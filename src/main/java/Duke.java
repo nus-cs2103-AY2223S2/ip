@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+=======
+import java.io.File;
+>>>>>>> branch-Level-7
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
 
 import Task.Task;
 import todo.todo;
@@ -9,6 +14,9 @@ import Exception.*;
 
 public class Duke {
 
+    /*
+     * 
+     */
     public static Task parseEcho(String echo) throws noTaskDescriptionException {
         if (echo.startsWith("todo")) {
             if (echo.substring(4).trim().isEmpty()) {
@@ -39,8 +47,28 @@ public class Duke {
         }
     }
 
+    /*
+     * 
+     */
     static void printListNumber(ArrayList<Task> list) {
         System.out.println("    Now you have " + list.size() + " task(s) in the list.");
+    }
+
+
+    public static Task parseFileReader(String echo, boolean isDone) {
+        if (echo.startsWith("todo")) {
+            return new todo(isDone, echo.substring(4).trim());
+        } else if (echo.startsWith("deadline")) {
+            String deadlineArguments = echo.substring(8).trim();
+            String splitArguments[] = deadlineArguments.split("/");
+            return new Deadline(isDone, splitArguments[0], splitArguments[1].substring(2).trim());
+        } else if (echo.startsWith("event")) {
+            String eventArguments = echo.substring(5).trim();
+            String splitArguments[] = eventArguments.split("/");
+            return new Event(isDone, splitArguments[0], splitArguments[1].substring(4).trim(), splitArguments[2].substring(2).trim());
+        } else {
+            throw(new invalidInputException("      ☹ OOPS!!! File format seems weird"));
+        }
     }
 
     public static void main(String[] args) {
@@ -54,15 +82,58 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-        boolean program_running_status = true;
+        /*
+         * Checks if the filepath exists, else creates it.
+         */
+
+        File createFolder = new File("data");
+        createFolder.mkdirs();
+
+        try {
+            File mySaveFile = new File("data/duke.txt");
+            //../../../
+            if (!mySaveFile.exists()) {
+                mySaveFile.createNewFile();
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println("Error has occurred");
+            e.printStackTrace();
+            return;
+        }
+
+        ArrayList<Task> listToStore = new ArrayList<Task>();
+
+        /*
+         * Attempt at loading the file into the listToStore
+         */
+
+        try {
+            File mySaveFile = new File("data/duke.txt");
+            Scanner s = new Scanner(mySaveFile);
+            while (s.hasNext()) {
+
+                Task task;
+                String nextLine = s.nextLine();
+                if (nextLine.charAt(0) == '1') {
+                    task = parseFileReader(nextLine.substring(2), true);
+                } else {
+                    task = parseFileReader(nextLine.substring(2), false);
+                }
+                listToStore.add(task);
+            }
+            s.close();
+        } catch (dukeException e){
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
 
         String echo;
         Scanner scan = new Scanner(System.in);
 
-        ArrayList<Task> listToStore = new ArrayList<Task>();
-
-
-        while (program_running_status) {
+        while (true) {
             echo = scan.nextLine();
 
             if (echo.equals("bye")) {
@@ -117,34 +188,11 @@ public class Duke {
             // Create a separate function in order to assign to item;
             try {
                 item = parseEcho(echo);
-
             } catch (dukeException e) {
                 // TODO: handle exception
                 System.out.println(e.getMessage());
                 continue;
             }
-            //
-
-
-            // if (echo.startsWith("todo")) {
-            //     item = new todo(echo.substring(4).trim());
-
-            // } else if (echo.startsWith("deadline")) {
-            //     String deadlineArguments = echo.substring(8).trim();
-            //     String splitArguments[] = deadlineArguments.split("/");
-                
-            //     item = new Deadline(splitArguments[0], splitArguments[1].substring(2).trim());
-
-            // } else if (echo.startsWith("event")) {
-            //     String eventArguments = echo.substring(5).trim();
-            //     String splitArguments[] = eventArguments.split("/");
-            //     item = new Event(splitArguments[0], splitArguments[1].substring(4).trim(), splitArguments[2].substring(2).trim());
-
-            // } else {
-            //     System.out.println("Placeholder");
-            //     continue;
-            // }
-
 
             listToStore.add(item);
 
@@ -152,9 +200,36 @@ public class Duke {
             System.out.println("    Added");
             System.out.println("    " + item.toString());
             printListNumber(listToStore);
-            // System.out.println("    Now you have " + listToStore.size() + " task(s) in the list.");
             
         }
+
+        System.out.println("    Saving:");
+
+        try {
+                FileWriter fw = new FileWriter("data/duke.txt");
+                fw.close();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        
+        while (!listToStore.isEmpty()) {
+            try {
+                
+                FileWriter fw = new FileWriter("data/duke.txt", true);
+                fw.write(listToStore.get(0).getCommand());
+                listToStore.remove(0);
+                fw.write(System.lineSeparator());
+                fw.close();
+            } catch (Exception e) {
+                // TODO: handle exception
+                System.out.println("    An Error has occured");
+                break;
+            }
+        }
+        
+
+        System.out.println("    Save complete");
+
         scan.close();
         System.out.println("    Duke says:");
         System.out.println("    Bye. Hope you run this program again!");
