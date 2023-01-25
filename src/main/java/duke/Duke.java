@@ -88,6 +88,7 @@ public class Duke {
   }
 
   public static void listTasks() {
+    System.out.println("Here are the tasks in your list:");
     taskDB.listItems();
   }
 
@@ -130,7 +131,13 @@ public class Duke {
       String[] values = request.unwrap();
       String description = values[0];
 
-      return new Todo(description);
+      Task task = new Todo(description);
+      System.out.println("Got it. I've added this task:");
+      taskDB.addItem(task);
+      System.out.println(task);
+      System.out.println("Now you have " + Duke.taskDB.size() + " tasks in the list.\n");
+      
+      return task;
     } catch (RequestException error) {
       throw new EmptyTaskArgumentException("☹ OOPS!!! Missing argument to create ToDo");
     }
@@ -142,7 +149,13 @@ public class Duke {
       String description = values[0];
       String by = values[1];
 
-      return new Deadline(description, by);
+      Task task = new Deadline(description, by);
+      System.out.println("Got it. I've added this task:");
+      taskDB.addItem(task);
+      System.out.println(task);
+      System.out.println("Now you have " + Duke.taskDB.size() + " tasks in the list.\n");
+      
+      return task;
     } catch (RequestException error) {
       throw new EmptyTaskArgumentException("☹ OOPS!!! Missing argument to create Deadline");
     }
@@ -155,7 +168,13 @@ public class Duke {
       String from = values[1];
       String to = values[2];
 
-      return new Event(description, from, to);
+      Task task = new Event(description, from, to);
+      System.out.println("Got it. I've added this task:");
+      taskDB.addItem(task);
+      System.out.println(task);
+      System.out.println("Now you have " + Duke.taskDB.size() + " tasks in the list.\n");
+      
+      return task;
     } catch (RequestException error) {
       System.out.println(error);
       throw new EmptyTaskArgumentException("☹ OOPS!!! Missing argument to create Event");
