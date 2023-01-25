@@ -1,14 +1,21 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private ArrayList<Task> actions = new ArrayList<Task>();
+    private String path;
 
     public Storage(String filePath) {
+        this.path = "./src/main/data/duke.txt";
+    }
+
+    public ArrayList<Task> load() throws TaskListEmpty {
+        ArrayList<Task> actions;
         try {
-            File f = new File(filePath);
-            Scanner scanner = new Scanner(f);
+            actions = new ArrayList<Task>();
+            Scanner scanner = new Scanner(new File(this.path));
             while (scanner.hasNext()) {
                 String taskDetails = scanner.nextLine();
                 String[] details = taskDetails.split(" |", 2);
@@ -16,24 +23,33 @@ public class Storage {
                 String taskName = details[1];
                 taskName = taskName.replace("|", "");
                 switch (taskType) {
-                    case "T" :
-                        this.actions.add(new ToDo(taskName));
-                        break;
-                    case "E" :
-                        this.actions.add(new Event(taskName));
-                        break;
-                    case "D" :
-                        this.actions.add(new Deadline(taskName));
-                        break;
+                case "T":
+                    actions.add(new ToDo(taskName));
+                    break;
+                case "E":
+                    actions.add(new Event(taskName));
+                    break;
+                case "D":
+                    actions.add(new Deadline(taskName));
+                    break;
                 }
             }
+        } catch (FileNotFoundException e) {
+            throw new TaskListEmpty("");
+        }
+        return actions;
+    }
+
+    public void writeToFile(String input , String type) {
+        try {
+            FileWriter filewriter =  new FileWriter(this.path, true);
+            String text = type + " |" + input;
+            filewriter.write(System.lineSeparator());
+            filewriter.write(text);
+            filewriter.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public ArrayList<Task> load() {
-        return this.actions;
     }
 
 }
