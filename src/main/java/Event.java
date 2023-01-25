@@ -1,6 +1,4 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 /**
  * The Event class is a type of task.
@@ -10,35 +8,27 @@ import java.time.LocalTime;
 
 public class Event extends Task {
 
-    protected LocalDateTime startDT;
-    protected LocalDateTime endDT;
-    private final LocalDate startDate;
-    private final LocalTime startTime;
-    private final LocalDate endDate;
-    private final LocalTime endTime;
+    protected LocalDateTime startDt;
+    protected LocalDateTime endDt;
 
-    public Event(String description, LocalDateTime startDT, LocalDateTime endDT) {
+    public Event(String description, LocalDateTime startDt, LocalDateTime endDt) {
         super(description);
-        this.startDT = startDT;
-        this.endDT = endDT;
-        this.startDate = startDT.toLocalDate();
-        this.startTime = startDT.toLocalTime();
-        this.endDate = endDT.toLocalDate();
-        this.endTime = endDT.toLocalTime();
+        this.startDt = startDt;
+        this.endDt = endDt;
     }
 
-    public LocalDateTime getStartDT() {
-        return this.startDT;
+    public LocalDateTime getStartDt() {
+        return this.startDt;
     }
 
-    public LocalDateTime getEndDT() {
-        return this.endDT;
+    public LocalDateTime getEndDt() {
+        return this.endDt;
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (from: " + this.startDate + " " + this.startTime
-                + " to: " + this.endDate + " " + this.endTime + ")";
+                + " (from: " + this.startDt.toLocalDate() + " " + this.startDt.toLocalTime()
+                + " to: " + this.endDt.toLocalDate() + " " + this.endDt.toLocalTime() + ")";
     }
 }

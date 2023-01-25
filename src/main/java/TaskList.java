@@ -1,79 +1,62 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * The TaskList class represent all the tasks added by the user.
+ * The TaskList class represent a list of all the tasks added by the user.
  *
  * @author Chia Jeremy
  */
 
 public class TaskList {
 
-    private final Storage storage = new Storage("data/tasks.txt");
     private final ArrayList<Task> taskList = new ArrayList<>(100);
-    private final Feedback fb;
 
-    public TaskList(ArrayList<String[]> tasks) {
-        System.out.println("tasks len: " + tasks.size());
-        for (int i = 0; i < tasks.size(); i++) {
+    public TaskList(List<String> tasks) {
+        for (String t : tasks) {
+            String[] data = t.split(" \\| ");
+            String type = data[0], mark = data[1], descr = data[2];
             Task task;
-            if (tasks.get(i)[0].equals("T")) {
-                task = new Todo(tasks.get(i)[2]);
-            } else if (tasks.get(i)[0].equals("D")) {
-                LocalDateTime localDateTime = LocalDateTime.parse(tasks.get(i)[3].trim());
-                task = new Deadline(tasks.get(i)[2], localDateTime);
+            if (type.equals("T")) {
+                task = new Todo(descr);
+            } else if (type.equals("D")) {
+                LocalDateTime dateTime = LocalDateTime.parse(data[3].trim());
+                task = new Deadline(descr, dateTime);
             } else {
-                LocalDateTime startDT = LocalDateTime.parse(tasks.get(i)[3].trim());
-                LocalDateTime endDT = LocalDateTime.parse(tasks.get(i)[4].trim());
-                task = new Event(tasks.get(i)[2], startDT, endDT);
+                LocalDateTime startDt = LocalDateTime.parse(data[3].trim());
+                LocalDateTime endDt = LocalDateTime.parse(data[4].trim());
+                task = new Event(descr, startDt, endDt);
             }
-            if (tasks.get(i)[1].equals("X")) {
+            if (mark.equals("X")) {
                 task.markDone();
+            } else {
+                task.unmarkDone();
             }
-            taskList.add(task);
+            add(task);
         }
-        this.fb = new Feedback();
     }
 
-    public void addTask(Task task) {
+    public void add(Task task) {
         this.taskList.add(task);
-        this.storage.add(task);
-        this.fb.addedTask(task, this.taskList.size());
     }
 
-    public void deleteTask(int index) {
-        Task task = this.taskList.get(index);
-        this.taskList.remove(task);
-        this.storage.delete(index);
-        this.fb.deletedTask(task, this.taskList.size());
+    public void delete(int index) {
+        this.taskList.remove(index);
     }
 
-    public void markTask(int index) {
-        this.taskList.get(index).markDone();
-        this.storage.mark(index);
-        this.fb.markedTask(this.taskList.get(index));
+    public void mark(int index) {
+        getTask(index).markDone();
     }
 
-    public void unmarkTask(int index) {
-        this.taskList.get(index).unmarkDone();
-        this.storage.unmark(index);
-        this.fb.unmarkedTask(this.taskList.get(index));
+    public void unmark(int index) {
+        getTask(index).unmarkDone();
     }
 
-    public void list() {
-        this.fb.listTask(this.taskList);
+    public Task getTask(int index) {
+        return this.taskList.get(index);
     }
 
-    public void help() {
-        this.fb.help();
-    }
-
-    public void invalid() {
-        this.fb.invalid();
-    }
-
-    @Override
-    public String toString() {
-        return this.taskList.toString();
+    public int getSize() {
+        return this.taskList.size();
     }
 }
