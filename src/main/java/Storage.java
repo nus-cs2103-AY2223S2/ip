@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -11,9 +12,11 @@ public class Storage {
     String home = System.getProperty("user.home");
     Path filePath;
     File dukeDataFile;
+    TaskList loadTaskList;
 
     public Storage(String s) {
         filePath = Paths.get(home, "data", s);
+        loadTaskList = new TaskList();
     }
 
     //Just a test, will remove later
@@ -77,7 +80,18 @@ public class Storage {
 
     //Supposed to take in tasklist and save to the file
     //Should save in CSV format for easier reading and writing
-    public void save() {
-        //Implement saving here
+    public void save(TaskList saveTaskList) {
+        StringBuilder outputString = new StringBuilder();
+        for (int i = 0; i < saveTaskList.tasks.size(); i++) {
+            outputString.append(saveTaskList.tasks.get(i).asCSV());
+            outputString.append(System.getProperty("line.separator"));
+        }
+//        System.out.println("SAVING THIS!");
+//        System.out.println(outputString.toString());
+        try {
+            FileUtils.writeStringToFile(dukeDataFile, outputString.toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
