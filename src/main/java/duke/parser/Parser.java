@@ -279,6 +279,10 @@ public class Parser {
                 Ui.printStraightLine();
                 return CommandType.NOTHING;
             }
+        case "find":
+            CommandType ctFind = CommandType.FIND;
+            ctFind.setKeyPhrase(rawCommand.substring(5));
+            return ctFind;
         default:
             return CommandType.INVALID;
         }
@@ -313,6 +317,8 @@ public class Parser {
             return new OnCommand(ui, command.getOnDate(), tasks);
         case HELP:
             return new HelpCommand(ui);
+        case FIND:
+            return new FindCommand(ui, command.getKeyPhrase(), tasks);
         case INVALID:
             return new InvalidCommand(ui);
         default:

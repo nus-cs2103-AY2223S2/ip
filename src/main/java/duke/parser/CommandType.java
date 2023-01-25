@@ -5,7 +5,7 @@ package duke.parser;
  */
 public enum CommandType {
     /** Possible command types. */
-    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, ON, HELP, INVALID, NOTHING;
+    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, ON, HELP, INVALID, NOTHING, FIND;
 
     /** Name of task associated with to-do, deadline and event commands. */
     private String taskName;
@@ -19,6 +19,9 @@ public enum CommandType {
     private String endDate;
     /** Date to check, associated with on command. */
     private String onDate;
+    /** Phrase to look up in task names. */
+    private String keyPhrase;
+
 
 
     /**
@@ -73,6 +76,13 @@ public enum CommandType {
      */
     public String getOnDate() { return this.onDate;}
 
+    /**
+     * Gets the key phrase to be looked up in task names.
+     *
+     * @return the key phrase to be checked.
+     */
+    public String getKeyPhrase() { return this.keyPhrase;}
+
 
 
     /**
@@ -117,4 +127,9 @@ public enum CommandType {
     public void setOnDate(String onDate) {
         this.onDate = onDate;
     }
+
+    /**
+     * Gets the key phrase to be looked up in task names.
+     */
+    public void setKeyPhrase(String keyPhrase) { this.keyPhrase = keyPhrase;}
 }

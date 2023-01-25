@@ -29,8 +29,9 @@ public class Ui {
                     + "    start date startDate, and end date endDate.\n"
                     + "7.  delete X -> Deletes task number X from the list.\n"
                     + "8.  on givenDate -> Displays all the tasks that occur on givenDate.\n"
-                    + "9.  help -> Prints the list of commands supported by this bot.\n"
-                    + "10. bye -> Exits the bot.\n\n"
+                    + "9.  find keyPhrase -> Displays all the tasks whose names contain any words from keyPhrase.\n"
+                    + "10. help -> Prints the list of commands supported by this bot.\n"
+                    + "11. bye -> Exits the bot.\n\n"
                     + "Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.";
 
     /** Introductory message excluding logo and command list. */
