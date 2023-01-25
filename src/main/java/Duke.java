@@ -1,4 +1,7 @@
-import java.util.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+import java.time.LocalDate;
 public class Duke {
     protected enum CommandEnum {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
@@ -18,10 +21,33 @@ public class Duke {
     }
 
     /**
+     * Parses the given string into a LocalDate object.
+     * @param date The given string representation of the date to be parsed.
+     * @return Returns the parsed LocalDate.
+     */
+    private static LocalDate parseDate(String date) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        return LocalDate.parse(date, dtf);
+    }
+
+    /**
+     * Formats LocalDate to dd MMM yyyy format and returns the string representation of it.
+     * @param ld The given LocalDate to be formatted.
+     * @return Returns the string representation of the formatted date.
+     */
+    public static String formatDate(LocalDate ld) {
+        int day = ld.getDayOfMonth();
+        String month = ld.getMonth().toString();
+        int year = ld.getYear();
+        return String.format("%d %s %d",day, month, year);
+    }
+
+    /**
      * Instantiate a new Deadline object and returns it.
      * @param inputArr The input given by the user.
      * @return Returns the new Deadline object.
-     * @throws DukeException If name or due date/time is not provided.
+     * @throws DukeException If name or due date/time is not provided,
+     *                       or due date/time is given in the wrong format.
      */
     private static Deadline getDeadline(String[] inputArr) throws DukeException {
         if (inputArr.length <= 1) {
@@ -39,14 +65,24 @@ public class Duke {
         if (end.isBlank()) {
             throw new IncompleteDescException("Please add the due date/time!");
         }
-        return new Deadline(name, end);
+        try {
+            LocalDate ldEnd = Duke.parseDate(end);
+            end = Duke.formatDate(ldEnd);
+            if (ldEnd.isBefore(LocalDate.now())) {
+                throw new InvalidInputException("The given deadline (yyyy/mm/dd) " + end + " has passed.");
+            }
+            return new Deadline(name,ldEnd);
+        } catch (DateTimeParseException e) {
+            throw new InvalidInputException("Please enter the date/time in \"yyyy/mm/dd\" format.");
+        }
     }
 
     /**
      * Instantiate a new Event object and returns it.
      * @param inputArr The input given by the user.
      * @return Returns the new Event.
-     * @throws DukeException If name or start date/time or due date/time is not given.
+     * @throws DukeException If name or start date/time or due date/time is not given
+     *                       or the date/time is given in the wrong format.
      */
     private static Event getEvent(String[] inputArr) throws DukeException {
         if (inputArr.length <= 1) {
@@ -68,7 +104,21 @@ public class Duke {
             throw new IncompleteDescException(
                     "Please make sure that the start and end date/time are not empty!");
         }
-        return new Event(name, start, end);
+        try {
+            LocalDate ldStart = Duke.parseDate(start);
+            LocalDate ldEnd = Duke.parseDate(end);
+            if (ldStart.isAfter(ldEnd)) {
+                throw new InvalidInputException(
+                        "The start date (yyyy/mm/dd) should be before the end date (yyyy/mm/dd).");
+            }
+            if (ldEnd.isBefore(LocalDate.now())) {
+                end = Duke.formatDate(ldEnd);
+                throw new InvalidInputException("The given event (end date: " + end + ") has ended.");
+            }
+            return new Event(name, ldStart, ldEnd);
+        } catch (DateTimeParseException e) {
+            throw new InvalidInputException("Please enter the date/time in \"yyyy/mm/dd\" format.");
+        }
     }
 
 

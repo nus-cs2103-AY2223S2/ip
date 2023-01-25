@@ -1,19 +1,21 @@
+import java.time.LocalDate;
+
 /**
  * Encapsulation of an Event task,
  * a task that starts and ends at a specific date/time.
  */
 public class Event extends Task {
     //Start time
-    private String start;
+    private LocalDate start;
 
     //End time
-    private String end;
+    private LocalDate end;
 
     /**
      * Constructor for Event.
      * @param name The name of the task.
      */
-    public Event(String name, String start, String end) {
+    public Event(String name, LocalDate start, LocalDate end) {
         super(name);
         this.start = start;
         this.end = end;
@@ -25,8 +27,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        String s = Duke.formatDate(this.start);
+        String e = Duke.formatDate(this.end);
         String toPrint = String.format("[E]%s (from: %s to: %s)",
-                super.toString(), this.start, this.end);
+                super.toString(), s, e);
         return toPrint;
     }
 }
