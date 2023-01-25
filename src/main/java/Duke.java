@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -51,6 +52,7 @@ public class Duke {
                     if (inputs.length != 1) {
                         throw new DukeException("Command does not take in extra arguments!");
                     } else {
+                        sc.close();
                         bye();
                     }
                 } else if (lcInput.contains("list")) {
@@ -83,9 +85,9 @@ public class Duke {
                 } else if (Pattern.compile("\\D+.\\d+").matcher(input).find()){
                     int index = Integer.parseInt(inputs[1]);
                     if (inputs[0].equals("mark")) {
-                        mark(inputs, index);
+                        mark(inputs, index, path);
                     } else if (inputs[0].equals("unmark")) {
-                        unmark(index);
+                        unmark(index, path);
                     } else if (inputs[0].equals("delete")) {
                         delete(index - 1, path);
                     } else {
@@ -112,6 +114,7 @@ public class Duke {
                         + "Bye. Hope to see you again soon!\n"
                         + "_____________________________________\n"
         );
+
         System.exit(0);
     }
 
@@ -129,7 +132,6 @@ public class Duke {
         } catch (IOException e){
             throw new DukeException("Unable to access contents of File!");
         }
-         */
     }
 
     private static void deadline(String rawInput, Path filePath) throws IOException {
@@ -151,8 +153,9 @@ public class Duke {
                 + "_____________________________________\n"
         );
 
-        String indexedTaskToAdd = storage.indexOf(taskAdd) + "|" + taskAdd.toString();
-        Files.write(filePath, indexedTaskToAdd.getBytes());
+        String indexedTaskToAdd = storage.indexOf(taskAdd) + "|" + taskAdd.toString() + "\n";
+        Files.write(filePath, indexedTaskToAdd.getBytes(), StandardOpenOption.APPEND);
+
     }
 
     private static void events(String rawInput, Path filePath) throws IOException {
@@ -181,8 +184,8 @@ public class Duke {
                 + "_____________________________________\n"
         );
 
-        String indexedTaskToAdd = storage.indexOf(taskAdd) + "|" + taskAdd.toString();
-        Files.write(filePath, indexedTaskToAdd.getBytes());
+        String indexedTaskToAdd = storage.indexOf(taskAdd) + "|" + taskAdd.toString() +"\n";
+        Files.write(filePath, indexedTaskToAdd.getBytes(), StandardOpenOption.APPEND);
     }
 
     private static void todo(String rawInput, Path filePath) throws IOException {
@@ -199,8 +202,8 @@ public class Duke {
                 + "_____________________________________\n"
         );
 
-        String indexedTaskToAdd = storage.indexOf(taskAdd) + "|" + taskAdd.toString();
-        Files.write(filePath, indexedTaskToAdd.getBytes());
+        String indexedTaskToAdd = storage.indexOf(taskAdd) + "|" + taskAdd.toString() + "\n";
+        Files.write(filePath, indexedTaskToAdd.getBytes(), StandardOpenOption.APPEND);
     }
 
     private static String taskCount(){
@@ -219,7 +222,7 @@ public class Duke {
                     .collect(Collectors.toList());
 
             for (String l : newTaskLines){
-                Files.write(filePath, l.getBytes());
+                Files.write(filePath, l.getBytes(), StandardOpenOption.APPEND);
             }
             Task taskRemoved = storage.remove(index);
             System.out.println(
@@ -237,10 +240,23 @@ public class Duke {
 
     }
 
-    private static void mark(String[] args, int index) throws DukeException{
+    private static void mark(String[] args, int index, Path filePath) throws DukeException{
         if (args[0].equals("mark")) {
             try {
                 storage.get(index - 1).markAsDone();
+                List<String> updateString = Files.lines(filePath)
+                                .map(line -> {
+                                    line.trim();
+                                    if (line.contains(index + "|")){
+                                        return index + "|" + storage.get(index).toString() + "\n";
+                                    } else {
+                                        return line;
+                                    }
+                                })
+                                        .collect(Collectors.toList());
+                for (String s: updateString){
+                    Files.write(filePath, s.getBytes(), StandardOpenOption.APPEND);
+                }
                 System.out.println(
                         "_____________________________________\n"
                                 + "Nice! I've marked this task as done\n"
@@ -249,13 +265,28 @@ public class Duke {
                 );
             } catch (IndexOutOfBoundsException err) {
                 throw new DukeException("Invalid index given!");
+            } catch (IOException e){
+                throw new DukeException("Unable to access content of file!");
             }
         }
     }
 
-    private static void unmark(int index) throws DukeException{
+    private static void unmark(int index, Path filePath) throws DukeException{
         try {
             storage.get(index - 1).unMark();
+            List<String> updateString = Files.lines(filePath)
+                    .map(line -> {
+                        line.trim();
+                        if (line.contains(index + "|")){
+                            return index + "|" + storage.get(index).toString();
+                        } else {
+                            return line;
+                        }
+                    })
+                    .collect(Collectors.toList());
+            for (String s: updateString){
+                Files.write(filePath, s.getBytes(), StandardOpenOption.APPEND);
+            }
             System.out.println(
                     "_____________________________________\n"
                             + "Ok, I've marked this task as not done yet\n"
@@ -264,6 +295,8 @@ public class Duke {
             );
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Invalid index given!");
+        } catch (IOException e){
+            throw new DukeException("Unable to access contents of file");
         }
     }
 }

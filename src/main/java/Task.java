@@ -22,7 +22,7 @@ public class Task {
 
     @Override
     public String toString(){
-        String output = "|" + "[" + getStatusIcon() + "] " + this.description;
+        String output = "[" + getStatusIcon() + "]" + " | "  +this.description;
         return output;
     }
 }
