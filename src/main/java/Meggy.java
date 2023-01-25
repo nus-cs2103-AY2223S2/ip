@@ -12,7 +12,11 @@ public class Meggy implements Runnable {
      * unparsed string arguments and return chatbot response strings.
      */
     public final Map<String, MeggyException.Function<String, String>> usrCmdToJob;
-    public final Map<String, MeggyException.Function<String, UserTask>> dataEntryToTask;
+    public final static Map<String, MeggyException.Function<String, UserTask>> dataEntryToTask = Map.of(
+            Resource.cmdTodo, Util.todoNew,
+            Resource.cmdDdl, Util.ddlNew,
+            Resource.cmdEvent, Util.eventNew
+    );
     /**
      * What to do when the user-typed the command is unknown. Currently: notify user command is unknown.
      */
@@ -33,9 +37,9 @@ public class Meggy implements Runnable {
     private final ArrayList<UserTask> tasks;
 
     /**
-     * The task list data file to read from and write to.
+     * Location to save cross-session data.
      */
-    private final File f;
+    private final Storage storage;
 
     /**
      * @param in  Non-null. Customizable input.
@@ -49,7 +53,7 @@ public class Meggy implements Runnable {
         this.in = new Scanner(in);
         this.ui = new UI(out);
         tasks = new ArrayList<>();
-        f = new File(Util.dataFilePath);
+        storage = new Storage(new File(Util.dataFilePath));
         usrCmdToJob = Map.of(
                 Resource.cmdExit, s -> Resource.farewell,
                 Resource.cmdList, s -> listTasks(),
@@ -59,11 +63,6 @@ public class Meggy implements Runnable {
                 Resource.cmdDdl, s -> addTask(s, Util.ddlNew),
                 Resource.cmdEvent, s -> addTask(s, Util.eventNew),
                 Resource.cmdDel, this::deleteTask
-        );
-        dataEntryToTask = Map.of(
-                Resource.cmdTodo, Util.todoNew,
-                Resource.cmdDdl, Util.ddlNew,
-                Resource.cmdEvent, Util.eventNew
         );
     }
 
@@ -134,7 +133,7 @@ public class Meggy implements Runnable {
     private String addTask(String args, MeggyException.Function<String, UserTask> newTask) throws MeggyException {
         final UserTask task = newTask.apply(args);
         tasks.add(task);
-        saveToFile(f);
+        storage.save(tasks);
         return Resource.notifAdd + reportChangedTaskAndList(task);
     }
 
@@ -153,7 +152,7 @@ public class Meggy implements Runnable {
         }
         final UserTask task = tasks.remove(idx);
         try {
-            saveToFile(f);
+            storage.save(tasks);
         } catch (MeggyException e) {
             ui.dispLn(e.getMessage());
         }
@@ -198,37 +197,6 @@ public class Meggy implements Runnable {
     }
 
     /**
-     * Write the content of the entire {@code tasks} list into data file. Creates data file if it did not previously
-     * exist.
-     *
-     * @param f Non-null. The data file to write to.
-     * @throws MeggyException If file IO throws {@link IOException}.
-     */
-    private void saveToFile(File f) throws MeggyException {
-        final FileWriter fw;
-        try {
-            f.createNewFile();
-            fw = new FileWriter(f, false);
-        } catch (IOException e) {
-            throw new MeggyException(Resource.errFileWrite + Resource.errIO);
-        } catch (SecurityException e) {
-            throw new MeggyException(Resource.errFileWrite + Resource.errNoAccess);
-        }
-        try {
-            for (UserTask t : tasks)
-                fw.write(t.encode() + '\n');
-            fw.flush();
-        } catch (IOException e) {
-            throw new MeggyException(Resource.errFileWrite + Resource.errIO);
-        } finally {
-            try {
-                fw.close();
-            } catch (IOException ignored) {
-            }
-        }
-    }
-
-    /**
      * Interacts with user using designated IO.
      */
     @Override
@@ -238,7 +206,7 @@ public class Meggy implements Runnable {
         ui.dispLn(Resource.logo);
         ui.disp(Resource.greetings);
         ui.disp(Resource.msgTl);
-        loadFromFile(f);
+        storage.load(tasks);
         while (in.hasNextLine()) { // reads input and responds in each iteration
             //Parse command and args
             final JobAndArg<String> jobAndArg = JobAndArg.parse(usrCmdToJob, in.nextLine());
@@ -267,7 +235,7 @@ public class Meggy implements Runnable {
      *
      * @param <E> The return type of the job function.
      */
-    private static class JobAndArg<E> {
+    public static class JobAndArg<E> {
         public final String cmd;
         /**
          * The command-specific function corresponding that will take {@code args} as arguments. Null if the command is
