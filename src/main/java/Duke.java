@@ -1,5 +1,15 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.List;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Duke {
     public static class Task {
@@ -21,6 +31,9 @@ public class Duke {
         public void setId(int id) {
             this.id = id;
         }
+        public String toFile() {
+            return "T|" + this.desc;
+        }
         @Override
         public String toString() {
             String statusIcon = this.getStatusIcon();
@@ -33,6 +46,9 @@ public class Duke {
         public ToDo(int id, String description) {
             super(id, description);
         }
+        public String toFile() {
+            return "TD|" + this.isDone + "|" + this.desc;
+        }
         @Override
         public String toString() {
             String statusIcon = this.getStatusIcon();
@@ -41,33 +57,44 @@ public class Duke {
     }
 
     public static class Deadline extends Task {
-        protected String deadline;
+        protected LocalDate deadline;
 
-        public Deadline(int id, String description, String deadline) {
+        public Deadline(int id, String description, LocalDate deadline) {
             super(id, description);
             this.deadline = deadline;
         }
 
+        public String toFile() {
+            return "D|" + this.isDone + "|" + this.desc + "|" + this.deadline;
+        }
+
         @Override
         public String toString() {
             String statusIcon = this.getStatusIcon();
-            return id + ". [D][" + statusIcon + "] " + this.desc + "(" + this.deadline + ")";
+            String parsedDeadline = deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return id + ". [D][" + statusIcon + "] " + this.desc + "(" + parsedDeadline + ")";
         }
     }
 
     public static class Event extends Task {
-        protected String start;
-        protected String end;
+        protected LocalDateTime start;
+        protected LocalDateTime end;
 
-        public Event(int id, String description, String start, String end) {
+        public Event(int id, String description, LocalDateTime start, LocalDateTime end) {
             super(id, description);
             this.start = start;
             this.end = end;
         }
+
+        public String toFile() {
+            return "E|" + this.isDone + "|" + this.desc + "|" + this.start + "|" + this.end;
+        }
         @Override
         public String toString() {
             String statusIcon = this.getStatusIcon();
-            return id + ". [E][" + statusIcon + "] " + this.desc + "(" + this.start + this.end + ")";
+            String startDnT = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(start);
+            String endDnT = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(end);
+            return id + ". [E][" + statusIcon + "] " + this.desc + "(from: " + startDnT + " to: " + endDnT + ")";
         }
     }
     public static class DukeExceptions extends Exception {
@@ -77,7 +104,53 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeExceptions {
+        String userDir = System.getProperty("user.dir");
+        Path dataDirPath = Paths.get(userDir, "data");
+        Path dataFilePath = Paths.get(userDir, "data", "Duke.txt");
         ArrayList<Task> tasks = new ArrayList<>();
+        //Create the data dir if it doesn't exist
+        try {
+            if(!Files.exists(dataDirPath)) {
+                Files.createDirectory(dataDirPath);
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while trying to create directory");
+            e.printStackTrace();
+        }
+        //Create Duke.txt inside data dir if it doesn't exist
+        //if it exists, read from it
+        try {
+            if(!Files.exists(dataFilePath)) {
+                Files.createFile(dataFilePath);
+            } else {
+                List<String> data = Files.readAllLines(dataFilePath);
+                for(String x: data) {
+                    String[] inp = x.split("\\|");
+                    String type = inp[0];
+                    if(type.equals("T")) {
+                        Task tsk = new Task(tasks.size() + 1, inp[1]);
+                        tsk.setIsDone(Boolean.parseBoolean(inp[1]));
+                        tasks.add(tsk);
+                    } else if(type.equals("TD")) {
+                        ToDo td = new ToDo(tasks.size() + 1, inp[2]);
+                        td.setIsDone(Boolean.parseBoolean(inp[1]));
+                        tasks.add(td);
+                    } else if(type.equals("D")) {
+                        Deadline d = new Deadline(tasks.size() + 1, inp[2], LocalDate.parse(inp[3]));
+                        d.setIsDone(Boolean.parseBoolean(inp[1]));
+                        tasks.add(d);
+                    } else if(type.equals("E")) {
+                        Event e = new Event(tasks.size() + 1, inp[2], LocalDateTime.parse(inp[3]),
+                                    LocalDateTime.parse(inp[4]));
+                        e.setIsDone(Boolean.parseBoolean(inp[1]));
+                        tasks.add(e);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while trying to create Duke.txt");
+            e.printStackTrace();
+        }
         Scanner myObj = new Scanner(System.in);
         System.out.println("Hey! This is Duke at your service!");
         while(myObj.hasNext()) {
@@ -98,6 +171,15 @@ public class Duke {
             }
             if (input.equals("bye")) {
                 System.out.println("See you again, thanks for visiting!");
+                ArrayList<String> writing = new ArrayList<>();
+                for(int i = 0; i < tasks.size(); i++) {
+                    writing.add(tasks.get(i).toFile());
+                }
+                try {
+                    Files.write(dataFilePath, writing);
+                } catch (IOException e) {
+                    System.out.println("Error while writing to file!");
+                }
                 break;
             }
             if(input.startsWith("mark ")) {
@@ -151,14 +233,15 @@ public class Duke {
                 }
                 String[] inp = input.split("/");
                 try { //catching no deadline
-                    String deadline = inp[1];
+                    String deadline = inp[1].substring(3);
+                    LocalDate date = LocalDate.parse(deadline);
                     try { //catching no description
                         String undesc = inp[0];
                         String desc = undesc.substring(9);
                         if(desc.equals("")) {
                             throw new DukeExceptions("Input cannot be empty!");
                         }
-                        Deadline dl = new Deadline(tasks.size() + 1, desc, deadline);
+                        Deadline dl = new Deadline(tasks.size() + 1, desc, date);
                         tasks.add(dl);
                         continue;
                     } catch(DukeExceptions e){
@@ -166,6 +249,7 @@ public class Duke {
                         continue;
                     }
                 } catch(Exception e) {
+                    System.out.println(e);
                     System.out.println("Please input a deadline!");
                     continue;
                 }
@@ -188,8 +272,16 @@ public class Duke {
                     System.out.println("Format is task, /start, /end!");
                     continue;
                 }
-                String start = inp[1];
-                String end = inp[2];
+                String start = inp[1].substring(5);
+                String[] DnT = start.split(" "); //[2000-10-23,10:15]
+                String startDate = DnT[0];
+                String startTime = DnT[1];
+                LocalDateTime startDnT = LocalDateTime.parse(String.join("T", startDate, startTime));
+                String end = inp[2].substring(3);
+                String[] DateAndTime = end.split(" ");
+                String endDate = DateAndTime[0];
+                String endTime = DateAndTime[1];
+                LocalDateTime endDnT = LocalDateTime.parse(String.join("T", endDate, endTime));
                 String undesc = inp[0];
                 String desc = undesc.substring(6);
                 try { //catching for empty description
@@ -200,7 +292,7 @@ public class Duke {
                     System.out.println("Description cannot be empty!");
                     continue;
                 }
-                Event ev = new Event(tasks.size() + 1, desc, start, end);
+                Event ev = new Event(tasks.size() + 1, desc, startDnT, endDnT);
                 tasks.add(ev);
                 continue;
             }
