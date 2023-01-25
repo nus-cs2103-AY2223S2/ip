@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.command.Command;
-import duke.command.Parser;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.command.Command;
+import duke.command.Parser;
 
 /**
  * Task List to manage tasks.
@@ -43,8 +43,8 @@ public class TaskList {
         try {
             execute(Parser.parse(input));
         } catch (IllegalArgumentException e) {
-            System.out.println("Task list on disk corrupted!" +
-                    " Some tasks might be missing or incorrect.");
+            System.out.println("Task list on disk corrupted!"
+                    + " Some tasks might be missing or incorrect.");
         }
     }
 
@@ -57,34 +57,36 @@ public class TaskList {
     public Task execute(Command command) {
         Task task = null;
         switch (command.getName()) {
-            case TODO:
-                task = new Todo(
-                        command.getArgumentValue(Command.Argument.TODO));
-                tasks.add(task);
-                break;
-            case DEADLINE:
-                task = new Deadline(
-                        command.getArgumentValue(Command.Argument.DEADLINE),
-                        command.getArgumentValue(Command.Argument.BY));
-                tasks.add(task);
-                break;
-            case EVENT:
-                task = new Event(
-                        command.getArgumentValue(Command.Argument.EVENT),
-                        command.getArgumentValue(Command.Argument.FROM),
-                        command.getArgumentValue(Command.Argument.TO));
-                tasks.add(task);
-                break;
-            case MARK:
-                task = tasks.get(Integer.parseInt(command.getArgumentValue(
-                        Command.Argument.MARK)));
-                task.toggleDone();
-                break;
-            case DELETE:
-                task = tasks.get(Integer.parseInt(
-                        command.getArgumentValue(Command.Argument.DELETE)));
-                tasks.remove(task);
-                break;
+        case TODO:
+            task = new Todo(
+                    command.getArgumentValue(Command.Argument.TODO));
+            tasks.add(task);
+            break;
+        case DEADLINE:
+            task = new Deadline(
+                    command.getArgumentValue(Command.Argument.DEADLINE),
+                    command.getArgumentValue(Command.Argument.BY));
+            tasks.add(task);
+            break;
+        case EVENT:
+            task = new Event(
+                    command.getArgumentValue(Command.Argument.EVENT),
+                    command.getArgumentValue(Command.Argument.FROM),
+                    command.getArgumentValue(Command.Argument.TO));
+            tasks.add(task);
+            break;
+        case MARK:
+            task = tasks.get(Integer.parseInt(command.getArgumentValue(
+                    Command.Argument.MARK)));
+            task.toggleDone();
+            break;
+        case DELETE:
+            task = tasks.get(Integer.parseInt(
+                    command.getArgumentValue(Command.Argument.DELETE)));
+            tasks.remove(task);
+            break;
+        default:
+            // Do nothing
         }
         return task;
     }
