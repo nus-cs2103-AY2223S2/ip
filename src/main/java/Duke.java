@@ -149,7 +149,8 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
-        Storage dataStorage = new Storage();
+        String storageFileName = "duke.txt";
+        Storage dataStorage = new Storage(storageFileName);
         ArrayList<Task> taskList = dataStorage.readFile();
         String input;
         Commands command = Commands.start;

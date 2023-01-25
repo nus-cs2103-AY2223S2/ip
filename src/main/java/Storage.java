@@ -13,9 +13,9 @@ import java.util.Scanner;
 public class Storage {
     private final Path path;
 
-    Storage() {
+    Storage(String fileName) {
         String currPath = System.getProperty("user.dir");
-        this.path = Paths.get(currPath, "src", "data", "duke.txt");
+        this.path = Paths.get(currPath, "src", "data", fileName);
     }
 
     public ArrayList<Task> readFile() {
