@@ -12,7 +12,7 @@ Prerequisites: JDK 19
    1. Click `File` -> `Open Folder`.
    1. Select the project directory, and click `OK`.
 
-1. After that, locate the `src/main/java/seedu/shao/Shao.java` file, right-click it, and choose `Run Java` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+1. After that, locate the `src/main/java/Shao.java` file, right-click it, and choose `Run Java` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
 
 ```Text
 ________________________________________________________
