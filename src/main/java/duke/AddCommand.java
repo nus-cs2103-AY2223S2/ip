@@ -1,7 +1,7 @@
 package duke;
 
-public class AddCommand extends Command{
-    Task task;
+public class AddCommand extends Command {
+    private final Task task;
 
     public AddCommand (String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {
@@ -13,21 +13,21 @@ public class AddCommand extends Command{
 
     public Task createTask(String cmd, String description) throws DukeInvalidArgumentException {
         try {
-            Task t = null;
+            Task task = null;
             switch (cmd) {
-                case "todo":
-                    t = new ToDos(description);
-                    break;
-                case "deadline":
-                    String[] s1 = description.split("/by ", 2);
-                    t = new Deadlines(s1[0], s1[1]);
-                    break;
-                case "event":
-                    String[] s2 = description.split("/from ", 2);
-                    String[] s3 = s2[1].split(" /to ", 2);
-                    t = new Events(s2[0], s3[0], s3[1]);
+            case "todo":
+                task = new ToDos(description);
+                break;
+            case "deadline":
+                String[] s1 = description.split("/by ", 2);
+                task = new Deadlines(s1[0], s1[1]);
+                break;
+            case "event":
+                String[] s2 = description.split("/from ", 2);
+                String[] s3 = s2[1].split(" /to ", 2);
+                task = new Events(s2[0], s3[0], s3[1]);
             }
-            return t;
+            return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidArgumentException("The description of " + cmd + " is invalid.");
         }

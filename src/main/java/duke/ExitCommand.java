@@ -1,6 +1,6 @@
 package duke;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     public boolean isExit() {
         return true;
     }

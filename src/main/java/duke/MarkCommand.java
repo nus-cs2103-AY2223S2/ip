@@ -1,6 +1,6 @@
 package duke;
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     int toggleLineNumber;
 
     public MarkCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
@@ -22,6 +22,7 @@ public class MarkCommand extends Command{
             throw new DukeInvalidArgumentException("There are only " + task.size()
                     + " tasks in list, but want to mark " + (toggleLineNumber + 1) + "th task.");
         }
+
         Task t = task.getTaskAt(toggleLineNumber);
         t.setDone(true);
         storage.updateData(toggleLineNumber, 1);

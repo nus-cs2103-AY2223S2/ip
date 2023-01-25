@@ -1,8 +1,6 @@
 package duke;
 
-import java.util.List;
-
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     public boolean isExit() {
         return false;
     }

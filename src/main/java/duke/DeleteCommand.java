@@ -1,7 +1,7 @@
 package duke;
 
-public class DeleteCommand extends Command{
-    private int deletedLineNumber;
+public class DeleteCommand extends Command {
+    private final int deletedLineNumber;
 
     public DeleteCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {

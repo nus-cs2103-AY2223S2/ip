@@ -3,21 +3,21 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private final ArrayList<Task> taskList;
 
-    public TaskList (ArrayList<Task> taskList) {
+    public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
-    public TaskList () {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
-    protected Task getTaskAt (int index) {
+    protected Task getTaskAt(int index) {
         return taskList.get(index);
     }
 
-    protected void setTaskAt (int index, Task task) {
+    protected void setTaskAt(int index, Task task) {
         taskList.set(index, task);
     }
 
@@ -25,7 +25,7 @@ public class TaskList {
         taskList.add(task);
     }
 
-    protected void removeTaskAt (int index) {
+    protected void removeTaskAt(int index) {
         taskList.remove(index);
     }
 

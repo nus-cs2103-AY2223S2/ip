@@ -1,6 +1,6 @@
 package duke;
 
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
     int toggleLineNumber;
 
     public UnmarkCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
@@ -22,6 +22,7 @@ public class UnmarkCommand extends Command{
             throw new DukeInvalidArgumentException("There are only " + task.size()
                     + " tasks in list, but want to unmark " + (toggleLineNumber + 1) + "th task.");
         }
+        
         Task t = task.getTaskAt(toggleLineNumber);
         t.setDone(false);
         storage.updateData(toggleLineNumber, 0);
