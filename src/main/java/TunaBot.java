@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -8,7 +14,25 @@ public class TunaBot {
     static ArrayList<Task> tasks = new ArrayList<>();
     static boolean toExit = false;
     public static void main(String[] args) {
-
+        Path filePath = Paths.get("data");
+        File saveLocation = filePath.toFile();
+        if (!saveLocation.exists()) {
+            try {
+                saveLocation.mkdir();
+            } catch (SecurityException e) {
+                System.out.println("BLUB! Problem with save location!!");
+            }
+        }
+        Path savePath = Paths.get("data", "save.txt");
+        File saveFile = savePath.toFile();
+        if (!saveFile.exists()) {
+            try {
+                saveFile.createNewFile();
+            } catch (IOException e) {
+                System.out.println("BLUB! Problem creating save file!");
+            }
+        }
+        loadSave(saveFile);
         System.out.println(LINE);
         System.out.println("    Hello! I'm TunaBot\n" +
                 "    What can I do for you?");
@@ -23,7 +47,39 @@ public class TunaBot {
             }
             System.out.println(LINE);
         }
+        save(saveFile);
     }
+
+    private static void save(File saveFile) {
+        try {
+            FileWriter writer = new FileWriter(saveFile);
+            for (Task task : tasks) {
+                writer.write(task.saveFormat()+ "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("BLUB! Couldn't save tasks!");
+        }
+    }
+
+    private static void loadSave(File saveFile) {
+        try {
+            Scanner saveReader = new Scanner(saveFile);
+            while (saveReader.hasNextLine()) {
+                String [] taskInfo = saveReader.nextLine().split(";");
+                if (taskInfo[0].equals("T")) {
+                    tasks.add(new Task(taskInfo[1], taskInfo[2]));
+                } else if (taskInfo[0].equals("D")) {
+                    tasks.add(new Deadline(taskInfo[1], taskInfo[2], taskInfo[3]));
+                } else if (taskInfo[0].equals("E")) {
+                    tasks.add(new Event(taskInfo[1], taskInfo[2], taskInfo[3], taskInfo[4]));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("BLUB! Couldn't find save file!");
+        }
+    }
+
     public static void parse(String input) throws InputException {
         String[] command = input.split(" ", 2);
         switch (command[0]) {

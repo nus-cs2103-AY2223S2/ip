@@ -5,11 +5,18 @@ public class Deadline extends Task{
         super(name);
         this.deadline = deadline;
     }
+    public Deadline(String name, String isDone, String deadline) {
+        super(name, isDone);
+        this.deadline = deadline;
+    }
 
     public String getDeadline() {
         return deadline;
     }
-
+    @Override
+    public String saveFormat() {
+        return "T;" + this.name + ";" +this.isDone + ";" + this.deadline;
+    }
     @Override
     public String toString() {
         String box;
