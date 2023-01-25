@@ -1,3 +1,8 @@
+package berry.ui;
+
+import berry.task.Task;
+import berry.task.TaskList;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;

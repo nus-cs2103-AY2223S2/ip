@@ -1,3 +1,5 @@
+package berry.task;
+
 public enum TaskType {
     TODO, DEADLINE, EVENT;
 

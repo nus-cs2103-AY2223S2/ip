@@ -1,3 +1,12 @@
+package berry;
+
+import berry.command.Command;
+import berry.exception.BerryException;
+import berry.storage.Storage;
+import berry.task.TaskList;
+import berry.ui.Ui;
+import berry.parser.Parser;
+
 import java.io.FileNotFoundException;
 
 public class Berry {

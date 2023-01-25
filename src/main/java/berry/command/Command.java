@@ -1,3 +1,10 @@
+package berry.command;
+
+import berry.task.TaskList;
+import berry.ui.Ui;
+import berry.storage.Storage;
+import berry.exception.BerryException;
+
 public abstract class Command {
     private boolean isExit;
 

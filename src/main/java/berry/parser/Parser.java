@@ -1,3 +1,18 @@
+package berry.parser;
+
+import berry.command.*;
+
+import berry.exception.BerryException;
+import berry.exception.EmptyClauseException;
+import berry.exception.EmptyDescriptionException;
+import berry.exception.UnknownCommandException;
+import berry.exception.MissingClauseException;
+
+import berry.task.Deadline;
+import berry.task.Event;
+import berry.task.Todo;
+
+
 /**
  * Deals with making sense of the user command.
  */
