@@ -10,9 +10,12 @@ public class TaskList {
         return this.taskStore.size();
     }
     public Task getTaskAtIndex(int index) {
-        return taskStore.get(index);
+        return this.taskStore.get(index);
     }
     public void addTask(Task t) {
-        taskStore.add(t);
+        this.taskStore.add(t);
+    }
+    public void deleteTask(int index) {
+        this.taskStore.remove(index);
     }
 }

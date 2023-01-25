@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Ui { // handles I/O things
@@ -12,7 +11,10 @@ public class Ui { // handles I/O things
     public String getNextTask() {
         return this.myScanner.nextLine();
     }
-    private static void printNewTask(Task t) {
+    public void greetUser() {
+        System.out.println("  insert ingenious greeting here");
+    }
+    private void printNewTask(Task t) {
         if (t instanceof Event) {
             System.out.println("  new event added!");
         }
@@ -23,13 +25,23 @@ public class Ui { // handles I/O things
             System.out.println("  new todo added!");
         }
         System.out.println("    " + t.toString());
-        System.out.println("  Now you have " + String.valueOf(Duke.countTasks()) +
+        System.out.println("  Now you have " + String.valueOf(this.myTaskList.countTasks()) +
                 " tasks in the list!");
     }
-    public void printSomething(String inputCommand, Task currTask) throws EmptyDescriptionException {
+    public void printReply(String inputCommand) {
         switch (inputCommand) {
             case "bye":
                 System.out.println("  Bye. Hope to see you soon again!");
+            case "list":
+                for (int i = 0; i < myTaskList.countTasks(); i++) {
+                    System.out.println("  " + String.valueOf(i + 1) + ". " + myTaskList.getTaskAtIndex(i));
+                }
+            default:
+                System.out.println("  this is not a task, contact admin");
+        }
+    }
+    public void printReply(String inputCommand, Task currTask) throws EmptyDescriptionException {
+        switch (inputCommand) {
             case "mark":
                 System.out.println("  You are done with: ");
                 System.out.println("    " + currTask.toString());
@@ -39,18 +51,12 @@ public class Ui { // handles I/O things
             case "delete":
                 System.out.println("  I've removed this task:");
                 System.out.println("    " + currTask.toString());
-                System.out.println("  Now you have "+ String.valueOf(Duke.countTasks()) +
+                System.out.println("  Now you have "+ String.valueOf(this.myTaskList.countTasks()) +
                         " tasks in the list!");
             case "deadline":
             case "event":
             case "todo":
                 printNewTask(currTask);
-            case "list":
-                for (int i = 0; i < myTaskList.countTasks(); i++) {
-                    System.out.println("  " + String.valueOf(i + 1) + ". " + myTaskList.getTaskAtIndex(i));
-                }
-            default:
-                System.out.println("  this is not a task, contact admin");
         }
     }
 }

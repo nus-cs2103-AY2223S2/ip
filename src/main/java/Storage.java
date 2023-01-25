@@ -11,15 +11,14 @@ import java.util.ArrayList;
 public class Storage {
     private TaskList myTaskList;
 
-    public Storage() {
-        TaskList myTaskList = new TaskList();
+    public Storage(TaskList myTaskList) {
+        this.myTaskList = myTaskList;
         try {
             loadFromFile();
         }
         catch (IOException ignored) {}
     }
-
-    private void loadFromFile() throws IOException {
+    public void loadFromFile() throws IOException {
         String home = System.getProperty("user.dir");
         Path dukeFolderPath = Paths.get(home, "data");
         Path dukeFilePath = Paths.get(home, "data", "duke.txt");
@@ -42,21 +41,21 @@ public class Storage {
             String description = params[2];
 
             if (type.equals("T")) {
-                myTaskList.addTask(new ToDo(description, isCompleted));
+                this.myTaskList.addTask(new ToDo(description, isCompleted));
             }
             else if (type.equals("D")) {
                 LocalDate by = LocalDate.parse(params[3]);
-                myTaskList.addTask(new Deadline(description, isCompleted, by));
+                this.myTaskList.addTask(new Deadline(description, isCompleted, by));
             }
             else if (type.equals("E")) {
                 LocalDate start = LocalDate.parse(params[3]);
                 LocalDate end = LocalDate.parse(params[4]);
-                myTaskList.addTask(new Event(description, isCompleted, start, end));
+                this.myTaskList.addTask(new Event(description, isCompleted, start, end));
             }
         }
         dukeReader.close();
     }
-    private static void addTaskToFile(Task currTask) throws IOException {
+    public void addTask(Task currTask) throws IOException {
         String home = System.getProperty("user.dir");
         Path dukeFilePath = Paths.get(home, "data", "duke.txt");
 
@@ -79,8 +78,9 @@ public class Storage {
                     + d.getDeadline() + newEntry;
         }
         Files.write(dukeFilePath, newEntry.getBytes(), StandardOpenOption.APPEND); // don't need to close
+        this.myTaskList.addTask(currTask);
     }
-    private static void deleteTask(int taskNo) throws IOException {
+    public void deleteTask(int taskNo) throws IOException {
         String home = System.getProperty("user.dir");
         Path dukeFilePath = Paths.get(home, "data", "duke.txt");
         Path tempPath = Paths.get(home, "data", "temp.txt");
@@ -99,6 +99,8 @@ public class Storage {
         dukeWriter.close();
         Files.delete(dukeFilePath);
         Files.move(tempPath, dukeFilePath); // move from src to dest (replace)
+
+        this.myTaskList.deleteTask(taskNo);
     }
     private void changeTaskCompletion(int taskNo) throws IOException {
         // TODO
