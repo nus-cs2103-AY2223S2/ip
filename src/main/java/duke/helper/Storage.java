@@ -47,14 +47,14 @@ public class Storage {
    * @return the created task.
    */
   public Task makeTask(String input) {
-    String[] words = input.split("|");
+    String[] words = input.split("\\|");
     switch (words[0]) {
       case "T":
-        return new ToDo(words[4]);
+        return new ToDo(words[2]);
       case "D":
-        return new Deadline(words[4], words[6]);
+        return new Deadline(words[2], words[3]);
       default:
-        return new Event(words[4], words[6], words[8]);
+        return new Event(words[2], words[3], words[4]);
     }
   }
 

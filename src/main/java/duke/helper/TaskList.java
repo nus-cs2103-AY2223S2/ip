@@ -58,4 +58,16 @@ public class TaskList {
     }
     return "Here are your tasks nya!\n" + output;
   }
+
+  public String findTask(String input) {
+    String output = "";
+    int count = 0;
+    for (int i = 0; i < tasks.size(); i++) {
+      if (tasks.get(i).toString().contains(input)) {
+        output += " " + (count + 1) + ". " + tasks.get(i) + "\n";
+        count++;
+      }
+    }
+    return "Here are your matched tasks nya!\n" + output;
+  }
 }
