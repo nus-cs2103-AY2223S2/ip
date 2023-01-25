@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
+/** A utility class for file reading and writing functions. */
 public class FileUtils {
     // magic number adapted from https://stackoverflow.com/a/35544601
     private static final int READ_LIMIT = 2097152;
@@ -36,6 +37,12 @@ public class FileUtils {
     }
 
 
+    /**
+     * Returns the input stream of the file in the given path.
+     * 
+     * @return the input stream of the file in the given path.
+     * @throws IOException if an I/O error occurs.
+     */
     public static BufferedInputStream getInputStream(Path path) throws IOException {
         return new BufferedInputStream(new FileInputStream(path.toFile()));
     }
