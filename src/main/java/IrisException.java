@@ -1,10 +1,10 @@
-public class DukeException extends Exception{
+public class IrisException extends Exception{
     String message;
-    public DukeException() {
+    public IrisException() {
         this.message = "OOPS!!! Something went wrong." + " Type \"help\" to see the commands.";
     }
 
-    public DukeException(String message) {
+    public IrisException(String message) {
         this.message = "OOPS!!! " + message + " Type \"help\" to see the commands.";
     }
 }

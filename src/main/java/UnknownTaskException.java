@@ -1,4 +1,4 @@
-public class UnknownTaskException extends DukeException{
+public class UnknownTaskException extends IrisException {
     public UnknownTaskException() {
         super("Task not found. Please check the task number again.");
     }

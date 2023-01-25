@@ -1,5 +1,5 @@
 public class Task {
-    private boolean done = false;
+    private boolean isDone = false;
     private String name;
 
     Task(String name) {
@@ -9,12 +9,14 @@ public class Task {
     /**
      * Marks the task done
      */
-    public void mark() {done = true;}
+    public void mark() {
+        isDone = true;}
 
     /**
      * Marks the task not done
      */
-    public void unmark() {done = false;}
+    public void unmark() {
+        isDone = false;}
 
     /**
      * Returns the name of the task
@@ -28,12 +30,12 @@ public class Task {
      * Returns the status of the task
      * @return the status of the task - done or not
      */
-    public boolean isDone() {
-        return this.done;
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     private String status() {
-        if (done) {
+        if (this.isDone) {
             return "X";
         } else {
             return " ";
