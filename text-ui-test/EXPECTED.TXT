@@ -8,6 +8,7 @@
         ________________________________________________________
 
         I have 0 tasks in my memory
+
         ________________________________________________________
         I have added buy food to my memory
           [T][ ] buy food
@@ -29,6 +30,7 @@
         2.[D][ ] do CS2103T (by: MAY 5 2023 1800)
         3.[E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
+
         ________________________________________________________
         Understood, I have marked the task as done:
         [D][X] do CS2103T (by: MAY 5 2023 1800)
@@ -38,6 +40,7 @@
         2.[D][X] do CS2103T (by: MAY 5 2023 1800)
         3.[E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
+
         ________________________________________________________
         Understood, I have marked the task as undone:
         [D][ ] do CS2103T (by: MAY 5 2023 1800)
@@ -47,6 +50,7 @@
         2.[D][ ] do CS2103T (by: MAY 5 2023 1800)
         3.[E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
+
         ________________________________________________________
         Understood, I have marked the task as done:
         [E][X] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
@@ -56,6 +60,7 @@
         2.[D][ ] do CS2103T (by: MAY 5 2023 1800)
         3.[E][X] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
+
         ________________________________________________________
         Understood, I have marked the task as undone:
         [T][ ] buy food
@@ -65,6 +70,7 @@
         2.[D][ ] do CS2103T (by: MAY 5 2023 1800)
         3.[E][X] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
+
         ________________________________________________________
         Understood, I have marked the task as undone:
         [E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
@@ -74,6 +80,7 @@
         2.[D][ ] do CS2103T (by: MAY 5 2023 1800)
         3.[E][ ] Dinner (from: JAN 1 2023 1600 to: JAN 1 2023 1800)
         I have 3 tasks in my memory
+
         ________________________________________________________
         INVALID TASK DESCRIPTION
         ________________________________________________________
