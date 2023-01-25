@@ -1,17 +1,14 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.Parser;
-
-import duke.storage.Storage;
-
-import duke.task.Task;
-import duke.task.TaskList;
-
-import duke.ui.Ui;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import duke.command.Command;
+import duke.command.Parser;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Duke command line tool that helps to track tasks.
@@ -100,6 +97,8 @@ public class Duke {
         case DELETE:
             ui.printDeleteTaskSuccessMessage(tasks.execute(command));
             break;
+        default:
+            // Do nothing
         }
     }
 

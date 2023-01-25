@@ -28,7 +28,8 @@ public abstract class Task {
         isDone = !isDone;
     }
 
-    /** Returns whether the task is completed.
+    /**
+     * Returns whether the task is completed.
      *
      * @return true if the task is completed, false otherwise.
      */

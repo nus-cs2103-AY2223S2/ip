@@ -43,31 +43,33 @@ public class Parser {
         ArrayList<Command.Argument> requiredArgs = new ArrayList<>();
         ArrayList<Command.Argument> requiredValues = new ArrayList<>();
         switch (command.getName()) {
-            case BYE:
-                // Fallthrough
-            case LIST:
-                break;
-            case MARK:
-                requiredValues.add(Command.Argument.MARK);
-                break;
-            case DELETE:
-                requiredValues.add(Command.Argument.DELETE);
-                break;
-            case TODO:
-                requiredValues.add(Command.Argument.TODO);
-                break;
-            case DEADLINE:
-                requiredArgs.add(Command.Argument.BY);
-                requiredValues.add(Command.Argument.DEADLINE);
-                requiredValues.add(Command.Argument.BY);
-                break;
-            case EVENT:
-                requiredArgs.add(Command.Argument.FROM);
-                requiredArgs.add(Command.Argument.TO);
-                requiredValues.add(Command.Argument.EVENT);
-                requiredValues.add(Command.Argument.FROM);
-                requiredValues.add(Command.Argument.TO);
-                break;
+        case BYE:
+            // Fallthrough
+        case LIST:
+            break;
+        case MARK:
+            requiredValues.add(Command.Argument.MARK);
+            break;
+        case DELETE:
+            requiredValues.add(Command.Argument.DELETE);
+            break;
+        case TODO:
+            requiredValues.add(Command.Argument.TODO);
+            break;
+        case DEADLINE:
+            requiredArgs.add(Command.Argument.BY);
+            requiredValues.add(Command.Argument.DEADLINE);
+            requiredValues.add(Command.Argument.BY);
+            break;
+        case EVENT:
+            requiredArgs.add(Command.Argument.FROM);
+            requiredArgs.add(Command.Argument.TO);
+            requiredValues.add(Command.Argument.EVENT);
+            requiredValues.add(Command.Argument.FROM);
+            requiredValues.add(Command.Argument.TO);
+            break;
+        default:
+            // Do nothing
         }
         checkHasArgs(command, requiredArgs);
         checkHasValues(command, requiredValues);

@@ -11,12 +11,12 @@ public class DateTime {
     /**
      * date of the instance
      */
-    public LocalDate date;
+    private LocalDate date;
 
     /**
      * time of the instance
      */
-    public LocalTime time;
+    private LocalTime time;
 
     /**
      * An instance of date and time.
@@ -28,8 +28,8 @@ public class DateTime {
 
         String[] splitInput = input.split(" ");
         if (splitInput.length != 2) {
-            throw new IllegalArgumentException("Invalid format for date and time, " +
-                    "expected: \"YYYY-MM-DD TTTT\" actual: " + input);
+            throw new IllegalArgumentException("Invalid format for date and time, "
+                    + "expected: \"YYYY-MM-DD TTTT\" actual: " + input);
         }
         date = parseDate(splitInput[0]);
         time = parseTime(splitInput[1]);
@@ -45,8 +45,8 @@ public class DateTime {
         try {
             return LocalDate.parse(date);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Invalid format for date, " +
-                    "expected: \"YYYY-MM-DD\" actual: " + date);
+            throw new IllegalArgumentException("Invalid format for date, "
+                    + "expected: \"YYYY-MM-DD\" actual: " + date);
         }
     }
 
@@ -58,8 +58,8 @@ public class DateTime {
         try {
             return LocalTime.parse(time);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Invalid format for time, " +
-                    "expected: \"TTTT\" actual: " + time);
+            throw new IllegalArgumentException("Invalid format for time, "
+                    + "expected: \"TTTT\" actual: " + time);
         }
     }
 }
