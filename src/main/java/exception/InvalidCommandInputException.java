@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Represents the exception when a command receives an invalid input.
+ */
 public class InvalidCommandInputException extends DukeException {
     String command;
 

@@ -8,6 +8,9 @@ import sys.Storage;
 import exception.DukeException;
 import exception.InvalidCommandInputException;
 
+/**
+ * Represents the command to unmark a task and save the changes.
+ */
 public class UnmarkCommand extends Command {
     private String input;
 
@@ -16,6 +19,14 @@ public class UnmarkCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Unmarks a task and save the changes.
+     *
+     * @param tl the current list of tasks
+     * @param ui the user interface running.
+     * @param storage the storage location for the program.
+     * @throws DukeException If an invalid input is given.
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         // Unmarking a task

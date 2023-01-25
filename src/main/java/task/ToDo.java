@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Represents a task that is to be done.
+ */
 public class ToDo extends Task{
     ToDo(String content) {
         super(content);

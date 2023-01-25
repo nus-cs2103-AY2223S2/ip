@@ -1,5 +1,6 @@
 package sys;
 
+import exception.InvalidDateFormatException;
 import exception.InvalidTaskStringException;
 import task.Task;
 import task.TaskList;
@@ -10,6 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the storage area used to contain the task list.
+ */
 public class Storage {
     String path;
 
@@ -17,6 +21,12 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Loads the TaskList object from the storage.
+     * If storage path is corrupted, return a fresh task list.
+     *
+     * @return Task list parsed from the file located in the storage path.
+     */
     public TaskList load() {
         TaskList tl = new TaskList();
 
@@ -36,6 +46,11 @@ public class Storage {
         return tl;
     }
 
+    /**
+     * Saves the given task list to the storage.
+     *
+     * @param tl The task list that is to be stored in the storage path.
+     */
     public void save(TaskList tl) {
         try {
             FileWriter fw = new FileWriter(this.path);

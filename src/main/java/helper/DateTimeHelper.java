@@ -7,7 +7,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
+/**
+ * Represents the helper class to abstract LocalDateTime logic in Duke.
+ */
 public class DateTimeHelper {
+    /**
+     * Returns corresponding LocalDateTime object for the given string. This
+     * method is used when receiving user input.
+     * The string must be in the format DD/MM/YYYY HHMM where the year can
+     * be any number of digits > 0 and each time-based unit (eg. day, month)
+     * must be valid.
+     *
+     * @param dateTimeString A string representing the date.
+     * @return The corresponding datetime object for the string.
+     * @throws InvalidDateFormatException If the string does not follow the specified format.
+     */
     public static LocalDateTime parse(String dateTimeString) throws InvalidDateFormatException {
         if (!dateTimeString.matches("\\d{1,3}/\\d{1,3}/\\d+ \\d{4}")) {
             throw new InvalidDateFormatException("Incorrect date format!");
@@ -30,8 +44,19 @@ public class DateTimeHelper {
         }
     }
 
+    /**
+     * Returns corresponding LocalDateTime object for the given string. This
+     * method is used when reading data from storage.
+     * The string must be in the format MMM DD YYYY HH:MM where the year can
+     * be any number of digits > 0 and each time-based unit (eg. day, month)
+     * must be valid.
+     *
+     * @param dateTimeString A string representing the date.
+     * @return The corresponding datetime object for the string.
+     * @throws InvalidDateFormatException If the string does not follow the specified format.
+     */
     public static LocalDateTime parseFormattedDateTime(String dateTimeString) throws InvalidDateFormatException{
-        if (!dateTimeString.matches(".{3} \\d{1,3} \\d{4} \\d{2}:\\d{2}")) {
+        if (!dateTimeString.matches(".{3} \\d{1,3} \\d+ \\d{2}:\\d{2}")) {
             throw new InvalidDateFormatException("Incorrect date format!");
         }
 
@@ -52,6 +77,13 @@ public class DateTimeHelper {
         }
     }
 
+    /**
+     * Returns corresponding Integer for a given month expressed as an English word.
+     *
+     * @param month A string representing a month as an English word.
+     * @return Integer value of the given month.
+     * @throws InvalidDateFormatException If the string does not follow the specified format.
+     */
     public static Integer convertMonth(String month) throws InvalidDateFormatException {
         HashMap<String, Integer> m = new HashMap<>();
 
@@ -77,6 +109,12 @@ public class DateTimeHelper {
         return monthValue;
     }
 
+    /**
+     * Convert a datetime object to a String in the format MMM d yyyy HH:mm.
+     *
+     * @param dt A datetime object to be converted in string format.
+     * @return String representing the datetime value in the above format.
+     */
     public static String stringify(LocalDateTime dt) {
         return DateTimeFormatter.ofPattern("MMM d yyyy HH:mm").format(dt);
     }
