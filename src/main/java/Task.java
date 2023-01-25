@@ -1,3 +1,5 @@
+
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -33,7 +35,7 @@ public class Task {
 
     public String changeFormat() {
         String indicator = isDone ? "1" : "0";
-        return "| " + indicator + " | " + this.description;
+        return "/ " + indicator + " / " + this.description;
 
     }
 }

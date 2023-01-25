@@ -2,10 +2,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.String;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
+
+
 
 public class Duke {
     private final static String UNDERLINE = "________________________________________________________________";
     private static ArrayList<Task> list = new ArrayList<>();
+    private final static DateTimeFormatter  timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private final static DateTimeFormatter  HrFormat = DateTimeFormatter.ofPattern("HHmm");
 
     private final static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -28,14 +35,14 @@ public class Duke {
         System.out.printf("\tNow you have %d tasks in the list.\n", list.size());
     }
 
-    private static void addEvents(String description, String start, String end) {
+    private static void addEvents(String description, LocalDateTime start, LocalTime end) {
         Events evItem = new Events(description, start, end);
         list.add(evItem);
         System.out.println("\tGot it. I have added this task:\n " + evItem.toString());
         System.out.printf("\tNow you have %d tasks in the list.\n", list.size());
     }
 
-    private static void addDeadline(String description, String doneBy) {
+    private static void addDeadline(String description, LocalDateTime doneBy) {
         Deadline dlItem = new Deadline(description, doneBy);
         list.add(dlItem);
         System.out.println("\tGot it. I have added this task:\n " + dlItem.toString());
@@ -72,7 +79,7 @@ public class Duke {
                 return 0;
             }
             else if ((instct.split(" ").length) > 1 && !instct.split(" ")[0].equals("list")) {
-                  if (instct.split(" ")[0].equals("mark")) {
+                if (instct.split(" ")[0].equals("mark")) {
                     int numbering = Integer.parseInt(instct.split(" ")[1]) - 1;
                     System.out.println(UNDERLINE);
                     System.out.println("\t" + "Nice! I've marked this task as done:");
@@ -98,7 +105,8 @@ public class Duke {
                 } else if (instct.split(" ")[0].equals("deadline")) {
                     System.out.println(UNDERLINE);
                     String description = instct.split(" ")[1];
-                    String doneBy = instct.split(" /by ")[1];
+                    String temp = instct.split(" /by ")[1];
+                    LocalDateTime doneBy = LocalDateTime.parse(temp, timeFormat);
                     addDeadline(description, doneBy);
                     System.out.println(UNDERLINE);
 
@@ -107,8 +115,8 @@ public class Duke {
                     System.out.println(UNDERLINE);
                     String description = instct.split(" ")[1];
                     String[] temp = instct.split("/from | /to ");
-                    String from = temp[1];
-                    String to = temp[2];
+                    LocalDateTime from = LocalDateTime.parse(temp[1], timeFormat);
+                    LocalTime to = LocalTime.parse(temp[2], HrFormat);
                     addEvents(description, from, to);
                     System.out.println(UNDERLINE);
 
@@ -149,12 +157,13 @@ public class Duke {
         }
     }
     private static void readnWriteData(){
-       try{
+        try{
             File data = new File("database/data.txt");
             Scanner sc = new Scanner(data);
             while (sc.hasNextLine()) {
                 String txt = sc.nextLine();
-                String[] segments = txt.split(" | ");
+
+                String[] segments = txt.split(" / ");
                 String task = segments[0];
                 String indicator = segments[1];
                 String description = segments[2];
@@ -167,7 +176,7 @@ public class Duke {
                     }
                 }
                 else if (task.equals("D")){
-                    String Doneby = segments[3];
+                    LocalDateTime Doneby = LocalDateTime.parse(segments[3],timeFormat);
                     addedtask = new Deadline(description, Doneby);
                     list.add(addedtask);
                     if (indicator.equals("1")) {
@@ -175,8 +184,8 @@ public class Duke {
                     }
                 }
                 else if (task.equals("E")){
-                    String from = segments[3];
-                    String to = segments[4];
+                    LocalDateTime from = LocalDateTime.parse(segments[3],timeFormat);
+                    LocalTime to = LocalTime.parse(segments[4],HrFormat);
                     addedtask = new Events(description, from, to);
                     list.add(addedtask);
                     if (indicator.equals("1")) {
@@ -187,12 +196,10 @@ public class Duke {
 
             }
 
-
-
         }
-       catch (IOException e){
-           createDataFile();
-       }
+        catch (IOException e){
+            createDataFile();
+        }
     }
     private static void saveData() throws  IOException{
         FileWriter fwrite = new FileWriter("database/data.txt", false);
@@ -223,7 +230,7 @@ public class Duke {
                 }
             }
             catch (IOException e){
-                 e.printStackTrace();
+                e.printStackTrace();
             }
 
 
@@ -231,4 +238,3 @@ public class Duke {
 
     }
 }
-
