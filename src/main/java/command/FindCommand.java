@@ -25,7 +25,7 @@ public class FindCommand extends Command{
     }
 
     /***
-     * Finds the relevant task with the keyword
+     * Finds the relevant task with matching keyword
      * @param taskList
      * @param ui
      * @param storage
