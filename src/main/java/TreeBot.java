@@ -96,7 +96,6 @@ public class TreeBot {
     }
 
     private void saveTasks() {
-        System.out.println("saving tasks");
         try {
             FileWriter fw = new FileWriter("data/treebot.txt");
             for (Task task : this.tasks) {
