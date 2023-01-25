@@ -2,25 +2,23 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 
-import java.util.List;
-
 public class Storage {
     File taskStorage;
     String FOLDER = "./";
 
-    public Storage(String filePath) {
-        this.taskStorage = new File(FOLDER, filePath);
+    public Storage(String fileName) {
+        this.taskStorage = new File(FOLDER, fileName + ".txt");
     }
 
-    public void write(List<Task> tasks) {
+    public void write(TaskList tasks) {
         if (this.taskStorage.exists()) {
             this.taskStorage.delete();
         }
         try {
             this.taskStorage.createNewFile();
             FileWriter fw = new FileWriter(this.taskStorage);
-            for (Task t : tasks) {
-                fw.write(t.toString() + "\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                fw.write(tasks.get(i).toString() + "\n");
             }
             fw.close();
         } catch (IOException e) {
