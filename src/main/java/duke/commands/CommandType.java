@@ -11,7 +11,8 @@ public enum CommandType {
     TODO("todo", true),
     DEADLINE("deadline", true),
     EVENT("event", true),
-    DELETE("delete", true);
+    DELETE("delete", true),
+    FIND("find", true);
 
     private final String command;
     private final boolean hasArguments;
