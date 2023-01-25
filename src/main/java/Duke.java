@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
     public enum ParseFunctions {
@@ -98,7 +99,7 @@ public class Duke {
                 }
                 case "deadline": {
                     String[] parsed = parser(command, ParseFunctions.DEADLINE);
-                    Task newDeadline = new Deadline(parsed[1], parsed[2]);
+                    Task newDeadline = new Deadline(parsed[1], LocalDate.parse(parsed[2]));
                     Duke.taskStore.add(newDeadline);
 
                     printNewTask(newDeadline);
@@ -106,7 +107,7 @@ public class Duke {
                 }
                 case "event": {
                     String[] parsed = parser(command, ParseFunctions.EVENT);
-                    Task newEvent = new Event(parsed[1], parsed[2], parsed[3]);
+                    Task newEvent = new Event(parsed[1], LocalDate.parse(parsed[2]), LocalDate.parse(parsed[3]));
                     Duke.taskStore.add(newEvent);
 
                     printNewTask(newEvent);
