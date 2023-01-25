@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 enum Command {
@@ -135,18 +136,25 @@ public class Duke {
     }
 
     private static void deadline(TaskList toDoList, String input) throws DukeExceptions {
-        int index_ddl = input.indexOf("/");
-        if (input.length() > 9 && !input.contains("/")) {
-            throw new DukeExceptions(timeNotFound);
+        try {
+
+<<<<<<< HEAD
+=======
+            int index_ddl = input.indexOf("/");
+            if (input.length() > 9 && !input.contains("/")) {
+                throw new DukeExceptions(timeNotFound);
+            }
+            if (index_ddl - 1 < 9) {
+                throw new DukeExceptions(descriptionNotFound);
+            }
+            Ddl ddlTask = new Ddl(input.substring(9, index_ddl - 1), input.substring(index_ddl + 4, input.length()));
+            System.out.println("   okie dokie. I've added this task:" + "\n" + ddlTask);
+            toDoList.add(ddlTask);
+            Save.saveTaskList(toDoList);
+            System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
+        } catch (DateTimeParseException e) {
+            System.out.println("   Key in deadline in the format of yyyy-mm-dd");
         }
-        if (index_ddl - 1 < 9) {
-            throw new DukeExceptions(descriptionNotFound);
-        }
-        Ddl ddlTask = new Ddl(input.substring(9, index_ddl - 1), input.substring(index_ddl + 4, input.length()));
-        System.out.println("   okie dokie. I've added this task:" + "\n" + ddlTask);
-        toDoList.add(ddlTask);
-        Save.saveTaskList(toDoList);
-        System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
     }
 
     private static void event(TaskList toDoList, String input) throws DukeExceptions {
@@ -171,6 +179,7 @@ public class Duke {
         System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
     }
 
+>>>>>>> branch-Level-8
     private static void delete(TaskList toDoList, String input) throws DukeExceptions {
         if (input.length() < 7) {
             throw new DukeExceptions(deleteNumberNotFound);
