@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Scanner;
+import java.time.format.DateTimeParseException;
 
 public class Reply {
     protected String[] command;
@@ -12,9 +13,9 @@ public class Reply {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void list(List<Task> tasks, int count) {
+    public void list(List<Task> tasks) {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i+1) + "." + tasks.get(i).toString());
         }
     }
@@ -50,7 +51,7 @@ public class Reply {
         }
     }
 
-    public void todo(List<Task> tasks, int count) {
+    public void todo(List<Task> tasks) {
         try {
             if (command.length == 1) {
                 throw new DukeException(null, null);
@@ -64,14 +65,14 @@ public class Reply {
             }
             tasks.add(new Todo(sb.toString()));
             System.out.println("Got it. I've added this task:");
-            System.out.println(tasks.get(count).toString());
-            System.out.printf("Now you have %d tasks in the list.\n", count + 1);
+            System.out.println(tasks.get(tasks.size()-1).toString());
+            System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
         } catch (DukeException e) {
             System.out.println("☹ OOPS!!! The description cannot be empty!");
         }
     }
 
-    public void event(List<Task> tasks, int count) {
+    public void event(List<Task> tasks) {
         try {
             StringBuilder sb = new StringBuilder();
             StringBuilder from = new StringBuilder();
@@ -108,14 +109,14 @@ public class Reply {
             }
             tasks.add(new Event(sb.toString(), from.toString(), to.toString()));
             System.out.println("Got it. I've added this task:");
-            System.out.println(tasks.get(count).toString());
-            System.out.printf("Now you have %d tasks in the list.\n", count + 1);
+            System.out.println(tasks.get(tasks.size() - 1).toString());
+            System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
         } catch (DukeException e) {
             System.out.println("☹ OOPS!!! The timing was not specified!");
         }
     }
 
-    public void deadline(List<Task> tasks, int count) {
+    public void deadline(List<Task> tasks) {
         try {
             StringBuilder sb = new StringBuilder();
             StringBuilder by = new StringBuilder();
@@ -141,14 +142,16 @@ public class Reply {
             }
             tasks.add(new Deadline(sb.toString(), by.toString()));
             System.out.println("Got it. I've added this task:");
-            System.out.println(tasks.get(count).toString());
-            System.out.printf("Now you have %d tasks in the list.\n", count + 1);
+            System.out.println(tasks.get(tasks.size() - 1).toString());
+            System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
         } catch (DukeException e) {
             System.out.println("☹ OOPS!!! The timing was not specified!");
+        } catch (DateTimeParseException e) {
+            System.out.println("☹ OOPS!!! The timing needs to be in format yyyy-mm-dd hhmm!");
         }
     }
 
-    public void delete(List<Task> tasks, int count) {
+    public void delete(List<Task> tasks) {
         try {
             if (command.length == 1) {
                 throw new DukeException(null, null);
@@ -165,7 +168,7 @@ public class Reply {
             }
             System.out.println("Noted. I've removed this task:");
             System.out.println(tasks.get(index).toString());
-            System.out.printf("Now you have %d tasks in the list.\n", count - 1);
+            System.out.printf("Now you have %d tasks in the list.\n", tasks.size() - 1);
             tasks.remove(index);
             sc.close();
         } catch (DukeException e) {
