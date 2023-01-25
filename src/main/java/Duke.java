@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.time.LocalDate;
 
 public class Duke {
     private static ArrayList<Task> taskStore = new ArrayList<>();
@@ -83,12 +84,12 @@ public class Duke {
                 taskStore.add(new ToDo(description, isCompleted));
             }
             else if (type.equals("D")) {
-                String by = params[3];
+                LocalDate by = LocalDate.parse(params[3]);
                 taskStore.add(new Deadline(description, isCompleted, by));
             }
             else if (type.equals("E")) {
-                String start = params[3];
-                String end = params[4];
+                LocalDate start = LocalDate.parse(params[3]);
+                LocalDate end = LocalDate.parse(params[4]);
                 taskStore.add(new Event(description, isCompleted, start, end));
             }
         }
@@ -186,7 +187,7 @@ public class Duke {
                 }
                 case "deadline": {
                     String[] parsed = parser(command, ParseFunctions.DEADLINE);
-                    Task newDeadline = new Deadline(parsed[1], parsed[2]);
+                    Task newDeadline = new Deadline(parsed[1], LocalDate.parse(parsed[2]));
                     Duke.taskStore.add(newDeadline);
                     addTaskToFile(newDeadline);
                     printNewTask(newDeadline);
@@ -194,7 +195,7 @@ public class Duke {
                 }
                 case "event": {
                     String[] parsed = parser(command, ParseFunctions.EVENT);
-                    Task newEvent = new Event(parsed[1], parsed[2], parsed[3]);
+                    Task newEvent = new Event(parsed[1], LocalDate.parse(parsed[2]), LocalDate.parse(parsed[3]));
                     Duke.taskStore.add(newEvent);
                     addTaskToFile(newEvent);
                     printNewTask(newEvent);
