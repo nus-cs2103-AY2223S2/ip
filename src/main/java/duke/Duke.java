@@ -20,6 +20,10 @@ public class Duke {
     private final TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Duke constructor
+     * @param filePathName the string representing the path to the file duke
+     */
     public Duke(String filePathName) {
         TaskList tasks1;
         this.ui = new Ui();
@@ -62,9 +66,6 @@ public class Duke {
                 String command = upperLine.split(" ")[0];
                 Command cm = Parser.parseCommand(command);
                 String[] elemArr = Parser.parseStartingElements(upperLine);
-
-
-
                 if (cm.equals(Command.BYE)) {
                     if (elemArr.length == 1) {
                         break;
@@ -132,6 +133,10 @@ public class Duke {
         this.ui.goodBye();
     }
 
+    /**
+     * function that returns the formatter for date time
+     * @return the date time formatter used in duke
+     */
     public static DateTimeFormatter getFormatter() {
         return FORMATTER;
     }

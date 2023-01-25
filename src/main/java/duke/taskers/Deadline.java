@@ -8,11 +8,21 @@ public class Deadline extends Task {
     private final LocalDateTime end;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM uuuu h.mma");
 
+    /**
+     * deadline constructor
+     * @param desc description of what the deadline is
+     * @param isDone true if the deadline is done. false if the deadline is not done
+     * @param end date the deadline is due
+     */
     public Deadline(String desc, boolean isDone, LocalDateTime end) {
         super(desc, isDone);
         this.end = end;
     }
 
+    /**
+     * returns the string to be inserted into the duke file for storage
+     * @return the deadline string
+     */
     public String statusStringForFile() {
         return String.format("DEADLINE / %s / %s", super.stringFormatForFile(), this.end.format(FORMATTER));
     }
