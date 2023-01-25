@@ -2,10 +2,49 @@ import java.util.List;
 
 public class CommandHandler {
     CommandHandler() {}
-    public String endDuke() {
+    public String handleCommand(Command command, List<Task> tasks) {
+        switch (command.getDescription()) {
+        case "bye":
+            return endDuke();
+            //Fallthrough (java doesn't let me compile if I add a break)
+        case "list":
+            return showTasks(tasks);
+            //Fallthrough
+        case "mark":
+            return markTask(command.getArguments().get(0), tasks);
+            //Fallthrough 
+        case "unmark":
+            return unmarkTask(command.getArguments().get(0), tasks);
+            //Fallthrough 
+        case "todo":
+            return addTodo(command.getArguments().get(0), tasks);
+            //Fallthrough 
+        case "deadline":
+            return addDeadline(command.getArguments().get(0), command.getArguments().get(1), tasks);
+            //Fallthrough 
+        case "event":
+            return addEvent(command.getArguments().get(0), command.getArguments().get(1), command.getArguments().get(2), tasks);
+            //Fallthrough 
+        case "delete":
+            return deleteEvent(command.getArguments().get(0), tasks);
+            //Fallthrough 
+        case "noMatch":
+            return noMatch();
+            //Fallthrough 
+        case "invalid":
+            return invalid(command.getArguments().get(0));
+            //Fallthrough 
+        }
+        return "";
+    }
+    
+    public boolean isByeCommand(Command command) {
+        return command.getDescription().equals("bye");
+    }
+    private String endDuke() {
         return "Bye! Hope to see you again soon!\n";
     }
-    public String showTasks(List<Task> tasks) {
+    private String showTasks(List<Task> tasks) {
         String response = "";
         if (!tasks.isEmpty()) {
             for (int i = 1; i <= tasks.size(); i++) {
@@ -16,101 +55,68 @@ public class CommandHandler {
         }
         return response;
     }
-    public String markTask(String command, List<Task> tasks) {
+    private String markTask(String index, List<Task> tasks) {
         String response = "";
-        if (! command.matches("mark \\d+")) {
-            response = "Please enter one task which you would like to mark as done.\n";
-        } else {
-            try {
-                int taskIndex = Integer.parseInt(command.split(" ")[1]) - 1;
-                tasks.get(taskIndex).setDone(true);
-                response += "Okay! I've marked this task as done!\n";
-                response += tasks.get(taskIndex).printTask() + "\n";
-            } catch (IndexOutOfBoundsException e) {
-                response = "You don't have that many tasks!\n";
-            }
+        try {
+            int taskIndex = Integer.parseInt(index) - 1;
+            tasks.get(taskIndex).setDone(true);
+            response += "Okay! I've marked this task as done!\n";
+            response += tasks.get(taskIndex).printTask() + "\n";
+        } catch (IndexOutOfBoundsException e) {
+            response = "You don't have that many tasks!\n";
         }
         return response;
     }
-    public String unmarkTask(String command, List<Task> tasks) {
+    private String unmarkTask(String index, List<Task> tasks) {
         String response = "";
-        if (! command.matches("unmark \\d+")) {
-            response = "Please enter one task which you would like to mark as undone.\n";
-        } else {
-            try {
-                int taskIndex = Integer.parseInt(command.split(" ")[1]) - 1;
-                tasks.get(taskIndex).setDone(false);
-                response += "Okay! I've marked this task as not done yet!\n";
-                response += tasks.get(taskIndex).printTask() + "\n";
-            } catch (IndexOutOfBoundsException e) {
-                response = "You don't have that many tasks!\n";
-            }
+        try {
+            int taskIndex = Integer.parseInt(index) - 1;
+            tasks.get(taskIndex).setDone(false);
+            response += "Okay! I've marked this task as not done yet!\n";
+            response += tasks.get(taskIndex).printTask() + "\n";
+        } catch (IndexOutOfBoundsException e) {
+            response = "You don't have that many tasks!\n";
         }
         return response;
     }
-    public String addTodo(String command, List<Task> tasks) {
+    private String addTodo(String description, List<Task> tasks) {
         String response = "";
-        if (! command.matches("todo .+")) {
-            response = "Please enter the task you would like to do in the format \n>> todo [task]\n";
-        } else {
-            command = command.split(" ", 2)[1];
-            Task newTask = new Todo(command);
-            tasks.add(newTask);
-            response = String.format("Added: %s\n", newTask.printTask());
-        }
+        Task newTask = new Todo(description);
+        tasks.add(newTask);
+        response = String.format("Added: %s\n", newTask.printTask());
         return response;
     }
-    public String addDeadline(String command, List<Task> tasks) {
+    private String addDeadline(String description, String by, List<Task> tasks) {
         String response = "";
-        if (! command.matches("deadline .+ /by .+")) {
-            response = "Sorry, that command is invalid. Specify a deadline task with \n >> deadline [description] /by [time]\n";
-        } else {
-            String delimiter = "/by ";
-            String task = command.substring("deadline ".length(), command.indexOf(delimiter) - 1);
-            String deadline = command.substring(command.indexOf(delimiter) + delimiter.length());
-            Task newTask = new Deadline(task, deadline);
-            tasks.add(newTask);
-            response = String.format("Added: %s\n", newTask.printTask());
-        }
-        return response;
-
-    }
-    public String addEvent(String command, List<Task> tasks) {
-        String response = "";
-        if (! command.matches("event .+ /from .+ /to .+")) {
-            response = "Sorry, that command is invalid. Specify an event task with \n >> event [description] /from [start time] /to [end time]\n";
-        } else {
-            String startDelimiter = "/from ";
-            String endDelimiter = "/to ";
-            String task = command.substring("event ".length(), command.indexOf(startDelimiter) - 1);
-            String startTime = command.substring(
-                    command.indexOf(startDelimiter) + startDelimiter.length(),
-                    command.indexOf(endDelimiter) - 1);
-            String endTime = command.substring(
-                    command.indexOf(endDelimiter) + endDelimiter.length());
-            Task newTask = new Event(task, startTime, endTime);
-            tasks.add(newTask);
-            response = String.format("Added: %s\n", newTask.printTask());
-        }
+        Task newTask = new Deadline(description, by);
+        tasks.add(newTask);
+        response = String.format("Added: %s\n", newTask.printTask());
         return response;
     }
-    public String noMatch() {
+    private String addEvent(String description, String from, String to, List<Task> tasks) {
+        String response = "";
+        Task newTask = new Event(description, from, to);
+        tasks.add(newTask);
+        response = String.format("Added: %s\n", newTask.printTask());
+        return response;
+    }
+    private String noMatch() {
         return "Sorry, I didn't understand that, please ask again.\n";
     }
 
-    public String deleteEvent(String command, List<Task> tasks) {
+    private String deleteEvent(String index, List<Task> tasks) {
         String response = "";
-        if (! command.matches("delete \\d+")) {
-            response = "Tell me the index of the event you want to delete! Type >>list to view your events again.\n";
-        } else {
-            try {
-                int taskIndex = Integer.parseInt(command.split(" ")[1]) - 1;
-                response = String.format("Okay! I deleted task %s\n", tasks.get(taskIndex).printTask());
-                tasks.remove(taskIndex);
-            } catch (IndexOutOfBoundsException e) {
-                response = "You don't have that many tasks!\n";
-            }
+        try {
+            int taskIndex = Integer.parseInt(index) - 1;
+            response = String.format("Okay! I deleted task %s\n", tasks.get(taskIndex).printTask());
+            tasks.remove(taskIndex);
+        } catch (IndexOutOfBoundsException e) {
+            response = "You don't have that many tasks!\n";
         }
         return response;
+    }
+    
+    private String invalid(String reply) {
+        return reply;
     }
 }

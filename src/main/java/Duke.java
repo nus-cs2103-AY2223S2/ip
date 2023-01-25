@@ -15,7 +15,7 @@ public class Duke {
     
     public static void main(String[] args) {
         Duke d = new Duke();
-        d.ui.start();
+        d.ui.showStartingDialogue();
         
         while (d.isRunning) {
             d.isRunning = d.ui.run(d.tasks);
