@@ -1,27 +1,22 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import org.apache.commons.io.FileUtils;
 
 public class Storage {
     String home = System.getProperty("user.home");
     java.nio.file.Path path;
+    File newFile;
 
     public Storage(String s) {
         path = java.nio.file.Paths.get(home, "data", s);
+        newFile = new File(path.toString());
+    }
+
+    public void dirTest() {
         try {
-            File newFile = new File(path.toString());
-            if (newFile.createNewFile()) {
-                System.out.println("New File Created!");
-            } else {
-                System.out.println("File exist!");
-            }
+            FileUtils.write(newFile, "Test\ning");
         } catch (IOException e) {
-            System.out.println("Error Occured");
             e.printStackTrace();
         }
     }
-//
-//    public void dirTest() {
-//
-//    }
 }

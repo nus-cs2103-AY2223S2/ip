@@ -127,6 +127,12 @@ public class Duke {
                                         + selectedTask.toString()
                                         + "\n    ____________________________________________________________");
                         break;
+                    case "Storage":
+                        System.out.println("I RAN HERE!");
+                        Storage s = new Storage("test.txt");
+                        System.out.println("I RAN HERE2!");
+                        s.dirTest();
+                        break;
                     default:
                         throw new DukeException("I don't get it!");
                 }
