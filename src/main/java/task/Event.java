@@ -1,11 +1,15 @@
 package task;
 
+import com.sun.jdi.LocalVariable;
+
+import java.time.LocalDate;
+
 /**
  * Represents an Event
  */
 public class Event extends Task {
-    protected String start;
-    protected String end;
+    protected LocalDate start;
+    protected LocalDate end;
 
     /**
      * Constructor to initialize an event object
@@ -14,7 +18,7 @@ public class Event extends Task {
      * @param end The end date/time of the event
      * @param desc The title of the event
      */
-    public Event(String start, String end, String desc) {
+    public Event(LocalDate start, LocalDate end, String desc) {
         super(desc);
         this.start = start;
         this.end = end;
@@ -27,6 +31,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + start + "to: " + end + ")";
+        return "[E]" + super.toString() + "(from: " + start + " to: " + end + ")";
     }
 }

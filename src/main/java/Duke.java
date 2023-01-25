@@ -1,5 +1,7 @@
 import task.Task;
 import task.TaskList;
+
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Duke {
@@ -102,8 +104,10 @@ public class Duke {
      * @param date The time/date of the deadline
      */
     public static void deadlineCommand(TaskList taskList, String desc, String date) {
+        // convert string date to localdate
+        LocalDate localDate = LocalDate.parse(date);
         System.out.println("Got it, I've added this task:");
-        taskList.addDeadline(date, desc);
+        taskList.addDeadline(localDate, desc);
     }
 
     /**
@@ -116,7 +120,9 @@ public class Duke {
      */
     public static void eventCommand(TaskList taskList, String start, String end, String desc) {
         System.out.println("Got it, I've added this task:");
-        taskList.addEvent(start, end, desc);
+        LocalDate startLocalDate = LocalDate.parse(start);
+        LocalDate endLocalDate = LocalDate.parse(end);
+        taskList.addEvent(startLocalDate, endLocalDate, desc);
     }
 
     /**
@@ -214,25 +220,22 @@ public class Duke {
                 String desc = command.split(" ", 2)[1];
                 todoCommand(taskList, desc);
             } else if (arr[0].equals("deadline")) {
-                if (countSlash(command) != 1) {
+                if (!command.contains("/by")) {
                     throw new DukeException("Please specify the deadline.");
                 } else {
-                    String segments[] = command.split("/");
-                    String deadline = segments[segments.length - 1];
-                    String date = deadline.split(" ", 2)[1];
-                    String subSegments[] = segments[0].split(" ", 2);
-                    String desc = subSegments[1];
+                    String segments[] = command.split("/by ", 2);
+                    String desc = segments[0].split("deadline ", 2)[1];
+                    String date = segments[1];
                     deadlineCommand(taskList, desc, date);
                 }
             } else if (arr[0].equals("event")) {
-                if (countSlash(command) != 2) {
+                if (!command.contains("/from") && !command.contains("/to")) {
                     throw new DukeException("Please specify both the start and end times/dates.");
                 } else {
-                    String segments[] = command.split("/", 3);
-                    String start = segments[segments.length - 2].split(" ", 2)[1];
-                    String end = segments[segments.length - 1].split(" ", 2)[1];
-                    String subSegments[] = segments[0].split(" ", 2);
-                    String desc = subSegments[1];
+                    String segments[] = command.split("/from ", 2);
+                    String desc = segments[0];
+                    String start = segments[1].split(" /to")[0];
+                    String end = segments[1].split("/to ")[1];
                     eventCommand(taskList, start, end, desc);
                 }
             } else if (arr[0].equals("delete")) {
