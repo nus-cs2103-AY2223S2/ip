@@ -1,4 +1,6 @@
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -103,7 +105,9 @@ public class Duke {
         case "deadline":
             try {
                 int slashIndex = arguments.indexOf('/');
-                String dateBy = arguments.substring(slashIndex + 4);
+                String dateByString = arguments.substring(slashIndex + 4);
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime dateBy = LocalDateTime.parse(dateByString, dateFormat);
                 addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE, null, dateBy);
             } catch (Throwable e) {
                 throw new IlegalCommandException(Commands.DEADLINE);
@@ -114,8 +118,12 @@ public class Duke {
                 int firstSlashIndex = arguments.indexOf('/');
                 String startAndEnd = arguments.substring(firstSlashIndex + 6);
                 int secondSlashIndex = startAndEnd.indexOf('/');
-                String start = startAndEnd.substring(0, secondSlashIndex - 1);
-                String end = startAndEnd.substring(secondSlashIndex + 4);
+                String startString = startAndEnd.substring(0, secondSlashIndex - 1);
+                String endString = startAndEnd.substring(secondSlashIndex + 4);
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime start = LocalDateTime.parse(startString, dateFormat);
+                LocalDateTime end = LocalDateTime.parse(endString, dateFormat);
+                // TODO: Check if start date is after end date
                 addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT, start, end);
             } catch (Throwable e) {
                 throw new IlegalCommandException(Commands.EVENT);
