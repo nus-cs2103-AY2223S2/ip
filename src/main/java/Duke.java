@@ -46,6 +46,9 @@ public class Duke {
 
         while(true){
             try {
+                Pattern todoPattern = Pattern.compile("todo \\D+");
+                Pattern deadlinePattern = Pattern.compile("deadline .+/by \\d{2}/\\d{2}/\\d{4}");
+                Pattern eventPattern = Pattern.compile("event .+/from \\d{2}/\\d{2}/\\d{4} /to \\d{2}/\\d{2}/\\d{4}");
                 input = sc.nextLine();
                 String lcInput = input.toLowerCase();
                 String[] inputs = input.split(" ");
@@ -62,27 +65,6 @@ public class Duke {
                     } else {
                         list(path);
                     }
-                } else if (lcInput.contains("deadline")) {
-                    if (inputs.length <= 1) {
-                        throw new DukeException("What is the deadline task????");
-                    } else if (!lcInput.contains("/by")) {
-                        throw new DukeException("Put in the deadline of your task Please!");
-                    } else {
-                        deadline(input, path);
-                    }
-                } else if (lcInput.contains("todo")) {
-                    if (inputs.length <= 1) {
-                        throw new DukeException("What is the todo task????");
-                    } else {
-                        todo(input, path);
-                    }
-                } else if (lcInput.contains("event")) {
-                    if (!input.contains("/from") && !input.contains("/to")){
-                        throw new DukeException("Period not specified!");
-                    } else if (inputs.length <= 1){
-                        throw new DukeException("What is the event task????");
-                    }
-                    events(input, path);
                 } else if (Pattern.compile("\\D+.\\d+").matcher(input).find()){
                     int index = Integer.parseInt(inputs[1]);
                     if (inputs[0].equals("mark")) {
@@ -94,6 +76,12 @@ public class Duke {
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
+                }else if (todoPattern.matcher(input).find()){
+                    todo(input, path);
+                } else if (deadlinePattern.matcher(input).find()){
+                    deadline(input, path);
+                } else if (eventPattern.matcher(input).find()){
+                    events(input, path);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -299,32 +287,6 @@ public class Duke {
         } catch (IOException e){
             throw new DukeException("Unable to access contents of file");
         }
-        //try{
-            //System.out.println(logo);
-            //"todo \D+"
-            //deadline .+/by \d{2}/\d{2}/\d{4}
-            //event .+/from \d{2}/\d{2}/\d{4} /to \d{2}/\d{2}/\d{4}
-            Scanner sc = new Scanner(System.in);
-            String command = sc.nextLine();
-            while (true){
-                Pattern todoPattern = Pattern.compile("todo \\D+");
-                Pattern deadlinePattern = Pattern.compile("deadline .+/by \\d{2}/\\d{2}/\\d{4}");
-                Pattern eventPattern = Pattern.compile("event .+/from \\d{2}/\\d{2}/\\d{4} /to \\d{2}/\\d{2}/\\d{4}");
-                if (todoPattern.matcher(command).find()){
-                    System.out.println("Todo Task added succesfully!");
-                } else if (deadlinePattern.matcher(command).find()){
-                    System.out.println("Deadline Task added succcesfully!");
-                } else if (eventPattern.matcher(command).find()){
-                    System.out.println("Event task added successfully!");
-                } else {
-                    System.out.println("Incorrect command given!");
-                }
-            }
-        //} catch(Exception e){
-
-        //}
     }
-
-
 }
 
