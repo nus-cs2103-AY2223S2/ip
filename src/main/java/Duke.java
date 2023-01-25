@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -7,18 +8,34 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        ArrayList taskList = new ArrayList<String>();
+        ArrayList<Task> taskList = new ArrayList<Task>();
 
 
         while(!input.equals("bye")) {
 
             if (input.equals("list")) {
+                System.out.println("Here are some tasks in your list:");
                 for (int i = 1; i < taskList.size() + 1; i++) {
-                    System.out.println(i + ". " + taskList.get(i - 1));
+                    System.out.println(i + ". " + (taskList.get(i - 1)).toString());
                 }
-            } else {
-                taskList.add(input);
-                System.out.println("added: " + input);
+
+            } else if((input.substring(0, 4)).equals("mark")) {
+                String taskStr = input.substring(5);
+                int taskNum = Integer.parseInt(taskStr) - 1;
+                Task originalTask =  taskList.get(taskNum);
+                originalTask.markTask();
+                System.out.println("Nice! I've marked this task as done: \n  " + originalTask.toString());
+            } else if((input.substring(0, 6)).equals("unmark")) {
+                String taskStr = input.substring(7);
+                int taskNum = Integer.parseInt(taskStr) - 1;
+                Task originalTask =  taskList.get(taskNum);
+                originalTask.unmarkTask();
+                System.out.println("Ok, I've marked this task as not done yet: \n  " + originalTask.toString());
+            }
+            else {
+                Task task = new Task(input);
+                taskList.add(task);
+                System.out.println(task.toString());
             }
             input = sc.nextLine();
         }
