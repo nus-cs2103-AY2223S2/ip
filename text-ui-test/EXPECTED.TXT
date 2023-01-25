@@ -1,3 +1,4 @@
+Unable to load, creating a data/duke.txt
 Good ta see yer dawg, Duke's at yer service.
 ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠀⣀⣀⣀⣀⢀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⣀⣰⣿⣿⡻⠟⠋⠉⠉⣻⠟⠉⠉⠉⠛⢯⡛⢿⣿⣷⣤⣀⠀⠀⠀⠀⠀
@@ -15,15 +16,24 @@ Good ta see yer dawg, Duke's at yer service.
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣧⠀⠀⠀⠀⠀⣸⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣷⣤⣤⣤⡾⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠿⢶⣾⣶⠾⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+____________________________________________________________
 Gotcha, I've added:
   [T][ ] borrow book
 Now you have 1 in the list!
+____________________________________________________________
+____________________________________________________________
 Here are the tasks in your list dawg:
 1.[T][ ] borrow book
+____________________________________________________________
+____________________________________________________________
+The task is marked, dawg
+____________________________________________________________
+____________________________________________________________
 Gotcha, I've added:
-  [D][ ] return book (by: Sunday)
+  [E][ ] project meeting (from: Mon 2pm to: 4pm)
 Now you have 2 in the list!
+____________________________________________________________
+____________________________________________________________
 Gotcha, I've added:
-  [E][ ] project meeting  (from: Mon 2pm to: 4pm)
+  [D][ ] return book (by: Feb 12 2019 1800)
 Now you have 3 in the list!
-See yer again RUFF!

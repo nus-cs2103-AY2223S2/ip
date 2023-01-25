@@ -1,7 +1,9 @@
-public class EmptyDescException extends Exception {
+package exception;
+
+public class EmptyDescException extends DukeException {
     String taskType;
-    public EmptyDescException(String taskType, String errMsg) {
-        super(errMsg);
+    public EmptyDescException(String taskType, String message) {
+        super(message);
         this.taskType = taskType;
     }
     @Override
