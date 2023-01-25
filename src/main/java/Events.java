@@ -19,7 +19,7 @@ public class Events extends  Task{
     @Override
     public String changeFormat() {
 
-        return String.format("E %s " + "/ " + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm" ))  + "-" + this.to.format(DateTimeFormatter.ofPattern("HHmm" )), super.changeFormat());
+        return String.format("E %s " + "/ " + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm" ))  + " / " + this.to.format(DateTimeFormatter.ofPattern("HHmm" )), super.changeFormat());
 
     }
 }
