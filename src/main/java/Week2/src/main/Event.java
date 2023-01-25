@@ -23,7 +23,7 @@ public class Event extends Task {
 
     /**
      * Overrides toString() method to change the task information to a string format.
-     * @return A string format of given task data
+     * @return A string format of given task information
      */
     @Override
     public String toString() {
