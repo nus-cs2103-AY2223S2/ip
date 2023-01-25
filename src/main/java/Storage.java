@@ -5,19 +5,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
-    private static final String FILE_NAME = "berry.txt";
-    private static final String FOLDER_NAME = "data";
+    private String filePath;
 
-    public void saveTasks(TaskBook tb) throws IOException {
-        FileWriter writer = new FileWriter(createFile());
-        for (Task task : tb.getList()) {
-            writer.write(task.interpretTaskToString() + "\n");
-        }
-        writer.close();
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
-    public ArrayList<Task> retrieveTasks() throws FileNotFoundException {
+    public void saveTasks(TaskList tasks) {
+        try {
+            FileWriter writer = new FileWriter(createFile());
+            for (Task task : tasks.getList()) {
+                writer.write(task.interpretTaskToString() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> listOfTasks = new ArrayList<Task>();
 
         Scanner sc = new Scanner(createFile());
@@ -29,8 +39,8 @@ public class Storage {
     }
 
     private File createFile() {
-        File dataFile = new File(FOLDER_NAME + "/" + FILE_NAME);
-        File folder =  new File(FOLDER_NAME);
+        File dataFile = new File(filePath);
+        File folder =  new File(filePath.split("/")[0]);
         try {
             folder.mkdir();
             dataFile.createNewFile();
