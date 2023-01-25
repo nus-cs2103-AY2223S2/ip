@@ -13,6 +13,10 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public String toData() {
+        String status = this.completed ? "1" : "0";
+        return "D | " + status + " |" + this.task + "|" + this.deadline;
+    }
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";

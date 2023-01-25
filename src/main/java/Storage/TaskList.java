@@ -5,10 +5,13 @@ import Task.Todo;
 import Task.Event;
 import Task.Deadline;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import DukeException.DukeException;
@@ -77,6 +80,19 @@ public class TaskList {
                 }
             }
             reader.close();
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
+    }
+
+    public void saveFile() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(this.file));
+            for (Task task: tasks) {
+                writer.write(task.toData());
+                writer.newLine();
+            }
+            writer.close();
         } catch (IOException error) {
             error.printStackTrace();
         }

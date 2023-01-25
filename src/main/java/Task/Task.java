@@ -28,6 +28,10 @@ public class Task {
         this.completed = false;
     }
 
+    public String toData() {
+        return "";
+    }
+
     @Override
     public String toString() {
         String statusIcon = completed ? "X" : " ";

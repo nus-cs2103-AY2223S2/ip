@@ -11,6 +11,11 @@ public class Todo extends Task {
         super(task);
     }
 
+    public String toData() {
+        String status = this.completed ? "1" : "0";
+        return "T | " + status + " |" + this.task;
+    }
+
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";

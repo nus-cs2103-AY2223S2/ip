@@ -61,13 +61,11 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         TaskList tasks = new TaskList();
-
         while(!input.equalsIgnoreCase("bye")) {
             Request request = new Request(input, tasks);
             printRes(request.toString());
             input = sc.nextLine();
         }
-
         sc.close();
     }
 
@@ -80,6 +78,8 @@ public class Duke {
             printRes(request.toString());
             input = sc.nextLine();
         }
+        tasks.saveFile();
+        sc.close();
     }
 
     public static File readFile(String path) {
