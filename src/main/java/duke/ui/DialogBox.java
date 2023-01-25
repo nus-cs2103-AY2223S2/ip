@@ -2,11 +2,16 @@ package duke.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 /**
  * DialogBox
@@ -21,8 +26,11 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
+        text.setPadding(new Insets(10));
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);
+        displayPicture.setClip(new Circle(50,50, 50));
+        
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
@@ -39,11 +47,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        var db = new DialogBox(l, iv);
+        db.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE,null,null)));
+        return db;
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
+        db.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN,null,null)));
         db.flip();
         return db;
     }

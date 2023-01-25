@@ -125,11 +125,11 @@ public class Duke extends Application{
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-
+        
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setSpacing(10);
 
         userInput.setPrefWidth(325.0);
-
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -175,7 +175,7 @@ public class Duke extends Application{
     /**
      * Generate a response to user input.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         try {
             //TODO: redirect output stream to ui
             Command c = Parser.parse(input);
