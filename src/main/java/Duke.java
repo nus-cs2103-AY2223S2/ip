@@ -19,6 +19,7 @@ public class Duke {
         int count = 0;
         List<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+        Storage st = new Storage("duke.txt");
         while (sc.hasNext()) {
             String echo = sc.nextLine();
             String[] command = echo.split(" ");
@@ -33,25 +34,31 @@ public class Duke {
                 break;
             case "mark":
                 reply.mark(tasks);
+                st.write(tasks);
                 break;
             case "unmark":
                 reply.mark(tasks);
+                st.write(tasks);
                 break;
             case "todo":
                 reply.todo(tasks,count);
                 count++;
+                st.write(tasks);
                 break;
             case "event":
                 reply.event(tasks, count);
                 count++;
+                st.write(tasks);
                 break;
             case "deadline":
                 reply.deadline(tasks, count);
                 count++;
+                st.write(tasks);
                 break;
             case "delete":
                 reply.delete(tasks, count);
                 count--;
+                st.write(tasks);
                 break;
             default:
                 reply.def();
