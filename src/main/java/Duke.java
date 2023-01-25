@@ -5,6 +5,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
+        TaskList tasksL = new TaskList();
 
         //Save everytime the file list changes
         //Load first time
@@ -30,11 +31,7 @@ public class Duke {
             try {
                 switch (inputArr[0]) {
                     case "list":
-                        System.out.println("    ____________________________________________________________");
-                        for (int i = 0; i < tasks.size(); i++) {
-                            System.out.println("     " + (i + 1) + ". " + tasks.get(i).toString());
-                        }
-                        System.out.println("    ____________________________________________________________");
+                        tasksL.printTask();
                         break;
                     case "todo":
                         String todoDesc;
@@ -43,16 +40,8 @@ public class Duke {
                         } catch (Exception e) {
                             throw new DukeException("Description of todo cannot be empty!!");
                         }
-                        tasks.add(new ToDo(todoDesc));
-                        numTasks++;
-                        System.out.println(
-                                "    ____________________________________________________________"
-                                        + "\n     Got it. I've added this task:\n "
-                                        + tasks.get(numTasks - 1).toString()
-                                        + "\n     Now you have "
-                                        + numTasks
-                                        +" tasks in the list."
-                                        + "\n    ____________________________________________________________");
+                        tasksL.addTask(todoDesc);
+                        tasksL.printNewestTask();
                         break;
                     case "deadline":
                         String deadlineInput;
@@ -62,16 +51,8 @@ public class Duke {
                             throw new DukeException("Description of deadline cannot be empty!!");
                         }
                         String[] deadlineDesc = deadlineInput.split(" /by ");
-                        tasks.add(new Deadline(deadlineDesc[0], deadlineDesc[1]));
-                        numTasks++;
-                        System.out.println(
-                                "    ____________________________________________________________"
-                                        + "\n     Got it. I've added this task:\n "
-                                        + tasks.get(numTasks - 1).toString()
-                                        + "\n     Now you have "
-                                        + numTasks
-                                        +" tasks in the list."
-                                        + "\n    ____________________________________________________________");
+                        tasksL.addTask(deadlineDesc[0], deadlineDesc[1]);
+                        tasksL.printNewestTask();
                         break;
                     case "event":
                         String eventInput;
@@ -85,34 +66,16 @@ public class Duke {
                         String[] eventTimeArr = eventDescArr[1].split(" /to ");
                         String eventFrom = eventTimeArr[0];
                         String eventTo = eventTimeArr[1];
-                        tasks.add(new Event(eventDesc, eventFrom, eventTo));
-                        numTasks++;
-                        System.out.println(
-                                "    ____________________________________________________________"
-                                        + "\n     Got it. I've added this task:\n "
-                                        + tasks.get(numTasks - 1).toString()
-                                        + "\n     Now you have "
-                                        + numTasks
-                                        +" tasks in the list."
-                                        + "\n    ____________________________________________________________");
+                        tasksL.addTask(eventDesc, eventFrom, eventTo);
+                        tasksL.printNewestTask();
                         break;
                     case "mark":
-                        selectedNum = Integer.parseInt(inputArr[1]) - 1;
-                        tasks.get(selectedNum).markDone();
-                        System.out.println(
-                                "    ____________________________________________________________"
-                                        + "\n     Nice! I've marked this task as done:"
-                                        + tasks.get(selectedNum).toString()
-                                        + "\n    ____________________________________________________________");
+                        selectedNum = Integer.parseInt(inputArr[1]);
+                        tasksL.markTask(selectedNum);
                         break;
                     case "unmark":
-                        selectedNum = Integer.parseInt(inputArr[1]) - 1;
-                        tasks.get(selectedNum).markUndone();
-                        System.out.println(
-                                "    ____________________________________________________________"
-                                        + "\n     OK, I've marked this task as not done yet:"
-                                        + tasks.get(selectedNum).toString()
-                                        + "\n    ____________________________________________________________");
+                        selectedNum = Integer.parseInt(inputArr[1]);
+                        tasksL.unMarkTask(selectedNum);
                         break;
                     case "delete":
                         int numToDelete;
@@ -121,14 +84,7 @@ public class Duke {
                         } catch (Exception e) {
                             throw new DukeException("Please enter a valid number to delete!");
                         }
-                        Task selectedTask = tasks.get(numToDelete - 1);
-                        tasks.remove(numToDelete - 1);
-                        numTasks--;
-                        System.out.println(
-                                "    ____________________________________________________________"
-                                        + "\n     OK, I've Deleted this task:"
-                                        + selectedTask.toString()
-                                        + "\n    ____________________________________________________________");
+                        tasksL.deleteTask(numToDelete);
                         break;
                     case "Storage":
                         System.out.println("I RAN HERE!");
