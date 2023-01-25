@@ -19,7 +19,7 @@ import duke.task.TodoTask;
 
 public class ParserTest {
 
-    private static final Class<DukeException> exceptionClass = DukeException.class;
+    private static final Class<DukeRuntimeException> exceptionClass = DukeRuntimeException.class;
 
     @Test
     public void shouldCorrectlyParseSomeCommand() {
@@ -38,7 +38,7 @@ public class ParserTest {
 
     @Test
     public void shouldThrowForEmptyDescription() {
-        DukeException ex;
+        DukeRuntimeException ex;
         ex = assertThrows(exceptionClass, () -> Parser.parseCommand("todo"));
         assertTrue(ex.getMessage().contains("description cannot be empty"));
         ex = assertThrows(exceptionClass, () -> Parser.parseCommand("deadline /by 2023-01-01"));
@@ -50,7 +50,7 @@ public class ParserTest {
 
     @Test
     public void shouldThrowForInvalidIntArgument() {
-        DukeException ex;
+        DukeRuntimeException ex;
         ex = assertThrows(exceptionClass, () -> Parser.parseCommand("mark 10v"));
         assertTrue(ex.getMessage().contains("expect an integer as argument"));
         ex = assertThrows(exceptionClass, () -> Parser.parseCommand("delete 10v"));

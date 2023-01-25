@@ -14,7 +14,7 @@ public class MarkCommand extends Command {
 
     @Override
     public void execute(TaskList list) {
-        Task task = list.get(index - 1);
+        Task task = list.get(index);
         task.markAsDone();
         UI.echo("Nice! I've marked this task as done:\n  " + task);
     }

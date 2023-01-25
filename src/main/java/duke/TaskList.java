@@ -37,6 +37,15 @@ public class TaskList implements Serializable {
         this.tasks = new ArrayList<>(tasks);
     }
 
+    private void raiseIfInvalidIndex(int index) {
+        int n = tasks.size();
+        if (index >= 1 && index <= n) {
+            return;
+        }
+        String msg = String.format("Invalid index - valid index is from 1 to %d", n);
+        throw new DukeIndexOutOfBoundsException(msg);
+    }
+
     /**
      * Adds a new task into this {@code TaskList}.
      * 
@@ -54,7 +63,8 @@ public class TaskList implements Serializable {
      * @return the accessed task
      */
     public Task get(int index) {
-        return tasks.get(index);
+        raiseIfInvalidIndex(index);
+        return tasks.get(index - 1);
     }
 
     /**
@@ -64,7 +74,8 @@ public class TaskList implements Serializable {
      * @return the removed task
      */
     public Task remove(int index) {
-        return tasks.remove(index);
+        raiseIfInvalidIndex(index);
+        return tasks.remove(index - 1);
     }
 
     /**

@@ -35,6 +35,7 @@ public class Storage {
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (IOException ex) {
+            UI.echo("Cannot create new file...");
         }
         return true;
     }
@@ -53,7 +54,6 @@ public class Storage {
                 ObjectInputStream objIn = new ObjectInputStream(in)) {
             return (TaskList) objIn.readObject();
         } catch (IOException | ClassNotFoundException ex) {
-            // should continue execution by returning an empty TaskList
             UI.echo("Something goes wrong with saved log. A new log will be created...");
             return new TaskList();
         }
@@ -71,7 +71,7 @@ public class Storage {
                 ObjectOutputStream objOut = new ObjectOutputStream(out)) {
             objOut.writeObject(list);
         } catch (IOException ex) {
-            throw new DukeException(ex);
+            UI.echo("Something goes wrong, cannot write log into file...");
         }
     }
 }

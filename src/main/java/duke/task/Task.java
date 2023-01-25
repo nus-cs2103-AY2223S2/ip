@@ -3,6 +3,8 @@ package duke.task;
 import java.io.Serializable;
 import java.util.Objects;
 
+import duke.DukeIllegalStateException;
+
 /**
  * Abstract implementation of a {@code Task}.
  */
@@ -29,7 +31,7 @@ public abstract class Task implements Serializable {
      */
     public void markAsDone() {
         if (isDone) {
-            throw new IllegalStateException("Task is already marked as done");
+            throw new DukeIllegalStateException("Task is already marked as done");
         }
         isDone = true;
     }
@@ -39,7 +41,7 @@ public abstract class Task implements Serializable {
      */
     public void unmarkAsDone() {
         if (!isDone) {
-            throw new IllegalStateException("Task is already marked as not done");
+            throw new DukeIllegalStateException("Task is already marked as not done");
         }
         isDone = false;
     }

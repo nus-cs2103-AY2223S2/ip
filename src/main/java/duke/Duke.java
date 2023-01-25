@@ -16,7 +16,7 @@ public class Duke {
                 if (cmd.isExit()) {
                     break;
                 }
-            } catch (DukeException ex) {
+            } catch (DukeRuntimeException ex) {
                 UI.echoError(ex);
             }
         } while (true);

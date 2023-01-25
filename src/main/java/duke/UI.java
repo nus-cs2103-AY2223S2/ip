@@ -45,7 +45,7 @@ public class UI {
      * 
      * @param ex a error of the application
      */
-    public static void echoError(DukeException ex) {
+    public static void echoError(DukeRuntimeException ex) {
         echo(ex.getMessage());
     }
 }

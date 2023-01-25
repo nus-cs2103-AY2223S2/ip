@@ -92,11 +92,12 @@ public class Parser {
                 break;
             }
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means");
+                throw new DukeRuntimeException(
+                        "☹ OOPS!!! I'm sorry, but I don't know what that means");
             }
             p.raiseIfTooManyArgument();
         } catch (ParserException ex) {
-            throw new DukeException(kw.keyword + ": " + ex.getMessage());
+            throw new DukeRuntimeException(kw.keyword + ": " + ex.getMessage());
         }
         return cmd;
     }

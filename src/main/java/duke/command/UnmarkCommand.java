@@ -14,7 +14,7 @@ public class UnmarkCommand extends Command {
 
     @Override
     public void execute(TaskList list) {
-        Task task = list.get(index - 1);
+        Task task = list.get(index);
         task.unmarkAsDone();
         UI.echo("OK, I've marked this task as not done yet:\n  " + task);
     }
