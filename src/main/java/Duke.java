@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,6 +20,8 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
+
 
         init();
 
@@ -154,6 +157,9 @@ public class Duke {
             displayMessage(output);
         } catch (DukeException e) {
             displayMessage(e.getMessage());
+        } catch (DateTimeParseException e) {
+            displayMessage("☹ OOPS!!! We couldn't figure out the entered date and time.\n" +
+                    "Please use the format: dd/mm/yyyy hh:ss");
         }
     }
 
@@ -165,6 +171,9 @@ public class Duke {
             displayMessage(output);
         } catch (DukeException e) {
             displayMessage(e.getMessage());
+        } catch (DateTimeParseException e) {
+            displayMessage("☹ OOPS!!! We couldn't figure out the entered date and time.\n" +
+                    "Please use the format: dd/mm/yyyy hh:ss");
         }
     }
 
@@ -198,24 +207,16 @@ public class Duke {
                 String taskString = s.nextLine();
                 String[] parts = taskString.split("/");
 
-                if (parts[0].equals("D")) {
-                    Deadline task = new Deadline(parts[2], parts[3]);
-                    if (Integer.parseInt(parts[1]) == 1) {
-                        task.mark();
+                try {
+                    if (parts[0].equals("D")) {
+                        taskList.add(Deadline.parseDeadlineStringArray(parts));
+                    } else if (parts[0].equals("E")) {
+                        taskList.add(Event.parseEventStringArray(parts));
+                    } else if (parts[0].equals("T")) {
+                        taskList.add(ToDo.parseToDoStringArray(parts));
                     }
-                    taskList.add(task);
-                } else if (parts[0].equals("E")) {
-                    Event task = new Event(parts[2], parts[3], parts[4]);
-                    if (Integer.parseInt(parts[1]) == 1) {
-                        task.mark();
-                    }
-                    taskList.add(task);
-                } else if (parts[0].equals("T")) {
-                    ToDo task = new ToDo(parts[2]);
-                    if (Integer.parseInt(parts[1]) == 1) {
-                        task.mark();
-                    }
-                    taskList.add(task);
+                } catch (DateTimeParseException e) {
+                    displayMessage(e.getMessage());
                 }
             }
         } catch (FileNotFoundException e) {
@@ -234,14 +235,14 @@ public class Duke {
                 output += "D";
                 output += "/" + isDone;
                 output += "/" + taskDesc;
-                output += "/" + task.getBy();
+                output += "/" + task.getByInStorageFormat();
             } else if (t instanceof Event) {
                 Event task = (Event) t;
                 output += "E";
                 output += "/" + isDone;
                 output += "/" + taskDesc;
-                output += "/" + task.getFrom();
-                output += "/" + task.getTo();
+                output += "/" + task.getFromInStorageFormat();
+                output += "/" + task.getToInStorageFormat();
             } else if (t instanceof ToDo) {
                 output += "T";
                 output += "/" + isDone;

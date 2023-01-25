@@ -26,4 +26,12 @@ public class ToDo extends Task{
         ToDo newTask = new ToDo(taskDesc.trim());
         return newTask;
     }
+
+    public static ToDo parseToDoStringArray(String parts[]) {
+        ToDo task = new ToDo(parts[2]);
+        if (Integer.parseInt(parts[1]) == 1) {
+            task.mark();
+        }
+        return task;
+    }
 }
