@@ -13,6 +13,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String getBy() {
+        return this.by;
+    }
+
     /**
      * String representation of deadline task
      * @return String representation of deadline task
