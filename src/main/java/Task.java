@@ -1,9 +1,14 @@
 public class Task {
-    private boolean isDone = false;
+    protected boolean isDone = false;
     private String name;
 
     public Task(String name) {
         this.name = name;
+    }
+
+    public Task(String name, boolean b) {
+        this.name = name;
+        this.isDone = b;
     }
 
     public void markDone() {
