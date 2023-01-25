@@ -22,7 +22,6 @@ public class TaskList {
         storage = new Storage();
         List<Task> list = storage.loadData();
         this.tasks = list;
-
     }
 
     /**

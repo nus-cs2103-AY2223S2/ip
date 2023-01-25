@@ -1,5 +1,6 @@
 package storage;
 
+import exception.DukeException;
 import task.Deadline;
 import task.Event;
 import task.Todo;
@@ -53,7 +54,6 @@ public class Storage {
                     String date = sub.substring(openBraceIndex+5, closeBraceIndex);
                     LocalDate ld = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd MMM yyyy"));
                     String desc = sub.substring(0, openBraceIndex-1);
-                    System.out.println(desc);
                     task = new Deadline(ld, desc);
 
                 } else if (type == 'E') {
@@ -72,10 +72,8 @@ public class Storage {
                 }
                 list.add(task);
             }
-
         } catch (IOException e) {
             System.out.println(e);
-
         } finally {
             return list;
         }
