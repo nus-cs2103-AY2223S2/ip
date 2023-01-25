@@ -96,6 +96,12 @@ public class Duke {
                     }
                     processes.processDelete(Integer.parseInt(split[1]) - 1);
                     break;
+                case DATE:
+                    if (split.length < 2) {
+                        throw new EmptyDescException("Sorry! you can't have empty descriptions!");
+                    }
+                    processes.processPrintDate(split[1].trim());
+                    break;
                 default:
                     throw new InvalidInputException("Sorry! I have no idea what that means ??? >:c");
                 }
