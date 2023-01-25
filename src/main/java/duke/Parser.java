@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     public boolean checkEnd(String userInput) {
         if (userInput.equals("bye")) {

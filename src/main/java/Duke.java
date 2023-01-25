@@ -1,13 +1,13 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import duke.Deadline;
+import duke.DukeException;
+import duke.Event;
+import duke.Parser;
+import duke.Storage;
+import duke.Task;
+import duke.TaskList;
+import duke.Todo;
+import duke.Ui;
 
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
