@@ -2,50 +2,27 @@ package duke;
 import java.util.Arrays;
 
 public class Functions {
+    /**
+     * Represents the available functions of the Duke program
+     */
     TaskList tl;
     Storage st;
 
+    /**
+     * Constructor for an instance of Function.
+     * @param tl TaskList object that stores all defined tasks
+     * @param st Storage object that controls writing and loading onto/from file
+     */
     public Functions(TaskList tl, Storage st) {
         this.tl = tl;
         this.st = st;
     }
 
-    public void list(String inp) throws DukeException{
-        String[] s = inp.split(" ");
-
-        /*
-        if (s.length>1) {
-            String[] temp = Arrays.copyOfRange(s, 1, s.length);
-            String datetime = String.join(" ", temp);
-            String[] x = datetime.split(" /find ");
-            //check date format
-            try {
-                LocalDateTime query = LocalDateTime.parse(x[0]);
-                //search and only print those that match date
-                for (int i = 0; i < ls.count(); i++) {
-                    Task ts = ls.getTask(i);
-                    if (ts instanceof TimedTask) {
-                        if (query.isEqual(((TimedTask) ts).end) || query.isEqual(((TimedTask) ts).start)) {
-                            ts.printStatus();
-                        }
-                    }
-                }
-                //report end of search
-                System.out.println("Search done!");
-            } catch (DateTimeParseException e) {
-                System.out.println("Date Time format is dd/mm/yyyy hh:mm");
-            }
-
-
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < ls.count(); i++) {
-                System.out.print(i + 1 + ".");
-                ls.getTask(i).printStatus();
-            }
-        }
-        */
-
+    /**
+     * Method to define function of list command
+     * @throws DukeException
+     */
+    public void list() throws DukeException{
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tl.count(); i++) {
             System.out.print(i + 1 + ".");
@@ -53,11 +30,20 @@ public class Functions {
         }
     }
 
+    /**
+     * Method to define function of bye command
+     * @return boolean flag to indicate when program should stop
+     */
     public boolean bye() {
         System.out.println("Bye. Hope to see you again soon!");
         return false;
     }
 
+    /**
+     * Method to define function of mark command
+     * @param inp Index of task specified
+     * @throws DukeException
+     */
     public void mark(String inp) throws DukeException{
         String[] s = inp.split(" ");
         if (s.length<2) {
@@ -71,6 +57,11 @@ public class Functions {
         this.st.save(tl);
     }
 
+    /**
+     * Method to define function of unmark command
+     * @param inp Index of task specified
+     * @throws DukeException
+     */
     public void unmark(String inp) throws DukeException{
         String[] s = inp.split(" ");
         if (s.length<2) {
@@ -84,6 +75,11 @@ public class Functions {
         this.st.save(tl);
     }
 
+    /**
+     * Method to define function of delete command
+     * @param inp Index of task specified
+     * @throws DukeException
+     */
     public void delete(String inp) throws DukeException{
         String[] s = inp.split(" ");
         if (s.length<2) {
@@ -97,6 +93,11 @@ public class Functions {
         this.st.save(tl);
     }
 
+    /**
+     * Method to define functino of todo command. Creates todo task
+     * @param inp Description of todo task
+     * @throws DukeException
+     */
     public void todo(String inp) throws DukeException{
         String[] s = inp.split(" ");
         if (s.length<2) {
@@ -109,6 +110,12 @@ public class Functions {
         this.st.save(tl);
     }
 
+    /**
+     * Method to define functino of deadline command. Create deadline task
+     * @param inp Description of deadline task. Define deadline after "/by".
+     *            Example: deadline task1 /by 12/12/2023 12:12
+     * @throws DukeException
+     */
     public void deadline(String inp) throws DukeException {
         String[] s = inp.split(" ");
         if (s.length<2) {
@@ -122,6 +129,12 @@ public class Functions {
         this.st.save(tl);
     }
 
+    /**
+     * Method to define function of event command. Create event task
+     * @param inp Descript of event task. Define event with "/from ... /to ...".
+     *            Example: deadline task1 /from 12/12/2023 12:12 /to 12/12/2023 23:59
+     * @throws DukeException
+     */
     public void events(String inp) throws DukeException {
         String[] s = inp.split(" ");
         if (s.length<2) {
