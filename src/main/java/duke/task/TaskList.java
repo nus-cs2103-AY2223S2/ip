@@ -102,6 +102,12 @@ public class TaskList {
         fileWriter.close();
     }
 
+    /**
+     * Returns the string representation of the task list.
+     * Contains string representation of every task.
+     *
+     * @return String representation of the task list.
+     */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

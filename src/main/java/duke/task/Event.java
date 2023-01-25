@@ -26,6 +26,12 @@ public class Event extends Task {
         this.to = new DateTime(to);
     }
 
+    /**
+     * Returns the command(s) required to recreate the event.
+     *
+     * @param id Identifier of the task, usually assigned by task list.
+     * @return the command(s).
+     */
     @Override
     public String getRecreateCommand(int id) {
         String result = "event " + description + " /from "
@@ -36,6 +42,11 @@ public class Event extends Task {
         return result;
     }
 
+    /**
+     * Returns the string representation of the event.
+     *
+     * @return String representation of the event.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";

@@ -35,12 +35,23 @@ public class DateTime {
         time = parseTime(splitInput[1]);
     }
 
+    /**
+     * Returns the string representation of this datetime instance.
+     *
+     * @return String representation of datetime.
+     */
     @Override
     public String toString() {
         return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))
                 + " " + time;
     }
 
+    /**
+     * Parses date in String to LocalDate.
+     *
+     * @param date Date to parse.
+     * @return Parsed LocalDate.
+     */
     private LocalDate parseDate(String date) {
         try {
             return LocalDate.parse(date);
@@ -50,6 +61,12 @@ public class DateTime {
         }
     }
 
+    /**
+     * Parses time in String to LocalTime.
+     *
+     * @param time Time to parse.
+     * @return Parsed LocalTime.
+     */
     private LocalTime parseTime(String time) {
         if (!time.contains(":")) {
             time = time.substring(0, 2) + ":"

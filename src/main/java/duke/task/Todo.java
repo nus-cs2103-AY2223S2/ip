@@ -14,6 +14,12 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Returns the command(s) required to recreate the todo.
+     *
+     * @param id Identifier of the task, usually assigned by task list.
+     * @return the command(s).
+     */
     @Override
     public String getRecreateCommand(int id) {
         String result = "todo " + description;
@@ -22,6 +28,12 @@ public class Todo extends Task {
         }
         return result;
     }
+
+    /**
+     * Returns the string representation of the todo.
+     *
+     * @return String representation of the todo.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

@@ -23,6 +23,12 @@ public class Deadline extends Task {
         this.by = new DateTime(by);
     }
 
+    /**
+     * Returns the command(s) required to recreate the deadline.
+     *
+     * @param id Identifier of the task, usually assigned by task list.
+     * @return the command(s).
+     */
     @Override
     public String getRecreateCommand(int id) {
         String result = "deadline " + description + " /by " + by;
@@ -32,6 +38,11 @@ public class Deadline extends Task {
         return result;
     }
 
+    /**
+     * Returns the string representation of the deadline.
+     *
+     * @return String representation of the deadline.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

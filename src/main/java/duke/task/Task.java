@@ -36,11 +36,6 @@ public abstract class Task {
         return isDone;
     }
 
-    @Override
-    public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + description;
-    }
-
     /**
      * Returns the command(s) required to recreate the task.
      *
@@ -48,4 +43,14 @@ public abstract class Task {
      * @return the command(s).
      */
     public abstract String getRecreateCommand(int id);
+
+    /**
+     * Returns the string representation of the task.
+     *
+     * @return String representation of the task.
+     */
+    @Override
+    public String toString() {
+        return (isDone ? "[X] " : "[ ] ") + description;
+    }
 }
