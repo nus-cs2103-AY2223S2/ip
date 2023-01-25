@@ -4,7 +4,7 @@ import duke.enums.Commands;
 import duke.enums.TaskTypes;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
-import duke.storage.Storage;
+import duke.storage.TaskStorage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -20,14 +20,13 @@ public class Duke {
     private static final String FILE_PATH = "data/data.txt";
     private Ui ui;
     private Parser parser;
-    private Storage storage;
     private final Tasklist tasklist;
     private boolean isActive;
 
     public Duke() {
         this.ui = new Ui();
         this.parser = new Parser();
-        this.tasklist = new Tasklist(FILE_PATH);
+        this.tasklist = new Tasklist(new TaskStorage(FILE_PATH));
         ui.greet();
     }
 

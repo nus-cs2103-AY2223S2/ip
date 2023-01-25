@@ -12,8 +12,8 @@ public class Tasklist {
     private ArrayList<Task> tasks;
     private Storage storage;
 
-    public Tasklist(String filepath) {
-        this.storage = new Storage(filepath);
+    public Tasklist(Storage storage) {
+        this.storage = storage;
         this.tasks = storage.load();
     }
 
