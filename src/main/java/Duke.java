@@ -42,8 +42,8 @@ public class Duke {
         try {
             Task curr = al.get(cint);
             curr.mark();
-            System.out.println(divider + "Congrats this has been done:\n"
-                    + curr + "\nOne down, Leskooo!\n" + divider);
+            System.out.println(divider + "Congrats this has been d:\n"
+                    + curr + "\n down, Leskooo!\n" + divider);
         } catch (Exception m){
             System.out.println("Number entered out of range, type the number again");
             String s = br.readLine();
@@ -82,51 +82,53 @@ public class Duke {
 
     public static Event createEvent(String[] splited) {
 
-        boolean one = true;
-        boolean two = false;
-        boolean three = false;
+        boolean isName = true;
+        boolean isStart = false;
+        boolean isEnd = false;
         String n = " ", s = " ", e = " ";
         for (int i = 1; i < splited.length; i++) {
-            if (one) {
+            if (isName) {
                 if (!splited[i].equalsIgnoreCase("/from")) {
                     sb.append(splited[i]);
                 } else {
-                    two = true;
+                    isStart = true;
                     n = sb.toString();
                     sb.setLength(0);
-                    one = false;
+                    isName = false;
                 }
-            } else if (two) {
+            } else if (isStart) {
                 if (!splited[i].equalsIgnoreCase("/to")) {
                     sb.append(splited[i]);
                 } else {
-                    three = true;
+                    isEnd = true;
                     s = sb.toString();
                     sb.setLength(0);
-                    two = false;
+                    isStart = false;
                 }
-            } else if (three) {
+            } else if (isEnd) {
                 sb.append(splited[i]);
             }
             if (i + 1 != splited.length) {
                 sb.append(" ");
             }
         }
+
         e = sb.toString();
+        sb.setLength(0);
         return new Event(n, s, e);
     }
 
     public static Deadline createDeadline(String[] splited) {
-        boolean one = true;
+        boolean isName = true;
         String n = " ", e = " ";
         for (int i = 1; i < splited.length; i++) {
-            if (one) {
+            if (isName) {
                 if (!splited[i].equalsIgnoreCase("/by")) {
                     sb.append(splited[i]);
                 } else {
                     n = sb.toString();
                     sb.setLength(0);
-                    one = false;
+                    isName = false;
                 }
             } else {
                 sb.append(splited[i]);
@@ -136,6 +138,7 @@ public class Duke {
             }
         }
         e = sb.toString();
+        sb.setLength(0);
         return new Deadline(n, e);
     }
 
