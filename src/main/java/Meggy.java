@@ -24,9 +24,9 @@ public class Meggy implements Runnable {
      */
     private final Scanner in;
     /**
-     * Customizable output.
+     * The text-based UI used by the chatbot.
      */
-    private final PrintStream out;
+    private final UI ui;
     /**
      * List of tasks. Allow dupes.
      */
@@ -47,7 +47,7 @@ public class Meggy implements Runnable {
         if (out == null)
             throw new NullPointerException("OutputStream is null");
         this.in = new Scanner(in);
-        this.out = out instanceof PrintStream ? (PrintStream) out : new PrintStream(out);
+        this.ui = new UI(out);
         tasks = new ArrayList<>();
         f = new File(Util.dataFilePath);
         usrCmdToJob = Map.of(
@@ -155,7 +155,7 @@ public class Meggy implements Runnable {
         try {
             saveToFile(f);
         } catch (MeggyException e) {
-            out.println(e.getMessage());
+            ui.dispLn(e.getMessage());
         }
         return Resource.notifDel + reportChangedTaskAndList(task);
     }
@@ -234,32 +234,32 @@ public class Meggy implements Runnable {
     @Override
     public void run() {
         // Front page
-        out.print(Resource.msgHd);
-        out.println(Resource.logo);
-        out.print(Resource.greetings);
-        out.print(Resource.msgTl);
+        ui.disp(Resource.msgHd);
+        ui.dispLn(Resource.logo);
+        ui.disp(Resource.greetings);
+        ui.disp(Resource.msgTl);
         loadFromFile(f);
         while (in.hasNextLine()) { // reads input and responds in each iteration
             //Parse command and args
             final JobAndArg<String> jobAndArg = JobAndArg.parse(usrCmdToJob, in.nextLine());
             final MeggyException.Function<String, String> job = jobAndArg.job == null ? unknownCmdBehavior : jobAndArg.job;
             //Execute commands and display results
-            out.print(Resource.msgHd);
+            ui.disp(Resource.msgHd);
             String response;
             try {
                 response = job.apply(jobAndArg.args);
             } catch (MeggyException e) {
                 response = e.getMessage();
             }
-            out.print(response);
-            out.print(Resource.msgTl);
+            ui.disp(response);
+            ui.disp(Resource.msgTl);
             if (Resource.cmdExit.equals(jobAndArg.cmd)) {
                 in.close();
-                out.close();
+                ui.close();
                 return;
             }
         }
-        out.println("WARNING: REACHED END OF INPUT WITHOUT 'BYE' COMMAND");
+        ui.dispLn("WARNING: REACHED END OF INPUT WITHOUT 'BYE' COMMAND");
     }
 
     /**
