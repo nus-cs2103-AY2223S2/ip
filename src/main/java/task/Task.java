@@ -1,4 +1,4 @@
-package duke;
+package task;
 
 public class Task {
     private final String instruction;

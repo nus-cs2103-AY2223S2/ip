@@ -1,4 +1,4 @@
-package duke;
+package task;
 
 import java.time.LocalDate;
 public class Event extends Task {
@@ -6,7 +6,7 @@ public class Event extends Task {
     private LocalDate end;
 
     public Event(String instruction, String start, String end) {
-        super(instruction.substring(5));
+        super(instruction.substring(6));
         this.start = LocalDate.parse(start.trim());
         this.end = LocalDate.parse(end);
     }

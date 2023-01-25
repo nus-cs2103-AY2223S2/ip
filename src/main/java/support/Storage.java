@@ -1,4 +1,4 @@
-package duke;
+package support;
 
 import java.io.File;
 import java.io.FileWriter;
