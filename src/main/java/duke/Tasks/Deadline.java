@@ -1,5 +1,7 @@
 package duke.Tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected String by;
 
@@ -7,7 +9,7 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
 
-        if (isInFile == false) {
+        if (!isInFile) {
             System.out.println(" " + "____________________________________________________________");
             System.out.println(" Got it. I've added this task:");
             System.out.println("  " + toString());
@@ -17,11 +19,13 @@ public class Deadline extends Task {
     }
     @Override
     public String toString() {
-        return "[D]" + "[" + getStatusIcon() + "] " + getDescription() + " (" + "by: " + this.by + ")";
+        return "[D]" + "[" + getStatusIcon() + "] " + getDescription()
+                + " (" + "by: " + this.by+ ")";
     }
     @Override
     public String file() {
         String status = isDone? "1" : "0";
-        return "D | " + status + " | " + getDescription() + " | " + this.by;
+        return "D | " + status + " | " + getDescription() + " | "
+                + this.by;
     }
 }

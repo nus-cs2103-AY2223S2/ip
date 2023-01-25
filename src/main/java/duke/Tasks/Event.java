@@ -1,5 +1,7 @@
 package duke.Tasks;
 
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
     protected String from;
 
@@ -10,7 +12,7 @@ public class Event extends Task{
         this.from = from;
         this.to = to;
 
-        if (isInFile == false) {
+        if (!isInFile) {
             System.out.println(" " + "____________________________________________________________");
             System.out.println(" Got it. I've added this task:");
             System.out.println("  " + toString());
@@ -21,12 +23,14 @@ public class Event extends Task{
     @Override
     public String toString() {
         return "[E]" + "[" + getStatusIcon() + "] " + getDescription() +
-                " (" + "from: " + this.from + " " + "to: " + this.to + ")";
+                " (" + "from: " + this.from
+                + " " + "to: " + this.to+ ")";
     }
     @Override
     public String file() {
         String status = isDone? "1" : "0";
         return "E | " + status + " | " + getDescription() + " | "
-                + this.from + " | " + this.to;
+                + this.from
+                + " | " + this.to;
     }
 }

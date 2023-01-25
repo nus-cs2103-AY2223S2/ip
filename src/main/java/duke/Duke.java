@@ -5,9 +5,15 @@ import duke.Tasks.Event;
 import duke.Tasks.Task;
 import duke.Tasks.Todo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.*;
 
 public class Duke {
     private static final String Indentation = " ";
@@ -88,7 +94,6 @@ public class Duke {
                         System.out.println("  ☹ OOPS!!! The The index number cannot be empty.");
                         System.out.println(Indentation + Horizontal);
                     }
-
                 } else if (words[0].equals("delete")) {
                     try{
                         delete(words[1]);
@@ -98,7 +103,6 @@ public class Duke {
                         System.out.println("  ☹ OOPS!!! The index number cannot be empty.");
                         System.out.println(Indentation + Horizontal);
                     }
-
                 } else if (words[0].equals("todo")) {
                     try {
                         if (words[1].equals(null)) {
@@ -119,10 +123,22 @@ public class Duke {
 
                 } else if (words[0].equals("deadline")) {
                     try {
-                        info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /by "));
+                        info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /by"));
                         String deadline = command.substring(command.indexOf("/by") + 4);
                         //listname[count] = new Deadline(info, deadline);
-                        task = new Deadline(info, deadline, false);
+
+                        try {
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(("MM/dd/yyyy HHmm"));
+                            LocalDateTime datetime1 = LocalDateTime.parse(deadline, formatter);
+                            System.out.println(datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")));
+
+                            task = new Deadline(info,
+                                    datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")), false);
+
+                        } catch(DateTimeParseException e) {
+                            System.out.println(deadline);
+                            task = new Deadline(info, deadline, false);
+                        }
                         listname.add(task);
                         count++;
                     } catch (Exception e) {
@@ -131,14 +147,31 @@ public class Duke {
                         System.out.println(Indentation + Horizontal);
                     }
 
-
                 } else if (words[0].equals("event")) {
                     try {
                         info = command.substring(command.indexOf(" ") + 1, command.indexOf(" /from "));
                         String fromtime = command.substring(command.indexOf(" /from ") + 6, command.indexOf(" /to "));
                         String totime = command.substring(command.indexOf(" /to ")  + 4);
                         //listname[count] = new Event(info, fromtime, totime);
-                        task = new Event(info, fromtime, totime, false);
+                        //task = new Event(info, fromtime, totime, false);
+                        try {
+                            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern((" MM/dd/yyyy HHmm"));
+                            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern((" MM/dd/yyyy HHmm"));
+                            LocalDateTime datetime1 = LocalDateTime.parse(fromtime, formatter1);
+                            LocalDateTime datetime2 = LocalDateTime.parse(totime, formatter2);
+                            //System.out.println(datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")));
+                            //System.out.println(datetime2.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")));
+
+                            task = new Event(info,
+                                    datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
+                                    datetime2.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")),
+                                    false);
+
+                        } catch(DateTimeParseException e) {
+                            System.out.println(fromtime + 11);
+                            task = new Event(info, fromtime, totime, false);
+                        }
+
                         listname.add(task);
                         count++;
                     } catch (Exception e) {
@@ -160,7 +193,6 @@ public class Duke {
         } while (!command.equals("bye"));
 
         exit();
-
     }
 
     public static void logo() {
