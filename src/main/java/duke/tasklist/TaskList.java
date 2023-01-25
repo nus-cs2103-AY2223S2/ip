@@ -7,7 +7,7 @@ import duke.tasktypes.Task;
 public class TaskList {
     private ArrayList<Task> taskStorage;
     private int numTasks;
-    public Ui ui;
+    private Ui ui;
 
     public TaskList(Ui ui) {
         taskStorage = new ArrayList<>();

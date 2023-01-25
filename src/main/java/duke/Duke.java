@@ -6,6 +6,7 @@ import duke.ui.Ui;
 import duke.command.*;
 import duke.parser.Parser;
 import duke.exceptions.DukeException;
+
 public class Duke {
 
     private Storage storage;
@@ -24,7 +25,9 @@ public class Duke {
 
     public void run() {
 
+        ui.showLine();
         ui.greet();
+        ui.showLine();
 
         boolean isExit = false;
         while (!isExit) {

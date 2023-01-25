@@ -13,8 +13,9 @@ import duke.tasktypes.ToDo;
 
 public class Parser {
 
-    public static final String[] VALUE_COMMANDS = {"unmark ", "mark ", "delete "};
-    public static final String[] TASK_COMMANDS = {"deadline ", "todo ", "event "};
+    private static final String[] VALUE_COMMANDS = {"unmark ", "mark ", "delete "};
+    private static final String[] TASK_COMMANDS = {"deadline ", "todo ", "event "};
+
     public Parser() {
     }
 

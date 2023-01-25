@@ -8,11 +8,11 @@ import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
 
-    LocalDate byDate;
-    LocalTime byTime;
-    LocalDateTime byDateTime;
-    String forSaving;
-    String doneBy;
+    private LocalDate byDate;
+    private LocalTime byTime;
+    private LocalDateTime byDateTime;
+    private String forSaving;
+    private String doneBy;
 
 
     public Deadline(String description, String by) {
@@ -30,7 +30,6 @@ public class Deadline extends Task {
         this.doneBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).
                 format(this.byDateTime);
 
-        Task.numTask++;
     }
 
     @Override

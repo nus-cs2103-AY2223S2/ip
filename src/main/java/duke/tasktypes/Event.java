@@ -8,18 +8,18 @@ import java.time.format.FormatStyle;
 
 public class Event extends Task {
 
-    LocalDate endDate;
-    LocalTime endTime;
-    LocalDateTime endDateTime;
-    String endBy;
+    private LocalDate endDate;
+    private LocalTime endTime;
+    private LocalDateTime endDateTime;
+    private String endBy;
 
-    LocalDate startDate;
-    LocalTime startTime;
-    LocalDateTime startDateTime;
-    String startBy;
+    private LocalDate startDate;
+    private LocalTime startTime;
+    private LocalDateTime startDateTime;
+    private String startBy;
 
-    String forSavingStart;
-    String forSavingEnd;
+    private String forSavingStart;
+    private String forSavingEnd;
 
     public Event(String description, String start, String end) {
         super(description);
@@ -50,7 +50,6 @@ public class Event extends Task {
         this.endBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).
                 format(this.endDateTime);
 
-        Task.numTask++;
     }
 
     @Override

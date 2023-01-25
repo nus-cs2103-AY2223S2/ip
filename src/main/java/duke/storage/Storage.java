@@ -17,11 +17,11 @@ import duke.ui.Ui;
 
 public class Storage {
 
-    public static final String DEFAULT_DIRECTORY = "./data/";
-    public static final String DEFAULT_FILEPATH = "./data/duke.txt";
-    public File dukeFile;
-    public TaskList tasks;
-    public Ui ui;
+    private static final String DEFAULT_DIRECTORY = "./data/";
+    private static final String DEFAULT_FILEPATH = "./data/duke.txt";
+    private File dukeFile;
+    private TaskList tasks;
+    private Ui ui;
 
     public Storage(Ui ui) {
         this.ui = ui;

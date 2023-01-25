@@ -1,10 +1,9 @@
 package duke.tasktypes;
 
-public class Task {
+public abstract class Task {
 
-    public static int numTask = 0;
-    public String description;
-    public boolean done;
+    protected String description;
+    protected boolean done;
 
     public Task(String description) {
         this.description = description;
@@ -30,8 +29,6 @@ public class Task {
         return status + " " + this.description;
     }
 
-    public String getSaveFormat() {
-        return this.toString();
-    }
+    public abstract String getSaveFormat();
 }
 
