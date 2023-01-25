@@ -11,9 +11,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class to manage file saved in hard disk.
+ */
 public class Storage {
     private final Path filePath;
     private List<Task> taskState;
+
+    /**
+     * Constructor for Storage.
+     * Creates missing directories and file.
+     *
+     * @param filePath Path of the file.
+     */
     protected Storage(String filePath) {
         Path file = Paths.get(filePath);
         Path parent = file.getParent();
@@ -28,7 +38,12 @@ public class Storage {
         this.filePath = file;
     }
 
-    // Load task file as specified in the filePath
+    /**
+     * Loads up the tasks saved in file and returns the list.
+     *
+     * @return List of initial tasks saved by data file.
+     * @throws DukeException Possibly corrupted data file.
+     */
     protected List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         try {
@@ -45,6 +60,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes the changes of the tasks into the file.
+     *
+     * @throws IOException Unexpected IOException.
+     */
     protected void write() throws IOException {
         FileWriter writer = new FileWriter(this.filePath.toString());
         for (Task t : taskState) {

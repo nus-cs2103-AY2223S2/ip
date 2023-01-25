@@ -91,13 +91,4 @@ public class Parser {
             return new MaybeDate(s);
         }
     }
-
-    public static void main(String[] args) {
-        try {
-            parseDate("01-12-2019");
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-
-    }
 }
