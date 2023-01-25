@@ -24,6 +24,7 @@ event
 todo
 deadline   /by 2023-05-05 1800
 event   /from 2023-01-01 1600 /to 2023-01-01 1800
+find food
 delete 50
 delete 0
 delete -1
