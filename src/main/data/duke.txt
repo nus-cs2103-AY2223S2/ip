@@ -3,3 +3,4 @@ D | return book (by:Dec 2 2019 0600pm)
 D | return book (by:Dec 2 2019 0600pm)
 T | borrow book
 T | go toilet
+T | go toilet

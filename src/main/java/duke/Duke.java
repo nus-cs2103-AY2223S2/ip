@@ -1,7 +1,6 @@
 package duke;
 
 import duke.dukeexceptions.DukeException;
-import duke.task.TaskList;
 
 public class Duke {
     private Storage storage;
@@ -39,7 +38,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./src/main/data/duke.txt").run();
+        new Duke("src/main/data/duke.txt").run();
 
 
     }
