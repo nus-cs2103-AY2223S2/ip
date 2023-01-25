@@ -25,36 +25,36 @@ public class Duke {
             Reply reply = new Reply(command);
 
             switch (command[0]) {
-                case "bye":
-                    reply.bye();
-                    return;
-                case "list":
-                    reply.list(tasks,count);
-                    break;
-                case "mark":
-                    reply.mark(tasks);
-                    break;
-                case "unmark":
-                    reply.mark(tasks);
-                    break;
-                case "todo":
-                    reply.todo(tasks,count);
-                    count++;
-                    break;
-                case "event":
-                    reply.event(tasks, count);
-                    count++;
-                    break;
-                case "deadline":
-                    reply.deadline(tasks, count);
-                    count++;
-                    break;
-                case "delete":
-                    reply.delete(tasks, count);
-                    count--;
-                    break;
-                default:
-                    reply.def();
+            case "bye":
+                reply.bye();
+                return;
+            case "list":
+                reply.list(tasks,count);
+                break;
+            case "mark":
+                reply.mark(tasks);
+                break;
+            case "unmark":
+                reply.mark(tasks);
+                break;
+            case "todo":
+                reply.todo(tasks,count);
+                count++;
+                break;
+            case "event":
+                reply.event(tasks, count);
+                count++;
+                break;
+            case "deadline":
+                reply.deadline(tasks, count);
+                count++;
+                break;
+            case "delete":
+                reply.delete(tasks, count);
+                count--;
+                break;
+            default:
+                reply.def();
             }
         }
         sc.close();
