@@ -1,5 +1,5 @@
-import java.util.HashMap;
 import java.util.Scanner;
+import java.util.HashMap;
 
 /**
  * Main Bot class which the user may run the program from
@@ -25,75 +25,80 @@ public class JeoBot {
         String divider = "________________________________________________________________________________________";
         boolean hasInput = true;
         Scanner sc = new Scanner(System.in);
-        Storage st = new Storage();
+        Storage st = new Storage("./data.txt");
+        st.load();
         while (hasInput) {
             String s = sc.nextLine();
             s = s.trim();
             // Parse
             try {
                 System.out.println(divider);
+                if (s.contains("\\")) {
+                    throw new JeoException("Backslash character \"\\\" not allowed");
+                }
                 HashMap<String, String> hm = parseString(s);
                 Command command = Command.valueOf(hm.get("command").toUpperCase());
                 switch (command) {
-                    case BYE:
-                        hasInput = false;
-                        System.out.println("Thank you for using JeoBot. Hope to see you again soon!");
-                        break;
-                    case LIST:
-                        st.showTasks();
-                        break;
-                    case MARK:
-                        int index = Integer.parseInt(hm.get("index"));
-                        st.markTask(index);
-                        break;
-                    case UNMARK:
-                        index = Integer.parseInt(hm.get("index"));
-                        st.unmarkTask(index);
-                        break;
-                    case DELETE:
-                        index = Integer.parseInt(hm.get("index"));
-                        st.deleteTask(index);
-                        break;
-                    case TODO:
-                        String desc = hm.get("description");
-                        if (desc.isEmpty()) {
-                            throw new JeoException("Please enter a task description.");
-                        }
-                        Task task = new ToDo(desc);
-                        st.addTask(task);
-                        break;
-                    case DEADLINE:
-                        desc = hm.get("description");
-                        String by = hm.get("by");
-                        if (desc.isEmpty()) {
-                            throw new JeoException("Please enter a task description.");
-                        }
-                        if (by.isEmpty()) {
-                            throw new JeoException("Please enter a date/time after \"/by\".");
-                        }
-                        task = new Deadline(desc, by);
-                        st.addTask(task);
-                        break;
-                    case EVENT:
-                        desc = hm.get("description");
-                        String from = hm.get("from");
-                        String to = hm.get("to");
-                        if (desc.isEmpty()) {
-                            throw new JeoException("Please enter a task description.");
-                        }
-                        if (from.isEmpty() && to.isEmpty()) {
-                            throw new JeoException("Please enter a date/time after \"/from\" and \"/to\".");
-                        }
-                        if (from.isEmpty()) {
-                            throw new JeoException("Please enter a date/time after \"/from\".");
-                        }
-                        if (to.isEmpty()) {
-                            throw new JeoException("Please enter a date/time after \"/to\".");
-                        }
-                        task = new Event(desc, from, to);
-                        st.addTask(task);
-                        break;
+                case BYE:
+                    hasInput = false;
+                    System.out.println("Thank you for using JeoBot. Hope to see you again soon!");
+                    break;
+                case LIST:
+                    st.showTasks();
+                    break;
+                case MARK:
+                    int index = Integer.parseInt(hm.get("index"));
+                    st.markTask(index);
+                    break;
+                case UNMARK:
+                    index = Integer.parseInt(hm.get("index"));
+                    st.unmarkTask(index);
+                    break;
+                case DELETE:
+                    index = Integer.parseInt(hm.get("index"));
+                    st.deleteTask(index);
+                    break;
+                case TODO:
+                    String desc = hm.get("description");
+                    if (desc.isEmpty()) {
+                        throw new JeoException("Please enter a task description.");
+                    }
+                    Task task = new ToDo(desc);
+                    st.addTask(task);
+                    break;
+                case DEADLINE:
+                    desc = hm.get("description");
+                    String by = hm.get("by");
+                    if (desc.isEmpty()) {
+                        throw new JeoException("Please enter a task description.");
+                    }
+                    if (by.isEmpty()) {
+                        throw new JeoException("Please enter a date/time after \"/by\".");
+                    }
+                    task = new Deadline(desc, by);
+                    st.addTask(task);
+                    break;
+                case EVENT:
+                    desc = hm.get("description");
+                    String from = hm.get("from");
+                    String to = hm.get("to");
+                    if (desc.isEmpty()) {
+                        throw new JeoException("Please enter a task description.");
+                    }
+                    if (from.isEmpty() && to.isEmpty()) {
+                        throw new JeoException("Please enter a date/time after \"/from\" and \"/to\".");
+                    }
+                    if (from.isEmpty()) {
+                        throw new JeoException("Please enter a date/time after \"/from\".");
+                    }
+                    if (to.isEmpty()) {
+                        throw new JeoException("Please enter a date/time after \"/to\".");
+                    }
+                    task = new Event(desc, from, to);
+                    st.addTask(task);
+                    break;
                 }
+                st.save();
             } catch (IllegalArgumentException e) {
                 System.out.println("[Error] Sorry, I don't understand what you're saying :(");
             } catch (IndexOutOfBoundsException e) {
