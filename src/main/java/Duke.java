@@ -1,5 +1,7 @@
 import java.io.*;
 
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -113,7 +115,15 @@ public class Duke {
                     "\tFormat: deadline <description> /by <due_date>");
         }
 
-        Task task = new Deadline(taskName.toString(), dueDate.toString());
+        // Convert date string to LocalDate
+        LocalDate localDate;
+        try {
+            localDate = LocalDate.parse(dueDate.toString());
+        } catch (RuntimeException re) {
+            throw new DukeException("Could not parse date. Please use format 'yyyy-mm-dd'.");
+        }
+
+        Task task = new Deadline(taskName.toString(), localDate);
         list.add(task);
         PixlPrint("Added new deadline!\n" +
                 "\t" + formatTask(task) +
