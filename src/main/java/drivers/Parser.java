@@ -10,9 +10,23 @@ import task.Todo;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Mechanism that interprets command given by user.
+ */
+
 public class Parser {
 
     // default constructor
+
+
+    /**
+     * Returns a boolean value to indicate if program should continue expecting inputs.
+     * Executes command given.
+     *
+     * @param userinput string to be read as command for execution
+     * @param l reference to record of list of tasks
+     * @return whether program should continue
+     */
     public boolean continueCommand(String userinput, TaskList l) {
         try {
             String[] parts = userinput.split(" ");

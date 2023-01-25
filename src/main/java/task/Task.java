@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Represents an entry in the to-do list
+ */
 public class Task {
     private final String instruction;
     private boolean status;
@@ -9,7 +12,11 @@ public class Task {
         this.status = false;
     }
 
+    /**
+     * Marks entry as completed and prompts user if action is redundant.
+     */
     public void setComplete() {
+
         if (this.status) {
             System.out.println("Mission is already completed.");
             return;
@@ -18,6 +25,10 @@ public class Task {
         System.out.println("Mission Completed!\n" + this);
     }
 
+
+    /**
+     * Marks entry as incomplete and prompts user if action is redundant.
+     */
     public void setIncomplete() {
         if (!this.status) {
             System.out.println("Mission is originally incomplete.");
