@@ -12,18 +12,6 @@ public class Duke {
 
 
         while(!input.equals("bye")) {
-            try {
-                if ((input.length() == 4 && input.substring(0, 4).equals("todo")) || (input.length() == 8 && input.substring(0, 8).equals("deadline")) ||
-                        (input.length() == 6 && input.substring(0, 6).equals("event"))) {
-                    throw new EmptyDescriptionException();
-                } else {
-                    throw new WrongCommandException();
-                }
-            } catch (EmptyDescriptionException e){
-                System.out.println(e.getMessage());
-            } catch (WrongCommandException e) {
-                System.out.println(e.getMessage());
-            }
 
             if (input.equals("list")) {
                 System.out.println("Here are some tasks in your list:");
@@ -46,7 +34,8 @@ public class Duke {
                 System.out.println("Ok, I've marked this task as not done yet: \n  " + originalTask.toString());
 
             }  else if(input.length() > 4 && (input.substring(0, 4)).equals("todo")) {
-                ToDo task = new ToDo(input);
+                String taskStr = input.substring(5);
+                ToDo task = new ToDo(taskStr);
                 taskList.add(task);
                 System.out.println("Got it. I've added this task: \n  " + task.toString() + "\nNow you have " + taskList.size()
                         + " tasks in the list.");
@@ -68,8 +57,29 @@ public class Duke {
                 taskList.add(task);
                 System.out.println("Got it. I've added this task: \n  " + task.toString() + "\nNow you have " + taskList.size()
                         + " tasks in the list.");
-            } else {
 
+            } else if(input.length() > 6 && (input.substring(0, 6)).equals("delete")) {
+                String taskStr = input.substring(7);
+                int taskNum = Integer.parseInt(taskStr) - 1;
+                Task taskToRemove = taskList.get(taskNum);
+                String removedTaskStr = taskToRemove.toString();
+                taskList.remove(taskNum);
+                System.out.println("Noted. I've removed this task: \n  " + removedTaskStr + "\nNow you have " + taskList.size()
+                        + " tasks in the list.");
+            }
+            else {
+                    try {
+                        if ((input.length() == 4 && input.substring(0, 4).equals("todo")) || (input.length() == 8 && input.substring(0, 8).equals("deadline")) ||
+                                (input.length() == 6 && input.substring(0, 6).equals("event"))) {
+                            throw new EmptyDescriptionException();
+                        } else {
+                            throw new WrongCommandException();
+                        }
+                    } catch (EmptyDescriptionException e){
+                        System.out.println(e.getMessage());
+                    } catch (WrongCommandException e) {
+                        System.out.println(e.getMessage());
+                    }
             }
             /*
             else {
