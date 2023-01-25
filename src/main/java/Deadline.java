@@ -1,13 +1,13 @@
-public class Deadline extends Task {
-    private String byTime;
+class Deadline extends Task {
+    private final String byTime;
 
-    public Deadline(String task, String type, String by) {
-        super(task, type);
-        byTime = by;
+    public Deadline(String taskDescription, String byTime) {
+        this.taskDescription = taskDescription;
+        this.byTime = byTime;
     }
 
     @Override
     public String toString() {
-        return String.format("%s from: %s to: %s", super.toString(), byTime);
+        return String.format("[D]%s by: %s", super.toString(), byTime);
     }
 }
