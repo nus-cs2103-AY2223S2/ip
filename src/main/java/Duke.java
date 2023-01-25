@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -106,11 +108,14 @@ public class Duke {
                     }
                     break;
                 case "deadline":
-                    String[] dSegments = input.split("/");
+                    String[] dSegments = input.split(" /");
                     String deadlineName = dSegments[0].substring(9);
                     String deadline = dSegments[1].substring(3);
 
-                    Deadline deadlineTask = new Deadline(deadlineName, deadline);
+                    DateTimeFormatter deadlineFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                    LocalDateTime formattedDeadline = LocalDateTime.parse(deadline, deadlineFormatter);
+
+                    Deadline deadlineTask = new Deadline(deadlineName, formattedDeadline);
                     taskArray.add(deadlineTask);
 
                     System.out.println("Got it. I've added this task:\n   "
@@ -119,12 +124,16 @@ public class Duke {
                     updateLog();
                     break;
                 case "event":
-                    String[] eSegments = input.split("/");
+                    String[] eSegments = input.split(" /");
                     String eventName = eSegments[0].substring(6);
                     String startTime = eSegments[1].substring(5);
                     String endTime = eSegments[2].substring(3);
 
-                    Event eventTask = new Event(eventName, startTime, endTime);
+                    DateTimeFormatter eventFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                    LocalDateTime formattedEventStartTime = LocalDateTime.parse(startTime, eventFormatter);
+                    LocalDateTime formattedEventEndTime = LocalDateTime.parse(endTime, eventFormatter);
+
+                    Event eventTask = new Event(eventName, formattedEventStartTime, formattedEventEndTime);
                     taskArray.add(eventTask);
 
                     System.out.println("Got it. I've added this task:\n   "
