@@ -1,33 +1,68 @@
 package duke.tasks;
 import duke.DukeException;
 
+/**
+ * Task encapsulates various tasks that can be done by the user.
+ */
+
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Contructor for task.
+     * @param description Description of task.
+     * @param isDone Completion status of task.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Gets status icon of task.
+     * @return String representation of the status of task.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
+
+    /**
+     * Sets the isDone parameter to true.
+     */
     public void markDone(){
         this.isDone = true;
     }
 
+    /**
+     * Sets the isDone parameter to false.
+     */
     public void markUnDone(){
         this.isDone = false;
     }
 
+    /**
+     * Converts the Task into its string representation.
+     * @return String representation of task.
+     */
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Converts boolean to int.
+     * @return Int representation of isDone.
+     */
     public int isDoneToInt(){
         return isDone ? 1 : 0;
     }
+
+    /**
+     * Method that creates specific task given input data.
+     * @param data String formatted data of the Task that is retrieved from Storage.
+     * @return Task created from data input.
+     * @throws DukeException if task type is not recognised by duke.
+     */
     public static Task loadTask(String data) throws DukeException {
         String [] dataSplit = data.trim().split("\\|",4);
         boolean isDone = dataSplit[1].equals("1");
@@ -48,6 +83,10 @@ public class Task {
 
     }
 
+    /**
+     * Converts Task into string representation to be saved in storage.
+     * @return Formatted String representation of data.
+     */
     public String saveFormat(){
         return String.format("%d | %s", isDoneToInt(), this.description);
     }
