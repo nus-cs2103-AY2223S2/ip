@@ -33,7 +33,7 @@ public class Storage {
     }
 
     /**
-     * loads the file. creates new file if not created
+     * loads the files. New files created if it doesn't exist
      *
      * @return
      * @throws IOException
