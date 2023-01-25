@@ -1,3 +1,12 @@
+package duke;
+
+import duke.dukeexceptions.Missing;
+import duke.dukeexceptions.WrongKeyWord;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

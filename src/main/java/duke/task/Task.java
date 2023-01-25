@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     public static int total = 0;
     private boolean done;
@@ -27,6 +29,6 @@ public class Task {
     }
 
     public String removeTask() {
-        return "Task has been removed";
+        return "duke.task.Task has been removed";
     }
 }

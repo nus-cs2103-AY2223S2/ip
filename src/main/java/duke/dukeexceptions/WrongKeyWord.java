@@ -1,3 +1,5 @@
+package duke.dukeexceptions;
+
 /* When the user inputs wrong keywords*/
 public class WrongKeyWord extends DukeException{
 

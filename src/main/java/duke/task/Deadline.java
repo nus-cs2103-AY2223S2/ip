@@ -1,7 +1,9 @@
-public class ToDo extends Task{
-    private String type = "[T]";
+package duke.task;
 
-    public ToDo(String name) {
+public class Deadline extends Task {
+    private String type = "[D]";
+
+    public Deadline(String name) {
         super(name);
     }
 
@@ -18,6 +20,7 @@ public class ToDo extends Task{
                 + super.total
                 + " tasks in the list";
     }
+
     @Override
     public String toString(){
         return "Got it. I've added this task:\n " + this.status() + "\n" + "Now you have " + super.total + " tasks in the list";

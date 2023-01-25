@@ -1,3 +1,5 @@
+package duke.dukeexceptions;
+
 public class TaskListEmpty extends DukeException{
 
     public TaskListEmpty(String s) {
