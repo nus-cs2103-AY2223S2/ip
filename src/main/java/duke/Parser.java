@@ -25,14 +25,14 @@ public class Parser {
         return null;
     }
 
-    public boolean parse(String input, TaskList toDoList) throws DukeException{
+    public boolean parse(String input, TaskList toDoList) throws DukeException {
         String[] splitInput = input.split(" ");
         String command = splitInput[0];
         boolean writeToFile = false;
         LocalDate taskDate;
 
         System.out.println("________________________________");
-        
+
         switch (command) {
             case "list":
                 System.out.println("Here are the tasks in your list:");
@@ -176,10 +176,8 @@ public class Parser {
 
         }
 
-        
         return writeToFile;
 
-
     }
-    
+
 }

@@ -17,7 +17,7 @@ public class Storage {
         this.filePath = "./data";
     }
 
-    public void readStorage( ArrayList<Task> toDoList) {
+    public void readStorage(ArrayList<Task> toDoList) {
         try {
             (new File(this.filePath)).mkdirs();
             File savedFile = new File(this.filePath + "/duke.txt");
@@ -63,7 +63,7 @@ public class Storage {
 
     public void writeToFile(TaskList toDoList) {
 
-        try{
+        try {
             FileWriter saveFileWriter = new FileWriter(this.filePath + "/duke.txt", false);
 
             for (int i = 0; i < toDoList.size(); i++) {
@@ -74,6 +74,6 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("failed to store to file");
         }
-        
+
     }
 }
