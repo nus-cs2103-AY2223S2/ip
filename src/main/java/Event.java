@@ -14,9 +14,24 @@ public class Event extends Task {
     /**
      * Constructor for Event.
      * @param name The name of the task.
+     * @param start The start date/time of event.
+     * @param end The end date/time of event.
      */
     public Event(String name, LocalDate start, LocalDate end) {
         super(name);
+        this.start = start;
+        this.end = end;
+    }
+
+    /**
+     * Constructor to instantiate an event.
+     * @param name The name of the task.
+     * @param start The start date/time of event.
+     * @param end The end date/time of event.
+     * @param isDone Status of the task.
+     */
+    public Event(String name, String start, String end, boolean isDone) {
+        super(name, isDone);
         this.start = start;
         this.end = end;
     }
@@ -32,5 +47,14 @@ public class Event extends Task {
         String toPrint = String.format("[E]%s (from: %s to: %s)",
                 super.toString(), s, e);
         return toPrint;
+    }
+
+    /**
+     * Format task to be stored in data file.
+     * @return Returns a  formatted string representation of this task to be stored.
+     */
+    @Override
+    public String format() {
+        return ("E | " + super.format() + String.format(" | %s | %s", this.start, this.end));
     }
 }

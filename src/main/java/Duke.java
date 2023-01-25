@@ -130,7 +130,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        List myList = new List();
+        Storage storage = new Storage();
+        TaskList myList = new TaskList(storage.read());
         System.out.println("Hi! I am Duke. How may I help you today?");
 
         Scanner sc = new Scanner(System.in);
@@ -148,6 +149,7 @@ public class Duke {
             }
             switch(cmd) {
                 case BYE:
+                    storage.write(myList.getTaskList());
                     System.out.println("Bye! Hope to see you again soon!\n");
                     return;
 
