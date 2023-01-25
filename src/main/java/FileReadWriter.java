@@ -8,6 +8,12 @@ import java.util.ArrayList;
 
 public class FileReadWriter {
 
+    /**
+     * Reads and loads the data from data.txt.
+     * @param filePath
+     * @return
+     * @throws FileNotFoundException
+     */
     public static ArrayList<Task> loadFile(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -31,6 +37,12 @@ public class FileReadWriter {
         return loadData;
     }
 
+    /**
+     * Dumps the ArrayList dumpFile into data.txt.
+     * @param filePath
+     * @param dumpFile
+     * @throws IOException
+     */
     public static void dumpFile(String filePath, ArrayList<Task> dumpFile) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         String txt = "";

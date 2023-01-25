@@ -12,6 +12,9 @@ public class Todos extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Formats the task into a form where it will be dumped into data.txt.
+     */
     public String formatText() {
         String divider = " | ";
         String isMarked = this.isDone ? "1" : "0";

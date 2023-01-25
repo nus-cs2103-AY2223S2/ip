@@ -19,6 +19,9 @@ abstract class Task {
         this.description = description;
     }
 
+    /**
+     * Gets the status icon from the task.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -28,10 +31,16 @@ abstract class Task {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Marks the task as completed.
+     */
     public void mark() {
         this.isDone = true;
     }
 
+    /**
+     * Formats the task into a form where it will be dumped into data.txt.
+     */
     abstract String formatText();
 
 

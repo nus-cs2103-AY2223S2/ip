@@ -18,6 +18,11 @@ public class Deadlines extends Task {
                 this.deadline.format(PRINTFORMATTER));
 
     }
+
+    /**
+     * Formats the task into a form where it will be dumped into data.txt.
+     */
+
     public String formatText() {
         String divider = " | ";
         String isMarked = this.isDone ? "1" : "0";
