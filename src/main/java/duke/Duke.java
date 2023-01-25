@@ -2,12 +2,11 @@ package duke;
 
 import command.Command;
 import storage.Storage;
+import task.Deadline;
+import task.Event;
 import task.Task;
 import task.TaskList;
 import task.ToDo;
-import task.Event;
-import task.Deadline;
-
 import ui.Parser;
 import ui.TextUi;
 
@@ -100,8 +99,8 @@ public class Duke {
      * In case of invalid or incomplete command, it throws an error message
      * to the user and prompts for a new command.
      *
-     * @param inMsg:         the input message from the user
-     * @param suppressPrint: suppress print out message or not
+     * @param inMsg         the input message from the user
+     * @param suppressPrint suppress print out message or not
      * @throws DukeException when the command is unknown
      */
     public void handleCommand(String inMsg, boolean suppressPrint) throws DukeException {
@@ -133,7 +132,7 @@ public class Duke {
             String keyword = parser.getCommandContent(inMsg, Command.FIND);
             stringToPrint = find(keyword);
         } else {
-                throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         if (!suppressPrint) {
@@ -147,21 +146,21 @@ public class Duke {
      * @return the string representation of the message
      */
     public String listTasks() {
-        String taskListString = "Here are the tasks in your list:\n" +
-                taskList.getTaskListString(true);
+        String taskListString = "Here are the tasks in your list:\n"
+                + taskList.getTaskListString(true);
         return taskListString;
     }
 
     /**
      * Add a task to the list
      *
-     * @param task: a task to add
+     * @param task a task to add
      * @return the string response after adding a task
      */
     public String addTask(Task task) {
         this.taskList.add(task);
-        return String.format("Got it. I've added this task:\n  %s\n" +
-                        "Now you have %d tasks in the list.",
+        return String.format("Got it. I've added this task:\n  %s\n"
+                        + "Now you have %d tasks in the list.",
                 task,
                 taskList.size());
     }
@@ -169,7 +168,7 @@ public class Duke {
     /**
      * Marks a task as done by index
      *
-     * @param idx: index of the task
+     * @param idx index of the task
      * @return the string message to print out
      */
     public String markTaskDone(int idx) {
@@ -181,7 +180,7 @@ public class Duke {
     /**
      * Marks a task as undone by index
      *
-     * @param idx: index of the task
+     * @param idx index of the task
      * @return the string message to print out
      */
     public String unmarkTaskDone(int idx) {
@@ -193,22 +192,22 @@ public class Duke {
     /**
      * Deletes a task by index
      *
-     * @param idx: the index of the task
+     * @param idx the index of the task
      * @return the string message to print out
      */
     public String deleteTask(int idx) {
-        idx = idx - 1;   // count from zero
+        idx = idx - 1; //count from zero
         Task t = taskList.get(idx);
         taskList.remove(idx);
-        return String.format("Noted. I've removed this task:\n  %s\n" +
-                "Now you have %d tasks in the list.", t, taskList.size());
+        return String.format("Noted. I've removed this task:\n  %s\n"
+                + "Now you have %d tasks in the list.", t, taskList.size());
     }
 
     /**
      * Adds user command to a list. The list will be used for
      * saving to local files as history.
      *
-     * @param string: the user-input command
+     * @param string the user-input command
      */
     public void addCommandList(String string) {
         commandList.add(string);
@@ -231,12 +230,12 @@ public class Duke {
     /**
      * Return the string representation of the list of tasks
      * whose names contain the given keyword.
-     * @param string: the keyword
+     * @param string the keyword
      * @return the string of the task list
      */
     public String find(String string) {
-        String taskListString = "Here are the matching tasks in your list:\n" +
-                taskList.getTaskNameContains(string).getTaskListString(true);
+        String taskListString = "Here are the matching tasks in your list:\n"
+                + taskList.getTaskNameContains(string).getTaskListString(true);
         return taskListString;
     }
 }

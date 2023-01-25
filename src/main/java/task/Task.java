@@ -22,7 +22,7 @@ public class Task {
     /**
      * The task string description
      *
-     * @param description: a string describing the task, which should include the parameters
+     * @param description a string describing the task, which should include the parameters
      *                   corresponding to the task
      */
     public Task(String description) {
@@ -33,7 +33,7 @@ public class Task {
     /**
      * Gives the string representation of date
      *
-     * @param date: a date object
+     * @param date a date object
      * @return the corresponding string representation
      */
     protected static String printDate(LocalDate date) {
@@ -104,7 +104,7 @@ public class Task {
 
     /**
      * Checks if the task name contains a given string
-     * @param string: a given string
+     * @param string a given string
      * @return a boolean value
      */
     public boolean containString(String string) {

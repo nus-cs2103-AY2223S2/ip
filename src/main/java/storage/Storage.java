@@ -21,8 +21,8 @@ public class Storage {
     /**
      * Constructor
      *
-     * @param directory: directory of the record file
-     * @param fileName:  the name of the record file
+     * @param directory directory of the record file
+     * @param fileName  the name of the record file
      */
     public Storage(String directory, String fileName) {
         this.directory = directory;
@@ -42,7 +42,7 @@ public class Storage {
     /**
      * Saves the list of tasks to a txt file as a string
      *
-     * @param commandListString: the string to write to
+     * @param commandListString the string to write to
      */
     public void saveToFile(String commandListString) {
         // https://www.w3schools.com/java/java_files_create.asp
@@ -68,7 +68,7 @@ public class Storage {
     /**
      * Loads the record file at start-up
      *
-     * @param path: path to the record file
+     * @param commandList the list to store commands into
      */
     public void loadRecordIfExists(ArrayList<String> commandList) {
         // check if file exists

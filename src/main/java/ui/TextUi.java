@@ -13,7 +13,7 @@ public class TextUi {
     /**
      * Constructor
      *
-     * @param name: string name of the robot duke.
+     * @param name string name of the robot duke
      */
     public TextUi(String name) {
         this.name = name;
@@ -39,7 +39,7 @@ public class TextUi {
     /**
      * Print the string in a pre-specified format.
      *
-     * @param string: the string content to print out
+     * @param string the string content to print out
      */
     public void printStructuredString(String string) {
         String longLine = "____________________________________________________________";
@@ -58,7 +58,7 @@ public class TextUi {
     /**
      * Checks if the command marks the end.
      *
-     * @param string: User-input string
+     * @param string User-input string
      * @return if the string marks the end of the conversation
      */
     public boolean isEnd(String string) {

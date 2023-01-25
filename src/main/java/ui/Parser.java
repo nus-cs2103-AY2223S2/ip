@@ -1,11 +1,11 @@
 package ui;
 
-import command.Command;
-
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import command.Command;
+import duke.DukeException;
+
 
 /**
  * A string parser that processes user-input commands.
@@ -14,8 +14,8 @@ public class Parser {
     /**
      * Gets the content of the command
      *
-     * @param string:  the command string
-     * @param command: a command type
+     * @param string  the command string
+     * @param command a command type
      * @return the content of the command
      * @throws DukeException when the string is not complete
      */
@@ -30,8 +30,8 @@ public class Parser {
     /**
      * Returns whether the input string is of the specified command type
      *
-     * @param string:  the input string from the user
-     * @param command: a candidate command to check against
+     * @param string  the input string from the user
+     * @param command a candidate command to check against
      * @return whether the input string is of the specified command type
      */
     public boolean checkCommand(String string, Command command) {
@@ -49,6 +49,8 @@ public class Parser {
         case FIND:
             isCommand = string.toUpperCase().startsWith(command.name());
             break;
+        default:
+            break;
         }
         return isCommand;
     }
@@ -56,7 +58,7 @@ public class Parser {
     /**
      * Parse the user-input date string into a date object
      *
-     * @param dateString: the string representation of the date
+     * @param dateString the string representation of the date
      * @return the date object
      */
     public static LocalDate parseDate(String dateString) throws DukeException {

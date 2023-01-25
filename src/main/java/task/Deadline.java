@@ -15,7 +15,7 @@ public class Deadline extends Task {
     /***
      * Constructor.
      *
-     * @param description: the content of the user command
+     * @param description the content of the user command
      * @throws DukeException when the command is incomplete
      */
     public Deadline(String description) throws DukeException {
@@ -34,8 +34,7 @@ public class Deadline extends Task {
      * Returns the string representation of the task.
      * The deadline date is included.
      *
-     * @return string representation of a deadline task,
-     * where the deadline is specified
+     * @return string representation of a deadline task, where the deadline is specified
      */
     @Override
     public String toString() {

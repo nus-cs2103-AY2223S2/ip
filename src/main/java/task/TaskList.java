@@ -1,13 +1,13 @@
 package task;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
 /**
  * A data structure that saves a list of tasks.
- * It is directly inherited from ArrayList<Task.Task>
+ * It is directly inherited from ArrayList
  */
 public class TaskList extends ArrayList<Task> {
 
@@ -20,7 +20,7 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Construct an instance from an array list of tasks
-     * @param tasks: an array list of tasks
+     * @param tasks an array list of tasks
      *
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -30,7 +30,7 @@ public class TaskList extends ArrayList<Task> {
     /**
      * Return the string representation of the task list
      *
-     * @param isIndexed: whether to add an index number at the beginning of each task
+     * @param isIndexed whether to add an index number at the beginning of each task
      *                   or not
      * @return the string representation of the task list
      */
@@ -49,7 +49,7 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Get the task list that contains all tasks whose names contain the given string
-     * @param string: the string to search for
+     * @param string the string to search for
      * @return a task list
      */
     public TaskList getTaskNameContains(String string) {

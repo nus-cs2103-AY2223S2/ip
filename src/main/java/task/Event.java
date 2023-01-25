@@ -1,8 +1,10 @@
 package task;
 
 import java.time.LocalDate;
-import ui.Parser;
+
 import duke.DukeException;
+import ui.Parser;
+
 
 /**
  * The event class that extends the Task class.
@@ -15,7 +17,7 @@ public class Event extends Task {
     /**
      * The default constructor
      *
-     * @param description: the content of the command
+     * @param description the content of the command
      */
     public Event(String description) throws DukeException {
         super();
@@ -34,7 +36,7 @@ public class Event extends Task {
     /**
      * Parse the start time of the event from the user string
      *
-     * @param s: the user-input string
+     * @param s the user-input string
      * @return the start time of the event
      */
     public static String parseStartTime(String s) {
@@ -45,7 +47,7 @@ public class Event extends Task {
     /**
      * Parse the end time of the event from the user string
      *
-     * @param s: the user-input string
+     * @param s the user-input string
      * @return the end time of the event
      */
     public static String parseEndTime(String s) {
