@@ -37,6 +37,14 @@ public class Duke {
 		System.out.println("added: " + task.getDescription());
 		System.out.print("You have: " + list.size() + " task(s)");
 	}	
+					
+	private static void deleteTask(int i) {
+		int index = i - 1;
+		System.out.println("removed: " + list.get(index).toString());
+		System.out.print("You have: " + (list.size() - 1)+ " task(s)");
+		list.remove(index);	
+
+	}
 	
 	private static void parseIn(List<String> parm) throws DukeException {
 			int byIndex;
@@ -138,6 +146,25 @@ public class Duke {
 				}
 					
 				break;
+			
+			case "delete":
+				try{
+					deleteTask(Integer.parseInt(parm.get(1)));
+				}
+				catch (IndexOutOfBoundsException e) {
+					throw new DukeException(e);
+				
+				}
+				catch (NumberFormatException e) {
+					throw new DukeException(e);
+				
+				}
+				catch (Exception e) {
+					throw new DukeException(e);	
+				}
+
+				break;
+					
 			default:
 				throw new DukeException();
 
