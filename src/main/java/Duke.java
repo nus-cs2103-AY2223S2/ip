@@ -16,7 +16,7 @@ public class Duke {
             if (input.equals("list")) {
                 System.out.println("Here are some tasks in your list:");
                 for (int i = 1; i < taskList.size() + 1; i++) {
-                    System.out.println(i + ". " + (taskList.get(i - 1)).toString());
+                    System.out.println(i + "." + (taskList.get(i - 1)).toString());
                 }
 
             } else if((input.substring(0, 4)).equals("mark")) {
