@@ -1,6 +1,5 @@
 package duke;
 
-
 import duke.command.Command;
 import duke.command.CreateDeadline;
 import duke.command.CreateEvent;
@@ -14,7 +13,17 @@ import duke.command.Unmark;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
+    /**
+     * Parses a command string into a Command object.
+     * 
+     * @param fullCommand the command string to parse.
+     * @return the Command object.
+     * @throws DukeException
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] split = fullCommand.split(" ", 2);
 
@@ -84,6 +93,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a date string into a LocalDate object.
+     * 
+     * @param date the date string to parse.
+     * @return the LocalDate object.
+     * @throws DukeException 
+     */
     public static LocalDate parseDate(String date) throws DukeException {
         try {
             return LocalDate.parse(date);

@@ -1,6 +1,5 @@
 package duke;
 
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,9 +12,21 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Storage class to handle saving and loading of tasks.
+ */
 public class Storage {
+    /**
+     * File to save and load tasks from.
+     */
     private File file;
 
+    /**
+     * Constructor for Storage class.
+     * 
+     * @param filePath the path of the file to save and load tasks from.
+     * @throws DukeException
+     */
     public Storage(String filePath) throws DukeException{
         this.file = new File(filePath);
         if (!file.exists()) {
@@ -28,6 +39,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the tasks from the file.
+     * 
+     * @return the ArrayList of tasks.
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<Task>();
         try {
@@ -65,6 +82,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves the tasks to the file.
+     * 
+     * @param list the ArrayList of tasks to save.
+     * @throws DukeException
+     */
     public void save(TaskList list) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);
