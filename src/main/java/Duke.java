@@ -1,6 +1,11 @@
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -25,7 +30,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         boolean continueRunning = true;
         String greeting = "______________________________________\n"
-                + "Hey there buddy! I'm Duke\n"
+                + "Hey there buddy! I'm Duke. Your Personal Task Assistant!\n"
                 + "What can I do for you today?\n"
                 + "______________________________________\n";
         System.out.print(greeting);
@@ -172,28 +177,46 @@ public class Duke {
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
-                    String deadline = userInput.substring(indexOfBy+4);
+                    String[] s = userInput.substring(indexOfBy + 4).split(" ");
+                    if (s.length != 2){
+                        errMsg = "______________________________________\n"
+                                + " ☹ OOPS!!! The task deadline must be defined as '/by YYYY-MM-DD HH:MM' .\n"
+                                + "______________________________________\n";
+                        throw new DukeException(errMsg);
+                    }
+                    String deadlineDate = s[0];
+                    String deadlineTime = s[1];
                     if (indexOfFirstSpace+1 > indexOfBy-1){
                         errMsg = "______________________________________\n"
                                 + " ☹ OOPS!!! The task description for a deadline cannot be empty.\n"
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
-                    String taskDescription = userInput.substring(indexOfFirstSpace+1,indexOfBy-1);
-                    if(taskDescription.isBlank()){
+                    try{
+                        LocalDate parsedDate = LocalDate.parse(deadlineDate);
+                        Date parsedTime = new SimpleDateFormat("hh:mm").parse(deadlineTime);
+                        String taskDescription = userInput.substring(indexOfFirstSpace+1,indexOfBy-1);
+                        if(taskDescription.isBlank()){
+                            errMsg = "______________________________________\n"
+                                    + " ☹ OOPS!!! The task description for a deadline cannot be empty.\n"
+                                    + "______________________________________\n";
+                            throw new DukeException(errMsg);
+                        }
+                        Deadline newDeadline = new Deadline(taskDescription, parsedDate, parsedTime, false);
+                        userTasks.add(newDeadline);
+                        Task.addTask();
+                        resultString = "______________________________________\n"
+                                + "Got it. I've added this task:\n"
+                                +  newDeadline + "\n"
+                                + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
+                                + "______________________________________\n";
+                        saveTasksToFile(userTasks);
+                    } catch (DateTimeParseException | ParseException e){
                         errMsg = "______________________________________\n"
-                                + " ☹ OOPS!!! The task description for a deadline cannot be empty.\n"
+                                + " ☹ OOPS!!! The task deadline must be defined as '/by YYYY-MM-DD HH:MM' .\n"
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
-                    Deadline newDeadline = new Deadline(taskDescription , deadline);
-                    userTasks.add(newDeadline);
-                    resultString = "______________________________________\n"
-                            + "Got it. I've added this task:\n"
-                            +  newDeadline + "\n"
-                            + "Now you have " + userTasks.size() + " tasks in the list.\n"
-                            + "______________________________________\n";
-                    saveTasksToFile(userTasks);
                 }
                 else if(userInput.split(" ")[0].equals(CmdType.event.name())){
                     int indexOfFrom = userInput.indexOf("/from");
@@ -214,27 +237,56 @@ public class Duke {
                     String eventStart = userInput.substring(indexOfFrom+6, indexOfTo-1);
                     String eventEnd = userInput.substring(indexOfTo+4);
 
+                    String[] eventStartSplitStr = eventStart.split(" ");
+                    String[] eventEndSplitStr = eventEnd.split(" ");
+
+                    if (eventStartSplitStr.length != 2 || eventEndSplitStr.length != 2){
+                        errMsg = "______________________________________\n"
+                                + " ☹ OOPS!!! The event start and the event end must defined " +
+                                "as '/from YYYY-MM-DD HH:MM /to YYYY-MM-DD HH:MM' .\n"
+                                + "______________________________________\n";
+                        throw new DukeException(errMsg);
+                    }
+                    String eventStartDate = eventStartSplitStr[0];
+                    String eventStartTime = eventStartSplitStr[1];
+                    String eventEndDate = eventEndSplitStr[0];
+                    String eventEndTime = eventEndSplitStr[1];
+
                     if (indexOfFirstSpace+1 > indexOfFrom-1){
                         errMsg = "______________________________________\n"
                                 + " ☹ OOPS!!! The event description cannot be empty!\n"
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
-                    String taskDescription = userInput.substring(indexOfFirstSpace+1,indexOfFrom-1);
-                    if(taskDescription.isBlank()){
+
+                    try{
+                        LocalDate parsedStartDate = LocalDate.parse(eventStartDate);
+                        LocalDate parsedEndDate = LocalDate.parse(eventEndDate);
+                        Date parsedStartTime = new SimpleDateFormat("hh:mm").parse(eventStartTime);
+                        Date parsedEndTime = new SimpleDateFormat("hh:mm").parse(eventEndTime);
+                        String taskDescription = userInput.substring(indexOfFirstSpace+1,indexOfFrom-1);
+                        if(taskDescription.isBlank()){
+                            errMsg = "______________________________________\n"
+                                    + " ☹ OOPS!!! The Event description cannot be empty!\n"
+                                    + "______________________________________\n";
+                            throw new DukeException(errMsg);
+                        }
+                        Event newEvent = new Event(taskDescription, parsedStartDate, parsedStartTime, parsedEndDate, parsedEndTime, false);
+                        userTasks.add(newEvent);
+                        Task.addTask();
+                        resultString = "______________________________________\n"
+                                + "Got it. I've added this task:\n"
+                                + newEvent + "\n"
+                                + "Now you have " + Task.getNumTasks() + " tasks in the list.\n"
+                                + "______________________________________\n";
+                        saveTasksToFile(userTasks);
+                    } catch (DateTimeParseException | ParseException e){
                         errMsg = "______________________________________\n"
-                                + " ☹ OOPS!!! The Event description cannot be empty!\n"
+                                + " ☹ OOPS!!! The event start and the event end must defined " +
+                                "as '/from YYYY-MM-DD HH:MM /to YYYY-MM-DD HH:MM' .\n"
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
-                    Event newEvent = new Event(taskDescription, eventStart, eventEnd);
-                    userTasks.add(newEvent);
-                    resultString = "______________________________________\n"
-                            + "Got it. I've added this task:\n"
-                            + newEvent + "\n"
-                            + "Now you have " + userTasks.size() + " tasks in the list.\n"
-                            + "______________________________________\n";
-                    saveTasksToFile(userTasks);
                 } else {
                     errMsg = "______________________________________\n"
                             + " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
@@ -281,15 +333,36 @@ public class Duke {
                     userTasks.add(newTodo);
                 }
                 if (parts.length == 4){
-                    String by = parts[3];
-                    Deadline newDeadline = new Deadline(taskDescription, by, completed);
-                    userTasks.add(newDeadline);
+                    try{
+                        String[] deadlineParts = parts[3].split(" ");
+                        String deadlineDate = deadlineParts[0];
+                        String deadlineTime = deadlineParts[1];
+                        LocalDate parsedDate = LocalDate.parse(deadlineDate);
+                        Date parsedTime = new SimpleDateFormat("hh:mm").parse(deadlineTime);
+                        Deadline newDeadline = new Deadline(taskDescription, parsedDate, parsedTime, completed);
+                        userTasks.add(newDeadline);
+                    } catch (DateTimeParseException | ParseException e){
+
+                    }
                 }
                 if(parts.length == 5){
-                    String from = parts[3];
-                    String to = parts[4];
-                    Event newEvent = new Event(taskDescription, from, to, completed);
-                    userTasks.add(newEvent);
+                    try{
+                        String[] eventStartParts = parts[3].split(" ");
+                        String[] eventEndParts = parts[4].split(" ");
+                        String eventStartDate = eventStartParts[0];
+                        String eventStartTime = eventStartParts[1];
+                        String eventEndDate = eventEndParts[0];
+                        String eventEndTime = eventEndParts[1];
+                        LocalDate parsedStartDate = LocalDate.parse(eventStartDate);
+                        LocalDate parsedEndDate = LocalDate.parse(eventEndDate);
+                        Date parsedStartTime = new SimpleDateFormat("hh:mm").parse(eventStartTime);
+                        Date parsedEndTime = new SimpleDateFormat("hh:mm").parse(eventEndTime);
+                        Event newEvent = new Event(taskDescription, parsedStartDate, parsedStartTime,
+                                parsedEndDate, parsedEndTime, completed);
+                        userTasks.add(newEvent);
+                    } catch(DateTimeParseException | ParseException e){
+
+                    }
                 }
                 taskStr = reader.readLine();
             }
@@ -318,13 +391,13 @@ public class Duke {
                     case "Deadline":
                         Deadline deadline = (Deadline) taskList.get(i);
                         toWrite = taskType + "|" +(deadline.getIsDone() ? 1 : 0) + "|" +
-                            deadline.getDescription() + "|" + deadline.getBy() + "\n";
+                            deadline.getDescription() + "|" + deadline.getDeadline() + "\n";
                         fileWriter.write(toWrite);
                         break;
                     case "Event":
                         Event event = (Event)taskList.get(i);
                         toWrite = taskType + "|" + (event.getIsDone() ? 1 : 0) + "|" +event.getDescription() + "|" +
-                            event.getFrom() + "|" + event.getTo() + "\n";
+                            event.getEventStart() + "|" + event.getEventEnd() + "\n";
                         fileWriter.write(toWrite);
                         break;
                     default:
