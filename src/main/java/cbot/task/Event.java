@@ -8,6 +8,8 @@ public class Event extends Task {
     private LocalDateTime fromTime;
     private LocalDateTime toTime;
     
+    public static final String EVENT_SYMBOL = "E";
+    
     public Event(String desc, boolean isDone, LocalDateTime fromTime, LocalDateTime toTime) {
         super(desc, isDone);
         this.fromTime = fromTime;
@@ -20,9 +22,8 @@ public class Event extends Task {
         this.toTime = toTime;
     }
     
-    @Override
     public String getSymbol() {
-        return "E";
+        return EVENT_SYMBOL;
     }
     
     @Override

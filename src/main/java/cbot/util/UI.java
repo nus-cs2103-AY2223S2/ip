@@ -14,12 +14,12 @@ public class UI {
     private final Scanner sc;
     
     // Frequently Used Strings
-    static String BLANK     = "        ";
-    static String INDENT    = "      ~ ";
-    static String WARNING   = "     !! ";
-    static String ERROR     = WARNING + "<Error> ";
-    static String PROMPT    = "\n v v\n";
-    static String STALL     = "\n   o\n   o\n   o\n\n";
+    private static String BLANK     = "        ";
+    private static String INDENT    = "      ~ ";
+    private static String WARNING   = "     !! ";
+    private static String ERROR     = WARNING + "<Error> ";
+    private static String PROMPT    = "\n v v\n";
+    private static String STALL     = "\n   o\n   o\n   o\n\n";
     
     public UI() {
         this.sc = new Scanner(System.in);
@@ -64,10 +64,6 @@ public class UI {
         System.out.println(STALL + INDENT + "See you again!");
     }
     
-    static void say(String str) {
-        System.out.println(INDENT + str);
-    }
-    
     public static void warn(Exception e) {
         System.out.println(WARNING + e.getMessage());
     }
@@ -79,6 +75,10 @@ public class UI {
     public static void warnTime() {
         System.out.println(ERROR + "Sorry, I don't know how to interpret that datetime");
         System.out.println(WARNING + "Try something in the form: yyyy-MM-dd HH:mm");
+    }
+
+    static void say(String str) {
+        System.out.println(INDENT + str);
     }
     
     static void printMany(ArrayList<String> arr) {

@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
     private LocalDateTime due;
     
+    public static final String DEADLINE_SYMBOL = "D";
+    
     public Deadline(String desc, boolean isDone, LocalDateTime due) {
         super(desc, isDone);
         this.due = due;
@@ -19,7 +21,7 @@ public class Deadline extends Task {
     
     @Override
     public String getSymbol() {
-        return "D";
+        return DEADLINE_SYMBOL;
     }
     
     @Override

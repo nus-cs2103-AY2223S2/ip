@@ -1,6 +1,12 @@
 package cbot;
 
-import cbot.util.*;
+import cbot.task.TaskList;
+
+import cbot.util.BadInputException;
+import cbot.util.FileStuff;
+import cbot.util.Parser;
+import cbot.util.PoorInputException;
+import cbot.util.UI;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,7 +19,7 @@ public class Cbot {
     
     private static final String PATH = "../data/cbot_save.txt";
 
-    public Cbot(String filePath) throws IOException {
+    Cbot(String filePath) throws IOException {
         this.fs = new FileStuff(filePath);
         this.ui = new UI();
 
@@ -25,6 +31,10 @@ public class Cbot {
             UI.sayNewFile(fs);
             this.tl = new TaskList();
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Cbot(PATH).run();
     }
 
     public void run() throws IOException {
@@ -64,9 +74,5 @@ public class Cbot {
         }
         
         UI.sayBye();
-    }
-
-    public static void main(String[] args) throws IOException {
-        new Cbot(PATH).run();
     }
 }

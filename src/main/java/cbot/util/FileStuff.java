@@ -3,7 +3,7 @@ package cbot.util;
 import cbot.task.Deadline;
 import cbot.task.Event;
 import cbot.task.Task;
-
+import cbot.task.TaskList;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,15 +20,15 @@ public class FileStuff {
         this.file = new File(path);
     }
     
-    public String getPath() {
+    String getPath() {
         return this.file.getAbsolutePath();
     }
     
-    public boolean pathExists() {
+    boolean pathExists() {
         return this.file.getParentFile().exists();
     }
     
-    public boolean fileExists() {
+    boolean fileExists() {
         return this.file.exists();
     }
     

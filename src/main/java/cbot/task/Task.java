@@ -5,10 +5,11 @@ import java.time.LocalDateTime;
 public class Task implements Comparable<Task> {
     protected String desc;
     protected boolean isDone;
-
-    public static final String SEP = " ;; ";
+    
     public static final String DONE_TRUE = "X";
     public static final String DONE_FALSE = " ";
+    public static final String SEP = " ;; ";
+    public static final String TODO_SYMBOL = "T";
     
     public Task(String desc, boolean isDone) {
         this.desc = desc;
@@ -21,7 +22,7 @@ public class Task implements Comparable<Task> {
     }
     
     public String getSymbol() {
-        return "T";
+        return TODO_SYMBOL;
     }
     
     public String getStatus() {

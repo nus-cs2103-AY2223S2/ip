@@ -3,6 +3,7 @@ package cbot.util;
 import cbot.task.Deadline;
 import cbot.task.Event;
 import cbot.task.Task;
+import cbot.task.TaskList;
 
 import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
@@ -155,6 +156,11 @@ public class Parser {
 
             LocalDateTime eStart = TimeStuff.parseDT(eStartStr);
             LocalDateTime eEnd = TimeStuff.parseDT(eEndStr);
+            
+            if (eStart.isAfter(eEnd)) {
+                throw new BadInputException("Hey! You have to start *before* you end...");
+            }
+            
             UI.say(tl.addTask(new Event(eDesc, eStart, eEnd)));
             break;
             
@@ -217,21 +223,21 @@ public class Parser {
             case "td":
             case "t":
                 msg = "Ok! These are on your ToDo list:";
-                arrFilter = tl.listFilter(t -> t.getSymbol().equals("T"));
+                arrFilter = tl.listFilter(t -> t.getSymbol().equals(Task.TODO_SYMBOL));
                 break;
             
             case "deadline":
             case "dl":
             case "d":
                 msg = "Ok! Here are your Deadlines:";
-                arrFilter = tl.listFilter(t -> t.getSymbol().equals("D"));
+                arrFilter = tl.listFilter(t -> t.getSymbol().equals(Deadline.DEADLINE_SYMBOL));
                 break;
             
             case "event":
             case "ev":
             case "e":
                 msg = "Ok! Here are your Events:";
-                arrFilter = tl.listFilter(t -> t.getSymbol().equals("E"));
+                arrFilter = tl.listFilter(t -> t.getSymbol().equals(Event.EVENT_SYMBOL));
                 break;
             
             case "complete":

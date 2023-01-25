@@ -1,6 +1,6 @@
-package cbot.util;
+package cbot.task;
 
-import cbot.task.Task;
+import cbot.util.PoorInputException;
 
 import java.lang.StringBuilder;
 import java.util.ArrayList;
@@ -8,10 +8,11 @@ import java.util.Collections;
 import java.util.function.Predicate;
 
 public class TaskList {
+    private ArrayList<Task> tdl;
+    
     private static final int MAX_SIZE = 100;
     //private static final int GAPS = 11;
     private static final String GAP = "             ";
-    private ArrayList<Task> tdl;
     
     public TaskList() {
         this.tdl = new ArrayList<Task>();
@@ -21,21 +22,21 @@ public class TaskList {
         this.tdl = tdl;
     }
     
-    int getCount() {
+    public int getCount() {
         return this.tdl.size();
     }
     
-    String addTask(Task task) {
+    public String addTask(Task task) {
         this.tdl.add(task);
         return String.format("\"%s\" added!",
                 task.toString());
     }
     
-    ArrayList<String> listTasks() {
+    public ArrayList<String> listTasks() {
         return listFilter(t -> true);
     }
     
-    ArrayList<String> listFilter(Predicate<Task> pred) {
+    public ArrayList<String> listFilter(Predicate<Task> pred) {
         ArrayList<String> arr = new ArrayList<String>();
         
         for (int i = 0; i < getCount(); i++) {
@@ -62,7 +63,7 @@ public class TaskList {
         }
     }
     
-    String mark(int num) throws PoorInputException {
+    public String mark(int num) throws PoorInputException {
         if (notInRange(num)) {
             throw new PoorInputException(rangeError(num));
         }
@@ -78,7 +79,7 @@ public class TaskList {
         }
     }
     
-    String unmark(int num) throws PoorInputException {
+    public String unmark(int num) throws PoorInputException {
         if (notInRange(num)) {
             throw new PoorInputException(rangeError(num));
         }
@@ -94,7 +95,7 @@ public class TaskList {
         }
     }
     
-    String delTask(int num) throws PoorInputException {
+    public String delTask(int num) throws PoorInputException {
         if (notInRange(num)) {
             throw new PoorInputException(rangeError(num));
         }
@@ -103,11 +104,11 @@ public class TaskList {
                 + tdl.remove(num - 1).toString();
     }
     
-    void sort() {
+    public void sort() {
         Collections.sort(tdl);
     }
 
-    String makeFileFriendly() {
+    public String makeFileFriendly() {
         StringBuilder sb = new StringBuilder();
         
         for (Task t : this.tdl) {
