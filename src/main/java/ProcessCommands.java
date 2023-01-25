@@ -1,5 +1,8 @@
 import entities.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class ProcessCommands {
     protected TaskList list;
 
@@ -62,6 +65,24 @@ public class ProcessCommands {
         Task task = list.getTask(index);
         task.setUndone();
         System.out.println(String.format("Nice, this task has been marked as done:\n %s", task.toString()));
+        System.out.println("---------------------------------------");
+    }
+
+    public void processPrintDate(String date) {
+        LocalDate now = LocalDate.parse(date.trim());
+        System.out.println("Tasks occurring on " + now.toString() + ":");
+        for (int i = 0; i < list.getSize(); i++) {
+            Task currTask = list.getTask(i);
+            if (currTask instanceof Deadline) {
+                if (now.equals(((Deadline) currTask).getBy())) {
+                    System.out.println(currTask.toString());
+                }
+            } else if (currTask instanceof Event) {
+                if (now.equals(((Event) currTask).getTo()) || now.equals(((Event) currTask).getFrom())) {
+                    System.out.println(currTask.toString());
+                }
+            }
+        }
         System.out.println("---------------------------------------");
     }
 
