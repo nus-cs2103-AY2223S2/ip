@@ -1,5 +1,9 @@
 import java.util.Scanner;
+import exceptions.TaskException;
+import storage.Storage;
+import tasklist.TaskList;
 import java.util.Arrays;
+import ui.Ui;
 
 public class Duke {
 
@@ -74,21 +78,19 @@ public class Duke {
                     case TODO:
                     case DEADLINE:
                     case EVENT: {
-                        tasks.addItem(instruction.toString() ,input);
+                        //
                         break;
                     }
 
                     // Delete task from the list according to its numbering on the list
                     case DELETE:
-                        tasks.deleteTask(index);
+                        //tasks.deleteTask(index);
                         break;
 
                     // default will throw an exception in case switch-case is unable to find instruction
                     default:
                     this.ui.error("default");
                 }
-
-                this.storage.writeToFile();
 
             }
         } catch (TaskException e) {
