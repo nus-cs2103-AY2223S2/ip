@@ -40,4 +40,17 @@ public class Parser {
         }
         return Duke.Commands.valueOf(command);
     }
+
+    /**
+     * Returns the String for find.
+     *
+     * @return The String to match in find.
+     */
+    public String findMatchDescription() {
+        String temp = "";
+        for (int i = 1; i < inputArr.length; i++) {
+            temp = temp + inputArr[i];
+        }
+        return temp.trim();
+    }
 }

@@ -25,7 +25,8 @@ public class Duke {
         todo,
         deadline,
         event,
-        delete
+        delete,
+        find
     }
 
     public Duke(String filepath) {
@@ -85,6 +86,9 @@ public class Duke {
                         break;
                     case delete:
                         ui.deleteMessage(tasks, tasks.delete(userParse));
+                        break;
+                    case find:
+                        ui.findMessage(tasks.find(userParse));
                         break;
                 }
                 storage.write(tasks);

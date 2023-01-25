@@ -70,4 +70,17 @@ public class Ui {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Found or not found matching tasks message.
+     *
+     * @param tasks The temporary TaskList for the find.
+     */
+    public void findMessage(TaskList tasks) {
+        if (tasks.tasksList.isEmpty()) {
+            System.out.println("Sorry! There are no matching tasks in your list.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            list(tasks);
+        }
+    }
 }
