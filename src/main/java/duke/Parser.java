@@ -1,9 +1,7 @@
 package duke;
 import duke.command.*;
 
-/**
- * Parser class deals with making sense of the user command.
- */
+
 public class Parser {
     public enum Commands {
         bye,
@@ -16,12 +14,6 @@ public class Parser {
         delete
     }
 
-    /**
-     * The parse method creates new commands.
-     * @param inputCommand Input command from the user.
-     * @return Command that corresponds to the user input.
-     * @throws DukeException If the user input cannot be recognised.
-     */
     public static Command parse(String inputCommand) throws DukeException {
         try {
             String[] splitString = inputCommand.split(" ", 2);
