@@ -16,7 +16,8 @@ public class Duke {
         greeting(greeting);
         //memory store = new memory();
         TaskList manager = new TaskList("/Users/s.f/ip/src/Data/duke.txt");
-
+        //testing branches
+        ///committing at new branch
         loop:
         while (true) {
             String input = sc.nextLine();
