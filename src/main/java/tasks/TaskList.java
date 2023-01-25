@@ -1,6 +1,9 @@
 package tasks;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static ui.Ui.LS;
 
 public class TaskList {
@@ -32,6 +35,16 @@ public class TaskList {
             formattedList += pos + ". " + t + LS;
         }
         return formattedList.trim();
+    }
+    public String findList(String s) {
+        String matchList = "";
+        for (Object t : this.tasks) {
+            if (t.toString().contains(s)) {
+                int pos = this.tasks.indexOf(t) + 1;
+                matchList += pos + ". " + t + LS;
+            }
+        }
+        return matchList.trim();
     }
     public String numTasksMsg() {
         return "Now you have " + this.tasks.size() + " tasks in the list.";

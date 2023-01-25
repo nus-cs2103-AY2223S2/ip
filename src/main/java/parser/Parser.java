@@ -29,6 +29,11 @@ public class Parser {
                 throw CommandType.DELETE.getErr();
             }
             return new DeleteCommand(arr[1]);
+        } else if (commandType.equals(CommandType.FIND.toString())) {
+            if (arr.length == 1) {
+                throw CommandType.FIND.getErr();
+            }
+            return new FindCommand(arr[1]);
         } else if (commandType.equals(CommandType.TODO.toString())) {
             if (arr.length == 1) {
                 throw CommandType.TODO.getErr();

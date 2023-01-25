@@ -11,6 +11,7 @@ public enum CommandType {
     MARK("mark", new DukeException("Invalid format for mark." + LS + "Usage: mark <number>")),
     UNMARK("unmark", new DukeException("Invalid format for unmark." + LS + "Usage: unmark <number>")),
     DELETE("delete", new DukeException("Invalid format for delete." + LS + "Usage: delete <number>")),
+    FIND("find", new DukeException("Invalid format for find." + LS + "Usage: find <string>")),
     TODO("todo", new DukeException("Invalid format for todo." + LS + "Usage: todo <task>")),
     DEADLINE("deadline", new DukeException("Invalid format for Deadline." + LS + "Usage: deadline <task> /by <" + DATE_TIME_FORMAT + ">")),
     EVENT("event", new DukeException("Invalid format for Event." + LS + "Usage: <task> /from <" + DATE_TIME_FORMAT +"> /to <" + DATE_TIME_FORMAT + ">")),
