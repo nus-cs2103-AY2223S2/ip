@@ -9,12 +9,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class Storage {
-    final String SAVE_FOLDER;
     final String SAVE_PATH;
 
-    Storage(String SAVE_FOLDER) {
-        this.SAVE_FOLDER = SAVE_FOLDER;
-        SAVE_PATH = SAVE_FOLDER + "/save.txt";
+    Storage(String SAVE_PATH) {
+        this.SAVE_PATH = SAVE_PATH;
     }
 
     /**
@@ -23,10 +21,7 @@ public class Storage {
      * @param list TaskList to be stored
      */
     void store(TaskList list) {
-        File dir = new File(SAVE_FOLDER);
-        if (!dir.exists()) {
-            boolean ignored = dir.mkdir();
-        }
+        boolean ignored = new File(SAVE_PATH).getParentFile().mkdirs();
         try (FileOutputStream fw = new FileOutputStream(SAVE_PATH); ObjectOutputStream out = new ObjectOutputStream(
                 fw)) {
             out.writeObject(list);

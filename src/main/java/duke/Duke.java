@@ -2,7 +2,7 @@ package duke;
 
 public class Duke {
     public static void main(String[] args) {
-        String SAVE_FOLDER = "data";
+        String SAVE_FOLDER = "data/save.txt";
 
         Ui ui = new Ui();
         Storage storage = new Storage(SAVE_FOLDER);
