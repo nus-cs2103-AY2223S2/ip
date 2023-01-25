@@ -7,12 +7,11 @@ public class Parser {
 
     Parser() {
         this.taskList = new TaskList();
-        this.counter = 0;
     }
 
     void parseCommand(String originalString) throws NeroException {
         String[] input = originalString.split(" ");
-        switch (Enum.valueOf(Types.class, input[0])) {
+        switch (Enum.valueOf(Types.class, input[0].toUpperCase())) {
             case BYE:
                 System.out.println("Bye. Hope to see you again soon!" + "\n");
                 break;
@@ -21,18 +20,27 @@ public class Parser {
                 taskList.printTasks();
                 break;
             case MARK: {
-                int taskToMark = Integer.parseInt(input[1]) - 1;
-                Task currTask = taskList.get(taskToMark);
-                currTask.markAsDone();
-                System.out.println("Great job on completing this task! " + "\n" + currTask.currToPrint());
-                break;
+                try {
+                    int taskToMark = Integer.parseInt(input[1]) - 1;
+                    Task currTask = taskList.get(taskToMark);
+                    currTask.markAsDone();
+                    System.out.println("Great job on completing this task! " + "\n" + currTask.currToPrint());
+                    break;
+                } catch (IndexOutOfBoundsException e) {
+                    throw new NeroException("Please add the correct index from 0 to " + taskList.getSize());
+                }
             }
             case UNMARK: {
-                int taskToUnmark = Integer.parseInt(input[1]) - 1;
-                Task currTask = taskList.get(taskToUnmark);
-                currTask.markAsUndone();
-                System.out.println("Remember to complete this task!! " + "\n" + currTask.currToPrint());
-                break;
+                try {
+                    int taskToUnmark = Integer.parseInt(input[1]) - 1;
+                    Task currTask = taskList.get(taskToUnmark);
+                    currTask.markAsUndone();
+                    System.out.println("Remember to complete this task!! " + "\n" + currTask.currToPrint());
+                    break;
+                }
+                catch (IndexOutOfBoundsException e) {
+                    throw new NeroException("Please add the correct index from 0 to " + taskList.getSize());
+                }
             }
             case TODO:
                 int index = originalString.indexOf("todo");
@@ -40,11 +48,10 @@ public class Parser {
                     String toAdd = originalString.substring(index + 5);
                     Task newTask = new ToDo(toAdd);
                     taskList.addTask(newTask);
-                    counter++;
-                    System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + counter +
+                    System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + taskList.getSize() +
                             " tasks in the list!" + "\n");
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Description of a todo cannot be empty!!!");
+                    throw new NeroException("Description of a todo cannot be empty!!!");
                 }
                 break;
             case DEADLINE:
@@ -54,8 +61,7 @@ public class Parser {
                     String duration = splitString[1].replace("by", "by:");
                     Task newTask = new Deadline(description, duration);
                     taskList.addTask(newTask);
-                    counter++;
-                    System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + counter +
+                    System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + taskList.getSize() +
                             " tasks in the list!" + "\n");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Please add a task description and deadline!!!");
@@ -68,8 +74,7 @@ public class Parser {
                     String duration = splitString[1].replace("from", "from:") + splitString[2].replace("to", "to:");
                     Task newTask = new Event(description, duration);
                     taskList.addTask(newTask);
-                    counter++;
-                    System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + counter +
+                    System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.currToPrint() + "\n" + "Now you have " + taskList.getSize() +
                             " tasks in the list!" + "\n");
                 } catch (IndexOutOfBoundsException e) {
                     throw new NeroException("Please add a task description, from and to date!!!");
@@ -80,8 +85,7 @@ public class Parser {
                     int toDelete = Integer.parseInt(input[1]) - 1;
                     Task removedTask = taskList.get(toDelete);
                     taskList.removeTask(toDelete);
-                    counter--;
-                    System.out.println("Alright, let me remove this task..." + "\n" + removedTask.currToPrint() + "\n" + "Now you have " + counter +
+                    System.out.println("Alright, let me remove this task..." + "\n" + removedTask.currToPrint() + "\n" + "Now you have " + taskList.getSize() +
                             " tasks in the list!" + "\n");
                 } catch (IndexOutOfBoundsException e) {
                     throw new NeroException("Please add a correct task number");

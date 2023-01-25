@@ -29,4 +29,8 @@ public class TaskList<Task> {
             System.out.println(taskList.get(i));
         }
     }
+
+    int getSize() {
+        return taskList.size();
+    }
 }
