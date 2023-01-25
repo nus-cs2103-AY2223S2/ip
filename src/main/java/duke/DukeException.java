@@ -1,3 +1,5 @@
+package duke;
+
 // Reference: https://www.baeldung.com/java-new-custom-exception
 
 public class DukeException extends Exception {
