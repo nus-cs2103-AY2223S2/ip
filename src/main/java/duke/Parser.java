@@ -5,11 +5,8 @@ import java.util.Arrays;
 
 public class Parser {
     public static boolean checkDescription(String[] splitInput) {
-
         return splitInput.length < 2;
     }
-
-
 
     public static LocalDate getDate(String[] splitInput) {
         if (splitInput.length >= 4) {

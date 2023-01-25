@@ -12,10 +12,9 @@ public class UI {
 
     public void run(Parser parser, TaskList toDoList, Storage storage) {
         while (true) {
-            
+
             String input = reader.nextLine();
-            
-            
+
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println("________________________________");
