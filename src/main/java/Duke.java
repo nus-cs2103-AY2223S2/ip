@@ -29,7 +29,7 @@ public class Duke {
                 taskCounter = loadSaved(saveFile.nextLine(), tasks, taskCounter);
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("    No saved data not found, will be created");
+            System.out.println("    No saved data not found, new file will be created");
             try {
                 file.createNewFile();
             } catch (IOException e) {
