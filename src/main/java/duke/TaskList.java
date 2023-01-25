@@ -82,9 +82,8 @@ public class TaskList {
             return "";
         }
         StringBuilder result = new StringBuilder();
-        String encodedTask;
         for (int i = 0; i < getLength(); i++) {
-            encodedTask = taskList.get(i).toEncodedString();
+            String encodedTask = taskList.get(i).toEncodedString();
             result.append(i + 1).append(".").append(encodedTask).append("\n");
         }
         if (result.length() > 0) {
