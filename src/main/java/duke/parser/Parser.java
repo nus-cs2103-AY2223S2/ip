@@ -38,7 +38,7 @@ public class Parser {
 
     public Command parseMark(String[] commandArr) throws DukeException {
         if (commandArr.length <= 1) {
-            throw new DukeException(Ui.wrapLines("Please enter a index to mark"));
+            throw new DukeException(Ui.wrapLines("Please enter a index to mark."));
         }
         int id = Integer.parseInt(commandArr[1]);
         if (id > data.len() || id < 0) {
@@ -49,7 +49,7 @@ public class Parser {
 
     public Command parseUnmark(String[] commandArr) throws DukeException {
         if (commandArr.length <= 1) {
-            throw new DukeException(Ui.wrapLines("Please enter a index to mark"));
+            throw new DukeException(Ui.wrapLines("Please enter a index to unmark."));
         }
         int id = Integer.parseInt(commandArr[1]);
         if (id > data.len() || id < 0) {
@@ -98,7 +98,7 @@ public class Parser {
 
     public Command parseDelete(String[] commandArr) throws DukeException {
         if (commandArr.length <= 1) {
-            throw new DukeException(Ui.wrapLines("Please enter a index to delete"));
+            throw new DukeException(Ui.wrapLines("Please enter a index to delete."));
         }
         int id = Integer.parseInt(commandArr[1]);
         if (id > data.len() || id < 0) {
