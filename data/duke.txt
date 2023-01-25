@@ -1,0 +1,3 @@
+E |   | read book 3 | Sunday 1pm | Monday 2pm
+D | X | read book 2 | Sunday 1pm
+T |   | read book 1

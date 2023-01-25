@@ -14,7 +14,7 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
-
+    
     public void setDone() {
         this.isDone = true;
         System.out.println(doneTaskString + "\n" + this);
@@ -23,6 +23,18 @@ public class Task {
     public void setUndone() {
         this.isDone = false;
         System.out.println(undoneTaskString + "\n" + this);
+    }
+
+    public void setDoneQuiet() {
+        this.isDone = true;
+    }
+
+    public void setUndoneQuiet() {
+        this.isDone = false;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     @Override

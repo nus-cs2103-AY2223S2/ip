@@ -35,9 +35,15 @@ public class Duke {
     }
 
     public static void main(String[] args) throws IOException {
+        File f = new File("data/duke.txt");
+        if (!f.exists()) {
+            new File("data").mkdir();
+            f.createNewFile();
+        }
+        readFromDatabase(f);
+
         System.out.println(outlinesString + "\n" + introductionString + "\n" + outlinesString);
         boolean continueConvo = true;
-
         while (continueConvo) {
             String input = br.readLine();
             System.out.println(outlinesString);
@@ -48,7 +54,12 @@ public class Duke {
             } 
             System.out.println(outlinesString + "\n");
         }
+
+        FileWriter fw = new FileWriter(f, false);
+        fw.write(databaseToString());
+
         br.close();
+        fw.close();
     }
 
     private static boolean handleMessage(String message) {
@@ -57,7 +68,8 @@ public class Duke {
         switch (command) {
             case list: read();
                 break;
-            case bye: return endConvo();
+            case bye: endConvo();
+                return false;
             case mark: markTask(message);
                 break;
             case unmark: unmarkTask(message);
@@ -93,9 +105,8 @@ public class Duke {
         System.out.println(deleteTaskString + "\n" + task + "\n" +  "Now you have " + db.size() + " tasks in the list");
     }
 
-    private static boolean endConvo() {
+    private static void endConvo() {
         System.out.println(farewellString);
-        return false;
     }
 
     private static void markTask(String message) {
@@ -134,5 +145,47 @@ public class Duke {
         temp = temp[1].split(" /to ");
         Event event = new Event(description, temp[0], temp[1]); 
         update(event);
+    }
+
+    private static void readFromDatabase(File f) throws IOException {
+        BufferedReader br_file = new BufferedReader(new FileReader(f));
+        String input;
+        while ((input = br_file.readLine()) != null) {
+            String[] temp = input.split(" \\| ");
+            Task task;
+            if (temp[0].equals("T")) { task = new ToDo(temp[2]); }
+            else if (temp[0].equals("D")) { task = new Deadline(temp[2], temp[3]); }
+            else { task = new Event(temp[2], temp[3], temp[4]); }
+
+            if (temp[1].equals("X")){ task.setDoneQuiet(); }
+            db.add(task);
+        }
+        br_file.close();
+    }
+
+    private static String databaseToString() {
+        StringBuilder sb = new StringBuilder();
+        for (Task task: db) {
+            if (task instanceof ToDo) {
+                sb.append("T");
+            } else if (task instanceof Deadline) {
+                sb.append("D");
+            } else if (task instanceof Event) {
+                sb.append("E");
+            }
+
+            sb.append(" | ").append(task.getStatusIcon()).append(" | ").append(task.getDescription());
+
+            if (task instanceof Deadline) {
+                Deadline temp = (Deadline) task;
+                sb.append(" | ").append(temp.getBy());
+            } else if (task instanceof Event) {
+                Event temp = (Event) task;
+                sb.append(" | ").append(temp.getFrom()).append(" | ").append(temp.getTo());
+            }
+
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
