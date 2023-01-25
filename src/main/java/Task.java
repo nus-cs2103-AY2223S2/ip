@@ -7,6 +7,11 @@ public class Task {
         this.done = false;
     }
 
+    public Task(String name, boolean done) {
+        this.name = name;
+        this.done = done;
+    }
+
     public void mark() {
         this.done = true;
     }
@@ -17,13 +22,11 @@ public class Task {
 
     @Override
     public String toString() {
-        String str = "";
-        if(done) {
-            str = str + "[X]";
+        if (done) {
+            return "1" + " | " + this.name;
         } else {
-            str = str + "[ ]";
+            return "0" + " | " + this.name;
         }
-        return str + " " + this.name;
     }
 
     @Override

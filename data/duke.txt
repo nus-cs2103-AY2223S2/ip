@@ -1,0 +1,7 @@
+T | 0 | borrow book
+D | 0 | return book | by: by: Sunday
+E | 0 | project meeting | from: from: Mon 2pm | to: to: 4pm
+T | 0 | run
+T | 0 | eat
+E | 0 | see stars | from: Tues | to: Wed
+D | 0 | buying food | by: tonight

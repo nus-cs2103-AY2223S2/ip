@@ -1,11 +1,15 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.regex.Pattern;
 
 public class Duke {
+    static String STR = "------------------------------------------------------------";
     static ArrayList<Task> arr = new ArrayList<Task>();
-    static String str = "------------------------------------------------------------";
-
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -15,19 +19,59 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        try {
+            File f = new File("./data/duke.txt");
+            Scanner scannerOne = new Scanner(f);
+            while(scannerOne.hasNextLine()) {
+                String[] parts = scannerOne.nextLine().split(Pattern.quote(" | "));
+                switch (parts[0]) {
+                    case "T":
+                        arr.add(new Todo(parts[2], Boolean.parseBoolean(parts[1])));
+                        break;
+                    case "D":
+                        arr.add(new Deadline(parts[2], Boolean.parseBoolean(parts[1]), parts[3]));
+                        break;
+                    case "E":
+                        arr.add(new Event(parts[2], Boolean.parseBoolean(parts[1]), parts[3], parts[4]));
+                        break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Previous Memory could not be loaded!");
+        } finally {
+            System.out.println("Your list has been loaded!");
+            list();
+        }
+
         printResponse("Hello! I'm Duke\n" + "What can I do for you?");
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scannerTwo = new Scanner(System.in);
         while (true) {
             try {
-                String input = scanner.nextLine();
+                String input = scannerTwo.nextLine();
                 String[] arrStr = input.split(" ", 2);
                 String command = arrStr[0];
 
                 if (command.equals("bye")) {
-                    // Bye - exit program
-                    printResponse("Bye. Hope to see you again soon!");
-                    break;
+                    // Bye - Save and Exit Program
+                    String str = "";
+                    for(int i = 0 ; i < arr.size(); i++) {
+                        if(str.isEmpty()) {
+                            str = str + arr.get(i);
+                        } else {
+                            str = str + "\n" + arr.get(i);
+                        }
+                    }
+                    try {
+                        FileWriter fw = new FileWriter("./data/duke.txt");
+                        fw.write(str);
+                        fw.close();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Sorry, memory cannot be saved!");
+                    } finally {
+                        printResponse("Bye. Hope to see you again soon!");
+                        break;
+                    }
                 } else if (command.equals("list")) {
                     // List = print list of task
                     list();
@@ -88,9 +132,9 @@ public class Duke {
     }
 
     public static void printResponse(String response) {
-        System.out.println(str);
+        System.out.println(STR);
         System.out.println(response);
-        System.out.println(str);
+        System.out.println(STR);
     }
 
     public static void add(String response, char type) throws ArrayIndexOutOfBoundsException {
