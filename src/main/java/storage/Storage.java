@@ -10,11 +10,18 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+/**
+ * Storage class that contains file for data to be read from.
+ */
 public class Storage {
     private File storageFile;
     public Storage(String filePath) {
         this.storageFile = makeFile(filePath);
     }
+
+    /**
+     * Creates file at the specified file path if it does not exist.
+     */
     private File makeFile(String filePath) {
         File f = new File(filePath);
         f.getParentFile().mkdirs();
@@ -25,7 +32,13 @@ public class Storage {
         }
         return f;
     }
+
     //Solution below adapted from https://stackoverflow.com/questions/1377279/find-a-line-in-a-file-and-remove-it
+
+    /**
+     * Deletes a line from storage text file.
+     * @param line
+     */
     private void deleteLine(String line) {
         File tempFile = new File("temp.txt");
         try {
@@ -56,6 +69,12 @@ public class Storage {
         }
         tempFile.renameTo(this.storageFile);
     }
+
+    /**
+     * Modifies a line in storage text file.
+     * @param line Line to be modified.
+     * @param newLine Line to be modified into.
+     */
     private void modifyLine(String line, String newLine) {
         File tempFile = new File("temp.txt");
         try {
@@ -87,6 +106,11 @@ public class Storage {
         }
         tempFile.renameTo(this.storageFile);
     }
+
+    /**
+     * Add a line of text to storage text file.
+     * @param text Line of text to be added.
+     */
     private void appendToFile(String text){
         try {
             FileWriter fw = new FileWriter(this.storageFile, true); // create a FileWriter in append mode
@@ -96,6 +120,10 @@ public class Storage {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Loads list of tasks from storage text file.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> userTasks = new ArrayList<>();
         if (this.storageFile.exists()) {
@@ -140,12 +168,24 @@ public class Storage {
             return userTasks;
         }
     }
+
+    /**
+     * Adds a task to storage text file.
+     */
     public void addTask(String taskText) {
         appendToFile(taskText);
     }
+
+    /**
+     * Modifies a task in storage text file.
+     */
     public void modifyTask(String oldText, String newText) {
         modifyLine(oldText, newText);
     }
+
+    /**
+     * Deletes a task in storage text file.
+     */
     public void deleteTask(String taskText) {
         deleteLine(taskText);
     }

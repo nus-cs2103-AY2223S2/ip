@@ -4,10 +4,21 @@ import parser.Parser;
 import storage.Storage;
 import tasks.*;
 import ui.Ui;
+
+/**
+ * Duke class that runs main chatbot logic.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Creates Duke object and populate field values from a file if it exists,
+     * otherwise create Duke object with default field values.
+     *
+     * @param filePath Path of the file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +29,10 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Starts the main logic of Duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -35,6 +50,10 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * The main entry point to the application.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
