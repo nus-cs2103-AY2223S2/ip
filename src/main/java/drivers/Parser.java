@@ -58,6 +58,10 @@ public class Parser {
                     l.delete(Integer.parseInt(parts[1]));
                     return true;
 
+                case find:
+                    l.find(parts[1]);
+                    return true;
+
                 default:
                     System.out.println("Something has gone wrong!");
                     return false;
