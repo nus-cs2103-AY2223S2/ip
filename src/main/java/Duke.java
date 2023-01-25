@@ -3,9 +3,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Duke {
 
@@ -113,11 +117,20 @@ public class Duke {
                 String[] taskInfo = currentLine.split(",");
 
                 if (taskInfo[0].compareTo("T") == 0)
-                    taskList.add(new Todo(Boolean.parseBoolean(taskInfo[1]), taskInfo[2]));
+                    taskList.add(new Todo(
+                            Boolean.parseBoolean(taskInfo[1]),
+                            taskInfo[2]));
                 if (taskInfo[0].compareTo("D") == 0)
-                    taskList.add(new Deadline(Boolean.parseBoolean(taskInfo[1]), taskInfo[2], taskInfo[3]));
+                    taskList.add(new Deadline(
+                            Boolean.parseBoolean(taskInfo[1]),
+                            taskInfo[2],
+                            Duke.parseDateTime(taskInfo[3], 'T')));
                 if (taskInfo[0].compareTo("E") == 0)
-                    taskList.add(new Event(Boolean.parseBoolean(taskInfo[1]), taskInfo[2], taskInfo[3], taskInfo[4]));
+                    taskList.add(new Event(
+                            Boolean.parseBoolean(taskInfo[1]),
+                            taskInfo[2],
+                            Duke.parseDateTime(taskInfo[3], 'T'),
+                            Duke.parseDateTime(taskInfo[4], 'T')));
             }
 
 
@@ -188,6 +201,44 @@ public class Duke {
         return State.UNKNOWN;
     }
 
+    // parse format is "YYYY-MM-DD"
+    // TODO: need to catch exceptions
+    private static LocalDate parseDate(String dateStr) {
+        //*
+        return LocalDate.parse(dateStr); //fixed to "-" seperator
+        /*/
+        String[] date = dateStr.split("/"); // can also use "-" or other seperator
+        int[] dateInfo = Stream.of(date).mapToInt(Integer::parseInt).toArray();
+        return LocalDate.of(dateInfo[0], dateInfo[1], dateInfo[2]);
+        /**/
+    }
+
+    // Can parse "HH:MM:SS" or "HH:MM"
+    // TODO: need to catch exceptions
+    private static LocalTime parseTime(String timeStr) {
+        //*
+        return LocalTime.parse(timeStr);
+        /*/
+        String[] time = timeStr.split(":");
+        int[] timeInfo = Stream.of(time).mapToInt(Integer::parseInt).toArray();
+        if (timeInfo.length == 2)
+            return LocalTime.of(timeInfo[0], timeInfo[1]);
+        else
+            return LocalTime.of(timeInfo[0], timeInfo[1], timeInfo[2]);
+        /**/
+    }
+
+    // Can parse "YYYY-MM-DD HH:MM:SS" or "YYYY-MM-DD HH:MM"
+    private static LocalDateTime parseDateTime(String str) {
+        String[] s = str.split(" ");
+        return LocalDateTime.of(parseDate(s[0]), parseTime(s[1]));
+    }
+
+    private static LocalDateTime parseDateTime(String str, char seperator) {
+        String[] s = str.split(String.valueOf(seperator));
+        return LocalDateTime.of(parseDate(s[0]), parseTime(s[1]));
+    }
+
     public static void main(String[] args) {
 
         Duke.displayLogo();
@@ -244,7 +295,7 @@ public class Duke {
                         Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
                         Duke.assertThis(!duedate.isEmpty(), "Due date cannot be empty.");
 
-                        duke.addNewTask(new Deadline(taskDescription, duedate));
+                        duke.addNewTask(new Deadline(taskDescription, Duke.parseDateTime(duedate)));
                         break;
 
                     case EVENT:
@@ -265,7 +316,11 @@ public class Duke {
                         Duke.assertThis(!start.isEmpty(), "Start date/time cannot be empty.");
                         Duke.assertThis(!end.isEmpty(), "End date/time cannot be empty.");
 
-                        duke.addNewTask(new Event(taskDescription, start, end));
+                        duke.addNewTask(new Event(
+                                taskDescription,
+                                Duke.parseDateTime(start),
+                                Duke.parseDateTime(end))
+                        );
                         break;
 
                     case LIST:
