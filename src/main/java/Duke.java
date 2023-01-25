@@ -17,13 +17,21 @@ public class Duke {
       while (true) {
         try {
           String input = userInput.nextLine();
+          
+          //Check for empty input (pressing enter)
           if (input == "") {
             throw new EmptyInputException();
           }
+          String[] inputArr = input.split(" ", 2);
+          //Check for invalid commands (first word)
+          boolean validCommand = commandList.contains(inputArr[0]);
+          if (!validCommand) {
+            throw new InvalidCommandException();
+          }
           handleInput(input, records);
-        }catch (EmptyInputException exception) {
-          System.out.println("Empty input detected, please enter a value.");
-          break;
+        }catch (EmptyInputException | InvalidCommandException exception) {
+          System.out.println("Input Error, please input a command within the list:" +
+                  "todo, deadline, event, mark, unmark, list, delete, bye/");
         }
       }
   }
