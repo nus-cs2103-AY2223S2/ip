@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +15,6 @@ public class ToDoList {
         System.out.println("\tTasks for Tony Stark:");
         System.out.println("\t--------------------------");
         for (int i = 0; i < count; i++) {
-            /*
-            System.out.println("\t" + (i + 1) + "." +
-                    todolist[i].printTask());
-             */
             System.out.println("\t" + (i + 1) + "." +
                     todolist.get(i).printTask());
         }
@@ -47,8 +44,33 @@ public class ToDoList {
         System.out.println("\t--------------------------");
     }
 
+    // deadline parsed timing
+    public void add(String task, LocalDate time) {
+        Task t = new Deadline(count, task, time);
+        //todolist[count] = t;
+        todolist.add(count, t);
+        count++;
+        System.out.println("\t--------------------------");
+        System.out.println("\tI have added task: " + t.getTask());
+        System.out.println("\tDue: " + time);
+        System.out.println("\t--------------------------");
+    }
+
     // event
     public void add(String task, String startTime, String endTime) {
+        Task t = new Event(count, task, startTime, endTime);
+        //todolist[count] = t;
+        todolist.add(count, t);
+        count++;
+        System.out.println("\t--------------------------");
+        System.out.println("\tI have added task: " + t.getTask());
+        System.out.println("\tStarts: " + startTime);
+        System.out.println("\tEnds: " + endTime);
+        System.out.println("\t--------------------------");
+    }
+
+    // event parsed timing
+    public void add(String task, LocalDate startTime, LocalDate endTime) {
         Task t = new Event(count, task, startTime, endTime);
         //todolist[count] = t;
         todolist.add(count, t);
