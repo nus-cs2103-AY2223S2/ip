@@ -1,3 +1,5 @@
+package command;
+
 import collections.TaskList;
 import exceptions.SaturdayException;
 import models.Deadline;
@@ -133,9 +135,7 @@ public enum Command {
     },
     BYE("bye") {
         @Override
-        public void execute(TaskList taskList, String args) {
-            Saturday.exit();
-        }
+        public void execute(TaskList taskList, String args) {}
     };
 
     private final String command;

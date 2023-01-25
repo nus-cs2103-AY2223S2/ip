@@ -1,4 +1,5 @@
 import collections.TaskList;
+import command.Command;
 import exceptions.SaturdayException;
 import utilities.Storage;
 import utilities.Ui;
@@ -25,6 +26,10 @@ public class Saturday {
             Ui.divider();
             try {
                 Command command = Command.getCommand(input);
+                if (command.equals(Command.BYE)) {
+                    isActive = false;
+                    Ui.output("Bye. Hope to see you again soon!");
+                }
                 command.execute(taskList, input);
                 storage.saveTaskList(taskList);
             } catch (SaturdayException e) {
@@ -36,11 +41,6 @@ public class Saturday {
     }
     public static void main(String[] args) {
         new Saturday("data/task_list.txt").run();
-    }
-
-    public static void exit() {
-        isActive = false;
-        Ui.output("Bye. Hope to see you again soon!");
     }
 
 }
