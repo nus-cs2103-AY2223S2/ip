@@ -1,15 +1,16 @@
 package sys;
 
 import command.*;
+
 import task.TaskList;
 
 public class Parser {
-    TaskList tl;
-    Storage storage;
-    Ui ui;
+    private TaskList tasks;
+    private Storage storage;
+    private Ui ui;
 
-    Parser(TaskList tl, Storage storage, Ui ui) {
-        this.tl = tl;
+    Parser(TaskList tasks, Storage storage, Ui ui) {
+        this.tasks = tasks;
         this.storage = storage;
         this.ui = ui;
     };

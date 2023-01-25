@@ -16,8 +16,10 @@ public class Event extends Task{
         this.end = DateTimeHelper.parse(endString);
     }
 
-    public boolean occursOn(LocalDateTime dt) {
-        return dt.equals(this.start) || (dt.isAfter(this.start) && dt.isBefore(this.end)) || dt.equals(this.end);
+    public boolean occursOn(LocalDateTime datetime) {
+        return datetime.equals(this.start)
+                || (datetime.isAfter(this.start) && datetime.isBefore(this.end))
+                || datetime.equals(this.end);
     }
 
     Event(String content, boolean done, String startString, String endString) throws InvalidDateFormatException {
@@ -28,6 +30,8 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + DateTimeHelper.stringify(this.start) + " to: " + DateTimeHelper.stringify(this.end) + ")";
+        return "[E]" + super.toString()
+                + " (from: " + DateTimeHelper.stringify(this.start)
+                + " to: " + DateTimeHelper.stringify(this.end) + ")";
     }
 }
