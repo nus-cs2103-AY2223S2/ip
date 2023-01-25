@@ -1,13 +1,20 @@
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+/**
+ * Class that defines the Duke task list manager
+ */
 public class Duke {
 
-    // Attributes
+    /** Array of tasks */
     private static ArrayList<Task> taskList = new ArrayList<>();
+    /** Number of tasks in list */
     private static int listIndex = 0;
 
-    // Methods
+    /**
+     * Prints greeting text
+     */
     public static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,12 +25,20 @@ public class Duke {
         System.out.println("How may I help you today?\n");
     }
 
+    /**
+     * Prints the user's input
+     */
     public static void echo(String userInput) {
         System.out.println("> Duke's response:");
         System.out.println(userInput);
         System.out.println("--------------------------------\n");
     }
 
+    /**
+     * Adds a task to the taskList.
+     *
+     * @param listItem Task to be added to taskList
+     */
     public static void addToList(Task listItem) {
         taskList.add(listItem);
         listIndex++;
@@ -34,6 +49,11 @@ public class Duke {
         System.out.println("--------------------------------\n");
     }
 
+    /**
+     * Removes the task at a specified position in taskList
+     *
+     * @param pos Position in taskList at which the task to be removed is stored
+     */
     public static void removeFromList(int pos) {
         Task curr = taskList.remove(pos - 1);
         listIndex--;
@@ -44,6 +64,9 @@ public class Duke {
         System.out.println("--------------------------------\n");
     }
 
+    /**
+     * Prints the contents of the taskList
+     */
     public static void displayList() {
         int pos = 0;
         System.out.println("Here are the tasks in your list:");
@@ -54,16 +77,31 @@ public class Duke {
         System.out.println("End of list!\n");
     }
 
+    /**
+     * Throws an exception
+     *
+     * @param exceptionType Describes the type of DukeException to be thrown
+     * @throws DukeException If input is invalid
+     */
     public static void throwException(String exceptionType) throws DukeException {
         throw new DukeException(exceptionType);
     }
 
+    /**
+     * Prints exit message
+     */
     public static void exit() {
         System.out.println("> Duke's response:");
         System.out.println("Bye. Hope to see you again!");
         System.out.println("--------------------------------\n");
     }
 
+    /**
+     * Greets user, awaits user input and updates/displays taskList accordingly.
+     *
+     * @param args Commands from user, to interact with taskList
+     * @return Output based on user's input command
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         greet();
@@ -137,7 +175,7 @@ public class Duke {
                 // Else create and add task to list
                 else {
                     try {
-                        addToList(new Task(0));
+                        addToList(new Task());
                     }
                     catch (DukeException de){
                         System.out.println(de.toString());

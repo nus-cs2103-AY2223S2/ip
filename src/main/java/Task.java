@@ -1,15 +1,28 @@
+/**
+ * Class that defines the Task object
+ */
 public class Task {
-    // Attributes:
+    /** Whether the task is completed or not */
     protected boolean isCompleted = false;
+    /** Description of the task */
     protected String title;
 
-    // Constructor:
+    /**
+     * Default constructor for Task objects
+     *
+     * @param title specifies the description of this task object
+     */
     public Task(String title) {
         this.isCompleted = false;
         this.title = title;
     }
 
-    public Task(int x) throws DukeException {
+    /**
+     *Constructor for invalid input that throws general DukeException
+     *
+     * @throws DukeException
+     */
+    public Task() throws DukeException {
         throw new DukeException();
     }
 

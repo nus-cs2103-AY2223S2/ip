@@ -1,16 +1,21 @@
+/**
+ * Class that defines the Deadline type of tasks
+ */
 public class Deadline extends Task {
 
-    // Attributes:
+    /** The end date of this deadline object */
     protected String byDate;
 
-    // Constructor:
+    /**
+     * Constructor for objects of type Deadline
+     *
+     * @param userInput specifies the byDate and title of a Deadline object
+     */
     public Deadline(String userInput) {
-        // use if-else and string.contains to check if this doesn't work
-        super(userInput.substring(9, userInput.indexOf("/by ") - 1)); // title
-        this.byDate = userInput.substring(userInput.indexOf("/by ") + 4); // due date
+        super(userInput.substring(9, userInput.indexOf("/by ") - 1));
+        this.byDate = userInput.substring(userInput.indexOf("/by ") + 4);
     }
 
-    // Methods:
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + byDate + ")";

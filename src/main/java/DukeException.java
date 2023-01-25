@@ -1,8 +1,15 @@
+/**
+ * Class that defines types of excpetions specific to Duke
+ */
 public class DukeException extends IllegalArgumentException {
-    // Attributes
-    String message;
 
-    // Error with incomplete command for todos, deadlines and events
+    /** Error message to be displayed when a DukeException is thrown*/
+    private String message;
+
+    /**
+     * Constructor for DukeException
+     * @param taskType Specifies the type of error in user input
+     */
     DukeException(String taskType) {
         if (taskType.equals("todo")) {
             message = "OOPS!! This is an invalid todo task.\n" +
@@ -19,7 +26,9 @@ public class DukeException extends IllegalArgumentException {
         }
     }
 
-    // Error with invalid command (only accept todos, deadlines and events)
+    /**
+     * Default constructor for non-specific cases of exception
+     */
     DukeException() {
         message = "OOPS!! I'm sorry, I don't know what that means :(";
     }
