@@ -11,6 +11,11 @@ public class Task {
 		return (isDone ? "X" : " "); // mark done task with X
 	}
 	
+	public String getDescription() {
+		return description; 
+	}
+	
+	
 	public void markTask(boolean b) {
 		isDone = b;
 	}
@@ -18,7 +23,7 @@ public class Task {
 	
 	@Override
 	public String toString() {
-		return description; // mark done task with X
+		return "[" + getStatusIcon() + "] " + description; // mark done task with X
 	}
 
 }

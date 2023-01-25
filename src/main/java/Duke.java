@@ -1,25 +1,27 @@
 import java.util.Scanner; 
 import java.util.ArrayList; 
+import java.util.List; 
+import java.util.Arrays; 
 public class Duke {
 	private static ArrayList<Task> list;
 	
 	public Duke() {
-		this.list = new ArrayList<Task>();	
+		this.list = new ArrayList<>();	
 	}
 
 	private static void line(int l) {
 		System.out.print('\n');
-		for (int i =0; i < l; i++) {	
+		for (int i =0; i < l + 15; i++) {	
 			System.out.print('_');
 		}
-			System.out.print('\n');
+		System.out.print('\n');
 	}	
 
 	private static void showList() {
 		int j = 0;
 		for (Task i: list) {
 			j++;
-			System.out.println(String.valueOf(j) + ". " + "["+i.getStatusIcon() +"] "  + i);
+			System.out.println(String.valueOf(j) + ". " + i);
 		}
 	}	
 	
@@ -27,12 +29,13 @@ public class Duke {
 		int index = i - 1;
 		list.get(index).markTask(b);
 		System.out.println("Marked/Unmarked the task, task is in the state:");
-		System.out.println("  " + "["+list.get(index).getStatusIcon() +"] "+ list.get(index));
+		System.out.print("  " + list.get(index));
 	}	
 	
-	private static void addList(String item) {
-		list.add(new Task(item));	
-		System.out.print("added: " + item);
+	private static void addList(Task task) {
+		list.add(task);	
+		System.out.println("added: " + task.getDescription());
+		System.out.print("You have: " + list.size() + " task(s)");
 	}	
 	
 
@@ -57,20 +60,53 @@ public class Duke {
 		}
 		
 		line(in.length());
-		String[] parm = in.split("\\s+");
-		
-		switch(parm[0]) {
+		String[] parmArr = in.split("\\s+");
+		List<String> parm = Arrays.asList(parmArr);	
+		switch(parm.get(0)){
 			case "list":
 				showList();
 				break;
+			case "deadline":
+					//find the /by keyword
+					int byIndex = parm.indexOf("/by");
+					List<String> l = parm.subList(1, byIndex);
+					String description = String.join(" ", l);
+					l = parm.subList(byIndex + 1, parm.size());
+					String deadline = String.join(" ", l);
+					addList(new Deadline(description,deadline));
+					
+				break;
+			case "todo":
+					l = parm.subList(1, parm.size());
+					description = String.join(" ", l);
+					addList(new Todo(description));
+					
+				break;
+
+			case "event":
+					int fromIndex = parm.indexOf("/from");
+					byIndex = parm.indexOf("/to");
+					l = parm.subList(1, fromIndex);
+					description = String.join(" ", l);
+
+					List<String> f = parm.subList(fromIndex + 1, byIndex);
+					String fDescription = String.join(" ", f);
+
+					List<String> t = parm.subList(byIndex + 1, parm.size());
+					String tDescription =  String.join(" ", l);
+					tDescription = String.join(" ", t);
+					addList(new Event(description, fDescription, tDescription));
+					
+				break;
+
 			case "mark":
-				markTask(Integer.parseInt(parm[1]), true);
+				markTask(Integer.parseInt(parm.get(1)), true);
 				break;
 			case "unmark":
-				markTask(Integer.parseInt(parm[1]), false);
+				markTask(Integer.parseInt(parm.get(1)), false);
 				break;
 			default:
-				addList(in);
+				addList(new Task(in));
 
 		}
 
