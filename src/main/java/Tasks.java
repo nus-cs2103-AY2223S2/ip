@@ -67,6 +67,8 @@ public class Tasks {
                 output.append(task.formatForFile()).append("\n");
             }
             return output.toString();
+        }
+    }
 
     public void filterByDate(String dateOnly) {
         if (l.size() == 0) {
