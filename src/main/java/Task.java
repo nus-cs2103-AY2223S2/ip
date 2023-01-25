@@ -16,6 +16,11 @@ public class Task {
         isDone = false;
     }
 
+    public Task(String name, boolean isDone) {
+        this.taskName = name;
+        this.isDone = isDone;
+    }
+
     /**
      * Mark the task as done
      */

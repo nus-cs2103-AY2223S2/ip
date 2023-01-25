@@ -12,6 +12,10 @@ public class ToDo extends Task {
         super(name);
     }
 
+    public ToDo(String name, boolean isDone) {
+        super(name, isDone);
+    }
+
     /**
      * Returns the string representation of the Todo task, including
      * whether the task is done or not.

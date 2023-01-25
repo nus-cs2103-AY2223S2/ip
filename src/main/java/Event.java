@@ -19,6 +19,12 @@ public class Event extends Task {
         this.end = end;
     }
 
+    public Event(String name, String start, String end, boolean isDone) {
+        super(name, isDone);
+        this.start = start;
+        this.end = end;
+    }
+
     /**
      * Returns the string representation of the Event task, including
      * whether the task is done or not.

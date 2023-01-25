@@ -1,6 +1,9 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
@@ -17,6 +20,8 @@ public class Duke {
 
         arr = new ArrayList<>();
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        FileHandler fh = new FileHandler("data/duke.txt");
+        fh.initialize(arr);
 
         String str;
         while ((str = bf.readLine()) != null) {
@@ -31,16 +36,22 @@ public class Duke {
                 listCommand();
             } else if (str.length() >= 5 && str.toLowerCase().startsWith("mark ")) {
                markCommand(str);
+               fh.load(arr);
             } else if (str.length() >= 6 && str.toLowerCase().startsWith("unmark ")) {
                unmarkCommand(str);
+                fh.load(arr);
             } else if (str.length() >= 5 && str.toLowerCase().startsWith("todo ")) {
                 todoCommand(str);
+                fh.load(arr);
             } else if (str.length() >= 6 && str.toLowerCase().startsWith("event ")) {
                 eventCommand(str);
+                fh.load(arr);
             } else if (str.length() >= 9 && str.toLowerCase().startsWith("deadline ")) {
                 deadlineCommand(str);
+                fh.load(arr);
             } else if (str.length() >= 7 && str.toLowerCase().startsWith("delete ")) {
                 deleteCommand(str);
+                fh.load(arr);
             } else {
                 System.out.println(new InvalidCommandException().getMessage());
             }
