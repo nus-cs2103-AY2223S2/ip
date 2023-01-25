@@ -1,6 +1,5 @@
 package chattime;
 
-
 import java.util.ArrayList;
 
 import chattime.task.Task;

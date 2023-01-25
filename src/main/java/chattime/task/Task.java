@@ -43,6 +43,15 @@ public class Task {
     }
 
     /**
+     * Compares current task's description with the given keyword.
+     *
+     * @return Result of comparison, true if matched, false otherwise.
+     */
+    public boolean isMatchDescription(String keyword) {
+        return description.contains(keyword);
+    }
+
+    /**
      * Sets done status of current task as done.
      */
     public void markAsDone() {

@@ -9,6 +9,7 @@ import chattime.command.AddCommand;
 import chattime.command.ByeCommand;
 import chattime.command.Command;
 import chattime.command.DeleteCommand;
+import chattime.command.FindCommand;
 import chattime.command.ListCommand;
 import chattime.command.MarkCommand;
 import chattime.exception.ChattimeException;
@@ -70,21 +71,25 @@ public class Parser {
         case "deadline":
         case "event":
         case "listTime":
-
-            checkAddCommand();
-
+        case "find":
             switch (command) {
             case "todo":
+                checkAddCommand();
                 return parseTodo();
 
             case "deadline":
+                checkAddCommand();
                 return parseDeadline();
 
             case "event":
+                checkAddCommand();
                 return parseEvent();
 
             case "listTime":
                 return parseListTime();
+
+            case "find":
+                return parseFind();
 
             default:
                 throw new ChattimeException(UNRECOGNISED_COMMAND);
@@ -160,7 +165,7 @@ public class Parser {
      * Processes list command and generate a ListCommand object.
      *
      * @return ListCommand object.
-     * @throws ChattimeException If no description detected, returns error message to user.
+     * @throws ChattimeException If description detected, returns error message to user.
      */
     private ListCommand parseList() throws ChattimeException {
         if (description != null) {
@@ -288,6 +293,21 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new ChattimeException("OOPS!!! Please enter date and time in format yyyy-mm-dd");
         }
+    }
+
+    /**
+     * Processes find command, ensure keyword is inputted and generate a FindCommand object.
+     *
+     * @return FindCommand object.
+     * @throws ChattimeException If no description detected, returns error message to user.
+     *
+     */
+    public FindCommand parseFind() throws ChattimeException {
+        if (description == null) {
+            throw new ChattimeException(
+                    String.format(MISSED_PARAM, command, "find keyword"));
+        }
+        return new FindCommand(description);
     }
 
 }

@@ -23,6 +23,12 @@ public class TaskTest {
     }
 
     @Test
+    public void isMatchDescriptionTest() {
+        Task testTask = new Task("Test");
+        assertTrue(testTask.isMatchDescription("Test"));
+    }
+
+    @Test
     public void toDataStringTest() {
         Task testTask = new Task("Test");
         assertEquals(" @ 0 @ Test", testTask.toDataString());

@@ -1,6 +1,5 @@
 package chattime.command;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

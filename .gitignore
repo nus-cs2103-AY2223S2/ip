@@ -16,7 +16,11 @@ bin/
 /text-ui-test/EXPECTED.TXT
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+<<<<<<< HEAD
 src/main/java/chattime/chattime.Chattime.class
+=======
+src/main/java/chattime/Chattime.class
+>>>>>>> branch-Level-9
 src/main/java/chattime/task/Deadline.class
 src/main/java/chattime/task/Event.class
 src/main/java/chattime/task/Task.class
