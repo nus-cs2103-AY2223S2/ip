@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.Files;
+import java.util.List;
+
 import org.apache.commons.io.FileUtils;
 
 public class Storage {
@@ -24,17 +26,47 @@ public class Storage {
         }
     }
 
-    //Supposed to return TaskList, which will be done later
+    //Supposed to return an arraylist of tasks
     //Should save in CSV format for easier reading and writing
-    public void load() {
-//        dukeDataFile = new File(filePath.toString());
+    public TaskList load() {
+        dukeDataFile = new File(filePath.toString());
         if (Files.exists(filePath)) {
+            System.out.println("FILE EXIST");
             //Means the file has been created before
             //This is where we read from it
             //return (loading)
+            TaskList loadTaskList= new TaskList();
+            try {
+                List<String> allLines = Files.readAllLines(filePath);
+                for (String line : allLines) {
+                    String[] lineArray = line.split(",");
+                    switch (lineArray[0]) {
+                        case "T":
+                            loadTaskList.addTask(lineArray[1]);
+                            break;
+                        case "D":
+                            loadTaskList.addTask(lineArray[1], lineArray[2]);
+                            break;
+                        case "E":
+                            loadTaskList.addTask(lineArray[1], lineArray[2], lineArray[3]);
+                            break;
+                        case "":
+                            break;
+                    }
+                }
+                return loadTaskList;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         } else {
-            //create file here, then return nothing?
+            System.out.println("NO EXIST");
+            try {
+                FileUtils.write(dukeDataFile, "");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+        return new TaskList();
     }
 
     //Supposed to take in tasklist and save to the file
