@@ -24,10 +24,10 @@ public class MarkCommand extends Command {
      * @param inter The Ui that will interact with the user.
      * @param store The storage that will help store the task into the data file if TaskList is modified.
      */
-    public void execute(TaskList taskList, Ui inter, Storage store) {
+    public String execute(TaskList taskList, Ui inter, Storage store) {
         Task changed = taskList.mark(input);
-        inter.mark(changed);
         store.writeTasks(taskList);
+        return inter.mark(changed);
     }
 
     public boolean isExit() {

@@ -10,8 +10,8 @@ import duke.Ui;
  * @author Cheam Jia Wei
  */
 public class ListCommand extends Command {
-    public void execute(TaskList taskList, Ui inter, Storage store) {
-        inter.list(taskList);
+    public String execute(TaskList taskList, Ui inter, Storage store) {
+        return inter.list(taskList);
     }
 
     public boolean isExit() {

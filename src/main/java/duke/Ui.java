@@ -1,8 +1,6 @@
 package duke;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 import duke.tasks.Task;
 
@@ -12,42 +10,18 @@ import duke.tasks.Task;
  * @author Cheam Jia Wei
  */
 public class Ui {
-    private static final String LINE = "__________________________________________________________\n";
-    private Scanner sc;
-
-    /**
-     * Constructor for the Ui class.
-     */
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
-
-    /**
-     * Reads the line of text input by the user.
-     *
-     * @return The line input by the user as a String.
-     */
-    public String uiRead() {
-        return sc.nextLine();
-    }
-
     /**
      * Message to greet the user.
      */
-    public void greet() {
-        System.out.println(Ui.LINE
-                + "Hello! I'm Duke\n"
-                + "What can I do for you?\n"
-                + Ui.LINE);
+    public String greet() {
+        return "Hello! I'm Duke\n" + "What can I do for you?\n";
     }
 
     /**
      * Message displayed when program exits.
      */
-    public void exit() {
-        System.out.println(Ui.LINE
-                + "Bye. Hope to see you again soon!\n"
-                + Ui.LINE);
+    public String exit() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**
@@ -55,12 +29,8 @@ public class Ui {
      *
      * @param taskList The TaskList containing the tasks to be displayed.
      */
-    public void list(TaskList taskList) {
-        System.out.println(Ui.LINE + "Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(i + 1 + "." + taskList.get(i).toString());
-        }
-        System.out.println(Ui.LINE);
+    public String list(TaskList taskList) {
+        return taskList.list();
     }
 
     /**
@@ -68,9 +38,9 @@ public class Ui {
      *
      * @param changed The task that was marked.
      */
-    public void mark(Task changed) {
-        System.out.println(Ui.LINE + "Nice! I've marked this task as done:\n"
-                + changed + "\n" + Ui.LINE);
+    public String mark(Task changed) {
+        return "Nice! I've marked this task as done:\n"
+                + changed + "\n";
     }
 
     /**
@@ -78,9 +48,9 @@ public class Ui {
      *
      * @param changed The task that was unmarked.
      */
-    public void unmark(Task changed) {
-        System.out.println(Ui.LINE + "Okay. I've unmarked the following task:\n"
-                + changed + "\n" + Ui.LINE);
+    public String unmark(Task changed) {
+        return "Okay. I've unmarked the following task:\n"
+                + changed + "\n";
     }
 
     /**
@@ -90,10 +60,9 @@ public class Ui {
      * @param added The task that was added.
      * @param size Number of tasks in the TaskList.
      */
-    public void taskAdded(Task added, int size) {
-        System.out.println(Ui.LINE + "Got it. I've added this task:\n" + added);
-        System.out.println("Now you have " + size + " tasks in the list.");
-        System.out.println(Ui.LINE);
+    public String taskAdded(Task added, int size) {
+        return "Got it. I've added this task:\n" + added + "\nNow you have "
+                + size + " tasks in the list.";
     }
 
     /**
@@ -103,10 +72,9 @@ public class Ui {
      * @param removed The task that was deleted.
      * @param size Number of tasks remaining in the TaskList.
      */
-    public void delete(Task removed, int size) {
-        System.out.println(Ui.LINE + "Noted. I've removed this task:\n" + removed);
-        System.out.println("Now you have " + size + " tasks in the list.");
-        System.out.println(Ui.LINE);
+    public String delete(Task removed, int size) {
+        return "Noted. I've removed this task:\n" + removed + "\nNow you have "
+                + size + " tasks in the list.";
     }
 
     /**
@@ -115,19 +83,9 @@ public class Ui {
      * @param input The string input by the user that has the date specified.
      * @param taskList The TaskList containing all the tasks and dates
      */
-    public void through(String input, TaskList taskList) {
+    public String through(String input, TaskList taskList) {
         LocalDateTime date = LocalDateTime.parse(input);
-        int i = 1;
-        System.out.println(Ui.LINE + "Here are the tasks occurring through "
-                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ":");
-        for (int j = 0; j < taskList.size(); j++) {
-            Task t = taskList.get(j);
-            if (t.isWithinDate(date)) {
-                System.out.println(i + "." + t);
-                i++;
-            }
-        }
-        System.out.println(Ui.LINE);
+        return taskList.through(date);
     }
 
     /**
@@ -136,34 +94,7 @@ public class Ui {
      * @param input The keyword to find in the name of the tasks.
      * @param taskList The TaskList containing all the tasks.
      */
-    public void find(String input, TaskList taskList) {
-        int i = 1;
-        System.out.println(Ui.LINE + "Here are the matching tasks in your list:");
-        for (int j = 0; j < taskList.size(); j++) {
-            Task t = taskList.get(j);
-            if (t.doesContain(input)) {
-                System.out.println(i + "." + t);
-                i++;
-            }
-        }
-        System.out.println(Ui.LINE);
+    public String find(String input, TaskList taskList) {
+        return taskList.find(input);
     }
-
-    /**
-     * Displays when the data file is unable to be found in the computer.
-     */
-    public void loadError() {
-        System.out.println("Task file does not exist");
-    }
-
-    /**
-     * Displays the error message of the exception.
-     *
-     * @param e Error message of the exception
-     */
-    public void printError(String e) {
-        System.out.println(Ui.LINE + e);
-        System.out.println(Ui.LINE);
-    }
-
 }

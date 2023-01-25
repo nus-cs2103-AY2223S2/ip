@@ -17,8 +17,8 @@ public class ThroughCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList taskList, Ui inter, Storage store) {
-        inter.through(input, taskList);
+    public String execute(TaskList taskList, Ui inter, Storage store) {
+        return inter.through(input, taskList);
     }
 
     public boolean isExit() {
