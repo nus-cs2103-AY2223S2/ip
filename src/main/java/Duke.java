@@ -41,7 +41,7 @@ public class Duke {
         }
         return null;
     }
-    private static int countTasks() {
+    public static int countTasks() {
         return Duke.taskStore.size();
     }
     private static void printNewTask(Task t) {

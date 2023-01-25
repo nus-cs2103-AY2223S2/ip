@@ -1,0 +1,106 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class Storage {
+    private TaskList myTaskList;
+
+    public Storage() {
+        TaskList myTaskList = new TaskList();
+        try {
+            loadFromFile();
+        }
+        catch (IOException ignored) {}
+    }
+
+    private void loadFromFile() throws IOException {
+        String home = System.getProperty("user.dir");
+        Path dukeFolderPath = Paths.get(home, "data");
+        Path dukeFilePath = Paths.get(home, "data", "duke.txt");
+        if (!Files.exists(dukeFolderPath)) {
+            Files.createDirectories(dukeFolderPath);
+            Files.createFile(dukeFilePath);
+        }
+        else if (!Files.exists(dukeFilePath)) {
+            Files.createFile(dukeFilePath);
+        }
+        BufferedReader dukeReader = Files.newBufferedReader(dukeFilePath);
+        String task;
+
+        while ((task = dukeReader.readLine()) != null) {
+            // process it
+            // format: E|0|project meeting|Aug 6th|2pm|4pm
+            String[] params = task.split("\\|");
+            String type = params[0];
+            boolean isCompleted = params[1].equals("1");
+            String description = params[2];
+
+            if (type.equals("T")) {
+                myTaskList.addTask(new ToDo(description, isCompleted));
+            }
+            else if (type.equals("D")) {
+                LocalDate by = LocalDate.parse(params[3]);
+                myTaskList.addTask(new Deadline(description, isCompleted, by));
+            }
+            else if (type.equals("E")) {
+                LocalDate start = LocalDate.parse(params[3]);
+                LocalDate end = LocalDate.parse(params[4]);
+                myTaskList.addTask(new Event(description, isCompleted, start, end));
+            }
+        }
+        dukeReader.close();
+    }
+    private static void addTaskToFile(Task currTask) throws IOException {
+        String home = System.getProperty("user.dir");
+        Path dukeFilePath = Paths.get(home, "data", "duke.txt");
+
+        String newEntry = "\n";
+        String completedBit = currTask.getCompletion() ? "1" : "0";
+        if (currTask instanceof Event) {
+            Event e = (Event) currTask;
+            String taskType = "E";
+            newEntry = taskType + "|" + completedBit + "|" + currTask.getDescription() + "|"
+                    + e.getStartTime() + "|" + e.getEndTime() + newEntry;
+        }
+        else if (currTask instanceof ToDo) {
+            String taskType = "T";
+            newEntry = taskType + "|" + completedBit + "|" + currTask.getDescription() + newEntry;
+        }
+        else if (currTask instanceof Deadline) {
+            Deadline d = (Deadline) currTask;
+            String taskType = "D";
+            newEntry = taskType + "|" + completedBit + "|" + currTask.getDescription() + "|"
+                    + d.getDeadline() + newEntry;
+        }
+        Files.write(dukeFilePath, newEntry.getBytes(), StandardOpenOption.APPEND); // don't need to close
+    }
+    private static void deleteTask(int taskNo) throws IOException {
+        String home = System.getProperty("user.dir");
+        Path dukeFilePath = Paths.get(home, "data", "duke.txt");
+        Path tempPath = Paths.get(home, "data", "temp.txt");
+        BufferedReader dukeReader = Files.newBufferedReader(dukeFilePath);
+        BufferedWriter dukeWriter = Files.newBufferedWriter(tempPath);
+
+        String currentLine;
+        int currentLineIndex = 1;
+        while ((currentLine = dukeReader.readLine()) != null) {
+            if (currentLineIndex != taskNo) {
+                dukeWriter.write(currentLine + System.getProperty("line.separator"));
+            }
+            taskNo++; // don't copy over to temp file (which is equivalent to deleting)
+        }
+        dukeReader.close();
+        dukeWriter.close();
+        Files.delete(dukeFilePath);
+        Files.move(tempPath, dukeFilePath); // move from src to dest (replace)
+    }
+    private void changeTaskCompletion(int taskNo) throws IOException {
+        // TODO
+    }
+}
