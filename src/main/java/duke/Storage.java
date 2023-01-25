@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.io.FileWriter;
 
+/**
+ * Represents a storage system that read or stores information from hard disk to program
+ */
+
+
 public class Storage {
     private String filePath;
 
@@ -16,6 +21,12 @@ public class Storage {
     public Storage() {
         this.filePath = "./data";
     }
+
+    /**
+     * read tasks from hard disk to program
+     * 
+     * @param toDoList ArrayList of all tasks
+     */
 
     public void readStorage(ArrayList<Task> toDoList) {
         try {
@@ -60,6 +71,12 @@ public class Storage {
             System.out.println("file missing unmarked/marked");
         }
     }
+
+    /**
+     * stores tasks from program to harddisk
+     * 
+     * @param toDoList ArrayList of all tasks
+     */
 
     public void writeToFile(TaskList toDoList) {
 
