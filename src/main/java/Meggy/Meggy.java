@@ -1,3 +1,8 @@
+package Meggy;
+
+import Meggy.Exception.MeggyException;
+import Meggy.Task.UserTask;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -102,7 +107,7 @@ public class Meggy implements Runnable {
     }
 
     /**
-     * Deletes task from {@code tasks} list. O(n) runtime.
+     * Deletes task from {@code tasks} list. Currently O(n) runtime.
      *
      * @param arg Non-null. Index (start with 1) string of task to be updated.
      * @return Response to 'delete' command.

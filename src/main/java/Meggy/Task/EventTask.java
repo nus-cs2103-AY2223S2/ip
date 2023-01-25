@@ -1,3 +1,9 @@
+package Meggy.Task;
+
+import Meggy.Exception.MeggyException;
+import Meggy.MeggyTime;
+import Meggy.Resource;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

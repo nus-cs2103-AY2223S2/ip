@@ -1,3 +1,7 @@
+package Meggy.Exception;
+
+import Meggy.Resource;
+
 /**
  * Converts {@link NumberFormatException} into {@link MeggyException}.
  */

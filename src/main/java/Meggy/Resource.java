@@ -1,3 +1,5 @@
+package Meggy;
+
 /**
  * Class that stores all customizable data statically. Works like a 'resource pack'.
  */
@@ -10,17 +12,14 @@ public final class Resource {
      * Error message if no argument is provided to a command that needs argument(s).
      */
     public final static String errNoArgs = "Description of this command cannot be empty.\n";
-
     /**
      * Error message if an error prevents writing to a file.
      */
     public final static String errFileWrite = "Can't save data to file. ";
-
     /**
      * Error message if an error prevents reading from a file.
      */
     public final static String errFileRead = "Can't read data from file. ";
-
     /**
      * Error message if an {@link java.io.IOException} prevents file interaction.
      */
@@ -29,7 +28,6 @@ public final class Resource {
      * Error message if an {@link SecurityException} prevents file interaction.
      */
     public final static String errNoAccess = "File access denied by system.\n";
-
     /**
      * Indentation before task that are highlighted.
      */
@@ -120,7 +118,7 @@ public final class Resource {
     /**
      * Front page greetings.
      */
-    public final static String greetings = " Wommy! Get REKT by the upcoming star of Inkopolis, Meggy!\n";
+    public final static String greetings = " Wommy! Get REKT by the upcoming star of Inkopolis, Meggy.Meggy!\n";
     /**
      * Notification message after 'bye' command.
      */
@@ -155,7 +153,7 @@ public final class Resource {
     }
 
     /**
-     * Msg of error caused by {@link NumberFormatException}
+     * Message of error caused by {@link NumberFormatException}
      *
      * @param arg Non-null. String in question.
      * @return Error message.
@@ -176,7 +174,7 @@ public final class Resource {
     }
 
     /**
-     * Msg of error would have caused by {@link IndexOutOfBoundsException}
+     * Message of error would have caused by {@link IndexOutOfBoundsException}
      *
      * @param idx      Index (starts with 0) in question.
      * @param listSize Size of list that would cause {@link IndexOutOfBoundsException} when queried with idx.

@@ -1,5 +1,9 @@
+package Meggy.Exception;
+
+import Meggy.Resource;
+
 /**
- * {@link Exception} that will eventually print out with {@code Resource.errBase} prefix.
+ * {@link Exception} that will eventually print out with {@code Meggy.Resource.errBase} prefix.
  */
 public class MeggyException extends Exception {
     /**

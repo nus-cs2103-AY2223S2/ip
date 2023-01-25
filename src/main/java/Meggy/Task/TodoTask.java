@@ -1,3 +1,8 @@
+package Meggy.Task;
+
+import Meggy.Exception.MeggyException;
+import Meggy.Resource;
+
 /**
  * {@link UserTask} that has no time whatsoever
  */

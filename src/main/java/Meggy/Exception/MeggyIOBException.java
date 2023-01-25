@@ -1,3 +1,7 @@
+package Meggy.Exception;
+
+import Meggy.Resource;
+
 /**
  * Converts upcoming {@link IndexOutOfBoundsException} into {@link MeggyException}.
  */

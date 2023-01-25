@@ -1,3 +1,11 @@
+package Meggy;
+
+import Meggy.Exception.MeggyException;
+import Meggy.Task.DdlTask;
+import Meggy.Task.EventTask;
+import Meggy.Task.TodoTask;
+import Meggy.Task.UserTask;
+
 /**
  * Class that stores all helper functions and uncustomizable constants statically.
  */
@@ -19,7 +27,7 @@ public final class Util {
      */
     public static final String noFound = "N/A";
     /**
-     * Task list data file.
+     * Meggy.Task list data file.
      */
     public static final String dataFilePath = "MeggyData.txt";
 

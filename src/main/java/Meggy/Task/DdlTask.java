@@ -1,3 +1,9 @@
+package Meggy.Task;
+
+import Meggy.Exception.MeggyException;
+import Meggy.MeggyTime;
+import Meggy.Resource;
+
 /**
  * {@link UserTask} with an optional due time.
  */

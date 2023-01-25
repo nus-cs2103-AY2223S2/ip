@@ -1,3 +1,7 @@
+package Meggy.Exception;
+
+import Meggy.Resource;
+
 /**
  * Deals with the absence of argument after commands that needs argument(s).
  */

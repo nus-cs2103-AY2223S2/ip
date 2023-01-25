@@ -1,3 +1,9 @@
+package Meggy;
+
+import Meggy.Exception.MeggyException;
+import Meggy.Exception.MeggyNFException;
+import Meggy.Exception.MeggyNoArgException;
+
 import java.util.Map;
 
 public class Parser {

@@ -1,13 +1,21 @@
+package Meggy.Task;
+
+
+import Meggy.Exception.MeggyException;
+import Meggy.Exception.MeggyNoArgException;
+import Meggy.Resource;
+import Meggy.Util;
+
 /**
- * Entries to be recorded by Meggy
+ * Entries to be recorded by the chatbot.
  */
 public abstract class UserTask {
     /**
-     * Task description.
+     * Meggy.Task description.
      */
     public final String desc;
     /**
-     * Task completion status.
+     * Meggy.Task completion status.
      */
     public boolean status;
 
@@ -25,7 +33,7 @@ public abstract class UserTask {
      * Get ask type label from their names.
      *
      * @param taskType Non-null, non-empty. Name of task type.
-     * @return Task-type-specific label.
+     * @return Meggy.Task-type-specific label.
      */
     public static String getTaskTypeLabel(String taskType) {
         return Util.parenthesize(Character.toUpperCase(taskType.charAt(0)));
@@ -46,7 +54,7 @@ public abstract class UserTask {
     public abstract String encode();
 
     /**
-     * @return The string representation of this task in text UI.
+     * @return The string representation of this task in text Meggy.UI.
      */
     @Override
     public String toString() {
