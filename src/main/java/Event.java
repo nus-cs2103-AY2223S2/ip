@@ -19,4 +19,12 @@ public class Event extends Task {
         return description + " (from: " + from + " to: " + to + ")";
     }
 
+    public String getFromDate() {
+        return from;
+    }
+
+    public String getToDate() {
+        return to;
+    }
+
 }

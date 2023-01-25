@@ -25,4 +25,8 @@ public class Task {
         this.done = val;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
 }

@@ -4,10 +4,14 @@ import java.util.Scanner;
 public class Duke {
     private static Scanner scanner = new Scanner(System.in);
     private static String horizontalLine = "************************";
-    private static ArrayList<Task> taskArr = new ArrayList<>();
-    private static int count = 0;
+    private static ArrayList<Task> taskArr;
+
+    private static Storage storage = new Storage();
 
     public static void main(String[] args) {
+        // Load list from storage
+        taskArr = storage.loadList();
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -22,9 +26,12 @@ public class Duke {
         readInput();
     }
 
+    private static void updateListStorage() {
+        storage.storeList(taskArr);
+    }
+
     private static void readInput() {
         String input = scanner.nextLine();
-
         try {
             if (input.equals("bye")) {
                 showBye();
@@ -48,7 +55,6 @@ public class Duke {
         } catch (DukeException e) {
             showUnknown(e.getMessage());
         }
-
     }
 
     private static void showUnknown(String errorMsg) {
@@ -77,9 +83,9 @@ public class Duke {
         System.out.println("OK. I'VE ADDED THIS TASK:");
         System.out.println("[T][ ] " + newTodo);
         taskArr.add(newTodo);
-        count++;
         showCount();
         System.out.println(horizontalLine);
+        updateListStorage();
         readInput();
     }
 
@@ -105,9 +111,9 @@ public class Duke {
         System.out.println("OK. I'VE ADDED THIS TASK:");
         System.out.println("[D][ ] " + newDeadline);
         taskArr.add(newDeadline);
-        count++;
         showCount();
         System.out.println(horizontalLine);
+        updateListStorage();
         readInput();
     }
 
@@ -135,9 +141,9 @@ public class Duke {
         System.out.println("OK. I'VE ADDED THIS TASK:");
         System.out.println("[E][ ] " + newEvent);
         taskArr.add(newEvent);
-        count++;
         showCount();
         System.out.println(horizontalLine);
+        updateListStorage();
         readInput();
     }
 
@@ -157,8 +163,8 @@ public class Duke {
                 "[" + taskArr.get(index-1).getStatusIcon() + "] " +
                 taskArr.get(index-1));
         taskArr.remove(index-1);
-        count--;
         System.out.println(horizontalLine);
+        updateListStorage();
         readInput();
     }
 
@@ -169,6 +175,7 @@ public class Duke {
         System.out.println("[X] " + taskArr.get(index-1));
         taskArr.get(index-1).setDone(true);
         System.out.println(horizontalLine);
+        updateListStorage();
         readInput();
     }
 
@@ -179,13 +186,14 @@ public class Duke {
         System.out.println("[ ] " + taskArr.get(index-1));
         taskArr.get(index-1).setDone(false);
         System.out.println(horizontalLine);
+        updateListStorage();
         readInput();
     }
 
     private static void showList() {
         System.out.println(horizontalLine);
         System.out.println("HERE ARE YOUR TASKS!");
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < taskArr.size(); i++) {
             System.out.println("" + (i+1) + ". " +
                     "[" + taskArr.get(i).getIcon() + "]" +
                     "[" + taskArr.get(i).getStatusIcon() + "] " +
@@ -197,10 +205,10 @@ public class Duke {
 
     private static void showCount() {
         String plural = "";
-        if (count > 1) {
+        if (taskArr.size() > 1) {
             plural = "S";
         }
-        System.out.println("NOW YOU HAVE " + count + " TASK" + plural + " IN THE LIST!");
+        System.out.println("NOW YOU HAVE " + taskArr.size() + " TASK" + plural + " IN THE LIST!");
     }
 
     private static void showBye() {
