@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
+    /**
+     * Main function which runs Duke's logic.
+     *
+     * @param args Arguments provided.
+     */
     public static void main(String[] args) {
         MyData data = new MyData();
         Ui ui = new Ui();

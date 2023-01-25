@@ -4,8 +4,14 @@ import duke.data.MyData;
 import duke.ui.Ui;
 
 public class Delete extends Command {
+    /** Index to delete task. */
     private final int id;
 
+    /**
+     *  Constructs a new Delete command.
+     *
+     * @param id Index to delete task.
+     */
     public Delete(int id) {
         this.id = id;
     }

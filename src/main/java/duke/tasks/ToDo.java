@@ -1,6 +1,7 @@
 package duke.tasks;
 
 public class ToDo extends Task {
+    /** Constructs a new To Do object.*/
     public ToDo(String description) {
         super(description);
     }

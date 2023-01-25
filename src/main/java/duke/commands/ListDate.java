@@ -6,9 +6,15 @@ import duke.ui.Ui;
 import java.time.LocalDate;
 
 public class ListDate extends Command {
+    /** Date to search for. */
     LocalDate date;
 
-    public ListDate(LocalDate date ) {
+    /**
+     * Constructs a new ListDate command.
+     *
+     * @param date Date to search for.
+     */
+    public ListDate(LocalDate date) {
         this.date = date;
     }
 

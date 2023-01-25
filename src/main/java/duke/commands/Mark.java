@@ -4,8 +4,14 @@ import duke.data.MyData;
 import duke.ui.Ui;
 
 public class Mark extends Command {
+    /** Index to mark. */
     private final int id;
 
+    /**
+     * Constructs a new Mark command.
+     *
+     * @param id Index to mark.
+     */
     public Mark(int id) {
         this.id = id;
     }
