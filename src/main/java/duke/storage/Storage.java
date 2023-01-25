@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.tasklist.TaskList;
+
 import duke.tasktypes.Deadline;
 import duke.tasktypes.Event;
 import duke.tasktypes.Task;
@@ -9,12 +10,19 @@ import duke.tasktypes.ToDo;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+
+import java.util.List;
+
 
 import duke.ui.Ui;
 
+/**
+ * Represents a Storage instance of Duke.
+ * A storage instance handles all communication between Duke and local data file.
+ */
 public class Storage {
 
     private static final String DEFAULT_DIRECTORY = "./data/";
@@ -23,18 +31,25 @@ public class Storage {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Storage instance.
+     * Storage object is constructed with an Ui instance.
+     * Ui object assists Storage in communicating with User.
+     *
+     * @param ui Ui instance.
+     */
     public Storage(Ui ui) {
         this.ui = ui;
         File directory = new File(DEFAULT_DIRECTORY);
-        boolean directoryCreated = directory.mkdir();
-        if (directoryCreated) {
+        boolean isDirectoryCreated = directory.mkdir();
+        if (isDirectoryCreated) {
             ui.directoryCreate();
         }
 
         dukeFile = new File(DEFAULT_FILEPATH);
         try {
-            boolean fileCreated = dukeFile.createNewFile();
-            if (fileCreated) {
+            boolean isFileCreated = dukeFile.createNewFile();
+            if (isFileCreated) {
                 ui.fileCreate();
             }
 
@@ -45,13 +60,18 @@ public class Storage {
         tasks = new TaskList(this.ui);
     }
 
+    /**
+     * Returns TaskList instance after loading tasks from data file.
+     *
+     * @return TaskList object with loaded tasks.
+     */
     public TaskList load() {
         try {
             List<String> allLines = Files.readAllLines(Paths.get(DEFAULT_FILEPATH));
-            boolean emptyFile = true;
+            boolean isEmptyFile = true;
 
             for (String line : allLines) {
-                emptyFile = false;
+                isEmptyFile = false;
                 String[] taskSplit = line.split(",,");
                 String type = taskSplit[0];
                 Task task = null;
@@ -72,13 +92,13 @@ public class Storage {
                 String done = taskSplit[1];
                 if (done.equals("1")) {
                     assert task != null;
-                    task.markDone();
+                    task.setDone();
                 }
 
                 tasks.loadTask(task);
             }
 
-            if (!emptyFile) {
+            if (!isEmptyFile) {
                 ui.printTasks(tasks);
             }
 
@@ -89,6 +109,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves existing tasks in TaskList into data file.
+     *
+     * @param tasks Updated TaskList with changes to be saved.
+     */
     public void save(TaskList tasks) {
         this.tasks = tasks;
 
@@ -108,13 +133,11 @@ public class Storage {
                 }
             }
             writer.close();
-
             ui.saved();
 
         } catch (IOException e) {
             ui.showError(e);
         }
-
     }
 
 }

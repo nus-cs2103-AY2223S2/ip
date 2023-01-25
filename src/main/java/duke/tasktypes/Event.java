@@ -3,9 +3,14 @@ package duke.tasktypes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Represents an Event Task.
+ * Event Task are unique in having a starting datetime and ending datetime.
+ */
 public class Event extends Task {
 
     private LocalDate endDate;
@@ -21,6 +26,14 @@ public class Event extends Task {
     private String forSavingStart;
     private String forSavingEnd;
 
+    /**
+     * Constructs an Event Task instance.
+     * Event tasks are constructed with a starting and ending time.
+     *
+     * @param description Description of task.
+     * @param start Starting time of Event.
+     * @param end Ending time of Event
+     */
     public Event(String description, String start, String end) {
         super(description);
         String[] startDateAndTime = start.split(" ");
@@ -55,13 +68,14 @@ public class Event extends Task {
     @Override
     public String getSaveFormat() {
         String done;
-        if (this.done) {
+        if (this.isDone) {
             done = "1";
         } else {
             done = "0";
         }
         return "E" + ",," + done + ",," + this.description + ",," + this.forSavingStart + ",," + this.forSavingEnd;
     }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.startBy + ", " + "to: " + this.endBy + ")";

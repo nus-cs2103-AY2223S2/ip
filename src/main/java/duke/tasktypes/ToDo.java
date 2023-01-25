@@ -1,6 +1,10 @@
 package duke.tasktypes;
 
+/**
+ * Represents a Todo Task.
+ */
 public class ToDo extends Task {
+
     public ToDo(String description) {
         super(description);
     }
@@ -8,7 +12,7 @@ public class ToDo extends Task {
     @Override
     public String getSaveFormat() {
         String done;
-        if (this.done) {
+        if (this.isDone) {
             done = "1";
         } else {
             done = "0";

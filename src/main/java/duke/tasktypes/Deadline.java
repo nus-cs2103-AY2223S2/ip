@@ -3,9 +3,14 @@ package duke.tasktypes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Represents a Deadline Task.
+ * Deadline Tasks are unique in having an ending time.
+ */
 public class Deadline extends Task {
 
     private LocalDate byDate;
@@ -14,7 +19,13 @@ public class Deadline extends Task {
     private String forSaving;
     private String doneBy;
 
-
+    /**
+     * Constructs a Deadline Task.
+     * Deadline Tasks are constructed with an ending time.
+     *
+     * @param description Description of task.
+     * @param by Ending time of task.
+     */
     public Deadline(String description, String by) {
         super(description);
         String[] dateAndTime = by.split(" ");
@@ -29,13 +40,12 @@ public class Deadline extends Task {
         this.byDateTime = LocalDateTime.of(this.byDate, this.byTime);
         this.doneBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).
                 format(this.byDateTime);
-
     }
 
     @Override
     public String getSaveFormat() {
         String done;
-        if (this.done) {
+        if (this.isDone) {
             done = "1";
         } else {
             done = "0";

@@ -7,6 +7,10 @@ import duke.command.*;
 import duke.parser.Parser;
 import duke.exceptions.DukeException;
 
+/**
+ * Represents a build instance of Duke.
+ * A Duke object is created when Duke is run.
+ */
 public class Duke {
 
     private Storage storage;
@@ -23,6 +27,9 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Duke Logic and Simulation.
+     */
     public void run() {
 
         ui.showLine();
