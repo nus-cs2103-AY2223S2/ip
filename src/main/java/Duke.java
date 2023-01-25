@@ -67,6 +67,13 @@ public class Duke {
                     e.MarkedException();
                 }
             }
+            // Delete a task
+            else if (command.toLowerCase().startsWith("delete ")) {
+                int index = Integer.parseInt(command.replaceAll("delete ", "")) - 1;
+                Task tempTask = taskList.get(index);
+                taskList.remove(index);
+                System.out.println("Noted. I've removed this task:" + "\n" + tempTask.toString());
+            }
             else {
                 try {
                     Task newTask;
@@ -131,7 +138,7 @@ public class Duke {
             }
 
             System.out.println("You have " + taskList.size() + " tasks in your list. | " +
-                     + (taskList.size() - Math.abs(tasksDone)) + " tasks to be completed.");
+                      (taskList.size() - Math.abs(tasksDone)) + " tasks to be completed.");
         }
     }
 }
