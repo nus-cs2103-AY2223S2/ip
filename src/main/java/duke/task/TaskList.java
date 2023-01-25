@@ -102,6 +102,27 @@ public class TaskList {
         fileWriter.close();
     }
 
+    /**
+     * Finds tasks that match a keyword.
+     *
+     * @param keyword Keyword to match.
+     * @return
+     */
+    public String findAll(String keyword) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.contains(keyword)) {
+                result.append(i);
+                result.append(". ");
+                result.append(tasks.get(i));
+                if (i < tasks.size() - 1) {
+                    result.append("\n");
+                }
+            }
+        }
+        return result.toString();
+    }
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

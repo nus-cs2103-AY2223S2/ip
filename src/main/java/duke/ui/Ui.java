@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.task.Task;
+import duke.task.TaskList;
 
 import java.util.Scanner;
 /**
@@ -96,6 +97,23 @@ public class Ui {
      */
     public void printStorageLoadFailure() {
         System.out.println("Task list not found on disk, creating empty task list");
+    }
+
+    /**
+     * Displays the full list of tasks.
+     *
+     * @param tasks Tasks to display.
+     */
+    public void printAllTasks(TaskList tasks) {
+        System.out.println(tasks);
+    }
+
+    /**
+     * Displays tasks containing a certain keyword
+     * @param tasks
+     */
+    public void printTasksWithKeyword(TaskList tasks, String keyword) {
+        System.out.println(tasks.findAll(keyword));
     }
 
     /**
