@@ -56,21 +56,21 @@ public class Duke {
                     response += task.toString();
                     response += "\n";
                 }
-                print(response);
+                Ui.print(response);
                 break;
             }
             case("mark"): {
                 Task task = ls.mark(chat.substring(5));
                 String response = "Nice! I've marked this task as done:\n";
                 response += task.toString();
-                print(response);
+                Ui.print(response);
                 break;
             }
             case("unmark"): {
                 Task task = ls.unmark(chat.substring(7));
                 String response = "OK, I've marked this task as not done yet:\n";
                 response += task.toString();
-                print(response);
+                Ui.print(response);
                 break;
             }
             case("todo"): {
@@ -79,9 +79,9 @@ public class Duke {
                     String response = "Got it. I've added this task:\n";
                     response += task.toString() + "\n";
                     response += "Now you have " + ls.getSize() + " tasks in the list.";
-                    print(response);
+                    Ui.print(response);
                 } catch (DukeException e) {
-                    print(e.toString());
+                    Ui.print(e.toString());
                 }
                 break;
             }
@@ -91,9 +91,9 @@ public class Duke {
                     String response = "Got it. I've added this task:\n";
                     response += task.toString() + "\n";
                     response += "Now you have " + ls.getSize() + " tasks in the list.";
-                    print(response);
+                    Ui.print(response);
                 } catch (DukeException e) {
-                    print(e.toString());
+                    Ui.print(e.toString());
                 }
                 break;
             }
@@ -103,9 +103,9 @@ public class Duke {
                     String response = "Got it. I've added this task:\n";
                     response += task.toString() + "\n";
                     response += "Now you have " + ls.getSize() + " tasks in the list.";
-                    print(response);
+                    Ui.print(response);
                 } catch (DukeException e) {
-                    print(e.toString());
+                    Ui.print(e.toString());
                 }
                 break;
             }
@@ -114,22 +114,12 @@ public class Duke {
                 String response = "Noted. I've removed this task:\n";
                 response += task.toString() + "\n";
                 response += "Now you have " + ls.getSize() + " tasks in the list.";
-                print(response);
+                Ui.print(response);
                 break;
             }
             default:
-                print("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                Ui.print("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         }
-    }
-
-    /**
-     * Prints out a response, wrapped with 2 hyphenated lines above and below
-     * @param response
-     */
-    private static void print(String response) {
-        System.out.println("----------------------------------");
-        System.out.println(response.trim());
-        System.out.println("----------------------------------");
     }
 }
