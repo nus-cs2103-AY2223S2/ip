@@ -11,6 +11,9 @@ public class Ui {
         return inputReader.nextLine();
     }
 
+    /**
+     * Shows the application's welcome message.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -21,6 +24,11 @@ public class Ui {
         this.showMessage("Hello! I'm Duke What can I do for you?");
     }
 
+    /**
+     * Wraps messages before displaying them to the terminal.
+     *
+     * @param msg the message to be displayed
+     */
     public void showMessage(String msg) {
 
         String wrapTop = "__________________________\n";

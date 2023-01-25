@@ -22,6 +22,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the deadline due date and time in a format suitable for storage.
+     * If the due date does not include a time, it returns a LocalDate. If it includes a time, it returns
+     * a LocalDateTime.
+     *
+     * @return the deadline's due date and time in a format suitable for storage.
+     */
     public String getByInStorageFormat() {
         if (hasTime) {
             return DateTimeParser.dateTimeToStorageString(this.by);
@@ -36,6 +43,14 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + this.getBy() + ")";
     }
 
+    /**
+     * Returns a Deadline object after parsing an add deadline task command.
+     *
+     * @param stringStream contains the add deadline command to be parsed
+     * @return a Deadline object from the given add deadline command
+     * @throws DukeException if the task description is empty or the /by field is missing
+     * @throws DateTimeParseException if the given date and time is not in a suitable format
+     */
     public static Deadline parseDeadlineCommand(Scanner stringStream) throws DukeException, DateTimeParseException {
         String taskDesc = "";
         String byString = "";
@@ -72,6 +87,15 @@ public class Deadline extends Task {
         return newTask;
     }
 
+    /**
+     * Returns a Deadline object after parsing a Deadline's storage string produced by DateTimeParser's
+     * dateTimeToStorageString or dateToStorageString that is split on the delimiter '/'. The format for the
+     * Deadline's storage String is D/(isMarked)/(Description)/(Date).
+     *
+     * @param parts the split Deadline storage string
+     * @return a Deadline object built from the parts array
+     * @throws DateTimeParseException
+     */
     public static Deadline parseDeadlineStringArray(String[] parts) throws DateTimeParseException {
         String taskDesc = parts[2];
         String byString = parts[3];

@@ -39,6 +39,13 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the Event's ending date and time in a format suitable for storage.
+     * If the ending date does not include a time, it returns a LocalDate. If it includes a time, it returns
+     * a LocalDateTime.
+     *
+     * @return the Event's ending date and time in a format suitable for storage.
+     */
     public String getToInStorageFormat() {
         if (toHasTime) {
             return DateTimeParser.dateTimeToStorageString(this.to);
@@ -47,6 +54,13 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the Event's starting date and time in a format suitable for storage.
+     * If the starting date does not include a time, it returns a LocalDate. If it includes a time, it returns
+     * a LocalDateTime.
+     *
+     * @return the Event's starting date and time in a format suitable for storage.
+     */
     public String getFromInStorageFormat() {
         if (fromHasTime) {
             return DateTimeParser.dateTimeToStorageString(this.from);
@@ -55,6 +69,14 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns a Deadline object after parsing an add event task command.
+     *
+     * @param stringStream contains the add event command to be parsed
+     * @return an Event object from the given add event command
+     * @throws DukeException if the task description is empty or the /from or /to fields are missing
+     * @throws DateTimeParseException if the given date and time is not in a suitable format
+     */
     public static Event parseEventCommand(Scanner stringStream) throws DukeException, DateTimeParseException {
         String taskDesc = "";
         String fromString = "";
@@ -106,6 +128,15 @@ public class Event extends Task {
         return newTask;
     }
 
+    /**
+     * Returns an Event object after parsing an Event's storage string produced by DateTimeParser's
+     * dateTimeToStorageString or dateToStorageString that is split on the delimiter '/'. The format for the
+     * Event's storage String is E/(isMarked)/(Description)/(From)/(To).
+     *
+     * @param parts the split Event storage string
+     * @return an Event object built from the parts array
+     * @throws DateTimeParseException
+     */
     public static Event parseEventStringArray(String[] parts) throws DateTimeParseException {
         String taskDesc = parts[2];
         String fromString = parts[3];

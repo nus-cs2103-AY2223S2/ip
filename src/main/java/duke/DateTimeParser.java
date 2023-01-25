@@ -32,19 +32,47 @@ public class DateTimeParser {
     private static DateTimeFormatter dateDisplayFormatter = DateTimeFormatter.ofPattern("MMMM yyyy");
 
 
-
+    /**
+     * Returns a LocalDateTime object from the given string containing date and time.
+     * The format for the date and time string is "dd-mm-yyyy hh:ss". The time may be omitted.
+     *
+     * @param dateTimeString a date and time string with the format "dd-mm-yyyy hh:ss"
+     * @return a LocalDateTime object containing the given date and time
+     * @throws DateTimeParseException if dateTimeString does not have an accepted format
+     */
     public static LocalDateTime parse(String dateTimeString) throws DateTimeParseException {
         return LocalDateTime.from(parser.parse(dateTimeString));
     }
 
+    /**
+     * Returns a String version of the specified date in a format suitable for storage.
+     *
+     * @param date a LocalDate object containing the date to be converted into a string.
+     * @return String version of the specified date
+     * @throws DateTimeException
+     */
     public static String dateToStorageString(LocalDate date) throws DateTimeException {
         return dateStorageFormatter.format(date);
     }
 
+    /**
+     * Returns a String version of the specified date and time in a format suitable for storage.
+     *
+     * @param dateTime a LocalDateTime object containing the date and time to be converted into a string.
+     * @return String version of the specified date and time
+     * @throws DateTimeException
+     */
     public static String dateTimeToStorageString(LocalDateTime dateTime) throws DateTimeException {
         return dateTimeStorageFormatter.format(dateTime);
     }
 
+    /**
+     * Returns a String version of the specified date in a format suitable for display.
+     *
+     * @param date a LocalDate object containing the date to be converted into a string.
+     * @return String version of the specified date
+     * @throws DateTimeException
+     */
     public static String dateToDisplayString(LocalDate date) throws DateTimeException {
         String formattedDate = dateDisplayFormatter.format(date);
         int dayOfTheMonth = date.getDayOfMonth();
@@ -52,6 +80,13 @@ public class DateTimeParser {
         return dayOfTheMonth + ordinal + " " + formattedDate;
     }
 
+    /**
+     * Returns a String version of the specified date and time in a format suitable for display.
+     *
+     * @param dateTime a LocalDateTime object containing the date to be converted into a string.
+     * @return String version of the specified date and time
+     * @throws DateTimeException
+     */
     public static String dateTimeToDisplayString(LocalDateTime dateTime) throws DateTimeException {
         String formattedDate = dateDisplayFormatter.format(dateTime);
 
