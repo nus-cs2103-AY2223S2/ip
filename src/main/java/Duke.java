@@ -181,12 +181,8 @@ public class Duke {
             break;
         case "deadline":
             try {
-<<<<<<< HEAD
-                String[] deadlineDescription = descriptions[1].split("/by");
-
-=======
                 String[] deadlineDescription = descriptions[1].split("/by ");
->>>>>>> branch-Level-8
+
                 if (deadlineDescription.length != 2) {
                     throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
                 }
@@ -198,12 +194,7 @@ public class Duke {
             break;
         case "event":
             try {
-<<<<<<< HEAD
-                String[] eventDescription = descriptions[1].split("/from|/to");
-
-=======
                 String[] eventDescription = descriptions[1].split("/from | /to ");
->>>>>>> branch-Level-8
                 if (eventDescription.length != 3) {
                     throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
                 }
@@ -233,18 +224,11 @@ public class Duke {
             String taskType = descriptions[0];
 
             if (taskType.equals("bye")) {
-<<<<<<< HEAD
                 saveData();
                 exitMsg();
                 return;
             }
             
-=======
-                exitMsg();
-                return;
-            }
-
->>>>>>> branch-Level-8
             createTask(taskType, descriptions);
         }
 
