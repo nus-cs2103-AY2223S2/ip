@@ -4,9 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateTranslator {
+    public String output;
     String raw_input;
     LocalDateTime time;
-    public String output;
+
     public DateTranslator(String raw_input) {
         this.raw_input = raw_input;
         convert();
@@ -19,6 +20,7 @@ public class DateTranslator {
         //first date format
         return token1.length > 2 || token2.length == 3;
     }
+
     void convert() {
         //example input = return book /by 2/12/2019 1800
         String[] tokens;
