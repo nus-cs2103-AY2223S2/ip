@@ -1,3 +1,4 @@
+package kira;
 import java.util.Scanner;
 
 import kira.exception.KiraException;
