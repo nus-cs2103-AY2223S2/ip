@@ -1,9 +1,9 @@
-package src.main.java.duke;
+package duke;
 
-import src.main.java.duke.task.Deadline;
-import src.main.java.duke.task.Event;
-import src.main.java.duke.task.Task;
-import src.main.java.duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

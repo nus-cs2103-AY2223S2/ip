@@ -1,4 +1,4 @@
-package src.main.java.duke;
+package duke;
 
 public class Parser {
 

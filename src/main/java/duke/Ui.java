@@ -1,6 +1,6 @@
-package src.main.java.duke;
+package duke;
 
-import src.main.java.duke.task.Task;
+import duke.task.Task;
 public class Ui {
 
     public Ui() {

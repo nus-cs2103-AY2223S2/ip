@@ -6,7 +6,7 @@
  * This class is for the Deadlines Task added by the User.
  */
 
-package src.main.java.duke.task;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

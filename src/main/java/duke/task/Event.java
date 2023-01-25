@@ -5,7 +5,7 @@
  *
  * This class is for the Events Task added by the User.
  */
-package src.main.java.duke.task;
+package duke.task;
 
 public class Event extends Task {
 

@@ -5,7 +5,7 @@
  *
  * This class is for all the Dukes Exception.
  */
-package src.main.java.duke;
+package duke;
 
 public class DukeException extends Exception {
 
