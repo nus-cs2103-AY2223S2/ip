@@ -7,10 +7,22 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This is a class responsible for parsing the inputs given by user
+ */
 public class Parser {
 
+    /**
+     * Constructor for Parser class
+     */
     public Parser() {}
 
+    /**
+     * Returns a Command corresponding to the information given by the user
+     *
+     * @param fullCommand information given by the user
+     * @return corresponding Command
+     */
     public static Command parse(String fullCommand) {
         String[] commandParts = fullCommand.split(" ", 2);
         String commandHeader = commandParts[0];

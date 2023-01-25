@@ -4,15 +4,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * a type of Task that stores the time it should be done by
- *
- * @author Wong Yong Xiang
+ * A type of Task that stores a description and the time it should be done by
  */
 public class Deadline extends Task {
 
     protected LocalDate by;
 
-    /** constructor for Deadline class
+    /**
+     * Constructor for Deadline class
      *
      * @param description description of the task
      * @param by time the task should be completed by
@@ -22,12 +21,20 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Another constructor for Deadline class
+     *
+     * @param description description of the task
+     * @param by time the task should be completed by
+     * @param isDone whether the task should be marked upon creation
+     */
     public Deadline(String description, LocalDate by, boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
 
-    /** returns the string representation of Deadline
+    /**
+     * Returns the string representation of Deadline
      *
      * @return string representation of Deadline class
      */
@@ -40,6 +47,11 @@ public class Deadline extends Task {
                 + ")";
     }
 
+    /**
+     * Returns the string representation of Deadline in data format
+     *
+     * @return string representation of Deadline in data format
+     */
     @Override
     public String toDataFormatString() {
         int marked = 0;
@@ -54,6 +66,12 @@ public class Deadline extends Task {
                 + this.by.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
     }
 
+    /**
+     * Checks if the given Object is the same as this
+     *
+     * @param o the Object being compared
+     * @return true if o is an instance of this and have the same description and by
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {

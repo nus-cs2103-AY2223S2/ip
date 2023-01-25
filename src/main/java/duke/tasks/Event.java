@@ -3,15 +3,13 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/** a type of Task that contains information of a start time and an end time
- *
- * @author Wong Yong Xiang
+/** A type of Task that contains a description, a start time and an end time
  */
 public class Event extends Task {
     protected LocalDate from;
     protected LocalDate to;
 
-    /** constructor for the Event class
+    /** Constructor for the Event class
      *
      * @param description description of the Event
      * @param from start time of Event
@@ -23,13 +21,20 @@ public class Event extends Task {
         this.to= to;
     }
 
+    /** Another constructor for the Event class
+     *
+     * @param description description of the Event
+     * @param from start time of Event
+     * @param to end time of Event
+     * @param isDone whether the task should be marked upon creation
+     */
     public Event(String description, LocalDate from, LocalDate to, boolean isDone) {
         super(description, isDone);
         this.from = from;
         this.to= to;
     }
 
-    /** returns the string representation of Event
+    /** Returns the string representation of Event
      *
      * @return string representation of Event class
      */
@@ -44,6 +49,10 @@ public class Event extends Task {
                 + ")";
     }
 
+    /** Returns the string representation of Event in data format
+     *
+     * @return string representation of Event class in data format
+     */
     @Override
     public String toDataFormatString() {
         int marked = 0;
@@ -60,6 +69,12 @@ public class Event extends Task {
                 + this.to.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
     }
 
+    /**
+     * Checks if the given Object is the same as this
+     *
+     * @param o the Object being compared
+     * @return true if o is an instance of this and have the same description, from and to
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {
