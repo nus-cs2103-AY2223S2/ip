@@ -20,6 +20,8 @@ public class Event extends Task {
 
     @Override
     public String toTxtString() {
-        return "E" + super.toTxtString() + "|" + this.from + "-" + this.to;
+        return "E" + super.toTxtString() + "|" 
+        + this.from.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "-" 
+        + this.to.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 }

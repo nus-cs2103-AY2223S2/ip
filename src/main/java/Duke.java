@@ -196,7 +196,9 @@ public class Duke {
 
     public static String removeSpaces(String input) {
         String str = input.replaceFirst(" ", "");
-        str = str.substring(0, str.length() - 1);
+        if (str.charAt(str.length() - 1) == ' ') { 
+            str = str.substring(0, str.length() - 1);
+        }
         return str;
     }
 

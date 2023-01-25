@@ -16,6 +16,6 @@ public class Deadline extends Task {
 
     @Override
     public String toTxtString() {
-        return "D" + super.toTxtString() + "|" + this.deadline;
+        return "D" + super.toTxtString() + "|" + this.deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 }
