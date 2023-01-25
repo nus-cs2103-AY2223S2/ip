@@ -1,8 +1,18 @@
 package duke;
 
+/**
+ * Command to mark a task as done.
+ */
 public class MarkCommand extends Command{
     int toggleLineNumber;
 
+    /**
+     * Constructor to create a mark command.
+     *
+     * @param fullCommand User input command.
+     * @throws DukeEmptyArgumentException
+     * @throws DukeInvalidArgumentException
+     */
     public MarkCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {
             toggleLineNumber = Integer.parseInt(fullCommand[1]) - 1;

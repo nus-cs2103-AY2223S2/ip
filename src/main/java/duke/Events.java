@@ -4,13 +4,30 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Event type of task.
+ */
 public class Events extends Task{
+    /**
+     * Starting time of events in "YYYY-MM-DDTHH:MM:SS" format
+     */
     protected LocalDateTime start;
+    /**
+     * End time of events in "YYYY-MM-DDTHH:MM:SS" format
+     */
     protected LocalDateTime end;
     protected String startTime;
     protected String endTime;
     private DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
+    /**
+     * Constructor to create a event instance.
+     *
+     * @param description description of the task.
+     * @param start starting time of events.
+     * @param end end time of events.
+     * @throws DukeInvalidArgumentException
+     */
     public Events(String description, String  start, String  end) throws DukeInvalidArgumentException {
         super(description);
         try {
@@ -31,11 +48,19 @@ public class Events extends Task{
         return endTime;
     }
 
+    /**
+     * Print the deadline of the event.
+     */
     public void getDeadline() {
         System.out.println("The event is from" + start.format(format) + " to "
                 + end.format(format));
     }
 
+    /**
+     * Return string representation of events task.
+     *
+     * @return string representation of event task.
+     */
     public String toString() {
         return "[E]" + super.toString() + "(from: " + start.format(format) + " to: "
                 + end.format(format) + ")";

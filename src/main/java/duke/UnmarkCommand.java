@@ -1,8 +1,17 @@
 package duke;
 
+/**
+ * Command to mark a task as not done yet.
+ */
 public class UnmarkCommand extends Command{
     int toggleLineNumber;
 
+    /**
+     * Constructor to create a unmark command.
+     * @param fullCommand User input command.
+     * @throws DukeEmptyArgumentException
+     * @throws DukeInvalidArgumentException
+     */
     public UnmarkCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {
             toggleLineNumber = Integer.parseInt(fullCommand[1]) - 1;

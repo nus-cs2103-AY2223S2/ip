@@ -2,21 +2,32 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * User interface of the application.
+ */
 public class Ui {
     private static Scanner scanner = new Scanner(System.in);
     private static final String DIVIDER = "____________________________________________________________";
 
-    //method for stdout
+    /**
+     * Print the divider among multiple response.
+     */
     protected void printHorizontalLine() {
         System.out.println("\t" + DIVIDER);
     }
 
+    /**
+     * Print the welcome message upon start of the application.
+     */
     public void showWelcomeMessage () {
         printHorizontalLine();
         System.out.println("\tHello! I'm Duke\n" + "\tWhat can I do for you?");
         printHorizontalLine();
     }
 
+    /**
+     * Print the exit message when application terminate.
+     */
     public void showGoodbyeMessage () {
         //closeScanner();
         printHorizontalLine();
@@ -24,6 +35,12 @@ public class Ui {
         printHorizontalLine();
     }
 
+
+    /**
+     * Print response to the task command.
+     *
+     * @param taskList list that contain the task.
+     */
     public void responseToListCommand (TaskList taskList) {
         printHorizontalLine();
         System.out.println("\tHere are the tasks in your list:");
@@ -34,6 +51,12 @@ public class Ui {
         printHorizontalLine();
     }
 
+    /**
+     * Print response to the add task command.
+     *
+     * @param task task to be added into task list.
+     * @param taskList list that contain the task.
+     */
     public void responseToLAddTaskCommand (Task task, TaskList taskList) {
         printHorizontalLine();
         System.out.println("\tGot it. I've added this task:\n\t  " + task + "\n\tNow you have "
@@ -41,6 +64,11 @@ public class Ui {
         printHorizontalLine();
     }
 
+    /**
+     * Print response to the mark command
+     *
+     * @param task task to be marked as done.
+     */
     public void responseToMarkTaskCommand (Task task) {
         printHorizontalLine();
         System.out.println("\tNice! I've marked this task as done:");
@@ -48,6 +76,11 @@ public class Ui {
         printHorizontalLine();
     }
 
+    /**
+     * Print response to the unmark response.
+     *
+     * @param task task to be marked as undone.
+     */
     public void responseToUnmarkTaskCommand (Task task) {
         printHorizontalLine();
         System.out.println("\tOK, I've marked this task as not done yet:");
@@ -55,6 +88,12 @@ public class Ui {
         printHorizontalLine();
     }
 
+    /**
+     * Print response to delete command.
+     *
+     * @param taskList list that contained the task
+     * @param index task to be deleted from task list.
+     */
     public void responseToDeleteTaskCommand (TaskList taskList, int index) {
         printHorizontalLine();
         System.out.println("\tNoted. I've removed this task:\n\t  " + taskList.getTaskAt(index)
@@ -62,19 +101,32 @@ public class Ui {
         printHorizontalLine();
     }
 
+    /**
+     * Print loading error
+     * If the file given doesn't exit, it will print this error.
+     */
     public void showLoadingError() {
         printHorizontalLine();
         System.out.println("\t☹ OOPS!!! Unable to load data from the file");
         printHorizontalLine();
     }
 
+    /**
+     * Print the error caused in the program.
+     *
+     * @param msg error message to print.
+     */
     public void showError(String msg) {
         printHorizontalLine();
         System.out.println("\t☹ OOPS!!! "+ msg);
         printHorizontalLine();
     }
 
-
+    /**
+     * Prompts for the command and reads the text entered by the user.
+     *
+     * @return command entered by the user.
+     */
     public String requestForUserInput() {
         System.out.println("\tEnter Command: ");
         return scanner.nextLine();
@@ -83,5 +135,4 @@ public class Ui {
     private void closeScanner() {
         scanner.close();
     }
-
 }

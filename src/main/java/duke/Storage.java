@@ -8,10 +8,19 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represent the file to store the task list.
+ */
 public class Storage {
     private final String filePath;
     private final Path path;
 
+    /**
+     * Constructor to create a storage.
+     *
+     * @param filepath string representation of the path.
+     * @throws DukeFileNotFoundException
+     */
     public Storage(String filepath) throws DukeFileNotFoundException {
         try {
             this.filePath = filepath;
@@ -21,6 +30,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Set a default storage if the file or folder is not found.
+     */
     protected static void setDefaultStorage() {
         File folder = new File("data/");
         if (!folder.exists()) {
@@ -37,6 +49,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Insert new task into the file.
+     *
+     * @param t task to be inserted.
+     * @throws DukeIOException
+     */
     protected void updateData(Task t) throws DukeIOException {
         try {
             List<String> allLine =  Files.readAllLines(path);
@@ -55,6 +73,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Update the task in the file with its new state.
+     *
+     * @param lineNumber line number in the file to be toggled.
+     * @param status status of file that indicate whether the task is done or not.
+     * @throws DukeIOException
+     */
     protected void updateData(int lineNumber, int status) throws DukeIOException {
         try {
             List<String> allLine = Files.readAllLines(path);
@@ -70,6 +95,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Remove specific task from the file.
+     *
+     * @param lineNumber line number in the file to be deleted.
+     * @throws DukeIOException
+     */
     protected void removeData(int lineNumber) throws DukeIOException {
         try {
             List<String> allLine = Files.readAllLines(path);
@@ -83,6 +114,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the task from the file at the beginning of the program execution.
+     *
+     * @return list of task that stored in the file before.
+     * @throws DukeIOException
+     * @throws DukeInvalidArgumentException
+     */
     protected ArrayList<Task> load() throws DukeIOException, DukeInvalidArgumentException {
         ArrayList<Task> taskList= new ArrayList<>();
         try {
@@ -116,6 +154,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Empty all the task that stored in the file.
+     *
+     * @throws DukeIOException
+     */
     protected void emptyStorage() throws DukeIOException {
         try {
             List<String> emptyLine = new ArrayList<>();

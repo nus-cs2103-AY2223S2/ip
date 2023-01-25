@@ -1,10 +1,19 @@
 package duke;
 
+/**
+ * Entry point of the application.
+ * Initialize the program and interact with the user.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor to create duke instance.
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         try {
             ui = new Ui();
@@ -17,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Start running the application.
+     */
     public void run() {
         boolean isExit = false;
 
@@ -34,6 +46,7 @@ public class Duke {
             }
         }
     }
+
 
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
