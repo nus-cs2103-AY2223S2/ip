@@ -1,25 +1,30 @@
 package Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    final private String deadline;
+//    final private String deadline;
+    final private LocalDate dueDate;
 
     /**
      * Constructor method for Deadline
      * @param task new task to be added
-     * @param deadline deadline of the task
+     * @param dueDate deadline of the task
      */
-    public Deadline(String task, String deadline) {
+    public Deadline(String task, LocalDate dueDate) {
         super(task);
-        this.deadline = deadline;
+        this.dueDate = dueDate;
     }
 
     public String toData() {
         String status = this.completed ? "1" : "0";
-        return "D | " + status + " |" + this.task + "|" + this.deadline;
+        return "D | " + status + " |" + this.task + "| " + this.dueDate;
     }
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";
-        return "[D][" + statusIcon + "]" + this.task + "(by:" + this.deadline + ")";
+        String formatted_dueDate = dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
+        return "[D][" + statusIcon + "]" + this.task + "(by: " + formatted_dueDate + ")";
     }
 }

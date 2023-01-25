@@ -11,10 +11,11 @@ import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-import DukeException.DukeException;
+import DukeException.*;
 
 public class TaskList {
 
@@ -25,11 +26,11 @@ public class TaskList {
      * Constructor to create new Task.Task List
      */
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     public TaskList(File file) {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
         this.file = file;
         loadTasks();
     }
@@ -43,6 +44,7 @@ public class TaskList {
                 try {
                     String[] args = line.split("\\|");
                     String task_type = args[0].trim();
+                    System.out.println(task_type);
                     String task_status = args[1].trim();
                     String task_desc = args[2];
                     switch (task_type) {
@@ -54,29 +56,44 @@ public class TaskList {
                             tasks.add(todo);
                             break;
                         case "D":
-                            String due_date = args[3];
-                            Deadline deadline = new Deadline(task_desc, due_date);
-                            if (task_status.equals("1")) {
-                                deadline.markComplete();
+                            String due_date = args[3].trim();
+                            try {
+                                LocalDate dueDate = LocalDate.parse(due_date);
+                                Deadline deadline = new Deadline(task_desc, dueDate);
+                                if (task_status.equals("1")) {
+                                    deadline.markComplete();
+                                }
+                                tasks.add(deadline);
+                                break;
+                            } catch (DateTimeException error) {
+                                throw new InvalidArgumentException("Wrong date format! Please follow the format YYYY-MM-DD (e.g. 2000-01-01)");
                             }
-                            tasks.add(deadline);
-                            break;
                         case "E":
-                            String[] duration = args[3].split("-");
-                            String startTime = duration[0];
-                            String endTime = duration[1];
-                            Event event = new Event(task_desc, startTime, endTime);
-                            if (task_status.equals("1")) {
-                                event.markComplete();
+                            System.out.println(args[3]);
+                            String from = args[3].trim();
+                            String to = args[4].trim();
+                            try {
+                                LocalDate startDate = LocalDate.parse(from);
+                                LocalDate endDate = LocalDate.parse(to);
+                                Event event = new Event(task_desc, startDate, endDate);
+                                if (startDate.isAfter(endDate)) {
+                                    throw new InvalidArgumentException("Your start date should be before your end date!");
+                                }
+                                if (task_status.equals("1")) {
+                                    event.markComplete();
+                                }
+                                tasks.add(event);
+                                break;
+                            } catch (DateTimeException error) {
+                                throw new InvalidArgumentException("Wrong date format! Please follow the format YYYY-MM-DD (e.g. 2000-01-01)");
                             }
-                            tasks.add(event);
-                            break;
                         default:
                             break;
                     }
                     line = reader.readLine();
                 } catch (DukeException duke_error) {
                     duke_error.printStackTrace();
+                    break;
                 }
             }
             reader.close();
@@ -120,11 +137,11 @@ public class TaskList {
     /**
      * Add new deadline to current task list
      * @param task new task to be added
-     * @param deadline the deadline of the task
+     * @param dueDate the deadline of the task
      * @return the added Deadline
      */
-    public Deadline addDeadline(String task, String deadline) {
-        Deadline taskDeadline = new Deadline(task, deadline);
+    public Deadline addDeadline(String task, LocalDate dueDate) {
+        Deadline taskDeadline = new Deadline(task, dueDate);
         this.tasks.add(taskDeadline);
         return taskDeadline;
     }
@@ -136,7 +153,7 @@ public class TaskList {
      * @param to end time of the event
      * @return the added Event
      */
-    public Event addEvent(String task, String from, String to) {
+    public Event addEvent(String task, LocalDate from, LocalDate to) {
         Event event = new Event(task, from, to);
         this.tasks.add(event);
         return event;

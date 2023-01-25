@@ -1,8 +1,12 @@
 package Command;
 
+import DukeException.InvalidArgumentException;
 import DukeException.MissingArgumentException;
 import Storage.TaskList;
 import Task.Deadline;
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
 
 public class AddDeadlineCommand extends Command {
 
@@ -17,16 +21,28 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks) throws MissingArgumentException {
-        String[] req = this.request.split(" ");
-        req = request.split("deadline")[1].split("/by");
+    public String execute(TaskList tasks) throws MissingArgumentException, InvalidArgumentException {
+        String[] req = request.split("deadline ");
         if (req.length < 2) {
-            throw new MissingArgumentException("☹ OOPS!!! You're missing either the task or the deadline");
+            throw new MissingArgumentException("☹ OOPS!!! You're missing the task description");
         }
+        req = req[1].split("/by ");
+
+        if (req.length < 2) {
+            throw new MissingArgumentException("☹ OOPS!!! You're missing the task deadline");
+        }
+
         String task = req[0];
-        String deadline = req[1];
-        Deadline newDeadline = tasks.addDeadline(task, deadline);
-        return "Great! I've added this task for you \n" + newDeadline +
-                "\nYou have " + tasks.numOfTask() + " tasks in the list";
+        String deadline = req[1].trim();
+
+        try {
+            LocalDate dueDate = LocalDate.parse(deadline);
+            Deadline newDeadline = tasks.addDeadline(task, dueDate);
+            return "Great! I've added this task for you \n" + newDeadline +
+                    "\nYou have " + tasks.numOfTask() + " tasks in the list";
+
+        } catch (DateTimeException error) {
+            throw new InvalidArgumentException("Please insert your date using the format, YYYY-MM-DD (e.g. 2000-01-01)");
+        }
     }
 }
