@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.util.Scanner;
+
 /**
  * Represents a user interface that is responsible for getting input and displaying output to the user.
  */
