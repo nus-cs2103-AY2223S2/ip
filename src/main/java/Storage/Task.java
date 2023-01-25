@@ -1,7 +1,7 @@
-package Storage;
+package storage;
 
-import LeoException.IncorrectMarkException;
-import LeoException.IncorrectUnmarkException;
+import leoException.IncorrectMarkException;
+import leoException.IncorrectUnmarkException;
 
 public class Task {
     protected String task;

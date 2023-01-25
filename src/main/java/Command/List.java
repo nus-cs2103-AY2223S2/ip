@@ -1,7 +1,7 @@
-package Command;
+package command;
 
-import LeoException.NoTaskFoundException;
-import Storage.Storage;
+import leoException.NoTaskFoundException;
+import storage.Storage;
 
 public class List {
 

@@ -1,10 +1,9 @@
-package Command;
-
-import LeoException.*;
-import Storage.Storage;
+package command;
 
 import java.util.Objects;
 import java.util.Scanner;
+import leoException.LeoException;
+import storage.Storage;
 
 public class Command {
 

@@ -1,4 +1,4 @@
-import Command.Command;
+import command.Command;
 
 public class Leo {
     private final Command c;

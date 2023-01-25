@@ -1,7 +1,15 @@
-package Command;
+package command;
 
-import LeoException.*;
-import Storage.*;
+import leoException.EmptyDeadlineException;
+import leoException.EmptyDescriptionException;
+import leoException.IncompleteDurationException;
+import leoException.InvalidInputException;
+import leoException.LeoException;
+import storage.Deadline;
+import storage.Event;
+import storage.Storage;
+import storage.Task;
+import storage.ToDo;
 
 public class Add {
 

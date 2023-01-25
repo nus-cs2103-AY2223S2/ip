@@ -1,6 +1,6 @@
-package Command;
+package command;
 
-import Storage.Storage;
+import storage.Storage;
 
 public class Unmark extends ListAction {
 

@@ -1,4 +1,4 @@
-package LeoException;
+package leoException;
 
 public class IncorrectMarkException extends LeoException {
 

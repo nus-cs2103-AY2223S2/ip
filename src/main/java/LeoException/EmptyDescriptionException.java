@@ -1,4 +1,4 @@
-package LeoException;
+package leoException;
 
 public class EmptyDescriptionException extends LeoException {
 

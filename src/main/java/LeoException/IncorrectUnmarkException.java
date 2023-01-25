@@ -1,4 +1,4 @@
-package LeoException;
+package leoException;
 
 public class IncorrectUnmarkException extends LeoException {
 
