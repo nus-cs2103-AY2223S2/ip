@@ -6,12 +6,16 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Storage {
+    private static final String FILE_DESTINATION = "data/duke.txt";
+    private final File file;
     public Storage() {
+        file = new File(FILE_DESTINATION);
     }
-    public void readSavedFile(File file, TaskList taskList) {
+    public TaskList readSavedFile() {
+        File file = new File(FILE_DESTINATION);
+        TaskList taskList = new TaskList();
         try {
             Scanner myReader = new Scanner(file);
-            String data;
             while (myReader.hasNextLine()) {
                 taskList.addTask(parseStringToTask(myReader.nextLine()));
             }
@@ -20,25 +24,28 @@ public class Storage {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return taskList;
     }
 
     public Task parseStringToTask(String string) {
         String[] arr = string.split(",");
         if (arr[0].equals("T")) {
-            Task t = new ToDo(arr[2], arr[1].equals("1"));
-            return t;
+            return new ToDo(arr[2]
+                    , arr[1].equals("1"));
         } else if (arr[0].equals("D")) {
-            Task t = new Deadline(arr[2], arr[1].equals("1"), LocalDate.parse(arr[3]));
-            return t;
+            return new Deadline(arr[2]
+                    , arr[1].equals("1")
+                    , LocalDate.parse(arr[3]));
         } else {
-            Task t = new Event(arr[2], arr[1].equals("1"), LocalDate.parse(arr[3]), LocalDate.parse(arr[4]));
-            return t;
+            return new Event(arr[2]
+                    , arr[1].equals("1")
+                    , LocalDate.parse(arr[3])
+                    , LocalDate.parse(arr[4]));
         }
     }
-    public void saveTaskListToStorage(File file, TaskList taskList) {
+    public void saveTaskListToStorage(TaskList taskList) {
         try {
-            FileWriter myWriter = new FileWriter(file);
-            // this truncates the duke.txt to size 0
+            FileWriter myWriter = new FileWriter(file); // this truncates the duke.txt to size 0
             for (int i = 0; i < taskList.getArraySize(); i++) {
                 myWriter.write(taskList.getTask(i).toStorableString() + "\n");
             }

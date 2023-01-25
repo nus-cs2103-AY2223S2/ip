@@ -1,20 +1,14 @@
-import java.util.*;
 import java.time.LocalDate;
 import java.io.File;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 
 public class Duke {
-    private static final String FILE_DESTINATION = "data/duke.txt";
     private static TaskList taskList;
     public static void main(String[] args) throws DukeException {
         TextUi TextUi = new TextUi();
         Parser Parser = new Parser();
         Storage Storage = new Storage();
-        taskList = new TaskList();
-        File file = new File(FILE_DESTINATION);
-        Storage.readSavedFile(file, taskList); // loads saved strings in duke.txt to tasklist
+        taskList = Storage.readSavedFile(); // loads the list
+
         TextUi.getWelcomeMessage();
         String input;
 
@@ -38,7 +32,7 @@ public class Duke {
                     if (indexToDelete < taskList.getArraySize()) {
                         TextUi.getTaskRemovedMessage(taskList.getTask(indexToDelete),taskList.getArraySize() - 1);
                         taskList.removeTask(indexToDelete);
-                        Storage.saveTaskListToStorage(file, taskList);
+                        Storage.saveTaskListToStorage(taskList);
                     } else {
                         throw new DukeException("Invalid, there is no such task");
                     }
@@ -47,7 +41,7 @@ public class Duke {
                     if (indexToMark < taskList.getArraySize()) {
                         Task toMark = taskList.getTask(indexToMark);
                         toMark.markAsDone();
-                        Storage.saveTaskListToStorage(file, taskList);
+                        Storage.saveTaskListToStorage(taskList);
                         TextUi.getCustomMessage("Nice! I've marked this task as done:\n" + toMark);
                     } else {
                         throw new DukeException("Invalid, there is no such task");
@@ -57,7 +51,7 @@ public class Duke {
                     if (indexToUnmark < taskList.getArraySize()) {
                         Task toUnmark = taskList.getTask(indexToUnmark);
                         toUnmark.markAsUndone();
-                        Storage.saveTaskListToStorage(file, taskList);
+                        Storage.saveTaskListToStorage(taskList);
                         TextUi.getCustomMessage("OK, I've marked this task as not done yet:\n" + toUnmark);
                     } else {
                         throw new DukeException("Invalid, there is no such task");
@@ -92,11 +86,11 @@ public class Duke {
                                 , LocalDate.parse(str[1].substring(3)));
                         taskList.addTask(newTask);
                         TextUi.getTaskAddedMessage(newTask, taskList.getArraySize());
-                        Storage.saveTaskListToStorage(file, taskList);
+                        Storage.saveTaskListToStorage(taskList);
                     } else {
                         throw new DukeException("I'm sorry, I don't know what that means!");
                     }
-                    Storage.saveTaskListToStorage(file, taskList);
+                    Storage.saveTaskListToStorage(taskList);
                 }
             } catch (DukeException dukeException) {
                 TextUi.getCustomMessage(dukeException.getMessage());

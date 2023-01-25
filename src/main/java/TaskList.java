@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    public static List<Task> taskList;
+    private static List<Task> taskList;
     public TaskList() {
         taskList = new ArrayList<>();
     }
@@ -10,7 +10,6 @@ public class TaskList {
     public Task getTask(int index) {
         return taskList.get(index);
     }
-
     public void addTask(Task task) {
         taskList.add(task);
     }

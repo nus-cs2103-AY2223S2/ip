@@ -1,2 +1,9 @@
-package PACKAGE_NAME;public class parser {
+public class Parser {
+
+    public Parser() {
+    }
+
+    public String removeWhiteSpaces(String str) {
+        return str.replaceAll("\\s", "");
+    }
 }
