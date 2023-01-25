@@ -29,6 +29,10 @@ public class Duke {
                 case "list":
                     Task.printTaskList(taskList);
                     break;
+                case "mark":
+                    break;
+                case "ummark":
+                    break;
                 default:
                     printMessage(msgDescription);
                     taskList[taskCounter] = new Task(msgDescription);
