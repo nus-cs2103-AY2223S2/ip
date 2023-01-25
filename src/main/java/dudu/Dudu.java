@@ -28,9 +28,16 @@ public class Dudu {
         }
     }
 
+    /**
+     * Dudu exit
+     */
     public static void exit() {
         isExit = true;
     }
+
+    /**
+     * Run Dudu
+     */
     public void run() {
         ui.showWelcome();
         while (!isExit && scanner.hasNext()) {

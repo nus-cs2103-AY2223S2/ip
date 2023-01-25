@@ -2,10 +2,21 @@ package dudu.task;
 
 public class Todo extends Task{
     private String name;
+
+    /**
+     * Constructor for todo task, default undone
+     * @param name Name of the task
+     */
     public Todo(String name) {
         super(name, false);
         this.name = name;
     }
+
+    /**
+     * Constructor for todo task
+     * @param name Name of the task
+     * @param isDone The completion status of the task
+     */
     public Todo(String name, boolean isDone) {
         super(name, isDone);
         this.name = name;
