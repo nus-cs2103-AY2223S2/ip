@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  * Represents a parser that can read the input and execute the corresponding command
@@ -59,6 +60,15 @@ public class Parser {
         System.out.println("________________________________");
 
         switch (command) {
+            case "find":
+                String searchString = input.substring(("find").length() + 1);
+                ArrayList<Task> foundTasks = toDoList.search(searchString);
+                System.out.println("Here are the matching tasks in your list:");
+                for (int i = 0; i < foundTasks.size(); i++) {
+                    System.out.println(i + 1 + "." + foundTasks.get(i).toString());
+                }
+                break;
+
             case "list":
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < toDoList.size(); i++) {

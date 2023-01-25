@@ -52,4 +52,16 @@ public class TaskList {
     public void remove(int index) {
         this.toDoList.remove(index);
     }
+
+    public ArrayList<Task> search(String searchString) {
+        ArrayList<Task> foundTasks = new ArrayList<Task>();
+        
+        for (int i = 0; i < this.toDoList.size(); i++) {
+            if(toDoList.get(i).contains(searchString)){
+                foundTasks.add(toDoList.get(i));
+            }
+        }
+
+        return foundTasks;
+    }
 }
