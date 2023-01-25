@@ -16,6 +16,11 @@ public class Event extends Task {
         this.to = to;
     }
 
+    public String toData() {
+        String status = this.completed ? "1" : "0";
+        return "E | " + status + " |" + this.task + "|" + this.from + "-" + this.to;
+    }
+
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";
