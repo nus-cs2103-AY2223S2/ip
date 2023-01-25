@@ -1,9 +1,10 @@
 package commands;
 
+import static ui.Ui.LS;
+
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
-import static ui.Ui.LS;
 
 public class UnmarkCommand extends Command {
     private int index;

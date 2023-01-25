@@ -1,7 +1,8 @@
 package tasks;
 
 public class Event extends Task {
-    private String from, to;
+    private String from;
+    private String to;
 
     public Event(String description, String from, String to) {
         super(description);
@@ -22,6 +23,6 @@ public class Event extends Task {
         } else {
             done = 0;
         }
-        return "E" + " | " + done +  " | " + this.description + " | " + this.from + " | " + this.to;
+        return "E" + " | " + done + " | " + this.description + " | " + this.from + " | " + this.to;
     }
 }

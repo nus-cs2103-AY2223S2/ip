@@ -1,14 +1,19 @@
 package storage;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+
 import exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.ToDo;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 public class Storage {
     private File storageFile;
@@ -87,7 +92,7 @@ public class Storage {
         }
         tempFile.renameTo(this.storageFile);
     }
-    private void appendToFile(String text){
+    private void appendToFile(String text) {
         try {
             FileWriter fw = new FileWriter(this.storageFile, true); // create a FileWriter in append mode
             fw.write(text + "\n");

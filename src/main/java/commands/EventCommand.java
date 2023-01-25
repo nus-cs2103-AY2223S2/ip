@@ -1,14 +1,17 @@
 package commands;
 
+import static ui.Ui.LS;
+
 import storage.Storage;
 import tasks.Event;
 import tasks.TaskList;
 import ui.Ui;
 
-import static ui.Ui.LS;
-
 public class EventCommand extends Command {
-    private String desc, from, to;
+    private String desc;
+    private String from;
+    private String to;
+
     public EventCommand(String desc, String from, String to) {
         this.desc = desc;
         this.from = from;

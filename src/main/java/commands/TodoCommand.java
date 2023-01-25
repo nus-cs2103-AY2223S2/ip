@@ -1,11 +1,11 @@
 package commands;
 
+import static ui.Ui.LS;
+
 import storage.Storage;
 import tasks.TaskList;
 import tasks.ToDo;
 import ui.Ui;
-
-import static ui.Ui.LS;
 
 public class TodoCommand extends Command {
     private String desc;

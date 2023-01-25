@@ -18,6 +18,6 @@ public class ToDo extends Task {
         } else {
             done = 0;
         }
-        return "T" + " | " + done +  " | " + this.description;
+        return "T" + " | " + done + " | " + this.description;
     }
 }

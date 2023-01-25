@@ -1,14 +1,24 @@
 package parser;
 
-import commands.*;
+import java.util.regex.Pattern;
+
+import commands.ByeCommand;
+import commands.Command;
+import commands.DeadlineCommand;
+import commands.DeleteCommand;
+import commands.EventCommand;
+import commands.IncorrectCommand;
+import commands.ListCommand;
+import commands.MarkCommand;
+import commands.TodoCommand;
+import commands.UnmarkCommand;
 import enums.CommandType;
 import exceptions.DukeException;
 
-import java.util.regex.Pattern;
 
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
-        String arr[] = fullCommand.split(" ", 2);
+        String[] arr = fullCommand.split(" ", 2);
         String commandType = arr[0].toLowerCase();
         if (commandType.equals(CommandType.BYE.toString())) {
             return new ByeCommand();
@@ -50,7 +60,7 @@ public class Parser {
     }
     private static DeadlineCommand prepareDeadline(String message) throws DukeException {
         Pattern p = Pattern.compile("/by");
-        String temp[] = p.split(message);
+        String[] temp = p.split(message);
         if (temp.length < 2) {
             throw CommandType.DEADLINE.getErr();
         }
@@ -60,15 +70,15 @@ public class Parser {
     }
     private static EventCommand prepareEvent(String message) throws DukeException {
         Pattern p1 = Pattern.compile("/from");
-        String temp1[] = p1.split(message);
+        String[] temp1 = p1.split(message);
         if (temp1.length < 2) {
-            throw new DukeException("Invalid format for tasks.Event.\nUsage: event <task> /from <date/time> /to <date/time>\n");
+            throw CommandType.EVENT.getErr();
         }
         String desc = temp1[0].trim();
         Pattern p2 = Pattern.compile("/to");
         String[] temp2 = p2.split(temp1[1]);
         if (temp2.length < 2) {
-            throw new DukeException("Invalid format for tasks.Event.\nUsage: event <task> /from <date/time> /to <date/time>\n");
+            throw CommandType.EVENT.getErr();
         }
         String from = temp2[0].trim();
         String to = temp2[1].trim();
