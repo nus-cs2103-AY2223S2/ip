@@ -48,12 +48,12 @@ public class MeggyTime {
     private static final DateTimeFormatter[] formats;
     /**
      * Output format.
-     * */
-    private static final DateTimeFormatter outFmt=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+     */
+    private static final DateTimeFormatter outFmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     /**
      * Encode format.
-     * */
-    private static final DateTimeFormatter encodeFmt =DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
+     */
+    private static final DateTimeFormatter encodeFmt = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
     /**
      * Cached dummy NA value.
      */
@@ -105,8 +105,8 @@ public class MeggyTime {
 
     /**
      * @return String representation used in data file. User-customized time is unchanged.
-     * */
-    public String encode(){
-        return formatted == null ? customized: formatted.format(encodeFmt);
+     */
+    public String encode() {
+        return formatted == null ? customized : formatted.format(encodeFmt);
     }
 }

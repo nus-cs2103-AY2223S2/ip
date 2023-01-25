@@ -5,7 +5,7 @@ public final class Resource {
     /**
      * Prefix of all error messages.
      */
-    public final static String errBase = " ☹ OOPS!!! ";
+    public final static String errBase = " OOPS!!! ";
     /**
      * Error message if no argument is provided to a command that needs argument(s).
      */
