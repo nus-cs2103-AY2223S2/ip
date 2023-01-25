@@ -1,4 +1,8 @@
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Duke {
 
@@ -7,6 +11,11 @@ public class Duke {
 
 
         public static void main (String[]args) {
+            try {
+                HardDisk.loadFile(list);
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
             try {
                 greet();
                 System.out.println(line);
@@ -39,7 +48,8 @@ public class Duke {
                         if (list.size() != 0 && index > 0 && index <= list.size()) {
                             list.get(index - 1).mark();
                         } else {
-                            throw new DukeException("Invalid Index!");
+                            System.out.println("Invalid Index!");
+                            //throw new DukeException("Invalid Index!");
                         }
                     }
 
@@ -50,7 +60,8 @@ public class Duke {
                         if (list.size() != 0 && index > 0 && index <= list.size()) {
                             list.get(index - 1).unmark();
                         } else {
-                            throw new DukeException("Invalid Index!");
+                            System.out.println("Invalid Index!");
+                            //throw new DukeException("Invalid Index!");
                         }
                     }
 
@@ -61,7 +72,8 @@ public class Duke {
                         if (list.size() != 0 && index > 0 && index <= list.size()) {
                             delete(index - 1, list);
                         } else {
-                            throw new DukeException("Invalid Index!");
+                            System.out.println("Invalid Index!");
+                            //throw new DukeException("Invalid Index!");
                         }
                     }
 
@@ -107,28 +119,37 @@ public class Duke {
                                 echo(list.get(list.size() - 1));
                                 System.out.println(line);
                             } else {
-                                throw new DukeException("Invalid Input! You need to specify a /from and /to or content is empty!");
+                                System.out.println("Invalid Input! You need to specify a /from and /to or content is empty!");
+                                //throw new DukeException("Invalid Input! You need to specify a /from and /to or content is empty!");
                             }
                         } else {
-                            throw new DukeException("Invalid Input! You need to specify a date or content is empty!");
+                            System.out.println("Invalid Input! You need to specify a date or content is empty!");
+                            //throw new DukeException("Invalid Input! You need to specify a date or content is empty!");
                         }
                     } else {
-                        throw new DukeException("Invalid Input!");
+                        System.out.println("Invalid Input!");
+                        //throw new DukeException("Invalid Input!");
+                    }
+                    try {
+                         HardDisk.saveToFile(list);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                 }
+
                 sc.close();
                 System.out.println(line);
-            } catch (DukeException e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
     }
 
-        public static void echo(Tasks task){
-        System.out.println(line);
-        System.out.println("        Got it. I've added this task:");
-        System.out.println("        " + task);
-        System.out.println("        Now you have " + list.size() + " tasks in the list.");
-        System.out.println(line);
+        public static void echo(Tasks task) {
+            System.out.println(line);
+            System.out.println("        Got it. I've added this task:");
+            System.out.println("        " + task);
+            System.out.println("        Now you have " + list.size() + " tasks in the list.");
+            System.out.println(line);
     }
 
         public static void delete(int i, ArrayList<Tasks> list){
@@ -140,7 +161,7 @@ public class Duke {
             System.out.println(line);
         }
 
-        static void greet () {
+        public static void greet () {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -149,6 +170,8 @@ public class Duke {
         System.out.println(line);
         System.out.println("\n      Hello! I'm Oli\n" + "       What can I do for you?");
     }
+
+
 
 
 }
