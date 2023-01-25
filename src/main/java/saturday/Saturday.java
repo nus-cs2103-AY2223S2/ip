@@ -42,7 +42,8 @@ public class Saturday {
         }
     }
     public static void main(String[] args) {
-        new Saturday("data/task_list.txt").run();
+        String filePath = Storage.getFilePath();
+        new Saturday(filePath).run();
     }
 
 }
