@@ -2,8 +2,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
     private ArrayList<Task> list;
+    Save s;
     Duke() {
         list = new ArrayList<>(100);
+        s = new Save();
     }
 
     public static void main(String[] args) {
@@ -20,6 +22,7 @@ public class Duke {
         String description = input.substring(5);
         ToDo temp = new ToDo((description));
         list.add(temp);
+        s.write(temp);
         System.out.println("Got it. I've added this task:");
         System.out.println(temp);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
@@ -33,6 +36,7 @@ public class Duke {
         String to = input.substring(index2 + 4);
         Event temp = new Event(description,from,to);
         list.add(temp);
+        s.write(temp);
         System.out.println("Got it. I've added this task:");
         System.out.println(temp);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
@@ -44,6 +48,7 @@ public class Duke {
         String by = input.substring(index + 4);
         Deadline temp = new Deadline(description,by);
         list.add(temp);
+        s.write(temp);
         System.out.println("Got it. I've added this task:");
         System.out.println(temp);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
@@ -53,6 +58,7 @@ public class Duke {
         int index = Integer.parseInt(input.substring(7));
         Task temp = list.get(index - 1);
         list.remove(index - 1);
+        s.update(list);
         System.out.println("Noted. I've removed this task:");
         System.out.println(temp);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
@@ -73,10 +79,12 @@ public class Duke {
                 }
                 continue;
             }
+            // Mark the task
             if (input.length() > 5 && input.substring(0,4).equals("mark")) {
                 try {
                     int index = Integer.parseInt(input.substring(5));
                     this.list.get(index - 1).markAsDone();
+                    s.update(list);
                 } catch (IndexOutOfBoundsException IOBE) {
                     System.out.println("There is no such task for marking ☹");
                 } catch (NumberFormatException e) {
@@ -85,10 +93,12 @@ public class Duke {
                     continue;
                 }
             }
+            // Unmark the task
             if (input.length() > 7 && input.substring(0,6).equals("unmark")) {
                 try {
                     int index = Integer.parseInt(input.substring(7));
                     this.list.get(index - 1).markAsNotDone();
+                    s.update(list);
                 } catch (IndexOutOfBoundsException IOBE) {
                     System.out.println("There is no such task for unmarking ☹");
                 } catch (NumberFormatException e) {
@@ -97,6 +107,7 @@ public class Duke {
                     continue;
                 }
             }
+            // Add a toDo task to the list
             if (input.length() >= 4 && input.substring(0,4).equals("todo")) {
                 try {
                     toDo(input);
@@ -106,6 +117,7 @@ public class Duke {
                     continue;
                 }
             }
+            // Add a event task to the list
             if (input.length() >= 5 && input.substring(0,5).equals("event")) {
                 try {
                     event(input);
@@ -115,6 +127,7 @@ public class Duke {
                     continue;
                 }
             }
+            // Add a deadline task to the list
             if (input.length() >= 8 && input.substring(0,8).equals("deadline")) {
                 try {
                     deadline(input);
@@ -124,6 +137,7 @@ public class Duke {
                     continue;
                 }
             }
+            // delete task from list
             if (input.length() > 7 && input.substring(0,6).equals("delete")) {
                 try {
                     delete(input);
