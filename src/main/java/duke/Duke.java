@@ -14,10 +14,6 @@ import task.Todo;
 public class Duke {
   static ArrayList<Task> taskStorage = new ArrayList<Task>();
 
-  enum Commands {
-    LIST, UNMARK, MARK, TODO, DEADLINE, EVENT, DELETE
-  };
-
   public static void main(String[] args) {
     greetings();
     handleRequest();
