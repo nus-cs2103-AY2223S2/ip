@@ -17,13 +17,13 @@ public class DdlTask extends UserTask {
     /**
      * Due time.
      */
-    public final String due;
+    public final MeggyTime due;
 
     /**
      * @param desc Non-null. Description string of task.
      * @param due  Non-null. Due time.
      */
-    private DdlTask(String desc, String due) throws MeggyException {
+    private DdlTask(String desc, MeggyTime due) throws MeggyException {
         super(desc);
         this.due = due;
     }
@@ -36,13 +36,14 @@ public class DdlTask extends UserTask {
     public static DdlTask of(String args) throws MeggyException {
         final int kwIdx = args.indexOf(dueFmt);
         // If no key word in args, time is set to "N/A".
-        final String desc, due;
+        final String desc;
+        final MeggyTime due;
         if (kwIdx < 0) {
             desc = args;
-            due = Util.noFound;
+            due = MeggyTime.NA;
         } else {
             desc = args.substring(0, kwIdx).trim();
-            due = args.substring(kwIdx + dueLen).trim();
+            due = MeggyTime.of(args.substring(kwIdx + dueLen));
         }
         return new DdlTask(desc, due);
     }

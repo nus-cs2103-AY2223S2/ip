@@ -19,14 +19,14 @@
 
 >------------------------------------------------------------
  Got it. Added this task:
-    [D][ ] return book (by: N/A)
+    [D][ ] return book (by: [N/A])
  Now you have 2 task(s) in the list.
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Here are the tasks in your list:
  1.[T][ ] read book
- 2.[D][ ] return book (by: N/A)
+ 2.[D][ ] return book (by: [N/A])
 ------------------------------------------------------------
 
 >------------------------------------------------------------
@@ -36,17 +36,17 @@
 
 >------------------------------------------------------------
  Booyah! Marked this task as done:
-    [D][X] return book (by: N/A)
+    [D][X] return book (by: [N/A])
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  OK. Marked this task as not done:
-    [D][ ] return book (by: N/A)
+    [D][ ] return book (by: [N/A])
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Got it. Added this task:
-    [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+    [E][ ] project meeting (from: 2023-08-06 14:00 to: [4pm])
  Now you have 3 task(s) in the list.
 ------------------------------------------------------------
 
@@ -65,40 +65,40 @@
 >------------------------------------------------------------
  Here are the tasks in your list:
  1.[T][X] read book
- 2.[D][ ] return book (by: N/A)
- 3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+ 2.[D][ ] return book (by: [N/A])
+ 3.[E][ ] project meeting (from: 2023-08-06 14:00 to: [4pm])
  4.[T][ ] join sports club
  5.[T][ ] borrow book
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Got it. Added this task:
-    [D][ ] return book (by: Sunday)
+    [D][ ] return book (by: [Sunday])
  Now you have 6 task(s) in the list.
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Got it. Added this task:
-    [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    [E][ ] project meeting (from: [Mon 2pm] to: 2023-08-06 16:00)
  Now you have 7 task(s) in the list.
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Got it. Added this task:
-    [D][ ] do homework (by: no idea :-p)
+    [D][ ] do homework (by: [no idea :-p])
  Now you have 8 task(s) in the list.
 ------------------------------------------------------------
 
 >------------------------------------------------------------
  Here are the tasks in your list:
  1.[T][X] read book
- 2.[D][ ] return book (by: N/A)
- 3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+ 2.[D][ ] return book (by: [N/A])
+ 3.[E][ ] project meeting (from: 2023-08-06 14:00 to: [4pm])
  4.[T][ ] join sports club
  5.[T][ ] borrow book
- 6.[D][ ] return book (by: Sunday)
- 7.[E][ ] project meeting (from: Mon 2pm to: 4pm)
- 8.[D][ ] do homework (by: no idea :-p)
+ 6.[D][ ] return book (by: [Sunday])
+ 7.[E][ ] project meeting (from: [Mon 2pm] to: 2023-08-06 16:00)
+ 8.[D][ ] do homework (by: [no idea :-p])
 ------------------------------------------------------------
 
 >------------------------------------------------------------
@@ -123,7 +123,7 @@
 
 >------------------------------------------------------------
  OK. Removed this task:
-    [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+    [E][ ] project meeting (from: 2023-08-06 14:00 to: [4pm])
  Now you have 7 task(s) in the list.
 ------------------------------------------------------------
 
@@ -138,14 +138,21 @@
 ------------------------------------------------------------
 
 >------------------------------------------------------------
+ Got it. Added this task:
+    [D][ ] return book (by: 2019-12-02 18:00)
+ Now you have 8 task(s) in the list.
+------------------------------------------------------------
+
+>------------------------------------------------------------
  Here are the tasks in your list:
  1.[T][X] read book
- 2.[D][ ] return book (by: N/A)
+ 2.[D][ ] return book (by: [N/A])
  3.[T][ ] join sports club
  4.[T][ ] borrow book
- 5.[D][ ] return book (by: Sunday)
- 6.[E][ ] project meeting (from: Mon 2pm to: 4pm)
- 7.[D][ ] do homework (by: no idea :-p)
+ 5.[D][ ] return book (by: [Sunday])
+ 6.[E][ ] project meeting (from: [Mon 2pm] to: 2023-08-06 16:00)
+ 7.[D][ ] do homework (by: [no idea :-p])
+ 8.[D][ ] return book (by: 2019-12-02 18:00)
 ------------------------------------------------------------
 
 >------------------------------------------------------------
