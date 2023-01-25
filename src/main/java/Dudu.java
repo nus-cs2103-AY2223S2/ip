@@ -37,6 +37,7 @@ public class Dudu {
 
     public Dudu() {
         list = new TaskList();
+        list.loadTask();
         scanner = new Scanner(System.in);
     }
 

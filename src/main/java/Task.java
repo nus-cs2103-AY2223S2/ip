@@ -22,8 +22,25 @@ public abstract class Task {
         return "[" + (isDone ? "X" : " ") + "]";
     }
 
-    public String parse() {
-        return getType() + "|" + getStatus()+ "|" + getDescription();
+    public String encode() {
+        return getType() + "," + getStatus()+ "," + getDescription();
+    }
+
+    public static Task decode(String task) {
+        String[] taskInfo = task.split(",");
+        String type = taskInfo[0];
+        boolean status = taskInfo[1] == "1";
+        String name = taskInfo[2];
+        if (type.equals("Deadline")) {
+            String by = taskInfo[3];
+            return new Deadline(name, by, status);
+        } else if (type.equals("Event")) {
+            String from = taskInfo[3];
+            String to = taskInfo[4];
+            return new Event(name, from, to, status);
+        } else {
+            return new Todo(name, status);
+        }
     }
     @Override
     public String toString() {
