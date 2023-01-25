@@ -1,12 +1,9 @@
 import java.util.*;
-<<<<<<< HEAD
 import java.time.LocalDate;
-=======
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
->>>>>>> master
 public class Duke {
     private static String fileDestination = "data/duke.txt";
     private static List<Task> taskList = new ArrayList<>();
