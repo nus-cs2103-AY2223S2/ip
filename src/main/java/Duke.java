@@ -194,7 +194,7 @@ public class Duke {
             break;
         case 'D':
             toCheck = currTask.split("by:", 2);
-            String desc = toCheck[0].substring(7, toCheck[0].length() - 1);
+            String desc = toCheck[0].substring(7, toCheck[0].length() - 2);
             String date = toCheck[1].substring(0, toCheck[1].length() - 1);
             task = new Deadline(desc, date);
             break;
