@@ -1,5 +1,8 @@
 package task;
+import exception.DukeException;
+import storage.Storage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +11,17 @@ import java.util.List;
  */
 public class TaskList {
     protected List<Task> tasks;
+    public Storage storage;
 
 
     /**
      * Constructor to initialize a tasklist object
      */
     public TaskList() {
-        this.tasks = new ArrayList<Task>(100);
+        storage = new Storage();
+        List<Task> list = storage.loadData();
+        this.tasks = list;
+
     }
 
     /**
@@ -63,9 +70,10 @@ public class TaskList {
      *
      * @param desc The title of the todo task
      */
-    public void addTodo(String desc) {
+    public void addTodo(String desc) throws DukeException {
         Todo t = new Todo(desc);
         tasks.add(t);
+        storage.save(this);
         System.out.println("    " + t);
         printNumTasks();
     }
@@ -76,9 +84,10 @@ public class TaskList {
      * @param date The time/date of the deadline
      * @param desc The title of the deadline
      */
-    public void addDeadline(String date, String desc) {
+    public void addDeadline(String date, String desc) throws DukeException {
         Deadline d = new Deadline(date, desc);
         tasks.add(d);
+        storage.save(this);
         System.out.println("    " + d);
         printNumTasks();
     }
@@ -90,9 +99,10 @@ public class TaskList {
      * @param end The end date/time of the event
      * @param desc The title of the event
      */
-    public void addEvent(String start, String end, String desc) {
+    public void addEvent(String start, String end, String desc) throws DukeException {
         Event e = new Event(start, end, desc);
         tasks.add(e);
+        storage.save(this);
         System.out.println("    " + e);
         printNumTasks();
     }
@@ -102,10 +112,36 @@ public class TaskList {
      *
      * @param taskNum The task number to be deleted
      */
-    public void deleteTask(int taskNum) {
+    public void deleteTask(int taskNum) throws DukeException {
         System.out.println("    " + tasks.get(taskNum-1));
         tasks.remove(taskNum-1);
+        storage.save(this);
         printNumTasks();
+    }
+
+    public void markTask(Task task) throws DukeException {
+        if (task.isMarked) {
+            throw new DukeException("This task has already been marked as done.");
+        } else {
+            task.mark();
+            storage.save(this);
+            System.out.println("Great job on completing this task! I've marked it as done:");
+            System.out.println(task);
+        }
+        if (this.isAllCompleted()) {
+            System.out.println("Yay! You have completed all your tasks :-)");
+        }
+    }
+
+    public void unmarkTask(Task task) throws DukeException {
+        if (!task.isMarked()) {
+            throw new DukeException("Oops! This task has not been marked as done before.");
+        } else {
+            task.unMark();
+            storage.save(this);
+            System.out.println("Alright, I've marked this task as not done yet:");
+            System.out.println(task);
+        }
     }
 
     /**
@@ -119,6 +155,7 @@ public class TaskList {
             System.out.println(str);
         }
     }
+
 
     /**
      * Returns the string representation of the tasklist.

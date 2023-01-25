@@ -1,3 +1,4 @@
+import exception.DukeException;
 import task.Task;
 import task.TaskList;
 import java.util.Scanner;
@@ -40,16 +41,7 @@ public class Duke {
      * @throws DukeException
      */
     public static void markCommand(TaskList taskList, Task t) throws DukeException {
-        if (t.isMarked()) {
-            throw new DukeException("This task has already been marked as done.");
-        } else {
-            t.mark();
-            System.out.println("Great job on completing this task! I've marked it as done:");
-            System.out.println(t);
-        }
-        if (taskList.isAllCompleted()) {
-            System.out.println("Yay! You have completed all your tasks :-)");
-        }
+        taskList.markTask(t);
     }
 
     /**
@@ -60,13 +52,7 @@ public class Duke {
      * @throws DukeException
      */
     public static void unmarkCommand(TaskList taskList, Task t) throws DukeException {
-        if (!t.isMarked()) {
-            throw new DukeException("Oops! This task has not been marked as done before.");
-        } else {
-            t.unMark();
-            System.out.println("Alright, I've marked this task as not done yet:");
-            System.out.println(t);
-        }
+        taskList.unmarkTask(t);
     }
 
     /**
@@ -89,7 +75,7 @@ public class Duke {
      * @param tasklist The tasklist to add the todo
      * @param desc The title of the todo
      */
-    public static void todoCommand(TaskList tasklist, String desc) {
+    public static void todoCommand(TaskList tasklist, String desc) throws DukeException {
         System.out.println("Got it, I've added this task:");
         tasklist.addTodo(desc);
     }
@@ -101,7 +87,7 @@ public class Duke {
      * @param desc The title of the deadline
      * @param date The time/date of the deadline
      */
-    public static void deadlineCommand(TaskList taskList, String desc, String date) {
+    public static void deadlineCommand(TaskList taskList, String desc, String date) throws DukeException {
         System.out.println("Got it, I've added this task:");
         taskList.addDeadline(date, desc);
     }
@@ -114,7 +100,7 @@ public class Duke {
      * @param end The end time/date of the event
      * @param desc The title of the event
      */
-    public static void eventCommand(TaskList taskList, String start, String end, String desc) {
+    public static void eventCommand(TaskList taskList, String start, String end, String desc) throws DukeException {
         System.out.println("Got it, I've added this task:");
         taskList.addEvent(start, end, desc);
     }
@@ -125,7 +111,7 @@ public class Duke {
      * @param taskList The tasklist to delete the task from
      * @param taskNum The task number of the task to be deleted
      */
-    public static void deleteCommand(TaskList taskList, int taskNum) {
+    public static void deleteCommand(TaskList taskList, int taskNum) throws DukeException {
         System.out.println("Noted. I've removed this task:");
         taskList.deleteTask(taskNum);
     }
