@@ -20,7 +20,7 @@ public class TaskList {
         return taskList.size();
     }
 
-    public Task retrieveTask(int i)  {
+    public Task retrieveTask(int i) {
         return taskList.get(i);
     }
 }

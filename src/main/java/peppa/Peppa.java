@@ -8,6 +8,12 @@ public class Peppa {
     private TaskList tasks;
     private Storage storage;
 
+    public Peppa(String filepath) {
+        this.screen = new Ui();
+        this.tasks = new TaskList();
+        this.storage = new Storage(filepath);
+    }
+
     public void run() {
         storage.loadData(tasks, screen);
         screen.greetUser();
@@ -24,12 +30,6 @@ public class Peppa {
                 screen.insertDivider();
             }
         }
-    }
-
-    public Peppa(String filepath) {
-        this.screen = new Ui();
-        this.tasks = new TaskList();
-        this.storage = new Storage(filepath);
     }
 
     public static void main(String[] args) {

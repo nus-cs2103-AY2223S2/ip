@@ -1,9 +1,15 @@
 package peppa;
 
-import peppa.commands.*;
-
 import java.util.Scanner;
 
+import peppa.commands.DeadlineCommand;
+import peppa.commands.DeleteCommand;
+import peppa.commands.EventCommand;
+import peppa.commands.ExitCommand;
+import peppa.commands.ListCommand;
+import peppa.commands.MarkCommand;
+import peppa.commands.TodoCommand;
+import peppa.commands.UnmarkCommand;
 public class Ui {
     public static final String DIVIDER = "=============================================";
     private Scanner sc;
@@ -14,7 +20,7 @@ public class Ui {
 
     public static void displayAddTaskMessage(Task task) {
         System.out.println("Oink! I've added the following task:");
-        System.out.println("> "+ task.toString());
+        System.out.println("> " + task.toString());
     }
 
     public static void displayCommands() {
@@ -30,7 +36,7 @@ public class Ui {
 
     public static void displayDeleteTaskMessage(Task task) {
         System.out.println("Oink! I've removed the following task:");
-        System.out.println("> "+ task.toString());
+        System.out.println("> " + task.toString());
     }
 
     public static void displayMessage(String message) {

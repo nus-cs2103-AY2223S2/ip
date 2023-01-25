@@ -1,6 +1,10 @@
 package peppa.commands;
 
-import peppa.*;
+import peppa.Storage;
+import peppa.Task;
+import peppa.TaskList;
+import peppa.Todo;
+import peppa.Ui;
 
 public class TodoCommand implements Command {
     public static final String COMMAND_WORD = "todo";

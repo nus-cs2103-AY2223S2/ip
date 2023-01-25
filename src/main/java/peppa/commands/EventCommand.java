@@ -1,8 +1,13 @@
 package peppa.commands;
 
-import peppa.*;
-
 import java.time.LocalDate;
+
+import peppa.Event;
+import peppa.PeppaException;
+import peppa.Storage;
+import peppa.Task;
+import peppa.TaskList;
+import peppa.Ui;
 
 public class EventCommand implements Command {
     public static final String COMMAND_WORD = "event";
@@ -21,8 +26,8 @@ public class EventCommand implements Command {
 
     public static String getParameterValue(String command, int start, int end) throws PeppaException {
         if (end < start) {
-            throw new PeppaException("Boink! Peppa could not process the request. " +
-                    "Please ensure that the input is formatted correctly and try again.");
+            throw new PeppaException("Boink! Peppa could not process the request. "
+                    + "Please ensure that the input is formatted correctly and try again.");
         } else {
             return command.substring(start, end);
         }
@@ -31,8 +36,8 @@ public class EventCommand implements Command {
     public static int getParameterIndex(String command, String param) throws PeppaException {
         int idx = command.indexOf("/" + param);
         if (idx == -1) {
-            throw new PeppaException("Boink! Peppa could not process the request. " +
-                    "Please ensure that the input is formatted correctly and try again.");
+            throw new PeppaException("Boink! Peppa could not process the request. "
+                    + "Please ensure that the input is formatted correctly and try again.");
         } else {
             return idx;
         }
