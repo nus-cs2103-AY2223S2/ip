@@ -6,6 +6,8 @@
  * This class is for the Deadlines Task added by the User.
  */
 
+package src.main.java.duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -21,6 +23,10 @@ public class Deadline extends Task {
     public Deadline(String description, String by){
         super(description.trim());
         this.by = LocalDate.parse(by.trim());
+    }
+
+    public String getBy() {
+        return this.by.toString();
     }
 
     /**

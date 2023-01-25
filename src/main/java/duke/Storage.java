@@ -1,3 +1,9 @@
+package src.main.java.duke;
+
+import src.main.java.duke.task.Deadline;
+import src.main.java.duke.task.Event;
+import src.main.java.duke.task.Task;
+import src.main.java.duke.task.Todo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -36,13 +42,13 @@ public class Storage {
             String mark = "0";
             if(element.getStatusIcon().equals("X")) mark = "1";
             if(element instanceof Todo) {
-                fw.write("T | " + mark + " | " + element.description);
+                fw.write("T | " + mark + " | " + element.getDescription());
             }
             if(element instanceof Deadline) {
-                fw.write("D | " + mark + " | " + element.description + " | " + ((Deadline) element).by);
+                fw.write("D | " + mark + " | " + element.getDescription() + " | " + ((Deadline) element).getBy());
             }
             if(element instanceof Event){
-                fw.write("E | " + mark + " | " + element.description + " | " + ((Event) element).from + " | " + ((Event) element).to);
+                fw.write("E | " + mark + " | " + element.getDescription() + " | " + ((Event) element).getFrom() + " | " + ((Event) element).getTo());
             }
             fw.write(System.lineSeparator());
         }

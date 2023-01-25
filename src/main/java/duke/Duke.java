@@ -5,7 +5,12 @@
  *
  * This class is the main class for the duke ip.
  */
+package src.main.java.duke;
 
+import src.main.java.duke.task.Deadline;
+import src.main.java.duke.task.Event;
+import src.main.java.duke.task.Task;
+import src.main.java.duke.task.Todo;
 import java.util.Scanner;
 
 

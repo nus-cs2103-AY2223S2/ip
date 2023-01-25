@@ -5,6 +5,7 @@
  *
  * This class is for the Events Task added by the User.
  */
+package src.main.java.duke.task;
 
 public class Event extends Task {
 
@@ -21,6 +22,14 @@ public class Event extends Task {
         super(description.trim());
         this.from = from.trim();
         this.to = to.trim();
+    }
+
+    public String getFrom() {
+        return this.from;
+    }
+
+    public String getTo() {
+        return this.to;
     }
 
     /**

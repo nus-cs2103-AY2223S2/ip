@@ -1,3 +1,9 @@
+package src.main.java.duke;
+
+import src.main.java.duke.task.Deadline;
+import src.main.java.duke.task.Event;
+import src.main.java.duke.task.Task;
+import src.main.java.duke.task.Todo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +31,7 @@ public class TaskList {
         return this;
     }
 
-    public void addTodo(String description, Parser userParse) {
+    public void addTodo(String description, Parser userParse) throws DukeException{
         int inputArrLength = userParse.inputArr.length;
         String[] inputArr = userParse.inputArr;
         for (int i = 1; i < inputArrLength; i++) {
@@ -36,11 +42,11 @@ public class TaskList {
             tasksList.add(new Todo(userParse.checkDescription(description, "todo")));
             counter++;
         } catch(DukeException e) {
-            System.out.println(e.getMessage());
+            throw e;
         }
     }
 
-    public void addDeadline(String description, Parser userParse) {
+    public void addDeadline(String description, Parser userParse) throws DukeException {
         String deadline = "";
         int inputArrLength = userParse.inputArr.length;
         String[] inputArr = userParse.inputArr;
@@ -61,11 +67,11 @@ public class TaskList {
                     userParse.checkTime(deadline, "deadline", "by")));
             counter++;
         } catch(DukeException e) {
-            System.out.println(e.getMessage());
+            throw e;
         }
     }
 
-    public void addEvent(String description, Parser userParse) {
+    public void addEvent(String description, Parser userParse) throws DukeException {
         String from = "";
         String to = "";
         int inputArrLength = userParse.inputArr.length;
@@ -96,7 +102,7 @@ public class TaskList {
                     userParse.checkTime(to, "event", "to")));
             counter++;
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            throw e;
         }
     }
 

@@ -1,3 +1,5 @@
+package src.main.java.duke;
+
 public class Parser {
 
     protected String input;

@@ -5,6 +5,7 @@
  *
  * This class is for the Task added by the User.
  */
+package src.main.java.duke.task;
 
 public class Task {
     protected String description;
@@ -39,6 +40,10 @@ public class Task {
      */
     public void unmark() {
         this.isDone = false;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     /**

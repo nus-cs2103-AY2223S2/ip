@@ -5,6 +5,7 @@
  *
  * This class is for the Todos Task added by the User.
  */
+package src.main.java.duke.task;
 
 public class Todo extends Task {
 
