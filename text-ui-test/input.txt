@@ -1,8 +1,7 @@
-todo ChestPress 5 set
-deadline submit /by Sunday
-event powerlifting /from ChestDay 2pm /to Friday 5pm
-list
-mark 3
-unmark 3
+todo visit park
+deadline return book /by Sunday
+event project meeting /from Mon 2pm /to 4pm
+mark 1
+unmark 1
 list
 bye

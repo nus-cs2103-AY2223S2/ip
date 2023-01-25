@@ -6,10 +6,9 @@ public class Duke {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         ArrayList<Task> t = new ArrayList<>();
-        final String markAsDone = "Nice! I've marked this task as done: ";
-        final String unMarkTask = "OK, I've marked this task as not done yet: ";
-        final String addedTask = "Got it, I've added this task: ";
-        final String freeSpace = "----------------------------------------------";
+        final String markAsDone = "Nice! I've marked this task as done:";
+        final String unMarkTask = "OK, I've marked this task as not done yet:";
+        final String addedTask = "Got it, I've added this task:";
 
         System.out.println("Hello from Bench Monster");
         System.out.println("What can I do for you?");
@@ -19,11 +18,9 @@ public class Duke {
             String[] tokens = type.split("\\s+");
             if (tokens[0].equalsIgnoreCase("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
-                System.out.println(freeSpace);
                 break;
             } else if (tokens[0].equalsIgnoreCase("list")) {
                 showList(t);
-                System.out.println(freeSpace);
             } else if (tokens[0].equalsIgnoreCase("mark")) {
                 try {
 
@@ -34,10 +31,8 @@ public class Duke {
                     t.get(i).mark();
                     System.out.println(markAsDone);
                     System.out.println(t.get(i).toString());
-                    System.out.println(freeSpace);
                 } catch(Exception e) {
                     System.out.println("Invalid value, there isn't this much tasks in the list :-( ");
-                    System.out.println(freeSpace);
                 }
 
             } else if (tokens[0].equalsIgnoreCase("unmark")) {
@@ -49,10 +44,8 @@ public class Duke {
                     t.get(i).unmarked();
                     System.out.println(unMarkTask);
                     System.out.println(t.get(i).toString());
-                    System.out.println(freeSpace);
                 } catch(Exception e) {
                     System.out.println("Invalid value, there isn't this much tasks in the list :-( ");
-                    System.out.println(freeSpace);
                 }
 
             } else if (tokens[0].equalsIgnoreCase("todo")) {
@@ -65,11 +58,9 @@ public class Duke {
                     t.add(newTask);
                     System.out.println(addedTask);
                     System.out.println(newTask);
-                    System.out.println("Now you have " + noOfTask(t) + " tasks in the list.");
-                    System.out.println(freeSpace);
+                    System.out.println("Now you have " + noOfTask(t) + " task(s) in the list.");
                 } catch(Exception e) {
-                    System.out.println("OOPS!!! The descripition of a todo cannot be empty");
-                    System.out.println(freeSpace);
+                    System.out.println("OOPS!!! The description of a todo cannot be empty");
                 }
 
             } else if (tokens[0].equalsIgnoreCase("deadline")) {
@@ -77,17 +68,15 @@ public class Duke {
                     if(!type.contains(" ")) {
                         throw new Exception();
                     }
-                    String des = type.substring(type.indexOf(" ")).replace(" ", "");
-                    String[] deadline = des.split("/");
-                    Deadline dead = new Deadline(deadline[0], deadline[1]);
+                    String des = type.substring(type.indexOf(" ")).trim();
+                    String[] deadline = des.split("/by");
+                    Deadline dead = new Deadline(deadline[0].trim(), deadline[1].trim());
                     t.add(dead);
                     System.out.println(addedTask);
                     System.out.println(dead);
-                    System.out.println("Now you have " + noOfTask(t) + " tasks in the list.");
-                    System.out.println(freeSpace);
+                    System.out.println("Now you have " + noOfTask(t) + " task(s) in the list.");
                 } catch(Exception e) {
                     System.out.println("OOPS!!! The description of a deadline cannot be empty");
-                    System.out.println(freeSpace);
                 }
 
             } else if (tokens[0].equalsIgnoreCase("event")) {
@@ -101,23 +90,21 @@ public class Duke {
                     t.add(e);
                     System.out.println(addedTask);
                     System.out.println(e);
-                    System.out.println("Now you have " + noOfTask(t) + " tasks in the list.");
-                    System.out.println(freeSpace);
+                    System.out.println("Now you have " + noOfTask(t) + " task(s) in the list.");
                 } catch(Exception e) {
                     System.out.println("OOPS!!! The description of an event cannot be empty");
-                    System.out.println(freeSpace);
                 }
 
             } else if(tokens[0].equalsIgnoreCase(("delete"))) {
                 try {
                     if (!type.contains(" ")) {
-                        throw new DukeException("OPPS!! Please indicate the task index to delete!");
+                        throw new DukeException("OOPS!! Please indicate the task index to delete!");
                     }
 
                     String[] index = type.split(" ");
                     int deleteIndex = Integer.parseInt(index[1]);
                     if (deleteIndex > t.size() || deleteIndex <= -1) {
-                        throw new DukeException("OPPS!! The index requested to be deleted does not exist!");
+                        throw new DukeException("OOPS!! The index requested to be deleted does not exist!");
                     } else {
                         System.out.println("Noted: I've removed this task");
                         Task whichTask = t.get(deleteIndex - 1);
@@ -129,7 +116,6 @@ public class Duke {
                 }
             } else {
                 System.out.println("OOPS!! I'm sorry, but I don't know what that means :-(");
-                System.out.println(freeSpace);
             }
         }
     }
