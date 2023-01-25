@@ -8,6 +8,7 @@ public class DukeException extends Exception {
      * @param errorMessage The description of the duke exception.
      */
     public DukeException(String errorMessage) {
+
         super(errorMessage);
     }
 
@@ -18,6 +19,7 @@ public class DukeException extends Exception {
      */
     @Override
     public String toString() {
+
         return "duke.Duke Exception: OOPS! " + super.getMessage();
     }
 }

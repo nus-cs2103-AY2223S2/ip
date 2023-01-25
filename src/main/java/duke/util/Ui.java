@@ -73,6 +73,7 @@ public class Ui {
      * Prints response when user exits Duke.
      */
     public void sayGoodBye() {
+
         this.printWithLines(" Bye! Hope to see you again soon!");
     }
 
@@ -98,7 +99,8 @@ public class Ui {
         if (arr.size() > 1) {
             plural = "s";
         }
-        return "\n     Now you have " + arr.size() + " task" + plural + " in the list.";
+        return "\n     Now you have " + arr.size() +
+                " task" + plural + " in the list.";
     }
 
 

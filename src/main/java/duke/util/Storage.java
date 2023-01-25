@@ -107,7 +107,8 @@ public class Storage {
 
 
     /**
-     * The function that deletes the entire duke file and re-inserts it with the current one.
+     * The function that deletes the entire duke file and
+     * re-inserts it with the current one.
      * Used for delete, mark and unmark when values are changed.
      */
     public void deleteFileAndRedo(ArrayList<Task> listOfThings) {

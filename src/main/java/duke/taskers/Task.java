@@ -36,7 +36,8 @@ public abstract class Task {
      * @return A partially formatted string.
      */
     public String helpFormatString() {
-        return ((this.isDone ? "1" : "0") + " / " + this.description.trim()).trim();
+        return ((this.isDone ? "1" : "0") + " / "
+                + this.description.trim()).trim();
     }
 
 
@@ -49,7 +50,8 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return (this.isDone ? "[X]" : "[ ]") + this.description;
+        return (this.isDone ? "[X]" : "[ ]") +
+                this.description;
     }
 
 }

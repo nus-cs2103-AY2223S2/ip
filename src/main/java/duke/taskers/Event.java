@@ -18,7 +18,8 @@ public class Event extends Task {
      * @param start Starting date of event.
      * @param end Ending date of event.
      */
-    public Event(String desc, boolean isDone, LocalDateTime start, LocalDateTime end) {
+    public Event(String desc, boolean isDone,
+                 LocalDateTime start, LocalDateTime end) {
         super(desc, isDone);
         this.start = start;
         this.end = end;
@@ -30,7 +31,8 @@ public class Event extends Task {
      * @return Formatted string to be inserted into duke storage file.
      */
     public String formatStringForFile() {
-        return String.format("EVENT / %s / %s / %s", super.helpFormatString(), this.start.format(FORMATTER), this.end.format(FORMATTER));
+        return String.format("EVENT / %s / %s / %s", super.helpFormatString(),
+                this.start.format(FORMATTER), this.end.format(FORMATTER));
     }
 
     /**
@@ -40,6 +42,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.start.format(FORMATTER) + " to: " + this.end.format(FORMATTER) + ")";
+        return "[E]" + super.toString() + " (from: " + this.start.format(FORMATTER) +
+                " to: " + this.end.format(FORMATTER) + ")";
     }
 }

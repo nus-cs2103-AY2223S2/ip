@@ -6,7 +6,8 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     private final LocalDateTime end;
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM uuuu h.mma");
+    private static final DateTimeFormatter FORMATTER =
+            DateTimeFormatter.ofPattern("d MMM uuuu h.mma");
 
     /**
      * Deadline constructor.
@@ -26,7 +27,8 @@ public class Deadline extends Task {
      * @return The deadline string.
      */
     public String formatStringForFile() {
-        return String.format("DEADLINE / %s / %s", super.helpFormatString(), this.end.format(FORMATTER));
+        return String.format("DEADLINE / %s / %s", super.helpFormatString(),
+                this.end.format(FORMATTER));
     }
 
     /**
@@ -36,6 +38,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.end.format(FORMATTER) + ")";
+        return "[D]" + super.toString() + " (by: " +
+                this.end.format(FORMATTER) + ")";
     }
 }
