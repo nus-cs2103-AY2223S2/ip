@@ -69,6 +69,10 @@ public class Duke {
                     manager.delete(Integer.parseInt(tokens[1]) - 1);
                     break;
 
+                case "find":
+                    manager.find(without_key);
+                    break;
+
                 default:
                     System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
 

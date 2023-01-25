@@ -160,5 +160,27 @@ public class TaskList {
         storage.writeAll();
     }
 
+    /**
+     * Find.
+     *
+     * @param key the key
+     */
+    public void find(String key) {
+        int[] indexes = new int[ListOfTasks.size()];
+        int count = 0;
+        StringBuilder output = new StringBuilder();
+        for (int x = 0; x < ListOfTasks.size(); x++) {
+            if (ListOfTasks.get(x).taskName.contains(key)) {
+                indexes[count] = x;
+                count++;
+            }
+        }
+        for (int x = 0; x < count; x++) {
+            ListOfTasks.get(indexes[x]).display();
+            output.append(x + 1).append(".").append(ListOfTasks.get(indexes[x]).messageDisplay).append("\n");
+        }
+        System.out.println(Parser.FIND_MESSAGE + output);
+    }
+
 
 }
