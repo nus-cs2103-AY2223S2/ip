@@ -38,8 +38,114 @@ public class Duke {
 		System.out.print("You have: " + list.size() + " task(s)");
 	}	
 	
+	private static void parseIn(List<String> parm) throws DukeException {
+			int byIndex;
+			int fromIndex;
+			String description;
+			List<String> l;
+			String deadline;
+			
+		switch(parm.get(0)){
+			case "list":
+				showList();
+				break;
+			case "todo":
+					l = parm.subList(1, parm.size());
+					if (parm.size() == 1) {
+						throw new DukeException("to do must have description");
+					}
 
-	public static void main(String[] args) {
+					description = String.join(" ", l);
+					addList(new Todo(description));
+					
+				break;
+
+			case "deadline":
+					try{
+						//find the /by keyword
+						byIndex = parm.indexOf("/by");
+						l = parm.subList(1, byIndex);
+						description = String.join(" ", l);
+						l = parm.subList(byIndex + 1, parm.size());
+						deadline = String.join(" ", l);
+						addList(new Deadline(description,deadline));
+					}	
+					catch (IllegalArgumentException e) {
+						throw new DukeException(e);	
+					}
+
+					catch (Exception e) {
+						throw new DukeException(e);	
+					}
+				break;
+			case "event":
+					try{
+						fromIndex = parm.indexOf("/from");
+						byIndex = parm.indexOf("/to");
+						l = parm.subList(1, fromIndex);
+						description = String.join(" ", l);
+
+						List<String> f = parm.subList(fromIndex + 1, byIndex);
+						String fDescription = String.join(" ", f);
+
+						List<String> t = parm.subList(byIndex + 1, parm.size());
+						String tDescription =  String.join(" ", l);
+						tDescription = String.join(" ", t);
+						addList(new Event(description, fDescription, tDescription));
+					}
+					catch (IllegalArgumentException e) {
+						throw new DukeException(e);	
+					}
+
+
+					catch (Exception e) {
+						throw new DukeException(e);	
+					}
+					
+				break;
+
+			case "mark":
+				try{
+					markTask(Integer.parseInt(parm.get(1)), true);
+				}
+				catch (IndexOutOfBoundsException e) {
+					throw new DukeException(e);
+				
+				}
+				catch (NumberFormatException e) {
+					throw new DukeException(e);
+				
+				}
+				catch (Exception e) {
+					throw new DukeException(e);	
+				}
+					
+				break;
+			case "unmark":
+				try{
+					markTask(Integer.parseInt(parm.get(1)), false);
+				}
+				catch (IndexOutOfBoundsException e) {
+					throw new DukeException(e);
+				
+				}
+				catch (NumberFormatException e) {
+					throw new DukeException(e);
+				
+				}
+				catch (Exception e) {
+					throw new DukeException(e);	
+				}
+					
+				break;
+			default:
+				throw new DukeException();
+
+		}
+
+	}	
+
+	public static void main(String[] args) throws DukeException{
 	Duke duke = new Duke();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -61,53 +167,12 @@ public class Duke {
 		
 		line(in.length());
 		String[] parmArr = in.split("\\s+");
-		List<String> parm = Arrays.asList(parmArr);	
-		switch(parm.get(0)){
-			case "list":
-				showList();
-				break;
-			case "deadline":
-					//find the /by keyword
-					int byIndex = parm.indexOf("/by");
-					List<String> l = parm.subList(1, byIndex);
-					String description = String.join(" ", l);
-					l = parm.subList(byIndex + 1, parm.size());
-					String deadline = String.join(" ", l);
-					addList(new Deadline(description,deadline));
-					
-				break;
-			case "todo":
-					l = parm.subList(1, parm.size());
-					description = String.join(" ", l);
-					addList(new Todo(description));
-					
-				break;
-
-			case "event":
-					int fromIndex = parm.indexOf("/from");
-					byIndex = parm.indexOf("/to");
-					l = parm.subList(1, fromIndex);
-					description = String.join(" ", l);
-
-					List<String> f = parm.subList(fromIndex + 1, byIndex);
-					String fDescription = String.join(" ", f);
-
-					List<String> t = parm.subList(byIndex + 1, parm.size());
-					String tDescription =  String.join(" ", l);
-					tDescription = String.join(" ", t);
-					addList(new Event(description, fDescription, tDescription));
-					
-				break;
-
-			case "mark":
-				markTask(Integer.parseInt(parm.get(1)), true);
-				break;
-			case "unmark":
-				markTask(Integer.parseInt(parm.get(1)), false);
-				break;
-			default:
-				addList(new Task(in));
-
+		List<String> parm = Arrays.asList(parmArr);
+		try {
+			parseIn(parm);
+		}
+		catch (DukeException e) {
+			
 		}
 
 		line(in.length());
