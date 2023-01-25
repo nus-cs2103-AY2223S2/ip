@@ -1,18 +1,32 @@
 import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.List;
 /**
  * Duke is a personal assistant chatbot that help to keep track of various stuff.
  */
 public class Duke {
     // Attribute
     static final String BORDER = "----------------------------------------";
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
 
+    private List<Task> tasks;
+
+    public Duke(String filePath) throws DukeException {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        taskList = new TaskList(storage.load());
+        this.tasks = taskList.tasks;
+    }
+
+    public void run() {
+
+    }
     // Methods
     // List out all tasks and their rank.
     private void list() {
         if (tasks.size() == 0) {
-            System.out.println("No tasks left :)" + BORDER);
+            System.out.println("No tasks left :)\n" + BORDER);
             return;
         }
         int rank = 1;
@@ -61,11 +75,11 @@ public class Duke {
     private void addTask(String message, int code) throws DukeException {
         Task t;
         if (code == 0) {
-            t = new ToDos(message);
+            t = new ToDos(false, new String[] {message});
         } else if (code == 1) {
-            t = new Deadlines(message.split("/"));
+            t = new Deadlines(false, message.split("/"));
         } else if (code == 2) {
-            t = new Events(message.split("/"));
+            t = new Events(false, message.split("/"));
         } else {
             // Unreachable as of now.
             return;
@@ -136,15 +150,8 @@ public class Duke {
     }
 
     // Driver function
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "What can I do for you?\n" + BORDER);
-
-        Duke duke1 = new Duke();
+    public static void main(String[] args) throws DukeException {
+        Duke duke1 = new Duke("./data/list.txt");
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             if (duke1.read(sc) == 0) {
