@@ -2,33 +2,44 @@ import java.util.*;
 import java.util.ArrayList;
 public class Duke {
     public static Scanner sc = new Scanner(System.in);
-    public static ArrayList<ATask> lst = new ArrayList<ATask>();
+    public static ArrayList<Task> lst = new ArrayList<Task>();
     public static void add_to_list(String str) {
-        lst.add(new ATask(str, false));
-        System.out.println("added: " + str);
+
+        if((str.split(" ", 2)[0]).equals("todo")) {
+            lst.add(new Todo(str));
+        }
+        else if((str.split(" ", 2)[0]).equals("deadline")) {
+            lst.add(new Deadline(str));
+        }
+        else if((str.split(" ", 2)[0]).equals("event")) {
+            lst.add(new Event(str));
+        }
+        else {
+            System.out.println("error input");
+        }
+        int size = lst.size();
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + lst.get(size-1).toString());
+        System.out.println("Now you have " + size + " tasks in the list");
     }
 
     public static void print_list() {
         for(int i = 0; i < lst.size(); i++) {
-            if(lst.get(i).status) {
-                System.out.println((i+1) + ". " + "[X]" + lst.get(i).task_name);
-            }
-            else {
-                System.out.println((i+1) + ". " + "[ ]" + lst.get(i).task_name);
-            }
+
+            System.out.println((i+1) + ". " + lst.get(i).toString());
         }
     }
 
-    public static void mark(ATask tsk) {
-        tsk.status = true;
+    public static void mark(Task tsk) {
+        tsk.toggleTrue();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[X] " + tsk.task_name);
+        System.out.println(tsk.toString());
     }
 
-    public static void unmark(ATask tsk) {
-        tsk.status = false;
+    public static void unmark(Task tsk) {
+        tsk.toggleFalse();
         System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println("[ ] " + tsk.task_name);
+        System.out.println(tsk.toString());
     }
     public static void reply() {
         String str = sc.nextLine();
