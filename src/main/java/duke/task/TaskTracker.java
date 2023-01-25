@@ -26,19 +26,19 @@ public class TaskTracker {
         return tasks.get(index);
     }
 
-    public Task addTodo(String taskDescription) throws DukeException {
+    public Task addTodo(String taskDescription) {
         Task t = new Task(taskDescription);
         tasks.add(t);
         return t;
     }
 
-    public Task addDeadline(String taskDescription, LocalDateTime endDate) throws DukeException {
+    public Task addDeadline(String taskDescription, LocalDateTime endDate) {
         Task t = new Deadline(taskDescription, endDate);
         tasks.add(t);
         return t;
     }
 
-    public Task addEvent(String taskDescription, LocalDateTime startDate, LocalDateTime endDate) throws DukeException {
+    public Task addEvent(String taskDescription, LocalDateTime startDate, LocalDateTime endDate) {
         Task t = new Event(taskDescription, startDate, endDate);
         tasks.add(t);
         return t;
@@ -50,11 +50,11 @@ public class TaskTracker {
         return toDelete;
     }
 
-    public Task MarkTask(int index) throws DukeException {
+    public Task markTask(int index) throws DukeException {
         return markUnmarkTask(index, true);
     }
 
-    public Task UnmarkTask(int index) throws TaskNotFoundException {
+    public Task unmarkTask(int index) throws TaskNotFoundException {
         return markUnmarkTask(index, false);
     }
 
