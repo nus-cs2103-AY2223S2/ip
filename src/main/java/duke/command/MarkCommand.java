@@ -8,8 +8,8 @@ public class MarkCommand extends Command {
     private int listNum;
 
     public MarkCommand(String input) {
-        int tasknumbermark = Integer.valueOf(input) - 1;
-        this.listNum = tasknumbermark;
+        int taskNumberMark = Integer.valueOf(input) - 1;
+        this.listNum = taskNumberMark;
     }
 
     public boolean execute(TaskList tasks, Ui ui, StorageList storage) {

@@ -11,13 +11,13 @@ public class EventCommand extends Command {
     private String to;
 
     public EventCommand(String input) {
-        String[] checkerslash = input.split("/");
-        String[] checkerevent = checkerslash[0].split("event ");
-        String[] checker4 = checkerslash[1].split("from ");
-        String[] checker5 = checkerslash[2].split("to ");
-        this.message = checkerevent[1];
-        this.from = checker4[1];
-        this.to = checker5[1];
+        String[] checkerSlash = input.split("/");
+        String[] checkerEvent = checkerSlash[0].split("event ");
+        String[] checkerFrom = checkerSlash[1].split("from ");
+        String[] checkerTo = checkerSlash[2].split("to ");
+        this.message = checkerEvent[1];
+        this.from = checkerFrom[1];
+        this.to = checkerTo[1];
     }
 
     public boolean execute(TaskList tasks, Ui ui, StorageList storage) {

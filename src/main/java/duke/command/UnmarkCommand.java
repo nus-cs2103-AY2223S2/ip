@@ -8,8 +8,8 @@ public class UnmarkCommand extends Command {
     private int listNum;
 
     public UnmarkCommand(String input) {
-        int tasknumbermark = Integer.valueOf(input) - 1;
-        this.listNum = tasknumbermark;
+        int taskNumberMark = Integer.valueOf(input) - 1;
+        this.listNum = taskNumberMark;
     }
 
     public boolean execute(TaskList tasks, Ui ui, StorageList storage) {

@@ -6,10 +6,6 @@ import duke.ui.Ui;
 
 public class ByeCommand extends Command {
 
-    public ByeCommand() {
-
-    }
-
     public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
         System.out.println("See you soon!");
         return true;

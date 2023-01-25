@@ -26,9 +26,9 @@ public class StorageList {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] linearr = line.split("\\] ");
-                String[] linetype = linearr[0].split("\\]");
-                this.list.add(new Task(linearr[1], linetype[0].substring(1), linetype[1].substring(1)));
+                String[] lineArr = line.split("\\] ");
+                String[] lineType = lineArr[0].split("\\]");
+                this.list.add(new Task(lineArr[1], lineType[0].substring(1), lineType[1].substring(1)));
             }
             scanner.close();
             return this.list;

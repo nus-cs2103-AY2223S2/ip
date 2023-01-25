@@ -48,11 +48,11 @@ public class TaskList {
         statement();
     }
 
-    public int lengthOflist() {
+    public int lengthOfList() {
         return list.size();
     }
 
     public void statement() {
-        System.out.println("Now you have " + this.lengthOflist() + " tasks in your list.\n");
+        System.out.println("Now you have " + this.lengthOfList() + " tasks in your list.\n");
     }
 }
