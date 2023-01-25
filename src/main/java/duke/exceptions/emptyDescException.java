@@ -1,5 +1,8 @@
 package duke.exceptions;
 
+/**
+ * Exception class for generic Tasks having no descriptor from user.
+ */
 public class emptyDescException extends Exception {
     public emptyDescException(String message) {
         super(message);

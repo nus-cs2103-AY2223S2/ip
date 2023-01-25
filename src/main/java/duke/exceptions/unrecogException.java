@@ -1,5 +1,8 @@
 package duke.exceptions;
 
+/**
+ * Exception class for commands not recognised or supported by Duke bot.
+ */
 public class unrecogException extends Exception {
     public unrecogException(String message) {
         super(message);

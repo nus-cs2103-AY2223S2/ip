@@ -7,6 +7,9 @@ import duke.exceptions.unspecTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class of parent class Tasks
+ */
 public class Deadline extends Tasks {
     String icon = "[D]";
 
@@ -14,6 +17,8 @@ public class Deadline extends Tasks {
     String end;
     LocalDate date;
     String time;
+
+    /*constructor for deadline*/
     public Deadline(String str) throws Exception {
         super(str);
         if(!str.contains("deadline")) {
@@ -38,10 +43,12 @@ public class Deadline extends Tasks {
 
         }
     }
+    /*Returns icon representing the Deadline class of Tasks*/
     public String icon() {
         return icon;
     }
 
+    /*Returns description of Deadline with timeframe*/
     public String getDesc(){
         if(this.date==null) {
             return this.desc.split(" ", 2)[1] + "(" + this.end + ")";
@@ -51,9 +58,12 @@ public class Deadline extends Tasks {
         }
     }
 
+    /*Returns a message specific to when an Deadline task is added to TaskList*/
     public String added() {
         return super.added() + " " + this.icon + super.completed() + " " + this.getDesc();
     }
+
+    /*Returns a message specific to when a Deadline task is removed from TaskList*/
     public String deleted() {
         return super.deleted() + " " + icon + super.completed() + " " + this.getDesc();
     }

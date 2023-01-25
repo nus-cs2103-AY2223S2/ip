@@ -6,12 +6,17 @@ import duke.exceptions.unspecTimeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+/**
+ * Event class of parent class Tasks
+ */
 public class Event extends Tasks{
     String icon = "[E]";
     String desc;
     String timeframe;
     String time1, time2;
     LocalDate date1, date2;
+
+    /*constructor for event*/
     public Event(String str) throws Exception{
         super(str);
 
@@ -48,17 +53,24 @@ public class Event extends Tasks{
 
         }
     }
+
+    /*Returns icon representing the Event class of Tasks*/
     public String icon() {
         return icon;
     }
 
+    /*Returns description of Event with timeframe*/
     public String getDesc() {
         return this.desc.split(" ", 2)[1]+ "("+this.timeframe+")";
     }
+
+    /*Returns a message specific to when an Event task is added to TaskList*/
     public String added() {
         return super.added() + " " + icon + super.completed() + " " + this.desc.split(" ", 2)[1]+
                 "("+this.timeframe+")";
     }
+
+    /*Returns a message specific to when an Event task is removed from TaskList*/
     public String deleted(){
         return super.deleted() +  " " + icon + super.completed() + " " + this.desc.split(" ", 2)[1]+
                 "("+this.timeframe+")";

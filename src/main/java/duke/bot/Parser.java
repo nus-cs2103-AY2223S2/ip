@@ -7,10 +7,14 @@ import duke.taskmanager.*;
 
 import java.io.IOException;
 
+/**
+ * Parser class containing storage of previously saved tasks.
+ */
 public class Parser {
     static Storage storage = new Storage("data/tasks.txt");
     static TaskList todoList;
 
+    /*function parses applicable inputs and prints out respective outputs based on saved state from storage*/
     public static void parse(String str, TaskList tasks) throws IOException {
         todoList = tasks;
         if (str.equals("bye")) {
@@ -89,7 +93,7 @@ public class Parser {
                                     " tasks in the list");
                             break;
                         default:
-                            Tasks wrong = new Event(str);
+
 
                     }
                 } catch (unrecogException e){
@@ -109,6 +113,7 @@ public class Parser {
         }
     }
 
+    /*Exit code to end the program*/
     public static void Exit() {
         System.out.println("Bye. Hope to see you again soon!");
         System.exit(0);

@@ -11,11 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+/**
+ * Storage class for storing saved file path and loading saved file
+ */
 public class Storage {
     String path;
+
+    /*Constructor for Storage object containing saved file path */
     public Storage(String str){
         this.path = str;
     }
+
+    /*Returns List<Tasks> loaded from saved file path*/
     public List<Tasks> load() throws DukeException {
         List<Tasks> tasksList = new ArrayList<>();
         try {
