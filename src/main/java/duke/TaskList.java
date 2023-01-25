@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.List;
 
 public class TaskList {
@@ -51,7 +53,7 @@ public class TaskList {
         return tasks.remove(index);
     }
 
-    // Create and add task given message and code. 0 - toDos, 1 - Deadlines, 2 - Event
+    // Create and add task given message and code. 0 - toDos, 1 - Deadlines, 2 - duke.Event
     protected Task addTask(int code, String[] message) {
         Task t;
         if (code == 0) {

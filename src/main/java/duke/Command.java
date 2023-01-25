@@ -1,8 +1,10 @@
+package duke;
+
 import java.io.IOException;
 
 public class Command {
     /*
-    Command codes:
+    duke.Command codes:
     -1 - Invalid input.
     0 - Bye
     1 - list

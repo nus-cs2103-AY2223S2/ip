@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -45,7 +47,7 @@ public class Parser {
                     message = s.split("/by ");
                     message = Arrays.stream(message).map(String::trim).toArray(String[]::new);
                     if (message.length != 2 || message[0].isEmpty() || message[1].isEmpty()) {
-                        throw new DukeException("OOPS!!! Command should be in the format 'deadline [M] /by [M]'\n" +
+                        throw new DukeException("OOPS!!! duke.Command should be in the format 'deadline [M] /by [M]'\n" +
                                 "The description, [M] cannot be empty.");
                     }
                     return new Command(5, message);
@@ -57,7 +59,7 @@ public class Parser {
                     if (message.length != 3 || message[0].isEmpty() ||
                             message[1].isEmpty() || message[2].isEmpty() ||
                             indexFrom == -1 || indexTo == -1 || indexFrom >= indexTo) {
-                        throw new DukeException("OOPS!!! Command should be in the format 'event [M] /from [M] /to [M]'\n" +
+                        throw new DukeException("OOPS!!! duke.Command should be in the format 'event [M] /from [M] /to [M]'\n" +
                                 "The description, [M] cannot be empty.");
                     }
                     return new Command(6, message);

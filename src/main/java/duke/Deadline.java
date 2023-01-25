@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represent a task with a deadline.
  */
