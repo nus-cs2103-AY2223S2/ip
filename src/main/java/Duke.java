@@ -1,6 +1,7 @@
 import java.text.BreakIterator;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.imageio.plugins.tiff.ExifTIFFTagSet;
 
@@ -11,21 +12,21 @@ public class Duke {
         //         + "| | | | | | | |/ / _ \\\n"
         //         + "| |_| | |_| |   <  __/\n"
         //         + "|____/ \\__,_|_|\\_\\___|\n";
-        // System.out.println("Hello from\n" + logo);
+        // System.out.println("splitInput from\n" + logo);
 
         
 
 
         //print welcome message, ask for user input
 
-        System.out.println("  ───── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ───── \n Hello! I'm Broccoli the dinosaur \n           <|°▿▿▿▿°|/ \n      What can I do for you? \n   ──── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ────" ); 
+        System.out.println("  ───── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ───── \n splitInput! I'm Broccoli the dinosaur \n           <|°▿▿▿▿°|/ \n      What can I do for you? \n   ──── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ────" ); 
         //getInput();
         ArrayList<Task> array=new ArrayList<Task>();
 
         int i = 0;
         while (i<100) {
-            String[] hello = getInput();
-            String combined = String.join(" ", hello);
+            String[] splitInput = getInput();
+            String combined = String.join(" ", splitInput);
             if(combined.equals("bye")) {
                 System.out.println("    ──────── ⋅ ∙ ∘ ☽ ༓ ☾ ∘ ⋅ ⋅ ─────────");
                 System.out.println( "      Bye. Hope to see you again soon!");
@@ -39,19 +40,43 @@ public class Duke {
                     //System.out.println( "       "+ (j+1) + ". "+ array.get(j));
                 }
                 System.out.println("    ────────────── ⋆⋅☆⋅⋆ ───────────────");
-            } else if(hello[0].equals("mark")){
-                array.get((Integer.parseInt(hello[1])-1)).markAsDone();
+            } else if(splitInput[0].equals("mark")){
+                array.get((Integer.parseInt(splitInput[1])-1)).markAsDone();
                 System.out.println("    ────────────── ⋆⋅☆⋅⋆ ───────────────");
                 System.out.println("      Nice! I've marked this task as done:");
-                System.out.println("      "+ array.get((Integer.parseInt(hello[1])-1)).toString());
+                System.out.println("      "+ array.get((Integer.parseInt(splitInput[1])-1)).toString());
                 System.out.println("    ────────────── ⋆⋅☆⋅⋆ ───────────────");
-            } else if(hello[0].equals("unmark")){
-                array.get((Integer.parseInt(hello[1])-1)).markAsUnDone();
+            } 
+            //Unmark the task as done
+            else if(splitInput[0].equals("unmark")){
+                array.get((Integer.parseInt(splitInput[1])-1)).markAsUnDone();
                 System.out.println("    ────────────── ⋆⋅☆⋅⋆ ───────────────");
                 System.out.println("      OK, I've marked this task as not done yet:");
-                System.out.println("      "+ array.get((Integer.parseInt(hello[1])-1)).toString());
+                System.out.println("      "+ array.get((Integer.parseInt(splitInput[1])-1)).toString());
                 System.out.println("    ────────────── ⋆⋅☆⋅⋆ ───────────────");
-            }else {
+            } else if(splitInput[0].equals("deadline")){
+                for(int j=1; j< splitInput.length; j++){
+                    if(splitInput[j].equals("/by")){
+                        for (int k=1; k< j-1; k++){
+                            splitInput[1] = splitInput[1] + " " + splitInput[k+1];
+                        }
+                        for (int l=splitInput.length-1; l > j +1; l--){
+                            splitInput[splitInput.length-1] = splitInput[l-1]+" "+splitInput[splitInput.length-1];
+                        }
+                    } else {
+                        splitInput[j] = splitInput[j];
+                    }
+                }
+              
+                String date = splitInput[splitInput.length-1];
+                String desc = splitInput[1];
+                Deadline d = new Deadline(desc, date);
+                System.out.println("    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══");
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("     " + d.toString());
+                System.out.println("    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══");
+                array.add(d);
+            } else {
                 System.out.println("    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══");
                 System.out.println("     added:" + combined);
                 System.out.println("\n    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══");
@@ -97,6 +122,20 @@ public class Duke {
         }
     }
     
+    static class Deadline extends Task {
+
+        protected String by;
+    
+        public Deadline(String description, String by) {
+            super(description);
+            this.by = by;
+        }
+    
+        @Override
+        public String toString() {
+            return "[D]" + super.toString() + " (by: " + by + ")";
+        }
+    }
     
 
 }
