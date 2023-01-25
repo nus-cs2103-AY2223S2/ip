@@ -1,6 +1,5 @@
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Scanner;
+package duke.tasks;
+import duke.DukeException;
 
 public class Task {
     protected String description;
@@ -29,7 +28,7 @@ public class Task {
     public int isDoneToInt(){
         return isDone ? 1 : 0;
     }
-    public static Task loadTask(String data){
+    public static Task loadTask(String data) throws DukeException {
         String [] dataSplit = data.trim().split("\\|",4);
         boolean isDone = dataSplit[1].equals("1");
         char taskType = dataSplit[0].charAt(0);

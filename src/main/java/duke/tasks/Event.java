@@ -1,3 +1,4 @@
+package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -15,7 +16,7 @@ public class Event extends Task {
             this.from = LocalDate.parse(from.trim(), formatter);
             this.to = LocalDate.parse(to.trim(), formatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("/tPlease enter a valid date in e.g /from yyyy-mm-dd /to yyyy-mm-dd format!");
+            System.out.println("/tPlease enter a valid date in e.g /from yyyy-mm-dd /to yyyy-mm-dd format!");
         }
     }
 

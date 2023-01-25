@@ -1,4 +1,8 @@
-import java.time.format.DateTimeParseException;
+package duke;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 import java.util.ArrayList;
 
 public class TaskList{
@@ -7,7 +11,7 @@ public class TaskList{
         this.listOfTasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<String> taskList) {
+    public TaskList(ArrayList<String> taskList) throws DukeException {
         this.listOfTasks = new ArrayList<Task>();
         for (String data : taskList) {
             listOfTasks.add(Task.loadTask(data));
