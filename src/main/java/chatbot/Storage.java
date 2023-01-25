@@ -1,7 +1,25 @@
-import java.io.*;
+package chatbot;
+
+import task.Task;
+import task.TaskList;
+import task.TaskType;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.io.IOException;
+
+import java.io.File;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Arrays;
 
 public class Storage {
     public static final String SEPARATOR_REGEX = " \\| ";
@@ -21,16 +39,17 @@ public class Storage {
         }
     }
 
+    /** Loads a single line in storage into a given task.TaskList.
+     *
+     *  It is assumed that a line in storage follows the format specified here:
+     *  <task symbol> | <isDone> | <desc> | <addtl-arg1>:<values> | <addtl-arg2>:<value> ...
+     *
+     * For example, a project meeting task.Event from 1pm to 3pm marked done:
+     * E | 1 | project meeting | from:1pm | to:3pm
+     *
+     */
     public int loadIntoTaskList(TaskList tl) throws Exception {
-        /*
-        Coverts a single line in the storage into a Task
-        It is assumed that a line in storage follows the format specified in docs.
 
-        <task symbol> | <isDone> | <desc> | <addtl-arg1>:<values> | <addtl-arg2>:<value> ...
-
-        For example, a project meeting Event from 1pm to 3pm marked done:
-        E | 1 | project meeting | from:1pm | to:3pm
-         */
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(this.file));
@@ -66,7 +85,7 @@ public class Storage {
                     }
                     totalSuccess++;
                 } catch (Exception e) {
-                    throw new Exception("Task number " + totalTaskCounter + " failed to load.");
+                    throw new Exception("task.Task number " + totalTaskCounter + " failed to load.");
                 }
                 line = br.readLine();
             }
@@ -87,4 +106,9 @@ public class Storage {
         return 1;
     }
 
+    public static class InvalidStorageException extends Exception{
+        InvalidStorageException(String msg) {
+            super(msg);
+        }
+    }
 }

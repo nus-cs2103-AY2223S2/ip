@@ -1,9 +1,13 @@
+package task;
+
+import command.CommandNotFoundException;
+
 import java.util.*;
 
 public class TaskList {
     private List<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
     }
 

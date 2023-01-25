@@ -1,7 +1,14 @@
+package command;
+
+import chatbot.Storage;
+import chatbot.Ui;
+import task.Task;
+import task.TaskList;
+
 public class DeleteCommand extends Command {
     private String deleteAtIndex;
 
-    DeleteCommand(String index) {
+    public DeleteCommand(String index) {
         this.isExit = false;
         this.isSave = true;
         this.deleteAtIndex = index;

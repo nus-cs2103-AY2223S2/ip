@@ -1,5 +1,11 @@
+package command;
+
+import chatbot.Storage;
+import chatbot.Ui;
+import task.TaskList;
+
 public class SaveCommand extends Command {
-    SaveCommand() {
+    public SaveCommand() {
         this.isExit = false;
         this.isSave = false; // no data is changed in this command that warrants saving
     }

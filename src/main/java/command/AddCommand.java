@@ -1,10 +1,18 @@
+package command;
+
+import chatbot.Storage;
+import chatbot.Ui;
+import task.Task;
+import task.TaskList;
+import task.TaskType;
+
 import java.util.Map;
 
 public class AddCommand extends Command {
     private Map<String,String> args;
     private TaskType.Type taskType;
 
-    AddCommand(TaskType.Type type, Map<String,String> args) {
+    public AddCommand(TaskType.Type type, Map<String, String> args) {
         this.isExit = false;
         this.args = args;
         this.taskType = type;

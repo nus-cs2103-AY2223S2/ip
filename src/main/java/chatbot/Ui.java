@@ -1,8 +1,10 @@
+package chatbot;
+
 import java.util.Scanner;
 
 public class Ui {
     private Scanner sc;
-    String LOGO = "       _             _    _    _                _                \n" +
+    private String LOGO = "       _             _    _    _                _                \n" +
             "  ___ | |__    __ _ | |_ | |_ (_) _ __    __ _ | |_  ___   _ __  \n" +
             " / __|| '_ \\  / _` || __|| __|| || '_ \\  / _` || __|/ _ \\ | '_ \\ \n" +
             "| (__ | | | || (_| || |_ | |_ | || | | || (_| || |_| (_) || | | |\n" +

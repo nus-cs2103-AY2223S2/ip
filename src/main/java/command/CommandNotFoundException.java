@@ -1,5 +1,7 @@
+package command;
+
 public class CommandNotFoundException extends Exception {
-    CommandNotFoundException(String message) {
+    public CommandNotFoundException(String message) {
         super(message);
     }
 }
