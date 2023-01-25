@@ -4,7 +4,7 @@ public class TaskList {
     private ArrayList<Task> taskStore;
 
     public TaskList() {
-        ArrayList<Task> taskStore = new ArrayList<>();
+        this.taskStore = new ArrayList<>();
     }
     public int countTasks() {
         return this.taskStore.size();
@@ -16,6 +16,6 @@ public class TaskList {
         this.taskStore.add(t);
     }
     public void deleteTask(int index) {
-        this.taskStore.remove(index);
+        this.taskStore.remove(index - 1);
     }
 }

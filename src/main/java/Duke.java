@@ -12,10 +12,9 @@ public class Duke {
     }
     public static void main(String[] args) throws EmptyDescriptionException, IOException {
         TaskList mainTaskList = new TaskList();
-        Storage mainStorage = new Storage(mainTaskList);
-        mainStorage.loadFromFile();
+        Storage mainStorage = new Storage(mainTaskList); // will load from file
 
-        Ui mainUi = new Ui();
+        Ui mainUi = new Ui(mainTaskList);
 
         mainUi.greetUser();
 
@@ -36,12 +35,18 @@ public class Duke {
                     Task completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
                     completedTask.setCompletion();
                     mainUi.printReply("mark", completedTask);
+
+                    String[] parsed = Parser.parse(command, ParseFunctions.TODO);
+                    mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
                     break;
                 }
                 case "unmark": {
                     Task completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
                     completedTask.setCompletion();
                     mainUi.printReply("unmark", completedTask);
+
+                    String[] parsed = Parser.parse(command, ParseFunctions.TODO);
+                    mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
                     break;
                 }
                 case "delete": {
@@ -61,7 +66,7 @@ public class Duke {
                     break;
                 }
                 case "event": {
-                    String[] parsed = Parser.parse(command, ParseFunctions.DEADLINE);
+                    String[] parsed = Parser.parse(command, ParseFunctions.EVENT);
                     Task newEvent = new Event(parsed[1], LocalDate.parse(parsed[2]), LocalDate.parse(parsed[3]));
                     mainStorage.addTask(newEvent);
                     mainUi.printReply("event", newEvent);
@@ -79,11 +84,6 @@ public class Duke {
                         System.out.println("  Add an argument");
                     }
                 }
-                case "list":
-                    for (int i = 0; i < mainTaskList.countTasks(); i++) {
-                        System.out.println("  " + String.valueOf(i + 1) + ". " + mainTaskList.getTaskAtIndex(i));
-                    }
-                    break;
                 default:
                     mainUi.printReply(first);
                     break;

@@ -93,7 +93,7 @@ public class Storage {
             if (currentLineIndex != taskNo) {
                 dukeWriter.write(currentLine + System.getProperty("line.separator"));
             }
-            taskNo++; // don't copy over to temp file (which is equivalent to deleting)
+            currentLineIndex++; // don't copy over to temp file (which is equivalent to deleting)
         }
         dukeReader.close();
         dukeWriter.close();
@@ -102,7 +102,30 @@ public class Storage {
 
         this.myTaskList.deleteTask(taskNo);
     }
-    private void changeTaskCompletion(int taskNo) throws IOException {
-        // TODO
+    public void changeTaskCompletion(int taskNo) throws IOException {
+        String home = System.getProperty("user.dir");
+        Path dukeFilePath = Paths.get(home, "data", "duke.txt");
+        Path tempPath = Paths.get(home, "data", "temp.txt");
+        BufferedReader dukeReader = Files.newBufferedReader(dukeFilePath);
+        BufferedWriter dukeWriter = Files.newBufferedWriter(tempPath);
+
+        String currentLine;
+        int currentLineIndex = 1;
+        while ((currentLine = dukeReader.readLine()) != null) {
+            if (currentLineIndex == taskNo) { // if this is the one we want to change, flip the completed bit
+                StringBuilder temp = new StringBuilder(currentLine);
+                char flipped = temp.charAt(2) == '1' ? '0' : '1';
+                temp.setCharAt(2, flipped);
+                dukeWriter.write(temp + System.getProperty("line.separator"));
+            }
+            else {
+                dukeWriter.write(currentLine + System.getProperty("line.separator"));
+                currentLineIndex++; // don't copy over to temp file (which is equivalent to deleting)
+            }
+        }
+        dukeReader.close();
+        dukeWriter.close();
+        Files.delete(dukeFilePath);
+        Files.move(tempPath, dukeFilePath); // move from src to dest (replace)
     }
 }

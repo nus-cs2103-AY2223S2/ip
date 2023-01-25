@@ -1,9 +1,4 @@
 public class Parser {
-
-    public Parser() {
-
-    }
-
     protected static String[] parse(String input, Duke.ParseFunctions parse_type) throws EmptyDescriptionException {
         switch (parse_type) {
             case SPLIT_ALL:
