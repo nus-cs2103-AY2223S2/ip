@@ -1,10 +1,11 @@
 import java.util.List;
 
 public class CommandHandler {
-    public static String endDuke() {
+    CommandHandler() {}
+    public String endDuke() {
         return "Bye! Hope to see you again soon!\n";
     }
-    public static String showTasks(List<Task> tasks) {
+    public String showTasks(List<Task> tasks) {
         String response = "";
         if (!tasks.isEmpty()) {
             for (int i = 1; i <= tasks.size(); i++) {
@@ -15,7 +16,7 @@ public class CommandHandler {
         }
         return response;
     }
-    public static String markTask(String command, List<Task> tasks) {
+    public String markTask(String command, List<Task> tasks) {
         String response = "";
         if (! command.matches("mark \\d+")) {
             response = "Please enter one task which you would like to mark as done.\n";
@@ -31,7 +32,7 @@ public class CommandHandler {
         }
         return response;
     }
-    public static String unmarkTask(String command, List<Task> tasks) {
+    public String unmarkTask(String command, List<Task> tasks) {
         String response = "";
         if (! command.matches("unmark \\d+")) {
             response = "Please enter one task which you would like to mark as undone.\n";
@@ -47,7 +48,7 @@ public class CommandHandler {
         }
         return response;
     }
-    public static String addTodo(String command, List<Task> tasks) {
+    public String addTodo(String command, List<Task> tasks) {
         String response = "";
         if (! command.matches("todo .+")) {
             response = "Please enter the task you would like to do in the format \n>> todo [task]\n";
@@ -59,7 +60,7 @@ public class CommandHandler {
         }
         return response;
     }
-    public static String addDeadline(String command, List<Task> tasks) {
+    public String addDeadline(String command, List<Task> tasks) {
         String response = "";
         if (! command.matches("deadline .+ /by .+")) {
             response = "Sorry, that command is invalid. Specify a deadline task with \n >> deadline [description] /by [time]\n";
@@ -74,7 +75,7 @@ public class CommandHandler {
         return response;
 
     }
-    public static String addEvent(String command, List<Task> tasks) {
+    public String addEvent(String command, List<Task> tasks) {
         String response = "";
         if (! command.matches("event .+ /from .+ /to .+")) {
             response = "Sorry, that command is invalid. Specify an event task with \n >> event [description] /from [start time] /to [end time]\n";
@@ -93,11 +94,11 @@ public class CommandHandler {
         }
         return response;
     }
-    public static String noMatch() {
+    public String noMatch() {
         return "Sorry, I didn't understand that, please ask again.\n";
     }
 
-    public static String deleteEvent(String command, List<Task> tasks) {
+    public String deleteEvent(String command, List<Task> tasks) {
         String response = "";
         if (! command.matches("delete \\d+")) {
             response = "Tell me the index of the event you want to delete! Type >>list to view your events again.\n";

@@ -1,18 +1,24 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class Duke {
-    private static boolean isRunning = true;
-    private static List<Task> tasks = new ArrayList<Task>();
-
+    private boolean isRunning;
+    private final List<Task> tasks;
+    private final UiHandler ui;
+    
+    Duke() {
+        this.isRunning = true;
+        this.tasks = new ArrayList<>();
+        this.ui = new UiHandler();
+    }
     
     public static void main(String[] args) {
-        UiHandler.start();
+        Duke d = new Duke();
+        d.ui.start();
         
-        while (isRunning) {
-            isRunning = UiHandler.run(tasks);
-
+        while (d.isRunning) {
+            d.isRunning = d.ui.run(d.tasks);
         }
     }
 }

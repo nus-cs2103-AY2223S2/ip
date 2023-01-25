@@ -10,8 +10,11 @@ public class UiHandler {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|";
     private static final String separator = "____________________________________________________________";
-    
-    public static void start() {
+    private CommandHandler commandHandler;
+    UiHandler() {
+        this.commandHandler = new CommandHandler();
+    }
+    public void start() {
         System.out.println(logo + "\n");
         System.out.println(separator);
         System.out.println("Duke: ");
@@ -19,7 +22,7 @@ public class UiHandler {
         System.out.println(separator);
     }
     
-    public static boolean run(List<Task> tasks) {
+    public boolean run(List<Task> tasks) {
         boolean isRunning = true;
         System.out.println("You: ");
         String command = sc.nextLine();
@@ -28,24 +31,24 @@ public class UiHandler {
         
         String response = "";
         if (command.equals("bye")) {
-            response = CommandHandler.endDuke();
+            response = this.commandHandler.endDuke();
             isRunning = false;
         } else if (command.equals("list")) {
-            response = CommandHandler.showTasks(tasks);
+            response = this.commandHandler.showTasks(tasks);
         } else if (command.startsWith("mark")) {
-            response = CommandHandler.markTask(command, tasks);
+            response = this.commandHandler.markTask(command, tasks);
         } else if (command.startsWith("unmark")) {
-            response = CommandHandler.unmarkTask(command, tasks);
+            response = this.commandHandler.unmarkTask(command, tasks);
         } else if (command.startsWith("todo")) {
-            response = CommandHandler.addTodo(command, tasks);
+            response = this.commandHandler.addTodo(command, tasks);
         } else if (command.startsWith("deadline")) {
-            response = CommandHandler.addDeadline(command, tasks);
+            response = this.commandHandler.addDeadline(command, tasks);
         } else if (command.startsWith("event")) {
-            response = CommandHandler.addEvent(command, tasks);
+            response = this.commandHandler.addEvent(command, tasks);
         } else if (command.startsWith("delete")) {
-            response = CommandHandler.deleteEvent(command, tasks);
+            response = this.commandHandler.deleteEvent(command, tasks);
         } else {
-            response = CommandHandler.noMatch();
+            response = this.commandHandler.noMatch();
         }
         System.out.print(response);
         System.out.println(separator);
