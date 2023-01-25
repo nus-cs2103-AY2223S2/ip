@@ -21,4 +21,12 @@ public class Task {
     public void unmark() {
         isDone = false;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
 }
