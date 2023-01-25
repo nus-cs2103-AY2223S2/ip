@@ -21,6 +21,10 @@ public abstract class Task {
         isDone = value;
     }
 
+    public boolean matchesKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return "[" + eventSymbol + "]" + "[" + getStatusIcon() + "] " + description;

@@ -28,6 +28,16 @@ public class TaskList {
         return list.get(getIndexFromNumber(number)).toString();
     }
 
+    public TaskList getMatchingTasks(String keyword) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : list) {
+            if (task.matchesKeyword(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     private int getIndexFromNumber(int number) {
         return number - 1;
     }
