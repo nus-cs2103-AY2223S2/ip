@@ -7,15 +7,24 @@ import task.ToDo;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * The TaskFileReaderWriter class provides methods for reading and writing tasks to and from a file.
+ * It includes methods for loading tasks from a file and updating a task file with tasks from a
+ * TaskManager object, and creating a new task file.
+ *
+ */
 public class TaskFileReaderWriter {
-
 
     private static final String DIRECTORY_NAME = "userData";
     private static final String FILE_NAME = "test.txt";
 
-
     public TaskFileReaderWriter() {}
 
+    /**
+     * Creates a new task storage .txt file in the user's drive in a specified directory and file name.
+     *
+     * @return boolean value indicating the success of the file creation.
+     */
     public boolean createTaskFile() {
 
         File taskFile = new File(DIRECTORY_NAME + File.separator + FILE_NAME);
@@ -36,6 +45,15 @@ public class TaskFileReaderWriter {
         return true;
     }
 
+
+    /**
+     * Converts a string representation of a task from storage file
+     * on the user's drive into a {@link Task} object.
+     *
+     * @param taskString The string representation of the task in the format of
+     *                   "category|isCompleted|details|(deadline/start) (end)"
+     * @return The created Task object
+     */
     public Task readTaskString(String taskString) {
 
         String[] taskArr = taskString.split("\\|");
@@ -63,6 +81,12 @@ public class TaskFileReaderWriter {
         return newTask;
     }
 
+    /**
+     * Updates the file on the user's drive with the tasks in a given {@link TaskManager} object.
+     *
+     * @param taskManager The TaskManager object containing the tasks to be written to the file.
+     * @return boolean value indicating the success of the file update operation.
+     */
     public boolean updateTaskFile(TaskManager taskManager) {
         File taskFile = new File(DIRECTORY_NAME + File.separator + FILE_NAME);
 
@@ -103,7 +127,10 @@ public class TaskFileReaderWriter {
         return true;
     }
 
-
+    /**
+      * Reads data from a file and creates a new TaskManager object.
+      * @return A TaskManager object initialised with the tasks read from the file.
+      */
     public TaskManager loadDataFromFile() {
         TaskManager taskManager = new TaskManager();
         try {

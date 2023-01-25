@@ -32,10 +32,20 @@ public class Event extends Task{
         super.changeStatus(isCompleted);
     }
 
+    /**
+     * Returns the value of the private field 'start' representing the event start date.
+     *
+     * @return The current value of 'start'.
+     */
     public String getStart() {
         return this.start;
     }
 
+    /**
+     * Returns the value of the private field 'end' representing the event end date.
+     *
+     * @return The current value of 'end'.
+     */
     public String getEnd() {
         return this.end;
     }

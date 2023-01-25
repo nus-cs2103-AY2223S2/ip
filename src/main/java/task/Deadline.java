@@ -40,7 +40,11 @@ public class Deadline extends Task{
                 " (By " + deadline +")" + Format.getCompletionDisplay(super.isCompleted()));
     }
 
-
+    /**
+     * Returns the value of the private field 'deadline'.
+     *
+     * @return The current value of 'deadline'.
+     */
     public String getDeadline() {
         return this.deadline;
     }
