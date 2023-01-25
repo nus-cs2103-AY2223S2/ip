@@ -196,8 +196,6 @@ public class Duke {
 
             }
 
-
-
         }
         catch (IOException e){
             createDataFile();
