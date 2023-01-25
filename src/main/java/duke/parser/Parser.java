@@ -38,12 +38,12 @@ public class Parser {
     public CommandType parseRawCommand(String rawCommand) {
         //Single word commands
         switch (rawCommand) {
-            case "bye":
-                return CommandType.BYE;
-            case "list":
-                return CommandType.LIST;
-            case "help":
-                return CommandType.HELP;
+        case "bye":
+            return CommandType.BYE;
+        case "list":
+            return CommandType.LIST;
+        case "help":
+            return CommandType.HELP;
         }
 
         //Multiple word commands
