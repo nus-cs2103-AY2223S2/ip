@@ -10,7 +10,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String eventType() {
+    public String getEventType() {
         return "T";
     }
 

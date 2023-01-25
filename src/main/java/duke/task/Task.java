@@ -15,7 +15,7 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
     }
-    public abstract String eventType();
+    public abstract String getEventType();
 
     public abstract String getStorageDetails();
 
