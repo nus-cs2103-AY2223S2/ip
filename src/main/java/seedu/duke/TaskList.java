@@ -10,6 +10,7 @@ import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,12 +75,14 @@ public class TaskList {
         String[] inputArr = userParse.inputArr;
         for (int i = 1; i < inputArrLength; i++) {
             description = description + inputArr[i];
-            if (i != inputArrLength - 1) description += " ";
+            if (i != inputArrLength - 1) {
+                description += " ";
+            }
         }
         try {
             tasksList.add(new Todo(userParse.checkDescription(description, "todo")));
             counter++;
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             throw e;
         }
     }
@@ -100,7 +103,9 @@ public class TaskList {
                 i++;
                 while (i < inputArrLength) {
                     deadline += inputArr[i];
-                    if (i != inputArrLength - 1) deadline += " ";
+                    if (i != inputArrLength - 1) {
+                        deadline += " ";
+                    }
                     i++;
                 }
                 break;
@@ -136,7 +141,9 @@ public class TaskList {
                         i++;
                         while (i < inputArr.length) {
                             to += inputArr[i];
-                            if (i != inputArr.length - 1) to += " ";
+                            if (i != inputArr.length - 1) {
+                                to += " ";
+                            }
                             i++;
                         }
                         break;
