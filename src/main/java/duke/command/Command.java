@@ -38,6 +38,9 @@ public class Command {
         case LIST:
             this.listTasksCommand(tasks);
             break;
+        case FIND:
+            tasks.findTask(this.parser.getKeyword(userInput));
+            break;
         case TODO:
             tasks.addTask(new ToDo(this.parser.getTodoDescription(userInput)));
             storage.saveData(tasks);
