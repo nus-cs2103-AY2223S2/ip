@@ -1,6 +1,7 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TaskManager {
     protected ArrayList<Task> taskArr;
@@ -34,22 +35,13 @@ public class TaskManager {
         System.out.println("There are currently " + taskArr.size() + " task(s) in the list!");
     }
 
-    //credit: https://stackabuse.com/java-check-if-string-is-a-number/
-    public boolean isNumeric(String string) {
-        int intValue;
+    public Task getTaskFromList(int index) {
+        return taskArr.get(index);
+    }
 
-        if(string == null || string.equals("")) {
-            System.out.println("String cannot be parsed, it is null or empty.");
-            return false;
-        }
-
-        try {
-            intValue = Integer.parseInt(string);
-            return true;
-        } catch (NumberFormatException e) {
-            //System.out.println("Input String cannot be parsed to Integer.");
-        }
-        return false;
+    public String printTask(int index) {
+        String str = taskArr.get(index).toString();
+        return str;
     }
 
     //display items in list method
