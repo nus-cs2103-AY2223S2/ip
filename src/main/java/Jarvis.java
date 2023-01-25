@@ -1,4 +1,9 @@
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Jarvis {
     public static void main(String[] args) {
@@ -38,10 +43,9 @@ public class Jarvis {
 
         System.out.println(computer);
         System.out.println("Please enter a command Mr Stark.");
-
         ToDoList toDo = new ToDoList(100);
-
         Scanner sc = new Scanner(System.in);
+
         while(true) {
             String line = sc.nextLine();
 
@@ -101,7 +105,14 @@ public class Jarvis {
                     int firstSlash = line.indexOf("/");
                     String task = line.substring(9, firstSlash);
                     String time = line.substring(firstSlash + 1);
-                    toDo.add(task, time);
+
+                    try {
+                        LocalDate startTimeParsed = LocalDate.parse(time);
+                        toDo.add(task, startTimeParsed);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Wrong date format\n");
+                        System.out.println("Input date format 'event <task> /<YYYY-MM-DD>'");
+                    }
                 }
 
             } else if (line.matches("event(.*)")) {
@@ -120,7 +131,14 @@ public class Jarvis {
                 String endTime = line.substring(secondSlash + 1);
                 String task = line.substring(6, firstSlash);
 
-                toDo.add(task, startTime, endTime);
+                try {
+                    LocalDate startTimeParsed = LocalDate.parse(startTime);
+                    LocalDate endTimeParsed = LocalDate.parse(endTime);
+                    toDo.add(task, startTimeParsed, endTimeParsed);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Wrong date format\n");
+                    System.out.println("Input date format 'event <task> /<YYYY-MM-DD>/<YYYY-MM-DD>'");
+                }
 
             } else if (line.matches("delete(.*)")) {
                 // mark task as done
