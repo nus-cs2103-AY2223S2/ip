@@ -1,34 +1,42 @@
 Greetings! 'Tis I, Page, thy medieval assistant.
 Type 'help' for the list of available commands.
-Added to Quest Log: [T] [ ] wake up
-Added to Quest Log: [D] [ ] eat lunch by: 12pm
-Added to Quest Log: [E] [ ] sleep from: 1pm to: 10pm
+My apologies, I cannot decipher your arcane incantations.
+Type 'help' for the list of commands I can understand.
+My apologies, I cannot decipher your arcane incantations.
+Type 'help' for the list of commands I can understand.
+type 'help' to show this help text!
+type 'todo someTask' to add the task to the Quest Log.
+type 'deadline someDeadline /by someTime' to add a task with deadline someTime.
+type 'event someEvent /from startTime /to endTime' to schedule an event lasting from startTime to endTime.
+type 'log' to show the current Quest Log.
+type 'complete 1' to mark the 1st quest as complete.
+type 'incomplete 2' to mark the 2nd quest as incomplete.
+type 'bye' to exit.
+Sorry, you must include a task description!
+Added to Quest Log: [T] [ ] eat
+Sorry, you must include a deadline time!
+Added to Quest Log: [D] [ ] drink by: 1pm
+Sorry, you must include a start time!
+Sorry, you must include an end time!
+Added to Quest Log: [E] [ ] sleep from: 10pm to: 8am
 Quest Log:
-1: [T] [ ] wake up
-2: [D] [ ] eat lunch by: 12pm
-3: [E] [ ] sleep from: 1pm to: 10pm
+1: [T] [ ] eat
+2: [D] [ ] drink by: 1pm
+3: [E] [ ] sleep from: 10pm to: 8am
 Quest Complete! Hooray!
-[T] [X] wake up
-Quest Complete! Hooray!
-[E] [X] sleep from: 1pm to: 10pm
+[T] [X] eat
 Quest is already complete!
-[T] [X] wake up
-Quest Log:
-1: [T] [X] wake up
-2: [D] [ ] eat lunch by: 12pm
-3: [E] [X] sleep from: 1pm to: 10pm
+[T] [X] eat
+Quest Complete! Hooray!
+[D] [X] drink by: 1pm
 Quest Incomplete, the realm is in mortal danger!
-[T] [ ] wake up
-Quest Incomplete, the realm is in mortal danger!
-[E] [ ] sleep from: 1pm to: 10pm
-Quest Log:
-1: [T] [ ] wake up
-2: [D] [ ] eat lunch by: 12pm
-3: [E] [ ] sleep from: 1pm to: 10pm
+[D] [ ] drink by: 1pm
 Quest is already incomplete...
-[T] [ ] wake up
+[D] [ ] drink by: 1pm
+Sorry, you only have 3 quests!
+Sorry, that's not a number!
 Quest Log:
-1: [T] [ ] wake up
-2: [D] [ ] eat lunch by: 12pm
-3: [E] [ ] sleep from: 1pm to: 10pm
+1: [T] [X] eat
+2: [D] [ ] drink by: 1pm
+3: [E] [ ] sleep from: 10pm to: 8am
 Farewell, my liege.

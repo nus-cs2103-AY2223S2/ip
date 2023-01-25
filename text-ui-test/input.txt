@@ -1,14 +1,20 @@
-todo wake up
-deadline eat lunch /by 12pm
-event sleep /from 1pm /to 10pm
+
+hi
+help
+todo
+todo eat
+deadline drink
+deadline drink /by 1pm
+event sleep
+event sleep /from 10pm
+event sleep /from 10pm /to 8am
 log
 complete 1
-complete 3
 complete 1
-log
-incomplete 1
-incomplete 3
-log
-incomplete 1
+complete 2
+incomplete 2
+incomplete 2
+complete 10
+complete notANumber
 log
 bye
