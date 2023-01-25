@@ -13,6 +13,7 @@ src/main/resources/docs/
 *.iml
 bin/
 
+/text-ui-test/EXPECTED.TXT
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 src/main/java/chattime/chattime.Chattime.class
@@ -21,3 +22,4 @@ src/main/java/chattime/task/Event.class
 src/main/java/chattime/task/Task.class
 src/main/java/chattime/task/Todo.class
 src/main/java/chattime/exception/ChattimeException.class
+out/
