@@ -1,6 +1,9 @@
-
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Duke {
     public static void main(String[] args) {
         //Initialisation of variables
@@ -54,13 +57,18 @@ public class Duke {
                     }
                     String[] separated = tokens[1].split("/by ");
                     if (separated.length < 2) {
-                        System.out.println("Deadline needs to include a specific end date or time!");
+                        System.out.println("Deadline needs to include a specific end date!");
                         break;
                     }
-                    Task created = new Deadline(separated[0], separated[1]);
-                    taskList.add(created);
-                    System.out.println("Got it. I've added this task:\n" + created);
-                    System.out.printf("Now you have %d tasks in the list.\n", taskList.size());
+                    try {
+                        LocalDate date = LocalDate.parse(separated[1]);
+                        Task created = new Deadline(separated[0], date);
+                        taskList.add(created);
+                        System.out.println("Got it. I've added this task:\n" + created);
+                        System.out.printf("Now you have %d tasks in the list.\n", taskList.size());
+                    } catch(DateTimeParseException e) {
+                        System.out.println("Give deadline in YYYY-MM-DD format!");
+                    }
                     break;
                 }
                 case "event": {
