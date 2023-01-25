@@ -18,11 +18,13 @@ public class Command {
     5 - deadline
     6 - event
     7 - delete
+    8 - find
      */
 
     private final int code;
     private int index;
     private String[] content;
+    private String keyword;
 
     /**
      * Constructor for Command of specified code.
@@ -57,13 +59,23 @@ public class Command {
 
     /**
      *
+     *
+     * @param code
+     * @param keyword
+     */
+    protected Command(int code, String keyword) {
+        this.code = code;
+        this.keyword = keyword;
+    }
+
+    /**
+     *
      * @param ui Ui object of Duke.
      * @param taskList TaskList object of Duke.
      * @param storage Storage object of Duke.
      * @throws DukeException DukeException unique to Duke
      * @throws IOException Unexpected IOException
      */
-
     protected void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException, IOException {
         if (code == -1) {
             return;
@@ -97,6 +109,9 @@ public class Command {
             Task t = taskList.delete(index);
             ui.deleteMessage(t, taskList);
             storage.write();
+        } else if (code == 8) {
+            taskList.find(keyword);
+            ui.showLine();
         }
     }
 
