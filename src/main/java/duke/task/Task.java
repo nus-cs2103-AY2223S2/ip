@@ -1,4 +1,4 @@
-//Reference from the partial solution provided on CS2103 module website
+package duke.task;//Reference from the partial solution provided on CS2103 module website
 
 public class Task {
     protected String description;

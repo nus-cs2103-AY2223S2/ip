@@ -1,13 +1,19 @@
-public class DeleteCommand extends Command {
+package duke.command;
+
+import duke.storage.StorageList;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
+public class UnmarkCommand extends Command {
     private int listNum;
 
-    public DeleteCommand(String input) {
+    public UnmarkCommand(String input) {
         int tasknumbermark = Integer.valueOf(input) - 1;
         this.listNum = tasknumbermark;
     }
 
     public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
-        tasks.deleteTask(listNum);
+        tasks.unmarkTask(listNum);
         return true;
     }
 }
