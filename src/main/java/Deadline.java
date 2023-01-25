@@ -9,12 +9,22 @@ public class Deadline extends Task{
         this.by = by;
     }
 
+    public Deadline(String desc, String by, boolean b) {
+        super(desc, b);
+        this.desc = desc;
+        this.by = by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
     public String asCSV() {
-        return "D," + desc + "," + by;
+        if (super.isDone) {
+            return "D,1" + desc + "," + by;
+        } else {
+            return "D,0" + desc + "," + by;
+        }
     }
 }
