@@ -1,99 +1,187 @@
-import java.sql.SQLOutput;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.regex.Pattern;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
+    static String STR = "------------------------------------------------------------";
     static ArrayList<Task> arr = new ArrayList<Task>();
-    static String str = "------------------------------------------------------------";
-
+    static DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd MMM uuuu kk:mm");
 
     public static void main(String[] args) {
+        // Introduction
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println(logo + "Hello! I'm Duke\n");
 
-        printResponse("Hello! I'm Duke\n" + "What can I do for you?");
+        // Load data
+        try {
+            loadData("./data/duke.txt");
+            System.out.println("I've successfully retrieved your past task list!");
+        } catch (FileNotFoundException e) {
+            System.out.println("Sorry! Unfortunately, I'm unable to retrieve your past task list!");
+        } finally {
+            listTask();
+            printResponse("What can I do for you?");
+        }
 
         Scanner scanner = new Scanner(System.in);
-        while (true) {
-            try {
-                String input = scanner.nextLine();
-                String[] arrStr = input.split(" ", 2);
-                String command = arrStr[0];
+        boolean hasMore = true;
+        while (hasMore) {
+            // Formatting String input
+            String input = scanner.nextLine();
+            String[] arrStr = input.split(" ", 2);
+            String command = arrStr[0];
 
-                if (command.equals("bye")) {
-                    // Bye - exit program
-                    printResponse("Bye. Hope to see you again soon!");
-                    break;
-                } else if (command.equals("list")) {
-                    // List = print list of task
-                    list();
-                } else if (command.equals("mark")) {
-                    // Mark - mark a task as done
+            switch (command) {
+                // Bye - Save program and exit
+                case "bye":
                     try {
-                        int taskNum = Integer.parseInt(arrStr[1]);
-                        Task taskToMark = arr.get(taskNum - 1);
-                        taskToMark.mark();
-                        printResponse("Nice! I've marked this task as done: \n " + taskToMark);
+                        saveData("./data/duke.txt");
+                    } catch (IOException e) {
+                        System.out.println("Sorry, memory cannot be saved!");
+                    } finally {
+                        printResponse("Bye. Hope to see you again soon!");
+                        hasMore = false;
+                        break;
+                    }
+
+                    // List - Print list of task
+                case "list":
+                    listTask();
+                    break;
+
+                // Mark - mark task as done
+                case "mark":
+                    try {
+                        markTask(Integer.parseInt(arrStr[1]), true);
                     } catch (ArrayIndexOutOfBoundsException e1) {
                         printResponse("OOPS!!! Please choose a Task to mark.");
+                    } finally {
+                        break;
                     }
-                } else if (command.equals("unmark")) {
-                    // Unmark - unmark a task as undone
+
+                // Unmark - unmark a task as undone
+                case "unmark":
                     try {
-                        int taskNum = Integer.parseInt(arrStr[1]);
-                        Task taskToMark = arr.get(taskNum - 1);
-                        taskToMark.unmark();
-                        printResponse("OK, I've marked this task as not done yet \n" + taskToMark);
+                        markTask(Integer.parseInt(arrStr[1]), false);
                     } catch (ArrayIndexOutOfBoundsException e1) {
                         printResponse("OOPS!!! Please choose a Task to unmark.");
+                    } finally {
+                        break;
                     }
-                } else if (command.equals("todo")) {
-                    // todo - add a task with type todo
+
+                // todo - add a task with type todo
+                case "todo":
                     try {
-                        add(arrStr[1], 'T');
+                        addTask(arrStr[1], 'T');
                     } catch (ArrayIndexOutOfBoundsException e1) {
                         printResponse("OOPS!!! The description of this todo is incomplete.");
+                    } finally {
+                        break;
                     }
-                } else if (command.equals("deadline")) {
+
+                // deadline - add a task with type deadline
+                case "deadline":
                     try {
-                        add(arrStr[1], 'D');
+                        addTask(arrStr[1], 'D');
                     } catch (ArrayIndexOutOfBoundsException e1) {
                         printResponse("OOPS!!! The description of this deadline is incomplete.");
+                    } catch (DateTimeParseException e2) {
+                        printResponse("OOPS!!! The description of this deadline is incomplete.");
+                    } finally {
+                        break;
                     }
-                } else if (command.equals("event")) {
+
+                // event - add a task with type event
+                case "event":
                     try {
-                        add(arrStr[1], 'E');
+                        addTask(arrStr[1], 'E');
                     } catch (ArrayIndexOutOfBoundsException e1) {
                         printResponse("OOPS!!! The description of this event is incomplete.");
+                    } catch (DateTimeParseException e2) {
+                        printResponse("OOPS!!! The description of this event is incomplete.");
+                    } finally {
+                        break;
                     }
-                } else if (command.equals("delete")) {
+
+                // delete - delete task
+                case "delete":
                     try {
-                        Task deleteTask = arr.remove(Integer.parseInt(arrStr[1]) - 1);
-                        printResponse("Noted. I've removed this task: \n" + deleteTask + "\nNow you have " + arr.size() + " " +
-                                "tasks in the list.");
+                        deleteTask(Integer.parseInt(arrStr[1]) - 1);
                     } catch (ArrayIndexOutOfBoundsException e1) {
                         printResponse("OOPS!!! Please choose a Task to delete.");
+                    } finally {
+                        break;
                     }
-                } else {
-                    throw new IllegalArgumentException();
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+                // incorrect input
+                default:
+                    printResponse("I'm sorry, but I don't understand what that means! Try re-typing your instruction!");
             }
         }
     }
 
     public static void printResponse(String response) {
-        System.out.println(str);
+        System.out.println(STR);
         System.out.println(response);
-        System.out.println(str);
+        System.out.println(STR);
     }
 
-    public static void add(String response, char type) throws ArrayIndexOutOfBoundsException {
+    public static void loadData(String pathName) throws FileNotFoundException {
+        File f = new File(pathName);
+        Scanner s = new Scanner(f);
+        while(s.hasNextLine()) {
+            String[] parts = s.nextLine().split(Pattern.quote(" | "));
+            switch (parts[0]) {
+                case "T":
+                    arr.add(new Todo(parts[2], Boolean.parseBoolean(parts[1])));
+                    break;
+                case "D":
+                    arr.add(new Deadline(parts[2], Boolean.parseBoolean(parts[1]), parts[3].substring(4), FORMAT));
+                    break;
+                case "E":
+                    arr.add(new Event(parts[2], Boolean.parseBoolean(parts[1]), parts[3].substring(6),
+                            parts[4].substring(4), FORMAT));
+                    break;
+            }
+        }
+    }
+
+    public static void saveData(String pathName) throws IOException {
+        FileWriter fw = new FileWriter("./data/duke.txt");
+        String str = "";
+        for(int i = 0 ; i < arr.size(); i++) {
+            if(str.isEmpty()) {
+                str = str + arr.get(i);
+            } else {
+                str = str + "\n" + arr.get(i);
+            }
+        }
+        fw.write(str);
+        fw.close();
+    }
+
+    public static void markTask(int taskNum, boolean isDone) {
+        Task taskToMark = arr.get(taskNum - 1);
+        if(isDone){
+            taskToMark.mark();
+            printResponse("Nice! I've marked this task as done: \n " + taskToMark);
+        } else {
+            taskToMark.unmark();
+            printResponse("OK, I've marked this task as not done yet \n" + taskToMark);
+        }
+    }
+
+    public static void addTask(String response, char type) throws ArrayIndexOutOfBoundsException {
        if(type == 'T') {
            Todo newTask = new Todo(response);
            arr.add(newTask);
@@ -101,21 +189,27 @@ public class Duke {
                    + " tasks in the list.");
        } else if(type == 'D') {
            String[] strArr = response.split(" /by ", 2);
-           Deadline newTask = new Deadline(strArr[0], strArr[1]);
+           Deadline newTask = new Deadline(strArr[0], strArr[1], FORMAT);
            arr.add(newTask);
            printResponse("Got it. I've added this task: \n" + newTask + "\nNow you have " + arr.size()
                    + " tasks in the list.");
        } else if(type =='E') {
            String[] strArr = response.split(" /from ", 2);
            String[] timings = strArr[1].split(" /to ", 2);
-           Event newTask = new Event(strArr[0], timings[0], timings[1]);
+           Event newTask = new Event(strArr[0], timings[0], timings[1], FORMAT);
            arr.add(newTask);
            printResponse("Got it. I've added this task: \n" + newTask + "\nNow you have " + arr.size()
                    + " tasks in the list.");
        }
     }
 
-    public static void list() {
+    public static void deleteTask(int taskNum) {
+        Task deleteTask = arr.remove(taskNum);
+        printResponse("Noted. I've removed this task: \n" + deleteTask + "\nNow you have " + arr.size() + " "
+                + "tasks in the list.");
+    }
+
+    public static void listTask() {
         if (arr.isEmpty()) {
             printResponse("You have 0 task to complete at the moment!");
         } else {
@@ -128,7 +222,8 @@ public class Duke {
                 lst = lst + x + ". " + arr.get(i);
                 x++;
             }
-            printResponse("Here are the task in your list: \n" + lst);
+            printResponse("Here are the task in your list: \n" + lst + "\nYou have " + arr.size()
+                    + " tasks in the list.");
         }
     }
 }
