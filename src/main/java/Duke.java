@@ -1,4 +1,6 @@
 import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -43,7 +45,9 @@ public class Duke {
                         System.out.println("☹ OOPS!!! You must indicate ur deadline using /by");
                     } else {
                         String by = command.substring(starting);
-                        Deadline deadline = new Deadline(command.substring(0,starting-5), by);
+                        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                        LocalDateTime formattedDeadline = LocalDateTime.parse(by, dateTimeFormatter);
+                        Deadline deadline = new Deadline(command.substring(0,starting-5), formattedDeadline);
                         list[counter] = deadline;
                         counter++;
                         System.out.println("Got it. I've added this task:\n" + deadline.toString() 
@@ -68,9 +72,12 @@ public class Duke {
                     if (fromStart == 0 || toStart == 0) {
                         System.out.println("☹ OOPS!!! You must indicate ur event duration using /from and /to");
                     } else {
-                        String from = command.substring(fromStart, toStart-4);
+                        String from = command.substring(fromStart, toStart-5);
                         String to = command.substring(toStart);
-                        Event event = new Event(command.substring(0,fromStart-7), from, to);
+                        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                        LocalDateTime formattedstartTime = LocalDateTime.parse(from, dateTimeFormatter);
+                        LocalDateTime formattedendTime= LocalDateTime.parse(to, dateTimeFormatter);
+                        Event event = new Event(command.substring(0,fromStart-7), formattedstartTime, formattedendTime);
                         list[counter] = event;
                         counter++;
                         System.out.println("Got it. I've added this task:\n" + event.toString() 
