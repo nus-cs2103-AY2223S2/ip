@@ -1,11 +1,31 @@
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.util.regex.*;
+import java.util.regex.Pattern;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Collectors;
 
 public class Duke {
     private static final int cap = 100;
     private static ArrayList<Task> storage = new ArrayList<>(cap);
+
     public static void main(String[] args) throws Exception {
+        Scanner sc;
+        String input;
+        Path path;
+
+        try{
+            String cwd = System.getProperty("user.dir");
+            path = Paths.get(cwd, "data","Duke.txt");
+            if (!Files.exists(path)){
+                Files.createFile(path);
+            }
+        } catch (Exception e){
+            throw new DukeException("Unable to access/create file");
+        }
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -13,14 +33,14 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+
         String intro = "_____________________________________\n"
                 + "Hello! I'm Duke\n"
                 + "What can I do for you?\n"
                 + "_____________________________________\n";
         System.out.println(intro);
 
-        Scanner sc = new Scanner(System.in);
-        String input;
+        sc = new Scanner(System.in);
 
         while(true){
             try {
@@ -37,7 +57,7 @@ public class Duke {
                     if (inputs.length != 1) {
                         throw new DukeException("Command does not take in extra arguments!");
                     } else {
-                        list();
+                        list(path);
                     }
                 } else if (lcInput.contains("deadline")) {
                     if (inputs.length <= 1) {
@@ -45,13 +65,13 @@ public class Duke {
                     } else if (!lcInput.contains("/by")) {
                         throw new DukeException("Put in the deadline of your task Please!");
                     } else {
-                        deadline(input);
+                        deadline(input, path);
                     }
                 } else if (lcInput.contains("todo")) {
                     if (inputs.length <= 1) {
                         throw new DukeException("What is the todo task????");
                     } else {
-                        todo(input);
+                        todo(input, path);
                     }
                 } else if (lcInput.contains("event")) {
                     if (!input.contains("/from") && !input.contains("/to")){
@@ -59,7 +79,7 @@ public class Duke {
                     } else if (inputs.length <= 1){
                         throw new DukeException("What is the event task????");
                     }
-                    events(input);
+                    events(input, path);
                 } else if (Pattern.compile("\\D+.\\d+").matcher(input).find()){
                     int index = Integer.parseInt(inputs[1]);
                     if (inputs[0].equals("mark")) {
@@ -67,7 +87,7 @@ public class Duke {
                     } else if (inputs[0].equals("unmark")) {
                         unmark(index);
                     } else if (inputs[0].equals("delete")) {
-                        delete(index - 1);
+                        delete(index - 1, path);
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
@@ -77,8 +97,8 @@ public class Duke {
             } catch (DukeException e){
                 System.out.println(
                         "_____________________________________\n"
-                        + e.errorMessage + "\n"
-                        + "_____________________________________\n"
+                                + e.errorMessage + "\n"
+                                + "_____________________________________\n"
                 );
                 continue;
             }
@@ -95,17 +115,24 @@ public class Duke {
         System.exit(0);
     }
 
-    private static void list(){
-        System.out.println("_____________________________________\n");
-        for (Task task: storage){
-            System.out.println(
-                    storage.indexOf(task) + ". " + task.toString() + "\n"
-            );
+    private static void list(Path filePath) throws DukeException {
+        try {
+            List<String> tasklines = Files.lines(filePath)
+                    .map(line -> line.trim())
+                    .collect(Collectors.toList());
+
+            System.out.println("_____________________________________\n");
+            for (String line: tasklines){
+                System.out.println(line + "\n");
+            }
+            System.out.println("_____________________________________\n");
+        } catch (IOException e){
+            throw new DukeException("Unable to access contents of File!");
         }
-        System.out.println("_____________________________________\n");
+         */
     }
 
-    private static void deadline(String rawInput){
+    private static void deadline(String rawInput, Path filePath) throws IOException {
         String desc = rawInput.substring(
                 rawInput.indexOf("deadline") + "deadline ".length(),
                 rawInput.indexOf("/by")
@@ -123,9 +150,12 @@ public class Duke {
                 + taskCount() + "\n"
                 + "_____________________________________\n"
         );
+
+        String indexedTaskToAdd = storage.indexOf(taskAdd) + "|" + taskAdd.toString();
+        Files.write(filePath, indexedTaskToAdd.getBytes());
     }
 
-    private static void events(String rawInput){
+    private static void events(String rawInput, Path filePath) throws IOException {
         String desc = rawInput.substring(
                 rawInput.indexOf("events") + "events ".length(),
                 rawInput.indexOf("/from")
@@ -142,15 +172,20 @@ public class Duke {
 
         Task taskAdd = new Events(desc, from, to);
         storage.add(taskAdd);
+
+
         System.out.println("_____________________________________\n"
                 + "Got it. I've added this task:\n"
                 + " " + taskAdd.toString() +"\n"
                 + taskCount() + "\n"
                 + "_____________________________________\n"
         );
+
+        String indexedTaskToAdd = storage.indexOf(taskAdd) + "|" + taskAdd.toString();
+        Files.write(filePath, indexedTaskToAdd.getBytes());
     }
 
-    private static void todo(String rawInput){
+    private static void todo(String rawInput, Path filePath) throws IOException {
         String desc = rawInput.substring(
                 rawInput.indexOf("todo") + "todo ".length()
         );
@@ -163,6 +198,9 @@ public class Duke {
                 + taskCount() + "\n"
                 + "_____________________________________\n"
         );
+
+        String indexedTaskToAdd = storage.indexOf(taskAdd) + "|" + taskAdd.toString();
+        Files.write(filePath, indexedTaskToAdd.getBytes());
     }
 
     private static String taskCount(){
@@ -171,8 +209,18 @@ public class Duke {
         return "Now you have " + newCount + task + " in the list.";
     }
 
-    private static void delete(int index) throws DukeException{
+    private static void delete(int index, Path filePath) throws DukeException{
         try {
+            List<String> newTaskLines = Files.lines(filePath)
+                    .map(line -> line.trim())
+                    .filter(line -> !line.contains(
+                            index + "|" +
+                            storage.get(index).toString()))
+                    .collect(Collectors.toList());
+
+            for (String l : newTaskLines){
+                Files.write(filePath, l.getBytes());
+            }
             Task taskRemoved = storage.remove(index);
             System.out.println(
                     "_____________________________________\n"
@@ -183,11 +231,13 @@ public class Duke {
             );
         } catch (IndexOutOfBoundsException err){
             throw new DukeException("Invalid index given!");
+        } catch (IOException e){
+            throw new DukeException("Unable to access content of file");
         }
 
     }
 
-    public static void mark(String[] args, int index) throws DukeException{
+    private static void mark(String[] args, int index) throws DukeException{
         if (args[0].equals("mark")) {
             try {
                 storage.get(index - 1).markAsDone();
@@ -203,7 +253,7 @@ public class Duke {
         }
     }
 
-    public static void unmark(int index) throws DukeException{
+    private static void unmark(int index) throws DukeException{
         try {
             storage.get(index - 1).unMark();
             System.out.println(
