@@ -34,6 +34,8 @@ public class Parser {
             handleToDo(stringStream, taskList, ui);
         } else if (command.equalsIgnoreCase("delete")) {
             handleDelete(stringStream, taskList, ui);
+        } else if (command.equalsIgnoreCase("find")) {
+            handleFind(stringStream, taskList, ui);
         } else {
             ui.showMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -150,6 +152,24 @@ public class Parser {
         } catch (DukeException e) {
             ui.showMessage(e.getMessage());
         }
+    }
+
+    private static void handleFind(Scanner stringStream, TaskList taskList, Ui ui) {
+        if (!stringStream.hasNext()) {
+            ui.showMessage("☹ OOPS!!! Please enter a keyword we can use to search");
+            return;
+        }
+
+        String keyword = stringStream.next();
+        TaskList tasksOfInterest = new TaskList();
+
+        for (Task t : taskList) {
+            String desc = t.getDescription();
+            if (desc.contains(keyword)) {
+                tasksOfInterest.add(t);
+            }
+        }
+        handleList(tasksOfInterest, ui);
     }
 
 }
