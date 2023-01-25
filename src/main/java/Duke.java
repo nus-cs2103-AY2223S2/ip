@@ -50,9 +50,7 @@ public class Duke {
                 } catch (Exception e) {
                     System.out.println("Come on now, try again. I asked for an number.");
                 }
-
-            }
-            else if (compareString(task, "unmark")) {
+            } else if (compareString(task, "unmark")) {
                 try {
                     int taskNum = Integer.parseInt(task.split(" ")[1]) - 1;
                     tasks.markTaskUndone(taskNum);
@@ -68,6 +66,12 @@ public class Duke {
 
             else if (task.isEmpty()) {
                 System.out.println("Don't appreciate the silence :(");
+            }
+
+            //filters deadlines due on date and events occuring during date
+            else if (task.split(" ")[0].equalsIgnoreCase("date")) {
+                String date = task.split(" ", 2)[1];
+                tasks.filterByDate(date);
             }
 
             else {
