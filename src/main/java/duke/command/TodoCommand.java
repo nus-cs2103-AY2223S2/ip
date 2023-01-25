@@ -10,8 +10,7 @@ public class TodoCommand extends Command {
 
     public TodoCommand(String fullCommand) {
         String[] checker = fullCommand.split("todo ");
-        System.out.println(checker[0]);
-        this.message = checker[0];
+        this.message = checker[1];
     }
 
     public boolean execute(TaskList tasks, Ui ui, StorageList storage) {

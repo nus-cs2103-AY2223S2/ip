@@ -2,6 +2,7 @@ package duke.task;
 
 import duke.task.Task;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -32,7 +33,7 @@ public class TaskList {
         for (int x = 0; x < list.size(); x++) {
             System.out.println((x + 1) + "." + list.get(x));
         }
-        System.out.println("");
+        System.out.println("----------------------------------------------------");
         statement();
     }
 
@@ -53,6 +54,17 @@ public class TaskList {
     }
 
     public void statement() {
-        System.out.println("Now you have " + this.lengthOflist() + " tasks in your list.\n");
+        System.out.print("Now you have " + this.lengthOflist() + " tasks in your list.\n");
+    }
+
+    public ArrayList<Task> find(String message) {
+        ArrayList<Task> arrStr = new ArrayList<>();
+        for (Task t: list) {
+            if (t.toString().contains(message)) {
+                arrStr.add(t);
+            }
+
+        }
+        return arrStr;
     }
 }

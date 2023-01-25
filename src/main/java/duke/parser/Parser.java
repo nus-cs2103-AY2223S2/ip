@@ -11,15 +11,16 @@ public class Parser {
         list,
         bye,
         delete,
+        find,
         event;
     }
 
     public static Command parse(String input) throws IllegalArgumentException {
         String[] input2 = input.split(" ");
         Type t = Type.valueOf(input2[0].toLowerCase());
-        switch(t) {
+        switch (t) {
             case todo:
-                return new TodoCommand(input2[1]);
+                return new TodoCommand(input);
 
             case deadline:
                 return new DeadlineCommand(input);
@@ -41,6 +42,9 @@ public class Parser {
 
             case event:
                 return new EventCommand(input);
+
+            case find:
+                return new FindCommand(input);
 
             default:
                 throw new IllegalArgumentException();
