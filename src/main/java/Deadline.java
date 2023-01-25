@@ -6,7 +6,12 @@ public class Deadline extends Task {
         super(description);
         this.deadline = deadline;
     }
-
+    @Override
+    public String addToFile() {
+        String str = String.format("D | %d | %s | %s ",
+                isDone ? 1 : 0, this.description, this.deadline);
+        return str + "\n";
+    }
     @Override
     public String toString() {
         return String.format("[D][%s] %s(by: %s)",

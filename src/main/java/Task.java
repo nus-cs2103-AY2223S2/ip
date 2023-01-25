@@ -15,6 +15,12 @@ public class Task {
         this.isDone = false;
     }
 
+    public String addToFile() {
+        String str = String.format(" | %d | %s ",
+                isDone ? 1 : 0, this.description);
+        return str + "\n";
+    }
+
     @Override
     public String toString() {
         return String.format("[T][%s] %s",

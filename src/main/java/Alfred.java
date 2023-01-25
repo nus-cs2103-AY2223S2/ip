@@ -1,4 +1,6 @@
-import java.text.NumberFormat;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -13,17 +15,31 @@ public class Alfred {
         Alfred.printLogo();
         Alfred.printIntro();
 
+        String path = "data/alfred.txt";
+        File dataFile = new File(path);
+
+        itemsList = new ArrayList<>();
+        try {
+            Alfred.loadFileContents(dataFile);
+        } catch (IOException e) {
+            Alfred.echoCommand("Error, invalid file path");
+            return;
+        } catch (AlfredException e) {
+            Alfred.echoCommand(e.getMessage());
+            return;
+        }
+
         Scanner sc = new Scanner(System.in);
         String commandLine = sc.nextLine();
 
-        itemsList = new ArrayList<>();
         while (true) {
             String[] lineArr = commandLine.split(" ");
             String command = lineArr[0];
             try {
                 if (command.equals("bye") && lineArr.length == 1) { // So we can still add taskNames that start with bye
                     Alfred.saysBye();
-                    System.exit(1);
+                    Alfred.writeToFile(dataFile);   // Handles the adding of the new task into the data file
+                    System.exit(0); // means if the program crashes halfway we won't the files at all
                 } else if (command.equals("list") && lineArr.length == 1) {
                     Alfred.listItems();
                 } else if (command.equals("mark") && lineArr.length == 2) {
@@ -36,10 +52,72 @@ public class Alfred {
                     Alfred.addItem(commandLine);
                 }
             } catch (AlfredException e) {
-                Alfred.echoCommand(e.toString());
+                Alfred.echoCommand(e.toString()); // only valid data can be saved into the file
             } finally {
                 commandLine = sc.nextLine();
             }
+        }
+    }
+
+    private static void loadFileContents(File dataFile) throws IOException, AlfredException {
+
+        class CheckMark {
+            public void isMark(int value, Task task) {
+                if (value == 1) {
+                    task.markAsDone();
+                }
+            }
+        }
+        // anonymous function?
+        CheckMark checkMark = new CheckMark();
+        // how to create the new directory?
+        dataFile.getParentFile().mkdir();
+        if (!dataFile.createNewFile()) {
+            Scanner sc = new Scanner(dataFile);
+            while (sc.hasNext()) {
+                String[] lineArr = sc.nextLine().split(" \\| ");
+                String taskType = lineArr[0];
+                Task task;
+                // What happens if the data in the file is not as the format given?
+                try {
+                    switch (taskType) {
+                        case "T":
+                            task = new ToDo(lineArr[2]);
+                            checkMark.isMark(Integer.parseInt(lineArr[1]), task);
+                            break;
+                        case "D":
+                            task = new Deadline(lineArr[2], lineArr[3]);
+                            checkMark.isMark(Integer.parseInt(lineArr[1]), task);
+                            break;
+                        case "E":
+                            String[] duration = lineArr[3].split("-");
+                            task = new Event(lineArr[2], duration[0], duration[1]);
+                            checkMark.isMark(Integer.parseInt(lineArr[1]), task);
+                            break;
+                        default:
+                            throw new AlfredException("I'm sorry but there is an" +
+                                    " invalid task in the data file");
+                            // No task type
+                    }
+                    itemsList.add(task);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new AlfredException("There is probably a missing separator in your file");
+                }
+
+            }
+        }
+    }
+
+    private static void writeToFile(File dataFile) {
+        try {
+            FileWriter fw = new FileWriter(dataFile);
+            for (Task task : itemsList) {
+                fw.write(task.addToFile());
+            }
+            fw.close();
+        } catch (IOException e) {
+            Alfred.echoCommand(String.format("Something went wrong while" +
+                    " saving the tasks, %s\n", e.getMessage()));
         }
     }
 
@@ -60,6 +138,7 @@ public class Alfred {
         String typeTask = commandArr[0];
         String[] lineArr;
         Task task;
+        // Handling the type of task
         switch (typeTask) {
             case "todo":
                 if (commandArr.length == 1) {
@@ -89,6 +168,7 @@ public class Alfred {
             default:
                 throw new AlfredException("I'm sorry, but I don't know what that means :<");
         }
+        // Alfred's response to remaining tasks
         String numTasks = itemsList.size() == 1 ? "task" : "tasks";
         String command = String.format("Noted, task added: \n      %s\n" +
                 "    Number of %s in the list: %d\n", task, numTasks, itemsList.size());
