@@ -1,19 +1,41 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.*;
 
-#test
 public class Duke {
     public static void main(String[] args) {
-        System.out.println("Hi! I'm Samantha\nHow can I help?");
+
+        System.out.println("    . . . Loading . . . ");
+
+        // initialise array of Task objects and task counter
+        ArrayList<Task> tasks = new ArrayList<Task>();
+
+        //Task[] tasks = new Task[100];
+        int taskCounter = 0;
+
+        File file = new File("../data/duke.txt");
+        try {
+            Scanner saveFile = new Scanner(file);
+            System.out.println("    Saved data found, welcome back!");
+            while (saveFile.hasNextLine()) {
+                taskCounter = loadSaved(saveFile.nextLine(), tasks, taskCounter);
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("    No saved data not found, will be created");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("File already created");
+            }
+        }
+
+        System.out.println("    Hi! I'm Samantha\n    How can I help?");
+
 
         // take in input command from user
         Scanner sc = new Scanner(System.in);
         String s = sc.nextLine();
-
-        // initialise array of Task objects and task counter
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        //Task[] tasks = new Task[100];
-        int taskCounter = 0;
 
         // loop while user has not entered 'bye' command
         while (!s.equals("bye")) {
@@ -26,6 +48,20 @@ public class Duke {
 
             // take in next command
             s = sc.nextLine();
+        }
+
+        try {
+            FileWriter fWriter = new FileWriter("../data/duke.txt");
+            for (int i = 0; i < tasks.size(); i++) {
+                Task t = tasks.get(i);
+                fWriter.write(t.toSavedString());
+                if (i != tasks.size() - 1) {
+                    fWriter.write("\n");
+                }
+            }
+            fWriter.close();
+        } catch (IOException e) {
+            System.out.print(e.getMessage());
         }
 
         // exit
@@ -83,7 +119,7 @@ public class Duke {
             if (s.substring(5).isBlank()) {
                 System.out.println("    OOPS!!! The description of a event cannot be empty.");
             } else {
-                String from = s.substring(s.indexOf("/") + 6, s.lastIndexOf("/"));
+                String from = s.substring(s.indexOf("/") + 6, s.lastIndexOf("/") - 1);
                 String to = s.substring(s.lastIndexOf("/") + 4);
                 Task newTask = new Event(s.substring(6, s.indexOf("/") - 1), from, to);
                 tasks.add(newTask);
@@ -109,6 +145,36 @@ public class Duke {
         return taskCounter;
     }
 
+    public static int loadSaved(String s, ArrayList<Task> tasks, int taskCounter) {
+        if (s.substring(0, 1).equals("T")) {
+            Todo newTodo = new Todo(s.substring(8));
+            if (s.substring(4, 5).equals("1")) {
+                newTodo.toggleMarked();
+            }
+            tasks.add(newTodo);
+
+        } else if (s.substring(0, 1).equals("D")) {
+            String marked = s.substring(4, 5);
+            String task = s.substring(8);
+            Deadline newDeadline = new Deadline(task.substring(0, task.indexOf("|") - 1),
+                    task.substring(task.indexOf("|") + 2));
+            if (marked.equals("1")) {
+                newDeadline.toggleMarked();
+            }
+            tasks.add(newDeadline);
+
+        } else {
+            String marked = s.substring(4, 5);
+            String task = s.substring(8);
+            String desc = task.substring(0, task.indexOf("|") - 1);
+            task = task.substring(task.indexOf("|") + 2);
+            Event newEvent = new Event(desc, task.substring(0, task.indexOf("|") - 1),
+                    task.substring(task.indexOf("|") + 2));
+            tasks.add(newEvent);
+        }
+        return taskCounter + 1;
+    }
+
 }
 
 // custom Task class to store individual tasks that the user enters
@@ -129,6 +195,14 @@ class Task {
         this.isDone = !this.isDone;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String toSavedString() {
+        return this.isDone ? "1 | " + this.description : "0 | " + this.description;
+    }
+
     @Override
     public String toString() {
         return this.getStatusIcon() + " " + this.description;
@@ -139,6 +213,11 @@ class Todo extends Task {
 
     public Todo(String description) {
         super(description);
+    }
+
+    @Override
+    public String toSavedString() {
+        return "T | " + super.toSavedString();
     }
 
     @Override
@@ -157,6 +236,11 @@ class Deadline extends Task {
     }
 
     @Override
+    public String toSavedString() {
+        return "D | " + super.toSavedString() + " | " + this.by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
@@ -170,6 +254,11 @@ class Event extends Task {
         super(description);
         this.from = from;
         this.to = to;
+    }
+
+    @Override
+    public String toSavedString() {
+        return "D | " + super.toSavedString() + " | " + this.from + " | " + this.to;
     }
 
     @Override
