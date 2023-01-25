@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,19 +35,29 @@ public class Storage {
                     break;
                 case "D":
                     String deadline = taskArr[3];
-                    data.add(new Deadline(taskArr[2], isDone, taskType, deadline));
+                    LocalDateTime formattedDeadline = formatTimeStamp(deadline);
+                    data.add(new Deadline(taskArr[2], isDone, taskType, formattedDeadline));
                     break;
                 case "E":
                     String from = taskArr[3];
+                    LocalDateTime formattedFrom = formatTimeStamp(from);
                     String to = taskArr[4];
-                    data.add(new Event(taskArr[2], isDone, taskType, from, to));
+                    LocalDateTime formattedTo = formatTimeStamp(to);
+                    data.add(new Event(taskArr[2], isDone, taskType, formattedFrom, formattedTo));
                     break;
                 }
             }
         } catch (FileNotFoundException err) {
-            File myObj = new File(String.valueOf(this.path));
+            new File(String.valueOf(this.path));
         }
         return data;
+    }
+
+    private LocalDateTime formatTimeStamp(String timeStamp) {
+        String[] timeStampArr = timeStamp.split("T");
+        LocalDate date = LocalDate.parse(timeStampArr[0]);
+        LocalTime time = LocalTime.parse(timeStampArr[1]);
+        return LocalDateTime.of(date, time);
     }
 
     public void writeFile(ArrayList<Task> taskList) {
