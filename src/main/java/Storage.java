@@ -1,22 +1,38 @@
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.Files;
 import org.apache.commons.io.FileUtils;
 
 public class Storage {
     String home = System.getProperty("user.home");
-    java.nio.file.Path path;
-    File newFile;
+    Path filePath;
+    File dukeDataFile;
 
     public Storage(String s) {
-        path = java.nio.file.Paths.get(home, "data", s);
-        newFile = new File(path.toString());
+        filePath = Paths.get(home, "data", s);
     }
 
+    //Just a test, will remove later
     public void dirTest() {
         try {
-            FileUtils.write(newFile, "Test\ning");
+            dukeDataFile = new File(filePath.toString());
+            FileUtils.write(dukeDataFile, "Test\ning");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    //Supposed to return TaskList, which will be done later
+    public void load() {
+//        dukeDataFile = new File(filePath.toString());
+        if (Files.exists(filePath)) {
+            //Means the file has been created before
+            //This is where we read from it
+            //return (loading)
+        } else {
+            //create file here, then return nothing?
         }
     }
 }
