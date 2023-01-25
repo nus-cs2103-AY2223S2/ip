@@ -10,8 +10,8 @@ public class Parser {
 
     protected static Command read(Scanner sc) {
         int rank;
-        String command = sc.next();
         String s = sc.nextLine().trim();
+        String command = sc.next();
         String[] message;
         try {
             if (s.length() > 500) {
