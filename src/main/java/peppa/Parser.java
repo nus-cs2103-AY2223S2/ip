@@ -44,6 +44,8 @@ public class Parser {
             return parseUnmarkCommand(args);
         case DeleteCommand.COMMAND_WORD:
             return parseDeleteCommand(args);
+        case FindCommand.COMMAND_WORD:
+            return new FindCommand(args[1]);
         case TodoCommand.COMMAND_WORD:
             return parseTodoCommand(fullCommand);
         case DeadlineCommand.COMMAND_WORD:
