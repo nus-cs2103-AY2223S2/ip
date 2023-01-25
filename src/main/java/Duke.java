@@ -2,8 +2,14 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.Locale;
 
-//test
+
 public class Duke {
     public static void main(String[] args) {
 
@@ -229,42 +235,55 @@ class Todo extends Task {
 
 class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate by;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        DateTimeFormatter df = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd-MM-yyyy")
+                .toFormatter(Locale.ENGLISH);
+        this.by = LocalDate.parse(by, df);
     }
 
     @Override
     public String toSavedString() {
-        return "D | " + super.toSavedString() + " | " + this.by;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy").withLocale(Locale.ENGLISH);
+        return "D | " + super.toSavedString() + " | " + this.by.format(df);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy").withLocale(Locale.ENGLISH);
+        return "[D]" + super.toString() + " (by: " + by.format(df) + ")";
     }
 }
 
 class Event extends Task {
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalTime to;
 
     public Event(String description, String from, String to) {
         super(description);
-        this.from = from;
-        this.to = to;
+        DateTimeFormatter df = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("dd-MM-yyyy HH:mm")
+                .toFormatter(Locale.ENGLISH);
+        DateTimeFormatter df2 = new DateTimeFormatterBuilder().parseCaseInsensitive().appendPattern("HH:mm")
+                .toFormatter(Locale.ENGLISH);
+        this.from = LocalDateTime.parse(from, df);
+        this.to = LocalTime.parse(to, df2);
     }
 
     @Override
     public String toSavedString() {
-        return "D | " + super.toSavedString() + " | " + this.from + " | " + this.to;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").withLocale(Locale.ENGLISH);
+        DateTimeFormatter df2 = DateTimeFormatter.ofPattern("HH:mm").withLocale(Locale.ENGLISH);
+
+        return "E | " + super.toSavedString() + " | " + this.from.format(df) + " | " + this.to.format(df2);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + "to: " + to + ")";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm").withLocale(Locale.ENGLISH);
+        DateTimeFormatter df2 = DateTimeFormatter.ofPattern("HH:mm").withLocale(Locale.ENGLISH);
+        return "[E]" + super.toString() + " (from: " + from.format(df) + " to: " + to.format(df2) + ")";
     }
 
 }
