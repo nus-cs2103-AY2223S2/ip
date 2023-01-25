@@ -26,7 +26,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String eventType() {
+    public String getEventType() {
         return "D";
     }
 

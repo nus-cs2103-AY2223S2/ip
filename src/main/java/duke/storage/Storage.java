@@ -39,7 +39,7 @@ public class Storage {
             for (int i = 0; i < taskList.getSize(); i++) {
                 Task task = taskList.getTask(i);
                 StringBuilder taskString = new StringBuilder();
-                taskString.append(task.eventType());
+                taskString.append(task.getEventType());
                 taskString.append(" | " + task.getStatusIcon() + " | ");
                 taskString.append(task.getStorageDetails() + "\n");
                 fileWriter.write(taskString.toString());
