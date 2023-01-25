@@ -3,6 +3,7 @@ package duke.tasktypes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
@@ -67,13 +68,14 @@ public class Event extends Task {
     @Override
     public String getSaveFormat() {
         String done;
-        if (this.done) {
+        if (this.isDone) {
             done = "1";
         } else {
             done = "0";
         }
         return "E" + ",," + done + ",," + this.description + ",," + this.forSavingStart + ",," + this.forSavingEnd;
     }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.startBy + ", " + "to: " + this.endBy + ")";

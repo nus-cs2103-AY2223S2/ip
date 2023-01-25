@@ -10,7 +10,7 @@ import duke.tasktypes.Task;
  */
 public class AddCommand extends Command {
 
-    private final Task task;
+    private Task task;
 
     /**
      * Constructs an add task command

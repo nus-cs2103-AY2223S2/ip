@@ -3,6 +3,7 @@ package duke.tasktypes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
@@ -39,13 +40,12 @@ public class Deadline extends Task {
         this.byDateTime = LocalDateTime.of(this.byDate, this.byTime);
         this.doneBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).
                 format(this.byDateTime);
-
     }
 
     @Override
     public String getSaveFormat() {
         String done;
-        if (this.done) {
+        if (this.isDone) {
             done = "1";
         } else {
             done = "0";

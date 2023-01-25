@@ -9,7 +9,7 @@ import duke.ui.Ui;
  */
 public class MarkCommand extends Command {
 
-    private final int toMark;
+    private int toMark;
 
     public MarkCommand(int toMark) {
         this.toMark = toMark;

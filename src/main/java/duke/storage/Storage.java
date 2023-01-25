@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.tasklist.TaskList;
+
 import duke.tasktypes.Deadline;
 import duke.tasktypes.Event;
 import duke.tasktypes.Task;
@@ -9,9 +10,12 @@ import duke.tasktypes.ToDo;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+
+import java.util.List;
+
 
 import duke.ui.Ui;
 
@@ -37,15 +41,15 @@ public class Storage {
     public Storage(Ui ui) {
         this.ui = ui;
         File directory = new File(DEFAULT_DIRECTORY);
-        boolean directoryCreated = directory.mkdir();
-        if (directoryCreated) {
+        boolean isDirectoryCreated = directory.mkdir();
+        if (isDirectoryCreated) {
             ui.directoryCreate();
         }
 
         dukeFile = new File(DEFAULT_FILEPATH);
         try {
-            boolean fileCreated = dukeFile.createNewFile();
-            if (fileCreated) {
+            boolean isFileCreated = dukeFile.createNewFile();
+            if (isFileCreated) {
                 ui.fileCreate();
             }
 
@@ -64,38 +68,35 @@ public class Storage {
     public TaskList load() {
         try {
             List<String> allLines = Files.readAllLines(Paths.get(DEFAULT_FILEPATH));
-            boolean emptyFile = true;
+            boolean isEmptyFile = true;
 
             for (String line : allLines) {
-                emptyFile = false;
+                isEmptyFile = false;
                 String[] taskSplit = line.split(",,");
                 String type = taskSplit[0];
                 Task task = null;
                 switch (type) {
-                    case "T": {
-                        task = new ToDo(taskSplit[2]);
-                        break;
-                    }
-                    case "D": {
-                        task = new Deadline(taskSplit[2], taskSplit[3]);
-                        break;
-                    }
-                    case "E": {
-                        task = new Event(taskSplit[2], taskSplit[3], taskSplit[4]);
-                        break;
-                    }
+                case "T":
+                    task = new ToDo(taskSplit[2]);
+                    break;
+                case "D":
+                    task = new Deadline(taskSplit[2], taskSplit[3]);
+                    break;
+                case "E":
+                    task = new Event(taskSplit[2], taskSplit[3], taskSplit[4]);
+                    break;
                 }
 
                 String done = taskSplit[1];
                 if (done.equals("1")) {
                     assert task != null;
-                    task.markDone();
+                    task.setDone();
                 }
 
                 tasks.loadTask(task);
             }
 
-            if (!emptyFile) {
+            if (!isEmptyFile) {
                 ui.printTasks(tasks);
             }
 
@@ -130,13 +131,11 @@ public class Storage {
                 }
             }
             writer.close();
-
             ui.saved();
 
         } catch (IOException e) {
             ui.showError(e);
         }
-
     }
 
 }

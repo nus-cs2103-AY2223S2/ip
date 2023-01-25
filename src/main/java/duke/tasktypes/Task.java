@@ -8,7 +8,7 @@ public abstract class Task {
     /** Description of a task */
     protected String description;
     /** Indicated whether a task is completed */
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Constructor to initialize a Task.
@@ -18,21 +18,21 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
      * Mark a task as completed.
      */
-    public void markDone() {
-        this.done = true;
+    public void setDone() {
+        this.isDone = true;
     }
 
     /**
      * Mark a task as incomplete.
      */
-    public void markUndone() {
-        this.done = false;
+    public void setUndone() {
+        this.isDone = false;
     }
 
     /**
@@ -44,7 +44,7 @@ public abstract class Task {
     @Override
     public String toString() {
         String status;
-        if (this.done) {
+        if (this.isDone) {
             status = "[X]";
         } else {
             status = "[ ]";

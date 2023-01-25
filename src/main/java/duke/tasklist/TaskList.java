@@ -69,7 +69,7 @@ public class TaskList {
      */
     public void markTask(int mark) {
         Task marked = taskStorage.get(mark - 1);
-        marked.markDone();
+        marked.setDone();
         ui.markTaskDone(marked);
     }
 
@@ -81,7 +81,7 @@ public class TaskList {
      */
     public void unmarkTask(int unmark) {
         Task unmarked = taskStorage.get(unmark - 1);
-        unmarked.markUndone();
+        unmarked.setUndone();
         ui.markTaskUndone(unmarked);
     }
 

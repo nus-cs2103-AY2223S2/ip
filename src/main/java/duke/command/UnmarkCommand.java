@@ -9,7 +9,7 @@ import duke.ui.Ui;
  */
 public class UnmarkCommand extends Command {
 
-    private final int toUnmark;
+    private int toUnmark;
 
     public UnmarkCommand(int toUnmark) {
         this.toUnmark = toUnmark;
