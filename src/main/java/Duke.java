@@ -5,10 +5,8 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
-        TaskList tasksL = new TaskList();
-
-        //Save everytime the file list changes
-        //Load first time
+        Storage s = new Storage("test.txt");
+        TaskList tasksL = s.load();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -40,8 +38,9 @@ public class Duke {
                         } catch (Exception e) {
                             throw new DukeException("Description of todo cannot be empty!!");
                         }
-                        tasksL.addTask(todoDesc);
+                        tasksL.addTask(todoDesc, false);
                         tasksL.printNewestTask();
+                        s.save(tasksL);
                         break;
                     case "deadline":
                         String deadlineInput;
@@ -51,8 +50,9 @@ public class Duke {
                             throw new DukeException("Description of deadline cannot be empty!!");
                         }
                         String[] deadlineDesc = deadlineInput.split(" /by ");
-                        tasksL.addTask(deadlineDesc[0], deadlineDesc[1]);
+                        tasksL.addTask(deadlineDesc[0], deadlineDesc[1], false);
                         tasksL.printNewestTask();
+                        s.save(tasksL);
                         break;
                     case "event":
                         String eventInput;
@@ -66,8 +66,9 @@ public class Duke {
                         String[] eventTimeArr = eventDescArr[1].split(" /to ");
                         String eventFrom = eventTimeArr[0];
                         String eventTo = eventTimeArr[1];
-                        tasksL.addTask(eventDesc, eventFrom, eventTo);
+                        tasksL.addTask(eventDesc, eventFrom, eventTo, false);
                         tasksL.printNewestTask();
+                        s.save(tasksL);
                         break;
                     case "mark":
                         selectedNum = Integer.parseInt(inputArr[1]);
@@ -87,10 +88,11 @@ public class Duke {
                         tasksL.deleteTask(numToDelete);
                         break;
                     case "Storage":
-                        System.out.println("I RAN HERE!");
-                        Storage s = new Storage("test.txt");
-                        System.out.println("I RAN HERE2!");
-                        s.dirTest();
+                        //System.out.println("I RAN HERE!");
+                        tasksL = s.load();
+                        break;
+                    case "Save":
+                        s.save(tasksL);
                         break;
                     default:
                         throw new DukeException("I don't get it!");
