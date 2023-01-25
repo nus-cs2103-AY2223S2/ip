@@ -42,7 +42,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException err) {
-            err.printStackTrace();
+            File myObj = new File(String.valueOf(this.path));
         }
         return data;
     }
