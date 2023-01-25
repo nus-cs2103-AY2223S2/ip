@@ -1,5 +1,5 @@
 public class EmptyInputException extends DukeException {
-    public EmptyInputException() {
-        super("☹ OOPS!!! The description of a todo cannot be empty.");
+    public EmptyInputException(String s) {
+        super("☹ OOPS!!! The description of " + s + " cannot be empty.");
     }
 }

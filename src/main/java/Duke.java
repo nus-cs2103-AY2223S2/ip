@@ -24,35 +24,41 @@ public class Duke {
         this.greet();
         loadData();
         this.printLine();
-        String i = sc.nextLine();
+        String i = sc.nextLine().toLowerCase();
 
-        while (!i.equalsIgnoreCase("bye")) {
+        while (!i.equals("bye")) {
             try {
-                if (i.equalsIgnoreCase("list")) {
+                if (i.equals("list")) {
                     this.printList();
-                } else if (i.toLowerCase().startsWith("mark")) {
+                } else if (i.startsWith("mark")) {
                     int num = Integer.parseInt(i.split(" ")[1]);
                     Task t = this.tasks.get(num - 1);
                     t.markDone();
                     getMarkDoneMessage(t);
-                } else if (i.toLowerCase().startsWith("unmark")) {
+                } else if (i.startsWith("unmark")) {
                     int num = Integer.parseInt(i.split(" ")[1]);
                     Task t = this.tasks.get(num - 1);
                     t.unmarkDone();
                     getUnmarkDoneMessage(t);
-                } else if(i.toLowerCase().startsWith("delete")) {
+                } else if(i.startsWith("delete")) {
                     int num = Integer.parseInt(i.split(" ")[1]);
                     Task t = this.tasks.get(num - 1);
                     this.deleteTask(num);
                     this.deleteTaskMessage(t);
-                } else if (i.toLowerCase().startsWith("todo")) {
+                } else if (i.startsWith("todo")) {
                     if (i.split(" ").length == 1) {
-                        throw new EmptyInputException();
+                        throw new EmptyInputException("todo");
                     }
                     this.addToDo(i);
-                } else if (i.toLowerCase().startsWith("deadline")) {
+                } else if (i.startsWith("deadline")) {
+                    if (i.split(" ").length == 1) {
+                        throw new EmptyInputException("deadline");
+                    }
                     this.addDeadline(i);
-                } else if (i.toLowerCase().startsWith("event")) {
+                } else if (i.startsWith("event")) {
+                    if (i.split(" ").length == 1) {
+                        throw new EmptyInputException("event");
+                    }
                     this.addEvent(i);
                 } else {
                     throw new InvalidInputException();
