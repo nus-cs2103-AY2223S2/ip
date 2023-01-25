@@ -5,6 +5,15 @@ import java.util.Scanner;
 
 public class Parser {
 
+    /**
+     * Parses the given user input (commandString) and executes the correct action based on that. Returns
+     * a boolean to indicate if the application should close due to the user's input.
+     *
+     * @param commandString string that contains the user's input command
+     * @param taskList a list that contains all tasks
+     * @param ui an Ui object that possesses user interaction functionality
+     * @return true if the application should exit. Otherwise, returns false.
+     */
     public boolean parseAndExecute(String commandString, TaskList taskList, Ui ui) {
         Scanner stringStream = new Scanner(commandString);
         String command = stringStream.next();

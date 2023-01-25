@@ -14,12 +14,25 @@ public class Storage {
         this.storagePath = storagePath;
     }
 
+    /**
+     * Writes a String to the file indicated by storagePath
+     *
+     * @param data String to be written to the file indicated by storagePath
+     * @throws IOException
+     */
     public void save(String data) throws IOException {
         FileWriter fw = new FileWriter(storagePath);
         fw.write(data);
         fw.close();
     }
 
+    /**
+     * Adds all tasks in the file located at storagePath into taskList.
+     *
+     * @param taskList the list where tasks loaded from the file at storagePath are added to
+     * @param ui an Ui object that contains user message displaying functionality
+     * @throws FileNotFoundException if the file at storagePath does not exist
+     */
     public void read(TaskList taskList, Ui ui) throws FileNotFoundException {
         File f = new File(storagePath);
         Scanner s = new Scanner(f);
