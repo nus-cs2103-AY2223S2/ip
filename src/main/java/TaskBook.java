@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class TaskBook {
-    private static String HOR_BAR = "✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦";
+    private static String HOR_BAR = "✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦";
 
     private static ArrayList<Task> listOfTasks;
 
@@ -24,7 +24,7 @@ public class TaskBook {
         return listOfTasks;
     }
 
-    public void addTask(TaskType taskType, String input) {
+    public void addTask(TaskType taskType, String input) throws IncorrectDateException {
         String desc = input.split(" ")[1];
         Task t;
 
@@ -32,12 +32,12 @@ public class TaskBook {
             t = new Todo(desc);
 
         } else if (taskType == TaskType.DEADLINE) {
-            String by = input.split("/by")[1];
+            String by = input.split("/by ")[1];
             t = new Deadline(desc, by);
 
         } else { // EVENT
-            String from = input.split("/from")[1].split("/to")[0];
-            String to = input.split("/to")[1];
+            String from = input.split("/from ")[1].split("/to")[0];
+            String to = input.split("/to ")[1];
 
             t = new Event(desc, from, to);
         }
