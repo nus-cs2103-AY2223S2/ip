@@ -16,7 +16,6 @@ public class Duke {
     }
 
     private static void chat() {
-        int count = 0;
         List<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
@@ -29,7 +28,7 @@ public class Duke {
                 reply.bye();
                 return;
             case "list":
-                reply.list(tasks,count);
+                reply.list(tasks);
                 break;
             case "mark":
                 reply.mark(tasks);
@@ -38,20 +37,16 @@ public class Duke {
                 reply.mark(tasks);
                 break;
             case "todo":
-                reply.todo(tasks,count);
-                count++;
+                reply.todo(tasks);
                 break;
             case "event":
-                reply.event(tasks, count);
-                count++;
+                reply.event(tasks);
                 break;
             case "deadline":
-                reply.deadline(tasks, count);
-                count++;
+                reply.deadline(tasks);
                 break;
             case "delete":
-                reply.delete(tasks, count);
-                count--;
+                reply.delete(tasks);
                 break;
             default:
                 reply.def();
