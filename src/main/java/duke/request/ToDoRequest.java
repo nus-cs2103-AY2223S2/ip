@@ -18,7 +18,7 @@ public class ToDoRequest extends Request {
         return Arrays.copyOfRange(values, 1, values.length);
     }
 
-    public String checkRequestRequirement() throws RequestException {
+    public void checkRequestRequirement() throws RequestException {
         String message = "";
 
         if (super.value.split(" ").length <= 1) {
@@ -28,7 +28,5 @@ public class ToDoRequest extends Request {
         if (!message.isEmpty()) {
             throw new RequestException(message);
         }
-
-        return message;
     }
 }

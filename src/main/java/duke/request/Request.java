@@ -11,7 +11,7 @@ public abstract class Request {
     Commands command;
 
     abstract public String[] unwrap() throws RequestException;
-    abstract String checkRequestRequirement() throws RequestException;
+    abstract void checkRequestRequirement() throws RequestException;
 
     public Request(Commands command, String request) {
         this.value = request;
