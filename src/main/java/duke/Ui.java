@@ -163,7 +163,7 @@ public class Ui {
     }
 
     /**
-     * Prints duplicates if found
+     * Prints a duplicate if found
      *
      * @param task
      * @return
