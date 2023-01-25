@@ -18,14 +18,28 @@ import java.time.format.DateTimeParseException;
  */
 public class DeadlineCommand extends Command {
     private final String slug;
+
+    /**
+     * Formats the given slug as a Deadline task. Slugs should be provided in
+     * this format: "{task} /by d/M/yy HHmm"
+     * @param slug The provided slug.
+     */
     public DeadlineCommand(String slug) {
         this.slug = slug;
     }
 
+    /**
+     * Formats an empty command.
+     */
     public DeadlineCommand() {
         this.slug = "";
     }
 
+    /**
+     * Executes this command.
+     * @param ts The TaskList instance.
+     * @param ui The UI output.
+     */
     @Override
     public void execute(TaskList ts, Ui ui) {
         if (slug.length() == 0) {

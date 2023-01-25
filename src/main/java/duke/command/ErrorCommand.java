@@ -13,14 +13,27 @@ import duke.Ui;
 public class ErrorCommand extends Command {
     private final String msg;
 
+    /**
+     * Formats this command with the given error message.
+     * @param msg
+     */
     public ErrorCommand(String msg) {
         this.msg = msg;
     }
 
+    /**
+     * Formats this command with the given error.
+     * @param de
+     */
     public ErrorCommand(DukeException de) {
         this.msg = de.getMessage();
     }
 
+    /**
+     * Executes this command.
+     * @param ts The TaskList instance.
+     * @param ui The UI output.
+     */
     @Override
     public void execute(TaskList ts, Ui ui) {
         ui.error(new DukeException(msg));

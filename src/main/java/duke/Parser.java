@@ -12,6 +12,12 @@ import duke.command.*;
  * AY2223-S2 CS2103T
  */
 public class Parser {
+    /**
+     * The main access function for creating commands given user input.
+     *
+     * @param line The user input.
+     * @return The parsed command.
+     */
     public static Command parse(String line) {
         String[] tokens = line.split(" ", 2);
         if (tokens.length == 1) {

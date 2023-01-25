@@ -19,6 +19,11 @@ public class EventTask extends DukeTask{
         this.to = to;
     }
 
+    /**
+     * Human friendly interpretation of this task.
+     *
+     * @return The task interpretation.
+     */
     @Override
     public String toString() {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d yyyy h:mma");
@@ -27,6 +32,12 @@ public class EventTask extends DukeTask{
                 this.from.format(df), this.to.format(df));
     }
 
+    /**
+     * Indicate if this task falls on the given date.
+     *
+     * @param dtParsed The given date.
+     * @return The indicative boolean.
+     */
     @Override
     public boolean isOnDate(LocalDate dtParsed) {
         return dtParsed.isAfter(this.from.toLocalDate()) && dtParsed.isBefore(this.to.toLocalDate()) ||
@@ -34,6 +45,11 @@ public class EventTask extends DukeTask{
                 dtParsed.equals(this.to.toLocalDate());
     }
 
+    /**
+     * Formats this task into a format for storage in the Storage class.
+     *
+     * @return The formatted task.
+     */
     @Override
     public String toDBSchema() {
         return String.format(

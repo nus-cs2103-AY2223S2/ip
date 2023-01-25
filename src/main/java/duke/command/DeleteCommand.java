@@ -12,10 +12,20 @@ import duke.Ui;
  */
 public class DeleteCommand extends Command {
     private final int idx;
+
+    /**
+     * Formats the command with the given storage index.
+     * @param idx The provided storage task index.
+     */
     public DeleteCommand(int idx) {
         this.idx = idx;
     }
 
+    /**
+     * Executes this command.
+     * @param ts The TaskList instance.
+     * @param ui The UI output.
+     */
     @Override
     public void execute(TaskList ts, Ui ui) {
         try {

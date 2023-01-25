@@ -27,6 +27,13 @@ public class TaskList {
     //The unique ID of this store
     private int id;
 
+    /**
+     * Restricted constructor to provide the interface between the Storage and
+     * the rest of the app.
+     *
+     * @param s The storage instance.
+     * @param ui The UI of the app.
+     */
     private TaskList(Storage s, Ui ui) {
         this.id = TaskList.ID + 1;
         TaskList.ID += 1;
@@ -123,6 +130,13 @@ public class TaskList {
         ui.section(message);
     }
 
+    /**
+     * Given a date, returns a section that displays all tasks that occur
+     * on that date.
+     *
+     * @param dt The date provided.
+     * @return The list of tasks that occur on that date, if any.
+     */
     public String occurOnDate(LocalDate dt) {
         List<DukeTask> filtered = this.dfw.toList()
                 .stream()
@@ -157,6 +171,10 @@ public class TaskList {
         return out.toString();
     }
 
+    /**
+     * Human friendly interpretation of the tasks in the storage.
+     * @return The string interpretation.
+     */
     @Override
     public String toString() {
         return this.dfw.toString();

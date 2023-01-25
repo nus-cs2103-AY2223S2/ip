@@ -12,10 +12,20 @@ import duke.Ui;
  */
 public class MarkCommand extends Command {
     private final int idx;
+
+    /**
+     * Formats this command with the task index.
+     * @param idx The index of the task in storage.
+     */
     public MarkCommand(int idx) {
         this.idx = idx;
     }
 
+    /**
+     * Executes this task.
+     * @param ts The TaskList instance.
+     * @param ui The UI output.
+     */
     @Override
     public void execute(TaskList ts, Ui ui) {
         try {

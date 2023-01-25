@@ -14,14 +14,27 @@ import duke.Ui;
  */
 public class TodoCommand extends Command {
     private final String task;
+
+    /**
+     * Given a task description, creates a Todo Task when executed.
+     * @param task
+     */
     public TodoCommand(String task) {
         this.task = task;
     }
 
+    /**
+     * Formats this as a task with an empty description.
+     */
     public TodoCommand() {
         this.task = "";
     }
 
+    /**
+     * Executes this task.
+     * @param ts The TaskList instance.
+     * @param ui The UI output.
+     */
     @Override
     public void execute(TaskList ts, Ui ui) {
         if (this.task.length() == 0) {

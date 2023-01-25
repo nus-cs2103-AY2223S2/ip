@@ -49,10 +49,17 @@ public class Ui {
 
     private Scanner sc;
 
+    /**
+     * Default constructor to setup the UI.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Parses the user input for the next command.
+     * @return The next command from the user.
+     */
     public String getCommand() {
         try {
             return sc.nextLine();
@@ -61,6 +68,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Provides the standard UI denoting the start or end of an interaction
+     * with the user.
+     */
     private void line() {
         System.out.println(INDENT + LINE);
     }
@@ -79,6 +90,9 @@ public class Ui {
         );
     }
 
+    /**
+     * Prints the exit message to the UI.
+     */
     public void exitMessage() {
         String message = "It was okay serving you. Might/might not see you again." + "\n"
                 + "Exiting...";
@@ -120,6 +134,8 @@ public class Ui {
 
     /**
      * Produces a user guide for incorrect command usages.
+     *
+     * @param message The guide message.
      */
     public void guide(String message) {
         line();

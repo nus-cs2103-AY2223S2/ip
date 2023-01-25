@@ -18,6 +18,11 @@ public class TodoTask extends DukeTask{
         return "[T]" + super.toString();
     }
 
+    /**
+     * Formats this task into a format for storage in the Storage class.
+     *
+     * @return The formatted task.
+     */
     @Override
     public String toDBSchema() {
         return String.format(
@@ -27,6 +32,11 @@ public class TodoTask extends DukeTask{
         );
     }
 
+    /**
+     * Indicate if this task falls on the given date.
+
+     * @return False. It has no relation to any date.
+     */
     @Override
     public boolean isOnDate(LocalDate dt) {
         return false;
