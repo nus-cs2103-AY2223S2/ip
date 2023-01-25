@@ -1,12 +1,22 @@
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class Deadline extends Task{
-    protected String by;
-    public Deadline(String description, String by){
+    private LocalDate deadlineDate;
+    private Date deadlineTime;
+    public Deadline(String description, LocalDate deadlineDate, Date deadlineTime){
         super(description);
-        this.by = by;
+        this.deadlineDate = deadlineDate;
+        this.deadlineTime = deadlineTime;
     }
 
     @Override
     public String toString() {
-        return "[D]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (by: " + by + ")";
+        String formattedDate = deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formattedTime = new SimpleDateFormat("h:mm a").format(deadlineTime);
+        String deadlineCombined = formattedDate + " " + formattedTime;
+        return "[D]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (by: " + deadlineCombined + ")";
     }
 }
