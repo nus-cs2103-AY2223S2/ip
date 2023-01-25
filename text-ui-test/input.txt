@@ -50,4 +50,8 @@ delete 5
 delete 2
 delete bla
 list
+find
+find adhkash
+find o
+find eat some
 bye
