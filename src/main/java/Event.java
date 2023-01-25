@@ -1,15 +1,17 @@
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 public class Event extends Task {
-    protected String date;
-    protected String time;
+    protected String dateStart;
+    protected String dateEnd;
 
-    public Event(String description, String date, String time) {
+    public Event(String description, String dateStart, String dateEnd) {
         super(description);
-        this.date = date;
-        this.time = time;
+        this.dateStart = LocalDateTime.parse(dateStart, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        this.dateEnd = LocalDateTime.parse(dateEnd, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.date + " to: " + this.time + ")";
+        return "[E]" + super.toString() + " (from: " + this.dateStart + " to: " + this.dateEnd + ")";
     }
 }
