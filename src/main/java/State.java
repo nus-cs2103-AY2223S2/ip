@@ -101,40 +101,38 @@ public enum State {
     },
     MARK ("mark") {
         @Override
-        public void execute(String input) throws SundayException{
-            if (input == null || input == " ") {
-                throw new SundayException("☹ OOPS!!! You did not specify which task you wanted me to mark.");
-            }
-            int index = Integer.parseInt(String.valueOf(input.substring(1))) - 1;
+        public void execute(String input) throws SundayException {
             try {
+                int index = Integer.parseInt(String.valueOf(input.substring(1))) - 1;
                 list.mark(index);
+                printer.printBar();
+                printer.printText("Well Done! I've marked this task as done:");
+                printer.printText("  " + list.taskToString(index));
+                printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
+                printer.printBar();
+            } catch (NumberFormatException e) {
+                throw new SundayException("☹ OOPS!!! You did not specify which task you wanted me to mark");
             } catch (IndexOutOfBoundsException e) {
                 throw new SundayException("☹ OOPS!!! Seems like that task does not exist.");
             }
-            printer.printBar();
-            printer.printText("Well Done! I've marked this task as done:");
-            printer.printText("  " + list.taskToString(index));
-            printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
-            printer.printBar();
         }
     },
     UNMARK ("unmark") {
         @Override
         public void execute(String input) throws SundayException {
-            if (input == null || input == " ") {
-                throw new SundayException("☹ OOPS!!! You did not specify which task you want me to unmark.");
-            }
-            int index = Integer.parseInt(String.valueOf(input.substring(1))) - 1;
             try {
+                int index = Integer.parseInt(String.valueOf(input.substring(1))) - 1;
                 list.unmark(index);
+                printer.printBar();
+                printer.printText("OK, I've marked this task as not done yet:");
+                printer.printText("  " + list.taskToString(index));
+                printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
+                printer.printBar();
+            }  catch (NumberFormatException e) {
+                throw new SundayException("☹ OOPS!!! You did not specify which task you wanted me to unmark");
             } catch (IndexOutOfBoundsException e) {
                 throw new SundayException("☹ OOPS!!! Seems like that task does not exist.");
             }
-            printer.printBar();
-            printer.printText("OK, I've marked this task as not done yet:");
-            printer.printText("  " + list.taskToString(index));
-            printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
-            printer.printBar();
         }
     },
     BYE ("bye") {
