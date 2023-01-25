@@ -13,7 +13,7 @@ public class Storage {
         this.path = p;
     }
 
-    public void saveTasks() throws IOException {
+    public void saveTasks(TaskList taskList) throws IOException {
         File dir = new File(directory);
         if (!dir.exists()) {
             dir.mkdirs();
@@ -23,7 +23,7 @@ public class Storage {
 
         FileWriter myWriter = new FileWriter(path);
         boolean isFirst = true;
-        for (Task t : Task.tasks) {
+        for (Task t : taskList.getTasks()) {
             if (!isFirst) {
                 myWriter.write("\n");
             }
@@ -33,7 +33,7 @@ public class Storage {
         myWriter.close();
     }
 
-    public void loadTasks() throws IOException, DukeException {
+    public void loadTasks(TaskList taskList) throws IOException, DukeException {
         Scanner fileReader = new Scanner(new File(path));
         while (fileReader.hasNextLine()) {
             String data = fileReader.nextLine();
@@ -41,20 +41,20 @@ public class Storage {
 
             switch (taskData[0]) {
                 case "T":
-                    Task.tasks.add(new Todo(taskData[1]));
+                    taskList.getTasks().add(new Todo(taskData[1]));
                     break;
                 case "D":
-                    Task.tasks.add(new Deadline(taskData[1], taskData[3]));
+                    taskList.getTasks().add(new Deadline(taskData[1], taskData[3]));
                     break;
                 case "E":
-                    Task.tasks.add(new Event(taskData[1], taskData[3], taskData[4]));
+                    taskList.getTasks().add(new Event(taskData[1], taskData[3], taskData[4]));
                     break;
                 default:
                     throw new DukeException("Error loading tasks from file!");
             }
 
             if (taskData[2].equals("T")) {
-                Task.tasks.get(Task.tasks.size() - 1).mark();
+                taskList.getTasks().get(taskList.getTasks().size() - 1).mark();
             }
         }
 

@@ -15,11 +15,12 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Storage storage = new Storage(FILE_DIRECTORY, FILE_PATH);
-
+        TaskList taskList = new TaskList();
+        
         printWelcomeMessage();
 
         try {
-            storage.loadTasks();
+            storage.loadTasks(taskList);
         } catch (FileNotFoundException e) {
             System.out.println("No save data found!");
         } catch (IOException | DukeException e) {
@@ -30,60 +31,50 @@ public class Duke {
             try {
                 String[] command = sc.nextLine().split(" ", 2);
                 if (command[0].equals("bye")) {
-                    storage.saveTasks();
+                    storage.saveTasks(taskList);
                     System.out.println(formatMessage("Bye. Hope to see you again soon!"));
                     break;
                 } else if (command[0].equals("list")) {
-                    System.out.println(formatMessage(listTasks()));
+                    System.out.println(formatMessage(taskList.listTasks()));
                 } else if (command[0].equals("mark")) {
                     if (command.length < 2) {
                         throw new DukeException("Task number required");
                     }
                     int taskNum = Integer.parseInt(command[1]) - 1;
-                    if (taskNum < 0 || taskNum >= Task.tasks.size()) {
-                        throw new DukeException("Task number invalid");
-                    }
-                    Task.tasks.get(taskNum).mark();
+                    taskList.markTask(taskNum);
                     System.out.println(formatMessage("Nice! I've marked this task as done:\n" +
-                            indent + Task.tasks.get(taskNum).toString()));
+                            indent + taskList.getTasks().get(taskNum).toString()));
                 } else if (command[0].equals("unmark")) {
                     if (command.length < 2) {
                         throw new DukeException("Task number required");
                     }
                     int taskNum = Integer.parseInt(command[1]) - 1;
-                    if (taskNum < 0 || taskNum >= Task.tasks.size()) {
-                        throw new DukeException("Task number invalid");
-                    }
-                    Task.tasks.get(taskNum).unmark();
+                    taskList.unmarkTask(taskNum);
                     System.out.println(formatMessage("OK, I've marked this task as not done yet:\n" +
-                            indent + Task.tasks.get(taskNum).toString()));
+                            indent + taskList.getTasks().get(taskNum).toString()));
                 } else if (command[0].equals("delete")) {
                     if (command.length < 2) {
                         throw new DukeException("Task number required");
                     }
                     int taskNum = Integer.parseInt(command[1]) - 1;
-                    if (taskNum < 0 || taskNum >= Task.tasks.size()) {
-                        throw new DukeException("Task number invalid");
-                    }
-                    String removedTask = Task.tasks.get(taskNum).toString();
-                    Task.tasks.remove(taskNum);
+                    String removedTask = taskList.deleteTask(taskNum);
                     System.out.println(formatMessage("Noted. I've removed this task:\n" +
                             indent + indent + removedTask + "\n" +
-                            indent + "Now you have " + Task.tasks.size() + " task(s) in the list."));
+                            indent + "Now you have " + taskList.getTasks().size() + " task(s) in the list."));
                 } else {
                     if (command.length < 2) {
                         throw new DukeException("Invalid input");
                     }
                     switch (command[0]) {
                         case "todo":
-                            Task.tasks.add(new Todo(command[1]));
+                            taskList.getTasks().add(new Todo(command[1]));
                             break;
                         case "deadline": {
                             String[] arguments = command[1].split(" /by ");
                             if (arguments.length < 2) {
                                 throw new DukeException("Deadline needs a \"by date\"");
                             }
-                            Task.tasks.add(new Deadline(arguments[0], arguments[1]));
+                            taskList.getTasks().add(new Deadline(arguments[0], arguments[1]));
                             break;
                         }
                         case "event": {
@@ -95,7 +86,7 @@ public class Duke {
                             if (timings.length < 2) {
                                 throw new DukeException("invalid format");
                             }
-                            Task.tasks.add(new Event(arguments[0], timings[0], timings[1]));
+                            taskList.getTasks().add(new Event(arguments[0], timings[0], timings[1]));
                             break;
                         }
                         default:
@@ -103,8 +94,8 @@ public class Duke {
                     }
 
                     System.out.println(formatMessage("Got it. I've added this task:\n" +
-                            indent + indent + Task.tasks.get(Task.tasks.size() - 1).toString() + "\n" +
-                            indent + "Now you have " + Task.tasks.size() + " task(s) in the list."));
+                            indent + indent + taskList.getTasks().get(taskList.getTasks().size() - 1).toString() + "\n" +
+                            indent + "Now you have " + taskList.getTasks().size() + " task(s) in the list."));
                 }
             } catch (DukeException e) {
                 System.out.println(formatMessage(e.getMessage()));
@@ -133,14 +124,4 @@ public class Duke {
         return divider + "\n" + indent + message + "\n" + divider;
     }
 
-    public static String listTasks() {
-        String output = "Here are the tasks in your list:\n";
-        for (int i = 0; i < Task.tasks.size(); i++) {
-            output += indent + (i + 1) + ". " + Task.tasks.get(i).toString();
-            if (i < Task.tasks.size() - 1) {
-                output += "\n";
-            }
-        }
-        return output;
-    }
 }
