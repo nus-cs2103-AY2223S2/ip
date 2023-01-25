@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.ui.Ui;
+
 /**
  * Represents an invalid command that is entered by the user.
  */
