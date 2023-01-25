@@ -68,7 +68,11 @@ public class Parser {
                 } catch (NumberFormatException e) {
                     throw new DukeException("OOPS! delete must have an integer rank");
                 }
-
+            case "find":
+                if (s.isEmpty()) {
+                    throw new DukeException("Specify a keyword");
+                }
+                return new Command(8, s);
             default:
                 throw new DukeException("Invalid input.");
             }

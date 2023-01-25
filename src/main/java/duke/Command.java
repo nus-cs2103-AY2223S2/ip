@@ -14,11 +14,13 @@ public class Command {
     5 - deadline
     6 - event
     7 - delete
+    8 - find
      */
 
     private final int code;
     private int index;
     private String[] content;
+    private String keyword;
 
     protected Command(int code) {
         this.code = code;
@@ -32,6 +34,17 @@ public class Command {
     protected Command(int code, String[] content) {
         this.code = code;
         this.content = content;
+    }
+
+    /**
+     *
+     *
+     * @param code
+     * @param keyword
+     */
+    protected Command(int code, String keyword) {
+        this.code = code;
+        this.keyword = keyword;
     }
 
     protected void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException, IOException {
@@ -67,6 +80,9 @@ public class Command {
             Task t = taskList.delete(index);
             ui.deleteMessage(t, taskList);
             storage.write();
+        } else if (code == 8) {
+            taskList.find(keyword);
+            ui.showLine();
         }
     }
 

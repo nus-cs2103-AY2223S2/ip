@@ -22,6 +22,25 @@ public class TaskList {
         }
     }
 
+    /**
+     * Lists out all tasks with matching keyword.
+     *
+     * @param keyword Keyword to match.
+     */
+    protected void find(String keyword) {
+        int rank = 1;
+        System.out.println("Looking for matching tasks in your list...");
+        for (Task t : tasks) {
+            if (t.toString().contains(keyword)) {
+                System.out.println(rank + "." + t.fullMessage());
+                rank++;
+            }
+        }
+        if (rank == 1) {
+            System.out.println("Cannot find any matching task!");
+        }
+    }
+
     // Mark task at index to be done
     protected Task markDone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
@@ -85,4 +104,6 @@ public class TaskList {
             throw new DukeException("Unsupported code");
         }
     }
+
+
 }
