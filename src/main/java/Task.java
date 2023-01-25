@@ -1,11 +1,11 @@
 public class Task {
     // Attributes:
-    protected boolean completed = false;
+    protected boolean isCompleted = false;
     protected String title;
 
     // Constructor:
     public Task(String title) {
-        this.completed = false;
+        this.isCompleted = false;
         this.title = title;
     }
 
@@ -15,14 +15,14 @@ public class Task {
 
     // Methods:
     public String toString() {
-        if (this.completed) {
+        if (this.isCompleted) {
             return "[X] " + title;
         }
         return "[ ] " + title;
     }
 
     public void setCompleted(boolean setting) {
-        this.completed = setting;
+        this.isCompleted = setting;
         if (setting) {
             System.out.println("Nice! I've marked this task as completed:");
             System.out.println(" " + this.toString() + "\n");

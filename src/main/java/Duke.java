@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class Duke {
 
     // Attributes
-    private static ArrayList<Task> task_list = new ArrayList<>();
-    private static int list_index = 0;
+    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static int listIndex = 0;
 
     // Methods
     public static void greet() {
@@ -18,44 +18,44 @@ public class Duke {
         System.out.println("How may I help you today?\n");
     }
 
-    public static void echo(String user_input) {
+    public static void echo(String userInput) {
         System.out.println("> Duke's response:");
-        System.out.println(user_input);
+        System.out.println(userInput);
         System.out.println("--------------------------------\n");
     }
 
-    public static void add_to_list(Task list_item) {
-        task_list.add(list_item);
-        list_index++;
+    public static void addToList(Task listItem) {
+        taskList.add(listItem);
+        listIndex++;
         System.out.println("> Duke's response:");
         System.out.println("I've added the following task to your list:");
-        System.out.println(list_item.toString());
-        System.out.println("Current tasks count: " + (list_index));
+        System.out.println(listItem.toString());
+        System.out.println("Current tasks count: " + (listIndex));
         System.out.println("--------------------------------\n");
     }
 
-    public static void remove_from_list(int pos) {
-        Task curr = task_list.remove(pos - 1);
-        list_index--;
+    public static void removeFromList(int pos) {
+        Task curr = taskList.remove(pos - 1);
+        listIndex--;
         System.out.println("> Duke's response:");
         System.out.println("I've removed the following task from your list:");
         System.out.println(curr.toString());
-        System.out.println("Current tasks count: " + (list_index));
+        System.out.println("Current tasks count: " + (listIndex));
         System.out.println("--------------------------------\n");
     }
 
-    public static void display_list() {
+    public static void displayList() {
         int pos = 0;
         System.out.println("Here are the tasks in your list:");
-        while (pos < list_index) {
-            System.out.println((pos + 1) + ". " + task_list.get(pos).toString());
+        while (pos < listIndex) {
+            System.out.println((pos + 1) + ". " + taskList.get(pos).toString());
             pos++;
         }
         System.out.println("End of list!\n");
     }
 
-    public static void exception_thrower(String exception_type) throws DukeException {
-        throw new DukeException(exception_type);
+    public static void throwException(String exceptionType) throws DukeException {
+        throw new DukeException(exceptionType);
     }
 
     public static void exit() {
@@ -67,29 +67,29 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         greet();
-        String user_input =  sc.nextLine();
-        String exit_command = "bye";
-        while (!user_input.equals(exit_command)) {
-            if (!user_input.equals("list")) {
+        String userInput =  sc.nextLine();
+        String exitCommand = "bye";
+        while (!userInput.equals(exitCommand)) {
+            if (!userInput.equals("list")) {
                 // If input = "mark x" set task x completed? to True
-                if (user_input.startsWith("mark ")){
-                    int task_num = Integer.parseInt(user_input.substring(5));
-                    task_list.get(task_num - 1).setCompleted(true);
+                if (userInput.startsWith("mark ")){
+                    int taskNum = Integer.parseInt(userInput.substring(5));
+                    taskList.get(taskNum - 1).setCompleted(true);
                 }
 
                 // If input = "unmark x" set task x completed? to False
-                else if (user_input.startsWith("unmark ")){
-                    int task_num = Integer.parseInt(user_input.substring(7));
-                    task_list.get(task_num - 1).setCompleted(false);
+                else if (userInput.startsWith("unmark ")){
+                    int taskNum = Integer.parseInt(userInput.substring(7));
+                    taskList.get(taskNum - 1).setCompleted(false);
                 }
 
                 // If input is a deadline, create deadline and add to task list
-                else if (user_input.startsWith("deadline ")) {
-                    if (user_input.contains("/by ")) {
-                        add_to_list(new Deadline(user_input));
+                else if (userInput.startsWith("deadline ")) {
+                    if (userInput.contains("/by ")) {
+                        addToList(new Deadline(userInput));
                     } else {
                         try {
-                            exception_thrower("deadline");
+                            throwException("deadline");
                         } catch (DukeException de) {
                             System.out.println(de.toString());
                         }
@@ -97,12 +97,12 @@ public class Duke {
                 }
 
                 // If input is an event, create event and add to task list
-                else if (user_input.startsWith("event ")) {
-                    if (user_input.contains("/from ") && user_input.contains("/to ")) {
-                        add_to_list(new Event(user_input));
+                else if (userInput.startsWith("event ")) {
+                    if (userInput.contains("/from ") && userInput.contains("/to ")) {
+                        addToList(new Event(userInput));
                     } else {
                         try {
-                            exception_thrower("event");
+                            throwException("event");
                         } catch (DukeException de) {
                             System.out.println(de.toString());
                         }
@@ -110,12 +110,12 @@ public class Duke {
                 }
 
                 // If input is a ToDos item, create ToDos item and add to task list
-                else if (user_input.startsWith("todo ")) {
-                    if (user_input.length() > 5) {
-                        add_to_list(new Todo(user_input));
+                else if (userInput.startsWith("todo ")) {
+                    if (userInput.length() > 5) {
+                        addToList(new Todo(userInput));
                     } else {
                         try {
-                            exception_thrower("todo");
+                            throwException("todo");
                         } catch (DukeException de) {
                             System.out.println(de.toString());
                         }
@@ -123,11 +123,11 @@ public class Duke {
                 }
 
                 // If command is delete, then remove from task list and return deleted task
-                else if (user_input.startsWith("delete ")) {
+                else if (userInput.startsWith("delete ")) {
                     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!___________handle non-int input
                     try {
-                        int num = Integer.parseInt(user_input.substring(7));
-                        remove_from_list(num);
+                        int num = Integer.parseInt(userInput.substring(7));
+                        removeFromList(num);
                     } catch (NumberFormatException ex) {
                         ex.printStackTrace();
                     }
@@ -137,17 +137,18 @@ public class Duke {
                 // Else create and add task to list
                 else {
                     try {
-                        add_to_list(new Task(0));
+                        addToList(new Task(0));
                     }
                     catch (DukeException de){
                         System.out.println(de.toString());
                     }
                 }
+                // Insert call on method that writes curr version of taskList to data/duke.txt
             }
             else {
-                display_list();
+                displayList();
             }
-            user_input = sc.nextLine();
+            userInput = sc.nextLine();
         }
         exit();
 

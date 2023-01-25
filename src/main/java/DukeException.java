@@ -3,16 +3,16 @@ public class DukeException extends IllegalArgumentException {
     String message;
 
     // Error with incomplete command for todos, deadlines and events
-    DukeException(String task_type) {
-        if (task_type.equals("todo")) {
+    DukeException(String taskType) {
+        if (taskType.equals("todo")) {
             message = "OOPS!! This is an invalid todo task.\n" +
                     "Here's a valid example:\n" +
                     "   todo borrow book";
-        } else if (task_type.equals("deadline")) {
+        } else if (taskType.equals("deadline")) {
             message = "OOPS!! This is an invalid deadline task.\n" +
                     "Here's a valid example:\n" +
                     "   deadline return book /by Sunday";
-        } else if (task_type.equals("event")) {
+        } else if (taskType.equals("event")) {
             message = "OOPS!! This is an invalid event task.\n" +
                     "Here's a valid example:\n" +
                     "   event project meeting /from Mon 2pm /to 4pm";
