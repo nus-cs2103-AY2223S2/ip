@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Duke {
-
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -20,11 +19,13 @@ public class Duke {
 
             String[] instruction = input.split(" ",2);
 
-            if(instruction[0].equals("list")) { // printing list
-                toDo.printList();
-            } else if (instruction[0].equals("mark")){ //marking
+            try {
 
-                try {
+                if(instruction[0].equals("list")) { // printing list
+                toDo.printList();
+
+                } else if (instruction[0].equals("mark")){ //marking
+
                     if(instruction.length <= 1 ){
                         throw new ArgumentException("What are we marking again?");
                     } else if (! instruction[1].matches("[0-9]+")){
@@ -36,12 +37,8 @@ public class Duke {
                     }
                     toDo.changingStatus(0, index);
 
-                } catch (ArgumentException ex) {
-                    System.out.println(ex.getMessage());
-                }
+                } else if (instruction[0].equals("unmark")) { //unmarking
 
-            } else if (instruction[0].equals("unmark")) { //unmarking
-                try {
                     if(instruction.length <= 1 )  {
                         throw new ArgumentException("What are we unmarking again?");
                     } else if (! instruction[1].matches("[0-9]+")){
@@ -53,18 +50,15 @@ public class Duke {
                     }
                     toDo.changingStatus(1, index);
 
-                } catch (ArgumentException ex) {
-                    System.out.println(ex.getMessage());
-                }
+                } else if(instruction[0].equals("delete")){
 
-            } else if(instruction[0].equals("delete")){
-                try {
                     if(instruction.length <= 1 )  {
                         throw new ArgumentException("What are we deleting again?");
                     } else if (! instruction[1].matches("[0-9]+")){
                         throw new ArgumentException("What are we deleting again?");
                     }
                     int index = Integer.parseInt(instruction[1]);
+
                     if ((index -1) < 0 || (index-1) >= toDo.numberOfTask()){
                         throw new ArgumentException("Can't find the index");
                     }
@@ -73,14 +67,9 @@ public class Duke {
                     toDo.deleteTask(index);
                     System.out.println("Now you have " + toDo.numberOfTask() + " tasks in the list.");
 
-                } catch (ArgumentException ex) {
-                    System.out.println(ex.getMessage());
-                }
 
-            } else { // adding into list
-
-                String command = instruction[0];
-                try {
+                } else { // adding into list
+                    String command = instruction[0];
 
                     if(!command.equals("todo") && !command.equals("deadline") &&
                             !command.equals("event") && !command.equals("delete")) {
@@ -153,11 +142,12 @@ public class Duke {
 
                     System.out.println("Now you have " + toDo.numberOfTask() + " tasks in the list.");
 
-                } catch (DukeException ex) {
-                    System.out.println(ex.getMessage());
-                } catch (ArgumentException ex2) {
-                    System.out.println(ex2.getMessage());
                 }
+
+            } catch (DukeException ex) {
+            System.out.println(ex.getMessage());
+            } catch (ArgumentException ex2) {
+                System.out.println(ex2.getMessage());
             }
 
             input = sc.nextLine();
