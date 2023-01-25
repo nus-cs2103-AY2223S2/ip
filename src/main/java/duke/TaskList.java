@@ -7,7 +7,7 @@ import duke.task.Task;
 /**
  * TaskList is a wrapper class for ArrayList<Task> that contains the list of tasks.
  */
-public class TaskList extends ArrayList<Task>{
+public class TaskList extends ArrayList<Task> {
     /**
      * Constructor for TaskList.
      * 

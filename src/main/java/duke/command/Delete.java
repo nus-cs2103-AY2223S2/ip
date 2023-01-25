@@ -6,7 +6,6 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-
 public class Delete extends Command {
     private Integer index;
 

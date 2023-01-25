@@ -19,7 +19,7 @@ public class Unmark extends Command {
             throw new DukeException("Please specify a valid task number.");
         }
         Task t = tasks.get(index-1);
-        t.markAsNotDone();
+        t.setNotDone();
         ui.showUnmark(t);
     }
     
