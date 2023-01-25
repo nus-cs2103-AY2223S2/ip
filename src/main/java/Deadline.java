@@ -1,8 +1,12 @@
+import javax.swing.text.html.parser.Parser;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A class that represents a Deadline with deadline time
  */
 public class Deadline extends Task {
-    private String deadline;
+    private LocalDate deadline;
 
     /**
      * Initialize an Event object with the given values.
@@ -13,7 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String name, String deadline) {
         super(name);
-        this.deadline = deadline;
+        this.deadline = LocalDate.parse(deadline);
     }
 
     public Deadline(String name, String deadline, boolean isDone) {
@@ -30,6 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
+        return "[D]" + super.toString() + " (by: " + deadline.format(formatter) + ")";
     }
 }
