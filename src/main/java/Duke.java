@@ -51,12 +51,18 @@ public class Duke {
                 userInput = scanner.nextLine();
                 continue;
             } else if (userInputComponents[0].equals("todo")) {
-                horizontalLine();
-                list.addTask(new ToDo(userInput.substring(5)));
-                list.getTaskDetails();
-                horizontalLine();
-                userInput = scanner.nextLine();
-                continue;
+                try {
+                    horizontalLine();
+                    list.addTask(new ToDo(userInput.substring(5)));
+                    list.getTaskDetails();
+                    horizontalLine();
+                    userInput = scanner.nextLine();
+                    continue;
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("The description of todo cannot be empty!");
+                    userInput = scanner.nextLine();
+                    continue;
+                }
             } else if (userInputComponents[0].equals("deadline")) {
                 String[] splitDeadline = userInput.split("/");
                 String description = splitDeadline[0].substring(9);
@@ -79,13 +85,12 @@ public class Duke {
                 horizontalLine();
                 userInput = scanner.nextLine();
                 continue;
+            } else {
+                System.out.println("You may have accidentally entered in an invalid command. Please re-enter!");
+                userInput = scanner.nextLine();
             }
 
-            horizontalLine();
-            list.addTask(new Task(userInput));
-            list.getTaskDetails();
-            horizontalLine();
-            userInput = scanner.nextLine();
+
         }
 
             System.out.println("Bye for now! Hope to see you again!");
