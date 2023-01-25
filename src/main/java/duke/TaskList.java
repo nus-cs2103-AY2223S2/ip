@@ -62,7 +62,7 @@ public class TaskList {
             t = new Deadline(false, message);
         } else if (code == 2) {
             t = new Event(false, message);
-        }  else {
+        } else {
             // Not reachable
             return null;
         }

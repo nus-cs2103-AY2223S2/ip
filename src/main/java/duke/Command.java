@@ -35,7 +35,9 @@ public class Command {
     }
 
     protected void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException, IOException {
-        if (code == -1) return;
+        if (code == -1) {
+            return;
+        }
         if (code == 0) {
             ui.byeMessage();
         } else if (code == 1) {

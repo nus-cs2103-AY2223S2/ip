@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 public class MaybeDate {
 
-    private final DateTimeFormatter OUTPUTFORMAT =  DateTimeFormatter.ofPattern("LLL dd yyyy HH:mm");
-    String timeString;
-    LocalDateTime dateTime;
+    private final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("LLL dd yyyy HH:mm");
+    private String timeString;
+    private LocalDateTime dateTime;
     final boolean isTime;
 
     protected MaybeDate(String timeString) {
@@ -23,7 +23,7 @@ public class MaybeDate {
     @Override
     public String toString() {
         if (isTime) {
-            return dateTime.format(OUTPUTFORMAT);
+            return dateTime.format(OUTPUT_FORMAT);
         } else {
             return timeString;
         }

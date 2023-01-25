@@ -1,15 +1,15 @@
 package duke;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.io.FileWriter;
+import java.util.List;
+import java.util.Scanner;
 
 public class Storage {
     private final Path filePath;
@@ -45,7 +45,7 @@ public class Storage {
         return tasks;
     }
 
-    protected void write() throws IOException{
+    protected void write() throws IOException {
         FileWriter writer = new FileWriter(this.filePath.toString());
         for (Task t : taskState) {
             String s = t.fileMessage();

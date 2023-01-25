@@ -1,9 +1,10 @@
 package duke;
 
-import java.util.Scanner;
 import java.io.IOException;
+import java.util.Scanner;
+
 /**
- * duke.Duke is a personal assistant chatbot that help to keep track of various stuff.
+ * Duke is a personal assistant chatbot that help to keep track of various stuff.
  */
 public class Duke {
     // Attribute
