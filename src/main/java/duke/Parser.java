@@ -9,7 +9,7 @@ public class Parser {
      * @param reply
      * @return an array that contains words that have been split
      */
-    public static String[] splitforDeadline(String reply) {
+    public static String[] splitForDeadline(String reply) {
         return reply.split("/",2);
     }
 

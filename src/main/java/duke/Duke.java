@@ -1,9 +1,7 @@
 package duke;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Scanner;
-import java.io.*;
+
 
 /**
  * The Duke program implements an application that takes in an input and places it in a list.
@@ -57,7 +55,7 @@ public class Duke {
         while (!reply.startsWith("bye")) {
             if (reply.startsWith("deadline")) {
                 reply = reply.replaceAll("deadline", "");
-                String[] replies = Parser.splitforDeadline(reply);
+                String[] replies = Parser.splitForDeadline(reply);
                 handleInvalidArgs checked = new handleInvalidArgs(replies);
                 checked.checkForDeadline(checked.replies);
                 Deadline deadline = new Deadline(replies[0],replies[1]);
@@ -73,13 +71,13 @@ public class Duke {
                 reply = reply.replaceAll("todo", "");
                 handleInvalidArgs checked = new handleInvalidArgs(reply);
                 checked.checkForToDo(checked.reply);
-                ToDo todo = new ToDo(reply);
-                taskList.add(todo);
+                ToDo toDo = new ToDo(reply);
+                taskList.add(toDo);
                 count += 1;
                 System.out.println("Got it. I've added this task:");
-                System.out.println(todo);
+                System.out.println(toDo);
                 System.out.println("Now you have " + Task.actions + " tasks in the list");
-                Task.tasks.add(todo);
+                Task.tasks.add(toDo);
 
             } else if (reply.startsWith("event")) {
                 reply = reply.replaceAll("event", "");
@@ -87,10 +85,10 @@ public class Duke {
                 for (int i = 0; i< replies.length; i++){
                     System.out.println(replies[i]);
                 }
-                String[] datecheck =  replies[1].split("/");
-                datecheck[0] = datecheck[0].replaceAll("from ", "");
-                datecheck[1] = datecheck[1].replaceAll("to ","");
-                replies[1] =   datecheck[0] + "/" + datecheck[1];
+                String[] dateCheck =  replies[1].split("/");
+                dateCheck[0] = dateCheck[0].replaceAll("from ", "");
+                dateCheck[1] = dateCheck[1].replaceAll("to ","");
+                replies[1] =   dateCheck[0] + "/" + dateCheck[1];
                 handleInvalidArgs checked = new handleInvalidArgs(replies);
                 checked.checkForEvent(checked.replies);
                 Event event = new Event(replies[0],replies[1]);

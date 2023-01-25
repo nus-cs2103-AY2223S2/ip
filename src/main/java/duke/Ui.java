@@ -21,11 +21,11 @@ public class Ui {
      */
     public void showList() {
         System.out.println("Here are the tasks in your list:\n");
-        int listcount = 1;
+        int listCount = 1;
         for (Task element: Task.tasks) {
             if (element != null) {
-                System.out.println("" + listcount + "." + element);
-                listcount += 1;
+                System.out.println("" + listCount + "." + element);
+                listCount += 1;
             }
         }
     }
