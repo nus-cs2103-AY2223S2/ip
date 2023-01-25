@@ -1,4 +1,6 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Jarvis {
     public static void main(String[] args) {
@@ -37,32 +39,44 @@ public class Jarvis {
                 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
         System.out.println(computer);
+
+        String dataPath = "./data/jarvis.txt";
+        ToDoList todolist = new ToDoList(100);
+
+        // Print previous data
+        try {
+            FileHandler.loadTasks(todolist, dataPath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
         System.out.println("Please enter a command Mr Stark.");
-
-        ToDoList toDo = new ToDoList(100);
-
         Scanner sc = new Scanner(System.in);
+
         while(true) {
+
             String line = sc.nextLine();
 
             if (line.equals("bye")) {
-                // exit code
-
+                try {
+                    FileHandler.saveTasks(todolist, dataPath);
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
                 System.out.println("\tHave a nice day sir.");
                 break;
 
             } else if (line.equals("list")) {
                 // show items
 
-                toDo.list();
+                todolist.list();
 
             } else if (line.matches("mark(.*)")) {
                 // mark task as done
 
                 try {
                     int taskNum = Integer.parseInt(line.substring(line.length() - 1));
-                    validate(toDo, taskNum);
-                    toDo.markDone(taskNum);
+                    validate(todolist, taskNum);
+                    todolist.markDone(taskNum);
                 } catch (NumberFormatException e) {
                     System.out.println("Which task have you completed, sir?");
                 } catch (NoTaskFoundException e) {
@@ -74,8 +88,8 @@ public class Jarvis {
 
                 try {
                     int taskNum = Integer.parseInt(line.substring(line.length() - 1));
-                    validate(toDo, taskNum);
-                    toDo.unmark(taskNum);
+                    validate(todolist, taskNum);
+                    todolist.unmark(taskNum);
                 } catch (NumberFormatException e) {
                     System.out.println("Which task would you like to unmark sir?");
                 } catch (NoTaskFoundException e) {
@@ -86,7 +100,7 @@ public class Jarvis {
                 // add task to list
 
                 try {
-                    addToDo(toDo, line);
+                    addToDo(todolist, line);
                 } catch (JarvisException e) {
                     System.out.println("\tPlease enter in format 'todo <task>'");
                 }
@@ -101,7 +115,7 @@ public class Jarvis {
                     int firstSlash = line.indexOf("/");
                     String task = line.substring(9, firstSlash);
                     String time = line.substring(firstSlash + 1);
-                    toDo.add(task, time);
+                    todolist.add(task, time);
                 }
 
             } else if (line.matches("event(.*)")) {
@@ -120,15 +134,15 @@ public class Jarvis {
                 String endTime = line.substring(secondSlash + 1);
                 String task = line.substring(6, firstSlash);
 
-                toDo.add(task, startTime, endTime);
+                todolist.add(task, startTime, endTime);
 
             } else if (line.matches("delete(.*)")) {
                 // mark task as done
 
                 try {
                     int taskNum = Integer.parseInt(line.substring(line.length() - 1));
-                    validate(toDo, taskNum);
-                    toDo.delete(taskNum);
+                    validate(todolist, taskNum);
+                    todolist.delete(taskNum);
                 } catch (NumberFormatException e) {
                     System.out.println("Which task would you like to delete, sir?");
                 } catch (NoTaskFoundException e) {
