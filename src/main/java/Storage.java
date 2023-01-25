@@ -25,6 +25,7 @@ public class Storage {
     }
 
     //Supposed to return TaskList, which will be done later
+    //Should save in CSV format for easier reading and writing
     public void load() {
 //        dukeDataFile = new File(filePath.toString());
         if (Files.exists(filePath)) {
@@ -34,5 +35,11 @@ public class Storage {
         } else {
             //create file here, then return nothing?
         }
+    }
+
+    //Supposed to take in tasklist and save to the file
+    //Should save in CSV format for easier reading and writing
+    public void save() {
+        //Implement saving here
     }
 }
