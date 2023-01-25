@@ -1,0 +1,4 @@
+[T][ ] run
+[T][ ] eat
+[D][ ] read  (Due: sunday)
+[E][ ] meeting (Start: 12pm | End: 2pm)

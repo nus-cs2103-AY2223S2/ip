@@ -12,7 +12,7 @@ public class Event extends Task {
     @Override
     public String printTask() {
         return this.isDone()
-                ? "[E][x] " + this.getTask() + "(" + this.startTime + " till " + this.endTime + ")"
-                : "[E][ ] " + this.getTask() + "(" + this.startTime + " till " + this.endTime + ")";
+                ? "[E][x] " + this.getTask() + "(Start: " + this.startTime + " | End: " + this.endTime + ")"
+                : "[E][ ] " + this.getTask() + "(Start: " + this.startTime + " | End: " + this.endTime + ")";
     }
 }

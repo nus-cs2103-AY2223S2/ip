@@ -10,7 +10,7 @@ public class Deadline extends Task {
     @Override
     public String printTask() {
         return this.isDone()
-                ? "[D][x] " + this.getTask() + "(" + this.time + ")"
-                : "[D][ ] " + this.getTask() + "(" + this.time + ")";
+                ? "[D][x] " + this.getTask() + " (Due: " + this.time + ")"
+                : "[D][ ] " + this.getTask() + " (Due: " + this.time + ")";
     }
 }
