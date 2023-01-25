@@ -29,15 +29,10 @@ public class Storage {
         }
     }
 
-    //Supposed to return an arraylist of tasks
-    //Should save in CSV format for easier reading and writing
     public TaskList load() {
         dukeDataFile = new File(filePath.toString());
         if (Files.exists(filePath)) {
             System.out.println("FILE EXIST");
-            //Means the file has been created before
-            //This is where we read from it
-            //return (loading)
             TaskList loadTaskList= new TaskList();
             try {
                 List<String> allLines = Files.readAllLines(filePath);
@@ -78,16 +73,12 @@ public class Storage {
         return new TaskList();
     }
 
-    //Supposed to take in tasklist and save to the file
-    //Should save in CSV format for easier reading and writing
     public void save(TaskList saveTaskList) {
         StringBuilder outputString = new StringBuilder();
         for (int i = 0; i < saveTaskList.tasks.size(); i++) {
             outputString.append(saveTaskList.tasks.get(i).asCSV());
             outputString.append(System.getProperty("line.separator"));
         }
-//        System.out.println("SAVING THIS!");
-//        System.out.println(outputString.toString());
         try {
             FileUtils.writeStringToFile(dukeDataFile, outputString.toString());
         } catch (IOException e) {
