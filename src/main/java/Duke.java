@@ -1,4 +1,3 @@
-
 import duke.command.TaskList;
 import duke.task.Deadlines;
 import duke.task.Events;
@@ -15,12 +14,6 @@ public class Duke {
         String greeting = "Hello! I'm Alpha Beast What can I do for you?";
         greeting(greeting);
         TaskList manager = new TaskList("/Users/s.f/ip/src/Data/duke.txt");
-        //testing branches
-        ///committing at new branch
-        //testing for branch 8 merging
-        //commit 1
-        //commit 2
-        //commit 3
         loop:
         while (true) {
             String input = sc.nextLine();

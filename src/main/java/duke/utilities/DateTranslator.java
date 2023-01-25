@@ -19,7 +19,6 @@ public class DateTranslator {
         //first date  format
         return token1.length > 2 || token2.length == 3;
     }
-
     void convert() {
         //example input = return book /by 2/12/2019 1800
         String[] tokens;
@@ -68,6 +67,5 @@ public class DateTranslator {
             output = time.format(formatter);
         }
     }
-
 
 }
