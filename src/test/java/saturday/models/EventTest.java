@@ -1,6 +1,7 @@
-package models;
+package saturday.models;
 
 import org.junit.jupiter.api.Test;
+import saturday.models.Event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

@@ -1,8 +1,10 @@
-import collections.TaskList;
-import command.Command;
-import exceptions.SaturdayException;
-import utilities.Storage;
-import utilities.Ui;
+package saturday;
+
+import saturday.collections.TaskList;
+import saturday.command.Command;
+import saturday.exceptions.SaturdayException;
+import saturday.utilities.Storage;
+import saturday.utilities.Ui;
 
 import java.util.Scanner;
 

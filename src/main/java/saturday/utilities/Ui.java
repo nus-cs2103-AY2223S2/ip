@@ -1,4 +1,4 @@
-package utilities;
+package saturday.utilities;
 
 public class Ui {
     public static void divider() {
@@ -12,7 +12,7 @@ public class Ui {
     }
     public static void greet() {
         Ui.divider();
-        Ui.output("Hello! I'm Saturday\n\tWhat can I do for you?");
+        Ui.output("Hello! I'm saturday.Saturday\n\tWhat can I do for you?");
         Ui.divider();
         Ui.newline();
     }

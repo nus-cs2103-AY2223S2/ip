@@ -1,4 +1,4 @@
-package models;
+package saturday.models;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package models;
+package saturday.models;
 
 public class ToDo extends Task {
 

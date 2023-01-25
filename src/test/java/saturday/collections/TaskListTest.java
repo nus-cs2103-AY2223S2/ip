@@ -1,9 +1,10 @@
-package collections;
+package saturday.collections;
 
-import models.Deadline;
-import models.Event;
-import models.Task;
-import models.ToDo;
+import saturday.collections.TaskList;
+import saturday.models.Deadline;
+import saturday.models.Event;
+import saturday.models.Task;
+import saturday.models.ToDo;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
-package utilities;
+package saturday.utilities;
 
-import exceptions.SaturdayException;
+import saturday.exceptions.SaturdayException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

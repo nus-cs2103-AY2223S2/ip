@@ -1,6 +1,6 @@
-package models;
+package saturday.models;
 
-import utilities.DateTimeParser;
+import saturday.utilities.DateTimeParser;
 
 import java.time.temporal.TemporalAccessor;
 

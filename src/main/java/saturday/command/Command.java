@@ -1,13 +1,13 @@
-package command;
+package saturday.command;
 
-import collections.TaskList;
-import exceptions.SaturdayException;
-import models.Deadline;
-import models.Event;
-import models.Task;
-import models.ToDo;
-import utilities.DateTimeParser;
-import utilities.Ui;
+import saturday.collections.TaskList;
+import saturday.exceptions.SaturdayException;
+import saturday.models.Deadline;
+import saturday.models.Event;
+import saturday.models.Task;
+import saturday.models.ToDo;
+import saturday.utilities.DateTimeParser;
+import saturday.utilities.Ui;
 
 public enum Command {
     TODO("todo") {
