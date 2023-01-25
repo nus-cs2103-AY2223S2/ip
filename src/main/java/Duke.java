@@ -35,21 +35,42 @@ public class Duke {
         String[] welcomeMsg = {logo, "Hello I am Duke", "What can I do for you?"};
         printMsg(welcomeMsg);
 
-        List<String> data = new ArrayList<>();
+        List<Task> data = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
-        while (true) {
-            String cmd = sc.nextLine();
-            if (cmd.equals("bye")) {
+        while (sc.hasNext()) {
+            String msg = sc.nextLine();
+            String cmd[] = msg.split(" ", 2);
+            if (cmd[0].equals("bye")) {
                 printMsg("Bye. Hope to see you again soon!");
                 break;
-            } else if (cmd.equals("list")) {
+            } else if (cmd[0].equals("list")) {
                 String[] list = new String[data.size()];
-                list = data.toArray(list);
+                for (int i = 0; i < data.size(); i++) {
+                    Task tsk = data.get(i);
+                    list[i] = String.format("[%s] %s", tsk.getStatusIcon(), tsk);
+                }
                 printList(list);
+            } else if (cmd[0].equals("mark")) {
+                int idx = Integer.parseInt(cmd[1]) - 1;
+                Task tsk = data.get(idx);
+                tsk.mark();
+                String cfmMsg = "Nice! I've marked this task as done:";
+                String markedTask = String.format(" [%s] %s", tsk.getStatusIcon(), tsk);
+                String[] markedMsg = {cfmMsg, markedTask};
+                printMsg(markedMsg);
+            } else if (cmd[0].equals("unmark")) {
+                int idx = Integer.parseInt(cmd[1]) - 1;
+                Task tsk = data.get(idx);
+                tsk.unmark();
+                String cfmMsg = "OK, I've marked this task as not done yet:";
+                String unmarkedTask = String.format(" [%s] %s", tsk.getStatusIcon(), tsk);
+                String[] unmarkedMsg = {cfmMsg, unmarkedTask};
+                printMsg(unmarkedMsg);
             } else {
-                data.add(cmd);
-                printMsg("added: " + cmd);
+                Task tsk = new Task(msg);
+                data.add(tsk);
+                printMsg("added: " + tsk);
             }
         }
     }
