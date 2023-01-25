@@ -1,15 +1,20 @@
 package Tasks;
+import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDateTime by;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        String[] temp = by.split(" ");
+        String[] date = temp[0].split("-");
+        if (temp.length == 1) { this.by = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]), 00, 00); 
+        } else { this.by = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]), Integer.parseInt(temp[1].substring(0,2)), Integer.parseInt(temp[1].substring(2))); }
+
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + this.by.getMonth().toString().substring(0,3) + " " + this.by.getDayOfMonth() + " " + this.by.getYear() + ", " + this.by.toLocalTime() + ")";
     }
 }
