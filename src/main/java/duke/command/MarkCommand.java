@@ -11,6 +11,11 @@ public class MarkCommand extends Command {
 
     private int toMark;
 
+    /**
+     * Constructs mark task as complete command.
+     *
+     * @param toMark Integer to specify task to be marked as complete.
+     */
     public MarkCommand(int toMark) {
         this.toMark = toMark;
     }
