@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -81,12 +84,18 @@ public class Duke {
                         throw new DukeException(errDeadline);
                     }
                     try {
-                        String[] stringarr = desc.split(" /by ");
-                        Deadline newDeadline = new Deadline(stringarr[0], stringarr[1]);
-                        System.out.println("Excellent sir, I've added the task: ");
-                        System.out.println(newDeadline.toString());
+                        String[] stringArr = desc.split(" /by ");
+                        ArrayList<String> arr = new ArrayList<String>(List.of(stringArr));
+                        String description = arr.get(0);
+                        arr.remove(0);
+
+                        String dateTimeString = String.join(" ", arr);
+                        Deadline newDeadline = new Deadline(description, dateTimeString);
+
+
                         System.out.println(Task.getTaskCount());
                     } catch (Exception e) {
+                        System.out.println(e);
                         String eventErr = "Sir, there seems to be an error in your deadline details input.";
                         throw new DukeException(eventErr);
                     }
