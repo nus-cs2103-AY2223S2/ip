@@ -51,7 +51,7 @@ public class Ui {
     }
 
     public void delete(Task task, int listLen) {
-        System.out.println(Ui.line() +
+        System.out.print(Ui.line() +
                 "     Noted. I've removed this task:\n" +
                 "       " + task + "\n" +
                 "     Now you have " + listLen + " tasks in the list.\n" +
