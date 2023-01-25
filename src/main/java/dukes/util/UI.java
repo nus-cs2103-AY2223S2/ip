@@ -32,6 +32,7 @@ public class UI {
             "Well, you have not finished this task yet: ";
     public static final String LIST_WORD = "Here are all of your tasks: ";
     public static final String SEARCH_WORD = "Here are your tasks on the given date: ";
+    public static final String FIND_WORD = "Here are the matching tasks in list:  ";
     public static final String ADD_WORD = "This task is added to your list: ";
     public static final String DELETE_WORD = "Ok, I will remove this task for you: ";
 
@@ -90,6 +91,11 @@ public class UI {
             System.out.println(MARK_UNDONE_WORD);
         }
         System.out.println(" " + theTask.toString());
+    }
+
+    public static void showFind(String str) {
+        System.out.println(FIND_WORD);
+        System.out.println(str);
     }
 
     public static void showBye() {
