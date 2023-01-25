@@ -2,6 +2,9 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Class that deals with interactions with the user.
+ */
 public class Ui {
     private Scanner scanner = new Scanner(System.in);
     private static String formatMessage(String message) {
