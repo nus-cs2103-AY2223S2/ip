@@ -15,6 +15,6 @@ public class Deadline extends Task{
     }
 
     public String asCSV() {
-        return "D," + desc + "," + from + "," + to;
+        return "D," + desc + "," + by;
     }
 }
