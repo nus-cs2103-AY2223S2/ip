@@ -1,8 +1,12 @@
 package response;
 
+import exception.InvalidArgumentException;
 import exception.MissingArgumentException;
 import storage.Deadline;
 import storage.ToDoList;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class DeadlineResponse extends Response {
 
@@ -26,17 +30,29 @@ public class DeadlineResponse extends Response {
      */
     @Override
     public String exec(ToDoList toDoList) {
+        // Parsing the String to get the task description and deadline
         String[] splitBy = deadline.split(" /by ", 2);
         String des = splitBy[0].trim();
         if (des.equals("")) {
             throw new MissingArgumentException("The description of a deadline cannot be empty.");
         } else if (splitBy.length != 2
                 || splitBy[1].trim().equals("")) {
-            throw new MissingArgumentException("The deadline cannot be empty.");
+            throw new MissingArgumentException("The deadline cannot be empty." +
+                    "Deadline has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
         }
         String by = splitBy[1].trim();
 
-        Deadline newD = new Deadline(des, by);
+        // Try to create LocalDate object from String
+        LocalDate byDate;
+        try {
+            byDate = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentException("Start date format should be in the format " +
+                    "YYYY-MM-DD (e.g. 2007-12-03)");
+        }
+
+        // Create Deadline object, add to list and print
+        Deadline newD = new Deadline(des, byDate);
         toDoList.createToDo(newD);
         return String.format(
                 "Alright! This task has been added into the list:" +
