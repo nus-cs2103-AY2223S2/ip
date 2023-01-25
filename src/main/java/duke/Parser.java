@@ -1,4 +1,4 @@
-package duke.packages;
+package duke;
 
 public class Parser {
     public enum ParseFunctions {

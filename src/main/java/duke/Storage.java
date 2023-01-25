@@ -1,4 +1,4 @@
-package duke.packages;
+package duke;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,4 +1,4 @@
-package duke.packages;
+package duke;
 
 public class NotTaskException extends DukeException {
     public NotTaskException(String message) {

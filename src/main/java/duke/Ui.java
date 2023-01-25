@@ -1,4 +1,4 @@
-package duke.packages;
+package duke;
 import java.util.Scanner;
 
 public class Ui { // handles I/O things
