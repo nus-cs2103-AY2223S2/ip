@@ -1,8 +1,8 @@
-package commands;
+package duke.commands;
 
-import data.MyData;
-import tasks.ToDo;
-import ui.Ui;
+import duke.data.MyData;
+import duke.tasks.ToDo;
+import duke.ui.Ui;
 
 public class AddToDo extends Command {
     protected ToDo todo;

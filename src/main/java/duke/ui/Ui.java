@@ -1,9 +1,9 @@
-package ui;
+package duke.ui;
 
-import data.MyData;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
+import duke.data.MyData;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
 
 import java.time.LocalDate;
 

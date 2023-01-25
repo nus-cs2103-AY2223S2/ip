@@ -1,7 +1,7 @@
-package commands;
+package duke.commands;
 
-import data.MyData;
-import ui.Ui;
+import duke.data.MyData;
+import duke.ui.Ui;
 
 public class Unmark extends Command {
     private final int id;

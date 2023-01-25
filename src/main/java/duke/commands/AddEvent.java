@@ -1,8 +1,8 @@
-package commands;
+package duke.commands;
 
-import data.MyData;
-import tasks.Event;
-import ui.Ui;
+import duke.data.MyData;
+import duke.tasks.Event;
+import duke.ui.Ui;
 
 public class AddEvent extends Command {
     protected Event event;

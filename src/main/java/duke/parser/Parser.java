@@ -1,9 +1,9 @@
-package parser;
+package duke.parser;
 
-import commands.*;
-import data.MyData;
-import exceptions.DukeException;
-import ui.Ui;
+import duke.commands.*;
+import duke.data.MyData;
+import duke.exceptions.DukeException;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -37,21 +37,25 @@ public class Parser {
     }
 
     public Command parseMark(String[] commandArr) throws DukeException {
+        if (commandArr.length <= 1) {
+            throw new DukeException(Ui.wrapLines("Please enter a index to mark"));
+        }
         int id = Integer.parseInt(commandArr[1]);
-        Mark toMark = new Mark(id - 1);
         if (id > data.len() || id < 0) {
             throw new DukeException(Ui.wrapLines("Please enter a valid number."));
         }
-        return toMark;
+        return new Mark(id - 1);
     }
 
     public Command parseUnmark(String[] commandArr) throws DukeException {
+        if (commandArr.length <= 1) {
+            throw new DukeException(Ui.wrapLines("Please enter a index to mark"));
+        }
         int id = Integer.parseInt(commandArr[1]);
-        Unmark toUnmark = new Unmark(id - 1);
         if (id > data.len() || id < 0) {
             throw new DukeException(Ui.wrapLines("Please enter a valid number."));
         }
-        return toUnmark;
+        return new Unmark(id - 1);
     }
 
     public Command parseTodo(String command) throws DukeException {
@@ -93,6 +97,9 @@ public class Parser {
     }
 
     public Command parseDelete(String[] commandArr) throws DukeException {
+        if (commandArr.length <= 1) {
+            throw new DukeException(Ui.wrapLines("Please enter a index to delete"));
+        }
         int id = Integer.parseInt(commandArr[1]);
         if (id > data.len() || id < 0) {
             throw new DukeException(Ui.wrapLines("Please enter a valid number."));

@@ -1,8 +1,8 @@
-package commands;
+package duke.commands;
 
-import data.MyData;
-import tasks.Deadline;
-import ui.Ui;
+import duke.data.MyData;
+import duke.tasks.Deadline;
+import duke.ui.Ui;
 
 public class AddDeadline extends Command {
     protected Deadline deadline;
