@@ -7,7 +7,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-// A chatbot
+/**
+ * Represents a Duke chatbot that stores a tasklist.
+ */
 public class Duke {
 
     private static TaskList taskList = new TaskList();
@@ -15,6 +17,10 @@ public class Duke {
     private static Storage storage;
     private static Ui ui = new Ui();
 
+    /**
+     * Constructor.
+     * @param filePath Path of the file where task data is stored.
+     */
     private Duke(String filePath) {
         storage = new Storage(filePath);
         try {
@@ -52,7 +58,10 @@ public class Duke {
         }
     }
 
-    // Main method
+    /**
+     * The main methods. Creates and runs a Duke instance.
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("data/duke.txt");
         duke.run();
