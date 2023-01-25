@@ -50,7 +50,7 @@ public class Ui {
     private Scanner sc;
 
     public Ui() {
-        this.sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     public String getCommand() {
@@ -73,7 +73,7 @@ public class Ui {
         String name = "R-r-r-rickkk";
         String greeting = String.format("Hello, I'm %s!", name);
         String cta = "What's up?";
-        this.section(
+        section(
     greeting + "\n"
             + cta +"\n"
         );
@@ -94,14 +94,14 @@ public class Ui {
      */
     public void section(String inputs) {
         //Start
-        this.line();
+        line();
         String[] lines = inputs.split("\n");
         System.out.println(MASCOT + lines[0]);
         for (String line: Arrays.copyOfRange(lines, 1, lines.length)) {
             System.out.println(INDENT + line);
         }
         //End
-        this.line();
+        line();
         System.out.print("\n");
     }
 
@@ -112,9 +112,9 @@ public class Ui {
      * @param error The error that occurred.
      */
     public void error(Exception error) {
-        this.line();
+        line();
         System.out.println(MASCOT + error.getMessage());
-        this.line();
+        line();
         System.out.print("\n");
     }
 
@@ -122,9 +122,9 @@ public class Ui {
      * Produces a user guide for incorrect command usages.
      */
     public void guide(String message) {
-        this.line();
+        line();
         System.out.println(MASCOT + message);
-        this.line();
+        line();
         System.out.print("\n");
     }
 

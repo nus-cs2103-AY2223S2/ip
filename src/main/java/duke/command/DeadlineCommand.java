@@ -29,7 +29,7 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList ts, Ui ui) {
         if (slug.length() == 0) {
-            ui.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Deadline));
+            ui.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.TYPE_Deadline));
             return;
         }
 

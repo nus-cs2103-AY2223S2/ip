@@ -57,8 +57,8 @@ public class DukeTaskTest {
     public void testBaseData() {
 
         DukeTask stub = new TaskStub();
-        DukeTask stub2 = new TaskStub();
-        stub2.setDone();
+        DukeTask stubTwo = new TaskStub();
+        stubTwo.setDone();
         assertAll(
                 () -> assertEquals(
                         "[ ] val",
@@ -73,7 +73,7 @@ public class DukeTaskTest {
                 ),
                 () -> assertEquals(
                         "[X] val",
-                        stub2.toString()
+                        stubTwo.toString()
                 )
         );
     }

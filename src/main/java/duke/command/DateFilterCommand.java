@@ -36,7 +36,7 @@ public class DateFilterCommand extends Command {
             DateTimeFormatter df = DateTimeFormatter.ofPattern("d MMM yyyy");
             ui.section(
                     "Searching for a list of tasks occurring on " + dt.format(df) + ":\n" +
-                            ts.occurOnDate(dt)
+                    ts.occurOnDate(dt)
             );
         } catch (DateTimeParseException e) {
             ui.error(

@@ -29,7 +29,7 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList ts, Ui ui) {
         if (this.slug.length() == 0) {
-            ui.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Event));
+            ui.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.TYPE_Event));
             return;
         }
 
