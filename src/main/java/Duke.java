@@ -47,5 +47,6 @@ public class Duke {
             Task task = taskAssigner.assignTask(command);
             taskList.add(task);
         }
+        sc.close();
     }
 }
