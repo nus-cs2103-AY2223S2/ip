@@ -1,14 +1,17 @@
-public class Event extends Task {
-    private final String from;
-    private final String to;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, boolean isDone, String taskType, String from, String to) {
+public class Event extends Task {
+    private final LocalDateTime from;
+    private final LocalDateTime to;
+
+    public Event(String description, boolean isDone, String taskType, LocalDateTime from, LocalDateTime to) {
         super(description, isDone, taskType);
         this.from = from;
         this.to = to;
     }
 
-    public Event(String description, String from, String to) {
+    public Event(String description, LocalDateTime from, LocalDateTime to) {
         this(description, false, "E", from, to);
     }
 
@@ -33,12 +36,14 @@ public class Event extends Task {
     }
 
     public String formatTask() {
-        return String.format("D|%b|%s|%s|%s", this.isDone, this.description, this.from, this.to);
+        return String.format("D|%b|%s|%s|%s", this.isDone, this.description, this.from.toString(), this.to.toString());
     }
 
     @Override
     public String toString() {
+        String timePattern = "d MMM yyyy HHmm";
         return String.format("%s%s %s (from: %s to: %s)", super.getTaskTypeBox(), super.getStatusCheckbox(),
-                super.toString(), this.from, this.to);
+                super.toString(), this.from.format(DateTimeFormatter.ofPattern(timePattern)),
+                this.to.format(DateTimeFormatter.ofPattern(timePattern)));
     }
 }

@@ -1,6 +1,12 @@
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.time.LocalDate;
+
 
 public class Duke {
     private final static String[] COMMANDS_LIST =
@@ -117,9 +123,25 @@ public class Duke {
         }
     }
 
-    public static void checkTimestamp(String timestamp) throws DukeException {
+    public static LocalDateTime convertTimestamp(String timestamp) throws DukeException {
         if (timestamp.equals("")) {
             throw new DukeException("There was no time period given!");
+        }
+        try {
+            String[] dateTime = timestamp.split(" ");
+            LocalDate date = LocalDate.parse(dateTime[0]);
+            int hour = Integer.parseInt(dateTime[1].substring(0, 2));
+            int min = Integer.parseInt(dateTime[1].substring(2, 4));
+            LocalTime time = LocalTime.of(hour, min);
+            return LocalDateTime.of(date, time);
+        } catch (DateTimeParseException err) {
+            throw new DukeException("Date formatting is wrong! Must be yyyy-MM-dd");
+        } catch (ArrayIndexOutOfBoundsException err) {
+            throw new DukeException("Time not stated!");
+        } catch (StringIndexOutOfBoundsException | NumberFormatException err) {
+            throw new DukeException("Time must be in HHmm format!");
+        } catch (DateTimeException err) {
+            throw new DukeException("Time given is not valid!");
         }
     }
 
@@ -202,8 +224,8 @@ public class Duke {
                         checkDescription(description);
                         String deadline = String.join(" ", Arrays.copyOfRange(splitInput,
                                 byIndex + 1, splitInput.length));
-                        checkTimestamp(deadline);
-                        newTask = new Deadline(description, deadline);
+                        LocalDateTime formattedDeadline = convertTimestamp(deadline);
+                        newTask = new Deadline(description, formattedDeadline);
                         addTask(taskList, dataStorage, newTask);
                     } catch (DukeException err) {
                         System.out.println(err.getErrorMessage());
@@ -217,11 +239,11 @@ public class Duke {
                         checkDescription(description);
                         String from = String.join(" ",
                                 Arrays.copyOfRange(splitInput, fromIndex + 1, toIndex));
-                        checkTimestamp(from);
+                        LocalDateTime formattedFrom = convertTimestamp(from);
                         String to = String.join(" ",
                                 Arrays.copyOfRange(splitInput, toIndex + 1, splitInput.length));
-                        checkTimestamp(to);
-                        newTask = new Event(description, from, to);
+                        LocalDateTime formattedTo = convertTimestamp(to);
+                        newTask = new Event(description, formattedFrom, formattedTo);
                         addTask(taskList, dataStorage, newTask);
                     } catch (DukeException err) {
                         System.out.println(err.getErrorMessage());
