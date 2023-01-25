@@ -5,14 +5,12 @@ public class Parser {
     /**
      * Parses the index integer from the first arg in args string.
      *
-     * @param args  Non-null. Trimmed arguments string.
-     * @param nTask Non-null. Current number of tasks in list. For boundary check purpose.
+     * @param args Non-null. Trimmed arguments string.
      * @return Parsed idx (starts with 0)
      * @throws MeggyNoArgException If args string is empty.
      * @throws MeggyNFException    If args string's first word is not a signed 32-bit {@link Integer}.
-     * @throws MeggyIOBException   If the parsed index is out of bounds with respect to the tasks list.
      */
-    public static int parseIdx(String args, int nTask) throws MeggyException {
+    public static int parseIdx(String args) throws MeggyException {
         final String arg = get1stArg(args);
         if ("".equals(arg))
             throw new MeggyNoArgException();
@@ -22,8 +20,6 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new MeggyNFException(arg);
         }
-        if (idx < 0 || idx >= nTask)
-            throw new MeggyIOBException(idx, nTask);
         return idx;
     }
 

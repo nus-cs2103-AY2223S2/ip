@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -32,7 +31,7 @@ public class Meggy implements Runnable {
     /**
      * List of tasks. Allow dupes.
      */
-    private final ArrayList<UserTask> tasks;
+    private final TaskList tasks;
 
     /**
      * Location to save cross-session data.
@@ -50,11 +49,11 @@ public class Meggy implements Runnable {
             throw new NullPointerException("OutputStream is null");
         this.in = new Scanner(in);
         this.ui = new UI(out);
-        tasks = new ArrayList<>();
+        tasks = new TaskList();
         storage = new Storage(new File(Util.dataFilePath));
         usrCmdToJob = Map.of(
                 Resource.cmdExit, s -> Resource.farewell,
-                Resource.cmdList, s -> listTasks(),
+                Resource.cmdList, s -> tasks.toString(),
                 Resource.cmdMk, s -> markTaskStatus(s, true),
                 Resource.cmdUnmk, s -> markTaskStatus(s, false),
                 Resource.cmdTodo, s -> addTask(s, Util.todoNew),
@@ -64,17 +63,8 @@ public class Meggy implements Runnable {
         );
     }
 
-    /**
-     * 'List' command: prints all tasks in the {@code tasks} list.
-     *
-     * @return Response to 'list' command.
-     */
-    private String listTasks() {
-        final StringBuilder ans = new StringBuilder(Resource.notifList);
-        int i = 0;
-        for (UserTask task : tasks)
-            ans.append(Resource.idxFmt(i++)).append(task).append('\n');
-        return ans.toString();
+    public static void main(String[] args) {
+        new Meggy(System.in, System.out).run();
     }
 
     /**
@@ -87,7 +77,8 @@ public class Meggy implements Runnable {
     private String markTaskStatus(String args, boolean newStatus) {
         final int idx;
         try {
-            idx = Parser.parseIdx(args, tasks.size());
+            idx = Parser.parseIdx(args);
+            tasks.boundsCheck(idx);
         } catch (MeggyException e) {
             return e.getMessage() + Util.usageIdxCmd(newStatus ? Resource.cmdMk : Resource.cmdUnmk);
         }
@@ -119,7 +110,8 @@ public class Meggy implements Runnable {
     private String deleteTask(String arg) {
         final int idx;
         try {
-            idx = Parser.parseIdx(arg, tasks.size());
+            idx = Parser.parseIdx(arg);
+            tasks.boundsCheck(idx);
         } catch (MeggyException e) {
             return e.getMessage() + Util.usageIdxCmd(Resource.cmdDel);
         }
@@ -173,9 +165,5 @@ public class Meggy implements Runnable {
             }
         }
         ui.dispLn("WARNING: REACHED END OF INPUT WITHOUT 'BYE' COMMAND");
-    }
-
-    public static void main(String[] args) {
-        new Meggy(System.in, System.out).run();
     }
 }

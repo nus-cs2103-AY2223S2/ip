@@ -56,6 +56,7 @@ public class MeggyTime {
      * Unparsable user-customized time or null if can be parsed.
      */
     final String customized;
+
     /**
      * Constructr of the dummy {@code NA} value
      */
@@ -63,6 +64,7 @@ public class MeggyTime {
         formatted = null;
         customized = Util.noFound;
     }
+
     /**
      * @param time Non-null. The trimmed time value to be interpreted.
      */

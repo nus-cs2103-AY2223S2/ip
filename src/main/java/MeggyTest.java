@@ -7,7 +7,6 @@ import java.io.IOException;
  */
 public class MeggyTest {
     public static void main(String[] args) throws IOException {
-
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         new Meggy(new FileInputStream("text-ui-test/input.txt"), out).run();
         String actual = out.toString().replaceAll("\r", "");
