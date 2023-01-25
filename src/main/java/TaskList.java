@@ -9,18 +9,18 @@ public class TaskList {
     }
 
     //AddTask method to add ToDo
-    public void addTask(String taskDesc) {
-        tasks.add(new ToDo(taskDesc));
+    public void addTask(String taskDesc, boolean taskStatus) {
+        tasks.add(new ToDo(taskDesc, taskStatus));
     }
 
     //AddTask method to add Deadline
-    public void addTask(String taskDesc, String taskBy) {
-        tasks.add(new Deadline(taskDesc, taskBy));
+    public void addTask(String taskDesc, String taskBy, boolean taskStatus) {
+        tasks.add(new Deadline(taskDesc, taskBy, taskStatus));
     }
 
     //AddTask method to add Deadline
-    public void addTask(String taskDesc, String taskFrom, String taskTo) {
-        tasks.add(new Event(taskDesc, taskFrom, taskTo));
+    public void addTask(String taskDesc, String taskFrom, String taskTo, boolean taskStatus) {
+        tasks.add(new Event(taskDesc, taskFrom, taskTo, taskStatus));
     }
 
     public void printTask() {
