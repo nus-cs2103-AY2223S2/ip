@@ -1,6 +1,9 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String startTime;
-    private String endTime;
+    private LocalDate startTime;
+    private LocalDate endTime;
 
     /** 
      * A public constructor to initialize Event instance.
@@ -11,8 +14,8 @@ public class Event extends Task {
      */
     Event(String task, String startTime, String endTime) {
         super(task);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = LocalDate.parse(startTime);;
+        this.endTime = LocalDate.parse(endTime);;
     }
 
     /** 
@@ -22,7 +25,7 @@ public class Event extends Task {
      */
     @Override
     public String getDescription() {
-        return "event " + super.getTaskName() + "/from" + this.startTime + "/to" + this.endTime;
+        return "event " + super.getTaskName() + "/from " + this.startTime + " /to " + this.endTime;
     }
 
     /** 
@@ -32,6 +35,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from:" + this.startTime + "to:" + this.endTime + ")";
+        return "[E]" + super.toString() 
+            + "(from: " + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
+            + " to: " + this.endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
