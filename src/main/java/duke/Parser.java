@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.Arrays;
 
 import duke.command.Command;
 import duke.command.CreateDeadline;
@@ -11,7 +10,6 @@ import duke.command.Exit;
 import duke.command.List;
 import duke.command.Mark;
 import duke.command.Unmark;
-import duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
