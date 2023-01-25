@@ -25,7 +25,7 @@ public class TodoCommand extends Command {
     @Override
     public void execute(TaskList ts, Ui ui) {
         if (this.task.length() == 0) {
-            ui.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.Todo));
+            ui.error(new DukeEmptyTaskException(DukeEmptyTaskException.TaskType.TYPE_Todo));
             return;
         }
 

@@ -36,12 +36,12 @@ public class Duke {
      */
     private void run() {
         ui.welcomeMessage();
-        boolean exit = false;
-        while (!exit) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
                 String command = ui.getCommand();
                 Command c = Parser.parse(command);
-                exit = c.isExit();
+                isExit = c.isExit();
                 c.execute(tasks, ui);
             } catch (IllegalStateException e) {
                 System.exit(1);

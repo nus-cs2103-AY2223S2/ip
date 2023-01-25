@@ -109,36 +109,37 @@ public class QueryCommandTest extends CommandTest {
         Command wrongFormat = new DateFilterCommand("2/2/23");
         Command emptyDate = new DateFilterCommand("/on 1/2/23");
 
-        String ui1 =
+        String expectedUIOne =
                 "      ____________________________________________________________\n" +
-                "Rick: An invalid date was entered. Please use this format:\n" +
-                "      {day}/{month}/{year} {hour}{minute}\n" +
-                "      Example: 2/2/23 1200\n" +
-                "      ____________________________________________________________\n\n";
-        String ui2 =
+                        "Rick: An invalid date was entered. Please use this format:\n" +
+                        "      {day}/{month}/{year} {hour}{minute}\n" +
+                        "      Example: 2/2/23 1200\n" +
+                        "      ____________________________________________________________\n\n";
+        String expectedUITwo =
                 "      ____________________________________________________________\n" +
-                "Rick: Usage: tasks /on {day}/{month}/{year}\n" +
-                "      ____________________________________________________________\n\n";
-        String ui3 =
+                        "Rick: Usage: tasks /on {day}/{month}/{year}\n" +
+                        "      ____________________________________________________________\n\n";
+        String expectedUIThree =
                 "      ____________________________________________________________\n" +
-                "Rick: Searching for a list of tasks occurring on 1 Feb 2023:\n" +
-                "      Hooray. No tasks occur on this date.\n" +
-                "      ____________________________________________________________\n\n";
+                        "Rick: Searching for a list of tasks occurring on 1 Feb 2023:\n" +
+                        "      Hooray. No tasks occur on this date.\n" +
+                        "      ____________________________________________________________\n\n";
 
         invalidDateFilter.execute(ts, ui);
-        String ac1 = outContent.toString();
+        String actualUIOne = outContent.toString();
         outContent.reset();
-        assertEquals(ui1, ac1);
+        assertEquals(expectedUIOne, actualUIOne);
 
         wrongFormat.execute(ts, ui);
-        String ac2 = outContent.toString();
+        String actualUITwo = outContent.toString();
         outContent.reset();
-        assertEquals(ui2, ac2);
+        assertEquals(expectedUITwo, actualUITwo);
 
         emptyDate.execute(ts, ui);
-        String ac3 = outContent.toString();
+        String actualUIThree = outContent.toString();
         outContent.reset();
-        assertEquals(ui3, ac3);
+
+        assertEquals(expectedUIThree, actualUIThree);
     }
 
     @Test

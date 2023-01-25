@@ -64,35 +64,35 @@ public class TaskCommandTest extends CommandTest{
         Command deadlineEmpty = new DeadlineCommand();
 
         deadlineInvalidUsage.execute(ts, ui);
-        String ui1 =
+        String expectedUIOne =
                 "      ____________________________________________________________\n" +
                         "Rick: Usage: deadline {task} /by {deadline}\n" +
                         "      ____________________________________________________________\n\n";
         assertEquals(
-                ui1,
+                expectedUIOne,
                 outContent.toString()
         );
         outContent.reset();
 
         deadlineInvalidDate.execute(ts, ui);
-        String ui2 =
+        String expectedUITwo =
                 "      ____________________________________________________________\n" +
                         "Rick: An invalid date was entered. Please use this format:\n" +
                         "      {day}/{month}/{year} {hour}{minute}\n" +
                         "      Example: 2/2/23 1200\n" +
                         "      ____________________________________________________________\n\n";
         assertEquals(
-                ui2,
+                expectedUITwo,
                 outContent.toString()
         );
         outContent.reset();
 
         deadlineEmpty.execute(ts, ui);
-        String ui3 =
+        String expectedUIThree =
                 "      ____________________________________________________________\n" +
                         "Rick: The description of a Deadline cannot be empty.\n" +
                         "      ____________________________________________________________\n\n";
-        assertEquals(ui3, outContent.toString());
+        assertEquals(expectedUIThree, outContent.toString());
         outContent.reset();
     }
 
@@ -130,18 +130,18 @@ public class TaskCommandTest extends CommandTest{
 
         Command eventEmpty = new EventCommand();
 
-        String ui1 =
+        String expectedUIOne =
                 "      ____________________________________________________________\n" +
                         "Rick: Usage: event {task} /from {start} /to {end}\n" +
                         "      ____________________________________________________________\n\n";
         eventWrongFormat.execute(ts, ui);
         assertEquals(
-                ui1,
+                expectedUIOne,
                 outContent.toString()
         );
         outContent.reset();
 
-        String ui2 =
+        String expectedUITwo =
                 "      ____________________________________________________________\n" +
                         "Rick: An invalid date was entered. Please use this format:\n" +
                         "      {day}/{month}/{year} {hour}{minute}\n" +
@@ -149,19 +149,19 @@ public class TaskCommandTest extends CommandTest{
                         "      ____________________________________________________________\n\n";
         eventImproperDate.execute(ts, ui);
         assertEquals(
-                ui2,
+                expectedUITwo,
                 outContent.toString()
         );
         outContent.reset();
 
-        String ui3 =
+        String expectedUIThree =
                 "      ____________________________________________________________\n" +
                         "Rick: The description of a Event cannot be empty.\n" +
                         "      ____________________________________________________________\n\n";
 
         eventEmpty.execute(ts, ui);
         assertEquals(
-                ui3,
+                expectedUIThree,
                 outContent.toString()
         );
         outContent.reset();
