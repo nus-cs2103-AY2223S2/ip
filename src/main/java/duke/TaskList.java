@@ -10,14 +10,25 @@ import tasks.ToDo;
 
 import java.util.ArrayList;
 
+/**
+ * Wraps the task list and provides methods to interact with it.
+ */
 public class TaskList {
-    // taskList is 1 indexed
     private final ArrayList<Task> taskList;
 
+    /**
+     * Constructs a new task list wrapper.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Constructs a new task list wrapper using parsed input from a data file.
+     *
+     * @param dataFileTasks Lines of parsed input commands from the data file.
+     * @throws DukeException if the command given is invalid or is not a command known by the chatbot.
+     */
     public TaskList(ArrayList<String[]> dataFileTasks) throws DukeException {
         this.taskList = new ArrayList<>();
         Task toAdd;
@@ -27,10 +38,11 @@ public class TaskList {
                 toAdd = new ToDo(fileCommand[2]);
                 break;
             case "D":
-                toAdd = new Deadline(fileCommand[2], fileCommand[3], true);
+                toAdd = new Deadline(fileCommand[2], Parser.parseDate(fileCommand[3], true));
                 break;
             case "E":
-                toAdd = new Event(fileCommand[2], fileCommand[3], fileCommand[4], true);
+                toAdd = new Event(fileCommand[2], Parser.parseDate(fileCommand[3], true),
+                        Parser.parseDate(fileCommand[4], true));
                 break;
             default:
                 throw new InvalidDataFileException();
@@ -43,48 +55,100 @@ public class TaskList {
         }
     }
 
+    /**
+     * Gets the length of the task list.
+     *
+     * @return Length of the task list.
+     */
+    public int size() {
+        return this.taskList.size();
+    }
+
+    /**
+     * Checks if the task list is empty.
+     *
+     * @return Whether the task list is empty or not.
+     */
+    public boolean isEmpty() {
+        return this.taskList.size() == 0;
+    }
+
+    private boolean indexOutOfRange(int index) {
+        return index - 1 >= this.size() || index < 0;
+    }
+
+    /**
+     * Gets a task by its index.
+     *
+     * @param taskNumber Index of the task.
+     * @return The requested task.
+     * @throws TaskNotFoundException if task index is out of range.
+     */
     public Task getTask(int taskNumber) throws TaskNotFoundException {
-        if (taskNumber - 1 >= getLength()) {
+        if (this.indexOutOfRange(taskNumber)) {
             throw new TaskNotFoundException();
         }
-        return taskList.get(taskNumber - 1);
+        return this.taskList.get(taskNumber - 1);
     }
 
-    public int getLength() {
-        return taskList.size();
-    }
-
+    /**
+     * Adds a task to the task list.
+     *
+     * @param task Task to be added.
+     */
     public void addTask(Task task) {
         this.taskList.add(task);
     }
 
+    /**
+     * Deletes a task from the task list.
+     *
+     * @param taskNumber Index of the task to be deleted.
+     * @throws TaskNotFoundException if task index is out of range.
+     */
     public void deleteTask(int taskNumber) throws TaskNotFoundException {
-        if (taskNumber - 1 >= getLength()) {
+        if (this.indexOutOfRange(taskNumber)) {
             throw new TaskNotFoundException();
         }
         this.taskList.remove(taskNumber - 1);
     }
 
+    /**
+     * Marks a task as complete or uncomplete.
+     *
+     * @param taskNumber Index of the task.
+     * @param done       Whether to mark the task as complete or uncomplete.
+     * @throws TaskNotFoundException if task index is out of range.
+     */
     public void setDone(int taskNumber, boolean done) throws TaskNotFoundException {
-        if (taskNumber - 1 >= getLength() || taskNumber < 0) {
+        if (this.indexOutOfRange(taskNumber)) {
             throw new TaskNotFoundException();
         }
-        taskList.get(taskNumber - 1).setDone(done);
+        this.taskList.get(taskNumber - 1).setDone(done);
     }
 
+    /**
+     * Describes the length of the task list in a human readable format.
+     *
+     * @return Description of the task list in a human readable format.
+     */
     public String describeLength() {
-        return "Now you have " + this.getLength() + " tasks in the list.";
+        return "Now you have " + this.size() + " tasks in the list.";
     }
 
-    // For storing task list in memory
+    /**
+     * Represents the task list in a string suitable for storing in memory.
+     *
+     * @return Representation of the task list to be stored in memory.
+     */
     public String toEncodedString() {
-        if (getLength() == 0) {
+        if (size() == 0) {
             return "";
         }
         StringBuilder result = new StringBuilder();
         String encodedTask;
-        for (int i = 0; i < getLength(); i++) {
-            encodedTask = taskList.get(i).toEncodedString();
+        for (int i = 0; i < size(); i++) {
+            encodedTask = this.taskList.get(i).toEncodedString();
             result.append(i + 1).append(".").append(encodedTask).append("\n");
         }
         if (result.length() > 0) {
@@ -93,17 +157,13 @@ public class TaskList {
         return result.toString();
     }
 
-    public boolean isEmpty() {
-        return taskList.size() == 0;
-    }
-
     @Override
     public String toString() {
-        if (getLength() == 0) {
+        if (size() == 0) {
             return "No tasks found.";
         }
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < getLength(); i++) {
+        for (int i = 0; i < size(); i++) {
             result.append(i + 1).append(".").append(taskList.get(i)).append("\n");
         }
         if (result.length() > 0) {

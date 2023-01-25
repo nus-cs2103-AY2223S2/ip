@@ -6,11 +6,19 @@ import tasks.Event;
 import tasks.Task;
 import tasks.ToDo;
 
+/**
+ * The main class, includes logic to run the chatbot.
+ */
 public class Duke {
     private final Ui ui;
     private final Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructs a new chatbot.
+     *
+     * @param dataFilePath Path to store the task list text file.
+     */
     public Duke(String dataFilePath) {
         ui = new Ui();
         storage = new Storage(dataFilePath);
@@ -26,6 +34,9 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Runs the main input loop for the chatbot.
+     */
     public void run() {
         ui.showGreeting();
 
@@ -72,12 +83,13 @@ public class Duke {
                     ui.showAddTaskMessage(task, tasks);
                     break;
                 case "deadline":
-                    task = new Deadline(parsedCommand[1], parsedCommand[2], false);
+                    task = new Deadline(parsedCommand[1], Parser.parseDate(parsedCommand[2], false));
                     tasks.addTask(task);
                     ui.showAddTaskMessage(task, tasks);
                     break;
                 case "event":
-                    task = new Event(parsedCommand[1], parsedCommand[2], parsedCommand[3], false);
+                    task = new Event(parsedCommand[1], Parser.parseDate(parsedCommand[2], false),
+                            Parser.parseDate(parsedCommand[3], false));
                     tasks.addTask(task);
                     ui.showAddTaskMessage(task, tasks);
                     break;
@@ -88,7 +100,6 @@ public class Duke {
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } catch (Exception e) {
-                // For unexpected exceptions, show the full message
                 ui.showError(e.toString());
             }
         }
