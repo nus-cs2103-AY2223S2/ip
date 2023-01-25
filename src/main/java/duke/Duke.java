@@ -14,6 +14,7 @@ public class Duke {
     static protected final String DATA_DIR = "data/";
     static protected final String DATA_FILENAME = "duke.txt";
     static protected final String WELCOME_MESSAGE = "Hello! I'm Duke\n\tWhat can I do for you?";
+    static protected final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     /**
      * Returns a Duke object.
@@ -48,7 +49,7 @@ public class Duke {
             inputStr = inputScanner.nextLine().trim();
         }
         inputScanner.close();
-        ui.showNormalMessage("Bye. Hope to see you again soon!");
+        ui.showNormalMessage(EXIT_MESSAGE);
     }
     public static void main(String[] args) {
         new Duke(DATA_DIR + DATA_FILENAME).run();
