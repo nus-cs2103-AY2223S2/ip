@@ -60,8 +60,8 @@ public class Parser {
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Please input a valid integer");
                 }
-
                 writeToFile = true;
+
                 break;
             case "unmark":
                 if (checkDescription(splitInput)) {
@@ -82,8 +82,8 @@ public class Parser {
                     throw new DukeException("Please input a valid integer");
                 }
                 writeToFile = true;
-                break;
 
+                break;
             case "event":
                 if (checkDescription(splitInput)) {
                     throw new DukeException("OOPS!!! The description of a event cannot be empty.");
@@ -106,8 +106,8 @@ public class Parser {
                 System.out.println("  " + newEvent.toString());
                 System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
                 writeToFile = true;
-                break;
 
+                break;
             case "deadline":
                 if (checkDescription(splitInput)) {
                     throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
@@ -127,8 +127,8 @@ public class Parser {
                 System.out.println("  " + newDeadline.toString());
                 System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
                 writeToFile = true;
+                
                 break;
-
             case "todo":
                 if (checkDescription(splitInput)) {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -147,8 +147,8 @@ public class Parser {
                 System.out.println("  " + newTodo.toString());
                 System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
                 writeToFile = true;
+                
                 break;
-
             case "delete":
                 if (checkDescription(splitInput)) {
                     throw new DukeException("OOPS!!! The description of a event cannot be empty.");
@@ -169,8 +169,8 @@ public class Parser {
                     throw new DukeException("Please input a valid integer");
                 }
                 writeToFile = true;
+                
                 break;
-
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
