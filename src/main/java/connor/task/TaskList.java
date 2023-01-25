@@ -46,6 +46,22 @@ public class TaskList {
         ui.markUndoneMessage(this.tasks.get(number - 1).toString());
     }
 
+    public String find(String input) {
+        StringBuilder str = new StringBuilder();
+        str.append(Ui.LINE).append("        HERE ARE THE MATCHING RESULTS:\n");
+        int counter = 1;
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (this.tasks.get(i).getTaskName().contains(input)) {
+                str.append("        ")
+                        .append(counter++)
+                        .append(".")
+                        .append(this.tasks.get(i).toString())
+                        .append("\n");
+            }
+        }
+        return str.toString();
+    }
+
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append(Ui.LINE).append("\n");

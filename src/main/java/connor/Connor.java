@@ -26,7 +26,8 @@ public class Connor {
         DEADLINE,
         EVENT,
         DELETE,
-        DELETEALL
+        DELETEALL,
+        FIND
     }
 
     private Storage storage;
