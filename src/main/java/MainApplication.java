@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * MainApplication is the main application of the Duke program. It serves as a
@@ -11,6 +15,23 @@ public class MainApplication {
         this.taskApplication = new TaskApplication();
     }
 
+    /**
+     * https://www.tutorialspoint.com/javaregex/javaregex_capturing_groups.htm
+     * @param regex
+     * @param command
+     * @return
+     */
+    private static String[] parseByRegex(String regex, String command) {
+        List<String> result = new ArrayList<>();
+        Pattern r = Pattern.compile(regex);
+        Matcher m = r.matcher(command);
+        if (m.find()) {
+            for (int i = 1; i <= m.groupCount(); i++) {
+                result.add(m.group(i));
+            }
+        }
+        return result.stream().toArray(String[] ::new);
+    }
     private void listTasksCommand() {
         System.out.println("\tHere are the tasks in your list:");
         this.taskApplication.printAllTasks();
@@ -64,9 +85,11 @@ public class MainApplication {
 
     private void deadlineCommand(String command) throws DukeException {
         Task t;
-        String[] tokens = tokens = command.split("/");
-        t = new Deadline(tokens[0].split(" ", 2)[1],
-                tokens[1].split(" ", 2)[1]);
+        // String[] tokens = command.split("/");
+        String[] tokens = parseByRegex("deadline\\s+([^/]+)\\s+/by\\s+([^/]+)\\s*", command);
+
+        // t = new Deadline(tokens[0].split(" ", 2)[1], tokens[1].split(" ", 2)[1]);
+        t = new Deadline(tokens[0], tokens[1]);
         this.taskApplication.addTask(t);
         System.out.printf("\tGot it. I've added this task:\n" +
                 "\t%s\n\tNow you have %d tasks in the list.\n", t, this.taskApplication.getNoOfTasks());
@@ -74,10 +97,13 @@ public class MainApplication {
 
     private void eventCommand(String command) throws DukeException {
         Task t;
-        String[] tokens = command.split("/");
-        t = new Event(tokens[0].split(" ", 2)[1],
-                tokens[1].split(" ", 2)[1],
-                tokens[2].split(" ", 2)[1]);
+//        String[] tokens = command.split("/");
+//        t = new Event(tokens[0].split(" ", 2)[1],
+//                tokens[1].split(" ", 2)[1],
+//                tokens[2].split(" ", 2)[1]);
+        String[] tokens = parseByRegex("event\\s+([^/]+?)\\s+/from\\s+([^/]+?)\\s+" +
+                "/to\\s([^/]+)\\s*", command);
+        t = new Event(tokens[0], tokens[1], tokens[2]);
         this.taskApplication.addTask(t);
         System.out.printf("\tGot it. I've added this task:\n" +
                 "\t%s\n\tNow you have %d tasks in the list.\n", t, this.taskApplication.getNoOfTasks());

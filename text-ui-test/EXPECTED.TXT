@@ -16,29 +16,29 @@ Hello from
 	---
 	---
 	Got it. I've added this task:
-	[ ][D] return book  (by: Sunday)
+	[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
 	Now you have 2 tasks in the list.
 	---
 	---
 	Here are the tasks in your list:
 	1.[ ][T] borrow book
-	2.[ ][D] return book  (by: Sunday)
+	2.[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
 	---
 	---
 	Here are the tasks in your list:
 	1.[ ][T] borrow book
-	2.[ ][D] return book  (by: Sunday)
+	2.[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
 	---
 	---
 	Got it. I've added this task:
-	[ ][E] project meeting  (from: Mon 2pm  to 4pm)
+	[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
 	Now you have 3 tasks in the list.
 	---
 	---
 	Here are the tasks in your list:
 	1.[ ][T] borrow book
-	2.[ ][D] return book  (by: Sunday)
-	3.[ ][E] project meeting  (from: Mon 2pm  to 4pm)
+	2.[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
+	3.[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
 	---
 	---
 	Nice! I've marked this task as done:
@@ -47,18 +47,18 @@ Hello from
 	---
 	Here are the tasks in your list:
 	1.[X][T] borrow book
-	2.[ ][D] return book  (by: Sunday)
-	3.[ ][E] project meeting  (from: Mon 2pm  to 4pm)
+	2.[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
+	3.[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
 	---
 	---
 	Nice! I've marked this task as done:
-	[X][D] return book  (by: Sunday)
+	[X][D] return book (by: 04 Aug 2015, 10.11 AM)
 	---
 	---
 	Here are the tasks in your list:
 	1.[X][T] borrow book
-	2.[X][D] return book  (by: Sunday)
-	3.[ ][E] project meeting  (from: Mon 2pm  to 4pm)
+	2.[X][D] return book (by: 04 Aug 2015, 10.11 AM)
+	3.[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
 	---
 	---
 	OK, I've marked this task as not done yet:
@@ -67,16 +67,16 @@ Hello from
 	---
 	Here are the tasks in your list:
 	1.[ ][T] borrow book
-	2.[X][D] return book  (by: Sunday)
-	3.[ ][E] project meeting  (from: Mon 2pm  to 4pm)
+	2.[X][D] return book (by: 04 Aug 2015, 10.11 AM)
+	3.[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
 	---
 	---
 	OK, I've marked this task as not done yet:
-	[ ][D] return book  (by: Sunday)
+	[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
 	---
 	---
 	Here are the tasks in your list:
 	1.[ ][T] borrow book
-	2.[ ][D] return book  (by: Sunday)
-	3.[ ][E] project meeting  (from: Mon 2pm  to 4pm)
+	2.[ ][D] return book (by: 04 Aug 2015, 10.11 AM)
+	3.[ ][E] project meeting (from: 04 Aug 2015, 10.11 AM to 04 Aug 2015, 10.11 AM)
 	---

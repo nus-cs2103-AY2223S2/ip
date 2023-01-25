@@ -1,13 +1,18 @@
+import java.time.LocalDateTime;
+
+/**
+ * Represents a Deadline object. A Deadline object is a task with a deadline.
+ */
 public class Deadline extends Task {
-    String deadline;
+    LocalDateTime deadline;
     public Deadline(String title, String deadline) {
         super(title);
-        this.deadline = deadline;
+        this.deadline = super.parseDateString(deadline);
     }
 
     @Override
     public String toString() {
         return String.format("[%s][D] %s (by: %s)", super.getIsDone() ? "X" : " ",
-                super.getTitle(), this.deadline);
+                super.getTitle(), super.dateTimeToString(this.deadline));
     }
 }
