@@ -20,7 +20,9 @@ public class Event extends Task {
 
     @Override
     public String toSaveString() {
-        return "E$$$" + super.toSaveString() + "$$$" + from + "$$$" + to;
+        return "E$$$" + super.toSaveString() + "$$$"
+                + from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "$$$"
+                + to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     @Override
