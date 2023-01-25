@@ -6,7 +6,6 @@ ____    ____  __    __   __    __
     |  |     |  `--'  | |  `--'  | 
     |__|      \______/   \______/  
 
-    No existing files found.
     What can I do for you?
     ----------------------------------------
     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
@@ -21,10 +20,14 @@ ____    ____  __    __   __    __
     ----------------------------------------
     ☹ OOPS!!! Missing /by keyword.
     ----------------------------------------
+    ☹ OOPS!!! Missing Task Name.
+    ----------------------------------------
     ☹ OOPS!!! Missing End Date.
     ----------------------------------------
+    ☹ OOPS!!! Invalid datetime. Syntax: YYYY-MM-DD
+    ----------------------------------------
     Got it. I've added this task:
-      [D][ ] study (by: tonight)
+      [D][ ] study (by: Dec 12 2020)
     Now you have 2 tasks in the list.
     ----------------------------------------
     ☹ OOPS!!! Missing Task Name.
@@ -37,14 +40,16 @@ ____    ____  __    __   __    __
     ----------------------------------------
     ☹ OOPS!!! Missing End Date.
     ----------------------------------------
+    ☹ OOPS!!! Invalid datetime. Syntax: YYYY-MM-DD
+    ----------------------------------------
     Got it. I've added this task:
-      [E][ ] buy food (from: today to: tomorrow)
+      [E][ ] buy food (from: Dec 12 2020 to: Dec 12 2020)
     Now you have 3 tasks in the list.
     ----------------------------------------
     Here are the tasks in your list: 
     1.[T][ ] read books
-    2.[D][ ] study (by: tonight)
-    3.[E][ ] buy food (from: today to: tomorrow)
+    2.[D][ ] study (by: Dec 12 2020)
+    3.[E][ ] buy food (from: Dec 12 2020 to: Dec 12 2020)
     ----------------------------------------
     ☹ OOPS!!! Invalid task number :(
     ----------------------------------------
@@ -55,8 +60,8 @@ ____    ____  __    __   __    __
     ----------------------------------------
     Here are the tasks in your list: 
     1.[T][X] read books
-    2.[D][ ] study (by: tonight)
-    3.[E][ ] buy food (from: today to: tomorrow)
+    2.[D][ ] study (by: Dec 12 2020)
+    3.[E][ ] buy food (from: Dec 12 2020 to: Dec 12 2020)
     ----------------------------------------
     ☹ OOPS!!! Invalid task number :(
     ----------------------------------------
@@ -67,8 +72,8 @@ ____    ____  __    __   __    __
     ----------------------------------------
     Here are the tasks in your list: 
     1.[T][ ] read books
-    2.[D][ ] study (by: tonight)
-    3.[E][ ] buy food (from: today to: tomorrow)
+    2.[D][ ] study (by: Dec 12 2020)
+    3.[E][ ] buy food (from: Dec 12 2020 to: Dec 12 2020)
     ----------------------------------------
     Incorrect command: delete <valid task index>
     ----------------------------------------
@@ -77,11 +82,11 @@ ____    ____  __    __   __    __
     ☹ OOPS!!! Invalid task number :(
     ----------------------------------------
     Noted. I've removed this task:
-      [D][ ] study (by: tonight)
+      [D][ ] study (by: Dec 12 2020)
     ----------------------------------------
     Here are the tasks in your list: 
     1.[T][ ] read books
-    2.[E][ ] buy food (from: today to: tomorrow)
+    2.[E][ ] buy food (from: Dec 12 2020 to: Dec 12 2020)
     ----------------------------------------
     Tasks saved successfully. 
     Bye. Hope to see you again soon!

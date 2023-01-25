@@ -8,7 +8,7 @@ public abstract class Command {
      * @ throws DukeException
      * 
      */
-    public abstract void execute() throws DukeException;
+    public abstract boolean execute() throws DukeException;
 
     /*
      * getTaskName checks the command line for the correct taskName syntax
@@ -28,8 +28,9 @@ public abstract class Command {
 
             int startIndex = command.indexOf(startWord) + startWord.length();
             int endIndex = command.indexOf(endWord);
-            if (startIndex < startWord.length() || endIndex < startIndex) throw new DukeException("☹ OOPS!!! Missing Task Name.");
+            if (startIndex < startWord.length()) throw new DukeException("☹ OOPS!!! Missing Task Name.");
             if (endIndex == -1 ) throw new DukeException("☹ OOPS!!! Missing" + endWord + " keyword.");
+            if (endIndex < startIndex) throw new DukeException("☹ OOPS!!! Missing Task Name.");
             return command.substring(startIndex, endIndex);
         }
     }
@@ -43,8 +44,9 @@ public abstract class Command {
         String endWord = " /to";
         int startIndex = command.indexOf(startWord) + startWord.length() + 1;
         int endIndex = command.indexOf(endWord);
-        if (startIndex > command.length() || endIndex < startIndex) throw new DukeException("☹ OOPS!!! Missing Start Date.");
+        if (startIndex > command.length()) throw new DukeException("☹ OOPS!!! Missing Start Date.");
         if (endIndex == -1) throw new DukeException("☹ OOPS!!! Missing" + endWord + " keyword.");
+        if (endIndex < startIndex) throw new DukeException("☹ OOPS!!! Missing Start Date.");
         return command.substring(startIndex, endIndex);
     }
 

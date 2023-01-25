@@ -3,13 +3,16 @@ package command;
 import exception.DukeException;
 import task.Task;
 import task.TaskList;
+import util.Ui;
 
 public class ListCommand extends Command {
     
     private TaskList taskList;
+    private Ui ui;
 
-    public ListCommand(TaskList taskList) {
+    public ListCommand(TaskList taskList, Ui ui) {
         this.taskList = taskList;
+        this.ui = ui;
     }
 
     /*
@@ -17,15 +20,9 @@ public class ListCommand extends Command {
      * and prints out the status of each individual tasks
      */
     @Override
-    public void execute() throws DukeException {
-        System.out.println("    Here are the tasks in your list: ");
+    public boolean execute() throws DukeException {
+        ui.printList(taskList);
 
-        for (int i = 0; i < taskList.size(); i++) {
-            Task toDo = taskList.get(i);
-
-            System.out.println("    " + (i+1) + "." + toDo);
-
-        }
+        return false;
     }
-    
 }

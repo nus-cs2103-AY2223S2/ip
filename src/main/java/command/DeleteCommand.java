@@ -2,16 +2,17 @@ package command;
 
 import exception.DukeException;
 import task.TaskList;
+import util.Ui;
 
 public class DeleteCommand extends Command {
-    
-    private TaskList taskList;
     private String command;
+    private TaskList taskList;
+    private Ui ui;
 
-    public DeleteCommand(String command, TaskList taskList) {
+    public DeleteCommand(String command, TaskList taskList, Ui ui) {
         this.command = command;
         this.taskList = taskList;
-        
+        this.ui = ui;
     }
 
     /*
@@ -19,20 +20,21 @@ public class DeleteCommand extends Command {
      * throws exception for wrong syntax and invalid task number
      */
     @Override
-    public void execute() throws DukeException {
+    public boolean execute() throws DukeException {
         
         String[] inputs = command.split(" ");
         if (inputs.length == 2) {
             int ind = Integer.parseInt(inputs[1]) - 1;
             if (ind >= taskList.size() || ind < 0) throw new DukeException("☹ OOPS!!! Invalid task number :(");
 
-            System.out.println("    Noted. I've removed this task:");
-            System.out.println("      " + taskList.get(ind));
+            ui.printDeletedTask(taskList.get(ind));
 
             taskList.remove(ind);
 
         } else {
             throw new DukeException("Incorrect command: delete <valid task index>");
         }
+
+        return false;
     }
 }

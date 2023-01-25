@@ -2,16 +2,17 @@ package command;
 
 import exception.DukeException;
 import task.TaskList;
+import util.Ui;
 
 public class MarkCommand extends Command {
-    
-    private TaskList taskList;
     private String command;
+    private TaskList taskList;
+    private Ui ui;
 
-    public MarkCommand(String command, TaskList taskList) {
+    public MarkCommand(String command, TaskList taskList, Ui ui) {
         this.command = command;
         this.taskList = taskList;
-        
+        this.ui = ui;
     }
      /*
      * Mark takes in a String comman and handles the command
@@ -20,7 +21,7 @@ public class MarkCommand extends Command {
      * @throws DukeException if input is incorrect
      */
     @Override
-    public void execute() throws DukeException {
+    public boolean execute() throws DukeException {
         String[] inputs = command.split(" ");
 
         if (inputs.length == 2) {
@@ -30,11 +31,11 @@ public class MarkCommand extends Command {
 
             taskList.get(ind).markCompleted();
 
-            System.out.println("    Nice! I've marked this task as done:");
-            System.out.println("      " + taskList.get(ind));
+            ui.printMarkedTask(taskList.get(ind));
 
         } else {
             throw new DukeException("Incorrect command: mark <valid task index>");
         }
+        return false;
     }
 }

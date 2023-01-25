@@ -3,16 +3,17 @@ package command;
 import exception.DukeException;
 import task.TaskList;
 import task.ToDo;
+import util.Ui;
 
 public class TodoCommand extends Command {
-    
-    private TaskList taskList;
     private String command;
+    private TaskList taskList;
+    private Ui ui;
 
-    public TodoCommand(String command, TaskList taskList) {
+    public TodoCommand(String command, TaskList taskList, Ui ui) {
         this.command = command;
         this.taskList = taskList;
-        
+        this.ui = ui;
     }
     
     /*
@@ -20,12 +21,12 @@ public class TodoCommand extends Command {
      * todo only requires taskName
      */
     @Override
-    public void execute() throws DukeException {
+    public boolean execute() throws DukeException {
         ToDo toDo = new ToDo(getTaskName("todo", command));
-        taskList.add(toDo);
 
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + toDo);
-        System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
+        taskList.add(toDo);
+        ui.printAddedTask(toDo, taskList);
+
+        return false;
     }
 }

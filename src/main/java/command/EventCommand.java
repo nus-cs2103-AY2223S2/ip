@@ -4,16 +4,17 @@ import java.time.format.DateTimeParseException;
 import exception.DukeException;
 import task.Event;
 import task.TaskList;
+import util.Ui;
 
 public class EventCommand extends Command {
-    
-    private TaskList taskList;
     private String command;
+    private TaskList taskList;
+    private Ui ui;
 
-    public EventCommand(String command, TaskList taskList) {
+    public EventCommand(String command, TaskList taskList, Ui ui) {
         this.command = command;
         this.taskList = taskList;
-        
+        this.ui = ui;
     }
     
     /*
@@ -21,7 +22,7 @@ public class EventCommand extends Command {
      * event requires taskName, StartDate and EndDate
      */
     @Override
-    public void execute() throws DukeException, DateTimeParseException {
+    public boolean execute() throws DukeException, DateTimeParseException {
         
         String taskName = getTaskName("event", command);
         String startDate = getStartDate(command);
@@ -30,8 +31,7 @@ public class EventCommand extends Command {
         Event event = new Event(taskName, startDate, endDate);
         taskList.add(event);
 
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + event);
-        System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
+        ui.printAddedTask(event, taskList);
+        return false;
     }
 }

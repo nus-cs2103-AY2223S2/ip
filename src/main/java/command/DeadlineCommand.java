@@ -4,16 +4,17 @@ import java.time.format.DateTimeParseException;
 import exception.DukeException;
 import task.Deadline;
 import task.TaskList;
+import util.Ui;
 
 public class DeadlineCommand extends Command {
-    
-    private TaskList taskList;
     private String command;
+    private TaskList taskList;
+    private Ui ui;
 
-    public DeadlineCommand(String command, TaskList taskList) {
+    public DeadlineCommand(String command, TaskList taskList, Ui ui) {
         this.command = command;
         this.taskList = taskList;
-        
+        this.ui = ui;
     }
     
     /*
@@ -21,15 +22,14 @@ public class DeadlineCommand extends Command {
      * deadline requires taskName and EndDate
      */
     @Override
-    public void execute() throws DukeException, DateTimeParseException {
+    public boolean execute() throws DukeException, DateTimeParseException {
         String taskName = getTaskName("deadline", command);
         String endDate = getEndDate("deadline", command);
 
         Deadline deadline = new Deadline(taskName, endDate);
         taskList.add(deadline);
 
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + deadline);
-        System.out.println("    Now you have " + taskList.size() + " tasks in the list.");
+        ui.printAddedTask(deadline, taskList);
+        return false;
     }
 }
