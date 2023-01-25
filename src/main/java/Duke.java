@@ -1,15 +1,8 @@
 import java.lang.ArrayIndexOutOfBoundsException;
 import java.lang.IndexOutOfBoundsException;
 import java.lang.NullPointerException;
-import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.Arrays;
-import java.time.LocalDate;
 
 public class Duke {
 
@@ -18,9 +11,14 @@ public class Duke {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
     }
 
-    private static Scanner sc = new Scanner(System.in);
-    private static String DUKETXT = "./data/duke.txt";
-    private static ArrayList<Task> list = new ArrayList<Task>(100);
+    private Scanner sc = new Scanner(System.in);
+    private Storage storage;
+    private TaskList taskList;
+
+    public Duke() {
+        this.storage = new Storage();
+        this.taskList = new TaskList();
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -31,18 +29,18 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
 
-        userInputs();
+        new Duke().userInputs();
 
     }
 
     // Allow users to add, mark and un-mark, delete, add tasks (to-do, deadline,
     // event) or show items in a list
-    public static void userInputs() {
+    public void userInputs() {
 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
-        loadFileData();
+        this.storage.loadFileData();
 
         try {
             while (true) {
@@ -70,20 +68,18 @@ public class Duke {
                     // Display a list of tasks that shows its completion and types
                     case LIST:
                         System.out.println("Take a look at ye DREAM goals for 2023");
-                        for (int i = 0; i < list.size(); i++) {
-                            System.out.println(i + 1 + "." + list.get(i));
-                        }
+                        this.storage.displayList();
                         break;
 
                     // Mark to complete the task, the second bracket will show a cross
                     case MARK:
-                        list.get(index).toBeMarked();
+                        this.storage.markListItem(index);
                         break;
 
                     // Un-mark to redo the completion of the task, the cross will be
                     // removed from the second bracket
                     case UNMARK:
-                        list.get(index).toBeUnmarked();
+                        this.storage.unmarkListItem(index);
                         break;
 
                     // Add task of type (To do)
@@ -92,8 +88,7 @@ public class Duke {
                         if (input.length() < 5) {
                             throw new TaskException("Please enter an to-do item");
                         }
-                        list.add(new Todo(input.substring(5, input.length())));
-                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+                        this.storage.addTodoItem(input);
                         break;
 
                     // Add task of type (Deadline)
@@ -102,7 +97,8 @@ public class Duke {
                             throw new TaskException("Enter an valid item followed by a deadline");
                         }
                         String[] deadline_part = input.substring(9, input.length()).split("/by ");
-                        list.add(new Deadline(deadline_part[0], deadline_part[1]));
+                        this.storage.addDeadlineItem(deadline_part[0], deadline_part[1]);
+                        // list.add(new Deadline(deadline_part[0], deadline_part[1]));
                         break;
 
                     // Add task of type (Event)
@@ -114,15 +110,13 @@ public class Duke {
                         }
                         String[] event_part = input.substring(6, input.length()).split("/from ");
                         String[] range = event_part[1].split("/to ");
-                        list.add(new Event(event_part[0], range[0], range[1]));
+                        this.storage.addEventItem(event_part[0], range[0], range[1]);
+                        // list.add(new Event(event_part[0], range[0], range[1]));
                         break;
 
                     // Delete task from the list according to its numbering on the list
                     case DELETE:
-                        Task temp = list.get(index);
-                        list.remove(index);
-                        System.out.println("The Duke has removed this task: " + temp);
-                        System.out.println("Now you have " + list.size() + " in the list.");
+                        this.storage.deleteListItem(index);
                         break;
 
                     // default will throw an exception in case switch-case is unable to find
@@ -131,7 +125,7 @@ public class Duke {
                         throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
                 }
 
-                writeToFile();
+                this.storage.writeToFile();
 
             }
         } catch (TaskException e) {
@@ -145,155 +139,7 @@ public class Duke {
         }
     }
 
-    /**
-     * Part of the code extracted from https:/
-     * /www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
-     */
-
-    public static void loadFileData() {
-        try {
-            File file = new File("./data");
-            if (file.exists()) {
-                File txtFile = new File(DUKETXT);
-                FileReader fileReader = new FileReader(txtFile);
-                readToFile(fileReader);
-            } else {
-                file.createNewFile();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void writeToFile() {
-        try {
-            FileWriter writer = new FileWriter(DUKETXT);
-            for (Task t : list) {
-                writer.write(t.toString());
-                writer.write("\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void readToFile(FileReader file) {
-        try {
-            BufferedReader reader = new BufferedReader(file);
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
-
-// Task class: parent class of Deadline, Event, To do
-class Task {
-    private final String name;
-    private boolean checkMark;
-
-    public Task(String name) {
-        this.name = name;
-        this.checkMark = false;
-    }
-
-    public void toBeMarked() {
-        this.checkMark = true;
-    }
-
-    public void toBeUnmarked() {
-        this.checkMark = false;
-    }
-
-    @Override
-    public String toString() {
-        return (checkMark ? "[X] " : "[] ") + name;
-    }
-}
-
-// To-do class returns result that is type [T]
-class Todo extends Task {
-    public Todo(String name) {
-        super(name);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-}
-
-// Deadline class returns result that is type [D] and a deadline
-class Deadline extends Task {
-    private final LocalDate date;
-    private final String time;
-    private final String[] period;
-
-    public Deadline(String name, String frame) {
-        super(name);
-        this.period = frame.split(" ");
-        if (period[0].contains("/")) {
-            this.date = LocalDate.parse(period[0].replaceAll("/", "-"));
-        } else {
-            this.date = LocalDate.parse(period[0]);
-        }
-        this.time = period[1];
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + "(by: " + date.getDayOfMonth() + " "
-                + date.getMonth() + " " + date.getYear() + ", " + time + " )";
-    }
-}
-
-// Event class returns result that is type [E] and a starting time and an ending
-// time
-class Event extends Task {
-
-    private final LocalDate startDate;
-    private final LocalDate endDate;
-    private final String startTime;
-    private final String endTime;
-    private final String[] startingPeriod;
-    private final String[] endingPeriod;
-
-    public Event(String name, String startingTime, String endTime) {
-        super(name);
-        startingPeriod = startingTime.split(" ");
-        endingPeriod = endTime.split(" ");
-        if (startingPeriod[0].contains("/")) {
-            this.startDate = LocalDate.parse(startingPeriod[0].replaceAll("/", "-"));
-        } else {
-            this.startDate = LocalDate.parse(startingPeriod[0]);
-        }
-
-        if (endingPeriod[0].contains("/")) {
-            this.endDate = LocalDate.parse(endingPeriod[0].replaceAll("/", "-"));
-        } else {
-            this.endDate = LocalDate.parse(endingPeriod[0]);
-        }
-
-        this.startTime = startingPeriod[1];
-        this.endTime = endingPeriod[1];
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + "(from: " + startDate.getDayOfMonth() + " " +
-                startDate.getMonth() + " " + startDate.getYear() + ", " + startTime + " to: " +
-                endDate.getDayOfMonth() + " " + endDate.getMonth() + " " + endDate.getYear() + ", "
-                + endTime + " )";
-    }
-}
-
 // Exception that return a custom message that handles errors in task
 // instructions
 class TaskException extends Exception {
