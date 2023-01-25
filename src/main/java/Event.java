@@ -28,11 +28,11 @@ public class Event extends Task{
             LocalDate end = LocalDate.parse(endString);
             Event e = new Event(details[0], start, end);
             lst.addTask(e);
-            Duke.printLine();
+            Ui.showLine();
             System.out.println("Got it! I've added: ");
             System.out.println(" " + e.toString());
             lst.printSize();
-            Duke.printLine();
+            Ui.showLine();
         } catch (DateTimeParseException e) {
             throw new DukeException("date format");
         }
@@ -40,8 +40,7 @@ public class Event extends Task{
 
     @Override
     public String toFile() {
-        int completed = this.completed ? 1 : 0;
-        return String.format("E | %d | %s | %s | %s\n", completed, this.taskName, this.start, this.end);
+        return String.format("E | %s | %s | %s\n", super.toFile(), this.start, this.end);
     }
 
     public static Event toEventFromFileStr(String taskNameData, String doneData,
@@ -61,9 +60,9 @@ public class Event extends Task{
             throw new DukeException("timing");
         }
         try {
-            LocalDate startDate = LocalDate.parse(startData);
-            LocalDate endDate = LocalDate.parse(endData);
-            event = new Event(taskNameData, startDate, endDate);
+            LocalDate start = LocalDate.parse(startData);
+            LocalDate end = LocalDate.parse(endData);
+            event = new Event(taskNameData, start, end);
             boolean completed = Integer.parseInt(doneData) == 1;
             event.setCompleted(completed);
         } catch (DateTimeParseException e) {
@@ -76,13 +75,13 @@ public class Event extends Task{
     public String toString() {
         String s;
         String start = this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String end = this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String endDate = this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         if (this.completed) {
             s = "[E]" + super.toString() +
-                    " (from: " + start + " to: " + end + ")";
+                    " (from: " + start + " to: " + endDate + ")";
         } else {
             s = "[E]"  + super.toString() +
-                    " (from: " + start + " to: " + end + ")";
+                    " (from: " + start + " to: " + endDate + ")";
         }
         return s;
     }

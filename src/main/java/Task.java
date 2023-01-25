@@ -25,7 +25,13 @@ public abstract class Task {
 
     public void setCompleted(boolean status) { this.completed = status; }
 
-    public abstract String toFile();
+    public String toFile() {
+        if (this.completed) {
+            return String.format("1 | %s", this.taskName);
+        } else {
+            return String.format("0 | %s", this.taskName);
+        }
+    }
 
     @Override
     public String toString() {

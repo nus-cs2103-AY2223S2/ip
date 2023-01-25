@@ -44,7 +44,6 @@ public class Storage {
     }
 
     public void loadFileInto(TaskList lst) throws DukeException {
-
         try {
             Scanner fileData = new Scanner(this.file);
             while(fileData.hasNextLine()) {
@@ -57,7 +56,8 @@ public class Storage {
         } catch (FileNotFoundException e) {
             this.createFile(this.filePath);
             this.loadFileInto(lst);
-            //throw new DukeException("file not found");
+        } catch (DukeException e) {
+            throw e;
         }
     }
 }

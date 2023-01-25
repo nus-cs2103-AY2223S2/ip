@@ -6,35 +6,34 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-    protected static String line = "____________________________________________________________";
     protected static TaskList lst = new TaskList();
     protected static boolean cont = true;
     protected static String path = "src/data/duke.txt";
     protected static Storage storage = new Storage(path);
+    protected static Ui ui = new Ui();
     public static void main(String[] args) {
         try {
             storage.loadFileInto(lst);
         } catch (DukeException e) {
-            System.out.println("error loading file");
+            ui.showError(e.toString());
         }
         Scanner input = new Scanner(System.in);
-        printLine();
-        System.out.println("Hello! I'm Kirby!\n" + "What can I do for you? :)");
-        printLine();
-        String in = input.nextLine();
+        // run()
+        // cont = true
+        ui.showWelcome();
+
         while(cont) {
+            String in = input.nextLine();
             String[] commands = in.trim().split(" ", 2);
             boolean single = commands.length < 2;
             try {
                 switch (commands[0]) {
                     case "bye":
-                        end();
+                        //ui.showExit();
                         cont = false;
                         break;
                     case "list":
-                        printLine();
-                        lst.printList();
-                        printLine();
+                        ui.showList(lst);
                         in = input.nextLine();
                         break;
                     case "mark":
@@ -89,27 +88,17 @@ public class Duke {
                 }
                 storage.saveToFile(lst);
             } catch (DukeException e) {
-                System.out.println(e);
+                ui.showError(e.toString());
                 in = input.nextLine();
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("OOPS!! This index is out of bounds!");
+                ui.showError("OOPS!! This index is out of bounds!");
                 in = input.nextLine();
             } catch (NumberFormatException e) {
-                System.out.println("Oh no! You have entered too many whitespaces!");
+                ui.showError("Oh no! You have entered too many whitespaces!");
                 in = input.nextLine();
             }
         }
+        ui.showExit();
         System.exit(0);
     }
-
-    public static void printLine(){
-        System.out.println(line);
-    }
-
-    public static void end() {
-        printLine();
-        System.out.println("Bye bye! Hope to see you again soon!! :>");
-        printLine();
-    }
-
 }

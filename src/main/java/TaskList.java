@@ -7,13 +7,16 @@ public class TaskList {
         this.lst = new LinkedList<>();
     }
 
-    public void mark(int taskNum) {
+    public void mark(int taskNum) throws DukeException{
+        if (taskNum < 0 || taskNum > lst.size() - 1) {
+            throw new DukeException("bounds");
+        }
         Task t = this.getTask(taskNum);
         t.markAsDone();
-        Duke.printLine();
+        Ui.showLine();
         System.out.println("Okay! I've marked this task as done:");
         System.out.println(t);
-        Duke.printLine();
+        Ui.showLine();
     }
 
     public void unmark(int taskNum) throws DukeException{
@@ -22,10 +25,10 @@ public class TaskList {
         }
         Task t = this.getTask(taskNum);
         t.markAsUndone();
-        Duke.printLine();
+        Ui.showLine();
         System.out.println("Okay! I've marked this task as not done yet:");
         System.out.println(t);
-        Duke.printLine();
+        Ui.showLine();
     }
 
     public void deleteTask(int taskNum) throws DukeException{
@@ -33,11 +36,11 @@ public class TaskList {
             throw new DukeException("bounds");
         }
         Task t = this.lst.remove(taskNum);
-        Duke.printLine();
+        Ui.showLine();
         System.out.println("Okay! I've removed this task from the list:");
         System.out.println(t);
         printSize();
-        Duke.printLine();
+        Ui.showLine();
 
     }
 
@@ -57,6 +60,9 @@ public class TaskList {
 
     public void addTaskFromString(String data) throws DukeException{
         Task task = null;
+        if (data.trim().isEmpty()) {
+            throw new DukeException("empty line in file");
+        }
         String[] details = data.split(" \\| ");
         // T/D/E || completed || descr || deadline/start || end
         String taskType = details[0];

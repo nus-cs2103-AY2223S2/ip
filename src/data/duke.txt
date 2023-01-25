@@ -1,5 +1,6 @@
 T | 1 | read book
-D | 0 | return book | June 6th
-E | 0 | project meeting | today 6pm | tmr 8pm
-T | 1 | join sports club
-T | 0 | make dinner
+D | 0 | test1 | 2023-01-25
+E | 0 | breakinus | 2023-01-25 | 2023-01-26
+E | 0 | briefing | 2023-02-03 | 2023-02-03
+D | 1 | test2 | 2023-01-25
+T | 0 | lalala

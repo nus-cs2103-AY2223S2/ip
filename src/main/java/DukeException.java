@@ -8,7 +8,7 @@ public class DukeException extends Exception{
             Arrays.asList("mark", "unmark", "delete"));
     protected ArrayList<String> fileError = new ArrayList<>(
             Arrays.asList("file already exists", "creating new file",
-                    "updating file", "saving changes to file", "file not found"));
+                    "updating file", "saving changes to file", "file not found", "empty line in file"));
     protected ArrayList<String> formatError = new ArrayList<>(
             Arrays.asList("date format"));
     protected String errorMsg;

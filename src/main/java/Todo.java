@@ -11,18 +11,17 @@ public class Todo extends Task{
         } else {
             Todo todo = new Todo(taskName);
             lst.addTask(todo);
-            Duke.printLine();
+            Ui.showLine();
             System.out.println("Got it! I've added: ");
-            System.out.println(" " + todo.toString());
+            System.out.println(" " + todo);
             lst.printSize();
-            Duke.printLine();
+            Ui.showLine();
         }
     }
 
     @Override
     public String toFile() {
-        int completed = this.completed ? 1 : 0;
-        return String.format("T | %d | %s\n", completed, this.taskName);
+        return String.format("T | %s\n", super.toFile());
     }
 
     public static Todo toTodoFromFileStr(String taskNameData, String doneData) throws DukeException{

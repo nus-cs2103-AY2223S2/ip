@@ -23,12 +23,12 @@ public class Deadline extends Task{
             String deadlineString = details[1].split(" ", 2)[1];
             LocalDate deadline = LocalDate.parse(deadlineString);
             Deadline d = new Deadline(details[0], deadline);
-            lst.addTask(d);
-            Duke.printLine();
-            System.out.println("Got it! I've added: ");
-            System.out.println(" " + d.toString());
-            lst.printSize();
-            Duke.printLine();
+//            lst.addTask(d);
+//            Ui.showLine();
+//            System.out.println("Got it! I've added: ");
+//            System.out.println(" " + d.toString());
+//            lst.printSize();
+//            Ui.showLine();
         } catch (DateTimeParseException e) {
             throw new DukeException("date format");
         }
@@ -36,9 +36,7 @@ public class Deadline extends Task{
 
     @Override
     public String toFile() {
-        int completed = this.completed ? 1 : 0;
-        String deadline = this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return String.format("D | %d | %s | %s\n", completed, this.taskName, deadline);
+        return String.format("D | %s | %s\n", super.toFile(), deadline);
     }
 
     public static Deadline toDeadlineFromFileStr(String taskNameData, String doneData, String deadlineData)
@@ -72,7 +70,7 @@ public class Deadline extends Task{
         String s;
         String deadline = this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         if (this.completed) {
-            s = "[D]" + super.toString() + "(by: " + deadline + ")";
+            s = "[D]" + super.toString() + " (by: " + deadline + ")";
         } else {
             s = "[D]" + super.toString()  + " (by: " + deadline + ")";
         }
