@@ -10,6 +10,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
+    /**
+     * Represents a constructor for the Deadline class.
+     *
+     * @param taskDescription Description of the Deadline task.
+     * @param deadline Deadline of the Deadline task.
+     */
     public Deadline(String taskDescription, LocalDateTime deadline) {
         super(taskDescription);
         this.deadline = deadline;
@@ -28,8 +34,8 @@ public class Deadline extends Task {
      */
     @Override
     public String getFileWriteString() {
-        return "D" + super.getFileWriteString() + " | " +
-                this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return "D" + super.getFileWriteString() + " | "
+                + this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     @Override

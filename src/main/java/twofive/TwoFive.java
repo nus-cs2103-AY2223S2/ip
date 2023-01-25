@@ -1,14 +1,14 @@
 package twofive;
 
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import twofive.command.Command;
 import twofive.data.TaskList;
 import twofive.exception.TwoFiveException;
 import twofive.storage.Storage;
 import twofive.ui.Ui;
 import twofive.utils.Parser;
-
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a chatbot that allows users to manage daily tasks.
@@ -18,6 +18,11 @@ public class TwoFive {
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * Represents a constructor for the TwoFive class.
+     *
+     * @param filePath String containing file path.
+     */
     public TwoFive(String filePath) {
         ui = new Ui();
         try {
@@ -32,13 +37,16 @@ public class TwoFive {
     }
 
     /**
-     * Starts the chatbot by showing a welcome message, then accepting commands
-     * from the user.
+     * Starts the chatbot by providing the path to the local task file.
      */
     public static void main(String[] args) {
         new TwoFive("data/twofive.txt").run();
     }
 
+    /**
+     * Runs the chatbot by showing a welcome message, then accepting commands
+     * from the user.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

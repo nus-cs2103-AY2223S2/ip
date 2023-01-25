@@ -35,8 +35,7 @@ public class Ui {
     /**
      * Reads a command entered by the user.
      *
-     * @return String containing the full command
-     * entered by the user in the same line.
+     * @return String containing the full command entered by the user in the same line.
      */
     public String readCommand() {
         return scanner.nextLine();

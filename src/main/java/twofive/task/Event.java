@@ -11,6 +11,13 @@ public class Event extends Task {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
+    /**
+     * Represents a constructor for the Event class.
+     *
+     * @param taskDescription Description of the Event task.
+     * @param startTime Start time of the Event task.
+     * @param endTime End time of the Event task.
+     */
     public Event(String taskDescription, LocalDateTime startTime, LocalDateTime endTime) {
         super(taskDescription);
         this.startTime = startTime;

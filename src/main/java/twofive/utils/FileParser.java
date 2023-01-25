@@ -1,17 +1,5 @@
 package twofive.utils;
 
-import twofive.exception.EmptyDescriptionException;
-import twofive.exception.EmptyStartTimeException;
-import twofive.exception.InvalidTaskTypeException;
-import twofive.exception.TaskDoneException;
-import twofive.exception.EmptyEndTimeException;
-import twofive.exception.EmptyDeadlineException;
-
-import twofive.task.Deadline;
-import twofive.task.Event;
-import twofive.task.Task;
-import twofive.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
@@ -19,6 +7,17 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import twofive.exception.EmptyDeadlineException;
+import twofive.exception.EmptyDescriptionException;
+import twofive.exception.EmptyEndTimeException;
+import twofive.exception.EmptyStartTimeException;
+import twofive.exception.InvalidTaskTypeException;
+import twofive.exception.TaskDoneException;
+import twofive.task.Deadline;
+import twofive.task.Event;
+import twofive.task.Task;
+import twofive.task.ToDo;
 
 /**
  * Parses the contents of a given file into a list of tasks.
@@ -107,6 +106,8 @@ public class FileParser {
                         }
                     }
                     break;
+                default:
+                    throw new InvalidTaskTypeException();
                 }
                 if (isTaskDone) {
                     currentTask.setDone();

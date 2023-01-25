@@ -1,13 +1,12 @@
 package twofive.data;
 
-import twofive.exception.InvalidTaskException;
-import twofive.exception.TaskDoneException;
-import twofive.exception.TaskUndoneException;
-import twofive.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import twofive.exception.TaskDoneException;
+import twofive.exception.TaskUndoneException;
+import twofive.task.Task;
 
 /**
  * Represents a list of tasks currently added.
@@ -152,9 +151,10 @@ public class TaskList {
      * @return String containing all added tasks with the keyword in their description
      */
     public String getKeywordString(String keyword) {
-        StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list with keyword [" + keyword +
-                "] in " +
-                "their description:\n");
+        StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list with keyword ["
+                + keyword
+                + "] in "
+                + "their description:\n");
         int taskIndex = 1;
         int numTasksWithKeyword = 0;
         for (Task task : tasks) {

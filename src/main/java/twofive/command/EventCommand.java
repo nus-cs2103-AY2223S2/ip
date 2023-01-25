@@ -1,13 +1,13 @@
 package twofive.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import twofive.data.TaskList;
 import twofive.storage.Storage;
 import twofive.task.Event;
 import twofive.ui.Ui;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Adds a new Event task given a description, a start time and an end time
@@ -19,6 +19,13 @@ public class EventCommand extends Command {
     private String startTimeString;
     private String endTimeString;
 
+    /**
+     * Represents a constructor for the EventCommand class.
+     *
+     * @param taskDescription Description of the Event task.
+     * @param startTimeString Start time of the Event task.
+     * @param endTimeString End time of the Event task.
+     */
     public EventCommand(String taskDescription, String startTimeString, String endTimeString) {
         this.taskDescription = taskDescription;
         this.startTimeString = startTimeString;

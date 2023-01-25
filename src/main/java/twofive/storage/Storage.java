@@ -1,22 +1,21 @@
 package twofive.storage;
 
-import twofive.data.TaskList;
-import twofive.task.Task;
-import twofive.utils.FileParser;
-
-import twofive.exception.EmptyDescriptionException;
-import twofive.exception.EmptyStartTimeException;
-import twofive.exception.InvalidTaskTypeException;
-import twofive.exception.TaskDoneException;
-import twofive.exception.EmptyEndTimeException;
-import twofive.exception.EmptyDeadlineException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import twofive.data.TaskList;
+import twofive.exception.EmptyDeadlineException;
+import twofive.exception.EmptyDescriptionException;
+import twofive.exception.EmptyEndTimeException;
+import twofive.exception.EmptyStartTimeException;
+import twofive.exception.InvalidTaskTypeException;
+import twofive.exception.TaskDoneException;
+import twofive.task.Task;
+import twofive.utils.FileParser;
 
 /**
  * Represents a storage responsible for loading and saving tasks saved
@@ -25,6 +24,12 @@ import java.util.ArrayList;
 public class Storage {
     private File taskFile;
 
+    /**
+     * Represents a constructor for the Storage class.
+     *
+     * @param filePath String containing file path.
+     * @throws IOException If an I/O error has occurred.
+     */
     public Storage(String filePath) throws IOException {
         this.taskFile = new File(filePath);
         this.taskFile.getParentFile().mkdirs(); // Create parent directories if absent

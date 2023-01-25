@@ -1,9 +1,9 @@
 package twofive.task;
 
+import java.time.LocalDate;
+
 import twofive.exception.TaskDoneException;
 import twofive.exception.TaskUndoneException;
-
-import java.time.LocalDate;
 
 /**
  * Represents a tasks which can either be a ToDo, a Deadline or an Event.
@@ -12,6 +12,11 @@ public abstract class Task {
     private String taskDescription;
     private boolean isDone;
 
+    /**
+     * Represents a constructor for the Task class.
+     *
+     * @param taskDescription Description of the task.
+     */
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
         this.isDone = false;

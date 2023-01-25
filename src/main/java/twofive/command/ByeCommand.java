@@ -1,10 +1,10 @@
 package twofive.command;
 
+import java.io.IOException;
+
 import twofive.data.TaskList;
 import twofive.storage.Storage;
 import twofive.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Results in the program saving current tasks and exiting when this command

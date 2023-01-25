@@ -1,7 +1,7 @@
 package twofive.utils;
 
-import twofive.command.Command;
 import twofive.command.ByeCommand;
+import twofive.command.Command;
 import twofive.command.DeadlineCommand;
 import twofive.command.DeleteCommand;
 import twofive.command.DueDateCommand;
@@ -11,16 +11,15 @@ import twofive.command.ListCommand;
 import twofive.command.MarkCommand;
 import twofive.command.ToDoCommand;
 import twofive.command.UnmarkCommand;
-
+import twofive.exception.EmptyDateException;
+import twofive.exception.EmptyDeadlineException;
 import twofive.exception.EmptyDescriptionException;
+import twofive.exception.EmptyEndTimeException;
 import twofive.exception.EmptyKeywordException;
 import twofive.exception.EmptyStartTimeException;
 import twofive.exception.EmptyTasknumException;
-import twofive.exception.MissingArgumentException;
-import twofive.exception.EmptyEndTimeException;
-import twofive.exception.EmptyDeadlineException;
-import twofive.exception.EmptyDateException;
 import twofive.exception.InvalidCommandException;
+import twofive.exception.MissingArgumentException;
 
 /**
  * Parses the contents of a given command to obtain the action

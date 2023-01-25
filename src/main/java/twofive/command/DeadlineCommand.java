@@ -1,13 +1,13 @@
 package twofive.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import twofive.data.TaskList;
 import twofive.storage.Storage;
 import twofive.task.Deadline;
 import twofive.ui.Ui;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Adds a new Deadline task given a description and a deadline
@@ -18,6 +18,12 @@ public class DeadlineCommand extends Command {
     private String taskDescription;
     private String deadlineString;
 
+    /**
+     * Represents a constructor for the DeadlineCommand class.
+     *
+     * @param taskDescription Description of the Deadline task.
+     * @param deadlineString Deadline of the Deadline task.
+     */
     public DeadlineCommand(String taskDescription, String deadlineString) {
         this.taskDescription = taskDescription;
         this.deadlineString = deadlineString;
