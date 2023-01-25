@@ -34,4 +34,8 @@ public class TaskList {
     public void deleteTask(int index) {
         tasks.remove(index - 1);
     }
+
+    public void printNewestTask() {
+        System.out.println(tasks.get(tasks.size() - 1));
+    }
 }
