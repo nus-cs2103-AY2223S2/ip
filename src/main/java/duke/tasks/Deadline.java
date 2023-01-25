@@ -1,20 +1,22 @@
 package duke.tasks;
-import java.time.LocalDateTime;
+import duke.DukeException;
+
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     protected String by;
-    LocalDateTime dateTime;
+    LocalDate dateTime;
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    public Deadline(String description, String by, boolean isDone) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    public Deadline(String description, String by, boolean isDone) throws DukeException {
         super(description, isDone);
         this.by = by;
         try {
-            this.dateTime = LocalDateTime.parse(by.trim(),formatter);
+            this.dateTime = LocalDate.parse(by.trim());
         } catch (DateTimeParseException e) {
-            System.out.println("\tPlease enter a date in e.g yyyy-mm-dd 23:59 format!");
+            throw new DukeException("\tPlease enter a date in e.g yyyy-mm-dd format!");
         }
     }
 

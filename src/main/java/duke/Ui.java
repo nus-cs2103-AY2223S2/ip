@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Ui {
     final static String logo = " ____        _        \n"
@@ -56,8 +57,8 @@ public class Ui {
 
     public void showDelete(Task task, int size) {
         System.out.println(SEPARATOR + "\n\tNoted. I've removed this task:\n\t  "
-                + task.toString() + "\n\tNow you have " +
-                size + " task(s) in the list.\n"
+                + task.toString() + "\n\tNow you have "
+                + size + " task(s) in the list.\n"
                 + SEPARATOR);
     }
 
@@ -65,6 +66,22 @@ public class Ui {
         System.out.print(SEPARATOR);
         tasklist.printList();
         System.out.println(SEPARATOR);
+    }
+
+    public void printFindList(ArrayList<String> findlist) {
+        int i = 1;
+        System.out.println(SEPARATOR + "\n\tHere are the matching tasks in your list:");
+        for (String string : findlist) {
+            System.out.println("\t"
+                    + i
+                    + ". "
+                    + string);
+        }
+        System.out.println("\tThere are "
+                + findlist.size()
+                + " matching task(s) in your list."
+                + "\n"
+                + SEPARATOR);
     }
     public void showListFromStorage (Storage storage) {
         String filepath = storage.getFilepath();
@@ -86,6 +103,10 @@ public class Ui {
         }
     }
     public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+        System.out.println(SEPARATOR
+                + "\n"
+                + errorMessage
+                + "\n"
+                + SEPARATOR);
     }
 }
