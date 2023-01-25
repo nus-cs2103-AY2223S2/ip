@@ -63,6 +63,7 @@ public class Duke {
                     String from = temp.split("/to")[0];
                     String to = temp.split("/to")[1];
                     Event event = new Event(description, from, to);
+                    store.add(event);
                     System.out.print("Got it. I've added this task:\n" + event.toString() +
                             "\nNow you have " + store.size() + " tasks in the list.\n");
                     echo = sc.nextLine();
