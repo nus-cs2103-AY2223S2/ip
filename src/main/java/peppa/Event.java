@@ -3,6 +3,9 @@ package peppa;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event task. Events are given by the user in the format event {desc} /from {startDate} /to {endDate}.
+ */
 public class Event extends Task {
     private LocalDate from;
     private LocalDate to;

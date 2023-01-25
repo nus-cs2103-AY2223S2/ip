@@ -2,6 +2,9 @@ package peppa.commands;
 
 import peppa.*;
 
+/**
+ * Represents an unmark task as done command.
+ */
 public class UnmarkCommand implements Command {
     public static final String COMMAND_WORD = "unmark";
     private int taskIndex;

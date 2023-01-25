@@ -7,11 +7,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser that converts user input into Commands that can be executed.
+ */
 public class Parser {
     public Parser() {
 
     }
 
+    /**
+     * Parses the given command into one of Command objects based on the first word.
+     * Manages high-level switching logic only. Actual parsing is handled by individual parsing methods.
+     *
+     * @param fullCommand Command given by the user.
+     * @return Command object corresponding to the user request.
+     */
     public static Command parseCommand(String fullCommand) {
         String[] args = fullCommand.split(" ");
         String commandType = args[0];
@@ -37,6 +47,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an add deadline request into a DeadlineCommand object.
+     *
+     * @param command Command given by the user.
+     * @return DeadlineCommand object if command was parsed successfully, and IncorrectCommand object otherwise.
+     */
     public static Command parseDeadlineCommand(String command) {
         try {
             int paramIndex = DeadlineCommand.getParameterIndex(command);
@@ -55,6 +71,12 @@ public class Parser {
         return new IncorrectCommand();
     }
 
+    /**
+     * Parses a delete task request into a DeleteCommand object.
+     *
+     * @param args Array of arguments obtained from splitting the given command around a whitespace character.
+     * @return DeleteCommand object if command was parsed successfully, and IncorrectCommand object otherwise.
+     */
     public static Command parseDeleteCommand(String[] args) {
         try {
             String idxStr = args[1];
@@ -66,6 +88,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an add event request into an EventCommand object.
+     *
+     * @param command Command given by the user.
+     * @return EventCommand object if command was parsed successfully, and IncorrectCommand object otherwise.
+     */
     public static Command parseEventCommand(String command) {
         try {
             int fromIndex = EventCommand.getParameterIndex(command, "from");
@@ -87,6 +115,13 @@ public class Parser {
         return new IncorrectCommand();
     }
 
+    /**
+     * Parses a line in the file and adds the task to the Tasklist provided.
+     *
+     * @param line Entry in the file that corresponds to a task.
+     * @param tasks List of tasks.
+     * @throws PeppaException If entry is not recognised or formatted correctly.
+     */
     public static void parseFileEntry(String line, TaskList tasks) throws PeppaException {
         String[] fields = line.split(" \\| ");
         String taskType = fields[0], done = fields[1], taskDesc = fields[2];
@@ -117,6 +152,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a mark task as done request into a MarkCommand object.
+     *
+     * @param args Array of arguments obtained from splitting the given command around a whitespace character.
+     * @return MarkCommand object if command was parsed successfully, and IncorrectCommand object otherwise.
+     */
     public static Command parseMarkCommand(String[] args) {
         try {
             String idxStr = args[1];
@@ -128,6 +169,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an add todo request into a TodoCommand object.
+     *
+     * @param command Command given by the user.
+     * @return TodoCommand object if command was parsed successfully, and IncorrectCommand object otherwise.
+     */
     public static Command parseTodoCommand(String command) {
         try {
             return new TodoCommand(command.substring(TodoCommand.DESC_INDEX));
@@ -138,6 +185,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an unmark task as done request into a UnmarkCommand object.
+     *
+     * @param args Array of arguments obtained from splitting the given command around a whitespace character.
+     * @return UnmarkCommand object if command was parsed successfully, and IncorrectCommand object otherwise.
+     */
     public static Command parseUnmarkCommand(String[] args) {
         try {
             String idxStr = args[1];

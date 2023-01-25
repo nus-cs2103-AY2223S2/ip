@@ -4,6 +4,9 @@ import peppa.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a deadline command that adds the deadline to the tasklist.
+ */
 public class DeadlineCommand implements Command {
     public static final String COMMAND_WORD = "deadline";
     public static final String ABBREVIATION = "D";
@@ -16,6 +19,16 @@ public class DeadlineCommand implements Command {
         this.deadline = deadline;
     }
 
+    /**
+     * Returns the value of the parameter (deadline).
+     *
+     * @param command Command given by the user.
+     * @param start Index/position of the first character of the parameter.
+     * @param end Index/position of the last character of the parameter.
+     * @return Parameter Value.
+     * @throws PeppaException If end < start.
+     */
+
     public static String getParameterValue(String command, int start, int end) throws PeppaException {
         if (end < start) {
             throw new PeppaException("Boink! Peppa could not process the request. " +
@@ -25,6 +38,13 @@ public class DeadlineCommand implements Command {
         }
     }
 
+    /**
+     * Returns the position of the parameter "/by".
+     *
+     * @param command Command given by the user.
+     * @return Parameter Index.
+     * @throws PeppaException If parameter /by is not found.
+     */
     public static int getParameterIndex(String command) throws PeppaException {
         int idx = command.indexOf("/by");
         if (idx == -1) {
