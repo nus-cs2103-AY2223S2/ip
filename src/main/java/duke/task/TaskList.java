@@ -5,25 +5,49 @@ import duke.storage.Storage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a task list.
+ */
 public class TaskList {
     private List<Task> list = new ArrayList<>();
 
+    /**
+     * Adds a task to the list.
+     * @param task The task to be added.
+     */
     public void add(Task task) {
         list.add(task);
     }
 
+    /**
+     * Marks a task in the list as done.
+     * @param number The index of the task in the list, starting from 1.
+     */
     public void markTaskAsDone(int number) {
         list.get(getIndexFromNumber(number)).setDone(true);
     }
 
+    /**
+     * Marks a task in the list as not done.
+     * @param number The index of the task in the list, starting from 1.
+     */
     public void markTaskAsNotDone(int number) {
         list.get(getIndexFromNumber(number)).setDone(false);
     }
 
+    /**
+     * Removes a task from the list.
+     * @param number The index of the task in the list, starting from 1.
+     */
     public void remove(int number) {
         list.remove(getIndexFromNumber(number));
     }
 
+    /**
+     * Returns the string representation of a task in the list.
+     * @param number The index of the task in the list, starting from 1.
+     * @return The string representation of the task.
+     */
     public String getTaskString(int number) {
         return list.get(getIndexFromNumber(number)).toString();
     }
@@ -32,6 +56,11 @@ public class TaskList {
         return number - 1;
     }
 
+    /**
+     * Returns the string representation of the list.
+     * @return Each task in the list in order, preceded by a number which
+     * is its index in the list starting from 1.
+     */
     @Override
     public String toString() {
         String res = "";
@@ -44,6 +73,13 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Returns the string representation of all the tasks in the list,
+     * formatted for saving.
+     * @param storage The storage object to be used in formatting.
+     * @return The string representation of all the tasks in the list, formatted
+     * for saving.
+     */
     public String toSaveString(Storage storage) {
         String res = "";
         for (Task task : list) {
