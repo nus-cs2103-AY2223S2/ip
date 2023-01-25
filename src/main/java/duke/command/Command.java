@@ -20,6 +20,7 @@ public class Command {
         TO,
         LIST,
         MARK,
+        FIND,
         DELETE,
         NO_OP
     }

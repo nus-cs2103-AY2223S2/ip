@@ -6,16 +6,15 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
+/**
+ * Instance of a date and time.
+ */
 public class DateTime {
 
-    /**
-     * date of the instance
-     */
+    /** date of the instance */
     private LocalDate date;
 
-    /**
-     * time of the instance
-     */
+    /** time of the instance */
     private LocalTime time;
 
     /**

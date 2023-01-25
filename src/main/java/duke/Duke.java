@@ -88,7 +88,11 @@ public class Duke {
             ui.printAddTaskSuccessMessage(tasks.execute(command));
             break;
         case LIST:
-            System.out.println(tasks);
+            ui.printAllTasks(tasks);
+            break;
+        case FIND:
+            ui.printTasksWithKeyword(tasks,
+                    command.getArgumentValue(Command.Argument.FIND));
             break;
         case MARK:
             Task task = tasks.execute(command);

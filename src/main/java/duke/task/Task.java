@@ -38,6 +38,16 @@ public abstract class Task {
     }
 
     /**
+     * Checks if task description contains a keyword.
+     *
+     * @param keyword Keyword to check.
+     * @return true if task description contains the keyword, false otherwise.
+     */
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
+    }
+
+    /**
      * Returns the command(s) required to recreate the task.
      *
      * @param id Identifier of the task, usually assigned by task list.
