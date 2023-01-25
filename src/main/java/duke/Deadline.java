@@ -5,43 +5,36 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    protected String by;
-    protected LocalDateTime byObj;
+    protected String byStr;
+    protected LocalDateTime byDateTime;
     protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
-    public Deadline(String description, String by) throws DukeException {
-        super(description.trim(), TaskSymbol.DEADLINE);
-        this.by = by.trim();
+    public Deadline(String description, String byStr) throws DukeException {
+        super(description.trim(), Icon.DEADLINE);
+        this.byStr = byStr.trim();
         if (this.description.equals("")) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
-        if (this.by.equals("")) {
+        if (this.byStr.equals("")) {
             throw new DukeException("The 'by' date of a deadline cannot be empty.");
         }
         try {
-            byObj = LocalDateTime.parse(by, inputFormatter);
+            byDateTime = LocalDateTime.parse(byStr, inputFormatter);
         } catch (DateTimeParseException e) {
-            byObj = null;
+            byDateTime = null;
         }
     }
 
-    /**
-     * Getter function for by date
-     * @return The by date
-     */
     public String getByDate() {
-        return by;
+        return byStr;
     }
-    /**
-     * Represent duke.Deadline as a string
-     * @return String representation of a duke.Deadline
-     */
+
     @Override
     public String toString() {
         return String.format(
             "%s (by: %s)", 
             super.toString(), 
-            byObj == null ? by : byObj.format(outputFormatter)
+            byDateTime == null ? byStr : byDateTime.format(outputFormatter)
         );
     }
 }

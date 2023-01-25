@@ -5,60 +5,49 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    protected String startTime;
-    protected LocalDateTime startObj;
-    protected String endTime;
-    protected LocalDateTime endObj;
+    protected String startStr;
+    protected LocalDateTime startDateTime;
+    protected String endStr;
+    protected LocalDateTime endDateTime;
     protected static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mma");
-    public Event(String description, String startTime, String endTime) throws DukeException {
-        super(description.trim(), TaskSymbol.EVENT);
-        this.startTime = startTime.trim();
-        this.endTime = endTime.trim();
+    public Event(String description, String startStr, String endStr) throws DukeException {
+        super(description.trim(), Icon.EVENT);
+        this.startStr = startStr.trim();
+        this.endStr = endStr.trim();
         if (this.description.equals("")) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
-        if (this.startTime.equals("") || this.endTime.equals("")) {
+        if (this.startStr.equals("") || this.endStr.equals("")) {
             throw new DukeException("The start and/or end time of a deadline cannot be empty.");
         }
         try {
-            startObj = LocalDateTime.parse(startTime, inputFormatter);
+            startDateTime = LocalDateTime.parse(startStr, inputFormatter);
         } catch (DateTimeParseException e) {
-            startObj = null;
+            startDateTime = null;
         }
         try {
-            endObj = LocalDateTime.parse(endTime, inputFormatter);
+            endDateTime = LocalDateTime.parse(endStr, inputFormatter);
         } catch (DateTimeParseException e) {
-            endObj = null;
+            endDateTime = null;
         }
     }
 
-    /**
-     * Getter function for start time
-     * @return Start time
-     */
     public String getStartTime() {
-        return startTime;
+        return startStr;
     }
 
-    /**
-     * Getter function for end time
-     * @return End time
-     */
     public String getEndTime() {
-        return endTime;
+        return endStr;
     }
-    /**
-     * Represent duke.Event as a string
-     * @return String representation of a duke.Event
-     */
+
     @Override
     public String toString() {
         return String.format(
             "%s (from: %s to: %s)", 
             super.toString(), 
-            startObj == null ? startTime : startObj.format(outputFormatter),
-            endObj == null ? endTime : endObj.format(outputFormatter)
+            startDateTime == null ? startStr : startDateTime.format(outputFormatter),
+            endDateTime == null ? endStr : endDateTime.format(outputFormatter)
         );
     }
 }

@@ -1,3 +1,2 @@
-T | 1 | test
-D | 0 | homework | thursday
-E | 0 | interview | 1 | 2
+T | 0 | Assignment
+E | 0 | Halloween Horror Night | 29/10/2023 | 31/10/2023

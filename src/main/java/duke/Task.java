@@ -1,12 +1,12 @@
 package duke;
 
 public abstract class Task {
-    public enum TaskSymbol {
+    public enum Icon {
         TODO ("T"),
         EVENT ("E"),
         DEADLINE ("D");
         private final String symbol;
-        TaskSymbol(String symbol) {
+        Icon(String symbol) {
             this.symbol = symbol;
         }
 
@@ -20,13 +20,13 @@ public abstract class Task {
     };
     protected String description;
     protected boolean isDone;
-    protected TaskSymbol symbol;
+    protected Icon symbol;
 
     /**
      * Constructor for task
      * @param description Description of the task
      */
-    protected Task(String description, TaskSymbol symbol) {
+    protected Task(String description, Icon symbol) {
         this.description = description;
         this.isDone = false;
         this.symbol = symbol;
@@ -74,7 +74,7 @@ public abstract class Task {
      * Getter function for the task type
      * @return Task type enum
      */
-    public TaskSymbol getTaskType() {
+    public Icon getTaskType() {
         return this.symbol;
     }
 
