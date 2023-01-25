@@ -13,7 +13,7 @@ public class MarkResponse extends Response {
      */
     private Integer idxToMark;
 
-    public MarkResponse(String inputContent) {
+    public MarkResponse(String inputContent) throws InvalidArgumentException {
         try {
             this.idxToMark = Integer.parseInt(inputContent);
         } catch (NumberFormatException e) {

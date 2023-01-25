@@ -50,7 +50,7 @@ public class ToDoList {
      * @param i The index of the task to mark
      * @return Returns the marked task for printing
      */
-    public Task mark(Integer i) {
+    public Task mark(Integer i) throws InvalidArgumentException {
         try {
             Task curr = this.toDoList.get(i - 1);
             curr.markAsDone();
@@ -65,7 +65,7 @@ public class ToDoList {
      * @param i The index of the task to unmark
      * @return Returns the unmarked task for printing
      */
-    public Task unmark(Integer i) {
+    public Task unmark(Integer i) throws InvalidArgumentException{
         try {
             Task curr = this.toDoList.get(i - 1);
             curr.unmarkAsDone();
@@ -88,7 +88,7 @@ public class ToDoList {
      * @param i The index of the task to delete
      * @return Returns the deleted task for printing
      */
-    public Task delete(Integer i) {
+    public Task delete(Integer i) throws InvalidArgumentException {
         try {
             Task curr = this.toDoList.get(i - 1);
             this.toDoList.remove(curr);
