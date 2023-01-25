@@ -5,7 +5,7 @@ public class Ui {
         System.out.println("\t_______________________________________________________");
     }
     public static void newline() {
-        System.out.println("");
+        System.out.println();
     }
     public static void output(String text) {
         System.out.println("\t" + text);

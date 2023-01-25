@@ -1,14 +1,18 @@
 package saturday.utilities;
 
-import saturday.collections.TaskList;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import saturday.collections.TaskList;
 public class Storage {
-    private static String filePath;
+    private final String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -58,7 +62,9 @@ public class Storage {
                 in.close();
                 fileIn.close();
             }
-        } catch (IOException | ClassNotFoundException e) {}
+        } catch (IOException | ClassNotFoundException ignored) {
+            // Do nothing
+        }
         return taskList;
     }
 }

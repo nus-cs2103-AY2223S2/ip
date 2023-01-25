@@ -1,17 +1,13 @@
 package saturday.collections;
 
-import saturday.collections.TaskList;
+import org.junit.Before;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import saturday.models.Deadline;
 import saturday.models.Event;
 import saturday.models.Task;
 import saturday.models.ToDo;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 public class TaskListTest {
     private TaskList taskList;
 
@@ -25,7 +21,7 @@ public class TaskListTest {
         setUp();
         taskList.add(new ToDo("Test task"));
         taskList.mark(1);
-        assertTrue(taskList.get(1).isDone());
+        Assertions.assertTrue(taskList.get(1).isDone());
     }
 
     @Test
@@ -34,7 +30,7 @@ public class TaskListTest {
         taskList.add(new ToDo("Test task"));
         taskList.mark(1);
         taskList.unMark(1);
-        assertFalse(taskList.get(1).isDone());
+        Assertions.assertFalse(taskList.get(1).isDone());
     }
 
     @Test
@@ -45,9 +41,9 @@ public class TaskListTest {
         taskList.add(new ToDo("Test todo"));
 
         TaskList tasksOnDate = taskList.getTaskListOnDate("01-01-2022");
-        assertEquals(2, tasksOnDate.size());
-        assertTrue(tasksOnDate.get(1) instanceof Deadline || tasksOnDate.get(1) instanceof Event);
-        assertTrue(tasksOnDate.get(2) instanceof Deadline || tasksOnDate.get(2) instanceof Event);
+        Assertions.assertEquals(2, tasksOnDate.size());
+        Assertions.assertTrue(tasksOnDate.get(1) instanceof Deadline || tasksOnDate.get(1) instanceof Event);
+        Assertions.assertTrue(tasksOnDate.get(2) instanceof Deadline || tasksOnDate.get(2) instanceof Event);
     }
 
     @Test
@@ -59,21 +55,21 @@ public class TaskListTest {
 
         // Test removing from middle of list
         Task removedTask = taskList.remove(2);
-        assertEquals("Test Task 2", removedTask.getDescription());
-        assertEquals(2, taskList.size());
-        assertEquals("1.[T][ ] Test Task 1\n\t2.[T][ ] Test Task 3\t", taskList.toString());
+        Assertions.assertEquals("Test Task 2", removedTask.getDescription());
+        Assertions.assertEquals(2, taskList.size());
+        Assertions.assertEquals("1.[T][ ] Test Task 1\n\t2.[T][ ] Test Task 3\t", taskList.toString());
 
         // Test removing from end of list
         removedTask = taskList.remove(2);
-        assertEquals("Test Task 3", removedTask.getDescription());
-        assertEquals(1, taskList.size());
-        assertEquals("1.[T][ ] Test Task 1\t", taskList.toString());
+        Assertions.assertEquals("Test Task 3", removedTask.getDescription());
+        Assertions.assertEquals(1, taskList.size());
+        Assertions.assertEquals("1.[T][ ] Test Task 1\t", taskList.toString());
 
         // Test removing from start of list
         removedTask = taskList.remove(1);
-        assertEquals("Test Task 1", removedTask.getDescription());
-        assertEquals(0, taskList.size());
-        assertEquals("", taskList.toString());
+        Assertions.assertEquals("Test Task 1", removedTask.getDescription());
+        Assertions.assertEquals(0, taskList.size());
+        Assertions.assertEquals("", taskList.toString());
     }
 
     @Test
@@ -83,6 +79,6 @@ public class TaskListTest {
         taskList.add(new ToDo("Test Task 2"));
         taskList.add(new ToDo("Test Task 3"));
 
-        assertEquals("1.[T][ ] Test Task 1\n\t2.[T][ ] Test Task 2\n\t3.[T][ ] Test Task 3\t", taskList.toString());
+        Assertions.assertEquals("1.[T][ ] Test Task 1\n\t2.[T][ ] Test Task 2\n\t3.[T][ ] Test Task 3\t", taskList.toString());
     }
 }

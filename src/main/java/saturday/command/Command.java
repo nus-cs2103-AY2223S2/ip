@@ -18,7 +18,8 @@ public enum Command {
                 String description = args.substring(args.indexOf(" ") + 1);
                 ToDo task = new ToDo(description);
                 taskList.add(task);
-                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
+                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
+                        + " tasks in the list.");
             } else {
                 throw new SaturdayException("OOPS!!! The description of a todo cannot be empty");
             }
@@ -34,7 +35,8 @@ public enum Command {
                 String deadline = args.substring(by + 4);
                 Deadline task = new Deadline(description, deadline);
                 taskList.add(task);
-                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
+                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
+                        + " tasks in the list.");
             } else {
                 throw new SaturdayException("OOPS!!! The deadline cannot be empty (use /by)");
             }
@@ -52,7 +54,8 @@ public enum Command {
                 String end = args.substring(to + 4);
                 Event task = new Event(description, start, end);
                 taskList.add(task);
-                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size() + " tasks in the list.");
+                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
+                        + " tasks in the list.");
             } else {
                 throw new SaturdayException("OOPS!!! The timeframe cannot be empty (use /from and /to)");
             }
@@ -67,7 +70,8 @@ public enum Command {
             } else if (on != -1) {
                 String date = args.substring(on + 4);
                 TaskList taskListOnDate = taskList.getTaskListOnDate(date);
-                Ui.output("Here are the tasks on: " + DateTimeParser.printDateTime(DateTimeParser.parseDate(date)) + "\n\t" + taskListOnDate.toString());
+                Ui.output("Here are the tasks on: " + DateTimeParser.printDateTime(DateTimeParser.parseDate(date))
+                        + "\n\t" + taskListOnDate.toString());
             } else {
                 throw new SaturdayException("OOPS!!! Input a valid date to check your list against");
             }
@@ -80,7 +84,7 @@ public enum Command {
             if (parts.length > 1) {
                 String number = parts[1];
                 if (number.matches("^\\d+")) {
-                    int i = Integer.valueOf(number);
+                    int i = Integer.parseInt(number);
                     try {
                         taskList.mark(i);
                         Ui.output("Nice! I've marked this task as done:\n\t  " + taskList.get(i));
@@ -100,7 +104,7 @@ public enum Command {
             if (parts.length > 1) {
                 String number = parts[1];
                 if (number.matches("^\\d+")) {
-                    int i = Integer.valueOf(number);
+                    int i = Integer.parseInt(number);
                     try {
                         taskList.unMark(i);
                         Ui.output("OK, I've marked this task as not done yet:\n\t  " + taskList.get(i));
@@ -120,10 +124,11 @@ public enum Command {
             if (parts.length > 1) {
                 String number = parts[1];
                 if (number.matches("^\\d+")) {
-                    int i = Integer.valueOf(number);
+                    int i = Integer.parseInt(number);
                     try {
                         Task removedTask = taskList.remove(i);
-                        Ui.output("Noted. I've removed this task:\n\t  " + removedTask + "\n\tNow you have " + taskList.size() + " tasks in the list.");
+                        Ui.output("Noted. I've removed this task:\n\t  " + removedTask + "\n\tNow you have "
+                                + taskList.size() + " tasks in the list.");
                     } catch (IndexOutOfBoundsException e) {
                         Ui.output("OOPS!!! There's no such task in your list");
                     }

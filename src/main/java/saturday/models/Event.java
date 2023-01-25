@@ -1,9 +1,8 @@
 package saturday.models;
 
-import saturday.utilities.DateTimeParser;
-
 import java.time.temporal.TemporalAccessor;
 
+import saturday.utilities.DateTimeParser;
 public class Event extends Task {
     private TemporalAccessor from;
     private TemporalAccessor to;
@@ -24,6 +23,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + DateTimeParser.printDateTime(from) + " to: " + DateTimeParser.printDateTime(to) + ")";
+        return "[E]" + super.toString() + " (from: " + DateTimeParser.printDateTime(from) + " to: "
+                + DateTimeParser.printDateTime(to) + ")";
     }
 }

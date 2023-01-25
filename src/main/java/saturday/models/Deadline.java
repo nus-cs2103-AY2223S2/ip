@@ -1,9 +1,8 @@
 package saturday.models;
 
-import saturday.utilities.DateTimeParser;
-
 import java.time.temporal.TemporalAccessor;
 
+import saturday.utilities.DateTimeParser;
 public class Deadline extends Task {
     private TemporalAccessor deadline;
 

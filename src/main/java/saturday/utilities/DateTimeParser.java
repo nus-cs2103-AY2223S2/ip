@@ -1,15 +1,15 @@
 package saturday.utilities;
 
-import saturday.exceptions.SaturdayException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 
+import saturday.exceptions.SaturdayException;
 public class DateTimeParser {
     private static final String[] DATE_TIME_FORMATS = {
+            "dd-MM-yyyy",
             "dd-MM-yyyy",
             "dd/MM/yyyy",
             "dd.MM.yyyy",
@@ -31,7 +31,6 @@ public class DateTimeParser {
             "hh:mm a dd.MM.yyyy",
             "hh:mm a dd MM yyyy"
     };
-
     public static TemporalAccessor parseDate(String date) {
         for (String format : DATE_TIME_FORMATS) {
             try {
@@ -52,11 +51,10 @@ public class DateTimeParser {
         DateTimeFormatter formatter;
         if (dateTime instanceof LocalDate) {
             formatter = DateTimeFormatter.ofPattern("MMM dd yy");
-            result = formatter.format(dateTime);
         } else {
             formatter = DateTimeFormatter.ofPattern("MMM dd yy hh:mm a");
-            result = formatter.format(dateTime);
         }
+        result = formatter.format(dateTime);
         return result;
     }
 

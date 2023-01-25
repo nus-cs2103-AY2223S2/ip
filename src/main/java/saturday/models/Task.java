@@ -23,12 +23,13 @@ public class Task implements Serializable {
         this.done = true;
     }
 
-    public void unMark() { this.done = false; }
+    public void unMark() {
+        this.done = false;
+    }
 
     @Override
     public String toString() {
-        String checkbox = "[ ] ";
-        if (done) checkbox = "[X] ";
+        String checkbox = done ? "[X] " : "[ ] ";
         return checkbox + description;
     }
 }

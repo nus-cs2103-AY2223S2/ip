@@ -1,10 +1,9 @@
 package saturday.models;
 
-import org.junit.jupiter.api.Test;
-import saturday.models.Deadline;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
 public class DeadlineTest {
 
     @Test

@@ -1,15 +1,16 @@
 package saturday;
 
+import java.util.Scanner;
+
 import saturday.collections.TaskList;
 import saturday.command.Command;
 import saturday.exceptions.SaturdayException;
 import saturday.utilities.Storage;
 import saturday.utilities.Ui;
-
-import java.util.Scanner;
 /**
  * The main class for the Saturday application.
- * This class initializes a task list and storage for the application, and handles the main loop for user input and command execution.
+ * This class initializes a task list and storage for the application, and handles the
+ * main loop for user input and command execution.
  *
  * @author  Titus Lowe
  * @version 1.0
@@ -35,9 +36,9 @@ public class Saturday {
      * @param filePath  The file path for the storage of task list
      */
     public Saturday(String filePath) {
-        this.isActive = true;
-        this.storage = new Storage(filePath);
-        this.taskList = storage.loadTaskList();
+        isActive = true;
+        storage = new Storage(filePath);
+        taskList = storage.loadTaskList();
     }
 
     /**
