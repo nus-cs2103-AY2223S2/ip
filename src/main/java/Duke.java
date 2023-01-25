@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class Duke {
         System.out.println("----------------------------------------------------");
     }
 
-    private static void addToList(String title, TaskType type, String start, String end) {
+    private static void addToList(String title, TaskType type, LocalDateTime start, LocalDateTime end) {
         Task task;
         if (type == TaskType.TODO) {
             task = new ToDo(title);
