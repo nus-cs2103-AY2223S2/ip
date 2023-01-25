@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDate;
 public class Duke {
     public static void main(String[] args) throws DukeException {
         Scanner userInput = new Scanner(System.in);
@@ -91,7 +92,9 @@ public class Duke {
                 throw new DukeException("The description of a event cannot be empty.");
             }
             String[] str = input.substring(6).split("/");
-            Task newTask = new Event(str[0].substring(0, str[0].length() - 1), str[1].substring(5, str[1].length() - 1), str[2].substring(3));
+            Task newTask = new Event(str[0].substring(0, str[0].length() - 1)
+                    , LocalDate.parse(str[1].substring(5, str[1].length() - 1))
+                    , LocalDate.parse(str[2].substring(3)));
             lst.add(newTask);
             taskAddedMessage(newTask, lst.size());
         } else if (input.length() >= 8 && input.substring(0,8).equals("deadline")) {
@@ -100,7 +103,8 @@ public class Duke {
                 throw new DukeException("The description of a deadline cannot be empty.");
             }
             String[] str = input.substring(9).split("/");
-            Task newTask = new Deadline(str[0].substring(0, str[0].length() - 1), str[1].substring(3));
+            Task newTask = new Deadline(str[0].substring(0, str[0].length() - 1)
+                    , LocalDate.parse(str[1].substring(3)));
             lst.add(newTask);
             taskAddedMessage(newTask, lst.size());
         } else {
