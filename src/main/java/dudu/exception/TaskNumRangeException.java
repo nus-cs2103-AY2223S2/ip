@@ -1,3 +1,7 @@
+package dudu.exception;
+
+import dudu.exception.DuduException;
+
 public class TaskNumRangeException extends DuduException {
     public TaskNumRangeException(String msg) {
         super(msg);

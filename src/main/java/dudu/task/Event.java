@@ -1,15 +1,15 @@
+package dudu.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 public class Event extends Task{
     private LocalDate from;
     private LocalDate to;
     private String name;
-    private boolean isDone;
 
     public Event(String name, String from, String to) {
         super(name, false);
         this.name = name;
-        this.isDone = false;
         this.from = LocalDate.parse(from);
         this.to = LocalDate.parse(to);
     }
@@ -17,7 +17,6 @@ public class Event extends Task{
     public Event(String name, String from, String to, boolean isDone) {
         super(name, isDone);
         this.name = name;
-        this.isDone = isDone;
         this.from = LocalDate.parse(from);
         this.to = LocalDate.parse(to);
     }
@@ -29,7 +28,7 @@ public class Event extends Task{
 
     @Override
     public String getStatus() {
-        return isDone ? "1" : "0";
+        return isDone() ? "1" : "0";
     }
 
     @Override

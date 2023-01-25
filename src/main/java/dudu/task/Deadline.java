@@ -1,21 +1,20 @@
+package dudu.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 public class Deadline extends Task {
-    private String name;
+    private final String name;
     private boolean isDone;
     private LocalDate by;
     public Deadline(String name, String by) {
         super(name, false);
         this.name = name;
-        this.isDone = false;
         this.by = LocalDate.parse(by);
     }
 
     public Deadline(String name, String by, boolean isDone) {
         super(name, isDone);
         this.name = name;
-        this.isDone = isDone;
         this.by = LocalDate.parse(by);
     }
 
@@ -26,7 +25,7 @@ public class Deadline extends Task {
 
     @Override
     public String getStatus() {
-        return isDone ? "1" : "0";
+        return isDone() ? "1" : "0";
     }
 
     @Override
@@ -36,6 +35,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

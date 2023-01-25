@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package dudu.task;
 
 public abstract class Task {
     private String name;
@@ -12,24 +12,27 @@ public abstract class Task {
     public abstract String getStatus();
     public abstract String getDescription();
 
+    public boolean isDone() {
+        return isDone;
+    }
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
     public void markAsUndone() {
-        this.isDone = false;
+        isDone = false;
     }
     public String getStatusIcon() {
         return "[" + (isDone ? "X" : " ") + "]";
     }
 
     public String encode() {
-        return getType() + "," + getStatus()+ "," + getDescription();
+        return getType() + "," + getStatus() + "," + getDescription();
     }
 
     public static Task decode(String task) {
         String[] taskInfo = task.split(",");
         String type = taskInfo[0];
-        boolean status = taskInfo[1] == "1";
+        boolean status = taskInfo[1].equals("1");
         String name = taskInfo[2];
         if (type.equals("Deadline")) {
             String by = taskInfo[3];

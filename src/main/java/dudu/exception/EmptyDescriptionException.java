@@ -1,4 +1,8 @@
-public class EmptyDescriptionException extends DuduException{
+package dudu.exception;
+
+import dudu.exception.DuduException;
+
+public class EmptyDescriptionException extends DuduException {
     private String type;
     private String error;
     public EmptyDescriptionException(String type, String error, String msg) {

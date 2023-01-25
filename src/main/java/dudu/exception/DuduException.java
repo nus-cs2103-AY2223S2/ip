@@ -1,3 +1,5 @@
+package dudu.exception;
+
 public class DuduException extends Exception {
     private String detail;
     public DuduException(String msg) {

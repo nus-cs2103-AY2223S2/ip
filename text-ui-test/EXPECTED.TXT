@@ -12,22 +12,22 @@ Got it. I've added this task:
 Now you have 1 task in the list.
 ___________________________________________
 Got it. I've added this task:
-  [D][ ] return book (by: Sunday)
+  [D][ ] return book (by: 2022-10-12)
 Now you have 2 tasks in the list.
 ___________________________________________
 Got it. I've added this task:
-  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+  [E][ ] project meeting (from: 2022-01-12 to: 2022-02-22)
 Now you have 3 tasks in the list.
 ___________________________________________
 Got it. I've added this task:
-  [D][ ] do homework (by: no idea :-p)
+  [D][ ] do homework (by: 2023-12-12)
 Now you have 4 tasks in the list.
 ___________________________________________
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
-4.[D][ ] do homework (by: no idea :-p)
+2.[D][ ] return book (by: 2022-10-12)
+3.[E][ ] project meeting (from: 2022-01-12 to: 2022-02-22)
+4.[D][ ] do homework (by: 2023-12-12)
 ___________________________________________
 OOPS!!! I'm sorry, but I don't know what that means :-(
 ___________________________________________
@@ -41,10 +41,10 @@ Nice! I've marked this task as done:
   [T][X] borrow book
 ___________________________________________
 Nice! I've marked this task as done:
-  [D][X] return book (by: Sunday)
+  [D][X] return book (by: 2022-10-12)
 ___________________________________________
 Noted. I've removed this task:
-  [E][ ] project meeting (from: Mon 2pm to: 4pm)
+  [E][ ] project meeting (from: 2022-01-12 to: 2022-02-22)
 Now you have 3 tasks in the list.
 ___________________________________________
 ERROR!!! The task number is not in the range.

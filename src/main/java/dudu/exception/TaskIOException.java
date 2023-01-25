@@ -1,4 +1,7 @@
-public class TaskIOException extends DuduException{
+package dudu.exception;
+import dudu.exception.DuduException;
+
+public class TaskIOException extends DuduException {
     private String msg;
     public TaskIOException(String msg) {
         super(msg);

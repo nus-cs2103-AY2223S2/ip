@@ -1,4 +1,8 @@
-public class InvalidCommandException extends DuduException{
+package dudu.exception;
+
+import dudu.exception.DuduException;
+
+public class InvalidCommandException extends DuduException {
     public InvalidCommandException(String msg) {
         super(msg);
     }
