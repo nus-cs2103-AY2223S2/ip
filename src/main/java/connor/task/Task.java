@@ -24,10 +24,6 @@ public abstract class Task {
         return "[ ]";
     }
 
-    public String dataFormat() {
-        return this.isDone + "|" + this.taskName;
-    }
-
     public void mark() {
         this.isDone = true;
     }
@@ -61,6 +57,10 @@ public abstract class Task {
     public LocalDateTime parseDateTime(String input) throws DateTimeException {
         String formattedDateTime = dateTimeFormat(input);
         return LocalDateTime.parse(formattedDateTime);
+    }
+
+    public String dataFormat() {
+        return this.isDone + "|" + this.taskName;
     }
 
     public String toString() {

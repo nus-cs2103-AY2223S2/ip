@@ -46,16 +46,24 @@ public class TaskList {
         ui.markUndoneMessage(this.tasks.get(number - 1).toString());
     }
 
-    public void printList() {
-        System.out.println(Ui.LINE);
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append(Ui.LINE).append("\n");
         for (int i = 0; i < this.tasks.size(); i++) {
-            System.out.println("        "
-                    + (i + 1)
-                    + "."
-                    + this.tasks.get(i).toString());
+            str.append("        ")
+                    .append(i + 1)
+                    .append(".")
+                    .append(this.tasks.get(i).toString())
+                    .append("\n");
         }
-        System.out.println("        I have " + this.tasks.size() + " tasks in my memory");
+
+        str.append("        I have ")
+                .append(this.tasks.size())
+                .append(" tasks in my memory")
+                .append("\n");
+        return str.toString();
     }
+
 
     public int getSize() {
         return this.tasks.size();

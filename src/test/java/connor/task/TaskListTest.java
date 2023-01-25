@@ -90,16 +90,15 @@ public class TaskListTest {
     }
 
     @Test
-    public void printListTest() {
+    public void toStringTest() {
         TaskList tasks = new TaskList();
         tasks.addTask(new Todo("work"));
         tasks.addTask(new Deadline("sleep", "2020-05-05 2000"));
-        tasks.printList();
-        String ans = "        ________________________________________________________\r\n" +
-                "\r\n" +
-                "        1.[T][ ] work\r\n" +
-                "        2.[D][ ] sleep (by: MAY 5 2020 2000)\r\n" +
-                "        I have 2 tasks in my memory\r\n";
-        assertEquals(outContent, ans);
+        String ans = "        ________________________________________________________\n" +
+                "\n" +
+                "        1.[T][ ] work\n" +
+                "        2.[D][ ] sleep (by: MAY 5 2020 2000)\n" +
+                "        I have 2 tasks in my memory\n";
+        assertEquals(tasks.toString(), ans);
     }
 }

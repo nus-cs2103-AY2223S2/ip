@@ -80,7 +80,7 @@ public class Parser {
                 return true;
 
             case LIST:
-                tasks.printList();
+                System.out.println(tasks.toString());
                 break;
 
             case MARK:
