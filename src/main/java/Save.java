@@ -36,10 +36,12 @@ public class Save {
                 writer.write("   You do not have a to-do list yet!\n Create one by adding your tasks here!");
                 writer.close();
                 System.out.println("   Sorry i have encountered an error..");
-            } catch(IOException e2) {
+            } catch (IOException e2) {
                 System.out.println("Sorry i have encountered an error..");
             }
         }
 
     }
 }
+
+

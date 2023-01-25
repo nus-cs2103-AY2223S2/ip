@@ -1,7 +1,7 @@
 import java.util.*;
 
 enum Command {
-    LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE;
+    LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
 }
 
 public class Duke {
@@ -17,7 +17,7 @@ public class Duke {
 
     public static void main(String[] args) throws DukeExceptions {
         String logo =
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡶⠶⢦⣄⠀⠀⠀⠀⠀⣴⠟⠛⢧⣠⣶⣿⠻⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀\n" +
+                "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡶⠶⢦⣄⠀⠀⠀⠀⠀⣴⠟⠛⢧⣠⣶⣿⠻⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠁⡟⠦⠌⠛⠉⠉⠉⢹⠇⢠⣶⣼⣷⣞⢙⣧⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀\n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣤⠃⠀⠀⠀⠀⠀⠀⣿⠀⠈⢻⡃⠀⢸⡿⡄⠈⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ \n" +
                         "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠁⠀⠀⠀⠀⠀⠀⠀⠘⠷⠖⠛⠛⠛⢿⡗⢋⣴⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
@@ -124,7 +124,6 @@ public class Duke {
     }
 
     private static void todo(TaskList toDoList, String input) throws DukeExceptions {
-
         if (input.length() <= 5) {
             throw new DukeExceptions(descriptionNotFound);
         }
@@ -185,6 +184,4 @@ public class Duke {
 
     }
 }
-
-
 
