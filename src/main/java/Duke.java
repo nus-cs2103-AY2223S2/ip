@@ -1,10 +1,12 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Duke {
-    public static String HOR_BAR = "✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦";
+    public static String HOR_BAR = "✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦";
     public static String[] commands = {"list", "mark", "unmark", "todo", "deadline", "event"};
     /* index                              0      1        2         3        4          5    */
 
@@ -24,6 +26,7 @@ public class Duke {
     private static String printlnTab(String message) {
         return "    " + message;
     }
+
 
     private static boolean isValidTaskCommand(String input) throws DukeException {
         String com = input.split(" ")[0];
