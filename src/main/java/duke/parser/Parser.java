@@ -19,6 +19,7 @@ public class Parser {
         MARK,
         UNMARK,
         DELETE,
+        FIND,
         UNKNOWN
     };
     public Action getCommand(String userInput) {
@@ -36,6 +37,8 @@ public class Parser {
             return Action.UNMARK;
         } else if (userInput.split(" ", 2)[0].equals("delete")) {
             return Action.DELETE;
+        } else if (userInput.split(" ", 2)[0].equals("find")) {
+            return Action.FIND;
         }
         return Action.UNKNOWN;
     }
@@ -96,5 +99,8 @@ public class Parser {
 
     public Integer getTaskIndex(String userInput) {
         return Integer.parseInt(userInput.split(" ", 2)[1]) - 1;
+    }
+    public String getKeyword(String userInput) {
+        return userInput.split(" ", 2)[1].trim();
     }
 }

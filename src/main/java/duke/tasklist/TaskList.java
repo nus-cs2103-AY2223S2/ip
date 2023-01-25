@@ -4,15 +4,22 @@ import java.util.ArrayList;
 
 import duke.exception.DukeException;
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * TaskList stores all tasks and performs operation to manage the tasks
  */
 public class TaskList {
     protected ArrayList<Task> taskList;
+    private Ui ui;
 
+    /**
+     * Constructor for TaskList
+     * @param taskList
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
+        this.ui = new Ui();
     }
 
     public int getSize() {
@@ -87,5 +94,19 @@ public class TaskList {
         System.out.println(this.getTask(index));
         taskList.remove(index);
         System.out.println("Now you have " + this.getSize() + " tasks in the list.");
+    }
+
+    /**
+     * Finds and prints task details based on keyword by user
+     * @param keyword
+     * @throws DukeException
+     */
+    public void findTask(String keyword) throws DukeException {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < this.getSize(); i++) {
+            if (this.getTask(i).getStorageDetails().contains(keyword)) {
+                this.ui.sendTaskDetails(i + 1, this.getTask(i));
+            }
+        }
     }
 }
