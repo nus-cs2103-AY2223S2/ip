@@ -29,7 +29,7 @@ public class Storage {
         }
     }
 
-    public TaskList load() {
+    public TaskList load() throws DukeException{
         dukeDataFile = new File(filePath.toString());
         if (Files.exists(filePath)) {
             System.out.println("FILE EXIST");
