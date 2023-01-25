@@ -3,15 +3,25 @@ import java.util.ArrayList;
 public class TaskBook {
     private static String HOR_BAR = "✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦";
 
-    private static int numOfTasks;
-    private static ArrayList<Task> listOfTasks = new ArrayList<Task>();
+    private static ArrayList<Task> listOfTasks;
+
+    public TaskBook() {
+        this.listOfTasks = new ArrayList<Task>();
+    }
+    public TaskBook(ArrayList<Task> listOfTasks) {
+        this.listOfTasks = listOfTasks;
+    }
 
     public void listTasks() {
         System.out.println(HOR_BAR + "\nHere's what I have for you:");
-        for (int i = 0; i < numOfTasks; i++) {
+        for (int i = 0; i < listOfTasks.size(); i++) {
             System.out.println((i + 1) + ". " + listOfTasks.get(i).toString());
         }
         System.out.println(HOR_BAR);
+    }
+
+    public ArrayList<Task> getList() {
+        return listOfTasks;
     }
 
     public void addTask(TaskType taskType, String input) {
@@ -36,7 +46,6 @@ public class TaskBook {
 
         System.out.println(HOR_BAR + "\nDone and ready to go! I've added this task for ya:");
         System.out.println(t.toString());
-        numOfTasks++;
         printNumberOfTasks();
         System.out.println(HOR_BAR);
     }
@@ -45,7 +54,6 @@ public class TaskBook {
         System.out.println(Duke.HOR_BAR + "\nHere you go! I've deleted this task for ya:");
         System.out.println(listOfTasks.get(index - 1).toString());
         listOfTasks.remove(index - 1);
-        numOfTasks--;
         printNumberOfTasks();
         System.out.println( Duke.HOR_BAR);
     }
@@ -65,7 +73,7 @@ public class TaskBook {
     }
 
     public boolean indexWithinRange(int index) throws DukeException {
-        if (index > 0 && index <= numOfTasks) {
+        if (index > 0 && index <= listOfTasks.size()) {
             return true;
         } else {
             throw new IndexOutOfRangeException();
@@ -73,6 +81,6 @@ public class TaskBook {
     }
 
     public void printNumberOfTasks() {
-        System.out.println("You now have " + numOfTasks + " tasks in the list ૮꒰ˊᗜˋ* ꒱ა");
+        System.out.println("You now have " + listOfTasks.size() + " tasks in the list ૮꒰ˊᗜˋ* ꒱ა");
     }
 }
