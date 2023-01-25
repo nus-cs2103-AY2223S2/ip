@@ -1,5 +1,7 @@
 import java.util.*;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 public class Duke {
     public static void main(String[] args) throws IOException {
 
@@ -56,12 +58,13 @@ public class Duke {
                     while (tk.hasMoreTokens()) {
                         String nextString = tk.nextToken();
                         if(nextString.equals("/by") ) {
-                            date = date + tk.nextToken();
-                            break;
+                            date = date + tk.nextToken() + tk.nextToken();
                         } else
                             value = value + nextString;
                     }
-                    Deadline t = new Deadline(value,date);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyyHHmm");
+                    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+                    Deadline t = new Deadline(value,dateTime);
                     list.add(t);
                     successToken = 1;
 
@@ -70,14 +73,16 @@ public class Duke {
                     while (tk.hasMoreTokens()) {
                         String nextString = tk.nextToken();
                         if(nextString.equals("/from") ) {
-                            from = from + tk.nextToken();
+                            from = from + tk.nextToken() + tk.nextToken();
                         } else if (nextString.equals("/to")) {
-                            to = to + tk.nextToken();
+                            to = to + tk.nextToken() + tk.nextToken();
                         } else
                             value = value + nextString;
                     }
-
-                    Event t = new Event(value,from,to);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyyHHmm");
+                    LocalDateTime dateTime = LocalDateTime.parse(from, formatter);
+                    LocalDateTime dateTime2 = LocalDateTime.parse(to, formatter);
+                    Event t = new Event(value,dateTime,dateTime2);
                     list.add(t);
                     successToken = 1;
 

@@ -1,11 +1,12 @@
+import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Event extends Task{
 
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
-    public Event(String value, String from, String to ) {
+    public Event(String value, LocalDateTime from, LocalDateTime to ) {
         super(value);
         this.from = from;
         this.to = to;
