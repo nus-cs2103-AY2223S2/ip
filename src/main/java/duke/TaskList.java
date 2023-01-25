@@ -2,33 +2,74 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Task list to store the task given by the user.
+ */
 public class TaskList {
+    /**
+     * Arraylist to keep track of the task.
+     */
     private ArrayList<Task> taskList = new ArrayList<>();
 
+    /**
+     * Initialize the task list.
+     *
+     * @param taskList list of task to be keep track.
+     */
     public TaskList (ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Initialize an empty task list.
+     */
     public TaskList () {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Return task from task list given its index.
+     *
+     * @param index index of the task in task list.
+     * @return task at that given index.
+     */
     protected Task getTaskAt (int index) {
         return taskList.get(index);
     }
 
+    /**
+     * Replace the task in the task list given its index and task to replace.
+     *
+     * @param index index of task in task list.
+     * @param task task to replace.
+     */
     protected void setTaskAt (int index, Task task) {
         taskList.set(index, task);
     }
 
+    /**
+     * Insert task at the end of the task list.
+     *
+     * @param task task to be inserted.
+     */
     protected void add(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * Remove task from task list given its index.
+     *
+     * @param index index of task to be removed.
+     */
     protected void removeTaskAt (int index) {
         taskList.remove(index);
     }
 
+    /**
+     * Return number of task in the task list.
+     *
+     * @return number of task has been keep tracked.
+     */
     protected int size() {
         return taskList.size();
     }

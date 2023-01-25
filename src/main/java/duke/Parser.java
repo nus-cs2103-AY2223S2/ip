@@ -1,6 +1,18 @@
 package duke;
 
+/**
+ * Parser to parse user input.
+ */
 public class Parser {
+    /**
+     * Parse the user input command and response it correspondingly.
+     *
+     * @param input user input command
+     * @return
+     * @throws DukeUnknownCommandException
+     * @throws DukeEmptyArgumentException
+     * @throws DukeInvalidArgumentException
+     */
     public static Command parse (String input) throws DukeUnknownCommandException,
             DukeEmptyArgumentException, DukeInvalidArgumentException {
         String[] split = input.split(" ", 2);

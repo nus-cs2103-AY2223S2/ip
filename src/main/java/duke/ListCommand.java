@@ -1,7 +1,8 @@
 package duke;
 
-import java.util.List;
-
+/**
+ * Command to list all available task given a task list.
+ */
 public class ListCommand extends Command{
     public boolean isExit() {
         return false;
@@ -11,3 +12,4 @@ public class ListCommand extends Command{
         ui.responseToListCommand(task);
     }
 }
+

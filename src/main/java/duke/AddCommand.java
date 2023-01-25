@@ -1,8 +1,18 @@
 package duke;
 
+/**
+ * Class for creating a add command, more specific for todo, deadline, and event command.
+ */
 public class AddCommand extends Command{
     Task task;
 
+    /**
+     * Constructor to create a add command.
+     *
+     * @param fullCommand User input command.
+     * @throws DukeEmptyArgumentException
+     * @throws DukeInvalidArgumentException
+     */
     public AddCommand (String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {
             this.task = createTask(fullCommand[0], fullCommand[1]);
@@ -11,7 +21,7 @@ public class AddCommand extends Command{
         }
     }
 
-    public Task createTask(String cmd, String description) throws DukeInvalidArgumentException {
+    private Task createTask(String cmd, String description) throws DukeInvalidArgumentException {
         try {
             Task t = null;
             switch (cmd) {

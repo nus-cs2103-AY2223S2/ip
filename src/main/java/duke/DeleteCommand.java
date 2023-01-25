@@ -1,8 +1,18 @@
 package duke;
 
+/**
+ * Delete a task from task lisk given a specific line in the database.
+ */
 public class DeleteCommand extends Command{
     private int deletedLineNumber;
 
+    /**
+     * Constructor to create a delete command.
+     *
+     * @param fullCommand user input command.
+     * @throws DukeEmptyArgumentException
+     * @throws DukeInvalidArgumentException
+     */
     public DeleteCommand(String[] fullCommand) throws DukeEmptyArgumentException, DukeInvalidArgumentException {
         try {
             deletedLineNumber = Integer.parseInt(fullCommand[1]) - 1;
