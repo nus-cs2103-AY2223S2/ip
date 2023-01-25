@@ -1,5 +1,7 @@
+package duke.ui;
+
 /**
- * The Ui class implements the user interactions of the user.
+ * The duke.ui.Ui class implements the user interactions of the user.
  *
  * @author Chia Jeremy
  */

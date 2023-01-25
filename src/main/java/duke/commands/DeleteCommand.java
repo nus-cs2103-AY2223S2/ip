@@ -1,5 +1,12 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
- * The DeleteCommand class implements the action of deleting tasks.
+ * The duke.commands.DeleteCommand class implements the action of deleting tasks.
  *
  * @author Chia Jeremy
  */

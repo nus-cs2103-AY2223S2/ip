@@ -1,5 +1,11 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
- * The ListCommand class implements the action of listing all saved tasks.
+ * The duke.commands.ListCommand class implements the action of listing all saved tasks.
  *
  * @author Chia Jeremy
  */

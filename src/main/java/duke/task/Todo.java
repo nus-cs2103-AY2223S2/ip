@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * The Todo class is a type of task.
+ * The duke.task.Todo class is a type of task.
  *
  * @author Chia Jeremy
  */

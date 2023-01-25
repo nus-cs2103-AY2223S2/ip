@@ -1,7 +1,17 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.ui.Ui;
+
 import java.time.LocalDateTime;
 
 /**
- * The AddCommand class implements the action of adding tasks (to-do, deadline, and event).
+ * The duke.commands.AddCommand class implements the action of adding tasks (to-do, deadline, and event).
  *
  * @author Chia Jeremy
  */
