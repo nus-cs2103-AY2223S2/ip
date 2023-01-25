@@ -8,7 +8,7 @@ public abstract class Request {
     String[] values;
     Commands command;
 
-    abstract public String[] unwrwap();
+    abstract public String[] unwrap();
 
     public Request(Commands command, String request) {
         this.values = request.split(" ");
