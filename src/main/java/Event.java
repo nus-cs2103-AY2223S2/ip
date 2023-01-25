@@ -1,11 +1,19 @@
 public class Event extends Task {
-    String from;
-    String to;
+    private String from;
+    private String to;
 
     Event(String desc, boolean done, String from, String to) {
         super(desc, done);
         this.from = from;
         this.to = to;
+    }
+
+    String getFrom(){
+        return this.from;
+    }
+
+    String getTo(){
+        return this.to;
     }
 
     @Override

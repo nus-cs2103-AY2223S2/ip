@@ -1,6 +1,6 @@
 public class Task {
-    String desc;
-    boolean done;
+    private String desc;
+    private boolean done;
 
     Task(String desc, boolean done) {
         this.desc = desc;
@@ -13,6 +13,14 @@ public class Task {
 
     String getDoness(){
         return done ? "X" : " ";
+    }
+
+    boolean getDone() {
+        return this.done;
+    }
+
+    String getDesc(){
+        return this.desc;
     }
 
     @Override
