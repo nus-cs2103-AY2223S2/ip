@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,20 +21,14 @@ public class Deadline extends Task {
         if (super.isDone) {
             throw new DukeException("This task is already marked!");
         }
-        System.out.println("Nice! I've marked this task as done:");
-        Task markedTask = new Deadline(super.description, true, super.taskType, this.deadline);
-        System.out.println(markedTask);
-        return markedTask;
+        return new Deadline(super.description, true, super.taskType, this.deadline);
     }
 
     public Task unmarkTask() throws DukeException {
         if (!super.isDone) {
             throw new DukeException("This task is already unmarked!");
         }
-        System.out.println("Ok, I've marked this task as not done yet:");
-        Task unmarkedTask = new Deadline(super.description, false, super.taskType, this.deadline);
-        System.out.println(unmarkedTask);
-        return unmarkedTask;
+        return new Deadline(super.description, false, super.taskType, this.deadline);
     }
 
     public String formatTask() {

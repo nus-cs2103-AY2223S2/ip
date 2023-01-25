@@ -1,3 +1,5 @@
+package duke;
+
 public class Todo extends Task {
 
     public Todo(String description, boolean isDone, String taskType) {
@@ -12,20 +14,14 @@ public class Todo extends Task {
         if (super.isDone) {
             throw new DukeException("This task is already marked!");
         }
-        System.out.println("Nice! I've marked this task as done:");
-        Task markedTask = new Todo(super.description, true, super.taskType);
-        System.out.println(markedTask);
-        return markedTask;
+        return new Todo(super.description, true, super.taskType);
     }
 
     public Task unmarkTask() throws DukeException {
         if (!super.isDone) {
             throw new DukeException("This task is already unmarked!");
         }
-        System.out.println("Ok, I've marked this task as not done yet:");
-        Task unmarkedTask = new Todo(this.description, false, super.taskType);
-        System.out.println(unmarkedTask);
-        return unmarkedTask;
+        return new Todo(this.description, false, super.taskType);
     }
 
     public String formatTask() {

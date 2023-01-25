@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
@@ -18,7 +20,7 @@ public class Storage {
         this.path = Paths.get(currPath, "src", "data", fileName);
     }
 
-    public ArrayList<Task> readFile() {
+    public ArrayList<Task> readFile() throws DukeException {
         ArrayList<Task> data = new ArrayList<>();
         try {
             File file = new File(String.valueOf(this.path));
@@ -48,7 +50,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException err) {
-            new File(String.valueOf(this.path));
+            throw new DukeException("Save file does not exist!");
         }
         return data;
     }
