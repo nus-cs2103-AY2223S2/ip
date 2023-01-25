@@ -19,7 +19,7 @@ public class Mark extends Command {
             throw new DukeException("Please specify a valid task number.");
         }
         Task t = tasks.get(index-1);
-        t.markAsDone();
+        t.setDone();
         ui.showMark(t);
     }
 }
