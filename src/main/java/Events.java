@@ -5,21 +5,10 @@ public class Events extends Task {
     private MaybeDate begin;
     private MaybeDate end;
 
-    protected Events(boolean status, String[] content) throws DukeException{
+    protected Events(boolean status, String[] content) {
         super(status, content[0]);
-        if (content[0].isEmpty() || content.length != 3) {
-            throw new DukeException("OOPS!!! Command should be in the format 'event [M] /from [M] /to [M]'\n" +
-                    "The description, [M] cannot be empty.");
-        }
-        String[] begins = content[1].split(" ", 2);
-        String[] ends = content[2].split(" ", 2);
-        if (!begins[0].equals("from") || begins.length == 1 || !ends[0].equals("to") || ends.length == 1) {
-            throw new DukeException("OOPS!!! Command should be in the format 'event [M] /from [M] /to [M]'\n" +
-                    "The description, [M] cannot be empty.");
-        }
-
-        this.begin = Parser.parseDate(begins[1]);
-        this.end = Parser.parseDate(ends[1]);
+        this.begin = Parser.parseDate(content[1]);
+        this.end = Parser.parseDate(content[2]);
     }
 
     @Override
@@ -32,7 +21,7 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + "(from: " + begin + "to: " + end + ")";
+        return super.toString() + " (from: " + begin + " to: " + end + ")";
     }
 
     @Override

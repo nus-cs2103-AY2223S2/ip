@@ -16,6 +16,7 @@ public class Duke {
     }
 
     public void run() throws IOException {
+        ui.showWelcome();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             try {
@@ -25,7 +26,7 @@ public class Duke {
                     return;
                 }
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                ui.showError(e);
             }
         }
     }

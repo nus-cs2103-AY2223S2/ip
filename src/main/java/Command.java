@@ -14,7 +14,7 @@ public class Command {
     7 - delete
      */
 
-    private int code;
+    private final int code;
     private int index;
     private String[] content;
 
@@ -34,26 +34,34 @@ public class Command {
 
     protected void execute(Ui ui, TaskList taskList, Storage storage) throws DukeException, IOException {
         if (code == -1) return;
-        if (code == 0) return;
-        if (code == 1) {
+        if (code == 0) {
+            ui.byeMessage();
+        } else if (code == 1) {
             taskList.list();
+            ui.showLine();
         } else if (code == 2) {
-            taskList.markDone(index);
+            Task t = taskList.markDone(index);
+            ui.markDoneMessage(t);
             storage.write();
         } else if (code == 3) {
-            taskList.markUndone(index);
+            Task t = taskList.markUndone(index);
+            ui.markUndoneMessage(t);
             storage.write();
         } else if (code == 4) {
-            taskList.addTask(0, content);
+            Task t = taskList.addTask(0, content);
+            ui.addMessage(t, taskList);
             storage.write();
         } else if (code == 5) {
-            taskList.addTask(1, content);
+            Task t = taskList.addTask(1, content);
+            ui.addMessage(t, taskList);
             storage.write();
         } else if (code == 6) {
-            taskList.addTask(2, content);
+            Task t = taskList.addTask(2, content);
+            ui.addMessage(t, taskList);
             storage.write();
         } else if (code == 7) {
-            taskList.delete(index);
+            Task t = taskList.delete(index);
+            ui.deleteMessage(t, taskList);
             storage.write();
         }
     }

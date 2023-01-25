@@ -1,9 +1,8 @@
 import java.util.List;
 
 public class TaskList {
-    static final String BORDER = "----------------------------------------";
 
-    private List<Task> tasks;
+    private final List<Task> tasks;
     protected TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
@@ -11,7 +10,7 @@ public class TaskList {
     // List out all tasks and their rank.
     protected void list() {
         if (tasks.size() == 0) {
-            System.out.println("No tasks left :)\n" + BORDER);
+            System.out.println("No tasks left :)");
             return;
         }
         int rank = 1;
@@ -19,45 +18,41 @@ public class TaskList {
             System.out.println(rank + "." + t.fullMessage());
             rank++;
         }
-        System.out.println(BORDER);
     }
 
     // Mark task at index to be done
-    protected void markDone(int index) throws DukeException {
+    protected Task markDone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index");
         }
 
         Task curr = tasks.get(index);
         curr.markAsDone();
-        System.out.println("Nice! I've marked this task as done:\n" +
-                curr.fullMessage() + "\n" + BORDER);
+        return curr;
+
     }
 
     // Mark task at index to be undone
-    protected void markUndone(int index) throws DukeException {
+    protected Task markUndone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index.");
         }
 
         Task curr = tasks.get(index);
         curr.markAsUndone();
-        System.out.println("OK, I've marked this task as not done yet:\n" +
-                curr.fullMessage() + "\n" + BORDER);
+        return curr;
     }
 
     // Delete task at index.
-    protected void delete(int index) throws DukeException {
+    protected Task delete(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("OOPS!!! Invalid index.");
         }
-        String message = tasks.remove(index).fullMessage();
-        System.out.println("Noted. I've removed this task:\n" + message + "\n" +
-                "Now you have " + tasks.size() + " tasks in the list.\n" + BORDER);
+        return tasks.remove(index);
     }
 
     // Create and add task given message and code. 0 - toDos, 1 - Deadlines, 2 - Event
-    protected void addTask(int code, String[] message) throws DukeException {
+    protected Task addTask(int code, String[] message) {
         Task t;
         if (code == 0) {
             t = new ToDos(false, message);
@@ -65,15 +60,27 @@ public class TaskList {
             t = new Deadlines(false, message);
         } else if (code == 2) {
             t = new Events(false, message);
-        } else {
-            // Unreachable as of now.
-            return;
+        }  else {
+            // Not reachable
+            return null;
         }
         tasks.add(t);
-        System.out.println("Got it. I've added this task:\n" + t.fullMessage());
-        System.out.println("Now you have " + tasks.size() + " tasks in this list\n" + BORDER);
+        return t;
     }
 
+    protected int getSize() {
+        return tasks.size();
+    }
 
-
+    protected static Task getInstance(String code, boolean status, String[] content) throws DukeException {
+        if (code.equals("T")) {
+            return new ToDos(status, content);
+        } else if (code.equals("D")) {
+            return new Deadlines(status, content);
+        } else if (code.equals("E")) {
+            return new Events(status, content);
+        } else {
+            throw new DukeException("Unsupported code");
+        }
+    }
 }

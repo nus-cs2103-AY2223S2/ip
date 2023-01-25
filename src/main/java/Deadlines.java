@@ -4,20 +4,9 @@
 class Deadlines extends Task {
     private MaybeDate end;
 
-    protected Deadlines(boolean status, String[] content) throws DukeException{
+    protected Deadlines(boolean status, String[] content) {
         super(status, content[0]);
-        if (content.length == 1 || content[0].isEmpty()) {
-            throw new DukeException("OOPS!!! Command should be in the format 'deadline [M] /by [M]'\n" +
-                    "The description, [M] cannot be empty.");
-        }
-
-
-        String[] ends = content[1].split(" ", 2);
-        if (!ends[0].equals("by") || ends.length == 1) {
-            throw new DukeException("OOPS!!! Command should be in the format 'deadline [M] /by [M]'\n" +
-                    "The description, [M] cannot be empty.");
-        }
-        this.end = Parser.parseDate(ends[1]);
+        this.end = Parser.parseDate(content[1]);
     }
 
     /**
@@ -35,7 +24,7 @@ class Deadlines extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + "(by: " + end + ")";
+        return super.toString() + " (by: " + end + ")";
     }
 
     @Override

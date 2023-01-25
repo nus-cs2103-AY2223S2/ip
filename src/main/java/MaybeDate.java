@@ -1,9 +1,12 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class MaybeDate {
+
+    private final DateTimeFormatter OUTPUTFORMAT =  DateTimeFormatter.ofPattern("LLL dd yyyy");
     String timeString;
     LocalDateTime dateTime;
-    boolean isTime;
+    final boolean isTime;
 
     protected MaybeDate(String timeString) {
         isTime = false;
@@ -18,7 +21,7 @@ public class MaybeDate {
     @Override
     public String toString() {
         if (isTime) {
-            return dateTime.toString();
+            return dateTime.format(OUTPUTFORMAT);
         } else {
             return timeString;
         }

@@ -33,28 +33,22 @@ public class Storage {
             Scanner sc = new Scanner(filePath.toFile());
             while (sc.hasNextLine()) {
                 String[] details = sc.nextLine().split("[|]{2}");
-                tasks.add(Tasks.getInstance(details[0], !details[1].equals("0"),
+                tasks.add(TaskList.getInstance(details[0], !details[1].equals("0"),
                         Arrays.copyOfRange(details, 2, details.length)));
             }
         } catch (IOException e) {
             System.err.println("Unexpected error encountered.");
-        } catch (DukeException e) {
-            throw new DukeException("Corrupted file");
         }
         this.taskState = tasks;
         return tasks;
     }
 
-    protected void write() throws IOException {
-        try {
-            FileWriter writer = new FileWriter(this.filePath.toString());
-            for (Task t : taskState) {
-                String s = t.fileMessage();
-                writer.write(s);
-            }
-            writer.close();
-        } catch (IOException e) {
-
+    protected void write() throws IOException{
+        FileWriter writer = new FileWriter(this.filePath.toString());
+        for (Task t : taskState) {
+            String s = t.fileMessage();
+            writer.write(s);
         }
+        writer.close();
     }
 }
