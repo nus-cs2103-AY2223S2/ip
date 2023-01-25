@@ -1,16 +1,21 @@
 /**
  * Project name: Duke
- * Author: Tan Jun Da
+ * @author Tan Jun Da
  * Student Number: A0234893U
- *
- * This class is for the Todos Task added by the User.
  */
+
 package seedu.duke.task;
 
+/**
+ * Represents a todo task. A <code>Todo</code> object corresponds to a
+ * description by a string.
+ * e.g., <code>"read book"</code>
+ */
 public class Todo extends Task {
 
     /**
      * Constructor for the class.
+     *
      * @param description The description of the Todos task.
      */
     public Todo(String description) {
@@ -19,6 +24,7 @@ public class Todo extends Task {
 
     /**
      * Override the toString method to return the Todos task.
+     *
      * @return The String of the Todos task.
      */
     @Override

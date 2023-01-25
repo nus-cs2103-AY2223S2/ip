@@ -1,18 +1,23 @@
 /**
  * Project name: Duke
- * Author: Tan Jun Da
+ * @author Tan Jun Da
  * Student Number: A0234893U
- *
- * This class is for the Task added by the User.
  */
+
 package seedu.duke.task;
 
+/**
+ * Represents a task. A <code>Task</code> object corresponds to a
+ * description by a string.
+ * e.g., <code>"read book"</code>
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
      * Constructor for the class Task.
+     *
      * @param description The description of the object Task.
      */
     public Task(String description) {
@@ -22,32 +27,39 @@ public class Task {
 
     /**
      * Method to get the status of the Task.
-     * @return A string indicating X for done and space for not done.
+     *
+     * @return A String indicating X for done and space for not done.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
     /**
-     * Setter method to set the Task to marked.
+     * Setter to set the Task to marked.
      */
     public void mark() {
         this.isDone = true;
     }
 
     /**
-     * Setter method to set the Task to unmarked.
+     * Setter to set the Task to unmarked.
      */
     public void unmark() {
         this.isDone = false;
     }
 
+    /**
+     * Getter for the variable description of this object instance.
+     *
+     * @return The string of the variable description.
+     */
     public String getDescription() {
         return this.description;
     }
 
     /**
      * Override toString method to get the icon and description of this object.
+     *
      * @return The String icon and description of this object.
      */
     @Override
