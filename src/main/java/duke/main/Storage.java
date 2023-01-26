@@ -13,28 +13,27 @@ import java.util.List;
 import duke.task.Task;
 
 public class Storage {
-  public static List<Task> loadFromDisk(String path) throws IOException, ClassNotFoundException {
+    public static List<Task> loadFromDisk(String path) throws IOException, ClassNotFoundException {
+        if (Files.exists(Paths.get(path)))  {
+            try (
+                final FileInputStream ifstream = new FileInputStream(path);
+                final ObjectInputStream objStream = new ObjectInputStream(ifstream);
+            ) {
+                @SuppressWarnings("unchecked")
+                List<Task> tasks = (List<Task>) objStream.readObject();
+                return tasks;
+            }
+        }
 
-    if (Files.exists(Paths.get(path)))  {
-      try (
-        final FileInputStream ifstream = new FileInputStream(path);
-        final ObjectInputStream objStream = new ObjectInputStream(ifstream);
-      ) {
-        @SuppressWarnings("unchecked")
-        List<Task> tasks = (List<Task>) objStream.readObject();
-        return tasks;
-      }
+        return new ArrayList<>();
     }
 
-    return new ArrayList<>();
-  }
-
-  public static void saveToDisk(String path, List<Task> tasks) throws IOException {
-    try (
-      final FileOutputStream ofstream = new FileOutputStream(path);
-      final ObjectOutputStream objStream = new ObjectOutputStream(ofstream);
-    ) {
-      objStream.writeObject(tasks);
+    public static void saveToDisk(String path, List<Task> tasks) throws IOException {
+        try (
+            final FileOutputStream ofstream = new FileOutputStream(path);
+            final ObjectOutputStream objStream = new ObjectOutputStream(ofstream);
+        ) {
+            objStream.writeObject(tasks);
+        }
     }
-  }
 }
