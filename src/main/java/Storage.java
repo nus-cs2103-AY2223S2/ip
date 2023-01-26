@@ -3,10 +3,10 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-public class FileSaver {
+public class Storage {
     private String path;
 
-    public FileSaver(String path) {
+    public Storage(String path) {
         this.path = path;
     }
 
@@ -29,7 +29,8 @@ public class FileSaver {
         return arr;
     }
 
-    public void overwrite(String[] arr) {
+    public void overwrite(TaskList tasks) {
+        String[] arr = tasks.readTaskList();
 
         try {
             File myFile = new File(this.path);
