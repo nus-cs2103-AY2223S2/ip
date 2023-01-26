@@ -94,23 +94,24 @@ public class Storage {
         try {
             String toWrite = "";
             FileWriter fileWriter = new FileWriter(SAVE_FILE_PATH);
+
             for(int i = 0; i< taskList.size(); i++) {
                 String taskType = taskList.get(i).getClass().getTypeName();
                 switch (taskType) {
-                    case "Todo":
+                    case "duke.Todo":
                         Todo todo = (Todo)taskList.get(i);
-                        toWrite = taskType + "|" + (todo.getIsDone() ? 1 : 0) + "|" + todo.getDescription() + "\n";
+                        toWrite = "todo|" + (todo.getIsDone() ? 1 : 0) + "|" + todo.getDescription() + "\n";
                         fileWriter.write(toWrite);
                         break;
-                    case "Deadline":
+                    case "duke.Deadline":
                         Deadline deadline = (Deadline) taskList.get(i);
-                        toWrite = taskType + "|" +(deadline.getIsDone() ? 1 : 0) + "|" +
+                        toWrite = "deadline|" +(deadline.getIsDone() ? 1 : 0) + "|" +
                                 deadline.getDescription() + "|" + deadline.getDeadline() + "\n";
                         fileWriter.write(toWrite);
                         break;
-                    case "Event":
+                    case "duke.Event":
                         Event event = (Event)taskList.get(i);
-                        toWrite = taskType + "|" + (event.getIsDone() ? 1 : 0) + "|" +event.getDescription() + "|" +
+                        toWrite = "event|" + (event.getIsDone() ? 1 : 0) + "|" +event.getDescription() + "|" +
                                 event.getEventStart() + "|" + event.getEventEnd() + "\n";
                         fileWriter.write(toWrite);
                         break;
