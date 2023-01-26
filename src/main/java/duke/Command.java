@@ -16,4 +16,22 @@ public class Command {
     public List<String> getArguments() {
         return arguments;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Command)) return false;
+
+        Command command = (Command) o;
+
+        if (!description.equals(command.description)) return false;
+        return arguments.equals(command.arguments);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = description.hashCode();
+        result = 31 * result + arguments.hashCode();
+        return result;
+    }
 }
