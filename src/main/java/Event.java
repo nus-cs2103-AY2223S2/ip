@@ -1,9 +1,11 @@
 public class Event extends Task {
+    private String description;
     private String start;
     private String end;
 
     private Event(String description, String start, String end) {
         super(TaskType.EVENT, description);
+        this.description = description;
         this.start = start;
         this.end = end;
     }
@@ -24,6 +26,12 @@ public class Event extends Task {
             throw new RuntimeException("Unable to create Event! Check your /from and /to formatting!\n");
         }
         throw new RuntimeException("Unable to create Event! Check your format!\n");
+    }
+
+    @Override
+    public String taskToSavedForm() {
+        String marked = super.getStatusIcon() == "X" ? "1" : "0";
+        return "event " + this.description + " /from " + this.start + " /to " + this.end + marked;
     }
 
     @Override

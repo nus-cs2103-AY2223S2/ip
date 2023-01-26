@@ -9,6 +9,8 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public abstract String taskToSavedForm();
+
     public static Task makeTask(String str) {
         if (str.startsWith("todo ")) {
             return ToDo.to(str.substring(5));

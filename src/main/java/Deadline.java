@@ -1,8 +1,10 @@
 public class Deadline extends Task {
+    private String description;
     private String deadline;
 
     private Deadline(String description, String deadline) {
         super(TaskType.DEADLINE, description);
+        this.description = description;
         this.deadline = deadline;
     }
 
@@ -19,6 +21,12 @@ public class Deadline extends Task {
             throw new RuntimeException("Unable to create Deadline! Description or deadline was not filled in!\n");
         }
         throw new RuntimeException("Unable to create Deadline! Check your format!\n");
+    }
+
+    @Override
+    public String taskToSavedForm() {
+        String marked = super.getStatusIcon() == "X" ? "1" : "0";
+        return "deadline " + this.description + " /by " + this.deadline + marked;
     }
 
     @Override
