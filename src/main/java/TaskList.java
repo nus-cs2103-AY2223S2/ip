@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class List {
+public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
 
-    public List() {
+    public TaskList() {
         this.list.add(new ToDo("zeroth"));
     }
 
@@ -54,7 +54,7 @@ public class List {
         return false;
     }
 
-    public void remove(int index) {
+    public void delete(int index) {
         Task removedTask = this.list.get(index);
         this.list.remove(index);
         System.out.println("    Noted. I've removed this task:");
@@ -66,11 +66,14 @@ public class List {
         return this.list.get(index);
     }
 
-    public void print() {
-        System.out.println("    Here are the tasks in your list:");
+    @Override
+    public String toString() {
+        String str = "    Here are the tasks in your list:";
         for (int i = 1; i < this.list.size(); i++) {
-            System.out.println("    " + i + ". " + this.list.get(i).toString());
+            str += "\n";
+            str += "    " + i + ". " + this.list.get(i).toString();
         }
+        return str;
     }
 
     public String toTxtString() {
