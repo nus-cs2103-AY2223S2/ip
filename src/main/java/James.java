@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -137,7 +139,6 @@ public class James {
                     } else {
                         int index = Integer.parseInt(parts[1]);
                         inputList.setTask(index, true);
-
                     }
                 } else if (input.startsWith("unmark")) {
                     if (isOutOfRange) {
@@ -159,32 +160,41 @@ public class James {
                     } else {
                         try {
                             input = input.replaceAll("deadline", "");
-                            String[] arrDeadline = input.split("/", 2);
+                            String[] arrDeadline = input.split("/by ", 2);
                             inputList.addDeadline(arrDeadline[0], arrDeadline[1]);
                         } catch (JamesException e) {
                             System.out.println(e.getMessage());
                         }
                     }
                 } else if (input.startsWith("event")) {
-                    if (isOutOfRange) {
-                        throw new JamesException("OOPS! Description of event task cannot be empty!");
-                    } else {
-                        input = input.replaceAll("event", "");
-                        String[] arrEvent = input.split("/", 3);
-                        inputList.addEvent(arrEvent[0], arrEvent[1], arrEvent[2]);
+                    try {
+                        if (isOutOfRange) {
+                            throw new JamesException("OOPS! Description of event task cannot be empty!");
+                        }
+                        if (!input.contains(" /from ") || !input.contains(" /to ")) {
+                            throw new JamesException("Please include: /from <time> /to <time>");
+                        }
+                        String[] arrEvent = input.split(" ", 2)[1].split(" /from ");
+                        String description = arrEvent[0];
+                        String[] timeRange = arrEvent[1].split(" /to ");
+                        String from = timeRange[0];
+                        String to = timeRange[1];
+                        inputList.addEvent(description, from, to);
+                    } catch(JamesException e) {
+                            System.out.println(e.getMessage());
                     }
                 } else if (input.startsWith("delete")) {
-                    try {
-                        int index = Integer.parseInt(input.substring(7)) - 1;
-                        inputList.delete(index);
-                    } catch (NumberFormatException e) {
-                        System.out.println("OOPS!!! Invalid number input. Please enter a valid number for the task index.");
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("OOPS!!! Invalid task index. Please enter a valid number for the task index.");
+                        try {
+                            int index = Integer.parseInt(input.substring(7)) - 1;
+                            inputList.delete(index);
+                        } catch (NumberFormatException e) {
+                            System.out.println("OOPS!!! Invalid number input. Please enter a valid number for the task index.");
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println("OOPS!!! Invalid task index. Please enter a valid number for the task index.");
+                        }
+                    } else {
+                        throw new JamesException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
-                } else {
-                    throw new JamesException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
             } catch (JamesException e) {
                 System.out.println(e);
             }
