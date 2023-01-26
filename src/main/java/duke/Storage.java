@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 
-
 public class Storage {
     private TaskList myTaskList;
 
@@ -17,8 +16,7 @@ public class Storage {
         this.myTaskList = myTaskList;
         try {
             loadFromFile();
-        }
-        catch (IOException ignored) {}
+        } catch (IOException ignored) {}
     }
     public void loadFromFile() throws IOException {
         String home = System.getProperty("user.dir");
@@ -27,8 +25,7 @@ public class Storage {
         if (!Files.exists(dukeFolderPath)) {
             Files.createDirectories(dukeFolderPath);
             Files.createFile(dukeFilePath);
-        }
-        else if (!Files.exists(dukeFilePath)) {
+        } else if (!Files.exists(dukeFilePath)) {
             Files.createFile(dukeFilePath);
         }
         BufferedReader dukeReader = Files.newBufferedReader(dukeFilePath);
@@ -44,12 +41,10 @@ public class Storage {
 
             if (type.equals("T")) {
                 this.myTaskList.addTask(new ToDo(description, isCompleted));
-            }
-            else if (type.equals("D")) {
+            } else if (type.equals("D")) {
                 LocalDate by = LocalDate.parse(params[3]);
                 this.myTaskList.addTask(new Deadline(description, isCompleted, by));
-            }
-            else if (type.equals("E")) {
+            } else if (type.equals("E")) {
                 LocalDate start = LocalDate.parse(params[3]);
                 LocalDate end = LocalDate.parse(params[4]);
                 this.myTaskList.addTask(new Event(description, isCompleted, start, end));
@@ -68,12 +63,10 @@ public class Storage {
             String taskType = "E";
             newEntry = taskType + "|" + completedBit + "|" + currTask.getDescription() + "|"
                     + e.getStartTime() + "|" + e.getEndTime() + newEntry;
-        }
-        else if (currTask instanceof ToDo) {
+        } else if (currTask instanceof ToDo) {
             String taskType = "T";
             newEntry = taskType + "|" + completedBit + "|" + currTask.getDescription() + newEntry;
-        }
-        else if (currTask instanceof Deadline) {
+        } else if (currTask instanceof Deadline) {
             Deadline d = (Deadline) currTask;
             String taskType = "D";
             newEntry = taskType + "|" + completedBit + "|" + currTask.getDescription() + "|"
@@ -119,8 +112,7 @@ public class Storage {
                 char flipped = temp.charAt(2) == '1' ? '0' : '1';
                 temp.setCharAt(2, flipped);
                 dukeWriter.write(temp + System.getProperty("line.separator"));
-            }
-            else {
+            } else {
                 dukeWriter.write(currentLine + System.getProperty("line.separator"));
                 currentLineIndex++; // don't copy over to temp file (which is equivalent to deleting)
             }
