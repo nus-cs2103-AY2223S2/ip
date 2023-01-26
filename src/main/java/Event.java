@@ -6,11 +6,17 @@ public class Event extends Task {
         super(description);
         this.start = start;
         this.end = end;
+        super.type = 'E';
+    }
+
+    @Override
+    public String taskInFileFormat() {
+        return super.taskInFileFormat() + " | " + start + "-" + end;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + start + " to: "
+        return "[" + super.type + "]" + super.toString() + " (from: " + start + " to: "
                 + end + ")";
     }
 }
