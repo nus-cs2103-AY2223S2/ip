@@ -1,3 +1,10 @@
+package jeo.database;
+
+import jeo.task.Deadline;
+import jeo.task.Event;
+import jeo.task.Task;
+import jeo.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

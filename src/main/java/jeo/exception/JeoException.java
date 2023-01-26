@@ -1,10 +1,12 @@
+package jeo.exception;
+
 /**
- * Custom exception that is thrown when there is a command error
+ * Custom jeo.exception that is thrown when there is a command error
  */
 public class JeoException extends Exception {
 
     /**
-     * Creates a new exception with description
+     * Creates a new jeo.exception with description
      * @param e Describes the error message
      */
     public JeoException(String e) {

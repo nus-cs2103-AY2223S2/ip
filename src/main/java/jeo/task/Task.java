@@ -1,3 +1,5 @@
+package jeo.task;
+
 /**
  * Represents a generic task
  */
@@ -6,7 +8,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Task constructor to be inherited
+     * Tasks.Task constructor to be inherited
      * @param description Describes the task
      */
     public Task(String description) {
@@ -27,7 +29,7 @@ public abstract class Task {
      * @return "X" or " "
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done jeo.task with X
     }
 
     /**

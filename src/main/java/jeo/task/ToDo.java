@@ -1,3 +1,5 @@
+package jeo.task;
+
 /**
  * Represents a Todo task
  */

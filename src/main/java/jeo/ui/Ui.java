@@ -1,3 +1,10 @@
+package jeo.ui;
+
+import jeo.task.Deadline;
+import jeo.task.Event;
+import jeo.task.Task;
+import jeo.database.TaskList;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -21,7 +28,7 @@ public class Ui {
     }
 
     public void showExitMessage() {
-        System.out.println("Thank you for using JeoBot. Hope to see you again soon!");
+        System.out.println("Thank you for using " + BOT_NAME + ". Hope to see you again soon!");
     }
 
     public void showInvalidCommand() {
@@ -77,7 +84,7 @@ public class Ui {
             StringBuilder sb = new StringBuilder()
                     .append(i+1)
                     .append(".")
-                    .append(list.taskList.get(i));
+                    .append(list.getTaskAtIndex(i));
             System.out.println(sb);
         }
     }
@@ -88,7 +95,7 @@ public class Ui {
         int j = 1;
         System.out.println("Here are the task(s) due on " + formattedDueDate + " :");
         for (int i = 0; i < list.getNumberOfTasks(); i++) {
-            Task currTask = list.taskList.get(i);
+            Task currTask = list.getTaskAtIndex(i);
             StringBuilder sb = new StringBuilder()
                     .append(j)
                     .append(".");
