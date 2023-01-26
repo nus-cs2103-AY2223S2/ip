@@ -1,13 +1,32 @@
-import java.util.*;
+import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.FileWriter;
 
 public class Duke {
     public static void main(String[] args) {
-        String greeting = formatStr("Hello! I'm Muse\n"
-                + "What can I do for you?");
-        System.out.println(greeting);
+
         Scanner sc = new Scanner(System.in);
         TaskList tasks = new TaskList();
 
+        try {
+            File file = new File("duke.txt");
+            if (!file.exists()) {
+                System.out.println(formatStr("Oh dear! There is no save file. Let me create one for you."));
+                System.out.println("........CREATING.......");
+                file.createNewFile();
+            } else {
+                System.out.println(file);
+            }
+            PrintWriter pw = new PrintWriter(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String greeting = formatStr("Hello! I'm Muse\n"
+                + "What can I do for you?");
+        System.out.println(greeting);
 
         String input = sc.nextLine();
         while (!input.equals("bye")) {
@@ -101,37 +120,5 @@ public class Duke {
         }
     }
 
-
-
-//    public static void mark(String marked, int index, List<Task> arrTasks) {
-//        arrTasks.get(index).setMark();
-//    }
-
-//    public static String addReport(Task task, List<Task> taskList) {
-//        String returnStr = "gotcha.\nyou added: " + task.toString().substring(2) + "\n"
-//                + numberOfTasks(taskList);
-//        return returnStr;
-//    }
-
-//    public static String deleteReport(Task task, List<Task> taskList) {
-//        String returnStr = "gotcha.\nyou you have deleted: " + task.toString().substring(2) + "\n"
-//                + numberOfTasks(taskList);
-//        return returnStr;
-//    }
-
-//    public static String numberOfTasks(List<Task> taskList) {
-//        return "You have " + taskList.size() + " tasks in this list!";
-//    }
-
-//    public static String listThings(List<Task> arrList) {
-//        String returnstr = "Alright, here are the things: \n";
-//        for (int i = 0; i < arrList.size(); i++) {
-//            if (i == arrList.size() - 1) {
-//                returnstr += Integer.toString(i+1) + arrList.get(i).toString();
-//            } else {
-//                returnstr += Integer.toString(i+1) + arrList.get(i).toString() + "\n";
-//            }
-//        } return returnstr;
-//    }
 }
 
