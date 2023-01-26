@@ -9,10 +9,6 @@ public class TaskList {
         this.numTasks = 0;
     }
 
-    public int getCount(){
-        return this.numTasks;
-    }
-
     public String addTask(String name){ //todo
         Task task = new ToDo(name);
         this.taskList.add(task);
