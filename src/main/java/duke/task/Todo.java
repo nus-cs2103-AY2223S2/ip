@@ -7,7 +7,7 @@ import duke.storage.serializer.TaskSerializer;
 
 public class Todo extends Task {
     private static final String ICON = "T";
-    private static final String NAME_KEY = "name";
+    private static final String DESCRIPTION_KEY = "description";
     private static final String COMPLETED_KEY = "completed";
 
     public static boolean hasIcon(String s) {
@@ -16,20 +16,20 @@ public class Todo extends Task {
 
     public static Deserializer getDeserializer() {
         return (Serializer serializer) -> {
-            String name = serializer.get(NAME_KEY).toString();
+            String description = serializer.get(DESCRIPTION_KEY).toString();
             boolean completed = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
-            return new Todo(name, completed);
+            return new Todo(description, completed);
         };
     }
 
-    public Todo(String name, boolean completed) throws DukeException {
-        super(name, completed);
+    public Todo(String description, boolean completed) throws DukeException {
+        super(description, completed);
     }
 
     @Override
     public String serialize() {
         Serializer ts = new TaskSerializer(ICON);
-        ts.add(NAME_KEY, name);
+        ts.add(DESCRIPTION_KEY, description);
         ts.add(COMPLETED_KEY, completed);
         return ts.toString();
     }

@@ -3,21 +3,21 @@ package duke.task;
 import duke.exception.DukeException;
 
 public abstract class Task {
-    protected String name;
+    protected String description;
     protected boolean completed;
 
-    public Task(String name, boolean completed) throws DukeException {
-        if (name.isEmpty()) {
-            throw new DukeException("OOPS!!! The description of a task cannot be empty.");
+    public Task(String description, boolean completed) throws DukeException {
+        if (description.isEmpty()) {
+            throw new DukeException("The description of a task cannot be empty");
         }
-        this.name = name;
+        this.description = description;
         this.completed = completed;
     }
 
     public abstract String serialize();
 
-    public String getName() {
-        return this.name;
+    public String getDescription() {
+        return this.description;
     }
 
     public boolean isCompleted() {
@@ -38,6 +38,19 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), getName());
+        return String.format("[%s] %s", getStatusIcon(), getDescription());
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (object instanceof Task) {
+            Task t = (Task) object;
+            return toString().equals(t.toString());
+        } else {
+            return false;
+        }
     }
 }

@@ -28,7 +28,7 @@ public class TaskList {
 
     public Task get(int index) throws DukeException {
         if (!taskExists(index)) {
-            throw new DukeException("OOPS!!! The index given is out of range.");
+            throw new DukeException("The index given is out of range");
         }
         return tasks.get(index);
     }

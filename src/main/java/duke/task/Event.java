@@ -11,7 +11,7 @@ import duke.storage.serializer.TaskSerializer;
 
 public class Event extends Task {
     private static final String ICON = "E";
-    private static final String NAME_KEY = "name";
+    private static final String DESCRIPTION_KEY = "description";
     private static final String COMPLETED_KEY = "completed";
     private static final String FROM_KEY = "from";
     private static final String TO_KEY = "to";
@@ -27,28 +27,33 @@ public class Event extends Task {
 
     public static Deserializer getDeserializer() {
         return (Serializer serializer) -> {
-            String name = serializer.get(NAME_KEY).toString();
+            String description = serializer.get(DESCRIPTION_KEY).toString();
             boolean completed = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
             String from = serializer.get(FROM_KEY).toString();
             String to = serializer.get(TO_KEY).toString();
-            return new Event(name, completed, from, to);
+            return new Event(description, completed, from, to);
         };
     }
 
-    public Event(String name, boolean completed, String from, String to) throws DukeException {
-        super(name, completed);
+    public Event(String description, boolean completed, String from, String to) throws DukeException {
+        super(description, completed);
         try {
             this.from = LocalDateTime.parse(from, RECEIVE_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Could not parse 'from' as date time");
+        }
+        try {
             this.to = LocalDateTime.parse(to, RECEIVE_FORMAT);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Could not parse time");
+            throw new DukeException("Could not parse 'to' as date time");
         }
+        
     }
 
     @Override
     public String serialize() {
         Serializer ts = new TaskSerializer(ICON);
-        ts.add(NAME_KEY, name);
+        ts.add(DESCRIPTION_KEY, description);
         ts.add(COMPLETED_KEY, completed);
         ts.add(FROM_KEY, from.format(RECEIVE_FORMAT));
         ts.add(TO_KEY, to.format(RECEIVE_FORMAT));
