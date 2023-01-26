@@ -14,7 +14,7 @@ public class Storage {
         this.taskStorage = new File(FOLDER, fileName + ".txt");
     }
 
-    public void write(TaskList tasks) {
+    public void saveToDisk(TaskList tasks) {
         if (this.taskStorage.exists()) {
             this.taskStorage.delete();
         }

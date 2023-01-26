@@ -21,12 +21,12 @@ public class Duke {
     }
 
     private void chat() {
-        this.ui.greetings();
-        Parser p = new Parser();
+        this.ui.printGreetings();
+        Parser parser = new Parser();
         boolean isExit = false;
         while (!isExit) {
             String command = this.ui.getLine();
-            Command c = p.parse(command);
+            Command c = parser.parse(command);
             c.execute(tasks, ui, storage);
             isExit = c.isExit();
         }

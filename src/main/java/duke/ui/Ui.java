@@ -13,20 +13,20 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n"
             + "Hello! I'm Duke\n"
             + "What can I do for you?";
-    private Scanner sc;
+    private Scanner scanner;
 
     public Ui() {
-        this.sc = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
 
-    public void greetings() {
+    public void printGreetings() {
         System.out.println(LOGO_AND_GREETINGS);
     }
 
     public String getLine() {
         String echo = "";
-        if (sc.hasNext()) {
-            echo = sc.nextLine();
+        if (scanner.hasNext()) {
+            echo = scanner.nextLine();
         }
         return echo;
     }
@@ -38,7 +38,7 @@ public class Ui {
     public void showList(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i+1) + "." + tasks.get(i).toString());
+            System.out.println((i + 1) + "." + tasks.get(i).toString());
         }
     }
 
@@ -94,6 +94,6 @@ public class Ui {
     }
 
     public void endUi() {
-        sc.close();
+        scanner.close();
     }
 }

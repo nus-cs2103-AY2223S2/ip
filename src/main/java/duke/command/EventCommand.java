@@ -14,9 +14,9 @@ public class EventCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            StringBuilder sb = new StringBuilder();
-            StringBuilder from = new StringBuilder();
-            StringBuilder to = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder startTime = new StringBuilder();
+            StringBuilder endTime = new StringBuilder();
             boolean fr = false;
             boolean t = false;
             for (int i = 1; i < command.length; i++) {
@@ -24,32 +24,32 @@ public class EventCommand extends Command {
                     if (command[i].equals("/to")) {
                         t = true;
                         fr = false;
-                        from.setLength(from.length()- 1);
+                        startTime.setLength(startTime.length()- 1);
                         continue;
                     }
-                    from.append(command[i]);
-                    from.append(" ");
+                    startTime.append(command[i]);
+                    startTime.append(" ");
                 } else if (t) {
-                    to.append(command[i]);
+                    endTime.append(command[i]);
                     if (i + 1 != command.length) {
-                        to.append(" ");
+                        endTime.append(" ");
                     }
                 } else {
                     if (command[i].equals("/from")) {
                         fr = true;
-                        sb.setLength(sb.length() - 1);
+                        stringBuilder.setLength(stringBuilder.length() - 1);
                         continue;
                     }
-                    sb.append(command[i]);
-                    sb.append(" ");
+                    stringBuilder.append(command[i]);
+                    stringBuilder.append(" ");
                 }
             }
-            if (from.length() == 0 || to.length() == 0) {
+            if (startTime.length() == 0 || endTime.length() == 0) {
                 throw new DukeException(null, null);
             }
-            tasks.add(new Event(sb.toString(), from.toString(), to.toString()));
+            tasks.add(new Event(stringBuilder.toString(), startTime.toString(), endTime.toString()));
             ui.addMsg(tasks);
-            storage.write(tasks);
+            storage.saveToDisk(tasks);
         } catch (DukeException e) {
             ui.eventError();
         }

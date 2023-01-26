@@ -17,16 +17,16 @@ public class ToDoCommand extends Command {
             if (command.length == 1) {
                 throw new DukeException(null, null);
             }
-            StringBuilder sb = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
             for (int i = 1; i < command.length; i++) {
-                sb.append(command[i]);
+                stringBuilder.append(command[i]);
                 if (i + 1 != command.length) {
-                    sb.append(" ");
+                    stringBuilder.append(" ");
                 }
             }
-            tasks.add(new Todo(sb.toString()));
+            tasks.add(new Todo(stringBuilder.toString()));
             ui.addMsg(tasks);
-            storage.write(tasks);
+            storage.saveToDisk(tasks);
         } catch (DukeException e) {
             ui.todoError();
         }
