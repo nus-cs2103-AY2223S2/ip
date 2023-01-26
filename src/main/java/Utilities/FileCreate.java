@@ -1,4 +1,4 @@
-package Utilities;
+package utilities;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ public class FileCreate {
             Files.createFile(path);
             File f = new File(path.toString());
             return f;
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Do not have permission to create folder.");
         }
 
@@ -21,7 +21,7 @@ public class FileCreate {
     public static void createFolder(Path path) {
         try {
             Files.createDirectories(path);
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Do not have permission to create folder.");
         }
     }

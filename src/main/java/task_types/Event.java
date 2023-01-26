@@ -1,6 +1,8 @@
-package TaskTypes;
-/** 
- * Represents a <code>task</code> object that contains a string holding the <code>event</code> time 
+package task_types;
+
+/**
+ * Represents a <code>task</code> object that contains a string holding the
+ * <code>event</code> time
  * from a specific length stated by the user.
  * 
  * 
@@ -8,9 +10,9 @@ package TaskTypes;
  */
 public class Event extends Task {
     protected String from;
-    protected String to;    
+    protected String to;
 
-    /** 
+    /**
      * Constructor for the Event object.
      */
     public Event(String name, String from, String to) {
@@ -19,11 +21,15 @@ public class Event extends Task {
         this.to = to;
     }
 
-    /** 
-     * @return a String containing the task type and event details. 
+    /**
+     * @return a String containing the task type and event details.
      */
     @Override
     public String toString() {
         return String.format("[E]%s (from: %s to: %s)", super.toString(), from, to);
+    }
+
+    public String toTextString() {
+        return String.format("E | %s | %s | %s", super.status ? "1" : "0", super.name, this.from + " " + this.to);
     }
 }
