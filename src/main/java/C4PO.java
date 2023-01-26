@@ -1,8 +1,11 @@
 
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class C4PO {
@@ -126,15 +129,21 @@ public class C4PO {
                     }
                     try {
                         String[] stringArr = desc.split(" /by ");
-                        Deadline newDeadline = new Deadline(stringArr[0], stringArr[1]);
+
+                        ArrayList<String> arr = new ArrayList<String>(List.of(stringArr));
+                        String description = arr.get(0);
+                        arr.remove(0);
+
+                        String dateTimeString = String.join(" ", arr);
+                        Deadline newDeadline = new Deadline(description, dateTimeString);
                         if (taskFileAppend) {
                             Task.writeToFile(newDeadline.getTaskFileFormat());
                         }
-
                         System.out.println(taskAddedQuote);
                         System.out.println(newDeadline);
                         System.out.println(Task.getTaskCount());
                     } catch (Exception e) {
+                        System.out.println(e);
                         String eventErr = "Sir, there seems to be an error in your deadline details input.";
                         throw new BotException(eventErr);
                     }
@@ -185,7 +194,6 @@ public class C4PO {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-
 
             System.out.println(line);
         }

@@ -31,6 +31,7 @@ public class Task {
         listSize -= 1;
     }
 
+
     /**
      * Appends to end of file, content. Does not override old content
      * @param content
@@ -55,7 +56,6 @@ public class Task {
         FileWriter fw = new FileWriter(C4PO.fileP);
         fw.write(build.toString());
         fw.close();
-
     }
 
     protected String getTaskFileFormat() {
@@ -105,6 +105,8 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+
+
     public static String mark(Integer index, String markOption) {
         if (index > taskList.size() || index < 0) {
             return "No such item exists in list";
@@ -119,7 +121,7 @@ public class Task {
     }
 
     /**
-     * Deletes the task with the specified index, and decrements the count of tasks
+     * Deletes Task object at index specified and decrements task count
      * @param index
      * @return
      */
@@ -162,7 +164,6 @@ public class Task {
     }
 
     /**Gets the size of the task list, in a String.
-     *
      * @return String that details size of task list
      */
     public static String getTaskCount() {
