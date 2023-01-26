@@ -1,8 +1,7 @@
-package Command;
+package command;
 
-import Command.Command;
-import Duke.DukeList;
-import Exception.TaskOutOfRangeException;
+import duke.DukeList;
+import exception.TaskOutOfRangeException;
 
 public class DeleteCommand extends Command {
     private String string;

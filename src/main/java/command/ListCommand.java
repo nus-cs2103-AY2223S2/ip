@@ -1,7 +1,7 @@
-package Command;
+package command;
 
-import Duke.DukeList;
-import Duke.TextBorder;
+import duke.DukeList;
+import duke.TextBorder;
 
 public class ListCommand extends Command{
     private DukeList dukeList;

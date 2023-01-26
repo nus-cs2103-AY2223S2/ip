@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.io.*;
 
@@ -13,8 +13,8 @@ public class Storage {
             FileOutputStream fos = new FileOutputStream("./data/Duke.Duke.DukeList.ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(dukeList);
-            oos.close();
             oos.flush();
+            oos.close();
             fos.close();
             System.out.println(new TextBorder("Sweet, seeya."));
         } catch (IOException e) {

@@ -1,9 +1,8 @@
-package Command;
+package command;
 
 import java.time.format.DateTimeParseException;
 
-import Duke.Duke;
-import Duke.DukeList;
+import duke.DukeList;
 
 public class AddCommand extends Command {
     private String type;

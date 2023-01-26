@@ -1,6 +1,4 @@
-package Command;
-
-import Duke.DukeList;
+package command;
 
 public abstract class Command {
     public abstract void execute();

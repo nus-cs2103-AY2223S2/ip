@@ -1,7 +1,7 @@
-package Command;
+package command;
 
-import Duke.DukeList;
-import Duke.Storage;
+import duke.DukeList;
+import duke.Storage;
 
 public class ExitCommand extends Command {
     private DukeList dukeList;

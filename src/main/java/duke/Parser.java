@@ -1,8 +1,8 @@
-package Duke;
+package duke;
 
-import Command.*;
-import Exception.UnknownInputException;
-import Exception.EmptyDescriptionException;
+import command.*;
+import exception.UnknownInputException;
+import exception.EmptyDescriptionException;
 
 public class Parser {
     private DukeList dukelist;

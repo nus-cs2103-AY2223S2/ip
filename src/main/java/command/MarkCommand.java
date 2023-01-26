@@ -1,6 +1,6 @@
-package Command;
+package command;
 
-import Duke.DukeList;
+import duke.DukeList;
 
 public class MarkCommand extends Command{
 

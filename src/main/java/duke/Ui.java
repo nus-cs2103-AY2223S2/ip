@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class Ui {
     public Ui() {
         System.out.println("Hello from\n" + logo);
 
-        System.out.println(new TextBorder("Waddup the name's Duncan. Sorry but Duke.Duke couldn't make it, had a pretty bad stomach-ache."));
+        System.out.println(new TextBorder("Waddup the name's Duncan. Sorry but Duke couldn't make it, had a pretty bad stomach-ache."));
         System.out.println(new TextBorder("So what do you need bro?"));
     }
 

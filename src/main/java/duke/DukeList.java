@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
-import Task.*;
-import Exception.*;
+import task.*;
+import exception.*;
 
 import java.time.LocalDate;
 import java.io.Serializable;

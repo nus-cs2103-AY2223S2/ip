@@ -1,11 +1,7 @@
-package Duke;
+package duke;
 
-import java.io.*;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-
-import Command.Command;
-import Exception.*;
+import command.Command;
+import exception.*;
 
 public class Duke {
     private Storage storage;
