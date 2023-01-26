@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -89,8 +90,8 @@ public class Duke {
         deletedTaskMessage(toDelete);
     }
 
-    public void inputEvent(String s, String timeFrom, String timeTo) {
-        Event event = new Event(s, timeFrom, timeTo);
+    public void inputEvent(String s, String time) {
+        Event event = new Event(s, time);
         list.add(event);
         addedTaskMessage(event);
     }
@@ -143,7 +144,81 @@ public class Duke {
         printLongLine();
     }
 
+    public void saveListToOutput() throws DukeException {
+        ArrayList<String> temp = new ArrayList<>();
+        try {
+            File file = new File("./data/duke.txt");
+            file.getParentFile().mkdir();
+
+            FileWriter fw = new FileWriter(file);
+
+            for (int i = 0; i < list.size(); i++) {
+                temp.add(list.get(i).sendOutputToFile());
+            }
+            fw.write(String.join("\n", temp));
+            fw.close();
+        } catch (Exception e) {
+            throw new DukeException("Error when adding file");
+        }
+    }
+
+    public void outputListToHardDrive() throws DukeException {
+        File file = new File("./data/duke.txt");
+        file.getParentFile().mkdirs();
+
+        try {
+            if (file.exists()) {
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNext()) {
+                    String[] curr = scanner.nextLine().split(" \\| ");
+                    String taskType = curr[0];
+                    switch (taskType) {
+                        case "E":
+                            Event event = new Event(curr[2], curr[3]);
+                            if (Integer.parseInt(curr[1]) == 1) {
+                                event.markAsDone();
+                            } else {
+                                event.markAsNotDone();
+                            }
+                            list.add(event);
+                            break;
+                        case "D":
+                            Deadline deadline = new Deadline(curr[2], curr[3]);
+                            if (Integer.parseInt(curr[1]) == 1) {
+                                deadline.markAsDone();
+                            } else {
+                                deadline.markAsNotDone();
+                            }
+                            list.add(deadline);
+                            break;
+
+                        case "T":
+                            Todo todo = new Todo(curr[2]);
+                            if (Integer.parseInt(curr[1]) == 1) {
+                                todo.markAsDone();
+                            } else {
+                                todo.markAsNotDone();
+                            }
+                            list.add(todo);
+                            break;
+                        default:
+                            throw new DukeException("Error: Wrong task");
+                    }
+                }
+
+            }
+        } catch (Exception ex) {
+            throw new DukeException("Exception has occurred");
+        }
+
+    }
+
     public void runApp() {
+        try {
+            outputListToHardDrive();
+        } catch (DukeException e) {
+            printMessage(e.getMessage());
+        }
         greetingMessage();
         boolean enteredBye = false;
         while (!enteredBye) {
@@ -165,10 +240,10 @@ public class Duke {
                     }
                     deleteTaskFromList(Integer.parseInt(input.split(" ")[1]));
                 } else if (addEventCheck(input)) { // check if input type is event
-                    String[] eventConstructor = input.replace("event ", "").split("/");
-                    String timeFromModified = eventConstructor[1].replace("from ", "");
-                    String timeToModified = eventConstructor[2].replace("to ", "");
-                    inputEvent(eventConstructor[0], timeFromModified, timeToModified);
+                    String[] eventConstructor = input.replace("event ", "").split("/at ");
+                    String timeModified = eventConstructor[1].replace("from ", "");
+
+                    inputEvent(eventConstructor[0], timeModified);
                 } else if (addDeadlineCheck(input)) { // check if input type is deadline
                     String[] deadlineConstructor = input.replace("deadline ", "").split(" /by ");
                     inputDeadline(deadlineConstructor[0], deadlineConstructor[1]);
@@ -178,6 +253,7 @@ public class Duke {
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+                saveListToOutput();
             } catch (DukeException e) {
                 printMessage(e.getMessage());
             }

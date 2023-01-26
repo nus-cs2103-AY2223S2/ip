@@ -18,4 +18,8 @@ public class Task {
         return isDone ? "[X] " + description : "[ ] " + description;
     }
 
+    public String sendOutputToFile() {
+        return String.format("Task | %d | %s", isDone ? 1 : 0, description);
+    }
+
 }
