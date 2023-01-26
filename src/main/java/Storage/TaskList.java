@@ -32,95 +32,17 @@ public class TaskList {
     public TaskList(File file) {
         this.tasks = new ArrayList<>();
         this.file = file;
-        loadTasks();
     }
 
-    public void loadTasks() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(this.file));
-            String line = reader.readLine();
-
-            while (line != null) {
-                try {
-                    String[] args = line.split("\\|");
-                    String task_type = args[0].trim();
-                    System.out.println(task_type);
-                    String task_status = args[1].trim();
-                    String task_desc = args[2];
-                    switch (task_type) {
-                        case "T":
-                            Todo todo = new Todo(task_desc);
-                            if (task_status.equals("1")) {
-                                todo.markComplete();
-                            }
-                            tasks.add(todo);
-                            break;
-                        case "D":
-                            String due_date = args[3].trim();
-                            try {
-                                LocalDate dueDate = LocalDate.parse(due_date);
-                                Deadline deadline = new Deadline(task_desc, dueDate);
-                                if (task_status.equals("1")) {
-                                    deadline.markComplete();
-                                }
-                                tasks.add(deadline);
-                                break;
-                            } catch (DateTimeException error) {
-                                throw new InvalidArgumentException("Wrong date format! Please follow the format YYYY-MM-DD (e.g. 2000-01-01)");
-                            }
-                        case "E":
-                            System.out.println(args[3]);
-                            String from = args[3].trim();
-                            String to = args[4].trim();
-                            try {
-                                LocalDate startDate = LocalDate.parse(from);
-                                LocalDate endDate = LocalDate.parse(to);
-                                Event event = new Event(task_desc, startDate, endDate);
-                                if (startDate.isAfter(endDate)) {
-                                    throw new InvalidArgumentException("Your start date should be before your end date!");
-                                }
-                                if (task_status.equals("1")) {
-                                    event.markComplete();
-                                }
-                                tasks.add(event);
-                                break;
-                            } catch (DateTimeException error) {
-                                throw new InvalidArgumentException("Wrong date format! Please follow the format YYYY-MM-DD (e.g. 2000-01-01)");
-                            }
-                        default:
-                            break;
-                    }
-                    line = reader.readLine();
-                } catch (DukeException duke_error) {
-                    duke_error.printStackTrace();
-                    break;
-                }
-            }
-            reader.close();
-        } catch (IOException error) {
-            error.printStackTrace();
-        }
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
-
-    public void saveFile() {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(this.file));
-            for (Task task: tasks) {
-                writer.write(task.toData());
-                writer.newLine();
-            }
-            writer.close();
-        } catch (IOException error) {
-            error.printStackTrace();
-        }
-    }
-
     /**
      * Add new task to current task list
      * @param task new task to be added into the task list
      */
-    public void addTask(String task) {
-        this.tasks.add(new Task(task));
+    public void add(Task task) {
+        this.tasks.add(task);
     }
 
     /**

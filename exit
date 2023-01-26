@@ -1,0 +1,29 @@
+[33m9ce8689[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;33mtag: Level-8[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: commit (merge): Level-8: Merge + resolved conflicts
+[33mea4bfed[m HEAD@{1}: merge branch-Level-7: Merge made by the 'ort' strategy.
+[33m1619bb6[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m HEAD@{2}: checkout: moving from branch-Level-8 to master
+[33m1d9d5da[m[33m ([m[1;33mtag: Level-7[m[33m, [m[1;31morigin/branch-Level-8[m[33m, [m[1;32mbranch-Level-8[m[33m)[m HEAD@{3}: commit: Added Dates formatting
+[33m1619bb6[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m HEAD@{4}: checkout: moving from master to branch-Level-8
+[33m1619bb6[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m HEAD@{5}: checkout: moving from branch-Level-7 to master
+[33m7e04980[m[33m ([m[1;31morigin/branch-Level-7[m[33m, [m[1;32mbranch-Level-7[m[33m)[m HEAD@{6}: reset: moving to HEAD
+[33m7e04980[m[33m ([m[1;31morigin/branch-Level-7[m[33m, [m[1;32mbranch-Level-7[m[33m)[m HEAD@{7}: checkout: moving from master to branch-Level-7
+[33m1619bb6[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m HEAD@{8}: checkout: moving from branch-Level-7 to master
+[33m7e04980[m[33m ([m[1;31morigin/branch-Level-7[m[33m, [m[1;32mbranch-Level-7[m[33m)[m HEAD@{9}: commit: Level-07: added save function to save tasklist into file
+[33md13a931[m HEAD@{10}: commit: Level-07: edited tasklists to add tasks from file
+[33m1619bb6[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m HEAD@{11}: checkout: moving from master to branch-Level-7
+[33m1619bb6[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m HEAD@{12}: checkout: moving from branch-Level-7 to master
+[33m1619bb6[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m HEAD@{13}: checkout: moving from master to branch-Level-7
+[33m1619bb6[m[33m ([m[1;33mtag: A-TextUiTesting[m[33m)[m HEAD@{14}: commit: A-TextUiTesting: Added new test cases for latest functions
+[33m6574ed3[m[33m ([m[1;33mtag: Level-6[m[33m)[m HEAD@{15}: commit: Level-06: Minor update on exception
+[33m933de31[m HEAD@{16}: commit: Level-06: Added IndexOutofBoundException
+[33m40179b3[m HEAD@{17}: commit: Level-06: Added delete command
+[33mf669ce6[m[33m ([m[1;33mtag: Level-5[m[33m, [m[1;33mtag: A-Packages[m[33m, [m[1;33mtag: A-MoreOOP[m[33m)[m HEAD@{18}: commit: Level-05: Handled Exception, edited code to incorporate OOP
+[33m6428278[m HEAD@{19}: commit: A-TextUiTesting: Added input text and expected result
+[33md4dde8e[m[33m ([m[1;33mtag: Level-4[m[33m)[m HEAD@{20}: commit: Level-04: Added ToDo, Event and Deadline
+[33m3eba56c[m[33m ([m[1;33mtag: Level-3[m[33m)[m HEAD@{21}: commit: Level-03: Added javadocs
+[33m2842556[m HEAD@{22}: commit: Level-03: Added Request Class to handle the user's request
+[33mb8584a6[m HEAD@{23}: commit: Level-03: Added mark and unmark function
+[33mad39336[m[33m ([m[1;33mtag: Level-2[m[33m)[m HEAD@{24}: commit: Level-02: Added Add and List method
+[33m0f7476b[m[33m ([m[1;33mtag: Level-1[m[33m)[m HEAD@{25}: commit: Level-01: Added javadocs
+[33m552824b[m HEAD@{26}: commit: Level-01: Added printRes function to standardise printing format
+[33m19528b4[m HEAD@{27}: commit: Level-01: Added Greet, Echo and Exit method
+[33m3b83789[m HEAD@{28}: clone: from github.com:Jnjy/ip.git

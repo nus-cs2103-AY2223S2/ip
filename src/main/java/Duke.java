@@ -1,59 +1,39 @@
+import Storage.LocalStorage;
 import Storage.TaskList;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private TaskList tasks;
+    private LocalStorage localStorage;
+
     public static void main(String[] args) {
-        File file = readFile("./data/duke.txt");
-        greet();
-        // echo();
-        // handleRequest();
-        handleFileRequest(file);
-        exit();
+        new Duke("./data/duke.txt").run();
     }
 
-    /**
-     * Prints response
-     * @param res Duke's response(String) to print
-     */
-    public static void printRes(String res) {
-        System.out.println("================================================================");
-        System.out.println(res);
-        System.out.println("================================================================\n");
-    }
-
-    /**
-     * Greet the user
-     */
-    public static void greet() {
-        final String logo = "██████   █████  ██████   █████  \n"
-                    + "██   ██ ██   ██ ██   ██ ██   ██ \n"
-                    + "██   ██ ██   ██ ██████  ███████ \n"
-                    + "██   ██ ██   ██ ██   ██ ██   ██ \n"
-                    + "██████   █████  ██   ██ ██   ██ \n\n";
-        final String intro = "Hola! Soy \n";
-        final String icebreaker = "What can I do for you?";
-        System.out.println(intro + logo + icebreaker);
-        System.out.println("________________________________________________________________");
-        System.out.println();
-    }
-
-    /**
-     * Echo the user's response
-     */
-    public static void echo() {
+    public void run() {
+        UI.greet();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-
         while(!input.equalsIgnoreCase("bye")) {
-            printRes(input);
+            Request request = new Request(input, tasks);
+            UI.printRes(request.toString());
             input = sc.nextLine();
         }
-
+        localStorage.saveFile(tasks);
         sc.close();
+        UI.exit();
     }
 
+    public Duke(String file_path) {
+        TaskList tasks = new TaskList();
+        this.localStorage = new LocalStorage(file_path);
+        this.localStorage.loadTasks(tasks);
+        this.tasks = tasks;
+    }
     /**
      * Function to handle the user's request
      */
@@ -63,47 +43,9 @@ public class Duke {
         TaskList tasks = new TaskList();
         while(!input.equalsIgnoreCase("bye")) {
             Request request = new Request(input, tasks);
-            printRes(request.toString());
+            UI.printRes(request.toString());
             input = sc.nextLine();
         }
         sc.close();
-    }
-
-    public static void handleFileRequest(File file) {
-        TaskList tasks = new TaskList(file);
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        while(!input.equalsIgnoreCase("bye")) {
-            Request request = new Request(input, tasks);
-            printRes(request.toString());
-            input = sc.nextLine();
-        }
-        tasks.saveFile();
-        sc.close();
-    }
-
-    public static File readFile(String path) {
-        File file = new File(path);
-        file.getParentFile().mkdirs();
-
-        if (file.exists()) {
-            return file;
-        }
-
-        try {
-            file.createNewFile();
-        } catch (IOException io_error) {
-            io_error.printStackTrace();
-        }
-
-        return file;
-    }
-
-    /**
-     * Exit the program with an outro
-     */
-    public static void exit() {
-        String outro = "bella ciao";
-        printRes(outro);
     }
 }
