@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class Storage {
     private File file;
     private boolean fileExists;
-    private ArrayList<Task> list;
+    private TaskList list;
 
-    public Storage(ArrayList<Task> list) {
+    public Storage(TaskList list) {
         this.list = list;
         Path path = Paths.get("src/main/data/duke.txt");
         this.fileExists = java.nio.file.Files.exists(path);
@@ -31,10 +31,9 @@ public class Storage {
         }
     }
 
-    public int connect() throws DukeException {
+    public void connect() throws DukeException {
         try {
             Scanner sc = new Scanner(this.file);
-            int count = 0;
             while (sc.hasNextLine()) {
                 String[] input = sc.nextLine().split(" \\| ");
                 Task task;
@@ -50,23 +49,20 @@ public class Storage {
                 if (input[1].equals("1")) {
                     task.setDone();
                 }
-                list.add(task);
-                count++;
+                list.addTask(task);
             }
-            return count;
         } catch (FileNotFoundException e) {
             throw new DukeException(e.toString());
         } catch (DukeException e) {
             System.out.println(e);
         }
-        return 0;
     }
 
     public void save() {
         try {
             FileWriter writer = new FileWriter("src/main/data/duke.txt");
-            for (int i = 0; i < list.size(); i++) {
-                String line = list.get(i).toSave();
+            for (int i = 0; i < list.getSize(); i++) {
+                String line = list.getTask(i).toSave();
                 writer.write(line);
 
             }

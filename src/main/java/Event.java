@@ -15,12 +15,12 @@ public class Event extends Task {
     public String toSave() {
         if (super.isDone()) {
             return "D | 1 | " + super.getName() + " | "
-                    + this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " | "
-                    + this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
+                    + this.start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " | "
+                    + this.end.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n";
         } else {
             return "D | 0 | " + super.getName() + " | "
-                    + this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " | "
-                    + this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
+                    + this.start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " | "
+                    + this.end.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n";
         }
     }
 

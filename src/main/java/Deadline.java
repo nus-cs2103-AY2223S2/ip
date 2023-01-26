@@ -12,9 +12,9 @@ public class Deadline extends Task {
     @Override
     public String toSave() {
         if (super.isDone()) {
-            return "D | 1 | " + super.getName() + " | " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
+            return "D | 1 | " + super.getName() + " | " + this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n";
         } else {
-            return "D | 0 | " + super.getName() + " | " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
+            return "D | 0 | " + super.getName() + " | " + this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n";
         }
     }
 

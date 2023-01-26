@@ -1,5 +1,7 @@
 T | 1 | read book
-D | 0 | return book | Jun 6 2023
-D | 0 | project meeting | Aug 25 2023 | Sep 1 2023
+D | 0 | return book | 2023-06-06
+D | 1 | project meeting | 2023-08-25
 T | 1 | join sports club
-T | 0 | hi
+D | 0 | submit assignment | 2023-01-26
+D | 0 | sleep | 2022-05-06 | 2023-05-30
+D | 1 | do work | 2023-01-27
