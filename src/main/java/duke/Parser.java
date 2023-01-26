@@ -34,4 +34,13 @@ public class Parser {
             return false;
         }
     }
+
+    public boolean checkFindRequest(String userInput) {
+        String[] terms = userInput.split(" ");
+        if (terms[0].equals("find") && terms.length == 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -45,7 +45,11 @@ public class Duke {
                 String[] terms = userInput.split(" ");
                 int itemNo = Integer.parseInt(terms[1]);
                 tasks.deleteTask(itemNo);
-            } else {
+            } else if (parser.checkFindRequest(userInput)) {
+                String toBeFound = userInput.substring(5);
+                tasks.find(toBeFound);
+            }
+            else {
                 String[] terms = userInput.split(" ");
                 Task newTask;
                 if (terms[0].equals("todo")) {

@@ -36,4 +36,8 @@ public class Task {
         completedString += this.name;
         return completedString;
     }
+
+    public boolean contains(String keyword) {
+        return name.contains(keyword);
+    }
 }
