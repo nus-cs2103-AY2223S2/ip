@@ -37,8 +37,8 @@ public class Commands {
      * @param storage  Storage for Duke.
      * @throws DukeException If there is no such task.
      */
-    public static void executeMarkCommand(String input, TextUi TextUi, TaskList taskList, Storage storage)
-            throws DukeException {
+    public static void executeMarkCommand(String input, TextUi TextUi
+            , TaskList taskList, Storage storage) throws DukeException {
         int indexToMark = Integer.parseInt(input) - 1;
         if (indexToMark < taskList.getArraySize()) {
             Task toMark = taskList.getTask(indexToMark);
