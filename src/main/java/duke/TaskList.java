@@ -30,6 +30,16 @@ public class TaskList {
         return sb.toString();
     }
 
+    public ArrayList<Task> search(String searchStr) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.description.contains(searchStr)) {
+                results.add(t);
+            }
+        }
+        return results;
+    }
+
     public Task get(int idx) {
         return tasks.get(idx);
     }
