@@ -47,6 +47,15 @@ public class Ui {
         }
     }
 
+    public void subListTaskResponse(TaskList tasks) {
+        if(tasks.getSize() == 0) {
+            printResponse("You have 0 matching task!");
+        } else {
+            printResponse("Here are the matching tasks in your list: \n" + tasks.toStringList() + "\nYou have "
+                    + tasks.getSize() + " matching tasks in the list.");
+        }
+    }
+
     public void markTaskResponse(Task t) {
         printResponse("Nice! I've marked this task as done: \n " + t);
     }
