@@ -1,42 +1,43 @@
 package command;
 
 import interfaces.Command;
-import interfaces.Model;
-import interfaces.View;
-import model.Task;
 import model.TaskModel;
-import model.ToDo;
 import view.TaskView;
-
-import java.util.ArrayList;
-import java.util.HashSet;
 
 public class CommandFactory {
     private final TaskModel taskModel;
     private final TaskView taskView;
-
+    public enum CommandType {
+        GREET, BYE, LIST, MARK_DONE, MARK_UNDONE, CREATE_TODO, CREATE_DEADLINE, CREATE_EVENT
+    }
     public CommandFactory(TaskModel taskModel, TaskView taskView) {
         this.taskModel = taskModel;
         this.taskView = taskView;
     }
 
-    public Command createCommand(String[] tokens) {
-        switch (tokens[0]) {
-            case "greet":
+    public Command createCommand(CommandType type, String... args) {
+        switch (type) {
+            case GREET:
                 return new GreetingCommand(taskView);
-            case "bye":
+            case BYE:
                 return new ByeCommand(taskView);
-            case "list":
+            case LIST:
                 return new ListTasksCommand(taskModel, taskView);
-            case "mark":
-                int markIndex = Integer.parseInt(tokens[1]); // handle parseInt error
+            case MARK_DONE:
+                int markIndex = Integer.parseInt(args[0]);
                 return new MarkDoneCommand(taskView, taskModel, markIndex);
-            case "unmark":
-                int unmarkIndex = Integer.parseInt(tokens[1]); // handle parseInt error
+            case MARK_UNDONE:
+                int unmarkIndex = Integer.parseInt(args[0]); // handle parseInt error
                 return new MarkUndoneCommand(taskView, taskModel, unmarkIndex);
+            case CREATE_TODO:
+                return new AddToDoCommand(taskView, taskModel, args[0]);
+            case CREATE_DEADLINE:
+                return new AddDeadlineCommand(taskView, taskModel, args[0], args[1]);
+            case CREATE_EVENT:
+                return new AddEventCommand(taskView, taskModel, args[0], args[1], args[2]);
             default:
-                Task newTask = new ToDo(String.join(" ", tokens));
-                return new AddToListCommand(taskView, taskModel, newTask);
+                // in case we add more to CommandType and forget to add here
+                return null;
         }
     }
 }

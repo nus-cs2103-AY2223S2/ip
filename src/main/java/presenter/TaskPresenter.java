@@ -8,17 +8,14 @@ import interfaces.Command;
 import model.TaskModel;
 import view.TaskView;
 
-import java.util.ArrayList;
 
 public class TaskPresenter implements Presenter {
     private final InputParser parser;
 
-    private final ArrayList<CommandEventListener> listenerList;
-    public TaskPresenter(TaskModel taskModel, TaskView taskView) {
-        this.listenerList = new ArrayList<>();
+    public TaskPresenter(TaskModel taskModel, TaskView taskView, CommandEventListener exitEventListener) {
         CommandFactory commandFactory = new CommandFactory(taskModel, taskView);
-        this.parser = new InputParser(listenerList, commandFactory);
-        Command greetCommand = this.parser.parseInput("greet");
+        this.parser = new InputParser(exitEventListener, commandFactory);
+        Command greetCommand = commandFactory.createCommand(CommandFactory.CommandType.GREET);
         greetCommand.execute();
     }
 
@@ -28,10 +25,5 @@ public class TaskPresenter implements Presenter {
         if (userCommand != null) {
             userCommand.execute();
         }
-    }
-
-    @Override
-    public void registerListener(CommandEventListener listener) {
-        this.listenerList.add(listener);
     }
 }

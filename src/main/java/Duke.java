@@ -15,16 +15,15 @@ public class Duke {
         Duke duke = new Duke();
         TaskModel taskModel = new TaskModel();
         TaskView taskView = new TaskView();
-        Presenter presenter = new TaskPresenter(taskModel, taskView);
-        CommandEventListener ExitCommandListener = command -> {
+
+        CommandEventListener exitEventListener = command -> {
             if (command.equalsIgnoreCase("bye")) {
                 // cleanup code here
                 duke.exit();
             }
         };
 
-        presenter.registerListener(ExitCommandListener);
-
+        Presenter presenter = new TaskPresenter(taskModel, taskView, exitEventListener);
         while(!duke.exit) {
             presenter.handleInput(taskView.getUserInput());
         }

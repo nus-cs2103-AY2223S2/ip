@@ -29,6 +29,7 @@ public class TaskView implements View {
     @Override
     public void renderTasks(List<Task> tasks) {
         System.out.println("____________________________________________________________");
+        System.out.println("Here are the tasks in your list:");
         int index = 1;
         for (Task task: tasks) {
             System.out.println(index++ + ". " + task.toString());

@@ -10,9 +10,23 @@ public class TaskModel implements Model {
     public TaskModel() {
         this.tasks = new ArrayList<>();
     }
-    @Override
-    public void addTask(Task task) {
-        tasks.add(task);
+
+    public Task createTask(String description) {
+        Task newTask = new ToDo(description);
+        this.tasks.add(newTask);
+        return newTask;
+    }
+
+    public Task createTask(String description, String deadline) {
+        Task newTask = new Deadline(description, deadline);
+        this.tasks.add(newTask);
+        return newTask;
+    }
+
+    public Task createTask(String description, String startTime, String endTime) {
+        Task newTask = new Event(description, startTime, endTime);
+        this.tasks.add(newTask);
+        return newTask;
     }
 
     @Override
@@ -22,6 +36,10 @@ public class TaskModel implements Model {
 
     public Task getTask(int index) {
         return this.tasks.get(index); // out of bounds exception
+    }
+
+    public int getNumberOfTasks() {
+        return this.tasks.size();
     }
 
     public void markTaskDone(int taskIndex) {
