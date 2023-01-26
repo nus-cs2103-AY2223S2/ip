@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     public Integer getMarkNum(String input, boolean isMark) {
         if (isMark) {
