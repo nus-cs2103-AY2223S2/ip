@@ -1,8 +1,10 @@
+package duke;
+
 public class ToDoTask extends Task{
 
     static final String INDICATOR = "[ToDo]";
     static final String INPUT_PREFIX = "todo ";
-    static final String FORMAT_EXCEPTION_MESSAGE = "Invalid format for creating ToDo Task";
+    static final String FORMAT_EXCEPTION_MESSAGE = "Invalid format for creating ToDo duke.Task";
     ToDoTask(String name) throws DukeException {
         super(name);
     }

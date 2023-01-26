@@ -1,12 +1,14 @@
+package duke;
+
 import java.io.Serializable;
 
 public abstract class Task implements Serializable {
     private static final String COMPLETED = " [O] ";
     private static final String NOT_COMPLETED = " [ ] ";
     static final String EXTRAS_FORMAT_TEMPLATE = " (%s)";
-    private static final String FORMAT_EXCEPTION = "Invalid format for creating Task";
-    private static final String MARKED_RESPONSE = "Well done. Task has been marked as completed:\n";
-    private static final String UNMARKED_RESPONSE = "Got it. Task has been unmarked:\n";
+    private static final String FORMAT_EXCEPTION = "Invalid format for creating duke.Task";
+    private static final String MARKED_RESPONSE = "Well done. duke.Task has been marked as completed:\n";
+    private static final String UNMARKED_RESPONSE = "Got it. duke.Task has been unmarked:\n";
     private final String name;
     private boolean isCompleted;
     Task(String name) throws DukeException {
@@ -17,14 +19,14 @@ public abstract class Task implements Serializable {
         isCompleted = false;
     }
 
-    public void markTask() {
+    public String mark() {
         isCompleted = true;
-        System.out.println(DukeIO.wrapContent(MARKED_RESPONSE + DukeIO.INDENT + this));
+        return MARKED_RESPONSE + UserInterface.INDENT + this;
     }
 
-    public void unmarkTask() {
+    public String unmark() {
         isCompleted = false;
-        System.out.println(DukeIO.wrapContent(UNMARKED_RESPONSE + DukeIO.INDENT + this));
+        return UNMARKED_RESPONSE + UserInterface.INDENT + this;
     }
 
     static Task parseTaskFromInput(String input) throws DukeException {

@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -6,7 +8,7 @@ public class DeadlineTask extends Task {
     private final LocalDate deadline;
     private static final String INDICATOR = "[Deadline]";
     static final String INPUT_PREFIX = "deadline ";
-    private static final String FORMAT_EXCEPTION_MESSAGE = "Invalid format for creating Deadline Task";
+    private static final String FORMAT_EXCEPTION_MESSAGE = "Invalid format for creating Deadline duke.Task";
     private static final String INVALID_DATE_EXCEPTION = "Incompatible date format given for Deadline";
     static final String DEADLINE_PREFIX = "/by ";
     static final String DEADLINE_PREFIX_REPLACEMENT = "BY: ";
