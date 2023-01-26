@@ -1,13 +1,41 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+
 public class Duke {
     private static final String DIV_OPEN = "____________________________________________________________\n";
     private static final String DIV_CLOSE = "____________________________________________________________\n";
 
     public static ArrayList<Task> list = new ArrayList<>();
-    public static int listNum = 1;
+    public static int listNum = 1; // reserve first element away
     public static boolean running = true;
+
+    public static Path loadDir() throws IOException {
+        String home = System.getProperty("user.home");
+        Path dir = Paths.get(home, "data");
+        if (!Files.exists(dir)) {
+            System.out.println("No existing data found! Creating new save file...");
+            dir = Files.createDirectories(dir);
+        }
+        return dir;
+    }
+
+    public static void loadFile(Path dir) throws IOException {
+        Path path = Paths.get(String.valueOf(dir), "data.txt");
+        if (!Files.exists(path)) {
+            path = Files.createFile(path);
+        }
+        List<String> readFile = Files.readAllLines(path);
+        for (String line : readFile) {
+            
+        }
+    }
+
 
     public static void parser(String commandLine) throws DukeException {
 
@@ -191,9 +219,18 @@ public class Duke {
         String greetings = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
 
-        list.add(new Task("DUMMY TASK"));
+        // Loading up Duke directory and data file
+        try {
+            Path dir = loadDir();
+            loadFile(dir);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        System.out.println(DIV_OPEN + logo + greetings + DIV_CLOSE); // Initialization complete
+
+        list.add(new Task("DUKE"));
+
+        System.out.println(DIV_OPEN + logo + "Loading Duke...\n" + DIV_CLOSE); // Initialization complete
 
         // Accept user input in a loop
         Scanner sc = new Scanner(System.in);
