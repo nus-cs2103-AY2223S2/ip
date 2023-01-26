@@ -1,6 +1,5 @@
 package domain.usecases;
 
-import core.exceptions.DisposableException;
 import core.exceptions.InvalidArgumentException;
 import core.exceptions.WriteException;
 import core.utils.fp.ThrowingFunction;
@@ -17,25 +16,27 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
     /**
      * Creates a new TaskManagerUsecase with the todos set to items.
      *
-     * @param items    the todos that this TaskManagerUsecase starts with.
-     * @param writable the writable that this manager writes to.
+     * @param items     the todos that this TaskManagerUsecase starts with.
+     * @param writable  the writable that this manager writes to.
      * @param dataSaver the data saver to save the data.
      */
     public TaskManagerUsecase(Writable writable, ArrayList<Task> items,
-                              DataSaver dataSaver) {
+                              DataSaver dataSaver, Writable errorWritable) {
         this.tasks = items;
         this.writable = writable;
         this.dataSaver = dataSaver;
+        this.errorWritable = errorWritable;
     }
 
     /**
      * Creates a new TaskManagerUsecase with the todos set to empty.
      *
-     * @param writable the writable that this manager writes to.
+     * @param writable  the writable that this manager writes to.
      * @param dataSaver the data saver to save the data.
      */
-    public TaskManagerUsecase(Writable writable, DataSaver dataSaver) {
-        this(writable, new ArrayList<>(), dataSaver);
+    public TaskManagerUsecase(Writable writable, Writable errorWritable,
+                              DataSaver dataSaver) {
+        this(writable, new ArrayList<>(), dataSaver, errorWritable);
     }
 
     /**
@@ -46,7 +47,12 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
     /**
      * The writable that this manager writes to.
      */
-    private final Writable writable;
+    private Writable writable;
+
+    /**
+     * The writable for writing errors.
+     */
+    private Writable errorWritable;
 
     /**
      * The data saver
@@ -58,7 +64,7 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
      *
      * @param task the Task.
      */
-    void addTask(Task task) {
+    private void addTask(Task task) {
         tasks.add(task);
     }
 
@@ -175,6 +181,7 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
 
     /**
      * Gets the executable for deleting a TodoItem.
+     *
      * @return the executable for deleting a TodoItem.
      */
     private IdentifiableExecutable getDeleteExecutable() {
@@ -203,13 +210,23 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
 
     /**
      * Gets the disposable for disposing this class.
+     *
      * @return the disposable for disposing this class.
      */
     private Disposable getDisposable() {
         return () -> {
-            System.out.println("Saving data...");
+            try {
+                dataSaver.clear();
+            } catch (WriteException e) {
+                errorWritable.writeln("Error while clearing data" +
+                        " saver: " + e.getMessage());
+            }
             for (Task task : tasks) {
-                dataSaver.writeln(task.serialize());
+                try {
+                    dataSaver.writeln(task.serialize());
+                } catch (WriteException e) {
+                    e.printStackTrace();
+                }
             }
             dataSaver.dispose();
         };
@@ -217,18 +234,7 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
 
     @Override
     public void register(NestableExecutableObject nestable) {
-        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
-                ToDo::fromTokens,
-                "todo"
-        ));
-        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
-                Deadline::fromTokens,
-                "deadline"
-        ));
-        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
-                Event::fromTokens,
-                "event"
-        ));
+        registerReader(nestable);
         nestable.registerIdentifiableExecutable(getListTodosExecutable());
         nestable.registerIdentifiableExecutable(
                 getMarkerExecutable(true, "mark")
@@ -238,5 +244,34 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
         );
         nestable.registerIdentifiableExecutable(getDeleteExecutable());
         nestable.registerDisposable(getDisposable());
+    }
+
+    /**
+     * Registers the readers for this class to the given nestable.
+     *
+     * @param nestable the nestable for executing the readers.
+     */
+    public void registerReader(NestableExecutableObject nestable) {
+        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
+                ToDo::new,
+                "todo"
+        ));
+        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
+                Deadline::new,
+                "deadline"
+        ));
+        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
+                Event::new,
+                "event"
+        ));
+    }
+
+    /**
+     * Redirects the output of this class to the given writable.
+     *
+     * @param writable the writable for this class.
+     */
+    public void redirectOutput(Writable writable) {
+        this.writable = writable;
     }
 }

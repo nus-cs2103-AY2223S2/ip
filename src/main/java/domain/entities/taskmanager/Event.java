@@ -16,40 +16,29 @@ import java.util.Set;
  */
 public class Event extends Task {
     /**
-     * Creates a new event.
-     *
-     * @param name       the name of the event
-     * @param isComplete whether if the event is completed
-     * @param startAt    the starting time of the event
-     * @param endAt      the end time of the event
+     * Creates a new Event object from the tokens.
+     * @param tokens The keywords after which we retrieve the important
+     *               information.
+     * @throws InvalidArgumentException for an event object to be valid,
+     * its name must not be null, and it must have a starting time and an
+     * ending time.
      */
-    public Event(String name, boolean isComplete, String startAt, String endAt) {
-        super(name, isComplete);
-        this.startAt = startAt;
-        this.endAt = endAt;
-    }
-
-    /**
-     * Creates a new event that has not been completed.
-     *
-     * @param name    the name of the event.
-     * @param startAt the starting time of the event.
-     * @param endAt   the end time of the event.
-     */
-    public Event(String name, String startAt, String endAt) {
-        this(name, false, startAt, endAt);
-    }
-
-    public static Event fromTokens(String[] tokens) throws InvalidArgumentException {
-        final Pair<String, Map<String, String>> tmp = Singletons.get(TokenUtilities.class).joinTokens(tokens, delims);
+    public Event(String[] tokens) throws InvalidArgumentException {
+        super(tokens, delims);
+        final Pair<String, Map<String, String>> tmp =
+                Singletons.get(TokenUtilities.class).joinTokens(tokens, delims);
         if (tmp.getLeft().isBlank()) {
-            throw new InvalidArgumentException("☹ OOPS, the name for an event " + "should not be null", tokens);
+            throw new InvalidArgumentException("☹ OOPS, the name for an " +
+                    "event " + "should not be null", tokens);
         } else if (tmp.getRight().get(startAtKey) == null) {
-            throw new InvalidArgumentException("☹ OOPS, did you forgot to type " + startAtKey + " for your event?");
+            throw new InvalidArgumentException("☹ OOPS, did you forgot to " +
+                    "type " + startAtKey + " for your event?");
         } else if (tmp.getRight().get(endAtKey) == null) {
-            throw new InvalidArgumentException("☹ OOPS, did you forgot to type " + endAtKey + " for your event?");
+            throw new InvalidArgumentException("☹ OOPS, did you forgot to " +
+                    "type " + endAtKey + " for your event?");
         }
-        return new Event(tmp.getLeft(), tmp.getRight().get(startAtKey), tmp.getRight().get(endAtKey));
+        this.startAt = tmp.getRight().get(startAtKey);
+        this.endAt = tmp.getRight().get(endAtKey);
     }
 
     private final String startAt;
@@ -68,7 +57,8 @@ public class Event extends Task {
     /**
      * The set for retrieval of the values from the Token Utils
      */
-    private static final Set<String> delims = Set.of(startAtKey, endAtKey);
+    private static final Set<String> delims = Set.of(startAtKey, endAtKey,
+            Task.completeKey);
 
     @Override
     public String serialize() {

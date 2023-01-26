@@ -10,13 +10,17 @@ public class DataLoaderImpl extends DataLoader {
     public DataLoaderImpl(String path) throws LoadException {
         this.file = new File(path);
         if (!file.exists()) {
-            throw new LoadException("File does not exist: " + path);
-        }  else {
+            // try to create the file
             try {
-                this.scanner = new Scanner(file);
+                file.createNewFile();
             } catch (Exception e) {
-                throw new LoadException("Could not read file: " + path);
+                throw new LoadException("Could not create file: " + path + " " + e.getMessage());
             }
+        }
+        try {
+            this.scanner = new Scanner(file);
+        } catch (Exception e) {
+            throw new LoadException("Could not read file: " + path + e.getMessage());
         }
     }
 
@@ -32,5 +36,10 @@ public class DataLoaderImpl extends DataLoader {
     @Override
     public String nextLine() {
         return scanner.nextLine();
+    }
+
+    @Override
+    public boolean hasNextLine() {
+        return scanner.hasNextLine();
     }
 }

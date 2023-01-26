@@ -45,6 +45,9 @@ public abstract class EventLoop implements Disposable {
     public void run() {
         ExitStatus status = ExitStatus.continueExecute;
         while (true) {
+            if (!reader.hasNextLine()) {
+                break;
+            }
             status = rootExecutable.execute(getTokens());
             if (status == ExitStatus.terminate) {
                 break;

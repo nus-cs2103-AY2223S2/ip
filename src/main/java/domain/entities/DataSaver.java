@@ -1,7 +1,7 @@
 package domain.entities;
 
 import domain.entities.core.Disposable;
-import domain.entities.core.Writable;
+import domain.entities.core.ThrowingWritable;
 
-public abstract class DataSaver implements Disposable, Writable {
+public abstract class DataSaver implements Disposable, ThrowingWritable {
 }

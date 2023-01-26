@@ -1,6 +1,11 @@
 package domain.entities.taskmanager;
 
 import core.exceptions.InvalidArgumentException;
+import core.singletons.Singletons;
+import core.utils.TokenUtilities;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A ToDo is just a very boring task.
@@ -9,35 +14,8 @@ import core.exceptions.InvalidArgumentException;
  * manager shall remain in this task manager.
  */
 public class ToDo extends Task {
-    /**
-     * Creates a new todo.
-     * @param name the name of the new todo.
-     * @param isComplete whether if this todo is completed.
-     */
-    public ToDo(String name, boolean isComplete) {
-        super(name, isComplete);
-    }
-
-    /**
-     * Creates a todo that is completed.
-     * @param name the name of the new todo.
-     */
-    public ToDo(String name) {
-        super(name);
-    }
-
-    /**
-     * Creates a new todo from the tokens.
-     * @param tokens the tokens.
-     * @return a new todo object.
-     */
-    public static ToDo fromTokens(String[] tokens) throws InvalidArgumentException {
-        final String name = String.join(" ", tokens).trim();
-        if (name.isBlank()) {
-            throw new InvalidArgumentException("☹ OOPS, the name for a ToDo should" +
-                    "not be blank.", tokens);
-        }
-        return new ToDo(String.join(" ", tokens));
+    public ToDo(String[] tokens) throws InvalidArgumentException {
+        super(tokens, Set.of(Task.completeKey));
     }
 
     @Override

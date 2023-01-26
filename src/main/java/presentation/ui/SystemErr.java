@@ -1,11 +1,18 @@
 package presentation.ui;
 
+import core.exceptions.WriteException;
 import domain.entities.core.Writable;
 
 public class SystemErr implements Writable {
     @Override
     public void write(Object content) {
         System.err.print(content.toString());
+    }
+
+    @Override
+    public void clear() {
+        System.err.print("\033[H\033[2J");
+        System.err.flush();
     }
 
     @Override

@@ -19,6 +19,11 @@ public class SystemIn implements StringReadable, Disposable {
     }
 
     @Override
+    public boolean hasNextLine() {
+        return scanner.hasNextLine();
+    }
+
+    @Override
     public void dispose() {
         scanner.close();
     }

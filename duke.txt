@@ -1,1 +1,3 @@
 todo hello
+deadline finish CS2103T homework /complete true /by today
+event hello-world /from today /to tomorrow
