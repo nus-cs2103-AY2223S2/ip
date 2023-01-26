@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * A Deadline object is a task with a deadline.
  */
 public class Deadline extends Task {
-    LocalDateTime deadline;
+    private LocalDateTime deadline;
     public Deadline(String title, String deadline) {
         super(title);
         this.deadline = super.parseDateString(deadline);
