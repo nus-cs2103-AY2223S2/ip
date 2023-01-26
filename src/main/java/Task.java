@@ -26,6 +26,11 @@ public class Task {
         this.status = TaskStatus.NOT_DONE;
     }
 
+    public Task(String description, String status) {
+        this.description = description;
+        this.status = TaskStatus.valueOf(status);
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
