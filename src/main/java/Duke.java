@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<Task> allTasks = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
     private Storage storage;
@@ -44,34 +43,6 @@ public class Duke {
         System.out.println("----------------------------------------------------");
     }
 
-    private static void addToList(String title, TaskType type, LocalDateTime start,
-            LocalDateTime end, boolean done, boolean shouldPrintOutput) {
-        Task task;
-        if (type == TaskType.TODO) {
-            task = new ToDo(title, done);
-        } else if (type == TaskType.DEADLINE) {
-            task = new Deadline(title, end, done);
-        } else if (type == TaskType.EVENT) {
-            task = new Event(title, start, end, done);
-        } else {
-            System.out.println("Something seems wrong...");
-            return;
-        }
-        allTasks.add(task);
-        if (shouldPrintOutput) {
-            System.out.println("Added this to your task list:");
-            System.out.println("  " + task.toString());
-            System.out.println(String.format("Number of tasks left: %d", allTasks.size()));
-        }
-    }
-
-    private static void deleteTask(int taskIndex) {
-        Task deletedTask = allTasks.remove(taskIndex);
-        System.out.println("Removed this from your task list:");
-        System.out.println("  " + deletedTask.toString());
-        System.out.println(String.format("Number of tasks left: %d", allTasks.size()));
-    }
-
     private static void printList() {
         if (allTasks.size() == 0) {
             System.out.println("You have zero tasks now!");
@@ -83,18 +54,6 @@ public class Duke {
             String toPrint = String.format("%d. %s", i + 1, task.toString());
             System.out.println(toPrint);
         }
-    }
-
-    private static void changeTaskCompletionStatus(int taskNumber, boolean completionStatus) {
-        Task task = allTasks.get(taskNumber);
-        task.setDone(completionStatus);
-        if (completionStatus) {
-            System.out.println("Solid work man! This task is marked done");
-        } else {
-            System.out.println("Aww what happened? This task is marked as undone");
-        }
-        String toPrint = task.toString();
-        System.out.println(toPrint);
     }
 
     private static boolean handleCommands(String rawCommand) throws DukeException {

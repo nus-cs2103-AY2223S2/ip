@@ -42,6 +42,7 @@ public class Storage {
 
     private void loadTaskLine(String taskLine, TaskList allTasks) {
         // TODO: Handle corruption in file, leading to incorrect syntax
+        // TODO: Edit such that it doesn't print anything
         String[] attributes = taskLine.split(", ");
         String type = attributes[0];
         String doneNumber = attributes[1];
