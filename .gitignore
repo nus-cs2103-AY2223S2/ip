@@ -9,6 +9,11 @@ duke.txt
 # Class files
 *.class
 
+*.classpath
+
+#.Project
+*.project
+
 # Gradle build files
 /.gradle/
 /build/
