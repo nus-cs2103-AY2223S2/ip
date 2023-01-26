@@ -1,12 +1,11 @@
 public class Task {
-    private boolean isMarked;
+    private boolean isMarked = false;
     private String taskName;
     private static String MARKED = "[X]";
     private static String UNMARKED = "[ ]";
 
     public Task(String taskName){
         this.taskName = taskName;
-        this.isMarked = false;
     }
 
     //Marking the task as done
