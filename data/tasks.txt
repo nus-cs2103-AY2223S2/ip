@@ -1,6 +1,0 @@
-Deadline,1,read book,2022-10-12
-Todo,1,read book
-Todo,1,hello
-Event,0,ok,2022-10-12,2022-10-13
-Event,0,buy book,2022-10-12,2022-10-13
-Todo,0,ok
