@@ -11,11 +11,6 @@ public class Todo extends Task{
         } else {
             Todo todo = new Todo(taskName);
             lst.addTask(todo);
-            Ui.showLine();
-            System.out.println("Got it! I've added: ");
-            System.out.println(" " + todo);
-            lst.printSize();
-            Ui.showLine();
         }
     }
 

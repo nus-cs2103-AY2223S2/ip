@@ -13,10 +13,6 @@ public class TaskList {
         }
         Task t = this.getTask(taskNum);
         t.markAsDone();
-        Ui.showLine();
-        System.out.println("Okay! I've marked this task as done:");
-        System.out.println(t);
-        Ui.showLine();
     }
 
     public void unmark(int taskNum) throws DukeException{
@@ -25,10 +21,6 @@ public class TaskList {
         }
         Task t = this.getTask(taskNum);
         t.markAsUndone();
-        Ui.showLine();
-        System.out.println("Okay! I've marked this task as not done yet:");
-        System.out.println(t);
-        Ui.showLine();
     }
 
     public void deleteTask(int taskNum) throws DukeException{
@@ -36,11 +28,6 @@ public class TaskList {
             throw new DukeException("bounds");
         }
         Task t = this.lst.remove(taskNum);
-        Ui.showLine();
-        System.out.println("Okay! I've removed this task from the list:");
-        System.out.println(t);
-        printSize();
-        Ui.showLine();
 
     }
 
@@ -94,8 +81,7 @@ public class TaskList {
     }
 
     public void printSize() {
-        System.out.println(String.format(
-                "Now you have %d tasks in the list!", this.getSize()));
+        System.out.println(String.format("Now you have %d tasks in the list!", this.getSize()));
     }
 
 }

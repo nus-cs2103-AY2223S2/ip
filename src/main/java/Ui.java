@@ -12,7 +12,7 @@ public class Ui {
         return input.nextLine();
     }
 
-    public static void showLine() {
+    public void showLine() {
         System.out.println(line);
     }
 
@@ -22,7 +22,13 @@ public class Ui {
         showLine();
     }
 
-    public static void showError(String errorMsg) {
+    public void showLoadingError() {
+        showLine();
+        System.out.println("Sorry I wasn't able to load the file");
+        showLine();
+    }
+
+    public void showError(String errorMsg) {
         System.out.println(errorMsg);
     }
 
@@ -56,7 +62,7 @@ public class Ui {
         showLine();
         System.out.println("Okay! I've removed this task from the list:");
         System.out.println(task);
-        System.out.println(size);
+        System.out.println(String.format("Now you have %d tasks in the list!", size));
         showLine();
     }
 
@@ -64,7 +70,7 @@ public class Ui {
         showLine();
         System.out.println("Got it! I've added: ");
         System.out.println(" " + todo);
-        System.out.println(size);
+        System.out.println(String.format("Now you have %d tasks in the list!", size));
         showLine();
     }
 
@@ -72,7 +78,7 @@ public class Ui {
         showLine();
         System.out.println("Got it! I've added: ");
         System.out.println(" " + deadline);
-        System.out.println(size);
+        System.out.println(String.format("Now you have %d tasks in the list!", size));
         showLine();
     }
 
@@ -80,7 +86,7 @@ public class Ui {
         showLine();
         System.out.println("Got it! I've added: ");
         System.out.println(" " + event);
-        System.out.println(size);
+        System.out.println(String.format("Now you have %d tasks in the list!", size));
         showLine();
     }
 }

@@ -28,11 +28,6 @@ public class Event extends Task{
             LocalDate end = LocalDate.parse(endString);
             Event e = new Event(details[0], start, end);
             lst.addTask(e);
-            Ui.showLine();
-            System.out.println("Got it! I've added: ");
-            System.out.println(" " + e.toString());
-            lst.printSize();
-            Ui.showLine();
         } catch (DateTimeParseException e) {
             throw new DukeException("date format");
         }

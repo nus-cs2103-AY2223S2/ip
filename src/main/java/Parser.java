@@ -33,21 +33,21 @@ public class Parser {
                     throw new DukeException(commandType);
                 }
                 index = parseIntArg(arguments);
-                command = new MarkCommand(index);
+                command = new MarkCommand(index - 1);
                 break;
             case "unmark":
                 if (single) {
                     throw new DukeException(commandType);
                 }
                 index = parseIntArg(arguments);
-                command = new UnmarkCommand(index);
+                command = new UnmarkCommand(index - 1);
                 break;
             case "delete":
                 if (single) {
                     throw new DukeException(commandType);
                 }
                 index = parseIntArg(arguments);
-                command = new DeleteCommand(index);
+                command = new DeleteCommand(index - 1);
                 break;
             case "todo":
                 if (single) {
@@ -127,6 +127,8 @@ public class Parser {
         String[] eventDetails = argument.split("/from |/by ");
         if (eventDetails.length != 3) {
             throw new DukeException("timing");
+        } else if (argument.indexOf("/from") > argument.indexOf("/by")) {
+            throw new DukeException("wrong order");
         }
         try {
             LocalDate start = LocalDate.parse(eventDetails[1]);
