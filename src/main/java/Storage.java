@@ -1,3 +1,8 @@
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -51,13 +56,13 @@ public class Storage {
         String status = task.getStatus() ? "๑(◕‿◕)๑ COMPLETED! ๑(◕‿◕)๑" : "(｡-_-｡ ) INCOMPLETE ( ｡-_-｡)";
         if (task instanceof Todo) {
             Todo t = (Todo) task;
-            return "Todo: " + t.getDescription() + " " + status;
+            return "duke.task.Todo: " + t.getDescription() + " " + status;
         } else if (task instanceof Deadline) {
             Deadline d = (Deadline) task;
-            return "Deadline: " + d.getDescription() + " by " + d.getBy() + " " + status;
-        } else { // instance of Event
+            return "duke.task.Deadline: " + d.getDescription() + " by " + d.getBy() + " " + status;
+        } else { // instance of duke.task.Event
             Event e = (Event) task;
-            return "Event: " + e.getDescription() + " from " + e.getFrom() + " to " + e.getTo() + " " + status;
+            return "duke.task.Event: " + e.getDescription() + " from " + e.getFrom() + " to " + e.getTo() + " " + status;
         }
     }
 }

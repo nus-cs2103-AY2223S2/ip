@@ -1,3 +1,8 @@
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 /**
  * Parser: deals with making sense of the user command
  */
@@ -6,7 +11,6 @@ public class Parser {
     private static final String LIST_PATTERN = "list";
     private static final String MARK_PATTERN = "mark\\s+\\d*";
     private static final String UNMARK_PATTERN = "unmark\\s+\\d*";
-
     private static final String DELETE_PATTERN = "delete\\s+\\d*";
     private static final String TODO_PATTERN = "todo\\s+(.*)";
     private static final String DEADLINE_PATTERN = "deadline\\s+(.*)\\s+/by\\s+(.*)";
