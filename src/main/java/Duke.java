@@ -55,6 +55,17 @@ public class Duke {
                     continue;
                 }
 
+                if (userInput.startsWith("checkdue")) {
+                    String[] commandSplit = userInput.split(" ");
+                    int indexToUse = Integer.parseInt(commandSplit[1]) - 1;
+                    if (storedText.get(indexToUse) instanceof Deadlines) {
+                        Deadlines taskOfInterest = (Deadlines) storedText.get(indexToUse);
+                        System.out.println(taskOfInterest.taskDate());
+                    }
+                    userInput = brToUse.readLine();
+                    continue;
+                }
+
                 if (userInput.startsWith("mark")) {
                     String[] commandSplit = userInput.split(" ");
                     if (commandSplit.length <= 1) {
