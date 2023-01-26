@@ -14,28 +14,30 @@ public class Duke {
     public static void main(String[] args) {
         Enum command;
         String[] parameters;
+        TaskList taskList = new TaskList();
         Scanner myObj = new Scanner(System.in);
+
         while (true) {
             String input = myObj.nextLine();
             command = getCommand(input);
 
             if (command.equals(Commands.BYE)) { // no parameters
-
+                System.out.println("bai");
             } else if (command.equals(Commands.LIST)) {
 
             } else { //has parameters
                 parameters = getParameters(input);
-                if (command.equals(Commands.TODO)) {
-
-                } else if (command.equals(Commands.DEADLINE)) {
-
-                } else if (command.equals(Commands.EVENT)) {
-
-                } else if (command.equals(Commands.DELETE)) {
+                if (command.equals(Commands.MARK)) {
 
                 } else if (command.equals(Commands.UNMARK)) {
 
-                } else if (command.equals(Commands.MARK)) {
+                } else if (command.equals(Commands.TODO)) {
+
+                } else if (command.equals(Commands.DELETE)) {
+
+                } else if (command.equals(Commands.EVENT)) {
+
+                } else if (command.equals(Commands.DEADLINE)) {
 
                 }
             }
