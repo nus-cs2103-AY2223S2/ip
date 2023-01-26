@@ -22,7 +22,7 @@ public class Task {
     }
 
     public void setDone(boolean val) {
-        this.done = val;
+        done = val;
     }
 
     public String getDescription() {

@@ -22,6 +22,7 @@ public class Duke {
         System.out.println(horizontalLine);
         System.out.println("HELLO! I'M DUKE!");
         System.out.println("HOW CAN I HELP?");
+        System.out.println("NOTE! USE THIS FORMAT FOR DATES: dd/MM/yyyy HH:mm");
         System.out.println(horizontalLine);
         readInput();
     }
