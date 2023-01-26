@@ -4,10 +4,11 @@ import java.util.Scanner;
  * A class to handle all User Interactions: getting command input and printing output.
  */
 public class Ui {
+    /** Scanner to get user input */
     private Scanner scanner;
 
     /**
-     * Constructor for UI class.
+     * Constructor for Ui class.
      */
     public Ui() {
         scanner = new Scanner(System.in);
