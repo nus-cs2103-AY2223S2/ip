@@ -20,6 +20,29 @@ public class Duke {
     private static Path memoryPath = Paths.get(".", "memory.txt");
     private static File memory = new File(String.valueOf(memoryPath));
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String memoryPath) {
+        ui = new Ui();
+        storage = new Storage(memoryPath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        //...
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
     private static void printLine() {
         System.out.println("----------------------------------------------------");
     }
