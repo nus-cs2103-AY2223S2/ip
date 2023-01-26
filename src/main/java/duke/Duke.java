@@ -13,11 +13,16 @@ import java.nio.file.Paths;
 import java.util.*;
 
 
+/**
+ * Represents a build instance of Duke.
+ * A Duke instance is created when Duke is run.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
 
     public Duke() {
         storage = new Storage();
@@ -29,6 +34,9 @@ public class Duke {
         ui = new Ui(tasks);
     }
 
+    /**
+     * Duke's program flow
+     */
     public void run() {
         this.ui.sayHi();
         boolean exit = false;
@@ -46,6 +54,9 @@ public class Duke {
         //...
     }
 
+    /**
+     * Starts Duke as it begins parsing the commands
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

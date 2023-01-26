@@ -13,14 +13,29 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a Storage instance of Duke.
+ * A storage instance handles all interactions between local data file and Duke.
+ */
 public class Storage {
     private File myFoo;
     private String path;
 
+    /**
+     * Constructs a Storage instance.
+     *
+     */
     public Storage() {
         this.path = "data/duke.txt";
         this.myFoo = new File(path);
     }
+
+    /**
+     * Returns ArrayList instance after initialising ArrayList from data file
+     * ArrayList will subsequently converted to TaskList
+     *
+     * @return ArrayList object with loaded tasks.
+     */
     public ArrayList<Task> initData() throws IOException {
         boolean isFileExist = new java.io.File(path).exists();
         ArrayList<Task> arrList = new ArrayList<>(); //might be empty
@@ -53,6 +68,15 @@ public class Storage {
 
     }
 
+    /**
+     * Parses each individual line in the data file
+     * to add the Task into the ArrayList
+     *
+     * @param arrList ArrayList instance that holds all the Tasks
+     * @param currTask String representation of the
+     *                 current Task to be added as a Task instance to the ArrayList
+     *
+     */
     public void parseTask(ArrayList<Task> arrList, String currTask) {
         Task task = null;
         String[] toCheck = null;
@@ -85,6 +109,12 @@ public class Storage {
         arrList.add(task);
     }
 
+    /**
+     * Saves the TaskList back into the data file after execution
+     *
+     * @param itemList TaskList instance that holds all the Tasks
+     *
+     */
     public void saveToFile(TaskList itemList) {
         String path = "data/duke.txt";
         FileWriter fooWriter = null; //init
