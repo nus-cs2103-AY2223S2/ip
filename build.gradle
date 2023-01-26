@@ -6,7 +6,7 @@ plugins {
 
 compileJava {
     compileJava.options.fork = true
-    compileJava.options.forkOptions.executable = "./jdk-11.0.2/bin/javac.exe"
+    compileJava.options.forkOptions.executable = "../jdk-11.0.2/bin/javac"
 }
 
 repositories {
