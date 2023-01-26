@@ -1,12 +1,16 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    private String from;
-    private String to;
+    private LocalDateTime fromDate;
+    private LocalDateTime toDate;
+    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d/MM/yyyy H:mm");
 
     public Event(String description, String from, String to) {
         super(description);
-        this.from = from;
-        this.to = to;
+        fromDate = LocalDateTime.parse(from, FORMATTER);
+        toDate = LocalDateTime.parse(to, FORMATTER);
     }
 
     @Override
@@ -16,7 +20,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return description + " (from: " + from + " to: " + to + ")";
+        return description + " (from: " + formatDate(fromDate) + " to: " + formatDate(toDate) + ")";
+    }
+
+    private String formatDate(LocalDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
     }
 
 }
