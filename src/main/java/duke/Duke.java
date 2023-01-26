@@ -20,6 +20,11 @@ public class Duke {
         ui = new Ui();
     }
 
+    private static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
+        if (!expectsTrue)
+            throw new DukeException(failureMessage);
+    }
+
     private void displayTaskCount() {
         if (taskList.isEmpty())
             ui.println("You do not have any task!");
@@ -46,11 +51,6 @@ public class Duke {
         displayTaskCount();
     }
 
-    private static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
-        if (!expectsTrue)
-            throw new DukeException(failureMessage);
-    }
-
     public static void main(String[] args) {
 
         Ui.printProgramInfo();
@@ -63,7 +63,6 @@ public class Duke {
         Task activeTask;
         Scanner sc = new Scanner(System.in);
         Duke duke = new Duke();
-
         boolean isContinue = true;
 
         // Retrieve saved data (if any)
