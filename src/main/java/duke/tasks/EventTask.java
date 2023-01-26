@@ -1,4 +1,6 @@
-package duke;
+package duke.tasks;
+
+import duke.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,8 +10,7 @@ public class EventTask extends Task {
     private final LocalDate startDate;
     private final LocalDate endDate;
     static final String INDICATOR = "[Event]";
-    static final String INPUT_PREFIX = "event ";
-    static final String FORMAT_EXCEPTION_MESSAGE = "Invalid format for creating Event duke.Task";
+    static final String FORMAT_EXCEPTION_MESSAGE = "Invalid format for creating Event duke.tasks.Task";
     private static final String INVALID_DATE_EXCEPTION = "Incompatible date format given for start/end of Event";
     static final String PERIOD_BEGIN_PREFIX = "/from ";
     static final String PERIOD_BEGIN_PREFIX_REPLACEMENT = "FROM: ";

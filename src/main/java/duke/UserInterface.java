@@ -11,7 +11,6 @@ public class UserInterface {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String GREET_MESSAGE = "Hello, I'm Ekud! What can I do for you?";
-    public static final String FAREWELL_MESSAGE = "Bye. Always at your service.";
     private static final String FORMATTER_LEFT_WRAP = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     private static final String FORMATTER_RIGHT_WRAP = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
@@ -23,7 +22,7 @@ public class UserInterface {
         scanner = new Scanner(System.in);
     }
 
-    public String getCommand() {
+    public String getInput() {
         return scanner.nextLine();
     }
 

@@ -1,4 +1,6 @@
-package duke;
+package duke.tasks;
+
+import duke.*;
 
 import java.io.Serializable;
 
@@ -6,9 +8,9 @@ public abstract class Task implements Serializable {
     private static final String COMPLETED = " [O] ";
     private static final String NOT_COMPLETED = " [ ] ";
     static final String EXTRAS_FORMAT_TEMPLATE = " (%s)";
-    private static final String FORMAT_EXCEPTION = "Invalid format for creating duke.Task";
-    private static final String MARKED_RESPONSE = "Well done. duke.Task has been marked as completed:\n";
-    private static final String UNMARKED_RESPONSE = "Got it. duke.Task has been unmarked:\n";
+    private static final String FORMAT_EXCEPTION = "Invalid format for creating duke.tasks.Task";
+    private static final String MARKED_RESPONSE = "Well done. duke.tasks.Task has been marked as completed:\n";
+    private static final String UNMARKED_RESPONSE = "Got it. duke.tasks.Task has been unmarked:\n";
     private final String name;
     private boolean isCompleted;
     Task(String name) throws DukeException {
@@ -29,16 +31,16 @@ public abstract class Task implements Serializable {
         return UNMARKED_RESPONSE + UserInterface.INDENT + this;
     }
 
-    static Task parseTaskFromInput(String input) throws DukeException {
-        if (input.startsWith(ToDoTask.INPUT_PREFIX)) {
-            return ToDoTask.createToDo(input);
-        } else if (input.startsWith(DeadlineTask.INPUT_PREFIX)) {
-            return  DeadlineTask.createDeadline(input);
-        } else if (input.startsWith(EventTask.INPUT_PREFIX)) {
-            return EventTask.createEvent(input);
-        }
-        return null;
-    }
+//    static Task parseTaskFromInput(String input) throws DukeException {
+//        if (input.startsWith(ToDoTask.INPUT_PREFIX)) {
+//            return ToDoTask.createToDo(input);
+//        } else if (input.startsWith(DeadlineTask.INPUT_PREFIX)) {
+//            return  DeadlineTask.createDeadline(input);
+//        } else if (input.startsWith(EventTask.INPUT_PREFIX)) {
+//            return EventTask.createEvent(input);
+//        }
+//        return null;
+//    }
 
     static boolean isCreateTaskCommand(String input) {
         return input.startsWith(ToDoTask.INPUT_PREFIX) || input.startsWith(DeadlineTask.INPUT_PREFIX)
