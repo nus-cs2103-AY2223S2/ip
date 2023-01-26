@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static duke.Utils.parseDateTime;
 
 public class UtilsTest {
-    public static MockedStatic<LocalDateTime> dateTime;
+    private static MockedStatic<LocalDateTime> dateTime;
     
     public static final LocalDateTime DEFAULT_TIME = LocalDateTime.of(2022, 01, 01, 12, 30);
 
