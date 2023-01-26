@@ -69,7 +69,6 @@ public class Ui {
     }
 
     public static void displayClear() {
-        System.out.println("        Got it. I have cleared the task-list.");
-        System.out.println(line);
+        System.out.println("        Got it. I have cleared the task-list.\n" + line);
     }
 }
