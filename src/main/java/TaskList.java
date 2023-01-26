@@ -1,31 +1,57 @@
+/**
+ * File name: TaskList.java
+ * @author: Jerome Neo
+ * Description: TaskList class putting Task objects into a list.
+ */
 import duke.task.Task;
-
 import java.util.ArrayList;
 
-/**
- * TaskList contains the task list
- * e.g., it has operations to add/delete tasks in the list
- */
 public class TaskList {
     private static ArrayList<Task> tasks;
 
+    /**
+     * Constructor for the TaskList object.
+     */
     public TaskList() {
+
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Returns an integer representing the size of the TaskList.
+     *
+     * @return the size of the TaskList.
+     */
     public static Integer size() {
+
         return tasks.size();
     }
 
+    /**
+     * Adds a Task object into the TaskList.
+     *
+     * @param t the Task object to be added.
+     */
     public static void addTask(Task t) {
         tasks.add(t);
         TaskList.announceAdded(t);
     }
 
+    /**
+     * Returns a Task object at a specific index.
+     *
+     * @param i index.
+     * @return Task object at index.
+     */
     public Task getTaskAtIndex(Integer i) {
         return tasks.get(i);
     }
 
+    /**
+     * Attempts to delete a Task object in the TaskList at a specified index if it exists.
+     *
+     * @param i index.
+     */
     public void deleteTaskAtIndex(Integer i) {
         try {
             if (i < 0 || i >= tasks.size()){
@@ -38,17 +64,33 @@ public class TaskList {
         tasks.remove(toDelete);
         TaskList.announceRemoved(toDelete);
     }
+
+    /**
+     * Announces that the task has been added.
+     *
+     * @param t task added.
+     */
     public static void announceAdded(Task t) {
         System.out.println("Got it. I've added this task:");
         System.out.println("Now we have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Announces that the task has been removed.
+     *
+     * @param t task removed.
+     */
     public static void announceRemoved(Task t) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(t.toString());
         System.out.println("Now we have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Attempts to mark a Task in TaskList as completed if it exists.
+     *
+     * @param i index.
+     */
     public void taskMarkedAtIndex(Integer i) {
         try {
             if (i < 0 || i >= this.size()){
@@ -60,6 +102,11 @@ public class TaskList {
         this.getTaskAtIndex(i).taskDone();
     }
 
+    /**
+     * Attempts to mark a Task in TaskList as incomplete if it exists.
+     *
+     * @param i index.
+     */
     public void taskUnmarkedAtIndex(Integer i) {
         try {
             if (i < 0 || i >= this.size()){
@@ -70,6 +117,10 @@ public class TaskList {
         }
         this.getTaskAtIndex(i).taskNotDone();
     }
+
+    /**
+     * Prints all Task objects in the TaskList in a readable manner.
+     */
     public void printTaskList() {
         System.out.println("Here are the tasks in your list: ");
         for (int i = 0; i < tasks.size(); i++) {

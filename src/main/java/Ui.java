@@ -1,5 +1,7 @@
 /**
- * Ui deals with interactions with the user
+ * File name: Ui.java
+ * @author: Jerome Neo
+ * Description: Ui class deals with interaction with the user.
  */
 public class Ui {
     private final String LINE = "____________________________________________________________";
@@ -9,13 +11,22 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    /**
+     * Constructor for Ui.
+     */
     public Ui () {
     }
 
+    /**
+     * Prints a line separator.
+     */
     public void line() {
         System.out.println(LINE);
     }
 
+    /**
+     * Prints a greeting to the user.
+     */
     public void greeting() {
         System.out.println(LOGO);
         line();
@@ -26,11 +37,17 @@ public class Ui {
         line();
     }
 
+    /**
+     * Prints an exit message to the user.
+     */
     public void farewell() {
         System.out.println("Bye. Hope to see you again soon!");
         line();
     }
 
+    /**
+     * Prints to notify the user that an unexpected error has occured.
+     */
     public void somethingWentWrong() {
         System.out.println("Invalid response. Please try: todo, deadline or event. :)");
     }

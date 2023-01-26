@@ -1,10 +1,13 @@
+/**
+ * File name: Duke.java
+ * @author: Jerome Neo
+ * Description: The main class for the Duke application.
+ */
 import duke.task.Task;
-
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-
     private static Storage store = new Storage();
     private static Ui display = new Ui();
     private static Parser logic = new Parser();
