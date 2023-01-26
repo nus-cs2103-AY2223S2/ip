@@ -81,12 +81,8 @@ class Duke {
                             taskDescription += " ";
                         }
                     }
-<<<<<<< Updated upstream
-                    Deadlines taskName = new Deadlines(taskDescription, time);
-=======
 
                     Deadlines taskName = new Deadlines(taskDescription, date);
->>>>>>> Stashed changes
                     System.out.println("Got it. I've added this task:");
                     System.out.println(taskName.toString());
                     list.add(taskName);
