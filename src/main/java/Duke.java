@@ -8,7 +8,7 @@ public class Duke {
     private static Scanner sc = new Scanner(System.in);
     private static String currentInput;
     private static TaskList taskList;
-    private static Storage memory = new Storage("data/duke.txt");
+    private static Storage memory = new Storage("/data/duke.txt");
 
     public static String mark(boolean toMark) throws DukeException{
         int index = Integer.parseInt(toMark ? currentInput.substring(5) : currentInput.substring(7)) - 1;

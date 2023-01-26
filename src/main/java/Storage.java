@@ -12,12 +12,13 @@ public class Storage {
     private File storageFile;
 
     Storage(String filePath) {
-        String basePath = "src/main/java/";
-        File dataDirectory = new File(basePath + "/data");
+        String basePath = System.getProperty("user.dir");
+        Path nextPath = Paths.get(basePath, "src", "main", "java");
+        File dataDirectory = new File(nextPath.toString() + "/data");
         if (!dataDirectory.exists()) {
-            dataDirectory.mkdir();
+            System.out.println(dataDirectory.mkdir());
         }
-        this.storageFile = new File(basePath + filePath);
+        this.storageFile = new File(nextPath.toString() + filePath);
 
     }
     // create an empty text file if there is no data or load the existing data to task list if data exist
