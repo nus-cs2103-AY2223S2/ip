@@ -1,12 +1,13 @@
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class Deadline extends Task {
-    private String by;
+    private LocalDateTime by;
 
-    public Deadline(String objective, String by) {
+    public Deadline(String objective, LocalDateTime by) {
         super(objective);
         this.by = by;
     }
@@ -28,7 +29,22 @@ public class Deadline extends Task {
             }
         }
         if (objective.isEmpty()) throw new TaskParseException("This deadline is missing its body text!");
-        return new Deadline(objective, by);
+        if (by.isEmpty()) throw new TaskParseException("This deadline is missing its deadline! Use /by [date]");
+        try {
+            return new Deadline(objective, LocalDateTime.parse(by, DATE_IN_FMT));
+        } catch (DateTimeParseException ex) {
+            throw new TaskParseException(by + " needs to be formatted as " + DATE_IN_FMT_STR + "!");
+        }
+    }
+
+    @Override
+    public boolean beforeDate(LocalDateTime date) {
+        return by.isBefore(date) || by.isEqual(date);
+    }
+
+    @Override
+    public boolean afterDate(LocalDateTime date) {
+        return by.isAfter(date) || by.isEqual(date);
     }
 
     public static Deadline parseLoad(String[] data) throws TaskParseException {
@@ -43,10 +59,10 @@ public class Deadline extends Task {
             int seek = 1;
             for (int i = 0; i < objLines; i++) objective += (i > 0 ? "\n" : "") + data[seek++];
             for (int i = 0; i < byLines; i++) by += (i > 0 ? "\n" : "") + data[seek++];
-            Deadline deadline = new Deadline(objective, by);
+            Deadline deadline = new Deadline(objective, LocalDateTime.parse(by, DATE_IN_FMT));
             deadline.done = done;
             return deadline;
-        } catch (ArrayIndexOutOfBoundsException ex) {
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
             throw new TaskParseException("Deadline data is malformed:\n" + ex.getMessage());
         }
     }
@@ -57,15 +73,15 @@ public class Deadline extends Task {
         String cur;
         cur = "D " + done
                 + " " + (objective.codePoints().filter(c -> c == '\n').count() + 1)
-                + " " + (by.codePoints().filter(c -> c == '\n').count() + 1);
+                + " " + (by.format(DATE_IN_FMT).codePoints().filter(c -> c == '\n').count() + 1);
         repres.add(cur);
         Collections.addAll(repres, objective.split("\n"));
-        Collections.addAll(repres, by.split("\n"));
+        Collections.addAll(repres, by.format(DATE_IN_FMT).split("\n"));
         return repres.toArray(new String[repres.size()]);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (" + by.format(DATE_OUT_FMT) + ")";
     }
 }

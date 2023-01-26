@@ -6,6 +6,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -25,7 +29,7 @@ public class Miki {
     }
 
     private static void printDiv() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________________________");
     }
 
     private static void print(String s) {
@@ -129,6 +133,54 @@ public class Miki {
         return tasks;
     }
 
+    private static void printList(ArrayList<Task> tasks, String[] args) throws MikiArgsException {
+        String from = "";
+        String to = "";
+        boolean token_from = false;
+        boolean token_to = false;
+        if (Collections.frequency(Arrays.asList(args), "/from") > 1) throw new MikiArgsException("too many filter-froms...");
+        if (Collections.frequency(Arrays.asList(args), "/to") > 1) throw new MikiArgsException("too many filter-tos...");
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].equals("/from")) {
+                token_from = true;
+                token_to = false;
+                continue;
+            }
+            if (args[i].equals("/to")) {
+                token_from = false;
+                token_to = true;
+                continue;
+            }
+            if (token_from) {
+                from += (from.isEmpty() ? "" : " ") + args[i];
+            } else if (token_to) {
+                to += (to.isEmpty() ? "" : " ") + args[i];
+            }
+        }
+        LocalDateTime fromDate = null;
+        LocalDateTime toDate = null;
+        if (!from.isEmpty()) {
+            try {
+                fromDate = LocalDateTime.parse(from, Task.DATE_IN_FMT);
+            } catch (DateTimeParseException ex) {
+                throw new MikiArgsException(from + " needs to be formatted as " + Task.DATE_IN_FMT_STR + "!");
+            }
+        }
+        if (!to.isEmpty()) {
+            try {
+                toDate = LocalDateTime.parse(to, Task.DATE_IN_FMT);
+            } catch (DateTimeParseException ex) {
+                throw new MikiArgsException(to + " needs to be formatted as " + Task.DATE_IN_FMT_STR + "!");
+            }
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            if ((fromDate == null || tasks.get(i).afterDate(fromDate))
+                    && (toDate == null || tasks.get(i).beforeDate(toDate))) {
+                print(Integer.toString(i + 1) + ". " + tasks.get(i));
+            }
+        }
+    }
+
     public static void main(String[] args) {
         boolean ascii_only = false;
         for (int i = 0; i < args.length; i++) {
@@ -173,9 +225,7 @@ public class Miki {
                         break;
                     case "list":
                         print("caught in 4k:");
-                        for (int i = 0; i < tasks.size(); i++) {
-                            print(Integer.toString(i + 1) + ". " + tasks.get(i));
-                        }
+                        printList(tasks, cmd_args);
                         break;
                     case "mark": {
                         int idx = parseIndex(cmd_args, tasks.size());

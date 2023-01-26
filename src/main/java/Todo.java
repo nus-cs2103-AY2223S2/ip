@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.time.LocalDateTime;
 
 public class Todo extends Task {
     public Todo(String objective) {
@@ -40,6 +41,16 @@ public class Todo extends Task {
         repres.add(cur);
         Collections.addAll(repres, objective.split("\n"));
         return repres.toArray(new String[repres.size()]);
+    }
+
+    @Override
+    public boolean beforeDate(LocalDateTime date) {
+        return false;
+    }
+
+    @Override
+    public boolean afterDate(LocalDateTime date) {
+        return false;
     }
 
     @Override
