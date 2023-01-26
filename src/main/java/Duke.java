@@ -4,7 +4,7 @@ public class Duke {
     private static final String LINE = "----------------------------------------------";
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        //ArrayList<String> list = new ArrayList<>(100);
+        ArrayList<String> list = new ArrayList<>(100);
         System.out.println(LINE);
         System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
         System.out.println(LINE+"\n");
@@ -16,18 +16,18 @@ public class Duke {
                 System.out.println(LINE+"\n");
                 break;
             }
-//            else if (command.equals("list")) {
-//                System.out.println(LINE);
-//                for (int i = 0; i < list.size(); i++){
-//                    System.out.println("\t" + (i + 1) + ". "+ list.get(i));
-//                }
-//                System.out.println(LINE+"\n");
-//            }
+            else if (command.equals("list")) {
+                System.out.println(LINE);
+                for (int i = 0; i < list.size(); i++){
+                    System.out.println("\t" + (i + 1) + ". "+ list.get(i));
+                }
+                System.out.println(LINE+"\n");
+            }
             else {
                 System.out.println(LINE);
                 System.out.println("\t" + "added: " + command);
                 System.out.println(LINE + "\n");
-                //list.add(command);
+                list.add(command);
             }
         }
     }
