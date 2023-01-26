@@ -3,6 +3,12 @@ import java.util.Arrays;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 
 /**
@@ -37,6 +43,11 @@ public class Duke {
 
     }
 
+    /**
+     * Run the input command given by the user
+     * 
+     * @return return False if command is bye, otherwise return true
+     */
     private static boolean runCommand() throws IOException {
         String[] words;
         System.out.print("Type your input below: \n");
@@ -94,7 +105,7 @@ public class Duke {
 
 
     /**
-     * Function to print a double horizontal line
+     * Print a double horizontal line
      */ 
     private static void horizontalLine() { 
         for (int i = 0; i < 20; i++) {
@@ -104,7 +115,7 @@ public class Duke {
     }
 
     /**
-     * Function to print a list
+     * Print the list
      */ 
     private static void printList() {
         for (int i = 0; i < strArr.size(); i++) {
@@ -113,7 +124,7 @@ public class Duke {
     }
 
     /**
-     * Function to retrieve the Task object given an index
+     * Retrieve the Task object from the list given an index
      * 
      * @param num Index of the task to retrieve
      * @return returns a Task object
@@ -123,36 +134,51 @@ public class Duke {
     }
 
     /**
-     * Function to add a Task to the list given the description
+     * Add a Task to the list given the description
      * 
      * @param words Array of strings to be added to the list
      * @param type The type of task
-     * 
      */ 
     private static void specialTask(String[] words, String type) {
         Task task;
         if (words.length == 0) {
-            System.out.println("The description of " + type + " cannot be empty. Pleas try again");
+            System.out.println("The description of " + type + " cannot be empty. Please try again");
             return;
         }
-        if(type.equals("TODO")) {
+        if (type.equals("TODO")) {
             task = new Todo(String.join(" ", words ));
         } else {
-            boolean hasFirstOccured = false;
-            for (int i = 0; i < words.length; i++) {
-                if(!hasFirstOccured && words[i].contains("/")) {
-                    hasFirstOccured = true;
-                    words[i] = words[i].replace("/", "(") + ":";
-                } else if(hasFirstOccured && words[i].contains("/")) {
-                    words[i] = words[i].replace("/", "") + ":";
-                } 
-            }
-            String mergeWord = String.join(" ", words) + ")";
-            if(type.equals("DEADLINE")) {
-                task = new Deadline(String.join(" ", mergeWord ));  
+            String description;
+            if (type.equals("DEADLINE")) {
+                int indexForBy = getIndexOfWord(words, "/by");
+                if (indexForBy == 0) {
+                    System.out.println("The description of " + type + " cannot be empty. Please try again");
+                    return;
+                }
+                LocalDateTime dateTimeBy = getDateTime(words,indexForBy);
+                if (dateTimeBy == null) {
+                    System.out.println("Please enter in this format {description} /by DD/MM/YYYY HHMM. Try again");
+                    return;
+                }
+                description = String.join(" ",Arrays.copyOfRange(words, 0, indexForBy));
+                task = new Deadline(description,getDateTime(words,indexForBy));
             }
             else {
-                task = new Event(String.join(" ", mergeWord ));
+                int indexForFrom = getIndexOfWord(words, "/from");
+                if (indexForFrom == 0) {
+                    System.out.println("The description of " + type + " cannot be empty. Please try again");
+                    return;
+                }
+                int indexForTo = getIndexOfWord(words, "/to");
+                if (getDateTime(words,indexForFrom) == null || getDateTime(words,indexForTo) == null) {
+                    System.out.println("Please enter in this format {description} /from DD/MM/YYYY HHMM /to DD/MM/YYYY HHMM. Try again");
+                    return;
+                }
+
+                LocalDateTime dateTimeFrom = getDateTime(words,indexForFrom);
+                LocalDateTime dateTimeTo = getDateTime(words,indexForTo);
+                description = String.join(" ",Arrays.copyOfRange(words, 0, indexForFrom));
+                task = new Event(description,dateTimeFrom,dateTimeTo);
             }
         }
         strArr.add(task);
@@ -161,10 +187,9 @@ public class Duke {
     }
 
     /**
-     * Function to add delete a Task from the list given the index
+     * Delete a Task from the list given the index
      * 
      * @param num Index of the task to be deleted
-     * 
      */ 
     private static void deleteTask(int num) throws IndexOutOfBoundsException {
         Task selectedTask = getTask(num);
@@ -178,16 +203,29 @@ public class Duke {
      */ 
     private static void saveFile() {
         String fileContent;
-        fileContent = "  TYPE  | COMPLETED | DETAILS\n";
-        for (Task t : strArr){
-            if(t.type == 'T')
+        String dateTime = null;
+        fileContent = "  TYPE  | COMPLETED | DETAILS | DATE\n";
+        for (Task t : strArr) {
+            if (t.type == 'T') {
                 fileContent += "  Todo  |";
-            else if(t.type == 'D')
+            }
+            else if (t.type == 'D') {
                 fileContent += "Deadline|";
-            else
+                if (t instanceof Deadline) {
+                    Deadline task = (Deadline) t;
+                    dateTime = task.getDateTime();
+                }
+            }
+            else {
                 fileContent += "  Event |";
-            fileContent += t.isDone ? "    YES    |" : "    NO     |";
-            fileContent += t.description + "\n";
+                if (t instanceof Event) {
+                    Event task = (Event) t;
+                    dateTime = task.getDateTime();
+                }
+            }
+            fileContent += t.isDone ? "    YES    | " : "    NO     | ";
+            fileContent += t.description + " | " ;
+            fileContent += (dateTime == null ? "---" : dateTime) + "\n";
         }
         File file = new File(FILE_PATH);
         try {
@@ -209,7 +247,6 @@ public class Duke {
      * Function to write to file
      * 
      * @param description File content to be written to the file
-     * 
      */ 
     private static void writeToFile(String description) {
         try {
@@ -235,15 +272,21 @@ public class Duke {
                 Boolean hasSkipped = true;
                 String[] splitInput;
                 Task task;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
+                LocalDateTime dateTime;
                 while ((currLine = fileReader.readLine()) != null) {
                     if(!hasSkipped) {
                         splitInput = currLine.split("\\|");
                         if(splitInput[0].contains("Deadline")) {
-                            task = new Deadline(splitInput[2]);
+                            dateTime = LocalDateTime.parse(splitInput[3].trim(), formatter); 
+                            task = new Deadline(splitInput[2].trim(),dateTime);
                         } else if(splitInput[0].contains("Todo")) {
-                            task = new Todo(splitInput[2]);
+                            task = new Todo(splitInput[2].trim());
                         } else {
-                            task = new Event(splitInput[2]);
+                            String[] splitToAndFrom = (splitInput[3].trim()).split(" - ");
+                            dateTime = LocalDateTime.parse(splitToAndFrom[0], formatter);
+                            LocalDateTime dateTimeTo = LocalDateTime.parse(splitToAndFrom[1], formatter);
+                            task = new Event(splitInput[2].trim(), dateTime, dateTimeTo);
                         }
                         if(splitInput[1].contains("YES"))
                             task.mark();
@@ -255,6 +298,49 @@ public class Duke {
             }
         } catch (IOException e) {
             System.out.println("Error when loading file, a new file will be created");
+        }
+    }
+
+    /**
+     * Return index of given word
+     * 
+     * @param words the array of words to look from
+     * @param word the word to look for
+     * @return return the index of the given word, if it doesnt exist, return -1
+     */
+    private static int getIndexOfWord(String[] words, String word) {
+        int index = -1;
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].equals(word)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    /**
+     * Return dateTime from user given input
+     * 
+     * @param words user input that has been put into an array of strings
+     * @param index the index before the date
+     * @return return LocalDateTime derived from user input
+     */
+    private static LocalDateTime getDateTime(String[] words, int index) {
+        LocalDateTime dateTime;
+
+        if (index != -1 && words.length >= index+2) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                dateTime = LocalDateTime.parse(words[index+1] + " " + words[index+2], formatter); 
+                return dateTime;
+            } catch (DateTimeParseException e) {
+                return null;
+            } catch (IndexOutOfBoundsException e) {
+                return null;
+            }
+        } else {
+            return null;
         }
     }
 }

@@ -1,4 +1,4 @@
-  TYPE  | COMPLETED | DETAILS
-Deadline|    NO     |(Tuesday:)
-  Todo  |    NO     |sleep
-  Event |    YES    |PARTY)
+  TYPE  | COMPLETED | DETAILS | DATE
+Deadline|    YES    | hoho | 27 Jan 1999 03:00pm
+  Event |    NO     | bobo | 27 Jan 1999 07:00pm - 28 Jan 1999 09:00am
+  Todo  |    NO     | hasdhasdas | 27 Jan 1999 07:00pm - 28 Jan 1999 09:00am
