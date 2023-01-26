@@ -7,7 +7,7 @@ public class Event extends Tasks {
         this.to = to;
         this.type = 'E';
     }
-
+//bugfix?
     @Override
     public String getDuration() {
         return this.from + " " + this.to;
