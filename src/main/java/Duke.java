@@ -14,58 +14,36 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static Scanner sc = new Scanner(System.in);
-
     private Storage storage;
     private TaskList allTasks;
 
     public Duke(String[] memoryPathArray) {
-        storage = new Storage(memoryPathArray);
-        allTasks = new TaskList();
+        this.storage = new Storage(memoryPathArray);
+        this.allTasks = new TaskList();
         try {
-            storage.loadTasks(allTasks);
+            this.storage.loadTasks(this.allTasks);
         } catch (MemoryFailedException e) {
-            Ui.showLoadingError();
-            allTasks = new TaskList();
+            Ui.println(e.toString());
         }
     }
 
     public void run() {
-
+        boolean promptAgain = true;
+        while (promptAgain) {
+            Ui.printPrompt();
+            String command = Ui.listen();
+            try {
+                promptAgain = Parser.handleCommands(command, this.allTasks);
+            } catch (DukeException e) {
+                Ui.println(e.toString());
+            }
+            Ui.printDottedLine();
+        }
+        this.storage.saveTasks(this.allTasks);
     }
 
     public static void main(String[] args) {
         String[] memoryPathArray = {".", "memory.txt"};
         new Duke(memoryPathArray).run();
     }
-
-//    public static void main(String[] args) {
-//        loadTasks();
-//
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//
-//        printLine();
-//        System.out.println(logo);
-//        System.out.println("Hope you are doing great!");
-//        System.out.println("What can I do for you?");
-//        printLine();
-//
-//        boolean promptAgain = true;
-//        while (promptAgain) {
-//            System.out.println("Enter your prompt below:");
-//            String command = sc.nextLine();
-//            try {
-//                promptAgain = handleCommands(command);
-//            } catch (DukeException e) {
-//                System.out.println(e.toString());
-//            }
-//            printLine();
-//        }
-//
-//        saveTasks();
-//    }
 }

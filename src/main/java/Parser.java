@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
-    private static boolean handleCommands(String rawCommand, TaskList allTasks) throws DukeException {
+    public static boolean handleCommands(String rawCommand, TaskList allTasks) throws DukeException {
         int commandIndex = rawCommand.indexOf(' ');
         String command = rawCommand;
         String arguments = "";

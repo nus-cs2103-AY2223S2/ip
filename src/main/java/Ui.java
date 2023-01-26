@@ -1,4 +1,8 @@
+import java.util.Scanner;
+
 public class Ui {
+
+    private static Scanner sc = new Scanner(System.in);
 
     public static void println(String str) {
         System.out.println(str);
@@ -21,12 +25,28 @@ public class Ui {
         }
     }
 
-    public static void printLine() {
+    public static void printPrompt() {
+        println("Enter your prompt below:");
+    }
+
+    public static void printDottedLine() {
         println("----------------------------------------------------");
     }
 
-    public static void showLoadingError() {
-        println("There was an issue loading up memory. Loading empty task list!");
+    public static void printOnStartup() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        printDottedLine();
+        println(logo);
+        println("Hope you are doing great!\nWhat can I do for you?");
+        printDottedLine();
+    }
+
+    public static String listen() {
+        return sc.nextLine();
     }
 
 }
