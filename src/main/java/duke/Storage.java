@@ -9,7 +9,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+
+/**
+ * Handles the memory of duke list, load and save of task list memory
+ * @author oliverloo
+ * @version 1.0
+ *
+ */
 public class Storage {
+
+    /**
+     * Creates a directory path for the Tasklist to be loaded and read
+     * @param list
+     * @return void
+     */
     public static void loadFile(Tasklist list) throws IOException, DukeException {
         File file = new File(System.getProperty("user.dir") + "/data/Duke.Duke.txt");
         File dir = new File(System.getProperty("user.dir") + "/data");
@@ -37,6 +50,12 @@ public class Storage {
             }
         }
     }
+
+    /**
+     * Takes in a string literal "1" or "0" converts it to a boolean
+     * @param str
+     * @return boolean value, true if 1, false if 0
+     */
     public static boolean strToBool(String str) {
         if (str == "1") {
             return true;
@@ -44,6 +63,12 @@ public class Storage {
             return false;
         }
     }
+
+    /**
+     * takes in a Tasklist and writes it into memory
+     * @param list
+     * @throws IOException
+     */
     public static void saveToFile(Tasklist list) throws IOException {
         FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/data/Duke.Duke.txt");
         for (int i = 0; i < list.size(); i++) {
