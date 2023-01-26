@@ -1,16 +1,15 @@
 package jarvis.storage;
 
-import jarvis.exception.CommandParseException;
-import jarvis.exception.TaskIOException;
-import jarvis.task.DeadlineTask;
-import jarvis.task.EventTask;
-import jarvis.task.Task;
-import jarvis.task.ToDoTask;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+
+import jarvis.exception.TaskIoException;
+import jarvis.task.Task;
 
 /**
  * Storage class to handle local storage of tasks.
@@ -30,7 +29,7 @@ public class Storage {
         Scanner scanner;
         try {
             scanner = new Scanner(this.getFile());
-        } catch (FileNotFoundException | TaskIOException e) {
+        } catch (FileNotFoundException | TaskIoException e) {
             return tasks;
         }
 
@@ -48,9 +47,9 @@ public class Storage {
      * Saves the given list of tasks to local storage.
      *
      * @param tasks List of tasks to save.
-     * @throws TaskIOException If the tasks cannot be saved.
+     * @throws TaskIoException If the tasks cannot be saved.
      */
-    public void saveTasks(List<Task> tasks) throws TaskIOException {
+    public void saveTasks(List<Task> tasks) throws TaskIoException {
         try {
             FileWriter writer = new FileWriter(this.getFile());
             for (Task task : tasks) {
@@ -59,7 +58,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            throw new TaskIOException(
+            throw new TaskIoException(
                     "Unable to save tasks",
                     "I couldn't save your tasks."
             );
@@ -70,9 +69,9 @@ public class Storage {
      * Creates the folder and file to save tasks, if necessary.
      *
      * @return The created file.
-     * @throws TaskIOException If the folder or file cannot be created or accessed.
+     * @throws TaskIoException If the folder or file cannot be created or accessed.
      */
-    private File getFile() throws TaskIOException {
+    private File getFile() throws TaskIoException {
         File folder = new File(DATA_PATH);
         File file = new File(TASKS_PATH);
         try {
@@ -80,7 +79,7 @@ public class Storage {
             file.createNewFile();
         } catch (IOException | SecurityException e) {
             e.printStackTrace();
-            throw new TaskIOException(
+            throw new TaskIoException(
                     "Unable to create tasks file",
                     "There's something wrong in my head."
             );

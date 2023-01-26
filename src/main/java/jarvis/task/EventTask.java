@@ -1,11 +1,11 @@
 package jarvis.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import jarvis.exception.CommandParseException;
 import jarvis.exception.InvalidParameterException;
 import jarvis.exception.MissingParameterException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Task class representing an event task
@@ -86,11 +86,11 @@ public class EventTask extends Task {
     @Override
     public String serialize() {
         String[] data = {
-                "E",
-                String.valueOf(this.isDone()),
-                this.getDescription(),
-                String.valueOf(this.fromDate),
-                String.valueOf(this.toDate)
+            "E",
+            String.valueOf(this.isDone()),
+            this.getDescription(),
+            String.valueOf(this.fromDate),
+            String.valueOf(this.toDate)
         };
         return String.join(" / ", data);
     }

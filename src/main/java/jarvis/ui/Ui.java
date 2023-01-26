@@ -6,12 +6,15 @@ import java.util.List;
  * Ui class to present a text-based interface.
  */
 public class Ui {
-    private static final String LOGO = "     _   _    ______     _____ ____  \n" +
-            "    | | / \\  |  _ \\ \\   / /_ _/ ___| \n" +
-            " _  | |/ _ \\ | |_) \\ \\ / / | |\\___ \\ \n" +
-            "| |_| / ___ \\|  _ < \\ V /  | | ___) |\n" +
-            " \\___/_/   \\_\\_| \\_\\ \\_/  |___|____/\n";
+    private static final String LOGO = "     _   _    ______     _____ ____  \n"
+            + "    | | / \\  |  _ \\ \\   / /_ _/ ___| \n"
+            + " _  | |/ _ \\ | |_) \\ \\ / / | |\\___ \\ \n"
+            + "| |_| / ___ \\|  _ < \\ V /  | | ___) |\n"
+            + " \\___/_/   \\_\\_| \\_\\ \\_/  |___|____/\n";
 
+    /**
+     * Types of standard responses.
+     */
     public enum Response {
         INTRO,
         GOODBYE,

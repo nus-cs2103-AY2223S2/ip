@@ -29,7 +29,9 @@ public class ToDoTask extends Task {
 
     @Override
     public boolean satisfies(TaskFilter filter) {
-        if (!super.satisfies(filter)) return false;
+        if (!super.satisfies(filter)) {
+            return false;
+        }
         return filter.hasNoDates();
     }
 

@@ -1,9 +1,9 @@
 package jarvis.command;
 
+import jarvis.exception.TaskIoException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;
-import jarvis.exception.TaskIOException;
 
 
 /**
@@ -11,14 +11,14 @@ import jarvis.exception.TaskIOException;
  */
 public class ByeCommand extends Command {
     public ByeCommand() {
-        super(null, null, null);
+        super(Action.BYE, null, null);
     }
 
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         try {
             storage.saveTasks(taskList.getTasks());
-        } catch (TaskIOException e) {
+        } catch (TaskIoException e) {
             ui.printError(e.getFriendlyMessage());
         }
 

@@ -1,39 +1,37 @@
 package jarvis.command;
 
+import java.util.List;
+
+import jarvis.exception.CommandParseException;
 import jarvis.storage.Storage;
+import jarvis.task.EventTask;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;
-import jarvis.exception.CommandParseException;
-import jarvis.task.EventTask;
-
-import java.util.List;
 
 /**
  * Command class to create event tasks.
  */
 public class EventCommand extends Command {
-    private final String fromDate;
-    private final String toDate;
 
-    public EventCommand(Action action, String body, List<Command> subCommands) {
-        super(action, body, subCommands);
-        String fromDate = null;
-        String toDate = null;
-        for (Command command : subCommands) {
-            if (command.hasAction(Action.EVENT_FROM) && fromDate == null) {
-                fromDate = command.getBody();
-            } else if (command.hasAction(Action.EVENT_TO) && toDate == null) {
-                toDate = command.getBody();
-            }
-        }
-        this.fromDate = fromDate;
-        this.toDate = toDate;
+    public EventCommand(String body, List<Command> subCommands) {
+        super(Action.CREATE_EVENT, body, subCommands);
     }
 
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
+        Command fromCommand = this.getSubCommand(Action.EVENT_FROM);
+        Command toCommand = this.getSubCommand(Action.EVENT_TO);
+        String fromDate = null;
+        String toDate = null;
+        if (fromCommand != null && fromCommand.getBody() != null) {
+            fromDate = fromCommand.getBody();
+        }
+        if (toCommand != null && toCommand.getBody() != null) {
+            toDate = toCommand.getBody();
+        }
+
         try {
-            ui.print(taskList.addTask(new EventTask(this.getBody(), this.fromDate, this.toDate)));
+            ui.print(taskList.addTask(new EventTask(this.getBody(), fromDate, toDate)));
         } catch (CommandParseException e) {
             ui.printError(e.getFriendlyMessage());
         }

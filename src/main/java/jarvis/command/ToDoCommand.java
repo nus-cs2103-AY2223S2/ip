@@ -1,10 +1,10 @@
 package jarvis.command;
 
+import jarvis.exception.MissingParameterException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
-import jarvis.ui.Ui;
-import jarvis.exception.MissingParameterException;
 import jarvis.task.ToDoTask;
+import jarvis.ui.Ui;
 
 
 /**
@@ -12,8 +12,8 @@ import jarvis.task.ToDoTask;
  */
 public class ToDoCommand extends Command {
 
-    public ToDoCommand(Action action, String body) {
-        super(action, body, null);
+    public ToDoCommand(String body) {
+        super(Action.CREATE_TODO, body);
     }
 
     @Override

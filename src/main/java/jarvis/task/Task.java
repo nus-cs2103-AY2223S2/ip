@@ -1,9 +1,9 @@
 package jarvis.task;
 
+import java.util.Scanner;
+
 import jarvis.exception.CommandParseException;
 import jarvis.exception.MissingParameterException;
-
-import java.util.Scanner;
 
 /**
  * Abstract task class.
@@ -125,11 +125,15 @@ public abstract class Task {
      * @return Whether the task satisfies the given filter.
      */
     public boolean satisfies(TaskFilter filter) {
-        if (filter == null || filter.isEmpty() || filter.hasNoKeywords()) return true;
+        if (filter == null || filter.isEmpty() || filter.hasNoKeywords()) {
+            return true;
+        }
 
         String lowerDescription = this.description.toLowerCase();
         for (String keyword: filter.getKeywords()) {
-            if (lowerDescription.contains(keyword)) return true;
+            if (lowerDescription.contains(keyword)) {
+                return true;
+            }
         }
         return false;
     }

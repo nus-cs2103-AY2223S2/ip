@@ -1,12 +1,12 @@
 package jarvis.command;
 
+import java.util.List;
+
+import jarvis.exception.InvalidParameterException;
 import jarvis.storage.Storage;
+import jarvis.task.TaskFilter;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;
-import jarvis.exception.InvalidParameterException;
-import jarvis.task.TaskFilter;
-
-import java.util.List;
 
 
 /**
@@ -15,8 +15,14 @@ import java.util.List;
 public class ListCommand extends Command {
     private TaskFilter filter;
 
-    public ListCommand(Action action, String body, List<Command> subCommands) {
-        super(action, body, subCommands);
+    /**
+     * Constructor for a list command.
+     *
+     * @param body Keywords to search for.
+     * @param subCommands Supplementary commands.
+     */
+    public ListCommand(String body, List<Command> subCommands) {
+        super(Action.LIST, body, subCommands);
 
         String afterDate = null;
         String beforeDate = null;
@@ -32,7 +38,9 @@ public class ListCommand extends Command {
                     .setAfterDate(afterDate)
                     .setBeforeDate(beforeDate)
                     .addKeywords(body);
-        } catch (InvalidParameterException ignored) {}
+        } catch (InvalidParameterException e) {
+            this.filter = new TaskFilter();
+        }
     }
 
     @Override

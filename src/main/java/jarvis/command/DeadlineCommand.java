@@ -1,36 +1,33 @@
 package jarvis.command;
 
+import java.util.List;
+
+import jarvis.exception.CommandParseException;
 import jarvis.storage.Storage;
+import jarvis.task.DeadlineTask;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;
-import jarvis.exception.CommandParseException;
-import jarvis.task.DeadlineTask;
-
-import java.util.List;
 
 
 /**
  * Command class to delete deadline tasks.
  */
 public class DeadlineCommand extends Command {
-    private final String deadline;
 
-    public DeadlineCommand(Action action, String body, List<Command> subCommands) {
-        super(action, body, subCommands);
-        String deadline = null;
-        for (Command command : subCommands) {
-            if (command.hasAction(Action.DEADLINE_BY)) {
-                deadline = command.getBody();
-                break;
-            }
-        }
-        this.deadline = deadline;
+    public DeadlineCommand(String body, List<Command> subCommands) {
+        super(Action.CREATE_DEADLINE, body, subCommands);
     }
 
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
+        Command byCommand = this.getSubCommand(Action.DEADLINE_BY);
+        if (byCommand == null || byCommand.getBody() == null) {
+            ui.printError("The deadline ('/by ...') is missing.");
+            return;
+        }
+
         try {
-            ui.print(taskList.addTask(new DeadlineTask(this.getBody(), this.deadline)));
+            ui.print(taskList.addTask(new DeadlineTask(this.getBody(), byCommand.getBody())));
         } catch (CommandParseException e) {
             ui.printError(e.getFriendlyMessage());
         }
