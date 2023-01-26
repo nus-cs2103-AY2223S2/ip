@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList list, Storage storage) throws DuduException {
         try {
             Task currTask = list.getTask(index);
-            storage.deleteTask(list.delete(index));
+            storage.updateTask(list.delete(index));
             System.out.println("Noted. I've removed this task:");
             System.out.println("  " + currTask);
             System.out.println(list.getTotalTask());

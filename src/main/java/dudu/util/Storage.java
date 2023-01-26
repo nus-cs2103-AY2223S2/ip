@@ -12,9 +12,22 @@ import java.util.Scanner;
 
 public class Storage {
     private String filePath;
+
+    /**
+     * Constructor to store data into the data file.
+     *
+     * @param filePath File path to be stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Save task into the file.
+     *
+     * @param list List of tasks to be stored.
+     * @throws TaskIOException If the data cannot be saved
+     */
     public void saveTask(ArrayList<Task> list) throws TaskIOException {
         try {
             FileWriter fileWriter = new FileWriter(this.getFile());
@@ -27,9 +40,21 @@ public class Storage {
         }
     }
 
-    public void deleteTask(ArrayList<Task> list) throws TaskIOException {
+    /**
+     * Update the data file.
+     *
+     * @param list Updated list of tasks.
+     * @throws TaskIOException If the data cannot be saved
+     */
+    public void updateTask(ArrayList<Task> list) throws TaskIOException {
         saveTask(list);
     }
+
+    /**
+     * Reads the tasks form the data file.
+     *
+     * @return List of tasks.
+     */
     public ArrayList<Task> loadTask() {
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -43,6 +68,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Gets the file.
+     *
+     * @return Returns the file containing task list.
+     * @throws TaskIOException If the file cannot be accessed.
+     */
     public File getFile() throws TaskIOException {
         File file = new File(filePath);
         File parentFile = file.getParentFile();

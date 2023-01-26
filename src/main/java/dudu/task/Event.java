@@ -7,6 +7,13 @@ public class Event extends Task{
     private LocalDate to;
     private String name;
 
+    /**
+     * Constructor for event task, marked as undone.
+     *
+     * @param name Name of the event task
+     * @param from Starting date
+     * @param to Ending date
+     */
     public Event(String name, String from, String to) {
         super(name, false);
         this.name = name;
@@ -14,6 +21,14 @@ public class Event extends Task{
         this.to = LocalDate.parse(to);
     }
 
+    /**
+     * Constructor for event task.
+     *
+     * @param name Name of the event task
+     * @param from Starting date
+     * @param to Ending date
+     * @param isDone Completing status of the task
+     */
     public Event(String name, String from, String to, boolean isDone) {
         super(name, isDone);
         this.name = name;
