@@ -1,15 +1,43 @@
+import java.io.*;
 import java.text.NumberFormat;
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import static java.lang.Boolean.parseBoolean;
+
 public class Duke {
     String lines = "____________________________________________________________\n";
     boolean exit = false;
     String msg;
     ArrayList<Task> tasks = new ArrayList<Task>();
     int num_tasks = 0;
-    public static void main(String[] args) throws DukeException, NumberFormatException {
+    public static void main(String[] args) throws DukeException, NumberFormatException, FileNotFoundException {
+        String home = System.getProperty("user.home");
+        java.nio.file.Path path = java.nio.file.Paths.get(home, "Documents", "duke.txt");
+//        System.out.println("hello:" + path);
+        boolean directoryExists = java.nio.file.Files.exists(path);
         Duke duke = new Duke();
         System.out.println(duke.welcome_msg());
+        if(directoryExists) {
+            Scanner scanner = new Scanner(path.toFile());
+            while(scanner.hasNextLine()) {
+                String cur = scanner.nextLine();
+//                System.out.println(cur);
+                String[] temp = cur.split(" \\| ");
+//                for(int i = 0; i < temp.length; i++) {
+//                    System.out.println(temp[i]);
+//                }
+                if (temp[0].equals("T")) {
+                    duke.tasks.add(new Todo(temp[2], parseBoolean(temp[1])));
+//                    System.out.println(new Todo(temp[2], parseBoolean(temp[1])));
+                } else if (temp[0].equals("D")) {
+                    duke.tasks.add(new Deadline(temp[2], temp[3], parseBoolean(temp[1])));
+                } else if (temp[0].equals("E")){
+                    duke.tasks.add(new Event(temp[2], temp[4], temp[3], parseBoolean(temp[1])));
+                }
+            }
+            duke.num_tasks = duke.tasks.size();
+        }
         Scanner scanner = new Scanner(System.in);
         while(!duke.exit) {
             String inp = scanner.next();
@@ -25,6 +53,7 @@ public class Duke {
             }
             else {
                 desc = scanner.nextLine();
+
             }
             String by = "";
             String from = "";
@@ -43,9 +72,23 @@ public class Duke {
             }
             try {
                 duke.check_msg(inp, idx, desc, by, from);
+                BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile()));
+                String res = "";
+                for (int i = 0; i < duke.tasks.size(); i++) {
+                    Task cur = duke.tasks.get(i);
+                    res += cur.getSymbol() + " | ";
+                    res += ((cur.getStatusIcon() == "X") ? "true" : "false") + " | ";
+                    res += cur.getDetailedDescription();
+                    res += "\n";
+                }
+//                System.out.println(res);
+                writer.write(res);
+                writer.close();
                 System.out.println(duke.msg);
             } catch (DukeException e) {
                 System.out.println(duke.msg);
+            } catch (IOException e) {
+                System.out.println(directoryExists + "\n");
             }
         }
     }
