@@ -10,6 +10,10 @@ public class TaskDeadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.endTime);
+        return String.format(
+            "[D]%s (by: %s)", 
+            super.toString(), 
+            Task.formatDate(this.endTime)
+        );
     }
 }

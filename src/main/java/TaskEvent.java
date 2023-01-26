@@ -15,8 +15,8 @@ public class TaskEvent extends Task {
         return String.format(
             "[E]%s (from: %s to: %s)", 
             super.toString(), 
-            this.fromTime, 
-            this.toTime
+            Task.formatDate(this.fromTime), 
+            Task.formatDate(this.toTime)
         );
     }
 }
