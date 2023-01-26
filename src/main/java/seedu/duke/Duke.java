@@ -15,8 +15,6 @@ public class Duke {
     }
 
     public Duke(String filePath) {
-
-
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {

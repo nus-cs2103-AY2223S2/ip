@@ -8,8 +8,10 @@ public abstract class Task {
     protected final String taskType;
 
     /**
-        default constructor for Task
-        this should not be used by the client
+     *  Constructor for Task
+     *  @param description String description of the task
+     *  @param isDone whether the task has been marked
+     *  @param taskType String representing the type of task
      */
     protected Task(String description, boolean isDone, String taskType) {
         this.description = description;
@@ -17,20 +19,40 @@ public abstract class Task {
         this.taskType = taskType;
     }
 
+    /**
+     * Gets the status checkbox
+     * @return String of the status checkbox
+     */
     public String getStatusCheckbox() {
         return (this.isDone) ? "[X]" : "[]";
     }
 
+    /**
+     * Gets the boxed Task type
+     * @return String of the boxed Task type
+     */
     public String getTaskTypeBox() {
         return String.format("[%s]", this.taskType);
     }
 
-    // returns new Task that is marked as done
+    /**
+     * Marks a marked Task
+     * @return the new marked Task
+     * @throws DukeException if Task is already marked
+     */
     abstract public Task markTask() throws DukeException;
 
-    // returns new Task that is marked as undone
+    /**
+     * Marks an unmarked Task
+     * @return the new unmarked Task
+     * @throws DukeException if Task is already unmarked
+     */
     abstract public Task unmarkTask() throws DukeException;
 
+    /**
+     * Formats the Task into a format readable by Storage
+     * @return String of the formatted Task
+     */
     abstract public String formatTask();
 
     @Override

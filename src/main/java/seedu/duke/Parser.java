@@ -9,7 +9,13 @@ import java.util.Arrays;
 
 public class Parser {
 
-    public String checkCommand(String command, String[] commandsList) throws DukeException {
+    /**
+     *  Checks the validity of the command
+     *  @param command String of the command sent by user
+     *  @param commandsList String array of all the commands
+     *  @return String of the command if valid
+     */
+    private String checkCommand(String command, String[] commandsList) throws DukeException {
         for (String cmd : commandsList) {
             if (cmd.equals(command)) {
                 return command;
@@ -18,7 +24,12 @@ public class Parser {
         throw new DukeException("I don't know what this command means!");
     }
 
-    public String getTaskNumber(String[] splitInput) throws DukeException {
+    /**
+     *  Checks whether task number is given
+     *  @param splitInput String array of each word input by the user
+     *  @return String of the task number if it exists
+     */
+    private String getTaskNumber(String[] splitInput) throws DukeException {
         if (splitInput.length == 1) {
             throw new DukeException("No task number was given!");
         } else {
@@ -26,7 +37,13 @@ public class Parser {
         }
     }
 
-    public int checkTaskNumber(TaskList taskList, String taskNumber) throws DukeException {
+    /**
+     *  Checks whether task number is numeric & valid
+     *  @param taskList Current state of TaskList
+     *  @param taskNumber String of the taskNumber
+     *  @return Integer of the task number if it is valid
+     */
+    private int checkTaskNumber(TaskList taskList, String taskNumber) throws DukeException {
         try {
             int index = Integer.parseInt(taskNumber) - 1;
             if (index >= taskList.getSize() || index < 0) {
@@ -39,13 +56,22 @@ public class Parser {
         }
     }
 
-    public void checkDescription(String description) throws DukeException {
+    /**
+     *  Checks whether description for Task is given
+     *  @param description Description of the Task
+     */
+    private void checkDescription(String description) throws DukeException {
         if (description.equals("")) {
             throw new DukeException("There was no task description given!");
         }
     }
 
-    public int checkDeadline(String[] splitInput) throws DukeException {
+    /**
+     *  Checks whether deadline is given
+     *  @param splitInput String array of each word input by the user
+     *  @return Index of /by in the array
+     */
+    private int checkDeadline(String[] splitInput) throws DukeException {
         int byIndex = Arrays.asList(splitInput).indexOf("/by");
         if (byIndex == -1) {
             throw new DukeException("There was no deadline given!");
@@ -54,7 +80,12 @@ public class Parser {
         }
     }
 
-    public int checkStarting(String[] splitInput) throws DukeException {
+    /**
+     *  Checks whether starting time stamp for Event is given
+     *  @param splitInput String array of each word input by the user
+     *  @return Index of /from in splitInput
+     */
+    private int checkStarting(String[] splitInput) throws DukeException {
         int byIndex = Arrays.asList(splitInput).indexOf("/from");
         if (byIndex == -1) {
             throw new DukeException("Please indicate a starting period!");
@@ -63,7 +94,12 @@ public class Parser {
         }
     }
 
-    public int checkEnding(String[] splitInput) throws DukeException {
+    /**
+     *  Checks whether ending time stamp for Event is given
+     *  @param splitInput String array of each word input by the user
+     *  @return Index of /to in splitInput
+     */
+    private int checkEnding(String[] splitInput) throws DukeException {
         int byIndex = Arrays.asList(splitInput).indexOf("/to");
         if (byIndex == -1) {
             throw new DukeException("Please indicate an ending period!");
@@ -72,7 +108,12 @@ public class Parser {
         }
     }
 
-    public static LocalDateTime convertTimestamp(String timestamp) throws DukeException {
+    /**
+     *  Converts String timestamp into LocalDateTime object
+     *  @param timestamp String of the timestamp given
+     *  @return LocalDateTime object of timestamp
+     */
+    private static LocalDateTime convertTimestamp(String timestamp) throws DukeException {
         if (timestamp.equals("")) {
             throw new DukeException("There was no time period given!");
         }
@@ -94,6 +135,15 @@ public class Parser {
         }
     }
 
+    /**
+     *  Converts String timestamp into LocalDateTime object
+     *  @param splitInput String array of each word input by the user
+     *  @param commandList String array of all the commands
+     *  @param taskList Current state of TaskList
+     *  @param storage Storage to overwrite save file
+     *  @param ui Ui to print lines for user to see and interact with
+     *  @return Enum Command of the input given
+     */
     public Duke.Commands executeCommand(String[] splitInput, String[] commandList,TaskList taskList,
                                         Storage storage, Ui ui) throws DukeException {
         String commandStr = splitInput[0];
