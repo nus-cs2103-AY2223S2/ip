@@ -4,6 +4,8 @@ import duke.DukeException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskTracker {
     private ArrayList<Task> tasks = new ArrayList<Task>();
@@ -72,6 +74,18 @@ public class TaskTracker {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < getNumTasks(); i++) {
             sb.append("\n\t").append(i + 1).append(". ").append(tasks.get(i));
+        }
+        return sb.toString();
+    }
+
+    public String listTasksByKeyword(String keyword) {
+        List<Task> matches = tasks.stream()
+                .filter(t -> t.getTaskDescription().contains(keyword))
+                .collect(Collectors.toList());
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < matches.size(); i++) {
+            sb.append("\n\t").append(i + 1).append(". ").append(matches.get(i));
         }
         return sb.toString();
     }

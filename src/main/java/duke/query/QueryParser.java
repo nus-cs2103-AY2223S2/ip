@@ -9,7 +9,7 @@ public class QueryParser {
         result[0] = st.nextToken();
 
         try {
-            result[1] = st.nextToken("/");
+            result[1] = st.nextToken("/").stripTrailing().stripLeading();
             for (int i = 0; i < commands.length; i++) {
                String command = st.nextToken(" ");
                if (!command.equals(commands[i])) {
