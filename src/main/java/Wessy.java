@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Duke {
+public class Wessy {
     static String[] taskList = new String[100];
     static int firstUnused = 0;
 
