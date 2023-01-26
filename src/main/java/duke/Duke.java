@@ -6,7 +6,13 @@ import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.Scanner;
 
-
+/**
+ * Duke class is the main class and the beginning point of execution for the Duke chatbot.
+ *
+ * @author      Tseng Chen-Yu
+ * @version     %I%, %G%
+ * @since       1.0
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;

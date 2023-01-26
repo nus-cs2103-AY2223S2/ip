@@ -7,7 +7,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
-
+/**
+ * Storage class is used for loading stored tasks from a file and saving tasks back to the file
+ * upon any user modification.
+ *
+ * @author      Tseng Chen-Yu
+ * @version     %I%, %G%
+ * @since       1.0
+ */
 public class Storage {
     private File saveFile;
     private final String SAVE_FILE_DIR_PATH = System.getProperty("user.dir") + "/data/";

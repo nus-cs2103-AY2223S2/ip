@@ -1,4 +1,12 @@
 package duke;
+/**
+ * Task class is the base class from which other more specific tasks inherit from.
+ * Specific tasks that inherit from this base class are Event, Deadline and Todo.
+ *
+ * @author      Tseng Chen-Yu
+ * @version     %I%, %G%
+ * @since       1.0
+ */
 public class Task {
     private String description;
     private boolean isDone;
