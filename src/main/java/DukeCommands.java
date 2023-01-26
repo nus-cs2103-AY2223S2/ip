@@ -1,9 +1,17 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class DukeCommands {
     private static final String SPACER = "____________________"
             + "______________________";
+
+    private static final String DATA_PATH = "data.txt";
 
     public static void printMsg(String msg) {
         System.out.println(SPACER);
@@ -137,5 +145,66 @@ public class DukeCommands {
         System.out.println(task);
         System.out.println(msgFooter);
         System.out.println(SPACER);
+    }
+
+    public static ArrayList<Task> getData() {
+        ArrayList<Task> tasks = new ArrayList<>();
+        try {
+            File file = new File(DATA_PATH);
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String data = scanner.nextLine();
+                Task task = fromData(data);
+                if (!task.isEmpty()) {
+                    tasks.add(task);
+                }
+            }
+
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            File file = new File(DATA_PATH);
+        } catch (Exception e) {
+            printError(new DukeException("Unexpected error when getting data"));
+        }
+        return tasks;
+    }
+
+    public static void updateData(List<Task> tasks) {
+        try {
+            FileWriter myWriter = new FileWriter(DATA_PATH);
+            String data = toData(tasks);
+            myWriter.write(data);
+            myWriter.close();
+            printMsg("Current data have all been saved.");
+        } catch (IOException e) {
+            System.out.println(e);
+            printError(new DukeException("Error has occurred when saving data."));
+        }
+    }
+
+    private static String toData(List<Task> tasks) {
+        String output = "";
+        for (Task task : tasks) {
+            output += task.toData();
+            output += "\n";
+        }
+        return output;
+    }
+
+    private static Task fromData(String data) {
+        String[] typeSplit = data.split(" \\| ", 2);
+        switch (typeSplit[0]) {
+        case "Todo":
+            return Todo.fromData(typeSplit[1]);
+        case "Deadline":
+            return Deadline.fromData(typeSplit[1]);
+        case "Event":
+            return Event.fromData(typeSplit[1]);
+        default:
+            printError(new DukeException("Unknown entry in data file"));
+            break;
+        }
+        return Task.EMPTY_TASK;
     }
 }
