@@ -1,17 +1,20 @@
 
-import java.io.FileNotFoundException;
-
 import commands.Command;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import parser.Parser;
 import storage.Storage;
 import tasklist.TaskList;
@@ -24,21 +27,21 @@ public class Shao extends Application {
     private Storage storage;
     private TaskList tasklist;
 
+    private boolean isExit = false;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
 
-    public static void main(String[] args) {
-        new Shao().run(args);
-    }
-
     @Override
     public void start(Stage stage) {
         initServices();
         setGUILayout(stage);
         ui.greetUser(dialogContainer, storage);
+
+        storage.getFile(tasklist, parser, ui);
     }
 
     private void initServices() {
@@ -59,15 +62,6 @@ public class Shao extends Application {
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        // Load the chat bot and user image
-        try {
-            storage.loadAvatars();
-        } catch (FileNotFoundException ex) {
-            Label errorLabel = new Label("Something went wrong. Please restart the app.");
-            errorLabel.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
-            dialogContainer.getChildren().add(errorLabel);
-        }
 
         scene = new Scene(mainLayout);
 
@@ -102,30 +96,58 @@ public class Shao extends Application {
 
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-        // sendButton.setOnAction(new EventHandler<ActionEvent>() {
-        // @Override
-        // public void handle(ActionEvent e) {
-        // dialogContainer.getChildren().add(new Label("Hi"));
-        // }
-        // });
+
+        sendButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                run(stage);
+            }
+        });
+
+        userInput.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent k) {
+                if (k.getCode().equals(KeyCode.ENTER)) {
+                    run(stage);
+                }
+            }
+        });
+
     }
 
     /** Run the program until it terminates */
-    public void run(String... args) {
-        initServices();
+    public void run(Stage stage) {
+        // initServices();
 
-        storage.getFile(tasklist, parser, ui);
+        // storage.getFile(tasklist, parser, ui);
 
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            Command c = parser.parseInput(fullCommand);
-            ui.printRowDivider();
-            c.execute(ui, parser, storage, tasklist);
-            ui.printRowDivider();
-            isExit = c.isExit();
+        // boolean isExit = false;
+        // while (!isExit) {
+        // String fullCommand = ui.readCommand();
+        // Command c = parser.parseInput(fullCommand);
+        // ui.printRowDivider();
+        // c.execute(ui, parser, storage, tasklist);
+        // ui.printRowDivider();
+        // isExit = c.isExit();
+        // }
+        // ui.cleanUp();
+        String fullCommand = userInput.getText();
+        userInput.setText("");
+
+        ui.sendInput(dialogContainer, storage, fullCommand);
+        Command c = parser.parseInput(fullCommand);
+        c.execute(ui, parser, storage, tasklist, dialogContainer);
+        isExit = c.isExit();
+
+        if (isExit) {
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent e) {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            });
         }
-        ui.cleanUp();
     }
 
 }

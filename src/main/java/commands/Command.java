@@ -1,5 +1,8 @@
 package commands;
 
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import storage.Storage;
 import ui.Ui;
 
 public class Command {
@@ -29,6 +32,10 @@ public class Command {
 	 */
 	public void execute(Object... args) {
 		Ui ui = (Ui) args[0];
-		ui.printError("Oops! I'm sorry but I don't know what that means.");
+		Storage storage = (Storage) args[2];
+		VBox dialogContainer = (VBox) args[4];
+		Label message = new Label("Oops! I'm sorry but I don't know what that means.");
+		message.setWrapText(true);
+		ui.sendResponse(dialogContainer, storage, message);
 	};
 }

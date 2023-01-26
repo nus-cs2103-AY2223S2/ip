@@ -32,15 +32,20 @@ public class Storage {
 
 	private File myFile = new File(dataFilePath);
 
-	private ImageView botImageView;
-	private ImageView userImageView;
-
 	public ImageView getBotImageView() {
-		return this.botImageView;
+		try {
+			return loadImageFile("bot.png");
+		} catch (FileNotFoundException ex) {
+			return new ImageView();
+		}
 	}
 
 	public ImageView getUserImageView() {
-		return this.userImageView;
+		try {
+			return loadImageFile("user.png");
+		} catch (FileNotFoundException ex) {
+			return new ImageView();
+		}
 	}
 
 	/**
@@ -165,11 +170,6 @@ public class Storage {
 		} catch (IOException e) {
 			ui.printError("Something went wrong while deleting a line from the file.");
 		}
-	}
-
-	public void loadAvatars() throws FileNotFoundException {
-		botImageView = loadImageFile("bot.png");
-		userImageView = loadImageFile("user.png");
 	}
 
 	private ImageView loadImageFile(String imageFileName) throws FileNotFoundException {

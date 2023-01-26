@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -175,21 +177,34 @@ public class Ui {
 		}
 	}
 
-	/** Welcome message */
 	public void greetUser(VBox dialogContainer, Storage storage) {
 		String s1 = "Hi There! I'm Shao";
 		String s2 = "What can I do for you?";
 		VBox messages = new VBox();
 		messages.getChildren().addAll(new Label(s1), new Label(s2));
+		sendResponse(dialogContainer, storage, messages);
+	}
+
+	public void sendResponse(VBox dialogContainer, Storage storage, Node messages) {
 		HBox rowContainer = new HBox();
+		rowContainer.setAlignment(Pos.CENTER_LEFT);
 		rowContainer.setPadding(new Insets(20, 0, 0, 20));
 		rowContainer.setSpacing(10);
-
 		rowContainer.getChildren().addAll(storage.getBotImageView(), messages);
 		dialogContainer.getChildren().add(rowContainer);
+	}
 
-		// println("\tHi There! I'm Shao");
-		// println("\tWhat can I do for you?");
+	public void sendInput(VBox dialogContainer, Storage storage, String input) {
+		HBox rowContainer = new HBox();
+		rowContainer.setAlignment(Pos.CENTER_RIGHT);
+		rowContainer.setPadding(new Insets(20, 20, 0, 0));
+		rowContainer.setSpacing(10);
+
+		Label message = new Label(input);
+		message.setWrapText(true);
+
+		rowContainer.getChildren().addAll(message, storage.getUserImageView());
+		dialogContainer.getChildren().add(rowContainer);
 	}
 
 	/**
