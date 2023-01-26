@@ -1,8 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
     String dead;
+    LocalDate deadDate;
     public Deadline(String details, String dead) {
         super(details);
-        this.dead = dead;
+        try {
+            this.deadDate = LocalDate.parse(dead);
+            this.dead = deadDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        } catch (DateTimeParseException ignored) {
+            this.dead = dead;
+        }
     }
 
     @Override
