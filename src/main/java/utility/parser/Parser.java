@@ -6,6 +6,7 @@ import tasklist.task_types.Deadline;
 import tasklist.task_types.Event;
 import tasklist.task_types.Task;
 import tasklist.task_types.ToDo;
+import utility.ui.UiMessage;
 
 public class Parser {
     private static DukeException wrongNumberParam = new DukeException("Wrong number of parameters inserted.");
@@ -14,57 +15,59 @@ public class Parser {
     private static DukeException noSpecialParam = new DukeException("Missing special param e.g /by, /from, /to");
     private static DukeException emptyParam = new DukeException("Empty parameter inserted.");
 
-    private static CommandMap printTasks(String[] command, TaskList list) throws DukeException {
+    private static UiMessage printTasks(String[] command, TaskList list) throws DukeException {
         if (command.length > 1) {
             throw noParamCommand;
         }
-        System.out.println(list);
-        return CommandMap.list;
+        return new UiMessage(CommandMap.list, null);
     }
 
-    private static CommandMap markTask(String[] command, TaskList list) throws DukeException {
+    private static UiMessage markTask(String[] command, TaskList list) throws DukeException {
         try {
             if (command.length > 2) {
                 throw wrongNumberParam;
             }
-            list.markedTask(Integer.parseInt(command[1]) - 1);
-            return CommandMap.mark;
+            int index = Integer.parseInt(command[1]) - 1;
+            list.markedTask(index);
+            return new UiMessage(CommandMap.mark, list.getTask(index));
         } catch (NumberFormatException e) {
             throw noNumericParam;
         }
 
     }
 
-    private static CommandMap unmarkTask(String[] command, TaskList list) throws DukeException {
+    private static UiMessage unmarkTask(String[] command, TaskList list) throws DukeException {
         try {
             if (command.length > 2) {
                 throw wrongNumberParam;
             }
-            list.unmarkedTask(Integer.parseInt(command[1]) - 1);
-            return CommandMap.unmark;
+            int index = Integer.parseInt(command[1]) - 1;
+            list.unmarkedTask(index);
+            return new UiMessage(CommandMap.unmark, list.getTask(index));
         } catch (NumberFormatException e) {
             throw noNumericParam;
         }
 
     }
 
-    private static CommandMap deleteTask(String[] command, TaskList list) throws DukeException {
+    private static UiMessage deleteTask(String[] command, TaskList list) throws DukeException {
         try {
             if (command.length > 2) {
                 throw wrongNumberParam;
             }
-            list.deleteTask(Integer.parseInt(command[1]) - 1);
-            return CommandMap.unmark;
+            int index = Integer.parseInt(command[1]) - 1;
+            list.deleteTask(index);
+            return new UiMessage(CommandMap.delete, list.getTask(index));
         } catch (NumberFormatException e) {
             throw noNumericParam;
         }
     }
 
-    private static CommandMap closeProgram() {
-        return CommandMap.bye;
+    private static UiMessage closeProgram() {
+        return new UiMessage(CommandMap.bye, null);
     }
 
-    private static CommandMap createToDo(String[] command, TaskList list) throws DukeException {
+    private static UiMessage createToDo(String[] command, TaskList list) throws DukeException {
         if (command.length > 2) {
             throw wrongNumberParam;
         }
@@ -76,10 +79,10 @@ public class Parser {
         Task toDoObj = new ToDo(command[1]);
         list.addTask(toDoObj);
 
-        return CommandMap.todo;
+        return new UiMessage(CommandMap.todo, toDoObj);
     }
 
-    private static CommandMap createDeadline(String[] command, TaskList list) throws DukeException {
+    private static UiMessage createDeadline(String[] command, TaskList list) throws DukeException {
         if (command.length != 4) {
             throw wrongNumberParam;
         }
@@ -91,10 +94,10 @@ public class Parser {
         Task deadlineObj = new Deadline(command[1], command[3]);
         list.addTask(deadlineObj);
 
-        return CommandMap.deadline;
+        return new UiMessage(CommandMap.deadline, deadlineObj);
     }
 
-    private static CommandMap createEvent(String[] command, TaskList list) throws DukeException {
+    private static UiMessage createEvent(String[] command, TaskList list) throws DukeException {
         if (command.length != 6) {
             throw wrongNumberParam;
         }
@@ -106,10 +109,10 @@ public class Parser {
         Task eventObj = new Event(command[1], command[3], command[5]);
         list.addTask(eventObj);
 
-        return CommandMap.event;
+        return new UiMessage(CommandMap.event, eventObj);
     }
 
-    public static CommandMap readCommand(String input, TaskList list) throws DukeException {
+    public static UiMessage readCommand(String input, TaskList list) throws DukeException {
         String[] command = input.trim().split(" ");
 
         try {

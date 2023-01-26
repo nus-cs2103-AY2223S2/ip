@@ -49,7 +49,7 @@ public class TaskList implements Serializable {
     }
 
     public String getTotal() {
-        return String.format("Now you have %d tasks in the list", list.size());
+        return String.format("Now you have %d tasks in the list\n", list.size());
     }
 
     public int getSize() {
@@ -61,9 +61,9 @@ public class TaskList implements Serializable {
         String str = "";
         for (int i = 0; i < list.size(); i++) {
             int index = i + 1;
-            System.out.println("\n" + index + ". " + list.get(i).toString());
+            str += "\n" + index + ". " + list.get(i).toString();
         }
 
-        return str;
+        return str + "\n";
     }
 }
