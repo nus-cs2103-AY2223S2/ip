@@ -12,7 +12,7 @@ public abstract class EventLoop implements Disposable {
     /**
      * The root executable that shall be executed in the loop.
      */
-    private final Executable rootExecutable;
+    private final Commandable rootCommandable;
     /**
      * The StringReadable that shall be used for providing the next line of
      * input to the event loop.
@@ -23,9 +23,9 @@ public abstract class EventLoop implements Disposable {
      */
     private final Writable errorWriter;
 
-    public EventLoop(Executable rootExecutable, StringReadable reader,
+    public EventLoop(Commandable rootCommandable, StringReadable reader,
                      Writable errorWriter) {
-        this.rootExecutable = rootExecutable;
+        this.rootCommandable = rootCommandable;
         this.reader = reader;
         this.errorWriter = errorWriter;
     }
@@ -48,7 +48,7 @@ public abstract class EventLoop implements Disposable {
             if (!reader.hasNextLine()) {
                 break;
             }
-            status = rootExecutable.execute(getTokens());
+            status = rootCommandable.execute(getTokens());
             if (status == ExitStatus.terminate) {
                 break;
             }
@@ -58,9 +58,9 @@ public abstract class EventLoop implements Disposable {
 
     @Override
     public void dispose() {
-        if (rootExecutable instanceof Disposable) {
+        if (rootCommandable instanceof Disposable) {
             try {
-                ((Disposable) rootExecutable).dispose();
+                ((Disposable) rootCommandable).dispose();
             } catch (DisposableException e) {
                 errorWriter.writeln("Failed to dispose the root " +
                         "executable: " + e.getMessage());

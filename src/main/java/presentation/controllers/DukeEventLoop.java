@@ -24,15 +24,15 @@ public class DukeEventLoop extends EventLoop {
     /**
      * Creates a {@link DukeEventLoop} instance.
      *
-     * @param rootExecutable the root executable that this event loop would
-     *                       iterate over and over again.
-     * @param reader         the reader that this event loop would read from.
-     * @param errorWriter    the error writer that this event loop would write
-     *                       errors to.
+     * @param rootCommandable the root executable that this event loop would
+     *                        iterate over and over again.
+     * @param reader          the reader that this event loop would read from.
+     * @param errorWriter     the error writer that this event loop would write
+     *                        errors to.
      */
-    private DukeEventLoop(Executable rootExecutable, StringReadable reader,
+    private DukeEventLoop(Commandable rootCommandable, StringReadable reader,
                           Writable errorWriter) {
-        super(rootExecutable, reader, errorWriter);
+        super(rootCommandable, reader, errorWriter);
     }
 
     /**
@@ -46,8 +46,8 @@ public class DukeEventLoop extends EventLoop {
         // are managed by the event loops.
         final StringReadable reader = new SystemIn();
         Writable errorWriter = Singletons.get(SystemErr.class);
-        final NestableExecutableObject executable =
-                new NestableExecutableObject(errorWriter);
+        final NestedCommandableObject executable =
+                new NestedCommandableObject(errorWriter);
         final ByeUsecase bye = Singletons.get(ByeUsecase.class);
         bye.register(executable);
         final TaskManagerUsecase manager =
@@ -57,8 +57,8 @@ public class DukeEventLoop extends EventLoop {
         final UnknownCommandUsecase unknown =
                 Singletons.get(UnknownCommandUsecase.class);
         unknown.register(executable);
-        final NestableExecutableObject rootExecutable =
-                new NestableExecutableObject(errorWriter);
+        final NestedCommandableObject rootExecutable =
+                new NestedCommandableObject(errorWriter);
         return new DukeEventLoop(executable, reader, errorWriter);
     }
 
@@ -70,8 +70,8 @@ public class DukeEventLoop extends EventLoop {
     public static DukeEventLoop createInitializingLoop() {
         final StringReadable readable = Singletons.get(DataLoader.class);
         final Writable errorWriter = Singletons.get(SystemErr.class);
-        final NestableExecutableObject executable =
-                new NestableExecutableObject(errorWriter);
+        final NestedCommandableObject executable =
+                new NestedCommandableObject(errorWriter);
         final TaskManagerUsecase manager =
                 Singletons.get(TaskManagerUsecase.class);
         manager.redirectOutput(Singletons.get(DummyWritable.class));

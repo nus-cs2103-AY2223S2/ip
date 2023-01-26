@@ -6,7 +6,7 @@ import domain.entities.core.*;
  * A {@link UnknownCommandUsecase} is a usecase that would be triggered when
  * the user types in a command that is not recognized by the program.
  */
-public class UnknownCommandUsecase implements Executable, ExecutableRegisterable {
+public class UnknownCommandUsecase implements Commandable, CommandRegisterable {
     /**
      * The destination that this UnknownCommandUsecase would write its
      * content. To show the flexibility of this design, you can choose to
@@ -34,7 +34,7 @@ public class UnknownCommandUsecase implements Executable, ExecutableRegisterable
     }
 
     @Override
-    public void register(NestableExecutableObject nestable) {
+    public void register(NestedCommandableObject nestable) {
         nestable.registerPostExecutable(this);
     }
 }

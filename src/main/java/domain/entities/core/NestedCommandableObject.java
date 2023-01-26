@@ -13,7 +13,7 @@ import java.util.Map;
  * This class shall contain several executable objects, hence it shall be
  * considered 'nestable' executable.
  */
-public class NestableExecutableObject implements Executable, Disposable {
+public class NestedCommandableObject implements Commandable, Disposable {
     /**
      * The commands that are executed in sequence before executing the
      * tokenedCommands in an execution iteration.
@@ -21,7 +21,7 @@ public class NestableExecutableObject implements Executable, Disposable {
      * iteration may not continue after executing a certain command, depending
      * on the command's return value upon execution.</p>
      */
-    private final List<Executable> preExecutables;
+    private final List<Commandable> preCommandables;
     /**
      * The commands that are executed in the sequence after executing the
      * keywordCommands.
@@ -29,7 +29,7 @@ public class NestableExecutableObject implements Executable, Disposable {
      * iteration may not continue after executing a certain command, depending
      * on the command's return value upon execution.</p>
      */
-    private final List<Executable> postExecutables;
+    private final List<Commandable> postCommandables;
     /**
      * The commands that are executed in the middle. They will be matched
      * against the keyword to decide whether if they wil be executed.
@@ -37,7 +37,7 @@ public class NestableExecutableObject implements Executable, Disposable {
      * iteration may not continue after executing a certain command, depending
      * on the command's return value upon execution.</p>
      */
-    private final Map<String, IdentifiableExecutable> identifiedExecutables;
+    private final Map<String, IdentifiedCommandable> identifiedExecutables;
     /**
      * The list of disposables that will be disposed when this object is
      * disposed. This can be used to do some bookkeeping such as saving the
@@ -52,9 +52,9 @@ public class NestableExecutableObject implements Executable, Disposable {
     /**
      * Instantiates a new TokensManager.
      *
-     * @param preExecutables        the executables to be executed first in an
+     * @param preCommandables       the executables to be executed first in an
      *                              iteration.
-     * @param postExecutables       the executables to be executed last in an
+     * @param postCommandables      the executables to be executed last in an
      *                              iteration.
      * @param identifiedExecutables the commands to be executed in the middle in
      *                              an iteration, with a mapping from tokens to
@@ -62,14 +62,14 @@ public class NestableExecutableObject implements Executable, Disposable {
      * @param errorWriter           the writer to which the error messages shall
      *                              be written.
      */
-    public NestableExecutableObject(
-            ArrayList<Executable> preExecutables,
-            ArrayList<Executable> postExecutables,
-            HashMap<String, IdentifiableExecutable> identifiedExecutables,
+    public NestedCommandableObject(
+            ArrayList<Commandable> preCommandables,
+            ArrayList<Commandable> postCommandables,
+            HashMap<String, IdentifiedCommandable> identifiedExecutables,
             Writable errorWriter
     ) {
-        this.preExecutables = preExecutables;
-        this.postExecutables = postExecutables;
+        this.preCommandables = preCommandables;
+        this.postCommandables = postCommandables;
         this.identifiedExecutables = identifiedExecutables;
         this.errorWriter = errorWriter;
     }
@@ -81,27 +81,27 @@ public class NestableExecutableObject implements Executable, Disposable {
      * @param errorWriter the writer to which the error messages shall be
      *                    written.
      */
-    public NestableExecutableObject(Writable errorWriter) {
+    public NestedCommandableObject(Writable errorWriter) {
         this(new ArrayList<>(), new ArrayList<>(), new HashMap<>(),
                 errorWriter);
     }
 
     /**
-     * Registers a executable to be executed before the tokened commands.
+     * Registers a commandable to be executed before the tokened commands.
      *
-     * @param executable the executable to be put into the preCommand loop.
+     * @param commandable the commandable to be put into the preCommand loop.
      */
-    public void registerPreExecutable(Executable executable) {
-        this.preExecutables.add(executable);
+    public void registerPreExecutable(Commandable commandable) {
+        this.preCommandables.add(commandable);
     }
 
     /**
-     * Registers a executable to be exe
+     * Registers a commandable to be exe
      *
-     * @param executable the executable to be put into the postCommand loop.
+     * @param commandable the commandable to be put into the postCommand loop.
      */
-    public void registerPostExecutable(Executable executable) {
-        this.postExecutables.add(executable);
+    public void registerPostExecutable(Commandable commandable) {
+        this.postCommandables.add(commandable);
     }
 
     /**
@@ -111,24 +111,24 @@ public class NestableExecutableObject implements Executable, Disposable {
      *
      * @param executable the executable to be put into the keyword executable loop.
      */
-    public void registerIdentifiableExecutable(IdentifiableExecutable executable) {
+    public void registerIdentifiableExecutable(IdentifiedCommandable executable) {
         final String key = executable.getId();
         identifiedExecutables.put(key, executable);
     }
 
     /**
-     * Runs a list of executables.
+     * Runs a list of commandables.
      *
-     * @param executables the list of executables to be run.
-     * @param tokens      the array of tokens to be passed to the list of executables
-     *                    as argument.
-     * @return the ExitStatus of executing the executables.
+     * @param commandables the list of commandables to be run.
+     * @param tokens       the array of tokens to be passed to the list of commandables
+     *                     as argument.
+     * @return the ExitStatus of executing the commandables.
      */
-    private ExitStatus runExecutablesList(List<Executable> executables,
+    private ExitStatus runExecutablesList(List<Commandable> commandables,
                                           String[] tokens) {
         ExitStatus status = ExitStatus.continueExecute;
-        for (Executable executable : executables) {
-            status = executable.execute(tokens);
+        for (Commandable commandable : commandables) {
+            status = commandable.execute(tokens);
             if (status != ExitStatus.continueExecute) {
                 return status;
             }
@@ -149,22 +149,22 @@ public class NestableExecutableObject implements Executable, Disposable {
 
     @Override
     public ExitStatus execute(String[] tokens) {
-        ExitStatus status = runExecutablesList(preExecutables, tokens);
+        ExitStatus status = runExecutablesList(preCommandables, tokens);
         if (status != ExitStatus.continueExecute) {
             return status;
         }
         if (!identifiedExecutables.isEmpty()) {
-            final Executable executable = identifiedExecutables.get(tokens[0]);
-            if (executable != null) {
+            final Commandable commandable = identifiedExecutables.get(tokens[0]);
+            if (commandable != null) {
                 final String[] newTokens =
                         Singletons.get(TokenUtilities.class).removeFirst(tokens);
-                status = executable.execute(newTokens);
+                status = commandable.execute(newTokens);
                 if (status != ExitStatus.continueExecute) {
                     return status;
                 }
             }
         }
-        return runExecutablesList(postExecutables, tokens);
+        return runExecutablesList(postCommandables, tokens);
     }
 
     @Override

@@ -3,7 +3,7 @@ package domain.entities.core;
 /**
  * The interface for objects that can be executed.
  */
-public interface Executable {
+public interface Commandable {
     /**
      * Execute the executable.
      *

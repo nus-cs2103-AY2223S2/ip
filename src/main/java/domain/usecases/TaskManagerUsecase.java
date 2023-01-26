@@ -17,12 +17,12 @@ import java.util.ArrayList;
 /**
  * A {@link TaskManagerUsecase} is a usecase that manages a list of
  * {@link Task}s. It provides many anonymous classes that can be registered
- * to a {@link NestableExecutableObject}. These anonymous classes will be
+ * to a {@link NestedCommandableObject}. These anonymous classes will be
  * used to execute the commands.
  * <p>
  * To register the anonymous classes, use the register method.
  */
-public class TaskManagerUsecase implements ExecutableRegisterable {
+public class TaskManagerUsecase implements CommandRegisterable {
     /**
      * The data saver
      */
@@ -82,9 +82,10 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
      * @param id           the id of the task instance.
      * @return the executable for adding a Task to this class.
      */
-    private IdentifiableExecutable getAddTaskExecutable(ThrowingFunction<String[], Task,
+    public IdentifiedCommandable getAddTaskCommand(ThrowingFunction<String[],
+            Task,
             InvalidArgumentException> taskSupplier, String id) {
-        return new IdentifiableExecutable() {
+        return new IdentifiedCommandable() {
             @Override
             public String getId() {
                 return id;
@@ -96,7 +97,7 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
                 try {
                     task = taskSupplier.apply(tokens);
                 } catch (InvalidArgumentException exception) {
-                    writable.writeln(exception.getMessage());
+                    errorWritable.writeln(exception.getMessage());
                     return ExitStatus.finishCurrentIteration;
                 }
                 addTask(task);
@@ -111,8 +112,8 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
      *
      * @return the executable for listing all the TodoItems.
      */
-    private IdentifiableExecutable getListTodosExecutable() {
-        return new IdentifiableExecutable() {
+    public IdentifiedCommandable getListTodoCommand() {
+        return new IdentifiedCommandable() {
             @Override
             public String getId() {
                 return "list";
@@ -123,7 +124,7 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
                 for (int i = 0; i < tasks.size(); i++) {
                     writable.writeln((i + 1) + ". " + tasks.get(i));
                 }
-                return null;
+                return ExitStatus.finishCurrentIteration;
             }
         };
     }
@@ -159,9 +160,9 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
      *                   complete or not.
      * @return the executable that will mark an item's isComplete.
      */
-    private IdentifiableExecutable getMarkerExecutable(boolean isComplete,
-                                                       String id) {
-        return new IdentifiableExecutable() {
+    public IdentifiedCommandable getMarkerExecutable(boolean isComplete,
+                                                     String id) {
+        return new IdentifiedCommandable() {
             @Override
             public ExitStatus execute(String[] tokens) {
                 final String indexStr = tokens[0];
@@ -169,7 +170,7 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
                 try {
                     index = getIndex(indexStr);
                 } catch (InvalidArgumentException exception) {
-                    writable.writeln(exception.getMessage());
+                    errorWritable.writeln(exception.getMessage());
                     return ExitStatus.finishCurrentIteration;
                 }
                 final Task item = tasks.get(index);
@@ -191,8 +192,8 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
      *
      * @return the executable for deleting a TodoItem.
      */
-    private IdentifiableExecutable getDeleteExecutable() {
-        return new IdentifiableExecutable() {
+    public IdentifiedCommandable getDeleteExecutable() {
+        return new IdentifiedCommandable() {
             @Override
             public ExitStatus execute(String[] tokens) {
                 final String indexStr = tokens[0];
@@ -215,8 +216,8 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
         };
     }
 
-    IdentifiableExecutable getListOfDate() {
-        return new IdentifiableExecutable() {
+    IdentifiedCommandable getListOfDate() {
+        return new IdentifiedCommandable() {
             @Override
             public ExitStatus execute(String[] tokens) {
                 final String dateStr = tokens[0];
@@ -254,7 +255,7 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
      *
      * @return the disposable for disposing this class.
      */
-    private Disposable getDisposable() {
+    public Disposable getDisposable() {
         return () -> {
             try {
                 dataSaver.clear();
@@ -274,9 +275,9 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
     }
 
     @Override
-    public void register(NestableExecutableObject nestable) {
+    public void register(NestedCommandableObject nestable) {
         registerReader(nestable);
-        nestable.registerIdentifiableExecutable(getListTodosExecutable());
+        nestable.registerIdentifiableExecutable(getListTodoCommand());
         nestable.registerIdentifiableExecutable(
                 getMarkerExecutable(true, "mark")
         );
@@ -293,16 +294,16 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
      *
      * @param nestable the nestable for executing the readers.
      */
-    public void registerReader(NestableExecutableObject nestable) {
-        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
+    public void registerReader(NestedCommandableObject nestable) {
+        nestable.registerIdentifiableExecutable(getAddTaskCommand(
                 ToDo::new,
                 "todo"
         ));
-        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
+        nestable.registerIdentifiableExecutable(getAddTaskCommand(
                 Deadline::new,
                 "deadline"
         ));
-        nestable.registerIdentifiableExecutable(getAddTaskExecutable(
+        nestable.registerIdentifiableExecutable(getAddTaskCommand(
                 Event::new,
                 "event"
         ));

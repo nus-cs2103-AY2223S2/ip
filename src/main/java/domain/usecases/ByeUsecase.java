@@ -6,7 +6,7 @@ import domain.entities.core.*;
  * A {@link ByeUsecase} is a usecase that would terminate the program. It can
  * be triggered when the user types in "bye".
  */
-public class ByeUsecase implements IdentifiableExecutable, ExecutableRegisterable {
+public class ByeUsecase implements IdentifiedCommandable, CommandRegisterable {
     /**
      * The destination that this ByeUsecase would write its content to.
      */
@@ -34,7 +34,7 @@ public class ByeUsecase implements IdentifiableExecutable, ExecutableRegisterabl
     }
 
     @Override
-    public void register(NestableExecutableObject nestable) {
+    public void register(NestedCommandableObject nestable) {
         nestable.registerIdentifiableExecutable(this);
     }
 }

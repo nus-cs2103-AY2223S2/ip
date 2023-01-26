@@ -6,7 +6,7 @@ import domain.entities.core.*;
  * A {@link EchoUsecase} is a usecase that would echo the tokens that it
  * receives.
  */
-public class EchoUsecase implements Executable, ExecutableRegisterable {
+public class EchoUsecase implements Commandable, CommandRegisterable {
     /**
      * The writable that this usecase writes to.
      */
@@ -29,7 +29,7 @@ public class EchoUsecase implements Executable, ExecutableRegisterable {
     }
 
     @Override
-    public void register(NestableExecutableObject nestable) {
+    public void register(NestedCommandableObject nestable) {
         nestable.registerPostExecutable(this);
     }
 }
