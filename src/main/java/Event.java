@@ -1,15 +1,17 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task {
     String startTime;
     String endTime;
     public Event(String description, String startTime, String endTime) {
         super(description);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = Parser.parseDate(startTime);
+        this.endTime = Parser.parseDate(endTime);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(" + startTime + endTime + ")";
+        return "[E]" + super.toString() + "(From: " + startTime + "hrs" + " To: " +  endTime + "hrs" + ")";
     }
 
     public String saveString() {
