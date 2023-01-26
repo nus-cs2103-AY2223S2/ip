@@ -27,6 +27,7 @@ public class Event extends Task {
         super(description);
         this.startTime = startTime;
         this.endTime = endTime;
+        this.wordsInDescription.addAll(Arrays.asList(description.split(" ")));
     }
 
     /**
