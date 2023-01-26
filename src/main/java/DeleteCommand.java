@@ -11,6 +11,7 @@ import duke.command.Command;
  * @author Karen
  */
 public class DeleteCommand extends Command {
+
     private int num;
 
     public DeleteCommand(int num) {
@@ -40,4 +41,5 @@ public class DeleteCommand extends Command {
             ui.taskNotChosenErrorMessage();
         }
     }
+
 }

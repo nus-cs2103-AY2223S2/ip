@@ -5,7 +5,9 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
+
 import java.time.format.DateTimeFormatter;
+
 import java.util.Scanner;
 
 /**
@@ -14,6 +16,7 @@ import java.util.Scanner;
  * @author Karen
  */
 public class Ui {
+
     private static final String STR = "------------------------------------------------------------";
     private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd MMM uuuu kk:mm");
     private static String LOGO = " ____        _        \n"

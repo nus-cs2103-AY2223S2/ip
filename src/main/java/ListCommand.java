@@ -11,6 +11,7 @@ import duke.command.Command;
  * @ Karen
  */
 public class ListCommand extends Command {
+
     /**
      * Checks if command is an exit command.
      *
@@ -30,4 +31,5 @@ public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.listTaskResponse(tasks);
     }
+
 }

@@ -6,12 +6,13 @@ package duke.task;
  * @author Karen
  */
 public class Todo extends Task {
+
     public Todo(String description) {
         super(description);
     }
 
-    public Todo(String description, boolean done) {
-        super(description, done);
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
     }
 
     /**
@@ -38,4 +39,5 @@ public class Todo extends Task {
         }
         return false;
     }
+
 }

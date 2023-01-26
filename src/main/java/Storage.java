@@ -5,13 +5,16 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -22,6 +25,7 @@ import java.time.format.DateTimeFormatter;
  * @author Karen
  */
 public class Storage {
+
     static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd MMM uuuu kk:mm");
     private String filePath;
 
@@ -42,16 +46,19 @@ public class Storage {
         while(s.hasNextLine()) {
             String[] parts = s.nextLine().split(Pattern.quote(" | "));
             switch (parts[0]) {
-                case "T":
-                    arr.add(new Todo(parts[2], Boolean.parseBoolean(parts[1])));
-                    break;
-                case "D":
-                    arr.add(new Deadline(parts[2], Boolean.parseBoolean(parts[1]), parts[3].substring(4), FORMAT));
-                    break;
-                case "E":
-                    arr.add(new Event(parts[2], Boolean.parseBoolean(parts[1]), parts[3].substring(6),
-                            parts[4].substring(4), FORMAT));
-                    break;
+
+            case "T":
+                arr.add(new Todo(parts[2], Boolean.parseBoolean(parts[1])));
+                break;
+
+            case "D":
+                arr.add(new Deadline(parts[2], Boolean.parseBoolean(parts[1]), parts[3].substring(4), FORMAT));
+                break;
+
+            case "E":
+                arr.add(new Event(parts[2], Boolean.parseBoolean(parts[1]), parts[3].substring(6),
+                        parts[4].substring(4), FORMAT));
+                break;
             }
         }
         return arr;
@@ -68,4 +75,5 @@ public class Storage {
         fw.write(tasks.toString());
         fw.close();
     }
+
 }

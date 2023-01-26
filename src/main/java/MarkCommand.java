@@ -11,6 +11,7 @@ import duke.command.Command;
  * @author Karen
  */
 public class MarkCommand extends Command {
+
     private int num;
 
     public MarkCommand(int num) {
@@ -40,4 +41,5 @@ public class MarkCommand extends Command {
             ui.taskNotChosenErrorMessage();
         }
     }
+
 }

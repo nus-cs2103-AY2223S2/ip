@@ -13,6 +13,7 @@ import java.time.format.DateTimeParseException;
  * @ Karen
  */
 public class AddEventCommand extends Command {
+
     private String name;
     private String from;
     private String to;
@@ -51,4 +52,5 @@ public class AddEventCommand extends Command {
             ui.incompleteCommandErrorMessage();
         }
     }
+
 }

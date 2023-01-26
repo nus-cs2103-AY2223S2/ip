@@ -4,10 +4,13 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
+
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 public class TaskList {
+
     static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd MMM uuuu kk:mm");
     private ArrayList<Task> tasks;
 
@@ -89,4 +92,5 @@ public class TaskList {
         }
         return str;
     }
+
 }

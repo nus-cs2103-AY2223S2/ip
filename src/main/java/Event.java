@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
  * @author Karen
  */
 public class Event extends Task {
+
     protected LocalDateTime to;
     protected LocalDateTime from;
     protected DateTimeFormatter format;
@@ -51,4 +52,5 @@ public class Event extends Task {
         }
         return false;
     }
+
 }
