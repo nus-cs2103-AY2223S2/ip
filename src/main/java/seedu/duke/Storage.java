@@ -7,10 +7,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Manages task operation that involves underlying file storage.
+ */
 public class Storage {
     private Path filePath;
     private final static String delimiter = "\\|";
 
+    /**
+     * Constructs a new storage.
+     */
     public Storage() {
         this.filePath = openDataFile();
     }
@@ -45,6 +51,12 @@ public class Storage {
         return lineArray;
     }
 
+    /**
+     * Converts the file content to a <code>TaskList</code> object.
+     *
+     * @return The TaskList converted from the file.
+     * @throws IOException If reading from the file fails.
+     */
     public TaskList fileToArrayList() throws IOException {
         int lineNumber = Math.toIntExact(Files.lines(filePath).count());
         TaskList tasks = new TaskList(new ArrayList<>());
@@ -77,6 +89,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes the whole list of tasks to the file.
+     *
+     * @param tasks A list of tasks to be recorded.
+     * @throws IOException If writing to the file fails.
+     */
     public void writeTasksToFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath.toString());
         int len = tasks.size();
@@ -87,6 +105,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Appends a new task to the end of file.
+     *
+     * @param task The new task to be appended.
+     * @throws IOException If appending the task to the file fails.
+     */
     public void addTaskToFile(Task task) throws IOException {
         FileWriter fw = new FileWriter(filePath.toString(), true);
         fw.write(task.taskInFileFormat());

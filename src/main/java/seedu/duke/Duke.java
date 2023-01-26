@@ -3,12 +3,18 @@ package seedu.duke;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * A personal assistant chatbox to manage daily tasks.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
     private final static String BYE = "bye";
 
+    /**
+     * Constructs a new Duke object
+     */
     public Duke() {
         storage = new Storage();
         parser = new Parser();
