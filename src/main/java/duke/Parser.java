@@ -86,11 +86,11 @@ public class Parser {
     public Task parseTask(String data) {
         String[] arguments = data.split("~-~-~");
         if (arguments[0].equals("todo")) {
-            return new Todo(arguments[1]);
+            return new Todo(arguments[1], arguments[2].equals("X"));
         } else if (arguments[0].equals("deadline")) {
-            return new Deadline(arguments[1], arguments[2]);
+            return new Deadline(arguments[1], arguments[3].equals("X"), arguments[2]);
         } else {
-            return new Event(arguments[1], arguments[2], arguments[3]);
+            return new Event(arguments[1], arguments[4].equals("X"), arguments[2], arguments[3]);
         }
         
     }

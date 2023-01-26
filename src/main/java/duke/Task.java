@@ -4,6 +4,11 @@ abstract class Task {
     private String description;
     private boolean isDone;
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public Task(String description) {
         if (description.isEmpty()) {
             throw new IllegalArgumentException("duke.Task cannot be empty!");
