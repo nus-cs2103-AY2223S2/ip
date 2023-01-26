@@ -4,7 +4,7 @@ public class InvalidIndexException extends IllegalArgumentException{
     }
     @Override
     public String toString() {
-        return "☹ OOPS!!! The index is out of bound";
+        return "☹ OOPS!!! The index is out of bound" + getMessage();
     }
 
 }

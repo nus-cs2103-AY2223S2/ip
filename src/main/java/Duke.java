@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 
 public class Duke {
 
@@ -18,6 +20,21 @@ public class Duke {
         LIST,
         DELETE,
         BYE
+    }
+
+    public static void getTaskForToday() {
+        for (Task t: arrOfTask) {
+            if (t.getDate().equals(LocalDate.now())) {
+                System.out.println(t);
+            }
+        }
+    }
+    public static LocalDate convertStringToDate(String date) throws DateTimeException {
+        String[] arr = date.split("-");
+        if (arr.length < 3) {
+            throw new DateTimeException("wrong date format");
+        }
+        return LocalDate.of(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]));
     }
 
     public static void exit() {
@@ -45,10 +62,17 @@ public class Duke {
         }
     }
 
-    public static void taskDone(int index) {
+    public static void checkValidIndex(int index) throws InvalidIndexException{
         if (index > Task.getTotalNumOfTask()) {
             throw new InvalidIndexException("Index too large");
+        } else if (index <= 0) {
+            throw new InvalidIndexException("Index too small");
         }
+    }
+
+
+    public static void taskDone(int index) {
+        checkValidIndex(index);
         Task t = arrOfTask.get(index - 1);
         t.taskDone();
         System.out.println(indentation + "Nice! I've marked this task as done:");
@@ -56,9 +80,7 @@ public class Duke {
     }
 
     public static void taskNotDone(int index) {
-        if (index > Task.getTotalNumOfTask()) {
-            throw new InvalidIndexException("Index too large");
-        }
+        checkValidIndex(index);
         Task t = arrOfTask.get(index - 1);
         t.taskNotDone();
         System.out.println(indentation + "OK, I've marked this task as not done yet:");
@@ -66,9 +88,7 @@ public class Duke {
     }
 
     public static void deleteTask(int index) {
-        if (index > Task.getTotalNumOfTask()) {
-            throw new InvalidIndexException("Index too large");
-        }
+        checkValidIndex(index);
         Task t = arrOfTask.get(index - 1);
         System.out.println(indentation + "Noted. I've removed this task:");
         System.out.println(indentation + t);
@@ -92,9 +112,9 @@ public class Duke {
                 if (arr[0].equals("T")) {
                     t = new Todo(arr[2]);
                 } else if (arr[0].equals("D")) {
-                    t = new Deadline(arr[2], arr[3]);
+                    t = new Deadline(arr[2], LocalDate.parse(arr[3]));
                 } else {
-                    t = new Event(arr[2], arr[3], arr[4]);
+                    t = new Event(arr[2], LocalDate.parse(arr[3]), LocalDate.parse(arr[4]));
                 }
                 if (arr[1].equals("1")) {
                     t.taskDone();
@@ -146,24 +166,48 @@ public class Duke {
                 list();
                 break;
             case MARK:
+                if (command.length() <= 5) {
+                    throw new EmptyDescriptionException("The description of a task cannot be empty");
+                }
                 taskDone(Integer.parseInt(command.substring(5)));
                 break;
             case UNMARK:
+                if (command.length() <= 7) {
+                    throw new EmptyDescriptionException("The description of a task cannot be empty");
+                }
                 taskNotDone(Integer.parseInt(command.substring(7)));
                 break;
             case DELETE:
+                if (command.length() <= 7) {
+                    throw new EmptyDescriptionException("The description of a task cannot be empty");
+                }
                 deleteTask(Integer.parseInt(command.substring(7)));
                 break;
             case TODO:
+                if (command.length() <= 5) {
+                    throw new EmptyDescriptionException("The description of a task cannot be empty");
+                }
                 addTask(new Todo(command.substring(5)));
                 break;
             case DEADLINE:
+                if (command.length() <= 9) {
+                    throw new EmptyDescriptionException("The description of a task cannot be empty");
+                }
                 String[] str1 = command.substring(9).split("/");
-                addTask(new Deadline(str1[0], str1[1].substring(3)));
+                if (str1.length < 2) {
+                    throw new EmptyDescriptionException("The date of a task cannot be empty");
+                }
+                addTask(new Deadline(str1[0], convertStringToDate(str1[1].substring(3, 13))));
                 break;
             case EVENT:
+                if (command.length() <= 6) {
+                    throw new EmptyDescriptionException("The description of a task cannot be empty");
+                }
                 String[] str2 = command.substring(6).split("/");
-                addTask(new Event(str2[0], str2[1].substring(5), str2[2].substring(3)));
+                if (str2.length < 3) {
+                    throw new EmptyDescriptionException("The date of a task cannot be empty");
+                }
+                addTask(new Event(str2[0], convertStringToDate(str2[1].substring(5, 15)), convertStringToDate(str2[2].substring(3, 13))));
         }
     }
 
@@ -171,6 +215,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         greet();
         openFile();
+        getTaskForToday();
         while (true) {
             try {
                 String command = sc.nextLine();
@@ -182,12 +227,10 @@ public class Duke {
                     break;
                 }
                 sortActions(action, command);
-            } catch (InvalidCommandException e1) {
-                System.out.println(indentation + e1);
-            } catch (InvalidIndexException e2) {
-                System.out.println(indentation + e2);
-            } catch (IndexOutOfBoundsException e3) {
-                System.out.println(indentation + "☹ OOPS!!! The description of a task cannot be empty.");
+            } catch (InvalidCommandException | InvalidIndexException | EmptyDescriptionException e ) {
+                System.out.println(indentation + e);
+            } catch (DateTimeException e) {
+                System.out.println(indentation + "☹ OOPS!!! Please enter date in yyyy-mm-dd format");
             } finally {
                 System.out.println(newLine);
             }

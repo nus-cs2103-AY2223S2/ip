@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public abstract class Task {
     private String nameOfTask;
     private boolean done;
@@ -31,6 +33,8 @@ public abstract class Task {
     public String toText() {
         return (this.isDone() ? "1" : "0") + "|" + this.nameOfTask;
     };
+    abstract public LocalDate getDate();
+
     @Override
     public String toString() {
         return "[" + (this.isDone() ? "X" : " ") + "] " + this.getNameOfTask();
