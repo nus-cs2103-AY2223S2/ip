@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Todo extends Task {
     private Todo(String desc, boolean done) {
         super(desc, done);
@@ -12,10 +14,17 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    @Override
+    public boolean hasDate(LocalDate date) {
+        return false;
+    }
+
+    @Override
     public Todo markDone() {
         return new Todo(this.desc, true);
     }
 
+    @Override
     public Todo markNotDone() {
         return new Todo(this.desc, false);
     }

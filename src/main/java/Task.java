@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public abstract class Task {
     protected final String desc;
     protected final boolean done;
@@ -16,6 +18,8 @@ public abstract class Task {
 
         return String.format("[%c] %s", mark, this.desc);
     }
+
+    public abstract boolean hasDate(LocalDate date);
 
     public abstract Task markDone();
 

@@ -23,6 +23,11 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean hasDate(LocalDate date) {
+        return this.start.isEqual(date) || this.end.isEqual(date);
+    }
+
+    @Override
     public Event markDone() {
         return new Event(this.desc, true, this.start, this.end);
     }

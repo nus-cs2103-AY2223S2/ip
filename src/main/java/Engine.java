@@ -16,6 +16,7 @@ public class Engine {
         DEADLINE,
         EVENT,
         DELETE,
+        FIND_DATE,
 
         // errors
         ERROR
@@ -140,6 +141,14 @@ public class Engine {
                 }
 
             }
+            case FIND_DATE: {
+                try {
+                    LocalDate date = LocalDate.parse(Util.cleanup(args));
+                    return this.taskList.findByDate(date);
+                } catch (DateTimeParseException ex) {
+                    return "Please input date in the following format: YYYY-MM-DD\n";
+                }
+            }
 
             default:
                 return "Case not accounted for, review code\n";
@@ -178,6 +187,9 @@ public class Engine {
         }
         if (command.equals("delete")) {
             return new Pair<>(Command.DELETE, rest);
+        }
+        if (command.equals("findbydate")) {
+            return new Pair<>(Command.FIND_DATE, rest);
         }
         return new Pair<>(Command.ERROR, "Unknown command.\n");
     }

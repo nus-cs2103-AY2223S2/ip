@@ -20,6 +20,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean hasDate(LocalDate date) {
+        return this.end.isEqual(date);
+    }
+
+    @Override
     public Deadline markDone() {
         return new Deadline(this.desc, true, this.end);
     }
