@@ -1,6 +1,8 @@
 package duke;
 
-public abstract class Task {
+import duke.storage.Storable;
+
+public abstract class Task implements Storable {
     protected boolean isDone;
     protected String description;
 
@@ -26,6 +28,7 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    @Override
     public String toCsv() {
         return (isDone ? "true":"false") + "," + description;
     }

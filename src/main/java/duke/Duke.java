@@ -1,32 +1,19 @@
 package duke;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.util.stream.Stream;
+
+import duke.storage.Storage;
 
 public class Duke {
 
-    static final String AUTHOR = "lhy-hoyin";
-    static final String TASKS_FILE_PATH = "./data/duke/tasks.csv";
-    static final String LOGO
-            = " ____        _\n"
-            + "|  _ \\ _   _| | _____\n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|";
+    private TaskList taskList;
+    private Storage storage;
+    private Parser parser;
+    private Ui ui;
 
-
-    private ArrayList<Task> taskList;
-
+    // todo: private
     enum State {
         LIST,
         TODO, DEADLINE, EVENT,
@@ -37,7 +24,10 @@ public class Duke {
     }
 
     public Duke() {
-        taskList = new ArrayList<>();
+        taskList = new TaskList();
+        storage = new Storage(taskList);
+        parser = new Parser();
+        ui = new Ui();
     }
 
     private Duke displayTaskCount() {
@@ -45,9 +35,9 @@ public class Duke {
             return this;
 
         if (taskList.isEmpty())
-            Duke.display("You do not have any task!");
+            ui.println("You do not have any task!");
         else
-            Duke.display("Now you have " + taskList.size() + " task(s) in the list.");
+            ui.println("Now you have " + taskList.size() + " task(s) in the list.");
 
         return this;
     }
@@ -57,11 +47,11 @@ public class Duke {
             return this;
 
         if (taskList.size() == 0)
-            Duke.display("Your list is empty.");
+            ui.println("Your list is empty.");
         else {
-            Duke.display("You have the following task(s):");
+            ui.println("You have the following task(s):");
             for (int i = 0; i < taskList.size(); i++)
-                Duke.display("\t" + (i + 1) + ". " + taskList.get(i));
+                ui.println("\t" + (i + 1) + ". " + taskList.get(i));
         }
 
         return this;
@@ -69,102 +59,18 @@ public class Duke {
 
     private Duke addNewTask(Task task) {
         taskList.add(task);
-        Duke.display("Got it. I've added this task:");
-        Duke.display("\t" + task);
+        ui.println("Got it. I've added this task:");
+        ui.println("\t" + task);
 
-        saveDataToFile();
+        storage.saveDataToFile();
         displayTaskCount();
 
         return this;
     }
 
-    private Duke saveDataToFile() {
-
-        // Prepare data into string format for saving
-        StringBuilder sb = new StringBuilder();
-        for (Task t : taskList) {
-            sb.append(t.toCsv()).append("\n");
-        }
-
-        // Write prepared data to file
-        try {
-            Path f = Paths.get(TASKS_FILE_PATH);
-            Files.createDirectories(f.getParent()); // Create directory (if not exist)
-            if (!Files.exists(f)) {
-                Files.createFile(f); // Create non-existing file
-            }
-            Files.writeString(f, sb.toString()); // Write to file
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return this;
-    }
-
-    private Duke loadDataFromFile() {
-
-        Path f = Paths.get(TASKS_FILE_PATH);
-        if (!Files.exists(f)) {
-            return this; // No saved data, do nothing
-        }
-
-        // Purge current taskList
-        taskList.clear();
-
-        try {
-            BufferedReader br = Files.newBufferedReader(f);
-            String currentLine;
-
-            while ((currentLine = br.readLine()) != null) {
-                String[] taskInfo = currentLine.split(",");
-
-                if (taskInfo[0].compareTo("T") == 0)
-                    taskList.add(new Todo(
-                            Boolean.parseBoolean(taskInfo[1]),
-                            taskInfo[2]));
-                if (taskInfo[0].compareTo("D") == 0)
-                    taskList.add(new Deadline(
-                            Boolean.parseBoolean(taskInfo[1]),
-                            taskInfo[2],
-                            Duke.parseDateTime(taskInfo[3], 'T')));
-                if (taskInfo[0].compareTo("E") == 0)
-                    taskList.add(new Event(
-                            Boolean.parseBoolean(taskInfo[1]),
-                            taskInfo[2],
-                            Duke.parseDateTime(taskInfo[3], 'T'),
-                            Duke.parseDateTime(taskInfo[4], 'T')));
-            }
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        catch (IndexOutOfBoundsException e) {
-            Duke.warn("Corrupt data. Cannot load from file.");
-        }
-
-        return this;
-    }
-
-    private static void display(Object obj) {
-        System.out.println(obj);
-    }
-    private static void display(String message) {
-        System.out.println(message);
-    }
-    private static void warn(String message) {
-        System.out.println("OOPS! " + message);
-    }
-
     private static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
         if (!expectsTrue)
             throw new DukeException(failureMessage);
-    }
-    private static void displayLogo() {
-        Duke.display(LOGO);
-    }
-    private static void displayLine() {
-        Duke.display("____________________________________________________________");
     }
 
     private static State detectState(String command) {
@@ -203,48 +109,12 @@ public class Duke {
         return State.UNKNOWN;
     }
 
-    // parse format is "YYYY-MM-DD"
-    // TODO: need to catch exceptions
-    private static LocalDate parseDate(String dateStr) {
-        //*
-        return LocalDate.parse(dateStr); //fixed to "-" seperator
-        /*/
-        String[] date = dateStr.split("/"); // can also use "-" or other seperator
-        int[] dateInfo = Stream.of(date).mapToInt(Integer::parseInt).toArray();
-        return LocalDate.of(dateInfo[0], dateInfo[1], dateInfo[2]);
-        /**/
-    }
 
-    // Can parse "HH:MM:SS" or "HH:MM"
-    // TODO: need to catch exceptions
-    private static LocalTime parseTime(String timeStr) {
-        //*
-        return LocalTime.parse(timeStr);
-        /*/
-        String[] time = timeStr.split(":");
-        int[] timeInfo = Stream.of(time).mapToInt(Integer::parseInt).toArray();
-        if (timeInfo.length == 2)
-            return LocalTime.of(timeInfo[0], timeInfo[1]);
-        else
-            return LocalTime.of(timeInfo[0], timeInfo[1], timeInfo[2]);
-        /**/
-    }
-
-    // Can parse "YYYY-MM-DD HH:MM:SS" or "YYYY-MM-DD HH:MM"
-    private static LocalDateTime parseDateTime(String str) {
-        String[] s = str.split(" ");
-        return LocalDateTime.of(parseDate(s[0]), parseTime(s[1]));
-    }
-
-    private static LocalDateTime parseDateTime(String str, char seperator) {
-        String[] s = str.split(String.valueOf(seperator));
-        return LocalDateTime.of(parseDate(s[0]), parseTime(s[1]));
-    }
 
     public static void main(String[] args) {
 
-        Duke.displayLogo();
-        Duke.display("Developed by: " + AUTHOR);
+        Ui.printProgramInfo();
+
         System.out.println("Initialising system . . .");
 
         //Initialise components, variables
@@ -257,15 +127,15 @@ public class Duke {
         Duke duke = new Duke();
 
         // Retrieve saved data (if any)
-        duke.loadDataFromFile();
+        duke.storage.loadDataFromFile();
 
         System.out.println("System is ready!");
-        Duke.display("\n\n");
-        Duke.displayLine();
+        duke.ui.println("\n\n");
+        duke.ui.displayLine();
 
         // Program Intro
-        Duke.display("Hello! I'm Duke! :D");
-        Duke.display("What can I do for you today?");
+        duke.ui.println("Hello! I'm Duke! :D");
+        duke.ui.println("What can I do for you today?");
 
         // Program Loop
         while(currentState != State.EXIT) {
@@ -297,7 +167,7 @@ public class Duke {
                         Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
                         Duke.assertThis(!duedate.isEmpty(), "Due date cannot be empty.");
 
-                        duke.addNewTask(new Deadline(taskDescription, Duke.parseDateTime(duedate)));
+                        duke.addNewTask(new Deadline(taskDescription, duke.parser.parseDateTime(duedate)));
                         break;
 
                     case EVENT:
@@ -320,8 +190,8 @@ public class Duke {
 
                         duke.addNewTask(new Event(
                                 taskDescription,
-                                Duke.parseDateTime(start),
-                                Duke.parseDateTime(end))
+                                duke.parser.parseDateTime(start),
+                                duke.parser.parseDateTime(end))
                         );
                         break;
 
@@ -335,8 +205,9 @@ public class Duke {
                         Duke.assertThis(inputs.length > 1, "Please indicate which task(s) to apply to.");
 
                         if (currentState == State.MARK)
-                            Duke.display("Nice I've marked the task(s) as done:");
-                        else Duke.display("OK, I've marked the task(s) as not done yet:");
+                            duke.ui.println("Nice I've marked the task(s) as done:");
+                        else
+                            duke.ui.println("OK, I've marked the task(s) as not done yet:");
 
                         for (int i = 1; i < inputs.length; i++) {
                             String input = inputs[i].trim();
@@ -348,14 +219,14 @@ public class Duke {
 
                                 activeTask = duke.taskList.get(taskIdx);
                                 activeTask.setDone(currentState == State.MARK); // Note: false means unmark
-                                duke.saveDataToFile();
-                                Duke.display("\t" + activeTask);
+                                duke.storage.saveDataToFile();
+                                duke.ui.println("\t" + activeTask);
                             }
                             catch(NumberFormatException e) {
-                                Duke.warn("'" + input + "' is not a number.");
+                                duke.ui.warn("'" + input + "' is not a number.");
                             }
                             catch(DukeException e) {
-                                Duke.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
+                                duke.ui.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
                             }
                         }
                         break;
@@ -379,43 +250,43 @@ public class Duke {
                                 markedDelete.add(taskIdx);
                             }
                             catch(NumberFormatException e) {
-                                Duke.warn("'" + input + "' is not a number.");
+                                duke.ui.warn("'" + input + "' is not a number.");
                             }
                             catch(DukeException e) {
-                                Duke.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
+                                duke.ui.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
                             }
                         }
 
-                        Duke.display("Noted. I've removed the task(s):");
+                        duke.ui.println("Noted. I've removed the task(s):");
 
                         // Actual delete from tasklist (start from the back)
                         Collections.sort(markedDelete);
                         Collections.reverse(markedDelete);
-                        for (int i : markedDelete) // Note: need to be int and not Integer
-                            Duke.display("\t" + duke.taskList.remove(i)); // or else remove(Object o) is used (wrong)
+                        for (int i : markedDelete)
+                            duke.ui.println("\t" + duke.taskList.remove(i));
                         // instead of remove(int index)
 
-                        duke.saveDataToFile();
+                        duke.storage.saveDataToFile();
                         duke.displayTaskCount();
                         break;
 
                 case SAVE:
-                    duke.saveDataToFile();
-                    Duke.display("Your list have been saved.");
+                    duke.storage.saveDataToFile();
+                    duke.ui.println("Your list have been saved.");
                     break;
 
                     case UNKNOWN:
-                        Duke.warn("Sorry, I don't understand your request :(");
-                        Duke.display("Did you spell something wrongly?");
-                        //Duke.display("Why not try rephrasing?"); // When chatbot is smarter
+                        duke.ui.warn("Sorry, I don't understand your request :(");
+                        duke.ui.println("Did you spell something wrongly?");
+                        //duke.ui..display("Why not try rephrasing?"); // When chatbot is smarter
                         break;
 
                     case EXIT:
-                        Duke.display("Saving your list ... ");
-                        duke.saveDataToFile();
-                        Duke.display("Goodbye!");
-                        Duke.displayLine();
-                        Duke.displayLogo();
+                        duke.ui.println("Saving your list ... ");
+                        duke.storage.saveDataToFile();
+                        duke.ui.println("Goodbye!");
+                        duke.ui.displayLine();
+                        duke.ui.printProgramInfo();
                         break;
 
                     default:
@@ -426,10 +297,10 @@ public class Duke {
                 }
             }
             catch (DukeException e) {
-                Duke.warn(e.getMessage());
+                duke.ui.warn(e.getMessage());
             }
             catch (RuntimeException e) {
-                Duke.warn(e.getMessage());
+                duke.ui.warn(e.getMessage());
                 e.printStackTrace();
             }
         }
