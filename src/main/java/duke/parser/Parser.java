@@ -1,3 +1,12 @@
+package duke.parser;
+
+import duke.exception.DukeException;
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.NoSuchElementException;
 
 /**
@@ -87,7 +96,7 @@ public class Parser {
                     c = new Command();
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
+            throw new DukeException("☹ I'm sorry, but Fake duke.duke doesn't know what that means :-(");
         }
 
         return c;
@@ -109,13 +118,13 @@ public class Parser {
             switch (taskType) {
                 case T:
                     if (splitInput.length != 3) {
-                        throw new DukeException("Todo task is of invalid format in the file.");
+                        throw new DukeException("duke.Todo task is of invalid format in the file.");
                     }
                     Todo todo = addTodo(splitInput[2]);
                     return todo;
                 case D:
                     if (splitInput.length != 4) {
-                        throw new DukeException("Deadline task is of invalid format in the file.");
+                        throw new DukeException("duke.Deadline task is of invalid format in the file.");
                     }
                     Deadline deadline = addDeadline(String.format("%s /by %s"
                             , splitInput[2]
@@ -123,7 +132,7 @@ public class Parser {
                     return deadline;
                 case E:
                     if (splitInput.length != 5) {
-                        throw new DukeException("Event task is of invalid format in the file.");
+                        throw new DukeException("duke.Event task is of invalid format in the file.");
                     }
                     Event event = addEvent(String.format("%s /from %s /to %s"
                             , splitInput[2]
@@ -135,7 +144,7 @@ public class Parser {
                 new MarkCommand(idx);
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
+            throw new DukeException("☹ I'm sorry, but Fake duke.duke doesn't know what that means :-(");
         }
         return null;
     }

@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
 
 /**
@@ -30,7 +34,7 @@ public class TaskList {
         try {
             return this.taskList.remove(idx).toString();
         } catch (IndexOutOfBoundsException e){
-            throw new DukeException("Task index given is invalid :( Unable to delete.");
+            throw new DukeException("duke.Task index given is invalid :( Unable to delete.");
         }
     }
 

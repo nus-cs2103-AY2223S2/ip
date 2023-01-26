@@ -1,3 +1,10 @@
+package duke.ui;
+
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.task.Task;
+
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -9,13 +16,19 @@ public class Ui {
     }
 
     public String readCommand() {
+//            throws DukeException {
         Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+        String command = "";
+//        try {
+            command = sc.nextLine();
+//        } catch (NoSuchElementException e) {
+//            throw new DukeException("No such element.");
+//        }
         return command;
     }
 
     /**
-     * Prints out the greeting for Fake Duke.
+     * Prints out the greeting for Fake duke.duke.
      */
     public void showWelcome() {
         String logo = "  _____     _       _  __  U _____ u      ____     _   _    _  __  U _____ u \n"

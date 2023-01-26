@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -30,7 +39,6 @@ public class Duke {
                 ui.showLine();
             }
         }
-        ui.showExit();
     }
 
     public static void main(String[] args) {

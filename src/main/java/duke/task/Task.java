@@ -1,9 +1,11 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a Task added by the user. It has a description attached to it and a isDone status.
+ * Represents a duke.Task added by the user. It has a description attached to it and a isDone status.
  */
 public class Task {
     protected String description;
@@ -36,9 +38,9 @@ public class Task {
     }
 
     /**
-     * Returns the String representation of a Task.
+     * Returns the String representation of a duke.Task.
      *
-     * @return  String representation of a Task in this format: [<status>] <description>.
+     * @return  String representation of a duke.Task in this format: [<status>] <description>.
      */
     @Override
     public String toString() {
