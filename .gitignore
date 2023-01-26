@@ -6,6 +6,8 @@
 #Duke tasklist
 duke.txt
 
+*.project
+
 # Class files
 *.class
 
