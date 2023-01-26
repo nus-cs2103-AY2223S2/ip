@@ -5,6 +5,9 @@ import core.singletons.Singletons;
 import core.utils.Pair;
 import core.utils.TokenUtilities;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 import java.util.Set;
 
@@ -37,12 +40,17 @@ public class Event extends Task {
             throw new InvalidArgumentException("☹ OOPS, did you forgot to " +
                     "type " + endAtKey + " for your event?");
         }
-        this.startAt = tmp.getRight().get(startAtKey);
-        this.endAt = tmp.getRight().get(endAtKey);
+        try {
+            startAt = LocalDate.parse(tmp.getRight().get(startAtKey));
+            endAt = LocalDate.parse(tmp.getRight().get(endAtKey));
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentException("☹ OOPS, the date format for " +
+                    "your event is wrong. " +
+                    "Please use yyyy-mm-dd", tokens);
+        }
     }
-
-    private final String startAt;
-    private final String endAt;
+    private final LocalDate startAt;
+    private final LocalDate endAt;
 
     /**
      * The token for getting the start time.
@@ -68,6 +76,9 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startAt + " to: " + endAt + ")";
+        final DateTimeFormatter formatter =
+                Singletons.get(DateTimeFormatter.class);
+        return "[E]" + super.toString() + " (from: " + startAt.format(formatter) +
+                " to: " + endAt.format(formatter) + ")";
     }
 }

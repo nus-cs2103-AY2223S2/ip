@@ -4,7 +4,9 @@ import core.exceptions.InvalidArgumentException;
 import core.singletons.Singletons;
 import core.utils.Pair;
 import core.utils.TokenUtilities;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,6 +18,7 @@ import java.util.Set;
  */
 public class Deadline extends Task {
     /**
+<<<<<<< HEAD
      * Creates a new Deadline object from the tokens.
      * @param tokens The keywords after which we retrieve the important
      *               information.
@@ -26,20 +29,23 @@ public class Deadline extends Task {
         super(tokens, delims);
         final Pair<String, Map<String, String>> tmp =
                 Singletons.get(TokenUtilities.class).joinTokens(tokens, delims);
-        if (tmp.getLeft().isBlank()) {
-            throw new InvalidArgumentException("☹ OOPS, the name for a " +
-                    "deadline " + "should not be null", tokens);
-        } else if (tmp.getRight().get(deadlineKey) == null) {
+        if (tmp.getRight().get(deadlineKey) == null) {
             throw new InvalidArgumentException("☹ OOPS, did you forgot to " +
                     "type " + deadlineKey + " for your deadline?");
         }
-        this.deadline = tmp.getRight().get(deadlineKey);
+        try {
+            this.deadline =
+                    LocalDate.parse(tmp.getRight().get(deadlineKey));
+        } catch (DateTimeParseException e) {
+            throw new InvalidArgumentException("☹ OOPS, the deadline you typed is " +
+                    "not in the correct format. Please type it in the format of yyyy-mm-dd");
+        }
     }
 
     /**
      * The deadline.
      */
-    private final String deadline;
+    private final LocalDate deadline;
 
     /**
      * The key used for retrieving the deadline.
@@ -60,6 +66,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline + ")";
+        final DateTimeFormatter formatter = Singletons.get(DateTimeFormatter.class);
+        return "[D]" + super.toString() + " (by: " + deadline.format(formatter)
+                + ")";
     }
 }

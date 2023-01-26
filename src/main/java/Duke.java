@@ -6,7 +6,6 @@ import data.DataLoaderImpl;
 import data.DataSaverImpl;
 import domain.entities.DataLoader;
 import domain.entities.DataSaver;
-import domain.entities.core.Writable;
 import domain.usecases.ByeUsecase;
 import domain.usecases.EchoUsecase;
 import domain.usecases.TaskManagerUsecase;
@@ -15,8 +14,7 @@ import presentation.controllers.DukeEventLoop;
 import presentation.ui.DummyWritable;
 import presentation.ui.SystemErr;
 import presentation.ui.SystemOut;
-
-import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -47,6 +45,8 @@ public class Duke {
      * This would register the singletons that we would be using later on.
      */
     private static void configureInjections() throws WriteException, LoadException {
+        Singletons.registerSingleton(DateTimeFormatter.class,
+                DateTimeFormatter.ofPattern("MMM d yyyy"));
         // Persistence related
         final String fileName = "duke.txt";
         final DataLoader dataLoader = new DataLoaderImpl(fileName);

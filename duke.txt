@@ -1,3 +1,3 @@
 todo hello
-deadline finish CS2103T homework /complete true /by today
-event hello-world /from today /to tomorrow
+deadline CS2109S assignment /by 2023-01-27
+event NOC Interview /from 2023-01-27 /to 2023-01-27
