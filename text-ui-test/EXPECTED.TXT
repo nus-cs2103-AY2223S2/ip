@@ -20,25 +20,25 @@
 
     ____________________________________________________________
     Got it. I've added this task:
-      [D][ ] return book (by: Sunday)
+      [D][ ] return book (by: 2023-01-28)
     Now you have 2 task in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Got it. I've added this task:
-      [D][ ] do homework (by: no idea :-p)
+      [D][ ] do homework (by: 2023-01-29)
     Now you have 3 task in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Got it. I've added this task:
-      [E][ ] project meeting (from: Mon 2pm to: 4pm)
+      [E][ ] project meeting (from: 2023-02-01 to: 2023-02-02)
     Now you have 4 task in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Got it. I've added this task:
-      [E][ ] project meeting (from: Sun 2pm to: Tues 4pm)
+      [E][ ] project meeting (from: 2023-02-03 to: 2023-02-05)
     Now you have 5 task in the list.
     ____________________________________________________________
 
@@ -49,21 +49,21 @@
 
     ____________________________________________________________
     Nice! I've marked this task as done:
-      [D][X] do homework (by: no idea :-p)
+      [D][X] do homework (by: 2023-01-29)
     ____________________________________________________________
 
     ____________________________________________________________
     Nice! I've marked this task as done:
-      [E][X] project meeting (from: Mon 2pm to: 4pm)
+      [E][X] project meeting (from: 2023-02-01 to: 2023-02-02)
     ____________________________________________________________
 
     ____________________________________________________________
     Here are the tasks in your list:
     1. [T][X] borrow book
-    2. [D][ ] return book (by: Sunday)
-    3. [D][X] do homework (by: no idea :-p)
-    4. [E][X] project meeting (from: Mon 2pm to: 4pm)
-    5. [E][ ] project meeting (from: Sun 2pm to: Tues 4pm)
+    2. [D][ ] return book (by: 2023-01-28)
+    3. [D][X] do homework (by: 2023-01-29)
+    4. [E][X] project meeting (from: 2023-02-01 to: 2023-02-02)
+    5. [E][ ] project meeting (from: 2023-02-03 to: 2023-02-05)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -73,21 +73,21 @@
 
     ____________________________________________________________
     OK, I've marked this task as not done yet:
-      [D][ ] do homework (by: no idea :-p)
+      [D][ ] do homework (by: 2023-01-29)
     ____________________________________________________________
 
     ____________________________________________________________
     OK, I've marked this task as not done yet:
-      [E][ ] project meeting (from: Mon 2pm to: 4pm)
+      [E][ ] project meeting (from: 2023-02-01 to: 2023-02-02)
     ____________________________________________________________
 
     ____________________________________________________________
     Here are the tasks in your list:
     1. [T][ ] borrow book
-    2. [D][ ] return book (by: Sunday)
-    3. [D][ ] do homework (by: no idea :-p)
-    4. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-    5. [E][ ] project meeting (from: Sun 2pm to: Tues 4pm)
+    2. [D][ ] return book (by: 2023-01-28)
+    3. [D][ ] do homework (by: 2023-01-29)
+    4. [E][ ] project meeting (from: 2023-02-01 to: 2023-02-02)
+    5. [E][ ] project meeting (from: 2023-02-03 to: 2023-02-05)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -208,15 +208,15 @@
 
     ____________________________________________________________
     Noted. I've removed this task:
-      [D][ ] return book (by: Sunday)
+      [D][ ] return book (by: 2023-01-28)
     ____________________________________________________________
 
     ____________________________________________________________
     Here are the tasks in your list:
     1. [T][ ] borrow book
-    2. [D][ ] do homework (by: no idea :-p)
-    3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-    4. [E][ ] project meeting (from: Sun 2pm to: Tues 4pm)
+    2. [D][ ] do homework (by: 2023-01-29)
+    3. [E][ ] project meeting (from: 2023-02-01 to: 2023-02-02)
+    4. [E][ ] project meeting (from: 2023-02-03 to: 2023-02-05)
     ____________________________________________________________
 
     ____________________________________________________________

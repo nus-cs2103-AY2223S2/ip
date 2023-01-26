@@ -1,9 +1,11 @@
+import java.time.LocalDate;
+
 public class TaskDeadline extends Task {
-    public final String endTime;
+    public final LocalDate endTime;
 
     public TaskDeadline(String description, String endTime) {
         super(description);
-        this.endTime = endTime;
+        this.endTime = LocalDate.parse(endTime);
     }
 
     @Override
