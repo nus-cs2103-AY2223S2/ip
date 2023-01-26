@@ -27,6 +27,10 @@ public final class Utils {
         return String.join(" ", Arrays.copyOfRange(args, from, to));
     }
 
+    public final static String stringJoiner(String[] args, int from) {
+        return stringJoiner(args, from, args.length);
+    }
+
     private final static <T extends TemporalAccessor> Function<String, Optional<T>> createParser(
         Iterable<String> patterns, 
         BiFunction<String, DateTimeFormatter, T> parser

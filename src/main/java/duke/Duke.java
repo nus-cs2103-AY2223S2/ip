@@ -30,14 +30,14 @@ public class Duke {
     public Duke(List<Task> tasks) {
         this.tasks = TaskList.fromIterable(tasks);
         this.commands = new Parser(Stream.<Supplier<Command>>of(
-          ListCommand::new,
-          MarkCommand::new,
-          UnmarkCommand::new,
-          TodoCommand::new,
-          DeadlineCommand::new,
-          EventCommand::new,
-          DeleteCommand::new,
-          SaveCommand::new
+            ListCommand::new,
+            MarkCommand::new,
+            UnmarkCommand::new,
+            TodoCommand::new,
+            DeadlineCommand::new,
+            EventCommand::new,
+            DeleteCommand::new,
+            SaveCommand::new
         ).map(Supplier::get));
     }
 

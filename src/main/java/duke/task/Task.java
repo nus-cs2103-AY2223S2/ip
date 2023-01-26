@@ -9,7 +9,7 @@ public abstract class Task implements Serializable {
     /**
      * String label for the task
      */
-    private final String task;
+    private final String description;
 
     /**
      * Boolean indicating if the task is completed or otherwise
@@ -17,7 +17,7 @@ public abstract class Task implements Serializable {
     private boolean done;
 
     public Task(String task) {
-        this.task = task;
+        this.description = task;
     }
 
     /**
@@ -28,6 +28,10 @@ public abstract class Task implements Serializable {
         this.done = value;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Get the type string for the task
      * @return String
@@ -36,6 +40,6 @@ public abstract class Task implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", getType(), this.done ? "X" : " ", this.task);
+        return String.format("[%s][%s] %s", getType(), this.done ? "X" : " ", this.description);
     }
 }
