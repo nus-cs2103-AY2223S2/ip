@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,6 +27,7 @@ public class Engine {
         DEADLINE,
         EVENT,
         DELETE,
+        FIND_DATE,
 
         // errors
         ERROR
@@ -106,8 +109,14 @@ public class Engine {
                 if (desc.isEmpty() || dl.isEmpty()) {
                     return "Some inputs are blank.\n";
                 }
+                LocalDate deadline = null;
+                try {
+                    deadline = LocalDate.parse(dl);
+                } catch (DateTimeParseException ex) {
+                    return "Please input date in the following format: YYYY-MM-DD\n";
+                }
 
-                this.taskList.addTask(new Deadline(desc, dl));
+                this.taskList.addTask(new Deadline(desc, deadline));
                 return "added-> " + this.taskList.getLast();
             }
             case EVENT: {
@@ -125,8 +134,17 @@ public class Engine {
                 if (event.isEmpty() || from.isEmpty() || to.isEmpty()) {
                     return "Some inputs are blank.\n";
                 }
+            
+                LocalDate start = null;
+                LocalDate end = null;
+                try {
+                    start = LocalDate.parse(from);
+                    end = LocalDate.parse(to);
+                } catch (DateTimeParseException ex) {
+                    return "Please input date in the following format: YYYY-MM-DD\n";
+                }
 
-                this.taskList.addTask(new Event(event, from, to));
+                this.taskList.addTask(new Event(event, start, end));
                 return "added-> " + this.taskList.getLast();
             }
             case MARK: {
@@ -171,6 +189,14 @@ public class Engine {
                 }
 
             }
+            case FIND_DATE: {
+                try {
+                    LocalDate date = LocalDate.parse(Util.cleanup(args));
+                    return this.taskList.findByDate(date);
+                } catch (DateTimeParseException ex) {
+                    return "Please input date in the following format: YYYY-MM-DD\n";
+                }
+            }
 
             default:
                 return "Case not accounted for, review code\n";
@@ -209,6 +235,9 @@ public class Engine {
         }
         if (command.equals("delete")) {
             return new Pair<>(Command.DELETE, rest);
+        }
+        if (command.equals("findbydate")) {
+            return new Pair<>(Command.FIND_DATE, rest);
         }
         return new Pair<>(Command.ERROR, "Unknown command.\n");
     }

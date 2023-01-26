@@ -1,6 +1,8 @@
+import java.time.LocalDate;
 import java.io.Serializable;
 
 public abstract class Task implements Serializable {
+
     protected final String desc;
     protected final boolean done;
     
@@ -18,6 +20,8 @@ public abstract class Task implements Serializable {
 
         return String.format("[%c] %s", mark, this.desc);
     }
+
+    public abstract boolean hasDate(LocalDate date);
 
     public abstract Task markDone();
 

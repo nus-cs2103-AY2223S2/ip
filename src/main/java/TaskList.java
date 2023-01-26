@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,17 @@ public class TaskList implements Serializable {
         int index = number - 1;
         this.lst.remove(index);
     }
+
+    public String findByDate(LocalDate date) {
+        String res = IntStream.range(0, this.size())
+                .filter(i -> this.lst.get(i).hasDate(date))
+                .mapToObj(i -> String.format("\n\t%d) %s", i + 1, this.lst.get(i)))
+                .reduce("", (a, b) -> a + b);
+        if (res.isEmpty()) {
+            return "No tasks found.\n";
+        }
+        return res + '\n';
+    }
     
     @Override
     public String toString() {
@@ -52,7 +64,7 @@ public class TaskList implements Serializable {
             return "You have no tasks\n";
         }
 
-        return IntStream.range(0, lst.size())
+        return IntStream.range(0, this.size())
                 .mapToObj(i -> String.format("\n\t%d) %s", i + 1, this.lst.get(i)))
                 .reduce("", (a, b) -> a + b) + '\n';
     }
