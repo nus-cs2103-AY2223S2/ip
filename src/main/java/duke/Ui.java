@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Ui {
     private static final String line = "____________________________________________________________";
-    private Scanner input;
+    private final Scanner input;
 
     public Ui() {
         this.input = new Scanner(System.in);

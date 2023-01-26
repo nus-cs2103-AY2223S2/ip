@@ -3,7 +3,6 @@ package duke.command;
 import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
-import duke.command.ByeCommand;
 
 public abstract class Command {
     private final String commandName;

@@ -1,5 +1,4 @@
 package duke;
-
 import duke.command.Command;
 
 public class Duke {
@@ -8,12 +7,11 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-    protected static TaskList lst;
-    protected static boolean cont = true;
-    protected static String path = "src/data/duke.txt";
-    protected static Storage storage;
+    protected TaskList lst;
+    protected static final String path = "src/data/duke.txt";
+    protected final Storage storage;
     protected final Parser parser;
-    protected static Ui ui;
+    protected final Ui ui;
 
     public Duke(String filePath) {
         this.ui = new Ui();

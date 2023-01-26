@@ -1,8 +1,5 @@
 package duke;
 
-import duke.DukeException;
-import duke.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -61,8 +58,6 @@ public class Storage {
         } catch (FileNotFoundException e) {
             this.createFile(this.filePath);
             this.loadFileInto(lst);
-        } catch (DukeException e) {
-            throw e;
         }
     }
 }

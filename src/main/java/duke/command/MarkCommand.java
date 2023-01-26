@@ -3,7 +3,6 @@ package duke.command;
 import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
-import duke.command.Command;
 
 public class MarkCommand extends Command {
     public static final String MARK_COMMAND = "mark";

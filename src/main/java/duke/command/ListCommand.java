@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.TaskList;
 import duke.Ui;
-import duke.command.Command;
 
 public class ListCommand extends Command {
     public static final String LIST_COMMAND = "list";
