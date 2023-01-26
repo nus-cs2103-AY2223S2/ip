@@ -8,10 +8,10 @@ import duke.storage.Storage;
 
 public class Duke {
 
-    private TaskList taskList;
-    private Storage storage;
-    private Parser parser;
-    private Ui ui;
+    private final TaskList taskList;
+    private final Storage storage;
+    private final Parser parser;
+    private final Ui ui;
 
     public Duke() {
         taskList = new TaskList();
@@ -21,9 +21,6 @@ public class Duke {
     }
 
     private void displayTaskCount() {
-        if (taskList == null)
-            return;
-
         if (taskList.isEmpty())
             ui.println("You do not have any task!");
         else
@@ -31,9 +28,6 @@ public class Duke {
     }
 
     private void displayTasks() {
-        if (taskList == null)
-            return;
-
         if (taskList.size() == 0)
             ui.println("Your list is empty.");
         else {
