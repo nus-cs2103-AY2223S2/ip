@@ -1,8 +1,10 @@
 package windycall;
 
+
 /**
  * Serves as an abstraction of different types of tasks
  */
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -37,6 +39,10 @@ public abstract class Task {
 
     public void unmark() {
         this.isDone = false;
+    }
+
+    public boolean matchFilterWord(String filterWord) {
+        return description.toLowerCase().indexOf(filterWord.toLowerCase()) != -1;
     }
 
 

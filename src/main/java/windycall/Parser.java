@@ -29,6 +29,9 @@ public class Parser {
         case "delete":
             return OperationType.DELETE;
             //break;
+        case "find":
+            return OperationType.FIND;
+            //break;
         default:
             return OperationType.ADDTASK;
             //break;
