@@ -16,4 +16,8 @@ public class Date {
         return this.date.format(DateTimeFormatter.ofPattern(format));
     }
 
+    public String dateToFileText() {
+        return this.date.toString();
+    }
+
 }

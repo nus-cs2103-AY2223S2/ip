@@ -32,6 +32,6 @@ public class Deadline extends Task {
     }
 
     public String toTextString() {
-        return String.format("D | %s | %s | %s", super.status ? "1" : "0", super.name, this.deadline);
+        return String.format("D | %s | %s | %s", super.status ? "1" : "0", super.name, this.deadline.dateToFileText());
     }
 }
