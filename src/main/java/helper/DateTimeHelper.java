@@ -23,11 +23,12 @@ public class DateTimeHelper {
      * @throws InvalidDateFormatException If the string does not follow the specified format.
      */
     public static LocalDateTime parse(String dateTimeString) throws InvalidDateFormatException {
+        // Check if string is in the correct format.
         if (!dateTimeString.matches("\\d{1,3}/\\d{1,3}/\\d+ \\d{4}")) {
             throw new InvalidDateFormatException("Incorrect date format!");
         }
 
-        // parse deadline string
+        // Parse day, month, year, hour and minute from dateTimeString.
         String[] values = dateTimeString.split("/");
         Integer day = Integer.valueOf(values[0]);
         Integer month = Integer.valueOf(values[1]);
@@ -37,6 +38,7 @@ public class DateTimeHelper {
         Integer hour = Integer.valueOf(yearAndTime[1].substring(0, 2));
         Integer minute = Integer.valueOf(yearAndTime[1].substring(2));
 
+        // Convert the time units into a LocalDateTime object.
         try {
             return LocalDateTime.of(year, month, day, hour, minute);
         } catch (DateTimeException e) {
@@ -56,11 +58,12 @@ public class DateTimeHelper {
      * @throws InvalidDateFormatException If the string does not follow the specified format.
      */
     public static LocalDateTime parseFormattedDateTime(String dateTimeString) throws InvalidDateFormatException{
-        if (!dateTimeString.matches(".{3} \\d{1,3} \\d+ \\d{2}:\\d{2}")) {
+        // Check if string is in the correct format.
+        if (!dateTimeString.matches(".{3} \\d{1,3} \\d{4} \\d{2}:\\d{2}")) {
             throw new InvalidDateFormatException("Incorrect date format!");
         }
 
-        // parse deadline string
+        // Parse day, month, year, hour and minute from dateTimeString.
         String[] values = dateTimeString.split(" ");
         Integer day = Integer.valueOf(values[1]);
         Integer month = convertMonth(values[0]);
@@ -70,6 +73,7 @@ public class DateTimeHelper {
         Integer hour = Integer.valueOf(hoursAndMinutes[0]);
         Integer minute = Integer.valueOf(hoursAndMinutes[1]);
 
+        // Convert the time units into a LocalDateTime object.
         try {
             return LocalDateTime.of(year, month, day, hour, minute);
         } catch (DateTimeException e) {
@@ -85,22 +89,23 @@ public class DateTimeHelper {
      * @throws InvalidDateFormatException If the string does not follow the specified format.
      */
     public static Integer convertMonth(String month) throws InvalidDateFormatException {
-        HashMap<String, Integer> m = new HashMap<>();
+        // Generate HashMap to map months to their numerical values.
+        HashMap<String, Integer> monthToNumber = new HashMap<>();
 
-        m.put("Jan", 1);
-        m.put("Feb", 2);
-        m.put("Mar", 3);
-        m.put("Apr", 4);
-        m.put("May", 5);
-        m.put("Jun", 6);
-        m.put("Jul", 7);
-        m.put("Aug", 8);
-        m.put("Sep", 9);
-        m.put("Oct", 10);
-        m.put("Nov", 11);
-        m.put("Dec", 12);
+        monthToNumber.put("Jan", 1);
+        monthToNumber.put("Feb", 2);
+        monthToNumber.put("Mar", 3);
+        monthToNumber.put("Apr", 4);
+        monthToNumber.put("May", 5);
+        monthToNumber.put("Jun", 6);
+        monthToNumber.put("Jul", 7);
+        monthToNumber.put("Aug", 8);
+        monthToNumber.put("Sep", 9);
+        monthToNumber.put("Oct", 10);
+        monthToNumber.put("Nov", 11);
+        monthToNumber.put("Dec", 12);
 
-        Integer monthValue = m.get(month);
+        Integer monthValue = monthToNumber.get(month);
 
         if (monthValue == null) {
             throw new InvalidDateFormatException("Incorrect month value!");

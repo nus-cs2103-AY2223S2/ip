@@ -1,19 +1,19 @@
 package sys;
 
 import command.*;
-import exception.InvalidDateFormatException;
+
 import task.TaskList;
 
 /**
  * Represents a parser used to decode user input.
  */
 public class Parser {
-    TaskList tl;
-    Storage storage;
-    Ui ui;
+    private TaskList tasks;
+    private Storage storage;
+    private Ui ui;
 
-    Parser(TaskList tl, Storage storage, Ui ui) {
-        this.tl = tl;
+    Parser(TaskList tasks, Storage storage, Ui ui) {
+        this.tasks = tasks;
         this.storage = storage;
         this.ui = ui;
     };

@@ -29,7 +29,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
-        // Marking a task as done
+        // Find index to mark
         Integer idx = Integer.valueOf(input.split(" ")[1]) - 1;
 
         // Verify if task number is invalid:
@@ -37,9 +37,11 @@ public class MarkCommand extends Command {
             throw new InvalidCommandInputException("Task number is invalid!", "mark");
         }
 
+        // Mark task and save changes
         tl.markTask(idx);
         storage.save(tl);
 
+        // Print statement
         System.out.println("Nice! I've marked this task as done:\n" + tl.getTask(idx));
     }
 }

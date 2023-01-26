@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
-        // Deleting a task
+        // Find index of task to delete
         Integer idx = Integer.valueOf(input.split(" ")[1]) - 1;
 
         // Verify if task number is invalid:
@@ -38,10 +38,14 @@ public class DeleteCommand extends Command {
             throw new InvalidCommandInputException("Task number is invalid!", "delete");
         }
 
+        // Delete task and save changes
         Task t = tl.deleteTask(idx);
         storage.save(tl);
 
-        System.out.println("Noted. I've removed this task:\n" + t +
-                "\nNow you have " + tl.numberOfTasks() + (tl.numberOfTasks() > 1 ? " tasks" : " task") + " in the list.");
+        // Print statement
+        System.out.println("Noted. I've removed this task:\n" + t
+                + "\nNow you have " + tl.numberOfTasks()
+                + (tl.numberOfTasks() > 1 ? " tasks" : " task")
+                + " in the list.");
     }
 }

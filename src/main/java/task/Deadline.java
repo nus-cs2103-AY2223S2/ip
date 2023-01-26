@@ -34,6 +34,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateTimeHelper.stringify(this.deadline) + ")";
+        return "[D]" + super.toString()
+                + " (by: " + DateTimeHelper.stringify(this.deadline) + ")";
     }
 }

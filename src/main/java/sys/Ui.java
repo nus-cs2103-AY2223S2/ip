@@ -1,8 +1,9 @@
 package sys;
 
 import command.Command;
+
 import exception.DukeException;
-import exception.InvalidDateFormatException;
+
 import task.TaskList;
 
 import java.util.Scanner;
@@ -13,19 +14,18 @@ import java.util.Scanner;
 public class Ui {
 
     private Storage storage;
-    private TaskList tl;
+    private TaskList tasks;
 
-    public Ui() {};
-
+    public Ui() {}
     /**
      * Sets the context for the program.
      *
      * @param storage The storage area used by the application.
-     * @param tl The task list used by the application.
+     * @param tasks The task list used by the application.
      */
-    public void setContext(Storage storage, TaskList tl) {
+    public void setContext(Storage storage, TaskList tasks) {
         this.storage = storage;
-        this.tl = tl;
+        this.tasks = tasks;
     }
 
     /**
@@ -33,22 +33,24 @@ public class Ui {
      */
     public void acceptInput() {
 
-        // Print welcome message
+        // Print welcome message.
         System.out.println("Hello! I'm Duke\n What can I do for you?");
 
-        // Create Scanner and sys.Parser object
+        // Create Scanner and Parser object.
         Scanner sc = new Scanner(System.in);
-        Parser p = new Parser(tl, storage, this);
+        Parser p = new Parser(this.tasks, this.storage, this);
 
-        // Always ready to receive input
+        // Accept input from user.
         while (sc.hasNextLine()) {
             try {
                 String input = sc.nextLine();
                 this.showLine();
 
+                // Parse input line.
                 Command c = p.parse(input);
 
-                c.execute(this.tl, this, storage);
+                // Execute the command.
+                c.execute(this.tasks, this, this.storage);
             } catch (DukeException e) {
                 showError(e.getMessage());
             } finally {

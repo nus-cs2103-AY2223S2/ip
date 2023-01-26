@@ -34,45 +34,51 @@ public class TaskList {
         if (input != null && (input.equals("todo") || input.equals("deadline") || input.equals("event"))) {
             throw new InvalidCommandInputException("Empty argument", input);
         } else if (input.matches("deadline .* /by .*")) {
-            // Handle deadline
+            // Break apart input string.
             String[] arr = input.split(" /by ");
             String content = arr[0].substring(9, arr[0].length());
 
+            // Check if argument exists.
             if (content.length() == 0 || arr[1].length() == 0) {
                 throw new InvalidCommandInputException("Empty argument", "deadline");
             }
 
+            // Add new deadline task to the list.
             try {
                 this.tasks.add(new Deadline(content, arr[1]));
             } catch (InvalidDateFormatException e) {
                 System.out.println(e.getMessage());
             }
         } else if (input.matches("event .* /from .* /to .*")) {
-            // Handle event
+            // Break apart input string.
             String[] arr = input.split(" /from ");
             String content = arr[0].substring(6, arr[0].length());
             String[] startEnd = arr[1].split(" /to ");
 
+            // Check if arguments exists.
             if (content.length() == 0 || startEnd[0].length() == 0 || startEnd[1].length() == 0) {
                 throw new InvalidCommandInputException("Empty argument", "event");
             }
 
+            // Add new event task to the list.
             try {
                 this.tasks.add(new Event(content, startEnd[0], startEnd[1]));
             } catch (InvalidDateFormatException e) {
                 System.out.println(e.getMessage());
             }
         } else if (input.matches("todo .*")) {
-            // Handle todo
+            // Check if argument exists.
             if (input.length() == 5) {
                 throw new InvalidCommandInputException("Empty argument", "todo");
             }
 
+            // Add new todo task to the list.
             this.tasks.add(new ToDo(input.substring(5, input.length())));
         } else {
             throw new CommandNotFoundException("Duke command is invalid.", input);
         }
 
+        // Return the added task.
         return tasks.get(tasks.size() - 1);
     }
 
@@ -91,8 +97,10 @@ public class TaskList {
      * @param i Index of the task to be deleted.
      */
     public Task deleteTask(int i) {
+        // Find and remove the task at the given index.
         Task res = this.getTask(i);
         tasks.remove(i);
+
         return res;
     }
 
@@ -136,24 +144,27 @@ public class TaskList {
     /**
      * Print the tasks that occurs on a given date. It is used for the occurs command.
      *
-     * @param deadline The date to check.
+     * @param input The date to check.
      * @throws InvalidDateFormatException If the date given does not follow the specified format.
      */
-    public void printTasksOnDate(String deadline) throws InvalidDateFormatException {
-        LocalDateTime dt = DateTimeHelper.parse(deadline);
+    public void printTasksOnDate(String input) throws InvalidDateFormatException {
+        // Convert string to LocalDateTime object.
+        LocalDateTime datetime = DateTimeHelper.parse(input);
+
         int counter = 1;
 
+        // Find all valid tasks by iterating through them.
         for (Task t: tasks) {
             if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
-                if (d.occursOn(dt)) {
-                    System.out.println(Integer.valueOf(counter) + ". " + d);
+                if (d.occursOn(datetime)) {
+                    System.out.println(counter + ". " + d);
                     counter++;
                 }
             } else if (t instanceof Event) {
                 Event e = (Event) t;
-                if (e.occursOn(dt)) {
-                    System.out.println(Integer.valueOf(counter) + ". " + e);
+                if (e.occursOn(datetime)) {
+                    System.out.println(counter + ". " + e);
                     counter++;
                 }
             }
@@ -167,7 +178,10 @@ public class TaskList {
 
         for (Task t: tasks) {
             result += curr.toString() + ". " + t;
-            if (curr != tasks.size()) result += '\n';
+
+            if (curr != tasks.size()) {
+                result += '\n';
+            }
 
             curr++;
         }

@@ -32,7 +32,7 @@ public class OccursCommand extends Command {
         // Handle occurs
         String dateTime = this.input.substring(7);
 
-        // Print tasks
+        // Print tasks that contain deadline
         try {
             tl.printTasksOnDate(dateTime);
         } catch (InvalidDateFormatException e) {
