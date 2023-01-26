@@ -1,19 +1,14 @@
-<<<<<<< HEAD
-import com.sun.source.tree.TryTree;
 
+
+import java.awt.*;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.nio.file.Files;
 import java.util.Arrays;
-=======
-import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.time.LocalDate;
->>>>>>> branch-Level-8
 
 
 /**
@@ -30,7 +25,6 @@ public class DukeBehaviour {
      * Public constructor for the DukeBehaviour Object.
      */
     public DukeBehaviour() {
-        System.out.println("DukeBehaviour constructor called...");
         System.out.println("Attempting to load data...");
         initMemData();
         //https://samderlust.com/dev-blog/java/write-read-arraylist-object-file-java
@@ -39,9 +33,9 @@ public class DukeBehaviour {
 
     private void initMemData() {
         Path dirPath = Paths.get(".", "data");
-        System.out.println("data path: " + dirPath.toAbsolutePath());
+        //System.out.println("data path: " + dirPath.toAbsolutePath());
         boolean directoryExists = java.nio.file.Files.exists(dirPath);
-        System.out.println("Does the data folder exist?: " + directoryExists);
+        //System.out.println("Does the data folder exist?: " + directoryExists);
         try {
             //This method creates a directory if it does not exist yet, but will not
             //throw an error even if it exists, and so is safe to call.
@@ -52,9 +46,12 @@ public class DukeBehaviour {
 
         dataPath = Paths.get(dirPath.toString(), "DukeMem.ser");
         boolean dataExists = java.nio.file.Files.exists(dataPath);
-        System.out.println("Does the data exist?: " + dataExists);
+        //System.out.println("Does the data exist?: " + dataExists);
         if (!dataExists) {
+            System.out.println("No previous session detected, initialising new taskList...");
             updateMem(new ArrayList<>());
+        } else {
+            System.out.println("Seems like you have a previous sessions with me! Recalling your tasks...");
         }
 
         try {
@@ -70,6 +67,7 @@ public class DukeBehaviour {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        displayList();
     }
 
     private void updateMem(ArrayList<Task> taskList) {
@@ -90,25 +88,10 @@ public class DukeBehaviour {
         ArrayList<String> tokens = tokenize(userIn);
         String key = tokens.get(0);
         try {
-<<<<<<< HEAD
-            if (userIn.equals("bye")) {
-                //System.out.println("exit command received, exiting...");
-                updateMem(taskList);
-                isActive = false;
-            } else if (userIn.equals("list")) {
-                displayList();
-            } else if (userIn.split(" ")[0].equals("mark")) {
-                mark(userIn);
-            } else if (userIn.split(" ")[0].equals("unmark")) {
-                unmark(userIn);
-            } else if (userIn.split(" ")[0].equals("delete")) {
-                delete(userIn);
-            } else {
-                addTask(userIn);
-=======
             switch (key){
                 case "bye":
                     isActive = false;
+                    updateMem(taskList);
                     break;
                 case "list":
                     displayList();
@@ -133,7 +116,6 @@ public class DukeBehaviour {
                     break;
                 default:
                     throw new DukeException("I'm sorry, I could not understand that command.");
->>>>>>> branch-Level-8
             }
 
         } catch (DukeException e) {
@@ -285,10 +267,10 @@ public class DukeBehaviour {
      * Private method for printing list of tasks stored.
      */
     private void displayList() {
-        System.out.println("Here are the tasks in your list: ");
+        System.out.println("Here are the tasks currently in your list: ");
         for (int i = 0; i<taskList.size(); i++) {
             System.out.println((i + 1) + ". " + taskList.get(i));
         }
-        System.out.println("End of task list.");
+        System.out.println("End of task list. (currently contains " + taskList.size() + " tasks)");
     }
 }
