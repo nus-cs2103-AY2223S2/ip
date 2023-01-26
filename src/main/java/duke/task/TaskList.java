@@ -22,9 +22,9 @@ public class TaskList {
         return taskList.size();
     }
 
-    public Task getTask(int idx) throws DukeException {
+    public Task getTask(int taskIndex) throws DukeException {
         try {
-            return taskList.get(idx);
+            return taskList.get(taskIndex);
         } catch (IndexOutOfBoundsException e){
             throw new DukeException("Unable to get task.");
         }
@@ -42,13 +42,13 @@ public class TaskList {
     /**
      * Deletes task from TaskList given index.
      *
-     * @param idx Index of task to be deleted.
+     * @param taskIndex Index of task to be deleted.
      * @return String representation of the deleted task.
      * @throws DukeException
      */
-    public String deleteTask(int idx) throws DukeException {
+    public String deleteTask(int taskIndex) throws DukeException {
         try {
-            return this.taskList.remove(idx).toString();
+            return this.taskList.remove(taskIndex).toString();
         } catch (IndexOutOfBoundsException e){
             throw new DukeException("duke.Task index given is invalid :( Unable to delete.");
         }
@@ -57,12 +57,12 @@ public class TaskList {
     /**
      * Marks task as done given its index.
      *
-     * @param idx Index of task that is to be marked as done.
+     * @param taskIndex Index of task that is to be marked as done.
      * @return String representation of the task that is marked done.
      * @throws DukeException
      */
-    public String markTask(int idx) throws DukeException {
-        Task task = this.getTask(idx);
+    public String markTask(int taskIndex) throws DukeException {
+        Task task = this.getTask(taskIndex);
         task.mark();
         return task.toString();
     }
@@ -70,12 +70,12 @@ public class TaskList {
     /**
      * Unmarks task as undone given its index.
      *
-     * @param idx Index of task that is to be marked as undone.
+     * @param taskIndex Index of task that is to be marked as undone.
      * @return String representation of the task that is marked undone.
      * @throws DukeException
      */
-    public String unmarkTask(int idx) throws DukeException {
-        Task task = this.getTask(idx);
+    public String unmarkTask(int taskIndex) throws DukeException {
+        Task task = this.getTask(taskIndex);
         task.unmark();
         return task.toString();
     }

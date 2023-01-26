@@ -15,7 +15,7 @@ public class Deadline extends Task {
     public Deadline(String description) throws DukeException {
         super(description.split(" /by ")[0]);
         try {
-            this.deadline = this.parseDatetime(description.split(" /by ")[1]);
+            this.deadline = this.parseDateTime(description.split(" /by ")[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ I'm sorry, but Fake duke.duke doesn't know what that means :-(");
         } catch (DateTimeParseException dtpe) {
@@ -31,7 +31,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D][%c] %s (by: %s)", this.getStatusIcon(), this.description, this.getStringDatetime(this.deadline));
+        return String.format("[D][%c] %s (by: %s)", this.getStatusIcon(), this.description
+                , this.getStringDateTime(this.deadline));
     }
 
     /**

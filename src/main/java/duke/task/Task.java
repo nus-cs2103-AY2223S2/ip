@@ -67,20 +67,20 @@ public class Task {
      * @param input Datetime input provided by user.
      * @return Datetime of Task in valid format.
      */
-    public LocalDateTime parseDatetime(String input) throws DateTimeParseException {
+    public LocalDateTime parseDateTime(String input) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime datetime = LocalDateTime.parse(input, formatter);
-        return datetime;
+        LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
+        return dateTime;
     }
 
     /**
      * Returns datetime in String for printing.
      *
-     * @param datetime Datetime of Task.
+     * @param dateTime Datetime of Task.
      * @return String representation of datetime.
      */
-    public String getStringDatetime(LocalDateTime datetime) {
+    public String getStringDateTime(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd-MM-yyyy HH:mma");
-        return datetime.format(formatter);
+        return dateTime.format(formatter);
     }
 }
