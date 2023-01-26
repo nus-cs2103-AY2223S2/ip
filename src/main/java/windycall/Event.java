@@ -17,6 +17,12 @@ public class Event extends Task {
         this.to = processDate(to);
     }
 
+    /**
+     * Return formatted LocalDate by translating user input String deadline
+     *
+     * @param deadline String representation of date input by user
+     * @return formatted LocalDate
+     */
     private LocalDate processDate(String deadline) {
         // now assume date is in the form
         // dd/mm/yy or yy-mm-dd

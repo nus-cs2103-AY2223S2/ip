@@ -1,5 +1,8 @@
 package windycall;
 
+/**
+ * Serves as an abstraction of different types of tasks
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -19,6 +22,12 @@ public abstract class Task {
 
     public abstract String getTaskTypeIcon();
 
+    /**
+     * Returns fileFormat of a specific task that will be stored
+     * inside data file with consistency
+     *
+     * @return a String representation of fileFormat of a task
+     */
     public abstract String fileFormat();
 
     public void markAsDone() {

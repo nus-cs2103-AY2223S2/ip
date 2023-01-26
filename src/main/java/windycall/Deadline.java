@@ -25,6 +25,13 @@ public class Deadline extends Task{
     public String fileFormat() {
         return "D | " + getStatusIcon() + " | " + description + " | " + deadline + "\n";
     }
+
+    /**
+     * Return formatted LocalDate by translating user input String deadline
+     *
+     * @param deadline String representation of date input by user
+     * @return formatted LocalDate
+     */
     public LocalDate processDateTime(String deadline) {
         // now assume date is in the form
         // dd/mm/yy or yy-mm-dd

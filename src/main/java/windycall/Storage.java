@@ -7,12 +7,22 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 
+/**
+ * Deals with loading tasks from the file and handle tasks change
+ * by overwriting contents in tasks back to file
+ */
 public class Storage {
 
     public Storage() {
 
     }
 
+    /**
+     * Loads data inside data file to current tasks.
+     * Handles non-existence of files or related directory
+     *
+     * @param tasks an ArrayList that will be loaded into
+     */
     public void handleLoad(List<Task> tasks) {
         //check if "./data" directory exist
         File file = new File("./data");
@@ -64,6 +74,12 @@ public class Storage {
 
     }
 
+    /**
+     * Handles tasks change by overwriting contents in tasks
+     * back to data file so that change is saved each time tasks get modified
+     *
+     * @param tasks tasks that has been changed to do users' operation on tasks
+     */
     public void handleTaskChange(List<Task> tasks) {
         // overwrite tasks back to data file to record the change
         try {

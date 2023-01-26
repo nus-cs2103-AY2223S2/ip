@@ -4,6 +4,10 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Serves as a trigger of the whole WindyCall chatBox application.
+ * Stores some important helper classes instance.
+ */
 public class WindyCall {
 
       private List<Task> tasks;
@@ -22,7 +26,13 @@ public class WindyCall {
     }
 
 
-
+    /**
+     * Adds a new type of task to tasks ArrayList while possible throwing
+     * errors from user invalid input.
+     *
+     * @param message message input by users
+     * @throws WindyCallException If user input command is invalid
+     */
     private void addTask(String message) throws WindyCallException{
         Ui.space();
         String[] parts = message.split(" ");
@@ -89,6 +99,10 @@ public class WindyCall {
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Serves as a runner of the application.
+     * Requires parser to translate user command and handle different commands accordingly.
+     */
     public void run() {
         Scanner scan = new Scanner(System.in);
         ui.greeting();
