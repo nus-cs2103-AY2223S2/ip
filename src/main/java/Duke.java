@@ -18,6 +18,7 @@ public class Duke {
         int taskCounter = 0;
 
         // use while loop to deal with user input through scanner
+        
         untilBye:
         while (true) {
             String msgDescription = in.nextLine();
