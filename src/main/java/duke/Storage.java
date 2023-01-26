@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-
 public class Storage {
     private String filePath;
     private File file;
@@ -20,9 +19,10 @@ public class Storage {
         try {
             this.filePath = filePath;
             this.file = new File(filePath);
-            if (!file.createNewFile()) {
+            if (file.exists()) {
                 throw new DukeException("file already exists");
             } else {
+                file.getAbsoluteFile().getParentFile().mkdirs();
                 file.createNewFile();
                 System.out.println("Successfully created new file.");
             }
@@ -31,7 +31,6 @@ public class Storage {
         }
     }
 
-    // in progress
     public void saveToFile(TaskList lst) {
         try {
             FileWriter writer = new FileWriter(this.filePath);
