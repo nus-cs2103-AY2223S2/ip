@@ -9,11 +9,20 @@ import java.io.IOException;
 import duke.task.*;
 import duke.exceptions.InvalidDateException;
 
+/**
+ * A file manager to manage the saving and retrieval of users' data.
+ *
+ * @author Andre Lin HuiKai
+ * @version CS2103T AY22/23 Semester 2
+ */
 public class FileManagement {
     private File file;
     private String filePath;
     private String dataDirectory;
 
+    /**
+     * Constructor for FileManagement.
+     */
     public FileManagement() {
         this.dataDirectory = "./data/";
         this.filePath = this.dataDirectory + "duke.txt";
@@ -31,6 +40,10 @@ public class FileManagement {
         }
     }
 
+    /**
+     * Saves the list of tasks inputted by the user.
+     * @param taskList TaskList of tasks provided by the user.
+     */
     public void save(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(this.filePath);
@@ -43,6 +56,10 @@ public class FileManagement {
         }
     }
 
+    /**
+     * Retrieves saved information about the user's tasks from the previous session.
+     * @return List of previously saved tasks.
+     */
     public List<Task> retrieve() {
         Scanner scanner = null;
         List<Task> taskList = new ArrayList<>();
@@ -63,6 +80,12 @@ public class FileManagement {
     }
 
 
+    /**
+     * A helper method to decode encrypted information regarding a task.
+     * @param task String encoding of task.
+     * @return The task corresponding to its encoded string representation.
+     * @throws InvalidDateException Throws an InvalidDateException if an invalid date format was saved for any task.
+     */
     private Task decodeTask(String task) throws InvalidDateException {
         String[] components = task.split(" ### ");
         String command = components[0];

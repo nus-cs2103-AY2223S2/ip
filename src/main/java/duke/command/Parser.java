@@ -6,13 +6,30 @@ import duke.exceptions.*;
 import duke.ui.Span;
 import duke.task.*;
 
+/**
+ * Parser to parse the command and process the necessary actions associated with the command.
+ *
+ * @author Andre Lin HuiKai
+ * @version CS2103T AY22/23 Semester 2
+ */
 public class Parser {
     private TaskList tasks;
 
+    /**
+     * Constructor for parser.
+     * @param tasks TaskList of tasks for the Parser to retrieve the tasks and act on it accordingly.
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     *
+     * @param command
+     * @param echo The user input to be parsed to be used in the execution of its associated command.
+     * @return a boolean value that determines whether the program will continue or halt.
+     * @throws DukeException DukeException thrown if there is missing required information in the user's input.
+     */
     public boolean execute(Command command, String echo) throws DukeException {
         Task task = null; // to be converted into the right (sub) task below
         switch (command) {
