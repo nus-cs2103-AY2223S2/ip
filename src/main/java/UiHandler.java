@@ -24,7 +24,7 @@ public class UiHandler {
         System.out.println(separator);
     }
     
-    public boolean run(List<Task> tasks) {
+    public boolean run(TaskList tasks) {
         boolean isRunning = true;
         System.out.println("You: ");
         String input = sc.nextLine();

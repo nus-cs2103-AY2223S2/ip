@@ -2,7 +2,7 @@ import java.util.List;
 
 public class CommandHandler {
     CommandHandler() {}
-    public String handleCommand(Command command, List<Task> tasks) {
+    public String handleCommand(Command command, TaskList tasks) {
         switch (command.getDescription()) {
         case "bye":
             return endDuke();
@@ -44,7 +44,7 @@ public class CommandHandler {
     private String endDuke() {
         return "Bye! Hope to see you again soon!\n";
     }
-    private String showTasks(List<Task> tasks) {
+    private String showTasks(TaskList tasks) {
         String response = "";
         if (!tasks.isEmpty()) {
             for (int i = 1; i <= tasks.size(); i++) {
@@ -55,7 +55,7 @@ public class CommandHandler {
         }
         return response;
     }
-    private String markTask(String index, List<Task> tasks) {
+    private String markTask(String index, TaskList tasks) {
         String response = "";
         try {
             int taskIndex = Integer.parseInt(index) - 1;
@@ -67,7 +67,7 @@ public class CommandHandler {
         }
         return response;
     }
-    private String unmarkTask(String index, List<Task> tasks) {
+    private String unmarkTask(String index, TaskList tasks) {
         String response = "";
         try {
             int taskIndex = Integer.parseInt(index) - 1;
@@ -79,21 +79,21 @@ public class CommandHandler {
         }
         return response;
     }
-    private String addTodo(String description, List<Task> tasks) {
+    private String addTodo(String description, TaskList tasks) {
         String response = "";
         Task newTask = new Todo(description);
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());
         return response;
     }
-    private String addDeadline(String description, String by, List<Task> tasks) {
+    private String addDeadline(String description, String by, TaskList tasks) {
         String response = "";
         Task newTask = new Deadline(description, by);
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());
         return response;
     }
-    private String addEvent(String description, String from, String to, List<Task> tasks) {
+    private String addEvent(String description, String from, String to, TaskList tasks) {
         String response = "";
         Task newTask = new Event(description, from, to);
         tasks.add(newTask);
@@ -104,7 +104,7 @@ public class CommandHandler {
         return "Sorry, I didn't understand that, please ask again.\n";
     }
 
-    private String deleteEvent(String index, List<Task> tasks) {
+    private String deleteEvent(String index, TaskList tasks) {
         String response = "";
         try {
             int taskIndex = Integer.parseInt(index) - 1;

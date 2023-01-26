@@ -4,12 +4,12 @@ import java.util.List;
 
 public class Duke {
     private boolean isRunning;
-    private final List<Task> tasks;
+    private final TaskList tasks;
     private final UiHandler ui;
     
     Duke() {
         this.isRunning = true;
-        this.tasks = new ArrayList<>();
+        this.tasks = new TaskList();
         this.ui = new UiHandler();
     }
     
