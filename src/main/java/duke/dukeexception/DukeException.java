@@ -1,4 +1,5 @@
 package duke.dukeexception;
+
 import java.lang.StringBuilder;
 
 /**

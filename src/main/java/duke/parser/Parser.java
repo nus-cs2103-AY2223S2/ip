@@ -1,7 +1,7 @@
 package duke.parser;
 
 
-import duke.command.*;
+import duke.command.*;  // import everything in command since all classes are used
 import duke.datetime.DateTime;
 import duke.dukeexception.DukeException;
 import duke.task.Deadline;

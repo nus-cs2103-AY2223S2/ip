@@ -1,12 +1,8 @@
-<<<<<<< HEAD:src/main/java/Duke/Task/Task.java
-package Duke.Task;
+package duke.task;
 
 /**
  * Class to represent the Task created by user
  */
-=======
-package duke.task;
->>>>>>> branch-A-CodingStandard:src/main/java/duke/task/Task.java
 public class Task {
     private boolean status = false;
     private String taskName;
