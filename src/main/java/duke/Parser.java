@@ -1,4 +1,11 @@
 package duke;
+/**
+ * Parser class is used for making sense of all possible user commands.
+ *
+ * @author      Tseng Chen-Yu
+ * @version     %I%, %G%
+ * @since       1.0
+ */
 public class Parser {
     public enum CmdType{
         bye,
