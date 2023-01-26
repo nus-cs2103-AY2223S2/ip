@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Represents a Task without deadline or duration.
+ *
+ * @author Karen
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
@@ -9,11 +14,17 @@ public class Todo extends Task {
         super(description, done);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "T | " + super.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if(this == obj) {

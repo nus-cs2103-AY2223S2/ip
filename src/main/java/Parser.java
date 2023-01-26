@@ -11,8 +11,21 @@ import duke.command.AddEventCommand;
 import duke.command.Command;
 import duke.Ui;
 
+/**
+ * Represents a parser which translates user input into data to be recognised by Duke.
+ *
+ * @author Karen
+ */
 public class Parser {
 
+    /**
+     * Returns a Command object corresponding to the command input by user.
+     *
+     * @param input. A String command by the user.
+     * @return Command. A corresponding Command object.
+     * @throws IllegalArgumentException
+     * @throws ArrayIndexOutOfBoundsException
+     */
     public static Command parse(String input) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
         String[] arrStr = input.split(" ", 2);
         String instruction = arrStr[0];

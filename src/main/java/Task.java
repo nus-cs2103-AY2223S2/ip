@@ -1,5 +1,10 @@
 package duke.task;
 
+/**
+ * Represents a Task which the user needs to complete.
+ *
+ * @author Karen
+ */
 public class Task {
     String name;
     boolean done;
@@ -14,14 +19,23 @@ public class Task {
         this.done = done;
     }
 
+    /**
+     * Marks a Task as completed.
+     */
     public void mark() {
         this.done = true;
     }
 
+    /**
+     * Unmarks a Task as uncompleted.
+     */
     public void unmark() {
         this.done = false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         if (done) {
@@ -31,6 +45,9 @@ public class Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if(this == obj) {
