@@ -24,6 +24,10 @@ class TextUi {
         out.println("Bye. Hope to see you again soon!");
     }
 
+    public void printLine() {
+        out.println("____________________");
+
+    }
     public void getCustomMessage(String message) {
         out.println("____________________");
         out.println(message);
