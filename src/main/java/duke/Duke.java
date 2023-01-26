@@ -14,6 +14,7 @@ import duke.ui.Ui;
 
 import java.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -72,6 +73,9 @@ public class Duke {
                 case DELETE:
                     this.deleteTask(parser.getIndex());
                     break;
+                case FIND:
+                    this.findTask(parser.getName());
+                    break;
                 case DEFAULT:
                     this.ui.printOutput("I don't quite get what that means.");
                 }
@@ -87,9 +91,13 @@ public class Duke {
     }
 
     private void viewList() {
-        ui.printLine();
-        this.tasklist.viewList();
-        ui.printLine();
+        if (this.tasklist.size() == 0) {
+            this.ui.printOutput("You currently have no tasks.");
+        } else {
+            this.ui.printOutput(
+                    "Here is a list of your tasks:",
+                    this.tasklist.getList());
+        }
     }
 
     public boolean isActive() {
@@ -141,5 +149,17 @@ public class Duke {
         Task task = this.tasklist.deleteTask(index);
         this.ui.printOutput("I've removed the following from your list of tasks:\n\t\t"
                 + task + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
+    }
+
+    private void findTask(String word) {
+        ArrayList<Task> tasks = this.tasklist.find(word);
+        if (tasks.size() == 0) {
+            this.ui.printOutput(
+                    "I could not find any task matching your request.");
+        } else {
+            this.ui.printOutput(
+                    "Here are the matching tasks in your list: ",
+                    tasks);
+        }
     }
 }

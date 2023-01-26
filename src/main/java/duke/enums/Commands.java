@@ -9,5 +9,6 @@ public enum Commands {
     DEADLINE,
     EVENT,
     DELETE,
+    FIND,
     DEFAULT
 }

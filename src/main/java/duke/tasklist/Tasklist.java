@@ -6,6 +6,7 @@ import duke.storage.Storage;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Tasklist {
 
@@ -15,6 +16,10 @@ public class Tasklist {
     public Tasklist(Storage storage) {
         this.storage = storage;
         this.tasks = storage.load();
+    }
+
+    public ArrayList<Task> getList() {
+        return this.tasks;
     }
 
     public int size() {
@@ -69,15 +74,11 @@ public class Tasklist {
         return false;
     }
 
-    public void viewList() {
-        if (this.tasks.isEmpty()) {
-            System.out.println("\t You currently have no tasks.");
-        } else {
-            System.out.println("\t Here is a list of your tasks:");
-            for (int i = 0; i < this.tasks.size(); i++) {
-                System.out.println("\t " + String.valueOf(i+1) + "." +  this.tasks.get(i));
-            }
-        }
-
+    public ArrayList<Task> find(String word) {
+        ArrayList<Task> result =
+                this.tasks.stream()
+                        .filter(t -> t.getName().contains(word))
+                        .collect(Collectors.toCollection(ArrayList::new));
+        return result;
     }
 }
