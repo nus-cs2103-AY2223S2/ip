@@ -66,7 +66,7 @@ public class TaskList {
      *
      * @param desc The title of the todo task
      */
-    public void addTodo(String desc) throws DukeException {
+    public void addTodo(String desc) {
         Todo t = new Todo(desc);
         tasks.add(t);
         storage.save(this);
