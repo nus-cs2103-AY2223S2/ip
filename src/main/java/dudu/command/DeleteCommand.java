@@ -8,13 +8,25 @@ import dudu.util.Storage;
 
 public class DeleteCommand extends Command {
     private int index;
-    public DeleteCommand(Instruction instruction, String index) {
-        super(instruction, index);
+
+    /**
+     * Constructor of delete command.
+     *
+     * @param index Index of the task to be deleted.
+     */
+    public DeleteCommand(String index) {
+        super(index);
         this.index = Integer.parseInt(index) - 1;
     }
 
+    /**
+     * Executes the delete command.
+     * @param list
+     * @param storage
+     * @throws DuduException
+     */
     @Override
-    public void execute(TaskList list, Storage storage) throws DuduException {
+    public Command execute(TaskList list, Storage storage) throws DuduException {
         try {
             Task currTask = list.getTask(index);
             storage.updateTask(list.delete(index));
@@ -24,5 +36,6 @@ public class DeleteCommand extends Command {
         } catch (TaskNumRangeException ex) {
             System.out.println(ex);
         }
+        return this;
     }
 }

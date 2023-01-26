@@ -1,5 +1,7 @@
 package dudu.task;
 
+import dudu.exception.DuduException;
+
 import java.util.Objects;
 
 public abstract class Task {
@@ -50,14 +52,20 @@ public abstract class Task {
     /**
      * Mark the task as done.
      */
-    public void markAsDone() {
+    public void markAsDone() throws DuduException {
+        if (isDone) {
+            throw new DuduException("The task has already marked as DONE!!!", "Already marked");
+        }
         isDone = true;
     }
 
     /**
      * Mark the task as undone.
      */
-    public void markAsUndone() {
+    public void markAsUndone() throws DuduException {
+        if (!isDone) {
+            throw new DuduException("The task has already marked as UNDONE!!!", "Already marked");
+        }
         isDone = false;
     }
 

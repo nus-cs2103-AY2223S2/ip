@@ -7,13 +7,13 @@ import dudu.util.Storage;
 
 public class FindCommand extends Command {
     private String input;
-    public FindCommand(Instruction instruction, String input) {
-        super(instruction, input);
+    public FindCommand(String input) {
+        super(input);
         this.input = input;
     }
 
     @Override
-    public void execute(TaskList list, Storage storage) throws DuduException {
+    public Command execute(TaskList list, Storage storage) throws DuduException {
         int index = 0;
         System.out.println("Here are the matching tasks in your list:");
         for (Task task: list.getList()) {
@@ -23,5 +23,6 @@ public class FindCommand extends Command {
                 System.out.println(task);
             }
         }
+        return this;
     }
 }

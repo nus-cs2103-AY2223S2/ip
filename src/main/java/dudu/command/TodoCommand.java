@@ -10,13 +10,14 @@ import dudu.util.Storage;
 
 public class TodoCommand extends Command {
     private String desc;
-    public TodoCommand(Instruction instruction, String desc) {
-        super(instruction, desc);
+    public TodoCommand(String desc) {
+        super(desc);
         this.desc = desc;
     }
 
     @Override
-    public void execute(TaskList list, Storage storage) throws DuduException {
+    public Command execute(TaskList list, Storage storage) throws DuduException {
         storage.saveTask(list.addTask(new Todo(desc)));
+        return this;
     }
 }

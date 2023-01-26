@@ -9,19 +9,19 @@ import dudu.util.Storage;
 
 public class EventCommand extends Command {
     private String input;
-    private String date;
-    public EventCommand(Instruction instruction, String input) {
-        super(instruction, input);
+    public EventCommand(String input) {
+        super(input);
         this.input = input;
     }
 
     @Override
-    public void execute(TaskList list, Storage storage) throws DuduException {
+    public Command execute(TaskList list, Storage storage) throws DuduException {
         if (!input.contains(" /from ")) {
             throw new EmptyDescriptionException("event", "date" , "Missing date");
         }
         String[] inputStr = input.split(" /from ");
         String[] dateStr = inputStr[1].split(" /to ");
         storage.saveTask(list.addTask(new Event(inputStr[0], dateStr[0], dateStr[1])));
+        return this;
     }
 }
