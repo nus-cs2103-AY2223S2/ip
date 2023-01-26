@@ -4,8 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Iterator;
+
+import saturday.models.Deadline;
+import saturday.models.Event;
+import saturday.models.Task;
+import saturday.utilities.DateTimeParser;
 /**
  * A TaskList is a collection of tasks that allows you to perform operations on tasks.
  * It extends the ArrayList class, so it has all the functionality of an ArrayList,
@@ -15,13 +19,6 @@ import java.util.Iterator;
  * @author Titus Lowe
  * @version 0.1
  */
-=======
-
-import saturday.models.Deadline;
-import saturday.models.Event;
-import saturday.models.Task;
-import saturday.utilities.DateTimeParser;
->>>>>>> branch-A-CodingStandard
 public class TaskList extends ArrayList<Task> {
 
     /**
@@ -31,29 +28,23 @@ public class TaskList extends ArrayList<Task> {
         super();
     }
 
-<<<<<<< HEAD
     /**
      * Marks the task at the specified index as done
      *
      * @param i index of task to be marked as done (1-based indexing)
      */
-    public void mark(int i) { super.get(i-1).mark(); }
+    public void mark(int i) {
+        super.get(i - 1).mark();
+    }
 
     /**
      * Unmarks the task at the specified index as done
      *
      * @param i index of task to be unmarked (1-based indexing)
      */
-    public void unMark(int i) { super.get(i-1).unMark(); }
-=======
-    public void mark(int i) {
-        super.get(i - 1).mark();
-    }
-
     public void unMark(int i) {
         super.get(i - 1).unMark();
     }
->>>>>>> branch-A-CodingStandard
 
     /**
      * Returns a TaskList containing all tasks that are on the specified date
@@ -106,6 +97,24 @@ public class TaskList extends ArrayList<Task> {
     @Override
     public Task get(int i) {
         return super.get(i - 1);
+    }
+
+    /**
+     * Returns the TaskList of tasks involving the String query
+     *
+     * @param query Substring to query
+     * @return TaskList of tasks involving the String query
+     */
+    public TaskList find(String query) {
+        TaskList queriedTaskList = new TaskList();
+        Iterator<Task> iterator = this.iterator();
+        while (iterator.hasNext()) {
+            Task task = iterator.next();
+            if (task.contains(query)) {
+                queriedTaskList.add(task);
+            }
+        }
+        return queriedTaskList;
     }
 
     /**

@@ -54,6 +54,11 @@ public class Task implements Serializable {
         this.done = false;
     }
 
+
+    public boolean contains(String query) {
+        return this.description.contains(query);
+    }
+
     /**
      * Returns a string representation of the task. The format of the returned string is "[X] " if the task is done
      * or "[ ] " if the task is not done, followed by the task description.

@@ -73,6 +73,21 @@ public class TaskListTest {
     }
 
     @Test
+    public void testFind() {
+        setUp();
+        taskList.add(new ToDo("Test Task 1"));
+        taskList.add(new ToDo("Test Task 2"));
+        Task queryTask = new ToDo("Test Task 3");
+        taskList.add(queryTask);
+
+        TaskList expectedTaskList = new TaskList();
+        expectedTaskList.add(queryTask);
+
+        TaskList actualTaskList = taskList.find("3");
+        Assertions.assertEquals(expectedTaskList, actualTaskList);
+    }
+
+    @Test
     public void testToString() {
         setUp();
         taskList.add(new ToDo("Test Task 1"));
@@ -81,4 +96,5 @@ public class TaskListTest {
 
         Assertions.assertEquals("1.[T][ ] Test Task 1\n\t2.[T][ ] Test Task 2\n\t3.[T][ ] Test Task 3\t", taskList.toString());
     }
+
 }

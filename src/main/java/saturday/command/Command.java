@@ -161,6 +161,19 @@ public enum Command {
             }
         }
     },
+    FIND("find") {
+        @Override
+        public void execute(TaskList taskList, String args) {
+            int space = args.indexOf(" ");
+            if (space != 1) {
+                String query = args.substring(args.indexOf(" ") + 1);
+                TaskList queriedTaskList = taskList.find(query);
+                Ui.output("Here are the tasks in your list:\n\t" + queriedTaskList.toString());
+            } else {
+                throw new SaturdayException("OOPS!!! What is it you're trying to find?");
+            }
+        }
+    },
     /**
      * Command for exiting the application.
      */
