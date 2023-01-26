@@ -47,17 +47,6 @@ public class Duke {
         return this;
     }
 
-    private Duke addNewTask(Task task) {
-        taskList.add(task);
-        ui.println("Got it. I've added this task:");
-        ui.println("\t" + task);
-
-        storage.saveDataToFile();
-        displayTaskCount();
-
-        return this;
-    }
-
     private static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
         if (!expectsTrue)
             throw new DukeException(failureMessage);
@@ -66,7 +55,6 @@ public class Duke {
     public static void main(String[] args) {
 
         Ui.printProgramInfo();
-
         System.out.println("Initialising system . . .");
 
         //Initialise components, variables
@@ -103,24 +91,31 @@ public class Duke {
                 switch (cmd) {
                 case "todo":
                     taskDescription = userCmd.substring(4).trim(); // exclude keyword
-                    activeTask = new Todo(taskDescription);
-                    duke.addNewTask(activeTask);
+                    duke.ui.println("Got it. I've added this task:");
+                    duke.ui.println("\t" + duke.taskList.addTodo(taskDescription));
+                    duke.storage.saveDataToFile();
+                    duke.displayTaskCount();
                     break;
 
                 case "deadline":
-                    // Checks for missing input
+                    // Checks for missing due date
                     Duke.assertThis(userCmd.contains(" /by "), "Missing due date.");
 
                     descIdx = userCmd.indexOf("deadline "); // 9 chars
                     int dueIdx = userCmd.indexOf(" /by "); // 5 chars
                     Duke.assertThis(descIdx+9 < dueIdx, "Task description cannot be empty.");
 
+                    // Check for empty (whitespace) description and due date
                     taskDescription = userCmd.substring(descIdx + 9, dueIdx).trim();
                     String duedate = userCmd.substring(dueIdx + 5).trim();
                     Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
                     Duke.assertThis(!duedate.isEmpty(), "Due date cannot be empty.");
 
-                    duke.addNewTask(new Deadline(taskDescription, duke.parser.parseDateTime(duedate)));
+                    duke.ui.println("Got it. I've added this task:");
+                    duke.ui.println("\t" + duke.taskList.addDeadline(taskDescription, duedate));
+                    duke.storage.saveDataToFile();
+                    duke.displayTaskCount();
+
                     break;
 
                 case "event":
@@ -141,13 +136,13 @@ public class Duke {
                     Duke.assertThis(!start.isEmpty(), "Start date/time cannot be empty.");
                     Duke.assertThis(!end.isEmpty(), "End date/time cannot be empty.");
 
-                    duke.addNewTask(new Event(
-                            taskDescription,
-                            duke.parser.parseDateTime(start),
-                            duke.parser.parseDateTime(end))
-                    );
+                    duke.ui.println("Got it. I've added this task:");
+                    duke.ui.println("\t" + duke.taskList.addEvent(taskDescription, start, end));
+                    duke.storage.saveDataToFile();
+                    duke.displayTaskCount();
                     break;
 
+                case "ls":
                 case "list":
                     duke.displayTasks();
                     break;
