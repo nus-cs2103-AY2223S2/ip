@@ -18,7 +18,8 @@ enum action {
     Todo,
     Deadline,
     Event,
-    Delete
+    Delete,
+    Find
 }
 public class Duke {
     private Storage storage;
@@ -52,13 +53,11 @@ public class Duke {
         TaskList listOfAction = tasks;
         Scanner sc = new Scanner(System.in);
         Storage file = storage;
-        //listOfAction = file.load();
         String s = "";
 
         String newLine = sc.nextLine();
         String[] arr = newLine.split(" ");
         s = arr[0];
-
         int len = listOfAction.validLen();
 
         while (!s.equals("bye")) {
@@ -67,6 +66,16 @@ public class Duke {
                 action myAction = action.valueOf(s.charAt(0).toUpperCase() +
                         s.substring(1));
                 switch(myAction) {
+                    case Find:
+                        try {
+                            checkEmptyAction(arr, "find");
+                            ui.findWordIntro(arr, listOfAction.checkWord(arr[1]));
+                            listOfAction.findWord(arr[1]);
+                        } catch (duke.DukeException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+
                     case Bye:
                         System.out.println("Bye. Hope to see you again soon!");
                         break;
