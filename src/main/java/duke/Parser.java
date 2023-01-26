@@ -1,3 +1,8 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+
 public class Parser {
     /* Takes in an input,
     1. looks at first word and checks if it is a task
@@ -47,7 +52,7 @@ public class Parser {
             return new Deadline(content, date);
 
         } else {
-            throw new DukeException("Deadline Input Error! You need to specify date or content is empty!");
+            throw new DukeException("Duke.Deadline Input Error! You need to specify date or content is empty!");
         }
     }
 
@@ -115,6 +120,7 @@ public class Parser {
     }
 
 
-
-
+    public static boolean is_Clear(String input) {
+        return input.equalsIgnoreCase("clear");
+    }
 }

@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+package duke;
+
+import duke.task.Task;
 
 public class Ui {
     static String line = "      _____________________________________________________________________";
@@ -38,7 +40,7 @@ public class Ui {
     }
 
     public static void displayDeadlineError() {
-        System.out.println("Deadline Input Error! You need to specify date or content is empty!");
+        System.out.println("Duke.Deadline Input Error! You need to specify date or content is empty!");
     }
 
     public static void displayEventError() {
@@ -64,5 +66,9 @@ public class Ui {
         list.delete(i);
         System.out.println("        Now you have " + list.size() + " tasks in the list.");
         System.out.println(line);
+    }
+
+    public static void displayClear() {
+        System.out.println("        Got it. I have cleared the task-list.\n" + line);
     }
 }
