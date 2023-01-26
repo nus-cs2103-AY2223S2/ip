@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.TaskType;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -41,7 +45,7 @@ public class Event extends Task {
             throw new RuntimeException("Invalid date and time! Please try again!");
         }
         if (startDateTime.isAfter(endDateTime)) {
-            throw new RuntimeException("Unable to create Event! Starting date and time cannot be after ending date and time!");
+            throw new RuntimeException("Unable to create duke.task.Event! Starting date and time cannot be after ending date and time!");
         }
         return new Event(description, startDateTime, endDateTime);
     }

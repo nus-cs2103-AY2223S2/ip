@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.TaskType;
+
 public class ToDo extends Task {
     private String description;
 

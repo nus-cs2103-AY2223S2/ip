@@ -5,13 +5,13 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello! I'm Duke
+Hello! I'm duke.Duke
 What can I do for you?
 Huh? I don't know what that means :(
 
-Task does not exist!
+duke.task.Task does not exist!
 
-Task does not exist!
+duke.task.Task does not exist!
 
 Oops!!!! The description of a todo can't be left blank!
 
@@ -19,13 +19,13 @@ Got it! This task has been added:
 [T][ ] read book
 You now have 1 task in the list.
 
-Unable to create Deadline! Check your format!
+Unable to create duke.task.Deadline! Check your format!
 
 Got it! This task has been added:
 [D][ ] return book (by: Sunday)
 You now have 2 tasks in the list.
 
-Unable to create Event! Check your /from and /to formatting!
+Unable to create duke.task.Event! Check your /from and /to formatting!
 
 Got it! This task has been added:
 [E][ ] project meeting (from: Mon 2pm to: 4pm)
@@ -35,7 +35,7 @@ You now have 3 tasks in the list.
 2. [D][ ] return book (by: Sunday)
 3. [E][ ] project meeting (from: Mon 2pm to: 4pm)
 
-Task does not exist!
+duke.task.Task does not exist!
 
 Great job! This task has been marked as done:
 [D][X] return book (by: Sunday)
@@ -58,7 +58,7 @@ Noted! This task has been marked as undone:
 2. [D][ ] return book (by: Sunday)
 3. [E][X] project meeting (from: Mon 2pm to: 4pm)
 
-Task does not exist!
+duke.task.Task does not exist!
 
 Got it! This task has been removed:
 [D][ ] return book (by: Sunday)

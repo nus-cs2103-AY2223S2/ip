@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.TaskType;
+
 public abstract class Task {
     private TaskType taskType;
     private String description;
