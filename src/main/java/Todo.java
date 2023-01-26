@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 public class Todo extends Task {
 
     public Todo(String description) {

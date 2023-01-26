@@ -1,13 +1,18 @@
 import exceptions.DukeException;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
+
 public class Duke {
     private static void printMsg(String[] msgs) {
         System.out.println("____________________________________________________________");
-        for (String msg :  msgs) {
+        for (String msg : msgs) {
             System.out.println(msg);
         }
         System.out.println("____________________________________________________________");
@@ -27,17 +32,48 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    private static void saveTasks(List<Task> tasks) {
+        try {
+            OutputStream output = new FileOutputStream("./data.txt");
+            ObjectOutputStream objOut = new ObjectOutputStream(output);
+            objOut.writeObject(tasks);
+            objOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static List<Task> loadTasks() {
+        InputStream input = null;
+        try {
+            input = new FileInputStream("./data.txt");
+            ObjectInputStream objIn = new ObjectInputStream(input);
+            @SuppressWarnings("unchecked")
+            List<Task> tasks = (List<Task>) objIn.readObject();
+            objIn.close();
+            return tasks;
+        } catch (FileNotFoundException fnfe) {
+            return new ArrayList<>();
+        } catch (IOException | ClassNotFoundException e) {
+            Logger.getLogger(Duke.class.getName()).log(Level.SEVERE, null, e);
+            return new ArrayList<>();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Duke.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
 
         String[] welcomeMsg = {"Hello I am Duke", "What can I do for you?"};
         printMsg(welcomeMsg);
 
-        List<Task> data = new ArrayList<>();
+        List<Task> data = loadTasks();
 
         Scanner sc = new Scanner(System.in);
             while (sc.hasNext()) {
@@ -119,6 +155,7 @@ public class Duke {
                         default:
                             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
+                    saveTasks(data);
                 } catch (DukeException e) {
                     printMsg(e.getMessage());
                 }
