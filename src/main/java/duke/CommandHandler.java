@@ -4,6 +4,13 @@ import java.time.format.DateTimeParseException;
 
 public class CommandHandler {
     CommandHandler() {}
+
+    /**
+     * Determines the behaviour of Duke given a command.
+     * @param command The command in which behaviour is to be determined.
+     * @param tasks A TaskList containing the current list of tasks in Duke. If required, the TaskList will be modified in place as a side effect of the method call.
+     * @return The response that Duke will display upon execution of the command.
+     */
     public String handleCommand(Command command, TaskList tasks) {
         switch (command.getDescription()) {
         case "bye":
@@ -39,7 +46,12 @@ public class CommandHandler {
         }
         return "";
     }
-    
+
+    /**
+     * Determines if a command is the 'bye' command. Used to terminate the program.
+     * @param command The command to be checked.
+     * @return true if the command is the 'bye' command, false for all other commands.
+     */
     public boolean isByeCommand(Command command) {
         return command.getDescription().equals("bye");
     }

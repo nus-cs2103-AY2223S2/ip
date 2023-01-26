@@ -7,6 +7,11 @@ public class Parser {
     Parser() {
     }
 
+    /**
+     * Parses a given input string command. Determines its validity, and returns a corresponding Command object.
+     * @param input The input command to be parsed, given as a String.
+     * @return The parsed command as a Command object.
+     */
     public Command parseCommand(String input) {
         List<String> arguments = new ArrayList<>();
         if (input.equals("bye")) {
@@ -84,6 +89,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a saved task into a Task object.
+     * @param data The saved task read from the database, read as a string.
+     * @return The parsed task corresponding to the input data string.
+     */
     public Task parseTask(String data) {
         String[] arguments = data.split("~-~-~");
         if (arguments[0].equals("todo")) {

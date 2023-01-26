@@ -22,6 +22,10 @@ public class UiHandler {
         this.commandHandler = new CommandHandler();
         this.parser = new Parser();
     }
+
+    /**
+     * Shows Duke's starting dialogue.
+     */
     public void showStartingDialogue() {
         System.out.println(logo + "\n");
         System.out.println(separator);
@@ -29,7 +33,12 @@ public class UiHandler {
         System.out.println("Hello! I'm DUKE!\nWhat can I do for you?");
         System.out.println(separator);
     }
-    
+
+    /**
+     * Responsible for taking in user inputs and passing them to the commandHandler.
+     * @param tasks A TaskList of the current tasks in Duke.
+     * @return true if Duke should continue running, false otherwise.
+     */
     public boolean run(TaskList tasks) {
         boolean isRunning = true;
         System.out.println("You: ");
