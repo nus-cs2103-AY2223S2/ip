@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-
+package duke;
 
 public class Duke {
     private boolean isRunning;

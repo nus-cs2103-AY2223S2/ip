@@ -1,10 +1,12 @@
+package duke;
+
 abstract class Task {
     private String description;
     private boolean isDone;
 
     public Task(String description) {
         if (description.isEmpty()) {
-            throw new IllegalArgumentException("Task cannot be empty!");
+            throw new IllegalArgumentException("duke.Task cannot be empty!");
         }
         this.description = description;
         this.isDone = false;

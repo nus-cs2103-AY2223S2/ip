@@ -1,4 +1,10 @@
-import java.util.List;
+package duke;
+
+import duke.Command;
+import duke.CommandHandler;
+import duke.Parser;
+import duke.TaskList;
+
 import java.util.Scanner;
 
 public class UiHandler {
