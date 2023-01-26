@@ -77,7 +77,7 @@ public class Ui {
      * @param list the TaskList storing the Task objects
      */
     public void displayList(TaskList list) {
-        int listSize = list.listLength();
+        int listSize = list.getListLength();
         for(int i = 1; i <= listSize; i++) {
             System.out.println("\t" + i + ". " + list.getTask(i).toString());
         }

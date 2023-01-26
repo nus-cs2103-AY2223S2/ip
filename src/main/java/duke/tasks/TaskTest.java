@@ -28,9 +28,9 @@ public class TaskTest {
         list.addTask(todo3);
         list.addTask(todo4);
 
-        assertEquals(list.listLength(), 4, "List length should be 4");
+        assertEquals(list.getListLength(), 4, "List length should be 4");
         list.deleteTask(2);
-        assertEquals(list.listLength(), 3, "List length should be 3 after deletion.");
+        assertEquals(list.getListLength(), 3, "List length should be 3 after deletion.");
 
     }
 }
