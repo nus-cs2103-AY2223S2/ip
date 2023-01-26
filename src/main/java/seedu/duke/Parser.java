@@ -4,7 +4,6 @@ package seedu.duke;
  * Parses the input command from user to the Duke chatbox.
  */
 public class Parser {
-
     private final static String LIST = "list";
     private final static String MARK = "mark";
     private final static String UNMARK = "unmark";
