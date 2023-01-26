@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class TaskTracker {
     private ArrayList<Task> tasks = new ArrayList<Task>();
-    private TaskStorage taskStorage;
+    private final TaskStorage taskStorage;
 
     public TaskTracker() {
         tasks = new ArrayList<Task>();

@@ -31,7 +31,7 @@ public class TaskStorage {
     }
 
     private String serializeTasks(ArrayList<Task> tasks) {
-        StringBuilder serialized  = new StringBuilder();
+        StringBuilder serialized = new StringBuilder();
         for (Task task : tasks) {
             serialized.append(task.serialize()).append("\n");
         }

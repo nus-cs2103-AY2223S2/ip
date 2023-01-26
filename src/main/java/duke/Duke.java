@@ -1,12 +1,12 @@
 package duke;
 
 public class Duke {
-    private Bot bot;
-    private Ui ui;
+    private final Bot bot;
+    private final Ui ui;
 
     public Duke() {
-       this.bot = new Bot();
-       this.ui = new Ui();
+        this.bot = new Bot();
+        this.ui = new Ui();
 
         try {
             bot.init();
@@ -17,7 +17,7 @@ public class Duke {
     }
 
     public void run() {
-        boolean running =  true;
+        boolean running = true;
         while (running & ui.hasUserInput()) {
             String input = ui.getUserInput();
             BotResult result = bot.process(input);

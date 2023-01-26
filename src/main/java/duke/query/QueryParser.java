@@ -11,13 +11,13 @@ public class QueryParser {
         try {
             result[1] = st.nextToken("/").stripTrailing().stripLeading();
             for (int i = 0; i < commands.length; i++) {
-               String command = st.nextToken(" ");
-               if (!command.equals(commands[i])) {
-                   result[i + 2] = "";
-               } else {
-                   result[i + 2] = st.nextToken(i == commands.length - 1 ? "\n" : "/")
-                           .stripLeading().stripTrailing();
-               }
+                String command = st.nextToken(" ");
+                if (!command.equals(commands[i])) {
+                    result[i + 2] = "";
+                } else {
+                    result[i + 2] = st.nextToken(i == commands.length - 1 ? "\n" : "/")
+                            .stripLeading().stripTrailing();
+                }
             }
         } catch (Exception e) {
         }

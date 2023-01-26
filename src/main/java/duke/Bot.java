@@ -2,7 +2,19 @@ package duke;
 
 import java.util.StringTokenizer;
 
-import duke.query.*;
+import duke.query.DeadlineQueryHandler;
+import duke.query.DeleteQueryHandler;
+import duke.query.EventQueryHandler;
+import duke.query.IQueryHandler;
+import duke.query.ListQueryHandler;
+import duke.query.FindTaskQueryHandler;
+import duke.query.MarkQueryHandler;
+import duke.query.QueryType;
+import duke.query.QueryTypeUtil;
+import duke.query.SimpleResponseQueryHandler;
+import duke.query.TodoQueryHandler;
+import duke.query.UnknownCommandException;
+import duke.query.UnmarkQueryHandler;
 import duke.task.TaskTracker;
 
 public class Bot {
@@ -10,7 +22,7 @@ public class Bot {
     private static final String GOODBYE_RES = "GOOD BYE!";
     private static final String UNKNOWN_COMMAND_RES = "Your command is not of the known tongue!";
 
-    private TaskTracker tt = new TaskTracker();
+    private final TaskTracker tt = new TaskTracker();
 
     public void init() throws DukeException {
         if (SHOULD_LOAD_TASK_SAVE) {
@@ -44,27 +56,27 @@ public class Bot {
     }
 
     private IQueryHandler getQueryHandler(QueryType queryType) throws UnknownCommandException {
-        switch(queryType) {
-            case TODO:
-                return new TodoQueryHandler(tt);
-            case DEADLINE:
-                return new DeadlineQueryHandler(tt);
-            case EVENT:
-                return new EventQueryHandler(tt);
-            case LIST:
-                return new ListQueryHandler(tt);
-            case MARK:
-                return new MarkQueryHandler(tt);
-            case UNMARK:
-                return new UnmarkQueryHandler(tt);
-            case DELETE:
-                return new DeleteQueryHandler(tt);
-            case FIND:
-                return new FindTaskQueryHandler(tt);
-            case EXIT:
-                return new SimpleResponseQueryHandler(GOODBYE_RES);
-            default:
-                throw new UnknownCommandException(UNKNOWN_COMMAND_RES);
+        switch (queryType) {
+        case TODO:
+            return new TodoQueryHandler(tt);
+        case DEADLINE:
+            return new DeadlineQueryHandler(tt);
+        case EVENT:
+            return new EventQueryHandler(tt);
+        case LIST:
+            return new ListQueryHandler(tt);
+        case FIND:
+            return new FindTaskQueryHandler(tt);
+        case MARK:
+            return new MarkQueryHandler(tt);
+        case UNMARK:
+            return new UnmarkQueryHandler(tt);
+        case DELETE:
+            return new DeleteQueryHandler(tt);
+        case EXIT:
+            return new SimpleResponseQueryHandler(GOODBYE_RES);
+        default:
+            throw new UnknownCommandException(UNKNOWN_COMMAND_RES);
         }
     }
 }
