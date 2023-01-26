@@ -48,13 +48,13 @@ public class TaskList {
      * @param index Index of task to be marked as done
      */
     public void mark (int index) {
-        this.tasks.get(index).setStatus(true);
+        this.tasks.get(index).setIsCompleted(true);
     }
 
     /**
      * @param index Index of task to be marked as undone
      */
     public void unmark (int index) {
-        this.tasks.get(index).setStatus(false);
+        this.tasks.get(index).setIsCompleted(false);
     }
 }

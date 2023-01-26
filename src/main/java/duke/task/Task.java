@@ -4,15 +4,15 @@ package duke.task;
  * Class to represent the Task created by user
  */
 public class Task {
-    private boolean status = false;
+    private boolean isCompleted = false;
     private String taskName;
 
     public Task (String name) {
         this.taskName = name;
     }
 
-    public boolean getStatus() {
-        return this.status;
+    public boolean getIsCompleted() {
+        return this.isCompleted;
     }
 
     public String getTaskName() {
@@ -24,7 +24,7 @@ public class Task {
      *
      * @param state State of Task to be changed into
      */
-    public void setStatus(boolean state) {
-        this.status = state;
+    public void setIsCompleted(boolean state) {
+        this.isCompleted = state;
     }
 }

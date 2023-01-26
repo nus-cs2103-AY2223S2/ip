@@ -33,7 +33,7 @@ public class Event extends Task {
     public String toString() {
         String from = DateTime.getDateTimeString(this.from);
         String to = DateTime.getDateTimeString(this.to);
-        if (super.getStatus()) {
+        if (super.getIsCompleted()) {
             return String.format("[E][X] %s (from: %s to: %s)\n", super.getTaskName(), from, to);
         } else {
             return String.format("[E][ ] %s (from: %s to: %s)\n", super.getTaskName(), from, to);

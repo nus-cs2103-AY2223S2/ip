@@ -25,7 +25,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String deadline = DateTime.getDateTimeString(this.deadline);
-        if (super.getStatus()) {
+        if (super.getIsCompleted()) {
             return String.format("[D][X] %s (by: %s)\n", super.getTaskName(), deadline);
         } else {
             return String.format("[D][ ] %s (by: %s)\n",super.getTaskName(), deadline);

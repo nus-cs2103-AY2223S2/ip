@@ -14,7 +14,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        if (super.getStatus()) {
+        if (super.getIsCompleted()) {
             return String.format("[T][X] %s\n", super.getTaskName());
         } else {
             return String.format("[T][ ] %s\n",super.getTaskName());

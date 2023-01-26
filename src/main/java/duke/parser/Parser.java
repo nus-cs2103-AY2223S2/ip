@@ -47,7 +47,7 @@ public class Parser {
             }
             tl.addTask(task);
             if (Objects.equals(arr[1], "1")) {
-                task.setStatus(true);
+                task.setIsCompleted(true);
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Parser parseAndAddStorageTask() Index out of bound when parsing string:" + str);

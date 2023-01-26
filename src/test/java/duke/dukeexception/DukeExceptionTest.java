@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeExceptionTest {
     @Test
-    public void DukeExceptionTest() {
+    public void DukeExceptionStringTest() {
         String expected = "    ____________________________________________________________\n" +
                 "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                 "    ____________________________________________________________\n";

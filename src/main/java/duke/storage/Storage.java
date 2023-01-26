@@ -114,7 +114,7 @@ public class Storage {
      */
     public String getStorageTaskString(Task task) {
         String res = "";
-        String completed = task.getStatus() ? "1" : "0";
+        String completed = task.getIsCompleted() ? "1" : "0";
         if (task instanceof Event) {
             res += "E,";
             res += completed + ",";
