@@ -1,3 +1,4 @@
+import exceptions.DukeException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.TaskList;
@@ -58,7 +59,7 @@ public class Storage {
         }
     }
 
-    public void parseFile(String input, TaskList tasks) {
+    public void parseFile(String input, TaskList tasks) throws DukeException {
         String[] inputList = input.split(",");
         String taskType = inputList[0];
         String taskName = inputList[1];
