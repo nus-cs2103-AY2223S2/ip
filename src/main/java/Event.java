@@ -1,25 +1,45 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents an Event task
  */
 public class Event extends Task {
+    protected final String DATE_TIME_PARSED = "yyyy-MM-dd HH:mm";
+    protected final String DATE_TIME_TO_PRINT = "d MMM yyyy HH:mm";
     protected String from;
     protected String to;
+    protected LocalDateTime fromDateTime;
+    protected LocalDateTime toDateTime;
 
     /**
      * Creates an Event task object
      * @param description Describes the task
      */
-    public Event(String description, String from, String to) {
+    public Event(String description, String from, String to) throws DateTimeParseException {
         super(description);
-        this.from =  from;
-        this.to = to;
+        DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_TIME_PARSED);
+        DateTimeFormatter formatterPrint = DateTimeFormatter.ofPattern(DATE_TIME_TO_PRINT);
+        this.fromDateTime = LocalDateTime.parse(from, formatterParse);
+        this.from = this.fromDateTime.format(formatterPrint);
+        this.toDateTime = LocalDateTime.parse(to, formatterParse);
+        this.to = this.toDateTime.format(formatterPrint);
     }
 
-    public String getFrom() {
+    public LocalDateTime getDateTimeFrom() {
+        return this.fromDateTime;
+    }
+
+    public LocalDateTime getDateTimeTo() {
+        return this.toDateTime;
+    }
+
+    public String getFormattedFrom() {
         return this.from;
     }
 
-    public String getTo() {
+    public String getFormattedTo() {
         return this.to;
     }
 
@@ -29,6 +49,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+        return "[E]" + super.toString() + " (from: " + getFormattedFrom() + " to: " + getFormattedTo() + ")";
     }
 }

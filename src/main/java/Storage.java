@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +12,8 @@ import java.util.Scanner;
  */
 public class Storage {
     protected String path;
+    protected final String DATE_TIME_TO_PARSE = "yyyy-MM-dd HH:mm";
+    protected final String DATE_TO_PRINT = "d MMM yyyy";
     protected ArrayList<Task> taskList;
 
     /**
@@ -42,6 +46,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(this.path);
             for (Task task: this.taskList) {
+                DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_TIME_TO_PARSE);
                 StringBuilder sb = new StringBuilder(task.getStatusIcon());
                 sb.append("\\");
                 sb.append(task.getDescription());
@@ -53,14 +58,14 @@ public class Storage {
                 } else if (task instanceof Deadline) { // X\desc\D\By
                     sb.append("D");
                     sb.append("\\");
-                    sb.append(((Deadline) task).getBy());
+                    sb.append(((Deadline) task).getDateTimeBy().format(formatterParse));
                     fw.write(sb + System.lineSeparator());
                 } else {
                     sb.append("E");
                     sb.append("\\");
-                    sb.append(((Event) task).getFrom()); // X\desc\E\From\To
+                    sb.append(((Event) task).getDateTimeFrom().format(formatterParse)); // X\desc\E\From\To
                     sb.append("\\");
-                    sb.append(((Event) task).getTo());
+                    sb.append(((Event) task).getDateTimeTo().format(formatterParse));
                     fw.write(sb + System.lineSeparator());
                 }
 
@@ -74,6 +79,7 @@ public class Storage {
     public Task parse(String str) {
         Task task;
         String[] arr = str.split("\\\\");
+
         switch (arr[2]) {
         case "T":
             task = new ToDo(arr[1]);
@@ -158,14 +164,40 @@ public class Storage {
     /**
      * Prints out the list of current tasks
      */
-    public void showTasks() {
-        System.out.println("Here are the tasks in your list:");
+    public void showAllTasks() {
+        System.out.println("Here are all the tasks in your list:");
         for (int i = 0; i < this.getNumberOfTasks(); i++) {
             StringBuilder sb = new StringBuilder();
             sb.append(i+1);
             sb.append(".");
             sb.append(this.taskList.get(i));
             System.out.println(sb);
+        }
+    }
+
+    public void showTasksDue(LocalDate byDate) {
+        DateTimeFormatter formatterPrint = DateTimeFormatter.ofPattern(DATE_TO_PRINT);
+        String formattedDueDate = byDate.format(formatterPrint);
+        int j = 1;
+        System.out.println("Here are the task(s) due on " + formattedDueDate + " :");
+        for (int i = 0; i < this.getNumberOfTasks(); i++) {
+            Task currTask = this.taskList.get(i);
+            StringBuilder sb = new StringBuilder();
+            sb.append(j);
+            sb.append(".");
+            if (currTask instanceof Deadline) {
+                if (((Deadline) currTask).getDateTimeBy().toLocalDate().compareTo(byDate) == 0) {
+                    sb.append(currTask);
+                    System.out.println(sb);
+                    j++;
+                }
+            } else if (currTask instanceof Event) {
+                if (((Event) currTask).getDateTimeTo().toLocalDate().compareTo(byDate) == 0) {
+                    sb.append(currTask);
+                    System.out.println(sb);
+                    j++;
+                }
+            }
         }
     }
 }
