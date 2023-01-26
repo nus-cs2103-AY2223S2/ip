@@ -9,7 +9,6 @@ import duke.command.*;
 
 /**
  * Main Duke class which keep track a list of tasks
-
  */
 class Duke {
 
