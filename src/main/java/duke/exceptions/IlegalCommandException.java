@@ -1,3 +1,7 @@
+package duke.exceptions;
+
+import duke.commands.Commands;
+
 public class IlegalCommandException extends DukeException {
 
     Commands c;

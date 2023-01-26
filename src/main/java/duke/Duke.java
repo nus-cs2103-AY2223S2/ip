@@ -1,16 +1,11 @@
-import java.io.*;
+package duke;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
+import duke.exceptions.DukeException;
+import duke.exceptions.MemoryFailedException;
+import duke.utils.Parser;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
 
 public class Duke {
 

@@ -1,3 +1,11 @@
+package duke.utils;
+
+import duke.exceptions.MemoryFailedException;
+import duke.tasks.Task;
+import duke.tasks.TaskType;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +28,6 @@ public class Storage {
     private File memory;
 
     public Storage(String[] memoryPathArray) {
-//        String[] memoryPathArray = memoryPathString.split(
-//                Matcher.quoteReplacement(System.getProperty("file.separator")));
         this.memoryPath = Paths.get(memoryPathArray[0],
                 Arrays.copyOfRange(memoryPathArray, 1, memoryPathArray.length));
         this.memory = new File(String.valueOf(memoryPath));
@@ -59,14 +65,15 @@ public class Storage {
             LocalDateTime end = LocalDateTime.parse(attributes[4], dateFormat);
             allTasks.addToList(title, TaskType.EVENT, start, end, done, false);
         } else {
-            System.out.println("Some task in memory does not fall into the three task categories!");
+            Ui.println("Some task in memory does not fall into the three task categories!"
+                    + "\nThese are not loaded.");
         }
     }
 
     public void saveTasks(TaskList allTasks) {
         // TODO: Handle case where file is destroyed while script is running
         try {
-            BufferedWriter fw = Files.newBufferedWriter(this.memoryPath , StandardOpenOption.TRUNCATE_EXISTING);
+            BufferedWriter fw = Files.newBufferedWriter(this.memoryPath, StandardOpenOption.TRUNCATE_EXISTING);
             for (Task task: allTasks.getArray()) {
                 fw.write(task.convertToMemoryString());
                 fw.newLine();

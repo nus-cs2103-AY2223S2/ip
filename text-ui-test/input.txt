@@ -2,8 +2,8 @@ list
 test
 help
 todo borrow book
-deadline do problem set 0 /by Sunday
-event access party /from 1900hrs Sunday /to 0000hrs Monday
+deadline do problem set 0 /by 2020-05-05 15:00
+event access party /from 2019-05-05 15:00 /to 2020-05-05 16:00
 todo
 deadline
 event

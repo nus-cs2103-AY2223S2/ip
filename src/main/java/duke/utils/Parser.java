@@ -1,3 +1,10 @@
+package duke.utils;
+
+import duke.commands.Commands;
+import duke.exceptions.DukeException;
+import duke.exceptions.IlegalCommandException;
+import duke.tasks.TaskType;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,7 +23,6 @@ public class Parser {
         switch (command) {
         case "bye":
             Ui.printGoodbye();
-//            System.out.println("Sad...Alright bye!");
             return false;
         case "list":
             Ui.printList(allTasks);

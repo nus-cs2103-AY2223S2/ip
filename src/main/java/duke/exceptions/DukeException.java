@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class DukeException extends Throwable {
 
     public DukeException() {
@@ -6,7 +8,7 @@ public class DukeException extends Throwable {
 
     @Override
     public String toString() {
-        return "Duke Exception: Something went wrong! Couldn't really pinpoint it though D:";
+        return "duke.Duke Exception: Something went wrong! Couldn't really pinpoint it though D:";
     }
 
 }
