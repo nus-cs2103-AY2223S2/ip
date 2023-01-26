@@ -1,6 +1,10 @@
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List; // Import List class
 import java.util.LinkedList; // Import LinkedList class
 import java.util.Scanner;  // Import the Scanner class
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Duke {
 
@@ -8,11 +12,14 @@ public class Duke {
 
     private static List<Task> storedInputs = new LinkedList<>(); // List to store inputs
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println(intro());
         
         String userInput;
         EventType curEvent;
+
+        Path filePath = Paths.get("/Users/shawn/", "data", "duke.txt");
+
         loop: while (true) {
 
             userInput = askForInput();
@@ -32,21 +39,27 @@ public class Duke {
                 break;
             case MARK:
                 markEvent(userInput);
+                replaceFileContents(filePath,printList());
                 break;
             case UNMARK:
                 unmarkEvent(userInput);
+                replaceFileContents(filePath,printList());
                 break;
             case DELETE:
                 deleteEvent(userInput);
+                replaceFileContents(filePath,printList());
                 break;
             case TODO:
                 todoEvent(userInput);
+                replaceFileContents(filePath,printList());
                 break;
             case DEADLINE:
                 deadlineEvent(userInput);
+                replaceFileContents(filePath,printList());
                 break;
             case EVENT:
                 eventEvent(userInput);
+                replaceFileContents(filePath,printList());
                 break;
             }
         }
@@ -226,6 +239,10 @@ public class Duke {
 
     private static void printTotalTasks() {
         System.out.println("Now you have " + Task.count  + " tasks in the list.\n");
+    }
+
+    private static void replaceFileContents(Path path, String newContents) throws IOException {
+        Files.writeString(path, newContents);
     }
 
 }
