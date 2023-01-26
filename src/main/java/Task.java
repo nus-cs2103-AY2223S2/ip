@@ -1,6 +1,8 @@
 import java.time.LocalDate;
+import java.io.Serializable;
 
-public abstract class Task {
+public abstract class Task implements Serializable {
+
     protected final String desc;
     protected final boolean done;
     
