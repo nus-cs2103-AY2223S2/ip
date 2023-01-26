@@ -8,6 +8,7 @@ public class Event extends Tasks {
         this.type = 'E';
     }
 //bugfix?
+    //second commit to feature1
     @Override
     public String getDuration() {
         return this.from + " " + this.to;
