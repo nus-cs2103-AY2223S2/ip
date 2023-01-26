@@ -16,6 +16,7 @@ public class DeleteQueryHandler extends TaskQueryHandler {
 
     /**
      * Processes a query for deleting a task.
+     *
      * @param query a user input string
      * @return response from deleting a task
      * @throws DukeException

@@ -16,6 +16,7 @@ public class UnmarkQueryHandler extends TaskQueryHandler {
 
     /**
      * Processes a query for unmarking a task.
+     *
      * @param query a user input string
      * @return response from unmarking a task
      * @throws DukeException

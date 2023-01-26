@@ -30,6 +30,7 @@ public class Event extends Deadline {
 
     /**
      * Provides a serialized format for the Event object.
+     *
      * @return serialized format for the Event object
      */
     @Override
@@ -41,6 +42,7 @@ public class Event extends Deadline {
 
     /**
      * Deserializes a serialized Event object.
+     *
      * @param data string of serialized Event object to deserialize
      * @return deserialized Event object
      * @throws DukeException

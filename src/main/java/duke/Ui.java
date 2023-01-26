@@ -28,6 +28,7 @@ public class Ui {
 
     /**
      * Returns true if there is user input. This method can block when waiting for user input.
+     *
      * @return true if there is user input to process
      */
     public boolean hasUserInput() {
@@ -36,6 +37,7 @@ public class Ui {
 
     /**
      * Returns the next user input line.
+     *
      * @return next user input string
      */
     public String getUserInput() {
@@ -59,6 +61,7 @@ public class Ui {
 
     /**
      * Displays a response to the user.
+     *
      * @param response response to display
      */
     public void displayResponse(String response) {

@@ -16,6 +16,7 @@ public class MarkQueryHandler extends TaskQueryHandler {
 
     /**
      * Processes a query for marking a task.
+     *
      * @param query a user input string
      * @return response from marking a task
      * @throws DukeException

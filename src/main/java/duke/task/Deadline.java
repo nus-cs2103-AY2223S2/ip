@@ -30,6 +30,7 @@ public class Deadline extends Task {
 
     /**
      * Provides a serialized format for the Deadline object.
+     *
      * @return serialized format for the Deadline object
      */
     @Override
@@ -40,6 +41,7 @@ public class Deadline extends Task {
 
     /**
      * Deserializes a serialized Deadline object.
+     *
      * @param data string of serialized Deadline object to deserialize
      * @return deserialized Deadline object
      * @throws DukeException

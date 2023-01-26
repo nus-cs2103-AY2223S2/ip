@@ -20,6 +20,7 @@ public class TaskStorage {
 
     /**
      * Saves tasks to storage.
+     *
      * @param tasks ArrayList of tasks to save to storage.
      * @throws TaskSaveException
      */
@@ -62,6 +63,7 @@ public class TaskStorage {
 
     /**
      * Loads tasks from storage.
+     *
      * @return ArrayList of tasks loaded from storage.
      * @throws TaskSaveException
      */

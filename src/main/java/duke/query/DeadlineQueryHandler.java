@@ -20,6 +20,7 @@ public class DeadlineQueryHandler extends TaskQueryHandler {
 
     /**
      * Processes a query for adding a new deadline.
+     *
      * @param query a user input string
      * @return response from adding deadline
      * @throws DukeException

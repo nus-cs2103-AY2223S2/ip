@@ -13,6 +13,7 @@ public class ListQueryHandler extends TaskQueryHandler {
 
     /**
      * Processes a query for listing added tasks.
+     *
      * @param query a user input string
      * @return response from listing added tasks
      * @throws DukeException

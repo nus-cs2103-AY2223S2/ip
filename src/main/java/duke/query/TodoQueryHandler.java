@@ -14,6 +14,7 @@ public class TodoQueryHandler extends TaskQueryHandler {
 
     /**
      * Processes a query for adding a todo.
+     *
      * @param query a user input string
      * @return response from adding a todo
      * @throws DukeException

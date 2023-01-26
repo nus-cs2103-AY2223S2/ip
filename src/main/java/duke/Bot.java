@@ -29,6 +29,7 @@ public class Bot {
 
     /**
      * Initializes the bot.
+     *
      * @throws DukeException
      */
     public void init() throws DukeException {
@@ -40,6 +41,7 @@ public class Bot {
     /**
      * Processes an input string as a query and returns a BotResult object that contains a response string
      * and the current status of the bot.
+     *
      * @param input user input to be processed as a query
      * @return the result of processing the user input
      */

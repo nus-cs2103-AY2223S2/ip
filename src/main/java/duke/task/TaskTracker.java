@@ -22,6 +22,7 @@ public class TaskTracker {
 
     /**
      * Returns the number of tasks tracked.
+     *
      * @return number of tasks tracked
      */
     public int getNumTasks() {
@@ -30,6 +31,7 @@ public class TaskTracker {
 
     /**
      * Returns the task of a given index.
+     *
      * @param index index of task to get
      * @return task of given index
      * @throws TaskNotFoundException
@@ -44,6 +46,7 @@ public class TaskTracker {
 
     /**
      * Creates and adds a new todo.
+     *
      * @param taskDescription description of new todo
      * @return new todo
      */
@@ -55,8 +58,9 @@ public class TaskTracker {
 
     /**
      * Creates and adds a new deadline.
+     *
      * @param taskDescription description of new deadline
-     * @param endDate end date of new deadline
+     * @param endDate         end date of new deadline
      * @return new deadline
      */
     public Task addDeadline(String taskDescription, LocalDateTime endDate) {
@@ -67,9 +71,10 @@ public class TaskTracker {
 
     /**
      * Creates and adds a new event.
+     *
      * @param taskDescription description of new event
-     * @param startDate start date of new event
-     * @param endDate end date of new event
+     * @param startDate       start date of new event
+     * @param endDate         end date of new event
      * @return new event
      */
     public Task addEvent(String taskDescription, LocalDateTime startDate, LocalDateTime endDate) {
@@ -80,6 +85,7 @@ public class TaskTracker {
 
     /**
      * Deletes a task of the given index.
+     *
      * @param index index of task to delete
      * @return deleted task
      * @throws DukeException
@@ -92,6 +98,7 @@ public class TaskTracker {
 
     /**
      * Marks a task of the given index.
+     *
      * @param index index of task to mark
      * @return marked task
      * @throws DukeException
@@ -102,6 +109,7 @@ public class TaskTracker {
 
     /**
      * Unmarks a task of the given index.
+     *
      * @param index index of task to unmark
      * @return unmarked task
      * @throws DukeException
@@ -112,7 +120,8 @@ public class TaskTracker {
 
     /**
      * Marks or unmarks a task of the given index.
-     * @param index index of task to mark/unmark
+     *
+     * @param index    index of task to mark/unmark
      * @param isMarked marks the task if true, else unmarks the task
      * @return marked/unmarked task
      * @throws DukeException
@@ -129,6 +138,7 @@ public class TaskTracker {
 
     /**
      * Returns a String that lists all tasks.
+     *
      * @return list of tasks
      */
     public String listTasks() {
@@ -141,6 +151,7 @@ public class TaskTracker {
 
     /**
      * Returns a String that lists all tasks that match a given keyword.
+     *
      * @param keyword keyword to match
      * @return tasks that match a given keyword
      */
@@ -158,6 +169,7 @@ public class TaskTracker {
 
     /**
      * Saves all tasks to storage.
+     *
      * @throws TaskSaveException
      */
     public void saveAllTasks() throws TaskSaveException {
@@ -166,6 +178,7 @@ public class TaskTracker {
 
     /**
      * Loads tasks from storage.
+     *
      * @throws TaskSaveException
      */
     public void loadTasks() throws TaskSaveException {

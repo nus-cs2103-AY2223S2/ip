@@ -8,7 +8,8 @@ import java.util.StringTokenizer;
 public class QueryParser {
     /**
      * Parses a query into an array of Strings.
-     * @param query query to the bot
+     *
+     * @param query    query to the bot
      * @param commands command keywords (e.g. /by, /from) to detect in query
      * @return a string array with query type, description and command parameters
      */

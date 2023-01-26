@@ -42,6 +42,7 @@ public class Task {
 
     /**
      * Provides a serialized format for the Task object.
+     *
      * @return serialized format for the Task object
      */
     public String serialize() {
@@ -51,6 +52,7 @@ public class Task {
 
     /**
      * Deserializes a serialized Task object.
+     *
      * @param data string of serialized Task object to deserialize
      * @return deserialized Task object
      * @throws DukeException

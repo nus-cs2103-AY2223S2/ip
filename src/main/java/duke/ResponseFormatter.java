@@ -6,6 +6,7 @@ package duke;
 public class ResponseFormatter implements IFormatter {
     /**
      * Formats a message as a response
+     *
      * @param msg message to format
      * @return formatted message
      */

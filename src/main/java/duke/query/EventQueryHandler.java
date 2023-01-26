@@ -18,6 +18,7 @@ public class EventQueryHandler extends DeadlineQueryHandler {
 
     /**
      * Processes a query for adding an event.
+     *
      * @param query a user input string
      * @return response from adding an event
      * @throws DukeException
