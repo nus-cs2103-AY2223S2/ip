@@ -27,6 +27,10 @@ public class TaskList {
         this.lstOfItems = new ArrayList<>();
     }
 
+    /**
+     * Parses the previously saved tasks that were keyed in, in the previous iteration.
+     * @param currentTask the saved task in the File in the filePath.
+     */
     public void parseTask(String currentTask) {
         Task task = null;
         if (currentTask.charAt(1) == 'T') {
@@ -50,6 +54,11 @@ public class TaskList {
         lstOfItems.add(task);
     }
 
+    /**
+     * Prints the contents of the list.
+     * If the list is empty, print a custom message.
+     * Otherwise, print out the contents of the list in the order in which they were added.
+     */
     public void printContents() {
         if (lstOfItems.size() == 0 ) {
             System.out.println("Nothing here yet. Add your 1st item!");
@@ -61,6 +70,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a string representation of a TaskList instance.
+     * If there are no tasks, return "Empty List".
+     * Otherwise, return the string representation of all tasks inside in order.
+     * @return the desired string representation of a TaskList instance.
+     */
     @Override
     public String toString() {
         if (lstOfItems.size() == 0) {
@@ -75,6 +90,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds the desired new Task into the TaskList.
+     * @param newTask the desired new Task that the user wishes to add in.
+     */
     public void addTask(Task newTask) {
         System.out.println("Got it. I have added: ");
         System.out.println(newTask);
@@ -88,10 +107,18 @@ public class TaskList {
         System.out.println(" in the list");
     }
 
+    /**
+     * A method stub to test the TaskList class.
+     * A stub Task with a simple "Test" description is added into the list of tasks.
+     */
     public void addTask() {
         lstOfItems.add(new Task("Test"));
     }
 
+    /**
+     * Marks a task as completed.
+     * @param number the task number to be marked as completed.
+     */
     public void markTask(int number) {
         try {
             if (number > lstOfItems.size()) {
@@ -106,6 +133,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task..
+     * @param number the task number to be deleted.
+     */
     public void deleteTask(int number) {
         try {
             if (number > lstOfItems.size()) {
@@ -122,10 +153,19 @@ public class TaskList {
             System.out.println(err);
         }
     }
+
+    /**
+     * Returns the list of tasks that are currently present.
+     * @return the list of tasks currently present.
+     */
     public ArrayList<Task> getTasks() {
         return lstOfItems;
     }
 
+    /**
+     * Returns the number of tasks in the list at the moment.
+     * @return the number of tasks currently in the list.
+     */
     public int getSize() {
         return lstOfItems.size();
     }
