@@ -1,10 +1,12 @@
-package Duke.Storage;
-import Duke.DateTime.DateTime;
-import Duke.Parser.Parser;
-import Duke.Task.Deadline;
-import Duke.Task.Event;
-import Duke.Task.Task;
-import Duke.TaskList.TaskList;
+package duke.storage;
+
+
+import duke.datetime.DateTime;
+import duke.parser.Parser;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,11 +18,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String dataPath = "src/main/java/Duke/Storage/data.txt";
+    private static final String DATAPATH = "src/main/java/Duke/Storage/data.txt";
 
     public Storage() {
         try {
-            File data = new File(Storage.dataPath);
+            File data = new File(Storage.DATAPATH);
             data.createNewFile();
         } catch (java.io.IOException e) {
             System.out.println("Storage constructor Error in creating new file:" + e);
@@ -29,7 +31,7 @@ public class Storage {
 
     public void populate(TaskList tl) {
         //populate the arraylist of taskmanager with values in file
-        File file = new File(Storage.dataPath);
+        File file = new File(Storage.DATAPATH);
         try {
             Scanner sc = new Scanner(file);
             Parser parser = new Parser();
@@ -44,7 +46,7 @@ public class Storage {
 
     public void add(String str) {
         try {
-            Path filePath = Paths.get(Storage.dataPath);
+            Path filePath = Paths.get(Storage.DATAPATH);
             Files.write(filePath,  (str + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
         } catch (java.io.IOException e) {
             System.out.println("storage add() Error:" + e);
@@ -53,7 +55,7 @@ public class Storage {
 
     public void modify(String str, int line) {
         try {
-            Path filePath = Paths.get(Storage.dataPath);
+            Path filePath = Paths.get(Storage.DATAPATH);
             List<String> lines = Files.readAllLines(filePath);
             lines.set(line - 1, str);
             Files.write(filePath, lines);
@@ -64,7 +66,7 @@ public class Storage {
 
     public void delete(int line) {
         try {
-            Path filePath = Paths.get(Storage.dataPath);
+            Path filePath = Paths.get(Storage.DATAPATH);
             List<String> lines = Files.readAllLines(filePath);
             lines.remove(line - 1);
             Files.write(filePath, lines);

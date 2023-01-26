@@ -1,9 +1,9 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Storage.Storage;
-import Duke.Task.Task;
-import Duke.TaskList.TaskList;
-import Duke.Ui.Ui;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class DeleteTask implements Command {
     private int index;

@@ -1,9 +1,9 @@
-package Duke.DukeException;
+package duke.dukeexception;
 import java.lang.StringBuilder;
 public class DukeException extends Exception{
-    private static final String starting = "    ____________________________________________________________\n";
-    private static final String ending = "    ____________________________________________________________\n";
-    private static final String spacing = "     ☹ OOPS!!! ";
+    private static final String STARTING = "    ____________________________________________________________\n";
+    private static final String ENDING = "    ____________________________________________________________\n";
+    private static final String SPACING = "     ☹ OOPS!!! ";
 
     public DukeException(String message) {
         super(message);
@@ -12,8 +12,8 @@ public class DukeException extends Exception{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(DukeException.starting).append(DukeException.spacing).append(super.getMessage()).append("\n");
-        sb.append(DukeException.ending);
+        sb.append(DukeException.STARTING).append(DukeException.SPACING).append(super.getMessage()).append("\n");
+        sb.append(DukeException.ENDING);
         return sb.toString();
     }
 }

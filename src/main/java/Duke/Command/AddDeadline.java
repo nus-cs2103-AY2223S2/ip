@@ -1,10 +1,11 @@
-package Duke.Command;
-import Duke.DateTime.DateTime;
-import Duke.DukeException.DukeException;
-import Duke.Storage.Storage;
-import Duke.Task.Deadline;
-import Duke.TaskList.TaskList;
-import Duke.Ui.Ui;
+package duke.command;
+
+import duke.datetime.DateTime;
+import duke.dukeexception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;

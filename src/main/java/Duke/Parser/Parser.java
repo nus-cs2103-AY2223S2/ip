@@ -1,12 +1,14 @@
-package Duke.Parser;
-import Duke.Command.*;  //import everything since all commands are used in parsing
-import Duke.DateTime.DateTime;
-import Duke.DukeException.DukeException;
-import Duke.Task.Deadline;
-import Duke.Task.Event;
-import Duke.Task.Task;
-import Duke.Task.Todo;
-import Duke.TaskList.TaskList;
+package duke.parser;
+
+
+import duke.command.*;
+import duke.datetime.DateTime;
+import duke.dukeexception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.tasklist.TaskList;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

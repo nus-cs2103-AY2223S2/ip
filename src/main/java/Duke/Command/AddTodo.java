@@ -1,9 +1,9 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Storage.Storage;
-import Duke.Task.Todo;
-import Duke.TaskList.TaskList;
-import Duke.Ui.Ui;
+import duke.storage.Storage;
+import duke.task.Todo;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class AddTodo implements Command{
     private String name;
