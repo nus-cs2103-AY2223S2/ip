@@ -1,9 +1,5 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.*;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.nio.charset.StandardCharsets;
@@ -33,7 +29,7 @@ public class Duke {
                 if (cur instanceof Todo) {
                     System.out.println(todo.indexOf(cur) + 1 + ". [" + cur.symbol + "] " + "[" + cur.getStatusIcon() + "] " + cur.description);
                 } else {
-                    System.out.println(todo.indexOf(cur) + 1 + ". [" + cur.symbol + "] " + "[" + cur.getStatusIcon() + "] " + cur.description + " (" + cur.due + ")");
+                    System.out.println(todo.indexOf(cur) + 1 + ". [" + cur.symbol + "] " + "[" + cur.getStatusIcon() + "] " + cur.description + " (" + cur.duedateString + ")");
 
                 }
             }
@@ -83,8 +79,6 @@ public class Duke {
             Scanner scFile = new Scanner(file);
             while (scFile.hasNextLine()) {
                 String input = scFile.nextLine();
-//                loadTask(scFile.nextLine());
-                System.out.println(input);
                 loadTask(input);
 
             }

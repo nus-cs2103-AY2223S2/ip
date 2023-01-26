@@ -1,5 +1,9 @@
-public class Deadline extends Task{
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
+public class Deadline extends Task {
+    protected LocalDate duedate;
     public Deadline(String input) throws MissingDescriptionException {
         super(input);
         this.symbol = 'D';
@@ -9,10 +13,12 @@ public class Deadline extends Task{
         }
         String[] descriptionArr= inputArr[1].split("/"); //split task from due date
         if (descriptionArr.length == 1 || descriptionArr[1].isBlank()) {
-            throw new MissingDescriptionException("Please include a deadline in the following format: '/[deadline]'");
+            throw new MissingDescriptionException("Please include a deadline in the following format: '/<due date>'");
         }
         this.description = descriptionArr[0];
-        this.due = descriptionArr[1];
+        LocalDate inputFormatter = LocalDate.parse(descriptionArr[1]);
+        this.duedate = inputFormatter;
+        this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 
     public Deadline(String input, boolean isDone) {
@@ -20,10 +26,13 @@ public class Deadline extends Task{
         this.symbol = 'D';
         String[] temp = input.split(",");
         this.description = temp[0];
-        this.due = temp[1];
+        LocalDate inputFormatter = LocalDate.parse(temp[1]);
+        this.duedate = inputFormatter;
+        this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
     public String saveTask() {
-        return this.symbol + "," + isDone + "," + this.description + "," + this.due;
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        return this.symbol + "," + isDone + "," + this.description + "," + duedate;
     }
 }
 

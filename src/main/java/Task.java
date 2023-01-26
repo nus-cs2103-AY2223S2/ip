@@ -1,9 +1,13 @@
+import java.time.LocalDateTime;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected char symbol;
 
-    protected String due;
+    protected String duedateString;
+
+
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
