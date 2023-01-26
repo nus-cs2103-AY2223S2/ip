@@ -1,10 +1,12 @@
-public class Tasks {
+import java.io.Serializable;
+
+public class Tasks implements Serializable {
     private String content;
     private Boolean is_Done;
     protected char type;
-    public Tasks(String content) {
+    public Tasks(String content, boolean is_Done) {
         this.content = content;
-        this.is_Done = false;
+        this.is_Done = is_Done;
     }
     public String seeTaskContent() {
         return content;

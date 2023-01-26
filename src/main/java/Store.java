@@ -13,16 +13,16 @@ public class Store extends Commands {
             String back = content.substring(9);
             String[] substrings = back.split("/");
             String date = substrings[1];
-            task = new Deadline(substrings[0], date.substring(3));
+            task = new Deadline(substrings[0], false, date.substring(3));
         } else if (content.matches("^event\\s.*$")) {
             String back = content.substring(6);
             String[] substrings = back.split("/");
             String from = substrings[1].substring(5);
             String to = substrings[2].substring(3);
-            task = new Event(substrings[0], from, to);
+            task = new Event(substrings[0], false, from, to);
         } else if (content.matches("^todo\\s.*$")){
             String desc = content.substring(5);
-            task = new Todo(desc);
+            task = new Todo(desc, false);
         }
         user.addTask(task);
         System.out.println("Got it. I've added this task: \n" + task);

@@ -1,8 +1,8 @@
 public class Event extends Tasks {
     private String from = "";
     private String to = "";
-    public Event(String content, String from, String to) {
-        super(content);
+    public Event(String content, boolean isDone, String from, String to) {
+        super(content, isDone);
         this.from = from;
         this.to = to;
         this.type = 'E';

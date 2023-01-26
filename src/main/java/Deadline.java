@@ -1,7 +1,7 @@
 public class Deadline extends Tasks {
     private String date = "";
-    public Deadline(String content, String date) {
-        super(content);
+    public Deadline(String content, boolean isDone, String date) {
+        super(content, isDone);
         this.date = date;
         this.type = 'D';
     }
