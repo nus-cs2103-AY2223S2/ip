@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -79,7 +80,7 @@ public class Duke {
                         }
                         String taskName = taskNameAndDeadline[0];
                         String deadline = taskNameAndDeadline[1];
-                        userTask = new Deadline(taskName, deadline);
+                        userTask = new Deadline(taskName, LocalDate.parse(deadline));
                         break;
                     }
                     case "event": {
@@ -97,7 +98,7 @@ public class Duke {
                         }
                         String from = toAndFrom[0];
                         String to = toAndFrom[1];
-                        userTask = new Event(taskName, from, to);
+                        userTask = new Event(taskName, LocalDate.parse(from), LocalDate.parse(to));
                         break;
                     }
                     default:
