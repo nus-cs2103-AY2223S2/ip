@@ -25,6 +25,17 @@ public class Ui {
         }
     }
 
+    public void displayTasks(List<Task> tasks, String filterWord) {
+        Ui.space();
+        System.out.println("Here are all matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).matchFilterWord(filterWord)) {
+                Ui.space();
+                System.out.println((i + 1) + "." + tasks.get(i));
+            }
+        }
+    }
+
     public void greeting() {
         line();
         space();

@@ -143,6 +143,14 @@ public class WindyCall {
                         System.out.println("     Sorry, your index is out of range");
                     }
                     break;
+                case FIND:
+                    if (parts.length == 1) {
+                        Ui.space();
+                        System.out.println("Please input description of task you want to find");
+                    } else {
+                        ui.displayTasks(tasks, userCommand.substring(5));
+                    }
+                    break;
                 default:
                     try {
                         this.addTask(userCommand);
