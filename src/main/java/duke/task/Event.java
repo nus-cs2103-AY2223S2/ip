@@ -1,8 +1,13 @@
+package duke.task;
+
+import duke.DukeException;
+import duke.TaskList;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate start;
     protected LocalDate end;
 
@@ -12,7 +17,7 @@ public class Event extends Task{
         this.end = end;
     }
 
-    public static void processEvent(String command, TaskList lst) throws DukeException{
+    public static void processEvent(String command, TaskList lst) throws DukeException {
         String info = command.trim();
         if (info.isEmpty()) {
             throw new DukeException("event");

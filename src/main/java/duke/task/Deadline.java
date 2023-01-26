@@ -1,8 +1,13 @@
+package duke.task;
+
+import duke.DukeException;
+import duke.TaskList;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate deadline;
 
     public Deadline(String taskName, LocalDate deadline) {
@@ -10,7 +15,7 @@ public class Deadline extends Task{
         this.deadline = deadline;
     }
 
-    public static void processDeadline(String command, TaskList lst) throws DukeException{
+    public static void processDeadline(String command, TaskList lst) throws DukeException {
         String info = command.trim();
         if (info.isEmpty()) {
             throw new DukeException("deadline");

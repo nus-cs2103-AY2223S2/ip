@@ -1,10 +1,15 @@
-public class Todo extends Task{
+package duke.task;
+
+import duke.DukeException;
+import duke.TaskList;
+
+public class Todo extends Task {
     public Todo(String taskName) {
         super(taskName);
     }
 
 
-    public static void processTodo(String command, TaskList lst) throws DukeException{
+    public static void processTodo(String command, TaskList lst) throws DukeException {
         String taskName = command.trim();
         if (taskName.isEmpty()) {
             throw new DukeException("todo");

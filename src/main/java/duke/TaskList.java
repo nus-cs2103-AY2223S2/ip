@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.LinkedList;
 
 public class TaskList {
@@ -7,7 +14,7 @@ public class TaskList {
         this.lst = new LinkedList<>();
     }
 
-    public void mark(int taskNum) throws DukeException{
+    public void mark(int taskNum) throws DukeException {
         if (taskNum < 0 || taskNum > lst.size() - 1) {
             throw new DukeException("bounds");
         }

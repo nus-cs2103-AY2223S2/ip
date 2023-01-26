@@ -1,4 +1,11 @@
-public class MarkCommand extends Command{
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.command.Command;
+
+public class MarkCommand extends Command {
     public static final String MARK_COMMAND = "mark";
     private final int index;
 
@@ -8,7 +15,7 @@ public class MarkCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList lst, Ui ui) throws DukeException{
+    public void execute(TaskList lst, Ui ui) throws DukeException {
         lst.mark(this.index);
         ui.showMarkedTask(lst.getTask(this.index));
     }
