@@ -1,15 +1,13 @@
 public class Event extends Task{
-    private String timeFrom;
-    private String timeTo;
+    private String timeOfEvent;
 
-    public Event(String description, String timeFrom, String timeTo) {
+    public Event(String description, String timeOfEvent) {
         super(description);
-        this.timeFrom = timeFrom;
-        this.timeTo = timeTo;
+        this.timeOfEvent = timeOfEvent;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + timeFrom + "to: " + timeTo + ")";
+        return "[E]" + super.toString() + " (at: " + timeOfEvent + ")";
     }
 }
