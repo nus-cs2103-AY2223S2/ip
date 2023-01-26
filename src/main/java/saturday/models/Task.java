@@ -50,7 +50,9 @@ public class Task implements Serializable {
     /**
      * unMark the task
      */
-    public void unMark() { this.done = false; }
+    public void unMark() {
+        this.done = false;
+    }
 
     /**
      * Returns a string representation of the task. The format of the returned string is "[X] " if the task is done
@@ -60,8 +62,7 @@ public class Task implements Serializable {
      */
     @Override
     public String toString() {
-        String checkbox = "[ ] ";
-        if (done) checkbox = "[X] ";
+        String checkbox = done ? "[X] " : "[ ] ";
         return checkbox + description;
     }
 }

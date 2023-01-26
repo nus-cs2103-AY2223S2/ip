@@ -1,8 +1,8 @@
 package saturday.models;
 
-import saturday.utilities.DateTimeParser;
-
 import java.time.temporal.TemporalAccessor;
+
+import saturday.utilities.DateTimeParser;
 /**
  * The Deadline class is a model class that represents a deadline. It extends the Task class and
  * provides additional functionality for handling the deadline time of the task.

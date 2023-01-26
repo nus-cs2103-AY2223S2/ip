@@ -15,7 +15,7 @@ public class Ui {
      * Prints a newline to the console.
      */
     public static void newline() {
-        System.out.println("");
+        System.out.println();
     }
 
     /**

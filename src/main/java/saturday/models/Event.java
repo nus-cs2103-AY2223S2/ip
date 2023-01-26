@@ -1,8 +1,8 @@
 package saturday.models;
 
-import saturday.utilities.DateTimeParser;
-
 import java.time.temporal.TemporalAccessor;
+
+import saturday.utilities.DateTimeParser;
 /**
  * The Event class is a model class that represents an event. It extends the Task class and
  * provides additional functionality for handling the start and end times of the event.
@@ -54,6 +54,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + DateTimeParser.printDateTime(from) + " to: " + DateTimeParser.printDateTime(to) + ")";
+        return "[E]" + super.toString() + " (from: " + DateTimeParser.printDateTime(from) + " to: "
+                + DateTimeParser.printDateTime(to) + ")";
     }
 }

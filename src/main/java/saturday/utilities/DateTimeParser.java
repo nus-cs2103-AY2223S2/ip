@@ -1,12 +1,12 @@
 package saturday.utilities;
 
-import saturday.exceptions.SaturdayException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
+
+import saturday.exceptions.SaturdayException;
 /**
  * Utility class to parse and print date and time in various formats
  */
@@ -16,6 +16,7 @@ public class DateTimeParser {
      * Array of date and time formats to try when parsing a date string
      */
     private static final String[] DATE_TIME_FORMATS = {
+            "dd-MM-yyyy",
             "dd-MM-yyyy",
             "dd/MM/yyyy",
             "dd.MM.yyyy",
@@ -71,11 +72,10 @@ public class DateTimeParser {
         DateTimeFormatter formatter;
         if (dateTime instanceof LocalDate) {
             formatter = DateTimeFormatter.ofPattern("MMM dd yy");
-            result = formatter.format(dateTime);
         } else {
             formatter = DateTimeFormatter.ofPattern("MMM dd yy hh:mm a");
-            result = formatter.format(dateTime);
         }
+        result = formatter.format(dateTime);
         return result;
     }
 

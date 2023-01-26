@@ -1,13 +1,10 @@
 package saturday.collections;
-import saturday.models.Deadline;
-import saturday.models.Event;
-import saturday.models.Task;
-import saturday.utilities.DateTimeParser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Iterator;
 /**
  * A TaskList is a collection of tasks that allows you to perform operations on tasks.
@@ -18,6 +15,13 @@ import java.util.Iterator;
  * @author Titus Lowe
  * @version 0.1
  */
+=======
+
+import saturday.models.Deadline;
+import saturday.models.Event;
+import saturday.models.Task;
+import saturday.utilities.DateTimeParser;
+>>>>>>> branch-A-CodingStandard
 public class TaskList extends ArrayList<Task> {
 
     /**
@@ -27,6 +31,7 @@ public class TaskList extends ArrayList<Task> {
         super();
     }
 
+<<<<<<< HEAD
     /**
      * Marks the task at the specified index as done
      *
@@ -40,6 +45,15 @@ public class TaskList extends ArrayList<Task> {
      * @param i index of task to be unmarked (1-based indexing)
      */
     public void unMark(int i) { super.get(i-1).unMark(); }
+=======
+    public void mark(int i) {
+        super.get(i - 1).mark();
+    }
+
+    public void unMark(int i) {
+        super.get(i - 1).unMark();
+    }
+>>>>>>> branch-A-CodingStandard
 
     /**
      * Returns a TaskList containing all tasks that are on the specified date
@@ -51,9 +65,7 @@ public class TaskList extends ArrayList<Task> {
         TemporalAccessor inputDate = DateTimeParser.parseDate(date);
         TaskList taskListOnDate = new TaskList();
         if (inputDate instanceof LocalDate) {
-            Iterator<Task> iterator = this.iterator();
-            while (iterator.hasNext()) {
-                Task task = iterator.next();
+            for (Task task : this) {
                 if (task instanceof Deadline) {
                     TemporalAccessor deadline = ((Deadline) task).getDeadline();
                     if (deadline instanceof LocalDate) {
@@ -69,11 +81,13 @@ public class TaskList extends ArrayList<Task> {
                     TemporalAccessor from = ((Event) task).getFrom();
                     TemporalAccessor to = ((Event) task).getTo();
                     if (from instanceof LocalDate && to instanceof LocalDate) {
-                        if (((LocalDate) inputDate).isEqual((LocalDate) from) || ((LocalDate) inputDate).isEqual((LocalDate) to)) {
+                        if (((LocalDate) inputDate).isEqual((LocalDate) from)
+                                || ((LocalDate) inputDate).isEqual((LocalDate) to)) {
                             taskListOnDate.add(task);
                         }
                     } else if (from instanceof LocalDateTime && to instanceof LocalDateTime) {
-                        if (((LocalDate) inputDate).isEqual(((LocalDateTime) from).toLocalDate()) || ((LocalDate) inputDate).isEqual(((LocalDateTime) to).toLocalDate())) {
+                        if (((LocalDate) inputDate).isEqual(((LocalDateTime) from).toLocalDate())
+                                || ((LocalDate) inputDate).isEqual(((LocalDateTime) to).toLocalDate())) {
                             taskListOnDate.add(task);
                         }
                     }
@@ -90,7 +104,9 @@ public class TaskList extends ArrayList<Task> {
      * @return the task at the specified index
      */
     @Override
-    public Task get(int i) { return super.get(i-1); }
+    public Task get(int i) {
+        return super.get(i - 1);
+    }
 
     /**
      * Removes the task at the specified index
@@ -100,8 +116,7 @@ public class TaskList extends ArrayList<Task> {
      */
     @Override
     public Task remove(int i) {
-        Task removedTask = super.remove(i-1);
-        return removedTask;
+        return super.remove(i - 1);
     }
 
     /**
@@ -115,9 +130,9 @@ public class TaskList extends ArrayList<Task> {
         int i = 1;
         for (Task task : this) {
             if (i == size()) {
-                sb.append(i+".").append(task).append("\t");
+                sb.append(i).append(".").append(task).append("\t");
             } else {
-                sb.append(i + ".").append(task).append("\n\t");
+                sb.append(i).append(".").append(task).append("\n\t");
                 i++;
             }
         }
