@@ -29,6 +29,32 @@ public class Commands {
     }
 
     /**
+     * Executes the find command.
+     *
+     * @param TextUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     */
+    public static void executeFindCommand(String toFind, TextUi TextUi, TaskList taskList) {
+        TextUi.printLine();
+        if (taskList.isEmpty()) {
+            System.out.println("You currently have no task.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            int count = 1;
+            for (int i = 0; i < taskList.getArraySize(); i++) {
+                String currentTaskDescription = taskList.getTask(i).getDescription();
+                if (currentTaskDescription.contains(toFind)) {
+                    System.out.println(count + ". " + taskList.getTask(i));
+                    count++;
+                }
+            }
+            if (count == 1) {
+                System.out.println("Here are no matching task in your list.");
+            }
+        }
+        TextUi.printLine();
+    }
+    /**
      * Executes the mark command.
      * 
      * @param input    input String.
