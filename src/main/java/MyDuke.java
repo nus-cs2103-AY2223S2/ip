@@ -11,34 +11,31 @@ public class MyDuke {
     private static int taskCount = 0;
 
     public void init() {
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo
-                            + "\nWhat's on your mind today?\n");
-
+        DukeIO.printHello();
         populateCommands();
-    
     }
 
     public void quit() {
         // To add: Deleting all tasks...
-        System.out.println( "Quitting MyDuke...\n" 
-                            + "See you soon!");
+        DukeIO.printQuit();
     }
 
     public void exec(String[] tokens) throws InvalidCommandException {
         try {
             MAP.get(tokens[0]).accept(tokens);
         } catch (NullPointerException n) {
-            System.out.println("Invalid Command! Try: [list, todo, deadline, event, mark/unmark");
+            DukeIO.showInvalidCommand();
             return;
         }
     }
 
-    public static ArrayList<Task> getAllTasks() {  return allTasks;   }
+    public static int getTaskCount() { 
+        return taskCount; 
+    }
+
+    public static ArrayList<Task> getAllTasks() {  
+        return allTasks;   
+    }
 
     public static void loadTask(ArrayList<Task> tasks) {
         allTasks = tasks;
@@ -46,7 +43,7 @@ public class MyDuke {
     }
 
     private void populateCommands() {
-        MAP.put("list", (tokens) -> showAll());
+        MAP.put("list", (tokens) -> DukeIO.showAll());
         MAP.put("todo", (tokens) -> addTodo(tokens));
         MAP.put("deadline", (tokens) -> addDeadline(tokens));
         MAP.put("event", (tokens) -> addEvent(tokens));
@@ -55,33 +52,10 @@ public class MyDuke {
         MAP.put("delete", (tokens) -> delete(tokens));
     }
 
-    private void showCount() {
-        String isare;
-        String s;
-        if (taskCount > 1) {
-            isare = " are: ";
-            s = " tasks";
-        } else {
-            isare = " is: ";
-            s = " task";
-        }
-        System.out.println("\nThere" + isare + Integer.toString(taskCount) 
-                            + s + " in the list.\n");
-    }
 
     private void addTask(Task task) {
         allTasks.add(task);
         taskCount++;
-    }
-
-    private void showAll() {
-        System.out.println("All Tasks:");
-        for (Integer i = 0; i < taskCount; i++) {
-            String showString = "   "  + Integer.toString(i+1)+ ": "
-                                + allTasks.get(i).toString();
-            System.out.println(showString);     
-        }
-        System.out.println();
     }
 
     private void toggle(String[] tokens) {
@@ -104,7 +78,7 @@ public class MyDuke {
                 "ERROR: Please mark/unmark tasks with task number! Find the task number with 'list'.");
             return;
         } catch (InvalidCommandException e) {
-            System.out.println(e.errorMessage);
+            DukeIO.showError(e);
             return;
         }
 
@@ -133,7 +107,7 @@ public class MyDuke {
                     "ERROR: Missing task name. Add todo task with: todo {name}.");
             }
         } catch (InvalidCommandException e) {
-            System.out.println(e.errorMessage);
+            DukeIO.showError(e);
             return;
         }
 
@@ -146,8 +120,8 @@ public class MyDuke {
 
         ToDo todo = new ToDo(t);
         addTask(todo);
-        System.out.println("Successfully added:\n" + todo.toString());
-        showCount();
+        DukeIO.showSuccessToast(todo);
+        DukeIO.showCount();
     }
 
     private void addDeadline(String[] tokens) {
@@ -168,7 +142,7 @@ public class MyDuke {
                     "ERROR: Missing task name.");
             }
         } catch (InvalidCommandException e) {
-            System.out.println(e.errorMessage);
+            DukeIO.showError(e);
             return;
         }
 
@@ -176,8 +150,8 @@ public class MyDuke {
         String byString = String.join(" ", t.subList(byIndex+1, t.size()));
         Deadline d = new Deadline(desc, byString);
         addTask(d);
-        System.out.println("Successfully added:\n" + d.toString());
-        showCount();          
+        DukeIO.showSuccessToast(d);
+        DukeIO.showCount();          
     }
 
     private void addEvent(String[] tokens) {
@@ -196,7 +170,7 @@ public class MyDuke {
                     "ERROR: Please specify both 'from' and 'to' times");
             }
         } catch (InvalidCommandException e) {
-            System.out.println(e.errorMessage);
+            DukeIO.showError(e);
             return;
         }
 
@@ -205,8 +179,8 @@ public class MyDuke {
         String to = String.join(" ", t.subList(toIndex+1, t.size()));
         Event e = new Event(desc, from, to);
         addTask(e);
-        System.out.println("Successfully added:\n" + e.toString());
-        showCount();
+        DukeIO.showSuccessToast(e);
+        DukeIO.showCount();
     }
 
     private void delete(String[] tokens) {
@@ -229,13 +203,13 @@ public class MyDuke {
                 "ERROR: Please mark/unmark tasks with task number! Find the task number with 'list'.");
             return;
         } catch (InvalidCommandException e) {
-            System.out.println(e.errorMessage);
+            DukeIO.showError(e);
             return;
         }
 
         System.out.println(allTasks.get(taskIndex-1).toString() + " deleted.");
         allTasks.remove(taskIndex-1);
         taskCount--;
-        showCount();
+        DukeIO.showCount();
     }
 }
