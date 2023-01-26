@@ -2,6 +2,7 @@ import enums.CommandType;
 import exceptions.DukeException;
 import storage.Storage;
 import tasks.*;
+import views.UI;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -13,20 +14,14 @@ public class Duke{
     public static void main(String[] args) throws IOException {
         Storage storage = new Storage(tasks);
         storage.load();
-        greetings();
+
+        UI ui = new UI();
+        ui.printInitMessage();
+        ui.printCommands();
+
         acceptCommands();
         storage.save();
         exit();
-    }
-
-    private static void greetings() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + ", your personal assistant.\n"
-                + "What can I do for you today?");
     }
 
     private static void acceptCommands(){
