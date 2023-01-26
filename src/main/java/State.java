@@ -31,9 +31,9 @@ public enum State {
                 String deadline = sb.toString().substring(4, sb.length() - 1);
                 list.add(new Deadline(description, deadline));
             } catch (StringIndexOutOfBoundsException e) {
-                throw new SundayException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new SundayException("OOPS!!! The description of a deadline cannot be empty.");
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new SundayException("☹ OOPS!!! The description of this deadline is invalid.");
+                throw new SundayException("OOPS!!! The description of this deadline is invalid.");
             }
             printer.printBar();
             printer.printText("Got it. I've added this task:");
@@ -72,9 +72,9 @@ public enum State {
                 String end = sb.toString().substring(4, sb.length() - 1);
                 list.add(new Event(description, start, end));
             } catch (StringIndexOutOfBoundsException e) {
-                throw new SundayException("☹ OOPS!!! The description of an event cannot be empty.");
+                throw new SundayException("OOPS!!! The description of an event cannot be empty.");
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new SundayException("☹ OOPS!!! The description of this event is invalid.");
+                throw new SundayException("OOPS!!! The description of this event is invalid.");
             }
             printer.printBar();
             printer.printText("Got it. I've added this task:");
@@ -90,7 +90,7 @@ public enum State {
                 String description = input.substring(1);
                 list.add(new ToDo(description));
             } catch (StringIndexOutOfBoundsException e) {
-                throw new SundayException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new SundayException("OOPS!!! The description of a todo cannot be empty.");
             }
             printer.printBar();
             printer.printText("Got it. I've added this task:");
@@ -111,9 +111,9 @@ public enum State {
                 printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
                 printer.printBar();
             } catch (NumberFormatException e) {
-                throw new SundayException("☹ OOPS!!! You did not specify which task you wanted me to mark");
+                throw new SundayException("OOPS!!! You did not specify which task you wanted me to mark");
             } catch (IndexOutOfBoundsException e) {
-                throw new SundayException("☹ OOPS!!! Seems like that task does not exist.");
+                throw new SundayException("OOPS!!! Seems like that task does not exist.");
             }
         }
     },
@@ -129,9 +129,9 @@ public enum State {
                 printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
                 printer.printBar();
             }  catch (NumberFormatException e) {
-                throw new SundayException("☹ OOPS!!! You did not specify which task you wanted me to unmark");
+                throw new SundayException("OOPS!!! You did not specify which task you wanted me to unmark");
             } catch (IndexOutOfBoundsException e) {
-                throw new SundayException("☹ OOPS!!! Seems like that task does not exist.");
+                throw new SundayException("OOPS!!! Seems like that task does not exist.");
             }
         }
     },
@@ -147,9 +147,9 @@ public enum State {
                 printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
                 printer.printBar();
             } catch (NumberFormatException e) {
-                throw new SundayException("☹ OOPS!!! You did not specify which task you wanted me to delete");
+                throw new SundayException("OOPS!!! You did not specify which task you wanted me to delete");
             } catch (IndexOutOfBoundsException e) {
-                throw new SundayException("☹ OOPS!!! Seems like that task does not exist");
+                throw new SundayException("OOPS!!! Seems like that task does not exist");
             }
         }
     },
@@ -172,7 +172,7 @@ public enum State {
         try {
             return State.valueOf(command.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new SundayException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new SundayException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
