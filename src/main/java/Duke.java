@@ -20,19 +20,13 @@ public class Duke{
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + ", your personal assistant.\n"
                 + "What can I do for you today?");
-//        try {
-//            File taskDataFile = new File(System.getProperty("user.dir") + "/data/");
-//            Scanner sc = new Scanner(taskDataFile);
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Its your first time ");
-//        }
     }
 
     private static void acceptCommands() throws DukeException {
         String command = sc.nextLine();
         boolean exitCommandGiven = false;
 
-        while (!exitCommandGiven) {
+        while (true) {
             try {
                 String[] commandList = command.split(" ");
                 CommandType commandType = CommandType.valueOf(commandList[0].toUpperCase().strip());
@@ -99,7 +93,7 @@ public class Duke{
                         }
                         int index = Integer.parseInt(commandList[1]);
                         tasks.markDone(index);
-                        System.out.println("Good job! I have marked this task as done! \n" + "\t" + tasks.get(index));
+                        System.out.println("Good job! I have marked this task as done! \n" + "\t" + tasks.get(index - 1));
                         break;
                     }
                     case UNMARK: {
@@ -108,7 +102,8 @@ public class Duke{
                         }
                         int index = Integer.parseInt(commandList[1]);
                         tasks.markUndone(index);
-                        System.out.println("Oof! I have marked this task as undone for you! \n" + tasks.get(index));
+                        System.out.println("Oof! I have marked this task as undone for you! \n" + tasks.get(index - 1));
+                        break;
                     }
                     case DELETE: {
                         if (tooFewArgs) {
@@ -134,6 +129,9 @@ public class Duke{
                 System.out.println("Please provide a valid index!");
             } finally {
                 sc.reset();
+            }
+            if (exitCommandGiven) {
+                break;
             }
             command = sc.nextLine();
         }
