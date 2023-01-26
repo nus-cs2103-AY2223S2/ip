@@ -8,6 +8,7 @@ import domain.usecases.UnknownCommandUsecase;
 import presentation.controllers.DukeEventLoop;
 import presentation.ui.SystemOut;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Duke {
@@ -29,6 +30,8 @@ public class Duke {
      * This would register the singletons that we would be using later on.
      */
     private static void configureInjections() {
+        Singletons.registerSingleton(DateTimeFormatter.class,
+                DateTimeFormatter.ofPattern("MMM d yyyy"));
         Singletons.registerLazySingleton(Writable.class, SystemOut::new);
         Singletons.registerLazySingleton(ByeUsecase.class,
                 () -> new ByeUsecase(Singletons.get(Writable.class)));
