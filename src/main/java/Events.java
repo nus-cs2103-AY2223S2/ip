@@ -1,14 +1,19 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Events extends Task {
-    protected String startDate;
-    protected String endDate;
+    protected LocalDate startDate;
+    protected LocalDate endDate;
     public Events(String name, String startDate, String endDate) {
         super(name, "E");
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = LocalDate.parse(startDate);
+        this.endDate = LocalDate.parse(endDate);
     }
 
     @Override
     public String description() {
-        return String.format("%s (from: %s to: %s)", super.description(), this.startDate, this.endDate);
+        return String.format("%s (from: %s to: %s)", super.description(),
+                this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }
