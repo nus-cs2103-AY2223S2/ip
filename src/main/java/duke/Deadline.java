@@ -13,4 +13,9 @@ public class Deadline extends Task {
                 super.getDescription(),
                 this.deadline);
     }
+    
+    @Override
+    public String formatTask() {
+        return String.format("deadline~-~-~%s~-~-~%s", this.getDescription(), this.deadline);
+    }
 }

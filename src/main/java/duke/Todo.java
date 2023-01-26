@@ -13,4 +13,9 @@ public class Todo extends Task {
                 (super.isDone() ? "X" : " "),
                 super.getDescription());
     }
+    
+    @Override
+    public String formatTask() {
+        return String.format("todo~-~-~%s", this.getDescription());
+    }
 }

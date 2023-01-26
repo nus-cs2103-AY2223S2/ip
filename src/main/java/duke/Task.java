@@ -23,4 +23,5 @@ abstract class Task {
     public String printTask() {
         return String.format("[%s] %s", (isDone ? "X" : " "), description);
     }
+    abstract public String formatTask();
 }
