@@ -13,6 +13,11 @@ public class TaskTest {
     Task t2 = new Task("test 2", true);
     
     @Test
+    public void testGetDesc() {
+        assertEquals(t1.getDesc(), "test 1");
+    }
+    
+    @Test
     public void testGetSymbol() {
         assertEquals(t1.getSymbol(), "T");
     }
