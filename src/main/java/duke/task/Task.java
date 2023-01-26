@@ -29,7 +29,6 @@ public class Task {
      * @return a string of "X" or " ".
      */
     public String getStatusIcon() {
-
         return (isDone ? "X" : " "); // mark done task with X
     }
 
@@ -39,7 +38,6 @@ public class Task {
      * @return a string stored in task object.
      */
     public String getDescription() {
-
         return description;
     }
 

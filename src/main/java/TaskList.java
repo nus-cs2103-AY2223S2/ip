@@ -23,7 +23,6 @@ public class TaskList {
      * @return the size of the TaskList.
      */
     public static Integer size() {
-
         return tasks.size();
     }
 
