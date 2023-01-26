@@ -10,12 +10,12 @@ import java.util.Objects;
 public class MeggyTime {
     /** Cached dummy NA value. */
     public static final MeggyTime NA = new MeggyTime();
-    /** All acceptable date-time formats. Singapore's convention (date-month) is prioritized. */
-    private static final DateTimeFormatter[] FORMATTERS;
     /** The date-time format to be pass to output. */
     public static final DateTimeFormatter OUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     /** The date-time format to be encoded to data file. */
     public static final DateTimeFormatter ENCODE_FORMAT = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
+    /** All acceptable date-time formats. Singapore's convention (date-month) is prioritized. */
+    private static final DateTimeFormatter[] FORMATTERS;
 
     static { //initialize date-time formats
         final String[] timeSeps = {":", ""};

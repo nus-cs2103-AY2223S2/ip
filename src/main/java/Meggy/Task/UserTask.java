@@ -25,7 +25,7 @@ public abstract class UserTask {
      * Get ask type label from their names.
      *
      * @param taskType Non-null, non-empty. Name of task type.
-     * @return Meggy.Task-type-specific label.
+     * @return Task-type-specific label.
      */
     public static String getTaskTypeLabel(String taskType) {
         return Util.parenthesize(Character.toUpperCase(taskType.charAt(0)));
@@ -45,9 +45,7 @@ public abstract class UserTask {
      */
     public abstract String encode();
 
-    /**
-     * @return The string representation of this task in text Meggy.UI.
-     */
+    /** @return The string representation of this task in text UI. */
     @Override
     public String toString() {
         return Util.parenthesize(status ? Resource.DONE_MK : ' ') + ' ' + desc;
