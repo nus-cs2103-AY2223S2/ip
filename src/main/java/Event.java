@@ -3,10 +3,21 @@ public class Event extends Task{
     protected String end;
 
     public Event(String description, String start, String end) {
-        super(description);
+        super(description, false);
+        this.start = start;
+        this.end = end;
+    }
+
+    public Event(String description, String start, String end, boolean isDone) {
+        super(description, isDone);
         this.start = start;
         this.end = end;
 
+    }
+
+    @Override
+    protected String getTaskFileFormat() {
+        return "E" + " | " + super.getTaskFileFormat() + " | " + start + " | " + end;
     }
 
     @Override
