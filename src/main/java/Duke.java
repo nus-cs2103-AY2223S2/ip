@@ -1,5 +1,7 @@
-import java.io.*;
-import java.util.*;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
 public class Duke {
     public static void printInListFormat(ArrayList<Task> tasks) {
         for (int i = 0; i < tasks.size(); i++) {
