@@ -1,5 +1,7 @@
-public class Task {
-    private String name;
+package tasks;
+
+public abstract class Task {
+    String name;
     private boolean isDone;
 
     public Task(String name){
@@ -18,6 +20,8 @@ public class Task {
     public void markAsUndone() {
         this.isDone = false;
     }
+
+    public abstract String toSaveFormat();
 
     @Override
     public String toString() {

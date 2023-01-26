@@ -1,3 +1,5 @@
+package tasks;
+
 public class Event extends Task{
     private String startDate;
     private String endDate;
@@ -14,6 +16,10 @@ public class Event extends Task{
 
     public String getEndDate() {
         return this.endDate;
+    }
+
+    public String toSaveFormat() {
+        return String.format("E,%s,%s,%s", this.name, this.getStartDate(), this.getEndDate());
     }
 
     @Override

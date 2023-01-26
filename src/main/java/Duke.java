@@ -1,14 +1,20 @@
 import enums.CommandType;
+import tasks.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke{
     private static final TaskList tasks = new TaskList();
     private static final Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws IOException {
+        Storage storage = new Storage(tasks);
+        storage.load();
         greetings();
         acceptCommands();
+        storage.save();
         exit();
     }
 
@@ -22,7 +28,7 @@ public class Duke{
                 + "What can I do for you today?");
     }
 
-    private static void acceptCommands() throws DukeException {
+    private static void acceptCommands(){
         String command = sc.nextLine();
         boolean exitCommandGiven = false;
 
@@ -59,7 +65,7 @@ public class Duke{
                     }
                     case TODO: {
                         if (tooFewArgs) {
-                            throw new DukeException("Please give a name for your ToDo task!");
+                            throw new DukeException("Please give a name for your tasks.ToDo task!");
                         }
                         ToDo newToDo = new ToDo(command.replaceFirst("todo ", "").strip());
                         tasks.addTask(newToDo);
