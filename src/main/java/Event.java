@@ -11,4 +11,8 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + "(" + startTime + endTime + ")";
     }
+
+    public String saveString() {
+        return String.format("event / %s / %s / %s / %s", super.saveString(), this.getDescription(), startTime, endTime);
+    }
 }

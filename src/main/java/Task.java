@@ -30,4 +30,11 @@ public class Task {
     public String toString() {
         return this.status() + this.getDescription();
     }
+    public String saveString() {
+        if (isDone) {
+            return "done";
+        } else {
+            return "undone";
+        }
+    }
 }

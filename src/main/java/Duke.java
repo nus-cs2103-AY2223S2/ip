@@ -1,9 +1,22 @@
 import exceptions.DukeException;
 import exceptions.UnknownInputException;
 
+import java.io.IOException;
+
 public class Duke {
-    UIText ui = new UIText();
-    TaskList taskList = new TaskList();
+    private UIText ui;
+    private Storage storage;
+    private TaskList taskList;
+    public Duke() {
+        try {
+            ui = new UIText();
+            taskList = new TaskList();
+            storage = new Storage("./data/tasks.txt");
+            storage.initialize();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
     public static void main(String[] args) {
         new Duke().run();
 
@@ -25,16 +38,22 @@ public class Duke {
                     System.out.println(handler.display());
                 } else if (input.startsWith("mark")) {
                     System.out.println(handler.markAsDone(input));
+                    storage.saveTasks();
                 } else if (input.startsWith("unmark")) {
                     System.out.println(handler.markAsUndone(input));
+                    storage.saveTasks();
                 } else if (input.startsWith("event")) {
                     System.out.println(handler.eventHandler(input));
+                    storage.saveTasks();
                 } else if (input.startsWith("todo")) {
                     System.out.println(handler.todoHandler(input));
+                    storage.saveTasks();
                 } else if (input.startsWith("deadline")) {
                     System.out.println(handler.deadlineHandler(input));
+                    storage.saveTasks();
                 } else if (input.startsWith("delete")) {
                     System.out.println(handler.deleteHandler(input));
+                    storage.saveTasks();
                 } else {
                     throw new UnknownInputException();
                 }

@@ -6,4 +6,7 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+    public String saveString() {
+        return String.format("todo / %s / %s", super.saveString(), this.getDescription());
+    }
 }

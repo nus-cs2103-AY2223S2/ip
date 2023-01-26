@@ -8,7 +8,7 @@ public class TaskList {
     }
 
 
-    public List<Task> getContent() {
-        return this.taskList;
+    public static List<Task> getContent() {
+        return taskList;
     }
 }
