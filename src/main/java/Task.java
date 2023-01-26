@@ -1,17 +1,14 @@
+import java.time.LocalDate;
+
 public abstract class Task {
     private String nameOfTask;
-    private int indexOfTask;
     private boolean done;
     public static int totalNumOfTask = 0;
 
     public Task(String name) {
         this.nameOfTask = name;
         totalNumOfTask++;
-        this.indexOfTask = totalNumOfTask;
         done = false;
-    }
-    public int getIndexOfTask() {
-        return indexOfTask;
     }
     public String getNameOfTask() {
         return nameOfTask;
@@ -32,6 +29,8 @@ public abstract class Task {
     public static void decreaseNumOfTask() {
         totalNumOfTask--;
     }
+
+    abstract public LocalDate getDate();
 
     @Override
     public String toString() {
