@@ -2,6 +2,9 @@ package Duke.Ui;
 
 import Duke.TaskList.TaskList;
 
+/**
+ * Ui class to perform the outputting tasks to user
+ */
 public class Ui {
     private final String starting = "    ____________________________________________________________\n";
     private final String ending = "    ____________________________________________________________\n";
@@ -16,14 +19,28 @@ public class Ui {
 
     public Ui() {}
 
+    /**
+     * Print the intro of Duke CLI
+     */
     public void showIntro() {
         System.out.println(Ui.intro);
     }
 
+    /**
+     * Print the outro of Duke CLI
+     */
     public void showOutro() {
         System.out.println(Ui.outro);
     }
 
+    /**
+     * Wrap string and size of list between indentations and
+     * horizontal lines
+     *
+     * @param s String to be wrapped
+     * @param size Size of TaskList
+     * @return String wrapped with indentations and horizontal lines
+     */
     public String wrap(String s, int size) {
         //wrap string with the correct indentation and lines when returning add task string
         //assumes s contains the nextline character
@@ -34,30 +51,66 @@ public class Ui {
         return sb.toString();
     }
 
+    /**
+     * Prints the ouput after adding a Deadline
+     *
+     * @param taskString String version of the Deadline task
+     * @param size Size of TaskList after adding
+     */
     public void showAddDeadlineResult(String taskString, int size) {
         System.out.println(this.wrap(taskString, size));
     }
 
+    /**
+     * Print the output after adding an Event
+     *
+     * @param taskString String version of Event task
+     * @param size Size of TaskList after adding
+     */
     public void showAddEventResult(String taskString, int size) {
         System.out.println(this.wrap(taskString, size));
     }
 
+    /**
+     * Prints the output after adding Todo
+     *
+     * @param taskString String version of Todo task
+     * @param size Size of TaskList after adding
+     */
     public void showAddTodoResult(String taskString, int size) {
         System.out.println(this.wrap(taskString, size));
     }
 
+    /**
+     * Prints output after marking a Task as done
+     *
+     * @param taskString
+     * @param index
+     */
     public void showMarkResult(String taskString, int index) {
         String s = this.starting + this.spacing + "Nice! I've marked this task as done:\n";
         s += this.spacing + "  " + taskString + this.ending;
         System.out.println(s);
     }
 
+    /**
+     * Prints output after marking Task as undone
+     *
+     * @param taskString
+     * @param index
+     */
     public void showUnmarkResult(String taskString, int index) {
         String s = this.starting + this.spacing + "OK, I've marked this task as not done yet:\n";
         s += this.spacing + "  " + taskString + this.ending;
         System.out.println(s);
     }
 
+    /**
+     * Prints output after deleting Task
+     *
+     * @param taskString String version of Task deleted
+     * @param size Size of TaskList after delete
+     */
     public void showDeleteResult(String taskString, int size) {
         StringBuilder sb = new StringBuilder();
         sb.append(this.starting).append(this.spacing).append("Noted. I've removed this task:\n  ");
@@ -66,6 +119,11 @@ public class Ui {
         System.out.println(sb);
     }
 
+    /**
+     * Print all the Task in TaskList after user calls 'list' command
+     *
+     * @param tl TaskList containing all the task
+     */
     public void showGetAllTaskResult(TaskList tl) {
         StringBuilder s = new StringBuilder();
         s.append(this.starting);

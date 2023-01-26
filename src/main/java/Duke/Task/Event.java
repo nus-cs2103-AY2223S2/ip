@@ -3,6 +3,9 @@ import Duke.DateTime.DateTime;
 
 import java.time.LocalDateTime;
 
+/**
+ * Task to represent Event task created by user
+ */
 public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
@@ -21,6 +24,9 @@ public class Event extends Task {
         return this.to;
     }
 
+    /**
+     * @return String version of Event
+     */
     @Override
     public String toString() {
         String from = DateTime.getDateTimeString(this.from);

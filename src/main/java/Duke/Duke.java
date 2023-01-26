@@ -9,9 +9,16 @@ import Duke.Ui.Ui;
 import java.util.Objects;
 import java.util.Scanner;
 
+
+/**
+ * A CLI task manager
+ */
 public class Duke {
     public Duke() {}
 
+    /**
+     * Function that runs the Duke CLI
+     */
     public void run() {
         boolean end = false;
         Scanner sc = new Scanner(System.in);

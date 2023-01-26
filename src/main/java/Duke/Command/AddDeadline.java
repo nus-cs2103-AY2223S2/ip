@@ -9,6 +9,9 @@ import Duke.Ui.Ui;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class in charge of handling the case of adding Deadline Task
+ */
 public class AddDeadline implements Command{
     private String deadlineString;
     private String name;
@@ -17,6 +20,13 @@ public class AddDeadline implements Command{
         this.deadlineString = deadlineString;
     }
 
+    /**
+     * Adds the Task to TaskList and storage, and output result using Ui
+     *
+     * @param tl TasList to be used to get Task
+     * @param ui Ui to output result
+     * @param storage Storage to modify if necessary
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         try {

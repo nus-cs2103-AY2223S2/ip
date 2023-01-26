@@ -1,5 +1,9 @@
 package Duke.DukeException;
 import java.lang.StringBuilder;
+
+/**
+ * Class to manage problems during execution of Duke CLI
+ */
 public class DukeException extends Exception{
     private static final String starting = "    ____________________________________________________________\n";
     private static final String ending = "    ____________________________________________________________\n";

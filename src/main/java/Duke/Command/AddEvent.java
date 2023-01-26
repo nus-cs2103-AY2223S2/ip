@@ -10,6 +10,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class in charge of handling the case of adding Event task
+ */
 public class AddEvent implements Command {
     private String fromString;
     private String toString;
@@ -19,6 +22,14 @@ public class AddEvent implements Command {
         this.toString = toString;
         this.name = name;
     }
+
+    /**
+     * Adds the Task to TaskList and storage, and output result using Ui
+     *
+     * @param tl TasList to be used to get Task
+     * @param ui Ui to output result
+     * @param storage Storage to modify if necessary
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         try {
