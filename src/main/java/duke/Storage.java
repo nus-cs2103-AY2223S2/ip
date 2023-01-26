@@ -39,18 +39,13 @@ public class Storage {
     }
 
     /**
-     * Recreates the list of duke.task.Task objects from a file in the correct format.
-     * @return List of duke.task.Task objects that was stored in the file.
+     * Recreates the list of Task objects from a file in the correct format.
+     * @return List of Task objects that was stored in the file.
      * @see <a href="https://www.sghill.net/2014/how-do-i-make-cross-platform-file-paths-in-java/">Tutorial 1</a>
      * @see <a href="https://www.baeldung.com/java-path-vs-file">Tutorial 2</a>
      * @see <a href="https://www.digitalocean.com/community/tutorials/java-read-file-line-by-line">Tutorial 3</a>
      */
     public List<Task> loadData() {
-        /**
-         *
-         *
-         *
-         */
         List<Task> result = new ArrayList<>();
         try {
             Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
@@ -72,19 +67,19 @@ public class Storage {
         return result;
     }
     /**
-     * https://beginnersbook.com/2014/01/how-to-write-to-file-in-java-using-bufferedwriter/
-     * @param userTasks
+     * Saves the list of Task objects to a file.
+     * @param userTasks List of Task objects to save.
      */
     public void saveData(List<Task> userTasks) {
         Path path = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
         BufferedWriter bw = null;
+        // https://beginnersbook.com/2014/01/how-to-write-to-file-in-java-using-bufferedwriter/
         try {
             bw = Files.newBufferedWriter(path);
             for (Task t: userTasks) {
                 bw.write(t.toDiskFormat());
                 bw.newLine();
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
