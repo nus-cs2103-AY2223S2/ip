@@ -55,6 +55,7 @@ public class Parser {
     }
 
     /**
+     * Gets first argument in string that separates args with whitespace.
      * @param args Non-null. Trimmed arguments string.
      * @return The substring before the 1st whitespace character, or original string if no whitespace exists.
      */

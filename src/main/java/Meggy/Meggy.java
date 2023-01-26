@@ -34,6 +34,7 @@ public class Meggy implements Runnable {
 
     /**
      * Creates a chatbot instance with specified IO.
+     *
      * @param in  Non-null. Customizable input.
      * @param out Non-null. Customizable output.
      */
