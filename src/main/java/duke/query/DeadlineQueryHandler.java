@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The DeadlineQueryHandler class handles user queries for adding new deadlines.
+ */
 public class DeadlineQueryHandler extends TaskQueryHandler {
     protected final String DATETIME_PATTERN = "yyyy-MM-dd HH:mm";
 
@@ -15,6 +18,12 @@ public class DeadlineQueryHandler extends TaskQueryHandler {
         super(tt);
     }
 
+    /**
+     * Processes a query for adding a new deadline.
+     * @param query a user input string
+     * @return response from adding deadline
+     * @throws DukeException
+     */
     @Override
     public String processQuery(String query) throws DukeException {
         String[] parsed = QueryParser.parseQuery(query, new String[]{"/by"});

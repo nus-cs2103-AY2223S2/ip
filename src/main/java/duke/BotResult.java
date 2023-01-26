@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * The BotResult class contains the result upon processing a user query.
+ */
 public class BotResult {
     public BotStatus resultStatus;
     public String response;

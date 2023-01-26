@@ -11,10 +11,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * TaskStorage is a class that handles the saving/loading of tasks to storage.
+ */
 public class TaskStorage {
     private static final String SAVE_DIR = "data";
     private static final String SAVE_NAME = "tasks.txt";
 
+    /**
+     * Saves tasks to storage.
+     * @param tasks ArrayList of tasks to save to storage.
+     * @throws TaskSaveException
+     */
     public void saveTasks(ArrayList<Task> tasks) throws TaskSaveException {
         try {
             Path savePath = Paths.get(SAVE_DIR, SAVE_NAME);
@@ -52,6 +60,11 @@ public class TaskStorage {
         }
     }
 
+    /**
+     * Loads tasks from storage.
+     * @return ArrayList of tasks loaded from storage.
+     * @throws TaskSaveException
+     */
     public ArrayList<Task> loadTasks() throws TaskSaveException {
         Path savePath = Paths.get(SAVE_DIR, SAVE_NAME);
         ArrayList<Task> tasks = new ArrayList<Task>();

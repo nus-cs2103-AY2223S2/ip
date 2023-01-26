@@ -1,9 +1,15 @@
 package duke;
 
+/**
+ * The Duke class represents the chatbot application.
+ */
 public class Duke {
     private final Bot bot;
     private final Ui ui;
 
+    /**
+     * Constructs and initializes Duke.
+     */
     public Duke() {
         this.bot = new Bot();
         this.ui = new Ui();
@@ -16,6 +22,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Begins and runs the bot's loop.
+     */
     public void run() {
         boolean running = true;
         while (running & ui.hasUserInput()) {

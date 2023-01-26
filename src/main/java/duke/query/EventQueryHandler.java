@@ -8,11 +8,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The EventQueryHandler class handles user queries for adding new events.
+ */
 public class EventQueryHandler extends DeadlineQueryHandler {
     public EventQueryHandler(TaskTracker tt) {
         super(tt);
     }
 
+    /**
+     * Processes a query for adding an event.
+     * @param query a user input string
+     * @return response from adding an event
+     * @throws DukeException
+     */
     @Override
     public String processQuery(String query) throws DukeException {
         String[] parsed = QueryParser.parseQuery(query, new String[]{"/from", "/to"});

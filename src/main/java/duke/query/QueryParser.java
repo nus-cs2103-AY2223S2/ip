@@ -2,7 +2,16 @@ package duke.query;
 
 import java.util.StringTokenizer;
 
+/**
+ * The QueryParser class is a utility class that parses query strings.
+ */
 public class QueryParser {
+    /**
+     * Parses a query into an array of Strings.
+     * @param query query to the bot
+     * @param commands command keywords (e.g. /by, /from) to detect in query
+     * @return a string array with query type, description and command parameters
+     */
     public static String[] parseQuery(String query, String[] commands) {
         String[] result = new String[commands.length + 2];
         StringTokenizer st = new StringTokenizer(query);
