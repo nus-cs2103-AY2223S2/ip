@@ -18,7 +18,9 @@ public class Duke {
         String userInput;
         EventType curEvent;
 
-        Path filePath = Paths.get("/Users/shawn/", "data", "duke.txt");
+        String home = System.getProperty("user.home"); //home directory OS independent
+        Files.createDirectories(Paths.get(home,"data")); //create directory if it does not exist
+        Path filePath = Paths.get(home,"data", "duke.txt");
 
         loop: while (true) {
 
@@ -223,7 +225,6 @@ public class Duke {
             return;
         }
     }
-
 
     private static String printList() {
         StringBuilder s = new StringBuilder();
