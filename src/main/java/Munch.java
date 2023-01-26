@@ -10,14 +10,13 @@ public class Munch {
         System.out.println("__________________________");
         ArrayList<Task> tasks = new ArrayList<>();
         Boolean exit = true;
+        Scanner text = new Scanner(System.in);
         int count = 0;
         while (exit) {
             try {
-                Scanner text = new Scanner(System.in);
                 String word = text.nextLine();
                 // check for specific words : "mark" and "unmark"
                 String[] words = word.split(" ");
-
 
                 // exit program
                 if (word.equals("bye")) {
@@ -106,5 +105,6 @@ public class Munch {
                 System.out.println(e.getMessage());
             }
         }
+        text.close();
     }
 }

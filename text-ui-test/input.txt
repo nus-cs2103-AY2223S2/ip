@@ -1,0 +1,8 @@
+deadline read book /by sunday
+todo CS2103 lecture
+event DJ @ Prism /from Wed 11pm /to Wed 12am
+list
+mark 2
+unmark 2
+list
+bye
