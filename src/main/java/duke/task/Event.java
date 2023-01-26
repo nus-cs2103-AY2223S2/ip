@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 /**
  * A subclass of Task that represents
  * a task that is considered an event.
@@ -11,6 +14,7 @@ package duke.task;
 public class Event extends Task {
     protected String startTime;
     protected String endTime;
+    protected HashSet<String> wordsInDescription = new HashSet<>();
 
     /**
      * Constructor of Event.
@@ -23,6 +27,17 @@ public class Event extends Task {
         super(description);
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    /**
+     * Method to check if the description of
+     * the task contains the word that the user
+     * is searching for.
+     * @param word Search term of Find
+     * @return True if the word exists in the description.
+     */
+    public boolean hasWord(String word) {
+        return this.wordsInDescription.contains(word);
     }
 
     /**

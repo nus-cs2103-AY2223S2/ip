@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,8 +15,11 @@ import java.time.format.DateTimeParseException;
  * @version 0.1
  * @since 0.1
  */
+
+
 public class Deadline extends Task {
     protected LocalDateTime endTime;
+    protected HashSet<String> wordsInDescription = new HashSet<>();
     protected DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     protected DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
 
@@ -21,11 +27,23 @@ public class Deadline extends Task {
      * Constructor of Deadline.
      *
      * @param description Description of the task.
-     * @param by Time limit of the task.
+     * @param endTime Time limit of the task.
      */
-    public Deadline(String description, String by) throws DateTimeParseException {
+    public Deadline(String description, String endTime) throws DateTimeParseException {
         super(description);
-        this.endTime = LocalDateTime.parse(by, INPUT_DATE_FORMAT);
+        this.endTime = LocalDateTime.parse(endTime, INPUT_DATE_FORMAT);
+        this.wordsInDescription.addAll(Arrays.asList(description.split(" ")));
+    }
+
+    /**
+     * Method to check if the description of
+     * the task contains the word that the user
+     * is searching for.
+     * @param word Search term of Find
+     * @return True if the word exists in the description.
+     */
+    public boolean hasWord(String word) {
+        return this.wordsInDescription.contains(word);
     }
 
     /**

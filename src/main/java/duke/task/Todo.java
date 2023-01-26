@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 /**
  * A subclass of Task that represents
  * a todo task.
@@ -9,6 +12,7 @@ package duke.task;
  * @since 0.1
  */
 public class Todo extends Task {
+    protected HashSet<String> wordsInDescription = new HashSet<>();
 
     /**
      * Constructor of the todo class.
@@ -16,6 +20,18 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+        this.wordsInDescription.addAll(Arrays.asList(description.split(" ")));
+    }
+
+    /**
+     * Method to check if the description of
+     * the task contains the word that the user
+     * is searching for.
+     * @param word Search term of Find
+     * @return True if the word exists in the description.
+     */
+    public boolean hasWord(String word) {
+        return this.wordsInDescription.contains(word);
     }
 
     /**

@@ -51,6 +51,17 @@ public class Task {
     }
 
     /**
+     * Method to check if the description of
+     * the task contains the word that the user
+     * is searching for.
+     * @param word Search term of Find
+     * @return True if the word exists in the description.
+     */
+    public boolean hasWord(String word) {
+        return false;
+    }
+
+    /**
      * Returns a string representation of a task.
      * @return String representation.
      */

@@ -11,19 +11,20 @@ import java.util.List;
  * @since 0.1
  */
 public class TaskList {
-    private List<Task> TASK_LIST = new LinkedList<>();
+    private List<Task> taskList = new LinkedList<>();
 
     /**
      * Constructor of TaskList.
      */
-    public TaskList() {}
+    public TaskList() {
+    }
 
     /**
      * Method to add a task into TaskList
      * @param task List of task.
      */
     public void add(Task task) {
-        this.TASK_LIST.add(task);
+        this.taskList.add(task);
     }
 
     /**
@@ -31,7 +32,7 @@ public class TaskList {
      * @return The length of the TaskList.
      */
     public int size() {
-        return this.TASK_LIST.size();
+        return this.taskList.size();
     }
 
     /**
@@ -41,7 +42,7 @@ public class TaskList {
      * @return The tasks that was at the index.
      */
     public Task get(int index) {
-        return this.TASK_LIST.get(index);
+        return this.taskList.get(index);
     }
 
     /**
@@ -50,7 +51,7 @@ public class TaskList {
      * @param index Index of the task being removed.
      */
     public void remove(int index) {
-        this.TASK_LIST.remove(index);
+        this.taskList.remove(index);
     }
     
 }
