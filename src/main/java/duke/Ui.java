@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Ui represents the user interface, which in this case is the console.
  */
 public class Ui {
-    Scanner scanner;
+    private Scanner scanner;
     public Ui() {
         this.scanner = new Scanner(System.in);
     }

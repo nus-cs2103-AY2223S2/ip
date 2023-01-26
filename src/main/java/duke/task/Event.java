@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
  * An Event object is a Task with a start time and end time.
  */
 public class Event extends Task {
-    LocalDateTime startTime;
-    LocalDateTime endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     public Event(String title, String startTime, String endTime) {
         super(title);
         this.startTime = super.parseDateString(startTime);
