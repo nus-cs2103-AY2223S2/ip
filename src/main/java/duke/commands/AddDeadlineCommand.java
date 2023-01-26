@@ -25,7 +25,7 @@ public class AddDeadlineCommand extends Command{
         }
         String[] taskNameAndDeadline = userInput.split(" ", 2)[1].split(" /by ");
         if (taskNameAndDeadline.length < 2) {
-            throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
+            throw new DukeException("☹ OOPS!! The date of a deadline cannot be empty.");
         }
         String taskName = taskNameAndDeadline[0];
         String deadline = taskNameAndDeadline[1];
