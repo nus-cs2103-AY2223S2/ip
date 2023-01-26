@@ -14,13 +14,13 @@ public class Storage {
     private String filePath;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
-    public Storage(String filePath) throws IOException {
+    public Storage(String filePath)  {
         this.f = new File(filePath);
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> loadTasks() {
-            Scanner sc = new Scanner(System.in);
+    public ArrayList<Task> loadTasks() throws FileNotFoundException {
+            Scanner sc = new Scanner(f);
             ArrayList<Task> taskList = new ArrayList<>();
             while (sc.hasNext()) {
                 taskList.add(formatStringToTask(sc.nextLine()));

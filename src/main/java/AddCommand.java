@@ -1,3 +1,6 @@
+import exception.TreeBotException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AddCommand extends Command{
@@ -9,8 +12,13 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(ArrayList<Task> taskList, Ui ui) {
+    public void execute(ArrayList<Task> taskList, Ui ui, Storage storage) throws TreeBotException {
         taskList.add(task);
+        try {
+            storage.saveTasks(taskList);
+        } catch (IOException e) {
+            throw new TreeBotException(e.getMessage());
+        }
 
     }
 }
