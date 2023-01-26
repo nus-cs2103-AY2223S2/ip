@@ -66,7 +66,12 @@ public class Dudu {
                         throw new EmptyDescriptionException("event", "description", "Missing task description");
                     }
                     new EventCommand(Command.Instruction.EVENT, input.substring(6)).execute(list, storage);
-                } else {
+                } else if (inputArr[0].equals("find")) {
+                    if (input.trim().length() == 4) {
+                        throw new EmptyDescriptionException("find", "description", "Missing task description");
+                    }
+                    new FindCommand((Command.Instruction.FIND), input.substring(5)).execute(list, storage);
+                }else {
                     throw new InvalidCommandException("Invalid Command");
                 }
             } catch (InvalidCommandException ex){
@@ -76,7 +81,6 @@ public class Dudu {
             }
             ui.showLine();
         }
-        ui.showLine();
     }
     public static void main(String[] args) {
         new Dudu("data/tasks.txt").run();

@@ -46,6 +46,7 @@ public class TaskList {
         list.remove(index);
         return list;
     }
+
     public void printList() {
         if (list.size() == 0) {
             System.out.println("There is no task in your list");

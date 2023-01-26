@@ -1,5 +1,7 @@
 package dudu.task;
 
+import java.util.Objects;
+
 public abstract class Task {
     private String name;
     private boolean isDone;
@@ -44,6 +46,23 @@ public abstract class Task {
         } else {
             return new Todo(name, status);
         }
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        } else if (object instanceof Task) {
+            Task task = (Task) object;
+            return isDone == task.isDone
+                    &&
+                    getDescription().equals(task.getDescription())
+                    &&
+                    getType().equals(task.getType());
+        } else {
+            return false;
+        }
+
     }
     @Override
     public String toString() {
