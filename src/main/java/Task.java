@@ -21,9 +21,7 @@ public class Task {
         this.marked =marked;
     }
 
-    //abstract public String[] delete() {}
 
-    //abstract public String[] add() {}
 
     /**
      * Marks task as done.

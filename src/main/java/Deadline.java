@@ -29,9 +29,11 @@ public class Deadline extends Task {
     @Override
     public String toString(){
         if (marked) {
-            return "[D][X] " + super.detail + " (by: " + this.day.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[D][X] " + super.detail + " (by: " + this.day.format(DateTimeFormatter.
+                    ofPattern("MMM d yyyy")) + ")";
         } else {
-            return "[D][ ] " + super.detail + " (by: " + this.day.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[D][ ] " + super.detail + " (by: " + this.day.format(DateTimeFormatter.
+                    ofPattern("MMM d yyyy")) + ")";
         }
     }
 }

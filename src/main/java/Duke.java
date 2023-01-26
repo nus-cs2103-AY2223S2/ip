@@ -11,14 +11,14 @@ import java.io.IOException;
 
 
 enum action {
-    bye,
-    list,
-    mark,
-    unmark,
-    todo,
-    deadline,
-    event,
-    delete
+    Bye,
+    List,
+    Mark,
+    Unmark,
+    Todo,
+    Deadline,
+    Event,
+    Delete
 }
 public class Duke {
     private Storage storage;
@@ -41,7 +41,8 @@ public class Duke {
      */
     static void checkEmptyAction(String[] arr, String action) throws DukeException {
         if (arr.length <= 1) {
-            throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", action));
+            throw new DukeException(String.format("OOPS!!! The description of " +
+                    "a %s cannot be empty.", action));
         }
     }
 
@@ -63,18 +64,19 @@ public class Duke {
         while (!s.equals("bye")) {
             String remaining = "";
             try {
-                action myAction = action.valueOf(s);
+                action myAction = action.valueOf(s.charAt(0).toUpperCase() +
+                        s.substring(1));
                 switch(myAction) {
-                    case bye:
+                    case Bye:
                         System.out.println("Bye. Hope to see you again soon!");
                         break;
 
-                    case list:
+                    case List:
                         System.out.println("Here are the tasks in your list:");
                         listOfAction.list();
                         break;
 
-                    case mark:
+                    case Mark:
                         try {
                             checkEmptyAction(arr, "mark");
                             int num = Integer.parseInt(arr[1]) - 1;
@@ -85,7 +87,7 @@ public class Duke {
                         }
                         break;
 
-                    case unmark:
+                    case Unmark:
                         try {
                             checkEmptyAction(arr, "unmark");
                             int num1 = Integer.parseInt(arr[1]) - 1;
@@ -96,7 +98,7 @@ public class Duke {
                         }
                         break;
 
-                    case delete:
+                    case Delete:
                         try {
                             checkEmptyAction(arr, "delete");
                             int num1 = Integer.parseInt(arr[1]) - 1;
@@ -104,7 +106,8 @@ public class Duke {
                                 System.out.println("Noted. I've removed this task:");
                                 listOfAction = listOfAction.delete(num1);
                                 len--;
-                                System.out.println(String.format("Now you have %d tasks in the list", len));
+                                System.out.println(String.format("Now you have %d " +
+                                        "tasks in the list", len));
                                 file.overwrite(listOfAction);
                             } else {
                                 System.out.println(new DukeException("OPPS!!! Invalid index!"));
@@ -114,15 +117,15 @@ public class Duke {
                         }
                         break;
 
-                    case todo:
+                    case Todo:
                         try {
                             checkEmptyAction(arr, "todo");
                             System.out.println("Got it. I've added this task:");
                             remaining = new Parser().toDo(arr);
                             Todo newTask = new Todo(s, remaining, false);
-                            listOfAction.add(newTask); //String.format("[T][ ] %s", remaining);
-                            //System.out.println(listOfAction[len]);
-                            System.out.println(String.format("Now you have %d tasks in the list", len + 1));
+                            listOfAction.add(newTask);
+                            System.out.println(String.format("Now you have %d " +
+                                    "tasks in the list", len + 1));
                             len++;
                             file.overwrite(listOfAction);
                         } catch (DukeException e) {
@@ -130,7 +133,7 @@ public class Duke {
                         }
                         break;
 
-                    case deadline:
+                    case Deadline:
                         try {
                             checkEmptyAction(arr, "deadline");
                             System.out.println("Got it. I've added this task:");
@@ -150,8 +153,9 @@ public class Duke {
                             }
 
                             Deadline newTask = new Deadline(s, detail, remaining);
-                            listOfAction.add(newTask); //String.format("[D][ ]%s", remaining);
-                            System.out.println(String.format("Now you have %d tasks in the list", len + 1));
+                            listOfAction.add(newTask);
+                            System.out.println(String.format("Now you have %d " +
+                                    "tasks in the list", len + 1));
                             len++;
                             file.overwrite(listOfAction);
 
@@ -160,19 +164,26 @@ public class Duke {
                         }
                         break;
 
-                    case event:
+                    case Event:
                         try {
                             checkEmptyAction(arr, "event");
                             System.out.println("Got it. I've added this task:");
                             //int k = 0;
-                            int startIndex = new Parser().getEventStartTimeIndex(arr);
-                            int endIndex = new Parser().getEventEndTimeIndex(arr, startIndex);
-                            String detail = new Parser().getEventDetail(arr);
+                            int startIndex = new Parser().
+                                    getEventStartTimeIndex(arr);
+                            int endIndex = new Parser().
+                                    getEventEndTimeIndex(arr, startIndex);
+                            String detail = new Parser().
+                                    getEventDetail(arr);
 
-                            String start = (new Parser().getEventTime(arr, startIndex, endIndex))[0];
-                            String end = (new Parser().getEventTime(arr, startIndex, endIndex))[1];
-                            listOfAction.add(new Event("event", detail, start, end)); //String.format("[E][ ]%s", remaining);
-                            System.out.println(String.format("Now you have %d tasks in the list", len + 1));
+                            String start = (new Parser().
+                                    getEventTime(arr, startIndex, endIndex))[0];
+                            String end = (new Parser().
+                                    getEventTime(arr, startIndex, endIndex))[1];
+                            listOfAction.add(new Event("event",
+                                    detail, start, end));
+                            System.out.println(String.format("Now you have %d " +
+                                    "tasks in the list", len + 1));
                             len++;
                             file.overwrite(listOfAction);
                         } catch (DukeException e) {
@@ -181,7 +192,8 @@ public class Duke {
                         break;
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("OOPS!!! I'm sorry, " +
+                        "but I don't know what that means :-(");
             }
 
             newLine = sc.nextLine();
