@@ -1,3 +1,5 @@
+package tunabot;
+
 public class Ui {
     private final String LINE = "------------------------------";
     public Ui() {

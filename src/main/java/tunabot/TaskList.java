@@ -1,3 +1,7 @@
+package tunabot;
+
+import tunabot.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {

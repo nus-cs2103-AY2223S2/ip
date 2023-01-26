@@ -1,3 +1,9 @@
+package tunabot;
+
+import tunabot.task.Deadline;
+import tunabot.task.Event;
+import tunabot.task.Task;
+
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;

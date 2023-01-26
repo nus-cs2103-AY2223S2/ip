@@ -1,3 +1,10 @@
+package tunabot;
+
+import tunabot.exceptions.InputException;
+import tunabot.task.Deadline;
+import tunabot.task.Event;
+import tunabot.task.Task;
+
 public class Parser {
     public static boolean parse(String input, TaskList tasks) throws InputException {
         String[] command = input.split(" ", 2);
@@ -23,7 +30,7 @@ public class Parser {
                 } catch (IllegalArgumentException e) {
                     throw new InputException("BLUB! Index chosen isn't a number!");
                 } catch (IndexOutOfBoundsException e) {
-                    throw new InputException("BLUB! Task chosen isn't on the list!");
+                    throw new InputException("BLUB! duke.task.Task chosen isn't on the list!");
                 }
                 break;
             case "unmark":
@@ -38,7 +45,7 @@ public class Parser {
                 } catch (IllegalArgumentException e) {
                     throw new InputException("BLUB! Index chosen isn't a number!");
                 } catch (IndexOutOfBoundsException e) {
-                    throw new InputException("BLUB! Task chosen isn't on the list!");
+                    throw new InputException("BLUB! duke.task.Task chosen isn't on the list!");
                 }
                 break;
             case "delete":
@@ -54,12 +61,12 @@ public class Parser {
                 } catch (IllegalArgumentException e) {
                     throw new InputException("BLUB! Index chosen isn't a number!");
                 } catch (IndexOutOfBoundsException e) {
-                    throw new InputException("BLUB! Task chosen isn't on the list!");
+                    throw new InputException("BLUB! duke.task.Task chosen isn't on the list!");
                 }
                 break;
             case "todo":
                 if (command.length < 2) {
-                    throw new InputException("BLUB! Task needs a name!");
+                    throw new InputException("BLUB! duke.task.Task needs a name!");
                 } else {
                     Task newTask = new Task(command[1]);
                     tasks.add(newTask);
@@ -69,12 +76,12 @@ public class Parser {
                 break;
             case "event":
                 if(command.length < 2) {
-                    throw new InputException("BLUB! Event needs a name, " +
+                    throw new InputException("BLUB! duke.task.Event needs a name, " +
                             "a start time and end time!");
                 } else {
                     String[] details = command[1].split("/from |/to ", 3);
                     if (details.length < 3) {
-                        throw new InputException("BLUB! Event is missing info!" +
+                        throw new InputException("BLUB! duke.task.Event is missing info!" +
                                 " Please check input. BLUB!");
                     }
                     Event newEvent = new Event(details[0], details[1], details[2]);
@@ -85,11 +92,11 @@ public class Parser {
                 break;
             case "deadline":
                 if(command.length < 2) {
-                    throw new InputException("BLUB! Deadline needs a name and due date!");
+                    throw new InputException("BLUB! duke.task.Deadline needs a name and due date!");
                 } else {
                     String details[] = command[1].split("/by ", 2);
                     if(details.length < 2) {
-                        throw new InputException("BLUB! Deadline is missing info!" +
+                        throw new InputException("BLUB! duke.task.Deadline is missing info!" +
                                 " PLease check input. BLUB!");
                     }
                     Deadline newDeadline = new Deadline(details[0], details[1]);

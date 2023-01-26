@@ -1,3 +1,5 @@
+package tunabot.task;
+
 public class Task {
     final String name;
     boolean isDone;
