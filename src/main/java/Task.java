@@ -2,11 +2,17 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected char symbol;
+
+    protected String due;
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
-
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -18,4 +24,6 @@ public abstract class Task {
     public void markUndone() {
         this.isDone = false;
     }
+
+    public abstract String saveTask();
 }
