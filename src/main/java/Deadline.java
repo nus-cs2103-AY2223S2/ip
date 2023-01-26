@@ -1,17 +1,21 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate by;
 
-    public Deadline(String description, String by) throws JamesException{
+    public Deadline(String description, LocalDate by) throws JamesException{
         super(description);
-        by = by.replaceAll("by", "");
         this.by = by;
 
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by:" + by + ")";
+        String dateFormat = this.by.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
+        return "[D]" + super.toString() + " (by:" + dateFormat + ")";
     }
 
 }
+

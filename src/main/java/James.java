@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -50,11 +52,15 @@ public class James {
             else if (input.startsWith("deadline")) {
                 try {
                 input = input.replaceAll("deadline", "");
-                String[] parts = input.split("/", 2);
+                String[] parts = input.split("/by ", 2);
+                System.out.println(parts[1]);
                 if (parts.length != 2) {
                     throw new JamesException("OOPS!!! The description of a deadline task cannot be empty.");
                 }
-                inputs.add(new Deadline(parts[0], parts[1]));
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("d-MM-yyyy");
+                LocalDate date = LocalDate.parse(parts[1], format);
+                Deadline task = new Deadline(parts[0], date);
+                inputs.add(task);
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + inputs.get(inputs.size() - 1));
                 System.out.println("Now you have " + inputs.size() + " tasks in the list.");
