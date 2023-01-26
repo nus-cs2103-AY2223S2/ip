@@ -13,6 +13,7 @@ public class Duke {
     private static final String DIV_CLOSE = "____________________________________________________________\n";
 
     public static ArrayList<Task> list = new ArrayList<>();
+    public static Path data;
     public static int listNum = 1; // reserve first element away
     public static boolean running = true;
 
@@ -31,16 +32,26 @@ public class Duke {
         if (!Files.exists(path)) {
             path = Files.createFile(path);
         }
+        data = path;
         List<String> readFile = Files.readAllLines(path);
         for (String line : readFile) {
-            String[] data = line.split("|");
+            String[] data = line.split("\\|");
             switch (data[0]) {
             case "T":
-                // Write adding todo
+                Todo todo = new Todo(data[2], data[1]);
+                list.add(todo);
+                listNum++;
+                break;
             case "D":
-                // Write adding deadline
+                Deadline deadline = new Deadline(data[2], data[3], data[1]);
+                list.add(deadline);
+                listNum++;
+                break;
             case "E":
-                // Write adding event
+                Event event = new Event(data[2], data[3], data[4], data[1]);
+                list.add(event);
+                listNum++;
+                break;
             default:
                 // Write default case if any
             }
@@ -49,7 +60,7 @@ public class Duke {
 
     public static void saveFile(Path path) {
         try {
-            FileWriter saveWriter = new FileWriter(path.toFile());
+            FileWriter saveWriter = new FileWriter(path.toFile(), false);
             for (int i = 1; i < listNum; i++) {
                 Task task = list.get(i);
                 saveWriter.write(task.toData() + System.lineSeparator());
@@ -243,7 +254,9 @@ public class Duke {
                 + "\n";
         String greetings = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
-
+        System.out.println(DIV_OPEN + logo + "Loading Duke...\n" + DIV_CLOSE);
+        // Dummy task for easy indexing of tasks
+        list.add(new Task("DUKE"));
         // Loading up Duke directory and data file
         try {
             Path dir = loadDir();
@@ -252,10 +265,8 @@ public class Duke {
             throw new RuntimeException(e);
         }
 
-
-        list.add(new Task("DUKE"));
-
-        System.out.println(DIV_OPEN + logo + "Loading Duke...\n" + DIV_CLOSE); // Initialization complete
+        System.out.println("Loading complete.");
+        System.out.println(greetings);
 
         // Accept user input in a loop
         Scanner sc = new Scanner(System.in);
@@ -274,6 +285,9 @@ public class Duke {
                 System.out.println(ex.getMessage());
                 System.out.println(DIV_CLOSE);
             }
+
+            saveFile(data);
+
         }
 
         // End of program
