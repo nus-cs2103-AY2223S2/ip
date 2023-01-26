@@ -38,7 +38,7 @@ public class Ui {
         // user enters list command
         if (s.contains("list")) {
             if (tasks.isEmpty()) {
-                System.out.println("    You have no tasks");
+                System.out.println("    No tasks");
             } else {
                 for (int i = 0; i < taskCounter; i++) {
                     Task task = tasks.get(i);
@@ -101,6 +101,17 @@ public class Ui {
                 tasks.remove(taskNumber);
                 return taskCounter - 1;
             }
+        } else if (s.contains("find")) {
+            String findString = s.substring(5);
+            ArrayList<Task> foundTasks = new ArrayList<Task>();
+            for (Task task : tasks) {
+                if (task.toString().contains(findString)) {
+                    foundTasks.add(task);
+                }
+            }
+            TaskList searchResults = new TaskList(foundTasks);
+            System.out.println("Here are the tasks I found!");
+            searchResults.displayTasks();
         } else {
             //throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :-(");
