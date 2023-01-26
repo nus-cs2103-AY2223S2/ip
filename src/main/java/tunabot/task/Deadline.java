@@ -3,7 +3,7 @@ package tunabot.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDateTime deadline;
 
     public Deadline(String name, String deadline) {
@@ -23,7 +23,7 @@ public class Deadline extends Task{
     }
     @Override
     public String saveFormat() {
-        return "T;" + this.name + ";" +this.isDone + ";" + this.getDeadline();
+        return "T;" + this.name + ";" + this.isDone + ";" + this.getDeadline();
     }
     @Override
     public String toString() {
@@ -33,6 +33,6 @@ public class Deadline extends Task{
         } else {
             box = "[ ] ";
         }
-        return"[D]" + box + this.getName() + "(by " + this.getDeadline() + ")";
+        return "[D]" + box + this.getName() + "(by " + this.getDeadline() + ")";
     }
 }

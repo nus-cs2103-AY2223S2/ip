@@ -1,15 +1,17 @@
 package tunabot;
 
-import tunabot.exceptions.InputException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import tunabot.exceptions.InputException;
+
+
 public class TunaBot {
-    private Storage storage;
-    private Ui ui;
+    private static Storage storage;
+    private static Ui ui;
     private static final Scanner s = new Scanner(System.in);
     private static TaskList tasks;
     private static boolean toExit = false;

@@ -3,7 +3,7 @@ package tunabot.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDateTime start;
     protected LocalDateTime end;
 
@@ -18,9 +18,8 @@ public class Event extends Task{
         super(name, isDone);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
         this.start = LocalDateTime.parse(start, formatter);
-        this.end = LocalDateTime.parse(end, formatter);;
+        this.end = LocalDateTime.parse(end, formatter);
     }
-    
 
     public String getEnd() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
@@ -34,7 +33,7 @@ public class Event extends Task{
 
     @Override
     public String saveFormat() {
-        return "E;" + this.name + ";" +this.isDone + ";" + this.getStart() + ";" + this.getEnd();
+        return "E;" + this.name + ";" + this.isDone + ";" + this.getStart() + ";" + this.getEnd();
     }
 
     @Override
@@ -45,6 +44,6 @@ public class Event extends Task{
         } else {
             box = "[ ] ";
         }
-        return"[E]" + box + this.getName() + "(from: " + this.getStart() + " to " + this.getEnd() + ")";
+        return "[E]" + box + this.getName() + "(from: " + this.getStart() + " to " + this.getEnd() + ")";
     }
 }

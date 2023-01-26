@@ -1,8 +1,9 @@
 package tunabot;
 
+import java.util.ArrayList;
+
 import tunabot.task.Task;
 
-import java.util.ArrayList;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
