@@ -17,8 +17,8 @@ public class Ui {
 
     public void sayHi() {
         String newLine = System.getProperty("line.separator");
-        System.out.println("-------------------------------------------------------" +
-                newLine + "Hello! Jak Sie Masz! I am Borat.\n What I do for you Premier Azamat?");
+        System.out.println("-------------------------------------------------------"
+                + newLine + "Hello! Jak Sie Masz! I am Borat.\n What I do for you Premier Azamat?");
     }
 
     public void sayBye() {

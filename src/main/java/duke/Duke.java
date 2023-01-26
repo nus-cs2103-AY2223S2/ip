@@ -1,17 +1,11 @@
 
 package duke;
 
-
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.*;
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
-
+import duke.ui.Ui;
+import java.io.IOException;
 
 public class Duke {
 
@@ -32,7 +26,7 @@ public class Duke {
     public void run() {
         this.ui.sayHi();
         boolean exit = false;
-        while(!exit) {
+        while (!exit) {
             try {
                 exit = this.ui.parseInput();
             } catch (DukeException e) {

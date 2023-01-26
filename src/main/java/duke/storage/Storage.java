@@ -1,15 +1,20 @@
 package duke.storage;
 
-import duke.tasklist.*;
+import duke.tasklist.Todo;
+import duke.tasklist.TaskList;
+import duke.tasklist.Task;
+import duke.tasklist.Event;
+import duke.tasklist.Deadline;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -70,13 +75,13 @@ public class Storage {
             toCheck = currTask.split("from:", 2);
             String descEvent = toCheck[0].substring(7, toCheck[0].length() - 1);
             String[] fromTo = toCheck[1].split("to:", 2);
-            String from = fromTo[0].substring(0, fromTo[0].length()- 1);
-            String to = fromTo[1].substring(0, fromTo[1].length()- 1);
+            String from = fromTo[0].substring(0, fromTo[0].length() - 1);
+            String to = fromTo[1].substring(0, fromTo[1].length() - 1);
             task = new Event(descEvent, from, to);
             break;
         }
         if (currTask.charAt(4) == 'X') {
-            try{
+            try {
                 task.changeCompletion();
             } catch (NullPointerException e) {
                 System.out.println(e.getMessage());
@@ -94,15 +99,15 @@ public class Storage {
             System.out.println(e.getMessage());
         }
         for (Task current : itemList.getList()) {
-            try{
+            try {
                 fooWriter.write(current.toSave() + "\n");
-            }  catch (IOException e) {
+            } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
         }
         try {
             fooWriter.flush();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
