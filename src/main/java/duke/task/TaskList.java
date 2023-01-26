@@ -18,9 +18,9 @@ public class TaskList {
     public int getSize() {
         return taskList.size();
     }
-    public Task getTask(int idx) throws DukeException {
+    public Task getTask(int taskIndex) throws DukeException {
         try {
-            return taskList.get(idx);
+            return taskList.get(taskIndex);
         } catch (IndexOutOfBoundsException e){
             throw new DukeException("Unable to get task.");
         }
@@ -30,22 +30,22 @@ public class TaskList {
         this.taskList.add(task);
     }
 
-    public String deleteTask(int idx) throws DukeException {
+    public String deleteTask(int taskIndex) throws DukeException {
         try {
-            return this.taskList.remove(idx).toString();
+            return this.taskList.remove(taskIndex).toString();
         } catch (IndexOutOfBoundsException e){
             throw new DukeException("duke.Task index given is invalid :( Unable to delete.");
         }
     }
 
-    public String markTask(int idx) throws DukeException {
-        Task task = this.getTask(idx);
+    public String markTask(int taskIndex) throws DukeException {
+        Task task = this.getTask(taskIndex);
         task.mark();
         return task.toString();
     }
 
-    public String unmarkTask(int idx) throws DukeException {
-        Task task = this.getTask(idx);
+    public String unmarkTask(int taskIndex) throws DukeException {
+        Task task = this.getTask(taskIndex);
         task.unmark();
         return task.toString();
     }

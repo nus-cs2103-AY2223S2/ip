@@ -20,10 +20,10 @@ public class TaskTest {
     }
 
     @Test
-    public void parseDatetime_validDatetimeFormat_success() throws DateTimeParseException {
+    public void parseDateTime_validDateTimeFormat_success() throws DateTimeParseException {
         assertEquals(LocalDateTime.parse("2020-11-09T12:13"),
-                new Task("read book").parseDatetime("2020-11-09 12:13"));
+                new Task("read book").parseDateTime("2020-11-09 12:13"));
         assertEquals(LocalDateTime.parse("2000-01-31T00:13"),
-                new Task("return book").parseDatetime("2000-01-31 00:13"));
+                new Task("return book").parseDateTime("2000-01-31 00:13"));
     }
 }

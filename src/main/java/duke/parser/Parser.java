@@ -37,30 +37,29 @@ public class Parser {
      * @return  Status whether the program should exit or not.
      */
     public static Command parse(String input) throws DukeException, NoSuchElementException {
-        String[] splitInput = input.split(" ");
-
+        String[] splitInputs = input.split(" ");
         Command c;
 
         try {
-            Action action = Action.valueOf(splitInput[0]);
+            Action action = Action.valueOf(splitInputs[0]);
 
             switch (action) {
                 case todo:
-                    if (splitInput.length < 2) {
+                    if (splitInputs.length < 2) {
                         throw new DukeException("The description of a todo cannot be empty.");
                     }
                     Todo todo = addTodo(input.split(" ", 2)[1]);
                     c = new AddCommand(todo);
                     break;
                 case deadline:
-                    if (splitInput.length < 2) {
+                    if (splitInputs.length < 2) {
                         throw new DukeException("The description of a deadline cannot be empty.");
                     }
                     Deadline deadline = addDeadline(input.split(" ", 2)[1]);
                     c = new AddCommand(deadline);
                     break;
                 case event:
-                    if (splitInput.length < 2) {
+                    if (splitInputs.length < 2) {
                         throw new DukeException("The description of a event cannot be empty.");
                     }
                     Event event = addEvent(input.split(" ", 2)[1]);
@@ -70,24 +69,24 @@ public class Parser {
                     c = new ListCommand();
                     break;
                 case mark:
-                    if (splitInput.length < 2) {
+                    if (splitInputs.length < 2) {
                         throw new DukeException("The task index cannot be empty.");
                     }
-                    int markIdx = Integer.parseInt(splitInput[1]);
-                    c = new MarkCommand(markIdx);
+                    int markIndex = Integer.parseInt(splitInputs[1]);
+                    c = new MarkCommand(markIndex);
                     break;
                 case unmark:
-                    if (splitInput.length < 2) {
+                    if (splitInputs.length < 2) {
                         throw new DukeException("The task index cannot be empty.");
                     }
-                    int unmarkIdx = Integer.parseInt(splitInput[1]);
-                    c = new UnmarkCommand(unmarkIdx);
+                    int unmarkIndex = Integer.parseInt(splitInputs[1]);
+                    c = new UnmarkCommand(unmarkIndex);
                     break;
                 case delete:
-                    if (splitInput.length < 2) {
+                    if (splitInputs.length < 2) {
                         throw new DukeException("The task index cannot be empty.");
                     }
-                    c = new DeleteCommand(Integer.parseInt(splitInput[1]));
+                    c = new DeleteCommand(Integer.parseInt(splitInputs[1]));
                     break;
                 case bye:
                     c = new ExitCommand();
@@ -109,39 +108,39 @@ public class Parser {
      * @throws DukeException
      * @throws NoSuchElementException
      */
-    public Task processTask(String input, int idx) throws DukeException, NoSuchElementException {
-        String[] splitInput = input.split(" ~ ");
+    public Task processTask(String input, int taskIndex) throws DukeException, NoSuchElementException {
+        String[] splitInputs = input.split(" ~ ");
 
         try {
-            TaskType taskType = TaskType.valueOf(splitInput[0]);
+            TaskType taskType = TaskType.valueOf(splitInputs[0]);
 
             switch (taskType) {
                 case T:
-                    if (splitInput.length != 3) {
+                    if (splitInputs.length != 3) {
                         throw new DukeException("duke.Todo task is of invalid format in the file.");
                     }
-                    Todo todo = addTodo(splitInput[2]);
+                    Todo todo = addTodo(splitInputs[2]);
                     return todo;
                 case D:
-                    if (splitInput.length != 4) {
+                    if (splitInputs.length != 4) {
                         throw new DukeException("duke.Deadline task is of invalid format in the file.");
                     }
                     Deadline deadline = addDeadline(String.format("%s /by %s"
-                            , splitInput[2]
-                            , splitInput[3]));
+                            , splitInputs[2]
+                            , splitInputs[3]));
                     return deadline;
                 case E:
-                    if (splitInput.length != 5) {
+                    if (splitInputs.length != 5) {
                         throw new DukeException("duke.Event task is of invalid format in the file.");
                     }
                     Event event = addEvent(String.format("%s /from %s /to %s"
-                            , splitInput[2]
-                            , splitInput[3]
-                            , splitInput[4]));
+                            , splitInputs[2]
+                            , splitInputs[3]
+                            , splitInputs[4]));
                     return event;
             }
-            if (splitInput[1].equals("1")) {
-                new MarkCommand(idx);
+            if (splitInputs[1].equals("1")) {
+                new MarkCommand(taskIndex);
             }
         } catch (IllegalArgumentException e) {
             throw new DukeException("☹ I'm sorry, but Fake duke.duke doesn't know what that means :-(");
@@ -152,30 +151,30 @@ public class Parser {
     /**
      * Handles the adding of todo tasks.
      *
-     * @param   taskDesc    Description of task.
+     * @param   taskDescription    Description of task.
      */
-    private static Todo addTodo(String taskDesc) {
-        Todo todo = new Todo(taskDesc);
+    private static Todo addTodo(String taskDescription) {
+        Todo todo = new Todo(taskDescription);
         return todo;
     }
 
     /**
      * Handles the adding of deadline tasks.
      *
-     * @param   taskDesc    Description of task.
+     * @param   taskDescription    Description of task.
      */
-    private static Deadline addDeadline(String taskDesc) throws DukeException {
-        Deadline deadline = new Deadline(taskDesc);
+    private static Deadline addDeadline(String taskDescription) throws DukeException {
+        Deadline deadline = new Deadline(taskDescription);
         return deadline;
     }
 
     /**
      * Handles the adding of event tasks.
      *
-     * @param   taskDesc    Description of task.
+     * @param   taskDescription    Description of task.
      */
-    private static Event addEvent(String taskDesc) throws DukeException {
-        Event event = new Event(taskDesc);
+    private static Event addEvent(String taskDescription) throws DukeException {
+        Event event = new Event(taskDescription);
         return event;
     }
 }

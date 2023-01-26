@@ -51,14 +51,14 @@ public class Task {
         return String.format("T ~ %d ~ %s\n", isDone ? 1 : 0, this.description);
     }
 
-    public LocalDateTime parseDatetime(String input) throws DateTimeParseException {
+    public LocalDateTime parseDateTime(String input) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime datetime = LocalDateTime.parse(input, formatter);
-        return datetime;
+        LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
+        return dateTime;
     }
 
-    public String getStringDatetime(LocalDateTime datetime) {
+    public String getStringDateTime(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd-MM-yyyy HH:mma");
-        return datetime.format(formatter);
+        return dateTime.format(formatter);
     }
 }

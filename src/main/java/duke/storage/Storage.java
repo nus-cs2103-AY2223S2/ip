@@ -16,42 +16,43 @@ import java.util.Scanner;
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    private final String filePath;
-    private final Parser parser = new Parser();
+    private final String FILEPATH;
+    private final Parser PARSER = new Parser();
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String FILEPATH) {
+        this.FILEPATH = FILEPATH;
     }
 
     /**
      * Reads file if exists. Create directory (if necessary) and file if the file do not exist.
      */
     public ArrayList<Task> load() throws DukeException {
-        File f = new File(this.filePath);
+        File f = new File(this.FILEPATH);
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(f);
             int idx = 0;
             while (s.hasNext()) {
                 idx++;
-                Task task = parser.processTask(s.nextLine(), idx);
+                Task task = PARSER.processTask(s.nextLine(), idx);
                 tasks.add(task);
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException fnfe) {
             try {
                 f.getParentFile().mkdirs();
                 f.createNewFile();
             } catch (IOException ioe) {
                 throw new DukeException("Fake duke.duke can't create the file.");
             }
-            throw new DukeException(String.format("Fake duke.duke can't find the file. I will create the file (%s) :D", this.filePath));
+            throw new DukeException(String.format("Fake duke.duke can't find the file. I will create the file (%s) :D"
+                    , this.FILEPATH));
         }
         return tasks;
     }
 
     public void saveTasks(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(this.filePath);
+            FileWriter fw = new FileWriter(this.FILEPATH);
             for (int i = 0; i < tasks.getSize(); i++) {
                 fw.write(tasks.getTask(i).getRawTask());
             }
