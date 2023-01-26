@@ -19,6 +19,11 @@ public abstract class Task {
         this.completed = completed;
     }
 
+    public String toSaveFormat() {
+        String status = completed ? "1" : "0";
+        return status + "||" + description;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
