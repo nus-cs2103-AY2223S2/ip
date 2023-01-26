@@ -1,6 +1,6 @@
 todo brush teeth
-deadline return book /by Sunday
-event project meeting /from Mon 2pm /to 4pm
+deadline return book /by 2019-02-15 22:45
+event project meeting /from 2000-06-20 08:00 /to 2020-06-20 08:00
 mark 1
 mark 3
 list
