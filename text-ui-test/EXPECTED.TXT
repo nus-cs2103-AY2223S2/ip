@@ -24,13 +24,13 @@ Nice! I've marked this task as done:
 [T][X] borrow book
 Nice! I've marked this task as done:
 [D][X] return book (by: Oct 15 2019)
-Given task number is invalid!
+Task does not exist!
 OK, I've marked this task as not done yet:
 [T][ ] borrow book
-Given task number is invalid!
+Task does not exist!
 Noted. I've removed this task:
 [E][ ] project meeting (from: Mon 2pm to: 4pm)
 Now you have 2 tasks in the list.
-Given task number is invalid!
+Task does not exist!
 Invalid command entered!
 Bye. Hope to see you again soon!
