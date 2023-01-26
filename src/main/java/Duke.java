@@ -72,6 +72,11 @@ public class Duke {
                         System.out.println("added:\n" + newEvent.toString());
                         lst.add(newEvent);
                         break;
+                    case "delete":
+                        int taskCodeDelete = Integer.parseInt(parsedInput[1]);
+                        Task deletedTask = lst.remove(taskCodeDelete - 1);
+                        System.out.println("I have deleted the following task: \n" + deletedTask.toString());
+                        break;
                     default:
                         throw new IllegalCommandException("You did not key in a valid command");
                 }
