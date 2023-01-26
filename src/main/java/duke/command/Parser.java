@@ -3,6 +3,10 @@ package duke.command;
 import duke.exception.*;
 import duke.tasklist.*;
 
+/**
+ * Represents an input Parser.
+ * A Parser decodes User input and allows Duke to process these inputs.
+ */
 public class Parser {
     private TaskList tasks;
 
@@ -10,6 +14,13 @@ public class Parser {
         this.tasks = arrList;
     }
 
+    /**
+     * Returns a boolean value after parsing User input, to indicate whether
+     * the program should keep running.
+     *
+     * @param command String representation of User input.
+     * @return boolean that determines whether Duke continues to run.
+     */
     public boolean parse(String command) {
         Task task = null;
         int indx = -1;
@@ -77,6 +88,12 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Ensures the validity of User's input command.
+     *
+     * @param cmd String representation of the command.
+     * @throws MissingDescriptionException If User input lacks a body.
+     */
     public static void validateCmd(String cmd) throws MissingDescriptionException {
         if (cmd.length() == 0) {
             throw new MissingDescriptionException("You need to " +
@@ -85,6 +102,12 @@ public class Parser {
 
     }
 
+    /**
+     * Ensures that of User inputs date as necessary for Events and Deadlines
+     *
+     * @param cmd String array representation of the command.
+     * @throws InvalidCmdException If User fails to provide a Date.
+     */
     public static void validateDate(String[] cmd) throws InvalidCmdException {
         if (cmd.length == 1) {
             throw new InvalidCmdException("Please specify date.");
