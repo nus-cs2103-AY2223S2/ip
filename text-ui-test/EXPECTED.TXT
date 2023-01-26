@@ -31,11 +31,11 @@ T | O | borrow book
 Now you have 7 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Nice! Duke has marked this task as done:
+Nice! duke.Duke has marked this task as done:
 [X] buybook
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Nice! Duke has marked this task as done:
+Nice! duke.Duke has marked this task as done:
 [X] return book
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1.T | X | buybook
@@ -66,5 +66,5 @@ Now you have 7 tasks in the list.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 OOOPS! The task number is not available. Try another number!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Duke says bye bye ~~
+duke.Duke says bye bye ~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * A class that represents a todo task
  */

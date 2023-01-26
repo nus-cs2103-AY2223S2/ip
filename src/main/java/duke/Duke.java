@@ -1,6 +1,9 @@
+package duke;
+
+import duke.exceptions.InvalidCommandException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 
 public class Duke {

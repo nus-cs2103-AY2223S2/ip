@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exceptions.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -40,17 +44,17 @@ public class Parser {
         }
     }
 
-    public static int getTaskNumber(String str, int from) throws MissingArguments, InvalidTaskNumber {
+    public static int getTaskNumber(String str, int from) throws MissingArgumentsException, InvalidTaskNumberException {
         int numOfTask;
         try {
             numOfTask = Integer.parseInt(str.substring(from));
         } catch (NullPointerException | IndexOutOfBoundsException err) {
-            throw new MissingArguments();
+            throw new MissingArgumentsException();
         }
 
         // Handle when the index is out of bound -> create a separate function
         if (numOfTask <= 0 || numOfTask > TaskList.getList().size()) {
-            throw new InvalidTaskNumber();
+            throw new InvalidTaskNumberException();
         }
         return numOfTask;
     }
@@ -60,7 +64,7 @@ public class Parser {
 
 
 
-    public static String[] getDuration(String line) throws MissingArguments, MissingTimeException, InvalidSyntaxException {
+    public static String[] getDuration(String line) throws MissingArgumentsException, MissingTimeException, InvalidSyntaxException {
         try {
             String[] arr = line.split("/");
             if (!arr[0].startsWith("from ")) {
@@ -76,12 +80,12 @@ public class Parser {
             }
             return arr;
         } catch (IndexOutOfBoundsException err) {
-            throw new MissingArguments();
+            throw new MissingArgumentsException();
         }
     }
 
 
-    public static String getName(String str, int from) throws MissingNameException, MissingArguments {
+    public static String getName(String str, int from) throws MissingNameException, MissingArgumentsException {
         try {
             String name = str.substring(from);
 
@@ -91,7 +95,7 @@ public class Parser {
 
             return name;
         }  catch (IndexOutOfBoundsException err) {
-            throw new MissingArguments();
+            throw new MissingArgumentsException();
         }
     }
 

@@ -1,14 +1,18 @@
+package duke;
+
+import duke.exceptions.InvalidDateFormatException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * A class that represents a Deadline with deadline time
+ * A class that represents a duke.Deadline with deadline time
  */
 public class Deadline extends Task {
     private LocalDate deadline;
 
     /**
-     * Initialize an Event object with the given values.
+     * Initialize an duke.Event object with the given values.
      *
      * @param name The name of the deadline
      * @param deadline The deadline time of the task
@@ -34,7 +38,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Returns the string representation of the Deadline task, including
+     * Returns the string representation of the duke.Deadline task, including
      * whether the task is done or not.
      *
      * @return The string representation of the task.

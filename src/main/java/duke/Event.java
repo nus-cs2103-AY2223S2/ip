@@ -1,3 +1,5 @@
+package duke;
+
 /**
 * A class that represents an event with starting and ending time
 */
@@ -6,7 +8,7 @@ public class Event extends Task {
     private String end;
 
     /**
-    * Initialize an Event object with the given values.
+    * Initialize an duke.Event object with the given values.
     *
     * @param name The name of the event
     * @param start The starting time of the event
@@ -26,7 +28,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of the Event task, including
+     * Returns the string representation of the duke.Event task, including
      * whether the task is done or not.
      *
      * @return The string representation of the task.

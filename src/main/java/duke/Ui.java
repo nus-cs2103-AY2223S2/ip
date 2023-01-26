@@ -1,3 +1,7 @@
+package duke;
+
+import duke.exceptions.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,8 +14,8 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String greeting = "Hello from\n" + logo;
-    private static final String list = "Duke presents tasks in your list: ";
-    private static final String bye = "Duke says bye bye ~~";
+    private static final String list = "duke.Duke presents tasks in your list: ";
+    private static final String bye = "duke.Duke says bye bye ~~";
 
     private BufferedReader bf;
     public Ui() {
@@ -44,7 +48,7 @@ public class Ui {
     public void listCommand() {
         ArrayList<Task> arr = TaskList.getList();
         if (arr.size() == 0) {
-            System.out.println("Duke sees no tasks in your list");
+            System.out.println("duke.Duke sees no tasks in your list");
         }
         int cnt = 1;
         while (cnt <= arr.size()) {
@@ -64,7 +68,7 @@ public class Ui {
             System.out.println(toDo);
             System.out.println("Now you have " + TaskList.getList().size() + " tasks in the list.");
             lineUI();
-        } catch (MissingArguments | MissingNameException err) {
+        } catch (MissingArgumentsException | MissingNameException err) {
             System.out.println(err.getMessage());
         }
     }
@@ -75,7 +79,7 @@ public class Ui {
             try {
                 foo = Parser.separate(str.substring(6));
             } catch (IndexOutOfBoundsException err) {
-                throw new MissingArguments();
+                throw new MissingArgumentsException();
             }
             String[] bar = Parser.getDuration(foo[1]);
             Task toAdd = new Event(foo[0], bar[0], bar[1]);
@@ -86,7 +90,7 @@ public class Ui {
             System.out.println(toAdd);
             System.out.println("Now you have " + TaskList.getList().size() + " tasks in the list.");
             lineUI();
-        } catch (MissingArguments | MissingNameException | MissingTimeException | InvalidSyntaxException err) {
+        } catch (MissingArgumentsException | MissingNameException | MissingTimeException | InvalidSyntaxException err) {
             System.out.println(err.getMessage());
         }
 
@@ -98,7 +102,7 @@ public class Ui {
             try {
                 foo = Parser.separate(str.substring(9));
             } catch (IndexOutOfBoundsException err) {
-                throw new MissingArguments();
+                throw new MissingArgumentsException();
             }
 
             Task toAdd = new Deadline(foo[0], Parser.getDeadline(foo[1]));
@@ -111,7 +115,8 @@ public class Ui {
             lineUI();
 
 
-        } catch (MissingArguments | MissingTimeException | MissingNameException | InvalidSyntaxException | InvalidDateFormatException err) {
+        } catch (MissingArgumentsException | MissingTimeException | MissingNameException | InvalidSyntaxException |
+                 InvalidDateFormatException err) {
             System.out.println(err.getMessage());
         }
     }
@@ -127,7 +132,7 @@ public class Ui {
             System.out.println("Now you have " + TaskList.getList().size() + " tasks in the list.");
             lineUI();
 
-        } catch (MissingArguments | InvalidTaskNumber err) {
+        } catch (MissingArgumentsException | InvalidTaskNumberException err) {
             System.out.println(err.getMessage());
         }
     }
@@ -138,10 +143,10 @@ public class Ui {
             String name = TaskList.markDone(index);
             storage.load();
             lineUI();
-            System.out.println("Nice! Duke has marked this task as done:");
+            System.out.println("Nice! duke.Duke has marked this task as done:");
             System.out.println("[X] " + name);
             lineUI();
-        } catch (MissingArguments | InvalidTaskNumber err) {
+        } catch (MissingArgumentsException | InvalidTaskNumberException err) {
             System.out.println(err.getMessage());
         }
     }
@@ -152,10 +157,10 @@ public class Ui {
             String name = TaskList.markUndone(index);
             storage.load();
             lineUI();
-            System.out.println("OK, Duke has marked this task as not done yet:");
+            System.out.println("OK, duke.Duke has marked this task as not done yet:");
             System.out.println("[O] " + name);
             lineUI();
-        } catch (MissingArguments | InvalidTaskNumber err) {
+        } catch (MissingArgumentsException | InvalidTaskNumberException err) {
             System.out.println(err.getMessage());
         }
     }
