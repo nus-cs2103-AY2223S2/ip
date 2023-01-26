@@ -1,8 +1,8 @@
-package task_types;
+package tasklist.task_types;
 
 import java.time.format.DateTimeParseException;
 
-import utility.Date;
+import utility.date.Date;
 
 /**
  * Represents a <code>task</code> object that contains a string holding the

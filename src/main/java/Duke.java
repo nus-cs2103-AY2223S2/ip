@@ -6,11 +6,11 @@ import java.util.Scanner;
 import java.util.Set;
 
 import duke_exception.DukeException;
-import task_types.Deadline;
-import task_types.Event;
-import task_types.Task;
-import task_types.ToDo;
-import utility.TextFileParser;
+import tasklist.task_types.Deadline;
+import tasklist.task_types.Event;
+import tasklist.task_types.Task;
+import tasklist.task_types.ToDo;
+import utility.storage.Storage;
 
 /**
  * <h1>Duke Chatbot</h1>
@@ -122,7 +122,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
-        ArrayList<Task> list = TextFileParser.readData();
+        ArrayList<Task> list = Storage.readData();
         boolean loop = true;
 
         String bracket = "\t_______________________________________________________";
@@ -135,7 +135,7 @@ public class Duke {
         String welcomeMsg = ("Hello from\n" + logo + "\nWhat can I do for you?");
         System.out.println(welcomeMsg);
 
-        TextFileParser.readData();
+        Storage.readData();
 
         while (loop) {
             try {
@@ -221,7 +221,7 @@ public class Duke {
                         break;
                     case "bye":
                         System.out.println("\tBye! See you soon!");
-                        TextFileParser.writeData(list);
+                        Storage.writeData(list);
                         loop = false;
                         break;
                 }

@@ -1,4 +1,4 @@
-package utility;
+package utility.storage;
 
 import java.io.File;
 import java.io.IOException;

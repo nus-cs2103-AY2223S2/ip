@@ -1,4 +1,4 @@
-package utility;
+package utility.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import task_types.Deadline;
-import task_types.Event;
-import task_types.Task;
-import task_types.ToDo;
+import tasklist.task_types.Deadline;
+import tasklist.task_types.Event;
+import tasklist.task_types.Task;
+import tasklist.task_types.ToDo;
 
-public class TextFileParser {
-    private static String folderPath = "data";
-    private static String filePath = "data/data.txt";
+public class Storage {
+    private static final String folderPath = "src/main/java/utility/storage";
+    private static final String filePath = "src/main/java/utility/storage/data.txt";
 
     public static ArrayList<Task> readData() {
         ArrayList<Task> list = new ArrayList<>();
