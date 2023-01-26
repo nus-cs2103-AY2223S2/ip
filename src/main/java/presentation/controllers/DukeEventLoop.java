@@ -11,8 +11,6 @@ import presentation.ui.SystemErr;
 import presentation.ui.SystemIn;
 import presentation.ui.SystemOut;
 
-import java.util.Scanner;
-
 /**
  * The event loop for managing Duke.
  */

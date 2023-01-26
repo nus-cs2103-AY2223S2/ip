@@ -1,10 +1,7 @@
 package domain.entities.taskmanager;
 
 import core.exceptions.InvalidArgumentException;
-import core.singletons.Singletons;
-import core.utils.TokenUtilities;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**

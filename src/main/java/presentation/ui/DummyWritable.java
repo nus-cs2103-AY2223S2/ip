@@ -1,6 +1,5 @@
 package presentation.ui;
 
-import core.exceptions.WriteException;
 import domain.entities.core.Writable;
 
 /**

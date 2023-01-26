@@ -1,6 +1,5 @@
 package presentation.ui;
 
-import core.exceptions.DisposableException;
 import domain.entities.core.Disposable;
 import domain.entities.core.StringReadable;
 
