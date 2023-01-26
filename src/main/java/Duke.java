@@ -21,12 +21,14 @@ import utility.TextFileParser;
 
 public class Duke {
 
-    /**
-     * Commands that do not require any parameter.
-     */
-    private static Set<String> commandMapWithoutParam = new HashSet<>() {
+    private static Set<String> commandMap = new HashSet<>() {
         {
             add("list");
+            add("mark");
+            add("unmark");
+            add("todo");
+            add("deadline");
+            add("event");
             add("bye");
         }
     };
@@ -82,8 +84,8 @@ public class Duke {
         }
 
         // Invalid command
-        if (!commandMap.contains(input[0]) || input.length > 2
-                && (input[0].equals("mark") || input[0].equals("unmark") || input[0].equals("delete"))) {
+        if (!commandMap.contains(input[0])
+                || input.length > 2 && (input[0].equals("mark") || input[0].equals("unmark"))) {
             throw new DukeException(1);
         }
 
@@ -93,7 +95,7 @@ public class Duke {
         }
 
         // Non-numerical parameters
-        if (input[0].equals("mark") || input[0].equals("unmark") || input[0].equals("delete")) {
+        if (input[0].equals("mark") || input[0].equals("unmark")) {
             if (!isNumeric(input[1]))
                 throw new DukeException(3);
         }
@@ -197,32 +199,27 @@ public class Duke {
                                 toIndex = i;
                             }
                         }
-                        String eName = String.join(" ", Arrays.copyOfRange(input, 1, fromIndex));
-                        String eFrom = String.join(" ", Arrays.copyOfRange(input, fromIndex + 1, toIndex));
-                        String eTo = String.join(" ", Arrays.copyOfRange(input, toIndex + 1, input.length));
-                        Event eventObj = new Event(eName, eFrom, eTo);
-                        list.add(eventObj);
-                        System.out.println("\tGot it. I've added this task: ");
-                        System.out.println("\t\t " + eventObj.toString());
-                        System.out.println(String.format("Now you have %d tasks in the list", list.size()));
-                        break;
-                    case "delete":
-                        int deleteIndex = Integer.parseInt(input[1]) - 1;
-                        Task deletedTask = list.get(deleteIndex);
-                        list.remove(deleteIndex);
-                        System.out.println("Following Task has been deleted:");
-                        System.out.println("\t " + deletedTask.toString());
-                        System.out.println(String.format("Now you have %d tasks in the list", list.size()));
-                        break;
-                    case "bye":
-                        System.out.println("\tBye! See you soon!");
-                        TextFileParser.writeData(list);
-                        loop = false;
-                        break;
-                }
-                System.out.println(bracket);
-            } catch (DukeException e) {
-                System.out.println(e);
+                    }
+                    String eName = String.join(" ", Arrays.copyOfRange(input, 1, fromIndex));
+                    String eFrom = String.join(" ", Arrays.copyOfRange(input, fromIndex + 1, toIndex));
+                    String eTo = String.join(" ", Arrays.copyOfRange(input, toIndex + 1, input.length));
+                    Event eventObj = new Event(eName, eFrom, eTo);
+                    lists.add(eventObj);
+                    System.out.println("\tGot it. I've added this task: ");
+                    System.out.println("\t\t "+ eventObj.toString());
+                    System.out.println(String.format("Now you have %d tasks in the list", lists.size()));
+                    break;
+                case "bye":
+                    System.out.println("\tBye! See you soon!");
+                    loop = false;
+                    break;
+                default:
+                    String combString = String.join(" ", input);
+                    ToDo tdObj = new ToDo(combString);
+                    lists.add(tdObj);
+                    System.out.println("\tGot it. I've added this task: ");
+                    System.out.println("\t\t "+ tdObj.toString());
+                    System.out.println(String.format("Now you have %d tasks in the list", lists.size()));
             }
 
         }
