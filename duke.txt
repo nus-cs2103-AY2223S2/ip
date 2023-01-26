@@ -1,3 +1,0 @@
-todo hello
-deadline CS2109S assignment /by 2023-01-27
-event NOC Interview /from 2023-01-27 /to 2023-01-27
