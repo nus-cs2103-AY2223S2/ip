@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 /**
@@ -141,9 +142,13 @@ public class Duke {
      *
      * @param   taskDesc    Description of task.
      */
-    private static void addDeadline(String taskDesc) throws DukeException {
-        Deadline deadline = new Deadline(taskDesc);
-        addTask(deadline);
+    private static void addDeadline(String taskDesc) {
+        try {
+            Deadline deadline = new Deadline(taskDesc);
+            addTask(deadline);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
