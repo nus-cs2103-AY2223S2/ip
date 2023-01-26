@@ -76,6 +76,10 @@ public class Parser {
         if (!Objects.equals(command, null)) {
             return command;
         }
+        command = this.isFind(str);
+        if (!Objects.equals(command, null)) {
+            return command;
+        }
         throw new DukeException("I'm sorry, but I don't know what that means :-(");
     }
 
@@ -84,11 +88,11 @@ public class Parser {
         if (s.length() >= 4 && Objects.equals(s.substring(0, 4), "mark")) {
             if (s.length() < 5) {
                 throw new DukeException("Please provide a index to mark.");
-            }else if (!Objects.equals(s.charAt(4), ' ')) {
+            } else if (!Objects.equals(s.charAt(4), ' ')) {
                 throw new DukeException("Please provide a spacing after the mark keyword.");
-            }else if (s.length() < 6) {
+            } else if (s.length() < 6) {
                 throw new DukeException("Please provide the index to mark.");
-            }else if (!s.substring(5, s.length()).matches("[0-9]+")) {
+            } else if (!s.substring(5, s.length()).matches("[0-9]+")) {
                 throw new DukeException("Please provide only positive integers for index to mark.");
             } else {
                 return new MarkTaskCommand(Integer.parseInt(s.substring(5, s.length())));
@@ -102,11 +106,11 @@ public class Parser {
         if (s.length() >= 6 && Objects.equals(s.substring(0, 6), "unmark")) {
             if (s.length() < 7) {
                 throw new DukeException("Please provide a index to unmark.");
-            }else if (!Objects.equals(s.charAt(6), ' ')) {
+            } else if (!Objects.equals(s.charAt(6), ' ')) {
                 throw new DukeException("Please provide a spacing after the unmark keyword");
-            }else if (s.length() < 8) {
+            } else if (s.length() < 8) {
                 throw new DukeException("Please provide the index to unmark.");
-            }else if (!s.substring(7, s.length()).matches("[0-9]+")) {
+            } else if (!s.substring(7, s.length()).matches("[0-9]+")) {
                 throw new DukeException("Please provide only positive integers for index to unmark.");
             } else {
                 return new UnmarkTaskCommand(Integer.parseInt(s.substring(7, s.length())));
@@ -120,9 +124,9 @@ public class Parser {
         if (s.length() >= 4 && Objects.equals(s.substring(0, 4), "todo")) {
             if (s.length() < 5) {
                 throw new DukeException("The description of a todo cannot be empty.");
-            }else if (!Objects.equals(s.charAt(4), ' ')) {
+            } else if (!Objects.equals(s.charAt(4), ' ')) {
                 throw new DukeException("Please provide a spacing after the todo keyword.");
-            }else if (s.length() < 6) {
+            } else if (s.length() < 6) {
                 throw new DukeException("The description of a todo cannot be empty.");
             } else {
                 return new AddTodoCommand(s.substring(5, s.length()));
@@ -136,9 +140,9 @@ public class Parser {
         if (s.length() >= 8 && Objects.equals(s.substring(0, 8), "deadline")) {
             if (s.length() < 9) {
                 throw new DukeException("The description of a deadline cannot be empty.");
-            }else if (!Objects.equals(s.charAt(8), ' ')) {
+            } else if (!Objects.equals(s.charAt(8), ' ')) {
                 throw new DukeException("Please provide a spacing after the deadline keyword");
-            }else if (s.length() < 10) {
+            } else if (s.length() < 10) {
                 throw new DukeException("The description of a deadline cannot be empty.");
             } else {
                 s = s.substring(9, s.length());
@@ -156,9 +160,9 @@ public class Parser {
         if (s.length() >= 5 && Objects.equals(s.substring(0, 5), "event")) {
             if (s.length() < 6) {
                 throw new DukeException("The description of a event cannot be empty.");
-            }else if (!Objects.equals(s.charAt(5), ' ')) {
+            } else if (!Objects.equals(s.charAt(5), ' ')) {
                 throw new DukeException("Please provide a spacing after the event keyword");
-            }else if (s.length() < 7) {
+            } else if (s.length() < 7) {
                 throw new DukeException("The description of a event cannot be empty.");
             } else {
                 s = s.substring(6, s.length());
@@ -177,14 +181,29 @@ public class Parser {
         if (s.length() >= 6 && Objects.equals(s.substring(0, 6), "delete")) {
             if (s.length() < 7) {
                 throw new DukeException("Please provide a index to delete.");
-            }else if (!Objects.equals(s.charAt(6), ' ')) {
+            } else if (!Objects.equals(s.charAt(6), ' ')) {
                 throw new DukeException("Please provide a spacing after the delete keyword.");
-            }else if (s.length() < 8) {
+            } else if (s.length() < 8) {
                 throw new DukeException("Please provide the index to delete.");
-            }else if (!s.substring(7, s.length()).matches("[0-9]+")) {
+            } else if (!s.substring(7, s.length()).matches("[0-9]+")) {
                 throw new DukeException("Please provide only positive integers for index to delete.");
             } else {
                 return new DeleteTaskCommand(Integer.parseInt(s.substring(7, s.length())));
+            }
+        }
+        return null;
+    }
+
+    private Command isFind(String s) throws DukeException {
+        if (s.length() >= 4 && Objects.equals(s.substring(0, 4), "find")) {
+            if (s.length() < 5) {
+                throw new DukeException("Please provide a keyword to find.");
+            } else if (!Objects.equals(s.charAt(4), ' ')) {
+                throw new DukeException("Please provide a spacing after the find keyword.");
+            } else if (s.length() < 6) {
+                throw new DukeException("Please provide the keyword to find.");
+            } else {
+                return new FindTaskCommand(s.substring(5, s.length()));
             }
         }
         return null;

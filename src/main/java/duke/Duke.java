@@ -14,7 +14,6 @@ public class Duke {
     public Duke() {}
 
     public void run() {
-        boolean end = false;
         Scanner sc = new Scanner(System.in);
         Ui ui = new Ui();
         TaskList tl = new TaskList();
@@ -25,6 +24,7 @@ public class Duke {
         while (true){
             try {
                 String str = sc.nextLine();
+                System.out.println(str);
                 Command command = parser.parse(str);
                 if (Objects.equals(command, null)) {
                     break;
