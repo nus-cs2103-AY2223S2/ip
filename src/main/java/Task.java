@@ -1,6 +1,7 @@
 import javax.print.DocFlavor;
+import java.io.Serializable;
 
-public class Task {
+public class Task implements Serializable {
     private String name;
     private boolean status;
 
