@@ -28,7 +28,6 @@ public class Duke {
         System.out.println("\nHello, I'm Duke");
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
-        String bye = "bye";
         String s = "";
 
         String newLine = sc.nextLine();
@@ -36,7 +35,7 @@ public class Duke {
         s = arr[0];
 
         int i = 0;
-        while (!bye.equals(s)) {
+        while (!s.equals("bye")) {
             String remaining = "";
             try {
             action myAction = action.valueOf(s);
