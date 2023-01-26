@@ -26,6 +26,9 @@ public class Duke {
 
                     case "list":
                         System.out.println("Here are the tasks in your list:");
+                        if (todo.size() == 0) {
+                            System.out.println("OOPS!!! Your list is empty.");
+                        }
                         for (int i = 0; i < todo.size(); i++) {
                             System.out.print(i + 1 + ".");
                             System.out.println(todo.get(i).toString());
