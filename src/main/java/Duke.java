@@ -1,19 +1,13 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println(logo);
 
-        String introMsg = "Hello! I'm Duke.\n"
-                + "What can I do for you today?";
+        String introMsg = "Hello! I'm Duke.\n" + "What can I do for you today?";
         DukeCommands.printMsg(introMsg);
 
         Scanner scanner = new Scanner(System.in);
@@ -74,16 +68,13 @@ public class Duke {
             } catch (DukeException e) {
                 DukeCommands.printError(e);
             } catch (Exception e) {
-                DukeCommands.printMsg("Unknown command/error not caught!\n" +
-                        "Please try again!");
+                DukeCommands.printMsg("Unknown command/error not caught!\n" + "Please try again!");
             }
         }
 
         DukeCommands.updateData(tasks);
 
-        String exitMsg = "Thank you for coming!\n"
-                + "Hope to see you again soon!\n"
-                + "~~Bye";
+        String exitMsg = "Thank you for coming!\n" + "Hope to see you again soon!\n" + "~~Bye";
         DukeCommands.printMsg(exitMsg);
     }
 }

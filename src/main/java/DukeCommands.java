@@ -8,8 +8,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class DukeCommands {
-    private static final String SPACER = "____________________"
-            + "______________________";
+    private static final String SPACER = "____________________" + "______________________";
 
     private static final String DATA_PATH = "data.txt";
 
@@ -38,8 +37,7 @@ public class DukeCommands {
         System.out.println(SPACER);
     }
 
-    public static int isValidIndex(String indexStr, ArrayList<Task> tasks)
-            throws DukeException {
+    public static int isValidIndex(String indexStr, ArrayList<Task> tasks) throws DukeException {
         Pattern p = Pattern.compile("^[0-9]+$");
         boolean isNumber = p.matcher(indexStr).matches();
 
@@ -55,8 +53,7 @@ public class DukeCommands {
         return index;
     }
 
-    public static void execMarkTask(String indexStr, ArrayList<Task> tasks)
-            throws DukeException {
+    public static void execMarkTask(String indexStr, ArrayList<Task> tasks) throws DukeException {
         int index = isValidIndex(indexStr, tasks);
 
         tasks.get(index).markTask();
@@ -69,8 +66,7 @@ public class DukeCommands {
         System.out.println(SPACER);
     }
 
-    public static void execUnmarkTask(String indexStr, ArrayList<Task> tasks)
-            throws DukeException {
+    public static void execUnmarkTask(String indexStr, ArrayList<Task> tasks) throws DukeException {
         int index = isValidIndex(indexStr, tasks);
 
         tasks.get(index).unmarkTask();
@@ -94,15 +90,13 @@ public class DukeCommands {
         System.out.println(SPACER);
     }
 
-    public static void execTodo(String description, ArrayList<Task> tasks)
-            throws DukeException {
+    public static void execTodo(String description, ArrayList<Task> tasks) throws DukeException {
         Task todo = new Todo(description);
         tasks.add(todo);
         printTask(todo, tasks.size());
     }
 
-    public static void execDeadline(String data, ArrayList<Task> tasks)
-            throws DukeException {
+    public static void execDeadline(String data, ArrayList<Task> tasks) throws DukeException {
         String[] splitData = data.split(" /by ", 2);
         if (splitData.length < 2) {
             throw new DukeException("Deadline command format error. Missing /by");
@@ -113,8 +107,7 @@ public class DukeCommands {
         printTask(deadline, tasks.size());
     }
 
-    public static void execEvent(String data, ArrayList<Task> tasks)
-            throws DukeException {
+    public static void execEvent(String data, ArrayList<Task> tasks) throws DukeException {
         String[] splitData1 = data.split(" /from ", 2);
         if (splitData1.length < 2) {
             throw new DukeException("Event command format error. Missing /from");
@@ -130,8 +123,7 @@ public class DukeCommands {
         printTask(event, tasks.size());
     }
 
-    public static void execDeleteTask(String indexStr, ArrayList<Task> tasks)
-            throws DukeException {
+    public static void execDeleteTask(String indexStr, ArrayList<Task> tasks) throws DukeException {
         int index = isValidIndex(indexStr, tasks);
 
         Task task = tasks.get(index);
