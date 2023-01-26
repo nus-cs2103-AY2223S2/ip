@@ -1,30 +1,31 @@
 package duke.task;
 
 public class Task {
+
     String name;
-    boolean done;
+    boolean isDone;
 
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     public Task(String name, boolean done) {
         this.name = name;
-        this.done = done;
+        this.isDone = done;
     }
 
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void unmark() {
-        this.done = false;
+        this.isDone = false;
     }
 
     @Override
     public String toString() {
-        if (done) {
+        if (isDone) {
             return "1" + " | " + this.name;
         } else {
             return "0" + " | " + this.name;
@@ -44,4 +45,5 @@ public class Task {
         }
         return false;
     }
+
 }

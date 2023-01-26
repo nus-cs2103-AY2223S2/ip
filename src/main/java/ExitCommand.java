@@ -1,12 +1,14 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
+import duke.command.Command;
+
 import java.io.IOException;
 
 public class ExitCommand extends Command {
+
     public boolean isExit() {
         return true;
     }
@@ -20,4 +22,5 @@ public class ExitCommand extends Command {
             ui.exitResponse();
         }
     }
+
 }

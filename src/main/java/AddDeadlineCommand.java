@@ -7,7 +7,8 @@ import duke.command.Command;
 
 import java.time.format.DateTimeParseException;
 
-public class AddDeadlineCommand extends Command{
+public class AddDeadlineCommand extends Command {
+
     private String name;
     private String by;
 

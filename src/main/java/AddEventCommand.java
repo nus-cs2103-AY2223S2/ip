@@ -8,6 +8,7 @@ import duke.command.Command;
 import java.time.format.DateTimeParseException;
 
 public class AddEventCommand extends Command {
+
     private String name;
     private String from;
     private String to;
@@ -33,4 +34,5 @@ public class AddEventCommand extends Command {
             ui.incompleteCommandErrorMessage();
         }
     }
+
 }

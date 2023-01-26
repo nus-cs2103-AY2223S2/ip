@@ -6,6 +6,7 @@ import duke.Ui;
 import duke.command.Command;
 
 public class MarkCommand extends Command {
+
     private int num;
 
     public MarkCommand(int num) {
@@ -23,4 +24,5 @@ public class MarkCommand extends Command {
             ui.taskNotChosenErrorMessage();
         }
     }
+
 }

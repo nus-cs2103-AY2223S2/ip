@@ -6,6 +6,7 @@ import duke.Ui;
 import duke.command.Command;
 
 public class DeleteCommand extends Command {
+
     private int num;
 
     public DeleteCommand(int num) {
@@ -23,4 +24,5 @@ public class DeleteCommand extends Command {
             ui.taskNotChosenErrorMessage();
         }
     }
+
 }
