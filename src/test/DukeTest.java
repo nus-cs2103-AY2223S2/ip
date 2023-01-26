@@ -1,11 +1,16 @@
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
 
 class DukeTest {
 
     @Test
+    void simpleAssertion() {
+        Assertions.assertEquals(1, 1);
+    }
+
+    @Test
     void main() {
+
     }
 
     @Test
