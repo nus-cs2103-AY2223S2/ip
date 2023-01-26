@@ -27,6 +27,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E][" +this.getDone()+ "] " +this.content+ "(from:" +this.from+ " to:" +this.to+ ")";
+        return "[E][" + this.getDone() + "] " + this.content + "(from:" + this.from + " to:" + this.to + ")";
     }
 }
