@@ -1,6 +1,8 @@
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class Tasks implements Serializable {
+    protected LocalDateTime time = null;
     private String content;
     private Boolean is_Done;
     protected char type;

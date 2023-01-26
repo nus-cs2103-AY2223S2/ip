@@ -51,7 +51,6 @@ public class User {
             i++;
         }
     }
-
     public int getTaskCount() {
         return taskCount;
     }
