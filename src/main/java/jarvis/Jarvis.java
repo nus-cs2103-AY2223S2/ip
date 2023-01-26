@@ -8,11 +8,15 @@ import jarvis.parser.Parser;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Jarvis class to run the program.
  */
-public class Jarvis {
+public class Jarvis extends Application {
     private static final String BOT_NAME = Jarvis.class.getSimpleName();
 
     private final Storage storage;
@@ -26,6 +30,15 @@ public class Jarvis {
         this.storage = new Storage();
         this.ui = new Ui(BOT_NAME);
         this.taskList = new TaskList(storage.readTasks());
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Label label = new Label("Hello world");
+        Scene scene = new Scene(label);
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     /**
