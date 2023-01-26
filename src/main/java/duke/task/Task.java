@@ -40,6 +40,17 @@ public abstract class Task {
     }
 
     /**
+     * Checks if description contains s.
+     * @param s The String to check for.
+     * @return True if description contains s. Else False.
+     */
+    public boolean contain(String s) {
+        int index = description.indexOf(s);
+
+        return index != - 1;
+    }
+
+    /**
      * Returns the Task in String form.
      * @return The Task in String form.
      */
@@ -56,4 +67,6 @@ public abstract class Task {
     private String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
+
+
 }

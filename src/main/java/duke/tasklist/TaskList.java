@@ -14,13 +14,13 @@ import java.util.ArrayList;
  */
 public class TaskList {
     /** Reference to the ArrayList object that contains the Task objects. */
-    private final ArrayList<Task> list;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for empty TaskList object.
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -28,7 +28,7 @@ public class TaskList {
      * @param tasks The existing list of Task objects.
      */
     public TaskList(ArrayList<Task> tasks) {
-        this.list = tasks;
+        this.tasks = tasks;
     }
 
     /**
@@ -63,7 +63,7 @@ public class TaskList {
 
             // Creates a new Todos object and add it to the list.
             ToDos todo = new ToDos(s, false);
-            list.add(todo);
+            tasks.add(todo);
 
             // Add object into the output String.
             output += "\t   " + todo;
@@ -101,7 +101,7 @@ public class TaskList {
             } catch (DateTimeParseException dateTimeParseException) {
                 dueDate = new Deadlines(desc, false, by);
             } finally {
-                list.add(dueDate);
+                tasks.add(dueDate);
                 output += "\t   " + dueDate;
             }
             break;
@@ -145,13 +145,13 @@ public class TaskList {
             } catch (DateTimeParseException dateTimeParseException) {
                 event = new Events(desc, false, startTime, endTime);
             } finally {
-                list.add(event);
+                tasks.add(event);
                 output += "\t   " + event;
             }
             break;
         }
         }
-        return String.format("%s\n\t Now you have %d tasks in the list.", output, list.size());
+        return String.format("%s\n\t Now you have %d tasks in the list.", output, tasks.size());
     }
 
     /**
@@ -164,10 +164,10 @@ public class TaskList {
     public String mark(String s) throws DukeInvalidTaskNumberException, DukeTaskNumberOutOfRangeException {
         int num = TaskList.stringToInt(s);
 
-        if (num < -1 || num >= list.size()) {
+        if (num < -1 || num >= tasks.size()) {
             throw new DukeTaskNumberOutOfRangeException();
         }
-        return list.get(num - 1).mark();
+        return tasks.get(num - 1).mark();
     }
 
     /**
@@ -180,10 +180,10 @@ public class TaskList {
     public String unMark(String s) throws DukeInvalidTaskNumberException, DukeTaskNumberOutOfRangeException {
         int num = TaskList.stringToInt(s);
 
-        if (num < -1 || num >= list.size()) {
+        if (num < -1 || num >= tasks.size()) {
             throw new DukeTaskNumberOutOfRangeException();
         }
-        return list.get(num - 1).unMark();
+        return tasks.get(num - 1).unMark();
     }
 
     /**
@@ -197,11 +197,11 @@ public class TaskList {
         int num = TaskList.stringToInt(s);
 
         String output = "\t Noted. I've removed this task:\n";
-        if (num < -1 || num >= list.size()) {
+        if (num < -1 || num >= tasks.size()) {
             throw new DukeTaskNumberOutOfRangeException();
         }
-        Task removed = list.remove(num - 1);
-        return String.format("%s\t   %s\n\t Now you have %d tasks in the list.", output, removed, list.size());
+        Task removed = tasks.remove(num - 1);
+        return String.format("%s\t   %s\n\t Now you have %d tasks in the list.", output, removed, tasks.size());
     }
 
     /**
@@ -212,10 +212,29 @@ public class TaskList {
         StringBuilder output = new StringBuilder();
         output.append("\t Here are the tasks in your list:\n");
         int index = 1;
-        for (Task task : list) {
-            output.append(String.format("\t %d.%s\n",
-                    index,
-                    task.toString()));
+        for (Task task : tasks) {
+            output.append(String.format("\t %d.%s\n", index, task));
+            index++;
+        }
+
+        return output.substring(0, output.length() - 1);
+    }
+
+    /**
+     * Searches through list for Tasks whose description contains s.
+     * @param s The String to be searched for.
+     * @return Message to user informing about the tasks that match.
+     */
+    public String find(String s) {
+        StringBuilder output = new StringBuilder("\t Here are the matching tasks in your list.\n");
+        if (s.isBlank()) {
+            return output.substring(0, output.length() - 1);
+        }
+        int index = 1;
+        for (Task task : tasks) {
+            if (task.contain(s)) {
+                output.append(String.format("\t %d.%s\n", index, task));
+            }
             index++;
         }
 
@@ -227,7 +246,7 @@ public class TaskList {
      * @return The Arraylist containing the Task objects.
      */
     public ArrayList<Task> getTasks() {
-        return list;
+        return tasks;
     }
 
     /**

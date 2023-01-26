@@ -56,6 +56,8 @@ public class Parser {
                 return tasks.add(TaskType.Deadlines, info.strip());
             case "event":
                 return tasks.add(TaskType.Events, info.strip());
+            case "find":
+                return tasks.find(info.strip());
             case "bye":
                 return "\t Bye. Hope to see you again soon!";
             default:
