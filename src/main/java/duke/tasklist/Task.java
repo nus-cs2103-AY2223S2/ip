@@ -5,7 +5,7 @@ package duke.tasklist;
  * A Task is created by the user.
  */
 public class Task {
-    private String description;
+    protected String description;
     private boolean isDone;
 
     public Task(String description) {
