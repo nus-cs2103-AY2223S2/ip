@@ -22,28 +22,34 @@ public class Duke {
 
         while(ongoing) {
             String command = sc.nextLine();
-            if (command.equals("bye")) {
-                System.out.println("Bye! Hope to See You Again!");
-                break;
-            }
 
-            if (command.contains("mark") || command.contains("unmark")) {
-                if (command.substring(0, 4).equals("mark")) {
-                    taskList.markTask(Integer.parseInt(command.substring(5)));
-                    continue;
-                }
-
-                if (command.substring(0, 6).equals("unmark")) {
-                    taskList.unmarkTask(Integer.parseInt(command.substring(7)));
-                    continue;
-                }
-            }
-
-            if (command.equals("list")) {
-                taskList.printTasks();
-                continue;
-            }
             try {
+                if (command.equals("bye")) {
+                    System.out.println("Bye! Hope to See You Again!");
+                    break;
+                }
+
+                if (command.contains("delete") && command.substring(0,6).equals("delete")) {
+                    taskList.deleteTask(Integer.parseInt(command.substring(7)));
+                    continue;
+                }
+
+                if (command.contains("mark") || command.contains("unmark")) {
+                    if (command.substring(0, 4).equals("mark")) {
+                        taskList.markTask(Integer.parseInt(command.substring(5)));
+                        continue;
+                    }
+
+                    if (command.substring(0, 6).equals("unmark")) {
+                        taskList.unmarkTask(Integer.parseInt(command.substring(7)));
+                        continue;
+                    }
+                }
+
+                if (command.equals("list")) {
+                    taskList.printTasks();
+                    continue;
+                }
                 Task task = taskAssigner.assignTask(command);
                 taskList.add(task);
             } catch (DukeException e) {
