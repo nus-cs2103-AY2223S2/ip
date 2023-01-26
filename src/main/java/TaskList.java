@@ -4,16 +4,13 @@
  * @author JamesLiuZX
  * AY2223-S2 CS2103T
  */
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class DukeList {
+public class TaskList {
     //Variables are kept protected and accessed only through internal getter and setter methods.
     protected static final int size = 100;
     protected ArrayList<Task> records;
@@ -24,8 +21,8 @@ public class DukeList {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yy HH:mm");
 
     //Constructor
-    public DukeList() {
-        this.records = new ArrayList<>(size);
+    public TaskList() {
+        records = new ArrayList<>(size);
     }
 
     public void mark(int index) {
@@ -36,7 +33,7 @@ public class DukeList {
         Task task = this.records.get(index);
         task.markDone();
         dw.setDone(index);
-        System.out.println(Duke.format("Nice! I've marked this task as done:\n" + task.toString()));
+        System.out.println(Ui.format("Nice! I've marked this task as done:\n" + task.toString()));
         return;
     }
 
@@ -48,7 +45,7 @@ public class DukeList {
         Task task = this.records.get(index);
         task.markUndone();
         dw.setUndone(index);
-        System.out.println(Duke.format("OK, I've marked this task as not done yet:\n\n" + task.toString()));
+        System.out.println(Ui.format("OK, I've marked this task as not done yet:\n\n" + task.toString()));
         return;
     }
 
@@ -56,14 +53,14 @@ public class DukeList {
         Task t = new Task(record);
         this.records.add(t);
         dw.addToDb(t);
-        System.out.println(Duke.format("added: " + t));
+        System.out.println(Ui.format("added: " + t));
     }
 
     public void insertToDo(String name) {
         TaskToDo t = new TaskToDo(name);
         this.records.add(t);
         dw.addToDb(t);
-        System.out.println(Duke.format("Got it. I've added this task:\n" + t.toString()));
+        System.out.println(Ui.format("Got it. I've added this task:\n" + t.toString()));
     }
 
     public void insertToDo(String name, boolean isInitial) {
@@ -76,7 +73,7 @@ public class DukeList {
         TaskDeadline d = new TaskDeadline(time, dateTime);
         this.records.add(d);
         dw.addToDb(d);
-        System.out.println(Duke.format("Got it. I've added this task:\n" + d.toString()));
+        System.out.println(Ui.format("Got it. I've added this task:\n" + d.toString()));
     }
     public void insertDeadline(String name, String time, boolean isInitial) {
         LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
@@ -91,7 +88,7 @@ public class DukeList {
         TaskEvent e = new TaskEvent(name, start, end);
         this.records.add(e);
         dw.addToDb(e);
-        System.out.println(Duke.format("Got it. I've added this task:\n" + e.toString()));
+        System.out.println(Ui.format("Got it. I've added this task:\n" + e.toString()));
     }
     public void insertEvent(String name, String time, boolean isInitial) {
         String[] times = time.split("/", 2);
@@ -109,7 +106,7 @@ public class DukeList {
         Task t = this.records.get(index);
         this.records.remove(index);
         dw.removeFromDb(index);
-        System.out.println(Duke.format("Noted. I've removed this task:\n" + t.toString()));
+        System.out.println(Ui.format("Noted. I've removed this task:\n" + t.toString()));
     }
 
     @Override
@@ -121,7 +118,7 @@ public class DukeList {
         for (int i = 0; i < records.size(); i++) {
             output += String.format("%s. %s\n", i+1, this.records.get(i));
         }
-        return Duke.format(output);
+        return Ui.format(output);
     }
 
 
