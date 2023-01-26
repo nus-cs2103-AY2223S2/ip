@@ -117,6 +117,19 @@ public class Parser {
                                 + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                                 + ":\n"
                                 + tasks.listAllOnDate(date)));
+                break;
+            }
+
+            case FIND: {
+                if (echo.length() < 6) {
+                    throw new DukeException("Please supply a word to find!");
+                }
+                String toFind = echo.substring(5);
+                System.out.println(Span.format(
+                        tasks.find(toFind)
+                        )
+                );
+                break;
             }
         }
         if (task != null) {
