@@ -1,24 +1,33 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String start;
-    private String end;
+    private LocalDate start;
+    private LocalDate end;
 
     public Event(String name, String start, String end) {
         super(name);
-        this.start = start;
-        this.end = end;
+        this.start = LocalDate.parse(start.trim());
+        this.end = LocalDate.parse(end.trim());
     }
 
     @Override
     public String toSave() {
         if (super.isDone()) {
-            return "D | 1 | " + super.getName() + " | " + this.start + " | " + this.end + "\n";
+            return "D | 1 | " + super.getName() + " | "
+                    + this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " | "
+                    + this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
         } else {
-            return "D | 0 | " + super.getName() + " | " + this.start + " | " + this.end + "\n";
+            return "D | 0 | " + super.getName() + " | "
+                    + this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " | "
+                    + this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n";
         }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.start + " to: " + this.end + ")";
+        return "[E]" + super.toString() + " (from: "
+                + this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: "
+                + this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
