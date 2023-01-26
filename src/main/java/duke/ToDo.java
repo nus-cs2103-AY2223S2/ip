@@ -14,6 +14,12 @@ public class ToDo extends Task {
         super(name);
     }
 
+    /**
+     * Initialize an Todo object with the given values.
+     *
+     * @param name The name of the todo
+     * @return A todo instance
+     */
     public ToDo(String name, boolean isDone) {
         super(name, isDone);
     }

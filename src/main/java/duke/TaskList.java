@@ -3,40 +3,40 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    private static ArrayList<Task> arr;
+    private static ArrayList<Task> tasks;
 
     public TaskList(){
-        arr = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> arr){
-        this.arr = arr;
+    public TaskList(ArrayList<Task> tasks){
+        this.tasks = tasks;
     }
 
     public static ArrayList<Task> getList() {
-        return arr;
+        return tasks;
     }
 
     public static String markDone(int index) {
-        arr.get(index).markDone();
-        return arr.get(index).getTaskName();
+        tasks.get(index).markDone();
+        return tasks.get(index).getTaskName();
     }
 
     public static String markUndone(int index) {
-        arr.get(index).markUndone();
-        return arr.get(index).getTaskName();
+        tasks.get(index).markUndone();
+        return tasks.get(index).getTaskName();
     }
 
     public static void addTask(Task task) {
-        arr.add(task);
+        tasks.add(task);
     }
 
     public static Task remove(int index) {
-        return arr.remove(index);
+        return tasks.remove(index);
     }
 
     public static void close() {
-        arr = null;
+        tasks = null;
     }
 
 }
