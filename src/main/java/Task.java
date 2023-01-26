@@ -41,7 +41,7 @@ public class Task {
      * @return A string representation of the task's status
      */
     public String getStatus() {
-        return isDone ? "X" : " ";
+        return isDone ? "X" : "O";
     }
 
     /**
@@ -61,6 +61,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatus() + "] " + this.taskName;
+        return getStatus() + " | " + this.taskName;
     }
 }
