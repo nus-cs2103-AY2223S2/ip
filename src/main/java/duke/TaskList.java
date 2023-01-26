@@ -129,4 +129,26 @@ public class TaskList {
     public int getSize() {
         return lstOfItems.size();
     }
+
+    public void find(String keyword) {
+        int found = 0;
+        ArrayList<Task> foundTasks = new ArrayList<>();
+
+        for (int i = 0; i < getSize(); i++) {
+            if (lstOfItems.get(i).contains(keyword)) {
+                found++;
+                foundTasks.add(lstOfItems.get(i));
+            }
+        }
+        if (found == 0) {
+            System.out.println("Didn't manage to find any tasks with this keyword!");
+        } else {
+            String descriptor = (found == 1) ? " task " : " tasks ";
+            System.out.println("Found " + String.valueOf(found) + descriptor + " with this keyword");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                System.out.print(String.valueOf(i + 1) + ". ");
+                System.out.println(foundTasks.get(i));
+            }
+        }
+    }
 }
