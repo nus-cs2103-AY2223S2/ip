@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -179,11 +180,15 @@ public class Duke {
                         }
                         String dName = String.join(" ", Arrays.copyOfRange(input, 1, deadlineIndex));
                         String dDate = String.join(" ", Arrays.copyOfRange(input, deadlineIndex + 1, input.length));
-                        Deadline deadlineObj = new Deadline(dName, dDate);
-                        list.add(deadlineObj);
-                        System.out.println("\tGot it. I've added this task: ");
-                        System.out.println("\t\t " + deadlineObj.toString());
-                        System.out.println(String.format("Now you have %d tasks in the list", list.size()));
+                        try {
+                            Deadline deadlineObj = new Deadline(dName, dDate);
+                            list.add(deadlineObj);
+                            System.out.println("\tGot it. I've added this task: ");
+                            System.out.println("\t\t " + deadlineObj.toString());
+                            System.out.println(String.format("Now you have %d tasks in the list", list.size()));
+                        } catch (DateTimeParseException e) {
+                            System.out.println("\t Invalid date format. Please input the right format <yyyy-mm-dd>.");
+                        }
                         break;
                     case "event":
                         int fromIndex = -1;

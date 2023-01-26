@@ -1,5 +1,9 @@
 package task_types;
 
+import java.time.format.DateTimeParseException;
+
+import utility.Date;
+
 /**
  * Represents a <code>task</code> object that contains a string holding the
  * <code>deadline</code>.
@@ -8,14 +12,14 @@ package task_types;
  * @author Brian Quek
  */
 public class Deadline extends Task {
-    protected String deadline;
+    protected Date deadline;
 
     /**
      * Constructor for the Deadline object.
      */
-    public Deadline(String name, String date) {
+    public Deadline(String name, String date) throws DateTimeParseException {
         super(name);
-        this.deadline = date;
+        this.deadline = new Date(date);
     }
 
     /**
@@ -23,7 +27,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), deadline);
+
+        return String.format("[D]%s (by: %s)", super.toString(), this.deadline.dateToString());
     }
 
     public String toTextString() {
