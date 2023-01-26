@@ -139,4 +139,14 @@ public class Ui {
                 "    " + task + "\n" +
                 Ui.line());
     }
+
+    public void find(MyData data, String keyword) {
+        System.out.print(Ui.line());
+        for (int i = 0; i < data.len(); i++) {
+            if (data.getData(i).inDescription(keyword)) {
+                System.out.printf("    %d. %s%n", i + 1, data.getData(i));
+            }
+        }
+        System.out.print(Ui.line());
+    }
 }

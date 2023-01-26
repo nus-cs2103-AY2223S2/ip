@@ -10,6 +10,7 @@ import duke.commands.AddToDo;
 import duke.commands.AddEvent;
 import duke.commands.AddDeadline;
 import duke.commands.Delete;
+import duke.commands.Find;
 
 import duke.data.MyData;
 import duke.exceptions.DukeException;
@@ -183,6 +184,21 @@ public class Parser {
     }
 
     /**
+     * Parses find command.
+     *
+     * @param commandArr Keyword to seach task by.
+     * @return Tasks if keyword is in the description.
+     * @throws DukeException If no keyword is given.
+     */
+    public Command parseFind(String[] commandArr) throws DukeException {
+        if (commandArr.length <= 1) {
+            throw new DukeException(Ui.wrapLines("Please enter a keyword"));
+        }
+        String keyword = commandArr[1];
+        return new Find(keyword);
+    }
+
+    /**
      * Removes the command word from user input.
      *
      * @param command Command that user inputs.
@@ -223,6 +239,8 @@ public class Parser {
                 return parseEvent(slashed);
             case "delete":
                 return parseDelete(commandArr);
+            case "find":
+                return parseFind(commandArr);
             default:
                 throw new DukeException(Ui.wrapLines("I am not sure what that means."));
         }
