@@ -1,7 +1,12 @@
 package duke.command;
 
-import duke.exception.*;
-import duke.tasklist.*;
+import duke.exception.MissingDescriptionException;
+import duke.exception.InvalidCmdException;
+import duke.tasklist.Todo;
+import duke.tasklist.Task;
+import duke.tasklist.TaskList;
+import duke.tasklist.Event;
+import duke.tasklist.Deadline;
 
 /**
  * Represents an input Parser.
@@ -22,12 +27,12 @@ public class Parser {
      * @return boolean that determines whether Duke continues to run.
      */
     public boolean parse(String command) {
-        Task task = null;
-        int indx = -1;
-        switch(command){
+        Task task;
+        int indx;
+        switch(command) {
         case "bye":
             return true;
-        case "list" :
+        case "list":
             System.out.println("Here are the tasks in your list my premier:");
             this.tasks.printList();
             break;
@@ -113,5 +118,5 @@ public class Parser {
             throw new InvalidCmdException("Please specify date.");
         }
     }
-    }
+}
 
