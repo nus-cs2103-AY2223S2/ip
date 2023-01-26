@@ -3,7 +3,7 @@ package duke.command;
 import duke.task.*;
 
 public class Ui {
-    Ui(){}
+    public Ui(){}
 
     public void showWelcome() {
         String logo = " ____        _        \n"

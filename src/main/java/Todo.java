@@ -1,9 +1,11 @@
+package duke.task;
+
 public class Todo extends Task {
-    Todo(String type, String detail, boolean marked){
+    public Todo(String type, String detail, boolean marked){
         super(type, detail, marked);
     }
 
-    Todo(String type, String detail){
+    public Todo(String type, String detail){
         super(type, detail);
     }
 

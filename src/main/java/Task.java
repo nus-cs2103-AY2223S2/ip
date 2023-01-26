@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,13 +9,13 @@ public class Task {
     protected String detail;
     protected boolean marked;
 
-    Task(String type, String detail) {
+    public Task(String type, String detail) {
         this.type =type;
         this.detail =detail;
         this.marked =false;
     }
 
-    Task(String type, String detail, boolean marked) {
+    public Task(String type, String detail, boolean marked) {
         this.type =type;
         this.detail =detail;
         this.marked =marked;

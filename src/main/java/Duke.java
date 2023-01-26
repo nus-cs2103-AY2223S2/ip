@@ -1,8 +1,14 @@
+package duke;
+
+import duke.command.*;
+import duke.task.*;
+
 import java.util.Scanner;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 
 enum action {
     bye,
@@ -181,22 +187,6 @@ public class Duke {
     }
 }
 
-class DukeException extends  Exception {
-    public DukeException() {
-        super();
-    }
 
-    public DukeException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public DukeException(String message) {
-        super(message);
-    }
-
-    public DukeException(Throwable cause) {
-        super(cause);
-    }
-}
 
 
