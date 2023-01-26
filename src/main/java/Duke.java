@@ -41,27 +41,27 @@ public class Duke {
                 break;
             case MARK:
                 markEvent(userInput);
-                replaceFileContents(filePath,printList());
+                replaceFileContents(filePath,saveList());
                 break;
             case UNMARK:
                 unmarkEvent(userInput);
-                replaceFileContents(filePath,printList());
+                replaceFileContents(filePath,saveList());
                 break;
             case DELETE:
                 deleteEvent(userInput);
-                replaceFileContents(filePath,printList());
+                replaceFileContents(filePath,saveList());
                 break;
             case TODO:
                 todoEvent(userInput);
-                replaceFileContents(filePath,printList());
+                replaceFileContents(filePath,saveList());
                 break;
             case DEADLINE:
                 deadlineEvent(userInput);
-                replaceFileContents(filePath,printList());
+                replaceFileContents(filePath,saveList());
                 break;
             case EVENT:
                 eventEvent(userInput);
-                replaceFileContents(filePath,printList());
+                replaceFileContents(filePath,saveList());
                 break;
             }
         }
@@ -234,6 +234,27 @@ public class Duke {
         return s.toString();
     }
 
+    private static String saveList() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i <= storedInputs.size(); i++) {
+            s.append(convertStringToFileFormat(storedInputs.get(i - 1).toString())).append("\n");
+        }
+        return s.toString();
+    }
+
+    private static String convertStringToFileFormat(String line) {
+        String task, status, details;
+        line = line.substring(line.indexOf("[") + 1);
+        task = line.substring(0, line.indexOf("]"));
+
+        line = line.substring(line.indexOf("[") + 1);
+        status = line.substring(0, line.indexOf("]"));
+
+        details = line.substring(line.indexOf("]") + 1).trim();
+
+        return task + "|" + status + "|" + details;
+    }
+
     private static void printConfirmation() {
         System.out.println("\nYAY! Task Added:");
     }
@@ -245,5 +266,4 @@ public class Duke {
     private static void replaceFileContents(Path path, String newContents) throws IOException {
         Files.writeString(path, newContents);
     }
-
 }
