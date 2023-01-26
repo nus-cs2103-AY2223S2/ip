@@ -17,7 +17,8 @@ public enum Command {
     DEADLINE("deadline"),
     EVENT("event"),
     DELETE("delete"),
-    GETEVENTSON("geteventson");
+    GETEVENTSON("geteventson"),
+    FIND("find");
 
     private String name;
 

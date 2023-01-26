@@ -82,10 +82,12 @@ public class Parser {
                 int taskNum = Integer.parseInt(echo.substring(7).trim());
                 if (1 <= taskNum && taskNum <= tasks.getSize()) {
                     Task removed = tasks.delete(taskNum);
-                    System.out.println(Span.format("Noted. I've removed this task:\n\t"
-                                                        + removed.getStatusIcon()
-                                                            + "\n" + "Now you have " + tasks.getSize()
-                                                                + " task(s) in the list.")
+                    System.out.println(Span.format(
+                            "Noted. I've removed this task:\n\t"
+                                    + removed.getStatusIcon()
+                                    + "\n" + "Now you have "
+                                    + tasks.getSize()
+                                    + " task(s) in the list.")
                     );
                 } else {
                     throw new InvalidIndexException(taskNum);
@@ -141,21 +143,32 @@ public class Parser {
                 LocalDate date = LocalDate.parse(echo.substring(11).trim());
                 System.out.println(
                         Span.format("Here are the deadlines/events on "
-                                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                                    + ":\n"
-                                    + tasks.listAllOnDate(date)
+                            + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                                    + ":\n" + tasks.listAllOnDate(date)
                         )
                 );
+                break;
+            }
+            case FIND: {
+                if (echo.length() < 6) {
+                    throw new DukeException("Please supply a word to find!");
+                }
+                String toFind = echo.substring(5);
+                System.out.println(Span.format(
+                        tasks.find(toFind)
+                        )
+                );
+                break;
             }
         }
         if (task != null) {
             tasks.addTask(task);
-            System.out.println(Span.format("Got it. I've added this task:\n\t"
-                                                + task.getStatusIcon()
-                                                    + "\n"
-                                                        + "Now you have "
-                                                            + tasks.getSize()
-                                                                + " task(s) in the list.")
+            System.out.println(Span.format(
+                    "Got it. I've added this task:\n\t"
+                            + task.getStatusIcon()
+                            + "\n" + "Now you have "
+                            + tasks.getSize()
+                            + " task(s) in the list.")
             );
         }
         return false;

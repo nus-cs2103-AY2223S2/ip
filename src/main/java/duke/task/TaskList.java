@@ -115,4 +115,20 @@ public class TaskList {
         }
         return display.toString();
     }
+    public String find(String word) {
+        StringBuilder display = new StringBuilder();
+        int count = 1;
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (count > 20) {
+                display.insert(0, "Note: Only up to 20 searches are displayed!\n");
+            }
+            Task curr = this.tasks.get(i);
+            // checks for word ignoring case sensitivity
+            if (curr.getDescription().toLowerCase().contains(word.toLowerCase())) {
+                display.append((count) + ". " + curr.getStatusIcon() + "\n");
+                count++;
+            }
+        }
+        return display.toString();
+    };
 }

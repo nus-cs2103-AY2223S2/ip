@@ -35,8 +35,8 @@ public class UI {
                         + "| |_| | |_| |   <  __/\n"
                         + "|____/ \\__,_|_|\\_\\___|\n";
         String greeting = "Hello i'm\n"
-                            + logo
-                                + "\nWhat can I do for you?";
+                + logo
+                + "\nWhat can I do for you?";
         System.out.println(Span.format(greeting));
     }
 
@@ -55,7 +55,8 @@ public class UI {
      * @throws DukeException Throws DukeException if an invalid input is encountered.
      */
     public boolean processInput() throws DukeException {
-        String echo = scanner.nextLine().trim(); // get user input and trim trailing white sp
+        // get user input and trim trailing white sp
+        String echo = scanner.nextLine().trim();
         String firstWord = echo.split(" ")[0];
         Command command = Command.get(firstWord);
         boolean exit = this.parser.execute(command, echo);

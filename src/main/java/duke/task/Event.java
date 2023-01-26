@@ -28,7 +28,8 @@ public class Event extends Task {
         try {
             this.startDate = LocalDate.parse(startDate);
             this.endDate = LocalDate.parse(endDate);
-            if (this.startDate.compareTo(this.endDate) > 0) { // invalid end date before start
+            // invalid end date before start
+            if (this.startDate.compareTo(this.endDate) > 0) {
                 throw new InvalidDateException();
             }
         } catch (DateTimeParseException e) {
@@ -54,7 +55,10 @@ public class Event extends Task {
      */
     @Override
     public String encode() {
-        return String.format("%s ### %s ### %s ### %s", "event", super.encode(), this.startDate, this.endDate);
+        return String.format("%s ### %s ### %s ### %s", "event",
+                super.encode(),
+                this.startDate,
+                this.endDate);
     }
 
     /**
@@ -64,6 +68,7 @@ public class Event extends Task {
      */
     @Override
     public boolean fallsOnDate(LocalDate date) {
-        return this.startDate.compareTo(date) * date.compareTo(this.endDate) >= 0;
+        return this.startDate.compareTo(date)
+                * date.compareTo(this.endDate) >= 0;
     }
 }
