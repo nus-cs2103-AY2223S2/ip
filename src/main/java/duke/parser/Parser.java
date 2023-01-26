@@ -10,7 +10,7 @@ import duke.task.Todo;
 import java.util.NoSuchElementException;
 
 /**
- * Deals with making sense of the user command
+ * Makes sense of the user command entered into Duke.
  */
 public class Parser {
     private enum Action {
@@ -33,8 +33,10 @@ public class Parser {
     /**
      * Parses input data entered by user.
      *
-     * @param   input   User input for the program menu.
-     * @return  Status whether the program should exit or not.
+     * @param input User input for the program menu.
+     * @return Command that user entered.
+     * @throws DukeException
+     * @throws NoSuchElementException
      */
     public static Command parse(String input) throws DukeException, NoSuchElementException {
         String[] splitInput = input.split(" ");
@@ -103,9 +105,10 @@ public class Parser {
     }
 
     /**
-     * Processes tasks from the list of tasks in file in the hard disk.
+     * Processes tasks from the list of tasks in file in the local storage.
      *
-     * @param input One task.
+     * @param input One task to be processed.
+     * @param idx Index of task.
      * @throws DukeException
      * @throws NoSuchElementException
      */
@@ -150,9 +153,10 @@ public class Parser {
     }
 
     /**
-     * Handles the adding of todo tasks.
+     * Handles the adding of Todo tasks.
      *
-     * @param   taskDesc    Description of task.
+     * @param taskDesc Description of task.
+     * @return Todo that has been added to task list.
      */
     private static Todo addTodo(String taskDesc) {
         Todo todo = new Todo(taskDesc);
@@ -160,9 +164,10 @@ public class Parser {
     }
 
     /**
-     * Handles the adding of deadline tasks.
+     * Handles the adding of Deadline tasks.
      *
-     * @param   taskDesc    Description of task.
+     * @param taskDesc Description of deadline.
+     * @return Deadline that has been added to task list.
      */
     private static Deadline addDeadline(String taskDesc) throws DukeException {
         Deadline deadline = new Deadline(taskDesc);
@@ -170,9 +175,10 @@ public class Parser {
     }
 
     /**
-     * Handles the adding of event tasks.
+     * Handles the adding of Event tasks.
      *
-     * @param   taskDesc    Description of task.
+     * @param taskDesc Description of Event.
+     * @return Event that has been added to task list.
      */
     private static Event addEvent(String taskDesc) throws DukeException {
         Event event = new Event(taskDesc);

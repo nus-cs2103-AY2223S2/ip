@@ -5,7 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a duke.Task added by the user. It has a description attached to it and a isDone status.
+ * Represents a task added by the user.
+ * It has a description attached to it and a isDone status.
  */
 public class Task {
     protected String description;
@@ -31,32 +32,53 @@ public class Task {
     }
 
     /**
-     * Marks done task with X.
+     * Returns X if task is marked done.
+     * If task is unmarked, a space is returned.
+     *
+     * @return Character to indicate the status of the task.
      */
     public char getStatusIcon() {
         return (isDone ? 'X' : ' ');
     }
 
     /**
-     * Returns the String representation of a duke.Task.
+     * Returns the String representation of a Task.
      *
-     * @return  String representation of a duke.Task in this format: [<status>] <description>.
+     * @return String representation of a Task in this format: [{status}] {description}.
      */
     @Override
     public String toString() {
         return String.format("[%c] %s", this.getStatusIcon(), this.description);
     }
 
+    /**
+     * Returns the raw String representation of a Task to be stored in the local file for storage.
+     *
+     * @return Raw String representation of a Task in this format: T ~ {status} ~ {description}.
+     */
     public String getRawTask() {
         return String.format("T ~ %d ~ %s\n", isDone ? 1 : 0, this.description);
     }
 
+    /**
+     * Returns the valid format of the datetime of the Task.
+     * Valid format: {yyyy-MM-dd HH:mm}
+     *
+     * @param input Datetime input provided by user.
+     * @return Datetime of Task in valid format.
+     */
     public LocalDateTime parseDatetime(String input) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime datetime = LocalDateTime.parse(input, formatter);
         return datetime;
     }
 
+    /**
+     * Returns datetime in String for printing.
+     *
+     * @param datetime Datetime of Task.
+     * @return String representation of datetime.
+     */
     public String getStringDatetime(LocalDateTime datetime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd-MM-yyyy HH:mma");
         return datetime.format(formatter);

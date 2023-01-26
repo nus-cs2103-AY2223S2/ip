@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents an duke.Event, which is a type of duke.Task that starts at a specific date/time and ends at a specific date/time.
+ * Represents an Event, which is a type of Task that starts at a specific datetime and ends at a specific datetime.
  */
 public class Event extends Task {
     protected LocalDateTime startDatetime;
@@ -27,10 +27,10 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the String representation of an duke.Event.
+     * Returns the String representation of an Event.
      *
-     * @return  String representation of an duke.Event in this format: [E][<status>] <description> (from: <start date/time>
-     * to: <end date/time>).
+     * @return String representation of an Event in this format:
+     * [E][{status}] {description} (from: {start datetime} to: {end datetime}).
      */
     @Override
     public String toString() {
@@ -38,6 +38,12 @@ public class Event extends Task {
                 , this.getStringDatetime(this.startDatetime), this.getStringDatetime(this.endDatetime));
     }
 
+    /**
+     * Returns the raw String representation of an Event to be stored in the local file for storage.
+     *
+     * @return Raw String representation of a Task in this format:
+     * E ~ {status} ~ {description} ~ {start datetime} ~ {end datetime}.
+     */
     @Override
     public String getRawTask() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

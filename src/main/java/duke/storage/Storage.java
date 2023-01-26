@@ -24,7 +24,11 @@ public class Storage {
     }
 
     /**
-     * Reads file if exists. Create directory (if necessary) and file if the file do not exist.
+     * Reads file if exists.
+     * Create directory (if necessary) and file if the file do not exist.
+     *
+     * @return List of tasks that are loaded from local storage.
+     * @throws DukeException
      */
     public ArrayList<Task> load() throws DukeException {
         File f = new File(this.filePath);
@@ -49,6 +53,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves tasks to local storage.
+     *
+     * @param tasks All the tasks that should be saved to local storage.
+     * @throws DukeException
+     */
     public void saveTasks(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.filePath);
