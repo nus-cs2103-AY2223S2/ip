@@ -12,10 +12,10 @@ public class DeleteCommand extends Command{
 
 
     @Override
-    public void execute(ArrayList<Task> taskList, Ui ui, Storage storage) throws TreeBotException {
-        taskList.remove(index - 1);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws TreeBotException {
+        taskList.deleteTask(index);
         try {
-            storage.saveTasks(taskList);
+            storage.saveTasks(taskList.getArrayListCopy());
         } catch (IOException e) {
             throw new TreeBotException(e.getMessage());
         }

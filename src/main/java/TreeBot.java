@@ -13,18 +13,17 @@ import java.util.Scanner;
 
 public class TreeBot {
     private static final String EXIT_TOKEN = "bye";
-    private ArrayList<Task> tasks;
+    private TaskList taskList;
     private Ui ui = new Ui();
     private Storage storage;
-
     private Parser parser = new Parser(new TaskFactory());
 
     public TreeBot(String filePath) {
         storage = new Storage(filePath);
         try {
-            tasks = storage.loadTasks();
+            taskList = new TaskList(storage.loadTasks());
         } catch (FileNotFoundException e) {
-            tasks = new ArrayList<>();
+            taskList = new TaskList();
         }
 
     }
@@ -40,7 +39,7 @@ public class TreeBot {
                 if (c.equals(EXIT_TOKEN)) {
                     break;
                 }
-                c.execute(tasks, ui, storage);
+                c.execute(taskList, ui, storage);
             } catch (TreeBotException e) {
                 System.out.println(e.getMessage());
             }

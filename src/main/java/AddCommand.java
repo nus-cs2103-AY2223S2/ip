@@ -12,10 +12,10 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(ArrayList<Task> taskList, Ui ui, Storage storage) throws TreeBotException {
-        taskList.add(task);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws TreeBotException {
+        taskList.addTask(task);
         try {
-            storage.saveTasks(taskList);
+            storage.saveTasks(taskList.getArrayListCopy());
         } catch (IOException e) {
             throw new TreeBotException(e.getMessage());
         }

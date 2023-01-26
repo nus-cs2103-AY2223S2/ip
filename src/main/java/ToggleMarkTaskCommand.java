@@ -11,15 +11,15 @@ public class ToggleMarkTaskCommand extends Command {
         this.isMarkAsDone = isMarkAsDone;
     }
     @Override
-    public void execute(ArrayList<Task> taskList, Ui u, Storage storage) throws TreeBotException {
+    public void execute(TaskList taskList, Ui u, Storage storage) throws TreeBotException {
         if (!isMarkAsDone) {
-            taskList.get(index - 1).markAsUndone();
+            taskList.unmarkTask(index);
         } else {
-            taskList.get(index - 1).markAsDone();
+            taskList.markTask(index);
         }
 
         try {
-            storage.saveTasks(taskList);
+            storage.saveTasks(taskList.getArrayListCopy());
         } catch (IOException e) {
             throw new TreeBotException(e.getMessage());
         }
