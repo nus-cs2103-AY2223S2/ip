@@ -31,15 +31,15 @@ public class Event extends Task {
         if (marked) {
             return "[E][X] " + super.detail + " (from: " +
                     this.start.format(DateTimeFormatter.
-                            ofPattern("h, MMM dd yyyy")) +
+                            ofPattern("MMM dd yyyy")) +
                     " to: " + this.end.format(DateTimeFormatter.
-                    ofPattern("h, MMM dd yyyy")) + ")";
+                    ofPattern("MMM dd yyyy")) + ")";
         } else {
             return "[E][ ] " + super.detail + " (from: " +
                     this.start.format(DateTimeFormatter.
-                            ofPattern("h, MMM dd yyyy")) +
+                            ofPattern("MMM dd yyyy")) +
                     " to: " + this.end.format(DateTimeFormatter.
-                    ofPattern("h, MMM dd yyyy")) + ")";
+                    ofPattern("MMM dd yyyy")) + ")";
         }
     }
 }

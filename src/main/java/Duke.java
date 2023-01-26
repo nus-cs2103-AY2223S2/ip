@@ -63,7 +63,7 @@ public class Duke {
         while (!s.equals("bye")) {
             String remaining = "";
             try {
-                action myAction = action.valueOf(s.charAt(0).toUpperCase() +
+                action myAction = action.valueOf(String.valueOf(s.charAt(0)).toUpperCase() +
                         s.substring(1));
                 switch(myAction) {
                     case Find:
