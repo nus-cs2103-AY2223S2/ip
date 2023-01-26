@@ -27,9 +27,17 @@ public class Event extends Task {
     @Override
     public String toString(){
         if (marked) {
-            return "[E][X] " + super.detail + " (from: " + this.start.format(DateTimeFormatter.ofPattern("h, MMM dd yyyy")) + " to: " + this.end.format(DateTimeFormatter.ofPattern("h, MMM dd yyyy")) + ")";
+            return "[E][X] " + super.detail + " (from: " +
+                    this.start.format(DateTimeFormatter.
+                            ofPattern("h, MMM dd yyyy")) +
+                    " to: " + this.end.format(DateTimeFormatter.
+                    ofPattern("h, MMM dd yyyy")) + ")";
         } else {
-            return "[E][ ] " + super.detail + " (from: " + this.start.format(DateTimeFormatter.ofPattern("h, MMM dd yyyy")) + " to: " + this.end.format(DateTimeFormatter.ofPattern("h, MMM dd yyyy")) + ")";
+            return "[E][ ] " + super.detail + " (from: " +
+                    this.start.format(DateTimeFormatter.
+                            ofPattern("h, MMM dd yyyy")) +
+                    " to: " + this.end.format(DateTimeFormatter.
+                    ofPattern("h, MMM dd yyyy")) + ")";
         }
     }
 }

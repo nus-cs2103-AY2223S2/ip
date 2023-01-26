@@ -21,10 +21,6 @@ public class Task {
         this.marked =marked;
     }
 
-    //abstract public String[] delete() {}
-
-    //abstract public String[] add() {}
-
     public void mark() {
         this.marked = true;
     }

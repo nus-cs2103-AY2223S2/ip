@@ -38,7 +38,8 @@ public class TaskList {
         if (arr[num] != null) {
             System.out.println("OK, I've marked this task as not done yet:");
             String original = arr[num];
-            arr[num] = new Task(String.valueOf(original.charAt(1)), original.substring(7), true).toString();
+            arr[num] = new Task(String.valueOf(original.charAt(1)),
+                    original.substring(7), true).toString();
             System.out.println(arr[num]);
         }
         return new TaskList(arr);
@@ -48,8 +49,9 @@ public class TaskList {
         if (arr[num1] != null) {
             System.out.println("OK, I've marked this task as not done yet:");
             String original = arr[num1];
-            Task newTask = new Task(String.valueOf(original.charAt(1)), original.substring(7), false);
-            arr[num1] = newTask.toString(); //String.format("%s[ ] %s", original.substring(0, 3), original.substring(7));
+            Task newTask = new Task(String.valueOf(original.charAt(1)),
+                    original.substring(7), false);
+            arr[num1] = newTask.toString();
             System.out.println(arr[num1]);
         }
         return new TaskList(arr);
