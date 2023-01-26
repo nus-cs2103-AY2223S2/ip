@@ -46,9 +46,11 @@ public class Parser {
         line = line.replaceAll("[ \t\r\n\f]+", " ").trim();
         //Parse command and args
         final int spaceIdx = line.indexOf(' ');
-        final String cmd = (spaceIdx < 0 ? line : line.substring(0, spaceIdx)).toLowerCase();
+        final boolean noSpace = spaceIdx < 0;
+        final String cmd = (noSpace ? line : line.substring(0, spaceIdx)).toLowerCase();
         final Function<String, E> job = jobTable.get(cmd);
-        final String args = job == null ? line : line.substring(spaceIdx + 1).trim();
+        //No corresponding job? args is line. Otherwise, args is everything after first space. No space? Empty args.
+        final String args = job == null ? line : noSpace ? "" : line.substring(spaceIdx + 1).trim();
         return new JobAndArg<>(cmd, job, args);
     }
 

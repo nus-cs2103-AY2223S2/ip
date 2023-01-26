@@ -2,6 +2,7 @@ package Meggy;
 
 import Meggy.Exception.Function;
 import Meggy.Exception.MeggyException;
+import Meggy.Exception.MeggyNoArgException;
 import Meggy.Task.UserTask;
 
 import java.io.File;
@@ -49,13 +50,14 @@ public class Meggy implements Runnable {
         storage = new Storage(new File(Util.DATA_FILE_PATH));
         usrCmdToJob = Map.of(
                 Resource.CMD_EXIT, s -> Resource.FAREWELL,
-                Resource.CMD_LIST, s -> tasks.toString(),
+                Resource.CMD_LIST, s -> Resource.NOTIF_LIST + tasks,
                 Resource.CMD_MARK, s -> markTaskStatus(s, true),
                 Resource.CMD_UNMK, s -> markTaskStatus(s, false),
                 Resource.CMD_TODO, s -> addTask(s, Util.TODO_NEW),
                 Resource.CMD_DDL, s -> addTask(s, Util.DDL_NEW),
                 Resource.CMD_EVENT, s -> addTask(s, Util.EVENT_NEW),
-                Resource.CMD_DEL, this::deleteTask
+                Resource.CMD_DEL, this::deleteTask,
+                Resource.CMD_FIND, this::find
         );
     }
 
@@ -123,6 +125,26 @@ public class Meggy implements Runnable {
      */
     private String reportChangedTaskAndList(UserTask task) {
         return Resource.TASK_STRING_INDENT + task + '\n' + Resource.nTaskFmt(tasks.size());
+    }
+
+    /**
+     * Lists all the tasks with description containing the keyword.
+     *
+     * @param substring Non-null. The keyword to look for.
+     * @return The printable string of the listed tasks.
+     * @throws MeggyNoArgException If user search keyword is blank.
+     */
+    private String find(String substring) throws MeggyNoArgException {
+        if ("".equals(substring)) {
+            throw new MeggyNoArgException();
+        }
+        final TaskList ans = new TaskList();
+        for (UserTask task : tasks) {
+            if (task.desc.contains(substring)) {
+                ans.add(task);
+            }
+        }
+        return Resource.NOTIF_FIND + ans;
     }
 
     /** Interacts with user through designated IO. */

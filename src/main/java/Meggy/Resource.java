@@ -30,6 +30,8 @@ public final class Resource {
     public final static String CMD_EVENT = "event";
     /** 'Delete' command. */
     public final static String CMD_DEL = "delete";
+    /** 'Find' command. */
+    public final static String CMD_FIND = "find";
     /** 'Due time' keyword of 'deadline' command. */
     public final static String KW_DUE = "by";
     /** 'Start time' keyword of 'event' command. */
@@ -48,6 +50,8 @@ public final class Resource {
     public final static String NOTIF_USAGE = " Usage: ";
     /** Notification message after 'delete' command. */
     public final static String NOTIF_DEL = " OK. Removed this task:\n";
+    /** Notification message after 'find' command. */
+    public final static String NOTIF_FIND = " Here are the matching tasks in your list:\n";
     /** Front page wallpaper. */
     public final static String MEGGY_LOGO = " __  __\n|  \\/  |\n| \\  / | ___  __ _  __ _ _   _\n| |\\/| |/ _ \\/ _`" +
             " |/ _` | | | |\n| |  | |  __/ (_| | (_| | |_| |\n|_|  |_|\\___|\\__, |\\__, |\\__, |\n              __/ " +

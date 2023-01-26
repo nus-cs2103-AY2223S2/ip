@@ -19,10 +19,10 @@ public class TaskList extends ArrayList<UserTask> {
         }
     }
 
-    /** @return Response to 'list' command. */
+    /** @return Printable string representation of this list. */
     @Override
     public String toString() {
-        final StringBuilder ans = new StringBuilder(Resource.NOTIF_LIST);
+        final StringBuilder ans = new StringBuilder();
         int i = 0;
         for (UserTask task : this) {
             ans.append(Resource.idxFmt(i++)).append(task).append('\n');

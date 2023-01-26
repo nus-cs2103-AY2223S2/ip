@@ -21,4 +21,6 @@ delete 100
 delete x
 deadline return book /by 2/12/2019 1800
 list
+find
+find book
 bye
