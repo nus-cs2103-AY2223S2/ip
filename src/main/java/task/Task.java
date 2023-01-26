@@ -35,10 +35,10 @@ public class Task implements Serializable {
             marked = !marked;
             if (marked) {
                 System.out.println("Alright, I've marked it out : \n"
-                        + this.toString());
+                        + this);
             } else {
                 System.out.println("Alright, I've erased the mark: \n"
-                        + this.toString());
+                        + this);
             }
         } else {
             System.out.println("Hey how I can change this mark?");

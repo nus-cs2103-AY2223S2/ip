@@ -5,7 +5,7 @@ import duke.DukeList;
 public class MarkCommand extends Command{
 
     private String task;
-    private boolean marker = false;
+    private boolean marker;
     private DukeList dukeList;
     public MarkCommand(String task, boolean marker, DukeList dukeList) {
         this.task = task;
