@@ -75,6 +75,19 @@ public class MainApplication {
                 t, this.taskApplication.getNoOfTasks()
         ));
     }
+    private void findCommand(String keyword) {
+        List<Task> tasks = this.taskApplication.getTaskByKeyword(keyword);
+        StringBuilder result = new StringBuilder();
+        int i = 1;
+        for (Task s: tasks) {
+            result.append(String.format("%d.%s\n", i, s));
+            i++;
+        }
+        String output = result.toString().replaceAll("\\n$", "");
+        this.ui.printBlock(String.format(
+                "Here are the matching tasks in your list:\n%s", output
+        ));
+    }
 
     private void byeCommand() {
         this.taskApplication.close();
@@ -102,6 +115,9 @@ public class MainApplication {
             break;
         case "delete":
             this.deleteCommand(Integer.parseInt(tokens.get(1)) - 1);
+            break;
+        case "find":
+            this.findCommand(tokens.get(1));
             break;
         default:
             throw new DukeUnknownCommandException("Unknown command");

@@ -3,6 +3,7 @@ package duke;
 import duke.exceptions.DukeInvalidArgumentException;
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -86,6 +87,16 @@ public class TaskList {
             i++;
         }
         return result.toString().replaceAll("\\n$", "");
+    }
+
+    public List<Task> getTaskByKeyword(String keyword) {
+        List<Task> result = new ArrayList<>();
+        for (Task s: this.userTasks) {
+            if (s.getTitle().contains(keyword)) {
+                result.add(s);
+            }
+        }
+        return result;
     }
 
     public Task getTask(int index) {

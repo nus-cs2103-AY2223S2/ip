@@ -57,6 +57,9 @@ public class Parser {
         case "delete":
             result.addAll(parseByRegex("^\\s+(\\d+?)\\s*$", tokens[1]));
             break;
+        case "find":
+            result.add(tokens[1].trim());
+            break;
         default:
             throw new DukeUnknownCommandException("\tUnknown command\n");
         }
