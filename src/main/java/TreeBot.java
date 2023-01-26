@@ -15,15 +15,17 @@ public class TreeBot {
     private static final String EXIT_TOKEN = "bye";
     private ArrayList<Task> tasks = new ArrayList<>();
     private TaskFactory taskFactory = new TaskFactory();
+    private Ui ui = new Ui();
+
     public void start() {
-        greet();
+        ui.showWelcome();
         loadTasks();
         listen();
     }
     private void listen() {
-        Scanner sc = new Scanner(System.in);
         while (true) {
-            String commandString = sc.nextLine();
+
+            String commandString = ui.readCommand();
 
             if (commandString.equals(EXIT_TOKEN)) {
                 exit();
