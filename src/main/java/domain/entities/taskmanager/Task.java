@@ -6,6 +6,7 @@ import core.utils.Pair;
 import core.utils.TokenUtilities;
 import domain.entities.core.Serializable;
 
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Set;
 
@@ -72,6 +73,17 @@ public abstract class Task implements Serializable {
      * The key for identifying if the object is marked as complete or not.
      */
     protected static final String completeKey = "/complete";
+
+    /**
+     * If the task contains the given date, i.e. if the task is a deadline,
+     * then if the deadline is the same as the given date. If the task is an
+     * event, then if the event contains the given date.
+     * @param date the date to be checked.
+     * @return true if the task contains the date, false otherwise.
+     */
+    public boolean containsDate(LocalDate date) {
+        return false;
+    }
 
     @Override
     public String serialize() {

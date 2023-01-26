@@ -7,7 +7,11 @@ import domain.entities.DataSaver;
 import domain.entities.core.*;
 import domain.entities.taskmanager.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A class for managing tasks.
@@ -208,6 +212,40 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
         };
     }
 
+    IdentifiableExecutable getListOfDate() {
+        return new IdentifiableExecutable() {
+            @Override
+            public ExitStatus execute(String[] tokens) {
+                final String dateStr = tokens[0];
+                final LocalDate date;
+                try {
+                    date = LocalDate.parse(dateStr);
+                } catch (DateTimeParseException exception) {
+                    writable.writeln("☹ OOPS, please input a date in the " +
+                            "format yyyy-mm-dd!");
+                    return ExitStatus.finishCurrentIteration;
+                }
+                boolean hasDate = false;
+                for (int i = 0; i < tasks.size(); i ++) {
+                    final Task task = tasks.get(i);
+                    if (task.containsDate(date)) {
+                        writable.writeln((i + 1) + ". " + task);
+                        hasDate = true;
+                    }
+                }
+                if (!hasDate) {
+                    writable.writeln("No tasks found on " + dateStr);
+                }
+                return ExitStatus.finishCurrentIteration;
+            }
+
+            @Override
+            public String getId() {
+                return "listwhen";
+            }
+        };
+    }
+
     /**
      * Gets the disposable for disposing this class.
      *
@@ -244,6 +282,7 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
         );
         nestable.registerIdentifiableExecutable(getDeleteExecutable());
         nestable.registerDisposable(getDisposable());
+        nestable.registerIdentifiableExecutable(getListOfDate());
     }
 
     /**

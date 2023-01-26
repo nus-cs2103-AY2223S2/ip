@@ -69,6 +69,11 @@ public class Event extends Task {
             Task.completeKey);
 
     @Override
+    public boolean containsDate(LocalDate date) {
+        return date.isAfter(startAt) && date.isBefore(endAt);
+    }
+
+    @Override
     public String serialize() {
         return "event " + super.serialize() + " " + startAtKey + " " +
                 startAt + " " + endAtKey + " " + endAt;

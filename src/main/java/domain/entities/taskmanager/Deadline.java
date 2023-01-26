@@ -59,6 +59,11 @@ public class Deadline extends Task {
             Task.completeKey);
 
     @Override
+    public boolean containsDate(LocalDate date) {
+        return deadline.equals(date);
+    }
+
+    @Override
     public String serialize() {
         return "deadline " + super.serialize() + " " + deadlineKey + " "
                 + deadline;
