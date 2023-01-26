@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.DukeException;
 
 public class Todo extends Task {
     public Todo(String description) throws DukeException {
@@ -8,8 +10,8 @@ public class Todo extends Task {
         }
     }
     /**
-     * Represent duke.Todo as a string
-     * @return String representation of a duke.Todo
+     * Represent duke.task.Todo as a string
+     * @return String representation of a duke.task.Todo
      */
     @Override
     public String toString() {
