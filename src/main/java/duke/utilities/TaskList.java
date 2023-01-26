@@ -57,6 +57,21 @@ public class TaskList {
         return arrayList;
     }
 
+    public ArrayList<String> findTasks(String name) {
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+
+            if (task.matchName(name)) {
+                String indexString = Integer.toString(i + 1);
+                arrayList.add(indexString + ". " + task);
+            }
+        }
+
+        return arrayList;
+    }
+
     public int getSize() {
         return this.tasks.size();
     }

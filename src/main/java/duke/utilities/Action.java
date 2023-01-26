@@ -9,5 +9,6 @@ public enum Action {
     event,
     delete,
     bye,
-    dueon
+    dueon,
+    find
 }

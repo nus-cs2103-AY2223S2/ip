@@ -6,6 +6,7 @@ import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DueOnCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.TodoCommand;
@@ -52,6 +53,8 @@ public class Parser {
             return new ByeCommand();
         case dueon:
             return new DueOnCommand(tokens);
+        case find:
+            return new FindCommand(tokens);
         default:
             throw new DukeUnknownActionException();
         }

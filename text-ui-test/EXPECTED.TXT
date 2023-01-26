@@ -130,4 +130,15 @@ There are 5 tasks in the list
 4. [D][ ] assignment 3 (by: 03 Apr 2019)
 5. [E][ ] meeting (from: 2pm to: 4pm)
 
+>> Usage: find <task name>
+
+>> No tasks match the query "abc"
+
+>> No tasks match the query "abc 123"
+
+>> Found:
+2. [D][x] assignment 1 (by: 04 Mar 2019)
+3. [D][ ] assignment 2 (by: 03 Apr 2019)
+4. [D][ ] assignment 3 (by: 03 Apr 2019)
+
 >> Exiting...

@@ -18,6 +18,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean matchName(String name) {
+        return this.name.contains(name);
+    }
+
     public String toDukeFileString() {
         String isDoneString = this.isDone ? "1" : "0";
         return isDoneString + "|" + this.name;
