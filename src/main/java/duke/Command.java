@@ -10,7 +10,7 @@ public class Command {
     /*
     Command codes:
     -1 - Invalid input.
-    0 - Bye
+    0 - bye
     1 - list
     2 - mark
     3 - unmark
@@ -58,10 +58,10 @@ public class Command {
     }
 
     /**
+     * Constructor for Command of specified code and keyword.
      *
-     *
-     * @param code
-     * @param keyword
+     * @param code Unique code for type of command.
+     * @param keyword Keyword to match.
      */
     protected Command(int code, String keyword) {
         this.code = code;
@@ -69,6 +69,7 @@ public class Command {
     }
 
     /**
+     * Executes command.
      *
      * @param ui Ui object of Duke.
      * @param taskList TaskList object of Duke.
@@ -113,6 +114,10 @@ public class Command {
         } else if (code == 8) {
             taskList.find(keyword);
             ui.showLine();
+        } else if (code == 9) {
+            ui.showHelp();
+        } else {
+            throw new DukeException("Invalid code.");
         }
     }
 

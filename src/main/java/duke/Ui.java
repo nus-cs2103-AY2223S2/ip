@@ -10,12 +10,17 @@ public class Ui {
      * Prints welcome message.
      */
     protected void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "What can I do for you?\n" + BORDER);
+        showLine();
+        String padding = "           ";
+        String logo = padding + " ____        _        \n"
+                + padding + "|  _ \\ _   _| | _____ \n"
+                + padding + "| | | | | | | |/ / _ \\\n"
+                + padding + "| |_| | |_| |   <  __/\n"
+                + "Hello from " + "|____/ \\__,_|_|\\_\\___|";
+        System.out.println(logo);
+        showLine();
+        System.out.println("I am a personal Chatbot who keep track of various things!\nEnter help to view commands!");
+        showLine();
     }
 
     /**
@@ -31,14 +36,18 @@ public class Ui {
      * @param e DukeException.
      */
     protected void showError(DukeException e) {
-        System.out.println(e.getMessage() + "\n" + BORDER);
+        showLine();
+        System.out.println(e.getMessage());
+        showLine();
     }
 
     /**
      * Prints exit message.
      */
     protected void byeMessage() {
-        System.out.println("Bye. Hope to see you again soon!\n" + BORDER);
+        showLine();
+        System.out.println("Bye. Hope to see you again soon!");
+        showLine();
     }
 
     /**
@@ -47,8 +56,10 @@ public class Ui {
      * @param t Task marked done.
      */
     protected void markDoneMessage(Task t) {
+        showLine();
         System.out.println("Nice! I've marked this task as done:\n"
-                + t.fullMessage() + "\n" + BORDER);
+                + t.fullMessage());
+        showLine();
     }
 
     /**
@@ -57,8 +68,10 @@ public class Ui {
      * @param t Task marked undone.
      */
     protected void markUndoneMessage(Task t) {
+        showLine();
         System.out.println("OK, I've marked this task as not done yet:\n"
-                + t.fullMessage() + "\n" + BORDER);
+                + t.fullMessage());
+        showLine();
     }
 
     /**
@@ -66,8 +79,8 @@ public class Ui {
      *
      * @param taskList Task manager.
      */
-    protected void sizeMessage(TaskList taskList) {
-        System.out.println("Now you have " + taskList.getSize() + " tasks in this list\n" + BORDER);
+    private void sizeMessage(TaskList taskList) {
+        System.out.println("Now you have " + taskList.getSize() + " tasks in this list");
     }
 
     /**
@@ -77,8 +90,10 @@ public class Ui {
      * @param taskList Task manager.
      */
     protected void addMessage(Task t, TaskList taskList) {
+        showLine();
         System.out.println("Got it. I've added this task:\n" + t.fullMessage());
         sizeMessage(taskList);
+        showLine();
     }
 
     /**
@@ -88,7 +103,29 @@ public class Ui {
      * @param taskList Task manager.
      */
     protected void deleteMessage(Task t, TaskList taskList) {
+        showLine();
         System.out.println("Noted. I've removed this task:\n" + t.fullMessage());
         sizeMessage(taskList);
+        showLine();
+    }
+
+    /**
+     * Prints help message.
+     */
+    protected void showHelp() {
+        // Might be shifted all into a file.
+        showLine();
+        System.out.println("Available commands: \n");
+        System.out.println("todo [M] - Adds todo task, replace [M] with message.");
+        System.out.println("deadline [M] /by [D] - Adds deadline task, replace [M] with message and [D] with date/time.");
+        System.out.println("event [M] /from [D] /to [D] - Adds event task, replace [M] with message and [D] with date/time.\n");
+        System.out.println("Intended date/time should be in format dd-MM-yyyy HHmm or dd-MM-yyyy.");
+        System.out.println("Otherwise, the date/time will be treated as plain text.\n");
+        System.out.println("list - Lists all tasks.");
+        System.out.println("mark [R] - Marks task as done, replace [R] with rank of task.");
+        System.out.println("unmark [R] - Marks task as not done, replace [R] with rank of task.");
+        System.out.println("find [K] - Lists all matching task, replace [K] with keyword.");
+        System.out.println("bye - Exits the chat bot.");
+        showLine();
     }
 }

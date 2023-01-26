@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Duke is a personal assistant chatbot that help to keep track of various stuff.
+ * Duke is a personal assistant chat bot that help to keep track of various stuff.
  */
 public class Duke {
     // Attribute
@@ -25,7 +25,7 @@ public class Duke {
     }
 
     /**
-     * Runs Duke chatbot.
+     * Runs Duke chat bot.
      *
      * @throws IOException Unexpected IOException
      */
