@@ -5,7 +5,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class Duke {
-
+    /**
+     * Searches for a task to be marked for completion.
+     * @param parsed Parsed command
+     * @param tempTaskList List of tasks
+     * @return Task that will be marked or unmarked
+     */
     private static Task getTaskForMarking(String[] parsed, TaskList tempTaskList) {
         int completedIndex = Integer.parseInt(parsed[1]) - 1; // index of the task completed
         Task completedTask = tempTaskList.getTaskAtIndex(completedIndex); // actual task
