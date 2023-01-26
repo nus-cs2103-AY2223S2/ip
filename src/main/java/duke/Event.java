@@ -1,8 +1,15 @@
+package duke;
+
 public class Event extends Task {
 
-    public String duration;
+    String duration;
     public Event(String description, String duration) {
         super(description);
+        this.duration = duration;
+    }
+
+    public Event(String description, boolean isDone, String duration) {
+        super(description, isDone);
         this.duration = duration;
     }
 
@@ -16,6 +23,11 @@ public class Event extends Task {
     public String currToPrint() {
         return this.getTaskIcon() + this.getStatusIcon() + " " + this.getDescription() +
                 " (" + this.getDuration() + ")";
+    }
+
+    public String toSave() {
+        return this.getTaskIcon() + SEPARATOR + convertBoolean() + SEPARATOR + this.getDescription()
+                + SEPARATOR + this.getDuration();
     }
 
 }

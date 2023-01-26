@@ -1,12 +1,13 @@
-import javax.lang.model.type.ArrayType;
+package duke;
 import java.util.ArrayList;
 
 public class TaskList<Task> {
-    public ArrayList<Task> taskList;
+    ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
+
 
     void addTask(Task task) {
         this.taskList.add(task);

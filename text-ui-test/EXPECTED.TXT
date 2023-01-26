@@ -1,4 +1,4 @@
-Hi, I'm Nero and I am an automated chat bot
+Hi, I'm duke and I am an automated chat bot
 What would you like to do?
 Got it! I've added this task to the list!
 [T][ ] return book 

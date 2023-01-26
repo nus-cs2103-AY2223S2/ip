@@ -1,11 +1,23 @@
+package duke;
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
+
+    public static final String SEPARATOR = " | ";
+    String description;
+    boolean isDone;
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+
+    public String convertBoolean() {
+        return (this.isDone) ? "1" : "0";
+    }
     public abstract String currToPrint();
     public String getDescription() {
         return description;
@@ -27,6 +39,6 @@ public abstract class Task {
         isDone = false;
     }
 
-
+    public abstract String toSave();
 }
 
