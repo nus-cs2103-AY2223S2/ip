@@ -13,28 +13,63 @@ import aqua.util.FileUtils;
 
 /** Manager of tasks. */
 public class TaskManager implements Reloadable {
+    /** Path of save directory. */
     private static final String SAVE_DIRECTORY = "SAVE_DATA";
+    /** Path of save file relative to save directory. */
     private static final String SAVE_FILE = "Goshujin-sama you promised to never touch this.txt";
 
+    /** Array list containing tasks. */
     private final ArrayList<AquaTask> tasks = new ArrayList<>();
 
 
+    /**
+     * Adds the specified task.
+     * 
+     * @param task - the task to add.
+     */
     public void add(AquaTask task) {
         tasks.add(task);
     }
 
     
+    /**
+     * Marks task in the at the given index as specified.
+     * 
+     * @param taskNum - the index of the task to mark.
+     * @param isComplete - {@code true} to mark the task as complete and
+     *      {@code false} as incomplete.
+     * @return the modified task.
+     * @throws IndexOutOfBoundsException if taskNum is out of range.
+     */
     public AquaTask mark(int taskNum, boolean isComplete) throws IndexOutOfBoundsException {
         tasks.set(taskNum, tasks.get(taskNum).mark(isComplete));
         return tasks.get(taskNum);
     }
 
 
+    /**
+     * Deletes the task at the given index.
+     * 
+     * @param taskNum - the index of the task to delete.
+     * @return the deleted task.
+     * @throws IndexOutOfBoundsException if taskNum is out of range.
+     */
     public AquaTask delete(int taskNum) throws IndexOutOfBoundsException {
         return tasks.remove(taskNum);
     }
 
 
+    /**
+     * Returns a filtered LinkedHashMap of task number - task pair of the tasks
+     * with names matching the specified patteren. Task number in the returned
+     * hash map is 1 based and the iteration order is sorted according to the
+     * task's task number within this task manager.
+     * 
+     * @param pattern - the String character sequence of the task's name to
+     *      include.
+     * @return a LinkedHashMap of task number - task pair containing the
+     *      filtered tasks.
+     */
     public LinkedHashMap<Integer, AquaTask> filter(String pattern) {
         LinkedHashMap<Integer, AquaTask> taskMap = new LinkedHashMap<>();
         Stream.iterate(0, i -> i + 1)
@@ -45,11 +80,21 @@ public class TaskManager implements Reloadable {
     }
 
 
+    /**
+     * Returns the number of tasks stored.
+     * 
+     * @return the number of tasks stored.
+     */
     public int size() {
         return tasks.size();
     }
 
 
+    /**
+     * Saves the state of this task manager to hard disk.
+     * 
+     * @throws IOException if an I/O error occurs.
+     */
     public void saveToFile() throws IOException {
         Path dirPath = Paths.get(SAVE_DIRECTORY);
         if (!FileUtils.mkdirs(dirPath)) {
@@ -59,6 +104,11 @@ public class TaskManager implements Reloadable {
     }
 
 
+    /**
+     * Returns the path of the file where the state is saved.
+     * 
+     * @return the path of the file where the state is saved.
+     */
     public Path getSavePath() {
         return Paths.get(SAVE_DIRECTORY, SAVE_FILE);
     }
