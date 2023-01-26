@@ -1,4 +1,5 @@
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -41,6 +42,44 @@ public class Event extends Task {
         }
         if (objective.isEmpty()) throw new TaskParseException("This event is missing its body text!");
         return new Event(objective, from, to);
+    }
+
+    public static Event parseLoad(String[] data) throws TaskParseException {
+        try {
+            String[] header = data[0].split(" ");
+            if (!header[0].equals("E")) throw new TaskParseException("Invalid event data format");
+            boolean done = Boolean.parseBoolean(header[1]);
+            int objLines = Integer.parseInt(header[2]);
+            int fromLines = Integer.parseInt(header[3]);
+            int toLines = Integer.parseInt(header[4]);
+            String objective = "";
+            String from = "";
+            String to = "";
+            int seek = 1;
+            for (int i = 0; i < objLines; i++) objective += (i > 0 ? "\n" : "") + data[seek++];
+            for (int i = 0; i < fromLines; i++) from += (i > 0 ? "\n" : "") + data[seek++];
+            for (int i = 0; i < toLines; i++) to += (i > 0 ? "\n" : "") + data[seek++];
+            Event event = new Event(objective, from, to);
+            event.done = done;
+            return event;
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            throw new TaskParseException("Event data is malformed:\n" + ex.getMessage());
+        }
+    }
+    
+    @Override
+    public String[] save() {
+        ArrayList<String> repres = new ArrayList<>();
+        String cur;
+        cur = "E " + done
+                + " " + (objective.codePoints().filter(c -> c == '\n').count() + 1)
+                + " " + (from.codePoints().filter(c -> c == '\n').count() + 1)
+                + " " + (to.codePoints().filter(c -> c == '\n').count() + 1);
+        repres.add(cur);
+        Collections.addAll(repres, objective.split("\n"));
+        Collections.addAll(repres, from.split("\n"));
+        Collections.addAll(repres, to.split("\n"));
+        return repres.toArray(new String[repres.size()]);
     }
 
     @Override

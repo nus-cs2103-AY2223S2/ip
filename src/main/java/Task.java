@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+
 public abstract class Task {
-    private String objective;
-    private boolean done;
+    protected String objective;
+    protected boolean done;
 
     public Task(String objective) {
         this.objective = objective;
@@ -14,6 +16,8 @@ public abstract class Task {
     public void unmark() {
         done = false;
     }
+
+    public abstract String[] save();
 
     @Override
     public String toString() {

@@ -1,10 +1,25 @@
-import java.text.ParseException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Miki {
+    private static final String DATA_PATH = "./data/";
+
     private static class MikiArgsException extends Exception {
         protected MikiArgsException(String message) {
+            super(message);
+        }
+    }
+
+    private static class MikiLoadException extends Exception {
+        protected MikiLoadException(String message) {
             super(message);
         }
     }
@@ -22,6 +37,19 @@ public class Miki {
         print("  " + t.toString());
     }
 
+    private static void printSaves() {
+        createSaveDir();
+        File dir = new File(DATA_PATH);
+        if (dir == null) {
+            print("(default save location is missing?!)");
+            return;
+        }
+        File[] saves = dir.listFiles();
+        for (int i = 0; i < saves.length; i++) {
+            print("> " + saves[i].getName());
+        }
+    }
+
     private static int parseIndex(String[] args, int taskCount) throws MikiArgsException {
         int idx;
         if (args.length == 0) throw new MikiArgsException("you didn't specify which one?!");
@@ -37,6 +65,68 @@ public class Miki {
             throw new MikiArgsException(message);
         }
         return idx;
+    }
+
+    private static void createSaveDir() {
+        File dir = new File(DATA_PATH);
+        if (!dir.mkdirs()) {
+
+        }
+    }
+
+    private static void save(String pathString, ArrayList<Task> tasks) throws IOException {
+        createSaveDir();
+        Path path = FileSystems.getDefault().getPath(DATA_PATH).resolve(pathString);
+        BufferedWriter bw = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
+        try {
+            bw.write(Integer.toString(tasks.size()));
+            for (int i = 0; i < tasks.size(); i++) {
+                String[] repres = tasks.get(i).save();
+                bw.newLine();
+                bw.write(Integer.toString(repres.length));
+                for (int j = 0; j < repres.length; j++) {
+                    bw.newLine();
+                    bw.write(repres[j]);
+                }
+            }
+        } finally {
+            bw.close();
+        }
+    }
+
+    private static ArrayList<Task> load(String pathString) throws IOException, MikiLoadException {
+        createSaveDir();
+        ArrayList<Task> tasks = new ArrayList<>();
+        Path path = FileSystems.getDefault().getPath(DATA_PATH).resolve(pathString);
+        BufferedReader br = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+        try {
+            int numTasks = Integer.parseInt(br.readLine());
+            for (int i = 0; i < numTasks; i++) {
+                int taskLines = Integer.parseInt(br.readLine());
+                String[] repres = new String[taskLines];
+                for (int j = 0; j < taskLines; j++) {
+                    repres[j] = br.readLine();
+                }
+                switch (repres[0].charAt(0)) {
+                    case 'T':
+                        tasks.add(Todo.parseLoad(repres));
+                        break;
+                    case 'D':
+                        tasks.add(Deadline.parseLoad(repres));
+                        break;
+                    case 'E':
+                        tasks.add(Event.parseLoad(repres));
+                        break;
+                    default:
+                        //invalid ver? try to handle
+                }
+            }
+        } catch (NumberFormatException | TaskParseException ex) {
+            throw new MikiLoadException("this file is corrupt...");
+        } finally {
+            br.close();
+        }
+        return tasks;
     }
 
     public static void main(String[] args) {
@@ -59,6 +149,11 @@ public class Miki {
             print("Hello " + username + " !! Konmiki! \\(^v^)/");
         }
         printDiv();
+        try {
+            tasks = load("autosave.txt");
+        } catch (IOException | MikiLoadException ex) {
+
+        }
 
         boolean exit_cmd = false;
         while (!exit_cmd) {
@@ -121,6 +216,45 @@ public class Miki {
                         print("- " + delTask);
                         break;
                     }
+                    case "save": {
+                        String pathString = "";
+                        for (int i = 0; i < cmd_args.length; i++) {
+                            pathString += (i > 0 ? " " : "") + cmd_args[i];
+                        }
+                        if (!pathString.equals("")) {
+                            try {
+                                save(pathString, tasks);
+                                print("done! i've written your list to: " + pathString);
+                            } catch (IOException ex) {
+                                print("umm... i can't write on that!");
+                                print("> " + ex.getMessage());
+                            }
+                        } else {
+                            print("tell me where to write!!!");
+                        }
+                        break;
+                    }
+                    case "load": {
+                        String pathString = "";
+                        for (int i = 0; i < cmd_args.length; i++) {
+                            pathString += (i > 0 ? " " : "") + cmd_args[i];
+                        }
+                        if (!pathString.equals("")) {
+                            try {
+                                tasks = load(pathString);
+                                print("done! i've taken your list from: " + pathString);
+                            } catch (IOException ex) {
+                                print("umm... i can't read from that!");
+                                print("> " + ex.getMessage());
+                            } catch (MikiLoadException ex) {
+                                print(ex.getMessage());
+                            }
+                        } else {
+                            print("tell me what to read!!!");
+                            printSaves();
+                        }
+                        break;
+                    }
                     default:
                         throw new MikiArgsException("\"" + cmd + "\" isn't a real word!");
                 }
@@ -128,6 +262,11 @@ public class Miki {
                 print("?!?!? " + ex.getMessage());
             }
             printDiv();
+            try {
+                save("autosave.txt", tasks);
+            } catch (IOException ex) {
+
+            }
         }
     }
 }
