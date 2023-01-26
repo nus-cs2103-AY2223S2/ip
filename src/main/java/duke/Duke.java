@@ -25,6 +25,7 @@ public class Duke {
       this.tasks = TaskList.fromIterable(tasks);
       this.commands = new Parser(Stream.<Supplier<Command>>of(
         ListCommand::new,
+        FindCommand::new,
         MarkCommand::new,
         UnmarkCommand::new,
         TodoCommand::new,
