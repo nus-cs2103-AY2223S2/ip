@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -27,7 +29,7 @@ public class Duke {
         storage.saveData(this.tasks);
     }
     public static void main(String[] args) {
-        new Duke("../data/duke.txt").run();
+        new Duke(System.getProperty("user.dir") +"/data/duke.txt").run();
 //
     }
 
@@ -36,7 +38,7 @@ public class Duke {
 
 }
 
-// custom Task class to store individual tasks that the user enters
+// custom duke.Task class to store individual tasks that the user enters
 class Task {
     protected String description;
     protected boolean isDone;
@@ -151,6 +153,10 @@ class Storage {
         System.out.println("    . . . Loading . . . ");
         File file = new File(this.filePath);
         ArrayList<Task> tasks = new ArrayList<Task>();
+        File dir = new File(System.getProperty("user.dir") + "/data");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
         try {
             Scanner saveFile = new Scanner(file);
             System.out.println("    Saved data found, welcome back!");
@@ -166,23 +172,6 @@ class Storage {
             }
         }
         return tasks;
-    }
-
-    public void saveData(TaskList t) {
-        ArrayList<Task> tasks = t.getTasks();
-        try {
-            FileWriter fWriter = new FileWriter(this.filePath);
-            for (int i = 0; i < tasks.size(); i++) {
-                Task task = tasks.get(i);
-                fWriter.write(task.toSavedString());
-                if (i != tasks.size() - 1) {
-                    fWriter.write("\n");
-                }
-            }
-            fWriter.close();
-        } catch (IOException e) {
-            System.out.print(e.getMessage());
-        }
     }
 
     public static void loadSaved(String s, ArrayList<Task> tasks) {
@@ -211,6 +200,23 @@ class Storage {
             Event newEvent = new Event(desc, task.substring(0, task.indexOf("|") - 1),
                     task.substring(task.indexOf("|") + 2));
             tasks.add(newEvent);
+        }
+    }
+
+    public void saveData(TaskList t) {
+        ArrayList<Task> tasks = t.getTasks();
+        try {
+            FileWriter fWriter = new FileWriter(this.filePath);
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
+                fWriter.write(task.toSavedString());
+                if (i != tasks.size() - 1) {
+                    fWriter.write("\n");
+                }
+            }
+            fWriter.close();
+        } catch (IOException e) {
+            System.out.print(e.getMessage());
         }
     }
 }
@@ -314,7 +320,7 @@ class Ui {
                 return taskCounter - 1;
             }
         } else {
-            //throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            //throw new duke.DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :-(");
             return taskCounter;
         }
