@@ -6,7 +6,7 @@ import duke.task.Task;
 import java.util.List;
 
 /**
- * TaskApplication has the basic functionalities of a checklist.
+ * TaskList has the basic functionalities of a checklist.
  * A checklist keeps track of everyday tasks or events.
  */
 public class TaskList {
@@ -15,6 +15,10 @@ public class TaskList {
     /** Underlying storage to load and save Tasks */
     private Storage storage;
 
+    /**
+     * Constructs a TaskList and initialises the underlying backing store if it
+     * does not exist. Otherwise, load data from the backing store.
+     */
     public TaskList() {
         this.storage = new Storage();
         this.userTasks = storage.loadData();
@@ -88,10 +92,19 @@ public class TaskList {
         return result.toString().replaceAll("\\n$", "");
     }
 
+    /**
+     * Returns the Task at the specified index.
+     * @param index Index of task in the list.
+     * @return Task that has the index in the list.
+     */
     public Task getTask(int index) {
         return this.userTasks.get(index);
     }
 
+    /**
+     * Returns the number of tasks in TaskList.
+     * @return Number of tasks in TaskList.
+     */
     public int getNoOfTasks() {
         return this.userTasks.size();
     }

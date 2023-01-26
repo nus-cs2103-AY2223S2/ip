@@ -109,7 +109,7 @@ public class MainApplication {
     }
 
     /**
-     * Main loop for duke.Duke program.
+     * Main loop for Duke program.
      */
     public void start() {
         this.ui.printStart();
