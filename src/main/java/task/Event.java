@@ -6,6 +6,9 @@ import exception.InvalidDateFormatException;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents an event task that lasts between two time periods.
+ */
 public class Event extends Task{
     private LocalDateTime start;
     private LocalDateTime end;
@@ -16,6 +19,12 @@ public class Event extends Task{
         this.end = DateTimeHelper.parse(endString);
     }
 
+    /**
+     * Checks if the given datetime occurs within the event period.
+     *
+     * @param dt the given datetime to check.
+     * @return Whether the given datetime occurs within the event period.
+     */
     public boolean occursOn(LocalDateTime dt) {
         return dt.equals(this.start) || (dt.isAfter(this.start) && dt.isBefore(this.end)) || dt.equals(this.end);
     }

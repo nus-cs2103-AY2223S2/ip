@@ -8,6 +8,9 @@ import task.Task;
 
 import exception.DukeException;
 
+/**
+ * Represents a command to add a task to the task list.
+ */
 public class AddCommand extends Command {
     private String input;
 
@@ -16,6 +19,14 @@ public class AddCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Adds a task to the task list and save it.
+     *
+     * @param tl the current list of tasks
+     * @param ui the user interface running.
+     * @param storage the storage location for the program.
+     * @throws DukeException If an invalid input is given.
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         // Add task

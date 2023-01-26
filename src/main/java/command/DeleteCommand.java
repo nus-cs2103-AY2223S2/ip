@@ -9,6 +9,9 @@ import task.Task;
 import exception.DukeException;
 import exception.InvalidCommandInputException;
 
+/**
+ * Represents a command to delete a task from the task list.
+ */
 public class DeleteCommand extends Command {
     private String input;
 
@@ -17,6 +20,14 @@ public class DeleteCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Deletes a task from the task list and save the changes.
+     *
+     * @param tl the current list of tasks
+     * @param ui the user interface running.
+     * @param storage the storage location for the program.
+     * @throws DukeException If an invalid input is given.
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         // Deleting a task
@@ -24,7 +35,7 @@ public class DeleteCommand extends Command {
 
         // Verify if task number is invalid:
         if (idx < 0 || idx >= tl.numberOfTasks()) {
-            throw new InvalidCommandInputException("task.Task number is invalid!", "delete");
+            throw new InvalidCommandInputException("Task number is invalid!", "delete");
         }
 
         Task t = tl.deleteTask(idx);

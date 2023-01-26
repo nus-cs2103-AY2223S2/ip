@@ -3,10 +3,20 @@ package task;
 import exception.InvalidDateFormatException;
 import exception.InvalidTaskStringException;
 
+/**
+ * Represents a task to be done by the user.
+ */
 public class Task {
     private String content;
     private boolean done;
 
+    /**
+     * Converts a task string from storage into a Task object.
+     *
+     * @param s The string that represents the task to be parsed.
+     * @return The corresponding Task object.
+     * @throws InvalidTaskStringException If the task string is corrupted.
+     */
     public static Task parseTask(String s) throws InvalidTaskStringException {
 
         // check if task format is correct
@@ -96,10 +106,16 @@ public class Task {
         this.done = done;
     }
 
+    /**
+     * Marks a task as done.
+     */
     public void mark() {
         this.done = true;
     }
 
+    /**
+     * Unmarks a task as not done.
+     */
     public void unmark() {
         this.done = false;
     }

@@ -1,8 +1,12 @@
 package sys;
 
 import command.*;
+import exception.InvalidDateFormatException;
 import task.TaskList;
 
+/**
+ * Represents a parser used to decode user input.
+ */
 public class Parser {
     TaskList tl;
     Storage storage;
@@ -14,6 +18,12 @@ public class Parser {
         this.ui = ui;
     };
 
+    /**
+     * Converts a user input into a Command object.
+     *
+     * @param input The input line given by the user.
+     * @return Command object representing the input.
+     */
     public Command parse(String input) {
         // Handle control flow
         switch (input) {

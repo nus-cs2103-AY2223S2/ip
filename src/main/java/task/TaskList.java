@@ -4,12 +4,16 @@ import exception.CommandNotFoundException;
 import exception.InvalidCommandInputException;
 import exception.InvalidDateFormatException;
 
+import exception.InvalidTaskStringException;
 import helper.DateTimeHelper;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Represents the list of tasks used by the UI.
+ */
 public class TaskList {
 
     private List<Task> tasks;
@@ -18,6 +22,14 @@ public class TaskList {
         this.tasks = new LinkedList<>();
     }
 
+    /**
+     * Adds a task to the list using the user input.
+     *
+     * @param input The user input.
+     * @return The corresponding task object.
+     * @throws CommandNotFoundException If command is invalid.
+     * @throws InvalidCommandInputException If command argument is invalid.
+     */
     public Task addTask(String input) throws CommandNotFoundException, InvalidCommandInputException {
         if (input != null && (input.equals("todo") || input.equals("deadline") || input.equals("event"))) {
             throw new InvalidCommandInputException("Empty argument", input);
@@ -64,48 +76,69 @@ public class TaskList {
         return tasks.get(tasks.size() - 1);
     }
 
+    /**
+     * Adds a given task object to the task list.
+     *
+     * @param t The task object to be added.
+     */
     public void addTask(Task t) {
         this.tasks.add(t);
     }
 
+    /**
+     * Deletes a task at the given index.
+     *
+     * @param i Index of the task to be deleted.
+     */
     public Task deleteTask(int i) {
         Task res = this.getTask(i);
         tasks.remove(i);
         return res;
     }
 
-    public void addDeadline(String task, String deadline) {
-        try {
-            this.tasks.add(new Deadline(task, deadline));
-        } catch (InvalidDateFormatException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void addEvent(String task, String start, String end) {
-        try {
-            this.tasks.add(new Event(task, start, end));
-        } catch (InvalidDateFormatException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
+    /**
+     * Marks a task at the given index.
+     *
+     * @param i Index of the task to be marked.
+     */
     public void markTask(int i) {
         tasks.get(i).mark();
     }
 
+    /**
+     * Unmarks a task at the given index.
+     *
+     * @param i Index of the task to be unmarked.
+     */
     public void unmarkTask(int i) {
         tasks.get(i).unmark();
     }
 
+    /**
+     * Gets a task at the given index.
+     *
+     * @param i Index of the task.
+     * @return The task object to be returned.
+     */
     public Task getTask(int i) {
         return tasks.get(i);
     }
 
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return The number of tasks.
+     */
     public int numberOfTasks() {
         return tasks.size();
     }
 
+    /**
+     * Print the tasks that occurs on a given date. It is used for the occurs command.
+     *
+     * @param deadline The date to check.
+     * @throws InvalidDateFormatException If the date given does not follow the specified format.
+     */
     public void printTasksOnDate(String deadline) throws InvalidDateFormatException {
         LocalDateTime dt = DateTimeHelper.parse(deadline);
         int counter = 1;
