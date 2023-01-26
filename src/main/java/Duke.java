@@ -110,7 +110,7 @@ public class Duke {
                                         "tasks in the list", len));
                                 file.overwrite(listOfAction);
                             } else {
-                                System.out.println(new DukeException("OPPS!!! Invalid index!"));
+                                System.out.println(new DukeException("OOPS!!! Invalid index!"));
                             }
                         } catch (DukeException e) {
                             System.out.println(e.getMessage());

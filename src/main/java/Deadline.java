@@ -17,10 +17,6 @@ public class Deadline extends Task {
         this.day = LocalDate.parse(day);
     }
 
-   /* Deadline(String type, String detail){
-        super(type, detail);
-    }*/
-
     /**
      * Returns deadline printed out properly.
      *
