@@ -17,7 +17,7 @@ public class Duke {
     public Duke(String fileName) {
         this.storage = new Storage(fileName);
         this.ui = new Ui();
-        this.tasks = new TaskList(new LinkedList<Task>());
+        this.tasks = new TaskList();
     }
 
     private void chat() {

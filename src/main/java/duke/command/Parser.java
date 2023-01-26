@@ -24,6 +24,8 @@ public class Parser {
             return new DeadlineCommand(command);
         case "delete":
             return new DeleteCommand(command);
+        case "find":
+            return new FindCommand(command);
         default:
             return new NoCommand(command);
         }

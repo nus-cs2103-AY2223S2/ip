@@ -42,6 +42,38 @@ public class Ui {
         }
     }
 
+    /**
+     * Method that prints to console the tasks
+     * with descriptions that contains the
+     * targeted word.
+     * @param tasks List of tasks.
+     */
+    public void showListWithMatchedWords(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + "." + tasks.get(i).toString());
+        }
+    }
+
+    /**
+     * Method to print to console when there
+     * are no tasks with descriptions that contains
+     * the targeted word.
+     * @param word The targeted word.
+     */
+    public void noMatchingWords(String word) {
+        System.out.printf("There are no task that contains the word: %s", word);
+    }
+
+    /**
+     * Method to print to console an error
+     * message when there is no valid word
+     * after the find command.
+     */
+    public void findError() {
+        System.out.println("☹ OOPS!!! The keyword is no valid!");
+    }
+
     public void markMsg(TaskList tasks, int index) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(tasks.get(index).toString());

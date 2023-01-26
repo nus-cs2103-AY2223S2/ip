@@ -1,13 +1,12 @@
 package duke.task;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class TaskList {
-    private List<Task> taskList;
+    private List<Task> taskList = new LinkedList<>();
 
-    public TaskList(List<Task> taskList) {
-        this.taskList = taskList;
-    }
+    public TaskList() {}
 
     public void add(Task task) {
         this.taskList.add(task);
