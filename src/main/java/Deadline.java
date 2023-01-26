@@ -1,23 +1,30 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-import static java.time.format.DateTimeFormatter.ofPattern;
 
-public class Deadline extends Tasks {
+public class Deadline extends Task {
 
     private LocalDateTime deadline;
 
     public Deadline(String content, String deadline) {
         super(content);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.deadline = LocalDateTime.parse(deadline.trim(), formatter);
-
+        try {
+            this.deadline = LocalDateTime.parse(deadline.trim(), formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format should be yyyy-MM-dd HH:mm");
+        }
     }
 
     public Deadline(boolean isMarked, String content, String deadline) {
         super(isMarked, content);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.deadline = LocalDateTime.parse(deadline.trim(), formatter);
+        try {
+            this.deadline = LocalDateTime.parse(deadline.trim(), formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format should be yyyy-MM-dd HH:mm");
+        }
     }
 
     @Override

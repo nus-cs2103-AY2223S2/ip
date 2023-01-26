@@ -1,38 +1,10 @@
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class HardDisk {
-    // create a file object for the current location
-    public static void initSaveFile() {
-        File dir = new File("Duke/save");
-        dir.mkdirs();
-        // create a file object for the current location
-        File file = new File(dir, "DukeSaveFile.txt");
-
-        try {
-            // create a new file with name specified
-            // by the file object
-            boolean value = file.createNewFile();
-            if (value) {
-                FileWriter output = new FileWriter("DukeSaveFile.txt");
-                output.write("---------------LIST OF TASKS--------------------");
-                output.append('\n');
-                System.out.println("New Save File is created.");
-            }
-            else {
-                System.out.println("Save file already exists.");
-            }
-        }
-        catch(Exception e) {
-            e.getStackTrace();
-        }
-    }
-
-    public static void loadFile(ArrayList<Tasks> list) throws IOException, DukeException {
+public class Storage {
+    public static void loadFile(Tasklist list) throws IOException, DukeException {
         File file = new File(System.getProperty("user.dir") + "/data/Duke.txt");
         File dir = new File(System.getProperty("user.dir") + "/data");
 
@@ -59,7 +31,6 @@ public class HardDisk {
             }
         }
     }
-
     public static boolean strToBool(String str) {
         if (str == "1") {
             return true;
@@ -67,21 +38,12 @@ public class HardDisk {
             return false;
         }
     }
-
-    public static void saveToFile(ArrayList<Tasks> list) throws IOException {
+    public static void saveToFile(Tasklist list) throws IOException {
         FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/data/Duke.txt");
-        for (Tasks t: list) {
-            fw.write(t.addDivider() +  "\n");
+        for (int i = 0; i < list.size(); i++) {
+            fw.write(list.get(i).addDivider() +  "\n");
         }
         fw.close();
     }
-
-
-    public static void clearFile(String filename) throws IOException {
-        FileOutputStream writer = new FileOutputStream(filename);
-        writer.write(("").getBytes());
-        writer.close();
-    }
-
 }
 

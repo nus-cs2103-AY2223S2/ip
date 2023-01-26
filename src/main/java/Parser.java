@@ -1,4 +1,4 @@
-public class InputProcessor {
+public class Parser {
     /* Takes in an input,
     1. looks at first word and checks if it is a task
     2. if it is, splits words future
@@ -11,6 +11,49 @@ public class InputProcessor {
             }
         }
         return false;
+    }
+
+    public static Event parseEvent(String input) throws DukeException {
+        String event = input.split(" ", 2)[1];
+        String[] event_Arr = event.split(" /from", 2);
+
+        if (event_Arr.length == 2) {
+            String content = event_Arr[0];
+            String[] period_Arr = event_Arr[1].split(" /to");
+            if (period_Arr.length == 2) {
+                String from = period_Arr[0];
+                String to = period_Arr[1];
+                return new Event(content, from, to);
+            } else {
+                throw new DukeException("Invalid Input! You need to specify a /from and /to or content is empty!");
+            }
+        } else {
+            throw new DukeException("Invalid Input! You need to specify a /from and /to or content is empty!");
+        }
+    }
+
+    public static int getIndex(String input) {
+        String int_Str = input.split(" ", 2)[1];
+        int index = Integer.parseInt(int_Str);
+        return index;
+    }
+
+    public static Deadline parseDeadline(String input) throws DukeException {
+        String deadline = input.split(" ", 2)[1];
+        String[] deadline_Arr = deadline.split(" /by");
+        if (deadline_Arr.length == 2) {
+            String content = deadline_Arr[0];
+            String date = deadline_Arr[1];
+            return new Deadline(content, date);
+
+        } else {
+            throw new DukeException("Deadline Input Error! You need to specify date or content is empty!");
+        }
+    }
+
+    public static String getTodo(String input) {
+        String todo = input.split(" ", 2)[1];
+        return todo;
     }
 
     public static boolean is_Event(String input) {

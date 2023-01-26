@@ -1,14 +1,14 @@
 
-public abstract class Tasks {
+public abstract class Task {
     private boolean isMarked;
     private String content;
 
-    public Tasks(String Task_content) {
+    public Task(String Task_content) {
         this.content = Task_content;
         this.isMarked = false;
     }
 
-    public Tasks(Boolean isMarked, String Task_content) {
+    public Task(Boolean isMarked, String Task_content) {
         this.content = Task_content;
         this.isMarked = isMarked;
     }
@@ -22,15 +22,13 @@ public abstract class Tasks {
     }
 
     public void mark() {
-        System.out.println("        Nice! I've marked this task as done:");
         isMarked = true;
-        System.out.println("        " + this);
+        Ui.displayMark(this);
     }
 
     public void unmark() {
-        System.out.println("        OK, I've marked this task as not done yet:");
         isMarked = false;
-        System.out.println("        " + this);
+        Ui.displayUnmark(this);
     }
 
     public abstract String addDivider();

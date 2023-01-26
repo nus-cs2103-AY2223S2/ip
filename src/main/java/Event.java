@@ -1,20 +1,31 @@
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-public class Event extends Tasks {
+import java.time.format.DateTimeParseException;
+
+public class Event extends Task {
     private LocalDateTime start_Date;
     private LocalDateTime end_Date;
     public Event(String content, String start_Date, String end_Date) {
         super(content);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.start_Date = LocalDateTime.parse(start_Date.trim(), formatter);
-        this.end_Date = LocalDateTime.parse(end_Date.trim(), formatter);
+        try {
+            this.start_Date = LocalDateTime.parse(start_Date.trim(), formatter);
+            this.end_Date = LocalDateTime.parse(end_Date.trim(), formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format should be yyyy-MM-dd HH:mm");
+        }
     }
 
     public Event(boolean isMarked, String content, String start_Date, String end_Date) {
         super(isMarked, content);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.start_Date = LocalDateTime.parse(start_Date.trim(), formatter);
-        this.end_Date = LocalDateTime.parse(end_Date.trim(), formatter);
+        try {
+            this.start_Date = LocalDateTime.parse(start_Date.trim(), formatter);
+            this.end_Date = LocalDateTime.parse(end_Date.trim(), formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println("Invalid date format should be yyyy-MM-dd HH:mm");
+        }
     }
 
     @Override
