@@ -1,6 +1,5 @@
 package duke;
 
-import duke.task.Ui;
 import duke.command.Command;
 
 public class Duke {
@@ -8,6 +7,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Returns duke object.
+     * @param filePath path for backup file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -19,6 +22,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the duke chatbot.
+     */
     public void run() {
         ui.greet();
         boolean isExit = false;
@@ -36,6 +42,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the duke chatbot.
+     * @param args input arguments.
+     */
     public static void main(String[] args) {
         new Duke("duke.txt").run();
     }

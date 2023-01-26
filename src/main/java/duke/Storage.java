@@ -16,6 +16,10 @@ import java.util.Scanner;
 public class Storage {
     private final Path backupPath;
 
+    /**
+     * Returns a storage object.
+     * @param filepath path of backup file.
+     */
     public Storage(String filepath) {
         String home = System.getProperty("user.dir");
         Path path = java.nio.file.Paths.get(home, "src", "main", "data");
@@ -30,6 +34,10 @@ public class Storage {
         this.backupPath = Path.of(path + "/" + filepath);
     }
 
+    /**
+     * Load entire task list into the backup file.
+     * @param arr task list.
+     */
     public void writeArray (TaskList arr) {
         File file = new File(backupPath.toString());
         try {
@@ -44,6 +52,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads backup file and converts into task list.
+     * @return task list.
+     */
     public TaskList readArray () {
         TaskList arr = new TaskList();
 

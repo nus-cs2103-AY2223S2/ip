@@ -7,6 +7,11 @@ import duke.task.Task;
 import duke.task.Todo;
 
 public class Parser {
+    /**
+     * Returns the command object that the input line represents.
+     * @param fullCommand full unparsed command.
+     * @return command
+     */
     public static Command parse(String fullCommand) {
 
         if (fullCommand.equalsIgnoreCase("bye")) {
