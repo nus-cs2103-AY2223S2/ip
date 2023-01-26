@@ -11,25 +11,25 @@ public class QueryTypeUtil {
     private static final String EVENT_QUERY_TYPE = "event";
 
     public static QueryType GetQueryTypeFromString(String queryTypeStr) {
-        switch(queryTypeStr) {
-            case TODO_QUERY_TYPE:
-                return QueryType.TODO;
-            case DEADLINE_QUERY_TYPE:
-                return QueryType.DEADLINE;
-            case EVENT_QUERY_TYPE:
-                return QueryType.EVENT;
-            case LIST_QUERY_TYPE:
-                return QueryType.LIST;
-            case MARK_QUERY_TYPE:
-                return QueryType.MARK;
-            case UNMARK_QUERY_TYPE:
-                return QueryType.UNMARK;
-            case DELETE_QUERY_TYPE:
-                return QueryType.DELETE;
-            case BYE_QUERY_TYPE:
-                return QueryType.EXIT;
-            default:
-                return QueryType.UNKNOWN;
+        switch (queryTypeStr) {
+        case TODO_QUERY_TYPE:
+            return QueryType.TODO;
+        case DEADLINE_QUERY_TYPE:
+            return QueryType.DEADLINE;
+        case EVENT_QUERY_TYPE:
+            return QueryType.EVENT;
+        case LIST_QUERY_TYPE:
+            return QueryType.LIST;
+        case MARK_QUERY_TYPE:
+            return QueryType.MARK;
+        case UNMARK_QUERY_TYPE:
+            return QueryType.UNMARK;
+        case DELETE_QUERY_TYPE:
+            return QueryType.DELETE;
+        case BYE_QUERY_TYPE:
+            return QueryType.EXIT;
+        default:
+            return QueryType.UNKNOWN;
         }
     }
 }

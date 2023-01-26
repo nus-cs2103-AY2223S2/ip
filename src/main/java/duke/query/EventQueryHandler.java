@@ -15,7 +15,7 @@ public class EventQueryHandler extends DeadlineQueryHandler {
 
     @Override
     public String processQuery(String query) throws DukeException {
-        String[] parsed = QueryParser.parseQuery(query, new String[]{ "/from", "/to"});
+        String[] parsed = QueryParser.parseQuery(query, new String[]{"/from", "/to"});
         String desc = parsed[1];
         if (desc == null || desc.isBlank()) {
             throw new InvalidCommandParamException("Please provide a description for your event!");

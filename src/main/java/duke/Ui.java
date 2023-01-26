@@ -16,8 +16,8 @@ public class Ui {
     private final Scanner scanner;
 
     public Ui() {
-       this.responseFormatter = new ResponseFormatter();
-       scanner = new Scanner(System.in);
+        this.responseFormatter = new ResponseFormatter();
+        scanner = new Scanner(System.in);
     }
 
     public boolean hasUserInput() {
@@ -38,6 +38,6 @@ public class Ui {
     }
 
     public void displayResponse(String response) {
-       System.out.println(responseFormatter.format(response));
+        System.out.println(responseFormatter.format(response));
     }
 }
