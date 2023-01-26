@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Duke {
 
     private static final List<Task> taskList = new ArrayList<>();
-    private static final String botName = "Tyrone";
+    private static final String BOT_NAME = "Tyrone";
 
     public static void print(String s) {
         System.out.println(s);
