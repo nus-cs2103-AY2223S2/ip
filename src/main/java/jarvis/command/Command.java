@@ -1,11 +1,13 @@
 package jarvis.command;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import jarvis.exception.InvalidActionException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;
-import jarvis.exception.InvalidActionException;
-
-import java.util.List;
 
 /**
  * Abstract command class.
@@ -38,6 +40,13 @@ public abstract class Command {
         // @@author hansstanley-reused
         // Reused from https://stackoverflow.com/questions/604424
         // with minor modifications.
+        /**
+         * Converts a string into an Action.
+         *
+         * @param str Raw string.
+         * @return The matching Action, if any.
+         * @throws InvalidActionException If the raw string does not match any Action.
+         */
         public static Action fromString(String str) throws InvalidActionException {
             if (str != null) {
                 str = str.trim();
@@ -53,7 +62,19 @@ public abstract class Command {
 
     private final Action action;
     private final String body;
-    private final List<Command> subCommands;
+    private final Map<Action, Command> commandMap;
+
+    /**
+     * Constructor for a command without subcommands.
+     *
+     * @param action Determines the nature of the command.
+     * @param body Supplementary information for the command.
+     */
+    public Command(Action action, String body) {
+        this.action = action;
+        this.body = body;
+        this.commandMap = new HashMap<>();
+    }
 
     /**
      * Constructor for a command.
@@ -63,9 +84,11 @@ public abstract class Command {
      * @param subCommands Secondary commands as additional parameters.
      */
     public Command(Action action, String body, List<Command> subCommands) {
-        this.action = action;
-        this.body = body;
-        this.subCommands = subCommands;
+        this(action, body);
+
+        for (Command command : subCommands) {
+            this.commandMap.put(command.action, command);
+        }
     }
 
     /**
@@ -92,23 +115,8 @@ public abstract class Command {
     }
 
     /**
-     * @return The secondary commands, if any.
-     */
-    public List<Command> getSubCommands() {
-        return this.subCommands;
-    }
-
-    /**
-     * @param action Action to check against.
-     * @return Whether this command is of the given action's nature.
-     */
-    public boolean hasAction(Action action) {
-        return this.action == action;
-    }
-
-    /**
      * @param actions Actions to check against.
-     * @return Whether this command is of any of the given actions' natures.
+     * @return Whether this command is of the given actions' natures.
      */
     public boolean hasAction(Action ...actions) {
         for (Action action : actions) {
@@ -117,5 +125,15 @@ public abstract class Command {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns the subcommand with the given action, if any.
+     *
+     * @param action Action of the subcommand.
+     * @return Command with the associated action.
+     */
+    public Command getSubCommand(Action action) {
+        return this.commandMap.getOrDefault(action, null);
     }
 }

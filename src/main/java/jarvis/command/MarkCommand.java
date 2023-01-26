@@ -1,9 +1,9 @@
 package jarvis.command;
 
+import jarvis.exception.InvalidParameterException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;
-import jarvis.exception.InvalidParameterException;
 
 
 /**
@@ -13,15 +13,22 @@ public class MarkCommand extends Command {
     private final int index;
     private final boolean isDone;
 
-    public MarkCommand(Action action, String body) {
-        super(action, body, null);
+    /**
+     * Constructor for a command to mark tasks as done or undone.
+     * @param body String 1-based index of the target task.
+     * @param isDone Whether the task is to be marked as done or undone.
+     */
+    public MarkCommand(String body, boolean isDone) {
+        super(isDone ? Action.MARK_DONE : Action.MARK_UNDONE, body);
 
-        int index = -1;
+        int index;
         try {
             index = Integer.parseInt(body);
-        } catch (NumberFormatException ignored) {}
+        } catch (NumberFormatException ignored) {
+            index = -1;
+        }
         this.index = index;
-        this.isDone = action == Action.MARK_DONE;
+        this.isDone = isDone;
     }
 
     @Override

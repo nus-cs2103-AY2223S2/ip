@@ -1,11 +1,12 @@
 package jarvis.task;
 
-import jarvis.exception.CommandParseException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import jarvis.exception.CommandParseException;
 
 public class EventTaskTest {
     private static final String BODY = "an event test";

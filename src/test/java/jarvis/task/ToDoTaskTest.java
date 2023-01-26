@@ -1,9 +1,10 @@
 package jarvis.task;
 
-import jarvis.exception.MissingParameterException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import jarvis.exception.MissingParameterException;
 
 public class ToDoTaskTest {
     private static final String BODY = "a todo task";

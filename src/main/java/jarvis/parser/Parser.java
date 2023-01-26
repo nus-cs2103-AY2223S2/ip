@@ -1,12 +1,24 @@
 package jarvis.parser;
 
-import jarvis.command.*;
-import jarvis.exception.InvalidActionException;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+
+import jarvis.command.ByeCommand;
+import jarvis.command.Command;
+import jarvis.command.DeadlineCommand;
+import jarvis.command.DeleteCommand;
+import jarvis.command.EventCommand;
+import jarvis.command.ListCommand;
+import jarvis.command.MarkCommand;
+import jarvis.command.ToDoCommand;
+import jarvis.command.UnknownCommand;
+import jarvis.command.subcommand.ByCommand;
+import jarvis.command.subcommand.FromCommand;
+import jarvis.command.subcommand.ToCommand;
+import jarvis.exception.InvalidActionException;
+
 
 /**
  * Parser class for user commands.
@@ -47,22 +59,25 @@ public class Parser {
             return new ByeCommand();
         case LIST:
         case FIND:
-            return new ListCommand(action, body, subCommands);
-        case MARK_DONE: // Fallthrough
+            return new ListCommand(body, subCommands);
+        case MARK_DONE:
+            return new MarkCommand(body, true);
         case MARK_UNDONE:
-            return new MarkCommand(action, body);
+            return new MarkCommand(body, false);
         case DELETE_TASK:
-            return new DeleteCommand(action, body);
+            return new DeleteCommand(body);
         case CREATE_TODO:
-            return new ToDoCommand(action, body);
+            return new ToDoCommand(body);
         case CREATE_DEADLINE:
-            return new DeadlineCommand(action, body, subCommands);
+            return new DeadlineCommand(body, subCommands);
         case CREATE_EVENT:
-            return new EventCommand(action, body, subCommands);
-        case DEADLINE_BY: // Fallthrough
-        case EVENT_FROM: // Fallthrough
+            return new EventCommand(body, subCommands);
+        case DEADLINE_BY:
+            return new ByCommand(body);
+        case EVENT_FROM:
+            return new FromCommand(body);
         case EVENT_TO:
-            return new SubCommand(action, body, subCommands);
+            return new ToCommand(body);
         default:
             return new UnknownCommand();
         }

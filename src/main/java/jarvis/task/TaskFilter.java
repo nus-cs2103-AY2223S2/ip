@@ -1,13 +1,13 @@
 package jarvis.task;
 
-import jarvis.exception.InvalidParameterException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import jarvis.exception.InvalidParameterException;
 
 /**
  * Container class for task filtering information.
@@ -107,12 +107,16 @@ public class TaskFilter {
      * @return This filter.
      */
     public TaskFilter addKeywords(String fromLine) {
-        if (fromLine == null || fromLine.isBlank()) return this;
+        if (fromLine == null || fromLine.isBlank()) {
+            return this;
+        }
         List<String> words = Arrays.stream(fromLine.split("\\s"))
                 .filter(s -> !s.isBlank())
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
-        for (String word : words) System.out.println("Word: " + word);
+        for (String word : words) {
+            System.out.println("Word: " + word);
+        }
         this.keywords.addAll(words);
         return this;
     }
