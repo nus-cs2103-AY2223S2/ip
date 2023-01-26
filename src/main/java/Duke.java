@@ -6,6 +6,14 @@ public class Duke {
     private static final int INDENT_LEVEL = 4;
 
     public static void main(String[] args) {
+        TaskList tasks;
+        try {
+            tasks = TaskList.load();
+        } catch(DukeLoadException e) {
+            Duke.say(e.getDukeMessage());
+            return;
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -14,7 +22,6 @@ public class Duke {
         Duke.say("Hello from\n" + logo);
 
         Scanner scanner = new Scanner(System.in);
-        TaskList tasks = new TaskList();
 
         whileLoop:
         while (true) {
@@ -56,6 +63,8 @@ public class Duke {
                     default:
                         throw new DukeInvalidCommandException();
                 }
+
+                tasks.save();
             } catch (DukeException e) {
                 Duke.say(e.getDukeMessage());
             }
