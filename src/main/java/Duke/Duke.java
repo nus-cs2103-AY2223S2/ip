@@ -1,16 +1,16 @@
 package Duke;
 
+import java.io.IOException;
+
 import Duke.Exceptions.EmptyCommandException;
 import Duke.Exceptions.InvalidCommandException;
 import Duke.Exceptions.InvalidTimeFormatException;
 import Duke.Exceptions.MissingDescriptionException;
-import Duke.Tasks.*;
-import java.io.IOException;
+import Duke.Tasks.Disk;
+import Duke.Tasks.Monitor;
+import Duke.Tasks.Task;
+import Duke.Tasks.TaskTable;
 
-/**
- * @author Sun Yitong
- * @version 1.0
- */
 
 /**
  * Represents class of Duke.Duke
@@ -27,7 +27,8 @@ public class Duke {
      * @throws InvalidCommandException
      * @throws MissingDescriptionException
      */
-    public Duke(String path) throws EmptyCommandException, InvalidTimeFormatException, InvalidCommandException, MissingDescriptionException {
+    public Duke(String path) throws EmptyCommandException, InvalidTimeFormatException,
+            InvalidCommandException, MissingDescriptionException {
         Monitor monitor = new Monitor();
         Disk disk = new Disk(path);
 
@@ -48,8 +49,8 @@ public class Duke {
                 Task newTask = Interpreter.interpret(command, table);
                 newTask.run(table, monitor, disk);
                 running = !newTask.exited; // if newTask exits stop running
-            } catch (NullPointerException | InvalidTimeFormatException | MissingDescriptionException |
-                     EmptyCommandException | InvalidCommandException e) {
+            } catch (NullPointerException | InvalidTimeFormatException | MissingDescriptionException
+                     | EmptyCommandException | InvalidCommandException e) {
                 continue;
             }
         }
@@ -64,8 +65,9 @@ public class Duke {
      * @throws InvalidCommandException
      * @throws MissingDescriptionException
      */
-    public static void main(String[] args) throws EmptyCommandException, InvalidTimeFormatException, InvalidCommandException, MissingDescriptionException {
-            new Duke("data/tasks.txt");
+    public static void main(String[] args) throws EmptyCommandException, InvalidTimeFormatException,
+            InvalidCommandException, MissingDescriptionException {
+        new Duke("data/tasks.txt");
     }
 
 }
