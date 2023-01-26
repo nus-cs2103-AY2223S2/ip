@@ -1,12 +1,10 @@
-package commands;
+package duke.commands;
 
-import ui.Ui;
-import commands.*;
-import storage.*;
-import parser.*;
-import tasks.*;
+import duke.ui.Ui;
+import duke.storage.*;
+import duke.tasks.*;
 
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
 public class Command {
 
     public boolean isExit() {

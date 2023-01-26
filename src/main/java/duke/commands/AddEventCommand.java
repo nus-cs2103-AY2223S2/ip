@@ -1,10 +1,10 @@
-package commands;
+package duke.commands;
 
-import exceptions.DukeException;
-import storage.Storage;
-import tasks.Event;
-import tasks.TaskList;
-import ui.Ui;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.tasks.Event;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -41,6 +41,6 @@ public class AddEventCommand extends Command{
         } catch(IOException e) {
             throw new DukeException("Error writing to file");
         }
-        ui.showToUser("Got it. I've added this task: \n    " + userTask + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+        ui.showToUser("Got it. I've added this task: \n    " + userTask + "\nNow you have " + tasks.getSize() + " duke.tasks in the list.");
     }
 }

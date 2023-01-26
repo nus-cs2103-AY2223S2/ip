@@ -1,27 +1,13 @@
-import java.util.Arrays;
-import java.time.LocalDate;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.charset.StandardCharsets;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+package duke;
 
-import exceptions.DukeException;
-import parser.Parser;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
-import ui.Ui;
-import commands.*;
-import storage.*;
-import parser.*;
-import tasks.*;
+import java.io.IOException;
+
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.ui.Ui;
+import duke.commands.*;
+import duke.storage.*;
+import duke.tasks.*;
 
 public class Duke {
     private Storage storage;
@@ -58,6 +44,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("data/duke.tasks.txt").run();
     }
 }

@@ -1,14 +1,7 @@
-package parser;
+package duke.parser;
 
-import commands.*;
-import exceptions.DukeException;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
+import duke.commands.*;
 
-import java.io.IOException;
-import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

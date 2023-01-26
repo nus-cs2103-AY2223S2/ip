@@ -1,10 +1,10 @@
-package commands;
+package duke.commands;
 
-import exceptions.DukeException;
-import storage.Storage;
-import tasks.Deadline;
-import tasks.TaskList;
-import ui.Ui;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.tasks.Deadline;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -36,6 +36,6 @@ public class AddDeadlineCommand extends Command{
         } catch(IOException e) {
             throw new DukeException("Error writing to file");
         }
-        ui.showToUser("Got it. I've added this task: \n    " + userTask + "\nNow you have " + tasks.getSize() + " tasks in the list.");
+        ui.showToUser("Got it. I've added this task: \n    " + userTask + "\nNow you have " + tasks.getSize() + " duke.tasks in the list.");
     }
 }
