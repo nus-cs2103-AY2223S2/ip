@@ -1,9 +1,9 @@
-package duke;//package duke;
+package duke;
 
-import exceptions.TaskException;
-import storage.Storage;
-import tasklist.TaskList;
-import ui.Ui;
+import duke.exceptions.TaskException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 import duke.parser.Parser;
 import duke.command.*;
 
