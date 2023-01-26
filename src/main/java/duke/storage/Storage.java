@@ -6,14 +6,31 @@ import java.io.FileWriter;
 
 import duke.task.TaskList;
 
+/**
+ * Storage handles the loading and saving of
+ * the task list.
+ *
+ * @author Oskar Lew
+ * @version 0.1
+ * @since 0.1
+ */
 public class Storage {
-    File taskStorage;
-    String FOLDER = "./";
+    private File taskStorage;
+    private final String FOLDER = "./";
 
+    /**
+     * Constructor of Storage.
+     *
+     * @param fileName Filename of saved task list.
+     */
     public Storage(String fileName) {
         this.taskStorage = new File(FOLDER, fileName + ".txt");
     }
 
+    /**
+     * Saves the task list onto the hard drive.
+     * @param tasks The list of tasks.
+     */
     public void write(TaskList tasks) {
         if (this.taskStorage.exists()) {
             this.taskStorage.delete();
