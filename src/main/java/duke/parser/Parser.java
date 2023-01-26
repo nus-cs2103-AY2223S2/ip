@@ -7,19 +7,40 @@ import duke.tasklist.TaskList;
 
 import java.util.Arrays;
 
+/**
+ * Represents a Parser.
+ * Parses user input into different TaskList methods.
+ * @author pzhengze.
+ */
 public class Parser {
+    /** Reference to the TaskList it is parsing for */
     private final TaskList tasks;
+
+    /**
+     * Constructor for Parser object.
+     * @param tasks The TaskList to be parsed for.
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 
-    public String parseAndExecute(String input) throws DukeException {
-        String[] inputArray = input.split(" ");
+    /**
+     * Parses the command and calls the correct TaskList method.
+     * @param command The user command to be parsed.
+     * @return The feedback message to the user.
+     * @throws DukeUnknownCommandException if the parser fails to understand the command.
+     * @throws DukeException if an exception occurred while executing the command.
+     */
+    public String parseAndExecute(String command) throws DukeUnknownCommandException, DukeException {
+        // Extracts the command the other details of the command
+        String[] inputArray = command.split(" ");
         String fn = inputArray[0];
         String info = "";
         if (inputArray.length > 1) {
             info = String.join(" ", Arrays.copyOfRange(inputArray, 1, inputArray.length));
         }
+
+        // Interprets the extracted function and executes the correct TaskList method.
         switch(fn) {
             case "list":
                 return tasks.list();
