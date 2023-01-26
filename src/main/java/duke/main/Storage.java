@@ -12,6 +12,9 @@ import java.util.List;
 
 import duke.task.Task;
 
+/**
+ * Class containing methods related to loading and saving tasks to and from the disk
+ */
 public class Storage {
   public static List<Task> loadFromDisk(String path) throws IOException, ClassNotFoundException {
 

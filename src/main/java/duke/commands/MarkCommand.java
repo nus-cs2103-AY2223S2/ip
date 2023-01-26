@@ -5,6 +5,9 @@ import java.util.List;
 import duke.Duke;
 import duke.task.Task;
 
+/**
+ * Command to mark a task as done. Will fail if an invalid index is given (i.e. out of bounds).
+ */
 public class MarkCommand extends Command {
 
   public MarkCommand() {

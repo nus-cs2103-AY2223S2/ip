@@ -13,6 +13,14 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public final class Utils {
+  /**
+   * Recombine an array of strings into a singular string, starting from the provided
+   * start index to the end index exclusive.
+   * @param args Array containing strings to join
+   * @param from From index, inclusive
+   * @param to To index, exclusive
+   * @return Recombined string
+   */
   public final static String stringJoiner(String[] args, int from, int to) {
     return String.join(" ", Arrays.copyOfRange(args, from, to));
   }
@@ -33,6 +41,14 @@ public final class Utils {
     };
   }
 
+  /**
+   * Parse the strings for date and time information. Passing null for one of the arguments indicates
+   * that only either date or time information was available. Passing both will create a LocalDateTime
+   * with both time and date information. If there is a missing component, it will be filled with LocalDateTime.now().
+   * @param str0 Null or string to parse for either date or time
+   * @param str1 Null or string to parse for either date or time
+   * @return LocalDateTime containing either the parsed date and time or the parsed arguments combined with the current time.
+   */
   public final static LocalDateTime parseDateTime(String str0, String str1) {
     List<String> dateFormats = List.of(
       "dd/MM" 

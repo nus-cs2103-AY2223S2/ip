@@ -5,6 +5,9 @@ import java.util.List;
 import duke.Duke;
 import duke.task.Task;
 
+/**
+ * Command to print the current list of tasks
+ */
 public class ListCommand extends Command{
 
   public ListCommand() {
@@ -12,7 +15,7 @@ public class ListCommand extends Command{
   }
 
   @Override
-  protected void execute(String[] tokens, Duke instance) {
+  protected void execute(String[] tokens, final Duke instance) {
     List<Task> tasks = instance.getTaskList();
 
     if (tasks.size() == 0) {

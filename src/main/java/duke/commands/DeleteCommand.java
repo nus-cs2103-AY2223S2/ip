@@ -5,6 +5,9 @@ import java.util.List;
 import duke.Duke;
 import duke.task.Task;
 
+/**
+ * Command to remove a task from the task list. Will fail if an invalid index is given (i.e. out of bounds).
+ */
 public class DeleteCommand extends Command {
   public DeleteCommand() {
     super("delete");

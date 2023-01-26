@@ -9,6 +9,9 @@ import java.util.stream.Stream;
 import duke.Duke;
 import duke.main.Ui;
 
+/**
+ * Class for parsing the input from a user into tokens that commands can use.
+ */
 public class Parser implements BiConsumer<String, Duke> {
   private final Map<String, Command> store;
 
@@ -22,6 +25,20 @@ public class Parser implements BiConsumer<String, Duke> {
     ));
   }
 
+  /**
+   * This method is called every time the user enters an invalid command string
+   * @param input Raw string as entered by the user
+   * @param instance Instance of Duke to run the command with
+   */
+  public void onUnknownCommand(String input, final Duke instance) {
+    Ui.print("Unknown command '%s' :(", input);
+  }
+
+  /**
+   * Try to execute the command as specified by the input string
+   * @param input Raw string as entered by the user
+   * @param instance Instance of Duke to run the command with
+   */
   public void executeCommand(String input, final Duke instance) {
     String[] tokens = input.split(" ");
     Command cmd = this.store.getOrDefault(tokens[0].toLowerCase(), null);
@@ -29,7 +46,7 @@ public class Parser implements BiConsumer<String, Duke> {
     if (cmd != null) {
       cmd.accept(tokens, instance);
     } else {
-      Ui.print("Unknown command '%s' :(", input);
+      onUnknownCommand(input, instance);
     }
   }
 

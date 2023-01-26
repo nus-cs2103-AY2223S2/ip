@@ -7,12 +7,12 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
   /**
-   * String representation of the start time
+   * The start time
    */
   private final LocalDateTime start;
 
   /**
-   * String representation of the end time
+   * The end time
    */
   private final LocalDateTime end;
 
