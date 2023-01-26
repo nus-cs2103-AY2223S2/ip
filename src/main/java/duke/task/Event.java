@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import duke.exceptions.InvalidDateException;
 
 /**
@@ -20,7 +21,7 @@ public class Event extends Task {
      * @param des Description of the event.
      * @param startDate The start date of the event.
      * @param endDate The end date of the event.
-     * @throws InvalidDateException
+     * @throws InvalidDateException Throws InvalidDateException if the string representation of deadline is not of the correct format.
      */
     public Event(String des, String startDate, String endDate) throws InvalidDateException {
         super(des);

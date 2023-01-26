@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.time.LocalDate;
 
 /**
@@ -30,13 +31,15 @@ public class TaskList {
      * Gets the list of tasks.
      * @return List of tasks.
      */
-    public List<Task> getTasks() { return this.tasks; }
+    public List<Task> getTasks() {
+        return this.tasks;
+    }
 
     /**
      * Gets the number of tasks in the TaskList.
      * @return Integer representing number of tasks.
      */
-    public int size() {
+    public int getSize() {
         return this.tasks.size();
     }
 

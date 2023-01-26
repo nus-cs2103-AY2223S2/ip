@@ -1,8 +1,12 @@
 package duke;
 
-import duke.ui.*;
+import duke.ui.Span;
+import duke.ui.UI;
+
 import duke.storage.FileManagement;
+
 import duke.task.TaskList;
+
 import duke.exceptions.DukeException;
 
 /**
