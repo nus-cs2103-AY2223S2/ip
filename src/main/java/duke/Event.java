@@ -4,13 +4,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate eventStartDate;
     private LocalDate eventEndDate;
     private Date eventStartTime;
     private Date eventEndTime;
 
-    public Event(String description, LocalDate eventStartDate, Date eventStartTime, LocalDate eventEndDate, Date eventEndTime, boolean isDone){
+    public Event(String description, LocalDate eventStartDate, Date eventStartTime, LocalDate eventEndDate,
+                 Date eventEndTime, boolean isDone) {
         super(description, isDone);
         this.eventStartDate = eventStartDate;
         this.eventEndDate = eventEndDate;
@@ -36,6 +37,7 @@ public class Event extends Task{
         String formattedEndTime = new SimpleDateFormat("h:mm a").format(eventEndTime);
         String eventStartCombined = formattedStartDate + " " + formattedStartTime;
         String eventEndCombined = formattedEndDate + " " + formattedEndTime;
-        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (from: " + eventStartCombined + " to: " + eventEndCombined +")";
+        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (from: " + eventStartCombined +
+                " to: " + eventEndCombined +")";
     }
 }

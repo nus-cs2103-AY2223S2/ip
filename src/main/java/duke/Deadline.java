@@ -4,17 +4,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class Deadline extends Task{
-
+public class Deadline extends Task {
     private LocalDate deadlineDate;
     private Date deadlineTime;
-    public Deadline(String description, LocalDate deadlineDate, Date deadlineTime, boolean isDone){
+    public Deadline(String description, LocalDate deadlineDate, Date deadlineTime, boolean isDone) {
         super(description, isDone);
         this.deadlineDate = deadlineDate;
         this.deadlineTime = deadlineTime;
     }
 
-    public String getDeadline(){
+    public String getDeadline() {
         String formattedTime = new SimpleDateFormat("h:mm").format(deadlineTime);
         return deadlineDate + " " + formattedTime;
     }

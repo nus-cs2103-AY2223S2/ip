@@ -1,6 +1,6 @@
 package duke;
 public class Ui {
-    public Ui(){
+    public Ui() {
         final String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
