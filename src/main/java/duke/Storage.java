@@ -8,18 +8,23 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String FILE_DESTINATION = "data.txt";
+
+    private static final String FILE_NAME = "data.txt";
     private final File file;
+
     public Storage() {
-        file = new File(FILE_DESTINATION);
+        file = new File(FILE_NAME);
     }
+
     public TaskList readSavedFile() {
-        File file = new File(FILE_DESTINATION);
+
+        File file = new File(FILE_NAME);
+
         if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println("Error while creating file: " + e);
+                System.out.println("Error when creating file: " + e);
             }
         }
         TaskList taskList = new TaskList();
@@ -36,22 +41,18 @@ public class Storage {
         return taskList;
     }
 
-    public Task parseStringToTask(String string) {
+    private Task parseStringToTask(String string) {
         String[] arr = string.split(",");
         if (arr[0].equals("T")) {
-            return new ToDo(arr[2]
-                    , arr[1].equals("1"));
+            return new ToDo(arr[2], arr[1].equals("1"));
         } else if (arr[0].equals("D")) {
-            return new Deadline(arr[2]
-                    , arr[1].equals("1")
-                    , LocalDate.parse(arr[3]));
+            return new Deadline(arr[2], arr[1].equals("1"), LocalDate.parse(arr[3]));
         } else {
-            return new Event(arr[2]
-                    , arr[1].equals("1")
-                    , LocalDate.parse(arr[3])
-                    , LocalDate.parse(arr[4]));
+            return new Event(arr[2], arr[1].equals("1")
+                    , LocalDate.parse(arr[3]), LocalDate.parse(arr[4]));
         }
     }
+
     public void saveTaskListToStorage(TaskList taskList) {
         try {
             FileWriter myWriter = new FileWriter(file); // this truncates the duke.txt to size 0
@@ -64,4 +65,5 @@ public class Storage {
             e.printStackTrace();
         }
     }
+
 }

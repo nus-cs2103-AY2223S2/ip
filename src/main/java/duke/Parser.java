@@ -1,9 +1,13 @@
 package duke;
 
 public class Parser {
-    public void parse(String userInput, TaskList taskList, Storage storage, TextUi textUi) throws DukeException {
+
+    public void parse(String userInput, TaskList taskList
+            , Storage storage, TextUi textUi) throws DukeException {
+
         String command;
         String body;
+
         if (userInput.contains(" ")) {
             command = userInput.substring(0, userInput.indexOf(" "));
             body = userInput.substring(userInput.indexOf(" ") + 1);
@@ -11,6 +15,7 @@ public class Parser {
             command = userInput;
             body = "";
         }
+
         switch (command) {
             case "list":
                 Commands.executeListCommand(textUi, taskList);

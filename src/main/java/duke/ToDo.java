@@ -1,6 +1,7 @@
 package duke;
 
 public class ToDo extends Task {
+
     public ToDo(String description) {
         super(description);
     }
@@ -8,13 +9,15 @@ public class ToDo extends Task {
     public ToDo(String description, boolean isDone) {
         super(description, isDone);
     }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    @Override
     public String toStorableString() {
-        // T|0|return book
-        return "T," +  (this.isDone() ? "1" : "0") + "," + this.getDescription();
+        return "T," + (this.isDone() ? "1" : "0") + "," + this.getDescription();
     }
+
 }

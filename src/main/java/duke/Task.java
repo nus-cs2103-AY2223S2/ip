@@ -1,8 +1,10 @@
 package duke;
 
 public abstract class Task {
+
     private String description;
     private boolean isDone;
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -12,11 +14,17 @@ public abstract class Task {
         this.description = description;
         this.isDone = isDone;
     }
+
     public abstract String toStorableString();
 
     public boolean isDone() {
         return this.isDone;
     }
+
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
     public void markAsUndone() {
         this.isDone = false;
     }
@@ -24,9 +32,7 @@ public abstract class Task {
     public String getDescription() {
         return this.description;
     }
-    public void markAsDone() {
-        this.isDone = true;
-    }
+
     public String toString() {
         return (isDone ? "[X] " : "[] ") + this.description;
     }

@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
+
     private LocalDate by;
+
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
@@ -14,13 +16,16 @@ public class Deadline extends Task {
         super(description, isDone);
         this.by = by;
     }
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    @Override
     public String toStorableString() {
-        // D|0|return book|June 6th
-        return "D" + "," +  (this.isDone() ? "1" : "0")+ "," + this.getDescription() + "," + this.by.toString();
+        return "D" + "," + (this.isDone() ? "1" : "0") + ","
+                + this.getDescription() + "," + this.by.toString();
     }
 }
