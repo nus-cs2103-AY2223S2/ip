@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.command.Command;
+
 public class UnmarkCommand extends Command{
     private int num;
 
@@ -12,7 +19,7 @@ public class UnmarkCommand extends Command{
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             ui.unmarkTaskResponse(tasks.markTask(num, false));
-        } catch (ArrayIndexOutOfBoundsException e1) {
+        } catch (IndexOutOfBoundsException e1) {
             ui.taskNotChosenErrorMessage();
         }
     }

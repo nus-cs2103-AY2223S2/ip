@@ -1,3 +1,10 @@
+package duke;
+
+import duke.TaskList;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -79,8 +86,13 @@ public class Ui {
     }
 
     public void incompleteCommandErrorMessage() {
-        printResponse("OOPS!!! The description of this deadline is incomplete.");
+        printResponse("OOPS!!! The description of this task is incomplete.");
     }
+
+    public void invalidTiming() {
+        printResponse("OOPS!!! You have key in an invalid date. (Format Example: 14 Oct 2023 23:00");
+    }
+
     private static void printResponse(String response) {
         System.out.println(STR);
         System.out.println(response);

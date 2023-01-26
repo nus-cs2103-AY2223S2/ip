@@ -1,12 +1,13 @@
+package duke;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.Parser;
+import duke.command.Command;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.util.regex.Pattern;
-import java.time.format.DateTimeFormatter;
+
 
 public class Duke {
     static final String STR = "------------------------------------------------------------";
@@ -33,7 +34,7 @@ public class Duke {
 
         // Load data
         Duke duke = new Duke("./data/duke.txt");
-        ui.listTaskResponse(tasks);
+        ui.listTaskResponse(this.tasks);
 
         boolean isExit = false;
         while (!isExit) {
@@ -43,12 +44,12 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (ArrayIndexOutOfBoundsException e1) {
-                ui.unreadableCommandErrorMessage();
             } catch (DateTimeParseException e2) {
                 System.out.println("this");
                 ui.unreadableCommandErrorMessage();
             } catch (IllegalArgumentException e3) {
+                ui.incompleteCommandErrorMessage();
+            } catch (ArrayIndexOutOfBoundsException e3) {
                 ui.incompleteCommandErrorMessage();
             }
         }

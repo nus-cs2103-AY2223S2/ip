@@ -1,6 +1,19 @@
+package duke;
+
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+import duke.command.DeleteCommand;
+import duke.command.AddTodoCommand;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.Command;
+import duke.Ui;
+
 public class Parser {
 
-    public static Command parse(String input) throws IllegalArgumentException {
+    public static Command parse(String input) throws IllegalArgumentException, ArrayIndexOutOfBoundsException {
         String[] arrStr = input.split(" ", 2);
         String instruction = arrStr[0];
 

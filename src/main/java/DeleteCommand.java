@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.command.Command;
+
 public class DeleteCommand extends Command {
     private int num;
 
@@ -11,8 +18,8 @@ public class DeleteCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            ui.deleteTaskResponse(tasks.deleteTask(num -1) , tasks);
-        } catch (ArrayIndexOutOfBoundsException e1) {
+            ui.deleteTaskResponse(tasks.deleteTask(num - 1) , tasks);
+        } catch (IndexOutOfBoundsException e1) {
             ui.taskNotChosenErrorMessage();
         }
     }
