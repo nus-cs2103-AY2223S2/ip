@@ -1,11 +1,15 @@
 package storage;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class Event extends Task {
 
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
-    public Event(String task, String from, String to) {
+    public Event(String task, LocalDateTime from, LocalDateTime to) {
         super(task);
         this.from = from;
         this.to = to;
@@ -17,6 +21,16 @@ public class Event extends Task {
     }
 
     private String duration() {
-        return " (" + this.from + " - " + this.to + ")";
+        DateTimeFormatter formatterOne = DateTimeFormatter.ofPattern("EEE, MMM dd, hh:mm a");
+        DateTimeFormatter formatterTwo = DateTimeFormatter.ofPattern("hh:mm a");
+        if (sameDate(this.from, this.to)) {
+            return " (" + formatterOne.format(this.from) + " - " + formatterTwo.format(this.to) + ")";
+        }
+        return " (" + formatterOne.format(this.from) + " - " + formatterOne.format(this.to) + ")";
+    }
+
+    private boolean sameDate(LocalDateTime dtOne, LocalDateTime dtTwo) {
+        boolean sameYear = dtOne.getYear() == dtTwo.getYear();
+        return sameYear && dtOne.getDayOfYear() == dtTwo.getDayOfYear();
     }
 }
