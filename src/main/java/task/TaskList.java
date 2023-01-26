@@ -18,6 +18,9 @@ public class TaskList {
 
     private List<Task> tasks;
 
+    /**
+     * Constructor for TaskList.
+     */
     public TaskList() {
         this.tasks = new LinkedList<>();
     }

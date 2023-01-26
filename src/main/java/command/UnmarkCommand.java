@@ -14,6 +14,10 @@ import exception.InvalidCommandInputException;
 public class UnmarkCommand extends Command {
     private String input;
 
+    /**
+     * Constructor for UnmarkCommand
+     * @param input Input to parse.
+     */
     public UnmarkCommand(String input) {
         super("unmark \\d+");
         this.input = input;

@@ -13,6 +13,10 @@ import exception.DukeException;
 public abstract class Command {
     private String regex;
 
+    /**
+     * Constructor for Command
+     * @param regex Regex for command argument to match with.
+     */
     Command (String regex) {
         this.regex = regex;
     }

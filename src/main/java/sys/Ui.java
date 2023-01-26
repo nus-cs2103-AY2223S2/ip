@@ -16,7 +16,11 @@ public class Ui {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructor for UI.
+     */
     public Ui() {}
+
     /**
      * Sets the context for the program.
      *

@@ -11,6 +11,9 @@ import task.TaskList;
  */
 public class ExitCommand extends Command {
 
+    /**
+     * Constructor for ExitCommand
+     */
     public ExitCommand() {
         super("bye");
     }

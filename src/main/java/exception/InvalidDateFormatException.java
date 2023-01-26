@@ -5,6 +5,10 @@ package exception;
  */
 public class InvalidDateFormatException extends DukeException{
 
+    /**
+     * Constructor for InvalidDateFormatException.
+     * @param errorMessage Message for the error.
+     */
     public InvalidDateFormatException(String errorMessage) {
         super(errorMessage);
     }

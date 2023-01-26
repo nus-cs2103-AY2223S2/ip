@@ -12,6 +12,12 @@ import java.time.LocalDateTime;
 public class Deadline extends Task{
     private LocalDateTime deadline;
 
+    /**
+     * Constructor for deadline.
+     * @param content Content to be done for the task.
+     * @param deadlineString The time by which the task must be completed.
+     * @throws InvalidDateFormatException If the time given for dateline is in the incorrect format.
+     */
     Deadline(String content, String deadlineString) throws InvalidDateFormatException {
         super(content);
         this.deadline = DateTimeHelper.parse(deadlineString);
@@ -27,6 +33,13 @@ public class Deadline extends Task{
         return dt.equals(this.deadline);
     }
 
+    /**
+     * Constructor for deadline.
+     * @param content Content to be done for the task.
+     * @param done Whether the task is completed.
+     * @param deadlineString The time by which the task must be completed.
+     * @throws InvalidDateFormatException If the time given for dateline is in the incorrect format.
+     */
     Deadline(String content, boolean done, String deadlineString) throws InvalidDateFormatException {
         super(content, done);
         this.deadline = DateTimeHelper.parseFormattedDateTime(deadlineString);

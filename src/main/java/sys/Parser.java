@@ -12,6 +12,12 @@ public class Parser {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Constructor for Parser.
+     * @param tasks The tasks to be parsed.
+     * @param storage The storage used to load and save the tasks.
+     * @param ui The UI used to interact with the user.
+     */
     Parser(TaskList tasks, Storage storage, Ui ui) {
         this.tasks = tasks;
         this.storage = storage;

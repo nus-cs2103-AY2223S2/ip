@@ -5,6 +5,10 @@ package exception;
  */
 public class InvalidTaskStringException extends DukeException {
 
+    /**
+     * Constructor for InvalidTaskStringException
+     * @param errorMessage Message for the error.
+     */
     public InvalidTaskStringException(String errorMessage) {
         super(errorMessage);
     }

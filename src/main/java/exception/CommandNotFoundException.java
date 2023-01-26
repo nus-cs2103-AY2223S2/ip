@@ -6,6 +6,11 @@ package exception;
 public class CommandNotFoundException extends DukeException{
     String command;
 
+    /**
+     * Constructor for CommandNotFoundException.
+     * @param errorMessage Message for the error.
+     * @param command The command that could not be found.
+     */
     public CommandNotFoundException(String errorMessage, String command) {
         super(errorMessage);
         this.command = command;

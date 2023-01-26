@@ -14,6 +14,10 @@ import exception.InvalidDateFormatException;
 public class OccursCommand extends Command {
     private String input;
 
+    /**
+     * Constructor for OccursCommand
+     * @param input Input to parse.
+     */
     public OccursCommand(String input) {
         super("occurs ");
         this.input = input;

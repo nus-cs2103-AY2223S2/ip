@@ -10,6 +10,10 @@ import task.TaskList;
  * Represents the command to list all the tasks in the task list.
  */
 public class ListCommand extends Command {
+
+    /**
+     * Constructor for ListCommand
+     */
     public ListCommand() {
         super("list");
     }

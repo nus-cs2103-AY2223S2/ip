@@ -12,6 +12,10 @@ import task.TaskList;
 public class FindCommand extends Command {
     private String input;
 
+    /**
+     * Constructor for FindCommand
+     * @param input Input to parse.
+     */
     public FindCommand(String input) {
         super("find .*");
         this.input = input;

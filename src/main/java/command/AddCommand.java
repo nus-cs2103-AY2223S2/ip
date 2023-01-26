@@ -14,6 +14,10 @@ import exception.DukeException;
 public class AddCommand extends Command {
     private String input;
 
+    /**
+     * Constructor for AddCommand
+     * @param input Input to parse.
+     */
     public AddCommand(String input) {
         super("");
         this.input = input;

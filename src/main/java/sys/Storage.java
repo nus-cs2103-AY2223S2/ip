@@ -17,6 +17,10 @@ import java.util.Scanner;
 public class Storage {
     private String path;
 
+    /**
+     * Constructor for storage.
+     * @param path The filepath to store the task list.
+     */
     public Storage(String path) {
         this.path = path;
     }

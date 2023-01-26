@@ -13,6 +13,13 @@ public class Event extends Task{
     private LocalDateTime start;
     private LocalDateTime end;
 
+    /**
+     * Constructor for an Event task.
+     * @param content The task to be done.
+     * @param startString Start date of event.
+     * @param endString End date of event.
+     * @throws InvalidDateFormatException If date field in content is in the incorrect format.
+     */
     Event(String content, String startString, String endString) throws InvalidDateFormatException {
         super(content);
         this.start = DateTimeHelper.parse(startString);
@@ -31,6 +38,15 @@ public class Event extends Task{
                 || datetime.equals(this.end);
     }
 
+    /**
+     *
+     * Constructor for an Event task.
+     * @param content The task to be done.
+     * @param done Whether the task was completed.
+     * @param startString Start date of event.
+     * @param endString End date of event.
+     * @throws InvalidDateFormatException If date field in content is in the incorrect format.
+     */
     Event(String content, boolean done, String startString, String endString) throws InvalidDateFormatException {
         super(content, done);
         this.start = DateTimeHelper.parseFormattedDateTime(startString);

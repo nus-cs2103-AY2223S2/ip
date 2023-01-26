@@ -15,6 +15,10 @@ import exception.InvalidCommandInputException;
 public class DeleteCommand extends Command {
     private String input;
 
+    /**
+     * Constructor for DeleteCommand
+     * @param input Input to parse.
+     */
     public DeleteCommand(String input) {
         super("delete \\d+");
         this.input = input;

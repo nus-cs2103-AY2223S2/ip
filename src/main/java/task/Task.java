@@ -100,11 +100,20 @@ public class Task {
         }
     }
 
+    /**
+     * Constructor for Task.
+     * @param content Content to be done for the task.
+     */
     Task(String content) {
         this.content = content;
         this.done = false;
     }
 
+    /**
+     * Constructor for Task.
+     * @param content Content to be done for the task.
+     * @param done Whether the task is completed.
+     */
     Task(String content, boolean done) {
         this.content = content;
         this.done = done;

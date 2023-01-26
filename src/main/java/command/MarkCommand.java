@@ -14,6 +14,10 @@ import exception.InvalidCommandInputException;
 public class MarkCommand extends Command {
     private String input;
 
+    /**
+     * Constructor for MarkCommand
+     * @param input Input to parse.
+     */
     public MarkCommand(String input) {
         super("mark \\d+");
         this.input = input;
