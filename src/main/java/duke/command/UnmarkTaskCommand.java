@@ -4,16 +4,16 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class MarkTask implements Command {
+public class UnmarkTaskCommand extends Command {
     private int index;
 
-    public MarkTask(int index) {
+    public UnmarkTaskCommand(int index) {
         this.index = index;
     }
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) {
-        tl.mark(this.index - 1);
+        tl.unmark(this.index - 1);
         storage.modify(storage.getStorageTaskString(tl.getTask(this.index - 1)), this.index);
-        ui.showMarkResult(tl.getTask(this.index - 1).toString(), this.index);
+        ui.showUnmarkResult(tl.getTask(this.index - 1).toString(), this.index);
     }
 }

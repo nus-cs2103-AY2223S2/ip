@@ -5,9 +5,9 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class DeleteTask implements Command {
+public class DeleteTaskCommand extends Command {
     private int index;
-    public DeleteTask(int index) {
+    public DeleteTaskCommand(int index) {
         this.index = index;
     }
     @Override

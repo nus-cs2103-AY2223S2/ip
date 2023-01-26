@@ -7,15 +7,14 @@ import duke.task.Event;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-public class AddEvent implements Command {
+public class AddEventCommand extends Command {
     private String fromString;
     private String toString;
     private String name;
-    public AddEvent(String name, String fromString, String toString) {
+    public AddEventCommand(String name, String fromString, String toString) {
         this.fromString = fromString;
         this.toString = toString;
         this.name = name;

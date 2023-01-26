@@ -50,7 +50,7 @@ public class Parser {
             return null;
         }
         if (Objects.equals(str, "list")) {
-            return new GetAllTask();
+            return new GetAllTaskCommand();
         }
         Command command = this.isMark(str);
         if (!Objects.equals(command, null)) {
@@ -91,7 +91,7 @@ public class Parser {
             }else if (!s.substring(5, s.length()).matches("[0-9]+")) {
                 throw new DukeException("Please provide only positive integers for index to mark.");
             } else {
-                return new MarkTask(Integer.parseInt(s.substring(5, s.length())));
+                return new MarkTaskCommand(Integer.parseInt(s.substring(5, s.length())));
             }
         }
         return null;
@@ -109,7 +109,7 @@ public class Parser {
             }else if (!s.substring(7, s.length()).matches("[0-9]+")) {
                 throw new DukeException("Please provide only positive integers for index to unmark.");
             } else {
-                return new UnmarkTask(Integer.parseInt(s.substring(7, s.length())));
+                return new UnmarkTaskCommand(Integer.parseInt(s.substring(7, s.length())));
             }
         }
         return null;
@@ -125,7 +125,7 @@ public class Parser {
             }else if (s.length() < 6) {
                 throw new DukeException("The description of a todo cannot be empty.");
             } else {
-                return new AddTodo(s.substring(5, s.length()));
+                return new AddTodoCommand(s.substring(5, s.length()));
             }
         }
         return null;
@@ -145,7 +145,7 @@ public class Parser {
                 String[] parts = s.split("/");
                 String deadlineString = parts[1].substring(3, parts[1].length()).strip();
                 String name = parts[0].strip();
-                return new AddDeadline(name, deadlineString);
+                return new AddDeadlineCommand(name, deadlineString);
             }
         }
         return null;
@@ -166,7 +166,7 @@ public class Parser {
                 String name = parts[0].strip();
                 String fromString = parts[1].substring(5, parts[1].length()).strip();
                 String toString = parts[2].substring(3, parts[2].length()).strip();
-                return new AddEvent(name, fromString, toString);
+                return new AddEventCommand(name, fromString, toString);
             }
         }
         return null;
@@ -184,7 +184,7 @@ public class Parser {
             }else if (!s.substring(7, s.length()).matches("[0-9]+")) {
                 throw new DukeException("Please provide only positive integers for index to delete.");
             } else {
-                return new DeleteTask(Integer.parseInt(s.substring(7, s.length())));
+                return new DeleteTaskCommand(Integer.parseInt(s.substring(7, s.length())));
             }
         }
         return null;

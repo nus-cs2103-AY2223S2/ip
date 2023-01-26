@@ -5,9 +5,9 @@ import duke.task.Todo;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class AddTodo implements Command{
+public class AddTodoCommand extends Command{
     private String name;
-    public AddTodo(String name) {
+    public AddTodoCommand(String name) {
         this.name = name;
     }
 

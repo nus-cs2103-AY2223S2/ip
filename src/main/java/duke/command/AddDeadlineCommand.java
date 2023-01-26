@@ -10,10 +10,10 @@ import duke.ui.Ui;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-public class AddDeadline implements Command{
+public class AddDeadlineCommand extends Command{
     private String deadlineString;
     private String name;
-    public AddDeadline(String name, String deadlineString) {
+    public AddDeadlineCommand(String name, String deadlineString) {
         this.name = name;
         this.deadlineString = deadlineString;
     }
