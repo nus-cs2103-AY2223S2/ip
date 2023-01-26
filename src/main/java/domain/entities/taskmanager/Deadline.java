@@ -43,15 +43,16 @@ public class Deadline extends Task {
         final Pair<String, Map<String, String>> tmp =
                 Singletons.get(TokenUtilities.class).joinTokens(tokens, delims);
         if (tmp.getRight().get(deadlineKey) == null) {
-            throw new InvalidArgumentException("☹ OOPS, did you forgot to " +
-                    "type " + deadlineKey + " for your deadline?");
+            throw new InvalidArgumentException("☹ OOPS, did you forgot to "
+                    + "type " + deadlineKey + " for your deadline?");
         }
         try {
             this.deadline =
                     LocalDate.parse(tmp.getRight().get(deadlineKey));
         } catch (DateTimeParseException e) {
-            throw new InvalidArgumentException("☹ OOPS, the deadline you typed is " +
-                    "not in the correct format. Please type it in the format of yyyy-mm-dd");
+            throw new InvalidArgumentException("☹ OOPS, the deadline you typed "
+                    + "is not in the correct format. Please type it in the "
+                    + "format of yyyy-mm-dd");
         }
     }
 

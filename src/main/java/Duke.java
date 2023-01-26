@@ -21,9 +21,14 @@ import java.time.format.DateTimeFormatter;
  * The main class for Duke.
  */
 public class Duke {
+    /**
+     * The main method for Duke.
+     *
+     * @param args the command line arguments, if any.
+     */
     public static void main(String[] args) {
         try {
-            configureInjections();
+            registerSingletons();
         } catch (WriteException e) {
             System.err.println("Unable to initialize app.");
             System.err.println(e.getMessage());
@@ -48,7 +53,7 @@ public class Duke {
     /**
      * This would register the singletons that we would be using later on.
      */
-    private static void configureInjections() throws WriteException, LoadException {
+    private static void registerSingletons() throws WriteException, LoadException {
         Singletons.registerSingleton(DateTimeFormatter.class,
                 DateTimeFormatter.ofPattern("MMM d yyyy"));
         // Persistence related
@@ -64,20 +69,28 @@ public class Duke {
         Singletons.registerLazySingleton(DummyWritable.class, DummyWritable::new);
 
         // Use cases
-        Singletons.registerLazySingleton(ByeUsecase.class,
-                () -> new ByeUsecase(Singletons.get(SystemOut.class)));
-        Singletons.registerLazySingleton(EchoUsecase.class,
-                () -> new EchoUsecase(Singletons.get(SystemOut.class)));
-        Singletons.registerLazySingleton(TaskManagerUsecase.class,
+        Singletons.registerLazySingleton(
+                ByeUsecase.class,
+                () -> new ByeUsecase(Singletons.get(SystemOut.class))
+        );
+        Singletons.registerLazySingleton(
+                EchoUsecase.class,
+                () -> new EchoUsecase(Singletons.get(SystemOut.class))
+        );
+        Singletons.registerLazySingleton(
+                TaskManagerUsecase.class,
                 () -> new TaskManagerUsecase(
                         Singletons.get(DummyWritable.class),
                         Singletons.get(SystemErr.class),
-                        Singletons.get(DataSaver.class)
-                )
+                        Singletons.get(DataSaver.class))
         );
-        Singletons.registerLazySingleton(UnknownCommandUsecase.class,
-                () -> new UnknownCommandUsecase(Singletons.get(SystemErr.class)));
-        Singletons.registerLazySingleton(TokenUtilities.class,
-                TokenUtilities::new);
+        Singletons.registerLazySingleton(
+                UnknownCommandUsecase.class,
+                () -> new UnknownCommandUsecase(Singletons.get(SystemErr.class))
+        );
+        Singletons.registerLazySingleton(
+                TokenUtilities.class,
+                TokenUtilities::new
+        );
     }
 }

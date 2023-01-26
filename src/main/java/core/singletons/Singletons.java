@@ -16,12 +16,12 @@ public class Singletons {
     /**
      * The dependencies stored in this dependencies section.
      */
-    static private final Map<Class<?>, Object> singletons = new HashMap<>();
+    private static final Map<Class<?>, Object> singletons = new HashMap<>();
 
     /**
      * The dependency suppliers, used for lazy registration.
      */
-    static private final Map<Class<?>, Supplier<?>> lazySingletons =
+    private static final Map<Class<?>, Supplier<?>> lazySingletons =
             new HashMap<>();
 
     /**
@@ -32,7 +32,7 @@ public class Singletons {
      * @param object the object itself.
      * @param <T>    the type of the object.
      */
-    static public <T> void registerSingleton(Class<T> cls,
+    public static <T> void registerSingleton(Class<T> cls,
                                              T object) {
         if (singletons.containsKey(cls) || lazySingletons.containsKey(cls)) {
             return;
@@ -48,7 +48,7 @@ public class Singletons {
      * @param supplier the lazy singleton of the object.
      * @param <T>      the type of the object.
      */
-    static public <T> void registerLazySingleton(Class<T> cls,
+    public static <T> void registerLazySingleton(Class<T> cls,
                                                  Supplier<T> supplier) {
         if (singletons.containsKey(cls) || lazySingletons.containsKey(cls)) {
             return;
@@ -62,7 +62,7 @@ public class Singletons {
      *
      * @param cls the class of the object.
      */
-    static public <T> void reRegisterSingleton(Class<T> cls,
+    public static <T> void reRegisterSingleton(Class<T> cls,
                                                T object) {
         singletons.put(cls, object);
     }
@@ -73,7 +73,7 @@ public class Singletons {
      *
      * @param cls the class of the object
      */
-    static public <T> void reRegisterLazySingleton(Class<T> cls,
+    public static <T> void reRegisterLazySingleton(Class<T> cls,
                                                    Supplier<T> supplier) {
         singletons.remove(cls);
         lazySingletons.put(cls, supplier);
@@ -86,7 +86,7 @@ public class Singletons {
      * @param <T> the type of the object.
      * @return the object that has been registered for this class.
      */
-    static public <T> T get(Class<T> cls) {
+    public static <T> T get(Class<T> cls) {
         if (singletons.containsKey(cls)) {
             return cls.cast(singletons.get(cls));
         } else if (lazySingletons.containsKey(cls)) {
@@ -95,7 +95,7 @@ public class Singletons {
             lazySingletons.remove(cls);
             return object;
         }
-        throw new RuntimeException("Dependency for " + cls.getName() + " has " +
-                "not been injected.");
+        throw new RuntimeException("Dependency for " + cls.getName() + " has "
+                + "not been injected.");
     }
 }

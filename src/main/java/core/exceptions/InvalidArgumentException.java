@@ -34,8 +34,8 @@ public class InvalidArgumentException extends Exception {
         if (tokens == null) {
             return "InvalidArgumentException: " + super.getMessage();
         } else {
-            return "InvalidArgumentException: " + super.getMessage() +
-                    "[" + String.join(", ", tokens) + "]";
+            return "InvalidArgumentException: " + super.getMessage()
+                    + "[" + String.join(", ", tokens) + "]";
         }
     }
 }

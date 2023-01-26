@@ -69,7 +69,7 @@ public class TokenUtilities {
         }
         final int length = endIdx - startIdx + 1;
         String[] res = new String[length];
-        System.arraycopy(tokens, 0 + startIdx, res, 0, length);
+        System.arraycopy(tokens, startIdx, res, 0, length);
         return res;
     }
 

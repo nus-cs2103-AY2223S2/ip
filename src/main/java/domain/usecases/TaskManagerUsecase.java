@@ -259,8 +259,8 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
             try {
                 dataSaver.clear();
             } catch (WriteException e) {
-                errorWritable.writeln("Error while clearing data" +
-                        " saver: " + e.getMessage());
+                errorWritable.writeln("Error while clearing data"
+                        + " saver: " + e.getMessage());
             }
             for (Task task : tasks) {
                 try {
