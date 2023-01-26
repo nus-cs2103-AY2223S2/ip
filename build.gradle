@@ -28,12 +28,13 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "windycall.WindyCall"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "windycall"
     archiveClassifier = null
+    archiveVersion = '1.0'
 }
 
 run{
