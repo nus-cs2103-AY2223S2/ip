@@ -28,7 +28,11 @@ public class UIText {
         return SEPARATOR + "\n";
     }
 
-
+    /**
+     * Prints the list for the find method
+     * @param wordList
+     * @return string with a list of all tasks containing a given keyword
+     */
     public static String printFind(List<Task> wordList) {
         String heading = "Here are the matching tasks in your list: " + "\n";
         String list = "";

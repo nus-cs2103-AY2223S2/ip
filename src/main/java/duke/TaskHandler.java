@@ -119,6 +119,13 @@ public class TaskHandler {
                     String.format("Now you have %d tasks in the list.", content.size()) + "\n";
         }
     }
+
+    /**
+     * Finds all tasks containing a keyword
+     * @param input input of the user
+     * @return string with a list of all tasks containing a given keyword
+     * @throws EmptyContentException
+     */
     public String findHandler(String input) throws EmptyContentException {
         String[] segments = Parser.parseTask(input);
         String keyword = segments[1];
