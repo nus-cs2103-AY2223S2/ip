@@ -2,8 +2,8 @@ public class Event extends Task {
 
     private String start, end;
 
-    public Event(String title, String start, String end) {
-        super(title);
+    public Event(String title, String start, String end, boolean done) {
+        super(title, done);
         this.start = start;
         this.end = end;
     }
@@ -12,6 +12,11 @@ public class Event extends Task {
     public String toString() {
         String doneString = this.getDone() ? "X" : " ";
         return String.format("[E][%s] %s (from: %s, to: %s)", doneString, this.getTitle(), this.start, this.end);
+    }
+
+    public String writeToMemory() {
+        String doneString = this.getDone() ? "1" : "0";
+        return "E, " + doneString + ", " + this.getTitle() + ", " + this.start + ", " + this.end;
     }
 
 }

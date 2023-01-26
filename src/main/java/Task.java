@@ -2,8 +2,8 @@ public abstract class Task {
     private boolean done;
     private String title;
 
-    public Task(String title) {
-        this.done = false;
+    public Task(String title, boolean done) {
+        this.done = done;
         this.title = title;
     }
 
@@ -23,4 +23,5 @@ public abstract class Task {
         this.done = done;
     }
 
+    public abstract String writeToMemory();
 }
