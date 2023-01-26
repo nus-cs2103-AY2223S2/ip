@@ -1,6 +1,5 @@
 package duke.storage;
 
-import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -18,11 +17,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Storage {
 
     private static final String DEFAULT_PATH = "data/duke.txt";
+
     private Path filePath;
+
     private String currRelativeFilePath;
 
     public Storage() {

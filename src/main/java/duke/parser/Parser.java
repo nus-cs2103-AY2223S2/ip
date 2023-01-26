@@ -193,7 +193,8 @@ public class Parser {
                 String e = String.format("Oops! The description of a %s cannot be empty.", arr[0]);
                 throw new DukeException(e);
             } else if (command.equals("mark") || command.equals("unmark")
-                    || command.equals("mark ") || command.equals("unmark ") || command.equals("delete") || command.equals("delete ")) {
+                    || command.equals("mark ") || command.equals("unmark ")
+                            || command.equals("delete") || command.equals("delete ")) {
                 String e = String.format("Oops! You need to specify the task number for me to %s it.", command);
                 throw new DukeException(e);
             } else {
