@@ -1,16 +1,19 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private String deadline;
+    private LocalDateTime deadline;
     public Deadline(String description, String deadline) {
         super(description);
-        this.deadline = deadline;
+        this.deadline = DateTimeParser.parseInput(deadline);
     }
     @Override
     public String printTask() {
         return String.format("[D][%s] %s (by: %s)",
                 (super.isDone() ? "X" : " "),
                 super.getDescription(),
-                this.deadline);
+                DateTimeParser.formatOutput(this.deadline));
     }
 }

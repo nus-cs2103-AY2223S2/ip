@@ -2,6 +2,9 @@ package duke;
 
 import duke.Command;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class CommandHandler {
     CommandHandler() {}
     public String handleCommand(Command command, TaskList tasks) {
@@ -90,14 +93,24 @@ public class CommandHandler {
     }
     private String addDeadline(String description, String by, TaskList tasks) {
         String response = "";
-        Task newTask = new Deadline(description, by);
+        Task newTask;
+        try {
+            newTask = new Deadline(description, by);
+        } catch (DateTimeParseException e) {
+            return "Sorry, I didn't understand. Please enter a date or time in one of the following formats:\n>>31/01/1970 2359\n>>2359\n>>31/01/1970\n";
+        }
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());
         return response;
     }
     private String addEvent(String description, String from, String to, TaskList tasks) {
         String response = "";
-        Task newTask = new Event(description, from, to);
+        Task newTask;
+        try {
+            newTask = new Event(description, from, to);
+        } catch (DateTimeParseException e) {
+            return "Sorry, I didn't understand. Please enter a date or time in one of the following formats:\n>>31/01/1970 2359\n>>2359\n>>31/01/1970\n";
+        }
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());
         return response;
