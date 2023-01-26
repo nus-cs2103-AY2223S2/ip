@@ -20,21 +20,19 @@ public class Duke {
         ui = new Ui();
     }
 
-    private Duke displayTaskCount() {
+    private void displayTaskCount() {
         if (taskList == null)
-            return this;
+            return;
 
         if (taskList.isEmpty())
             ui.println("You do not have any task!");
         else
             ui.println("Now you have " + taskList.size() + " task(s) in the list.");
-
-        return this;
     }
 
-    private Duke displayTasks() {
+    private void displayTasks() {
         if (taskList == null)
-            return this;
+            return;
 
         if (taskList.size() == 0)
             ui.println("Your list is empty.");
@@ -43,8 +41,6 @@ public class Duke {
             for (int i = 0; i < taskList.size(); i++)
                 ui.println("\t" + (i + 1) + ". " + taskList.get(i));
         }
-
-        return this;
     }
 
     private static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
@@ -60,7 +56,7 @@ public class Duke {
         //Initialise components, variables
         int taskIdx, descIdx;
         String[] inputs;
-        String userCmd, taskDescription;
+        String cmd, userCmd, taskDescription;
         Task activeTask;
         Scanner sc = new Scanner(System.in);
         Duke duke = new Duke();
@@ -84,7 +80,7 @@ public class Duke {
             userCmd = sc.nextLine();
 
             // Suppress all upper case letters, gets only the first word
-            String cmd = userCmd.toLowerCase().split(" ")[0];
+            cmd = userCmd.toLowerCase().split(" ")[0];
 
             try {
                 // State handling
@@ -243,7 +239,7 @@ public class Duke {
                     default:
                         duke.ui.warn("Sorry, I don't understand your request :(");
                         duke.ui.println("Did you spell something wrongly?");
-                        //duke.ui..display("Why not try rephrasing?"); // When chatbot is smarter
+                        //duke.ui.println("Why not try rephrasing?"); // When chatbot is smarter
                 }
             }
             catch (DukeException e) {

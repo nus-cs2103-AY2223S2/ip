@@ -10,10 +10,6 @@ public class TaskList {
         tasks = new ArrayList<Task>();
     }
 
-    public boolean add(Task task) {
-        return tasks.add(task);
-    }
-
     public Todo addTodo(String description) {
         Todo t = new Todo(description);
         tasks.add(t);
