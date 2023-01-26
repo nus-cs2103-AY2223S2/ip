@@ -2,12 +2,21 @@ package duke;
 
 import duke.exceptions.DukeException;
 
+/**
+ * The main driver class for Duke chatbot. This bot handles high level logic for the bot including startup and
+ * shutdown.
+ */
 public class Duke {
     private final Ui ui;
     private final TaskList taskList;
     private final Storage storage;
     private final Parser parser;
 
+    /**
+     * Primary constructor for an instance of the chatbot. This initialises the Ui, taskList, storage and parser
+     * instances used by the bot, which are not to be modified throughout the lifecycle of the bot.
+     * @param dataStoragePath A string representing the path which the bot's data should be stored on disk
+     */
     Duke(String dataStoragePath) {
         this.ui = new Ui();
         this.taskList = new TaskList();
@@ -15,11 +24,18 @@ public class Duke {
         this.parser = new Parser();
     }
 
-    private void exit() {
+    /**
+     * Terminates the current instance of the chatbot by exiting the program.
+     */
+    void exit() {
         storage.updateData(this.taskList);
         ui.displayMessage("Bye. Hope to see you again soon!\n");
+        System.exit(0);
     }
 
+    /**
+     * Starts an instance of the chatbot by displaying welcome message and beginning to listen for user input.
+     */
     void run() {
         ui.welcomeMessage();
         while (true) {
