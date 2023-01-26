@@ -1,3 +1,5 @@
+package duke;
+
 import exceptions.EmptyContentException;
 import exceptions.InvalidTaskAccessException;
 
