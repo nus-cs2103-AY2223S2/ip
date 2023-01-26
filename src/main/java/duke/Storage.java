@@ -108,7 +108,7 @@ public class Storage {
     public void storeData(TaskList list) throws IOException{
         FileWriter writer = new FileWriter(this.filePath, false);
         BufferedWriter buffer = new BufferedWriter(writer);
-        for(int i = 1; i <= list.listLength(); i++) {
+        for(int i = 1; i <= list.getListLength(); i++) {
             buffer.write(list.getTask(i).writeFile());
             buffer.newLine();
         }

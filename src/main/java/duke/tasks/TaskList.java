@@ -23,11 +23,12 @@ public class TaskList {
      * 
      * @return
      */
-    public int listLength() {
+    public int getListLength() {
         return this.tasks.size();
     }
 
     /**
+     *
      * Adds a task to the TaskList
      * 
      * @param task Task

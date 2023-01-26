@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +22,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Intializes a Duke object
+     * Initializes a Duke object
      */
     public Duke() {
         this.ui = new Ui();
@@ -46,7 +46,7 @@ public class Duke {
             input = this.ui.getUserInput();
             String[] userInput = this.parser.parseUserInput(input);
             String dukeQuery = userInput[0];
-            DukeCommand dukeCommand= DukeCommand.valueOf(dukeQuery.toUpperCase());
+            DukeCommand dukeCommand = DukeCommand.valueOf(dukeQuery.toUpperCase());
 
             try {
                 switch (dukeCommand) {
@@ -99,7 +99,7 @@ public class Duke {
     private void markComplete(String[] userInput) throws DukeInvalidArgumentsException, DukeMissingArgumentException, DukeTaskArgumentException {
         try {
             int taskIndex = Integer.parseInt(userInput[1]);
-            if(taskIndex > this.list.listLength()) {
+            if(taskIndex > this.list.getListLength()) {
                 throw new DukeTaskArgumentException();
             }
             if (list.getTask(taskIndex).getStatus()) {
@@ -120,13 +120,12 @@ public class Duke {
     private void markInComplete(String[] userInput) throws DukeMissingArgumentException, DukeInvalidArgumentsException, DukeTaskArgumentException{
         try {
             int taskIndex = Integer.parseInt(userInput[1]);
-            if(taskIndex > this.list.listLength()) {
+            if(taskIndex > this.list.getListLength()) {
                 throw new DukeTaskArgumentException();
             }
             if (list.getTask(taskIndex).getStatus() == false) {
                 throw new DukeTaskArgumentException();
             }
-
             Task taskToBeUnmarked = this.list.getTask(taskIndex);
             taskToBeUnmarked.changeStatus();
             this.ui.unmarkTaskDisplay(taskToBeUnmarked);
@@ -142,7 +141,7 @@ public class Duke {
         try {
             Todo todo = new Todo(userInput[1]);
             this.list.addTask(todo);
-            this.ui.taskAddDisplay(todo, this.list.listLength());
+            this.ui.taskAddDisplay(todo, this.list.getListLength());
         } catch (IndexOutOfBoundsException e) {
             String task = "todo";
             throw new DukeMissingArgumentException(task);
@@ -158,7 +157,7 @@ public class Duke {
             LocalDateTime deadlineDate = LocalDateTime.parse(deadlineInfo[1].trim(), formatter);
             Deadline deadline = new Deadline(deadlineText, deadlineDate);
             this.list.addTask(deadline);
-            this.ui.taskAddDisplay(deadline, this.list.listLength());
+            this.ui.taskAddDisplay(deadline, this.list.getListLength());
         } catch(IndexOutOfBoundsException e) {
             String task = "deadline";
             throw new DukeMissingArgumentException(task);
@@ -177,7 +176,7 @@ public class Duke {
 
             Event event = new Event(eventText, eventFrom, eventTo);
             this.list.addTask(event);
-            this.ui.taskAddDisplay(event, this.list.listLength());
+            this.ui.taskAddDisplay(event, this.list.getListLength());
         } catch (IndexOutOfBoundsException e) {
             String task = "event";
             throw new DukeMissingArgumentException(task);
@@ -189,12 +188,12 @@ public class Duke {
     private void deleteTask(String[] userInput) throws DukeTaskArgumentException, DukeMissingArgumentException, DukeInvalidArgumentsException{
         try{
             int taskIndex = Integer.parseInt(userInput[1]);
-            if(taskIndex > this.list.listLength()) {
+            if(taskIndex > this.list.getListLength()) {
                 throw new DukeTaskArgumentException();
             }
             this.ui.taskDeleteDisplay(this.list, taskIndex);
             this.list.deleteTask(taskIndex);
-            this.ui.displayTasks(this.list.listLength());
+            this.ui.displayTasks(this.list.getListLength());
         } catch(IndexOutOfBoundsException e) {
             String task = "delete";
             throw new DukeMissingArgumentException(task);
@@ -207,7 +206,7 @@ public class Duke {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = LocalDate.parse(userInput[1], formatter);
         int counter = 1;
-        for(int i = 0; i < this.list.listLength(); i++) {
+        for(int i = 0; i < this.list.getListLength(); i++) {
             String taskType = this.list.getTask(i).getTaskType();
             LocalDate taskDate = this.list.getTask(i).getDate().toLocalDate();
             if(taskType.equals("D") || taskType.equals(("E"))){
@@ -226,19 +225,19 @@ public class Duke {
             return;
         }
 
-        ArrayList<Task> filter= new ArrayList<>();
-        TaskList findList = new TaskList(filter);
-        for(int i = 1; i <= this.list.listLength(); i++) {
+        ArrayList<Task> filteredTasks= new ArrayList<>();
+        TaskList foundTasks = new TaskList(filteredTasks);
+        for(int i = 1; i <= this.list.getListLength(); i++) {
             Task task = this.list.getTask(i);
             if(task.toString().contains(keyword)){
-                findList.addTask(task);
+                foundTasks.addTask(task);
             }
         }
 
-        if(findList.isEmpty()) {
+        if(foundTasks.isEmpty()) {
             this.ui.noMatchFoundDisplay();
         } else {
-            this.ui.matchFoundDisplay(findList);
+            this.ui.matchFoundDisplay(foundTasks);
         }
     }
 
