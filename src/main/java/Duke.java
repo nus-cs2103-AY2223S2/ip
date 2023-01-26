@@ -1,9 +1,14 @@
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
+<<<<<<< HEAD
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+=======
+import java.io.File;
+import java.io.IOException;
+>>>>>>> branch-Level-7
 
 import static java.lang.Integer.parseInt;
 
@@ -45,7 +50,7 @@ public class Duke {
         System.out.println(dashedLine());
         switch (inputAnalyzed[0].toLowerCase(Locale.ROOT)) {
             case "bye":
-                end = byeOperation(inputAnalyzed);
+                end = byeOperation(inputAnalyzed, list);
                 break;
             case "list":
                 listOperation(inputAnalyzed,list);
@@ -76,12 +81,30 @@ public class Duke {
         return end;
     }
 
-    private static boolean byeOperation(String[] inputAnalyzed){
+    private static boolean byeOperation(String[] inputAnalyzed, ArrayList<Task> list){
         //Check if there is anything other than bye
         if (inputAnalyzed.length > 1) {
             System.out.println("Did you want to close the program? A simple bye would be enough.");
             return false;
         } else {
+            String home = System.getProperty("user.home");
+            // inserts correct file path separator on *nix and Windows
+            java.nio.file.Path path = java.nio.file.Paths.get(home, "dukeData");
+            java.nio.file.Path filePath = java.nio.file.Paths.get(home, "dukeData","duke.txt");
+            StringBuilder outputConstruct = new StringBuilder();
+            for (Task curr : list) {
+                outputConstruct.append(curr).append(System.lineSeparator());
+            }
+            String finalOut = outputConstruct.toString();
+            try {
+                if (!java.nio.file.Files.exists(path)) {
+                    java.nio.file.Files.createFile(path);
+                }
+                java.nio.file.Files.write(path, finalOut.getBytes());
+
+            } catch (IOException e) {
+                System.out.println(e);
+            }
             System.out.println("Pleasure doing business with you.");
             return true;
         }
