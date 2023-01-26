@@ -29,18 +29,8 @@ public class Storage {
         // Prepare data into string format for saving
         String fileDataStr = tasklist.prepareFileSave();
 
-        // Write prepared data to file
-        try {
-            Path f = Paths.get(TASKS_FILE_PATH);
-            Files.createDirectories(f.getParent()); // Create directory (if not exist)
-            if (!Files.exists(f)) {
-                Files.createFile(f); // Create non-existing file
-            }
-            Files.writeString(f, fileDataStr); // Write to file
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        // Write to file
+        writeToFile(TASKS_FILE_PATH, fileDataStr);
     }
 
     public void loadDataFromFile() {
@@ -52,7 +42,7 @@ public class Storage {
             return; // No saved data, do nothing
         }
 
-        // Purge current taskList
+        // Purge taskList
         tasklist.removeAllTask();
 
         try {
@@ -63,8 +53,6 @@ public class Storage {
                 String[] taskInfo = currentLine.split(",");
 
                 if (taskInfo[0].compareTo("T") == 0)
-                    tasklist.addTodo()
-
                     tasklist.add(new Todo(
                             Boolean.parseBoolean(taskInfo[1]),
                             taskInfo[2]));
@@ -87,6 +75,20 @@ public class Storage {
         }
         catch (IndexOutOfBoundsException e) {
             new Ui().warn("Corrupt data. Cannot load from file.");
+        }
+    }
+
+    private void writeToFile(String filePath, String fileContent) {
+        // Write prepared data to file
+        try {
+            Path f = Paths.get(filePath);
+            Files.createDirectories(f.getParent()); // Create directory (if not exist)
+            if (!Files.exists(f)) {
+                Files.createFile(f); // Create non-existing file
+            }
+            Files.writeString(f, fileContent); // Write to file
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
