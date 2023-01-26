@@ -30,7 +30,7 @@ public class Task {
 
     @Override
     public String toString(){
-        return this.getSymbol() +" "  + this.getDescription();
+        return this.getSymbol() + " "  + this.getDescription();
     }
 
     public String changeFormat() {
