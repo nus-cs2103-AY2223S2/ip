@@ -1,15 +1,22 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents a Deadline, which is a type of Task that has to be done before s specific date/time.
  */
 public class Deadline extends Task {
-    protected String deadline;
+    protected LocalDateTime deadline;
 
     public Deadline(String description) throws DukeException {
-        super(description.split("/by")[0]);
+        super(description.split(" /by ")[0]);
         try {
-            this.deadline = description.split("/by")[1];
+            this.deadline = this.parseDatetime(description.split(" /by ")[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
+        } catch (DateTimeParseException dtpe) {
+            throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
         }
     }
 
@@ -20,6 +27,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D][%c] %s(by:%s)", this.getStatusIcon(), this.description, this.deadline);
+        return String.format("[D][%c] %s (by: %s)", this.getStatusIcon(), this.description, this.getStringDatetime(this.deadline));
     }
 }
