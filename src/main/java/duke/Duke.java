@@ -4,57 +4,47 @@ import duke.exception.DukeException;
 import duke.helper.Parser;
 import duke.helper.TaskList;
 import duke.helper.Ui;
-import duke.storage.Database;
+import duke.storage.FileSystem;
 
 import java.io.IOException;
 
 public class Duke {
     private final Ui ui;
-    private final Parser parser;
-    private Database db;
+    private Parser parser;
+    private FileSystem db;
     private TaskList tasks;
 
     public Duke(String filePath) {
         this.ui = new Ui();
-        this.parser = new Parser();
 
         try {
-            this.db = new Database(filePath);
-            this.tasks = new TaskList(this.db, this.ui);
-        } catch (IOException e) {
-            ui.showErrorMsg("IO", e, this.tasks.getSize());
-        } catch (DukeException e) {
-            ui.showErrorMsg("duke.Duke", e, this.tasks.getSize());
+            db = new FileSystem(filePath);
+            this.tasks = new TaskList(db.loadFromFile());
+            this.parser = new Parser(tasks);
+        } catch (DukeException | IOException e) {
+            System.out.println(e);
         }
     }
 
     public void run() {
-        String currInput = ui.getNextLine();
-        String[] splitStr = currInput.split(" ", 2);
-
         ui.showWelcome();
-        ui.showLine();
+        String[] splitStr = ui.getNextLine();
 
-        while(!currInput.equals("bye")) {
+        while (!splitStr[0].equals("bye")) {
             try {
-                this.parser.parseInputs(splitStr, tasks);
-            } catch (DukeException e) {
-                ui.showErrorMsg("duke.Duke", e, this.tasks.getSize());
+                this.parser.parseInputs(splitStr);
+            } catch (DukeException | IOException e) {
+                System.out.println(e);
             } catch (NumberFormatException e) {
-                ui.showErrorMsg("NAN", e, this.tasks.getSize());
+                ui.showErrorMsg(splitStr[0]);
             } catch (IndexOutOfBoundsException e) {
-                ui.showErrorMsg("OutOfBounds", e, this.tasks.getSize());
-            } catch (IOException e) {
-                ui.showErrorMsg("IO", e, this.tasks.getSize());
+                ui.showErrorMsg(tasks.getTasks().size());
             } finally {
-                ui.showLine();
-                currInput = ui.getNextLine();
-                splitStr = currInput.split(" ", 2);
-                ui.showLine();
+                splitStr = ui.getNextLine();
             }
         }
+        db.updateFile(tasks);
         ui.showExit();
-        ui.closeScanner();
     }
 
     public static void main(String[] arg) {

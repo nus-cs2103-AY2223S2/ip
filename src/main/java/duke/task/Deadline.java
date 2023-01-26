@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.InvalidDateTimeException;
+import duke.helper.Parser;
 
 import java.time.LocalDateTime;
 
@@ -8,8 +9,9 @@ public class Deadline extends Task {
     private LocalDateTime dueDateTime;
 
     private Deadline(String description, String by) throws InvalidDateTimeException {
-        super(description);
-        this.dueDateTime = handleDateTime(by);
+        super(description,false, "D" );
+
+        this.dueDateTime = Parser.handleDateTime(by);
     }
 
     public static Deadline createDeadline(String desc) throws InvalidDateTimeException {
@@ -21,7 +23,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s %s)", super.toString(),
+        return String.format("%s (by: %s %s)", super.toString(),
                 dueDateTime.toLocalDate(), dueDateTime.toLocalTime());
     }
 }

@@ -1,17 +1,14 @@
 package duke.task;
 
-import duke.exception.InvalidDateTimeException;
-
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-
 public class Task {
     private String description;
     private boolean isDone;
+    private String type;
 
-    public Task(String description) {
+    public Task(String description, boolean isDone, String type) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
+        this.type = type;
     }
 
     public String getStatusIcon() {
@@ -22,23 +19,8 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public LocalDateTime handleDateTime(String dateTime) throws InvalidDateTimeException {
-        try {
-            String[] period = dateTime.split("/", 3);
-            String[] yearTime = period[2].split(" ");
-            int year = Integer.parseInt(yearTime[0]);
-            int month = Integer.parseInt(period[1]);
-            int day = Integer.parseInt(period[0]);
-            int hour = Integer.parseInt(yearTime[1].substring(0, 2));
-            int min = Integer.parseInt(yearTime[1].substring(2));
-            return LocalDateTime.of(year, month, day, hour, min);
-        } catch (NumberFormatException | IndexOutOfBoundsException | DateTimeException e) {
-            throw new InvalidDateTimeException();
-        }
-    }
-
     @Override
     public String toString() {
-        return String.format("[%s] %s",this.getStatusIcon(), this.description);
+        return String.format("[%s][%s] %s", this.type, this.getStatusIcon(), this.description);
     }
 }
