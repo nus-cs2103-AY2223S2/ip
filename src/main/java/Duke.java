@@ -1,59 +1,71 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.io.FileWriter;
+
 import java.util.List;
 import java.util.ArrayList;
 
 import java.util.Scanner;
 
-
-
 public class Duke {
+
+    private static final String FILE_PATH = "./data/duke.txt";
+    private static final String FILE_DIRECTORY = "data";
+    private static final String FILE_NAME = "duke.txt";
+
     private static final List<Task> taskList = new ArrayList<>();
     private static final String BOT_NAME = "Tyrone";
-    private static final String FILE_PATH = "data/duke.txt";
 
     public static void greet() {
         Duke.say("Sup, my name is " + Duke.BOT_NAME);
+    }
+
+    public static void processInput(String input) {
+        try {
+            // Split strings into 2, first part is the operation, 2nd part is the description
+            String[] command = input.split(" ", 2);
+            Operation op = Operation.valueOf(command[0].toUpperCase());
+
+            switch (op) {
+                case MARK:
+                    Duke.markTask(command);
+                    break;
+                case UNMARK:
+                    Duke.unmarkTask(command);
+                    break;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    Duke.addTask(command, op);
+                    break;
+                case LIST:
+                    Duke.listTasks();
+                    break;
+                case DELETE:
+                    Duke.deleteTask(command);
+            }
+        } catch (DukeException e) {
+            Duke.say(e.toString());
+        } catch (IllegalArgumentException e) {
+            Duke.say("What are you talkin about man?");
+        }
     }
 
     public static void interact() {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            try {
-                String input = sc.nextLine();
+            String input = sc.nextLine();
 
-                // If input is "bye", terminate loop
-                if (input.equals("bye")) {
-                    break;
-                }
-
-                // Split strings into 2, first part is the operation, 2nd part is the description
-                String[] command = input.split(" ", 2);
-                Operation op = Operation.valueOf(command[0].toUpperCase());
-
-                switch (op) {
-                    case MARK:
-                        Duke.markTask(command);
-                        break;
-                    case UNMARK:
-                        Duke.unmarkTask(command);
-                        break;
-                    case TODO:
-                    case DEADLINE:
-                    case EVENT:
-                        Duke.addTask(command, op);
-                        break;
-                    case LIST:
-                        Duke.listTasks();
-                        break;
-                    case DELETE:
-                        Duke.deleteTask(command);
-                }
-
-            } catch (DukeException e) {
-                Duke.say(e.toString());
-            } catch (IllegalArgumentException e) {
-                Duke.say("What are you talkin about man?");
+            // If input is "bye", terminate loop
+            if (input.equals("bye")) {
+                break;
             }
+
+            // Else, we process the input
+            Duke.processInput(input);
         }
 
         sc.close();
@@ -121,6 +133,13 @@ public class Duke {
         Duke.say("Task masked as undone: " + t);
     }
 
+    /**
+     * Adds a task to the task list, taking into account the type of task given.
+     *
+     * @param command The given command from user.
+     * @param op The type of task given.
+     * @throws DukeException
+     */
     public static void addTask(String[] command, Operation op) throws DukeException {
 
         if (command.length < 2) {
@@ -163,6 +182,12 @@ public class Duke {
         Duke.say(text.toString());
     }
 
+    /**
+     * Deletes the given task.
+     *
+     * @param command The input from the user.
+     * @throws DukeException If task is invalid or task is not given.
+     */
     public static void deleteTask(String[] command) throws DukeException {
 
         Duke.checkCommandValidity(command);
@@ -170,37 +195,138 @@ public class Duke {
         Task t = taskList.get(Integer.parseInt(command[1]) - 1);
         taskList.remove(t);
 
+        // Print response text to user
         StringBuilder text = new StringBuilder();
         text.append("Task deleted: " + t + "\n");
         text.append("You have " + taskList.size() + " task(s) remained.");
         Duke.say(text.toString());
     }
 
+    /**
+     * Prints shutdown message
+     */
     public static void shutdown() {
         Duke.say("Aight imma head out");
     }
 
-
     /**
-     * Loads the record file at startup.
-     * If record file is not found, create a new file.
-     * If folder where file is contained not found, create a new folder.
-     *
+     * Adds a task from saved file to the task list.
      */
-    public static void loadFile() {
+    private static void loadTaskFromFile(String task) {
+        String[] command = task.split("\\|");
+        String taskType = command[0];
+        String description = command[2];
 
+        Task t = new Task("placeholder");
+
+        switch (taskType) {
+        case "T":
+            t = new ToDo(description);
+            break;
+        case "D":
+            String by = command[3];
+            t = new Deadline(description, by);
+            break;
+        case "E":
+            String from = command[3];
+            String to = command[4];
+            t = new Event(description, from, to);
+            break;
+        }
+
+        boolean isMarked = command[1].equals("1");
+        if (isMarked) {
+            t.markAsDone();
+        }
+
+        Duke.taskList.add(t);
     }
 
+    /**
+     * Gets the directories to the save file.
+     *
+     * @return String representing the directories to the save file.
+     */
+    public static String getDir() {
+        String home = System.getProperty("user.dir");
+        Path path = java.nio.file.Paths.get(home, Duke.FILE_DIRECTORY);
+        return path.toString();
+    }
 
+    /**
+     * Creates parent directories and the file if necessary. Then returns file.
+     */
+    private static File fileWithAssurance(String directory, String filename) {
+        // Load parent directories
+        File dir = new File(directory);
+
+        // Create parent directories if necessary
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        // Load file
+        File file = new File(directory + "/" + filename);
+
+        // Create file if not exist
+        try {
+            if (file.createNewFile()) {
+                Duke.say("New save file created.");
+            } else {
+                Duke.say("Save file detected. Loading...");
+            }
+        } catch (IOException e) {
+            Duke.say("Something went wrong while creating a new save");
+        }
+
+        return file;
+    }
+
+    /**
+     * Loads the save file at startup if it exists.
+     * If directory does not exist, create a new directory.
+     */
+    private static void loadFile() {
+
+        File file = fileWithAssurance(Duke.getDir(), FILE_NAME);
+
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                String task = sc.nextLine();
+                Duke.loadTaskFromFile(task);
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            Duke.say("An error occurred while locating save file.");
+        }
+    }
+
+    /**
+     * Saves the task list to hard drive.
+     */
+    private static void saveFile() {
+        Duke.say("Saving file...");
+        try {
+            FileWriter fw = new FileWriter(Duke.getDir() + "/" + FILE_NAME);
+
+            for (int i = 0; i < Duke.taskList.size(); i++) {
+                Task t = Duke.taskList.get(i);
+                fw.write(t.toSavedString() + System.lineSeparator());
+            }
+
+            fw.close();
+
+        } catch (IOException e) {
+            Duke.say("Something went wrong with saving file");
+        }
+    }
 
     public static void main(String[] args) {
         Duke.greet();
-
         Duke.loadFile();
-
         Duke.interact();
-
         Duke.shutdown();
+        Duke.saveFile();
     }
-
 }

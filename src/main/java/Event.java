@@ -13,5 +13,11 @@ public class Event extends Task {
         return "[E]" + super.toString()
                 + "(from:" + this.from + "to:" + this.to + ")";
     }
+
+    @Override
+    public String toSavedString() {
+        return "E" + "|" + (super.isDone ? "1" : "0")
+                + "|" + super.description + "|" + this.from + "|" + this.to;
+    }
 }
 
