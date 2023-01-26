@@ -17,21 +17,18 @@ public class Duke {
     private static ArrayList<Task> allTasks = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
-    private static Path memoryPath = Paths.get(".", "memory.txt");
-    private static File memory = new File(String.valueOf(memoryPath));
-
     private Storage storage;
-    private TaskList tasks;
+    private TaskList allTasks;
     private Ui ui;
 
     public Duke(String memoryPath) {
         ui = new Ui();
         storage = new Storage(memoryPath);
         try {
-            tasks = new TaskList(storage.load());
+            allTasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            allTasks = new TaskList();
         }
     }
 
@@ -178,55 +175,6 @@ public class Duke {
             throw new IlegalCommandException(Commands.UNRECOGNIZED);
         }
         return true;
-    }
-
-    public static void loadTasks() {
-        try {
-            memory.createNewFile();
-            Scanner memoryScanner = new Scanner(memory);
-            while (memoryScanner.hasNext()) {
-                String taskLine = memoryScanner.nextLine();
-                loadTaskLine(taskLine);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void loadTaskLine(String taskLine) {
-        // TODO: Handle corruption in file, leading to incorrect syntax
-        String[] attributes = taskLine.split(", ");
-        String type = attributes[0];
-        String doneNumber = attributes[1];
-        boolean done = Objects.equals(doneNumber, "1");
-        String title = attributes[2];
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE MMM dd yyyy HH:mm a");
-        if (Objects.equals(type, "T")) {
-            addToList(title, TaskType.TODO, null, null, done, false);
-        } else if (Objects.equals(type, "D")) {
-            LocalDateTime dateBy = LocalDateTime.parse(attributes[3], dateFormat);
-            addToList(title, TaskType.DEADLINE, null, dateBy, done, false);
-        } else if (Objects.equals(type, "E")) {
-            LocalDateTime start = LocalDateTime.parse(attributes[3], dateFormat);
-            LocalDateTime end = LocalDateTime.parse(attributes[4], dateFormat);
-            addToList(title, TaskType.EVENT, start, end, done, false);
-        } else {
-            System.out.println("Some task in memory does not fall into the three task categories!");
-        }
-    }
-
-    public static void saveTasks() {
-        // TODO: Handle case where file is destroyed while script is running
-        try {
-            BufferedWriter fw = Files.newBufferedWriter(memoryPath , StandardOpenOption.TRUNCATE_EXISTING);
-            for (Task task: allTasks) {
-                fw.write(task.writeToMemory());
-                fw.newLine();
-            }
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static void main(String[] args) {

@@ -19,7 +19,7 @@ public class Event extends Task {
                 this.start.format(dateFormat), this.end.format(dateFormat));
     }
 
-    public String writeToMemory() {
+    public String convertToMemoryString() {
         String doneString = this.getDone() ? "1" : "0";
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE MMM dd yyyy HH:mm a");
         return "E, " + doneString + ", " + this.getTitle() + ", "

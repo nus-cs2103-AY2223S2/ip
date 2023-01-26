@@ -17,7 +17,7 @@ public class Deadline extends Task {
         return String.format("[D][%s] %s (by: %s)", doneString, this.getTitle(), this.dateBy.format(dateFormat));
     }
 
-    public String writeToMemory() {
+    public String convertToMemoryString() {
         String doneString = this.getDone() ? "1" : "0";
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE MMM dd yyyy HH:mm a");
         return "D, " + doneString + ", " + this.getTitle() + ", " + this.dateBy.format(dateFormat);
