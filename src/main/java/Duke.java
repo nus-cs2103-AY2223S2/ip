@@ -42,13 +42,23 @@ public class Duke {
                 continue;
             }
 
-            if (textInput.length() >= 6 && 
+            if (textInput.length() >= 4 &&
                 textInput.substring(0, 4).equalsIgnoreCase("todo")) {
-                Task t = new Task.Todo(textInput.substring(5));
-                taskList[index] = t;
-                index++;
-                String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), index);
-                System.out.println(output);
+                try {
+                    String[] parts = textInput.split(" ", 2);
+                    if (parts.length == 1 || parts[1] == "") {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    Task t = new Task.Todo(textInput.substring(5));
+                    taskList[index] = t;
+                    index++;
+                    String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), index);
+                    System.out.println(output);
+                    continue;                
+                } catch (DukeException e) {
+                    System.out.println(e);
+                    continue;
+                }
             }
 
             if (textInput.length() >= 10 && 
@@ -59,6 +69,7 @@ public class Duke {
                 index++;
                 String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), index);
                 System.out.println(output);
+                continue;
             }
 
             if (textInput.length() >= 7 && 
@@ -69,7 +80,10 @@ public class Duke {
                 index++;
                 String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), index);
                 System.out.println(output);
+                continue;
             }
+            
+            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
