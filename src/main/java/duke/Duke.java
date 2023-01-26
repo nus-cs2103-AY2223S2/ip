@@ -77,39 +77,35 @@ public class Duke {
         // Suppress all upper case letters, gets only the first word
         String cmd = command.toLowerCase().split(" ")[0];
 
-        if (cmd.compareTo("list") == 0)
-            return State.LIST;
-        else if (cmd.compareTo("todo") == 0)
-            return State.TODO;
-        else if (cmd.compareTo("deadline") == 0)
-            return State.DEADLINE;
-        else if (cmd.compareTo("event") == 0)
-            return State.EVENT;
-        else if (cmd.compareTo("mark") == 0)
-            return State.MARK;
-        else if (cmd.compareTo("unmark") == 0)
-            return State.UNMARK;
-        else if (cmd.compareTo("delete") == 0)
-            return State.DELETE;
-        else if (cmd.compareTo("save") == 0)
-            return State.SAVE;
-
-        // multiple exit keywords
+        // Detect state
         switch (cmd) {
-            case "bye":
-            case "goodbye":
-            case "quit":
-            case "quit()":
-            case "exit":
-            case "exit()":
-                return State.EXIT;
+        case "list":
+            return State.LIST;
+        case "todo":
+            return State.TODO;
+        case "deadline":
+            return State.DEADLINE;
+        case "event":
+            return State.EVENT;
+        case "mark":
+            return State.MARK;
+        case "unmark":
+            return State.UNMARK;
+        case "delete":
+            return State.DELETE;
+        case "save":
+            return State.SAVE;
+        case "bye":
+        case "goodbye":
+        case "quit":
+        case "quit()":
+        case "exit":
+        case "exit()":
+            return State.EXIT;
+        default:
+            return State.UNKNOWN; // no matches found
         }
-
-        // no matches found
-        return State.UNKNOWN;
     }
-
-
 
     public static void main(String[] args) {
 
