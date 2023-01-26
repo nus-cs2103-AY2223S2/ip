@@ -1,18 +1,28 @@
 package tunabot;
 
-import tunabot.exceptions.InputException;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import tunabot.exceptions.InputException;
+
+/**
+ * Main class for TunaBot
+ */
 public class TunaBot {
-    private Storage storage;
-    private Ui ui;
     private static final Scanner s = new Scanner(System.in);
     private static TaskList tasks;
     private static boolean toExit = false;
+    private final Storage storage;
+    private final Ui ui;
+
+    /**
+     * Initializes a TunaBot with the given save path.
+     * @param savePath Path for locating the save file containing existing tasks if any.
+     */
     public TunaBot(Path savePath) {
         ui = new Ui();
         storage = new Storage(savePath);
@@ -22,6 +32,10 @@ public class TunaBot {
             ui.saveFileProblem();
         }
     }
+
+    /**
+     * Runs TunaBot
+     */
     public void run() {
         ui.greeting();
         while (!toExit) {
@@ -38,6 +52,10 @@ public class TunaBot {
         }
         storage.save(tasks);
     }
+
+    /**
+     * Main class to initialize and run TunaBot
+     */
     public static void main(String[] args) {
         Path savePath = Paths.get("data", "save.txt");
         new TunaBot(savePath).run();

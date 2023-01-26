@@ -4,6 +4,9 @@ import tunabot.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Class to handle TaskList
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
     public TaskList() {

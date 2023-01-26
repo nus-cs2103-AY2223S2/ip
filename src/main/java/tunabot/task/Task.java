@@ -1,13 +1,26 @@
 package tunabot.task;
 
+/**
+ * Class to handle Tasks
+ */
 public class Task {
     final String name;
     boolean isDone;
 
+    /**
+     * Initializes new Task with given name
+     * @param name
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
+
+    /**
+     * Initializes new Task with given name and status
+     * @param name
+     * @param isDone
+     */
     public  Task(String name, String isDone) {
         this.name = name;
         this.isDone = isDone.equals("true");
@@ -19,13 +32,19 @@ public class Task {
     public boolean getDone() {
         return isDone;
     }
-    public boolean markDone() {
+
+    /**
+     * Marks task as done
+     */
+    public void markDone() {
         this.isDone = true;
-        return true;
     }
-    public boolean unmarkDone() {
+
+    /**
+     * Marks task as undone
+     */
+    public void unmarkDone() {
         this.isDone = false;
-        return false;
     }
     public String saveFormat() {
         return "T;" + this.name + ";" +this.isDone;

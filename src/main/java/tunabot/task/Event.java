@@ -3,10 +3,19 @@ package tunabot.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class to handle Events
+ */
 public class Event extends Task{
     protected LocalDateTime start;
     protected LocalDateTime end;
 
+    /**
+     * Initializes new Event with given name, start date and end date
+     * @param name Name of Event
+     * @param start Start date of Event
+     * @param end End date of Event
+     */
     public Event(String name, String start, String end) {
         super(name);
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
@@ -14,11 +23,19 @@ public class Event extends Task{
         this.start = LocalDateTime.parse(start, format);
         this.end = LocalDateTime.parse(end, format);
     }
+
+    /**
+     * Initializes new Event with given name, status, start date and end date
+     * @param name Name of Event
+     * @param isDone Status of Event
+     * @param start Start date of Event
+     * @param end End date of Event
+     */
     public Event(String name, String isDone, String start, String end) {
         super(name, isDone);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy-HHmm");
         this.start = LocalDateTime.parse(start, formatter);
-        this.end = LocalDateTime.parse(end, formatter);;
+        this.end = LocalDateTime.parse(end, formatter);
     }
     
 
