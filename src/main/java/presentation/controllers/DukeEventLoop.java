@@ -1,13 +1,12 @@
 package presentation.controllers;
 
 import core.singletons.Singletons;
-import domain.entities.core.EventLoop;
-import domain.entities.core.Executable;
-import domain.entities.core.NestableExecutableObject;
+import domain.entities.core.*;
 import domain.usecases.ByeUsecase;
 import domain.usecases.TaskManagerUsecase;
 import domain.usecases.UnknownCommandUsecase;
 import presentation.ui.SystemErr;
+import presentation.ui.SystemIn;
 
 import java.util.Scanner;
 
@@ -15,35 +14,27 @@ import java.util.Scanner;
  * The event loop for managing Duke.
  */
 public class DukeEventLoop extends EventLoop {
-    private DukeEventLoop(Scanner scanner, Executable rootExecutable) {
-        super(rootExecutable);
-        this.scanner = scanner;
+    private DukeEventLoop(Executable rootExecutable, StringReadable reader,
+                          Writable errorWriter) {
+        super(rootExecutable, reader, errorWriter);
     }
 
-    public static DukeEventLoop createEventLoop(Scanner scanner) {
+    public static DukeEventLoop createEventLoop() {
+        // creates a new system in instance. We want to make sure that
+        // the scanner is not closed for each event loop, because scanners
+        // are managed by the event loops.
+        final StringReadable reader = new SystemIn();
+        Writable errorWriter = Singletons.get(SystemErr.class);
         final NestableExecutableObject executable =
-                new NestableExecutableObject(Singletons.get(SystemErr.class));
-
+                new NestableExecutableObject(errorWriter);
         final ByeUsecase bye = Singletons.get(ByeUsecase.class);
         bye.register(executable);
-        // final EchoUsecase echo = new EchoUsecase();
-        // echo.register(executable);
         final TaskManagerUsecase manager =
                 Singletons.get(TaskManagerUsecase.class);
         manager.register(executable);
         final UnknownCommandUsecase unknown =
                 Singletons.get(UnknownCommandUsecase.class);
         unknown.register(executable);
-        return new DukeEventLoop(scanner, executable);
-    }
-
-    /**
-     * The scanner used for reading user input.
-     */
-    private final Scanner scanner;
-
-    @Override
-    protected String[] getTokens() {
-        return scanner.nextLine().trim().split(" ");
+        return new DukeEventLoop(executable, reader, errorWriter);
     }
 }

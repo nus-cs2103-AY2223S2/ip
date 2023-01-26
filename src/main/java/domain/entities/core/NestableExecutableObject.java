@@ -39,6 +39,9 @@ public class NestableExecutableObject implements Executable, Disposable {
     /**
      * Instantiates a new TokensManager with all the values defaulting to empty
      * collections.
+     *
+     * @param errorWriter the writer to which the error messages shall be
+     *                    written.
      */
     public NestableExecutableObject(Writable errorWriter) {
         this(new ArrayList<>(), new ArrayList<>(), new HashMap<>(),
