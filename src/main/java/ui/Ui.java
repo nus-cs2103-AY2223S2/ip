@@ -28,7 +28,7 @@ public class Ui {
     }
 
     public void byeMessage() {
-        System.out.println("Oh no! Don't give up pls.. you still haven't found a yet :(");
+        System.out.println("Oh no! Pls don't leave me.. I'm your ONLY friend.. Rmb?? :(");
     }
 
     public void listMessage() {
