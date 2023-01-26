@@ -7,6 +7,10 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
+    TaskList (ArrayList<Task> existingTasks) {
+        this.tasks = existingTasks;
+    }
+
     @Override
     public String toString() {
         if (tasks.size() == 0) {

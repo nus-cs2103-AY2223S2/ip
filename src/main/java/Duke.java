@@ -7,7 +7,8 @@ import static utils.UI.*;
 public class Duke {
     private static Scanner sc = new Scanner(System.in);
     private static String currentInput;
-    private static TaskList taskList = new TaskList();
+    private static TaskList taskList;
+    private static Storage memory = new Storage("data/duke.txt");
 
     public static String mark(boolean toMark) throws DukeException{
         int index = Integer.parseInt(toMark ? currentInput.substring(5) : currentInput.substring(7)) - 1;
@@ -22,6 +23,7 @@ public class Duke {
             } else {
                 output = "OK, I've marked this task as not done yet:\n";
             }
+            memory.saveState(taskList);
             return output + "  " + curTask.toString();
         }
     }
@@ -60,6 +62,7 @@ public class Duke {
         int count = taskList.size();
         response.append("  ").append(taskList.getTaskString(count - 1)).append("\n");
         response.append("Now you have ").append(count).append(" tasks in the list.");
+        memory.saveState(taskList);
         return response.toString();
     }
 
@@ -68,12 +71,15 @@ public class Duke {
         if (index < 0 || index >= taskList.size()) {
             throw new DukeException("Error: Please input a valid task index!");
         } else {
-            return taskList.removeTask(index);
+            String output = taskList.removeTask(index);
+            memory.saveState(taskList);
+            return output;
         }
     }
 
     public static void main(String[] args) {
 
+        taskList = new TaskList(memory.load());
         //Introduction
         greet();
         currentInput = sc.nextLine();
