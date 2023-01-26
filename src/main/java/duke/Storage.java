@@ -11,7 +11,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exceptions.CorruptedFileException;
-import duke.tasks.*;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 public class Storage {
     private final String FILE_PATH;
