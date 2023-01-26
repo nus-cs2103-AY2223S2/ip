@@ -1,4 +1,6 @@
 package task;
+import core.DateHandler;
+
 import java.time.LocalDateTime;
 /**
  * Event is a type of Task.
@@ -52,7 +54,8 @@ public class Event extends Task {
      */
     @Override
     public String toCSV() {
-        return String.format("E,%s,%s,%s,%s", this.name(), this.status, this.from, this.to);
+        return String.format("E,%s,%s,%s,%s", this.name(), this.status,
+                DateHandler.unconvert(this.from), DateHandler.unconvert(this.to));
     }
 
 }

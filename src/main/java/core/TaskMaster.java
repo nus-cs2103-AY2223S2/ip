@@ -48,6 +48,7 @@ public class TaskMaster {
         LIST.add(task);
         ret.append("Got it. I've added this task:\n");
         ret.append(task);
+        ret.append("\n");
         ret.append(String.format("Now you have %d tasks in the list.\n", LIST.size()));
         return ret.toString();
     }
@@ -64,7 +65,7 @@ public class TaskMaster {
         try {
             return LIST.get(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new exceptions.invalid.Index(index);
+            throw new exceptions.invalid.Index(index + 1);
         }
     }
 
@@ -118,7 +119,6 @@ public class TaskMaster {
     public String addToDo(String taskName, boolean status) {
         return this.add(new task.ToDo(taskName, status));
     }
-
 
     /**
      * Creates a Deadline task and adds it to the list.

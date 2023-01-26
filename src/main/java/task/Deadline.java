@@ -1,4 +1,6 @@
 package task;
+import core.DateHandler;
+
 import java.time.LocalDateTime;
 /**
  * Deadline is a type of Task.
@@ -49,6 +51,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toCSV() {
-        return String.format("D,%s,%s,%s", this.name(), this.status, this.by);
+        return String.format("D,%s,%s,%s", this.name(), this.status, DateHandler.unconvert(this.by));
     }
 }

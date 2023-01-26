@@ -18,10 +18,11 @@ public class Parser {
 
         String[] split = userInput.split(" ", 2);
         if (split.length > 1) {
-
             this.userInput = split[1];
-            this.keyword = split[0].toLowerCase();
+        } else {
+            this.userInput = "";
         }
+        this.keyword = split[0].toLowerCase().trim();
     }
 
     public String getKeyword() {
@@ -34,16 +35,16 @@ public class Parser {
             throw new exceptions.missing.Parameter(this.keyword);
         }
         try {
-            int ind = Integer.parseInt(userInSplit[1]);
+            int ind = Integer.parseInt(userInSplit[0]);
             return ind - 1; // Count starting from 0
         } catch (NumberFormatException e) {
-            throw new exceptions.invalid.Input(String.format("%s is not an integer", userInSplit[1]));
+            throw new exceptions.invalid.Input(String.format("%s is not an integer!", userInSplit[0]));
         }
     }
 
     public String[] extractTaskParams(Parser.KEYWORD desire) throws DukeException {
         // Check for RHS
-        if (userInput.isEmpty()) {
+        if (userInput.trim().isEmpty()) {
             throw new exceptions.missing.Parameter(this.keyword);
         }
 
@@ -115,7 +116,7 @@ public class Parser {
 
     public String parse(TaskMaster tm) throws DukeException{
         String[] args;
-
+//        System.out.println(this.getKeyword());
         switch (this.getKeyword()) {
             case "list":
                 return tm.list();
@@ -125,6 +126,7 @@ public class Parser {
                 return tm.markComplete(extractIndexParams(), false);
             case "todo":
                 args = extractTaskParams(KEYWORD.TODO);
+//                System.out.println(args);
                 return tm.addToDo(args[0], false);
             case "event":
                 args = extractTaskParams(KEYWORD.EVENT);

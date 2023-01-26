@@ -38,6 +38,8 @@ public class Duke {
                 try {
                     Parser a = new Parser(userInput);
                     dio.println(a.parse(tm));
+                } catch (exceptions.Quit e) {
+                    QUIT = true;
                 } catch (DukeException de) {
                     dio.println(de.getMessage());
                 }

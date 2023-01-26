@@ -1,5 +1,4 @@
 package core;
-import exceptions.DukeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -65,22 +64,26 @@ public class DateHandler {
         return LDT;
     }
 
-    /**
-     * Returns String input formatted according to the stored format
-     * @param datetime The time to print
-     * @return String representation of Date Time according to the format
-     */
-    public static String print(LocalDateTime datetime) {
-        return print(datetime, printFormat);
+    public static String unconvert(LocalDateTime userin) {
+        return userin.format(DateTimeFormatter.ofPattern(DTFPattern));
     }
 
-    /**
-     * Returns String input formatted according to the given format
-     * @param datetime The time to print
-     * @param format Custom DateTimeFormatter format
-     * @return String representation of Date Time according to the format
-     */
-    private static String print(LocalDateTime datetime, DateTimeFormatter format) {
-        return datetime.format(format);
-    }
+//    /**
+//     * Returns String input formatted according to the stored format
+//     * @param datetime The time to print
+//     * @return String representation of Date Time according to the format
+//     */
+//    public static String print(LocalDateTime datetime) {
+//        return print(datetime, printFormat);
+//    }
+//
+//    /**
+//     * Returns String input formatted according to the given format
+//     * @param datetime The time to print
+//     * @param format Custom DateTimeFormatter format
+//     * @return String representation of Date Time according to the format
+//     */
+//    private static String print(LocalDateTime datetime, DateTimeFormatter format) {
+//        return datetime.format(format);
+//    }
 }
