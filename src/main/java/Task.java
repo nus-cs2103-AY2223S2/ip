@@ -1,9 +1,9 @@
 public abstract class Task {
-    private String Name;
+    private String name;
     private boolean isDone;
 
-    public Task(String taskName) {
-        this.Name = taskName;
+    public Task(String name) {
+        this.name = name;
         this.isDone = false;
     }
 
@@ -22,10 +22,10 @@ public abstract class Task {
     @Override
     public String toString() {
         if(this.isDone) {
-            return "[X]" + this.Name;
+            return "[X] " + this.name;
         }
         else {
-            return "[ ]" + this.Name;
+            return "[ ] " + this.name;
         }
     }
 }

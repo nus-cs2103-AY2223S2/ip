@@ -23,18 +23,18 @@ public class Duke {
             return cleanedParameters;
 
         }
-        else if(command.equals(Commands.EVENT)){
+        else if(command.equals(Commands.DEADLINE)){
             String[] cleanedParameters = new String[2];
             cleanedParameters[0] = parameters[0];
-            cleanedParameters[1] = parameters[1];
+            cleanedParameters[1] = parameters[2];
             return cleanedParameters;
 
         }
-        else if(command.equals(Commands.DEADLINE)){
+        else if(command.equals(Commands.EVENT)){
             String[] cleanedParameters = new String[3];
             cleanedParameters[0] = parameters[0];
-            cleanedParameters[1] = parameters[1];
-            cleanedParameters[2] = parameters[2];
+            cleanedParameters[1] = parameters[2];
+            cleanedParameters[2] = parameters[4];
             return cleanedParameters;
         }
         else{
@@ -65,9 +65,9 @@ public class Duke {
                     System.out.println(taskList.addTask(parameters[0]));
                 } else if (command.equals(Commands.DELETE)) {
                     System.out.println(taskList.deleteTask(Integer.parseInt(parameters[0])));
-                } else if (command.equals(Commands.EVENT)) {
-                    System.out.println(taskList.addTask(parameters[0], parameters[1]));
                 } else if (command.equals(Commands.DEADLINE)) {
+                    System.out.println(taskList.addTask(parameters[0], parameters[1]));
+                } else if (command.equals(Commands.EVENT)) {
                     System.out.println(taskList.addTask(parameters[0], parameters[1], parameters[2]));
                 }
             }

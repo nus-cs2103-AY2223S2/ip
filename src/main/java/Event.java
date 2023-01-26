@@ -2,8 +2,8 @@ public class Event extends Task {
     private String start;
     private String end;
 
-    public Event(String Name, String start, String end) {
-        super(Name);
+    public Event(String name, String start, String end) {
+        super(name);
         this.start = start;
         this.end = end;
     }

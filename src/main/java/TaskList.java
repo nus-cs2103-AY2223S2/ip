@@ -8,26 +8,24 @@ public class TaskList {
         this.taskList = new ArrayList<>();
         this.numTasks = 0;
     }
-
+    public String processTask(Task task){
+        this.taskList.add(task);
+        this.numTasks +=1;
+        return "Task added. You now have:" + this.numTasks + " task(s).";
+    }
     public String addTask(String name){ //todo
         Task task = new ToDo(name);
-        this.taskList.add(task);
-        this.numTasks += 1;
-        return "Task added. You now have:" + this.numTasks + "task(s).";
+        return processTask(task);
     }
 
     public String addTask(String name, String end){ //deadline
         Task task = new Deadline(name,end);
-        this.taskList.add(task);
-        this.numTasks += 1;
-        return "Task added. You now have:" + this.numTasks + "task(s).";
+        return processTask(task);
     }
 
     public String addTask(String name, String start, String end){ //event
         Task task = new Event(name,start,end);
-        this.taskList.add(task);
-        this.numTasks += 1;
-        return "Task added. You now have:" + this.numTasks + "task(s).";
+        return processTask(task);
     }
 
     public String listTasks(){
