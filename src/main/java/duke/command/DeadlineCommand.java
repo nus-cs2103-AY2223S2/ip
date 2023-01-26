@@ -6,12 +6,31 @@ import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.TaskList;
 
+/**
+ * A subclass of Command that represents
+ * the command to add a deadline task into
+ * the TaskList.
+ *
+ * @author Oskar Lew
+ * @version 0.1
+ * @since 0.1
+ */
 public class DeadlineCommand extends Command {
-    
+
+    /**
+     * Constructor of DeadlineCommand.
+     * @param command Command from the user.
+     */
     public DeadlineCommand(String[] command) {
         super(command);
     }
 
+    /**
+     * Method to add a deadline task to the TaskList.
+     * @param tasks List of tasks.
+     * @param ui Ui of the chat.
+     * @param storage Storage of Duke.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             StringBuilder sb = new StringBuilder();
