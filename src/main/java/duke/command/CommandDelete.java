@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.task.Ui;
 
 public class CommandDelete extends Command{
-    private int index;
+    private final int index;
     public CommandDelete(String command, int index) {
         super(command);
         this.index = index;

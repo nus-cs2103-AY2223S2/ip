@@ -6,7 +6,7 @@ import duke.task.Task;
 import duke.task.Ui;
 
 public class CommandTask extends Command{
-    private Task task;
+    private final Task task;
     public CommandTask(String command, Task task) {
         super(command);
         this.task = task;

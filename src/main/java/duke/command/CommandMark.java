@@ -5,8 +5,8 @@ import duke.TaskList;
 import duke.task.Ui;
 
 public class CommandMark extends Command{
-    private int index;
-    private boolean mark;
+    private final int index;
+    private final boolean mark;
 
     public CommandMark(String command, int index, boolean mark) {
         super(command);
