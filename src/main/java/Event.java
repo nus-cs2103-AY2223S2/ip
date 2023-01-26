@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 
 /**
- * Represents an Event object. An Even object has a start time and end time.
+ * An Event object is a Task with a start time and end time.
  */
 public class Event extends Task {
     LocalDateTime startTime;

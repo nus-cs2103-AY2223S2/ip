@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 
 /**
- * Represents a Deadline object. A Deadline object is a task with a deadline.
+ * A Deadline object is a task with a deadline.
  */
 public class Deadline extends Task {
     LocalDateTime deadline;

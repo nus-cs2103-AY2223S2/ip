@@ -1,5 +1,3 @@
-// Learn to create custom Exceptions: https://www.baeldung.com/java-new-custom-exception
-
 /**
  * DukeException is the base class of all exceptions in the Duke application.
  */
