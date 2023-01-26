@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import com.sun.jdi.LocalVariable;
 
@@ -11,14 +11,14 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate start;
     protected LocalDate end;
-    private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Constructor to initialize an event object
      *
      * @param start The start date/time of the event
-     * @param end The end date/time of the event
-     * @param desc The title of the event
+     * @param end   The end date/time of the event
+     * @param desc  The title of the event
      */
     public Event(LocalDate start, LocalDate end, String desc) {
         super(desc);

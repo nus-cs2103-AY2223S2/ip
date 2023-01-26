@@ -1,11 +1,11 @@
-package storage;
+package duke.storage;
 
-import exception.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Todo;
-import task.Task;
-import task.TaskList;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.task.Task;
+import duke.task.TaskList;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -19,10 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class Storage {
 
-    private static String DEFAULT_PATH = "data/duke.txt";
+    private static final String DEFAULT_PATH = "data/duke.txt";
     private Path filePath;
     private String currRelativeFilePath;
 
@@ -40,7 +39,7 @@ public class Storage {
         List<Task> list = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(filePath);
-            for (String i: lines) {
+            for (String i : lines) {
                 char type = i.charAt(1);
                 Task task = null;
                 if (type == 'T') {
@@ -51,18 +50,18 @@ public class Storage {
                     String sub = i.substring(7);
                     int openBraceIndex = sub.indexOf('(');
                     int closeBraceIndex = sub.indexOf(')');
-                    String date = sub.substring(openBraceIndex+5, closeBraceIndex);
+                    String date = sub.substring(openBraceIndex + 5, closeBraceIndex);
                     LocalDate ld = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd MMM yyyy"));
-                    String desc = sub.substring(0, openBraceIndex-1);
+                    String desc = sub.substring(0, openBraceIndex - 1);
                     task = new Deadline(ld, desc);
 
                 } else if (type == 'E') {
                     String sub = i.substring(7);
-                    String segments[] = sub.split("from: ", 2);
-                    String desc = segments[0].substring(0, segments[0].length()-2);
-                    String dateTime[] = segments[1].split(" to: ", 2);
+                    String[] segments = sub.split("from: ", 2);
+                    String desc = segments[0].substring(0, segments[0].length() - 2);
+                    String[] dateTime = segments[1].split(" to: ", 2);
                     String start = dateTime[0];
-                    String end = dateTime[1].substring(0, dateTime[1].length()-1);
+                    String end = dateTime[1].substring(0, dateTime[1].length() - 1);
                     LocalDate sld = LocalDate.parse(start, DateTimeFormatter.ofPattern("dd MMM yyyy"));
                     LocalDate eld = LocalDate.parse(end, DateTimeFormatter.ofPattern("dd MMM yyyy"));
                     task = new Event(sld, eld, desc);

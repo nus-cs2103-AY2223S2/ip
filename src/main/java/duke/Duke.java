@@ -1,11 +1,10 @@
-import exception.DukeException;
-import parser.Parser;
-import storage.Storage;
-import task.Task;
-import task.TaskList;
-import ui.TextUi;
+package duke;
 
-import java.time.LocalDate;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.task.TaskList;
+import duke.ui.TextUi;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -17,6 +16,7 @@ public class Duke {
         this.ui = new TextUi();
         this.taskList = new TaskList();
     }
+    
 
     public void run() {
         String logo = " ____        _        \n"
@@ -32,18 +32,18 @@ public class Duke {
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
-                parser.listCommand(taskList);
+                Parser.listCommand(taskList);
             } else {
                 try {
-                    parser.checkCommand(taskList, command);
+                    Parser.checkCommand(taskList, command);
                 } catch (DukeException e) {
                     System.out.println(e);
                 }
             }
-            parser.nextCommand();
+            Parser.nextCommand();
             command = sc.nextLine();
         }
-        parser.byeCommand();
+        Parser.byeCommand();
     }
 
     public static void main(String[] args) {

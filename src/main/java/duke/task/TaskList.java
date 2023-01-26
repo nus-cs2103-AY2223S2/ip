@@ -1,10 +1,9 @@
-package task;
-import exception.DukeException;
-import storage.Storage;
+package duke.task;
 
-import java.io.IOException;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +25,6 @@ public class TaskList {
 
     /**
      * Returns true if all tasks in the tasklist is completed; returns false otherwise.
-     *
      */
     public boolean isAllCompleted() {
         for (int i = 0; i < tasks.size(); i++) {
@@ -41,14 +39,13 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the tasklist.
-     *
      */
     public int getNumTasks() {
         return tasks.size();
     }
 
     /**
-     *  Returns the task in the ith position of the tasklist.
+     * Returns the task in the ith position of the tasklist.
      *
      * @param i The index of the task in the tasklist
      * @return The task in the ith position
@@ -59,7 +56,6 @@ public class TaskList {
 
     /**
      * Returns true if a task exists in the tasklist; returns false otherwise.
-     *
      */
     public boolean doesTaskExist(int taskNum) {
         return taskNum > 0 && taskNum <= getNumTasks();
@@ -97,8 +93,8 @@ public class TaskList {
      * Creates a new event and adds it to the tasklist.
      *
      * @param start The start date/time of the event
-     * @param end The end date/time of the event
-     * @param desc The title of the event
+     * @param end   The end date/time of the event
+     * @param desc  The title of the event
      */
 
     public void addEvent(LocalDate start, LocalDate end, String desc) {
@@ -115,8 +111,8 @@ public class TaskList {
      * @param taskNum The task number to be deleted
      */
     public void deleteTask(int taskNum) throws DukeException {
-        System.out.println("    " + tasks.get(taskNum-1));
-        tasks.remove(taskNum-1);
+        System.out.println("    " + tasks.get(taskNum - 1));
+        tasks.remove(taskNum - 1);
         storage.save(this);
         printNumTasks();
     }
@@ -168,10 +164,10 @@ public class TaskList {
     public String toString() {
         String str = "";
         for (int i = 0; i < getNumTasks(); i++) {
-            if (i == getNumTasks()-1) {
-                str += (i+1) + ". " + this.getTask(i);
+            if (i == getNumTasks() - 1) {
+                str += (i + 1) + ". " + this.getTask(i);
             } else {
-                str += (i+1) + ". " + this.getTask(i) + '\n';
+                str += (i + 1) + ". " + this.getTask(i) + '\n';
             }
         }
         return str;

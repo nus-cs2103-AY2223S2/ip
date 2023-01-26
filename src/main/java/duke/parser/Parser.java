@@ -1,8 +1,8 @@
-package parser;
+package duke.parser;
 
-import exception.DukeException;
-import task.Task;
-import task.TaskList;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
 
 import java.time.LocalDate;
 
@@ -10,13 +10,12 @@ public class Parser {
 
     /**
      * Returns true if a String is numerical; return false otherwise.
-     *
      */
     public static boolean isNumber(String str) {
         try {
             Double.parseDouble(str);
             return true;
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return false;
         }
     }
@@ -30,7 +29,7 @@ public class Parser {
         int count = 0;
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == '/') {
-                count ++;
+                count++;
             }
         }
         return count;
@@ -40,7 +39,7 @@ public class Parser {
      * Executes the mark command by marking the task as done.
      *
      * @param taskList The tasklist that the task is in
-     * @param t The task to be marked as done
+     * @param t        The task to be marked as done
      * @throws DukeException
      */
     public static void markCommand(TaskList taskList, Task t) throws DukeException {
@@ -51,7 +50,7 @@ public class Parser {
      * Executes the unmark command by unmarking the task.
      *
      * @param taskList The tasklist that the task is in
-     * @param t The task to be marked as undone
+     * @param t        The task to be marked as undone
      * @throws DukeException
      */
     public static void unmarkCommand(TaskList taskList, Task t) throws DukeException {
@@ -76,7 +75,7 @@ public class Parser {
      * Executes the todo command.
      *
      * @param tasklist The tasklist to add the todo
-     * @param desc The title of the todo
+     * @param desc     The title of the todo
      */
     public static void todoCommand(TaskList tasklist, String desc) throws DukeException {
         System.out.println("Got it, I've added this task:");
@@ -87,8 +86,8 @@ public class Parser {
      * Executes the deadline command.
      *
      * @param taskList The tasklist to add the deadline
-     * @param desc The title of the deadline
-     * @param date The time/date of the deadline
+     * @param desc     The title of the deadline
+     * @param date     The time/date of the deadline
      */
 
     public static void deadlineCommand(TaskList taskList, String desc, String date) {
@@ -102,9 +101,9 @@ public class Parser {
      * Executes the event command.
      *
      * @param taskList The tasklist to add the event
-     * @param start The start time/date of the event
-     * @param end The end time/date of the event
-     * @param desc The title of the event
+     * @param start    The start time/date of the event
+     * @param end      The end time/date of the event
+     * @param desc     The title of the event
      */
     public static void eventCommand(TaskList taskList, String start, String end, String desc) throws DukeException {
         System.out.println("Got it, I've added this task:");
@@ -117,7 +116,7 @@ public class Parser {
      * Executes the delete command.
      *
      * @param taskList The tasklist to delete the task from
-     * @param taskNum The task number of the task to be deleted
+     * @param taskNum  The task number of the task to be deleted
      */
     public static void deleteCommand(TaskList taskList, int taskNum) throws DukeException {
         System.out.println("Noted. I've removed this task:");
@@ -140,10 +139,9 @@ public class Parser {
 
     /**
      * Checks if the command is in the right format in order to execute the mark command.
-     *
      */
     public static void checkMark(TaskList taskList, String command) throws DukeException {
-        String arr[] = command.split("\\s+");
+        String[] arr = command.split("\\s+");
         if (arr.length == 2 && isNumber(arr[1]) && (arr[0].equals("mark") || arr[0].equals("unmark"))) {
             // check if task exists
             int taskNum = Integer.parseInt(arr[1]);
@@ -151,7 +149,7 @@ public class Parser {
                 // mark or unmark task
                 if (arr[0].equals("mark")) {
                     markCommand(taskList, taskList.getTask(taskNum - 1));
-                } else if (arr[0].equals("unmark")){
+                } else if (arr[0].equals("unmark")) {
                     unmarkCommand(taskList, taskList.getTask(taskNum - 1));
                 }
             } else {
@@ -164,12 +162,13 @@ public class Parser {
 
     /**
      * Checks if the command is in the right format to execute a delete command.
+     *
      * @param taskList
      * @param command
      * @throws DukeException
      */
     public static void checkDelete(TaskList taskList, String command) throws DukeException {
-        String arr[] = command.split("\\s+");
+        String[] arr = command.split("\\s+");
         if (arr.length == 2 && arr[0].equals("delete")) {
             if (isNumber(arr[1])) {
                 if (taskList.doesTaskExist(Integer.parseInt(arr[1]))) {
@@ -189,7 +188,7 @@ public class Parser {
      * Checks the command in order to execute the corresponding command correctly.
      */
     public static void checkCommand(TaskList taskList, String command) throws DukeException {
-        String arr[] = command.split("\\s+");
+        String[] arr = command.split("\\s+");
         if (arr.length == 1) {
             if (arr[0].equals("todo") || arr[0].equals("event") || arr[0].equals("deadline")) {
                 String e = String.format("Oops! The description of a %s cannot be empty.", arr[0]);
@@ -211,7 +210,7 @@ public class Parser {
                 if (!command.contains("/by")) {
                     throw new DukeException("Please specify the deadline.");
                 } else {
-                    String segments[] = command.split("/by ", 2);
+                    String[] segments = command.split("/by ", 2);
                     String desc = segments[0].split("deadline ", 2)[1];
                     String date = segments[1];
                     deadlineCommand(taskList, desc, date);
@@ -220,7 +219,7 @@ public class Parser {
                 if (!command.contains("/from") && !command.contains("/to")) {
                     throw new DukeException("Please specify both the start and end times/dates.");
                 } else {
-                    String segments[] = command.split("/from ", 2);
+                    String[] segments = command.split("/from ", 2);
                     String desc = segments[0];
                     String start = segments[1].split(" /to")[0];
                     String end = segments[1].split("/to ")[1];

@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,12 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     protected LocalDate by;
-    private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Constructor to initialize a deadline object
      *
-     * @param by The date/time of the deadline
+     * @param by   The date/time of the deadline
      * @param desc The title of the deadline
      */
     public Deadline(LocalDate by, String desc) {
