@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Engine {
     private final Scanner scanner;
     private final TaskList taskList;
-    private static final String DIRECTORY = "data";
+    private static final String DIRECTORY = "./data";
     private static final String FILE_NAME = "taskList.dat";
     private static final String FILE_PATH = DIRECTORY + "/" + FILE_NAME;
 
