@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.FormatStyle;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.nio.file.Files;
@@ -5,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.List;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -34,7 +36,7 @@ public class Jane {
         }
         @Override
         public String toString() {
-            return String.format("%d. [%s] %s", this.num, this.getStatusIcon(), this.description);
+            return String.format("%d. [%s](%s)", this.num, this.getStatusIcon(), this.description);
         }
     }
 
@@ -52,12 +54,12 @@ public class Jane {
         }
         @Override
         public String toString() {
-            return String.format("%d. [T][%s] %s", this.num, this.getStatusIcon(), this.description);
+            return String.format("%d. [T][%s]%s", this.num, this.getStatusIcon(), this.description);
         }
     }
     public static class Deadline extends Task{
-        protected String deadline;
-        public Deadline(int num, String description, String deadline) {
+        protected LocalDateTime deadline;
+        public Deadline(int num, String description, LocalDateTime deadline) {
             super(num, description);
             this.deadline = deadline;
         }
@@ -67,18 +69,19 @@ public class Jane {
             if (this.isDone== true) {
                 i = 1;
             }
-            return String.format("D|%d| %s | %s", i, this.description, this.deadline);
+            return String.format("D|%d| %s |%s", i, this.description, this.deadline);
         }
         @Override
         public String toString() {
-            return String.format("%d. [D][%s] %s(%s)", this.num, this.getStatusIcon(), this.description, this.deadline);
+            String parsed = deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            return String.format("%d. [D][%s] %s(%s)", this.num, this.getStatusIcon(), this.description, parsed);
         }
 
     }
     public static class Event extends Task{
-        protected String from;
-        protected String to;
-        public Event(int num, String description, String from, String to) {
+        protected LocalDateTime from;
+        protected LocalDateTime to;
+        public Event(int num, String description, LocalDateTime from, LocalDateTime to) {
             super(num, description);
             this.from = from;
             this.to = to;
@@ -89,11 +92,13 @@ public class Jane {
             if (this.isDone== true) {
                 i = 1;
             }
-            return String.format("E|%d| %s | %s|%s", i, this.description, this.from, this.to );
+            return String.format("E|%d| %s |%s|%s", i, this.description, this.from, this.to );
         }
         @Override
         public String toString() {
-            return String.format("%d. [E][%s] %s(%s%s)", this.num, this.getStatusIcon(), this.description, this.from, this.to);
+            String first = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(from);
+            String end = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(to);
+            return String.format("%d. [E][%s] %s(from %s to %s)", this.num, this.getStatusIcon(), this.description, first, end);
         }
 
     }
@@ -126,11 +131,11 @@ public class Jane {
                         T.changeState(b);
                         tasks.add(T);
                     } else if (line[0].equals("D")) {
-                        Deadline D = new Deadline(tasks.size() + 1, line[2], line[3]);
+                        Deadline D = new Deadline(tasks.size() + 1, line[2], LocalDateTime.parse(line[3]));
                         D.changeState(b);
                         tasks.add(D);
                     } else if (line[0].equals("E")) {
-                        Event E = new Event(tasks.size()+1, line[2], line[3], line[4]);
+                        Event E = new Event(tasks.size()+1, line[2], LocalDateTime.parse(line[3]), LocalDateTime.parse(line[4]));
                         E.changeState(b);
                         tasks.add(E);
                     }
@@ -200,7 +205,7 @@ public class Jane {
                     continue;
                 }
                 count+=1;
-                Deadline d = new Deadline(count, s[0], s[1]);
+                Deadline d = new Deadline(count, s[0], LocalDateTime.parse(s[1].substring(3)));
                 tasks.add(d);
                 System.out.println(d.toString());
             }
@@ -211,8 +216,11 @@ public class Jane {
                     System.out.println("Please specify when the event is :(((");
                     continue;
                 }
+                String[] start = s[1].substring(5).split(" ");
+                LocalDateTime startE = LocalDateTime.parse(String.format("%sT%s", start[0], start[1]));
+                LocalDateTime end = LocalDateTime.parse(String.format("%sT%s", start[0], s[2]));
                 count+=1;
-                Event e = new Event(count, s[0], s[1], s[2]);
+                Event e = new Event(count, s[0], startE, end);
                 tasks.add(e);
                 System.out.println(e.toString());
             }
