@@ -28,6 +28,9 @@ public class Duke {
         new Duke("src/data/duke.txt").run();
     }
 
+    /**
+     * Executes the Duke chatbot. 
+     */
     public void run() {
 
         ui.introMessage();

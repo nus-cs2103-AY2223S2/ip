@@ -6,11 +6,19 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Returns the string representation of a To-do instance with a [T] indicator.
+     * @return the desired string representation of a To-do instance.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Returns the string representation of a To-do instance with a [T] indicator.
+     * @return the desired string representation of a To-do instance.
+     */
     public String parse() {
         return "[T]" + super.parse();
     }
