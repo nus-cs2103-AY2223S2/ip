@@ -1,13 +1,13 @@
-package duke.Tasks;
+package seedu.duke.Tasks;
 
-import duke.DukeException;
+import seedu.duke.DukeException;
 
 public abstract class Task {
     protected final String description;
     protected final boolean isDone;
     protected final String taskType;
 
-    /*
+    /**
         default constructor for Task
         this should not be used by the client
      */

@@ -1,6 +1,6 @@
-package duke;
+package seedu.duke;
 
-import duke.Tasks.*;
+import seedu.duke.Tasks.*;
 
 public class Ui {
 

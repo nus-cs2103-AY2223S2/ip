@@ -1,6 +1,6 @@
-package duke.Tasks;
+package seedu.duke.Tasks;
 
-import duke.DukeException;
+import seedu.duke.DukeException;
 
 public class Todo extends Task {
 

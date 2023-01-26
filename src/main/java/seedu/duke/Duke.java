@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 import java.util.Scanner;
 
@@ -20,7 +20,7 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
-            this.tasks = new TaskList(storage.readFile());
+            this.tasks = storage.readFile();
         } catch (DukeException err) {
             ui.showLoadingError();
             System.out.println(err.getErrorMessage());

@@ -1,6 +1,6 @@
-package duke.Tasks;
+package seedu.duke.Tasks;
 
-import duke.DukeException;
+import seedu.duke.DukeException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,7 +34,7 @@ public class Event extends Task {
     }
 
     public String formatTask() {
-        return String.format("D|%b|%s|%s|%s", this.isDone, this.description, this.from.toString(), this.to.toString());
+        return String.format("E|%b|%s|%s|%s", this.isDone, this.description, this.from.toString(), this.to.toString());
     }
 
     @Override

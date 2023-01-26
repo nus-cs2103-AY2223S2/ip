@@ -1,6 +1,6 @@
-package duke;
+package seedu.duke;
 
-import duke.Tasks.*;
+import seedu.duke.Tasks.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -22,8 +21,8 @@ public class Storage {
         this.path = Paths.get(currPath, "src", "data", fileName);
     }
 
-    public ArrayList<Task> readFile() throws DukeException {
-        ArrayList<Task> data = new ArrayList<>();
+    public TaskList readFile() throws DukeException {
+        TaskList data = new TaskList();
         try {
             File file = new File(String.valueOf(this.path));
             Scanner sc = new Scanner(file);
@@ -35,19 +34,19 @@ public class Storage {
                 boolean isDone = Boolean.parseBoolean(taskArr[1]);
                 switch (taskType) {
                 case "T":
-                    data.add(new Todo(taskArr[2], isDone, taskType));
+                    data.addTask(new Todo(taskArr[2], isDone, taskType));
                     break;
                 case "D":
                     String deadline = taskArr[3];
                     LocalDateTime formattedDeadline = formatTimeStamp(deadline);
-                    data.add(new Deadline(taskArr[2], isDone, taskType, formattedDeadline));
+                    data.addTask(new Deadline(taskArr[2], isDone, taskType, formattedDeadline));
                     break;
                 case "E":
                     String from = taskArr[3];
                     LocalDateTime formattedFrom = formatTimeStamp(from);
                     String to = taskArr[4];
                     LocalDateTime formattedTo = formatTimeStamp(to);
-                    data.add(new Event(taskArr[2], isDone, taskType, formattedFrom, formattedTo));
+                    data.addTask(new Event(taskArr[2], isDone, taskType, formattedFrom, formattedTo));
                     break;
                 }
             }
@@ -64,10 +63,10 @@ public class Storage {
         return LocalDateTime.of(date, time);
     }
 
-    public void writeFile(ArrayList<Task> taskList) {
+    public void writeFile(TaskList taskList) {
         StringBuilder taskString = new StringBuilder();
-        for (Task task : taskList) {
-            String formattedTask = task.formatTask();
+        for (int i = 0; i < taskList.getSize(); i++) {
+            String formattedTask = taskList.formatTask(i);
             taskString.append(formattedTask);
             taskString.append("\n");
         }

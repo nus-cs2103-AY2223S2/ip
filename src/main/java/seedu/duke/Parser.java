@@ -1,10 +1,11 @@
-package duke;
+package seedu.duke;
+
+import seedu.duke.Tasks.*;
 
 import java.time.*;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
-import duke.Tasks.*;
 
 public class Parser {
 
@@ -114,7 +115,8 @@ public class Parser {
                 description = String.join(" ", Arrays.copyOfRange(splitInput, 1, splitInput.length));
                 checkDescription(description);
                 newTask = new Todo(description);
-                updatedList = taskList.addTask(storage, newTask);
+                updatedList = taskList.addTask(newTask);
+                storage.writeFile(updatedList);
                 ui.sayAddedTask(newTask, updatedList);
                 break;
             case deadline:
@@ -125,7 +127,8 @@ public class Parser {
                         byIndex + 1, splitInput.length));
                 LocalDateTime formattedDeadline = convertTimestamp(deadline);
                 newTask = new Deadline(description, formattedDeadline);
-                updatedList = taskList.addTask(storage, newTask);
+                updatedList = taskList.addTask(newTask);
+                storage.writeFile(updatedList);
                 ui.sayAddedTask(newTask, updatedList);
                 break;
             case event:
@@ -140,7 +143,8 @@ public class Parser {
                         Arrays.copyOfRange(splitInput, toIndex + 1, splitInput.length));
                 LocalDateTime formattedTo = convertTimestamp(to);
                 newTask = new Event(description, formattedFrom, formattedTo);
-                updatedList = taskList.addTask(storage, newTask);
+                updatedList = taskList.addTask(newTask);
+                storage.writeFile(updatedList);
                 ui.sayAddedTask(newTask, updatedList);
                 break;
             case mark:
@@ -148,14 +152,15 @@ public class Parser {
                 taskNumber = getTaskNumber(splitInput);
                 // index in 0-indexing
                 index = checkTaskNumber(taskList, taskNumber);
-                updatedList = taskList.markTask(storage, index);
+                updatedList = taskList.markTask(index);
                 newTask = updatedList.get(index);
+                storage.writeFile(updatedList);
                 ui.sayMarkedTask(newTask);
                 break;
             case unmark:
                 taskNumber = getTaskNumber(splitInput);
                 index = checkTaskNumber(taskList, taskNumber);
-                updatedList = taskList.unmarkTask(storage, index);
+                updatedList = taskList.unmarkTask(index);
                 newTask = updatedList.get(index);
                 ui.sayUnmarkedTask(newTask);
                 break;
@@ -165,7 +170,8 @@ public class Parser {
                 // index in 0-indexing
                 index = checkTaskNumber(taskList, taskNumber);
                 Task deletedTask = taskList.get(index);
-                updatedList = taskList.deleteTask(storage, index);
+                updatedList = taskList.deleteTask(index);
+                storage.writeFile(updatedList);
                 ui.sayDeletedTask(deletedTask, updatedList);
                 break;
             }
