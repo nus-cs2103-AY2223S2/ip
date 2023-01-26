@@ -10,6 +10,7 @@ public class Ui {
 
     }
 
+    // prints out welcome greeting to user when Duke is run
     public void showWelcome() {
         System.out.println("    Hi! I'm Samantha\n    How can I help?");
     }
