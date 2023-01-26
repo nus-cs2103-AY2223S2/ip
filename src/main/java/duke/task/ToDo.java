@@ -1,14 +1,16 @@
+package duke.task;
+
 /**
- * Subclass of Task class used by Duke to keep track of user's tasks inputted.
+ * Subclass of duke.task.Task class used by duke.Duke to keep track of user's tasks inputted.
  *
  * @author Bo Kuan (LG17)
  * @version CS2103T AY22/23 Semester 2
  */
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
-     * Constructor for a ToDo.
+     * Constructor for a duke.task.ToDo.
      *
      * @param description String describing the task.
      */

@@ -1,9 +1,12 @@
+package duke.task;
+
+import duke.exception.DukeBadInstructionFormatException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Task class used by Duke to keep track of user's tasks inputted.
+ * duke.task.Task class used by duke.Duke to keep track of user's tasks inputted.
  *
  * @author Bo Kuan (LG17)
  * @version CS2103T AY22/23 Semester 2
@@ -82,7 +85,8 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-           return "[" + getStatusIcon() + "] " + this.description;
+
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 
     public abstract String getFileFormatString();

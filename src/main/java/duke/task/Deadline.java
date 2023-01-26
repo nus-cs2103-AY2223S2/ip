@@ -1,8 +1,11 @@
+package duke.task;
+
+import duke.exception.DukeBadInstructionFormatException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 /**
- * Subclass of Task class used by Duke to keep track of user's tasks inputted.
+ * Subclass of duke.task.Task class used by duke.Duke to keep track of user's tasks inputted.
  *
  * @author Bo Kuan (LG17)
  * @version CS2103T AY22/23 Semester 2
@@ -11,18 +14,18 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
 
     /**
-     * A string representing the deadline of the Deadline instance.
+     * A string representing the deadline of the duke.task.Deadline instance.
      */
     private LocalDateTime by;
 
     private String byString;
 
     /**
-     * Constructor for a Deadline instance.
+     * Constructor for a duke.task.Deadline instance.
      *
-     * @param description String describing this Deadline.
+     * @param description String describing this duke.task.Deadline.
      *
-     * @param by deadline of this Deadline.
+     * @param by deadline of this duke.task.Deadline.
      */
     public Deadline(String description, String by) throws DukeBadInstructionFormatException {
         super(description);
@@ -37,9 +40,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string representation of a Deadline.
+     * Returns the string representation of a duke.task.Deadline.
      *
-     * @return The string representation of a Deadline.
+     * @return The string representation of a duke.task.Deadline.
      */
     @Override
     public String toString() {

@@ -1,11 +1,11 @@
-import java.time.LocalDate;
+package duke.task;
+
+import duke.exception.DukeBadInstructionFormatException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 
 /**
- * Subclass of Task class used by Duke to keep track of user's tasks inputted.
+ * Subclass of duke.task.Task class used by duke.Duke to keep track of user's tasks inputted.
  *
  * @author Bo Kuan (LG17)
  * @version CS2103T AY22/23 Semester 2
@@ -14,12 +14,12 @@ import java.time.temporal.ChronoUnit;
 public class Event extends Task {
 
     /**
-     * A string representing the start of this Event instance.
+     * A string representing the start of this duke.task.Event instance.
      */
     private LocalDateTime from;
 
     /**
-     * A string representation of the end of this Event instance.
+     * A string representation of the end of this duke.task.Event instance.
      */
     private LocalDateTime to;
 
@@ -28,13 +28,13 @@ public class Event extends Task {
     private String toString;
 
     /**
-     * Constructor for an Event instance.
+     * Constructor for an duke.task.Event instance.
      *
-     * @param description String describing this Deadline.
+     * @param description String describing this duke.task.Deadline.
      *
-     * @param from String representing the start of this Event.
+     * @param from String representing the start of this duke.task.Event.
      *
-     * @param to String representing the end of this Event.
+     * @param to String representing the end of this duke.task.Event.
      */
     public Event(String description, String from, String to)
             throws DukeBadInstructionFormatException {
@@ -52,9 +52,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of an Event.
+     * Returns the string representation of an duke.task.Event.
      *
-     * @return The string representation of an Event.
+     * @return The string representation of an duke.task.Event.
      */
     @Override
     public String toString() {

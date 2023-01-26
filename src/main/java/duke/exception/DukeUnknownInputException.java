@@ -1,5 +1,7 @@
+package duke.exception;
+
 /**
- * Custom Exceptions specific to the 'Duke' class where Duke does not
+ * Custom Exceptions specific to the 'duke.Duke' class where duke.Duke does not
  * understand the given input.
  *
  * @author Bo Kuan (LG17)
@@ -9,7 +11,7 @@
 public class DukeUnknownInputException extends DukeException {
 
     /**
-     * Constructor for a DukeUnknownInputException.
+     * Constructor for a duke.exception.DukeUnknownInputException.
      * @param message The error message.
      */
     public DukeUnknownInputException(String message) {
@@ -17,9 +19,9 @@ public class DukeUnknownInputException extends DukeException {
     }
 
     /**
-     * Returns the string representation of a DukeUnknownInputException.
+     * Returns the string representation of a duke.exception.DukeUnknownInputException.
      *
-     * @return The string representation of a DukeUnknownInputException.
+     * @return The string representation of a duke.exception.DukeUnknownInputException.
      */
     @Override
     public String toString() {

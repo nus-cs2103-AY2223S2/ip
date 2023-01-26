@@ -1,3 +1,8 @@
+package duke.storage;
+
+import duke.task.Task;
+import duke.exception.DukeBadInstructionFormatException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class FileManager {
+public class Storage {
 
     /**
      * The file path of duke.txt.
@@ -14,18 +19,8 @@ public class FileManager {
 
     private ArrayList<Task> tasksFromFile;
 
-    public FileManager() {
-        makeDukeDirectory();
-
-        try {
-            this.tasksFromFile = getTaskArrayFromFile();
-        } catch (DukeBadInstructionFormatException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void init(DukeMemory dukeMemory) {
-        dukeMemory.syncTasks(this.tasksFromFile);
+    public Storage(String filePath) {
+        makeDukeDirectoryAndFile(filePath);
     }
 
     public void fileAppend(Task t) {
@@ -132,7 +127,7 @@ public class FileManager {
 
     }
 
-    public ArrayList<Task> getTaskArrayFromFile()
+    public ArrayList<Task> load()
             throws DukeBadInstructionFormatException {
         try {
             File taskFile = new File(this.taskFilePath);
@@ -154,14 +149,15 @@ public class FileManager {
 
     }
 
-    public void makeDukeDirectory() {
-        String dukeDirectory = "data";
+    public void makeDukeDirectoryAndFile(String filePath) {
+        String[] dirAndFileName = filePath.split("/");
+        String dukeDirectory = dirAndFileName[0];
         File directory = new File(dukeDirectory);
 
         if (!directory.exists()) {
             directory.mkdir();
         }
 
-        this.taskFilePath = dukeDirectory + "/duke.txt";
+        this.taskFilePath = dukeDirectory + '/' + dirAndFileName[1];
     }
 }

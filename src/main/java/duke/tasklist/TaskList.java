@@ -1,35 +1,37 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+package duke.tasklist;
+
+import duke.task.Task;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 //TODO: consider changing to TaskManager class; handles everything related to tasks
 /**
- * This class encapsulates everything the Task arraylist needs to do. Also
- * handles saving tasks to Duke.txt.
+ * This class encapsulates everything the duke.task.Task arraylist needs to do. Also
+ * handles saving tasks to duke.Duke.txt.
  */
-public class DukeMemory {
+public class TaskList {
 
     /**
-     * The arraylist storing all of Duke's tasks.
+     * The arraylist storing all of duke.Duke's tasks.
      */
     private ArrayList<Task> taskList;
 
     /**
-     * Constructor for DukeMemory. Takes care of file access of Duke.
+     * Constructor for duke.tasklist.TaskList. Takes care of file access of duke.Duke.
      */
-    public DukeMemory() {
+    public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> loadedList) {
+        this.taskList = loadedList;
     }
 
     /**
      * Getter for a task given its index.
      *
-     * @param index Index of Task instance of interest.
+     * @param index Index of duke.task.Task instance of interest.
      *
-     * @return Task instance of given index.
+     * @return duke.task.Task instance of given index.
      */
     public Task getTask(int index) {
         return taskList.get(index);
@@ -38,7 +40,7 @@ public class DukeMemory {
     /**
      * Returns string representation of a task given its index.
      *
-     * @param index Index of Task instance of interest.
+     * @param index Index of duke.task.Task instance of interest.
      *
      * @return String representation of given task.
      */
@@ -50,7 +52,7 @@ public class DukeMemory {
     /**
      * Appends a task to arraylist.
      *
-     * @param t Task to be appended.
+     * @param t duke.task.Task to be appended.
      */
     public void append(Task t) {
         taskList.add(t);
@@ -110,9 +112,4 @@ public class DukeMemory {
         return removed;
     }
 
-    public void syncTasks(ArrayList<Task> tasks) {
-        if (tasks != null) {
-            this.taskList = tasks;
-        }
-    }
 }
