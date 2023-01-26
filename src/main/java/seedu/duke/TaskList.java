@@ -104,4 +104,21 @@ public class TaskList {
             System.err.println(e.getMessage());
         }
     }
+
+    public void searchTask(String str) {
+        ArrayList<Task> results = new ArrayList<>();
+        ArrayList<Integer> indices = new ArrayList<>();
+        int index = 1;
+        for (Task task : tasks) {
+            if (task.description.contains(str)) {
+                results.add(task);
+                indices.add(index);
+            }
+            index++;
+        }
+        Ui.indentedPrintln("Here are the matching tasks in your list:");
+        for (int i = 0; i < results.size(); i++) {
+            Ui.indentedPrintln(indices.get(i) + ". " +results.get(i).toString());
+        }
+    }
 }
