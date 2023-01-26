@@ -42,6 +42,7 @@ public abstract class Task {
         return " ";
     }
 
+
     public static void saveTaskData(Task t, int isAppend) {
         String PATH = "src/main/data";
         File directory = new File("src/main/data/");
@@ -59,7 +60,7 @@ public abstract class Task {
     }
 
     public String saveTaskString() {
-        return String.format("%s|%b|%s|%b", this.taskType, this.deleted, this.taskName, this.completed);
+        return String.format("%s|%s|%b", this.taskType, this.taskName, this.completed);
     }
 
     @Override

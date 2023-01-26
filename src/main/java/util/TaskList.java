@@ -12,9 +12,8 @@ import java.util.ArrayList;
 
 public class TaskList {
     private static int TASK_TYPE = 0;
-    private static int IS_DELETED = 1;
-    private static int TASK_NAME = 2;
-    private static int IS_DONE = 3;
+    private static int TASK_NAME = 1;
+    private static int IS_DONE = 2;
     protected ArrayList<Task> taskList = new ArrayList<>();
     protected BufferedReader br;
 
@@ -52,32 +51,24 @@ public class TaskList {
                     break;
                 }
                 String[] taskArr = taskLine.split("\\|");
+//                for (String s: taskArr) {
+//                    System.out.println(s);
+//                }
                 String taskType = taskArr[TASK_TYPE];
                 if (taskType.equals("T")) {
-                    if (Boolean.parseBoolean(taskArr[IS_DELETED])) {
-                        continue;
-                    }
                     boolean completion = Boolean.parseBoolean(taskArr[IS_DONE]);
                     ToDo t = new ToDo(taskArr[TASK_NAME], completion);
                     this.taskList.add(t);
                 } else if (taskType.equals("D")) {
-                    if (Boolean.parseBoolean(taskArr[IS_DELETED])) {
-                        continue;
-                    }
-                    LocalDateTime deadline = LocalDateTime.parse(taskArr[4]);
+                    LocalDateTime deadline = LocalDateTime.parse(taskArr[3]);
                     boolean completion = Boolean.parseBoolean(taskArr[IS_DONE]);
                     DeadlineTask d = new DeadlineTask(taskArr[TASK_NAME], deadline, completion);
                     this.taskList.add(d);
-                    // D|false|return book|false|2000-12-18T23:59
                 } else if (taskType.equals("E")) {
-                    if (!Boolean.parseBoolean(taskArr[IS_DELETED])) {
-                        continue;
-                    }
-                    LocalDateTime start = DateTimeParser.dateTimeParser(taskArr[4] + " " + taskArr[5]);
-                    LocalDateTime end = DateTimeParser.dateTimeParser(taskArr[6] + " " + taskArr[7]);
+                    LocalDateTime start = LocalDateTime.parse(taskArr[3]);
+                    LocalDateTime end = LocalDateTime.parse(taskArr[4]);
                     boolean completion = Boolean.parseBoolean(taskArr[IS_DONE]);
                     Event e = new Event(taskArr[TASK_NAME], start, end, completion);
-                    e.setCompletion(Boolean.parseBoolean(taskArr[IS_DONE]));
                     this.taskList.add(e);
                 }
             }
@@ -113,7 +104,6 @@ public class TaskList {
             boolean completion = input[0].equals("mark");
             Task task = taskList.get(taskNumber);
             task.setCompletion(completion);
-            Task.saveTaskData(task, completion ? 1 : 0);
         }
     }
 

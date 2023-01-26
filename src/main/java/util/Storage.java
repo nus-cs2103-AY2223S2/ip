@@ -31,7 +31,7 @@ public class Storage {
 
     public void saveTasks(TaskList tasks) throws IOException {
         try {
-            FileWriter fw = new FileWriter(this.filePath, true);
+            FileWriter fw = new FileWriter(this.filePath);
             String tl = tasks.saveTaskList();
             fw.write(tl);
             fw.close();
