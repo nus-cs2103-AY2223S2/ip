@@ -1,15 +1,17 @@
 package duke.command;
 
 import duke.storage.Storage;
+
 import duke.task.TaskList;
+
 import duke.ui.Ui;
 
 /**
- * Encapsulation of the command to exit the program.
+ * Encapsulates the related fields and behavior of the command to exit the program.
  */
 public class ByeCommand extends Command {
     /**
-     * Prints out goodbye message and close program.
+     * Prints out goodbye message.
      */
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) {
@@ -17,7 +19,9 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Returns whether the program should exit or not.
+     * Returns whether the command requires the program to exit.
+     *
+     * @return True indicating that the program should exit.
      */
     @Override
     public boolean isExit() {

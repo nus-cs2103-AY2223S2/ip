@@ -1,11 +1,14 @@
 package duke.exception;
 
 /**
- * Encapsulation of an invalid input exception.
+ * Encapsulates the related fields and behavior of an InvalidInputException.
+ * Represents the exception to throw when given input is invalid,
+ * for instance, command given does not exit.
  */
 public class InvalidInputException extends DukeException {
     /**
-     * Constructor for InvalidInputException
+     * Instantiates InvalidInputException.
+     *
      * @param message The error message.
      */
     public InvalidInputException(String message) {

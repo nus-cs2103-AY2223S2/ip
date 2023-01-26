@@ -5,8 +5,8 @@ import duke.Formatter;
 import java.time.LocalDate;
 
 /**
- * Encapsulation of an Event task,
- * a task that starts and ends at a specific date/time.
+ * Encapsulates the related fields and behavior of an Event task.
+ * Represents a task that starts and ends at a specific date/time.
  */
 public class Event extends Task {
     //Start time
@@ -16,7 +16,8 @@ public class Event extends Task {
     private LocalDate end;
 
     /**
-     * Constructor for Event.
+     * Instantiates Event with three arguments given.
+     *
      * @param name The name of the task.
      * @param start The start date/time of event.
      * @param end The end date/time of event.
@@ -28,7 +29,8 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor to instantiate an event.
+     * Instantiates Event with 4 arguments given.
+     *
      * @param name The name of the task.
      * @param start The start date/time of event.
      * @param end The end date/time of event.
@@ -41,7 +43,8 @@ public class Event extends Task {
     }
 
     /**
-     * Get the string with a [E] icon representing this task.
+     * Returns the string with a [E] icon representing this task.
+     *
      * @return A string representation of this Event task.
      */
     @Override
@@ -54,8 +57,9 @@ public class Event extends Task {
     }
 
     /**
-     * Format task to be stored in data file.
-     * @return Returns a  formatted string representation of this task to be stored.
+     * Returns a formatted string representation of this task for storage.
+     *
+     * @return A string representation of this task.
      */
     @Override
     public String formatStore() {

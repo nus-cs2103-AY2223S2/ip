@@ -1,24 +1,31 @@
 package duke.command;
 
 import duke.exception.DukeException;
+
 import duke.storage.Storage;
+
 import duke.task.TaskList;
+
 import duke.ui.Ui;
 
 /**
- * Encapsulation of the command to delete a task.
+ * Encapsulates the related fields and behavior of the command to delete a task.
  */
 public class DeleteCommand extends Command {
     private int index;
+
     /**
-     * Constructor for DeleteCommand.
+     * Instantiates DeleteCommand object.
+     *
      * @param index The index of the task to be deleted.
      */
     public DeleteCommand(int index) {
         this.index = index;
     }
+
     /**
-     * Deletes the task at the given index as done.
+     * Deletes the task at the given index.
+     *
      * @throws DukeException if given index is out of range.
      */
     @Override
@@ -27,7 +34,9 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns whether the program should exit or not.
+     * Returns whether the command requires the program to exit.
+     *
+     * @return False indicating that program should not exit.
      */
     @Override
     public boolean isExit() {

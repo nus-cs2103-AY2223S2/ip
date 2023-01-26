@@ -1,11 +1,13 @@
 package duke.exception;
 
 /**
- * For indexes that are out of bounds.
+ * Encapsulates the related fields and behavior of OutOfBoundsException.
+ * Represents the exception to throw when indexes given are out of bounds.
  */
 public class OutOfBoundsException extends DukeException {
     /**
-     * Constructor for OutOfBoundsException.
+     * Instantiates OutOfBoundsException.
+     *
      * @param message The error message.
      */
     public OutOfBoundsException(String message) {

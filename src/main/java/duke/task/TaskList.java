@@ -3,41 +3,43 @@ package duke.task;
 import duke.exception.OutOfBoundsException;
 
 import java.util.ArrayList;
+
 /**
- * Encapsulation of the list containing tasks.
+ * Encapsulates the related fields and behavior of the list containing tasks.
  */
 public class TaskList {
-    /**
-     * An ArrayList to store the tasks.
-     */
-    private ArrayList<Task> taskList;
+     //An ArrayList to store the tasks.
+     private ArrayList<Task> taskList;
 
     /**
-     * Constructor for TaskList.
+     * Instantiates TaskList with no arguments given.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
     /**
-     * Constructor for TaskList.
-     * @param taskList The list of our tasks.
+     * Instantiates TaskList with the given ArrayList.
+     *
+     * @param taskList The list of our tasks fetched from hard drive storage.
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * Returns the list of tasks.
-     * @return taskList, the list of tasks.
+     * Returns this list of tasks.
+     *
+     * @return The ArrayList containing the tasks.
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
     /**
-     * Add tasks into the list and display added task when done.
-     * @param task The description of the task to be added.
+     * Adds tasks into the list and prints out completion message when done.
+     *
+     * @param task The task to be added.
      */
     public void add(Task task) {
         this.taskList.add(task);
@@ -47,8 +49,11 @@ public class TaskList {
     }
 
     /**
-     * Delete item at the given index.
-     * @param index The index of item to be deleted
+     * Deletes task at the given index.
+     *
+     * @param index The index of task to be deleted.
+     * @throws OutOfBoundsException If index given is less than 0
+     *                              or more than the index of the last list element.
      */
     public void delete(int index) throws OutOfBoundsException {
         if (index < 0 || index >= this.taskList.size()) {
@@ -62,8 +67,11 @@ public class TaskList {
     }
 
     /**
-     * Mark the task at the given index as done.
+     * Marks the task at the given index as done.
+     *
      * @param index The index number of the task given.
+     * @throws OutOfBoundsException If index given is less than 0
+     *                              or more than the index of the last list element.
      */
     public void mark(int index) throws OutOfBoundsException {
         if (index < 0 || index >= this.taskList.size()) {
@@ -76,8 +84,11 @@ public class TaskList {
     }
 
     /**
-     * Mark the task at the given index as not done.
+     * Marks the task at the given index as not done.
+     *
      * @param index The index number of the task given.
+     * @throws OutOfBoundsException If index given is less than 0
+     *                              or more than the index of the last list element.
      */
     public void unmark(int index) throws OutOfBoundsException {
         if (index < 0 || index >= this.taskList.size()) {
@@ -90,7 +101,7 @@ public class TaskList {
     }
 
     /**
-     * Print the list.
+     * Prints all the tasks in the list.
      */
     public void print() {
         int size = this.taskList.size();

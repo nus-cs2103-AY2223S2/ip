@@ -3,8 +3,9 @@ package duke.task;
 import duke.Formatter;
 
 import java.time.LocalDate;
+
 /**
- * Encapsulation of a Deadline task,
+ * Encapsulates the related fields and behavior of a Deadline task,
  * a task that needs to be done before a specific date/time.
  */
 public class Deadline extends Task {
@@ -12,7 +13,8 @@ public class Deadline extends Task {
     private LocalDate end;
 
     /**
-     * Constructor for Deadline.
+     * Instantiates Deadline with two arguments given.
+     *
      * @param name The name of the task.
      * @param end The end date/time of deadline.
      */
@@ -22,7 +24,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor to instantiate a deadline.
+     * Instantiates deadline with three arguments given.
+     *
      * @param name The name of the task.
      * @param end The end date/time of deadline.
      * @param isDone Status of the task.
@@ -33,21 +36,25 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get the string with a [D] icon representing this task.
+     * Returns the string with a [D] icon representing this task.
+     *
      * @return A string representation of this Deadline task.
      */
     @Override
     public String toString() {
-        String toPrint = String.format("[D]%s (by: %s)", super.toString(), Formatter.formatDatePrint(this.end));
+        String toPrint = String.format("[D]%s (by: %s)",
+                super.toString(), Formatter.formatDatePrint(this.end));
         return toPrint;
     }
 
     /**
-     * Format task to be stored in data file.
-     * @return Returns a  formatted string representation of this task to be stored.
+     * Returns a formatted string representation of this task for storage.
+     *
+     * @return A string representation of this task.
      */
     @Override
     public String formatStore() {
-        return ("D | " + super.formatStore() + String.format(" | %s", Formatter.formatDateStore(this.end)));
+        return ("D | " + super.formatStore()
+                + String.format(" | %s", Formatter.formatDateStore(this.end)));
     }
 }

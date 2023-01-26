@@ -1,7 +1,9 @@
 package duke.storage;
 
-import duke.parser.Parser;
 import duke.exception.DukeException;
+
+import duke.parser.Parser;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -13,9 +15,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates the related fields and behavior of the Storage.
+ * Represents the class that reads and writes to the storage file in the hard disk.
+ */
 public class Storage {
     private String dirPath;
     private String fileName;
@@ -23,9 +30,10 @@ public class Storage {
     private File myFile;
 
     /**
-     * Constructor for Storage.
-     * @param dirPath The path to the directory the file is stored in.
-     * @param fileName The path to storage file.
+     * Instantiates Storage.
+     *
+     * @param dirPath The path to the directory that the file is stored in.
+     * @param fileName The name of the storage file.
      */
     public Storage(String dirPath, String fileName) {
         this.dirPath = dirPath;
@@ -34,8 +42,7 @@ public class Storage {
     }
 
     /**
-     * Creates file at the specified file path if it
-     * does not already exist.
+     * Creates file at the specified file path if it does not already exist.
      */
     public void createFile() {
         File dir = new File(this.dirPath);
@@ -56,8 +63,9 @@ public class Storage {
     }
 
     /**
-     * Reads data stored in hard disk.
-     * @return An ArrayList containing tasks stored in the storage.
+     * Reads data stored in the hard disk.
+     *
+     * @return An ArrayList containing existing tasks stored in the storage.
      * @throws DukeException if file to be read cannot be found.
      */
     public ArrayList<Task> read() throws DukeException {
@@ -95,6 +103,7 @@ public class Storage {
 
     /**
      * Updates the storage file in hard disk with the given list of tasks.
+     *
      * @param tasks The list of tasks.
      */
     public void write(ArrayList<Task> tasks) {

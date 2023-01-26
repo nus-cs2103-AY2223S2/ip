@@ -1,14 +1,16 @@
 package duke.ui;
 
 import java.util.Scanner;
+
 /**
- * Handles interaction with user.
+ * Encapsulates the related fields and behavior of the Ui
+ * that handles interaction with user.
  */
 public class Ui {
     private Scanner sc;
 
     /**
-     * Constructor for Ui.
+     * Instantiates Ui.
      */
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -38,7 +40,7 @@ public class Ui {
     /**
      * Reads input from the user.
      *
-     * @return Returns the input string read.
+     * @return The input string read.
      */
     public String readCommand() {
         return this.sc.nextLine();

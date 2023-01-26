@@ -1,11 +1,13 @@
 package duke.command;
 
 import duke.storage.Storage;
+
 import duke.task.TaskList;
+
 import duke.ui.Ui;
 
 /**
- * Encapsulation of the command to list out all tasks.
+ * Encapsulates the related fields and behavior of the command to list out all tasks.
  */
 public class ListCommand extends Command {
     /**
@@ -17,7 +19,9 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Returns whether the program should exit or not.
+     * Returns whether the command requires the program to exit.
+     *
+     * @return False indicating that program should not exit.
      */
     @Override
     public boolean isExit() {

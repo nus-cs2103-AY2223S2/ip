@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.Formatter;
+
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -8,33 +9,36 @@ import duke.command.DeleteCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
-import duke.exception.DukeException;
+
 import duke.exception.IncompleteDescException;
 import duke.exception.InvalidInputException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
 import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Encapsulation of a parser that parses the inputs given.
+ * Encapsulates the related fields and behavior of a parser that parses the inputs given.
  */
 public class Parser {
-    protected enum CommandEnum {
+    private enum CommandEnum {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
     }
 
     /**
      * Instantiates a new ToDo task and returns it.
+     *
      * @param inputArr An array containing the input by the user.
-     * @return Returns the new ToDo task.
-     * @throws DukeException If name of the task is not given.
+     * @return A new ToDo task.
+     * @throws IncompleteDescException If name of the task is not given.
      */
-    private static ToDo getTodo(String[] inputArr) throws DukeException {
+    private static ToDo getTodo(String[] inputArr) throws IncompleteDescException {
         if (inputArr.length <= 1 || inputArr[1].isBlank()) {
             throw new IncompleteDescException("The description of a todo cannot be empty!");
         }
@@ -43,8 +47,9 @@ public class Parser {
 
     /**
      * Parses the given string into a LocalDate object.
+     *
      * @param date The given string representation of the date to be parsed.
-     * @return Returns the parsed LocalDate.
+     * @return The parsed LocalDate.
      */
     public static LocalDate parseDate(String date) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -53,13 +58,14 @@ public class Parser {
 
 
     /**
-     * Instantiate a new Deadline object and returns it.
-     * @param inputArr The input given by the user.
-     * @return Returns the new Deadline object.
-     * @throws DukeException If name or due date/time is not provided,
-     *                       or due date/time is given in the wrong format.
+     * Instantiates a new Deadline object and returns it.
+     *
+     * @param inputArr An array containing the input by the user.
+     * @return A new Deadline object.
+     * @throws IncompleteDescException If name or due date/time or both is/are not provided.
+     * @throws InvalidInputException If due date/time is given in the wrong format.
      */
-    private static Deadline getDeadline(String[] inputArr) throws DukeException {
+    private static Deadline getDeadline(String[] inputArr) throws IncompleteDescException, InvalidInputException {
         if (inputArr.length <= 1) {
             throw new IncompleteDescException("The description of a deadline cannot be empty!");
         }
@@ -89,12 +95,14 @@ public class Parser {
 
     /**
      * Instantiate a new Event object and returns it.
-     * @param inputArr The input given by the user.
-     * @return Returns the new Event.
-     * @throws DukeException If name or start date/time or due date/time is not given
-     *                       or the date/time is given in the wrong format.
+     *
+     * @param inputArr An array containing the input by the user.
+     * @return A new Event.
+     * @throws IncompleteDescException If the name, start date/time or due date/time are not given.
+     * @throws InvalidInputException If any of the date/time are given
+     *                               in a format different from "yyyy/MM/dd".
      */
-    private static Event getEvent(String[] inputArr) throws DukeException {
+    private static Event getEvent(String[] inputArr) throws IncompleteDescException, InvalidInputException {
         if (inputArr.length <= 1) {
             throw new IncompleteDescException("The description of an event cannot be empty!");
         }
@@ -133,11 +141,13 @@ public class Parser {
 
     /**
      * Parses the given string into the correct command.
+     *
      * @param input The string input given by the user.
-     * @return Returns a Command representing the command given.
-     * @throws DukeException if command is incomplete or invalid.
+     * @return A Command representing the command given.
+     * @throws IncompleteDescException If command given is incomplete.
+     * @throws InvalidInputException If command is invalid.
      */
-    public static Command parse(String input) throws DukeException{
+    public static Command parse(String input) throws IncompleteDescException, InvalidInputException {
         String[] inputArr = input.split(" ", 2);
         CommandEnum commandType;
         try {

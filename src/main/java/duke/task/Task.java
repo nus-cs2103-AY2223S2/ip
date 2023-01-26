@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Encapsulation of a task.
+ * Encapsulates the related fields and behavior of a task.
  */
 public class Task {
     //name of the task.
@@ -11,7 +11,8 @@ public class Task {
     private boolean isDone = false;
 
     /**
-     * Constructor to instantiate a task.
+     * Instantiates Task with one argument given.
+     *
      * @param name The name of the task.
      */
     public Task(String name) {
@@ -19,7 +20,8 @@ public class Task {
     }
 
     /**
-     * Constructor to instantiate a task.
+     * Instantiates a task with two arguments given.
+     *
      * @param name The name of the task.
      * @param isDone Status of the task.
      */
@@ -29,22 +31,23 @@ public class Task {
     }
 
     /**
-     * Mark the task as done.
+     * Marks the task as done.
      */
     public void mark() {
         this.isDone = true;
     }
 
     /**
-     * Mark the task as undone.
+     * Marks the task as undone.
      */
     public void unmark() {
         this.isDone = false;
     }
 
     /**
-     * Get a string icon representing the 'isDone' status.
-     * @return A string representation of the icon.
+     * Returns a string representing the 'isDone' status.
+     *
+     * @return "X" if isDone is true, " " otherwise.
      */
     public String getStatus() {
         if (this.isDone) {
@@ -54,7 +57,8 @@ public class Task {
     }
 
     /**
-     * Print out the 'isDone' status and the name of task.
+     * Returns the string representation of the 'isDone' status and the name of this task.
+     *
      * @return The string representation of this task.
      */
     @Override
@@ -64,8 +68,9 @@ public class Task {
     }
 
     /**
-     * Format task to be stored in data file.
-     * @return Returns a  formatted string representation of this task to be stored.
+     * Returns a formatted string representation of this task for storage.
+     *
+     * @return A string representation of this task.
      */
     public String formatStore() {
         String status = isDone ? "1" : "0";

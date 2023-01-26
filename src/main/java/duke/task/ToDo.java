@@ -1,12 +1,13 @@
 package duke.task;
 
 /**
- * Encapsulation of a ToDo task,
- * a task without any date/time attached.
+ * Encapsulates the related fields and behavior of a ToDo task.
+ * Represents a task without any date/time attached.
  */
 public class ToDo extends Task {
     /**
-     * Constructor for ToDo.
+     * Instantiates ToDo with one argument given.
+     *
      * @param name The name of the task.
      */
     public ToDo(String name) {
@@ -14,7 +15,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Constructor to instantiate a todo task.
+     * Instantiates ToDo with two arguments given.
+     *
      * @param name The name of the task.
      * @param isDone Status of the task.
      */
@@ -23,7 +25,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Get the string with a [T] icon representing this task.
+     * Returns the string with a [T] icon representing this task.
+     *
      * @return A string representation of this ToDo task.
      */
     @Override
@@ -32,8 +35,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Format task to be stored in data file.
-     * @return Returns a  formatted string representation of this task to be stored.
+     * Returns a formatted string representation of this task for storage.
+     *
+     * @return A string representation of this task.
      */
     @Override
     public String formatStore() {

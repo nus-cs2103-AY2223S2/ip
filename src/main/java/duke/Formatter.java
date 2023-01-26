@@ -1,16 +1,18 @@
 package duke;
 
 import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
 
 /**
- * Encapsulation of a Formatter that formats given inputs.
+ * Encapsulates the related fields and behavior of a Formatter that formats given inputs.
  */
 public class Formatter {
     /**
      * Formats LocalDate to day month year format and returns the string representation of it.
+     *
      * @param ld The given LocalDate to be formatted.
-     * @return Returns the string representation of the formatted date.
+     * @return The string representation of the formatted date.
      */
     public static String formatDatePrint(LocalDate ld) {
         int day = ld.getDayOfMonth();
@@ -21,8 +23,9 @@ public class Formatter {
 
     /**
      * Formats LocalDate to yyyy/mm/dd format and returns the string representation of it.
+     *
      * @param ld The given LocalDate to be formatted.
-     * @return Returns the string representation of the formatted date.
+     * @return The string representation of the formatted date.
      */
     public static String formatDateStore(LocalDate ld) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");

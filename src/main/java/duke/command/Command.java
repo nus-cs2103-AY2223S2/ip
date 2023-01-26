@@ -1,12 +1,15 @@
 package duke.command;
 
 import duke.exception.DukeException;
+
 import duke.storage.Storage;
+
 import duke.task.TaskList;
+
 import duke.ui.Ui;
 
 /**
- * Encapsulation of a command.
+ * Encapsulates the related fields and behavior of a command.
  */
 public abstract class Command {
     /**
@@ -15,7 +18,9 @@ public abstract class Command {
     public abstract void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException;
 
     /**
-     * Returns whether the type of command is 'bye' or not.
+     * Returns whether the command requires the program to exit.
+     *
+     * @return True if the program should exit, false otherwise.
      */
     public abstract boolean isExit();
 }

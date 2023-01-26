@@ -1,18 +1,28 @@
 package duke;
 
 import duke.command.Command;
+
 import duke.exception.DukeException;
+
 import duke.parser.Parser;
+
 import duke.storage.Storage;
+
 import duke.task.TaskList;
+
 import duke.ui.Ui;
 
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Instantiates Duke.
+     *
+     * @param dirPath The path to the directory that the file is stored in.
+     * @param fileName The name of the storage file.
+     */
     public Duke(String dirPath, String fileName) {
         storage = new Storage(dirPath, fileName);
         ui = new Ui();
@@ -24,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke.
+     */
     public void run() {
         ui.printWelcome();
         boolean isExit = false;
@@ -41,6 +54,11 @@ public class Duke {
         return;
     }
 
+    /**
+     * Starts the program.
+     *
+     * @param args A string array of arguments from the command line.
+     */
     public static void main(String[] args) {
         new Duke("./data", "DukeList.txt").run();
     }
