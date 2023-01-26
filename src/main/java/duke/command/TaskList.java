@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.task.*;
+
 public class TaskList {
     private String[] arr;
 

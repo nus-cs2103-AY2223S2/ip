@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.task.*;
+
 public class Parser {
     public String toDo(String[] arr) {
         String remaining = "";

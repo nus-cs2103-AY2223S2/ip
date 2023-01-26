@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.task.*;
+
 public class Ui {
     Ui(){}
 
