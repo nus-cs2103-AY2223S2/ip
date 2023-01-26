@@ -1,9 +1,11 @@
-public class MarkCommand extends Command{
+package duke;
+
+public class MarkCommand extends Command {
     public MarkCommand(String input) {
         super(input);
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int taskNumber = Integer.parseInt(input);
 
         Task markedTask = taskList.changeMarkStatus(taskNumber);

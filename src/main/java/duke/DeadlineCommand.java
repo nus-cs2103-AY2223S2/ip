@@ -1,9 +1,11 @@
-public class DeadlineCommand extends Command{
+package duke;
+
+public class DeadlineCommand extends Command {
     public DeadlineCommand(String input) {
         super(input);
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (input.length() == 0) {
             throw new DukeException(
                     "You cant be doing nothing!! Please try again!");

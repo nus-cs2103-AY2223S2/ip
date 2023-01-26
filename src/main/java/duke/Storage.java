@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,7 +17,7 @@ public class Storage {
     public Storage(String filePath) {
         this.path = new File(filePath);
     }
-    void writeTasksToFile(String taskListStrings) {
+    public void writeTasksToFile(String taskListStrings) {
         try {
             FileWriter fw = new FileWriter(this.path);
             fw.write(taskListStrings.substring(1, taskListStrings.length()-1));
@@ -25,7 +27,7 @@ public class Storage {
         }
     }
 
-    ArrayList<Task> readTasksFromFile() throws DukeException{
+    public ArrayList<Task> readTasksFromFile() throws DukeException{
         try {
             String path = System.getProperty(("user.dir")) + "/duke.txt";
             Scanner scanner = new Scanner(new File(path));

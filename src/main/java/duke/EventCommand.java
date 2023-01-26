@@ -1,9 +1,11 @@
-public class EventCommand extends Command{
+package duke;
+
+public class EventCommand extends Command {
     public EventCommand(String input) {
         super(input);
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (input.length() == 0) {
             throw new DukeException(
                     "You can't be doing nothing!! Please try again!");
