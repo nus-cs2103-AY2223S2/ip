@@ -15,6 +15,13 @@ public class DeleteCommand extends Command{
         this.idx = idx;
     }
 
+    /**
+     * Deletes task from TaskList
+     *
+     * @param tasks The TaskList to add the new task.
+     * @param ui Ui given by Duke.
+     * @param storage Storage for storing the newly created task.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showToUser("Noted. I've removed this task:");

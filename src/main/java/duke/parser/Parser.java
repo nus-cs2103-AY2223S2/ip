@@ -7,6 +7,13 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param userInput user's input string
+     * @return A command with respect to the user's input
+     */
+
     public static Command parse(String userInput) {
         Pattern mark = Pattern.compile("mark [0-9]+");
         Pattern unmark = Pattern.compile("unmark [0-9]+");
