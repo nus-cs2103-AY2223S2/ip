@@ -5,12 +5,15 @@ public class Duke {
     private enum Commands {
          BYE, LIST, MARK, UNMARK, DELETE, TODO, EVENT, DEADLINE
     }
+
     private static Enum getCommand(String input){ //get the command
         return Commands.valueOf(input.split(" ")[0].toUpperCase());
     }
+
     private static String[] getParameters(String input){ //get all tokens after the command
         return input.split(" ", 2)[1].split(" ");
     }
+
     private static String[] parseParameters(Enum command, String[] parameters){ //get only the useful tokens
         if(command.equals(Commands.MARK) || command.equals(Commands.UNMARK) || command.equals(Commands.DELETE)){
             String[] cleanedParameters = new String[1];
