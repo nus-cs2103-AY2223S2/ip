@@ -1,10 +1,16 @@
 package jarvis.ui.message;
 
+import java.io.IOException;
+
+import jarvis.ui.layout.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
@@ -12,8 +18,10 @@ import javafx.scene.layout.HBox;
  * Container class for a chat message.
  */
 public class MessageBox extends HBox {
-    private final Label messageText;
-    private final ImageView displayPicture;
+    @FXML
+    private Label messageText;
+    @FXML
+    private ImageView displayPicture;
 
     /**
      * Constructor for a message box.
@@ -31,6 +39,20 @@ public class MessageBox extends HBox {
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(this.messageText, this.displayPicture);
+    }
+
+    private MessageBox(String message, Image image) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MessageBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        messageText.setText(message);
+        displayPicture.setImage(image);
     }
 
     /**
