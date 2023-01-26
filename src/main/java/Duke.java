@@ -43,9 +43,12 @@ public class Duke {
                 taskList.printTasks();
                 continue;
             }
-
-            Task task = taskAssigner.assignTask(command);
-            taskList.add(task);
+            try {
+                Task task = taskAssigner.assignTask(command);
+                taskList.add(task);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
         }
         sc.close();
     }
