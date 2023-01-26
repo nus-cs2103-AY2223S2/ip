@@ -7,6 +7,15 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, Boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    public String getType(){
+        return "";
+    }
+
     public String getStatusIcon() {
         return (this.isDone ? "[X]" : "[ ]");
     }
