@@ -1,12 +1,12 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
     @Test
-    public void testDefaultStringConversion(){
+    public void testDefaultStringConversion() {
         assertEquals("[E][ ] read book (from: May 12 2022 to: Oct 27 2023)",
                 new Event("read book", false, "2022-05-12", "2023-10-27").toString());
         assertEquals("[E][X] READ BOOK (from: Oct 27 2019 to: Dec 27 2019)",
@@ -18,7 +18,7 @@ public class EventTest {
     }
 
     @Test
-    public void testTaskStorageStringConversion(){
+    public void testTaskStorageStringConversion() {
         assertEquals("E|false|read book|2022-05-12|2023-10-27",
                 new Event("read book", false, "2022-05-12", "2023-10-27").toTaskStorageString());
         assertEquals("E|true|READ BOOK|2019-10-27|2019-12-27",

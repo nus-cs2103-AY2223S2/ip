@@ -1,12 +1,12 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
-    public void testDefaultStringConversion(){
+    public void testDefaultStringConversion() {
         assertEquals("[D][ ] read book (by: May 12 2022)",
                 new Deadline("read book", false, "2022-05-12").toString());
         assertEquals("[D][X] READ BOOK (by: Oct 27 2019)",
@@ -18,7 +18,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void testTaskStorageStringConversion(){
+    public void testTaskStorageStringConversion() {
         assertEquals("D|false|read book|2022-05-12",
                 new Deadline("read book", false, "2022-05-12").toTaskStorageString());
         assertEquals("D|true|READ BOOK|2019-10-27",

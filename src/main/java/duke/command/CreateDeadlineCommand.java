@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * Represents a command that creates a deadline task.

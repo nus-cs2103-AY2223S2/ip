@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.util.ArrayList;
+
+import duke.DukeException;
 
 /**
  * Represents a list of tasks.
@@ -85,7 +85,7 @@ public class TaskList {
         int size = taskList.size();
 
         if (size == 0 || taskNumber > size) {
-            throw  new DukeException("duke.task.Task number does not exist.");
+            throw new DukeException("duke.task.Task number does not exist.");
         }
 
         Task task = taskList.get(taskNumber - 1);

@@ -1,11 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,6 +7,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 /**
  * The task storage of the chatbot.
  *
@@ -54,7 +55,7 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
         String taskStorageString = reader.readLine();
 
-        while(taskStorageString != null) {
+        while (taskStorageString != null) {
             String[] data = taskStorageString.split("\\|");
             taskList.add(parseTaskData(data));
             taskStorageString = reader.readLine();
@@ -71,12 +72,12 @@ public class Storage {
      */
     private Task parseTaskData(String[] data) {
         switch (data[0]) {
-            case "T":
-                return new Todo(data[2], Boolean.parseBoolean(data[1]));
-            case "D":
-                return new Deadline(data[2], Boolean.parseBoolean(data[1]), data[3]);
-            default:
-                return new Event(data[2], Boolean.parseBoolean(data[1]), data[3], data[4]);
+        case "T":
+            return new Todo(data[2], Boolean.parseBoolean(data[1]));
+        case "D":
+            return new Deadline(data[2], Boolean.parseBoolean(data[1]), data[3]);
+        default:
+            return new Event(data[2], Boolean.parseBoolean(data[1]), data[3], data[4]);
         }
     }
 

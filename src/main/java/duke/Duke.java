@@ -1,10 +1,10 @@
 package duke;
 
-import duke.command.Command;
-import duke.task.TaskList;
-
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.command.Command;
+import duke.task.TaskList;
 
 /**
  * The chatbot that users will be interacting with.

@@ -1,12 +1,12 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TodoTest {
     @Test
-    public void testDefaultStringConversion(){
+    public void testDefaultStringConversion() {
         assertEquals("[T][ ] read book",
                 new Todo("read book", false).toString());
         assertEquals("[T][X] READ BOOK",
@@ -18,7 +18,7 @@ public class TodoTest {
     }
 
     @Test
-    public void testTaskStorageStringConversion(){
+    public void testTaskStorageStringConversion() {
         assertEquals("T|false|read book",
                 new Todo("read book", false).toTaskStorageString());
         assertEquals("T|true|READ BOOK",
