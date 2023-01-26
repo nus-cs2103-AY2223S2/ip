@@ -4,7 +4,12 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * This is a TextUi that contains methods read and write
+ * on Duke.
+ */
 class TextUi {
+
     public final Scanner in;
     private final PrintStream out;
 
@@ -30,6 +35,7 @@ class TextUi {
         out.println("____________________");
 
     }
+
     public void getCustomMessage(String message) {
         out.println("____________________");
         out.println(message);

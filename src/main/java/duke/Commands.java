@@ -2,7 +2,17 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * This class is responsible for keeping track of the Commands
+ */
 public class Commands {
+
+    /**
+     * Executes the list command.
+     * 
+     * @param TextUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     */
     public static void executeListCommand(TextUi TextUi, TaskList taskList) {
         TextUi.printLine();
         if (taskList.isEmpty()) {
@@ -18,8 +28,17 @@ public class Commands {
         TextUi.printLine();
     }
 
-    public static void executeMarkCommand(String input, TextUi TextUi
-            , TaskList taskList, Storage storage) throws DukeException {
+    /**
+     * Executes the mark command.
+     * 
+     * @param input    input String.
+     * @param TextUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException If there is no such task.
+     */
+    public static void executeMarkCommand(String input, TextUi TextUi, TaskList taskList, Storage storage)
+            throws DukeException {
         int indexToMark = Integer.parseInt(input) - 1;
         if (indexToMark < taskList.getArraySize()) {
             Task toMark = taskList.getTask(indexToMark);
@@ -31,8 +50,17 @@ public class Commands {
         }
     }
 
-    public static void executeUnmarkCommand(String input, TextUi TextUi
-            , TaskList taskList, Storage storage) throws DukeException {
+    /**
+     * Executes the unmark command.
+     * 
+     * @param input    input String.
+     * @param TextUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException
+     */
+    public static void executeUnmarkCommand(String input, TextUi TextUi, TaskList taskList, Storage storage)
+            throws DukeException {
         int indexToUnmark = Integer.parseInt(input) - 1;
         if (indexToUnmark < taskList.getArraySize()) {
             Task toUnmark = taskList.getTask(indexToUnmark);
@@ -44,8 +72,17 @@ public class Commands {
         }
     }
 
-    public static void executeDeleteCommand(String input, TextUi TextUi
-            , TaskList taskList, Storage storage) throws DukeException {
+    /**
+     * Executes the delete command.
+     * 
+     * @param input    input String.
+     * @param TextUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException
+     */
+    public static void executeDeleteCommand(String input, TextUi TextUi, TaskList taskList, Storage storage)
+            throws DukeException {
         int indexToDelete = Integer.parseInt(input) - 1;
         if (indexToDelete < taskList.getArraySize()) {
             TextUi.getTaskRemovedMessage(taskList.getTask(indexToDelete), taskList.getArraySize() - 1);
@@ -56,8 +93,17 @@ public class Commands {
         }
     }
 
-    public static void executeToDoCommand(String input, TextUi TextUi
-            , TaskList taskList, Storage storage) throws DukeException {
+    /**
+     * Executes the todo command.
+     * 
+     * @param input    input String.
+     * @param TextUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException If the given string is empty.
+     */
+    public static void executeToDoCommand(String input, TextUi TextUi, TaskList taskList, Storage storage)
+            throws DukeException {
         String check = Parser.removeWhiteSpaces(input);
         if (check.equals("todo")) {
             throw new DukeException("The description of a todo cannot be empty.");
@@ -68,30 +114,46 @@ public class Commands {
         storage.saveTaskListToStorage(taskList);
     }
 
-    public static void executeDeadlineCommand(String input, TextUi TextUi
-            , TaskList taskList, Storage storage) throws DukeException {
+    /**
+     * Executes the deadline command.
+     * 
+     * @param input    input String.
+     * @param TextUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException If the given string is empty.
+     */
+    public static void executeDeadlineCommand(String input, TextUi TextUi, TaskList taskList, Storage storage)
+            throws DukeException {
         String check = Parser.removeWhiteSpaces(input);
         if (check.equals("deadline")) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
         String[] str = input.split("/");
-        Task newTask = new Deadline(str[0].substring(0, str[0].length() - 1)
-                , LocalDate.parse(str[1].substring(3)));
+        Task newTask = new Deadline(str[0].substring(0, str[0].length() - 1), LocalDate.parse(str[1].substring(3)));
         taskList.addTask(newTask);
         TextUi.getTaskAddedMessage(newTask, taskList.getArraySize());
         storage.saveTaskListToStorage(taskList);
     }
 
-    public static void executeEventCommand(String input, TextUi TextUi
-            , TaskList taskList, Storage storage) throws DukeException {
+    /**
+     * Executes the event command.
+     * 
+     * @param input    input String.
+     * @param TextUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException If the given string is empty.
+     */
+    public static void executeEventCommand(String input, TextUi TextUi, TaskList taskList, Storage storage)
+            throws DukeException {
         String check = Parser.removeWhiteSpaces(input);
         if (check.equals("event")) {
             throw new DukeException("The description of a event cannot be empty.");
         }
         String[] str = input.split("/");
-        Task newTask = new Event(str[0].substring(0, str[0].length() - 1)
-                , LocalDate.parse(str[1].substring(5, str[1].length() - 1))
-                , LocalDate.parse(str[2].substring(3)));
+        Task newTask = new Event(str[0].substring(0, str[0].length() - 1),
+                LocalDate.parse(str[1].substring(5, str[1].length() - 1)), LocalDate.parse(str[2].substring(3)));
         taskList.addTask(newTask);
         TextUi.getTaskAddedMessage(newTask, taskList.getArraySize());
         storage.saveTaskListToStorage(taskList);

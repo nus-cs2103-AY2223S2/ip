@@ -1,6 +1,19 @@
 package duke;
 
+/**
+ * This class is a parser that reads user inputs.
+ */
 public class Parser {
+
+    /**
+     * Parses the input string and calls the correct
+     * execution method.
+     * 
+     * @param userInput User Input.
+     * @param taskList  TaskList.
+     * @param storage   Storage.
+     * @param textUi    TextUi.
+     */
     public void parse(String userInput, TaskList taskList, Storage storage, TextUi textUi) throws DukeException {
         String command;
         String body;

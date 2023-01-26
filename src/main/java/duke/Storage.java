@@ -7,12 +7,23 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * This class is a Storage that helps with the writing and reading
+ * of saved contents made by user.
+ */
 public class Storage {
     private static final String FILE_DESTINATION = "data.txt";
     private final File file;
+
     public Storage() {
         file = new File(FILE_DESTINATION);
     }
+
+    /**
+     * Loads and parses saved content into a TaskList.
+     * 
+     * @return TaskList of user.
+     */
     public TaskList readSavedFile() {
         File file = new File(FILE_DESTINATION);
         if (!file.exists()) {
@@ -36,22 +47,29 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Takes in a String and returns a Task.
+     * 
+     * @param string List of tasks in use by the app.
+     * @return Task.
+     */
     public Task parseStringToTask(String string) {
         String[] arr = string.split(",");
         if (arr[0].equals("T")) {
-            return new ToDo(arr[2]
-                    , arr[1].equals("1"));
+            return new ToDo(arr[2], arr[1].equals("1"));
         } else if (arr[0].equals("D")) {
-            return new Deadline(arr[2]
-                    , arr[1].equals("1")
-                    , LocalDate.parse(arr[3]));
+            return new Deadline(arr[2], arr[1].equals("1"), LocalDate.parse(arr[3]));
         } else {
-            return new Event(arr[2]
-                    , arr[1].equals("1")
-                    , LocalDate.parse(arr[3])
-                    , LocalDate.parse(arr[4]));
+            return new Event(arr[2], arr[1].equals("1"), LocalDate.parse(arr[3]), LocalDate.parse(arr[4]));
         }
     }
+
+    /**
+     * Saves the TaskList.
+     * 
+     * @param taskList TaskList of user.
+     * 
+     */
     public void saveTaskListToStorage(TaskList taskList) {
         try {
             FileWriter myWriter = new FileWriter(file); // this truncates the duke.txt to size 0
