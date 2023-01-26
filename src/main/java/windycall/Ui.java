@@ -1,6 +1,11 @@
 package windycall;
 
 import java.util.List;
+
+/**
+ * Deals with interactions with the user
+ * Makes the background of chatBox more pretty
+ */
 public class Ui {
 
     public Ui() {
@@ -16,6 +21,11 @@ public class Ui {
         System.out.println("--------------------------------------------------");
     }
 
+    /**
+     * Displays all the tasks according to their String representation
+     *
+     * @param tasks tasks to be displayed
+     */
     public void displayTasks(List<Task> tasks) {
         Ui.space();
         System.out.println("Here are all of your tasks:");

@@ -1,11 +1,21 @@
 package windycall;
 
+/**
+ * Deals with making sense of the user command by splitting
+ * user command and translation
+ */
 public class Parser {
 
     public Parser() {
 
     }
 
+    /**
+     * Returns an operation type representing what users want to do
+     *
+     * @param command command input by users
+     * @return a enumeration type representing a specific operation
+     */
     public OperationType getOperationType(String command) {
         if (command.equals("list")) return OperationType.LIST;
         String[] parts = command.split(" ");
@@ -25,6 +35,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the translated index of mark operation while
+     * handling invalid input
+     *
+     * @param parts parts of String of user command split by space
+     * @return an index representing which task user want to mark
+     */
     public int getMarkIndex(String[] parts) {
         if (parts.length == 1) {
             System.out.println("     You should input a number to mark/unmark a task");
