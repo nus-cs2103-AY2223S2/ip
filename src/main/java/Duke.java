@@ -1,5 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.Parser;
+import duke.DukeException;
 
 public class Duke {
 
@@ -32,7 +37,7 @@ public class Duke {
             try {
                 parser.executeCommand(fullCommand, tasks, storage, ui);
             } catch (DukeException e) {
-                throw new RuntimeException(e);
+                e.getMessage();
             }
             isExit = parser.checkForExit(fullCommand);
         }
@@ -45,7 +50,7 @@ public class Duke {
 //        Scanner sc = new Scanner(System.in);
 //        ArrayList<Task> tasks = new ArrayList<>();
 //        Storage s = new Storage("test.txt");
-//        TaskList tasksL = new TaskList();
+//        Duke.TaskList tasksL = new Duke.TaskList();
 //        try {
 //            tasksL = s.load();
 //        } catch (DukeException e) {

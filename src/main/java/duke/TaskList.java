@@ -1,10 +1,13 @@
+package duke;
+
 import java.util.ArrayList;
+
 
 public class TaskList {
     protected ArrayList<Task> tasks;
 
     public TaskList() {
-        //Default constructor for empty TaskList
+        //Default constructor for empty Duke.TaskList
         tasks = new ArrayList<Task>();
     }
 
