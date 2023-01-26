@@ -124,6 +124,16 @@ public class Task {
         this.done = false;
     }
 
+    /**
+     * Checks if task contains a word.
+     *
+     * @param word The word to check
+     * @return Whether task contains the word;
+     */
+    public boolean containsWord(String word) {
+        return content.contains(word);
+    }
+
     @Override
     public String toString() {
         // Fill square brackets with X if task is done.

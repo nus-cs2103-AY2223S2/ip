@@ -15,7 +15,7 @@ public class OccursCommand extends Command {
     private String input;
 
     public OccursCommand(String input) {
-        super("list");
+        super("occurs ");
         this.input = input;
     }
 

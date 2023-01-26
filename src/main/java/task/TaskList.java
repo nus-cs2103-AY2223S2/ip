@@ -171,6 +171,24 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints out the tasks containing a given word.
+     *
+     * @param word The word to check.
+     */
+    public void findTasksWithWord(String word) {
+
+        System.out.println("Here are the matching tasks in your list:");
+
+        int counter = 1;
+
+        for (Task t: tasks) {
+            if (t.containsWord(word)) {
+                System.out.println(counter + "." + t);
+            }
+        }
+    }
+
     @Override
     public String toString() {
         String result = "";
