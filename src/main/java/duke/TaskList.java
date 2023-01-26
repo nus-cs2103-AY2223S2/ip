@@ -20,12 +20,14 @@ public class TaskList {
         return this.lst.get(index);
     }
     
-    public void add(Task task) {
+    public TaskList add(Task task) {
         this.lst.add(task);
+        return this;
     }
     
-    public void remove(int index) {
+    public TaskList remove(int index) {
         this.lst.remove(index);
+        return this;
     }
     
     public boolean isEmpty() {
