@@ -29,12 +29,12 @@ public class KiraBot {
     }
 
     private void listenForCommand() {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         boolean isActive = true;
 
         while (isActive) {
             try {
-                Parser commandString = new Parser(sc.nextLine());
+                Parser commandString = new Parser(scanner.nextLine());
                 switch(commandString.command) {
                 case BYE:
                     isActive = false;
@@ -67,7 +67,7 @@ public class KiraBot {
                 UI.errMsg(e.getMessage());
             }
         }
-        sc.close();
+        scanner.close();
     }
 
     public static void main(String[] args) {

@@ -1,4 +1,5 @@
 package kira.task;
+
 public abstract class Task {
     private String data;
     private boolean isDone;
@@ -23,16 +24,16 @@ public abstract class Task {
     }
 
     public String saveFormat() {
-        String[] temp = new String[] {this.data, this.isDone ? "y" : "n"};
-        return String.join("\",\"", temp);
+        String[] saveString = new String[] {this.data, this.isDone ? "y" : "n"};
+        return String.join("\",\"", saveString);
     }
 
     @Override
     public String toString() {
-        StringBuilder ret = new StringBuilder();
+        StringBuilder sBuilder = new StringBuilder();
         String done = this.isDone ? "x" : " ";
-        ret.append("[" + done + "] ");
-        ret.append(this.data);
-        return ret.toString();
+        sBuilder.append("[" + done + "] ")
+                .append(this.data);
+        return sBuilder.toString();
     }
 }

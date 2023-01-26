@@ -1,13 +1,14 @@
 package kira.exception;
+
 public class KiraException extends Exception {
     
     /**
-     * Construct an exception with the message.
+     * Constructs an exception with the message.
      * 
-     * @param msg
+     * @param message
      */
-    public KiraException(String msg) {
-        super(msg);
+    public KiraException(String message) {
+        super(message);
     }
 
     public KiraException() {

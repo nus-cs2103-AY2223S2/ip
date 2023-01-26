@@ -11,7 +11,7 @@ public class Parser {
 
     public Command command;
     private int index;
-    private String taskArguments;
+    private String taskArgument;
     
     public Parser(String input) throws KiraException {
         String[] temp = input.split(" ", 2);
@@ -19,14 +19,18 @@ public class Parser {
             this.command = Command.valueOf(temp[0].toUpperCase());
             switch (this.command) {
             case BYE:
+                // Fallthrough
             case LIST:
+                // Fallthrough
             case TODAY:
                 if (temp.length != 1) {
                     throw new KiraException("Incorrect use of command for BYE/LIST/TODAY");
                 }
                 break;
             case MARK:
+                // Fallthrough
             case UNMARK:
+                // Fallthrough
             case DELETE:
                 if (temp.length != 2) {
                     throw new KiraException("Incorrect use of command for MARK/UNMARK/DELETE");
@@ -34,12 +38,14 @@ public class Parser {
                 this.index = Integer.valueOf(temp[1]);
                 break;
             case TODO:
+                // Fallthrough
             case DEADLINE:
+                // Fallthrough
             case EVENT:
                 if (temp.length != 2) {
                     throw new KiraException("Incorrect use of command for any TASK commands");
                 }
-                this.taskArguments = temp[1];
+                this.taskArgument = temp[1];
                 break;
             }
         } catch (NumberFormatException e) {
@@ -53,9 +59,9 @@ public class Parser {
         TaskType type = TaskType.valueOf(this.command.toString());
         switch (type) {
         case TODO:
-            return new ToDo(this.taskArguments);
+            return new ToDo(this.taskArgument);
         case DEADLINE:
-            String[] format = this.taskArguments.split(" /by ", 2);
+            String[] format = this.taskArgument.split(" /by ", 2);
             if (format.length != 2) {
                 throw new KiraException("Incorrect deadline format :C\n"
                         + "Please follow this format for deadline:\n"
@@ -67,7 +73,7 @@ public class Parser {
                     + "Please follow this format for event:\n"
                     + "event <description> /from yyyy-MM-dd HHmm "
                     + "/to yyyy-MM-dd HHmm";
-            format = this.taskArguments.split(" /from ", 2);
+            format = this.taskArgument.split(" /from ", 2);
             if (format.length != 2) {
                 throw new KiraException(errMsg);
             }
