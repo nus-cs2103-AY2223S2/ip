@@ -19,7 +19,7 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         String str = super.toString();
-        str += "\n";
+        //str += "\n";
         return str;
     }
 }
