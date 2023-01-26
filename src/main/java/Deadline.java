@@ -1,6 +1,10 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
 
-    protected String dueDate;
+    protected LocalDateTime dueDate;
+    private static final DateTimeFormatter FORMATTER  = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public static Deadline create(String str) throws DukeException{
         if (str.length() < 1) {
@@ -10,18 +14,18 @@ public class Deadline extends Task{
             if (text.length < 2) {
                 throw new DukeException();
             } else {
-                return new Deadline(text[0], text[1]);
+                return new Deadline(text[0], LocalDateTime.parse(text[1], Deadline.FORMATTER));
             }
         }
     }
 
-    public Deadline(String description, String dueDate) {
+    public Deadline(String description, LocalDateTime dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.dueDate + ")";
+        return "[D]" + super.toString() + " (by: " + this.dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm")) + ")";
     }
 }
