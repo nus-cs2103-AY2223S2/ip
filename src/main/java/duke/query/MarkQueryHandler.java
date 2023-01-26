@@ -6,11 +6,20 @@ import duke.task.TaskTracker;
 
 import java.util.StringTokenizer;
 
+/**
+ * The MarkQueryHandler class handles user queries for marking tasks.
+ */
 public class MarkQueryHandler extends TaskQueryHandler {
     public MarkQueryHandler(TaskTracker tt) {
         super(tt);
     }
 
+    /**
+     * Processes a query for marking a task.
+     * @param query a user input string
+     * @return response from marking a task
+     * @throws DukeException
+     */
     @Override
     public String processQuery(String query) throws DukeException {
         StringTokenizer st = new StringTokenizer(query);

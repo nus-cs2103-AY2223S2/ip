@@ -5,6 +5,9 @@ import duke.DukeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Event class represents a task that has a start date and end date.
+ */
 public class Event extends Deadline {
     protected LocalDateTime startDate;
 
@@ -25,6 +28,10 @@ public class Event extends Deadline {
                 endDate.format(DateTimeFormatter.ofPattern(DATETIME_DISPLAY_PATTERN)));
     }
 
+    /**
+     * Provides a serialized format for the Event object.
+     * @return serialized format for the Event object
+     */
     @Override
     public String serialize() {
         // TODO: Handle case where description contains "|"
@@ -32,6 +39,12 @@ public class Event extends Deadline {
                 startDate.toString(), endDate.toString());
     }
 
+    /**
+     * Deserializes a serialized Event object.
+     * @param data string of serialized Event object to deserialize
+     * @return deserialized Event object
+     * @throws DukeException
+     */
     public static Task deserialize(String data) throws DukeException {
         String[] split = splitDataStr(data);
         // TODO: Verify task data (similar to processing queries)

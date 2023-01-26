@@ -5,6 +5,9 @@ import java.util.StringTokenizer;
 import duke.query.*;
 import duke.task.TaskTracker;
 
+/**
+ * The Bot class represents a bot that can process and respond to user queries.
+ */
 public class Bot {
     private static final boolean SHOULD_LOAD_TASK_SAVE = true;
     private static final String GOODBYE_RES = "GOOD BYE!";
@@ -12,12 +15,22 @@ public class Bot {
 
     private TaskTracker tt = new TaskTracker();
 
+    /**
+     * Initializes the bot.
+     * @throws DukeException
+     */
     public void init() throws DukeException {
         if (SHOULD_LOAD_TASK_SAVE) {
             tt.loadTasks();
         }
     }
 
+    /**
+     * Processes an input string as a query and returns a BotResult object that contains a response string
+     * and the current status of the bot.
+     * @param input user input to be processed as a query
+     * @return the result of processing the user input
+     */
     public BotResult process(String input) {
         IFormatter formatter = new ResponseFormatter();
         BotResult.BotStatus status = BotResult.BotStatus.Successful;

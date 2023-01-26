@@ -1,5 +1,8 @@
 package duke.query;
 
+/**
+ * The QueryTypeUtil class provides utility functions for handling query types.
+ */
 public class QueryTypeUtil {
     private static final String BYE_QUERY_TYPE = "bye";
     private static final String LIST_QUERY_TYPE = "list";
