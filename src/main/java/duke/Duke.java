@@ -9,12 +9,12 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import duke.commands.Command;
-import duke.commands.DeleteCommand;
 import duke.commands.ListCommand;
-import duke.commands.MarkCommand;
 import duke.commands.Parser;
 import duke.commands.SaveCommand;
-import duke.commands.UnmarkCommand;
+import duke.commands.indexedCommand.DeleteCommand;
+import duke.commands.indexedCommand.MarkCommand;
+import duke.commands.indexedCommand.UnmarkCommand;
 import duke.commands.taskCommand.DeadlineCommand;
 import duke.commands.taskCommand.EventCommand;
 import duke.commands.taskCommand.TodoCommand;
