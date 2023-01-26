@@ -1,4 +1,5 @@
 package duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,18 +16,25 @@ public class TaskList {
         t.printStatus();
         printCount();
     }
+
     public void loadTask(Task t) {
         list.add(t);
     }
+
     public void removeTask(int index) {
         this.list.remove(index);
     }
-    public Task getTask(int index) throws taskNotFoundException{
+
+    public Task getTask(int index) throws taskNotFoundException {
         try {
             return this.list.get(index);
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             throw new taskNotFoundException();
         }
+    }
+
+    public List<Task> iterable() {
+        return this.list;
     }
 
     public int count() {
@@ -34,6 +42,6 @@ public class TaskList {
     }
 
     public void printCount() {
-        System.out.println("Now you have "+count()+" task(s) in the list.");
+        System.out.println("Now you have " + count() + " task(s) in the list.");
     }
 }

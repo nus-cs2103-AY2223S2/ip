@@ -1,4 +1,5 @@
 package duke;
+
 import java.util.Arrays;
 
 public class Functions {
@@ -10,46 +11,33 @@ public class Functions {
         this.st = st;
     }
 
-    public void list(String inp) throws DukeException{
-        String[] s = inp.split(" ");
-
-        /*
-        if (s.length>1) {
-            String[] temp = Arrays.copyOfRange(s, 1, s.length);
-            String datetime = String.join(" ", temp);
-            String[] x = datetime.split(" /find ");
-            //check date format
-            try {
-                LocalDateTime query = LocalDateTime.parse(x[0]);
-                //search and only print those that match date
-                for (int i = 0; i < ls.count(); i++) {
-                    Task ts = ls.getTask(i);
-                    if (ts instanceof TimedTask) {
-                        if (query.isEqual(((TimedTask) ts).end) || query.isEqual(((TimedTask) ts).start)) {
-                            ts.printStatus();
-                        }
-                    }
-                }
-                //report end of search
-                System.out.println("Search done!");
-            } catch (DateTimeParseException e) {
-                System.out.println("Date Time format is dd/mm/yyyy hh:mm");
-            }
-
-
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < ls.count(); i++) {
-                System.out.print(i + 1 + ".");
-                ls.getTask(i).printStatus();
-            }
-        }
-        */
-
+    public void list() throws DukeException {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tl.count(); i++) {
             System.out.print(i + 1 + ".");
             tl.getTask(i).printStatus();
+        }
+    }
+
+    public void find(String s) {
+        String query = s.split(" ")[1];
+        boolean flag = false;
+        int i = 1;
+        for (Task t : tl.iterable()) {
+            if (t.getDes().contains(query)) {
+                flag = true;
+                if (flag) {
+                    System.out.println("Here are the matching tasks in your list:");
+                }
+                System.out.print(i + ".");
+                t.printStatus();
+                i++;
+            }
+        }
+        if (!flag) {
+            System.out.println("No matching tasks are found in your list");
+        } else {
+            System.out.println("Search done!");
         }
     }
 
@@ -58,9 +46,9 @@ public class Functions {
         return false;
     }
 
-    public void mark(String inp) throws DukeException{
+    public void mark(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new markException();
         }
         int index = Integer.parseInt(s[1]) - 1;
@@ -71,9 +59,9 @@ public class Functions {
         this.st.save(tl);
     }
 
-    public void unmark(String inp) throws DukeException{
+    public void unmark(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new markException();
         }
         int index = Integer.parseInt(s[1]) - 1;
@@ -84,9 +72,9 @@ public class Functions {
         this.st.save(tl);
     }
 
-    public void delete(String inp) throws DukeException{
+    public void delete(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new deleteException();
         }
         int index = Integer.parseInt(s[1]) - 1;
@@ -97,9 +85,9 @@ public class Functions {
         this.st.save(tl);
     }
 
-    public void todo(String inp) throws DukeException{
+    public void todo(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new todoException();
         }
         String[] temp = Arrays.copyOfRange(s, 1, s.length);
@@ -111,7 +99,7 @@ public class Functions {
 
     public void deadline(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new deadlineException();
         }
         String[] temp = Arrays.copyOfRange(s, 1, s.length);
@@ -124,7 +112,7 @@ public class Functions {
 
     public void events(String inp) throws DukeException {
         String[] s = inp.split(" ");
-        if (s.length<2) {
+        if (s.length < 2) {
             throw new eventException();
         }
         String[] temp = Arrays.copyOfRange(s, 1, s.length);

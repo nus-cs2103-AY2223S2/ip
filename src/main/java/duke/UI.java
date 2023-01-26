@@ -1,13 +1,15 @@
 package duke;
+
 import java.util.Scanner;
 
 public class UI {
     String inp;
     String[] inpLine;
+    Functions fn;
+
     public UI(Functions fn) {
         this.fn = fn;
     }
-    Functions fn;
 
     public void getInput() {
         Scanner sc = new Scanner(System.in);
@@ -15,14 +17,17 @@ public class UI {
         this.inpLine = inp.split(" ");
     }
 
-    public boolean action() throws DukeException{
+    public boolean action() throws DukeException {
         boolean flag = true;
         switch (inpLine[0]) {
             case "bye":
                 flag = fn.bye();
                 break;
             case "list":
-                fn.list(inp);
+                fn.list();
+                break;
+            case "find":
+                fn.find(inp);
                 break;
             case "mark":
                 fn.mark(inp);

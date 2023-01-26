@@ -19,7 +19,11 @@ public class Duke {
         this.ui = new UI(fn);
     }
 
-    public void run(){
+    public static void main(String[] args) {
+        new Duke("tasks.txt").run();
+    }
+
+    public void run() {
         ar.show();
         boolean flag = true;
         while (flag) {
@@ -30,12 +34,8 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(e);
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
     }
 }
