@@ -57,6 +57,8 @@ public class InputParser {
                 // handle improper arguments
             case "unmark":
                 return commandFactory.createCommand(CommandType.MARK_UNDONE, tokens[1]);
+            case "delete":
+                return commandFactory.createCommand(CommandType.DELETE_TASK, tokens[1]);
             default:
                 return null;
         }

@@ -42,6 +42,10 @@ public class TaskModel implements Model {
         return this.tasks.size();
     }
 
+    public void deleteTask(int indexToRemove) {
+        this.tasks.remove(indexToRemove); // handle out of bounds error
+    }
+
     public void markTaskDone(int taskIndex) {
         tasks.get(taskIndex).markTaskDone(); // handle out of bounds exception
     }
