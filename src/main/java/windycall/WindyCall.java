@@ -102,55 +102,55 @@ public class WindyCall {
             Ui.line();
             String[] parts = userCommand.split(" ");
             switch (type) {
-                case LIST:
-                    ui.displayTasks(tasks);
-                    break;
-                case MARK:
-                    int num = parser.getMarkIndex(parts);
-                    if (num >= 1 && num <= tasks.size()) {
-                        System.out.println("     Good job! I've marked this task as done:");
-                        tasks.get(num - 1).markAsDone();
-                        Ui.space();
-                        System.out.println(tasks.get(num - 1));
-                        storage.handleTaskChange(tasks);
-                    } else if (num != -1) {
-                        System.out.println("     Sorry, your index is out of range");
-                    }
-                    break;
-                case UNMARK:
-                    int idx = parser.getUnmarkIndex(parts);
-                    if (idx >= 1 && idx <= tasks.size()) {
-                        System.out.println("     OK, I've marked this task as not done yet:");
-                        tasks.get(idx - 1).unmark();
-                        Ui.space();
-                        System.out.println(tasks.get(idx - 1));
-                        storage.handleTaskChange(tasks);
-                    } else if (idx != -1){
-                        System.out.println("     Sorry, your index is out of range");
-                    }
-                    break;
-                case DELETE:
-                    int idx1 = parser.getDeleteIndex(parts);
-                    if (idx1 >= 1 && idx1 <= tasks.size()) {
-                        System.out.println("     Noted. I've removed this task:");
-                        Ui.space();
-                        System.out.println(tasks.get(idx1 - 1));
-                        tasks.remove(idx1 - 1);
-                        storage.handleTaskChange(tasks);
-                        Ui.space();
-                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                    } else if (idx1 != -1) {
-                        System.out.println("     Sorry, your index is out of range");
-                    }
-                    break;
-                default:
-                    try {
-                        this.addTask(userCommand);
-                    }
-                    catch (WindyCallException e) {
-                        System.out.println(e.getMessage());
-                    }
-                    break;
+            case LIST:
+                ui.displayTasks(tasks);
+                break;
+            case MARK:
+                int num = parser.getMarkIndex(parts);
+                if (num >= 1 && num <= tasks.size()) {
+                    System.out.println("     Good job! I've marked this task as done:");
+                    tasks.get(num - 1).markAsDone();
+                    Ui.space();
+                    System.out.println(tasks.get(num - 1));
+                    storage.handleTaskChange(tasks);
+                } else if (num != -1) {
+                    System.out.println("     Sorry, your index is out of range");
+                }
+                break;
+            case UNMARK:
+                int idx = parser.getUnmarkIndex(parts);
+                if (idx >= 1 && idx <= tasks.size()) {
+                    System.out.println("     OK, I've marked this task as not done yet:");
+                    tasks.get(idx - 1).unmark();
+                    Ui.space();
+                    System.out.println(tasks.get(idx - 1));
+                    storage.handleTaskChange(tasks);
+                } else if (idx != -1){
+                    System.out.println("     Sorry, your index is out of range");
+                }
+                break;
+            case DELETE:
+                int idx1 = parser.getDeleteIndex(parts);
+                if (idx1 >= 1 && idx1 <= tasks.size()) {
+                    System.out.println("     Noted. I've removed this task:");
+                    Ui.space();
+                    System.out.println(tasks.get(idx1 - 1));
+                    tasks.remove(idx1 - 1);
+                    storage.handleTaskChange(tasks);
+                    Ui.space();
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                } else if (idx1 != -1) {
+                    System.out.println("     Sorry, your index is out of range");
+                }
+                break;
+            default:
+                try {
+                    this.addTask(userCommand);
+                }
+                catch (WindyCallException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
             }
             Ui.line();
         }

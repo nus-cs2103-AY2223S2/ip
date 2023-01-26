@@ -19,7 +19,7 @@ public abstract class Task {
 
     public abstract String getTaskTypeIcon();
 
-    public abstract String fileFormat();
+    public abstract String getFileFormat();
 
     public void markAsDone() {
         this.isDone = true;

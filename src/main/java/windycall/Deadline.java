@@ -22,9 +22,10 @@ public class Deadline extends Task{
 
 
     @Override
-    public String fileFormat() {
+    public String getFileFormat() {
         return "D | " + getStatusIcon() + " | " + description + " | " + deadline + "\n";
     }
+
     public LocalDate processDateTime(String deadline) {
         // now assume date is in the form
         // dd/mm/yy or yy-mm-dd
@@ -42,12 +43,12 @@ public class Deadline extends Task{
         return dateTime;
     }
 
-    private String deadlineFormat() {
+    private String getDeadlineFormat() {
         return deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 
     private String getDeadline() {
-        return " (by: " + deadlineFormat() + ")";
+        return " (by: " + getDeadlineFormat() + ")";
     }
 
     @Override
