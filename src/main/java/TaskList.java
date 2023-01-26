@@ -54,4 +54,12 @@ public class TaskList {
     public Task getTask(int taskIndex) {
         return list.get(taskIndex);
     }
+
+    /**
+     * Gets the size of the current list.
+     * @return Size of list.
+     */
+    public int getSize() {
+        return list.size();
+    }
 }

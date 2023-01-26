@@ -26,7 +26,7 @@ public class Ui {
      * Wishes the user goodbye and closes the Scanner.
      */
     public void close() {
-        PixlPrint("Goodbye! See you again :)");
+        pixlPrint("Goodbye! See you again :)");
         System.out.println(Values.HLINE);
         scanner.close();
     }
@@ -35,7 +35,7 @@ public class Ui {
      * Prints some text as PixlBot.
      * @param text Text to print.
      */
-    public void PixlPrint(String text) {
+    public void pixlPrint(String text) {
         System.out.println(Values.COLOR_PURPLE + "PixlBot: " + Values.COLOR_RESET + text);
         System.out.println(Values.HLINE);
     }
@@ -45,7 +45,7 @@ public class Ui {
      * @param text Text to print.
      * @param color ANSI color code for text.
      */
-    public void PixlPrint(String text, String color) {
+    public void pixlPrint(String text, String color) {
         System.out.println(Values.COLOR_PURPLE + "PixlBot: " + color + text + Values.COLOR_RESET);
         System.out.println(Values.HLINE);
     }
@@ -54,8 +54,8 @@ public class Ui {
      * Special print method to display the message from an exception.
      * @param e Exception to display.
      */
-    public void PixlPrintException(Exception e) {
-        PixlPrint("Uh oh! " + e.getMessage(), Values.COLOR_RED);
+    public void pixlPrintException(Exception e) {
+        pixlPrint("Uh oh! " + e.getMessage(), Values.COLOR_RED);
     }
 
     /**

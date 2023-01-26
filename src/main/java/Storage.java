@@ -17,18 +17,9 @@ public class Storage {
     /**
      * Constructor for Storage class.
      * @param filePath Path to file to store list data (no extension).
-     * @throws DukeException If filePath ends with an extension.
      */
-    public Storage(String filePath) throws DukeException{
-        // Code adapted from https://www.baeldung.com/java-file-extension to get file extension.
-        String extension = Optional.ofNullable(filePath)
-                .filter(f -> f.contains("."))
-                .map(f -> f.substring(filePath.lastIndexOf(".") + 1)).toString();
-        if (!extension.equals("Optional.empty")) {
-            throw new DukeException("Invalid file path. Please provide file without any extension.");
-        } else {
-            this.filePath = filePath;
-        }
+    public Storage(String filePath){
+        this.filePath = filePath;
     }
 
     /**
@@ -51,7 +42,7 @@ public class Storage {
 
     /**
      * Loads data from the file path (provided in constructor).
-     * @return The ArrayList of Tasks, if found.
+     * @return The TaskList, if found.
      * @throws DukeException If data could not be read.
      */
     public TaskList load() throws DukeException {
@@ -63,7 +54,7 @@ public class Storage {
             ois.close();
             return list;
         } catch (IOException | ClassNotFoundException e) {
-            throw new DukeException("No task list found on hard disk. Create a new one...");
+            throw new DukeException("No task list found on hard disk.");
         }
     }
 }
