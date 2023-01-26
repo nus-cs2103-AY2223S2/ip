@@ -1,7 +1,12 @@
+import java.io.*;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Duke {
+    private final static String delimiter = "\\|";
     private final static String bye = "bye";
     private final static String goodbyeMessage = "Bye. Hope to see you again soon!";
     private final static String list = "list";
@@ -9,6 +14,7 @@ public class Duke {
     private final static String unmark = "unmark";
     private final static String delete = "delete";
     private static ArrayList<Task> tasks = new ArrayList<>();
+    private static Path pathToFile;
 
     private static void indentedPrintln(String message) {
         String indentedMessage = "     " + message;
@@ -96,6 +102,12 @@ public class Duke {
         indentedPrintln("Got it. I've added this task:");
         indentedPrintln("  " + newTask);
         indentedPrintln("Now you have " + tasks.size() + " tasks in the list.");
+
+        try {
+            addTaskToFile(newTask);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     private static void deleteTask(int taskNumber) {
@@ -106,6 +118,76 @@ public class Duke {
         indentedPrintln("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    private static Path openDataFile() throws IOException {
+        String home = System.getProperty("user.home");
+        Path pathToDir = Paths.get(home, "Downloads", "data");
+        if (!Files.exists(pathToDir)) {
+            Files.createDirectories(pathToDir);
+        }
+        Path pathToFile = Paths.get(home, "Downloads", "data", "duke.txt");
+        if (!Files.exists(pathToFile)) {
+            Files.createFile(pathToFile);
+        }
+        return pathToFile;
+    }
+
+    private static String[] readFromDataFile(int lineNumber) throws IOException {
+        String line = Files.readAllLines(pathToFile).get(lineNumber);
+        String[] lineArray = line.split(delimiter);
+        int len = lineArray.length;
+        for (int i = 0; i < len; i++) {
+            lineArray[i] = lineArray[i].trim();
+        }
+        return lineArray;
+    }
+
+    private static void fileToArrayList() throws IOException {
+        int lineNumber = Math.toIntExact(Files.lines(pathToFile).count());
+        tasks = new ArrayList<>();
+        for (int i = 0; i < lineNumber; i++) {
+            String[] s = readFromDataFile(i);
+            Task task;
+            switch (s[0]) {
+            case "T":
+                task = new Todo(s[2]);
+                break;
+            case "D":
+                task = new Deadline(s[2], s[3]);
+                break;
+            case "E":
+                String[] date = s[3].split("-"); // to be improved
+                task = new Event(s[2], date[0], date[1]);
+                break;
+            default:
+                throw new DukeException("Invalid type of task");
+            }
+            if (Integer.parseInt(s[1]) == 1) {
+                task.markAsDone();
+            } else if (Integer.parseInt(s[1]) == 0) {
+                task.markAsNotDone();
+            } else {
+                throw new DukeException("Invalid file format");
+            }
+            tasks.add(task);
+        }
+    }
+
+    private static void writeTasksToFile() throws IOException {
+        FileWriter fw = new FileWriter(pathToFile.toString());
+        for (Task task : tasks) {
+            fw.write(task.taskInFileFormat());
+            fw.write(System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    private static void addTaskToFile(Task task) throws IOException {
+        FileWriter fw = new FileWriter(pathToFile.toString(), true);
+        fw.write(task.taskInFileFormat());
+        fw.write(System.lineSeparator());
+        fw.close();
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -113,6 +195,13 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
+        try {
+            pathToFile = openDataFile();
+            fileToArrayList();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();

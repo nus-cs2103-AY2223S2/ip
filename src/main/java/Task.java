@@ -1,6 +1,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected char type;
 
     public Task(String description) {
         this.description = description;
@@ -17,6 +18,14 @@ public class Task {
 
     public void markAsNotDone() {
         this.isDone = false;
+    }
+
+    private int isDoneToInt() {
+        return isDone ? 1 : 0;
+    }
+
+    public String taskInFileFormat() {
+        return type + " | " + isDoneToInt() + " | " + description;
     }
 
     @Override
