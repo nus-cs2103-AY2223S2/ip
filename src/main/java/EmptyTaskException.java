@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class EmptTaskException {
+public class EmptyTaskException extends DukeException{
+    public EmptyTaskException(String err){
+        super(err);
+    }
 }

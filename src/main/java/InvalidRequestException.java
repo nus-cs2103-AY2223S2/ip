@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class InvalidRequestException {
+public class InvalidRequestException extends DukeException{
+    public InvalidRequestException(String err){
+        super(err);
+    }
 }
