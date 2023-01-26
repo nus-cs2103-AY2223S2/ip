@@ -216,7 +216,12 @@ public class TaskManagerUsecase implements CommandRegisterable {
         };
     }
 
-    IdentifiedCommandable getListOfDate() {
+    /**
+     * Gets the executable for listing all the tasks that contains a date.
+     *
+     * @return the executable for listing all the tasks that contains a date.
+     */
+    IdentifiedCommandable getListWhenCommand() {
         return new IdentifiedCommandable() {
             @Override
             public ExitStatus execute(String[] tokens) {
@@ -246,6 +251,32 @@ public class TaskManagerUsecase implements CommandRegisterable {
             @Override
             public String getId() {
                 return "listwhen";
+            }
+        };
+    }
+
+    IdentifiedCommandable getFindCommand() {
+        return new IdentifiedCommandable() {
+            @Override
+            public ExitStatus execute(String[] tokens) {
+                final String keyword = String.join(" ", tokens);
+                boolean hasKeyword = false;
+                for (int i = 0; i < tasks.size(); i++) {
+                    final Task task = tasks.get(i);
+                    if (task.nameContains(keyword)) {
+                        writable.writeln((i + 1) + ". " + task);
+                        hasKeyword = true;
+                    }
+                }
+                if (!hasKeyword) {
+                    writable.writeln("No tasks found with keyword " + keyword);
+                }
+                return ExitStatus.finishCurrentIteration;
+            }
+
+            @Override
+            public String getId() {
+                return "find";
             }
         };
     }
@@ -286,7 +317,7 @@ public class TaskManagerUsecase implements CommandRegisterable {
         );
         nestable.registerIdentifiableExecutable(getDeleteExecutable());
         nestable.registerDisposable(getDisposable());
-        nestable.registerIdentifiableExecutable(getListOfDate());
+        nestable.registerIdentifiableExecutable(getListWhenCommand());
     }
 
     /**

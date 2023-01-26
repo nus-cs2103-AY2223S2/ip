@@ -82,6 +82,16 @@ public abstract class Task implements Serializable {
         return false;
     }
 
+    /**
+     * Whether if the name of the task contains the given str.
+     *
+     * @param str the str to be checked.
+     * @return true if the name contains the str, false otherwise.
+     */
+    public boolean nameContains(String str) {
+        return this.name.contains(str);
+    }
+
     @Override
     public String serialize() {
         if (isComplete) {

@@ -131,4 +131,33 @@ public class TaskManagerUsecaseTest {
         final IdentifiedCommandable command = sut.getListTodoCommand();
         Assertions.assertEquals(ExitStatus.finishCurrentIteration, command.execute(new String[]{}));
     }
+
+    @Test
+    void getFindCommand_invocation_shouldReturnCommandableWithCorrectId() {
+        final String id = "find";
+        final IdentifiedCommandable command = sut.getFindCommand();
+        Assertions.assertEquals(id, command.getId());
+    }
+
+    @Test
+    void getFindCommand_invocation_shouldWriteTasksWhoseNameContainsTheKeywordToWriter() {
+        final String id = "find";
+        final int count = 6;
+        final String keyword = "keyword";
+        final IdentifiedCommandable command = sut.getFindCommand();
+        final Task task1 = Mockito.mock(Task.class);
+        final Task task2 = Mockito.mock(Task.class);
+
+        Mockito.when(tasks.size()).thenReturn(count);
+        Mockito.when(tasks.get(Mockito.intThat(i -> i < count / 2))).thenReturn(task1);
+        Mockito.when(tasks.get(Mockito.intThat(i -> i >= count / 2))).thenReturn(task2);
+        Mockito.when(task2.toString()).thenReturn("Task2");
+        Mockito.when(task1.nameContains(Mockito.anyString())).thenReturn(false);
+        Mockito.when(task2.nameContains(Mockito.anyString())).thenReturn(true);
+
+        command.execute(new String[]{keyword});
+
+        Mockito.verify(writer, Mockito.times(0)).writeln(Mockito.endsWith("Task1"));
+        Mockito.verify(writer, Mockito.times(count / 2)).writeln(Mockito.endsWith("Task2"));
+    }
 }
