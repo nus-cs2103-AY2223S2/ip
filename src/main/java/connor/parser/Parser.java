@@ -107,6 +107,10 @@ public class Parser {
                 tasks.deleteAllTask();
                 ui.deleteAllMessage();
                 break;
+
+            case FIND:
+                System.out.println(tasks.find(getTask(input)));
+                break;
             }
         } catch (IllegalArgumentException e) {
             Ui.printMessage("INVALID COMMAND");
