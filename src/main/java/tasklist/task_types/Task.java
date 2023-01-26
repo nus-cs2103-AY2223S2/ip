@@ -1,5 +1,7 @@
 package tasklist.task_types;
 
+import java.io.Serializable;
+
 /**
  * Represents a <code>task</code> object that contains a string holding the
  * <code>name</code> of the task
@@ -9,7 +11,7 @@ package tasklist.task_types;
  * @author Brian Quek
  */
 
-public abstract class Task {
+public abstract class Task implements Serializable {
     protected String name;
     protected boolean status;
 

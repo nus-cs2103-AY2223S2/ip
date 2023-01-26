@@ -1,12 +1,14 @@
 package tasklist.task_types;
 
+import java.io.Serializable;
+
 /**
  * Represents a <code>task</code> object with the todo tag into it.
  * 
  * 
  * @author Brian Quek
  */
-public class ToDo extends Task {
+public class ToDo extends Task implements Serializable {
 
     /**
      * Constructor for the ToDo object.

@@ -1,11 +1,11 @@
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
 import duke_exception.DukeException;
+import tasklist.TaskList;
 import tasklist.task_types.Deadline;
 import tasklist.task_types.Event;
 import tasklist.task_types.Task;
@@ -122,7 +122,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
-        ArrayList<Task> list = Storage.readData();
+        TaskList list = Storage.readData();
         boolean loop = true;
 
         String bracket = "\t_______________________________________________________";
@@ -135,8 +135,6 @@ public class Duke {
         String welcomeMsg = ("Hello from\n" + logo + "\nWhat can I do for you?");
         System.out.println(welcomeMsg);
 
-        Storage.readData();
-
         while (loop) {
             try {
                 String[] input = checkInput(inputScanner.nextLine().split(" ", 10));
@@ -145,30 +143,27 @@ public class Duke {
                 switch (input[0]) {
                     case "list":
                         System.out.println("\t Here are the tasks in your list:");
-                        for (int i = 0; i < list.size(); i++) {
-                            int index = i + 1;
-                            System.out.println("\t " + index + ". " + list.get(i).toString());
-                        }
+                        System.out.println(list);
                         break;
                     case "mark":
-                        Task markedTask = list.get(Integer.parseInt(input[1]) - 1);
-                        markedTask.setStatus(true);
+                        int markedIndex = Integer.parseInt(input[1]) - 1;
+                        list.markedTask(markedIndex);
                         System.out.println("Nice! One Task Down!");
-                        System.out.println("\t " + markedTask.toString());
+                        System.out.println("\t " + list.getTask(markedIndex).toString());
                         break;
                     case "unmark":
-                        Task unmarkedTask = list.get(Integer.parseInt(input[1]) - 1);
-                        unmarkedTask.setStatus(false);
+                        int unmarkedIndex = Integer.parseInt(input[1]) - 1;
+                        list.unmarkedTask(unmarkedIndex);
                         System.out.println("I have unmarked the task as not done yet.");
-                        System.out.println("\t " + unmarkedTask.toString());
+                        System.out.println("\t " + list.getTask(unmarkedIndex).toString());
                         break;
                     case "todo":
                         String tName = String.join(" ", Arrays.copyOfRange(input, 1, input.length));
                         ToDo toDoObj = new ToDo(tName);
-                        list.add(toDoObj);
-                        System.out.println("\tGot it. I've added this task: ");
-                        System.out.println("\t\t " + toDoObj.toString());
-                        System.out.println(String.format("Now you have %d tasks in the list", list.size()));
+                        list.addTask(toDoObj);
+                        // System.out.println("\tGot it. I've added this task: ");
+                        // System.out.println("\t\t " + toDoObj.toString());
+                        // System.out.println(list.getTotal());
                         break;
                     case "deadline":
                         int deadlineIndex = 1;
@@ -182,10 +177,10 @@ public class Duke {
                         String dDate = String.join(" ", Arrays.copyOfRange(input, deadlineIndex + 1, input.length));
                         try {
                             Deadline deadlineObj = new Deadline(dName, dDate);
-                            list.add(deadlineObj);
+                            list.addTask(deadlineObj);
                             System.out.println("\tGot it. I've added this task: ");
                             System.out.println("\t\t " + deadlineObj.toString());
-                            System.out.println(String.format("Now you have %d tasks in the list", list.size()));
+                            System.out.println(list.getTotal());
                         } catch (DateTimeParseException e) {
                             System.out.println("\t Invalid date format. Please input the right format <yyyy-mm-dd>.");
                         }
@@ -206,18 +201,18 @@ public class Duke {
                         String eFrom = String.join(" ", Arrays.copyOfRange(input, fromIndex + 1, toIndex));
                         String eTo = String.join(" ", Arrays.copyOfRange(input, toIndex + 1, input.length));
                         Event eventObj = new Event(eName, eFrom, eTo);
-                        list.add(eventObj);
+                        list.addTask(eventObj);
                         System.out.println("\tGot it. I've added this task: ");
                         System.out.println("\t\t " + eventObj.toString());
-                        System.out.println(String.format("Now you have %d tasks in the list", list.size()));
+                        System.out.println(list.getTotal());
                         break;
                     case "delete":
                         int deleteIndex = Integer.parseInt(input[1]) - 1;
-                        Task deletedTask = list.get(deleteIndex);
-                        list.remove(deleteIndex);
+                        Task deletedTask = list.getTask(deleteIndex);
+                        list.deleteTask(deleteIndex);
                         System.out.println("Following Task has been deleted:");
                         System.out.println("\t " + deletedTask.toString());
-                        System.out.println(String.format("Now you have %d tasks in the list", list.size()));
+                        System.out.println(list.getTotal());
                         break;
                     case "bye":
                         System.out.println("\tBye! See you soon!");
