@@ -5,29 +5,27 @@ import java.util.ArrayList;
 /** A class TaskList that contains the task list e.g., it has operations to add/delete tasks in the list */
 public class TaskList {
     /** The array that stores the list */
-    private static ArrayList<Task> arr;
+    private static ArrayList<Task> tasks;
 
     /**
      * Initializes an TaskList object.
      *
-     * @return A TaskList instance
      */
-    public TaskList(){
-        arr = new ArrayList<>();
+    public TaskList() {
+        tasks = new ArrayList<>();
     }
 
     /**
      * Initializes an TaskList object with the given array.
      *
-     * @param arr The given array that contains tasks
-     * @return A TaskList instance
+     * @param tasks The given array that contains tasks
      */
-    public TaskList(ArrayList<Task> arr){
-        this.arr = arr;
+    public TaskList(ArrayList<Task> tasks){
+        this.tasks = tasks;
     }
 
     public static ArrayList<Task> getList() {
-        return arr;
+        return tasks;
     }
 
     /**
@@ -37,8 +35,8 @@ public class TaskList {
      * @return The name of the task marked
      */
     public static String markDone(int index) {
-        arr.get(index).markDone();
-        return arr.get(index).getTaskName();
+        tasks.get(index).markDone();
+        return tasks.get(index).getTaskName();
     }
 
     /**
@@ -48,8 +46,8 @@ public class TaskList {
      * @return The name of the task unmarked
      */
     public static String markUndone(int index) {
-        arr.get(index).markUndone();
-        return arr.get(index).getTaskName();
+        tasks.get(index).markUndone();
+        return tasks.get(index).getTaskName();
     }
 
     /**
@@ -58,7 +56,7 @@ public class TaskList {
      * @param task The task
      */
     public static void addTask(Task task) {
-        arr.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -68,13 +66,13 @@ public class TaskList {
      * @return The task removed
      */
     public static Task remove(int index) {
-        return arr.remove(index);
+        return tasks.remove(index);
     }
 
     public static ArrayList<Task> findMatch(String keyword) {
         ArrayList<Task> matchedTasks = new ArrayList<>();
-        for (int i = 0; i < arr.size(); i++) {
-            Task temp = arr.get(i);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task temp = tasks.get(i);
             if (temp.getTaskName().contains(keyword)) {
                 matchedTasks.add(temp);
             }
@@ -86,7 +84,7 @@ public class TaskList {
      * Destroy the TaskList
      */
     public static void close() {
-        arr = null;
+        tasks = null;
     }
 
 }
