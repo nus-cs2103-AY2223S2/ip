@@ -137,6 +137,7 @@ public class Duke {
                     break;
                 }
             }
+            fileReader.close();
             return listOfThings;
 
         } catch (Exception e) {
