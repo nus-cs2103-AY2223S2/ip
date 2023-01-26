@@ -13,43 +13,45 @@ import duke.main.Ui;
  * Class for parsing the input from a user into tokens that commands can use.
  */
 public class Parser implements BiConsumer<String, Duke> {
-  private final Map<String, Command> store;
+    private final Map<String, Command> store;
 
-  public Parser(Map<String, Command> store) {
-    this.store = store;
-  }
-
-  public Parser(Stream<Command> cmds) {
-    this(cmds.collect(
-      Collectors.toUnmodifiableMap(Command::getLabel, Function.identity())
-    ));
-  }
-
-  /**
-   * This method is called every time the user enters an invalid command string
-   * @param input Raw string as entered by the user
-   * @param instance Instance of Duke to run the command with
-   */
-  public void onUnknownCommand(String input, final Duke instance) {
-    Ui.print("Unknown command '%s' :(", input);
-  }
-
-  /**
-   * Try to execute the command as specified by the input string
-   * @param input Raw string as entered by the user
-   * @param instance Instance of Duke to run the command with
-   */
-  public void executeCommand(String input, final Duke instance) {
-    String[] tokens = input.split(" ");
-    Command cmd = this.store.getOrDefault(tokens[0].toLowerCase(), null);
-
-    if (cmd != null) {
-      cmd.accept(tokens, instance);
-    } else {
-      onUnknownCommand(input, instance);
+    public Parser(Map<String, Command> store) {
+        this.store = store;
     }
-  }
 
-  @Override
-  public void accept(String input, final Duke instance) { executeCommand(input, instance); }
+    public Parser(Stream<Command> cmds) {
+        this(cmds.collect(
+            Collectors.toUnmodifiableMap(Command::getLabel, Function.identity())
+        ));
+    }
+
+    /**
+     * This method is called every time the user enters an invalid command string
+     * @param input Raw string as entered by the user
+     * @param instance Instance of Duke to run the command with
+     */
+    public void onUnknownCommand(String input, final Duke instance) {
+        Ui.print("Unknown command '%s' :(", input);
+    }
+
+    /**
+     * Try to execute the command as specified by the input string
+     * @param input Raw string as entered by the user
+     * @param instance Instance of Duke to run the command with
+     */
+    public void executeCommand(String input, final Duke instance) {
+        String[] tokens = input.split(" ");
+        Command cmd = this.store.getOrDefault(tokens[0].toLowerCase(), null);
+
+        if (cmd != null) {
+            cmd.accept(tokens, instance);
+        } else {
+            onUnknownCommand(input, instance);
+        }
+    }
+
+    @Override
+    public void accept(String input, final Duke instance) { 
+        executeCommand(input, instance);
+    }
 }

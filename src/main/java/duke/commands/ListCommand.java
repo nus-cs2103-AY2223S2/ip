@@ -8,23 +8,22 @@ import duke.task.Task;
 /**
  * Command to print the current list of tasks
  */
-public class ListCommand extends Command{
-
-  public ListCommand() {
-    super("list");
-  }
-
-  @Override
-  protected void execute(String[] tokens, final Duke instance) {
-    List<Task> tasks = instance.getTaskList();
-
-    if (tasks.size() == 0) {
-      output("No stored tasks!");
-    } else {
-      output("A total of %d tasks\n", tasks.size());
-      for (int i = 0; i < tasks.size(); i++) {
-        output("%d. %s\n", i + 1, tasks.get(i).toString());
-      }
+public class ListCommand extends Command {
+    public ListCommand() {
+        super("list");
     }
-  }
+
+    @Override
+    protected void execute(String[] tokens, Duke instance) {
+        List<Task> tasks = instance.getTaskList();
+
+        if (tasks.size() == 0) {
+            output("No stored tasks!");
+        } else {
+            output("A total of %d tasks\n", tasks.size());
+            for (int i = 0; i < tasks.size(); i++) {
+                output("%d. %s\n", i + 1, tasks.get(i).toString());
+            }
+        }
+    }
 }
