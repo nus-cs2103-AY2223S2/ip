@@ -72,6 +72,7 @@ public class Duke {
             int count = taskList.size();
             response.append("  ").append(taskList.getTaskString(count - 1)).append("\n");
             response.append("Now you have ").append(count).append(" tasks in the list.");
+            memory.saveState(taskList);
             return response.toString();
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid Date and Time provided, use the format: dd/MM/yyyy HH:mm");

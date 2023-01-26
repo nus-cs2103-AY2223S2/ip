@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
 
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+    protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
     protected LocalDateTime by;
 
     Deadline(String description, LocalDateTime by) throws IllegalArgumentException {
@@ -13,7 +13,7 @@ public class Deadline extends Task{
 
     @Override
     public String toSaveFormat() {
-        return "D||" + super.toSaveFormat() + "||" + this.by;
+        return "D||" + super.toSaveFormat() + "||" + by.format(formatter);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class Deadline extends Task{
 
     public static Deadline fromSaveFormat(String savedData) {
         String[] inputs = savedData.split("\\|\\|");
-        Deadline generatedDeadline = new Deadline(inputs[2], inputs[3]);
+        Deadline generatedDeadline = new Deadline(inputs[2], LocalDateTime.parse(inputs[3], formatter));
         if (inputs[1].equals("1")) {
             generatedDeadline.setCompleted(true);
         }
