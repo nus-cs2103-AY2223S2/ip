@@ -13,6 +13,27 @@ public class TaskList {
         return this.numTasks;
     }
 
+    public String addTask(String name){ //todo
+        Task task = new ToDo(name);
+        this.taskList.add(task);
+        this.numTasks += 1;
+        return "Task added. You now have:" + this.numTasks + "task(s).";
+    }
+
+    public String addTask(String name, String end){ //deadline
+        Task task = new Deadline(name,end);
+        this.taskList.add(task);
+        this.numTasks += 1;
+        return "Task added. You now have:" + this.numTasks + "task(s).";
+    }
+
+    public String addTask(String name, String start, String end){ //event
+        Task task = new Event(name,start,end);
+        this.taskList.add(task);
+        this.numTasks += 1;
+        return "Task added. You now have:" + this.numTasks + "task(s).";
+    }
+
     public String listTasks(){
         String output = "";
         for(int i = 0; i<taskList.size(); i++){
