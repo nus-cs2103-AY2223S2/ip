@@ -1,7 +1,27 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+
+/**
+ * The Duke program implements a 'to-do' list
+ * where users can add, mark and delete tasks 
+ */
 
 public class Duke {
+
+    enum Type {
+        TODO,
+        DEADLINE,
+        EVENT,
+        MARK,
+        UNMARK,
+        LIST,
+        DELETE,
+        BYE,
+        ERR
+    }
 
     public static class Task {
         protected String description;
@@ -77,7 +97,81 @@ public class Duke {
         }
     }
 
+    public static ArrayList<Task> readSave() {
+        try {
+            ArrayList<Task> listOfThings = new ArrayList<Task>();
+            File saveFile = new File("src/duke.txt");
+            Scanner fileReader = new Scanner(saveFile);
+            while (fileReader.hasNextLine()) {
+                String data = fileReader.nextLine();
+                char taskType = data.charAt(4);
+                boolean taskDone = (data.charAt(7) == 'X');
+                String taskName = data.substring(10, data.length());
+
+                switch(taskType) {
+                case 'T':
+                    Todo newTodo = new Todo(taskName);
+                    if (taskDone) {
+                        newTodo.markDone();
+                    }
+                    listOfThings.add(newTodo);
+                    break;
+                case 'D':
+                    String byWhen = data.substring(data.indexOf("by:") + 4, data.length() - 1);
+                    Deadline newDeadline = new Deadline(taskName, byWhen);
+                    if (taskDone) {
+                        newDeadline.markDone();
+                    }
+                    listOfThings.add(newDeadline);
+                    break;
+                case 'E':
+                    String fromWhen = data.substring(data.indexOf("from:") + 6, data.indexOf("to:") - 1);
+                    String toWhen = data.substring(data.indexOf("to:") + 4, data.length() - 1);
+                    Event newEvent = new Event(taskName, fromWhen, toWhen);
+                    if (taskDone) {
+                        newEvent.markDone();
+                    }
+                    listOfThings.add(newEvent);
+                    break;
+                default:
+                    break;
+                }
+            }
+            return listOfThings;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
+
+    }
+
+    private static void appendToFile(String filePath, ArrayList<Task> listOfThings) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write("");
+        fw.close();
+        fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        for (int i = 0; i < listOfThings.size(); i++) {
+           fw.write(i + 1 + ". " + listOfThings.get(i) + System.lineSeparator());
+        }
+        fw.close();
+    }
+
     public static void main(String[] args) {
+        ArrayList<Task> listOfThings = new ArrayList<Task>();
+        try {
+            File saveFile = new File("src/duke.txt");
+            if (saveFile.createNewFile()) {
+                System.out.println("Save file created: " + saveFile.getName());
+            } else {
+                listOfThings = Duke.readSave();
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -85,19 +179,32 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        ArrayList<Task> listOfThings = new ArrayList<Task>();
         boolean loop = true;
         while (loop) {
             Scanner echoScanner = new Scanner(System.in);
             String msg = echoScanner.nextLine();
             String firstWord = "";
+            if (msg.contains(" ")) {
+                firstWord = msg.substring(0, msg.indexOf(" "));
+            } else {
+                firstWord = msg;
+            }
+            
+            Type cmdType = Type.ERR;
+
+            try { 
+                cmdType = Type.valueOf(firstWord.toUpperCase());
+            } catch (Exception ex) {
+                System.err.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+            
             Integer secondInt = 0;
-            String bye = "bye";
-            String showList = "list";
             String byWhen = "";
             String fromWhen = "";
             String toWhen = "";
-            if (msg.contains("mark")) {
+
+            switch (cmdType) {
+            case MARK:
                 try {
                     firstWord = msg.substring(0, msg.indexOf(" "));
                     secondInt = Integer
@@ -107,10 +214,16 @@ public class Duke {
                     listOfThings.set(secondInt - 1, thisTask);
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(thisTask);
+                    try {
+                        appendToFile("src/duke.txt", listOfThings);
+                    } catch (Exception ex) {
+                        System.err.println("Error! There is no save file!");
+                    }
                 } catch (Exception ex) {
                     System.err.println("Please indicate a valid task!");
                 }
-            } else if (msg.contains("unmark")) {
+                break;
+            case UNMARK:
                 try {
                     firstWord = msg.substring(0, msg.indexOf(" "));
                     secondInt = Integer
@@ -120,20 +233,32 @@ public class Duke {
                     listOfThings.set(secondInt - 1, thisTask);
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(thisTask);
+                    try {
+                        appendToFile("src/duke.txt", listOfThings);
+                    } catch (Exception ex) {
+                        System.err.println("Error! There is no save file!");
+                    }
                 } catch (Exception ex) {
                     System.err.println("Please indicate a valid task!");
                 }
-            } else if (msg.contains("delete")) {
+                break;
+            case DELETE:
                 try {
                     secondInt = Integer.parseInt(msg.substring(msg.indexOf(" ") + 1, msg.length()));
                     System.out.println("Noted. I've removed this task!");
                     System.out.println(listOfThings.get(secondInt - 1));
                     listOfThings.remove(secondInt - 1);
                     System.out.println("Now you have " + listOfThings.size() + " tasks in the list.");
+                    try {
+                        appendToFile("src/duke.txt", listOfThings);
+                    } catch (Exception ex) {
+                        System.err.println("Error! There is no save file!");
+                    }
                 } catch (Exception ex) {
                     System.err.println("Please indicate a valid task to delete!");
                 }
-            } else if (msg.contains("todo")) {
+                break;
+            case TODO:
                 try {
                     firstWord = msg.substring(msg.indexOf(" ") + 1, msg.length());
                     Todo newTodo = new Todo(firstWord);
@@ -141,36 +266,63 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newTodo);
                     System.out.println("Now you have " + listOfThings.size() + " tasks in the list.");
+                    try {
+                        appendToFile("src/duke.txt", listOfThings);
+                    } catch (Exception ex) {
+                        System.err.println("Error! There is no save file!");
+                    }
                 } catch (Exception ex) {
                     System.err.println("Whoops! The description of a todo cannot be empty!");
                 }
-            } else if (msg.contains("deadline")) {
-                firstWord = msg.substring(msg.indexOf(" ") + 1, msg.indexOf("/by") - 1);
-                byWhen = msg.substring(msg.indexOf("/by") + 4, msg.length());
-                Deadline newDeadline = new Deadline(firstWord, byWhen);
-                listOfThings.add(newDeadline);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(newDeadline);
-                System.out.println("Now you have " + listOfThings.size() + " tasks in the list.");
-            } else if (msg.contains("event")) {
-                firstWord = msg.substring(msg.indexOf(" ") + 1, msg.indexOf("/from") - 1);
-                fromWhen = msg.substring(msg.indexOf("/from") + 6, msg.indexOf("/to") - 1);
-                toWhen = msg.substring(msg.indexOf("/to") + 4, msg.length());
-                Event newEvent = new Event(firstWord, fromWhen, toWhen);
-                listOfThings.add(newEvent);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(newEvent);
-                System.out.println("Now you have " + listOfThings.size() + " tasks in the list.");
-            } else if (bye.equalsIgnoreCase(msg)) {
+                
+                break;
+            case DEADLINE:
+                try {
+                    firstWord = msg.substring(msg.indexOf(" ") + 1, msg.indexOf("/by") - 1);
+                    byWhen = msg.substring(msg.indexOf("/by") + 4, msg.length());
+                    Deadline newDeadline = new Deadline(firstWord, byWhen);
+                    listOfThings.add(newDeadline);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(newDeadline);
+                    System.out.println("Now you have " + listOfThings.size() + " tasks in the list.");
+                    try {
+                        appendToFile("src/duke.txt", listOfThings);
+                    } catch (Exception ex) {
+                        System.err.println("Error! There is no save file!");
+                    }
+                } catch (Exception ex) {
+                    System.err.println("Whoops! Please enter the deadline followed by its due date preceeded by a '/by'");
+                }
+                break;
+            case EVENT:
+                try {
+                    firstWord = msg.substring(msg.indexOf(" ") + 1, msg.indexOf("/from") - 1);
+                    fromWhen = msg.substring(msg.indexOf("/from") + 6, msg.indexOf("/to") - 1);
+                    toWhen = msg.substring(msg.indexOf("/to") + 4, msg.length());
+                    Event newEvent = new Event(firstWord, fromWhen, toWhen);
+                    listOfThings.add(newEvent);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(newEvent);
+                    System.out.println("Now you have " + listOfThings.size() + " tasks in the list.");
+                    try {
+                        appendToFile("src/duke.txt", listOfThings);
+                    } catch (Exception ex) {
+                        System.err.println("Error! There is no save file!");
+                    }
+                } catch (Exception ex) {
+                    System.err.println("Whoops! Please enter the event followed by its /from and /to timings.");
+                }
+                break;
+            case BYE:
                 System.out.println("Bye. Hope to see you again soon!");
                 echoScanner.close();
                 loop = false;
-            } else if (showList.equalsIgnoreCase(msg)) {
+                break;
+            case LIST:
                 for (int i = 0; i < listOfThings.size(); i++) {
                     System.out.println(i + 1 + ". " + listOfThings.get(i));
                 }
-            } else {
-                System.err.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                break;
             }
         }
     }
