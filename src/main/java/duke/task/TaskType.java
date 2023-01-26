@@ -1,5 +1,24 @@
 package duke.task;
 
+/**
+ * The types of Tasks available.
+ * {@link #ToDos}
+ * {@link #Deadlines}
+ * {@link #Events}
+ */
 public enum TaskType {
-    ToDos, Deadlines, Events
+    /**
+     * Represents a Todos Task.
+     */
+    ToDos,
+
+    /**
+     * Represents a Deadlines Task.
+     */
+    Deadlines,
+    /**
+     * Represents a Events Task.
+     */
+
+    Events
 }

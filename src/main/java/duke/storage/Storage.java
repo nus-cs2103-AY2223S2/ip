@@ -15,22 +15,43 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a Storage.
+ * Responsible for the reading and writing to save file for Duke.
+ * @author pzhengze.
+ */
 public class Storage {
+    /** Relative path of the save file */
     private final String path;
+
+    /** The save file in File object form */
     private final File saveFile;
 
+    /**
+     * Constructor for Storage object.
+     * @param path The relative path of the save file.
+     */
     public Storage(String path) {
         this.path = path;
         saveFile = new File(path);
     }
 
+    /**
+     * Deletes old save file and saves input task list into new save file.
+     * @param tasks The list of tasks to be saved.
+     * @throws DukeWriteException if the writer fails to write to save file.
+     * @throws DukeFileCreationException if a new save file fails to be created.
+     */
     public void save(ArrayList<Task> tasks) throws DukeWriteException, DukeFileCreationException {
+        // Deletes old save and creates new one.
         saveFile.delete();
         try {
             saveFile.createNewFile();
         } catch (IOException e) {
             throw new DukeFileCreationException();
         }
+
+        // Convert all task into String form and writes it into save file.
         StringBuilder save = new StringBuilder();
         for (Task task : tasks) {
             save.append(task.save());
@@ -38,7 +59,12 @@ public class Storage {
         this.writeToFile(save.toString());
     }
 
-    public void writeToFile(String s) throws DukeWriteException {
+    /**
+     * Appends given string into a new line at bottom of save file.
+     * @param s The string to be appended.
+     * @throws DukeWriteException if the writer fails to write into the save file.
+     */
+    private void writeToFile(String s) throws DukeWriteException {
         try {
             FileWriter fw = new FileWriter(path, true);
             fw.write(s);
@@ -48,17 +74,27 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads save file and creates a list of Tasks based on it.
+     * @return The list of Tasks.
+     * @throws DukeFileCreationException if it fails to create a save file.
+     * @throws DukeReadException if it fails to read the save file.
+     */
     public ArrayList<Task> loadSaveFile() throws DukeFileCreationException, DukeReadException {
         Scanner scanner;
 
         ArrayList<Task> list = new ArrayList<>();
 
+        // Checks if the save file's parent directory and the save file exists.
+        // Creates them if they do not exit.
+        // Returns empty list if save file does not exist.
         try {
             if (!saveFile.getParentFile().exists()) {
                 saveFile.getParentFile().mkdirs();
             }
             if (!saveFile.exists()) {
                 saveFile.createNewFile();
+                return list;
             }
         } catch (IOException e) {
             throw new DukeFileCreationException();
@@ -70,6 +106,7 @@ public class Storage {
             throw new DukeReadException();
         }
 
+        // Reads save file line by line and creates new Tasks based on it.
         while (scanner.hasNext()) {
             String fn = scanner.next();
             String[] details = scanner.nextLine()

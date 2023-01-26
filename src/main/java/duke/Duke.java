@@ -5,13 +5,26 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-public class Duke {
 
+/**
+ * Represents the Duke personal assistant.
+ * @author pzhengze.
+ */
+public class Duke {
+    /** Reference for the Storage object used for i/o to save file. */
     private final Storage storage;
+    /** Reference for the TaskList object used for storing Task objects. */
     private TaskList tasks;
+    /** Reference for the Ui object used for user interaction in the console. */
     private final Ui ui;
+    /** Reference for the Parser object used for parsing user input. */
     private final Parser parser;
 
+    /**
+     * Constructor for Duke object.
+     * Creates a new Object with the save file at the specified path.
+     * @param path The relative path of the save text file.
+     */
     public Duke(String path) {
         ui = new Ui();
         storage = new Storage(path);
@@ -24,10 +37,17 @@ public class Duke {
         parser = new Parser(tasks);
     }
 
+    /**
+     * Creates a new Duke object at the default save path and runs it.
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Runs the duke object, allowing the user to interact with it.
+     */
     public void run() {
         this.ui.greet();
         String input = "";
