@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
@@ -60,14 +61,18 @@ public class Duke {
                         System.out.println("Now you have " + task_list.size() + " tasks in the list.");
                         break;
                     case "deadline":
-                        String msg = segments[1].split("/by",2)[0];
-                        String by = segments[1].split("/by",2)[1];
-                        Task d = new Deadline(msg, by);
-                        task_list.add(d);
-                        saveList();
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println(d);
-                        System.out.println("Now you have " + task_list.size() + " tasks in the list.");
+                        try {
+                            String msg = segments[1].split("/by ",2)[0];
+                            String by = segments[1].split("/by ",2)[1];
+                            Task d = new Deadline(msg, by);
+                            task_list.add(d);
+                            saveList();
+                            System.out.println("Got it. I've added this task:");
+                            System.out.println(d);
+                            System.out.println("Now you have " + task_list.size() + " tasks in the list.");
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Date Unacceptable (YYYY-MM-DD PLZ)");
+                        }
                         break;
                     case "event":
                         String event = segments[1].split("/from",2)[0];

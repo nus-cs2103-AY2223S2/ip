@@ -1,4 +1,2 @@
-T0mmm
-T0return book
-D0read book  /by  tomorrow
-E0book admire  /from  tomorrow  /to  Wednesday
+D0return book  /by 2023-01-01
+D0return book  /by 2024-09-10
