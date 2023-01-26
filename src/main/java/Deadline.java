@@ -18,6 +18,9 @@ public class Deadline extends Task {
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = by;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        LocalDate date = LocalDate.parse(by, format);
+        String formattedDate = date.format(format);
     }
     @Override
     public String getDetailedDescription() {
