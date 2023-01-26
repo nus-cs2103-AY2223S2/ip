@@ -1,4 +1,5 @@
 package duke;
+
 /**
  * DukeException is a custom Exception class representing Duke chatbot specific exceptions.
  *
@@ -6,7 +7,7 @@ package duke;
  * @version     %I%, %G%
  * @since       1.0
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     public DukeException(String errMsg){
         super(errMsg);
     }

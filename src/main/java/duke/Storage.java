@@ -19,14 +19,14 @@ public class Storage {
     private File saveFile;
     private final String SAVE_FILE_DIR_PATH = System.getProperty("user.dir") + "/data/";
     private final String SAVE_FILE_PATH = SAVE_FILE_DIR_PATH + "dukeSave.txt";
-    public Storage(){
+    public Storage() {
         File savedFileDir = new File(SAVE_FILE_DIR_PATH);
         File savedTaskFile = new File(SAVE_FILE_PATH);
-        try{
-            if (!savedFileDir.exists()){
+        try {
+            if (!savedFileDir.exists()) {
                 savedFileDir.mkdir();
             }
-            if(!savedTaskFile.exists()){
+            if (!savedTaskFile.exists()) {
                 savedTaskFile.createNewFile();
             }
         } catch (IOException e){
@@ -35,7 +35,7 @@ public class Storage {
         this.saveFile = savedTaskFile;
     }
 
-    public ArrayList<Task> load(){
+    public ArrayList<Task> load() {
         ArrayList<Task> userTasks = new ArrayList<>();
         BufferedReader reader;
         try {
@@ -45,12 +45,12 @@ public class Storage {
                 String[] parts = taskStr.split("\\|");
                 boolean completed = parts[1].equals("1");
                 String taskDescription = parts[2];
-                if (parts.length == 3){
+                if (parts.length == 3) {
                     Todo newTodo = new Todo(taskDescription, completed);
                     userTasks.add(newTodo);
                 }
-                if (parts.length == 4){
-                    try{
+                if (parts.length == 4) {
+                    try {
                         String[] deadlineParts = parts[3].split(" ");
                         String deadlineDate = deadlineParts[0];
                         String deadlineTime = deadlineParts[1];
@@ -58,12 +58,12 @@ public class Storage {
                         Date parsedTime = new SimpleDateFormat("hh:mm").parse(deadlineTime);
                         Deadline newDeadline = new Deadline(taskDescription, parsedDate, parsedTime, completed);
                         userTasks.add(newDeadline);
-                    } catch (DateTimeParseException | ParseException e){
+                    } catch (DateTimeParseException | ParseException e) {
 
                     }
                 }
-                if(parts.length == 5){
-                    try{
+                if (parts.length == 5) {
+                    try {
                         String[] eventStartParts = parts[3].split(" ");
                         String[] eventEndParts = parts[4].split(" ");
                         String eventStartDate = eventStartParts[0];
@@ -77,26 +77,26 @@ public class Storage {
                         Event newEvent = new Event(taskDescription, parsedStartDate, parsedStartTime,
                                 parsedEndDate, parsedEndTime, completed);
                         userTasks.add(newEvent);
-                    } catch(DateTimeParseException | ParseException e){
+                    } catch(DateTimeParseException | ParseException e) {
 
                     }
                 }
                 taskStr = reader.readLine();
             }
             reader.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return userTasks;
     }
 
-    public  void saveTasksToFile(ArrayList<Task> taskList){
+    public void saveTasksToFile(ArrayList<Task> taskList) {
         try {
             String toWrite = "";
             FileWriter fileWriter = new FileWriter(SAVE_FILE_PATH);
-            for(int i = 0; i< taskList.size(); i++){
+            for(int i = 0; i< taskList.size(); i++) {
                 String taskType = taskList.get(i).getClass().getTypeName();
-                switch (taskType){
+                switch (taskType) {
                     case "Todo":
                         Todo todo = (Todo)taskList.get(i);
                         toWrite = taskType + "|" + (todo.getIsDone() ? 1 : 0) + "|" + todo.getDescription() + "\n";
@@ -119,7 +119,7 @@ public class Storage {
                 }
             }
             fileWriter.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

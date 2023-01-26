@@ -13,7 +13,7 @@ import java.util.Date;
  * @version     %I%, %G%
  * @since       1.0
  */
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate eventStartDate;
     private LocalDate eventEndDate;
     private Date eventStartTime;
@@ -29,7 +29,7 @@ public class Event extends Task{
      * @param eventEndDate End time for the event task.
      * @param isDone Event task completion status.
      */
-    public Event(String description, LocalDate eventStartDate, Date eventStartTime, LocalDate eventEndDate, Date eventEndTime, boolean isDone){
+    public Event(String description, LocalDate eventStartDate, Date eventStartTime, LocalDate eventEndDate, Date eventEndTime, boolean isDone) {
         super(description, isDone);
         this.eventStartDate = eventStartDate;
         this.eventEndDate = eventEndDate;
@@ -74,6 +74,7 @@ public class Event extends Task{
         String formattedEndTime = new SimpleDateFormat("h:mm a").format(eventEndTime);
         String eventStartCombined = formattedStartDate + " " + formattedStartTime;
         String eventEndCombined = formattedEndDate + " " + formattedEndTime;
-        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (from: " + eventStartCombined + " to: " + eventEndCombined +")";
+        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (from: " + eventStartCombined +
+                " to: " + eventEndCombined +")";
     }
 }

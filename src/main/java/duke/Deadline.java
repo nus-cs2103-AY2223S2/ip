@@ -12,8 +12,7 @@ import java.util.Date;
  * @version     %I%, %G%
  * @since       1.0
  */
-public class Deadline extends Task{
-
+public class Deadline extends Task {
     private LocalDate deadlineDate;
     private Date deadlineTime;
 
@@ -25,7 +24,7 @@ public class Deadline extends Task{
      * @param deadlineTime Deadline time for the deadline task.
      * @param isDone Deadline task completion status.
      */
-    public Deadline(String description, LocalDate deadlineDate, Date deadlineTime, boolean isDone){
+    public Deadline(String description, LocalDate deadlineDate, Date deadlineTime, boolean isDone) {
         super(description, isDone);
         this.deadlineDate = deadlineDate;
         this.deadlineTime = deadlineTime;
@@ -37,7 +36,7 @@ public class Deadline extends Task{
      * @return Formatted deadline date and time, separated by a single space.
      *
      */
-    public String getDeadline(){
+    public String getDeadline() {
         String formattedTime = new SimpleDateFormat("h:mm").format(deadlineTime);
         return deadlineDate + " " + formattedTime;
     }

@@ -9,11 +9,10 @@ package duke;
  * @since       1.0
  */
 public class Ui {
-
     /**
      * Constructor for Ui class, displaying greeting UI when user first starts the program.
      */
-    public Ui(){
+    public Ui() {
         final String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
