@@ -1,11 +1,22 @@
 package duke;
 
 import java.util.Scanner;
+
+/**
+ * Encapsulates a Command Line Application which acts as a Task Manager.
+ *
+ * @author Sean Chin Jun Kai
+ */
 public class Duke {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructor to initialise the Task Manager.
+     *
+     * @param filePath the path of the file where we want to store the tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -17,6 +28,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Opens up the Task Manager to taking in input and executing commands.
+     *
+     */
     public void run() {
         ui.showWelcomeMessage();
         Scanner scanner = new Scanner(System.in);
@@ -39,14 +54,14 @@ public class Duke {
                     case MARK: {
                         int id = Parser.parseTask(Parser.getArgs());
                         Task chosen = tasks.getTask(id);
-                        tasks.markTask(chosen);
+                        chosen.mark();
                         ui.markTaskMessage(chosen);
                         break;
                     }
                     case UNMARK: {
                         int id = Parser.parseTask(Parser.getArgs());
                         Task chosen = tasks.getTask(id);
-                        tasks.unmarkTask(chosen);
+                        chosen.unmark();
                         ui.unmarkTaskMessage(chosen);
                         break;
 

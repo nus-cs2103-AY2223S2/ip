@@ -7,6 +7,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a storage unit which handles loading tasks from the
+ * file and saving tasks in the file.
+ *
+ * @author Sean Chin Jun Kai
+ */
 public class Storage {
 
     private static final String dirPath = System.getProperty("user.home") + "/ip/data";
@@ -15,6 +21,12 @@ public class Storage {
         this.filePath = path;
     }
 
+    /**
+     * Loads all saved tasks in txt file.
+     *
+     * @return List of saved tasks.
+     * @throws DukeException if there is an error with reading or creating the txt file.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -36,6 +48,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves all tasks into txt file.
+     *
+     * @param tasks List of current tasks.
+     * @throws DukeException if there is an error writing to the txt file.
+     */
     public void saveToFile(ArrayList<Task> tasks) throws DukeException  {
         try {
             FileWriter fw = new FileWriter(dirPath + filePath);
@@ -49,6 +67,14 @@ public class Storage {
         }
     }
 
+
+    /**
+     * Formats tasks in txt file into corresponding Task objects.
+     *
+     * @param input task in txt file.
+     * @return Task object.
+     * @throws DukeException if there is an error reading the file.
+     */
     public static Task readTaskString(String input) throws DukeException{
         String[] parsed = input.split(" \\| ");
         Task task;
