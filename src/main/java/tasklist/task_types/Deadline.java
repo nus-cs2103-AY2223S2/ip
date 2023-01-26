@@ -1,6 +1,5 @@
 package tasklist.task_types;
 
-import java.io.Serializable;
 import java.time.format.DateTimeParseException;
 
 import utility.date.Date;
@@ -12,7 +11,7 @@ import utility.date.Date;
  * 
  * @author Brian Quek
  */
-public class Deadline extends Task implements Serializable {
+public class Deadline extends Task {
     protected Date deadline;
 
     /**

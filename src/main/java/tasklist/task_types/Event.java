@@ -1,7 +1,5 @@
 package tasklist.task_types;
 
-import java.io.Serializable;
-
 /**
  * Represents a <code>task</code> object that contains a string holding the
  * <code>event</code> time
@@ -10,7 +8,7 @@ import java.io.Serializable;
  * 
  * @author Brian Quek
  */
-public class Event extends Task implements Serializable {
+public class Event extends Task {
     protected String from;
     protected String to;
 
