@@ -1,11 +1,11 @@
+import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner s = new Scanner(System.in);
-        ArrayList<Task> t = new ArrayList<>();
+        ArrayList<Task> taskArrayList = new ArrayList<>();
         final String markAsDone = "Nice! I've marked this task as done:";
         final String unMarkTask = "OK, I've marked this task as not done yet:";
         final String addedTask = "Got it, I've added this task:";
@@ -13,24 +13,28 @@ public class Duke {
         System.out.println("Hello from Bench Monster");
         System.out.println("What can I do for you?");
 
+        readData(taskArrayList);
         while (true) {
+            //File class retrieve
             String type = s.nextLine();
             String[] tokens = type.split("\\s+");
             if (tokens[0].equalsIgnoreCase("bye")) {
+                //File class load
+                saveData(taskArrayList);
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (tokens[0].equalsIgnoreCase("list")) {
-                showList(t);
+                showList(taskArrayList);
             } else if (tokens[0].equalsIgnoreCase("mark")) {
                 try {
 
                     int i = Integer.parseInt(tokens[1]) - 1;
-                    if(i >= t.size()) {
+                    if(i >= taskArrayList.size()) {
                         throw new Exception();
                     }
-                    t.get(i).mark();
+                    taskArrayList.get(i).mark();
                     System.out.println(markAsDone);
-                    System.out.println(t.get(i).toString());
+                    System.out.println(taskArrayList.get(i).toString());
                 } catch(Exception e) {
                     System.out.println("Invalid value, there isn't this much tasks in the list :-( ");
                 }
@@ -38,12 +42,12 @@ public class Duke {
             } else if (tokens[0].equalsIgnoreCase("unmark")) {
                 int i = Integer.parseInt(tokens[1]) - 1;
                 try {
-                    if(i >= t.size()) {
+                    if(i >= taskArrayList.size()) {
                         throw new Exception();
                     }
-                    t.get(i).unmarked();
+                    taskArrayList.get(i).unmarked();
                     System.out.println(unMarkTask);
-                    System.out.println(t.get(i).toString());
+                    System.out.println(taskArrayList.get(i).toString());
                 } catch(Exception e) {
                     System.out.println("Invalid value, there isn't this much tasks in the list :-( ");
                 }
@@ -55,10 +59,11 @@ public class Duke {
                     }
                     String des = type.substring(type.indexOf(" ")).trim();
                     Task newTask = new ToDo(des);
-                    t.add(newTask);
+                    taskArrayList.add(newTask);
+                    realTimeSave(taskArrayList);
                     System.out.println(addedTask);
                     System.out.println(newTask);
-                    System.out.println("Now you have " + noOfTask(t) + " task(s) in the list.");
+                    System.out.println("Now you have " + noOfTask(taskArrayList) + " task(s) in the list.");
                 } catch(Exception e) {
                     System.out.println("OOPS!!! The description of a todo cannot be empty");
                 }
@@ -71,10 +76,11 @@ public class Duke {
                     String des = type.substring(type.indexOf(" ")).trim();
                     String[] deadline = des.split("/by");
                     Deadline dead = new Deadline(deadline[0].trim(), deadline[1].trim());
-                    t.add(dead);
+                    taskArrayList.add(dead);
+                    realTimeSave(taskArrayList);
                     System.out.println(addedTask);
                     System.out.println(dead);
-                    System.out.println("Now you have " + noOfTask(t) + " task(s) in the list.");
+                    System.out.println("Now you have " + noOfTask(taskArrayList) + " task(s) in the list.");
                 } catch(Exception e) {
                     System.out.println("OOPS!!! The description of a deadline cannot be empty");
                 }
@@ -87,10 +93,11 @@ public class Duke {
                     String des = type.substring(type.indexOf(" "));
                     String[] events = des.split("/");
                     Event e = new Event(events[0].trim(), events[1].trim(), events[2].trim());
-                    t.add(e);
+                    taskArrayList.add(e);
+                    realTimeSave(taskArrayList);
                     System.out.println(addedTask);
                     System.out.println(e);
-                    System.out.println("Now you have " + noOfTask(t) + " task(s) in the list.");
+                    System.out.println("Now you have " + noOfTask(taskArrayList) + " task(s) in the list.");
                 } catch(Exception e) {
                     System.out.println("OOPS!!! The description of an event cannot be empty");
                 }
@@ -103,13 +110,13 @@ public class Duke {
 
                     String[] index = type.split(" ");
                     int deleteIndex = Integer.parseInt(index[1]);
-                    if (deleteIndex > t.size() || deleteIndex <= -1) {
+                    if (deleteIndex > taskArrayList.size() || deleteIndex <= -1) {
                         throw new DukeException("OOPS!! The index requested to be deleted does not exist!");
                     } else {
                         System.out.println("Noted: I've removed this task");
-                        Task whichTask = t.get(deleteIndex - 1);
+                        Task whichTask = taskArrayList.get(deleteIndex - 1);
                         System.out.println(whichTask);
-                        t.remove(deleteIndex -1 );
+                        taskArrayList.remove(deleteIndex -1 );
                     }
                 } catch (DukeException e) {
                     System.out.println(e.message);
@@ -120,6 +127,64 @@ public class Duke {
         }
     }
 
+    /* Help to create a file if does not exists, if exits read the data */
+    public static void readData(ArrayList<Task> tasks) {
+        try {
+            File dukeTxt = new File("duke.txt");
+            if (!dukeTxt.exists()) {
+                dukeTxt.createNewFile();
+            } else {
+                FileReader fw = new FileReader(dukeTxt);
+                BufferedReader dukeRead = new BufferedReader(fw);
+                String line = dukeRead.readLine();
+                while(line != null) {
+                    tasks.add(new Task(line));
+                    line = dukeRead.readLine();
+                }
+                dukeRead.close();
+            }
+        }catch (IOException e) {
+            System.out.println("Oh no!! It can't be read");
+        }
+    }
+
+    public static void saveData(ArrayList<Task> tasks) {
+        try {
+            File dukeTxt = new File("duke.txt");
+            if (!dukeTxt.exists()) {
+                dukeTxt.createNewFile();
+            } else {
+                dukeTxt.delete();
+                dukeTxt.createNewFile();
+            }
+            FileWriter fw = new FileWriter(dukeTxt);
+            BufferedWriter dukeWrite = new BufferedWriter(fw);
+            for (int i = 0; i < tasks.size(); i++) {
+                dukeWrite.write(tasks.get(i).toString());
+                dukeWrite.newLine();
+            }//Read from the file
+            dukeWrite.close();
+        }catch (IOException e) {
+            System.out.println("Oh no!!");
+        }
+    }
+
+    public static void realTimeSave(ArrayList<Task> tasks) {
+        try {
+            File dukeTxt = new File("duke.txt");
+            if (!dukeTxt.exists()) {
+                dukeTxt.createNewFile();
+            }
+            FileWriter fw = new FileWriter(dukeTxt, true);
+            BufferedWriter dukeWrite = new BufferedWriter(fw);
+            int i = tasks.size() - 1;
+                dukeWrite.write(tasks.get(i).toString());
+                dukeWrite.newLine();
+                dukeWrite.close();
+        }catch (IOException e) {
+            System.out.println("Oh no!!");
+        }
+    }
 
     public static void showList(ArrayList<Task> tasks) {
         for(int i=0; i < tasks.size(); i++) {
@@ -171,7 +236,15 @@ class Task {
 
     @Override
     public String toString() {
-        return isDone() + " " + this.details;
+        if(status && (details.contains("[ ]") || details.contains("[X]"))) {
+           return details.replace("[ ]", "[X]");
+        } else if(!status && (details.contains("[ ]") || details.contains("[X]"))){
+            return details.replace("[X]", "[ ]");
+        } else if(!details.contains("[ ]") || !details.contains("[X]")) {
+            return isDone() + " " + this.details;
+        } else {
+            return this.details;
+        }
     }
 }
 
