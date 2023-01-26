@@ -116,7 +116,7 @@ public class Duke {
      */
     public void handleInput(String input, DukeList d) {
         if (input.contains("/")) {
-            String[] split = input.split("/", 2);
+            String[] split = input.split("/");
             String[] secondSplit = split[0].split(" ", 2);
 
             String command = secondSplit[0];
