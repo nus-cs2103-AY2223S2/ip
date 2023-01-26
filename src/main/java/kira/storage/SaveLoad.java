@@ -15,6 +15,9 @@ import kira.task.Task;
 import kira.task.TaskType;
 import kira.task.ToDo;
 
+/**
+ * SaveLoad handles all the saving of tasklist and loading of tasklist into the bot.
+ */
 public class SaveLoad {
     
     /**
@@ -40,9 +43,9 @@ public class SaveLoad {
     /**
      * Loads and parses the csv save file into a list of tasks.
      * 
-     * @param pathname path where the csv file is stored.
+     * @param pathname path where the csv file is stored
      * @return a list of tasks
-     * @throws KiraException File cannot be found.
+     * @throws KiraException File-Not-Found
      */
     public static List<Task> load(String pathname) throws KiraException {
         List<Task> taskList = new ArrayList<>();

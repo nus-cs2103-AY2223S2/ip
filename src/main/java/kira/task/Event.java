@@ -5,12 +5,24 @@ import java.time.format.DateTimeParseException;
 
 import kira.exception.KiraException;
 
+/**
+ * Event is a type of task with a duration from a date and time until another date and time.
+ */
 public class Event extends Task {
-    LocalDateTime startDate;
-    LocalDateTime endDate;
 
-    public Event(String data, String startDate, String endDate) throws KiraException {
-        super(data);
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+
+    /**
+     * Constructs an event task with a start and end datetime, and a description.
+     * 
+     * @param description
+     * @param startDate
+     * @param endDate
+     * @throws KiraException DateTime-Parse-Error, Invalid-DateTime
+     */
+    public Event(String description, String startDate, String endDate) throws KiraException {
+        super(description);
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             this.startDate = LocalDateTime.parse(startDate, formatter);

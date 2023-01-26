@@ -1,73 +1,122 @@
 package kira.ui;
 
+import kira.command.ByeCommand;
+import kira.command.Command;
+import kira.command.DeadlineCommand;
+import kira.command.DeleteCommand;
+import kira.command.EventCommand;
+import kira.command.ListCommand;
+import kira.command.MarkCommand;
+import kira.command.ToDoCommand;
+import kira.command.TodayCommand;
+import kira.command.UnmarkCommand;
 import kira.exception.KiraException;
 import kira.task.Deadline;
 import kira.task.Event;
-import kira.task.Task;
 import kira.task.TaskType;
 import kira.task.ToDo;
 
-public class Parser {
+/**
+ * CommandString are all possible commands.
+ */
+enum CommandString {
+    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, TODAY
+}
 
-    public Command command;
-    private int index;
-    private String taskArguments;
+/**
+ * Parser handles the parsing of user inputs into executable commands.
+ */
+public class Parser {
     
-    public Parser(String input) throws KiraException {
+    /**
+     * Parses the input to an executable command.
+     * 
+     * @param input input string to be parsed
+     * @return executable command
+     * @throws KiraException Incorrect-Format, Invalid-Index
+     */
+    public static Command parse(String input) throws KiraException {
         String[] temp = input.split(" ", 2);
         try {
-            this.command = Command.valueOf(temp[0].toUpperCase());
-            switch (this.command) {
+            CommandString commandString = CommandString.valueOf(temp[0].toUpperCase());
+            switch (commandString) {
             case BYE:
+                if (temp.length != 1) {
+                    throw new KiraException("Incorrect use of BYE.\n" 
+                            + "There should be no extra arguments");
+                }
+                return new ByeCommand();
             case LIST:
+                if (temp.length != 1) {
+                    throw new KiraException("Incorrect use of LIST.\n" 
+                            + "There should be no extra arguments");
+                }
+                return new ListCommand();
             case TODAY:
                 if (temp.length != 1) {
-                    throw new KiraException("Incorrect use of command for BYE/LIST/TODAY");
+                    throw new KiraException("Incorrect use of TODAY.\n" 
+                            + "There should be no extra arguments");
                 }
-                break;
+                return new TodayCommand();
             case MARK:
+                if (temp.length != 2) {
+                    throw new KiraException("Incorrect use of MARK"
+                            + "Format: mark <index>");
+                }
+                return new MarkCommand(Integer.valueOf(temp[1]));
             case UNMARK:
+                if (temp.length != 2) {
+                    throw new KiraException("Incorrect use of UNMARK"
+                            + "Format: unmark <index>");
+                }
+                return new UnmarkCommand(Integer.valueOf(temp[1]));
             case DELETE:
                 if (temp.length != 2) {
-                    throw new KiraException("Incorrect use of command for MARK/UNMARK/DELETE");
+                    throw new KiraException("Incorrect use of DELETE"
+                            + "Format: delete <index>");
                 }
-                this.index = Integer.valueOf(temp[1]);
-                break;
+                return new DeleteCommand(Integer.valueOf(temp[1]));
             case TODO:
             case DEADLINE:
             case EVENT:
-                if (temp.length != 2) {
-                    throw new KiraException("Incorrect use of command for any TASK commands");
-                }
-                this.taskArguments = temp[1];
-                break;
+                return parseTask(commandString.toString(), temp[1]);
             }
         } catch (NumberFormatException e) {
             throw new KiraException("Index is not a number...\nPlease check your arguments.");
         } catch (IllegalArgumentException e) {
             throw new KiraException("Sorry, I don't know this command :C");
         } 
+        // Should never reach here
+        throw new KiraException("Unexpected error...");
     }
 
-    public Task parseOutputTask() throws KiraException {
-        TaskType type = TaskType.valueOf(this.command.toString());
+    /**
+     * Parses the task with additional checks on validity.
+     * 
+     * @param commandString
+     * @param taskArguments
+     * @return executable command
+     * @throws KiraException Incorrect-Format
+     */
+    private static Command parseTask(String commandString, String taskArguments) throws KiraException {
+        TaskType type = TaskType.valueOf(commandString);
         switch (type) {
         case TODO:
-            return new ToDo(this.taskArguments);
+            return new ToDoCommand(new ToDo(taskArguments));
         case DEADLINE:
-            String[] format = this.taskArguments.split(" /by ", 2);
+            String[] format = taskArguments.split(" /by ", 2);
             if (format.length != 2) {
                 throw new KiraException("Incorrect deadline format :C\n"
                         + "Please follow this format for deadline:\n"
                         + "deadline <description> /by yyyy-MM-dd HHmm");
             }
-            return new Deadline(format[0], format[1]);
+            return new DeadlineCommand(new Deadline(format[0], format[1]));
         case EVENT:
             String errMsg = "Incorrect event format :C\n"
                     + "Please follow this format for event:\n"
                     + "event <description> /from yyyy-MM-dd HHmm "
                     + "/to yyyy-MM-dd HHmm";
-            format = this.taskArguments.split(" /from ", 2);
+            format = taskArguments.split(" /from ", 2);
             if (format.length != 2) {
                 throw new KiraException(errMsg);
             }
@@ -76,13 +125,9 @@ public class Parser {
             if (format.length != 2) {
                 throw new KiraException(errMsg);
             }
-            return new Event(desc, format[0], format[1]);
+            return new EventCommand(new Event(desc, format[0], format[1]));
         }
         // Should never reach here
         throw new KiraException("Unexpected error...");
-    }
-
-    public int getIndex() {
-        return index;
     }
 }

@@ -5,11 +5,22 @@ import java.time.format.DateTimeParseException;
 
 import kira.exception.KiraException;
 
+/**
+ * Deadline is a type of task with a time and date as deadline.
+ */
 public class Deadline extends Task {
-    LocalDateTime deadline;
 
-    public Deadline(String data, String deadline) throws KiraException {
-        super(data);
+    private LocalDateTime deadline;
+
+    /**
+     * Constructs a deadline task with a description and deadline.
+     * 
+     * @param description
+     * @param deadline
+     * @throws KiraException DateTime-Parse-Error
+     */
+    public Deadline(String description, String deadline) throws KiraException {
+        super(description);
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             this.deadline = LocalDateTime.parse(deadline, formatter);

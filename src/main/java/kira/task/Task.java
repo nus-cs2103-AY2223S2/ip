@@ -1,10 +1,20 @@
 package kira.task;
+
+/**
+ * Task represents all possible task.
+ */
 public abstract class Task {
-    private String data;
+
+    private String description;
     private boolean isDone;
 
-    public Task(String data) {
-        this.data = data;
+    /**
+     * Constructs an abstract task with a description.
+     * 
+     * @param description
+     */
+    protected Task(String description) {
+        this.description = description;
         this.isDone = false;
     }
 
@@ -22,8 +32,13 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Formats the task into saveload readable format.
+     * 
+     * @return formatted string
+     */
     public String saveFormat() {
-        String[] temp = new String[] {this.data, this.isDone ? "y" : "n"};
+        String[] temp = new String[] {this.description, this.isDone ? "y" : "n"};
         return String.join("\",\"", temp);
     }
 
@@ -32,7 +47,7 @@ public abstract class Task {
         StringBuilder ret = new StringBuilder();
         String done = this.isDone ? "x" : " ";
         ret.append("[" + done + "] ");
-        ret.append(this.data);
+        ret.append(this.description);
         return ret.toString();
     }
 }

@@ -4,22 +4,44 @@ import java.util.List;
 
 import kira.task.Task;
 
+/**
+ * Ui class manages user interactions, prettify output
+ * to simulate a conversation with the user.
+ * 
+ * @author Eric Goh
+ */
 public class Ui {
 
-    public void start() {
+    /**
+     * Formats and prints the initial message of the bot.
+     */
+    public void startMsg() {
         String startMsg = "Hi! I am KiraBot~\n"
                 + "How may I help you today?";
         Printer.printFormatReplyMsg(startMsg);
     }
 
-    public void end() {
+    /**
+     * Formats and prints the last message of the bot.
+     */
+    public void endMsg() {
         Printer.printFormatReplyMsg("Goodbye! Have a nice day~");
     }
 
+    /**
+     * Formats and prints any error message for the bot.
+     * 
+     * @param msg Error message for the output.
+     */
     public void errMsg(String msg) {
         Printer.printFormatErrorMsg(msg);
     }
 
+    /**
+     * Formats and prints message for the list command.
+     * 
+     * @param taskList
+     */
     public void listMsg(List<Task> taskList) {
         Printer.printFormatReplyMsg("Here are all the items stored~"
                 + listOfTasks(taskList));

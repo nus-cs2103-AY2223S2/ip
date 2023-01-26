@@ -1,8 +1,12 @@
 package kira.exception;
+
+/**
+ * KiraException denotes all exception handled by the bot.
+ */
 public class KiraException extends Exception {
     
     /**
-     * Construct an exception with the message.
+     * Constructs an exception related to the bot with a message.
      * 
      * @param msg
      */
@@ -10,6 +14,9 @@ public class KiraException extends Exception {
         super(msg);
     }
 
+    /**
+     * Constructs an exception related to the bot.
+     */
     public KiraException() {
         super();
     }
