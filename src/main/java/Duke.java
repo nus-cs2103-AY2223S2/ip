@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.stream.IntStream;
+
 enum action {
     bye,
     list,
@@ -30,6 +32,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         FileSaver file = new FileSaver("./data/duke.txt");
         listOfAction = file.load();
+
         String s = "";
 
         String newLine = sc.nextLine();
@@ -66,9 +69,13 @@ public class Duke {
                             if (listOfAction[num] != null) {
                                 System.out.println("OK, I've marked this task as not done yet:");
                                 String original = listOfAction[num];
-                                listOfAction[num] = String.format("%s[X] %s", original.substring(0, 3), original.substring(7));
+
+                                //Task newTask = new Task(orginal.indexAt(1),  original.substring(7), true);
+                                listOfAction[num] = new Task(String.valueOf(original.charAt(1)),  original.substring(7), true).toString();
+                                //listOfAction[num] = String.format("%s[X] %s", original.substring(0, 3), original.substring(7));
                                 System.out.println(listOfAction[num]);
                                 file.overwrite(listOfAction);
+
                             }
                         } catch (DukeException e) {
                             System.out.println(e.getMessage());
@@ -82,7 +89,9 @@ public class Duke {
                             if (listOfAction[num1] != null) {
                                 System.out.println("OK, I've marked this task as not done yet:");
                                 String original = listOfAction[num1];
-                                listOfAction[num1] = String.format("%s[ ] %s", original.substring(0, 3), original.substring(7));
+
+                                Task newTask = new Task(String.valueOf(original.charAt(1)),  original.substring(7), false);
+                                listOfAction[num1] = newTask.toString(); //String.format("%s[ ] %s", original.substring(0, 3), original.substring(7));
                                 System.out.println(listOfAction[num1]);
                                 file.overwrite(listOfAction);
                             }
@@ -115,6 +124,7 @@ public class Duke {
                                     trace++;
                                 }
                                 file.overwrite(listOfAction);
+
                             }
                         } catch (DukeException e) {
                             System.out.println(e.getMessage());
@@ -130,7 +140,8 @@ public class Duke {
                                 remaining += arr[j];
                                 remaining += " ";
                             }
-                            listOfAction[len] = String.format("[T][ ] %s", remaining);
+                            Todo newTask = new Todo(s, remaining, false);
+                            listOfAction[len] = newTask.toString(); //String.format("[T][ ] %s", remaining);
                             System.out.println(listOfAction[len]);
                             System.out.println(String.format("Now you have %d tasks in the list", len + 1));
                             len++;
@@ -144,7 +155,11 @@ public class Duke {
                         try {
                             checkEmptyAction(arr, "deadline");
                             System.out.println("Got it. I've added this task:");
+<<<<<<< HEAD
                             for (int j = 1; j < arr.length; j++) {
+=======
+                            /*for (int j = 1; j < arr.length; j++) {
+>>>>>>> branch-Level-8
                                 remaining += " ";
                                 if (String.valueOf(arr[j].charAt(0)).equals("/")) {
                                     remaining += "(";
@@ -156,12 +171,44 @@ public class Duke {
                                     remaining += arr[j];
                                 }
                             }
+<<<<<<< HEAD
                             remaining += ")";
                             listOfAction[len] = String.format("[D][ ]%s", remaining);
                             System.out.println(listOfAction[len]);
                             System.out.println(String.format("Now you have %d tasks in the list", len + 1));
                             len++;
                             file.overwrite(listOfAction);
+=======
+                            remaining += ")";*/
+                            String detail = "";
+                            int pointer = 1;
+                            for (int j = 1 ; j < arr.length ; j++) {
+                                if (String.valueOf(arr[j]).equals("/by")) {
+                                    pointer = j + 1;
+                                    break;
+                                }
+                                detail += arr[j];
+                                detail += " ";
+                            }
+
+                            for (int j = pointer; j < arr.length; j++) {
+                                if (String.valueOf(arr[j]).equals("/")) {
+                                    remaining += "-";
+                                } else {
+                                    remaining += arr[j];
+                                }
+                                if (j != arr.length - 1) {
+                                    remaining += " ";
+                                }
+                            }
+
+                            Deadline newTask = new Deadline(s, detail, remaining);
+                            listOfAction[len] = newTask.toString(); //String.format("[D][ ]%s", remaining);
+                            System.out.println(listOfAction[len]);
+                            System.out.println(String.format("Now you have %d tasks in the list", len + 1));
+                            len++;
+                            file.overwrite(listOfAction);
+
                         } catch (DukeException e) {
                             System.out.println(e.getMessage());
                         }
@@ -172,7 +219,11 @@ public class Duke {
                             checkEmptyAction(arr, "event");
                             System.out.println("Got it. I've added this task:");
                             int k = 0;
+<<<<<<< HEAD
                             for (int j = 1; j < arr.length; j++) {
+=======
+                            /*for (int j = 1; j < arr.length; j++) {
+>>>>>>> branch-Level-8
                                 remaining += " ";
                                 if (String.valueOf(arr[j].charAt(0)).equals("/") && (k != 0)) {
                                     if (arr[j].length() != 1) {
@@ -192,12 +243,59 @@ public class Duke {
                                     remaining += arr[j];
                                 }
                             }
+<<<<<<< HEAD
                             remaining += ")";
                             listOfAction[len] = String.format("[E][ ]%s", remaining);
                             System.out.println(listOfAction[len]);
                             System.out.println(String.format("Now you have %d tasks in the list", len + 1));
                             len++;
                             file.overwrite(listOfAction);
+=======
+                            remaining += ")";*/
+                            int startIndex = 0;
+                            int endIndex = 0;
+                            String detail = "";
+                            for (int j = 1; j < arr.length; j++){
+                                if (String.valueOf(arr[j]).equals("/from")) {
+                                    startIndex = j + 1;
+                                    break;
+                                }
+                                detail += arr[j];
+                                detail += " ";
+                            }
+                            for (int j = startIndex; j < arr.length; j++){
+                                if (String.valueOf(arr[j]).equals("/to")) {
+                                    endIndex = j + 1;
+                                    break;
+                                }
+                            }
+                            String start = "";
+                            String end = "";
+                            for (int j = startIndex; j < endIndex - 1; j++) {
+                                if (String.valueOf(arr[j]).equals("/")) {
+                                    start += "-";
+                                } else {
+                                    start += arr[j];
+                                }
+                                if (j != endIndex - 2) {
+                                    start += " ";
+                                }
+                            }
+                            for (int j = endIndex; j < arr.length; j++) {
+                                if (String.valueOf(arr[j]).equals("/")) {
+                                    end += "-";
+                                } else {
+                                    end += arr[j];
+                                }
+                                if (j != arr.length - 1) {
+                                    end += " ";
+                                }
+                            }
+                            listOfAction[len] = new Event("event", detail, start, end).toString(); //String.format("[E][ ]%s", remaining);
+                            System.out.println(listOfAction[len]);
+                            System.out.println(String.format("Now you have %d tasks in the list", len + 1));
+                            len++;
+                           file.overwrite(listOfAction);
                         } catch (DukeException e) {
                             System.out.println(e.getMessage());
                         }
@@ -233,4 +331,5 @@ class DukeException extends  Exception {
         super(cause);
     }
 }
+
 
