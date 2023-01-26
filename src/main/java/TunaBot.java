@@ -6,34 +6,38 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TunaBot {
+    private Storage storage;
+    private Ui ui;
     private static final Scanner s = new Scanner(System.in);
     private static ArrayList<Task> tasks = new ArrayList<>();
     private static boolean toExit = false;
-    public static void main(String[] args) {
-        Path savePath = Paths.get("data", "save.txt");
-        Storage storage = new Storage(savePath);
+    public TunaBot(Path savePath) {
+        ui = new Ui();
+        storage = new Storage(savePath);
         try {
             tasks = storage.load();
         } catch (IOException e) {
-            System.out.println("BLUB! Problem with save file!");
+            ui.saveFileProblem();
         }
-        String LINE = "------------------------------";
-        System.out.println(LINE);
-        System.out.println("    Hello! I'm TunaBot\n" +
-                "    What can I do for you?");
-        System.out.println(LINE);
+    }
+    public void run() {
+        ui.greeting();
         while (!toExit) {
-            String input = s.nextLine();
-            System.out.println(LINE);
+            ui.line();
             try {
+                String input = s.nextLine();
                 toExit = Parser.parse(input, tasks);
             } catch (InputException e) {
-                System.out.println(e.getMessage());
+                ui.printErrorMessage(e);
             } catch (DateTimeParseException e) {
-                System.out.println("BLUB! Please use the format dd/mm/yy-hhmm with time in 24H format! eg. 29/12/23-1854");
+                ui.printDateTimeFormatError();
             }
-            System.out.println(LINE);
+            ui.line();
         }
         storage.save(tasks);
+    }
+    public static void main(String[] args) {
+        Path savePath = Paths.get("data", "save.txt");
+        new TunaBot(savePath).run();
     }
 }
