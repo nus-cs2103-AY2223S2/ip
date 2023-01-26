@@ -1,19 +1,22 @@
 package duke.tasks;
 
+import java.io.Serializable;
+
 import duke.DukeException;
 import duke.UserInterface;
 
-import java.io.Serializable;
 
 public abstract class Task implements Serializable {
+    static final String EXTRAS_FORMAT_TEMPLATE = " (%s)";
     private static final String COMPLETED = " [O] ";
     private static final String NOT_COMPLETED = " [ ] ";
-    static final String EXTRAS_FORMAT_TEMPLATE = " (%s)";
     private static final String FORMAT_EXCEPTION = "Invalid format for creating Task";
     private static final String MARKED_RESPONSE = "Well done. Task has been marked as completed:\n";
     private static final String UNMARKED_RESPONSE = "Got it. Task has been unmarked:\n";
+
     private final String name;
     private boolean isCompleted;
+
     Task(String name) throws DukeException {
         if (name.isEmpty()) {
             throw new DukeException(FORMAT_EXCEPTION);
@@ -34,6 +37,7 @@ public abstract class Task implements Serializable {
 
     @Override
     public String toString() {
-        return (isCompleted ? COMPLETED : NOT_COMPLETED) + name;
+        String completionStatus = isCompleted ? COMPLETED : NOT_COMPLETED;
+        return completionStatus + name;
     }
 }

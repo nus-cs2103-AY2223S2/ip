@@ -15,6 +15,7 @@ public class Duke {
     public void run() {
         ui.showStartMessage();
         controller.runExecutionLoop();
+        ui.showExitMessage();
     }
 
     public static void main(String[] args) {

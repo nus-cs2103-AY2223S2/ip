@@ -14,11 +14,13 @@ public class TodoCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) throws DukeException {
-        String input = super.input;
+        // Prepare arguments for Todo task
+        String input = getInput();
         String taskName = input.substring(COMMAND_WORD.length());
         if (taskName.isEmpty()) {
             throw new DukeException(Parser.INVALID_COMMAND_EXCEPTION_MESSAGE);
         }
+
         String result = tasks.addTask(new TodoTask(taskName));
         return result;
     }

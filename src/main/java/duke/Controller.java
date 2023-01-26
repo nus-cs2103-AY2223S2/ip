@@ -4,7 +4,6 @@ import duke.commands.Command;
 
 public class Controller {
 
-    private static final String COMMAND_SEPARATOR = " ";
     private TaskList tasks;
     private UserInterface ui;
     private Storage storage;
@@ -25,7 +24,7 @@ public class Controller {
     }
 
     public void runExecutionLoop() {
-        while(!isExited) {
+        while (!isExited) {
             try {
                 String input = ui.getInput();
                 Command command = parser.parse(input);
@@ -34,7 +33,6 @@ public class Controller {
                 ui.showExceptionMessage(exception);
             }
         }
-        ui.showExitMessage();
     }
 
     public void executeCommand(Command command) throws DukeException {

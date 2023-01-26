@@ -1,8 +1,8 @@
 package duke.commands;
 
+import duke.DukeException;
 import duke.Parser;
 import duke.TaskList;
-import duke.DukeException;
 
 public class ListCommand extends Command {
 
@@ -14,6 +14,7 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) throws DukeException {
+        String input = getInput();
         if (!input.equals(COMMAND_WORD)) {
             throw new DukeException(Parser.INVALID_COMMAND_EXCEPTION_MESSAGE);
         }

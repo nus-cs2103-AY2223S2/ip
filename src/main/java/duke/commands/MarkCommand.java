@@ -1,8 +1,8 @@
 package duke.commands;
 
+import duke.DukeException;
 import duke.Parser;
 import duke.TaskList;
-import duke.DukeException;
 
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
@@ -12,10 +12,12 @@ public class MarkCommand extends Command {
     }
     @Override
     public String execute(TaskList tasks) throws DukeException {
-        String input = super.input;
+        String input = getInput();
         try {
+            // Prepare arguments for marking task
             String[] tokens = input.split(" ");
             int taskIndex = Integer.parseInt(tokens[1]);
+
             String result = tasks.markTask(taskIndex);
             return result;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {

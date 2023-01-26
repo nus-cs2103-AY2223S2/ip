@@ -1,27 +1,29 @@
 package duke;
 
 import duke.commands.Command;
-
-import duke.commands.TodoCommand;
-import duke.commands.EventCommand;
 import duke.commands.DeadlineCommand;
-import duke.commands.MarkCommand;
-import duke.commands.UnmarkCommand;
 import duke.commands.DeleteCommand;
+import duke.commands.EventCommand;
 import duke.commands.ListCommand;
-
+import duke.commands.MarkCommand;
+import duke.commands.TodoCommand;
+import duke.commands.UnmarkCommand;
 
 public class Parser {
     public static final String INVALID_COMMAND_EXCEPTION_MESSAGE = "Invalid Command received.";
     static final String EXIT_COMMAND = "bye";
-    public Command parse(String input) throws DukeException {
+
+    private String getCommandWord(String input) {
         int firstWhitespaceIndex = input.indexOf(" ");
-        String commandWord;
         if (firstWhitespaceIndex == -1) {
-            commandWord = input;
+            return input;
         } else {
-            commandWord = input.substring(0, firstWhitespaceIndex);
+            return input.substring(0, firstWhitespaceIndex);
         }
+    }
+
+    public Command parse(String input) throws DukeException {
+        String commandWord = getCommandWord(input);
 
         Command command;
         switch (commandWord) {
@@ -46,7 +48,7 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             command = new ListCommand(input);
             break;
-            case EXIT_COMMAND:
+        case EXIT_COMMAND:
             command = null;
             break;
         default:

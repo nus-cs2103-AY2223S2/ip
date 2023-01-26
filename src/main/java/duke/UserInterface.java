@@ -4,18 +4,17 @@ import java.util.Scanner;
 
 public class UserInterface {
 
+    public static final String EXIT_MESSAGE = "Farewell. Always at your service.";
+    public static final String GREET_MESSAGE = "Hello, I'm Ekud! What can I do for you?";
+    public static final String INDENT = "    ";
     private static final String LOGO =
             " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    public static final String GREET_MESSAGE = "Hello, I'm Ekud! What can I do for you?";
-    public static final String EXIT_MESSAGE = "Farewell. Always at your service.";
     private static final String FORMATTER_LEFT_WRAP = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     private static final String FORMATTER_RIGHT_WRAP = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-
-    public static final String INDENT = "    ";
 
     private Scanner scanner;
 

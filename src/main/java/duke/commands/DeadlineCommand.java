@@ -15,11 +15,14 @@ public class DeadlineCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) throws DukeException {
-        String input = super.input;
+        String input = getInput();
+
         try {
+            // Prepare arguments for DeadlineTask
             int prefixIndex = input.indexOf(DEADLINE_PREFIX);
             String taskName = input.substring(COMMAND_WORD.length(), prefixIndex - 1);
             String deadline = input.substring(prefixIndex + DEADLINE_PREFIX.length());
+
             String result = tasks.addTask(DeadlineTask.createTask(taskName, deadline));
             return result;
         } catch (IndexOutOfBoundsException exception) {
