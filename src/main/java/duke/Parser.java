@@ -9,6 +9,7 @@ public class Parser {
         todo,
         deadline,
         event,
+        find
     }
     public Parser(){
 
@@ -43,5 +44,9 @@ public class Parser {
 
     public boolean isEventCommand(String userInput){
         return userInput.split(" ")[0].equals(CmdType.event.name());
+    }
+
+    public boolean isFindCommand(String userInput){
+        return userInput.split(" ")[0].equals(CmdType.find.name());
     }
 }

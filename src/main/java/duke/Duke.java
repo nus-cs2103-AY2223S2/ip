@@ -3,6 +3,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -269,6 +270,39 @@ public class Duke {
                                 + "______________________________________\n";
                         throw new DukeException(errMsg);
                     }
+                } else if(parser.isFindCommand(userInput)) {
+                    int indexOfFirstSpace = userInput.indexOf(" ");
+                    String toFind = userInput.substring(indexOfFirstSpace+1);
+                    if(indexOfFirstSpace == -1 || toFind.isBlank()) {
+                        errMsg = "______________________________________\n"
+                                + " ☹ OOPS!!! Invalid find, please supply a sequence of characters to find.\n"
+                                + "______________________________________\n";
+                        throw new DukeException(errMsg);
+                    }
+                    ArrayList<Task> matches = new ArrayList<Task>();
+                    for (int i = 0; i < tasks.getUserTasks().size(); i++) {
+                        if (tasks.getUserTasks().get(i).getDescription().contains(toFind)) {
+                            matches.add(tasks.getUserTasks().get(i));
+                        }
+                    }
+                    String matchingTasksResult = "";
+                    if (matches.size() == 0){
+                        matchingTasksResult = "______________________________________\n"
+                                + "No matching tasks in the list.\n"
+                                + "______________________________________\n";
+                    } else {
+                        StringBuilder listOfMatches = new StringBuilder();
+                        for(int i = 0; i < matches.size(); i++){
+                            listOfMatches.append(i + 1)
+                                    .append(".")
+                                    .append(matches.get(i)).append("\n");
+                        }
+                        matchingTasksResult = "______________________________________\n"
+                                + "Here are the matching tasks in your list:\n"
+                                + listOfMatches
+                                + "______________________________________\n";
+                    }
+                    System.out.println(matchingTasksResult);
                 } else {
                     errMsg = "______________________________________\n"
                             + " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
