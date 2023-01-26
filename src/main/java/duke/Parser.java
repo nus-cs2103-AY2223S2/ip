@@ -36,7 +36,7 @@ public class Parser {
             } else if (parts[0].equalsIgnoreCase("unmark")) {
                 return new CommandMark(fullCommand, index, false);
             }
-        } else if ((fullCommand.startsWith("delete"))) {
+        } else if (fullCommand.startsWith("delete")) {
             String[] parts = fullCommand.split(" ");
             if (parts.length != 2) {
                 System.out.println("invalid\n");
@@ -44,6 +44,13 @@ public class Parser {
             }
             int index = Integer.parseInt(parts[1]) - 1;
             return new CommandDelete(fullCommand, index);
+        } else if (fullCommand.startsWith("find")) {
+            String[] parts = fullCommand.split(" ");
+            if (parts.length != 2) {
+                System.out.println("invalid\n");
+                return null;
+            }
+            return new CommandFind(fullCommand, parts[1]);
         } else {
             String[] parts = fullCommand.split(" ");
             Task t = null;
