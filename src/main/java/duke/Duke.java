@@ -14,13 +14,19 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * A constructor to initialize a Duke object.
+     */
     public Duke() {
         this.ui = new TextUi();
         this.storage = new Storage();
         this.taskList = new TaskList(storage.loadData());
     }
-    
 
+
+    /**
+     * Runs this Duke program.
+     */
     public void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -49,6 +55,7 @@ public class Duke {
         }
         Parser.byeCommand();
     }
+
 
     public static void main(String[] args) {
         new Duke().run();

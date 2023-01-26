@@ -6,10 +6,13 @@ import duke.task.TaskList;
 
 import java.time.LocalDate;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
 
     /**
-     * Returns true if a String is numerical; return false otherwise.
+     * Returns true if the string is numerical; return false otherwise.
      */
     public static boolean isNumber(String str) {
         try {
@@ -21,9 +24,9 @@ public class Parser {
     }
 
     /**
-     * Returns the number of '/' characters in the command.
+     * Returns the number of '/' characters in the string.
      *
-     * @return The number of '/' characters in the command
+     * @return The number of '/' characters in the string.
      */
     public static int countSlash(String str) {
         int count = 0;
@@ -36,31 +39,31 @@ public class Parser {
     }
 
     /**
-     * Executes the mark command by marking the task as done.
+     * Executes the mark command.
      *
-     * @param taskList The tasklist that the task is in
-     * @param t        The task to be marked as done
-     * @throws DukeException
+     * @param taskList The TaskList that the task is in.
+     * @param t The Task to be marked as completed.
+     * @throws DukeException If Task has already been marked.
      */
     public static void markCommand(TaskList taskList, Task t) throws DukeException {
         taskList.markTask(t);
     }
 
     /**
-     * Executes the unmark command by unmarking the task.
+     * Executes the unmark command.
      *
-     * @param taskList The tasklist that the task is in
-     * @param t        The task to be marked as undone
-     * @throws DukeException
+     * @param taskList The TaskList that the task is in.
+     * @param t        The Task to be marked as undone.
+     * @throws DukeException If Task is already not marked.
      */
     public static void unmarkCommand(TaskList taskList, Task t) throws DukeException {
         taskList.unmarkTask(t);
     }
 
     /**
-     * Executes the list command by listing the tasks in the tasklist.
+     * Executes the list command.
      *
-     * @param taskList The tasklist to be listed out
+     * @param taskList The TaskList to be listed out.
      */
     public static void listCommand(TaskList taskList) {
         if (taskList.getNumTasks() == 0) {
@@ -74,8 +77,8 @@ public class Parser {
     /**
      * Executes the todo command.
      *
-     * @param tasklist The tasklist to add the todo
-     * @param desc     The title of the todo
+     * @param tasklist The TaskList to add the Todo task.
+     * @param desc     The description of the Todo task.
      */
     public static void todoCommand(TaskList tasklist, String desc) throws DukeException {
         System.out.println("Got it, I've added this task:");
@@ -85,13 +88,12 @@ public class Parser {
     /**
      * Executes the deadline command.
      *
-     * @param taskList The tasklist to add the deadline
-     * @param desc     The title of the deadline
-     * @param date     The time/date of the deadline
+     * @param taskList The TaskList to add the Deadline task.
+     * @param desc     The description of the Deadline task.
+     * @param date     The date of the Deadline task.
      */
 
     public static void deadlineCommand(TaskList taskList, String desc, String date) {
-        // convert string date to localdate
         LocalDate localDate = LocalDate.parse(date);
         System.out.println("Got it, I've added this task:");
         taskList.addDeadline(localDate, desc);
@@ -100,10 +102,10 @@ public class Parser {
     /**
      * Executes the event command.
      *
-     * @param taskList The tasklist to add the event
-     * @param start    The start time/date of the event
-     * @param end      The end time/date of the event
-     * @param desc     The title of the event
+     * @param taskList The TaskList to add the Event task.
+     * @param start    The start date of the Event task.
+     * @param end      The end date of the Event task.
+     * @param desc     The description of the Event task.
      */
     public static void eventCommand(TaskList taskList, String start, String end, String desc) throws DukeException {
         System.out.println("Got it, I've added this task:");
@@ -115,8 +117,8 @@ public class Parser {
     /**
      * Executes the delete command.
      *
-     * @param taskList The tasklist to delete the task from
-     * @param taskNum  The task number of the task to be deleted
+     * @param taskList The TaskList to delete the Task from.
+     * @param taskNum  The task number of the Task to be deleted.
      */
     public static void deleteCommand(TaskList taskList, int taskNum) throws DukeException {
         System.out.println("Noted. I've removed this task:");
@@ -136,6 +138,7 @@ public class Parser {
     public static void byeCommand() {
         System.out.println("Bye. Hope to see you again soon! :-p");
     }
+
 
     /**
      * Checks if the command is in the right format in order to execute the mark command.
@@ -162,10 +165,6 @@ public class Parser {
 
     /**
      * Checks if the command is in the right format to execute a delete command.
-     *
-     * @param taskList
-     * @param command
-     * @throws DukeException
      */
     public static void checkDelete(TaskList taskList, String command) throws DukeException {
         String[] arr = command.split("\\s+");

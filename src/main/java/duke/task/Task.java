@@ -1,16 +1,19 @@
 package duke.task;
 
 /**
- * Represents a task
+ * Represents a Task.
  */
 public abstract class Task {
+
+    /** Description of this Task */
     protected String desc;
+    /** Status of this Task */
     protected boolean isMarked;
 
     /**
-     * Constructor to initialize a task object
+     * A constructor to initialize a Task.
      *
-     * @param desc The title of the task
+     * @param desc The title of this Task.
      */
     public Task(String desc) {
         this.desc = desc;
@@ -18,14 +21,14 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as done
+     * Marks this Task as complete.
      */
     public void mark() {
         isMarked = true;
     }
 
     /**
-     * Unmarks the task
+     * Unmarks this Task.
      */
     public void unMark() {
         isMarked = false;
@@ -35,11 +38,6 @@ public abstract class Task {
         return this.isMarked;
     }
 
-    /**
-     * Returns the string representation of the task
-     *
-     * @return The string representation of the task
-     */
     @Override
     public String toString() {
         if (isMarked) {

@@ -4,29 +4,25 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Deadline
+ * Represents a Deadline task.
  */
 public class Deadline extends Task {
 
+    /** Date of this Deadline */
     protected LocalDate by;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
-     * Constructor to initialize a deadline object
+     * A constructor to initialize a Deadline.
      *
-     * @param by   The date/time of the deadline
-     * @param desc The title of the deadline
+     * @param by The date of this Deadline.
+     * @param desc The description of this Deadline.
      */
     public Deadline(LocalDate by, String desc) {
         super(desc);
         this.by = by;
     }
 
-    /**
-     * Returns the string representation of the deadline.
-     *
-     * @return The string representation of the deadline
-     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by.format(FORMATTER) + ")";

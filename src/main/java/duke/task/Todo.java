@@ -1,24 +1,19 @@
 package duke.task;
 
 /**
- * Represents a Todo
+ * Represents a Todo task.
  */
 public class Todo extends Task {
 
     /**
-     * Constructor to initialize a todo object
+     * A constructor to initialize a Todo.
      *
-     * @param desc The title of the todo
+     * @param desc The description of this Todo.
      */
     public Todo(String desc) {
         super(desc);
     }
 
-    /**
-     * Returns the string representation of the todo
-     *
-     * @return The string representation of the todo
-     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

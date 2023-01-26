@@ -1,24 +1,24 @@
 package duke.task;
 
-import com.sun.jdi.LocalVariable;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents an Event
+ * Represents an Event Task.
  */
 public class Event extends Task {
+    /** Start date of this Event */
     protected LocalDate start;
+    /** End date of this Event */
     protected LocalDate end;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
-     * Constructor to initialize an event object
+     * Constructor to initialize an Event.
      *
-     * @param start The start date/time of the event
-     * @param end   The end date/time of the event
-     * @param desc  The title of the event
+     * @param start The start date of this Event.
+     * @param end The end date of this Event.
+     * @param desc The description of this Event.
      */
     public Event(LocalDate start, LocalDate end, String desc) {
         super(desc);
@@ -26,11 +26,6 @@ public class Event extends Task {
         this.end = end;
     }
 
-    /**
-     * Returns the string representation of the event
-     *
-     * @return The string representation of the event
-     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + start.format(FORMATTER) + " to: " + end.format(FORMATTER) + ")";

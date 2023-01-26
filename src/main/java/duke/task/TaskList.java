@@ -1,26 +1,25 @@
 package duke.task;
 
 import duke.exception.DukeException;
-import duke.storage.Storage;
 
 import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Represents a TaskList
+ * Represents the entire list of Tasks.
  */
 public class TaskList {
     protected List<Task> tasks;
 
     /**
-     * Constructor to initialize a tasklist object
+     * A constructor to initialize a TaskList.
      */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
     /**
-     * Returns true if all tasks in the tasklist is completed; returns false otherwise.
+     * Returns true if all tasks in this TaskList are completed; returns false otherwise.
      */
     public boolean isAllCompleted() {
         for (int i = 0; i < tasks.size(); i++) {
@@ -33,34 +32,32 @@ public class TaskList {
         return true;
     }
 
-    /**
-     * Returns the number of tasks in the tasklist.
-     */
+
     public int getNumTasks() {
         return tasks.size();
     }
 
     /**
-     * Returns the task in the ith position of the tasklist.
+     * Returns the task in the i-th position of this TaskList.
      *
-     * @param i The index of the task in the tasklist
-     * @return The task in the ith position
+     * @param i The index of the task in this TaskList.
+     * @return The task in the i-th position of this TaskList.
      */
     public Task getTask(int i) {
         return tasks.get(i);
     }
 
     /**
-     * Returns true if a task exists in the tasklist; returns false otherwise.
+     * Returns true if a task exists in this TaskList; returns false otherwise.
      */
     public boolean doesTaskExist(int taskNum) {
         return taskNum > 0 && taskNum <= getNumTasks();
     }
 
     /**
-     * Creates a new todo and adds it to the tasklist.
+     * Creates a new Todo task and adds it to this TaskList.
      *
-     * @param desc The title of the todo task
+     * @param desc The description of the Todo task to add to this TaskList.
      */
     public void addTodo(String desc) {
         Todo t = new Todo(desc);
@@ -70,10 +67,10 @@ public class TaskList {
     }
 
     /**
-     * Creates a new deadline and adds it to the tasklist.
+     * Creates a new Deadline task and adds it to this TaskList.
      *
-     * @param date The time/date of the deadline
-     * @param desc The title of the deadline
+     * @param date The date of the Deadline task.
+     * @param desc The description of the Deadline task.
      */
 
     public void addDeadline(LocalDate date, String desc) {
@@ -84,11 +81,11 @@ public class TaskList {
     }
 
     /**
-     * Creates a new event and adds it to the tasklist.
+     * Creates a new Event task and adds it to this TaskList.
      *
-     * @param start The start date/time of the event
-     * @param end   The end date/time of the event
-     * @param desc  The title of the event
+     * @param start The start date of the Event task.
+     * @param end The end date/time of the Event task.
+     * @param desc The description of the Event task.
      */
 
     public void addEvent(LocalDate start, LocalDate end, String desc) {
@@ -99,9 +96,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the tasklist.
+     * Deletes a task from this TaskList.
      *
-     * @param taskNum The task number to be deleted
+     * @param taskNum The number of the task to be deleted.
      */
     public void deleteTask(int taskNum) throws DukeException {
         System.out.println("    " + tasks.get(taskNum - 1));
@@ -109,6 +106,12 @@ public class TaskList {
         printNumTasks();
     }
 
+    /**
+     * Marks a task in this TaskList.
+     *
+     * @param task The task to be marked.
+     * @throws DukeException If the task has already been marked.
+     */
     public void markTask(Task task) throws DukeException {
         if (task.isMarked) {
             throw new DukeException("This task has already been marked as done.");
@@ -122,6 +125,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unmarks a task in this TaskList.
+     *
+     * @param task The task to be marked.
+     * @throws DukeException If the task is already unmarked.
+     */
     public void unmarkTask(Task task) throws DukeException {
         if (!task.isMarked()) {
             throw new DukeException("Oops! This task has not been marked as done before.");
@@ -144,12 +153,6 @@ public class TaskList {
         }
     }
 
-
-    /**
-     * Returns the string representation of the tasklist.
-     *
-     * @return The string representation of the tasklist
-     */
     @Override
     public String toString() {
         String str = "";
