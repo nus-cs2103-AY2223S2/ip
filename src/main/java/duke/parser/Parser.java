@@ -5,6 +5,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Parser {
 
@@ -184,6 +185,16 @@ public class Parser {
         }
     }
 
+    public static void checkFind(TaskList taskList, String command) throws DukeException {
+        String[] arr = command.split(" ", 2);
+        if (arr.length > 1) {
+            String keyword = arr[1];
+            taskList.search(keyword);
+        } else {
+            throw new DukeException("Oops! You need to specify a keyword for me to find a task.");
+        }
+    }
+
     /**
      * Checks the command in order to execute the corresponding command correctly.
      */
@@ -228,6 +239,8 @@ public class Parser {
                 }
             } else if (arr[0].equals("delete")) {
                 checkDelete(taskList, command);
+            } else if (arr[0].equals("find")) {
+                checkFind(taskList, command);
             } else {
                 throw new DukeException("Hmm... I can't quite understand you :-/");
             }

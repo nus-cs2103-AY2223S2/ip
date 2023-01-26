@@ -3,6 +3,7 @@ package duke.task;
 import duke.exception.DukeException;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -128,6 +129,30 @@ public class TaskList {
             task.unMark();
             System.out.println("Alright, I've marked this task as not done yet:");
             System.out.println(task);
+        }
+    }
+
+    /**
+     * Finds a Task by searching for the keyword.
+     * Returns a list of Task objects that match the keyword.
+     *
+     * @param keyword The string to search for.
+     * @return The list of Task objects that match the keyword.
+     */
+    public void search(String keyword) {
+        List<Task> searched = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            String taskInString = tasks.get(i).toString();
+            if (taskInString.contains(keyword)) {
+                searched.add(tasks.get(i));
+            }
+        }
+        if (searched.size() == 0) {
+            System.out.println("Huh... I can't find any matching tasks.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            TaskList searchedTaskList = new TaskList(searched);
+            System.out.println(searchedTaskList);
         }
     }
 
