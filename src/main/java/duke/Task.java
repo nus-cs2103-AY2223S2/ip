@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     private boolean mark;
     private String value;

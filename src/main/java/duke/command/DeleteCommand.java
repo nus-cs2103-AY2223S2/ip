@@ -1,4 +1,11 @@
-public class DeleteCommand extends Command  {
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+
+public class DeleteCommand extends Command {
 
     private int index;
 
@@ -7,7 +14,7 @@ public class DeleteCommand extends Command  {
     }
 
     @Override
-    public void execute(TaskList tasks,Ui ui,Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.customMessage("Noted. I've removed this task: \n");
         ui.customMessage(tasks.get(index));
         tasks.remove(index);

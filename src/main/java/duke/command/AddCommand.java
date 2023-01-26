@@ -1,6 +1,11 @@
-import java.io.FileWriter;
+package duke.command;
 
-public class AddCommand extends Command{
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.Task;
+
+public class AddCommand extends Command {
 
     private Task task;
 
@@ -9,7 +14,7 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks,Ui ui,Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(this.task);
         ui.customMessage("Added : " + task.getValue());
         ui.showNumberOfListings(tasks.size());

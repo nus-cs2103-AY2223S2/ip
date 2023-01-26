@@ -1,7 +1,9 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDateTime from;
     protected LocalDateTime to;
