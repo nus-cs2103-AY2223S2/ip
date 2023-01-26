@@ -107,4 +107,11 @@ public class Parser {
     public static LocalDate getDate(String str) {
         return LocalDate.parse(str);
     }
+
+    public static String getDateMMM(String str) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
+        return getString(LocalDate.parse(str, formatter));
+    }
+
+
 }

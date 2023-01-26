@@ -124,7 +124,7 @@ public class Ui {
      static void deleteCommand(String str, Storage storage) throws IOException {
         try {
             int num = Parser.getTaskNumber(str, 7);
-            Task removed = TaskList.remove(num);
+            Task removed = TaskList.remove(num - 1);
             storage.load();
             lineUI();
             System.out.println("Noted. I've removed this task:");
@@ -168,7 +168,4 @@ public class Ui {
      static void lineUI() {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
-
-
-
 }
