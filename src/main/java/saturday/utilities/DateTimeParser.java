@@ -7,8 +7,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
-
+/**
+ * Utility class to parse and print date and time in various formats
+ */
 public class DateTimeParser {
+
+    /**
+     * Array of date and time formats to try when parsing a date string
+     */
     private static final String[] DATE_TIME_FORMATS = {
             "dd-MM-yyyy",
             "dd/MM/yyyy",
@@ -32,6 +38,13 @@ public class DateTimeParser {
             "hh:mm a dd MM yyyy"
     };
 
+    /**
+     * Parse Date string to TemporalAccessor
+     *
+     * @param date date string to be parsed
+     * @return TemporalAccessor representation of the date
+     * @throws SaturdayException if date string is in invalid format
+     */
     public static TemporalAccessor parseDate(String date) {
         for (String format : DATE_TIME_FORMATS) {
             try {
@@ -47,6 +60,12 @@ public class DateTimeParser {
         throw new SaturdayException("Invalid date format: " + date);
     }
 
+    /**
+     * Convert the TemporalAccessor into a String
+     *
+     * @param dateTime TemporalAccessor to be converted into a String
+     * @return String representation of the date
+     */
     public static String printDateTime(TemporalAccessor dateTime) {
         String result;
         DateTimeFormatter formatter;

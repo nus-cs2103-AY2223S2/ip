@@ -12,7 +12,7 @@ import java.util.Scanner;
  * This class initializes a task list and storage for the application, and handles the main loop for user input and command execution.
  *
  * @author  Titus Lowe
- * @version 1.0
+ * @version 0.1
  * @since   2023-01-26
  */
 public class Saturday {
@@ -32,7 +32,8 @@ public class Saturday {
     /**
      * Constructor for the Saturday class.
      * Initializes the active state, storage and task list for the application.
-     * @param filePath  The file path for the storage of task list
+     *
+     * @param filePath The file path for the storage of task list
      */
     public Saturday(String filePath) {
         this.isActive = true;
@@ -69,7 +70,8 @@ public class Saturday {
 
     /**
      * main method for the Saturday application
-     * @param args  command line arguments
+     *
+     * @param args command line arguments
      */
     public static void main(String[] args) {
         String filePath = Storage.getFilePath();

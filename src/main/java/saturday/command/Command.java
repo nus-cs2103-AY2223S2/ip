@@ -8,8 +8,13 @@ import saturday.models.Task;
 import saturday.models.ToDo;
 import saturday.utilities.DateTimeParser;
 import saturday.utilities.Ui;
-
+/**
+ * Enum class for handling different commands.
+ */
 public enum Command {
+    /**
+     * Command for creating a ToDo task.
+     */
     TODO("todo") {
         @Override
         public void execute(TaskList taskList, String args) {
@@ -24,6 +29,9 @@ public enum Command {
             }
         }
     },
+    /**
+     * Command for creating a Deadline task.
+     */
     DEADLINE("deadline") {
         @Override
         public void execute(TaskList taskList, String args) {
@@ -40,6 +48,9 @@ public enum Command {
             }
         }
     },
+    /**
+     * Command for creating an Event task.
+     */
     EVENT("event") {
         @Override
         public void execute(TaskList taskList, String args) {
@@ -58,6 +69,9 @@ public enum Command {
             }
         }
     },
+    /**
+     * Command for displaying the TaskList.
+     */
     LIST("list") {
         @Override
         public void execute(TaskList taskList, String args) {
@@ -73,6 +87,9 @@ public enum Command {
             }
         }
     },
+    /**
+     * Command for marking a task.
+     */
     MARK("mark") {
         @Override
         public void execute(TaskList taskList, String args) {
@@ -93,6 +110,9 @@ public enum Command {
             }
         }
     },
+    /**
+     * Command for unmarking a task.
+     */
     UNMARK("unmark") {
         @Override
         public void execute(TaskList taskList, String args) {
@@ -113,6 +133,9 @@ public enum Command {
             }
         }
     },
+    /**
+     * Command for deleting a task.
+     */
     DELETE("delete") {
         @Override
         public void execute(TaskList taskList, String args) {
@@ -133,19 +156,45 @@ public enum Command {
             }
         }
     },
+    /**
+     * Command for exiting the application.
+     */
     BYE("bye") {
         @Override
         public void execute(TaskList taskList, String args) {}
     };
 
+    /**
+     * A String command name to identify the class of command.
+     */
     private final String command;
 
+    /**
+     * Constructor for the Command class.
+     * Initializes the command.
+     *
+     * @param command The command to identify the instance with
+     */
     Command(String command) {
         this.command = command;
     }
 
+    /**
+     * Method to execute the command on the active TaskList.
+     *
+     * @abstract
+     * @param taskList The TaskList to execute the command on
+     * @param args The instructions of the command
+     */
     public abstract void execute(TaskList taskList, String args);
 
+    /**
+     * Method to identify the command to be used on the program.
+     *
+     * @param input The input to parse and process
+     * @return A Command
+     * @throws SaturdayException If unable to find a suitable Command
+     */
     public static Command getCommand(String input) {
         for (Command c : Command.values()) {
             if (input.startsWith(c.command)) {

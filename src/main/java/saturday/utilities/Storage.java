@@ -6,14 +6,26 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+/**
+ * A utility class to handle loading and saving of TaskList object to a file
+ */
 public class Storage {
     private static String filePath;
 
+    /**
+     * Creates a new Storage object with the given file path.
+     *
+     * @param filePath The file path where the TaskList will be saved to and loaded from
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns the file path where the TaskList will be saved to and loaded from.
+     *
+     * @return The file path where the TaskList will be saved to and loaded from
+     */
     public static String getFilePath() {
         Path dataDirPath = Paths.get(System.getProperty("user.dir"), "data");
         if (!Files.exists(dataDirPath)) {
@@ -34,6 +46,11 @@ public class Storage {
         return filePath.toString();
     }
 
+    /**
+     * This method saves the taskList to the file specified in the filePath attribute.
+     *
+     * @param taskList TaskList to write to file
+     */
     public void saveTaskList(TaskList taskList) {
         try {
             File file = new File(filePath);
@@ -47,6 +64,11 @@ public class Storage {
         }
     }
 
+    /**
+     * This method loads the taskList from the file specified in the filePath attribute.
+     *
+     * @return TaskList read from file
+     */
     public TaskList loadTaskList() {
         TaskList taskList = new TaskList();
         try {
