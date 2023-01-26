@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidDeleteCommandException {
 
-        if (this.tokens.length != 2) {
+        if (tokens.length != 2) {
             throw new DukeInvalidDeleteCommandException();
         }
 

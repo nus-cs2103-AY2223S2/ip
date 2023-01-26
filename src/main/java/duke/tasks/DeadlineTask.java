@@ -28,17 +28,17 @@ public class DeadlineTask extends Task {
      * @return A boolean indicating if this deadline task is due on {@code date}.
      */
     public boolean isDueOn(LocalDate date) {
-        return this.by.equals(date);
+        return by.equals(date);
     }
 
     public String toDukeFileString() {
-        return "D|" + super.toDukeFileString() + "|" + this.by;
+        return "D|" + super.toDukeFileString() + "|" + by;
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        String formattedByString = this.by.format(formatter);
+        String formattedByString = by.format(formatter);
         return "[D]" + super.toString() + " (by: " + formattedByString + ")";
     }
 }

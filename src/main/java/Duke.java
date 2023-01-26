@@ -20,15 +20,15 @@ public class Duke {
      *                 tasks to {@code duke.txt} after every command, and load from it on startup.
      */
     Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        ui = new Ui();
+        storage = new Storage(filePath);
 
         try {
-            this.taskList = new TaskList(this.storage.loadTaskList());
+            taskList = new TaskList(storage.loadTaskList());
         } catch (DukeInvalidFileFormatException e) {
             e.printStackTrace();
-            this.ui.showMessage(e.getMessage());
-            this.taskList = new TaskList();
+            ui.showMessage(e.getMessage());
+            taskList = new TaskList();
         }
     }
 
@@ -47,18 +47,18 @@ public class Duke {
      * Runs the Duke app.
      */
     public void run() {
-        this.ui.showWelcomeMessage();
+        ui.showWelcomeMessage();
         boolean isByeCommand = false;
 
         while (!isByeCommand) {
             try {
-                this.ui.showPrompt();
-                String line = this.ui.readLine();
+                ui.showPrompt();
+                String line = ui.readLine();
                 Command command = Parser.parseUserCommand(line);
-                command.execute(this.taskList, this.ui, this.storage);
+                command.execute(taskList, ui, storage);
                 isByeCommand = command.isByeCommand();
             } catch (DukeException e) {
-                this.ui.showMessage(e.getMessage());
+                ui.showMessage(e.getMessage());
             }
         }
     }

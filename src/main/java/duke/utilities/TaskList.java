@@ -16,14 +16,14 @@ public class TaskList {
      * Instantiates a new empty {@code TaskList} object.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
      * Instantiates a new {@code TaskList} object from the {@code taskList} provided.
      */
     public TaskList(ArrayList<Task> taskList) {
-        this.tasks = taskList;
+        tasks = taskList;
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskList {
      * @param task The task to be added.
      */
     public void addTask(Task task) {
-        this.tasks.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -42,7 +42,8 @@ public class TaskList {
      * @return The task that was deleted.
      */
     public Task deleteTask(int index) {
-        return this.tasks.remove(index);
+        return
+                tasks.remove(index);
     }
 
     /**
@@ -52,7 +53,7 @@ public class TaskList {
      * @return The task at the position {@code index}.
      */
     public Task getTask(int index) {
-        return this.tasks.get(index);
+        return tasks.get(index);
     }
 
     /**
@@ -62,7 +63,7 @@ public class TaskList {
      * @return The task that was marked as done.
      */
     public Task markTaskAsDone(int index) {
-        Task task = this.tasks.get(index);
+        Task task = tasks.get(index);
         task.markDone();
         return task;
     }
@@ -74,7 +75,7 @@ public class TaskList {
      * @return The task that was unmarked as done.
      */
     public Task unmarkTaskAsDone(int index) {
-        Task task = this.tasks.get(index);
+        Task task = tasks.get(index);
         task.unmarkDone();
         return task;
     }
@@ -88,7 +89,7 @@ public class TaskList {
     public ArrayList<Task> getAllTasksThatAreDueOn(LocalDate dueOnDate) {
         ArrayList<Task> arrayList = new ArrayList<>();
 
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
             if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
 
@@ -107,7 +108,7 @@ public class TaskList {
      * @return The size of the task list.
      */
     public int getSize() {
-        return this.tasks.size();
+        return tasks.size();
     }
 
     /**
@@ -116,7 +117,7 @@ public class TaskList {
      * @return A boolean indicating if the task list is empty.
      */
     public boolean isEmpty() {
-        return this.tasks.size() == 0;
+        return tasks.size() == 0;
     }
 
     /**
@@ -127,7 +128,7 @@ public class TaskList {
     public String toDukeFileString() {
         ArrayList<String> output = new ArrayList<>();
 
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
             output.add(task.toDukeFileString() + "\n");
         }
 

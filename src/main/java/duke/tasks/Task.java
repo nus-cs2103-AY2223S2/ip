@@ -15,21 +15,21 @@ public class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
      * Marks the task as done
      */
     public void markDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
      * Unmarks the task as done
      */
     public void unmarkDone() {
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -38,13 +38,13 @@ public class Task {
      * @return A string representing the entire task.
      */
     public String toDukeFileString() {
-        String isDoneString = this.isDone ? "1" : "0";
-        return isDoneString + "|" + this.name;
+        String isDoneString = isDone ? "1" : "0";
+        return isDoneString + "|" + name;
     }
 
     @Override
     public String toString() {
         String checkMark = isDone ? "x" : " ";
-        return "[" + checkMark + "] " + this.name;
+        return "[" + checkMark + "] " + name;
     }
 }

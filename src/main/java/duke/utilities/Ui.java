@@ -13,7 +13,7 @@ public class Ui {
      * Instantiates a new ui manager.
      */
     public Ui() {
-        this.sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     /**
@@ -61,6 +61,6 @@ public class Ui {
      * @return A string representing a line of user input, excluding the newline character.
      */
     public String readLine() {
-        return this.sc.nextLine();
+        return sc.nextLine();
     }
 }
