@@ -115,6 +115,11 @@ public class TaskList {
         Ui.showTaskMarked(task, false);
     }
 
+    /**
+     * List out tasks that contains the keyword
+     *
+     * @param keyword the word used for filtering tasks
+     */
     public void findTask(String keyword) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task: tasks) {
