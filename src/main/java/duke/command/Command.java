@@ -10,6 +10,10 @@ public abstract class Command {
         fullCommand = command;
     }
 
+    public String getFullCommand() {
+        return fullCommand;
+    }
+
     public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 
     public boolean isExit() {
