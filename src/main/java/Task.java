@@ -51,8 +51,8 @@ public class Task {
 
     public LocalDateTime parseDatetime(String input) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime deadline = LocalDateTime.parse(input, formatter);
-        return deadline;
+        LocalDateTime datetime = LocalDateTime.parse(input, formatter);
+        return datetime;
     }
 
     public String getStringDatetime(LocalDateTime datetime) {

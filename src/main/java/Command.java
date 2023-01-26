@@ -1,0 +1,11 @@
+public class Command {
+    protected boolean isExit;
+
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        // Do nothing
+    }
+
+    public boolean isExit() {
+        return this.isExit;
+    }
+}

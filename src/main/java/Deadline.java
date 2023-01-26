@@ -32,6 +32,7 @@ public class Deadline extends Task {
 
     @Override
     public String getRawTask() {
-        return String.format("D ~ %d ~ %s~%s\n", isDone ? 1 : 0, this.description, this.deadline);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return String.format("D ~ %d ~ %s ~ %s\n", isDone ? 1 : 0, this.description, dtf.format(this.deadline));
     }
 }

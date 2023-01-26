@@ -30,12 +30,14 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E][%c] %s (from:%s to:%s)", this.getStatusIcon(), this.description
+        return String.format("[E][%c] %s (from: %s to: %s)", this.getStatusIcon(), this.description
                 , this.getStringDatetime(this.startDatetime), this.getStringDatetime(this.endDatetime));
     }
 
     @Override
     public String getRawTask() {
-        return String.format("E ~ %d ~ %s~%s~%s\n", isDone ? 1 : 0, this.description, this.startDatetime, this.endDatetime);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return String.format("E ~ %d ~ %s ~ %s ~ %s\n", isDone ? 1 : 0, this.description,
+                dtf.format(this.startDatetime), dtf.format(this.endDatetime));
     }
 }
