@@ -6,7 +6,7 @@ import duke.task.Task;
 import duke.Ui;
 
 public class CommandTask extends Command{
-    private Task task;
+    private final Task task;
 
     /**
      * Returns a task command.

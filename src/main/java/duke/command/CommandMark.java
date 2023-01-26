@@ -5,8 +5,8 @@ import duke.TaskList;
 import duke.Ui;
 
 public class CommandMark extends Command{
-    private int index;
-    private boolean mark;
+    private final int index;
+    private final boolean mark;
 
     /**
      * Returns a mark/unmark command.

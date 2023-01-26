@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.Ui;
 
 public class CommandDelete extends Command{
-    private int index;
+    private final int index;
 
     /**
      * Returns a delete command.
