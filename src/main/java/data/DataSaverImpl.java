@@ -16,7 +16,7 @@ public class DataSaverImpl extends DataSaver {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                throw new WriteException("Could not create file: " + filename);
+                throw new WriteException("Could not create file: " + filename + " " + e.getMessage());
             }
         }
         try {

@@ -50,6 +50,7 @@ public abstract class EventLoop implements Disposable {
                 break;
             }
         }
+        dispose();
     }
 
     @Override

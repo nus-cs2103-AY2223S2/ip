@@ -1,8 +1,13 @@
 package domain.usecases;
+
+import core.exceptions.DisposableException;
 import core.exceptions.InvalidArgumentException;
+import core.exceptions.WriteException;
 import core.utils.fp.ThrowingFunction;
+import domain.entities.DataSaver;
 import domain.entities.core.*;
 import domain.entities.taskmanager.*;
+
 import java.util.ArrayList;
 
 /**
@@ -11,20 +16,26 @@ import java.util.ArrayList;
 public class TaskManagerUsecase implements ExecutableRegisterable {
     /**
      * Creates a new TaskManagerUsecase with the todos set to items.
-     * @param items the todos that this TaskManagerUsecase starts with.
+     *
+     * @param items    the todos that this TaskManagerUsecase starts with.
      * @param writable the writable that this manager writes to.
+     * @param dataSaver the data saver to save the data.
      */
-    public TaskManagerUsecase(Writable writable, ArrayList<Task> items) {
+    public TaskManagerUsecase(Writable writable, ArrayList<Task> items,
+                              DataSaver dataSaver) {
         this.tasks = items;
         this.writable = writable;
+        this.dataSaver = dataSaver;
     }
 
     /**
      * Creates a new TaskManagerUsecase with the todos set to empty.
+     *
      * @param writable the writable that this manager writes to.
+     * @param dataSaver the data saver to save the data.
      */
-    public TaskManagerUsecase(Writable writable) {
-        this(writable, new ArrayList<>());
+    public TaskManagerUsecase(Writable writable, DataSaver dataSaver) {
+        this(writable, new ArrayList<>(), dataSaver);
     }
 
     /**
@@ -38,7 +49,13 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
     private final Writable writable;
 
     /**
+     * The data saver
+     */
+    private final DataSaver dataSaver;
+
+    /**
      * Adds a Task to the todoItems.
+     *
      * @param task the Task.
      */
     void addTask(Task task) {
@@ -47,8 +64,9 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
 
     /**
      * The executable for adding a Task to this class.
+     *
      * @param taskSupplier the function for creating a task instance.
-     * @param id the id of the task instance.
+     * @param id           the id of the task instance.
      * @return the executable for adding a Task to this class.
      */
     private IdentifiableExecutable getAddTaskExecutable(ThrowingFunction<String[], Task,
@@ -77,31 +95,33 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
 
     /**
      * Gets the executable for listing TodoItems.
+     *
      * @return the executable for listing all the TodoItems.
      */
     private IdentifiableExecutable getListTodosExecutable() {
-       return new IdentifiableExecutable() {
-           @Override
-           public String getId() {
-               return "list";
-           }
+        return new IdentifiableExecutable() {
+            @Override
+            public String getId() {
+                return "list";
+            }
 
-           @Override
-           public ExitStatus execute(String[] tokens) {
-               for (int i = 0; i < tasks.size(); i++) {
-                   writable.writeln((i+1) + ". " + tasks.get(i));
-               }
-               return null;
-           }
-       };
+            @Override
+            public ExitStatus execute(String[] tokens) {
+                for (int i = 0; i < tasks.size(); i++) {
+                    writable.writeln((i + 1) + ". " + tasks.get(i));
+                }
+                return null;
+            }
+        };
     }
 
     /**
      * Gets a index number from the index string.
+     *
      * @param indexStr the string from which the index number is get.
      * @return the index as an int.
      * @throws InvalidArgumentException the exception whose value should be
-     * displayed.
+     *                                  displayed.
      */
     private int getIndex(String indexStr) throws InvalidArgumentException {
         final int index;
@@ -120,13 +140,14 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
 
     /**
      * Gets the executable that will mark an item's isComplete as isComplete.
-     * @param id the id for the marker executable.
+     *
+     * @param id         the id for the marker executable.
      * @param isComplete whether if the marker executable will mark item as
      *                   complete or not.
      * @return the executable that will mark an item's isComplete.
      */
     private IdentifiableExecutable getMarkerExecutable(boolean isComplete,
-                                                 String id) {
+                                                       String id) {
         return new IdentifiableExecutable() {
             @Override
             public ExitStatus execute(String[] tokens) {
@@ -152,6 +173,10 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
         };
     }
 
+    /**
+     * Gets the executable for deleting a TodoItem.
+     * @return the executable for deleting a TodoItem.
+     */
     private IdentifiableExecutable getDeleteExecutable() {
         return new IdentifiableExecutable() {
             @Override
@@ -173,6 +198,20 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
             public String getId() {
                 return "delete";
             }
+        };
+    }
+
+    /**
+     * Gets the disposable for disposing this class.
+     * @return the disposable for disposing this class.
+     */
+    private Disposable getDisposable() {
+        return () -> {
+            System.out.println("Saving data...");
+            for (Task task : tasks) {
+                dataSaver.writeln(task.serialize());
+            }
+            dataSaver.dispose();
         };
     }
 
@@ -198,5 +237,6 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
                 getMarkerExecutable(false, "unmark")
         );
         nestable.registerIdentifiableExecutable(getDeleteExecutable());
+        nestable.registerDisposable(getDisposable());
     }
 }
