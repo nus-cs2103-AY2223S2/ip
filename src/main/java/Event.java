@@ -4,7 +4,6 @@ public class Event extends Task{
     public Event(String description, String timeOfEvent) {
         super(description);
         this.timeOfEvent = timeOfEvent;
-
     }
 
     @Override

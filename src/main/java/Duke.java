@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Duke {
@@ -46,6 +48,17 @@ public class Duke {
         }
     }
 
+    public void deadlineInputChecker(String input) throws DukeException {
+        String[] inputArray = input.split(" ", 2);
+        if (inputArray.length != 2) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        } else {
+            if (inputArray[1].trim().length() == 0) {
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            }
+        }
+    }
+
     public void deleteInputChecker(String input) throws DukeException {
         String[] inputArray = input.split(" ", 2);
         if (inputArray.length != 2) {
@@ -58,7 +71,7 @@ public class Duke {
     }
 
     public boolean addDeadlineCheck(String s) {
-        return s.startsWith("deadline ");
+        return s.startsWith("deadline");
     }
 
     public boolean addTodoCheck(String s) {
@@ -96,7 +109,7 @@ public class Duke {
         addedTaskMessage(event);
     }
 
-    public void inputDeadline(String s, String d) {
+    public void inputDeadline(String s, LocalDate d) {
         Deadline deadline = new Deadline(s, d);
         list.add(deadline);
         addedTaskMessage(deadline);
@@ -144,6 +157,7 @@ public class Duke {
         printLongLine();
     }
 
+
     public void saveListToOutput() throws DukeException {
         ArrayList<String> temp = new ArrayList<>();
         try {
@@ -183,7 +197,8 @@ public class Duke {
                             list.add(event);
                             break;
                         case "D":
-                            Deadline deadline = new Deadline(curr[2], curr[3]);
+                            LocalDate temp = LocalDate.parse(curr[3], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                            Deadline deadline = new Deadline(curr[2], temp);
                             if (Integer.parseInt(curr[1]) == 1) {
                                 deadline.markAsDone();
                             } else {
@@ -210,6 +225,13 @@ public class Duke {
         } catch (Exception ex) {
             throw new DukeException("Exception has occurred");
         }
+    }
+
+
+    public void addDeadlineFormatted(String input) {
+        String[] constructor = input.replace("deadline ", "").split(" /by ");
+        LocalDate temp = LocalDate.parse(constructor[1], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        inputDeadline(constructor[0], temp);
 
     }
 
@@ -245,8 +267,8 @@ public class Duke {
 
                     inputEvent(eventConstructor[0], timeModified);
                 } else if (addDeadlineCheck(input)) { // check if input type is deadline
-                    String[] deadlineConstructor = input.replace("deadline ", "").split(" /by ");
-                    inputDeadline(deadlineConstructor[0], deadlineConstructor[1]);
+                    deadlineInputChecker(input);
+                    addDeadlineFormatted(input);
                 } else if (addTodoCheck(input)) { // check if input type is todo
                     todoInputChecker(input);
                     inputTodo(input.replace("todo ", ""));
