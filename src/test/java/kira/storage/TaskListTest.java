@@ -45,6 +45,7 @@ public class TaskListTest {
     @Test
     public void delete_removeTask_success() throws KiraException {
         TaskList taskList = new TaskList(testList());
+        taskList.delete(2);
         assertEquals(2, taskList.getList().size());
     }
 

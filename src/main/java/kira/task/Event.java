@@ -50,19 +50,19 @@ public class Event extends Task {
     @Override
     public String saveFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        StringBuilder temp = new StringBuilder("EVENT\",\"" + super.saveFormat());
-        temp.append("\",\"" + startDate.format(formatter));
-        temp.append("\",\"" + endDate.format(formatter));
-        return temp.toString();
+        StringBuilder saveString = new StringBuilder("EVENT\",\"" + super.saveFormat());
+        saveString.append("\",\"" + startDate.format(formatter));
+        saveString.append("\",\"" + endDate.format(formatter));
+        return saveString.toString();
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
-        StringBuilder ret = new StringBuilder("[E]");
-        ret.append(super.toString())
+        StringBuilder sBuilder = new StringBuilder("[E]");
+        sBuilder.append(super.toString())
                 .append(" (from: " + startDate.format(formatter))
                 .append(", to: " + endDate.format(formatter) + ")");
-        return ret.toString();
+        return sBuilder.toString();
     }
 }

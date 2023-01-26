@@ -8,10 +8,10 @@ public class KiraException extends Exception {
     /**
      * Constructs an exception related to the bot with a message.
      * 
-     * @param msg
+     * @param message
      */
-    public KiraException(String msg) {
-        super(msg);
+    public KiraException(String message) {
+        super(message);
     }
 
     /**

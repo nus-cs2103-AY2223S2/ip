@@ -1,4 +1,5 @@
 package kira.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -45,17 +46,18 @@ public class Deadline extends Task {
 
     @Override
     public String saveFormat() {
-        StringBuilder temp = new StringBuilder("DEADLINE\",\"" + super.saveFormat());
-        temp.append("\",\"" + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
-        return temp.toString();
+        StringBuilder saveString = new StringBuilder("DEADLINE\",\"" + super.saveFormat());
+        saveString.append("\",\"" 
+                + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
+        return saveString.toString();
     }
     
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
-        StringBuilder ret = new StringBuilder("[D]");
-        ret.append(super.toString())
+        StringBuilder sBuilder = new StringBuilder("[D]");
+        sBuilder.append(super.toString())
                 .append(" (by: " + deadline.format(formatter) + ")");
-        return ret.toString();
+        return sBuilder.toString();
     }
 }

@@ -38,8 +38,8 @@ public abstract class Task {
      * @return a newly formatted string
      */
     public String saveFormat() {
-        String[] temp = new String[] {this.description, this.isDone ? "y" : "n"};
-        return String.join("\",\"", temp);
+        String[] saveString = new String[] {this.description, this.isDone ? "y" : "n"};
+        return String.join("\",\"", saveString);
     }
 
     /**
@@ -54,10 +54,10 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        StringBuilder ret = new StringBuilder();
+        StringBuilder sBuilder = new StringBuilder();
         String done = this.isDone ? "x" : " ";
-        ret.append("[" + done + "] ");
-        ret.append(this.description);
-        return ret.toString();
+        sBuilder.append("[" + done + "] ")
+                .append(this.description);
+        return sBuilder.toString();
     }
 }

@@ -37,19 +37,19 @@ public class KiraBot {
     }
 
     private void listenForCommand() {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         boolean isActive = true;
 
         while (isActive) {
             try {
-                Command command = Parser.parse(sc.nextLine());
+                Command command = Parser.parse(scanner.nextLine());
                 isActive = command.execute(UI, taskList);
                 SaveLoad.save(taskList.getList(), FILEPATH);
             } catch (KiraException e) {
                 UI.errMsg(e.getMessage());
             }
         }
-        sc.close();
+        scanner.close();
     }
 
     public static void main(String[] args) {

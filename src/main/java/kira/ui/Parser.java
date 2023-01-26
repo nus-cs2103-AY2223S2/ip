@@ -84,8 +84,13 @@ public class Parser {
                 }
                 return new FindCommand(temp[1]);
             case TODO:
+                // Fallthrough
             case DEADLINE:
+                // Fallthrough
             case EVENT:
+                if (temp.length != 2) {
+                    throw new KiraException("Incorrect use of command for any TASK commands");
+                }
                 return parseTask(commandString.toString(), temp[1]);
             }
         } catch (NumberFormatException e) {

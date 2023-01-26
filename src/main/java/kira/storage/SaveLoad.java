@@ -28,13 +28,13 @@ public class SaveLoad {
     public static void save(List<Task> taskList, String pathname) throws KiraException {
         try {
             File saveFile = new File(pathname);
-            FileWriter fw = new FileWriter(saveFile);
+            FileWriter fileWriter = new FileWriter(saveFile);
             for (Task t : taskList) {
-                fw.write(t.saveFormat());
-                fw.write("\n");
+                fileWriter.write(t.saveFormat());
+                fileWriter.write("\n");
             }
-            fw.flush();
-            fw.close();
+            fileWriter.flush();
+            fileWriter.close();
         } catch (IOException e) {
             throw new KiraException("Error encountered when saving file :C");
         }
@@ -51,48 +51,48 @@ public class SaveLoad {
         List<Task> taskList = new ArrayList<>();
         try {
             File loadFile = new File(pathname);
-            Scanner sc = new Scanner(loadFile);
-            while (sc.hasNextLine()) {
-                String task = sc.nextLine();
-                String[] parsed = task.split("\",\"");
-                switch (TaskType.valueOf(parsed[0])) {
+            Scanner scanner = new Scanner(loadFile);
+            while (scanner.hasNextLine()) {
+                String task = scanner.nextLine();
+                String[] parsedTasks = task.split("\",\"");
+                switch (TaskType.valueOf(parsedTasks[0])) {
                 case TODO:
-                    if (parsed.length != 3) {
+                    if (parsedTasks.length != 3) {
                         throw new KiraException();
                     }
-                    ToDo tdo = new ToDo(parsed[1]);
-                    if (parsed[2].equals("y")) {
-                        tdo.mark();
+                    ToDo todo = new ToDo(parsedTasks[1]);
+                    if (parsedTasks[2].equals("y")) {
+                        todo.mark();
                     }
-                    taskList.add(tdo);
+                    taskList.add(todo);
                     break;
                 case DEADLINE:
-                    if (parsed.length != 4) {
+                    if (parsedTasks.length != 4) {
                         throw new KiraException();
                     }
-                    Deadline deadline = new Deadline(parsed[1], parsed[3]);
-                    if (parsed[2].equals("y")) {
+                    Deadline deadline = new Deadline(parsedTasks[1], parsedTasks[3]);
+                    if (parsedTasks[2].equals("y")) {
                         deadline.mark();
                     }
                     taskList.add(deadline);
                     break;
                 case EVENT:
-                    if (parsed.length != 5) {
+                    if (parsedTasks.length != 5) {
                         throw new KiraException();
                     }
-                    Event evt = new Event(parsed[1], parsed[3], parsed[4]);
-                    if (parsed[2].equals("y")) {
-                        evt.mark();
+                    Event event = new Event(parsedTasks[1], parsedTasks[3], parsedTasks[4]);
+                    if (parsedTasks[2].equals("y")) {
+                        event.mark();
                     }
-                    taskList.add(evt);
+                    taskList.add(event);
                     break;
                 }
             }
-            sc.close();
+            scanner.close();
         } catch (FileNotFoundException e) {
-            StringBuilder msg = new StringBuilder("Error encountered when loading file.");
-            msg.append("\nIgnore this if it is your first time using!");
-            throw new KiraException(msg.toString());
+            StringBuilder message = new StringBuilder("Error encountered when loading file.");
+            message.append("\nIgnore this if it is your first time using!");
+            throw new KiraException(message.toString());
         } catch (KiraException e) {
             throw new KiraException("It seems that the save file is corrupted...");
         }
