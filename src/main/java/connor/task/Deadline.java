@@ -4,7 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
-    private String taskName;
+
     private LocalDateTime deadline;
     private String dataFormat;
 
