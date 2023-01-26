@@ -118,10 +118,13 @@ public class TaskHandler {
             return "Noted. I've removed this task:" + "\n" + taskContent + "\n" +
                     String.format("Now you have %d tasks in the list.", content.size()) + "\n";
         }
-
-
+    }
+    public String findHandler(String input) throws EmptyContentException {
+        String[] segments = Parser.parseTask(input);
+        String keyword = segments[1];
+        TaskList.findKeyword(keyword);
+        return UIText.printFind(TaskList.getWordList());
 
     }
-
 
 }
