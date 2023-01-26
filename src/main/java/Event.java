@@ -18,8 +18,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + super.type + "]" + super.toString() + " (from: " + Duke.getDateTimeOutput(start) + " to: "
-                + Duke.getDateTimeOutput(end) + ")";
+        return "[" + super.type + "]" + super.toString() + " (from: " + Ui.getDateTimeOutput(start) + " to: "
+                + Ui.getDateTimeOutput(end) + ")";
 
     }
 }

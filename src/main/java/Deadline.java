@@ -16,6 +16,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + super.type + "]" + super.toString() + " (by: " + Duke.getDateTimeOutput(by) + ")";
+        return "[" + super.type + "]" + super.toString() + " (by: " + Ui.getDateTimeOutput(by) + ")";
     }
 }
