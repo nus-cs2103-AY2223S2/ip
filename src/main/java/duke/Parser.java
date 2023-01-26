@@ -1,18 +1,30 @@
 package duke;
-
 import duke.dukeexceptions.Missing;
 import duke.dukeexceptions.WrongKeyWord;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Class that understands and handles commands
+ */
 public class Parser {
 
+    /**
+     * Returns reply string based on.
+     * the command from the user.
+     *
+     * @param input the full command from the user.
+     * @param input_arr the full command split in words.
+     * @param tasks keeps track of the list of tasks
+     * @param storage stores the list of tasks
+     * @return a string upon understanding the command.
+     * @throws Missing if there is missing information regarding date and time
+     * @throws WrongKeyWord if there is a missing key command
+     */
     public static String understandInput(String input, String[] input_arr, TaskList tasks, Storage storage) throws Missing, WrongKeyWord {
         String reply;
 
@@ -24,11 +36,11 @@ public class Parser {
         } else if (input_arr[0].equals("mark")) {
             int index = Integer.valueOf(input_arr[1]) - 1;
             Task task = tasks.getTask(index);
-            reply =  task.mark();
+            reply =  task.setDone();
         } else if (input_arr[0].equals("unmark")){
             int index = Integer.valueOf(input_arr[1]) - 1;
             Task task = tasks.getTask(index);
-            reply = task.unmark();
+            reply = task.setNotDone();
         }
         else if (input_arr[0].equals("delete")) {
             int index = Integer.valueOf(input_arr[1]) - 1;
