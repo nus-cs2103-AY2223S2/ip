@@ -21,8 +21,6 @@ public class DukeList implements Serializable {
     }
 
     public void add(String type, String s) {
-
-
         Task task = new Task();
         if (type.equals("todo")) {
             task = new Todo(s);
@@ -43,8 +41,22 @@ public class DukeList implements Serializable {
         System.out.println(new TextBorder(""));
     }
 
+    public void add(Task task) {
+        list.add(task);
+    }
+
     public boolean isEmpty() {
         return list.isEmpty();
+    }
+
+    public DukeList findSubString(String subString) {
+        DukeList foundList = new DukeList();
+        for (Task task : this.list) {
+            if (task.hasSubstring(subString)) {
+                foundList.add(task);
+            }
+        }
+        return foundList;
     }
 
     public void findAndMark(String text, boolean mark) {
