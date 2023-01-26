@@ -5,13 +5,18 @@ import duke.Parser;
 import duke.TaskList;
 import duke.tasks.DeadlineTask;
 
+/**
+ * Command class pertaining to creating a Deadline task
+ */
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     private static final String DEADLINE_PREFIX = "/by ";
 
+    {@inheritDoc}
     public DeadlineCommand(String input) {
         super(input);
     }
+
 
     @Override
     public String execute(TaskList tasks) throws DukeException {
