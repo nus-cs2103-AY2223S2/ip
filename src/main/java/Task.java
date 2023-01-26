@@ -3,9 +3,21 @@ public class Task {
     protected TaskStatus status;
 
     public enum TaskStatus {
-        DONE,
-        NOT_DONE,
-        DOING;
+        DONE {
+            public String toString() {
+                return "DONE";
+            }
+        },
+        NOT_DONE {
+            public String toString() {
+                return "NOT_DONE";
+            }
+        },
+        DOING {
+            public String toString() {
+                return "DOING";
+            }
+        }
     }
 
 
@@ -17,6 +29,10 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    public String toData() {
+        return this.status.toString() + "|" + this.description;
     }
 
     public String getStatusIcon() {

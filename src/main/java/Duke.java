@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,7 +33,21 @@ public class Duke {
         }
         List<String> readFile = Files.readAllLines(path);
         for (String line : readFile) {
-            
+
+        }
+    }
+
+    public static void saveFile(Path path) {
+        try {
+            FileWriter saveWriter = new FileWriter(path.toFile());
+            for (int i = 1; i < listNum; i++) {
+                Task task = list.get(i);
+                saveWriter.write(task.toData() + System.lineSeparator());
+            }
+            saveWriter.close();
+        } catch (IOException e) {
+            System.out.println("Error occurred while saving data!");
+            e.printStackTrace();
         }
     }
 
