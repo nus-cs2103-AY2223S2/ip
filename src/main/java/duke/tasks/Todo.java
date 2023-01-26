@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 // To-do class returns result that is type [T]
 public class Todo extends Task {

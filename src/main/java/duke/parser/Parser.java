@@ -1,6 +1,6 @@
-package parser;
+package duke.parser;
 
-import command.*;
+import duke.command.*;
 import exceptions.TaskException;
 import java.util.Arrays;
 

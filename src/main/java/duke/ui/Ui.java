@@ -1,7 +1,7 @@
-package ui;
+package duke.ui;
 import java.util.Scanner;
 
-import exceptions.TaskException;
+import duke.exceptions.TaskException;
 
 public class Ui {
 

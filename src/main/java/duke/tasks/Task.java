@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 // Task class: parent class of Deadline, Event, To do
 public class Task {
     private final String name;

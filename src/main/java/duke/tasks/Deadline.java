@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 import java.time.LocalDate;
 
 // Deadline class returns result that is type [D] and a deadline

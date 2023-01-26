@@ -1,10 +1,10 @@
-package tasklist;
+package duke.tasklist;
 import java.lang.ArrayIndexOutOfBoundsException;
 import java.lang.IndexOutOfBoundsException;
 import java.lang.NullPointerException;
-import exceptions.TaskException;
-import storage.Storage;
-import ui.Ui;
+import duke.exceptions.TaskException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 
 public class TaskList {

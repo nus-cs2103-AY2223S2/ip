@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 import java.time.LocalDate;
 
 // Event class returns result that is type [E] and a starting time and an ending
