@@ -1,8 +1,19 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class Engine {
     private final Scanner scanner;
     private final TaskList taskList;
+    private static final String DIRECTORY = "./data";
+    private static final String FILE_NAME = "taskList.dat";
+    private static final String FILE_PATH = DIRECTORY + "/" + FILE_NAME;
+
 
     private enum Command {
         EXIT,
@@ -21,7 +32,32 @@ public class Engine {
 
     Engine() {
         this.scanner = new Scanner(System.in);
-        this.taskList = new TaskList();
+        Either<TaskList, String> temp = this.getLocalData();
+        if (temp.isRight()) {
+            System.out.println(temp.fromRight("Default error.\n"));
+            this.taskList = new TaskList();
+        } else {
+            this.taskList = temp.fromLeft(new TaskList());
+        }
+    }
+
+    private Either<TaskList, String> getLocalData() {
+        ObjectInputStream inputStream = null;
+        try {
+            inputStream = new ObjectInputStream(new FileInputStream(FILE_PATH));
+            try {
+                TaskList taskList = (TaskList) inputStream.readObject();
+                inputStream.close();
+                return Either.left(taskList);
+            } catch (ClassNotFoundException ex) {
+                inputStream.close();
+                return Either.right("Error reading data, tasks has been reset.\n");
+            }
+        } catch (FileNotFoundException ex) {
+            return Either.left(new TaskList());
+        } catch (IOException ex) {
+            return Either.right("Error reading data, tasks has been reset.\n");
+        }
     }
 
     private String getOutput(Command command, String args) {
@@ -30,7 +66,19 @@ public class Engine {
                 return args;
             }
             case EXIT: {
-                return "Bye\n";
+                ObjectOutputStream outputStream = null;
+                while (true) {
+                    try {
+                        outputStream = new ObjectOutputStream(new FileOutputStream(FILE_PATH));
+                        outputStream.writeObject(this.taskList);
+                        outputStream.close();
+                        return "Tasks saved successfully. Bye.\n";
+                    } catch (FileNotFoundException ex) {
+                        new File(DIRECTORY).mkdir();
+                    } catch (IOException ex) {
+                        return "Error saving tasks. Bye.\n";
+                    }
+                }
             }
             case LIST: {
                 if (this.taskList.isEmpty()) {
@@ -54,7 +102,7 @@ public class Engine {
                 }
                 String desc = Util.cleanup(args.substring(0, start));
                 String dl = Util.cleanup(args.substring(start + flag.length(), args.length()));
-                
+
                 if (desc.isEmpty() || dl.isEmpty()) {
                     return "Some inputs are blank.\n";
                 }
@@ -113,9 +161,9 @@ public class Engine {
                     if (num > this.taskList.size()) {
                         return "Task not in list.\n";
                     }
-                    String out = "Task has been deleted:" + 
-                        this.taskList.get(num) +
-                        "\nTasks remaining: ";
+                    String out = "Task has been deleted:" +
+                            this.taskList.get(num) +
+                            "\nTasks remaining: ";
                     this.taskList.deleteTask(num);
                     return out + this.taskList.toString();
                 } catch (NumberFormatException ex) {
