@@ -68,9 +68,9 @@ public final class Resource {
     }
 
     /**
-     * Format of array/list index number.
+     * Formats an array/list index number.
      *
-     * @return Formatted index (start with 1).
+     * @return Formatted index (starts with 1).
      */
     public static String idxFmt(int i) {
         return " " + (i + 1) + '.';

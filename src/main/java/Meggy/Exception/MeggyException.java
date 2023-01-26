@@ -2,7 +2,7 @@ package Meggy.Exception;
 
 import Meggy.Resource;
 
-/** {@link Exception} that will eventually print out with {@code Meggy.Resource.errBase} prefix. */
+/** {@link Exception} that will eventually print out with {@code Resource.ERR_BASE} prefix. */
 public class MeggyException extends Exception {
     /**
      * Adds prefix to message.

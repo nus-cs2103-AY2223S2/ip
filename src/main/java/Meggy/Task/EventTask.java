@@ -7,9 +7,7 @@ import Meggy.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * {@link UserTask} with an optional start time and an optional end time.
- */
+/** {@link UserTask} with a start time and an end time. */
 public class EventTask extends UserTask {
     /** Bracketed icon of task type. */
     public final static String LABEL = getTaskTypeLabel(Resource.CMD_EVENT);

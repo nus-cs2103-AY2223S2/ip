@@ -59,7 +59,7 @@ public class MeggyTime {
     }
 
     /**
-     * Factory method that trims none-null strings. It also accepts {@code null} value, in which case it returns the
+     * Factory method. Trims none-null strings. It also accepts {@code null} value, in which case it returns the
      * cached {@code NA} value.
      *
      * @param time Untrimmed time value to be interpreted or {@code null} if {@code NA} value is intended.
@@ -68,7 +68,7 @@ public class MeggyTime {
         return time == null ? NA : new MeggyTime(time.trim());
     }
 
-    /** @return parsed date-time or null if no formatter can parse correctly. */
+    /** @return parsed date-time or {@code null} if no formatter can parse correctly. */
     public static LocalDateTime parseTime(String time) {
         for (DateTimeFormatter format : FORMATTERS) {
             try {
