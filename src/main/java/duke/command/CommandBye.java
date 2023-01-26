@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.task.Ui;
+
 public class CommandBye extends Command{
     public CommandBye(String command) {
         super(command);

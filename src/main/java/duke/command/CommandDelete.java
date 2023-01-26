@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.task.Ui;
+
 public class CommandDelete extends Command{
     private int index;
     public CommandDelete(String command, int index) {

@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.task.Task;
+import duke.task.Ui;
+
 public class CommandTask extends Command{
     private Task task;
     public CommandTask(String command, Task task) {

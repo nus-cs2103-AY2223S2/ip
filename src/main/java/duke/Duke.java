@@ -1,4 +1,7 @@
-import java.util.*;
+package duke;
+
+import duke.task.Ui;
+import duke.command.Command;
 
 public class Duke {
     private Storage storage;
