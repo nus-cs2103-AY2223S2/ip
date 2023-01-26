@@ -8,16 +8,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Ui {
-    private static final String logo = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String greeting = "Hello from\n" + logo;
-    private static final String list = "duke.Duke presents tasks in your list: ";
-    private static final String bye = "duke.Duke says bye bye ~~";
+    private static final String GREETING = "Hello from\n" + LOGO;
+    private static final String LIST = "Duke presents tasks in your list: ";
+    private static final String BYE = "Duke says bye bye ~~";
+    private static final String MATCHING = "Duke finds these items containg your keyword: ";
 
     private BufferedReader bf;
+
     public Ui() {
         bf = new BufferedReader(new InputStreamReader(System.in));
     }
@@ -36,26 +38,21 @@ public class Ui {
     }
 
     public void greet() {
-        System.out.println(greeting);
+        System.out.println(GREETING);
     }
 
     public void goodBye() {
         lineUI();
-        System.out.println(bye);
+        System.out.println(BYE);
         lineUI();
     }
 
     public void listCommand() {
         ArrayList<Task> arr = TaskList.getList();
         if (arr.size() == 0) {
-            System.out.println("duke.Duke sees no tasks in your list");
+            System.out.println("Duke sees no tasks in your list");
         }
-        int cnt = 1;
-        while (cnt <= arr.size()) {
-            Task item = arr.get(cnt - 1);
-            System.out.println(cnt + "." + item.toString());
-            cnt++;
-        }
+        listTasks(arr);
     }
 
      static void todoCommand(String str, Storage storage) throws IOException {
@@ -162,6 +159,32 @@ public class Ui {
             lineUI();
         } catch (MissingArgumentsException | InvalidTaskNumberException err) {
             System.out.println(err.getMessage());
+        }
+    }
+
+    void findCommand(String str) {
+        try {
+            String keyword = Parser.getName(str, 5);
+            ArrayList<Task> matchedTasks = TaskList.findMatch(keyword);
+            if (matchedTasks.size() == 0) {
+                System.out.println("Duke finds no tasks containing the keyword given");
+            } else {
+                lineUI();
+                System.out.println(MATCHING);
+                listTasks(matchedTasks);
+                lineUI();
+            }
+        } catch (MissingNameException | MissingArgumentsException err) {
+            System.out.println(err.getMessage());
+        }
+    }
+
+    void listTasks(ArrayList<Task> arr) {
+        int cnt = 1;
+        while (cnt <= arr.size()) {
+            Task item = arr.get(cnt - 1);
+            System.out.println(cnt + "." + item.toString());
+            cnt++;
         }
     }
 

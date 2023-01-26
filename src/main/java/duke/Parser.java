@@ -5,7 +5,17 @@ import duke.exceptions.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/** A class Parser that deals with making sense of the user command */
 public class Parser {
+
+    /**
+     * Returns an array that contains the name of the task and the rest of the command after parsing
+     *
+     * @param line The command
+     * @throws MissingTimeException If there is not a time element in the command
+     * @throws MissingNameException If the name of the task is blank
+     * @returns Array of string with name and the rest of the command
+     */
     public static String[] separate(String line) throws MissingTimeException, MissingNameException {
         try {
             StringBuilder sb = new StringBuilder();
@@ -29,6 +39,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the deadline in the command
+     *
+     * @param line The command
+     * @throws MissingTimeException If there is not a time element in the command
+     * @throws InvalidSyntaxException If the command does not start with "by" keyword
+     * @returns The deadline as string
+     */
     public static String getDeadline(String line) throws MissingTimeException, InvalidSyntaxException {
         try {
             String toReturn = line.substring(3);
@@ -44,6 +62,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the task number in the command
+     *
+     * @param str The string passed
+     * @param from The starting index to start searching for task number
+     * @throws MissingArgumentsException If there is no number detected
+     * @throws InvalidTaskNumberException If the task number is invalid: smaller or equal to
+     *                                    0 or larger than list size
+     * @returns The task number
+     */
     public static int getTaskNumber(String str, int from) throws MissingArgumentsException, InvalidTaskNumberException {
         int numOfTask;
         try {
@@ -59,11 +87,15 @@ public class Parser {
         return numOfTask;
     }
 
-
-
-
-
-
+    /**
+     * Returns the array that contains starting and ending time in the command
+     *
+     * @param line The string passed
+     * @throws MissingArgumentsException If there is not either starting or ending time
+     * @throws InvalidSyntaxException If the syntax of the command is not correct
+     * @throws MissingTimeException If either of the starting or ending time is blank
+     * @returns The task number
+     */
     public static String[] getDuration(String line) throws MissingArgumentsException, MissingTimeException, InvalidSyntaxException {
         try {
             String[] arr = line.split("/");
@@ -84,7 +116,15 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Returns the array that contains starting and ending time in the command
+     *
+     * @param str The string passed
+     * @param from The index that starts searching from
+     * @throws MissingNameException If name found is blank
+     * @throws MissingArgumentsException If there is no name detected
+     * @returns The name in the command
+     */
     public static String getName(String str, int from) throws MissingNameException, MissingArgumentsException {
         try {
             String name = str.substring(from);
@@ -99,19 +139,37 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the date as string in format of "MMM dd YYYY"
+     *
+     * @param d LocalDate object
+     * @returns The date parsed
+     */
     public static String getString(LocalDate d) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
         return d.format(formatter);
     }
 
+    /**
+     * Returns the date as a LocalDate object
+     *
+     * @param str The string
+     * @returns The LocalDate object
+     */
     public static LocalDate getDate(String str) {
+        // Solve the exception here
         return LocalDate.parse(str);
     }
 
+    /**
+     * Returns the string of form "YYYY-MM-DD" that contains date
+     *
+     * @param str The string of form "MMM dd YYYY"
+     * @returns The string of form "YYYY-MM-DD"
+     */
     public static String getDateMMM(String str) {
+        // Solve the exception here
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd YYYY");
         return getString(LocalDate.parse(str, formatter));
     }
-
-
 }

@@ -9,14 +9,16 @@ import java.time.format.DateTimeParseException;
  * A class that represents a duke.Deadline with deadline time
  */
 public class Deadline extends Task {
+    /** Deadline of the task */
     private LocalDate deadline;
 
     /**
-     * Initialize an duke.Event object with the given values.
+     * Initializes an Deadline object with the given values.
      *
      * @param name The name of the deadline
      * @param deadline The deadline time of the task
      * @return A deadline instance
+     * @throws InvalidDateFormatException If the deadline passed as String is not of format "YYYY-MM-DD"
      */
     public Deadline(String name, String deadline) throws InvalidDateFormatException {
         super(name);
@@ -27,6 +29,15 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Initializes an Deadline object with the given values.
+     *
+     * @param name The name of the deadline
+     * @param deadline The deadline time of the task
+     * @param isDone The status of the task, whether it is done or not
+     * @return A deadline instance
+     * @throws InvalidDateFormatException If the deadline passed as String is not of format "YYYY-MM-DD"
+     */
     public Deadline(String name, String deadline, boolean isDone) throws InvalidDateFormatException {
         super(name, isDone);
         try {
@@ -38,7 +49,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Returns the string representation of the duke.Deadline task, including
+     * Returns the string representation of the Deadline task, including
      * whether the task is done or not.
      *
      * @return The string representation of the task.

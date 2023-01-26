@@ -4,20 +4,30 @@ package duke;
  * A class that represents a Task
  */
 public class Task {
+    /** Name of the task */
     private String taskName;
+
+    /** Status of the class */
     private boolean isDone;
 
     /**
-     * Initialize an Task object with the given values.
+     * Initializes an Task object with the given values.
      *
      * @param name The name of the task
-     * @return A deadline instance
+     * @return A task instance
      */
     public Task(String name) {
         this.taskName = name;
         isDone = false;
     }
 
+    /**
+     * Initializes an Task object with the given values.
+     *
+     * @param name The name of the task
+     * @param isDone The status of the task
+     * @return A task instance
+     */
     public Task(String name, boolean isDone) {
         this.taskName = name;
         this.isDone = isDone;

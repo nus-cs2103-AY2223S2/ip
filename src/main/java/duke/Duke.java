@@ -1,22 +1,42 @@
 package duke;
 
 import duke.exceptions.InvalidCommandException;
+import duke.exceptions.InvalidDateFormatException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
+/** A class that represents a Personal Assistant Chatbot
+ * that helps keep track of various things.
+ */
 public class Duke {
+    /** Storage that handles hard-disk saving */
     private Storage storage;
+
+    /** TaskList that keeps track of all the tasks added */
     private TaskList tasks;
+
+    /** Ui that handles user interface jobs */
     private Ui ui;
 
+    /**
+     * Initializes an Duke object with the given values.
+     *
+     * @param filePath The name of the file where you keep list of tasks
+     * @return A Duke instance
+     * @throws FileNotFoundException
+     */
     public Duke(String filePath) throws FileNotFoundException {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.initialize());
     }
 
+    /**
+     * Starts running the Duke
+     *
+     * @throws IOException
+     */
     public void run() throws IOException {
         ui.greet();
         String str;
@@ -41,13 +61,16 @@ public class Duke {
                 ui.deadlineCommand(str, storage);
             } else if (str.length() >= 7 && str.toLowerCase().startsWith("delete ")) {
                 ui.deleteCommand(str, storage);
+            } else if (str.length() >= 5 && str.toLowerCase().startsWith("find ")) {
+                ui.findCommand(str);
             } else {
                 System.out.println(new InvalidCommandException().getMessage());
             }
         }
-
         ui.close();
     }
+
+
     public static void main(String[] args) throws IOException {
         new Duke("data/duke.txt").run();
     }

@@ -5,7 +5,7 @@ package duke;
  */
 public class ToDo extends Task {
     /**
-     * Initialize an Todo object with the given values.
+     * Initializes an Todo object with the given values.
      *
      * @param name The name of the todo
      * @return A todo instance
@@ -14,6 +14,13 @@ public class ToDo extends Task {
         super(name);
     }
 
+    /**
+     * Initializes an Todo object with the given values.
+     *
+     * @param name The name of the todo
+     * @param isDone The status of the todo
+     * @return A todo instance
+     */
     public ToDo(String name, boolean isDone) {
         super(name, isDone);
     }
