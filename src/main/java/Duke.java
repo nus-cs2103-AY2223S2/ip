@@ -53,6 +53,20 @@ public class Duke {
                     System.out.println("\tOOPS!!! Please input the index.\n" + LINE + "\n");
                 }
             }
+            else if (splittedCmd[0].equals("delete")){
+                try {
+                    System.out.println(LINE);
+                    int idx = Integer.parseInt(splittedCmd[1]) - 1;
+                    Task task = list.get(idx);
+                    list.remove(idx);
+                    System.out.println("\tNoted. I've removed this task:");
+                    System.out.println("\t" + task.toString());
+                    System.out.println("\t" + "Now you have " + list.size() + " tasks in the list");
+                    System.out.println(LINE + "\n");
+                }catch (Exception e){
+                    System.out.println("\tOOPS!!! Please input the index.\n" + LINE + "\n");
+                }
+            }
             else if (splittedCmd[0].equals("todo")){
                 try {
                     System.out.println(LINE);
