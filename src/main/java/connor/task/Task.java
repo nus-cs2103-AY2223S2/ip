@@ -4,19 +4,39 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
 public abstract class Task {
-    private String taskName;
-    private boolean isDone;
 
+    /** String that represents the name of the task. */
+    protected String taskName;
+    /** Boolean that is true if a task is marked. */
+    protected boolean isDone;
+
+    /**
+     * Constructor for Task that assumes that a task is not marked.
+     *
+     * @param taskName
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Task that marks a task.
+     * Meant for reading from memory.
+     *
+     * @param taskName
+     * @param isDone
+     */
     public Task(String taskName, Boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;
     }
 
+    /**
+     * Returns String representing if a task is marked.
+     *
+     * @return String [X] if marked.
+     */
     public String getMark() {
         if (this.isDone) {
             return "[X]";
@@ -24,18 +44,35 @@ public abstract class Task {
         return "[ ]";
     }
 
+    /**
+     * Sets isDone to true.
+     */
     public void mark() {
         this.isDone = true;
     }
 
+    /**
+     * Set isDone to false.
+     */
     public void unmark() {
         this.isDone = false;
     }
 
+    /**
+     * Returns the taskName of this instance.
+     *
+     * @return String of the taskName.
+     */
     public String getTaskName() {
         return this.taskName;
     }
 
+    /**
+     * Returns a String by converting LocalDateTime to print.
+     *
+     * @param input
+     * @return String from LocalDateTime.
+     */
     public String formatDateTime(LocalDateTime input) {
         String month = input.getMonth().toString().substring(0, 3);
         int day = input.getDayOfMonth();
@@ -45,6 +82,12 @@ public abstract class Task {
         return month + " " + day + " " + year + " " + hour + minute;
     }
 
+    /**
+     * Returns a String in a parseable format into LocalDateTime.
+     *
+     * @param input
+     * @return String that is parseable into LocalDateTime.
+     */
     public String dateTimeFormat(String input) {
         String[] dateTimePair = input.split(" ");
         String date = dateTimePair[0];
@@ -54,15 +97,32 @@ public abstract class Task {
         return date + "T" + hrStr + ":" + minStr + ":00";
     }
 
+    /**
+     * Returns a LocalDateTime object that has the date and time of the input.
+     *
+     * @param input
+     * @return LocalDateTime with the date and time of the input.
+     * @throws DateTimeException
+     */
     public LocalDateTime parseDateTime(String input) throws DateTimeException {
         String formattedDateTime = dateTimeFormat(input);
         return LocalDateTime.parse(formattedDateTime);
     }
 
+    /**
+     * Returns a String in a format that is meant to be stored in the memory.
+     *
+     * @return String that represents the Task instance in the memory.
+     */
     public String dataFormat() {
         return this.isDone + "|" + this.taskName;
     }
 
+    /**
+     * Returns a String which is a concatenation of if the task is done and the taskName.
+     *
+     * @return String representation of the task.
+     */
     public String toString() {
         return getMark() + " " + this.taskName;
     }

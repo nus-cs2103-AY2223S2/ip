@@ -13,13 +13,27 @@ import java.util.Scanner;
 
 public class Storage {
 
+    /** dataFile that stores the tasks between sessions. */
     private File dataFile;
 
+    /**
+     * Constructor that reads information from a File object.
+     *
+     * @param dataFile File contains the current list of Tasks.
+     */
     public Storage(File dataFile) {
         this.dataFile = dataFile;
     }
 
-    public Task parseLine(String[] directives) throws CorruptedDataException {
+    /**
+     * Returns a Task after reading one line in the memory.
+     *
+     * @param str String of one line in the memory.
+     * @return Task instance read from memory.
+     * @throws CorruptedDataException if command is unreadable.
+     */
+    public Task interpretLine(String str) throws CorruptedDataException {
+        String[] directives = str.split("\\|");
         if (directives[0].equals("T")) {
             return new Todo(directives[2], Boolean.parseBoolean(directives[1]));
         } else if (directives[0].equals("D")) {
@@ -30,11 +44,13 @@ public class Storage {
         throw new CorruptedDataException();
     }
 
-    public Task interpretLine(String str) throws CorruptedDataException {
-        String[] directives = str.split("\\|");
-        return parseLine(directives);
-    }
-
+    /**
+     * Returns a LinkedList that is from the memory if it is valid and not corrupted.
+     * Ignores that line if memory is corrupted.
+     *
+     * @param sc scanner object to read the File object.
+     * @return LinkedList read from memory.
+     */
     public LinkedList<Task> readFile(Scanner sc) {
         LinkedList<Task> tasks = new LinkedList<>();
         while (sc.hasNextLine()) {
@@ -47,12 +63,23 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Returns a LinkedList that is read from the dataFile.
+     *
+     * @return LinkedList that is read from dataFile.
+     * @throws IOException if File does not exist.
+     */
     public LinkedList<Task> initialize() throws IOException {
         this.dataFile.createNewFile();
         Scanner sc = new Scanner(this.dataFile);
         return readFile(sc);
     }
 
+    /**
+     * Writes the contents of the LinkedList into the memory.
+     *
+     * @param tasks the collection of Task to be stored in memory.
+     */
     public void updateFile(LinkedList<Task> tasks) {
         try {
             FileWriter writer = new FileWriter(String.valueOf(this.dataFile));

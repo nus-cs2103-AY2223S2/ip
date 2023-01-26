@@ -30,10 +30,21 @@ public class Connor {
         FIND
     }
 
+    /** Storage variable for this instance */
     private Storage storage;
+
+    /** Collection of tasks for this instance */
     private TaskList tasks;
+
+    /** UI to print messages for this instance */
     private Ui ui;
+
+    /** Parser to parse inputs for this instance */
     private Parser parser;
+
+    /**
+     * Constructor to instantiate a new Connor object.
+     */
     public Connor() {
         this.ui = new Ui();
         this.ui.greet();
@@ -47,6 +58,14 @@ public class Connor {
         }
     }
 
+    /**
+     * Returns a File object that is created in a relative directory path of the user.
+     * Creates a new Directory if the directory does not exist.
+     * Creates a new File if the data file does not exist.
+     * Utilises an existing file if it exists.
+     *
+     * @return File object that stores tasks across instances.
+     */
     private File getFile() {
         String homeDir = System.getProperty("user.dir");
         Path directoryPath = Paths.get(homeDir, "data");
@@ -66,6 +85,10 @@ public class Connor {
         return new File("data/connor.Connor.txt");
     }
 
+    /**
+     * Scans in user input and parses it.
+     * Stores the output in the file.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         boolean isOver = false;
