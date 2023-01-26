@@ -64,7 +64,6 @@ public class TaskList {
         return str.toString();
     }
 
-
     public int getSize() {
         return this.tasks.size();
     }
