@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.function.Predicate;
@@ -108,15 +109,21 @@ public class Duke {
         if (command.namedParameters.get("by").isEmpty()) {
             throw new DukeInvalidArgumentException("The \"/by\" parameter of a deadline cannot be empty.");
         }
-
-        String description = command.body;
-        Task task = new TaskDeadline(description, command.namedParameters.get("by"));
-        tasks.add(task);
-        Duke.say(
-            "Got it. I've added this task:\n"
-                + "  " + task.toString() + "\n"
-                + tasks.getStatus()
-        );
+        
+        try {
+            String description = command.body;
+            Task task = new TaskDeadline(description, command.namedParameters.get("by"));
+            tasks.add(task);
+            Duke.say(
+                "Got it. I've added this task:\n"
+                    + "  " + task.toString() + "\n"
+                    + tasks.getStatus()
+            );
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidArgumentException(
+                "The \"/by\" value must be in the form \"yyyy-mm-dd\" (eg. 2019-10-15)."
+            );
+        }
     }
 
     private static void addEvent(Command command, TaskList tasks) throws DukeInvalidArgumentException {
@@ -136,18 +143,24 @@ public class Duke {
             throw new DukeInvalidArgumentException("The \"/to\" parameter of an event cannot be empty.");
         }
 
-        String description = command.body;
-        Task task = new TaskEvent(
-            description, 
-            command.namedParameters.get("from"), 
-            command.namedParameters.get("to")
-        );
-        tasks.add(task);
-        Duke.say(
-            "Got it. I've added this task:\n"
-                + "  " + task.toString() + "\n"
-                + tasks.getStatus()
-        );
+        try {
+            String description = command.body;
+            Task task = new TaskEvent(
+                description, 
+                command.namedParameters.get("from"), 
+                command.namedParameters.get("to")
+            );
+            tasks.add(task);
+            Duke.say(
+                "Got it. I've added this task:\n"
+                    + "  " + task.toString() + "\n"
+                    + tasks.getStatus()
+            );
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidArgumentException(
+                "The \"/from\" and \"/to\" values must be in the form \"yyyy-mm-dd\" (eg. 2019-10-15)."
+            );
+        }
     }
 
     private static void mark(Command command, TaskList tasks) throws DukeInvalidArgumentException {

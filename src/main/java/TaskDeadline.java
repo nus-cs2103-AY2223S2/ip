@@ -1,9 +1,11 @@
+import java.time.LocalDate;
+
 public class TaskDeadline extends Task {
-    public final String endTime;
+    public final LocalDate endTime;
 
     public TaskDeadline(String description, String endTime) {
         super(description);
-        this.endTime = endTime;
+        this.endTime = LocalDate.parse(endTime);
     }
 
     public static TaskDeadline loadFromString(String input) {
@@ -24,13 +26,17 @@ public class TaskDeadline extends Task {
         return Task.encodeValues(new String[]{ 
             "D", 
             this.isDone ? "1" : "0", 
-            this.description, 
-            this.endTime 
+            this.description.toString(), 
+            this.endTime.toString()
         });
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.endTime);
+        return String.format(
+            "[D]%s (by: %s)", 
+            super.toString(), 
+            Task.formatDate(this.endTime)
+        );
     }
 }

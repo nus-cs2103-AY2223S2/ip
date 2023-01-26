@@ -1,9 +1,9 @@
 list
 todo borrow book
-deadline return book /by Sunday
-deadline do homework /by no idea :-p
-event project meeting /from Mon 2pm /to 4pm
-event project meeting /to Tues 4pm /from Sun 2pm
+deadline return book /by 2023-01-28
+deadline do homework /by 2023-01-29
+event project meeting /from 2023-02-01 /to 2023-02-02
+event project meeting /to 2023-02-05 /from 2023-02-03
 mark 1
 mark 3
 mark 4
@@ -30,6 +30,7 @@ deadline
 deadline   
 deadline DESCRIPTION   
 deadline DESCRIPTION /by   
+deadline DESCRIPTION /by INVALID DATE
 event
 event   
 event DESCRIPTION   
@@ -41,6 +42,9 @@ event DESCRIPTION /to
 event DESCRIPTION /to TO TIME   
 event DESCRIPTION /to /from   
 event DESCRIPTION /to TO TIME /from   
+event DESCRIPTION /from INVALID DATE /to INVALID DATE
+event DESCRIPTION /from 2023-01-27 /to INVALID DATE
+event DESCRIPTION /from INVALID DATE /to 2023-01-27
 delete 2
 list
 delete

@@ -1,6 +1,8 @@
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
     public final String description;
@@ -55,5 +57,9 @@ public abstract class Task {
     public String toString() {
         String statusIcon = isDone ? "X" : " ";
         return String.format("[%s] %s", statusIcon, description);
+    }
+
+    protected static String formatDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }
