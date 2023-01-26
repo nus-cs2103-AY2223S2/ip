@@ -4,16 +4,36 @@ import cbot.time.TimeStuff;
 
 import java.time.LocalDateTime;
 
+/**
+ * Task with a due date. Stores the description of the task, whether it has been completed or not,
+ * and the eponymous deadline.
+ *
+ * @see Task
+ * @see Event
+ */
 public class Deadline extends Task {
     private final LocalDateTime due;
-    
+
     public static final String DEADLINE_SYMBOL = "D";
-    
+
+    /**
+     * Constructs a task with the given description, completion status, and deadline.
+     *
+     * @param desc The task description.
+     * @param isDone Whether the task is done.
+     * @param due The deadline of the task.
+     */
     public Deadline(String desc, boolean isDone, LocalDateTime due) {
         super(desc, isDone);
         this.due = due;
     }
-    
+
+    /**
+     * Constructs a not-yet-done task with the given description and deadline.
+     *
+     * @param desc The task description.
+     * @param due The deadline of the task.
+     */
     public Deadline(String desc, LocalDateTime due) {
         super(desc);
         this.due = due;
