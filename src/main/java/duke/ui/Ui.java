@@ -96,7 +96,7 @@ public class Ui {
      * after the find command.
      */
     public void findError() {
-        System.out.println("☹ OOPS!!! The keyword is no valid!");
+        System.out.println("☹ OOPS!!! The keyword is not valid!");
     }
 
     /**
@@ -116,7 +116,7 @@ public class Ui {
      * after the mark command.
      */
     public void markError() {
-        System.out.println("☹ OOPS!!! A valid number has to follow the mark command");
+        System.out.println("☹ OOPS!!! A valid number has to follow the mark command!");
     }
 
     /**
@@ -135,7 +135,7 @@ public class Ui {
      * after the unmark command.
      */
     public void unmarkError() {
-        System.out.println("☹ OOPS!!! A valid number has to follow the unmark command");
+        System.out.println("☹ OOPS!!! A valid number has to follow the unmark command!");
     }
 
     /**

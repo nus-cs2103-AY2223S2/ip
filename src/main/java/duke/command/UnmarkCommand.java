@@ -41,7 +41,8 @@ public class UnmarkCommand extends Command {
                 throw new DukeException(null, null);
             }
             int index = scanner.nextInt() - 1;
-            if (tasks.get(index) == null) {
+            System.out.println(index);
+            if (index >= tasks.size() || index < 0) {
                 scanner.close();
                 throw new DukeException(null, null);
             }
