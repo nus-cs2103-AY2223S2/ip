@@ -17,4 +17,13 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.from + ", to: " + this.to + ")";
     }
+
+    public static Event fromSaveFormat(String savedData) {
+        String[] inputs = savedData.split("\\|\\|");
+        Event generatedEvent = new Event(inputs[2], inputs[3], inputs[4]);
+        if (inputs[1].equals("1")) {
+            generatedEvent.setCompleted(true);
+        }
+        return generatedEvent;
+    }
 }
