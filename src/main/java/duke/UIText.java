@@ -15,9 +15,17 @@ public class UIText {
         return sc.nextLine();
     }
 
+    /**
+     * String representation of opening message.
+     * @return String object of greeting message.
+     */
     public String greet() {
         return GREET;
     }
+    /**
+     * String representation of closing message and closes the scanner. 
+     * @return String object of greeting message.
+     */
     public String exit() {
         sc.close();
         return EXIT;

@@ -9,6 +9,10 @@ public class Duke {
     private UIText ui;
     private Storage storage;
     private TaskList taskList;
+
+    /**
+     * Constructor for the Duke class.
+     */
     public Duke() {
         try {
             ui = new UIText();
@@ -24,6 +28,9 @@ public class Duke {
 
     }
 
+    /**
+     * Method to run the Duke program.
+     */
     public void run() {
         boolean isClosed = false;
         TaskHandler handler = new TaskHandler(taskList);
