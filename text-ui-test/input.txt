@@ -1,6 +1,6 @@
 todo eat lunch
-deadline do HW /by 10 Jan
-event play tennis /from 11 Jan 2pm /to 4pm
+deadline do HW /by 2023-10-10 14:00
+event play tennis /from 2023-10-10 14:00 /to 2023-10-10 15:00
 list
 mark 1
 unmark 2

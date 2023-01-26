@@ -1,154 +1,132 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Duke {
-
-        static String line = "      _____________________________________________________________________";
-        static ArrayList<Tasks> list = new ArrayList<Tasks>(100);
-
-
         public static void main (String[]args) {
+            Tasklist list = new Tasklist();
             try {
-                greet();
-                System.out.println(line);
+                Storage.loadFile(list);
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+                Ui.greet();
                 Scanner sc = new Scanner(System.in);
                 //echo
 
                 while (true) {
+                    try {
                     String input = sc.nextLine();
 
-                    if (InputProcessor.is_Bye(input)) {
-                        System.out.println(line);
-                        System.out.println("        byebye! Have an exquisite day");
-                        System.out.println(line);
+                    if (Parser.is_Bye(input)) {
+                        Ui.displayByeMessage();
                         break;
                     }
 
                     //list
-                    else if (InputProcessor.is_List(input)) {
-                        System.out.println(line);
-                        for (int i = 0; i < list.size(); i++) {
-                            System.out.println("        " + (i + 1) + ". " + list.get(i));
-                        }
-                        System.out.println(line);
+                    else if (Parser.is_List(input)) {
+                        Duke.executeList(list);
                     }
 
                     //mark
-                    else if (InputProcessor.is_Mark(input)) {
-                        String int_Str = input.split(" ", 2)[1];
-                        int index = Integer.parseInt(int_Str);
-                        if (list.size() != 0 && index > 0 && index <= list.size()) {
-                            list.get(index - 1).mark();
-                        } else {
-                            throw new DukeException("Invalid Index!");
-                        }
+                    else if (Parser.is_Mark(input)) {
+                        Duke.executeMark(input, list);
                     }
 
                     //unmark
-                    else if (InputProcessor.is_Unmark(input)) {
-                        String int_Str = input.split(" ", 2)[1];
-                        int index = Integer.parseInt(int_Str);
-                        if (list.size() != 0 && index > 0 && index <= list.size()) {
-                            list.get(index - 1).unmark();
-                        } else {
-                            throw new DukeException("Invalid Index!");
-                        }
+                    else if (Parser.is_Unmark(input)) {
+                        Duke.executeUnmark(input, list);
                     }
 
                     //delete
-                    else if (InputProcessor.is_Delete(input)) {
-                        String int_Str = input.split(" ", 2)[1];
-                        int index = Integer.parseInt(int_Str);
-                        if (list.size() != 0 && index > 0 && index <= list.size()) {
-                            delete(index - 1, list);
-                        } else {
-                            throw new DukeException("Invalid Index!");
-                        }
+                    else if (Parser.is_Delete(input)) {
+                        Duke.executeDelete(input, list);
                     }
 
                     //todo
-                    else if (InputProcessor.is_toDo(input)) {
-                        String todo = input.split(" ", 2)[1];
-                        System.out.println("\n" + line);
-                        list.add(new ToDo(todo));
-                        echo(list.get(list.size() - 1));
-                        System.out.println(line);
+                    else if (Parser.is_toDo(input)) {
+                        Duke.executeToDo(input, list);
                     }
 
                     //deadline
-                    else if (InputProcessor.is_Deadline(input)) {
-                        String deadline = input.split(" ", 2)[1];
-                        String[] deadline_Arr = deadline.split(" /by");
-
-                        if (deadline_Arr.length == 2) {
-                            String content = deadline_Arr[0];
-                            String date = deadline_Arr[1];
-                            System.out.println("\n" + line);
-                            list.add(new Deadline(content, date));
-                            echo(list.get(list.size() - 1));
-                            System.out.println(line);
-                        } else {
-                            System.out.println("Invalid Input! You need to specify date or content is empty!");
-                        }
+                    else if (Parser.is_Deadline(input)) {
+                        Duke.executeDeadline(input, list);
                     }
 
                     //event
-                    else if (InputProcessor.is_Event(input)) {
-                        String event = input.split(" ", 2)[1];
-                        String[] event_Arr = event.split(" /from", 2);
-
-                        if (event_Arr.length == 2) {
-                            String content = event_Arr[0];
-                            String[] period_Arr = event_Arr[1].split(" /to");
-                            if (period_Arr.length == 2) {
-                                String from = period_Arr[0];
-                                String to = period_Arr[1];
-                                System.out.println("\n" + line);
-                                list.add(new Event(content, from, to));
-                                echo(list.get(list.size() - 1));
-                                System.out.println(line);
-                            } else {
-                                throw new DukeException("Invalid Input! You need to specify a /from and /to or content is empty!");
-                            }
-                        } else {
-                            throw new DukeException("Invalid Input! You need to specify a date or content is empty!");
-                        }
+                    else if (Parser.is_Event(input)) {
+                        Duke.executeEvent(input, list);
                     } else {
-                        throw new DukeException("Invalid Input!");
+                        System.out.println("Invalid Input!");
+                        //throw new DukeException("Invalid Input!");
+                    }
+                    try {
+                        Storage.saveToFile(list);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                 }
                 sc.close();
-                System.out.println(line);
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
     }
 
-        public static void echo(Tasks task){
-        System.out.println(line);
-        System.out.println("        Got it. I've added this task:");
-        System.out.println("        " + task);
-        System.out.println("        Now you have " + list.size() + " tasks in the list.");
-        System.out.println(line);
-    }
-
-        public static void delete(int i, ArrayList<Tasks> list){
-            System.out.println(line);
-            System.out.println("        Got it. I've removed this task:");
-            System.out.println("        " + list.get(i));
-            list.remove(i);
-            System.out.println("        Now you have " + list.size() + " tasks in the list.");
-            System.out.println(line);
+        public static void executeList(Tasklist list) {
+            Ui.displayList(list);
         }
 
-        static void greet () {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(line);
-        System.out.println("\n      Hello! I'm Oli\n" + "       What can I do for you?");
+        public static void executeMark(String input, Tasklist list) {
+            int index = Parser.getIndex(input);
+            if (list.size() != 0 && index > 0 && index <= list.size()) {
+                list.get(index - 1).mark();
+            } else {
+                Ui.displayInvalidIndexMessage();
+            }
+        }
+
+        public static void executeUnmark(String input, Tasklist list) {
+            int index = Parser.getIndex(input);
+            if (list.size() != 0 && index > 0 && index <= list.size()) {
+            list.get(index - 1).unmark();
+            } else {
+            Ui.displayInvalidIndexMessage();
+            }
+        }
+
+        public static void executeDelete(String input, Tasklist list) {
+            int index = Parser.getIndex(input);
+            if (list.size() != 0 && index > 0 && index <= list.size()) {
+            Ui.displayDelete(index - 1, list);
+            } else {
+            Ui.displayInvalidIndexMessage();
+            }
+        }
+
+    public static void executeDeadline(String input, Tasklist list) throws DukeException {
+        Deadline deadline = Parser.parseDeadline(input);
+        list.add(deadline);
+        Ui.displayAddTask(list.get(list.size() - 1), list);
     }
+
+    public static void executeEvent(String input, Tasklist list) throws DukeException {
+        Event event = Parser.parseEvent(input);
+        list.add(event);
+        Ui.displayAddTask(list.get(list.size() - 1), list);
+        }
+
+    public static void executeToDo(String input, Tasklist list) {
+        String todo = Parser.getTodo(input);
+        list.add(new ToDo(todo));
+        Ui.displayAddTask(list.get(list.size() - 1), list);
+    }
+
+
+
+
+
+
 
 
 }
