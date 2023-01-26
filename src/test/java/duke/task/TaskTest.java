@@ -8,37 +8,39 @@ public class TaskTest {
     @Test
     public void testMark() {
         Task task = new Task("get food");
-        task.mark();
+        task.markIsDone();
         assertEquals("[X] get food", task.toString());
     }
 
     @Test
-    public void testUnMark() {
+    public void testUnmark() {
         Task task = new Task("get food");
-        task.mark();
-        task.unmark();
+        task.markIsDone();
+        task.unmarkIsDone();
         assertEquals("[ ] get food", task.toString());
     }
 
     @Test
-    public void testGetStatusUnmarked() {
-        assertEquals(" ", new Task("a").getStatus());
+    public void isDone_unmarked_whiteSpace() {
+        assertEquals(" ", new Task("a").isDone());
     }
 
     @Test
-    public void testGetStatusMarked() {
+    public void isDone_marked_X() {
         Task task = new Task("a");
-        task.mark();
-        assertEquals("X", task.getStatus());
+        task.markIsDone();
+        assertEquals("X", task.isDone());
     }
 
     @Test
     public void testStringConversion() {
-        assertEquals("[ ] get food", new Task("get food").toString());
+        assertEquals("[ ] get food",
+                new Task("get food").toString());
     }
 
     @Test
     public void testFormatStore() {
-        assertEquals("0 | get food", new Task("get food").formatStore());
+        assertEquals("0 | get food",
+                new Task("get food").formatForStorage());
     }
 }

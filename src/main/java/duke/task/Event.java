@@ -46,8 +46,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String s = Formatter.formatDatePrint(this.start);
-        String e = Formatter.formatDatePrint(this.end);
+        String s = Formatter.formatDateForPrint(this.start);
+        String e = Formatter.formatDateForPrint(this.end);
         String toPrint = String.format("[E]%s (from: %s to: %s)",
                 super.toString(), s, e);
         return toPrint;
@@ -58,9 +58,9 @@ public class Event extends Task {
      * @return Returns a  formatted string representation of this task to be stored.
      */
     @Override
-    public String formatStore() {
-        String s = Formatter.formatDateStore(this.start);
-        String e = Formatter.formatDateStore(this.end);
-        return ("E | " + super.formatStore() + String.format(" | %s | %s", s, e));
+    public String formatForStorage() {
+        String s = Formatter.formatDateForStorage(this.start);
+        String e = Formatter.formatDateForStorage(this.end);
+        return ("E | " + super.formatForStorage() + String.format(" | %s | %s", s, e));
     }
 }

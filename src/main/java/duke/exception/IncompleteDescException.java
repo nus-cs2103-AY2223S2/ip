@@ -4,8 +4,6 @@ package duke.exception;
  * Encapsulation of an incomplete description exception.
  */
 public class IncompleteDescException extends DukeException {
-    String taskType;
-
     /**
      * Constructor for IncompleteDescException
      * @param message The error message.

@@ -31,14 +31,14 @@ public class Task {
     /**
      * Mark the task as done.
      */
-    public void mark() {
+    public void markIsDone() {
         this.isDone = true;
     }
 
     /**
      * Mark the task as undone.
      */
-    public void unmark() {
+    public void unmarkIsDone() {
         this.isDone = false;
     }
 
@@ -46,7 +46,7 @@ public class Task {
      * Get a string icon representing the 'isDone' status.
      * @return A string representation of the icon.
      */
-    public String getStatus() {
+    public String isDone() {
         if (this.isDone) {
             return "X";
         }
@@ -59,7 +59,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String status = this.getStatus();
+        String status = this.isDone();
         return (String.format("[%s] %s", status, this.name));
     }
 
@@ -67,7 +67,7 @@ public class Task {
      * Format task to be stored in data file.
      * @return Returns a  formatted string representation of this task to be stored.
      */
-    public String formatStore() {
+    public String formatForStorage() {
         String status = isDone ? "1" : "0";
         return (String.format("%s | %s", status, this.name));
     }

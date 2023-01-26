@@ -8,7 +8,6 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -19,7 +18,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.read());
         } catch (DukeException e) {
-            ui.print(e.getMessage());
+            ui.printMsg(e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -27,14 +26,14 @@ public class Duke {
     public void run() {
         ui.printWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String input = ui.readCommand();
-                Command cmd = Parser.parse(input);
+                Command cmd = Parser.parseCommand(input);
                 cmd.execute(tasks, storage, ui);
                 isExit = cmd.isExit();
             } catch (DukeException e) {
-                ui.print(e.getMessage());
+                ui.printMsg(e.getMessage());
             }
         }
         storage.write(tasks.getTaskList());

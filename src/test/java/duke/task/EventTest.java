@@ -26,6 +26,6 @@ public class EventTest {
         LocalDate start = LocalDate.parse("2024/11/11", dtf);
         LocalDate end = LocalDate.parse("2024/11/25", dtf);
         assertEquals("E | 0 | school event | 2024/11/11 | 2024/11/25",
-                new Event("school event", start, end).formatStore());
+                new Event("school event", start, end).formatForStorage());
     }
 }

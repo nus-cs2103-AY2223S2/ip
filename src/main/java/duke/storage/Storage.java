@@ -48,8 +48,7 @@ public class Storage {
             if (!myFile.exists()) {
                 myFile.createNewFile();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(e + "\nNew storage file cannot be created.");
             e.printStackTrace();
         }
@@ -87,8 +86,7 @@ public class Storage {
             }
             sc.close();
             return tasks;
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new DukeException(e + "\nData file not found.");
         }
     }
@@ -99,14 +97,14 @@ public class Storage {
      */
     public void write(ArrayList<Task> tasks) {
         try {
-            FileWriter fw = new FileWriter(this.filePath);
+            FileWriter fileWriter = new FileWriter(this.filePath);
             int size = tasks.size();
             for (int i = 0; i < size; i++) {
-                Task t = tasks.get(i);
-                fw.write(t.formatStore());
-                fw.write("\n");
+                Task task = tasks.get(i);
+                fileWriter.write(task.formatForStorage());
+                fileWriter.write("\n");
             }
-            fw.close();
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println(e + "\nUnable to write to data file.");
             e.printStackTrace();
