@@ -31,13 +31,12 @@ public class Duke {
     }
 
     public static Path getData() throws IOException{
-        //Check if directory AND file exists.
-        Path pathToCheck = Paths.get("..", "..", "..", "data");
+        Path pathToCheck = Paths.get("data");
         if (!Files.exists(pathToCheck)) {
             Files.createDirectory(pathToCheck);
         }
 
-        Path fileToCheck = Paths.get("..", "..", "..", "data", "dukedata.txt");
+        Path fileToCheck = Paths.get("data", "dukedata.txt");
         if (!Files.exists(fileToCheck)) {
             Files.createFile(fileToCheck);
         }
