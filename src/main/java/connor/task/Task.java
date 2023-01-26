@@ -98,10 +98,10 @@ public abstract class Task {
     }
 
     /**
-     * 
+     * Returns a LocalDateTime object that has the date and time of the input.
      *
      * @param input
-     * @return
+     * @return LocalDateTime with the date and time of the input.
      * @throws DateTimeException
      */
     public LocalDateTime parseDateTime(String input) throws DateTimeException {
@@ -109,10 +109,20 @@ public abstract class Task {
         return LocalDateTime.parse(formattedDateTime);
     }
 
+    /**
+     * Returns a String in a format that is meant to be stored in the memory.
+     *
+     * @return String that represents the Task instance in the memory.
+     */
     public String dataFormat() {
         return this.isDone + "|" + this.taskName;
     }
 
+    /**
+     * Returns a String which is a concatenation of if the task is done and the taskName.
+     *
+     * @return String representation of the task.
+     */
     public String toString() {
         return getMark() + " " + this.taskName;
     }

@@ -16,19 +16,24 @@ public class Storage {
     /** dataFile that stores the tasks between sessions. */
     private File dataFile;
 
+    /**
+     * Constructor that reads information from a File object.
+     *
+     * @param dataFile File contains the current list of Tasks.
+     */
     public Storage(File dataFile) {
         this.dataFile = dataFile;
     }
 
     /**
-     * Returns a Task instance depending on command.
-     * Used for reading from memory.
+     * Returns a Task after reading one line in the memory.
      *
-     * @param directives
-     * @return Task instance depending on command.
-     * @throws CorruptedDataException
+     * @param str String of one line in the memory.
+     * @return Task instance read from memory.
+     * @throws CorruptedDataException if command is unreadable.
      */
-    public Task parseLine(String[] directives) throws CorruptedDataException {
+    public Task interpretLine(String str) throws CorruptedDataException {
+        String[] directives = str.split("\\|");
         if (directives[0].equals("T")) {
             return new Todo(directives[2], Boolean.parseBoolean(directives[1]));
         } else if (directives[0].equals("D")) {
@@ -40,22 +45,10 @@ public class Storage {
     }
 
     /**
-     * Returns a Task after reading the dataformat in the memory.
-     *
-     * @param str
-     * @return Task instance read from memory.
-     * @throws CorruptedDataException
-     */
-    public Task interpretLine(String str) throws CorruptedDataException {
-        String[] directives = str.split("\\|");
-        return parseLine(directives);
-    }
-
-    /**
      * Returns a LinkedList that is from the memory if it is valid and not corrupted.
-     * Throws an error and ignore that line if memory is corrupted.
+     * Ignores that line if memory is corrupted.
      *
-     * @param sc
+     * @param sc scanner object to read the File object.
      * @return LinkedList read from memory.
      */
     public LinkedList<Task> readFile(Scanner sc) {
@@ -74,7 +67,7 @@ public class Storage {
      * Returns a LinkedList that is read from the dataFile.
      *
      * @return LinkedList that is read from dataFile.
-     * @throws IOException
+     * @throws IOException if File does not exist.
      */
     public LinkedList<Task> initialize() throws IOException {
         this.dataFile.createNewFile();
@@ -85,7 +78,7 @@ public class Storage {
     /**
      * Writes the contents of the LinkedList into the memory.
      *
-     * @param tasks
+     * @param tasks the collection of Task to be stored in memory.
      */
     public void updateFile(LinkedList<Task> tasks) {
         try {
