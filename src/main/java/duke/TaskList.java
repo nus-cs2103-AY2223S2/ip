@@ -12,13 +12,25 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class handles the tracking of added <code>Task</code>s while the bot is running. This is an abstraction of
+ * a list of tasks to be used by the bot.
+ */
 public class TaskList {
     final List<Task> tasks;
 
+    /**
+     * Standard constructor for an instance of TaskList.
+     */
     TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Method to accept tokens that were parsed by <code>Parser</code> which read existing data from stored file on disk
+     * and adds the contents into the current session.
+     * @param tokens <code>String[]</code> of tokens as read from the data file by <code>Parser</code>.
+     */
     void parseEventFromFile(String[] tokens) {
         String taskType = tokens[0];
         if (Objects.equals(taskType, "T")) {
@@ -30,6 +42,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to handle adding a task to the underlying list, and trigger corresponding <code>Ui</code> event.
+     * @param task Target <code>Task</code> to be added to list.
+     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
+     */
     void addTaskToList(Task task, Ui ui) {
         this.tasks.add(task);
         ui.displayMessage("Got it. I've added this task:\n" +
@@ -39,6 +56,12 @@ public class TaskList {
                 " tasks in the list\n");
     }
 
+    /**
+     * Method to check the validity of the format of a <code>ToDo</code> task, and adds it to the list.
+     * @param tokens <code>String[]</code> of arguments from <code>Parser</code>.
+     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
+     * @throws DukeException In the event that the name of the task is not specified.
+     */
     void addToDo(String[] tokens, Ui ui) throws DukeException {
         StringBuilder sb = new StringBuilder();
         if (tokens.length < 2) {
@@ -52,6 +75,13 @@ public class TaskList {
         addTaskToList(td, ui);
     }
 
+    /**
+     * Method to check the validity of the format of a <code>DeadLine</code> task, and adds it to the list.
+     * @param tokens <code>String[]</code> of arguments from <code>Parser</code>.
+     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
+     * @throws DukeException In the event that the name of the task is not specified, or the deadline is not specified
+     * in the correct format with <code>/by</code> tag.
+     */
     void addDeadline(String[] tokens, Ui ui) throws DukeException {
         StringBuilder sb = new StringBuilder();
         int idxDelimiter = Arrays.asList(tokens).indexOf("/by");
@@ -80,6 +110,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to check the validity of the format of a <code>DeadLine</code> task, and adds it to the list.
+     * @param tokens <code>String[]</code> of arguments from <code>Parser</code>.
+     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
+     * @throws DukeException In the event that the name of the task is not specified, or the from and to date times are
+     * not specified in the correct format with <code>/from</code> and <code>/to</code> tags.
+     */
     void addEvent(String[] tokens, Ui ui) throws DukeException {
         StringBuilder sb = new StringBuilder();
         int idxFrom = Arrays.asList(tokens).indexOf("/from");
@@ -121,6 +158,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to mark a list item and trigger corresponding <code>Ui</code> event.
+     * @param tokens <code>String[]</code> of arguments from <code>Parser</code>, specifying the index to mark.
+     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
+     */
     void markListItem(String[] tokens, Ui ui) {
         try {
             int listIndex = Integer.parseInt(tokens[1])-1;
@@ -134,6 +176,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to unmark a list item and trigger corresponding <code>Ui</code> event.
+     * @param tokens <code>String[]</code> of arguments from <code>Parser</code>, specifying the index to unmark.
+     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
+     */
     void unmarkListItem(String[] tokens, Ui ui) {
         try {
             int listIndex = Integer.parseInt(tokens[1]) - 1;
@@ -147,6 +194,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to delete an item from the list and trigger corresponding <code>Ui</code> event.
+     * @param tokens tokens <code>String[]</code> of arguments from <code>Parser</code>, specifying the index to delete.
+     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
+     * @throws DukeException In the event that the specified list index is out of bounds, or the argument corresponding
+     * to the deletion index is not an integer.
+     */
     void deleteItem(String[] tokens, Ui ui) throws DukeException {
         if (tokens.length != 2) {
             throw new DukeException("please specify delete command as delete [list index]");
@@ -166,10 +220,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns number of elements in the list.
+     * @return <code>int</code> representing number of elements in the list.
+     */
     public int size() {
         return tasks.size();
     }
 
+    /**
+     * Returns the item at specified index in the list.
+     * @param idx Index of desired item.
+     * @return <code>Task</code> object that is at the index specified.
+     */
     public Task get(int idx) {
         return tasks.get(idx);
     }
