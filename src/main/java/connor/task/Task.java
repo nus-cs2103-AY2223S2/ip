@@ -13,7 +13,7 @@ public abstract class Task {
     /**
      * Constructor for Task that assumes that a task is not marked.
      *
-     * @param taskName
+     * @param taskName name of the task.
      */
     public Task(String taskName) {
         this.taskName = taskName;
@@ -24,8 +24,8 @@ public abstract class Task {
      * Constructor for Task that marks a task.
      * Meant for reading from memory.
      *
-     * @param taskName
-     * @param isDone
+     * @param taskName name of the task.
+     * @param isDone indicates if the task is done.
      */
     public Task(String taskName, Boolean isDone) {
         this.taskName = taskName;
@@ -70,7 +70,7 @@ public abstract class Task {
     /**
      * Returns a String by converting LocalDateTime to print.
      *
-     * @param input
+     * @param input LocalDateTime representation of a dateTime.
      * @return String from LocalDateTime.
      */
     public String formatDateTime(LocalDateTime input) {
@@ -85,7 +85,7 @@ public abstract class Task {
     /**
      * Returns a String in a parseable format into LocalDateTime.
      *
-     * @param input
+     * @param input substring from user input containing date and time.
      * @return String that is parseable into LocalDateTime.
      */
     public String dateTimeFormat(String input) {
@@ -100,7 +100,7 @@ public abstract class Task {
     /**
      * Returns a LocalDateTime object that has the date and time of the input.
      *
-     * @param input
+     * @param input substring from user input containing date and time.
      * @return LocalDateTime with the date and time of the input.
      * @throws DateTimeException
      */
