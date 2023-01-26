@@ -34,10 +34,12 @@ public class AddTaskCommand extends Command {
         commandHistory.saveState(tasks);
         tasks.addTask(this.task);
         storage.saveTaskList(tasks);
-        String message = "Got it. I've added this task:\n" + this.task
-                + "\nNow you have " + tasks.getNoOfTasks() + " tasks in the list.";
+        final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.";
+
+        String message = String.format(ADDED_TASK_MESSAGE, this.task, tasks.getNoOfTasks());
         ui.appendResponse(message);
     }
+
 
     /**
      * Compares this object to the specified object.

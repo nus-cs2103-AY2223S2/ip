@@ -14,6 +14,7 @@ public class UpdateCommand extends Command{
     private final String information;
     private static final String EMPTY_TASK_LIST_ERROR = "OOPS!!! Your task list is currently empty";
     private static final String INVALID_INDEX_ERROR = "OOPS!!! The input index is not within the range of [1, %d]";
+    private static final String TASK_UPDATED_MESSAGE = "Nice! I've updated the description of this task:\n ";
 
     /**
      * Constructor of UpdateCommand that takes in the index of the task to marked.
@@ -58,7 +59,8 @@ public class UpdateCommand extends Command{
                 throw new InvalidInputException(EMPTY_TASK_LIST_ERROR + "\nPlease add in more tasks");
             }
             if (!isValidIndex(tasks)) {
-                throw new InvalidInputException(String.format(INVALID_INDEX_ERROR + "\nPlease input a valid index", tasks.getNoOfTasks()));
+                throw new InvalidInputException(String.format(INVALID_INDEX_ERROR + "\nPlease input a valid index",
+                        tasks.getNoOfTasks()));
             }
             updateTaskInformation(tasks, ui);
             saveTaskList(tasks, storage);
@@ -75,15 +77,15 @@ public class UpdateCommand extends Command{
     private void updateTaskInformation(TaskList tasks, Ui ui) {
         DukeTask currentTask = tasks.getTask(this.taskIndex);
         currentTask.updateInformation(this.information);
-        String message = "Nice! I've updated the description of this task:\n " + currentTask;
+        String message = TASK_UPDATED_MESSAGE + currentTask;
         ui.appendResponse(message);
     }
 
     /**
-     * Save the task list to storage
-     * @param tasks tasklist
-     * @param storage storage
-     */
+    * Save the task list to storage
+    * @param tasks tasklist
+    * @param storage storage
+    */
     private void saveTaskList(TaskList tasks, Storage storage) throws StorageFileException {
         storage.saveTaskList(tasks);
     }

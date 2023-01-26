@@ -103,16 +103,22 @@ public class TaskList implements Cloneable {
      * @return A new TaskList containing all incomplete deadline tasks from the original list
      */
     public TaskList extractDeadlines() {
+        // Create a stream of tasks
         List<DukeTask> result = this.tasks.stream()
+                // filter the stream to only include DEADLINE tasks that are not done
                 .filter(task -> task.getType() == TaskType.DEADLINE && !task.getStatus())
+                // sort the filtered tasks based on their end date
                 .sorted(Comparator.comparing(x -> {
                     DeadlineTask ddlTask = (DeadlineTask) x;
                     return ddlTask.getEndDate();
                 }))
+                // collect the sorted tasks into a list
                 .collect(Collectors.toList());
 
+        // return a new tasklist containing the filtered and sorted tasks
         return new TaskList(new ArrayList<>(result));
     }
+
 
     /**
      * Returns a string representation of the task list in the format "index. task\n".
@@ -121,10 +127,14 @@ public class TaskList implements Cloneable {
      */
     @Override
     public String toString() {
+        // Creating a string builder to append task index and details
         StringBuilder listContent = new StringBuilder();
+        // Iterating through the task list
         for (int i = 0; i < this.getNoOfTasks(); i++) {
+            // Appending task index and task details
             listContent.append(i + 1).append(".").append(this.getTask(i)).append("\n");
         }
+        // Return the final string representation of the task list
         return String.valueOf(listContent);
     }
 

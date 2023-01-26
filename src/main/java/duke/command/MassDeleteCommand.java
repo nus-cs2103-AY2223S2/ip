@@ -7,8 +7,8 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class MassDeleteCommand extends Command {
-    private static final String DELETE_MESSAGE = "I have deleted all the tasks that have been marked as done.\n";
-    private static final String REMAINING_TASKS_MESSAGE = "Here are the remaining tasks in your list:\n";
+    private final static String DELETE_MESSAGE = "I have deleted all the tasks that have been marked as done.\n";
+    private final static String REMAINING_TASKS_MESSAGE = "Here are the remaining tasks in your list:\n";
 
     /**
      * Executes the command to delete all tasks that have been marked as done.
@@ -44,8 +44,7 @@ public class MassDeleteCommand extends Command {
      * @param tasks The user TaskList that contains all the task to be manipulated
      * @return The response message for the MassDeleteCommand execution
      */
-    private String
-    createResponseMessage(TaskList tasks) {
+    private String createResponseMessage(TaskList tasks) {
         StringBuilder responseMessage = new StringBuilder(DELETE_MESSAGE);
         responseMessage.append(REMAINING_TASKS_MESSAGE);
         for (int i = 0; i < tasks.getNoOfTasks(); i++) {

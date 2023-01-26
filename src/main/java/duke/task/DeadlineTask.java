@@ -8,6 +8,8 @@ import java.util.Objects;
  * A DeadlineTask that encapsulates the information and deadline date of a Deadline Task.
  */
 public class DeadlineTask extends DukeTask {
+    private static final String FORMAT = "[D] | %s %s | %s";
+
     /** The deadline date of the task */
     public final LocalDate deadline;
 
@@ -51,7 +53,7 @@ public class DeadlineTask extends DukeTask {
     @Override
     public String storageString() {
         String status = this.getStatus() ? "[X] | " : "[ ] | ";
-        return "[D] | " + status + this.getInformation() + " | " + this.deadline;
+        return String.format(FORMAT, status, this.getInformation(), this.deadline);
     }
 
     /**
@@ -83,7 +85,9 @@ public class DeadlineTask extends DukeTask {
         }
         DeadlineTask ddlObj = (DeadlineTask) obj;
 
+        // Compare task information and deadline
         return Objects.equals(this.getInformation(), ddlObj.getInformation())
+                && this.getStatus() == ddlObj.getStatus()
                 && this.deadline.isEqual(ddlObj.deadline);
     }
 

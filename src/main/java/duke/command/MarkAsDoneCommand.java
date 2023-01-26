@@ -16,6 +16,11 @@ import duke.ui.Ui;
 public class MarkAsDoneCommand extends Command {
     private final int taskIndex;
 
+    private final static String TASK_LIST_EMPTY_MESSAGE = "OOPS!!! Your task list is currently empty";
+    private final static String MARKED_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n ";
+    private final static String ADD_MORE_TASKS_MESSAGE = "\nPlease add in more tasks";
+    private final static String INPUT_VALID_INDEX_MESSAGE = "\nPlease input a valid index";
+
     /**
      * Constructor of MarkAsDoneCommand that takes in the index of the task to marked.
      *
@@ -56,17 +61,15 @@ public class MarkAsDoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
-        final String TASK_LIST_EMPTY_MESSAGE = "OOPS!!! Your task list is currently empty";
-        final String INVALID_INDEX_MESSAGE = "OOPS!!! The input index is not within the range of [1, "
+        final String invalidIndexMessage = "OOPS!!! The input index is not within the range of [1, "
                 + tasks.getNoOfTasks() + "]";
-        final String MARKED_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n ";
 
         commandHistory.saveState(tasks);
         if (isEmpty(tasks)) {
-            throw new InvalidInputException(TASK_LIST_EMPTY_MESSAGE + "\nPlease add in more tasks");
+            throw new InvalidInputException(TASK_LIST_EMPTY_MESSAGE + ADD_MORE_TASKS_MESSAGE);
         }
         if (!isValidIndex(tasks)) {
-            throw new InvalidInputException(INVALID_INDEX_MESSAGE + "\nPlease input a valid index");
+            throw new InvalidInputException(invalidIndexMessage+ INPUT_VALID_INDEX_MESSAGE);
         } else {
             DukeTask currentTask = tasks.getTask(this.taskIndex);
             currentTask.markAsDone();

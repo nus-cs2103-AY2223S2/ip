@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -64,38 +66,63 @@ public class Storage {
         }
 
         try {
-            // Create a scanner to read the file
-            Scanner sc = new Scanner(storageFile);
-            // Iterate through each line in the file
-            while (sc.hasNextLine()) {
-                String instruction = sc.nextLine().strip();
-                String[] information = instruction.split("\\s\\|\\s");
-
-                String taskTag = information[0];
-                boolean isDone = information[1].equals(IS_DONE_TAG);
-                storageFormatChecker(information[0], information[1]);
-
-                // Decode the task information based on the task tag
-                switch (taskTag) {
-                    case TODO_TAG:
-                        Decoder.todoDecoder(list, information[2], isDone);
-                        break;
-                    case DEADLINE_TAG:
-                        String date = information[3];
-                        Decoder.deadlineDecoder(list, information[2], isDone, date);
-                        break;
-                    case EVENT_TAG:
-                        String from = information[3];
-                        String to = information[4];
-                        Decoder.eventDecoder(list, information[2], isDone, from, to);
-                        break;
-                    default:
-                        throw new InvalidInputException("Unrecognized task tag: " + taskTag);
-                }
+            // read file
+            List<String> lines = readFile(storageFile);
+            // process each line
+            for (String line : lines) {
+                processLine(list, line);
             }
             return list;
         } catch (FileNotFoundException e) {
             throw new StorageFileException(STORAGE_ERROR);
+        }
+    }
+
+    /**
+     * Reads the content of a file and returns the lines in a list.
+     *
+     * @param file the file to read
+     * @return list of lines in the file
+     * @throws FileNotFoundException if the file doesn't exist
+     */
+    private List<String> readFile(File file) throws FileNotFoundException {
+        // Create a scanner to read the file
+        Scanner sc = new Scanner(file);
+        List<String> lines = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            lines.add(sc.nextLine().strip());
+        }
+        return lines;
+    }
+
+    /**
+     * Processes a line from the storage file and decodes the task information into a task object.
+     * The task object is then added to the task list.
+     *
+     * @param list the task list to add the task object to
+     * @param line the line of information to be processed
+     * @throws InvalidInputException if the input is invalid
+     */
+    private void processLine(TaskList list, String line) throws InvalidInputException {
+        String[] information = line.split("\\s\\|\\s");
+
+        String taskTag = information[0];
+        boolean isDone = information[1].equals(IS_DONE_TAG);
+        storageFormatChecker(information[0], information[1]);
+
+        // Decode the task information based on the task tag
+        switch (taskTag) {
+            case TODO_TAG:
+                Decoder.todoDecoder(list, information[2], isDone);
+                break;
+            case DEADLINE_TAG:
+                Decoder.deadlineDecoder(list, information[2], isDone, information[3]);
+                break;
+            case EVENT_TAG:
+                Decoder.eventDecoder(list, information[2], isDone, information[3], information[4]);
+                break;
+            default:
+                throw new InvalidInputException("Unrecognized task tag: " + taskTag);
         }
     }
 
@@ -106,12 +133,15 @@ public class Storage {
      * @param isDone The status of the task
      */
     private void storageFormatChecker(String tag, String isDone) {
+        String errorMessage = "Type tag of event should be [T], [D], or [E]";
         assert Objects.equals(tag, TODO_TAG) || Objects.equals(tag, DEADLINE_TAG) || Objects.equals(tag, EVENT_TAG)
-                : "Type tag of event should be [T], [D], or [E]";
+                : errorMessage;
 
+        errorMessage = "IsDone tag of event should be [ ], or [X]";
         assert Objects.equals(isDone, IS_DONE_TAG) || Objects.equals(isDone, NOT_DONE_TAG)
-                : "IsDone tag of event should be [ ], or [X]";
+                : errorMessage;
     }
+
 
     //@@author Yufannnn-reused
     //https://nus-cs2103-ay2223s2.github.io/website/schedule/week3/topics.html#W3-4c

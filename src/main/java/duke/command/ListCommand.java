@@ -11,6 +11,8 @@ import duke.ui.Ui;
  */
 
 public class ListCommand extends Command {
+    private final static String NO_TASKS_MESSAGE = "There are no tasks in your list.";
+    private final static String TASK_LIST_MESSAGE = "Here are the tasks in your list:\n";
     /**
      * Displays all the tasks with their respective types and status.
      *
@@ -20,9 +22,9 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
-        StringBuilder listContent = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder listContent = new StringBuilder(TASK_LIST_MESSAGE);
         if (tasks.getNoOfTasks() == 0) {
-            ui.appendResponse("There are no tasks in your list.");
+            ui.appendResponse(NO_TASKS_MESSAGE);
             return;
         }
         int index = 1;

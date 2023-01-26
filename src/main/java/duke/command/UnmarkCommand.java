@@ -15,6 +15,9 @@ import duke.ui.Ui;
 
 public class UnmarkCommand extends Command {
     private final int taskIndex;
+    private static final String TASK_LIST_EMPTY_MESSAGE = "OOPS!!! Your task list is currently empty";
+    private static final String INVALID_INDEX_MESSAGE = "OOPS!!! The input index is not within the range of [1, ";
+    private static final String UNMARKED_TASK_MESSAGE = "OK, I've marked this task as not done yet:\n ";
 
     /**
      * Constructor of UnmarkCommand that takes in the index of the task to unmarked.
@@ -51,24 +54,23 @@ public class UnmarkCommand extends Command {
      * @param tasks The user TaskList that contains all the task to be manipulated
      * @param ui The ui Object used to display information
      * @param storage The Storage Object used to save and load the TaskList
-     * @throws DukeException Throws exception if the list is empty
-     * or the given index is our of range
+     * @throws DukeException Throws exception if the list is empty or the given index is our of range
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
         commandHistory.saveState(tasks);
         if (isEmpty(tasks)) {
-            String errorMessage = "OOPS!!! Your task list is currently empty";
-            throw new InvalidInputException(errorMessage + "\nPlease add in more tasks");
+            String errorMessage = TASK_LIST_EMPTY_MESSAGE + "\nPlease add in more tasks";
+            throw new InvalidInputException(errorMessage);
         }
         if (!isValidIndex(tasks)) {
-            String errorMessage = "OOPS!!! The input index is not within the range of [1, "
-                    + tasks.getNoOfTasks() + "]";
-            throw new InvalidInputException(errorMessage + "\nPlease input a valid index");
+            String errorMessage = INVALID_INDEX_MESSAGE + tasks.getNoOfTasks() + "]";
+            errorMessage += "\nPlease input a valid index";
+            throw new InvalidInputException(errorMessage);
         } else {
             DukeTask currentTask = tasks.getTask(this.taskIndex);
             currentTask.unmark();
-            String message = "OK, I've marked this task as not done yet:\n " + currentTask;
+            String message = UNMARKED_TASK_MESSAGE + currentTask;
             ui.appendResponse(message);
         }
         storage.saveTaskList(tasks);

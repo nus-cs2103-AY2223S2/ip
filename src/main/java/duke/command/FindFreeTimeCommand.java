@@ -14,6 +14,8 @@ import java.time.LocalDate;
  * The FindFreeTimeCommand class that finds the nearest date with no tasks
  */
 public class FindFreeTimeCommand extends Command {
+    private final static String noFreeTimeMessage = "No free time found in the next month.";
+    private final static String nearestFreeTimeMessage = "The nearest free time is on %s.";
 
     /**
      * Execute the find free time command on the tasklist
@@ -29,8 +31,6 @@ public class FindFreeTimeCommand extends Command {
         LocalDate currentDate = LocalDate.now();
         LocalDate endDate = LocalDate.now().plusMonths(1);
         LocalDate nearestFreeDate = endDate;
-        String noFreeTimeMessage = "No free time found in the next month.";
-        String nearestFreeTimeMessage = "The nearest free time is on %s.";
 
         while (currentDate.isBefore(endDate) || currentDate.isEqual(endDate)) {
             if (isDayFree(currentDate, tasks)) {

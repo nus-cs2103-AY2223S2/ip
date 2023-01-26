@@ -108,11 +108,6 @@ public abstract class DukeTask {
      */
     @Override
     public String toString() {
-        if (getStatus()) {
-            return this.DONE_FLAG + this.information;
-        } else {
-            return this.UNDONE_FLAG + this.information;
-        }
+        return (getStatus() ? this.DONE_FLAG : this.UNDONE_FLAG) + this.information;
     }
-
 }

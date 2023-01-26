@@ -14,6 +14,10 @@ import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     private final int taskIndex;
+    private final static String TASK_LIST_IS_EMPTY_ERROR = "OOPS!!! Your task list is currently empty\nPlease add in more tasks";
+    private final static String INVALID_INDEX_ERROR = "OOPS!!! The input index is not within the range of [1, %d]\n" +
+            "Please input a valid index";
+    private final static String TASK_REMOVED_MESSAGE = "Noted. I've removed this task:\n %s \nNow you have %d tasks in the list.";
 
     /**
      * Constructor for DeleteCommand that takes in the index of the task to be deleted.
@@ -55,9 +59,6 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
-        final String TASK_LIST_IS_EMPTY_ERROR = "OOPS!!! Your task list is currently empty\nPlease add in more tasks";
-        final String INVALID_INDEX_ERROR = "OOPS!!! The input index is not within the range of [1, %d]\nPlease input a valid index";
-
         commandHistory.saveState(tasks);
         if (isEmpty(tasks)) {
             throw new InvalidInputException(TASK_LIST_IS_EMPTY_ERROR);
@@ -66,10 +67,9 @@ public class DeleteCommand extends Command {
             throw new InvalidInputException(String.format(INVALID_INDEX_ERROR, tasks.getNoOfTasks()));
         } else {
             DukeTask deletedTask = tasks.deleteTask(this.taskIndex);
-            String message = String.format("Noted. I've removed this task:\n %s \nNow you have %d tasks in the list.", deletedTask.toString(), tasks.getNoOfTasks());
+            String message = String.format(TASK_REMOVED_MESSAGE, deletedTask.toString(), tasks.getNoOfTasks());
             ui.appendResponse(message);
         }
         storage.saveTaskList(tasks);
     }
-
 }

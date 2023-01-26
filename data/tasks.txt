@@ -1,6 +1,6 @@
-[D] | [ ] | party | 1919-08-10
-[D] | [X] | have fun | 1919-08-10
-[D] | [ ] | examination | 1900-10-20
+[D] | [ ] |  party | 1919-08-10
+[D] | [X] |  have fun | 1919-08-10
+[D] | [ ] |  examination | 1900-10-20
 [T] | [X] | read book
 [T] | [ ] | group meeting
 [T] | [ ] | baseball

@@ -12,8 +12,8 @@ import duke.ui.Ui;
  */
 public class FindCommand extends Command {
     private final String[] descriptions;
-    private static final String MATCHING_TASKS_MESSAGE = "Here are the tasks matching \"%s\" :\n";
-    private static final String NO_MATCHING_TASKS_MESSAGE = "No tasks matching \"%s\" were found.\n";
+    private final static String MATCHING_TASKS_MESSAGE = "Here are the tasks matching \"%s\" :\n";
+    private final static String NO_MATCHING_TASKS_MESSAGE = "No tasks matching \"%s\" were found.\n";
 
     /**
      * The constructor of FinaCommand that takes in the description of the tasks to be found.
@@ -33,20 +33,42 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
         StringBuilder message = new StringBuilder();
         for (String description : this.descriptions) {
-            TaskList matchedTaskList = new TaskList();
-            for (DukeTask task : tasks.getTasks()) {
-                if (task.matches(description)) {
-                    matchedTaskList.addTask(task);
-                }
-            }
-            if (!matchedTaskList.getTasks().isEmpty()) {
-                message.append(String.format(MATCHING_TASKS_MESSAGE, description));
-                message.append(matchedTaskList).append("\n");
-            } else {
-                message.append(String.format(NO_MATCHING_TASKS_MESSAGE, description));
-            }
+            TaskList matchedTaskList = getMatchedTasks(tasks, description);
+            message.append(getMatchedTasksMessage(matchedTaskList, description));
         }
         ui.appendResponse(message.toString());
     }
 
+    /**
+     * Method that takes in a list of tasks and a description and returns a list of tasks that match the given description.
+     *
+     * @param tasks The list of tasks to be searched
+     * @param description The description of the task to be searched
+     * @return A list of tasks that match the given description
+     */
+    private TaskList getMatchedTasks(TaskList tasks, String description) {
+        TaskList matchedTaskList = new TaskList();
+        for (DukeTask task : tasks.getTasks()) {
+            if (task.matches(description)) {
+                matchedTaskList.addTask(task);
+            }
+        }
+        return matchedTaskList;
+    }
+
+    /**
+     * Gets the message for matched tasks.
+     *
+     * @param matchedTaskList The list of matched tasks
+     * @param description The description used to find the tasks
+     * @return The message for matched tasks
+     */
+    private String getMatchedTasksMessage(TaskList matchedTaskList, String description) {
+        if (!matchedTaskList.getTasks().isEmpty()) {
+            return String.format(MATCHING_TASKS_MESSAGE, description) + matchedTaskList + "\n";
+        } else {
+            return String.format(NO_MATCHING_TASKS_MESSAGE, description);
+        }
+    }
 }
+

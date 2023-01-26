@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * A TodoTask class that encapsulates the information a Todo Task.
@@ -45,4 +46,19 @@ public class TodoTask extends DukeTask {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof TodoTask)) {
+            return false;
+        }
+        TodoTask todoObj = (TodoTask) obj;
+
+        return Objects.equals(this.getInformation(), todoObj.getInformation())
+                && this.getStatus() == todoObj.getStatus();
+    }
+
 }
