@@ -13,7 +13,8 @@ public abstract class Command {
         DELETE("delete"),
         MARK("mark"),
         UNMARK("unmark"),
-        BYE("bye");
+        BYE("bye"),
+        FIND("find");
 
         private final String instruction;
 
