@@ -18,7 +18,7 @@ public class Chattime {
     private TaskList tasks;
 
     /**
-     * Initializes a bot with ui objects and a storage space with provided path to store list.
+     * Initializes a bot with uiobjects a nd a storage space with provided path to store list.
      *
      * @param filePath Path to storage.
      */
@@ -38,10 +38,9 @@ public class Chattime {
         while (ui.getExecuteStatus()) {
 
             userInput = sc.nextLine();
-            Parser parser = new Parser(userInput);
 
             try {
-                Command cmd = parser.parse();
+                Command cmd = Parser.parse(userInput);
                 if (cmd != null) {
                     cmd.execute(ui, tasks, storage);
                 }

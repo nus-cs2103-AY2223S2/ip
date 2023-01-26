@@ -31,33 +31,20 @@ public class Parser {
     private static final String IDX_OUT_OF_BOUND = "OOPS!!! The index is too large! We currently have %d task(s).";
     private static final String UNRECOGNISED_COMMAND = "Sorry... but I don't understand what you said >,<";
 
-    private String userInput;
-    private String[] splitCommand;
-    private String command;
-    private String description = null;
-
-    /**
-     * Creates Parser object for user input.
-     *
-     * @param input Command entered by user.
-     */
-    public Parser(String input) {
-        userInput = input;
-        splitCommand = userInput.split(" ", 2);
-        command = splitCommand[0];
-
-        if (splitCommand.length > 1) {
-            description = splitCommand[1];
-        }
-    }
+    private static String userInput;
+    private static String[] splitCommand;
+    private static String command;
+    private static String description = null;
 
     /**
      * Returns suitable Command object for further execution.
      *
+     * @param input Command and description entered by user.
      * @return Command object to execute user request.
      * @throws ChattimeException Exception thrown when command is not recognisable.
      */
-    public Command parse() throws ChattimeException {
+    public static Command parse(String input) throws ChattimeException {
+        parseInput(input);
         checkCleanCommand();
 
         switch (command) {
@@ -117,11 +104,26 @@ public class Parser {
     }
 
     /**
+     * Process user input into command and description.
+     *
+     * @param input Command and description entered by user.
+     */
+    private static void parseInput(String input) {
+        userInput = input;
+        splitCommand = userInput.split(" ", 2);
+        command = splitCommand[0];
+
+        if (splitCommand.length > 1) {
+            description = splitCommand[1];
+        }
+    }
+
+    /**
      * Checks user's command clashes with data storage format.
      *
      * @throws ChattimeException Returns error message to require new input with problem statement.
      */
-    private void checkCleanCommand() throws ChattimeException {
+    private static void checkCleanCommand() throws ChattimeException {
         if (userInput.contains("@")) {
             throw new ChattimeException("@^@ I'm sorry but your message should not contain any \"@\" .");
         }
@@ -132,7 +134,7 @@ public class Parser {
      *
      * @throws ChattimeException Returns error message to require new input with description provided.
      */
-    private void checkAddCommand() throws ChattimeException {
+    private static void checkAddCommand() throws ChattimeException {
         if (description == null) {
             throw new ChattimeException(String.format(NO_DESCRIPTION, command));
         }
@@ -144,7 +146,7 @@ public class Parser {
      * @return Index parsed if the type check passed.
      * @throws ChattimeException Returns error message to request an integer input for the description.
      */
-    private int checkIndexCommand() throws ChattimeException {
+    private static int checkIndexCommand() throws ChattimeException {
         if (description == null) {
             throw new ChattimeException(String.format(NO_INDEX, command));
 
@@ -167,7 +169,7 @@ public class Parser {
      * @return ListCommand object.
      * @throws ChattimeException If description detected, returns error message to user.
      */
-    private ListCommand parseList() throws ChattimeException {
+    private static ListCommand parseList() throws ChattimeException {
         if (description != null) {
             throw new ChattimeException("OOPS!!! list does not take any description.");
         }
@@ -181,7 +183,7 @@ public class Parser {
      * @return ByeCommand object.
      * @throws ChattimeException If ambiguous command detected, returns error message to user.
      */
-    private ByeCommand parseBye() throws ChattimeException {
+    private static ByeCommand parseBye() throws ChattimeException {
         if (description != null) {
             throw new ChattimeException("Type \"bye\" if you really want to say goodbye to me.");
         }
@@ -194,7 +196,7 @@ public class Parser {
      *
      * @return TodoCommand object.
      */
-    private AddCommand parseTodo() {
+    private static AddCommand parseTodo() {
         Todo todo = new Todo(description);
         return new AddCommand(todo);
     }
@@ -206,7 +208,7 @@ public class Parser {
      * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
      *
      */
-    private AddCommand parseDeadline() throws ChattimeException {
+    private static AddCommand parseDeadline() throws ChattimeException {
         String[] splitBy = description.split(" /by ", 2);
 
         if (splitBy.length < 2 || splitBy[1].equals("")) {
@@ -241,7 +243,7 @@ public class Parser {
      * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
      *
      */
-    private AddCommand parseEvent() throws ChattimeException {
+    private static AddCommand parseEvent() throws ChattimeException {
         String[] splitTask = description.split(" /from ", 2);
         String task = splitTask[0];
 
@@ -280,7 +282,7 @@ public class Parser {
      * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
      *
      */
-    private ListCommand parseListTime() throws ChattimeException {
+    private static ListCommand parseListTime() throws ChattimeException {
         if (description == null) {
             throw new ChattimeException(
                     String.format(MISSED_PARAM, command, "listTime yyyy-mm-dd"));
@@ -302,7 +304,7 @@ public class Parser {
      * @throws ChattimeException If no description detected, returns error message to user.
      *
      */
-    public FindCommand parseFind() throws ChattimeException {
+    public static FindCommand parseFind() throws ChattimeException {
         if (description == null) {
             throw new ChattimeException(
                     String.format(MISSED_PARAM, command, "find keyword"));
