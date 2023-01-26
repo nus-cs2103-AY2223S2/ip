@@ -18,6 +18,7 @@ public abstract class Command {
      * Enum of command actions with their associated keywords.
      */
     public enum Action {
+        INTRO("hi"),
         BYE("bye"),
         LIST("list"),
         FIND("find"),
