@@ -10,7 +10,7 @@ public class Deadlines extends Task{
     public Deadlines(String description, boolean isDone, LocalDateTime deadline) {
         super(description, isDone);
         this.deadline = deadline;
-        this.stringDeadline = deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
+        this.stringDeadline = deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy HHmm"));
     }
 
     public Deadlines(String description, boolean isDone, String deadline) {
@@ -28,6 +28,9 @@ public class Deadlines extends Task{
 
     @Override
     public String save() {
-        return String.format("deadline %s-%s-%s\n", this.description, this.isDone, this.deadline);
+        return String.format("deadline %s-%s-%s\n",
+                this.description,
+                this.isDone,
+                this.deadline.format(DateTimeFormatter.ofPattern(("d/M/yyyy HHmm"))));
     }
 }

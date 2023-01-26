@@ -12,9 +12,9 @@ public class Events extends Task {
     public Events(String description,boolean isDone, LocalDateTime from, LocalDateTime to) {
         super(description, isDone);
         this.from = from;
-        this.stringFrom = from.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
+        this.stringFrom = from.format(DateTimeFormatter.ofPattern("d MMM yyyy HHmm"));
         this.to = to;
-        this.stringTo = to.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
+        this.stringTo = to.format(DateTimeFormatter.ofPattern("d MMM yyyy HHmm"));
     }
 
     public Events(String description, boolean isDone, String from, String to) {
@@ -32,6 +32,10 @@ public class Events extends Task {
 
     @Override
     public String save() {
-        return String.format("event %s-%s-%s-%s\n", this.description, this.isDone, this.from, this.to);
+        return String.format("event %s-%s-%s-%s\n",
+                this.description,
+                this.isDone,
+                this.from.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")),
+                this.to.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")));
     }
 }

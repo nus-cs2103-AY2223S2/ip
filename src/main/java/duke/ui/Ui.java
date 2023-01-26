@@ -25,10 +25,6 @@ public class Ui {
         printText(e.getMessage());
     }
 
-    public void showLoadingError() {
-        printText("\t OOPS!!! An error occurred while loading save");
-    }
-
     private void printText(String s) {
         System.out.println("\t____________________________________________________________");
         System.out.println(s);
