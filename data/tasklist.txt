@@ -1,8 +1,5 @@
 This is your current task list:
 1. [E][X] cry        (From: 2pm       To: 8am) 
 2. [T][ ] eat5      
-3. [T][ ] die     
-4. [T][ ] eat ass  
-5. [D][ ] eat ass    (Before: 2020-12-08T16:00) 
-6. [D][ ] eat ass   (Before: Aug 08 2020) 
+3. [T][ ] die
 
