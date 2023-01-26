@@ -79,4 +79,15 @@ public class TaskList {
         task.unmark();
         return task.toString();
     }
+
+    public ArrayList<Task> findTask(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            if (task.getDescription().indexOf(keyword) != -1) {
+                foundTasks.add(task);
+            }
+        }
+        return foundTasks;
+    }
 }

@@ -2,21 +2,24 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-/**
- * Unmarks task when user input indicates unmark.
- */
-public class UnmarkCommand extends Command {
-    private int taskIndex;
+import java.util.ArrayList;
 
-    public UnmarkCommand(int taskIndex) {
-        this.taskIndex = taskIndex;
+/**
+ * Finds task when user input indicates find.
+ */
+public class FindCommand extends Command {
+    private String keyword;
+
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
 
     /**
-     * Unmarks task and updates the task list in the local storage.
+     * Finds task from the list of tasks using the keyword provided.
      *
      * @param tasks List of tasks.
      * @param ui Ui object that handles all Ui actions.
@@ -25,8 +28,7 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String taskString = tasks.unmarkTask(this.taskIndex - 1);
-        storage.saveTasks(tasks);
-        ui.showUnmark(taskString);
+        ArrayList<Task> foundTasks = tasks.findTask(this.keyword);
+        ui.showFind(foundTasks);
     }
 }

@@ -17,7 +17,7 @@ public class Deadline extends Task {
         try {
             this.deadline = this.parseDateTime(description.split(" /by ")[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ I'm sorry, but Fake duke.duke doesn't know what that means :-(");
+            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
         } catch (DateTimeParseException dtpe) {
             throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
         }

@@ -21,6 +21,7 @@ public class Parser {
         mark,
         unmark,
         delete,
+        find,
         bye
     }
 
@@ -46,58 +47,64 @@ public class Parser {
             Action action = Action.valueOf(splitInputs[0]);
 
             switch (action) {
-                case todo:
-                    if (splitInputs.length < 2) {
-                        throw new DukeException("The description of a todo cannot be empty.");
-                    }
-                    Todo todo = addTodo(input.split(" ", 2)[1]);
-                    c = new AddCommand(todo);
-                    break;
-                case deadline:
-                    if (splitInputs.length < 2) {
-                        throw new DukeException("The description of a deadline cannot be empty.");
-                    }
-                    Deadline deadline = addDeadline(input.split(" ", 2)[1]);
-                    c = new AddCommand(deadline);
-                    break;
-                case event:
-                    if (splitInputs.length < 2) {
-                        throw new DukeException("The description of a event cannot be empty.");
-                    }
-                    Event event = addEvent(input.split(" ", 2)[1]);
-                    c = new AddCommand(event);
-                    break;
-                case list:
-                    c = new ListCommand();
-                    break;
-                case mark:
-                    if (splitInputs.length < 2) {
-                        throw new DukeException("The task index cannot be empty.");
-                    }
-                    int markIndex = Integer.parseInt(splitInputs[1]);
-                    c = new MarkCommand(markIndex);
-                    break;
-                case unmark:
-                    if (splitInputs.length < 2) {
-                        throw new DukeException("The task index cannot be empty.");
-                    }
-                    int unmarkIndex = Integer.parseInt(splitInputs[1]);
-                    c = new UnmarkCommand(unmarkIndex);
-                    break;
-                case delete:
-                    if (splitInputs.length < 2) {
-                        throw new DukeException("The task index cannot be empty.");
-                    }
-                    c = new DeleteCommand(Integer.parseInt(splitInputs[1]));
-                    break;
-                case bye:
-                    c = new ExitCommand();
-                    break;
-                default:
-                    c = new Command();
+            case todo:
+                if (splitInputs.length < 2) {
+                    throw new DukeException("The description of a todo cannot be empty.");
+                }
+                Todo todo = addTodo(input.split(" ", 2)[1]);
+                c = new AddCommand(todo);
+                break;
+            case deadline:
+                if (splitInputs.length < 2) {
+                    throw new DukeException("The description of a deadline cannot be empty.");
+                }
+                Deadline deadline = addDeadline(input.split(" ", 2)[1]);
+                c = new AddCommand(deadline);
+                break;
+            case event:
+                if (splitInputs.length < 2) {
+                    throw new DukeException("The description of a event cannot be empty.");
+                }
+                Event event = addEvent(input.split(" ", 2)[1]);
+                c = new AddCommand(event);
+                break;
+            case list:
+                c = new ListCommand();
+                break;
+            case mark:
+                if (splitInputs.length < 2) {
+                    throw new DukeException("The task index cannot be empty.");
+                }
+                int markIndex = Integer.parseInt(splitInputs[1]);
+                c = new MarkCommand(markIndex);
+                break;
+            case unmark:
+                if (splitInputs.length < 2) {
+                    throw new DukeException("The task index cannot be empty.");
+                }
+                int unmarkIndex = Integer.parseInt(splitInputs[1]);
+                c = new UnmarkCommand(unmarkIndex);
+                break;
+            case delete:
+                if (splitInputs.length < 2) {
+                    throw new DukeException("The task index cannot be empty.");
+                }
+                c = new DeleteCommand(Integer.parseInt(splitInputs[1]));
+                break;
+            case bye:
+                c = new ExitCommand();
+                break;
+            case find:
+                if (splitInputs.length < 2) {
+                    throw new DukeException("You must include the keyword you wish to search.");
+                }
+                c = new FindCommand(input.split(" ", 2)[1]);
+                break;
+            default:
+                c = new Command();
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ I'm sorry, but Fake duke.duke doesn't know what that means :-(");
+            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
         }
 
         return c;
@@ -146,7 +153,7 @@ public class Parser {
                 new MarkCommand(taskIndex);
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ I'm sorry, but Fake duke.duke doesn't know what that means :-(");
+            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
         }
         return null;
     }

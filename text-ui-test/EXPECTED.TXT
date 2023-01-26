@@ -1,5 +1,5 @@
 ________________________________________________________________
-☹ OOPS!!! Fake Duke.Duke can't find the file. I will create the file (data/tasks.txt) :D
+☹ OOPS!!! Fake Duke can't find the file. I will create the file (data/tasks.txt) :D
 Will be creating a new task list instead~
 ________________________________________________________________
 
@@ -44,7 +44,7 @@ OK, I've marked this task as not done yet:
 ________________________________________________________________
 
 ________________________________________________________________
-☹ OOPS!!! ☹ I'm sorry, but Fake Duke.Duke doesn't know what that means :-(
+☹ OOPS!!! ☹ I'm sorry, but Fake Duke doesn't know what that means :-(
 ________________________________________________________________
 
 ________________________________________________________________

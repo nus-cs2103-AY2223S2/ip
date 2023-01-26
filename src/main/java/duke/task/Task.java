@@ -38,7 +38,11 @@ public class Task {
      * @return Character to indicate the status of the task.
      */
     public char getStatusIcon() {
-        return (isDone ? 'X' : ' ');
+        return (isDone) ? 'X' : ' ';
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     /**
