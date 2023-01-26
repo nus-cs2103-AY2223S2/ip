@@ -107,6 +107,14 @@ public class Parser {
         return new Delete(id - 1);
     }
 
+    public Command parseFind(String[] commandArr) throws DukeException {
+        if (commandArr.length <= 1) {
+            throw new DukeException(Ui.wrapLines("Please enter a keyword"));
+        }
+        String keyword = commandArr[1];
+        return new Find(keyword);
+    }
+
     public String removeCommand(String command) {
         String[] commandArr = command.split(" ");
         String[] descriptionArr = Arrays.copyOfRange(commandArr, 1, commandArr.length);
@@ -135,6 +143,8 @@ public class Parser {
                 return parseEvent(slashed);
             case "delete":
                 return parseDelete(commandArr);
+            case "find":
+                return parseFind(commandArr);
             default:
                 throw new DukeException(Ui.wrapLines("I am not sure what that means."));
         }

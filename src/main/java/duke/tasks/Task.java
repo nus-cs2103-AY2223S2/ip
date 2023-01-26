@@ -26,4 +26,8 @@ public class Task {
     public void markUndone() {
         this.isDone = false;
     }
+
+    public boolean inDescription(String keyword) {
+        return this.description.contains(keyword);
+    }
 }
