@@ -3,8 +3,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    ToDo(String description, boolean isDone) {
+        super(description, isDone);
+    }
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("T | %s", super.toString());
     }
 }
