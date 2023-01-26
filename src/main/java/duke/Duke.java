@@ -9,6 +9,9 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import duke.commands.*;
+import duke.commands.indexedCommand.DeleteCommand;
+import duke.commands.indexedCommand.MarkCommand;
+import duke.commands.indexedCommand.UnmarkCommand;
 import duke.commands.taskCommand.*;
 import duke.main.Ui;
 import duke.task.Task;

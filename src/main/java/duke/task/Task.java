@@ -33,6 +33,10 @@ public abstract class Task implements Serializable {
    */
   public abstract String getType();
 
+  public String getTask() {
+    return task;
+  }
+
   @Override
   public String toString() {
     return String.format("[%s][%s] %s", getType(), this.done ? "X" : " ", this.task);
