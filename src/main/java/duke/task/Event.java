@@ -3,17 +3,18 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import duke.exceptions.InvalidDateException;
 
 public class Event extends Task {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public Event(String des, String startTime, String endTime) throws InvalidDateException {
+    public Event(String des, String startDate, String endDate) throws InvalidDateException {
         super(des);
         try {
-            this.startDate = LocalDate.parse(startTime);
-            this.endDate = LocalDate.parse(endTime);
+            this.startDate = LocalDate.parse(startDate);
+            this.endDate = LocalDate.parse(endDate);
             if (this.startDate.compareTo(this.endDate) > 0) { // invalid end date before start
                 throw new InvalidDateException();
             }

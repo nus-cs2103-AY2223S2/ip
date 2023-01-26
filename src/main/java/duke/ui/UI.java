@@ -1,8 +1,12 @@
 package duke.ui;
 
 import java.util.Scanner;
-import duke.command.*;
+
+import duke.command.Command;
+import duke.command.Parser;
+
 import duke.task.TaskList;
+
 import duke.exceptions.DukeException;
 
 public class UI {
@@ -16,16 +20,20 @@ public class UI {
 
     public void greetUser() {
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String greeting = "Hello i'm\n" + logo + "\nWhat can I do for you?";
+                        + "|  _ \\ _   _| | _____ \n"
+                        + "| | | | | | | |/ / _ \\\n"
+                        + "| |_| | |_| |   <  __/\n"
+                        + "|____/ \\__,_|_|\\_\\___|\n";
+        String greeting = "Hello i'm\n"
+                            + logo
+                                + "\nWhat can I do for you?";
         System.out.println(Span.format(greeting));
     }
 
     public void byeUser() {
-        System.out.println(Span.format("Bye. Hope to see you again soon!"));
+        System.out.println(Span.format(
+                "Bye. Hope to see you again soon!")
+        );
     }
 
     public boolean processInput() throws DukeException {
