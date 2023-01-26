@@ -1,7 +1,13 @@
+import java.util.Scanner;
+
 /**
  * Ui represents the user interface, which in this case is the console.
  */
 public class Ui {
+    Scanner scanner;
+    public Ui() {
+        this.scanner = new Scanner(System.in);
+    }
     public void println(String string) {
         System.out.println("\t" + string + "\n");
     }
@@ -42,5 +48,13 @@ public class Ui {
         System.out.println("\t---");
         System.out.println("\tBye. Hope to see you again soon!");
         System.out.println("\t---");
+    }
+
+    public String readCommand() {
+        return this.scanner.nextLine();
+    }
+
+    public boolean hasNextCommand() {
+        return this.scanner.hasNextLine();
     }
 }

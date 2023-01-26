@@ -67,6 +67,10 @@ public class MainApplication {
                 t, this.taskApplication.getNoOfTasks()
         ));
     }
+
+    private void byeCommand() {
+        this.taskApplication.close();
+    }
     private void parseCommand(String command) throws DukeException {
         List<String> tokens = this.parser.parseCommand(command);
         switch(tokens.get(0)) {
@@ -100,14 +104,12 @@ public class MainApplication {
      * Main loop for Duke program.
      */
     public void start() {
-        Scanner scanner = new Scanner(System.in);
-        String command;
         this.ui.printStart();
-        while (scanner.hasNextLine()) {
-            command = scanner.nextLine();
+        while (this.ui.hasNextCommand()) {
+            String command = this.ui.readCommand();
             if (command.equals("bye")) {
                 this.ui.printEnd();
-                this.taskApplication.close();
+                this.byeCommand();
                 break;
             }
             try {
