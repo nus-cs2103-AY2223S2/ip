@@ -85,4 +85,18 @@ public class TaskListTest {
                 "        I have 2 tasks in my memory\n";
         assertEquals(tasks.toString(), ans);
     }
+
+    @Test
+    public void findTest() {
+        TaskList tasks = new TaskList();
+        tasks.addTask(new Todo("work"));
+        tasks.addTask(new Deadline("sleep", "2020-05-05 2000"));
+        tasks.addTask(new Event("assist with work", "2020-05-05 1800", "2020-05-05 2200"));
+        String output = tasks.find("work");
+        String expected = "        ________________________________________________________\n"
+        + "        HERE ARE THE MATCHING RESULTS:\n"
+        + "        1.[T][ ] work\n"
+        + "        2.[E][ ] assist with work (from: MAY 5 2020 1800 to: MAY 5 2020 2200)\n";
+        assertEquals(output, expected);
+    }
 }
