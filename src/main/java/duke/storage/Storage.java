@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.Task;
 import duke.Todo;
 import duke.Event;
 import duke.Deadline;
@@ -28,10 +27,7 @@ public class Storage {
     public void saveDataToFile() {
 
         // Prepare data into string format for saving
-        StringBuilder sb = new StringBuilder();
-        for (Task t : tasklist.getInner()) {
-            sb.append(t.toCsv()).append("\n");
-        }
+        String fileDataStr = tasklist.prepareFileSave();
 
         // Write prepared data to file
         try {
@@ -40,7 +36,7 @@ public class Storage {
             if (!Files.exists(f)) {
                 Files.createFile(f); // Create non-existing file
             }
-            Files.writeString(f, sb.toString()); // Write to file
+            Files.writeString(f, fileDataStr); // Write to file
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -67,6 +63,8 @@ public class Storage {
                 String[] taskInfo = currentLine.split(",");
 
                 if (taskInfo[0].compareTo("T") == 0)
+                    tasklist.addTodo()
+
                     tasklist.add(new Todo(
                             Boolean.parseBoolean(taskInfo[1]),
                             taskInfo[2]));

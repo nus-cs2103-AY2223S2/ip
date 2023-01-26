@@ -10,6 +10,10 @@ public class TaskList {
         tasks = new ArrayList<Task>();
     }
 
+    public boolean add(Task task) {
+        return tasks.add(task);
+    }
+
     public Todo addTodo(String description) {
         Todo t = new Todo(description);
         tasks.add(t);
@@ -37,6 +41,14 @@ public class TaskList {
         tasks.clear();
     }
 
+    public String prepareFileSave() {
+        StringBuilder sb = new StringBuilder();
+        for (Task t : tasks) {
+            sb.append(t.toCsv()).append("\n");
+        }
+        return sb.toString();
+    }
+
     public Task get(int idx) {
         return tasks.get(idx);
     }
@@ -47,8 +59,4 @@ public class TaskList {
         return tasks.isEmpty();
     }
 
-    //TODO: hacked, fixeme
-    public ArrayList<Task> getInner() {
-        return tasks;
-    }
 }
