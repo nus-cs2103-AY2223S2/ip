@@ -1,12 +1,13 @@
-import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class Event extends Task {
-    private String from;
-    private String to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
-    public Event(String objective, String from, String to) {
+    public Event(String objective, LocalDateTime from, LocalDateTime to) {
         super(objective);
         this.from = from;
         this.to = to;
@@ -40,11 +41,35 @@ public class Event extends Task {
             }
         }
         if (objective.isEmpty()) throw new TaskParseException("This event is missing its body text!");
-        return new Event(objective, from, to);
+        if (from.isEmpty()) throw new TaskParseException("This event is missing its start-time! Use /from [date]");
+        if (to.isEmpty()) throw new TaskParseException("This event is missing its end-time! Use /to [date]");
+        LocalDateTime fromDate;
+        LocalDateTime toDate;
+        try {
+            fromDate = LocalDateTime.parse(from, DATE_IN_FMT);
+        } catch (DateTimeParseException ex) {
+            throw new TaskParseException(from + " needs to be formatted as " + DATE_IN_FMT_STR + "!");
+        }
+        try {
+            toDate = LocalDateTime.parse(to, DATE_IN_FMT);
+        } catch (DateTimeParseException ex) {
+            throw new TaskParseException(to + " needs to be formatted as " + DATE_IN_FMT_STR + "!");
+        }
+        return new Event(objective, fromDate, toDate);
+    }
+
+    @Override
+    public boolean beforeDate(LocalDateTime date) {
+        return from.isBefore(date) || from.isEqual(date);
+    }
+
+    @Override
+    public boolean afterDate(LocalDateTime date) {
+        return to.isAfter(date) || to.isEqual(date);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " | to: " + to + ")";
+        return "[E]" + super.toString() + " (" + from.format(DATE_OUT_FMT) + " - " + to.format(DATE_OUT_FMT) + ")";
     }
 }

@@ -1,4 +1,4 @@
-import java.text.ParseException;
+import java.time.LocalDateTime;
 
 public class Todo extends Task {
     public Todo(String objective) {
@@ -12,6 +12,16 @@ public class Todo extends Task {
         }
         if (objective.isEmpty()) throw new TaskParseException("This todo is missing its body text!");
         return new Todo(objective);
+    }
+
+    @Override
+    public boolean beforeDate(LocalDateTime date) {
+        return false;
+    }
+
+    @Override
+    public boolean afterDate(LocalDateTime date) {
+        return false;
     }
 
     @Override

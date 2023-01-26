@@ -1,11 +1,12 @@
-import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class Deadline extends Task {
-    private String by;
+    private LocalDateTime by;
 
-    public Deadline(String objective, String by) {
+    public Deadline(String objective, LocalDateTime by) {
         super(objective);
         this.by = by;
     }
@@ -27,11 +28,26 @@ public class Deadline extends Task {
             }
         }
         if (objective.isEmpty()) throw new TaskParseException("This deadline is missing its body text!");
-        return new Deadline(objective, by);
+        if (by.isEmpty()) throw new TaskParseException("This deadline is missing its deadline! Use /by [date]");
+        try {
+            return new Deadline(objective, LocalDateTime.parse(by, DATE_IN_FMT));
+        } catch (DateTimeParseException ex) {
+            throw new TaskParseException(by + " needs to be formatted as " + DATE_IN_FMT_STR + "!");
+        }
+    }
+
+    @Override
+    public boolean beforeDate(LocalDateTime date) {
+        return by.isBefore(date) || by.isEqual(date);
+    }
+
+    @Override
+    public boolean afterDate(LocalDateTime date) {
+        return by.isAfter(date) || by.isEqual(date);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (" + by.format(DATE_OUT_FMT) + ")";
     }
 }
