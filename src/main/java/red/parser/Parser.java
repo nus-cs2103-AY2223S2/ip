@@ -1,70 +1,45 @@
-import java.io.IOException;
-import java.util.Scanner;
-import java.io.File;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+package red.parser;
 
+import red.exception.RedException;
+import red.task.DeadlineTask;
+import red.task.EventTask;
+import red.task.ToDoTask;
+import red.command.AddCommand;
+import red.command.Command;
+import red.command.DeleteCommand;
+import red.command.ExitCommand;
+import red.command.ListCommand;
+import red.command.MarkCommand;
+import red.command.UnmarkCommand;
 
-public class Red{
-    private static TaskList tasks = new TaskList(100);
-    private static Scanner scanner;
-    private static String input;
+public class Parser {
     private static String[] arrOfStr;
 
-    public static void reader() {
-        input = scanner.nextLine();
-        arrOfStr = input.split(" ", 2);
-    }
 
 
-
-
-    public static void main(String[] args) {
-        String logo = "██████╗░███████╗██████╗░\n"
-                 +    "██╔══██╗██╔════╝██╔══██╗\n"
-                 +    "██████╔╝█████╗░░██║░░██║\n"
-                 +    "██╔══██╗██╔══╝░░██║░░██║\n"
-                 +    "██║░░██║███████╗██████╔╝\n"
-                 +    "╚═╝░░╚═╝╚══════╝╚═════╝░\n";
-
-        TaskFile fi = new TaskFile();
-        fi.createFile(tasks);
-
-
-
-
-
-
-
-
-
-
-        System.out.println(logo + " is ready to assist you\n");
-
-        scanner = new Scanner(System.in);
-        input = scanner.nextLine();
+    public static Command parse(String input) throws RedException {
         arrOfStr = input.split(" ", 2);
 
 
-        while(!input.equals("bye")) {
-            if(input.equals("list")) {
-                System.out.println(tasks);
-                reader();
+        if(input.equals("bye")) {
+            return new ExitCommand();
+        }else if(input.equals("list")) {
+                return new ListCommand();
+
             } else if(arrOfStr[0].equals("mark")) {
                 if(arrOfStr.length <= 1) {
-                    throw new RuntimeException("Specification of which task to mark is missing\n");
+                    throw new RedException("Specification of which task to mark is missing\n");
                 }
                 Integer index = Integer.valueOf(arrOfStr[1]) - 1;
-                tasks.indexof(index).mark();
-                reader();
+                return new MarkCommand(index);
+
             } else if(arrOfStr[0].equals("unmark")) {
                 if(arrOfStr.length <= 1) {
-                    throw new RuntimeException("Specification of a which task to unmark is missing\n");
+                    throw new RedException("Specification of a which task to unmark is missing\n");
                 }
                 Integer index = Integer.valueOf(arrOfStr[1]) - 1;
-                tasks.indexof(index).unmark();
-                reader();
+                return  new UnmarkCommand(index);
+
             } else if(arrOfStr[0].equals("deadline")) {
                 DeadlineTask NewDeadlineTask = null;
                 if(arrOfStr.length <= 1) {
@@ -89,15 +64,17 @@ public class Red{
                     NewDeadlineTask = new DeadlineTask(deadstr[0],timestr[0]);
                 }
 
-                tasks.enq(NewDeadlineTask);
-                reader();
+                return new AddCommand(NewDeadlineTask);
+
+
             } else if(arrOfStr[0].equals("todo")) {
                 if(arrOfStr.length <= 1) {
                     throw new RuntimeException("Specification of the ToDoTask is missing\n");
                 }
                 ToDoTask NewToDoTask = new ToDoTask(arrOfStr[1]);
-                tasks.enq(NewToDoTask);
-                reader();
+
+                return new AddCommand(NewToDoTask);
+
             } else if(arrOfStr[0].equals("event")) {
                 if(arrOfStr.length <= 1) {
                     throw new RuntimeException("Specification of the EventTask is missing\n");
@@ -111,34 +88,19 @@ public class Red{
                     throw new RuntimeException("Specification of the EventTask is missing\n");
                 }
                 EventTask NewEventTask = new EventTask(eventStr[0], dateTimeStr[0], dateTimeStr[1]);
-                tasks.enq(NewEventTask);
-                reader();
+
+                return new AddCommand(NewEventTask);
+
             }else if(arrOfStr[0].equals("delete")) {
                 if(arrOfStr.length <= 1) {
                     throw new RuntimeException("Specification of the DeleteTask is missing\n");
                 }
-                tasks.delete(Integer.parseInt(arrOfStr[1]));
-                reader();
+
+                return new DeleteCommand(Integer.parseInt(arrOfStr[1]));
+
             }  else {
-                throw new RedDoesNotUnderstandException();
+                throw new RedException("Cannot understand input");
             }
 
-
-        }
-
-        String TaskListCopy = tasks.toString();
-        try {
-            fi.appendToFile(TaskListCopy);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        System.out.println("Goodbye.");
-
     }
-
-
-
-
 }

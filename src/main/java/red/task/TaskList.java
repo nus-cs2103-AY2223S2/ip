@@ -1,3 +1,5 @@
+package red.task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -21,15 +23,15 @@ public class TaskList {
      * @param e The item to put in the queue.
      * @return false if the queue is full; true if e is added successfully.
      */
-    public boolean enq(Task e) {
+    public boolean addTask(Task e) {
         items.add(e);
         System.out.println("New Task Added: " + e.getDescription());
         System.out.println("There are now " + this.items.size() + " task(s) awaiting completion\n");
         return true;
     }
 
-    public void delete(int index) {
-        this.items.remove(index - 1);
+    public Task deleteTask(int index) {
+        return this.items.remove(index - 1);
     }
 
     public void recordTaskList() {
@@ -42,6 +44,10 @@ public class TaskList {
             count++;
         }
 
+    }
+
+    public int getTaskListSize() {
+        return this.items.size();
     }
 
     /**
@@ -62,7 +68,7 @@ public class TaskList {
         return str;
     }
 
-    public Task indexof(int index) {
+    public Task indexOf(int index) {
         return items.get(index);
     }
 }

@@ -1,3 +1,5 @@
+package red.task;
+
 public class EventTask extends Task {
 
     protected String by;
