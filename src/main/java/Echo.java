@@ -3,8 +3,7 @@ public class Echo extends Commands {
         this.setCommandStorage(str);
     }
     @Override
-    public test void execute(User user) {
+    public void execute(User user) {
         System.out.println(this.getCommandStorage());
     }
 }
-//make second commit to the main branch
