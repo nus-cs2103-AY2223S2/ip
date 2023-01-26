@@ -221,6 +221,32 @@ public class TaskList {
     }
 
     /**
+     * Method to find all items containing keyword in the list, and invokes the associated Ui event to
+     * display matching items
+     * @param tokens <code>String[]</code> provided by <code>Parser</code>.
+     * @param ui Instance of <code>Ui</code> belonging to the calling instance of <code>Duke</code>.
+     * @throws DukeException In the event that no keyword is specified.
+     */
+    void findItemInList(String[] tokens, Ui ui) throws DukeException {
+        if (tokens.length == 1) {
+            throw new DukeException("please provide a keyword or keywords to search for");
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < tokens.length; i++) {
+            sb.append(tokens[i]).append(' ');
+        }
+        sb.deleteCharAt(sb.length()-1);
+        List<Integer> indices = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.getName().matches(".*" + sb + ".*")) {
+                indices.add(i);
+            }
+        }
+        ui.displayItemsAtIndices(this, indices);
+    }
+
+    /**
      * Returns number of elements in the list.
      * @return <code>int</code> representing number of elements in the list.
      */

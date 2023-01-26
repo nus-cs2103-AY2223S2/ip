@@ -73,6 +73,12 @@ public class Duke {
                 } catch (DukeException e) {
                     ui.displayMessage(e.getMessage());
                 }
+            } else if (tokens[0].equals("find")) {
+                try {
+                    taskList.findItemInList(tokens, ui);
+                } catch (DukeException e) {
+                    ui.displayMessage(e.getMessage());
+                }
             } else {
                 ui.displayMessage("unknown command\n");
             }
