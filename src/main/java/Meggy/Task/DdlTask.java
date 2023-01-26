@@ -8,21 +8,13 @@ import Meggy.Resource;
  * {@link UserTask} with an optional due time.
  */
 public class DdlTask extends UserTask {
-    /**
-     * Bracketed icon of task type.
-     */
-    public final static String label = getTaskTypeLabel(Resource.cmdDdl);
-    /**
-     * 'Due' keyword formatted to be looked up in user input during parsing.
-     */
-    public final static String dueFmt = formatKeyword(Resource.kwDue);
-    /**
-     * Formatted 'Due' keyword length. Cached for later use.
-     */
-    public final static int dueLen = dueFmt.length();
-    /**
-     * Due time.
-     */
+    /** Bracketed icon of task type. */
+    public final static String LABEL = getTaskTypeLabel(Resource.CMD_DDL);
+    /** 'Due' keyword formatted to be looked up in user input during parsing. */
+    public final static String DUE_KEYWORD_FORMATTED = formatKeyword(Resource.KW_DUE);
+    /** Formatted 'Due' keyword length. Cached for later use. */
+    public final static int DUE_LEN = DUE_KEYWORD_FORMATTED.length();
+    /** Due time. */
     public final MeggyTime due;
 
     /**
@@ -40,7 +32,7 @@ public class DdlTask extends UserTask {
      * @param args Non-null. User input line with command removed.
      */
     public static DdlTask of(String args) throws MeggyException {
-        final int kwIdx = args.indexOf(dueFmt);
+        final int kwIdx = args.indexOf(DUE_KEYWORD_FORMATTED);
         // If no key word in args, time is set to "N/A".
         final String desc;
         final MeggyTime due;
@@ -49,7 +41,7 @@ public class DdlTask extends UserTask {
             due = MeggyTime.NA;
         } else {
             desc = args.substring(0, kwIdx).trim();
-            due = MeggyTime.of(args.substring(kwIdx + dueLen));
+            due = MeggyTime.of(args.substring(kwIdx + DUE_LEN));
         }
         return new DdlTask(desc, due);
     }
@@ -59,25 +51,22 @@ public class DdlTask extends UserTask {
      */
     @Override
     public String encode() {
-        return Resource.cmdDdl + ' ' + desc + ' ' + dueFmt + due.encode();
+        return Resource.CMD_DDL + ' ' + desc + ' ' + DUE_KEYWORD_FORMATTED + due.encode();
     }
 
-    /**
-     * Two {@link DdlTask} objects are equal iff they have same (non-null) description and due time.
-     */
+    /** Two {@link DdlTask} objects are equal iff they have same (non-null) description and due time. */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof DdlTask))
+        if (!(o instanceof DdlTask)) {
             return false;
+        }
         final DdlTask other = (DdlTask) o;
         return due.equals(other.due) && desc.equals(other.desc);
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     @Override
     public String toString() {
-        return label + super.toString() + " (by: " + due + ')';
+        return LABEL + super.toString() + " (by: " + due + ')';
     }
 }

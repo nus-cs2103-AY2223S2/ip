@@ -1,12 +1,17 @@
 package Meggy;
 
+import Meggy.Exception.Function;
 import Meggy.Exception.MeggyException;
 import Meggy.Exception.MeggyNFException;
 import Meggy.Exception.MeggyNoArgException;
 
 import java.util.Map;
 
+/** Contains various static parsing methods. */
 public class Parser {
+    /** @deprecated Class with all methods static should not be initialized. */
+    private Parser() {
+    }
 
     /**
      * Parses the index integer from the first arg in args string.
@@ -18,8 +23,9 @@ public class Parser {
      */
     public static int parseIdx(String args) throws MeggyException {
         final String arg = get1stArg(args);
-        if ("".equals(arg))
+        if ("".equals(arg)) {
             throw new MeggyNoArgException();
+        }
         final int idx;
         try {
             idx = Integer.parseInt(arg) - 1;
@@ -35,13 +41,13 @@ public class Parser {
      *
      * @return Parsed command, job, and argument encapsulated in an {@code JobAndArg} object.
      */
-    public static <E> JobAndArg<E> parseJobAndArg(Map<String, MeggyException.Function<String, E>> jobTable, String line) {
+    public static <E> JobAndArg<E> parseJobAndArg(Map<String, Function<String, E>> jobTable, String line) {
         //Multiple whitespace characters are treated as 1 whitespace.
         line = line.replaceAll("[ \t\r\n\f]+", " ").trim();
         //Parse command and args
         final int spaceIdx = line.indexOf(' ');
         final String cmd = (spaceIdx < 0 ? line : line.substring(0, spaceIdx)).toLowerCase();
-        MeggyException.Function<String, E> job = jobTable.get(cmd);
+        final Function<String, E> job = jobTable.get(cmd);
         final String args = job == null ? line : line.substring(spaceIdx + 1).trim();
         return new JobAndArg<>(cmd, job, args);
     }
@@ -66,14 +72,13 @@ public class Parser {
          * The command-specific function corresponding that will take {@code args} as arguments. Null if the command is
          * unknown.
          */
-        public final MeggyException.Function<String, E> job;
+        public final Function<String, E> job;
         public final String args;
 
-        private JobAndArg(String cmd, MeggyException.Function<String, E> job, String args) {
+        private JobAndArg(String cmd, Function<String, E> job, String args) {
             this.cmd = cmd;
             this.job = job;
             this.args = args;
         }
     }
-
 }

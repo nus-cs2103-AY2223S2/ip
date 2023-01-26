@@ -11,25 +11,15 @@ import java.util.HashMap;
  * {@link UserTask} with an optional start time and an optional end time.
  */
 public class EventTask extends UserTask {
-    /**
-     * Bracketed icon of task type.
-     */
-    public final static String label = getTaskTypeLabel(Resource.cmdEvent);
-    /**
-     * 'Start' keyword formatted to be looked up in user input during parsing.
-     */
-    public final static String sttFmt = formatKeyword(Resource.kwStt);
-    /**
-     * 'End' keyword formatted to be looked up in user input during parsing.
-     */
-    public final static String endFmt = formatKeyword(Resource.kwEnd);
-    /**
-     * Start time.
-     */
+    /** Bracketed icon of task type. */
+    public final static String LABEL = getTaskTypeLabel(Resource.CMD_EVENT);
+    /** 'Start' keyword formatted to be looked up in user input during parsing. */
+    public final static String START_KEYWORD_FORMATTED = formatKeyword(Resource.KW_STT);
+    /** 'End' keyword formatted to be looked up in user input during parsing. */
+    public final static String END_KEYWORD_FORMATTED = formatKeyword(Resource.KW_END);
+    /** Start time. */
     public final MeggyTime start;
-    /**
-     * end time.
-     */
+    /** End time. */
     public final MeggyTime end;
 
     /**
@@ -55,10 +45,11 @@ public class EventTask extends UserTask {
         // For simplicity, end of argument string is also a keyword position.
         kwIdxs.add(new KwIdxPair(null, argLen));
         // Record all keyword positions
-        for (String keyword : new String[]{sttFmt, endFmt}) {
+        for (String keyword : new String[]{START_KEYWORD_FORMATTED, END_KEYWORD_FORMATTED}) {
             final int idx = args.indexOf(keyword);
-            if (idx >= 0)
+            if (idx >= 0) {
                 kwIdxs.add(new KwIdxPair(keyword, idx));
+            }
         }
         kwIdxs.sort(KwIdxPair::compareTo);
         // Assign the substring between 2 adjacent keywords to the left one.
@@ -72,55 +63,31 @@ public class EventTask extends UserTask {
         final int descLim = kwIdxs.get(0).idx;
         final String desc = descLim >= argLen ? args : args.substring(0, descLim);
         // If "start" keyword is in args, write to start time variable. Otherwise use default.
-        final String start = kwValue.get(sttFmt);
+        final String start = kwValue.get(START_KEYWORD_FORMATTED);
         // If "end" keyword is in args, write to end time variable. Otherwise use default.
-        final String end = kwValue.get(endFmt);
+        final String end = kwValue.get(END_KEYWORD_FORMATTED);
         return new EventTask(desc.trim(), MeggyTime.of(start), MeggyTime.of(end));
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     @Override
     public String encode() {
-        return Resource.cmdEvent + ' ' + desc + ' ' + sttFmt + start.encode() + ' ' + endFmt + end.encode();
+        return Resource.CMD_EVENT + ' ' + desc + ' ' + START_KEYWORD_FORMATTED + start.encode() + ' ' + END_KEYWORD_FORMATTED + end.encode();
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     @Override
     public String toString() {
-        return label + super.toString() + " (from: " + start + " to: " + end + ')';
+        return LABEL + super.toString() + " (from: " + start + " to: " + end + ')';
     }
 
-    /**
-     * Two {@link EventTask} objects are equal iff they have same (non-null) description, due time, and start
-     * time.
-     */
+    /** Two {@link EventTask} objects are equal iff they have same (non-null) description, due time, and start time. */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof EventTask))
+        if (!(o instanceof EventTask)) {
             return false;
+        }
         final EventTask other = (EventTask) o;
         return start.equals(other.start) && end.equals(other.end) && desc.equals(other.desc);
-    }
-
-    /**
-     * Keyword-position pair. Enables index sorting of keywords by index positions.
-     */
-    private static class KwIdxPair implements Comparable<KwIdxPair> {
-        public final String keyword;
-        public final int idx;
-
-        private KwIdxPair(String keyword, int idx) {
-            this.keyword = keyword;
-            this.idx = idx;
-        }
-
-        @Override
-        public int compareTo(KwIdxPair o) {
-            return Integer.compare(idx, o.idx);
-        }
     }
 }

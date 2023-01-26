@@ -6,26 +6,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Objects;
 
-/**
- * Time that either comply to {@link LocalDateTime} format or user-customized.
- */
+/** Date-time value that either complies to {@link LocalDateTime} format or user-customized. */
 public class MeggyTime {
-    /**
-     * Cached dummy NA value.
-     */
+    /** Cached dummy NA value. */
     public static final MeggyTime NA = new MeggyTime();
-    /**
-     * All acceptable date-time formats. Singapore's convention (date-month) is prioritized.
-     */
-    private static final DateTimeFormatter[] formats;
-    /**
-     * Output format.
-     */
-    public static final DateTimeFormatter outFmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    /**
-     * Encode format.
-     */
-    public static final DateTimeFormatter encodeFmt = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
+    /** All acceptable date-time formats. Singapore's convention (date-month) is prioritized. */
+    private static final DateTimeFormatter[] FORMATTERS;
+    /** The date-time format to be pass to output. */
+    public static final DateTimeFormatter OUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    /** The date-time format to be encoded to data file. */
+    public static final DateTimeFormatter ENCODE_FORMAT = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
 
     static { //initialize date-time formats
         final String[] timeSeps = {":", ""};
@@ -35,7 +25,7 @@ public class MeggyTime {
         final String[] datePartLong = new String[dateFmts.length];
         Arrays.setAll(datePartLong, i -> dateFmts[i].replace("d", "dd")
                 .replace("M", "MM").replace("y", "yyyy"));
-        formats = new DateTimeFormatter[timeSeps.length * dateSeps.length * dateFmts.length * 2];
+        FORMATTERS = new DateTimeFormatter[timeSeps.length * dateSeps.length * dateFmts.length * 2];
         int i = 0;
         for (int j = 0; j < dateFmts.length; j++) {
             final String dateFmt = dateFmts[j];
@@ -44,33 +34,25 @@ public class MeggyTime {
                         dateFmt.charAt(0) + dateSep + dateFmt.charAt(1) + dateSep + dateFmt.charAt(2);
                 for (String timeSep : timeSeps) {
                     final String timePart = "HH" + timeSep + "mm";
-                    formats[i++] = DateTimeFormatter.ofPattern(datePart + ' ' + timePart);
-                    formats[i++] = DateTimeFormatter.ofPattern(timePart + ' ' + dateFmt);
+                    FORMATTERS[i++] = DateTimeFormatter.ofPattern(datePart + ' ' + timePart);
+                    FORMATTERS[i++] = DateTimeFormatter.ofPattern(timePart + ' ' + dateFmt);
                 }
             }
         }
     }
 
-    /**
-     * Time that comply to {@link LocalDateTime} format or null if time is user-customized.
-     */
+    /** Time that comply to {@link LocalDateTime} format or null if time is user-customized. */
     final LocalDateTime formatted;
-    /**
-     * Unparsable user-customized time or null if can be parsed.
-     */
+    /** Unparsable user-customized time or null if can be parsed. */
     final String customized;
 
-    /**
-     * Constructr of the dummy {@code NA} value
-     */
+    /** Constructr of the dummy {@code NA} value */
     private MeggyTime() {
         formatted = null;
-        customized = Util.noFound;
+        customized = Util.NO_FOUND;
     }
 
-    /**
-     * @param time Non-null. The trimmed time value to be interpreted.
-     */
+    /** @param time Non-null. The trimmed time value to be interpreted. */
     private MeggyTime(String time) {
         this.formatted = parseTime(time);
         this.customized = this.formatted == null ? time : null;
@@ -86,11 +68,9 @@ public class MeggyTime {
         return time == null ? NA : new MeggyTime(time.trim());
     }
 
-    /**
-     * @return parsed date-time or null if no formatter can parse correctly.
-     */
+    /** @return parsed date-time or null if no formatter can parse correctly. */
     public static LocalDateTime parseTime(String time) {
-        for (DateTimeFormatter format : formats) {
+        for (DateTimeFormatter format : FORMATTERS) {
             try {
                 return LocalDateTime.parse(time, format);
             } catch (DateTimeException ignored) {
@@ -99,27 +79,25 @@ public class MeggyTime {
         return null;
     }
 
-    /**
-     * @return User-customized time string in square brackets or formatted date-time.
-     */
+    /** @return User-customized time string in square brackets or formatted date-time. */
     public String toString() {
-        return formatted == null ? '[' + customized + ']' : formatted.format(outFmt);
+        return formatted == null ? '[' + customized + ']' : formatted.format(OUT_FORMAT);
     }
 
-    /**
-     * @return String representation used in data file. User-customized time is unchanged.
-     */
+    /** @return String representation used in data file. User-customized time is unchanged. */
     public String encode() {
-        return formatted == null ? customized : formatted.format(encodeFmt);
+        return formatted == null ? customized : formatted.format(ENCODE_FORMAT);
     }
 
     /**
-     * Two {@link MeggyTime} objects are equal iff they have same (equal or both null) formatted time and customized time.
+     * Two {@link MeggyTime} objects are equal iff they have same (equal or both null) formatted time and customized
+     * time.
      */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof MeggyTime))
+        if (!(o instanceof MeggyTime)) {
             return false;
+        }
         final MeggyTime other = (MeggyTime) o;
         return Objects.equals(formatted, other.formatted) && Objects.equals(customized, other.customized);
     }

@@ -1,30 +1,22 @@
 package Meggy.Task;
 
-
 import Meggy.Exception.MeggyException;
 import Meggy.Exception.MeggyNoArgException;
 import Meggy.Resource;
 import Meggy.Util;
 
-/**
- * Entries to be recorded by the chatbot.
- */
+/** Entries to be recorded by the chatbot. */
 public abstract class UserTask {
-    /**
-     * Meggy.Task description.
-     */
+    /** Task description. */
     public final String desc;
-    /**
-     * Meggy.Task completion status.
-     */
+    /** Task completion status. */
     public boolean status;
 
-    /**
-     * @param desc Non-null. Description string of task with command removed.
-     */
+    /** @param desc Non-null. Description string of task with command removed. */
     public UserTask(String desc) throws MeggyException {
-        if ("".equals(desc)) // No arguments
+        if ("".equals(desc)) { // No arguments
             throw new MeggyNoArgException();
+        }
         this.desc = desc;
         status = false;
     }
@@ -58,6 +50,6 @@ public abstract class UserTask {
      */
     @Override
     public String toString() {
-        return Util.parenthesize(status ? Resource.doneMk : ' ') + ' ' + desc;
+        return Util.parenthesize(status ? Resource.DONE_MK : ' ') + ' ' + desc;
     }
 }

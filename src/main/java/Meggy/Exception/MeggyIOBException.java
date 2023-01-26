@@ -2,9 +2,7 @@ package Meggy.Exception;
 
 import Meggy.Resource;
 
-/**
- * Converts upcoming {@link IndexOutOfBoundsException} into {@link MeggyException}.
- */
+/** Converts upcoming {@link IndexOutOfBoundsException} into {@link MeggyException}. */
 public class MeggyIOBException extends MeggyException {
     /**
      * @param idx      Index (starts with 0) in question.

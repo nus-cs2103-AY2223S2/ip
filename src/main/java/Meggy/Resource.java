@@ -1,137 +1,70 @@
 package Meggy;
 
-/**
- * Class that stores all customizable data statically. Works like a 'resource pack'.
- */
+/** Class that stores all customizable data statically. Works like a 'resource pack' */
 public final class Resource {
-    /**
-     * Prefix of all error messages.
-     */
-    public final static String errBase = " OOPS!!! ";
-    /**
-     * Error message if no argument is provided to a command that needs argument(s).
-     */
-    public final static String errNoArgs = "Description of this command cannot be empty.\n";
-    /**
-     * Error message if an error prevents writing to a file.
-     */
-    public final static String errFileWrite = "Can't save data to file. ";
-    /**
-     * Error message if an error prevents reading from a file.
-     */
-    public final static String errFileRead = "Can't read data from file. ";
-    /**
-     * Error message if an {@link java.io.IOException} prevents file interaction.
-     */
-    public final static String errIO = "An IO error occurred.\n";
-    /**
-     * Error message if an {@link SecurityException} prevents file interaction.
-     */
-    public final static String errNoAccess = "File access denied by system.\n";
-    /**
-     * Indentation before task that are highlighted.
-     */
-    public final static String taskIndent = "    ";
-    /**
-     * 'Exit' command.
-     */
-    public final static String cmdExit = "bye";
-    /**
-     * 'List' command.
-     */
-    public final static String cmdList = "list";
-    /**
-     * 'Mark' command.
-     */
-    public final static String cmdMk = "mark";
-    /**
-     * 'Unmark' command.
-     */
-    public final static String cmdUnmk = "unmark";
-    /**
-     * 'Todo' command.
-     */
-    public final static String cmdTodo = "todo";
-    /**
-     * 'Deadline' command.
-     */
-    public final static String cmdDdl = "deadline";
-    /**
-     * 'Event' command.
-     */
-    public final static String cmdEvent = "event";
-    /**
-     * 'Delete' command.
-     */
-    public final static String cmdDel = "delete";
-    /**
-     * 'Due time' keyword of 'deadline' command.
-     */
-    public final static String kwDue = "by";
-    /**
-     * 'Start time' keyword of 'event' command.
-     */
-    public final static String kwStt = "from";
-    /**
-     * 'End time' keyword of 'event' command.
-     */
-    public final static String kwEnd = "to";
-    /**
-     * Notification message after 'todo/deadline/event' command.
-     */
-    public final static String notifAdd = " Got it. Added this task:\n";
-    /**
-     * Notification message after 'list' command.
-     */
-    public final static String notifList = " Here are the tasks in your list:\n";
-    /**
-     * Notification message after 'mark' command.
-     */
-    public final static String notifMk = " Booyah! Marked this task as done:\n";
-    /**
-     * Notification message after 'unmark' command.
-     */
-    public final static String notifUnmk = " OK. Marked this task as not done:\n";
-    /**
-     * Notification message after syntax error.
-     */
-    public final static String notifUsage = " Usage: ";
-    /**
-     * Notification message after 'delete' command.
-     */
-    public final static String notifDel = " OK. Removed this task:\n";
-    /**
-     * Front page wallpaper.
-     */
-    public final static String logo = " __  __\n|  \\/  |\n| \\  / | ___  __ _  __ _ _   _\n| |\\/| |/ _ \\/ _` |/ _`" +
-            " | | | |\n| |  | |  __/ (_| | (_| | |_| |\n|_|  |_|\\___|\\__, |\\__, |\\__, |\n              __/ | __/ " +
-            "| __/ |\n             |___/ |___/ |___/\n";
-    /**
-     * Message header.
-     */
-    public final static String msgHd = "------------------------------------------------------------\n";
-    /**
-     * Message tail.
-     */
+    /** Prefix of all error messages. */
+    public final static String ERR_BASE = " OOPS!!! ";
+    /** Error message if no argument is provided to a command that needs argument(s). */
+    public final static String ERR_NO_ARGS = "Description of this command cannot be empty.\n";
+    /** Error message if an error prevents writing to a file. */
+    public final static String ERR_FILE_WRITE = "Can't save data to file. ";
+    /** Error message if an {@link java.io.IOException} prevents file interaction. */
+    public final static String ERR_IO = "An IO error occurred.\n";
+    /** Error message if an {@link SecurityException} prevents file interaction. */
+    public final static String ERR_NO_FILE_ACCESS = "File access denied by system.\n";
+    /** Indentation before task string when displaying in list. */
+    public final static String TASK_STRING_INDENT = "    ";
+    /** 'Exit' command. */
+    public final static String CMD_EXIT = "bye";
+    /** 'List' command. */
+    public final static String CMD_LIST = "list";
+    /** 'Mark' command. */
+    public final static String CMD_MARK = "mark";
+    /** 'Unmark' command. */
+    public final static String CMD_UNMK = "unmark";
+    /** 'Todo' command. */
+    public final static String CMD_TODO = "todo";
+    /** 'Deadline' command. */
+    public final static String CMD_DDL = "deadline";
+    /** 'Event' command. */
+    public final static String CMD_EVENT = "event";
+    /** 'Delete' command. */
+    public final static String CMD_DEL = "delete";
+    /** 'Due time' keyword of 'deadline' command. */
+    public final static String KW_DUE = "by";
+    /** 'Start time' keyword of 'event' command. */
+    public final static String KW_STT = "from";
+    /** 'End time' keyword of 'event' command. */
+    public final static String KW_END = "to";
+    /** Notification message after 'todo/deadline/event' command. */
+    public final static String NOTIF_ADD = " Got it. Added this task:\n";
+    /** Notification message after 'list' command. */
+    public final static String NOTIF_LIST = " Here are the tasks in your list:\n";
+    /** Notification message after 'mark' command. */
+    public final static String NOTIF_MARK = " Booyah! Marked this task as done:\n";
+    /** Notification message after 'unmark' command. */
+    public final static String NOTIF_UNMK = " OK. Marked this task as not done:\n";
+    /** Notification message after syntax error. */
+    public final static String NOTIF_USAGE = " Usage: ";
+    /** Notification message after 'delete' command. */
+    public final static String NOTIF_DEL = " OK. Removed this task:\n";
+    /** Front page wallpaper. */
+    public final static String MEGGY_LOGO = " __  __\n|  \\/  |\n| \\  / | ___  __ _  __ _ _   _\n| |\\/| |/ _ \\/ _`" +
+            " |/ _` | | | |\n| |  | |  __/ (_| | (_| | |_| |\n|_|  |_|\\___|\\__, |\\__, |\\__, |\n              __/ " +
+            "| __/ | __/ |\n             |___/ |___/ |___/\n";
+    /** Message header. */
+    public final static String MSG_HD = "------------------------------------------------------------\n";
+    /** Message tail. */
+    public final static String MSG_TL = MSG_HD + "\n>";
+    /** Front page greetings. */
+    public final static String GREETINGS = " Wommy! Get REKT by the upcoming star of Inkopolis, Meggy.Meggy!\n";
+    /** Notification message after 'bye' command. */
+    public final static String FAREWELL = " OK gotta go play more Turf Wars. Have a nice day!\n";
+    /** Icon for tasks marked 'done'. */
+    public final static char DONE_MK = 'X';
 
-    public final static String msgTl = msgHd + "\n>";
-    /**
-     * Front page greetings.
-     */
-    public final static String greetings = " Wommy! Get REKT by the upcoming star of Inkopolis, Meggy.Meggy!\n";
-    /**
-     * Notification message after 'bye' command.
-     */
-    public final static String farewell = " OK gotta go play more Turf Wars. Have a nice day!\n";
-    /**
-     * Icon for tasks marked 'done'.
-     */
-    public final static char doneMk = 'X';
-
-    /**
-     * @deprecated Class stores all resource values statically and should not be initialized.
-     */
-    Resource() {
+    /** @deprecated Class stores all resource values statically should not be initialized. */
+    private Resource() {
     }
 
     /**

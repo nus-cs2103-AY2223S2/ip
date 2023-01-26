@@ -1,5 +1,6 @@
 package Meggy;
 
+import Meggy.Exception.Function;
 import Meggy.Exception.MeggyException;
 import Meggy.Task.UserTask;
 
@@ -11,17 +12,13 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
-/**
- * Save cross-session data in file.
- */
+/** Save cross-session data in file. */
 public class Storage {
-    /**
-     * From "command" in a data line to the type of {@link UserTask} to be created.
-     */
-    public final static Map<String, MeggyException.Function<String, UserTask>> dataEntryToTask = Map.of(
-            Resource.cmdTodo, Util.todoNew,
-            Resource.cmdDdl, Util.ddlNew,
-            Resource.cmdEvent, Util.eventNew
+    /** From "command" in a data line to the type of {@link UserTask} to be created. */
+    public final static Map<String, Function<String, UserTask>> DATA_ENTRY_TO_TASK = Map.of(
+            Resource.CMD_TODO, Util.TODO_NEW,
+            Resource.CMD_DDL, Util.DDL_NEW,
+            Resource.CMD_EVENT, Util.EVENT_NEW
     );
     final public File dataFile;
 
@@ -46,16 +43,17 @@ public class Storage {
             dataFile.createNewFile();
             fw = new FileWriter(dataFile, false);
         } catch (IOException e) {
-            throw new MeggyException(Resource.errFileWrite + Resource.errIO);
+            throw new MeggyException(Resource.ERR_FILE_WRITE + Resource.ERR_IO);
         } catch (SecurityException e) {
-            throw new MeggyException(Resource.errFileWrite + Resource.errNoAccess);
+            throw new MeggyException(Resource.ERR_FILE_WRITE + Resource.ERR_NO_FILE_ACCESS);
         }
         try {
-            for (UserTask t : tasks)
+            for (UserTask t : tasks) {
                 fw.write(t.encode() + '\n');
+            }
             fw.flush();
         } catch (IOException e) {
-            throw new MeggyException(Resource.errFileWrite + Resource.errIO);
+            throw new MeggyException(Resource.ERR_FILE_WRITE + Resource.ERR_IO);
         } finally {
             try {
                 fw.close();
@@ -80,8 +78,8 @@ public class Storage {
             return;
         }
         while (fileIn.hasNextLine()) {
-            final Parser.JobAndArg<UserTask> jobAndArg = Parser.parseJobAndArg(dataEntryToTask, fileIn.nextLine());
-            final MeggyException.Function<String, UserTask> taskNew = jobAndArg.job;
+            final Parser.JobAndArg<UserTask> jobAndArg = Parser.parseJobAndArg(DATA_ENTRY_TO_TASK, fileIn.nextLine());
+            final Function<String, UserTask> taskNew = jobAndArg.job;
             if (taskNew != null) { // Command recognized
                 try {
                     tasks.add(taskNew.apply(jobAndArg.args));
