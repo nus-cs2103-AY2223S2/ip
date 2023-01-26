@@ -38,7 +38,7 @@ public class Task {
 
     /**
      * To be overriden in its subclasses
-     * @return
+     * @return empty String
      */
     @Override
     public String toString() {
