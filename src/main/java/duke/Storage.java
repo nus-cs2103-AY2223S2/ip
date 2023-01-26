@@ -8,13 +8,20 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String FILE_DESTINATION = "data/duke.txt";
+    private static final String FILE_DESTINATION = "data.txt";
     private final File file;
     public Storage() {
         file = new File(FILE_DESTINATION);
     }
     public TaskList readSavedFile() {
         File file = new File(FILE_DESTINATION);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Error while creating file: " + e);
+            }
+        }
         TaskList taskList = new TaskList();
         try {
             Scanner myReader = new Scanner(file);
