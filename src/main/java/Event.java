@@ -3,6 +3,11 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Task with a duration.
+ *
+ * @author Karen
+ */
 public class Event extends Task {
     protected LocalDateTime to;
     protected LocalDateTime from;
@@ -22,11 +27,17 @@ public class Event extends Task {
         this.format = format;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "E | " + super.toString() + " | from: " + from.format(format) + " | " + "to: " + to.format(format);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if(this == obj) {

@@ -5,6 +5,11 @@ import duke.TaskList;
 import duke.Ui;
 import duke.command.Command;
 
+/**
+ * Represents a command from the user to unmark a task as undone.
+ *
+ * @author Karen
+ */
 public class UnmarkCommand extends Command{
     private int num;
 
@@ -12,10 +17,23 @@ public class UnmarkCommand extends Command{
         this.num = num;
     }
 
+    /**
+     * Checks if command is an exit command.
+     *
+     * @return false. Unmark task command is not an exit command.
+     */
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Unmarks the selected task in the list as undone. Prints a message indicating to user that task successfully
+     * unmarked.
+     *
+     * @param tasks. A TaskList containing the set of task the user has.
+     * @param ui. An Ui which allows for interaction between Duke and user.
+     * @param storage. A Storage enabling Duke to store memory.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             ui.unmarkTaskResponse(tasks.markTask(num, false));

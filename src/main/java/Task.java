@@ -14,14 +14,23 @@ public class Task {
         this.done = done;
     }
 
+    /**
+     * Marks a Task as completed.
+     */
     public void mark() {
         this.done = true;
     }
 
+    /**
+     * Unmarks a Task as uncompleted.
+     */
     public void unmark() {
         this.done = false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean isRelated(String name) {
         return this.name.contains(name);
     }
@@ -35,6 +44,9 @@ public class Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if(this == obj) {

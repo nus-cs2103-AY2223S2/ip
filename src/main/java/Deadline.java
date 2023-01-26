@@ -3,6 +3,11 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Task with a deadline.
+ *
+ * @author Karen
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
     protected DateTimeFormatter format;
@@ -19,11 +24,17 @@ public class Deadline extends Task {
         this.format = format;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "D | " + super.toString() + " | by: " + by.format(format);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if(this == obj) {

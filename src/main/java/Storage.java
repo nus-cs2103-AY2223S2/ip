@@ -14,6 +14,13 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.time.format.DateTimeFormatter;
 
+/**
+ *
+ * Represents memory of Duke. Contains methods that help Duke recover previously save task list and save task list
+ * before closing programme.
+ *
+ * @author Karen
+ */
 public class Storage {
     static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd MMM uuuu kk:mm");
     private String filePath;
@@ -22,6 +29,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads string data of tasks from file and organise the tasks into an ArrayList<Tasks>.
+     *
+     * @return ArrayList<List>. An ArrayList containing all the tasks previously stored in memory.
+     * @throws FileNotFoundException. Filepath is invalid.
+     */
     public ArrayList<Task> loadData() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -44,6 +57,12 @@ public class Storage {
         return arr;
     }
 
+    /**
+     * Saves ArrayList of task into file as a string.
+     *
+     * @param tasks. List of task to be stored in memory.
+     * @throws IOException. Filepath is invalid.
+     */
     public void saveData(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter("./data/duke.txt");
         fw.write(tasks.toString());

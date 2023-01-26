@@ -8,6 +8,11 @@ import duke.task.Event;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Represents Duke's interaction with user.
+ *
+ * @author Karen
+ */
 public class Ui {
     private static final String STR = "------------------------------------------------------------";
     private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd MMM uuuu kk:mm");
@@ -22,6 +27,11 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Returns the next command input by user.
+     *
+     * @return String. The next command input by user.
+     */
     public String nextInput() {
         return this.sc.nextLine();
     }
