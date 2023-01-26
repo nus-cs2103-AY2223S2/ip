@@ -5,6 +5,13 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String getFileRepresentation() {
+        String mark = (super.isDone) ? "X" : " ";
+
+        return "T" + "~" + mark + "~" + this.description;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

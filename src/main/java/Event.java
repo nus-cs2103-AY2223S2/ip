@@ -10,6 +10,14 @@ public class Event extends Task {
     }
 
     @Override
+    public String getFileRepresentation() {
+        String mark = (super.isDone) ? "X" : " ";
+
+        return "E" + "~" + mark + "~" + this.description
+                + "~" + this.from + "~" + this.to;
+    }
+
+    @Override
     public String toString() {
         return "[E]"
                 + super.toString()
