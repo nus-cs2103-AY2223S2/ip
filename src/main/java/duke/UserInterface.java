@@ -11,6 +11,7 @@ public class UserInterface {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String GREET_MESSAGE = "Hello, I'm Ekud! What can I do for you?";
+    public static final String EXIT_MESSAGE = "Farewell. Always at your service.";
     private static final String FORMATTER_LEFT_WRAP = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     private static final String FORMATTER_RIGHT_WRAP = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
@@ -37,6 +38,9 @@ public class UserInterface {
     public void showStartMessage() {
         System.out.println(LOGO);
         printFormattedMessage(GREET_MESSAGE);
+    }
+    public void showExitMessage() {
+        printFormattedMessage(EXIT_MESSAGE);
     }
 
     private void printFormattedMessage(String message) {

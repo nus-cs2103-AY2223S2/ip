@@ -8,8 +8,9 @@ public class Controller {
     private TaskList tasks;
     private UserInterface ui;
     private Storage storage;
-
     private Parser parser;
+    private boolean isExited;
+
 
     Controller(UserInterface ui, Storage storage) {
         try {
@@ -20,10 +21,11 @@ public class Controller {
         this.ui = ui;
         this.storage = storage;
         parser = new Parser();
+        this.isExited = false;
     }
 
     public void runExecutionLoop() {
-        while(true) {
+        while(!isExited) {
             try {
                 String input = ui.getInput();
                 Command command = parser.parse(input);
@@ -32,9 +34,14 @@ public class Controller {
                 ui.showExceptionMessage(exception);
             }
         }
+        ui.showExitMessage();
     }
 
     public void executeCommand(Command command) throws DukeException {
+        if (command == null) {
+            isExited = true;
+            return;
+        }
         String result = command.execute(tasks);
         ui.displayResult(result);
         storage.saveTaskChangesToFile(tasks);

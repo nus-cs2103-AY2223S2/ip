@@ -9,8 +9,6 @@ import java.time.format.DateTimeParseException;
 public class DeadlineTask extends Task {
     private final LocalDate deadline;
     private static final String INDICATOR = "[Deadline]";
-
-    private static final String FORMAT_EXCEPTION_MESSAGE = "Invalid format for creating Deadline duke.tasks.Task";
     private static final String INVALID_DATE_EXCEPTION = "Incompatible date format given for Deadline";
 
     static final String DEADLINE_PREFIX_REPLACEMENT = "BY: ";
@@ -33,7 +31,7 @@ public class DeadlineTask extends Task {
 
     private static String formattedDeadline (LocalDate deadline) {
         String formattedDate = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        return String.format(Task.EXTRAS_FORMAT_TEMPLATE, formattedDate);
+        return String.format(Task.EXTRAS_FORMAT_TEMPLATE, DEADLINE_PREFIX_REPLACEMENT + formattedDate);
     }
     @Override
     public String toString() {
