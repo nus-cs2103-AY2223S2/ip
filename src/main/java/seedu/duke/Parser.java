@@ -6,6 +6,7 @@ public class Parser {
     private final static String MARK = "mark";
     private final static String UNMARK = "unmark";
     private final static String DELETE = "delete";
+    private final static String SEARCH = "search";
 
     private void list(TaskList tasks) {
         Ui.indentedPrintln("Here are the tasks in your list:");
@@ -46,6 +47,8 @@ public class Parser {
             tasks.addTask(str, storage);
         } else if (str.length() >= 6 && str.substring(0, 6).equals(DELETE)) {
             tasks.deleteTask(Character.getNumericValue(str.charAt(7)));
+        } else if (str.length() >= 6 && str.substring(0, 6).equals(SEARCH)) {
+            tasks.searchTask(str.substring(7));
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
