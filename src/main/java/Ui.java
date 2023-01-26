@@ -25,4 +25,8 @@ public class Ui {
         println("----------------------------------------------------");
     }
 
+    public static void showLoadingError() {
+        println("There was an issue loading up memory. Loading empty task list!");
+    }
+
 }

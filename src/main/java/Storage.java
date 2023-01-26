@@ -27,7 +27,7 @@ public class Storage {
         this.memory = new File(String.valueOf(memoryPath));
     }
 
-    public void loadTasks(TaskList allTasks) {
+    public void loadTasks(TaskList allTasks) throws MemoryFailedException {
         try {
             boolean success = this.memory.createNewFile();
             Scanner memoryScanner = new Scanner(memory);
@@ -36,7 +36,7 @@ public class Storage {
                 loadTaskLine(taskLine, allTasks);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new MemoryFailedException();
         }
     }
 

@@ -18,15 +18,14 @@ public class Duke {
 
     private Storage storage;
     private TaskList allTasks;
-    private Ui ui;
 
     public Duke(String[] memoryPathArray) {
-        ui = new Ui();
         storage = new Storage(memoryPathArray);
+        allTasks = new TaskList();
         try {
-            allTasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
+            storage.loadTasks(allTasks);
+        } catch (MemoryFailedException e) {
+            Ui.showLoadingError();
             allTasks = new TaskList();
         }
     }
@@ -37,7 +36,7 @@ public class Duke {
 
     public static void main(String[] args) {
         String[] memoryPathArray = {".", "memory.txt"};
-        new Duke("data/tasks.txt").run();
+        new Duke(memoryPathArray).run();
     }
 
 //    public static void main(String[] args) {
