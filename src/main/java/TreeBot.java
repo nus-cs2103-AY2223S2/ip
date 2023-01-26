@@ -16,10 +16,13 @@ public class TreeBot {
     private ArrayList<Task> tasks = new ArrayList<>();
     private TaskFactory taskFactory = new TaskFactory();
     private Ui ui = new Ui();
+    private Storage storage = new Storage("data/treebot.txt");
+
+    public TreeBot() throws IOException {
+    }
 
     public void start() {
         ui.showWelcome();
-        loadTasks();
         listen();
     }
     private void listen() {
@@ -36,12 +39,15 @@ public class TreeBot {
                 execute(commandString);
             } catch (TreeBotException e) {
                 System.out.println(e.getMessage());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                System.out.println("cant execute due to storage error");
             }
 
         }
 
     }
-    private void execute(String commandString) throws TreeBotException {
+    private void execute(String commandString) throws TreeBotException, IOException {
         String[] splitStr = commandString.split("\\s+", 2);
         String command = splitStr[0];
 
@@ -53,19 +59,19 @@ public class TreeBot {
         case "deadline":
         case "event":
             addTask(this.taskFactory.make(commandString));
-            saveTasks();
+            storage.saveTasks(this.tasks);
             break;
         case "mark":
             markTask(Integer.parseInt(splitStr[1]));
-            saveTasks();
+            storage.saveTasks(this.tasks);
             break;
         case "unmark":
             unmarkTask(Integer.parseInt(splitStr[1]));
-            saveTasks();
+            storage.saveTasks(this.tasks);
             break;
         case "delete":
             deleteTask(Integer.parseInt(splitStr[1]));
-            saveTasks();
+            storage.saveTasks(this.tasks);
             break;
         default:
             throw new InvalidCommandException("This command is invalid");
@@ -99,57 +105,7 @@ public class TreeBot {
         System.out.println(command);
     }
 
-    private void saveTasks() {
-        try {
-            FileWriter fw = new FileWriter("data/treebot.txt");
-            for (Task task : this.tasks) {
-                fw.write(task.toStorageFormatString() + System.lineSeparator());
-            }
-            fw.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("file does not exist");
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    private void loadTasks() {
-        try {
-            File f = new File("data/treebot.txt");
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                String formatString = s.nextLine();
-                this.tasks.add(formatStringToTask(formatString));
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("file is not found");
-        }
-    }
-    private Task formatStringToTask(String formatString) {
-        String[] splitStr = formatString.split("\\|");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        Task task;
-        switch (splitStr[0]) {
-        case "T":
-            task = new Todo(splitStr[2]);
-            break;
-        case "D":
-            task =  new Deadline(splitStr[2], LocalDateTime.parse(splitStr[3], formatter));
-            break;
-        case "E":
-            task = new Event(splitStr[2], LocalDateTime.parse(splitStr[3], formatter), LocalDateTime.parse(splitStr[4], formatter));
-            break;
-        default:
-            task =  null;
 
-        }
-
-        if (splitStr[1].equals("1")) {
-           task.markAsDone();
-           return task;
-        }
-
-        return task;
-    }
 
     private void exit() {
         System.out.println("Thank you, i'll be rooting for you.");
