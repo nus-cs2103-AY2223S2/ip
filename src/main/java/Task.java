@@ -11,20 +11,19 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void markAsDone() {
-        this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-    }
-
-    public void markAsUnDone() {
-        this.isDone = false;
-        System.out.println("OK, I've marked this task as not done yet:");
+    public void setStatus(boolean isDone) {
+        this.isDone = isDone;
     }
 
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
     }
+    public String toStoreString() {
+        String isDoneIndicator = isDone ? "1 |" : "0 |";
+        return isDoneIndicator + this.description;
+    }
+
 
 }
 

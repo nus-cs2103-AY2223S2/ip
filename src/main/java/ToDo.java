@@ -1,4 +1,4 @@
-public class ToDo extends Task{
+public class ToDo extends Task {
     public ToDo(String description) throws JamesException {
         super(description);
         if (description.isEmpty()) {
@@ -7,7 +7,13 @@ public class ToDo extends Task{
     }
     @Override
     public String toString() {
+
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public String toStoreString() {
+        return "T | " + super.toStoreString() + "\n";
     }
 
 }

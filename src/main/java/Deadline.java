@@ -2,7 +2,7 @@ public class Deadline extends Task {
 
     protected String by;
 
-    public Deadline(String description, String by) throws JamesException{
+    public Deadline(String description, String by) {
         super(description);
         by = by.replaceAll("by", "");
         this.by = by;
@@ -11,7 +11,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+
         return "[D]" + super.toString() + " (by:" + by + ")";
+    }
+    @Override
+    public String toStoreString() {
+        return "D | " + super.toStoreString() + " | " + this.by + "\n";
     }
 
 }
