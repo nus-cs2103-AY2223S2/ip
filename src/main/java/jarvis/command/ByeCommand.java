@@ -11,7 +11,7 @@ import jarvis.ui.Ui;
  */
 public class ByeCommand extends Command {
     public ByeCommand() {
-        super(Action.BYE, null, null);
+        super(Action.BYE, null);
     }
 
     @Override
