@@ -2,15 +2,27 @@ package duke;
 
 import duke.task.Task;
 
+/**
+ * Handles the user interface and overall appearance of the duke program
+ * @author oliverloo
+ * @version 1.0
+ *
+ */
 public class Ui {
     static String line = "      _____________________________________________________________________";
 
+    /**
+     * Greet user interface: Duke greets the user
+     */
     public static void greet () {
         System.out.println(line);
         System.out.println("\n      Hello! I'm Oli\n" + "       What can I do for you?");
         System.out.println(line);
     }
 
+    /**
+     * Displays list to the user in a numbered format
+     */
     public static void displayList(Tasklist list) {
         System.out.println(line);
         for (int i = 0; i < list.size(); i++) {
@@ -19,21 +31,33 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Displays a task that is just marked
+     * @param task
+     */
     public static void displayMark(Task task) {
         System.out.println("        Nice! I've marked this task as done:");
         System.out.println("        " + task);
     }
 
+    /**
+     * Displays a task that is just unmarked
+     * @param task
+     */
     public static void displayUnmark(Task task) {
         System.out.println("        OK, I've marked this task as not done yet:");
         System.out.println("        " + task);
     }
 
+    /**
+     * Bids the user farewell before terminating the duke program
+     */
     public static void displayByeMessage() {
         System.out.println(line);
         System.out.println("        byebye! Have an exquisite day");
         System.out.println(line);
     }
+
 
     public static void displayInvalidIndexMessage() {
         System.out.println("Invalid Index!");
@@ -47,6 +71,11 @@ public class Ui {
         System.out.println("Invalid Input! You need to specify a /from and /to or content is empty!");
     }
 
+    /**
+     * Displays a task that is just added to a specified Tasklist
+     * @param task
+     * @param list
+     */
     public static void displayAddTask(Task task, Tasklist list) {
         System.out.println(line);
         System.out.println("        Got it. I've added this task:");
@@ -54,11 +83,17 @@ public class Ui {
         displayUpdatedList(list);
     }
 
+    /**
+     * Displays an updated Tasklist
+     */
     public static void displayUpdatedList(Tasklist list) {
         System.out.println("        Now you have " + list.size() + " tasks in the list.");
         System.out.println(line);
     }
 
+    /**
+     * Displays information of task that is just removed from Tasklist
+     */
     public static void displayDelete(int i, Tasklist list){
         System.out.println(line);
         System.out.println("        Got it. I've removed this task:");
@@ -68,7 +103,19 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Informs user that list is just cleared
+     */
     public static void displayClear() {
         System.out.println("        Got it. I have cleared the task-list.\n" + line);
+    }
+
+    public static void displayFindHeader() {
+        System.out.println(line);
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public static void displayMatchedTask(Task task, int count) {
+        System.out.println(count + ". " + task);
     }
 }
