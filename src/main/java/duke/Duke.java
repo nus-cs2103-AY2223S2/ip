@@ -1,7 +1,6 @@
+package duke;
+
 import java.util.Scanner;
-
-
-
 public class Duke {
     private final Storage storage;
     private TaskList tasks;
