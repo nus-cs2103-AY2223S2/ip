@@ -30,7 +30,7 @@ public class Ui {
 
     public void showWelcome() {
         showLine();
-        System.out.println("Hello! I'm duke.Duke");
+        System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
     }
 
