@@ -1,4 +1,4 @@
-package duke;
+package seedu.duke;
 
 public class DukeException extends RuntimeException {
     DukeException(String message) {

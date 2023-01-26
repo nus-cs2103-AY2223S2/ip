@@ -1,9 +1,4 @@
-package duke;
-
-import duke.Deadline;
-import duke.Event;
-import duke.Storage;
-import duke.Task;
+package seedu.duke;
 
 import java.io.IOException;
 import java.util.ArrayList;
