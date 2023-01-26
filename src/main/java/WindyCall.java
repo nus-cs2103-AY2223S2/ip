@@ -91,99 +91,74 @@ public class WindyCall {
         System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
     }
 
-
-    public static void main(String[] args) {
+    public void run() {
         Scanner scan = new Scanner(System.in);
-        WindyCall chatBox = new WindyCall();
-        chatBox.ui.greeting();
+        ui.greeting();
         while(true) {
             String userCommand = scan.nextLine();
             if (userCommand.equals("bye")) {
-                chatBox.ui.byeWords();
+                ui.byeWords();
                 break;
             }
+            OperationType type = parser.getOperationType(userCommand);
             Ui.line();
-            if (userCommand.equals("list")) chatBox.ui.displayTasks(chatBox.tasks);
-            else {
-                String[] parts = userCommand.split(" ");
-                if (parts[0].equals("mark")) {
-                    if (parts.length == 1) {
-                        System.out.println("     You should input a number to mark/unmark a task");
-                        Ui.line();
-                        continue;
-                    }
-                    int num = -1;
-                    try {
-                        num = Integer.parseInt(parts[1]);
-                    } catch (NumberFormatException e) {
-                        Ui.space();
-                        System.out.println("☹ OOPS!!! You should input a number");
-                    }
-                    if (num >= 1 && num <= chatBox.tasks.size()) {
+            String[] parts = userCommand.split(" ");
+            switch (type) {
+                case LIST:
+                    ui.displayTasks(tasks);
+                    break;
+                case MARK:
+                    int num = parser.getMarkIndex(parts);
+                    if (num >= 1 && num <= tasks.size()) {
                         System.out.println("     Good job! I've marked this task as done:");
-                        chatBox.tasks.get(num - 1).markAsDone();
+                        tasks.get(num - 1).markAsDone();
                         Ui.space();
-                        System.out.println(chatBox.tasks.get(num - 1));
-                        chatBox.storage.handleTaskChange(chatBox.tasks);
+                        System.out.println(tasks.get(num - 1));
+                        storage.handleTaskChange(tasks);
                     } else if (num != -1) {
                         System.out.println("     Sorry, your index is out of range");
                     }
-                } else if (parts[0].equals("unmark")) {
-                    if (parts.length == 1) {
-                        System.out.println("     You should input a number to mark/unmark a task");
-                        Ui.line();
-                        continue;
-                    }
-                    int num = -1;
-                    try {
-                        num = Integer.parseInt(parts[1]);
-                    } catch (NumberFormatException e) {
-                        Ui.space();
-                        System.out.println("☹ OOPS!!! You should input a number");
-                    }
-                    if (num >= 1 && num <= chatBox.tasks.size()) {
+                    break;
+                case UNMARK:
+                    int idx = parser.getUnmarkIndex(parts);
+                    if (idx >= 1 && idx <= tasks.size()) {
                         System.out.println("     OK, I've marked this task as not done yet:");
-                        chatBox.tasks.get(num - 1).unmark();
+                        tasks.get(idx - 1).unmark();
                         Ui.space();
-                        System.out.println(chatBox.tasks.get(num - 1));
-                        chatBox.storage.handleTaskChange(chatBox.tasks);
-                    } else if (num != -1){
+                        System.out.println(tasks.get(idx - 1));
+                        storage.handleTaskChange(tasks);
+                    } else if (idx != -1){
                         System.out.println("     Sorry, your index is out of range");
                     }
-                } else if (parts[0].equals("delete")) {
-                    if (parts.length == 1) {
-                        System.out.println("     You should input a number to delete a task");
-                        Ui.line();
-                        continue;
-                    }
-                    int num = -1;
-                    try {
-                        num = Integer.parseInt(parts[1]);
-                    } catch (NumberFormatException e) {
-                        Ui.space();
-                        System.out.println("☹ OOPS!!! You should input a number");
-                    }
-                    if (num >= 1 && num <= chatBox.tasks.size()) {
+                    break;
+                case DELETE:
+                    int idx1 = parser.getDeleteIndex(parts);
+                    if (idx1 >= 1 && idx1 <= tasks.size()) {
                         System.out.println("     Noted. I've removed this task:");
                         Ui.space();
-                        System.out.println(chatBox.tasks.get(num - 1));
-                        chatBox.tasks.remove(num - 1);
-                        chatBox.storage.handleTaskChange(chatBox.tasks);
+                        System.out.println(tasks.get(idx1 - 1));
+                        tasks.remove(idx1 - 1);
+                        storage.handleTaskChange(tasks);
                         Ui.space();
-                        System.out.println("Now you have " + chatBox.tasks.size() + " tasks in the list.");
-                    } else if (num != -1) {
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    } else if (idx1 != -1) {
                         System.out.println("     Sorry, your index is out of range");
                     }
-                } else {
+                    break;
+                default:
                     try {
-                        chatBox.addTask(userCommand);
+                        this.addTask(userCommand);
                     }
                     catch (WindyCallException e) {
                         System.out.println(e.getMessage());
                     }
-                }
+                    break;
             }
             Ui.line();
         }
+    }
+    public static void main(String[] args) {
+        WindyCall chatBox = new WindyCall();
+        chatBox.run();
     }
 }

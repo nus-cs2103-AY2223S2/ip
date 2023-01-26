@@ -1,2 +1,2 @@
-public class AddTask {
+public abstract class AddTask {
 }
