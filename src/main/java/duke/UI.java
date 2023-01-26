@@ -24,7 +24,7 @@ public class UI {
                 flag = fn.bye();
                 break;
             case "list":
-                fn.list(inp);
+                fn.list();
                 break;
             case "mark":
                 fn.mark(inp);

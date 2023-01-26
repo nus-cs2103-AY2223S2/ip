@@ -10,10 +10,19 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Storage {
+    /**
+     * Represent a Storage object that controls writing and loading function of the Duke program.
+     */
     String fp;
     File f;
     Map<String, Task> taskMap;
 
+    /**
+     * Constructor for an instance of Storage.
+     *
+     * @param fp file path to save/load file
+     * @throws IOException
+     */
     public Storage(String fp) throws IOException {
         this.fp = fp;
         this.f = new File(fp);
@@ -23,6 +32,11 @@ public class Storage {
         this.taskMap = TaskMap.tm;
     }
 
+    /**
+     * Method to load information from previously saved task defined in file
+     *
+     * @return TaskList object for Function to manipulate
+     */
     public TaskList load() {
         TaskList tl = new TaskList();
         try {
@@ -46,6 +60,11 @@ public class Storage {
         return tl;
     }
 
+    /**
+     * Method to write onto file tasks that have been scheduled.
+     *
+     * @param tl Tasklist object to determine task to write onto file.
+     */
     public void save(TaskList tl) {
         //overwrite all in tasklist into file
         try {
