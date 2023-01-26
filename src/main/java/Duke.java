@@ -15,66 +15,66 @@ public class Duke {
 
         String[] command = commandLine.split(" ");
 
-        switch(command[0]) {
+        switch (command[0]) {
 
-            case "list":
-                printList();
-                break;
+        case "list":
+            printList();
+            break;
 
-            case "mark":
-                if (command.length != 2) {
-                    throw new DukeException("Please check the number of your arguments!");
-                }
-                markTask(command[1]);
+        case "mark":
+            if (command.length != 2) {
+                throw new DukeException("Please check the number of your arguments!");
+            }
+            markTask(command[1]);
 
-                break;
+            break;
 
-            case "unmark":
-                if (command.length != 2) {
-                    throw new DukeException("Please check the number of your arguments!");
-                }
-                unmarkTask(command[1]);
-                break;
+        case "unmark":
+            if (command.length != 2) {
+                throw new DukeException("Please check the number of your arguments!");
+            }
+            unmarkTask(command[1]);
+            break;
 
-            case "todo":
-                if (command.length < 2) {
-                    throw new DukeException("The description of a todo cannot be empty!");
-                }
-                addTodo(command);
-                break;
+        case "todo":
+            if (command.length < 2) {
+                throw new DukeException("The description of a todo cannot be empty!");
+            }
+            addTodo(command);
+            break;
 
-            case "deadline":
-                int byIndex = Arrays.asList(command).indexOf("/by");
-                if (command.length < 4 || byIndex == -1) {
-                    throw new DukeException("Too few arguments!");
-                }
-                if (byIndex == command.length - 1) {
-                    throw new DukeException("Check the format again!");
-                }
-                addDeadline(command, byIndex);
-                break;
+        case "deadline":
+            int byIndex = Arrays.asList(command).indexOf("/by");
+            if (command.length < 4 || byIndex == -1) {
+                throw new DukeException("Too few arguments!");
+            }
+            if (byIndex == command.length - 1) {
+                throw new DukeException("Check the format again!");
+            }
+            addDeadline(command, byIndex);
+            break;
 
-            case "event":
-                int fromIndex = Arrays.asList(command).indexOf("/from");
-                int toIndex = Arrays.asList(command).indexOf("/to");
-                if (command.length < 6 || fromIndex == -1 || toIndex == -1) {
-                    throw new DukeException("Too few arguments!");
-                }
-                if (fromIndex + 1 >= toIndex || toIndex == command.length - 1) {
-                    throw new DukeException("Check the format again!");
-                }
-                addEvent(command, fromIndex, toIndex);
-                break;
+        case "event":
+            int fromIndex = Arrays.asList(command).indexOf("/from");
+            int toIndex = Arrays.asList(command).indexOf("/to");
+            if (command.length < 6 || fromIndex == -1 || toIndex == -1) {
+                throw new DukeException("Too few arguments!");
+            }
+            if (fromIndex + 1 >= toIndex || toIndex == command.length - 1) {
+                throw new DukeException("Check the format again!");
+            }
+            addEvent(command, fromIndex, toIndex);
+            break;
 
-            case "delete":
-                if (command.length != 2) {
-                    throw new DukeException("Please check the number of your arguments!");
-                }
-                deleteTask(command[1]);
-                break;
+        case "delete":
+            if (command.length != 2) {
+                throw new DukeException("Please check the number of your arguments!");
+            }
+            deleteTask(command[1]);
+            break;
 
-            default:
-                throw new DukeException("Invalid/Unknown command.");
+        default:
+            throw new DukeException("Invalid/Unknown command.");
         }
 
         System.out.println(DIV_CLOSE); // DIV_CLOSE for output
