@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
+    private static final String FORMAT = "deadline {task name} /by {dd/mm/yyyy HHmm}";
     private LocalDateTime deadline;
     private static final DateTimeFormatter IN_FORMAT = DateTimeFormatter.
                                                         ofPattern("dd/MM/yyyy HHmm");
@@ -26,6 +27,11 @@ public class Deadline extends Task {
     private String deadline() {
         return " (by: " + this.deadline.format(OUT_FORMAT) + ")";
     }
+
+    public static String showFormat() {
+        return "Create a `deadline` with: " + FORMAT;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + this.deadline();

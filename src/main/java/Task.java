@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Task implements Serializable {
     protected String desc;
-    protected  boolean done;
+    protected boolean isDone;
 
     public Task(String desc) {
         this.desc = desc;
@@ -14,10 +14,12 @@ public class Task implements Serializable {
     }
 
     public void setDone(boolean done) {
-        this.done = done;
+        this.isDone = done;
     }
 
-    public boolean isDone() {   return this.done;   }
+    public boolean isDone() {   
+        return this.isDone;   
+    }
 
     public void toggleDoneOrNot() {
         if (this.isDone()) {
@@ -29,7 +31,7 @@ public class Task implements Serializable {
 
     @Override
     public String toString() {
-        String icon = done ? "[X]" : "[ ]";
+        String icon = isDone ? "[X]" : "[ ]";
         return icon + " " + this.getDescription();
     }
 }

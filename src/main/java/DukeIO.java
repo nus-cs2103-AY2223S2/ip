@@ -35,32 +35,51 @@ public class DukeIO {
 
     private static final String SAVE_SUCCESS = "Successfully saved all tasks\n";
     
-    private static final String QUIT = SEPERATOR
-                                    + REPLY + SAVE_SUCCESS 
+    private static final String QUIT = SEPERATOR 
                                     + REPLY + "Quitting Duke...\n"
                                     + REPLY + "See you soon!\n"
                                     + SEPERATOR;
      
 
+    public static void echoMessage(String message) {
+        System.out.println(message);
+    }
+    
     public static String[] tokenise(Scanner sc) {
         String[] tokens = sc.nextLine().split(" ");
         return tokens;
     }
     
     public static void printHello() {
-        System.out.println(HELLO);
+        System.out.print(HELLO);
     }
 
     public static void printQuit() {
-        System.out.println(QUIT);
+        System.out.print(QUIT);
     }
 
     public static void showPrompt() {
         System.out.print(INPUT_PROMPT);
     }
 
-    public static void showSuccessToast(Task t) {
+    public static void notifySuccessAdd(Task t) {
         System.out.println(REPLY + "Successfully added: " + t.toString());
+    }
+
+    public static void notifySuccessComplete(Task t) {
+        System.out.println(REPLY + "Successfully completed: " + t.toString());
+    }
+
+    public static void notifyUnmark(Task t) {
+        System.out.println(REPLY + "Unmarked task: " + t.toString());
+    }
+
+    public static void nofifyMarkFail(Task t) {
+        System.out.println(REPLY + "Cannot mark completed task: " + t.toString());
+    }
+
+    public static void notifyUnmarkFail(Task t) {
+        System.out.println(REPLY + "Cannot unmark incomplete task: " + t.toString());
     }
 
     public static void showCount() {
@@ -98,6 +117,14 @@ public class DukeIO {
 
     public static void showError(Exception e) {
         System.out.println(e.getMessage());
+    }
+
+    public static void notifyLoad() {
+        System.out.println("Loaded successfully from previous session.");
+    }
+
+    public static void notifySave() {
+        System.out.println(SAVE_SUCCESS);
     }
     
 }

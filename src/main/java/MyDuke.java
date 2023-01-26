@@ -16,7 +16,6 @@ public class MyDuke {
     }
 
     public void quit() {
-        // To add: Deleting all tasks...
         DukeIO.printQuit();
     }
 
@@ -65,17 +64,17 @@ public class MyDuke {
             // Can we handle batch mark/unmark?
             if (tokens.length == 1 || tokens.length > 2) {
                 throw new InvalidCommandException(
-                    "ERROR: Please mark/unmark tasks with task number! Find the task number with 'list'.");
+                    InvalidCommandException.MARK_FORMAT_EXCEPTION);
             }
             taskIndex = Integer.parseInt(tokens[1]);
             if (taskIndex <= 0 || taskIndex > taskCount) {
                 throw new InvalidCommandException(
-                    "ERROR: No such task. View all tasks with 'list'");
+                    InvalidCommandException.TASK_NOT_FOUND_EXCEPTION);
             }
         // NaN input from user to mark/unmark task
         } catch (NumberFormatException e) {
-            System.out.println(
-                "ERROR: Please mark/unmark tasks with task number! Find the task number with 'list'.");
+            DukeIO.showError(new InvalidCommandException(
+                InvalidCommandException.MARK_FORMAT_EXCEPTION));
             return;
         } catch (InvalidCommandException e) {
             DukeIO.showError(e);
@@ -85,16 +84,14 @@ public class MyDuke {
         Task task = allTasks.get(taskIndex-1);
         if (!task.isDone() && tokens[0].equals("mark")) {
             task.toggleDoneOrNot();
-            System.out.println("Successfully completed:\n"
-                                + " " + task.toString());
+            DukeIO.notifySuccessComplete(task); 
         } else if (task.isDone() && tokens[0].equals("unmark")) {
             task.toggleDoneOrNot();
-            System.out.println("Unmark Task:\n"
-                                + " " + task.toString());
+            DukeIO.notifyUnmark(task);
         } else if (!task.isDone() && tokens[0].equals("unmark")) {
-            System.out.println("Task not marked yet: " + task.toString());
+            DukeIO.notifyUnmarkFail(task);
         } else if (task.isDone() && tokens[0].equals("mark")) {
-            System.out.println("Task already done: " + task.toString());
+            DukeIO.nofifyMarkFail(task);
         }
     }
 
@@ -104,7 +101,8 @@ public class MyDuke {
             if (tokens.length == 1) {
                 // raise invalid command
                 throw new InvalidCommandException(
-                    "ERROR: Missing task name. Add todo task with: todo {name}.");
+                    InvalidCommandException.NAME_FORMAT_EXCEPTION 
+                    + ToDo.showFormat());
             }
         } catch (InvalidCommandException e) {
             DukeIO.showError(e);
@@ -120,7 +118,7 @@ public class MyDuke {
 
         ToDo todo = new ToDo(t);
         addTask(todo);
-        DukeIO.showSuccessToast(todo);
+        DukeIO.notifySuccessAdd(todo);
         DukeIO.showCount();
     }
 
@@ -131,15 +129,18 @@ public class MyDuke {
         try {
             if (byIndex == -1) {
                 throw new InvalidCommandException(
-                    "ERROR: Set a deadline with: deadline {task name} /by {deadline}");
+                    InvalidCommandException.ARG_FORMAT_EXCEPTION
+                    + Deadline.showFormat());
             }
             if (byIndex + 1 == t.size()) {
                 throw new InvalidCommandException(
-                    "ERROR: Please specify a date/time.");
+                    InvalidCommandException.ARG_FORMAT_EXCEPTION
+                    + Deadline.showFormat());
             }
             if (byIndex == 1) {
                 throw new InvalidCommandException(
-                    "ERROR: Missing task name.");
+                    InvalidCommandException.NAME_FORMAT_EXCEPTION
+                    + Deadline.showFormat());
             }
         } catch (InvalidCommandException e) {
             DukeIO.showError(e);
@@ -150,7 +151,7 @@ public class MyDuke {
         String byString = String.join(" ", t.subList(byIndex+1, t.size()));
         Deadline d = new Deadline(desc, byString);
         addTask(d);
-        DukeIO.showSuccessToast(d);
+        DukeIO.notifySuccessAdd(d);
         DukeIO.showCount();          
     }
 
@@ -160,14 +161,15 @@ public class MyDuke {
 
         try {
             if (fromIndex == -1 || toIndex == -1) {
-                // raise invalid command
                 throw new InvalidCommandException(
-                    "ERROR: Missing 'from' and 'to times'. Please specify 'from' and 'to' times.");
+                    InvalidCommandException.ARG_FORMAT_EXCEPTION
+                    + Event.showFomat());
             }
 
             if (fromIndex + 1 == toIndex || toIndex + 1 == t.size()) {
                 throw new InvalidCommandException(
-                    "ERROR: Please specify both 'from' and 'to' times");
+                    InvalidCommandException.ARG_FORMAT_EXCEPTION
+                    + Event.showFomat());
             }
         } catch (InvalidCommandException e) {
             DukeIO.showError(e);
@@ -179,7 +181,7 @@ public class MyDuke {
         String to = String.join(" ", t.subList(toIndex+1, t.size()));
         Event e = new Event(desc, from, to);
         addTask(e);
-        DukeIO.showSuccessToast(e);
+        DukeIO.notifySuccessAdd(e);
         DukeIO.showCount();
     }
 
@@ -187,20 +189,19 @@ public class MyDuke {
         int taskIndex = 0;
 
         try {
-            // Can we handle batch delete?
             if (tokens.length == 1 || tokens.length > 2) {
                 throw new InvalidCommandException(
-                    "ERROR: Missing task to delete. Please specify a task.");
+                    InvalidCommandException.NULL_DELETE_EXCEPTION);
             }
 
             taskIndex = Integer.parseInt(tokens[1]);
             if (taskIndex <= 0 || taskIndex > taskCount) {
                 throw new InvalidCommandException(
-                    "ERROR: No such task. View all tasks with 'list'");
+                    InvalidCommandException.TASK_NOT_FOUND_EXCEPTION);
             }
         } catch (NumberFormatException e) {
-            System.out.println(
-                "ERROR: Please mark/unmark tasks with task number! Find the task number with 'list'.");
+            DukeIO.showError(new InvalidCommandException(
+                InvalidCommandException.DELETE_FORMAT_EXCEPTION));
             return;
         } catch (InvalidCommandException e) {
             DukeIO.showError(e);

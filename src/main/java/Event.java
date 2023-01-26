@@ -3,6 +3,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
+    private static final String FORMAT = "event {task name}"
+                                        + "/from {dd/mm/yyyy HHmm}"
+                                        + "/to {dd/mm/yyyy HHmm}";
     private LocalDateTime from;
     private LocalDateTime to;
 
@@ -40,6 +43,10 @@ public class Event extends Task {
     private String duration() {
         return " (from: " + this.from.format(OUT_FORMAT) + ", to: "
                 + this.to.format(OUT_FORMAT) + ")";
+    }
+
+    public static String showFomat() {
+        return "Create an `Event` with: " + FORMAT;
     }
 
     @Override
