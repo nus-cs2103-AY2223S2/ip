@@ -1,7 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
 
-    protected String by;
-    Deadline(String description, String by) {
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+    protected LocalDateTime by;
+
+    Deadline(String description, LocalDateTime by) throws IllegalArgumentException {
         super(description);
         this.by = by;
     }
@@ -13,7 +18,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
     }
 
     public static Deadline fromSaveFormat(String savedData) {
