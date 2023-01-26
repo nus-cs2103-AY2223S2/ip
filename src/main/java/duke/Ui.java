@@ -117,8 +117,10 @@ public class Ui {
         showLine();
         System.out.println("Available commands: \n");
         System.out.println("todo [M] - Adds todo task, replace [M] with message.");
-        System.out.println("deadline [M] /by [D] - Adds deadline task, replace [M] with message and [D] with date/time.");
-        System.out.println("event [M] /from [D] /to [D] - Adds event task, replace [M] with message and [D] with date/time.\n");
+        System.out.println("deadline [M] /by [D] - " +
+                "Adds deadline task, replace [M] with message and [D] with date/time.");
+        System.out.println("event [M] /from [D] /to [D] - " +
+                "Adds event task, replace [M] with message and [D] with date/time.\n");
         System.out.println("Intended date/time should be in format dd-MM-yyyy HHmm or dd-MM-yyyy.");
         System.out.println("Otherwise, the date/time will be treated as plain text.\n");
         System.out.println("list - Lists all tasks.");
