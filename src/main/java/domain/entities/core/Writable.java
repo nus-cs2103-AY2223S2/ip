@@ -1,5 +1,7 @@
 package domain.entities.core;
 
+import core.exceptions.WriteException;
+
 /**
  * An interface wrapping around things that can be written to.
  */

@@ -41,6 +41,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String serialize() {
+        return "todo " + super.serialize();
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

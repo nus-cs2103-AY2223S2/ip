@@ -1,8 +1,10 @@
 package domain.entities.taskmanager;
+
 import core.exceptions.InvalidArgumentException;
 import core.singletons.Singletons;
 import core.utils.Pair;
 import core.utils.TokenUtilities;
+
 import java.util.Map;
 import java.util.Set;
 
@@ -15,10 +17,11 @@ import java.util.Set;
 public class Event extends Task {
     /**
      * Creates a new event.
-     * @param name the name of the event
+     *
+     * @param name       the name of the event
      * @param isComplete whether if the event is completed
-     * @param startAt the starting time of the event
-     * @param endAt the end time of the event
+     * @param startAt    the starting time of the event
+     * @param endAt      the end time of the event
      */
     public Event(String name, boolean isComplete, String startAt, String endAt) {
         super(name, isComplete);
@@ -28,30 +31,27 @@ public class Event extends Task {
 
     /**
      * Creates a new event that has not been completed.
-     * @param name the name of the event.
+     *
+     * @param name    the name of the event.
      * @param startAt the starting time of the event.
-     * @param endAt the end time of the event.
+     * @param endAt   the end time of the event.
      */
     public Event(String name, String startAt, String endAt) {
         this(name, false, startAt, endAt);
     }
 
     public static Event fromTokens(String[] tokens) throws InvalidArgumentException {
-        final Pair<String, Map<String, String>> tmp =
-                Singletons.get(TokenUtilities.class).joinTokens(tokens, delims);
+        final Pair<String, Map<String, String>> tmp = Singletons.get(TokenUtilities.class).joinTokens(tokens, delims);
         if (tmp.getLeft().isBlank()) {
-            throw new InvalidArgumentException("☹ OOPS, the name for an event " +
-                    "should not be null", tokens);
+            throw new InvalidArgumentException("☹ OOPS, the name for an event " + "should not be null", tokens);
         } else if (tmp.getRight().get(startAtKey) == null) {
-            throw new InvalidArgumentException("☹ OOPS, did you forgot to type " +
-                    startAtKey + " for your event?");
+            throw new InvalidArgumentException("☹ OOPS, did you forgot to type " + startAtKey + " for your event?");
         } else if (tmp.getRight().get(endAtKey) == null) {
-            throw new InvalidArgumentException("☹ OOPS, did you forgot to type " +
-                    endAtKey + " for your event?");
+            throw new InvalidArgumentException("☹ OOPS, did you forgot to type " + endAtKey + " for your event?");
         }
-        return new Event(tmp.getLeft(), tmp.getRight().get(startAtKey),
-                tmp.getRight().get(endAtKey));
+        return new Event(tmp.getLeft(), tmp.getRight().get(startAtKey), tmp.getRight().get(endAtKey));
     }
+
     private final String startAt;
     private final String endAt;
 
@@ -70,6 +70,11 @@ public class Event extends Task {
      */
     private static final Set<String> delims = Set.of(startAtKey, endAtKey);
 
+    @Override
+    public String serialize() {
+        return "event " + super.serialize() + " " + startAtKey + " " +
+                startAt + " " + endAtKey + " " + endAt;
+    }
 
     @Override
     public String toString() {

@@ -54,6 +54,29 @@ public class Singletons {
     }
 
     /**
+     * Re-registers a class as a singleton, therefore, it would only be created
+     * once.
+     *
+     * @param cls the class of the object.
+     */
+    static public <T> void reRegisterSingleton(Class<T> cls,
+                                             T object) {
+        singletons.put(cls, object);
+    }
+
+    /**
+     * Re-registers a class as a lazy singleton. A lazy singleton will only get
+     * instantiated if it was used.
+     *
+     * @param cls the class of the object
+     */
+    static public <T> void reRegisterLazySingleton(Class<T> cls,
+                                                 Supplier<T> supplier) {
+        singletons.remove(cls);
+        lazySingletons.put(cls, supplier);
+    }
+
+    /**
      * Gets an instance of the specified class.
      * @param cls the class of the class.
      * @return the object that has been registered for this class.

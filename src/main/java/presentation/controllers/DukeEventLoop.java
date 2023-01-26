@@ -7,6 +7,7 @@ import domain.entities.core.NestableExecutableObject;
 import domain.usecases.ByeUsecase;
 import domain.usecases.TaskManagerUsecase;
 import domain.usecases.UnknownCommandUsecase;
+import presentation.ui.SystemErr;
 
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class DukeEventLoop extends EventLoop {
 
     public static DukeEventLoop createEventLoop(Scanner scanner) {
         final NestableExecutableObject executable =
-                new NestableExecutableObject();
+                new NestableExecutableObject(Singletons.get(SystemErr.class));
 
         final ByeUsecase bye = Singletons.get(ByeUsecase.class);
         bye.register(executable);
