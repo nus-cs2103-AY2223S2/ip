@@ -8,7 +8,7 @@ public class Event extends Task {
     private LocalDateTime startDateTime;
     private LocalDateTime dueDateTime;
 
-    public Event(String description, String from, String to) throws InvalidDateTimeException {
+    private Event(String description, String from, String to) throws InvalidDateTimeException {
         super(description);
 
         this.startDateTime = handleDateTime(from);

@@ -54,9 +54,10 @@ public class Parser {
         }
     }
 
-    public static void checkTaskDesc(String[] splitStr) throws EmptyTaskException {
+    public static boolean checkTaskDesc(String[] splitStr) throws EmptyTaskException {
         if(splitStr.length == 1) {
             throw new EmptyTaskException(splitStr[0]);
         }
+        return true;
     }
 }

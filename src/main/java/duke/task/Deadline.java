@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
     private LocalDateTime dueDateTime;
 
-    public Deadline(String description, String by) throws InvalidDateTimeException {
+    private Deadline(String description, String by) throws InvalidDateTimeException {
         super(description);
         this.dueDateTime = handleDateTime(by);
     }
