@@ -8,10 +8,17 @@ public class AddCommand extends Command{
 
     private String instruction;
     private String input;
+    private boolean exit;
 
     public AddCommand(String instruction, String input) {
         this.instruction = instruction;
         this.input = input;
+    }
+
+    @Override
+    public boolean isExit() {
+        exit = false;
+        return exit;
     }
 
     @Override

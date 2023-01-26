@@ -6,9 +6,16 @@ import ui.Ui;
 
 public class UnmarkCommand extends Command {
     private int index;
+    private boolean exit;
 
     public UnmarkCommand(int index) {
         this.index = index;
+    }
+
+    @Override
+    public boolean isExit() {
+        exit = false;
+        return exit;
     }
     
     @Override

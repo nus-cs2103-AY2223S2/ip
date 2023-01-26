@@ -8,7 +8,7 @@ public class Ui {
     private Scanner sc;
 
     public Ui() {
-        sc = new Scanner(System.in);
+        this.sc = new Scanner(System.in);
     }
 
     public void welcomeMessage() {
@@ -21,6 +21,10 @@ public class Ui {
         System.out.println("Hello I'm \n" + logo);
 
         System.out.println("What can I do for you?\n");
+    }
+
+    public String readCommand() {
+        return sc.nextLine();
     }
 
     public void byeMessage() {
@@ -50,6 +54,10 @@ public class Ui {
             throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
         
         }
+    }
+
+    public void showLine() {
+        System.out.println("_________________________________________");
     }
 
 }

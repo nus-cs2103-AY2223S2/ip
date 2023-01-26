@@ -1,11 +1,11 @@
 package command;
 
 import tasklist.TaskList;
+import exceptions.TaskException;
 import storage.Storage;
 import ui.Ui;
 
-public class ListCommand extends Command {
-    
+public class DefaultCommand extends Command{
     private boolean exit;
 
     @Override
@@ -13,9 +13,9 @@ public class ListCommand extends Command {
         exit = false;
         return exit;
     }
-
+    
     @Override
-    public void execute(TaskList tasklist, Storage storage, Ui ui) {
-        tasklist.printList();
+    public void execute(TaskList tasklist, Storage storage, Ui ui) throws TaskException {
+        ui.error("default");
     }
 }
