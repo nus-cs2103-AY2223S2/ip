@@ -13,16 +13,6 @@ public class Duke {
     private Parser parser;
     private Ui ui;
 
-    // todo: private
-    enum State {
-        LIST,
-        TODO, DEADLINE, EVENT,
-        MARK, UNMARK,
-        DELETE,
-        SAVE, EXIT,
-        UNKNOWN,
-    }
-
     public Duke() {
         taskList = new TaskList();
         storage = new Storage(taskList);
@@ -73,40 +63,6 @@ public class Duke {
             throw new DukeException(failureMessage);
     }
 
-    private static State detectState(String command) {
-        // Suppress all upper case letters, gets only the first word
-        String cmd = command.toLowerCase().split(" ")[0];
-
-        // Detect state
-        switch (cmd) {
-        case "list":
-            return State.LIST;
-        case "todo":
-            return State.TODO;
-        case "deadline":
-            return State.DEADLINE;
-        case "event":
-            return State.EVENT;
-        case "mark":
-            return State.MARK;
-        case "unmark":
-            return State.UNMARK;
-        case "delete":
-            return State.DELETE;
-        case "save":
-            return State.SAVE;
-        case "bye":
-        case "goodbye":
-        case "quit":
-        case "quit()":
-        case "exit":
-        case "exit()":
-            return State.EXIT;
-        default:
-            return State.UNKNOWN; // no matches found
-        }
-    }
-
     public static void main(String[] args) {
 
         Ui.printProgramInfo();
@@ -118,9 +74,10 @@ public class Duke {
         String[] inputs;
         String userCmd, taskDescription;
         Task activeTask;
-        State currentState = State.UNKNOWN;
         Scanner sc = new Scanner(System.in);
         Duke duke = new Duke();
+
+        boolean isContinue = true;
 
         // Retrieve saved data (if any)
         duke.storage.loadDataFromFile();
@@ -134,162 +91,164 @@ public class Duke {
         duke.ui.println("What can I do for you today?");
 
         // Program Loop
-        while(currentState != State.EXIT) {
+        while(isContinue) {
             System.out.print("\n > ");
             userCmd = sc.nextLine();
 
-            // Command detection
-            currentState = Duke.detectState(userCmd);
+            // Suppress all upper case letters, gets only the first word
+            String cmd = userCmd.toLowerCase().split(" ")[0];
 
             try {
                 // State handling
-                switch (currentState) {
-                    case TODO:
-                        taskDescription = userCmd.substring(4).trim(); // exclude keyword
-                        activeTask = new Todo(taskDescription);
-                        duke.addNewTask(activeTask);
-                        break;
+                switch (cmd) {
+                case "todo":
+                    taskDescription = userCmd.substring(4).trim(); // exclude keyword
+                    activeTask = new Todo(taskDescription);
+                    duke.addNewTask(activeTask);
+                    break;
 
-                    case DEADLINE:
-                        // Checks for missing input
-                        Duke.assertThis(userCmd.contains(" /by "), "Missing due date.");
+                case "deadline":
+                    // Checks for missing input
+                    Duke.assertThis(userCmd.contains(" /by "), "Missing due date.");
 
-                        descIdx = userCmd.indexOf("deadline "); // 9 chars
-                        int dueIdx = userCmd.indexOf(" /by "); // 5 chars
-                        Duke.assertThis(descIdx+9 < dueIdx, "Task description cannot be empty.");
+                    descIdx = userCmd.indexOf("deadline "); // 9 chars
+                    int dueIdx = userCmd.indexOf(" /by "); // 5 chars
+                    Duke.assertThis(descIdx+9 < dueIdx, "Task description cannot be empty.");
 
-                        taskDescription = userCmd.substring(descIdx + 9, dueIdx).trim();
-                        String duedate = userCmd.substring(dueIdx + 5).trim();
-                        Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
-                        Duke.assertThis(!duedate.isEmpty(), "Due date cannot be empty.");
+                    taskDescription = userCmd.substring(descIdx + 9, dueIdx).trim();
+                    String duedate = userCmd.substring(dueIdx + 5).trim();
+                    Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
+                    Duke.assertThis(!duedate.isEmpty(), "Due date cannot be empty.");
 
-                        duke.addNewTask(new Deadline(taskDescription, duke.parser.parseDateTime(duedate)));
-                        break;
+                    duke.addNewTask(new Deadline(taskDescription, duke.parser.parseDateTime(duedate)));
+                    break;
 
-                    case EVENT:
-                        // Checks for missing inputs
-                        Duke.assertThis(userCmd.contains(" /from "), "Missing start date/time.");
-                        Duke.assertThis(userCmd.contains(" /to "), "Missing end date/time.");
+                case "event":
+                    // Checks for missing inputs
+                    Duke.assertThis(userCmd.contains(" /from "), "Missing start date/time.");
+                    Duke.assertThis(userCmd.contains(" /to "), "Missing end date/time.");
 
-                        descIdx = userCmd.indexOf("event "); // 6 chars
-                        int fromIdx = userCmd.indexOf(" /from "); // 7 chars
-                        int toIdx = userCmd.indexOf(" /to "); // 5 chars
-                        Duke.assertThis(descIdx+6 < fromIdx, "Task description cannot be empty.");
-                        Duke.assertThis(fromIdx+7 < toIdx, "Start date/time cannot be empty.");
+                    descIdx = userCmd.indexOf("event "); // 6 chars
+                    int fromIdx = userCmd.indexOf(" /from "); // 7 chars
+                    int toIdx = userCmd.indexOf(" /to "); // 5 chars
+                    Duke.assertThis(descIdx+6 < fromIdx, "Task description cannot be empty.");
+                    Duke.assertThis(fromIdx+7 < toIdx, "Start date/time cannot be empty.");
 
-                        taskDescription = userCmd.substring(descIdx + 6, fromIdx).trim();
-                        String start = userCmd.substring(fromIdx + 7, toIdx).trim();
-                        String end = userCmd.substring(toIdx + 5).trim();
-                        Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
-                        Duke.assertThis(!start.isEmpty(), "Start date/time cannot be empty.");
-                        Duke.assertThis(!end.isEmpty(), "End date/time cannot be empty.");
+                    taskDescription = userCmd.substring(descIdx + 6, fromIdx).trim();
+                    String start = userCmd.substring(fromIdx + 7, toIdx).trim();
+                    String end = userCmd.substring(toIdx + 5).trim();
+                    Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
+                    Duke.assertThis(!start.isEmpty(), "Start date/time cannot be empty.");
+                    Duke.assertThis(!end.isEmpty(), "End date/time cannot be empty.");
 
-                        duke.addNewTask(new Event(
-                                taskDescription,
-                                duke.parser.parseDateTime(start),
-                                duke.parser.parseDateTime(end))
-                        );
-                        break;
+                    duke.addNewTask(new Event(
+                            taskDescription,
+                            duke.parser.parseDateTime(start),
+                            duke.parser.parseDateTime(end))
+                    );
+                    break;
 
-                    case LIST:
-                        duke.displayTasks();
-                        break;
+                case "list":
+                    duke.displayTasks();
+                    break;
 
-                    case MARK:
-                    case UNMARK:
-                        inputs = userCmd.split(" ");
-                        Duke.assertThis(inputs.length > 1, "Please indicate which task(s) to apply to.");
+                case "mark":
+                case "unmark":
+                    boolean isMark = cmd.compareTo("mark") == 0;
 
-                        if (currentState == State.MARK)
-                            duke.ui.println("Nice I've marked the task(s) as done:");
-                        else
-                            duke.ui.println("OK, I've marked the task(s) as not done yet:");
+                    inputs = userCmd.split(" ");
+                    Duke.assertThis(inputs.length > 1, "Please indicate which task(s) to apply to.");
 
-                        for (int i = 1; i < inputs.length; i++) {
-                            String input = inputs[i].trim();
-                            if (input.isEmpty()) continue; // Blank, do nothing
+                    if (isMark)
+                        duke.ui.println("Nice I've marked the task(s) as done:");
+                    else
+                        duke.ui.println("OK, I've marked the task(s) as not done yet:");
 
-                            try {
-                                taskIdx = Integer.parseInt(inputs[i]) - 1;
-                                Duke.assertThis(taskIdx >= 0 && taskIdx < duke.taskList.size(), "");
+                    for (int i = 1; i < inputs.length; i++) {
+                        String input = inputs[i].trim();
+                        if (input.isEmpty()) continue; // Blank, do nothing
 
-                                activeTask = duke.taskList.get(taskIdx);
-                                activeTask.setDone(currentState == State.MARK); // Note: false means unmark
-                                duke.storage.saveDataToFile();
-                                duke.ui.println("\t" + activeTask);
-                            }
-                            catch(NumberFormatException e) {
-                                duke.ui.warn("'" + input + "' is not a number.");
-                            }
-                            catch(DukeException e) {
-                                duke.ui.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
-                            }
+                        try {
+                            taskIdx = Integer.parseInt(inputs[i]) - 1;
+                            Duke.assertThis(taskIdx >= 0 && taskIdx < duke.taskList.size(), "");
+
+                            activeTask = duke.taskList.get(taskIdx);
+                            activeTask.setDone(isMark); // Note: false means unmark
+                            duke.storage.saveDataToFile();
+                            duke.ui.println("\t" + activeTask);
                         }
-                        break;
-
-                    case DELETE:
-                        inputs = userCmd.split(" ");
-                        Duke.assertThis(inputs.length > 1, "Please indicate which task(s) to apply to.");
-
-                        ArrayList<Integer> markedDelete = new ArrayList<>();
-
-                        // Check and note what to delete
-                        for (int i = 1; i < inputs.length; i++) {
-                            String input = inputs[i].trim();
-                            if (input.isEmpty()) continue; // Blank, do nothing
-
-                            try {
-                                taskIdx = Integer.parseInt(inputs[i]) - 1;
-                                Duke.assertThis(taskIdx >= 0 && taskIdx < duke.taskList.size(), "");
-
-                                activeTask = duke.taskList.get(taskIdx);
-                                markedDelete.add(taskIdx);
-                            }
-                            catch(NumberFormatException e) {
-                                duke.ui.warn("'" + input + "' is not a number.");
-                            }
-                            catch(DukeException e) {
-                                duke.ui.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
-                            }
+                        catch(NumberFormatException e) {
+                            duke.ui.warn("'" + input + "' is not a number.");
                         }
+                        catch(DukeException e) {
+                            duke.ui.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
+                        }
+                    }
+                    break;
 
-                        duke.ui.println("Noted. I've removed the task(s):");
+                case "delete":
+                    inputs = userCmd.split(" ");
+                    Duke.assertThis(inputs.length > 1, "Please indicate which task(s) to apply to.");
 
-                        // Actual delete from tasklist (start from the back)
-                        Collections.sort(markedDelete);
-                        Collections.reverse(markedDelete);
-                        for (int i : markedDelete)
-                            duke.ui.println("\t" + duke.taskList.remove(i));
-                        // instead of remove(int index)
+                    ArrayList<Integer> markedDelete = new ArrayList<>();
 
-                        duke.storage.saveDataToFile();
-                        duke.displayTaskCount();
-                        break;
+                    // Check and note what to delete
+                    for (int i = 1; i < inputs.length; i++) {
+                        String input = inputs[i].trim();
+                        if (input.isEmpty()) continue; // Blank, do nothing
 
-                case SAVE:
+                        try {
+                            taskIdx = Integer.parseInt(inputs[i]) - 1;
+                            Duke.assertThis(taskIdx >= 0 && taskIdx < duke.taskList.size(), "");
+
+                            activeTask = duke.taskList.get(taskIdx);
+                            markedDelete.add(taskIdx);
+                        }
+                        catch(NumberFormatException e) {
+                            duke.ui.warn("'" + input + "' is not a number.");
+                        }
+                        catch(DukeException e) {
+                            duke.ui.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
+                        }
+                    }
+
+                    duke.ui.println("Noted. I've removed the task(s):");
+
+                    // Actual delete from tasklist (start from the back)
+                    Collections.sort(markedDelete);
+                    Collections.reverse(markedDelete);
+                    for (int i : markedDelete)
+                        duke.ui.println("\t" + duke.taskList.remove(i));
+                    // instead of remove(int index)
+
+                    duke.storage.saveDataToFile();
+                    duke.displayTaskCount();
+                    break;
+
+                case "save":
                     duke.storage.saveDataToFile();
                     duke.ui.println("Your list have been saved.");
                     break;
 
-                    case UNKNOWN:
+                case "bye":
+                case "goodbye":
+                case ":q":
+                case "quit":
+                case "quit()":
+                case "exit":
+                case "exit()":
+                    duke.ui.println("Saving your list ... ");
+                    duke.storage.saveDataToFile();
+                    duke.ui.println("Goodbye!");
+                    duke.ui.displayLine();
+                    Ui.printProgramInfo();
+                    isContinue = false;
+                    break;
+
+                    default:
                         duke.ui.warn("Sorry, I don't understand your request :(");
                         duke.ui.println("Did you spell something wrongly?");
                         //duke.ui..display("Why not try rephrasing?"); // When chatbot is smarter
-                        break;
-
-                    case EXIT:
-                        duke.ui.println("Saving your list ... ");
-                        duke.storage.saveDataToFile();
-                        duke.ui.println("Goodbye!");
-                        duke.ui.displayLine();
-                        duke.ui.printProgramInfo();
-                        break;
-
-                    default:
-                        // Unknown input is already handled above.
-                        // Something is seriously wrong if this code is called.
-                        // Throw RuntimeException and print the stack for debugging.
-                        throw new RuntimeException("FATAL ERROR: default case is called.");
                 }
             }
             catch (DukeException e) {
