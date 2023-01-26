@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Locale;
 
+// class Deadline - Type of task with description and a date to finish it by
 public class Deadline extends Task {
 
     protected LocalDate by;

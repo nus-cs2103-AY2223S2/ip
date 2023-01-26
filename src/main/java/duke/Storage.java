@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// class Storage - handles the loading of data when duke is run and
+// saving of data when duke is closed
 class Storage {
     private String filePath;
 

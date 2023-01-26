@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Locale;
 
+// class Event - Type of task with description, a start date + time and an end time
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalTime to;

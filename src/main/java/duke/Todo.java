@@ -1,5 +1,6 @@
 package duke;
 
+// class To do - Type of task with just a description
 public class Todo extends Task {
 
     public Todo(String description) {

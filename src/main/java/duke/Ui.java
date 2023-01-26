@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// class Ui - handles all the lines to be printed and all the user inputs (commands)
 public class Ui {
 
     public Ui() {
