@@ -5,11 +5,10 @@ public class Todo extends Duke.Task {
 
     public String toString() {
         String sign = "";
-        if (super.mark == false) {
-            sign = " ";
-        } else {
-            sign = "X";
-        }
-        return ". [T][" + sign + "] " + super.content;
+        return ". [T][" + super.markSign(super.mark) + "] " + super.content;
+    }
+
+    public String printTodo() {
+        return "TODO" + " [" + super.markSign(super.mark) + "] " + super.content + "\n";
     }
 }
