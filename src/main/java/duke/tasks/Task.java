@@ -1,35 +1,65 @@
 package duke.tasks;
 import java.time.LocalDateTime;
 
+/**
+ * Represents the Task information with
+ * its status and description
+ */
 public abstract class Task {
     private String taskText;
-    private boolean status;
+    private boolean isCompleted;
 
+    /**
+     * Creates a new Task with the given task description
+     * with deafult status as false
+     * 
+     * @param taskText description of the task
+     */
     public Task(String taskText) {
         this.taskText = taskText;
-        this.status = false;
+        this.isCompleted = false;
     }
 
+    /**
+     * Changes the status of the task to the opposite of its current status
+     * 
+     * @return void
+     */
     public void changeStatus() {
-        if(this.status) {
-            this.status = false;
+        if(this.isCompleted) {
+            this.isCompleted = false;
         } else {
-            this.status = true;
+            this.isCompleted = true;
         }
     }
 
+    /**
+     * Returns the status of the task
+     * 
+     * @return boolean status of the task
+     * 
+     */
     public boolean getStatus() {
-        return this.status;
+        return this.isCompleted;
     }
 
+    /**
+     * Returns the status of the task in String format
+     * 
+     * @return String status of the task
+     */
     public String getCurrentStatus() {
-        return this.status ? "1" : "0";
+        return this.isCompleted ? "1" : "0";
     }
 
     private String getStatusText() {
-        return status ? "X" : " ";
+        return isCompleted ? "X" : " ";
     }
 
+    /**
+     * Returns the task text
+     * @return String task text
+     */
     public String getTaskText() {
         return this.taskText;
     }
@@ -40,6 +70,12 @@ public abstract class Task {
 
     public abstract String getTaskType();
 
+    /**
+     * Returns the string representation of task status 
+     * and description
+     * 
+     * @return the string representation
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusText(), this.taskText);

@@ -9,14 +9,29 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+/**
+ * Deals with loading tasks from the file
+ * and saving tasks in the file
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Initializes a Storage object
+     *
+     * @param filePath the file on hard disk
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
 
     }
 
+    /**
+     * Loads the data from the filepath specified
+     *
+     * @return the ArrayList<Task> storing the stored tasks
+     */
     public ArrayList<Task> loadData()  {
         ArrayList<Task> list = new ArrayList<>();
         File data = new File(this.filePath);
@@ -36,6 +51,9 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Creates an empty file in a seperate directory
+     */
     public void createFile() {
         File dir = new File("./data");
         File newFile = new File(this.filePath);
@@ -47,6 +65,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the data from the file
+     *
+     * @param taskData the string representation of Task
+     * @return the Task object
+     * @throws DukeDataException
+     */
     public Task readData(String[] taskData) throws DukeDataException {
         String taskType = taskData[0];
         String taskStatus = taskData[1];
@@ -59,7 +84,7 @@ public class Storage {
             loadTask = new Todo(taskInfo);
         } else if (taskType.equals("D")) {
             LocalDateTime taskTime = LocalDateTime.parse(taskData[3].trim(), formatter);
-            loadTask = new Deadlines(taskInfo, taskTime);
+            loadTask = new Deadline(taskInfo, taskTime);
         } else if (taskType.equals("E")){
             LocalDateTime taskFrom = LocalDateTime.parse(taskData[3].trim(), formatter);
             LocalDateTime taskTo = LocalDateTime.parse(taskData[4].trim(), formatter);
@@ -74,6 +99,12 @@ public class Storage {
         return loadTask;
     }
 
+    /**
+     * Stores the data in the file on the hard disk
+     *
+     * @param list the list generated in current session
+     * @throws IOException
+     */
     public void storeData(TaskList list) throws IOException{
         FileWriter writer = new FileWriter(this.filePath, false);
         BufferedWriter buffer = new BufferedWriter(writer);

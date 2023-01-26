@@ -11,14 +11,19 @@ import java.time.LocalDate;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Represents the chatbot
+ */
 public class Duke {
-    //private Scanner sc = new Scanner(System.in);
     private static String FILEPATH = "./data/duke.txt";
     private TaskList list;
     private Ui ui;
     private Storage storage;
     private Parser parser;
 
+    /**
+     * Intializes a Duke object
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage(FILEPATH);
@@ -151,7 +156,7 @@ public class Duke {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             String deadlineText = deadlineInfo[0].trim();
             LocalDateTime deadlineDate = LocalDateTime.parse(deadlineInfo[1].trim(), formatter);
-            Deadlines deadline = new Deadlines(deadlineText, deadlineDate);
+            Deadline deadline = new Deadline(deadlineText, deadlineDate);
             this.list.addTask(deadline);
             this.ui.taskAddDisplay(deadline, this.list.listLength());
         } catch(IndexOutOfBoundsException e) {
