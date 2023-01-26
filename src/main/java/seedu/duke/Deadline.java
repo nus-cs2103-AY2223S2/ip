@@ -2,9 +2,18 @@ package seedu.duke;
 
 import java.time.LocalDateTime;
 
+/**
+ * Encapsulates a task with deadline.
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
+    /**
+     * Constructs a Deadline task.
+     *
+     * @param description A sentence that describes the task.
+     * @param by The deadline of the task.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;

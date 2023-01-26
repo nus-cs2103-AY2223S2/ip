@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Parses the input command from user to the Duke chatbox.
+ */
 public class Parser {
 
     private final static String LIST = "list";
@@ -35,6 +38,13 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Parses the input command entered by user.
+     *
+     * @param str Input command of user.
+     * @param tasks The entire list of current tasks.
+     * @param storage A storage that manages file operation underlying Duke.
+     */
     public void parseInput(String str, TaskList tasks, Storage storage) {
         if (str.equals(LIST)) {
             list(tasks);
