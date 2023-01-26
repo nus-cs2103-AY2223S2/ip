@@ -74,7 +74,7 @@ public class DukeList implements Serializable {
             throw new TaskOutOfRangeException("Yo, I can't find the task at " + i);
         } else {
             Task removedTask = this.list.remove(i - 1);
-            System.out.println("Got it, this task is gonez:");
+            System.out.println(new TextBorder("Got it, this task is gonez:"));
             System.out.println(removedTask);
             System.out.println("Now you've got " + list.size() + pluralTask(list.size()));
         }

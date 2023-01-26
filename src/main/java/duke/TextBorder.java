@@ -1,7 +1,7 @@
 package duke;
 
 public class TextBorder {
-    String text = "null";
+    String text;
     String border = "//  /  /  //  /  /  //  /  /  //  /  /  //  /  /  //  /  /  //  /";
 
     public TextBorder(String text) {
