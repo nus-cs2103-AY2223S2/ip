@@ -5,11 +5,11 @@ import java.util.Scanner;
 import java.util.Set;
 
 import Exception.DukeException;
-import Task.Deadline;
-import Task.Event;
-import Task.Task;
-import Task.ToDo;
-import TextFileParser.TextFileParser;
+import TaskTypes.Deadline;
+import TaskTypes.Event;
+import TaskTypes.Task;
+import TaskTypes.ToDo;
+import Utilities.TextFileParser;
 
 
 /** 

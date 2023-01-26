@@ -1,4 +1,4 @@
-package Task;
+package TaskTypes;
 /** 
  * Represents a <code>task</code> object with the todo tag into it.
  * 

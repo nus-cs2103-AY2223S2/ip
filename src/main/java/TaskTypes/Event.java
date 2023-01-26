@@ -1,4 +1,4 @@
-package Task;
+package TaskTypes;
 /** 
  * Represents a <code>task</code> object that contains a string holding the <code>event</code> time 
  * from a specific length stated by the user.

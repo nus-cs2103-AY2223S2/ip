@@ -1,4 +1,4 @@
-package Task;
+package TaskTypes;
 /** 
  * Represents a <code>task</code> object that contains a string holding the <code>name</code> of the task
  * and the <code>status</code> of the task.

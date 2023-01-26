@@ -1,4 +1,4 @@
-package TextFileParser;
+package Utilities;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import Task.Deadline;
-import Task.Event;
-import Task.Task;
-import Task.ToDo;
-import Utilities.FileCreate;
+import TaskTypes.Deadline;
+import TaskTypes.Event;
+import TaskTypes.Task;
+import TaskTypes.ToDo;
 
 public class TextFileParser {
     private static String folderPath = "data";
