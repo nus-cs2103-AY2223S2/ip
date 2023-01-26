@@ -55,10 +55,7 @@ public class Event extends Task {
      */
     @Override
     public String toDataFormatString() {
-        int marked = 0;
-        if(super.isDone) {
-            marked = 1;
-        }
+        int marked = super.isDone ? 1 : 0;
         return "E / "
                 + marked
                 + " / "

@@ -38,10 +38,7 @@ public class Todo extends Task{
      */
     @Override
     public String toDataFormatString() {
-        int marked = 0;
-        if(super.isDone) {
-            marked = 1;
-        }
+        int marked = super.isDone ? 1 : 0;
         return "T / " + marked + " / " + super.description;
     }
 

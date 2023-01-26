@@ -6,6 +6,7 @@ import duke.Ui;
 import duke.tasks.Deadline;
 
 import javax.crypto.SealedObject;
+import java.io.IOException;
 
 /**
  * This is a command to delete a Task from Duke
@@ -43,6 +44,11 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.deleteTask(this.taskNumber);
+        try {
+            storage.saveData(taskList);
+        } catch (IOException e) {
+            Ui.showFatalError("Error in saving data.\nReboot Duke and try again");
+        }
     }
 
     /**
