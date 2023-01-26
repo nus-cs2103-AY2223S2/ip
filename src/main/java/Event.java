@@ -20,10 +20,12 @@ public class Event extends Task {
         this.end = LocalDate.parse(end);
     }
 
-   /* Deadline(String type, String detail){
-        super(type, detail);
-    }*/
 
+    /**
+     * Returns event printed out properly.
+     *
+     * @return event in full details.
+     */
     @Override
     public String toString(){
         if (marked) {

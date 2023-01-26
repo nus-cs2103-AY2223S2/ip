@@ -30,13 +30,23 @@ public class Duke {
         storage = new Storage(filepath);
         tasks = new TaskList(storage.load());
     }
+
+    /**
+     * Check if input array is empty or not.
+     * For some types of tasks.
+     *
+     * @param arr an array of the input.
+     * @param action type of task given.
+     * @throw DukeException if input array is empty.
+     */
     static void checkEmptyAction(String[] arr, String action) throws DukeException {
         if (arr.length <= 1) {
             throw new DukeException(String.format("OOPS!!! The description of a %s cannot be empty.", action));
         }
     }
 
-    public void run() {
+
+    private void run() {
         ui.showWelcome();
         TaskList listOfAction = tasks;
         Scanner sc = new Scanner(System.in);

@@ -9,6 +9,12 @@ public class Todo extends Task {
         super(type, detail);
     }
 
+
+    /**
+     * Returns todo printed out properly.
+     *
+     * @return todo in full details.
+     */
     @Override
     public String toString(){
         if (marked) {

@@ -25,10 +25,20 @@ public class Task {
 
     //abstract public String[] add() {}
 
+    /**
+     * Marks task as done.
+     *
+     * @mark task as done.
+     */
     public void mark() {
         this.marked = true;
     }
 
+    /**
+     * Unarks task as undone.
+     *
+     * @unmark task as undone.
+     */
     public void unmark() {
         this.marked = false;
     }

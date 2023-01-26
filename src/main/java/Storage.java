@@ -13,6 +13,11 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Returns the loaded data file whenever Duke restarts.
+     *
+     * @return array containing content of the existing data file.
+     */
     public String[] load() {
         String[] arr = new String[100];
         try {
@@ -32,6 +37,12 @@ public class Storage {
         return arr;
     }
 
+    /**
+     * Overwrites the given data file with new information.
+     *
+     * @param tasks new task list to overwrite on the given file.
+     * @write on given data file.
+     */
     public void overwrite(TaskList tasks) {
         String[] arr = tasks.readTaskList();
 

@@ -21,6 +21,11 @@ public class Deadline extends Task {
         super(type, detail);
     }*/
 
+    /**
+     * Returns deadline printed out properly.
+     *
+     * @return deadline in full details.
+     */
     @Override
     public String toString(){
         if (marked) {

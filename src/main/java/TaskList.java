@@ -17,6 +17,11 @@ public class TaskList {
         return this.arr;
     }
 
+    /**
+     * Lists tasks inside tasklist.
+     *
+     * @print task one-by-one.
+     */
     public void list() {
         for (int j = 0; j < arr.length; j++) {
             if (arr[j] == null) {
@@ -26,6 +31,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the real length of the array.
+     * Maximum index in which array at such index is not null.
+     *
+     * @return the first null index.
+     */
     public int validLen() {
         int len = 0;
         while (arr[len] != null) {
@@ -34,6 +45,13 @@ public class TaskList {
         return len;
     }
 
+    /**
+     * Returns new task list.
+     * Marks task at given index as done.
+     *
+     * @param num index at which task need to be marked as done.
+     * @return new task list with task marked.
+     */
     public TaskList mark(int num) {
         if (arr[num] != null) {
             System.out.println("OK, I've marked this task as not done yet:");
@@ -44,6 +62,13 @@ public class TaskList {
         return new TaskList(arr);
     }
 
+    /**
+     * Returns new task list.
+     * Unmarks task at given index as done.
+     *
+     * @param num index at which task need to be marked as undone.
+     * @return new task list with task unmarked.
+     */
     public TaskList unmark(int num1) {
         if (arr[num1] != null) {
             System.out.println("OK, I've marked this task as not done yet:");
@@ -55,9 +80,23 @@ public class TaskList {
         return new TaskList(arr);
     }
 
+    /**
+     * Checks if element at given index of array is valid or not.
+     *
+     * @param num index at which content need to be checked.
+     * @return boolean for content validity.
+     */
     public boolean checkValidIndex(int index) {
         return (arr[index] != null);
     }
+
+    /**
+     * Returns new task list.
+     * Deletes task at given index.
+     *
+     * @param num1 index at which task need to be deleted.
+     * @return new task list with task deleted.
+     */
     public TaskList delete(int num1) {
         if (arr[num1] != null) {
             System.out.println("Noted. I've removed this task:");
@@ -80,6 +119,13 @@ public class TaskList {
         return new TaskList(arr);
     }
 
+    /**
+     * Returns new task list.
+     * Adds task to the back.
+     *
+     * @param task needed to be added.
+     * @return new task list with task added.
+     */
     public TaskList add(Task task) {
         int len = this.validLen();
         arr[len] = task.toString();
