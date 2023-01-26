@@ -2,6 +2,7 @@ package duke;
 
 import duke.exception.DukeException;
 import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.TextUi;
 
@@ -11,10 +12,12 @@ public class Duke {
 
     private TextUi ui;
     private TaskList taskList;
+    private Storage storage;
 
     public Duke() {
         this.ui = new TextUi();
-        this.taskList = new TaskList();
+        this.storage = new Storage();
+        this.taskList = new TaskList(storage.loadData());
     }
     
 
@@ -36,6 +39,7 @@ public class Duke {
             } else {
                 try {
                     Parser.checkCommand(taskList, command);
+                    storage.save(taskList);
                 } catch (DukeException e) {
                     System.out.println(e);
                 }

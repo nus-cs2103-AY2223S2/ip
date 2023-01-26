@@ -11,16 +11,12 @@ import java.util.List;
  */
 public class TaskList {
     protected List<Task> tasks;
-    public Storage storage;
-
 
     /**
      * Constructor to initialize a tasklist object
      */
-    public TaskList() {
-        storage = new Storage();
-        List<Task> list = storage.loadData();
-        this.tasks = list;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -69,7 +65,6 @@ public class TaskList {
     public void addTodo(String desc) {
         Todo t = new Todo(desc);
         tasks.add(t);
-        storage.save(this);
         System.out.println("    " + t);
         printNumTasks();
     }
@@ -84,7 +79,6 @@ public class TaskList {
     public void addDeadline(LocalDate date, String desc) {
         Deadline d = new Deadline(date, desc);
         tasks.add(d);
-        storage.save(this);
         System.out.println("    " + d);
         printNumTasks();
     }
@@ -100,7 +94,6 @@ public class TaskList {
     public void addEvent(LocalDate start, LocalDate end, String desc) {
         Event e = new Event(start, end, desc);
         tasks.add(e);
-        storage.save(this);
         System.out.println("    " + e);
         printNumTasks();
     }
@@ -113,7 +106,6 @@ public class TaskList {
     public void deleteTask(int taskNum) throws DukeException {
         System.out.println("    " + tasks.get(taskNum - 1));
         tasks.remove(taskNum - 1);
-        storage.save(this);
         printNumTasks();
     }
 
@@ -122,7 +114,6 @@ public class TaskList {
             throw new DukeException("This task has already been marked as done.");
         } else {
             task.mark();
-            storage.save(this);
             System.out.println("Great job on completing this task! I've marked it as done:");
             System.out.println(task);
         }
@@ -136,7 +127,6 @@ public class TaskList {
             throw new DukeException("Oops! This task has not been marked as done before.");
         } else {
             task.unMark();
-            storage.save(this);
             System.out.println("Alright, I've marked this task as not done yet:");
             System.out.println(task);
         }
