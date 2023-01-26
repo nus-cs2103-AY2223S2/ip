@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
     private static final String LINE = "----------------------------------------------";
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EmptyTaskException, InvalidRequestException {
         Scanner scanner = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>(100);
         System.out.println(LINE);
@@ -26,61 +26,78 @@ public class Duke {
                 System.out.println(LINE+"\n");
             }
             else if (splittedCmd[0].equals("mark")) {
-                int idx = Integer.parseInt(splittedCmd[1]) - 1;
-                System.out.println(LINE);
-                System.out.println("\tOK, I've marked this task as done:");
-                Task task = list.get(idx);
-                task.mark();
-                System.out.println("\t" + task.toString());
-                System.out.println(LINE+"\n");
-                list.set(idx, task);
+                try {
+                    int idx = Integer.parseInt(splittedCmd[1]) - 1;
+                    System.out.println(LINE);
+                    System.out.println("\tOK, I've marked this task as done:");
+                    Task task = list.get(idx);
+                    task.mark();
+                    System.out.println("\t" + task.toString());
+                    System.out.println(LINE + "\n");
+                    list.set(idx, task);
+                }catch (Exception e){
+                    throw new EmptyTaskException("\tOOPS!!! Please input the index.\n" + LINE + "\n");
+                }
             }
             else if (splittedCmd[0].equals("unmark")) {
-                int idx = Integer.parseInt(splittedCmd[1]) - 1;
-                System.out.println(LINE);
-                System.out.println("\tNice! I've unmarked this task as not done yet:");
-                Task task = list.get(idx);
-                task.unmark();
-                System.out.println("\t" + task.toString());
-                System.out.println(LINE+"\n");
-                list.set(idx, task);
+                try {
+                    int idx = Integer.parseInt(splittedCmd[1]) - 1;
+                    System.out.println(LINE);
+                    System.out.println("\tNice! I've unmarked this task as not done yet:");
+                    Task task = list.get(idx);
+                    task.unmark();
+                    System.out.println("\t" + task.toString());
+                    System.out.println(LINE + "\n");
+                    list.set(idx, task);
+                } catch (Exception e) {
+                    System.out.println("\tOOPS!!! Please input the index.\n" + LINE + "\n");
+                }
             }
             else if (splittedCmd[0].equals("todo")){
-                System.out.println(LINE);
-                System.out.println("\t" + "Got it. I've added this task: ");
-                ToDos todos = new ToDos(command);
-                list.add(todos);
-                System.out.println("\t" + todos.toString());
-                System.out.println("\t" + "Now you have " + list.size() + " tasks in the list");
-                System.out.println(LINE + "\n");
+                try {
+                    System.out.println(LINE);
+                    ToDos todos = new ToDos(splittedCmd[1]);
+                    list.add(todos);
+                    System.out.println("\t" + "Got it. I've added this task:");
+                    System.out.println("\t" + todos.toString());
+                    System.out.println("\t" + "Now you have " + list.size() + " tasks in the list");
+                    System.out.println(LINE + "\n");
+                }catch(Exception e){
+                    System.out.println("\tOOPS!!! The description of a todo cannot be empty.\n" + LINE + "\n");
+                }
             }
             else if (splittedCmd[0].equals("deadline")){
-                String[] request = splittedCmd[1].split("/", 2);
-                String task = request[0];
-                String date = request[1];
-                Deadlines deadlines = new Deadlines(task, date);
-                list.add(deadlines);
-                System.out.println("\t" + deadlines.toString());
-                System.out.println("\t" + "Now you have " + list.size() + " tasks in the list");
-                System.out.println(LINE + "\n");
+                try {
+                    String[] request = splittedCmd[1].split("/", 2);
+                    String task = request[0];
+                    String date = request[1];
+                    Deadlines deadlines = new Deadlines(task, date);
+                    list.add(deadlines);
+                    System.out.println("\t" + deadlines.toString());
+                    System.out.println("\t" + "Now you have " + list.size() + " tasks in the list");
+                    System.out.println(LINE + "\n");
+                }catch(Exception e) {
+                    System.out.println("\tOOPS!!! Make sure insert all required input.\n" + LINE + "\n");
+                }
             }
             else if (splittedCmd[0].equals("event")){
-                String[] request = splittedCmd[1].split("/", 3);
-                String task = request[0];
-                String from = request[1];
-                String to = request[2];
-                Events event = new Events(task, from, to);
-                list.add(event);
-                System.out.println("\t" + event.toString());
-                System.out.println("\t" + "Now you have " + list.size() + " tasks in the list");
-                System.out.println(LINE + "\n");
+                try {
+                    String[] request = splittedCmd[1].split("/", 3);
+                    String task = request[0];
+                    String from = request[1];
+                    String to = request[2];
+                    Events event = new Events(task, from, to);
+                    list.add(event);
+                    System.out.println("\t" + event.toString());
+                    System.out.println("\t" + "Now you have " + list.size() + " tasks in the list");
+                    System.out.println(LINE + "\n");
+                }catch(Exception e) {
+                    System.out.println("\tOOPS!!! Make sure insert all required input.\n" + LINE + "\n");
+                }
             }
             else {
                 System.out.println(LINE);
-                System.out.println("\t" + "added: " + command);
-                System.out.println(LINE + "\n");
-                Task task = new Task(command);
-                list.add(task);
+                System.out.println("\tOOPS!!! I'm sorry, but I don't know what that means\n" + LINE + "\n");
             }
         }
     }
