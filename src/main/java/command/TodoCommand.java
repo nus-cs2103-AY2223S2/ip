@@ -15,7 +15,7 @@ public class TodoCommand extends Command {
 
     @Override
     public void executeCommand() throws DukeException {
-        ToDo todo = new ToDo(this.description);
+        ToDo todo = new ToDo(this.description, false);
         taskManager.addTaskToList(todo);
     }
 }

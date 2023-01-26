@@ -19,7 +19,7 @@ public class EventCommand extends Command {
             String[] time = arr[1].split(" /to ");
             String start = time[0];
             String end = time[1];
-            Event event = new Event(arr[0], start, end);
+            Event event = new Event(arr[0], false, start, end);
             taskManager.addTaskToList(event);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please add a description, date and time e.g. party /from 12/2/23 1800 /to 12/2/23 2200");

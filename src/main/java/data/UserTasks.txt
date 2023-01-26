@@ -1,11 +1,3 @@
- work
- work
- work
- work
- work
- homework
- homework
- work
- party
- work
- work
+Event,false,party,12/2/23 0600,12/2/23 1000
+Deadline,true,test program,25/12/23 1150
+Todo,false,task2

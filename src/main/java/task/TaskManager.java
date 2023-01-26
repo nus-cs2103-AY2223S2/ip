@@ -1,9 +1,6 @@
 package task;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import util.WriteToFile;
 
 public class TaskManager {
     private ArrayList<Task> taskArr;

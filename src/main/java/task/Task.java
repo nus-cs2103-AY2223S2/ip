@@ -8,9 +8,9 @@ public class Task {
     private String description;
     private boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, boolean status) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = status;
     }
 
     public String getStatusIcon() {
@@ -46,14 +46,15 @@ public class Task {
     }
 
     public String serialise() {
-        return String.format("Task,%s", description);
+        return String.format("Task,%s,%s", this.getStatus(), this.description);
     }
 
     public static Task deserialise(String data) throws DukeException {
         String[] arr = data.split(",");
-        String desc = arr[1];
+        boolean isDone = Boolean.parseBoolean(arr[1]);
+        String desc = arr[2];
 
-        return new Task(desc);
+        return new Task(desc, isDone);
     }
 
     @Override

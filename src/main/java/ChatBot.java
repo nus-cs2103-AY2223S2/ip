@@ -1,13 +1,9 @@
 import command.*;
-import task.Deadline;
-import task.Event;
 import task.TaskManager;
-import task.ToDo;
 import ui.WelcomeUI;
 import util.DukeException;
-import util.Parser;
+import util.FileManager;
 
-import java.time.DateTimeException;
 import java.util.*;
 
 public class ChatBot {
@@ -15,11 +11,16 @@ public class ChatBot {
     private TaskManager taskManager;
     private String[] inputArr;
 
+    private FileManager fileManager;
+
     public ChatBot(Scanner input, WelcomeUI welcomeUI) {
         System.out.println(welcomeUI);
         this.input = input;
         //initialise taskmanager that manages array of tasks
         this.taskManager = new TaskManager();
+        this.fileManager = new FileManager();
+
+        this.fileManager.loadDataToArrayList(this.taskManager);
     }
 
     public void run() {
@@ -50,6 +51,7 @@ public class ChatBot {
                     case "bye":
                         ByeCommand bc = new ByeCommand();
                         bc.executeCommand();
+                        fileManager.saveTasksToFile(taskManager);
                         break loop;
                     case "check":
                         CheckCommand cc = new CheckCommand(taskManager, inputArr[1]);
