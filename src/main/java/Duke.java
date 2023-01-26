@@ -2,6 +2,10 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+// import java.util.Scanner;
 public class Duke {
     public static void printInListFormat(ArrayList<Task> tasks) {
         for (int i = 0; i < tasks.size(); i++) {
@@ -9,8 +13,33 @@ public class Duke {
             System.out.printf("%d. %s\n", i + 1, currTask.description());
         }
     }
+
+    public static void updateDukeTxt(ArrayList<Task> tasks) throws IOException {
+        FileWriter newTasks = new FileWriter("data/Duke.txt");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currTask = tasks.get(i);
+            newTasks.write(currTask.description());
+        }
+        newTasks.close();
+    }
     public static void main(String[] args) {
+        try {
+            File data = new File("data");
+            if (!data.exists()) {
+                data.mkdir();
+                System.out.printf("Create folder: %s\n", data.getName());
+            }
+
+            File dukeTxt = new File("data/Duke.txt");
+            if (dukeTxt.createNewFile()) {
+                System.out.printf("Create file: %s\n", dukeTxt.getName());
+            }
+        } catch (IOException e) {
+            System.out.printf("Something went wrong ): %s", e);
+        }
+
         System.out.println("Hello! I'm Dupe\nWhat can I do for you?");
+
         try {
             InputStreamReader isr = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(isr);
@@ -58,6 +87,7 @@ public class Duke {
                 } else {
                     throw new DukeException();
                 }
+                updateDukeTxt(tasks);
                 line = br.readLine();
             }
             System.out.println("Bye. Hope to see you again soon!");
