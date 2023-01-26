@@ -2,12 +2,10 @@ package duke;
 
 import duke.command.Command;
 import duke.command.Parser;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
-import java.util.LinkedList;
 
 /**
  * Duke program implements an interactive chatbot with the
@@ -31,7 +29,7 @@ public class Duke {
     public Duke(String fileName) {
         this.storage = new Storage(fileName);
         this.ui = new Ui();
-        this.tasks = new TaskList(new LinkedList<Task>());
+        this.tasks = new TaskList();
     }
 
     /**
