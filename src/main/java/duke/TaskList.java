@@ -14,25 +14,6 @@ public class TaskList {
         return tasks.add(task);
     }
 
-    public Todo addTodo(String description) {
-        Todo t = new Todo(description);
-        tasks.add(t);
-        return t;
-    }
-
-    public Deadline addDeadline(String description, String duedate) {
-        Deadline d = new Deadline(description, new Parser().parseDateTime(duedate));
-        tasks.add(d);
-        return d;
-    }
-
-    public Event addEvent(String description, String from, String to) {
-        Parser p = new Parser();
-        Event e = new Event(description, p.parseDateTime(from), p.parseDateTime(to));
-        tasks.add(e);
-        return e;
-    }
-
     public Task remove(int idx) {
         return tasks.remove(idx);
     }

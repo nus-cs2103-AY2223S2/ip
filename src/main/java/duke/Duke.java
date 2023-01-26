@@ -43,6 +43,15 @@ public class Duke {
         }
     }
 
+    private void addNewTask(Task task) {
+        taskList.add(task);
+        ui.println("Got it. I've added this task:");
+        ui.println("\t" + task);
+
+        storage.saveDataToFile();
+        displayTaskCount();
+    }
+
     private static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
         if (!expectsTrue)
             throw new DukeException(failureMessage);
@@ -87,10 +96,8 @@ public class Duke {
                 switch (cmd) {
                 case "todo":
                     taskDescription = userCmd.substring(4).trim(); // exclude keyword
-                    duke.ui.println("Got it. I've added this task:");
-                    duke.ui.println("\t" + duke.taskList.addTodo(taskDescription));
-                    duke.storage.saveDataToFile();
-                    duke.displayTaskCount();
+                    activeTask = new Todo(taskDescription);
+                    duke.addNewTask(activeTask);
                     break;
 
                 case "deadline":
@@ -101,17 +108,12 @@ public class Duke {
                     int dueIdx = userCmd.indexOf(" /by "); // 5 chars
                     Duke.assertThis(descIdx+9 < dueIdx, "Task description cannot be empty.");
 
-                    // Check for empty (whitespace) description and due date
                     taskDescription = userCmd.substring(descIdx + 9, dueIdx).trim();
                     String duedate = userCmd.substring(dueIdx + 5).trim();
                     Duke.assertThis(!taskDescription.isEmpty(), "Task description cannot be empty.");
                     Duke.assertThis(!duedate.isEmpty(), "Due date cannot be empty.");
 
-                    duke.ui.println("Got it. I've added this task:");
-                    duke.ui.println("\t" + duke.taskList.addDeadline(taskDescription, duedate));
-                    duke.storage.saveDataToFile();
-                    duke.displayTaskCount();
-
+                    duke.addNewTask(new Deadline(taskDescription, duke.parser.parseDateTime(duedate)));
                     break;
 
                 case "event":
@@ -132,10 +134,11 @@ public class Duke {
                     Duke.assertThis(!start.isEmpty(), "Start date/time cannot be empty.");
                     Duke.assertThis(!end.isEmpty(), "End date/time cannot be empty.");
 
-                    duke.ui.println("Got it. I've added this task:");
-                    duke.ui.println("\t" + duke.taskList.addEvent(taskDescription, start, end));
-                    duke.storage.saveDataToFile();
-                    duke.displayTaskCount();
+                    duke.addNewTask(new Event(
+                            taskDescription,
+                            duke.parser.parseDateTime(start),
+                            duke.parser.parseDateTime(end))
+                    );
                     break;
 
                 case "ls":
@@ -239,7 +242,6 @@ public class Duke {
                     default:
                         duke.ui.warn("Sorry, I don't understand your request :(");
                         duke.ui.println("Did you spell something wrongly?");
-                        //duke.ui.println("Why not try rephrasing?"); // When chatbot is smarter
                 }
             }
             catch (DukeException e) {
