@@ -16,29 +16,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    /**
-     * Checks if the file in the given filePath exists.
-     * @return true if the file exists, or false otherwise.
-     */
     public boolean isExistFile() {
         return new java.io.File(filePath).exists();
     }
 
-<<<<<<< HEAD
     // Idea for the following code snippet to create a file is referenced from:
     // https://stackoverflow.com/questions/6142901/how-to-create-a-file-in-a-directory-in-java
-    /**
-     * Returns the desired File in the filePath.
-     * If there was originally no File, a new empty File with a "0" is created.
-     * Otherwise, the previously saved File at that filePath is returned.
-     * @return the desired File in the filePath.
-     */
-=======
-
->>>>>>> branch-A-CodingStandard
     public File load() {
-        // Idea for the following code snippet to create a file is referenced from:
-        // https://stackoverflow.com/questions/6142901/how-to-create-a-file-in-a-directory-in-java
         if (!isExistFile()) {
             Path desiredPath = Paths.get(filePath);
             try {
@@ -69,10 +53,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Adds and saves the user's tasks into the File at the filePath.
-     * @param tasks the user's list of tasks before termination of the chatbot.
-     */
     public void addToFile(TaskList tasks) {
         // Idea for the following code snippet is taken from:
         // https://stackoverflow.com/questions/1053467/how-do-i-save-a-string-to-a-text-file-using-java

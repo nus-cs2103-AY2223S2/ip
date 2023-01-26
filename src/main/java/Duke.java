@@ -33,7 +33,8 @@ public class Duke {
      */
     public void run() {
 
-        ui.introMessage();
+        ui.introduce();
+        ui.instruct();
         Scanner scan = new Scanner(System.in);
         String userInput = scan.nextLine();
 
@@ -54,14 +55,13 @@ public class Duke {
             }
             else {
                 String[] terms = userInput.split(" ");
-                Task newTask;
                 if (terms[0].equals("todo")) {
                     try {
                         if (terms.length == 1) {
                             String error = "The description of a todo cannot be empty";
                             throw new DukeException(error);
                         }
-                        newTask = new Todo(userInput.substring(5));
+                        Task newTask = new Todo(userInput.substring(5));
                         tasks.addTask(newTask);
                     } catch (DukeException err) {
                         System.out.println(err);
@@ -74,7 +74,7 @@ public class Duke {
                         }
                         String description = splitBySlash[0].substring(9);
                         String by = splitBySlash[1].substring(3);
-                        newTask = new Deadline(description, by);
+                        Task newTask = new Deadline(description, by);
                         tasks.addTask(newTask);
                     } catch (DukeException err) {
                         System.out.println(err);
@@ -89,7 +89,7 @@ public class Duke {
                         String description = splitBySlash[0].substring(6);
                         String from = splitBySlash[1].substring(5);
                         String to = splitBySlash[2].substring(3);
-                        newTask = new Event(description, from, to);
+                        Task newTask = new Event(description, from, to);
                         tasks.addTask(newTask);
                     } catch (DukeException err) {
                         System.out.println(err);
@@ -106,6 +106,6 @@ public class Duke {
             userInput = scan.nextLine();
         }
         storage.addToFile(tasks);
-        ui.endMessage();
+        ui.terminate();
     }
 }

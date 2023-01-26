@@ -24,7 +24,6 @@ public class Storage {
         return new java.io.File(filePath).exists();
     }
 
-<<<<<<< HEAD
     // Idea for the following code snippet to create a file is referenced from:
     // https://stackoverflow.com/questions/6142901/how-to-create-a-file-in-a-directory-in-java
     /**
@@ -33,12 +32,7 @@ public class Storage {
      * Otherwise, the previously saved File at that filePath is returned.
      * @return the desired File in the filePath.
      */
-=======
-
->>>>>>> branch-A-CodingStandard
     public File load() {
-        // Idea for the following code snippet to create a file is referenced from:
-        // https://stackoverflow.com/questions/6142901/how-to-create-a-file-in-a-directory-in-java
         if (!isExistFile()) {
             Path desiredPath = Paths.get(filePath);
             try {
