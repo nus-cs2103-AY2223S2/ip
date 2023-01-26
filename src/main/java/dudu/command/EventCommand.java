@@ -2,7 +2,6 @@ package dudu.command;
 
 import dudu.exception.DuduException;
 import dudu.exception.EmptyDescriptionException;
-import dudu.task.Deadline;
 import dudu.task.Event;
 import dudu.task.TaskList;
 import dudu.util.Storage;
