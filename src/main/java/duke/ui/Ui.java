@@ -28,7 +28,7 @@ public class Ui {
     }
 
     /**
-     * Prints out the greeting for Fake duke.duke.
+     * Prints out the greeting for Fake Duke.
      */
     public void showWelcome() {
         String logo = "  _____     _       _  __  U _____ u      ____     _   _    _  __  U _____ u \n"

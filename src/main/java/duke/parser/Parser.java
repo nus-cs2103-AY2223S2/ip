@@ -96,7 +96,7 @@ public class Parser {
                     c = new Command();
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ I'm sorry, but Fake duke.duke doesn't know what that means :-(");
+            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
         }
 
         return c;
@@ -144,7 +144,7 @@ public class Parser {
                 new MarkCommand(idx);
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ I'm sorry, but Fake duke.duke doesn't know what that means :-(");
+            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
         }
         return null;
     }

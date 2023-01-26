@@ -42,9 +42,9 @@ public class Storage {
                 f.getParentFile().mkdirs();
                 f.createNewFile();
             } catch (IOException ioe) {
-                throw new DukeException("Fake duke.duke can't create the file.");
+                throw new DukeException("Fake Duke can't create the file.");
             }
-            throw new DukeException(String.format("Fake duke.duke can't find the file. I will create the file (%s) :D", this.filePath));
+            throw new DukeException(String.format("Fake Duke can't find the file. I will create the file (%s) :D", this.filePath));
         }
         return tasks;
     }
