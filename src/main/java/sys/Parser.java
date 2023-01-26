@@ -27,6 +27,8 @@ public class Parser {
             default:
                 if (input.matches("occurs .*")) {
                     return new OccursCommand(input);
+                } else if (input.matches("find .*")) {
+                    return new FindCommand(input);
                 } else if (input.matches("mark \\d+")) {
                     return new MarkCommand(input);
                 } else if (input.matches("unmark \\d+")) {
