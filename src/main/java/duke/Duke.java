@@ -8,7 +8,7 @@ import duke.task.Todo;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class DukeApp {
+public class Duke {
     public static final String LOGO = "_____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
         + "| | | | | | | |/ / _ \\\n"
@@ -19,7 +19,7 @@ public class DukeApp {
     private Ui ui;
     private boolean isListening;
 
-    public DukeApp() {
+    public Duke() {
         tasks = new TaskList();
         ui = new Ui();
         try {
