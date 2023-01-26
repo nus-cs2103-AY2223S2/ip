@@ -1,19 +1,19 @@
-package Duke.Ui;
+package duke.ui;
 
-import Duke.TaskList.TaskList;
+import duke.tasklist.TaskList;
 
 /**
  * Ui class to perform the outputting tasks to user
  */
 public class Ui {
-    private final String starting = "    ____________________________________________________________\n";
-    private final String ending = "    ____________________________________________________________\n";
-    private final String spacing = "     ";
-    private static String intro = "    ____________________________________________________________\n" +
+    private final String STARTING = "    ____________________________________________________________\n";
+    private final String ENDING = "    ____________________________________________________________\n";
+    private final String SPACING = "     ";
+    private static final String INTRO = "    ____________________________________________________________\n" +
             "     Hello! I'm Duke\n" +
             "     What can I do for you?\n" +
             "    ____________________________________________________________\n";
-    private static String outro = "    ____________________________________________________________\n" +
+    private static final String OUTRO = "    ____________________________________________________________\n" +
             "     Bye. Hope to see you again soon!\n" +
             "    ____________________________________________________________\n";
 
@@ -23,14 +23,14 @@ public class Ui {
      * Print the intro of Duke CLI
      */
     public void showIntro() {
-        System.out.println(Ui.intro);
+        System.out.println(Ui.INTRO);
     }
 
     /**
      * Print the outro of Duke CLI
      */
     public void showOutro() {
-        System.out.println(Ui.outro);
+        System.out.println(Ui.OUTRO);
     }
 
     /**
@@ -45,9 +45,9 @@ public class Ui {
         //wrap string with the correct indentation and lines when returning add task string
         //assumes s contains the nextline character
         StringBuilder sb = new StringBuilder();
-        sb.append(this.starting).append(this.spacing).append("Got it. I've added this task:\n  ");
-        sb.append(this.spacing).append(s).append(this.spacing);
-        sb.append(String.format("Now you have %d tasks in the list.\n", size)).append(this.ending);
+        sb.append(this.STARTING).append(this.SPACING).append("Got it. I've added this task:\n  ");
+        sb.append(this.SPACING).append(s).append(this.SPACING);
+        sb.append(String.format("Now you have %d tasks in the list.\n", size)).append(this.ENDING);
         return sb.toString();
     }
 
@@ -88,8 +88,8 @@ public class Ui {
      * @param index
      */
     public void showMarkResult(String taskString, int index) {
-        String s = this.starting + this.spacing + "Nice! I've marked this task as done:\n";
-        s += this.spacing + "  " + taskString + this.ending;
+        String s = this.STARTING + this.SPACING + "Nice! I've marked this task as done:\n";
+        s += this.SPACING + "  " + taskString + this.ENDING;
         System.out.println(s);
     }
 
@@ -100,8 +100,8 @@ public class Ui {
      * @param index
      */
     public void showUnmarkResult(String taskString, int index) {
-        String s = this.starting + this.spacing + "OK, I've marked this task as not done yet:\n";
-        s += this.spacing + "  " + taskString + this.ending;
+        String s = this.STARTING + this.SPACING + "OK, I've marked this task as not done yet:\n";
+        s += this.SPACING + "  " + taskString + this.ENDING;
         System.out.println(s);
     }
 
@@ -113,9 +113,9 @@ public class Ui {
      */
     public void showDeleteResult(String taskString, int size) {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.starting).append(this.spacing).append("Noted. I've removed this task:\n  ");
-        sb.append(this.spacing).append(taskString).append(this.spacing);
-        sb.append(String.format("Now you have %d tasks in the list.\n", size)).append(this.ending);
+        sb.append(this.STARTING).append(this.SPACING).append("Noted. I've removed this task:\n  ");
+        sb.append(this.SPACING).append(taskString).append(this.SPACING);
+        sb.append(String.format("Now you have %d tasks in the list.\n", size)).append(this.ENDING);
         System.out.println(sb);
     }
 
@@ -126,12 +126,12 @@ public class Ui {
      */
     public void showGetAllTaskResult(TaskList tl) {
         StringBuilder s = new StringBuilder();
-        s.append(this.starting);
-        s.append(this.spacing).append("Here are the tasks in your list:\n");
+        s.append(this.STARTING);
+        s.append(this.SPACING).append("Here are the tasks in your list:\n");
         for (int i = 0; i < tl.getSize(); i++) {
-            s.append(String.format("%s%d.%s", this.spacing, i + 1, tl.getTask(i).toString()));
+            s.append(String.format("%s%d.%s", this.SPACING, i + 1, tl.getTask(i).toString()));
         }
-        s.append(this.ending);
+        s.append(this.ENDING);
         System.out.println(s);
     }
 }

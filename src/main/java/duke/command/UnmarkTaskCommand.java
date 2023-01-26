@@ -1,16 +1,16 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Storage.Storage;
-import Duke.TaskList.TaskList;
-import Duke.Ui.Ui;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Class in charge of handling the case of Unmakring Task
  */
-public class UnmarkTask implements Command {
+public class UnmarkTaskCommand extends Command {
     private int index;
 
-    public UnmarkTask(int index) {
+    public UnmarkTaskCommand(int index) {
         this.index = index;
     }
 

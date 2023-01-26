@@ -1,23 +1,23 @@
-package Duke.Command;
-import Duke.DateTime.DateTime;
-import Duke.DukeException.DukeException;
-import Duke.Storage.Storage;
-import Duke.Task.Event;
-import Duke.TaskList.TaskList;
-import Duke.Ui.Ui;
+package duke.command;
 
-import java.time.LocalDate;
+import duke.datetime.DateTime;
+import duke.dukeexception.DukeException;
+import duke.storage.Storage;
+import duke.task.Event;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 /**
  * Class in charge of handling the case of adding Event task
  */
-public class AddEvent implements Command {
+public class AddEventCommand extends Command {
     private String fromString;
     private String toString;
     private String name;
-    public AddEvent(String name, String fromString, String toString) {
+    public AddEventCommand(String name, String fromString, String toString) {
         this.fromString = fromString;
         this.toString = toString;
         this.name = name;

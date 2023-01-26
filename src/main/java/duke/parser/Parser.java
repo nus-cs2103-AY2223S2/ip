@@ -1,12 +1,14 @@
-package Duke.Parser;
-import Duke.Command.*;  //import everything since all commands are used in parsing
-import Duke.DateTime.DateTime;
-import Duke.DukeException.DukeException;
-import Duke.Task.Deadline;
-import Duke.Task.Event;
-import Duke.Task.Task;
-import Duke.Task.Todo;
-import Duke.TaskList.TaskList;
+package duke.parser;
+
+
+import duke.command.*;
+import duke.datetime.DateTime;
+import duke.dukeexception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.tasklist.TaskList;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -64,7 +66,7 @@ public class Parser {
             return null;
         }
         if (Objects.equals(str, "list")) {
-            return new GetAllTask();
+            return new GetAllTaskCommand();
         }
         Command command = this.isMark(str);
         if (!Objects.equals(command, null)) {
@@ -112,7 +114,7 @@ public class Parser {
             }else if (!s.substring(5, s.length()).matches("[0-9]+")) {
                 throw new DukeException("Please provide only positive integers for index to mark.");
             } else {
-                return new MarkTask(Integer.parseInt(s.substring(5, s.length())));
+                return new MarkTaskCommand(Integer.parseInt(s.substring(5, s.length())));
             }
         }
         return null;
@@ -137,7 +139,7 @@ public class Parser {
             }else if (!s.substring(7, s.length()).matches("[0-9]+")) {
                 throw new DukeException("Please provide only positive integers for index to unmark.");
             } else {
-                return new UnmarkTask(Integer.parseInt(s.substring(7, s.length())));
+                return new UnmarkTaskCommand(Integer.parseInt(s.substring(7, s.length())));
             }
         }
         return null;
@@ -160,7 +162,7 @@ public class Parser {
             }else if (s.length() < 6) {
                 throw new DukeException("The description of a todo cannot be empty.");
             } else {
-                return new AddTodo(s.substring(5, s.length()));
+                return new AddTodoCommand(s.substring(5, s.length()));
             }
         }
         return null;
@@ -187,7 +189,7 @@ public class Parser {
                 String[] parts = s.split("/");
                 String deadlineString = parts[1].substring(3, parts[1].length()).strip();
                 String name = parts[0].strip();
-                return new AddDeadline(name, deadlineString);
+                return new AddDeadlineCommand(name, deadlineString);
             }
         }
         return null;
@@ -215,7 +217,7 @@ public class Parser {
                 String name = parts[0].strip();
                 String fromString = parts[1].substring(5, parts[1].length()).strip();
                 String toString = parts[2].substring(3, parts[2].length()).strip();
-                return new AddEvent(name, fromString, toString);
+                return new AddEventCommand(name, fromString, toString);
             }
         }
         return null;
@@ -240,7 +242,7 @@ public class Parser {
             }else if (!s.substring(7, s.length()).matches("[0-9]+")) {
                 throw new DukeException("Please provide only positive integers for index to delete.");
             } else {
-                return new DeleteTask(Integer.parseInt(s.substring(7, s.length())));
+                return new DeleteTaskCommand(Integer.parseInt(s.substring(7, s.length())));
             }
         }
         return null;

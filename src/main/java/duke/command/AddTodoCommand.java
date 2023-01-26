@@ -1,16 +1,16 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Storage.Storage;
-import Duke.Task.Todo;
-import Duke.TaskList.TaskList;
-import Duke.Ui.Ui;
+import duke.storage.Storage;
+import duke.task.Todo;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Class in charge of handling the case of adding a Todotask
  */
-public class AddTodo implements Command{
+public class AddTodoCommand extends Command{
     private String name;
-    public AddTodo(String name) {
+    public AddTodoCommand(String name) {
         this.name = name;
     }
 

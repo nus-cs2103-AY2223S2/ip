@@ -1,16 +1,16 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Storage.Storage;
-import Duke.TaskList.TaskList;
-import Duke.Ui.Ui;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Class in charge of handling the case to mark Task
  */
-public class MarkTask implements Command {
+public class MarkTaskCommand extends Command {
     private int index;
 
-    public MarkTask(int index) {
+    public MarkTaskCommand(int index) {
         this.index = index;
     }
 

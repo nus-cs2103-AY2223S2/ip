@@ -1,8 +1,12 @@
+<<<<<<< HEAD:src/main/java/Duke/Task/Todo.java
 package Duke.Task;
 
 /**
  * Class to represent Todotask created by user
  */
+=======
+package duke.task;
+>>>>>>> branch-A-CodingStandard:src/main/java/duke/task/Todo.java
 public class Todo extends Task {
 
     public Todo(String name) {

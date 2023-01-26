@@ -1,16 +1,16 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Storage.Storage;
-import Duke.Task.Task;
-import Duke.TaskList.TaskList;
-import Duke.Ui.Ui;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Class to handle the case of deleting Task
  */
-public class DeleteTask implements Command {
+public class DeleteTaskCommand extends Command {
     private int index;
-    public DeleteTask(int index) {
+    public DeleteTaskCommand(int index) {
         this.index = index;
     }
 
