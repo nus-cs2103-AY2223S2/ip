@@ -2,6 +2,7 @@ package tasklist.task_types;
 
 import java.time.format.DateTimeParseException;
 
+import duke_exception.DukeException;
 import utility.date.Date;
 
 /**
@@ -12,14 +13,20 @@ import utility.date.Date;
  * @author Brian Quek
  */
 public class Deadline extends Task {
+    private static DukeException invalidDate = new DukeException("Invalid date input/format. [Format: yyyy-mm-dd] ");
     protected Date deadline;
 
     /**
      * Constructor for the Deadline object.
      */
-    public Deadline(String name, String date) throws DateTimeParseException {
+    public Deadline(String name, String date) throws DukeException {
         super(name);
-        this.deadline = new Date(date);
+        try {
+            this.deadline = new Date(date);
+        } catch (DateTimeParseException e) {
+            throw invalidDate;
+        }
+
     }
 
     /**

@@ -1,10 +1,11 @@
 package utility.date;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Date {
+public class Date implements Serializable {
     private static String format = "MMM dd yyyy";
     private LocalDate date;
 

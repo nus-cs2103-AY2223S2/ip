@@ -2,6 +2,8 @@ package utility.parser;
 
 import duke_exception.DukeException;
 import tasklist.TaskList;
+import tasklist.task_types.Deadline;
+import tasklist.task_types.Event;
 import tasklist.task_types.Task;
 import tasklist.task_types.ToDo;
 
@@ -77,11 +79,33 @@ public class Parser {
         return CommandMap.todo;
     }
 
-    private static CommandMap createDeadline(String[] command, TaskList list) {
+    private static CommandMap createDeadline(String[] command, TaskList list) throws DukeException {
+        if (command.length != 4) {
+            throw wrongNumberParam;
+        }
+
+        if (!command[2].equals("/by")) {
+            throw noSpecialParam;
+        }
+
+        Task deadlineObj = new Deadline(command[1], command[3]);
+        list.addTask(deadlineObj);
+
         return CommandMap.deadline;
     }
 
-    private static CommandMap createEvent(String[] command, TaskList list) {
+    private static CommandMap createEvent(String[] command, TaskList list) throws DukeException {
+        if (command.length != 6) {
+            throw wrongNumberParam;
+        }
+
+        if (!command[2].equals("/from") || !command[4].equals("/to")) {
+            throw noSpecialParam;
+        }
+
+        Task eventObj = new Event(command[1], command[3], command[5]);
+        list.addTask(eventObj);
+
         return CommandMap.event;
     }
 
