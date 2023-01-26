@@ -10,7 +10,6 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-
 public class Parser {
     private Command c;
     private String text;

@@ -28,13 +28,13 @@ public class Task implements Comparable<Task> {
     public String getStatus() {
         return this.isDone ? DONE_TRUE : DONE_FALSE;
     }
-    
-    public LocalDateTime getTime() {
-        return LocalDateTime.MIN;
-    }
-    
+
     public boolean hasTime() {
         return false;
+    }
+
+    public LocalDateTime getTime() {
+        return LocalDateTime.MIN;
     }
     
     @Override
@@ -68,7 +68,7 @@ public class Task implements Comparable<Task> {
     
     @Override
     public int compareTo(Task other) {
-        if (this.getTime().compareTo(other.getTime()) == 0) {
+        if (this.getTime().isEqual(other.getTime())) {
             return this.desc.compareTo(other.desc);
         }
         

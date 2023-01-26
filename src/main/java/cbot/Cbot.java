@@ -16,7 +16,7 @@ public class Cbot {
     private final FileStuff fs;
     private final UI ui;
     
-    private static final String PATH = "../data/cbot_save.txt";
+    private static final String PATH = "data/cbot_save.txt";
 
     Cbot(String filePath) throws IOException {
         this.fs = new FileStuff(filePath);
@@ -31,11 +31,7 @@ public class Cbot {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new Cbot(PATH).run();
-    }
-
-    public void run() throws IOException {
+    void run() throws IOException {
         UI.sayHi();
         
         boolean doLoop = true;
@@ -72,5 +68,9 @@ public class Cbot {
         }
         
         UI.sayBye();
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Cbot(PATH).run();
     }
 }
