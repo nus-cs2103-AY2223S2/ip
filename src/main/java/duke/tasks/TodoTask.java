@@ -4,7 +4,7 @@ import duke.DukeException;
 
 public class TodoTask extends Task {
 
-    static final String INDICATOR = "[ToDo]";
+    static final String INDICATOR = "[Todo]";
 
     public TodoTask(String name) throws DukeException {
         super(name);
