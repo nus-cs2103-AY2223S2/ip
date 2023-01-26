@@ -1,7 +1,10 @@
+import containers.FileContainer;
 import handlers.*;
 import services.Dispatcher;
+import services.SpeakerRegistry;
+import services.TaskList;
+import speakers.StdOut;
 import utilities.Prompt;
-import services.TaskStorage;
 
 import java.util.Scanner;
 
@@ -14,14 +17,20 @@ public class Tach {
             + "               \\/     \\/     \\/ \n";
     private static final Scanner scanner = new Scanner(System.in);
     private static final Dispatcher dispatcher = new Dispatcher();
-    private static final TaskStorage ts = new TaskStorage();
+    private static final TaskList ts = new TaskList(FileContainer.ofLocation("./data/tasks.txt", true));
+    private static final SpeakerRegistry sp = new SpeakerRegistry();
     private static Boolean shouldContinue = true;
 
     public static void hello() {
-        System.out.println("Yoooo from\n" + logo);
+        sp.broadcast("Yoooo from\n" + logo);
+    }
+
+    private static void initSpeaker() {
+        sp.registerSpeaker(new StdOut());
     }
 
     private static void initDispatcher() {
+        dispatcher.setSpeakerRegistry(sp);
         dispatcher.setDefaultHandler(new JThrowException());
         dispatcher.registerCommand(new JAddTask(ts));
         dispatcher.registerCommand(new JShowTaskList(ts));
@@ -33,12 +42,13 @@ public class Tach {
     }
 
     private static void takeInput() {
-        Prompt.beforeInput();
+        sp.broadcast(Prompt.beforeInput());
         dispatcher.handle(scanner.nextLine());
-        Prompt.afterInput();
+        sp.broadcast(Prompt.afterInput());
     }
 
     public static void main(String[] args) {
+        initSpeaker();
         initDispatcher();
         hello();
 

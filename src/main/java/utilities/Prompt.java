@@ -1,11 +1,11 @@
 package utilities;
 
 public final class Prompt {
-    public static void beforeInput() {
-        System.out.print("\uE0B4 ");
+    public static String beforeInput() {
+        return "\uE0B4 ";
     }
 
-    public static void afterInput() {
-        System.out.println();
+    public static String afterInput() {
+        return "\n";
     }
 }

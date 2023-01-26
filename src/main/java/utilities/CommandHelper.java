@@ -1,21 +1,12 @@
 package utilities;
 
+import services.SpeakerRegistry;
 import types.IHandler;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public final class CommandHelper {
-    @SuppressWarnings("unchecked")
-    public static Class<IHandler> getClass(String s) {
-        try {
-            return (Class<IHandler>) Class.forName(s);
-        } catch (ClassNotFoundException e) {
-            System.out.printf("[Command Registration] command %s not found!\n", s);
-            return null;
-        }
-    }
-
     public static IHandler getObject(Class<IHandler> c) {
         try {
             return c.getConstructor().newInstance();
@@ -25,10 +16,10 @@ public final class CommandHelper {
         }
     }
 
-    public static boolean checkAndRun(List<IHandler> handlers, String expr) {
+    public static boolean checkAndRun(SpeakerRegistry sr, List<IHandler> handlers, String expr) {
         for (IHandler c : handlers) {
             if (c.canTake(expr)) {
-                c.take(expr);
+                sr.broadcast(c.take(expr));
                 return true;
             }
         }
@@ -36,9 +27,9 @@ public final class CommandHelper {
         return false;
     }
 
-    public static boolean checkAndRun(IHandler c, String expr) {
+    public static boolean checkAndRun(SpeakerRegistry sr, IHandler c, String expr) {
         if (c.canTake(expr)) {
-            c.take(expr);
+            sr.broadcast(c.take(expr));
             return true;
         }
 

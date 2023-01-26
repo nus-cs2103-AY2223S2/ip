@@ -4,8 +4,8 @@ import types.IHandler;
 
 public final class JEcho implements IHandler {
     @Override
-    public void take(String s) {
-        System.out.println(s);
+    public String take(String s) {
+        return s;
     }
 
     @Override

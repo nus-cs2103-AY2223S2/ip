@@ -1,6 +1,6 @@
 package handlers;
 
-import services.TaskStorage;
+import services.TaskList;
 import types.IHandler;
 
 import java.util.Objects;
@@ -9,25 +9,25 @@ import java.util.regex.Pattern;
 
 public final class JMarkTask implements IHandler {
     private static final Pattern p = Pattern.compile("(un)?mark ([0-9]*)");
-    private final TaskStorage ts;
+    private final TaskList ts;
 
-    public JMarkTask(TaskStorage ts) {
+    public JMarkTask(TaskList ts) {
         this.ts = ts;
     }
 
     @Override
-    public void take(String s) {
+    public String take(String s) {
         Matcher m = p.matcher(s);
         if (!m.matches()) {
-            return;
+            return "";
         }
         int no = Integer.parseInt(m.group(2));
         if (Objects.equals(m.group(1), "un")) {
             ts.unmarkByNo(no);
-            System.out.printf("OK, I've marked this task as not done yet:\n[ ] %s\n", ts.getTaskByNo(no).getName());
+            return String.format("OK, I've marked this task as not done yet:\n[ ] %s\n", ts.getTaskByNo(no).getName());
         } else {
             ts.markByNo(no);
-            System.out.printf("Nice! I've marked this task as done:\n[X] %s\n", ts.getTaskByNo(no).getName());
+            return String.format("Nice! I've marked this task as done:\n[X] %s\n", ts.getTaskByNo(no).getName());
         }
     }
 

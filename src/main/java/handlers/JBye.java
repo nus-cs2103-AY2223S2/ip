@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 
 public final class JBye implements IHandler {
     private static final Pattern p = Pattern.compile("bye");
-    private static final String outputText = "Bye. Hope to see you again soon!";
+    private static final String outputText = "Bye. Hope to see you again soon!\n";
 
     @Override
-    public void take(String s) {
-        System.out.println(outputText);
+    public String take(String s) {
+        return outputText;
     }
 
     @Override

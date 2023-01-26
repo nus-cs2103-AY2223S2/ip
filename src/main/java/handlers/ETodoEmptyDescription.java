@@ -8,8 +8,8 @@ public class ETodoEmptyDescription implements IHandler {
     private static final Pattern p = Pattern.compile("todo");
 
     @Override
-    public void take(String s) {
-        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+    public String take(String s) {
+        return "☹ OOPS!!! The description of a todo cannot be empty.";
     }
 
     @Override

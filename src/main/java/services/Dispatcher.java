@@ -11,10 +11,15 @@ public final class Dispatcher {
     private final ArrayList<IHandler> errorRegistry = new ArrayList<>();
     private IHandler defaultHandler;
     private IHandler exitHandler;
+    private SpeakerRegistry speakerRegistry;
     private Runnable toExit;
 
     public void registerCommand(IHandler c) {
         this.handlerRegistry.add(c);
+    }
+
+    public void setSpeakerRegistry(SpeakerRegistry speakerRegistry) {
+        this.speakerRegistry = speakerRegistry;
     }
 
     public void registerCommand(Class<IHandler> c) {
@@ -53,16 +58,16 @@ public final class Dispatcher {
         if (Objects.equals(expr, ""))
             return;
 
-        if (CommandHelper.checkAndRun(exitHandler, expr)) {
+        if (CommandHelper.checkAndRun(speakerRegistry, exitHandler, expr)) {
             toExit.run();
             return;
         }
 
-        if (CommandHelper.checkAndRun(handlerRegistry, expr) ||
-                CommandHelper.checkAndRun(errorRegistry, expr)) {
+        if (CommandHelper.checkAndRun(speakerRegistry, handlerRegistry, expr) ||
+                CommandHelper.checkAndRun(speakerRegistry, errorRegistry, expr)) {
             return;
         }
 
-        this.defaultHandler.take(expr);
+        speakerRegistry.broadcast(this.defaultHandler.take(expr));
     }
 }

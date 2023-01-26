@@ -11,7 +11,7 @@ import java.util.Map;
 //Taken from [https://stackoverflow.com/questions/3389348/parse-any-date-in-java]
 // with minor modifications
 public class DateTimeParser {
-    private static final Map<String, String> DATE_FORMAT_REGEXPS = new HashMap<String, String>() {{
+    private static final Map<String, String> DATE_FORMAT_REGEXPS = new HashMap<>() {{
         put("^\\d{8}$", "yyyyMMdd");
         put("^\\d{1,2}-\\d{1,2}-\\d{4}$", "dd-MM-yyyy");
         put("^\\d{4}-\\d{1,2}-\\d{1,2}$", "yyyy-MM-dd");
@@ -54,12 +54,10 @@ public class DateTimeParser {
                             .atZone(ZoneId.systemDefault())
                             .toLocalDateTime();
                 } catch (ParseException e) {
-                    System.out.printf("Matched by cannot parse: %s\n", dateString);
-                    return null;
+                    throw new IllegalArgumentException(String.format("Matched by cannot parse: %s\n", dateString));
                 }
             }
         }
-        System.out.printf("Unknown date/time format: %s\n", dateString);
-        return null; // Unknown format.
+        throw new IllegalArgumentException(String.format("Unknown format: %s\n", dateString));
     }
 }

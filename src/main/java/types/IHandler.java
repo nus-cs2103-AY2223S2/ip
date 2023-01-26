@@ -1,7 +1,7 @@
 package types;
 
 public interface IHandler {
-    void take(String s);
+    String take(String s);
 
     boolean canTake(String s);
 }

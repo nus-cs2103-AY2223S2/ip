@@ -1,7 +1,7 @@
 package handlers;
 
-import services.TaskStorage;
-import types.*;
+import services.TaskList;
+import types.IHandler;
 import types.data.Deadline;
 import types.data.Event;
 import types.data.Task;
@@ -16,16 +16,16 @@ public final class JAddTask implements IHandler {
     private static final Pattern deadline_p = Pattern.compile("(deadline) (.*) /by (.*)");
     private static final Pattern p = Pattern
             .compile("(todo) (.*)|(deadline) (.*) /by (.*)|(event) (.*) /from (.*) /to (.*)");
-    private final TaskStorage ts;
+    private final TaskList ts;
 
-    public JAddTask(TaskStorage ts) {
+    public JAddTask(TaskList ts) {
         this.ts = ts;
     }
 
     @Override
-    public void take(String s) {
+    public String take(String s) {
         if (!p.matcher(s).matches()) {
-            return;
+            return "";
         }
 
         Matcher m;
@@ -46,7 +46,7 @@ public final class JAddTask implements IHandler {
             ts.addTask(t = Deadline.create(m.group(2), m.group(3)));
         }
 
-        System.out.printf("Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.\n", t,
+        return String.format("Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.\n", t,
                 ts.getTaskCount());
     }
 
