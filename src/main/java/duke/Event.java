@@ -1,7 +1,7 @@
 package duke;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 /**
  * This class is a event task. It contains
@@ -41,13 +41,15 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return "[E]" + super.toString()
-                + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+        return "[E]" + super.toString() + " (from: "
+                + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + " to: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    @Override
     public String toStorableString() {
         return "E" + "," + (this.isDone() ? "1" : "0") + "," + this.getDescription()
                 + "," + this.from.toString() + "," + this.to.toString();
     }
+
 }

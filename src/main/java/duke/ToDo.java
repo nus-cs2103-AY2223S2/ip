@@ -31,8 +31,9 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
+    @Override
     public String toStorableString() {
-        // T|0|return book
         return "T," + (this.isDone() ? "1" : "0") + "," + this.getDescription();
     }
+
 }

@@ -2,6 +2,7 @@ package duke;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+
 import java.util.Scanner;
 
 /**
@@ -33,7 +34,6 @@ class TextUi {
 
     public void printLine() {
         out.println("____________________");
-
     }
 
     public void getCustomMessage(String message) {
@@ -46,7 +46,8 @@ class TextUi {
         out.println("____________________");
         out.println("Got it. I've added this task:");
         out.println(task);
-        out.println("Now you have " + sizeOfList + " task" + (sizeOfList > 1 ? "s" : "") + " in the list.");
+        out.println("Now you have " + sizeOfList
+                + " task" + (sizeOfList > 1 ? "s" : "") + " in the list.");
         out.println("____________________");
     }
 
@@ -54,7 +55,9 @@ class TextUi {
         out.println("____________________");
         out.println("Noted. I've removed this task:");
         out.println(task);
-        out.println("Now you have " + sizeOfList + " task" + (sizeOfList > 1 ? "s" : "") + " in the list.");
+        out.println("Now you have " + sizeOfList
+                + " task" + (sizeOfList > 1 ? "s" : "") + " in the list.");
         out.println("____________________");
     }
+
 }

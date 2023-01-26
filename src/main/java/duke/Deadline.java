@@ -37,10 +37,13 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    @Override
     public String toStorableString() {
-        return "D" + "," + (this.isDone() ? "1" : "0") + "," + this.getDescription() + "," + this.by.toString();
+        return "D" + "," + (this.isDone() ? "1" : "0") + ","
+                + this.getDescription() + "," + this.by.toString();
     }
 }

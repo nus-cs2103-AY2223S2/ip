@@ -12,11 +12,12 @@ import java.util.Scanner;
  * of saved contents made by user.
  */
 public class Storage {
-    private static final String FILE_DESTINATION = "data.txt";
+
+    private static final String FILE_NAME = "data.txt";
     private final File file;
 
     public Storage() {
-        file = new File(FILE_DESTINATION);
+        file = new File(FILE_NAME);
     }
 
     /**
@@ -25,12 +26,14 @@ public class Storage {
      * @return TaskList of user.
      */
     public TaskList readSavedFile() {
-        File file = new File(FILE_DESTINATION);
+
+        File file = new File(FILE_NAME);
+
         if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println("Error while creating file: " + e);
+                System.out.println("Error when creating file: " + e);
             }
         }
         TaskList taskList = new TaskList();
@@ -64,12 +67,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Saves the TaskList.
-     * 
-     * @param taskList TaskList of user.
-     * 
-     */
     public void saveTaskListToStorage(TaskList taskList) {
         try {
             FileWriter myWriter = new FileWriter(file); // this truncates the duke.txt to size 0
@@ -82,4 +79,5 @@ public class Storage {
             e.printStackTrace();
         }
     }
+
 }

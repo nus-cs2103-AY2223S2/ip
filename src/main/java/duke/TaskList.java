@@ -34,4 +34,5 @@ public class TaskList {
     public int getArraySize() {
         return taskList.size();
     }
+
 }

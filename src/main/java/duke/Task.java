@@ -5,6 +5,7 @@ package duke;
  * the description of the task and whether the task is completed.
  */
 public abstract class Task {
+
     private String description;
     private boolean isDone;
 
@@ -35,16 +36,16 @@ public abstract class Task {
         return this.isDone;
     }
 
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
     public void markAsUndone() {
         this.isDone = false;
     }
 
     public String getDescription() {
         return this.description;
-    }
-
-    public void markAsDone() {
-        this.isDone = true;
     }
 
     public String toString() {
