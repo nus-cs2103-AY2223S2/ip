@@ -15,6 +15,41 @@ import java.util.Map;
  */
 public class NestableExecutableObject implements Executable, Disposable {
     /**
+     * The commands that are executed in sequence before executing the
+     * tokenedCommands in an execution iteration.
+     * <p>It shall be noted that this
+     * iteration may not continue after executing a certain command, depending
+     * on the command's return value upon execution.</p>
+     */
+    private final List<Executable> preExecutables;
+    /**
+     * The commands that are executed in the sequence after executing the
+     * keywordCommands.
+     * <p>It shall be noted that this
+     * iteration may not continue after executing a certain command, depending
+     * on the command's return value upon execution.</p>
+     */
+    private final List<Executable> postExecutables;
+    /**
+     * The commands that are executed in the middle. They will be matched
+     * against the keyword to decide whether if they wil be executed.
+     * <p>It shall be noted that this
+     * iteration may not continue after executing a certain command, depending
+     * on the command's return value upon execution.</p>
+     */
+    private final Map<String, IdentifiableExecutable> identifiedExecutables;
+    /**
+     * The list of disposables that will be disposed when this object is
+     * disposed. This can be used to do some bookkeeping such as saving the
+     * data to the disk.
+     */
+    private final List<Disposable> disposables = new ArrayList<>();
+    /**
+     * The writer to which the error messages will be written.
+     */
+    private final Writable errorWriter;
+
+    /**
      * Instantiates a new TokensManager.
      *
      * @param preExecutables        the executables to be executed first in an
@@ -50,44 +85,6 @@ public class NestableExecutableObject implements Executable, Disposable {
         this(new ArrayList<>(), new ArrayList<>(), new HashMap<>(),
                 errorWriter);
     }
-
-    /**
-     * The commands that are executed in sequence before executing the
-     * tokenedCommands in an execution iteration.
-     * <p>It shall be noted that this
-     * iteration may not continue after executing a certain command, depending
-     * on the command's return value upon execution.</p>
-     */
-    private final List<Executable> preExecutables;
-
-    /**
-     * The commands that are executed in the sequence after executing the
-     * keywordCommands.
-     * <p>It shall be noted that this
-     * iteration may not continue after executing a certain command, depending
-     * on the command's return value upon execution.</p>
-     */
-    private final List<Executable> postExecutables;
-
-    /**
-     * The commands that are executed in the middle. They will be matched
-     * against the keyword to decide whether if they wil be executed.
-     * <p>It shall be noted that this
-     * iteration may not continue after executing a certain command, depending
-     * on the command's return value upon execution.</p>
-     */
-    private final Map<String, IdentifiableExecutable> identifiedExecutables;
-
-    /**
-     * The list of disposables that will be disposed when this object is
-     * disposed.
-     */
-    private final List<Disposable> disposables = new ArrayList<>();
-
-    /**
-     * The writer to which the error messages will be written.
-     */
-    private final Writable errorWriter;
 
     /**
      * Registers a executable to be executed before the tokened commands.

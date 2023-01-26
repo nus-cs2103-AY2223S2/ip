@@ -16,30 +16,9 @@ import java.util.Set;
  */
 public abstract class Task implements Serializable {
     /**
-     * Creates a new task with the given tokens.
-     * @param tokens the list of String to be processed.
-     * @param delims the keywords after which we retrieve relevant data.
-     * @throws InvalidArgumentException if the name is null.
+     * The key for identifying if the object is marked as complete or not.
      */
-    public Task(String[] tokens, Set<String> delims) throws InvalidArgumentException {
-        final Pair<String, Map<String, String>> tmp =
-                Singletons.get(TokenUtilities.class).joinTokens(tokens, delims);
-        if (tmp.getLeft().isBlank()) {
-            throw new InvalidArgumentException("☹ OOPS, the name for a task " +
-                    "should not be null", tokens);
-        }
-        this.name = tmp.getLeft();
-        if (tmp.getRight().get(completeKey) != null) {
-            if (tmp.getRight().get(completeKey).equals("true")) {
-                this.isComplete = true;
-            } else {
-                this.isComplete = false;
-            }
-        } else {
-            this.isComplete = false;
-        }
-    }
-
+    protected static final String completeKey = "/complete";
     /**
      * The name of the list item.
      * <p>
@@ -51,6 +30,28 @@ public abstract class Task implements Serializable {
      * If the object is complete or not.
      */
     private boolean isComplete;
+
+    /**
+     * Creates a new task with the given tokens.
+     *
+     * @param tokens the list of String to be processed.
+     * @param delims the keywords after which we retrieve relevant data.
+     * @throws InvalidArgumentException if the name is null.
+     */
+    public Task(String[] tokens, Set<String> delims) throws InvalidArgumentException {
+        final Pair<String, Map<String, String>> tmp =
+                Singletons.get(TokenUtilities.class).joinTokens(tokens, delims);
+        if (tmp.getLeft().isBlank()) {
+            throw new InvalidArgumentException("☹ OOPS, the name for a task "
+                    + "should not be null", tokens);
+        }
+        this.name = tmp.getLeft();
+        if (tmp.getRight().get(completeKey) != null) {
+            this.isComplete = tmp.getRight().get(completeKey).equals("true");
+        } else {
+            this.isComplete = false;
+        }
+    }
 
     /**
      * Sets the isComplete to complete.
@@ -70,14 +71,10 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * The key for identifying if the object is marked as complete or not.
-     */
-    protected static final String completeKey = "/complete";
-
-    /**
      * If the task contains the given date, i.e. if the task is a deadline,
      * then if the deadline is the same as the given date. If the task is an
      * event, then if the event contains the given date.
+     *
      * @param date the date to be checked.
      * @return true if the task contains the date, false otherwise.
      */

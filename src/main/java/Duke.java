@@ -17,6 +17,9 @@ import presentation.ui.SystemOut;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The main class for Duke.
+ */
 public class Duke {
     public static void main(String[] args) {
         try {

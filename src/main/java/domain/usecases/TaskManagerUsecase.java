@@ -5,18 +5,41 @@ import core.exceptions.WriteException;
 import core.utils.fp.ThrowingFunction;
 import domain.entities.DataSaver;
 import domain.entities.core.*;
-import domain.entities.taskmanager.*;
+import domain.entities.taskmanager.Deadline;
+import domain.entities.taskmanager.Event;
+import domain.entities.taskmanager.Task;
+import domain.entities.taskmanager.ToDo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * A class for managing tasks.
+ * A {@link TaskManagerUsecase} is a usecase that manages a list of
+ * {@link Task}s. It provides many anonymous classes that can be registered
+ * to a {@link NestableExecutableObject}. These anonymous classes will be
+ * used to execute the commands.
+ * <p>
+ * To register the anonymous classes, use the register method.
  */
 public class TaskManagerUsecase implements ExecutableRegisterable {
+    /**
+     * The data saver
+     */
+    private final DataSaver dataSaver;
+    /**
+     * The list of tasks that this manager contains.
+     */
+    private final ArrayList<Task> tasks;
+    /**
+     * The writable for writing errors.
+     */
+    private final Writable errorWritable;
+    /**
+     * The writable that this manager writes to.
+     */
+    private Writable writable;
+
     /**
      * Creates a new TaskManagerUsecase with the todos set to items.
      *
@@ -42,26 +65,6 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
                               DataSaver dataSaver) {
         this(writable, new ArrayList<>(), dataSaver, errorWritable);
     }
-
-    /**
-     * The list of tasks that this manager contains.
-     */
-    private ArrayList<Task> tasks;
-
-    /**
-     * The writable that this manager writes to.
-     */
-    private Writable writable;
-
-    /**
-     * The writable for writing errors.
-     */
-    private Writable errorWritable;
-
-    /**
-     * The data saver
-     */
-    private final DataSaver dataSaver;
 
     /**
      * Adds a Task to the todoItems.
@@ -138,12 +141,12 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
         try {
             index = Integer.parseInt(indexStr) - 1;
         } catch (NumberFormatException exception) {
-            throw new InvalidArgumentException("☹ OOPS, please input a " +
-                    "number!");
+            throw new InvalidArgumentException("☹ OOPS, please input a "
+                    + "number!");
         }
         if (index >= tasks.size() || index < 0) {
-            throw new InvalidArgumentException("☹ OOPS, please input a number" +
-                    " that is within range!");
+            throw new InvalidArgumentException("☹ OOPS, please input a number"
+                    + " that is within range!");
         }
         return index;
     }
@@ -221,12 +224,12 @@ public class TaskManagerUsecase implements ExecutableRegisterable {
                 try {
                     date = LocalDate.parse(dateStr);
                 } catch (DateTimeParseException exception) {
-                    writable.writeln("☹ OOPS, please input a date in the " +
-                            "format yyyy-mm-dd!");
+                    writable.writeln("☹ OOPS, please input a date "
+                            + "in the format yyyy-mm-dd!");
                     return ExitStatus.finishCurrentIteration;
                 }
                 boolean hasDate = false;
-                for (int i = 0; i < tasks.size(); i ++) {
+                for (int i = 0; i < tasks.size(); i++) {
                     final Task task = tasks.get(i);
                     if (task.containsDate(date)) {
                         writable.writeln((i + 1) + ". " + task);

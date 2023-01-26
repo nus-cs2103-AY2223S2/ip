@@ -1,4 +1,5 @@
 package core.singletons;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -26,9 +27,10 @@ public class Singletons {
     /**
      * Registers a class as a singleton, therefore, it would only be created
      * once.
-     * @param cls the class of the object.
+     *
+     * @param cls    the class of the object.
      * @param object the object itself.
-     * @param <T> the type of the object.
+     * @param <T>    the type of the object.
      */
     static public <T> void registerSingleton(Class<T> cls,
                                              T object) {
@@ -41,9 +43,10 @@ public class Singletons {
     /**
      * Registers a class as a lazy singleton. A lazy singleton will only get
      * instantiated if it was used.
-     * @param cls the class of the object
+     *
+     * @param cls      the class of the object
      * @param supplier the lazy singleton of the object.
-     * @param <T> the type of the object.
+     * @param <T>      the type of the object.
      */
     static public <T> void registerLazySingleton(Class<T> cls,
                                                  Supplier<T> supplier) {
@@ -60,7 +63,7 @@ public class Singletons {
      * @param cls the class of the object.
      */
     static public <T> void reRegisterSingleton(Class<T> cls,
-                                             T object) {
+                                               T object) {
         singletons.put(cls, object);
     }
 
@@ -71,16 +74,17 @@ public class Singletons {
      * @param cls the class of the object
      */
     static public <T> void reRegisterLazySingleton(Class<T> cls,
-                                                 Supplier<T> supplier) {
+                                                   Supplier<T> supplier) {
         singletons.remove(cls);
         lazySingletons.put(cls, supplier);
     }
 
     /**
      * Gets an instance of the specified class.
+     *
      * @param cls the class of the class.
-     * @return the object that has been registered for this class.
      * @param <T> the type of the object.
+     * @return the object that has been registered for this class.
      */
     static public <T> T get(Class<T> cls) {
         if (singletons.containsKey(cls)) {

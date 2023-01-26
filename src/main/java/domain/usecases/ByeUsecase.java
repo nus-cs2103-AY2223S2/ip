@@ -2,7 +2,16 @@ package domain.usecases;
 
 import domain.entities.core.*;
 
+/**
+ * A {@link ByeUsecase} is a usecase that would terminate the program. It can
+ * be triggered when the user types in "bye".
+ */
 public class ByeUsecase implements IdentifiableExecutable, ExecutableRegisterable {
+    /**
+     * The destination that this ByeUsecase would write its content to.
+     */
+    private final Writable writable;
+
     /**
      * Creates a new Bye Usecase.
      *
@@ -12,8 +21,6 @@ public class ByeUsecase implements IdentifiableExecutable, ExecutableRegisterabl
     public ByeUsecase(Writable writable) {
         this.writable = writable;
     }
-
-    private final Writable writable;
 
     @Override
     public ExitStatus execute(String[] tokens) {

@@ -5,12 +5,17 @@ import core.exceptions.InvalidArgumentException;
 import java.util.Set;
 
 /**
- * A ToDo is just a very boring task.
- * Note that this class is not set to public by design. It is supposed to be
- * package private only. Therefore, anything that's related to this task
- * manager shall remain in this task manager.
+ * A {@link ToDo} is just a very boring task.
  */
 public class ToDo extends Task {
+    /**
+     * Creates a new {@link ToDo} object from the tokens.
+     *
+     * @param tokens The keywords after which we retrieve the important
+     *               information.
+     * @throws InvalidArgumentException for a {@link ToDo} object to be
+     *                                  valid, it has to have a name.
+     */
     public ToDo(String[] tokens) throws InvalidArgumentException {
         super(tokens, Set.of(Task.completeKey));
     }

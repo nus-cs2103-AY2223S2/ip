@@ -1,11 +1,11 @@
 package domain.entities.core;
 
 /**
- * The interface for objects that can be run.
+ * The interface for objects that can be executed.
  */
 public interface Executable {
     /**
-     * Runs the executable.
+     * Execute the executable.
      *
      * @param tokens the tokens, i.e. the arguments, for the executable. They
      *               should include the first word.

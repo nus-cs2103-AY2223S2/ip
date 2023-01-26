@@ -3,7 +3,8 @@ package domain.entities.core;
 import core.exceptions.WriteException;
 
 /**
- * An interface wrapping around things that can be written to.
+ * An interface wrapping around things that can be written to. This interface
+ * can throw exceptions.
  */
 public interface ThrowingWritable {
     /**
@@ -12,9 +13,9 @@ public interface ThrowingWritable {
      *
      * @param content the content to be written to the interface.
      * @throws WriteException if the content could not be written to the
-     * interface.
+     *                        interface.
      */
-    public void write(Object content) throws WriteException;
+    void write(Object content) throws WriteException;
 
     /**
      * Write the content to the interface. This will add a new line to the
@@ -22,13 +23,14 @@ public interface ThrowingWritable {
      *
      * @param content the content to be written to the interface.
      * @throws WriteException if the content could not be written to the
-     * interface.
+     *                        interface.
      */
-    public void writeln(Object content) throws WriteException;
+    void writeln(Object content) throws WriteException;
 
     /**
      * Clear the interface.
+     *
      * @throws WriteException if the interface could not be cleared.
      */
-    public void clear() throws WriteException;
+    void clear() throws WriteException;
 }

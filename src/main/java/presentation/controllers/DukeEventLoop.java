@@ -13,13 +13,33 @@ import presentation.ui.SystemOut;
 
 /**
  * The event loop for managing Duke.
+ * <p>
+ * To initialize and facilitate reading data from persistence, use the {@link
+ * #createInitializingLoop()} method.
+ * <p>
+ * To create the actual main event loop, use the {@link #createEventLoop()}
+ * method.
  */
 public class DukeEventLoop extends EventLoop {
+    /**
+     * Creates a {@link DukeEventLoop} instance.
+     *
+     * @param rootExecutable the root executable that this event loop would
+     *                       iterate over and over again.
+     * @param reader         the reader that this event loop would read from.
+     * @param errorWriter    the error writer that this event loop would write
+     *                       errors to.
+     */
     private DukeEventLoop(Executable rootExecutable, StringReadable reader,
                           Writable errorWriter) {
         super(rootExecutable, reader, errorWriter);
     }
 
+    /**
+     * Creates the main event loop for Duke.
+     *
+     * @return the main event loop for Duke.
+     */
     public static DukeEventLoop createEventLoop() {
         // creates a new system in instance. We want to make sure that
         // the scanner is not closed for each event loop, because scanners
@@ -42,6 +62,11 @@ public class DukeEventLoop extends EventLoop {
         return new DukeEventLoop(executable, reader, errorWriter);
     }
 
+    /**
+     * Creates the event loop for initializing Duke.
+     *
+     * @return the event loop for initializing Duke.
+     */
     public static DukeEventLoop createInitializingLoop() {
         final StringReadable readable = Singletons.get(DataLoader.class);
         final Writable errorWriter = Singletons.get(SystemErr.class);

@@ -13,18 +13,30 @@ import java.util.Set;
 
 /**
  * A Deadline is a Task with a deadline.
- * Note that this class is not set to public by design. It is supposed to be
- * package private only. Therefore, anything that's related to this task
- * manager shall remain in this task manager.
  */
 public class Deadline extends Task {
     /**
-<<<<<<< HEAD
+     * The key used for retrieving the deadline.
+     */
+    private static final String deadlineKey = "/by";
+    /**
+     * The set of keys for retrieving the data.
+     */
+    private static final Set<String> delims = Set.of(deadlineKey,
+            Task.completeKey);
+    /**
+     * The deadline.
+     */
+    private final LocalDate deadline;
+
+    /**
+     * <<<<<<< HEAD
      * Creates a new Deadline object from the tokens.
+     *
      * @param tokens The keywords after which we retrieve the important
      *               information.
      * @throws InvalidArgumentException for a deadline object to be valid,
-     * its name must not be null, and it must have a deadline.
+     *                                  its name must not be null, and it must have a deadline.
      */
     public Deadline(String[] tokens) throws InvalidArgumentException {
         super(tokens, delims);
@@ -42,22 +54,6 @@ public class Deadline extends Task {
                     "not in the correct format. Please type it in the format of yyyy-mm-dd");
         }
     }
-
-    /**
-     * The deadline.
-     */
-    private final LocalDate deadline;
-
-    /**
-     * The key used for retrieving the deadline.
-     */
-    private static final String deadlineKey = "/by";
-
-    /**
-     * The set of keys for retrieving the data.
-     */
-    private static final Set<String> delims = Set.of(deadlineKey,
-            Task.completeKey);
 
     @Override
     public boolean containsDate(LocalDate date) {

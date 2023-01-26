@@ -17,7 +17,18 @@ package domain.entities.core;
  * </li>
  */
 public enum ExitStatus {
+    /**
+     * This means that the event loop shall skip the rest of the commands in the
+     * current iteration and continue to the next iteration.
+     */
     finishCurrentIteration,
+    /**
+     * This means that the event loop shall terminate.
+     */
     terminate,
-    continueExecute;
+    /**
+     * This means that the event loop shall continue executing the commands in
+     * the current iteration.
+     */
+    continueExecute
 }

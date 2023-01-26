@@ -5,12 +5,18 @@ import domain.entities.core.StringReadable;
 
 import java.util.Scanner;
 
+/**
+ * The {@link StringReadable} wrapper for the {@link System#in} object.
+ */
 public class SystemIn implements StringReadable, Disposable {
+    private final Scanner scanner;
+
+    /**
+     * Creates a new instance of the {@link SystemIn} class.
+     */
     public SystemIn() {
         this.scanner = new Scanner(System.in);
     }
-
-    private final Scanner scanner;
 
     @Override
     public String nextLine() {

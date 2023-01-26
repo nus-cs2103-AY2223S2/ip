@@ -6,8 +6,34 @@ import domain.entities.DataSaver;
 
 import java.io.*;
 
-
+/**
+ * The implementation of the data saver, which will save the data to a file.
+ */
 public class DataSaverImpl extends DataSaver {
+    /**
+     * The name of the file to which the data will be saved.
+     */
+    final String fileName;
+    /**
+     * The file to which the data will be saved.
+     */
+    final File file;
+    /**
+     * The file writer.
+     */
+    final FileWriter fileWriter;
+    /**
+     * The buffered writer.
+     */
+    final BufferedWriter bufferedWriter;
+
+    /**
+     * Creates a new data saver that will save the data to file with the
+     * given file name.
+     *
+     * @param fileName the name of the file to which the data will be saved.
+     * @throws WriteException if the file could not be created or written to.
+     */
     public DataSaverImpl(String fileName) throws WriteException {
         this.fileName = fileName;
         this.file = new File(fileName);
@@ -26,14 +52,6 @@ public class DataSaverImpl extends DataSaver {
         }
         this.bufferedWriter = new BufferedWriter(fileWriter);
     }
-
-    final String fileName;
-
-    final File file;
-
-    final FileWriter fileWriter;
-
-    final BufferedWriter bufferedWriter;
 
     @Override
     public void write(Object content) throws WriteException {

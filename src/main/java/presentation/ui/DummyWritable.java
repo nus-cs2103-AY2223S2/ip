@@ -3,7 +3,7 @@ package presentation.ui;
 import domain.entities.core.Writable;
 
 /**
- * A dummy implementation of the Writable interface.
+ * A dummy implementation of the {@link Writable} interface.
  */
 public class DummyWritable implements Writable {
     @Override

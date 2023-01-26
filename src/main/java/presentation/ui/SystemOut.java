@@ -3,7 +3,7 @@ package presentation.ui;
 import domain.entities.core.Writable;
 
 /**
- * This will be writing the contents to the System's output stream.
+ * The {@link Writable} wrapper for the {@link System#out} object.
  */
 public class SystemOut implements Writable {
     @Override

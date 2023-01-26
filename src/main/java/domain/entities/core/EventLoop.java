@@ -5,30 +5,30 @@ import core.exceptions.DisposableException;
 /**
  * This shall serve as the base for implementing an event loop. An event loop
  * loops forever unless the executable in it returns ExitStatus.terminate.
+ * Also, when the loop terminates, it will call the dispose method, which
+ * will dispose the things that are registered to the disposables.
  */
 public abstract class EventLoop implements Disposable {
+    /**
+     * The root executable that shall be executed in the loop.
+     */
+    private final Executable rootExecutable;
+    /**
+     * The StringReadable that shall be used for providing the next line of
+     * input to the event loop.
+     */
+    private final StringReadable reader;
+    /**
+     * The writer for writing the error messages.
+     */
+    private final Writable errorWriter;
+
     public EventLoop(Executable rootExecutable, StringReadable reader,
                      Writable errorWriter) {
         this.rootExecutable = rootExecutable;
         this.reader = reader;
         this.errorWriter = errorWriter;
     }
-
-    /**
-     * The root executable that shall be executed in the loop.
-     */
-    private final Executable rootExecutable;
-
-    /**
-     * The StringReadable that shall be used for providing the next line of
-     * input to the event loop.
-     */
-    private final StringReadable reader;
-
-    /**
-     * The writer for writing the error messages.
-     */
-    private final Writable errorWriter;
 
     /**
      * The function for getting the tokens for each loop iteration.

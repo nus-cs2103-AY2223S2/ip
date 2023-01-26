@@ -8,6 +8,7 @@ public interface Identifiable {
     /**
      * Gets the id of the Keyable object, which can be stored as keys for a
      * HashMap.
+     *
      * @return the id of the Keyable object.
      */
     String getId();

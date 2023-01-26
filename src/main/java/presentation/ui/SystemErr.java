@@ -2,6 +2,9 @@ package presentation.ui;
 
 import domain.entities.core.Writable;
 
+/**
+ * The {@link Writable} wrapper for the {@link System#err} object.
+ */
 public class SystemErr implements Writable {
     @Override
     public void write(Object content) {
