@@ -300,7 +300,6 @@ public class Duke {
             System.out.println("Error when loading file, a new file will be created");
         }
     }
-<<<<<<< HEAD
 
     /**
      * Return index of given word
@@ -345,7 +344,3 @@ public class Duke {
         }
     }
 }
-
-=======
-}
->>>>>>> branch-Level-7
