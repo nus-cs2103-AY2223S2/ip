@@ -1,8 +1,10 @@
-public class Event extends Task {
-    protected String start;
-    protected String end;
+import java.time.LocalDateTime;
 
-    public Event(String description, String start, String end) {
+public class Event extends Task {
+    protected LocalDateTime start;
+    protected LocalDateTime end;
+
+    public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
         this.start = start;
         this.end = end;
@@ -11,12 +13,13 @@ public class Event extends Task {
 
     @Override
     public String taskInFileFormat() {
-        return super.taskInFileFormat() + " | " + start + "-" + end;
+        return super.taskInFileFormat() + " | " + start + " to " + end;
     }
 
     @Override
     public String toString() {
-        return "[" + super.type + "]" + super.toString() + " (from: " + start + " to: "
-                + end + ")";
+        return "[" + super.type + "]" + super.toString() + " (from: " + Duke.getDateTimeOutput(start) + " to: "
+                + Duke.getDateTimeOutput(end) + ")";
+
     }
 }
