@@ -52,6 +52,10 @@ public class DukeException extends Exception {
         }
     }
 
+    public DukeException(String msg) {
+        this.message = msg;
+    }
+
     /**
      * @return a string explaining what kind of invalid input has been written.
      */
