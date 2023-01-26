@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
     protected final String DATE_TIME_PARSED = "yyyy-MM-dd HH:mm";
-    protected final String DATE_TIME_TO_PRINT = "MMM d yyyy HH:mm";
+    protected final String DATE_TIME_TO_PRINT = "d MMM yyyy HH:mm";
     protected String from;
     protected String to;
     protected LocalDateTime fromDateTime;
@@ -25,6 +25,14 @@ public class Event extends Task {
         this.from = this.fromDateTime.format(formatterPrint);
         this.toDateTime = LocalDateTime.parse(to, formatterParse);
         this.to = this.toDateTime.format(formatterPrint);
+    }
+
+    public LocalDateTime getDateTimeFrom() {
+        return this.fromDateTime;
+    }
+
+    public LocalDateTime getDateTimeTo() {
+        return this.toDateTime;
     }
 
     public String getFormattedFrom() {

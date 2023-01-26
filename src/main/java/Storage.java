@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
  * Storage which stores a list of tasks to be kept track of
  */
 public class Storage {
+    protected final String DATE_TO_PRINT = "d MMM yyyy";
     protected ArrayList<Task> taskList;
 
     /**
@@ -78,14 +81,44 @@ public class Storage {
     /**
      * Prints out the list of current tasks
      */
-    public void showTasks() {
-        System.out.println("Here are the tasks in your list:");
+    public void showAllTasks() {
+        System.out.println("Here are all the tasks in your list:");
         for (int i = 0; i < this.getNumberOfTasks(); i++) {
             StringBuilder sb = new StringBuilder();
             sb.append(i+1);
             sb.append(".");
             sb.append(this.taskList.get(i));
             System.out.println(sb);
+        }
+    }
+
+    public void showTasksDue(LocalDate byDate) {
+        DateTimeFormatter formatterPrint = DateTimeFormatter.ofPattern(DATE_TO_PRINT);
+        String formattedDueDate = byDate.format(formatterPrint);
+        int j = 1;
+        for (int i = 0; i < this.getNumberOfTasks(); i++) {
+            Task currTask = this.taskList.get(i);
+            StringBuilder sb = new StringBuilder();
+            sb.append(j);
+            sb.append(".");
+            if (currTask instanceof Deadline) {
+                if (((Deadline) currTask).getDateTimeBy().toLocalDate().compareTo(byDate) == 0) {
+                    sb.append(currTask);
+                    System.out.println("Here are the task(s) due on " + formattedDueDate + " :");
+                    System.out.println(sb);
+                    j++;
+                }
+            } else if (currTask instanceof Event) {
+                if (((Event) currTask).getDateTimeTo().toLocalDate().compareTo(byDate) == 0) {
+                    sb.append(currTask);
+                    System.out.println("Here are the task(s) due on " + formattedDueDate + ":");
+                    System.out.println(sb);
+                    j++;
+                }
+            }
+        }
+        if (j == 1) {
+            System.out.println("There are no tasks due on " + formattedDueDate + " :D");
         }
     }
 }

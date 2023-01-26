@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -6,8 +8,10 @@ import java.util.Scanner;
  * Main Bot class which the user may run the program from
  */
 public class JeoBot {
+    protected static final String DATE_PARSE = "yyyy-MM-dd";
+
     public enum Command {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, DUE
     }
 
     /**
@@ -41,7 +45,7 @@ public class JeoBot {
                         System.out.println("Thank you for using JeoBot. Hope to see you again soon!");
                         break;
                     case LIST:
-                        st.showTasks();
+                        st.showAllTasks();
                         break;
                     case MARK:
                         int index = Integer.parseInt(hm.get("index"));
@@ -98,6 +102,15 @@ public class JeoBot {
                         task = new Event(desc, from, to);
                         st.addTask(task);
                         break;
+                    case DUE:
+                        by = hm.get("by");
+                        if (by.isEmpty()) {
+                            throw new JeoException("Please enter a date in the format: \"yyyy-MM-dd\".");
+                        }
+                        DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_PARSE);
+                        LocalDate byDate = LocalDate.parse(by, formatterParse);
+                        st.showTasksDue(byDate);
+                        break;
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println("[Error] Sorry, I don't understand what you're saying :(");
@@ -105,7 +118,7 @@ public class JeoBot {
                 System.out.println("[Error] Task number cannot be negative, zero, or exceed the total number of tasks.");
             } catch (DateTimeParseException e) {
                 System.out.println("[Error] Unable to parse date. " +
-                        "Please input date in the format: \"yyyy-MM-dd HH:mm\"");
+                        "Please input date in the format: \"yyyy-MM-dd HH:mm\".");
             } catch (JeoException e) {
                 System.out.println(e.getMessage());
             }
@@ -172,8 +185,10 @@ public class JeoBot {
             hm.put("command", "delete");
             int i = parseSubStringActions(s, 6);
             hm.put("index", Integer.toString(i-1));
-        }
-        else {
+        } else if (s.toLowerCase().startsWith("due")) {
+            hm.put("command", "due");
+            hm.put("by", s.substring(3).trim());
+        } else {
             hm.put("command", "");
         }
         return hm;
