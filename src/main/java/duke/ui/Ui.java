@@ -1,6 +1,9 @@
 package duke.ui;
 
+import duke.task.Task;
 import duke.tasklist.TaskList;
+
+import java.util.ArrayList;
 
 /**
  * Ui class to perform the outputting tasks to user
@@ -116,6 +119,18 @@ public class Ui {
         sb.append(this.STARTING).append(this.SPACING).append("Noted. I've removed this task:\n  ");
         sb.append(this.SPACING).append(taskString).append(this.SPACING);
         sb.append(String.format("Now you have %d tasks in the list.\n", size)).append(this.ENDING);
+        System.out.println(sb);
+    }
+
+    public void showFindTaskResult(ArrayList<Task> taskArr) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.STARTING).append(this.SPACING).append("Here are the matching tasks in your list:\n");
+        int counter = 1;
+        for (Task task : taskArr) {
+            sb.append(String.format("%s%d.%s", this.SPACING, counter, task.toString()));
+            counter += 1;
+        }
+        sb.append(this.ENDING);
         System.out.println(sb);
     }
 

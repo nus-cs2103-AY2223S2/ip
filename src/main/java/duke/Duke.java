@@ -21,7 +21,6 @@ public class Duke {
      * Function that runs the Duke CLI
      */
     public void run() {
-        boolean end = false;
         Scanner sc = new Scanner(System.in);
         Ui ui = new Ui();
         TaskList tl = new TaskList();
@@ -32,6 +31,7 @@ public class Duke {
         while (true){
             try {
                 String str = sc.nextLine();
+                System.out.println(str);
                 Command command = parser.parse(str);
                 if (Objects.equals(command, null)) {
                     break;
