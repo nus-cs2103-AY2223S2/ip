@@ -1,3 +1,5 @@
+package src.main.java;
+
 public class Task {
     private String task;
     private boolean isMarked = false;

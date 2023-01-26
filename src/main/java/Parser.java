@@ -1,3 +1,5 @@
+package src.main.java;
+
 public class Parser {
     /** 
      * Creates task and stores it in Task arraylist.

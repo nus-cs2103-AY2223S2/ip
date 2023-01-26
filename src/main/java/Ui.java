@@ -1,3 +1,5 @@
+package src.main.java;
+
 public class Ui {
     /** 
      * Outputs given string with formatting.

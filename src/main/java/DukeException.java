@@ -1,3 +1,5 @@
+package src.main.java;
+
 public class DukeException extends Exception {
     /** 
      * A public constructor to initialize DukeException instance.
