@@ -62,6 +62,12 @@ public class Parser {
                 this.tasks.setToMark(indx);
                 System.out.println("Nice! I've marked this task as done:\n" + task);
                 break;
+            case "find":
+                String toSearch = arrOfStr[1];
+                TaskList toPrint = this.tasks.search(toSearch);
+                System.out.println("Here are the matching tasks in your list:");
+                toPrint.printList();
+                break;
             case "todo":
                 task = new Todo(arrOfStr[1]);
                 System.out.println("Very nice. I've added this task:\n" + task);

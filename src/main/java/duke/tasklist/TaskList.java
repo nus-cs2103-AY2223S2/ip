@@ -41,6 +41,17 @@ public class TaskList {
         return arrList.get(index - 1);
     }
 
+    public TaskList search(String toFind) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for(Task tasks : arrList) {
+            if(tasks.description.contains(toFind)) {
+                matchingTasks.add(tasks);
+            }
+        }
+        TaskList toReturn = new TaskList(matchingTasks);
+        return toReturn;
+    }
+
     public void printList() {
         int counter = 0;
         for (Task i : arrList) {
