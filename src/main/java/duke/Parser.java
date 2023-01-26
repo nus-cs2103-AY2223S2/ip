@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
-    Parser() {}
-    
+    Parser() {
+    }
+
     public Command parseCommand(String input) {
         List<String> arguments = new ArrayList<>();
         if (input.equals("bye")) {
@@ -13,7 +14,7 @@ public class Parser {
         } else if (input.equals("list")) {
             return new Command("list", arguments);
         } else if (input.startsWith("mark")) {
-            if (! input.matches("^mark \\d+$")) {
+            if (!input.matches("^mark \\d+$")) {
                 arguments.add("Please enter one task which you would like to mark as done.\n");
                 return new Command("invalid", arguments);
             } else {
@@ -22,7 +23,7 @@ public class Parser {
                 return new Command("mark", arguments);
             }
         } else if (input.startsWith("unmark")) {
-            if (! input.matches("^unmark \\d+$")) {
+            if (!input.matches("^unmark \\d+$")) {
                 arguments.add("Please enter one task which you would like to mark as undone.\n");
                 return new Command("invalid", arguments);
             } else {
@@ -31,7 +32,7 @@ public class Parser {
                 return new Command("unmark", arguments);
             }
         } else if (input.startsWith("todo")) {
-            if (! input.matches("^todo .+$")) {
+            if (!input.matches("^todo .+$")) {
                 arguments.add("Please enter the task you would like to do in the format \n>> todo [task]\n");
                 return new Command("invalid", arguments);
             } else {
@@ -40,7 +41,7 @@ public class Parser {
                 return new Command("todo", arguments);
             }
         } else if (input.startsWith("deadline")) {
-            if (! input.matches("^deadline .+ /by .+$")) {
+            if (!input.matches("^deadline .+ /by .+$")) {
                 arguments.add("Sorry, that command is invalid. Specify a deadline task with \n >> deadline [description] /by [time]\n");
                 return new Command("invalid", arguments);
             } else {
@@ -52,7 +53,7 @@ public class Parser {
                 return new Command("deadline", arguments);
             }
         } else if (input.startsWith("event")) {
-            if (! input.matches("^event .+ /from .+ /to .+$")) {
+            if (!input.matches("^event .+ /from .+ /to .+$")) {
                 arguments.add("Sorry, that command is invalid. Specify an event task with \n >> event [description] /from [start time] /to [end time]\n");
                 return new Command("invalid", arguments);
             } else {
@@ -70,7 +71,7 @@ public class Parser {
                 return new Command("event", arguments);
             }
         } else if (input.startsWith("delete")) {
-            if (! input.matches("^delete \\d+$")) {
+            if (!input.matches("^delete \\d+$")) {
                 arguments.add("Tell me the index of the event you want to delete! Type >>list to view your events again.\n");
                 return new Command("invalid", arguments);
             } else {
@@ -82,7 +83,7 @@ public class Parser {
             return new Command("noMatch", arguments);
         }
     }
-    
+
     public Task parseTask(String data) {
         String[] arguments = data.split("~-~-~");
         if (arguments[0].equals("todo")) {
@@ -92,6 +93,5 @@ public class Parser {
         } else {
             return new Event(arguments[1], arguments[4].equals("X"), arguments[2], arguments[3]);
         }
-        
     }
 }

@@ -35,10 +35,10 @@ public class CommandHandlerTest {
     public void markTask_taskPresent_markedResponse() {
         List<String> argument = new ArrayList<String>();
         argument.add("1");
-        assertEquals("Okay! I've marked this task as done!\n[D][X] Tutorial (by: Tomorrow 3pm)\n",
+        assertEquals("Okay! I've marked this task as done!\n[D][X] Tutorial (by: 28 Feb 2024 11:59PM)\n",
                 new CommandHandler().handleCommand(
                         new Command("mark", argument),
-                        new TaskList().add(new Deadline("Tutorial", "Tomorrow 3pm"))));
+                        new TaskList().add(new Deadline("Tutorial", "28/02/2024 2359"))));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class CommandHandlerTest {
         assertEquals("You don't have that many tasks!\n",
                 new CommandHandler().handleCommand(
                         new Command("mark", argument),
-                        new TaskList().add(new Deadline("Tutorial", "Tomorrow 3pm"))));
+                        new TaskList().add(new Deadline("Tutorial", "2359"))));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CommandHandlerTest {
                 new CommandHandler().handleCommand(
                         new Command("unmark", argument),
                         new TaskList()
-                                .add(new Deadline("Tutorial", "Tomorrow 3pm"))
+                                .add(new Deadline("Tutorial", "2222"))
                                 .add(new Todo("Find girlfriend"))
                 )
         );
@@ -73,7 +73,7 @@ public class CommandHandlerTest {
                 new CommandHandler().handleCommand(
                         new Command("unmark", argument),
                         new TaskList()
-                                .add(new Deadline("Tutorial", "Tomorrow 3pm"))
+                                .add(new Deadline("Tutorial", "2359"))
                                 .add(new Todo("Find girlfriend"))
                 )
         );
@@ -95,8 +95,8 @@ public class CommandHandlerTest {
     public void testAddDeadline() {
         List<String> argument = new ArrayList<String>();
         argument.add("Project");
-        argument.add("4pm");
-        assertEquals("Added: [D][ ] Project (by: 4pm)\n",
+        argument.add("31/12/2022 1330");
+        assertEquals("Added: [D][ ] Project (by: 31 Dec 2022 01:30PM)\n",
                 new CommandHandler().handleCommand(
                         new Command("deadline", argument),
                         new TaskList()
@@ -108,9 +108,9 @@ public class CommandHandlerTest {
     public void testAddEvent() {
         List<String> argument = new ArrayList<String>();
         argument.add("Project meeting");
-        argument.add("4pm");
-        argument.add("5pm");
-        assertEquals("Added: [E][ ] Project meeting (4pm - 5pm)\n",
+        argument.add("31/12/2022 1130");
+        argument.add("31/12/2022 1230");
+        assertEquals("Added: [E][ ] Project meeting (31 Dec 2022 11:30AM - 31 Dec 2022 12:30PM)\n",
                 new CommandHandler().handleCommand(
                         new Command("event", argument),
                         new TaskList()
@@ -132,10 +132,10 @@ public class CommandHandlerTest {
     public void deleteEvent_taskPresent_deletedResponse() {
         List<String> argument = new ArrayList<String>();
         argument.add("1");
-        assertEquals("Okay! I deleted task [D][ ] Tutorial (by: Tomorrow 3pm)\n",
+        assertEquals("Okay! I deleted task [D][ ] Tutorial (by: 31 Jan 2023 11:59PM)\n",
                 new CommandHandler().handleCommand(
                         new Command("delete", argument),
-                        new TaskList().add(new Deadline("Tutorial", "Tomorrow 3pm"))));
+                        new TaskList().add(new Deadline("Tutorial", "31/01/2023 2359"))));
     }
     
     @Test

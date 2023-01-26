@@ -1,19 +1,21 @@
 package duke;
 
+import java.time.LocalDateTime;
+
 public class Event extends Task {
-    private String startTime;
-    private String endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     public Event(String description, boolean isDone, String startTime, String endTime) {
         super(description, isDone);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = DateTimeParser.parseInput(startTime);
+        this.endTime = DateTimeParser.parseInput(endTime);
     }
 
     public Event(String description, String startTime, String endTime) {
         super(description);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = DateTimeParser.parseInput(startTime);
+        this.endTime = DateTimeParser.parseInput(endTime);
     }
 
     @Override
@@ -21,12 +23,12 @@ public class Event extends Task {
         return String.format("[E][%s] %s (%s - %s)",
                 (super.isDone() ? "X" : " "),
                 super.getDescription(),
-                this.startTime,
-                this.endTime);
+                DateTimeParser.formatOutput(this.startTime),
+                DateTimeParser.formatOutput(this.endTime));
     }
     
     @Override
     public String formatTask() {
-        return String.format("event~-~-~%s~-~-~%s~-~-~%s~-~-~%s", this.getDescription(), this.startTime, this.endTime, this.isDone() ? "X" : "O");
+        return String.format("event~-~-~%s~-~-~%s~-~-~%s~-~-~%s", this.getDescription(), DateTimeParser.formatSave(this.startTime), DateTimeParser.formatSave(this.endTime), this.isDone() ? "X" : "O");
     }
 }
