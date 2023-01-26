@@ -10,33 +10,34 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> taskList) {
-        this.tasks = taskList;
+        tasks = taskList;
     }
 
     public void addTask(Task task) {
-        this.tasks.add(task);
+        tasks.add(task);
     }
 
     public Task deleteTask(int index) {
-        return this.tasks.remove(index);
+        return
+                tasks.remove(index);
     }
 
     public Task getTask(int index) {
-        return this.tasks.get(index);
+        return tasks.get(index);
     }
 
     public Task markTaskAsDone(int index) {
-        Task task = this.tasks.get(index);
+        Task task = tasks.get(index);
         task.markDone();
         return task;
     }
 
     public Task unmarkTaskAsDone(int index) {
-        Task task = this.tasks.get(index);
+        Task task = tasks.get(index);
         task.unmarkDone();
         return task;
     }
@@ -44,7 +45,7 @@ public class TaskList {
     public ArrayList<Task> getAllTasksThatAreDueOn(LocalDate dueOnDate) {
         ArrayList<Task> arrayList = new ArrayList<>();
 
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
             if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
 
@@ -58,17 +59,17 @@ public class TaskList {
     }
 
     public int getSize() {
-        return this.tasks.size();
+        return tasks.size();
     }
 
     public boolean isEmpty() {
-        return this.tasks.size() == 0;
+        return tasks.size() == 0;
     }
 
     public String toDukeFileString() {
         ArrayList<String> output = new ArrayList<>();
 
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
             output.add(task.toDukeFileString() + "\n");
         }
 

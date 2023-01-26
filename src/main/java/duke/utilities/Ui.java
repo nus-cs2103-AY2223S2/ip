@@ -7,7 +7,7 @@ public class Ui {
     private final Scanner sc;
 
     public Ui() {
-        this.sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     public void showWelcomeMessage() {
@@ -34,6 +34,6 @@ public class Ui {
     }
 
     public String readLine() {
-        return this.sc.nextLine();
+        return sc.nextLine();
     }
 }

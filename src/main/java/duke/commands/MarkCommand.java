@@ -17,7 +17,7 @@ public class MarkCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidMarkCommandException {
 
-        if (this.tokens.length != 2) {
+        if (tokens.length != 2) {
             throw new DukeInvalidMarkCommandException();
         }
 

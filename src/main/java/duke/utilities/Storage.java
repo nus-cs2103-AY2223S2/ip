@@ -14,7 +14,7 @@ public class Storage {
     private final File file;
 
     public Storage(String filePath) {
-        this.file = new File(filePath);
+        file = new File(filePath);
     }
 
     public ArrayList<Task> loadTaskList() throws DukeInvalidFileFormatException {
@@ -22,7 +22,7 @@ public class Storage {
         Scanner sc;
 
         try {
-            sc = new Scanner(this.file);
+            sc = new Scanner(file);
         } catch (FileNotFoundException e) {
             // if this is a new user, there'll be no `duke.txt` to load from disk
             return arrayList;
@@ -41,7 +41,7 @@ public class Storage {
     public void saveTaskList(TaskList taskList) {
         try {
             // overwrite old file
-            FileWriter fw = new FileWriter(this.file, false);
+            FileWriter fw = new FileWriter(file, false);
             fw.write(taskList.toDukeFileString());
             fw.close();
         } catch (IOException e) {
