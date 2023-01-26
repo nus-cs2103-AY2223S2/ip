@@ -21,6 +21,10 @@ public class Ui {
         System.out.println("Hello! I'm " + name + " !");
     }
 
+    public void printExit() {
+        System.out.println("BUH BYE!");
+    }
+
     public String readCommand() {
         System.out.println("What can I do for you today?\n");
         String input = sc.nextLine();
@@ -28,4 +32,7 @@ public class Ui {
         return input;
     }
 
+    public void closeScanner() {
+        sc.close();
+    }
 }
