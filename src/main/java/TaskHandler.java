@@ -27,8 +27,7 @@ public class TaskHandler {
     }
 
     public String markAsDone(String input) {
-        String num = input.split(" ")[1];
-        int index = Integer.parseInt(num) - 1;
+        int index = Parser.findIndex(input);
         int listIndex = index + 1;
         if (! content.isEmpty()) {
             content.get(index).setDone();
@@ -39,8 +38,7 @@ public class TaskHandler {
     }
 
     public String markAsUndone(String input) {
-        String num = input.split(" ")[1];
-        int index = Integer.parseInt(num) - 1;
+        int index = Parser.findIndex(input);
         int listIndex = index + 1;
         if (content.isEmpty()) {
             return "No such task.";
@@ -58,8 +56,7 @@ public class TaskHandler {
         if (input.length() < 7) {
             throw new EmptyContentException("event");
         }
-        String[] splitCommand = input.split(" ", 2);
-        String[] segments = splitCommand[1].split("/");
+        String[] segments = Parser.parseTask(input);
         String item = segments[0];
         String startTime = segments[1];
         String endTime = segments[2];
@@ -76,8 +73,8 @@ public class TaskHandler {
         if (input.length() < 5) {
             throw new EmptyContentException("todo");
         }
-        String[] splitCommand = input.split(" ", 2);
-        String item = splitCommand[1];
+        String[] segments = Parser.parseTask(input);
+        String item = segments[1];
 
         if (item.isEmpty()) {
             throw new EmptyContentException("todo");
@@ -92,8 +89,7 @@ public class TaskHandler {
         if (input.length() < 9) {
             throw new EmptyContentException("deadline");
         }
-        String[] splitCommand = input.split(" ", 2);
-        String[] segments = splitCommand[1].split("/");
+        String[] segments = Parser.parseTask(input);
         String item = segments[0];
         String deadline = segments[1];
 
@@ -111,9 +107,8 @@ public class TaskHandler {
         if (input.length() < 7) {
             throw new EmptyContentException("delete");
         }
-        String[] splitCommand = input.split(" ", 2);
-        int index = Integer.parseInt(splitCommand[1]) - 1;
-        if (index >= content.size() || index < 1) {
+        int index = Parser.findIndex(input);
+        if (index > content.size() || index < 1) {
             throw new InvalidTaskAccessException();
         } else {
             String taskContent = content.get(index).toString();

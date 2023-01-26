@@ -47,9 +47,9 @@ public class Storage {
                 if (type.equals("todo")) {
                     currentTask = new Todo(sections[2]);
                 } else if (type.equals("deadline")) {
-                    currentTask = new Deadline(sections[2], sections[3]);
+                    currentTask = new Deadline(sections[2], Parser.retrieveDate(sections[3]));
                 } else if (type.equals("event")) {
-                    currentTask = new Event(sections[2], sections[3], sections[4]);
+                    currentTask = new Event(sections[2], Parser.retrieveDate(sections[3]), Parser.retrieveDate(sections[4]));
                 } else {
                     System.out.println("error");
                 }

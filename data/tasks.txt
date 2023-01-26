@@ -1,3 +1,1 @@
-event / done / project meeting  / from Mon 2pm  / to 4pm
-deadline / undone / return book  / by Sunday
-todo / undone / borrow book
+deadline / done / return book  / Dec 13 2000 1200
