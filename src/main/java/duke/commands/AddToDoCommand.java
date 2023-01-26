@@ -11,9 +11,23 @@ public class AddToDoCommand extends Command{
 
     private String userInput;
 
+    /**
+     * Constructor for the AddToDoCommand class.
+     *
+     * @param userInput Given user input parsed by parser.
+     */
     public AddToDoCommand(String userInput) {
         this.userInput = userInput;
     }
+
+    /**
+     * Adds a ToDo task to the given TaskList.
+     * Displays success message if task is added or throw exception if fails.
+     *
+     * @param tasks The TaskList to add the new task.
+     * @param ui Ui given by Duke.
+     * @param storage Storage for storing the newly created task.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         String[] inputs = userInput.split(" ");

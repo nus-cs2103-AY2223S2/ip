@@ -6,11 +6,17 @@ import duke.ui.Ui;
 
 public class ExitCommand extends Command{
 
+    /**
+     * Indicates the command is exit
+     */
     @Override
     public boolean isExit() {
         return true;
     }
 
+    /**
+     * Displays goodbye message.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showGoodbyeMessage();
