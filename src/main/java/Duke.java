@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.time.LocalDate;
+
 public class Duke {
     private static final String DIV_OPEN = "____________________________________________________________\n";
     private static final String DIV_CLOSE = "____________________________________________________________\n";
@@ -137,6 +139,7 @@ public class Duke {
         for (int i = by + 2; i < len; i++) {
             byWhen.append(" ").append(args[i]);
         }
+        LocalDate byDate = LocalDate.parse(byWhen.toString());
         Deadline deadline = new Deadline(taskName.toString(), byWhen.toString());
         list.add(deadline);
         System.out.println("Got it. I've added this task:\n  " + list.get(listNum));
