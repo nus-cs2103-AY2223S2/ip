@@ -1,14 +1,25 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
-  protected String by;
+  protected LocalDate by;
 
   public Deadline(String description, String by) {
     super(description);
-    this.by = by;
+    try {
+      this.by = LocalDate.parse(by);
+    } catch (DateTimeParseException e) {
+      throw DukeException.DATETIME_FORMAT;
+    } catch (Exception e) {
+      throw new DukeException("Unknown error occurred when parsing datetime.");
+    }
   }
 
   @Override
   public String toString() {
-    return String.format("[D]%s (by: %s)", super.toString(), this.by);
+    String formattedBy = by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    return String.format("[D]%s (by: %s)", super.toString(), formattedBy);
   }
 }
