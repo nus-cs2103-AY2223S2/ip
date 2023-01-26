@@ -28,15 +28,19 @@ public class Duke {
         System.out.println("\nHello, I'm Duke");
         System.out.println("What can I do for you?");
         Scanner sc = new Scanner(System.in);
-        String bye = "bye";
+        FileSaver file = new FileSaver("./data/duke.txt");
+        listOfAction = file.load();
         String s = "";
 
         String newLine = sc.nextLine();
         String[] arr = newLine.split(" ");
         s = arr[0];
 
-        int i = 0;
-        while (!bye.equals(s)) {
+        int len = 0;
+        while (listOfAction[len] != null) {
+            len++;
+        }
+        while (!s.equals("bye")) {
             String remaining = "";
             try {
             action myAction = action.valueOf(s);
@@ -64,6 +68,7 @@ public class Duke {
                             String original = listOfAction[num];
                             listOfAction[num] = String.format("%s[X] %s", original.substring(0, 3), original.substring(7));
                             System.out.println(listOfAction[num]);
+                            file.overwrite(listOfAction);
                         }
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
@@ -79,6 +84,7 @@ public class Duke {
                             String original = listOfAction[num1];
                             listOfAction[num1] = String.format("%s[ ] %s", original.substring(0, 3), original.substring(7));
                             System.out.println(listOfAction[num1]);
+                            file.overwrite(listOfAction);
                         }
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
@@ -93,8 +99,8 @@ public class Duke {
                             System.out.println("Noted. I've removed this task:");
                             String original = listOfAction[num1];
                             System.out.println(original);
-                            i--;
-                            System.out.println(String.format("Now you have %d tasks in the list", i));
+                            len--;
+                            System.out.println(String.format("Now you have %d tasks in the list", len));
                             int trace = num1;
                             String[] originalList = new String[100];
                             for (int k = 0; k < 100; k++) {
@@ -108,6 +114,7 @@ public class Duke {
                                 listOfAction[trace] = originalList[trace + 1];
                                 trace++;
                             }
+                            file.overwrite(listOfAction);
                         }
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
@@ -123,10 +130,11 @@ public class Duke {
                             remaining += arr[j];
                             remaining += " ";
                         }
-                        listOfAction[i] = String.format("[T][ ] %s", remaining);
-                        System.out.println(listOfAction[i]);
-                        System.out.println(String.format("Now you have %d tasks in the list", i + 1));
-                        i++;
+                        listOfAction[len] = String.format("[T][ ] %s", remaining);
+                        System.out.println(listOfAction[len]);
+                        System.out.println(String.format("Now you have %d tasks in the list", len + 1));
+                        len++;
+                        file.overwrite(listOfAction);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
@@ -149,10 +157,11 @@ public class Duke {
                             }
                         }
                         remaining += ")";
-                        listOfAction[i] = String.format("[D][ ]%s", remaining);
-                        System.out.println(listOfAction[i]);
-                        System.out.println(String.format("Now you have %d tasks in the list", i + 1));
-                        i++;
+                        listOfAction[len] = String.format("[D][ ]%s", remaining);
+                        System.out.println(listOfAction[len]);
+                        System.out.println(String.format("Now you have %d tasks in the list", len + 1));
+                        len++;
+                        file.overwrite(listOfAction);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
@@ -184,17 +193,18 @@ public class Duke {
                             }
                         }
                         remaining += ")";
-                        listOfAction[i] = String.format("[E][ ]%s", remaining);
-                        System.out.println(listOfAction[i]);
-                        System.out.println(String.format("Now you have %d tasks in the list", i + 1));
-                        i++;
+                        listOfAction[len] = String.format("[E][ ]%s", remaining);
+                        System.out.println(listOfAction[len]);
+                        System.out.println(String.format("Now you have %d tasks in the list", len + 1));
+                        len++;
+                        file.overwrite(listOfAction);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                 }
                     break;
             }
             } catch (IllegalArgumentException e) {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
             newLine = sc.nextLine();
