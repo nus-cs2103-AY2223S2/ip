@@ -11,7 +11,7 @@ public class AquaEvent extends AquaTask {
     /** Tag of {@code from} argument when parsing. */
     public static final String TAG_FROM = "from";
     /** Tag of {@code to} argument when parsing. */
-    public static final String TO_TAG = "to";
+    public static final String TAG_TO = "to";
 
     /** If the event is completed. */
     private final boolean isComplete;
@@ -78,7 +78,7 @@ public class AquaEvent extends AquaTask {
         return String.format("event %s /%s %s /%s %s /%s %s",
                 getName(),
                 TAG_FROM, from,
-                TO_TAG, to,
+                TAG_TO, to,
                 TAG_IS_COMPLETE, isComplete);
     }
 
