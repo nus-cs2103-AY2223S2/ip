@@ -41,4 +41,8 @@ delete 999
 delete abc
 delete 1
 list
+find
+find abc
+find abc 123
+find assignment
 bye

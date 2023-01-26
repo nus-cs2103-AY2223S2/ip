@@ -32,6 +32,10 @@ public class Task {
         isDone = false;
     }
 
+    public boolean matchName(String name) {
+        return this.name.contains(name);
+    }
+
     /**
      * Converts the entire task to a string. This string is to be stored on the disk.
      *

@@ -20,7 +20,8 @@ public class TaskList {
     }
 
     /**
-     * Instantiates a new {@code TaskList} object from the {@code taskList} provided.
+     * Instantiates a new {@code TaskList} object from the {@code taskList}
+     * provided.
      */
     public TaskList(ArrayList<Task> taskList) {
         tasks = taskList;
@@ -42,8 +43,7 @@ public class TaskList {
      * @return The task that was deleted.
      */
     public Task deleteTask(int index) {
-        return
-                tasks.remove(index);
+        return tasks.remove(index);
     }
 
     /**
@@ -102,6 +102,21 @@ public class TaskList {
         return arrayList;
     }
 
+    public ArrayList<String> findTasks(String name) {
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+
+            if (task.matchName(name)) {
+                String indexString = Integer.toString(i + 1);
+                arrayList.add(indexString + ". " + task);
+            }
+        }
+
+        return arrayList;
+    }
+
     /**
      * Returns the size of the task list.
      *
@@ -121,7 +136,8 @@ public class TaskList {
     }
 
     /**
-     * Converts the entire task list to a string. This string is to be stored on the disk.
+     * Converts the entire task list to a string. This string is to be stored on the
+     * disk.
      *
      * @return A string representing the entire task list.
      */
