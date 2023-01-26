@@ -31,10 +31,10 @@ public class MainWindow extends AnchorPane {
 
     private final Image userImage = new Image(Objects.requireNonNull(this
             .getClass()
-            .getResourceAsStream("/images/Jarvis.jpg")));
+            .getResourceAsStream("/images/User.png")));
     private final Image jarvisImage = new Image(Objects.requireNonNull(this
             .getClass()
-            .getResourceAsStream("/images/User.png")));
+            .getResourceAsStream("/images/Jarvis.jpg")));
 
     @FXML
     public void initialize() {
@@ -43,6 +43,9 @@ public class MainWindow extends AnchorPane {
 
     public void setJarvis(Jarvis jarvis) {
         this.jarvis = jarvis;
+
+        this.userInput.setText("Hi");
+        this.handleUserInput();
     }
 
     @FXML
@@ -51,11 +54,11 @@ public class MainWindow extends AnchorPane {
             return;
         }
 
-        Label inputText = new Label(userInput.getText());
-        Label jarvisText = new Label(jarvis.getResponse(userInput.getText()));
+        String inputText = userInput.getText();
+        String jarvisText = jarvis.getResponse(inputText);
         chatContainer.getChildren().addAll(
-                new MessageBox(inputText, new ImageView(userImage)),
-                new MessageBox(jarvisText, new ImageView(jarvisImage)).flip()
+                new MessageBox(inputText, userImage),
+                new MessageBox(jarvisText, jarvisImage).flip()
         );
         userInput.clear();
     }

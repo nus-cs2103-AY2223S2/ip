@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * Container class for a chat message.
@@ -21,27 +23,15 @@ public class MessageBox extends HBox {
     @FXML
     private Label messageText;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPicture;
 
     /**
      * Constructor for a message box.
      *
-     * @param messageText Message label.
-     * @param displayPicture Display picture image view.
+     * @param message Message to display.
+     * @param image Display picture.
      */
-    public MessageBox(Label messageText, ImageView displayPicture) {
-        this.messageText = messageText;
-        this.displayPicture = displayPicture;
-
-        this.messageText.setWrapText(true);
-        this.displayPicture.setFitHeight(50);
-        this.displayPicture.setFitWidth(50);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(this.messageText, this.displayPicture);
-    }
-
-    private MessageBox(String message, Image image) {
+    public MessageBox(String message, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MessageBox.fxml"));
             fxmlLoader.setController(this);
@@ -52,7 +42,7 @@ public class MessageBox extends HBox {
         }
 
         messageText.setText(message);
-        displayPicture.setImage(image);
+        displayPicture.setFill(new ImagePattern(image));
     }
 
     /**
