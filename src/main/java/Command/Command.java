@@ -7,7 +7,11 @@ import storage.Storage;
 
 public class Command {
 
-    private final Storage s = new Storage();
+    private final Storage s;
+
+    public Command(Storage s) {
+        this.s = s;
+    }
 
     public void readCommand() {
         Scanner scanner = new Scanner(System.in);
@@ -33,7 +37,7 @@ public class Command {
             command = scanner.nextLine();
         }
 
-        new Exit();
+        new Exit(s);
     }
 
 }

@@ -1,16 +1,80 @@
 package storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import leoException.IncorrectMarkException;
 import leoException.LeoException;
 import leoException.NoTaskFoundException;
+import leoException.NoStorageFileException;
 
 public class Storage {
 
     private final List<Task> data;
+    private final String dataFilePath;
+    private final File taskFile;
 
-    public Storage() {
-        this.data = new ArrayList<>();
+    public Storage(String filePath) throws NoStorageFileException, IncorrectMarkException {
+        String root = Paths.get("").toAbsolutePath().toString();
+        this.dataFilePath = Paths.get(root, filePath).toString();
+
+        this.taskFile = new File(this.dataFilePath);
+        this.data = loadData();
+    }
+
+    private List<Task> loadData() throws IncorrectMarkException, NoStorageFileException {
+        List<Task> taskList = new ArrayList<>();
+        if (!taskFile.exists()) {
+            return taskList;
+        }
+
+        try {
+            Scanner scanner = new Scanner(taskFile);
+            while (scanner.hasNextLine()) {
+                String task = scanner.nextLine().strip();
+                char taskType = task.charAt(1);
+                char completion = task.charAt(4);
+                String description = task.substring(7).strip();
+
+                try {
+                    if (taskType == 'T') {
+                        Task t = new ToDo(description);
+                        if (completion == 'X')
+                            t.mark();
+                        taskList.add(t);
+                    } else {
+                        String[] temp = description.split("\\|");
+                        String taskDescription = temp[0].strip();
+                        String time = temp[1].strip();
+                        if (taskType == 'D') {
+                            Task t = new Deadline(taskDescription, time);
+                            if (completion == 'X')
+                                t.mark();
+                            taskList.add(t);
+                        } else if (taskType == 'E') {
+                            String[] duration = time.split("-");
+                            String from = duration[0].strip();
+                            String to = duration[1].strip();
+                            Task t = new Event(taskDescription, from, to);
+                            if (completion == 'X')
+                                t.mark();
+                            taskList.add(t);
+                        }
+                    }
+                } catch (LeoException e) {
+                    throw new IncorrectMarkException("Leo: This task was already marked previously.");
+                }
+            }
+            return taskList;
+        } catch (FileNotFoundException e) {
+            throw new NoStorageFileException("Leo: No file found!! >:-(");
+        }
     }
 
     public void addTask(Task task) {
@@ -71,6 +135,29 @@ public class Storage {
             return data.get(num);
         } catch (Exception e) {
             throw new NoTaskFoundException("Leo: Hm, this task does not exist...");
+        }
+    }
+
+    public String getDataFilePath() {
+        return this.dataFilePath;
+    }
+
+    public int getDataLength() {
+        return data.size();
+    }
+
+    public void writeToFile() throws NoStorageFileException {
+        try {
+            int len = getDataLength();
+            FileWriter fileWriter = new FileWriter(getDataFilePath());
+
+            for (int i = 0; i < len; i++) {
+                fileWriter.write(data.get(i).saveFormat());
+            }
+
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new NoStorageFileException("Leo: No file found!! >:-(");
         }
     }
 

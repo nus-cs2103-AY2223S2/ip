@@ -13,10 +13,15 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + status() + getTask() + duration();
+        return "[E]" + status() + getTask() + " (" + duration() + ")";
     }
 
     private String duration() {
-        return " (" + this.from + " - " + this.to + ")";
+        return this.from + " - " + this.to;
+    }
+
+    @Override
+    public String saveFormat() {
+        return "[E]" + status() + getTask() + " | " + duration() + "\n";
     }
 }

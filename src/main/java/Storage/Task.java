@@ -4,6 +4,7 @@ import leoException.IncorrectMarkException;
 import leoException.IncorrectUnmarkException;
 
 public class Task {
+
     protected String task;
     protected boolean done;
 
@@ -32,5 +33,9 @@ public class Task {
             throw new IncorrectUnmarkException("Leo: This task has not been marked.");
         }
         this.done = false;
+    }
+
+    public String saveFormat() {
+        return task;
     }
 }

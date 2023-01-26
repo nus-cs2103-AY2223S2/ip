@@ -11,10 +11,15 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + status() + getTask() + getDeadline();
+        return "[D]" + status() + getTask() + " (by: " + getDeadline() + ")";
     }
 
-     private String getDeadline() {
-        return " (by: " + this.deadline + ")";
+    public String getDeadline() {
+        return this.deadline;
+    }
+
+    @Override
+    public String saveFormat() {
+        return "[D]" + status() + getTask() + " | " + getDeadline() + "\n";
      }
 }
