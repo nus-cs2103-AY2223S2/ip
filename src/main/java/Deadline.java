@@ -22,4 +22,9 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("[D][%c] %s(by:%s)", this.getStatusIcon(), this.description, this.deadline);
     }
+
+    @Override
+    public String getRawTask() {
+        return String.format("D ~ %d ~ %s~%s\n", isDone ? 1 : 0, this.description, this.deadline);
+    }
 }

@@ -27,4 +27,9 @@ public class Event extends Task {
         return String.format("[E][%c] %s(from:%sto:%s)", this.getStatusIcon(), this.description
                 , this.startDatetime, this.endDatetime);
     }
+
+    @Override
+    public String getRawTask() {
+        return String.format("E ~ %d ~ %s~%s~%s\n", isDone ? 1 : 0, this.description, this.startDatetime, this.endDatetime);
+    }
 }

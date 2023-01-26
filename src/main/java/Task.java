@@ -40,4 +40,8 @@ public class Task {
     public String toString() {
         return String.format("[%c] %s", this.getStatusIcon(), this.description);
     }
+
+    public String getRawTask() {
+        return String.format("T ~ %d ~ %s\n", isDone ? 1 : 0, this.description);
+    }
 }
