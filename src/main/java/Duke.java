@@ -5,8 +5,6 @@ import duke.storage.Storage;
 import duke.task.*;
 import duke.command.*;
 
-
-
 /**
  * Main Duke class which keep track a list of tasks
  */
