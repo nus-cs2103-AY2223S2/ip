@@ -18,40 +18,60 @@ public class Duke {
         return "Hello! I'm Luminus\nWhat can I do for you?";
     }
 
-    private void toDo(String input) {
-        String description = input.substring(5);
-        ToDo temp = new ToDo((description));
-        list.add(temp);
-        s.write(temp);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(temp);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    /**
+     * Adds new todo task
+     * @param input Input Chat which starts with "todo"
+     * @throws StringIndexOutOfBoundsException if input format isn't correct
+     */
+    private void toDo(String input) throws StringIndexOutOfBoundsException  {
+        try {
+            ToDo temp = ToDo.createToDo(input);
+            list.add(temp);
+            s.write(temp);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(temp);
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        } catch (StringIndexOutOfBoundsException IOBE) {
+            System.out.println("OOPS!!! The description of a todo cannot be empty.");
+        }
     }
 
-    private void event(String input) {
-        int index1 = input.indexOf("/");
-        int index2 = input.lastIndexOf("/");
-        String description = input.substring(6,index1 - 1);
-        String from = input.substring(index1 + 6, index2 - 1);
-        String to = input.substring(index2 + 4);
-        Event temp = new Event(description,from,to);
-        list.add(temp);
-        s.write(temp);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(temp);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    /**
+     * Adds new event task
+     * @param input Input Chat which starts with "event"
+     *              Format: Check Event.java
+     * @throws StringIndexOutOfBoundsException if input format isn't correct
+     */
+    private void event(String input) throws StringIndexOutOfBoundsException {
+        try {
+            Event temp = Event.createEvent(input);
+            list.add(temp);
+            s.write(temp);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(temp);
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        } catch (StringIndexOutOfBoundsException IOBE) {
+            System.out.println("OOPS!!! The description of a event is not correct.");
+        }
     }
 
-    private void deadline(String input) {
-        int index = input.indexOf("/");
-        String description = input.substring(9, index - 1);
-        String by = input.substring(index + 4);
-        Deadline temp = new Deadline(description,by);
-        list.add(temp);
-        s.write(temp);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(temp);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    /**
+     * Adds new deadline task
+     * @param input Input Chat which starts with "deadline"
+     *              Format: Check Deadline.java
+     * @throws StringIndexOutOfBoundsException if input format isn't correct
+     */
+    private void deadline(String input) throws StringIndexOutOfBoundsException {
+        try {
+            Deadline temp = Deadline.createDeadline(input);
+            list.add(temp);
+            s.write(temp);
+            System.out.println("Got it. I've added this task:");
+            System.out.println(temp);
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        } catch (StringIndexOutOfBoundsException IOBE) {
+            System.out.println("OOPS!!! The description of a deadline is not correct.");
+        }
     }
 
     private void delete(String input) {
@@ -109,33 +129,18 @@ public class Duke {
             }
             // Add a toDo task to the list
             if (input.length() >= 4 && input.substring(0,4).equals("todo")) {
-                try {
-                    toDo(input);
-                } catch (StringIndexOutOfBoundsException IOBE) {
-                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
-                } finally {
-                    continue;
-                }
+                toDo(input);
+                continue;
             }
             // Add a event task to the list
             if (input.length() >= 5 && input.substring(0,5).equals("event")) {
-                try {
-                    event(input);
-                } catch (StringIndexOutOfBoundsException IOBE) {
-                    System.out.println("OOPS!!! The description of a event is not correct.");
-                } finally {
-                    continue;
-                }
+                event(input);
+                continue;
             }
             // Add a deadline task to the list
             if (input.length() >= 8 && input.substring(0,8).equals("deadline")) {
-                try {
-                    deadline(input);
-                } catch (StringIndexOutOfBoundsException IOBE) {
-                    System.out.println("OOPS!!! The description of a deadline is not correct.");
-                } finally {
-                    continue;
-                }
+                deadline(input);
+                continue;
             }
             // delete task from list
             if (input.length() > 7 && input.substring(0,6).equals("delete")) {

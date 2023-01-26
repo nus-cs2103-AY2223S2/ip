@@ -33,7 +33,7 @@ public class Task {
         return isDone;
     }
 
-    public String getDescription() {
+    public String getDescriptionAndTime() {
         return description;
     }
 

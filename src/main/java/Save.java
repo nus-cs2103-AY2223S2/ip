@@ -31,7 +31,7 @@ public class Save {
         int isDone = 0;
         if(t.getIsDone())
             isDone = 1;
-        String description = t.type + " | " + isDone + " | " + t.getDescription() + System.lineSeparator();
+        String description = t.type + " | " + isDone + " | " + t.getDescriptionAndTime() + System.lineSeparator();
         try {
             Files.writeString(path,description,StandardCharsets.UTF_8,StandardOpenOption.APPEND);
         } catch (IOException e) {
@@ -53,7 +53,7 @@ public class Save {
             Task t = it.next();
             if (t.getIsDone())
                 isDone = 1;
-            String description = t.type + " | " + isDone + " | " + t.getDescription() + System.lineSeparator();
+            String description = t.type + " | " + isDone + " | " + t.getDescriptionAndTime() + System.lineSeparator();
             try {
                 Files.writeString(path,description,StandardCharsets.UTF_8,StandardOpenOption.APPEND);
             } catch (IOException e) {
