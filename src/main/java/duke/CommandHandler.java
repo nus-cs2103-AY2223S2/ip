@@ -1,7 +1,5 @@
 package duke;
 
-import duke.Command;
-
 public class CommandHandler {
     CommandHandler() {}
     public String handleCommand(Command command, TaskList tasks) {

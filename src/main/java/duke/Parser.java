@@ -1,7 +1,5 @@
 package duke;
 
-import duke.Command;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,5 +81,17 @@ public class Parser {
         } else {
             return new Command("noMatch", arguments);
         }
+    }
+    
+    public Task parseTask(String data) {
+        String[] arguments = data.split("~-~-~");
+        if (arguments[0].equals("todo")) {
+            return new Todo(arguments[1], arguments[2].equals("X"));
+        } else if (arguments[0].equals("deadline")) {
+            return new Deadline(arguments[1], arguments[3].equals("X"), arguments[2]);
+        } else {
+            return new Event(arguments[1], arguments[4].equals("X"), arguments[2], arguments[3]);
+        }
+        
     }
 }
