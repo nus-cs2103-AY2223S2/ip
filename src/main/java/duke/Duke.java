@@ -8,7 +8,7 @@ public class Duke {
     private final Storage storage;
     private final Parser parser;
 
-    private Duke(String dataStoragePath) {
+    Duke(String dataStoragePath) {
         this.ui = new Ui();
         this.taskList = new TaskList();
         this.storage = new Storage(dataStoragePath, this.taskList);
@@ -20,7 +20,7 @@ public class Duke {
         ui.displayMessage("Bye. Hope to see you again soon!\n");
     }
 
-    private void run() {
+    void run() {
         ui.welcomeMessage();
         while (true) {
             String[] tokens = parser.parseUserInput();

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class TaskList {
-    private final List<Task> tasks;
+    final List<Task> tasks;
 
     TaskList() {
         this.tasks = new ArrayList<>();
@@ -30,7 +30,7 @@ public class TaskList {
         }
     }
 
-    private void addToList(Task task, Ui ui) {
+    void addTaskToList(Task task, Ui ui) {
         this.tasks.add(task);
         ui.displayMessage("Got it. I've added this task:\n" +
                 task.toString() +
@@ -49,7 +49,7 @@ public class TaskList {
         }
         sb.deleteCharAt(sb.length()-1);
         ToDo td = new ToDo(sb.toString());
-        addToList(td, ui);
+        addTaskToList(td, ui);
     }
 
     void addDeadline(String[] tokens, Ui ui) throws DukeException {
@@ -73,7 +73,7 @@ public class TaskList {
             String dueDate = sb.deleteCharAt(sb.length()-1).toString();
             try {
                 Task task = new Deadline(taskName, dueDate);
-                addToList(task, ui);
+                addTaskToList(task, ui);
             } catch (DateTimeParseException e) {
                 ui.displayMessage("Please enter a valid date in the format YYYY-MM-DD/HH:mm\n");
             }
@@ -113,7 +113,7 @@ public class TaskList {
             String taskTo = sb.deleteCharAt(sb.length()-1).toString();
             try {
                 Task task = new Event(taskName, taskFrom, taskTo);
-                addToList(task, ui);
+                addTaskToList(task, ui);
             } catch (DateTimeParseException e) {
                 ui.displayMessage("Please enter valid dates in the format YYYY-MM-DD/HH:mm\n");
             }
