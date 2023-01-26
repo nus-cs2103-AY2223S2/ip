@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents a duke.Todo, which is a type of duke.Task that has no date/time attached to it.
+ * Represents a Todo, which is a type of Task that has no datetime attached to it.
  */
 public class Todo extends Task {
     public Todo(String description) {
@@ -9,9 +9,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns the String representation of a duke.Todo.
+     * Returns the String representation of a Todo.
      *
-     * @return  String representation of a duke.Todo in this format: [T][status] description date/time.
+     * @return String representation of a Todo in this format: [T] [{status}] {description}.
      */
     @Override
     public String toString() {

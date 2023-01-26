@@ -7,6 +7,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Main class for Fake Duke the chat bot.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -23,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Provides the main skeleton code for Duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

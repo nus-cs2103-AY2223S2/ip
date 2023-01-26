@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a duke.Deadline, which is a type of duke.Task that has to be done before s specific date/time.
+ * Represents a Deadline, which is a type of Task that has to be done before a specific datetime.
  */
 public class Deadline extends Task {
     protected LocalDateTime deadline;
@@ -24,15 +24,21 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the String representation of a duke.Deadline.
+     * Returns the String representation of a Deadline.
      *
-     * @return  String representation of a duke.Deadline in this format: [type][<status>] <description> (by: <deadline>).
+     * @return String representation of a Deadline in this format:
+     * [D][{status}] {description} (by: {deadline}).
      */
     @Override
     public String toString() {
         return String.format("[D][%c] %s (by: %s)", this.getStatusIcon(), this.description, this.getStringDatetime(this.deadline));
     }
 
+    /**
+     * Returns the raw String representation of a Deadline to be stored in the local file for storage.
+     *
+     * @return Raw String representation of a Task in this format: D ~ {status} ~ {description} ~ {deadline}.
+     */
     @Override
     public String getRawTask() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

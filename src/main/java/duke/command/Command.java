@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Skeleton class for all Commands.
+ */
 public class Command {
     protected boolean isExit;
 

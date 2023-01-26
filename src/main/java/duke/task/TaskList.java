@@ -9,15 +9,19 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> taskList;
+
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
+
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
+
     public int getSize() {
         return taskList.size();
     }
+
     public Task getTask(int idx) throws DukeException {
         try {
             return taskList.get(idx);
@@ -26,10 +30,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds given task into TaskList.
+     *
+     * @param task Task added by user.
+     */
     public void addTask(Task task) {
         this.taskList.add(task);
     }
 
+    /**
+     * Deletes task from TaskList given index.
+     *
+     * @param idx Index of task to be deleted.
+     * @return String representation of the deleted task.
+     * @throws DukeException
+     */
     public String deleteTask(int idx) throws DukeException {
         try {
             return this.taskList.remove(idx).toString();
@@ -38,12 +54,26 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks task as done given its index.
+     *
+     * @param idx Index of task that is to be marked as done.
+     * @return String representation of the task that is marked done.
+     * @throws DukeException
+     */
     public String markTask(int idx) throws DukeException {
         Task task = this.getTask(idx);
         task.mark();
         return task.toString();
     }
 
+    /**
+     * Unmarks task as undone given its index.
+     *
+     * @param idx Index of task that is to be marked as undone.
+     * @return String representation of the task that is marked undone.
+     * @throws DukeException
+     */
     public String unmarkTask(int idx) throws DukeException {
         Task task = this.getTask(idx);
         task.unmark();
