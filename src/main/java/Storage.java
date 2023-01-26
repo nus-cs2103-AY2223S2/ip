@@ -53,16 +53,16 @@ public class Storage {
     }
 
     private static String readerFriendly(Task task) {
-        String status = task.getStatus() ? "๑(◕‿◕)๑ COMPLETED! ๑(◕‿◕)๑" : "(｡-_-｡ ) INCOMPLETE ( ｡-_-｡)";
+        String status = task.getStatus() ? "    ๑(◕‿◕)๑ COMPLETED! ๑(◕‿◕)๑    " : "    (｡-_-｡ ) INCOMPLETE ( ｡-_-｡)    git ";
         if (task instanceof Todo) {
             Todo t = (Todo) task;
-            return "duke.task.Todo: " + t.getDescription() + " " + status;
+            return "Todo: " + t.getDescription() + " " + status;
         } else if (task instanceof Deadline) {
             Deadline d = (Deadline) task;
-            return "duke.task.Deadline: " + d.getDescription() + " by " + d.getBy() + " " + status;
+            return "Deadline: " + d.getDescription() + " by " + d.getBy() + " " + status;
         } else { // instance of duke.task.Event
             Event e = (Event) task;
-            return "duke.task.Event: " + e.getDescription() + " from " + e.getFrom() + " to " + e.getTo() + " " + status;
+            return "Event: " + e.getDescription() + " from " + e.getFrom() + " to " + e.getTo() + " " + status;
         }
     }
 }
