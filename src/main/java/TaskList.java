@@ -87,5 +87,39 @@ public class TaskList {
         return new TaskList(arr);
     }
 
+    /**
+     * Prints out tasks that contain the given keyword.
+     *
+     * @param keyWord given keyword.
+     * @print tasks that contain the given keyword in task list.
+     */
+    public void findWord(String keyWord) {
+        int trace = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == null) {
+                break;
+            } else if (arr[i].contains(keyWord)) {
+                trace++;
+                System.out.println(String.format("%d. %s", trace, arr[i]));
+            }
+        }
+    }
+
+    /**
+     * Checks if there is any task that contains the given keyword.
+     *
+     * @param keyWord given keyword.
+     * @return true if there is any task contains the keyword and false otherwise.
+     */
+    public boolean checkWord(String keyWord) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == null) {
+                break;
+            } else if (arr[i].contains(keyWord)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

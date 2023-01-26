@@ -1,6 +1,9 @@
 package duke.command;
 
+import duke.Duke;
+import duke.DukeException;
 import duke.task.*;
+//import duke.MissingContentException;
 
 public class Ui {
     public Ui(){}
@@ -26,5 +29,25 @@ public class Ui {
 
     public void showLine() {
         System.out.println("_____________________________");
+    }
+
+
+    /**
+     * Prints out if input array is not empty
+     *
+     * @param arr input array.
+     * @print instruction.
+     * @throw MissingContentException if input array is empty.
+     */
+    public void findWordIntro(String[] arr, boolean containsKeyword) throws DukeException{
+        if (arr.length >= 1) {
+            if (containsKeyword) {
+                System.out.println("Here are the matching tasks in your list:");
+            } else {
+                System.out.println("Sorry! No task found!");
+            }
+        } else {
+            throw new DukeException("OPPS! The content can not be left empty!");
+        }
     }
 }
