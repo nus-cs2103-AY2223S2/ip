@@ -13,17 +13,34 @@ public class Duke {
     }
     private static String[] parseParameters(Enum command, String[] parameters){ //get only the useful tokens
         if(command.equals(Commands.MARK) || command.equals(Commands.UNMARK) || command.equals(Commands.DELETE)){
-
+            String[] cleanedParameters = new String[1];
+            cleanedParameters[0] = parameters[0];
+            return cleanedParameters;
         }
         else if(command.equals(Commands.TODO)){
+            String[] cleanedParameters = new String[1];
+            cleanedParameters[0] = parameters[0];
+            return cleanedParameters;
 
         }
         else if(command.equals(Commands.EVENT)){
+            String[] cleanedParameters = new String[2];
+            cleanedParameters[0] = parameters[0];
+            cleanedParameters[1] = parameters[1];
+            return cleanedParameters;
 
         }
         else if(command.equals(Commands.DEADLINE)){
-
+            String[] cleanedParameters = new String[3];
+            cleanedParameters[0] = parameters[0];
+            cleanedParameters[1] = parameters[1];
+            cleanedParameters[2] = parameters[2];
+            return cleanedParameters;
         }
+        else{
+            return null;
+        }
+
     }
     public static void main(String[] args) {
         Enum command;
