@@ -34,7 +34,7 @@ public class Duke {
     };
 
     /**
-     * The entire command list that Duke is capable of responding to.
+     * The entire command list that Duke is capable of responding.
      */
     private static Set<String> commandMap = new HashSet<>() {
         {
