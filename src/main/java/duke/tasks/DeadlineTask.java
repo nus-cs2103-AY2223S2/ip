@@ -3,15 +3,30 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The {@code DeadlineTask} class for tasks with a deadline.
+ */
 public class DeadlineTask extends Task {
 
     private final LocalDate by;
 
+    /**
+     * Instantiates a new {@code DeadlineTask} object.
+     *
+     * @param name The name of the task.
+     * @param by   The due date of the task.
+     */
     public DeadlineTask(String name, LocalDate by) {
         super(name);
         this.by = by;
     }
 
+    /**
+     * Checks whether this {@code DeadlineTask} is due on {@code date}
+     *
+     * @param date A due date.
+     * @return A boolean indicating if this deadline task is due on {@code date}.
+     */
     public boolean isDueOn(LocalDate date) {
         return this.by.equals(date);
     }

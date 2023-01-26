@@ -6,14 +6,27 @@ import duke.utilities.Storage;
 import duke.utilities.TaskList;
 import duke.utilities.Ui;
 
+/**
+ * The {@code Command} class for the {@code unmark} command.
+ */
 public class UnmarkCommand extends Command {
 
     private final String[] tokens;
 
+    /**
+     * Instantiates a new {@code UnmarkCommand} object.
+     *
+     * @param tokens The array of strings generated from tokenising the user's input.
+     */
     public UnmarkCommand(String[] tokens) {
         this.tokens = tokens;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws DukeInvalidUnmarkCommandException If the {@code unmark} command is invalid.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidUnmarkCommandException {
 

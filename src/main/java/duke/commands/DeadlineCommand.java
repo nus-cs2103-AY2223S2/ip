@@ -10,14 +10,27 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
+/**
+ * The {@code Command} class for the {@code deadline} command.
+ */
 public class DeadlineCommand extends Command {
 
     private final String[] tokens;
 
+    /**
+     * Instantiates a new {@code DeadlineCommand} object.
+     *
+     * @param tokens The array of strings generated from tokenising the user's input.
+     */
     public DeadlineCommand(String[] tokens) {
         this.tokens = tokens;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws DukeInvalidDeadlineCommandException If the {@code deadline} command is invalid.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidDeadlineCommandException {
 

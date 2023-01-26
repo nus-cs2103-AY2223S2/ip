@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The storage manager for Duke.
+ */
 public class Storage {
 
     private final File file;
@@ -17,6 +20,12 @@ public class Storage {
         this.file = new File(filePath);
     }
 
+    /**
+     * Loads the task list from disk.
+     *
+     * @return A list of tasks.
+     * @throws DukeInvalidFileFormatException If the file is incorrectly formatted.
+     */
     public ArrayList<Task> loadTaskList() throws DukeInvalidFileFormatException {
         ArrayList<Task> arrayList = new ArrayList<>();
         Scanner sc;
@@ -38,6 +47,11 @@ public class Storage {
         return arrayList;
     }
 
+    /**
+     * Saves the task list to disk.
+     *
+     * @param taskList The list of tasks to be saved to disk.
+     */
     public void saveTaskList(TaskList taskList) {
         try {
             // overwrite old file

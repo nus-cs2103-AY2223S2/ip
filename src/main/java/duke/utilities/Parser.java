@@ -23,6 +23,13 @@ import java.util.Arrays;
 
 public class Parser {
 
+    /**
+     * Parses a user command.
+     *
+     * @param line A string representing a line of user input, excluding the newline character.
+     * @return A {@code Command} object parsed from the line {@code line}.
+     * @throws DukeUnknownActionException If the action in the user command is unknown.
+     */
     public static Command parseUserCommand(String line) throws DukeUnknownActionException {
         String[] tokens = line.split(" ");
         Action action;
@@ -57,6 +64,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a line from the {@code duke.txt} file.
+     *
+     * @param line A string representing a line in the {@code duke.txt} file, excluding the newline
+     *             character.
+     * @return A {@code Task} object parsed from the line {@code line} in the {@code duke.txt} file.
+     * @throws DukeInvalidFileFormatException If the {@code duke.txt} file is incorrectly
+     *                                        formatted.
+     */
     public static Task parseTask(String line) throws DukeInvalidFileFormatException {
         // need to escape the literal character "|" since it is a special character used
         // in regex
