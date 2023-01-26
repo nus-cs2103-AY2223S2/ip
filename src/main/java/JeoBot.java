@@ -27,7 +27,7 @@ public class JeoBot {
      * Executes commands which the user inputs accordingly
      */
     public static void echo() {
-        String divider = "________________________________________________________________________________________";
+        String divider = "_________________________________________________________________________________________";
         boolean hasInput = true;
         Scanner sc = new Scanner(System.in);
         Storage st = new Storage("./data.txt");
