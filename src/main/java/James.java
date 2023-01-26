@@ -215,13 +215,10 @@ public class James {
                 try {
                 input = input.replaceAll("deadline", "");
                 String[] parts = input.split("/by ", 2);
-                System.out.println(parts[1]);
                 if (parts.length != 2) {
                     throw new JamesException("OOPS!!! The description of a deadline task cannot be empty.");
                 }
-                DateTimeFormatter format = DateTimeFormatter.ofPattern("d-MM-yyyy");
-                LocalDate date = LocalDate.parse(parts[1], format);
-                Deadline task = new Deadline(parts[0], date);
+                Deadline task = new Deadline(parts[0], parts[1]);
                 inputs.add(task);
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + inputs.get(inputs.size() - 1));
@@ -231,16 +228,23 @@ public class James {
                 }
             }
             else if(input.startsWith("event")) {
-               try {
-                   input = input.replaceAll("event", "");
-                   String[] parts = input.split("/", 3);
-                   if (parts.length != 3) {
-                       throw new JamesException("OOPS!!! The description of a event cannot be empty.");
-                   }
-                   inputs.add(new Event(parts[0], parts[1], parts[2]));
-                   System.out.println("Got it. I've added this task:");
-                   System.out.println("  " + inputs.get(inputs.size() - 1));
-                   System.out.println("Now you have " + inputs.size() + " tasks in the list.");
+                try {
+                    if (input.split(" ").length == 1) {
+                        throw new JamesException("The description of an event cannot be empty.");
+                    }
+                    if (!input.contains(" /from ") || !input.contains(" /to ")) {
+                        throw new JamesException("Please include: /from <time> /to <time>");
+                    }
+                    String[] arrEvent = input.split(" ", 2)[1].split(" /from ");
+                    String description = arrEvent[0];
+                    String[] timeRange = arrEvent[1].split(" /to ");
+                    String from = timeRange[0];
+                    String to = timeRange[1];
+                    Event event = new Event(description, from, to);
+                    inputs.add(event);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("  " + inputs.get(inputs.size() - 1));
+                    System.out.println("Now you have " + inputs.size() + " tasks in the list.");
                } catch(JamesException e) {
                     System.out.println(e.getMessage());
                 }
