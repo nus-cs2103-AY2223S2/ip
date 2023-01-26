@@ -20,7 +20,11 @@ public class Task implements Comparable<Task> {
         this.desc = desc.trim();
         this.isDone = false;
     }
-    
+
+    public String getDesc() {
+        return this.desc;
+    }
+
     public String getSymbol() {
         return TODO_SYMBOL;
     }

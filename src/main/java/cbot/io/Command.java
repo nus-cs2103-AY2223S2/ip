@@ -23,6 +23,8 @@ public enum Command {
     AFTER_BAD   ("after",       false),
     FILTER      ("filter ",     true),
     FILTER_BAD  ("filter",      false),
+    FIND        ("find ",       true),
+    FIND_BAD    ("find",        false),
     NONE        ("",            false);
     
     private final String str;
@@ -49,9 +51,9 @@ public enum Command {
     
     boolean match(String input) {
         if (this.hasText && input.length() > getLen()) {
-            return input.substring(0, getLen()).equals(this.str);
+            return input.substring(0, getLen()).toLowerCase().equals(this.str);
         } else {
-            return input.equals(this.str);
+            return input.toLowerCase().equals(this.str);
         }
     }
     

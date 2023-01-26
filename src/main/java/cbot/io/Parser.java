@@ -276,6 +276,24 @@ public class Parser {
                 UI.printMany(arrFilter);
             }
             break;
+
+        case FIND:
+            if (tl.getCount() == 0) {
+                throw new PoorInputException("Eh? You have no tasks to filter");
+            }
+
+            String lowText = this.text.toLowerCase();
+
+            ArrayList<String> arrFind = tl.listFilter(t ->
+                    t.getDesc().toLowerCase().contains(lowText));
+
+            if (arrFind.isEmpty()) {
+                UI.say("Nope, nothing matches your search!");
+            } else {
+                UI.say("Here! I found these:");
+                UI.printMany(arrFind);
+            }
+            break;
             
         default:
             // catches all the BADs
