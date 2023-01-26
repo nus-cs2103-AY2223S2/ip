@@ -33,7 +33,17 @@ public class Duke {
         }
         List<String> readFile = Files.readAllLines(path);
         for (String line : readFile) {
-
+            String[] data = line.split("|");
+            switch (data[0]) {
+            case "T":
+                // Write adding todo
+            case "D":
+                // Write adding deadline
+            case "E":
+                // Write adding event
+            default:
+                // Write default case if any
+            }
         }
     }
 
