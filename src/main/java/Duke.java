@@ -4,33 +4,43 @@ public class Duke {
     public static void main(String[] args) {
         //init
         Scanner sc = new Scanner(System.in);
-        ToDoList ls = new ToDoList();
+        ToDoList ls;
 
-        Duke.welcomeMsg();
+        ls = Duke.startUp();
         Duke.input(sc, ls);
-        Duke.endMsg();
+        Duke.shutDown(ls);
     }
 
-    private static void welcomeMsg() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        String divider = "____________________________________________________________\n";
-        System.out.println(divider + "What can the Duke help you with today?\n" + divider);
+    private static ToDoList startUp() {
+        try {
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+            System.out.println("Hello from\n" + logo);
+            String divider = "____________________________________________________________\n";
+            System.out.println(divider + "What can the Duke help you with today?\n" + divider);
+            return ToDoList.load();
+        } catch(Exception e) {
+            return new ToDoList();
+        }
     }
 
-    private static void endMsg() {
-        String divider = "____________________________________________________________\n";
-        System.out.println(divider + "Goodbye, feel free to call the Duke again whenever you need.\n" + divider);
+    private static void shutDown(ToDoList ls) {
+        try {
+            ls.save();
+            String divider = "____________________________________________________________\n";
+            System.out.println(divider + "Goodbye, feel free to call the Duke again whenever you need.\n" + divider);
+        } catch(Exception e) {
+
+        }
     }
 
     private static void input(Scanner sc, ToDoList ls) {
         while (true) {
             try {
-                String input[] = Duke.commandHandler(sc.nextLine(), " ", 2, 1);
+                String[] input = Duke.commandHandler(sc.nextLine(), " ", 2, 1);
                 String command = input[0];
                 String sub;
 
@@ -67,9 +77,9 @@ public class Duke {
     }
 
     private static String[] commandHandler(String input, String regex,int limit, int minSize) throws DukeException {
-        String sub[] = input.split(regex, limit);
+        String[] sub = input.split(regex, limit);
         if (sub.length < minSize) {
-            throw new DukeException("Not enough details are given!\nThe Duke expects more information!");
+            throw new InputDukeException();
         }
         return sub;
     }
@@ -77,7 +87,7 @@ public class Duke {
     private static void taskCommandHandler(String[] input, ToDoList ls) throws DukeException {
         String command = input[0];
         if (input.length < 2) {
-            throw new DukeException("Not enough details are given!\n The Duke expects more information!");
+            throw new InputDukeException();
         }
         if (command.equals("todo")) {
             ls.add(new ToDoTask(input[1]));

@@ -1,4 +1,4 @@
-public class Task {
+abstract public class Task {
     protected String title;
     protected boolean isDone;
 
@@ -14,6 +14,8 @@ public class Task {
     public void markNotDone() {
         this.isDone = false;
     }
+
+    abstract public String save();
 
     @Override
     public String toString() {

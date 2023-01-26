@@ -1,10 +1,16 @@
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
 
 public class ToDoList {
     private ArrayList<Task> arr = new ArrayList<>(); //1-based index
     private int toDoCount;
     public ToDoList() {
-        arr.add(new Task("0index")); //1-based index
+        arr.add(new ToDoTask("0index")); //1-based index
         this.toDoCount = 0;
     }
 
@@ -20,7 +26,7 @@ public class ToDoList {
     public void delete(int ind) throws DukeException {
         String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
         if (ind < 1 || ind > toDoCount) {
-            throw new DukeException("It seems like the number given isn't on the list!");
+            throw new IndexDukeException();
         }
         Task rm = arr.get(ind);
         arr.remove(ind);
@@ -34,7 +40,7 @@ public class ToDoList {
     public void unmarkTask(int ind) throws DukeException {
         String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
         if (ind < 1 || ind > toDoCount) {
-            throw new DukeException("It seems like the number given isn't on the list!");
+            throw new IndexDukeException();
         }
         arr.get(ind).markNotDone();
         System.out.println(divider + "The Duke has unmarked the following task: \n"
@@ -44,11 +50,41 @@ public class ToDoList {
     public void  markTask(int ind) throws DukeException {
         String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
         if (ind < 1 || ind > toDoCount) {
-            throw new DukeException("It seems like the number given isn't on the list!");
+            throw new IndexDukeException();
         }
         arr.get(ind).markDone();
         System.out.println(divider + "The Duke has marked the following task: \n"
                 + " - " + arr.get(ind) + "\n" + divider);
+    }
+
+    public void save() throws IOException {
+        FileWriter fw = new FileWriter("./data.txt"); //file structure
+        for (int i=1; i<=this.toDoCount; i++) {
+            fw.write(arr.get(i).save());
+        }
+        fw.close();
+    }
+
+    public static ToDoList load() throws IOException {
+        File f = new File("./data.txt"); //file structure
+        ToDoList ls = new ToDoList();
+        if (!f.exists()) {
+            f.createNewFile();
+        }
+        Scanner sc = new Scanner(f);
+        while (sc.hasNext()) {
+            String[] input = sc.nextLine().split(" ");
+            String command = input[0];
+            switch (command) { //to settle out index error
+                case "TODO":
+                    ls.add(new ToDoTask(input[1]));
+                case "DEADLINE":
+                    ls.add(new DeadlineTask(input[1], input[2]));
+                case "EVENT":
+                    ls.add(new EventTask(input[1], input[2], input[3]));
+            }
+        }
+        return ls;
     }
 
     @Override

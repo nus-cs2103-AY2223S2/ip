@@ -3,6 +3,11 @@ public class ToDoTask extends Task {
         super(title);
     }
 
+    public String save() {
+        String status = this.isDone ? "DONE " : "NOTDONE ";
+        return "TODO " + status + "\n";
+    }
+
     @Override
     public String toString() {
         String status = this.isDone ? "[x] " : "[ ] ";
