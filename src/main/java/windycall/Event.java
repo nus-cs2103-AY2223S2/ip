@@ -47,15 +47,15 @@ public class Event extends Task {
 
 
     @Override
-    public String fileFormat() {
+    public String getFileFormat() {
         return "E | " + getStatusIcon() + " | " + description + " | " + from + " | " + to + "\n";
     }
-    private String deadlineFormat(LocalDate date) {
+    private String getDeadlineFormat(LocalDate date) {
         return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 
     private String getEventInterval() {
-        return " (from: " + deadlineFormat(from) + " to: " + deadlineFormat(to) + ")";
+        return " (from: " + getDeadlineFormat(from) + " to: " + getDeadlineFormat(to) + ")";
     }
 
     @Override

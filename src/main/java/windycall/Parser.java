@@ -20,18 +20,18 @@ public class Parser {
         if (command.equals("list")) return OperationType.LIST;
         String[] parts = command.split(" ");
         switch (parts[0]) {
-            case "mark":
-                return OperationType.MARK;
-                //break;
-            case "unmark":
-                return OperationType.UNMARK;
-                //break;
-            case "delete":
-                return OperationType.DELETE;
-                //break;
-            default:
-                return OperationType.ADDTASK;
-                //break;
+        case "mark":
+            return OperationType.MARK;
+            //break;
+        case "unmark":
+            return OperationType.UNMARK;
+            //break;
+        case "delete":
+            return OperationType.DELETE;
+            //break;
+        default:
+            return OperationType.ADDTASK;
+            //break;
         }
     }
 

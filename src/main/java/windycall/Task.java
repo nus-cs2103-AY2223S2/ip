@@ -22,13 +22,14 @@ public abstract class Task {
 
     public abstract String getTaskTypeIcon();
 
+
     /**
      * Returns fileFormat of a specific task that will be stored
      * inside data file with consistency
      *
      * @return a String representation of fileFormat of a task
      */
-    public abstract String fileFormat();
+    public abstract String getFileFormat();
 
     public void markAsDone() {
         this.isDone = true;

@@ -85,7 +85,7 @@ public class Storage {
         try {
             FileWriter myWriter = new FileWriter("./data/WindyCall.txt");
             for (Task task : tasks) {
-                myWriter.write(task.fileFormat());
+                myWriter.write(task.getFileFormat());
             }
 //            myWriter.write("Files in Java might be tricky, but it is fun enough!");
             myWriter.close();

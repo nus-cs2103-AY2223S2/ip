@@ -10,7 +10,7 @@ public class TodoTest {
         String description = "finish assignment";
         Task todoTask = new Todo(description, false);
         String expectedFormat = "T |   | finish assignment\n";
-        assertEquals(expectedFormat, todoTask.fileFormat());
+        assertEquals(expectedFormat, todoTask.getFileFormat());
     }
 
     @Test
