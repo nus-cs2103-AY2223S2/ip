@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -33,7 +34,7 @@ public final class Utils {
         return str -> {
             for (String pattern : patterns) {
                 try {
-                    return Optional.of(parser.apply(str, DateTimeFormatter.ofPattern(pattern)));
+                    return Optional.of(parser.apply(str, DateTimeFormatter.ofPattern(pattern, Locale.ENGLISH)));
                 } catch (DateTimeParseException r) {
                 //   System.out.format("Couldn't match %s with %s\n", str, pattern);
                 }

@@ -16,8 +16,11 @@
     <module name="EmptyLineSeparator" />
     <module name="FallThrough" />
     <module name="ImportOrder">
+      <property name="option" value="bottom" />
       <property name="separated" value="true" />
+      <property name="separatedStaticGroups" value="true" />
       <property name="groups" value="/^java\./,javax,org"/>
+      <property name="staticGroups" value="/^java\./,javax,org"/>
     </module>
     <module name="Indentation">
       <property name="caseIndent" value="0" />
