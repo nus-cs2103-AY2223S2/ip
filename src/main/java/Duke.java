@@ -155,31 +155,6 @@ public class Duke {
                         try {
                             checkEmptyAction(arr, "deadline");
                             System.out.println("Got it. I've added this task:");
-<<<<<<< HEAD
-                            for (int j = 1; j < arr.length; j++) {
-=======
-                            /*for (int j = 1; j < arr.length; j++) {
->>>>>>> branch-Level-8
-                                remaining += " ";
-                                if (String.valueOf(arr[j].charAt(0)).equals("/")) {
-                                    remaining += "(";
-                                    if (arr[j].length() != 1) {
-                                        remaining += arr[j].substring(1);
-                                    }
-                                } else {
-                                    //remaining += arr[j];
-                                    remaining += arr[j];
-                                }
-                            }
-<<<<<<< HEAD
-                            remaining += ")";
-                            listOfAction[len] = String.format("[D][ ]%s", remaining);
-                            System.out.println(listOfAction[len]);
-                            System.out.println(String.format("Now you have %d tasks in the list", len + 1));
-                            len++;
-                            file.overwrite(listOfAction);
-=======
-                            remaining += ")";*/
                             String detail = "";
                             int pointer = 1;
                             for (int j = 1 ; j < arr.length ; j++) {
@@ -218,40 +193,7 @@ public class Duke {
                         try {
                             checkEmptyAction(arr, "event");
                             System.out.println("Got it. I've added this task:");
-                            int k = 0;
-<<<<<<< HEAD
-                            for (int j = 1; j < arr.length; j++) {
-=======
-                            /*for (int j = 1; j < arr.length; j++) {
->>>>>>> branch-Level-8
-                                remaining += " ";
-                                if (String.valueOf(arr[j].charAt(0)).equals("/") && (k != 0)) {
-                                    if (arr[j].length() != 1) {
-                                        remaining += arr[j].substring(1);
-                                        remaining += ":";
-                                    }
-                                } else if (String.valueOf(arr[j].charAt(0)).equals("/") && (k == 0)) {
-                                    remaining += "(";
-                                    if (arr[j].length() != 1) {
-                                        remaining += arr[j].substring(1);
-                                        remaining += ":";
-                                    }
-                                    k++;
-                                } else if (arr[j-1].substring(1).equals("to") && (k!= 0)) {
-                                    remaining += arr[j];
-                                } else {
-                                    remaining += arr[j];
-                                }
-                            }
-<<<<<<< HEAD
-                            remaining += ")";
-                            listOfAction[len] = String.format("[E][ ]%s", remaining);
-                            System.out.println(listOfAction[len]);
-                            System.out.println(String.format("Now you have %d tasks in the list", len + 1));
-                            len++;
-                            file.overwrite(listOfAction);
-=======
-                            remaining += ")";*/
+                            //int k = 0;
                             int startIndex = 0;
                             int endIndex = 0;
                             String detail = "";
