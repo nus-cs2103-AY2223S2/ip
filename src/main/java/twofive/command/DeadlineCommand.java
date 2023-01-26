@@ -1,5 +1,6 @@
 package twofive.command;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -46,11 +47,14 @@ public class DeadlineCommand extends Command {
 
             //Adds new task to list of tasks
             tasks.addTask(newDeadline);
+            storage.save(tasks);
             ui.showMessage(
                     "Got it. I've added this task:\n " + newDeadline + "\n" + "Now you have " + tasks.getTasksNum()
                             + "this is a test test tasks in the list");
         } catch (DateTimeParseException e) {
             ui.showError("Deadline must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
+        } catch (IOException e) {
+            ui.showError(e.getMessage());
         }
     }
 }

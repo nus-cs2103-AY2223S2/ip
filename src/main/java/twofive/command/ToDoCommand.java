@@ -1,5 +1,7 @@
 package twofive.command;
 
+import java.io.IOException;
+
 import twofive.data.TaskList;
 import twofive.storage.Storage;
 import twofive.task.ToDo;
@@ -28,7 +30,12 @@ public class ToDoCommand extends Command {
         ToDo newToDo = new ToDo(taskDescription);
         //Adds new task to list of tasks
         tasks.addTask(newToDo);
-        ui.showMessage("Got it. I've added this task:\n " + newToDo + "\n"
-                + "Now you have " + tasks.getTasksNum() + " tasks in the list");
+        try {
+            storage.save(tasks);
+            ui.showMessage("Got it. I've added this task:\n " + newToDo + "\n"
+                    + "Now you have " + tasks.getTasksNum() + " tasks in the list");
+        } catch (IOException e) {
+            ui.showError(e.getMessage());
+        }
     }
 }

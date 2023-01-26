@@ -1,5 +1,7 @@
 package twofive.command;
 
+import java.io.IOException;
+
 import twofive.data.TaskList;
 import twofive.exception.InvalidTaskException;
 import twofive.exception.TaskDoneException;
@@ -32,7 +34,12 @@ public class MarkCommand extends Command {
             throw new InvalidTaskException();
         } else {
             Task currentTask = tasks.setTaskAsDone(taskNum);
-            ui.showMessage("Nice! Congrats for completing this task:\n " + currentTask);
+            try {
+                storage.save(tasks);
+                ui.showMessage("Nice! Congrats for completing this task:\n " + currentTask);
+            } catch (IOException e) {
+                ui.showError(e.getMessage());
+            }
         }
     }
 }

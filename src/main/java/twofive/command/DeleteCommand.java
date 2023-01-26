@@ -1,5 +1,7 @@
 package twofive.command;
 
+import java.io.IOException;
+
 import twofive.data.TaskList;
 import twofive.exception.InvalidTaskException;
 import twofive.storage.Storage;
@@ -30,8 +32,13 @@ public class DeleteCommand extends Command {
             throw new InvalidTaskException();
         } else {
             Task currentTask = tasks.deleteTask(this.taskNum);
-            ui.showMessage("Noted. I've removed this task:\n " + currentTask + "\n"
-                    + "Now you have " + tasks.getTasksNum() + " tasks in the list");
+            try {
+                storage.save(tasks);
+                ui.showMessage("Noted. I've removed this task:\n " + currentTask + "\n"
+                        + "Now you have " + tasks.getTasksNum() + " tasks in the list");
+            } catch (IOException e) {
+                ui.showError(e.getMessage());
+            }
         }
     }
 }

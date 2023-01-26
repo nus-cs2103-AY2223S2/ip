@@ -1,5 +1,7 @@
 package twofive.command;
 
+import java.io.IOException;
+
 import twofive.data.TaskList;
 import twofive.exception.InvalidTaskException;
 import twofive.exception.TaskUndoneException;
@@ -32,7 +34,12 @@ public class UnmarkCommand extends Command {
             throw new InvalidTaskException();
         } else {
             Task currentTask = tasks.setTaskAsUndone(taskNum);
-            ui.showMessage("OK, I've marked this task as not done yet:\n " + currentTask);
+            try {
+                storage.save(tasks);
+                ui.showMessage("OK, I've marked this task as not done yet:\n " + currentTask);
+            } catch (IOException e) {
+                ui.showError(e.getMessage());
+            }
         }
     }
 }
