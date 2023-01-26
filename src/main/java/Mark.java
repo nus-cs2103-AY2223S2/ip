@@ -4,12 +4,12 @@ public class Mark extends Commands {
     }
 
     @Override
-    public void execute(User user) {
+    public void execute(TaskList tasks) {
         String content = this.getCommandStorage();
         int taskNumber = Character.getNumericValue(content.charAt(content.length() - 1));
         taskNumber -= 1;
-        user.markTask(taskNumber, true);
-        System.out.println("Nice! I've marked this task as done:\n" + "[" + user.getTaskIcon(taskNumber)
-                + "] " + user.getTaskContent(taskNumber));
+        tasks.markTask(taskNumber, true);
+        System.out.println("Nice! I've marked this task as done:\n" + "[" + tasks.getTaskIcon(taskNumber)
+                + "] " + tasks.getTaskContent(taskNumber));
     }
 }

@@ -3,7 +3,7 @@ public class List extends Commands{
         this.setCommandStorage(str);
     }
     @Override
-    public void execute(User user) {
-        user.listTasks();
+    public void execute(TaskList tasks) {
+        tasks.listTasks();
     }
 }

@@ -3,10 +3,10 @@ public class Delete extends Commands{
         this.setCommandStorage(str);
     }
     @Override
-    public void execute(User user) {
+    public void execute(TaskList list) {
         String content = this.getCommandStorage();
         int taskNumber = Character.getNumericValue(content.charAt(content.length() - 1));
         taskNumber -= 1;
-        System.out.println("Noted. I've removed this task:\n" + user.deleteTask(taskNumber));
+        System.out.println("Noted. I've removed this task:\n" + list.deleteTask(taskNumber));
     }
 }

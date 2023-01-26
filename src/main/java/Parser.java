@@ -1,4 +1,4 @@
-public class CommandManager {
+public class Parser {
     private static CommandQueue queue = new CommandQueue();
     public static void createCommand (String input) throws DukeException {
         switch (input){
@@ -14,7 +14,7 @@ public class CommandManager {
                         throw new InsufficientAruments("☹ OOPS!!! The description of a " +
                                 input.split(" ")[0] + " cannot be empty.");
                     } else {
-                        queue.add(new Store(input));
+                        queue.add(new ExecuteCommandQueue(input));
                     }
                 } else {
                     throw new UnknownCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -31,7 +31,7 @@ public class CommandManager {
             }
         }
     }
-    public static void executeQueue (User user){
-        queue.executeQueue(user);
+    public static void executeQueue (TaskList list){
+        queue.executeQueue(list);
     }
 }

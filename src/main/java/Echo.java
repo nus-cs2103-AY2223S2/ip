@@ -3,7 +3,7 @@ public class Echo extends Commands {
         this.setCommandStorage(str);
     }
     @Override
-    public void execute(User user) {
+    public void execute(TaskList tasks) {
         System.out.println(this.getCommandStorage());
     }
 }

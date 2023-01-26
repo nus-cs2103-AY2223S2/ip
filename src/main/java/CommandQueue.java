@@ -7,9 +7,9 @@ public class CommandQueue {
         queue.add(command);
     }
 
-    public void executeQueue(User user) {
+    public void executeQueue(TaskList list) {
         for (Commands command : queue) {
-            command.execute(user);
+            command.execute(list);
         }
         queue.clear();
     }

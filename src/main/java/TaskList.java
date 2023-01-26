@@ -1,48 +1,26 @@
-import java.util.ArrayList;
 import java.io.*;
+import java.util.ArrayList;
 
-public class User {
+public class TaskList {
+
     private int taskCount = 0;
+    private Storage storage = null;
     private ArrayList<Tasks> tasks = new ArrayList<>();
 
-    public User() {
-        try {
-            this.loadTasks();
-        } catch (FileNotFoundException e) {
-            System.out.println("No existing tasks, creating new task list...");
-        }
-
+    public TaskList(Storage storage) {
+        this.storage = storage;
+        this.tasks = storage.loadTasks();
         this.taskCount = this.tasks.size();
     }
 
     public void addTask(Tasks task) {
         this.tasks.add(task);
         this.taskCount += 1;
-        this.saveTasks();
+
     }
 
     //adopted from CHATGPT
-    public void saveTasks() {
-        try {
-            FileOutputStream file = new FileOutputStream("tasks.ser");
-            ObjectOutputStream output = new ObjectOutputStream(file);
-            output.writeObject(this.tasks);
-            output.close();
-        } catch (IOException e) {
-            System.out.println("file error");
-        }
-    }
-    //adapted from CHATGPT
-    public void loadTasks() throws FileNotFoundException {
-        try {
-            FileInputStream file = new FileInputStream("tasks.ser");
-            ObjectInputStream output = new ObjectInputStream(file);
-            this.tasks = (ArrayList<Tasks>)output.readObject();
-            output.close();
-        } catch (IOException | ClassNotFoundException e) {
-            throw new FileNotFoundException();
-        }
-    }
+
     public void listTasks() {
         int i = 1;
         System.out.println("Here are the tasks in your list: \n");
@@ -57,7 +35,7 @@ public class User {
 
     public void markTask(int index, boolean done){
         this.tasks.get(index).markTask(done);
-        this.saveTasks();
+        this.storage.saveTasks(this.tasks);
     }
 
     public String deleteTask(int index) {
@@ -65,11 +43,9 @@ public class User {
         this.tasks.remove(index);
         this.taskCount -= 1;
         System.out.println("Now you have " + this.taskCount + " tasks in the list.");
-        this.saveTasks();
+        this.storage.saveTasks(this.tasks);
         return returnString;
     }
-
-
 
     public String getTaskIcon(int index) {
         return this.tasks.get(index).getStatusIcon();

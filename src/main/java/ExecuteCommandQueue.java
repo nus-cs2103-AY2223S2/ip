@@ -1,12 +1,10 @@
-import java.nio.charset.StandardCharsets;
-import java.util.regex.Pattern;
 //A CLASS THAT STORE THE TASKS
-public class Store extends Commands {
-    public Store(String str) {
+public class ExecuteCommandQueue extends Commands {
+    public ExecuteCommandQueue(String str) {
         this.setCommandStorage(str);
     }
     @Override
-    public void execute(User user){
+    public void execute(TaskList list){
         String content = this.getCommandStorage();
         Tasks task = null;
         if (content.matches("^deadline\\s.*$")) {
@@ -25,8 +23,8 @@ public class Store extends Commands {
             String desc = content.substring(5);
             task = new Todo(desc, false);
         }
-        user.addTask(task);
+        list.addTask(task);
         System.out.println("Got it. I've added this task: \n" + task);
-        System.out.println("Now you have " + user.getTaskCount() + " tasks in the list.");
+        System.out.println("Now you have " + list.getTaskCount() + " tasks in the list.");
     }
 }

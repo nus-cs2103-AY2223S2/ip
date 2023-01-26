@@ -5,12 +5,12 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" +
                 "What can I do for you?");
         //CommandCreator creator = new CommandCreator();
-        User user = new User();
+        TaskList list = new TaskList(new Storage("tasks.ser"));
         while(!offBot) {
             Scanner sc= new Scanner(System.in); //System.in is a standard input stream
             try {
-                CommandManager.createCommand(sc.nextLine());
-                CommandManager.executeQueue(user);
+                Parser.createCommand(sc.nextLine());
+                Parser.executeQueue(list);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }

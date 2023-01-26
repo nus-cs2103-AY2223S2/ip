@@ -4,12 +4,12 @@ public class Unmark extends Commands {
     }
 
     @Override
-    public void execute(User user) {
+    public void execute(TaskList tasks) {
         String content = this.getCommandStorage();
         int taskNumber = Character.getNumericValue(content.charAt(content.length() - 1));
         taskNumber -= 1;
-        user.markTask(taskNumber, false);
-        System.out.println("OK, I've marked this task as not done yet:\n" + "[" + user.getTaskIcon(taskNumber)
-                + "] " + user.getTaskContent(taskNumber));
+        tasks.markTask(taskNumber, false);
+        System.out.println("OK, I've marked this task as not done yet:\n" + "[" + tasks.getTaskIcon(taskNumber)
+                + "] " + tasks.getTaskContent(taskNumber));
     }
 }
