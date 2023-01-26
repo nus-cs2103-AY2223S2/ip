@@ -42,7 +42,7 @@ public class TaskList {
      * A Deadlines Task requires a description and a deadline(/by) in input String s
      * <p>
      * If TaskType = Events: A Events Task is created.
-     * A Events Task requires a descriptions, a duration(/from and /to) in input String s
+     * An Events Task requires a descriptions, a duration(/from and /to) in input String s
      * <p>
      * @param type The type of Task to be created
      * @param s The containing the data required to create the new Task
@@ -129,7 +129,7 @@ public class TaskList {
             String endTime = s.substring(toIndex + 5).strip();
 
             // Checks if description is empty,
-            if (fromIndex == 0 || toIndex == 0 || desc.isEmpty()) {
+            if (fromIndex == 0 || desc.isEmpty()) {
                 throw new DukeMissingDescriptionException();
             }
 
