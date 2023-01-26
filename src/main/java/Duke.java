@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
     private enum Commands {
-         MARK, UNMARK, TODO, DEADLINE, EVENT, LIST, DELETE, BYE
+         BYE, LIST, MARK, UNMARK, DELETE, TODO, EVENT, DEADLINE
     }
     private static Enum getCommand(String input){
         return Commands.valueOf(input.split(" ")[0].toUpperCase());
