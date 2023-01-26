@@ -1,6 +1,9 @@
 import exceptions.DukeException;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -68,6 +71,28 @@ public class Duke {
         }
     }
 
+    public static LocalDate parseDate(String dateString) {
+        LocalDate date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            date = LocalDate.parse(dateString, formatter);
+        } catch (DateTimeParseException e) {
+
+            if (dateString.matches("^\\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$")) {
+                formatter = DateTimeFormatter.ofPattern("M/d/yyyy HHmm");
+                date = LocalDate.parse(dateString, formatter);
+            } else if (dateString.matches("\\d{1,2}-\\d{1,2}-\\d{4}")) {
+                formatter = DateTimeFormatter.ofPattern("M-d-yyyy");
+                date = LocalDate.parse(dateString, formatter);
+            } else if (dateString.matches("\\d{2}-\\d{2}-\\d{4}")) {
+                formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+                date = LocalDate.parse(dateString, formatter);
+            } else {
+                throw new IllegalArgumentException("Invalid date format: " + dateString);
+            }
+        }
+        return date;
+    }
     public static void main(String[] args) {
 
         String[] welcomeMsg = {"Hello I am Duke", "What can I do for you?"};
@@ -91,6 +116,7 @@ public class Duke {
                     String cfmMsg = "Got it. I've added this task:";
                     String tskNum;
                     String[] desc;
+                    LocalDate date, from, to;
 
 
                     switch (cmd[0]) {
@@ -130,7 +156,9 @@ public class Duke {
                             break;
                         case "deadline":
                             desc = cmd[1].split(" /by ");
-                            tsk = new Deadline(desc[0], desc[1]);
+                            System.out.println(desc[1]);
+                            date = parseDate(desc[1]);
+                            tsk = new Deadline(desc[0], date);
                             data.add(tsk);
                             tskNum = String.format("Now you have %d tasks in the list.", data.size());
                             String[] deadlineMsg = {cfmMsg, " " + tsk.toString(), tskNum};
@@ -138,7 +166,9 @@ public class Duke {
                             break;
                         case "event":
                             desc = cmd[1].split(" /from | /to ");
-                            tsk = new Event(desc[0], desc[1], desc[2]);
+                            from = parseDate(desc[1]);
+                            to = parseDate(desc[2]);
+                            tsk = new Event(desc[0], from, to);
                             data.add(tsk);
                             tskNum = String.format("Now you have %d tasks in the list.", data.size());
                             String[] eventMsg = {cfmMsg, " " + tsk.toString(), tskNum};
