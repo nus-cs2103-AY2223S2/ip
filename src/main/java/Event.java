@@ -3,10 +3,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    
+
     protected LocalDate from;
     protected LocalDate to;
-    
+
     public Event(String description, String from, String to) {
         super(description);
         try {
@@ -18,7 +18,7 @@ public class Event extends Task {
             throw new DukeException("Unknown error occurred when parsing datetime.");
         }
     }
-    
+
     @Override
     public String toString() {
         String formattedFrom = from.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
