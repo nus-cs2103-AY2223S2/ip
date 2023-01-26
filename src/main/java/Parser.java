@@ -1,11 +1,13 @@
+/**
+ * File name: Parser.java
+ * @author: Jerome Neo
+ * Description: Parser class deals with making sense of the user command.
+ */
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-/**
- * Parser: deals with making sense of the user command
- */
 public class Parser {
     private static final String BYE_PATTERN = "bye";
     private static final String LIST_PATTERN = "list";
@@ -17,9 +19,14 @@ public class Parser {
     private static final String EVENT_PATTERN = "event\\s+(.*)\\s+/from\\s+(.*)\\s+/to\\s+(.*)";
 
     public Parser() {
-
     }
 
+    /**
+     * Returns a boolean that checks if the command matches the aforementioned command formats.
+     *
+     * @param command is the raw string input.
+     * @return true if the command is recognised, else false.
+     */
     public static boolean isValidCommand(String command) {
         String[] commandsCollection = {BYE_PATTERN, LIST_PATTERN, MARK_PATTERN, UNMARK_PATTERN,
                 DELETE_PATTERN, TODO_PATTERN, DEADLINE_PATTERN, EVENT_PATTERN};
@@ -31,6 +38,12 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Returns a boolean that checks if the command is a Task command and it matches the aforementioned command formats.
+     *
+     * @param command is the raw string input.
+     * @return true if the command is recognised as a Task, else false.
+     */
     public static boolean isTaskCommand(String command) {
         String[] commandsCollection = {TODO_PATTERN, DEADLINE_PATTERN, EVENT_PATTERN};
         for (String pattern : commandsCollection) {
@@ -41,6 +54,13 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Returns a Task object if the command is compatible.
+     *
+     * @param command is the raw string input.
+     * @return a Task object representation of the command.
+     * @throws DukeException is thrown if the command is incompatible.
+     */
     public static Task toTask(String command) throws DukeException {
         Task task;
         if (Parser.isTaskCommand(command)) {
@@ -66,14 +86,32 @@ public class Parser {
         return task;
     }
 
+    /**
+     * Returns an integer representing the index to be marked in a TaskList object.
+     *
+     * @param command is the raw string input.
+     * @return an index.
+     */
     public static Integer indexToMark(String command) {
         return Integer.parseInt(command.substring(5));
     }
 
+    /**
+     * Returns an integer representing the index to be unmarked in a TaskList object.
+     *
+     * @param command is the raw string input.
+     * @return an index.
+     */
     public static Integer indexToUnmark(String command) {
         return Integer.parseInt(command.substring(7));
     }
 
+    /**
+     * Returns an integer representing the index to be deleted in a TaskList object.
+     *
+     * @param command is the raw string input.
+     * @return an index.
+     */
     public static Integer indexToDelete(String command) {
         return Integer.parseInt(command.substring(7));
     }

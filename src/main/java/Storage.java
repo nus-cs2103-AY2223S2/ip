@@ -1,19 +1,24 @@
+/**
+ * File name: Storage.java
+ * @author: Jerome Neo
+ * Description: Storage class deals with loading tasks from the file and saving tasks in the file.
+ */
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-/**
- * Storage deals with loading tasks from the file and saving tasks in the file
- */
 public class Storage {
     private static String savePath;
     private static String loadPath;
+
+    /**
+     * Constructor for the storage.
+     */
     public Storage() {
         // Get the directory of from our root.
         String root;
@@ -22,10 +27,8 @@ public class Storage {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        // System.out.println(root);
         // Make sure that it is independent of the OS.
         savePath = java.nio.file.Paths.get(root,"src", "data", "duke.txt").toString();
-        // System.out.println(PATH);
     }
 
     public Storage(String pathSave, String pathLoad) {
@@ -33,6 +36,12 @@ public class Storage {
         loadPath = pathLoad;
     }
 
+    /**
+     * Saves all the tasks in the TaskList objects by writing it into the savePath directory.
+     *
+     * @param tasks is a TaskList object.
+     * @throws IOException if the directory is invalid.
+     */
     public static void autoSave(TaskList tasks) throws IOException {
         File f = new File(savePath);
         FileWriter fw = new FileWriter(f.getAbsolutePath());
@@ -52,6 +61,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a string object of how the task object will be saved in the save file.
+     *
+     * @param task is the task to be converted into a String to be saved.
+     * @return string that is to be saved.
+     */
     private static String readerFriendly(Task task) {
         String status = task.getStatus() ? "    ๑(◕‿◕)๑ COMPLETED! ๑(◕‿◕)๑    " : "    (｡-_-｡ ) INCOMPLETE ( ｡-_-｡)    git ";
         if (task instanceof Todo) {
