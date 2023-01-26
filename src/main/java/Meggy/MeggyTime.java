@@ -4,6 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Time that either comply to {@link LocalDateTime} format or user-customized.
@@ -20,11 +21,11 @@ public class MeggyTime {
     /**
      * Output format.
      */
-    private static final DateTimeFormatter outFmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public static final DateTimeFormatter outFmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     /**
      * Encode format.
      */
-    private static final DateTimeFormatter encodeFmt = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
+    public static final DateTimeFormatter encodeFmt = DateTimeFormatter.ofPattern("ddMMyyyy HHmm");
 
     static { //initialize date-time formats
         final String[] timeSeps = {":", ""};
@@ -110,5 +111,16 @@ public class MeggyTime {
      */
     public String encode() {
         return formatted == null ? customized : formatted.format(encodeFmt);
+    }
+
+    /**
+     * Two {@link MeggyTime} objects are equal iff they have same (equal or both null) formatted time and customized time.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof MeggyTime))
+            return false;
+        final MeggyTime other = (MeggyTime) o;
+        return Objects.equals(formatted, other.formatted) && Objects.equals(customized, other.customized);
     }
 }

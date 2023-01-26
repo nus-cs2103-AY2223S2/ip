@@ -54,11 +54,28 @@ public class DdlTask extends UserTask {
         return new DdlTask(desc, due);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String encode() {
         return Resource.cmdDdl + ' ' + desc + ' ' + dueFmt + due.encode();
     }
 
+    /**
+     * Two {@link DdlTask} objects are equal iff they have same (non-null) description and due time.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof DdlTask))
+            return false;
+        final DdlTask other = (DdlTask) o;
+        return due.equals(other.due) && desc.equals(other.desc);
+    }
+
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toString() {
         return label + super.toString() + " (by: " + due + ')';

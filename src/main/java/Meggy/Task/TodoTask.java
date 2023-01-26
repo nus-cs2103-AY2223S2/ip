@@ -19,13 +19,27 @@ public class TodoTask extends UserTask {
         super(desc);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String encode() {
         return Resource.cmdTodo + ' ' + desc;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toString() {
         return label + super.toString();
+    }
+
+    /**
+     * Two {@link TodoTask} objects are equal iff they have same (non-null) description.
+     */
+    @Override
+    public boolean equals(Object o) {
+        return (o instanceof TodoTask) && desc.equals(((TodoTask) o).desc);
     }
 }

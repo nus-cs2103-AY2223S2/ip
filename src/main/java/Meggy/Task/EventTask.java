@@ -78,14 +78,32 @@ public class EventTask extends UserTask {
         return new EventTask(desc.trim(), MeggyTime.of(start), MeggyTime.of(end));
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String encode() {
         return Resource.cmdEvent + ' ' + desc + ' ' + sttFmt + start.encode() + ' ' + endFmt + end.encode();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toString() {
         return label + super.toString() + " (from: " + start + " to: " + end + ')';
+    }
+
+    /**
+     * Two {@link EventTask} objects are equal iff they have same (non-null) description, due time, and start
+     * time.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof EventTask))
+            return false;
+        final EventTask other = (EventTask) o;
+        return start.equals(other.start) && end.equals(other.end) && desc.equals(other.desc);
     }
 
     /**
