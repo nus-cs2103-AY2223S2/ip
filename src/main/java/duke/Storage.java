@@ -19,9 +19,7 @@ public class Storage {
                 String[] tokens = sc.nextLine().split(",");
                 taskList.parseEventFromFile(tokens);
             }
-        } catch (FileNotFoundException e) {
-//            System.out.println(e.getMessage());
-        }
+        } catch (FileNotFoundException ignored) {}
     }
 
     void updateData(TaskList tasks) {
