@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -16,7 +18,7 @@ class TextUi {
     }
 
     public void getWelcomeMessage() {
-        out.println("Hello! I'm Duke.");
+        out.println("Hello! I'm duke.Duke.");
         out.println("What can I do for you?");
     }
 

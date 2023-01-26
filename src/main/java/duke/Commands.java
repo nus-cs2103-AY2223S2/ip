@@ -1,7 +1,8 @@
+package duke;
+
 import java.time.LocalDate;
 
 public class Commands {
-
     public static void executeListCommand(TextUi TextUi, TaskList taskList) {
         TextUi.printLine();
         if (taskList.isEmpty()) {
@@ -29,7 +30,9 @@ public class Commands {
             throw new DukeException("Invalid, there is no such task");
         }
     }
-    public static void executeUnmarkCommand(String input, TextUi TextUi, TaskList taskList, Storage storage) throws DukeException {
+
+    public static void executeUnmarkCommand(String input, TextUi TextUi
+            , TaskList taskList, Storage storage) throws DukeException {
         int indexToUnmark = Integer.parseInt(input) - 1;
         if (indexToUnmark < taskList.getArraySize()) {
             Task toUnmark = taskList.getTask(indexToUnmark);
@@ -41,7 +44,8 @@ public class Commands {
         }
     }
 
-    public static void executeDeleteCommand(String input, TextUi TextUi, TaskList taskList, Storage storage) throws DukeException {
+    public static void executeDeleteCommand(String input, TextUi TextUi
+            , TaskList taskList, Storage storage) throws DukeException {
         int indexToDelete = Integer.parseInt(input) - 1;
         if (indexToDelete < taskList.getArraySize()) {
             TextUi.getTaskRemovedMessage(taskList.getTask(indexToDelete), taskList.getArraySize() - 1);
@@ -52,8 +56,8 @@ public class Commands {
         }
     }
 
-    public static void executeToDoCommand(String input, TextUi TextUi, TaskList taskList, Storage storage)
-            throws DukeException {
+    public static void executeToDoCommand(String input, TextUi TextUi
+            , TaskList taskList, Storage storage) throws DukeException {
         String check = Parser.removeWhiteSpaces(input);
         if (check.equals("todo")) {
             throw new DukeException("The description of a todo cannot be empty.");
@@ -78,8 +82,8 @@ public class Commands {
         storage.saveTaskListToStorage(taskList);
     }
 
-    public static void executeEventCommand(String input, TextUi TextUi, TaskList taskList, Storage storage)
-            throws DukeException {
+    public static void executeEventCommand(String input, TextUi TextUi
+            , TaskList taskList, Storage storage) throws DukeException {
         String check = Parser.removeWhiteSpaces(input);
         if (check.equals("event")) {
             throw new DukeException("The description of a event cannot be empty.");
