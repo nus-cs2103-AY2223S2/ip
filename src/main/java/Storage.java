@@ -1,3 +1,4 @@
+import javax.sound.midi.SysexMessage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
@@ -8,10 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class Backup {
+public class Storage {
     private final Path backupPath;
 
-    public Backup() {
+    public Storage(String filepath) {
         String home = System.getProperty("user.dir");
         Path path = java.nio.file.Paths.get(home, "src", "main", "data");
         boolean directoryExists = java.nio.file.Files.exists(path);
@@ -22,16 +23,16 @@ public class Backup {
                 System.out.println("Could not create /data directory.");
             }
         }
-        this.backupPath = Path.of(path + "/duke.txt");
+        this.backupPath = Path.of(path + "/" + filepath);
     }
 
-    public void writeArray (List<Task> arr) {
+    public void writeArray (TaskList arr) {
         File file = new File(backupPath.toString());
         try {
             boolean fileCreated = file.createNewFile();
             FileWriter fileWriter = new FileWriter(file, false);
-            for (int i = 0; i < arr.size(); i++) {
-                fileWriter.write(arr.get(i).toBackup());
+            for (int i = 0; i < arr.getLength(); i++) {
+                fileWriter.write(arr.getTask(i).toBackup());
             }
             fileWriter.close();
         } catch (IOException e) {
@@ -39,11 +40,13 @@ public class Backup {
         }
     }
 
-    public List<Task> readArray () {
-        List<Task> arr = new ArrayList<>();
+    public TaskList readArray () {
+        TaskList arr = new TaskList();
 
         try {
             File file = new File(backupPath.toString());
+            System.out.println(backupPath);
+
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine()) {
                 String[] line = myReader.nextLine().split("\\|");
@@ -62,7 +65,7 @@ public class Backup {
                 if (line[1].strip().equals("1")) {
                     task.setStatus(true);
                 }
-                arr.add(task);
+                arr.addTask(task);
             }
             myReader.close();
         } catch (FileNotFoundException e) {

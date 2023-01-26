@@ -22,9 +22,6 @@ public class Event extends Task {
 
     @Override
     public String toBackup() {
-        String fromStr = from.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        String toStr = to.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-
-        return "D | " + super.toBackup() + " | " + fromStr + " | " + toStr + "\n";
+        return "D | " + super.toBackup() + " | " + from + " | " + to + "\n";
     }
 }
