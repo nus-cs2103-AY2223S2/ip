@@ -1,3 +1,7 @@
+package duke;
+
+import duke.DukeException;
+
 public class Parser {
 
     private final static String LIST = "list";
