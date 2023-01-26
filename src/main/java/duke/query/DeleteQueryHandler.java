@@ -17,6 +17,6 @@ public class DeleteQueryHandler extends TaskQueryHandler {
         st.nextToken();
         Task t = tt.deleteTask(Integer.parseInt(st.nextToken()) - 1);
         tt.saveAllTasks();
-        return "duke.task.Task deleted: " + t;
+        return "Task deleted: " + t;
     }
 }

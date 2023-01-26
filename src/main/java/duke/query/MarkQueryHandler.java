@@ -17,6 +17,6 @@ public class MarkQueryHandler extends TaskQueryHandler {
         st.nextToken();
         Task t = tt.markUnmarkTask(Integer.parseInt(st.nextToken()) - 1, true);
         tt.saveAllTasks();
-        return "duke.task.Task marked as complete: " + t;
+        return "Task marked as complete: " + t;
     }
 }

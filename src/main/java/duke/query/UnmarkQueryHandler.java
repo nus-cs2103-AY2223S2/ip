@@ -17,6 +17,6 @@ public class UnmarkQueryHandler extends TaskQueryHandler {
         st.nextToken();
         Task t = tt.markUnmarkTask(Integer.parseInt(st.nextToken()) - 1, false);
         tt.saveAllTasks();
-        return "duke.task.Task marked as incomplete: " + t;
+        return "Task marked as incomplete: " + t;
     }
 }
