@@ -1,4 +1,7 @@
-import java.lang.reflect.Array;
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class Tasklist {
@@ -22,5 +25,9 @@ public class Tasklist {
 
     public int size() {
         return list.size();
+    }
+
+    public void clear() {
+        list.clear();
     }
 }

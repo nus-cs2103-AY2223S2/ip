@@ -1,3 +1,9 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,7 +11,7 @@ import java.util.Scanner;
 
 public class Storage {
     public static void loadFile(Tasklist list) throws IOException, DukeException {
-        File file = new File(System.getProperty("user.dir") + "/data/Duke.txt");
+        File file = new File(System.getProperty("user.dir") + "/data/Duke.Duke.txt");
         File dir = new File(System.getProperty("user.dir") + "/data");
 
         // if directory has not been created, make directory
@@ -39,7 +45,7 @@ public class Storage {
         }
     }
     public static void saveToFile(Tasklist list) throws IOException {
-        FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/data/Duke.txt");
+        FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/data/Duke.Duke.txt");
         for (int i = 0; i < list.size(); i++) {
             fw.write(list.get(i).addDivider() +  "\n");
         }

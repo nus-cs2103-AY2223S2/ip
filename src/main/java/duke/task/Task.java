@@ -1,3 +1,6 @@
+package duke.task;
+
+import duke.Ui;
 
 public abstract class Task {
     private boolean isMarked;

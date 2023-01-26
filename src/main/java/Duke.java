@@ -1,4 +1,8 @@
-import java.util.ArrayList;
+import duke.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 import java.util.Scanner;
 
 
@@ -44,6 +48,11 @@ public class Duke {
                         Duke.executeDelete(input, list);
                     }
 
+                    //clear
+                    else if (Parser.is_Clear(input)) {
+                        Duke.executeClear(input, list);
+                    }
+
                     //todo
                     else if (Parser.is_toDo(input)) {
                         Duke.executeToDo(input, list);
@@ -59,7 +68,7 @@ public class Duke {
                         Duke.executeEvent(input, list);
                     } else {
                         System.out.println("Invalid Input!");
-                        //throw new DukeException("Invalid Input!");
+                        //throw new Duke.DukeException("Invalid Input!");
                     }
                     try {
                         Storage.saveToFile(list);
@@ -73,7 +82,12 @@ public class Duke {
                 sc.close();
     }
 
-        public static void executeList(Tasklist list) {
+    private static void executeClear(String input, Tasklist list) {
+            list.clear();
+            Ui.displayClear();
+    }
+
+    public static void executeList(Tasklist list) {
             Ui.displayList(list);
         }
 
