@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a ToDo object.
  */

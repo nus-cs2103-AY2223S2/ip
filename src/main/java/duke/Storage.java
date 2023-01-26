@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -32,8 +39,8 @@ public class Storage {
     }
 
     /**
-     * Recreates the list of Task objects from a file in the correct format.
-     * @return List of Task objects that was stored in the file.
+     * Recreates the list of duke.task.Task objects from a file in the correct format.
+     * @return List of duke.task.Task objects that was stored in the file.
      * @see <a href="https://www.sghill.net/2014/how-do-i-make-cross-platform-file-paths-in-java/">Tutorial 1</a>
      * @see <a href="https://www.baeldung.com/java-path-vs-file">Tutorial 2</a>
      * @see <a href="https://www.digitalocean.com/community/tutorials/java-read-file-line-by-line">Tutorial 3</a>

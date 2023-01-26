@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exceptions.DukeInvalidArgumentException;
+import duke.task.Task;
+
 import java.util.List;
 
 /**
@@ -92,7 +97,7 @@ public class TaskList {
     }
 
     /**
-     * Saves the underlying data to Storage.
+     * Saves the underlying data to duke.Storage.
      */
     public void close() {
         this.storage.saveData(this.userTasks);
