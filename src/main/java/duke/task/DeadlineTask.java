@@ -53,11 +53,11 @@ public class DeadlineTask extends DukeTask{
      * @return The formatted task.
      */
     @Override
-    public String toDBSchema() {
+    public String toDbSchema() {
         return String.format(
                 "%s|%s|%s",
                 "D",
-                super.toDBSchema(),
+                super.toDbSchema(),
                 this.deadline.format(DateTimeFormatter.ofPattern("d/M/yy HHmm"))
         );
     }

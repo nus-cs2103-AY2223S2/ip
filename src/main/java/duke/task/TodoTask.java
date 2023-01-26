@@ -24,11 +24,11 @@ public class TodoTask extends DukeTask{
      * @return The formatted task.
      */
     @Override
-    public String toDBSchema() {
+    public String toDbSchema() {
         return String.format(
                 "%s|%s",
                 "T",
-                super.toDBSchema()
+                super.toDbSchema()
         );
     }
 

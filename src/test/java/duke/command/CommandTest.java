@@ -17,9 +17,9 @@ public class CommandTest {
     private static final PrintStream originalOut = System.out;
     private static final PrintStream originalErr = System.err;
 
-    static final Storage s = Storage.create();
+    static final Storage storage = Storage.create();
     static final Ui ui = new Ui();
-    static final TaskList ts = TaskList.create(s, ui);
+    static final TaskList taskList = TaskList.create(storage, ui);
 
     @BeforeAll
     public static void setup() {

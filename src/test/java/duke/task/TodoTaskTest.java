@@ -17,7 +17,7 @@ public class TodoTaskTest {
     }
 
     @Test
-    public void unmark() {
+    public void unMark() {
         DukeTask todo = new TodoTask("task one");
 
         assertEquals(
@@ -35,11 +35,11 @@ public class TodoTaskTest {
 
 
     @Test
-    public void toDBSchema() {
+    public void toDbSchema() {
         DukeTask todo = new TodoTask("task one");
         assertEquals(
                 "T|0|task one",
-                todo.toDBSchema()
+                todo.toDbSchema()
         );
     }
 }

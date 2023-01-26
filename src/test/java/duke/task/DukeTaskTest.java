@@ -22,7 +22,7 @@ public class DukeTaskTest {
     }
 
     @Test
-    public void fromDB() {
+    public void fromDb() {
         String event = "E|0|task one|2/2/23 0000|2/2/23 0001";
         String deadline = "D|0|task two|2/2/23 0001";
         String todo = "T|0|task three";
@@ -32,11 +32,11 @@ public class DukeTaskTest {
         assertAll(
                 () -> assertEquals(
                    new TodoTask("task three").toString(),
-                   DukeTask.fromDBSchema(todo).toString()
+                   DukeTask.fromDbSchema(todo).toString()
                 ),
                 () -> assertEquals(
                     new DeadlineTask("task two", DukeUtils.parseDateTime("2/2/23 0001")).toString(),
-                    DukeTask.fromDBSchema(deadline).toString()
+                    DukeTask.fromDbSchema(deadline).toString()
                 ),
                 () -> assertEquals(
                     new EventTask(
@@ -44,18 +44,17 @@ public class DukeTaskTest {
                             DukeUtils.parseDateTime("2/2/23 0000"),
                             DukeUtils.parseDateTime("2/2/23 0001")
                             ).toString(),
-                    DukeTask.fromDBSchema(event).toString()
+                    DukeTask.fromDbSchema(event).toString()
                 ),
                 () -> assertEquals(
                         todoTask.toString(),
-                        DukeTask.fromDBSchema(doneTodo).toString()
+                        DukeTask.fromDbSchema(doneTodo).toString()
                 )
         );
     }
 
     @Test
     public void testBaseData() {
-
         DukeTask stub = new TaskStub();
         DukeTask stubTwo = new TaskStub();
         stubTwo.setDone();
@@ -69,7 +68,7 @@ public class DukeTaskTest {
                 ),
                 () -> assertEquals(
                         "0|val",
-                        stub.toDBSchema()
+                        stub.toDbSchema()
                 ),
                 () -> assertEquals(
                         "[X] val",

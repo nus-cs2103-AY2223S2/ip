@@ -56,7 +56,7 @@ public abstract class DukeTask {
      *
      * @return The formatted string.
      */
-    public String toDBSchema() {
+    public String toDbSchema() {
         return String.format(
                 "%s|%s",
                 this.isDone? 1 : 0,
@@ -71,7 +71,7 @@ public abstract class DukeTask {
      * @param o The object read from file storage.
      * @return The corresponding task record.
      */
-    public static DukeTask fromDBSchema(Object o) {
+    public static DukeTask fromDbSchema(Object o) {
         String[] s = o.toString().split("\\|");
         boolean isDone = s[1].equals("1");
         switch (s[0]) {

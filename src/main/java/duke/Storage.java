@@ -26,8 +26,8 @@ import java.util.stream.Stream;
  * task data.
  */
 public class Storage {
-    private static final String folderPath = "data";
-    private static final String filePath = "data/DUKEDB.TXT";
+    private static final String FOLDER_PATH = "data";
+    private static final String FILE_PATH = "data/DUKEDB.TXT";
     private final File store;
 
     /**
@@ -35,7 +35,7 @@ public class Storage {
      */
     private Storage() {
         //Create directory if it does not yet exist
-        Path parentDir = Paths.get(folderPath);
+        Path parentDir = Paths.get(FOLDER_PATH);
         try {
             Files.createDirectory(parentDir);
         } catch (FileAlreadyExistsException fe) {
@@ -46,7 +46,7 @@ public class Storage {
         }
 
         //Create file if it does not yet exist.
-        File store = new File(filePath);
+        File store = new File(FILE_PATH);
         if (!store.exists()) {
             try {
                 store.createNewFile();
@@ -73,14 +73,14 @@ public class Storage {
     public long write(String s) {
         this.store.setWritable(true);
         try {
-            FileWriter fw = new FileWriter(filePath, true);
+            FileWriter fw = new FileWriter(FILE_PATH, true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(s);
             bw.newLine();
             bw.close();
             fw.close();
             this.store.setWritable(false);
-            return Files.lines(Paths.get(filePath)).count();
+            return Files.lines(Paths.get(FILE_PATH)).count();
         } catch (IOException e) {
             return 0;
         }
@@ -93,16 +93,16 @@ public class Storage {
      * @return The modified task.
      */
     public DukeTask setDone(int index, boolean done) {
-        Path path = Paths.get(filePath);
+        Path path = Paths.get(FILE_PATH);
         try {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-            DukeTask task = Objects.requireNonNull(DukeTask.fromDBSchema(lines.get(index)));
+            DukeTask task = Objects.requireNonNull(DukeTask.fromDbSchema(lines.get(index)));
             if (done) {
                 task.setDone();
             } else {
                 task.markUndone();
             }
-            lines.set(index, task.toDBSchema());
+            lines.set(index, task.toDbSchema());
 
             this.store.setWritable(true);
             Files.write(path, lines, StandardCharsets.UTF_8);
@@ -120,10 +120,10 @@ public class Storage {
      * @return The deleted task.
      */
     public DukeTask delete(int index) {
-        Path path = Paths.get(filePath);
+        Path path = Paths.get(FILE_PATH);
         try {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-            DukeTask task = DukeTask.fromDBSchema(lines.remove(index));
+            DukeTask task = DukeTask.fromDbSchema(lines.remove(index));
 
             this.store.setWritable(true);
             Files.write(path, lines, StandardCharsets.UTF_8);
@@ -144,7 +144,7 @@ public class Storage {
         StringBuilder out = new StringBuilder();
         long lines = 0;
         try {
-            Path path = Paths.get(filePath);
+            Path path = Paths.get(FILE_PATH);
             Stream<String> fileStream = Files.lines(path);
             lines = Files.lines(path).count();
             Object[] output = fileStream.toArray();
@@ -152,7 +152,7 @@ public class Storage {
                 out.append(String.format(
                         "%s. %s\n",
                         i + 1,
-                        DukeTask.fromDBSchema(output[i])
+                        DukeTask.fromDbSchema(output[i])
                 ));
             }
         } catch (IOException e) {
@@ -172,10 +172,10 @@ public class Storage {
      */
     public List<DukeTask> toList() {
         try {
-            Path path = Paths.get(filePath);
+            Path path = Paths.get(FILE_PATH);
             Stream<String> fileStream = Files.lines(path);
             return fileStream
-                    .map(task -> DukeTask.fromDBSchema(task))
+                    .map(task -> DukeTask.fromDbSchema(task))
                     .collect(Collectors.toList());
         } catch (IOException e) {
             return List.of();
@@ -187,7 +187,7 @@ public class Storage {
      * @return The number of records stored.
      */
     public long size() {
-        try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
+        try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
             return lines.count();
         } catch (IOException e) {
             return 0L;

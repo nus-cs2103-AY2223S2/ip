@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class QueryCommandTest extends CommandTest {
-    private static ArrayList<DukeTask> currentTasks = new ArrayList<DukeTask>();
+    private static final ArrayList<DukeTask> currentTasks = new ArrayList<>();
     @BeforeAll
     public static void clearStorage() {
-        int size = Integer.parseInt(String.valueOf(s.size()));
+        int size = Integer.parseInt(String.valueOf(storage.size()));
         while (size > 0) {
-            currentTasks.add(s.delete(size - 1));
+            currentTasks.add(storage.delete(size - 1));
             size -= 1;
         }
     }
@@ -29,7 +29,7 @@ public class QueryCommandTest extends CommandTest {
     public static void repopulate() {
         while (currentTasks.size() > 0) {
             try {
-                ts.add(currentTasks.remove(currentTasks.size() - 1));
+                taskList.add(currentTasks.remove(currentTasks.size() - 1));
             } catch (TaskListFullException e) {
                 return;
             }
@@ -40,18 +40,18 @@ public class QueryCommandTest extends CommandTest {
     public void testList() {
         for (int i = 0; i < 5; i++) {
             try {
-                ts.add(new TodoTask("Task " + (i + 1)));
+                taskList.add(new TodoTask("Task " + (i + 1)));
             } catch (TaskListFullException e) {
                 break;
             }
         }
         outContent.reset();
         Command list = new ListCommand();
-        list.execute(ts, ui);
+        list.execute(taskList, ui);
         for (int i = 5; i > 0; i--) {
-            s.delete(i - 1);
+            storage.delete(i - 1);
         }
-        String expectedUI =
+        String expectedUi =
                 "      ____________________________________________________________\n" +
                 "Rick: 1. [T][ ] Task 1\n" +
                 "      2. [T][ ] Task 2\n" +
@@ -62,7 +62,7 @@ public class QueryCommandTest extends CommandTest {
         String actual = outContent.toString();
         outContent.reset();
         assertEquals(
-                expectedUI, actual
+                expectedUi, actual
         );
     }
 
@@ -73,23 +73,23 @@ public class QueryCommandTest extends CommandTest {
                     "deadline " + (i + 1),
                     DukeUtils.parseDateTime(String.format("2/2/23 000%s", i))
             );
-            s.write(dl.toDBSchema());
+            storage.write(dl.toDbSchema());
         }
 
         DukeTask dlTwo = new DeadlineTask(
                 "deadline " + (6),
                 DukeUtils.parseDateTime("1/2/23 0000"));
-        s.write(dlTwo.toDBSchema());
+        storage.write(dlTwo.toDbSchema());
         outContent.reset();
 
         Command validFilter = new DateFilterCommand("/on 2/2/23");
-        validFilter.execute(ts, ui);
+        validFilter.execute(taskList, ui);
 
         for (int i = 6; i > 0; i--) {
-            s.delete(i - 1);
+            storage.delete(i - 1);
         }
 
-        String expectedValidUI =
+        String expectedValidUi =
                 "      ____________________________________________________________\n" +
                 "Rick: Searching for a list of tasks occurring on 2 Feb 2023:\n" +
                 "      - [D][ ] deadline 1 (by: Feb 02 2023 12:00AM)\n" +
@@ -98,9 +98,9 @@ public class QueryCommandTest extends CommandTest {
                 "      - [D][ ] deadline 4 (by: Feb 02 2023 12:03AM)\n" +
                 "      - [D][ ] deadline 5 (by: Feb 02 2023 12:04AM)\n" +
                 "      ____________________________________________________________\n\n";
-        String actualValidUI = outContent.toString();
+        String actualValidUi = outContent.toString();
         outContent.reset();
-        assertEquals(expectedValidUI, actualValidUI);
+        assertEquals(expectedValidUi, actualValidUi);
     }
 
     @Test
@@ -109,80 +109,80 @@ public class QueryCommandTest extends CommandTest {
         Command wrongFormat = new DateFilterCommand("2/2/23");
         Command emptyDate = new DateFilterCommand("/on 1/2/23");
 
-        String expectedUIOne =
+        String expectedUiOne =
                 "      ____________________________________________________________\n" +
                         "Rick: An invalid date was entered. Please use this format:\n" +
                         "      {day}/{month}/{year} {hour}{minute}\n" +
                         "      Example: 2/2/23 1200\n" +
                         "      ____________________________________________________________\n\n";
-        String expectedUITwo =
+        String expectedUiTwo =
                 "      ____________________________________________________________\n" +
                         "Rick: Usage: tasks /on {day}/{month}/{year}\n" +
                         "      ____________________________________________________________\n\n";
-        String expectedUIThree =
+        String expectedUiThree =
                 "      ____________________________________________________________\n" +
                         "Rick: Searching for a list of tasks occurring on 1 Feb 2023:\n" +
                         "      Hooray. No tasks occur on this date.\n" +
                         "      ____________________________________________________________\n\n";
 
-        invalidDateFilter.execute(ts, ui);
-        String actualUIOne = outContent.toString();
+        invalidDateFilter.execute(taskList, ui);
+        String actualUiOne = outContent.toString();
         outContent.reset();
-        assertEquals(expectedUIOne, actualUIOne);
+        assertEquals(expectedUiOne, actualUiOne);
 
-        wrongFormat.execute(ts, ui);
-        String actualUITwo = outContent.toString();
+        wrongFormat.execute(taskList, ui);
+        String actualUiTwo = outContent.toString();
         outContent.reset();
-        assertEquals(expectedUITwo, actualUITwo);
+        assertEquals(expectedUiTwo, actualUiTwo);
 
-        emptyDate.execute(ts, ui);
-        String actualUIThree = outContent.toString();
+        emptyDate.execute(taskList, ui);
+        String actualUiThree = outContent.toString();
         outContent.reset();
 
-        assertEquals(expectedUIThree, actualUIThree);
+        assertEquals(expectedUiThree, actualUiThree);
     }
 
     @Test
     public void testFind() {
-        s.write(new TodoTask("book 1").toDBSchema());
-        s.write(new TodoTask("paper 2").toDBSchema());
-        s.write(new TodoTask("read book now").toDBSchema());
+        storage.write(new TodoTask("book 1").toDbSchema());
+        storage.write(new TodoTask("paper 2").toDbSchema());
+        storage.write(new TodoTask("read book now").toDbSchema());
 
         Command search = new FindCommand("book");
-        search.execute(ts, ui);
+        search.execute(taskList, ui);
         for (int i = 3; i > 0; i--) {
-            s.delete(i - 1);
+            storage.delete(i - 1);
         }
 
-        String expectedValidUI =
+        String expectedValidUi =
                 "      ____________________________________________________________\n" +
                 "Rick: Here are the matching tasks in your list:\n" +
                 "      1. [T][ ] book 1\n" +
                 "      2. [T][ ] read book now\n" +
                 "      ____________________________________________________________\n\n";
-        String actualValidUI = outContent.toString();
+        String actualValidUi = outContent.toString();
         outContent.reset();
-        assertEquals(expectedValidUI, actualValidUI);
+        assertEquals(expectedValidUi, actualValidUi);
 
         Command searchNoResult = new FindCommand("write");
-        searchNoResult.execute(ts, ui);
-        String expectedNoResUI =
+        searchNoResult.execute(taskList, ui);
+        String expectedNoResUi =
                 "      ____________________________________________________________\n" +
                 "Rick: Here are the matching tasks in your list:\n" +
                 "      Try again. No tasks have this term.\n" +
                 "      ____________________________________________________________\n\n";
-        String actualNoResUI = outContent.toString();
+        String actualNoResUi = outContent.toString();
         outContent.reset();
-        assertEquals(expectedNoResUI, actualNoResUI);
+        assertEquals(expectedNoResUi, actualNoResUi);
 
         Command emptySearch = Parser.parse("find");
-        emptySearch.execute(ts, ui);
-        String expectedEmptyUI =
+        emptySearch.execute(taskList, ui);
+        String expectedEmptyUi =
                 "      ____________________________________________________________\n" +
                 "Rick: An empty search was attempted. Valid Usage: find {search term}\n" +
                 "      ____________________________________________________________\n\n";
-        String actualEmptyUI = outContent.toString();
+        String actualEmptyUi = outContent.toString();
         outContent.reset();
-        assertEquals(expectedEmptyUI, actualEmptyUI);
+        assertEquals(expectedEmptyUi, actualEmptyUi);
     }
 }

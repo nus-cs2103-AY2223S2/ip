@@ -9,31 +9,31 @@ public class MainCommandTest extends CommandTest {
     @Test
     public void testErrorCommand() {
         Command error = new ErrorCommand("This is an error");
-        error.execute(ts, ui);
+        error.execute(taskList, ui);
 
-        String expectedUI =
+        String expectedUi =
                 "      ____________________________________________________________\n" +
                 "Rick: This is an error\n" +
                 "      ____________________________________________________________\n\n";
-        String actualUI = outContent.toString();
+        String actualUi = outContent.toString();
         outContent.reset();
-        assertEquals(expectedUI, actualUI);
+        assertEquals(expectedUi, actualUi);
     }
 
     @Test
     public void testExitCommand() {
         Command exit = new ExitCommand();
         assertTrue(exit.isExit());
-        exit.execute(ts, ui);
+        exit.execute(taskList, ui);
 
-        String expectedUI =
+        String expectedUi =
                 "      ____________________________________________________________\n" +
                 "Rick: It was okay serving you. Might/might not see you again.\n" +
                 "      Exiting...\n" +
                 "      ____________________________________________________________\n\n";
-        String actualUI = outContent.toString();
+        String actualUi = outContent.toString();
         outContent.reset();
-        assertEquals(expectedUI, actualUI);
+        assertEquals(expectedUi, actualUi);
 
     }
 }

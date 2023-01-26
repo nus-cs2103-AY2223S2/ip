@@ -21,7 +21,7 @@ public class TaskList {
     private static int ID = 0;
 
     //The store instance that writes to storage
-    private Storage dfw;
+    private Storage storage;
     private Ui ui;
 
     //The unique ID of this store
@@ -37,7 +37,7 @@ public class TaskList {
     private TaskList(Storage s, Ui ui) {
         this.id = TaskList.ID + 1;
         TaskList.ID += 1;
-        this.dfw = s;
+        this.storage = s;
         this.ui = ui;
     }
 
@@ -60,11 +60,11 @@ public class TaskList {
      */
     public void add(DukeTask input) throws TaskListFullException {
         long count;
-        if (this.dfw.size() >= recordSize) {
+        if (this.storage.size() >= recordSize) {
             throw new TaskListFullException();
         }
         try {
-            count = this.dfw.write(input.toDBSchema());
+            count = this.storage.write(input.toDbSchema());
         } catch (NullPointerException e) {
             ui.error(new DukeException("An internal system error occurred"));
             return;
@@ -72,10 +72,7 @@ public class TaskList {
 
         String message = "Got it. I've added this task:\n"
                 + "  " + input
-                + String.format("\nNow you have %s task%s in the list.",
-                            count,
-                            count == 1L ? "" : "s"
-                    );
+                + String.format("\nNow you have %s task%s in the list.", count, count == 1L ? "" : "s");
         ui.section(message);
     }
 
@@ -87,10 +84,10 @@ public class TaskList {
      * invalid index was provided.
      */
     public void mark(int i) throws TaskListInvalidAccessException {
-        if (i < 0 || i >= this.dfw.size()) { //Unassigned, invalid index
+        if (i < 0 || i >= this.storage.size()) { //Unassigned, invalid index
             throw new TaskListInvalidAccessException();
         }
-        DukeTask task = this.dfw.setDone(i, true);
+        DukeTask task = this.storage.setDone(i, true);
         String message = "Nice! I've marked this task as done:\n" + "  " + task;
         ui.section(message);
     }
@@ -103,10 +100,10 @@ public class TaskList {
      * invalid index was provided.
      */
     public void unMark(int i) throws TaskListInvalidAccessException {
-        if (i < 0 || i >= this.dfw.size()) { //Unassigned, invalid index
+        if (i < 0 || i >= this.storage.size()) { //Unassigned, invalid index
             throw new TaskListInvalidAccessException();
         }
-        DukeTask task = this.dfw.setDone(i, false);
+        DukeTask task = this.storage.setDone(i, false);
         String message = "OK, I've marked this task as not done yet:\n" + "  " + task;
         ui.section(message);
     }
@@ -119,14 +116,13 @@ public class TaskList {
      * invalid index was provided.
      */
     public void delete(int i) throws TaskListInvalidAccessException {
-        long size = this.dfw.size();
+        long size = this.storage.size();
         if (i < 0 || i >= size) {
             throw new TaskListInvalidAccessException();
         }
-        DukeTask task = this.dfw.delete(i);
+        DukeTask task = this.storage.delete(i);
         String message = "Noted. I've removed this task:\n" + "  " + task
-                + String.format("\nNow you have %s task%s in the list.", size - 1,
-                size - 1 == 1L? "": "s");
+                + String.format("\nNow you have %s task%s in the list.", size - 1, size - 1 == 1L? "": "s");
         ui.section(message);
     }
 
@@ -138,7 +134,7 @@ public class TaskList {
      * @return The list of tasks that occur on that date, if any.
      */
     public String occurOnDate(LocalDate dt) {
-        List<DukeTask> filtered = this.dfw.toList()
+        List<DukeTask> filtered = this.storage.toList()
                 .stream()
                 .filter(dukeTask -> dukeTask.isOnDate(dt))
                 .collect(Collectors.toList());
@@ -157,7 +153,7 @@ public class TaskList {
      * @return The list of tasks.
      */
     public String searchDescription(String searchTerm) {
-        List<DukeTask> filtered = this.dfw.toList()
+        List<DukeTask> filtered = this.storage.toList()
                 .stream()
                 .filter(dukeTask -> dukeTask.containsTerm(searchTerm))
                 .collect(Collectors.toList());
@@ -177,6 +173,6 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        return this.dfw.toString();
+        return this.storage.toString();
     }
 }

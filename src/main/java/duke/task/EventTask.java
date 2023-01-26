@@ -51,11 +51,11 @@ public class EventTask extends DukeTask{
      * @return The formatted task.
      */
     @Override
-    public String toDBSchema() {
+    public String toDbSchema() {
         return String.format(
                 "%s|%s|%s|%s",
                 "E",
-                super.toDBSchema(),
+                super.toDbSchema(),
                 this.from.format(DateTimeFormatter.ofPattern("d/M/yy HHmm")),
                 this.to.format(DateTimeFormatter.ofPattern("d/M/yy HHmm"))
         );

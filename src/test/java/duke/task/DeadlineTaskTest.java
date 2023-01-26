@@ -15,7 +15,7 @@ public class DeadlineTaskTest {
     }
 
     @Test
-    public void unmark() {
+    public void unMark() {
         DukeTask deadline = new DeadlineTask("task one",
                 DukeUtils.parseDateTime("2/2/23 0000"));
         deadline.setDone();
@@ -39,12 +39,12 @@ public class DeadlineTaskTest {
     }
 
     @Test
-    public void toDBSchema() {
+    public void toDbSchema() {
         DukeTask deadline = new DeadlineTask("task one",
                 DukeUtils.parseDateTime("2/2/23 0000"));
         assertEquals(
                 "D|0|task one|2/2/23 0000",
-                deadline.toDBSchema()
+                deadline.toDbSchema()
         );
     }
 }

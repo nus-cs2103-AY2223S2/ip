@@ -21,7 +21,7 @@ public class EventTaskTest {
     }
 
     @Test
-    public void unmark() {
+    public void unMark() {
         DukeTask event = new EventTask(
                 "task one",
                 DukeUtils.parseDateTime("2/2/23 0001"),
@@ -57,7 +57,7 @@ public class EventTaskTest {
     }
 
     @Test
-    public void toDBSchema() {
+    public void toDbSchema() {
         DukeTask event = new EventTask(
                 "task one",
                 DukeUtils.parseDateTime("2/2/23 0001"),
@@ -65,7 +65,7 @@ public class EventTaskTest {
         );
         assertEquals(
                 "E|0|task one|2/2/23 0001|2/2/23 0005",
-                event.toDBSchema()
+                event.toDbSchema()
         );
     }
 }
