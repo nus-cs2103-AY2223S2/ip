@@ -1,4 +1,5 @@
 package duke;
+
 public class Art {
     String logo;
 
