@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -69,7 +70,8 @@ public class JeoBot {
                             throw new JeoException("Please enter a task description.");
                         }
                         if (by.isEmpty()) {
-                            throw new JeoException("Please enter a date/time after \"/by\".");
+                            throw new JeoException("Please enter a date-time in the format " +
+                                    "\"yyyy-MM-dd HH:mm\" after \"/by\".");
                         }
                         task = new Deadline(desc, by);
                         st.addTask(task);
@@ -82,13 +84,16 @@ public class JeoBot {
                             throw new JeoException("Please enter a task description.");
                         }
                         if (from.isEmpty() && to.isEmpty()) {
-                            throw new JeoException("Please enter a date/time after \"/from\" and \"/to\".");
+                            throw new JeoException("Please enter a date-time in the format " +
+                                    "\"yyyy-MM-dd HH:mm\" after \"/from\" and \"/to\".");
                         }
                         if (from.isEmpty()) {
-                            throw new JeoException("Please enter a date/time after \"/from\".");
+                            throw new JeoException("Please enter a date-time in the format " +
+                                    "\"yyyy-MM-dd HH:mm\" after \"/from\".");
                         }
                         if (to.isEmpty()) {
-                            throw new JeoException("Please enter a date/time after \"/to\".");
+                            throw new JeoException("Please enter a date-time in the format " +
+                                    "\"yyyy-MM-dd HH:mm\" after \"/to\".");
                         }
                         task = new Event(desc, from, to);
                         st.addTask(task);
@@ -98,6 +103,9 @@ public class JeoBot {
                 System.out.println("[Error] Sorry, I don't understand what you're saying :(");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("[Error] Task number cannot be negative, zero, or exceed the total number of tasks.");
+            } catch (DateTimeParseException e) {
+                System.out.println("[Error] Unable to parse date. " +
+                        "Please input date in the format: \"yyyy-MM-dd HH:mm\"");
             } catch (JeoException e) {
                 System.out.println(e.getMessage());
             }
@@ -127,7 +135,7 @@ public class JeoBot {
             if (!s.toLowerCase().contains("/by")) {
                 throw new JeoException(s.isEmpty()
                         ? "Please enter a task description."
-                        : "Please follow the format: deadline <description> /by <date/time>");
+                        : "Please follow the format: deadline <description> /by <yyyy-MM-dd HH:mm>");
             }
             String[] arr = parseSubstringTasks(s, "deadline");
             String desc = arr[0];
@@ -140,7 +148,8 @@ public class JeoBot {
             if (!s.toLowerCase().contains("/from") || !s.toLowerCase().contains("/to")) {
                 throw new JeoException(s.isEmpty()
                         ? "Please enter a task description."
-                        : "Please follow the format: event <description> /from <date/time> /to <date/time>");
+                        : "Please follow the format: event <description> " +
+                                "/from <yyyy-MM-dd HH:mm> /to <yyyy-MM-dd HH:mm>");
             }
             String[] arr = parseSubstringTasks(s, "event1");
             String desc = arr[0];
