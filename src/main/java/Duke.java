@@ -1,5 +1,12 @@
-import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Duke {
+    private static final String FILE_PATH = "./userRecords/records.txt";
+
     private static void printDashes() {
         System.out.println ("****************************************");
     }
@@ -15,10 +22,11 @@ public class Duke {
         System.out.println("Now you have " + items.size() + " tasks in the list.");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ArrayList<Task> list = new ArrayList<>();
         String request = "";
         int chosenTask;
+        recordManager manager = new recordManager(FILE_PATH);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -31,6 +39,10 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! This is Esther!");
         System.out.println("How can I help you today? ^_^");
+        printDashes();
+
+        System.out.println("Here is your previous records. ^_^");
+        list.addAll(manager.loadRecord(FILE_PATH));
         printDashes();
 
         while(!request.equals("bye")) {
@@ -56,6 +68,7 @@ public class Duke {
                         list.get(chosenTask - 1).setIsDone();
                         System.out.println("Nice! I've marked this task as done:");
                         System.out.println(list.get(chosenTask - 1));
+                        manager.writeToFile(list);
                         break;
                     case "unmark":
                         if(userInput.indexOf(" ") == -1) {
@@ -68,6 +81,7 @@ public class Duke {
                         list.get(chosenTask - 1).revertIsDone();
                         System.out.println("OK, I've marked this task as not done yet:");
                         System.out.println(list.get(chosenTask - 1));
+                        manager.writeToFile(list);
                         break;
                     case "todo":
                         if(userInput.indexOf(" ") == -1) {
@@ -78,6 +92,7 @@ public class Duke {
                         list.add(todo);
                         System.out.println("Got it. I've added this task:\n" + todo);
                         numOfTasks(list);
+                        manager.writeToFile(list);
                         break;
                     case "deadline":
                         if(userInput.indexOf(" ") == -1) {
@@ -90,6 +105,7 @@ public class Duke {
                         list.add(deadline);
                         System.out.println("Got it. I've added this task:\n" + deadline);
                         numOfTasks(list);
+                        manager.writeToFile(list);
                         break;
                     case "event":
                         if(userInput.indexOf(" ") == -1) {
@@ -103,6 +119,7 @@ public class Duke {
                         list.add(event);
                         System.out.println("Got it. I've added this task:\n" + event);
                         numOfTasks(list);
+                        manager.writeToFile(list);
                         break;
                     case "delete":
                         if(userInput.indexOf(" ") == -1) {
@@ -116,6 +133,7 @@ public class Duke {
                         System.out.println(list.get(chosenTask - 1));
                         list.remove(chosenTask - 1);
                         numOfTasks(list);
+                        manager.writeToFile(list);
                         break;
                     default:
                         throw new unknownInputException();
@@ -124,6 +142,8 @@ public class Duke {
                 System.out.println(e.eMessage);
             } catch(NumberFormatException e) {
                 System.out.println("The operation must follow by a integer");
+            } catch (IOException e) {
+                System.out.println(e);
             }
             printDashes();
         }
@@ -157,7 +177,7 @@ class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getTaskDes();
+        return "[" + this.getStatusIcon() + "]" + " " + this.getTaskDes();
     }
 }
 
@@ -234,5 +254,61 @@ class taskNotExist extends DukeException {
     }
 }
 
+class recordManager {
+    private final File file;
 
+    public recordManager(String filePath) throws IOException {
+        this.file = new File(filePath);
 
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        }
+    }
+
+    public ArrayList<Task> loadRecord(String filePath) throws IOException {
+        Scanner sc = new Scanner(this.file);
+        int index = 1;
+        ArrayList<Task> records = new ArrayList<>();
+
+        while (sc.hasNext()) {
+            String history = sc.nextLine();
+            System.out.println(index++ + "." + history);
+            String recordType = history.substring(0, 3);
+            String recordDescription = history.substring(7);
+            String recordStatus = history.substring(3, 6);
+            Task item = null;
+
+            switch (recordType) {
+                case "[T]":
+                    item = new Todo(recordDescription);
+                    break;
+                case "[D]":
+                    String byDate = recordDescription.substring(recordDescription.indexOf(":") + 2, recordDescription.length() - 1);
+                    recordDescription = recordDescription.substring(0, recordDescription.indexOf("("));
+                    item = new Deadline(recordDescription, byDate);
+                    break;
+                case "[E]":
+                    String fromDate = recordDescription.substring(recordDescription.indexOf("from:") + 6, recordDescription.indexOf("to:") - 1);
+                    String toDate = recordDescription.substring(recordDescription.indexOf("to:") + 4, recordDescription.length() - 1);
+                    recordDescription = recordDescription.substring(0, recordDescription.indexOf("("));
+                    item = new Event(recordDescription, fromDate, toDate);
+                    break;
+            }
+            if(recordStatus.equals("[X]")) {
+                item.setIsDone();
+            }
+            records.add(item);
+        }
+        return records;
+    }
+
+    public void writeToFile(ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(this.file);
+        for(int i = 0; i < tasks.size(); i++) {
+            fw.write((tasks.get(i)).toString());
+            fw.write("\n");
+        }
+        fw.close();
+    }
+}
