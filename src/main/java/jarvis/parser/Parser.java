@@ -16,6 +16,7 @@ import jarvis.command.ToDoCommand;
 import jarvis.command.UnknownCommand;
 import jarvis.command.subcommand.ByCommand;
 import jarvis.command.subcommand.FromCommand;
+import jarvis.command.subcommand.IntroCommand;
 import jarvis.command.subcommand.ToCommand;
 import jarvis.exception.InvalidActionException;
 
@@ -55,6 +56,8 @@ public class Parser {
         scanner.close();
 
         switch (action) {
+        case INTRO:
+            return new IntroCommand();
         case BYE:
             return new ByeCommand();
         case LIST:

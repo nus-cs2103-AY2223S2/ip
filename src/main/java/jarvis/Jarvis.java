@@ -19,6 +19,8 @@ public class Jarvis {
     private final Ui ui;
     private final TaskList taskList;
 
+    private boolean isExit;
+
     /**
      * Constructor for Jarvis.
      */
@@ -26,6 +28,8 @@ public class Jarvis {
         this.storage = new Storage();
         this.ui = new Ui(BOT_NAME);
         this.taskList = new TaskList(storage.readTasks());
+
+        this.isExit = false;
     }
 
     /**
@@ -35,29 +39,33 @@ public class Jarvis {
         this.ui.printLogo();
         this.ui.printStandard(Ui.Response.INTRO);
 
-        boolean isExit = false;
         Scanner scanner = new Scanner(System.in);
         while (!isExit && scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            if (line.isBlank()) {
-                this.ui.printUserPrompt();
-                continue;
-            }
-
-            Command command;
-            try {
-                command = Parser.parse(line);
-            } catch (InvalidActionException e) {
-                this.ui.printStandard(Ui.Response.CONFUSED);
-                continue;
-            }
-            command.execute(this.ui, this.taskList, this.storage);
-            isExit = command.isExit();
+            this.handleUserInput(line);
         }
         scanner.close();
     }
 
-    public static void main(String[] args) {
-        new Jarvis().run();
+    public String getResponse(String input) {
+        this.handleUserInput(input);
+        return this.ui.dumpResponses();
+    }
+
+    private void handleUserInput(String input) {
+        if (input == null || input.isBlank()) {
+            this.ui.printUserPrompt();
+            return;
+        }
+
+        Command command;
+        try {
+            command = Parser.parse(input);
+        } catch (InvalidActionException e) {
+            this.ui.printStandard(Ui.Response.CONFUSED);
+            return;
+        }
+        command.execute(this.ui, this.taskList, this.storage);
+        isExit = command.isExit();
     }
 }

@@ -1,5 +1,6 @@
 package jarvis.ui;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,6 +24,7 @@ public class Ui {
     }
 
     private final String name;
+    private final List<String> responses;
 
     /**
      * Constructor for the Ui class.
@@ -31,28 +33,39 @@ public class Ui {
      */
     public Ui(String name) {
         this.name = name;
+        this.responses = new LinkedList<>();
     }
 
     /**
-     * Formats and prints multiple lines of response.
+     * Dumps the accumulated responses.
      *
-     * @param lines List of response lines.
+     * @return String dump.
+     */
+    public String dumpResponses() {
+        String dump = String.join("\n", this.responses);
+        this.responses.clear();
+        return dump;
+    }
+
+    public void print(String ...lines) {
+        this.print(List.of(lines));
+    }
+
+    /**
+     * Formats and prints the given lines of response.
+     *
+     * @param lines Response lines.
      */
     public void print(List<String> lines) {
+        // Print bot name
         System.out.printf("| %s:%n", name);
+        // Print lines
         for (String line : lines) {
             System.out.println("| \t" + line);
         }
         this.printUserPrompt();
-    }
 
-    /**
-     * Formats and prints a single line of response.
-     *
-     * @param line Response line.
-     */
-    public void print(String line) {
-        this.print(List.of(line));
+        this.responses.addAll(lines);
     }
 
     /**
@@ -61,22 +74,24 @@ public class Ui {
      * @param response Type of response.
      */
     public void printStandard(Response response) {
+        String standard;
         switch (response) {
         case INTRO:
-            print(String.format("Hello, I'm %s, how may I help you?", this.name));
+            standard = String.format("Hello, I'm %s, how may I help you?", this.name);
             break;
         case GOODBYE:
-            print("Goodbye, and see you again!");
+            standard = "Goodbye, and see you again!";
             break;
         case CONFUSED:
-            print("I don't quite understand, please try again.");
+            standard = "I don't quite understand, please try again.";
             break;
         case REJECT:
-            print("Sorry, I can't handle that right now.");
+            standard = "Sorry, I can't handle that right now.";
             break;
         default:
-            print("I'm most definitely a teapot.");
+            standard = "I'm most definitely a teapot.";
         }
+        print(standard);
     }
 
     /**

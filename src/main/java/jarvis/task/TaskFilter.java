@@ -114,9 +114,6 @@ public class TaskFilter {
                 .filter(s -> !s.isBlank())
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
-        for (String word : words) {
-            System.out.println("Word: " + word);
-        }
         this.keywords.addAll(words);
         return this;
     }
