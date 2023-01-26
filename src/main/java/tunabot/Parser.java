@@ -116,6 +116,22 @@ public class Parser {
                 System.out.println("    Blub! You have " + tasks.size() + " tasks now!");
             }
             break;
+        case "find":
+            if (command.length < 2) {
+                throw new InputException("BLUB! find needs a search target!");
+            } else {
+                String target = command[1];
+                TaskList targetList = tasks.find(target);
+                if (targetList.size() == 0) {
+                    System.out.println("BLUB! No matching tasks!");
+                } else {
+                    System.out.println("BLUB! Here are your matching task(s)!");
+                    for (int i = 1; i <= targetList.size(); i++) {
+                        System.out.println("    " + i + ". " + targetList.get(i - 1));
+                    }
+                }
+            }
+            break;
         default:
             System.out.println("BLUB OH! INVALID COMMAND!");
         }

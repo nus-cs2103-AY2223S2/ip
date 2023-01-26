@@ -26,4 +26,19 @@ public class TaskList {
     public void remove(int i) {
         tasks.remove(i);
     }
+
+    /**
+     * Returns a TaskList containing tasks that contain the given target String
+     * @param target Target string to search for
+     * @return targetList TaskList containing matching tasks
+     */
+    public TaskList find(String target) {
+        TaskList targetList = new TaskList();
+        for (Task task : tasks) {
+            if (task.getName().contains(target)) {
+                targetList.add(task);
+            }
+        }
+        return targetList;
+    }
 }
