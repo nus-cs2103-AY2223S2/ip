@@ -1,7 +1,6 @@
 package seedu.duke;
 
 public class Parser {
-
     private final static String LIST = "list";
     private final static String MARK = "mark";
     private final static String UNMARK = "unmark";
