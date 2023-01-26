@@ -25,10 +25,10 @@ public class Event extends Task {
         this.startStr = startStr.trim();
         this.endStr = endStr.trim();
         if (this.description.equals("")) {
-            throw new DukeException("The description of a deadline cannot be empty.");
+            throw new DukeException("The description of an event cannot be empty.");
         }
         if (this.startStr.equals("") || this.endStr.equals("")) {
-            throw new DukeException("The start and/or end time of a deadline cannot be empty.");
+            throw new DukeException("The start and/or end time of an event cannot be empty.");
         }
         try {
             startDateTime = LocalDateTime.parse(startStr, inputFormatter);
