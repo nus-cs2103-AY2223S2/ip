@@ -67,7 +67,11 @@ public enum Command {
 
     /** Catches FILTER calls with no input. */
     FILTER_BAD  ("filter",      false),
+
+    /** Displays the tasks that contain the input. */
     FIND        ("find ",       true),
+
+    /** Catches FIND calls with no input. */
     FIND_BAD    ("find",        false),
 
     /** Catches all other inputs. */

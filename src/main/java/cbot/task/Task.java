@@ -38,6 +38,11 @@ public class Task implements Comparable<Task> {
         this.isDone = false;
     }
 
+    /**
+     * Returns the description of the task.
+     *
+     * @return The task description.
+     */
     public String getDesc() {
         return this.desc;
     }
@@ -91,7 +96,7 @@ public class Task implements Comparable<Task> {
     @Override
     public String toString() {
         return String.format("[%s][%s] %s",
-                getSymbol(), getStatus(), this.desc);
+                getSymbol(), getStatus(), getDesc());
     }
 
     /**
@@ -103,7 +108,7 @@ public class Task implements Comparable<Task> {
      */
     public String makeFileFriendly() {
         return String.format("%s%s%s%s%s",
-                getSymbol(), SEP, getStatus(), SEP, this.desc);
+                getSymbol(), SEP, getStatus(), SEP, getDesc());
     }
 
     /**
@@ -144,7 +149,7 @@ public class Task implements Comparable<Task> {
     @Override
     public int compareTo(Task other) {
         if (this.getTime().isEqual(other.getTime())) {
-            return this.desc.compareTo(other.desc);
+            return getDesc().compareTo(other.getDesc());
         }
         
         return getTime().compareTo(other.getTime());
