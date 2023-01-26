@@ -87,6 +87,16 @@ public class Duke {
                     continue;
                 }
 
+                else if (input.equals("delete")) {
+                    int index = scan.nextInt();
+                    Task t = list.get(index - 1);
+                    list.remove(index - 1);
+                    counter = counter - 1;
+                    System.out.print("Noted. I've removed this task:\n" + t.toString() + "\n" + "Now you have " + counter + " tasks in the list.\n");
+                    input = scan.next();
+                    continue;
+                }
+
                 else if (input.equals("list")){
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < counter; i++) {
