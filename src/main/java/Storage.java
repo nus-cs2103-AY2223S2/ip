@@ -11,15 +11,15 @@ import java.util.Scanner;
 public class Storage {
     private File storageFile;
 
-    Storage(String filePath) {
-        String basePath = System.getProperty("user.dir");
-        Path nextPath = Paths.get(basePath, "src", "main", "java");
-        File dataDirectory = new File(nextPath.toString() + "/data");
-        if (!dataDirectory.exists()) {
-            System.out.println(dataDirectory.mkdir());
+    Storage(String file) {
+        try {
+            String innerPath = System.getProperty("user.dir");
+            Path path = Paths.get(innerPath, "src", "main", "java", "data");
+            Files.createDirectories(path);
+            storageFile = new File(path.toString() + file);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        this.storageFile = new File(nextPath.toString() + filePath);
-
     }
     // create an empty text file if there is no data or load the existing data to task list if data exist
     public ArrayList<Task> load() {
