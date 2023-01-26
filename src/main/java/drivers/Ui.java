@@ -1,5 +1,6 @@
 package drivers;
 
+import support.Instructions;
 import task.TaskList;
 
 import java.util.Scanner;
@@ -13,7 +14,8 @@ public class Ui {
 
     public Ui() {
         System.out.println("Echo! I'm Bond.");
-        System.out.println(".....");
+        System.out.println("---------------");
+        System.out.println(Instructions.generate());
     }
 
     /**
@@ -25,7 +27,7 @@ public class Ui {
         boolean check = true;
 
         while (check) {
-            System.out.println("Awaiting command");
+            System.out.println("\n----- Awaiting command -----");
             check = this.parser.continueCommand(sc.nextLine(), l);
         }
     }

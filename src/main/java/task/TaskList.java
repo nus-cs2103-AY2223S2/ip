@@ -9,18 +9,23 @@ public class TaskList {
     private ArrayList<Task> records = new ArrayList<>();
 
     // default constructor
-
     public void add(Task task) {
         records.add(task);
+        System.out.println("B: " + task.toString() + "has been added");
     }
 
     public void delete(int x) {
-        records.remove(x-1);
+        Task temp = records.remove(x-1);
+        System.out.println("B: " + temp.toString() + "has been removed");
     }
 
     public String print() {
         String s = "";
         int n = this.records.size();
+
+        if (n == 0) {
+            return "B: There are no missions!";
+        }
 
         for (int i = 0; i < n; i++) {
             if (i != n - 1) {
@@ -50,7 +55,7 @@ public class TaskList {
      * @param s keyword that user inputs
      */
     public void find(String s) {
-        System.out.println("These are what I found:");
+        System.out.println("B: " + "These are what I found:");
 
         int x = 1;
         int n = this.records.size();
@@ -63,7 +68,7 @@ public class TaskList {
         }
 
         if (x == 1) {
-            System.out.println("No missions contain this keyword.");
+            System.out.println("B: " + "No missions contain this keyword.");
         }
     }
 }

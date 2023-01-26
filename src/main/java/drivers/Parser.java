@@ -2,6 +2,7 @@ package drivers;
 
 import support.Commands;
 import support.DukeException;
+import support.Instructions;
 
 import task.Deadline;
 import task.Event;
@@ -73,23 +74,29 @@ public class Parser {
                 l.delete(Integer.parseInt(parts[1]));
                 return true;
 
-                case find:
-                    l.find(parts[1]);
-                    return true;
+            case find:
+                l.find(parts[1]);
+                return true;
 
-                default:
-                    System.out.println("Something has gone wrong!");
-                    return false;
+            case help:
+                System.out.println("B: " + Instructions.generate());
+                return true;
+
+            default:
+                System.out.println("Something has gone wrong!");
+                return false;
 
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            System.out.println("B: " + e.getMessage());
         } catch (DateTimeParseException e) {
-            System.out.println("Please enter a valid date format");
+            System.out.println("B: Please enter a valid date format");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Please key in a positive value that is less than " + l.size());
+            System.out.println("B: Please key in a valid command. Enter 'help' for instructions.");
         } catch (NumberFormatException e) {
-            System.out.println("Please key in an integer number");
+            System.out.println("B: Please key in an integer number");
+        } catch (IllegalArgumentException e) {
+            System.out.println("B: Command not recognised. Please re-try");
         }
         return true;
     }

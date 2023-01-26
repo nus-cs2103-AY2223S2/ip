@@ -1,2 +1,1 @@
-1. [T][ ] abc
-2. [T][ ] cde
+B: There are no missions!
