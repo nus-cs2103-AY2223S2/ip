@@ -9,7 +9,7 @@ public class TunaBot {
     private Storage storage;
     private Ui ui;
     private static final Scanner s = new Scanner(System.in);
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static TaskList tasks;
     private static boolean toExit = false;
     public TunaBot(Path savePath) {
         ui = new Ui();
@@ -23,9 +23,9 @@ public class TunaBot {
     public void run() {
         ui.greeting();
         while (!toExit) {
-            ui.line();
             try {
                 String input = s.nextLine();
+                ui.line();
                 toExit = Parser.parse(input, tasks);
             } catch (InputException e) {
                 ui.printErrorMessage(e);

@@ -3,7 +3,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -13,7 +12,7 @@ public class Storage {
         this.filePath = filePath;
     }
     
-    public ArrayList<Task> load() throws IOException {
+    public TaskList load() throws IOException {
         File saveFile = filePath.toFile();
         Path parentPath = filePath.getParent();
         File parentFolder = parentPath.toFile();
@@ -25,8 +24,8 @@ public class Storage {
         }
         return loadSave(saveFile);
     }
-    private static ArrayList<Task> loadSave(File saveFile) {
-        ArrayList<Task> tasks = new ArrayList<>();
+    private static TaskList loadSave(File saveFile) {
+        TaskList tasks = new TaskList();
         try {
             Scanner saveReader = new Scanner(saveFile);
             while (saveReader.hasNextLine()) {
@@ -48,12 +47,12 @@ public class Storage {
         }
         return tasks;
     }
-    public void save(ArrayList<Task> tasks) {
+    public void save(TaskList tasks) {
         try {
             File saveFile = filePath.toFile();
             FileWriter writer = new FileWriter(saveFile);
-            for (Task task : tasks) {
-                writer.write(task.saveFormat()+ "\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                writer.write(tasks.get(i).saveFormat()+ "\n");
             }
             writer.close();
         } catch (IOException e) {

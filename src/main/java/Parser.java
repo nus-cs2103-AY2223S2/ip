@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-
 public class Parser {
-    public static boolean parse(String input, ArrayList<Task> tasks) throws InputException {
+    public static boolean parse(String input, TaskList tasks) throws InputException {
         String[] command = input.split(" ", 2);
         switch (command[0]) {
             case "list":
