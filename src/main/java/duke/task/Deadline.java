@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
  * @since 0.1
  */
 public class Deadline extends Task {
-    protected LocalDateTime by;
+    protected LocalDateTime endTime;
     protected DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     protected DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
 
@@ -25,7 +25,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
-        this.by = LocalDateTime.parse(by, INPUT_DATE_FORMAT);
+        this.endTime = LocalDateTime.parse(by, INPUT_DATE_FORMAT);
     }
 
     /**
@@ -33,6 +33,8 @@ public class Deadline extends Task {
      * @return String
      */
     public String toString() {
-        return "[D]" + getStatusIcon() + " " + description + " (by: " + by.format(OUTPUT_DATE_FORMAT) + ")";
+        return "[D]" + getStatusIcon()
+                + " " + description + " (by: "
+                + endTime.format(OUTPUT_DATE_FORMAT) + ")";
     }
 }

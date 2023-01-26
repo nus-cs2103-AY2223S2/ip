@@ -31,7 +31,7 @@ public class Storage {
      * Saves the task list onto the hard drive.
      * @param tasks The list of tasks.
      */
-    public void write(TaskList tasks) {
+    public void saveToDisk(TaskList tasks) {
         if (this.taskStorage.exists()) {
             this.taskStorage.delete();
         }

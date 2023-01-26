@@ -9,20 +9,20 @@ package duke.task;
  * @since 0.1
  */
 public class Event extends Task {
-    protected String from;
-    protected String to;
+    protected String startTime;
+    protected String endTime;
 
     /**
      * Constructor of Event.
      *
      * @param description Description of the event.
-     * @param from Start time of event.
-     * @param to End time of event.
+     * @param startTime Start time of event.
+     * @param endTime End time of event.
      */
-    public Event(String description, String from, String to) {
+    public Event(String description, String startTime, String endTime) {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -30,6 +30,9 @@ public class Event extends Task {
      * @return representation String representation of Event
      */
     public String toString() {
-        return "[E]" + getStatusIcon() + " " + description + " (from: " + from + " to: " + to + ")";
+        return "[E]" + getStatusIcon() + " " + description
+                + " (from: "
+                + startTime + " to: "
+                + endTime + ")";
     }
 }

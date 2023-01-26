@@ -33,31 +33,31 @@ public class DeadlineCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            StringBuilder sb = new StringBuilder();
-            StringBuilder by = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder endTime = new StringBuilder();
             boolean b = false;
             for (int i = 1; i < command.length; i++) {
                 if (b) {
-                    by.append(command[i]);
+                    endTime.append(command[i]);
                     if (i + 1 != command.length) {
-                        by.append(" ");
+                        endTime.append(" ");
                     }
                 } else {
                     if (command[i].equals("/by")) {
                         b = true;
-                        sb.setLength(sb.length() - 1);
+                        stringBuilder.setLength(stringBuilder.length() - 1);
                         continue;
                     }
-                    sb.append(command[i]);
-                    sb.append(" ");
+                    stringBuilder.append(command[i]);
+                    stringBuilder.append(" ");
                 }
             }
-            if (by.length() == 0) {
+            if (endTime.length() == 0) {
                 throw new DukeException(null, null);
             }
-            tasks.add(new Deadline(sb.toString(), by.toString()));
+            tasks.add(new Deadline(stringBuilder.toString(), endTime.toString()));
             ui.addMsg(tasks);
-            storage.write(tasks);
+            storage.saveToDisk(tasks);
         } catch (DukeException e) {
             ui.deadlineError();
         }

@@ -35,20 +35,20 @@ public class MarkCommand extends Command {
             if (this.command.length == 1) {
                 throw new DukeException(null, null);
             }
-            Scanner sc = new Scanner(command[1]);
-            if (!sc.hasNextInt()) {
-                sc.close();
+            Scanner scanner = new Scanner(command[1]);
+            if (!scanner.hasNextInt()) {
+                scanner.close();
                 throw new DukeException(null, null);
             }
-            int index = sc.nextInt() - 1;
+            int index = scanner.nextInt() - 1;
             if (tasks.get(index) == null) {
-                sc.close();
+                scanner.close();
                 throw new DukeException(null, null);
             }
             tasks.get(index).markAsDone();
             ui.markMsg(tasks, index);
-            storage.write(tasks);
-            sc.close();
+            storage.saveToDisk(tasks);
+            scanner.close();
         } catch (DukeException e) {
             ui.markError();
         }
