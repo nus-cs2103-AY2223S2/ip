@@ -7,14 +7,27 @@ import duke.utilities.TaskList;
 import duke.utilities.Ui;
 import java.util.Arrays;
 
+/**
+ * The {@code Command} class for the {@code event} command.
+ */
 public class EventCommand extends Command {
 
     private final String[] tokens;
 
+    /**
+     * Instantiates a new {@code EventCommand} object.
+     *
+     * @param tokens The array of strings generated from tokenising the user's input.
+     */
     public EventCommand(String[] tokens) {
         this.tokens = tokens;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws DukeInvalidEventCommandException If the {@code event} command is invalid.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidEventCommandException {
 

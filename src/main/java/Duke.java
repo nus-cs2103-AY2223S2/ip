@@ -13,6 +13,12 @@ public class Duke {
     private final Ui ui;
     private TaskList taskList;
 
+    /**
+     * Instantiates a new Duke app.
+     *
+     * @param filePath The path to the {@code duke.txt} file. The Duke app will save the user's
+     *                 tasks to {@code duke.txt} after every command, and load from it on startup.
+     */
     Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -26,12 +32,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Driver code for the Duke app.
+     *
+     * @param args The command line arguments supplied to the Duke app.
+     */
     public static void main(String[] args) {
         String home = System.getProperty("user.home");
         Path dukeFilePath = Path.of(home, "duke.txt");
         new Duke(dukeFilePath.toString()).run();
     }
 
+    /**
+     * Runs the Duke app.
+     */
     public void run() {
         this.ui.showWelcomeMessage();
         boolean isByeCommand = false;

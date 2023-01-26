@@ -6,8 +6,16 @@ import duke.utilities.Storage;
 import duke.utilities.TaskList;
 import duke.utilities.Ui;
 
+/**
+ * The {@code Command} class for the {@code list} command.
+ */
 public class ListCommand extends Command {
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws DukeEmptyListException If the {@code taskList} is empty.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeEmptyListException {
         if (taskList.isEmpty()) {
             throw new DukeEmptyListException();

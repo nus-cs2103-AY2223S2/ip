@@ -6,14 +6,27 @@ import duke.utilities.Storage;
 import duke.utilities.TaskList;
 import duke.utilities.Ui;
 
+/**
+ * The {@code Command} class for the {@code mark} command.
+ */
 public class MarkCommand extends Command {
 
     private final String[] tokens;
 
+    /**
+     * Instantiates a new {@code MarkCommand} object.
+     *
+     * @param tokens The array of strings generated from tokenising the user's input.
+     */
     public MarkCommand(String[] tokens) {
         this.tokens = tokens;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws DukeInvalidMarkCommandException If the {@code mark} command is invalid.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidMarkCommandException {
 

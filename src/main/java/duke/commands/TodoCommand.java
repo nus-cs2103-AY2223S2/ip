@@ -7,14 +7,27 @@ import duke.utilities.TaskList;
 import duke.utilities.Ui;
 import java.util.Arrays;
 
+/**
+ * The {@code Command} class for the {@code todo} command.
+ */
 public class TodoCommand extends Command {
 
     private final String[] tokens;
 
+    /**
+     * Instantiates a new {@code TodoCommand} object.
+     *
+     * @param tokens The array of strings generated from tokenising the user's input.
+     */
     public TodoCommand(String[] tokens) {
         this.tokens = tokens;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws DukeInvalidTodoCommandException If the {@code todo} command is invalid.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeInvalidTodoCommandException {
 
