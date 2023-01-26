@@ -35,11 +35,21 @@ public abstract class Task {
     /**
      * Formats the task into saveload readable format.
      * 
-     * @return formatted string
+     * @return a newly formatted string
      */
     public String saveFormat() {
         String[] temp = new String[] {this.description, this.isDone ? "y" : "n"};
         return String.join("\",\"", temp);
+    }
+
+    /**
+     * Checks if the task description contains the keyword.
+     * 
+     * @param keyword the keyword to search for
+     * @return true if this task contains keyword, false otherwise
+     */
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
     }
 
     @Override

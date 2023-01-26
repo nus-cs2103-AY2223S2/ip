@@ -101,21 +101,21 @@ public class TaskList {
      * @return list of all tasks ongoing today
      */
     public List<Task> findToday() {
-        ArrayList<Task> todays = new ArrayList<>();
+        ArrayList<Task> todayTasks = new ArrayList<>();
         for (Task t : taskList) {
             if (t instanceof Deadline) {
                 Deadline temp = (Deadline) t;
                 if (temp.matchToday()) {
-                    todays.add(temp);
+                    todayTasks.add(temp);
                 }
             } else if (t instanceof Event) {
                 Event temp = (Event) t;
                 if (temp.withinTimeframe()) {
-                    todays.add(temp);
+                    todayTasks.add(temp);
                 }
             }
         }
-        return todays;
+        return todayTasks;
     }
 
     /**
@@ -126,5 +126,15 @@ public class TaskList {
      */
     public void save(String pathname) throws KiraException {
         SaveLoad.save(taskList, pathname);
+    }
+
+    public List<Task> findByKey(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.contains(keyword)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
     }
 }

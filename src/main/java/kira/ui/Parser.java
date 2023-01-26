@@ -5,6 +5,7 @@ import kira.command.Command;
 import kira.command.DeadlineCommand;
 import kira.command.DeleteCommand;
 import kira.command.EventCommand;
+import kira.command.FindCommand;
 import kira.command.ListCommand;
 import kira.command.MarkCommand;
 import kira.command.ToDoCommand;
@@ -20,7 +21,7 @@ import kira.task.ToDo;
  * CommandString are all possible commands.
  */
 enum CommandString {
-    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, TODAY
+    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, TODAY, FIND
 }
 
 /**
@@ -76,6 +77,12 @@ public class Parser {
                             + "Format: delete <index>");
                 }
                 return new DeleteCommand(Integer.valueOf(temp[1]));
+            case FIND:
+                if (temp.length != 2) {
+                    throw new KiraException("Incorrect use of FIND"
+                            + "Format: find <description>");
+                }
+                return new FindCommand(temp[1]);
             case TODO:
             case DEADLINE:
             case EVENT:

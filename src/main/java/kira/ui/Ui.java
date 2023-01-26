@@ -47,6 +47,23 @@ public class Ui {
                 + listOfTasks(taskList));
     }
 
+    /**
+     * Formats and prints message for the list command.
+     * 
+     * @param taskList
+     */
+    public void findMsg(List<Task> taskList, String keyword) {
+        Printer.printFormatReplyMsg("Here are all the tasks matching " 
+                + keyword 
+                + "~"
+                + listOfTasks(taskList));
+    }
+
+    /**
+     * Formats and prints message for the today command.
+     * 
+     * @param taskList
+     */
     public void todayMsg(List<Task> taskList) {
         Printer.printFormatReplyMsg("Here are your tasks for today~"
                 + listOfTasks(taskList));
@@ -64,6 +81,12 @@ public class Ui {
         return msg.toString();
     }
 
+    /**
+     * Formats and prints the message for storing of task.
+     * 
+     * @param task
+     * @param size size of the tasklist
+     */
     public void storeTaskMsg(Task task, int size) {
         StringBuilder msg = new StringBuilder("This task has been stored~\n")
                 .append(task.toString())
@@ -72,16 +95,31 @@ public class Ui {
         Printer.printFormatReplyMsg(msg.toString());
     }
 
+    /**
+     * Formats and prints the message for deleting of task.
+     * 
+     * @param task
+     */
     public void deleteMsg(Task task) {
         Printer.printFormatReplyMsg("This task has been deleted~\n"
         + task.toString());
     }
 
+    /**
+     * Formats and prints the message for marking of task.
+     * 
+     * @param task
+     */
     public void markMsg(Task task) {
         Printer.printFormatReplyMsg("This task has been marked as completed~\n"
         + task.toString());
     }
 
+    /**
+     * Formats and prints the message for unmarking of task.
+     * 
+     * @param task
+     */
     public void unmarkMsg(Task task) {
         Printer.printFormatReplyMsg("This task has been reverted to incomplete~\n"
         + task.toString());
