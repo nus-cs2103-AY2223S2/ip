@@ -22,17 +22,6 @@ public class MeggyTest {
     private static final Random RAND = new Random();
     private static final int N_TEST = 1024;
 
-    @Test
-    public void textUItest() throws IOException {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        new Meggy(new FileInputStream("text-ui-test/input.txt"), out).run();
-        String actual = out.toString().replaceAll("\r", "");
-        String expected = new String(new FileInputStream("text-ui-test/EXPECTED.txt").readAllBytes()).
-                replaceAll("\r", "");
-        assertEquals(expected, actual);
-        System.out.println(actual);
-    }
-
     /**
      * @return String that will never be entirely whitespace.
      */
@@ -55,6 +44,17 @@ public class MeggyTest {
     private static MeggyTime randMeggyTime() {
         return MeggyTime.of(RAND.nextDouble() < 0.5 ? randString()
                 : LocalDateTime.ofEpochSecond(RAND.nextInt(), 0, ZoneOffset.UTC).format(MeggyTime.ENCODE_FORMAT));
+    }
+
+    @Test
+    public void textUItest() throws IOException {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        new Meggy(new FileInputStream("text-ui-test/input.txt"), out).run();
+        String actual = out.toString().replaceAll("\r", "");
+        String expected = new String(new FileInputStream("text-ui-test/EXPECTED.txt").readAllBytes()).
+                replaceAll("\r", "");
+        assertEquals(expected, actual);
+        System.out.println(actual);
     }
 
     @Test

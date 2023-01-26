@@ -46,9 +46,7 @@ public abstract class UserTask {
      */
     public abstract String encode();
 
-    /**
-     * @return The string representation of this task in text Meggy.UI.
-     */
+    /** @return The string representation of this task in text UI. */
     @Override
     public String toString() {
         return Util.parenthesize(status ? Resource.DONE_MK : ' ') + ' ' + desc;
