@@ -1,11 +1,14 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
 
     private static final String indentation = "     ";
     private static final String newLine = "    ____________________________________________________________";
-    private static ArrayList<Task> arrOfTask = new ArrayList<>();
+    private static ArrayList<Task> arrOfTask;
     public enum Action {
         TODO,
         DEADLINE,
@@ -15,10 +18,6 @@ public class Duke {
         LIST,
         DELETE,
         BYE
-    }
-
-    public static void echo(String command) {
-        System.out.println(indentation + command);
     }
 
     public static void exit() {
@@ -41,8 +40,8 @@ public class Duke {
 
     public static void list() {
         System.out.println(indentation + "Here are the tasks in your list:");
-        for (Task t : arrOfTask) {
-            System.out.println(indentation + t.getIndexOfTask() + "." + t);
+        for (int i = 0; i < arrOfTask.size(); i++) {
+            System.out.println(indentation + (i + 1) + "." + arrOfTask.get(i));
         }
     }
 
@@ -81,6 +80,44 @@ public class Duke {
         System.out.println(indentation + "Now you have " + Task.getTotalNumOfTask() + " tasks in the list.");
     }
 
+    public static void openFile() {
+        try {
+            File f = new File("DukeEventPlanner.txt");
+            f.createNewFile();
+            Scanner s = new Scanner(f);
+            arrOfTask = new ArrayList<>();
+            while (s.hasNext()) {
+                String[] arr = s.nextLine().split("\\|");
+                Task t;
+                if (arr[0].equals("T")) {
+                    t = new Todo(arr[2]);
+                } else if (arr[0].equals("D")) {
+                    t = new Deadline(arr[2], arr[3]);
+                } else {
+                    t = new Event(arr[2], arr[3], arr[4]);
+                }
+                if (arr[1].equals("1")) {
+                    t.taskDone();
+                }
+                arrOfTask.add(t);
+            }
+        } catch (IOException e) {
+        System.out.println(indentation + e);
+        }
+    }
+
+    public static void writeFile() {
+        try {
+            FileWriter fw = new FileWriter("DukeEventPlanner.txt");
+            for (Task t : arrOfTask) {
+                fw.write(t.toText() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(indentation + "something went wrong");
+        }
+    }
+
     public static Action getAction(String command) {
         if (command.equals("bye")) {
             return Action.BYE;
@@ -103,9 +140,37 @@ public class Duke {
         }
     }
 
+    public static void sortActions(Action action, String command) {
+        switch (action) {
+            case LIST:
+                list();
+                break;
+            case MARK:
+                taskDone(Integer.parseInt(command.substring(5)));
+                break;
+            case UNMARK:
+                taskNotDone(Integer.parseInt(command.substring(7)));
+                break;
+            case DELETE:
+                deleteTask(Integer.parseInt(command.substring(7)));
+                break;
+            case TODO:
+                addTask(new Todo(command.substring(5)));
+                break;
+            case DEADLINE:
+                String[] str1 = command.substring(9).split("/");
+                addTask(new Deadline(str1[0], str1[1].substring(3)));
+                break;
+            case EVENT:
+                String[] str2 = command.substring(6).split("/");
+                addTask(new Event(str2[0], str2[1].substring(5), str2[2].substring(3)));
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         greet();
+        openFile();
         while (true) {
             try {
                 String command = sc.nextLine();
@@ -113,35 +178,13 @@ public class Duke {
                 Action action = getAction(command);
                 if (action == Action.BYE) {
                     exit();
+                    writeFile();
                     break;
                 }
-                switch (action) {
-                    case LIST:
-                        list();
-                        break;
-                    case MARK:
-                        taskDone(Integer.parseInt(command.substring(5)));
-                        break;
-                    case UNMARK:
-                        taskNotDone(Integer.parseInt(command.substring(7)));
-                        break;
-                    case DELETE:
-                        deleteTask(Integer.parseInt(command.substring(7)));
-                        break;
-                    case TODO:
-                        addTask(new Todo(command.substring(5)));
-                        break;
-                    case DEADLINE:
-                        String[] str1 = command.substring(9).split("/");
-                        addTask(new Deadline(str1[0], str1[1].substring(3)));
-                        break;
-                    case EVENT:
-                        String[] str2 = command.substring(6).split("/");
-                        addTask(new Event(str2[0], str2[1].substring(5), str2[2].substring(3)));
-                }
+                sortActions(action, command);
             } catch (InvalidCommandException e1) {
                 System.out.println(indentation + e1);
-            } catch  (InvalidIndexException e2) {
+            } catch (InvalidIndexException e2) {
                 System.out.println(indentation + e2);
             } catch (IndexOutOfBoundsException e3) {
                 System.out.println(indentation + "☹ OOPS!!! The description of a task cannot be empty.");
