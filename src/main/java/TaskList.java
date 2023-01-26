@@ -56,6 +56,17 @@ public class TaskList {
         return newTask;
     }
 
+    public TaskList findRelated(String word) {
+        TaskList lst = new TaskList(new ArrayList<>());
+        for(int i = 0; i < this.tasks.size(); i++) {
+            Task t = this.tasks.get(i);
+            if(t.isRelated(word)) {
+                lst.tasks.add(t);
+            }
+        }
+        return lst;
+    }
+
     public String toStringList() {
         if(this.tasks.isEmpty()) {
             return "";

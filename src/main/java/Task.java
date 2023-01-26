@@ -22,6 +22,10 @@ public class Task {
         this.done = false;
     }
 
+    public boolean isRelated(String name) {
+        return this.name.contains(name);
+    }
+
     @Override
     public String toString() {
         if (done) {

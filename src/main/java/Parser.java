@@ -8,6 +8,7 @@ import duke.command.DeleteCommand;
 import duke.command.AddTodoCommand;
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
+import duke.command.FindCommand;
 import duke.command.Command;
 import duke.Ui;
 
@@ -23,6 +24,9 @@ public class Parser {
 
             case "list":
                 return new ListCommand();
+
+            case "find":
+                return new FindCommand(arrStr[1]);
 
             case "mark":
                 return new MarkCommand(Integer.parseInt(arrStr[1]));
