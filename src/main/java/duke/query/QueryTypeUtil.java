@@ -9,6 +9,7 @@ public class QueryTypeUtil {
     private static final String TODO_QUERY_TYPE = "todo";
     private static final String DEADLINE_QUERY_TYPE = "deadline";
     private static final String EVENT_QUERY_TYPE = "event";
+    private static final String FIND_QUERY_TYPE = "find";
 
     public static QueryType GetQueryTypeFromString(String queryTypeStr) {
         switch(queryTypeStr) {
@@ -28,6 +29,8 @@ public class QueryTypeUtil {
                 return QueryType.DELETE;
             case BYE_QUERY_TYPE:
                 return QueryType.EXIT;
+            case FIND_QUERY_TYPE:
+                return QueryType.FIND;
             default:
                 return QueryType.UNKNOWN;
         }

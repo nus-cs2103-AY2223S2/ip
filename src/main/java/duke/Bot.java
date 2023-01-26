@@ -59,6 +59,8 @@ public class Bot {
                 return new UnmarkQueryHandler(tt);
             case DELETE:
                 return new DeleteQueryHandler(tt);
+            case FIND:
+                return new FindTaskQueryHandler(tt);
             case EXIT:
                 return new SimpleResponseQueryHandler(GOODBYE_RES);
             default:

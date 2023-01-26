@@ -34,7 +34,7 @@ public class Task {
     }
 
     protected String getTaskDescription() {
-        return getStatusIndicator() + description;
+        return getStatusIndicator() + " " + description;
     }
 
     public String serialize() {
