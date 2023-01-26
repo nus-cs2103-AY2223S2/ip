@@ -1,7 +1,1 @@
-T, 1, read book
-D, 0, return book, June 6th
-E, 0, project meeting, Aug 6th 2pm, Aug 6th 4pm
-T, 1, join sports club
-T, 1, play basketball
-E, 1, test, 5pm, 7pm
-D, 0, access, 6pm
+D, 1, access vetting, Tuesday May 05 2020 05:00 AM

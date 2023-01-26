@@ -28,6 +28,7 @@ public class Duke {
     }
 
     public void run() {
+        Ui.printOnStartup();
         boolean promptAgain = true;
         while (promptAgain) {
             Ui.printPrompt();
