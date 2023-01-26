@@ -30,10 +30,10 @@ public class Duke {
         StringBuilder response = new StringBuilder();
         response.append("Got it. I've added this task:\n");
         if (currentInput.matches("^todo .*")) {
-            //Adding a Todo task
+            // Adding a Todo task
             taskList.add(new Todo(currentInput.substring(5)));
         } else if (currentInput.matches("^deadline .*")) {
-            //Adding a Deadline
+            // Adding a Deadline
             int byPos = currentInput.indexOf(" /by ");
             if (byPos == -1) {
                 throw new DukeException("Deadline not specified with /by");
@@ -73,6 +73,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+
         //Introduction
         greet();
         currentInput = sc.nextLine();
