@@ -17,6 +17,14 @@ public class TaskList {
         return this.array;
     }
 
+    public int size() {
+        return this.array.size();
+    }
+
+    public Task getTask(int taskIndex) {
+        return this.array.get(taskIndex);
+    }
+
     public void addToList(String title, TaskType type, LocalDateTime start,
             LocalDateTime end, boolean done, boolean shouldPrintOutput) {
         // TODO: Edit such that it doesnt print anything

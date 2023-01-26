@@ -20,9 +20,9 @@ public class Duke {
     private TaskList allTasks;
     private Ui ui;
 
-    public Duke(String memoryPath) {
+    public Duke(String[] memoryPathArray) {
         ui = new Ui();
-        storage = new Storage(memoryPath);
+        storage = new Storage(memoryPathArray);
         try {
             allTasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -32,57 +32,41 @@ public class Duke {
     }
 
     public void run() {
-        //...
+
     }
 
     public static void main(String[] args) {
+        String[] memoryPathArray = {".", "memory.txt"};
         new Duke("data/tasks.txt").run();
     }
 
-    private static void printLine() {
-        System.out.println("----------------------------------------------------");
-    }
-
-    private static void printList() {
-        if (allTasks.size() == 0) {
-            System.out.println("You have zero tasks now!");
-            return;
-        }
-        System.out.println("Your tasks so far!!");
-        for (int i = 0; i < allTasks.size(); i++) {
-            Task task = allTasks.get(i);
-            String toPrint = String.format("%d. %s", i + 1, task.toString());
-            System.out.println(toPrint);
-        }
-    }
-
-    public static void main(String[] args) {
-        loadTasks();
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        printLine();
-        System.out.println(logo);
-        System.out.println("Hope you are doing great!");
-        System.out.println("What can I do for you?");
-        printLine();
-
-        boolean promptAgain = true;
-        while (promptAgain) {
-            System.out.println("Enter your prompt below:");
-            String command = sc.nextLine();
-            try {
-                promptAgain = handleCommands(command);
-            } catch (DukeException e) {
-                System.out.println(e.toString());
-            }
-            printLine();
-        }
-
-        saveTasks();
-    }
+//    public static void main(String[] args) {
+//        loadTasks();
+//
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//
+//        printLine();
+//        System.out.println(logo);
+//        System.out.println("Hope you are doing great!");
+//        System.out.println("What can I do for you?");
+//        printLine();
+//
+//        boolean promptAgain = true;
+//        while (promptAgain) {
+//            System.out.println("Enter your prompt below:");
+//            String command = sc.nextLine();
+//            try {
+//                promptAgain = handleCommands(command);
+//            } catch (DukeException e) {
+//                System.out.println(e.toString());
+//            }
+//            printLine();
+//        }
+//
+//        saveTasks();
+//    }
 }
