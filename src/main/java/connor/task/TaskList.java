@@ -102,12 +102,18 @@ public class TaskList {
         return str.toString();
     }
 
-    public String find(String input) {
+    /**
+     * Returns a String representation of all tasks with the keyword.
+     *
+     * @param keyword the keyword to be searched
+     * @return String representation of all tasks with the keyword.
+     */
+    public String find(String keyword) {
         StringBuilder str = new StringBuilder();
         str.append(Ui.LINE).append("        HERE ARE THE MATCHING RESULTS:\n");
         int counter = 1;
         for (int i = 0; i < this.tasks.size(); i++) {
-            if (this.tasks.get(i).getTaskName().contains(input)) {
+            if (this.tasks.get(i).getTaskName().contains(keyword)) {
                 str.append("        ")
                         .append(counter++)
                         .append(".")

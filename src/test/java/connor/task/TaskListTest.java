@@ -11,23 +11,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
-    //https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
 
-    @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-    }
-
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        System.setErr(originalErr);
-    }
     @Test
     public void addTaskTest() {
         TaskList tasks = new TaskList();
