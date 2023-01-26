@@ -1,21 +1,21 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task{
-    private LocalDate deadline;
+    private LocalDateTime deadline;
 
     public Deadline(String name, String deadline) throws DukeException {
         super(name);
         try {
-            this.deadline = LocalDate.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            this.deadline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a valid date format in dd/mm/yyyy!");
+            throw new DukeException("Please enter a valid date format in \"dd/mm/yyyy!\"");
         }
     }
 
     public String getDeadline() {
-        return this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return this.deadline.format(DateTimeFormatter.ofPattern("HHmm, MMM d yyyy"));
     }
 
     @Override
