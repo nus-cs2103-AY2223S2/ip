@@ -6,41 +6,44 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private String filePath;
-    private List<Task> listOfTasks = new ArrayList<>();
+    private final String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public void save() throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        String str;
-        for (Task task : listOfTasks) {
-            str = task.toString();
-            str = str.replace("[ ]", " | 0 |");
-            str = str.replace("[X]", " | 1 |");
-            str = str.replace("[", "");
-            str = str.replace("]", "");
-            if (str.startsWith("D")) {
-                str = str.replace("(by:", "|");
-                str = str.replace(")", "");
-            } else if (str.startsWith("E")) {
-                str = str.replace("(from:", "|");
-                str = str.replace(" to: ", " - ");
-                str = str.replace(")", "");
+    public void save(ArrayList<Task> listOfTasks) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            String str;
+            for (Task task : listOfTasks) {
+                str = task.toString();
+                str = str.replace("[ ]", " | 0 |");
+                str = str.replace("[X]", " | 1 |");
+                str = str.replace("[", "");
+                str = str.replace("]", "");
+                if (str.startsWith("D")) {
+                    str = str.replace("(by:", "|");
+                    str = str.replace(")", "");
+                } else if (str.startsWith("E")) {
+                    str = str.replace("(from:", "|");
+                    str = str.replace(" to: ", " - ");
+                    str = str.replace(")", "");
+                }
+                str = str + "\n";
+                fw.write(str);
             }
-            str = str + "\n";
-            fw.write(str);
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException(e);
         }
-        fw.close();
     }
 
-    public List<Task> load() throws FileNotFoundException, DateTimeParseException {
+    public ArrayList<Task> load() throws DukeException {
+        ArrayList<Task> listOfTasks = new ArrayList<>(100);
         try {
             File f = new File(filePath);
             Scanner s = new Scanner(f);
@@ -72,11 +75,8 @@ public class Storage {
                 }
                 listOfTasks.add(task);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (DateTimeParseException e) {
-            System.out.println("Could not load data from file due to incorrect date time format.");
-            System.out.println("Format should be of (MMM dd yyyy h:mm a) instead.");
+        } catch (FileNotFoundException | DateTimeParseException e) {
+            throw new DukeException();
         }
         return listOfTasks;
     }
