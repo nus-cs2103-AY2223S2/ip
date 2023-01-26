@@ -39,11 +39,11 @@ public class Duke {
 
     public static void checkCommandValidity(String[] command) throws DukeException {
         if (isNoTaskGiven(command)) {
-            throw new DukeException("    > You gave me no task. :(");
+            throw new DukeException("    > You gave me no task.");
         }
 
-        if (!isValidTask(command)) {
-            throw new DukeException("    > Task given is invalid / unavailable. :(");
+        if (isValidTask(command)) {
+            throw new DukeException("    > Task given is invalid / unavailable.");
         }
     }
 
@@ -103,19 +103,13 @@ public class Duke {
 
     public static void deleteTask(String[] command) throws DukeException {
 
-        if (isNoTaskGiven(command)) {
-            throw new DukeException("    > chu gave me no task");
-        }
-
-        if (isValidTask(command)) {
-            throw new DukeException("    > aint no such task available");
-        }
+        Duke.checkCommandValidity(command);
 
         Task t = taskList.get(Integer.parseInt(command[1]) - 1);
         taskList.remove(t);
 
         Duke.print("    > Task deleted: " + t);
-        Duke.print("    > Chu have " + taskList.size() + " task(s) remained.");
+        Duke.print("    > You have " + taskList.size() + " task(s) remained.");
     }
 
     public static void shutdown() {
@@ -168,6 +162,8 @@ public class Duke {
                 Duke.print("    > What are you talkin about man?");
             }
         }
+
+        sc.close();
     }
 
     public static void main(String[] args) {
