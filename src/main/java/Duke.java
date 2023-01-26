@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+
 public class Duke {
     public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
@@ -8,9 +9,13 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        ArrayList<Task> list = new ArrayList<Task>(100);
+        Storage storage = new Storage(list);
+        storage.findData();
+        int count = storage.connect();
         System.out.println("ฅʕ•ᴥ•ʔฅ :: Hiii! I'm duke, what can I help you with?");
         //echo();
-        add();
+        start(list, storage, count);
     }
     public static void echo() {
         Scanner input = new Scanner(System.in);
@@ -26,11 +31,9 @@ public class Duke {
         }
     }
 
-    public static void add() throws DukeException {
+    public static void start(ArrayList<Task> list, Storage storage, int count) throws DukeException {
         Scanner input = new Scanner(System.in);
         String cmd;
-        ArrayList<Task> list = new ArrayList<Task>(100);
-        Integer count = 0;
         Integer num;
         while (true) {
             System.out.println("•──────────────────♛─────────────────•");
@@ -38,6 +41,7 @@ public class Duke {
                 cmd = input.nextLine();
                 System.out.println("•──────────────────♛─────────────────•");
                 if (cmd.equals("bye")) {
+                    storage.save();
                     System.out.println("ʕっ￫ᴥ￩ʔっ :: Buhbyeee, hope to see you again soon!");
                     return;
                 } else if (cmd.equals("list")) {

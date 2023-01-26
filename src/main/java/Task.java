@@ -14,6 +14,25 @@ public class Task {
         this.done = " ";
     }
 
+    public boolean isDone() {
+        if (this.done.equals(" ")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public String getName() {
+        return this.name;
+    }
+    public String toSave() {
+        if (this.done.equals("X")) {
+            return "1 | " + this.name + "\n";
+        } else {
+            return "0 | " + this.name + "\n";
+        }
+    }
+
     @Override
     public String toString() {
         return "[" + done + "] " + name;
