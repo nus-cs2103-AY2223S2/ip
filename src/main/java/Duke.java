@@ -1,6 +1,7 @@
 import duke.*;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
 
 import java.util.Scanner;
@@ -66,7 +67,14 @@ public class Duke {
                     //event
                     else if (Parser.is_Event(input)) {
                         Duke.executeEvent(input, list);
-                    } else {
+                    }
+
+                    //find
+                    else if (Parser.is_Find(input)) {
+                        Duke.executeFind(input, list);
+                    }
+
+                    else {
                         System.out.println("Invalid Input!");
                         //throw new Duke.DukeException("Invalid Input!");
                     }
@@ -97,6 +105,20 @@ public class Duke {
                 list.get(index - 1).mark();
             } else {
                 Ui.displayInvalidIndexMessage();
+            }
+        }
+
+        public static void executeFind(String input, Tasklist list) throws DukeException {
+            String wordToFind = Parser.get_Findable(input);
+            int count = 1;
+            Ui.displayFindHeader();
+            for(int i = 0; i < list.size(); i++) {
+                Task currTask = list.get(i);
+                if (currTask.get_content().contains(wordToFind)) {
+                    Ui.displayMatchedTask(list.get(i), count);
+                    count++;
+                }
+
             }
         }
 

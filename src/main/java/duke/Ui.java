@@ -71,4 +71,13 @@ public class Ui {
     public static void displayClear() {
         System.out.println("        Got it. I have cleared the task-list.\n" + line);
     }
+
+    public static void displayFindHeader() {
+        System.out.println(line);
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public static void displayMatchedTask(Task task, int count) {
+        System.out.println(count + ". " + task);
+    }
 }

@@ -91,6 +91,20 @@ public class Parser {
         return false;
     }
 
+    public static boolean is_Find(String input) {
+        String[] firstword_Arr = input.split(" ", 2);
+        if (firstword_Arr.length == 2 ) {
+            if (firstword_Arr[0].equalsIgnoreCase("find")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static String get_Findable(String input) {
+        return input.split(" ", 2)[1];
+    }
+
     public static boolean is_Unmark(String input) {
         String[] firstword_Arr = input.split(" ", 2);
         if (firstword_Arr.length == 2 ) {
