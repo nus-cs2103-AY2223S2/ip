@@ -1,14 +1,18 @@
+import java.time.DayOfWeek;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
 public class Event extends Tasks {
-    private String from = "";
-    private String to = "";
+    private LocalDateTime from = null;
+    private LocalDateTime to = null;
     public Event(String content, String from, String to) {
         super(content);
-        this.from = from;
-        this.to = to;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        this.from = LocalDateTime.parse(from, format);
+        this.to = LocalDateTime.parse(to, format);
         this.type = 'E';
     }
-//bugfix?
-    //second commit to feature1
+
     @Override
     public String getDuration() {
         return this.from + " " + this.to;
@@ -16,7 +20,10 @@ public class Event extends Tasks {
 
     @Override
     public String toString() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm");
+        String from = this.from.format(format);
+        String to = this.to.format(format);
         return "[" + this.getTypeIcon() + "]"
-                + "[" + this.getStatusIcon() + "] " + this.seeTaskContent() + "(from: " + this.from + "to: " + this.to + ")";
+                + "[" + this.getStatusIcon() + "] " + this.seeTaskContent() + " (from: " + from + " to: " + to + ")";
     }
 }

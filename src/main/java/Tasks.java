@@ -1,4 +1,7 @@
-public class Tasks {
+import java.time.LocalDateTime;
+
+abstract public class Tasks {
+    protected LocalDateTime time = null;
     private String content;
     private Boolean is_Done;
     protected char type;
