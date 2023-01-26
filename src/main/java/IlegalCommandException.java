@@ -12,7 +12,8 @@ public class IlegalCommandException extends DukeException {
         case LIST:
             return "Command Exception: Make sure that your list command is as such\n\nlist\n";
         case BYE:
-            return "Command Exception: Make sure that your list command is as such\n\nbye\n\nHaving troubles saying bye huh ;)\n";
+            return "Command Exception: Make sure that your list command is as such\n\nbye\n\n" +
+                    "Having troubles saying bye huh ;)\n";
         case MARK:
             return "Command Exception: Make sure that your mark command is as such\n\nmark index-of-task\n";
         case UNMARK:
@@ -20,9 +21,11 @@ public class IlegalCommandException extends DukeException {
         case TODO:
             return "Command Exception: Make sure that your todo command is as such\n\ntodo name-of-task\n";
         case EVENT:
-            return "Command Exception: Make sure that your event command is as such\n\nevent name-of-task /from start-date /to end-date\n";
+            return "Command Exception: Make sure that your event command is as such\n\nevent name-of-task " +
+                    "/from start-date (format: yyyy-MM-dd HH:mm) /to end-date (format: yyyy-MM-dd HH:mm)\n";
         case DEADLINE:
-            return "Command Exception: Make sure that your deadline command is as such\n\ndeadline name-of-task /by date-of-deadline\n";
+            return "Command Exception: Make sure that your deadline command is as such\n\ndeadline name-of-task " +
+                    "/by date-of-deadline (format: yyyy-MM-dd HH:mm)\n";
         case DELETE:
             return "Command Exception: Make sure that your delete command is as such\n\ndelete index-of-task\n";
         case UNRECOGNIZED:

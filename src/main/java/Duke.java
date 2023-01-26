@@ -3,10 +3,12 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.nio.file.StandardOpenOption;
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -22,7 +24,8 @@ public class Duke {
         System.out.println("----------------------------------------------------");
     }
 
-    private static void addToList(String title, TaskType type, String start, String end, boolean done, boolean shouldPrintOutput) {
+    private static void addToList(String title, TaskType type, LocalDateTime start,
+            LocalDateTime end, boolean done, boolean shouldPrintOutput) {
         Task task;
         if (type == TaskType.TODO) {
             task = new ToDo(title, done);
@@ -116,7 +119,9 @@ public class Duke {
         case "deadline":
             try {
                 int slashIndex = arguments.indexOf('/');
-                String dateBy = arguments.substring(slashIndex + 4);
+                String dateByString = arguments.substring(slashIndex + 4);
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime dateBy = LocalDateTime.parse(dateByString, dateFormat);
                 addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE, null, dateBy, false, true);
             } catch (Throwable e) {
                 throw new IlegalCommandException(Commands.DEADLINE);
@@ -127,8 +132,12 @@ public class Duke {
                 int firstSlashIndex = arguments.indexOf('/');
                 String startAndEnd = arguments.substring(firstSlashIndex + 6);
                 int secondSlashIndex = startAndEnd.indexOf('/');
-                String start = startAndEnd.substring(0, secondSlashIndex - 1);
-                String end = startAndEnd.substring(secondSlashIndex + 4);
+                String startString = startAndEnd.substring(0, secondSlashIndex - 1);
+                String endString = startAndEnd.substring(secondSlashIndex + 4);
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                LocalDateTime start = LocalDateTime.parse(startString, dateFormat);
+                LocalDateTime end = LocalDateTime.parse(endString, dateFormat);
+                // TODO: Check if start date is after end date
                 addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT, start, end, false, true);
             } catch (Throwable e) {
                 throw new IlegalCommandException(Commands.EVENT);
@@ -168,12 +177,16 @@ public class Duke {
         String doneNumber = attributes[1];
         boolean done = Objects.equals(doneNumber, "1");
         String title = attributes[2];
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE MMM dd yyyy HH:mm a");
         if (Objects.equals(type, "T")) {
             addToList(title, TaskType.TODO, null, null, done, false);
         } else if (Objects.equals(type, "D")) {
-            addToList(title, TaskType.DEADLINE, null, attributes[3], done, false);
+            LocalDateTime dateBy = LocalDateTime.parse(attributes[3], dateFormat);
+            addToList(title, TaskType.DEADLINE, null, dateBy, done, false);
         } else if (Objects.equals(type, "E")) {
-            addToList(title, TaskType.EVENT, attributes[3], attributes[4], done, false);
+            LocalDateTime start = LocalDateTime.parse(attributes[3], dateFormat);
+            LocalDateTime end = LocalDateTime.parse(attributes[4], dateFormat);
+            addToList(title, TaskType.EVENT, start, end, done, false);
         } else {
             System.out.println("Some task in memory does not fall into the three task categories!");
         }
