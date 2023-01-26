@@ -1,11 +1,17 @@
 package types.data;
 
+import utilities.DateTimeParser;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private final String before;
+    private final LocalDateTime before;
+    protected static final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private Deadline(String n, String d) {
         super(n, "D");
-        before = d;
+        before = DateTimeParser.parse(d);
     }
 
     public static Deadline create(String n, String d) {
@@ -14,6 +20,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s (by: %s)", super.toString(), before);
+        return String.format("%s (by: %s)", super.toString(), before.format(format));
     }
 }
