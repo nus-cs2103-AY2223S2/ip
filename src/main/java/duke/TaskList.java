@@ -11,6 +11,7 @@ public class TaskList {
 
     /**
      * Constructor for TaskList.
+     *
      * @param tasks Initial tasks.
      */
     protected TaskList(List<Task> tasks) {
@@ -39,9 +40,11 @@ public class TaskList {
      */
     protected void find(String keyword) {
         int rank = 1;
+        // Matches exact keyword. Do not match part of word.
+        String regex = ".*\\b" + keyword + "\\b.*";
         System.out.println("Looking for matching tasks in your list...");
         for (Task t : tasks) {
-            if (t.toString().contains(keyword)) {
+            if (t.toString().matches(regex)) {
                 System.out.println(rank + "." + t.fullMessage());
                 rank++;
             }

@@ -83,6 +83,7 @@ public class Command {
         if (code == 0) {
             ui.byeMessage();
         } else if (code == 1) {
+            // System.out.println("here");
             taskList.list();
             ui.showLine();
         } else if (code == 2) {

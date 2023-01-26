@@ -16,77 +16,73 @@ public class Parser {
      * @param sc Scanner for system input.
      * @return Command parsed.
      */
-    protected static Command read(Scanner sc) {
+    protected static Command read(Scanner sc) throws DukeException {
         int rank;
-        String s = sc.nextLine().trim();
         String command = sc.next();
+        String s = sc.nextLine().trim();
         String[] message;
-        try {
-            if (s.length() > 500) {
-                throw new DukeException("Message body is too long!");
+
+        if (s.length() > 500) {
+            throw new DukeException("Message body is too long!");
+        }
+        switch (command) {
+        case "bye":
+            return new Command(0);
+        case "list":
+            return new Command(1);
+        case "mark":
+            try {
+                rank = Integer.parseInt(s);
+                return new Command(2, rank - 1);
+            } catch (NumberFormatException e) {
+                throw new DukeException("OOPS! mark must have an integer rank");
             }
-            switch (command) {
-            case "bye":
-                return new Command(0);
-            case "list":
-                return new Command(1);
-            case "mark":
-                try {
-                    rank = Integer.parseInt(s);
-                    return new Command(2, rank - 1);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("OOPS! mark must have an integer rank");
-                }
-            case "unmark":
-                try {
-                    rank = Integer.parseInt(s);
-                    return new Command(3, rank - 1);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("OOPS! unmark must have an integer rank");
-                }
-            case "todo":
-                if (s.isEmpty()) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                }
-                return new Command(4, new String[] {s});
-            case "deadline":
-                message = s.split("/by ");
-                message = Arrays.stream(message).map(String::trim).toArray(String[]::new);
-                if (message.length != 2 || message[0].isEmpty() || message[1].isEmpty()) {
-                    throw new DukeException("OOPS!!! Command should be in the format 'deadline [M] /by [M]'\n"
-                            + "The description, [M] cannot be empty.");
-                }
-                return new Command(5, message);
-            case "event":
-                int indexFrom = s.indexOf("/from");
-                int indexTo = s.indexOf("/to");
-                message = s.split("/from |/to ");
-                message = Arrays.stream(message).map(String::trim).toArray(String[]::new);
-                if (message.length != 3 || message[0].isEmpty()
-                        || message[1].isEmpty() || message[2].isEmpty()
-                        || indexFrom == -1 || indexTo == -1 || indexFrom >= indexTo) {
-                    throw new DukeException("OOPS!!! Command should be in the format 'event [M] /from [M] /to [M]'\n"
-                            + "The description, [M] cannot be empty.");
-                }
-                return new Command(6, message);
-            case "delete":
-                try {
-                    rank = Integer.parseInt(s);
-                    return new Command(7, rank - 1);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("OOPS! delete must have an integer rank");
-                }
-            case "find":
-                if (s.isEmpty()) {
-                    throw new DukeException("Specify a keyword");
-                }
-                return new Command(8, s);
-            default:
-                throw new DukeException("Invalid input.");
+        case "unmark":
+            try {
+                rank = Integer.parseInt(s);
+                return new Command(3, rank - 1);
+            } catch (NumberFormatException e) {
+                throw new DukeException("OOPS! unmark must have an integer rank");
             }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            return new Command(-1);
+        case "todo":
+            if (s.isEmpty()) {
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            }
+            return new Command(4, new String[] {s});
+        case "deadline":
+            message = s.split("/by ");
+            message = Arrays.stream(message).map(String::trim).toArray(String[]::new);
+            if (message.length != 2 || message[0].isEmpty() || message[1].isEmpty()) {
+                throw new DukeException("OOPS!!! Command should be in the format 'deadline [M] /by [M]'\n"
+                        + "The description, [M] cannot be empty.");
+            }
+            return new Command(5, message);
+        case "event":
+            int indexFrom = s.indexOf("/from");
+            int indexTo = s.indexOf("/to");
+            message = s.split("/from |/to ");
+            message = Arrays.stream(message).map(String::trim).toArray(String[]::new);
+            if (message.length != 3 || message[0].isEmpty()
+                    || message[1].isEmpty() || message[2].isEmpty()
+                    || indexFrom == -1 || indexTo == -1 || indexFrom >= indexTo) {
+                throw new DukeException("OOPS!!! Command should be in the format 'event [M] /from [M] /to [M]'\n"
+                        + "The description, [M] cannot be empty.");
+            }
+            return new Command(6, message);
+        case "delete":
+            try {
+                rank = Integer.parseInt(s);
+                return new Command(7, rank - 1);
+            } catch (NumberFormatException e) {
+                throw new DukeException("OOPS! delete must have an integer rank");
+            }
+        case "find":
+            if (s.isEmpty()) {
+                throw new DukeException("Specify a keyword");
+            }
+            return new Command(8, s);
+        default:
+            throw new DukeException("Invalid input.");
         }
     }
 
