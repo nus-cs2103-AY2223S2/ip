@@ -1,4 +1,5 @@
 todo read book
+todo return book
 deadline homework /by 2022-02-02
 event team meeting /from 2023-01-01 /to 2023-04-06
 mark 1
@@ -28,4 +29,7 @@ delete 2
 delete 50
 delete asdojv
 delete -214
+find homework
+find book
+find
 bye

@@ -1,5 +1,9 @@
 package duke.ui;
 
+import duke.task.Task;
+
+import java.util.ArrayList;
+
 /**
  * This class manages the displaying of output to the user.
  */
@@ -35,10 +39,16 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    /**
-     * Prints a line on the standard output.
-     */
-    public void printLine() {
+    public void printOutput(String text, ArrayList<Task> tasks) {
         System.out.println(LINE);
+        System.out.println("\t " + text);
+        this.displayList(tasks);
+        System.out.println(LINE);
+    }
+
+    private void displayList(ArrayList<Task> tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("\t " + String.valueOf(i+1) + "." +  tasks.get(i));
+        }
     }
 }

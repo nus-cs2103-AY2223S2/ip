@@ -13,13 +13,18 @@ What can I do for you?
 	____________________________________________________________
 	____________________________________________________________
 	 I've added the following to your list of tasks:
-		[D][ ] homework (by: 2 Feb 2022)
+		[T][ ] return book
 	 You now have 2 task(s) in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 I've added the following to your list of tasks:
-		[E][ ] team meeting (from: 1 Jan 2023 to: 6 Apr 2023)
+		[D][ ] homework (by: 2 Feb 2022)
 	 You now have 3 task(s) in the list.
+	____________________________________________________________
+	____________________________________________________________
+	 I've added the following to your list of tasks:
+		[E][ ] team meeting (from: 1 Jan 2023 to: 6 Apr 2023)
+	 You now have 4 task(s) in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 I've marked this as done:
@@ -29,7 +34,7 @@ What can I do for you?
 	 The selected task has already been marked as done.
 	____________________________________________________________
 	____________________________________________________________
-	 Invalid task number provided. Given task number is 100 but there are only 3 task(s) in the list
+	 Invalid task number provided. Given task number is 100 but there are only 4 task(s) in the list
 	____________________________________________________________
 	____________________________________________________________
 	 Invalid task number provided. Number cannot be less than 1.
@@ -48,26 +53,27 @@ What can I do for you?
 	____________________________________________________________
 	____________________________________________________________
 	 I've marked this as done:
-	 [D][X] homework (by: 2 Feb 2022)
+	 [T][X] return book
 	____________________________________________________________
 	____________________________________________________________
 	 I've marked this as not done yet:
-	 [D][ ] homework (by: 2 Feb 2022)
+	 [T][ ] return book
 	____________________________________________________________
 	____________________________________________________________
 	 Here is a list of your tasks:
 	 1.[T][X] read book
-	 2.[D][ ] homework (by: 2 Feb 2022)
-	 3.[E][ ] team meeting (from: 1 Jan 2023 to: 6 Apr 2023)
+	 2.[T][ ] return book
+	 3.[D][ ] homework (by: 2 Feb 2022)
+	 4.[E][ ] team meeting (from: 1 Jan 2023 to: 6 Apr 2023)
 	____________________________________________________________
 	____________________________________________________________
-	 Invalid description provided. The description of a task cannot be empty.
+	 Invalid description provided.
 	____________________________________________________________
 	____________________________________________________________
-	 Invalid description provided. The description of a task cannot be empty.
+	 Invalid description provided.
 	____________________________________________________________
 	____________________________________________________________
-	 Invalid description provided. The description of a task cannot be empty.
+	 Invalid description provided.
 	____________________________________________________________
 	____________________________________________________________
 	 Please provide a valid deadline.
@@ -93,26 +99,37 @@ What can I do for you?
 	____________________________________________________________
 	 I've removed the following from your list of tasks:
 		[T][X] read book
-	 You now have 2 task(s) in the list.
+	 You now have 3 task(s) in the list.
 	____________________________________________________________
 	____________________________________________________________
 	 Here is a list of your tasks:
-	 1.[D][ ] homework (by: 2 Feb 2022)
-	 2.[E][ ] team meeting (from: 1 Jan 2023 to: 6 Apr 2023)
+	 1.[T][ ] return book
+	 2.[D][ ] homework (by: 2 Feb 2022)
+	 3.[E][ ] team meeting (from: 1 Jan 2023 to: 6 Apr 2023)
 	____________________________________________________________
 	____________________________________________________________
 	 I've removed the following from your list of tasks:
-		[E][ ] team meeting (from: 1 Jan 2023 to: 6 Apr 2023)
-	 You now have 1 task(s) in the list.
+		[D][ ] homework (by: 2 Feb 2022)
+	 You now have 2 task(s) in the list.
 	____________________________________________________________
 	____________________________________________________________
-	 Invalid task number provided. Given task number is 50 but there are only 1 task(s) in the list
+	 Invalid task number provided. Given task number is 50 but there are only 2 task(s) in the list
 	____________________________________________________________
 	____________________________________________________________
 	 Invalid task number provided.
 	____________________________________________________________
 	____________________________________________________________
 	 Invalid task number provided. Number cannot be less than 1.
+	____________________________________________________________
+	____________________________________________________________
+	 I could not find any task matching your request.
+	____________________________________________________________
+	____________________________________________________________
+	 Here are the matching tasks in your list: 
+	 1.[T][ ] return book
+	____________________________________________________________
+	____________________________________________________________
+	 Invalid description provided.
 	____________________________________________________________
 	____________________________________________________________
 	 Bye. Hope to see you again soon!

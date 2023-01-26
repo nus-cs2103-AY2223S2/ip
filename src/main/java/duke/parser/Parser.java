@@ -58,6 +58,9 @@ public class Parser {
         case "delete":
             this.index = this.retrieveIndex(delimited);
             return Commands.DELETE;
+        case "find":
+            this.name = this.retrieveName(input, delimited);
+            return Commands.FIND;
         default:
             return Commands.DEFAULT;
         }
@@ -82,9 +85,7 @@ public class Parser {
     private String retrieveName(String input, String[] delimitedInput)
             throws DukeException {
         if (delimitedInput.length < 2) {
-            throw new DukeException(
-                    "Invalid description provided. "
-                            + "The description of a task cannot be empty.");
+            throw new DukeException("Invalid description provided.");
         }
         return input.split(" /")[0].split(" ", 2)[1];
     }
