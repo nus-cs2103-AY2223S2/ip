@@ -13,7 +13,11 @@ public class Wessy {
 //        System.out.println("----------------------------------------------------------------");
 //        System.out.println("Hello from\n" + logo);
 //        System.out.println("----------------------------------------------------------------");
-        System.out.println("Please type something...");
+        System.out.println("    -Wessy------------------------------------------------------ ");
+//        System.out.println("    ____________________________________________________________ ");
+        println("Hi, I am Wessy, your personal assistant chatbot.");
+        println("Please type something to interact with me.");
+        System.out.println("    ------------------------------------------------------------ ");
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
@@ -31,7 +35,7 @@ public class Wessy {
     }
 
     static void printNormal(String str) {
-        System.out.println("    ------------------------------------------------------------ ");
+        System.out.println("    -Wessy------------------------------------------------------ ");
 //        System.out.println("    ____________________________________________________________ ");
         println(str);
         System.out.println("    ------------------------------------------------------------ ");
