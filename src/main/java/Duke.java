@@ -6,12 +6,12 @@ public class Duke {
 
     private static void start() {
 
-        Scanner sc = new Scanner(System.in);
-        TaskManager tm = new TaskManager();
+        Scanner commandScanner = new Scanner(System.in);
+        TaskManager taskManager = new TaskManager();
 
         while (true) {
             System.out.print("You:\n");
-            String command = sc.nextLine().strip().replaceAll("( )+", " ");
+            String command = commandScanner.nextLine().strip().replaceAll("( )+", " ");
 
             System.out.println("\nDuke:");
 
@@ -22,7 +22,7 @@ public class Duke {
 
             } else {
                 try {
-                    tm.processCommand(command);
+                    taskManager.processCommand(command);
                 } catch (DukeException e) {
                     System.out.println(e.getMessage());
                 } finally {
@@ -33,7 +33,7 @@ public class Duke {
 
         }
 
-        sc.close();
+        commandScanner.close();
 
     }
 
