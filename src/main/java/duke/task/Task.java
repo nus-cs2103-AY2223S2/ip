@@ -34,7 +34,11 @@ public class Task {
      * Marks done task with X.
      */
     public char getStatusIcon() {
-        return (isDone ? 'X' : ' ');
+        return (isDone) ? 'X' : ' ';
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     /**

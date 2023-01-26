@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -16,14 +17,9 @@ public class Ui {
     }
 
     public String readCommand() {
-//            throws DukeException {
         Scanner sc = new Scanner(System.in);
         String command = "";
-//        try {
             command = sc.nextLine();
-//        } catch (NoSuchElementException e) {
-//            throw new DukeException("No such element.");
-//        }
         return command;
     }
 
@@ -105,5 +101,13 @@ public class Ui {
 
     public void showError(String error) {
         System.out.println(this.showLine() + error + this.showLine());
+    }
+
+    public void showFind(ArrayList<Task> foundTasks) {
+        System.out.println(this.showLine() + "Here are the matching tasks in your list:");
+        for (int i = 1; i <= foundTasks.size(); i++) {
+            System.out.println(i + "." + foundTasks.get(i - 1));
+        }
+        System.out.println(this.showLine());
     }
 }
