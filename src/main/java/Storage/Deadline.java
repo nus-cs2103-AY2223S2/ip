@@ -1,10 +1,13 @@
 package storage;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    protected String deadline;
+    private final LocalDateTime deadline;
 
-    public Deadline(String task, String by) {
+    public Deadline(String task, LocalDateTime by) {
         super(task);
         this.deadline = by;
     }
@@ -14,12 +17,14 @@ public class Deadline extends Task {
         return "[D]" + status() + getTask() + " (by: " + getDeadline() + ")";
     }
 
-    public String getDeadline() {
-        return this.deadline;
-    }
-
     @Override
     public String saveFormat() {
         return "[D]" + status() + getTask() + " | " + getDeadline() + "\n";
-     }
+    }
+
+    private String getDeadline() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, MMM dd, hh:mm a");
+        String strDeadline = formatter.format(this.deadline);
+        return " (by: " + strDeadline + ")";
+    }
 }

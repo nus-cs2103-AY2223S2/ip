@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -52,16 +54,16 @@ public class Storage {
                         String[] temp = description.split("\\|");
                         String taskDescription = temp[0].strip();
                         String time = temp[1].strip();
+                        LocalDateTime dt = convertString(time);
                         if (taskType == 'D') {
-                            Task t = new Deadline(taskDescription, time);
+                            Task t = new Deadline(taskDescription, dt);
                             if (completion == 'X')
                                 t.mark();
                             taskList.add(t);
                         } else if (taskType == 'E') {
-                            String[] duration = time.split("-");
-                            String from = duration[0].strip();
-                            String to = duration[1].strip();
-                            Task t = new Event(taskDescription, from, to);
+                            String to = temp[2].strip();
+                            LocalDateTime dtTo = convertString(to);
+                            Task t = new Event(taskDescription, dt, dtTo);
                             if (completion == 'X')
                                 t.mark();
                             taskList.add(t);
@@ -159,6 +161,11 @@ public class Storage {
         } catch (IOException e) {
             throw new NoStorageFileException("Leo: No file found!! >:-(");
         }
+    }
+
+    private LocalDateTime convertString(String str) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy HH:mm");
+        return LocalDateTime.parse(str, formatter);
     }
 
 }
