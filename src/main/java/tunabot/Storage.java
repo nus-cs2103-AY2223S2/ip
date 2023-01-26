@@ -1,22 +1,23 @@
 package tunabot;
 
-import tunabot.task.Deadline;
-import tunabot.task.Event;
-import tunabot.task.Task;
-
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.io.File;
 import java.util.Scanner;
+
+import tunabot.task.Deadline;
+import tunabot.task.Event;
+import tunabot.task.Task;
+
+
 
 /**
  * Class to handle Storage of TunaBot
  */
 public class Storage {
     private final Path filePath;
-    
     public Storage(Path filePath) {
         this.filePath = filePath;
     }
@@ -33,7 +34,7 @@ public class Storage {
         if (!parentFolder.exists()) {
             parentFolder.mkdir();
         }
-        if(!saveFile.exists()) {
+        if (!saveFile.exists()) {
             saveFile.createNewFile();
         }
         return loadSave(saveFile);
@@ -45,15 +46,16 @@ public class Storage {
             while (saveReader.hasNextLine()) {
                 String [] taskInfo = saveReader.nextLine().split(";");
                 switch (taskInfo[0]) {
-                    case "T":
-                        tasks.add(new Task(taskInfo[1], taskInfo[2]));
-                        break;
-                    case "D":
-                        tasks.add(new Deadline(taskInfo[1], taskInfo[2], taskInfo[3]));
-                        break;
-                    case "E":
-                        tasks.add(new Event(taskInfo[1], taskInfo[2], taskInfo[3], taskInfo[4]));
-                        break;
+                case "T":
+                    tasks.add(new Task(taskInfo[1], taskInfo[2]));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(taskInfo[1], taskInfo[2], taskInfo[3]));
+                    break;
+                case "E":
+                    tasks.add(new Event(taskInfo[1], taskInfo[2], taskInfo[3], taskInfo[4]));
+                    break;
+                default:
                 }
             }
         } catch (FileNotFoundException e) {
@@ -71,7 +73,7 @@ public class Storage {
             File saveFile = filePath.toFile();
             FileWriter writer = new FileWriter(saveFile);
             for (int i = 0; i < tasks.size(); i++) {
-                writer.write(tasks.get(i).saveFormat()+ "\n");
+                writer.write(tasks.get(i).saveFormat() + "\n");
             }
             writer.close();
         } catch (IOException e) {
