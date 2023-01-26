@@ -1,20 +1,27 @@
 import java.util.Scanner;
-import java.time.LocalDateTime;
 import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
 public class Duke {
-    protected static final String FILE_DIRECTORY = "../../../data";
-    protected static final String FILE_PATH = "../../../data/duke.txt";
+    private Storage storage;
+    private TaskList taskList;
+    private UI ui;
+    private Parser parser;
+
+    public Duke(String directory, String path) {
+        storage = new Storage(directory, path);
+        taskList = new TaskList();
+        ui = new UI();
+        parser = new Parser();
+    }
 
     public static void main(String[] args) {
+        new Duke("../../../data", "../../../data/duke.txt").run();
+    }
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
-        Storage storage = new Storage(FILE_DIRECTORY, FILE_PATH);
-        TaskList taskList = new TaskList();
-        UI ui = new UI();
-        
         ui.printWelcomeMessage();
 
         try {
@@ -35,73 +42,28 @@ public class Duke {
                 } else if (command[0].equals("list")) {
                     ui.printMessage(taskList.listTasks());
                 } else if (command[0].equals("mark")) {
-                    if (command.length < 2) {
-                        throw new DukeException("Task number required");
-                    }
-                    int taskNum = Integer.parseInt(command[1]) - 1;
-                    taskList.markTask(taskNum);
-                    ui.printSuccessMessage("Nice! I've marked this task as done:", taskList.getTasks().get(taskNum));
+                    int taskNum = parser.getTaskNum(command);
+                    taskList.markTask(parser.getTaskNum(command));
+                    ui.printSuccessMessage("Nice! I've marked this task as done:", taskList.getTask(taskNum));
                 } else if (command[0].equals("unmark")) {
-                    if (command.length < 2) {
-                        throw new DukeException("Task number required");
-                    }
-                    int taskNum = Integer.parseInt(command[1]) - 1;
+                    int taskNum = parser.getTaskNum(command);
                     taskList.unmarkTask(taskNum);
-                    ui.printSuccessMessage("OK, I've marked this task as not done yet:",
-                            taskList.getTasks().get(taskNum));
+                    ui.printSuccessMessage("OK, I've marked this task as not done yet:", taskList.getTask(taskNum));
                 } else if (command[0].equals("delete")) {
-                    if (command.length < 2) {
-                        throw new DukeException("Task number required");
-                    }
-                    int taskNum = Integer.parseInt(command[1]) - 1;
+                    int taskNum = parser.getTaskNum(command);
                     Task removedTask = taskList.deleteTask(taskNum);
-                    ui.printTaskMessage("Noted. I've removed this task:", removedTask, taskList.getTasks().size());
+                    ui.printTaskMessage("Noted. I've removed this task:", removedTask, taskList.getSize());
                 } else {
-                    if (command.length < 2) {
-                        throw new DukeException("Invalid input");
-                    }
-                    switch (command[0]) {
-                        case "todo":
-                            taskList.getTasks().add(new Todo(command[1]));
-                            break;
-                        case "deadline": {
-                            String[] arguments = command[1].split(" /by ");
-                            if (arguments.length < 2) {
-                                throw new DukeException("Deadline needs a \"by date\"");
-                            }
-                            taskList.getTasks().add(new Deadline(arguments[0], arguments[1]));
-                            break;
-                        }
-                        case "event": {
-                            String[] arguments = command[1].split(" /from ");
-                            if (arguments.length < 2) {
-                                throw new DukeException("invalid format");
-                            }
-                            String[] timings = arguments[1].split(" /to ");
-                            if (timings.length < 2) {
-                                throw new DukeException("invalid format");
-                            }
-                            taskList.getTasks().add(new Event(arguments[0], timings[0], timings[1]));
-                            break;
-                        }
-                        default:
-                            throw new DukeException("I do not understand");
-                    }
-                    ui.printTaskMessage("Got it. I've added this task:",
-                            taskList.getTasks().get(taskList.getTasks().size() - 1), taskList.getTasks().size());
+                    taskList.addTask(parser.getTaskToAdd(command));
+                    ui.printTaskMessage("Got it. I've added this task:", taskList.getLatestTask(), taskList.getSize());
                 }
             } catch (DukeException e) {
                 ui.printMessage(e.getMessage());
             } catch (NumberFormatException e) {
-                ui.printMessage("Valid task required");
+                ui.printMessage("Valid task number required");
             } catch (IOException e) {
                 ui.printMessage(e.getMessage());
             }
         }
     }
-
-
-
-
-
 }

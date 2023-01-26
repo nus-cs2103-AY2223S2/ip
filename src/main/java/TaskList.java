@@ -11,6 +11,10 @@ public class TaskList {
         return tasks;
     }
 
+    public void addTask(Task t) {
+        tasks.add(t);
+    }
+
     public String listTasks() {
         String output = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
@@ -43,5 +47,17 @@ public class TaskList {
         Task removedTask = tasks.get(taskNum);
         tasks.remove(taskNum);
         return removedTask;
+    }
+
+    public int getSize() {
+        return tasks.size();
+    }
+
+    public Task getLatestTask() {
+        return tasks.get(tasks.size() - 1);
+    }
+
+    public Task getTask(int taskNum) { // get task according to the index of the array
+        return tasks.get(taskNum);
     }
 }
