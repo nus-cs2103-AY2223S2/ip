@@ -1,10 +1,8 @@
+package windycall;
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileWriter;
 
 public class WindyCall {
 
