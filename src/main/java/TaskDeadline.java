@@ -4,9 +4,10 @@
  * @author JamesLiuZX
  * AY2223-S2 CS2103T
  */
+import java.time.LocalDateTime;
 
 public class TaskDeadline extends Task {
-    protected String time;
+    protected LocalDateTime time;
     /**
      * Given a task and a deadline, constructs a TaskDeadline task.
      *
@@ -17,7 +18,7 @@ public class TaskDeadline extends Task {
      * AY2223-S2 CS2103T
      */
 
-    public TaskDeadline(String task, String time) {
+    public TaskDeadline(String task, LocalDateTime time) {
         super(task);
         this.time = time;
     }

@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 /**
  * Given a task and a time range, constructs a Task event.
  *
@@ -6,10 +8,10 @@
  */
 
 public class TaskEvent extends Task{
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
-    public TaskEvent(String task, String from, String to) {
+    public TaskEvent(String task, LocalDateTime from, LocalDateTime to) {
         super(task);
         this.from = from;
         this.to = to;
