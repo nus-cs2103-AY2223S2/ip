@@ -36,11 +36,11 @@ public class TaskList {
         tasks.get(taskNum).unmark();
     }
 
-    public String deleteTask(int taskNum) throws DukeException {
+    public Task deleteTask(int taskNum) throws DukeException {
         if (taskNum < 0 || taskNum >= tasks.size()) {
             throw new DukeException("Task number invalid");
         }
-        String removedTask = tasks.get(taskNum).toString();
+        Task removedTask = tasks.get(taskNum);
         tasks.remove(taskNum);
         return removedTask;
     }
