@@ -1,0 +1,4 @@
+  TYPE  | COMPLETED | DETAILS
+Deadline|    NO     |(Tuesday:)
+  Todo  |    NO     |sleep
+  Event |    YES    |PARTY)
