@@ -1,4 +1,8 @@
 package Duke.Task;
+
+/**
+ * Class to represent the Task created by user
+ */
 public class Task {
     private boolean status = false;
     private String taskName;
@@ -15,6 +19,11 @@ public class Task {
         return this.taskName;
     }
 
+    /**
+     * Change the status of Task to state
+     *
+     * @param state State of Task to be changed into
+     */
     public void setStatus(boolean state) {
         this.status = state;
     }

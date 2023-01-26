@@ -3,6 +3,9 @@ import Duke.DateTime.DateTime;
 
 import java.time.LocalDateTime;
 
+/**
+ * Task to represent Deadline task created by user
+ */
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
@@ -15,6 +18,9 @@ public class Deadline extends Task {
         return this.deadline;
     }
 
+    /**
+     * @return String version of Deadline
+     */
     @Override
     public String toString() {
         String deadline = DateTime.getDateTimeString(this.deadline);

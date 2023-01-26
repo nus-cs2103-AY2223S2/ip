@@ -11,9 +11,18 @@ import Duke.TaskList.TaskList;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Class to parse user input
+ */
 public class Parser {
     public Parser() {}
 
+    /**
+     * Parse data from data.txt in storage and adds it to TaskList
+     *
+     * @param str String to be parsed
+     * @param tl TaskList where Tasks are added to
+     */
     public void parseAndAddStorageTask(String str, TaskList tl) {
         //parse from string that is either a event, deadline or todoevent
         String[] arr = str.split(",");
@@ -43,6 +52,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse input from user given in CLI
+     *
+     * @param str String input of user
+     * @return Command corresponding to the input of user
+     * @throws DukeException If user input is unknown or incorrect format
+     */
     public Command parse(String str) throws DukeException {
         if (Objects.equals(str, "bye")) {
             return null;
@@ -77,6 +93,13 @@ public class Parser {
         throw new DukeException("I'm sorry, but I don't know what that means :-(");
     }
 
+    /**
+     * Check if user input String is to Mark task as done
+     *
+     * @param s Stirng input of user
+     * @return MarkTask Command if user input is correct, else null
+     * @throws DukeException If no spacing/index/index are not numbers only
+     */
     private Command isMark(String s) throws DukeException {
         //checks if input is mark and throw exception for wrong format if matches
         if (s.length() >= 4 && Objects.equals(s.substring(0, 4), "mark")) {
@@ -95,6 +118,13 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Check if user input String is to Unmark task
+     *
+     * @param s Stirng input of user
+     * @return MarkTask Command if user input is correct, else null
+     * @throws DukeException If no spacing/index/index are not numbers only
+     */
     private Command isUnmark(String s) throws DukeException {
         //checks if input is unmark and throw exception for wrong format if matches
         if (s.length() >= 6 && Objects.equals(s.substring(0, 6), "unmark")) {
@@ -113,6 +143,13 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Check if user input String is to add todotask
+     *
+     * @param s Stirng input of user
+     * @return AddTodo Command if user input is correct, else null
+     * @throws DukeException If no spacing/taskname
+     */
     private Command isTodo(String s) throws DukeException {
         //checks if input is todotask and throw exception for wrong format if matches
         if (s.length() >= 4 && Objects.equals(s.substring(0, 4), "todo")) {
@@ -129,6 +166,13 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Check if user input String is to add Deadline task
+     *
+     * @param s Stirng input of user
+     * @return AddDeadline Command if user input is correct, else null
+     * @throws DukeException If no spacing/taskanme/date/date wrong format
+     */
     private Command isDeadline(String s) throws DukeException {
         //checks if input is deadline task and throw exception for wrong format if matches
         if (s.length() >= 8 && Objects.equals(s.substring(0, 8), "deadline")) {
@@ -149,6 +193,13 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Check if user input String is to add Event task
+     *
+     * @param s Stirng input of user
+     * @return AddEvent Command if user input is correct, else null
+     * @throws DukeException If no spacing/taskanme/date/date wrong format
+     */
     private Command isEvent(String s) throws DukeException {
         //check if input is event task and throw exception for wrong format if matches
         if (s.length() >= 5 && Objects.equals(s.substring(0, 5), "event")) {
@@ -170,6 +221,13 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Check if user input String is to Delete task
+     *
+     * @param s Stirng input of user
+     * @return DeleteTask Command if user input is correct, else null
+     * @throws DukeException If no spacing/index/index not all numbers
+     */
     private Command isDelete(String s) throws DukeException {
         //checks if input is delete and throw exception for wrong format if matches
         if (s.length() >= 6 && Objects.equals(s.substring(0, 6), "delete")) {
