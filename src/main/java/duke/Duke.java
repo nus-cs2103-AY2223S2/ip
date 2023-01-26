@@ -10,9 +10,15 @@ import duke.ui.Ui;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * A class for managing tasks
+ */
 public class Duke {
     public Duke() {}
 
+    /**
+     * Function to run the Duke CLI
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         Ui ui = new Ui();

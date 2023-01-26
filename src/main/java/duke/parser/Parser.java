@@ -252,6 +252,13 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Check if user input string is to find task using keyword
+     *
+     * @param s String input of user
+     * @return FindTaskCommand if user input is Find... else null
+     * @throws DukeException If no spacing or incorrect indentation
+     */
     private Command isFind(String s) throws DukeException {
         if (s.length() >= 4 && Objects.equals(s.substring(0, 4), "find")) {
             if (s.length() < 5) {

@@ -7,6 +7,9 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Class in charge of handling the case to display all task matching keyword
+ */
 public class FindTaskCommand extends Command {
     private String keyword;
 

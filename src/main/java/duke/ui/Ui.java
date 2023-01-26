@@ -122,6 +122,11 @@ public class Ui {
         System.out.println(sb);
     }
 
+    /**
+     * Print all the task matching to user input
+     *
+     * @param taskArr ArrayList containing tasks with matching taskname
+     */
     public void showFindTaskResult(ArrayList<Task> taskArr) {
         StringBuilder sb = new StringBuilder();
         sb.append(this.STARTING).append(this.SPACING).append("Here are the matching tasks in your list:\n");
