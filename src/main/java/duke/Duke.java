@@ -1,9 +1,7 @@
-import java.io.*;
-import java.text.NumberFormat;
-import java.util.Scanner;
-import java.util.ArrayList;
+package duke;
 
-import static java.lang.Boolean.parseBoolean;
+import duke.command.Command;
+import duke.task.TaskList;
 
 public class Duke {
     private Storage storage;

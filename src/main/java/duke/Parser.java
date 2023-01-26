@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 public class Parser {
     public static Command parse(String inp, Ui ui, TaskList tasks) throws DukeException {
