@@ -4,12 +4,12 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-import exception.DukeException;
+import duke_exception.DukeException;
 import task_types.Deadline;
 import task_types.Event;
 import task_types.Task;
 import task_types.ToDo;
-import utilities.TextFileParser;
+import utility.TextFileParser;
 
 /**
  * <h1>Duke Chatbot</h1>
