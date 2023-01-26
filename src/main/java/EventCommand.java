@@ -7,7 +7,7 @@ public class EventCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (!content.matches("^.+(\\s)/from(\\s).+(\\s)/to.*$")) {
+        if (!FormatChecker.isCorrectEventCmd(this.content)) {
             throw new DukeException(
                 "Please use the correct format to add an event.");
         }
@@ -15,6 +15,9 @@ public class EventCommand extends Command {
         eventTask[0] = eventTask[0].trim();
         eventTask[1] = eventTask[1].trim();
         eventTask[2] = eventTask[2].trim();
+        if (!FormatChecker.isCorrectDateInput(eventTask[1]) || !FormatChecker.isCorrectDateInput(eventTask[2])) {
+            throw new DukeException("Please use the correct format for date (dd/MM/yyyy HH:mm)");
+        }
         try {
             tasks.add(eventTask[0], eventTask[1], eventTask[2], true);
         } catch (DukeException e) {

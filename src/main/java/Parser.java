@@ -28,6 +28,8 @@ public class Parser {
         case "delete":
             int deleteIdx = Integer.parseInt(content);
             return new DeleteCommand(deleteIdx);
+        case "guide":
+            return new GuideCommand();
         default:
             return new UnknownCommand();
         }
