@@ -26,12 +26,12 @@ public class AddEventCommand extends AddTaskCommand {
                 .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
         
         // get from date
-        String fromString = args.get("from")
+        String fromString = args.get(AquaEvent.TAG_FROM)
                 .orElseThrow(() -> new IllegalSyntaxException("[from] disappeared!"));
         LocalDateTime from = DateUtils.parse(fromString);
 
         // get to date
-        String toString = args.get("to")
+        String toString = args.get(AquaEvent.TAG_TO)
                 .orElseThrow(() -> new IllegalSyntaxException("[to] disappeared!"));
         LocalDateTime to = DateUtils.parse(toString);
 
