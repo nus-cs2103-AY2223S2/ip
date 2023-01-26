@@ -4,9 +4,7 @@ import Meggy.Exception.MeggyException;
 import Meggy.MeggyTime;
 import Meggy.Resource;
 
-/**
- * {@link UserTask} with an optional due time.
- */
+/** {@link UserTask} with a due time. */
 public class DdlTask extends UserTask {
     /** Bracketed icon of task type. */
     public final static String LABEL = getTaskTypeLabel(Resource.CMD_DDL);
@@ -46,9 +44,7 @@ public class DdlTask extends UserTask {
         return new DdlTask(desc, due);
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     @Override
     public String encode() {
         return Resource.CMD_DDL + ' ' + desc + ' ' + DUE_KEYWORD_FORMATTED + due.encode();

@@ -20,7 +20,7 @@ public class Storage {
             Resource.CMD_DDL, Util.DDL_NEW,
             Resource.CMD_EVENT, Util.EVENT_NEW
     );
-    final public File dataFile;
+    public final File dataFile;
 
     /**
      * @param dataFile Non-null. The data file to read from and write to. If not exist, it will be created upon first

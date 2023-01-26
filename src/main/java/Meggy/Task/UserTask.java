@@ -25,13 +25,14 @@ public abstract class UserTask {
      * Get ask type label from their names.
      *
      * @param taskType Non-null, non-empty. Name of task type.
-     * @return Meggy.Task-type-specific label.
+     * @return Task-type-specific label.
      */
     public static String getTaskTypeLabel(String taskType) {
         return Util.parenthesize(Character.toUpperCase(taskType.charAt(0)));
     }
 
     /**
+     * Formats the time keywords used to indicate date-time in user input.
      * @param keyword Non-null. Raw time keyword.
      * @return Command-syntax-marking time keyword.
      */

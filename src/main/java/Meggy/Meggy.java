@@ -28,11 +28,11 @@ public class Meggy implements Runnable {
     private final UI ui;
     /** List of tasks. Allows dupes. */
     private final TaskList tasks;
-
     /** Location to save cross-session data. */
     private final Storage storage;
 
     /**
+     * Creates a chatbot instance with specified IO.
      * @param in  Non-null. Customizable input.
      * @param out Non-null. Customizable output.
      */
@@ -117,7 +117,7 @@ public class Meggy implements Runnable {
     }
 
     /**
-     * Formatted string about the recently modified task and {@code tasks} list.
+     * Formats the string of the recently modified task and {@code tasks} list.
      *
      * @param task Non-null. The recently modified task.
      */
