@@ -11,21 +11,21 @@ ____________________________________________________________
 
 ____________________________________________________________
   Got it. I've added this task:
-    [D][ ] return book (by: Sunday)
+    [D][ ] return book (by: Oct 15 2019)
   Now you have 2 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
   Got it. I've added this task:
-    [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    [E][ ] project meeting (from: Oct 16 2019 to: Oct 17 2019)
   Now you have 3 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
   Here are the tasks in your list:
   1.[T][ ] borrow book
-  2.[D][ ] return book (by: Sunday)
-  3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
+  2.[D][ ] return book (by: Oct 15 2019)
+  3.[E][ ] project meeting (from: Oct 16 2019 to: Oct 17 2019)
 ____________________________________________________________
 
 ____________________________________________________________
@@ -38,10 +38,11 @@ ____________________________________________________________
 
 ____________________________________________________________
   Noted. I've removed this task:
-    [E][ ] project meeting (from: Mon 2pm to: 4pm)
+    [E][ ] project meeting (from: Oct 16 2019 to: Oct 17 2019)
   Now you have 2 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
   Bye. Hope to see you again soon!
 ____________________________________________________________
+
