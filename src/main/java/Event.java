@@ -14,7 +14,7 @@ public class Event extends Task {
     public String toStorageFormatString() {
         return "E|" + (isDone? "1" : "0") + "|" +
                 this.taskDescription + "|" +
-                this.start + "|" + this.end;
+                this.start.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")) + "|" + this.end.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
     @Override

@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -122,16 +124,17 @@ public class TreeBot {
     }
     private Task formatStringToTask(String formatString) {
         String[] splitStr = formatString.split("\\|");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         Task task;
         switch (splitStr[0]) {
         case "T":
             task = new Todo(splitStr[2]);
             break;
         case "D":
-            task =  new Deadline(splitStr[2],splitStr[3]);
+            task =  new Deadline(splitStr[2], LocalDateTime.parse(splitStr[3], formatter));
             break;
         case "E":
-            task = new Event(splitStr[2], splitStr[3], splitStr[4]);
+            task = new Event(splitStr[2], LocalDateTime.parse(splitStr[3], formatter), LocalDateTime.parse(splitStr[4], formatter));
             break;
         default:
             task =  null;

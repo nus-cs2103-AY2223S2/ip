@@ -13,7 +13,7 @@ public class Deadline extends Task {
 
     @Override
     public String toStorageFormatString() {
-        return "D|" + (isDone ? "1" : "0") + "|" + this.taskDescription + "|" + this.deadline;
+        return "D|" + (isDone ? "1" : "0") + "|" + this.taskDescription + "|" + this.deadline.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
     @Override
