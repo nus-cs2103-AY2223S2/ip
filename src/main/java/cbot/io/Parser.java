@@ -10,10 +10,22 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Handles much of the parsing of user inputs.
+ */
 public class Parser {
     private Command c;
     private String text;
-    
+
+    /**
+     * Constructs a new instance to process the user's current input. Attempts to recognize the Command,
+     * and the rest of the input body.
+     *
+     * @param input The user's input.
+     * @throws PoorInputException If the input command is not recognized.
+     * @see UI#askUser()
+     * @see Command
+     */
     public Parser(String input) throws PoorInputException {
         this.c = null;
         this.text = "";
@@ -32,15 +44,33 @@ public class Parser {
             throw new PoorInputException("Sorry, I don't recognize that command :<");
         }
     }
-    
+
+    /**
+     * Returns true if the stored Command is the BYE Command.
+     *
+     * @return true if the stored Command is BYE.
+     */
     public boolean isBye() {
         return (this.c == Command.BYE);
     }
-    
+
+    /**
+     * Returns true if the stored Command requires the task list to be saved.
+     *
+     * @return Whether the task list needs to be saved after the Command.
+     */
     public boolean needSave() {
         return this.c.needSave();
     }
-    
+
+    /**
+     * Processes the Command and the rest of the input. If needed, the TaskList is modified and the UI is given
+     * outputs to print. The main bulk of Cbot's parsing is done here.
+     *
+     * @param tl The current list of tasks.
+     * @throws PoorInputException If the input text is improper or erroneous.
+     * @throws DateTimeParseException If some provided datetime is not in a recognized format.
+     */
     public void respond(TaskList tl) throws PoorInputException, DateTimeParseException {
         if (this.c.missingText(this.text)) {
             throw new PoorInputException("That command needs an input");

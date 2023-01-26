@@ -5,34 +5,70 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.function.Predicate;
 
+/**
+ * Stores and manages a list of tasks.
+ *
+ * @see Task
+ */
 public class TaskList {
     private final ArrayList<Task> tdl;
 
     //private static final int GAPS = 11;
     private static final String GAP = "             ";
-    
+
+    /**
+     * Constructs an empty list of tasks.
+     */
     public TaskList() {
         this.tdl = new ArrayList<>();
     }
-    
+
+    /**
+     * Constructs a (special) list of the given tasks.
+     *
+     * @param tdl A (not-so-special) list of tasks.
+     */
     public TaskList(ArrayList<Task> tdl) {
         this.tdl = tdl;
     }
-    
+
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return The number of tasks.
+     */
     public int getCount() {
         return this.tdl.size();
     }
-    
+
+    /**
+     * Adds a task to the list.
+     *
+     * @param task The task to be added.
+     * @return A confirmation message.
+     */
     public String addTask(Task task) {
         this.tdl.add(task);
         return String.format("\"%s\" added!",
                 task.toString());
     }
-    
+
+    /**
+     * Returns an enumerated list of the tasks stored.
+     *
+     * @return A numbered list of tasks.
+     */
     public ArrayList<String> listTasks() {
         return listFilter(t -> true);
     }
-    
+
+    /**
+     * Returns a list of the tasks stored filtered by the given clause.
+     * Tasks are numbered relative to their position entire list, not the filtered list.
+     *
+     * @param pred The clause a task must satisfy to be included.
+     * @return The filtered list of tasks.
+     */
     public ArrayList<String> listFilter(Predicate<Task> pred) {
         ArrayList<String> arr = new ArrayList<>();
         
@@ -45,11 +81,25 @@ public class TaskList {
         
         return arr;
     }
-    
+
+    /**
+     * Returns true if the input number is larger than the number of tasks, or less than one.
+     *
+     * @param num The input number to test.
+     * @return Whether the number is more than the number of tasks, or less than one.
+     */
     public boolean notInRange(int num) {
         return (num <= 0 || num > getCount());
     }
-    
+
+    /**
+     * Returns a different message depending on whether the input number is
+     * less than one, more than the number of tasks or else within the acceptable range.
+     *
+     * @param num The input number to test.
+     * @return The corresponding message.
+     * @see #notInRange(int)
+     */
     public String rangeError(int num) {
         if (num <= 0) {
             return "wadahek pls";
@@ -59,7 +109,14 @@ public class TaskList {
             return "All's good! That index is in range :D";
         }
     }
-    
+
+    /**
+     * Marks the task at the given position as done.
+     *
+     * @param num The 1-based index of the task.
+     * @return An encouraging confirmation message.
+     * @see cbot.task.Task#yesDo()
+     */
     public String mark(int num) {
         int index = num - 1;
         
@@ -71,7 +128,14 @@ public class TaskList {
                     + tdl.get(index).toString();
         }
     }
-    
+
+    /**
+     * Marks the task at the given position as not done.
+     *
+     * @param num The 1-based index of the task.
+     * @return A consoling confirmation message.
+     * @see cbot.task.Task#noDo()
+     */
     public String unmark(int num) {
         int index = num - 1;
         
@@ -83,16 +147,34 @@ public class TaskList {
                     + tdl.get(index).toString();
         }
     }
-    
+
+    /**
+     * Removes the task at the given position from the list.
+     *
+     * @param num The 1-based index of the task.
+     * @return A confirmation message.
+     */
     public String delTask(int num) {
         return "Got it! Deleted:\n" + GAP
                 + tdl.remove(num - 1).toString();
     }
-    
+
+    /**
+     * Sorts the list of tasks. From earliest to latest, then lexicographically.
+     *
+     * @see cbot.task.Task#compareTo(Task)
+     */
     public void sort() {
         Collections.sort(tdl);
     }
 
+    /**
+     * Returns a string representation of the entire TaskList, for the convenience of file-saving.
+     *
+     * @return A string representation of the TaskList, for saving.
+     * @see cbot.task.Task#makeFileFriendly()
+     * @see cbot.io.FileStuff#saveFile(TaskList)
+     */
     public String makeFileFriendly() {
         StringBuilder sb = new StringBuilder();
         
