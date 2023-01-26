@@ -39,8 +39,7 @@ public class Request {
         case "ON":
             return new OnParser().parse(this.requestContent);
         case "FIND":
-            // TODO: add parser
-            break;
+            return new FindParser().parse(this.requestContent);
         default:
             throw new UnknownCommandException();
         }

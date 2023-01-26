@@ -13,6 +13,15 @@ public abstract class Task {
     }
 
     /**
+     * Retrieves the task string.
+     *
+     * @return A task string.
+     */
+    public String getTask() {
+        return this.task;
+    }
+
+    /**
      * Toggles todo as completed.
      */
     public void markCompleted() {
