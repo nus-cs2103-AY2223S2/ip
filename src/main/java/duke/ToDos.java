@@ -18,7 +18,6 @@ public class ToDos extends Task {
      * @param status
      * @param des
      */
-
     public ToDos(boolean status, String des) {
         super(status, des);
     }

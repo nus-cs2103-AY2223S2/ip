@@ -6,6 +6,7 @@ class DukeException extends Exception {
      *
      * @param message Print out any message entered
      */
+
     public DukeException(String message) {
         super(message);
     }
@@ -21,7 +22,6 @@ class markException extends DukeException {
     }
 }
 
-
 class taskNotFoundException extends DukeException {
     /**
      * Exception used to indicate user input was invalid and/or task was not found in TaskList
@@ -36,7 +36,6 @@ class deleteException extends DukeException {
     /**
      * Exception used by delete function to indicate invalid user input
      */
-
     public deleteException() {
         super("I don't know which task to delete...");
     }
@@ -52,7 +51,6 @@ class todoException extends DukeException {
     }
 }
 
-
 class deadlineException extends DukeException {
     /**
      * Exception used by deadline task to indicate invalid user input when creating deadline task
@@ -62,7 +60,6 @@ class deadlineException extends DukeException {
         super("☹ OOPS!!! The description of a deadline cannot be empty.");
     }
 }
-
 
 class eventException extends DukeException {
     /**

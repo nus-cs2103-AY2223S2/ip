@@ -26,6 +26,9 @@ public class UI {
             case "list":
                 fn.list();
                 break;
+            case "find":
+                fn.find(inp);
+                break;
             case "mark":
                 fn.mark(inp);
                 break;

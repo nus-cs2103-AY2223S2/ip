@@ -34,6 +34,35 @@ public class Functions {
     }
 
     /**
+     * Method to allow user to search for task by description.
+     *
+     * @param s User input
+     */
+    public void find(String s) {
+        String query = s.split(" ")[1];
+        boolean flag = false;
+        boolean printed = false;
+        int i = 1;
+        for (Task t : tl.iterable()) {
+            if (t.getDes().contains(query)) {
+                flag = true;
+                if (flag && !printed) {
+                    System.out.println("Here are the matching tasks in your list:");
+                    printed = true;
+                }
+                System.out.print(i + ".");
+                t.printStatus();
+                i++;
+            }
+        }
+        if (!flag) {
+            System.out.println("No matching tasks are found in your list");
+        } else {
+            System.out.println("Search done!");
+        }
+    }
+
+    /**
      * Method to define function of bye command
      *
      * @return boolean flag to indicate when program should stop
@@ -102,7 +131,7 @@ public class Functions {
     }
 
     /**
-     * Method to define functino of todo command. Creates todo task
+     * Method to define function of todo command. Creates todo task
      *
      * @param inp Description of todo task
      * @throws DukeException
@@ -120,7 +149,7 @@ public class Functions {
     }
 
     /**
-     * Method to define functino of deadline command. Create deadline task
+     * Method to define function of deadline command. Create deadline task
      *
      * @param inp Description of deadline task. Define deadline after "/by".
      *            Example: deadline task1 /by 12/12/2023 12:12

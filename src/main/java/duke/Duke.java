@@ -57,8 +57,8 @@ public class Duke {
                 flag = ui.action();
             } catch (DukeException e) {
                 System.out.println(e);
-            } catch (Exception e) {
-                System.out.println(e);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input...");
             }
         }
     }

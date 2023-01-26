@@ -52,7 +52,6 @@ public abstract class TimedTask extends Task {
         setEnd(des[1]);
     }
 
-
     /**
      * Method to assist with laoding from file.
      *

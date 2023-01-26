@@ -62,6 +62,15 @@ public class TaskList {
     }
 
     /**
+     * Method to return an iterable list from TaskList
+     *
+     * @return List<Task></Task>
+     */
+    public List<Task> iterable() {
+        return this.list;
+    }
+
+    /**
      * Method to calculate number of task in TaskList
      *
      * @return Int representation of count of Tasks in TaskList
