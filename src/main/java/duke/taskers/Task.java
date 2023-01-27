@@ -23,8 +23,14 @@ public class Task {
         this.isDone = false;
     }
 
-    public String stringFormatForFile() {
-        return ((this.isDone ? "1" : "0") + " / " + this.description.trim()).trim();
+    /**
+     * Helps to format the string for file input.
+     *
+     * @return A partially formatted string.
+     */
+    public String helpFormatString() {
+        return ((this.isDone ? "1" : "0") + " / "
+                + this.description.trim()).trim();
     }
 
     /**
@@ -33,7 +39,8 @@ public class Task {
      */
     @Override
     public String toString() {
-        return (this.isDone ? "[X]" : "[ ]") + this.description;
+        return (this.isDone ? "[X]" : "[ ]") +
+                this.description;
     }
 
 }

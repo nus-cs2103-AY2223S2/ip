@@ -16,6 +16,7 @@ public class TaskList {
     private final ArrayList<Task> listOfThings;
 
     public TaskList(ArrayList<Task> loadedTasks) {
+
         this.listOfThings = loadedTasks;
     }
 
@@ -69,7 +70,8 @@ public class TaskList {
         } else if (add.equals(Command.DEADLINE)) {
             String[] arr = Parser.parseDeadline(text);
             if (arr.length != 2) {
-                throw new DukeException("I don't know what that means. Format it as 'deadline [do something] /by [date]");
+                throw new DukeException("I don't know what that means." +
+                        " Format it as 'deadline [do something] /by [date]");
             }
             LocalDateTime end = Duke.createLocalDateTime(arr[1]);
             if (end != null) {
@@ -80,7 +82,9 @@ public class TaskList {
         } else {
             String[] arr = Parser.parseEvent(text);
             if (arr.length != 3) {
-                throw new DukeException("I don't know what that means. Format it as 'event [do something] /from [start date] /to [end date]'");
+                throw new DukeException("I don't know what that means. " +
+                        "Format it as 'event [do something] /from [start date] /to" +
+                        " [end date]'");
             }
             LocalDateTime start = Duke.createLocalDateTime(arr[1]);
             LocalDateTime end = Duke.createLocalDateTime(arr[2]);

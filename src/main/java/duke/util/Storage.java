@@ -39,13 +39,13 @@ public class Storage {
         String s = "";
         if (t instanceof Todo) {
             Todo todo = (Todo) t;
-            s = todo.statusStringForFile();
+            s = todo.formatStringForFile();
         } else if (t instanceof Deadline) {
             Deadline deadline = (Deadline) t;
-            s = deadline.statusStringForFile();
+            s = deadline.formatStringForFile();
         } else {
             Event event = (Event) t;
-            s = event.statusStringForFile();
+            s = event.formatStringForFile();
         }
         return s;
     }
@@ -108,8 +108,14 @@ public class Storage {
 
 
     /**
+<<<<<<< HEAD
      * the function that deletes the entire duke file and re-inserts it with the current one.
      * used for delete, mark and unmark when values are changed
+=======
+     * The function that deletes the entire duke file and
+     * re-inserts it with the current one.
+     * Used for delete, mark and unmark when values are changed.
+>>>>>>> branch-A-CodingStandard
      */
     public void deleteFileAndRedo(ArrayList<Task> listOfThings) {
         if (this.dukeFile.delete()) {
