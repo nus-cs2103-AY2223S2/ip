@@ -11,6 +11,12 @@ import java.util.ArrayList;
 public class TaskList {
     private  ArrayList<Task> tasks = new ArrayList<>();
     private int taskCount = 0;
+    private String FILE_NAME = "tasks.txt";
+    private Storage storage = new Storage();
+
+    public TaskList(){
+        this.addFromStorage();
+    }
 
     /**
      * Adds Task to the List , and returns the success Message
@@ -18,27 +24,29 @@ public class TaskList {
      * @return
      */
     public String addTasks(String input,String formatSpace) throws CommandNotFoundException{
-        String[] splitCommand = input.trim().split(" ", 2);
-        String command = splitCommand[0].toLowerCase();
-        if (splitCommand.length == 1) {
+        try {
+            String[] splitCommand = input.trim().split(" ", 2);
+            String command = splitCommand[0].toLowerCase();
+            String message = splitCommand[1];
+            Task newTask = null;
+            if (command.equals("todo")) {
+                newTask = new Todo(message);
+            } else if (command.equals("deadline")) {
+                String[] parsedMessage = this.parseDeadline(message);
+                newTask = new Deadline(parsedMessage[0], parsedMessage[1]);
+            } else if (command.equals("event")) {
+                String[] parsedMessage = this.parseEvent(message);
+                newTask = new Event(parsedMessage[0], parsedMessage[1], parsedMessage[2]);
+            } else {
+                // Throw Error
+                throw new CommandNotFoundException(input);
+            }
+            tasks.add(newTask);
+            taskCount++;
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new CommandNotFoundException(input);
         }
-        String message = splitCommand[1];
-        Task newTask = null;
-        if (command.equals("todo")) {
-            newTask = new Todo(message);
-        } else if (command.equals("deadline")) {
-            String[] parsedMessage = this.parseDeadline(message);
-            newTask = new Deadline(parsedMessage[0] , parsedMessage[1]);
-        } else if (command.equals("event")) {
-            String[] parsedMessage = this.parseEvent(message);
-            newTask = new Event(parsedMessage[0] , parsedMessage[1], parsedMessage[2]);
-        } else {
-            // Throw Error
-            throw new CommandNotFoundException(input);
-        }
-        tasks.add(newTask);
-        taskCount++;
+
         return formatSpace + tasks.get(taskCount - 1).getRepresentation();
     }
 
@@ -106,6 +114,38 @@ public class TaskList {
         output[1] = fromTo[0];
         output[2] = fromTo[1];
         return output;
+    }
+    public void addToStorage() {
+        boolean canAppend = true;
+        storage.deleteFile(FILE_NAME);
+        for (Task t : tasks) {
+            storage.writeToStorage(FILE_NAME, t.getStorageFormat(), canAppend);
+        }
+    }
+
+
+    private void addFromStorage() {
+        ArrayList<String> taskStrings = storage.readStorage(FILE_NAME);
+        for (String task : taskStrings){
+            String[] parsed = task.split(",");
+
+            Task newTask = null;
+            if (parsed[0].contains(Todo.TASK_SIGN)) {
+                newTask = new Todo(parsed[2]);
+            } else if (parsed[0].contains(Deadline.TASK_SIGN) ) {
+                newTask = new Deadline(parsed[2] , parsed[3]);
+            } else if (parsed[0].contains(Event.TASK_SIGN) ) {
+                newTask = new Event(parsed[2] , parsed[3], parsed[4]);
+            } else {
+                //Uknown ouput
+            }
+            if (Boolean.valueOf(parsed[1])) {
+                newTask.mark();
+            }
+            tasks.add(newTask);
+            taskCount++;
+        }
+
     }
 
 

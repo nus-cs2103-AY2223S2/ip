@@ -3,7 +3,7 @@ package Tasks;
 import Tasks.Task;
 
 public class Event extends Task {
-    private final String TASK_SIGN = "[E]";
+    public static final String TASK_SIGN = "[E]";
     private String from;
     private String to;
 
@@ -16,6 +16,11 @@ public class Event extends Task {
     @Override
     public String getMessage(){
         return this.message + " (from: " + this.from + " to: " + this.to + ")";
+    }
+
+    @Override
+    public String getStorageFormat() {
+        return TASK_SIGN + "," +this.isMarked()+","+this.message+"," +this.to + "," + this.from;
     }
 
     @Override

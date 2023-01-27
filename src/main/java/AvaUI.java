@@ -29,6 +29,7 @@ public class AvaUI {
      * Calls the Intialisation function
      */
     public AvaUI(){
+
         this.intialise();
     }
 
@@ -45,6 +46,7 @@ public class AvaUI {
                 String input = myObj.nextLine().toLowerCase();
                 String output = "";
                 if (input.contains("bye")){
+                    this.tasks.addToStorage();
                     this.displayExit();
                     break;
                 } else if(input.contains("list")) {
