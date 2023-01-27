@@ -23,7 +23,7 @@ public class Parser {
     }
 
     /**
-     * method for list, mark, unmark, delete, todo, deadline, event commands
+     * method for list, mark, unmark, delete, to do, deadline, event commands
      * @param cmd
      * @param  tasks
      * @return command
@@ -37,6 +37,7 @@ public class Parser {
         if (!command.equals("bye")) {
             if (command.equals("list")) {
                 Ui.showList(tasks);
+
             } else if (words[0].equals("mark")) {
                 try {
                     Ui.done(words[1], tasks);
@@ -45,6 +46,7 @@ public class Parser {
                     System.out.println("  ☹ OOPS!!! The index number cannot be empty.");
                     System.out.println(Indentation + Horizontal);
                 }
+
             } else if (words[0].equals("unmark")) {
                 try {
                     Ui.undone(words[1], tasks);
@@ -53,6 +55,7 @@ public class Parser {
                     System.out.println("  ☹ OOPS!!! The The index number cannot be empty.");
                     System.out.println(Indentation + Horizontal);
                 }
+
             } else if (words[0].equals("delete")) {
                 try {
                     Ui.delete(words[1], tasks);
@@ -61,6 +64,7 @@ public class Parser {
                     System.out.println("  ☹ OOPS!!! The index number cannot be empty.");
                     System.out.println(Indentation + Horizontal);
                 }
+
             } else if (words[0].equals("todo")) {
                 try {
                     if (words[1].equals(null)) {
@@ -131,6 +135,7 @@ public class Parser {
                     System.out.println("  ☹ OOPS!!! The description of a event cannot be empty.");
                     System.out.println(Indentation + Horizontal);
                 }
+
             } else {
                 System.out.println(Indentation + Horizontal);
                 System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
