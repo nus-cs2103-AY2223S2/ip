@@ -59,11 +59,17 @@ public abstract class Task implements Storable {
         this.isDone = isDone;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toCsv() {
         return (isDone ? "true":"false") + "," + description;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toString() {
         return "[" + (isDone ? "√" : " ") + "] " + description;

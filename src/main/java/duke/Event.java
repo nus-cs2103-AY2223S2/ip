@@ -73,21 +73,27 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toCsv() {
         return "E," + super.toCsv() + ","
                 + from + "," + to;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString()
                 + " (From: "
                 + from.getDayOfMonth() + " " + from.getMonth() + " " + from.getYear() + " "
-                + from.getHour() + from.getMinute() // bugalert: may not always be 4-digits
+                + from.getHour() + from.getMinute() // TODO: bugalert (may not always be 4-digits)
                 + " To: "
                 + to.getDayOfMonth() + " " + to.getMonth() + " " + to.getYear() + " "
-                + to.getHour() + to.getMinute() // bugalert: may not always be 4-digits
+                + to.getHour() + to.getMinute() // TODO: bugalert (may not always be 4-digits)
                 + ")";
     }
 }
