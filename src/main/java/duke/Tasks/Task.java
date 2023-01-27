@@ -1,12 +1,10 @@
 package duke.Tasks;
-
+//
 public class Task {
     protected String description;
     public boolean isDone;
 
     public static int taskNum;
-
-    //
     public boolean isExit;
 
     public Task (String description) {
