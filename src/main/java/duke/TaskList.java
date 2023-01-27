@@ -3,6 +3,10 @@ package duke;
 import duke.Task;
 
 import java.util.ArrayList;
+
+/**
+ * TaskList class that helps to handle the arrayList operations
+ */
 public class TaskList {
     private ArrayList<Task> list;
 

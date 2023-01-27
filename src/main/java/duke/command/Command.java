@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Abstract class
+ */
 public abstract class Command {
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);

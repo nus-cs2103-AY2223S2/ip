@@ -7,16 +7,30 @@ import java.time.format.DateTimeFormatter;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
+/**
+ * Parser class to handle all the user input commands.
+ */
 public class Parser {
 
     private Ui ui;
     private StringTokenizer tk;
     private String fullcommand;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyyHHmm");
+
+    /**
+     * Public constructor
+     */
     public Parser() {
 
     }
 
+    /**
+     * Convert user input into command and provide validation of the user input
+     *
+     * @param fullcommand = User input
+     * @param ui = User interface class
+     * @return = return the command Duke thinks from the User Input
+     */
     public Command parse(String fullcommand, Ui ui) {
         this.fullcommand = fullcommand;
         this.tk = new StringTokenizer(fullcommand);
@@ -93,6 +107,7 @@ public class Parser {
         return c;
     }
 
+    //try and catch for tk.nextToken() for integer;
     public Integer getIndex() {
         try {
             return Integer.parseInt(this.tk.nextToken());
@@ -113,6 +128,7 @@ public class Parser {
         return null;
     }
 
+    //try and catch for tk.nextToken() for string
     public String getString() {
         try {
             return tk.nextToken();

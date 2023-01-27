@@ -38,10 +38,5 @@ public class Duke {
     }
 
     //Error Checking Methods
-    public static boolean empty(String value) {
-        if(value == null) {
-            return true;
-        }
-        return false;
-    }
+    
 }
