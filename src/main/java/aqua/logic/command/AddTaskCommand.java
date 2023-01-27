@@ -55,9 +55,9 @@ public abstract class AddTaskCommand implements Command {
         public String getDataDisplay(AquaTask task, LogicManager manager) {
             return String.format(String.join("\n",
                             "Hai okay desu! I have added the task:",
-                            "/",
+                            "/／",
                             "  %s",
-                            "\\",
+                            "\\＼",
                             "You now have %d tasks."),
                     task.toString(),
                     manager.getTaskManager().size());

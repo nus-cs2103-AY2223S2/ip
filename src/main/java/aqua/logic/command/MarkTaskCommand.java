@@ -76,7 +76,7 @@ public class MarkTaskCommand implements Command {
                         task.toString());
             }
             return String.format(String.join("\n",
-                            "Uah... Okay I have unmarked the task:",
+                            "Uah (๑•﹏•) Okay I have unmarked the task:",
                             "  %s"),
                     task.toString());
         }

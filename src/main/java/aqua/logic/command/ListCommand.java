@@ -24,7 +24,7 @@ public class ListCommand implements Command {
             @Override
             public String getDataDisplay(TaskManager taskManager, LogicManager manager) {
                 return String.format(String.join("\n",
-                                "Here is your task list",
+                                "Here is your task list ( ꜆ 'ᵕ' )꜆",
                                 "%s"),
                         getListMessage(taskManager));
             }
@@ -36,6 +36,6 @@ public class ListCommand implements Command {
         if (manager.size() > 0) {
             return manager.toString();
         }
-        return "Nothing!!";
+        return "Nothing!! - ̗̀ ( ˶'ᵕ'˶) ̖́-";
     }
 }

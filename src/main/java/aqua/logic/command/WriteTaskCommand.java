@@ -28,7 +28,7 @@ public class WriteTaskCommand implements Command {
                                     "If you leave me I might forget everything!!"),
                             ioEx.getMessage());
                 }
-                return "Safely stored hehe";
+                return "Safely stored hehe (  •̀֊•́ )";
             }
 
             

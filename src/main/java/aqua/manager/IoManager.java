@@ -13,29 +13,29 @@ import aqua.exception.ProcedureExecutionException;
 public class IoManager {
     /** Greeting message. */
     private static final String MESSAGE_GREETING = 
-            "Konaqua~~ Perfect idol gamer nekomimi super maid Minato Aqua desu!";
+            "Konaqua~~\n(*ゝω･*)ﾉ Perfect idol gamer nekomimi super maid Minato Aqua desu!";
     /** Load success message. */
     private static final String MESSAGE_LOAD_SUCCESS =
-            "I remembered all your previous tasks! Praise me";
+            "I remembered all your previous tasks! Praise me (⋈◍＞◡＜◍)。✧♡";
     
     /** Syntax exception message format. */
     private static final String EXCEPTION_FORMAT_SYNTAX =
             "Hanya??\n" +
             "I do not understand because:\n" +
             "  %s\n" +
-            "Gomennasai!!";
+            "Gomennasai!! (╥﹏╥)";
     /** Execution exception message format. */
     private static final String EXCEPTION_FORMAT_EXECUTION = 
             "Hanya??\n" +
             "I was doing what you told me to do half way but messed up because:\n" +
             "  %s\n" +
-            "Gomennasai!!";
+            "Gomennasai!! (╥﹏╥)";
     /** Load exception message format. */
     private static final String EXCEPTION_FORMAT_LOAD = 
             "Hanya??\n" +
             "I was looking through my notes and could not remember your previous tasks because:\n" +
             "  %s\n" +
-            "Gomennasai!! But you did not touch it right?";
+            "Gomennasai!! But you did not touch it right? ( ･̆-･̆)";
     /** All other exception message format. */
     private static final String EXCEPTION_FORMAT_DEATH =
             "UWAWAWA!!\n" +

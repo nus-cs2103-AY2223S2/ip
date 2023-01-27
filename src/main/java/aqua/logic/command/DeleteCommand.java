@@ -67,10 +67,10 @@ public class DeleteCommand implements Command {
         private String getRemainingMessage(LogicManager manager) {
             int numTask = manager.getTaskManager().size();
             if (numTask > 0) {
-                return String.format("You have %d task(s) left, all the best",
+                return String.format("You have %d task(s) left, all the best ( ง*`꒳´*)ว",
                         numTask);
             }
-            return "You have no task left~";
+            return "٩ (ˊᗜˋ *) و You have no task left~ ☆";
         }
     }
 }
