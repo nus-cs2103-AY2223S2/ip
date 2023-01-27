@@ -1,24 +1,24 @@
 public class Task {
-    private String name; // name of the task
-    private Boolean status; // whether task is done or not
+    protected String description; // name of the task
+    protected Boolean isMarked; // whether task is done or not
 
-    public Task(String name) {
-        this.name = name;
-        this.status = false;
+    public Task(String description) {
+        this.description = description;
+        this.isMarked = false;
     }
     public void mark() {
-        this.status = true;
+        this.isMarked = true;
     }
 
     public void unmark() {
-        this.status = false;
+        this.isMarked = false;
     }
 
     @Override
     public String toString() {
-        return this.status
-                ? String.format("[X] %s", this.name)
-                : String.format("[ ] %s", this.name);
+        return this.isMarked
+                ? String.format("[X] %s", this.description)
+                : String.format("[ ] %s", this.description);
     }
 
 }
