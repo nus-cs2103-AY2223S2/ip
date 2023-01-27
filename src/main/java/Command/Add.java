@@ -10,13 +10,15 @@ import storage.Event;
 import storage.Storage;
 import storage.Task;
 import storage.ToDo;
+import ui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Add {
+public class Add extends Command {
 
     public Add(Storage s, String task) throws LeoException {
+        super(s, task);
         try {
             if (task.contains("todo")) {
                 s.addTask(new ToDo(task.substring(5)));
@@ -30,7 +32,7 @@ public class Add {
                     Task deadline = new Deadline(deadlineTask, dateTime);
                     s.addTask(deadline);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new EmptyDeadlineException("Leo: Uh oh! There is no deadline indicated :-(");
+                    throw new EmptyDeadlineException("Uh oh! There is no deadline indicated :-(");
                 }
             } else if (task.contains("event")) {
                 try {
@@ -44,15 +46,15 @@ public class Add {
                     Task event = new Event(eventTask, dateFrom, dateTo);
                     s.addTask(event);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new IncompleteDurationException("Leo: Uh oh! The duration of the event is incomplete :-(");
+                    throw new IncompleteDurationException("Uh oh! The duration of the event is incomplete :-(");
                 }
             } else if (task.contains("hello") || task.contains("hi") || task.contains("hey")) {
-                System.out.println("Leo: Well hello to you too! :-D");
+                Ui.displayMessage(Ui.leoResponse("Well hello to you too! :-D"));
             } else {
-                throw new InvalidInputException("Leo: Ohno! I do not know what you mean...\n     Sorry! :-(((");
+                throw new InvalidInputException("Ohno! I do not know what you mean...");
             }
         } catch (StringIndexOutOfBoundsException e) {
-            throw new EmptyDescriptionException("Leo: Uh oh! Description of task is empty :-(");
+            throw new EmptyDescriptionException("Uh oh! Description of task is empty :-(");
         }
     }
 

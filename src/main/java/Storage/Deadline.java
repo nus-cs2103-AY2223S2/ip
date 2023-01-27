@@ -10,21 +10,23 @@ public class Deadline extends Task {
     public Deadline(String task, LocalDateTime by) {
         super(task);
         this.deadline = by;
+        setType(TaskType.DEADLINE);
     }
 
     @Override
     public String toString() {
-        return "[D]" + status() + getTask() + " (by: " + getDeadline() + ")";
+        return typeAndStatus() + getTask() + " (by: " + getDeadline() + ")";
     }
 
     @Override
     public String saveFormat() {
-        return "[D]" + status() + getTask() + " | " + getDeadline() + "\n";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy HH:mm");
+        String strDeadline = formatter.format(this.deadline);
+        return typeAndStatus() + getTask() + " | " + strDeadline + "\n";
     }
 
     private String getDeadline() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, MMM dd, hh:mm a");
-        String strDeadline = formatter.format(this.deadline);
-        return " (by: " + strDeadline + ")";
+        return formatter.format(this.deadline);
     }
 }

@@ -2,35 +2,38 @@ package storage;
 
 import leoException.IncorrectMarkException;
 import leoException.IncorrectUnmarkException;
+import ui.Ui;
 
 public class Task {
 
-    protected String task;
-    protected boolean done;
+    private final String task;
+    private boolean done;
+    private TaskType type;
 
     public Task(String task) {
         this.task = task;
         this.done = false;
+        this.type = TaskType.TODO;
     }
 
     public String getTask() {
         return this.task;
     }
 
-    public String status() {
-        return (done ? "[X] " : "[ ] ");
+    public boolean isDone() {
+        return this.done;
     }
 
     public void mark() throws IncorrectMarkException {
         if (this.done) {
-            throw new IncorrectMarkException("Leo: This task was already marked previously.");
+            throw new IncorrectMarkException("This task was already marked previously.");
         }
         this.done = true;
     }
 
     public void unmark() throws IncorrectUnmarkException {
         if (!this.done) {
-            throw new IncorrectUnmarkException("Leo: This task has not been marked.");
+            throw new IncorrectUnmarkException("This task has not been marked.");
         }
         this.done = false;
     }
@@ -38,4 +41,17 @@ public class Task {
     public String saveFormat() {
         return task;
     }
+
+    public TaskType getType() {
+        return this.type;
+    }
+
+    public void setType(TaskType tt) {
+        this.type = tt;
+    }
+
+    public String typeAndStatus() {
+        return Ui.type(this) + Ui.completion(this);
+    }
+
 }

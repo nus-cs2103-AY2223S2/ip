@@ -15,10 +15,11 @@ import leoException.IncorrectMarkException;
 import leoException.LeoException;
 import leoException.NoTaskFoundException;
 import leoException.NoStorageFileException;
+import ui.Ui;
 
 public class Storage {
 
-    private final List<Task> data;
+    private final TaskList data;
     private final String dataFilePath;
     private final File taskFile;
 
@@ -27,7 +28,7 @@ public class Storage {
         this.dataFilePath = Paths.get(root, filePath).toString();
 
         this.taskFile = new File(this.dataFilePath);
-        this.data = loadData();
+        this.data = new TaskList(loadData());
     }
 
     private List<Task> loadData() throws IncorrectMarkException, NoStorageFileException {
@@ -70,52 +71,48 @@ public class Storage {
                         }
                     }
                 } catch (LeoException e) {
-                    throw new IncorrectMarkException("Leo: This task was already marked previously.");
+                    throw new IncorrectMarkException("This task was already marked previously.");
                 }
             }
             return taskList;
         } catch (FileNotFoundException e) {
-            throw new NoStorageFileException("Leo: No file found!! >:-(");
+            throw new NoStorageFileException("No file found!! >:-(");
         }
     }
 
     public void addTask(Task task) {
-        data.add(task);
-        System.out.println("Leo: added " + task.getTask() + " to your tasks :-) !");
-    }
-
-    public int size() {
-        return data.size();
+        data.addTask(task);
+        Ui.displayMessage(Ui.leoResponse("added " + task.getTask() + " to your tasks :-) !"));
     }
 
     public void showList() throws NoTaskFoundException {
         try {
-            int length = size();
+            int length = data.size();
             for (int i = 0; i < length; i++) {
-                System.out.println((i + 1) + ". " + getTask(i).toString());
+                Ui.displayMessage((i + 1) + ". " + getTask(i).toString());
             }
         } catch (LeoException e) {
-            System.out.println(e.getMessage());
+            Ui.displayMessage(Ui.leoResponse(e.getMessage()));
         }
     }
 
     public void mark(int num) {
         try {
             getTask(num - 1).mark();
-            System.out.println("Leo: Good work! You have completed task " + num + ":");
-            System.out.println("     " + getTask(num - 1).toString());
+            Ui.displayMessage(Ui.leoResponse("Good work! You have completed task " + num + ":"));
+            Ui.displayMessage(Ui.notFirstLine(getTask(num - 1).toString()));
         } catch (LeoException e) {
-            System.out.println(e.getMessage());
+            Ui.displayMessage(Ui.leoResponse(e.getMessage()));
         }
     }
 
     public void unmark(int num) {
         try {
             getTask(num - 1).unmark();
-            System.out.println("Leo: No worries! I have unmarked task " + num + ":");
-            System.out.println("     " + getTask(num - 1).toString());
+            Ui.displayMessage(Ui.leoResponse("No worries! I have unmarked task " + num + ":"));
+            Ui.displayMessage(Ui.notFirstLine(getTask(num - 1).toString()));
         } catch (LeoException e) {
-            System.out.println(e.getMessage());
+            Ui.displayMessage(Ui.leoResponse(e.getMessage()));
         }
     }
 
@@ -123,20 +120,20 @@ public class Storage {
         Task removed;
         try {
             removed = getTask(num -1);
-            data.remove(num - 1);
-            System.out.println("Leo: I have removed task " + num + ":");
+            data.removeTask(num - 1);
+            Ui.displayMessage(Ui.leoResponse("I have removed task " + num + ":"));
             assert removed != null;
-            System.out.println("     " + removed);
+            Ui.displayMessage(Ui.notFirstLine(removed.toString()));
         } catch (LeoException e) {
-            System.out.println(e.getMessage());
+            Ui.displayMessage(Ui.leoResponse(e.getMessage()));
         }
     }
 
     private Task getTask(int num) throws NoTaskFoundException {
         try {
-            return data.get(num);
+            return data.getTask(num);
         } catch (Exception e) {
-            throw new NoTaskFoundException("Leo: Hm, this task does not exist...");
+            throw new NoTaskFoundException("Hm, this task does not exist...");
         }
     }
 
@@ -154,12 +151,12 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(getDataFilePath());
 
             for (int i = 0; i < len; i++) {
-                fileWriter.write(data.get(i).saveFormat());
+                fileWriter.write(data.getTask(i).saveFormat());
             }
 
             fileWriter.close();
         } catch (IOException e) {
-            throw new NoStorageFileException("Leo: No file found!! >:-(");
+            throw new NoStorageFileException("No file found!! >:-(");
         }
     }
 

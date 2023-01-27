@@ -4,12 +4,13 @@ import java.util.Objects;
 import java.util.Scanner;
 import leoException.LeoException;
 import storage.Storage;
+import ui.Ui;
 
-public class Command {
+public class Parser {
 
     private final Storage s;
 
-    public Command(Storage s) {
+    public Parser(Storage s) {
         this.s = s;
     }
 
@@ -18,7 +19,7 @@ public class Command {
         String command = scanner.nextLine();
         while (!command.contains("bye")) {
             if (Objects.equals(command, "list")) {
-                new List(s);
+                new List(s, command);
             } else if (command.contains("mark")) {
                 if (command.contains("unmark")) {
                     new Unmark(s, command);
@@ -31,13 +32,13 @@ public class Command {
                 try {
                     new Add(s, command);
                 } catch (LeoException e) {
-                    System.out.println(e.getMessage());
+                    Ui.displayMessage(Ui.leoResponse(e.getMessage()));
                 }
             }
             command = scanner.nextLine();
         }
 
-        new Exit(s);
+        new Exit(s, command);
     }
 
 }

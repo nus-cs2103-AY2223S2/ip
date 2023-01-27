@@ -1,21 +1,12 @@
 package command;
 
-import leoException.LeoException;
 import storage.Storage;
 
-public class Exit {
+public class Exit extends Command {
 
-    public Exit(Storage s) {
-        exit(s);
+    public Exit(Storage s, String c) {
+        super(s, c);
+        exit();
     }
 
-    private void exit(Storage s) {
-        try {
-            s.writeToFile();
-            System.out.println("Leo: Good bye, have a nice day ahead!");
-            System.exit(0);
-        } catch (LeoException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }

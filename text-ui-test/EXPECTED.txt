@@ -1,0 +1,33 @@
+__   __   ______   __       __        _____ 
+| |  | |  | ____|  | |      | |      /  __  \ 
+| |__| |  | |____  | |      | |      | |  | |
+|  __  |  | ____|  | |      | |      | |  | |
+| |  | |  | |____  | |____  | |____  | |__| |
+|_|  |_|  |______| |______| |______| \_____/
+
+Leo: Good day, I am Leo!
+     How can I assist you today?
+Leo: Well hello to you too! :-D
+Leo: added run to your tasks :-) !
+Leo: added project to your tasks :-) !
+Leo: added meeting to your tasks :-) !
+Leo: added training to your tasks :-) !
+Leo: Uh oh! Description of task is empty :-(
+Leo: Uh oh! There is no deadline indicated :-(
+Leo: Uh oh! The duration of the event is incomplete :-(
+1. [T][ ] run
+2. [D][ ] project (by: Sun, Jan 29, 12:00 pm)
+3. [E][ ] meeting (Thu, Jan 26, 02:00 pm - 03:00 pm)
+4. [E][ ] training (Mon, Jan 30, 10:00 pm - Tue, Jan 31, 12:00 am)
+Leo: Good work! You have completed task 2:
+     [D][X] project (by: Sun, Jan 29, 12:00 pm)
+Leo: Good work! You have completed task 3:
+     [E][X] meeting (Thu, Jan 26, 02:00 pm - 03:00 pm)
+Leo: No worries! I have unmarked task 3:
+     [E][ ] meeting (Thu, Jan 26, 02:00 pm - 03:00 pm)
+Leo: I have removed task 3:
+     [E][ ] meeting (Thu, Jan 26, 02:00 pm - 03:00 pm)
+Leo: This task was already marked previously.
+Leo: This task has not been marked.
+Leo: Hm, this task does not exist...
+Leo: No file found!! >:-(
