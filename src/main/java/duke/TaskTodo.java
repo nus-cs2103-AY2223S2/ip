@@ -1,3 +1,5 @@
+package duke;
+
 public class TaskTodo extends Task {
     public TaskTodo(String description) {
         super(description);

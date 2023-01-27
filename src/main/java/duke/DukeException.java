@@ -1,3 +1,5 @@
+package duke;
+
 public abstract class DukeException extends Exception {
     protected final String DUKE_MESSAGE_PREFIX = ":( OOPS!!! ";
 
