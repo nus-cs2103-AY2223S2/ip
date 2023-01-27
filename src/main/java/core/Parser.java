@@ -1,21 +1,27 @@
 package core;
 import exceptions.DukeException;
-import exceptions.invalid.Input;
 
 /**
  * Parses user input into usable terms for Duke.
  */
 public class Parser {
     private String userInput;
-    private String keyword = "";
+    private final String keyword;
 
-    public enum KEYWORD {
-        UNKNOWN, BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, SAVE
+    /**
+     * For enum attempt
+     */
+    public enum Keyword {
+        TODO, DEADLINE, EVENT
     }
 
+    /**
+     * Constructor for Parser class.
+     * @param userInput The command to parse
+     */
     public Parser(String userInput) {
-        this.userInput = userInput.trim();
 
+        this.userInput = userInput.trim();
         String[] split = userInput.split(" ", 2);
         if (split.length > 1) {
             this.userInput = split[1];
@@ -25,12 +31,24 @@ public class Parser {
         this.keyword = split[0].toLowerCase().trim();
     }
 
+    /**
+     * Returns first word of user input.
+     * For example 'mark 1', 'mark' would be considered as the keyword.
+     * @return The command which the user has typed.
+     */
     public String getKeyword() {
         return keyword;
     }
 
+    /**
+     * Returns integer from user input.
+     * This assumes that the second item in the user input is an integer.
+     * Example: 'mark 1', '1' is expected to be an integer.
+     * @return The integer value which the user has passed in.
+     * @throws DukeException Thrown when user input is invalid or missing.
+     */
     public int extractIndexParams() throws DukeException {
-        String[] userInSplit = this.userInput.split(" ",2);
+        String[] userInSplit = this.userInput.split(" ", 2);
         if (userInSplit.length < 1) {
             throw new exceptions.missing.Parameter(this.keyword);
         }
@@ -42,7 +60,13 @@ public class Parser {
         }
     }
 
-    public String[] extractTaskParams(Parser.KEYWORD desire) throws DukeException {
+    /**
+     * Extracts commands for task creation.
+     * @param desire Which Task is being called
+     * @return The appropriate inputs needed to create a Task
+     * @throws DukeException Thrown when there is invalid input or missing parameters
+     */
+    public String[] extractTaskParams(Keyword desire) throws DukeException {
         // Check for RHS
         if (userInput.trim().isEmpty()) {
             throw new exceptions.missing.Parameter(this.keyword);
@@ -101,13 +125,13 @@ public class Parser {
     public static void parseFile(String[] task, TaskMaster tm) throws DukeException {
         switch (task[0]) {
             case "T":
-                tm.addToDo(task[1], Boolean.valueOf(task[2]));
+                tm.addToDo(task[1], Boolean.parseBoolean(task[2]));
                 break;
             case"D":
-                tm.addDeadLine(task[1], Boolean.valueOf(task[2]), DateHandler.convert(task[3]));
+                tm.addDeadLine(task[1], Boolean.parseBoolean(task[2]), DateHandler.convert(task[3]));
                 break;
             case "E":
-                tm.addEvent(task[1], Boolean.valueOf(task[2]), DateHandler.convert(task[3]), DateHandler.convert(task[4]));
+                tm.addEvent(task[1], Boolean.parseBoolean(task[2]), DateHandler.convert(task[3]), DateHandler.convert(task[4]));
                 break;
             default:
                 throw new exceptions.invalid.Input(String.format("Unknown command for %s",task[0]));
@@ -125,14 +149,14 @@ public class Parser {
             case "unmark":
                 return tm.markComplete(extractIndexParams(), false);
             case "todo":
-                args = extractTaskParams(KEYWORD.TODO);
+                args = extractTaskParams(Keyword.TODO);
 //                System.out.println(args);
                 return tm.addToDo(args[0], false);
             case "event":
-                args = extractTaskParams(KEYWORD.EVENT);
+                args = extractTaskParams(Keyword.EVENT);
                 return tm.addEvent(args[0], false, DateHandler.convert(args[1]), DateHandler.convert(args[2]));
             case "deadline":
-                args = extractTaskParams(KEYWORD.DEADLINE);
+                args = extractTaskParams(Keyword.DEADLINE);
                 return tm.addDeadLine(args[0], false, DateHandler.convert(args[1]));
             case "delete":
                 return tm.delete(extractIndexParams());

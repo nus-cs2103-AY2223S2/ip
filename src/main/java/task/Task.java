@@ -3,7 +3,7 @@ package task;
  * Task is the superclass of the activities that can be stored within Duke.
  */
 public abstract class Task {
-    private String taskName;
+    private final String taskName;
     public boolean status;
 
     /**
@@ -17,15 +17,15 @@ public abstract class Task {
         this.status = status;
     }
 
-    /**
-     * Constructs a Task with the provided name.
-     * The task created would have its status set to false.
-     *
-     * @param name The name of this task
-     */
-    protected Task(String name) {
-        this(name,false);
-    }
+//    /**
+//     * Constructs a Task with the provided name.
+//     * The task created would have its status set to false.
+//     *
+//     * @param name The name of this task
+//     */
+//    protected Task(String name) {
+//        this(name,false);
+//    }
 
     /**
      * Returns the name of the Task.
@@ -38,10 +38,9 @@ public abstract class Task {
 
     /**
      * Returns the state of the task alongside with the task name.
-     *
      * Example output:
-     * > `[X] read book` would mean that the task `read book` is complete.
-     * > `[ ] read book` would mean that the task `read book` is incomplete.
+     * `[X] read book` would mean that the task `read book` is complete.
+     * `[ ] read book` would mean that the task `read book` is incomplete.
      *
      * @return The String representation of this task.
      */

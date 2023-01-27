@@ -98,7 +98,7 @@ public class TaskMaster {
      *
      * @param index The index to be deleted
      * @return A message indicating that the task has been deleted
-     * @throws exceptions.invalid.Index
+     * @throws exceptions.invalid.Index Thrown when user enters an invalid index
      */
     public String delete(int index) throws exceptions.invalid.Index {
         try {
