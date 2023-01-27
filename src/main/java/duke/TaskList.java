@@ -3,12 +3,18 @@ package duke;
 import duke.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private static ArrayList<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -63,16 +69,28 @@ public class TaskList {
     }
 
     /**
-     * Prints out all the duke.tasks in the list
+     * Prints out all the tasks in the list
      */
     public void printList() {
-        String tasksList = "Here are the duke.tasks in your list:\n";
+        StringBuilder tasksList = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            tasksList += "\t" + (i + 1) + ". " + tasks.get(i).toString();
+            tasksList.append("\t").append(i + 1).append(". ").append(tasks.get(i).toString());
             if (i < tasks.size() - 1) {
-                tasksList += "\n";
+                tasksList.append("\n");
             }
         }
-        Ui.print(tasksList);
+        Ui.print(tasksList.toString());
+    }
+
+    /**
+     * Filters tasks with the given keyword.
+     *
+     * @param keyword Keyword for searching tasks
+     * @return List of filtered Tasks
+     */
+    public ArrayList<Task> findMatchingTasks(String keyword) {
+        return (ArrayList<Task>) tasks
+                .stream().filter(task -> task.toString().contains(keyword))
+                .collect(Collectors.toList());
     }
 }

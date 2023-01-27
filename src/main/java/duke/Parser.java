@@ -9,11 +9,8 @@ import duke.tasks.Todo;
 import java.io.IOException;
 
 public class Parser {
-    enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
-
     private final TaskList tasks;
     private final Storage storage;
-
     public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
@@ -72,6 +69,12 @@ public class Parser {
                     throw new DukeException("No such task found");
                 tasks.deleteTask(taskNumber - 1);
                 break;
+            case FIND:
+                if (s.length < 2)
+                    throw new DukeException("You must enter a keyword to find");
+                TaskList filtered = new TaskList(tasks.findMatchingTasks(s[1]));
+                filtered.printList();
+                break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
@@ -82,4 +85,7 @@ public class Parser {
             Ui.print("Please enter a valid action!");
         }
     }
+
+    enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND}
+
 }
