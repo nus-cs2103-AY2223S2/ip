@@ -1,8 +1,8 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.Tasks.Task;
-import seedu.duke.Tasks.Todo;
+import seedu.duke.tasks.Task;
+import seedu.duke.tasks.Todo;
 
 import java.util.ArrayList;
 
@@ -13,11 +13,11 @@ public class TaskListTest {
     @Test
     public void addTask_success() {
         TaskList taskList = new TaskList();
-        ArrayList<Task> taskListArr = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         Task addedTask = new Todo("eat book");
         taskList = taskList.addTask(addedTask);
-        taskListArr.add(addedTask);
-        TaskList updatedTaskList = new TaskList(taskListArr);
+        tasks.add(addedTask);
+        TaskList updatedTaskList = new TaskList(tasks);
         assertEquals(updatedTaskList, taskList);
     }
 
@@ -25,16 +25,16 @@ public class TaskListTest {
     public void deleteIndexZeroTask_success() {
         // add task first
         TaskList taskList = new TaskList();
-        ArrayList<Task> taskListArr = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         Task addedTask = new Todo("return book");
         taskList = taskList.addTask(addedTask);
-        taskListArr.add(addedTask);
+        tasks.add(addedTask);
 
         // then delete index 0
         int index = 0;
         taskList = taskList.deleteTask(index);
-        taskListArr.remove(index);
-        TaskList updatedTaskList = new TaskList(taskListArr);
+        tasks.remove(index);
+        TaskList updatedTaskList = new TaskList(tasks);
         assertEquals(updatedTaskList, taskList);
     }
 }
