@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.*;
+
 public class Command {
     private String command;
     private String args;
@@ -40,7 +44,7 @@ public class Command {
 
     private void todo(TaskList taskList) throws DukeException {
         if (this.args.length() == 0){
-            throw new DukeException("What is the ToDo task???");
+            throw new DukeException("What is the duke.task.ToDo task???");
         } else {
             taskList.add(new ToDo(this.args.trim()));
         }
@@ -48,7 +52,7 @@ public class Command {
 
     private void deadline(TaskList taskList) throws DukeException {
         if (args.length() == 0){
-            throw new DukeException("What is the Deadline task???");
+            throw new DukeException("What is the duke.task.Deadline task???");
         } else {
             String desc = args.substring(
                     args.indexOf("deadline") + "deadline ".length(),
