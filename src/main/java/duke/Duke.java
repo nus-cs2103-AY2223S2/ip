@@ -1,5 +1,5 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+package duke;
+import duke.command.Command;
 
 public class Duke {
     private Storage storage;

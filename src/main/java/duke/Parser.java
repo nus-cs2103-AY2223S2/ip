@@ -1,3 +1,7 @@
+package duke;
+import duke.task.*;
+import duke.command.*;
+
 public class Parser {
 
     public Parser() {
