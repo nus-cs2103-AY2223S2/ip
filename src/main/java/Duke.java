@@ -5,12 +5,13 @@ import java.util.function.Predicate;
 
 public class Duke {
     private Ui ui = new Ui();
+    private Storage storage = new Storage("_duke_data.txt");
     private TaskList tasks;
     private Command currentCommand;
 
     public Duke() {
         try {
-            this.tasks = TaskList.load();
+            this.tasks = this.storage.load();
         } catch(DukeLoadException e) {
             this.ui.showError(e);
             this.tasks = new TaskList();
@@ -68,7 +69,7 @@ public class Duke {
                         throw new DukeInvalidCommandException();
                 }
 
-                this.tasks.save();
+                this.storage.save(this.tasks);
             } catch (DukeException e) {
                 this.ui.showError(e);
             }
