@@ -5,7 +5,9 @@ import errors.DukeInvalidCommandException;
 import errors.DukeRuntimeException;
 import formatters.Format;
 import formatters.Response;
+import utils.Utility;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -18,9 +20,9 @@ import java.util.List;
 
 public class Deadline extends Task{
 
-    private final String deadline;
+    private final LocalDateTime deadline;
 
-    public Deadline(String details, String deadline) {
+    public Deadline(String details, LocalDateTime deadline) {
         super(details);
         this.deadline = deadline;
     }
@@ -32,7 +34,7 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         return ("DEADLINE: " + super.getDetails() +
-                " (By " + deadline +")" + Format.getCompletionDisplay(super.isCompleted()));
+                " (By " + Utility.getDateTimeString(deadline) +")" + Format.getCompletionDisplay(super.isCompleted()));
     }
 
 

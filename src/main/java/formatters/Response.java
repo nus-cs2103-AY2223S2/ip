@@ -51,7 +51,7 @@ public enum Response {
     NO_TASK {
         @Override
         public String toString() {
-            return "Wooks wike *screams* you do not have any OwO tasks!";
+            return "Wooks wike you do not have any tasks! *screams* OwO";
         }
     },
 
@@ -93,6 +93,13 @@ public enum Response {
         @Override
         public String toString() {
             return "Bye byee!!! UwU";
+        }
+    },
+
+    DATE_FORMAT_INCORRECT {
+        @Override
+        public String toString() {
+            return "I can't wead your d-date!! Can you give i-it t-to me in the format of '31/12/2023 1730'?";
         }
     },
 
