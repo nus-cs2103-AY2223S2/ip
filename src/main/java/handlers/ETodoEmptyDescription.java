@@ -5,7 +5,7 @@ import types.IHandler;
 import java.util.regex.Pattern;
 
 public class ETodoEmptyDescription implements IHandler {
-    private static final Pattern p = Pattern.compile("todo");
+    private static final Pattern PATTERN = Pattern.compile("todo");
 
     @Override
     public String take(String s) {
@@ -14,6 +14,6 @@ public class ETodoEmptyDescription implements IHandler {
 
     @Override
     public boolean canTake(String s) {
-        return p.matcher(s).matches();
+        return PATTERN.matcher(s).matches();
     }
 }

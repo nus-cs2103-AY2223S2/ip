@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class JMarkTask implements IHandler {
-    private static final Pattern p = Pattern.compile("(un)?mark ([0-9]*)");
+    private static final Pattern PATTERN = Pattern.compile("(un)?mark ([0-9]*)");
     private final TaskList ts;
 
     public JMarkTask(TaskList ts) {
@@ -17,7 +17,7 @@ public final class JMarkTask implements IHandler {
 
     @Override
     public String take(String s) {
-        Matcher m = p.matcher(s);
+        Matcher m = PATTERN.matcher(s);
         if (!m.matches()) {
             return "";
         }
@@ -33,6 +33,6 @@ public final class JMarkTask implements IHandler {
 
     @Override
     public boolean canTake(String s) {
-        return p.matcher(s).matches();
+        return PATTERN.matcher(s).matches();
     }
 }

@@ -7,7 +7,7 @@ import types.data.Task;
 import java.util.regex.Pattern;
 
 public final class JShowTaskList implements IHandler {
-    private static final Pattern p = Pattern.compile("list");
+    private static final Pattern PATTERN = Pattern.compile("list");
     private final TaskList ts;
 
     public JShowTaskList(TaskList ts) {
@@ -26,6 +26,6 @@ public final class JShowTaskList implements IHandler {
 
     @Override
     public boolean canTake(String s) {
-        return p.matcher(s).matches();
+        return PATTERN.matcher(s).matches();
     }
 }

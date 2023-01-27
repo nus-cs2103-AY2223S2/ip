@@ -22,7 +22,7 @@ public final class Dispatcher {
      * @param c Command to add.
      */
     public void registerCommand(IHandler c) {
-        this.handlerRegistry.add(c);
+        handlerRegistry.add(c);
     }
 
     /**
@@ -38,7 +38,7 @@ public final class Dispatcher {
      * @param c Error to add.
      */
     public void registerError(IHandler c) {
-        this.errorRegistry.add(c);
+        errorRegistry.add(c);
     }
 
     /**
@@ -47,7 +47,7 @@ public final class Dispatcher {
      * @param c The default handler.
      */
     public void setDefaultHandler(IHandler c) {
-        this.defaultHandler = c;
+        defaultHandler = c;
     }
 
     /**
@@ -56,7 +56,7 @@ public final class Dispatcher {
      * @param c The exit handler.
      */
     public void setExitHandler(IHandler c) {
-        this.exitHandler = c;
+        exitHandler = c;
     }
 
     /**
@@ -85,6 +85,6 @@ public final class Dispatcher {
             return;
         }
 
-        speakerRegistry.broadcast(this.defaultHandler.take(expr));
+        speakerRegistry.broadcast(defaultHandler.take(expr));
     }
 }

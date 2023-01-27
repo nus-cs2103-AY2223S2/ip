@@ -11,10 +11,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class JAddTask implements IHandler {
-    private static final Pattern todo_p = Pattern.compile("(todo) (.*)");
-    private static final Pattern event_p = Pattern.compile("(event) (.*) /from (.*) /to (.*)");
-    private static final Pattern deadline_p = Pattern.compile("(deadline) (.*) /by (.*)");
-    private static final Pattern p = Pattern
+    private static final Pattern TODO_PATTERN = Pattern.compile("(todo) (.*)");
+    private static final Pattern EVENT_PATTERN = Pattern.compile("(event) (.*) /from (.*) /to (.*)");
+    private static final Pattern DEADLINE_PATTERN = Pattern.compile("(deadline) (.*) /by (.*)");
+    private static final Pattern ALL_PATTERN = Pattern
             .compile("(todo) (.*)|(deadline) (.*) /by (.*)|(event) (.*) /from (.*) /to (.*)");
     private final TaskList ts;
 
@@ -24,24 +24,24 @@ public final class JAddTask implements IHandler {
 
     @Override
     public String take(String s) {
-        if (!p.matcher(s).matches()) {
+        if (!ALL_PATTERN.matcher(s).matches()) {
             return "";
         }
 
         Matcher m;
         Task t = null;
 
-        m = todo_p.matcher(s);
+        m = TODO_PATTERN.matcher(s);
         if (m.matches()) {
             ts.addTask(t = Todo.create(m.group(2)));
         }
 
-        m = event_p.matcher(s);
+        m = EVENT_PATTERN.matcher(s);
         if (m.matches()) {
             ts.addTask(t = Event.create(m.group(2), m.group(3), m.group(4)));
         }
 
-        m = deadline_p.matcher(s);
+        m = DEADLINE_PATTERN.matcher(s);
         if (m.matches()) {
             ts.addTask(t = Deadline.create(m.group(2), m.group(3)));
         }
@@ -52,6 +52,6 @@ public final class JAddTask implements IHandler {
 
     @Override
     public boolean canTake(String s) {
-        return p.matcher(s).matches();
+        return ALL_PATTERN.matcher(s).matches();
     }
 }
