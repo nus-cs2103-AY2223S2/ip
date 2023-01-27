@@ -78,6 +78,7 @@ public class Duke {
      * Prints standard goodby message and closes DIO.
      */
     public static void goodbye() {
+        dio.writeSave(tm);
         dio.println("Bye. Hope to see you again soon!");
         dio.flush();
         dio.close();
