@@ -10,6 +10,7 @@ import duke.TaskList;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
+    private static final String LIST_RESPONSE = "Current tasks in list:";
 
     public ListCommand(String input) {
         super(input);
@@ -21,6 +22,6 @@ public class ListCommand extends Command {
         if (!input.equals(COMMAND_WORD)) {
             throw new DukeException(Parser.INVALID_COMMAND_EXCEPTION_MESSAGE);
         }
-        return tasks.toString();
+        return LIST_RESPONSE + tasks.toString();
     }
 }

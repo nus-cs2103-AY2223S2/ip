@@ -11,7 +11,6 @@ import duke.tasks.Task;
 public class TaskList implements Serializable {
 
     private static final String INVALID_INDEX_EXCEPTION = "Invalid task index given for Mark/Unmark/Delete command.";
-    private static final String LIST_RESPONSE = "Current tasks in list:";
     private static final String ADDED_TASK_RESPONSE = "Task added:\n";
     private static final String REMAINING_TASK_RESPONSE = "\nRemaining task count: ";
     private static final String REMOVE_TASK_RESPONSE = "Task removed:\n";
@@ -69,7 +68,6 @@ public class TaskList implements Serializable {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result.append(LIST_RESPONSE);
 
         for (int i = 0; i < list.size(); i++) {
             result.append("\n").append(i + 1).append(LIST_INDEX_SEPARATOR).append(list.get(i));

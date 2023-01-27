@@ -3,13 +3,13 @@ package duke.commands;
 import duke.DukeException;
 import duke.Parser;
 import duke.TaskList;
-import duke.tasks.DeadlineTask;
 
 /**
  * Command that allows user to search the list of tasks with keywords
  */
 public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
+    private static final String SEARCH_RESPONSE = "Here are the task search results:";
 
     public SearchCommand(String input) {
         super(input);
@@ -17,14 +17,17 @@ public class SearchCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) throws DukeException {
-        String input = super.input;
+        String input = getInput();
         try {
-            String[] tokens = input.split(" ");
-            String keyword = tokens[1];
+            int firstWhitespaceIndex = input.indexOf(" ");
+            if (firstWhitespaceIndex == -1) {
+                throw new IndexOutOfBoundsException();
+            }
+            String keyword = input.substring(firstWhitespaceIndex + 1);
 
             String result = tasks.search(keyword);
-            return result;
-        } catch (ArrayIndexOutOfBoundsException exception) {
+            return SEARCH_RESPONSE + result;
+        } catch (IndexOutOfBoundsException exception) {
             throw new DukeException(Parser.INVALID_COMMAND_EXCEPTION_MESSAGE);
         }
     }
