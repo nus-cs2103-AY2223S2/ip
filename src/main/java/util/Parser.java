@@ -1,8 +1,19 @@
 package util;
 
+/**
+ * A library of useful methods to parse various String
+ * user inputs and retrieve data from it.
+ */
 public class Parser {
 
-    public String parseScannerInput(String input) {
+    /**
+     * Removes leading and trailing whitespaces in user
+     * input and extracts the command.
+     *
+     * @param input
+     * @return command String
+     */
+    public String getCommandFromInput(String input) {
         //remove leading and trailing whitespaces
         String ip = input.trim();
         if(!ip.isBlank()) {
@@ -14,6 +25,13 @@ public class Parser {
     }
 
     //credit: https://stackabuse.com/java-check-if-string-is-a-number/
+
+    /**
+     * Checks if a given String is numeric.
+     *
+     * @param string
+     * @return true if String is numeric and false otherwise
+     */
     public static boolean isNumeric(String string) {
         int intValue;
 

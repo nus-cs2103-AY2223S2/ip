@@ -6,10 +6,21 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Contains method for data related operations i.e.
+ * saving data to a file or uploading data to destination.
+ */
 public class FileManager implements Serializable {
     private static final String FILEPATH = "src/main/java/data/UserTasks.txt";
 
     //Credit to @Junyi00 for the simple and easy to understand serialisation method for level-7
+
+    /**
+     * Extracts tasks from the arraylist and writes
+     * to the file at a specified path.
+     *
+     * @param taskManager
+     */
     public void saveTasksToFile(TaskManager taskManager) {
         try{
             File file = new File(FILEPATH);
@@ -30,6 +41,14 @@ public class FileManager implements Serializable {
         }
     }
 
+    /**
+     * Upload data stored in specified file path to
+     * the arraylist.
+     *
+     * @param taskManager
+     * @return a 0 to indicate successful load
+     * and -1 to indicate unsuccessful load.
+     */
     public int loadDataToArrayList(TaskManager taskManager) {
         File file = new File(FILEPATH);
         if(!file.isFile()) {
@@ -65,7 +84,7 @@ public class FileManager implements Serializable {
             return -1;
         } catch (DukeException e) {
             System.out.println(e);
-            return 0;
+            return -1;
         }
         return 0;
     }

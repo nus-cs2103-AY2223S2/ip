@@ -6,13 +6,21 @@ import util.FileManager;
 
 import java.util.*;
 
+/**
+ * Represents the main logic flow of the chatbot.
+ */
 public class ChatBot {
     private Scanner input;
     private TaskManager taskManager;
     private String[] inputArr;
-
     private FileManager fileManager;
 
+    /**
+     * Initialises the Scanner to recieve user input
+     * and the WelcomeUI to be displayed upon start up.
+     * @param input
+     * @param welcomeUI
+     */
     public ChatBot(Scanner input, WelcomeUI welcomeUI) {
         System.out.println(welcomeUI);
         this.input = input;
@@ -23,6 +31,9 @@ public class ChatBot {
         this.fileManager.loadDataToArrayList(this.taskManager);
     }
 
+    /**
+     * Driver method to run the chatbot.
+     */
     public void run() {
         loop: while(input.hasNextLine()) {
 

@@ -4,6 +4,9 @@ import task.Deadline;
 import task.TaskManager;
 import util.DukeException;
 
+/**
+ * Executes add deadline task command.
+ */
 public class DeadlineCommand extends Command {
     private final TaskManager taskManager;
     private final String description;
@@ -11,6 +14,15 @@ public class DeadlineCommand extends Command {
         this.taskManager = taskManager;
         this.description = description;
     }
+
+    /**
+     * Adds a deadline type task to the list.
+     *
+     * String input is parsed to extract date and
+     * time the task is due by.
+     *
+     * @throws DukeException
+     */
     @Override
     public void executeCommand() throws DukeException {
         try {

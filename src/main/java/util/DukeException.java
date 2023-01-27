@@ -1,5 +1,9 @@
 package util;
 
+/**
+ * Custom exception class which throws a
+ * custom error message.
+ */
 public class DukeException extends Exception {
     public DukeException(String msg) {
         super(msg);
