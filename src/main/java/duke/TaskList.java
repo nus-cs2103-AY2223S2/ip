@@ -8,10 +8,18 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for TaskList object
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Adds a given task to the end of the list of tasks.
+     *
+     * @param task Task to be added.
+     */
     public void addTask(Task task) {
         this.tasks.add(task);
     }
@@ -24,6 +32,12 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Deletes a Task of the given index from the list of tasks.
+     *
+     * @param index 0-indexed index of task to be deleted.
+     * @return Task deleted.
+     */
     public Task deleteTask(int index) {
         return this.tasks.remove(index);
     }

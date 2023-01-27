@@ -9,11 +9,19 @@ public class Ui {
     Parser parser;
     Scanner scanner;
 
+    /**
+     * Constructor for Ui object.
+     */
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
-
+    /**
+     * Takes in a line of user input using Scanner object and splits it into
+     * the first word, command, and the remaining words, content.
+     *
+     * @return Size 2 string array containing [command, content].
+     */
     public String[] receiveInput() {
         String command = scanner.next();
         String content = scanner.nextLine();

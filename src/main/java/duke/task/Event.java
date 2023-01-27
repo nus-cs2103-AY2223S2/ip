@@ -11,6 +11,14 @@ public class Event extends Task{
     protected LocalDateTime endTime;
     private static final DateTimeFormatter FORMATTER  = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    /**
+     * Factory method to create Event object. String object should contain
+     * startTime and endTime in the format /from yyyy-MM-dd HH:mm /to yyyy-MM-dd HH:mm.
+     *
+     * @param str String to be processed into Event object.
+     * @return Event object.
+     * @throws DukeException If format of input is incorrect.
+     */
     public static Event create(String str) throws DukeException {
         if (str.length() < 1) {
             throw new DukeException();
@@ -27,6 +35,15 @@ public class Event extends Task{
         }
     }
 
+    /**
+     * Factory method to create Event object with boolean input. String object should contain
+     * startTime and endTime in the format /from yyyy-MM-dd HH:mm /to yyyy-MM-dd HH:mm.
+     *
+     * @param str String to be processed into Event object.
+     * @param isDone Whether Event object should be mark as completed.
+     * @return Event object.
+     * @throws DukeException If format of input is incorrect.
+     */
     public static Event create(String str, Boolean isDone) throws DukeException{
         if (str.length() < 1) {
             throw new DukeException();
@@ -43,12 +60,27 @@ public class Event extends Task{
         }
     }
 
+    /**
+     * Constructor for Event object.
+     *
+     * @param description Description of task.
+     * @param startTime Starting time of Event in the format yyyy-MM-dd HH:mm.
+     * @param endTime Ending time of Event in the format yyyy-MM-dd HH:mm.
+     */
     public Event(String description, LocalDateTime startTime, LocalDateTime endTime) {
         super(description);
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
+    /**
+     * Constructor for Event object with boolean input.
+     *
+     * @param description Description of task.
+     * @param startTime Starting time of Event in the format yyyy-MM-dd HH:mm.
+     * @param endTime Ending time of Event in the format yyyy-MM-dd HH:mm.
+     * @param isDone Whether task is marked complete.
+     */
     public Event(String description, LocalDateTime startTime, LocalDateTime endTime, Boolean isDone) {
         super(description, isDone);
         this.startTime = startTime;

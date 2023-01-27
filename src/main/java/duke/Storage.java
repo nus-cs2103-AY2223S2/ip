@@ -9,15 +9,26 @@ import java.io.*;
 
 public class Storage {
 
-    protected String filename;
+    protected String filePath;
 
-    public Storage(String filename) {
-        this.filename = filename;
+    /**
+     * Constructor for Storage object.
+     *
+     * @param filePath String containing the file path of data text file.
+     */
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
+    /**
+     * Creates Tasks based on data text file at filePath and adds into TaskList.
+     *
+     * @param taskList TaskList which tasks should be loaded into.
+     * @throws DukeException If error reading from file.
+     */
     public void load(TaskList taskList) throws DukeException {
         try {
-            FileReader fileReader = new FileReader(this.filename);
+            FileReader fileReader = new FileReader(this.filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line = bufferedReader.readLine();
             while (line != null) {
@@ -55,6 +66,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Write tasks from given TaskList onto a data text file at filePath.
+     *
+     * @param taskList TaskList to write from.
+     * @throws DukeException If error writing to file.
+     */
     public void save(TaskList taskList) throws DukeException{
         try {
             File file = new File("./data/duke.txt");
