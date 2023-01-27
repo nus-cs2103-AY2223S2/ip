@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.Tasks.*;
+import seedu.duke.tasks.*;
 
 import java.time.*;
 import java.time.format.DateTimeParseException;
@@ -12,11 +12,11 @@ public class Parser {
     /**
      *  Checks the validity of the command
      *  @param command String of the command sent by user
-     *  @param commandsList String array of all the commands
+     *  @param listOfCommands String array of all the commands
      *  @return String of the command if valid
      */
-    private String checkCommand(String command, String[] commandsList) throws DukeException {
-        for (String cmd : commandsList) {
+    private String checkCommand(String command, String[] listOfCommands) throws DukeException {
+        for (String cmd : listOfCommands) {
             if (cmd.equals(command)) {
                 return command;
             }
@@ -26,14 +26,14 @@ public class Parser {
 
     /**
      *  Checks whether task number is given
-     *  @param splitInput String array of each word input by the user
+     *  @param inputStrings String array of each word input by the user
      *  @return String of the task number if it exists
      */
-    private String getTaskNumber(String[] splitInput) throws DukeException {
-        if (splitInput.length == 1) {
+    private String getTaskNumber(String[] inputStrings) throws DukeException {
+        if (inputStrings.length == 1) {
             throw new DukeException("No task number was given!");
         } else {
-            return splitInput[1];
+            return inputStrings[1];
         }
     }
 
@@ -68,11 +68,11 @@ public class Parser {
 
     /**
      *  Checks whether deadline is given
-     *  @param splitInput String array of each word input by the user
+     *  @param inputStrings String array of each word input by the user
      *  @return Index of /by in the array
      */
-    private int checkDeadline(String[] splitInput) throws DukeException {
-        int byIndex = Arrays.asList(splitInput).indexOf("/by");
+    private int checkDeadline(String[] inputStrings) throws DukeException {
+        int byIndex = Arrays.asList(inputStrings).indexOf("/by");
         if (byIndex == -1) {
             throw new DukeException("There was no deadline given!");
         } else {
@@ -82,11 +82,11 @@ public class Parser {
 
     /**
      *  Checks whether starting time stamp for Event is given
-     *  @param splitInput String array of each word input by the user
+     *  @param inputStrings String array of each word input by the user
      *  @return Index of /from in splitInput
      */
-    private int checkStarting(String[] splitInput) throws DukeException {
-        int byIndex = Arrays.asList(splitInput).indexOf("/from");
+    private int checkStarting(String[] inputStrings) throws DukeException {
+        int byIndex = Arrays.asList(inputStrings).indexOf("/from");
         if (byIndex == -1) {
             throw new DukeException("Please indicate a starting period!");
         } else {
@@ -96,11 +96,11 @@ public class Parser {
 
     /**
      *  Checks whether ending time stamp for Event is given
-     *  @param splitInput String array of each word input by the user
+     *  @param inputStrings String array of each word input by the user
      *  @return Index of /to in splitInput
      */
-    private int checkEnding(String[] splitInput) throws DukeException {
-        int byIndex = Arrays.asList(splitInput).indexOf("/to");
+    private int checkEnding(String[] inputStrings) throws DukeException {
+        int byIndex = Arrays.asList(inputStrings).indexOf("/to");
         if (byIndex == -1) {
             throw new DukeException("Please indicate an ending period!");
         } else {
@@ -118,10 +118,10 @@ public class Parser {
             throw new DukeException("There was no time period given!");
         }
         try {
-            String[] dateTime = timestamp.split(" ");
-            LocalDate date = LocalDate.parse(dateTime[0]);
-            int hour = Integer.parseInt(dateTime[1].substring(0, 2));
-            int min = Integer.parseInt(dateTime[1].substring(2, 4));
+            String[] dateTimeStrings = timestamp.split(" ");
+            LocalDate date = LocalDate.parse(dateTimeStrings[0]);
+            int hour = Integer.parseInt(dateTimeStrings[1].substring(0, 2));
+            int min = Integer.parseInt(dateTimeStrings[1].substring(2, 4));
             LocalTime time = LocalTime.of(hour, min);
             return LocalDateTime.of(date, time);
         } catch (DateTimeParseException err) {
@@ -137,17 +137,17 @@ public class Parser {
 
     /**
      *  Converts String timestamp into LocalDateTime object
-     *  @param splitInput String array of each word input by the user
-     *  @param commandList String array of all the commands
+     *  @param inputStrings String array of each word input by the user
+     *  @param listOfCommands String array of all the commands
      *  @param taskList Current state of TaskList
      *  @param storage Storage to overwrite save file
      *  @param ui Ui to print lines for user to see and interact with
      *  @return Enum Command of the input given
      */
-    public Duke.Commands executeCommand(String[] splitInput, String[] commandList,TaskList taskList,
+    public Duke.Commands executeCommand(String[] inputStrings, String[] listOfCommands,TaskList taskList,
                                         Storage storage, Ui ui) throws DukeException {
-        String commandStr = splitInput[0];
-        Duke.Commands command = Duke.Commands.valueOf(checkCommand(commandStr, commandList));
+        String commandStr = inputStrings[0];
+        Duke.Commands command = Duke.Commands.valueOf(checkCommand(commandStr, listOfCommands));
         try {
             String description;
             String taskNumber;
@@ -162,7 +162,7 @@ public class Parser {
                 ui.sayGoodbye();
                 break;
             case todo:
-                description = String.join(" ", Arrays.copyOfRange(splitInput, 1, splitInput.length));
+                description = String.join(" ", Arrays.copyOfRange(inputStrings, 1, inputStrings.length));
                 checkDescription(description);
                 newTask = new Todo(description);
                 updatedList = taskList.addTask(newTask);
@@ -170,11 +170,11 @@ public class Parser {
                 ui.sayAddedTask(newTask, updatedList);
                 break;
             case deadline:
-                int byIndex = checkDeadline(splitInput);
-                description = String.join(" ", Arrays.copyOfRange(splitInput, 1, byIndex));
+                int byIndex = checkDeadline(inputStrings);
+                description = String.join(" ", Arrays.copyOfRange(inputStrings, 1, byIndex));
                 checkDescription(description);
-                String deadline = String.join(" ", Arrays.copyOfRange(splitInput,
-                        byIndex + 1, splitInput.length));
+                String deadline = String.join(" ", Arrays.copyOfRange(inputStrings,
+                        byIndex + 1, inputStrings.length));
                 LocalDateTime formattedDeadline = convertTimestamp(deadline);
                 newTask = new Deadline(description, formattedDeadline);
                 updatedList = taskList.addTask(newTask);
@@ -182,15 +182,15 @@ public class Parser {
                 ui.sayAddedTask(newTask, updatedList);
                 break;
             case event:
-                int fromIndex = checkStarting(splitInput);
-                int toIndex = checkEnding(splitInput);
-                description = String.join(" ", Arrays.copyOfRange(splitInput, 1, fromIndex));
+                int fromIndex = checkStarting(inputStrings);
+                int toIndex = checkEnding(inputStrings);
+                description = String.join(" ", Arrays.copyOfRange(inputStrings, 1, fromIndex));
                 checkDescription(description);
                 String from = String.join(" ",
-                        Arrays.copyOfRange(splitInput, fromIndex + 1, toIndex));
+                        Arrays.copyOfRange(inputStrings, fromIndex + 1, toIndex));
                 LocalDateTime formattedFrom = convertTimestamp(from);
                 String to = String.join(" ",
-                        Arrays.copyOfRange(splitInput, toIndex + 1, splitInput.length));
+                        Arrays.copyOfRange(inputStrings, toIndex + 1, inputStrings.length));
                 LocalDateTime formattedTo = convertTimestamp(to);
                 newTask = new Event(description, formattedFrom, formattedTo);
                 updatedList = taskList.addTask(newTask);
@@ -199,7 +199,7 @@ public class Parser {
                 break;
             case mark:
                 // taskNumber in 1-indexing
-                taskNumber = getTaskNumber(splitInput);
+                taskNumber = getTaskNumber(inputStrings);
                 // index in 0-indexing
                 index = checkTaskNumber(taskList, taskNumber);
                 updatedList = taskList.markTask(index);
@@ -208,7 +208,7 @@ public class Parser {
                 ui.sayMarkedTask(newTask);
                 break;
             case unmark:
-                taskNumber = getTaskNumber(splitInput);
+                taskNumber = getTaskNumber(inputStrings);
                 index = checkTaskNumber(taskList, taskNumber);
                 updatedList = taskList.unmarkTask(index);
                 newTask = updatedList.get(index);
@@ -216,7 +216,7 @@ public class Parser {
                 break;
             case delete:
                 // taskNumber in 1-indexing
-                taskNumber = getTaskNumber(splitInput);
+                taskNumber = getTaskNumber(inputStrings);
                 // index in 0-indexing
                 index = checkTaskNumber(taskList, taskNumber);
                 Task deletedTask = taskList.get(index);

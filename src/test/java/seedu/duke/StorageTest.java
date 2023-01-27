@@ -1,9 +1,9 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.Tasks.Deadline;
-import seedu.duke.Tasks.Event;
-import seedu.duke.Tasks.Todo;
+import seedu.duke.tasks.Deadline;
+import seedu.duke.tasks.Event;
+import seedu.duke.tasks.Todo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

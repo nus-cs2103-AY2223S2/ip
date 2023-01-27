@@ -7,7 +7,7 @@ public class Duke {
     private final Ui ui;
     private TaskList tasks;
 
-    private final static String[] COMMANDS_LIST =
+    private final static String[] LIST_OF_COMMANDS =
             new String[]{"list", "bye", "todo", "mark", "unmark", "event", "deadline", "delete"};
 
     enum Commands {
@@ -33,9 +33,9 @@ public class Duke {
         this.ui.sayGreetings();
         while (!command.equals(Commands.bye)) {
             String input = sc.nextLine();
-            String[] inputArr = input.split(" ");
+            String[] inputStrings = input.split(" ");
             try {
-                command = parser.executeCommand(inputArr, COMMANDS_LIST, this.tasks, this.storage, this.ui);
+                command = parser.executeCommand(inputStrings, LIST_OF_COMMANDS, this.tasks, this.storage, this.ui);
             } catch (DukeException err) {
                 System.out.println(err.getErrorMessage());
             }

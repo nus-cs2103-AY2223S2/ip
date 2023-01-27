@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.Tasks.*;
+import seedu.duke.tasks.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -37,24 +37,24 @@ public class Storage {
             // scan and read each line on the duke.txt file
             // need to be able to have a common function that creates the different types of tasks
             while (sc.hasNextLine()) {
-                String[] taskArr = sc.nextLine().split("\\|");
-                String taskType = taskArr[0];
-                boolean isDone = Boolean.parseBoolean(taskArr[1]);
+                String[] taskDetails = sc.nextLine().split("\\|");
+                String taskType = taskDetails[0];
+                boolean isDone = Boolean.parseBoolean(taskDetails[1]);
                 switch (taskType) {
                 case "T":
-                    data.addTask(new Todo(taskArr[2], isDone, taskType));
+                    data.addTask(new Todo(taskDetails[2], isDone, taskType));
                     break;
                 case "D":
-                    String deadline = taskArr[3];
+                    String deadline = taskDetails[3];
                     LocalDateTime formattedDeadline = formatTimeStamp(deadline);
-                    data.addTask(new Deadline(taskArr[2], isDone, taskType, formattedDeadline));
+                    data.addTask(new Deadline(taskDetails[2], isDone, taskType, formattedDeadline));
                     break;
                 case "E":
-                    String from = taskArr[3];
+                    String from = taskDetails[3];
                     LocalDateTime formattedFrom = formatTimeStamp(from);
-                    String to = taskArr[4];
+                    String to = taskDetails[4];
                     LocalDateTime formattedTo = formatTimeStamp(to);
-                    data.addTask(new Event(taskArr[2], isDone, taskType, formattedFrom, formattedTo));
+                    data.addTask(new Event(taskDetails[2], isDone, taskType, formattedFrom, formattedTo));
                     break;
                 }
             }
@@ -70,9 +70,9 @@ public class Storage {
      *  @return LocalDateTime object of the time stamp
      */
     private LocalDateTime formatTimeStamp(String timeStamp) {
-        String[] timeStampArr = timeStamp.split("T");
-        LocalDate date = LocalDate.parse(timeStampArr[0]);
-        LocalTime time = LocalTime.parse(timeStampArr[1]);
+        String[] timeStampDetails = timeStamp.split("T");
+        LocalDate date = LocalDate.parse(timeStampDetails[0]);
+        LocalTime time = LocalTime.parse(timeStampDetails[1]);
         return LocalDateTime.of(date, time);
     }
 

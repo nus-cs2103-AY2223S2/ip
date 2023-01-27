@@ -1,25 +1,25 @@
 package seedu.duke;
 
-import seedu.duke.Tasks.*;
+import seedu.duke.tasks.*;
 
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> taskList;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for TaskList
-     * @param taskList List of Task to be initialized
+     * @param tasks List of Task to be initialized
      */
-    public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
      * Constructor for empty TaskList
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -28,7 +28,7 @@ public class TaskList {
      * @return Task at the specified index (0-indexing)
      */
     public Task get(int index) {
-        return this.taskList.get(index - 1);
+        return this.tasks.get(index);
     }
 
     /**
@@ -37,9 +37,9 @@ public class TaskList {
      * @return Updated TaskList
      */
     public TaskList addTask(Task newTask) {
-        ArrayList<Task> updatedList = this.taskList;
-        updatedList.add(newTask);
-        return new TaskList(updatedList);
+        ArrayList<Task> updatedTasks = this.tasks;
+        updatedTasks.add(newTask);
+        return new TaskList(updatedTasks);
     }
 
     /**
@@ -48,9 +48,9 @@ public class TaskList {
      * @return Updated TaskList
      */
     public TaskList deleteTask(int index) {
-        ArrayList<Task> updatedList = this.taskList;
-        updatedList.remove(index);
-        return new TaskList(updatedList);
+        ArrayList<Task> updatedTasks = this.tasks;
+        updatedTasks.remove(index);
+        return new TaskList(updatedTasks);
     }
 
     /**
@@ -59,11 +59,11 @@ public class TaskList {
      * @return Updated TaskList
      */
     public TaskList markTask(int index) throws DukeException {
-        ArrayList<Task> updatedList = this.taskList;
-        Task unmarkedTask = updatedList.get(index);
+        ArrayList<Task> updatedTasks = this.tasks;
+        Task unmarkedTask = updatedTasks.get(index);
         Task markedTask = unmarkedTask.markTask();
-        updatedList.set(index, markedTask);
-        return new TaskList(updatedList);
+        updatedTasks.set(index, markedTask);
+        return new TaskList(updatedTasks);
     }
 
     /**
@@ -72,11 +72,11 @@ public class TaskList {
      * @return Updated TaskList
      */
     public TaskList unmarkTask(int index) throws DukeException {
-        ArrayList<Task> updatedList = this.taskList;
-        Task markedTask = updatedList.get(index);
+        ArrayList<Task> updatedTasks = this.tasks;
+        Task markedTask = updatedTasks.get(index);
         Task unmarkedTask = markedTask.unmarkTask();
-        updatedList.set(index, unmarkedTask);
-        return new TaskList(updatedList);
+        updatedTasks.set(index, unmarkedTask);
+        return new TaskList(updatedTasks);
     }
 
     /**
@@ -92,7 +92,7 @@ public class TaskList {
      * @return Size of the TaskList
      */
     public int getSize() {
-        return this.taskList.size();
+        return this.tasks.size();
     }
 
     /**
@@ -104,7 +104,7 @@ public class TaskList {
     public boolean equals (Object o) {
         if (o instanceof TaskList) {
             TaskList taskList = (TaskList) o;
-            if(taskList.taskList.equals(this.taskList)) {
+            if(taskList.tasks.equals(this.tasks)) {
                 return true;
             }
             return true;
