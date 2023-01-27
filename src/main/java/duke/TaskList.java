@@ -4,9 +4,15 @@ import duke.tasks.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of Task to store users' tasks
+ */
 public class TaskList {
     private static ArrayList<Task> tasks;
 
+    /**
+     * Creates a new TaskList object with ArrayList as data structure.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }

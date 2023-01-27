@@ -5,20 +5,42 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents Storage object to provide services of saving and loading data from local.
+ */
 public class Storage {
     private static String filePath;
     private static String directoryPath;
     private TaskList tasks;
 
+    /**
+     * Creates a new Storage object with file path and directory path where the data
+     * file is stored.
+     *
+     * @param filePath
+     * @param directoryPath
+     */
     public Storage(String filePath, String directoryPath) {
-        this.filePath = filePath;
-        this.directoryPath = directoryPath;
+        Storage.filePath = filePath;
+        Storage.directoryPath = directoryPath;
     }
 
-    public TaskList loadTasks() throws FileNotFoundException, IOException, DukeException {
+    /**
+     * Reads stored data in the directoryPath and returns TaskList object that contains
+     * all the saved tasks. It creates a new directory and new file if the directory does
+     * not exist.
+     *
+     * @return TaskList object that contains all the saved tasks.
+     * @throws IOException if new directory or new file cannot be created.
+     * @throws DukeException if there is error parsing users' inputs.
+     */
+    public TaskList loadTasks() throws IOException, DukeException {
         File directory = new File(directoryPath);
         final File file = new File(filePath);
 
@@ -63,6 +85,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves current TaskList object and write data to the storage file.
+     *
+     * @throws IOException if new directory or new file cannot be created.
+     */
     public void saveTasks() throws IOException {
         String path = "./data/duke.txt";
         String directoryPath = "./data";

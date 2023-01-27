@@ -8,17 +8,31 @@ import duke.tasks.Todo;
 
 import java.io.IOException;
 
+/**
+ * Represents parser for Duke, parses user inputs and reacts accordingly
+ */
 public class Parser {
     enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
 
     private final TaskList tasks;
     private final Storage storage;
 
+    /**
+     * Creates new Parser object
+     *
+     * @param tasks TaskList of current user
+     * @param storage Storage of current user
+     */
     public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
     }
 
+    /**
+     * Parses user inputs and reacts according to different keywords
+     *
+     * @param command Users' inputs
+     */
     public void parse(String command) {
         String[] s;
         Actions selection;
