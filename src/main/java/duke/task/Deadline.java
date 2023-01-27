@@ -3,10 +3,21 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline task represented by description and deadline. Extends from Task class.
+ */
 public class Deadline extends Task {
+    /** The deadline date represented as a String **/
     protected String by;
+    /** The deadline date represented as a LocalDate **/
     protected LocalDate date;
 
+    /**
+     * Main constructor (for invocation by most classes)
+     *
+     * @param description Description of a deadline.
+     * @param by Deadline date of a deadline.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
@@ -16,6 +27,13 @@ public class Deadline extends Task {
         this.by = formattedDate;
     }
 
+    /**
+     * Secondary constructor (for invocation by Storage to put task in data into TaskList.
+     *
+     * @param description Description of a deadline.
+     * @param by Deadline date of a deadline.
+     * @param isDone Status of a deadline.
+     */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = by;
@@ -23,11 +41,23 @@ public class Deadline extends Task {
         LocalDate date = LocalDate.parse(by, format);
         String formattedDate = date.format(format);
     }
+
+    /**
+     * Get the detailed description of a deadline.
+     * To store the current data into the file.
+     *
+     * @return Detailed description as a String.
+     */
     @Override
     public String getDetailedDescription() {
         return super.description + " | " + this.by;
     }
 
+    /**
+     * Get the symbol of a deadline.
+     *
+     * @return The symbol of a deadline.
+     */
     @Override
     public String getSymbol() {
         return "D";
