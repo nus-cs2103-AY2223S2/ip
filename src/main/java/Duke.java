@@ -7,6 +7,7 @@ public class Duke {
     private static final int INDENT_LEVEL = 4;
 
     private TaskList tasks;
+    private Command currentCommand;
 
     public Duke() {
         try {
@@ -34,30 +35,30 @@ public class Duke {
             }
             
             String input = scanner.nextLine();
-            Command command = new Command(input);
+            this.currentCommand = new Command(input);
         
             try {
-                switch (command.baseCommand) {
+                switch (this.currentCommand.baseCommand) {
                     case "todo":
-                        Duke.addTodo(command, tasks);
+                        this.addTodo();
                         break;
                     case "deadline":
-                        Duke.addDeadline(command, tasks);
+                        this.addDeadline();
                         break;
                     case "event":
-                        Duke.addEvent(command, tasks);
+                        this.addEvent();
                         break;
                     case "mark":
-                        Duke.mark(command, tasks);
+                        this.mark();
                         break;
                     case "unmark":
-                        Duke.unmark(command, tasks);
+                        this.unmark();
                         break;
                     case "delete":
-                        Duke.delete(command, tasks);
+                        this.delete();
                         break;
                     case "list":
-                        Duke.list(command, tasks);
+                        this.list();
                         break;
                     case "quit":
                     case "exit":
@@ -68,7 +69,7 @@ public class Duke {
                         throw new DukeInvalidCommandException();
                 }
 
-                tasks.save();
+                this.tasks.save();
             } catch (DukeException e) {
                 this.say(e.getDukeMessage());
             }
@@ -91,40 +92,40 @@ public class Duke {
         System.out.println(indentation + horizontalLine + '\n');
     }
 
-    private static void addTodo(Command command, TaskList tasks) throws DukeInvalidArgumentException {
-        if (command.hasEmptyBody()) {
+    private void addTodo() throws DukeInvalidArgumentException {
+        if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("The description of a todo cannot be empty.");
         }
         
-        String description = command.body;
+        String description = this.currentCommand.body;
         Task task = new TaskTodo(description);
-        tasks.add(task);
+        this.tasks.add(task);
         this.say(
             "Got it. I've added this task:\n"
                 + "  " + task.toString() + "\n"
-                + tasks.getStatus()
+                + this.tasks.getStatus()
         );
     }
 
-    private static void addDeadline(Command command, TaskList tasks) throws DukeInvalidArgumentException {
-        if (command.hasEmptyBody()) {
+    private void addDeadline() throws DukeInvalidArgumentException {
+        if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("The description of a deadline cannot be empty.");
         }
-        if (!command.namedParameters.containsKey("by")) {
+        if (!this.currentCommand.namedParameters.containsKey("by")) {
             throw new DukeInvalidArgumentException("The \"/by\" parameter of a deadline is missing.");
         }
-        if (command.namedParameters.get("by").isEmpty()) {
+        if (this.currentCommand.namedParameters.get("by").isEmpty()) {
             throw new DukeInvalidArgumentException("The \"/by\" parameter of a deadline cannot be empty.");
         }
         
         try {
-            String description = command.body;
-            Task task = new TaskDeadline(description, command.namedParameters.get("by"));
-            tasks.add(task);
+            String description = this.currentCommand.body;
+            Task task = new TaskDeadline(description, this.currentCommand.namedParameters.get("by"));
+            this.tasks.add(task);
             this.say(
                 "Got it. I've added this task:\n"
                     + "  " + task.toString() + "\n"
-                    + tasks.getStatus()
+                    + this.tasks.getStatus()
             );
         } catch (DateTimeParseException e) {
             throw new DukeInvalidArgumentException(
@@ -133,35 +134,35 @@ public class Duke {
         }
     }
 
-    private static void addEvent(Command command, TaskList tasks) throws DukeInvalidArgumentException {
-        if (command.hasEmptyBody()) {
+    private void addEvent() throws DukeInvalidArgumentException {
+        if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("The description of an event cannot be empty.");
         }
-        if (!command.namedParameters.containsKey("from")) {
+        if (!this.currentCommand.namedParameters.containsKey("from")) {
             throw new DukeInvalidArgumentException("The \"/from\" parameter of an event is missing.");
         }
-        if (command.namedParameters.get("from").isEmpty()) {
+        if (this.currentCommand.namedParameters.get("from").isEmpty()) {
             throw new DukeInvalidArgumentException("The \"/from\" parameter of an event cannot be empty.");
         }
-        if (!command.namedParameters.containsKey("to")) {
+        if (!this.currentCommand.namedParameters.containsKey("to")) {
             throw new DukeInvalidArgumentException("The \"/to\" parameter of an event is missing.");
         }
-        if (command.namedParameters.get("to").isEmpty()) {
+        if (this.currentCommand.namedParameters.get("to").isEmpty()) {
             throw new DukeInvalidArgumentException("The \"/to\" parameter of an event cannot be empty.");
         }
 
         try {
-            String description = command.body;
+            String description = this.currentCommand.body;
             Task task = new TaskEvent(
                 description, 
-                command.namedParameters.get("from"), 
-                command.namedParameters.get("to")
+                this.currentCommand.namedParameters.get("from"), 
+                this.currentCommand.namedParameters.get("to")
             );
-            tasks.add(task);
+            this.tasks.add(task);
             this.say(
                 "Got it. I've added this task:\n"
                     + "  " + task.toString() + "\n"
-                    + tasks.getStatus()
+                    + this.tasks.getStatus()
             );
         } catch (DateTimeParseException e) {
             throw new DukeInvalidArgumentException(
@@ -170,13 +171,13 @@ public class Duke {
         }
     }
 
-    private static void mark(Command command, TaskList tasks) throws DukeInvalidArgumentException {
-        if (command.hasEmptyBody()) {
+    private void mark() throws DukeInvalidArgumentException {
+        if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
         }
         
         Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
-        int taskIndex = Optional.of(command.body)
+        int taskIndex = Optional.of(this.currentCommand.body)
             .filter(isNumeric)
             .map(body -> Integer.parseInt(body) - 1)
             .filter(i -> i >= 0)
@@ -184,8 +185,8 @@ public class Duke {
                 "Invalid task index. Index needs to be a positive integer."
             ));
         Task task = Optional.of(taskIndex)
-            .filter(index -> index < tasks.size())
-            .map(index -> tasks.get(index))
+            .filter(index -> index < this.tasks.size())
+            .map(index -> this.tasks.get(index))
             .orElseThrow(() -> new DukeInvalidArgumentException(
                 "Task index is beyond the range of the task list."
             ));
@@ -196,13 +197,13 @@ public class Duke {
         );
     }
 
-    private static void unmark(Command command, TaskList tasks) throws DukeInvalidArgumentException {
-        if (command.hasEmptyBody()) {
+    private void unmark() throws DukeInvalidArgumentException {
+        if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
         }
         
         Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
-        int taskIndex = Optional.of(command.body)
+        int taskIndex = Optional.of(this.currentCommand.body)
             .filter(isNumeric)
             .map(body -> Integer.parseInt(body) - 1)
             .filter(i -> i >= 0)
@@ -210,8 +211,8 @@ public class Duke {
                 "Invalid task index. Index needs to be a positive integer."
             ));
         Task task = Optional.of(taskIndex)
-            .filter(index -> index < tasks.size())
-            .map(index -> tasks.get(index))
+            .filter(index -> index < this.tasks.size())
+            .map(index -> this.tasks.get(index))
             .orElseThrow(() -> new DukeInvalidArgumentException(
                 "Task index is beyond the range of the task list."
             ));
@@ -222,13 +223,13 @@ public class Duke {
         );
     }
 
-    private static void delete(Command command, TaskList tasks) throws DukeInvalidArgumentException {
-        if (command.hasEmptyBody()) {
+    private void delete() throws DukeInvalidArgumentException {
+        if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
         }
         
         Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
-        int taskIndex = Optional.of(command.body)
+        int taskIndex = Optional.of(this.currentCommand.body)
             .filter(isNumeric)
             .map(body -> Integer.parseInt(body) - 1)
             .filter(i -> i >= 0)
@@ -236,19 +237,19 @@ public class Duke {
                 "Invalid task index. Index needs to be a positive integer."
             ));
         Task task = Optional.of(taskIndex)
-            .filter(index -> index < tasks.size())
-            .map(index -> tasks.get(index))
+            .filter(index -> index < this.tasks.size())
+            .map(index -> this.tasks.get(index))
             .orElseThrow(() -> new DukeInvalidArgumentException(
                 "Task index is beyond the range of the task list."
             ));
-        tasks.remove(taskIndex);
+        this.tasks.remove(taskIndex);
         this.say(
             "Noted. I've removed this task:\n"
                 + "  " + task.toString()
         );
     }
 
-    private static void list(Command command, TaskList tasks) {
-        this.say(tasks.toString());
+    private void list() {
+        this.say(this.tasks.toString());
     }
 }
