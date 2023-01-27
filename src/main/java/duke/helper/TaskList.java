@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
     private Ui Ui;
 
     public TaskList(ArrayList<Task> tasks) throws IOException {

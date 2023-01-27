@@ -6,7 +6,7 @@ import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Todo;
+import duke.task.ToDo;
 
 import java.io.IOException;
 import java.time.DateTimeException;
@@ -37,7 +37,7 @@ public class Parser {
 
         case "todo":
             checkTaskDesc(inputs);
-            tasks.addToTasks(new Todo(inputs[1]));
+            tasks.addToTasks(new ToDo(inputs[1]));
             tasks.handleTaskOutput();
             break;
 

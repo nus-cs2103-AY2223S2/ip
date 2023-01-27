@@ -10,7 +10,6 @@ public class Deadline extends Task {
 
     private Deadline(String description, String by) throws InvalidDateTimeException {
         super(description,false, "D" );
-
         this.dueDateTime = Parser.handleDateTime(by);
     }
 
