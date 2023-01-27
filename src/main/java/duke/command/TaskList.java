@@ -34,20 +34,15 @@ public class TaskList {
         init();
     }
 
-    /**
-     * Add.
-     * add Task
-     *
-     * @param input the input
-     */
-    public void add(Task input) {
+    public String gui_add(Task input){
         try {
+            String str;
             if (input.taskName.equals("") || input.taskName.equals(" ")) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
             } else {
                 ListOfTasks.add(input);
                 input.add();
-                System.out.println(input.messageAdd + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
+                str = input.messageAdd + "\n Now you have " + ListOfTasks.size() + " tasks in the list";
                 if (input instanceof ToDo) {
                     storage.write("T|" + input.done + "|" + ((ToDo) input).rawInput);
                 } else if (input instanceof Deadlines) {
@@ -57,7 +52,9 @@ public class TaskList {
                 } else {
                     System.out.println("Unspecific type");
                 }
+
             }
+            return str;
         } catch (DukeException e) {
             if (input instanceof ToDo)
                 System.out.println("OOPS!!! The description of a todo cannot be empty.\n");
@@ -66,52 +63,45 @@ public class TaskList {
             else
                 System.out.println("OOPS!!! The description of a event cannot be empty.\n");
         }
+        return null;
     }
 
-    /**
-     * Display all.
-     * Print out all Tasks in memory
-     */
-    public void displayAll() {
+    public String gui_displayAll() {
         System.out.println(Parser.THE_TASKS_IN_YOUR_LIST);
+        StringBuilder str = new StringBuilder(Parser.THE_TASKS_IN_YOUR_LIST);
         for (int x = 0; x < ListOfTasks.size(); x++) {
             ListOfTasks.get(x).display();
-            System.out.println(x + 1 + ". " + ListOfTasks.get(x).messageDisplay);
+            str.append(x + 1).append(". ").append(ListOfTasks.get(x).messageDisplay).append("\n");
         }
+        return str.toString();
     }
 
-    /**
-     * Mark.
-     * Marks task at given index
-     *
-     * @param index the index
-     */
-    public void mark(int index) {
+    public String gui_mark(int index) {
         try {
+            String str;
             Task temp = ListOfTasks.get(index);
             temp.marked();
-            System.out.println(temp.messageMarked);
+            str = temp.messageMarked;
             storage.markAt(index);
+            return str;
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
         }
+        return null;
     }
 
-    /**
-     * Unmark.
-     * unmarked task at given index
-     *
-     * @param index the index
-     */
-    public void unmark(int index) {
+    public String gui_unmark(int index) {
         try {
+            String str;
             Task temp = ListOfTasks.get(index);
             temp.unmarked();
-            System.out.println(temp.messageUnmarked);
+            str = temp.messageUnmarked;
             storage.unmarkAt(index);
+            return str;
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
         }
+        return null;
     }
 
     /**
@@ -120,16 +110,19 @@ public class TaskList {
      *
      * @param index the index
      */
-    public void delete(int index) {
+    public String gui_delete(int index) {
         try {
+            String str;
             Task temp = ListOfTasks.get(index);
             temp.delete();
             ListOfTasks.remove(index);
-            System.out.println(temp.messageDelete + "\n Now you have " + ListOfTasks.size() + " tasks in the list");
+            str = temp.messageDelete + "\n Now you have " + ListOfTasks.size() + " tasks in the list";
             storage.deteleAt(index);
+            return str;
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid Index");
         }
+        return null;
     }
 
     /**
@@ -160,12 +153,7 @@ public class TaskList {
         storage.writeAll();
     }
 
-    /**
-     * Find.
-     *
-     * @param key the key
-     */
-    public void find(String key) {
+    public String gui_find(String key) {
         int[] indexes = new int[ListOfTasks.size()];
         int count = 0;
         StringBuilder output = new StringBuilder();
@@ -179,7 +167,7 @@ public class TaskList {
             ListOfTasks.get(indexes[x]).display();
             output.append(x + 1).append(".").append(ListOfTasks.get(indexes[x]).messageDisplay).append("\n");
         }
-        System.out.println(Parser.FIND_MESSAGE + output);
+        return Parser.FIND_MESSAGE + output;
     }
 
 

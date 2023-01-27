@@ -10,6 +10,8 @@ public class Parser {
     public static final String THE_TASKS_IN_YOUR_LIST = "Here are the tasks in your list\n";
     public static final String REMOVED_THIS_TASK = "Noted. I've removed this task:\n";
     public static final String FIND_MESSAGE = "Here are the matching tasks in your list:\n";
+    public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!\n";
+    public static final String WRONG_INPUT = "Yeaaaaah buddy, Light Weight Baby!!!!!!!!!!!!!\n";
     public static final String TODO_MARKED = "[T][X]";
     public static final String TODO_UNMARKED = "[T][ ]";
     public static final String TODO_MARKED_SPACED = "  [T][X] ";
@@ -24,6 +26,6 @@ public class Parser {
     public static final String EVENT_UNMARKED = "[E][ ] ";
     public static final String EVENT_MARKED_SPACED = "  [E][X] ";
     public static final String EVENT_UNMARKED_SPACED = " [E][ ] ";
-    //
+
 
 }

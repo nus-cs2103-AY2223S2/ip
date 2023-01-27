@@ -40,7 +40,7 @@ public class Events extends Task {
 
     @Override
     public void add() {
-        messageAdd = Parser.ADDED_THIS_TASK + Parser.EVENT_MARKED_SPACED + taskName + start + end;
+        messageAdd = Parser.ADDED_THIS_TASK + Parser.EVENT_UNMARKED_SPACED + taskName + start + end;
     }
 
     @Override

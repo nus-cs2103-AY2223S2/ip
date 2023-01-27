@@ -1,12 +1,12 @@
 package duke.gui;
 
+import duke.command.menu;
+import duke.utilities.Parser;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
@@ -24,7 +24,7 @@ public class Duke_GUI extends Application {
     TextField userInput = new TextField();
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage)  {
         ScrollPane scrollPane = new ScrollPane();
 
         scrollPane.setContent(dialogContrainer);
@@ -74,6 +74,7 @@ public class Duke_GUI extends Application {
             handleUserInput();
         });
 
+
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
@@ -90,9 +91,10 @@ public class Duke_GUI extends Application {
     }
 
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput(){
         input = userInput.getText();
-        output = getResponse();
+        output = getResponse(input);
+
         dialogContrainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, user),
                 DialogBox.getDukeDialog(output, duke)
@@ -101,8 +103,8 @@ public class Duke_GUI extends Application {
     }
 
 
-    String getResponse() {
-        return "Light Weight Baby!!!!!!!!!: ";
+    String getResponse(String input) {
+        return menu.In_Out(input);
         //+ input;
     }
 
