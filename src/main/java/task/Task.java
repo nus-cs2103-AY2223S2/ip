@@ -56,4 +56,13 @@ public abstract class Task {
      */
     public abstract String toCSV();
 
+    /**
+     * Retrieves the name of the Task.
+     * More appropriately, the description of the task.
+     * @return the name of this Task.
+     */
+    public String getTaskName(){
+        return this.taskName;
+    }
+
 }

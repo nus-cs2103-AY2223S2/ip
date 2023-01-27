@@ -52,14 +52,16 @@ public class DukeIO extends PrintWriter {
     /**
      * Create buffered reader for file reading.
      *
-     * @return Buffered Reader
+     * @param filePath The name of the file to open
+     * @return Buffered Reader.
+     * @throws DukeException Thrown when no file is found at filepath
      */
-    private static BufferedReader readFileBR() {
+    private static BufferedReader readFileBR(Path filePath) throws DukeException {
         BufferedReader READ_FILE = null;
         try {
             READ_FILE = Files.newBufferedReader(DukeIO.LOCAL_SAVE, StandardCharsets.UTF_8);
         } catch (java.nio.file.NoSuchFileException e) {
-            System.err.println("File you were trying to read does not exist!");
+            throw new exceptions.missing.File(filePath);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -110,10 +112,11 @@ public class DukeIO extends PrintWriter {
     /**
      * Read save file and populates the given TaskMaster object.
      * @param tm the runtime TaskMaster object
+     * @throws DukeException is thrown when the save file is not found.
      */
-    protected static void readSave(TaskMaster tm) {
+    public static void readSave(TaskMaster tm) throws DukeException {
+        BufferedReader FILE = readFileBR(LOCAL_SAVE);
         try {
-            BufferedReader FILE = readFileBR();
             String curLine;
             while ((curLine = FILE.readLine()) != null ) {
                 Parser.parseSaveFile(curLine.split(","), tm);
@@ -129,7 +132,7 @@ public class DukeIO extends PrintWriter {
      * Write to save file everything that is stored in the given TaskMaster object.
      * @param tm the runtime TaskMaster object
      */
-    protected static void writeSave(TaskMaster tm) {
+    public static void writeSave(TaskMaster tm) {
         System.out.println(LOCAL_SAVE);
         BufferedWriter FILE = writeFileBW();
         try {

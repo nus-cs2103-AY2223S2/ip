@@ -12,7 +12,7 @@ public class Parser {
      * For enum attempt
      */
     public enum Keyword {
-        TODO, DEADLINE, EVENT
+        TODO, DEADLINE, EVENT, FIND
     }
 
     /**
@@ -73,6 +73,7 @@ public class Parser {
         }
 
         switch (desire) {
+            case FIND:
             case TODO: {
                 // Return descriptor
                 return new String[]{ userInput.trim() };
@@ -185,11 +186,15 @@ public class Parser {
                 return "Loaded!";
             case "bye":
                 throw new exceptions.Quit();
+            case "find":
+                return tm.find(extractTaskParams(Keyword.FIND)[0]);
             case "?":
                 throw new exceptions.Unimplemented();
             default:
                 throw new exceptions.invalid.Command();
         }
     }
+
+
 
 }
