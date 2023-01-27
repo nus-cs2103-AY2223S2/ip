@@ -3,6 +3,7 @@ import java.util.*;
 public class Event extends Task {
 
     protected String startTime;
+    static final String type  = "E";
 
     protected String endTime;
 

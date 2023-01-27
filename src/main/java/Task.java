@@ -5,6 +5,8 @@ public class Task {
     String name;
     boolean completionStatus;
 
+    static String type;
+
     public Task(String name) {
         this.name = name;
         this.completionStatus = false;

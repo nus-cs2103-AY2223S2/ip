@@ -5,6 +5,8 @@ public class Deadline extends Task {
 
     protected String endTime;
 
+    static final String type  = "D";
+
     public Deadline(String name, String endTime) {
         super(name);
         this.endTime = endTime;
