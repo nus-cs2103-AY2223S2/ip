@@ -21,7 +21,7 @@ public class Feedback {
     }
 
     public static void greet(String logo) {
-        display("Hello I'm\n" + logo + "What can I do for you?\n\n" + commands());
+        display("Hello I'm\n" + logo + "What can I do for you?\n" + commands());
     }
 
     public void addedTask(Task task, int size) {
@@ -71,7 +71,7 @@ public class Feedback {
     }
 
     private static String commands() {
-        return "MY COMMANDS ARE:\n\n"
+        return "MY COMMANDS ARE:\n"
                 + "ADD TODO TASK:     todo [description]\n"
                 + "ADD DEADLINE TASK: deadline [description] /by [date time]\n"
                 + "ADD EVENT TASK:    event [description] /from [date time] /to [date time]\n"
