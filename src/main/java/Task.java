@@ -1,14 +1,13 @@
+import java.util.Arrays;
+
 public abstract class Task {
-    private String taskName;
-    private boolean isDone;
+    protected String taskName;
+    protected String type;
+    protected boolean isDone;
 
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
-    }
-
-    public boolean isDone() {
-        return this.isDone;
     }
 
     public void markDone() {
@@ -18,6 +17,30 @@ public abstract class Task {
     public void unmarkDone() {
         this.isDone = false;
     }
+
+    abstract public String encode();
+
+    public static Task decode(String str) {
+        String[] splitStr = str.split(" \\| ", 5);
+        Task result = null;
+        switch(splitStr[0]) {
+            case "T":
+                result = new ToDo(splitStr[2]);
+                break;
+            case "D":
+                result = new Deadline(splitStr[2], splitStr[3]);
+                break;
+            case "E":
+                result = new Event(splitStr[2], splitStr[3], splitStr[4]);
+                break;
+        }
+        if (splitStr[1].equals("true")) {
+            result.markDone();
+        }
+
+        return result;
+    }
+
 
     @Override
     public String toString() {

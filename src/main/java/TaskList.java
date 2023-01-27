@@ -1,11 +1,17 @@
 //import java.util.HashMap;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.File;  // Import the File class
+import java.io.FileWriter;   // Import the FileWriter class
+import java.io.IOException;  // Import the IOException class to handle errors
+import java.util.Scanner;
 
 public class TaskList {
-    private ArrayList<Task> taskList;
-    private int taskCount;
+    protected final String SAVE_DIR = "./data";
+    protected final String SAVE_NAME = "/duke.txt";
+    protected ArrayList<Task> taskList;
+    protected int taskCount;
 
     public TaskList() {
         this.taskCount = 0;
@@ -74,8 +80,8 @@ public class TaskList {
             return "OK, I've marked this task as not done yet: \n" + task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No task with given task number of " + taskNumber);
+        }
     }
-}
 
     public String listTasks() {
         String result = "";
@@ -84,5 +90,44 @@ public class TaskList {
             result += String.format("%d. %s \n", i + 1, this.taskList.get(i));
         }
         return result;
+    }
+
+    public void saveTaskList() {
+        try {
+            boolean dataDir = new File(SAVE_DIR).mkdirs();
+            File txtFile = new File(SAVE_DIR + SAVE_NAME);
+            FileWriter myWriter = new FileWriter("./data/duke.txt");
+            myWriter.write(this.encode());
+            myWriter.close();
+//            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+//            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public String encode() {
+        String result = "";
+        for (int i = 0; i < this.taskCount; i++) {
+            result += String.format("%s\n", this.taskList.get(i).encode());
+        }
+        return result;
+    }
+
+    public void loadFromSave() throws DukeException {
+        File file = new File(SAVE_DIR + SAVE_NAME);
+        if (file.exists()) {
+            try {
+                Scanner scanner = new Scanner(file);
+                while (scanner.hasNextLine()) {
+                    String nextLine = scanner.nextLine();
+                    taskList.add(Task.decode(nextLine));
+                    this.taskCount++;
+                }
+                scanner.close();
+            } catch (IOException e) {
+                throw new DukeException("Error when loading from save");
+            }
+        }
     }
 }

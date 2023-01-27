@@ -83,6 +83,11 @@ public class Duke {
         boolean flag = true;
 
         p.printWelcome();
+        try {
+            taskList.loadFromSave();
+        } catch (DukeException e) {
+            p.print(e.getMessage());
+        }
 
         while (flag) {
             text = s.nextLine();
@@ -95,19 +100,25 @@ public class Duke {
                     p.print(taskList.listTasks());
                 } else if (command.equals(Commands.MARK)) {
                     p.print(taskList.markTask(parseMarkOrDeleteCommands(text)));
+                    taskList.saveTaskList();
                 } else if (command.equals(Commands.UNMARK)) {
                     p.print(taskList.unmarkTask(parseMarkOrDeleteCommands(text)));
+                    taskList.saveTaskList();
                 } else if (command.equals(Commands.DELETE)) {
                     p.print(taskList.deleteTask(parseMarkOrDeleteCommands(text)));
+                    taskList.saveTaskList();
                 } else {
                     if (command.equals(Commands.TODO)) {
                         p.print(taskList.addTask(parseTodoCommand(text)));
+                        taskList.saveTaskList();
                     } else if (command.equals(Commands.DEADLINE)) {
                         String[] parsed = parseDeadlineCommand(text); // parsed[0] is description of task; parsed[1] is by
                         p.print(taskList.addTask(parsed[0], parsed[1]));
+                        taskList.saveTaskList();
                     } else if (command.equals(Commands.EVENT)) {
                         String[] parsed = parseEventCommand(text); // parsed[0] is description of task; parsed[1] is from; parsed[2] is to
                         p.print(taskList.addTask(parsed[0], parsed[1], parsed[2]));
+                        taskList.saveTaskList();
                     } else {
                         p.print("MISSED AN EXCEPTION: Somehow ended up at the end of the if-else blocks"); //should be unnecessary
                     }
