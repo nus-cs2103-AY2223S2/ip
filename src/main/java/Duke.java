@@ -6,15 +6,18 @@ import java.util.function.Predicate;
 public class Duke {
     private static final int INDENT_LEVEL = 4;
 
-    public static void main(String[] args) {
-        TaskList tasks;
+    private TaskList tasks;
+
+    public Duke() {
         try {
-            tasks = TaskList.load();
+            this.tasks = TaskList.load();
         } catch(DukeLoadException e) {
             Duke.say(e.getDukeMessage());
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
+    }
 
+    public void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -72,6 +75,10 @@ public class Duke {
         }
         
         scanner.close();
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 
     private static void say(String whatToSay) {
