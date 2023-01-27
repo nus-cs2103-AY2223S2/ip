@@ -23,5 +23,8 @@ public class Task {
     public String getStatusBox() {
         return "[" +  this.getStatusIcon() + "] ";
     }
+    public String toFileFormat() {
+        return this.getStatusBox() + this.description;
+    }
 }
 
