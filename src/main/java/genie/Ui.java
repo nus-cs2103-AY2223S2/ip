@@ -31,7 +31,7 @@ public class Ui {
                     "      ░    ░  ░         ░  ░     ░  ░        ░    ░  ░         ░  ░     ░  ░";
     public Ui() {}
     public void greet() {
-        System.out.println("Hello! This is genie.Genie, your personal task tracker!");
+        System.out.println("Hello! This is Genie, your personal task tracker!");
     }
     public void bootLogo() {
         printLine();
