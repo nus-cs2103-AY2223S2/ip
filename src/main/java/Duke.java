@@ -1,7 +1,7 @@
 import core.DukeIO;
 import core.Parser;
-import exceptions.DukeException;
 import core.TaskMaster;
+import exceptions.DukeException;
 
 /**
  * DUKE
@@ -20,14 +20,14 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        boolean QUIT = false;
+        boolean quit = false;
         String userInput;
 
         initialize();
         greet();
 
 
-        while(!QUIT) {
+        while (!quit) {
             userInput = dio.readLn();
             if (!userInput.isEmpty()) {
                 dio.lb();
@@ -35,7 +35,7 @@ public class Duke {
                     Parser a = new Parser(userInput);
                     dio.println(a.parse(tm));
                 } catch (exceptions.Quit e) {
-                    QUIT = true;
+                    quit = true;
                 } catch (DukeException de) {
                     dio.println(de.getMessage());
                 }

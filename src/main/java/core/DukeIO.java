@@ -1,29 +1,30 @@
 package core;
 
-import exceptions.DukeException;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.nio.charset.StandardCharsets;
+
+import exceptions.DukeException;
 
 public class DukeIO extends PrintWriter {
 
     // To look into placing into Document/Appdata like locations instead of this directory
-    private final static Path LOCAL_SETTINGS_DIR = Paths.get(System.getProperty("user.dir"), "data");
-    private final static Path LOCAL_SAVE = Paths.get(LOCAL_SETTINGS_DIR.toString(), "data.csv");
+    private static final Path LOCAL_SETTINGS_DIR = Paths.get(System.getProperty("user.dir"), "data");
+    private static final Path LOCAL_SAVE = Paths.get(LOCAL_SETTINGS_DIR.toString(), "data.csv");
     private final BufferedReader bf;
 
     /**
      * Constructor for DukeIO class.
      * This object can be used for all IO purposes, primarily printing messages and reading of user input.
      */
-    public DukeIO(){
+    public DukeIO() {
         super(new BufferedOutputStream(System.out));
         bf = new BufferedReader(new InputStreamReader(System.in));
     }
@@ -34,9 +35,9 @@ public class DukeIO extends PrintWriter {
      */
     public String readLn() {
         String userInput = "";
-        try{
+        try {
             userInput = bf.readLine().trim();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.err.printf("DukeIO : %s%n", e.getMessage());
         }
         return userInput;
@@ -45,7 +46,7 @@ public class DukeIO extends PrintWriter {
     /**
      * Prints line break.
      */
-    public void lb(){
+    public void lb() {
         this.println("____________________________________________________________");
     }
 
@@ -57,15 +58,14 @@ public class DukeIO extends PrintWriter {
      * @throws DukeException Thrown when no file is found at filepath
      */
     private static BufferedReader readFileBR(Path filePath) throws DukeException {
-        BufferedReader READ_FILE = null;
         try {
-            READ_FILE = Files.newBufferedReader(DukeIO.LOCAL_SAVE, StandardCharsets.UTF_8);
+            return Files.newBufferedReader(DukeIO.LOCAL_SAVE, StandardCharsets.UTF_8);
         } catch (java.nio.file.NoSuchFileException e) {
             throw new exceptions.missing.File(filePath);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-        return READ_FILE;
+        return null;
     }
 
     /**
@@ -75,18 +75,16 @@ public class DukeIO extends PrintWriter {
      * @return Buffered writer
      */
     private static BufferedWriter writeFileBW() {
-        BufferedWriter WRITE_FILE = null;
         if (Files.notExists(DukeIO.LOCAL_SAVE)) {
             createFile(DukeIO.LOCAL_SAVE);
         }
 
         try {
-            WRITE_FILE = Files.newBufferedWriter(DukeIO.LOCAL_SAVE, StandardCharsets.UTF_8);
+            return Files.newBufferedWriter(DukeIO.LOCAL_SAVE, StandardCharsets.UTF_8);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-
-        return WRITE_FILE;
+        return null;
     }
 
     /**
@@ -115,13 +113,13 @@ public class DukeIO extends PrintWriter {
      * @throws DukeException is thrown when the save file is not found.
      */
     public static void readSave(TaskMaster tm) throws DukeException {
-        BufferedReader FILE = readFileBR(LOCAL_SAVE);
+        BufferedReader file = readFileBR(LOCAL_SAVE);
         try {
             String curLine;
-            while ((curLine = FILE.readLine()) != null ) {
+            while ((curLine = file.readLine()) != null) {
                 Parser.parseSaveFile(curLine.split(","), tm);
             }
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             System.err.printf("SysErr %s\n", e.getMessage());
         } catch (DukeException e) {
             System.err.println(e.getMessage());
@@ -134,12 +132,12 @@ public class DukeIO extends PrintWriter {
      */
     public static void writeSave(TaskMaster tm) {
         System.out.println(LOCAL_SAVE);
-        BufferedWriter FILE = writeFileBW();
+        BufferedWriter file = writeFileBW();
         try {
             System.out.println(tm.export());
-            FILE.write(tm.export());
-            FILE.close();
-        } catch (IOException e) {
+            file.write(tm.export());
+            file.close();
+        } catch (IOException | NullPointerException e) {
             System.err.printf("SysErr %s\n", e.getMessage());
         }
     }

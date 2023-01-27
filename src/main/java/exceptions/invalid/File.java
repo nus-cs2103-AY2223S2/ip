@@ -1,5 +1,4 @@
 package exceptions.invalid;
-
 public class File extends exceptions.DukeException {
     /**
      * Constructs an Invalid File Exception for the given filepath.
@@ -12,4 +11,5 @@ public class File extends exceptions.DukeException {
     public File(String filepath) {
         super(String.format("%s Unable to find the file at %s", OOPS, filepath));
     }
+
 }

@@ -1,6 +1,6 @@
 package exceptions.missing;
 
-public class Options extends exceptions.DukeException{
+public class Options extends exceptions.DukeException {
     /**
      * Constructs an Invalid Options Exception for the given TaskType.
      *

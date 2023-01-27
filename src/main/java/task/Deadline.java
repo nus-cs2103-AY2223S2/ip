@@ -1,7 +1,8 @@
 package task;
-import core.DateHandler;
 
 import java.time.LocalDateTime;
+
+import core.DateHandler;
 /**
  * Deadline is a type of Task.
  * Deadlines have a 'by' field to indicate the period which the task must be completed by.
@@ -22,18 +23,6 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-//    /**
-//     * Constructs a Deadline task with the given name and timing details.
-//     * By default, the task created has its status set to false.
-//     *
-//     * @param name The name of this Task
-//     * @param by The end date time of this Task
-//     */
-//    public Deadline(String name, LocalDateTime by) {
-//        this(name, false, by);
-//    }
-
-
     /**
      * Returns the String representation of the Deadline task.
      *
@@ -50,7 +39,8 @@ public class Deadline extends Task {
      * @return The name of this task and the timing details in CSV format.
      */
     @Override
-    public String toCSV() {
-        return String.format("D,%s,%s,%s", this.name(), this.status, DateHandler.unconvert(this.by));
+    public String toCsv() {
+        return String.format("D,%s,%s,%s", this.getTaskName(),
+                this.getStatus(), DateHandler.unconvert(this.by));
     }
 }

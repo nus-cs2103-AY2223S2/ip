@@ -1,19 +1,21 @@
 package core;
-import task.Task;
+
 import java.time.LocalDateTime;
 import java.util.LinkedList;
+
+import task.Task;
 
 /**
  * core.TaskMaster is the managing class for all Tasks.
  */
 public class TaskMaster {
-    private final LinkedList<Task> LIST;
+    private final LinkedList<Task> taskList;
 
     /**
      * Constructor which creates a TaskMaster instance.
      */
     public TaskMaster() {
-        LIST = new LinkedList<>();
+        taskList = new LinkedList<>();
     }
 
     /**
@@ -25,9 +27,9 @@ public class TaskMaster {
 
         StringBuilder ret = new StringBuilder();
 
-        if (LIST.size() > 0) {
+        if (taskList.size() > 0) {
             int number = 1;
-            for (Task task: LIST) {
+            for (Task task: taskList) {
                 ret.append(String.format("%d.%s\n", number++, task));
             }
         } else {
@@ -45,11 +47,11 @@ public class TaskMaster {
      */
     private String add(Task task) {
         StringBuilder ret = new StringBuilder();
-        LIST.add(task);
+        taskList.add(task);
         ret.append("Got it. I've added this task:\n");
         ret.append(task);
         ret.append("\n");
-        ret.append(String.format("Now you have %d tasks in the list.\n", LIST.size()));
+        ret.append(String.format("Now you have %d tasks in the list.\n", taskList.size()));
         return ret.toString();
     }
 
@@ -63,7 +65,7 @@ public class TaskMaster {
      */
     private Task getTaskAtIndex(int index) throws exceptions.invalid.Index {
         try {
-            return LIST.get(index);
+            return taskList.get(index);
         } catch (IndexOutOfBoundsException e) {
             throw new exceptions.invalid.Index(index + 1);
         }
@@ -82,7 +84,7 @@ public class TaskMaster {
         StringBuilder ret = new StringBuilder();
 
         Task task = this.getTaskAtIndex(index);
-        task.status = status;
+        task.setStatus(status);
         if (status) {
             ret.append("Nice! I've marked this task as done:\n");
         } else {
@@ -102,7 +104,7 @@ public class TaskMaster {
      */
     public String delete(int index) throws exceptions.invalid.Index {
         try {
-            LIST.remove(index);
+            taskList.remove(index);
             return "Noted. I've removed this task:";
         } catch (IndexOutOfBoundsException e) {
             throw new exceptions.invalid.Index(index);
@@ -151,12 +153,12 @@ public class TaskMaster {
      *
      * @return list of all Tasks in CSV format.
      */
-    public String export(){
+    public String export() {
         StringBuilder ret = new StringBuilder();
 
-        int tmSize = LIST.size();
-        for (Task task : LIST ){
-            ret.append(task.toCSV());
+        int tmSize = taskList.size();
+        for (Task task : taskList) {
+            ret.append(task.toCsv());
             tmSize--;
             if (tmSize > 0) {
                 ret.append(System.getProperty("line.separator"));
@@ -173,9 +175,9 @@ public class TaskMaster {
     public String find(String keyword) {
         keyword = keyword.toLowerCase();
         StringBuilder ret = new StringBuilder();
-        if (LIST.size() > 0) {
+        if (taskList.size() > 0) {
             int number = 1;
-            for (Task task: LIST) {
+            for (Task task: taskList) {
                 number++;
                 if (task.getTaskName().toLowerCase().contains(keyword)) {
                     System.out.println("AAA");

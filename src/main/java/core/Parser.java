@@ -1,4 +1,5 @@
 package core;
+
 import exceptions.DukeException;
 
 /**
@@ -17,6 +18,7 @@ public class Parser {
 
     /**
      * Constructor for Parser class.
+     *
      * @param userInput The command to parse
      */
     public Parser(String userInput) {
@@ -34,6 +36,7 @@ public class Parser {
     /**
      * Returns first word of user input.
      * For example 'mark 1', 'mark' would be considered as the keyword.
+     *
      * @return The command which the user has typed.
      */
     public String getKeyword() {
@@ -44,6 +47,7 @@ public class Parser {
      * Returns integer from user input.
      * This assumes that the second item in the user input is an integer.
      * Example: 'mark 1', '1' is expected to be an integer.
+     *
      * @return The integer value which the user has passed in.
      * @throws DukeException Thrown when user input is invalid or missing.
      */
@@ -62,6 +66,7 @@ public class Parser {
 
     /**
      * Extracts commands for task creation.
+     *
      * @param desire Which Task is being called
      * @return The appropriate inputs needed to create a Task
      * @throws DukeException Thrown when there is invalid input or missing parameters
@@ -73,41 +78,41 @@ public class Parser {
         }
 
         switch (desire) {
-            case FIND:
-            case TODO: {
-                // Return descriptor
-                return new String[]{ userInput.trim() };
+        case FIND:
+        case TODO: {
+            // Return descriptor
+            return new String[]{userInput.trim()};
+        }
+
+        case EVENT: {
+            // Check for /from keyword
+            String[] fromSplit = this.splitByDelimiter(this.userInput, "/from", 3);
+
+            // Check for descriptor // This only allows "<DESC> /from <TIME> /to <TIME>"
+            if (fromSplit[0].isEmpty()) {
+                throw new exceptions.missing.Parameter(this.keyword);
             }
 
-            case EVENT: {
-                // Check for /from keyword
-                String[] fromSplit = this.splitByDelimiter(this.userInput,"/from",3);
+            // Check from /to keyword
+            String[] toSplit = this.splitByDelimiter(fromSplit[1], "/to", 3);
 
-                // Check for descriptor // This only allows "<DESC> /from <TIME> /to <TIME>"
-                if (fromSplit[0].isEmpty()) {
-                    throw new exceptions.missing.Parameter(this.keyword);
-                }
+            return new String[]{fromSplit[0].trim(), toSplit[0].trim(), toSplit[1].trim()};
+        }
 
-                // Check from /to keyword
-                String[] toSplit = this.splitByDelimiter(fromSplit[1],"/to",3);
+        case DEADLINE: {
+            // Check for /by keyword
+            String[] bySplit = this.splitByDelimiter(this.userInput, "/by", 3);
 
-                return new String[]{ fromSplit[0].trim() , toSplit[0].trim(), toSplit[1].trim() };
+            // Check for descriptor
+            if (bySplit[0].isEmpty()) {
+                throw new exceptions.missing.Parameter(this.keyword);
             }
 
-            case DEADLINE: {
-                // Check for /by keyword
-                String[] bySplit = this.splitByDelimiter(this.userInput,"/by",3);
+            return new String[]{bySplit[0].trim(), bySplit[1].trim()};
+        }
 
-                // Check for descriptor
-                if (bySplit[0].isEmpty()) {
-                    throw new exceptions.missing.Parameter(this.keyword);
-                }
-
-                return new String[]{ bySplit[0].trim() , bySplit[1].trim()};
-            }
-
-            default:
-                throw new exceptions.invalid.Input("DIO - extractTaskParams - used unexpectedly");
+        default:
+            throw new exceptions.invalid.Input("DIO - extractTaskParams - used unexpectedly");
         }
 
     }
@@ -117,14 +122,15 @@ public class Parser {
      * Example:
      * splitByDelimiter("Gymkhana /from TIME /to TIME","/from",2)
      * returns ["Gymkhana","TIME /to TIME"]
-     * @param in The string to split
+     *
+     * @param in        The string to split
      * @param delimiter The delimiter to watch for
-     * @param limit What is the maximum times the method should split
+     * @param limit     What is the maximum times the method should split
      * @return String array with limit number of entries
      * @throws DukeException Thrown when missing parameters or invalid input is detected
      */
-    private String[] splitByDelimiter(String in, String delimiter, int limit) throws DukeException{
-        String[] ret = in.split(delimiter,limit);
+    private String[] splitByDelimiter(String in, String delimiter, int limit) throws DukeException {
+        String[] ret = in.split(delimiter, limit);
         if (ret.length < 2) {
             throw new exceptions.missing.Parameter(this.keyword);
         } else if (ret.length > 2) {
@@ -136,65 +142,65 @@ public class Parser {
 
     /**
      * Parses save file and loads it into the given TaskMaster
+     *
      * @param task The task stored in the safe file
-     * @param tm The runtime TaskMaster object
+     * @param tm   The runtime TaskMaster object
      * @throws DukeException Thrown when input is invalid, which can appear when user manually edits the file.
      */
     public static void parseSaveFile(String[] task, TaskMaster tm) throws DukeException {
         switch (task[0]) {
-            case "T":
-                tm.addToDo(task[1], Boolean.parseBoolean(task[2]));
-                break;
-            case"D":
-                tm.addDeadLine(task[1], Boolean.parseBoolean(task[2]), DateHandler.convert(task[3]));
-                break;
-            case "E":
-                tm.addEvent(task[1], Boolean.parseBoolean(task[2]), DateHandler.convert(task[3]), DateHandler.convert(task[4]));
-                break;
-            default:
-                throw new exceptions.invalid.Input(String.format("Unknown command for %s",task[0]));
+        case "T":
+            tm.addToDo(task[1], Boolean.parseBoolean(task[2]));
+            break;
+        case "D":
+            tm.addDeadLine(task[1], Boolean.parseBoolean(task[2]),
+                    DateHandler.convert(task[3]));
+            break;
+        case "E":
+            tm.addEvent(task[1], Boolean.parseBoolean(task[2]),
+                    DateHandler.convert(task[3]), DateHandler.convert(task[4]));
+            break;
+        default:
+            throw new exceptions.invalid.Input(String.format("Unknown command for %s", task[0]));
         }
     }
 
-    public String parse(TaskMaster tm) throws DukeException{
+    public String parse(TaskMaster tm) throws DukeException {
         String[] args;
-//        System.out.println(this.getKeyword());
         switch (this.getKeyword()) {
-            case "list":
-                return tm.list();
-            case "mark":
-                return tm.markComplete(extractIndexParams(), true);
-            case "unmark":
-                return tm.markComplete(extractIndexParams(), false);
-            case "todo":
-                args = extractTaskParams(Keyword.TODO);
-//                System.out.println(args);
-                return tm.addToDo(args[0], false);
-            case "event":
-                args = extractTaskParams(Keyword.EVENT);
-                return tm.addEvent(args[0], false, DateHandler.convert(args[1]), DateHandler.convert(args[2]));
-            case "deadline":
-                args = extractTaskParams(Keyword.DEADLINE);
-                return tm.addDeadLine(args[0], false, DateHandler.convert(args[1]));
-            case "delete":
-                return tm.delete(extractIndexParams());
-            case "save":
-                DukeIO.writeSave(tm);
-                return "Saved!";
-            case "load":
-                DukeIO.readSave(tm);
-                return "Loaded!";
-            case "bye":
-                throw new exceptions.Quit();
-            case "find":
-                return tm.find(extractTaskParams(Keyword.FIND)[0]);
-            case "?":
-                throw new exceptions.Unimplemented();
-            default:
-                throw new exceptions.invalid.Command();
+        case "list":
+            return tm.list();
+        case "mark":
+            return tm.markComplete(extractIndexParams(), true);
+        case "unmark":
+            return tm.markComplete(extractIndexParams(), false);
+        case "todo":
+            args = extractTaskParams(Keyword.TODO);
+            return tm.addToDo(args[0], false);
+        case "event":
+            args = extractTaskParams(Keyword.EVENT);
+            return tm.addEvent(args[0], false, DateHandler.convert(args[1]), DateHandler.convert(args[2]));
+        case "deadline":
+            args = extractTaskParams(Keyword.DEADLINE);
+            return tm.addDeadLine(args[0], false, DateHandler.convert(args[1]));
+        case "delete":
+            return tm.delete(extractIndexParams());
+        case "save":
+            DukeIO.writeSave(tm);
+            return "Saved!";
+        case "load":
+            DukeIO.readSave(tm);
+            return "Loaded!";
+        case "bye":
+            throw new exceptions.Quit();
+        case "find":
+            return tm.find(extractTaskParams(Keyword.FIND)[0]);
+        case "?":
+            throw new exceptions.Unimplemented();
+        default:
+            throw new exceptions.invalid.Command();
         }
     }
-
 
 
 }

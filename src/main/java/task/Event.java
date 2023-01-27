@@ -1,7 +1,7 @@
 package task;
-import core.DateHandler;
-
 import java.time.LocalDateTime;
+
+import core.DateHandler;
 /**
  * Event is a type of Task.
  * Events have a 'from' and 'to' field to indicate the period which the task takes place.
@@ -25,18 +25,6 @@ public class Event extends Task {
         this.to = to;
     }
 
-//    /**
-//     * Constructs an Event task with the given name and timing details.
-//     * By default, the task created has its status set to false.
-//     *
-//     * @param name
-//     * @param from
-//     * @param to
-//     */
-//    public Event(String name, LocalDateTime from, LocalDateTime to) {
-//        this(name, false, from, to);
-//    }
-
     /**
      * Returns the String representation of an Event task.
      *
@@ -53,8 +41,8 @@ public class Event extends Task {
      * @return The name of this task and the timing details in CSV format.
      */
     @Override
-    public String toCSV() {
-        return String.format("E,%s,%s,%s,%s", this.name(), this.status,
+    public String toCsv() {
+        return String.format("E,%s,%s,%s,%s", this.getTaskName(), this.getStatus(),
                 DateHandler.unconvert(this.from), DateHandler.unconvert(this.to));
     }
 

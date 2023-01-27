@@ -8,4 +8,5 @@ public class Quit extends DukeException {
     public Quit() {
         super("");
     }
+
 }
