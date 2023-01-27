@@ -7,12 +7,18 @@ public class Duke {
     private TaskList tasks;
     private String filePath;
 
+    /**
+     * A public constructor to initialize Duke instance.
+     *
+     * @param filePath Path of file.
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.tasks = new TaskList();
         this.filePath = filePath;
     }
 
+    /** Runs Duke bot. */
     public void run() {
         this.storage.loadData(this.tasks);
         Ui.welcomeMsg();
