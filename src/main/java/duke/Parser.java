@@ -9,6 +9,7 @@ import duke.commands.MarkCommand;
 import duke.commands.UnmarkCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.ListCommand;
+import duke.commands.SearchCommand;
 
 
 public class Parser {
@@ -46,7 +47,10 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             command = new ListCommand(input);
             break;
-            case EXIT_COMMAND:
+        case SearchCommand.COMMAND_WORD:
+            command = new SearchCommand(input);
+            break;
+        case EXIT_COMMAND:
             command = null;
             break;
         default:

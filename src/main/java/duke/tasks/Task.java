@@ -32,6 +32,10 @@ public abstract class Task implements Serializable {
         return UNMARKED_RESPONSE + UserInterface.INDENT + this;
     }
 
+    public boolean hasKeyword(String keyword) {
+        return name.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return (isCompleted ? COMPLETED : NOT_COMPLETED) + name;
