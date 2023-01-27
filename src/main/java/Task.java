@@ -30,7 +30,7 @@ public class Task {
      * Returns the status of the task
      * @return the status of the task - done or not
      */
-    public boolean getIsDone() {
+    public boolean isDone() {
         return this.isDone;
     }
 
@@ -42,7 +42,19 @@ public class Task {
         }
     }
 
+    public static Task parse(String str) {
+        Task task;
+        String[] strArray = str.split("] ");
+        switch (strArray[0].charAt(0)) {
+        case 'T':
+            task = new Todo(strArray[2]);
+        default:
+            task = new Task(strArray[1]);
+        }
+        return task;
+    }
 
+    @Override
     public String toString() {
         return "[" + this.status() + "] " + this.name;
     }
