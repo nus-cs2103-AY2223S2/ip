@@ -2,6 +2,7 @@ package duke.helper;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -63,5 +64,12 @@ public class Ui {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + size + " tasks in the list.");
+    }
+
+    public static void filter(ArrayList<Task> taskList) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task : taskList) {
+            System.out.println(task);
+        }
     }
 }
