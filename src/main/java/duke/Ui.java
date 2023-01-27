@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+import duke.exceptions.DukeException;
 
 public class Ui {
     private static final int INDENT_LEVEL = 4;

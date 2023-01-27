@@ -1,4 +1,4 @@
-package duke;
+package duke.exceptions;
 
 public class DukeSaveLoadException extends DukeException {
     public DukeSaveLoadException(String message) {
