@@ -1,3 +1,11 @@
+package panav.command;
+
+import panav.storage.Storage;
+import panav.task.Deadline;
+import panav.task.Task;
+import panav.task.TaskList;
+import panav.ui.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,6 +29,13 @@ public class DeadlineCommand extends Command {
 
     }
 
+    /**
+     * Formats the date according to 'MMM dd yyyy' if it's given in the correct format of
+     * 'yyyy-mm-dd', otherwise it just returns the string.
+     *
+     * @param dateString the string to be formatted.
+     * @return either the formatted date or the original string itself.
+     */
     public static String formatDate(String dateString) {
         LocalDate d = null;
         String result = dateString;

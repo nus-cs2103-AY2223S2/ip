@@ -1,4 +1,11 @@
-import java.io.IOException;
+package panav.command;
+
+import panav.exception.DukeException;
+import panav.exception.InvalidNumberException;
+import panav.storage.Storage;
+import panav.task.Task;
+import panav.task.TaskList;
+import panav.ui.Ui;
 
 public class DeleteCommand extends Command {
 
@@ -22,6 +29,15 @@ public class DeleteCommand extends Command {
         }
 
     }
+
+    /**
+     * Returns the index number for commands which manipulate the list.
+     *
+     * @param command The command which is manipulating list.
+     * @param len The number of elements in the list.
+     * @return Index number in command.
+     * @throws InvalidNumberException If the index doesn't exist.
+     */
     public static int readNumber(String command, int len) throws InvalidNumberException {
         int number = Integer.parseInt(String.valueOf(command.charAt(command.length() - 1)));
         if (number > len || number < 1) {

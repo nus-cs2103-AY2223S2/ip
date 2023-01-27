@@ -1,3 +1,8 @@
+package panav.storage;
+
+import panav.exception.ToDoDescriptionException;
+import panav.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +18,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads the existing list of tasks from text file.
+     *
+     * @throws FileNotFoundException if text file doesn't exist.
+     * @throws ToDoDescriptionException if todo is missing description.
+     */
     public ArrayList<Task> load() throws FileNotFoundException, ToDoDescriptionException {
         ArrayList<Task> list = new ArrayList<>();
         File f = new File(filePath);
@@ -43,6 +54,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Writes the changes to the list to the file.
+     *
+     * @param tasks the TaskList containing the tasks.
+     * @throws IOException in case if folder is not found or some other exception.
+     */
     public void write(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         String textToAdd = "";

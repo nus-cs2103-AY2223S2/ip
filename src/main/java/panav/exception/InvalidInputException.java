@@ -3,6 +3,7 @@
  * his list using commands such as 'delete', 'mark' etc. but inputs an index number
  * which doesn't exist in the list.
  */
+package panav.exception;
 public class InvalidInputException extends DukeException {
 
     public InvalidInputException(String message) {
