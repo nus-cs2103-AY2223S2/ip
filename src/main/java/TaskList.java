@@ -1,15 +1,22 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private List<Task> taskList = new LinkedList<>();
+    private List<Task> taskList = new ArrayList<>();
 
     public int getListSize() {
         return taskList.size();
     }
 
-    public void addTask(String taskName) {
-        Task newTask = new Task(taskName);
+    public Task getTask(int taskIndex) {
+        /*
+        System.out.println(taskIndex);
+        System.out.println(this.taskList);
+        */
+        return this.taskList.get(taskIndex);
+    }
+
+    public void addTask(Task newTask) {
         taskList.add(newTask);
     }
 
@@ -18,12 +25,12 @@ public class TaskList {
     }
 
     public void markTask(int taskIndex) {
-        Task taskToMark = this.taskList.get(taskIndex - 1);
+        Task taskToMark = this.getTask(taskIndex);
         taskToMark.mark();
     }
 
     public void unmarkTask(int taskIndex) {
-        Task taskToMark = this.taskList.get(taskIndex - 1);
+        Task taskToMark = this.getTask(taskIndex);
         taskToMark.unmark();
     }
 
