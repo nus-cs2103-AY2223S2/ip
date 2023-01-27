@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
-        String greeting = formatStr("Hello! I'm Muse\n"
+        String greeting = formatStr("Hello! I'm Muse!\n"
                 + "What can I do for you?");
         System.out.println(greeting);
         Scanner sc = new Scanner(System.in);
