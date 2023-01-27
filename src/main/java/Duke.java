@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Duke {
@@ -49,11 +52,19 @@ public class Duke {
             return new ToDo(taskArray[2].trim(), taskArray[1].trim().equals("X"));
         } else if (taskType.equals("D")) {
             return new Deadline(taskArray[2].trim(), taskArray[1].trim().equals("X"),
-                    taskArray[3].trim().substring(4));
+                    parseDateTime(taskArray[3].trim().substring(4)));
         } else {
             return new Event(taskArray[2].trim(), taskArray[1].trim().equals("X"),
-                    taskArray[3].trim().substring(6), taskArray[4].trim().substring(4));
+                    parseDateTime(taskArray[3].trim().substring(6)),
+                    parseDateTime(taskArray[4].trim().substring(4)));
         }
+    }
+
+    static LocalDateTime parseDateTime(String dateTimeString) {
+        String[] dateTimeArray = dateTimeString.split(" ");
+        LocalDate date = LocalDate.parse(dateTimeArray[0]);
+        LocalTime time = LocalTime.parse(dateTimeArray[1]);
+        return LocalDateTime.of(date, time);
     }
 
     static void saveTasksInFile(String filePath, TaskList taskList) throws IOException {
