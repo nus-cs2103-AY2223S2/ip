@@ -12,10 +12,6 @@ import aqua.exception.ProcedureExecutionException;
 
 /** Manager of inputs and outputs. */
 public class IoManager {
-    /** Line separator. */
-    private static String SEPARATOR =
-            "____________________________________________________________";
-    
     /** Greeting message. */
     private static final String MESSAGE_GREETING = 
             "Konaqua~~ Perfect idol gamer nekomimi super maid Minato Aqua desu!";
@@ -114,20 +110,6 @@ public class IoManager {
      * @param msg - the message to print.
      */
     public void reply(String msg) {
-        outputConsumer.accept(formatMessage(msg));
-    }
-
-
-    private String formatMessage(String msg) {
-        StringBuilder builder = new StringBuilder();
-        try (Scanner scanner = new Scanner(msg)) {
-            while (scanner.hasNextLine()) {
-                builder.append(String.format("\t  %s\n", scanner.nextLine()));
-            }
-        }
-        return String.format("\t%s\n%s\t%s\n",
-                SEPARATOR,
-                builder.toString(),
-                SEPARATOR);
+        outputConsumer.accept(msg);
     }
 }
