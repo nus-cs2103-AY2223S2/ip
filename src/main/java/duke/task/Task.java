@@ -30,6 +30,16 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String toExport() {
+        String returnString = "";
+        if (isDone) {
+            returnString = "[X] ";
+        } else {
+            returnString = "[ ] ";
+        }
+        return returnString + title;
+    }
+
     @Override
     public String toString() {
         String returnString = "";

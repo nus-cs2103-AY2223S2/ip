@@ -24,7 +24,7 @@ public class Storage {
         File dukeData = new File("duke_data.txt");
         try (PrintWriter writer = new PrintWriter(new FileWriter(dukeData));) {
             for (Task item : tasks.getList()) {
-                writer.println(item.toString()
+                writer.println(item.toExport()
                         .replace("[T]", "todo")
                         .replace("[D]", "deadline")
                         .replace("(by:", "/by")

@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import duke.enums.Views;
 import duke.DukeException;
@@ -27,7 +28,12 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toString() {
+    public String toExport() {
         return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmm")) + ")";
     }
 }

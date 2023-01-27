@@ -1,4 +1,5 @@
 clear
+mark1
 todo one
 todotwo
 list
