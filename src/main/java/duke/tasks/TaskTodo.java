@@ -30,4 +30,15 @@ public class TaskTodo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof TaskTodo)) {
+            return false;
+        }
+        return true;
+    }
 }

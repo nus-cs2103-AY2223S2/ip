@@ -46,4 +46,22 @@ public class TaskEvent extends Task {
             Task.formatDate(this.toTime)
         );
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof TaskEvent)) {
+            return false;
+        }
+        TaskEvent other = (TaskEvent) obj;
+        if (!other.fromTime.equals(this.fromTime)) {
+            return false;
+        }
+        if (!other.toTime.equals(this.toTime)) {
+            return false;
+        }
+        return true;
+    }
 }

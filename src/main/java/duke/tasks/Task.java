@@ -65,4 +65,19 @@ public abstract class Task {
     protected static String formatDate(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Task)) {
+            return false;
+        }
+        Task other = (Task) obj;
+        if (other.isDone != this.isDone) {
+            return false;
+        }
+        if (!other.description.equals(this.description)) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -41,4 +41,19 @@ public class TaskDeadline extends Task {
             Task.formatDate(this.endTime)
         );
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof TaskDeadline)) {
+            return false;
+        }
+        TaskDeadline other = (TaskDeadline) obj;
+        if (!other.endTime.equals(other.endTime)) {
+            return false;
+        }
+        return true;
+    }
 }
