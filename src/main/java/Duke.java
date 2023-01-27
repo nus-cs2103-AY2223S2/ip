@@ -1,4 +1,3 @@
-import java.io.*;
 
 import duke.Parser;
 import duke.Storage;
@@ -7,14 +6,25 @@ import duke.Ui;
 
 import exception.DukeException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * A chatbot that receives user's input on various predetermined
+ * command types and performs relevant functions.
+ */
 public class Duke {
     private Ui ui;
     private static TaskList tasks;
     private Storage storage;
     private Parser parser;
 
+    /**
+     * Initializes a bot with provided path to the storage space.
+     *
+     * @param filePath Path to the storage file.
+     * @param directoryPath Path to the storage directory.
+     */
     public Duke(String filePath, String directoryPath) {
         ui = new Ui();
         storage = new Storage(filePath, directoryPath);
@@ -27,6 +37,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the bot and handles users' inputs
+     */
     public void run() {
         Ui.greet();
         Scanner sc = new Scanner(System.in);
@@ -38,6 +51,11 @@ public class Duke {
         Ui.goodbye();
     }
 
+    /**
+     * Initiates the bot.
+     *
+     * @param args Supplied command-line arguments.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt", "/data").run();
     }
