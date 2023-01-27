@@ -1,110 +1,77 @@
+import Parser.Parser;
+import Ui.Ui;
 import entities.TaskList;
-import enums.Commands;
 import exceptions.DukeFileNotFoundException;
 import exceptions.EmptyDescException;
 import exceptions.InvalidInputException;
 import storage.Storage;
+import Commands.*;
 
-import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 public class Duke {
+    private TaskList list;
+    private Storage storage;
+    private Ui ui;
+    private Parser parser;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        parser = new Parser();
+        storage = new Storage(filePath);
+        try {
+            storage.connect();
+            ui.print("Successfully connected to the database!");
+            list = new TaskList(storage);
+        } catch (FileNotFoundException e) {
+            ui.printError(e.getMessage());
+        } catch (InvalidInputException e) {
+            ui.printError(e.getMessage());
+        }
+
+    }
 
     public static void main(String[] args) throws EmptyDescException, InvalidInputException, DukeFileNotFoundException {
-        TaskList list = new TaskList(100);
-        Storage storage = new Storage("user.home", list);
-        UI ui = new UI();
+        new Duke("duke.txt").run();
+    }
+
+    private void run() throws InvalidInputException, EmptyDescException {
         ui.showWelcome();
-        storage.connect();
-        storage.load();
-        processInputs(ui, list, storage);
-    }
-
-    //exits the application when "exit" is inputted
-    private static void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("---------------------------------------");
-    }
-
-    //adds items into the list and prints it when "list" is the input
-    //our list takes in Tasks that are marked with a boolean.
-    //processes the list with inputs from the user with list and Tasks operations.
-    private static void processInputs(UI ui, TaskList list, Storage storage) throws InvalidInputException, EmptyDescException {
-        Scanner sc = new Scanner(System.in).useDelimiter(" ");
-        String input = sc.nextLine();
+        ui.startScanner();
+        String input = ui.readCommand();
         while (input.equals("bye") == false) {
             try {
-                String[] split = input.split(" ");
-                Commands type = Commands.valueOf(split[0].toUpperCase().strip());
-                switch (type) {
-                case LIST:
-                    ui.processList(list);
-                    break;
-                case MARK:
-                    if (split.length < 2) {
-                        throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-                    }
-                    ui.processMark(list, Integer.parseInt(split[1]) - 1);
-                    break;
-                case UNMARK:
-                    if (split.length < 2) {
-                        throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-                    }
-                    ui.processUnmark(list, Integer.parseInt(split[1]) - 1);
-                    break;
-                case TODO:
-                    if (split.length < 2) {
-                        throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-                    }
-                    String task = "";
-                    for (int i = 1; i < split.length; i++) {
-                        task += split[i] + " ";
-                    }
-                    ui.processTodo(list, task.trim());
-                    break;
-                case DEADLINE:
-                    if (split.length < 2) {
-                        throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-                    }
-                    String[] parseInput = input.split("/by");
-                    ui.processDeadline(list, parseInput[0].replaceFirst("deadline ", ""), parseInput[1]);
-                    break;
-                case EVENT:
-                    if (split.length < 2) {
-                        throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-                    }
-                    String[] parseFirst = input.split("/from");
-                    String[] parseSecond = parseFirst[1].split("/to");
-                    ui.processEvent(list, parseFirst[0].replaceFirst("event ", ""), parseSecond[0], parseSecond[1]);
-                    break;
-                case DELETE:
-                    if (split.length < 2) {
-                        throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-                    }
-                    ui.processDelete(list, Integer.parseInt(split[1]) - 1);
-                    break;
-                case DATE:
-                    if (split.length < 2) {
-                        throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-                    }
-                    ui.processPrintDate(list, split[1].trim());
-                    break;
-                default:
-                    throw new InvalidInputException("Sorry! I have no idea what that means ??? >:c");
+                Command command = parser.parseCommand(input);
+                if (command instanceof ListCommand) {
+                    ((ListCommand) command).processCommand(list, ui);
+                } else if (command instanceof DeleteCommand) {
+                    ((DeleteCommand) command).processCommand(list, parser.parseIndex(input), ui);
+                } else if (command instanceof MarkCommand) {
+                    ((MarkCommand) command).processCommand(list, parser.parseIndex(input), ui);
+                } else if (command instanceof UnmarkCommand) {
+                    ((UnmarkCommand) command).processCommand(list, parser.parseIndex(input), ui);
+                } else if (command instanceof TodoCommand) {
+                    ((TodoCommand) command).processCommand(list, parser.parseDescription(input), ui);
+                } else if (command instanceof DeadlineCommand) {
+                    ((DeadlineCommand) command).processCommand(list, parser.parseDescription(input),
+                            parser.parseDeadline(input), ui);
+                } else if (command instanceof EventCommand) {
+                    String[] eventlist = parser.parseEvent(input);
+                    ((EventCommand) command).processCommand(list, parser.parseDescription(input),
+                            eventlist[0], eventlist[1], ui);
+                } else if (command instanceof ExitCommand) {
+                    ((ExitCommand) command).processCommand(ui);
+                } else if (command instanceof SameDateCommand) {
+                    ((SameDateCommand) command).processCommand(list, parser.parseDescription(input), ui);
                 }
-            } catch (IllegalArgumentException e) {
-                System.out.println("Sorry! I have no idea what that means ??? >:c");
-                System.out.println("---------------------------------------");
             } catch (InvalidInputException e) {
-                System.out.println(e);
-                System.out.println("---------------------------------------");
+                ui.printError(e.getMessage());
+                ui.printDivider();
             }
-            if (!sc.hasNextLine()) {
-                break;
-            }
-            input = sc.nextLine();
+            input = ui.readCommand();
         }
-        storage.save();
-        exit();
+        storage.save(this.list);
+        ui.printBye();
 
     }
 }

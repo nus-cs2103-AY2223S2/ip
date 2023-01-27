@@ -1,6 +1,6 @@
 package enums;
 
-public enum Commands {
+public enum CommandEnums {
     BYE("bye"),
     LIST("list"),
     TODO("todo"),
@@ -13,7 +13,7 @@ public enum Commands {
 
     private final String command;
 
-    Commands(String command) {
+    CommandEnums(String command) {
         this.command = command;
     }
 

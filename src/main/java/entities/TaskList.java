@@ -1,13 +1,22 @@
 package entities;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class TaskList {
-    protected int init;
-    ArrayList<Task> list = new ArrayList<>(init);
+import exceptions.DukeFileNotFoundException;
+import exceptions.InvalidInputException;
+import storage.Storage;
+import Ui.Ui;
 
-    public TaskList(int init) {
-        this.init = init;
+public class TaskList {
+    protected Storage storage;
+    ArrayList<Task> list = new ArrayList<>();
+
+    public TaskList(Storage storage) throws InvalidInputException, FileNotFoundException {
+        this.storage = storage;
+        if (!storage.load(this)) {
+            throw new InvalidInputException("Sorry! I have detected weird inputs in the commands");
+        }
     }
 
     public void addTask(Task t) {
