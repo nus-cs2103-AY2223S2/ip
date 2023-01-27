@@ -7,7 +7,7 @@ import ui.TextUi;
 /**
  * Command for exiting from the program
  */
-public class ExitCommand extends CommandClass {
+public class ExitCommand extends Command {
 
     /**
      * Default constructor

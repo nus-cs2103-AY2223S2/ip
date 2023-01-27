@@ -7,7 +7,7 @@ import ui.TextUi;
 /**
  * Mark a task as undone
  */
-public class UnmarkCommand extends CommandClass {
+public class UnmarkCommand extends Command {
     /**
      * Default constructor
      * @param command the command

@@ -7,7 +7,7 @@ import ui.TextUi;
 /**
  * Mark a task as done
  */
-public class MarkCommand extends CommandClass {
+public class MarkCommand extends Command {
 
     /**
      * Default constructor, saves the command

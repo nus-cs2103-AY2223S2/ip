@@ -6,7 +6,7 @@ import ui.TextUi;
 /**
  * List commands
  */
-public class ListCommand extends CommandClass {
+public class ListCommand extends Command {
 
     /**
      * Default constructor, saves the command

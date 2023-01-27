@@ -1,6 +1,6 @@
 package duke;
 
-import command.CommandClass;
+import command.Command;
 import storage.Storage;
 
 import task.TaskList;
@@ -97,7 +97,7 @@ public class Duke {
      * @throws DukeException when the command is unknown
      */
     public boolean handleCommand(String inMsg, boolean suppressPrint) throws DukeException {
-        CommandClass command = Parser.parseCommand(inMsg, suppressPrint);
+        Command command = Parser.parseCommand(inMsg, suppressPrint);
         command.execute(taskList, ui);
         return !command.isExit();
     }

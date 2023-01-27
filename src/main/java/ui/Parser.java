@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 
 import static java.util.Map.entry;
 
-import command.CommandClass;
+import command.Command;
 import duke.DukeException;
 
 import java.lang.reflect.Constructor;
@@ -49,12 +49,12 @@ public class Parser {
      * @return the command object
      * @throws DukeException when any error occurs
      */
-    public static CommandClass parseCommand(String command, boolean suppressPrint) throws DukeException {
+    public static Command parseCommand(String command, boolean suppressPrint) throws DukeException {
         try {
             Class<?> c = Class.forName("command." + stringToCommandClass.get(command.split(" ")[0]));
             Constructor<?> cons = c.getConstructor(String.class, boolean.class);
             Object object = cons.newInstance(command, !suppressPrint);
-            return (CommandClass) object;
+            return (Command) object;
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
                  | InvocationTargetException e) {
             throw new DukeException(e.toString());

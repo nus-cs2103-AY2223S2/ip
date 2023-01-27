@@ -11,7 +11,7 @@ import ui.TextUi;
 /**
  * A class for many tasks
  */
-public class TaskCommand extends CommandClass {
+public class TaskCommand extends Command {
     protected final String commandName;
 
     /**
