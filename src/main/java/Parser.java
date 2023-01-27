@@ -5,6 +5,9 @@ import formatters.Response;
 import task.Deadline;
 import task.Event;
 import task.ToDo;
+import utils.Utility;
+
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class Parser {
@@ -52,13 +55,20 @@ public class Parser {
      */
     public String createEvent(String input) {
         String output;
+        String details;
+        LocalDateTime startDate;
+        LocalDateTime endDate;
         HashMap<String, String> parsedDetails;
         try {
             parsedDetails = Event.parse(input);
+            details = parsedDetails.get("details");
+            startDate = Utility.parseDateTime(parsedDetails.get("from"));
+            endDate = Utility.parseDateTime(parsedDetails.get("to"));
         } catch (DukeRuntimeException e) {
             return e.getMessage();
         }
-        Event event = new Event(parsedDetails.get("details"), parsedDetails.get("from"), parsedDetails.get("to"));
+
+        Event event = new Event(details, startDate, endDate);
         taskManager.addTask(event);
         output =  Response.EVENT_ADDED + "\n" + taskManager.displayTasks(false);
         return output;
@@ -72,13 +82,17 @@ public class Parser {
      */
     public String createDeadline(String input) {
         String output;
+        String details;
+        LocalDateTime deadlineDate;
         HashMap<String, String> parsedDetails;
         try {
             parsedDetails = Deadline.parse(input);
+            details = parsedDetails.get("details");
+            deadlineDate = Utility.parseDateTime(parsedDetails.get("deadline"));
         } catch (DukeRuntimeException e) {
             return e.getMessage();
         }
-        Deadline deadline = new Deadline(parsedDetails.get("details"), parsedDetails.get("deadline"));
+        Deadline deadline = new Deadline(details, deadlineDate);
         taskManager.addTask(deadline);
         output = Response.DEADLINE_ADDED + "\n" + taskManager.displayTasks(false);
         return output;

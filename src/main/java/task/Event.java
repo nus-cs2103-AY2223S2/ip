@@ -5,7 +5,9 @@ import errors.DukeInvalidCommandException;
 import errors.DukeRuntimeException;
 import formatters.Format;
 import formatters.Response;
+import utils.Utility;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,10 +18,10 @@ import java.util.List;
 
 public class Event extends Task{
 
-    private final String start;
-    private final String end;
+    private final LocalDateTime start;
+    private final LocalDateTime end;
 
-    public Event(String details, String start, String end) {
+    public Event(String details, LocalDateTime start, LocalDateTime end) {
         super(details);
         this.start = start;
         this.end = end;
@@ -55,7 +57,7 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return ("EVENT: " + super.getDetails() + " (From " + start +" to " + end + ")" +
+        return ("EVENT: " + super.getDetails() + " (From " + Utility.getDateTimeString(start) +" to " + Utility.getDateTimeString(end) + ")" +
                 Format.getCompletionDisplay(super.isCompleted()));
     }
 
@@ -100,6 +102,7 @@ public class Event extends Task{
         String details = String.join(" ", detailsSublist);
         String from = String.join(" ", fromSublist);
         String to = String.join(" ", toSublist);
+
 
         HashMap<String, String> result = new HashMap<>();
         result.put("details", details);
