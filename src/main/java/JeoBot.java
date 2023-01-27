@@ -26,7 +26,7 @@ public class JeoBot {
     protected TaskList taskList;
 
     public enum Command {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, DUE
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, DUE, FIND
     }
 
     public JeoBot(String path) {
@@ -51,7 +51,6 @@ public class JeoBot {
             String s = sc.nextLine();
             try {
                 ui.showBodyDivider();
-                // Parse
                 HashMap<String, String> hm = Parser.parseString(s);
                 Command command = Command.valueOf(hm.get("command").toUpperCase());
                 switch (command) {
@@ -107,6 +106,9 @@ public class JeoBot {
                     LocalDate byDate = LocalDate.parse(by, formatterParse);
                     ui.showTasksDue(byDate, taskList);
                     break;
+                case FIND:
+                    String keyword = hm.get("key");
+                    ui.showTasksWithKeyword(keyword, taskList);
                 }
                 store.save(taskList.getTaskList());
             } catch (IOException e) {
