@@ -40,7 +40,7 @@ public class ToDo extends Task {
      * @return A string representation of this task.
      */
     @Override
-    public String formatStore() {
-        return ("T | " + super.formatStore());
+    public String formatForStorage() {
+        return ("T | " + super.formatForStorage());
     }
 }

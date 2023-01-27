@@ -7,13 +7,13 @@ import java.util.Scanner;
  * that handles interaction with user.
  */
 public class Ui {
-    private Scanner sc;
+    private Scanner scanner;
 
     /**
      * Instantiates Ui.
      */
     public Ui() {
-        this.sc = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -43,13 +43,13 @@ public class Ui {
      * @return The input string read.
      */
     public String readCommand() {
-        return this.sc.nextLine();
+        return this.scanner.nextLine();
     }
 
     /**
      * Prints out the given string to screen.
      */
-    public void print(String errMessage) {
+    public void printMsg(String errMessage) {
         System.out.println(errMessage + "\n");
     }
 }

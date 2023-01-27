@@ -8,14 +8,21 @@ import duke.exception.OutOfBoundsException;
  * Encapsulates the related fields and behavior of the list containing tasks.
  */
 public class TaskList {
+<<<<<<< HEAD
     //An ArrayList to store the tasks.
     private ArrayList<Task> taskList;
+=======
+    /**
+     * An ArrayList to store the tasks.
+     */
+    private ArrayList<Task> tasks;
+>>>>>>> branch-A-CodingStandard
 
     /**
      * Instantiates TaskList with no arguments given.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -24,7 +31,7 @@ public class TaskList {
      * @param taskList The list of our tasks fetched from hard drive storage.
      */
     public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+        this.tasks = taskList;
     }
 
     /**
@@ -33,7 +40,7 @@ public class TaskList {
      * @return The ArrayList containing the tasks.
      */
     public ArrayList<Task> getTaskList() {
-        return this.taskList;
+        return this.tasks;
     }
 
     /**
@@ -42,10 +49,11 @@ public class TaskList {
      * @param task The task to be added.
      */
     public void add(Task task) {
-        this.taskList.add(task);
+        this.tasks.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println(" " + task);
-        System.out.println("Now you have " + this.taskList.size() + " task(s) in your list.\n");
+        System.out.println("Now you have "
+                + this.tasks.size() + " task(s) in your list.\n");
     }
 
     /**
@@ -56,14 +64,14 @@ public class TaskList {
      *                              or more than the index of the last list element.
      */
     public void delete(int index) throws OutOfBoundsException {
-        if (index < 0 || index >= this.taskList.size()) {
-            throw new OutOfBoundsException("Item at given index does not exist! " +
-                    "Please enter a valid index.");
+        if (index < 0 || index >= this.tasks.size()) {
+            throw new OutOfBoundsException("Item at given index does not exist! "
+                    + "Please enter a valid index.");
         }
-        Task removed = this.taskList.remove(index);
-        System.out.println("Noted. I've removed this task:\n" +
-                " " + removed + "\nNow you have " +
-                this.taskList.size() + " task(s) in the list.\n");
+        Task removed = this.tasks.remove(index);
+        System.out.println("Noted. I've removed this task:\n" + " "
+                + removed + "\nNow you have " + this.tasks.size()
+                + " task(s) in the list.\n");
     }
 
     /**
@@ -73,14 +81,14 @@ public class TaskList {
      * @throws OutOfBoundsException If index given is less than 0
      *                              or more than the index of the last list element.
      */
-    public void mark(int index) throws OutOfBoundsException {
-        if (index < 0 || index >= this.taskList.size()) {
-            throw new OutOfBoundsException("Item at given index does not exist! " +
-                    "Please enter a valid index.");
+    public void markIsDone(int index) throws OutOfBoundsException {
+        if (index < 0 || index >= this.tasks.size()) {
+            throw new OutOfBoundsException("Item at given index does not exist! "
+                    + "Please enter a valid index.");
         }
-        this.taskList.get(index).mark();
+        this.tasks.get(index).markIsDone();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println(" " + this.taskList.get(index) + "\n");
+        System.out.println(" " + this.tasks.get(index) + "\n");
     }
 
     /**
@@ -90,28 +98,28 @@ public class TaskList {
      * @throws OutOfBoundsException If index given is less than 0
      *                              or more than the index of the last list element.
      */
-    public void unmark(int index) throws OutOfBoundsException {
-        if (index < 0 || index >= this.taskList.size()) {
-            throw new OutOfBoundsException("Item at given index does not exist! " +
-                    "Please enter a valid index.");
+    public void unmarkIsDone(int index) throws OutOfBoundsException {
+        if (index < 0 || index >= this.tasks.size()) {
+            throw new OutOfBoundsException("Item at given index does not exist! "
+                    + "Please enter a valid index.");
         }
-        this.taskList.get(index).unmark();
+        this.tasks.get(index).unmarkIsDone();
         System.out.println("OK, I've marked this task as not done:");
-        System.out.println(" " + this.taskList.get(index) + "\n");
+        System.out.println(" " + this.tasks.get(index) + "\n");
     }
 
     /**
      * Prints all the tasks in the list.
      */
     public void print() {
-        int size = this.taskList.size();
+        int size = this.tasks.size();
         if (size == 0) {
             System.out.println("There are no items in the list.\n");
             return;
         }
         System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < size; i++) {
-            String toPrint = String.format("%d. %s", (i + 1), this.taskList.get(i));
+        for (int i = 0; i < size; i++) {
+            String toPrint = String.format("%d. %s", (i + 1), this.tasks.get(i));
             System.out.println(toPrint);
         }
         System.out.println("");

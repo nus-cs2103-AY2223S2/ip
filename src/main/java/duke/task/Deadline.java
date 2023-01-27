@@ -43,7 +43,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String toPrint = String.format("[D]%s (by: %s)",
-                super.toString(), Formatter.formatDatePrint(this.end));
+                super.toString(), Formatter.formatDateForPrint(this.end));
         return toPrint;
     }
 
@@ -53,8 +53,8 @@ public class Deadline extends Task {
      * @return A string representation of this task.
      */
     @Override
-    public String formatStore() {
-        return ("D | " + super.formatStore()
-                + String.format(" | %s", Formatter.formatDateStore(this.end)));
+    public String formatForStorage() {
+        return ("D | " + super.formatForStorage()
+                + String.format(" | %s", Formatter.formatDateForStorage(this.end)));
     }
 }
