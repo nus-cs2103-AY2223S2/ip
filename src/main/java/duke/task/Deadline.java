@@ -23,6 +23,10 @@ public class Deadline extends Task {
         return icon.equals(ICON);
     }
 
+    public static boolean canDeserialize(Serializer serializer) {
+        return hasIcon(serializer.get(CATEGORY_KEY).toString());
+    }
+
     public static Deserializer getDeserializer() {
         return (Serializer serializer) -> {
             String description = serializer.get(DESCRIPTION_KEY).toString();
@@ -43,7 +47,8 @@ public class Deadline extends Task {
 
     @Override
     public String serialize() {
-        Serializer ts = new TaskSerializer(ICON);
+        Serializer ts = new TaskSerializer();
+        ts.add(CATEGORY_KEY, ICON);
         ts.add(DESCRIPTION_KEY, description);
         ts.add(COMPLETED_KEY, completed);
         ts.add(BY_KEY, by.format(RECEIVE_FORMAT));
@@ -52,6 +57,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), by.format(PRINT_FORMAT));
+        return String.format("[%s]%s (by: %s)", ICON, super.toString(), by.format(PRINT_FORMAT));
     }
 }

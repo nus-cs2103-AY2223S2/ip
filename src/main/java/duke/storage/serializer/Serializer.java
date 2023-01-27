@@ -11,20 +11,21 @@ public class Serializer {
         map = new HashMap<>();
     }
 
+    public Serializer(String serialized) {
+        this();
+        String[] entries = serialized.split(GROUP_DELIMITER);
+        for (String entry: entries) {
+            String[] keyVal = entry.split(RECORD_DELIMITER);
+            add(keyVal[0], keyVal[1]);
+        }
+    }
+
     public void add(String key, Object value) {
         map.put(key, value);
     }
 
     public Object get(String key) {
         return map.get(key);
-    }
-
-    public void deserialize(String s) {
-        String[] entries = s.split(GROUP_DELIMITER);
-        for (String entry: entries) {
-            String[] keyVal = entry.split(RECORD_DELIMITER);
-            add(keyVal[0], keyVal[1]);
-        }
     }
 
     @Override

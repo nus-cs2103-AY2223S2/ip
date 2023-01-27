@@ -25,6 +25,10 @@ public class Event extends Task {
         return s.equals(ICON);
     }
 
+    public static boolean canDeserialize(Serializer serializer) {
+        return hasIcon(serializer.get(CATEGORY_KEY).toString());
+    }
+
     public static Deserializer getDeserializer() {
         return (Serializer serializer) -> {
             String description = serializer.get(DESCRIPTION_KEY).toString();
@@ -52,7 +56,8 @@ public class Event extends Task {
 
     @Override
     public String serialize() {
-        Serializer ts = new TaskSerializer(ICON);
+        Serializer ts = new TaskSerializer();
+        ts.add(CATEGORY_KEY, ICON);
         ts.add(DESCRIPTION_KEY, description);
         ts.add(COMPLETED_KEY, completed);
         ts.add(FROM_KEY, from.format(RECEIVE_FORMAT));
@@ -62,7 +67,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), from.format(PRINT_FORMAT),
+        return String.format("[%s]%s (from: %s to: %s)", ICON, super.toString(), from.format(PRINT_FORMAT),
                 to.format(PRINT_FORMAT));
     }
 }

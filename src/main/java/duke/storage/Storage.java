@@ -23,8 +23,7 @@ public class Storage {
             f = new File(DATA_PATH);
             sc = new Scanner(f);
             while (sc.hasNextLine()) {
-                TaskSerializer ts = new TaskSerializer();
-                ts.deserialize(sc.nextLine());
+                TaskSerializer ts = new TaskSerializer(sc.nextLine());
                 tasks.add(ts.createTask());
             }
         } catch (FileNotFoundException e) {

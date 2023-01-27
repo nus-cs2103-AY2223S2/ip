@@ -7,28 +7,24 @@ import duke.task.Task;
 import duke.task.Todo;
 
 public class TaskSerializer extends Serializer {
-    private static final String CATEGORY_KEY = "category";
-
     public TaskSerializer() {
         super();
     }
 
-    public TaskSerializer(String category) {
-        super();
-        add(CATEGORY_KEY, category);
+    public TaskSerializer(String serialized) {
+        super(serialized);
     }
 
     public Task createTask() throws DukeException {
-        String icon = get(CATEGORY_KEY).toString();
-        if (Deadline.hasIcon(icon)) {
+        if (Deadline.canDeserialize(this)) {
             return Deadline.getDeserializer().deserialize(this);
         } 
-        if (Event.hasIcon(icon)) {
+        if (Event.canDeserialize(this)) {
             return Event.getDeserializer().deserialize(this);
         }
-        if (Todo.hasIcon(icon)) {
+        if (Todo.canDeserialize(this)) {
             return Todo.getDeserializer().deserialize(this);
         }
-        throw new DukeException("Unable to create task from TaskSerializer");
+        throw new DukeException("Unable to create task from Serializer");
     }
 }

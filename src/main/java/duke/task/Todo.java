@@ -14,6 +14,10 @@ public class Todo extends Task {
         return s.equals(ICON);
     }
 
+    public static boolean canDeserialize(Serializer serializer) {
+        return hasIcon(serializer.get(CATEGORY_KEY).toString());
+    }
+
     public static Deserializer getDeserializer() {
         return (Serializer serializer) -> {
             String description = serializer.get(DESCRIPTION_KEY).toString();
@@ -28,7 +32,8 @@ public class Todo extends Task {
 
     @Override
     public String serialize() {
-        Serializer ts = new TaskSerializer(ICON);
+        Serializer ts = new TaskSerializer();
+        ts.add(CATEGORY_KEY, ICON);
         ts.add(DESCRIPTION_KEY, description);
         ts.add(COMPLETED_KEY, completed);
         return ts.toString();
@@ -36,6 +41,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%s]%s", ICON, super.toString());
     }
 }

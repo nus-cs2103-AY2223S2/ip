@@ -3,6 +3,7 @@ package duke.task;
 import duke.exception.DukeException;
 
 public abstract class Task {
+    protected static final String CATEGORY_KEY = "category";
     protected String description;
     protected boolean completed;
 
