@@ -11,7 +11,7 @@ class TaskList {
 
     public void bye() {
         System.out.println("Bye. Hope to see you again soon!");
-        System.exit(1);
+        System.exit(0);
     }
 
     public void showList(ArrayList<Task> tasks) {
