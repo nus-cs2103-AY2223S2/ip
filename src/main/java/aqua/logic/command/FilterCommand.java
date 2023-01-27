@@ -10,9 +10,9 @@ import aqua.logic.ExecutionTask;
 import aqua.manager.LogicManager;
 
 
-public class FilterCommand implements Command {
+public class FilterCommand extends Command {
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager) {
+    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new ExecutionTask<LinkedHashMap<Integer, AquaTask>>(args, manager) {
             @Override
             public LinkedHashMap<Integer, AquaTask> process(ArgumentMap args, LogicManager manager) {

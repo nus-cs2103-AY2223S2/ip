@@ -14,9 +14,9 @@ import aqua.manager.LogicManager;
  * will delete an AquaTask from the task manager and then save the state of the
  * task manager to hard disk.
  */
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager) {
+    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new DeleteTask(args, manager))
                 .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
     }

@@ -13,7 +13,7 @@ import aqua.manager.LogicManager;
  * will mark an AquaTask in the task manager and then save the state of the
  * task manager to hard disk.
  */
-public class MarkTaskCommand implements Command {
+public class MarkTaskCommand extends Command {
     /** Value to pass {@link AquaTask#mark(boolean)} when marking a task. */
     private boolean isCompletedMarker;
 
@@ -31,7 +31,7 @@ public class MarkTaskCommand implements Command {
 
 
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager) {
+    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new MarkTask(args, manager))
                 .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
     }
