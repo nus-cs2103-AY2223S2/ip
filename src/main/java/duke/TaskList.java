@@ -40,6 +40,16 @@ public class TaskList {
         return chosen;
     }
 
+    public ArrayList<Task> getMatchingTasks(String keyword) {
+        ArrayList<Task> selected = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.toString().contains(keyword)) {
+                selected.add(task);
+            }
+        }
+        return selected;
+    }
+
 
     public ArrayList<Task> getTaskList() {
         return tasks;

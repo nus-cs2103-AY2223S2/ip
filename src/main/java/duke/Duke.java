@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Duke {
     private final Storage storage;
@@ -30,6 +31,12 @@ public class Duke {
                         storage.saveToFile(tasks.getTaskList());
                         ui.showGoodbyeMessage();
                         isExit = true;
+                        break;
+                    }
+                    case FIND: {
+                        String keyword = Parser.getArgs()[1];
+                        ArrayList<Task> matchingTasks = tasks.getMatchingTasks(keyword);
+                        ui.showMatchingTasksMessage(matchingTasks);
                         break;
                     }
                     case LIST: {

@@ -11,17 +11,30 @@ public class Ui {
         System.out.println(e);
     }
     public void showTasksMessage(ArrayList<Task> tasks) {
-        System.out.println("Here are the tasks in your list:");
         if (tasks.size() != 0) {
+            System.out.println("Here are the tasks in your list:");
             int idx = 1;
             for (Task task : tasks) {
                 System.out.printf("%d.%s%n", idx, task);
                 idx++;
             }
         } else {
-            System.out.println("There are no tasks currently");
+            System.out.println("There are no tasks currently!");
         }
 
+    }
+
+    public void showMatchingTasksMessage(ArrayList<Task> matchingTasks) {
+        if (matchingTasks.size() != 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            int idx = 1;
+            for (Task task : matchingTasks) {
+                System.out.printf("%d.%s%n", idx, task);
+                idx++;
+            }
+        } else {
+            System.out.println("There are no matching tasks currently!");
+        }
     }
 
     public void showGoodbyeMessage() {
@@ -45,4 +58,5 @@ public class Ui {
         System.out.println("Noted. I've removed this task:\n" + task);
         System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
     }
+
 }
