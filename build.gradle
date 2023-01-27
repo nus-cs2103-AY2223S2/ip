@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "chatbot.Duke"
+    mainClassName = "app.chatbot.Duke"
 }
 
 shadowJar {
