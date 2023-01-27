@@ -59,7 +59,7 @@ public class Duke {
 
                 } else if (wordArr[0].equals("event")) {
                     String desc = wordArr[1].split(" ", 2)[0];
-                    String from = wordArr[1].split(" /from ", 2)[1].split(" /to ", 2)[0];
+                    String from = wordArr[1].split(" /from ")[1].split(" /to ")[0];
                     String to = wordArr[1].split(" /to ", 2)[1];
                     System.out.println(taskList.addTask(desc, from, to));
                 } else{
