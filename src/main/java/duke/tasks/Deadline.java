@@ -14,7 +14,7 @@ public class Deadline extends Task {
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Parse Error: " + e.getMessage() +  "\n" +
+            throw new DukeException("Parse Error: " + e.getMessage() + "\n" +
                     "\tAccepted format: \"YYYY-MM-DD\"");
         }
     }
@@ -29,7 +29,7 @@ public class Deadline extends Task {
             sb.append("0 | ");
         }
         sb.append(this.description).append(" | ");
-        sb.append(this.by).append("\n");;
+        sb.append(this.by).append("\n");
         return sb.toString();
     }
 

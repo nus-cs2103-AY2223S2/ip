@@ -5,7 +5,11 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
 
-import java.io.*;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
@@ -18,7 +22,7 @@ public class Storage {
         this.directoryPath = directoryPath;
     }
 
-    public TaskList loadTasks() throws FileNotFoundException, IOException, DukeException {
+    public TaskList loadTasks() throws IOException, DukeException {
         File directory = new File(directoryPath);
         final File file = new File(filePath);
 

@@ -1,5 +1,3 @@
-import java.io.*;
-
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
@@ -7,11 +5,12 @@ import duke.Ui;
 
 import exception.DukeException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    private Ui ui;
     private static TaskList tasks;
+    private Ui ui;
     private Storage storage;
     private Parser parser;
 
@@ -27,6 +26,10 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("data/duke.txt", "/data").run();
+    }
+
     public void run() {
         Ui.greet();
         Scanner sc = new Scanner(System.in);
@@ -36,10 +39,6 @@ public class Duke {
             command = sc.nextLine();
         }
         Ui.goodbye();
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt", "/data").run();
     }
 
 }

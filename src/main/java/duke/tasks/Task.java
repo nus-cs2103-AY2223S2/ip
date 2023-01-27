@@ -33,7 +33,7 @@ public class Task {
         } else {
             sb.append("0 | ");
         }
-        sb.append(this.description).append("\n");;
+        sb.append(this.description).append("\n");
         return sb.toString();
     }
 

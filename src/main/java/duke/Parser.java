@@ -9,11 +9,8 @@ import duke.tasks.Todo;
 import java.io.IOException;
 
 public class Parser {
-    enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
-
     private final TaskList tasks;
     private final Storage storage;
-
     public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
@@ -82,4 +79,6 @@ public class Parser {
             Ui.print("Please enter a valid action!");
         }
     }
+
+    enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
 }
