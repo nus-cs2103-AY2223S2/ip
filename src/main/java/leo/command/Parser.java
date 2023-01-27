@@ -28,6 +28,8 @@ public class Parser {
                 }
             } else if (command.contains("delete")) {
                 new Delete(s, command);
+            } else if (command.contains("find")) {
+                new Find(s, command);
             } else {
                 try {
                     new Add(s, command);

@@ -85,15 +85,8 @@ public class Storage {
         Ui.displayMessage(Ui.leoResponse("added " + task.getTask() + " to your tasks :-) !"));
     }
 
-    public void showList() throws NoTaskFoundException {
-        try {
-            int length = data.size();
-            for (int i = 0; i < length; i++) {
-                Ui.displayMessage((i + 1) + ". " + getTask(i).toString());
-            }
-        } catch (LeoException e) {
-            Ui.displayMessage(Ui.leoResponse(e.getMessage()));
-        }
+    public void showList() {
+        data.display();
     }
 
     public void mark(int num) {
@@ -129,7 +122,7 @@ public class Storage {
         }
     }
 
-    private Task getTask(int num) throws NoTaskFoundException {
+    public Task getTask(int num) throws NoTaskFoundException {
         try {
             return data.getTask(num);
         } catch (Exception e) {
