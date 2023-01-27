@@ -132,7 +132,7 @@ public class DukeIO extends PrintWriter {
      * Write to save file everything that is stored in the given TaskMaster object.
      * @param tm the runtime TaskMaster object
      */
-    protected static void writeSave(TaskMaster tm) {
+    public static void writeSave(TaskMaster tm) {
         System.out.println(LOCAL_SAVE);
         BufferedWriter FILE = writeFileBW();
         try {
