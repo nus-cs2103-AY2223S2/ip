@@ -7,6 +7,11 @@ public class Task {
         this.taskName = name;
     }
 
+    public Task() {
+        this.isMarked = false;
+        this.taskName = "Blank Task";
+    }
+
     public void markTask() {
         this.isMarked = true;
     }

@@ -14,7 +14,11 @@ public class Event extends Task {
 
     @Override
     public String toLog() {
-        return "E" + super.toLog() + "| " + this.startTime + "- " + this.endTime +"\n";
+        return "E" + super.toLog() + " | "
+                + this.startTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+                + " - "
+                + this.endTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+                + "\n";
     }
 
     @Override
