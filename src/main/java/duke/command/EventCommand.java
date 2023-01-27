@@ -39,5 +39,6 @@ public class EventCommand extends Command {
         int size = task.getSize();
         Task temp = task.getTask(size - 1);
         ui.showAdd(temp, size);
+        storage.save(task.getListOfTasks());
     }
 }

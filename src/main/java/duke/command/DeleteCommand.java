@@ -37,6 +37,7 @@ public class DeleteCommand extends Command {
                 Task deletedTask = task.deleteTask(index);
                 int size = task.getSize();
                 ui.showDelete(deletedTask, size);
+                storage.save(task.getListOfTasks());
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("\tTask number does not exist!");
             }

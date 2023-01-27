@@ -30,5 +30,6 @@ public class MarkCommand extends Command {
     public void execute(TaskList task, Storage storage, Ui ui) throws DukeException {
         task.markTask(index);
         ui.showMark(task.getTask(index));
+        storage.save(task.getListOfTasks());
     }
 }
