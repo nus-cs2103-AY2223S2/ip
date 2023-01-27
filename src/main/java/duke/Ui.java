@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     private final static String INDENT_LINE = "____________________________________________________________";
     private TaskList taskList;
