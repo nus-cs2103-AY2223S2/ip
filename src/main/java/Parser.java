@@ -2,7 +2,10 @@ package duke.command;
 
 import duke.DukeException;
 import duke.MissingContentException;
-import duke.task.*;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 
 public class Parser {
     public String toDo(String[] arr) {

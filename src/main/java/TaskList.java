@@ -1,6 +1,9 @@
 package duke.command;
 
-import duke.task.*;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 
 public class TaskList {
     private String[] arr;

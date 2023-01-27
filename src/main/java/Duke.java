@@ -1,7 +1,11 @@
 package duke;
 
 import duke.command.*;
-import duke.task.*;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 
 import java.util.Scanner;
 import java.util.Arrays;
