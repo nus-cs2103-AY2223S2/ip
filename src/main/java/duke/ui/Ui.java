@@ -2,6 +2,9 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Represents the user interface for Duke.
+ */
 public class Ui {
     private static final String DIVIDER = "-".repeat(50);
 
@@ -23,6 +26,9 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
+    /**
+     * Displays the welcome message to the user.
+     */
     public void showWelcomeMessage() {
         Ui.printDivider();
         System.out.println("Hello from\n" + LOGO);
@@ -34,6 +40,10 @@ public class Ui {
         System.out.println(GOODBYE_MESSAGE);
     }
 
+    /**
+     * Reads the user input.
+     * @return the user input.
+     */
     public String readCommand() {
         System.out.println("Enter something here: ");
         String command = this.sc.nextLine();

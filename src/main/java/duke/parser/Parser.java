@@ -9,8 +9,16 @@ import duke.commands.ExitCommand;
 import duke.commands.IncorrectCommand;
 import duke.commands.ListCommand;
 
+/**
+ * Represents a parser that receives and parses user input.
+ */
 public class Parser {
 
+    /**
+     * Generates the correct command according to user command.
+     * @param fullCommand the user's full input.
+     * @return the corresponding command.
+     */
     public static Command parse(String fullCommand) {
         String commandType = fullCommand.split(" ")[0].toLowerCase();
 
@@ -35,6 +43,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Prepares the user input for the add command.
+     * @param commandType to do, deadline or event.
+     * @param fullCommand the user's full input.
+     * @return a command of type add or incorrect.
+     */
     public static Command prepareAddCommand(String commandType, String fullCommand) {
         //command type removed from full command
         try {
@@ -61,6 +75,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Prepares the user input for the add command.
+     * @param changeType mark or unmark.
+     * @param fullCommand the user's full input.
+     * @return a command of type change status or incorrect.
+     */
     public static Command prepareChangeStatusCommand(String changeType, String fullCommand) {
         try {
             int taskNumber = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
@@ -70,6 +90,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Prepares the user input for the date command.
+     * @param fullCommand the user's full input.
+     * @return a command of type date or incorrect.
+     */
     public static Command prepareDateCommand(String fullCommand) {
         try {
             String date = fullCommand.split(" ", 2)[1];
@@ -77,9 +102,13 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             return new IncorrectCommand("date");
         }
-
-
     }
+
+    /**
+     * Prepares the user input for the delete command.
+     * @param fullCommand the user's full input.
+     * @return a command of type delete or incorrect.
+     */
     public static Command prepareDeleteCommand(String fullCommand) {
         try {
             int taskNumber = Integer.parseInt(fullCommand.split(" ")[1]) - 1;
