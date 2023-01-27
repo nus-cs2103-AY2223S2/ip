@@ -212,6 +212,20 @@ public class Duke {
                     duke.displayTaskCount();
                     break;
 
+                case "find":
+                    String searchWords = userCmd.substring(4).trim(); // exclude keyword
+                    ArrayList<Task> matches = duke.taskList.search(searchWords);
+                    if (matches.isEmpty()) {
+                        duke.ui.println("Sorry, no match found.");
+                        break;
+                    }
+                    duke.ui.println("Here are the matching tasks in your list:");
+                    for (int i = 0; i < matches.size(); i++) {
+                        duke.ui.println("\t" + (i + 1) + ". " + matches.get(i));
+                    }
+                    // FIXME: since index is seperate from the actual tasklist, user might un/mark/delete wrong idx
+                    break;
+
                 case "save":
                     duke.storage.saveDataToFile();
                     duke.ui.println("Your list have been saved.");
