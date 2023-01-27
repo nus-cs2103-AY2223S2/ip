@@ -2,8 +2,6 @@ package core;
 
 import exceptions.DukeException;
 import core.TaskMaster;
-import exceptions.missing.File;
-
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -42,12 +40,12 @@ public class DukeIO extends PrintWriter {
         this.println("____________________________________________________________");
     }
 
-    private static BufferedReader readFileBR(Path filePath) throws File {
+    private static BufferedReader readFileBR(Path filePath) {
         BufferedReader READ_FILE = null;
         try {
             READ_FILE = Files.newBufferedReader(filePath, StandardCharsets.UTF_8);
         } catch (java.nio.file.NoSuchFileException e) {
-            throw new exceptions.missing.File(filePath);
+            System.err.println("File you were trying to read does not exist!");
         } catch (IOException e) {
             System.err.println(e);
         }
@@ -83,7 +81,7 @@ public class DukeIO extends PrintWriter {
         }
     }
 
-    public static void readSave(TaskMaster tm) throws DukeException {
+    protected static void readSave(TaskMaster tm) {
         BufferedReader FILE = readFileBR(LOCAL_SAVE);
         try {
             String curLine;
