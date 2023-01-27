@@ -163,39 +163,39 @@ public class Parser {
         String output = Response.DEFAULT.toString();
 
         switch (action) {
-            case "list":
+        case "list":
 
-                output = taskManager.displayTasks(true);
-                break;
+            output = taskManager.displayTasks(true);
+            break;
 
-            case "mark":
-                output = markTaskEvent(true, input);
-                break;
+        case "mark":
+            output = markTaskEvent(true, input);
+            break;
 
-            case "unmark":
+        case "unmark":
 
-                output = markTaskEvent(false, input);
-                break;
+            output = markTaskEvent(false, input);
+            break;
 
-            case "delete":
+        case "delete":
 
-                output = deleteTaskEvent(input);
-                break;
+            output = deleteTaskEvent(input);
+            break;
 
-            case "event":
+        case "event":
 
-                output = createEvent(input);
-                break;
+            output = createEvent(input);
+            break;
 
-            case "to-do":
+        case "to-do":
 
-                output = createToDo(input);
-                break;
+            output = createToDo(input);
+            break;
 
-            case "deadline":
+        case "deadline":
 
-                output = createDeadline(input);
-                break;
+            output = createDeadline(input);
+            break;
         }
         return output;
     }

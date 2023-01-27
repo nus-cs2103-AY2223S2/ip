@@ -1,9 +1,8 @@
+import data.TaskFileReaderWriter;
 import data.TaskManager;
 import formatters.Format;
 import formatters.Response;
-import task.Task;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * A bot with an UwU personality to help users keep track
@@ -22,7 +21,16 @@ public class Duke {
         System.out.println("Hewwo! I'm UwU_TaskMaster! How c-can I hewp you?!?");
 
         Scanner scanner = new Scanner(System.in);
-        TaskManager taskManager = new TaskManager(new ArrayList<Task>());
+        TaskFileReaderWriter taskReaderWriter = new TaskFileReaderWriter();
+
+
+        TaskManager taskManager = taskReaderWriter.loadDataFromFile();
+
+        if (!taskReaderWriter.createTaskFile()) {
+            System.out.println("Error creating data file");
+            return;
+        }
+
         Parser parser = new Parser(taskManager);
         String input;
 
@@ -31,6 +39,11 @@ public class Duke {
             input = scanner.nextLine();
 
             if (input.contains("bye")) {
+
+                if (!taskReaderWriter.updateTaskFile(taskManager)) {
+                    System.out.println("Error updating data file");
+                    return;
+                }
                 System.out.println(Format.formatResponse(Response.BYE_BYE.toString()));
                 break;
             }

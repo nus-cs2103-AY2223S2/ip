@@ -25,6 +25,11 @@ public class Deadline extends Task{
         this.deadline = deadline;
     }
 
+    public Deadline(String details, String deadline, boolean isCompleted) {
+        super(details);
+        this.deadline = deadline;
+        super.changeStatus(isCompleted);
+    }
 
     /**
      * Prints out a formatted string containing the specific deadline details
@@ -33,6 +38,15 @@ public class Deadline extends Task{
     public String toString() {
         return ("DEADLINE: " + super.getDetails() +
                 " (By " + deadline +")" + Format.getCompletionDisplay(super.isCompleted()));
+    }
+
+    /**
+     * Returns the value of the private field 'deadline'.
+     *
+     * @return The current value of 'deadline'.
+     */
+    public String getDeadline() {
+        return this.deadline;
     }
 
 
