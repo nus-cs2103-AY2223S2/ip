@@ -1,12 +1,15 @@
 package leo.task;
 
-import java.util.*;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TaskList {
-
+public class TaskList implements Serializable {
+    
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    static class Task {
+    static class Task implements Serializable{
         enum Type {
             TODO, DEADLINE, EVENT
         };

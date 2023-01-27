@@ -1,7 +1,17 @@
-import java.util.*;
-import leo.task.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Scanner;
+
+import leo.task.LeoTaskException;
+import leo.task.TaskList;
+
 
 public class Leo {
+
+    private TaskList taskList;
     public static void main(String[] args) throws LeoTaskException {
         // String logo = " ____ _ \n"
         // + "| _ \\ _ _| | _____ \n"
@@ -13,14 +23,50 @@ public class Leo {
     }
 
     public void start() throws LeoTaskException {
+        //Get saved state
+
         Scanner sc = new Scanner(System.in);
         String cmd = sc.nextLine(); // reads in command fed by user
-        TaskList taskList = new TaskList();
+        readFile();
         while (!cmd.equals("bye")) {
             taskList.processRequest(cmd);
             cmd = sc.nextLine();
         }
+        writeObjectToFile(taskList);
         System.out.println("It was nice talking, see you soon!");
         sc.close();
+    }
+
+    public void writeObjectToFile(Object obj) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("taskList.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(obj);
+            out.close();
+            fileOut.close();
+            System.out.printf("Serialized data is saved in taskList.ser");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    public void readFile() {
+        try {
+            FileInputStream fileIn = new FileInputStream("taskList.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            taskList = (TaskList) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return;
+        } catch (ClassNotFoundException c) {
+            System.out.println("TaskList class not found");
+            c.printStackTrace();
+            return;
+        } catch (Exception i) {
+            taskList = new TaskList();
+            return;
+        }
     }
 }
