@@ -34,8 +34,6 @@ public class Parser {
         Task task;
         String info;
 
-        //if command is equal to bye, exit()
-        //if command is not equal to bye, distinguish list or normal command
         if (!command.equals("bye")) {
             if (command.equals("list")) {
                 Ui.showList(tasks);
@@ -127,14 +125,12 @@ public class Parser {
                     } catch (DateTimeParseException e) {
                         task = new Event(info, fromtime, totime, false);
                     }
-
                     tasks.add(task);
                 } catch (Exception e) {
                     System.out.println(Indentation + Horizontal);
                     System.out.println("  ☹ OOPS!!! The description of a event cannot be empty.");
                     System.out.println(Indentation + Horizontal);
                 }
-
             } else {
                 System.out.println(Indentation + Horizontal);
                 System.out.println(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

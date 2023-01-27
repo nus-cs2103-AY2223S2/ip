@@ -32,10 +32,12 @@ public class Duke {
         Ui.showWelcome();
 
         String fullCommand;
+
         do {
             fullCommand = ui.readCommand();
             Parser.parse(fullCommand, tasks);
         } while(!fullCommand.equals("bye"));
+
         storage.updateFile(tasks);
         Ui.exit();
     }
