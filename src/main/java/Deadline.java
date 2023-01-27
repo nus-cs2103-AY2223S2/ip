@@ -21,7 +21,7 @@ public class Deadline extends Task {
     }
 
     public String getDetailsToSave() {
-        return String.format("deadline %s %s\n%s", ddmmyyyy, hhmm, desc);
+        return String.format("deadline %s %s %s\n%s", isDone, ddmmyyyy, hhmm, desc);
     }
 
 }

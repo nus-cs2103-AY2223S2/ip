@@ -33,7 +33,7 @@ public class Event extends Task {
     }
 
     public String getDetailsToSave() {
-        return String.format("event %s %s %s %s\n%s", ddmmyyyyFrom, hhmmFrom, ddmmyyyyTo, hhmmTo, desc);
+        return String.format("event %s %s %s %s %s\n%s", isDone, ddmmyyyyFrom, hhmmFrom, ddmmyyyyTo, hhmmTo, desc);
     }
 
 }

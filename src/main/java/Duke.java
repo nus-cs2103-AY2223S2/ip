@@ -7,13 +7,16 @@ import java.io.IOException;
 
 public class Duke {
 
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+    static final String dirPath = "./data/";
+    static final String filePath = dirPath + "tasks.txt";
+
+    private static void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
-    private static ArrayList<Task> loadData(String filePath) throws FileNotFoundException {
+    private static ArrayList<Task> loadData() throws FileNotFoundException {
         File file = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<Task>();
 
@@ -23,11 +26,23 @@ public class Duke {
             while (sc.hasNext()) {
                 String[] line = sc.nextLine().split(" ");
                 if (line[0].equals("todo")) {
-                    tasks.add(new ToDo(sc.nextLine()));
+                    ToDo t = new ToDo(sc.nextLine());
+                    if (line[1].equals("true")) {
+                        t.mark();
+                    }
+                    tasks.add(t);
                 } else if (line[0].equals("deadline")) {
-                    tasks.add(new Deadline(sc.nextLine(), line[1], line[2]));
+                    Deadline d = new Deadline(sc.nextLine(), line[2], line[3]);
+                    if (line[1].equals("true")) {
+                        d.mark();
+                    }
+                    tasks.add(d);
                 } else { // event
-                    tasks.add(new Event(sc.nextLine(), line[1], line[2], line[3], line[4]));
+                    Event e = new Event(sc.nextLine(), line[2], line[3], line[4], line[5]);
+                    if (line[1].equals("true")) {
+                        e.mark();
+                    }
+                    tasks.add(e);
                 }
             }
             System.out.println("I'm so happy we're meeting again!");
@@ -37,7 +52,7 @@ public class Duke {
         return tasks;
     }
 
-    static String saveTasks(ArrayList<Task> tasks) {
+    static String generateDetailsToSave(ArrayList<Task> tasks) {
         String str = "";
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
@@ -49,67 +64,7 @@ public class Duke {
         return str;
     }
 
-    public static void main(String[] args) throws DukeException, FileNotFoundException {
-
-        String dirPath = "./data/";
-        String filePath = dirPath + "tasks.txt";
-
-        System.out.println("<コ:彡");
-        System.out.println("Hello! I'm Duke, your favourite pink octopus.");
-        System.out.println("What can I do for you today?");
-
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = loadData(filePath);
-
-        while (true) {
-            String input = sc.nextLine();
-            String[] chunked = input.split(" ");
-            // code for abstraction + error handling adapted from EvitanRelta's comment:
-            // https://github.com/nus-cs2103-AY2223S2/forum/issues/20#issuecomment-1396557797
-            try {
-                if (input.equals("bye")) {
-                    Duke.quit();
-                    break;
-                }
-                System.out.println("(\\ (\\\n" +
-                        "(„• ֊ •„) ♡\n" +
-                        "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-                if (chunked[0].equals("mark")) {
-                    if (chunked.length == 1) {
-                        throw new DukeInvalidCommandException("Huh? You didn't give me a task to mark!");
-                    } else {
-                        Duke.mark(tasks, Integer.parseInt(chunked[1]));
-                    }
-                } else if (chunked[0].equals("unmark")) {
-                    if (chunked.length == 1) {
-                        throw new DukeInvalidCommandException("Huh? You didn't give me a task to unmark!");
-                    } else {
-                        Duke.unmark(tasks, Integer.parseInt(chunked[1]));
-                    }
-                } else if (chunked[0].equals("delete")) {
-                    if (chunked.length == 1) {
-                        throw new DukeInvalidCommandException("Huh? You didn't give me a task to delete!");
-                    } else {
-                        Duke.delete(tasks, Integer.parseInt(chunked[1]));
-                    }
-                } else if (input.equals("list")) {
-                    Duke.list(tasks);
-                } else if (chunked[0].equals("todo")) {
-                    Duke.addToDo(tasks, input);
-                } else if (chunked[0].equals("deadline")) {
-                    Duke.addDeadline(tasks, input);
-                } else if (chunked[0].equals("event")) {
-                    Duke.addEvent(tasks, input);
-                } else {
-                    throw new DukeInvalidCommandException("Huh? Sorry, I don't know what this means :(");
-                }
-            }
-            catch (DukeException err) {
-                System.out.println(err.getMessage());
-            }
-        }
-
-        sc.close();
+    static void saveTasks(ArrayList<Task> tasks) {
 
         File file = new File(filePath);
         File dir = new File(dirPath);
@@ -124,13 +79,79 @@ public class Duke {
         } catch (IOException err) {
             System.out.println(err.getMessage());
         }
-
         try {
-            writeToFile(filePath, saveTasks(tasks));
+            writeToFile(generateDetailsToSave(tasks));
         } catch (IOException err) {
             System.out.println("Something went wrong when trying to save your list!");
             System.out.println(err.getMessage());
         }
+    }
+
+    public static void main(String[] args) throws DukeException, FileNotFoundException, IOException {
+
+        System.out.println("<コ:彡");
+        System.out.println("Hello! I'm Duke, your favourite pink octopus.");
+        System.out.println("What can I do for you today?");
+
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Task> tasks = loadData();
+
+        while (true) {
+            String input = sc.nextLine();
+            String[] chunked = input.split(" ");
+            // code for abstraction + error handling adapted from EvitanRelta's comment:
+            // https://github.com/nus-cs2103-AY2223S2/forum/issues/20#issuecomment-1396557797
+            try {
+                if (input.equals("bye")) {
+                    saveTasks(tasks);
+                    Duke.quit();
+                    break;
+                }
+                System.out.println("(\\ (\\\n" +
+                        "(„• ֊ •„) ♡\n" +
+                        "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+                if (chunked[0].equals("mark")) {
+                    if (chunked.length == 1) {
+                        throw new DukeInvalidCommandException("Huh? You didn't give me a task to mark!");
+                    } else {
+                        Duke.mark(tasks, Integer.parseInt(chunked[1]));
+                        saveTasks(tasks);
+                    }
+                } else if (chunked[0].equals("unmark")) {
+                    if (chunked.length == 1) {
+                        throw new DukeInvalidCommandException("Huh? You didn't give me a task to unmark!");
+                    } else {
+                        Duke.unmark(tasks, Integer.parseInt(chunked[1]));
+                        saveTasks(tasks);
+                    }
+                } else if (chunked[0].equals("delete")) {
+                    if (chunked.length == 1) {
+                        throw new DukeInvalidCommandException("Huh? You didn't give me a task to delete!");
+                    } else {
+                        Duke.delete(tasks, Integer.parseInt(chunked[1]));
+                        saveTasks(tasks);
+                    }
+                } else if (input.equals("list")) {
+                    Duke.list(tasks);
+                } else if (chunked[0].equals("todo")) {
+                    Duke.addToDo(tasks, input);
+                    saveTasks(tasks);
+                } else if (chunked[0].equals("deadline")) {
+                    Duke.addDeadline(tasks, input);
+                    saveTasks(tasks);
+                } else if (chunked[0].equals("event")) {
+                    Duke.addEvent(tasks, input);
+                    saveTasks(tasks);
+                } else {
+                    throw new DukeInvalidCommandException("Huh? Sorry, I don't know what this means :(");
+                }
+            }
+            catch (DukeException err) {
+                System.out.println(err.getMessage());
+            }
+        }
+
+        sc.close();
 
     }
 

@@ -40,4 +40,3 @@ Here are all the things on your list!
 1. [D][X] return book (by: 25 January 2023 18:00)
 2. [D][ ] project meeting (from: 25 January 2023 17:00 to: 25 January 2023 18:00)
 Bye bye :( Hope to see you again soon!
-
