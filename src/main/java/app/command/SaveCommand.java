@@ -1,8 +1,8 @@
-package command;
+package app.command;
 
-import chatbot.Storage;
-import chatbot.Ui;
-import task.TaskList;
+import app.chatbot.Storage;
+import app.chatbot.Ui;
+import app.task.TaskList;
 
 public class SaveCommand extends Command {
     public SaveCommand() {

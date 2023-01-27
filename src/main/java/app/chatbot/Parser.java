@@ -1,14 +1,14 @@
-package chatbot;
+package app.chatbot;
 
-import command.AddCommand;
-import command.Command;
-import command.CommandNotFoundException;
-import command.DeleteCommand;
-import command.ExitCommand;
-import command.ListCommand;
-import command.MarkAsDoneCommand;
-import command.MarkAsUndoneCommand;
-import static task.TaskType.inputToTask;
+import app.command.AddCommand;
+import app.command.Command;
+import app.command.CommandNotFoundException;
+import app.command.DeleteCommand;
+import app.command.ExitCommand;
+import app.command.ListCommand;
+import app.command.MarkAsDoneCommand;
+import app.command.MarkAsUndoneCommand;
+import static app.task.TaskType.inputToTask;
 
 import java.util.Arrays;
 import java.util.HashMap;

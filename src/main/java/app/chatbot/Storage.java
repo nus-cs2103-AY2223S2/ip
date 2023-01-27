@@ -1,25 +1,21 @@
-package chatbot;
+package app.chatbot;
 
-import task.Task;
-import task.TaskList;
-import task.TaskType;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.io.IOException;
-
-import java.io.File;
+import app.task.Task;
+import app.task.TaskList;
+import app.task.TaskType;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
-
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
-
-import java.util.Map;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Arrays;
+import java.util.Map;
 
 public class Storage {
     public static final String SEPARATOR_REGEX = " \\| ";

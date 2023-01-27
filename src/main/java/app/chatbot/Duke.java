@@ -1,9 +1,9 @@
-package chatbot;
+package app.chatbot;
 
-import command.Command;
-import command.LoadCommand;
-import command.SaveCommand;
-import task.TaskList;
+import app.command.Command;
+import app.command.LoadCommand;
+import app.command.SaveCommand;
+import app.task.TaskList;
 
 import java.io.IOException;
 import java.nio.file.Path;

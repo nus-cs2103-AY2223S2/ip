@@ -1,4 +1,4 @@
-package task;
+package app.task;
 
 public class ToDo extends Task {
 

@@ -1,10 +1,10 @@
-package command;
+package app.command;
 
-import chatbot.Storage;
-import chatbot.Ui;
-import task.Task;
-import task.TaskList;
-import task.TaskType;
+import app.chatbot.Storage;
+import app.chatbot.Ui;
+import app.task.Task;
+import app.task.TaskList;
+import app.task.TaskType;
 
 import java.util.Map;
 
