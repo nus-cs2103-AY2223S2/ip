@@ -10,7 +10,7 @@ public class Task implements Serializable {
         this.done = false;
     }
 
-    public void mark(){
+    public void mark() {
         if (!this.done) {
             this.done = true;
         }
@@ -21,6 +21,7 @@ public class Task implements Serializable {
             this.done = false;
         }
     }
+
     @Override
     public String toString() {
         if (this.done) {

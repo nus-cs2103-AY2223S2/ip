@@ -11,6 +11,7 @@ public class TodoCommand extends Command {
     public TodoCommand(String input) {
         this.input = input;
     }
+
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (5 > input.length()) {
@@ -19,9 +20,11 @@ public class TodoCommand extends Command {
             Todo td = new Todo(input.substring(5, input.length()));
             tasks.add(td);
             storage.saveTaskList(tasks);
-            System.out.println("    Got it. I've added this task:\n" +
-                    "      " + td + "\n" +
-                    "    Now you have " + tasks.size() + " tasks in the list.");
+            System.out.println("    Got it. I've added this task:\n"
+                    + "      " + td + "\n"
+                    + "    Now you have "
+                    + tasks.size()
+                    + " tasks in the list.");
             return true;
         } catch (DukeException de) {
             System.out.println(de.getMessage());

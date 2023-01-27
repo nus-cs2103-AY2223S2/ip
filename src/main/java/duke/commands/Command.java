@@ -6,7 +6,7 @@ import duke.Ui;
 public abstract class Command {
     public abstract boolean execute(TaskList tasks, Ui ui, Storage storage);
 
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

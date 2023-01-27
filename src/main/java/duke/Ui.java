@@ -1,12 +1,12 @@
 package duke;
-
 import java.util.Scanner;
 
 public class Ui {
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.out.println("Unable to load tasks from storage");
     }
-    public void welcomeMessage(){
+
+    public void showWelcomeMessage() {
         String chopper =
                 "           /\\_/\\\n" +
                         "          ( o.o )\n" +
@@ -24,7 +24,8 @@ public class Ui {
                 "      8. bye\n" +
                 "    What can I do for you?");
     }
-    public void showLine(){
+
+    public void showLine() {
         System.out.println("____________________________________________");
     }
 

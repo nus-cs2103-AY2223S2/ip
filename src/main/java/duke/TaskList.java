@@ -4,31 +4,30 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TaskList implements Serializable {
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
     public TaskList() {
-        this.list = new ArrayList<Task>();
-
+        this.tasks = new ArrayList<>();
     }
 
     public Task get(int i) {
-        return this.list.get(i);
+        return this.tasks.get(i);
     }
 
     public void add(Task t) {
-        this.list.add(t);
+        this.tasks.add(t);
     }
 
     public int size() {
-        return this.list.size();
+        return this.tasks.size();
     }
 
     public void remove(int i) {
-        this.list.remove(i);
+        this.tasks.remove(i);
     }
 
     @Override
     public String toString() {
-        return "" + this.list;
+        return "" + this.tasks;
     }
 
 }

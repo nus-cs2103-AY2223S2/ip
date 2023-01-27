@@ -1,5 +1,4 @@
 package duke;
-
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
@@ -15,7 +14,7 @@ public class Parser {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
     }
 
-    public static Command parse(String input) throws IllegalArgumentException{
+    public static Command parse(String input) throws IllegalArgumentException {
         String[] words = input.split(" ");
         Type t = Type.valueOf(words[0].toUpperCase());
         switch(t) {

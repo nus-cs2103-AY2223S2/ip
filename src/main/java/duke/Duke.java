@@ -16,8 +16,9 @@ public class Duke {
             this.tasks = new TaskList();
         }
     }
+
     public void run() {
-        this.ui.welcomeMessage();
+        this.ui.showWelcomeMessage();
         boolean isExit = false;
 
         while (!isExit) {
@@ -33,6 +34,7 @@ public class Duke {
             }
         }
     }
+
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }
