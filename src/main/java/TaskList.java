@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaskList extends ArrayList<Task> {
@@ -14,6 +15,33 @@ public class TaskList extends ArrayList<Task> {
         return count;
     }
 
+    public String dateFilter(LocalDateTime startDate, LocalDateTime endDate) {
+        StringBuilder str = new StringBuilder();
+        int count = 0;
+        for (Task task : this) {
+            if (task instanceof Deadline) {
+                Deadline d = (Deadline) task;
+                LocalDateTime t = d.getDeadline();
+                if (t.isBefore(endDate)
+                        && t.isAfter(startDate)) {
+                    count++;
+                    str.append(count).append(". ").append(d).append("\n");
+                }
+            } else if (task instanceof Event) {
+                Event e = (Event) task;
+                LocalDateTime f = e.getFrom();
+                LocalDateTime t = e.getTo();
+                if (t.isBefore(endDate)
+                        && f.isAfter(startDate)) {
+                    count++;
+                    str.append(count).append(". ").append(e).append("\n");
+                }
+
+            }
+        }
+        return str + "You have " + count + " tasks in this period.";
+    }
+
     public String list() {
         if (this.size() == 0) {
             return "You have no tasks.";
@@ -28,11 +56,11 @@ public class TaskList extends ArrayList<Task> {
     }
 
     public String storageFormat() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (Task task : this) {
-            str = str + task.storageFormat();
+            str.append(task.storageFormat());
         }
-        return str;
+        return str.toString();
     }
 
     @Override

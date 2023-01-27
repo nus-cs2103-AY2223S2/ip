@@ -1,6 +1,6 @@
 public class Parser {
     enum CommandWord {
-        help, bye, list, mark, unmark, delete, todo, deadline, event, reset
+        help, bye, list, mark, unmark, delete, todo, deadline, event, reset, filter
     }
 
     private static void checkNotEmpty(String str, String message) throws MissingFieldException {
@@ -32,6 +32,18 @@ public class Parser {
                 return new DeleteTaskCommand(Integer.parseInt(input.split(" ")[1]) - 1);
             case reset:
                 return new ResetCommand();
+            case filter:
+                try {
+                    String s = input.substring(7);
+                    String[] a = s.split("/to");
+                    if (a.length == 1) {
+                        return new FilterCommand(s.trim());
+                    } else {
+                        return new FilterCommand(a[0].trim(), a[1].trim());
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    throw new MissingFieldException("Date for filter");
+                }
             case todo:
                 try {
                     name = input.substring(5);
