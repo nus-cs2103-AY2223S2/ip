@@ -18,7 +18,7 @@ text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 text-ui-test/data/
 
-# storage
+# duke.storage
 data/
 
 # artifacts
