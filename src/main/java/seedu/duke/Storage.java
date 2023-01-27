@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.Tasks.*;
+import seedu.duke.tasks.*;
 
 import java.io.File;
 import java.io.FileWriter;

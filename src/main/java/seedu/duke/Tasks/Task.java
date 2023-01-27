@@ -1,4 +1,4 @@
-package seedu.duke.Tasks;
+package seedu.duke.tasks;
 
 import seedu.duke.DukeException;
 

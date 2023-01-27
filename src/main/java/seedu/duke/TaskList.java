@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.Tasks.*;
+import seedu.duke.tasks.*;
 
 import java.util.ArrayList;
 
@@ -53,6 +53,26 @@ public class TaskList {
 
     public int getSize() {
         return this.taskList.size();
+    }
+
+    /**
+     * Finds all Tasks in TaskList that contains the String of keyword(s), including sub-words
+     *
+     * @param keywords keywords provided by the user
+     * @return TaskList containing all Tasks with matching keywords
+     */
+    public TaskList find(String keywords) throws DukeException {
+        TaskList matchingTasks = new TaskList();
+        for (int index = 0; index < getSize(); index++) {
+            Task task = get(index);
+            if (task.toString().contains(keywords)) {
+                matchingTasks.addTask(task);
+            }
+        }
+        if (matchingTasks.getSize() == 0) {
+            throw new DukeException("There are no matching tasks!");
+        }
+        return matchingTasks;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.Tasks.*;
+import seedu.duke.tasks.*;
 
 public class Ui {
 
@@ -37,6 +37,18 @@ public class Ui {
     public void sayUnmarkedTask(Task unmarkedTask) {
         System.out.println("Ok, I've marked this task as not done yet:");
         System.out.println(unmarkedTask);
+    }
+
+    /**
+     * Prints out line after successfully finding matching Tasks for user to see
+     *
+     * @param matchingTasks Tasks that match the keyword provided by user
+     */
+    public void sayMatchingTasks(TaskList matchingTasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < matchingTasks.getSize(); i++) {
+            System.out.printf("%d: %s\n", i + 1, matchingTasks.get(i));
+        }
     }
 
     public void showLoadingError(){

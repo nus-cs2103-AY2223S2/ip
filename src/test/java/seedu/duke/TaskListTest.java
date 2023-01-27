@@ -1,8 +1,8 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.Tasks.Task;
-import seedu.duke.Tasks.Todo;
+import seedu.duke.tasks.Task;
+import seedu.duke.tasks.Todo;
 
 import java.util.ArrayList;
 
