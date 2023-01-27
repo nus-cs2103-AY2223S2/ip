@@ -149,6 +149,24 @@ public class TaskList {
     }
 
     /**
+     * To find tasks with specific key word.
+     *
+     * @param searchKey Search key for finding the task.
+     */
+    public void find (String searchKey) {
+        boolean isFind = false;
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getTaskDes().indexOf(searchKey.trim()) != -1) {
+                System.out.println((i + 1) + ". " + list.get(i));
+                isFind = true;
+            }
+        }
+        if(!isFind) {
+            System.out.println("No result found.");
+        }
+    }
+
+    /**
      * Check if there is deadline on a specific date.
      * Need check keyword.
      * Format: check deadline /2019-10-15.
