@@ -15,6 +15,12 @@ public class TaskSerializer extends Serializer {
         super(serialized);
     }
 
+    /**
+     * Creates and returns a task defined by instance
+     * 
+     * @return Task defined by instance
+     * @throws DukeException
+     */
     public Task createTask() throws DukeException {
         if (Deadline.canDeserialize(this)) {
             return Deadline.getDeserializer().deserialize(this);

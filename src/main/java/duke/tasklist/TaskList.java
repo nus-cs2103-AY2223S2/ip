@@ -7,6 +7,9 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
     private List<Task> tasks;
 
@@ -33,12 +36,26 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Adds {@code task} to the TaskList instance.
+     * 
+     * @param task Task to be added to the instance.
+     * @return The task that was added.
+     * @throws DukeException
+     */
     public Task add(Task task) throws DukeException {
         tasks.add(task);
         save();
         return task;
     }
 
+    /**
+     * Deletes the task at {@code index}.
+     * 
+     * @param index
+     * @return The task that was deleted.
+     * @throws DukeException
+     */
     public Task delete(int index) throws DukeException {
         Task t = get(index);
         tasks.remove(index);
@@ -50,6 +67,13 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Marks the task at {@code index} as completed.
+     * 
+     * @param index
+     * @return The task that was marked completed.
+     * @throws DukeException
+     */
     public Task mark(int index) throws DukeException {
         Task t = get(index);
         t.mark();
@@ -57,6 +81,13 @@ public class TaskList {
         return t;
     }
 
+    /**
+     * Marks the task at {@code index} as uncompleted.
+     * 
+     * @param index
+     * @return The task that was marked uncompleted.
+     * @throws DukeException
+     */
     public Task unmark(int index) throws DukeException {
         Task t = get(index);
         t.unmark();

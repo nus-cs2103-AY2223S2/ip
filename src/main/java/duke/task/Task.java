@@ -2,11 +2,21 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+/**
+ * Represents a generic completable Task with a description.
+ */
 public abstract class Task {
     protected static final String CATEGORY_KEY = "category";
     protected String description;
     protected boolean completed;
 
+    /**
+     * Initialises a task.
+     * 
+     * @param description Description of task.
+     * @param completed Whether the task has been completed.
+     * @throws DukeException
+     */
     public Task(String description, boolean completed) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeException("The description of a task cannot be empty");

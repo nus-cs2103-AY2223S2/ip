@@ -1,6 +1,9 @@
 package duke.storage.serializer;
 import java.util.HashMap;
 
+/**
+ * Serializer is the base class that handles serializing of instances.
+ */
 public class Serializer {
     private static final String GROUP_DELIMITER = String.valueOf((char)0x1d);
     private static final String RECORD_DELIMITER = String.valueOf((char)0x1e);
@@ -11,6 +14,11 @@ public class Serializer {
         map = new HashMap<>();
     }
 
+    /**
+     * Initialises a Serializer with data extracted from serialized
+     * 
+     * @param serialized The string to be deserialized
+     */
     public Serializer(String serialized) {
         this();
         String[] entries = serialized.split(GROUP_DELIMITER);

@@ -5,10 +5,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
-import duke.storage.serializer.Deserializer;
 import duke.storage.serializer.Serializer;
+import duke.storage.serializer.TaskDeserializer;
 import duke.storage.serializer.TaskSerializer;
 
+/**
+ * Represents an event with a start timing and an end timing
+ */
 public class Event extends Task {
     private static final String ICON = "E";
     private static final String DESCRIPTION_KEY = "description";
@@ -21,6 +24,12 @@ public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
+    /**
+     * Returns whether {@code icon} belongs to a Event Task.
+     * 
+     * @param icon Icon to be checked.
+     * @return whether the {@code icon} belongs to a Event Task.
+     */
     public static boolean hasIcon(String s) {
         return s.equals(ICON);
     }
@@ -29,8 +38,8 @@ public class Event extends Task {
         return hasIcon(serializer.get(CATEGORY_KEY).toString());
     }
 
-    public static Deserializer getDeserializer() {
-        return (Serializer serializer) -> {
+    public static TaskDeserializer getDeserializer() {
+        return (TaskSerializer serializer) -> {
             String description = serializer.get(DESCRIPTION_KEY).toString();
             boolean completed = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
             String from = serializer.get(FROM_KEY).toString();
