@@ -17,6 +17,10 @@ import leo.leoException.NoTaskFoundException;
 import leo.leoException.NoStorageFileException;
 import leo.ui.Ui;
 
+/**
+ * Represents a storage place containing a list Tasks. A <code>Storage</code> object corresponds to
+ * a database consisting of the list of Tasks, the File in which the data is stored in and the file path.
+ */
 public class Storage {
 
     private final TaskList data;
@@ -31,6 +35,13 @@ public class Storage {
         this.data = new TaskList(loadData());
     }
 
+    /**
+     * Returns a list of tasks stored in the data file.
+     *
+     * @return List of tasks.
+     * @throws IncorrectMarkException If a completed task is set to be completed.
+     * @throws NoStorageFileException If file is not found.
+     */
     private List<Task> loadData() throws IncorrectMarkException, NoStorageFileException {
         List<Task> taskList = new ArrayList<>();
         if (!taskFile.exists()) {
@@ -80,11 +91,22 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds task into the list of tasks.
+     * Prints task upon successful addition.
+     *
+     * @param task Task to be added into the list.
+     */
     public void addTask(Task task) {
         data.addTask(task);
         Ui.displayMessage(Ui.leoResponse("added " + task.getTask() + " to your tasks :-) !"));
     }
 
+    /**
+     * Prints the list of tasks stored in the data.
+     *
+     * @throws NoTaskFoundException If there are no tasks in the list.
+     */
     public void showList() throws NoTaskFoundException {
         try {
             int length = data.size();
@@ -96,6 +118,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Marks a task in the list.
+     * Prints error message if task is marked or not in the list.
+     *
+     * @param num Index of task to be marked.
+     */
     public void mark(int num) {
         try {
             getTask(num - 1).mark();
@@ -106,6 +134,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Unmarks a task in the list.
+     * Prints error message if task is not marked or not in the list.
+     *
+     * @param num Index of task to be unmarked.
+     */
     public void unmark(int num) {
         try {
             getTask(num - 1).unmark();
@@ -116,6 +150,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes a task in the list.
+     * Prints error message if task is not in the list.
+     *
+     * @param num Index of task to be deleted.
+     */
     public void delete(int num) {
         Task removed;
         try {
@@ -129,6 +169,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns Task in the list at the index stated.
+     *
+     * @param num Index of task required.
+     * @return Task required.
+     * @throws NoTaskFoundException If task is not in the list.
+     */
     private Task getTask(int num) throws NoTaskFoundException {
         try {
             return data.getTask(num);
@@ -137,14 +184,29 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the path of the data file.
+     *
+     * @return String representation of path.
+     */
     public String getDataFilePath() {
         return this.dataFilePath;
     }
 
+    /**
+     * Returns the number of tasks in the data list.
+     *
+     * @return Integer presenting number of tasks in the list.
+     */
     public int getDataLength() {
         return data.size();
     }
 
+    /**
+     * Writes the tasks in the list into the data file in hard disk.
+     *
+     * @throws NoStorageFileException If file does not exist.
+     */
     public void writeToFile() throws NoStorageFileException {
         try {
             int len = getDataLength();
@@ -160,6 +222,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts String object to LocalDateTime.
+     *
+     * @param str String representation of date and time.
+     * @return LocalDateTime object.
+     */
     private LocalDateTime convertString(String str) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy HH:mm");
         return LocalDateTime.parse(str, formatter);

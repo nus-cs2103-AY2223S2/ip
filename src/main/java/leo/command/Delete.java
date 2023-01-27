@@ -2,6 +2,9 @@ package leo.command;
 
 import leo.storage.Storage;
 
+/**
+ * Represents a deletion command input by user.
+ */
 public class Delete extends Command {
 
     public Delete(Storage s, String c) {

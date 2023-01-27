@@ -3,6 +3,10 @@ package leo.storage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Event Task. A <code>Event</code> object corresponds to
+ * a Task containing the String description and duration consisting of LocalDateTime from and LocalDateTime to.
+ */
 public class Event extends Task {
 
     private final LocalDateTime from;
@@ -15,11 +19,21 @@ public class Event extends Task {
         setType(TaskType.EVENT);
     }
 
+    /**
+     * Returns type, status, description and deadline of Task.
+     *
+     * @return String representation of Event.
+     */
     @Override
     public String toString() {
         return typeAndStatus() + getTask() + " (" + duration() + ")";
     }
 
+    /**
+     * Returns formatted duration of Event obtained from LocalDateTime.
+     *
+     * @return String representation of the duration.
+     */
     private String duration() {
         DateTimeFormatter formatterOne = DateTimeFormatter.ofPattern("EEE, MMM dd, hh:mm a");
         DateTimeFormatter formatterTwo = DateTimeFormatter.ofPattern("hh:mm a");
@@ -29,11 +43,23 @@ public class Event extends Task {
         return formatterOne.format(this.from) + " - " + formatterOne.format(this.to);
     }
 
+    /**
+     * Checks whether both LocalDateTime provided are on the same day regardless of time.
+     *
+     * @param dtOne First LocalDateTime to be compared.
+     * @param dtTwo Second LocalDateTime to be compared.
+     * @return Both LocalDateTime are on the same day.
+     */
     private boolean sameDate(LocalDateTime dtOne, LocalDateTime dtTwo) {
         boolean sameYear = dtOne.getYear() == dtTwo.getYear();
         return sameYear && dtOne.getDayOfYear() == dtTwo.getDayOfYear();
     }
 
+    /**
+     * Returns the String representation of Task that is to be saved in the data file.
+     *
+     * @return String representation of Event.
+     */
     @Override
     public String saveFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy HH:mm");

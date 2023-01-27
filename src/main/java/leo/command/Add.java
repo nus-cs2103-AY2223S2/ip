@@ -15,6 +15,9 @@ import leo.ui.Ui;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an addition command input by user.
+ */
 public class Add extends Command {
 
     public Add(Storage s, String task) throws LeoException {
@@ -58,6 +61,12 @@ public class Add extends Command {
         }
     }
 
+    /**
+     * Converts String object to LocalDateTime.
+     *
+     * @param str String representation of date and time.
+     * @return LocalDateTime object.
+     */
     private LocalDateTime convertString(String str) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy HH:mm");
         return LocalDateTime.parse(str, formatter);

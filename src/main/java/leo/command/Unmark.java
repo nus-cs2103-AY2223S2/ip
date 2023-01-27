@@ -2,6 +2,9 @@ package leo.command;
 
 import leo.storage.Storage;
 
+/**
+ * Represents an unmark command input by user.
+ */
 public class Unmark extends Command {
 
     public Unmark(Storage s, String c) {

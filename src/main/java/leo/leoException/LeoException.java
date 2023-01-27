@@ -1,5 +1,8 @@
 package leo.leoException;
 
+/**
+ * Represents an exception specific to features in Leo.
+ */
 public class LeoException extends Exception {
 
     public LeoException(String message) {

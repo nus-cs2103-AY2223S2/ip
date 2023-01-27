@@ -3,9 +3,13 @@ package leo.command;
 import java.util.Objects;
 import java.util.Scanner;
 import leo.leoException.LeoException;
+import leo.leoException.NoStorageFileException;
 import leo.storage.Storage;
 import leo.ui.Ui;
 
+/**
+ * Represents a Parser make sense of commands from user input.
+ */
 public class Parser {
 
     private final Storage s;
@@ -14,6 +18,9 @@ public class Parser {
         this.s = s;
     }
 
+    /**
+     * Reads user inputs line by line.
+     */
     public void readCommand() {
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();

@@ -1,9 +1,13 @@
 package leo.command;
 
 import leo.leoException.LeoException;
+import leo.leoException.NoStorageFileException;
 import leo.storage.Storage;
 import leo.ui.Ui;
 
+/**
+ * Represents a command input by user.
+ */
 public class Command {
 
     private final Storage storage;
@@ -14,11 +18,21 @@ public class Command {
         this.command = command;
     }
 
+    /**
+     * Returns index of a task in the list.
+     *
+     * @return Index of task.
+     */
     public int extractTaskNum() {
         String num = command.replaceAll("[^0-9]", "");
         return Integer.parseInt(num);
     }
 
+    /**
+     * Updates and write tasks to data file.
+     * Prints farewell message and exits program.
+     * 
+     */
     public void exit() {
         try {
             storage.writeToFile();
