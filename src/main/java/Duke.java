@@ -1,7 +1,9 @@
 
 import java.sql.Array;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.io.*;
 public class Duke {
     /*public static void main(String[] args) {
@@ -78,29 +80,36 @@ public class Duke {
                 }
             } else if (parts[0].equals("deadline")) {
                 try {
-                    String[] deadlineParts = parts[1].split("/");
+                    String[] deadlineParts = parts[1].split(" /");
                     String[] deadline = deadlineParts[1].split(" ", 2);
-                    Deadline newDeadline = new Deadline(deadlineParts[0], deadline[1]);
+                    LocalDate byDate = LocalDate.parse(deadline[1]);
+                    Deadline newDeadline = new Deadline(deadlineParts[0], byDate);
                     toDoList.add(newDeadline);
                     System.out.println("    Got it. I've added this task:");
                     System.out.println("     " + newDeadline.toString());
                     System.out.println("    Now you have " + toDoList.size() + " tasks in the list");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("    OOPS!!! The description of deadline cannot be empty.");
+                } catch (DateTimeParseException e) {
+                    System.out.println("    Incorrect date format, try again~");
                 }
 
             } else if (parts[0].equals("event")) {
                 try {
-                    String[] eventParts = parts[1].split("/");
+                    String[] eventParts = parts[1].split(" /");
                     String[] from = eventParts[1].split(" ", 2);
                     String[] to = eventParts[2].split(" ", 2);
-                    Event newEvent = new Event(eventParts[0], from[1], to[1]);
+                    LocalDate fromDate = LocalDate.parse(from[1]);
+                    LocalDate toDate = LocalDate.parse(to[1]);
+                    Event newEvent = new Event(eventParts[0], fromDate, toDate);
                     toDoList.add(newEvent);
                     System.out.println("    Got it. I've added this task:");
                     System.out.println("     " + newEvent.toString());
                     System.out.println("    Now you have " + toDoList.size() + " tasks in the list");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("    OOPS!!! The description of event cannot be empty.");
+                } catch (DateTimeParseException e) {
+                    System.out.println("    Incorrect date format, please try again~");
                 }
             } else {
                 System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :<");
