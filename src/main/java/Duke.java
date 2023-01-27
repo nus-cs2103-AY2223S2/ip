@@ -1,5 +1,3 @@
-package Duke;
-
 import Duke.Parser.Parser;
 import Duke.Ui.Ui;
 import Duke.entities.TaskList;
