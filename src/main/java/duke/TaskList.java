@@ -1,6 +1,11 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 
 public class TaskList {
     private ArrayList<Task> listOfTasks;
@@ -46,6 +51,7 @@ public class TaskList {
                     return false;
                 }
                 int indexForTo = Parser.getIndexOfWord(words, "/to");
+
                 if (DateTime.getDateTime(words,indexForFrom) == null || DateTime.getDateTime(words,indexForTo) == null) {
                     System.out.println("Please enter in this format {description} /from DD/MM/YYYY HHMM /to DD/MM/YYYY HHMM. Try again");
                     return false;
@@ -101,7 +107,7 @@ public class TaskList {
      * 
      * @return return a list of task
      */
-    public ArrayList<Task> getListOfTask(){
+    public ArrayList<Task> getListOfTask() {
         return listOfTasks;
     }
 }

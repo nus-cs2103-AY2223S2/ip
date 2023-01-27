@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,7 +17,7 @@ public class Deadline extends Task {
      * 
      * @return String representation of date and time in this format "DD MMM yyyy hh:mma"
      */
-    public String getDateTime(){
+    public String getDateTime() {
         return date.format(DateTimeFormatter.ofPattern("DD MMM yyyy hh:mma"));
     }
 

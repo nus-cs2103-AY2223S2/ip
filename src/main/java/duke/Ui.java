@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,9 +7,11 @@ import java.io.InputStreamReader;
 public class Ui {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private Parser parser;
+    
     public Ui(Parser parser) {
         this.parser = parser;
     }
+
      /**
      * Receive command given by the user and pass to parser to run the command
      * 

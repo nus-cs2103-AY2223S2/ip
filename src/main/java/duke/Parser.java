@@ -1,4 +1,7 @@
+package duke;
+
 import java.util.Arrays;
+import duke.task.Task;
 
 public class Parser {
 
@@ -10,7 +13,9 @@ public class Parser {
      * @param words User input
      * @return return True if command is bye, otherwise return false
      */
-    public boolean runCommand(TaskList taskList, Storage storage, String[] words) throws IndexOutOfBoundsException, NumberFormatException, InvalidCommandException {
+    public boolean runCommand(TaskList taskList, Storage storage, String[] words) throws IndexOutOfBoundsException,
+            NumberFormatException, InvalidCommandException {
+
         boolean hasTaskChanged = false;
         words[0] = words[0].toUpperCase();
         switch(words[0]) {

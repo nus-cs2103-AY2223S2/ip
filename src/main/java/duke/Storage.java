@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,6 +10,9 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 
 public class Storage {
     private static String FILE_PATH = "./data/eren.txt";
@@ -20,10 +25,10 @@ public class Storage {
         String dateTime = null;
         fileContent = "  TYPE  | COMPLETED | DETAILS | DATE\n";
         for (Task t : listOfTasks) {
-            if (t.type == 'T') {
+            if (t.getType() == 'T') {
                 fileContent += "  Todo  |";
             }
-            else if (t.type == 'D') {
+            else if (t.getType() == 'D') {
                 fileContent += "Deadline|";
                 if (t instanceof Deadline) {
                     Deadline task = (Deadline) t;
@@ -37,8 +42,8 @@ public class Storage {
                     dateTime = task.getDateTime();
                 }
             }
-            fileContent += t.isDone ? "    YES    | " : "    NO     | ";
-            fileContent += t.description + " | " ;
+            fileContent += t.isDone() ? "    YES    | " : "    NO     | ";
+            fileContent += t.getDescription() + " | " ;
             fileContent += (dateTime == null ? "---" : dateTime) + "\n";
         }
         File file = new File(FILE_PATH);
