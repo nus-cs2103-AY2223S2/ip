@@ -43,6 +43,10 @@ public class Deadline extends Task{
         this.dueDate = dueDate;
     }
 
+    public String getDueDate() {
+        return this.dueDate.format(FORMATTER);
+    }
+
     @Override
     public String getType() {
         return "deadline";

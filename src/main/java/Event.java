@@ -51,6 +51,14 @@ public class Event extends Task{
         this.endTime = endTime;
     }
 
+    public String getStartTime() {
+        return this.startTime.format(FORMATTER);
+    }
+
+    public String getEndTime() {
+        return this.endTime.format(FORMATTER);
+    }
+
     @Override
     public String getType() {
         return "event";
