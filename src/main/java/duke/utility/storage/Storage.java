@@ -1,4 +1,4 @@
-package utility.storage;
+package duke.utility.storage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Paths;
 
-import tasklist.TaskList;
+import duke.tasklist.TaskList;
 
 public class Storage {
     private static final String FOLDER_PATH = "src/main/java/utility/storage/data";

@@ -1,4 +1,4 @@
-package utility.storage;
+package duke.utility.storage;
 
 import java.io.File;
 import java.io.IOException;

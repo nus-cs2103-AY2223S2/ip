@@ -1,4 +1,4 @@
-package duke_exception;
+package duke.duke_exception;
 
 /**
  * An Exception class used to handle invalid commands where Duke is unable to

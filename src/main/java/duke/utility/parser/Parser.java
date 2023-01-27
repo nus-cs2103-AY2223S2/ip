@@ -1,12 +1,12 @@
-package utility.parser;
+package duke.utility.parser;
 
-import duke_exception.DukeException;
-import tasklist.TaskList;
-import tasklist.task_types.Deadline;
-import tasklist.task_types.Event;
-import tasklist.task_types.Task;
-import tasklist.task_types.ToDo;
-import utility.ui.UiMessage;
+import duke.duke_exception.DukeException;
+import duke.tasklist.TaskList;
+import duke.tasklist.task_types.Deadline;
+import duke.tasklist.task_types.Event;
+import duke.tasklist.task_types.Task;
+import duke.tasklist.task_types.ToDo;
+import duke.utility.ui.UiMessage;
 
 public class Parser {
     private static DukeException wrongNumberParam = new DukeException("Wrong number of parameters inserted.");

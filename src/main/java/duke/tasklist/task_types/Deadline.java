@@ -1,9 +1,9 @@
-package tasklist.task_types;
+package duke.tasklist.task_types;
 
 import java.time.format.DateTimeParseException;
 
-import duke_exception.DukeException;
-import utility.date.Date;
+import duke.duke_exception.DukeException;
+import duke.utility.date.Date;
 
 /**
  * Represents a <code>task</code> object that contains a string holding the

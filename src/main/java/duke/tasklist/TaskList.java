@@ -1,10 +1,10 @@
-package tasklist;
+package duke.tasklist;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import duke_exception.DukeException;
-import tasklist.task_types.Task;
+import duke.duke_exception.DukeException;
+import duke.tasklist.task_types.Task;
 
 public class TaskList implements Serializable {
     private static DukeException invalidIndex = new DukeException("Invalid index keyed.");

@@ -1,4 +1,4 @@
-package tasklist.task_types;
+package duke.tasklist.task_types;
 
 /**
  * Represents a <code>task</code> object that contains a string holding the

@@ -1,4 +1,4 @@
-package tasklist.task_types;
+package duke.tasklist.task_types;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
-package utility.ui;
+package duke.utility.ui;
 
-import tasklist.TaskList;
-import utility.parser.CommandMap;
+import duke.tasklist.TaskList;
+import duke.utility.parser.CommandMap;
 
 public class Ui {
     private static final String BRACKETS = "_______________________________________________________\n";

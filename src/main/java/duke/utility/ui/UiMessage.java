@@ -1,7 +1,7 @@
-package utility.ui;
+package duke.utility.ui;
 
-import tasklist.task_types.Task;
-import utility.parser.CommandMap;
+import duke.tasklist.task_types.Task;
+import duke.utility.parser.CommandMap;
 
 public class UiMessage extends Ui {
     public final CommandMap TYPE;

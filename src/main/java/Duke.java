@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
-import duke_exception.DukeException;
-import tasklist.TaskList;
-import utility.parser.CommandMap;
-import utility.parser.Parser;
-import utility.storage.Storage;
-import utility.ui.Ui;
-import utility.ui.UiMessage;
+import duke.duke_exception.DukeException;
+import duke.tasklist.TaskList;
+import duke.utility.parser.CommandMap;
+import duke.utility.parser.Parser;
+import duke.utility.storage.Storage;
+import duke.utility.ui.Ui;
+import duke.utility.ui.UiMessage;
 
 /**
  * <h1>Duke Chatbot</h1>

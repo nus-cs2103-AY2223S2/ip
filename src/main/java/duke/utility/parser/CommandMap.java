@@ -1,4 +1,4 @@
-package utility.parser;
+package duke.utility.parser;
 
 public enum CommandMap {
     list,
