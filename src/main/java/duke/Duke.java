@@ -20,10 +20,6 @@ public class Duke {
         }
     }
 
-    /**
-     * The method of run
-     * Runs the whole program until exit
-     */
     public void run() throws IOException {
         Ui.showLogo();
         Ui.showWelcome();
@@ -36,10 +32,7 @@ public class Duke {
         storage.updateFile(tasks);
         Ui.exit();
     }
-    /**
-     * The method of main
-     * @param  args
-     */
+
     public static void main(String[] args) throws IOException {
         new Duke("data/tasks.txt").run();
     }
