@@ -9,6 +9,8 @@ import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+/*
 public class Panav {
     public static void main(String[] args) throws InvalidInputException, ToDoDescriptionException {
 
@@ -28,13 +30,13 @@ public class Panav {
         } catch (ToDoDescriptionException e) {
             System.out.println(e.getMessage());
         }
+
         String command = sc.nextLine();
         int counter = list.size();
         while(true) {
             try {
                 String[] temp = command.split(" ");
                 String first = temp[0];
-                //Task t = new Task(command);
                 int len = command.length();
                 switch (first) {
                 case "list":
@@ -160,14 +162,16 @@ public class Panav {
 
     }
 
-    /**
+    */
+/**
      * Returns the index number for commands which manipulate the list.
      *
      * @param command The command which is manipulating list.
      * @param counter The number of elements in the list.
      * @return Index number in command.
      * @throws InvalidNumberException If the index doesn't exist.
-     */
+     *//*
+
     public static int readNumber(String command, int counter) throws InvalidNumberException{
         int number = Integer.parseInt(String.valueOf(command.charAt(command.length() - 1)));
         if (number > counter || number < 1) {
@@ -177,13 +181,15 @@ public class Panav {
         }
     }
 
-    /**
+    */
+/**
      * Reads the existing list of tasks from text file.
      *
      * @param filePath path of file to be read from
      * @throws FileNotFoundException if text file doesn't exist.
      * @throws ToDoDescriptionException if todo is missing description.
-     */
+     *//*
+
     public static ArrayList<Task> readFromFile(String filePath) throws FileNotFoundException ,
             ToDoDescriptionException {
         ArrayList<Task> list = new ArrayList<>();
@@ -215,12 +221,14 @@ public class Panav {
         return list;
     }
 
-    /**
+    */
+/**
      * Writes the changes to the list to the file.
      * @param list the list containing the tasks.
      * @param filePath the path of the file to be written to.
      * @throws IOException in case if folder is not found or some other exception.
-     */
+     *//*
+
     public static void writeToFile(ArrayList<Task> list, String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         String textToAdd = "";
@@ -247,12 +255,14 @@ public class Panav {
         fw.close();
     }
 
-    /**
+    */
+/**
      * Formats the date according to 'MMM dd yyyy' if it's given in the correct format of
      * 'yyyy-mm-dd', otherwise it just returns the string.
      * @param dateString the string to be formatted.
      * @return either the formatted date or the original string itself.
-     */
+     *//*
+
     public static String formatDate(String dateString) {
         LocalDate d = null;
         String result = dateString;
@@ -266,3 +276,53 @@ public class Panav {
         return result;
     }
 }
+*/
+public class Panav {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Panav(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException | FileNotFoundException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+
+
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                if(c.toString().compareTo(ListCommand.COMMAND_WORD) != 0 ||
+                        c.toString().compareTo(ExitCommand.COMMAND_WORD) != 0) {
+                    storage.write(tasks);
+                }
+                isExit = c.isExit();
+            } catch (DukeException e) {
+               System.out.println(e.getMessage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (NullPointerException e) {
+                continue;
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Panav("C:\\Users\\panav\\OneDrive\\Desktop\\CS2103T\\ip\\src\\main\\java\\data\\panav.txt").run();
+    }
+}
+

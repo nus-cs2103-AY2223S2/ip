@@ -1,11 +1,7 @@
-public class InvalidNumberException extends Exception{
+public class InvalidNumberException extends DukeException{
 
     public InvalidNumberException(String message) {
         super(message);
     }
 
-    @Override
-    public String toString() {
-        return getMessage();
-    }
 }
