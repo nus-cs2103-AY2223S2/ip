@@ -1,19 +1,26 @@
 import java.util.Scanner;
 import java.io.IOException;
 import java.time.DateTimeException;
-
 import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public class Duke
-{
+/**
+ * Main application class.
+ */
+public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Create <case>Duke</case> object.
+     *
+     * @param filePath To specific a file path to save the previous records.
+     * @throws IOException If file cannot be loaded.
+     */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         try {
@@ -27,6 +34,10 @@ public class Duke
         }
     }
 
+    /**
+     * Main application loop.
+     * Get the user input to trigger the run.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -47,6 +58,12 @@ public class Duke
         }
     }
 
+    /**
+     * Entry point to the application.
+     *
+     * @param args Optional arguments.
+     * @throws IOException if cannot access folder/file.
+     */
     public static void main(String[] args) throws IOException {
         Duke duke = new Duke("./userRecords/records.txt");
         duke.run();

@@ -1,29 +1,59 @@
 package duke;
 
+/**
+ * The task class contains all the tasks that can be opreated by
+ * users.
+ */
 public class Task {
     private String taskDescription;
     private boolean isDone;
 
-    public Task(String taskDescription) {
+    /**
+     * Generate a <code>Task</code> object.
+     * @param taskDescription The task description.
+     */
+    public Task (String taskDescription) {
         this.taskDescription = taskDescription;
         this.isDone = false;
     }
 
+    /**
+     * Get the status of a task.
+     *
+     * @return Whether the task is being marked or not.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
+    /**
+     * Set the task as done.
+     */
     public void setIsDone() {
         isDone = true;
     }
 
+    /**
+     * Set the task as not done.
+     */
     public void revertIsDone() {
         isDone = false;
     }
 
+    /**
+     * Get the description of a task
+     *
+     * @return A specific task description.
+     */
     public String getTaskDes() {
         return taskDescription;
     }
+
+    /**
+     * Construct display message.
+     *
+     * @return Message in format.
+     */
 
     @Override
     public String toString() {
