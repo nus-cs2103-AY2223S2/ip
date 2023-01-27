@@ -5,7 +5,8 @@ public class Event extends Duke.Task {
     private String eventSpan;
     public Event(String content) {
         super(content.substring(6).split("/")[0]);
-        String[] strArr = content.split("/");
+        String[] strArr = content.split("/from");
+        String deadlineTime = strArr[1].substring(1);
         this.eventSpan = "(" + "by:" + strArr[1].substring(4) + "to:" + strArr[2].substring(2) + ")";
     }
 
