@@ -12,7 +12,7 @@ public class Duke {
     public Duke() {
         try {
             this.tasks = this.storage.load();
-        } catch(DukeLoadException e) {
+        } catch(DukeSaveLoadException e) {
             this.ui.showError(e);
             this.tasks = new TaskList();
         }

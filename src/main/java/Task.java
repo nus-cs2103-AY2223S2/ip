@@ -35,7 +35,7 @@ public abstract class Task {
             .toArray(String[]::new);
     }
 
-    public static Task loadFromString(String input) throws DukeLoadException {
+    public static Task loadFromString(String input) throws DukeSaveLoadException {
         String[] values = Task.decodeValues(input);
         String taskType = values[0];
         switch (taskType) {
@@ -47,7 +47,7 @@ public abstract class Task {
                 return TaskEvent.loadFromString(input);
             default:
                 String errorMessage = String.format("Unknown task in save-file: \"%s\"", input);
-                throw new DukeLoadException(errorMessage);
+                throw new DukeSaveLoadException(errorMessage);
         }
     }
 

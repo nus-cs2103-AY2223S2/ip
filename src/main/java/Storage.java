@@ -26,7 +26,7 @@ public class Storage {
         }
     }
 
-    public TaskList load() throws DukeLoadException {
+    public TaskList load() throws DukeSaveLoadException {
         String saveFileContents = Storage.readFile(this.filePath);
         TaskList output = new TaskList();
         if (saveFileContents == null || saveFileContents.isBlank()) {
