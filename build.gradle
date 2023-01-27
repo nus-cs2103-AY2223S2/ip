@@ -4,6 +4,14 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+        }
+    }
+}
+
 repositories {
     mavenCentral()
 }

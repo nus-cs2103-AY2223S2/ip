@@ -2,7 +2,7 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
-import Views;
+import duke.enums.Views;
 import duke.DukeException;
 
 public class Deadline extends Task {
