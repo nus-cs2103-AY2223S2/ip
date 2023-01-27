@@ -1,13 +1,11 @@
 public class Event extends Task{
     private final String fromStr;
     private final String toStr;
-    public Task.Type type;
 
     public Event(String task, String from, String to) {
         super(task);
         fromStr = from;
         toStr = to;
-        type = Type.EVENT;
     }
 
     @Override
@@ -17,6 +15,6 @@ public class Event extends Task{
 
     @Override
     public String toCommand() {
-        return "event " + super.taskStr + " /from " + fromStr + " /to " + toStr + (super.done ? "\nmark last": "");
+        return "event " + super.description + " /from " + fromStr + " /to " + toStr + (super.isDone ? "\nmark last": "");
     }
 }

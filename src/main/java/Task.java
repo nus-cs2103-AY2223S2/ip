@@ -1,26 +1,24 @@
 import java.util.Locale;
 
+/**
+ * The parent class of all tasks.
+ * Takes in a string description of the task
+ */
 public abstract class Task{
-    protected final String taskStr;
-    protected boolean done;
-    enum Type {
-        TODO,
-        EVENT,
-        DEADLINE
-    }
+    final String description;
+    boolean isDone;
 
     /**
      * Constructor for a Task
-     * Since Task is an abstract class this should NOT be called directory.
-     * @param taskStr is the description of the task
+     * @param description is the description of the task
      */
-    public Task(String taskStr) {
-        this.taskStr = taskStr;
-        done = false;
+    public Task(String description) {
+        this.description = description;
+        isDone = false;
     }
 
     /**
-     * Factory builder for different types of tasks.
+     * Creates a Task of a certain type based on a given command
      * @param command is the input typed in by the user
      * @return the relevant Task subclass
      * @throws CatBotException if the input is malformed
@@ -54,23 +52,22 @@ public abstract class Task{
         }
     }
 
-    /**
-     * Setter for done
-     * @param done is whether the task is marked as done
-     */
     public void setDone(boolean done) {
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
      * Internal method for getting the icon for a marked task
      * @return a string that should be placed in the slot indicating whether this task is marked
      */
-    public String getStatusIcon() {
-        return done ? ConsoleColors.GREEN + "✓" + ConsoleColors.RESET : " ";
+    protected String getStatusIcon() {
+        return isDone ? ConsoleColors.GREEN + "✓" + ConsoleColors.RESET : " ";
     }
+
+    @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + taskStr;
+        return "[" + getStatusIcon() + "] " + description;
     }
+
     public abstract String toCommand();
 }

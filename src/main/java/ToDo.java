@@ -1,9 +1,7 @@
 public class ToDo extends Task {
-    public Task.Type type;
 
     public ToDo(String task) {
         super(task);
-        type = Type.TODO;
     }
 
     @Override
@@ -13,6 +11,6 @@ public class ToDo extends Task {
 
     @Override
     public String toCommand() {
-        return "todo " + super.taskStr + (super.done ? "\nmark last": "");
+        return "todo " + super.description + (super.isDone ? "\nmark last": "");
     }
 }
