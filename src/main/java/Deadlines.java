@@ -20,26 +20,44 @@ public class Deadlines extends Task {
         String possibleDueDate = endsByInArr[0];
         if (endsByInArr.length > 1) {
             String timeInString = endsByInArr[1];
-            if (timeInString.length() == 4) {
-                String firstTwo = timeInString.substring(0, 2);
-                String nextTwo = timeInString.substring(2, 4);
-                String toParse = firstTwo + ":" + nextTwo;
-                if (checkValidityOfTime(toParse)) {
-                    this.dueTime = LocalTime.parse(toParse);
-                    validTime = true;
-                }
-            } else if (timeInString.length() == 5) {
-                if (checkValidityOfTime(timeInString)) {
-                    this.dueTime = LocalTime.parse(timeInString);
-                    validTime = true;
-                }
-            }
+            // if (timeInString.length() == 4) {
+            //     String firstTwo = timeInString.substring(0, 2);
+            //     String nextTwo = timeInString.substring(2, 4);
+            //     String toParse = firstTwo + ":" + nextTwo;
+            //     if (checkValidityOfTime(toParse)) {
+            //         this.dueTime = LocalTime.parse(toParse);
+            //         validTime = true;
+            //     }
+            // } else if (timeInString.length() == 5) {
+            //     if (checkValidityOfTime(timeInString)) {
+            //         this.dueTime = LocalTime.parse(timeInString);
+            //         validTime = true;
+            //     }
+            // }
+            formatTimeIfValid(timeInString);
         }
         if (possibleDueDate.indexOf("/") != -1) {
             possibleDueDate = possibleDueDate.replace("/", "-");
         }
-        if (checkValidityOfDate(possibleDueDate)) {
+        if (checkValidityOfInitialInputDate(possibleDueDate)) {
             this.dueDateBy = LocalDate.parse(possibleDueDate);
+        }
+    }
+
+    public void formatTimeIfValid(String toFormat) {
+        if (toFormat.length() == 4) {
+            String firstTwo = toFormat.substring(0, 2);
+            String nextTwo = toFormat.substring(2, 4);
+            String toParse = firstTwo + ":" + nextTwo;
+            if (checkValidityOfTime(toParse)) {
+                this.dueTime = LocalTime.parse(toParse);
+                validTime = true;
+            }
+        } else if (toFormat.length() == 5) {
+            if (checkValidityOfTime(toFormat)) {
+                this.dueTime = LocalTime.parse(toFormat);
+                validTime = true;
+            }
         }
     }
 
@@ -47,7 +65,16 @@ public class Deadlines extends Task {
         return this.validTime;
     }
 
-    public boolean checkValidityOfDate(String toCheck) throws DateTimeParseException{
+    public void reformat() {
+        String[] reconstructedDateArr = this.endsBy.split(" ");
+        String reconstructedDateInString = reconstructedDateArr[0] + " " + reconstructedDateArr[1] + " " + reconstructedDateArr[2];
+        reconstructedDateInString = reconstructedDateInString.replace(" ", "/");
+        DateTimeFormatter originalFormat = DateTimeFormatter.ofPattern("MMM/d/uuuu");
+        LocalDate reconstructedDate = LocalDate.parse(LocalDate.parse(reconstructedDateInString, originalFormat).toString());
+        this.dueDateBy = reconstructedDate;
+    }
+
+    public boolean checkValidityOfInitialInputDate(String toCheck) throws DateTimeParseException {
         boolean isValid = true;
         try {
             LocalDate.parse(toCheck);
@@ -57,7 +84,18 @@ public class Deadlines extends Task {
         return isValid;
     }
 
-    public boolean checkValidityOfTime(String toCheck) throws DateTimeParseException{
+    public boolean checkValidityOfDateFromList(String toCheck) throws DateTimeParseException {
+        boolean isValid = true;
+        try {
+            DateTimeFormatter originalFormat = DateTimeFormatter.ofPattern("MMM/d/uuuu");
+            LocalDate.parse(toCheck, originalFormat);
+        } catch (DateTimeParseException DTPE) {
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    public boolean checkValidityOfTime(String toCheck) throws DateTimeParseException {
         boolean isValid = true;
         try {
             LocalTime.parse(toCheck);
@@ -87,18 +125,40 @@ public class Deadlines extends Task {
     public String toString() {
         String toReturn = "";
         DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("MMM/d/uuuu");
-        String newFormatOfDate = this.dueDateBy.format(newFormat).replace("/", " ");
-        if (this.done) {
-            if (validTime) {
-                toReturn = "[D][X]" + this.name + "(by: " + newFormatOfDate + " " + this.dueTime.toString() + ")";
+        if (this.dueDateBy == null) {
+            String[] checkIfTrulyNull = this.endsBy.split(" ");
+            if (checkIfTrulyNull.length >= 3) {
+                String checkingInString = checkIfTrulyNull[0] + "/" + checkIfTrulyNull[1] + "/" + checkIfTrulyNull[2];
+                if (checkValidityOfDateFromList(checkingInString)) {
+                    reformat();
+                    if (checkIfTrulyNull.length == 4) {
+                        formatTimeIfValid(checkIfTrulyNull[3]);
+                    }
+                } else {
+                    System.out.println("The date is invalid!");
+                }
+            }
+        }
+        if (this.dueDateBy != null) {
+            String newFormatOfDate = this.dueDateBy.format(newFormat).replace("/", " ");
+            if (this.done) {
+                if (validTime) {
+                    toReturn = "[D][X]" + this.name + "(by: " + newFormatOfDate + " " + this.dueTime.toString() + ")";
+                } else {
+                    toReturn = "[D][X]" + this.name + "(by: " + newFormatOfDate + ")";
+                }
             } else {
-                toReturn = "[D][X]" + this.name + "(by: " + newFormatOfDate + ")";
+                if (validTime) {
+                    toReturn = "[D][ ]" + this.name + "(by: " + newFormatOfDate + " " + this.dueTime.toString() + ")";
+                } else {
+                    toReturn = "[D][ ]" + this.name + "(by: " + newFormatOfDate + ")";
+                }
             }
         } else {
-            if (validTime) {
-                toReturn = "[D][ ]" + this.name + "(by: " + newFormatOfDate + " " + this.dueTime.toString() + ")";
+            if (this.done) {
+                toReturn = "[D][X]" + this.name + "(by: " + this.endsBy + ")";
             } else {
-                toReturn = "[D][ ]" + this.name + "(by: " + newFormatOfDate + ")";
+                toReturn = "[D][ ]" + this.name + "(by: " + this.endsBy + ")";
             }
         }
         return toReturn;
