@@ -55,6 +55,17 @@ public class TaskList implements Serializable {
             throw new DukeException(INVALID_INDEX_EXCEPTION);
         }
     }
+
+    public String search(String keyword) {
+        TaskList filteredTasks = new TaskList();
+        for (Task task: list) {
+            if (task.hasKeyword(keyword)) {
+                filteredTasks.addTask(task);
+            }
+        }
+        return filteredTasks.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
