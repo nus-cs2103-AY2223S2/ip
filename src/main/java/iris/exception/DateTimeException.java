@@ -1,4 +1,4 @@
-package src.main.java.exception;
+package iris.exception;
 
 public class DateTimeException extends IrisException {
     public DateTimeException() {

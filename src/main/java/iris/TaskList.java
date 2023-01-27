@@ -1,6 +1,11 @@
-package src.main.java;
+package iris;
+
+import iris.task.Deadline;
+import iris.task.Event;
+import iris.task.Task;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class TaskList extends ArrayList<Task> {
 

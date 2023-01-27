@@ -1,4 +1,4 @@
-package src.main.java;
+package iris;
 
 import java.util.Scanner;
 

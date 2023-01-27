@@ -1,9 +1,12 @@
-package src.main.java;
+package iris;
 
-import src.main.java.command.Command;
-import src.main.java.command.HelpCommand;
-import src.main.java.exception.MissingFieldException;
-import src.main.java.exception.NoTaskException;
+import iris.command.*;
+import iris.exception.MissingFieldException;
+import iris.task.Event;
+import iris.task.Todo;
+import iris.exception.IrisException;
+import iris.exception.NoTaskException;
+import iris.task.Deadline;
 
 public class Parser {
     enum CommandWord {

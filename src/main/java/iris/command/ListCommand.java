@@ -1,4 +1,8 @@
-package src.main.java.command;
+package iris.command;
+
+import iris.TaskList;
+import iris.Ui;
+import iris.TaskStore;
 
 public class ListCommand extends Command{
     @Override

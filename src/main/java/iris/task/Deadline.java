@@ -1,13 +1,15 @@
-package src.main.java.task;
+package iris.task;
+
+import iris.exception.DateTimeException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task{
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
-    Deadline(String name, String by) throws DateTimeException {
+    public Deadline(String name, String by) throws DateTimeException {
         super(name);
         try {
             this.deadline = LocalDateTime.parse(by.trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));

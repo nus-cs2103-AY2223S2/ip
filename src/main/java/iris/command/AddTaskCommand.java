@@ -1,4 +1,9 @@
-package src.main.java.command;
+package iris.command;
+
+import iris.TaskList;
+import iris.Ui;
+import iris.task.*;
+import iris.TaskStore;
 
 public class AddTaskCommand extends Command {
     Task task;
@@ -17,7 +22,7 @@ public class AddTaskCommand extends Command {
                 ? "What?!! You're going to dieee!\n"
                 : "Another task? Phew >:(.\n" ;
 
-        ui.output(out + "Added your task: "  + this.task);
-        ui.output("You have " + tasks.size() + " tasks.");
+        Ui.output(out + "Added your task: "  + this.task);
+        Ui.output("You have " + tasks.size() + " tasks.");
     }
 }

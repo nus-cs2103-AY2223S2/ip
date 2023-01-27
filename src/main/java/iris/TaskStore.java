@@ -1,4 +1,7 @@
-package src.main.java;
+package iris;
+
+import iris.exception.IrisException;
+import iris.task.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;

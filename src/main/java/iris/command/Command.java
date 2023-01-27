@@ -1,4 +1,9 @@
-package src.main.java.command;
+package iris.command;
+
+import iris.TaskList;
+import iris.Ui;
+import iris.exception.IrisException;
+import iris.TaskStore;
 
 public abstract class Command {
     public boolean isEnd() {

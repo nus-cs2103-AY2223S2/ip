@@ -1,4 +1,6 @@
-package src.main.java.command;
+package iris.task;
+
+import iris.exception.DateTimeException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +10,7 @@ public class Event extends Task{
     private final LocalDateTime from;
     private final LocalDateTime to;
 
-    Event(String name, String from, String to) throws DateTimeException {
+    public Event(String name, String from, String to) throws DateTimeException {
         super(name);
         try {
             this.from = LocalDateTime.parse(from.trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));

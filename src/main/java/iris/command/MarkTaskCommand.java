@@ -1,4 +1,11 @@
-package src.main.java.command;
+package iris.command;
+
+import iris.TaskList;
+import iris.Ui;
+import iris.exception.IrisException;
+import iris.exception.UnknownTaskException;
+import iris.task.*;
+import iris.TaskStore;
 
 public class MarkTaskCommand extends Command {
     int index;

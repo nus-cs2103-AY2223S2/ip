@@ -1,7 +1,7 @@
-package src.main.java;
+package iris;
 
-import src.main.java.command.Command;
-import src.main.java.exception.IrisException;
+import iris.command.Command;
+import iris.exception.IrisException;
 
 /**
  * A teenage chatbot that can store text entered by the user and
@@ -12,9 +12,8 @@ import src.main.java.exception.IrisException;
  */
 public class Iris {
     private TaskList tasks = null;
-    private String input;
-    private TaskStore taskStore;
-    private Ui ui;
+    private final TaskStore taskStore;
+    private final Ui ui;
 
     public Iris() {
         this.ui = new Ui();
@@ -35,7 +34,7 @@ public class Iris {
         boolean isEnd = false;
         while (!isEnd) {
             try {
-                input = this.ui.readInput();
+                String input = this.ui.readInput();
                 Command command = Parser.parse(input);
                 command.execute(this.tasks, this.ui, this.taskStore);
                 isEnd = command.isEnd();

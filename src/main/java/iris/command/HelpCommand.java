@@ -1,4 +1,8 @@
-package src.main.java.command;
+package iris.command;
+
+import iris.TaskList;
+import iris.Ui;
+import iris.TaskStore;
 
 public class HelpCommand extends Command {
     private static final String HELP_TEXT = "Hello! You can use the following commands:\n" +

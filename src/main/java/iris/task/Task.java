@@ -1,10 +1,14 @@
-package src.main.java.task;
+package iris.task;
+
+import iris.exception.IrisException;
+import iris.exception.MissingFieldException;
+import iris.exception.NoTaskException;
 
 public class Task {
     private boolean isDone = false;
     private final String name;
 
-    Task(String name) {
+    public Task(String name) {
         this.name = name;
     }
 
