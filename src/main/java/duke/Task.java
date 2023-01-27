@@ -18,7 +18,6 @@ public abstract class Task {
     public String convertBoolean() {
         return (this.isDone) ? "1" : "0";
     }
-    public abstract String currToPrint();
     public String getDescription() {
         return description;
     }

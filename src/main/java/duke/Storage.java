@@ -5,42 +5,39 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
 public class Storage {
 
     String filePath;
+    String directoryPath;
 
-    public Storage(String filePath) {
+    public Storage(String filePath, String directoryPath) {
         this.filePath = filePath;
+        this.directoryPath = directoryPath;
     }
 
     TaskList<Task> readFile() throws NeroException {
         TaskList<Task> taskList = new TaskList<Task>();
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
         try {
             File file = new File(filePath);
-            file.getParentFile().mkdirs();
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-                String[] inputs = line.split(" | ");
-                ArrayList<String> cleanedInputs = new ArrayList<String>();
-                String s = "";
-                for (int i = 0; i < inputs.length; i++) {
-                    if (inputs[i] != "|" || i == inputs.length) {
-                        cleanedInputs.add(s);
-                    } else {
-                        s += inputs[i];
-                    }
-                }
-                boolean isDone = (cleanedInputs.get(1).equals("0")) ? false : true;
-                if (cleanedInputs.get(0).equals("T")) {
-                    taskList.addTask(new ToDo(cleanedInputs.get(2), isDone));
-                } else if (cleanedInputs.get(0).equals("D")) {
-                    taskList.addTask(new Deadline(cleanedInputs.get(2), isDone, cleanedInputs.get(3)));
-                } else {
-                    taskList.addTask(new Event(cleanedInputs.get(2), isDone, cleanedInputs.get(3)));
+                String[] cleanedInputs = line.split(" \\| ");
+                boolean isDone = (cleanedInputs[1].equals("0")) ? false : true;
+                if (cleanedInputs[0].toUpperCase().equals("T")) {
+                    taskList.addTask(new ToDo(cleanedInputs[2], isDone));
+                } else if (cleanedInputs[0].toUpperCase().equals("D")) {
+                    taskList.addTask(new Deadline(cleanedInputs[2], isDone, cleanedInputs[3]));
+                } else if (cleanedInputs[0].toUpperCase().equals("E")) {
+                    taskList.addTask(new Event(cleanedInputs[2], isDone, cleanedInputs[3]));
                 }
             }
             sc.close();
@@ -54,7 +51,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (int i = 0; i < taskList.getSize(); i++) {
-                fw.write(taskList.get(i).toSave());
+                fw.write(taskList.get(i).toSave() + "\n");
             }
             fw.close();
         } catch (IOException e) {

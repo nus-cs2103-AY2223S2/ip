@@ -1,0 +1,6 @@
+T | 0 | eat food
+T | 1 | read book
+T | 0 | run around
+T | 0 | sleep
+D | 0 |  return book  | from 7 may
+E | 0 |  panic  | from: 2 aug to: 3 aug

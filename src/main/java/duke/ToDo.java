@@ -13,12 +13,11 @@ public class ToDo extends Task {
         return "T";
     }
 
-    public String currToPrint() {
-        return "[" + this.getTaskIcon() + "]" + this.getStatusIcon() + " " + this.getDescription();
-    }
-
-
     public String toSave() {
         return this.getTaskIcon() + SEPARATOR + convertBoolean() + SEPARATOR + this.getDescription();
+    }
+    @Override
+    public String toString() {
+        return "[" + this.getTaskIcon() + "]" + this.getStatusIcon() + " " + this.getDescription();
     }
 }

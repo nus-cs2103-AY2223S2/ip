@@ -16,16 +16,18 @@ public class Deadline extends Task {
         return duration;
     }
     public String getTaskIcon() {
-        return "[D]";
+        return "D";
     }
 
-    public String currToPrint() {
-        return this.getTaskIcon() + this.getStatusIcon() + " " + this.getDescription() +
-                " (" + this.getDuration() + ")";
-    }
 
     public String toSave() {
         return this.getTaskIcon() + SEPARATOR + convertBoolean() + SEPARATOR + this.getDescription()
                 + SEPARATOR + this.getDuration();
+    }
+    @Override
+    public String toString() {
+        return "[" + this.getTaskIcon() + "]"
+                + this.getStatusIcon() + " " + this.getDescription()
+                + " (" + this.getDuration() + ")";
     }
 }
