@@ -51,6 +51,10 @@ public class Duke {
             //Creates a Todo type Task
             else if(splitInput[0].equals("todo")) {
                 Todo.createTodoTask(array, splitInput);
+            }
+            //Deletes a Task 
+            else if(splitInput[0].equals("delete")) {
+                Task.deleteTask(array, splitInput);
             } else {
                 try {
                     throw new IllegalArgumentException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
