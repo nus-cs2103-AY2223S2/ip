@@ -30,7 +30,7 @@ public class Task {
     public void toBeUnmarked() {
         this.checkMark = false;
     }
-
+    
     /**
      * Displays name, date and time of the task
      *
@@ -40,4 +40,5 @@ public class Task {
     public String toString() {
         return (checkMark ? "[X] " : "[] ") + name;
     }
+
 }

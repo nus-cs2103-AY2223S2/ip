@@ -14,7 +14,7 @@ public class Parser {
      * Contains instructions to be entered by user to control system
      */
     public enum Instructions {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
     }
 
     /**
@@ -66,8 +66,11 @@ public class Parser {
             case DELETE:
                 return new DeleteCommand(index);
 
-            // default will throw an exception in case switch-case is unable to find
-            // instruction
+            // Find tasks that contain the input word entered by user
+            case FIND:
+                return new FindCommand(part[1]);
+
+            // default will throw an exception in case switch-case is unable to find instruction
             default:
                 return new DefaultCommand();
         }

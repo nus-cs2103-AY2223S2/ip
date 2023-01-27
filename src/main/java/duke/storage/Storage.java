@@ -100,6 +100,20 @@ public class Storage {
         this.ui.listInfo(list.size());
     }
 
+    /**
+     * Finds word that contains in existing tasks
+     *
+     * @param input to be entered by the user
+     */
+    public void findListItem(String input) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).toString().contains(input)) {
+                System.out.println((i + 1) + ". " + list.get(i));
+            }
+        }
+
+    }
+
 
     /**
      * Part of the code extracted from

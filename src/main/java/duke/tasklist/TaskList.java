@@ -107,4 +107,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds items that contains word enter by user
+     *
+     * @param input to be entered by the users
+     */
+    public void findItem(String input) {
+        this.storage.findListItem(input);
+    }
 }
