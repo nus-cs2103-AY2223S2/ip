@@ -1,5 +1,8 @@
 package types.data;
 
+/**
+ * To-do data type.
+ */
 public class Todo extends Task {
     private Todo(String s) {
         super(s, "T");

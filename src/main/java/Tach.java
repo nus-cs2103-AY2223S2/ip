@@ -21,7 +21,7 @@ public class Tach {
     private static final SpeakerRegistry sp = new SpeakerRegistry();
     private static Boolean shouldContinue = true;
 
-    public static void hello() {
+    private static void hello() {
         sp.broadcast("Yoooo from\n" + logo);
     }
 
