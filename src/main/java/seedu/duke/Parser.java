@@ -24,6 +24,21 @@ public class Parser {
     }
 
     /**
+     *  Retrieve the keyword(s) from the input given by user
+     *
+     *  @param inputStrings String array of each word input by the user
+     *  @return String of the keyword(s) that user wants to look for
+     */
+    private String getKeywords(String[] inputStrings) throws DukeException {
+        inputStrings = Arrays.copyOfRange(inputStrings, 1, inputStrings.length);
+        String keywords = String.join(" ", inputStrings).trim();
+        if (keywords.length() == 0) {
+            throw new DukeException("No keyword was given!");
+        }
+        return keywords;
+    }
+
+    /**
      *  Checks the validity of the command
      *
      *  @param command String of the command sent by user
@@ -38,7 +53,6 @@ public class Parser {
         }
         throw new DukeException("I don't know what this command means!");
     }
-
     /**
      *  Checks whether task number is numeric & valid
      *
@@ -232,6 +246,11 @@ public class Parser {
                 updatedList = taskList.deleteTask(index);
                 storage.writeFile(updatedList);
                 ui.sayDeletedTask(deletedTask, updatedList);
+                break;
+            case find:
+                String keywords = getKeywords(inputStrings);
+                TaskList matchingTasks = taskList.find(keywords);
+                ui.sayMatchingTasks(matchingTasks);
                 break;
             }
         } catch (DukeException err) {

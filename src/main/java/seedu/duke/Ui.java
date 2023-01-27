@@ -69,6 +69,18 @@ public class Ui {
         System.out.println(unmarkedTask);
     }
 
+    /**
+     * Prints out line after successfully finding matching Tasks for user to see
+     *
+     * @param matchingTasks Tasks that match the keyword provided by user
+     */
+    public void sayMatchingTasks(TaskList matchingTasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < matchingTasks.getSize(); i++) {
+            System.out.printf("%d: %s\n", i + 1, matchingTasks.get(i));
+        }
+    }
+
 
     /**
      * Prints out line if there is an error loading for user to see
