@@ -17,6 +17,7 @@ public class Parser {
     private static final String TODO_PATTERN = "todo\\s+(.*)";
     private static final String DEADLINE_PATTERN = "deadline\\s+(.*)\\s+/by\\s+(.*)";
     private static final String EVENT_PATTERN = "event\\s+(.*)\\s+/from\\s+(.*)\\s+/to\\s+(.*)";
+    private static final String FIND_PATTERN = "find\\s+\\s*(.*)";
 
     public Parser() {
     }
@@ -29,7 +30,7 @@ public class Parser {
      */
     public static boolean isValidCommand(String command) {
         String[] commandsCollection = {BYE_PATTERN, LIST_PATTERN, MARK_PATTERN, UNMARK_PATTERN,
-                DELETE_PATTERN, TODO_PATTERN, DEADLINE_PATTERN, EVENT_PATTERN};
+                DELETE_PATTERN, TODO_PATTERN, DEADLINE_PATTERN, EVENT_PATTERN, FIND_PATTERN};
         for (String pattern : commandsCollection) {
             if (command.matches(pattern)) {
                 return true;
@@ -68,14 +69,16 @@ public class Parser {
                 String taskDescription = command.substring(5);
                 task = new Todo(taskDescription);
             } else if (command.matches(DEADLINE_PATTERN)) {
-                String[] temp = command.substring(9).split(" /by ");
+                String description = command.substring(9);
+                String[] temp = description.split("\\s*/by\\s*");
                 String taskDescription = temp[0];
                 String by = temp[1];
                 task = new Deadline(taskDescription, by);
             } else { // (command.matches(EVENT_PATTERN)) {
-                String[] temp = command.substring(6).split(" /from ");
+                String description = command.substring(6);
+                String[] temp = description.split("\\s*/from\\s*");
                 String taskDescription = temp[0];
-                String[] time = temp[1].split(" /to ");
+                String[] time = temp[1].split("\\s*/to\\s*");
                 String from = time[0];
                 String to = time[1];
                 task = new Event(taskDescription, from, to);
@@ -114,6 +117,17 @@ public class Parser {
      */
     public static Integer indexToDelete(String command) {
         return Integer.parseInt(command.substring(7));
+    }
+
+    /**
+     * Returns a string. Extracts the description of the find command.
+     *
+     * @param command is equal to find.
+     * @return the description only.
+     */
+    public static String commandToDescription(String command) {
+        String[] parts = command.split("find\\s*");
+        return parts[1];
     }
 }
 

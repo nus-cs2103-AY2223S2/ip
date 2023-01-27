@@ -34,7 +34,7 @@ public class TaskList {
      */
     public static void addTask(Task t) {
         tasks.add(t);
-        TaskList.announceAdded(t);
+        TaskList.announceAdded();
     }
 
     /**
@@ -45,6 +45,26 @@ public class TaskList {
      */
     public Task getTaskAtIndex(Integer i) {
         return tasks.get(i);
+    }
+
+    /**
+     * Returns a TaskList of tasks matching the string description.
+     *
+     * @param description of a task.
+     * @return TaskList containing only those matched.
+     */
+    public void matchDescription(String description) {
+        System.out.println("Here are the tasks matched in your list: ");
+        Integer j = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = this.getTaskAtIndex(i);
+            if (task.getDescription().equals(description)) {
+                System.out.println((++j) + ". " + task.toString());
+            }
+        }
+        if  (j == 0) {
+            System.out.println("It seems that there are no matches.");
+        }
     }
 
     /**
@@ -67,10 +87,8 @@ public class TaskList {
 
     /**
      * Announces that the task has been added.
-     *
-     * @param t task added.
      */
-    public static void announceAdded(Task t) {
+    public static void announceAdded() {
         System.out.println("Got it. I've added this task:");
         System.out.println("Now we have " + tasks.size() + " tasks in the list.");
     }
