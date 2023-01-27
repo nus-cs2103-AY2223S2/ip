@@ -13,8 +13,8 @@ public class FindTaskCommand extends TaskCommand {
      * @param command the user-input command
      * @param doesPrint whether to print messaegs
      */
-    public FindTaskCommand(String command, boolean doesPrint) {
-        super(command, doesPrint);
+    public FindTaskCommand(String command, boolean doesPrint) throws DukeException {
+        super(command, doesPrint, 2);
     }
 
     @Override

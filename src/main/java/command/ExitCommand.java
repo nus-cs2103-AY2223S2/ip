@@ -14,8 +14,8 @@ public class ExitCommand extends Command {
      * @param command the user-input command
      * @param doesPrint whether to print messages
      */
-    public ExitCommand(String command, boolean doesPrint) {
-        super(command, doesPrint);
+    public ExitCommand(String command, boolean doesPrint) throws DukeException {
+        super(command, doesPrint, 1);
         isExit = true;
     }
 

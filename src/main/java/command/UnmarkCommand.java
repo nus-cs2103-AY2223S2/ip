@@ -1,5 +1,6 @@
 package command;
 
+import duke.DukeException;
 import task.Task;
 import task.TaskList;
 import ui.TextUi;
@@ -13,8 +14,8 @@ public class UnmarkCommand extends Command {
      * @param command the command
      * @param doesPrint whether to print messages
      */
-    public UnmarkCommand(String command, boolean doesPrint) {
-        super(command, doesPrint);
+    public UnmarkCommand(String command, boolean doesPrint) throws DukeException {
+        super(command, doesPrint, 2);
     }
 
     /**

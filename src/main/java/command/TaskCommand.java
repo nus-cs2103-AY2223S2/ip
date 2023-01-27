@@ -19,8 +19,8 @@ public class TaskCommand extends Command {
      * @param command the user-input command
      * @param doesPrint whether to print messages
      */
-    public TaskCommand(String command, boolean doesPrint) {
-        super(command, doesPrint);
+    public TaskCommand(String command, boolean doesPrint, int numComponents) throws DukeException {
+        super(command, doesPrint, numComponents);
         this.commandName = captalizeFirstChar(command.split(" ")[0]);
     }
 

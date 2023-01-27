@@ -21,9 +21,9 @@ public class Parser {
             entry("mark", "MarkCommand"),
             entry("unmark", "UnmarkCommand"),
             entry("delete", "DeleteTaskCommand"),
-            entry("todo", "TaskCommand"),
-            entry("event", "TaskCommand"),
-            entry("deadline", "TaskCommand"),
+            entry("todo", "TodoCommand"),
+            entry("event", "EventCommand"),
+            entry("deadline", "DeadlineCommand"),
             entry("bye", "ExitCommand"),
             entry("find", "FindTaskCommand")
     );
@@ -50,14 +50,17 @@ public class Parser {
      * @throws DukeException when any error occurs
      */
     public static Command parseCommand(String command, boolean suppressPrint) throws DukeException {
+        Object object = null;
         try {
             Class<?> c = Class.forName("command." + stringToCommandClass.get(command.split(" ")[0]));
             Constructor<?> cons = c.getConstructor(String.class, boolean.class);
-            Object object = cons.newInstance(command, !suppressPrint);
-            return (Command) object;
-        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
-                 | InvocationTargetException e) {
+            object = cons.newInstance(command, !suppressPrint);
+        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             throw new DukeException(e.toString());
+        } catch (InvocationTargetException e) {
+            Throwable t = e.getTargetException();
+            throw new DukeException(t.toString());
         }
+        return (Command) object;
     }
 }

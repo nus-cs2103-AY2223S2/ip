@@ -15,8 +15,8 @@ public class DeleteTaskCommand extends TaskCommand {
      * @param command the user-input command
      * @param doesPrint whether to print messages
      */
-    public DeleteTaskCommand(String command, boolean doesPrint) {
-        super(command, doesPrint);
+    public DeleteTaskCommand(String command, boolean doesPrint) throws DukeException {
+        super(command, doesPrint, 2);
     }
 
     /**

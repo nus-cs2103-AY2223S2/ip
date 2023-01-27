@@ -11,15 +11,18 @@ public abstract class Command {
     protected final String command;
     protected final boolean doesPrint;
     protected boolean isExit = false;
+    protected int numComponents;
 
     /**
      * Default constructor, saves the command
      *
      * @param command the user-input command
      */
-    public Command(String command, boolean doesPrint) {
+    public Command(String command, boolean doesPrint, int numComponents) throws DukeException {
         this.command = command;
         this.doesPrint = doesPrint;
+        this.numComponents = numComponents;
+        checkInputComponents();
     }
 
     /**
@@ -52,5 +55,18 @@ public abstract class Command {
             throw new DukeException("The command argument is not complete.");
         }
         return string.substring(string.indexOf(commandString) + commandString.length() + " ".length());
+    }
+
+    /**
+     * Throws exceptions if the user-input is not a complete command.
+     * @return true if there are enough number of splits
+     */
+    protected void checkInputComponents() throws DukeException {
+        String[] splits = command.split(" ");
+        if (splits.length < numComponents) {
+            throw new DukeException(String.format("Input is not a complete command. "
+                            + "It should contain %d components. \nPlease try again. ",
+                    numComponents));
+        }
     }
 }

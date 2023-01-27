@@ -1,5 +1,7 @@
 package command;
 
+import duke.Duke;
+import duke.DukeException;
 import task.TaskList;
 import ui.TextUi;
 
@@ -13,8 +15,8 @@ public class ListCommand extends Command {
      *
      * @param command the user-input command
      */
-    public ListCommand(String command, boolean doesPrint) {
-        super(command, doesPrint);
+    public ListCommand(String command, boolean doesPrint) throws DukeException {
+        super(command, doesPrint, 1);
     }
 
     /**
