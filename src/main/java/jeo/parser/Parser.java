@@ -14,6 +14,7 @@ public class Parser {
      * Accepts a string that represents the trimmed raw string input to be parsed as command and action.
      * @param s String representing the trimmed raw string input of current line.
      * @return HashMap linking each essential aspect of the input to its corresponding substring.
+     * @throws JeoException for custom errors.
      */
     public static HashMap<String, String> parseString(String s) throws JeoException {
         HashMap<String, String> hm = new HashMap<>();
@@ -116,6 +117,7 @@ public class Parser {
      * @param s String representing the trimmed raw string input.
      * @param j An integer representing the first index after the command substring.
      * @return An integer representing the task number.
+     * @throws JeoException for custom errors.
      */
     public static int parseSubStringActions(String s, int j) throws JeoException {
         s = s.substring(j).trim();

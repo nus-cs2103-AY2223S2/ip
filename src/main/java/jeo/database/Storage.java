@@ -33,6 +33,7 @@ public class Storage {
     /**
      * Loads tasks that have been saved previously.
      * @return TaskList containing saved tasks.
+     * @throws FileNotFoundException if file does not exist.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> arr = new ArrayList<>();
@@ -50,6 +51,7 @@ public class Storage {
     /**
      * Saves tasks to data file.
      * @param taskList TaskList containing tasks to be saved.
+     * @throws IOException if data cannot be written to the text file.
      */
     public void save(ArrayList<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter(this.path);
