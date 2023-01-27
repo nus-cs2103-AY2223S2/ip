@@ -27,6 +27,7 @@ public class Duke {
         initialize();
         greet();
 
+
         while(!QUIT) {
             userInput = dio.readln();
             if (!userInput.isEmpty()) {
@@ -49,7 +50,15 @@ public class Duke {
     public static void initialize() {
         dio = new DukeIO();
         tm = new TaskMaster();
+        try {
+            dio.readSave(tm);
+        } catch (exceptions.missing.File e) {
+            // do nothing
+        } catch (DukeException e) {
+            throw new RuntimeException(e); //Figure out who throws tis
+        }
     }
+
     /**
      * Prints standard welcome message.
      */
