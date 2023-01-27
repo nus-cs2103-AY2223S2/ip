@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.Command;
 import duke.command.Commands;
 import duke.storage.Storage;

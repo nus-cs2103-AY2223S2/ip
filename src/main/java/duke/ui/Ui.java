@@ -51,7 +51,7 @@ public class Ui {
     }
 
     public void printWelcome() {
-        String welcomeMessage = "Hello! I'm Duke \nWhat can I do for you";
+        String welcomeMessage = "Hello! I'm duke.Duke \nWhat can I do for you";
         print(welcomeMessage);
     }
 }
