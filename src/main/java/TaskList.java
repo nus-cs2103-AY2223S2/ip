@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -13,17 +14,19 @@ public class TaskList {
     private final Feedback fb;
 
     public TaskList(ArrayList<String[]> tasks) {
-        System.out.println("tasks len: " + tasks.size());
-        for (int i = 0; i < tasks.size(); i++) {
+        for (String[] strings : tasks) {
             Task task;
-            if (tasks.get(i)[0].equals("T")) {
-                task = new Todo(tasks.get(i)[2]);
-            } else if (tasks.get(i)[0].equals("D")) {
-                task = new Deadline(tasks.get(i)[2], tasks.get(i)[3]);
+            if (strings[0].equals("T")) {
+                task = new Todo(strings[2]);
+            } else if (strings[0].equals("D")) {
+                LocalDateTime dateTime = LocalDateTime.parse(strings[3].trim());
+                task = new Deadline(strings[2], dateTime);
             } else {
-                task = new Event(tasks.get(i)[2], tasks.get(i)[3], tasks.get(i)[4]);
+                LocalDateTime startDT = LocalDateTime.parse(strings[3].trim());
+                LocalDateTime endDT = LocalDateTime.parse(strings[4].trim());
+                task = new Event(strings[2], startDT, endDT);
             }
-            if (tasks.get(i)[1].equals("X")) {
+            if (strings[1].equals("X")) {
                 task.markDone();
             }
             taskList.add(task);
