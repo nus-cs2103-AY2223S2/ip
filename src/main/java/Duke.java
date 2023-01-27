@@ -42,10 +42,14 @@ public class Duke {
                 case "list": {
                     userInput = keyboard.nextLine().trim();
                     if (userInput.isEmpty()) {
-                        System.out.println("Here are the current tasks:");
-                        for (int i = 0; i < taskList.size(); i++) {
-                            System.out.print((i + 1) + ".");
-                            System.out.println(taskList.get(i).toString());
+                        if (taskList.size() == 0) {
+                            System.out.println("The task list is empty.");
+                        } else {
+                            System.out.println("Here are the current tasks:");
+                            for (int i = 0; i < taskList.size(); i++) {
+                                System.out.print((i + 1) + ".");
+                                System.out.println(taskList.get(i).toString());
+                            }
                         }
                     } else {
                         System.out.println("Please key in *list* to check the task list.");
@@ -138,6 +142,22 @@ public class Duke {
                             System.out.println("This item is marked as not done yet");
                             taskList.get(itemID).setNotDone();
                             System.out.println((taskList.get(itemID).toString()));
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter the task number");
+                    }
+                    break;
+                }
+                case "delete": {
+                    try {
+                        int itemID = Integer.parseInt(keyboard.nextLine().trim()) - 1;
+                        if ((itemID + 1) > taskList.size()) {
+                            System.out.println("I cannot find task " + (itemID + 1) + " as it exceeds the total tasks number");
+                        } else {
+                            System.out.println("This task is deleted from the list:");
+                            System.out.println("  " + (taskList.get(itemID).toString()));
+                            taskList.remove(itemID);
+                            System.out.println("Now you have " + taskList.size() + " tasks in the list");
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("Please enter the task number");
