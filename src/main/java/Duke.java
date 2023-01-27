@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 public class Duke {
 
     final static String ENTRY = "Hello! I'm Duke\nWhat can I do for you?";
