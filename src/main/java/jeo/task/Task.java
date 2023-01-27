@@ -1,4 +1,4 @@
-package jeo.task;
+package main.java.jeo.task;
 
 /**
  * Represents a generic task

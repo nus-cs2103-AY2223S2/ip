@@ -1,9 +1,9 @@
-package jeo.ui;
+package main.java.jeo.ui;
 
-import jeo.task.Deadline;
-import jeo.task.Event;
-import jeo.task.Task;
-import jeo.database.TaskList;
+import main.java.jeo.task.Deadline;
+import main.java.jeo.task.Event;
+import main.java.jeo.task.Task;
+import main.java.jeo.database.TaskList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

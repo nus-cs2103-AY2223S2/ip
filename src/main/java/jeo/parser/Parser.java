@@ -1,7 +1,7 @@
-package jeo.parser;
+package main.java.jeo.parser;
 
 import java.util.HashMap;
-import jeo.exception.JeoException;
+import main.java.jeo.exception.JeoException;
 
 public class Parser {
 
