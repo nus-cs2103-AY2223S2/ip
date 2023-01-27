@@ -52,18 +52,22 @@ public class Duke {
                 } else if (command[0].equals("mark")) {
                     int taskNum = parser.getTaskNum(command);
                     taskList.markTask(parser.getTaskNum(command));
-                    ui.printSuccessMessage("Nice! I've marked this task as done:", taskList.getTask(taskNum));
+                    ui.printSuccessMessage("Nice! I've marked this task as done:",
+                            taskList.getTask(taskNum));
                 } else if (command[0].equals("unmark")) {
                     int taskNum = parser.getTaskNum(command);
                     taskList.unmarkTask(taskNum);
-                    ui.printSuccessMessage("OK, I've marked this task as not done yet:", taskList.getTask(taskNum));
+                    ui.printSuccessMessage("OK, I've marked this task as not done yet:",
+                            taskList.getTask(taskNum));
                 } else if (command[0].equals("delete")) {
                     int taskNum = parser.getTaskNum(command);
                     Task removedTask = taskList.deleteTask(taskNum);
-                    ui.printTaskMessage("Noted. I've removed this task:", removedTask, taskList.getSize());
+                    ui.printTaskMessage("Noted. I've removed this task:",
+                            removedTask, taskList.getSize());
                 } else {
                     taskList.addTask(parser.getTaskToAdd(command));
-                    ui.printTaskMessage("Got it. I've added this task:", taskList.getLatestTask(), taskList.getSize());
+                    ui.printTaskMessage("Got it. I've added this task:",
+                            taskList.getLatestTask(), taskList.getSize());
                 }
             } catch (DukeException e) {
                 ui.printMessage(e.getMessage());
