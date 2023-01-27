@@ -90,11 +90,11 @@ public class FileStuff {
                 break;
                 
             case Deadline.DEADLINE_SYMBOL:
-                tdl.add(new Deadline(desc, isDone, LocalDateTime.parse(taskStr[3])));
+                tdl.add(new Deadline(desc, LocalDateTime.parse(taskStr[3]), isDone));
                 break;
 
             case Event.EVENT_SYMBOL:
-                tdl.add(new Event(desc, isDone, LocalDateTime.parse(taskStr[3]), LocalDateTime.parse(taskStr[4])));
+                tdl.add(new Event(desc, LocalDateTime.parse(taskStr[3]), LocalDateTime.parse(taskStr[4]), isDone));
                 break;
             }
         }

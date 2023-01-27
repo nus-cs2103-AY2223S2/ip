@@ -6,46 +6,46 @@ package cbot.io;
 public enum Command {
     //NAME      (str,           hasText,    save),
     /** Ends the Cbot session. */
-    BYE         ("bye",         false),
+    BYE         ("bye"),
 
     /** Displays the current list of tasks. */
-    LIST        ("list",        false),
+    LIST        ("list"),
 
     /** Marks the stipulated task as done. */
     MARK        ("mark ",       true,       true),
 
     /** Catches MARK calls with no input. */
-    MARK_BAD    ("mark",        false),
+    MARK_BAD    ("mark"),
 
     /** Marks the stipulated task as not done. */
     UNMARK      ("unmark ",     true,       true),
 
     /** Catches UNMARK calls with no input. */
-    UNMARK_BAD  ("unmark",      false),
+    UNMARK_BAD  ("unmark"),
 
     /** Deletes the stipulated task from the list. */
     DELETE      ("delete ",     true,       true),
 
     /** Catches DELETE calls with no input. */
-    DELETE_BAD  ("delete",      false),
+    DELETE_BAD  ("delete"),
 
     /** Adds a To-Do task to the list. */
     TODO        ("todo ",       true,       true),
 
     /** Catches TODO calls with no input. */
-    TODO_BAD    ("todo",        false),
+    TODO_BAD    ("todo"),
 
     /** Adds a Deadline task to the list. */
     DEADLINE    ("deadline ",   true,       true),
 
     /** Catches DEADLINE calls with no input. */
-    DEADLINE_BAD("deadline",    false),
+    DEADLINE_BAD("deadline"),
 
     /** Adds an Event task to the list. */
     EVENT       ("event ",      true,       true),
 
     /** Catches EVENT calls with no input. */
-    EVENT_BAD   ("event",       false),
+    EVENT_BAD   ("event"),
 
     /** Sorts the list by date and description. */
     SORT        ("sort",        false,      true),
@@ -54,57 +54,46 @@ public enum Command {
     BEFORE      ("before ",     true),
 
     /** Catches BEFORE calls with no input. */
-    BEFORE_BAD  ("before",      false),
+    BEFORE_BAD  ("before"),
 
     /** Displays the tasks that fall after the given date. */
     AFTER       ("after ",      true),
 
     /** Catches AFTER calls with no input. */
-    AFTER_BAD   ("after",       false),
+    AFTER_BAD   ("after"),
 
     /** Displays the tasks that match the given filter. */
     FILTER      ("filter ",     true),
 
     /** Catches FILTER calls with no input. */
-    FILTER_BAD  ("filter",      false),
+    FILTER_BAD  ("filter"),
 
     /** Displays the tasks that contain the input. */
     FIND        ("find ",       true),
 
     /** Catches FIND calls with no input. */
-    FIND_BAD    ("find",        false),
+    FIND_BAD    ("find"),
 
     /** Catches all other inputs. */
-    NONE        ("",            false);
+    NONE        ("");
     
     private final String str;
     private final boolean hasText;
     private final boolean needSave;
 
     /**
-     * Constructs a Command type with the given keyword.
-     * Specifies whether the Command expects additional input after the keyword,
-     * and whether the file needs to be saved after the Command is run.
+     * Constructs a Command type with the given keyword. The next two booleans are optional,
+     * and default to false. Respectively, they specify whether the Command expects additional input
+     * after the keyword, and whether the file needs to be saved after the Command is run.
      *
      * @param str The command keyword.
-     * @param hasText Whether more text after the keyword is expected.
-     * @param save Whether the file needs to be saved after the command is run.
+     * @param bools (Optional) Whether more text after the keyword is expected, and
+     *        whetrher the file needs to be saved after the command is run.
      */
-    Command(String str, boolean hasText, boolean save) {
+    Command(String str, boolean ... bools) {
         this.str = str;
-        this.hasText = hasText;
-        this.needSave = save;
-    }
-
-    /**
-     * Constructs a Command type with the given keyword, where the Command does not update the file.
-     * Allows to specify whether the Command expects additional input after the keyword.
-     *
-     * @param str The command keyword.
-     * @param hasText Whether more text after the keyword is expected.
-     */
-    Command(String str, boolean hasText) {
-        this(str, hasText, false);
+        this.hasText = bools.length >= 1 && bools[0];
+        this.needSave = bools.length >= 2 && bools[1];
     }
 
     /**

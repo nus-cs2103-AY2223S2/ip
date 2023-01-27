@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class DeadlineTest {
     Deadline dl1 = new Deadline("test 1", LocalDateTime.MIN);
-    Deadline dl2 = new Deadline("test 2", true, LocalDateTime.parse("0023-01-27T10:00"));
+    Deadline dl2 = new Deadline("test 2", LocalDateTime.parse("0023-01-27T10:00"), true);
     
     @Test
     public void testGetSymbol() {

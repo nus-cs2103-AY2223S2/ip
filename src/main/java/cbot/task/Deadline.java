@@ -17,25 +17,15 @@ public class Deadline extends Task {
     public static final String DEADLINE_SYMBOL = "D";
 
     /**
-     * Constructs a task with the given description, completion status, and deadline.
+     * Constructs a task with the given description, deadline, and completion status.
+     * The last variable is optional, and defaults to false (not done).
      *
      * @param desc The task description.
-     * @param isDone Whether the task is done.
      * @param due The deadline of the task.
+     * @param isDone (Optional) Whether the task is done.
      */
-    public Deadline(String desc, boolean isDone, LocalDateTime due) {
+    public Deadline(String desc, LocalDateTime due, boolean ... isDone) {
         super(desc, isDone);
-        this.due = due;
-    }
-
-    /**
-     * Constructs a not-yet-done task with the given description and deadline.
-     *
-     * @param desc The task description.
-     * @param due The deadline of the task.
-     */
-    public Deadline(String desc, LocalDateTime due) {
-        super(desc);
         this.due = due;
     }
     

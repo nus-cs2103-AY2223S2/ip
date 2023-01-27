@@ -19,23 +19,14 @@ public class Task implements Comparable<Task> {
 
     /**
      * Constructs a 'to-do' task with the given description and completion status.
+     * The last variable is optional, and defaults to false (not done)
      *
      * @param desc The task description.
      * @param isDone Whether the task is done.
      */
-    public Task(String desc, boolean isDone) {
+    public Task(String desc, boolean ... isDone) {
         this.desc = desc;
-        this.isDone = isDone;
-    }
-
-    /**
-     * Constructs a not-yet-done 'to-do' task with the given description.
-     *
-     * @param desc The task description.
-     */
-    public Task(String desc) {
-        this.desc = desc.trim();
-        this.isDone = false;
+        this.isDone = isDone.length != 0 && isDone[0];
     }
 
     /**

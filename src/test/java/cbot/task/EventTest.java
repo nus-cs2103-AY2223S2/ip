@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 
 public class EventTest {
     Event e1 = new Event("test 1", LocalDateTime.MIN, LocalDateTime.MAX);
-    Event e2 = new Event("test 2", true,
-            LocalDateTime.parse("0023-01-27T01:00"), LocalDateTime.parse("0023-01-27T09:00"));
+    Event e2 = new Event("test 2", LocalDateTime.parse("0023-01-27T01:00"),
+            LocalDateTime.parse("0023-01-27T09:00"), true);
     
     @Test
     public void testGetSymbol() {
