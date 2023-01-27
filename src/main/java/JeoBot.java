@@ -1,14 +1,12 @@
-package main.java;
-
-import main.java.jeo.parser.Parser;
-import main.java.jeo.database.Storage;
-import main.java.jeo.database.TaskList;
-import main.java.jeo.exception.JeoException;
-import main.java.jeo.task.Deadline;
-import main.java.jeo.task.Event;
-import main.java.jeo.task.Task;
-import main.java.jeo.task.ToDo;
-import main.java.jeo.ui.Ui;
+import jeo.parser.Parser;
+import jeo.database.Storage;
+import jeo.database.TaskList;
+import jeo.exception.JeoException;
+import jeo.task.Deadline;
+import jeo.task.Event;
+import jeo.task.Task;
+import jeo.task.ToDo;
+import jeo.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

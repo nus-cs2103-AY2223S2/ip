@@ -1,6 +1,6 @@
-package main.java.jeo.database;
+package jeo.database;
 
-import main.java.jeo.task.Task;
+import jeo.task.Task;
 
 import java.util.ArrayList;
 

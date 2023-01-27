@@ -1,7 +1,7 @@
-package main.java.jeo.parser;
+package jeo.parser;
 
 import java.util.HashMap;
-import main.java.jeo.exception.JeoException;
+import jeo.exception.JeoException;
 
 public class Parser {
 
@@ -121,7 +121,7 @@ public class Parser {
         try {
             i = Integer.parseInt(s);
         } catch (NumberFormatException e) {
-            throw new JeoException("Tasks.Task number needs to be an integer value.");
+            throw new JeoException("Task number needs to be an integer value.");
         }
         return i;
     }

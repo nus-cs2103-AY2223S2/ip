@@ -1,4 +1,4 @@
-package main.java.jeo.exception;
+package jeo.exception;
 
 /**
  * Custom jeo.exception that is thrown when there is a command error

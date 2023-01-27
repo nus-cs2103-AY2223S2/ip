@@ -1,4 +1,4 @@
-package main.java.jeo.task;
+package jeo.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
