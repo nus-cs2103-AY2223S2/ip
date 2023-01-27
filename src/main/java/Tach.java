@@ -33,6 +33,7 @@ public class Tach {
         dispatcher.setSpeakerRegistry(sp);
         dispatcher.setDefaultHandler(new JThrowException());
         dispatcher.registerCommand(new JAddTask(ts));
+        dispatcher.registerCommand(new JFind(ts));
         dispatcher.registerCommand(new JShowTaskList(ts));
         dispatcher.registerCommand(new JMarkTask(ts));
         dispatcher.registerCommand(new JDeleteTask(ts));
