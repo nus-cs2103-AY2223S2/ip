@@ -40,4 +40,18 @@ public abstract class CommandClass {
     public boolean isExit() {
         return isExit;
     }
+
+    /**
+     * Get the sub-string after the command key word
+     * @param string the command
+     * @return the sub-string after the command keyword
+     * @throws DukeException
+     */
+    public String getCommandContent(String string, String commandName) throws DukeException {
+        String commandString = commandName.toLowerCase();
+        if ((!commandString.equals("list")) && string.length() <= commandString.length() + 1) {
+            throw new DukeException("The command argument is not complete.");
+        }
+        return string.substring(string.indexOf(commandString) + commandString.length() + " ".length());
+    }
 }

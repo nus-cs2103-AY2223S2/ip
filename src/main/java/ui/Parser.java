@@ -6,20 +6,11 @@ import java.time.format.DateTimeParseException;
 import static java.util.Map.entry;
 
 import command.Command;
-
 import command.CommandClass;
-import command.TaskCommand;
-import command.DeleteTaskCommand;
-import command.ExitCommand;
-import command.*;
-
 import duke.DukeException;
-import task.Task;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 /**
@@ -34,7 +25,8 @@ public class Parser {
             entry("todo", "TaskCommand"),
             entry("event", "TaskCommand"),
             entry("deadline", "TaskCommand"),
-            entry("bye", "ExitCommand")
+            entry("bye", "ExitCommand"),
+            entry("find", "FindTaskCommand")
     );
 
     /**
@@ -95,17 +87,22 @@ public class Parser {
         }
     }
 
-    public static CommandClass parseCommand(String command, boolean suppressPrint) throws DukeException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        Class<?> c = Class.forName("command." + stringToCommandClass.get(command.split(" ")[0]));
-        Constructor<?> cons = c.getConstructor(String.class, boolean.class);
-        Object object = cons.newInstance(command, !suppressPrint);
-        return (CommandClass) object;
-
-//        try {
-//            ;
-//        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException |
-//                 InvocationTargetException e) {
-//            throw new DukeException(e.toString());
-//        }
+    /**
+     * Returns the appropriate command object based on user-input command string
+     * @param command the user-input string
+     * @param suppressPrint whether to suppress print-out or not
+     * @return the command object
+     * @throws DukeException when any error occurs
+     */
+    public static CommandClass parseCommand(String command, boolean suppressPrint) throws DukeException {
+        try {
+            Class<?> c = Class.forName("command." + stringToCommandClass.get(command.split(" ")[0]));
+            Constructor<?> cons = c.getConstructor(String.class, boolean.class);
+            Object object = cons.newInstance(command, !suppressPrint);
+            return (CommandClass) object;
+        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
+                 | InvocationTargetException e) {
+            throw new DukeException(e.toString());
+        }
     }
 }

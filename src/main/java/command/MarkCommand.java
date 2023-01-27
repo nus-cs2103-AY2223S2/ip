@@ -4,6 +4,9 @@ import task.Task;
 import task.TaskList;
 import ui.TextUi;
 
+/**
+ * Mark a task as done
+ */
 public class MarkCommand extends CommandClass {
 
     /**
@@ -15,6 +18,11 @@ public class MarkCommand extends CommandClass {
         super(command, doesPrint, false);
     }
 
+    /**
+     * Execute the task
+     * @param taskList the list of tasks
+     * @param ui       a text UI
+     */
     @Override
     public void execute(TaskList taskList, TextUi ui) {
         int idx = Integer.parseInt(command.substring(5)) - 1;

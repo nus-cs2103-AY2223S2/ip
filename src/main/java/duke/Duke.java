@@ -3,13 +3,11 @@ package duke;
 import command.CommandClass;
 import storage.Storage;
 
-import task.Task;
 import task.TaskList;
 
 import ui.Parser;
 import ui.TextUi;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 
@@ -103,123 +101,8 @@ public class Duke {
      * @throws DukeException when the command is unknown
      */
     public void handleCommand(String inMsg, boolean suppressPrint) throws DukeException {
-//        boolean isToSave = true;
-//
-//        String stringToPrint = "";
-//        if (parser.checkCommand(inMsg, Command.LIST)) {
-//            stringToPrint = listTasks();
-//            isToSave = false;
-//        } else if (parser.checkCommand(inMsg, Command.MARK)) {
-//            int idx = Integer.parseInt(inMsg.substring(5)) - 1;
-//            stringToPrint = markTaskDone(idx);
-//        } else if (parser.checkCommand(inMsg, Command.UNMARK)) {
-//            int idx = Integer.parseInt(inMsg.substring(7)) - 1;
-//            stringToPrint = unmarkTaskDone(idx);
-//        } else if (parser.checkCommand(inMsg, Command.TODO)) {
-//            String todoName = parser.getCommandContent(inMsg, Command.TODO);
-//            ToDo todo = new ToDo(todoName);
-//            stringToPrint = addTask(todo);
-//        } else if (parser.checkCommand(inMsg, Command.DEADLINE)) {
-//            String deadlineContent = parser.getCommandContent(inMsg, Command.DEADLINE);
-//            Deadline ddl = new Deadline(deadlineContent);
-//            stringToPrint = addTask(ddl);
-//        } else if (parser.checkCommand(inMsg, Command.EVENT)) {
-//            String eventContent = parser.getCommandContent(inMsg, Command.EVENT);
-//            Event event = new Event(eventContent);
-//            stringToPrint = addTask(event);
-//        } else if (parser.checkCommand(inMsg, Command.DELETE)) {
-//            String indexToDelete = parser.getCommandContent(inMsg, Command.DELETE);
-//            stringToPrint = deleteTask(Integer.parseInt(indexToDelete));
-//        } else if (parser.checkCommand(inMsg, Command.FIND)) {
-//            String keyword = parser.getCommandContent(inMsg, Command.FIND);
-//            stringToPrint = find(keyword);
-//            isToSave = false;
-//        } else {
-//            throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
-//        }
-//
-//        if (!suppressPrint) {
-//            ui.printStructuredString(stringToPrint);
-//            if (isToSave) {
-//                addCommandList(inMsg);
-//            }
-//        }
-
         CommandClass command = Parser.parseCommand(inMsg, suppressPrint);
         command.execute(taskList, ui);
-    }
-
-    /**
-     * Returns the string representation to be printed out when the command "list" is invoked
-     *
-     * @return the string representation of the message
-     */
-    public String listTasks() {
-        String taskListString = "Here are the tasks in your list:\n"
-                + taskList.getTaskListString(true);
-        return taskListString;
-    }
-
-    /**
-     * Add a task to the list
-     *
-     * @param task a task to add
-     * @return the string response after adding a task
-     */
-    public String addTask(Task task) {
-        this.taskList.add(task);
-        return String.format("Got it. I've added this task:\n  %s\n"
-                        + "Now you have %d tasks in the list.",
-                task,
-                taskList.size());
-    }
-
-    /**
-     * Marks a task as done by index
-     *
-     * @param idx index of the task
-     * @return the string message to print out
-     */
-    public String markTaskDone(int idx) {
-        Task t = taskList.get(idx);
-        t.markDone();
-        return String.format("Nice! I've marked this task as done:\n  %s", t);
-    }
-
-    /**
-     * Marks a task as undone by index
-     *
-     * @param idx index of the task
-     * @return the string message to print out
-     */
-    public String unmarkTaskDone(int idx) {
-        Task t = this.taskList.get(idx);
-        t.unmarkDone();
-        return String.format("OK, I've marked this task as not done yet:\n  %s", t);
-    }
-
-    /**
-     * Deletes a task by index
-     *
-     * @param idx the index of the task
-     * @return the string message to print out
-     */
-    public String deleteTask(int idx) {
-        idx = idx - 1; //count from zero
-        Task t = taskList.get(idx);
-        taskList.remove(idx);
-        return String.format("Noted. I've removed this task:\n  %s\n"
-                + "Now you have %d tasks in the list.", t, taskList.size());
-    }
-
-    /**
-     * Adds user command to a list. The list will be used for
-     * saving to local files as history.
-     *
-     * @param string the user-input command
-     */
-    public void addCommandList(String string) {
-        commandList.add(string);
     }
 
     /**
@@ -234,17 +117,5 @@ public class Duke {
             string = string + s + "\n";
         }
         return string;
-    }
-
-    /**
-     * Return the string representation of the list of tasks
-     * whose names contain the given keyword.
-     * @param string the keyword
-     * @return the string of the task list
-     */
-    public String find(String string) {
-        String taskListString = "Here are the matching tasks in your list:\n"
-                + taskList.getTaskNameContains(string).getTaskListString(true);
-        return taskListString;
     }
 }

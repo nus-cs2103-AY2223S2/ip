@@ -3,6 +3,9 @@ package command;
 import task.TaskList;
 import ui.TextUi;
 
+/**
+ * List commands
+ */
 public class ListCommand extends CommandClass {
 
     /**
@@ -14,9 +17,14 @@ public class ListCommand extends CommandClass {
         super(command, doesPrint, false);
     }
 
+    /**
+     * Execute the task
+     * @param taskList the list of tasks
+     * @param ui       a text UI
+     */
     public void execute(TaskList taskList, TextUi ui) {
-        String taskListString = "Here are the tasks in your list:\n" +
-                taskList.getTaskListString(true);
+        String taskListString = "Here are the tasks in your list:\n"
+                + taskList.getTaskListString(true);
         uiPrint(ui, taskListString);
     }
 }
