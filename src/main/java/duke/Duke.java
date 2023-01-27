@@ -61,6 +61,9 @@ public class Duke {
                     int taskNum = parser.getTaskNum(command);
                     Task removedTask = taskList.deleteTask(taskNum);
                     ui.printTaskMessage("Noted. I've removed this task:", removedTask, taskList.getSize());
+                } else if (command[0].equals("find")) {
+                    String keyword = parser.getKeyword(command);
+                    ui.printFindResult(taskList.getTasksWithKeyword(keyword));
                 } else {
                     taskList.addTask(parser.getTaskToAdd(command));
                     ui.printTaskMessage("Got it. I've added this task:", taskList.getLatestTask(), taskList.getSize());

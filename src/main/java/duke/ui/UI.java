@@ -2,6 +2,8 @@ package duke.ui;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
+
 public class UI {
     protected String indent = "     ";
     protected String divider = indent + "____________________________________________________________";
@@ -25,5 +27,17 @@ public class UI {
         printMessage(message + "\n" +
                 indent + indent + task.toString() + "\n" +
                 indent + "Now you have " + numOfTasks + " task(s) in the list.");
+    }
+
+    public void printFindResult(ArrayList<Task> tasks) {
+        if (tasks.isEmpty()) {
+            printMessage("No corresponding task found!");
+        } else {
+            String message = "Here are the matching tasks in your list:";
+            for (int i = 0; i < tasks.size(); i++) {
+                message += "\n" + indent + (i + 1) + ". " + tasks.get(i).toString();
+            }
+            printMessage(message);
+        }
     }
 }

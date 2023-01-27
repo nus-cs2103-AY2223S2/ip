@@ -64,4 +64,16 @@ public class TaskList {
     public Task getTask(int taskNum) { // get task according to the index of the array
         return tasks.get(taskNum);
     }
+
+    public ArrayList<Task> getTasksWithKeyword(String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+
+        for (Task t : tasks) {
+            if (t.nameContainsKeyword(keyword)) {
+                result.add(t);
+            }
+        }
+
+        return result;
+    }
 }

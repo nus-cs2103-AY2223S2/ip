@@ -44,4 +44,12 @@ public class Parser {
                 throw new DukeException("I do not understand");
         }
     }
+
+    public String getKeyword(String[] command) throws DukeException {
+        if (command.length < 2) {
+            throw new DukeException("Keyword required");
+        }
+
+        return command[1];
+    }
 }

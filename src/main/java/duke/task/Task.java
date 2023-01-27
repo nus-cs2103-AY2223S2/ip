@@ -21,6 +21,10 @@ public class Task {
         return this.name;
     }
 
+    public boolean nameContainsKeyword(String keyword) {
+        return name.contains(keyword);
+    }
+
     public String toSaveString() {
         return name + "$$$" + (isDone ? "T" : "F");
     }
