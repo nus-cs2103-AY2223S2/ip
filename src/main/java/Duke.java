@@ -1,11 +1,25 @@
+import com.sun.java.accessibility.util.EventQueueMonitor;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Duke {
 
     final static String ENTRY = "Hello! I'm Duke\nWhat can I do for you?";
     final static String EXIT_COMMAND = "bye";
     final static String LIST_COMMAND = "list";
     final static String DELETE_COMMAND = "delete";
+    final static String MARK_COMMAND = "mark";
+    final static String UNMARK_COMMAND = "unmark";
+    final static String TODO_COMMAND = "todo";
+    final static String DEADLINE_COMMAND = "deadline";
+    final static String EVENT_COMMAND = "event";
+    final static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy/MM/d HHmm");
+
+    final static DateTimeFormatter outputFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
 
     public static ArrayList<Task> list;
@@ -89,8 +103,10 @@ public class Duke {
         checkEmptyDescription(inputWords);
         String[] splitedString = inputWords[1].split(" /by ");
         String action = splitedString[0];
-        String date = splitedString[1];
-        Task newTask = new Deadline(action, date);
+        String date = splitedString[1]; // in yyyy-mm-dd HHMM format
+        LocalDateTime inputDateTime = LocalDateTime.parse(date, inputFormatter);
+        String outputDateTime = inputDateTime.format(outputFormatter);
+        Task newTask = new Deadline(action, outputDateTime);
         addTask(newTask);
     }
 
@@ -114,23 +130,23 @@ public class Duke {
     }
 
     public static boolean isMark(String word) {
-        return word.equals("mark");
+        return word.equals(MARK_COMMAND);
     }
 
     public static boolean isUnmark(String word) {
-        return word.equals("unmark");
+        return word.equals(UNMARK_COMMAND);
     }
 
     public static boolean isToDo(String word) {
-        return word.equals("todo");
+        return word.equals(TODO_COMMAND);
     }
 
     public static boolean isDeadline(String word) {
-        return word.equals("deadline");
+        return word.equals(DEADLINE_COMMAND);
     }
 
     public static boolean isEvent(String word) {
-        return word.equals("event");
+        return word.equals(EVENT_COMMAND);
     }
 
 
