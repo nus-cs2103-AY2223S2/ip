@@ -1,15 +1,17 @@
 package duke;
 
-import duke.command.*;
-import duke.task.Todo;
+import duke.command.Parser;
+import duke.command.Storage;
+import duke.command.TaskList;
+import duke.command.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
+import duke.task.Todo;
+import duke.exception.MissingContentException;
+import duke.exception.DukeException;
 
 
 import java.util.Scanner;
-import java.util.Arrays;
-import java.util.stream.IntStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -44,15 +46,8 @@ public class Duke {
      * @param action type of task given.
      * @throw DukeException if input array is empty.
      */
-    static void checkEmptyAction(String[] arr, String action) throws DukeException {
-        if (arr.length <= 1) {
-            throw new DukeException(String.format("OOPS!!! The description of " +
-                    "a %s cannot be empty.", action));
-        }
-    }
 
-
-    private void run() {
+    private void run() throws IOException {
         ui.showWelcome();
         TaskList listOfAction = tasks;
         Scanner sc = new Scanner(System.in);
@@ -71,13 +66,9 @@ public class Duke {
                         s.substring(1));
                 switch(myAction) {
                     case Find:
-                        try {
-                            checkEmptyAction(arr, "find");
                             ui.findWordIntro(arr, listOfAction.checkWord(arr[1]));
                             listOfAction.findWord(arr[1]);
-                        } catch (duke.DukeException e) {
-                            System.out.println(e.getMessage());
-                        }
+
                         break;
 
                     case Bye:
@@ -90,31 +81,21 @@ public class Duke {
                         break;
 
                     case Mark:
-                        try {
-                            checkEmptyAction(arr, "mark");
                             int num = Integer.parseInt(arr[1]) - 1;
                             listOfAction = listOfAction.mark(num);
                             file.overwrite(listOfAction);
-                        } catch (DukeException e) {
-                            System.out.println(e.getMessage());
-                        }
+
                         break;
 
                     case Unmark:
-                        try {
-                            checkEmptyAction(arr, "unmark");
                             int num1 = Integer.parseInt(arr[1]) - 1;
                             listOfAction = listOfAction.unmark(num1);
                             file.overwrite(listOfAction);
-                        } catch (DukeException e) {
-                            System.out.println(e.getMessage());
-                        }
+
                         break;
 
                     case Delete:
-                        try {
-                            checkEmptyAction(arr, "delete");
-                            int num1 = Integer.parseInt(arr[1]) - 1;
+                            num1 = Integer.parseInt(arr[1]) - 1;
                             if (listOfAction.checkValidIndex(num1)) {
                                 System.out.println("Noted. I've removed this task:");
                                 listOfAction = listOfAction.delete(num1);
@@ -125,14 +106,9 @@ public class Duke {
                             } else {
                                 System.out.println(new DukeException("OOPS!!! Invalid index!"));
                             }
-                        } catch (DukeException e) {
-                            System.out.println(e.getMessage());
-                        }
                         break;
 
                     case Todo:
-                        try {
-                            checkEmptyAction(arr, "todo");
                             System.out.println("Got it. I've added this task:");
                             remaining = new Parser().toDo(arr);
                             Todo newTask = new Todo(s, remaining, false);
@@ -141,14 +117,11 @@ public class Duke {
                                     "tasks in the list", len + 1));
                             len++;
                             file.overwrite(listOfAction);
-                        } catch (DukeException e) {
-                            System.out.println(e.getMessage());
-                        }
+
                         break;
 
                     case Deadline:
                         try {
-                            checkEmptyAction(arr, "deadline");
                             System.out.println("Got it. I've added this task:");
                             String detail = new Parser().deadlineDetail(arr);
                             int pointer = new Parser().deadlineTimeIndex(arr);
@@ -165,8 +138,8 @@ public class Duke {
                                 }
                             }
 
-                            Deadline newTask = new Deadline(s, detail, remaining);
-                            listOfAction.add(newTask);
+                            Deadline newTaskDeadline = new Deadline(s, detail, remaining);
+                            listOfAction.add(newTaskDeadline);
                             System.out.println(String.format("Now you have %d " +
                                     "tasks in the list", len + 1));
                             len++;
@@ -179,7 +152,6 @@ public class Duke {
 
                     case Event:
                         try {
-                            checkEmptyAction(arr, "event");
                             System.out.println("Got it. I've added this task:");
                             //int k = 0;
                             int startIndex = new Parser().

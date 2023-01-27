@@ -1,7 +1,7 @@
-package duke;
+package duke.exception;
 
-public class MissingContentException extends duke.DukeException {
+public class MissingContentException extends DukeException {
     public MissingContentException() {
-        super("OPPS! The content/detail cannot be empty!");
+        super("OOPS! The content/detail cannot be empty!");
     }
 }

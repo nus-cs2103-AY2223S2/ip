@@ -1,11 +1,14 @@
 package duke.command;
 
+import duke.exception.MissingContentException;
+import duke.exception.InvalidIndexException;
 import duke.task.Task;
+import java.io.IOException;
 
 public class TaskList {
     private String[] arr;
 
-    public TaskList(){
+    public TaskList() {
         arr = new String[100];
     }
 
@@ -13,7 +16,16 @@ public class TaskList {
         this.arr = arr;
     }
 
-    public String[] readTaskList() {
+    public String[] readTaskList() throws IOException {
+        try {
+            try {
+                return this.arr;
+            } catch (IndexOutOfBoundsException e) {
+                throw new MissingContentException();
+            }
+        } catch (MissingContentException e) {
+             System.out.println(e.getMessage());
+        }
         return this.arr;
     }
 
@@ -52,13 +64,22 @@ public class TaskList {
      * @param num index at which task need to be marked as done.
      * @return new task list with task marked.
      */
-    public TaskList mark(int num) {
-        if (arr[num] != null) {
-            System.out.println("OK, I've marked this task as not done yet:");
-            String original = arr[num];
-            arr[num] = new Task(String.valueOf(original.charAt(1)),
-                    original.substring(7), true).toString();
-            System.out.println(arr[num]);
+    public TaskList mark(int num) throws IOException {
+        try {
+            try {
+                if (arr[num] != null) {
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    String original = arr[num];
+                    arr[num] = new Task(String.valueOf(original.charAt(1)),
+                            original.substring(7), true).toString();
+                    System.out.println(arr[num]);
+                }
+                return new TaskList(arr);
+            } catch (IndexOutOfBoundsException e) {
+                throw new InvalidIndexException();
+            }
+        } catch (InvalidIndexException e) {
+            System.out.println(e.getMessage());
         }
         return new TaskList(arr);
     }
@@ -69,15 +90,26 @@ public class TaskList {
      *
      * @param num index at which task need to be marked as undone.
      * @return new task list with task unmarked.
+     * @throw InvalidIndexException if array at specific index is null
      */
-    public TaskList unmark(int num1) {
-        if (arr[num1] != null) {
-            System.out.println("OK, I've marked this task as not done yet:");
-            String original = arr[num1];
-            Task newTask = new Task(String.valueOf(original.charAt(1)),
-                    original.substring(7), false);
-            arr[num1] = newTask.toString();
-            System.out.println(arr[num1]);
+    public TaskList unmark(int num1) throws IOException {
+        try {
+            try {
+                if (arr[num1] != null) {
+                    System.out.println("OK, I've marked this task as not done yet:");
+                    String original = arr[num1];
+                    Task newTask = new Task(String.valueOf(original.charAt(1)),
+                            original.substring(7), false);
+                    arr[num1] = newTask.toString();
+                    System.out.println(arr[num1]);
+
+                    return new TaskList(arr);
+                }
+            } catch (IndexOutOfBoundsException e) {
+                throw new InvalidIndexException();
+            }
+        } catch (InvalidIndexException e) {
+            System.out.println(e.getMessage());
         }
         return new TaskList(arr);
     }
@@ -87,6 +119,7 @@ public class TaskList {
      *
      * @param num index at which content need to be checked.
      * @return boolean for content validity.
+     * @throw InvalidIndexException if array at specific index is null
      */
     public boolean checkValidIndex(int index) {
         return (arr[index] != null);
@@ -98,28 +131,39 @@ public class TaskList {
      *
      * @param num1 index at which task need to be deleted.
      * @return new task list with task deleted.
+     *  @throw InvalidIndexException if array at specific index is null if array at specific index is null
      */
-    public TaskList delete(int num1) {
-        if (arr[num1] != null) {
-            System.out.println("Noted. I've removed this task:");
-            String original = arr[num1];
-            System.out.println(original);
-            int trace = num1;
-            String[] originalList = new String[100];
-            for (int k = 0; k < 100; k++) {
-                originalList[k] = arr[k];
-            }
+    public TaskList delete(int num1) throws IOException {
+        try {
+            try {
+                if (arr[num1] != null) {
+                    System.out.println("Noted. I've removed this task:");
+                    String original = arr[num1];
+                    System.out.println(original);
+                    int trace = num1;
+                    String[] originalList = new String[100];
+                    for (int k = 0; k < 100; k++) {
+                        originalList[k] = arr[k];
+                    }
 
-            arr[trace] = arr[trace + 1];
-            trace++;
+                    arr[trace] = arr[trace + 1];
+                    trace++;
 
-            while ((trace >= 1) && (originalList[trace - 1] != null)) {
-                arr[trace] = originalList[trace + 1];
-                trace++;
+                    while ((trace >= 1) && (originalList[trace - 1] != null)) {
+                        arr[trace] = originalList[trace + 1];
+                        trace++;
+                    }
+                }
+                return new TaskList(arr);
+            } catch (IndexOutOfBoundsException e) {
+                throw new InvalidIndexException();
             }
+        } catch (InvalidIndexException e) {
+                System.out.println(e.getMessage());
+            }
+        return this;
         }
-        return new TaskList(arr);
-    }
+
 
     /**
      * Returns new task list.

@@ -42,10 +42,9 @@ public class Storage {
      * @param tasks new task list to overwrite on the given file.
      * @write on given data file.
      */
-    public void overwrite(TaskList tasks) {
+    public void overwrite(TaskList tasks) throws IOException {
         String[] arr = tasks.readTaskList();
 
-        try {
             File myFile = new File(this.path);
             myFile.getParentFile().mkdirs();
             FileWriter myWriter = new FileWriter(myFile);
@@ -69,8 +68,5 @@ public class Storage {
                 }
                 myWriter.close();
             }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-        }
     }
 }

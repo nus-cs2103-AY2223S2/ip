@@ -50,7 +50,7 @@ public class Ui {
      * @print instruction.
      * @throw MissingContentException if input array is empty.
      */
-    public void findWordIntro(String[] arr, boolean containsKeyword) throws DukeException {
+    public void findWordIntro(String[] arr, boolean containsKeyword) {
         if (arr.length >= 1) {
             if (containsKeyword) {
                 System.out.println("Here are the matching tasks in your list:");
@@ -58,7 +58,7 @@ public class Ui {
                 System.out.println("Sorry! No task found!");
             }
         } else {
-            throw new DukeException("OPPS! The content can not be left empty!");
+            System.out.println(new DukeException("OPPS! The content can not be left empty!"));
         }
     }
 }
