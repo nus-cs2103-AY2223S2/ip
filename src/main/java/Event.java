@@ -1,6 +1,6 @@
 public class Event extends Task {
-    private String startDateTime;
-    private String endDateTime;
+    private final String startDateTime;
+    private final String endDateTime;
 
     public Event(String description, String startDateTime, String endDateTime) {
         super(description);
@@ -13,5 +13,10 @@ public class Event extends Task {
         return "[E]" + super.toString() +
                 " (from: " + startDateTime + " to: " + endDateTime + ")";
     }
-}
 
+    @Override
+    public String getTaskState() {
+        return "E | " + super.getTaskString() + " | "
+                + this.startDateTime + " | " + this.endDateTime;
+    }
+}
