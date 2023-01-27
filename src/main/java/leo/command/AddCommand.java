@@ -5,23 +5,23 @@ import leo.leoException.EmptyDescriptionException;
 import leo.leoException.IncompleteDurationException;
 import leo.leoException.InvalidInputException;
 import leo.leoException.LeoException;
-import leo.storage.Deadline;
-import leo.storage.Event;
+import leo.storage.DeadlineTask;
+import leo.storage.EventTask;
 import leo.storage.Storage;
 import leo.storage.Task;
-import leo.storage.ToDo;
+import leo.storage.ToDoTask;
 import leo.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Add extends Command {
+public class AddCommand extends Command {
 
-    public Add(Storage s, String task) throws LeoException {
+    public AddCommand(Storage s, String task) throws LeoException {
         super(s, task);
         try {
             if (task.contains("todo")) {
-                s.addTask(new ToDo(task.substring(5)));
+                s.addTask(new ToDoTask(task.substring(5)));
             } else if (task.contains("deadline")) {
                 try {
                     String t = task.substring(9);
@@ -29,7 +29,7 @@ public class Add extends Command {
                     String deadlineTask = taskAndDeadline[0].trim();
                     String time = taskAndDeadline[1];
                     LocalDateTime dateTime = convertString(time);
-                    Task deadline = new Deadline(deadlineTask, dateTime);
+                    Task deadline = new DeadlineTask(deadlineTask, dateTime);
                     s.addTask(deadline);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new EmptyDeadlineException("Uh oh! There is no deadline indicated :-(");
@@ -43,7 +43,7 @@ public class Add extends Command {
                     String to = eventAndDuration[2].trim();
                     LocalDateTime dateFrom = convertString(from);
                     LocalDateTime dateTo = convertString(to);
-                    Task event = new Event(eventTask, dateFrom, dateTo);
+                    Task event = new EventTask(eventTask, dateFrom, dateTo);
                     s.addTask(event);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new IncompleteDurationException("Uh oh! The duration of the event is incomplete :-(");

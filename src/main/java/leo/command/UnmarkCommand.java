@@ -2,12 +2,12 @@ package leo.command;
 
 import leo.storage.Storage;
 
-public class Delete extends Command {
+public class UnmarkCommand extends Command {
 
-    public Delete(Storage s, String c) {
+    public UnmarkCommand(Storage s, String c) {
         super(s, c);
         int num = extractTaskNum();
-        s.delete(num);
+        s.unmark(num);
     }
 
 }

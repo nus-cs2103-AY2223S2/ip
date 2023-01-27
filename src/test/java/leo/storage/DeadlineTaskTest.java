@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DeadlineTest {
+public class DeadlineTaskTest {
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy HH:mm");
     private final LocalDateTime dt = LocalDateTime.parse("19012023 12:00", formatter);
-    private final Deadline deadline = new Deadline("project", dt);
+    private final DeadlineTask deadline = new DeadlineTask("project", dt);
 
     @Test
     public void testStringConversion() {

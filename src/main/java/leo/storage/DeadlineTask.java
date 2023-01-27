@@ -3,11 +3,11 @@ package leo.storage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class DeadlineTask extends Task {
 
     private final LocalDateTime deadline;
 
-    public Deadline(String task, LocalDateTime by) {
+    public DeadlineTask(String task, LocalDateTime by) {
         super(task);
         this.deadline = by;
         setType(TaskType.DEADLINE);

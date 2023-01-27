@@ -19,18 +19,18 @@ public class Parser {
         String command = scanner.nextLine();
         while (!command.contains("bye")) {
             if (Objects.equals(command, "list")) {
-                new List(s, command);
+                new ListCommand(s, command);
             } else if (command.contains("mark")) {
                 if (command.contains("unmark")) {
-                    new Unmark(s, command);
+                    new UnmarkCommand(s, command);
                 } else {
-                    new Mark(s, command);
+                    new MarkCommand(s, command);
                 }
             } else if (command.contains("delete")) {
-                new Delete(s, command);
+                new DeleteCommand(s, command);
             } else {
                 try {
-                    new Add(s, command);
+                    new AddCommand(s, command);
                 } catch (LeoException e) {
                     Ui.displayMessage(Ui.leoResponse(e.getMessage()));
                 }
@@ -38,7 +38,7 @@ public class Parser {
             command = scanner.nextLine();
         }
 
-        new Exit(s, command);
+        new ExitCommand(s, command);
     }
 
 }

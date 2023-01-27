@@ -1,8 +1,8 @@
 package leo.storage;
 
-public class ToDo extends Task {
+public class ToDoTask extends Task {
 
-    public ToDo(String task) {
+    public ToDoTask(String task) {
         super(task);
         setType(TaskType.TODO);
     }
