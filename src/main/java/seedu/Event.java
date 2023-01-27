@@ -18,7 +18,7 @@ public class Event extends Task {
 
     @Override
     public String toStoreString() {
-        return "E | " + super.toStoreString() + " |" + this.start + "| " + this.end + "\n";
+        return "E | " + super.toStoreString() + " | " + this.start + " | " + this.end + "\n";
     }
 
 }
