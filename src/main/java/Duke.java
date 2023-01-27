@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -17,36 +18,53 @@ public class Duke {
             + INDENTATION + "| |_| | |_| |   <  __/\n"
             + INDENTATION + "|____/ \\__,_|_|\\_\\___|\n";
 
+    private static final ArrayList<String> tasks = new ArrayList<>(100);
+
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
-        Scanner input = new Scanner(System.in);
-        String cmd = input.nextLine();
-        while (!cmd.equals("bye")) {
-            duke.echo(cmd);
-            cmd = input.nextLine();
+
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        while (!input.equals("bye")) {
+            if (input.equals("list")) {
+                duke.list();
+            } else {
+                tasks.add(input);
+                duke.add(input);
+            }
+            input = scanner.nextLine();
         }
         duke.exit();
-        input.close();
+        scanner.close();
+    }
+
+    private void fixedResponse(String text) {
+        System.out.println(INDENTATION + LINE);
+        String[] lines = text.split("\n");
+        for (String s : lines) {
+            System.out.println(INDENTATION + s);
+        }
+        System.out.println(INDENTATION + LINE + "\n");
     }
 
     private void greet() {
-        System.out.println(INDENTATION + LINE
-                + INDENTATION + "Hello I'm\n"
-                + LOGO
-                + INDENTATION + "What can I do for you?\n"
-                + INDENTATION + LINE);
+        fixedResponse("Hello I'm\n" + LOGO + "What can I do for you?");
     }
 
     private void exit() {
-        System.out.println(INDENTATION + LINE
-                + INDENTATION + "Bye. Hope to see you again soon!\n"
-                + INDENTATION + LINE);
+        fixedResponse("Bye. Hope to see you again soon!");
     }
 
-    private void echo(String cmd) {
-        System.out.println(INDENTATION + LINE
-                + INDENTATION + cmd + "\n"
-                + INDENTATION + LINE);
+    private void add(String s) {
+        fixedResponse("added: " + s);
+    }
+
+    private void list() {
+        System.out.println(INDENTATION + LINE);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(INDENTATION + (i + 1) + ". " + tasks.get(i));
+        }
+        System.out.println(INDENTATION + LINE + "\n");
     }
 }
