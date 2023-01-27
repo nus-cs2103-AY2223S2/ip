@@ -37,14 +37,14 @@ public class Duke {
                     String desc = wordArr[1];
                     System.out.println(taskList.addTask(desc));
                 } else if (wordArr[0].equals("deadline")) {
-                    String desc = wordArr[1].split("/by", 2)[0];
-                    String by = wordArr[1].split("/by", 2)[1];
+                    String desc = wordArr[1].split(" /by ")[0];
+                    String by = wordArr[1].split(" /by ")[1];
                     System.out.println(taskList.addTask(desc, by));
 
                 } else if (wordArr[0].equals("event")) {
                     String desc = wordArr[1].split(" ", 2)[0];
-                    String from = wordArr[1].split("/from", 2)[1].split("/to", 2)[0];
-                    String to = wordArr[1].split("/to", 2)[1];
+                    String from = wordArr[1].split(" /from ")[1].split(" /to ")[0];
+                    String to = wordArr[1].split(" /to ", 2)[1];
                     System.out.println(taskList.addTask(desc, from, to));
                 } else{
                     throw new DukeException("Sorry, I don't know that command");
