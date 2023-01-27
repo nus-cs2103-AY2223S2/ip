@@ -1,5 +1,5 @@
 /**
- * The Task class represents one single task added by the user.
+ * The Task class represents a single task added by the user.
  *
  * @author Chia Jeremy
  */

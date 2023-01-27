@@ -6,11 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
- * The Storage class represents a repository that implements CRUD (Create, Read, Update, and Delete)
- * operations to deals with loading tasks from the file and saving tasks in the file.
+ * The Storage class implements a repository that deals with the
+ * loading of tasks from the file and saving tasks in the file.
  *
  * @author Chia Jeremy
  */
@@ -23,18 +22,8 @@ public class Storage {
         this.file = new File(filePath);
     }
 
-    public ArrayList<String[]> load() {
-        ArrayList<String[]> tasks = new ArrayList<>();
-        try {
-            Scanner s = new Scanner(this.file);
-            while (s.hasNext()) {
-                String[] data = s.nextLine().split(" \\| ");
-                tasks.add(data);
-            }
-        } catch (FileNotFoundException e) {
-            Feedback.warning("File not found.");
-        }
-        return tasks;
+    public List<String> load() {
+        return getSavedTasksAsList();
     }
 
     public void add(Task task) {
@@ -48,14 +37,14 @@ public class Storage {
                 Deadline dl = (Deadline) task;
                 data = "D |   | " + dl.getDescription() + " | " + dl.getDateTime();
             } else {
-                Event ev = (Event) task;
-                data = "E |   | " + ev.getDescription() + " | " + ev.getStartDT() + " | " + ev.getEndDT();
+                Event evt = (Event) task;
+                data = "E |   | " + evt.getDescription() + " | " + evt.getStartDt() + " | " + evt.getEndDt();
             }
             fw.write(data + System.lineSeparator());
             fw.flush();
             fw.close();
         } catch (IOException e) {
-            Feedback.warning("Fail to add to repository: " + e.getMessage());
+            System.out.println("\"Fail to add to repository.");
         }
     }
 
@@ -63,28 +52,46 @@ public class Storage {
         List<String> tasks = getSavedTasksAsList();
         StringBuilder sb = new StringBuilder(tasks.get(index));
         sb.setCharAt(4, 'X');
-        replaceTextInFile(index, sb.toString());
+        replaceLineInFile(index, sb.toString());
     }
 
     public void unmark(int index) {
         List<String> tasks = getSavedTasksAsList();
         StringBuilder sb = new StringBuilder(tasks.get(index));
         sb.setCharAt(4, ' ');
-        replaceTextInFile(index, sb.toString());
+        replaceLineInFile(index, sb.toString());
     }
 
     public void delete(int index) {
-        replaceTextInFile(index, "");
+        replaceLineInFile(index, "");
     }
 
-    private void replaceTextInFile(int index, String text) {
+    private List<String> getSavedTasksAsList() {
+        List<String> savedTaskList = new ArrayList<>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(this.file));
+            String s = br.readLine();
+            while (s != null && !s.isEmpty()) {
+                savedTaskList.add(s);
+                s = br.readLine();
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return savedTaskList;
+    }
+
+    private void replaceLineInFile(int index, String text) {
         try {
             List<String> tasks = getSavedTasksAsList();
             FileWriter fw = new FileWriter(this.file, false);
             for (int i = 0; i < tasks.size(); i++) {
-                if (i != index) {
+                if (i != index) {               // not the line we want to replace
                     fw.write(tasks.get(i) + System.lineSeparator());
-                } else if (i == index && !text.isEmpty()) {
+                } else if (!text.isEmpty()) {   // only replace line if is not empty, else delete line
                     fw.write(text + System.lineSeparator());
                 }
                 fw.flush();
@@ -93,23 +100,5 @@ public class Storage {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private List<String> getSavedTasksAsList() {
-        List<String> savedTasks = new ArrayList<>(100);
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(this.file));
-            String s = br.readLine();
-            while (s != null && !s.isEmpty()) {
-                savedTasks.add(s);
-                s = br.readLine();
-            }
-            br.close();
-        } catch (FileNotFoundException e) {
-            Feedback.warning("File not found.");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return savedTasks;
     }
 }
