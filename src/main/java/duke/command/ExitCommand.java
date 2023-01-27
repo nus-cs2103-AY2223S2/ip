@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.Ui;
+import duke.gui.GuiText;
 
 public class ExitCommand extends Command {
 
@@ -11,8 +11,8 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) {
-        return ui.showGoodbye();
+    public String execute(TaskList task, GuiText guiText, Storage storage) {
+        return guiText.showGoodbye();
     }
 
 }

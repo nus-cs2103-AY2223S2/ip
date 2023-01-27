@@ -4,7 +4,7 @@ import duke.command.Command;
 
 import duke.exception.DukeException;
 
-import duke.ui.Ui;
+import duke.gui.GuiText;
 
 /** Class that encapsulates the Duke chatbot */
 public class Duke {
@@ -14,9 +14,10 @@ public class Duke {
     /** TaskList object to store tasks */
     private TaskList tasks;
     /** UI object to display user interface and read user input */
-    private Ui ui;
+    private GuiText guiText;
 
     private boolean isExit = false;
+    private boolean isLoadSuccessful = true;
 
     /**
      * Constructs a Duke object with a specified path
@@ -26,28 +27,45 @@ public class Duke {
      *                used for storing tasks.
     */
     public Duke(String dirPath) {
-        this.ui = new Ui();
+        this.guiText = new GuiText();
         this.storage = new Storage(dirPath);
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            this.ui.showErrorMessage(e);
+            this.isLoadSuccessful = false;
             this.tasks = new TaskList();
         }
     }
 
+    /**
+     * Runs the given command.
+     *
+     * @param command Given command.
+     * @return The text response.
+     */
     public String runCommand(String command) {
         try {
             Command c = Parser.parseCommand(command);
             this.isExit = c.isExit();
-            return c.execute(this.tasks, this.ui, this.storage);
+            return c.execute(this.tasks, this.guiText, this.storage);
         } catch (DukeException e) {
-            return this.ui.showErrorMessage(e);
+            return this.guiText.showErrorMessage(e);
         }
     }
 
     public boolean isExit() {
         return this.isExit;
+    }
+
+    /**
+     * Returns the text indicating whether
+     * loading from storage was successful.
+     *
+     * @return Text indicating whether loading
+     *         from storage was successful.
+     */
+    public String displayLoadStatus() {
+        return this.guiText.showLoad(isLoadSuccessful);
     }
 
 }

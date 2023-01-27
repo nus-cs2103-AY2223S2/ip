@@ -1,4 +1,4 @@
-package duke.ui;
+package duke.gui;
 
 import duke.Duke;
 
@@ -17,21 +17,30 @@ import javafx.scene.layout.VBox;
 
 import javafx.stage.Stage;
 
+/**
+ * Class that handles the GUI.
+ * Reused from https://se-education.org/guides/tutorials/javaFx.html
+ */
 public class Gui extends Application {
 
     /** Relative path to the data directory used for storing tasks */
     private static final String dirPath = "./data/";
     private Duke duke;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("resources/images/DaUser.png"));
-    private Image colette = new Image(this.getClass().getResourceAsStream("resources/images/Colette_Neutral.png"));
+    /** Images to be used in GUI */
+    private Image user = new Image(this.getClass().getResourceAsStream("../resources/images/DaUser.png"));
+    private Image colette = new Image(this.getClass().getResourceAsStream("../resources/images/Colette_Neutral.png"));
 
+    /** JavaFX GUI objects */
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
 
+    /**
+     * Constructs a GUI object.
+     */
     public Gui() {
         this.duke = new Duke(dirPath);
     }
@@ -151,7 +160,11 @@ public class Gui extends Application {
     }
 
     private void entry() {
-        Label dukeText = new Label(Ui.showGreeting());
+        Label storageText = new Label(this.duke.displayLoadStatus());
+        dialogContainer.getChildren().addAll(
+            DialogBox.getDukeDialog(storageText, new ImageView(colette))
+        );
+        Label dukeText = new Label(GuiText.showGreeting());
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(dukeText, new ImageView(colette))
         );

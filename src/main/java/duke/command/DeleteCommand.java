@@ -3,8 +3,8 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.exception.DukeException;
+import duke.gui.GuiText;
 import duke.task.Task;
-import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
 
@@ -16,10 +16,10 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, GuiText guiText, Storage storage) throws DukeException {
         Task task = tasks.deleteTask(this.index);
         storage.save(tasks.createTaskListString());
-        return ui.showDeleteTask(task, tasks);
+        return guiText.showDeleteTask(task, tasks);
     }
 
 }

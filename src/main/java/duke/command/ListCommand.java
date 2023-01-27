@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.Ui;
+import duke.gui.GuiText;
 
 public class ListCommand extends Command {
 
@@ -11,8 +11,8 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.showList(tasks);
+    public String execute(TaskList tasks, GuiText guiText, Storage storage) {
+        return guiText.showList(tasks);
     }
 
 }
