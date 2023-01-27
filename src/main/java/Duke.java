@@ -4,8 +4,7 @@ import java.util.Scanner;
 import java.util.function.Predicate;
 
 public class Duke {
-    private static final int INDENT_LEVEL = 4;
-
+    private Ui ui = new Ui();
     private TaskList tasks;
     private Command currentCommand;
 
@@ -13,7 +12,7 @@ public class Duke {
         try {
             this.tasks = TaskList.load();
         } catch(DukeLoadException e) {
-            this.say(e.getDukeMessage());
+            this.ui.showError(e);
             this.tasks = new TaskList();
         }
     }
@@ -24,7 +23,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        this.say("Hello from\n" + logo);
+        this.ui.show("Hello from\n" + logo);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -63,7 +62,7 @@ public class Duke {
                     case "quit":
                     case "exit":
                     case "bye":
-                        this.say("Bye. Hope to see you again soon!");
+                        this.ui.show("Bye. Hope to see you again soon!");
                         break whileLoop;
                     default:
                         throw new DukeInvalidCommandException();
@@ -71,7 +70,7 @@ public class Duke {
 
                 this.tasks.save();
             } catch (DukeException e) {
-                this.say(e.getDukeMessage());
+                this.ui.showError(e);
             }
         }
         
@@ -82,16 +81,6 @@ public class Duke {
         new Duke().run();
     }
 
-    private void say(String whatToSay) {
-        String indentation = " ".repeat(Duke.INDENT_LEVEL);
-        String horizontalLine = "_".repeat(60);
-        String indentedInput = whatToSay.replaceAll("(?<=^|\n)", indentation);
-        
-        System.out.println(indentation + horizontalLine);
-        System.out.println(indentedInput);
-        System.out.println(indentation + horizontalLine + '\n');
-    }
-
     private void addTodo() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("The description of a todo cannot be empty.");
@@ -100,7 +89,7 @@ public class Duke {
         String description = this.currentCommand.body;
         Task task = new TaskTodo(description);
         this.tasks.add(task);
-        this.say(
+        this.ui.show(
             "Got it. I've added this task:\n"
                 + "  " + task.toString() + "\n"
                 + this.tasks.getStatus()
@@ -122,7 +111,7 @@ public class Duke {
             String description = this.currentCommand.body;
             Task task = new TaskDeadline(description, this.currentCommand.namedParameters.get("by"));
             this.tasks.add(task);
-            this.say(
+            this.ui.show(
                 "Got it. I've added this task:\n"
                     + "  " + task.toString() + "\n"
                     + this.tasks.getStatus()
@@ -159,7 +148,7 @@ public class Duke {
                 this.currentCommand.namedParameters.get("to")
             );
             this.tasks.add(task);
-            this.say(
+            this.ui.show(
                 "Got it. I've added this task:\n"
                     + "  " + task.toString() + "\n"
                     + this.tasks.getStatus()
@@ -191,7 +180,7 @@ public class Duke {
                 "Task index is beyond the range of the task list."
             ));
         task.markAsDone();
-        this.say(
+        this.ui.show(
             "Nice! I've marked this task as done:\n"
                 + "  " + task.toString()
         );
@@ -217,7 +206,7 @@ public class Duke {
                 "Task index is beyond the range of the task list."
             ));
         task.markAsNotDone();
-        this.say(
+        this.ui.show(
             "OK, I've marked this task as not done yet:\n"
                 + "  " + task.toString()
         );
@@ -243,13 +232,13 @@ public class Duke {
                 "Task index is beyond the range of the task list."
             ));
         this.tasks.remove(taskIndex);
-        this.say(
+        this.ui.show(
             "Noted. I've removed this task:\n"
                 + "  " + task.toString()
         );
     }
 
     private void list() {
-        this.say(this.tasks.toString());
+        this.ui.show(this.tasks.toString());
     }
 }
