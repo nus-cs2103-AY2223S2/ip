@@ -2,6 +2,11 @@ package task;
 
 import util.DukeException;
 
+/**
+ * Represents a deadline task that the user wishes to
+ * add to the list. A deadline object has a completion
+ * status, description and time to complete by.
+ */
 public class Deadline extends Task {
     private String by;
     private String byFormatted;

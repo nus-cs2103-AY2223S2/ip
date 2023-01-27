@@ -2,6 +2,11 @@ package task;
 
 import util.DukeException;
 
+/**
+ * Represents an event task that the user wishes to add
+ * to the list. An event object has a completion status,
+ * description, start and end timings.
+ */
 public class Event extends Task {
     private String startFormatted;
     private String start;

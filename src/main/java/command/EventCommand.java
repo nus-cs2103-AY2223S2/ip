@@ -5,6 +5,9 @@ import task.Event;
 import task.TaskManager;
 import util.DukeException;
 
+/**
+ * Executes add event task command.
+ */
 public class EventCommand extends Command {
     private final TaskManager taskManager;
     private final String description;
@@ -12,6 +15,15 @@ public class EventCommand extends Command {
         this.taskManager = taskManager;
         this.description = description;
     }
+
+    /**
+     * Adds an event type task to the list.
+     *
+     * String input is parsed to extract start and end
+     * dates and timings of the event.
+     *
+     * @throws DukeException
+     */
     @Override
     public void executeCommand() throws DukeException {
         try {

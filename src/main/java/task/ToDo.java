@@ -2,6 +2,11 @@ package task;
 
 import util.DukeException;
 
+/**
+ * Represents a todo task that the user wishes to add
+ * to the list. A todo object has a completion status
+ * and description.
+ */
 public class ToDo extends Task {
     public ToDo(String description, boolean status) {
         super(description, status);

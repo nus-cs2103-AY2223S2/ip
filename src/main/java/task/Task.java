@@ -4,6 +4,12 @@ import util.DukeException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+/**
+ * Represents a task that the user wishes to add to
+ * the list. A task object has a completion status and
+ * a description.
+ */
 public class Task {
     private String description;
     private boolean isDone;
@@ -34,6 +40,14 @@ public class Task {
         isDone = false;
     }
 
+    /**
+     * Formats the date and time input by the user while creating the
+     * task into a more readable format i.e. 1 Jan 2021 11:59 PM.
+     *
+     * @param str
+     * @return Formatted date and time
+     * @throws DukeException
+     */
     public String dateFormatter(String str) throws DukeException {
         //"d/M/y H:mm" for auto detection of AM/PM d/M/yy h:mma for manual but in 12hr time
         try {
@@ -45,10 +59,23 @@ public class Task {
         }
     }
 
+    /**
+     * Encodes task data for storage in a file.
+     *
+     * @return Encoded String representation
+     */
     public String serialise() {
         return String.format("Task,%s,%s", this.getStatus(), this.description);
     }
 
+    /**
+     * Decodes a String representation of a task in the file
+     * back into the Task object.
+     *
+     * @param data
+     * @return Decoded Task object
+     * @throws DukeException
+     */
     public static Task deserialise(String data) throws DukeException {
         String[] arr = data.split(",");
         boolean isDone = Boolean.parseBoolean(arr[1]);
@@ -57,6 +84,11 @@ public class Task {
         return new Task(desc, isDone);
     }
 
+    /**
+     * String representation of a Task object.
+     *
+     * @return String representation of a Task object.
+     */
     @Override
     public String toString() {
         String str = "[" + this.getStatusIcon() + "] " + this.description;
