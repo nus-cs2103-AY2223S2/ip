@@ -5,6 +5,9 @@ import duke.helper.Parser;
 
 import java.time.LocalDateTime;
 
+/**
+ * Subclass of tasks representing an event task
+ */
 public class Event extends Task {
     private LocalDateTime startDateTime;
     private LocalDateTime dueDateTime;
@@ -16,6 +19,13 @@ public class Event extends Task {
         dueDateTime = Parser.handleDateTime(to);
     }
 
+    /**
+     * Factory method to create an event task
+     *
+     * @param desc the description of an event task
+     * @return an event task
+     * @throws InvalidDateTimeException If incorrect dateTime values are provided
+     */
     public static Event createEvent(String desc) throws InvalidDateTimeException {
         String[] eventArr = desc.split(" /from ");
         String[] dataTimes = eventArr[1].split(" /to ");
@@ -25,6 +35,11 @@ public class Event extends Task {
         return new Event(eventDesc, from, to);
     }
 
+    /**
+     * Returns the string representation of an event task
+     *
+     * @return string representation of an event task
+     */
     @Override
     public String toString() {
         return String.format("%s (from: %s %s to: %s %s)", super.toString(),

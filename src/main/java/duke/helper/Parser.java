@@ -6,12 +6,15 @@ import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Todo;
+import duke.task.ToDo;
 
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
+/**
+ * Parser class to parse inputs
+ */
 public class Parser {
     private TaskList tasks;
 
@@ -19,6 +22,9 @@ public class Parser {
         this.tasks = tasks;
     }
 
+    /**
+     * Handles the input according to the type of the task
+     */
     public void parseInputs(String[] inputs) throws DukeException, IOException {
         String type = inputs[0];
 
@@ -37,7 +43,7 @@ public class Parser {
 
         case "todo":
             checkTaskDesc(inputs);
-            tasks.addToTasks(new Todo(inputs[1]));
+            tasks.addToTasks(new ToDo(inputs[1]));
             tasks.handleTaskOutput();
             break;
 
@@ -70,6 +76,13 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Parse the dateTime description into a LocalDateTime object
+     *
+     * @param dateTime dateTime description
+     * @return a LocalDateTime object
+     * @throws InvalidDateTimeException If incorrect dateTime values are given
+     */
     public static LocalDateTime handleDateTime(String dateTime) throws InvalidDateTimeException {
         try {
             String[] period = dateTime.split("/", 3);
