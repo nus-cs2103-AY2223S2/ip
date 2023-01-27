@@ -16,4 +16,5 @@ mark 4
 mark test
 delete test
 deadline do homework /by 26/1/2023 2500
+find book
 bye

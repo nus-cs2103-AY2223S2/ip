@@ -7,10 +7,12 @@ import duke.exception.InvalidTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
+import duke.task.Task;
 
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * Parser class to parse inputs
@@ -62,6 +64,17 @@ public class Parser {
         case "delete":
             int taskNo = Integer.parseInt(inputs[1]) - 1;
             tasks.deleteTask(taskNo);
+            break;
+
+        case "find":
+            ArrayList<Task> taskList = tasks.getTasks();
+            ArrayList<Task> output = new ArrayList<>();
+            for (Task task : taskList) {
+                if (task.toString().contains(inputs[1])) {
+                    output.add(task);
+                }
+            }
+            Ui.filter(output);
             break;
 
         default:
