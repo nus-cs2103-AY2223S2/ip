@@ -17,9 +17,9 @@ public class Task {
 
     public void printTask(){
         if (isDone){
-            System.out.println("[X] " + name);
+            System.out.print("[X] " + name);
         } else {
-            System.out.println("[ ] " + name);
+            System.out.print("[ ] " + name);
         }
     }
 
