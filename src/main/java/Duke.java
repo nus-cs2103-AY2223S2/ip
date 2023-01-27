@@ -106,9 +106,9 @@ public class Duke {
                     this.list.get(index - 1).markAsDone();
                     s.update(list);
                 } catch (IndexOutOfBoundsException IOBE) {
-                    System.out.println("There is no such task for marking ☹");
+                    System.out.println("There is no such task for marking");
                 } catch (NumberFormatException e) {
-                    System.out.println("Please key in number after mark ☹");
+                    System.out.println("Please key in number after mark");
                 } finally {
                     continue;
                 }
@@ -120,9 +120,9 @@ public class Duke {
                     this.list.get(index - 1).markAsNotDone();
                     s.update(list);
                 } catch (IndexOutOfBoundsException IOBE) {
-                    System.out.println("There is no such task for unmarking ☹");
+                    System.out.println("There is no such task for unmarking");
                 } catch (NumberFormatException e) {
-                    System.out.println("Please key in number after unmark ☹");
+                    System.out.println("Please key in number after unmark");
                 } finally {
                     continue;
                 }
@@ -147,9 +147,9 @@ public class Duke {
                 try {
                     delete(input);
                 } catch (IndexOutOfBoundsException IOBE) {
-                    System.out.println("There is no such task for deletion ☹");
+                    System.out.println("There is no such task for deletion");
                 } catch (NumberFormatException e) {
-                    System.out.println("Please key in number after deletion ☹");
+                    System.out.println("Please key in number after deletion");
                 }
                 finally {
                     continue;
