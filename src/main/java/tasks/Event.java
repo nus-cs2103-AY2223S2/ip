@@ -9,17 +9,10 @@ public class Event extends Task{
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
-    public Event(String name, String startDate, String endDate) throws DukeException {
+    public Event(String name, LocalDateTime startDate, LocalDateTime endDate) throws DukeException {
         super(name);
-        try {
-            this.startDate = LocalDateTime.parse(startDate, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
-            this.endDate = LocalDateTime.parse(endDate, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
-            if (this.startDate.isAfter(this.endDate)) {
-                throw new DukeException("The starting date of this event is after its ending date!");
-            }
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Please enter a valid date format in \"dd/mm/yyyy!\"");
-        }
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public String getStartDate() {

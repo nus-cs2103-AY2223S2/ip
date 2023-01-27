@@ -1,4 +1,6 @@
 package tasks;
+import exceptions.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -6,13 +8,9 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task{
     private LocalDateTime deadline;
 
-    public Deadline(String name, String deadline) {
+    public Deadline(String name, LocalDateTime deadline) throws DukeException {
         super(name);
-        try {
-            this.deadline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
-        } catch (DateTimeParseException e) {
-            System.out.println("Please enter a valid date format in \"dd/mm/yyyy!\"");
-        }
+        this.deadline = deadline;
     }
 
     public String getDeadline() {

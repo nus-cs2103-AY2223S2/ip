@@ -1,5 +1,7 @@
 package views;
 
+import commands.Command;
+
 public class UI {
     private static final String DATE_FORMAT = "dd/mm/yyyy";
 
@@ -12,6 +14,10 @@ public class UI {
         System.out.println("Hello from\n"
                 + logo
                 + ", your personal assistant.\n");
+    }
+
+    public void printExitMessage() {
+        System.out.println("I hope you've managed to be productive today. Bye!");
     }
 
     private String indentString(String s) {
@@ -30,6 +36,14 @@ public class UI {
                         + indentString("unmark [index]")
                         + indentString("delete [index]")
                         + indentString("bye"));
+    }
+
+    public void printCommandOutput(Command c) {
+        System.out.println(c.getCommandStatus());
+    }
+
+    public void printErrorMessage(String e) {
+        System.out.println(e);
     }
 
 }

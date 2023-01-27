@@ -5,9 +5,12 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.TaskList;
 import tasks.ToDo;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import java.io.File;
@@ -60,8 +63,7 @@ public class Storage {
             System.out.println("Failed to save existing tasks...");
         }
     }
-
-    public void parseFile(String input, TaskList tasks) throws DukeException {
+    public static void parseFile(String input, TaskList tasks) throws DukeException {
         String[] inputList = input.split(",");
         String taskType = inputList[0];
         String taskName = inputList[1];
@@ -72,12 +74,15 @@ public class Storage {
                 break;
             case "D":
                 String by = inputList[2];
-                tasks.addTask(new Deadline(taskName, by));
+                LocalDateTime deadline = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                tasks.addTask(new Deadline(taskName, deadline));
                 break;
             case "E":
                 String from = inputList[2];
                 String to = inputList[3];
-                tasks.addTask(new Event(taskName, from, to));
+                LocalDateTime startDate = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                LocalDateTime endDate = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                tasks.addTask(new Event(taskName, startDate, endDate));
                 break;
         }
     }
