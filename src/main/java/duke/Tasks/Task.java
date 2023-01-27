@@ -1,4 +1,4 @@
-
+package duke.Tasks;
 public class Task {
     protected String description;
     protected boolean isDone;

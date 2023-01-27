@@ -1,8 +1,14 @@
+package duke;
+import duke.Exceptions.DukeException;
+import duke.Exceptions.emptyDescriptionException;
+import duke.Tasks.*;
+import duke.Exceptions.unknownCommandException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.lang.String;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 public class Parser {
     private final static DateTimeFormatter  timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private final static DateTimeFormatter  HrFormat = DateTimeFormatter.ofPattern("HHmm");
@@ -13,14 +19,14 @@ public class Parser {
         System.out.printf("\tNow you have %d tasks in the list.\n", list.size());
     }
 
-    private static void addEvents(String description,TaskList list, LocalDateTime start, LocalTime end) {
+    private static void addEvents(String description, TaskList list, LocalDateTime start, LocalTime end) {
         Events evItem = new Events(description, start, end);
         list.addTask(evItem);
         System.out.println("\tGot it. I have added this task:\n " + evItem.toString());
         System.out.printf("\tNow you have %d tasks in the list.\n", list.size());
     }
 
-    private static void addDeadline(String description,TaskList list, LocalDateTime doneBy) {
+    private static void addDeadline(String description, TaskList list, LocalDateTime doneBy) {
         Deadline dlItem = new Deadline(description, doneBy);
         list.addTask(dlItem);
         System.out.println("\tGot it. I have added this task:\n " + dlItem.toString());
@@ -113,7 +119,7 @@ public class Parser {
             }
 
 
-        } catch (DukeException ex) {
+        } catch (DukeException | DateTimeParseException ex) {
             System.out.printf("%s\n", ex);
             Ui.Underline();
         }

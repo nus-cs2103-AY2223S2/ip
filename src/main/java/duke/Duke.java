@@ -1,3 +1,6 @@
+package duke;
+
+import duke.Tasks.*;
 import java.io.IOException;
 import java.lang.String;
 
@@ -13,7 +16,7 @@ public class Duke {
         this.storage = new Storage(file);
         this.ui = new Ui();
         list = new TaskList(storage.readnWriteData());
-        }
+    }
 
     public void run() {
         ui.greet();

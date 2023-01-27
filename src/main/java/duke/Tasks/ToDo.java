@@ -1,3 +1,5 @@
+package duke.Tasks;
+
 public class ToDo extends Task {
     public ToDo(String description){
         super(description);
@@ -14,10 +16,5 @@ public class ToDo extends Task {
         return String.format("T %s", super.changeFormat());
 
     }
-    @Override
-    public String changeFormat() {
 
-        return String.format("T %s", super.changeFormat());
-
-    }
 }

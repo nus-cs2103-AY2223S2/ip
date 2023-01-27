@@ -1,3 +1,8 @@
+package duke;
+
+import duke.Exceptions.DukeException;
+import duke.Tasks.TaskList;
+
 import javax.swing.*;
 import java.util.Scanner;
 import java.lang.String;
@@ -17,7 +22,7 @@ public class Ui {
     }
     public void greet() {
         System.out.println(logo);
-        System.out.println("Welcome! I'm Duke.");
+        System.out.println("Welcome! I'm duke.Duke.");
         System.out.println("What can I do for you?");
         Underline();
     }
