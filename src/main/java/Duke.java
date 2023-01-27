@@ -19,7 +19,7 @@ public class Duke {
     private static final String BOT_NAME = "Tyrone";
 
     public static void greet() {
-        Duke.say("Sup, my name is " + Duke.BOT_NAME);
+        Duke.say(Duke.BOT_NAME + "Bot activated.");
     }
 
     public static void processInput(String input) {
@@ -72,9 +72,40 @@ public class Duke {
     }
 
     public static void say(String s) {
-        String opener = "◤━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━◥";
-        String ender = "◣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━◢";
-        System.out.println("\n" + opener + "\n" + s + "\n" + ender + "\n");
+        String opener = "◤";
+        String ender = "◣";
+
+        // Find max length of a line
+        String[] stringArr = s.split(System.lineSeparator());
+        int maxLen = 0;
+        for (String str : stringArr) {
+            maxLen = Math.max(maxLen, str.length());
+        }
+
+        // Create adjustable text box
+        for (int i = 0; i < maxLen; i++) {
+            if (i == maxLen - 1) {
+                opener += "◥";
+                ender += "◢";
+            } else {
+                opener += "━";
+                ender += "━";
+            }
+        }
+
+        // Change String array to a StringBuilder
+        // Append line separator + append " " space character to each line
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < stringArr.length; i++) {
+            sb.append(" " + stringArr[i]);
+            if (i != stringArr.length - 1) {
+                sb.append(System.lineSeparator());
+            }
+        }
+
+        System.out.println("\n" + opener + "\n"
+                + sb.toString()
+                + "\n" + ender + "\n");
     }
 
     public static void listTasks() throws DukeException {
@@ -89,7 +120,7 @@ public class Duke {
             stringList.append((i + 1) + ". " + task.toString());
 
             if (i < taskList.size() - 1) {
-                stringList.append("\n");
+                stringList.append(System.lineSeparator());
             }
         }
 
@@ -178,7 +209,7 @@ public class Duke {
                 break;
         }
 
-        text.append("\nYou have " + taskList.size() + " task(s) in the list.");
+        text.append(System.lineSeparator() + "You have " + taskList.size() + " task(s) in the list.");
         Duke.say(text.toString());
     }
 
@@ -197,16 +228,9 @@ public class Duke {
 
         // Print response text to user
         StringBuilder text = new StringBuilder();
-        text.append("Task deleted: " + t + "\n");
+        text.append("Task deleted: " + t + System.lineSeparator());
         text.append("You have " + taskList.size() + " task(s) remained.");
         Duke.say(text.toString());
-    }
-
-    /**
-     * Prints shutdown message
-     */
-    public static void shutdown() {
-        Duke.say("Aight imma head out");
     }
 
     /**
@@ -326,7 +350,6 @@ public class Duke {
         Duke.greet();
         Duke.loadFile();
         Duke.interact();
-        Duke.shutdown();
         Duke.saveFile();
     }
 }
