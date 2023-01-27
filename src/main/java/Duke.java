@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -61,7 +63,7 @@ public class Duke {
         Duke.print("    > Task masked as undone: " + t);
     }
 
-    public static void addTask(String[] command, Operation op) throws DukeException {
+    public static void addTask(String[] command, Operation op) throws DukeException, DateTimeParseException {
 
         if (command.length < 2) {
             throw new DukeException("    > No task description given. :( ");
@@ -70,31 +72,35 @@ public class Duke {
         String description = command[1];
 
         switch (op) {
-            case TODO:
-                Task todo = new ToDo(description);
-                taskList.add(todo);
-                Duke.print("    > I got you, new todo task added: " + todo);
-                break;
+        case TODO:
+            Task todo = new ToDo(description);
+            taskList.add(todo);
+            Duke.print("    > I got you, new todo task added: " + todo);
+            break;
 
-            case DEADLINE:
-                String[] deadlineDescription = description.split("/by", 2);
-                Task deadline = new Deadline(deadlineDescription[0], deadlineDescription[1]);
-                taskList.add(deadline);
-                Duke.print("    > I got you, new deadline added: " + deadline);
-                break;
+        case DEADLINE:
+            String[] deadlineString = description.split("/by", 2);
+            String deadlineDescription = deadlineString[0];
+            LocalDate by = LocalDate.parse(deadlineString[1].trim());
 
-            case EVENT:
-                String[] eventDescription = description.split("/from", 2);
+            Task deadline = new Deadline(deadlineDescription, by);
+            taskList.add(deadline);
+            Duke.print("    > I got you, new deadline added: " + deadline);
+            break;
 
-                // Parse the string to get to and from dates of the event
-                String[] fromAndTo = eventDescription[1].split("/to", 2);
-                String from = fromAndTo[0];
-                String to = fromAndTo[1];
+        case EVENT:
+            String[] eventString = description.split("/from", 2);
+            String eventDescription = eventString[0];
 
-                Task event = new Event(eventDescription[0], from, to);
-                taskList.add(event);
-                Duke.print("    > I got you, new event added: " + event);
-                break;
+            // Parse the string to get to and from dates of the event
+            String[] fromAndTo = eventString[1].split("/to", 2);
+            LocalDate from = LocalDate.parse(fromAndTo[0].trim());
+            LocalDate to = LocalDate.parse(fromAndTo[1].trim());
+
+            Task event = new Event(eventDescription, from, to);
+            taskList.add(event);
+            Duke.print("    > I got you, new event added: " + event);
+            break;
         }
 
         Duke.print("    > Chu have " + taskList.size() + " task(s) in the list.");
@@ -160,6 +166,8 @@ public class Duke {
                 Duke.print(e.toString());
             } catch (IllegalArgumentException e) {
                 Duke.print("    > What are you talkin about man?");
+            } catch (DateTimeParseException e) {
+                Duke.print("Wrong date format given.");
             }
         }
 
