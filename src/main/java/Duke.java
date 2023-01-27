@@ -1,10 +1,19 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Storage storage = new Storage();
         ArrayList<Task> tasks = new ArrayList<>();
+
+        try {
+            tasks = storage.loadTasks();
+        } catch (IOException e) {
+            System.out.println("\t" + e);
+        }
+
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Hello, I am Duke. \nWhat can I do for you?");
 
@@ -19,15 +28,23 @@ public class Duke {
                 } else if (input.startsWith("mark ")) {
                     String number = input.substring(5);
                     int index = Integer.parseInt((number)) - 1;
+                    if (index+1 == 0) {
+                        throw new DukeException("cannot mark a number not in the list!");
+                    }
                     Task task = tasks.get(index);
                     task.mark();
+                    storage.saveTasks(tasks);
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(task);
                 } else if (input.startsWith("unmark ")) {
                     String number = input.substring(7);
                     int index = Integer.parseInt((number)) - 1;
+                    if (index+1 == 0) {
+                        throw new DukeException("cannot unmark a number not in the list!");
+                    }
                     Task task = tasks.get(index);
                     task.unmark();
+                    storage.saveTasks(tasks);
                     System.out.println("OK, I've marked this task as not done yet:");
                     System.out.println(task);
                 } else if (input.startsWith("delete ")) {
@@ -35,6 +52,7 @@ public class Duke {
                     int index = Integer.parseInt((number)) - 1;
                     Task task = tasks.get(index);
                     tasks.remove(index);
+                    storage.saveTasks(tasks);
                     System.out.println("Noted. I've removed this task: \n" + task);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 } else if (input.startsWith("todo ")) {
@@ -44,6 +62,7 @@ public class Duke {
                     String taskName = input.substring(5);
                     Todo todo = new Todo(taskName);
                     tasks.add(todo);
+                    storage.saveTasks(tasks);
                     System.out.println("Got it. I've added this task: \n" + todo);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 } else if (input.startsWith("deadline ")) {
@@ -52,6 +71,7 @@ public class Duke {
                     String by = input.substring(dash_index + 4);
                     Deadline deadline = new Deadline(taskName, by);
                     tasks.add(deadline);
+                    storage.saveTasks(tasks);
                     System.out.println("Got it. I've added this task: \n" + deadline);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 } else if (input.startsWith("event ")) {
@@ -62,6 +82,7 @@ public class Duke {
                     String to = input.substring(second_dash_index + 4);
                     Event event = new Event(taskName, from, to);
                     tasks.add(event);
+                    storage.saveTasks(tasks);
                     System.out.println("Got it. I've added this task: \n" + event);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                 } else {
