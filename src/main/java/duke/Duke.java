@@ -6,6 +6,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke object.
+     *
+     * @param filePath String path of data text file to load data from and save to.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -17,6 +22,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Start the Duke task tracker software.
+     */
     public void run() {
         ui.printGreeting();
         while (true) {

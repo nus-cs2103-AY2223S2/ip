@@ -10,6 +10,14 @@ public class Deadline extends Task{
     protected LocalDateTime dueDate;
     private static final DateTimeFormatter FORMATTER  = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    /**
+     * Factory method to create Deadline object. String input should contain dueDate
+     * in the format /by yyyy-MM-dd HH:mm.
+     *
+     * @param str String to be processed into Deadline object.
+     * @return Deadline object.
+     * @throws DukeException If format of input is incorrect.
+     */
     public static Deadline create(String str) throws DukeException {
         if (str.length() < 1) {
             throw new DukeException();
@@ -23,6 +31,15 @@ public class Deadline extends Task{
         }
     }
 
+    /**
+     * Factory method to create Deadline object with boolean input. String input should contain dueDate
+     * in the format /by yyyy-MM-dd HH:mm.
+     *
+     * @param str String to be processed into Deadline object.
+     * @param isDone Whether Deadline object should be mark as completed.
+     * @return Deadline object.
+     * @throws DukeException If format of input is incorrect.
+     */
     public static Deadline create(String str, Boolean isDone) throws DukeException{
         if (str.length() < 1) {
             throw new DukeException();
@@ -36,12 +53,24 @@ public class Deadline extends Task{
         }
     }
 
-
+    /**
+     * Constructor for Deadline object.
+     *
+     * @param description Description of task.
+     * @param dueDate Deadline of task in yyyy-MM-dd HH:mm format.
+     */
     public Deadline(String description, LocalDateTime dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
 
+    /**
+     * Constructor for Deadline object.
+     *
+     * @param description Description of task.
+     * @param dueDate Deadline of task in yyyy-MM-dd HH:mm format.
+     * @param isDone Whether task is marked complete.
+     */
     public Deadline(String description, LocalDateTime dueDate, Boolean isDone) {
         super(description, isDone);
         this.dueDate = dueDate;

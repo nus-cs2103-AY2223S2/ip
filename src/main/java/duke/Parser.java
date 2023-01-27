@@ -7,7 +7,15 @@ import duke.task.Todo;
 
 public class Parser {
 
-
+    /**
+     * Executes the appropriate command based on the input given by the user, which is split into
+     * a command and content before being parsed and executed.
+     *
+     * @param command Command word to be executed.
+     * @param content Details of the command to be executed.
+     * @param taskList TaskList objects which the command should be executed on.
+     * @return String response based on the command executed.
+     */
     public static String execute(String command, String content, TaskList taskList) {
         String response = "";
         if (command.equals("list")) {
