@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import java.io.Serializable;
-
 public class Event extends Task {
     private String from;
     private String to;

@@ -1,5 +1,4 @@
 package duke;
-
 import java.util.Scanner;
 
 public class Ui {
@@ -7,14 +6,14 @@ public class Ui {
     /**
      * Prints an error message if loading tasks from text file fails.
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.out.println("Unable to load tasks from storage");
     }
 
     /**
      * Prints the welcome message on start.
      */
-    public void welcomeMessage(){
+    public void showWelcomeMessage() {
         String chopper =
                 "           /\\_/\\\n" +
                         "          ( o.o )\n" +
@@ -32,10 +31,11 @@ public class Ui {
                 "      8. bye\n" +
                 "    What can I do for you?");
     }
+
     /**
      * Prints a line separator.
      */
-    public void showLine(){
+    public void showLine() {
         System.out.println("____________________________________________");
     }
 

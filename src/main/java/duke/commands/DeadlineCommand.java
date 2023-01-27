@@ -42,13 +42,17 @@ public class DeadlineCommand extends Command {
             storage.saveTaskList(tasks);
             System.out.println("    Got it. I've added this task:");
             System.out.println("      " + d);
-            System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+            System.out.println("    Now you have "
+                    + tasks.size()
+                    + " tasks in the list.");
             return true;
         } catch (DukeException de) {
             System.out.println(de.getMessage());
             return false;
         } catch (DateTimeParseException new_e) {
-            System.out.println("    Deadline must have a date of the following format:\n    1. yyyy-MM-dd\n    2. yyyy-MM-dd HHmm");
+            System.out.println("    Deadline must have a date of the following format:\n" +
+                    "    1. yyyy-MM-dd\n" +
+                    "    2. yyyy-MM-dd HHmm");
             return false;
         }
     }

@@ -1,5 +1,4 @@
 package duke.commands;
-
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -29,7 +28,7 @@ public class ByeCommand extends Command {
      * @inheritDoc
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 }

@@ -21,7 +21,7 @@ public class Parser {
      * @param input The user's input.
      * @throws IllegalArgumentException  If user's input does not correspond to any of the cases.
      */
-    public static Command parse(String input) throws IllegalArgumentException{
+    public static Command parse(String input) throws IllegalArgumentException {
         String[] words = input.split(" ");
         Type t = Type.valueOf(words[0].toUpperCase());
         switch(t) {

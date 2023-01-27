@@ -18,7 +18,7 @@ public class Task implements Serializable {
     /**
      * Method to mark the task as done.
      */
-    public void mark(){
+    public void mark() {
         if (!this.done) {
             this.done = true;
         }
@@ -27,7 +27,7 @@ public class Task implements Serializable {
     /**
      * Method to unmark the task as not done.
      */
-    public void unmark(){
+    public void unmark() {
         if (this.done) {
             this.done = false;
         }

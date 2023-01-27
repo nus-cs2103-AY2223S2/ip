@@ -4,14 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TaskList implements Serializable {
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     /**
      * TaskList constructor.
      */
     public TaskList() {
-        this.list = new ArrayList<Task>();
-
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -21,7 +20,7 @@ public class TaskList implements Serializable {
      * @return Task
      */
     public Task get(int i) {
-        return this.list.get(i);
+        return this.tasks.get(i);
     }
 
     /**
@@ -30,7 +29,7 @@ public class TaskList implements Serializable {
      * @param t The Task object to be added into the ArrayList.
      */
     public void add(Task t) {
-        this.list.add(t);
+        this.tasks.add(t);
     }
 
     /**
@@ -39,7 +38,7 @@ public class TaskList implements Serializable {
      * @return int representing the size.
      */
     public int size() {
-        return this.list.size();
+        return this.tasks.size();
     }
 
     /**
@@ -48,7 +47,7 @@ public class TaskList implements Serializable {
      * @param i An integer representing the index
      */
     public void remove(int i) {
-        this.list.remove(i);
+        this.tasks.remove(i);
     }
 
     /**
@@ -56,7 +55,7 @@ public class TaskList implements Serializable {
      */
     @Override
     public String toString() {
-        return "" + this.list;
+        return "" + this.tasks;
     }
 
 }

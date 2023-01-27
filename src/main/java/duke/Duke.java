@@ -30,7 +30,7 @@ public class Duke {
      * Exits from the while loop if the command is a ByeCommand.
      */
     public void run() {
-        this.ui.welcomeMessage();
+        this.ui.showWelcomeMessage();
         boolean isExit = false;
 
         while (!isExit) {
