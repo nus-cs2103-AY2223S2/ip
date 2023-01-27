@@ -102,6 +102,10 @@ public class TaskList {
      * @param taskNum The number of the task to be deleted.
      */
     public void deleteTask(int taskNum) throws DukeException {
+        if (!doesTaskExist(taskNum)) {
+            throw new DukeException("Huh... the task does not exist.");
+        }
+        System.out.println("Okay, I've removed this task:");
         System.out.println("    " + tasks.get(taskNum - 1));
         tasks.remove(taskNum - 1);
         printNumTasks();
@@ -110,10 +114,11 @@ public class TaskList {
     /**
      * Marks a task in this TaskList.
      *
-     * @param task The task to be marked.
+     * @param TaskNumber The task to be marked.
      * @throws DukeException If the task has already been marked.
      */
-    public void markTask(Task task) throws DukeException {
+    public void markTask(int TaskNumber) throws DukeException {
+        Task task = tasks.get(TaskNumber-1);
         if (task.isMarked) {
             throw new DukeException("This task has already been marked as done.");
         } else {
@@ -129,10 +134,11 @@ public class TaskList {
     /**
      * Unmarks a task in this TaskList.
      *
-     * @param task The task to be marked.
+     * @param taskNumber The task number of this Task to be unmarked.
      * @throws DukeException If the task is already unmarked.
      */
-    public void unmarkTask(Task task) throws DukeException {
+    public void unmarkTask(int taskNumber) throws DukeException {
+        Task task = tasks.get(taskNumber-1);
         if (!task.isMarked()) {
             throw new DukeException("Oops! This task has not been marked as done before.");
         } else {
@@ -149,7 +155,7 @@ public class TaskList {
      * @param keyword The string to search for.
      * @return The list of Task objects that match the keyword.
      */
-    public void search(String keyword) {
+    public void search(String keyword) throws DukeException {
         List<Task> searched = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             String taskInString = tasks.get(i).toString();
@@ -158,7 +164,7 @@ public class TaskList {
             }
         }
         if (searched.size() == 0) {
-            System.out.println("Huh... I can't find any matching tasks.");
+            throw new DukeException("Huh... I can't find any matching tasks.");
         } else {
             System.out.println("Here are the matching tasks in your list:");
             TaskList searchedTaskList = new TaskList(searched);

@@ -1,249 +1,235 @@
 package duke.parser;
 
+
+import duke.commands.*;
 import duke.exception.DukeException;
-import duke.task.Task;
-import duke.task.TaskList;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Parses user input.
  */
 public class Parser {
 
-    /**
-     * Returns true if the string is numerical; return false otherwise.
-     */
-    public static boolean isNumber(String str) {
+    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+
+    public Command parseCommand(String userInput) {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            // incorrect command
+            return new InvalidCommand();
+        }
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+
+        switch (commandWord) {
+        case DeleteCommand.COMMAND_WORD:
+            return prepareDelete(arguments);
+
+        case MarkCommand.COMMAND_WORD:
+            return prepareMark(arguments);
+
+        case UnmarkCommand.COMMAND_WORD:
+            return prepareUnmark(arguments);
+
+        case ListCommand.COMMAND_WORD:
+            return prepareList(arguments);
+
+        case EventCommand.COMMAND_WORD:
+            return prepareEvent(arguments);
+
+        case DeadlineCommand.COMMAND_WORD:
+            return prepareDeadline(arguments);
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case TodoCommand.COMMAND_WORD:
+            return prepareTodo(arguments);
+
+        case FindCommand.COMMAND_WORD:
+            return prepareFind(arguments);
+
+        default:
+            return new InvalidCommand();
+        }
+    }
+
+
+    private Command prepareDelete(String args) {
         try {
-            Double.parseDouble(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+            final int targetIndex = parseArgsAsDisplayedIndex(args);
+            return new DeleteCommand(targetIndex);
+        } catch (DukeException e) {
+            return new InvalidCommand(e.getMessage());
         }
     }
 
-    /**
-     * Returns the number of '/' characters in the string.
-     *
-     * @return The number of '/' characters in the string.
-     */
-    public static int countSlash(String str) {
-        int count = 0;
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == '/') {
-                count++;
+    private Command prepareMark(String args) {
+        try {
+            final int targetIndex = parseArgsAsDisplayedIndex(args);
+            return new MarkCommand(targetIndex);
+        } catch (DukeException pe) {
+            return new InvalidCommand(pe.getMessage());
+        }
+    }
+
+    private Command prepareUnmark(String args) {
+        try {
+            final int targetIndex = parseArgsAsDisplayedIndex(args);
+            return new UnmarkCommand(targetIndex);
+        } catch (DukeException pe) {
+            return new InvalidCommand(pe.getMessage());
+        }
+    }
+
+    private Command prepareEvent(String args) {
+        try {
+            Object[] descStartEnd = parseEvent(args);
+            String desc = String.valueOf(descStartEnd[0]);
+            LocalDate start = LocalDate.parse(descStartEnd[1].toString());
+            LocalDate end = LocalDate.parse(descStartEnd[2].toString());
+            return new EventCommand(desc, start, end);
+
+        } catch (DukeException e) {
+            return new InvalidCommand(e.getMessage());
+        }
+    }
+
+    private Command prepareDeadline(String args) {
+        try {
+            Object[] descBy = parseDeadline(args);
+            String desc = String.valueOf(descBy[0]);
+            LocalDate by = LocalDate.parse(descBy[1].toString());
+            return new DeadlineCommand(desc, by);
+        } catch (DukeException e) {
+            return new InvalidCommand(e.getMessage());
+        }
+    }
+
+    private Command prepareTodo(String args) {
+        try {
+            String desc = parseTodo(args);
+            return new TodoCommand(desc);
+        } catch (DukeException e) {
+            return new InvalidCommand(e.getMessage());
+        }
+    }
+
+    private Command prepareFind(String args) {
+        try {
+            String keyword = parseFind(args);
+            return new FindCommand(keyword);
+        } catch (DukeException e) {
+            return new InvalidCommand(e.getMessage());
+        }
+    }
+
+    private Command prepareList(String args) {
+        if (args.length() != 0) {
+            return new InvalidCommand();
+        } else {
+            return new ListCommand();
+        }
+    }
+
+    private String parseFind(String args) throws DukeException {
+        try {
+            String keyword = parseDescription(args, "find");
+            return keyword;
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
+    private String parseTodo(String args) throws DukeException {
+        try {
+            String desc = parseDescription(args, "todo");
+            return desc;
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
+
+    private Object[] parseDeadline(String args) throws DukeException {
+        if (!args.contains("/by")) {
+            throw new DukeException("Please specify the deadline.");
+        } else {
+            try {
+                String[] segments = args.split(" /by ", 2);
+                String desc = parseDescription(args, "deadline");
+                LocalDate by = parseArgsAsLocalDate(segments[1]);
+                Object[] returnArr = {desc, by};
+                return returnArr;
+            } catch (DukeException e) {
+                throw new DukeException(e.getMessage());
             }
         }
-        return count;
     }
-
-    /**
-     * Executes the mark command.
-     *
-     * @param taskList The TaskList that the task is in.
-     * @param t The Task to be marked as completed.
-     * @throws DukeException If Task has already been marked.
-     */
-    public static void markCommand(TaskList taskList, Task t) throws DukeException {
-        taskList.markTask(t);
-    }
-
-    /**
-     * Executes the unmark command.
-     *
-     * @param taskList The TaskList that the task is in.
-     * @param t        The Task to be marked as undone.
-     * @throws DukeException If Task is already not marked.
-     */
-    public static void unmarkCommand(TaskList taskList, Task t) throws DukeException {
-        taskList.unmarkTask(t);
-    }
-
-    /**
-     * Executes the list command.
-     *
-     * @param taskList The TaskList to be listed out.
-     */
-    public static void listCommand(TaskList taskList) {
-        if (taskList.getNumTasks() == 0) {
-            System.out.println("You have no tasks in your list.");
+    private Object[] parseEvent(String args) throws DukeException {
+        if (!args.contains("/from") && !args.contains("/to")) {
+            throw new DukeException("Please specify both the start and end times/dates.");
         } else {
-            System.out.println("Here are the tasks in your list:");
-            System.out.println(taskList);
+            try {
+                String[] segments = args.split(" /from ", 2);
+                String desc = parseDescription(args, "event");
+                LocalDate start = parseArgsAsLocalDate(segments[1].split(" /to")[0]);
+                LocalDate end = parseArgsAsLocalDate(segments[1].split("/to ")[1]);
+                System.out.println(desc);
+                Object[] returnArr = {desc, start, end};
+                return returnArr;
+            } catch (DukeException e) {
+                throw new DukeException(e.getMessage());
+            }
         }
     }
 
-    /**
-     * Executes the todo command.
-     *
-     * @param tasklist The TaskList to add the Todo task.
-     * @param desc     The description of the Todo task.
-     */
-    public static void todoCommand(TaskList tasklist, String desc) throws DukeException {
-        System.out.println("Got it, I've added this task:");
-        tasklist.addTodo(desc);
-    }
+    private String parseDescription(String args, String task) throws DukeException {
+        try {
+            String desc = "";
+            if (task == "event") {
+                String[] segments = args.split(" /from ", 2);
+                desc = segments[0].substring(1);
+            } else if (task == "deadline") {
+                String[] segments = args.split(" /by ", 2);
+                desc = segments[0].substring(1);
 
-    /**
-     * Executes the deadline command.
-     *
-     * @param taskList The TaskList to add the Deadline task.
-     * @param desc     The description of the Deadline task.
-     * @param date     The date of the Deadline task.
-     */
+            } else if (task == "todo" || task == "find") {
+                desc = args.substring(1);
+            }
+            return desc;
 
-    public static void deadlineCommand(TaskList taskList, String desc, String date) {
-        LocalDate localDate = LocalDate.parse(date);
-        System.out.println("Got it, I've added this task:");
-        taskList.addDeadline(localDate, desc);
-    }
-
-    /**
-     * Executes the event command.
-     *
-     * @param taskList The TaskList to add the Event task.
-     * @param start    The start date of the Event task.
-     * @param end      The end date of the Event task.
-     * @param desc     The description of the Event task.
-     */
-    public static void eventCommand(TaskList taskList, String start, String end, String desc) throws DukeException {
-        System.out.println("Got it, I've added this task:");
-        LocalDate startLocalDate = LocalDate.parse(start);
-        LocalDate endLocalDate = LocalDate.parse(end);
-        taskList.addEvent(startLocalDate, endLocalDate, desc);
-    }
-
-    /**
-     * Executes the delete command.
-     *
-     * @param taskList The TaskList to delete the Task from.
-     * @param taskNum  The task number of the Task to be deleted.
-     */
-    public static void deleteCommand(TaskList taskList, int taskNum) throws DukeException {
-        System.out.println("Noted. I've removed this task:");
-        taskList.deleteTask(taskNum);
-    }
-
-    /**
-     * Executes the next command.
-     */
-    public static void nextCommand() {
-        System.out.println("What else can I do for you?");
-    }
-
-    /**
-     * Executes the bye command.
-     */
-    public static void byeCommand() {
-        System.out.println("Bye. Hope to see you again soon! :-p");
-    }
-
-
-    /**
-     * Checks if the command is in the right format in order to execute the mark command.
-     */
-    public static void checkMark(TaskList taskList, String command) throws DukeException {
-        String[] arr = command.split("\\s+");
-        if (arr.length == 2 && isNumber(arr[1]) && (arr[0].equals("mark") || arr[0].equals("unmark"))) {
-            // check if task exists
-            int taskNum = Integer.parseInt(arr[1]);
-            if (taskList.doesTaskExist(taskNum)) {
-                // mark or unmark task
-                if (arr[0].equals("mark")) {
-                    markCommand(taskList, taskList.getTask(taskNum - 1));
-                } else if (arr[0].equals("unmark")) {
-                    unmarkCommand(taskList, taskList.getTask(taskNum - 1));
-                }
+        } catch (StringIndexOutOfBoundsException e) {
+            if (task == "keyword") {
+                throw new DukeException("You need to provide a keyword.");
             } else {
-                throw new DukeException("Huh... the task does not exist.");
-            }
-        } else {
-            throw new DukeException("Hmm... I can't quite understand you :-/");
-        }
-    }
-
-    /**
-     * Checks if the command is in the right format to execute a delete command.
-     */
-    public static void checkDelete(TaskList taskList, String command) throws DukeException {
-        String[] arr = command.split("\\s+");
-        if (arr.length == 2 && arr[0].equals("delete")) {
-            if (isNumber(arr[1])) {
-                if (taskList.doesTaskExist(Integer.parseInt(arr[1]))) {
-                    deleteCommand(taskList, Integer.parseInt(arr[1]));
-                } else {
-                    throw new DukeException("Huh... the task does not exist.");
-                }
-            } else {
-                throw new DukeException("Oops! You need to specify the task number for me to delete it.");
-            }
-        } else {
-            throw new DukeException("Hmm... I can't quite understand you :-/");
-        }
-    }
-
-    public static void checkFind(TaskList taskList, String command) throws DukeException {
-        String[] arr = command.split(" ", 2);
-        if (arr.length > 1) {
-            String keyword = arr[1];
-            taskList.search(keyword);
-        } else {
-            throw new DukeException("Oops! You need to specify a keyword for me to find a task.");
-        }
-    }
-
-    /**
-     * Checks the command in order to execute the corresponding command correctly.
-     */
-    public static void checkCommand(TaskList taskList, String command) throws DukeException {
-        String[] arr = command.split("\\s+");
-        if (arr.length == 1) {
-            if (arr[0].equals("todo") || arr[0].equals("event") || arr[0].equals("deadline")) {
-                String e = String.format("Oops! The description of a %s cannot be empty.", arr[0]);
-                throw new DukeException(e);
-            } else if (command.equals("mark") || command.equals("unmark")
-                    || command.equals("mark ") || command.equals("unmark ")
-                            || command.equals("delete") || command.equals("delete ")) {
-                String e = String.format("Oops! You need to specify the task number for me to %s it.", command);
-                throw new DukeException(e);
-            } else {
-                throw new DukeException("Hmm... I can't quite understand you :-/");
-            }
-        } else if (arr[0].equals("mark") || arr[0].equals("unmark")) {
-            checkMark(taskList, command);
-        } else {
-            if (arr[0].equals("todo")) {
-                String desc = command.split(" ", 2)[1];
-                todoCommand(taskList, desc);
-            } else if (arr[0].equals("deadline")) {
-                if (!command.contains("/by")) {
-                    throw new DukeException("Please specify the deadline.");
-                } else {
-                    String[] segments = command.split("/by ", 2);
-                    String desc = segments[0].split("deadline ", 2)[1];
-                    String date = segments[1];
-                    deadlineCommand(taskList, desc, date);
-                }
-            } else if (arr[0].equals("event")) {
-                if (!command.contains("/from") && !command.contains("/to")) {
-                    throw new DukeException("Please specify both the start and end times/dates.");
-                } else {
-                    String[] segments = command.split("/from ", 2);
-                    String desc = segments[0];
-                    String start = segments[1].split(" /to")[0];
-                    String end = segments[1].split("/to ")[1];
-                    eventCommand(taskList, start, end, desc);
-                }
-            } else if (arr[0].equals("delete")) {
-                checkDelete(taskList, command);
-            } else if (arr[0].equals("find")) {
-                checkFind(taskList, command);
-            } else {
-                throw new DukeException("Hmm... I can't quite understand you :-/");
+                throw new DukeException("You need to provide a short description or title of the task.");
             }
         }
     }
 
+    private int parseArgsAsDisplayedIndex(String args) throws DukeException {
+        final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            throw new DukeException("Could not find index number to parse");
+        }
+        try {
+            int targetIndex = Integer.parseInt(matcher.group("targetIndex"));
+            return targetIndex;
+        } catch (NumberFormatException ne) {
+            throw new DukeException("You have not specified the task number");
+        }
+    }
+
+    private LocalDate parseArgsAsLocalDate(String time) throws DukeException {
+        try {
+            LocalDate ld = LocalDate.parse(time);
+            return ld;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Can't parse date/time");
+        }
+    }
 }

@@ -1,12 +1,10 @@
 package duke;
 
-import duke.exception.DukeException;
+import duke.commands.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.TextUi;
-
-import java.util.Scanner;
 
 public class Duke {
 
@@ -23,6 +21,20 @@ public class Duke {
         this.taskList = new TaskList(storage.loadData());
     }
 
+    public void runCommandLoop() {
+        boolean isExit = false;
+        while (!isExit) {
+            String userInput = ui.getUserCommand();
+            Command command = new Parser().parseCommand(userInput);
+            command.execute(taskList, storage);
+            isExit = command.isExit();
+        }
+    }
+
+
+    public void exit() {
+        System.exit(0);
+    }
 
     /**
      * Runs this Duke program.
@@ -34,26 +46,9 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
-        Parser parser = new Parser();
+        runCommandLoop();
+        exit();
 
-        while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                Parser.listCommand(taskList);
-            } else {
-                try {
-                    Parser.checkCommand(taskList, command);
-                    storage.save(taskList);
-                } catch (DukeException e) {
-                    System.out.println(e);
-                }
-            }
-            Parser.nextCommand();
-            command = sc.nextLine();
-        }
-        Parser.byeCommand();
     }
 
 
