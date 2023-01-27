@@ -12,8 +12,6 @@ import java.io.IOException;
  * Represents parser for Duke, parses user inputs and reacts accordingly
  */
 public class Parser {
-    enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
-
     private final TaskList tasks;
     private final Storage storage;
 
@@ -96,4 +94,6 @@ public class Parser {
             Ui.print("Please enter a valid action!");
         }
     }
+
+    enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
 }

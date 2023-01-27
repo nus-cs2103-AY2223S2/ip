@@ -21,7 +21,7 @@ public class TaskList {
      * Adds a task into task list. Notifications will be printed if this
      * is not an action done by auto save and load.
      *
-     * @param task Task to be added to the list
+     * @param task   Task to be added to the list
      * @param isLoad Indicates if the action is done by auto save and load
      */
     public void addTask(Task task, boolean isLoad) {
@@ -43,8 +43,8 @@ public class TaskList {
     public void deleteTask(int taskId) {
         Ui.print(
                 "Noted. I've removed this task:\n" +
-                "\t  " + tasks.get(taskId) + "\n" +
-                "\tNow you have " + (tasks.size() - 1) + " task(s) in the list."
+                        "\t  " + tasks.get(taskId) + "\n" +
+                        "\tNow you have " + (tasks.size() - 1) + " task(s) in the list."
         );
         tasks.remove(taskId);
     }

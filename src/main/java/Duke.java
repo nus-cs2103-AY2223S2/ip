@@ -14,8 +14,8 @@ import java.util.Scanner;
  * command types and performs relevant functions.
  */
 public class Duke {
-    private Ui ui;
     private static TaskList tasks;
+    private Ui ui;
     private Storage storage;
     private Parser parser;
 
