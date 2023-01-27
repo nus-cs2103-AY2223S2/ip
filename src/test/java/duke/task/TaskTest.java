@@ -1,8 +1,8 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskTest {
     @Test
@@ -26,7 +26,7 @@ public class TaskTest {
     }
 
     @Test
-    public void isDone_marked_X() {
+    public void isDone_marked_markedX() {
         Task task = new Task("a");
         task.markIsDone();
         assertEquals("X", task.isDone());
