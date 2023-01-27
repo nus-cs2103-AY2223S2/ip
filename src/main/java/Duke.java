@@ -2,7 +2,6 @@ import core.DukeIO;
 import core.Parser;
 import exceptions.DukeException;
 import core.TaskMaster;
-import core.DukeIO;
 
 /**
  * DUKE
@@ -28,7 +27,7 @@ public class Duke {
         greet();
 
         while(!QUIT) {
-            userInput = dio.readln();
+            userInput = dio.readLn();
             if (!userInput.isEmpty()) {
                 dio.lb();
                 try {

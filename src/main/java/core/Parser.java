@@ -80,7 +80,7 @@ public class Parser {
 
             case EVENT: {
                 // Check for /from keyword
-                String[] fromSplit = this.splitByDelim(this.userInput,"/from",3);
+                String[] fromSplit = this.splitByDelimiter(this.userInput,"/from",3);
 
                 // Check for descriptor // This only allows "<DESC> /from <TIME> /to <TIME>"
                 if (fromSplit[0].isEmpty()) {
@@ -88,14 +88,14 @@ public class Parser {
                 }
 
                 // Check from /to keyword
-                String[] toSplit = this.splitByDelim(fromSplit[1],"/to",3);
+                String[] toSplit = this.splitByDelimiter(fromSplit[1],"/to",3);
 
                 return new String[]{ fromSplit[0].trim() , toSplit[0].trim(), toSplit[1].trim() };
             }
 
             case DEADLINE: {
                 // Check for /by keyword
-                String[] bySplit = this.splitByDelim(this.userInput,"/by",3);
+                String[] bySplit = this.splitByDelimiter(this.userInput,"/by",3);
 
                 // Check for descriptor
                 if (bySplit[0].isEmpty()) {
@@ -111,18 +111,35 @@ public class Parser {
 
     }
 
-    private String[] splitByDelim(String in, String delim, int limit) throws DukeException{
-        String[] ret = in.split(delim,limit);
+    /**
+     * Splits String based on delimiter.
+     * Example:
+     * splitByDelimiter("Gymkhana /from TIME /to TIME","/from",2)
+     * returns ["Gymkhana","TIME /to TIME"]
+     * @param in The string to split
+     * @param delimiter The delimiter to watch for
+     * @param limit What is the maximum times the method should split
+     * @return String array with limit number of entries
+     * @throws DukeException Thrown when missing parameters or invalid input is detected
+     */
+    private String[] splitByDelimiter(String in, String delimiter, int limit) throws DukeException{
+        String[] ret = in.split(delimiter,limit);
         if (ret.length < 2) {
             throw new exceptions.missing.Parameter(this.keyword);
         } else if (ret.length > 2) {
             throw new exceptions.invalid.Input(
-                    String.format("Multiple `%s` detected, only one is allowed, please try again.", delim));
+                    String.format("Multiple `%s` detected, only one is allowed, please try again.", delimiter));
         }
         return ret;
     }
 
-    public static void parseFile(String[] task, TaskMaster tm) throws DukeException {
+    /**
+     * Parses save file and loads it into the given TaskMaster
+     * @param task The task stored in the safe file
+     * @param tm The runtime TaskMaster object
+     * @throws DukeException Thrown when input is invalid, which can appear when user manually edits the file.
+     */
+    public static void parseSaveFile(String[] task, TaskMaster tm) throws DukeException {
         switch (task[0]) {
             case "T":
                 tm.addToDo(task[1], Boolean.parseBoolean(task[2]));

@@ -64,6 +64,12 @@ public class DateHandler {
         return LDT;
     }
 
+    /**
+     * Unconverts pattern dateTimeFormat input into DTFPattern.
+     * Primarily used for saving.
+     * @param userin LocalDateTime in dateTimeFormat
+     * @return userin in DTFPattern DTFPattern
+     */
     public static String unconvert(LocalDateTime userin) {
         return userin.format(DateTimeFormatter.ofPattern(DTFPattern));
     }
