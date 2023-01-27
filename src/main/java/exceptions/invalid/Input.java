@@ -1,5 +1,8 @@
 package exceptions.invalid;
 
+/**
+ * Thrown for any generic invalid input.
+ */
 public class Input extends exceptions.DukeException {
     /**
      * Constructs an Invalid Input Exception for the given input.

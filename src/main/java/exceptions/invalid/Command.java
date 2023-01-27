@@ -1,5 +1,8 @@
 package exceptions.invalid;
 
+/**
+ * Thrown when user attempts to enter an unknown command.
+ */
 public class Command extends exceptions.DukeException {
     /**
      * Constructs an Invalid Command Exception.

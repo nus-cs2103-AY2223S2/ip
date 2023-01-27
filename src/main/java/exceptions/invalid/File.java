@@ -1,4 +1,8 @@
 package exceptions.invalid;
+
+/**
+ * Thrown when an invalid file at given filepath has been provided.
+ */
 public class File extends exceptions.DukeException {
     /**
      * Constructs an Invalid File Exception for the given filepath.

@@ -13,6 +13,9 @@ import java.nio.file.Paths;
 
 import exceptions.DukeException;
 
+/**
+ * Handles all text and file input output for Duke.
+ */
 public class DukeIO extends PrintWriter {
 
     // To look into placing into Document/Appdata like locations instead of this directory
@@ -61,7 +64,7 @@ public class DukeIO extends PrintWriter {
         try {
             return Files.newBufferedReader(DukeIO.LOCAL_SAVE, StandardCharsets.UTF_8);
         } catch (java.nio.file.NoSuchFileException e) {
-            throw new exceptions.missing.File(filePath);
+            throw new exceptions.invalid.File(filePath.toString());
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

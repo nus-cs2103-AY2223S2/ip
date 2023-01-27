@@ -46,12 +46,15 @@ public class Duke {
         goodbye();
     }
 
+    /**
+     * Initialize Duke by initializing needed classes.
+     */
     public static void initialize() {
         dio = new DukeIO();
         tm = new TaskMaster();
         try {
             dio.readSave(tm);
-        } catch (exceptions.missing.File e) {
+        } catch (exceptions.invalid.File e) {
             // do nothing
         } catch (DukeException e) {
             throw new RuntimeException(e); //Figure out who throws tis

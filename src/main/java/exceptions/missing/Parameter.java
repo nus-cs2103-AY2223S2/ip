@@ -1,5 +1,8 @@
 package exceptions.missing;
 
+/**
+ * Thrown when user misses out a parameter.
+ */
 public class Parameter extends exceptions.DukeException {
     /**
      * Constructs a Missing Parameter Exception for the given TaskType

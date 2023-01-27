@@ -165,6 +165,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse user input into meaningful commands.
+     * @param tm The runtime TaskMaster object
+     * @return Message from the corresponding commands to print out.
+     * @throws DukeException Thrown when missing parameters is found or index error etc.
+     */
     public String parse(TaskMaster tm) throws DukeException {
         String[] args;
         switch (this.getKeyword()) {

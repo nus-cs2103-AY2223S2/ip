@@ -1,5 +1,8 @@
 package exceptions.invalid;
 
+/**
+ * Thrown in place of ArrayIndexOutOfBoundsException.
+ */
 public class Index extends exceptions.DukeException {
     /**
      * Constructs an Invalid Index Exception for the given index.

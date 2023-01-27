@@ -1,5 +1,8 @@
 package exceptions.missing;
 
+/**
+ * Thrown when user misses out an option.
+ */
 public class Options extends exceptions.DukeException {
     /**
      * Constructs an Invalid Options Exception for the given TaskType.
