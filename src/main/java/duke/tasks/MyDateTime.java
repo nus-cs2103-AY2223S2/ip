@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,11 +34,11 @@ public class MyDateTime {
         return true;
     }
 
-    public String saveDateTime() {
+    public String formatDateTimeForFile() {
         return this.dateTime.format(saveFormat);
     }
 
-    public String printDateTime() {
+    public String formatDateTimeForPrint() {
         return this.dateTime.format((outputFormat));
     }
 

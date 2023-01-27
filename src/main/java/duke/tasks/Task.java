@@ -1,4 +1,6 @@
-public class Task{
+package duke.tasks;
+
+public class Task {
     protected String description;
     protected boolean isDone;
 
@@ -22,7 +24,8 @@ public class Task{
         } else {
             this.isDone = true;
             if (!silent) {
-                System.out.println("WOW you got something done! A miracle!! I've marked this task as done now, ur wlcm :)");
+                System.out.println("WOW you got something done! A miracle!! "
+                         + "I've marked this task as done now, ur wlcm :)");
                 System.out.println(printTask());
             }
         }

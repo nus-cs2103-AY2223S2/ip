@@ -1,8 +1,10 @@
+package duke.tasks;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tasks {
-    List<Task> l;
+    private List<Task> l;
 
     public Tasks() {
         this.l = new ArrayList<Task>(100);

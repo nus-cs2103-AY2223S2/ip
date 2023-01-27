@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 
 public class Deadline extends Task {
@@ -15,11 +17,11 @@ public class Deadline extends Task {
 
     @Override
     public String formatForFile() {
-        return String.format("%s|%s|%s", "D", super.formatForFile(), this.by);
+        return String.format("%s|%s|%s", "D", super.formatForFile(), this.by.formatDateTimeForFile());
     }
 
     public String printDateTime() {
-        return this.by.printDateTime();
+        return this.by.formatDateTimeForPrint();
     }
 
     public boolean isDeadLine(MyDate other) {
