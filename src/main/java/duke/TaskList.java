@@ -35,5 +35,15 @@ public class TaskList {
     public int size() {
         return this.lst.size();
     }
+
+    public TaskList find(String taskToFind) {
+        TaskList foundTasks = new TaskList();
+        for (Task t : this.lst) {
+            if (t.getDescription().contains(taskToFind)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
+    }
     
 }
