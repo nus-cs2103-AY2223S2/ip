@@ -1,6 +1,6 @@
 package duke;
 
-import duke.task.Todo;
+import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
 
@@ -10,7 +10,7 @@ public class Parser {
      * 
      * @param tasks List of tasks.
      * @param taskType Type of task.
-     * @param description The descriptions of the task.
+     * @param descriptions The descriptions of the task.
      */
     protected static void parseInput(TaskList tasks, String taskType, String[] descriptions) {
         switch (taskType) {
@@ -29,7 +29,7 @@ public class Parser {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
                 }
 
-                tasks.addTask(new Todo(descriptions[1]));
+                tasks.addTask(new ToDo(descriptions[1]));
             } catch (DukeException error) {
                 Ui.errorMsg(error.getMessage());
             }
