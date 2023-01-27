@@ -11,9 +11,9 @@ import duke.ui.Ui;
 import java.io.IOException;
 
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -37,7 +37,7 @@ public class Duke {
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException | IOException e) {
-                e.printStackTrace();
+                ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }

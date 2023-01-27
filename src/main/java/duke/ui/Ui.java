@@ -53,51 +53,59 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println("Unable to load, creating a data/duke.txt");
+        showLine();
+        System.out.println("No existing data, creating new files now");
+        showLine();
+    }
+
+    public void showError(String message) {
+        showLine();
+        System.err.println(message);
+        showLine();
     }
 
     public void printBye() {
-        System.out.println(separator);
+        showLine();
         System.out.println("See yer again RUFF!");
-        System.out.println(separator);
+        showLine();
     }
 
     public void printTaskList(TaskList taskList) {
-        System.out.println(separator);
+        showLine();
         System.out.println("Here are the tasks in your list dawg:");
         taskList.printList();
-        System.out.println(separator);
+        showLine();
     }
 
     public void printMarkStatus(TaskList taskList, int index) {
         taskList.markStatus(index);
-        System.out.println(separator);
+        showLine();
         System.out.println("The Duke.task is marked, dawg");
         System.out.println(taskList.getTask(index - 1));
-        System.out.println(separator);
+        showLine();
     }
 
     public void printUnMarkStatus(TaskList taskList, int index) {
         taskList.unMarkStatus(index);
-        System.out.println(separator);
+        showLine();
         System.out.println("Gotcha dawg, unmarked");
         System.out.println(taskList.getTask(index - 1));
-        System.out.println(separator);
+        showLine();
     }
 
     public void printAddTask(TaskList taskList, Task task) {
-        System.out.println(separator);
+        showLine();
         System.out.println("Gotcha, I've added:");
         System.out.println("  " + task);
         System.out.println("Now you have " + taskList.listSize() + " in the list!");
-        System.out.println(separator);
+        showLine();
     }
 
     public void printDelete(TaskList taskList, Task task) {
-        System.out.println(separator);
+        showLine();
         System.out.println("Removing your Duke.task? It's gone now RUFF:");
         System.out.println("  " + task);
         System.out.println("Now you have " + taskList.listSize() + " in the list!");
-        System.out.println(separator);
+        showLine();
     }
 }

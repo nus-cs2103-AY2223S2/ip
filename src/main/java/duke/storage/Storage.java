@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private String filePath;
+    private final String filePath;
     private ArrayList<Task> list;
 
     public Storage(String filePath) {
@@ -35,8 +35,7 @@ public class Storage {
 //                    System.out.println("File is not created");
 //                }
                 dir.mkdir(); f.createNewFile();
-                throw new EmptyStorageException("EmptyStorageException");
-
+                throw new EmptyStorageException("No existing data, creating a new file now");
             }
             else if (!f.exists()) {
                 f.createNewFile();
@@ -55,7 +54,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error occurred, can't open file or ");
+            System.out.println("Error occurred, can't open file or something else happened");
             e.printStackTrace();
         }
         return this.list;
@@ -85,11 +84,12 @@ public class Storage {
         Task task;
         StringBuilder sb = new StringBuilder();
         FileWriter fw = new FileWriter(filePath);
-        for (int i = 0; i < this.list.size(); i++) {
-            task = this.list.get(i);
+        for (Task value : this.list) {
+            task = value;
             String taskName = task.getName();
 //            System.out.println(taskName);
-            sb.append(taskName); sb.append("|");
+            sb.append(taskName);
+            sb.append("|");
             if (task.getStatusIcon().equals("X")) {
                 sb.append("1");
             } else {
@@ -99,10 +99,14 @@ public class Storage {
             sb.append(task.getDescription());
             if (taskName.equals("D")) {
                 Deadline d = (Deadline) task;
-                sb.append("|"); sb.append(d.getDateTime());
+                sb.append("|");
+                sb.append(d.getDateTime());
             } else if (taskName.equals("E")) {
                 Event ev = (Event) task;
-                sb.append("|"); sb.append(ev.getFrom()); sb.append("|"); sb.append(ev.getTo());
+                sb.append("|");
+                sb.append(ev.getFrom());
+                sb.append("|");
+                sb.append(ev.getTo());
             }
             sb.append("\n");
         }

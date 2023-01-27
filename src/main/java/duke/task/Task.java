@@ -26,7 +26,7 @@ public class Task {
     }
 
     public void markStatus(String s) {
-        this.isDone = (s.equals("0")) ? false : true;
+        this.isDone = !s.equals("0");
     }
 
     @Override

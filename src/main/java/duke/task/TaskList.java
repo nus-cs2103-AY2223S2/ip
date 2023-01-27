@@ -1,11 +1,7 @@
 package duke.task;
 
-import duke.exception.EmptyDescException;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.lang.StringBuilder;
-import java.io.FileWriter;
 
 public class TaskList {
     protected ArrayList<Task> list;
@@ -42,7 +38,7 @@ public class TaskList {
         return task;
     }
 
-    public Task deleteTasks(int inputIndex) throws IOException {
+    public Task deleteTasks(int inputIndex) {
         Task task = this.list.get(inputIndex - 1);
         this.list.remove(inputIndex - 1);
 

@@ -5,7 +5,6 @@ import duke.exception.EmptyDescException;
 import duke.exception.UnknownCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.Todo;
 
 public class Parser {
@@ -21,9 +20,9 @@ public class Parser {
         LIST("list"),
         BYE("bye");
 
-        String label;
+        final String label;
 
-        private Commands(String label) {
+        Commands(String label) {
             this.label = label;
         }
     }
@@ -36,7 +35,6 @@ public class Parser {
         String[] inputArr = fullCommand.split(" ");
         Commands command = Commands.valueOf(inputArr[0]);
         String desc = "variable not initialised";
-        Task task = null; // Variable might not be initialised
         StringBuilder sb = new StringBuilder();
         switch(command) {
             case TODO:
@@ -50,6 +48,7 @@ public class Parser {
                 Todo todo = new Todo(sb.toString().trim());
                 return new TodoCommand(todo);
             case DEADLINE:
+                if (inputArr.length == 1) throw new EmptyDescException("deadline", "EmptyDescException");
                 for (int i = 1; i < inputArr.length; i++) {
                     if (inputArr[i].equals("/by")) {
                         desc = sb.toString();
@@ -65,6 +64,7 @@ public class Parser {
                 Deadline deadline = new Deadline(desc, dateTime[0], dateTime[1]);
                 return new DeadlineCommand(deadline);
             case EVENT:
+                if (inputArr.length == 1) throw new EmptyDescException("event", "EmptyDescException");
                 String from = "local variable not initialised";
                 for (int i = 1; i < inputArr.length; i++) {
                     if (inputArr[i].equals("/from")) {

@@ -6,8 +6,4 @@ public class EmptyStorageException extends DukeException {
         super(message);
     }
 
-    @Override
-    public String toString() {
-        return "No existing data, creating a new one now";
-    }
 }

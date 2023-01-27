@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -10,7 +9,7 @@ import duke.ui.Ui;
 import java.io.IOException;
 
 public class EventCommand extends Command {
-    private Event event;
+    private final Event event;
     public EventCommand(Event event) {
         this.event = event;
     }

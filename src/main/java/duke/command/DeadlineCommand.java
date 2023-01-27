@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.EmptyDescException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Task;
@@ -10,7 +9,7 @@ import duke.ui.Ui;
 import java.io.IOException;
 
 public class DeadlineCommand extends Command {
-    private Deadline deadline;
+    private final Deadline deadline;
     public DeadlineCommand(Deadline deadline) {
         this.deadline = deadline;
     }

@@ -1,4 +1,6 @@
-Unable to load, creating a data/duke.txt
+____________________________________________________________
+No existing data, creating a new file now
+____________________________________________________________
 Good ta see yer dawg, Duke's at yer service.
 ⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠀⣀⣀⣀⣀⢀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⣀⣰⣿⣿⡻⠟⠋⠉⠉⣻⠟⠉⠉⠉⠛⢯⡛⢿⣿⣷⣤⣀⠀⠀⠀⠀⠀

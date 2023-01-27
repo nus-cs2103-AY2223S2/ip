@@ -8,7 +8,7 @@ import duke.ui.Ui;
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
-    private int inputIndex;
+    private final int inputIndex;
 
     public DeleteCommand(int inputIndex) {
         this.inputIndex = inputIndex;
