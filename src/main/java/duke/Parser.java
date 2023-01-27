@@ -122,6 +122,12 @@ public class Parser {
             chosenTask = Integer.parseInt(userInput.split("\\s+")[1]);
             list.delete(chosenTask);
             return true;
+        case "find":
+            if (userInput.indexOf(" ") == -1) {
+                throw new MissingNumberException("find");
+            }
+            list.find(userInput.substring(userInput.indexOf(" ") + 1));
+            return false;
         case "check":
             if (userInput.indexOf("/") == -1) {
                 throw new MissingNumberException("check");
