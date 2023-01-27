@@ -51,6 +51,9 @@ public class Duke {
             String inMsg = ui.getUserInput();
             try {
                 isRunning = handleCommand(inMsg, false);
+                if (isRunning) {
+                    commandList.add(inMsg);
+                }
             } catch (DukeException e) {
                 ui.printStructuredString(e.toString());
             } catch (NumberFormatException e) {

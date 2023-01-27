@@ -55,7 +55,9 @@ public class Parser {
             Class<?> c = Class.forName("command." + stringToCommandClass.get(command.split(" ")[0]));
             Constructor<?> cons = c.getConstructor(String.class, boolean.class);
             object = cons.newInstance(command, !suppressPrint);
-        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
+        } catch (ClassNotFoundException e) {
+            throw new DukeException("Command not recognized. Try again. ");
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             throw new DukeException(e.toString());
         } catch (InvocationTargetException e) {
             Throwable t = e.getTargetException();
