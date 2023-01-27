@@ -49,9 +49,11 @@ public class TaskCommand extends Command {
             Constructor<?> cons = c.getConstructor(String.class);
             Object object = cons.newInstance(content);
             handleTask((Task) object, taskList, ui);
-        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
-                 | InvocationTargetException e) {
+        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
             throw new DukeException(e.toString());
+        } catch (InvocationTargetException e) {
+            Throwable t = e.getTargetException();
+            throw new DukeException(t.toString());
         }
     }
 

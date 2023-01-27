@@ -23,6 +23,11 @@ public class Event extends Task {
         super();
         int indexOfFrom = description.indexOf("/from");
         int indexOfTo = description.indexOf("/to");
+        if (indexOfFrom < 0 | indexOfFrom < 0) {
+            throw new DukeException("This is not a complete command, missing dates. \n"
+                    + "Please try again. ");
+        }
+
         this.name = description.substring(0, indexOfFrom - " ".length());
         this.startTime = Parser.parseDate(
                 description.substring(indexOfFrom + "/from ".length(),

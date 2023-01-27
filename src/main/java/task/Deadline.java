@@ -21,12 +21,12 @@ public class Deadline extends Task {
     public Deadline(String description) throws DukeException {
         super();
         int indexOfBy = description.indexOf("/by");
-        try {
-            this.time = Parser.parseDate(description.substring(indexOfBy + "/by ".length()));
-            this.name = description.substring(0, indexOfBy - " ".length());
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("The command argument is not complete.");
+        if (indexOfBy < 0) {
+            throw new DukeException("This is not a complete command, missing dates. \n"
+                    + "Please try again");
         }
+        this.time = Parser.parseDate(description.substring(indexOfBy + "/by ".length()));
+        this.name = description.substring(0, indexOfBy - " ".length());
         this.type = "D";
     }
 
