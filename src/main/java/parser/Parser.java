@@ -7,7 +7,7 @@ import response.*;
 /**
  * Represents the parser for the user input
  */
-public class InputParser {
+public class Parser {
 
     private enum Types {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
 
@@ -23,7 +23,7 @@ public class InputParser {
      * Creates a parser for the specified user input
      * @param input User input
      */
-    public InputParser(String input) {
+    public Parser(String input) {
         this.input = input;
     }
 

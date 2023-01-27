@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import exception.DukeException;
-import parser.InputParser;
+import parser.Parser;
 
 import response.Response;
 import storage.Storage;
@@ -41,7 +41,7 @@ public class Duke {
             }
 
             // Parse the user input
-            InputParser input = new InputParser(req);
+            Parser input = new Parser(req);
 
             try {
                 // Parsing the input returns a Response
