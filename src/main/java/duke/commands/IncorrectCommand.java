@@ -6,7 +6,6 @@ import duke.ui.Ui;
 
 public class IncorrectCommand extends Command {
 
-
     private static final String INT_ERROR = "Come on now, try again. I asked for an number";
     private static final String INVALID_COMMAND_ERROR = "My bad, didn't catch what you said, "
             + "did you mess up your spelling? 0_o";
@@ -15,6 +14,7 @@ public class IncorrectCommand extends Command {
             + "\n----Description, /by deadline for [deadline]"
             + "\n----Description, /from start date time /to end date time for [event]";
     private static final String NO_DATE_ERROR = "Give me a dateeeeee";
+    private static final String NO_KEYWORD_ERROR = "I need a keyword to start looking y'know??";
 
     private final String errorType;
 
@@ -38,6 +38,9 @@ public class IncorrectCommand extends Command {
             break;
         case "date":
             System.out.println(NO_DATE_ERROR);
+            break;
+        case "find":
+            System.out.println(NO_KEYWORD_ERROR);
             break;
         default:
             break;

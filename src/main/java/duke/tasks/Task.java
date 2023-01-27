@@ -46,4 +46,14 @@ public class Task {
         //status|desc
         return String.format("%s|%s", this.isDone ? "X" : "O", this.description);
     }
+
+
+    /**
+     * Checks if task description contains a given keyword.
+     * @param keyword The given keyword.
+     * @return True if task description contains keyword, else false.
+     */
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
 }

@@ -6,6 +6,7 @@ import duke.commands.Command;
 import duke.commands.DateCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.IncorrectCommand;
 import duke.commands.ListCommand;
 
@@ -30,8 +31,25 @@ public class Parser {
             return prepareDateCommand(fullCommand);
         case "bye":
             return new ExitCommand();
+        case "find":
+            return prepareFindCommand(commandType, fullCommand);
         default:
             return new IncorrectCommand("invalid");
+        }
+    }
+
+    /**
+     * Prepares user input for a find command.
+     * @param commandType find.
+     * @param fullCommand The user's full input.
+     * @return A command of type find or incorrect.
+     */
+    public static Command prepareFindCommand(String commandType, String fullCommand) {
+        try {
+            String toFind = fullCommand.split(" ", 2)[1];
+            return new FindCommand(toFind);
+        } catch (ArrayIndexOutOfBoundsException a) {
+            return new IncorrectCommand(commandType);
         }
     }
 
