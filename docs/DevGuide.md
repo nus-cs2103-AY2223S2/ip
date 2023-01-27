@@ -5,3 +5,6 @@
 2. Make new command enum
 3. Add functionality for error handling
 4. Add command functionality
+
+### Things to undo
+1. Remove comments around MissingJavadocCheck in checkstyle.xml

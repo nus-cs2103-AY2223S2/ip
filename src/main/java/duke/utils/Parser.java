@@ -1,12 +1,12 @@
 package duke.utils;
 
-import duke.commands.Commands;
-import duke.exceptions.DukeException;
-import duke.exceptions.IlegalCommandException;
-import duke.tasks.TaskType;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.commands.Commands;
+import duke.exceptions.DukeException;
+import duke.exceptions.IllegalCommandException;
+import duke.tasks.TaskType;
 
 public class Parser {
 
@@ -32,7 +32,7 @@ public class Parser {
                 int markIndex = Integer.parseInt(arguments) - 1;
                 allTasks.changeTaskCompletionStatus(markIndex, true);
             } catch (Throwable e) {
-                throw new IlegalCommandException(Commands.MARK);
+                throw new IllegalCommandException(Commands.MARK);
             }
             break;
         case "unmark":
@@ -40,12 +40,12 @@ public class Parser {
                 int unmarkIndex = Integer.parseInt(arguments) - 1;
                 allTasks.changeTaskCompletionStatus(unmarkIndex, false);
             } catch (Throwable e) {
-                throw new IlegalCommandException(Commands.UNMARK);
+                throw new IllegalCommandException(Commands.UNMARK);
             }
             break;
         case "todo":
             if (arguments.trim().equals("")) {
-                throw new IlegalCommandException(Commands.TODO);
+                throw new IllegalCommandException(Commands.TODO);
             }
             allTasks.addToList(arguments, TaskType.TODO, null, null, false, true);
             break;
@@ -55,9 +55,10 @@ public class Parser {
                 String dateByString = arguments.substring(slashIndex + 4);
                 DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 LocalDateTime dateBy = LocalDateTime.parse(dateByString, dateFormat);
-                allTasks.addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE, null, dateBy, false, true);
+                allTasks.addToList(arguments.substring(0, slashIndex - 1), TaskType.DEADLINE,
+                        null, dateBy, false, true);
             } catch (Throwable e) {
-                throw new IlegalCommandException(Commands.DEADLINE);
+                throw new IllegalCommandException(Commands.DEADLINE);
             }
             break;
         case "event":
@@ -71,9 +72,10 @@ public class Parser {
                 LocalDateTime start = LocalDateTime.parse(startString, dateFormat);
                 LocalDateTime end = LocalDateTime.parse(endString, dateFormat);
                 // TODO: Check if start date is after end date
-                allTasks.addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT, start, end, false, true);
+                allTasks.addToList(arguments.substring(0, firstSlashIndex - 1), TaskType.EVENT,
+                        start, end, false, true);
             } catch (Throwable e) {
-                throw new IlegalCommandException(Commands.EVENT);
+                throw new IllegalCommandException(Commands.EVENT);
             }
             break;
         case "delete":
@@ -81,11 +83,11 @@ public class Parser {
                 int deleteIndex = Integer.parseInt(arguments) - 1;
                 allTasks.deleteTask(deleteIndex);
             } catch (Throwable e) {
-                throw new IlegalCommandException(Commands.DELETE);
+                throw new IllegalCommandException(Commands.DELETE);
             }
             break;
         default:
-            throw new IlegalCommandException(Commands.UNRECOGNIZED);
+            throw new IllegalCommandException(Commands.UNRECOGNIZED);
         }
         return true;
     }
