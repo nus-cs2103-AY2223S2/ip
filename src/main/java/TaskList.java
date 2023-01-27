@@ -20,8 +20,32 @@ public class TaskList {
         this.tasks.add(task);
     }
 
+    public boolean checkMark(String mark) {
+        if (mark.equals("X")) {
+            return true;
+        } else return false;
+    }
+
     public void removeTask(int index) {
         this.tasks.remove(index);
+    }
+
+    public void addLine(String line) {
+        if (line.substring(1,2).equals("T")) {
+            String todo = line.substring(6);
+            Todo newTodo = new Todo(todo, this.checkMark(line.substring(3,4)));
+            this.addTask(newTodo);
+        }
+        if (line.substring(1,2).equals("D")) {
+            String deadline = line.substring(6);
+            Deadline newDead = new Deadline(deadline, this.checkMark(line.substring(3,4)));
+            this.addTask(newDead);
+        }
+        if (line.substring(1,2).equals("E")) {
+            String event = "event " + line.substring(6);
+            Event newEvent = new Event(event, this.checkMark(line.substring(3,4)));
+            this.addTask(newEvent);
+        }
     }
 
     public String addReport(Duke.Task task) {

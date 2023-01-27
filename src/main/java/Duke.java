@@ -1,23 +1,34 @@
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Duke {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        TaskList tasks = new TaskList();
+        String textDir = System.getProperty("user.dir")+"/duke.txt";
 
         try {
-            File file = new File("duke.txt");
+            File file = new File(textDir);
+            TaskList tasks = new TaskList();
             if (!file.exists()) {
                 System.out.println(formatStr("Oh dear! There is no save file. Let me create one for you."));
                 System.out.println("........CREATING.......");
                 file.createNewFile();
             }
-            PrintWriter pw = new PrintWriter(file);
+            PrintWriter pw = new PrintWriter(new FileWriter(textDir, true));
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            while (br.ready()) {
+                line = br.readLine();
+                tasks.addLine(line);
+                System.out.println("loaded");
+            }
 
             String greeting = formatStr("Hello! I'm Muse\n"
                     + "What can I do for you?");
@@ -67,10 +78,12 @@ public class Duke {
                         Deadline newDead = new Deadline(input);
                         tasks.addTask(newDead);
                         System.out.println(formatStr(tasks.addReport(newDead)));
+                        pw.write(newDead.printDeadline());
                     } else if (splitArr[0].equals("event")) {
                         Event newEvent = new Event(input);
                         tasks.addTask(newEvent);
                         System.out.println(formatStr(tasks.addReport(newEvent)));
+                        pw.write(newEvent.printEvent());
                     } else {
                         throw new VagueInputException("Oh no! What do you mean? \n" +
                                 "I'm confused. Please specify... @.@");
@@ -99,6 +112,9 @@ public class Duke {
         }
     }
 
+    public static void convertList(ArrayList<Duke.Task> tasks) {
+
+    }
     public static String formatStr(String str) {
         String returnstr =  ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
                             + str + "\n"
@@ -113,6 +129,11 @@ public class Duke {
         public Task(String content) {
             this.content = content;
             this.mark = false;
+        }
+
+        public Task(String content, boolean alternative) {
+            this.content = content;
+            this.mark = alternative;
         }
 
         public boolean getMark() {
