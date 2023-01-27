@@ -1,6 +1,5 @@
 package cbot.task;
 
-import java.lang.StringBuilder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.function.Predicate;
@@ -11,10 +10,9 @@ import java.util.function.Predicate;
  * @see Task
  */
 public class TaskList {
-    private final ArrayList<Task> tdl;
+    private static final String GAP = "             "; // 8+3 whitespaces
 
-    //private static final int GAPS = 11;
-    private static final String GAP = "             ";
+    private final ArrayList<Task> tdl;
 
     /**
      * Constructs an empty list of tasks.
@@ -71,14 +69,14 @@ public class TaskList {
      */
     public ArrayList<String> listFilter(Predicate<Task> pred) {
         ArrayList<String> arr = new ArrayList<>();
-        
+
         for (int i = 0; i < getCount(); i++) {
             if (pred.test(this.tdl.get(i))) {
                 arr.add(String.format("%3d. %s",
                         i + 1, this.tdl.get(i)));
             }
         }
-        
+
         return arr;
     }
 
@@ -119,7 +117,7 @@ public class TaskList {
      */
     public String mark(int num) {
         int index = num - 1;
-        
+
         if (tdl.get(index).yesDo()) {
             return "Woohoo! You've completed:\n" + GAP
                     + tdl.get(index).toString();
@@ -138,7 +136,7 @@ public class TaskList {
      */
     public String unmark(int num) {
         int index = num - 1;
-        
+
         if (tdl.get(index).noDo()) {
             return "Aw, okay :( I've unmarked:\n" + GAP
                     + tdl.get(index).toString();
@@ -177,16 +175,16 @@ public class TaskList {
      */
     public String makeFileFriendly() {
         StringBuilder sb = new StringBuilder();
-        
+
         for (Task t : this.tdl) {
             sb.append(t.makeFileFriendly());
             sb.append("\n");
         }
-        
+
         if (!tdl.isEmpty()) {
             sb.deleteCharAt(sb.length() - 1);
         }
-        
+
         return sb.toString();
     }
 }

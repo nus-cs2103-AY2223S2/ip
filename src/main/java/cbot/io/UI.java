@@ -1,16 +1,16 @@
 package cbot.io;
 
-import cbot.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import cbot.task.Task;
 
 /**
  * Manages printing to and receiving from the user, mainly via the Command Line Interface.
  */
 public class UI {
-    private final Scanner sc;
-    
+    //CHECKSTYLE.OFF: SingleSpaceSeparator
+
     // Frequently Used Strings
     private static final String BLANK     = "        ";
     private static final String INDENT    = "      ~ ";
@@ -18,6 +18,10 @@ public class UI {
     private static final String ERROR     = WARNING + "<Error> ";
     private static final String PROMPT    = "\n v v\n";
     private static final String STALL     = "\n   o\n   o\n   o\n\n";
+
+    //CHECKSTYLE.ON: SingleSpaceSeparator
+
+    private final Scanner sc;
 
     /**
      * Constructs a new instance to manage the CLI.
@@ -37,11 +41,11 @@ public class UI {
         System.out.println(PROMPT);
         String userInput = this.sc.nextLine();
         System.out.println();
-        
+
         if (userInput.contains(Task.SEP)) {
             throw new BadInputException("Please avoid using: \"" + Task.SEP + "\"");
         }
-        
+
         return userInput;
     }
 
@@ -63,13 +67,13 @@ public class UI {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-        
+
         String cbotLogo = "  _____  _            _\n"
                 + " /  ___]| |   ^-^   _| |_\n"
                 + "|  / :D | |___  ___[_ + _]\n"
                 + "|  \\___ | / . \\/ . \\ | |\n"
                 + " \\_____]|_,_*_/\\_*_/ |_/\n";
-        
+
         System.out.println(STALL + INDENT + "Hey! D:< I'm not\n" + dukeLogo);
         System.out.println(INDENT + "I'm\n" + cbotLogo);
         System.out.println(STALL + INDENT

@@ -1,5 +1,9 @@
 package cbot;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import cbot.io.BadInputException;
 import cbot.io.FileStuff;
 import cbot.io.Parser;
@@ -7,20 +11,16 @@ import cbot.io.PoorInputException;
 import cbot.io.UI;
 import cbot.task.TaskList;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
-
 /**
  * Your very own Personal Assistant Chatbot. Use Cbot to keep track of your tasks,
  * from deadlines to events, and even mark them as you complete them!
  */
 public class Cbot {
+    private static final String PATH = "data/cbot_save.txt";
+
     private TaskList tl;
     private final FileStuff fs;
     private final UI ui;
-    
-    private static final String PATH = "data/cbot_save.txt";
 
     /**
      * Constructs a fresh Cbot instance.
@@ -49,18 +49,18 @@ public class Cbot {
      */
     void run() throws IOException {
         UI.sayHi();
-        
+
         boolean doLoop = true;
         boolean doSave = false;
-        
+
         while (doLoop) {
             String userInput;
             Parser p;
-            
+
             try {
                 userInput = this.ui.askUser();
                 p = new Parser(userInput);
-                
+
                 if (p.isBye()) {
                     doLoop = false;
                 } else {
@@ -76,13 +76,13 @@ public class Cbot {
             } catch (DateTimeParseException e) {
                 UI.warnTime();
             }
-            
+
             if (doSave) {
                 this.fs.saveFile(tl);
                 doSave = false;
             }
         }
-        
+
         UI.sayBye();
     }
 
