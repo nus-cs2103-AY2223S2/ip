@@ -173,6 +173,9 @@ public class Duke {
             }
         } catch (IndexOutOfBoundsException e) {
             System.out.println("OOPS!!! The description of a todo cannot be empty.");
+            System.out.println("OOPS!!! The description of a todo cannot be empty.");
+        } catch (FileNotFoundException e) {
+            System.out.println("File doesn't exist!");
         }
             lining();
             System.out.println("Bye. Hope to see you again soon!");
