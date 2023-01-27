@@ -20,4 +20,3 @@ public class Event extends Task {
                 + "|" + super.description + "|" + this.from + "|" + this.to;
     }
 }
-
