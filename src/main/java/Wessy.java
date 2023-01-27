@@ -5,11 +5,11 @@ public class Wessy {
     static int firstUnused = 0;
 
     public static void main(String[] args) {
-        String logo = "     ____        _        \n"
-                + "    |  _ \\ _   _| | _____ \n"
-                + "    | | | | | | | |/ / _ \\\n"
-                + "    | |_| | |_| |   <  __/\n"
-                + "    |____/ \\__,_|_|\\_\\___|";
+//        String logo = "     ____        _        \n"
+//                + "    |  _ \\ _   _| | _____ \n"
+//                + "    | | | | | | | |/ / _ \\\n"
+//                + "    | |_| | |_| |   <  __/\n"
+//                + "    |____/ \\__,_|_|\\_\\___|";
 //        System.out.println("----------------------------------------------------------------");
 //        System.out.println("Hello from\n" + logo);
 //        System.out.println("----------------------------------------------------------------");
@@ -43,8 +43,8 @@ public class Wessy {
 
     static void println(String str) {
         int length = str.length();
-        String message = "   | " + str;
-        for (int i = 0; i < 60 - length - 1; i++)
+        String message = "   |   " + str;
+        for (int i = 0; i < 60 - length - 3; i++)
             message += " ";
         message += "|";
         System.out.println(message);
