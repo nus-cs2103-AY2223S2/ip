@@ -8,9 +8,18 @@ import duke.tasks.Todo;
 public class TodoCommand extends Command {
     private String input;
 
+    /**
+     * TodoCommand constructor.
+     *
+     * @param input The user's input.
+     */
     public TodoCommand(String input) {
         this.input = input;
     }
+
+    /**
+     * @inheritDoc
+     */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (5 > input.length()) {

@@ -9,10 +9,18 @@ import duke.tasks.Event;
 public class EventCommand extends Command {
     private String input;
 
+    /**
+     * EventCommand constructor.
+     *
+     * @param input The user's input.
+     */
     public EventCommand(String input) {
         this.input = input;
     }
 
+    /**
+     * @inheritDoc
+     */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int index_from = input.indexOf("/");

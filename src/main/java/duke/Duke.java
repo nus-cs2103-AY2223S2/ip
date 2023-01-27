@@ -6,6 +6,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Duke constructor.
+     *
+     * @param filePath The relative path of the text file that tasks are saved into.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -16,6 +21,14 @@ public class Duke {
             this.tasks = new TaskList();
         }
     }
+
+    /**
+     * Runs the task list program.
+     * Prints the welcome message on start.
+     * Uses a while loop and accepts user input.
+     * Input is converted into a Command object which is executed.
+     * Exits from the while loop if the command is a ByeCommand.
+     */
     public void run() {
         this.ui.welcomeMessage();
         boolean isExit = false;
@@ -33,6 +46,10 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * Main method that creates an instance of Duke and calls the run() method
+     */
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }

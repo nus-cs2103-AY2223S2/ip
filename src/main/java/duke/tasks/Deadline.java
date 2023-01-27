@@ -6,8 +6,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    protected String by;
+    private String by;
 
+    /**
+     * Constructor for a Deadline object.
+     *
+     * @param description The Event description.
+     * @param date The date of the Deadline.
+     */
     public Deadline(String description, String date) {
         super(description);
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -23,6 +29,9 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";

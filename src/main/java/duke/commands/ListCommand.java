@@ -6,9 +6,18 @@ import duke.Ui;
 public class ListCommand extends Command {
     private String input;
 
+    /**
+     * ListCommand constructor.
+     *
+     * @param input The user's input.
+     */
     public ListCommand(String input) {
         this.input = input;
     }
+
+    /**
+     * @inheritDoc
+     */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         System.out.println("    Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {

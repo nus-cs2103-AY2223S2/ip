@@ -9,10 +9,18 @@ import duke.tasks.Task;
 public class MarkCommand extends Command {
     private String input;
 
+    /**
+     * MarkCommand constructor.
+     *
+     * @param input The user's input.
+     */
     public MarkCommand(String input) {
         this.input = input;
     }
 
+    /**
+     * @inheritDoc
+     */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (input.length() <= 5) {

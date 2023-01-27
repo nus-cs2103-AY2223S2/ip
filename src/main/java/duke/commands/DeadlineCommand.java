@@ -11,10 +11,18 @@ import java.time.format.DateTimeParseException;
 public class DeadlineCommand extends Command {
     private String input;
 
+    /**
+     * DeadlineCommand constructor.
+     *
+     * @param input The user's input.
+     */
     public DeadlineCommand(String input) {
         this.input = input;
     }
 
+    /**
+     * @inheritDoc
+     */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int index_by = input.indexOf("/");

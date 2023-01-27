@@ -1,14 +1,24 @@
 package duke;
 import java.io.*;
-import duke.TaskList;
 
 public class Storage {
     private String filePath;
 
+    /**
+     * Storage constructor.
+     *
+     * @param filePath The relative path of the text file that tasks are saved into.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves the TaskList into the text file.
+     * Prints the error message if there is one.
+     *
+     * @param tl TaskList that contains objects of type Task.
+     */
     public void saveTaskList(TaskList tl) {
         try {
             FileOutputStream fos = new FileOutputStream(this.filePath);
@@ -22,6 +32,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the TaskList from the text file into the program.
+     * If file exists, return the TaskList stored in the file.
+     * If not, return a new TaskList and creates the file.
+     *
+     * @return TaskList
+     */
     public TaskList loadTaskList() {
         File file = new File(this.filePath);
         if (file.exists()) {

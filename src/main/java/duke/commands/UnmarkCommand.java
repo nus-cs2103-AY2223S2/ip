@@ -9,9 +9,18 @@ import duke.tasks.Task;
 public class UnmarkCommand extends Command {
     private String input;
 
+    /**
+     * UnmarkCommand constructor.
+     *
+     * @param input The user's input.
+     */
     public UnmarkCommand(String input) {
         this.input = input;
     }
+
+    /**
+     * @inheritDoc
+     */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (input.length() <= 7) {

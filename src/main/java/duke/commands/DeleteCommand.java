@@ -9,9 +9,18 @@ import duke.tasks.Task;
 public class DeleteCommand extends Command {
     private String input;
 
+    /**
+     * DeleteCommand constructor.
+     *
+     * @param input The user's input.
+     */
     public DeleteCommand(String input) {
         this.input = input;
     }
+
+    /**
+     * @inheritDoc
+     */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (input.length() <= 7) {
