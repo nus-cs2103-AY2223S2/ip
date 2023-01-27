@@ -12,39 +12,45 @@ public class TaskList {
     }
 
     //add task
-    public void addTask(String input) {
+    public void addTask(String input) throws InvalidTaskDescriptionException{
         String[] newInput = input.split("todo ");
+        if (newInput.length < 2) {
+            throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
+        }
         tasks.add(new Todo(newInput[1]));
         this.currentSize++;
         System.out.println("Gotchu fam");
         System.out.printf("I've added\n" + tasks.get(currentSize-1).toString() +
                 "\nto all the shit u need to do\n");
         System.out.printf("shag bro now u got %d tasks\n", currentSize);
-        return;
     }
 
     //add event
-    public void addEvent(String input) {
+    public void addEvent(String input) throws InvalidTaskDescriptionException{
         String[] newInput = input.split("/");
+        if (newInput.length < 2) {
+            throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
+        }
         tasks.add(currentSize, new Event(newInput[0], newInput[1], newInput[2]));
         this.currentSize++;
         System.out.println("Gotchu fam");
         System.out.printf("I've added\n" + tasks.get(currentSize-1).toString() +
                 "\nto all the shit u need to do\n");
         System.out.printf("shag bro now u got %d tasks\n", currentSize);
-        return;
     }
 
     //add deadline
-    public void addDeadline(String input) {
+    public void addDeadline(String input) throws InvalidTaskDescriptionException{
         String[] newInput = input.split("/");
+        if (newInput.length < 2) {
+            throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
+        }
         tasks.add(currentSize, new Deadline(newInput[0], newInput[1]));
         this.currentSize++;
         System.out.println("Gotchu fam");
         System.out.printf("I've added\n" + tasks.get(currentSize-1).toString() +
                 "\nto all the shit u need to do\n");
         System.out.printf("shag bro now u got %d tasks\n", currentSize);
-        return;
     }
 
 
@@ -62,7 +68,6 @@ public class TaskList {
         System.out.printf(temp.toString() +
                 "\nfrom all the shit u need to do\n");
         System.out.println("Hope you have a better life now");
-        return;
     }
 
 
@@ -85,7 +90,6 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e ) {
             System.out.println("Wake up and choose a better task to unmark brother");
         }
-        return;
     }
 
 
@@ -101,7 +105,7 @@ public class TaskList {
             }
             System.out.printf("%d." + tasks.get(i).toString() + "\n", i+1);
         }
-        return;
+
     }
 
 
