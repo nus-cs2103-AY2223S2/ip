@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     public Task(String description) {
@@ -23,4 +23,12 @@ public class Task {
         return (this.isDone ? "[X]" : "[ ]") + this.description;
     }
 
+    private String getMark() {
+        return this.isDone ? "X" : " ";
+    }
+    public Boolean isDone(){
+        return this.isDone;
+    }
+
+    public abstract String toFileString();
 }
