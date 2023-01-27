@@ -33,6 +33,10 @@ public abstract class Task {
         this.completed = false;
     }
 
+    public boolean matches(String pattern) {
+        return description.contains(pattern);
+    }
+
     public String getStatusIcon() {
         return isCompleted() ? "X" : " ";
     }

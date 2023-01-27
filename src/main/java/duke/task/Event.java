@@ -50,8 +50,7 @@ public class Event extends Task {
             this.to = LocalDateTime.parse(to, RECEIVE_FORMAT);
         } catch (DateTimeParseException e) {
             throw new DukeException("Could not parse 'to' as date time");
-        }
-        
+        }   
     }
 
     @Override

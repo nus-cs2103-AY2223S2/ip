@@ -15,7 +15,7 @@ public class DeadlineTest {
             Task task = new Deadline(description, false, "26/1/2023 2303");    
             assertEquals(description, task.getDescription());
         } catch (DukeException e) {
-            fail();
+            fail(e);
         }
     }
 
@@ -59,7 +59,7 @@ public class DeadlineTest {
             task.unmark();
             assertEquals(false, task.isCompleted());
         } catch (Exception e) {
-            fail();
+            fail(e);
         }
     }
 }

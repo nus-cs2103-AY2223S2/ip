@@ -51,6 +51,13 @@ public class Ui {
         );
     }
 
+    public void listMatchingTasks(TaskList tasks) {
+        respond(
+            "Here are the matching tasks in your list:",
+            tasks.toString()
+        );
+    }
+
     public void markTask(Task task) {
         respond(
             "Nice! I've marked this task as done:", 
