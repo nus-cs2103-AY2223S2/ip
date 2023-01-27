@@ -7,7 +7,8 @@ public class Event extends Task {
     private LocalDateTime endTime;
 
     /**
-     * Constructs an event task with the given description, completion status, start time and end time. The start and end times given has to be in either formats below.
+     * Constructs an event task with the given description, completion status, start time and end time.
+     * The start and end times given has to be in either formats below.
      * dd/MM/yyyy HHmm
      * HHmm
      * dd/MM/yyyy 
@@ -23,7 +24,9 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs an event task with the given description, start time and end time. The start and end times given has to be in either formats below. The isDone status defaults to false.
+     * Constructs an event task with the given description, start time and end time.
+     * The start and end times given has to be in either formats below.
+     * The isDone status defaults to false.
      * dd/MM/yyyy HHmm
      * HHmm
      * dd/MM/yyyy 

@@ -9,7 +9,8 @@ public class CommandHandler {
     /**
      * Determines the behaviour of Duke given a command.
      * @param command The command in which behaviour is to be determined.
-     * @param tasks A TaskList containing the current list of tasks in Duke. If required, the TaskList will be modified in place as a side effect of the method call.
+     * @param tasks A TaskList containing the current list of tasks in Duke.
+     *              If required, the TaskList will be modified in place as a side effect of the method call.
      * @return The response that Duke will display upon execution of the command.
      */
     public String handleCommand(Command command, TaskList tasks) {

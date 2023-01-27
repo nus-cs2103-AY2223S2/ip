@@ -7,7 +7,8 @@ public class Deadline extends Task {
     private LocalDateTime deadline;
 
     /**
-     * Constructs a Deadline task with the given description, completion status and deadline. The deadline given has to be in either formats below.
+     * Constructs a Deadline task with the given description, completion status and deadline.
+     * The deadline given has to be in either formats below.
      * dd/MM/yyyy HHmm
      * HHmm
      * dd/MM/yyyy 
@@ -21,7 +22,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructs a Deadline task with the given description and deadline. The deadline given has to be in either formats below. The isDone status defaults to false.
+     * Constructs a Deadline task with the given description and deadline.
+     * The deadline given has to be in either formats below.
+     * The isDone status defaults to false.
      * @param description The description of the Deadline task.
      * @param deadline The deadline of the Deadline task as a String.
      */
