@@ -175,6 +175,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the tasks that match the specified keyword.
+     * @param keyword String representing the keyword.
+     * @param list TaskList representing the list of all tasks.
+     */
     public void showTasksWithKeyword(String keyword, TaskList list) {
         System.out.println("Here are the matching tasks in your list:");
         int j = 1;
