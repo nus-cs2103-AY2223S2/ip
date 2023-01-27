@@ -6,6 +6,9 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 
+/**
+ * Class representing a Deadline task
+ */
 public class DeadlineTask extends Task {
     static final String DEADLINE_PREFIX_REPLACEMENT = "BY: ";
     private static final String INDICATOR = "[Deadline]";

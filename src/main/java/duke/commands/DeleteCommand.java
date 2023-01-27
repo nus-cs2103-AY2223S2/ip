@@ -4,6 +4,9 @@ import duke.DukeException;
 import duke.Parser;
 import duke.TaskList;
 
+/**
+ * Command to delete a task from the list
+ */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 

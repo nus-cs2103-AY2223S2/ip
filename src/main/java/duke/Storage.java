@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Storage class that handles saving and loading of task data
+ */
 public class Storage {
     private static final String SAVED_FILE_PATH = "./savedTasks.txt";
     private static final String IO_EXCEPTION_MESSAGE = "I/O error occurred while retrieving list from save.";

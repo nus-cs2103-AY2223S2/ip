@@ -6,6 +6,9 @@ import duke.DukeException;
 import duke.UserInterface;
 
 
+/**
+ * Abstract parent class of task classes
+ */
 public abstract class Task implements Serializable {
     static final String EXTRAS_FORMAT_TEMPLATE = " (%s)";
     private static final String COMPLETED = " [O] ";
@@ -17,6 +20,11 @@ public abstract class Task implements Serializable {
     private final String name;
     private boolean isCompleted;
 
+    /**
+     * Constructor for a task
+     * @param name Given task name
+     * @throws DukeException if no name is provided
+     */
     Task(String name) throws DukeException {
         if (name.isEmpty()) {
             throw new DukeException(FORMAT_EXCEPTION);

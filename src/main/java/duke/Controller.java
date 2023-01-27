@@ -2,6 +2,9 @@ package duke;
 
 import duke.commands.Command;
 
+/**
+ * Controller class that handles the flow of information in Duke
+ */
 public class Controller {
 
     private TaskList tasks;
@@ -9,7 +12,6 @@ public class Controller {
     private Storage storage;
     private Parser parser;
     private boolean isExited;
-
 
     Controller(UserInterface ui, Storage storage) {
         try {

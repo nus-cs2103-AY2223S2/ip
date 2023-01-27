@@ -9,6 +9,9 @@ import duke.commands.MarkCommand;
 import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
 
+/**
+ * Class that parses user inputs into commands for Duke
+ */
 public class Parser {
     public static final String INVALID_COMMAND_EXCEPTION_MESSAGE = "Invalid Command received.";
     static final String EXIT_COMMAND = "bye";

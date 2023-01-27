@@ -5,6 +5,9 @@ import duke.Parser;
 import duke.TaskList;
 import duke.tasks.EventTask;
 
+/**
+ * Command to create an Event task
+ */
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     private static final String PERIOD_BEGIN_PREFIX = "/from ";

@@ -6,6 +6,9 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 
+/**
+ * Class representing an Event task
+ */
 public class EventTask extends Task {
     static final String INDICATOR = "[Event]";
     static final String PERIOD_BEGIN_PREFIX_REPLACEMENT = "FROM: ";

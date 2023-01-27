@@ -5,6 +5,9 @@ import duke.Parser;
 import duke.TaskList;
 import duke.tasks.TodoTask;
 
+/**
+ * Command to create a Todo task
+ */
 public class TodoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
 

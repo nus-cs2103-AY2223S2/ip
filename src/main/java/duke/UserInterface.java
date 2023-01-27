@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Interface class that handles input accepting and output display
+ */
 public class UserInterface {
 
     public static final String EXIT_MESSAGE = "Farewell. Always at your service.";
