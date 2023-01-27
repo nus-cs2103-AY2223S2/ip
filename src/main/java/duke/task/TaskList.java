@@ -27,6 +27,18 @@ public class TaskList {
     }
 
     /**
+     * Add task method for GUI.
+     *
+     * @param task to be added.
+     * @param ui ui for messages.
+     * @return String message for GUI.
+     */
+    public String guiAdd(Task task, Ui ui) {
+        items.add(task);
+        return ui.guiAddTask(task, items.size());
+    }
+
+    /**
      * Method to add an Event to the TaskList via the input String array.
      *
      * @param curr a String array from user input to be parsed.
@@ -40,6 +52,27 @@ public class TaskList {
             String from = newCurr[0].trim();
             String to = newCurr[1].trim();
             add(new Event(descr, from, to), ui);
+        } catch (Exception e) {
+            throw new DukeException(
+                    "You need to fill in an event with format `event {title} /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm`");
+        }
+    }
+
+    /**
+     * Method to add an Event to the TaskList via the input String array for GUI.
+     *
+     * @param curr a String array from user input to be parsed.
+     * @param ui   ui to give user the message.
+     * @return String message for GUI.
+     * @throws DukeException If user input is erroneous.
+     */
+    public String guiAddEvent(String[] curr, Ui ui) throws DukeException {
+        try {
+            String descr = curr[0].substring(6).trim();
+            String[] newCurr = curr[1].split("/to");
+            String from = newCurr[0].trim();
+            String to = newCurr[1].trim();
+            return guiAdd(new Event(descr, from, to), ui);
         } catch (Exception e) {
             throw new DukeException(
                     "You need to fill in an event with format `event {title} /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm`");
@@ -65,6 +98,25 @@ public class TaskList {
     }
 
     /**
+     * Method to add a Deadline to the TaskList via the input String array for GUI.
+     *
+     * @param curr a String array from user input to be parsed.
+     * @param ui   ui to give user the message.
+     * @return String message for GUI.
+     * @throws DukeException If user input is erroneous.
+     */
+    public String guiAddDeadline(String[] curr, Ui ui) throws DukeException {
+        try {
+            String descr = curr[0].substring(9).trim();
+            String by = curr[1].trim();
+            return guiAdd(new Deadline(descr, by), ui);
+        } catch (Exception e) {
+            throw new DukeException(
+                    "You need to fill in a deadline with format `deadline {title} /by dd/MM/yyyy HHmm`");
+        }
+    }
+
+    /**
      * Method to add a ToDo to the TaskList via the input String array.
      *
      * @param curr a String array from user input to be parsed.
@@ -77,6 +129,23 @@ public class TaskList {
             throw new DukeException("You need to add a todo with format `todo {title}`");
         } else {
             add(new ToDo(todo), ui);
+        }
+    }
+
+    /**
+     * Add ToDo for GUI.
+     *
+     * @param curr a String array from user input to be parsed.
+     * @param ui   ui to give user the message.
+     * @return String message for GUI.
+     * @throws DukeException If user input is erroneous.
+     */
+    public String guiAddToDo(String[] curr, Ui ui) throws DukeException {
+        String todo = curr[0].substring(5).trim();
+        if (todo.isBlank()) {
+            throw new DukeException("You need to add a todo with format `todo {title}`");
+        } else {
+            return guiAdd(new ToDo(todo), ui);
         }
     }
 
@@ -102,6 +171,29 @@ public class TaskList {
     }
 
     /**
+     * Method to delete a Task from the TaskList via input String array for GUI.
+     *
+     * @param curr_title a String array from user input to be parsed.
+     * @param ui         ui to give user the message.
+     * @return String message for GUI.
+     * @throws DukeException If user input is erroneous.
+     */
+    public String guiDeleteTask(String[] curr_title, Ui ui) throws DukeException {
+        try {
+            int idx = Integer.parseInt(curr_title[1]) - 1;
+            if (idx >= items.size() || idx < 0) {
+                throw new DukeException();
+            } else {
+                String guiMessage = ui.guiDeleteMessage(items.get(idx), items.size());
+                items.remove(idx);
+                return guiMessage;
+            }
+        } catch (Exception e) {
+            throw new DukeException("Please give a valid index between 1 and " + items.size());
+        }
+    }
+
+    /**
      * Method to mark Task in TaskList via input String array.
      *
      * @param curr_title a String array from user input to be parsed
@@ -116,6 +208,30 @@ public class TaskList {
             } else {
                 items.get(idx).mark();
                 ui.markMessage(items.get(idx));
+            }
+        } catch (AlreadyMarkedException e) {
+            throw new AlreadyMarkedException("Already Marked!");
+        } catch (Exception e) {
+            throw new DukeException("Please give a valid input with index between 1 and " + items.size());
+        }
+    }
+
+    /**
+     * Mark task in GUI.
+     *
+     * @param curr_title a String array from user input to be parsed
+     * @param ui         ui to give user the message.
+     * @return String for mark message.
+     * @throws DukeException If user input is erroneous.
+     */
+    public String guiMark(String[] curr_title, Ui ui) throws DukeException {
+        try {
+            int idx = Integer.parseInt(curr_title[1]) - 1;
+            if (items.get(idx).isMarked()) {
+                throw new AlreadyMarkedException();
+            } else {
+                items.get(idx).mark();
+                return ui.guiMarkMessage(items.get(idx));
             }
         } catch (AlreadyMarkedException e) {
             throw new AlreadyMarkedException("Already Marked!");
@@ -148,6 +264,30 @@ public class TaskList {
     }
 
     /**
+     * Unmark in GUI.
+     *
+     * @param curr_title a String array from user input to be parsed.
+     * @param ui         ui to give user the message.
+     * @return String for unmark message.
+     * @throws DukeException If user input is erroneous.
+     */
+    public String guiUnmark(String[] curr_title, Ui ui) throws DukeException {
+        try {
+            int idx = Integer.parseInt(curr_title[1]) - 1;
+            if (!items.get(idx).isMarked()) {
+                throw new AlreadyUnmarkedException();
+            } else {
+                items.get(idx).unmark();
+                return ui.guiUnmarkMessage(items.get(idx));
+            }
+        } catch (AlreadyUnmarkedException e) {
+            throw new AlreadyUnmarkedException("Already unmarked!");
+        } catch (Exception e) {
+            throw new DukeException("Please give a valid input with index between 1 and " + items.size());
+        }
+    }
+
+    /**
      * Method to find a keyword within tasks via String array from user input.
      *
      * @param curr_title String array with user input.
@@ -167,6 +307,34 @@ public class TaskList {
                 ui.failedSearch();
             } else {
                 ui.printSearch(temp);
+            }
+
+        } catch (Exception e) {
+            throw new DukeException("You need to do a search with the format `find {substring}`");
+        }
+    }
+
+    /**
+     * Method to find a keyword within tasks via String array from user input for GUI.
+     *
+     * @param curr_title String array with user input.
+     * @param ui         ui to show user messages.
+     * @return String message for GUI.
+     * @throws DukeException if there is error in the command.
+     */
+    public String guiFindTask(String[] curr_title, Ui ui) throws DukeException {
+        try {
+            String searchFor = curr_title[1].trim();
+            TaskList temp = new TaskList();
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i).contains(searchFor)) {
+                    temp.initAdd(items.get(i));
+                }
+            }
+            if (temp.isEmpty()) {
+                return ui.guiFailedSearch();
+            } else {
+                return ui.guiPrintSearch(temp);
             }
 
         } catch (Exception e) {

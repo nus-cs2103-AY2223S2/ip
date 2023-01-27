@@ -1,29 +1,32 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Scanner;
+
+import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
-import java.util.Scanner;
-
+/**
+ * Main program of Duke program.
+ *
+ * @author Yu Heng
+ */
 public class Duke {
     private final String LINE_BREAK = "\n\t ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^\n";
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
+    private boolean hasGui;
 
     /**
      * Constructor method for Duke Chatbot.
-     *
-     * @param filePath a string representation of the filePath of
-     *                 data stored when application is run.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        ui.greet();
-        storage = new Storage(filePath);
+        storage = new Storage();
         try {
             taskList = new TaskList();
             storage.loadData(taskList);
@@ -35,12 +38,48 @@ public class Duke {
     }
 
     /**
+     * Set Gui. If true, console off.
+     * @param hasGui
+     */
+    public void setGui(boolean hasGui) {
+        this.hasGui = hasGui;
+    }
+
+    /**
      * Main Method to call Duke.
      *
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        Duke duke = new Duke();
+        duke.setGui(true);
+        duke.run();
+    }
+
+    /**
+     * Gets reply from bot to display in GUI.
+     *
+     * @param input input from user.
+     * @return reply message
+     */
+    public String getResponse(String input) {
+        String response;
+        try {
+            response = Parser.parse(input, taskList, ui);
+            storage.writeToData(taskList.itemsToData());
+            return response;
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * Get greeting from UI for GUI.
+     *
+     * @return greeting
+     */
+    public String getGreeting() {
+        return ui.guiGreet();
     }
 
     /**
@@ -48,9 +87,10 @@ public class Duke {
      * and contains main loop for commands.
      */
     private void run() {
-        Scanner usr_in = new Scanner(System.in);
-        Parser parser = new Parser(usr_in);
-        while (usr_in.hasNextLine()) {
+        ui.greet();
+        Scanner usrInput = new Scanner(System.in);
+        Parser parser = new Parser(usrInput);
+        while (usrInput.hasNextLine()) {
             try {
                 parser.parse_cmds(taskList, ui);
                 storage.writeToData(taskList.itemsToData());

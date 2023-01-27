@@ -7,16 +7,15 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import duke.task.*;
 
+/**
+ * Class for handling storing of tasks.
+ */
 public class Storage {
-    private String filePath;
 
     /**
      * Constructor method for Storage.
-     *
-     * @param filePath String representation of the filePath for storage.
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage() {
     }
 
     /**
@@ -33,7 +32,7 @@ public class Storage {
                 parse_data(line, taskList);
             }
         } catch (IOException e) {
-            File file = new File(filePath);
+            File file = new File("data/duke.txt");
             file.getParentFile().mkdirs();
             FileWriter fw = new FileWriter(file);
             fw.close();
@@ -47,7 +46,7 @@ public class Storage {
      * @throws IOException If there is an error retrieving the file.
      */
     public void writeToData(String newData) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+        FileWriter fw = new FileWriter("data/duke.txt");
         fw.write(newData);
         fw.close();
     }
