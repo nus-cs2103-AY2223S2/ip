@@ -34,7 +34,7 @@ public class Storage {
             for (Task task : list) {
                 fileWriter.write(task.encode() + '\n');
             }
-            fileWriter.flush();
+            fileWriter.close();
         } catch (IOException ex) {
             throw new TaskIOException("Cannot save task");
         }

@@ -22,5 +22,4 @@ public class TodoTest {
                 task.toString()
         );
     }
-
 }
