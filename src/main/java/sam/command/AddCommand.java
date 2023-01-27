@@ -15,13 +15,12 @@ import sam.task.SamMissingTaskTitleException;
 import sam.task.SamMissingTaskValueException;
 import sam.task.Task;
 import sam.task.TaskList;
-import sam.task.TaskType;
 import sam.task.ToDo;
 
 public class AddCommand extends Command {
-    private TaskType taskType;
+    private char taskType;
 
-    public AddCommand(String args, TaskType taskType) {
+    public AddCommand(String args, char taskType) {
         super(args);
         this.taskType = taskType;
     }
@@ -35,10 +34,10 @@ public class AddCommand extends Command {
         Task task = null;
 
         switch (taskType) {
-        case TODO:
+        case 'T':
             task = new ToDo(title);
             break;
-        case EVENT:
+        case 'E':
             if (!taskArgs.containsKey("from") || !taskArgs.containsKey("to")) {
                 throw new SamMissingTaskArgException();
             }
@@ -46,7 +45,7 @@ public class AddCommand extends Command {
             LocalDate to = Parser.parseDate(taskArgs.get("to"));
             task = new Event(title, from, to);
             break;
-        case DEADLINE:
+        case 'D':
             if (!taskArgs.containsKey("by")) {
                 throw new SamMissingTaskArgException();
             }

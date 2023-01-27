@@ -15,7 +15,6 @@ import sam.command.ListCommand;
 import sam.command.MarkCommand;
 import sam.task.SamMissingTaskTitleException;
 import sam.task.SamMissingTaskValueException;
-import sam.task.TaskType;
 
 /**
  * Handles deciphering user inputs.
@@ -119,13 +118,13 @@ public class Parser {
             c = new MarkCommand(args, false);
             break;
         case "todo":
-            c = new AddCommand(args, TaskType.TODO);
+            c = new AddCommand(args, 'T');
             break;
         case "event":
-            c = new AddCommand(args, TaskType.EVENT);
+            c = new AddCommand(args, 'E');
             break;
         case "deadline":
-            c = new AddCommand(args, TaskType.DEADLINE);
+            c = new AddCommand(args, 'D');
             break;
         case "delete":
             c = new DeleteCommand(args);
