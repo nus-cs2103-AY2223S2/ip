@@ -30,7 +30,8 @@ public class Event extends Task{
                 String desc = text[0];
                 String from = text[1].substring(5);
                 String to = text[2].substring(3);
-                return new Event(desc, LocalDateTime.parse(from, Event.FORMATTER), LocalDateTime.parse(to, Event.FORMATTER));
+                return new Event(desc, LocalDateTime.parse(from, Event.FORMATTER),
+                        LocalDateTime.parse(to, Event.FORMATTER));
             }
         }
     }
@@ -55,7 +56,8 @@ public class Event extends Task{
                 String desc = text[0];
                 String from = text[1].substring(5);
                 String to = text[2].substring(3);
-                return new Event(desc, LocalDateTime.parse(from, Event.FORMATTER), LocalDateTime.parse(to, Event.FORMATTER), isDone);
+                return new Event(desc, LocalDateTime.parse(from, Event.FORMATTER),
+                        LocalDateTime.parse(to, Event.FORMATTER), isDone);
             }
         }
     }
@@ -102,6 +104,11 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm")) + " to: " + this.endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm")) + ")";
+        return "[E]" + super.toString()
+                + " (from: "
+                + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm"))
+                + " to: "
+                + this.endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm"))
+                + ")";
     }
 }
