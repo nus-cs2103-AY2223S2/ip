@@ -59,11 +59,10 @@ public class Storage {
             sb.append("\\");
             sb.append(task.getDescription());
             sb.append("\\");
-            // X\desc\T
             if (task instanceof ToDo) {
                 sb.append("T");
                 fw.write(sb + System.lineSeparator());
-            } else if (task instanceof Deadline) { // X\desc\D\By
+            } else if (task instanceof Deadline) {
                 sb.append("D");
                 sb.append("\\");
                 sb.append(((Deadline) task).getDateTimeBy().format(formatterParse));
@@ -71,7 +70,7 @@ public class Storage {
             } else {
                 sb.append("E");
                 sb.append("\\");
-                sb.append(((Event) task).getDateTimeFrom().format(formatterParse)); // X\desc\E\From\To
+                sb.append(((Event) task).getDateTimeFrom().format(formatterParse));
                 sb.append("\\");
                 sb.append(((Event) task).getDateTimeTo().format(formatterParse));
                 fw.write(sb + System.lineSeparator());
