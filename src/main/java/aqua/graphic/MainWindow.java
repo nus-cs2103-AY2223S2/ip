@@ -25,6 +25,11 @@ public class MainWindow extends UiComponent<VBox> {
 
         this.executor = initialiseExecutor(logicManager);
 
+        // add listener to auto scroll to bottom
+        textDisplayArea.heightProperty().addListener((ob, o, n) -> {
+            textScrollPane.setVvalue(1D);
+        });
+
         // add listener to sync display area size to view port
         textScrollPane.viewportBoundsProperty().addListener((ob, o, n) -> {
             double width = n.getWidth();
