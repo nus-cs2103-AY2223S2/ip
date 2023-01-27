@@ -23,7 +23,6 @@ public class Genie {
         ui.printLoadedTaskList(storage.getLoadedTaskList());
         while(!isExit) {
             try {
-                //ui.printList(taskList.getTasks());
                 String i = ui.readCommand();
                 ui.printLine();
                 Parser parser = new Parser();
