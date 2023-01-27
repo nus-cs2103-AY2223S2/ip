@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 
 public class FileSave {
-    private static final String path = "text-ui-test/SavedTaskList.txt";
+    private static final String path = "src/main/java/data/SavedTaskList.txt";
     private static final File storageFile = new File(path);
 
     public static ArrayList<Task> load(ArrayList<Task> tasks) {
