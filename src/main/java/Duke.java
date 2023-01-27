@@ -6,7 +6,7 @@ import parser.InputParser;
 
 import response.Response;
 import storage.LocalStorage;
-import storage.ToDoList;
+import storage.TaskList;
 
 public class Duke {
     /**
@@ -29,7 +29,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         LocalStorage localStorage = new LocalStorage(); // Create a LocalStorage object
-        ToDoList toDoList = localStorage.loadToDoList();  // Create a ToDoList object based on saved list
+        TaskList taskList = localStorage.loadTaskList();  // Create a TaskList object based on saved list
 
 
         while (true) {
@@ -48,11 +48,11 @@ public class Duke {
                 Response res = input.parse();
 
                 // Execute the Response to do what needs to be done and get an output message
-                String out = res.exec(toDoList);
+                String out = res.exec(taskList);
 
                 // If the response is anything other than list, save the to do list
                 if (!input.getInputType().equals("LIST")) {
-                    localStorage.saveToDoList(toDoList);
+                    localStorage.saveTaskList(taskList);
                 }
 
                 // Print the output message

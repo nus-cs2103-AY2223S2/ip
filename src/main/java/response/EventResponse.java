@@ -3,7 +3,7 @@ package response;
 import exception.InvalidArgumentException;
 import exception.MissingArgumentException;
 import storage.Event;
-import storage.ToDoList;
+import storage.TaskList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -25,11 +25,11 @@ public class EventResponse extends Response {
 
     /**
      * Creates a new event in the to do list
-     * @param toDoList The to do list to create a new event in
+     * @param taskList The to do list to create a new event in
      * @return String to indicate that a new event was created successfully
      */
     @Override
-    public String exec(ToDoList toDoList) throws MissingArgumentException, InvalidArgumentException {
+    public String exec(TaskList taskList) throws MissingArgumentException, InvalidArgumentException {
         String[] splitFrom = event.split(" /from ", 2);
         String des = splitFrom[0].trim();
         if (des.equals("")) {
@@ -62,12 +62,12 @@ public class EventResponse extends Response {
 
         // Create Event object, add to list and print
         Event newEvent = new Event(des, fromDate, toDate);
-        toDoList.createToDo(newEvent);
+        taskList.createToDo(newEvent);
         return String.format(
                 "Alright! This task has been added into the list:" +
                         "\n\t   %s" +
                         "\n\t Now you have %d task(s) in the list.",
                 newEvent,
-                toDoList.count());
+                taskList.count());
     }
 }

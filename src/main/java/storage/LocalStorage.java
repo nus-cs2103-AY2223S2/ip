@@ -1,6 +1,7 @@
 package storage;
 
 import exception.DukeException;
+import exception.InvalidArgumentException;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class LocalStorage {
     private Path path;
 
@@ -18,8 +22,8 @@ public class LocalStorage {
         this.path = Paths.get("./data/duke.txt");
     }
 
-    public void saveToDoList(ToDoList todoList) {
-        // Convert ToDoList into ArrayList<String>
+    public void saveTaskList(TaskList todoList) {
+        // Convert TaskList into ArrayList<String>
         ArrayList<String> todoStringList = todoList.getDataList();
         if (Files.notExists(this.path)) {
             // Create file in filepath
@@ -38,7 +42,7 @@ public class LocalStorage {
         }
     }
 
-    public ToDoList loadToDoList() {
+    public TaskList loadTaskList() {
         List<String> lines = Collections.emptyList();
 
         if (Files.exists(this.path)) {
@@ -49,7 +53,7 @@ public class LocalStorage {
             }
         }
 
-        ToDoList res = new ToDoList();
+        TaskList res = new TaskList();
         if (!lines.isEmpty()) {
             lines.forEach(line -> {
                 // Split up the line
@@ -68,14 +72,34 @@ public class LocalStorage {
                     break;
                 case "D":
                     String by = lineArr[3].trim();
-                    task = new Deadline(content, by);
+                    // Try to create LocalDate object from String
+                    LocalDate byDate;
+                    try {
+                        byDate = LocalDate.parse(by);
+                    } catch (DateTimeParseException e) {
+                        throw new InvalidArgumentException("Start date format should be in the format " +
+                                "YYYY-MM-DD (e.g. 2007-12-03)");
+                    }
+                    task = new Deadline(content, byDate);
                     break;
                 case "E":
                     String fromTo = lineArr[3].trim();
                     String[] fromToArr = fromTo.split("-");
                     String from = fromToArr[0].trim();
                     String to = fromToArr[1].trim();
-                    task = new Event(content, from, to);
+
+                    // Try to create LocalDate object from String
+                    LocalDate fromDate;
+                    LocalDate toDate;
+                    try {
+                        fromDate = LocalDate.parse(from);
+                        toDate = LocalDate.parse(to);
+                    } catch (DateTimeParseException e) {
+                        throw new InvalidArgumentException("Start date format should be in the format " +
+                                "YYYY-MM-DD (e.g. 2007-12-03)");
+                    }
+
+                    task = new Event(content, fromDate, toDate);
                     break;
                 default:
                     task = new Task(content);

@@ -1,7 +1,7 @@
 package response;
 
 import exception.InvalidArgumentException;
-import storage.ToDoList;
+import storage.TaskList;
 import storage.Task;
 
 /**
@@ -23,12 +23,12 @@ public class UnMarkResponse extends Response {
 
     /**
      * Unmarks a task in the to do list specified
-     * @param toDoList The to do list specified
+     * @param taskList The to do list specified
      * @return String to print to the console later
      */
     @Override
-    public String exec(ToDoList toDoList) {
-        Task currTask = toDoList.unmark(idxToMark);
+    public String exec(TaskList taskList) {
+        Task currTask = taskList.unmark(idxToMark);
         return String.format("OK, I've marked this task as not done yet:\n\t\t%s", currTask.toString());
     }
 }

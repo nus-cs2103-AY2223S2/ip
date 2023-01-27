@@ -1,7 +1,7 @@
 package response;
 
 import exception.InvalidArgumentException;
-import storage.ToDoList;
+import storage.TaskList;
 import storage.Task;
 
 /**
@@ -24,12 +24,12 @@ public class MarkResponse extends Response {
 
     /**
      * Marks a task in the to do list specified
-     * @param toDoList The to do list specified
+     * @param taskList The to do list specified
      * @return String to print to the console later
      */
     @Override
-    public String exec(ToDoList toDoList) {
-        Task currTask = toDoList.mark(idxToMark);
+    public String exec(TaskList taskList) {
+        Task currTask = taskList.mark(idxToMark);
         return String.format("Nice! I've marked this task as done:\n\t\t%s", currTask.toString());
     }
 }

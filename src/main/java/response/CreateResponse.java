@@ -1,7 +1,7 @@
 package response;
 
 import exception.MissingArgumentException;
-import storage.ToDoList;
+import storage.TaskList;
 import storage.Todo;
 
 /**
@@ -23,21 +23,21 @@ public class CreateResponse extends Response {
 
     /**
      * Creates a new task in the to do list
-     * @param toDoList The to do list to create a new task in
+     * @param taskList The to do list to create a new task in
      * @return String to indicate that a new task was created successfully
      */
     @Override
-    public String exec(ToDoList toDoList) throws MissingArgumentException{
+    public String exec(TaskList taskList) throws MissingArgumentException{
         if (this.todo.equals("")) {
             throw new MissingArgumentException("The description of a todo cannot be empty.");
         }
         Todo newTodo = new Todo(this.todo);
-        toDoList.createToDo(newTodo);
+        taskList.createToDo(newTodo);
         return String.format(
                 "Alright! This task has been added into the list:" +
                         "\n\t   %s" +
                         "\n\t Now you have %d task(s) in the list.",
                 newTodo,
-                toDoList.count());
+                taskList.count());
     }
 }

@@ -1,10 +1,10 @@
 package response;
 
-import storage.ToDoList;
+import storage.TaskList;
 
 /**
  * Abstract class containing the methods that a Response should have
  */
 public abstract class Response {
-    public abstract String exec(ToDoList toDoList);
+    public abstract String exec(TaskList taskList);
 }

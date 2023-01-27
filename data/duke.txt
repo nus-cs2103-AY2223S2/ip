@@ -1,3 +1,2 @@
-T | 1 | test
-D | 0 | test1 | tonight
-E | 0 | test2 | now - midnight
+T | 0 | test
+D | 0 | test | 2023-01-27

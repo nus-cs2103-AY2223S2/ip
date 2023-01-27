@@ -3,7 +3,7 @@ package response;
 import exception.InvalidArgumentException;
 import exception.MissingArgumentException;
 import storage.Deadline;
-import storage.ToDoList;
+import storage.TaskList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -25,11 +25,11 @@ public class DeadlineResponse extends Response {
 
     /**
      * Creates a new deadline in the to do list
-     * @param toDoList The to do list to create a new deadline in
+     * @param taskList The to do list to create a new deadline in
      * @return String to indicate that a new deadline was created successfully
      */
     @Override
-    public String exec(ToDoList toDoList) throws MissingArgumentException, InvalidArgumentException{
+    public String exec(TaskList taskList) throws MissingArgumentException, InvalidArgumentException{
         // Parsing the String to get the task description and deadline
         String[] splitBy = deadline.split(" /by ", 2);
         String des = splitBy[0].trim();
@@ -53,12 +53,12 @@ public class DeadlineResponse extends Response {
 
         // Create Deadline object, add to list and print
         Deadline newD = new Deadline(des, byDate);
-        toDoList.createToDo(newD);
+        taskList.createToDo(newD);
         return String.format(
                 "Alright! This task has been added into the list:" +
                         "\n\t   %s" +
                         "\n\t Now you have %d task(s) in the list.",
                 newD,
-                toDoList.count());
+                taskList.count());
     }
 }

@@ -1,7 +1,7 @@
 package response;
 
 import exception.InvalidArgumentException;
-import storage.ToDoList;
+import storage.TaskList;
 import storage.Task;
 
 /**
@@ -23,17 +23,17 @@ public class DeleteResponse extends Response {
 
     /**
      * Deletes a task in the to do list specified
-     * @param toDoList The to do list specified
+     * @param taskList The to do list specified
      * @return String to print to the console later
      */
     @Override
-    public String exec(ToDoList toDoList) {
-        Task removedTask = toDoList.delete(idxToMark);
+    public String exec(TaskList taskList) {
+        Task removedTask = taskList.delete(idxToMark);
         return String.format(
                 "Noted. I've removed this task:" +
                         "\n\t   %s" +
                         "\n\t Now you have %d task(s) in the list.",
                 removedTask,
-                toDoList.count());
+                taskList.count());
     }
 }

@@ -8,17 +8,17 @@ import exception.InvalidArgumentException;
  * Represents the to do list
  * @author clevon-w
  */
-public class ToDoList {
+public class TaskList {
     /**
      * Represents the to do list
      */
-    private ArrayList<Task> toDoList;
+    private ArrayList<Task> taskList;
 
     /**
      * Creates an empty ArrayList of Strings as an empty to do list
      */
-    public ToDoList() {
-        this.toDoList = new ArrayList<>();
+    public TaskList() {
+        this.taskList = new ArrayList<>();
     }
 
     /**
@@ -26,7 +26,7 @@ public class ToDoList {
      * @param newToDo The new task to be added
      */
     public void createToDo(Task newToDo) {
-        this.toDoList.add(newToDo);
+        this.taskList.add(newToDo);
     }
 
     /**
@@ -36,11 +36,11 @@ public class ToDoList {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder("Here are the tasks in your list:\n");
-        if (toDoList.size() == 0) {
+        if (taskList.size() == 0) {
             return "There are currently no tasks in your to do list,\n\t create one now!";
         }
-        for (int i = 0; i < toDoList.size(); i++) {
-            res.append(String.format("\t %d.%s\n", i + 1, toDoList.get(i).toString()));
+        for (int i = 0; i < taskList.size(); i++) {
+            res.append(String.format("\t %d.%s\n", i + 1, taskList.get(i).toString()));
         }
         return res.toString().trim();
     }
@@ -52,7 +52,7 @@ public class ToDoList {
      */
     public Task mark(Integer i) throws InvalidArgumentException {
         try {
-            Task curr = this.toDoList.get(i - 1);
+            Task curr = this.taskList.get(i - 1);
             curr.markAsDone();
             return curr;
         } catch (IndexOutOfBoundsException err) {
@@ -67,7 +67,7 @@ public class ToDoList {
      */
     public Task unmark(Integer i) throws InvalidArgumentException{
         try {
-            Task curr = this.toDoList.get(i - 1);
+            Task curr = this.taskList.get(i - 1);
             curr.unmarkAsDone();
             return curr;
         } catch (IndexOutOfBoundsException err) {
@@ -80,7 +80,7 @@ public class ToDoList {
      * @return Count of the tasks
      */
     public int count() {
-        return toDoList.size();
+        return taskList.size();
     }
 
     /**
@@ -90,8 +90,8 @@ public class ToDoList {
      */
     public Task delete(Integer i) throws InvalidArgumentException {
         try {
-            Task curr = this.toDoList.get(i - 1);
-            this.toDoList.remove(curr);
+            Task curr = this.taskList.get(i - 1);
+            this.taskList.remove(curr);
             return curr;
         } catch (IndexOutOfBoundsException err) {
             throw new InvalidArgumentException("Make sure you enter an index of a task that exists in the list!");
@@ -100,7 +100,7 @@ public class ToDoList {
 
     public ArrayList<String> getDataList() {
         ArrayList<String> res = new ArrayList<>();
-        this.toDoList.forEach(task -> {
+        this.taskList.forEach(task -> {
             res.add(task.toData());
         });
         return res;
