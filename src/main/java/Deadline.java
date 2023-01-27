@@ -1,9 +1,11 @@
+import java.time.LocalDate;
+
 public class Deadline extends Task{
-    String deadline;
+    LocalDate deadline;
 
     Deadline(String name, String by) {
         super(name);
-        this.deadline = by;
+        this.deadline = LocalDate.parse(by);
     }
 
     @Override
