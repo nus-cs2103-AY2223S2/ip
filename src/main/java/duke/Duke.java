@@ -57,7 +57,6 @@ public class Duke {
 
             try {
                 handleCommand(inMsg, false);
-                addCommandList(inMsg);
             } catch (DukeException e) {
                 ui.printStructuredString(e.toString());
             } catch (NumberFormatException e) {
@@ -83,12 +82,12 @@ public class Duke {
      */
     public void loadRecord() {
         storage.loadRecordIfExists(commandList);
-        for (String s : commandList) {
-            try {
+        try {
+            for (String s : commandList) {
                 handleCommand(s, true);
-            } catch (DukeException e) {
-                System.out.println(e.toString());
             }
+        } catch (DukeException e) {
+            System.out.println(e.toString());
         }
     }
 
@@ -104,9 +103,12 @@ public class Duke {
      * @throws DukeException when the command is unknown
      */
     public void handleCommand(String inMsg, boolean suppressPrint) throws DukeException {
+        boolean isToSave = true;
+
         String stringToPrint = "";
         if (parser.checkCommand(inMsg, Command.LIST)) {
             stringToPrint = listTasks();
+            isToSave = false;
         } else if (parser.checkCommand(inMsg, Command.MARK)) {
             int idx = Integer.parseInt(inMsg.substring(5)) - 1;
             stringToPrint = markTaskDone(idx);
@@ -131,12 +133,16 @@ public class Duke {
         } else if (parser.checkCommand(inMsg, Command.FIND)) {
             String keyword = parser.getCommandContent(inMsg, Command.FIND);
             stringToPrint = find(keyword);
+            isToSave = false;
         } else {
             throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         if (!suppressPrint) {
             ui.printStructuredString(stringToPrint);
+            if (isToSave) {
+                addCommandList(inMsg);
+            }
         }
     }
 
