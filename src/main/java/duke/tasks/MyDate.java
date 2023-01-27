@@ -24,7 +24,7 @@ public class MyDate {
         return LocalDate.parse(date, MyDate.saveFormat);
     }
 
-    public boolean isValidDate(String date) {
+    public static boolean isValidDate(String date) {
         try {
             LocalDate.parse(date, MyDate.saveFormat);
         } catch (DateTimeParseException e) {
