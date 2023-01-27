@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        Scanner keyboard = new Scanner(System.in);
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,93 +12,144 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?\n");
 
+        boolean isOnline = true;
+        ArrayList<Task> taskList = new ArrayList<>();
+
+        while (isOnline) {
+            try {
+                isOnline = takeRequest(taskList);
+            }
+            catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public static boolean takeRequest(ArrayList<Task> taskList) throws DukeException {
+        Scanner keyboard = new Scanner(System.in);
         String userInput;
+
         boolean flag = true;
-        ArrayList<Task> taskList = new ArrayList<Task>();
 
         while (flag) {
             userInput = keyboard.next();
             System.out.println("--------------------------------");
-            if (userInput.equals("bye")) {
-                //System.out.println("--------------------------------");
-                System.out.println("Bye. Have a nice Day~");
-                //System.out.println("--------------------------------");
-                flag = false;
-            } else if (userInput.equals("list")) {
-                //System.out.println("--------------------------------");
-                System.out.println("Here are the current tasks:");
-
-                for (int i = 0; i < taskList.size(); i++) {
-                    System.out.print((i + 1) + ".");
-                    System.out.println(taskList.get(i).toString());
+            switch (userInput) {
+                case "bye": {
+                    System.out.println("Bye. Have a nice Day~");
+                    return false;
                 }
-                //System.out.println("--------------------------------");
-
-            } else if (userInput.equals("todo")) {
-                System.out.println("This task had been added!");
-                Todo t = new Todo(keyboard.nextLine());
-                System.out.println("  " + t.toString());
-                taskList.add(t);
-                System.out.println("Now you have " + taskList.size() + " tasks in the list");
-
-            } else if (userInput.equals("event")) {
-                System.out.println("This event had been added! Hope you will enjoy it :D");
-                userInput = keyboard.nextLine();
-                int first = userInput.indexOf('/');
-                int last = userInput.lastIndexOf('/');
-                String name = userInput.substring(0, first);
-                String from = userInput.substring(first + 1, last);
-                String to = userInput.substring(last + 1, userInput.length());
-
-                Event t = new Event(name, from, to);
-                System.out.println("  " + t.toString());
-
-                taskList.add(t);
-                System.out.println("Now you have " + taskList.size() + " tasks in the list");
-
-            } else if (userInput.equals("deadline")) {
-                System.out.println("This deadline had been added! Try to finish it early 0v0");
-                userInput = keyboard.nextLine();
-                int dateID = userInput.indexOf('/');
-                String name = userInput.substring(0, dateID);
-                String date = userInput.substring(dateID+1, userInput.length());
-                Deadline t = new Deadline(name, date);
-                System.out.println("  " + t.toString());
-
-                taskList.add(t);
-                System.out.println("Now you have " + taskList.size() + " tasks in the list");
-
-            } else if (userInput.equals("mark")) {
-                //System.out.println("--------------------------------");
-                int itemID = Integer.valueOf(keyboard.next());
-                if ((itemID) > taskList.size()) {
-                    System.out.println("I cannot find task " + (itemID) + " as it exceeds the total tasks number");
-                } else {
-                    System.out.println("Nice! Great job for completing this task:");
-                    taskList.get(itemID - 1).setDone();
-                    System.out.println((taskList.get(itemID - 1).toString()));
+                case "list": {
+                    userInput = keyboard.nextLine().trim();
+                    if (userInput.isEmpty()) {
+                        System.out.println("Here are the current tasks:");
+                        for (int i = 0; i < taskList.size(); i++) {
+                            System.out.print((i + 1) + ".");
+                            System.out.println(taskList.get(i).toString());
+                        }
+                    } else {
+                        System.out.println("Please key in *list* to check the task list.");
+                    }
+                    break;
                 }
-                // System.out.println("--------------------------------");
+                case "todo": {
+                    String name = keyboard.nextLine();
+                    if (name.trim().isEmpty()){
+                        System.out.println("The task name cannot be empty");
+                    } else {
+                        System.out.println("This task had been added!");
+                        Todo t = new Todo(name);
+                        System.out.println("  " + t);
+                        taskList.add(t);
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list");
+                    }
+                    break;
 
-            } else if (userInput.equals("unmark")) {
-                //System.out.println("--------------------------------");
-                int itemID = Integer.valueOf(keyboard.next()) - 1;
-                if ((itemID + 1) > taskList.size()) {
-                    System.out.println("I cannot find task " + (itemID + 1) + " as it exceeds the total tasks number");
-                } else {
-                    System.out.println("This item is marked as not done yet");
-                    taskList.get(itemID).setNotDone();
-                    System.out.println((taskList.get(itemID).toString()));
                 }
-                //System.out.println("--------------------------------");
+                case "event": {
+                    userInput = keyboard.nextLine();
+                    if (userInput.trim().isEmpty()){
+                        System.out.println("The task name cannot be empty");
+                    } else {
+                        try {
+                            int first = userInput.indexOf('/');
+                            int last = userInput.lastIndexOf('/');
+                            String eventName = userInput.substring(0, first);
+                            String from = userInput.substring(first + 1, last);
+                            String to = userInput.substring(last + 1);
+                            System.out.println("This event had been added! Hope you will enjoy it :D");
 
-            } else {
-                //System.out.println("--------------------------------");
-                System.out.println("Hiiii it's great to talk with you :D");
-                System.out.println("May I know what type of task this is?");
-                // System.out.println("--------------------------------");
+                            Event t = new Event(eventName, from, to);
+                            System.out.println("  " + t);
+
+                            taskList.add(t);
+                            System.out.println("Now you have " + taskList.size() + " tasks in the list");
+                        } catch (StringIndexOutOfBoundsException e){
+                            System.out.println("Please specify the starting and ending time of the event");
+                        }
+                    }
+                    break;
+
+                }
+                case "deadline": {
+                    userInput = keyboard.nextLine();
+                    if (userInput.trim().isEmpty()){
+                        System.out.println("The task name cannot be empty");
+                    } else {
+                        try {
+                            int dateID = userInput.indexOf('/');
+                            String eventName = userInput.substring(0, dateID);
+                            String date = userInput.substring(dateID + 1);
+                            System.out.println("This deadline had been added! Try to finish it early 0v0");
+                            Deadline t = new Deadline(eventName, date);
+                            System.out.println("  " + t);
+
+                            taskList.add(t);
+                            System.out.println("Now you have " + taskList.size() + " tasks in the list");
+                        } catch (StringIndexOutOfBoundsException e){
+                            System.out.println("Please specify the deadline");
+                        }
+                    }
+                    break;
+
+                }
+                case "mark": {
+                    try {
+                        int itemID = Integer.parseInt(keyboard.nextLine().trim());
+                        if ((itemID) > taskList.size()) {
+                            System.out.println("I cannot find task " + (itemID) + " as it exceeds the total tasks number");
+                        } else {
+                            System.out.println("Nice! Great job for completing this task:");
+                            taskList.get(itemID - 1).setDone();
+                            System.out.println((taskList.get(itemID - 1).toString()));
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter the task number");
+                    }
+                    break;
+
+                }
+                case "unmark": {
+                    try {
+                        int itemID = Integer.parseInt(keyboard.nextLine().trim()) - 1;
+                        if ((itemID + 1) > taskList.size()) {
+                            System.out.println("I cannot find task " + (itemID + 1) + " as it exceeds the total tasks number");
+                        } else {
+                            System.out.println("This item is marked as not done yet");
+                            taskList.get(itemID).setNotDone();
+                            System.out.println((taskList.get(itemID).toString()));
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter the task number");
+                    }
+                    break;
+                }
+                default: {
+                    throw new DukeException("May I know what type of task this is?");
+                }
             }
             System.out.println("--------------------------------");
         }
+        return true;
     }
 }
