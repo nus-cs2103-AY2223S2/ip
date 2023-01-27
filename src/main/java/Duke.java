@@ -111,7 +111,7 @@ public class Duke {
                 reWriter.write(tasks.getTask(i).printRecord());
             }
             reWriter.close();
-            String goodbyeMessage = formatStr("Bye. Come back again!"); 
+            String goodbyeMessage = formatStr("Bye. Come back again!");  
             System.out.println(goodbyeMessage);
         }
             catch(IOException e){
