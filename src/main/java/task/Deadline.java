@@ -1,3 +1,7 @@
+package task;
+
+import exception.TaskParseException;
+
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -63,7 +67,7 @@ public class Deadline extends Task {
             deadline.done = done;
             return deadline;
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
-            throw new TaskParseException("Deadline data is malformed:\n" + ex.getMessage());
+            throw new TaskParseException("task.Deadline data is malformed:\n" + ex.getMessage());
         }
     }
 

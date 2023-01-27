@@ -1,3 +1,7 @@
+package task;
+
+import exception.TaskParseException;
+
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -90,7 +94,7 @@ public class Event extends Task {
             event.done = done;
             return event;
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
-            throw new TaskParseException("Event data is malformed:\n" + ex.getMessage());
+            throw new TaskParseException("task.Event data is malformed:\n" + ex.getMessage());
         }
     }
     

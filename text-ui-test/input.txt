@@ -1,8 +1,8 @@
 todo read book
-deadline get bread /by 26 Jan
+deadline get bread /by 2023-03-10 18:00
 eat bread
-event lunch /from tomorrow 12pm /to 1pm /from 11am
-event lunch /from tomorrow 12pm /to 1pm
+event lunch /from 2023-05-01 12:00 /to 2023-05-01 13:00 /from 2023-05-01 11:00
+event lunch /from 2023-05-01 12:00 /to 2023-05-01 13:00
 list
 todo git-push
 mark 4
@@ -15,10 +15,22 @@ mark
 unmark 4
 deadline
 delete
-deadline ip /by 23:59 /by lecture
-event lecture /to 4pm /from 2pm
+deadline ip /by 2023-02-01 23:59 /by 2023-02-02 14:00
+event lecture /to 2023-02-02 16:00 /from 2023-02-02 14:00
 list
+save test1.txt
 mark 4
+mark 2
 delete 4
+unmark 1
 list
+load test1.txt
+list
+list /from 2023-02-02 14:00 /to 2023-05-01 13:00
+list /from 2023-02-02 16:00 /to 2023-05-01 12:00
+list /from 2023-02-02 16:00
+list /from 2023-02-02 16:01
+list /to 2023-05-01 11:59
+list /to 2023-05-01 12:00
+list /from 2023-02-02 14:00 /to 2023-03-10 17:59
 bye

@@ -1,3 +1,7 @@
+package task;
+
+import exception.TaskParseException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.time.LocalDateTime;
@@ -29,7 +33,7 @@ public class Todo extends Task {
             todo.done = done;
             return todo;
         } catch (ArrayIndexOutOfBoundsException ex) {
-            throw new TaskParseException("Todo data is malformed:\n" + ex.getMessage());
+            throw new TaskParseException("task.Todo data is malformed:\n" + ex.getMessage());
         }
     }
 
