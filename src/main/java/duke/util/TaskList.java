@@ -20,19 +20,16 @@ public class TaskList {
         this.listOfThings = loadedTasks;
     }
 
-//    public TaskList() {
-//        this.listOfThings = new ArrayList<Task>();
-//    }
-
     public ArrayList<Task> getList() {
         return this.listOfThings;
     }
 
 
     /**
-     * marks the task inside the list as done
-     * @param index the index in the array of the task we want marked
-     * @return the task that is marked
+     * Marks the task inside the list as done.
+     *
+     * @param index The index in the array of the task we want marked.
+     * @return The task that is marked.
      */
     public Task markTaskInListDone(int index) {
         this.listOfThings.get(index).markDone();
@@ -41,9 +38,10 @@ public class TaskList {
 
 
     /**
-     * marks the task inside the list as undone
-     * @param index the index in the array of the task we want unmarked
-     * @return the task we just unmarked
+     * Marks the task inside the list as undone.
+     *
+     * @param index The index in the array of the task we want unmarked.
+     * @return The task we just unmarked.
      */
     public Task markTaskInListUndone(int index) {
         this.listOfThings.get(index).markUndone();
@@ -53,10 +51,11 @@ public class TaskList {
 
 
     /**
+     * Adds the Task inside.
      *
-     * @param text the text containing the information of the command
-     * @param add type of add command use
-     * @throws DukeException when the format is wrong
+     * @param text The text containing the information of the command.
+     * @param add Type of add command use.
+     * @throws DukeException When the format is wrong.
      */
     public Task addItem(String text, Command add) throws DukeException {
         Task addedItem = null;
@@ -99,6 +98,12 @@ public class TaskList {
     }
 
 
+    /**
+     * Finds the matching Task with respect to the keyword.
+     *
+     * @param keyword The keyword string.
+     * @return An array of Tasks that contain that matching keyword.
+     */
     public ArrayList<Task> findMatching(String keyword) {
         ArrayList<Task> matchingWords = new ArrayList<>();
         String betterKeyword = keyword.trim().toLowerCase();
@@ -111,8 +116,9 @@ public class TaskList {
     }
 
     /**
-     * removes the item in the list
-     * @param index the index of the item to be removed
+     * Removes the item in the list.
+     *
+     * @param index The index of the item to be removed.
      */
     public Task removeItem(int index) {
         return this.listOfThings.remove(index);

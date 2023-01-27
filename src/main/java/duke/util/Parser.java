@@ -5,6 +5,12 @@ import duke.DukeException;
 
 public class Parser {
 
+    /**
+     * Parses command.
+     *
+     * @param command String to be parsed.
+     * @return The Command type.
+     */
     public static Command parseCommand(String command) throws DukeException {
         if (!Command.contains(command)) {
             throw new DukeException("Sorry! I don't know what that means!");
@@ -12,16 +18,34 @@ public class Parser {
         return Command.valueOf(command);
     }
 
+    /**
+     * Parses starting elements.
+     *
+     * @param elemString String to be parsed.
+     * @return An array of individual commands.
+     */
     public static String[] parseStartingElements(String elemString) {
 
         return elemString.split(" ");
     }
 
+    /**
+     * Parses todo.
+     *
+     * @param str String to be parsed.
+     * @return An array of individual commands.
+     */
     public static String parseTodo(String str) {
 
         return str.substring(4);
     }
 
+    /**
+     * Parses deadline.
+     *
+     * @param str String to be parsed.
+     * @return An array of individual commands.
+     */
     public static String[] parseDeadline(String str) {
         String temp = str.substring(8);
 

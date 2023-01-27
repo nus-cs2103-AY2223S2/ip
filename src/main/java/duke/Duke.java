@@ -23,8 +23,9 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Duke constructor
-     * @param filePathName the string representing the path to the file duke
+     * Duke constructor.
+     *
+     * @param filePathName The string representing the path to the file duke.
      */
     public Duke(String filePathName) {
         TaskList tasks1;
@@ -39,9 +40,10 @@ public class Duke {
     }
 
      /**
-     * creates the localdatetime by parsing the text string
-     * @param dateTime the string representation of the local date time
-     * @return the LocalDateTime object being created
+     * Creates the localdatetime by parsing the text string.
+      *
+     * @param dateTime The string representation of the local date time.
+     * @return The LocalDateTime object being created.
      */
     public static LocalDateTime createLocalDateTime(String dateTime) {
         LocalDateTime date;
@@ -57,7 +59,7 @@ public class Duke {
 
 
     /**
-     * driver function
+     * Driver function.
      */
     public void run() {
         this.ui.greetings();
@@ -144,8 +146,9 @@ public class Duke {
     }
 
     /**
-     * function that returns the formatter for date time
-     * @return the date time formatter used in duke
+     * Function that returns the formatter for date time.
+     *
+     * @return The date time formatter used in duke.
      */
     public static DateTimeFormatter getFormatter() {
         return FORMATTER;

@@ -11,10 +11,11 @@ public class Deadline extends Task {
 
 
     /**
-     * deadline constructor
-     * @param desc description of what the deadline is
-     * @param isDone true if the deadline is done. false if the deadline is not done
-     * @param end date the deadline is due
+     * Deadline constructor.
+     *
+     * @param desc Description of what the deadline is.
+     * @param isDone True if the deadline is done. false if the deadline is not done.
+     * @param end Date the deadline is due.
      */
     public Deadline(String desc, boolean isDone, LocalDateTime end) {
         super(desc, isDone);
@@ -22,8 +23,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * returns the string to be inserted into the duke file for storage
-     * @return the deadline string
+     * Returns the string to be inserted into the duke file for storage.
+     *
+     * @return The deadline string.
      */
     public String formatStringForFile() {
         return String.format("DEADLINE / %s / %s", super.helpFormatString(),
@@ -31,8 +33,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * overriding the toString function to contain the type of task being created
-     * @return string of the deadline being created
+     * Overriding the toString function to contain the type of task being created.
+     *
+     * @return String of the deadline being created.
      */
     @Override
     public String toString() {

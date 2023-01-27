@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Ui {
 
     /**
-     * iterates through the arraylist and prints out the elements inside
+     * Iterates through the arraylist and prints out the elements inside.
      */
     public void printList(ArrayList<Task> arrList) {
         String totalString = "";
@@ -18,6 +18,11 @@ public class Ui {
         this.printWithLines(totalString);
     }
 
+    /**
+     * Prints out the matching tasks.
+     *
+     * @param arrList Array of matching tasks.
+     */
     public void showMatchingTasks(ArrayList<Task> arrList) {
         String totalString = "";
         totalString += " Here are the matching tasks in your list:";
@@ -28,8 +33,9 @@ public class Ui {
     }
 
     /**
-     * prints out the text with lines on top and below
-     * @param text the content that is to be printed out
+     * Prints out the text with lines on top and below.
+     *
+     * @param text The content that is to be printed out.
      */
     public void printWithLines(String text) {
         System.out.println("    ____________________________________________________________");
@@ -37,21 +43,40 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Greets when program starts.
+     */
     public void greetings() {
         this.printWithLines(" Hello! I'm duke.Duke!\n     What can I do for you today?");
 
     }
 
+    /**
+     * Response when task is marked.
+     *
+     * @param t Task to be marked.
+     */
     public void markResponse(Task t) {
         String str = " Nice! I've marked this task as done!:\n" + "       " + t.toString();
         this.printWithLines(str);
     }
 
+    /**
+     * Response when task is unmarked.
+     *
+     * @param t Task to be unmarked.
+     */
     public void unmarkResponse(Task t) {
         String str = " OK, I've marked this task as not done yet:\n" + "       " + t.toString();
         this.printWithLines(str);
     }
 
+    /**
+     * Response when item is added.
+     *
+     * @param t Task to be added.
+     * @param arr Array for the task to be added to.
+     */
     public void addItemResponse(Task t, ArrayList<Task> arr) {
         String str = "  " + t.toString();
         str = " Got it. I've added this task:\n     " + str;
@@ -74,7 +99,7 @@ public class Ui {
 
     /**
      *
-     * @return the string that updates the number of elements left in the string
+     * @return The string that updates the number of elements left in the string.
      */
     public String listUpdate(ArrayList<Task> arr) {
         String plural = "";

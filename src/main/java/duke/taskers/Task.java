@@ -14,14 +14,14 @@ public class Task {
     }
 
     /**
-     * marks the task as done
+     * Marks the task as done.
      */
     public void markDone() {
         this.isDone = true;
     }
 
     /**
-     * unmarks the tast
+     * Unmarks the task.
      */
     public void markUndone() {
         this.isDone = false;
@@ -38,8 +38,9 @@ public class Task {
     }
 
     /**
-     * format for the task string
-     * @return the string representing the task
+     * Formats for the task string.
+     *
+     * @return The string representing the task.
      */
     @Override
     public String toString() {

@@ -10,13 +10,12 @@ public class Event extends Task {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final DateTimeFormatter FORMATTER_FOR_STRING_ONLY = DateTimeFormatter.ofPattern("d MMM uuuu h.mma");
 
-//"d MMM uuuu h.mma"
     /**
-     * event constructor
-     * @param desc description of what the event is
-     * @param isDone true if event is done, false if event is not done
-     * @param start starting date of event
-     * @param end ending date of event
+     * Event constructor.
+     * @param desc Description of what the event is.
+     * @param isDone True if event is done, false if event is not done.
+     * @param start Starting date of event.
+     * @param end Ending date of event.
      */
     public Event(String desc, boolean isDone,
                  LocalDateTime start, LocalDateTime end) {
@@ -26,8 +25,9 @@ public class Event extends Task {
     }
 
     /**
-     * formats string before inserting into duke storage file
-     * @return formatted string to be inserted into duke storage file
+     * Formats string before inserting into duke storage file.
+     *
+     * @return Formatted string to be inserted into duke storage file.
      */
 
     public String formatStringForFile() {
@@ -36,8 +36,9 @@ public class Event extends Task {
     }
 
     /**
-     * returns the string of the event
-     * @return the string of  the event
+     * Returns the string of the event.
+     *
+     * @return The string of  the event.
      */
     @Override
     public String toString() {

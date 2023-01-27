@@ -31,9 +31,10 @@ public class Storage {
     }
 
     /**
-     * the function that formats the task to store into the duke file
-     * @param t the task to be appended to the file
-     * @return the string representation to be appended to the file
+     * The function that formats the task to store into the duke file.
+     *
+     * @param t The task to be appended to the file.
+     * @return The string representation to be appended to the file.
      */
     public static String taskStringFormatter(Task t) {
         String s = "";
@@ -52,8 +53,9 @@ public class Storage {
 
 
     /**
-     * writes the tasks to the duke file
-     * @param item the task that is inserted into the duke file
+     * Writes the tasks to the duke file.
+     *
+     * @param item The task that is inserted into the duke file.
      */
     public void writeToFile(Task item) {
         try {
@@ -67,7 +69,7 @@ public class Storage {
     }
 
     /**
-     * loads all the items from the duke file
+     * Loads all the items from the duke file.
      */
     public ArrayList<Task> loadFromFile() throws DukeException {
         ArrayList<Task> loadedTasks = new ArrayList<>();
@@ -78,7 +80,6 @@ public class Storage {
             while (sc.hasNext()) {
                 String str = sc.nextLine();
                 String[] valueArr = str.split("/");
-                // throw exceptions here later if you want
 
                 String type = valueArr[0].toUpperCase().trim();
                 Command commandType = Parser.parseCommand(type);
@@ -103,16 +104,10 @@ public class Storage {
     }
 
 
-
     /**
-<<<<<<< HEAD
-     * the function that deletes the entire duke file and re-inserts it with the current one.
-     * used for delete, mark and unmark when values are changed
-=======
-     * The function that deletes the entire duke file and
-     * re-inserts it with the current one.
-     * Used for delete, mark and unmark when values are changed.
->>>>>>> branch-A-CodingStandard
+     * The function that deletes the file and redoes it.
+     *
+     * @param listOfThings Array of Tasks to be inside the new file.
      */
     public void deleteFileAndRedo(ArrayList<Task> listOfThings) {
         if (this.dukeFile.delete()) {

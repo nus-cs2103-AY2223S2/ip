@@ -3,9 +3,10 @@ package duke.taskers;
 public class Todo extends Task {
 
     /**
-     * constructor of todo
-     * @param description description of what the todo task is
-     * @param isDone true if todo is done, false if todo is not done
+     * Constructor of todo.
+     *
+     * @param description Description of what the todo task is.
+     * @param isDone True if todo is done, false if todo is not done.
      */
     public Todo(String description,  boolean isDone) {
 
@@ -13,8 +14,9 @@ public class Todo extends Task {
     }
 
     /**
-     * formats the string before being added to the duke storage file
-     * @return the formatted string to be added to the duke storage file
+     * Formats the string before being added to the duke storage file.
+     *
+     * @return The formatted string to be added to the duke storage file.
      */
 
     public String formatStringForFile() {
@@ -23,8 +25,9 @@ public class Todo extends Task {
     }
 
     /**
-     * string representation of the todo
-     * @return todo string
+     * String representation of the todo.
+     *
+     * @return Todo string.
      */
     @Override
     public String toString() {

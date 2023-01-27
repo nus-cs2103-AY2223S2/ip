@@ -3,8 +3,9 @@ package duke;
 public class DukeException extends Exception {
 
     /**
-     * DukeException constructor. passes on errorMessage into superclass
-     * @param errorMessage the description of the duke exception
+     * DukeException constructor. passes on errorMessage into superclass.
+     *
+     * @param errorMessage The description of the duke exception.
      */
     public DukeException(String errorMessage) {
 
@@ -12,8 +13,9 @@ public class DukeException extends Exception {
     }
 
     /**
-     * returns string representation of the duke exception
-     * @return the string of the duke exception
+     * Returns string representation of the duke exception.
+     *
+     * @return The string of the duke exception.
      */
     @Override
     public String toString() {
