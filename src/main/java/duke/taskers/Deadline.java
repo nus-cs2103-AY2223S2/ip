@@ -38,6 +38,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.end.format(FORMATTER_FOR_STRING_ONLY) + ")";
+        return "[D]" + super.toString() + " (by: " + this.end.format(FORMATTER_FOR_STRING_ONLY) + ")";
     }
 }
