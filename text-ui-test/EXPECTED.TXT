@@ -1,31 +1,80 @@
-Whats good its duke
+Whats good its CHADGpt
 what do you want from me
+todo fuck bitches
 Gotchu fam
 I've added
-[T][ ] read book
+[T][ ] fuck bitches
 to all the shit u need to do
 shag bro now u got 1 tasks
+todo get money
 Gotchu fam
 I've added
-[E][ ] event meeting (from: now to: later)
+[T][ ] get money
 to all the shit u need to do
 shag bro now u got 2 tasks
+list
+1.[T][ ] fuck bitches
+2.[T][ ] get money
+event sex/now/later
 Gotchu fam
 I've added
-[D][ ] deadline return book (by:  tomorrow)
+[E][ ] event sex (from: now to: later)
 to all the shit u need to do
 shag bro now u got 3 tasks
-1.[T][ ] read book
-2.[E][ ] event meeting (from: now to: later)
-3.[D][ ] deadline return book (by:  tomorrow)
+list
+1.[T][ ] fuck bitches
+2.[T][ ] get money
+3.[E][ ] event sex (from: now to: later)
+mark 3
 Congrats bro you've done something with your life
-[T][X] read book
-1.[T][X] read book
-2.[E][ ] event meeting (from: now to: later)
-3.[D][ ] deadline return book (by:  tomorrow)
+[E][X] event sex (from: now to: later)
+unmark 3
 Stop being useless why u ask me to unmark
-[T][ ] read book
-1.[T][ ] read book
-2.[E][ ] event meeting (from: now to: later)
-3.[D][ ] deadline return book (by:  tomorrow)
+[E][ ] event sex (from: now to: later)
+list
+1.[T][ ] fuck bitches
+2.[T][ ] get money
+3.[E][ ] event sex (from: now to: later)
+deadline pill/4pm
+Gotchu fam
+I've added
+[D][ ] deadline pill (by: 4pm)
+to all the shit u need to do
+shag bro now u got 4 tasks
+list
+1.[T][ ] fuck bitches
+2.[T][ ] get money
+3.[E][ ] event sex (from: now to: later)
+4.[D][ ] deadline pill (by: 4pm)
+mark 4
+Congrats bro you've done something with your life
+[D][X] deadline pill (by: 4pm)
+list
+1.[T][ ] fuck bitches
+2.[T][ ] get money
+3.[E][ ] event sex (from: now to: later)
+4.[D][X] deadline pill (by: 4pm)
+delete 4
+Ok bro I've removed this :
+[D][X] deadline pill (by: 4pm)
+from all the shit u need to do
+Hope you have a better life now
+delete 1
+Ok bro I've removed this :
+[T][ ] fuck bitches
+from all the shit u need to do
+Hope you have a better life now
+list
+1.[T][ ] get money
+2.[E][ ] event sex (from: now to: later)
+mark 2
+Congrats bro you've done something with your life
+[E][X] event sex (from: now to: later)
+mark 1
+Congrats bro you've done something with your life
+[T][X] get money
+list
+1.[T][X] get money
+2.[E][X] event sex (from: now to: later)
+bye
 Thanks for using me brother

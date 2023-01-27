@@ -5,23 +5,25 @@ public class Duke {
 
         //initialize scanner
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> storedTask = new ArrayList<>(100);
+        TaskList taskList = new TaskList(100);
 
 
         //intro message from duke
 
-        System.out.println("Whats good its duke\nwhat do you want from me");
+        System.out.println("Whats good its CHADGpt\nwhat do you want from me");
 
 
-        int taskCounter = 0;
+
+
 
         while(true) {
             String input = sc.nextLine();
             String[] command = input.split(" ");
+
             if (input.equals("bye")) {
                 break;
             } else {
-                CommandManager.run(input, command, storedTask, taskCounter);
+                CommandManager.run(input, command, taskList);
             }
 
         }
