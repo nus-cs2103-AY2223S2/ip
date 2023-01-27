@@ -9,13 +9,10 @@ import java.io.FileReader;
 
 public class Duke {
     public static void main(String[] args) {
-<<<<<<< HEAD
         String greeting = formatStr("Hello! I'm Muse!\n"
                 + "What can I do for you?");
         System.out.println(greeting);
-=======
 
->>>>>>> branch-Level-7
         Scanner sc = new Scanner(System.in);
         String textDir = System.getProperty("user.dir")+"/duke.txt";
 
@@ -34,10 +31,6 @@ public class Duke {
                 line = br.readLine();
                 tasks.addLine(line);
             }
-
-            String greeting = formatStr("Hello! I'm Muse\n"
-                    + "What can I do for you?");
-            System.out.println(greeting);
 
             String input = sc.nextLine();
             while (!input.equals("bye")) {
