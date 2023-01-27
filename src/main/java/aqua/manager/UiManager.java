@@ -1,11 +1,10 @@
 package aqua.manager;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
@@ -47,26 +46,13 @@ public class UiManager {
             "I messed up big time...\n" +
             "  %s";
     
-    /** Reader to read input from. */
-    private final BufferedReader reader;
+    private final Supplier<String> inputSupplier;
+    private final Consumer<String> outputConsumer;
 
 
-    /**
-     * Constructs the default UiManager that reads input from the
-     * {@link System#in} input stream.
-     */
-    public UiManager() {
-        this(System.in);
-    }
-
-
-    /**
-     * Constructs a UiManager that reads inputs from the given input stream.
-     * 
-     * @param inStream - the input stream to read inputs from.
-     */
-    public UiManager(InputStream inStream) {
-        reader = new BufferedReader(new InputStreamReader(inStream));
+    public UiManager(Supplier<String> inputSupplier, Consumer<String> outputConsumer) {
+        this.inputSupplier = inputSupplier;
+        this.outputConsumer = outputConsumer;
     }
     
 
@@ -77,7 +63,7 @@ public class UiManager {
      * @throws IOException if an I/O error occurs.
      */
     public String readLine() throws IOException {
-        String msg = reader.readLine();
+        String msg = inputSupplier.get();
         return Optional.ofNullable(msg).orElse("");
     }
     
@@ -128,7 +114,7 @@ public class UiManager {
      * @param msg - the message to print.
      */
     public void reply(String msg) {
-        System.out.println(formatMessage(msg));
+        outputConsumer.accept(formatMessage(msg));
     }
 
 

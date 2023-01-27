@@ -1,15 +1,25 @@
 package aqua.manager;
 
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 import aqua.logic.parser.ArgumentParser;
 import aqua.logic.parser.CommandLineInputParser;
 
 /** Manager of all managers of the app. */
 public class AppManager {
-    private final CommandLineInputParser inputParser = new CommandLineInputParser(new ArgumentParser());
-    private final TaskManager taskManager = new TaskManager();
-    private final UiManager formatManager = new UiManager();
+    private final CommandLineInputParser inputParser;;
+    private final TaskManager taskManager;
+    private final UiManager uiManager;
     
     private boolean isClosed = false;
+
+
+    public AppManager(Supplier<String> inputSupplier, Consumer<String> outputConsumer) {
+        inputParser = new CommandLineInputParser(new ArgumentParser());
+        taskManager = new TaskManager();
+        uiManager = new UiManager(inputSupplier, outputConsumer);
+    }
 
 
     public CommandLineInputParser getInputParser() {
@@ -23,7 +33,7 @@ public class AppManager {
 
 
     public UiManager getUiManager() {
-        return formatManager;
+        return uiManager;
     }
 
 
