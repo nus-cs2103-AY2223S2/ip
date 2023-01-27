@@ -1,6 +1,6 @@
 todo borrow book
-list
 event read book /from 2005-06-13 08:00 /to 2011-04-27 13:52
+list
 deadline submit book report /by 2011-05-21 11:26
 mark 1
 mark 2
@@ -17,5 +17,7 @@ event chinese new year! /from 2008-01-01 03:43 /to 2010-03-22 11:39
 delete 3
 list
 deadline get productive /by 2019-06-25 12:52
+find chinese
+find book
 bye
 

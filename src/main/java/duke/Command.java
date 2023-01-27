@@ -8,7 +8,8 @@ public enum Command {
     LIST,
     MARK,
     UNMARK,
-    DELETE;
+    DELETE,
+    FIND;
 
     /**
      * Checks if the type is a valid Command.

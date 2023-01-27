@@ -22,9 +22,9 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private final String filePath;
-    private final String dirPath;
-    private final File dukeFile;
+    private String filePath;
+    private String dirPath;
+    private File dukeFile;
 
     /**
      * Storage constructor.
@@ -72,8 +72,6 @@ public class Storage {
         ArrayList<Task> loadedTasks = new ArrayList<>();
         try {
             Files.createDirectories(Paths.get(this.dirPath));
-
-            this.dukeFile.createNewFile();
             Scanner sc = new Scanner(this.dukeFile);
 
             while (sc.hasNext()) {
@@ -97,11 +95,10 @@ public class Storage {
                 }
                 loadedTasks.add(thisTask);
             }
-            return loadedTasks;
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            return new ArrayList<Task>();
         }
+        return loadedTasks;
     }
 
 

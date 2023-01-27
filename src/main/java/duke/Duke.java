@@ -6,7 +6,9 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import java.io.File;
 
@@ -18,9 +20,9 @@ public class Duke {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    private final Storage storage;
-    private final TaskList tasks;
-    private final Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
     /**
      * Duke constructor.
@@ -32,9 +34,9 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage(filePathName);
         try {
-            tasks1 = new TaskList(storage.loadFromFile());
+            tasks1 = new TaskList(this.storage.loadFromFile());
         } catch (DukeException e) {
-            tasks1 = new TaskList();
+            tasks1 = new TaskList(new ArrayList<>());
         }
         this.tasks = tasks1;
     }
@@ -50,6 +52,7 @@ public class Duke {
         try {
             String stringWithNoTrailingWhitespaces = dateTime.trim();
             date = LocalDateTime.parse(stringWithNoTrailingWhitespaces, FORMATTER);
+            // DateTimeFormatter.ofPattern("d MMM uuuu h.mma")
         } catch (DateTimeException e) {
             date = null;
         }
@@ -67,7 +70,7 @@ public class Duke {
             try {
                 String line = input.nextLine();
                 String upperLine = line.toUpperCase();
-                String command = upperLine.split(" ")[0];
+                String command = upperLine.split(" ")[0].trim();
                 Command cm = Parser.parseCommand(command);
                 String[] elemArr = Parser.parseStartingElements(upperLine);
                 if (cm.equals(Command.BYE)) {
@@ -125,6 +128,13 @@ public class Duke {
                     Task removedTask = this.tasks.removeItem(idx);
                     this.ui.showDeleteItem(removedTask, this.tasks.getList());
                     this.storage.deleteFileAndRedo(this.tasks.getList());
+                } else if (cm.equals(Command.FIND)) {
+                    if (elemArr.length != 2) {
+                        throw new DukeException("Find must have a keyword.");
+                    }
+                    String keyword = elemArr[1];
+                    ArrayList<Task> matchingTasks = this.tasks.findMatching(keyword);
+                    this.ui.showMatchingTasks(matchingTasks);
                 } else {
                     Task addedTask = this.tasks.addItem(line, Command.valueOf(command));
                     this.storage.writeToFile(addedTask);

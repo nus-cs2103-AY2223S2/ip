@@ -13,15 +13,15 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private final ArrayList<Task> listOfThings;
+    private ArrayList<Task> listOfThings;
 
     public TaskList(ArrayList<Task> loadedTasks) {
         this.listOfThings = loadedTasks;
     }
 
-    public TaskList() {
-        this.listOfThings = new ArrayList<Task>();
-    }
+//    public TaskList() {
+//        this.listOfThings = new ArrayList<Task>();
+//    }
 
     public ArrayList<Task> getList() {
         return this.listOfThings;
@@ -97,6 +97,17 @@ public class TaskList {
         return addedItem;
     }
 
+
+    public ArrayList<Task> findMatching(String keyword) {
+        ArrayList<Task> matchingWords = new ArrayList<>();
+        String betterKeyword = keyword.trim().toLowerCase();
+        for (Task listOfThing : this.listOfThings) {
+            if (listOfThing.getDescription().contains(betterKeyword)) {
+                matchingWords.add(listOfThing);
+            }
+        }
+        return matchingWords;
+    }
 
     /**
      * Removes the item in the list.
