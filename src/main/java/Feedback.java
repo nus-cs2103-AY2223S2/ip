@@ -21,7 +21,28 @@ public class Feedback {
     }
 
     public static void greet(String logo) {
-        display("Hello I'm\n" + logo + "What can I do for you?\n" + commands());
+        display("Hello I'm\n" + logo + "What can I do for you?\n\n" + commands());
+    }
+
+    public static void exit() {
+        display("Bye. Hope to see you again soon!");
+    }
+
+    public static void warning(String errorMessage) {
+        display(errorMessage);
+    }
+
+    private static String commands() {
+        return "MY COMMANDS ARE:\n"
+                + "ADD TODO TASK:     todo [description]\n"
+                + "ADD DEADLINE TASK: deadline [description] /by [date time]\n"
+                + "ADD EVENT TASK:    event [description] /from [date time] /to [date time]\n"
+                + "MARK A TASK:       mark [index]\n"
+                + "UNMARK A TASK:     unmark [index]\n"
+                + "DELETE A TASK:     delete [index]\n"
+                + "LIST ALL TASKS:    list\n"
+                + "DISPLAY COMMANDS:  help\n"
+                + "EXIT PROGRAM:      bye";
     }
 
     public void addedTask(Task task, int size) {
@@ -58,28 +79,7 @@ public class Feedback {
         display(commands());
     }
 
-    public static void exit() {
-        display("Bye. Hope to see you again soon!");
-    }
-
     public void invalid() {
         display("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-    }
-
-    public static void warning(String errorMessage) {
-        display(errorMessage);
-    }
-
-    private static String commands() {
-        return "MY COMMANDS ARE:\n"
-                + "ADD TODO TASK:     todo [description]\n"
-                + "ADD DEADLINE TASK: deadline [description] /by [date time]\n"
-                + "ADD EVENT TASK:    event [description] /from [date time] /to [date time]\n"
-                + "MARK A TASK:       mark [index]\n"
-                + "UNMARK A TASK:     unmark [index]\n"
-                + "DELETE A TASK:     delete [index]\n"
-                + "LIST ALL TASKS:    list\n"
-                + "DISPLAY COMMANDS:  help\n"
-                + "EXIT PROGRAM:      bye";
     }
 }
