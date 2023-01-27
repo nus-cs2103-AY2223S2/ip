@@ -16,9 +16,9 @@ public class TodoCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-            Task t = taskList.addTasks(todo);
-            storage.updateStorage();
-            ui.printAddTask(taskList, t);
+            taskList.addTasks(todo);
+            storage.updateStorage(taskList);
+            ui.printAddTask(taskList, todo);
     }
 
     @Override

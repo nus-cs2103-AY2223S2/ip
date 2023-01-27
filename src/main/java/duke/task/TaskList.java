@@ -1,6 +1,7 @@
 package duke.task;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -25,6 +26,10 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    public ArrayList<Task> getList() {
+        return this.list;
+    }
+
     public void markStatus(int index) {
         list.get(index - 1).markStatus(true);
     }
@@ -33,9 +38,8 @@ public class TaskList {
         list.get(index - 1).markStatus(false);
     }
 
-    public Task addTasks(Task task) {
+    public void addTasks(Task task) {
         this.list.add(task);
-        return task;
     }
 
     public Task deleteTasks(int inputIndex) {

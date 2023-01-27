@@ -17,9 +17,9 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            Task t = taskList.addTasks(event);
-            storage.updateStorage();
-            ui.printAddTask(taskList, t);
+            taskList.addTasks(event);
+            storage.updateStorage(taskList);
+            ui.printAddTask(taskList, event);
         } catch  (IOException e) {
             e.printStackTrace();
         }

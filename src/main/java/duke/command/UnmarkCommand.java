@@ -17,7 +17,7 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
             ui.printUnMarkStatus(taskList, index);
-            storage.updateStorage();
+            storage.updateStorage(taskList);
     }
 
     @Override

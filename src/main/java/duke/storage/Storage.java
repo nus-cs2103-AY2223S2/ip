@@ -80,14 +80,15 @@ public class Storage {
         }
     }
 
-    public void updateStorage() throws IOException {
+    public void updateStorage(TaskList tasklist) throws IOException {
+//        System.out.println("entered update storage");
         Task task;
         StringBuilder sb = new StringBuilder();
         FileWriter fw = new FileWriter(filePath);
-        for (Task value : this.list) {
+        for (Task value : tasklist.getList()) {
             task = value;
             String taskName = task.getName();
-//            System.out.println(taskName);
+//            System.out.println("taskName: " + taskName);
             sb.append(taskName);
             sb.append("|");
             if (task.getStatusIcon().equals("X")) {

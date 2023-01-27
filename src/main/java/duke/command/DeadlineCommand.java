@@ -17,9 +17,9 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            Task t = taskList.addTasks(deadline);
-            storage.updateStorage();
-            ui.printAddTask(taskList, t);
+            taskList.addTasks(deadline);
+            storage.updateStorage(taskList);
+            ui.printAddTask(taskList, deadline);
         } catch  (IOException e) {
             e.printStackTrace();
         }
