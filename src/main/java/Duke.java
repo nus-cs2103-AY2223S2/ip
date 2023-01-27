@@ -1,9 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        Task[] taskList = new Task[100];
-        int index = 0;
+        ArrayList<Task> taskList = new ArrayList<Task>();
         System.out.println("Hello I'm Duke\nWhat can I do for you?");
         Scanner scan = new Scanner(System.in);
         
@@ -18,41 +18,50 @@ public class Duke {
 
             if (textInput.equalsIgnoreCase("list")) {
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < index; i++) {
-                    System.out.println(i + 1 + ". " + taskList[i].toString());
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.println(i + 1 + ". " + taskList.get(i).toString());
                 }
                 continue;
             }
 
+            if (textInput.length() >= 8 &&
+                    textInput.substring(0, 6).equalsIgnoreCase("delete")) {
+                int i = Integer.parseInt(textInput.substring(7));
+                Task t = taskList.get(i - 1);
+                taskList.remove(i - 1);
+                String output = String.format("Got it. I've removed this task:\n%s\nNow you have %d tasks in the list", t.toString(), taskList.size());
+                System.out.println(output);
+                continue;
+            }
+
             if (textInput.length() >= 6 && 
-                textInput.substring(0, 4).equalsIgnoreCase("mark")) {
+                    textInput.substring(0, 4).equalsIgnoreCase("mark")) {
                 int i = Integer.parseInt(textInput.substring(5));
-                Task currTask = taskList[i - 1];
+                Task currTask = taskList.get(i - 1);
                 currTask.markDone();
                 System.out.println("Nice! I've marked this task as done\n" + currTask.toString());
                 continue;
             }
 
             if (textInput.length() >= 8 &&
-                textInput.substring(0, 6).equalsIgnoreCase("unmark")) {
+                    textInput.substring(0, 6).equalsIgnoreCase("unmark")) {
                 int i = Integer.parseInt(textInput.substring(7));
-                Task currTask = taskList[i - 1];
+                Task currTask = taskList.get(i - 1);
                 currTask.markUndone();
                 System.out.println("OK, I've marked this task as not done yet:\n" + currTask.toString());
                 continue;
             }
 
             if (textInput.length() >= 4 &&
-                textInput.substring(0, 4).equalsIgnoreCase("todo")) {
+                    textInput.substring(0, 4).equalsIgnoreCase("todo")) {
                 try {
                     String[] parts = textInput.split(" ", 2);
                     if (parts.length == 1 || parts[1] == "") {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                     Task t = new Task.Todo(textInput.substring(5));
-                    taskList[index] = t;
-                    index++;
-                    String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), index);
+                    taskList.add(t);
+                    String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), taskList.size());
                     System.out.println(output);
                     continue;                
                 } catch (DukeException e) {
@@ -62,23 +71,21 @@ public class Duke {
             }
 
             if (textInput.length() >= 10 && 
-                textInput.substring(0, 8).equalsIgnoreCase("deadline")) {
+                    textInput.substring(0, 8).equalsIgnoreCase("deadline")) {
                 String[] parts = textInput.split("/");
                 Task t = new Task.Deadline(parts[0].substring(9), parts[1].substring(3));
-                taskList[index] = t;
-                index++;
-                String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), index);
+                taskList.add(t);
+                String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), taskList.size());
                 System.out.println(output);
                 continue;
             }
 
             if (textInput.length() >= 7 && 
-                textInput.substring(0, 5).equalsIgnoreCase("event")) {
+                    textInput.substring(0, 5).equalsIgnoreCase("event")) {
                 String[] parts = textInput.split("/");
                 Task t = new Task.Event(parts[0].substring(6), parts[1].substring(5), parts[2].substring(3));
-                taskList[index] = t;
-                index++;
-                String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), index);
+                taskList.add(t);
+                String output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list", t.toString(), taskList.size());
                 System.out.println(output);
                 continue;
             }
