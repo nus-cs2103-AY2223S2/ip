@@ -41,7 +41,7 @@ public class Parser {
      *  Checks whether task number is numeric & valid
      *  @param taskList Current state of TaskList
      *  @param taskNumber String of the taskNumber
-     *  @return Integer of the task number if it is valid
+     *  @return Integer of the task number (in 0-indexing) if it is valid
      */
     private int checkTaskNumber(TaskList taskList, String taskNumber) throws DukeException {
         try {
