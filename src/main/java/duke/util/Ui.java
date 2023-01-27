@@ -1,7 +1,7 @@
-package util;
+package duke.util;
 
-import exception.DukeException;
-import task.*;
+import duke.exception.DukeException;
+import duke.task.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,6 +31,10 @@ public class Ui {
 
     public void showError(String message) {
         System.out.println("    " + message);
+    }
+
+    public void showInvalidTimeError() {
+        System.out.println("    ☹ OOPS!!! Invalid datetime. Syntax: YYYY-MM-DD");
     }
 
     public String readCommand() throws DukeException {

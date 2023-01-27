@@ -1,8 +1,8 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
-import task.TaskList;
-import util.Ui;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.util.Ui;
 
 public class MarkCommand extends Command {
     private String command;

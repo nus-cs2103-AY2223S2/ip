@@ -1,11 +1,13 @@
+package duke;
+
 import java.io.*;
 
 import java.time.format.DateTimeParseException;
 
-import command.*;
-import exception.*;
-import task.*;
-import util.*;
+import duke.command.*;
+import duke.exception.*;
+import duke.task.*;
+import duke.util.*;
 
 
 public class Duke {
@@ -37,10 +39,6 @@ public class Duke {
 
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } catch (IllegalArgumentException e) {
-                System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            } catch (DateTimeParseException e) {
-                System.out.println("    ☹ OOPS!!! Invalid datetime. Syntax: YYYY-MM-DD");
             }
         }
     }

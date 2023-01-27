@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
-import exception.DukeException;
-import task.TaskList;
-import task.ToDo;
-import util.Ui;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.util.Ui;
 
 public class TodoCommand extends Command {
     private String command;
@@ -23,7 +23,6 @@ public class TodoCommand extends Command {
     @Override
     public boolean execute() throws DukeException {
         ToDo toDo = new ToDo(getTaskName("todo", command));
-
         taskList.add(toDo);
         ui.printAddedTask(toDo, taskList);
 

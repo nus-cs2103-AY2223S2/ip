@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 public abstract class Task {
     private boolean isCompleted; //by default the task should not be completed

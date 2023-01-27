@@ -1,6 +1,6 @@
-package util;
+package duke.util;
 
-import task.*;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,7 +38,6 @@ public class Storage {
         FileWriter fw = new FileWriter(file);
 
         for (Task task : taskList) {
-
             String str = task.encode();
             fw.write(str);
             fw.write(System.lineSeparator());

@@ -1,5 +1,5 @@
-package command;
-import exception.*;
+package duke.command;
+import duke.exception.*;
 
 public abstract class Command {
     

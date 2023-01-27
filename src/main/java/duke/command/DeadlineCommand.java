@@ -1,10 +1,10 @@
-package command;
+package duke.command;
 
 import java.time.format.DateTimeParseException;
-import exception.DukeException;
-import task.Deadline;
-import task.TaskList;
-import util.Ui;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.TaskList;
+import duke.util.Ui;
 
 public class DeadlineCommand extends Command {
     private String command;
@@ -22,14 +22,17 @@ public class DeadlineCommand extends Command {
      * deadline requires taskName and EndDate
      */
     @Override
-    public boolean execute() throws DukeException, DateTimeParseException {
+    public boolean execute() throws DukeException {
         String taskName = getTaskName("deadline", command);
         String endDate = getEndDate("deadline", command);
 
-        Deadline deadline = new Deadline(taskName, endDate);
-        taskList.add(deadline);
-
-        ui.printAddedTask(deadline, taskList);
+        try {
+            Deadline deadline = new Deadline(taskName, endDate);
+            taskList.add(deadline);
+            ui.printAddedTask(deadline, taskList);
+        } catch (DateTimeParseException e) {
+            ui.showInvalidTimeError();
+        }
         return false;
     }
 }
