@@ -12,7 +12,7 @@ import aqua.manager.LogicManager;
  */
 public class ByeCommand extends Command {
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager, boolean isLoading) {
+    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new ExecutionTask<String>(args, manager) {
             @Override
             public String process(ArgumentMap args, LogicManager manager) {

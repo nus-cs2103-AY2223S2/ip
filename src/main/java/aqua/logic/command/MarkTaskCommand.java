@@ -31,9 +31,9 @@ public class MarkTaskCommand extends Command {
 
 
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager, boolean isLoading) {
+    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new MarkTask(args, manager))
-                .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
+                .setFollowUp(new WriteTaskCommand().getService(args, manager));
     }
 
 

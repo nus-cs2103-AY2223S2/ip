@@ -17,9 +17,9 @@ public abstract class Command {
      * @param manager - the application AppManager.
      * @return an ExecutionDispatcher to execute the command.
      */
-    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager) {
-        return getDispatcher(args, manager, false);
+    public ExecutionService getService(ArgumentMap args, LogicManager manager) {
+        return getService(args, manager, false);
     }
 
-    public abstract ExecutionService getDispatcher(ArgumentMap args, LogicManager manager, boolean isLoading);
+    public abstract ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading);
 }

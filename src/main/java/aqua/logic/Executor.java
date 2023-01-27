@@ -43,7 +43,7 @@ public class Executor {
         }
 
         // start service
-        initiateService(commandInput.getDispatcher(manager));
+        initiateService(commandInput.getService(manager));
     }
 
 

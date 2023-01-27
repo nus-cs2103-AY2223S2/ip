@@ -16,9 +16,9 @@ import aqua.manager.LogicManager;
  */
 public class DeleteCommand extends Command {
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager, boolean isLoading) {
+    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new DeleteTask(args, manager))
-                .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
+                .setFollowUp(new WriteTaskCommand().getService(args, manager));
     }
 
 

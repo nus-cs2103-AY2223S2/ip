@@ -13,7 +13,7 @@ import aqua.manager.TaskManager;
  */
 public class ListCommand extends Command {
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager, boolean isLoading) {
+    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new ExecutionTask<TaskManager>(args, manager) {
             @Override
             public TaskManager process(ArgumentMap args, LogicManager manager) {

@@ -25,12 +25,12 @@ public abstract class AddTaskCommand extends Command {
 
 
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager, boolean isLoading) {
+    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
         ExecutionService service = ExecutionService.of(new AddTask(args, manager));
         if (isLoading) {
             return service;
         }
-        return service.setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
+        return service.setFollowUp(new WriteTaskCommand().getService(args, manager));
     }
 
 
