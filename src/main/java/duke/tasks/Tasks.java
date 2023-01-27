@@ -128,4 +128,23 @@ public class Tasks {
             }
         }
     }
+
+    /**
+     * Filters and prints out tasks that contain a given keyword.
+     * @param keyword The given keyword.
+     */
+    public void filterByKeyword(String keyword) {
+        if (l.size() == 0) {
+            System.out.println("Nothing~");
+        } else {
+            System.out.println("Tasks that have " + keyword);
+            int count = 1;
+            for (Task task : l) {
+                if (task.containsKeyword(keyword)) {
+                    System.out.println(count + ". " + task.printTask());
+                    count++;
+                }
+            }
+        }
+    }
 }
