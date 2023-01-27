@@ -52,11 +52,11 @@ class Events extends Task {
      * @param to The end time of the event task
      * @param isDone The boolean state of whether the event task is marked as completed or yet to be completed
      */
-    Events(String description,String from, String to, boolean isDone) {
+    Events(String description, String from, String to, boolean isDone) {
         super(description, isDone);
         this.from = from;
         this.to = to;
-    } 
+    }
     /**
      * Process the user's from and to date as a LocalDate into String if the
      * user keys in a valid format for LocalDate to process (MMM dd YYYY) in
@@ -80,7 +80,7 @@ class Events extends Task {
      * Since the Event class is immutable, a new Event object will be
      * returned with the exact same description, from and to, except now,
      * the event task will be marked as done
-     *  @return Events The new Event task object 
+     *  @return Events The new Event task object
      */
     @Override
     Events markAsDone() {
@@ -90,7 +90,7 @@ class Events extends Task {
      * Since the Event class is immutable, a new Event object will be
      * returned with the exact same description, from and to, except now,
      * the event task will be marked as undone
-     *  @return Events The new Event task object 
+     *  @return Events The new Event task object
      */
     @Override
     Events markAsUndone() {

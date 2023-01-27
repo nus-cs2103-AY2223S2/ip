@@ -7,12 +7,12 @@ import java.util.ArrayList;
  * stored in the list is Task. It is an immutable list and will always
  * return a new list if modified.
  *
- * @author Muhammad Reyaaz 
+ * @author Muhammad Reyaaz
  * @version %I% %G%
  * @since 11
  */
 class TaskList<T> {
-    
+
     private final ArrayList<Task> tasks;
     //List starts numbering from 1
     private final static int INCREMENT = 1;
@@ -39,7 +39,7 @@ class TaskList<T> {
     }
     /**
      * Get the total number of tasks in the list.
-     * 
+     *
      * @return sizeOfTasks
      */
     int numberOfTasks() {
@@ -54,23 +54,23 @@ class TaskList<T> {
      */
     TaskList<T> listAllTasks() {
         for (int i=0; i < numberOfTasks(); i++) {
-            System.out.println(i + INCREMENT + "." + get(i));    
+            System.out.println(i + INCREMENT + "." + get(i));
         }
         return new TaskList<T>(tasks);
     }
-    
-    <T extends Task> TaskList<T> listFindTasks(String find, TaskList<T> list) { 
+
+    <T extends Task> TaskList<T> listFindTasks(String find, TaskList<T> list) {
         for (int i=0; i < numberOfTasks(); i++) {
             Task currTask = (Task)get(i);
             if (currTask.getDescription().contains(find.substring(1))) {
-                System.out.println(i + INCREMENT + "." + currTask);    
+                System.out.println(i + INCREMENT + "." + currTask);
             }
         }
         return new TaskList<T>(tasks);
-    } 
+    }
 
     /**
-     * Get a task in a specific position 
+     * Get a task in a specific position
      * @return positionOfTask
      */
     Task get(int index) {
@@ -89,6 +89,16 @@ class TaskList<T> {
         System.out.println("SUI I have added this task!: " + newTask);
         return newTasks;
     }
+
+    TaskList<T> addMultipleTasks(Task... newTask) {
+        TaskList<T> newTasks = new TaskList<T>(tasks);
+        for (Task task: newTask) {
+            newTasks.tasks.add(task);
+            System.out.println("SUI I have added this task!: " + task);
+        }
+        return newTasks;
+    }
+
     /**
      * Modify a task in the list, such as to mark it as done or undone. Due
      * to the immutability nature of TaskList, a new TaskList will be
@@ -102,12 +112,13 @@ class TaskList<T> {
         newTasks.tasks.set(index, task);
         return newTasks;
     }
+
     /**
      * Delete a particular task present in the list. However, due to the
      * immutability nature of TaskList, a new TaskList will be returned with
      * the corresponding task deleted.
      *
-     * @return TaskList<T> 
+     * @return TaskList<T>
      */
     TaskList<T> removeTask(int index) {
         TaskList<T> newTasks = new TaskList<T>(tasks);
@@ -115,10 +126,17 @@ class TaskList<T> {
         return newTasks;
     }
 
-    @Override 
+    TaskList<T> removeMultipleTasks(int... index) {
+        TaskList<T> newTasks = new TaskList<T>(tasks);
+        for (int i : index) {
+            newTasks.tasks.remove(i);
+        }
+        return newTasks;
+    }
+
+    @Override
     public String toString() {
         return tasks.toString();
     }
 
 }
-

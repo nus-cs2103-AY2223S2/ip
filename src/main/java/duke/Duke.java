@@ -390,11 +390,10 @@ public class Duke {
 
     }
 
-//
-//    /*
-//    public static void main(String[] args) {
-//        Duke duke = new Duke();
-//        duke.moreOop();
-//    }
-//    */
+    /*
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.moreOop();
+    }
+    */
 }
