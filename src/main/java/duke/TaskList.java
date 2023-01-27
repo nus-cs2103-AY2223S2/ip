@@ -104,6 +104,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Check if there is deadline on a specific date.
+     * Need check keyword.
+     * Format: check deadline /2019-10-15.
+     *
+     * @param checkDeadline The date.
+     */
     public void check(String checkDeadline) {
         boolean ifDeadlineExist = false;
         for (int i = 0; i < list.size(); i++) {
