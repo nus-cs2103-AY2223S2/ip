@@ -3,9 +3,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public abstract class Task {
 
@@ -13,6 +15,7 @@ public abstract class Task {
     private static File dataFile;
     private static final ArrayList<Task> taskList = new ArrayList<>();
     private static final StringBuilder strBuild = new StringBuilder();
+    static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
     private static final Scanner sc = new Scanner(System.in);
     private boolean done;
     private static boolean isItNew;

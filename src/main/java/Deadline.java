@@ -1,4 +1,7 @@
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Scanner;
 
 public class Deadline extends Task{
@@ -6,10 +9,11 @@ public class Deadline extends Task{
     private static StringBuilder strBuild = new StringBuilder();
     private static Scanner sc = new Scanner(System.in);
 
-    private final String end;
+    private final LocalDateTime end;
     public Deadline(String name, String end, boolean done) {
         super(name, done);
-        this.end = end;
+        this.end = LocalDateTime.parse(end,
+                Task.DATE_TIME_FORMATTER);
     }
 
     public static void createDeadline(String[] split) {
@@ -17,22 +21,26 @@ public class Deadline extends Task{
         String n = " ", e = " ";
         for (int i = 1; i < split.length; i++) {
             if (isName) {
-                if (!split[i].equalsIgnoreCase("/by")) {
+                if (!split[i + 1].equalsIgnoreCase("/by")) {
                     strBuild.append(split[i]);
+                    strBuild.append(" ");
                 } else {
+                    strBuild.append(split[i]);
                     n = strBuild.toString();
                     strBuild.setLength(0);
                     isName = false;
+                    i++;
                 }
             } else {
                 strBuild.append(split[i]);
-            }
-            if (i + 1 != split.length) {
-                strBuild.append(" ");
+                if (i + 1 != split.length) {
+                    strBuild.append(" ");
+                }
             }
         }
         e = strBuild.toString();
         strBuild.setLength(0);
+        System.out.println(e);
         Deadline d = new Deadline(n, e, false);
         Task.addToList(d);
         Task.printDefault(d);
@@ -45,11 +53,13 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "   [D]" + super.toString() + " |by: " + end + "|\n";
+        return "   [D]" + super.toString() + " |by: "
+                + end.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM,
+                FormatStyle.SHORT)) + "|\n";
     }
 
     @Override
     public String toWrite() {
-        return "D | " + super.toWrite() + " | " + end + "\n";
+        return "D | " + super.toWrite() + " | " + end.format(Task.DATE_TIME_FORMATTER) + "\n";
     }
 }
