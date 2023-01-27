@@ -1,3 +1,7 @@
+import java.time.LocalDateTime;
+
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
 
     protected final String description;
@@ -11,7 +15,7 @@ public abstract class Task {
     public static Task getTaskFromString(String task) {
         String[] taskParts = task.split("~");
         String taskType = taskParts[0];
-        String mark = taskParts[1];
+        String marked = taskParts[1];
         String description = taskParts[2];
 
         Task answer = null;
@@ -20,19 +24,27 @@ public abstract class Task {
             answer = new ToDo(description);
 
         } else if (taskType.equals("D")) {
-            answer = new Deadline(description, taskParts[3]);
+            answer = new Deadline(description, LocalDateTime.parse(taskParts[3]));
 
-        } else if (taskType.equals("E")){
-            answer = new Event(description, taskParts[3], taskParts[4]);
+        } else if (taskType.equals("E")) {
+            answer = new Event(description,
+                    LocalDateTime.parse(taskParts[3]),
+                    LocalDateTime.parse(taskParts[4]));
 
         }
 
-        if (answer != null && mark.equals("X")) {
+        if (answer != null && marked.equals("X")) {
             answer.mark();
 
         }
 
         return answer;
+
+    }
+
+    public static String getDateTimeString(LocalDateTime dateTime) {
+        DateTimeFormatter formatToPrint = DateTimeFormatter.ofPattern("MMM dd yyyy KK:mm a");
+        return dateTime.format(formatToPrint);
 
     }
 

@@ -1,8 +1,10 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
 
-    private final String by;
+    private final LocalDateTime by;
 
-    Deadline(String description, String by) {
+    Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
@@ -16,6 +18,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+
+        return "[D]" + super.toString()
+                + " (by: " + Task.getDateTimeString(this.by) + ")";
     }
 }

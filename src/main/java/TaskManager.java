@@ -1,3 +1,7 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +14,21 @@ public class TaskManager {
     private FileManager tasksFileManager = new FileManager(TASKS_FOLDER_PATH, TASKS_FILE_NAME);
 
     private ArrayList<Task> tasks = tasksFileManager.readTasksFromFile();
+
+    private LocalDateTime parseDateTime(String dateTimeText) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy kkmm");
+        LocalDateTime dateTime = null;
+
+        try {
+            dateTime = LocalDateTime.parse(dateTimeText, dateTimeFormatter);
+
+        } catch (DateTimeParseException e) {
+            System.out.println("Oops! Invalid date-time format. It should be DD-MM-YYYY hhmm (24-hrs format)");
+
+        } finally {
+            return dateTime;
+        }
+    }
 
     private void listTasks() {
         if (this.tasks.size() == 0) {
@@ -145,12 +164,16 @@ public class TaskManager {
         String[] byArray = Arrays.copyOfRange(cmdRest, byIndex + 1, cmdRest.length);
         String by = String.join(" ", byArray);
 
-        Task deadline = new Deadline(description, by);
-        this.tasks.add(deadline);
-        tasksFileManager.writeTasksToFile(this.tasks);
-        System.out.println("I have added the deadline to the list.");
-        System.out.println(deadline);
+        LocalDateTime byDateTime = this.parseDateTime(by);
 
+        if (byDateTime != null) {
+            Task deadline = new Deadline(description, byDateTime);
+            this.tasks.add(deadline);
+            tasksFileManager.writeTasksToFile(this.tasks);
+            System.out.println("I have added the deadline to the list.");
+            System.out.println(deadline);
+
+        }
     }
 
     private void processEvent(String[] cmdParts) throws DukeException {
@@ -207,11 +230,17 @@ public class TaskManager {
         String from = String.join(" ", fromArray);
         String to = String.join(" ", toArray);
 
-        Task event = new Event(description, from, to);
-        this.tasks.add(event);
-        tasksFileManager.writeTasksToFile(this.tasks);
-        System.out.println("I have added the event to the list.");
-        System.out.println(event);
+        LocalDateTime fromDateTime = this.parseDateTime(from);
+        LocalDateTime toDateTime = this.parseDateTime(to);
+
+        if (fromDateTime != null && toDateTime != null) {
+            Task event = new Event(description, fromDateTime, toDateTime);
+            this.tasks.add(event);
+            tasksFileManager.writeTasksToFile(this.tasks);
+            System.out.println("I have added the event to the list.");
+            System.out.println(event);
+
+        }
 
     }
 
