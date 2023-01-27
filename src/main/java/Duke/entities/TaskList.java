@@ -1,12 +1,10 @@
-package entities;
+package Duke.entities;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import exceptions.DukeFileNotFoundException;
-import exceptions.InvalidInputException;
-import storage.Storage;
-import Ui.Ui;
+import Duke.exceptions.InvalidInputException;
+import Duke.storage.Storage;
 
 public class TaskList {
     protected Storage storage;

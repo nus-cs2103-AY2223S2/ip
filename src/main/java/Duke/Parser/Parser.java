@@ -1,13 +1,13 @@
-package Parser;
+package Duke.Parser;
 
-import Commands.*;
-import entities.Deadline;
-import entities.Event;
-import entities.Todo;
-import enums.CommandEnums;
-import exceptions.EmptyDescException;
-import exceptions.InvalidInputException;
-import entities.TaskList;
+import Duke.Commands.*;
+import Duke.entities.Deadline;
+import Duke.entities.Event;
+import Duke.entities.Todo;
+import Duke.enums.CommandEnums;
+import Duke.exceptions.EmptyDescException;
+import Duke.exceptions.InvalidInputException;
+import Duke.entities.TaskList;
 
 public class Parser {
     public Command parseCommand(String input) throws InvalidInputException {

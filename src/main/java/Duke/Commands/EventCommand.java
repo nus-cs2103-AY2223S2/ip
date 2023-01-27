@@ -1,8 +1,8 @@
-package Commands;
+package Duke.Commands;
 
-import entities.Event;
-import entities.TaskList;
-import Ui.Ui;
+import Duke.entities.Event;
+import Duke.entities.TaskList;
+import Duke.Ui.Ui;
 
 public class EventCommand extends Command {
     @Override

@@ -1,4 +1,4 @@
-package storage;
+package Duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,10 +7,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.nio.file.Path;
 
-import Parser.Parser;
-import entities.*;
-import exceptions.DukeFileNotFoundException;
-import exceptions.InvalidInputException;
+import Duke.Parser.Parser;
+import Duke.entities.*;
+import Duke.exceptions.DukeFileNotFoundException;
 
 public class Storage {
     private final Path HOME_DIRECTORY = Path.of(System.getProperty("user.dir") + "/data");
@@ -30,12 +29,11 @@ public class Storage {
 
     public boolean load(TaskList list) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
-        String input = sc.nextLine();
         while (sc.hasNextLine()) {
+            String input = sc.nextLine();
             if (parser.parseText(input, list) == false) {
                 return false;
             }
-            input = sc.nextLine();
         }
         return true;
 
@@ -43,7 +41,7 @@ public class Storage {
 
     public void save(TaskList list) {
         try {
-            FileWriter myWriter = new FileWriter(this.HOME_DIRECTORY + "/" + file);
+            FileWriter myWriter = new FileWriter(file);
             for (int i = 0; i < list.getSize(); i++) {
                 String line = list.getTask(i).toSave();
                 myWriter.write(line);

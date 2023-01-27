@@ -1,11 +1,13 @@
-import Parser.Parser;
-import Ui.Ui;
-import entities.TaskList;
-import exceptions.DukeFileNotFoundException;
-import exceptions.EmptyDescException;
-import exceptions.InvalidInputException;
-import storage.Storage;
-import Commands.*;
+package Duke;
+
+import Duke.Parser.Parser;
+import Duke.Ui.Ui;
+import Duke.entities.TaskList;
+import Duke.exceptions.DukeFileNotFoundException;
+import Duke.exceptions.EmptyDescException;
+import Duke.exceptions.InvalidInputException;
+import Duke.storage.Storage;
+import Duke.Commands.*;
 
 import java.io.FileNotFoundException;
 

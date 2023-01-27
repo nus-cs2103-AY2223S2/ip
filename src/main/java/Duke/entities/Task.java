@@ -1,4 +1,4 @@
-package entities;
+package Duke.entities;
 
 public class Task {
     protected String description;

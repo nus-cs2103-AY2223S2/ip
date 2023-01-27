@@ -1,8 +1,8 @@
-package Commands;
+package Duke.Commands;
 
-import entities.Deadline;
-import entities.TaskList;
-import Ui.Ui;
+import Duke.entities.Deadline;
+import Duke.entities.TaskList;
+import Duke.Ui.Ui;
 
 public class DeadlineCommand extends Command {
 

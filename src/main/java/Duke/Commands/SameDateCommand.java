@@ -1,13 +1,13 @@
-package Commands;
+package Duke.Commands;
 
-import entities.Deadline;
-import entities.Event;
-import entities.Task;
-import entities.TaskList;
+import Duke.entities.Deadline;
+import Duke.entities.Event;
+import Duke.entities.Task;
+import Duke.entities.TaskList;
 
 import java.time.LocalDate;
 
-import Ui.Ui;
+import Duke.Ui.Ui;
 
 public class SameDateCommand extends Command {
     @Override

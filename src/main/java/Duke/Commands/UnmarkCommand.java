@@ -1,10 +1,10 @@
-package Commands;
+package Duke.Commands;
 
-import entities.Task;
-import entities.TaskList;
-import Ui.Ui;
+import Duke.entities.Task;
+import Duke.entities.TaskList;
+import Duke.Ui.Ui;
 
-public class MarkCommand extends Command {
+public class UnmarkCommand extends Command {
     @Override
     public void processCommand() {
         System.out.println("abstract method invoked");
@@ -12,7 +12,7 @@ public class MarkCommand extends Command {
 
     public void processCommand(TaskList list, int index, Ui ui) {
         Task task = list.getTask(index);
-        task.setDone();
+        task.setUndone();
         ui.print(String.format("Nice, this task has been marked as done:\n %s", task.toString()));
         ui.printDivider();
     }

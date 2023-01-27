@@ -1,9 +1,8 @@
-package Commands;
+package Duke.Commands;
 
-import entities.Task;
-import entities.TaskList;
-import entities.Todo;
-import Ui.Ui;
+import Duke.entities.TaskList;
+import Duke.entities.Todo;
+import Duke.Ui.Ui;
 
 public class TodoCommand extends Command {
     @Override

@@ -1,4 +1,4 @@
-package exceptions;
+package Duke.exceptions;
 
 public class EmptyDescException extends InvalidInputException {
     public EmptyDescException(String message) {

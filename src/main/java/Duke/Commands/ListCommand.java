@@ -1,8 +1,8 @@
-package Commands;
+package Duke.Commands;
 
-import entities.Task;
-import entities.TaskList;
-import Ui.Ui;
+import Duke.entities.Task;
+import Duke.entities.TaskList;
+import Duke.Ui.Ui;
 
 public class ListCommand extends Command {
 

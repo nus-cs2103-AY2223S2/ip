@@ -1,4 +1,4 @@
-package exceptions;
+package Duke.exceptions;
 
 import java.io.FileNotFoundException;
 
