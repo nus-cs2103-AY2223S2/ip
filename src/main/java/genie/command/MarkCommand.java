@@ -1,3 +1,10 @@
+package genie.command;
+
+import genie.Storage;
+import genie.TaskList;
+import genie.Ui;
+import genie.task.Task;
+
 public class MarkCommand extends Command {
     private int index;
     public MarkCommand(int index) {

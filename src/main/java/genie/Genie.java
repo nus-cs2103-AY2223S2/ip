@@ -1,3 +1,8 @@
+package genie;
+
+import genie.command.Command;
+import genie.exception.DukeException;
+
 import java.io.*;
 public class Genie {
     private Storage storage;

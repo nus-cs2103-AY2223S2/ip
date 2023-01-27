@@ -1,3 +1,10 @@
+package genie.command;
+
+import genie.Storage;
+import genie.TaskList;
+import genie.Ui;
+import genie.task.Task;
+
 public class AddCommand extends Command {
     private String taskType;
     private String fullCommand;

@@ -1,3 +1,7 @@
+package genie;
+
+import genie.task.Task;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -51,7 +55,7 @@ author Aaron D
         return taskList;
     }
     /*
-    public void saveTaskToFile(Task t) throws IOException {
+    public void saveTaskToFile(genie.task.Task t) throws IOException {
         fw.write(t.toString());
         fw.write("\n");
     } */

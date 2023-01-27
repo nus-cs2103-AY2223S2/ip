@@ -1,3 +1,10 @@
+package genie;
+
+import genie.task.Deadline;
+import genie.task.Event;
+import genie.task.Task;
+import genie.task.ToDo;
+
 import java.util.ArrayList;
 
 public class TaskList {

@@ -1,3 +1,7 @@
+package genie.task;
+
+import genie.task.Task;
+
 public class Event extends Task {
     protected String from;
     protected String to;

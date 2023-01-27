@@ -1,4 +1,9 @@
-import java.io.IOException;
+package genie;
+
+import genie.command.*;
+import genie.exception.DukeException;
+import genie.exception.EmptyInputException;
+import genie.exception.InvalidInputException;
 
 public class Parser {
     public Parser() {}

@@ -1,3 +1,9 @@
+package genie.command;
+
+import genie.Storage;
+import genie.TaskList;
+import genie.Ui;
+
 import java.io.IOException;
 
 public class ExitCommand extends Command {
