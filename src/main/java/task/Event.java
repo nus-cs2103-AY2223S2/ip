@@ -91,7 +91,7 @@ public class Event extends Task{
             detailsSublist = segments.subList(detailsIndex, fromIndex - 1);
             fromSublist = segments.subList(fromIndex, toIndex - 1);
             toSublist = segments.subList(toIndex, segments.size());
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | IllegalArgumentException e) {
             throw new DukeInvalidCommandException(Response.INVALID_COMMAND.toString());
         }
 
