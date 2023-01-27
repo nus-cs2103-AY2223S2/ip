@@ -31,7 +31,7 @@ public class JeoBot {
      * Represents the list of commands recognised by the bot.
      */
     public enum Command {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, DUE
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, DUE, FIND
     }
 
     /**
@@ -115,6 +115,9 @@ public class JeoBot {
                     LocalDate byDate = LocalDate.parse(by, formatterParse);
                     ui.showTasksDue(byDate, taskList);
                     break;
+                case FIND:
+                    String keyword = hm.get("key");
+                    ui.showTasksWithKeyword(keyword, taskList);
                 }
                 store.save(taskList.getTaskList());
             } catch (IOException e) {

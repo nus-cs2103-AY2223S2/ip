@@ -106,6 +106,13 @@ public class Parser {
                 throw new JeoException("Please enter a date in the format: \"yyyy-MM-dd\".");
             }
             hm.put("by", by);
+        } else if (str.toLowerCase().startsWith("find")) {
+            hm.put("command", "find");
+            String key = str.substring(4).trim();
+            if (key.isEmpty()) {
+                throw new JeoException("Please enter a keyword.");
+            }
+            hm.put("key", key);
         } else {
             hm.put("command", "");
         }

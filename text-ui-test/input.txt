@@ -2,7 +2,7 @@ todo read book
 deadline assignment /by 2023-01-27 14:00
 event attend interview /from 2023-01-25 00:30 /to 2023-01-27 12:00
 todo apply for internships
-deadline project /by 2023-01-29 12:00
+deadline submit project /by 2023-01-29 12:00
 todo
 todo exercise
 deadline submit proposal /by 2023-01-27 12:00
@@ -16,5 +16,6 @@ list
 delete 3
 delete 5
 list
+find submit
 hello
 bye

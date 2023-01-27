@@ -174,4 +174,19 @@ public class Ui {
             }
         }
     }
+
+    public void showTasksWithKeyword(String keyword, TaskList list) {
+        System.out.println("Here are the matching tasks in your list:");
+        int j = 1;
+        for (Task task: list.getTaskList()) {
+            if (task.toString().contains(keyword)) {
+                StringBuilder sb = new StringBuilder()
+                        .append(j)
+                        .append(".")
+                        .append(task);
+                System.out.println(sb);
+                j++;
+            }
+        }
+    }
 }
