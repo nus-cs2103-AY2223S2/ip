@@ -164,4 +164,29 @@ public class TaskMaster {
         }
         return ret.toString();
     }
+
+    /**
+     * Return list of tasks with the keyword
+     * @param keyword The keyword to find stored in the list.
+     * @return
+     */
+    public String find(String keyword) {
+        keyword = keyword.toLowerCase();
+        StringBuilder ret = new StringBuilder();
+        if (LIST.size() > 0) {
+            int number = 1;
+            for (Task task: LIST) {
+                number++;
+                if (task.getTaskName().toLowerCase().contains(keyword)) {
+                    System.out.println("AAA");
+                    ret.append(String.format("%d.%s\n", number, task));
+                }
+            }
+        } else {
+            ret.append("Oh my, the list is empty!\n");
+        }
+
+        return ret.toString();
+    }
+
 }
