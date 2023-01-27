@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 import duke.storage.Storage;
 
+/**
+ * Is the main class of the program
+ */
 public class Duke {
 
     private final TaskList taskList;
@@ -13,6 +16,9 @@ public class Duke {
     private final Parser parser;
     private final Ui ui;
 
+    /**
+     * Constructs an instance of Duke
+     */
     public Duke() {
         taskList = new TaskList();
         storage = new Storage(taskList);
@@ -51,6 +57,10 @@ public class Duke {
         displayTaskCount();
     }
 
+    /**
+     * Is the entry point of the application
+     * @param args Arguments provided through the console when running the program
+     */
     public static void main(String[] args) {
 
         Ui.printProgramInfo();

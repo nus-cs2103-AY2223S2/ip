@@ -2,26 +2,55 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a collection of Tasks
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructs a TaskList instance
+     */
     TaskList() {
         tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Adds a Task to this TaskList.
+     *
+     * @param task Task to be added
+     * @return true (as specified by (ArrayList.add)
+     */
     public boolean add(Task task) {
         return tasks.add(task);
     }
 
+    /**
+     * Removes the Task at specified index.
+     *
+     * @param idx Index of the Task to be removed
+     * @return The Task that was removed from TaskList
+     */
     public Task remove(int idx) {
+
         return tasks.remove(idx);
     }
 
+    /**
+     * Removes all Task from the TaskList
+     */
     public void removeAllTask() {
         tasks.clear();
     }
 
+    /**
+     * Consolidates all the String representation of every Task in TaskList.
+     * Each representation is separated by a newline.
+     * Representation is specified by <code>Storable</code>
+     *
+     * @return String representation of all the Task in this TaskList
+     */
     public String prepareFileSave() {
         StringBuilder sb = new StringBuilder();
         for (Task t : tasks) {
@@ -30,12 +59,30 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Returns the Task from this TaskList at the specified index.
+     *
+     * @param idx Index of the Task
+     * @return Task at the specified position
+     */
     public Task get(int idx) {
         return tasks.get(idx);
     }
+
+    /**
+     * Return the number of Task in this TaskList.
+     *
+     * @return The number of Task in this TaskList
+     */
     public int size() {
         return tasks.size();
     }
+
+    /**
+     * Returns true if this TaskList contains no Task.
+     *
+     * @return true if this TaskList contains no Task
+     */
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
