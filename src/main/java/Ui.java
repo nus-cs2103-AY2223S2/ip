@@ -8,26 +8,46 @@ public class Ui {
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|";
+    // credits to: https://patorjk.com/
+    private final static String genieLogo =
+                            "     *          *          *              *     *         *    *\n " +
+                            "               ▄████ ▓█████  ███▄ * ▒█ ▒██ ▓█████               \n" +
+                            " *       *    ▄▒█▀ ▀█ ▒██  ▀  ▒██▀█▄ ▒█ ▄▄▄ ▒▓█  ▀ *          * \n" +
+                            "              ▒██ ▄▄▄ ▒██▒▄   ▒██ ▀▒ ▒█ ▒██ ▒██▒▄       *       \n" +
+                            "       *      ░▓█ ▀░█ ░▓█  ▄  ░██  ░▌░█ ░██ ░▓█  ▄   *          \n" +
+                            "   *       *  ░▒▓███▀ ░▒████  ░██ * ░██ ░██ ░▒████         *    \n" +
+                            //           ░▒   ▒ ░░ ▒░ ░░ ▒░   ▒ ▒ ░▓  ░░ ▒░ ░\n" +
+                            //         *      ░   ░  ░ ░  ░░ ░░  *░ ░░ ░ ░ ░ ░  ░  *    \n" +
+                            "       *    * ░ ░   ░    ░ *    ░   ░ ░  ░ ░   ░ *      *       \n" +
+                            " *       *       *  ░    ░  ░     *   ░  ░    *░  ░   *       *   ";
+    private final static String endBanner =
+                    " ░▒   ▒ ░░ ▒░ ░░ ▒░   ▒ ▒ ░▓  ░░ ▒░ ░   ░▒   ▒ ░░ ▒░ ░░ ▒░   ▒ ▒ ░▓  ░░ ▒░ ░\n" +
+                    "  ░   ░  ░ ░  ░░ ░░   ░ ▒░ ▒ ░ ░ ░  ░    ░   ░  ░ ░  ░░ ░░   ░ ▒░ ▒ ░ ░ ░  ░\n" +
+                    "░ ░   ░    ░      ░   ░ ░  ▒ ░   ░     ░ ░   ░    ░      ░   ░ ░  ▒ ░   ░   \n" +
+                    "      ░    ░  ░         ░  ░     ░  ░        ░    ░  ░         ░  ░     ░  ░";
     public Ui() {}
     public void greet() {
-        System.out.println("Hello! I'm Duke, a bot to help track your tasks.");
+        System.out.println("Hello! This is Genie, your personal task tracker!");
     }
     public void bootLogo() {
-        System.out.println("Hello from\n" + logo);
+        printLine();
+        System.out.println(genieLogo);
         printLine();
     }
     public void printLine() {
-        System.out.println("_____________________________________________________________________");
+        //System.out.println("_____________________________________________________________________");
+        System.out.println("==============================================================================");
+        //System.out.println("~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~");
     }
     public void printList(ArrayList<Task> tasks) {
         if(tasks.size() > 0) {
             System.out.println("Here are the tasks in your list:");
             for(int i = 1; i <= tasks.size(); i++) {
-                Task t = tasks.get(i-1);
+                Task t = tasks.get(i - 1);
                 System.out.println(i + ". " + t.toString());
             }
         } else {
-            System.out.println("Your task list is currently empty! Let's get started! ^-^");
+            showEmptyListMessage();
         }
         printLine();
     }
@@ -59,5 +79,20 @@ public class Ui {
     }
     public String showErrorMessage() {
         return "Something went wrong here xx...";
+    }
+    public void printLoadedTaskList(ArrayList<String> tl) {
+        if(tl.isEmpty()) {
+            showEmptyListMessage();
+        } else {
+            System.out.println("Here is a record of your task list from where you had previously left off:");
+            for (int i = 0; i < tl.size(); i++) {
+                System.out.println("  " + tl.get(i));
+            }
+            System.out.println("Now, what can I do for you?");
+        }
+        printLine();
+    }
+    public void showEmptyListMessage() {
+        System.out.println("Your task list is currently empty! Let's get started! ^-^");
     }
 }

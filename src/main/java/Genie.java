@@ -1,9 +1,9 @@
 import java.io.*;
-public class Duke {
+public class Genie {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    public Duke() {
+    public Genie() {
         ui = new Ui();
         storage = new Storage();
         try {
@@ -14,16 +14,18 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().activate();
+        new Genie().activate();
     }
     public void activate() {
         ui.bootLogo();
         ui.greet();
         boolean isExit = false;
+        ui.printLoadedTaskList(storage.getLoadedTaskList());
         while(!isExit) {
             try {
                 //ui.printList(taskList.getTasks());
                 String i = ui.readCommand();
+                ui.printLine();
                 Parser parser = new Parser();
                 Command c = parser.parse(i);
                 c.execute(taskList, ui, storage);

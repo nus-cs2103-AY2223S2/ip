@@ -14,8 +14,12 @@ public class TaskList {
         return t;
     }
     public Task addToDoFromFile(String sf) {
+        char status = sf.charAt(4);
         ToDo t = new ToDo(sf.substring(7));
         storeTask(t);
+        if(status == 'X') {
+            t.markDone();
+        }
         return t;
     }
     public Task addDeadlineFromUser(String i) {
@@ -25,11 +29,15 @@ public class TaskList {
         return d;
     }
     public Task addDeadlineFromFile(String sf) {
+        char status = sf.charAt(4);
         String[] contents = sf.substring(7).split(" \\| ");
         String deadlineDesc = contents[0];
         String deadlineBy = contents[1];
         Deadline d = new Deadline(deadlineDesc, deadlineBy);
         storeTask(d);
+        if(status == 'X') {
+            d.markDone();
+        }
         return d;
     }
     public Task addEventFromUser(String i) {
@@ -40,16 +48,21 @@ public class TaskList {
         return e;
     }
     public Task addEventFromFile(String sf) {
+        char status = sf.charAt(4);
         String[] contents = sf.substring(7).split(" \\| ");
         String eventDesc = contents[0];
         String[] eventFromTo = contents[1].split(" - ");
         String eventFrom = eventFromTo[0];
         String eventTo = eventFromTo[1];
         Event e = new Event(eventDesc, eventFrom, eventTo);
+        storeTask(e);
+        if(status == 'X') {
+            e.markDone();
+        }
         return e;
     }
     public void deleteTask(int index) {
-        taskList.remove(index - 1);
+        taskList.remove(index);
     }
     public ArrayList<Task> getTasks() {
         return this.taskList;
