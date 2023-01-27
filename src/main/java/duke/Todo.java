@@ -10,11 +10,17 @@ public class Todo extends Task {
         super(isDone, description);
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toCsv() {
         return "T," + super.toCsv();
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

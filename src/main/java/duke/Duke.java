@@ -21,21 +21,23 @@ public class Duke {
     }
 
     private static void assertThis(boolean expectsTrue, String failureMessage) throws DukeException {
-        if (!expectsTrue)
+        if (!expectsTrue) {
             throw new DukeException(failureMessage);
+        }
     }
 
     private void displayTaskCount() {
-        if (taskList.isEmpty())
+        if (taskList.isEmpty()) {
             ui.println("You do not have any task!");
-        else
+        } else {
             ui.println("Now you have " + taskList.size() + " task(s) in the list.");
+        }
     }
 
     private void displayTasks() {
-        if (taskList.size() == 0)
+        if (taskList.size() == 0) {
             ui.println("Your list is empty.");
-        else {
+        } else {
             ui.println("You have the following task(s):");
             for (int i = 0; i < taskList.size(); i++)
                 ui.println("\t" + (i + 1) + ". " + taskList.get(i));
@@ -56,14 +58,9 @@ public class Duke {
         Ui.printProgramInfo();
         System.out.println("Initialising system . . .");
 
-        //Initialise components, variables
-        int taskIdx, descIdx;
-        String[] inputs;
-        String cmd, userCmd, taskDescription;
-        Task activeTask;
+        //Initialise components
         Scanner sc = new Scanner(System.in);
         Duke duke = new Duke();
-        boolean isContinue = true;
 
         // Retrieve saved data (if any)
         duke.storage.loadDataFromFile();
@@ -75,6 +72,13 @@ public class Duke {
         // Program Intro
         duke.ui.println("Hello! I'm Duke! :D");
         duke.ui.println("What can I do for you today?");
+
+        //Initialise variables used inside the program loop
+        boolean isContinue = true;
+        int taskIdx, descIdx;
+        Task activeTask;
+        String cmd, userCmd, taskDescription;
+        String[] inputs;
 
         // Program Loop
         while(isContinue) {
@@ -146,14 +150,17 @@ public class Duke {
                     inputs = userCmd.split(" ");
                     Duke.assertThis(inputs.length > 1, "Please indicate which task(s) to apply to.");
 
-                    if (isMark)
+                    if (isMark) {
                         duke.ui.println("Nice I've marked the task(s) as done:");
-                    else
+                    } else {
                         duke.ui.println("OK, I've marked the task(s) as not done yet:");
+                    }
 
                     for (int i = 1; i < inputs.length; i++) {
                         String input = inputs[i].trim();
-                        if (input.isEmpty()) continue; // Blank, do nothing
+                        if (input.isEmpty()) {
+                            continue; // Blank, do nothing
+                        }
 
                         try {
                             taskIdx = Integer.parseInt(inputs[i]) - 1;
@@ -163,14 +170,12 @@ public class Duke {
                             activeTask.setDone(isMark); // Note: false means unmark
                             duke.storage.saveDataToFile();
                             duke.ui.println("\t" + activeTask);
-                        }
-                        catch(NumberFormatException e) {
+                        } catch(NumberFormatException e) {
                             duke.ui.warn("'" + input + "' is not a number.");
-                        }
-                        catch(DukeException e) {
+                        } catch(DukeException e) {
                             duke.ui.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
                         }
-                    }
+                    } // for loop
                     break;
 
                 case "delete":
@@ -182,19 +187,19 @@ public class Duke {
                     // Check and note what to delete
                     for (int i = 1; i < inputs.length; i++) {
                         String input = inputs[i].trim();
-                        if (input.isEmpty()) continue; // Blank, do nothing
+                        if (input.isEmpty()) {
+                            continue; // Blank, do nothing
+                        }
 
                         try {
+                            // Parse input to int
                             taskIdx = Integer.parseInt(inputs[i]) - 1;
                             Duke.assertThis(taskIdx >= 0 && taskIdx < duke.taskList.size(), "");
 
-                            activeTask = duke.taskList.get(taskIdx);
                             markedDelete.add(taskIdx);
-                        }
-                        catch(NumberFormatException e) {
+                        } catch(NumberFormatException e) {
                             duke.ui.warn("'" + input + "' is not a number.");
-                        }
-                        catch(DukeException e) {
+                        } catch(DukeException e) {
                             duke.ui.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
                         }
                     }
@@ -204,9 +209,9 @@ public class Duke {
                     // Actual delete from tasklist (start from the back)
                     Collections.sort(markedDelete);
                     Collections.reverse(markedDelete);
-                    for (int i : markedDelete)
+                    for (int i : markedDelete) {
                         duke.ui.println("\t" + duke.taskList.remove(i));
-                    // instead of remove(int index)
+                    }
 
                     duke.storage.saveDataToFile();
                     duke.displayTaskCount();
@@ -235,15 +240,13 @@ public class Duke {
                     default:
                         duke.ui.warn("Sorry, I don't understand your request :(");
                         duke.ui.println("Did you spell something wrongly?");
-                }
-            }
-            catch (DukeException e) {
+                } // switch case
+            } catch (DukeException e) {
                 duke.ui.warn(e.getMessage());
-            }
-            catch (RuntimeException e) {
+            } catch (RuntimeException e) {
                 duke.ui.warn(e.getMessage());
                 e.printStackTrace();
             }
-        }
+        } // Program while loop
     }
 }

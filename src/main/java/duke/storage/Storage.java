@@ -2,6 +2,7 @@ package duke.storage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,10 +37,11 @@ public class Storage {
     public void loadDataFromFile() {
 
         Parser parser = new Parser();
-
         Path f = Paths.get(TASKS_FILE_PATH);
+
+        // No saved data file, do nothing
         if (!Files.exists(f)) {
-            return; // No saved data, do nothing
+            return;
         }
 
         // Purge taskList
@@ -52,28 +54,26 @@ public class Storage {
             while ((currentLine = br.readLine()) != null) {
                 String[] taskInfo = currentLine.split(",");
 
-                if (taskInfo[0].compareTo("T") == 0)
+                if (taskInfo[0].compareTo("T") == 0) {
                     tasklist.add(new Todo(
                             Boolean.parseBoolean(taskInfo[1]),
                             taskInfo[2]));
-                if (taskInfo[0].compareTo("D") == 0)
+                } else if (taskInfo[0].compareTo("D") == 0) {
                     tasklist.add(new Deadline(
                             Boolean.parseBoolean(taskInfo[1]),
                             taskInfo[2],
                             parser.parseDateTime(taskInfo[3], 'T')));
-                if (taskInfo[0].compareTo("E") == 0)
+                } else if (taskInfo[0].compareTo("E") == 0) {
                     tasklist.add(new Event(
                             Boolean.parseBoolean(taskInfo[1]),
                             taskInfo[2],
                             parser.parseDateTime(taskInfo[3], 'T'),
                             parser.parseDateTime(taskInfo[4], 'T')));
-            }
-
-
+                }
+            } // while loop
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             new Ui().warn("Corrupt data. Cannot load from file.");
         }
     }

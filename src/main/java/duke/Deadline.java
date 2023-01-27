@@ -24,17 +24,23 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toCsv() {
         return "D," + super.toCsv() + "," + by;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString()
                 + " (By: "
                 + by.getDayOfMonth() + " " + by.getMonth() + " " + by.getYear() + " "
-                + by.getHour() + by.getMinute() // bugalert: may not always be 4-digits
+                + by.getHour() + by.getMinute() // TODO: bugalert (may not always be 4-digits)
                 + ")";
     }
 }

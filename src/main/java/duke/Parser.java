@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
 import java.util.stream.Stream;
 
 public class Parser {
@@ -38,10 +39,11 @@ public class Parser {
     private LocalTime parseTime(String timeStr, char seperator) {
         String[] time = timeStr.split(String.valueOf(seperator));
         int[] timeInfo = Stream.of(time).mapToInt(Integer::parseInt).toArray();
-        if (timeInfo.length == 2)
+        if (timeInfo.length == 2) {
             return LocalTime.of(timeInfo[0], timeInfo[1]);
-        else
+        } else {
             return LocalTime.of(timeInfo[0], timeInfo[1], timeInfo[2]);
+        }
     }
 
     // Can parse "YYYY-MM-DD HH:MM:SS" or "YYYY-MM-DD HH:MM"
