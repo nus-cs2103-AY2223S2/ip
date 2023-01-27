@@ -7,13 +7,13 @@ import ui.TextUi;
 /**
  * A command for finding a class
  */
-public class FindTaskCommand extends TaskCommand {
+public class FindCommand extends TaskCommand {
     /**
      * Default constructor
      * @param command the user-input command
      * @param doesPrint whether to print messaegs
      */
-    public FindTaskCommand(String command, boolean doesPrint) throws DukeException {
+    public FindCommand(String command, boolean doesPrint) throws DukeException {
         super(command, doesPrint, 2);
     }
 

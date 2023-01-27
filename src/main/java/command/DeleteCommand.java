@@ -10,14 +10,14 @@ import ui.TextUi;
 /**
  * Command for deleting a task
  */
-public class DeleteTaskCommand extends TaskCommand {
+public class DeleteCommand extends TaskCommand {
 
     /**
      * Default constructor
      * @param command the user-input command
      * @param doesPrint whether to print messages
      */
-    public DeleteTaskCommand(String command, boolean doesPrint) throws DukeException {
+    public DeleteCommand(String command, boolean doesPrint) throws DukeException {
         super(command, doesPrint, 2);
     }
 

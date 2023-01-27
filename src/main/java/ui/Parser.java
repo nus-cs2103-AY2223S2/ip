@@ -20,12 +20,12 @@ public class Parser {
             entry("list", "ListCommand"),
             entry("mark", "MarkCommand"),
             entry("unmark", "UnmarkCommand"),
-            entry("delete", "DeleteTaskCommand"),
+            entry("delete", "DeleteCommand"),
             entry("todo", "TodoCommand"),
             entry("event", "EventCommand"),
             entry("deadline", "DeadlineCommand"),
             entry("bye", "ExitCommand"),
-            entry("find", "FindTaskCommand")
+            entry("find", "FindCommand")
     );
 
     /**
