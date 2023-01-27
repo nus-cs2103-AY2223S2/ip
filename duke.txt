@@ -1,5 +1,0 @@
-[T][ ] play computer
-[T][ ] bench
-[T][ ] visit park
-[D][ ] return book(by: Sunday)
-[E][ ] project meeting (from: Mon 2pm to: 4pm)
