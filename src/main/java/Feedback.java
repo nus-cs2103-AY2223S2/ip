@@ -24,6 +24,10 @@ public class Feedback {
         display("Hello I'm\n" + logo + "What can I do for you?\n\n" + commands());
     }
 
+    public static void exit() {
+        display("Bye. Hope to see you again soon!");
+    }
+
     public void addedTask(Task task, int size) {
         display("Got it. I've added this task:\n"
                 + task.toString() + "\n"
@@ -56,10 +60,6 @@ public class Feedback {
 
     public void help() {
         display(commands());
-    }
-
-    public static void exit() {
-        display("Bye. Hope to see you again soon!");
     }
 
     public void invalid() {

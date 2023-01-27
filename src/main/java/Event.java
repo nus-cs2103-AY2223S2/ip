@@ -15,8 +15,16 @@ public class Event extends Task {
         this.endDT = endDT;
     }
 
+    public String getStartDT() {
+        return this.startDT;
+    }
+
+    public String getEndDT() {
+        return this.endDT;
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startDT + " to: " + endDT + ")";
+        return "[D]" + super.toString() + " (from: " + startDT + " to: " + endDT + ")";
     }
 }

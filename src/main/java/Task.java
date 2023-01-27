@@ -1,5 +1,5 @@
 /**
- * The Task class represent a single task added by the user.
+ * The Task class represents one single task added by the user.
  *
  * @author Chia Jeremy
  */
@@ -22,13 +22,16 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    private String getStatusIcon() {
-        return (this.isDone ? "[X] " : "[ ] ");   // mark done task with X
+    public String getStatusIcon() {
+        return (this.isDone ? "X" : " ");   // mark done task with X
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     @Override
     public String toString() {
-        return this.getStatusIcon() + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
-
