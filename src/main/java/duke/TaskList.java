@@ -1,12 +1,4 @@
-package duke.util;
-
-import duke.Command;
-import duke.Duke;
-import duke.DukeException;
-import duke.taskers.Deadline;
-import duke.taskers.Event;
-import duke.taskers.Task;
-import duke.taskers.Todo;
+package duke;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -51,7 +43,7 @@ public class TaskList {
 
 
     /**
-     * Adds the Task inside.
+     * Adds the duke.Task inside.
      *
      * @param text The text containing the information of the command.
      * @param add Type of add command use.
@@ -99,7 +91,7 @@ public class TaskList {
 
 
     /**
-     * Finds the matching Task with respect to the keyword.
+     * Finds the matching duke.Task with respect to the keyword.
      *
      * @param keyword The keyword string.
      * @return An array of Tasks that contain that matching keyword.

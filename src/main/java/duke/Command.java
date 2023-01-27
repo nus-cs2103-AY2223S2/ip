@@ -12,7 +12,7 @@ public enum Command {
     FIND;
 
     /**
-     * Checks if the string is a valid Command enum.
+     * Checks if the string is a valid duke.Command enum.
      *
      * @param str String to be checked.
      * @return boolean on whether it is a valid enum.

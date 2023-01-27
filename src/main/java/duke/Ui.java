@@ -1,6 +1,4 @@
-package duke.util;
-
-import duke.taskers.Task;
+package duke;
 
 import java.util.ArrayList;
 
@@ -54,7 +52,7 @@ public class Ui {
     /**
      * Response when task is marked.
      *
-     * @param t Task to be marked.
+     * @param t duke.Task to be marked.
      */
     public void markResponse(Task t) {
         String str = " Nice! I've marked this task as done!:\n" + "       " + t.toString();
@@ -64,7 +62,7 @@ public class Ui {
     /**
      * Response when task is unmarked.
      *
-     * @param t Task to be unmarked.
+     * @param t duke.Task to be unmarked.
      */
     public void unmarkResponse(Task t) {
         String str = " OK, I've marked this task as not done yet:\n" + "       " + t.toString();
@@ -74,7 +72,7 @@ public class Ui {
     /**
      * Response when item is added.
      *
-     * @param t Task to be added.
+     * @param t duke.Task to be added.
      * @param arr Array for the task to be added to.
      */
     public void addItemResponse(Task t, ArrayList<Task> arr) {
@@ -85,7 +83,7 @@ public class Ui {
     }
 
     /**
-     * Prints response when user exits Duke.
+     * Prints response when user exits duke.Duke.
      */
     public void sayGoodBye() {
         this.printWithLines(" Bye! Hope to see you again soon!");

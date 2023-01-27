@@ -1,12 +1,4 @@
-package duke.util;
-
-import duke.Command;
-import duke.Duke;
-import duke.DukeException;
-import duke.taskers.Deadline;
-import duke.taskers.Event;
-import duke.taskers.Task;
-import duke.taskers.Todo;
+package duke;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -98,7 +90,7 @@ public class Storage {
                 loadedTasks.add(thisTask);
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            // do nothing
         }
         return loadedTasks;
     }

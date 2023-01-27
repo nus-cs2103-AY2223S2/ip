@@ -1,4 +1,4 @@
-package duke.taskers;
+package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +11,7 @@ public class Event extends Task {
     private static final DateTimeFormatter FORMATTER_FOR_STRING_ONLY = DateTimeFormatter.ofPattern("d MMM uuuu h.mma");
 
     /**
-     * Event constructor.
+     * duke.Event constructor.
      * @param desc Description of what the event is.
      * @param isDone True if event is done, false if event is not done.
      * @param start Starting date of event.

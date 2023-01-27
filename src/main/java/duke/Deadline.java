@@ -1,4 +1,4 @@
-package duke.taskers;
+package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +11,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Deadline constructor.
+     * duke.Deadline constructor.
      *
      * @param desc Description of what the deadline is.
      * @param isDone True if the deadline is done. false if the deadline is not done.

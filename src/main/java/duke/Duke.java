@@ -1,11 +1,5 @@
 package duke;
 
-import duke.taskers.Task;
-import duke.util.Parser;
-import duke.util.Storage;
-import duke.util.TaskList;
-import duke.util.Ui;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -23,7 +17,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Duke constructor.
+     * duke.Duke constructor.
      *
      * @param filePathName The string representing the path to the file duke.
      */

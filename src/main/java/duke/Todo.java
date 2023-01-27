@@ -1,4 +1,4 @@
-package duke.taskers;
+package duke;
 
 public class Todo extends Task {
 
@@ -27,7 +27,7 @@ public class Todo extends Task {
     /**
      * String representation of the todo.
      *
-     * @return Todo string.
+     * @return duke.Todo string.
      */
     @Override
     public String toString() {

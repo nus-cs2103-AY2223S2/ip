@@ -1,7 +1,4 @@
-package duke.util;
-
-import duke.Command;
-import duke.DukeException;
+package duke;
 
 public class Parser {
 
@@ -9,7 +6,7 @@ public class Parser {
      * Parses command.
      *
      * @param command String to be parsed.
-     * @return The Command type.
+     * @return The duke.Command type.
      */
     public static Command parseCommand(String command) throws DukeException {
         if (!Command.contains(command)) {

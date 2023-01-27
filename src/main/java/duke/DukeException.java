@@ -3,7 +3,7 @@ package duke;
 public class DukeException extends Exception {
 
     /**
-     * DukeException constructor. passes on errorMessage into superclass.
+     * duke.DukeException constructor. passes on errorMessage into superclass.
      *
      * @param errorMessage The description of the duke exception.
      */
