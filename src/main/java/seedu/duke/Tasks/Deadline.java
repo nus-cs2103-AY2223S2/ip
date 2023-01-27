@@ -10,6 +10,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline
+     *
      * @param description String description of the task
      * @param deadline deadline of the task in LocalDateTime
      */
@@ -19,6 +20,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Storage's creation of Deadline when reading save file
+     *
      * @param description String description of the task
      * @param isDone whether the task has been marked
      * @param taskType String representing the type of task

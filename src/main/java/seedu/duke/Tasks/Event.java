@@ -11,6 +11,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event
+     *
      * @param description String description of the task
      * @param from /from timestamp of the task in LocalDateTime
      * @param to /to timestamp of the task in LocalDateTime
@@ -21,6 +22,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Storage's creation of Deadline when reading save file
+     *
      * @param description String description of the task
      * @param isDone whether the task has been marked
      * @param taskType String representing the type of task

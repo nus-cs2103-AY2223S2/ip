@@ -9,6 +9,7 @@ public abstract class Task {
 
     /**
      *  Constructor for Task
+     *
      *  @param description String description of the task
      *  @param isDone whether the task has been marked
      *  @param taskType String representing the type of task
@@ -21,6 +22,7 @@ public abstract class Task {
 
     /**
      * Gets the status checkbox
+     *
      * @return String of the status checkbox
      */
     public String getStatusCheckbox() {
@@ -29,6 +31,7 @@ public abstract class Task {
 
     /**
      * Gets the boxed Task type
+     *
      * @return String of the boxed Task type
      */
     public String getTaskTypeBox() {
@@ -37,6 +40,7 @@ public abstract class Task {
 
     /**
      * Marks a marked Task
+     *
      * @return the new marked Task
      * @throws DukeException if Task is already marked
      */
@@ -44,6 +48,7 @@ public abstract class Task {
 
     /**
      * Marks an unmarked Task
+     *
      * @return the new unmarked Task
      * @throws DukeException if Task is already unmarked
      */
@@ -51,6 +56,7 @@ public abstract class Task {
 
     /**
      * Formats the Task into a format readable by Storage
+     *
      * @return String of the formatted Task
      */
     abstract public String formatTask();

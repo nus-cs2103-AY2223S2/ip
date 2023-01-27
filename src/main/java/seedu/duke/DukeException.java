@@ -5,6 +5,7 @@ public class DukeException extends Exception {
 
     /**
      *  Constructor for DukeException
+     *
      *  @param errorMessage Message to be printed out when exception occurs
      */
     public DukeException(String errorMessage) {
@@ -14,6 +15,7 @@ public class DukeException extends Exception {
 
     /**
      *  Gets the error message for the exception faced
+     *
      *  @return Reason for error faced
      */
     public String getErrorMessage() {

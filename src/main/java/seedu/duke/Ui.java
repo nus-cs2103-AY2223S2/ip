@@ -14,6 +14,7 @@ public class Ui {
 
     /**
      * prints out current list of Tasks for user to see
+     *
      * @param taskList current Task List
      */
     public void showList(TaskList taskList) {
@@ -26,6 +27,7 @@ public class Ui {
 
     /**
      * prints out line after successfully adding a Task for user to see
+     *
      * @param newTask Task that has been added
      * @param updatedList updated Task List
      */
@@ -37,6 +39,7 @@ public class Ui {
 
     /**
      * prints out line after successfully deleting a Task for user to see
+     *
      * @param deletedTask Task that has been deleted
      * @param updatedList updated Task List
      */
@@ -48,6 +51,7 @@ public class Ui {
 
     /**
      * prints out line after successfully marking a Task for user to see
+     *
      * @param markedTask Task that has been marked
      */
     public void sayMarkedTask(Task markedTask) {
@@ -57,6 +61,7 @@ public class Ui {
 
     /**
      * prints out line after successfully unmarking a Task for user to see
+     *
      * @param unmarkedTask Task that has been unmarked
      */
     public void sayUnmarkedTask(Task unmarkedTask) {

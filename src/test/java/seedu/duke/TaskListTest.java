@@ -10,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
 
+    /**
+     * Testing script for adding Tasks to TaskList
+     */
     @Test
     public void addTask_success() {
         TaskList taskList = new TaskList();
@@ -21,6 +24,9 @@ public class TaskListTest {
         assertEquals(updatedTaskList, taskList);
     }
 
+    /**
+     * Testing script for deleted index zero Tasks from TaskList
+     */
     @Test
     public void deleteIndexZeroTask_success() {
         // add task first

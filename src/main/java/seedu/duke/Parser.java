@@ -11,6 +11,7 @@ public class Parser {
 
     /**
      *  Checks the validity of the command
+     *
      *  @param command String of the command sent by user
      *  @param listOfCommands String array of all the commands
      *  @return String of the command if valid
@@ -26,6 +27,7 @@ public class Parser {
 
     /**
      *  Checks whether task number is given
+     *
      *  @param inputStrings String array of each word input by the user
      *  @return String of the task number if it exists
      */
@@ -39,6 +41,7 @@ public class Parser {
 
     /**
      *  Checks whether task number is numeric & valid
+     *
      *  @param taskList Current state of TaskList
      *  @param taskNumber String of the taskNumber
      *  @return Integer of the task number (in 0-indexing) if it is valid
@@ -58,6 +61,7 @@ public class Parser {
 
     /**
      *  Checks whether description for Task is given
+     *
      *  @param description Description of the Task
      */
     private void checkDescription(String description) throws DukeException {
@@ -68,6 +72,7 @@ public class Parser {
 
     /**
      *  Checks whether deadline is given
+     *
      *  @param inputStrings String array of each word input by the user
      *  @return Index of /by in the array
      */
@@ -82,6 +87,7 @@ public class Parser {
 
     /**
      *  Checks whether starting time stamp for Event is given
+     *
      *  @param inputStrings String array of each word input by the user
      *  @return Index of /from in splitInput
      */
@@ -96,6 +102,7 @@ public class Parser {
 
     /**
      *  Checks whether ending time stamp for Event is given
+     *
      *  @param inputStrings String array of each word input by the user
      *  @return Index of /to in splitInput
      */
@@ -110,6 +117,7 @@ public class Parser {
 
     /**
      *  Converts String timestamp into LocalDateTime object
+     *
      *  @param timestamp String of the timestamp given
      *  @return LocalDateTime object of timestamp
      */
@@ -137,6 +145,7 @@ public class Parser {
 
     /**
      *  Converts String timestamp into LocalDateTime object
+     *
      *  @param inputStrings String array of each word input by the user
      *  @param listOfCommands String array of all the commands
      *  @param taskList Current state of TaskList

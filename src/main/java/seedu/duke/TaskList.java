@@ -9,6 +9,7 @@ public class TaskList {
 
     /**
      * Constructor for TaskList
+     *
      * @param tasks List of Task to be initialized
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -24,6 +25,7 @@ public class TaskList {
 
     /**
      * Retrieves the Task at the specified index (in 0-indexing)
+     *
      * @param index of the Task in list shown
      * @return Task at the specified index (0-indexing)
      */
@@ -33,6 +35,7 @@ public class TaskList {
 
     /**
      * Adds Task to the TaskList
+     *
      * @param newTask Task to be added
      * @return Updated TaskList
      */
@@ -44,6 +47,7 @@ public class TaskList {
 
     /**
      * Deletes Task from the TaskList
+     *
      * @param index Index of Task to be added (in 0-indexing)
      * @return Updated TaskList
      */
@@ -55,6 +59,7 @@ public class TaskList {
 
     /**
      * Marks Task from the TaskList
+     *
      * @param index Index of Task to be marked (in 0-indexing)
      * @return Updated TaskList
      */
@@ -68,6 +73,7 @@ public class TaskList {
 
     /**
      * Unmarks Task from the TaskList
+     *
      * @param index Index of Task to be unmarked (in 0-indexing)
      * @return Updated TaskList
      */
@@ -81,6 +87,7 @@ public class TaskList {
 
     /**
      * Format Task to be saved as String in save file
+     *
      * @param index Index of Task to be unmarked (in 0-indexing)
      * @return String of formatted Task
      */
@@ -97,6 +104,7 @@ public class TaskList {
 
     /**
      * Checks whether contents in two TaskLists are similar
+     *
      * @param o Object to be compared with TaskList for equality
      * @return true if TaskLists have similar content, or else false
      */

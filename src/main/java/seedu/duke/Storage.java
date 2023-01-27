@@ -18,6 +18,7 @@ public class Storage {
 
     /**
      *  Constructor for Storage
+     *
      *  @param fileName String of the name of the save file
      */
     Storage(String fileName) {
@@ -27,6 +28,7 @@ public class Storage {
 
     /**
      *  Coverts the text in save file into a TaskList object
+     *
      *  @return TaskList object of the save file
      */
     public TaskList readFile() throws DukeException {
@@ -66,6 +68,7 @@ public class Storage {
 
     /**
      *  Formats the String of the LocalDateTime time stamp into a LocalDateTime object
+     *
      *  @param timeStamp String of the LocalDateTime time stamp
      *  @return LocalDateTime object of the time stamp
      */
@@ -78,6 +81,7 @@ public class Storage {
 
     /**
      *  Coverts the TaskList object into a String for the save file
+     *
      *  @param taskList TasKList object to be saved into save file
      */
     public void writeFile(TaskList taskList) {

@@ -13,6 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class StorageTest {
+
+    /**
+     * Testing script for reading save file with empty input
+     */
     @Test
     public void readFile_emptyInput_emptyTaskList(){
         Storage storage = new Storage("duke.txt");
@@ -25,6 +29,9 @@ public class StorageTest {
         }
     }
 
+    /**
+     * Testing script for reading save file with three inputs
+     */
     @Test
     public void writeAndReadFile_threeInputs_taskListWithThreeTasks(){
         Storage storage = new Storage("duke.txt");

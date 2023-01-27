@@ -6,6 +6,7 @@ public class Todo extends Task {
 
     /**
      * Constructor for Deadline
+     *
      * @param description String description of the task
      */
     public Todo(String description) {
@@ -14,6 +15,7 @@ public class Todo extends Task {
 
     /**
      * Constructor for Storage's creation of Deadline when reading save file
+     *
      * @param description String description of the task
      * @param isDone whether the task has been marked
      * @param taskType String representing the type of task
