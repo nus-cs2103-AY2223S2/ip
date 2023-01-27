@@ -1,11 +1,8 @@
-//import java.util.HashMap;
+package duke.task;//import java.util.HashMap;
+import duke.exception.DukeException;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.io.File;  // Import the File class
-import java.io.FileWriter;   // Import the FileWriter class
-import java.io.IOException;  // Import the IOException class to handle errors
-import java.util.Scanner;
+
 
 public class TaskList {
     protected final String SAVE_DIR = "./data";
@@ -27,25 +24,31 @@ public class TaskList {
     }
 
     //==== OVERLOADED METHOD addTask =====
-    public String addTask(String str) {
-        Task newTask = new ToDo(str);
-        this.taskList.add(newTask);
+    public String addTask(Task task) {
+        this.taskList.add(task);
         taskCount++;
-        return addTaskMessage(newTask);
+        return addTaskMessage(task);
     }
-    public String addTask(String task, String deadline) throws DukeException {
-        Task newTask = new Deadline(task, deadline);
-        this.taskList.add(newTask);
-        taskCount++;
-        return addTaskMessage(newTask);
-    }
-
-    public String addTask(String task, String from, String to) throws DukeException {
-        Task newTask = new Event(task, from, to);
-        this.taskList.add(newTask);
-        taskCount++;
-        return addTaskMessage(newTask);
-    }
+//
+//    public String addTask(String str) {
+//        duke.Task newTask = new ToDo(str);
+//        this.taskList.add(newTask);
+//        taskCount++;
+//        return addTaskMessage(newTask);
+//    }
+//    public String addTask(String task, String deadline) throws DukeException {
+//        duke.Task newTask = new Deadline(task, deadline);
+//        this.taskList.add(newTask);
+//        taskCount++;
+//        return addTaskMessage(newTask);
+//    }
+//
+//    public String addTask(String task, String from, String to) throws DukeException {
+//        duke.Task newTask = new Event(task, from, to);
+//        this.taskList.add(newTask);
+//        taskCount++;
+//        return addTaskMessage(newTask);
+//    }
     //======================================
 
     private String deleteTaskMessage(Task task) {
@@ -92,20 +95,6 @@ public class TaskList {
         return result;
     }
 
-    public void saveTaskList() {
-        try {
-            boolean dataDir = new File(SAVE_DIR).mkdirs();
-            File txtFile = new File(SAVE_DIR + SAVE_NAME);
-            FileWriter myWriter = new FileWriter("./data/duke.txt");
-            myWriter.write(this.encode());
-            myWriter.close();
-//            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-//            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
-
     public String encode() {
         String result = "";
         for (int i = 0; i < this.taskCount; i++) {
@@ -114,20 +103,8 @@ public class TaskList {
         return result;
     }
 
-    public void loadFromSave() throws DukeException {
-        File file = new File(SAVE_DIR + SAVE_NAME);
-        if (file.exists()) {
-            try {
-                Scanner scanner = new Scanner(file);
-                while (scanner.hasNextLine()) {
-                    String nextLine = scanner.nextLine();
-                    taskList.add(Task.decode(nextLine));
-                    this.taskCount++;
-                }
-                scanner.close();
-            } catch (IOException e) {
-                throw new DukeException("Error when loading from save");
-            }
-        }
+    public void loadTasks(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+        this.taskCount = taskList.size();
     }
 }

@@ -1,17 +1,19 @@
+package duke.ui;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Printer {
+public class Ui {
     private String str;
     private int maxCharPerLine = 100;
     private int maxLines = 500;
     private String horizontal;
 
-    public Printer() {
+    public Ui() {
         this.horizontal = "_".repeat(this.maxCharPerLine + 4);
     }
 
-    public Printer(int maxCharPerLine, int maxLines) {
+    public Ui(int maxCharPerLine, int maxLines) {
         this.maxLines = maxLines;
         this.maxCharPerLine = maxCharPerLine;
         this.horizontal = "_".repeat(maxCharPerLine + 4);
