@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * The duke.commands.Command class is the base class for all of Duke's command.
+ * The Command class is the skeleton class for all of Duke's command.
  *
  * @author Chia Jeremy
  */
