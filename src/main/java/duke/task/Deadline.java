@@ -14,7 +14,6 @@ public class Deadline extends Task {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             this.by = LocalDateTime.parse(by, formatter);
-
         } catch (DateTimeException e) {
             throw new DukeException("Invalid date/time!");
         }
@@ -22,11 +21,13 @@ public class Deadline extends Task {
 
     @Override
     public String toSaveString() {
-        return "D$$$" + super.toSaveString() + "$$$" + by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return "D$$$" + super.toSaveString() + "$$$"
+                + by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 }

@@ -11,7 +11,6 @@ import java.io.IOException;
 public class Storage {
     private String directory;
     private String path;
-
     public Storage(String d, String p) {
         this.directory = d;
         this.path = p;
