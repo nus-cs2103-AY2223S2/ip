@@ -4,6 +4,8 @@ import duke.command.Command;
 
 import duke.exception.DukeException;
 
+import duke.ui.Ui;
+
 /** Class that encapsulates the Duke chatbot */
 public class Duke {
 

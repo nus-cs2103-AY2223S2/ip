@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
+import duke.ui.Ui;
 
 public class AddCommand extends Command {
 

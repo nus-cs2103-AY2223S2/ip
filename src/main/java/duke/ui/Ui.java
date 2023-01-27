@@ -1,7 +1,7 @@
-package duke;
+package duke.ui;
 
+import duke.TaskList;
 import duke.exception.DukeException;
-
 import duke.task.Task;
 
 /** Class that handles user interface */

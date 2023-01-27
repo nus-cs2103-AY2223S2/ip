@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
+import duke.ui.Ui;
 
 /** Class that represents a user command */
 public abstract class Command {

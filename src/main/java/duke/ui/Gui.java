@@ -1,4 +1,6 @@
-package duke;
+package duke.ui;
+
+import duke.Duke;
 
 import javafx.application.Application;
 
@@ -29,7 +31,6 @@ public class Gui extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
 
     public Gui() {
         this.duke = new Duke(dirPath);
