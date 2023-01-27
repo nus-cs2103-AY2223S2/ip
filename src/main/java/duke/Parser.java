@@ -23,7 +23,7 @@ public class Parser {
         this.ui = ui;
     }
     /**
-     * method for list, mark, unmark, delete, todo, deadline, event commands
+     * method for list, mark, unmark, delete, to do, deadline, event commands
      * @param cmd
      * @param  tasks
      * @return command

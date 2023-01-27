@@ -36,9 +36,9 @@ public class Duke {
         storage.updateFile(tasks);
         Ui.exit();
     }
-
     /**
      * main method
+     * @param  args
      */
     public static void main(String[] args) throws IOException {
         new Duke("data/tasks.txt").run();
