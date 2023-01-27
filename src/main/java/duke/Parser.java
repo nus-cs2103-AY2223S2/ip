@@ -88,6 +88,15 @@ public class Parser {
                 arguments.add(taskIndex);
                 return new Command("delete", arguments);
             }
+        } else if (input.startsWith("find")) {
+            if (!input.matches("^find .+$")) {
+                arguments.add("What task are you looking for?\n");
+                return new Command("invalid", arguments);
+            } else {
+                String taskToFind = input.split(" ", 2)[1];
+                arguments.add(taskToFind);
+                return new Command("find", arguments);
+            }
         } else {
             return new Command("noMatch", arguments);
         }

@@ -149,6 +149,34 @@ public class CommandHandlerTest {
                 )
         );
     }
+
+    @Test
+    public void findTasks_tasksPresent_tasksFound() {
+        List<String> argument = new ArrayList<String>();
+        argument.add("stuff");
+        assertEquals("I found these tasks in your task list!\n[T][ ] stuff turkey\n[T][ ] stuff chicken\n",
+                new CommandHandler().handleCommand(
+                        new Command("find", argument),
+                        new TaskList().add(new Todo("stuff turkey"))
+                                .add(new Todo("stuff chicken"))
+                                .add(new Todo("don't fill birds"))
+                )
+        );
+    }
+
+    @Test
+    public void findTasks_tasksNotPresent_noTasksFound() {
+        List<String> argument = new ArrayList<String>();
+        argument.add("cook");
+        assertEquals("You don't have any tasks matching that description!\n",
+                new CommandHandler().handleCommand(
+                        new Command("find", argument),
+                        new TaskList().add(new Todo("stuff turkey"))
+                                .add(new Todo("stuff chicken"))
+                                .add(new Todo("don't fill birds"))
+                )
+        );
+    }
     
     
 }

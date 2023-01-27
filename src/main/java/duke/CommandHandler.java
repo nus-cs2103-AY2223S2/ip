@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class CommandHandler {
     CommandHandler() {}
@@ -43,7 +44,9 @@ public class CommandHandler {
             //Fallthrough 
         case "invalid":
             return invalid(command.getArguments().get(0));
-            //Fallthrough 
+            //Fallthrough
+        case "find":
+            return findTasks(command.getArguments().get(0), tasks);
         }
         return "";
     }
@@ -145,5 +148,19 @@ public class CommandHandler {
     
     private String invalid(String reply) {
         return reply;
+    }
+
+    private String findTasks(String taskToFind, TaskList taskList) {
+        String response = "";
+        TaskList foundTasks = taskList.find(taskToFind);
+        if (foundTasks.isEmpty()) {
+            response = "You don't have any tasks matching that description!\n";
+        } else {
+            response = "I found these tasks in your task list!\n";
+            for (Task t : foundTasks.getTasks()) {
+                response += t.printTask() + "\n";
+            }
+        }
+        return response;
     }
 }

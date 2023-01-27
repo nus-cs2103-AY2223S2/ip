@@ -148,4 +148,33 @@ public class ParserTest {
                 new Parser().parseCommand("event /from today /to next year"));
     }
 
+    @Test
+    public void parseCommand_findValidInput() {
+        List<String> argument = new ArrayList<>();
+        argument.add("stuff");
+        assertEquals(new Command("find", argument),
+                new Parser().parseCommand("find stuff"));
+    }
+    @Test
+    public void parseCommand_findValidInputWithSpaces() {
+        List<String> argument = new ArrayList<>();
+        argument.add("stuff turkey");
+        assertEquals(new Command("find", argument),
+                new Parser().parseCommand("find stuff turkey"));
+    }
+    @Test
+    public void parseCommand_findInvalidInput() {
+        List<String> argument = new ArrayList<>();
+        argument.add("What task are you looking for?\n");
+        assertEquals(new Command("invalid", argument),
+                new Parser().parseCommand("find"));
+    }
+    @Test
+    public void parseCommand_findInvalidInputWithSpace() {
+        List<String> argument = new ArrayList<>();
+        argument.add("What task are you looking for?\n");
+        assertEquals(new Command("invalid", argument),
+                new Parser().parseCommand("find "));
+    }
+
 }
