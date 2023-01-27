@@ -5,7 +5,7 @@ import exception.DukeException;
 import parser.InputParser;
 
 import response.Response;
-import storage.LocalStorage;
+import storage.Storage;
 import storage.TaskList;
 
 public class Duke {
@@ -28,8 +28,8 @@ public class Duke {
         Duke.print(intro);
 
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        LocalStorage localStorage = new LocalStorage(); // Create a LocalStorage object
-        TaskList taskList = localStorage.loadTaskList();  // Create a TaskList object based on saved list
+        Storage storage = new Storage(); // Create a Storage object
+        TaskList taskList = storage.loadTaskList();  // Create a TaskList object based on saved list
 
 
         while (true) {
@@ -52,7 +52,7 @@ public class Duke {
 
                 // If the response is anything other than list, save the to do list
                 if (!input.getInputType().equals("LIST")) {
-                    localStorage.saveTaskList(taskList);
+                    storage.saveTaskList(taskList);
                 }
 
                 // Print the output message

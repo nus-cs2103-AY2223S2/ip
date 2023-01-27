@@ -15,10 +15,10 @@ import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class LocalStorage {
+public class Storage {
     private Path path;
 
-    public LocalStorage() {
+    public Storage() {
         this.path = Paths.get("./data/duke.txt");
     }
 
