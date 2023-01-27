@@ -64,6 +64,12 @@ public class TaskList {
         return chosen;
     }
 
+    /**
+     * Finds all matching tasks containing the keyword
+     *
+     * @param keyword
+     * @return list of tasks matching the keyword
+     */
     public ArrayList<Task> getMatchingTasks(String keyword) {
         ArrayList<Task> selected = new ArrayList<>();
         for (Task task: tasks) {

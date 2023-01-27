@@ -44,6 +44,10 @@ public class Ui {
 
     }
 
+    /**
+     * Displays all matching tasks in TaskList to user.
+     *
+     */
     public void showMatchingTasksMessage(ArrayList<Task> matchingTasks) {
         if (matchingTasks.size() != 0) {
             System.out.println("Here are the matching tasks in your list:");
