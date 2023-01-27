@@ -63,7 +63,10 @@ public class Ui {
     public static void showDeleteMessage() {
         System.out.println("\tNoted. I've removed this task:");
     }
-    public static void addOnTaskMsg(TaskList list, int num) {
+    /**
+     * The method of addTaskMsg()
+     */
+    public static void addTaskMsg(TaskList list, int num) {
         System.out.println("\tGot it. I've added this task:");
     }
     /**
@@ -74,6 +77,10 @@ public class Ui {
 
     }
 
+    /**
+     * The method of DukeExeptionMsg()
+     * @arg e the exception catched
+     */
     public void DukeExceptionMsg(DukeException e) {
         System.out.printf("\t%s\n", e);
     }
