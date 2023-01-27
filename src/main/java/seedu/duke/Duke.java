@@ -1,8 +1,8 @@
-package jarvis;
+package seedu.duke;
 
 import java.io.FileNotFoundException;
 
-public class Jarvis {
+public class Duke {
 
     private Storage storage;
     private ToDoList todolist;
@@ -10,7 +10,7 @@ public class Jarvis {
     private Parser parser;
     boolean isBye;
 
-    public Jarvis (String dataPath) {
+    public Duke(String dataPath) {
         storage = new Storage(dataPath);
         todolist = new ToDoList();
         ui = new Ui();
@@ -40,6 +40,6 @@ public class Jarvis {
 
 
     public static void main(String[] args) {
-        new Jarvis("./data/jarvis.txt").run();
+        new Duke("./data/jarvis.txt").run();
     }
 }

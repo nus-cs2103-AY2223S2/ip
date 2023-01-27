@@ -1,4 +1,4 @@
-package jarvis;
+package seedu.duke;
 
 import java.io.IOException;
 import java.time.LocalDate;

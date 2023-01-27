@@ -1,4 +1,4 @@
-package jarvis;
+package seedu.duke;
 
 public class AsciiArt {
 

@@ -1,4 +1,4 @@
-package jarvis;
+package seedu.duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
