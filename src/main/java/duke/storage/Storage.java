@@ -1,10 +1,10 @@
-import exception.EmptyStorageException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+package duke.storage;
+
+import duke.exception.EmptyStorageException;
+import duke.task.*;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -79,5 +79,34 @@ public class Storage {
                 this.list.add(ev);
                 ev.markStatus(inputArr[1]);
         }
+    }
+
+    public void updateStorage() throws IOException {
+        Task task;
+        StringBuilder sb = new StringBuilder();
+        FileWriter fw = new FileWriter(filePath);
+        for (int i = 0; i < this.list.size(); i++) {
+            task = this.list.get(i);
+            String taskName = task.getName();
+//            System.out.println(taskName);
+            sb.append(taskName); sb.append("|");
+            if (task.getStatusIcon().equals("X")) {
+                sb.append("1");
+            } else {
+                sb.append("0");
+            }
+            sb.append("|");
+            sb.append(task.getDescription());
+            if (taskName.equals("D")) {
+                Deadline d = (Deadline) task;
+                sb.append("|"); sb.append(d.getDateTime());
+            } else if (taskName.equals("E")) {
+                Event ev = (Event) task;
+                sb.append("|"); sb.append(ev.getFrom()); sb.append("|"); sb.append(ev.getTo());
+            }
+            sb.append("\n");
+        }
+        fw.write(sb.toString().trim());
+        fw.close();
     }
 }

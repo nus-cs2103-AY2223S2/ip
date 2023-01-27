@@ -1,4 +1,4 @@
-package exception;
+package duke.exception;
 
 public class EmptyDescException extends DukeException {
     String taskType;

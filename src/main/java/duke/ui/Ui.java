@@ -1,16 +1,17 @@
-import task.Task;
-import task.TaskList;
+package duke.ui;
 
-import java.io.IOException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
-    private String separator;
-    private Scanner sc;
+    private final String separator;
+    private final Scanner sc;
 
     public Ui () {
         this.separator = "____________________________________________________________";
-//        this.sc = new Scanner(System.in);
+        this.sc = new Scanner(System.in);
     }
 
     public void welcome() {
@@ -30,12 +31,22 @@ public class Ui {
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⣧⠀⠀⠀⠀⠀⣸⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣷⣤⣤⣤⡾⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
                 "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠿⢶⣾⣶⠾⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀";
-        System.out.println("Good ta see yer dawg, Duke's at yer service.\n" + dog);
+        System.out.println("Good ta see yer dawg, Duke.Duke's at yer service.\n" + dog);
     }
 
-//    public String readCommand() {
-//
-//    }
+    private boolean shouldIgnore(String inputLine) {
+        return inputLine.trim().isEmpty();
+    }
+
+    public String readCommand() {
+        String command = sc.nextLine();
+
+        while (shouldIgnore(command)) {
+            command = sc.nextLine();
+        }
+
+        return command;
+    }
 
     public void showLine() {
         System.out.println(this.separator);
@@ -58,19 +69,19 @@ public class Ui {
         System.out.println(separator);
     }
 
-    public void printMarkStatus(TaskList taskList, String index) throws IOException {
+    public void printMarkStatus(TaskList taskList, int index) {
         taskList.markStatus(index);
         System.out.println(separator);
-        System.out.println("The task is marked, dawg");
-        System.out.println(taskList.getTask(Integer.parseInt(index) - 1));
+        System.out.println("The Duke.task is marked, dawg");
+        System.out.println(taskList.getTask(index - 1));
         System.out.println(separator);
     }
 
-    public void printUnMarkStatus(TaskList taskList, String index) throws IOException {
+    public void printUnMarkStatus(TaskList taskList, int index) {
         taskList.unMarkStatus(index);
         System.out.println(separator);
         System.out.println("Gotcha dawg, unmarked");
-        System.out.println(taskList.getTask(Integer.parseInt(index) - 1));
+        System.out.println(taskList.getTask(index - 1));
         System.out.println(separator);
     }
 
@@ -84,7 +95,7 @@ public class Ui {
 
     public void printDelete(TaskList taskList, Task task) {
         System.out.println(separator);
-        System.out.println("Removing your task? It's gone now RUFF:");
+        System.out.println("Removing your Duke.task? It's gone now RUFF:");
         System.out.println("  " + task);
         System.out.println("Now you have " + taskList.listSize() + " in the list!");
         System.out.println(separator);
