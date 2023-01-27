@@ -77,6 +77,11 @@ public class Ui {
         );
     }
 
+    /**
+     * Prints a list of tasks that have been filtered with a pattern.
+     *
+     * @param tasks List of tasks to be printed.
+     */
     public void listMatchingTasks(TaskList tasks) {
         respond(
             "Here are the matching tasks in your list:",

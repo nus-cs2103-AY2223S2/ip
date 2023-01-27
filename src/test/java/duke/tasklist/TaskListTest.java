@@ -13,7 +13,7 @@ import duke.task.Todo;
 
 public class TaskListTest {
     @Test
-    public void testAddAndGet() {
+    public void addAndGet() {
         try {
             TaskList tasks = new TaskList();
             Task task0 = new Todo("Write unit tests", false);
@@ -31,7 +31,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testDelete() {
+    public void delete() {
         TaskList tasks = new TaskList();
         try {
             Task task0 = new Todo("Write unit tests", false);
@@ -55,10 +55,10 @@ public class TaskListTest {
     }
 
     @Test
-    public void matches_tests_success() {
+    public void matches_testsPattern() {
         TaskList tasks = new TaskList();
         TaskList filteredTasks = null;
-        try {    
+        try {
             Task task0 = new Todo("Write unit tests", false);
             Task task1 = new Deadline("complete unit tests", false, "26/1/2023 2303");
             Task task2 = new Event("unit test celebrations", false, "26/1/2023 2303", "26/1/2023 2359");

@@ -95,6 +95,14 @@ public class TaskList {
         return t;
     }
 
+    /**
+     * Filters and returns a new instance of TaskList
+     * containing only task whose description matches {@code pattern}
+     *
+     * @param pattern
+     * @return A new instance of TaskList with tasks only task whose description matches {@code pattern}
+     * @throws DukeException
+     */
     public TaskList matches(String pattern) throws DukeException {
         TaskList filtered = new TaskList();
         for (Task task: tasks) {
