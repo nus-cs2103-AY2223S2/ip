@@ -14,7 +14,12 @@ public class Duke {
         this.tasks = this.storage.loadData();
         this.ui = new UiHandler();
     }
-    
+
+    /**
+     * Main function for running Duke.
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         Duke d = new Duke();
         d.ui.showStartingDialogue();

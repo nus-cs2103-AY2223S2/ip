@@ -16,6 +16,12 @@ public class Storage {
         this.file = null;
         this.parser = null;
     }
+
+    /**
+     * Checks if a given path exists. If it does not exist, create the file.
+     * Creates a Storage object with the given path.
+     * @param path The path which the Storage object will store and read the saved tasks from.
+     */
     public Storage(String path) {
         this.path = path;
         this.file = new File(path);
@@ -32,7 +38,11 @@ public class Storage {
             }
         }
     }
-    
+
+    /**
+     * Loads a previously saved database file and returns the TaskList corresponding to the saved database file.
+     * @return A TaskList corresponding to the saved satabase file.
+     */
     public TaskList loadData() {
         Scanner s;
         try {
@@ -47,7 +57,12 @@ public class Storage {
         }
         return taskList;
     }
-    
+
+    /**
+     * Saves a TaskList into a database in the previously specified path.
+     * @param taskList The TaskList to be saved to the database.
+     * @throws IOException Exception thrown if the database file does not exist.
+     */
     public void saveData(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.file);
         
