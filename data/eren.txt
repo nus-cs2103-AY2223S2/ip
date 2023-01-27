@@ -1,4 +1,4 @@
   TYPE  | COMPLETED | DETAILS | DATE
 Deadline|    NO     | hoho | 27 Jan 1999 03:00pm
   Event |    YES    | bobo | 27 Jan 1999 07:00pm - 28 Jan 1999 09:00am
-  Todo  |    NO     | asdasd | 27 Jan 1999 07:00pm - 28 Jan 1999 09:00am
+  Todo  |    NO     | Clean house | ---

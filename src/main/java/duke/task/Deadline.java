@@ -18,7 +18,7 @@ public class Deadline extends Task {
      * @return String representation of date and time in this format "DD MMM yyyy hh:mma"
      */
     public String getDateTime() {
-        return date.format(DateTimeFormatter.ofPattern("DD MMM yyyy hh:mma"));
+        return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma"));
     }
 
     /**
@@ -27,7 +27,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[" + type + "]" + "[" + getStatusIcon()+ "] " + this.description + " (by: " + 
-                date.format(DateTimeFormatter.ofPattern("DD MMM yyyy hh:mma")) + ")";
+                date.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma")) + ")";
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
 
 public class TaskList {
     private ArrayList<Task> listOfTasks;
@@ -17,7 +18,7 @@ public class TaskList {
     /**
      * Add a Task to the list given the description
      * 
-     * @param words Array of strings to be added to the list
+     * @param words Description given by user input
      * @param type The type of task
      */ 
     public boolean addTask(String[] words, String type) {

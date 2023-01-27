@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
 
 public class Storage {
     private static String FILE_PATH = "./data/eren.txt";
@@ -22,9 +23,10 @@ public class Storage {
      */ 
     public void saveFile(ArrayList<Task> listOfTasks) {
         String fileContent;
-        String dateTime = null;
+        String dateTime;
         fileContent = "  TYPE  | COMPLETED | DETAILS | DATE\n";
         for (Task t : listOfTasks) {
+            dateTime = null;
             if (t.getType() == 'T') {
                 fileContent += "  Todo  |";
             }
