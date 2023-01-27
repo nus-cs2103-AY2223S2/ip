@@ -11,6 +11,11 @@ import utils.Utility;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+
+/**
+ * Responsible for the high-level parsing of user inputs and delegating relevant actions
+ * @author Nicholas Lee
+ */
 public class Parser {
 
     private final TaskManager taskManager;

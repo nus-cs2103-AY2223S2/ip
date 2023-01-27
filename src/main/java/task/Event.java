@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
 /**
  * A Task with added start and end details
  * @author Nicholas Lee
  */
-
 public class Event extends Task{
 
     private final LocalDateTime start;

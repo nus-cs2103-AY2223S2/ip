@@ -14,7 +14,7 @@ import java.util.Scanner;
  * The TaskFileReaderWriter class provides methods for reading and writing tasks to and from a file.
  * It includes methods for loading tasks from a file and updating a task file with tasks from a
  * TaskManager object, and creating a new task file.
- *
+ * @author Nicholas Lee
  */
 public class TaskFileReaderWriter {
 

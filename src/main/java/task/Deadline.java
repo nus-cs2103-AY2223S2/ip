@@ -17,7 +17,6 @@ import java.util.List;
  * A Task with a deadline
  * @author Nicholas Lee
  */
-
 public class Deadline extends Task{
 
     private final LocalDateTime deadline;
