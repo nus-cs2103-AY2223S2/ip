@@ -17,7 +17,7 @@ public class MarkCommand extends Command {
     /**
      * Class constructor for the mark command.
      *
-     * @param index the index of the task to be mark
+     * @param index the index of the task to mark
      */
     public MarkCommand(int index) {
         this.index = index;

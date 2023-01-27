@@ -21,7 +21,7 @@ public class AddCommand extends Command {
     private final Task task;
 
     /**
-     * Class constructor of an Todo task.
+     * Class constructor of an add todo task command.
      *
      * @param description the description of the task
      */
@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Class constructor of a Deadline task.
+     * Class constructor of an add deadline task command.
      *
      * @param description the description of the task
      * @param dateTime    the deadline to finish the task
@@ -40,7 +40,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Class constructor of an Event task.
+     * Class constructor of an add event task command.
      *
      * @param description   the description of the task
      * @param startDateTime the starting date and time

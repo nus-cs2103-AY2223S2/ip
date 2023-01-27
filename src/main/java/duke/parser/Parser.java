@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The duke.parser.Parser class parses the user input.
+ * The Parser class parses the user input.
  *
  * @author Chia Jeremy
  */
@@ -32,6 +32,12 @@ public class Parser {
         INVALID
     }
 
+    /**
+     * Returns the command code of the user input.
+     *
+     * @param input the user input
+     * @return the command code of the input
+     */
     public static Command_Code getCommand(String input) {
         String command = input.split(" ", 2)[0].toLowerCase();
         switch (command) {
@@ -58,6 +64,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the command based on the user input.
+     *
+     * @param input the user input
+     * @return the command based on the input
+     */
     public Command parseCommand(String input) {
         Command_Code commandCode = getCommand(input);
         switch (commandCode) {

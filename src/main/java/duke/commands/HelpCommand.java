@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * The HelpCommand class implements the action of showing all the duke.commands.
+ * The HelpCommand class implements the action of showing all the commands.
  *
  * @author Chia Jeremy
  */
