@@ -5,10 +5,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
-import duke.storage.serializer.Deserializer;
 import duke.storage.serializer.Serializer;
+import duke.storage.serializer.TaskDeserializer;
 import duke.storage.serializer.TaskSerializer;
 
+/**
+ * Represents a Task with a deadline.
+ */
 public class Deadline extends Task {
     private static final String ICON = "D";
     private static final String DESCRIPTION_KEY = "description";
@@ -27,7 +30,13 @@ public class Deadline extends Task {
             throw new DukeException("Could not parse 'by' as date time");
         }
     }
-
+ 
+    /**
+     * Returns whether {@code icon} belongs to a Deadline Task.
+     * 
+     * @param icon Icon to be checked.
+     * @return whether the {@code icon} belongs to a Deadline Task.
+     */
     public static boolean hasIcon(String icon) {
         return icon.equals(ICON);
     }
@@ -36,8 +45,8 @@ public class Deadline extends Task {
         return hasIcon(serializer.get(CATEGORY_KEY).toString());
     }
 
-    public static Deserializer getDeserializer() {
-        return (Serializer serializer) -> {
+    public static TaskDeserializer getDeserializer() {
+        return (TaskSerializer serializer) -> {
             String description = serializer.get(DESCRIPTION_KEY).toString();
             boolean completed = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
             String by = serializer.get(BY_KEY).toString();

@@ -8,6 +8,12 @@ import duke.task.Todo;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * <h1>Duke Task Management Application</h1>
+ * Duke is an applications that allow the user to manage their task from the command line.
+ * 
+ * @author Stanley Neoh Jia Jun
+ */
 public class Duke {
     public static final String LOGO = "_____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
@@ -29,7 +35,7 @@ public class Duke {
         }
     }
 
-    public void handleCommand(String cmd) throws DukeException {
+    private void handleCommand(String cmd) throws DukeException {
         if (cmd.matches("^bye$")) {
             ui.bye();
             isListening = false;
@@ -71,7 +77,7 @@ public class Duke {
         }
     }
 
-    public void start() {
+    private void start() {
         ui.introduce(LOGO);
         isListening = true;
         while (isListening) {
@@ -84,6 +90,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the duke application.
+     * This is the entry point for the application.
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.start();

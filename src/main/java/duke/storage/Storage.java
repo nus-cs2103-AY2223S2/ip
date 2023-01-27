@@ -1,7 +1,6 @@
 package duke.storage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,10 +11,19 @@ import duke.exception.DukeException;
 import duke.storage.serializer.TaskSerializer;
 import duke.task.Task;
 
+/**
+ * The duke component that is responsible for saving and loading tasks from local storage.
+ */
 public class Storage {
     private static final String DATA_PATH = "data/duke.txt";
 
-    public static List<Task> load() throws Exception {
+    /**
+     * Loads and returns a list of tasks stored locally.
+     * 
+     * @return List of tasks that was stored locally.
+     * @throws DukeException
+     */
+    public static List<Task> load() throws DukeException {
         File f = null;
         Scanner sc = null;
         List<Task> tasks = new ArrayList<>();
@@ -26,7 +34,7 @@ public class Storage {
                 TaskSerializer ts = new TaskSerializer(sc.nextLine());
                 tasks.add(ts.createTask());
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             throw new DukeException("No data file found");
         } finally {
             sc.close();
@@ -34,6 +42,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves a list of tasks locally.
+     * 
+     * @param tasks The list of tasks to be saved
+     * @throws DukeException
+     */
     public static void save(List<Task> tasks) throws DukeException {
         FileWriter fw = null;
         try {
