@@ -7,6 +7,20 @@ public class Deadline extends Task{
     }
 
     @Override
+
+    public String getType() {
+        return "Deadline";
+    }
+
+    @Override
+    public String dataFormat(){
+        if (isDone) {
+            return "D | 1 | " + description + " | " + by;
+        }else {
+            return "D | 0 | " + description + " | " + by;
+        }
+    }
+    @Override
     public String toString(){
         return "[D]" + super.toString() + "(" + by + ")";
     }

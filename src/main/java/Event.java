@@ -7,6 +7,20 @@ public class Event extends Task{
     }
 
     @Override
+    public String getType() {
+        return "Event";
+    }
+
+    @Override
+    public String dataFormat(){
+        if (isDone) {
+            return "E | 1 | " + description + " | " + duration;
+        }else {
+            return "E | 0 | " + description + " | " + duration;
+        }
+    }
+
+    @Override
     public String toString(){
         return "[E]" + super.toString() + "(" + this.duration + ")";
     }

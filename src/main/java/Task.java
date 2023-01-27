@@ -7,6 +7,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getType(){
+        return "Task";
+    }
+
     public String getDes(){
         return description;
     }
@@ -20,6 +24,11 @@ public class Task {
     public void unMark(){
         isDone = false;
     }
+
+    public String dataFormat() {
+        return "not yet";
+    }
+
 
     public String toString(){
         return this.getStatusIcon() + " " + this.getDes();

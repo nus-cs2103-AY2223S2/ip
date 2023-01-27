@@ -6,6 +6,20 @@ public class ToDos extends Task{
     }
 
     @Override
+    public String getType() {
+        return "Todo";
+    }
+
+    @Override
+    public String dataFormat(){
+        if (isDone) {
+            return "T | 1 | " + description;
+        }else {
+            return "T | 0 | " + description;
+        }
+    }
+
+    @Override
     public String toString(){
         return "[T]" + super.toString();
     }
