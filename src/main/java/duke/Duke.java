@@ -1,15 +1,15 @@
 package duke;
 
-import command.Command;
+import command.CommandClass;
 import storage.Storage;
-import task.Deadline;
-import task.Event;
+
 import task.Task;
 import task.TaskList;
-import task.ToDo;
+
 import ui.Parser;
 import ui.TextUi;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 
@@ -82,12 +82,12 @@ public class Duke {
      */
     public void loadRecord() {
         storage.loadRecordIfExists(commandList);
-        try {
-            for (String s : commandList) {
+        for (String s : commandList) {
+            try {
                 handleCommand(s, true);
+            } catch (DukeException e) {
+                System.out.println(e.toString());
             }
-        } catch (DukeException e) {
-            System.out.println(e.toString());
         }
     }
 
@@ -103,47 +103,50 @@ public class Duke {
      * @throws DukeException when the command is unknown
      */
     public void handleCommand(String inMsg, boolean suppressPrint) throws DukeException {
-        boolean isToSave = true;
+//        boolean isToSave = true;
+//
+//        String stringToPrint = "";
+//        if (parser.checkCommand(inMsg, Command.LIST)) {
+//            stringToPrint = listTasks();
+//            isToSave = false;
+//        } else if (parser.checkCommand(inMsg, Command.MARK)) {
+//            int idx = Integer.parseInt(inMsg.substring(5)) - 1;
+//            stringToPrint = markTaskDone(idx);
+//        } else if (parser.checkCommand(inMsg, Command.UNMARK)) {
+//            int idx = Integer.parseInt(inMsg.substring(7)) - 1;
+//            stringToPrint = unmarkTaskDone(idx);
+//        } else if (parser.checkCommand(inMsg, Command.TODO)) {
+//            String todoName = parser.getCommandContent(inMsg, Command.TODO);
+//            ToDo todo = new ToDo(todoName);
+//            stringToPrint = addTask(todo);
+//        } else if (parser.checkCommand(inMsg, Command.DEADLINE)) {
+//            String deadlineContent = parser.getCommandContent(inMsg, Command.DEADLINE);
+//            Deadline ddl = new Deadline(deadlineContent);
+//            stringToPrint = addTask(ddl);
+//        } else if (parser.checkCommand(inMsg, Command.EVENT)) {
+//            String eventContent = parser.getCommandContent(inMsg, Command.EVENT);
+//            Event event = new Event(eventContent);
+//            stringToPrint = addTask(event);
+//        } else if (parser.checkCommand(inMsg, Command.DELETE)) {
+//            String indexToDelete = parser.getCommandContent(inMsg, Command.DELETE);
+//            stringToPrint = deleteTask(Integer.parseInt(indexToDelete));
+//        } else if (parser.checkCommand(inMsg, Command.FIND)) {
+//            String keyword = parser.getCommandContent(inMsg, Command.FIND);
+//            stringToPrint = find(keyword);
+//            isToSave = false;
+//        } else {
+//            throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
+//        }
+//
+//        if (!suppressPrint) {
+//            ui.printStructuredString(stringToPrint);
+//            if (isToSave) {
+//                addCommandList(inMsg);
+//            }
+//        }
 
-        String stringToPrint = "";
-        if (parser.checkCommand(inMsg, Command.LIST)) {
-            stringToPrint = listTasks();
-            isToSave = false;
-        } else if (parser.checkCommand(inMsg, Command.MARK)) {
-            int idx = Integer.parseInt(inMsg.substring(5)) - 1;
-            stringToPrint = markTaskDone(idx);
-        } else if (parser.checkCommand(inMsg, Command.UNMARK)) {
-            int idx = Integer.parseInt(inMsg.substring(7)) - 1;
-            stringToPrint = unmarkTaskDone(idx);
-        } else if (parser.checkCommand(inMsg, Command.TODO)) {
-            String todoName = parser.getCommandContent(inMsg, Command.TODO);
-            ToDo todo = new ToDo(todoName);
-            stringToPrint = addTask(todo);
-        } else if (parser.checkCommand(inMsg, Command.DEADLINE)) {
-            String deadlineContent = parser.getCommandContent(inMsg, Command.DEADLINE);
-            Deadline ddl = new Deadline(deadlineContent);
-            stringToPrint = addTask(ddl);
-        } else if (parser.checkCommand(inMsg, Command.EVENT)) {
-            String eventContent = parser.getCommandContent(inMsg, Command.EVENT);
-            Event event = new Event(eventContent);
-            stringToPrint = addTask(event);
-        } else if (parser.checkCommand(inMsg, Command.DELETE)) {
-            String indexToDelete = parser.getCommandContent(inMsg, Command.DELETE);
-            stringToPrint = deleteTask(Integer.parseInt(indexToDelete));
-        } else if (parser.checkCommand(inMsg, Command.FIND)) {
-            String keyword = parser.getCommandContent(inMsg, Command.FIND);
-            stringToPrint = find(keyword);
-            isToSave = false;
-        } else {
-            throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-
-        if (!suppressPrint) {
-            ui.printStructuredString(stringToPrint);
-            if (isToSave) {
-                addCommandList(inMsg);
-            }
-        }
+        CommandClass command = Parser.parseCommand(inMsg, suppressPrint);
+        command.execute(taskList, ui);
     }
 
     /**
