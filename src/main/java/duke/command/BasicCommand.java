@@ -1,6 +1,6 @@
 package duke.command;
 
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 /**
  * A simple command that does not take arguments.
@@ -8,7 +8,7 @@ import java.util.function.Supplier;
  * @see Command
  */
 public class BasicCommand extends Command {
-  private final Supplier<String[]> supplier;
+  private final Function<Boolean, String[]> function;
 
   /**
    * Creates a new BasicCommand.
@@ -17,13 +17,13 @@ public class BasicCommand extends Command {
    * @param helpStr  The help string of the command.
    * @param supplier The supplier to be called when the command is executed.
    */
-  public BasicCommand(String name, String helpStr, Supplier<String[]> supplier) {
+  public BasicCommand(String name, String helpStr,Function<Boolean, String[]> supplier) {
     super(name, helpStr, false, new String[]{});
-    this.supplier = supplier;
+    this.function = supplier;
   }
 
   @Override
-  public String[] execute(String[] params) {
-    return supplier.get();
+  public String[] execute(String[] params, Boolean hasQuit) {
+    return function.apply(hasQuit);
   }
 }

@@ -71,12 +71,11 @@ public abstract class Command {
     return params.length > 0 || hasBaseParam;
   }
 
-  /**
-   * Each command encapsulates an operation that Duke can perform,
-   * as a function that may accept parameters. This method executes the operation.
-   *
-   * @param params The parameters to pass to the operation.
-   * @return The output of the operation.
-   */
-  public abstract String[] execute(String[] params);
+    /**
+     * Each command encapsulates an operation that Duke can perform, as a function that may accept parameters. This
+     * method executes the operation.
+     * @param params The parameters to pass to the operation.
+     * @return The output of the operation.
+     */
+    public abstract String[] execute(String[] params, Boolean hasQuit);
 }

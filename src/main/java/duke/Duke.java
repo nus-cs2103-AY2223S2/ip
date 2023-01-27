@@ -22,27 +22,50 @@ public class Duke {
   private final Ui ui;
   private final Parser parser;
 
-  private Duke(String filename) {
-    this.ui = new Ui();
-    TaskList taskList;
-    try {
-      taskList = new TaskList(filename);
-    } catch (Exception e) {
-      ui.loadError(e);
-      taskList = new TaskList(new ArrayList<>());
+    private Duke(String filename) {
+        this.ui = new Ui();
+        TaskList taskList;
+        TaskList temp;
+        try {
+            temp = new TaskList(filename);
+        } catch (Exception e) {
+            ui.loadError(e);
+            temp = new TaskList(new ArrayList<>());
+        }
+        taskList = temp;
+        Command[] commands = new Command[]{
+                new BasicCommand("exit"
+                        , "exit the app"
+                        , hasQuit -> new String[]{"Goodbye."}),
+                new BasicCommand("help"
+                        , "show this help message"
+                        , hasQuit -> {
+                    ui.print();
+                    return new String[]{};
+                }),
+                new BasicCommand("list"
+                        , "list tasks"
+                        , hasQuit -> taskList.stringify()),
+                new ArgCommand("add"
+                        , "add task"
+                        , new String[]{"\\s"}
+                        , (args, hasQuit) -> taskList.add(args)),
+                new ArgCommand("mark"
+                        , "mark/unmark task as done"
+                        , new String[]{}
+                        , (args, hasQuit) -> taskList.mark(args)),
+                new ArgCommand("delete"
+                        , "delete task"
+                        , new String[]{}
+                        , (args, hasQuit) -> taskList.delete(args)),
+                new ArgCommand("find"
+                    , "find tasks containing text fragment"
+                    , new String[]{}
+                    , (args, hasQuit) -> taskList.find(args)),
+        };
+        ui.setCommands(commands);
+        this.parser = new Parser(commands);
     }
-    Command[] commands = new Command[]{
-        new BasicCommand("exit", "exit the app", () -> new String[]{"Goodbye."}),
-        new BasicCommand("help", "show this help message", ui::getHelpMsg),
-        new BasicCommand("list", "list tasks", taskList::stringify),
-        new ArgCommand("add", "add task", new String[]{"\\s"}, taskList::add),
-        new ArgCommand("mark", "mark/unmark task as done", new String[]{}, taskList::mark),
-        new ArgCommand("delete", "delete task", new String[]{}, taskList::delete),
-        new ArgCommand("find", "find tasks containing text fragment",
-            new String[]{}, taskList::find)};
-    ui.setCommands(commands);
-    this.parser = new Parser(commands);
-  }
 
   private void run() {
     this.ui.printIntro();
@@ -51,8 +74,10 @@ public class Duke {
     String[] arguments;
     String[] lineParts;
     Command cmd;
-
-    while (scanner.hasNextLine()) {
+    Boolean hasQuit = false; // in case there are more commands that affect
+                     // program execution or state, might replace
+                     // with a proper State class()
+    while (scanner.hasNextLine() && !hasQuit) {
       try {
         lineParts = scanner.nextLine().split("\\s", 2);
         cmd = this.parser.parseCommand(lineParts[0]);
@@ -61,9 +86,9 @@ public class Duke {
             throw new IllegalArgumentException("Missing argument.");
           }
           arguments = Parser.parseArgs(lineParts[1], cmd);
-          outputs = cmd.execute(arguments);
+          outputs = cmd.execute(arguments, hasQuit);
         } else {
-          outputs = cmd.execute(new String[]{});
+          outputs = cmd.execute(new String[]{}, hasQuit);
         }
         this.ui.print(outputs);
         if (cmd.getName().equals("exit")) {
@@ -71,6 +96,7 @@ public class Duke {
         }
       } catch (Exception e) {
         this.ui.error(e);
+        this.ui.print();
       }
     }
     scanner.close();
