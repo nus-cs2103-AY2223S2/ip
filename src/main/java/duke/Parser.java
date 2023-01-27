@@ -8,11 +8,12 @@ import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
+import duke.commands.FindCommand;
 
 public class Parser {
 
     private enum Type {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
     }
 
     /**
@@ -45,6 +46,9 @@ public class Parser {
 
         case MARK:
             return new MarkCommand(input);
+
+        case FIND:
+            return new FindCommand(input);
 
         case BYE:
             return new ByeCommand(input);
