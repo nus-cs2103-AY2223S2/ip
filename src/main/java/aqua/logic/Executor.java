@@ -2,6 +2,7 @@ package aqua.logic;
 
 import aqua.manager.LogicManager;
 import aqua.exception.LoadException;
+import aqua.logic.command.ListCommand;
 import aqua.manager.IoManager;
 
 
@@ -20,12 +21,14 @@ public class Executor {
 
 
     public void start() {
+        ioManager.greet();
         try {
             manager.load();
+            ioManager.replyLoadSuccess();
+            initiateService(new ListCommand().getService(null, manager));
         } catch (LoadException loadException) {
             ioManager.replyException(loadException);
         }
-        ioManager.greet();
     }
 
 
