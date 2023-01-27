@@ -3,7 +3,7 @@ package aqua.logic.command;
 import aqua.aquatask.AquaTask;
 import aqua.exception.IllegalSyntaxException;
 import aqua.logic.ArgumentMap;
-import aqua.logic.ExecutionDispatcher;
+import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
@@ -25,8 +25,8 @@ public abstract class AddTaskCommand implements Command {
 
 
     @Override
-    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
-        return ExecutionDispatcher.of(new AddTask(args, manager))
+    public ExecutionService getDispatcher(ArgumentMap args, AppManager manager) {
+        return ExecutionService.of(new AddTask(args, manager))
                 .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
     }
 

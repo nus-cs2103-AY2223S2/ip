@@ -4,7 +4,7 @@ import aqua.aquatask.AquaTask;
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.ProcedureExecutionException;
 import aqua.logic.ArgumentMap;
-import aqua.logic.ExecutionDispatcher;
+import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
@@ -16,8 +16,8 @@ import aqua.manager.AppManager;
  */
 public class DeleteCommand implements Command {
     @Override
-    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
-        return ExecutionDispatcher.of(new DeleteTask(args, manager))
+    public ExecutionService getDispatcher(ArgumentMap args, AppManager manager) {
+        return ExecutionService.of(new DeleteTask(args, manager))
                 .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
     }
 

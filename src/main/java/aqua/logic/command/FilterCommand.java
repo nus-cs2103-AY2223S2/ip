@@ -5,15 +5,15 @@ import java.util.Map;
 
 import aqua.aquatask.AquaTask;
 import aqua.logic.ArgumentMap;
-import aqua.logic.ExecutionDispatcher;
+import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
 
 public class FilterCommand implements Command {
     @Override
-    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
-        return ExecutionDispatcher.of(new ExecutionTask<LinkedHashMap<Integer, AquaTask>>(args, manager) {
+    public ExecutionService getDispatcher(ArgumentMap args, AppManager manager) {
+        return ExecutionService.of(new ExecutionTask<LinkedHashMap<Integer, AquaTask>>(args, manager) {
             @Override
             public LinkedHashMap<Integer, AquaTask> process(ArgumentMap args, AppManager manager) {
                 return manager.getTaskManager().filter(args.getMainInput().orElse(""));

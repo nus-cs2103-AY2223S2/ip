@@ -4,7 +4,7 @@ import aqua.aquatask.AquaTask;
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.ProcedureExecutionException;
 import aqua.logic.ArgumentMap;
-import aqua.logic.ExecutionDispatcher;
+import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.AppManager;
 
@@ -31,8 +31,8 @@ public class MarkTaskCommand implements Command {
 
 
     @Override
-    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
-        return ExecutionDispatcher.of(new MarkTask(args, manager))
+    public ExecutionService getDispatcher(ArgumentMap args, AppManager manager) {
+        return ExecutionService.of(new MarkTask(args, manager))
                 .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
     }
 

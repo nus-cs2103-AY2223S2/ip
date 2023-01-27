@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import aqua.exception.LoadException;
 import aqua.logic.CommandLineInput;
-import aqua.logic.ExecutionDispatcher;
+import aqua.logic.ExecutionService;
 import aqua.logic.command.ListCommand;
 import aqua.manager.AppManager;
 import aqua.storage.Loader;
@@ -56,7 +56,7 @@ public class Aqua {
     }
 
 
-    private void initiateDispatcher(ExecutionDispatcher dispatcher) {
+    private void initiateDispatcher(ExecutionService dispatcher) {
         try {
             manager.getUiManager().reply(dispatcher.dispatch());
         } catch (Throwable ex) {

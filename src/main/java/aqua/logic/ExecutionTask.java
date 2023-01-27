@@ -4,13 +4,15 @@ import aqua.exception.IllegalSyntaxException;
 import aqua.exception.ProcedureExecutionException;
 import aqua.manager.AppManager;
 
+import javafx.concurrent.Task;
+
 
 /**
  * Represents a task that can be executed to produce a result.
  * 
  * @param <T> the return type of the result after execution.
  */
-public abstract class ExecutionTask<T> {
+public abstract class ExecutionTask<T> extends Task<String> {
     /** The arguments to work on. */
     private final ArgumentMap args;
     /** The AppManager to work on. */
@@ -61,7 +63,8 @@ public abstract class ExecutionTask<T> {
      * @throws ProcedureExecutionException - if the task failed to execute
      *      completely.
      */
-    public String execute() throws IllegalSyntaxException, ProcedureExecutionException {
+    @Override
+    protected String call() throws IllegalSyntaxException, ProcedureExecutionException {
         T data = process(args, manager);
         return getDataDisplay(data, manager);
     }

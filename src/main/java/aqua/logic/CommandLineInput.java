@@ -25,7 +25,7 @@ public class CommandLineInput {
      * @param manager - the AppManager for the command to wrok on.
      * @returnt he ExecutionDispatcher of the command.
      */
-    public ExecutionDispatcher getDispatcher(AppManager manager) {
+    public ExecutionService getDispatcher(AppManager manager) {
         return command.getDispatcher(args, manager);
     }
 }
