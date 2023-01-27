@@ -1,39 +1,46 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TaskList {
     ArrayList<Task> taskList;
 
     TaskList() {
-        taskList = new ArrayList<Task>();
+        taskList = new ArrayList<>();
     }
 
-    String addTask(String command) throws DukeException {
+    String parseCommand(String command) throws DukeException {
         String[] commandArr = command.split(" ");
         String taskType = commandArr[0];
         String description; Task task;
-        if (taskType.equals("todo")) {
-            if (commandArr.length == 1) {
-                throw new EmptyTaskDescriptionException();
-            }
-            description = command.substring(5);
-            task = new ToDo(description);
-        } else if (taskType.equals("deadline")) {
-            int doneByIndex = command.indexOf("/by");
-            description = command.substring(9, doneByIndex - 1);
-            String doneBy = command.substring(doneByIndex + 4);
-            task = new Deadline(description, doneBy);
-        } else if (taskType.equals("event")){
-            int startIndex = command.indexOf("/from"), endIndex = command.indexOf("/to");
-            description = command.substring(6, startIndex - 1);
-            String start = command.substring(startIndex + 6, endIndex - 1), end = command.substring(endIndex + 4);
-            task = new Event(description, start, end);
-        } else {
-            //add exception for invalid task type
-            throw new InvalidCommandException();
+        switch (taskType) {
+            case "todo":
+                if (commandArr.length == 1) {
+                    throw new EmptyTaskDescriptionException();
+                }
+                description = command.substring(5);
+                task = new ToDo(description);
+                break;
+            case "deadline":
+                int doneByIndex = command.indexOf("/by");
+                description = command.substring(9, doneByIndex - 1);
+                String doneBy = command.substring(doneByIndex + 4);
+                task = new Deadline(description, doneBy);
+                break;
+            case "event":
+                int startIndex = command.indexOf("/from"), endIndex = command.indexOf("/to");
+                description = command.substring(6, startIndex - 1);
+                String start = command.substring(startIndex + 6, endIndex - 1), end = command.substring(endIndex + 4);
+                task = new Event(description, start, end);
+                break;
+            default:
+                //add exception for invalid task type
+                throw new InvalidCommandException();
         }
-        taskList.add(task);
+        addTask(task);
         return addTaskText(task);
+    }
+
+    void addTask(Task task) {
+        taskList.add(task);
     }
 
     String deleteTask(int taskNum) {
@@ -62,17 +69,23 @@ public class TaskList {
     int getNumOfTasks() {
         return taskList.size();
     }
-
+    String getListOfTasks() {
+        StringBuilder listString = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            listString.append(String.format("%s\n", taskList.get(i)));
+        }
+        return listString.toString();
+    }
     @Override
     public String toString() {
         if (taskList.isEmpty()) {
             return "There are no tasks in your list";
         }
-        String printedList = "Here are the tasks in your list:\n";
+        StringBuilder printedList = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
-            printedList += String.format("%d. %s\n", i + 1, taskList.get(i));
+            printedList.append(String.format("%d. %s\n", i + 1, taskList.get(i)));
         }
-        return printedList;
+        return printedList.toString();
     }
 
 }

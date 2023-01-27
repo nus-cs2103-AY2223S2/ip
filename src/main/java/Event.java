@@ -8,8 +8,14 @@ public class Event extends Task {
         this.end = end;
     }
 
+    Event(String description, boolean isDone, String start, String end) {
+        super(description, isDone);
+        this.start = start;
+        this.end = end;
+    }
+
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), start, end);
+        return String.format("E | %s | from: %s | to: %s", super.toString(), start, end);
     }
 }
