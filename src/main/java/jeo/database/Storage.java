@@ -33,6 +33,7 @@ public class Storage {
     /**
      * Loads tasks that have been saved previously.
      * @return TaskList containing saved tasks.
+     * @throws FileNotFoundException if file does not exist.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> arr = new ArrayList<>();
@@ -50,6 +51,7 @@ public class Storage {
     /**
      * Saves tasks to data file.
      * @param taskList TaskList containing tasks to be saved.
+     * @throws IOException if data cannot be written to the text file.
      */
     public void save(ArrayList<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter(this.path);
@@ -59,7 +61,6 @@ public class Storage {
             sb.append("\\");
             sb.append(task.getDescription());
             sb.append("\\");
-            // X\desc\T
             if (task instanceof ToDo) {
                 sb.append("T");
                 fw.write(sb + System.lineSeparator());
@@ -71,7 +72,7 @@ public class Storage {
             } else {
                 sb.append("E");
                 sb.append("\\");
-                sb.append(((Event) task).getDateTimeFrom().format(formatterParse)); // X\desc\E\From\To
+                sb.append(((Event) task).getDateTimeFrom().format(formatterParse));
                 sb.append("\\");
                 sb.append(((Event) task).getDateTimeTo().format(formatterParse));
                 fw.write(sb + System.lineSeparator());
