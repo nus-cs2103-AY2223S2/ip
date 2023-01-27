@@ -13,10 +13,20 @@ import java.util.Scanner;
 
 public class Storage {
     private final String filePath;
+
+    /**
+     * Storage constructor
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * method for reading data from saving file
+     * @return tasks list from saving file
+     * @throws IOException
+     */
     public TaskList load() throws IOException {
         TaskList tasks = new TaskList();
         try {
@@ -51,6 +61,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * method for updating date in saving file
+     * @param t
+     * @throws IOException
+     */
     public void updateFile(TaskList t) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write("");
@@ -61,7 +76,12 @@ public class Storage {
             }
         }
     }
-    //Java append to file using FileWriter
+
+    /**
+     * method for appending to file
+     * @param info
+     * @throws IOException
+     */
     private void appendToFile(String info) throws IOException {
         //Constructs a FileWriter object given a file name
         // with a boolean indicating whether to append the data written

@@ -1,6 +1,12 @@
 package duke.Tasks;
 
 public class Todo extends Task {
+
+    /**
+     * the constructor
+     * @param description
+     * @param isInFile
+     */
     public Todo(String description, boolean isInFile) {
         super(description);
         if (!isInFile) {
@@ -11,10 +17,20 @@ public class Todo extends Task {
             System.out.println(" " + "____________________________________________________________");
         }
     }
+
+    /**
+     * Override toString method
+     * @return String
+     */
     @Override
     public String toString() {
         return "[T]" + "[" + getStatusIcon() + "] " + getDescription();
     }
+
+    /**
+     * Override file method, changing into data saving format
+     * @return String
+     */
     @Override
     public String file() {
         String status = isDone? "1" : "0";
