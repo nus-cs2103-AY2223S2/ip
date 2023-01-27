@@ -71,4 +71,15 @@ public class Task {
         String status = isDone ? "1" : "0";
         return (String.format("%s | %s", status, this.name));
     }
+
+    /**
+     * Searches for given keyword string in the name of this task.
+     *
+     * @param keyword The given keyword string.
+     * @return True if name contains keyword, false otherwise.
+     */
+    public boolean containKeyword(String keyword) {
+        String formatName = " " + this.name.toUpperCase() + " ";
+        return formatName.contains(keyword.toUpperCase());
+    }
 }

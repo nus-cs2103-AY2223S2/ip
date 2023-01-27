@@ -99,10 +99,46 @@ public class TaskList {
             return;
         }
         System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             String toPrint = String.format("%d. %s", (i + 1), this.taskList.get(i));
             System.out.println(toPrint);
         }
         System.out.println("");
+    }
+
+    /**
+     * Searches for tasks with names that contain the given keyword
+     * and prints them out.
+     *
+     * @param keyword The keyword to search for.
+     */
+    public void find(String keyword) {
+        int size = this.taskList.size();
+        int printIndex = 1;
+        int currIndex = 0;
+        Task curr = this.taskList.get(currIndex);
+        while (printIndex == 1 && currIndex < size) {
+            curr = this.taskList.get(currIndex);
+            if (curr.containKeyword(" " + keyword + " ")) {
+                System.out.println("Here are the matching tasks in your list:");
+                String toPrint = String.format("%d. %s", printIndex, curr);
+                printIndex++;
+                System.out.println(toPrint);
+            }
+            currIndex++;
+        }
+        while (currIndex < size) {
+            curr = this.taskList.get(currIndex);
+            if (curr.containKeyword(" " + keyword + " ")) {
+                String toPrint = String.format("%d. %s", printIndex, curr);
+                printIndex++;
+                System.out.println(toPrint);
+            }
+            currIndex++;
+        }
+        if (printIndex == 1) {
+            System.out.println("None of the items in your list matches with \"" + keyword + "\"");
+        }
+        System.out.print("\n");
     }
 }

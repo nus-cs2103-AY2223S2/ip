@@ -10,6 +10,10 @@ import duke.ui.Ui;
 public class ByeCommand extends Command {
     /**
      * Prints out goodbye message and close program.
+     *
+     * @param tasks The ArrayList of tasks.
+     * @param storage The class that reads and write program data to hard drive.
+     * @param ui The class that handles interaction with the users.
      */
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) {

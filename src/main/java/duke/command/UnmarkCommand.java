@@ -19,6 +19,10 @@ public class UnmarkCommand extends Command {
     }
     /**
      * Marks the task at the given index as not done.
+     *
+     * @param tasks The ArrayList of tasks.
+     * @param storage The class that reads and write program data to hard drive.
+     * @param ui The class that handles interaction with the users.
      * @throws DukeException if given index is out of range.
      */
     @Override

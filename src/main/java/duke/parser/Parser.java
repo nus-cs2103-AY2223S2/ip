@@ -5,6 +5,7 @@ import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -25,7 +26,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Parser {
     protected enum CommandEnum {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
     }
 
     /**
@@ -171,6 +172,8 @@ public class Parser {
                 case EVENT:
                     Event event = Parser.getEvent(inputArr);
                     return new AddCommand(event);
+            case FIND:
+                return new FindCommand(inputArr[1]);
                 default:
                     throw new InvalidInputException(
                             "OPPS! I'm sorry, there is no such command.\nPlease try again.");
