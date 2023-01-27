@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -49,6 +50,12 @@ public class Duke {
                     isExit = true;
                     break;
                 }
+                case FIND: {
+                    String keyword = Parser.getArgs()[1];
+                    ArrayList<Task> matchingTasks = tasks.getMatchingTasks(keyword);
+                    ui.showMatchingTasksMessage(matchingTasks);
+                    break;
+                }
                 case LIST: {
                     ui.showTasksMessage(tasks.getTaskList());
                     break;
@@ -92,7 +99,6 @@ public class Duke {
                     ui.addedTaskMessage(created, tasks.getTaskList());
                     break;
                 }
-
                 }
             } catch (DukeException e) {
                 ui.showErrorMessage(e.getMessage());

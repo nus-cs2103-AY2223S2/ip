@@ -7,6 +7,7 @@ package duke;
  */
 public enum Command {
     BYE,
+    FIND,
     LIST,
     MARK,
     UNMARK,

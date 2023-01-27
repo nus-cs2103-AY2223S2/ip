@@ -36,6 +36,14 @@ public class Parser {
             action = Command.LIST;
             break;
         }
+        case "find": {
+            if (tokens.length < 2) {
+                throw new DukeException("Keyword missing!");
+            }
+            action = Command.FIND;
+            args = tokens;
+            break;
+        }
         case "unmark": {
             if (tokens.length < 2) {
                 throw new DukeException("Task number missing!");
@@ -43,6 +51,7 @@ public class Parser {
             action = Command.UNMARK;
             args = tokens;
             break;
+
         }
         case "mark": {
             if (tokens.length < 2) {
