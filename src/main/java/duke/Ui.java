@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.exception.DukeException;
 
 import duke.task.Task;
@@ -9,36 +7,13 @@ import duke.task.Task;
 /** Class that handles user interface */
 public class Ui {
 
-    /** Scanner to read in user input */
-    private Scanner sc = new Scanner(System.in);
-
     /**
      * Prints greeting text.
      */
-    public void showGreeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String greeting = "Hello! I'm Duke\n"
+    public String showGreeting() {
+        String greeting = "Hello! I'm Colette.\n"
                 + "What can I do for you?";
-        System.out.println("Hello from\n" + logo);
-        System.out.println(greeting);
-    }
-
-    /**
-     * Prints arrow to indicate user should input something.
-     */
-    public void showArrow() {
-        System.out.print("> ");
-    }
-
-    /**
-     * Prints separator.
-     */
-    public void showSeparator() {
-        System.out.println("____________________________________________________________\n");
+        return greeting;
     }
 
     /**
@@ -46,18 +21,8 @@ public class Ui {
      *
      * @param e Error.
      */
-    public void showErrorMessage(DukeException e) {
-        System.out.println(e.getMessage());
-    }
-
-    /**
-     * Reads in user's next command.
-     *
-     * @return User's next command.
-     */
-    public String readCommand() {
-        String command = this.sc.nextLine().trim();
-        return command;
+    public String showErrorMessage(DukeException e) {
+        return e.getMessage();
     }
 
     /**
@@ -65,14 +30,12 @@ public class Ui {
      *
      * @param tasks User's task list.
      */
-    public void showList(TaskList tasks) {
+    public String showList(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            System.out.println("There are currently no tasks in your list.");
+            return "There are currently no tasks in your list.";
         } else {
-            System.out.println("Here are the tasks in your list:");
-            System.out.println(tasks);
+            return "Here are the tasks in your list:\n" + tasks;
         }
-
     }
 
     /**
@@ -81,10 +44,8 @@ public class Ui {
      * @param task Task to be added.
      * @param tasks Task list.
      */
-    public void showAddTask(Task task, TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+    public String showAddTask(Task task, TaskList tasks) {
+        return "Got it. I've added this task:\n" + task + "\nNow you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
@@ -92,9 +53,8 @@ public class Ui {
      *
      * @param task Task that has been marked.
      */
-    public void showMarkTask(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+    public String showMarkTask(Task task) {
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
     /**
@@ -102,9 +62,8 @@ public class Ui {
      *
      * @param task Task that has been unmarked.
      */
-    public void showUnmarkTask(Task task) {
-        System.out.println("Got it. I've marked this task as not done:");
-        System.out.println(task);
+    public String showUnmarkTask(Task task) {
+        return "Got it. I've marked this task as not done:\n" + task;
     }
 
     /**
@@ -113,34 +72,27 @@ public class Ui {
      * @param task Deleted task.
      * @param tasks Task list.
      */
-    public void showDeleteTask(Task task, TaskList tasks) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+    public String showDeleteTask(Task task, TaskList tasks) {
+        return "Noted. I've removed this task:\n" + task + "\nNow you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
      * Prints goodbye text.
      */
-    public void showGoodbye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showGoodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Prints matching tasks.
      * @param tasks TaskList containing matching tasks.
      */
-    public void showFind(TaskList tasks) {
+    public String showFind(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            System.out.println("There are no matching tasks.");
+            return "There are no matching tasks.";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
-            System.out.println(tasks);
+            return "Here are the matching tasks in your list:\n" + tasks;
         }
-    }
-
-    public void closeScanner() {
-        this.sc.close();
     }
 
 }

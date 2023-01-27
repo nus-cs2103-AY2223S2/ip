@@ -16,10 +16,10 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.markTaskDone(index);
-        ui.showMarkTask(task);
         storage.save(tasks.createTaskListString());
+        return ui.showMarkTask(task);
     }
 
 }
