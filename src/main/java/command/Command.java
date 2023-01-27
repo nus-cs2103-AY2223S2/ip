@@ -59,7 +59,6 @@ public abstract class Command {
 
     /**
      * Throws exceptions if the user-input is not a complete command.
-     * @return true if there are enough number of splits
      */
     protected void checkInputComponents() throws DukeException {
         String[] splits = command.split(" ");
