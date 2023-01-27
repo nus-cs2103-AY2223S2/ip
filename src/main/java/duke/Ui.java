@@ -28,7 +28,8 @@ public class Ui {
                 "      5. mark <task number>\n" +
                 "      6. unmark <task number>\n" +
                 "      7. list\n" +
-                "      8. bye\n" +
+                "      8. find <keyword(s)>\n" +
+                "      9. bye\n" +
                 "    What can I do for you?");
     }
 
