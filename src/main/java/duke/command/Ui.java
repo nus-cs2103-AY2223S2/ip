@@ -1,12 +1,7 @@
 package duke.command;
 
-import duke.Duke;
-import duke.DukeException;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-//import duke.MissingContentException;
+import duke.exception.MissingContentException;
+import duke.exception.DukeException;
 
 public class Ui {
     public Ui(){}
@@ -55,7 +50,7 @@ public class Ui {
      * @print instruction.
      * @throw MissingContentException if input array is empty.
      */
-    public void findWordIntro(String[] arr, boolean containsKeyword) throws DukeException{
+    public void findWordIntro(String[] arr, boolean containsKeyword) throws DukeException {
         if (arr.length >= 1) {
             if (containsKeyword) {
                 System.out.println("Here are the matching tasks in your list:");
