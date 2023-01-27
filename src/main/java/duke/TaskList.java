@@ -86,6 +86,24 @@ public class TaskList {
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
+    /**
+     * To find tasks with specific key word.
+     *
+     * @param searchKey Search key for finding the task.
+     */
+    public void find (String searchKey) {
+        boolean isFind = false;
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getTaskDes().indexOf(searchKey.trim()) != -1) {
+                System.out.println((i + 1) + ". " + list.get(i));
+                isFind = true;
+            }
+        }
+        if(!isFind) {
+            System.out.println("No result found.");
+        }
+    }
+
     public void check(String checkDeadline) {
         boolean ifDeadlineExist = false;
         for (int i = 0; i < list.size(); i++) {

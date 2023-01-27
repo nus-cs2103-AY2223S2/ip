@@ -91,6 +91,12 @@ public class Parser {
                         .trim();
                 list.event(event_descrip, new TimeConvertor(event_from), new TimeConvertor(event_to));
                 return true;
+            case "find":
+                if (userInput.indexOf(" ") == -1) {
+                    throw new missingNumber("find");
+                }
+                list.find(userInput.substring(userInput.indexOf(" ") + 1));
+                return false;
             case "delete":
                 if (userInput.indexOf(" ") == -1) {
                     throw new missingNumber("delete");
