@@ -31,6 +31,7 @@ public class Parser {
             } catch (DukeException e) {
                 response = "☹ OOPS!!! Invalid input for deadline.";
             }
+
         } else if (command.equals("event")) {
             try {
                 Task task = Event.create(content);
@@ -40,6 +41,7 @@ public class Parser {
             } catch (DukeException e) {
                 response = "☹ OOPS!!! Invalid input for event.";
             }
+
         } else if (command.equals("mark")) {
             if (content.length() < 2) {
                 response = "☹ OOPS!!! Invalid input for mark command.";
@@ -53,6 +55,7 @@ public class Parser {
                     response = "Ok boss! Marked this task as done: \n" + task.toString();
                 }
             }
+
         } else if (command.equals("unmark")) {
             if (content.length() < 2) {
                 response = "☹ OOPS!!! Invalid input for unmark command.";
@@ -66,6 +69,7 @@ public class Parser {
                     response = "Ok boss! Marked this task as not done yet: \n" + task.toString();
                 }
             }
+
         } else if (command.equals("delete")) {
             if (content.length() < 2) {
                 response = "☹ OOPS!!! Invalid input for delete command.";
@@ -79,9 +83,11 @@ public class Parser {
                             "\nNow you have " + taskList.getSize() + " in the list.";
                 }
             }
+
         } else {
             response = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
+
         return response;
     }
 }

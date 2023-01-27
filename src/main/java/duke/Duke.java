@@ -10,6 +10,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList();
+
         try {
             storage.load(tasks);
         } catch (DukeException e) {
@@ -25,8 +26,10 @@ public class Duke {
                 ui.exitMessage();
                 break;
             }
+
             ui.printResponse(Parser.execute(command[0], command[1], tasks));
         }
+
         try {
             storage.save(tasks);
         } catch (DukeException e) {

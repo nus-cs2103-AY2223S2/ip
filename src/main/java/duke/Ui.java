@@ -5,8 +5,6 @@ import java.util.Scanner;
 public class Ui {
 
     protected final String LINE = "____________________________________________________________";
-    boolean isTalking;
-    Parser parser;
     Scanner scanner;
 
     public Ui() {
