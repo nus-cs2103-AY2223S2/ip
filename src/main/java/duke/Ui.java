@@ -2,8 +2,6 @@ package duke;
 
 import duke.Exceptions.DukeException;
 import duke.Tasks.TaskList;
-
-import javax.swing.*;
 import java.util.Scanner;
 import java.lang.String;
 public class Ui {
@@ -52,3 +50,4 @@ public class Ui {
         System.out.printf("\t%s\n", e);
     }
 }
+

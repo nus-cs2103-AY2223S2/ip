@@ -1,5 +1,4 @@
 package duke.Exceptions;
-
 public class unknownCommandException extends DukeException {
     @Override
     public String toString(){
