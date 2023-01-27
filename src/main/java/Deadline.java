@@ -9,19 +9,23 @@ public class Deadline extends Duke.Task {
         super(content.substring(9).split("/")[0]);
         String[] strArr = content.split("/by");
         String deadlineTime = strArr[1].substring(1);
-        System.out.println(deadlineTime);
         if (deadlineTime.contains("/")) {
             String[] strArrDate = deadlineTime.split("/");
             System.out.println(Arrays.toString(strArrDate));
-            this.dateTypeDeadline = LocalDateTime.of(Integer.parseInt(strArrDate[2].substring(0,4)),
-                    Integer.parseInt(strArrDate[1]), Integer.parseInt(strArrDate[0]),
-                    Integer.parseInt(strArrDate[2].substring(5,7)),
-                    Integer.parseInt(strArrDate[2].substring(7)));
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MMM-YYYY");
-            this.deadlineDue = "(" + "by: " + dtf.format(dateTypeDeadline) + ")";
+            this.deadlineDue = this.dateFormat(strArrDate);
         } else {
             this.deadlineDue = "(" + "by: " + strArr[1].substring(2) + ")";
         }
+    }
+
+    public String dateFormat(String[] strArrDate) {
+        LocalDateTime dateTypeDeadline;
+        dateTypeDeadline = LocalDateTime.of(Integer.parseInt(strArrDate[2].substring(0,4)),
+                Integer.parseInt(strArrDate[1]), Integer.parseInt(strArrDate[0]),
+                Integer.parseInt(strArrDate[2].substring(5,7)),
+                Integer.parseInt(strArrDate[2].substring(7)));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MMM-YYYY");
+        return "(" + "by: " + dtf.format(dateTypeDeadline) + ")";
     }
 
     public Deadline(String content, boolean mark) {
