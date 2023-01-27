@@ -10,6 +10,10 @@ import java.util.Map;
 //@@author {salty-flower}-reused
 //Taken from [https://stackoverflow.com/questions/3389348/parse-any-date-in-java]
 // with minor modifications
+
+/**
+ * A helper class to parse date string.
+ */
 public class DateTimeParser {
     private static final Map<String, String> DATE_FORMAT_REGEXPS = new HashMap<>() {{
         put("^\\d{8}$", "yyyyMMdd");
@@ -39,11 +43,12 @@ public class DateTimeParser {
     }};
 
     /**
-     * Determine SimpleDateFormat pattern matching with the given date string. Returns null if
+     * Determine SimpleDateFormat pattern matching with the given date string. Throws exception if
      * format is unknown. You can simply extend DateUtil with more formats if needed.
      *
      * @param dateString The date string to determine the SimpleDateFormat pattern for.
-     * @return The matching SimpleDateFormat pattern, or null if format is unknown.
+     * @return The parsed LocalDateTime object.
+     * @throws IllegalArgumentException If it cannot parse given string.
      * @see SimpleDateFormat
      */
     public static LocalDateTime parse(String dateString) {

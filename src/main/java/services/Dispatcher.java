@@ -6,6 +6,9 @@ import utilities.CommandHelper;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * A singleton class to execute all handlers.
+ */
 public final class Dispatcher {
     private final ArrayList<IHandler> handlerRegistry = new ArrayList<>();
     private final ArrayList<IHandler> errorRegistry = new ArrayList<>();
@@ -14,46 +17,60 @@ public final class Dispatcher {
     private SpeakerRegistry speakerRegistry;
     private Runnable toExit;
 
+    /**
+     * Adds a new command.
+     * @param c Command to add.
+     */
     public void registerCommand(IHandler c) {
         this.handlerRegistry.add(c);
     }
 
+    /**
+     * Sets the SpeakerRegistry.
+     * @param speakerRegistry The SpeakerRegistry.
+     */
     public void setSpeakerRegistry(SpeakerRegistry speakerRegistry) {
         this.speakerRegistry = speakerRegistry;
     }
 
-    public void registerCommand(Class<IHandler> c) {
-        this.handlerRegistry.add(CommandHelper.getObject(c));
-    }
-
+    /**
+     * Adds a new error.
+     * @param c Error to add.
+     */
     public void registerError(IHandler c) {
         this.errorRegistry.add(c);
     }
 
-    public void registerError(Class<IHandler> c) {
-        this.errorRegistry.add(CommandHelper.getObject(c));
-    }
-
-    public void setDefaultHandler(Class<IHandler> c) {
-        this.defaultHandler = CommandHelper.getObject(c);
-    }
-
+    /**
+     * Sets the fallback handler. All unrecognized user input goes there.
+     * Should take any string.
+     * @param c The default handler.
+     */
     public void setDefaultHandler(IHandler c) {
         this.defaultHandler = c;
     }
 
-    public void setExitHandler(Class<IHandler> c) {
-        this.exitHandler = CommandHelper.getObject(c);
-    }
-
+    /**
+     * Sets the handler for exit. Will trigger exit of the program
+     * once matches.
+     * @param c The exit handler.
+     */
     public void setExitHandler(IHandler c) {
         this.exitHandler = c;
     }
 
+    /**
+     * The lambda expression from driver class to indicate exit of the entire program.
+     * @param toExit The lambda to trigger program exit.
+     */
     public void setToExit(Runnable toExit) {
         this.toExit = toExit;
     }
 
+    /**
+     * Takes any user input and takes action accordingly.
+     * @param expr User input to consider.
+     */
     public void handle(String expr) {
         if (Objects.equals(expr, ""))
             return;
