@@ -3,7 +3,14 @@
  */
 public class UnmarkCommand extends Command {
     @Override
-    public void execute(Ui ui, TaskList list, String command) {
-
+    public void execute(Ui ui, TaskList list, String command) throws DukeException{
+        try {
+            Task task = list.getTask(Integer.parseInt(command.split("\\s+")[1]) - 1);
+            task.uncomplete();
+            ui.pixlPrint("Un-doing the task...\n" +
+                    "\t" + task.formatTask());
+        } catch (Exception e) {
+            throw new DukeException("Please provide a valid task number to unmark.");
+        }
     }
 }

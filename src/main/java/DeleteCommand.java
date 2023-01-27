@@ -3,7 +3,14 @@
  */
 public class DeleteCommand extends Command{
     @Override
-    public void execute(Ui ui, TaskList list, String command) {
-
+    public void execute(Ui ui, TaskList list, String command) throws DukeException{
+        try {
+            Task task = list.removeTask(Integer.parseInt(command.split("\\s+")[1]) - 1);
+            ui.pixlPrint("Removed the task:\n" +
+                    "\t" + task.formatTask() +
+                    "\nYou now have " + list.getSize() + " task(s) in the list.");
+        } catch (Exception e) {
+            throw new DukeException("Please provide a valid task number to delete.");
+        }
     }
 }

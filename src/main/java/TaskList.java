@@ -34,16 +34,19 @@ public class TaskList {
      * Removes a task from the list.
      * @param task Task to be removed.
      */
-    public void removeTask(Task task) {
-        list.remove(task);
+    public Task removeTask(Task task) {
+        if (list.remove(task)) {
+            return task;
+        }
+        return null;
     }
 
     /**
      * Removes the task at a specific index from the list.
      * @param taskIndex Index of task to be removed.
      */
-    public void removeTask(int taskIndex) {
-        list.remove(taskIndex);
+    public Task removeTask(int taskIndex) {
+        return list.remove(taskIndex);
     }
 
     /**
@@ -61,5 +64,9 @@ public class TaskList {
      */
     public int getSize() {
         return list.size();
+    }
+
+    public ArrayList<Task> getList() {
+        return list;
     }
 }

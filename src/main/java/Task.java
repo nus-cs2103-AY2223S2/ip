@@ -36,6 +36,14 @@ public abstract class Task implements java.io.Serializable {
         this.isDone = false;
     }
 
+    /**
+     * Formats the task as "[type][status] description". E.g. [T][ ] Todo1.
+     * @return The formatted representation.
+     */
+    public String formatTask() {
+        return String.format("[%s][%s] %s", getTaskType(), getStatusIcon(), getDescription());
+    }
+
     public abstract String getTaskType();
     public abstract String getDescription();
 }

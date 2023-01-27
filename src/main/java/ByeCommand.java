@@ -4,6 +4,6 @@
 public class ByeCommand extends Command{
     @Override
     public void execute(Ui ui, TaskList list, String command) {
-
+        // Do nothing.
     }
 }

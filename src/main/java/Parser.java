@@ -2,24 +2,13 @@
  * A class to parse commands received from user input.
  */
 public class Parser {
-    /** Same basic instances as Duke */
-    private Ui ui;
-    private Storage storage;
-    private TaskList list;
-
     /** Check for program exit (true when bye command entered).*/
     private boolean isExit;
 
     /**
      * Constructor for Parser class.
-     * @param ui The Ui reference of Duke.
-     * @param storage The Storage reference of Duke.
-     * @param list The TaskList reference of Duke.
      */
-    public Parser(Ui ui, Storage storage, TaskList list) {
-        this.ui = ui;
-        this.storage = storage;
-        this.list = list;
+    public Parser() {
         isExit = false;
     }
 
@@ -51,6 +40,21 @@ public class Parser {
         default:
             throw new DukeException("Invalid command");
         }
+    }
+
+    /**
+     * Utility function to find index of element in a String array.
+     * @param arr The array to search.
+     * @param item The item to find.
+     * @return Index of item if present; -1 otherwise.
+     */
+    public static int indexOf(String[] arr, String item) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i].equals(item)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public boolean getIsExit() {

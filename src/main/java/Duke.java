@@ -25,8 +25,16 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        parser = new Parser();
+    }
+
+    /**
+     * Runs the Duke program.
+     */
+    public void run() {
+        ui.open();
         try {
-            list = storage.load();
+            list = new TaskList(storage.load());
             if (list.getSize() != 0) {
                 new ListCommand().execute(ui, list, "");
             }
@@ -35,13 +43,6 @@ public class Duke {
             ui.pixlPrint("Creating a new list...");
             list = new TaskList();
         }
-    }
-
-    /**
-     * Runs the Duke program.
-     */
-    public void run() {
-        ui.open();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -54,7 +55,7 @@ public class Duke {
             }
         }
         try {
-            storage.save(list);
+            storage.save(list.getList());
         } catch (DukeException de) {
             ui.pixlPrintException(de);
         }
