@@ -1,26 +1,10 @@
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
 
 
 public class Duke {
-    private static ArrayList<Task> tasklst = new ArrayList<>();
-
-    public enum Cmdtype {
-        mark,
-        unmark,
-        delete,
-        list,
-        todo,
-        deadline,
-        event,
-        date,
-        bye
-    }
 
     public static void main(String[] args) {
+        Tasklist tl = new Tasklist();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -38,47 +22,45 @@ public class Duke {
                 checkCommand(cmd);
                 System.out.println("--------------------------------------------------------------------");
                 String c = cmd.split(" ")[0];
-                Cmdtype cmdtype = Cmdtype.valueOf(c);
+                Command cmdtype = Command.valueOf(c);
                 switch (cmdtype) {
                     case list:
-                        int counter = 1;
-                        for (Task tmp : tasklst) {
-                            System.out.println(counter++ + ". " + tmp.toString());
-                        }
+                        System.out.println(tl.getTasks());
                         break;
                     case mark:
                         int id1 = Integer.parseInt(cmd.split(" ")[1]);
-                        Task t1 = tasklst.get(id1 - 1);
+                        Task t1 = tl.getTask(id1 - 1);
                         t1.mark();
                         System.out.println("Nice! I've marked this task as done:\n" + t1);
-                        updateTasklist();
+                        tl.updateTasklist();
                         break;
                     case unmark:
                         int id2 = Integer.parseInt(cmd.split(" ")[1]);
-                        Task t2 = tasklst.get(id2 - 1);
+                        Task t2 = tl.getTask(id2 - 1);
                         t2.unmark();
                         System.out.println("OK, I've marked this task as not done yet:\n" + t2);
-                        updateTasklist();
+                        tl.updateTasklist();
                         break;
                     case todo:
                         String activity1 = cmd.substring(c.length() + 1);
                         Task t3 = new Todo(activity1);
-                        tasklst.add(t3);
+                        tl.addTask(t3);
                         System.out.println("Got it. I've added this task:\n" + t3
-                                + "\n Now you have " + tasklst.size() + " tasks in the list.");
-                        updateTasklist();
+                                + "\n Now you have " + tl.getSize() + " tasks in the list.");
+                        tl.updateTasklist();
                         break;
                     case deadline:
                         int indexOfBy = cmd.indexOf("/by ");
                         int indexOfDate = indexOfBy + 4; // "/by "
                         String activity2 = cmd.substring(c.length() + 1, indexOfBy - 1);
-                        String date = cmd.substring(indexOfDate);
-
-                        Task t4 = new Deadline(activity2, date);
-                        tasklst.add(t4);
+                        String datetime = cmd.substring(indexOfDate);
+                        String date = datetime.split(" ")[0];
+                        String time = datetime.split(" ")[1];
+                        Task t4 = new Deadline(activity2, date, time);
+                        tl.addTask(t4);
                         System.out.println("Got it. I've added this task:\n" + t4
-                                + "\n Now you have " + tasklst.size() + " tasks in the list.");
-                        updateTasklist();
+                                + "\n Now you have " + tl.getSize() + " tasks in the list.");
+                        tl.updateTasklist();
                         break;
                     case event:
                         int indexOfFrom = cmd.indexOf("/from ");
@@ -89,17 +71,17 @@ public class Duke {
                         String from = cmd.substring(indexOfFromTime, indexOfTo - 1);
                         String to = cmd.substring(indexOfToTime);
                         Task t5 = new Event(activity, from, to);
-                        tasklst.add(t5);
+                        tl.addTask(t5);
                         System.out.println("Got it. I've added this task:\n" + t5
-                                + "\n Now you have " + tasklst.size() + " tasks in the list.");
-                        updateTasklist();
+                                + "\n Now you have " + tl.getSize() + " tasks in the list.");
+                        tl.updateTasklist();
                         break;
                     case delete:
                         int id3 = Integer.parseInt(cmd.split(" ")[1]);
-                        Task t6 = tasklst.remove(id3 - 1);
+                        Task t6 = tl.removeTask(id3 - 1);
                         System.out.println("Noted. I've removed this task:\n" + t6
-                                + "\n Now you have " + tasklst.size() + " tasks in the list.");
-                        updateTasklist();
+                                + "\n Now you have " + tl.getSize() + " tasks in the list.");
+                        tl.updateTasklist();
                         break;
                     case bye:
                         System.out.println("Bye. Hope to see you again soon!");
@@ -145,27 +127,5 @@ public class Duke {
             }
         }
         return true;
-    }
-
-    public static void updateTasklist() {
-        String DIRECTORY = "./data";
-        String FILENAME = "duke.txt";
-        try {
-            File directory = new File(DIRECTORY);
-            if (!directory.exists()){
-                directory.mkdir();
-            }
-            StringBuilder res = new StringBuilder();
-            int counter = 1;
-            for (Task tmp : tasklst) {
-                res.append(counter++ + ". " + tmp.toString() + "\n");
-            }
-            FileWriter myWriter = new FileWriter(DIRECTORY + "/" + FILENAME);
-            myWriter.write(res.toString());
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
     }
 }
