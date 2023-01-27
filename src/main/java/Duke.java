@@ -1,6 +1,5 @@
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
-import java.util.Scanner;
 import java.util.function.Predicate;
 
 public class Duke {
@@ -26,15 +25,13 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         this.ui.show("Hello from\n" + logo);
 
-        Scanner scanner = new Scanner(System.in);
-
         whileLoop:
         while (true) {
-            if (!scanner.hasNextLine()) {
+            if (!this.ui.hasCommand()) {
                 continue;
             }
             
-            String input = scanner.nextLine();
+            String input = this.ui.readCommand();
             this.currentCommand = new Parser(input);
         
             try {
@@ -74,8 +71,8 @@ public class Duke {
                 this.ui.showError(e);
             }
         }
-        
-        scanner.close();
+
+        this.ui.close();
     }
 
     public static void main(String[] args) {
