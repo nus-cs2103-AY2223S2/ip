@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 public abstract class DukeException extends Exception {
-    protected final String DUKE_MESSAGE_PREFIX = ":( OOPS!!! ";
+    protected final static String DUKE_MESSAGE_PREFIX = ":( OOPS!!! ";
 
     public DukeException() {
         super();
@@ -12,6 +12,6 @@ public abstract class DukeException extends Exception {
     }
 
     public String getDukeMessage() {
-        return this.DUKE_MESSAGE_PREFIX + this.getMessage();
+        return DukeException.DUKE_MESSAGE_PREFIX + this.getMessage();
     }
 }
