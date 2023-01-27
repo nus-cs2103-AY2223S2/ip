@@ -12,7 +12,7 @@ public class Duke {
             tasks = TaskList.load();
         } catch(DukeLoadException e) {
             Duke.say(e.getDukeMessage());
-            return;
+            tasks = new TaskList();
         }
 
         String logo = " ____        _        \n"
