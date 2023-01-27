@@ -128,6 +128,7 @@ public class Duke {
         System.out.print("User: ");
         String[] raw = sc.nextLine().split(" ");
         String input = raw[0];
+
         
         while(!input.equals("bye")) {
             if (input.equals("list")) {
