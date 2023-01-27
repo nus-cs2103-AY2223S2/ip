@@ -4,9 +4,10 @@ import duke.storage.Storage;
 import duke.tasks.Tasks;
 import duke.ui.Ui;
 
+/**
+ * Represents an invalid command.
+ */
 public class IncorrectCommand extends Command {
-
-
     private static final String INT_ERROR = "Come on now, try again. I asked for an number";
     private static final String INVALID_COMMAND_ERROR = "My bad, didn't catch what you said, "
             + "did you mess up your spelling? 0_o";

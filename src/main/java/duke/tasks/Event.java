@@ -2,10 +2,20 @@ package duke.tasks;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a event task.
+ */
 public class Event extends Task {
 
     protected MyDateTime from;
     protected MyDateTime to;
+
+    /**
+     * Creates a new event task.
+     * @param description Description of the task.
+     * @param from Start date and time of the task.
+     * @param to End date and time of the task.
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = new MyDateTime(from);
@@ -26,6 +36,11 @@ public class Event extends Task {
         return this.to.formatDateTimeForPrint();
     }
 
+    /**
+     * Checks if event is occurring on a given date.
+     * @param other The given date.
+     * @return True if it occurs on given date, else false.
+     */
     public boolean liesBetween(MyDate other) {
         LocalDate f = this.from.dateOnly();
         LocalDate t = this.to.dateOnly();

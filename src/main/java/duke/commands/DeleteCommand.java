@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.tasks.Tasks;
 import duke.ui.Ui;
 
+/**
+ * Represents the command for deleting an existing task.
+ */
 public class DeleteCommand extends Command {
 
     private int taskNumber;

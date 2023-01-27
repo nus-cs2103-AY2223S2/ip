@@ -8,6 +8,9 @@ import duke.tasks.Tasks;
 import duke.tasks.Todo;
 import duke.ui.Ui;
 
+/**
+ * Represents the command for adding a task to the task list.
+ */
 public class AddCommand extends Command {
 
     private Task task;

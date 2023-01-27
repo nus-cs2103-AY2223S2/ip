@@ -10,6 +10,9 @@ import duke.tasks.Event;
 import duke.tasks.Tasks;
 import duke.tasks.Todo;
 
+/**
+ * Represents a storage for data received in Duke.
+ */
 public class Storage {
 
     private static final String FILE_PATH = "data/DukeData.txt";
@@ -19,6 +22,9 @@ public class Storage {
         this.createDirectory();
     }
 
+    /**
+     * Creates the data directory if it does not exist.
+     */
     public void createDirectory() {
         File directory = new File(DIRECTORY);
         if (!directory.exists()) {
@@ -26,6 +32,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads data from storage file into task list.
+     * @param tasks the task list.
+     * @throws IllegalStateException If task type is invalid.
+     */
     public void load(Tasks tasks) throws IllegalStateException {
         try {
             File data = new File(FILE_PATH);
@@ -82,6 +93,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks in task list into storage file.
+     * @param tasks the task list.
+     */
     public void save(Tasks tasks) {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);

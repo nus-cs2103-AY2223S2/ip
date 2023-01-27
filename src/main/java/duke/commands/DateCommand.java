@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.tasks.Tasks;
 import duke.ui.Ui;
 
+/**
+ * Represents the command for filtering tasks by a given date.
+ */
 public class DateCommand extends Command {
 
     private String date;

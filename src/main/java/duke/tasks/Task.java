@@ -1,9 +1,16 @@
 package duke.tasks;
 
+/**
+ * Represents a task.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a task.
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -17,6 +24,10 @@ public class Task {
         return String.format("[%s] %s", getStatusIcon(), this.description);
     }
 
+    /**
+     * Marks a task as done.
+     * @param silent True if printing for user is not required, else false.
+     */
     public void markTaskDone(boolean silent) {
         //task already marked done
         if (this.isDone) {
@@ -31,6 +42,9 @@ public class Task {
         }
     }
 
+    /**
+     * Marks a task undone.
+     */
     public void markTaskUndone() {
         //task is not done in first place
         if (!this.isDone) {
@@ -42,6 +56,10 @@ public class Task {
         }
     }
 
+    /**
+     * Formats the task for saving to storage.
+     * @return A formatted string of the task.
+     */
     public String formatForFile() {
         //status|desc
         return String.format("%s|%s", this.isDone ? "X" : "O", this.description);

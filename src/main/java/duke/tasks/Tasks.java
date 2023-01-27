@@ -3,6 +3,9 @@ package duke.tasks;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a task list.
+ */
 public class Tasks {
     private List<Task> l;
 
@@ -10,6 +13,9 @@ public class Tasks {
         this.l = new ArrayList<Task>(100);
     }
 
+    /**
+     * Prints the tasks in the task list.
+     */
     public void printList() {
         if (l.size() == 0) {
             System.out.println("You haven't added anything 0_0?");
@@ -22,14 +28,24 @@ public class Tasks {
         }
     }
 
-    public void addToList(Task s, boolean silent) {
-        l.add(s);
+    /**
+     * Adds a task to the task list.
+     * @param task The task to be added.
+     * @param silent True if printing to user is not required, else false.
+     */
+    public void addToList(Task task, boolean silent) {
+        l.add(task);
         if (!silent) {
-            System.out.printf("Added to list: %s\n", s.printTask());
+            System.out.printf("Added to list: %s\n", task.printTask());
             System.out.printf("Now you've got %d task(s) in your bag, CHOP CHOP GET THEM DONE.\n", l.size());
         }
     }
 
+    /**
+     * Marks a task as done.
+     * @param num The index of the task in the task list.
+     * @param silent True if printing to user is not required, else false.
+     */
     public void markTaskDone(int num, boolean silent) {
         if (withinRange(num)) {
             this.l.get(num).markTaskDone(silent);
@@ -38,6 +54,10 @@ public class Tasks {
         }
     }
 
+    /**
+     * Marks a task undone.
+     * @param num The index of the task in the task list.
+     */
     public void markTaskUndone(int num) {
         if (withinRange(num)) {
             this.l.get(num).markTaskUndone();
@@ -46,6 +66,10 @@ public class Tasks {
         }
     }
 
+    /**
+     * Deletes a task from the task list.
+     * @param num The index of the task in the task list.
+     */
     public void deleteTask(int num) {
         if (withinRange(num)) {
             System.out.println("Into the bin it goes! This is now deleted!\n" + this.l.get(num).printTask());
@@ -60,6 +84,10 @@ public class Tasks {
         return this.l.size() > num && num >= 0;
     }
 
+    /**
+     * Formats the tasks for storing to storage file.
+     * @return A formatted string of all tasks.
+     */
     public String formatForFile() {
         if (l.size() == 0) {
             return "";
@@ -72,6 +100,10 @@ public class Tasks {
         }
     }
 
+    /**
+     * Filters tasks due or occurring on a given date.
+     * @param dateOnly The given date.
+     */
     public void filterByDate(String dateOnly) {
         if (l.size() == 0) {
             System.out.println("Nothing~");

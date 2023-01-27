@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Represents a date in a specified format.
+ */
 public class MyDateTime {
     protected static DateTimeFormatter saveFormat = DateTimeFormatter.ofPattern(("dd/MM/yyyy HH:mm"));
     protected static DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy MMM dd, HH:mm");
@@ -25,6 +28,11 @@ public class MyDateTime {
         return LocalDateTime.parse(dateTime, MyDateTime.saveFormat);
     }
 
+    /**
+     * Checks if a given string is a valid date and time in the specified format.
+     * @param dateTime The given string.
+     * @return True if the string is a valid date and time, else false.
+     */
     public boolean isValidDateTime(String dateTime) {
         try {
             LocalDateTime.parse(dateTime, MyDateTime.saveFormat);

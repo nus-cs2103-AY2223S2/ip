@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Represents a date in a specified format.
+ */
 public class MyDate {
     protected static DateTimeFormatter saveFormat = DateTimeFormatter.ofPattern(("dd/MM/yyyy"));
     protected static DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy MMM dd");
@@ -24,6 +27,11 @@ public class MyDate {
         return LocalDate.parse(date, MyDate.saveFormat);
     }
 
+    /**
+     * Checks if a given string is a valid date in the specified format.
+     * @param date The given string.
+     * @return True if the string is a valid date, else false.
+     */
     public static boolean isValidDate(String date) {
         try {
             LocalDate.parse(date, MyDate.saveFormat);
