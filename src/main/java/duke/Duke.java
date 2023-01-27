@@ -57,7 +57,7 @@ public class Duke {
             } catch (DukeException e) {
                 ui.printStructuredString(e.toString());
             } catch (NumberFormatException e) {
-                ui.printStructuredString("Please enter a number.");
+                ui.printStructuredString("Please specify the index.");
             }
         }
 

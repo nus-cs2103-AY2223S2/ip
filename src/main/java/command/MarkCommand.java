@@ -2,6 +2,8 @@ package command;
 
 import duke.Duke;
 import duke.DukeException;
+import duke.IndexOutOfBoundsDukeException;
+import duke.NumberFormatDukeException;
 import task.Task;
 import task.TaskList;
 import ui.TextUi;
@@ -17,7 +19,7 @@ public class MarkCommand extends Command {
      * @param command the user-input command
      */
     public MarkCommand(String command, boolean doesPrint) throws DukeException {
-        super(command, doesPrint, 3);
+        super(command, doesPrint, 2);
     }
 
     /**
@@ -27,14 +29,15 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, TextUi ui) throws DukeException {
-        int idx = Integer.parseInt(command.split(" ")[1]);  //TODO: debug loading wrong commands. handle exception.
-        idx = idx - 1;
         try {
+            int idx = Integer.parseInt(command.substring(5)) - 1;
             Task t = taskList.get(idx);
             t.markDone();
             uiPrint(ui, String.format("Nice! I've marked this task as done:\n  %s", t));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(e.toString());
+            throw new IndexOutOfBoundsDukeException();
+        } catch (NumberFormatException e) {
+            throw new NumberFormatDukeException();
         }
     }
 }
