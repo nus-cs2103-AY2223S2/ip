@@ -24,6 +24,26 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    public String toStringIndexes(ArrayList<Integer> arrayList) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < arrayList.size(); i++) {
+            str.append(i + 1).append(".").append(this.tasks.get(arrayList.get(i)).toString()).append("\n");
+        }
+
+        return str.toString();
+    }
+
+    public ArrayList<Integer> findIndexesContaining(String str) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (this.getTask(i).getDescription().contains(str)) {
+                arrayList.add(i);
+            }
+        }
+
+        return arrayList;
+    }
+
     public Task deleteTask(int index) {
         return this.tasks.remove(index);
     }
@@ -31,9 +51,10 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             str.append(i + 1).append(".").append(this.tasks.get(i).toString()).append("\n");
         }
+
         return str.toString();
     }
 }
