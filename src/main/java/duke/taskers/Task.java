@@ -9,6 +9,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * marks the task as done
      */

@@ -8,7 +8,8 @@ public enum Command {
     LIST,
     MARK,
     UNMARK,
-    DELETE;
+    DELETE,
+    FIND;
 
     public static boolean contains(String str) {
         for (Command ac:values()) {

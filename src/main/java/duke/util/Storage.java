@@ -19,9 +19,9 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private final String filePath;
-    private final String dirPath;
-    private final File dukeFile;
+    private String filePath;
+    private String dirPath;
+    private File dukeFile;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -73,8 +73,6 @@ public class Storage {
         ArrayList<Task> loadedTasks = new ArrayList<>();
         try {
             Files.createDirectories(Paths.get(this.dirPath));
-
-            this.dukeFile.createNewFile();
             Scanner sc = new Scanner(this.dukeFile);
 
             while (sc.hasNext()) {
@@ -85,7 +83,7 @@ public class Storage {
                 String type = valueArr[0].toUpperCase().trim();
                 Command commandType = Parser.parseCommand(type);
                 Task thisTask = null;
-                boolean doneOrNot = valueArr[1].equals("1");
+                boolean doneOrNot = valueArr[1].trim().equals("1");
                 if (commandType.equals(Command.TODO)) {
                     thisTask = new Todo(valueArr[2], doneOrNot);
                 } else if (commandType.equals(Command.DEADLINE)) {
@@ -98,11 +96,10 @@ public class Storage {
                 }
                 loadedTasks.add(thisTask);
             }
-            return loadedTasks;
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            return new ArrayList<Task>();
         }
+        return loadedTasks;
     }
 
 

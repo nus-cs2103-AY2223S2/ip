@@ -18,6 +18,15 @@ public class Ui {
         this.printWithLines(totalString);
     }
 
+    public void showMatchingTasks(ArrayList<Task> arrList) {
+        String totalString = "";
+        totalString += " Here are the matching tasks in your list:";
+        for (int i = 0; i < arrList.size(); i++) {
+            totalString += "\n     " + (i+1) + "." + arrList.get(i).toString();
+        }
+        this.printWithLines(totalString);
+    }
+
     /**
      * prints out the text with lines on top and below
      * @param text the content that is to be printed out

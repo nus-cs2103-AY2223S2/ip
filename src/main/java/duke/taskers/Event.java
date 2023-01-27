@@ -7,9 +7,10 @@ public class Event extends Task {
 
     private final LocalDateTime start;
     private final LocalDateTime end;
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM uuuu h.mma");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter FORMATTER_FOR_STRING_ONLY = DateTimeFormatter.ofPattern("d MMM uuuu h.mma");
 
-
+//"d MMM uuuu h.mma"
     /**
      * event constructor
      * @param desc description of what the event is
@@ -40,7 +41,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.start.format(FORMATTER) +
-                " to: " + this.end.format(FORMATTER) + ")";
+        return "[E]" + super.toString() + " (from: " + this.start.format(FORMATTER_FOR_STRING_ONLY) + " to: " + this.end.format(FORMATTER_FOR_STRING_ONLY) + ")";
     }
 }
