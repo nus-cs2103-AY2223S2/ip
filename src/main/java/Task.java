@@ -19,6 +19,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public String toTXT() {
+        String isDoneAsInt = isDone ? "1" : "0";
+        return String.format("%s | %s", isDoneAsInt, this.description);
+    };
+
     @Override
     public String toString() {
         return String.format("[%s]%s", this.getStatusIcon(), this.description);

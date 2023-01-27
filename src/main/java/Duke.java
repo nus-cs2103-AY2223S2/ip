@@ -1,13 +1,22 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
 import java.util.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Duke {
     private static final ArrayList<Task> taskArrayList = new ArrayList<>();
+    private static final String PATH_TO_FILE = "data/duke.txt";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         //Always greets user when Duke is run
         String greeting = "Hello! I'm Duke! \n What can I do for you? \n";
         System.out.println(greeting);
+        readFromFile(PATH_TO_FILE);
 
 
         //Use scanner to read input
@@ -49,6 +58,7 @@ public class Duke {
                     System.out.println("\nNice! I've marked this task as done:\n");
                     System.out.println(currentTask);
                     System.out.println("\n____________________________________________________________\n");
+                    writeToFile(PATH_TO_FILE);
                     keyWord = scanner.next();
                     break;
                 } catch (NoSuchElementException e) {
@@ -63,6 +73,7 @@ public class Duke {
                     System.out.println("\nOK, I've marked this task as not done yet:\n");
                     System.out.println(currentTask);
                     System.out.println("\n____________________________________________________________\n");
+                    writeToFile(PATH_TO_FILE);
                     keyWord = scanner.next();
                     break;
                 } catch (NoSuchElementException e) {
@@ -78,6 +89,7 @@ public class Duke {
                         currentTask = new ToDo(taskDescription.toString());
                         taskArrayList.add(currentTask);
                         addTaskReply(currentTask);
+                        appendToFile(PATH_TO_FILE, currentTask);
                         keyWord = scanner.next();
                         break;
                     }
@@ -115,6 +127,7 @@ public class Duke {
                         currentTask = new Deadline(taskDescription.toString(),by.toString());
                         taskArrayList.add(currentTask);
                         addTaskReply(currentTask);
+                        appendToFile(PATH_TO_FILE, currentTask);
                         keyWord = scanner.next();
                         break;
                     }
@@ -148,6 +161,7 @@ public class Duke {
                 currentTask = new Event(taskDescription.toString(), from.toString(), to);
                 taskArrayList.add(currentTask);
                 addTaskReply(currentTask);
+                appendToFile(PATH_TO_FILE, currentTask);
                 keyWord = scanner.next();
                 break;
             case "delete":
@@ -159,6 +173,7 @@ public class Duke {
                     System.out.println(currentTask.toString());
                     System.out.println("\nNow you have " + taskArrayList.size() + " tasks in the list.");
                     System.out.println("\n____________________________________________________________\n");
+                    writeToFile(PATH_TO_FILE);
                     keyWord = scanner.next();
                     break;
                 } catch (NoSuchElementException e) {
@@ -181,5 +196,68 @@ public class Duke {
         System.out.println("\nGot it. I've added this task: " + currentTask.toString());
         System.out.println("\nNow you have " + taskArrayList.size() + " tasks in the list.");
         System.out.println("\n____________________________________________________________\n");
+    }
+
+    public static void readFromFile(String filePath) throws IOException {
+        if (hasTaskListFile(filePath)) { //file exists
+            File fileTxt = new File(filePath);
+            Scanner scanner = new Scanner(fileTxt);
+            while (scanner.hasNext()) {
+                //create task for each line of tasks
+                String taskString = scanner.nextLine();
+                String[] splitTaskString = taskString.split(" \\| ");
+                Task scannedTask;
+                boolean markAsDone = false;
+                switch (splitTaskString[0]) {
+                case "T":
+                    scannedTask = new ToDo(splitTaskString[2]);
+                    markAsDone = splitTaskString[1].equals("1");
+                    if (markAsDone) {
+                        scannedTask.markAsDone();
+                    }
+                    taskArrayList.add(scannedTask);
+                    break;
+                case "D":
+                    scannedTask = new Deadline(splitTaskString[2], splitTaskString[3]);
+                    markAsDone = splitTaskString[1].equals("1");
+                    if (markAsDone) {
+                        scannedTask.markAsDone();
+                    }
+                    taskArrayList.add(scannedTask);
+                    break;
+                case "E":
+                    scannedTask = new Event(splitTaskString[2], splitTaskString[3], splitTaskString[4]);
+                    markAsDone = splitTaskString[1].equals("1");
+                    if (markAsDone) {
+                        scannedTask.markAsDone();
+                    }
+                    taskArrayList.add(scannedTask);
+                    break;
+                }
+            }
+        } else {
+            Path path = Paths.get(filePath);
+            Files.createDirectories(path.getParent());
+            Files.createFile(path);
+        }
+    }
+
+    public static void writeToFile(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (Task t : taskArrayList) {
+            fw.write(t.toTXT() + System.lineSeparator());
+        }
+        fw.close();
+    }
+
+    public static void appendToFile(String filePath, Task task) throws IOException {
+        FileWriter fw = new FileWriter(filePath,true);
+        fw.write(task.toTXT() + System.lineSeparator());
+        fw.close();
+    }
+
+    public static boolean hasTaskListFile(String filePath) {
+        Path path = Paths.get(filePath);
+        return Files.exists(path);
     }
 }
