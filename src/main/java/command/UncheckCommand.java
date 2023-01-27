@@ -3,7 +3,7 @@ package command;
 import task.TaskManager;
 
 import util.DukeException;
-import util.Parser;
+
 public class UncheckCommand extends Command {
     private final TaskManager taskManager;
     private final int index;

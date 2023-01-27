@@ -2,9 +2,14 @@ package util;
 
 import task.*;
 
-import java.io.*;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Serializable;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class FileManager implements Serializable {
     private static final String FILEPATH = "src/main/java/data/UserTasks.txt";
@@ -13,14 +18,14 @@ public class FileManager implements Serializable {
     public void saveTasksToFile(TaskManager taskManager) {
         try{
             File file = new File(FILEPATH);
-            if(!file.isFile() && !file.isDirectory()) {
+            if (!file.isFile() && !file.isDirectory()) {
                 System.out.println("File or folder not found!");
                 System.out.println("Please create the file or folder.");
             }
             FileWriter fw = new FileWriter(file);
             ArrayList<Task> taskArr = taskManager.getTaskArr();
 
-            for(int i = 0; i < taskArr.size(); i++) {
+            for (int i = 0; i < taskArr.size(); i++) {
                 fw.write(taskArr.get(i).serialise());
                 fw.write(System.lineSeparator());
             }
@@ -32,12 +37,12 @@ public class FileManager implements Serializable {
 
     public int loadDataToArrayList(TaskManager taskManager) {
         File file = new File(FILEPATH);
-        if(!file.isFile()) {
+        if (!file.isFile()) {
             return -1;
         }
 
         try {
-            Scanner s = new Scanner(file); // create a Scanner using the File as the source
+            Scanner s = new Scanner(file);
             while (s.hasNext()) {
                 String data = s.nextLine();
                 String id = data.split(",")[0];
@@ -69,5 +74,4 @@ public class FileManager implements Serializable {
         }
         return 0;
     }
-
 }

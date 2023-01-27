@@ -5,7 +5,7 @@ public class Parser {
     public String parseScannerInput(String input) {
         //remove leading and trailing whitespaces
         String ip = input.trim();
-        if(!ip.isBlank()) {
+        if (!ip.isBlank()) {
             String[] inputArr = ip.split(" ", 2);
             return inputArr[0];
         }
@@ -17,7 +17,7 @@ public class Parser {
     public static boolean isNumeric(String string) {
         int intValue;
 
-        if(string == null || string.equals("")) {
+        if (string == null || string.equals("")) {
             System.out.println("String cannot be parsed, it is null or empty.");
             return false;
         }

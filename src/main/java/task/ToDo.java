@@ -1,7 +1,5 @@
 package task;
 
-import util.DukeException;
-
 public class ToDo extends Task {
     public ToDo(String description, boolean status) {
         super(description, status);
