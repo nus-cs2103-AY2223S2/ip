@@ -1,9 +1,16 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
+
 /**
  * A Command subclass for the mark command.
  */
 public class DeleteCommand extends Command{
     @Override
-    public void execute(Ui ui, TaskList list, String command) throws DukeException{
+    public void execute(Ui ui, TaskList list, String command) throws DukeException {
         try {
             Task task = list.removeTask(Integer.parseInt(command.split("\\s+")[1]) - 1);
             ui.pixlPrint("Removed the task:\n" +

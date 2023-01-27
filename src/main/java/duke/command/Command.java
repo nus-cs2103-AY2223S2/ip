@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+
 /**
  * Abstract class for duke.commands.
  */

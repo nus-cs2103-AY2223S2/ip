@@ -1,3 +1,5 @@
+package duke;
+
 // A class to store global variable values.
 public final class Values {
     // Logo art generated on https://patorjk.com/software/taag/#p=display&f=Graffiti&t=PixlBot

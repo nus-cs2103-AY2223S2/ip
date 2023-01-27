@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * A task subclass to represent a ToDo (no date).
  */

@@ -1,4 +1,4 @@
-import java.io.Serializable;
+package duke.task;
 
 /**
  * A class to represent a task.

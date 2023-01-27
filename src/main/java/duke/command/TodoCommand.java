@@ -1,9 +1,18 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.Task;
+import duke.TaskList;
+import duke.task.ToDo;
+import duke.Ui;
+import duke.Values;
+
 /**
  * A Command subclass for the todo command.
  */
 public class TodoCommand extends Command{
     @Override
-    public void execute(Ui ui, TaskList list, String command) throws DukeException{
+    public void execute(Ui ui, TaskList list, String command) throws DukeException {
         String[] parts = command.split("\\s+");
         if (parts.length == 1) {
             throw new DukeException("ToDo description cannot be empty.");

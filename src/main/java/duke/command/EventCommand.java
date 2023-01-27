@@ -1,9 +1,19 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.Event;
+import duke.Parser;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
+import duke.Values;
+
 /**
  * A Command subclass for the event command.
  */
 public class EventCommand extends Command{
     @Override
-    public void execute(Ui ui, TaskList list, String command) throws DukeException{
+    public void execute(Ui ui, TaskList list, String command) throws DukeException {
         String[] parts = command.split("\\s+");
         int fromIndex = Parser.indexOf(parts, "/from");
         int toIndex = Parser.indexOf(parts, "/to");
