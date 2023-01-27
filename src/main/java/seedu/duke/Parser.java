@@ -10,6 +10,20 @@ import java.util.Arrays;
 public class Parser {
 
     /**
+     *  Checks whether task number is given
+     *
+     *  @param inputStrings String array of each word input by the user
+     *  @return String of the task number if it exists
+     */
+    private String getTaskNumber(String[] inputStrings) throws DukeException {
+        if (inputStrings.length == 1) {
+            throw new DukeException("No task number was given!");
+        } else {
+            return inputStrings[1];
+        }
+    }
+
+    /**
      *  Checks the validity of the command
      *
      *  @param command String of the command sent by user
@@ -23,20 +37,6 @@ public class Parser {
             }
         }
         throw new DukeException("I don't know what this command means!");
-    }
-
-    /**
-     *  Checks whether task number is given
-     *
-     *  @param inputStrings String array of each word input by the user
-     *  @return String of the task number if it exists
-     */
-    private String getTaskNumber(String[] inputStrings) throws DukeException {
-        if (inputStrings.length == 1) {
-            throw new DukeException("No task number was given!");
-        } else {
-            return inputStrings[1];
-        }
     }
 
     /**

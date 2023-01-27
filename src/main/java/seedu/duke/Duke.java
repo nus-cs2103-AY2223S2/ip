@@ -8,10 +8,10 @@ public class Duke {
     private TaskList tasks;
 
     private final static String[] LIST_OF_COMMANDS =
-            new String[]{"list", "bye", "todo", "mark", "unmark", "event", "deadline", "delete"};
+            new String[]{"list", "bye", "todo", "mark", "unmark", "event", "deadline", "delete", "find"};
 
     enum Commands {
-        start, list, bye, todo, mark, unmark, event, deadline, delete
+        start, list, bye, todo, mark, unmark, event, deadline, delete, find
     }
 
     public Duke(String filePath) {

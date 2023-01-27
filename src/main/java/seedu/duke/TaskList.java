@@ -34,6 +34,24 @@ public class TaskList {
     }
 
     /**
+     * @return Size of the TaskList
+     */
+    public int getSize() {
+        return this.tasks.size();
+    }
+
+    /**
+     * Format Task to be saved as String in save file
+     *
+     * @param index Index of Task to be unmarked (in 0-indexing)
+     * @return String of formatted Task
+     */
+    public String formatTask(int index) {
+        return get(index).formatTask();
+    }
+
+
+    /**
      * Adds Task to the TaskList
      *
      * @param newTask Task to be added
@@ -83,23 +101,6 @@ public class TaskList {
         Task unmarkedTask = markedTask.unmarkTask();
         updatedTasks.set(index, unmarkedTask);
         return new TaskList(updatedTasks);
-    }
-
-    /**
-     * Format Task to be saved as String in save file
-     *
-     * @param index Index of Task to be unmarked (in 0-indexing)
-     * @return String of formatted Task
-     */
-    public String formatTask(int index) {
-        return get(index).formatTask();
-    }
-
-    /**
-     * @return Size of the TaskList
-     */
-    public int getSize() {
-        return this.tasks.size();
     }
 
     /**
