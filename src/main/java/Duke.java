@@ -1,8 +1,7 @@
 import ui.WelcomeUI;
 
-import java.util.*;
+import java.util.Scanner;
 public class Duke {
-
     /**
      * Main driver method which initialises the chatbot with
      * a Scanner, Welcome UI and runs it.

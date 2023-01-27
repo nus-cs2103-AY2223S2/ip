@@ -18,9 +18,8 @@ public class WelcomeUI {
 //            "|__|\\_|\\__,_|_____|____|__|\\_|____/ \\___/ \n" +
 //            "                                          \n";
 
-    protected String LOGO = "RubiRyo ";
-
-    protected String introMessage = "Woof! I'm RubiRyo the Japanese Spitz!\n" +
+    private String LOGO = "RubiRyo ";
+    private String introMessage = "Woof! I'm RubiRyo the Japanese Spitz!\n" +
             "Give me a command or type menu to see the commands I know!";
 
     @Override

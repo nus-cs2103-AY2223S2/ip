@@ -1,7 +1,5 @@
 package task;
 
-import util.DukeException;
-
 /**
  * Represents a todo task that the user wishes to add
  * to the list. A todo object has a completion status

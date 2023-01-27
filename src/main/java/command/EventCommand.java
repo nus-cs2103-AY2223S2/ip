@@ -1,8 +1,8 @@
 package command;
 
-import task.Deadline;
 import task.Event;
 import task.TaskManager;
+
 import util.DukeException;
 
 /**

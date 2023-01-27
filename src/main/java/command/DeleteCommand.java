@@ -1,7 +1,8 @@
 package command;
+
 import task.TaskManager;
+
 import util.DukeException;
-import util.Parser;
 
 /**
  * Executes delete task command.

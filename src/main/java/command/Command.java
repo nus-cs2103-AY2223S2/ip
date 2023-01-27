@@ -28,5 +28,4 @@ public abstract class Command {
      * @throws DukeException
      */
     public abstract void executeCommand() throws DukeException;
-
 }
