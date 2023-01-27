@@ -20,6 +20,8 @@ public class Todo extends Task {
     
     @Override
     public String formatTask() {
-        return String.format("todo~-~-~%s~-~-~%s", this.getDescription(), this.isDone() ? "X" : "O");
+        return String.format("todo~-~-~%s~-~-~%s",
+                this.getDescription(),
+                this.isDone() ? "X" : "O");
     }
 }

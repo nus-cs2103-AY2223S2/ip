@@ -29,6 +29,10 @@ public class Event extends Task {
     
     @Override
     public String formatTask() {
-        return String.format("event~-~-~%s~-~-~%s~-~-~%s~-~-~%s", this.getDescription(), DateTimeParser.formatSave(this.startTime), DateTimeParser.formatSave(this.endTime), this.isDone() ? "X" : "O");
+        return String.format("event~-~-~%s~-~-~%s~-~-~%s~-~-~%s",
+                this.getDescription(),
+                DateTimeParser.formatSave(this.startTime),
+                DateTimeParser.formatSave(this.endTime),
+                this.isDone() ? "X" : "O");
     }
 }

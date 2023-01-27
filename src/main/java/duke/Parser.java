@@ -33,7 +33,8 @@ public class Parser {
             }
         } else if (input.startsWith("todo")) {
             if (!input.matches("^todo .+$")) {
-                arguments.add("Please enter the task you would like to do in the format \n>> todo [task]\n");
+                arguments.add("Please enter the task you would like to do in the format \n" +
+                        ">> todo [task]\n");
                 return new Command("invalid", arguments);
             } else {
                 String taskDescription = input.split(" ", 2)[1];
@@ -42,7 +43,8 @@ public class Parser {
             }
         } else if (input.startsWith("deadline")) {
             if (!input.matches("^deadline .+ /by .+$")) {
-                arguments.add("Sorry, that command is invalid. Specify a deadline task with \n >> deadline [description] /by [time]\n");
+                arguments.add("Sorry, that command is invalid. Specify a deadline task with \n " +
+                        ">> deadline [description] /by [time]\n");
                 return new Command("invalid", arguments);
             } else {
                 String delimiter = "/by ";
@@ -54,7 +56,8 @@ public class Parser {
             }
         } else if (input.startsWith("event")) {
             if (!input.matches("^event .+ /from .+ /to .+$")) {
-                arguments.add("Sorry, that command is invalid. Specify an event task with \n >> event [description] /from [start time] /to [end time]\n");
+                arguments.add("Sorry, that command is invalid. Specify an event task with \n " +
+                        ">> event [description] /from [start time] /to [end time]\n");
                 return new Command("invalid", arguments);
             } else {
                 String startDelimiter = "/from ";
@@ -72,7 +75,8 @@ public class Parser {
             }
         } else if (input.startsWith("delete")) {
             if (!input.matches("^delete \\d+$")) {
-                arguments.add("Tell me the index of the event you want to delete! Type >>list to view your events again.\n");
+                arguments.add("Tell me the index of the event you want to delete! " +
+                        "Type >>list to view your events again.\n");
                 return new Command("invalid", arguments);
             } else {
                 String taskIndex = input.split(" ")[1];

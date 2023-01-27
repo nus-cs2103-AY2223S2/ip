@@ -25,7 +25,8 @@ public class CommandHandler {
             return addDeadline(command.getArguments().get(0), command.getArguments().get(1), tasks);
             //Fallthrough 
         case "event":
-            return addEvent(command.getArguments().get(0), command.getArguments().get(1), command.getArguments().get(2), tasks);
+            return addEvent(command.getArguments().get(0), 
+                    command.getArguments().get(1), command.getArguments().get(2), tasks);
             //Fallthrough 
         case "delete":
             return deleteEvent(command.getArguments().get(0), tasks);
@@ -94,7 +95,8 @@ public class CommandHandler {
         try {
             newTask = new Deadline(description, by);
         } catch (DateTimeParseException e) {
-            return "Sorry, I didn't understand. Please enter a date or time in one of the following formats:\n>>31/01/1970 2359\n>>2359\n>>31/01/1970\n";
+            return "Sorry, I didn't understand. Please enter a date or time in one of the following formats:\n" +
+                    ">>31/01/1970 2359\n>>2359\n>>31/01/1970\n";
         }
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());
@@ -106,7 +108,8 @@ public class CommandHandler {
         try {
             newTask = new Event(description, from, to);
         } catch (DateTimeParseException e) {
-            return "Sorry, I didn't understand. Please enter a date or time in one of the following formats:\n>>31/01/1970 2359\n>>2359\n>>31/01/1970\n";
+            return "Sorry, I didn't understand. Please enter a date or time in one of the following formats:\n" +
+                    ">>31/01/1970 2359\n>>2359\n>>31/01/1970\n";
         }
         tasks.add(newTask);
         response = String.format("Added: %s\n", newTask.printTask());
