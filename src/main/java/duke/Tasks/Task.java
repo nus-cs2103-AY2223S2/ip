@@ -6,10 +6,14 @@ public class Task {
 
     public static int taskNum;
 
+    //
+    public boolean isExit;
+
     public Task (String description) {
         this.description = description;
         this.isDone = false;
         taskNum++;
+        this.isExit = false;
     }
 
     public String getStatusIcon() {

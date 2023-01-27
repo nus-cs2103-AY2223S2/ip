@@ -1,7 +1,5 @@
 package duke.Tasks;
 
-import java.time.format.DateTimeFormatter;
-
 public class Event extends Task{
     protected String from;
 
