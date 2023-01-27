@@ -22,22 +22,22 @@ public class TaskList {
 
     //==== OVERLOADED METHOD addTask =====
     public String addTask(String str) {
-        taskCount++;
         Task newTask = new ToDo(str);
         this.taskList.add(newTask);
+        taskCount++;
         return addTaskMessage(newTask);
     }
-    public String addTask(String task, String deadline) {
-        taskCount++;
+    public String addTask(String task, String deadline) throws DukeException {
         Task newTask = new Deadline(task, deadline);
         this.taskList.add(newTask);
+        taskCount++;
         return addTaskMessage(newTask);
     }
 
-    public String addTask(String task, String from, String to) {
-        taskCount++;
+    public String addTask(String task, String from, String to) throws DukeException {
         Task newTask = new Event(task, from, to);
         this.taskList.add(newTask);
+        taskCount++;
         return addTaskMessage(newTask);
     }
     //======================================
