@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.task.Task;
+
 public class UI {
     protected String indent = "     ";
     protected String divider = indent + "____________________________________________________________";

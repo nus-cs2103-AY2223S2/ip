@@ -1,5 +1,13 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.UI;
+
 import java.util.Scanner;
-import java.time.DateTimeException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
@@ -17,7 +25,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("../../../data", "../../../data/duke.txt").run();
+        new Duke("data", "../../../data/duke.txt").run();
     }
 
     public void run() {
