@@ -1,21 +1,23 @@
 package jeo.exception;
 
 /**
- * Custom jeo.exception that is thrown when there is a command error
+ * Represents the custom exception that is thrown when an error is encountered while parsing user input.
+ * @author Goh Jun How
+ * @version 0.1
  */
 public class JeoException extends Exception {
 
     /**
-     * Creates a new jeo.exception with description
-     * @param e Describes the error message
+     * Creates a new custom exception with the specified error description.
+     * @param e String describing the error message.
      */
     public JeoException(String e) {
         super(e);
     }
 
     /**
-     * Gets the error message
-     * @return error message
+     * Gets the error message.
+     * @return String representing the error message.
      */
     @Override
     public String getMessage() {

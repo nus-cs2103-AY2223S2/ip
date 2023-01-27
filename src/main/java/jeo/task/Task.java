@@ -1,15 +1,17 @@
 package jeo.task;
 
 /**
- * Represents a generic task
+ * Represents a generic task.
+ * @author Goh Jun How
+ * @version 0.1
  */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Tasks.Task constructor to be inherited
-     * @param description Describes the task
+     * Acts as the constructor taking in the task description, to be inherited.
+     * @param description String describing the task.
      */
     public Task(String description) {
         this.description = description;
@@ -17,38 +19,38 @@ public abstract class Task {
     }
 
     /**
-     * Gets the task description
-     * @return task description
+     * Gets the task description.
+     * @return String representing the task description.
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Gets the status icon
-     * @return "X" or " "
+     * Gets the status icon.
+     * @return String representing either "X" or " ".
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done jeo.task with X
     }
 
     /**
-     * Marks the task as done
+     * Marks the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Marks the task as not done
+     * Marks the task as not done.
      */
     public void unmarkFromDone() {
         this.isDone = false;
     }
 
     /**
-     * String representation of a task
-     * @return String representation of task
+     * Gets the string representation of a task.
+     * @return String representing a task.
      */
     @Override
     public String toString() {

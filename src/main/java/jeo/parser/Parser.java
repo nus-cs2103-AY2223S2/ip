@@ -3,12 +3,17 @@ package jeo.parser;
 import java.util.HashMap;
 import jeo.exception.JeoException;
 
+/**
+ * Represents the parser which parses user input as a string.
+ * @author Goh Jun How
+ * @version 0.1
+ */
 public class Parser {
 
     /**
-     * Accepts a string that represents the trimmed raw string input to be parsed as command and action
-     * @param s Trimmed raw string input of current line
-     * @return a hashmap linking each essential aspect of the input to its corresponding substring
+     * Accepts a string that represents the trimmed raw string input to be parsed as command and action.
+     * @param s String representing the trimmed raw string input of current line.
+     * @return HashMap linking each essential aspect of the input to its corresponding substring.
      */
     public static HashMap<String, String> parseString(String s) throws JeoException {
         HashMap<String, String> hm = new HashMap<>();
@@ -106,11 +111,11 @@ public class Parser {
     }
 
     /**
-     * Accepts a string that represents the trimmed raw string input and an integer that represents
-     * the first index after the command, returning the task number that follows (for actions)
-     * @param s Trimmed raw string input
-     * @param j First index after the command substring
-     * @return an integer representing the task number
+     * Accepts a string that represents the trimmed raw string input, an integer that represents
+     * the first index after the command, and returns the task number that follows.
+     * @param s String representing the trimmed raw string input.
+     * @param j An integer representing the first index after the command substring.
+     * @return An integer representing the task number.
      */
     public static int parseSubStringActions(String s, int j) throws JeoException {
         s = s.substring(j).trim();
@@ -127,11 +132,13 @@ public class Parser {
     }
 
     /**
-     * Accepts 2 strings, one representing a substring after the command and the other representing
-     * one of 3 cases to be parsed, for deadline and event, returning a list of 2 parsed substring values
-     * @param s Substring after the command
-     * @param c Takes in "deadline", "event1" or "event2" which parses different segments of deadline and event
-     * @return a list of 2 strings which have been parsed
+     * Accepts two strings, one representing a substring after the command and the other
+     * representing one of three cases to be parsed, for deadline and event, and returns
+     * a list of two parsed substring values.
+     * @param s String representing the substring after the command.
+     * @param c String representing either "deadline", "event1", or "event2", which parses
+     *          different segments of deadline and event.
+     * @return String[] representing a list of 2 strings which have been parsed.
      */
     public static String[] parseSubstringTasks(String s, String c) {
         StringBuilder sb = new StringBuilder();

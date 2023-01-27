@@ -17,7 +17,9 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 /**
- * Main Bot class which the user may run the program from
+ * Represents the bot which the user may run.
+ * @author Goh Jun How
+ * @version 0.1
  */
 public class JeoBot {
     protected final String DATE_PARSE = "yyyy-MM-dd";
@@ -25,10 +27,17 @@ public class JeoBot {
     protected Storage store;
     protected TaskList taskList;
 
+    /**
+     * Represents the list of commands recognised by the bot.
+     */
     public enum Command {
         BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, DUE
     }
 
+    /**
+     * Creates the bot with the specified path to load tasks.
+     * @param path String representing the file path.
+     */
     public JeoBot(String path) {
         ui = new Ui();
         store = new Storage(path);
@@ -41,7 +50,7 @@ public class JeoBot {
     }
 
     /**
-     * Executes commands which the user inputs accordingly
+     * Executes commands which the user inputs and prints output message accordingly.
      */
     public void run() {
         ui.showGreetingMessage();
@@ -51,7 +60,6 @@ public class JeoBot {
             String s = sc.nextLine();
             try {
                 ui.showBodyDivider();
-                // Parse
                 HashMap<String, String> hm = Parser.parseString(s);
                 Command command = Command.valueOf(hm.get("command").toUpperCase());
                 switch (command) {
@@ -126,6 +134,10 @@ public class JeoBot {
         sc.close();
     }
 
+    /**
+     * Starts the bot running.
+     * @param args String representing the command line arguments.
+     */
     public static void main(String[] args) {
         new JeoBot("./data.txt").run();
     }

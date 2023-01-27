@@ -13,14 +13,27 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage for loading and saving tasks.
+ * @author Goh Jun How
+ * @version 0.1
+ */
 public class Storage {
     protected String path;
     protected final String DATE_TIME_TO_PARSE = "yyyy-MM-dd HH:mm";
 
+    /**
+     * Creates the storage object with the specified path to load tasks.
+     * @param path String representing the file path.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Loads tasks that have been saved previously.
+     * @return TaskList containing saved tasks.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> arr = new ArrayList<>();
         File f = new File(this.path);
@@ -34,6 +47,10 @@ public class Storage {
         return arr;
     }
 
+    /**
+     * Saves tasks to data file.
+     * @param taskList TaskList containing tasks to be saved.
+     */
     public void save(ArrayList<Task> taskList) throws IOException {
         FileWriter fw = new FileWriter(this.path);
         for (Task task: taskList) {
@@ -64,6 +81,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Returns task corresponding to the accepted string.
+     * @param str String representing formatted text to be parsed.
+     * @return Task corresponding to the accepted string.
+     */
     public Task parse(String str) {
         Task task;
         String[] arr = str.split("\\\\");

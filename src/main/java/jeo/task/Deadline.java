@@ -5,7 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a Deadline task
+ * Represents a task that has a deadline.
+ * @author Goh Jun How
+ * @version 0.1
  */
 public class Deadline extends Task {
     protected final String DATE_TIME_TO_PARSE = "yyyy-MM-dd HH:mm";
@@ -14,9 +16,9 @@ public class Deadline extends Task {
     protected LocalDateTime byDateTime;
 
     /**
-     * Creates a Deadline task object
-     * @param description Describes the task
-     * @param by Represents when the task is due
+     * Creates a Deadline task object with the specified description and due date-time.
+     * @param description String describing the task.
+     * @param by String representing the date-time when the task is due.
      */
     public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
@@ -26,17 +28,25 @@ public class Deadline extends Task {
         this.by = this.byDateTime.format(formatterPrint);
     }
 
+    /**
+     * Gets the parsed due date-time.
+     * @return the parsed due date-time.
+     */
     public LocalDateTime getDateTimeBy() {
         return this.byDateTime;
     }
 
+    /**
+     * Gets the formatted due date-time.
+     * @return the formatted due date-time.
+     */
     public String getFormattedBy() {
         return this.by;
     }
 
     /**
-     * String representation of deadline task
-     * @return String representation of deadline task
+     * Gets the string representation of the deadline task.
+     * @return String representing the deadline task.
      */
     @Override
     public String toString() {

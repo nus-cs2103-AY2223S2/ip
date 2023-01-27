@@ -1,21 +1,23 @@
 package jeo.task;
 
 /**
- * Represents a Todo task
+ * Represents a Todo task.
+ * @author Goh Jun How
+ * @version 0.1
  */
 public class ToDo extends Task {
 
     /**
-     * Creates a toDo task object
-     * @param description Describes the task
+     * Creates a ToDo task object with the specified description.
+     * @param description String describing the task.
      */
     public ToDo(String description) {
         super(description);
     }
 
     /**
-     * String representation of todo task
-     * @return String representation of todo task
+     * Gets the string representation of the todo task.
+     * @return String representing the todo task.
      */
     @Override
     public String toString() {
