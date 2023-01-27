@@ -4,11 +4,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a task. A Task object corresponds to a task that represented by its completion status(done),description and deadline
+ * Represents a task. A Task object corresponds to a task that represented by
+ * its completion status(done),description and deadline
  */
 
 public class Task {
-    private boolean done;
+    private boolean isDone;
     private String description;
     private LocalDate deadline;
 
@@ -20,7 +21,7 @@ public class Task {
 
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
         this.deadline = null;
     }
 
@@ -28,24 +29,22 @@ public class Task {
      * initialises an task object with the given description and deadline
      * 
      * @param description description of task
-     * @param deadline deadline of task
+     * @param deadline    deadline of task
      */
-
-
 
     public Task(String description, LocalDate deadline) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
         this.deadline = deadline;
     }
 
     public String mark() {
-        this.done = true;
+        this.isDone = true;
         return this.toString();
     }
 
     public String unMark() {
-        this.done = false;
+        this.isDone = false;
         return this.toString();
     }
 
@@ -56,7 +55,7 @@ public class Task {
     @Override
     public String toString() {
         String doneString;
-        if (done) {
+        if (isDone) {
             doneString = "[X]";
         } else {
             doneString = "[ ]";

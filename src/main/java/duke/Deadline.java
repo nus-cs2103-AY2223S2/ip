@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDate;
 
 /**
- * Represents a task of deadline type
+ * represents a task of deadline type
  */
 
 public class Deadline extends Task {

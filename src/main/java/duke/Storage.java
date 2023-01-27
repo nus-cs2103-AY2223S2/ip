@@ -1,10 +1,12 @@
 package duke;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.io.IOException;
-import java.util.Scanner;
 import java.io.FileWriter;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 /**
  * Represents a storage system that read or stores information from hard disk to program

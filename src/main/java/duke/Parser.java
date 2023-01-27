@@ -22,7 +22,7 @@ public class Parser {
     }
 
     /**
-     * Convert input string to LocalDate type
+     * convert input string to LocalDate type
      * @param splitInput Array of words in input string
      * @return LocalDate object of parsed input string else null
      */
@@ -54,7 +54,7 @@ public class Parser {
     public boolean parse(String input, TaskList toDoList) throws DukeException {
         String[] splitInput = input.split(" ");
         String command = splitInput[0];
-        boolean writeToFile = false;
+        boolean isWritingToFile = false;
         LocalDate taskDate;
 
         System.out.println("________________________________");
@@ -95,7 +95,7 @@ public class Parser {
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Please input a valid integer");
                 }
-                writeToFile = true;
+                isWritingToFile = true;
 
                 break;
             case "unmark":
@@ -116,7 +116,7 @@ public class Parser {
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Please input a valid integer");
                 }
-                writeToFile = true;
+                isWritingToFile = true;
 
                 break;
             case "event":
@@ -140,7 +140,7 @@ public class Parser {
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("  " + newEvent.toString());
                 System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
-                writeToFile = true;
+                isWritingToFile = true;
 
                 break;
             case "deadline":
@@ -161,7 +161,7 @@ public class Parser {
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("  " + newDeadline.toString());
                 System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
-                writeToFile = true;
+                isWritingToFile = true;
                 
                 break;
             case "todo":
@@ -181,7 +181,7 @@ public class Parser {
                 System.out.println(" Got it. I've added this task:");
                 System.out.println("  " + newTodo.toString());
                 System.out.println("Now you have " + toDoList.size() + " tasks on the list.");
-                writeToFile = true;
+                isWritingToFile = true;
                 
                 break;
             case "delete":
@@ -203,7 +203,7 @@ public class Parser {
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Please input a valid integer");
                 }
-                writeToFile = true;
+                isWritingToFile = true;
                 
                 break;
             default:
@@ -211,7 +211,7 @@ public class Parser {
 
         }
 
-        return writeToFile;
+        return isWritingToFile;
 
     }
 

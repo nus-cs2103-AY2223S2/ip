@@ -15,7 +15,7 @@ public class UI {
     }
 
     /**
-     * check if input string has less than 2 words *
+     * runs the user interface *
      * 
      * @param toDoList TaskList which stores all tasks in programme
      * @param parser   Parser that executes relevant command for each input
@@ -33,16 +33,16 @@ public class UI {
                 break;
             }
 
-            boolean writeToFile = false;
+            boolean isWritingToFile = false;
 
             try {
-                writeToFile = parser.parse(input, toDoList);
+                isWritingToFile = parser.parse(input, toDoList);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 System.out.println("________________________________");
             }
 
-            if (writeToFile) {
+            if (isWritingToFile) {
                 storage.writeToFile(toDoList);
             }
 
