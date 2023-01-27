@@ -1,5 +1,4 @@
 package duke.Exceptions;
-
 /**
  * Contains a duke exception object when unknown command is imput by user
  */

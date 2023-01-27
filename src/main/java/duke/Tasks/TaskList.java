@@ -1,8 +1,8 @@
 package duke.Tasks;
 
 import duke.Tasks.Task;
-
 import  java.util.ArrayList;
+
 public class TaskList {
     private static ArrayList<Task> list;
 

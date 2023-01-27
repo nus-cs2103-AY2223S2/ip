@@ -9,6 +9,7 @@ import java.lang.String;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+
 /**
  * Contains Parser object that deals with making sense of the user command
  */
@@ -28,6 +29,7 @@ public class Parser {
         System.out.println("\tGot it. I have added this task:\n" + tdItem.toString());
         System.out.printf("\tNow you have %d tasks in the list.\n", list.size());
     }
+
     /**
      * The method for addEvents
      * @param description of events task
@@ -41,18 +43,21 @@ public class Parser {
         System.out.println("\tGot it. I have added this task:\n " + evItem.toString());
         System.out.printf("\tNow you have %d tasks in the list.\n", list.size());
     }
+
     /**
      * The method for addDeadline
      * @param description of deadline task
      * @param list tasklist where task going to be stored in
      * @param doneBy the time of deadline task
      */
+
     private static void addDeadline(String description, TaskList list, LocalDateTime doneBy) {
         Deadline dlItem = new Deadline(description, doneBy);
         list.addTask(dlItem);
         System.out.println("\tGot it. I have added this task:\n " + dlItem.toString());
         System.out.printf("\tYou have %d tasks in the list.\n\n", list.size());
     }
+
     /**
      * The method for delete
      * @param number the
@@ -67,6 +72,7 @@ public class Parser {
         System.out.println(String.format("\t%s removed", removed.toString()));
         System.out.println("\tNow you have " + list.size() + " tasks in the list.");
     }
+
 
     /**
      * The method for parse which makes sense of the user input and execute the correct actions
@@ -157,4 +163,6 @@ public class Parser {
         }
         return 1;
     }
+
 }
+

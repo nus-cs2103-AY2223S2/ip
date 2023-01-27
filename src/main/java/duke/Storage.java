@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.lang.String;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
+
 /**
  * Contains Storage object that deals with loading tasks from the file and saving tasks in the file
  */
@@ -18,6 +19,7 @@ public class Storage {
     private final static DateTimeFormatter  timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private final static DateTimeFormatter  HrFormat = DateTimeFormatter.ofPattern("HHmm");
     private  String file;
+
     /**
      * The constructor for Storage
      * @param file the file/path where data is saved/store in
@@ -37,10 +39,12 @@ public class Storage {
             System.out.println("File does not exist creating now");
         }
     }
+
     /**
      * The method readnWriteData for reading data from input file path and writing it/ storing it into Arraylist
      * @return ArrayList<Task>
      */
+
     public  ArrayList<Task> readnWriteData(){
         ArrayList<Task> list = new ArrayList<>();
         try{
@@ -84,10 +88,12 @@ public class Storage {
         }
         return list;
     }
+
     /**
      * The method of saveData to save the data from a TaskList into file
      * @param list
      */
+
     public  void saveData(TaskList list) throws  IOException{
         FileWriter fwrite = new FileWriter("database/data.txt", false);
         for (int i = 0; i < list.size(); i++) {

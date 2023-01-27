@@ -2,12 +2,13 @@ package duke;
 
 import duke.Exceptions.DukeException;
 import duke.Tasks.TaskList;
-
 import java.util.Scanner;
 import java.lang.String;
+
 /**
  * Contains Ui object that deals with interactions with the user
  */
+
 public class Ui {
     private final static String UNDERLINE = "________________________________________________________________";
     private final static String logo = " ____        _        \n"
@@ -16,6 +17,7 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private Scanner text = new Scanner(System.in);
+
     /**
      * The method of Underline() to print out a separating line
      */
@@ -32,12 +34,14 @@ public class Ui {
     /**
      * The method of showing logo and welcoming when run at start
      */
+
     public void greet() {
         System.out.println(logo);
         System.out.println("Welcome! I'm duke.Duke.");
         System.out.println("What can I do for you?");
         Underline();
     }
+
     /**
      * The method of sayBye when exiting program
      */
@@ -47,10 +51,12 @@ public class Ui {
     /**
      * The method of markedMessage()
      */
+
     public static void markedMessage() {
         System.out.println("\tNice! I've marked this task as done:");
 
     }
+
     /**
      * The method of unMarkedMessage()
      */
@@ -72,16 +78,20 @@ public class Ui {
     /**
      * The method of listMsg()
      */
+
     public static void listMsg() {
         System.out.println("\tHere are the tasks in your list:");
 
     }
 
+
     /**
      * The method of DukeExeptionMsg()
      * @arg e the exception catched
      */
+
     public void DukeExceptionMsg(DukeException e) {
         System.out.printf("\t%s\n", e);
     }
 }
+

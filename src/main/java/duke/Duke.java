@@ -1,14 +1,17 @@
 package duke;
+
 import duke.Tasks.*;
 import java.io.IOException;
 import java.lang.String;
 /**
  * Contains the Duke object
  */
+
 public class Duke {
     private Storage storage;
     private TaskList list;
     private Ui ui;
+
 
     /**
      * Constructor for Duke.
@@ -20,6 +23,7 @@ public class Duke {
         this.ui = new Ui();
         list = new TaskList(storage.readnWriteData());
     }
+
 
     /**
      * The method of run
@@ -42,6 +46,7 @@ public class Duke {
 
 
     }
+
     /**
      * The main method
      * @param args
@@ -50,4 +55,6 @@ public class Duke {
         new Duke("database/data.txt").run();
     }
 
+
 }
+
