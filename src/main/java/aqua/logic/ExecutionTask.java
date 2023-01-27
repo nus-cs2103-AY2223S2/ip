@@ -63,9 +63,14 @@ public abstract class ExecutionTask<T> extends Task<String> {
      * @throws ProcedureExecutionException - if the task failed to execute
      *      completely.
      */
-    @Override
-    protected String call() throws IllegalSyntaxException, ProcedureExecutionException {
+    public String execute() throws IllegalSyntaxException, ProcedureExecutionException {
         T data = process(args, manager);
         return getDataDisplay(data, manager);
+    }
+
+
+    @Override
+    protected String call() throws IllegalSyntaxException, ProcedureExecutionException {
+        return execute();
     }
 }

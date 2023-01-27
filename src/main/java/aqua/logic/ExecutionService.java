@@ -74,8 +74,8 @@ public abstract class ExecutionService extends Service<String> {
      * @throws ProcedureExecutionExecution if the task fail to execute
      *      completely.
      */
-    public String dispatch() throws IllegalSyntaxException, ProcedureExecutionException {
-        return task.call();
+    public String execute() throws IllegalSyntaxException, ProcedureExecutionException {
+        return task.execute();
     }
 
 

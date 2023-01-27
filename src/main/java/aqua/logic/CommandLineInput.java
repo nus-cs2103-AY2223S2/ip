@@ -28,4 +28,9 @@ public class CommandLineInput {
     public ExecutionService getService(LogicManager manager) {
         return command.getService(args, manager);
     }
+
+
+    public ExecutionService getService(LogicManager manager, boolean isLoading) {
+        return command.getService(args, manager, isLoading);
+    }
 }

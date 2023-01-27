@@ -31,7 +31,8 @@ public class LogicManager implements Loadable {
         try (Scanner scanner = new Scanner(path.toFile())) {
             CommandLineInputParser parser = new CommandLineInputParser(new ArgumentParser());
             while (scanner.hasNextLine()) {
-                parser.parse(scanner.nextLine()).getService(this).dispatch();
+                String line = scanner.nextLine();
+                parser.parse(line).getService(this, true).execute();
             }
         } catch (IllegalSyntaxException | ProcedureExecutionException ex) {
             throw new LoadException(ex);
