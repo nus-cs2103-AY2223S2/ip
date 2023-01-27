@@ -1,8 +1,8 @@
-package command;
+package leo.command;
 
-import leoException.LeoException;
-import storage.Storage;
-import ui.Ui;
+import leo.leoException.LeoException;
+import leo.storage.Storage;
+import leo.ui.Ui;
 
 public class Command {
 

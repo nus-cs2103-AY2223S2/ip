@@ -1,4 +1,4 @@
-package storage;
+package leo.storage;
 
 public class ToDo extends Task {
 

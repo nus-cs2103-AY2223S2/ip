@@ -1,6 +1,6 @@
-package command;
+package leo.command;
 
-import storage.Storage;
+import leo.storage.Storage;
 
 public class Delete extends Command {
 

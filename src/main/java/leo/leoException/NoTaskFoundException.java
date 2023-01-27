@@ -1,4 +1,4 @@
-package leoException;
+package leo.leoException;
 
 public class NoTaskFoundException extends LeoException {
 

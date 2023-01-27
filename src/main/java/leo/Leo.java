@@ -1,14 +1,16 @@
-import command.Parser;
-import leoException.LeoException;
-import storage.Storage;
-import ui.Ui;
+package leo;
+
+import leo.command.Parser;
+import leo.leoException.LeoException;
+import leo.storage.Storage;
+import leo.ui.Ui;
 
 public class Leo {
 
     private final Ui ui;
 
     public static void main(String[] args) {
-        new Leo("ip/text-ui-test/data/leo.txt");
+        new Leo("ip/data/leo.txt");
     }
 
     private Leo(String filePath) {

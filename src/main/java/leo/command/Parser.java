@@ -1,10 +1,10 @@
-package command;
+package leo.command;
 
 import java.util.Objects;
 import java.util.Scanner;
-import leoException.LeoException;
-import storage.Storage;
-import ui.Ui;
+import leo.leoException.LeoException;
+import leo.storage.Storage;
+import leo.ui.Ui;
 
 public class Parser {
 

@@ -1,16 +1,16 @@
-package command;
+package leo.command;
 
-import leoException.EmptyDeadlineException;
-import leoException.EmptyDescriptionException;
-import leoException.IncompleteDurationException;
-import leoException.InvalidInputException;
-import leoException.LeoException;
-import storage.Deadline;
-import storage.Event;
-import storage.Storage;
-import storage.Task;
-import storage.ToDo;
-import ui.Ui;
+import leo.leoException.EmptyDeadlineException;
+import leo.leoException.EmptyDescriptionException;
+import leo.leoException.IncompleteDurationException;
+import leo.leoException.InvalidInputException;
+import leo.leoException.LeoException;
+import leo.storage.Deadline;
+import leo.storage.Event;
+import leo.storage.Storage;
+import leo.storage.Task;
+import leo.storage.ToDo;
+import leo.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

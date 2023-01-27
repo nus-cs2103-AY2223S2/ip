@@ -1,4 +1,4 @@
-package storage;
+package leo.storage;
 
 import java.util.List;
 

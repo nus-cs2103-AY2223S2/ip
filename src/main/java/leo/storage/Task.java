@@ -1,8 +1,8 @@
-package storage;
+package leo.storage;
 
-import leoException.IncorrectMarkException;
-import leoException.IncorrectUnmarkException;
-import ui.Ui;
+import leo.leoException.IncorrectMarkException;
+import leo.leoException.IncorrectUnmarkException;
+import leo.ui.Ui;
 
 public class Task {
 

@@ -1,6 +1,6 @@
-package ui;
+package leo.ui;
 
-import storage.Task;
+import leo.storage.Task;
 
 public class Ui {
 

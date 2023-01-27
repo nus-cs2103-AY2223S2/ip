@@ -1,4 +1,4 @@
-package storage;
+package leo.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import leoException.IncorrectMarkException;
-import leoException.LeoException;
-import leoException.NoTaskFoundException;
-import leoException.NoStorageFileException;
-import ui.Ui;
+import leo.leoException.IncorrectMarkException;
+import leo.leoException.LeoException;
+import leo.leoException.NoTaskFoundException;
+import leo.leoException.NoStorageFileException;
+import leo.ui.Ui;
 
 public class Storage {
 
