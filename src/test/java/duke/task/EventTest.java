@@ -1,18 +1,18 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
 public class EventTest {
     @Test
-    public void testGetDescription() {
+    public void getDescription() {
         try {
             String description = "unit test celebrations";
-            Task task = new Event(description, false, "26/1/2023 2303", "26/1/2023 2359"); 
+            Task task = new Event(description, false, "26/1/2023 2303", "26/1/2023 2359");
             assertEquals(description, task.getDescription());
         } catch (DukeException e) {
             fail();
@@ -34,8 +34,8 @@ public class EventTest {
         assertEquals(true, Event.hasIcon("E"));
     }
 
-    @Test 
-    void hasIcon_notEventIcon_returnsFalse() {
+    @Test
+    public void hasIcon_notEventIcon_returnsFalse() {
         assertEquals(false, Event.hasIcon("not E"));
     }
 
@@ -60,9 +60,9 @@ public class EventTest {
     }
 
     @Test
-    void testMarkAndUnmark() {
+    public void markAndUnmark() {
         try {
-            Task task = new Event("unit test celebrations", false, "26/1/2023 2303", "26/1/2023 2359");  
+            Task task = new Event("unit test celebrations", false, "26/1/2023 2303", "26/1/2023 2359");
             assertEquals(false, task.isCompleted());
             task.mark();
             assertEquals(true, task.isCompleted());

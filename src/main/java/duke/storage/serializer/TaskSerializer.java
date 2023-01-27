@@ -18,7 +18,7 @@ public class TaskSerializer extends Serializer {
     public Task createTask() throws DukeException {
         if (Deadline.canDeserialize(this)) {
             return Deadline.getDeserializer().deserialize(this);
-        } 
+        }
         if (Event.canDeserialize(this)) {
             return Event.getDeserializer().deserialize(this);
         }

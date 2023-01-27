@@ -67,14 +67,14 @@ public class Duke {
             Task task = tasks.delete(index);
             ui.deleteTask(task, tasks.length());
         } else {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");    
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
     public void start() {
         ui.introduce(LOGO);
         isListening = true;
-        while(isListening) {
+        while (isListening) {
             String cmd = ui.ask();
             try {
                 handleCommand(cmd);

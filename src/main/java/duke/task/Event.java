@@ -21,6 +21,20 @@ public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
+    public Event(String description, boolean completed, String from, String to) throws DukeException {
+        super(description, completed);
+        try {
+            this.from = LocalDateTime.parse(from, RECEIVE_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Could not parse 'from' as date time");
+        }
+        try {
+            this.to = LocalDateTime.parse(to, RECEIVE_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Could not parse 'to' as date time");
+        }
+    }
+
     public static boolean hasIcon(String s) {
         return s.equals(ICON);
     }
@@ -37,21 +51,6 @@ public class Event extends Task {
             String to = serializer.get(TO_KEY).toString();
             return new Event(description, completed, from, to);
         };
-    }
-
-    public Event(String description, boolean completed, String from, String to) throws DukeException {
-        super(description, completed);
-        try {
-            this.from = LocalDateTime.parse(from, RECEIVE_FORMAT);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Could not parse 'from' as date time");
-        }
-        try {
-            this.to = LocalDateTime.parse(to, RECEIVE_FORMAT);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Could not parse 'to' as date time");
-        }
-        
     }
 
     @Override

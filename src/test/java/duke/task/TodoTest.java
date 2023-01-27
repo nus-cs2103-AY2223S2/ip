@@ -1,15 +1,15 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
 public class TodoTest {
     @Test
-    public void testGetDescription() {
+    public void getDescription() {
         try {
             String description = "write unit tests";
             Task task = new Todo(description, false);
@@ -34,13 +34,13 @@ public class TodoTest {
         assertEquals(true, Todo.hasIcon("T"));
     }
 
-    @Test 
-    void hasIcon_notTodoIcon_returnsFalse() {
+    @Test
+    public void hasIcon_notTodoIcon_returnsFalse() {
         assertEquals(false, Todo.hasIcon("not T"));
     }
 
     @Test
-    void testMarkAndUnmark() {
+    public void markAndUnmark() {
         try {
             Task task = new Todo("write unit tests", false);
             assertEquals(false, task.isCompleted());

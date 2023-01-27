@@ -2,8 +2,8 @@ package duke.storage.serializer;
 import java.util.HashMap;
 
 public class Serializer {
-    private static final String GROUP_DELIMITER = String.valueOf((char)0x1d);
-    private static final String RECORD_DELIMITER = String.valueOf((char)0x1e);
+    private static final String GROUP_DELIMITER = String.valueOf((char) 0x1d);
+    private static final String RECORD_DELIMITER = String.valueOf((char) 0x1e);
 
     private HashMap<String, Object> map;
 

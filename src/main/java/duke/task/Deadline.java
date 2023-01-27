@@ -16,8 +16,17 @@ public class Deadline extends Task {
     private static final String BY_KEY = "by";
     private static final DateTimeFormatter RECEIVE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy kkmm");
     private static final DateTimeFormatter PRINT_FORMAT = DateTimeFormatter.ofPattern("dd-MMM-uuuu,EEE,hh:mma");
-    
+
     protected LocalDateTime by;
+
+    public Deadline(String description, boolean completed, String by) throws DukeException {
+        super(description, completed);
+        try {
+            this.by = LocalDateTime.parse(by, RECEIVE_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Could not parse 'by' as date time");
+        }
+    }
 
     public static boolean hasIcon(String icon) {
         return icon.equals(ICON);
@@ -34,15 +43,6 @@ public class Deadline extends Task {
             String by = serializer.get(BY_KEY).toString();
             return new Deadline(description, completed, by);
         };
-    }
-
-    public Deadline(String description, boolean completed, String by) throws DukeException {
-        super(description, completed);
-        try {
-            this.by = LocalDateTime.parse(by, RECEIVE_FORMAT);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("Could not parse 'by' as date time");
-        }
     }
 
     @Override

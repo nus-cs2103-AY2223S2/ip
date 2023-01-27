@@ -10,6 +10,10 @@ public class Todo extends Task {
     private static final String DESCRIPTION_KEY = "description";
     private static final String COMPLETED_KEY = "completed";
 
+    public Todo(String description, boolean completed) throws DukeException {
+        super(description, completed);
+    }
+
     public static boolean hasIcon(String s) {
         return s.equals(ICON);
     }
@@ -24,10 +28,6 @@ public class Todo extends Task {
             boolean completed = Boolean.parseBoolean(serializer.get(COMPLETED_KEY).toString());
             return new Todo(description, completed);
         };
-    }
-
-    public Todo(String description, boolean completed) throws DukeException {
-        super(description, completed);
     }
 
     @Override

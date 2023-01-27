@@ -1,5 +1,8 @@
 package duke.tasklist;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
@@ -7,9 +10,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskListTest {
     @Test
@@ -33,7 +33,7 @@ public class TaskListTest {
     @Test
     public void testDelete() {
         TaskList tasks = new TaskList();
-        try {    
+        try {
             Task task0 = new Todo("Write unit tests", false);
             Task task1 = new Deadline("complete unit tests", false, "26/1/2023 2303");
             Task task2 = new Event("unit test celebrations", false, "26/1/2023 2303", "26/1/2023 2359");
