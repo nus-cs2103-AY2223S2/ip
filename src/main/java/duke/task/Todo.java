@@ -1,6 +1,10 @@
+package duke.task;
+
+import duke.DukeException;
+
 public class Todo extends Task{
 
-    public static Todo create(String text) throws DukeException{
+    public static Todo create(String text) throws DukeException {
         if (text.length() < 1) {
             throw new DukeException();
         } else {

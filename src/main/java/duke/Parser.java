@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class Parser {
 
 
@@ -68,7 +75,7 @@ public class Parser {
                     response = "☹ OOPS!!! No such task in list.";
                 } else {
                     Task task = taskList.deleteTask(index);
-                    response = "Ok boss! Task removed: \n" + task.toString() +
+                    response = "Ok boss! Duke.Task removed: \n" + task.toString() +
                             "\nNow you have " + taskList.getSize() + " in the list.";
                 }
             }

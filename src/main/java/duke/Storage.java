@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.*;
 
 public class Storage {
@@ -55,7 +62,7 @@ public class Storage {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (int i  = 0; i < taskList.getSize(); i++) {
                 Task t = taskList.getTask(i);
-                String entry = t.getType() + " " + t.isDone + " " + t.description;
+                String entry = t.getType() + " " + t.getIsDone() + " " + t.getDescription();
                 if (t instanceof Deadline) {
                     entry += " /by " + ((Deadline) t).getDueDate();
                 } else if (t instanceof Event) {

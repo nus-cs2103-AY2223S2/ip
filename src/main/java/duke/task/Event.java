@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,7 +11,7 @@ public class Event extends Task{
     protected LocalDateTime endTime;
     private static final DateTimeFormatter FORMATTER  = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public static Event create(String str) throws DukeException{
+    public static Event create(String str) throws DukeException {
         if (str.length() < 1) {
             throw new DukeException();
         } else {

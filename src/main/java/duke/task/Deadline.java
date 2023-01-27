@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -6,7 +10,7 @@ public class Deadline extends Task{
     protected LocalDateTime dueDate;
     private static final DateTimeFormatter FORMATTER  = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public static Deadline create(String str) throws DukeException{
+    public static Deadline create(String str) throws DukeException {
         if (str.length() < 1) {
             throw new DukeException();
         } else {
