@@ -3,7 +3,6 @@ import java.lang.StringBuilder;
 class TaskParser {
 
     private TaskList taskList;
-
     TaskParser(TaskList taskList) {
         this.taskList = taskList;
     }
@@ -19,13 +18,16 @@ class TaskParser {
         } else if (input.startsWith("delete")) {
             return delete(input);
         } else {
-            return addTask(input);
+            return addTask(input)[1];
         }
     }
     String returnList() {
         StringBuilder out = new StringBuilder();
+        System.out.println(taskList.size());
+        System.out.println(taskList.get(0));
         for (int i = 1; i <= taskList.size(); i++) {
             out.append(String.format("%d. %s\n", i, taskList.get(i-1)));
+            System.out.println("working");
         }
         return out.toString();
     }
@@ -53,10 +55,10 @@ class TaskParser {
     }
 
     String sayBye() {
-        return "\tBye. Hope to see you again soon!";
+        return "";
     }
 
-    String addTask(String input) {
+    String[] addTask(String input) {
         String taskDescription;
         Task task;
         String[] s;
@@ -64,30 +66,34 @@ class TaskParser {
         String taskType = split[0];
         try {
             switch (taskType) {
-                case "todo":
-                    if (split.length == 1) {
-                        DukeException.rethrow("ToDoException");
-                    }
-                    task = new ToDo(split[1]);
-                    taskList.add(task);
-                    return String.format("added: %s", task);
-                case "deadline":
-                    s =  split[1].split(" /by ");
-                    System.out.println(s[0]);
-                    task = new Deadline(s[0], s[1]);
-                    taskList.add(task);
-                    return String.format("added: %s", task);
-                case "event":
-                    s =  split[1].split(" /by ");
-                    taskDescription = s[0];
-                    s = s[1].split(" /from ");
-                    task = new Event(taskDescription, s[0], s[1]);
-                    taskList.add(task);
-                    return String.format("added: %s", task);
+            case "t": // fallthrough
+            case "todo":
+                if (split.length == 1) {
+                    DukeException.rethrow("ToDoException");
+                }
+                task = new ToDo(split[1]);
+                taskList.add(task);
+                System.out.println(taskList.size());
+                return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+            case "d": // fallthrough
+            case "deadline":
+                s = split[1].split(" /by ");
+                System.out.println(s[0]);
+                task = new Deadline(s[0], s[1]);
+                taskList.add(task);
+                return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
+            case "e": // fallthrough
+            case "event":
+                s = split[1].split(" /by ");
+                taskDescription = s[0];
+                s = s[1].split(" /from ");
+                task = new Event(taskDescription, s[0], s[1]);
+                taskList.add(task);
+                return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
             }
-        } catch(DukeException.ToDoException | DukeException.UnknownCommandException | DukeException.ThirdException e){
+        } catch (DukeException.ToDoException | DukeException.UnknownCommandException e) {
             System.out.println(e.getMessage());
         }
-        return "";
+        return null;
     }
 }

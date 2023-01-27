@@ -1,14 +1,16 @@
 public class DukeException extends Exception {
 
-    public static void rethrow(String s) throws ToDoException, UnknownCommandException,
-            ThirdException {
+    public DukeException(String msg) {
+        super(msg);
+    }
+
+    public static void rethrow(String s) throws ToDoException, UnknownCommandException {
         try {
-            if (s.equals("ToDoException"))
+            if (s.equals("ToDoException")) {
                 throw new ToDoException();
-            else if (s.equals("UnknownCommandException"))
+            } else {
                 throw new UnknownCommandException();
-            else
-                throw new ThirdException("Third");
+            }
         } catch (Exception e) {
             throw e;
         }
@@ -34,10 +36,4 @@ public class DukeException extends Exception {
         }
     }
 
-    static class ThirdException extends Exception {
-
-        public ThirdException(String msg) {
-            super(msg);
-        }
-    }
 }
