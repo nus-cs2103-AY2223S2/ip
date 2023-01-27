@@ -13,11 +13,16 @@ public class EventCommand extends Command {
     private static final String PERIOD_BEGIN_PREFIX = "/from ";
     private static final String PERIOD_END_PREFIX = "/to ";
 
+    /**
+     * {@inheritDoc}
+     */
     public EventCommand(String input) {
         super(input);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks) throws DukeException {
         String input = getInput();

@@ -10,10 +10,16 @@ import duke.TaskList;
 public class UnmarkCommand extends Command {
     public static final String COMMAND_FORMAT = "unmark";
 
+    /**
+     * {@inheritDoc}
+     */
     public UnmarkCommand(String input) {
         super(input);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks) throws DukeException {
         String input = getInput();

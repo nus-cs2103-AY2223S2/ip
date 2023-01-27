@@ -11,10 +11,16 @@ import duke.tasks.TodoTask;
 public class TodoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
 
+    /**
+     * {@inheritDoc}
+     */
     public TodoCommand(String input) {
         super(input);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks) throws DukeException {
         // Prepare arguments for Todo task

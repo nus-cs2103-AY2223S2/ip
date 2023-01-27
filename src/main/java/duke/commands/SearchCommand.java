@@ -11,10 +11,16 @@ public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
     private static final String SEARCH_RESPONSE = "Here are the task search results:";
 
+    /**
+     * {@inheritDoc}
+     */
     public SearchCommand(String input) {
         super(input);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks) throws DukeException {
         String input = getInput();

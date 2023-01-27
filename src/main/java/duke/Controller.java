@@ -13,6 +13,13 @@ public class Controller {
     private Parser parser;
     private boolean isExited;
 
+    /**
+     * Constructor to initialize components to Controller and recover data
+     * from save file if any
+     *
+     * @param ui Interface that user interacts with
+     * @param storage Handler for saving and loading of task data
+     */
     Controller(UserInterface ui, Storage storage) {
         try {
             tasks = storage.recoverList();
@@ -25,6 +32,10 @@ public class Controller {
         this.isExited = false;
     }
 
+    /**
+     * Asks for user input and turns that into commands to be executed.
+     * This repeats until a exit command is given.
+     */
     public void runExecutionLoop() {
         while (!isExited) {
             try {

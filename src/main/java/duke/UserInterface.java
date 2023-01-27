@@ -21,6 +21,9 @@ public class UserInterface {
 
     private Scanner scanner;
 
+    /**
+     * Constructor for User Interface class to initialize Scanner
+     */
     UserInterface() {
         scanner = new Scanner(System.in);
     }

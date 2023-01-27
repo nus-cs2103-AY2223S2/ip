@@ -10,10 +10,16 @@ import duke.TaskList;
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
+    /**
+     * {@inheritDoc}
+     */
     public DeleteCommand(String input) {
         super(input);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks) throws DukeException {
         String input = getInput();

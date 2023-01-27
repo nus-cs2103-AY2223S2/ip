@@ -33,16 +33,31 @@ public abstract class Task implements Serializable {
         isCompleted = false;
     }
 
+    /**
+     * Sets task's own status to completed
+     *
+     * @return Task marked response
+     */
     public String mark() {
         isCompleted = true;
         return MARKED_RESPONSE + UserInterface.INDENT + this;
     }
 
+    /**
+     * Sets task's own status to uncompleted
+     *
+     * @return Task marked response
+     */
     public String unmark() {
         isCompleted = false;
         return UNMARKED_RESPONSE + UserInterface.INDENT + this;
     }
 
+    /**
+     * Checks if name of task contains the keyword
+     * @param keyword to be checked against the name
+     * @return boolean indicating presence of keyword
+     */
     public boolean hasKeyword(String keyword) {
         return name.contains(keyword);
     }

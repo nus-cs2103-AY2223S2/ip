@@ -12,10 +12,16 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     private static final String LIST_RESPONSE = "Current tasks in list:";
 
+    /**
+     * {@inheritDoc}
+     */
     public ListCommand(String input) {
         super(input);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks) throws DukeException {
         String input = getInput();

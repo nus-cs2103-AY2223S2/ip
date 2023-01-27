@@ -9,12 +9,18 @@ public class Duke {
     private Controller controller;
     private UserInterface ui;
 
+    /**
+     * Constructor to initialize required components
+     */
     public Duke() {
         ui = new UserInterface();
         storage = new Storage();
         controller = new Controller(ui, storage);
     }
 
+    /**
+     * Drives Duke program
+     */
     public void run() {
         ui.showStartMessage();
         controller.runExecutionLoop();

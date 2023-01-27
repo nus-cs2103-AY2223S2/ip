@@ -16,12 +16,25 @@ public class DeadlineTask extends Task {
 
     private final LocalDate deadline;
 
+    /**
+     * Constructor for a Deadline task
+     * @param name Task's name
+     * @param deadline Deadline date for task
+     * @throws DukeException If name is empty
+     */
     DeadlineTask(String name, LocalDate deadline) throws DukeException {
         super(name);
         this.deadline = deadline;
     }
 
-
+    /**
+     * Creates Deadline task using String arguments
+     *
+     * @param name Task's name
+     * @param deadline Deadline date for task in String
+     * @return The created Deadline task
+     * @throws DukeException If invalid date string is passed in
+     */
     public static DeadlineTask createTask(String name, String deadline) throws DukeException {
         try {
             LocalDate date = LocalDate.parse(deadline);
@@ -31,11 +44,17 @@ public class DeadlineTask extends Task {
         }
     }
 
-
+    /**
+     * Formats deadline date
+     *
+     * @param deadline To be formatted into String
+     * @return Formatted deadline date string
+     */
     private static String formattedDeadline(LocalDate deadline) {
         String formattedDate = deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return String.format(Task.EXTRAS_FORMAT_TEMPLATE, DEADLINE_PREFIX_REPLACEMENT + formattedDate);
     }
+
     @Override
     public String toString() {
         return INDICATOR + super.toString() + formattedDeadline(deadline);

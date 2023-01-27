@@ -18,12 +18,27 @@ public class EventTask extends Task {
     private final LocalDate startDate;
     private final LocalDate endDate;
 
+    /**
+     * Constructor for Event task
+     *
+     * @param name Task's name
+     * @param startDate Start date for period allocated
+     * @param endDate End date for period allocated
+     * @throws DukeException If name is empty
+     */
     EventTask(String name, LocalDate startDate, LocalDate endDate) throws DukeException {
         super(name);
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
+    /**
+     * Formats period allocated for Event task
+     *
+     * @param startDate start Date of period
+     * @param endDate end Date of period
+     * @return Formatted period
+     */
     private static String formattedPeriod(LocalDate startDate, LocalDate endDate) {
         // TODO: Abstract into util function
         String startDateString = startDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
@@ -34,6 +49,15 @@ public class EventTask extends Task {
                 + PERIOD_END_PREFIX_REPLACEMENT + endDateString);
     }
 
+    /**
+     * Creates an Event task using String arguments
+     *
+     * @param taskName Task's name
+     * @param startDateString Start date for allocated in String
+     * @param endDateString End date for allocated in String
+     * @return The created Event task
+     * @throws DukeException If given date strings are of invalid format
+     */
     public static EventTask createTask(String taskName, String startDateString, String endDateString)
             throws DukeException {
         try {

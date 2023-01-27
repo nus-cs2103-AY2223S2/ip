@@ -10,9 +10,16 @@ import duke.TaskList;
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
+    /**
+     * {@inheritDoc}
+     */
     public MarkCommand(String input) {
         super(input);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks) throws DukeException {
         String input = getInput();
