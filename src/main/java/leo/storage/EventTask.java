@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Event Task. A <code>Event</code> object corresponds to
+ * Represents a Event Task. A <code>EventTask</code> object corresponds to
  * a Task containing the String description and duration consisting of LocalDateTime from and LocalDateTime to.
  */
 public class EventTask extends Task {
@@ -22,7 +22,7 @@ public class EventTask extends Task {
     /**
      * Returns type, status, description and deadline of Task.
      *
-     * @return String representation of Event.
+     * @return String representation of EventTask.
      */
     @Override
     public String toString() {
@@ -30,7 +30,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * Returns formatted duration of Event obtained from LocalDateTime.
+     * Returns formatted duration of EventTask obtained from LocalDateTime.
      *
      * @return String representation of the duration.
      */
@@ -58,7 +58,7 @@ public class EventTask extends Task {
     /**
      * Returns the String representation of Task that is to be saved in the data file.
      *
-     * @return String representation of Event.
+     * @return String representation of EventTask.
      */
     @Override
     public String saveFormat() {

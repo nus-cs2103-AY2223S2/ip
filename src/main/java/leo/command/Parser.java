@@ -3,7 +3,6 @@ package leo.command;
 import java.util.Objects;
 import java.util.Scanner;
 import leo.leoException.LeoException;
-import leo.leoException.NoStorageFileException;
 import leo.storage.Storage;
 import leo.ui.Ui;
 
@@ -36,7 +35,7 @@ public class Parser {
             } else if (command.contains("delete")) {
                 new DeleteCommand(s, command);
             } else if (command.contains("find")) {
-                new Find(s, command);
+                new FindCommand(s, command);
             } else {
                 try {
                     new AddCommand(s, command);

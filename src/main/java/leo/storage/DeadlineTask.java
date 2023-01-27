@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Deadline Task. A <code>Deadline</code> object corresponds to
+ * Represents a Deadline Task. A <code>DeadlineTask</code> object corresponds to
  * a Task containing the String description and LocalDateTime deadline.
  */
 public class DeadlineTask extends Task {
@@ -20,7 +20,7 @@ public class DeadlineTask extends Task {
     /**
      * Returns type, status, description and deadline of Task.
      *
-     * @return String representation of Deadline.
+     * @return String representation of DeadlineTask.
      */
     @Override
     public String toString() {
@@ -30,7 +30,7 @@ public class DeadlineTask extends Task {
     /**
      * Returns the String representation of Task that is to be saved in the data file.
      *
-     * @return String representation of Deadline.
+     * @return String representation of DeadlineTask.
      */
     @Override
     public String saveFormat() {

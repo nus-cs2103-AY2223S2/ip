@@ -11,9 +11,12 @@ import leo.ui.Ui;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Find extends Command {
+/**
+ * Represents a find command input by user.
+ */
+public class FindCommand extends Command {
 
-    public Find(Storage storage, String task) {
+    public FindCommand(Storage storage, String task) {
         super(storage, task);
         try {
             TaskList taskList = findTasks(storage, task);
@@ -24,6 +27,15 @@ public class Find extends Command {
         }
     }
 
+    /**
+     * Returns a TaskList object containing Tasks that matches the keyword input by user.
+     *
+     * @param storage Storage containing data to be searched.
+     * @param task Task containing keyword to use for search.
+     * @return TaskList containing Tasks that matches keyword.
+     * @throws NoKeywordException If there is no keyword input.
+     * @throws NoTaskFoundException If there are no matching tasks.
+     */
     public TaskList findTasks(Storage storage, String task) throws NoKeywordException, NoTaskFoundException {
         List<Task> foundList = new ArrayList<>();
         int dataLength = storage.getDataLength();
