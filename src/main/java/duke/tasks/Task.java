@@ -10,6 +10,14 @@ public class Task implements Serializable {
         this.done = false;
     }
 
+    public boolean contains(String keyword) {
+        if (description.length() >= keyword.length()) {
+            return description.contains(keyword);
+        } else {
+            return false;
+        }
+    }
+
     public void mark(){
         if (!this.done) {
             this.done = true;

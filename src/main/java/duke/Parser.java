@@ -1,18 +1,10 @@
 package duke;
 
-import duke.commands.ByeCommand;
-import duke.commands.Command;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.EventCommand;
-import duke.commands.ListCommand;
-import duke.commands.MarkCommand;
-import duke.commands.TodoCommand;
-import duke.commands.UnmarkCommand;
+import duke.commands.*;
 
 public class Parser {
     private enum Type {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
     }
 
     public static Command parse(String input) throws IllegalArgumentException{
@@ -39,6 +31,9 @@ public class Parser {
 
         case MARK:
             return new MarkCommand(input);
+
+        case FIND:
+            return new FindCommand(input);
 
         case BYE:
             return new ByeCommand(input);
