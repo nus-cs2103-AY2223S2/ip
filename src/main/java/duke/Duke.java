@@ -11,12 +11,21 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+/**
+ * Duke contains the main logic for the task management program.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private UI ui;
     private Parser parser;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param directory directory of the storage file.
+     * @param path path of thr storage file
+     */
     public Duke(String directory, String path) {
         storage = new Storage(directory, path);
         taskList = new TaskList();
@@ -28,6 +37,9 @@ public class Duke {
         new Duke("./data", "./data/duke.txt").run();
     }
 
+    /**
+     * Runs Duke according to commands from user.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         ui.printWelcomeMessage();

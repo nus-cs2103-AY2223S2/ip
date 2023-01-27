@@ -8,15 +8,31 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Storage handles all the interaction with the memory.
+ */
+
 public class Storage {
     private String directory;
     private String path;
 
+    /**
+     * Initialises the storage file.
+     *
+     * @param d directory of the storage file.
+     * @param p Path of the storage file.
+     */
     public Storage(String d, String p) {
         this.directory = d;
         this.path = p;
     }
 
+    /**
+     * Save the file from the current session onto the file.
+     *
+     * @param taskList TaskList for the current session.
+     * @throws IOException If the tasks cannot be saved to file.
+     */
     public void saveTasks(TaskList taskList) throws IOException {
         File dir = new File(directory);
         if (!dir.exists()) {
@@ -37,6 +53,13 @@ public class Storage {
         myWriter.close();
     }
 
+    /**
+     * Loads the tasks from the file onto the tasks list.
+     *
+     * @param taskList TaskList for the current session.
+     * @throws IOException If storage file/directory cannot be created.
+     * @throws DukeException If storage file is in the wrong format.
+     */
     public void loadTasks(TaskList taskList) throws IOException, DukeException {
         Scanner fileReader = new Scanner(new File(path));
         while (fileReader.hasNextLine()) {
@@ -56,12 +79,10 @@ public class Storage {
                 default:
                     throw new DukeException("Error loading tasks from file!");
             }
-
             if (taskData[2].equals("T")) {
                 taskList.getTasks().get(taskList.getTasks().size() - 1).mark();
             }
         }
-
         fileReader.close();
     }
 }
