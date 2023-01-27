@@ -1,8 +1,13 @@
+package duke;
 
+import duke.tasktypes.Deadlines;
+import duke.tasktypes.Events;
+import duke.tasktypes.ToDo;
+import duke.tasktypes.Task;
 
 public class Parser {
     
-    Parser() {
+    public Parser() {
 
     }
 

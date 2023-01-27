@@ -1,3 +1,5 @@
+package duke.tasktypes;
+
 public class Task {
     protected String name;
     protected boolean done;

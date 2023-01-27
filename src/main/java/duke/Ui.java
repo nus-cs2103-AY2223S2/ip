@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
@@ -7,7 +9,7 @@ public class Ui {
     BufferedReader readingInput;
     Parser currentStatus;
 
-    Ui() {
+    public Ui() {
         this.readingInput = new BufferedReader(new InputStreamReader(System.in));
     }
 

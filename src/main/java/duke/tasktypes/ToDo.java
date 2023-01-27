@@ -1,6 +1,10 @@
+package duke.tasktypes;
+
+import duke.DukeExceptions;
+
 public class ToDo extends Task {
     
-    ToDo(String taskName) throws DukeExceptions{
+    public ToDo(String taskName) throws DukeExceptions{
         super(taskName);
         if (taskName.length() <= 0 || taskName.isBlank()) {
             throw new DukeExceptions("todo");

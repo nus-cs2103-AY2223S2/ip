@@ -1,8 +1,12 @@
+package duke.tasktypes;
+
+import duke.DukeExceptions;
+
 public class Events extends Task {
     protected String fromDetails;
     protected String toDetails;
 
-    Events(String taskName) throws DukeExceptions{
+    public Events(String taskName) throws DukeExceptions{
         super(taskName.split("/from ")[0]);
         if (taskName.length() <= 0 || taskName.isBlank()) {
             throw new DukeExceptions("event");

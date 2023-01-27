@@ -1,11 +1,20 @@
+package duke;
+
 import java.util.ArrayList;
+
+import duke.tasktypes.Deadlines;
+import duke.tasktypes.Task;
 
 public class TaskList {
     
     ArrayList<Task> listOfTasks;
 
-    TaskList(ArrayList<Task> listOfTasks) {
+    public TaskList(ArrayList<Task> listOfTasks) {
         this.listOfTasks = listOfTasks;
+    }
+
+    public ArrayList<Task> getListOfTasks() {
+        return this.listOfTasks;
     }
 
     public void toRead() {

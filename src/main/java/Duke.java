@@ -1,6 +1,13 @@
 import java.io.*;
 import java.util.*;
 
+import duke.DukeExceptions;
+import duke.tasktypes.Task;
+import duke.TaskList;
+import duke.Ui;
+import duke.Parser;
+import duke.Storage;
+
 public class Duke {
 
     static ArrayList<Task> storedText = new ArrayList<Task>();
@@ -39,7 +46,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
         Duke initDuke = new Duke();
         initDuke.run();
-        DukeStorage.storeTask(DukeTaskList.listOfTasks);
+        DukeStorage.storeTask(DukeTaskList.getListOfTasks());
         System.out.println("Bye! Hope to see you again soon!");
     }
 

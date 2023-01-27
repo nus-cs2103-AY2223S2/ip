@@ -1,7 +1,9 @@
+package duke;
+
 public class DukeExceptions extends Exception {
     String printThisOut;
 
-    DukeExceptions(String commandType) {
+    public DukeExceptions(String commandType) {
         this.printThisOut = commandType;
     }
 

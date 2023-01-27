@@ -1,3 +1,5 @@
+package duke;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
@@ -6,11 +8,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.tasktypes.Deadlines;
+import duke.tasktypes.Events;
+import duke.tasktypes.ToDo;
+import duke.tasktypes.Task;
+
 public class Storage {
     
     Path dataPath;
 
-    Storage(String filePath, String fileName) throws IOException {
+    public Storage(String filePath, String fileName) throws IOException {
         this.dataPath = getData(filePath, fileName);
     }
 

@@ -1,5 +1,10 @@
+package duke.tasktypes;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeExceptions;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,7 +15,7 @@ public class Deadlines extends Task {
     boolean validTime = false;
 
 
-    Deadlines(String taskName) throws DukeExceptions, DateTimeParseException{
+    public Deadlines(String taskName) throws DukeExceptions, DateTimeParseException{
         super(taskName.split("/by ")[0]);
         if (taskName.length() <= 0 || taskName.isBlank()) {
             throw new DukeExceptions("deadline");
@@ -20,20 +25,6 @@ public class Deadlines extends Task {
         String possibleDueDate = endsByInArr[0];
         if (endsByInArr.length > 1) {
             String timeInString = endsByInArr[1];
-            // if (timeInString.length() == 4) {
-            //     String firstTwo = timeInString.substring(0, 2);
-            //     String nextTwo = timeInString.substring(2, 4);
-            //     String toParse = firstTwo + ":" + nextTwo;
-            //     if (checkValidityOfTime(toParse)) {
-            //         this.dueTime = LocalTime.parse(toParse);
-            //         validTime = true;
-            //     }
-            // } else if (timeInString.length() == 5) {
-            //     if (checkValidityOfTime(timeInString)) {
-            //         this.dueTime = LocalTime.parse(timeInString);
-            //         validTime = true;
-            //     }
-            // }
             formatTimeIfValid(timeInString);
         }
         if (possibleDueDate.indexOf("/") != -1) {
