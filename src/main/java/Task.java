@@ -20,7 +20,7 @@ public abstract class Task {
 
     abstract public String encode();
 
-    public static Task decode(String str) {
+    public static Task decode(String str) throws DukeException {
         String[] splitStr = str.split(" \\| ", 5);
         Task result = null;
         switch(splitStr[0]) {
