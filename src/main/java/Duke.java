@@ -25,6 +25,7 @@ public class Duke {
                     task = new Deadline(description, by);
                 }
             } else {
+                // event
                 String[] addon = rest.split(" /", 3);
                 String description = addon[0];
                 if (addon.length <= 1) {
@@ -72,7 +73,7 @@ public class Duke {
                 case "unmark":
                 case "delete":
                     if (inputs.length <= 1) {
-                        throw new DukeException("Please input the numbering of the task you want to" + command + "as well!");
+                        throw new DukeException("Please input the numbering of the task you want to " + command + " as well!");
                     } else {
                         String number = inputs[1]; // might have Number Format Exception here
                         int num = Integer.parseInt(number);
