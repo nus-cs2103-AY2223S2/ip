@@ -7,20 +7,20 @@ import aqua.aquatask.AquaTask;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 
 
 public class FilterCommand implements Command {
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, AppManager manager) {
+    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new ExecutionTask<LinkedHashMap<Integer, AquaTask>>(args, manager) {
             @Override
-            public LinkedHashMap<Integer, AquaTask> process(ArgumentMap args, AppManager manager) {
+            public LinkedHashMap<Integer, AquaTask> process(ArgumentMap args, LogicManager manager) {
                 return manager.getTaskManager().filter(args.getMainInput().orElse(""));
             }
 
             @Override
-            public String getDataDisplay(LinkedHashMap<Integer, AquaTask> map, AppManager manager) {
+            public String getDataDisplay(LinkedHashMap<Integer, AquaTask> map, LogicManager manager) {
                 return String.format("Here are your matching tasks:\n%s", formatMap(map));
             }
         });

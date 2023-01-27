@@ -6,7 +6,7 @@ import aqua.exception.ProcedureExecutionException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 
 
 /**
@@ -16,7 +16,7 @@ import aqua.manager.AppManager;
  */
 public class DeleteCommand implements Command {
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, AppManager manager) {
+    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new DeleteTask(args, manager))
                 .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
     }
@@ -26,13 +26,13 @@ public class DeleteCommand implements Command {
 
 
     private class DeleteTask extends ExecutionTask<AquaTask> {
-        DeleteTask(ArgumentMap args, AppManager manager) {
+        DeleteTask(ArgumentMap args, LogicManager manager) {
             super(args, manager);
         }
 
 
         @Override
-        public AquaTask process(ArgumentMap args, AppManager manager)
+        public AquaTask process(ArgumentMap args, LogicManager manager)
                     throws IllegalSyntaxException, ProcedureExecutionException {
             try {
                 // get task index string
@@ -54,7 +54,7 @@ public class DeleteCommand implements Command {
 
 
         @Override
-        public String getDataDisplay(AquaTask task, AppManager manager) {
+        public String getDataDisplay(AquaTask task, LogicManager manager) {
             return String.format(String.join("\n",
                             "I have deleted the task:",
                             "  %s",
@@ -64,7 +64,7 @@ public class DeleteCommand implements Command {
         }
 
 
-        private String getRemainingMessage(AppManager manager) {
+        private String getRemainingMessage(LogicManager manager) {
             int numTask = manager.getTaskManager().size();
             if (numTask > 0) {
                 return String.format("You have %d task(s) left, all the best",

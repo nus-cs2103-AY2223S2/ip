@@ -5,7 +5,7 @@ import aqua.exception.IllegalSyntaxException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 
 
 /**
@@ -25,7 +25,7 @@ public abstract class AddTaskCommand implements Command {
 
 
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, AppManager manager) {
+    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new AddTask(args, manager))
                 .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
     }
@@ -35,13 +35,13 @@ public abstract class AddTaskCommand implements Command {
 
 
     private class AddTask extends ExecutionTask<AquaTask> {
-        AddTask(ArgumentMap args, AppManager manager) {
+        AddTask(ArgumentMap args, LogicManager manager) {
             super(args, manager);
         }
 
 
         @Override
-        public AquaTask process(ArgumentMap args, AppManager manager) throws IllegalSyntaxException {
+        public AquaTask process(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
             // create task
             AquaTask task = createTask(args);
 
@@ -52,7 +52,7 @@ public abstract class AddTaskCommand implements Command {
 
 
         @Override
-        public String getDataDisplay(AquaTask task, AppManager manager) {
+        public String getDataDisplay(AquaTask task, LogicManager manager) {
             return String.format(String.join("\n",
                             "Hai okay desu! I have added the task:",
                             "/",

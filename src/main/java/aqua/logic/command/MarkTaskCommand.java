@@ -6,7 +6,7 @@ import aqua.exception.ProcedureExecutionException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 
 /**
  * An implementation of Command that will produce an ExecutionDispatcher that
@@ -31,7 +31,7 @@ public class MarkTaskCommand implements Command {
 
 
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, AppManager manager) {
+    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new MarkTask(args, manager))
                 .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
     }
@@ -41,13 +41,13 @@ public class MarkTaskCommand implements Command {
 
 
     private class MarkTask extends ExecutionTask<AquaTask> {
-        MarkTask(ArgumentMap args, AppManager manager) {
+        MarkTask(ArgumentMap args, LogicManager manager) {
             super(args, manager);
         }
 
 
         @Override
-        public AquaTask process(ArgumentMap args, AppManager manager)
+        public AquaTask process(ArgumentMap args, LogicManager manager)
                     throws IllegalSyntaxException, ProcedureExecutionException {
             try {
                 // get index String
@@ -68,7 +68,7 @@ public class MarkTaskCommand implements Command {
         }
 
         @Override
-        public String getDataDisplay(AquaTask task, AppManager manager) {
+        public String getDataDisplay(AquaTask task, LogicManager manager) {
             if (isCompletedMarker) {
                 return String.format(String.join("\n",
                                 "I have marked this task:",

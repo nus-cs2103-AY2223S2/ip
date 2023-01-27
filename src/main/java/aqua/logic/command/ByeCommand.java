@@ -3,7 +3,7 @@ package aqua.logic.command;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 
 
 /** 
@@ -12,16 +12,16 @@ import aqua.manager.AppManager;
  */
 public class ByeCommand implements Command {
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, AppManager manager) {
+    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new ExecutionTask<String>(args, manager) {
             @Override
-            public String process(ArgumentMap args, AppManager manager) {
+            public String process(ArgumentMap args, LogicManager manager) {
                 manager.setClose(true);
                 return "Bye bye";
             }
 
             @Override
-            public String getDataDisplay(String msg, AppManager manager) {
+            public String getDataDisplay(String msg, LogicManager manager) {
                 return msg;
             }
         });

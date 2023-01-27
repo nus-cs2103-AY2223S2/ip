@@ -5,7 +5,7 @@ import java.io.IOException;
 import aqua.logic.ArgumentMap;
 import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 
 
 /**
@@ -14,10 +14,10 @@ import aqua.manager.AppManager;
  */
 public class WriteTaskCommand implements Command {
     @Override
-    public ExecutionService getDispatcher(ArgumentMap args, AppManager manager) {
+    public ExecutionService getDispatcher(ArgumentMap args, LogicManager manager) {
         return ExecutionService.of(new ExecutionTask<String>(args, manager) {
             @Override
-            public String process(ArgumentMap args, AppManager manager) {
+            public String process(ArgumentMap args, LogicManager manager) {
                 try {
                     manager.getTaskManager().saveToFile();
                 } catch (IOException ioEx) {
@@ -33,7 +33,7 @@ public class WriteTaskCommand implements Command {
 
             
             @Override
-            public String getDataDisplay(String data, AppManager manager) {
+            public String getDataDisplay(String data, LogicManager manager) {
                 return data;
             }
         });

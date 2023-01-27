@@ -1,6 +1,5 @@
 package aqua.manager;
 
-import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.function.Consumer;
@@ -10,7 +9,9 @@ import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureExecutionException;
 
-public class UiManager {
+
+/** Manager of inputs and outputs. */
+public class IoManager {
     /** Line separator. */
     private static String SEPARATOR =
             "____________________________________________________________";
@@ -50,7 +51,7 @@ public class UiManager {
     private final Consumer<String> outputConsumer;
 
 
-    public UiManager(Supplier<String> inputSupplier, Consumer<String> outputConsumer) {
+    public IoManager(Supplier<String> inputSupplier, Consumer<String> outputConsumer) {
         this.inputSupplier = inputSupplier;
         this.outputConsumer = outputConsumer;
     }
@@ -60,9 +61,8 @@ public class UiManager {
      * Reads a line from the set input stream.
      * 
      * @return a line in the set input stream.
-     * @throws IOException if an I/O error occurs.
      */
-    public String readLine() throws IOException {
+    public String readLine() {
         String msg = inputSupplier.get();
         return Optional.ofNullable(msg).orElse("");
     }

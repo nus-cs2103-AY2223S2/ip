@@ -1,28 +1,37 @@
 package aqua.logic;
 
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
+import aqua.manager.IoManager;
 
 
 /**
  * The executor of ExecutionService.
  */
 public class Executor {
-    private final AppManager manager;
+    private final LogicManager manager;
+    private final IoManager uiManager;
 
 
-    public Executor(AppManager manager) {
+    public Executor(LogicManager manager, IoManager uiManager) {
         this.manager = manager;
+        this.uiManager = uiManager;
     }
 
 
-    public void processInput(String input) {
+    public void processInput() {
+        // get input string
+        String input = uiManager.readLine();
+
+        // form command input
         CommandLineInput commandInput;
         try {
             commandInput = manager.getInputParser().parse(input);
         } catch (Throwable ex) {
-            manager.getUiManager().replyException(ex);
+            uiManager.replyException(ex);
             return;
         }
+
+        // start service
         initiateService(commandInput.getDispatcher(manager));
     }
 
@@ -35,12 +44,12 @@ public class Executor {
 
 
     private void handleExecutionSuccess(ExecutionService service) {
-        manager.getUiManager().reply(service.getValue());
+        uiManager.reply(service.getValue());
         service.followUpDispatcher().ifPresent(this::initiateService);
     }
 
 
     private void handleExecutionFailure(ExecutionService service) {
-        manager.getUiManager().replyException(service.getException());
+        uiManager.replyException(service.getException());
     }
 }

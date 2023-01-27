@@ -10,11 +10,11 @@ import aqua.exception.LoadException;
 import aqua.exception.ProcedureExecutionException;
 import aqua.logic.parser.ArgumentParser;
 import aqua.logic.parser.CommandLineInputParser;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 
 
 public class Loader {
-    public static void load(Path path, AppManager manager) throws LoadException {
+    public static void load(Path path, LogicManager manager) throws LoadException {
         try (Scanner scanner = new Scanner(path.toFile())) {
             CommandLineInputParser parser = new CommandLineInputParser(new ArgumentParser());
             while (scanner.hasNextLine()) {
@@ -29,7 +29,7 @@ public class Loader {
     }
 
 
-    public static void load(String pathString, AppManager manager) throws LoadException {
+    public static void load(String pathString, LogicManager manager) throws LoadException {
         load(Paths.get(pathString), manager);
     }
 }
