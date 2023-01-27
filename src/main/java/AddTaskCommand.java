@@ -10,12 +10,12 @@ public class AddTaskCommand extends Command {
         taskStore.addTask(this.task);
 
         String out = tasks.size() < 4
-                ? "Added your task: "
+                ? ""
                 : tasks.size() > 10
-                ? "What?!! You're going to dieee! Added your task: "
-                : "Another task? Phew >:(. Added your task: " ;
+                ? "What?!! You're going to dieee!\n"
+                : "Another task? Phew >:(.\n" ;
 
-        ui.output(out + this.task);
+        ui.output(out + "Added your task: "  + this.task);
         ui.output("You have " + tasks.size() + " tasks.");
     }
 }

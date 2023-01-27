@@ -7,6 +7,11 @@ public class Deadline extends Task{
     }
 
     @Override
+    public String storageFormat() {
+        return String.join("|", "D", super.storageFormat(), deadline)  + "\n";
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + deadline + ")";
     }

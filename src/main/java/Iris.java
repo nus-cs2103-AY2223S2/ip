@@ -8,15 +8,23 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class Iris {
-    private final TaskList tasks;
+    private TaskList tasks = null;
     private String input;
     private TaskStore taskStore;
     private Ui ui;
 
     public Iris() {
-        this.taskStore = new TaskStore();
-        this.tasks = this.taskStore.parse();
         this.ui = new Ui();
+        this.taskStore = new TaskStore();
+        try {
+            this.tasks = this.taskStore.parse();
+        } catch (IrisException e) {
+            Ui.output("Error while parsing stores file: " + e.getMessage() + "\nResetting the task list.");
+            if (this.tasks == null) {
+                this.tasks = new TaskList();
+                this.taskStore.reset();
+            }
+        }
     }
 
     private void run() {
@@ -29,7 +37,7 @@ public class Iris {
                 command.execute(this.tasks, this.ui, this.taskStore);
                 isEnd = command.isEnd();
             } catch (IrisException e) {
-                Ui.output(e.message);
+                Ui.output(e.getMessage());
             }
         }
     }

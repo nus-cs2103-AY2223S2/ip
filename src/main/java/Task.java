@@ -1,6 +1,6 @@
 public class Task {
     private boolean isDone = false;
-    private String name;
+    private final String name;
 
     Task(String name) {
         this.name = name;
@@ -42,16 +42,36 @@ public class Task {
         }
     }
 
-    public static Task parse(String str) {
-        Task task;
-        String[] strArray = str.split("] ");
-        switch (strArray[0].charAt(0)) {
-        case 'T':
-            task = new Todo(strArray[2]);
-        default:
-            task = new Task(strArray[1]);
+    public static Task parse(String str) throws IrisException {
+        Task task; String type; String mark;
+        String[] strArray = str.split("\\|");
+        try {
+            type = strArray[0];
+            mark = strArray[1];
+            switch (type) {
+            case "T":
+                task = new Todo(strArray[2]);
+                break;
+            case "D":
+                task = new Deadline(strArray[2], strArray[3]);
+                break;
+            case "E":
+                task = new Event(strArray[2], strArray[3], strArray[4]);
+                break;
+            default:
+                throw new NoTaskException();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MissingFieldException("Field missing in tasks file.");
+        }
+        if (mark.equals("X")) {
+            task.mark();
         }
         return task;
+    }
+
+    public String storageFormat() {
+        return String.join("|", this.status(), this.name);
     }
 
     @Override

@@ -8,7 +8,8 @@ public class HelpCommand extends Command {
             "To mark a task as done, type \"mark <task number>\".\n"  +
             "To mark a task as not done, type \"unmark <task number>\".\n"  +
             "To delete a task, type \"delete <task number>\".\n" +
-            "A task marked with a X is done. " +
+            "A task marked with a X is done.\n" +
+            "To reset the task list type \"reset\".\n" +
             "To close me, type \"bye\".\n" +
             "Have fun!";
 

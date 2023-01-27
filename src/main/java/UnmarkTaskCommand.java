@@ -14,7 +14,7 @@ public class UnmarkTaskCommand extends Command {
             throw new UnknownTaskException();
         }
         task.unmark();
-        taskStore.updateFile(tasks.toString());
+        taskStore.updateTasks(tasks);
         Ui.output("Bummer! Have fun doing this:");
         Ui.output(task.toString());
     }

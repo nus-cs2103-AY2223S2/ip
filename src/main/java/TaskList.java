@@ -8,8 +8,8 @@ public class TaskList extends ArrayList<Task> {
 
     public int countMarkedTasks() {
         int count = 0;
-        for (int i = 0; i < this.size(); i++) {
-            count += this.get(i).isDone() ? 1 : 0;
+        for (Task task : this) {
+            count += task.isDone() ? 1 : 0;
         }
         return count;
     }
@@ -19,19 +19,27 @@ public class TaskList extends ArrayList<Task> {
             return "You have no tasks.";
         }
 
-        String str = "You have the following tasks: ";
-        str.join(this.size() < 10
+        String str = this.size() < 10
                 ? "(So few~ good going!)\n"
-                : "(So many >:O)\n");
+                : "(So many >:O)\n";
+        str = String.join(" ", "You have the following tasks:", str);
 
-        return str + this.toString() + "You have " + this.size() + " tasks.";
+        return str + this + "You have " + this.size() + " tasks.";
+    }
+
+    public String storageFormat() {
+        String str = "";
+        for (Task task : this) {
+            str = str + task.storageFormat();
+        }
+        return str;
     }
 
     @Override
     public String toString() {
         String str = "";
         for (int i = 0; i < this.size(); i++) {
-            str += (i + 1) + ". " + this.get(i) + "\n";
+            str = String.join("",str, String.valueOf(i + 1), ". ", this.get(i).toString(), "\n");
         }
         return str;
     }

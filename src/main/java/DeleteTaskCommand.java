@@ -13,7 +13,7 @@ public class DeleteTaskCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new UnknownTaskException();
         }
-        taskStore.updateFile(tasks.toString());
+        taskStore.updateTasks(tasks);
         Ui.output("I've removed this task");
         Ui.output(task.toString());
     }

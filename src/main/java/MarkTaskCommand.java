@@ -14,7 +14,7 @@ public class MarkTaskCommand extends Command {
             throw new UnknownTaskException();
         }
         task.mark();
-        taskStore.updateFile(tasks.toString());
+        taskStore.updateTasks(tasks);
         Ui.output("Good job! I've marked this task done:");
         Ui.output(task.toString());
     }

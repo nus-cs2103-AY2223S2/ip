@@ -1,6 +1,6 @@
 public class Parser {
     enum CommandWord {
-        help, bye, list, mark, unmark, delete, todo, deadline, event
+        help, bye, list, mark, unmark, delete, todo, deadline, event, reset
     }
 
     private static void checkNotEmpty(String str, String message) throws MissingFieldException {
@@ -30,6 +30,8 @@ public class Parser {
                 return new UnmarkTaskCommand(Integer.parseInt(input.split(" ")[1]) - 1);
             case delete:
                 return new DeleteTaskCommand(Integer.parseInt(input.split(" ")[1]) - 1);
+            case reset:
+                return new ResetCommand();
             case todo:
                 try {
                     name = input.substring(5);

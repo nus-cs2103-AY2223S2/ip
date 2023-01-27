@@ -2,44 +2,57 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskStore {
-    private File taskFile;
+    private final File taskFile;
     public TaskStore() {
+        File dir = new File("./data");
         this.taskFile = new File("./data/TaskList.txt");
-        if (!this.taskFile.exists()) {
-            try {
-                this.taskFile.createNewFile();
-            } catch (IOException e) {
-                Ui.output("Something went wrong while creating the task file");
+        try {
+            if (!dir.exists()) {
+                dir.mkdir();
             }
+            if (!this.taskFile.exists()) {
+                this.taskFile.createNewFile();
+            }
+        } catch (IOException e) {
+            Ui.output("Something went wrong while creating the task file: " + e.getMessage());
         }
     }
 
     public void addTask(Task task) {
         try {
             FileWriter fw = new FileWriter(taskFile, true);
-            fw.write(task.toString());
+            fw.write(task.storageFormat());
             fw.close();
         } catch (IOException e) {
-            Ui.output("Something went wrong while adding the task." + e.getMessage());
+            Ui.output("Something went wrong while adding the task: " + e.getMessage());
         }
     }
 
-    public void updateFile(String newText) {
+    public void updateTasks(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(this.taskFile);
-            fw.write(newText);
+            fw.write(tasks.storageFormat());
             fw.close();
         } catch (IOException e) {
-            Ui.output("Something went wrong while updating the task." + e.getMessage());
+            Ui.output("Something went wrong while updating the task: " + e.getMessage());
         }
     }
 
-    public TaskList parse(){
-        Ui.output("parsing the file");
+
+    public void reset() {
+        try {
+            FileWriter fw = new FileWriter(this.taskFile);
+            fw.write("");
+            fw.close();
+        } catch (IOException e) {
+            Ui.output("Something went wrong while resetting the file: " + e.getMessage());
+        }
+    }
+
+    public TaskList parse() throws IrisException {
         TaskList tasks = new TaskList();
         try {
             try {
@@ -51,7 +64,7 @@ public class TaskStore {
                 this.taskFile.createNewFile();
             }
         } catch (IOException e) {
-            Ui.output("Something went wrong while reading the task file." + e.getMessage());
+            Ui.output("Something went wrong while reading the task file: " + e.getMessage());
         }
 
         return tasks;
