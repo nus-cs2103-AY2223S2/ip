@@ -109,7 +109,7 @@ public class TaskList {
      * @param keywords keywords provided by the user
      * @return TaskList containing all Tasks with matching keywords
      */
-    public TaskList find(String keywords) throws DukeException {
+    public TaskList findTask(String keywords) throws DukeException {
         TaskList matchingTasks = new TaskList();
         for (int index = 0; index < getSize(); index++) {
             Task task = get(index);

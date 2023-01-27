@@ -81,7 +81,6 @@ public class Ui {
         }
     }
 
-
     /**
      * Prints out line if there is an error loading for user to see
      */

@@ -249,7 +249,7 @@ public class Parser {
                 break;
             case find:
                 String keywords = getKeywords(inputStrings);
-                TaskList matchingTasks = taskList.find(keywords);
+                TaskList matchingTasks = taskList.findTask(keywords);
                 ui.sayMatchingTasks(matchingTasks);
                 break;
             }
