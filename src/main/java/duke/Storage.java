@@ -45,12 +45,12 @@ public class Storage {
             Scanner scanner = new Scanner(new File("duke_data.txt"));
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
-                boolean done = line.indexOf("[X]") == -1 ? false : true;
+                boolean isDone = line.indexOf("[X]") == -1 ? false : true;
                 line = line.replace("[ ]", "");
                 line = line.replace("[X]", "");
                 if (line.startsWith(Commands.TODO.cmd())) {
                     String title = line.substring(Commands.TODO.cmd().length());
-                    Task newTask = new Todo(title, done);
+                    Task newTask = new Todo(title, isDone);
                     tasksList.add(newTask);
                 } else if (line.startsWith(Commands.DEADLINE.cmd())) {
                     if (line.indexOf(Commands.BY.cmd()) == -1) {
@@ -59,7 +59,7 @@ public class Storage {
                     String title = line.substring(Commands.DEADLINE.cmd().length(),
                             line.indexOf(Commands.BY.cmd()));
                     Task newTask = new Deadline(title,
-                            line.substring(line.indexOf(Commands.BY.cmd())), done);
+                            line.substring(line.indexOf(Commands.BY.cmd())), isDone);
                     tasksList.add(newTask);
                 } else if (line.startsWith(Commands.EVENT.cmd())) {
                     if (line.indexOf(Commands.FROM.cmd()) == -1 || line.indexOf(Commands.TO.cmd()) == -1) {
@@ -70,7 +70,7 @@ public class Storage {
                     Task newTask = new Event(title,
                             line.substring(line.indexOf(Commands.FROM.cmd()),
                                     line.indexOf(Commands.TO.cmd())),
-                            line.substring(line.indexOf(Commands.TO.cmd())), done);
+                            line.substring(line.indexOf(Commands.TO.cmd())), isDone);
                     tasksList.add(newTask);
                 }
             }

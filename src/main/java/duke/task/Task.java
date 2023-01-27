@@ -5,7 +5,7 @@ import duke.DukeException;
 
 public abstract class Task {
     private String title;
-    private boolean done = false;
+    private boolean isDone = false;
 
     Task(String title) throws DukeException {
         if (title.trim().length() == 0) {
@@ -14,26 +14,26 @@ public abstract class Task {
         this.title = title.trim();
     }
 
-    Task(String title, boolean done) throws DukeException {
+    Task(String title, boolean isDone) throws DukeException {
         if (title.trim().length() == 0) {
             throw new DukeException(Views.EMPTY_ERR_STRING.eng());
         }
         this.title = title.trim();
-        this.done = done;
+        this.isDone = isDone;
     }
 
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void unmarkAsDone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     @Override
     public String toString() {
         String returnString = "";
-        if (done) {
+        if (isDone) {
             returnString = "[X] ";
         } else {
             returnString = "[ ] ";

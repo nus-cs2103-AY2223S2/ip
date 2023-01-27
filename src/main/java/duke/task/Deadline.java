@@ -17,8 +17,8 @@ public class Deadline extends Task {
         }
     }
 
-    public Deadline(String title, String by, boolean done) throws DukeException {
-        super(title, done);
+    public Deadline(String title, String by, boolean isDone) throws DukeException {
+        super(title, isDone);
         try {
             this.by = LocalDateTime.parse(by.replace("/by", "").trim());
         } catch (java.time.format.DateTimeParseException e) {

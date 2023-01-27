@@ -7,8 +7,8 @@ public class Todo extends Task {
         super(title);
     }
 
-    public Todo(String title, boolean done) throws DukeException {
-        super(title, done);
+    public Todo(String title, boolean isDone) throws DukeException {
+        super(title, isDone);
     }
 
     @Override

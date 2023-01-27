@@ -22,8 +22,8 @@ public class Event extends Task {
         }
     }
 
-    public Event(String title, String from, String to, boolean done) throws DukeException {
-        super(title, done);
+    public Event(String title, String from, String to, boolean isDone) throws DukeException {
+        super(title, isDone);
         try {
             this.from = LocalDateTime.parse(from.replace("/from", "").trim());
             this.to = LocalDateTime.parse(to.replace("/to", "").trim());
