@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -11,7 +12,7 @@ public class UnmarkCommand extends Command {
         this.taskNo = taskNo;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.get(taskNo).unmarkAsDone();
         ui.showUnmarkDone(tasks, taskNo);
         storage.save(tasks);

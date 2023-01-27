@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -12,7 +13,7 @@ public class DeleteCommand extends Command {
         this.taskNo = taskNo;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task delTask = tasks.get(taskNo);
         tasks.remove(taskNo);
         ui.showDel(delTask, tasks);

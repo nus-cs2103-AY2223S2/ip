@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 import duke.task.Task;
+import duke.enums.Views;
 
 public class TaskList {
     private ArrayList<Task> tasksList;
@@ -15,8 +16,12 @@ public class TaskList {
         this.tasksList = new ArrayList<Task>(100);
     }
 
-    public Task get(int index) {
-        return tasksList.get(index);
+    public Task get(int index) throws DukeException {
+        try {
+            return tasksList.get(index);
+        } catch (Exception e) {
+            throw new DukeException(Views.OUT_RANGE_ERR_STRING.eng());
+        }
     }
 
     public ArrayList<Task> getList() {

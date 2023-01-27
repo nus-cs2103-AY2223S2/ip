@@ -26,7 +26,7 @@ public class Ui {
         printer(Views.WELCOME_STRING.eng());
     }
 
-    public void showList(TaskList tasks) {
+    public void showList(TaskList tasks) throws DukeException {
         if (tasks.size() == 0) {
             printer(Views.EMPTY_LIST_STRING.eng());
         } else {
@@ -38,11 +38,11 @@ public class Ui {
         }
     }
 
-    public void showMarkDone(TaskList tasks, int taskNo) {
+    public void showMarkDone(TaskList tasks, int taskNo) throws DukeException {
         printer(Views.MARK_DONE_STRING.eng() + tasks.get(taskNo));
     }
 
-    public void showUnmarkDone(TaskList tasks, int taskNo) {
+    public void showUnmarkDone(TaskList tasks, int taskNo) throws DukeException {
         printer(Views.UNMARK_DONE_STRING.eng() + tasks.get(taskNo));
     }
 
