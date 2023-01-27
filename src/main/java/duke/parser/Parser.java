@@ -6,13 +6,32 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * A parser class to parse command inputs.
+ */
 public class Parser {
+
+    /**
+     * Parse a command expecting a task number input.
+     *
+     * @param command Command given by user.
+     * @return Task number specified by the user command.
+     * @throws DukeException User did not provide task number.
+     */
     public int getTaskNum(String[] command) throws DukeException {
         if (command.length < 2) {
             throw new DukeException("Task number required");
         }
         return Integer.parseInt(command[1]) - 1;
     }
+
+    /**
+     * Parse a command to generate a task.
+     *
+     * @param command Command given by user.
+     * @return Task object specified by the user command.
+     * @throws DukeException User provide invalid command.
+     */
 
     public Task getTaskToAdd(String[] command) throws DukeException {
         if (command.length < 2) {
