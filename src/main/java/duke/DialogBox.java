@@ -1,16 +1,17 @@
 package duke;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javafx.geometry.Pos;
+
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 
 public class DialogBox extends HBox {
-    
+
     private Label text;
     private ImageView displayPicture;
 

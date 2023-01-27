@@ -10,7 +10,7 @@ public class Ui {
     /**
      * Prints greeting text.
      */
-    public String showGreeting() {
+    public static String showGreeting() {
         String greeting = "Hello! I'm Colette.\n"
                 + "What can I do for you?";
         return greeting;
