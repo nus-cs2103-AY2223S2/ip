@@ -3,13 +3,13 @@ package duke;
 import java.io.IOException;
 
 /**
- * A talking robot
+ * This class is for the starting screen and the loop the commands in Ui class
+ * 
  * CS2103T
  * AY22/23 Semester 2.
  *
  * @author Lyndon Lim Liang Hng 
  */
-
 public class Duke {
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"

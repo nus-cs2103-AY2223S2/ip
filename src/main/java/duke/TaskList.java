@@ -8,18 +8,27 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/*
+ * Contains the task list and it has operations to add/delete tasks in the list
+ */
 public class TaskList {
     private ArrayList<Task> listOfTasks;
     
+    /**
+     * Constructs a new TaskList instance
+     * 
+     * @param list List of the tasks
+     */
     public TaskList(ArrayList<Task> list) {
         listOfTasks = list;
     }
 
     /**
-     * Add a Task to the list given the description
+     * Adds a Task to the list given the description
      * 
      * @param words Description given by user input
      * @param type The type of task
+     * @return true if task has been added successfully, else false
      */ 
     public boolean addTask(String[] words, String type) {
         Task task;
@@ -72,9 +81,11 @@ public class TaskList {
     }
 
     /**
-     * Delete a Task from the list given the index
+     * Deletes a Task from the list given the index
      * 
      * @param num Index of the task to be deleted
+     * @return true if task has been deleted, else false
+     * @throws IndexOutOfBoundsExceptio If num > listOfTask.size()
      */ 
     public boolean deleteTask(int num) throws IndexOutOfBoundsException {
         Task selectedTask = getTask(num);
@@ -85,7 +96,7 @@ public class TaskList {
     }
 
     /**
-     * Print the list
+     * Prints the list
      */ 
     public void printList() {
         for (int i = 0; i < listOfTasks.size(); i++) {
@@ -94,7 +105,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieve the Task object from the list given an index
+     * Retrieves the Task object from the list given an index
      * 
      * @param num Index of the task to retrieve
      * @return returns a Task object
@@ -104,7 +115,7 @@ public class TaskList {
     }
 
     /**
-     * Return a list of task
+     * Returns a list of task
      * 
      * @return return a list of task
      */

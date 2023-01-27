@@ -3,11 +3,12 @@ import duke.Storage;
 import duke.TaskList;
 import duke.task.Task;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/*
+ * Test for Parser class
+ */
 public class ParserTest {
 
     /**

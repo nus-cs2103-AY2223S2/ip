@@ -1,17 +1,18 @@
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
 import duke.TaskList;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Event;
 
+/*
+ * Test for TaskList class
+ */
 public class TaskListTest {
 
     /**

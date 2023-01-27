@@ -3,9 +3,20 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/*
+ * Represents an Event task
+ */
 public class Event extends Task {
     public LocalDateTime dateTimeFrom;
     public LocalDateTime dateTimeTo;
+
+    /**
+     * Constructs a new Todo instance
+     * 
+     * @param description Description of the task
+     * @param dateTimeFrom Starting date and time
+     * @param dateTimeTo Ending date and time
+     */
     public Event(String description, LocalDateTime dateTimeFrom, LocalDateTime dateTimeTo) {
         super(description);
         this.type = 'E';
@@ -14,7 +25,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return date and time of from and to
+     * Returns date and time of from and to
      * 
      * @return String representation of date and time from and to in this format "DD MMM yyyy hh:mma"
      */
@@ -22,7 +33,6 @@ public class Event extends Task {
         return dateTimeFrom.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma")) + " - " +
                 dateTimeTo.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma"));
     }
-
 
     /**
      * {@inheritDoc}
@@ -33,5 +43,4 @@ public class Event extends Task {
                 dateTimeFrom.format(DateTimeFormatter.ofPattern("DD MMM yyyy hh:mma")) + " to: " +
                 dateTimeTo.format(DateTimeFormatter.ofPattern("DD MMM yyyy hh:mma")) + ")";
     }
-
 }

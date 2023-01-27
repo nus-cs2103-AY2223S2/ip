@@ -3,15 +3,21 @@ package duke;
 import java.util.Arrays;
 import duke.task.Task;
 
+/*
+ * Deals with making sense of the user command
+ */
 public class Parser {
 
     /**
-     * Run the input command given by the user and write into file if list has changed
+     * Runs the input command given by the user and write into file if list has changed
      * 
      * @param taskList Arraylist containing task objects
      * @param storage Storage class that manages save and loading
      * @param words User input
-     * @return return True if command is bye, otherwise return false
+     * @return true if command is bye, otherwise return false
+     * @throws IndexOutOfBoundsException When index given is larger than the taskList
+     * @throws NumberFormatException When a string is given instead of a number for some commmands
+     * @throws InvalidCommandException When user inputs an invalid command
      */
     public boolean runCommand(TaskList taskList, Storage storage, String[] words) throws IndexOutOfBoundsException,
             NumberFormatException, InvalidCommandException {
@@ -49,7 +55,7 @@ public class Parser {
             hasTaskChanged = taskList.deleteTask(Integer.parseInt(words[1]));
             break;
         default:
-            throw new InvalidCommandException("");
+            throw new InvalidCommandException("Invalid command. Please try again");
         }
         if(words[0] != "LIST" && hasTaskChanged) {
             storage.saveFile(taskList.getListOfTask());
@@ -59,11 +65,11 @@ public class Parser {
 
 
     /**
-     * Return index of given word
+     * Returns the index of given word
      * 
-     * @param words the array of words to look from
-     * @param word the word to look for
-     * @return return the index of the given word, if it doesnt exist, return -1
+     * @param words Array of words to look from
+     * @param word Word to look for
+     * @return The index of the given word, if it doesnt exist, return -1
      */
     public static int getIndexOfWord(String[] words, String word) {
         int index = -1;

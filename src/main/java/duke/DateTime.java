@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/*
+ * Handles the conversion of time from user input
+ */
 public class DateTime {
     
     /**

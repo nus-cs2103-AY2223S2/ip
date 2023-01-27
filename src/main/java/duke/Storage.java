@@ -15,11 +15,15 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/*
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private static String FILE_PATH = "./data/eren.txt";
     private static String DIR_PATH = "./data/";
+
     /**
-     * Function to save list of task in txt file
+     * Saves the list of task in txt file
      */ 
     public void saveFile(ArrayList<Task> listOfTasks) {
         String fileContent;
@@ -65,7 +69,7 @@ public class Storage {
     }
 
     /**
-     * Function to write to file
+     * Writes to file
      * 
      * @param description File content to be written to the file
      */ 
@@ -82,7 +86,7 @@ public class Storage {
 
 
     /**
-     * Function to load the list of task from txt file
+     * Loads the list of task from txt file
      */ 
     public ArrayList<Task> loadFile() {
         File file = new File(FILE_PATH);

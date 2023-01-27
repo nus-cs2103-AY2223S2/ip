@@ -1,17 +1,25 @@
 package duke.task;
 
+/*
+ * Represents a task
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
     protected char type = ' ';
 
+    /**
+     * Constructs a new task instance
+     * 
+     * @param description Description of the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
     /**
-     * Retrieve mark status of task
+     * Retrieves mark status of task
      * 
      * @return Return a string "X" if the task is mark as completed, otherwise return blank
      */
@@ -20,17 +28,16 @@ public class Task {
     }
 
     /**
-     * Return the status of the current task
+     * Returns the status of the current task
      * 
-     * @return False if task is unmark and True if task is mark
+     * @return false if task is unmark and True if task is mark
      */
-
     public boolean isDone() {
         return this.isDone;
     }
 
     /**
-     * Return the type of the current task
+     * Returns the type of the current task
      * 
      * @return Type of current task
      */
@@ -39,7 +46,7 @@ public class Task {
     }
 
     /**
-     * Return the description of the current task
+     * Returns the description of the current task
      * 
      * @return Description of current task
      */

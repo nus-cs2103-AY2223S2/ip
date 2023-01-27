@@ -4,20 +4,29 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/*
+ * Deals with interactions with the user
+ */
 public class Ui {
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private Parser parser;
-    
+
+    /**
+     * Constructs a new Ui instance
+     * 
+     * @param parser Parser instance
+     */
     public Ui(Parser parser) {
         this.parser = parser;
     }
 
      /**
-     * Receive command given by the user and pass to parser to run the command
+     * Receives command given by the user and pass to parser to run the command
      * 
      * @param taskList Arraylist containing task objects
      * @param storage Storage class that manages save and loading
-     * @return return True if command is bye, otherwise return false
+     * @return true if command is bye, otherwise return false
+     * @throws IOException If an I/O error occurs
      */
     public boolean receiveInput(TaskList taskList, Storage storage) throws IOException {
         String[] words;
@@ -32,7 +41,7 @@ public class Ui {
         } catch(NumberFormatException e) {
             System.out.println("Invalid number. Please enter a number!");
         } catch(InvalidCommandException e) {
-            System.out.println("Invalid command. Pleas try again!");
+            System.out.println(e.getMessage());
         } 
         horizontalLine();
         return isCommandBye;
@@ -40,7 +49,7 @@ public class Ui {
 
 
     /**
-     * Print a double horizontal line
+     * Prints a double horizontal line
      */ 
     private static void horizontalLine() { 
         for (int i = 0; i < 20; i++) {
