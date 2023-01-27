@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Duke {
     private final static String INDENT_LINE = "____________________________________________________________";
     private ArrayList<Task> taskList;
