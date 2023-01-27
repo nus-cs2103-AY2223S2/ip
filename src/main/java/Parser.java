@@ -1,14 +1,14 @@
 import java.util.HashMap;
 
-public class Command {
+public class Parser {
     private final String fullCommand;
     public final String baseCommand;
     public final String body;
     public final HashMap<String, String> namedParameters = new HashMap<>();
 
-    public Command(String commandString) {
-        this.fullCommand = commandString;
-        String[] temp = commandString.split(" +", 2);
+    public Parser(String command) {
+        this.fullCommand = command;
+        String[] temp = command.split(" +", 2);
         this.baseCommand = temp[0];
         String rawBody = temp.length > 1 ? temp[1].trim() : "";
         String body = "";

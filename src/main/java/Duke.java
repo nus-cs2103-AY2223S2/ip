@@ -7,7 +7,7 @@ public class Duke {
     private Ui ui = new Ui();
     private Storage storage = new Storage("_duke_data.txt");
     private TaskList tasks;
-    private Command currentCommand;
+    private Parser currentCommand;
 
     public Duke() {
         try {
@@ -35,7 +35,7 @@ public class Duke {
             }
             
             String input = scanner.nextLine();
-            this.currentCommand = new Command(input);
+            this.currentCommand = new Parser(input);
         
             try {
                 switch (this.currentCommand.baseCommand) {
