@@ -17,7 +17,7 @@ public class Storage {
 
     private static final String TASKS_FILE_PATH = "./data/duke/tasks.csv";
 
-    private TaskList tasklist;
+    private final TaskList tasklist;
 
     public Storage(TaskList taskList) {
         this.tasklist = taskList;
@@ -79,7 +79,6 @@ public class Storage {
     }
 
     private void writeToFile(String filePath, String fileContent) {
-        // Write prepared data to file
         try {
             Path f = Paths.get(filePath);
             Files.createDirectories(f.getParent()); // Create directory (if not exist)

@@ -15,6 +15,11 @@ public class TaskList {
     }
 
     public Task remove(int idx) {
+        if (idx < 0 || idx > tasks.size()) {
+            // out of bounds
+            return null;
+        }
+
         return tasks.remove(idx);
     }
 

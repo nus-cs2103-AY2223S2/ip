@@ -70,7 +70,7 @@ public class Duke {
 
         System.out.println("System is ready!");
         duke.ui.println("\n\n");
-        duke.ui.displayLine();
+        duke.ui.printBufferLine();
 
         // Program Intro
         duke.ui.println("Hello! I'm Duke! :D");
@@ -227,7 +227,7 @@ public class Duke {
                     duke.ui.println("Saving your list ... ");
                     duke.storage.saveDataToFile();
                     duke.ui.println("Goodbye!");
-                    duke.ui.displayLine();
+                    duke.ui.printBufferLine();
                     Ui.printProgramInfo();
                     isContinue = false;
                     break;

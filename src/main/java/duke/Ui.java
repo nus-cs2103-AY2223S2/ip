@@ -14,9 +14,6 @@ public class Ui {
         // Empty
     }
 
-    void display(Object obj) {
-        System.out.println(obj);
-    }
     public void println(String message) {
         System.out.println(message);
     }
@@ -28,7 +25,7 @@ public class Ui {
         System.out.println(LOGO);
         System.out.println("Developed by: " + AUTHOR);
     }
-    void displayLine() {
+    void printBufferLine() {
         println("____________________________________________________________");
     }
 }
