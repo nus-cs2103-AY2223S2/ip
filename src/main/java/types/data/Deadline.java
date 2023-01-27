@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected static final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    protected static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private final LocalDateTime before;
 
     private Deadline(String n, String d) {
@@ -20,6 +20,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s (by: %s)", super.toString(), before.format(format));
+        return String.format("%s (by: %s)", super.toString(), before.format(DATE_TIME_FORMATTER));
     }
 }

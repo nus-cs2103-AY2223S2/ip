@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JDeleteTask implements IHandler {
-    private static final Pattern p = Pattern.compile("delete ([0-9]*)");
+    private static final Pattern PATTERN = Pattern.compile("delete ([0-9]*)");
     private final TaskList ts;
 
     public JDeleteTask(TaskList ts) {
@@ -17,7 +17,7 @@ public class JDeleteTask implements IHandler {
 
     @Override
     public String take(String s) {
-        Matcher m = p.matcher(s);
+        Matcher m = PATTERN.matcher(s);
         if (!m.matches()) {
             return "";
         }
@@ -34,6 +34,6 @@ public class JDeleteTask implements IHandler {
 
     @Override
     public boolean canTake(String s) {
-        return p.matcher(s).matches();
+        return PATTERN.matcher(s).matches();
     }
 }

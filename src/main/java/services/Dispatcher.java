@@ -15,7 +15,7 @@ public final class Dispatcher {
     private Runnable toExit;
 
     public void registerCommand(IHandler c) {
-        this.handlerRegistry.add(c);
+        handlerRegistry.add(c);
     }
 
     public void setSpeakerRegistry(SpeakerRegistry speakerRegistry) {
@@ -23,31 +23,31 @@ public final class Dispatcher {
     }
 
     public void registerCommand(Class<IHandler> c) {
-        this.handlerRegistry.add(CommandHelper.getObject(c));
+        handlerRegistry.add(CommandHelper.getObject(c));
     }
 
     public void registerError(IHandler c) {
-        this.errorRegistry.add(c);
+        errorRegistry.add(c);
     }
 
     public void registerError(Class<IHandler> c) {
-        this.errorRegistry.add(CommandHelper.getObject(c));
+        errorRegistry.add(CommandHelper.getObject(c));
     }
 
     public void setDefaultHandler(Class<IHandler> c) {
-        this.defaultHandler = CommandHelper.getObject(c);
+        defaultHandler = CommandHelper.getObject(c);
     }
 
     public void setDefaultHandler(IHandler c) {
-        this.defaultHandler = c;
+        defaultHandler = c;
     }
 
     public void setExitHandler(Class<IHandler> c) {
-        this.exitHandler = CommandHelper.getObject(c);
+        exitHandler = CommandHelper.getObject(c);
     }
 
     public void setExitHandler(IHandler c) {
-        this.exitHandler = c;
+        exitHandler = c;
     }
 
     public void setToExit(Runnable toExit) {
@@ -68,6 +68,6 @@ public final class Dispatcher {
             return;
         }
 
-        speakerRegistry.broadcast(this.defaultHandler.take(expr));
+        speakerRegistry.broadcast(defaultHandler.take(expr));
     }
 }
