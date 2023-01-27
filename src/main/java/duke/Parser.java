@@ -1,5 +1,5 @@
 package duke;
-//
+
 import duke.Tasks.Deadline;
 import duke.Tasks.Event;
 import duke.Tasks.Task;
@@ -74,6 +74,7 @@ public class Parser {
                     String deadline = command.substring(command.indexOf("/by") + 4);
 
                     try {
+                        //Date and Time
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(("MM/dd/yyyy HHmm"));
                         LocalDateTime datetime1 = LocalDateTime.parse(deadline, formatter);
                         System.out.println(datetime1.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")));
@@ -98,6 +99,7 @@ public class Parser {
                     String fromtime = command.substring(command.indexOf(" /from ") + 6, command.indexOf(" /to "));
                     String totime = command.substring(command.indexOf(" /to ") + 4);
                     try {
+                        //Date and Time
                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern((" MM/dd/yyyy HHmm"));
                         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern((" MM/dd/yyyy HHmm"));
                         LocalDateTime datetime1 = LocalDateTime.parse(fromtime, formatter1);
