@@ -47,7 +47,7 @@ public class Parser {
     public static String[] parseDeadline(String str) {
         String temp = str.substring(8);
 
-        return temp.split("/by");
+        return temp.split(" /by ");
     }
 
 
@@ -60,11 +60,11 @@ public class Parser {
      */
     public static String[] parseEvent(String str) throws DukeException {
         String temp = str.substring(5);
-        String[] arr1 = temp.split("/from");
+        String[] arr1 = temp.split(" /from ");
         if (arr1.length != 2) {
             throw new DukeException("I don't know what that means. Format it as 'event [do something] /from [start date] /to [end date]'");
         }
-        String[] arr2 = arr1[1].split("/to");
+        String[] arr2 = arr1[1].split(" /to ");
         if (arr2.length != 2) {
             throw new DukeException("I don't know what that means. Format it as 'event [do something] /from [start date] /to [end date]'");
         }
