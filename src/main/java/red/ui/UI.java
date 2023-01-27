@@ -7,14 +7,7 @@ public class UI {
     private static Scanner scanner;
 
     public void sayHello() {
-        String logo = "██████╗░███████╗██████╗░\n"
-                 +    "██╔══██╗██╔════╝██╔══██╗\n"
-                 +    "██████╔╝█████╗░░██║░░██║\n"
-                 +    "██╔══██╗██╔══╝░░██║░░██║\n"
-                 +    "██║░░██║███████╗██████╔╝\n"
-                 +    "╚═╝░░╚═╝╚══════╝╚═════╝░\n";
-
-        System.out.println(logo + " is ready to assist you\n");
+        System.out.println("Red is ready to assist you\n");
     }
 
     public String readCommand() {
