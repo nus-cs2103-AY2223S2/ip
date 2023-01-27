@@ -45,6 +45,10 @@ public class Ui {
         line();
     }
 
+    public void announceFindResult() {
+        System.out.println("Here's what we found. ");
+    }
+
     /**
      * Prints to notify the user that an unexpected error has occured.
      */
