@@ -27,7 +27,6 @@ public class Duke {
             while (br.ready()) {
                 line = br.readLine();
                 tasks.addLine(line);
-                System.out.println("loaded");
             }
 
             String greeting = formatStr("Hello! I'm Muse\n"
@@ -73,17 +72,17 @@ public class Duke {
                         Todo newTodo = new Todo(input);
                         tasks.addTask(newTodo);
                         System.out.println(formatStr(tasks.addReport(newTodo)));
-                        pw.write(newTodo.printTodo());
+                        pw.write(newTodo.printRecord());
                     } else if (splitArr[0].equals("deadline")) {
                         Deadline newDead = new Deadline(input);
                         tasks.addTask(newDead);
                         System.out.println(formatStr(tasks.addReport(newDead)));
-                        pw.write(newDead.printDeadline());
+                        pw.write(newDead.printRecord());
                     } else if (splitArr[0].equals("event")) {
                         Event newEvent = new Event(input);
                         tasks.addTask(newEvent);
                         System.out.println(formatStr(tasks.addReport(newEvent)));
-                        pw.write(newEvent.printEvent());
+                        pw.write(newEvent.printRecord());
                     } else {
                         throw new VagueInputException("Oh no! What do you mean? \n" +
                                 "I'm confused. Please specify... @.@");
@@ -103,9 +102,17 @@ public class Duke {
                 }
                 input = sc.nextLine();
             }
+            pw.print("");
+            pw.close();
+            PrintWriter clearer = new PrintWriter(textDir);
+            clearer.close();
+            PrintWriter reWriter = new PrintWriter(new FileWriter(textDir, true));
+            for (int i = 0; i < tasks.getSize(); i++) {
+                reWriter.write(tasks.getTask(i).printRecord());
+            }
+            reWriter.close();
             String goodbyeMessage = formatStr("Bye. Come back again!");
             System.out.println(goodbyeMessage);
-            pw.close();
         }
             catch(IOException e){
                 e.printStackTrace();
@@ -160,6 +167,10 @@ public class Duke {
 
         public String toString() {
             return ". [" + markSign(this.mark) + "] " + this.content;
+        }
+
+        public String printRecord() {
+            return this.toString();
         }
     }
 

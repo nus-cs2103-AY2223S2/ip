@@ -32,18 +32,18 @@ public class TaskList {
 
     public void addLine(String line) {
         if (line.substring(1,2).equals("T")) {
-            String todo = line.substring(6);
-            Todo newTodo = new Todo(todo, this.checkMark(line.substring(3,4)));
+            String todo = line.substring(8);
+            Todo newTodo = new Todo(todo, this.checkMark(line.substring(5,6)));
             this.addTask(newTodo);
         }
         if (line.substring(1,2).equals("D")) {
-            String deadline = line.substring(6);
-            Deadline newDead = new Deadline(deadline, this.checkMark(line.substring(3,4)));
+            String deadline = line.substring(8);
+            Deadline newDead = new Deadline(deadline, this.checkMark(line.substring(5,6)));
             this.addTask(newDead);
         }
         if (line.substring(1,2).equals("E")) {
-            String event = "event " + line.substring(6);
-            Event newEvent = new Event(event, this.checkMark(line.substring(3,4)));
+            String event = line.substring(8);
+            Event newEvent = new Event(event, this.checkMark(line.substring(5,6)));
             this.addTask(newEvent);
         }
     }

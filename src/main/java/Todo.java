@@ -8,10 +8,10 @@ public class Todo extends Duke.Task {
     }
 
     public Todo(String content, boolean mark) {
-        super(content.substring(5), mark);
+        super(content, mark);
     }
 
-    public String printTodo() {
+    public String printRecord() {
         return "[T]" + " [" + super.markSign(super.mark) + "] " + super.content + "\n";
     }
 }

@@ -16,7 +16,7 @@ public class Event extends Duke.Task {
         return ". [E][" + super.markSign(super.mark) + "] " + super.content + this.eventSpan;
     }
 
-    public String printEvent() {
+    public String printRecord() {
         return "[E]" + " [" + super.markSign(super.mark) + "] " + super.content + " " + this.eventSpan + "\n";
     }
 }

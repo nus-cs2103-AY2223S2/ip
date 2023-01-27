@@ -1,0 +1,4 @@
+[T] [ ] work
+[T] [X] banna
+[T] [ ] pokemon card
+[E] [X] make pie   (by: Mon 5 to: Tue 4)

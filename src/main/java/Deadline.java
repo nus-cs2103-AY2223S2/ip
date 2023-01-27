@@ -16,7 +16,7 @@ public class Deadline extends Duke.Task {
         return ". [D][" +super.markSign(super.mark) + "] " + super.content + deadlineDue;
     }
 
-    public String printDeadline() {
+    public String printRecord() {
         return "[D]" + " [" + super.markSign(super.mark) + "] " + super.content + " " + this.deadlineDue + "\n";
     }
 }
