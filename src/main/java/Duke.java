@@ -8,6 +8,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+//Follow the given coding standard.
 public class Duke
 {
     private Ui ui;
