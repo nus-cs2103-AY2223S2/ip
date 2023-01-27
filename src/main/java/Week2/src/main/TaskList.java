@@ -6,16 +6,29 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
 import java.util.Scanner;
+
+/**
+ * List of tasks
+ * @param <Task>
+ */
 public class TaskList<Task> {
 
     private int size = 0;
 
     private ArrayList<Task> list;
 
+    /**
+     * Basic TaskList constructor without parameter
+     */
     public TaskList() {
         this.list = new ArrayList<Task>();
     }
 
+    /**
+     * TaskList constructor that loads data from the file of the path.
+     * @param path File to load
+     * @throws FileNotFoundException
+     */
     @SuppressWarnings("unchecked")
     public TaskList(String path) throws FileNotFoundException {
         Scanner sc = new Scanner(new File(path));
@@ -39,18 +52,35 @@ public class TaskList<Task> {
         sc.close();
     }
 
+    /**
+     * Size of the list
+     * @return size of the list
+     */
     public int size() {
         return this.size;
     }
 
+    /**
+     * Gives the task at the given index
+     * @param index
+     * @return The task at the index
+     */
     public Task get(int index) {
         return this.list.get(index);
     }
 
+    /**
+     * Removes the task at the given index
+     * @param index
+     */
     public void remove(int index) {
         this.list.remove(index);
     }
 
+    /**
+     * Add a new task that user has entered
+     * @param t new task
+     */
     public void add(Task t) {
         this.list.add(t);
         this.size++;

@@ -7,15 +7,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.*;
 
+/**
+ * A simple todo bot to manage my todo list.
+ * It can mark done jobs or unmark.
+ */
 public class Duke {
     private static Storage storage;
     private Ui ui;
     private static TaskList tasklist;
 
+    /**
+     * Constructor of Duke.
+     * It begins the basic operation of the program when it is constructed.
+     * @param filePath
+     * @throws IOException
+     */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
+            ui.hello();
             tasklist = new TaskList(storage.load());
         } catch(Exception e) {
             ui.showLoadingError();
@@ -23,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Prints out a line
+     */
     public static void lining() {
         System.out.println("____________________________________________________________");
     }
@@ -37,23 +51,24 @@ public class Duke {
         }
     }
 
+    /**
+     * Writes information of the task on the file
+     * @param currtask Current task that user has entered
+     * @throws IOException
+     */
     public static void writeOn(Task currtask) throws IOException {
         fw.write(currtask.toString() +System.lineSeparator());
     }
+
+    /**
+     * Main method to manage my todo list
+     * Takes inputs from the user and send them to right classes.
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         new Duke("saves/data.txt");
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        lining();
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        lining();
 
         String comm = "";
 
