@@ -16,20 +16,23 @@ public class Duke {
     public static void main(String[] args) {
         String greetings = "Heyyo, Pandora at your service \n"
                 + "What can I do for you?";
-        System.out.println(greetings);
 
         //Initial inputs
         Scanner userInput = new Scanner(System.in);;
         String userMessage;
 
-        //To-do-list
-        ArrayList<Task> toDoList = new ArrayList<Task>();
+        //To-do-list, fetch save file if available
+        ArrayList<Task> toDoList;
+        FileManager fm = new FileManager();
+        toDoList = fm.getFile();
+        System.out.println(greetings);
 
         while (true) {
             userMessage = userInput.nextLine();
             String [] parts = userMessage.split(" ", 2);
 
             if (parts[0].equals("bye")) {
+                fm.saveFile(toDoList);
                 System.out.print("  Cya~ Till next time!");
                 break;
             } else if (parts[0].equals("list")) {
