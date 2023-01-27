@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-
 public class TodoTest {
     private final Todo todo1 = new Todo("some description");
     private final Todo todo2 = new Todo("another description");

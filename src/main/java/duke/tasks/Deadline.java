@@ -3,11 +3,11 @@ package duke.tasks;
 import java.time.LocalDate;
 
 public class Deadline extends Task {
-    protected MyDateTime by;
+    protected MyDateTime dueDateTime;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String dueDateTime) {
         super(description);
-        this.by = new MyDateTime(by);
+        this.dueDateTime = new MyDateTime(dueDateTime);
     }
 
     @Override
@@ -17,15 +17,15 @@ public class Deadline extends Task {
 
     @Override
     public String formatForFile() {
-        return String.format("%s|%s|%s", "D", super.formatForFile(), this.by.formatDateTimeForFile());
+        return String.format("%s|%s|%s", "D", super.formatForFile(), this.dueDateTime.formatDateTimeForFile());
     }
 
     public String printDateTime() {
-        return this.by.formatDateTimeForPrint();
+        return this.dueDateTime.formatDateTimeForPrint();
     }
 
     public boolean isDeadLine(MyDate other) {
-        LocalDate current = this.by.dateOnly();
+        LocalDate current = this.dueDateTime.dateOnly();
         return other.isEqual(current);
     }
 }
