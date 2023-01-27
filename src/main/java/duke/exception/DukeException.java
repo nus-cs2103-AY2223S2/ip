@@ -1,5 +1,7 @@
+package duke.exception;
+
 /**
- * The DukeException class implements exceptions specific to Duke.
+ * The duke.exception.DukeException class implements exceptions specific to Duke.
  *
  * @author Chia Jeremy
  */

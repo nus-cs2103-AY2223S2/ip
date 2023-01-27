@@ -1,5 +1,11 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
- * The ExitCommand class implements the action of exiting the program.
+ * The duke.commands.ExitCommand class implements the action of exiting the program.
  *
  * @author Chia Jeremy
  */

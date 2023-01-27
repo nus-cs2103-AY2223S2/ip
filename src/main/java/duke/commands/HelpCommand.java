@@ -1,5 +1,11 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
- * The HelpCommand class implements the action of showing all the commands.
+ * The duke.commands.HelpCommand class implements the action of showing all the duke.commands.
  *
  * @author Chia Jeremy
  */

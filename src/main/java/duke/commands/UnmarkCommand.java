@@ -1,5 +1,11 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
- * The UnmarkCommand class implements the action of unmarking tasks.
+ * The duke.commands.UnmarkCommand class implements the action of unmarking tasks.
  *
  * @author Chia Jeremy
  */

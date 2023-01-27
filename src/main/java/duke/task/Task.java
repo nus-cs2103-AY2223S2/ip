@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * The Task class represents a single task added by the user.
+ * The duke.task.Task class represents a single task added by the user.
  *
  * @author Chia Jeremy
  */

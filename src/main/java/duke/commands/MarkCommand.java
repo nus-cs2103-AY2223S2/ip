@@ -1,5 +1,11 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 /**
- * The MarkCommand class implements the action of marking tasks.
+ * The duke.commands.MarkCommand class implements the action of marking tasks.
  *
  * @author Chia Jeremy
  */

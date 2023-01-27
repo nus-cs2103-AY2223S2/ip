@@ -1,9 +1,11 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The TaskList class represent a list of all the tasks added by the user.
+ * The duke.task.TaskList class represent a list of all the tasks added by the user.
  *
  * @author Chia Jeremy
  */

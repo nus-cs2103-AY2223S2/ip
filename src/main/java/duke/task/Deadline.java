@@ -1,7 +1,9 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 
 /**
- * The Deadline class is a type of task.
+ * The duke.task.Deadline class is a type of task.
  *
  * @author Chia Jeremy
  */
