@@ -12,7 +12,7 @@ public class Duke {
         try {
             this.tasks = TaskList.load();
         } catch(DukeLoadException e) {
-            Duke.say(e.getDukeMessage());
+            this.say(e.getDukeMessage());
             this.tasks = new TaskList();
         }
     }
@@ -23,7 +23,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        Duke.say("Hello from\n" + logo);
+        this.say("Hello from\n" + logo);
 
         Scanner scanner = new Scanner(System.in);
 
@@ -62,7 +62,7 @@ public class Duke {
                     case "quit":
                     case "exit":
                     case "bye":
-                        Duke.say("Bye. Hope to see you again soon!");
+                        this.say("Bye. Hope to see you again soon!");
                         break whileLoop;
                     default:
                         throw new DukeInvalidCommandException();
@@ -70,7 +70,7 @@ public class Duke {
 
                 tasks.save();
             } catch (DukeException e) {
-                Duke.say(e.getDukeMessage());
+                this.say(e.getDukeMessage());
             }
         }
         
@@ -81,7 +81,7 @@ public class Duke {
         new Duke().run();
     }
 
-    private static void say(String whatToSay) {
+    private void say(String whatToSay) {
         String indentation = " ".repeat(Duke.INDENT_LEVEL);
         String horizontalLine = "_".repeat(60);
         String indentedInput = whatToSay.replaceAll("(?<=^|\n)", indentation);
@@ -99,7 +99,7 @@ public class Duke {
         String description = command.body;
         Task task = new TaskTodo(description);
         tasks.add(task);
-        Duke.say(
+        this.say(
             "Got it. I've added this task:\n"
                 + "  " + task.toString() + "\n"
                 + tasks.getStatus()
@@ -121,7 +121,7 @@ public class Duke {
             String description = command.body;
             Task task = new TaskDeadline(description, command.namedParameters.get("by"));
             tasks.add(task);
-            Duke.say(
+            this.say(
                 "Got it. I've added this task:\n"
                     + "  " + task.toString() + "\n"
                     + tasks.getStatus()
@@ -158,7 +158,7 @@ public class Duke {
                 command.namedParameters.get("to")
             );
             tasks.add(task);
-            Duke.say(
+            this.say(
                 "Got it. I've added this task:\n"
                     + "  " + task.toString() + "\n"
                     + tasks.getStatus()
@@ -190,7 +190,7 @@ public class Duke {
                 "Task index is beyond the range of the task list."
             ));
         task.markAsDone();
-        Duke.say(
+        this.say(
             "Nice! I've marked this task as done:\n"
                 + "  " + task.toString()
         );
@@ -216,7 +216,7 @@ public class Duke {
                 "Task index is beyond the range of the task list."
             ));
         task.markAsNotDone();
-        Duke.say(
+        this.say(
             "OK, I've marked this task as not done yet:\n"
                 + "  " + task.toString()
         );
@@ -242,13 +242,13 @@ public class Duke {
                 "Task index is beyond the range of the task list."
             ));
         tasks.remove(taskIndex);
-        Duke.say(
+        this.say(
             "Noted. I've removed this task:\n"
                 + "  " + task.toString()
         );
     }
 
     private static void list(Command command, TaskList tasks) {
-        Duke.say(tasks.toString());
+        this.say(tasks.toString());
     }
 }
