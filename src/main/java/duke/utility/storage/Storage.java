@@ -12,8 +12,8 @@ import java.nio.file.Paths;
 import duke.tasklist.TaskList;
 
 public class Storage {
-    private static final String FOLDER_PATH = "src/main/java/utility/storage/data";
-    private static final String FILE_PATH = "src/main/java/utility/storage/data/data.txt";
+    private static final String FOLDER_PATH = "src/main/java/duke/utility/storage/";
+    private static final String FILE_PATH = "src/main/java/duke/utility/storage/storage.txt";
 
     public static TaskList readData() {
         TaskList list = new TaskList();
