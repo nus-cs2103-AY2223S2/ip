@@ -1,13 +1,37 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 public class Event extends Duke.Task {
     private String eventSpan;
     public Event(String content) {
         super(content.substring(6).split("/")[0]);
         String[] strArr = content.split("/from");
-        String deadlineTime = strArr[1].substring(1);
-        this.eventSpan = "(" + "by:" + strArr[1].substring(4) + "to:" + strArr[2].substring(2) + ")";
+        String[] eventTime = strArr[1].substring(1).split("/to");
+        String eventStartTime = eventTime[0];
+        String eventEndTime = eventTime[1].substring(1);
+        if (eventStartTime.contains("/")) {
+            String[] strArrStart = eventStartTime.split("/");
+            eventStartTime = dateFormat(strArrStart);
+        } if (eventEndTime.contains("/")) {
+            String[] strArrEnd = eventEndTime.split("/");
+            eventEndTime = dateFormat(strArrEnd);
+        }
+        System.out.println(Arrays.toString(eventTime));
+        System.out.println(eventStartTime + " " + eventEndTime);
+        System.out.println(Arrays.toString(eventStartTime.split("/")));
+        System.out.println(Arrays.toString(eventEndTime.split("/")));
+        this.eventSpan = "(" + "by: " + eventStartTime + " to: " + eventEndTime + ")";
+    }
+
+    public String dateFormat(String[] strArrDate) {
+        LocalDateTime dateTypeEvent;
+        dateTypeEvent = LocalDateTime.of(Integer.parseInt(strArrDate[2].substring(0,4)),
+                Integer.parseInt(strArrDate[1]), Integer.parseInt(strArrDate[0]),
+                Integer.parseInt(strArrDate[2].substring(5,7)),
+                Integer.parseInt(strArrDate[2].substring(7,9)));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MMM-YYYY");
+        return dtf.format(dateTypeEvent);
     }
 
     public Event(String content, boolean mark) {
