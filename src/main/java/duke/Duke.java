@@ -7,6 +7,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * The construction of duke
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +23,10 @@ public class Duke {
         }
     }
 
+    /**
+     * The method of run
+     * Runs the whole program until exit
+     */
     public void run() throws IOException {
         Ui.showLogo();
         Ui.showWelcome();
@@ -33,6 +40,10 @@ public class Duke {
         Ui.exit();
     }
 
+    /**
+     * The method of main
+     * @param  args
+     */
     public static void main(String[] args) throws IOException {
         new Duke("data/tasks.txt").run();
     }

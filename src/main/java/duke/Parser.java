@@ -14,9 +14,20 @@ public class Parser {
     private static final String Indentation = " ";
     private static final String Horizontal = "____________________________________________________________";
 
+    /**
+     * Parser constructor
+     * @param ui
+     */
     public Parser(Ui ui) {
         this.ui = ui;
     }
+
+    /**
+     * method for list, mark, unmark, delete, todo, deadline, event commands
+     * @param cmd
+     * @param  tasks
+     * @return command
+     */
     public static Task parse(String cmd, TaskList tasks) {
         String command = cmd.trim();
         String[] words = command.split(" ");
