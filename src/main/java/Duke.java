@@ -15,10 +15,6 @@ public class Duke {
     private static DukeIO dio;
     private static TaskMaster tm;
 
-    public enum SWITCHTYPERELATED {
-        TODO, EVENT, DEADLINE
-    }
-
     /**
      * Main method for the program
      * @param args UNUSED

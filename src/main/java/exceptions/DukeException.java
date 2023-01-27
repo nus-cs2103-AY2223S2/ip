@@ -12,7 +12,7 @@ public class DukeException extends Exception {
     public DukeException(String msg) {
         super(msg);
     }
-    protected final static String OOPS = "☹ OOPS!!!";
+    protected final static String OOPS = "OOPS!!!";
     public static String OOPS() {
         return OOPS;
     }
