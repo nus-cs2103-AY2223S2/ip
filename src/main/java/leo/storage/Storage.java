@@ -58,7 +58,7 @@ public class Storage {
 
                 try {
                     if (taskType == 'T') {
-                        Task t = new ToDo(description);
+                        Task t = new ToDoTask(description);
                         if (completion == 'X')
                             t.mark();
                         taskList.add(t);
@@ -68,14 +68,14 @@ public class Storage {
                         String time = temp[1].strip();
                         LocalDateTime dt = convertString(time);
                         if (taskType == 'D') {
-                            Task t = new Deadline(taskDescription, dt);
+                            Task t = new DeadlineTask(taskDescription, dt);
                             if (completion == 'X')
                                 t.mark();
                             taskList.add(t);
                         } else if (taskType == 'E') {
                             String to = temp[2].strip();
                             LocalDateTime dtTo = convertString(to);
-                            Task t = new Event(taskDescription, dt, dtTo);
+                            Task t = new EventTask(taskDescription, dt, dtTo);
                             if (completion == 'X')
                                 t.mark();
                             taskList.add(t);

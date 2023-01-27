@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
  * Represents a Deadline Task. A <code>Deadline</code> object corresponds to
  * a Task containing the String description and LocalDateTime deadline.
  */
-public class Deadline extends Task {
+public class DeadlineTask extends Task {
 
     private final LocalDateTime deadline;
 
-    public Deadline(String task, LocalDateTime by) {
+    public DeadlineTask(String task, LocalDateTime by) {
         super(task);
         this.deadline = by;
         setType(TaskType.DEADLINE);

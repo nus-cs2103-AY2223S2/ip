@@ -7,12 +7,12 @@ import java.time.format.DateTimeFormatter;
  * Represents a Event Task. A <code>Event</code> object corresponds to
  * a Task containing the String description and duration consisting of LocalDateTime from and LocalDateTime to.
  */
-public class Event extends Task {
+public class EventTask extends Task {
 
     private final LocalDateTime from;
     private final LocalDateTime to;
 
-    public Event(String task, LocalDateTime from, LocalDateTime to) {
+    public EventTask(String task, LocalDateTime from, LocalDateTime to) {
         super(task);
         this.from = from;
         this.to = to;

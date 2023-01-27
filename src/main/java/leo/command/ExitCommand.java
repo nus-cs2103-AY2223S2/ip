@@ -5,9 +5,9 @@ import leo.storage.Storage;
 /**
  * Represents an exit command input by user.
  */
-public class Exit extends Command {
+public class ExitCommand extends Command {
 
-    public Exit(Storage s, String c) {
+    public ExitCommand(Storage s, String c) {
         super(s, c);
         exit();
     }

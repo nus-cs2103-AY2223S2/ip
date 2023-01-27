@@ -4,9 +4,9 @@ package leo.storage;
  * Represents a ToDo Task. A <code>ToDo</code> object corresponds to
  * a Task containing the String description.
  */
-public class ToDo extends Task {
+public class ToDoTask extends Task {
 
-    public ToDo(String task) {
+    public ToDoTask(String task) {
         super(task);
         setType(TaskType.TODO);
     }
