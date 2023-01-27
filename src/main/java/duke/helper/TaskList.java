@@ -5,6 +5,9 @@ import duke.task.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * TaskList class that handles all the tasks
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
     private Ui Ui;
@@ -14,10 +17,18 @@ public class TaskList {
         this.Ui = new Ui();
     }
 
+    /**
+     * Adds the task to the task list
+     *
+     * @param task task to be added
+     */
     public void addToTasks(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Prints all the tasks stored in the list
+     */
     public void outputList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -25,6 +36,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the task from the tasklist
+     *
+     * @param taskNo Task number to be deleted
+     * @return task that has been deleted
+     */
     public Task deleteTask(int taskNo) {
         Task task = tasks.get(taskNo);
         tasks.remove(taskNo);
@@ -44,6 +61,11 @@ public class TaskList {
         Ui.showTaskOutput(task, tasks.size());
     }
 
+    /**
+     * Outputs the tasklist stored
+     *
+     * @return tasklist stored
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }

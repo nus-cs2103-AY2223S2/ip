@@ -1,6 +1,5 @@
 package duke.storage;
 
-import duke.exception.InvalidDateTimeException;
 import duke.helper.TaskList;
 import duke.task.Task;
 
@@ -13,6 +12,9 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * FileSystem class that handles the saving and loading of tasks
+ */
 public class FileSystem {
     private File file;
 
@@ -30,6 +32,11 @@ public class FileSystem {
         }
     }
 
+    /**
+     * Updates the file according to the tasks stored on the list
+     *
+     * @param taskList the TaskList that contains all the tasks that will be stored in the file
+     */
     public void updateFile(TaskList taskList) {
         try {
             file.delete();
@@ -45,7 +52,13 @@ public class FileSystem {
 
     }
 
-    public ArrayList<Task> loadFromFile() throws FileNotFoundException, InvalidDateTimeException {
+    /**
+     * Loads the tasks from the file into the TaskList
+     *
+     * @return an ArrayList that contains all the tasks from the file
+     * @throws FileNotFoundException If the file cannot be found
+     */
+    public ArrayList<Task> loadFromFile() throws FileNotFoundException {
         Scanner scanner = new Scanner(file);
         ArrayList<Task> tasks = new ArrayList<>();
 

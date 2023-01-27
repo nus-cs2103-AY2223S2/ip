@@ -8,6 +8,9 @@ import duke.storage.FileSystem;
 
 import java.io.IOException;
 
+/**
+ * Main class of the project
+ */
 public class Duke {
     private final Ui ui;
     private Parser parser;
@@ -21,11 +24,14 @@ public class Duke {
             db = new FileSystem(filePath);
             this.tasks = new TaskList(db.loadFromFile());
             this.parser = new Parser(tasks);
-        } catch (DukeException | IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
 
+    /**
+     * Runs the Duke program
+     */
     public void run() {
         ui.showWelcome();
         String[] splitStr = ui.getNextLine();
@@ -47,6 +53,11 @@ public class Duke {
         ui.showExit();
     }
 
+    /**
+     * Main method to execute Duke program
+     *
+     * @param arg Command line argument
+     */
     public static void main(String[] arg) {
         new Duke("data/dukeTasks.txt").run();
     }
