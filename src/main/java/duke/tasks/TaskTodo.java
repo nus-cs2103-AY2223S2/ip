@@ -1,10 +1,20 @@
 package duke.tasks;
 
+/**
+ * A task with no specified starting/ending times.
+ */
 public class TaskTodo extends Task {
     public TaskTodo(String description) {
         super(description);
     }
 
+    /**
+     * Parses a todo task that has been encoded into a string, into a 
+     * 'TaskTodo' instance.
+     * @param input The encoded todo task.
+     * @return The todo task that was encoded.
+     * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.
+     */
     public static TaskTodo loadFromString(String input) {
         String[] values = Task.decodeValues(input);
         boolean isDone = values[1].equals("1");

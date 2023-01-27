@@ -13,6 +13,10 @@ import duke.tasks.TaskEvent;
 import duke.tasks.TaskList;
 import duke.tasks.TaskTodo;
 
+/**
+ * A simple task list program.
+ * @see https://github.com/nus-cs2103-AY2223S2/ip
+ */
 public class Duke {
     private Ui ui = new Ui();
     private Storage storage = new Storage("_duke_data.txt");
@@ -20,6 +24,7 @@ public class Duke {
     private Parser currentCommand;
 
     public Duke() {
+        // Attempt to load task list from save file.
         try {
             this.tasks = this.storage.load();
         } catch(DukeSaveLoadException e) {
@@ -28,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method for running the app.
+     */
     public void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -90,6 +98,10 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Handles the adding of todo-type tasks by the "todo" command.
+     * @throws DukeInvalidArgumentException If no description given.
+     */
     private void addTodo() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("The description of a todo cannot be empty.");
@@ -105,6 +117,10 @@ public class Duke {
         );
     }
 
+    /**
+     * Handles the adding of deadline-type tasks by the "deadline" command.
+     * @throws DukeInvalidArgumentException If no or invalid description/by-param are given.
+     */
     private void addDeadline() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("The description of a deadline cannot be empty.");
@@ -132,6 +148,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Handles the adding of event-type tasks by the "event" command.
+     * @throws DukeInvalidArgumentException If no or invalid description/from-param/to-param are given.
+     */
     private void addEvent() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("The description of an event cannot be empty.");
@@ -169,6 +189,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Handles the marking of tasks as done, by the "mark" command.
+     * @throws DukeInvalidArgumentException If no or invalid task-index is given.
+     */
     private void mark() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
@@ -195,6 +219,10 @@ public class Duke {
         );
     }
 
+    /**
+     * Handles the marking of tasks as not done, by the "unmark" command.
+     * @throws DukeInvalidArgumentException If no or invalid task-index is given.
+     */
     private void unmark() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
@@ -221,6 +249,11 @@ public class Duke {
         );
     }
 
+
+    /**
+     * Handles the deleting of tasks by the "delete" command.
+     * @throws DukeInvalidArgumentException If no or invalid task-index is given.
+     */
     private void delete() throws DukeInvalidArgumentException {
         if (this.currentCommand.hasEmptyBody()) {
             throw new DukeInvalidArgumentException("No task index given.");
@@ -247,6 +280,9 @@ public class Duke {
         );
     }
 
+    /**
+     * Handles the listing of tasks by the "list" command.
+     */
     private void list() {
         this.ui.show(this.tasks.toString());
     }

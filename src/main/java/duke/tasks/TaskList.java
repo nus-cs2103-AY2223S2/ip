@@ -3,7 +3,11 @@ package duke.tasks;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * A list of tasks.
+ */
 public class TaskList extends ArrayList<Task> {
+    /** The summary status message to be displayed in Duke. */
     public String getStatus() {
         switch (this.size()) {
             case 0:
@@ -14,7 +18,11 @@ public class TaskList extends ArrayList<Task> {
                 return String.format("Now you have %d task in the list.", this.size());
         }
     }
-
+    
+    /**
+     * Encodes this task list into a string.
+     * @return The encoded task list.
+     */
     public String encodeAsString() {
         return this.stream()
             .map(task -> task.encodeAsString())
