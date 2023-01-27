@@ -1,6 +1,6 @@
 import ui.WelcomeUI;
 
-import java.util.*;
+import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) {
