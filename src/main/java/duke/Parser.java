@@ -2,6 +2,9 @@ package duke;
 import duke.task.*;
 import duke.command.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
 
     public Parser() {
@@ -87,7 +90,12 @@ public class Parser {
             if (taskTime.length != 2) {
                 throw new DukeException("Please enter a time for the deadline!");
             }
-            return new AddCommand(new Deadline(taskTime[0], taskTime[1]));
+            try {
+                Deadline deadline = new Deadline(taskTime[0], LocalDate.parse(taskTime[1]));
+                return new AddCommand(deadline);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please enter a valid date in the format [yyyy-mm-dd]");
+            }
         }
 
         throw new DukeException("Not a valid command.");

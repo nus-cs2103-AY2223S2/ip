@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,7 +46,11 @@ public class Storage {
         } else if (taskData[0].equals("E")) {
             return new Event(taskData[1].equals("1"), taskData[2], taskData[3]);
         } else if (taskData[0].equals("D")) {
-            return new Event(taskData[1].equals("1"), taskData[2], taskData[3]);
+            try {
+                return new Deadline(taskData[1].equals("1"), taskData[2], LocalDate.parse(taskData[3]));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please enter a valid date in the format [yyyy-mm-dd]");
+            }
         } else {
             throw new DukeException("Invalid file");
         }
