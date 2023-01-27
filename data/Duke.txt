@@ -1,0 +1,2 @@
+T | 0 | drink coffee
+T | 0 | eat foood

@@ -1,7 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+package duke;
+
 import java.util.Objects;
-import java.util.Scanner;
 
 public class Ui {
     private final String LOGO = " ____        _        \n"
@@ -12,7 +11,7 @@ public class Ui {
 
     public void greetUser() {
         System.out.println(LOGO);
-        System.out.println("Hello I'm Duke\n"
+        System.out.println("Hello I'm duke.Duke\n"
                 + "What can I do for you?\n");
     }
 

@@ -1,5 +1,6 @@
-import java.util.Scanner;
+package duke;
 
+import java.util.Scanner;
 
 public class Duke {
     private Storage storage;
@@ -11,9 +12,9 @@ public class Duke {
         storage = new Storage(filePath);
         //try {
             tasks = new TaskList(storage.loadTasksFromTaskLog());
-        //} catch (DukeException e) {
+        //} catch (duke.DukeException e) {
         //    ui.showError(e);
-        //    tasks = new TaskList();
+        //    tasks = new duke.TaskList();
         //}
     }
 
@@ -61,6 +62,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException {
-        new Duke("data/Duke.txt").run();
+        new Duke("data/duke.Duke.txt").run();
     }
 }

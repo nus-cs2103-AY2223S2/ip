@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     private boolean isMarked;
     private String taskName;
@@ -9,7 +11,7 @@ public class Task {
 
     public Task() {
         this.isMarked = false;
-        this.taskName = "Blank Task";
+        this.taskName = "Blank duke.Task";
     }
 
     public void markTask() {
