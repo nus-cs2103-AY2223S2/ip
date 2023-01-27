@@ -16,19 +16,8 @@ public class ToDo extends Task {
         super(name, status);
     }
 
-//    /**
-//     * Constructs a ToDo task with the given name.
-//     * By default, the task created has its status set to false.
-//     *
-//     * @param name The name of this Todo task.
-//     */
-//    public ToDo(String name) {
-//        this(name, false);
-//    }
-
     /**
      * Returns the String representation of the Todo task.
-     *
      * @return The string representation of this Todo.
      */
     @Override
@@ -42,7 +31,7 @@ public class ToDo extends Task {
      * @return The string representation of this Todo task in CSV format.
      */
     @Override
-    public String toCSV() {
-        return String.format("T,%s,%s", this.name(), this.status);
+    public String toCsv() {
+        return String.format("T,%s,%s", this.getTaskName(), this.getStatus());
     }
 }

@@ -1,6 +1,9 @@
 package exceptions.invalid;
 
-public class Input extends  exceptions.DukeException {
+/**
+ * Thrown for any generic invalid input.
+ */
+public class Input extends exceptions.DukeException {
     /**
      * Constructs an Invalid Input Exception for the given input.
      * @param msg The message to be passed to Exception

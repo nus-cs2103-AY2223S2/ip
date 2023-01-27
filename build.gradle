@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-//    id 'checkstyle'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -31,9 +31,9 @@ dependencies {
 //    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-//checkstyle {
-//    toolVersion = '10.2'
-//}
+checkstyle {
+    toolVersion = '10.2'
+}
 
 jar {
     manifest {

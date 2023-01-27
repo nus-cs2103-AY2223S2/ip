@@ -3,8 +3,9 @@ package task;
  * Task is the superclass of the activities that can be stored within Duke.
  */
 public abstract class Task {
+    private boolean status;
     private final String taskName;
-    public boolean status;
+
 
     /**
      * Constructs a Task with the provided name and status.
@@ -12,27 +13,17 @@ public abstract class Task {
      * @param name The name of this task
      * @param status The status of this task
      */
-    protected Task(String name, Boolean status){
+    protected Task(String name, Boolean status) {
         this.taskName = name;
         this.status = status;
     }
-
-//    /**
-//     * Constructs a Task with the provided name.
-//     * The task created would have its status set to false.
-//     *
-//     * @param name The name of this task
-//     */
-//    protected Task(String name) {
-//        this(name,false);
-//    }
 
     /**
      * Returns the name of the Task.
      *
      * @return The name of this Task.
      */
-    protected String name(){
+    public String getTaskName() {
         return this.taskName;
     }
 
@@ -46,7 +37,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.status ? "X" : " ", this.taskName);
+        return String.format("[%s] %s", this.getStatus() ? "X" : " ", this.taskName);
     }
 
     /**
@@ -54,15 +45,13 @@ public abstract class Task {
      *
      * @return The string representation of this task in CSV format
      */
-    public abstract String toCSV();
+    public abstract String toCsv();
 
-    /**
-     * Retrieves the name of the Task.
-     * More appropriately, the description of the task.
-     * @return the name of this Task.
-     */
-    public String getTaskName(){
-        return this.taskName;
+    public boolean getStatus() {
+        return status;
     }
 
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }

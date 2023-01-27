@@ -1,5 +1,9 @@
 package exceptions;
 
+/**
+ * Thrown if unimplemented.
+ * Usually as a placeholder until actual function is available.
+ */
 public class Unimplemented extends DukeException {
     /**
      * Constructor to pass on forward to Exception
