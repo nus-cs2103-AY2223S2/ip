@@ -1,4 +1,9 @@
-package duke;
+package runner;
+import components.Deadline;
+import components.Event;
+import components.Task;
+import components.Todo;
+
 import java.time.format.DateTimeParseException;
 
 public class Parser {
@@ -18,6 +23,10 @@ public class Parser {
     }
 
     public void read(String info) {
+        if (!info.contains(" ")) {
+            System.out.println("Not Smart to Understand -_-");
+            return;
+        }
         try {
             String[] segments = info.split(" ", 2);
             String first = segments[0];
@@ -112,8 +121,9 @@ public class Parser {
 
     public void add_event(String s) {
         String event = s.split("/from", 2)[0];
-        String from = s.split("/from", 2)[1].split("/to")[0];
-        String to = s.split("/from", 2)[1].split("/to")[1];
+        String time = s.split("/from", 2)[1];
+        String from = time.split("/to")[0];
+        String to = time.split("/to")[1];
         Task e = new Event(event, from, to);
         duke.taskList.add(e);
         duke.store.saveList();

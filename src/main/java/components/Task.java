@@ -1,7 +1,7 @@
-package duke;
+package components;
 public class Task {
-    int done;
-    String msg;
+    public int done;
+    public String msg;
 
     public Task(String msg) {
         this.msg = msg;

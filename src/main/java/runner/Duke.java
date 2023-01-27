@@ -1,10 +1,10 @@
-package duke;
+package runner;
 import java.util.Scanner;
 
 public class Duke {
     protected int exit;
-    protected TaskList taskList;
-    protected Storage store;
+    protected final Storage store;
+    protected final TaskList taskList;
 
     public Duke() {
         this.exit = 0;

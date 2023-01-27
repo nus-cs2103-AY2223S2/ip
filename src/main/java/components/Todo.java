@@ -1,4 +1,4 @@
-package duke;
+package components;
 public class Todo extends Task {
     public Todo(String msg) {
         super(msg);

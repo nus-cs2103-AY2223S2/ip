@@ -1,4 +1,9 @@
-package duke;
+package runner;
+import components.Deadline;
+import components.Event;
+import components.Task;
+import components.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -6,7 +11,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    protected TaskList taskList;
+    private final TaskList taskList;
 
     public Storage (TaskList taskList) {
         this.taskList = taskList;

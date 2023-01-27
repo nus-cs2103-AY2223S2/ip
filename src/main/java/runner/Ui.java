@@ -1,4 +1,6 @@
-package duke;
+package runner;
+
+import components.Task;
 
 public class Ui {
     static String logo = " ____        _        \n"
