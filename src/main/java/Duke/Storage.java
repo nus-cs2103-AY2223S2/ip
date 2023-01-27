@@ -1,6 +1,6 @@
-package duke;
+package Duke;
 
-import duke.Tasks.*;
+import Duke.Tasks.*;
 
 import java.io.File;
 import java.io.FileWriter;

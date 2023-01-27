@@ -1,7 +1,7 @@
-package duke;
+package Duke;
 
-import duke.Exceptions.DukeException;
-import duke.Tasks.TaskList;
+import Duke.Exceptions.DukeException;
+import Duke.Tasks.TaskList;
 import java.util.Scanner;
 import java.lang.String;
 public class Ui {

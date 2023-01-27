@@ -1,8 +1,8 @@
-package duke;
-import duke.Exceptions.DukeException;
-import duke.Exceptions.emptyDescriptionException;
-import duke.Tasks.*;
-import duke.Exceptions.unknownCommandException;
+package Duke;
+import Duke.Exceptions.DukeException;
+import Duke.Exceptions.emptyDescriptionException;
+import Duke.Tasks.*;
+import Duke.Exceptions.unknownCommandException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.lang.String;

@@ -1,4 +1,4 @@
-package duke.Exceptions;
+package Duke.Exceptions;
 public class emptyDescriptionException extends DukeException {
     private String command;
     public emptyDescriptionException(String command) {
