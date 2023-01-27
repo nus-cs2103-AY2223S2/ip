@@ -10,17 +10,16 @@ import ui.TextUi;
 public abstract class CommandClass {
     protected final String command;
     protected final boolean doesPrint;
-    protected final boolean isExit;
+    protected boolean isExit = false;
 
     /**
      * Default constructor, saves the command
      *
      * @param command the user-input command
      */
-    public CommandClass(String command, boolean doesPrint, boolean isExit) {
+    public CommandClass(String command, boolean doesPrint) {
         this.command = command;
         this.doesPrint = doesPrint;
-        this.isExit = isExit;
     }
 
     /**
@@ -29,7 +28,7 @@ public abstract class CommandClass {
      * @param taskList the list of tasks
      * @param ui       a text UI
      */
-    abstract public void execute(TaskList taskList, TextUi ui) throws DukeException;
+    public abstract void execute(TaskList taskList, TextUi ui) throws DukeException;
 
     protected void uiPrint(TextUi ui, String toPrint) {
         if (doesPrint) {

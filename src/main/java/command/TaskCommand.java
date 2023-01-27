@@ -20,7 +20,7 @@ public class TaskCommand extends CommandClass {
      * @param doesPrint whether to print messages
      */
     public TaskCommand(String command, boolean doesPrint) {
-        super(command, doesPrint, false);
+        super(command, doesPrint);
         this.commandName = captalizeFirstChar(command.split(" ")[0]);
     }
 

@@ -14,7 +14,7 @@ public class ListCommand extends CommandClass {
      * @param command the user-input command
      */
     public ListCommand(String command, boolean doesPrint) {
-        super(command, doesPrint, false);
+        super(command, doesPrint);
     }
 
     /**

@@ -15,7 +15,7 @@ public class MarkCommand extends CommandClass {
      * @param command the user-input command
      */
     public MarkCommand(String command, boolean doesPrint) {
-        super(command, doesPrint, false);
+        super(command, doesPrint);
     }
 
     /**

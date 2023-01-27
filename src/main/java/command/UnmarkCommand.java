@@ -14,7 +14,7 @@ public class UnmarkCommand extends CommandClass {
      * @param doesPrint whether to print messages
      */
     public UnmarkCommand(String command, boolean doesPrint) {
-        super(command, doesPrint, false);
+        super(command, doesPrint);
     }
 
     /**

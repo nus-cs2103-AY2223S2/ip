@@ -4,7 +4,6 @@ import command.CommandClass;
 import storage.Storage;
 
 import task.TaskList;
-
 import ui.Parser;
 import ui.TextUi;
 
@@ -46,15 +45,12 @@ public class Duke {
     public void run() {
         ui.showWelcome();
 
-        String inMsg = null;
-        while (true) {
-            inMsg = ui.getUserInput();
-            if (ui.isEnd(inMsg)) {
-                break;
-            }
+        boolean isRunning = true;
 
+        while (isRunning) {
+            String inMsg = ui.getUserInput();
             try {
-                handleCommand(inMsg, false);
+                isRunning = handleCommand(inMsg, false);
             } catch (DukeException e) {
                 ui.printStructuredString(e.toString());
             } catch (NumberFormatException e) {
@@ -63,7 +59,6 @@ public class Duke {
         }
 
         storage.saveToFile(getCommandListString());
-        ui.sayGoodbye();
     }
 
     /**
@@ -98,11 +93,13 @@ public class Duke {
      *
      * @param inMsg         the input message from the user
      * @param suppressPrint suppress print out message or not
+     * @return whether the program continues or not
      * @throws DukeException when the command is unknown
      */
-    public void handleCommand(String inMsg, boolean suppressPrint) throws DukeException {
+    public boolean handleCommand(String inMsg, boolean suppressPrint) throws DukeException {
         CommandClass command = Parser.parseCommand(inMsg, suppressPrint);
         command.execute(taskList, ui);
+        return !command.isExit();
     }
 
     /**

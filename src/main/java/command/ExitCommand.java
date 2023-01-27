@@ -15,7 +15,8 @@ public class ExitCommand extends CommandClass {
      * @param doesPrint whether to print messages
      */
     public ExitCommand(String command, boolean doesPrint) {
-        super(command, doesPrint, true);
+        super(command, doesPrint);
+        isExit = true;
     }
 
     /**
@@ -25,6 +26,6 @@ public class ExitCommand extends CommandClass {
      * @throws DukeException
      */
     public void execute(TaskList taskList, TextUi ui) throws DukeException {
-        throw new DukeException("execute method not implemented for ExitCommand");
+        ui.sayGoodbye();
     }
 }
