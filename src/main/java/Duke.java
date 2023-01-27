@@ -1,19 +1,60 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 public class Duke {
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = storage.load();
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+            tasks = new TaskList();
+        }
+    }
+
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException |DateTimeParseException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
 
     public static void main(String[] args) {
-        System.out.println("Duke started, initializing Duke behaviour...");
-        System.out.println("Hello! I'm Duke!\n");
-        DukeBehaviour mainBehaviour = new DukeBehaviour();
+        new Duke(getFilePath()).run();
+    }
 
-        System.out.println("We're all set! What can I do for you?\n");
-        Scanner inputScanner = new Scanner(System.in);
-        while (mainBehaviour.isActive){
-            String userInput = inputScanner.nextLine();
-            mainBehaviour.receiveInput(userInput);
+    private static String getFilePath() {
+        Path dirPath = Paths.get(".", "data");
+        boolean directoryExists = java.nio.file.Files.exists(dirPath);
+        try {
+            //This method creates a directory if it does not exist yet, but will not
+            //throw an error even if it exists, and so is safe to call.
+            Files.createDirectories(dirPath);
+        } catch (IOException e){
+            e.printStackTrace();
         }
-        System.out.println("Bye. Hope to see you again soon!\n");
-        return;
+        Path dataPath = Paths.get(dirPath.toString(), "DukeMem.ser");
+        return dataPath.toString();
     }
 }
