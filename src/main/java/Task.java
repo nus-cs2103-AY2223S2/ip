@@ -17,7 +17,6 @@ public class Task {
     public void markDone(int index) {
         this.done = true;
         System.out.println("\tCongratulations, Mr Stark. You have completed task " + index);
-        System.out.println("\tPepper Potts will be pleased with your progress today.");
         System.out.println("\t" + printTask());
     }
 

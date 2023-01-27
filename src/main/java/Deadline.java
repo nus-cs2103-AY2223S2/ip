@@ -3,13 +3,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    private String time = "";
     private LocalDate timeParsed;
-
-    public Deadline(int id, String task, String time) {
-        super(id, task);
-        this.time = time;
-    }
 
     public Deadline(int id, String task, LocalDate timeParsed) {
         super(id, task);
@@ -18,12 +12,15 @@ public class Deadline extends Task {
 
     @Override
     public String printTask() {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
         return this.isDone()
                 ? "[D][x] " + this.getTask()
                         + " (Due: "
-                        + this.timeParsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
+                        + this.timeParsed.format(formatter) + ")"
                 : "[D][ ] " + this.getTask()
                         + " (Due: "
-                        + this.timeParsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                        + this.timeParsed.format(formatter) + ")";
     }
 }

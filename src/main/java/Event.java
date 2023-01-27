@@ -3,16 +3,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    private String startTime = "";
-    private String endTime = "";
     private LocalDate startTimeParsed;
     private LocalDate endTimeParsed;
-
-    public Event(int id, String task, String startTime, String endTime) {
-        super(id, task);
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
 
     public Event(int id, String task, LocalDate startTime, LocalDate endTime) {
         super(id, task);
@@ -22,14 +14,17 @@ public class Event extends Task {
 
     @Override
     public String printTask() {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
         return this.isDone()
                 ? "[E][x] " + this.getTask() + " (Start: "
-                        + this.startTimeParsed.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                        + this.startTimeParsed.format(formatter)
                         + " | End: "
-                        + endTimeParsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"
+                        + endTimeParsed.format(formatter) + ")"
                 : "[E][ ] " + this.getTask() + " (Start: "
-                        + this.startTimeParsed.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                        + this.startTimeParsed.format(formatter)
                         + " | End: "
-                        + this.endTimeParsed.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                        + this.endTimeParsed.format(formatter) + ")";
     }
 }
