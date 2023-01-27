@@ -1,4 +1,6 @@
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -44,7 +46,7 @@ public class Leo {
             out.writeObject(obj);
             out.close();
             fileOut.close();
-            System.out.printf("Serialized data is saved in taskList.ser");
+            System.out.println("Serialized data is saved in taskList.ser");
         } catch (IOException i) {
             i.printStackTrace();
         }
@@ -57,15 +59,16 @@ public class Leo {
             taskList = (TaskList) in.readObject();
             in.close();
             fileIn.close();
+        } catch (FileNotFoundException i) {
+            taskList = new TaskList();
+            writeObjectToFile(taskList);
+            return;
         } catch (IOException i) {
             i.printStackTrace();
             return;
         } catch (ClassNotFoundException c) {
             System.out.println("TaskList class not found");
             c.printStackTrace();
-            return;
-        } catch (Exception i) {
-            taskList = new TaskList();
             return;
         }
     }
