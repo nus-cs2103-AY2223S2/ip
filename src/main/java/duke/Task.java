@@ -13,6 +13,11 @@ public class Task {
         this.isDone = !this.isDone;
         return this;
     }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
