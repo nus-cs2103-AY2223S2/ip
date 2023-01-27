@@ -1,3 +1,5 @@
+package seedu;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -7,12 +9,20 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getTask() {
+        return this.description;
+    }
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void setStatus(boolean isDone) {
+    public boolean setStatus(boolean isDone) {
         this.isDone = isDone;
+        return isDone;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     @Override

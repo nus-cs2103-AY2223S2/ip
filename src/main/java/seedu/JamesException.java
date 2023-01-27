@@ -1,3 +1,5 @@
+package seedu;
+
 public class JamesException extends Exception {
 
     public JamesException(String message) {

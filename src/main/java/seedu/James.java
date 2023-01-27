@@ -1,11 +1,12 @@
+package seedu;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 
 public class James {
     ArrayList<Task> inputs = new ArrayList<>();
