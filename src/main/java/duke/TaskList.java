@@ -108,6 +108,7 @@ class TaskList<T> {
      * @return TaskList<T>
      */
     TaskList<T> set(int index, Task task) {
+
         TaskList<T> newTasks = new TaskList<T>(tasks);
         newTasks.tasks.set(index, task);
         return newTasks;

@@ -16,14 +16,14 @@ import java.io.IOException;
  * file is read and processed into TaskList<Task>. If the file is not found,
  * the text file is created, and everytime a user changes the list of tasks,
  * the new list of task is saved into the text file. The old list of task is
- * overwritten to save space. 
+ * overwritten to save space.
  *
- * @author Muhammad Reyaaz 
- * @version %I% %G% 
+ * @author Muhammad Reyaaz
+ * @version %I% %G%
  * @since 11
  * @see TaskList
  */
-class Storage { 
+class Storage {
     //Dynamic directory
     private String directory = System.getProperty("user.dir");
     //Full directory with dukeList.txt
@@ -38,7 +38,7 @@ class Storage {
     }
     /**
      * Checks if the dukeList text file exist in the correct dynamic
-     * directory, OS independent. 
+     * directory, OS independent.
      *
      * @return pathPresent
      *
@@ -50,7 +50,7 @@ class Storage {
      * Creates the file in the dyanamic directory located in
      * ip/src/main/java
      *
-     * @exception IOException 
+     * @exception IOException
      */
     void createDirectory() {
         try {
@@ -63,10 +63,10 @@ class Storage {
     }
     /**
      * Whenever the user list of task changes, the previous data in the
-     * dukeList is overwritten to a new list of tasks. 
+     * dukeList is overwritten to a new list of tasks.
      *
      * @param listOfTasks New list of tasks in String
-     * @exception IOException 
+     * @exception IOException
      */
     void writeToFile(String listOfTasks) {
         try {
@@ -80,7 +80,7 @@ class Storage {
     /**
      * The text from dukeList.txt is processed. Manipulation is needed
      * because the text is stored as an array, and not as commands from the
-     * user, since it does not make sense to store as the latter. 
+     * user, since it does not make sense to store as the latter.
      *
      * @exception IOException
      */
@@ -90,7 +90,7 @@ class Storage {
           Scanner scanner = new Scanner(new File(path));
           String inputFromFile = scanner.useDelimiter("\\A").next();
           String[] inputArr = inputFromFile.substring(1,inputFromFile.length()-1).split(",");
-          for (String task : inputArr) {  
+          for (String task : inputArr) {
             if (("" + task.charAt(0)).equals(" ")) {
                 task = task.substring(1);
             }
@@ -110,9 +110,9 @@ class Storage {
     }
     /**
      * Checks if the stored task is a todo, deadline or event.
-     * 
+     *
      * @param task Task in the array of tasks in the dukeList.txt file
-     * @param symbol How the task is demarcated 
+     * @param symbol How the task is demarcated
      * @return hasSymbol
      */
     boolean isSymbol(String task, String symbol) {
@@ -123,14 +123,16 @@ class Storage {
             return false;
         }
     }
+
     /**
      * Process the saved task to check if it is marked as done or undone.
      */
     void markTask(String task) {
-        boolean isMark = ("" + task.charAt(1)).equals(Parser.MARK_SYMBOL) ? true : false;
+        boolean isMark = (("" + task.charAt(1)).equals(Parser.MARK_SYMBOL) ||
+                ("" + task.charAt(4)).equals(Parser.MARK_SYMBOL))? true : false;
         if (isMark) {
             this.tasks = Parser.mark(this.tasks.numberOfTasks() - 1, this.tasks);
-        } 
+        }
     }
     /**
      * Change the format of the saved task that is not todo, deadline or
@@ -161,18 +163,18 @@ class Storage {
      * Change the format of the saved events task so that the same method in
      * TaskList can be invoked
      */
-    void rephraseEvents(String input) { 
+    void rephraseEvents(String input) {
         int indexOfFrom = input.indexOf("(from: ");
         int indexOfTo = input.indexOf("(to: ");
         this.tasks = Parser.events(input.substring(8, indexOfFrom), input.substring(indexOfFrom + 6, indexOfTo - 1), input.substring(indexOfTo + 4, input.length() - 1), this.tasks);
         markTask(input);
     }
     /**
-     * Getter to get the current set of tasks 
-     * @return TaskList<Task> 
+     * Getter to get the current set of tasks
+     * @return TaskList<Task>
      */
     TaskList<Task> getTasks() {
         return tasks;
     }
-    
+
 }

@@ -345,20 +345,21 @@ public class Duke {
     protected String getResponse(String input) {
         //return storeString.toString();
 
-        /*
+        ///*
         storage = new Storage();
         storage.readFromFile();
-        */
+        this.taskList = storage.getTasks();
+        storage.createDirectory();
+        //*/
 
         ByteArrayOutputStream storeString = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(storeString);
         PrintStream oldPrintStream = System.out;
         System.setOut(printStream);
 
-        /*
-        this.taskList = storage.getTasks();
-        storage.createDirectory();
-        */
+        ///*
+
+        //*/
 
         /*
         ui = new Ui();
@@ -384,7 +385,7 @@ public class Duke {
         System.setOut(oldPrintStream);
         //System.out.println(storeString.toString());
 
-        //storage.writeToFile(taskList.toString());
+        storage.writeToFile(taskList.toString());
 
         return storeString.toString();
 
@@ -396,4 +397,5 @@ public class Duke {
         duke.moreOop();
     }
     */
+
 }
