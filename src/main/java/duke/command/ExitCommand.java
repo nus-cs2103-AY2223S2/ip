@@ -20,8 +20,10 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
+        // Send goodbye message to the user interface
         ui.appendResponse(GOODBYE_MESSAGE);
     }
+
 
     /**
      * Indicates that this Command is the exit Command.

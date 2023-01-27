@@ -52,9 +52,12 @@ public class DeadlineTask extends DukeTask {
      */
     @Override
     public String storageString() {
-        String status = this.getStatus() ? "[X] | " : "[ ] | ";
-        return String.format(FORMAT, status, this.getInformation(), this.deadline);
+        // Format the task status, task information, and deadline into a single string
+        String isCompleted = this.getStatus() ? "[X]" : "[ ]";
+        return String.format(FORMAT, isCompleted, this.getInformation().strip(),
+                this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
+
 
     /**
      * Returns a string representation of the task in a specific format, indicating the task type, whether the task is
@@ -64,8 +67,9 @@ public class DeadlineTask extends DukeTask {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        // format the string to include the task's description and deadline in the desired format
+        return String.format("[D] %s (by: %s)", super.toString(),
+                this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
     /**

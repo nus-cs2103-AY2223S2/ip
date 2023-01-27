@@ -25,36 +25,43 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Displays all the matching tasks with their respective types and status.
-     *
-     * @param tasks The user TaskList that contains all the task to be manipulated
+     * Executes the command and displays the matched tasks based on the provided descriptions.
+     * @param tasks TaskList containing all the tasks
+     * @param ui Ui object for displaying the matched tasks
+     * @param storage Storage object for accessing the storage
+     * @param commandHistory CommandHistory object for adding the command to history
      */
-    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
         StringBuilder message = new StringBuilder();
         for (String description : this.descriptions) {
+            // Get the matched tasks based on the provided description
             TaskList matchedTaskList = getMatchedTasks(tasks, description);
+            // Append the matched tasks message for the current description
             message.append(getMatchedTasksMessage(matchedTaskList, description));
         }
+        // Display the final message containing matched tasks for all the descriptions
         ui.appendResponse(message.toString());
     }
 
     /**
-     * Method that takes in a list of tasks and a description and returns a list of tasks that match the given description.
+     * This method takes in a task list and a description as input and returns a task list containing tasks that match
+     * the given description.
      *
-     * @param tasks The list of tasks to be searched
-     * @param description The description of the task to be searched
-     * @return A list of tasks that match the given description
+     * @param tasks - the task list to be searched
+     * @param description - the description to be searched for
+     * @return - a task list containing tasks that match the given description
      */
     private TaskList getMatchedTasks(TaskList tasks, String description) {
         TaskList matchedTaskList = new TaskList();
         for (DukeTask task : tasks.getTasks()) {
+            // check if each task matches the given description
             if (task.matches(description)) {
                 matchedTaskList.addTask(task);
             }
         }
         return matchedTaskList;
     }
+
 
     /**
      * Gets the message for matched tasks.
@@ -64,11 +71,19 @@ public class FindCommand extends Command {
      * @return The message for matched tasks
      */
     private String getMatchedTasksMessage(TaskList matchedTaskList, String description) {
+        // Initialize a message string
+        String message = "";
+        // Check if the matched task list is not empty
         if (!matchedTaskList.getTasks().isEmpty()) {
-            return String.format(MATCHING_TASKS_MESSAGE, description) + matchedTaskList + "\n";
+            // If there are matched tasks, add them to the message string with a formatted message
+            message = String.format(MATCHING_TASKS_MESSAGE, description) + matchedTaskList + "\n";
         } else {
-            return String.format(NO_MATCHING_TASKS_MESSAGE, description);
+            // If there are no matched tasks, add a no matching tasks message to the message string
+            message = String.format(NO_MATCHING_TASKS_MESSAGE, description);
         }
+
+        // return the message string
+        return message;
     }
 }
 

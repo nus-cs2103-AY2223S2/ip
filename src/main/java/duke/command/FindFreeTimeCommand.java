@@ -14,8 +14,8 @@ import java.time.LocalDate;
  * The FindFreeTimeCommand class that finds the nearest date with no tasks
  */
 public class FindFreeTimeCommand extends Command {
-    private final static String noFreeTimeMessage = "No free time found in the next month.";
-    private final static String nearestFreeTimeMessage = "The nearest free time is on %s.";
+    private final static String NO_FREE_TIME_MESSAGE = "No free time found in the next month.";
+    private final static String NEAREST_FREE_TIME_MESSAGE = "The nearest free time is on %s.";
 
     /**
      * Execute the find free time command on the tasklist
@@ -26,26 +26,35 @@ public class FindFreeTimeCommand extends Command {
      * @param commandHistory command history
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory)
-            throws InvalidInputException {
+    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws InvalidInputException {
+        // Get the current date
         LocalDate currentDate = LocalDate.now();
+        // Get the end date as one month from the current date
         LocalDate endDate = LocalDate.now().plusMonths(1);
+        // Assume the nearest free date is the end date
         LocalDate nearestFreeDate = endDate;
 
+        // Iterate through each day in the range of current date to end date
         while (currentDate.isBefore(endDate) || currentDate.isEqual(endDate)) {
+            // Check if the current day is free
             if (isDayFree(currentDate, tasks)) {
+                // If it is, update the nearest free date
                 nearestFreeDate = currentDate;
                 break;
             }
+            // Move to the next day
             currentDate = currentDate.plusDays(1);
         }
 
+        // If the nearest free date is still the end date, it means there is no free time in the next month
         if (nearestFreeDate.isAfter(endDate) || nearestFreeDate.isEqual(endDate)) {
-            ui.appendResponse(noFreeTimeMessage);
+            ui.appendResponse(NO_FREE_TIME_MESSAGE);
         } else {
-            ui.appendResponse(String.format(nearestFreeTimeMessage, nearestFreeDate));
+            // Otherwise, display the nearest free date
+            ui.appendResponse(String.format(NEAREST_FREE_TIME_MESSAGE, nearestFreeDate));
         }
     }
+
 
     /**
      * Check whether the given date is free of tasks
@@ -55,18 +64,23 @@ public class FindFreeTimeCommand extends Command {
      * @return true if the date is free of tasks, false otherwise
      */
     private boolean isDayFree(LocalDate date, TaskList tasks) {
+        // Iterate through all tasks in the task list
         for (int i = 0; i < tasks.getNoOfTasks(); i++) {
             DukeTask task = tasks.getTask(i);
+            // Check if the task is a DeadlineTask
             if (task instanceof DeadlineTask) {
                 if (isDeadlineTaskScheduledOnDate(date, (DeadlineTask) task)) {
                     return false;
                 }
-            } else if (task instanceof EventTask) {
+            }
+            // Check if the task is a EventTask
+            else if (task instanceof EventTask) {
                 if (isEventTaskScheduledOnDate(date, (EventTask) task)) {
                     return false;
                 }
             }
         }
+        // If none of the tasks are scheduled on the given date, return true
         return true;
     }
 
@@ -82,13 +96,14 @@ public class FindFreeTimeCommand extends Command {
     }
 
     /**
-     *
      * Check whether the given event task is scheduled on the given date.
+     *
      * @param date the date to check
      * @param task the event task to check against
      * @return true if the task is scheduled on the date, false otherwise
      */
     private boolean isEventTaskScheduledOnDate(LocalDate date, EventTask task) {
+    // Check if the input date is between the start and end date of the event task
         return (date.isAfter(task.getStartDate()) || date.isEqual(task.getStartDate()))
                 && (date.isBefore(task.getEndDate()) || date.isEqual(task.getEndDate()));
     }

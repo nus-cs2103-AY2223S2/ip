@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
-import duke.exception.StorageFileException;
+import duke.parser.ErrorMessage;
 import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
@@ -12,9 +12,7 @@ import duke.ui.Ui;
 public class UpdateCommand extends Command{
     private final int taskIndex;
     private final String information;
-    private static final String EMPTY_TASK_LIST_ERROR = "OOPS!!! Your task list is currently empty";
-    private static final String INVALID_INDEX_ERROR = "OOPS!!! The input index is not within the range of [1, %d]";
-    private static final String TASK_UPDATED_MESSAGE = "Nice! I've updated the description of this task:\n ";
+    private static final String UPDATE_TASK_MESSAGE = "Nice! I've updated the description of this task:\n %s";
 
     /**
      * Constructor of UpdateCommand that takes in the index of the task to marked.
@@ -49,44 +47,35 @@ public class UpdateCommand extends Command{
 
     /**
      * Execute the update command on the tasklist
+     *
      * @param ui user interface
      * @param storage storage
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
-        commandHistory.saveState(tasks);
-        try {
-            if (isEmpty(tasks)) {
-                throw new InvalidInputException(EMPTY_TASK_LIST_ERROR + "\nPlease add in more tasks");
-            }
-            if (!isValidIndex(tasks)) {
-                throw new InvalidInputException(String.format(INVALID_INDEX_ERROR + "\nPlease input a valid index",
-                        tasks.getNoOfTasks()));
-            }
-            updateTaskInformation(tasks, ui);
-            saveTaskList(tasks, storage);
-        } catch (InvalidInputException | StorageFileException e) {
-            ui.appendResponse(e.getMessage());
-        }
-    }
 
-    /**
-     * Update the task information
-     * @param tasks tasklist
-     * @param ui user interface
-     */
-    private void updateTaskInformation(TaskList tasks, Ui ui) {
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
+        // Save current state of task list before making changes
+        commandHistory.saveState(tasks);
+        // Check if task list is empty
+        if (isEmpty(tasks)) {
+            String errorMessage = ErrorMessage.TASK_LIST_EMPTY_ERROR + ErrorMessage.ADD_MORE_TASKS;
+            throw new InvalidInputException(errorMessage);
+        }
+
+        // Check if the task index is valid
+        if (!isValidIndex(tasks)) {
+            String errorMessage = String.format(ErrorMessage.INVALID_INDEX_ERROR,
+                    tasks.getNoOfTasks()) + ErrorMessage.INPUT_VALID_INDEX;
+            throw new InvalidInputException(errorMessage);
+        }
+
+        // Get the task at the specified index and update its information
         DukeTask currentTask = tasks.getTask(this.taskIndex);
         currentTask.updateInformation(this.information);
-        String message = TASK_UPDATED_MESSAGE + currentTask;
+        // Construct success message and pass it to UI
+        String message = String.format(UPDATE_TASK_MESSAGE, currentTask);
         ui.appendResponse(message);
-    }
-
-    /**
-    * Save the task list to storage
-    * @param tasks tasklist
-    * @param storage storage
-    */
-    private void saveTaskList(TaskList tasks, Storage storage) throws StorageFileException {
+        // Save the updated task list to storage
         storage.saveTaskList(tasks);
     }
 }

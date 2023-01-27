@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
+import duke.parser.ErrorMessage;
 import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
@@ -15,11 +16,7 @@ import duke.ui.Ui;
 
 public class MarkAsDoneCommand extends Command {
     private final int taskIndex;
-
-    private final static String TASK_LIST_EMPTY_MESSAGE = "OOPS!!! Your task list is currently empty";
     private final static String MARKED_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n ";
-    private final static String ADD_MORE_TASKS_MESSAGE = "\nPlease add in more tasks";
-    private final static String INPUT_VALID_INDEX_MESSAGE = "\nPlease input a valid index";
 
     /**
      * Constructor of MarkAsDoneCommand that takes in the index of the task to marked.
@@ -28,16 +25,6 @@ public class MarkAsDoneCommand extends Command {
      */
     public MarkAsDoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
-    }
-
-    /**
-     * Check whether the given list is empty.
-     *
-     * @param list The given list to be checked
-     * @return Whether the given list is empty
-     */
-    public boolean isEmpty(TaskList list) {
-        return list.getNoOfTasks() == 0;
     }
 
     /**
@@ -61,22 +48,27 @@ public class MarkAsDoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
-        final String invalidIndexMessage = "OOPS!!! The input index is not within the range of [1, "
-                + tasks.getNoOfTasks() + "]";
-
+        // Save the current state of tasks to the command history
         commandHistory.saveState(tasks);
-        if (isEmpty(tasks)) {
-            throw new InvalidInputException(TASK_LIST_EMPTY_MESSAGE + ADD_MORE_TASKS_MESSAGE);
+        if (tasks.isEmpty()) {
+            // throw an error message if task list is empty
+            String errorMessage = ErrorMessage.TASK_LIST_EMPTY_MESSAGE + ErrorMessage.ADD_MORE_TASKS;
+            throw new InvalidInputException(errorMessage);
         }
+
         if (!isValidIndex(tasks)) {
-            throw new InvalidInputException(invalidIndexMessage+ INPUT_VALID_INDEX_MESSAGE);
+            // throw an error message if the input index is invalid
+            String errorMessage = String.format(ErrorMessage.INVALID_INDEX_ERROR
+                    + ErrorMessage.INPUT_VALID_INDEX, tasks.getNoOfTasks());
+            throw new InvalidInputException(errorMessage);
         } else {
+            // Mark the task as done
             DukeTask currentTask = tasks.getTask(this.taskIndex);
             currentTask.markAsDone();
             String message = MARKED_AS_DONE_MESSAGE + currentTask;
             ui.appendResponse(message);
+            // Save the updated task list to storage
+            storage.saveTaskList(tasks);
         }
-        storage.saveTaskList(tasks);
     }
-
 }

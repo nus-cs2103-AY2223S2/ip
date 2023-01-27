@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 import duke.exception.InvalidInputException;
 import duke.exception.StorageFileException;
+import duke.parser.ErrorMessage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
 
@@ -31,8 +32,6 @@ public class Storage {
     private final String EVENT_TAG = "[E]";
     private final String IS_DONE_TAG = "[X]";
     private final String NOT_DONE_TAG = "[ ]";
-    private final String STORAGE_ERROR = "OOPS!!! There's something wrong "
-            + "when reading the Storage list";
 
     /**
      * Constructor of that takes a path of the file and specify the file for
@@ -41,15 +40,22 @@ public class Storage {
      * @param filePath The path of the storage file
      */
     public Storage(String filePath) {
+        // Get the absolute path of the root directory
         String rootPath = Paths.get("").toAbsolutePath().toString();
+        // Create the full path to the storage file by concatenating the root path and the file path
         this.filePath = Paths.get(rootPath, filePath).toString();
 
+        // Get the path of the file
         Path path = Paths.get(filePath);
+        // Get the number of elements in the path
         int len = path.getNameCount();
 
+        // Get the parent folder of the storage file by getting the path of all elements except the last one
         this.folder = Paths.get(rootPath, path.subpath(0, len - 1).toString());
+        // Create a new file object for the storage file
         this.storageFile = new File(this.filePath);
     }
+
 
     /**
      * Load the TaskList from the given data file. If the file does not exist return
@@ -61,20 +67,24 @@ public class Storage {
      */
     public TaskList load() throws InvalidInputException, StorageFileException {
         TaskList list = new TaskList();
+        // If the storage file does not exist, return an empty task list
         if (!storageFile.exists()) {
             return list;
         }
 
         try {
-            // read file
+            // Read the file
             List<String> lines = readFile(storageFile);
-            // process each line
+            // Process each line in the file
             for (String line : lines) {
+                // Parse the line and add the task to the task list
                 processLine(list, line);
             }
+            // Return the task list
             return list;
         } catch (FileNotFoundException e) {
-            throw new StorageFileException(STORAGE_ERROR);
+            // Throw an exception if the file is not found
+            throw new StorageFileException(ErrorMessage.STORAGE_ERROR);
         }
     }
 
@@ -88,10 +98,16 @@ public class Storage {
     private List<String> readFile(File file) throws FileNotFoundException {
         // Create a scanner to read the file
         Scanner sc = new Scanner(file);
+        // Initialize a list to store the lines read from the file
         List<String> lines = new ArrayList<>();
+        // Iterate through each line of the file
         while (sc.hasNextLine()) {
-            lines.add(sc.nextLine().strip());
+            // Read the line and strip leading/trailing whitespaces
+            String line = sc.nextLine().strip();
+            // Add the line to the list
+            lines.add(line);
         }
+        // Return the list of lines
         return lines;
     }
 
@@ -113,15 +129,19 @@ public class Storage {
         // Decode the task information based on the task tag
         switch (taskTag) {
             case TODO_TAG:
+                // Decode the to-do task information
                 Decoder.todoDecoder(list, information[2], isDone);
                 break;
             case DEADLINE_TAG:
+                // Decode the deadline task information
                 Decoder.deadlineDecoder(list, information[2], isDone, information[3]);
                 break;
             case EVENT_TAG:
+                // Decode the event task information
                 Decoder.eventDecoder(list, information[2], isDone, information[3], information[4]);
                 break;
             default:
+                // Throw an exception if the task tag is not recognized
                 throw new InvalidInputException("Unrecognized task tag: " + taskTag);
         }
     }
@@ -133,22 +153,26 @@ public class Storage {
      * @param isDone The status of the task
      */
     private void storageFormatChecker(String tag, String isDone) {
+        // Type tag of event should be [T], [D], or [E]
         String errorMessage = "Type tag of event should be [T], [D], or [E]";
         assert Objects.equals(tag, TODO_TAG) || Objects.equals(tag, DEADLINE_TAG) || Objects.equals(tag, EVENT_TAG)
                 : errorMessage;
 
+        // IsDone tag of event should be [ ], or [X]
         errorMessage = "IsDone tag of event should be [ ], or [X]";
         assert Objects.equals(isDone, IS_DONE_TAG) || Objects.equals(isDone, NOT_DONE_TAG)
                 : errorMessage;
     }
 
-
     //@@author Yufannnn-reused
     //https://nus-cs2103-ay2223s2.github.io/website/schedule/week3/topics.html#W3-4c
     //with minor modification, nice and concise function to overwrite text to a given file.
     private void writeToFile(String filePath, String textToAdd) throws IOException {
+        // Initialize the FileWriter
         FileWriter fw = new FileWriter(filePath);
+        // Write the text to the file
         fw.write(textToAdd);
+        // Close the FileWriter
         fw.close();
     }
     //@@author
@@ -161,30 +185,35 @@ public class Storage {
      * @throws StorageFileException Throws StorageFileException when encountering an IOException when writing to the file
      */
     public void saveTaskList(TaskList taskList) throws StorageFileException {
+        // Create parent folder if it does not exist
         createParentFolderIfNotExists();
 
         StringBuilder record = new StringBuilder();
+        // Append each task's storage string to the record
         for (int i = 0; i < taskList.getNoOfTasks(); i++) {
             DukeTask task = taskList.getTask(i);
             record.append(task.storageString()).append(System.lineSeparator());
         }
 
         try {
+            // Write the record to the file
             writeToFile(this.filePath, record.toString());
         } catch (IOException e) {
-            throw new StorageFileException(this.STORAGE_ERROR);
+            throw new StorageFileException(ErrorMessage.STORAGE_ERROR);
         }
     }
+
 
     /**
      * Creates the parent folder of the file associated with this StorageFile object if it does not exist.
      */
     private void createParentFolderIfNotExists() {
+        // check if the folder exists
         if (!this.folder.toFile().exists()) {
+            // if it does not, create the folder using mkdirs()
             this.folder.toFile().mkdirs();
         }
     }
-
 }
 
 

@@ -20,29 +20,28 @@ import java.util.regex.Pattern;
  */
 public class Decipherer {
     private static final Pattern emptyStringChecker = Pattern.compile("\\S.*+");
-    private static final String INVALID_DESCRIPTION_ERROR = "OOPS!!! The description cannot be empty.";
-    private static final String INVALID_TASK_INDEX_ERROR = "OOPS!!! The input task index is not a number,\n"
-            + "Please input a valid task index";
-    private static final String INVALID_DATE_ERROR = "OOPS!!! The input date format is invalid\nPlease input " +
-            "the date in the format of yyyy-mm-dd";
-    private static final String INVALID_DEADLINE_FORMAT_ERROR = "OOPS!!! Please input the deadline in the " +
-            "correct format.";
-    private static final String EMPTY_DEADLINE_ERROR = "OOPS!!! The description of a deadline cannot be empty.";
-    private static final String INVALID_DATE_FORMAT_ERROR = "OOPS!!! The input date format is invalid\n"
-            + "Please input the date in the format of yyyy-mm-dd";
-
 
     private static String[] splitString(String information) {
         return information.split(" ", 2);
     }
 
+    /**
+     * Helper method to parse the given string index to an int and return the corresponding index
+     * in the TaskList, with an offset of -1.
+     *
+     * @param index The string index of a task
+     * @return The corresponding index in the TaskList, with an offset of -1
+     */
     private static int getIndex(String index) {
         try {
+            //parse the input string as an integer and subtract 1 to convert it to zero-based index
             return Integer.parseInt(index) - 1;
         } catch (NumberFormatException e) {
+            //if the input is not a valid integer, return -1
             return -1;
         }
     }
+
     /**
      * Decodes the information string for an update command.
      * The input string should be in the format of "index description".
@@ -52,15 +51,25 @@ public class Decipherer {
      * @throws InvalidInputException if the input task index is not a number or the description is empty
      */
     public static UpdateCommand updateDecoder(String information) throws InvalidInputException {
+        //split the input into index and task description
         String[] parts = splitString(information);
+        //parse the index and convert it to zero-indexed
         int index = getIndex(parts[0]);
-        if (index == -1) {
-            throw new InvalidInputException(INVALID_TASK_INDEX_ERROR);
+        try {
+            //if the task description is empty, throw an exception
+            if (parts[1].isEmpty()) {
+                throw new InvalidInputException(ErrorMessage.INVALID_DESCRIPTION_ERROR);
+            }
+            //if the index is invalid, throw an exception
+            if (index == -1) {
+                throw new InvalidInputException(ErrorMessage.INVALID_TASK_INDEX_ERROR);
+            }
+            //return a new UpdateCommand object with the index and task description
+            return new UpdateCommand(index, parts[1].strip());
+        } catch (IndexOutOfBoundsException e) {
+            //if there is an index out of bounds exception, throw an exception
+            throw new InvalidInputException(ErrorMessage.INVALID_DESCRIPTION_ERROR);
         }
-        if (parts[1].isEmpty()) {
-            throw new InvalidInputException(INVALID_DESCRIPTION_ERROR);
-        }
-        return new UpdateCommand(index, parts[1]);
     }
 
     /**
@@ -74,12 +83,13 @@ public class Decipherer {
     public static MarkAsDoneCommand markDecoder(String information) throws InvalidInputException {
         // Use regular expression to check if the input is a number
         Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
+
         if (numberChecker.matches()) {
             // convert the input to an integer and decrement by 1
             return new MarkAsDoneCommand(Integer.parseInt(information) - 1);
         } else {
             // if the input is not a number, throw an exception
-            throw new InvalidInputException(INVALID_TASK_INDEX_ERROR);
+            throw new InvalidInputException(ErrorMessage.INVALID_TASK_INDEX_ERROR);
         }
     }
 
@@ -94,12 +104,13 @@ public class Decipherer {
     public static UnmarkCommand unmarkDecoder(String information) throws InvalidInputException {
         // Use regular expression to check if the input is a number
         Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
+
         if (numberChecker.matches()) {
             // convert the input to an integer and decrement by 1
             return new UnmarkCommand(Integer.parseInt(information) - 1);
         } else {
             // if the input is not a number, throw an exception
-            throw new InvalidInputException(INVALID_TASK_INDEX_ERROR);
+            throw new InvalidInputException(ErrorMessage.INVALID_TASK_INDEX_ERROR);
         }
     }
 
@@ -114,12 +125,13 @@ public class Decipherer {
     public static DeleteCommand deleteDecoder(String information) throws InvalidInputException {
         // Use regular expression to check if the input is a number
         Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
+
         if (numberChecker.matches()) {
             // convert the input to an integer and decrement by 1
             return new DeleteCommand(Integer.parseInt(information) - 1);
         } else {
             // if the input is not a number, throw an exception
-            throw new InvalidInputException(INVALID_TASK_INDEX_ERROR);
+            throw new InvalidInputException(ErrorMessage.INVALID_TASK_INDEX_ERROR);
         }
     }
 
@@ -134,7 +146,7 @@ public class Decipherer {
     public static AddTaskCommand todoDecoder(String information) throws InvalidInputException {
         // check if the input is not empty
         if (!emptyStringChecker.matcher(information).matches()) {
-            throw new InvalidInputException(INVALID_DESCRIPTION_ERROR);
+            throw new InvalidInputException(ErrorMessage.EMPTY_TODO_ERROR);
         } else {
             // create a new TodoTask and return an AddTaskCommand with it
             return new AddTaskCommand(new TodoTask(information));
@@ -153,7 +165,7 @@ public class Decipherer {
     public static AddTaskCommand deadlineDecoder(String information) throws InvalidInputException {
         // check if the input is not empty
         if (!emptyStringChecker.matcher(information).matches()) {
-            throw new InvalidInputException(EMPTY_DEADLINE_ERROR);
+            throw new InvalidInputException(ErrorMessage.EMPTY_DEADLINE_ERROR);
         } else {
             // Use regular expression to extract the name and date
             Matcher dateChecker = Pattern.compile("(?<name>.)/by(?<date>.)").matcher(information);
@@ -165,11 +177,11 @@ public class Decipherer {
                     return new AddTaskCommand(new DeadlineTask(name, LocalDate.parse(date)));
                 } catch (DateTimeParseException e) {
                     // if the input date format is invalid, throw an exception
-                    throw new InvalidInputException(INVALID_DATE_ERROR);
+                    throw new InvalidInputException(ErrorMessage.INVALID_DATE_ERROR);
                 }
             } else {
                 // if the input format is incorrect, throw an exception
-               throw new InvalidInputException(INVALID_DEADLINE_FORMAT_ERROR);
+               throw new InvalidInputException(ErrorMessage.INVALID_DEADLINE_FORMAT_ERROR);
             }
         }
     }
@@ -186,7 +198,7 @@ public class Decipherer {
     public static AddTaskCommand eventDecoder(String information) throws InvalidInputException {
         // check if the input is not empty
         if (!emptyStringChecker.matcher(information).matches()) {
-            throw new InvalidInputException("OOPS!!! The description of an event cannot be empty.");
+            throw new InvalidInputException(ErrorMessage.EMPTY_EVENT_ERROR);
         } else {
             // Use regular expression to extract the name, start date, and end date
             Matcher intervalChecker = Pattern.compile("(?<name>.*)/from(?<from>.*)/to(?<to>.*)")
@@ -201,12 +213,11 @@ public class Decipherer {
                             new EventTask(name, LocalDate.parse(from), LocalDate.parse(to)));
                 } catch (DateTimeParseException e) {
                     // if the input date format is invalid, throw an exception
-                    throw new InvalidInputException("OOPS!!! The input date format is invalid\n"
-                            + "Please input the date in the format of yyyy-mm-dd");
+                    throw new InvalidInputException(ErrorMessage.INVALID_DATE_ERROR);
                 }
             } else {
                 // if the input format is incorrect, throw an exception
-                throw new InvalidInputException("OOPS!!! Please input the event in the correct format.");
+                throw new InvalidInputException(ErrorMessage.INVALID_EVENT_FORMAT_ERROR);
             }
         }
     }
@@ -221,7 +232,7 @@ public class Decipherer {
     public static FindCommand findDecoder(String information) throws InvalidInputException {
         // check if the input is not empty
         if (!emptyStringChecker.matcher(information).matches()) {
-            throw new InvalidInputException("OOPS!!! The description of a todo cannot be empty.");
+            throw new InvalidInputException(ErrorMessage.INVALID_DESCRIPTION_ERROR);
         } else {
             String[] descriptions = information.split(" ");
             // create a new FindCommand with the array of descriptions
@@ -240,14 +251,14 @@ public class Decipherer {
     public static ViewScheduleCommand viewDecoder(String information) throws InvalidInputException {
         // check if the input is not empty
         if (!emptyStringChecker.matcher(information).matches()) {
-            throw new InvalidInputException(INVALID_DESCRIPTION_ERROR);
+            throw new InvalidInputException(ErrorMessage.INVALID_DESCRIPTION_ERROR);
         } else {
             try {
                 // create a new ViewScheduleCommand with the date
                 return new ViewScheduleCommand(LocalDate.parse(information));
             } catch (DateTimeParseException e) {
                 // if the input date format is invalid, throw an exception
-                throw new InvalidInputException(INVALID_DATE_FORMAT_ERROR);
+                throw new InvalidInputException(ErrorMessage.INVALID_DATE_FORMAT_ERROR);
             }
         }
     }

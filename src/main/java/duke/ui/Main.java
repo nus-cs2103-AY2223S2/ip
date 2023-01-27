@@ -24,7 +24,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            // Set the Duke object in the controller
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            // Set the window icon
             stage.getIcons().add(new Image("/images/icon.png"));
             stage.setTitle("Mr. Bear");
             stage.isResizable();
@@ -33,4 +35,5 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
 }

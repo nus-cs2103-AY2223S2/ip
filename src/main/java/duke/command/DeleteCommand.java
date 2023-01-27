@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
+import duke.parser.ErrorMessage;
 import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
@@ -14,9 +15,6 @@ import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     private final int taskIndex;
-    private final static String TASK_LIST_IS_EMPTY_ERROR = "OOPS!!! Your task list is currently empty\nPlease add in more tasks";
-    private final static String INVALID_INDEX_ERROR = "OOPS!!! The input index is not within the range of [1, %d]\n" +
-            "Please input a valid index";
     private final static String TASK_REMOVED_MESSAGE = "Noted. I've removed this task:\n %s \nNow you have %d tasks in the list.";
 
     /**
@@ -59,17 +57,29 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
+        //save the current state of the task list before making any changes
         commandHistory.saveState(tasks);
         if (isEmpty(tasks)) {
-            throw new InvalidInputException(TASK_LIST_IS_EMPTY_ERROR);
+            //if the task list is empty, throw an exception
+            String errorMessage = ErrorMessage.TASK_LIST_EMPTY_MESSAGE + ErrorMessage.ADD_MORE_TASKS;
+            throw new InvalidInputException(errorMessage);
         }
+
         if (!isValidIndex(tasks)) {
-            throw new InvalidInputException(String.format(INVALID_INDEX_ERROR, tasks.getNoOfTasks()));
+            //if the index passed is not valid, throw an exception
+            String errorMessage = String.format(ErrorMessage.INVALID_INDEX_ERROR
+                    + ErrorMessage.INPUT_VALID_INDEX, tasks.getNoOfTasks());
+            throw new InvalidInputException(errorMessage);
         } else {
+            //delete the task from the list, store the task that was deleted
             DukeTask deletedTask = tasks.deleteTask(this.taskIndex);
+            //create a message that the task has been removed and the number of tasks remaining
             String message = String.format(TASK_REMOVED_MESSAGE, deletedTask.toString(), tasks.getNoOfTasks());
+            //append the message to the UI
             ui.appendResponse(message);
         }
+
+        //save the updated task list to storage
         storage.saveTaskList(tasks);
     }
 }

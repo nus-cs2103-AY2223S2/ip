@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import duke.exception.InvalidInputException;
+import duke.parser.ErrorMessage;
 
 /**
  * A DeadlineTask that encapsulates the information and starting and ending
@@ -13,7 +14,8 @@ import duke.exception.InvalidInputException;
 public class EventTask extends DukeTask {
     private final LocalDate from;
     private final LocalDate to;
-    private static final String FORMAT = "[E] | %s %s | %s | %s";
+    private static final String STORAGE_FORMAT = "[E] | %s %s | %s | %s";
+    private static final String FORMAT = "[E] %s (from: %s to: %s)";
 
     /**
      * Constructor for EventTask that takes in the information of the task
@@ -29,7 +31,7 @@ public class EventTask extends DukeTask {
         this.from = from;
         this.to = to;
         if (from.isAfter(to)) {
-            throw new InvalidInputException("☹ OOPS!!! Start date can not be after than the End date");
+            throw new InvalidInputException(ErrorMessage.INVALID_FROM_AND_TO_ERROR);
         }
     }
 
@@ -60,7 +62,7 @@ public class EventTask extends DukeTask {
     @Override
     public String storageString() {
         String status = this.getStatus() ? "[X] | " : "[ ] | ";
-        return String.format(FORMAT, status, this.getInformation(), this.from, this.to);
+        return String.format(STORAGE_FORMAT, status, this.getInformation(), this.from, this.to);
     }
 
     /**
@@ -88,8 +90,9 @@ public class EventTask extends DukeTask {
         // Store the formatted dates in a local variable
         String formattedFrom = this.from.format(formatter);
         String formattedTo = this.to.format(formatter);
-        return "[E]" + super.toString() + " (from: " + formattedFrom + " to: " + formattedTo + ")";
+        return String.format(FORMAT, super.toString(), formattedFrom, formattedTo);
     }
+
 
     /**
      * Check whether this event task is equal to the given object

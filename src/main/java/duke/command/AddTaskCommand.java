@@ -14,6 +14,7 @@ import duke.ui.Ui;
 
 public class AddTaskCommand extends Command {
     private final DukeTask task;
+    private final static String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.";
 
     /**
      * The constructor of AddTaskCommand that takes in the task to be added.
@@ -25,21 +26,26 @@ public class AddTaskCommand extends Command {
     }
 
     /**
-     * Adds the given task to the TaskList and display relevant information with the customized format.
+     * Execute the command to add a task to the task list, save the task list to storage, and display a message to the user.
      *
-     * @param tasks The user TaskList that contains all the task to be manipulated
+     * @param tasks the task list to add the task to
+     * @param ui the user interface to display a message to the user
+     * @param storage the storage to save the task list to
+     * @param commandHistory the command history to save the previous state of the task list
+     * @throws StorageFileException if there is an error saving the task list to storage
      */
-    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws StorageFileException {
+        // Save the current state of the task list to the command history
         commandHistory.saveState(tasks);
+        // Add the task to the task list
         tasks.addTask(this.task);
+        // Save the task list to storage
         storage.saveTaskList(tasks);
-        final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n%s\nNow you have %d tasks in the list.";
 
+        // Display a message to the user that the task was added to the task list
         String message = String.format(ADDED_TASK_MESSAGE, this.task, tasks.getNoOfTasks());
         ui.appendResponse(message);
     }
-
 
     /**
      * Compares this object to the specified object.
@@ -52,6 +58,7 @@ public class AddTaskCommand extends Command {
         if (obj == this) {
             return true;
         }
+
         if (!(obj instanceof AddTaskCommand)) {
             return false;
         }

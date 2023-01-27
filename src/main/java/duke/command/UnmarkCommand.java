@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
+import duke.parser.ErrorMessage;
 import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
@@ -15,8 +16,6 @@ import duke.ui.Ui;
 
 public class UnmarkCommand extends Command {
     private final int taskIndex;
-    private static final String TASK_LIST_EMPTY_MESSAGE = "OOPS!!! Your task list is currently empty";
-    private static final String INVALID_INDEX_MESSAGE = "OOPS!!! The input index is not within the range of [1, ";
     private static final String UNMARKED_TASK_MESSAGE = "OK, I've marked this task as not done yet:\n ";
 
     /**
@@ -26,16 +25,6 @@ public class UnmarkCommand extends Command {
      */
     public UnmarkCommand(int taskIndex) {
         this.taskIndex = taskIndex;
-    }
-
-    /**
-     * Check whether the given list is empty.
-     *
-     * @param list The given list to be checked
-     * @return Whether the given list is empty
-     */
-    public boolean isEmpty(TaskList list) {
-        return list.getNoOfTasks() == 0;
     }
 
     /**
@@ -58,21 +47,29 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
+        // save the current state of the task list before making changes
         commandHistory.saveState(tasks);
-        if (isEmpty(tasks)) {
-            String errorMessage = TASK_LIST_EMPTY_MESSAGE + "\nPlease add in more tasks";
+        if (tasks.isEmpty()) {
+            // throw an error message if task list is empty
+            String errorMessage = ErrorMessage.TASK_LIST_EMPTY_MESSAGE + ErrorMessage.ADD_MORE_TASKS;
             throw new InvalidInputException(errorMessage);
         }
+
         if (!isValidIndex(tasks)) {
-            String errorMessage = INVALID_INDEX_MESSAGE + tasks.getNoOfTasks() + "]";
-            errorMessage += "\nPlease input a valid index";
+            // throw an error message if the input index is invalid
+            String errorMessage = String.format(ErrorMessage.INVALID_INDEX_ERROR
+                    + ErrorMessage.INPUT_VALID_INDEX, tasks.getNoOfTasks());
             throw new InvalidInputException(errorMessage);
         } else {
+            // get the task at the input index and unmark it
             DukeTask currentTask = tasks.getTask(this.taskIndex);
             currentTask.unmark();
+            // construct success message
             String message = UNMARKED_TASK_MESSAGE + currentTask;
             ui.appendResponse(message);
         }
+
+        // save the updated task list
         storage.saveTaskList(tasks);
     }
 }

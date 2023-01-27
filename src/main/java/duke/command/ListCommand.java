@@ -23,14 +23,20 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
         StringBuilder listContent = new StringBuilder(TASK_LIST_MESSAGE);
+        // check if there are no tasks
         if (tasks.getNoOfTasks() == 0) {
             ui.appendResponse(NO_TASKS_MESSAGE);
             return;
         }
+
         int index = 1;
+        // iterate through the tasks and append them to the listContent
         for (DukeTask task : tasks.getTasks()) {
             listContent.append(index++).append(".").append(task).append("\n");
         }
+
+        // append the final task list to the UI
         ui.appendResponse(listContent.toString());
     }
+
 }

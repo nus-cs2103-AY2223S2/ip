@@ -10,6 +10,9 @@ public class HelpCommand extends Command {
     private final static String HEADER = "Here are the available commands and their respective function:";
     private final static String PROMPT = "All the command keywords are case insensitive!";
 
+    /**
+     * Enum to represent the different types of commands supported by the application
+     */
     private enum CommandType {
         BYE("bye", "Exit the program"),
         DEADLINE("deadline [description] /by [yyyy-mm-dd]", "Add a deadline event with its " +
@@ -34,6 +37,12 @@ public class HelpCommand extends Command {
         private final String command;
         private final String description;
 
+        /**
+         * Constructor for the CommandType enum
+         *
+         * @param command     the command string that the user inputs
+         * @param description the description of the command
+         */
         CommandType(String command, String description) {
             this.command = command;
             this.description = description;
@@ -67,15 +76,18 @@ public class HelpCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
+        // Initialize a StringBuilder to store the help message
         StringBuilder message = new StringBuilder();
         message.append(HEADER).append("\n\n");
 
+        // Iterate through the CommandType enum and append the command and its description to the message
         for (CommandType commandType : CommandType.values()) {
             message.append("- ").append(commandType.getCommand()).append(" : ")
                     .append(commandType.getDescription()).append("\n\n");
         }
 
         message.append(PROMPT);
+        // Send the message to the UI
         ui.appendResponse(message.toString());
     }
 

@@ -20,9 +20,13 @@ public class MassDeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException {
+        // Save the current state of tasks in the command history
         commandHistory.saveState(tasks);
+        // Delete done tasks from the task list
         deleteDoneTasks(tasks);
+        // Create a response message containing the updated task list
         String responseMessage = createResponseMessage(tasks);
+        // Append the response message to the UI
         ui.appendResponse(responseMessage);
     }
 
@@ -32,8 +36,11 @@ public class MassDeleteCommand extends Command {
      * @param tasks The user TaskList that contains all the task to be manipulated
      */
     private void deleteDoneTasks(TaskList tasks) {
+        // loop through all tasks
         for (int i = 0; i < tasks.getNoOfTasks(); i++) {
+            // check if task at index i is done
             if (tasks.getTask(i).getStatus()) {
+                // if task is done, delete the task from the task list
                 tasks.deleteTask(i);
             }
         }
@@ -46,10 +53,17 @@ public class MassDeleteCommand extends Command {
      */
     private String createResponseMessage(TaskList tasks) {
         StringBuilder responseMessage = new StringBuilder(DELETE_MESSAGE);
+        //append the message to notify the user of the remaining tasks
         responseMessage.append(REMAINING_TASKS_MESSAGE);
+
+        //loop through the list of remaining tasks
         for (int i = 0; i < tasks.getNoOfTasks(); i++) {
+            //append the task number, task and a newline character to the response message
             responseMessage.append(i + 1).append(".").append(tasks.getTask(i)).append("\n");
         }
+
+        //return the response message
         return responseMessage.toString();
     }
+
 }

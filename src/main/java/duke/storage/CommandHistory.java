@@ -1,9 +1,7 @@
 package duke.storage;
 
-import duke.task.DukeTask;
 import duke.task.TaskList;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 /**
@@ -25,9 +23,12 @@ public class CommandHistory {
      * @param tasks The current TaskList
      */
     public void saveState(TaskList tasks) {
+        // Create a copy of the current task list
         TaskList taskListCopy = new TaskList(tasks.getTasks());
+        // Push the copy onto the undo stack for future undo operations
         undoStack.push(taskListCopy);
     }
+
 
     /**
      * Check if the undo stack is empty.

@@ -11,9 +11,6 @@ import duke.exception.InvalidInputException;
 * A parser that parse the input String into a Duke Instruction with respective information encapsulated.
 */
 public class Parser {
-    private static final String UNRECOGNIZED_ERROR = "OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-            "Please type in \"help\" to check all available commands.";
-    private static final String EMPTY_ERROR = "OOPS!!! The instruction cannot be empty";
 
     public enum Instruction {
         BYE,
@@ -43,6 +40,22 @@ public class Parser {
      * @throws DukeException Throws exception when invalid input is given
      */
     public static Command parse(String input) throws DukeException {
+        Matcher instructionExtractor = extractInstructionAndInformation(input);
+        String instructionTag = instructionExtractor.group("instructionTag").strip();
+        String information = instructionExtractor.group("information").strip();
+
+        Instruction instruction = matchInstructionTag(instructionTag);
+        return createCommand(instruction, information);
+    }
+
+    /**
+     * Extracts the instruction tag and information from the input by using a regular expression.
+     *
+     * @param input The input to be parsed.
+     * @return A Matcher object that contains the instruction tag and information extracted from the input.
+     * @throws InvalidInputException If the input does not match the regular expression.
+     */
+    private static Matcher extractInstructionAndInformation(String input) throws InvalidInputException {
         //@@author Yufannnn-reused
         //Reused from https://github.com/wweqg/ip/blob/master/src/main/java/duke/parser/Parser.java
         //with minor modification, it is a pretty clean and concise regular expression for general instructions
@@ -50,51 +63,92 @@ public class Parser {
                 .compile("(?<instructionTag>\\S++)(?<information>.*)").matcher(input.strip());
         //@@author
 
+        // Check if the input matches the regular expression
         if (!instructionExtractor.matches()) {
-            throw new InvalidInputException(EMPTY_ERROR);
+            // If not, throw an exception
+            throw new InvalidInputException(ErrorMessage.EMPTY_ERROR);
         }
-        String instructionTag = instructionExtractor.group("instructionTag").strip();
-        String information = instructionExtractor.group("information").strip();
+        // Return the Matcher object that contains the instruction tag and information
+        return instructionExtractor;
+    }
 
+
+    /**
+     * Matches the instruction tag with the corresponding instruction enum.
+     *
+     * @param instructionTag The instruction tag to be matched.
+     * @return The instruction enum that matches the instruction tag.
+     * @throws InvalidInputException If the instruction tag is not recognized.
+     */
+    private static Instruction matchInstructionTag(String instructionTag) throws InvalidInputException {
         try {
-            Instruction instruction = Instruction.valueOf(instructionTag.toUpperCase());
-            switch (instruction) {
-                case BYE:
-                    return new ExitCommand();
-                case LIST:
-                    return new ListCommand();
-                case REMINDER:
-                    return new ReminderCommand();
-                case HELP:
-                    return new HelpCommand();
-                case MASSDELETE:
-                    return new MassDeleteCommand();
-                case FREE:
-                    return new FindFreeTimeCommand();
-                case MARK:
-                    return Decipherer.markDecoder(information);
-                case UNMARK:
-                    return Decipherer.unmarkDecoder(information);
-                case DELETE:
-                    return Decipherer.deleteDecoder(information);
-                case TODO:
-                    return Decipherer.todoDecoder(information);
-                case DEADLINE:
-                    return Decipherer.deadlineDecoder(information);
-                case EVENT:
-                    return Decipherer.eventDecoder(information);
-                case FIND:
-                    return Decipherer.findDecoder(information);
-                case VIEW:
-                    return Decipherer.viewDecoder(information);
-                case UPDATE:
-                    return Decipherer.updateDecoder(information);
-                case UNDO:
-                    return new UndoCommand();
-            }
+            //convert instruction tag to uppercase to match enum
+            return Instruction.valueOf(instructionTag.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new InvalidInputException(UNRECOGNIZED_ERROR);
+            //thrown if instruction tag does not match any of the enum values
+            throw new InvalidInputException(ErrorMessage.UNRECOGNIZED_ERROR);
         }
+    }
+
+    /**
+     * Creates a command based on the instruction and the information provided.
+     * @param instruction The instruction to be executed by the command.
+     * @param information The information needed by the command to execute the instruction.
+     * @return A command that can execute the instruction with the given information.
+     * @throws InvalidInputException If the instruction or the information is invalid.
+     */
+    private static Command createCommand(Instruction instruction, String information) throws InvalidInputException {
+        switch (instruction) {
+            case BYE:
+                //create and return ExitCommand
+                return new ExitCommand();
+            case LIST:
+                //create and return ListCommand
+                return new ListCommand();
+            case REMINDER:
+                //create and return ReminderCommand
+                return new ReminderCommand();
+            case HELP:
+                //create and return HelpCommand
+                return new HelpCommand();
+            case MASSDELETE:
+                //create and return MassDeleteCommand
+                return new MassDeleteCommand();
+            case FREE:
+                //create and return FindFreeTimeCommand
+                return new FindFreeTimeCommand();
+            case MARK:
+                //create and return command to mark item using markDecoder in Decipherer
+                return Decipherer.markDecoder(information);
+            case UNMARK:
+                //create and return command to unmark item using unmarkDecoder in Decipherer
+                return Decipherer.unmarkDecoder(information);
+            case DELETE:
+                //create and return command to delete item using deleteDecoder in Decipherer
+                return Decipherer.deleteDecoder(information);
+            case TODO:
+                //create and return command to create to-do item using todoDecoder in Decipherer
+                return Decipherer.todoDecoder(information);
+            case DEADLINE:
+                //create and return command to create deadline item using deadlineDecoder in Decipherer
+                return Decipherer.deadlineDecoder(information);
+            case EVENT:
+                //create and return command to create event item using eventDecoder in Decipherer
+                return Decipherer.eventDecoder(information);
+            case FIND:
+                //create and return command to find item using findDecoder in Decipherer
+                return Decipherer.findDecoder(information);
+            case VIEW:
+                //create and return command to view item using viewDecoder in Decipherer
+                return Decipherer.viewDecoder(information);
+            case UPDATE:
+                //create and return command to update item using updateDecoder in Decipherer
+                return Decipherer.updateDecoder(information);
+            case UNDO:
+                //create and return UndoCommand
+                return new UndoCommand();
+        }
+        //if no case matched, return null
         return null;
     }
 }

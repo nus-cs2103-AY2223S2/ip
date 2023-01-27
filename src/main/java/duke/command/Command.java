@@ -22,13 +22,15 @@ public abstract class Command {
     }
 
     /**
-     * Execute the respective instructions.
+     * The execute method is responsible for executing the command.
      *
-     * @param tasks The user TaskList that contains all the task to be manipulated
-     * @param ui The ui Object used to display information
-     * @param storage The Storage Object used to save and load the TaskList
-     * @throws DukeException Throws Exception when the user inputs invalid instruction or
-     * when encountering issues reading or writing to the storage file.
+     * @param tasks the task list where the command will be executed on
+     * @param ui the user interface where the result of the command will be displayed
+     * @param storage the storage where the task list will be saved
+     * @param commandHistory the command history where the command will be added
+     * @throws DukeException if there is any error during the execution of the command
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) throws DukeException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage
+            , CommandHistory commandHistory) throws DukeException;
+
 }

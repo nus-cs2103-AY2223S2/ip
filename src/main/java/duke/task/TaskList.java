@@ -119,6 +119,14 @@ public class TaskList implements Cloneable {
         return new TaskList(new ArrayList<>(result));
     }
 
+    /**
+     * Check if the task list is empty.
+     *
+     * @return true if the task list is empty, false otherwise
+     */
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
+    }
 
     /**
      * Returns a string representation of the task list in the format "index. task\n".

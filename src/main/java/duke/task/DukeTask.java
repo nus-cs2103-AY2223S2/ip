@@ -26,20 +26,6 @@ public abstract class DukeTask {
     }
 
     /**
-     * Mark the current task as done.
-     */
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    /**
-     * mark the current task as not done.
-     */
-    public void unmark() {
-        this.isDone = false;
-    }
-
-    /**
      * Gets the information of the current task.
      *
      * @return the information of the current task
@@ -47,7 +33,6 @@ public abstract class DukeTask {
     public String getInformation() {
         return this.information;
     }
-
     /**
      * Gets the type of the current task.
      *
@@ -64,6 +49,19 @@ public abstract class DukeTask {
      */
     public boolean getStatus() {
         return this.isDone;
+    }
+    /**
+     * Mark the current task as done.
+     */
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    /**
+     * mark the current task as not done.
+     */
+    public void unmark() {
+        this.isDone = false;
     }
 
     /**
@@ -87,9 +85,9 @@ public abstract class DukeTask {
      * @param description The given description to be checked
      * @return Whether the description and the information matches
      */
-     public boolean matches(String description) {
-         return this.information.toUpperCase().contains(description.toUpperCase());
-     }
+    public boolean matches(String description) {
+        return this.information.toUpperCase().contains(description.toUpperCase());
+    }
 
     /**
      * Update the information of the task with the given string.
@@ -108,6 +106,7 @@ public abstract class DukeTask {
      */
     @Override
     public String toString() {
-        return (getStatus() ? this.DONE_FLAG : this.UNDONE_FLAG) + this.information;
+        return (getStatus() ?
+                DONE_FLAG : UNDONE_FLAG) + getInformation();
     }
 }

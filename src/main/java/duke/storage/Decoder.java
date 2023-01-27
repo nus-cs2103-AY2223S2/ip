@@ -23,7 +23,7 @@ public class Decoder {
      */
     public static void todoDecoder(TaskList list, String description, boolean isDone) {
         // Create a new TodoTask with the given description
-        TodoTask todo = new TodoTask(description);
+        TodoTask todo = new TodoTask(description.strip());
 
         // If the TodoTask is done, mark it as done
         if (isDone) {
@@ -33,7 +33,6 @@ public class Decoder {
         // Add the TodoTask to the given TaskList
         list.addTask(todo);
     }
-
 
     /**
      * Decodes a DeadlineTask and adds it to a TaskList.
@@ -45,7 +44,7 @@ public class Decoder {
      */
     public static void deadlineDecoder(TaskList list, String description, boolean isDone, String date) {
         // Create a new DeadlineTask with the given description and deadline date
-        DeadlineTask deadline = new DeadlineTask(description, LocalDate.parse(date));
+        DeadlineTask deadline = new DeadlineTask(description.strip(), LocalDate.parse(date));
 
         // If the DeadlineTask is done, mark it as done
         if (isDone) {
@@ -70,7 +69,7 @@ public class Decoder {
     public static void eventDecoder(TaskList list, String description, boolean isDone, String from, String to)
             throws InvalidInputException {
         // Create a new EventTask with the given description and event dates
-        EventTask event = new EventTask(description, LocalDate.parse(from), LocalDate.parse(to));
+        EventTask event = new EventTask(description.strip(), LocalDate.parse(from), LocalDate.parse(to));
 
         // If the EventTask is done, mark it as done
         if (isDone) {

@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -18,8 +17,11 @@ public class ReminderCommand extends Command{
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage, CommandHistory commandHistory) {
+        //Create a new TaskList to store all the tasks with deadlines
         TaskList deadlineList = tasks.extractDeadlines();
+        //Create a response message for the tasks with deadlines
         String responseMessage = createResponseMessage(deadlineList);
+        //append the response message to the UI
         ui.appendResponse(responseMessage);
     }
 
@@ -30,10 +32,16 @@ public class ReminderCommand extends Command{
      * @return The response message
      */
     private String createResponseMessage(TaskList deadlineList) {
+        //Creating a new string builder to store the response message
         StringBuilder responseMessage = new StringBuilder(REMINDER_MESSAGE);
+        //Iterating through the tasks in the deadlineList
+
         for (int i = 0; i < deadlineList.getNoOfTasks(); i++) {
+            //Appending the task number, task details and newline character to the response message
             responseMessage.append(i + 1).append(".").append(deadlineList.getTask(i)).append("\n");
         }
+
+        //Returning the final response message as a string
         return responseMessage.toString();
     }
 }
