@@ -16,3 +16,4 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 _duke_data.txt
+/.vscode/
