@@ -37,7 +37,7 @@ public class Duke {
         Ui.exit();
     }
     /**
-     * main method
+     * The method of main
      * @param  args
      */
     public static void main(String[] args) throws IOException {
