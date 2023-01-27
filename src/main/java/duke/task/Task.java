@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -12,7 +12,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
-    protected static Task factory(char type, char done, String text) {
+    public static Task factory(char type, char done, String text) {
         Task curr;
 
         Matcher m;

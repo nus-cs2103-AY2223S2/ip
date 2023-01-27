@@ -1,6 +1,7 @@
 package duke;
 
-import duke.Task;
+import duke.task.Deadline;
+import duke.task.Task;
 
 public class Test {
     public static void main(String[] args) {

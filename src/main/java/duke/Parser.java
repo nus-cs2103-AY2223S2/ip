@@ -2,6 +2,9 @@ package duke;
 
 import duke.exception.InvalidFormatException;
 import duke.exception.UnrecognisedCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 import java.util.regex.Matcher;
 

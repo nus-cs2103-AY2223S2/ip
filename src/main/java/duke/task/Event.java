@@ -1,6 +1,4 @@
-package duke;
-
-import duke.Task;
+package duke.task;
 
 import java.time.LocalDate;
 import java.util.regex.Pattern;
