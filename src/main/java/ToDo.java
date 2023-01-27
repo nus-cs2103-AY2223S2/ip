@@ -1,6 +1,7 @@
-public class ToDo extends Task{
-    protected  String type = "[T]";
-    public ToDo (String description){
+public class ToDo extends Task {
+    protected String type = "[T]";
+
+    public ToDo(String description) {
         super(description);
     }
 
@@ -9,6 +10,7 @@ public class ToDo extends Task{
         ToDo temp = new ToDo((description));
         return temp;
     }
+
     @Override
     public String toString() {
         return type + super.toString();
