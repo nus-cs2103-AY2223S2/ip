@@ -99,6 +99,7 @@ public class Parser {
                     String fromtime = command.substring(command.indexOf(" /from ") + 6, command.indexOf(" /to "));
                     String totime = command.substring(command.indexOf(" /to ") + 4);
                     try {
+
                         //Date and Time
                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern((" MM/dd/yyyy HHmm"));
                         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern((" MM/dd/yyyy HHmm"));
