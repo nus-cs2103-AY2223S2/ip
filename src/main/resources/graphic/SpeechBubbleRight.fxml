@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="7.0" layoutY="200.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <styleClass>
+            <String fx:value="speech-bubble" />
+            <String fx:value="speech-bubble-pointer-right" />
+         </styleClass></Pane>
+      <AnchorPane layoutX="16.0" layoutY="28.0" maxHeight="1.7976931348623157E308" maxWidth="300.0" minHeight="40.0" minWidth="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox fx:id="bubbleDisplayArea" alignment="CENTER" layoutX="242.0" layoutY="100.0" maxWidth="280.0" minHeight="20.0" minWidth="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+         </children>
+         <styleClass>
+            <String fx:value="speech-bubble" />
+            <String fx:value="main-speech-bubble-right" />
+         </styleClass>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -3,6 +3,7 @@ package aqua.graphic;
 import aqua.logic.Executor;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -49,12 +50,22 @@ public class MainWindow extends UiComponent<VBox> {
     public String getInput() {
         String input = inputField.getText();
         inputField.setText("");
+        SpeechBubble bubble = new SpeechBubble(true);
+        bubble.setText(input);
+        displaySpeechBubble(bubble);
         return input;
     }
 
 
     private void displayReply(String reply) {
-        System.out.println(reply);
+        SpeechBubble bubble = new SpeechBubble(false);
+        bubble.setText(reply);
+        displaySpeechBubble(bubble);
+    }
+
+
+    private void displaySpeechBubble(SpeechBubble bubble) {
+        Platform.runLater(() -> textDisplayArea.getChildren().add(bubble.getRoot()));
     }
 
 
