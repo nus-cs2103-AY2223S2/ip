@@ -49,6 +49,9 @@ public class Deadline extends Task {
      */
     @Override
     public String formatTask() {
-        return String.format("deadline~-~-~%s~-~-~%s~-~-~%s", this.getDescription(), DateTimeParser.formatSave(this.deadline), this.isDone() ? "X" : "O");
+        return String.format("deadline~-~-~%s~-~-~%s~-~-~%s",
+                this.getDescription(),
+                DateTimeParser.formatSave(this.deadline),
+                this.isDone() ? "X" : "O");
     }
 }
