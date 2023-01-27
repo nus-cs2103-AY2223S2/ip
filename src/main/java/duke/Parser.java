@@ -5,6 +5,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
+
 public class Parser {
 
     /**
@@ -89,6 +91,20 @@ public class Parser {
                     Task task = taskList.deleteTask(index);
                     response = "Ok boss! Duke.Task removed: \n" + task.toString() +
                             "\nNow you have " + taskList.getSize() + " in the list.";
+                }
+            }
+
+        } else if (command.equals("find")) {
+            if (content.length() < 1) {
+                response = "☹ OOPS!!! Invalid keyword for find command.";
+            } else {
+                String keyWord = content.substring(1);
+                ArrayList<Integer> arrayList = taskList.findIndexesContaining(keyWord);
+                if (arrayList.size() == 0) {
+                    response = "no matches found!";
+                } else {
+                    response = "Here are the matching tasks from your list:\n"
+                            + taskList.toStringIndexes(arrayList);
                 }
             }
 
