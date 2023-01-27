@@ -89,8 +89,8 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException, FileNotFoundException, IOException {
 
-        System.out.println("<コ:彡");
-        System.out.println("Hello! I'm Duke, your favourite pink octopus.");
+        System.out.println("૮₍ ˃ ᵕ ˂ ₎ა");
+        System.out.println("Hello! I'm Duke, your favourite pink bunny.");
         System.out.println("What can I do for you today?");
 
         Scanner sc = new Scanner(System.in);
