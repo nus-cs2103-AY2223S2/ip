@@ -2,10 +2,11 @@ package command;
 
 import storage.Storage;
 
-public class Unmark extends ListAction {
+public class Unmark extends Command {
 
-    public Unmark(Storage s, String command) {
-        int num = extractTaskNum(command);
+    public Unmark(Storage s, String c) {
+        super(s, c);
+        int num = extractTaskNum();
         s.unmark(num);
     }
 

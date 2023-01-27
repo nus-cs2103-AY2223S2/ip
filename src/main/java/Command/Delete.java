@@ -2,10 +2,11 @@ package command;
 
 import storage.Storage;
 
-public class Delete extends ListAction {
+public class Delete extends Command {
 
     public Delete(Storage s, String c) {
-        int num = extractTaskNum(c);
+        super(s, c);
+        int num = extractTaskNum();
         s.delete(num);
     }
 
