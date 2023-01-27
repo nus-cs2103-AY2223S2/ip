@@ -1,6 +1,5 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Parser {
     private static final int INPUT_LENGTH_VALIDATE= 2;
