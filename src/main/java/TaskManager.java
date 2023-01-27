@@ -15,17 +15,24 @@ public class TaskManager {
 
     private ArrayList<Task> tasks = tasksFileManager.readTasksFromFile();
 
-    private LocalDateTime parseDateTime(String dateTimeText) {
+    private LocalDateTime parseDateTime(String dateTimeText) throws DukeException {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy kkmm");
         LocalDateTime dateTime = null;
+        boolean isInvalid = false;
 
         try {
             dateTime = LocalDateTime.parse(dateTimeText, dateTimeFormatter);
 
         } catch (DateTimeParseException e) {
-            System.out.println("Oops! Invalid date-time format. It should be DD-MM-YYYY hhmm (24-hrs format)");
+            isInvalid = true;
 
         } finally {
+
+            if (isInvalid) {
+                throw new DukeInvalidCommandException(
+                        "Oops! Invalid date-time format. It should be DD-MM-YYYY hhmm (24-hrs format)");
+            }
+            
             return dateTime;
         }
     }
@@ -234,6 +241,11 @@ public class TaskManager {
         LocalDateTime toDateTime = this.parseDateTime(to);
 
         if (fromDateTime != null && toDateTime != null) {
+            if (toDateTime.isBefore(fromDateTime)) {
+                throw new DukeInvalidCommandException(
+                        "Uh-oh, those are incompatible dates and times for 'from' and 'to' :/");
+            }
+
             Task event = new Event(description, fromDateTime, toDateTime);
             this.tasks.add(event);
             tasksFileManager.writeTasksToFile(this.tasks);
