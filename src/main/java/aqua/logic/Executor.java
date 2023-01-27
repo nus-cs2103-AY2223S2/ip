@@ -1,6 +1,7 @@
 package aqua.logic;
 
 import aqua.manager.LogicManager;
+import aqua.exception.LoadException;
 import aqua.manager.IoManager;
 
 
@@ -9,25 +10,35 @@ import aqua.manager.IoManager;
  */
 public class Executor {
     private final LogicManager manager;
-    private final IoManager uiManager;
+    private final IoManager ioManager;
 
 
     public Executor(LogicManager manager, IoManager uiManager) {
         this.manager = manager;
-        this.uiManager = uiManager;
+        this.ioManager = uiManager;
+    }
+
+
+    public void start() {
+        try {
+            manager.load();
+        } catch (LoadException loadException) {
+            ioManager.replyException(loadException);
+        }
+        ioManager.greet();
     }
 
 
     public void processInput() {
         // get input string
-        String input = uiManager.readLine();
+        String input = ioManager.readLine();
 
         // form command input
         CommandLineInput commandInput;
         try {
             commandInput = manager.getInputParser().parse(input);
         } catch (Throwable ex) {
-            uiManager.replyException(ex);
+            ioManager.replyException(ex);
             return;
         }
 
@@ -44,12 +55,12 @@ public class Executor {
 
 
     private void handleExecutionSuccess(ExecutionService service) {
-        uiManager.reply(service.getValue());
+        ioManager.reply(service.getValue());
         service.followUpDispatcher().ifPresent(this::initiateService);
     }
 
 
     private void handleExecutionFailure(ExecutionService service) {
-        uiManager.replyException(service.getException());
+        ioManager.replyException(service.getException());
     }
 }

@@ -41,13 +41,18 @@ public class MainWindow extends UiComponent<VBox> {
     }
 
 
+    public void start() {
+        executor.start();
+    }
+
+
     private Executor initialiseExecutor(LogicManager logicManager) {
         IoManager ioManager = new IoManager(this::getInput, this::displayReply);
         return new Executor(logicManager, ioManager);
     }
 
 
-    public String getInput() {
+    private String getInput() {
         String input = inputField.getText();
         inputField.setText("");
         SpeechBubble bubble = new SpeechBubble(true);
