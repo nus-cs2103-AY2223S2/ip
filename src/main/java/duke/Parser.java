@@ -11,7 +11,7 @@ public class Parser {
     /**
      * Runs the input command given by the user and write into file if list has changed
      * 
-     * @param taskList Arraylist containing task objects
+     * @param tasks Arraylist containing task objects
      * @param storage Storage class that manages save and loading
      * @param words User input
      * @return true if command is bye, otherwise return false
@@ -19,7 +19,7 @@ public class Parser {
      * @throws NumberFormatException When a string is given instead of a number for some commmands
      * @throws InvalidCommandException When user inputs an invalid command
      */
-    public boolean runCommand(TaskList taskList, Storage storage, String[] words) throws IndexOutOfBoundsException,
+    public boolean runCommand(TaskList tasks, Storage storage, String[] words) throws IndexOutOfBoundsException,
             NumberFormatException, InvalidCommandException {
 
         boolean hasTaskChanged = false;
@@ -29,17 +29,17 @@ public class Parser {
             System.out.println("Bye. Hope to see you again soon!");
             return true;
         case "LIST":
-            taskList.printList();
+            tasks.printList();
             break;
         case "MARK":
-            Task markTask = taskList.getTask(Integer.parseInt(words[1]));
+            Task markTask = tasks.getTask(Integer.parseInt(words[1]));
             markTask.mark();
             hasTaskChanged = true;
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(markTask);
             break;
         case "UNMARK":
-            Task unmarkTask = taskList.getTask(Integer.parseInt(words[1]));
+            Task unmarkTask = tasks.getTask(Integer.parseInt(words[1]));
             unmarkTask.unmark();
             hasTaskChanged = true;
             System.out.println("OK, I've marked this task as not done yet:");
@@ -49,16 +49,16 @@ public class Parser {
         case "DEADLINE":
         case "EVENT":
             String[] sliceWords = Arrays.copyOfRange(words, 1, words.length);
-            hasTaskChanged = taskList.addTask(sliceWords, words[0]);
+            hasTaskChanged = tasks.addTask(sliceWords, words[0]);
             break;
         case "DELETE":
-            hasTaskChanged = taskList.deleteTask(Integer.parseInt(words[1]));
+            hasTaskChanged = tasks.deleteTask(Integer.parseInt(words[1]));
             break;
         default:
             throw new InvalidCommandException("Invalid command. Please try again");
         }
         if(words[0] != "LIST" && hasTaskChanged) {
-            storage.saveFile(taskList.getListOfTask());
+            storage.saveFile(tasks.getListOfTask());
         }
         return false;
     }

@@ -25,11 +25,11 @@ public class Storage {
     /**
      * Saves the list of task in txt file
      */ 
-    public void saveFile(ArrayList<Task> listOfTasks) {
+    public void saveFile(ArrayList<Task> tasks) {
         String fileContent;
         String dateTime;
         fileContent = "  TYPE  | COMPLETED | DETAILS | DATE\n";
-        for (Task t : listOfTasks) {
+        for (Task t : tasks) {
             dateTime = null;
             if (t.getType() == 'T') {
                 fileContent += "  Todo  |";
@@ -90,7 +90,7 @@ public class Storage {
      */ 
     public ArrayList<Task> loadFile() {
         File file = new File(FILE_PATH);
-        ArrayList<Task> listOfTasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         try {   
             if (file.exists()) {
                 BufferedReader fileReader = new BufferedReader(new FileReader(file));
@@ -116,12 +116,12 @@ public class Storage {
                         }
                         if(splitInput[1].contains("YES"))
                             task.mark();
-                        listOfTasks.add(task);
+                        tasks.add(task);
                     }
                     hasSkipped = false;
                 }
                 fileReader.close();
-                return listOfTasks;
+                return tasks;
             }
         } catch (IOException e) {
             System.out.println("Error when loading file, a new file will be created");

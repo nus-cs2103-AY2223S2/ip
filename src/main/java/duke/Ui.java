@@ -23,19 +23,19 @@ public class Ui {
      /**
      * Receives command given by the user and pass to parser to run the command
      * 
-     * @param taskList Arraylist containing task objects
+     * @param tasks Arraylist containing task objects
      * @param storage Storage class that manages save and loading
      * @return true if command is bye, otherwise return false
      * @throws IOException If an I/O error occurs
      */
-    public boolean receiveInput(TaskList taskList, Storage storage) throws IOException {
+    public boolean receiveInput(TaskList tasks, Storage storage) throws IOException {
         String[] words;
         boolean isCommandBye = false;
         System.out.print("Type your input below: \n");
         words = br.readLine().split(" ");
 
         try { 
-            isCommandBye = parser.runCommand(taskList, storage, words);
+            isCommandBye = parser.runCommand(tasks, storage, words);
         } catch(IndexOutOfBoundsException e) {
             System.out.println("Number out of range/empty. Please try again!");
         } catch(NumberFormatException e) {

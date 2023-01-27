@@ -12,7 +12,7 @@ import duke.task.Todo;
  * Contains the task list and it has operations to add/delete tasks in the list
  */
 public class TaskList {
-    private ArrayList<Task> listOfTasks;
+    private ArrayList<Task> tasks;
     
     /**
      * Constructs a new TaskList instance
@@ -20,7 +20,7 @@ public class TaskList {
      * @param list List of the tasks
      */
     public TaskList(ArrayList<Task> list) {
-        listOfTasks = list;
+        tasks = list;
     }
 
     /**
@@ -74,9 +74,9 @@ public class TaskList {
             }
 
         }
-        listOfTasks.add(task);
+        tasks.add(task);
         System.out.println("Got it. I've added this task:\n" + task);
-        System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         return true;
     }
 
@@ -89,9 +89,9 @@ public class TaskList {
      */ 
     public boolean deleteTask(int num) throws IndexOutOfBoundsException {
         Task selectedTask = getTask(num);
-        listOfTasks.remove(selectedTask);
+        tasks.remove(selectedTask);
         System.out.println("Noted. I've removed this task:\n" + selectedTask);
-        System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         return true;
     }
 
@@ -99,8 +99,8 @@ public class TaskList {
      * Prints the list
      */ 
     public void printList() {
-        for (int i = 0; i < listOfTasks.size(); i++) {
-            System.out.println((i+1) + ". " + listOfTasks.get(i));
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i+1) + ". " + tasks.get(i));
         }
     }
 
@@ -111,7 +111,7 @@ public class TaskList {
      * @return returns a Task object
      */ 
     public Task getTask(int num) throws IndexOutOfBoundsException {
-        return listOfTasks.get(num-1);
+        return tasks.get(num-1);
     }
 
     /**
@@ -120,6 +120,6 @@ public class TaskList {
      * @return return a list of task
      */
     public ArrayList<Task> getListOfTask() {
-        return listOfTasks;
+        return tasks;
     }
 }

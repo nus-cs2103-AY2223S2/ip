@@ -19,16 +19,17 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Eren\nWhat can I do for you?");
-        boolean bool;
+        boolean hasEnded;
         Storage storage = new Storage();
-        TaskList taskList = new TaskList(storage.loadFile());
+        TaskList tasks = new TaskList(storage.loadFile());
         Parser parser = new Parser();
         Ui ui = new Ui(parser);
 
         while(true) {
-            bool = ui.receiveInput(taskList, storage);
-            if(bool)
+            hasEnded = ui.receiveInput(tasks, storage);
+            if(hasEnded){
                 break;
+            }
         }
     }
 }
