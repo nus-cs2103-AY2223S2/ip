@@ -1,12 +1,17 @@
+// Level 7
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.io.FileWriter;
 
+// Level 8
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+// Level 1
 import java.util.List;
 import java.util.ArrayList;
-
 import java.util.Scanner;
 
 public class Duke {
@@ -50,6 +55,8 @@ public class Duke {
             Duke.say(e.toString());
         } catch (IllegalArgumentException e) {
             Duke.say("What are you talkin about man?");
+        } catch (DateTimeParseException e) {
+            Duke.say("Wrong date format given.");
         }
     }
 
@@ -171,7 +178,7 @@ public class Duke {
      * @param op The type of task given.
      * @throws DukeException
      */
-    public static void addTask(String[] command, Operation op) throws DukeException {
+    public static void addTask(String[] command, Operation op) throws DukeException, DateTimeParseException {
 
         if (command.length < 2) {
             throw new DukeException("No task description given.");
@@ -182,31 +189,35 @@ public class Duke {
         StringBuilder text = new StringBuilder();
 
         switch (op) {
-            case TODO:
-                Task todo = new ToDo(description);
-                taskList.add(todo);
-                text.append("New todo task added: " + todo);
-                break;
 
-            case DEADLINE:
-                String[] deadlineDescription = description.split("/by", 2);
-                Task deadline = new Deadline(deadlineDescription[0], deadlineDescription[1]);
-                taskList.add(deadline);
-                text.append("New deadline added: " + deadline);
-                break;
+        case TODO:
+            Task todo = new ToDo(description);
+            taskList.add(todo);
+            text.append("New todo task added: " + todo);
+            break;
 
-            case EVENT:
-                String[] eventDescription = description.split("/from", 2);
+        case DEADLINE:
+            String[] deadlineString = description.split("/by", 2);
+            String deadlineDescription = deadlineString[0];
+            LocalDate by = LocalDate.parse(deadlineString[1].trim());
+            Task deadline = new Deadline(deadlineDescription, by);
+            taskList.add(deadline);
+            text.append("New deadline added: " + deadline);
+            break;
 
-                // Parse the string to get to and from dates of the event
-                String[] fromAndTo = eventDescription[1].split("/to", 2);
-                String from = fromAndTo[0];
-                String to = fromAndTo[1];
+        case EVENT:
+            String[] eventString = description.split("/from", 2);
+            String eventDescription = eventString[0];
 
-                Task event = new Event(eventDescription[0], from, to);
-                taskList.add(event);
-                text.append("New event added: " + event);
-                break;
+            // Parse the string to get to and from dates of the event
+            String[] fromAndTo = eventString[1].split("/to", 2);
+            LocalDate from = LocalDate.parse(fromAndTo[0].trim());
+            LocalDate to = LocalDate.parse(fromAndTo[1].trim());
+
+            Task event = new Event(eventDescription, from, to);
+            taskList.add(event);
+            text.append("New event added: " + event);
+            break;
         }
 
         text.append(System.lineSeparator() + "You have " + taskList.size() + " task(s) in the list.");
@@ -235,6 +246,8 @@ public class Duke {
 
     /**
      * Adds a task from saved file to the task list.
+     *
+     * @return
      */
     private static void loadTaskFromFile(String task) {
         String[] command = task.split("\\|");
@@ -244,18 +257,18 @@ public class Duke {
         Task t = new Task("placeholder");
 
         switch (taskType) {
-        case "T":
-            t = new ToDo(description);
-            break;
-        case "D":
-            String by = command[3];
-            t = new Deadline(description, by);
-            break;
-        case "E":
-            String from = command[3];
-            String to = command[4];
-            t = new Event(description, from, to);
-            break;
+            case "T":
+                t = new ToDo(description);
+                break;
+            case "D":
+                LocalDate by = LocalDate.parse(command[3].trim());
+                t = new Deadline(description, by);
+                break;
+            case "E":
+                LocalDate from = LocalDate.parse(command[3].trim());
+                LocalDate to = LocalDate.parse(command[4].trim());
+                t = new Event(description, from, to);
+                break;
         }
 
         boolean isMarked = command[1].equals("1");
