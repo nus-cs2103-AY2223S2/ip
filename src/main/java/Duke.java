@@ -105,7 +105,7 @@ public class Duke {
                                 continue;
                             }
                             if (isDateTime) {
-                                by.append(" ").append(s);
+                                by.append(s);
                             } else {
                                 taskDescription.append(" ").append(s);
                             }
