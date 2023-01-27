@@ -5,42 +5,42 @@ import duke.task.Deadline;
 import duke.task.Event;
 
 public class Parser {
-    /** 
-     * Creates task and stores it in Task arraylist.
-     * 
-     * @param tasks List of tasks.
-     * @param taskType Type of task.
-     * @param descriptions The descriptions of the task.
-     */
-    protected static void parseInput(TaskList tasks, String taskType, String[] descriptions) {
-        switch (taskType) {
-        case "list":
-            tasks.listTasks();
-            break;
-        case "mark":
-            tasks.markTask(tasks.getTask(Integer.parseInt(descriptions[1]) - 1));
-            break;
-        case "unmark":
-            tasks.unmarkTask(tasks.getTask(Integer.parseInt(descriptions[1]) - 1));
-            break;
-        case "todo":
-            try {
-                if (descriptions.length != 2) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
-                }
+	/**
+	 * Creates task and stores it in Task arraylist.
+	 *
+	 * @param tasks List of tasks.
+	 * @param taskType Type of task.
+	 * @param descriptions The descriptions of the task.
+	 */
+	protected static void parseInput(TaskList tasks, String taskType, String[] descriptions) {
+		switch (taskType) {
+		case "list":
+			tasks.listTasks();
+			break;
+		case "mark":
+			tasks.markTask(tasks.getTask(Integer.parseInt(descriptions[1]) - 1));
+			break;
+		case "unmark":
+			tasks.unmarkTask(tasks.getTask(Integer.parseInt(descriptions[1]) - 1));
+			break;
+		case "todo":
+			try {
+				if (descriptions.length != 2) {
+					throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
+				}
 
-                tasks.addTask(new ToDo(descriptions[1]));
-            } catch (DukeException error) {
-                Ui.errorMsg(error.getMessage());
-            }
-            break;
-        case "deadline":
-            try {
-                String[] deadlineDescription = descriptions[1].split("/by ");
+				tasks.addTask(new ToDo(descriptions[1]));
+			} catch (DukeException error) {
+				Ui.errorMsg(error.getMessage());
+			}
+			break;
+		case "deadline":
+			try {
+				String[] deadlineDescription = descriptions[1].split("/by ");
 
-                if (deadlineDescription.length != 2) {
-                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
-                }
+				if (deadlineDescription.length != 2) {
+					throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
+				}
 
                 tasks.addTask(new Deadline(deadlineDescription[0], deadlineDescription[1]));
             } catch (DukeException error) {
@@ -55,17 +55,21 @@ public class Parser {
                     throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
                 }
 
-                tasks.addTask(new Event(eventDescription[0], eventDescription[1], eventDescription[2]));
-            } catch (DukeException e) {
-                Ui.errorMsg(e.getMessage());
-            }
-            break;
-        case "delete":
-            tasks.removeTask(Integer.parseInt(descriptions[1]) - 1);
-            break;
-        default:
-            Ui.unknownInputMsg();
-            break;
-        }
-    }
+				tasks.addTask(new Event(eventDescription[0], eventDescription[1], eventDescription[2]));
+			} catch (DukeException e) {
+				Ui.errorMsg(e.getMessage());
+			}
+			break;
+		case "delete":
+			tasks.removeTask(Integer.parseInt(descriptions[1]) - 1);
+			break;
+        case "find":
+			TaskList filteredTasks = new TaskList(tasks.filteredTaskList(descriptions[1]));
+			filteredTasks.listTasks();
+			break;
+		default:
+			Ui.unknownInputMsg();
+			break;
+		}
+	}
 }
