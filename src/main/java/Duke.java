@@ -1,6 +1,10 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+
 public class Duke {
     public static final String HORIZONTAL_LINE =
             "____________________________________________________________";
@@ -16,6 +20,8 @@ public class Duke {
         DEADLINE,
         EVENT
     }
+    private Storage storage;
+    private static final File savedFile = new File("savedFile.txt");
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -25,7 +31,22 @@ public class Duke {
     public Duke() {
         commandList = new ArrayList<>();
     }
+
     public void run() {
+        //Creating/Loading from storage
+        this.storage = new Storage();
+        boolean isCreated = savedFile.exists();
+        if (isCreated) {
+            this.storage.loadFromFile(new File("savedFile.txt"));
+            commandList = this.storage.getStorage();
+        } else {
+            try {
+                savedFile.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException("Unable to create file" + e);
+            }
+        }
+
         System.out.println(GREETING_MESSAGE);
         Scanner scanner = new Scanner(System.in);
         boolean isOver = false;
@@ -33,6 +54,8 @@ public class Duke {
             String userCommands = scanner.nextLine();
             String[] strArray = userCommands.split(" ", 2);
             String action = strArray[0];
+            boolean isModified = false;
+
             if (action.equalsIgnoreCase("bye")) {
                 isOver = true;
                 System.out.println(BYE_MESSAGE);
@@ -75,9 +98,14 @@ public class Duke {
                     System.out.println(HORIZONTAL_LINE + "\n" + "Got it. I've added this task:" +
                             "\n" + task + "\n" + "Now you have " + numberOfTask +
                             " tasks in the list." + "\n" + HORIZONTAL_LINE);
+                    isModified = true;
                 } catch (InvalidTaskTypeException | EmptyCommandException | InvalidTimeException e) {
                     System.out.println(HORIZONTAL_LINE + "\n" + e.getMessage() + "\n" + HORIZONTAL_LINE);
                 }
+            }
+            if(isModified) {
+                storage.editStorage(commandList);
+                storage.saveToFile(savedFile);
             }
         }
     }
@@ -102,15 +130,15 @@ public class Duke {
         }
 
         if (type.equals(TaskTypes.TODO)) {
-            command = strArray[1];
+            command = strArray[1].trim();
             return new ToDo(command);
         } else if (type.equals(TaskTypes.DEADLINE)) {
             String[] temp = strArray[1].split("/by", 2);
             if (temp.length < 2 || temp[1].trim().equals("")) {
                 throw new InvalidTimeException();
             }
-            command = temp[0];
-            String deadline = temp[1];
+            command = temp[0].trim();
+            String deadline = temp[1].trim();
             return new Deadline(command, deadline);
         } else if (type.equals(TaskTypes.EVENT)) {
             String[] temp = strArray[1].split("/from", 2);
@@ -121,9 +149,9 @@ public class Duke {
             if (temp2.length < 2 || temp2[1].trim().equals("")) {
                 throw new InvalidTimeException();
             }
-            command = temp[0];
-            String start = temp2[0];
-            String end = temp2[1];
+            command = temp[0].trim();
+            String start = temp2[0].trim();
+            String end = temp2[1].trim();
             return new Event(command, start, end);
         } else {
             throw new InvalidTaskTypeException();

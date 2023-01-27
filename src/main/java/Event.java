@@ -11,6 +11,18 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from:" + start + "to:" + end + ")";
+        return "[E]" + super.toString() + "(from: " + start + " to: " + end + ")";
     }
+
+    @Override
+    public String taskToData() {
+        int done = isDone() ? 1 : 0;
+        String task = getTask();
+        return String.format("[E] | %d | %s | %s | %s",
+                done,
+                task,
+                this.start,
+                this.end);
+    }
+
 }
