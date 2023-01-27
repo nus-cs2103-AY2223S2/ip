@@ -10,7 +10,7 @@ public class Leo {
     private final Ui ui;
 
     public static void main(String[] args) {
-        new Leo("ip/data/leo.txt");
+        new Leo("data/leo.txt");
     }
 
     private Leo(String filePath) {
