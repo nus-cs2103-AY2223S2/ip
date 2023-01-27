@@ -61,6 +61,10 @@ public class ChatBot {
                     bc.executeCommand();
                     fileManager.saveTasksToFile(taskManager);
                     break loop;
+                case "find":
+                    FindCommand fc = new FindCommand(taskManager, inputArr[1]);
+                    fc.executeCommand();
+                    break;
                 case "check":
                     CheckCommand cc = new CheckCommand(taskManager, inputArr[1]);
                     cc.executeCommand();
