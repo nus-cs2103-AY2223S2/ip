@@ -77,6 +77,13 @@ public class Ui {
         );
     }
 
+    public void listMatchingTasks(TaskList tasks) {
+        respond(
+            "Here are the matching tasks in your list:",
+            tasks.toString()
+        );
+    }
+
     /**
      * Prints the response after a task has been marked as completed.
      *

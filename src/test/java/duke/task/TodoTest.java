@@ -15,7 +15,7 @@ public class TodoTest {
             Task task = new Todo(description, false);
             assertEquals(description, task.getDescription());
         } catch (DukeException e) {
-            fail();
+            fail(e);
         }
     }
 
@@ -49,7 +49,7 @@ public class TodoTest {
             task.unmark();
             assertEquals(false, task.isCompleted());
         } catch (Exception e) {
-            fail();
+            fail(e);
         }
     }
 }

@@ -24,7 +24,7 @@ public class StorageTest {
             Storage.save(tasks);
             assertArrayEquals(Storage.load().toArray(), tasks.toArray());
         } catch (Exception e) {
-            fail();
+            fail(e);
         }
     }
 }

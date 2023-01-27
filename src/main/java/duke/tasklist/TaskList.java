@@ -95,6 +95,16 @@ public class TaskList {
         return t;
     }
 
+    public TaskList matches(String pattern) throws DukeException {
+        TaskList filtered = new TaskList();
+        for (Task task: tasks) {
+            if (task.matches(pattern)) {
+                filtered.add(task);
+            }
+        }
+        return filtered;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("");

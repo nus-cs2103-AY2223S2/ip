@@ -15,7 +15,7 @@ public class EventTest {
             Task task = new Event(description, false, "26/1/2023 2303", "26/1/2023 2359");
             assertEquals(description, task.getDescription());
         } catch (DukeException e) {
-            fail();
+            fail(e);
         }
     }
 
@@ -69,7 +69,7 @@ public class EventTest {
             task.unmark();
             assertEquals(false, task.isCompleted());
         } catch (Exception e) {
-            fail();
+            fail(e);
         }
     }
 }

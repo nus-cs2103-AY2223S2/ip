@@ -75,6 +75,10 @@ public class Duke {
             int index = Integer.parseInt(cmd.substring(7)) - 1;
             Task task = tasks.delete(index);
             ui.deleteTask(task, tasks.length());
+        } else if (cmd.matches("^find .*$")) {
+            String pattern = cmd.substring(5);
+            TaskList filteredTasks = tasks.matches(pattern);
+            ui.listMatchingTasks(filteredTasks);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
