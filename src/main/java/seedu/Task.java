@@ -16,13 +16,12 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public boolean setStatus(boolean isDone) {
-        this.isDone = isDone;
-        return isDone;
+    public void markDone() {
+        this.isDone = true;
     }
 
-    public boolean isDone() {
-        return isDone;
+    public void markUnDone() {
+        this.isDone = false;
     }
 
     @Override
@@ -30,8 +29,8 @@ public class Task {
         return "[" + getStatusIcon() + "] " + this.description;
     }
     public String toStoreString() {
-        String isDoneIndicator = isDone ? "1 |" : "0 |";
-        return isDoneIndicator + this.description;
+        String isDoneIndicator = isDone ? "1" : "0";
+        return isDoneIndicator + " | " + this.description;
     }
 
 
