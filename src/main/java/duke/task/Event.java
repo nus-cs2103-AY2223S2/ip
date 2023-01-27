@@ -29,7 +29,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString()
+        return "[E]" + super.toString()
                 + " (from: " + this.startDt.toLocalDate() + " " + this.startDt.toLocalTime()
                 + " to: " + this.endDt.toLocalDate() + " " + this.endDt.toLocalTime() + ")";
     }
