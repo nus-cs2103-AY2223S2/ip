@@ -6,13 +6,17 @@ public class Deadline extends Duke.Task {
         this.deadlineDue = "(" + "by:" + strArr[1].substring(2) + ")";
     }
 
+    public Deadline(String content, boolean mark) {
+        super(content.split("\\(")[0], mark);
+        this.deadlineDue = "(" + content.split("\\(")[1];
+    }
+
     public String toString() {
         String sign = "";
-        if (super.mark == false) {
-            sign = " ";
-        } else {
-            sign = "X";
-        }
-        return ". [D][" + sign + "] " + super.content + deadlineDue;
+        return ". [D][" +super.markSign(super.mark) + "] " + super.content + deadlineDue;
+    }
+
+    public String printRecord() {
+        return "[D]" + " [" + super.markSign(super.mark) + "] " + super.content + " " + this.deadlineDue + "\n";
     }
 }

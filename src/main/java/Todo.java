@@ -4,12 +4,14 @@ public class Todo extends Duke.Task {
     }
 
     public String toString() {
-        String sign = "";
-        if (super.mark == false) {
-            sign = " ";
-        } else {
-            sign = "X";
-        }
-        return ". [T][" + sign + "] " + super.content;
+        return ". [T][" + super.markSign(super.mark) + "] " + super.content;
+    }
+
+    public Todo(String content, boolean mark) {
+        super(content, mark);
+    }
+
+    public String printRecord() {
+        return "[T]" + " [" + super.markSign(super.mark) + "] " + super.content + "\n";
     }
 }
