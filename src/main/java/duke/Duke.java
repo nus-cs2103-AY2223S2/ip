@@ -1,17 +1,15 @@
 package duke;
 
 import duke.command.Command;
-
 import duke.exception.DukeException;
-
 import duke.parser.Parser;
-
 import duke.storage.Storage;
-
 import duke.task.TaskList;
-
 import duke.ui.Ui;
 
+/**
+ * Encapsulates the related fields and behavior of Duke.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -40,7 +38,7 @@ public class Duke {
     public void run() {
         ui.printWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String input = ui.readCommand();
                 Command cmd = Parser.parse(input);

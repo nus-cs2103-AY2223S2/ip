@@ -1,7 +1,10 @@
 package duke.parser;
 
-import duke.Formatter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
+import duke.Formatter;
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -9,19 +12,12 @@ import duke.command.DeleteCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
-
 import duke.exception.IncompleteDescException;
 import duke.exception.InvalidInputException;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.time.LocalDate;
-
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Encapsulates the related fields and behavior of a parser that parses the inputs given.
@@ -87,7 +83,7 @@ public class Parser {
             if (ldEnd.isBefore(LocalDate.now())) {
                 throw new InvalidInputException("The given deadline (yyyy/mm/dd) " + end + " has passed.");
             }
-            return new Deadline(name,ldEnd);
+            return new Deadline(name, ldEnd);
         } catch (DateTimeParseException e) {
             throw new InvalidInputException("Please enter the date/time in \"yyyy/mm/dd\" format.");
         }

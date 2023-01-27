@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.Formatter;
-
 import java.time.LocalDate;
+
+import duke.Formatter;
 
 /**
  * Encapsulates the related fields and behavior of an Event task.

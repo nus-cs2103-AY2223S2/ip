@@ -1,15 +1,15 @@
 package duke.task;
 
-import duke.exception.OutOfBoundsException;
-
 import java.util.ArrayList;
+
+import duke.exception.OutOfBoundsException;
 
 /**
  * Encapsulates the related fields and behavior of the list containing tasks.
  */
 public class TaskList {
-     //An ArrayList to store the tasks.
-     private ArrayList<Task> taskList;
+    //An ArrayList to store the tasks.
+    private ArrayList<Task> taskList;
 
     /**
      * Instantiates TaskList with no arguments given.

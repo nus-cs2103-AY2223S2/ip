@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDate;
-
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -18,7 +17,7 @@ public class Formatter {
         int day = ld.getDayOfMonth();
         String month = ld.getMonth().toString();
         int year = ld.getYear();
-        return String.format("%d %s %d",day, month, year);
+        return String.format("%d %s %d", day, month, year);
     }
 
     /**

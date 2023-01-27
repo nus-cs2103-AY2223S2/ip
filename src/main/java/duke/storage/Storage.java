@@ -1,23 +1,19 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-
-import duke.parser.Parser;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Encapsulates the related fields and behavior of the Storage.
