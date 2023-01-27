@@ -1,7 +1,6 @@
 package aqua.manager;
 
 import java.util.Optional;
-import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
