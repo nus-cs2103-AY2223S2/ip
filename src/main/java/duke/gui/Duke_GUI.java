@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.awt.print.PrinterAbortException;
 import java.util.Objects;
 
 public class Duke_GUI extends Application {
@@ -68,7 +69,7 @@ public class Duke_GUI extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         dialogContrainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
+        welcome();
         //actions
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -94,6 +95,17 @@ public class Duke_GUI extends Application {
     private void handleUserInput(){
         input = userInput.getText();
         output = getResponse(input);
+
+        dialogContrainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, user),
+                DialogBox.getDukeDialog(output, duke)
+        );
+        userInput.clear();
+    }
+
+    private void welcome(){
+        input = "Lets Go buddy\n";
+        output = Parser.WRONG_INPUT;
 
         dialogContrainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, user),
