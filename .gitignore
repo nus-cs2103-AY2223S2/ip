@@ -16,3 +16,4 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 src/Main/java/Test.java
+data/duke.txt
