@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -13,6 +16,10 @@ public abstract class Task {
 
     void undoTask() {
         this.isDone = false;
+    }
+    String formatDateTime (LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH: mm");
+        return dateTime.format(formatter);
     }
 
     @Override
