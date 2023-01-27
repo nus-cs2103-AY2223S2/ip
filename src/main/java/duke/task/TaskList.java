@@ -8,15 +8,10 @@ import duke.exception.OutOfBoundsException;
  * Encapsulates the related fields and behavior of the list containing tasks.
  */
 public class TaskList {
-<<<<<<< HEAD
-    //An ArrayList to store the tasks.
-    private ArrayList<Task> taskList;
-=======
     /**
      * An ArrayList to store the tasks.
      */
     private ArrayList<Task> tasks;
->>>>>>> branch-A-CodingStandard
 
     /**
      * Instantiates TaskList with no arguments given.
