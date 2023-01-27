@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Interface class that handles input accepting and output display
+ */
 public class UserInterface {
 
     private static final String LOGO =

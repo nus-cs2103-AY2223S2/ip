@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class representing a Deadline task
+ */
 public class DeadlineTask extends Task {
     private final LocalDate deadline;
     private static final String INDICATOR = "[Deadline]";

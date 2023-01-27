@@ -5,6 +5,9 @@ import duke.tasks.Task;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * List data structure to store the tasks in Duke
+ */
 public class TaskList implements Serializable {
 
     private static final String INVALID_INDEX_EXCEPTION = "Invalid task index given for Mark/Unmark/Delete command.";

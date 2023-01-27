@@ -4,6 +4,9 @@ import duke.Parser;
 import duke.TaskList;
 import duke.DukeException;
 
+/**
+ * Command to mark a task as completed
+ */
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 

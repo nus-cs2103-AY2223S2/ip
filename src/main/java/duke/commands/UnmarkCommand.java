@@ -4,6 +4,9 @@ import duke.Parser;
 import duke.TaskList;
 import duke.DukeException;
 
+/**
+ * Command to unmark a task
+ */
 public class UnmarkCommand extends Command {
     public static final String COMMAND_FORMAT = "unmark";
 

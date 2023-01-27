@@ -6,18 +6,22 @@ import duke.TaskList;
 import duke.tasks.DeadlineTask;
 
 /**
- * Command class pertaining to creating a Deadline task
+ * Command to create a Deadline task
  */
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     private static final String DEADLINE_PREFIX = "/by ";
 
-    {@inheritDoc}
+    /**
+     * {@inheritDoc}
+     */
     public DeadlineCommand(String input) {
         super(input);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks) throws DukeException {
         String input = super.input;

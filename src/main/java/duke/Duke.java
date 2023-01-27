@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Main driver class for Duke
+ */
 public class Duke {
 
     private Storage storage;

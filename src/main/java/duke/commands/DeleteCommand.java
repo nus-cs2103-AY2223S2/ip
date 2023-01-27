@@ -1,9 +1,12 @@
 package duke.commands;
 
+import duke.DukeException;
 import duke.Parser;
 import duke.TaskList;
-import duke.DukeException;
 
+/**
+ * Command to delete a task from the list
+ */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
@@ -15,8 +18,10 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks) throws DukeException {
         String input = super.input;
         try {
+            // Prepare argument for deleteTask
             String[] tokens = input.split(" ");
             int taskIndex = Integer.parseInt(tokens[1]);
+
             String result = tasks.deleteTask(taskIndex);
             return result;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {

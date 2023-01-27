@@ -5,6 +5,9 @@ import duke.UserInterface;
 
 import java.io.Serializable;
 
+/**
+ * Abstract parent class of task classes
+ */
 public abstract class Task implements Serializable {
     private static final String COMPLETED = " [O] ";
     private static final String NOT_COMPLETED = " [ ] ";
@@ -14,6 +17,12 @@ public abstract class Task implements Serializable {
     private static final String UNMARKED_RESPONSE = "Got it. Task has been unmarked:\n";
     private final String name;
     private boolean isCompleted;
+
+    /**
+     * Constructor for a task
+     * @param name Given task name
+     * @throws DukeException if no name is provided
+     */
     Task(String name) throws DukeException {
         if (name.isEmpty()) {
             throw new DukeException(FORMAT_EXCEPTION);

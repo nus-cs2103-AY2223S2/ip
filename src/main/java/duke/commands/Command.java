@@ -11,7 +11,7 @@ public abstract class Command {
     String input;
 
     /**
-     * Constructs the respective Command class using user input
+     * Class constructor for this Command class using user input
      *
      * @param input User input with arguments for command execution
      */

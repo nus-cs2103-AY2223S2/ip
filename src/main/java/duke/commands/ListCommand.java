@@ -4,6 +4,9 @@ import duke.Parser;
 import duke.TaskList;
 import duke.DukeException;
 
+/**
+ * Command to display all tasks in the list
+ */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";

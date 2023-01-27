@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import duke.DukeException;
 
+/**
+ * Class representing an Event task
+ */
 public class EventTask extends Task {
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -35,7 +38,6 @@ public class EventTask extends Task {
             throw new DukeException(INVALID_DATE_EXCEPTION);
         }
     }
-
 
     @Override
     public String toString() {
