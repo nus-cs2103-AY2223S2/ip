@@ -1,3 +1,5 @@
+package src.main.java.command;
+
 public class HelpCommand extends Command {
     private static final String HELP_TEXT = "Hello! You can use the following commands:\n" +
             "To add a todo task, type \"todo \" + your task.\n" +

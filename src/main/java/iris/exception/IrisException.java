@@ -1,3 +1,5 @@
+package src.main.java.exception;
+
 public class IrisException extends Exception{
     private String message;
     public IrisException() {

@@ -1,3 +1,5 @@
+package src.main.java.command;
+
 public abstract class Command {
     public boolean isEnd() {
         return false;

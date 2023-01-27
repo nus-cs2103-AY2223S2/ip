@@ -1,3 +1,5 @@
+package src.main.java.command;
+
 public class ResetCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, TaskStore taskStore) throws IrisException {

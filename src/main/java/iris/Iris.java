@@ -1,4 +1,7 @@
-import java.util.Scanner;
+package src.main.java;
+
+import src.main.java.command.Command;
+import src.main.java.exception.IrisException;
 
 /**
  * A teenage chatbot that can store text entered by the user and

@@ -1,3 +1,5 @@
+package src.main.java.command;
+
 public class ExitCommand extends Command{
     @Override
     public boolean isEnd() {

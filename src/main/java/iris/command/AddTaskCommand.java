@@ -1,3 +1,5 @@
+package src.main.java.command;
+
 public class AddTaskCommand extends Command {
     Task task;
 

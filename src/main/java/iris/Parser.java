@@ -1,3 +1,10 @@
+package src.main.java;
+
+import src.main.java.command.Command;
+import src.main.java.command.HelpCommand;
+import src.main.java.exception.MissingFieldException;
+import src.main.java.exception.NoTaskException;
+
 public class Parser {
     enum CommandWord {
         help, bye, list, mark, unmark, delete, todo, deadline, event, reset, filter
