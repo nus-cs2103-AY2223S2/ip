@@ -4,13 +4,13 @@ package task;
  * The to-do class extending from the Task.Task class.
  * To-do items have no starting date or deadlines.
  */
-public class ToDo extends Task {
+public class Todo extends Task {
     /**
      * Default constructor
      *
      * @param description: a string describing the to-do task
      */
-    public ToDo(String description) {
+    public Todo(String description) {
         super(description);
         this.type = "T";
     }

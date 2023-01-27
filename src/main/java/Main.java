@@ -1,4 +1,5 @@
 import duke.Duke;
+import command.*;
 
 /**
  * The main class

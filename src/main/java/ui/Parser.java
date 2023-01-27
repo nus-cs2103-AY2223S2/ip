@@ -1,16 +1,39 @@
 package ui;
 
+import static java.util.Map.entry;
+
 import command.Command;
 
-import duke.DukeException;
+import command.CommandClass;
+import command.TaskCommand;
+import command.DeleteTaskCommand;
+import command.ExitCommand;
+import command.*;
 
+import duke.DukeException;
+import task.Task;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Map;
 
 /**
  * A string parser that processes user-input commands.
  */
 public class Parser {
+    private static Map<String, String> stringToCommandClass = Map.ofEntries(
+            entry("list", "ListCommand"),
+            entry("mark", "MarkCommand"),
+            entry("unmark", "UnmarkCommand"),
+            entry("delete", "DeleteTaskCommand"),
+            entry("todo", "TaskCommand"),
+            entry("event", "TaskCommand"),
+            entry("deadline", "TaskCommand"),
+            entry("bye", "ExitCommand")
+    );
+
     /**
      * Gets the content of the command
      *
@@ -64,5 +87,19 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new DukeException("The date could not be parsed!");
         }
+    }
+
+    public static CommandClass parseCommand(String command, boolean suppressPrint) throws DukeException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        Class<?> c = Class.forName("command." + stringToCommandClass.get(command.split(" ")[0]));
+        Constructor<?> cons = c.getConstructor(String.class, boolean.class);
+        Object object = cons.newInstance(command, !suppressPrint);
+        return (CommandClass) object;
+
+//        try {
+//            ;
+//        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException |
+//                 InvocationTargetException e) {
+//            throw new DukeException(e.toString());
+//        }
     }
 }

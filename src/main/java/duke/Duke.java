@@ -1,16 +1,20 @@
 package duke;
 
 import command.Command;
+import command.CommandClass;
+import command.*;
+
 import storage.Storage;
 import task.Task;
 import task.TaskList;
-import task.ToDo;
+import task.Todo;
 import task.Event;
 import task.Deadline;
 
 import ui.Parser;
 import ui.TextUi;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 
@@ -63,6 +67,16 @@ public class Duke {
                 ui.printStructuredString(e.toString());
             } catch (NumberFormatException e) {
                 ui.printStructuredString("Please enter a number.");
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            } catch (NoSuchMethodException e) {
+                throw new RuntimeException(e);
+            } catch (InstantiationException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
         }
 
@@ -89,6 +103,16 @@ public class Duke {
                 handleCommand(s, true);
             } catch (DukeException e) {
                 System.out.println(e.toString());
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            } catch (NoSuchMethodException e) {
+                throw new RuntimeException(e);
+            } catch (InstantiationException e) {
+                throw new RuntimeException(e);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -104,38 +128,41 @@ public class Duke {
      * @param suppressPrint: suppress print out message or not
      * @throws DukeException when the command is unknown
      */
-    public void handleCommand(String inMsg, boolean suppressPrint) throws DukeException {
-        String stringToPrint = "";
-        if (parser.checkCommand(inMsg, Command.LIST)) {
-            stringToPrint = listTasks();
-        } else if (parser.checkCommand(inMsg, Command.MARK)) {
-            int idx = Integer.parseInt(inMsg.substring(5)) - 1;
-            stringToPrint = markTaskDone(idx);
-        } else if (parser.checkCommand(inMsg, Command.UNMARK)) {
-            int idx = Integer.parseInt(inMsg.substring(7)) - 1;
-            stringToPrint = unmarkTaskDone(idx);
-        } else if (parser.checkCommand(inMsg, Command.TODO)) {
-            String todoName = parser.getCommandContent(inMsg, Command.TODO);
-            ToDo todo = new ToDo(todoName);
-            stringToPrint = addTask(todo);
-        } else if (parser.checkCommand(inMsg, Command.DEADLINE)) {
-            String deadlineContent = parser.getCommandContent(inMsg, Command.DEADLINE);
-            Deadline ddl = new Deadline(deadlineContent);
-            stringToPrint = addTask(ddl);
-        } else if (parser.checkCommand(inMsg, Command.EVENT)) {
-            String eventContent = parser.getCommandContent(inMsg, Command.EVENT);
-            Event event = new Event(eventContent);
-            stringToPrint = addTask(event);
-        } else if (parser.checkCommand(inMsg, Command.DELETE)) {
-            String indexToDelete = parser.getCommandContent(inMsg, Command.DELETE);
-            stringToPrint = deleteTask(Integer.parseInt(indexToDelete));
-        } else {
-            throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
+    public void handleCommand(String inMsg, boolean suppressPrint) throws DukeException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+//        String stringToPrint = "";
+//        if (parser.checkCommand(inMsg, Command.LIST)) {
+//            stringToPrint = listTasks();
+//        } else if (parser.checkCommand(inMsg, Command.MARK)) {
+//            int idx = Integer.parseInt(inMsg.substring(5)) - 1;
+//            stringToPrint = markTaskDone(idx);
+//        } else if (parser.checkCommand(inMsg, Command.UNMARK)) {
+//            int idx = Integer.parseInt(inMsg.substring(7)) - 1;
+//            stringToPrint = unmarkTaskDone(idx);
+//        } else if (parser.checkCommand(inMsg, Command.TODO)) {
+//            String todoName = parser.getCommandContent(inMsg, Command.TODO);
+//            Todo todo = new Todo(todoName);
+//            stringToPrint = addTask(todo);
+//        } else if (parser.checkCommand(inMsg, Command.DEADLINE)) {
+//            String deadlineContent = parser.getCommandContent(inMsg, Command.DEADLINE);
+//            Deadline ddl = new Deadline(deadlineContent);
+//            stringToPrint = addTask(ddl);
+//        } else if (parser.checkCommand(inMsg, Command.EVENT)) {
+//            String eventContent = parser.getCommandContent(inMsg, Command.EVENT);
+//            Event event = new Event(eventContent);
+//            stringToPrint = addTask(event);
+//        } else if (parser.checkCommand(inMsg, Command.DELETE)) {
+//            String indexToDelete = parser.getCommandContent(inMsg, Command.DELETE);
+//            stringToPrint = deleteTask(Integer.parseInt(indexToDelete));
+//        } else {
+//            throw new DukeException("  OOPS!!! I'm sorry, but I don't know what that means :-(");
+//        }
+//
+//        if (!suppressPrint) {
+//            ui.printStructuredString(stringToPrint);
+//        }
 
-        if (!suppressPrint) {
-            ui.printStructuredString(stringToPrint);
-        }
+        CommandClass command = Parser.parseCommand(inMsg, suppressPrint);
+        command.execute(taskList, ui);
     }
 
     /**
