@@ -2,6 +2,7 @@ package duke.task;
 
 /** Class that represents a task */
 public abstract class Task {
+
     private boolean isDone = false;
     private String name;
 

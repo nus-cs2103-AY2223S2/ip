@@ -7,6 +7,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
+
     private int index;
 
     public DeleteCommand(int index) {
@@ -20,4 +21,5 @@ public class DeleteCommand extends Command {
         ui.showDeleteTask(task, tasks);
         storage.save(tasks.createTaskListString());
     }
+
 }

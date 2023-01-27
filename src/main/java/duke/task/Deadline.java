@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
+
     private LocalDate by;
 
     public Deadline(String name, String by) throws DateTimeParseException {
@@ -22,4 +23,5 @@ public class Deadline extends Task {
     public String getFileRepresentation() {
         return "D" + "@" + (super.isDone() ? "1" : "0") + "@" + this.getName() + "@" + this.by;
     }
+
 }

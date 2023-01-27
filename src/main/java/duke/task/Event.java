@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
+
     private LocalDate from;
     private LocalDate to;
 
@@ -25,4 +26,5 @@ public class Event extends Task {
     public String getFileRepresentation() {
         return "E" + "@" + (super.isDone() ? "1" : "0") + "@" + this.getName() + "@" + this.from + "@" + this.to;
     }
+
 }

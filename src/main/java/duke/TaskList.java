@@ -9,6 +9,7 @@ import duke.task.Task;
 
 /** Contains task list */
 public class TaskList {
+
     /** ArrayList with initial capacity of 100 to store tasks */
     private ArrayList<Task> tasks = new ArrayList<>(100);
 

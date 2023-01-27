@@ -7,6 +7,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 public class AddCommand extends Command {
+
     private Task task;
 
     public AddCommand(Task task) {

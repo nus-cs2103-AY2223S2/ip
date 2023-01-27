@@ -7,6 +7,7 @@ import duke.exception.DukeException;
 
 /** Class that represents a user command */
 public abstract class Command {
+
     /** Whether Duke should exit */
     private boolean isExit;
 

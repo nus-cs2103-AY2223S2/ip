@@ -1,6 +1,7 @@
 package duke.task;
 
 public class Todo extends Task {
+
     public Todo(String name) {
         super(name);
     }
@@ -14,4 +15,5 @@ public class Todo extends Task {
     public String getFileRepresentation() {
         return "T" + "@" + (super.isDone() ? "1" : "0") + "@" + this.getName();
     }
+
 }
