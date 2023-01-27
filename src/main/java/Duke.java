@@ -7,30 +7,16 @@ import parser.Parser;
 import response.Response;
 import storage.Storage;
 import storage.TaskList;
+import ui.Ui;
 
 public class Duke {
-    /**
-     * Prints formatted response to the console.
-     *
-     * @param s string that will be printed
-     */
-    public static void print(String s) {
-        String p = String.format("\t____________________________________________________________\n" +
-                "\t %s\n" +
-                "\t____________________________________________________________\n", s);
-        System.out.println(p);
-    }
 
     public static void main(String[] args) {
-        final String intro = "Hello! I'm Duke\n\t What can I do for you?";
-        final String extStr = "Bye! Hope to see you again soon!";
-
-        Duke.print(intro);
-
         Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         Storage storage = new Storage(); // Create a Storage object
         TaskList taskList = storage.loadTaskList();  // Create a TaskList object based on saved list
-
+        Ui ui = new Ui(); // Create Ui object to handle interactions with user
+        ui.printIntro();
 
         while (true) {
             String req = scanner.nextLine();  // Read user req
@@ -56,11 +42,11 @@ public class Duke {
                 }
 
                 // Print the output message
-                Duke.print(out);
+                ui.printResponse(out);
             } catch (DukeException err) {
-                Duke.print(err.toString());
+                ui.printError(err);
             }
         }
-        Duke.print(extStr);
+        ui.printExit();
     }
 }
