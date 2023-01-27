@@ -4,15 +4,20 @@ import java.util.List;
 
 public class TaskManager {
 
-    private final ArrayList<Task> TASKS = new ArrayList<Task>();
+    private static final String TASKS_FOLDER_PATH = "data";
+    private static final String TASKS_FILE_NAME = "duke_tasks.txt";
+    
+    private FileManager tasksFileManager = new FileManager(TASKS_FOLDER_PATH, TASKS_FILE_NAME);
+
+    private ArrayList<Task> tasks = tasksFileManager.readTasksFromFile();
 
     private void listTasks() {
-        if (this.TASKS.size() == 0) {
+        if (this.tasks.size() == 0) {
             System.out.println("You do not have any tasks added to the list.");
         } else {
             System.out.println("Listing all tasks...");
-            for (int i = 0; i < this.TASKS.size(); i++) {
-                System.out.println((i + 1) + ") " + this.TASKS.get(i));
+            for (int i = 0; i < this.tasks.size(); i++) {
+                System.out.println((i + 1) + ") " + this.tasks.get(i));
             }
         }
     }
@@ -40,13 +45,14 @@ public class TaskManager {
         try {
             int taskNumber = Integer.parseInt(cmdParts[1]);
             boolean isValidTaskNumber =
-                    (taskNumber > 0 && taskNumber <= this.TASKS.size());
+                    (taskNumber > 0 && taskNumber <= this.tasks.size());
 
             if (isValidTaskNumber) {
-                Task removedTask = this.TASKS.remove(taskNumber - 1);
+                Task removedTask = this.tasks.remove(taskNumber - 1);
+                tasksFileManager.writeTasksToFile(this.tasks);
                 System.out.println("I have removed Task " + taskNumber + " from the list.");
                 System.out.println(removedTask);
-                System.out.println("You now have " + this.TASKS.size() + " task(s) in the list.");
+                System.out.println("You now have " + this.tasks.size() + " task(s) in the list.");
 
             } else {
                 throw new DukeInvalidCommandException("Sorry... That is an invalid task number :/");
@@ -67,20 +73,22 @@ public class TaskManager {
         try {
             int taskNumber = Integer.parseInt(cmdParts[1]);
             boolean isValidTaskNumber =
-                    (taskNumber > 0 && taskNumber <= this.TASKS.size());
+                    (taskNumber > 0 && taskNumber <= this.tasks.size());
 
             if (isValidTaskNumber) {
                 if (cmdHeader.equals("mark")) {
-                    this.TASKS.get(taskNumber - 1).mark();
+                    this.tasks.get(taskNumber - 1).mark();
                     System.out.println("I have marked Task " + taskNumber + " as done.");
-                    System.out.println(this.TASKS.get(taskNumber - 1));
+                    System.out.println(this.tasks.get(taskNumber - 1));
 
                 } else {
-                    this.TASKS.get(taskNumber - 1).unmark();
+                    this.tasks.get(taskNumber - 1).unmark();
                     System.out.println("I have marked Task " + taskNumber + " as undone.");
-                    System.out.println(this.TASKS.get(taskNumber - 1));
+                    System.out.println(this.tasks.get(taskNumber - 1));
 
                 }
+
+                tasksFileManager.writeTasksToFile(this.tasks);
 
             } else {
                 throw new DukeInvalidCommandException("Sorry... That is an invalid task number :/");
@@ -102,7 +110,8 @@ public class TaskManager {
         String description = String.join(" ", descWords);
 
         Task toDo = new ToDo(description);
-        this.TASKS.add(toDo);
+        this.tasks.add(toDo);
+        tasksFileManager.writeTasksToFile(this.tasks);
         System.out.println("I have added the to-do to the list.");
         System.out.println(toDo);
 
@@ -137,7 +146,8 @@ public class TaskManager {
         String by = String.join(" ", byArray);
 
         Task deadline = new Deadline(description, by);
-        this.TASKS.add(deadline);
+        this.tasks.add(deadline);
+        tasksFileManager.writeTasksToFile(this.tasks);
         System.out.println("I have added the deadline to the list.");
         System.out.println(deadline);
 
@@ -198,7 +208,8 @@ public class TaskManager {
         String to = String.join(" ", toArray);
 
         Task event = new Event(description, from, to);
-        this.TASKS.add(event);
+        this.tasks.add(event);
+        tasksFileManager.writeTasksToFile(this.tasks);
         System.out.println("I have added the event to the list.");
         System.out.println(event);
 
@@ -213,7 +224,7 @@ public class TaskManager {
             processEmptyCommand();
         }
 
-        String [] cmdParts = command.split(" ");
+        String[] cmdParts = command.split(" ");
         String cmdHeader = cmdParts[0].toLowerCase();
 
         if (cmdHeader.equals("list")) {
