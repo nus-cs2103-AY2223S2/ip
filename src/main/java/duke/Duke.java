@@ -7,7 +7,7 @@ import java.util.Scanner;
 import duke.storage.Storage;
 
 /**
- * Is the main class of the program
+ * Is the main class of the program.
  */
 public class Duke {
 
@@ -17,7 +17,7 @@ public class Duke {
     private final Ui ui;
 
     /**
-     * Constructs an instance of Duke
+     * Constructs an instance of Duke.
      */
     public Duke() {
         taskList = new TaskList();
@@ -58,8 +58,8 @@ public class Duke {
     }
 
     /**
-     * Is the entry point of the application
-     * @param args Arguments provided through the console when running the program
+     * Is the entry point of the application.
+     * @param args Arguments provided through the console when running the program.
      */
     public static void main(String[] args) {
 

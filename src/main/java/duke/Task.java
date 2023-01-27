@@ -35,17 +35,16 @@ public abstract class Task implements Storable {
     /**
      * Returns description of this Task.
      *
-     * @return Description of task
+     * @return Description of task.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Returns task status of this Task.
-     * (Completed/Uncompleted)
+     * Returns task status of this Task. (Completed/Uncompleted)
      *
-     * @return task status
+     * @return task status.
      */
     boolean isDone() {
         return isDone;

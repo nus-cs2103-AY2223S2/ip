@@ -14,11 +14,11 @@ import duke.Parser;
 import duke.Ui;
 
 /**
- * Handles read and write of the (storable) taskList to/from file
+ * Handles read and write of the (storable) taskList to/from file.
  */
 public class Storage {
 
-    /** Relative path of save file */
+    /** Relative path of save file. */
     private static final String TASKS_FILE_PATH = "./data/duke/tasks.csv";
 
     private TaskList tasklist;
@@ -27,7 +27,7 @@ public class Storage {
      * Constructs instance of Storage using a reference to a TaskList.
      * Read/write is relative to this taskList.
      *
-     * @param taskList Reference to a TaskList
+     * @param taskList Reference to a TaskList.
      */
     public Storage(TaskList taskList) {
         this.tasklist = taskList;
@@ -97,8 +97,8 @@ public class Storage {
     /**
      * Writes specified file content to specified file path.
      *
-     * @param filePath Where to write to file
-     * @param fileContent What to write to file
+     * @param filePath Where to write to file.
+     * @param fileContent What to write to file.
      */
     private void writeToFile(String filePath, String fileContent) {
         // Write prepared data to file

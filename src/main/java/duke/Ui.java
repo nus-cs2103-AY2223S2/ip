@@ -1,14 +1,14 @@
 package duke;
 
 /**
- * Customised how messages are printed to console
+ * Customised how messages are printed to console.
  */
 public class Ui {
 
-    /** Name of the program developer */
+    /** Name of the program developer. */
     private static final String AUTHOR = "lhy-hoyin";
 
-    /** Printable of the program name */
+    /** Printable of the program name. */
     private static final String LOGO
             = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
@@ -29,9 +29,9 @@ public class Ui {
 
     /**
      * Prints specified message to console and move cursor to next line.
-     * Similar to System.out.println(..)
+     * Similar to System.out.println.
      *
-     * @param message Details of message to be printed
+     * @param message Details of message to be printed.
      */
     public void println(String message) {
         System.out.println(message);
@@ -42,7 +42,7 @@ public class Ui {
      * Message is prepended with a "OOPS!" to indicate that something unexpected
      * has happened.
      *
-     * @param message Details of warning to be printed
+     * @param message Details of warning to be printed.
      */
     public void warn(String message) {
         System.out.println("OOPS! " + message);

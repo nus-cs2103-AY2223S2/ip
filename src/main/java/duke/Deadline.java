@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 
 /**
- * Represents a Task with a due date
+ * Represents a Task with a due date.
  */
 public class Deadline extends Task {
 
@@ -12,8 +12,8 @@ public class Deadline extends Task {
     /**
      * Constructs an instance of Deadline with specified description and due date.
      *
-     * @param description Task description
-     * @param by Due date of task
+     * @param description Task description.
+     * @param by Due date of task.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -23,9 +23,9 @@ public class Deadline extends Task {
     /**
      * Constructs an instance of Deadline with specified task status, description and due date.
      *
-     * @param isDone Status of the task (completed or not completed)
-     * @param description Task description
-     * @param by Due date of task
+     * @param isDone Status of the task (completed or not completed).
+     * @param description Task description.
+     * @param by Due date of task.
      */
     public Deadline(boolean isDone, String description, LocalDateTime by) {
         super(isDone, description);
@@ -35,7 +35,7 @@ public class Deadline extends Task {
     /**
      * Returns the due date of the task.
      *
-     * @return Due date of task
+     * @return Due date of task.
      */
     LocalDateTime getBy() {
         return by;
@@ -44,7 +44,7 @@ public class Deadline extends Task {
     /**
      * Updates the due date of the task with specified dua date.
      *
-     * @param by New due date of the task
+     * @param by New due date of the task.
      */
     void setBy(LocalDateTime by) {
         this.by = by;

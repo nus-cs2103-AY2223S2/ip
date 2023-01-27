@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import java.util.stream.Stream;
 
 /**
- * Represents a Parser to parse date and time
+ * Represents a Parser to parse date and time.
  */
 public class Parser {
 
@@ -22,8 +22,8 @@ public class Parser {
      * Expects input to be formatted as "YYYY-MM-DD" (fixed to "-" seperator).
      * TODO: need to catch exceptions
      *
-     * @param dateStr String representation of a date
-     * @return Date in a LocalDate instance
+     * @param dateStr String representation of a date.
+     * @return Date in a LocalDate instance.
      */
     private LocalDate parseDate(String dateStr) {
         return LocalDate.parse(dateStr);
@@ -35,9 +35,9 @@ public class Parser {
      * Arbitrary seperator needs to be specified.
      * TODO: need to catch exceptions
      *
-     * @param dateStr String representation of a date
-     * @param seperator Seperator used to separate the day, month, year
-     * @return Date in a LocalDate instance
+     * @param dateStr String representation of a date.
+     * @param seperator Seperator used to separate the day, month, year.
+     * @return Date in a LocalDate instance.
      */
     private LocalDate parseDate(String dateStr, char seperator) {
         String[] date = dateStr.split(String.valueOf(seperator));
@@ -50,8 +50,8 @@ public class Parser {
      * Expects input to be formatted as "HH:MM:SS" or "HH:MM" (fixed to ':' seperator).
      * TODO: need to catch exceptions
      *
-     * @param timeStr String representation of a time
-     * @return Time in a LocalTime instance
+     * @param timeStr String representation of a time.
+     * @return Time in a LocalTime instance.
      */
     private LocalTime parseTime(String timeStr) {
         return LocalTime.parse(timeStr);
@@ -63,9 +63,9 @@ public class Parser {
      * Arbitrary seperator needs to be specified.
      * TODO: need to catch exceptions
      *
-     * @param timeStr String representation of a time
-     * @param seperator Seperator used to separate the hour, minute, (second)
-     * @return Time in a LocalTime instance
+     * @param timeStr String representation of a time.
+     * @param seperator Seperator used to separate the hour, minute, (second).
+     * @return Time in a LocalTime instance.
      */
     private LocalTime parseTime(String timeStr, char seperator) {
         String[] time = timeStr.split(String.valueOf(seperator));
@@ -80,8 +80,8 @@ public class Parser {
      * Parses a string representation of a date and time into LocalDateTime.
      * Expects input to be formatted as "YYYY-MM-DD HH:MM:SS" or "YYYY-MM-DD HH:MM" (fixed to ' ' seperator).
      *
-     * @param str String representation of a date & time
-     * @return Date and time in a LocalDateTime instance
+     * @param str String representation of a date & time.
+     * @return Date and time in a LocalDateTime instance.
      */
     public LocalDateTime parseDateTime(String str) {
         return parseDateTime(str, ' ');
@@ -92,9 +92,9 @@ public class Parser {
      * Expects input to be formatted as "YYYY-MM-DD HH:MM:SS" or "YYYY-MM-DD HH:MM" but seperator is arbitrary.
      * Arbitrary seperator (between date and time) needs to be specified.
      *
-     * @param str String representation of a date & time
-     * @param seperator Character separating the date and time
-     * @return Date and time in a LocalDateTime instance
+     * @param str String representation of a date & time.
+     * @param seperator Character separating the date and time.
+     * @return Date and time in a LocalDateTime instance.
      */
     public LocalDateTime parseDateTime(String str, char seperator) {
         String[] s = str.split(String.valueOf(seperator));
