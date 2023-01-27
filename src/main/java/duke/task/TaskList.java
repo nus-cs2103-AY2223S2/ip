@@ -119,4 +119,39 @@ public class TaskList {
         }
         System.out.println("");
     }
+
+    /**
+     * Searches for tasks with names that contain the given keyword
+     * and prints them out.
+     *
+     * @param keyword The keyword to search for.
+     */
+    public void find(String keyword) {
+        int size = this.tasks.size();
+        int printIndex = 1;
+        int currIndex = 0;
+        while (printIndex == 1 && currIndex < size) {
+            Task curr = this.tasks.get(currIndex);
+            if (curr.containKeyword(" " + keyword + " ")) {
+                System.out.println("Here are the matching tasks in your list:");
+                String toPrint = String.format("%d. %s", printIndex, curr);
+                printIndex++;
+                System.out.println(toPrint);
+            }
+            currIndex++;
+        }
+        while (currIndex < size) {
+            Task curr = this.tasks.get(currIndex);
+            if (curr.containKeyword(" " + keyword + " ")) {
+                String toPrint = String.format("%d. %s", printIndex, curr);
+                printIndex++;
+                System.out.println(toPrint);
+            }
+            currIndex++;
+        }
+        if (printIndex == 1) {
+            System.out.println("None of the items in your list matches with \"" + keyword + "\"");
+        }
+        System.out.print("\n");
+    }
 }
