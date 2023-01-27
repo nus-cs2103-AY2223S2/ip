@@ -22,72 +22,73 @@ public class Parser {
         String[] tokens = userInput.split(" ", 2);
         String command = tokens[0];
         switch (command) {
-            case "bye": {
-                if (tokens.length != 1) {
-                    throw new DukeException("Invalid number of arguments.Only require 1!");
-                }
-                action = Command.BYE;
-                break;
+        case "bye": {
+            if (tokens.length != 1) {
+                throw new DukeException("Invalid number of arguments.Only require 1!");
             }
-            case "list": {
-                if (tokens.length != 1) {
-                    throw new DukeException("Invalid number of arguments.Only require 1!");
-                }
-                action = Command.LIST;
-                break;
+            action = Command.BYE;
+            break;
+        }
+        case "list": {
+            if (tokens.length != 1) {
+                throw new DukeException("Invalid number of arguments.Only require 1!");
             }
-            case "unmark": {
-                if (tokens.length < 2) {
-                    throw new DukeException("Task number missing!");
-                }
-                action = Command.UNMARK;
-                args = tokens;
-                break;
+            action = Command.LIST;
+            break;
+        }
+        case "unmark": {
+            if (tokens.length < 2) {
+                throw new DukeException("Task number missing!");
             }
-            case "mark": {
-                if (tokens.length < 2) {
-                    throw new DukeException("Task number missing!");
-                }
-                action = Command.MARK;
-                args = tokens;
-                break;
+            action = Command.UNMARK;
+            args = tokens;
+            break;
+        }
+        case "mark": {
+            if (tokens.length < 2) {
+                throw new DukeException("Task number missing!");
             }
-            case "delete": {
-                if (tokens.length < 2) {
-                    throw new DukeException("Task number missing!");
-                }
-                action = Command.DELETE;
-                args = tokens;
-                break;
+            action = Command.MARK;
+            args = tokens;
+            break;
+        }
+        case "delete": {
+            if (tokens.length < 2) {
+                throw new DukeException("Task number missing!");
             }
-            case "todo": {
-                if (tokens.length < 2) {
-                    throw new DukeException("The description of a todo cannot be empty!");
-                }
-                action = Command.TODO;
-                args = tokens;
-                break;
+            action = Command.DELETE;
+            args = tokens;
+            break;
+        }
+        case "todo": {
+            if (tokens.length < 2) {
+                throw new DukeException("The description of a todo cannot be empty!");
             }
-            case "deadline": {
-                if (tokens.length < 2) {
-                    throw new DukeException("The description of a deadline cannot be empty!");
-                }
-                action = Command.DEADLINE;
-                args = tokens;
-                break;
+            action = Command.TODO;
+            args = tokens;
+            break;
+        }
+        case "deadline": {
+            if (tokens.length < 2) {
+                throw new DukeException("The description of a deadline cannot be empty!");
             }
-            case "event": {
-                if (tokens.length < 2) {
-                    throw new DukeException("The description of a event cannot be empty!");
-                }
-                action = Command.EVENT;
-                args = tokens;
-                break;
+            action = Command.DEADLINE;
+            args = tokens;
+            break;
+        }
+        case "event": {
+            if (tokens.length < 2) {
+                throw new DukeException("The description of a event cannot be empty!");
             }
-            default:
-                throw new DukeException("Invalid command entered!");
+            action = Command.EVENT;
+            args = tokens;
+            break;
+        }
+        default:
+            throw new DukeException("Invalid command entered!");
         }
     }
+
 
     /**
      * Parses the stored arguments and returns a Todo object.
@@ -96,10 +97,13 @@ public class Parser {
      * @return  Todo object.
      * @throws DukeException if description of Todo is not present.
      */
-    public static Todo parseTodo(String[] args) {
-        String desc = args[1];
-        Todo created = new Todo(desc);
-        return created;
+    public static Todo parseTodo(String[] args) throws DukeException {
+        if (args.length < 2) {
+            throw new DukeException("The description of a todo cannot be empty!");
+        } else {
+            String desc = args[1];
+            return new Todo(desc);
+        }
     }
 
 
@@ -117,9 +121,8 @@ public class Parser {
         }
         try {
             LocalDate date = LocalDate.parse(separated[1]);
-            Deadline created = new Deadline(separated[0], date);
-            return created;
-        } catch(DateTimeParseException e) {
+            return new Deadline(separated[0], date);
+        } catch (DateTimeParseException e) {
             throw new DukeException("Give deadline in YYYY-MM-DD format!");
         }
     }
@@ -137,8 +140,7 @@ public class Parser {
         if (separated.length < 3) {
             throw new DukeException("Event needs to include a start date/time and a end date/time!");
         }
-        Event created = new Event(separated[0], separated[1], separated[2]);
-        return created;
+        return new Event(separated[0], separated[1], separated[2]);
     }
 
     /**

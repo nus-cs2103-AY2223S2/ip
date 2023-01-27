@@ -17,12 +17,13 @@ public class Ui {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+
     /**
      * Displays error message to user.
      *
      */
-    public void showErrorMessage(String e) {
-        System.out.println(e);
+    public void showErrorMessage(String error) {
+        System.out.println(error);
     }
 
     /**

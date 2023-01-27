@@ -35,65 +35,66 @@ public class Duke {
     public void run() {
         ui.showWelcomeMessage();
         Scanner scanner = new Scanner(System.in);
+        Task chosen;
+        Task created;
         boolean isExit = false;
         while (!isExit) {
             try {
                 String userInput = scanner.nextLine();
                 Parser.parseUserResponse(userInput);
                 switch(Parser.getCommand()) {
-                    case BYE: {
-                        storage.saveToFile(tasks.getTaskList());
-                        ui.showGoodbyeMessage();
-                        isExit = true;
-                        break;
-                    }
-                    case LIST: {
-                        ui.showTasksMessage(tasks.getTaskList());
-                        break;
-                    }
-                    case MARK: {
-                        int id = Parser.parseTask(Parser.getArgs());
-                        Task chosen = tasks.getTask(id);
-                        chosen.mark();
-                        ui.markTaskMessage(chosen);
-                        break;
-                    }
-                    case UNMARK: {
-                        int id = Parser.parseTask(Parser.getArgs());
-                        Task chosen = tasks.getTask(id);
-                        chosen.unmark();
-                        ui.unmarkTaskMessage(chosen);
-                        break;
-
-                    }
-                    case DELETE: {
-                        int id = Parser.parseTask(Parser.getArgs());
-                        Task chosen = tasks.getTask(id);
-                        tasks.deleteTask(chosen);
-                        ui.deleteTaskMessage(chosen, tasks.getTaskList());
-                        break;
-                    }
-                    case TODO: {
-                        Todo created = Parser.parseTodo(Parser.getArgs());
-                        tasks.addTask(created);
-                        ui.addedTaskMessage(created, tasks.getTaskList());
-                        break;
-                    }
-                    case DEADLINE: {
-                        Deadline created = Parser.parseDeadline(Parser.getArgs());
-                        tasks.addTask(created);
-                        ui.addedTaskMessage(created, tasks.getTaskList());
-                        break;
-                    }
-                    case EVENT: {
-                        Event created = Parser.parseEvent(Parser.getArgs());
-                        tasks.addTask(created);
-                        ui.addedTaskMessage(created, tasks.getTaskList());
-                        break;
-                    }
+                case BYE: {
+                    storage.saveToFile(tasks.getTaskList());
+                    ui.showGoodbyeMessage();
+                    isExit = true;
+                    break;
+                }
+                case LIST: {
+                    ui.showTasksMessage(tasks.getTaskList());
+                    break;
+                }
+                case MARK: {
+                    int id = Parser.parseTask(Parser.getArgs());
+                    chosen = tasks.getTask(id);
+                    chosen.mark();
+                    ui.markTaskMessage(chosen);
+                    break;
+                }
+                case UNMARK: {
+                    int id = Parser.parseTask(Parser.getArgs());
+                    chosen = tasks.getTask(id);
+                    chosen.unmark();
+                    ui.unmarkTaskMessage(chosen);
+                    break;
+                }
+                case DELETE: {
+                    int id = Parser.parseTask(Parser.getArgs());
+                    chosen = tasks.getTask(id);
+                    tasks.deleteTask(chosen);
+                    ui.deleteTaskMessage(chosen, tasks.getTaskList());
+                    break;
+                }
+                case TODO: {
+                    created = Parser.parseTodo(Parser.getArgs());
+                    tasks.addTask(created);
+                    ui.addedTaskMessage(created, tasks.getTaskList());
+                    break;
+                }
+                case DEADLINE: {
+                    created = Parser.parseDeadline(Parser.getArgs());
+                    tasks.addTask(created);
+                    ui.addedTaskMessage(created, tasks.getTaskList());
+                    break;
+                }
+                case EVENT: {
+                    created = Parser.parseEvent(Parser.getArgs());
+                    tasks.addTask(created);
+                    ui.addedTaskMessage(created, tasks.getTaskList());
+                    break;
+                }
 
                 }
-            } catch(DukeException e) {
+            } catch (DukeException e) {
                 ui.showErrorMessage(e.getMessage());
             }
         }
