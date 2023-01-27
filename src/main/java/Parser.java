@@ -74,6 +74,64 @@ public class Parser<T> {
         });
     }
 
+    public <U> Parser<List<T>> manyUntil(Parser<U> p) {
+        return new Parser<>(inp -> {
+            List<T> res = new ArrayList<>();
+            String remain = inp;
+            Result<T> temp = this.parse(remain);
+            Result<U> until = p.parse(remain);
+            while (until.isError() && temp.isOk()) {
+                remain = temp.getRemainInp();
+                res.add(temp.getRes());
+                temp = this.parse(remain);
+                until = p.parse(remain);
+            }
+            if (until.isError()) {
+                return Result.error(String.format("Ending Flag: %s", until.getErrorMsg()));
+            }
+            return Result.ok(res, until.getRemainInp());
+        });
+    }
+
+    public Parser<List<T>> some() {
+        return new Parser<>(inp -> {
+            List<T> res = new ArrayList<>();
+            String remain = inp;
+            Result<T> temp = this.parse(remain);
+            while (temp.isOk()) {
+                remain = temp.getRemainInp();
+                res.add(temp.getRes());
+                temp = this.parse(remain);
+            }
+            if (res.isEmpty()) {
+                return Result.error(temp.getErrorMsg());
+            }
+            return Result.ok(res, remain);
+        });
+    }
+
+    public <U> Parser<List<T>> someUntil(Parser<U> p) {
+        return new Parser<>(inp -> {
+            List<T> res = new ArrayList<>();
+            String remain = inp;
+            Result<T> temp = this.parse(remain);
+            Result<U> until = p.parse(remain);
+            while (until.isError() && temp.isOk()) {
+                remain = temp.getRemainInp();
+                res.add(temp.getRes());
+                temp = this.parse(remain);
+                until = p.parse(remain);
+            }
+            if (until.isError()) {
+                return Result.error(String.format("Ending Flag: %s", until.getErrorMsg()));
+            }
+            if (res.isEmpty()) {
+                return Result.error(this.parse(until.getRemainInp()).getErrorMsg());
+            }
+            return Result.ok(res, until.getRemainInp());
+        });
+    }
+
     public <U> Parser<U> map(Function<? super T, ? extends U> f) {
         return new Parser<>(inp -> {
             return this.parse(inp).map(f);
@@ -86,10 +144,7 @@ public class Parser<T> {
 
     public static Parser<Character> charParser(char c) {
         return new Parser<>(inp -> {
-            if (inp.isEmpty()) {
-                return Result.error("End of Input");
-            }
-            if (inp.charAt(0) != c) {
+            if (inp.isEmpty() || inp.charAt(0) != c) {
                 return Result.error(String.format("Character %s not found.", c));
             }
             return Result.ok(c, inp.substring(1));
