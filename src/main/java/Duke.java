@@ -10,6 +10,7 @@ import duke.Ui;
 /**
  * Main application class.
  */
+//Follow the given coding standard.
 public class Duke {
     private Ui ui;
     private Storage storage;
