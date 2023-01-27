@@ -35,12 +35,11 @@ public class Duke {
     public void run() {
         this.ui.greet(LOGO);
         Scanner scn = new Scanner(System.in);
-        String input = scn.nextLine();
         Command command;
         do {
+            String input = scn.nextLine();
             command = new Parser().parseCommand(input);
             command.execute(this.storage, this.tasks, this.ui);
-            input = scn.nextLine();
         } while (!(command instanceof ExitCommand));
         scn.close();
     }
