@@ -52,7 +52,7 @@ public class EventTest {
     @Test
     public void dateValidity_invalidTo_exceptionThrown() {
         try {
-            new Event("unit test celebrations", false, "26/1/2023 2359", "oh no this is invalid") ;
+            new Event("unit test celebrations", false, "26/1/2023 2359", "oh no this is invalid");
             fail();
         } catch (DukeException e) {
             assertEquals("Could not parse 'to' as date time", e.getMessage());

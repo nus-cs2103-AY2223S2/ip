@@ -6,6 +6,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * TaskSerializer the serialization and deserialization of tasks.
+ */
 public class TaskSerializer extends Serializer {
     public TaskSerializer() {
         super();
@@ -17,7 +20,7 @@ public class TaskSerializer extends Serializer {
 
     /**
      * Creates and returns a task defined by instance
-     * 
+     *
      * @return Task defined by instance
      * @throws DukeException
      */

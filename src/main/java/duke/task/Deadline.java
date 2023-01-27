@@ -22,6 +22,14 @@ public class Deadline extends Task {
 
     protected LocalDateTime by;
 
+    /**
+     * Initialises a Deadline task.
+     *
+     * @param description Description of the task.
+     * @param completed Whether the task is completed
+     * @param by Due date of task.
+     * @throws DukeException
+     */
     public Deadline(String description, boolean completed, String by) throws DukeException {
         super(description, completed);
         try {
@@ -30,10 +38,10 @@ public class Deadline extends Task {
             throw new DukeException("Could not parse 'by' as date time");
         }
     }
- 
+
     /**
      * Returns whether {@code icon} belongs to a Deadline Task.
-     * 
+     *
      * @param icon Icon to be checked.
      * @return whether the {@code icon} belongs to a Deadline Task.
      */

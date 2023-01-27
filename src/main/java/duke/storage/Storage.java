@@ -19,7 +19,7 @@ public class Storage {
 
     /**
      * Loads and returns a list of tasks stored locally.
-     * 
+     *
      * @return List of tasks that was stored locally.
      * @throws DukeException
      */
@@ -44,7 +44,7 @@ public class Storage {
 
     /**
      * Saves a list of tasks locally.
-     * 
+     *
      * @param tasks The list of tasks to be saved
      * @throws DukeException
      */

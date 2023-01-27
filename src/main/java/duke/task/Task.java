@@ -12,7 +12,7 @@ public abstract class Task {
 
     /**
      * Initialises a task.
-     * 
+     *
      * @param description Description of task.
      * @param completed Whether the task has been completed.
      * @throws DukeException

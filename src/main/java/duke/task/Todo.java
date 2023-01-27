@@ -1,8 +1,8 @@
 package duke.task;
 
 import duke.exception.DukeException;
-import duke.storage.serializer.TaskDeserializer;
 import duke.storage.serializer.Serializer;
+import duke.storage.serializer.TaskDeserializer;
 import duke.storage.serializer.TaskSerializer;
 
 /**
@@ -19,12 +19,12 @@ public class Todo extends Task {
 
     /**
      * Returns whether {@code icon} belongs to a Todo Task.
-     * 
+     *
      * @param icon Icon to be checked.
      * @return whether the {@code icon} belongs to a Todo Task.
      */
-    public static boolean hasIcon(String s) {
-        return s.equals(ICON);
+    public static boolean hasIcon(String icon) {
+        return icon.equals(ICON);
     }
 
     public static boolean canDeserialize(Serializer serializer) {

@@ -17,7 +17,7 @@ public class Ui {
 
     /**
      * Prints a sequence of strings in a pretty way.
-     * 
+     *
      * @param chunks sequence of strings to be printed.
      */
     public void respond(String... chunks) {
@@ -33,7 +33,7 @@ public class Ui {
 
     /**
      * Prints an exception.
-     * 
+     *
      * @param e Exception to be printed.
      */
     public void error(Exception e) {
@@ -45,7 +45,7 @@ public class Ui {
 
     /**
      * Prints a introduction message to the user.
-     * 
+     *
      * @param logo Logo of to be printed with the introduction.
      */
     public void introduce(String logo) {
@@ -67,7 +67,7 @@ public class Ui {
 
     /**
      * Prints a list of tasks.
-     * 
+     *
      * @param tasks List of tasks to be printed.
      */
     public void listTasks(TaskList tasks) {
@@ -79,7 +79,7 @@ public class Ui {
 
     /**
      * Prints the response after a task has been marked as completed.
-     * 
+     *
      * @param task The task that has been marked as completed.
      */
     public void markTask(Task task) {
@@ -91,7 +91,7 @@ public class Ui {
 
     /**
      * Prints the response after a task has been marked as uncompleted.
-     * 
+     *
      * @param task The task that has been marked as uncompleted.
      */
     public void unmarkTask(Task task) {
@@ -100,10 +100,10 @@ public class Ui {
             String.format("=> %s", task)
         );
     }
-    
+
     /**
      * Prints the response after the addition of a task.
-     * 
+     *
      * @param task Task that was added.
      * @param length Length of the list after addition of task.
      */
@@ -118,7 +118,7 @@ public class Ui {
 
     /**
      * Prints the response after the deletion of a task.
-     * 
+     *
      * @param task Task that was deleted.
      * @param length Length of the list after deletion of task.
      */
@@ -133,7 +133,7 @@ public class Ui {
 
     /**
      * Waits and retrieves a command from the user.
-     * 
+     *
      * @return The command of the user.
      */
     public String ask() {

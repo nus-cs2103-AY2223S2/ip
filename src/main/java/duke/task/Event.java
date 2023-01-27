@@ -24,6 +24,15 @@ public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
+    /**
+     * Initialises an Event task.
+     *
+     * @param description Description of event.
+     * @param completed Whether the event has been completed.
+     * @param from Start time of event.
+     * @param to End time of event.
+     * @throws DukeException
+     */
     public Event(String description, boolean completed, String from, String to) throws DukeException {
         super(description, completed);
         try {
@@ -37,15 +46,15 @@ public class Event extends Task {
             throw new DukeException("Could not parse 'to' as date time");
         }
     }
-    
+
     /**
      * Returns whether {@code icon} belongs to a Event Task.
-     * 
+     *
      * @param icon Icon to be checked.
      * @return whether the {@code icon} belongs to a Event Task.
      */
-    public static boolean hasIcon(String s) {
-        return s.equals(ICON);
+    public static boolean hasIcon(String icon) {
+        return icon.equals(ICON);
     }
 
     public static boolean canDeserialize(Serializer serializer) {

@@ -38,7 +38,7 @@ public class TaskList {
 
     /**
      * Adds {@code task} to the TaskList instance.
-     * 
+     *
      * @param task Task to be added to the instance.
      * @return The task that was added.
      * @throws DukeException
@@ -51,7 +51,7 @@ public class TaskList {
 
     /**
      * Deletes the task at {@code index}.
-     * 
+     *
      * @param index
      * @return The task that was deleted.
      * @throws DukeException
@@ -69,7 +69,7 @@ public class TaskList {
 
     /**
      * Marks the task at {@code index} as completed.
-     * 
+     *
      * @param index
      * @return The task that was marked completed.
      * @throws DukeException
@@ -83,7 +83,7 @@ public class TaskList {
 
     /**
      * Marks the task at {@code index} as uncompleted.
-     * 
+     *
      * @param index
      * @return The task that was marked uncompleted.
      * @throws DukeException

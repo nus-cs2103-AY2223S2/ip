@@ -16,7 +16,7 @@ public class Serializer {
 
     /**
      * Initialises a Serializer with data extracted from serialized
-     * 
+     *
      * @param serialized The string to be deserialized
      */
     public Serializer(String serialized) {

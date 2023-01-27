@@ -8,5 +8,5 @@ import duke.task.Task;
  */
 @FunctionalInterface
 public interface TaskDeserializer {
-    abstract public Task deserialize(TaskSerializer taskSerializer) throws DukeException;
+    Task deserialize(TaskSerializer taskSerializer) throws DukeException;
 }

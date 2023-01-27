@@ -11,7 +11,7 @@ import duke.ui.Ui;
 /**
  * <h1>Duke Task Management Application</h1>
  * Duke is an applications that allow the user to manage their task from the command line.
- * 
+ *
  * @author Stanley Neoh Jia Jun
  */
 public class Duke {
@@ -25,6 +25,9 @@ public class Duke {
     private Ui ui;
     private boolean isListening;
 
+    /**
+     * Initialises a Duke application
+     */
     public Duke() {
         tasks = new TaskList();
         ui = new Ui();
@@ -93,7 +96,7 @@ public class Duke {
     /**
      * Runs the duke application.
      * This is the entry point for the application.
-     * 
+     *
      * @param args
      */
     public static void main(String[] args) {
