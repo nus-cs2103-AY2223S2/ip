@@ -8,9 +8,6 @@ public class Ui {
     private static final String Indentation = " ";
     private static final String Horizontal = "____________________________________________________________";
 
-    /**
-     * shows duke logo at the beginnig
-     */
     public static void showLogo() {
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -20,9 +17,6 @@ public class Ui {
         System.out.println(logo);
     }
 
-    /**
-     * shows welcome after printing logo
-     */
     public static void showWelcome() {
         System.out.println(Indentation + Horizontal);
         System.out.println(Indentation + "Hello! I'm Duke");
@@ -30,28 +24,18 @@ public class Ui {
         System.out.println(Indentation + Horizontal);
     }
 
-    /**
-     * shows loading error
-     */
     public void showLoadingError() {
         System.out.println(Indentation + Horizontal);
         System.out.println(Indentation + "Loading error! please try again");
         System.out.println(Indentation + Horizontal);
     }
 
-    /**
-     * exits the program
-     */
     public static void exit() {
         System.out.println(Indentation + Horizontal);
         System.out.println(Indentation + "Bye. Hope to see you again soon!");
         System.out.println(Indentation + Horizontal);
     }
 
-    /**
-     * shows list details
-     * @param task
-     */
     public static void showList(TaskList task) {
         System.out.println(Indentation + Horizontal);
         System.out.println(Indentation + "Here are the tasks in your list:");
@@ -63,20 +47,11 @@ public class Ui {
         System.out.println(Indentation + Horizontal);
     }
 
-    /**
-     * reads user's input
-     * @return command
-     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
-    /**
-     * shows that task is marked as done
-     * @param num
-     * @param tasks
-     */
     public static void done (String num, TaskList tasks) {
         int number = Integer.parseInt(num) - 1;
         tasks.get(number).isDone = true;
@@ -87,11 +62,6 @@ public class Ui {
         System.out.println(Indentation + Horizontal);
     }
 
-    /**
-     * shows that task is marked as not done
-     * @param num
-     * @param tasks
-     */
     public static void undone(String num, TaskList tasks) {
         int number = Integer.parseInt(num) - 1;
         tasks.get(number).isDone = false;
@@ -102,11 +72,6 @@ public class Ui {
         System.out.println(Indentation + Horizontal);
     }
 
-    /**
-     * delete the tasks
-     * @param num
-     * @param tasks
-     */
     public static void delete(String num, TaskList tasks) {
         int index = Integer.parseInt(num) - 1;
         try{
