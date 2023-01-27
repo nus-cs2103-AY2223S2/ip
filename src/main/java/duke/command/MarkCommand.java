@@ -1,25 +1,45 @@
 package duke.command;
 
+import duke.exceptions.TaskException;
 import duke.tasklist.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Gives command to mark item as complete
+ */
 public class MarkCommand extends Command {
     private int index;
-    private boolean exit;
 
+    /**
+     * Initialises mark class
+     *
+     * @param index task sequences in task list
+     */
     public MarkCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Exits duke if it detects bye command
+     *
+     * @return boolean false
+     */
     @Override
     public boolean isExit() {
-        exit = false;
-        return exit;
+        return false;
     }
-    
+
+    /**
+     * Marks task items
+     *
+     * @param taskList arraylist that stores tasks
+     * @param storage  stores data of tasks
+     * @param ui       responds to user input
+     * @throws TaskException displays error messages
+     */
     @Override
-    public void execute(TaskList tasklist, Storage storage, Ui ui) {
-        tasklist.markItem(index);
+    public void execute(TaskList taskList, Storage storage, Ui ui) {
+        taskList.markItem(index);
     }
 }

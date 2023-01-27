@@ -7,12 +7,20 @@ import duke.ui.Ui;
 import duke.parser.Parser;
 import duke.command.*;
 
+/**
+ * Acts as the main class for execution of user inputs.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
     private Ui ui;
 
+    /**
+     * Initialises classes need to read and write the program.
+     *
+     * @param filePath file name in the form of string
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath, this.ui);
@@ -20,12 +28,19 @@ public class Duke {
         this.parser = new Parser();
     }
 
+    /**
+     * Represents main class of duke
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("./data/duke.txt").userInputs();
     }
 
-    // Allow users to add, mark and un-mark, delete, add tasks (to-do, deadline,
-    // event) or show items in a list
+    /**
+     * Allow users to add, mark and un-mark, delete, add task (to-do, deadline, event)
+     * or show items in a list and will exit if the bye command is returned
+     */
     public void userInputs() {
 
         this.ui.welcomeMessage();

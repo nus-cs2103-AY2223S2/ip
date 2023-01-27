@@ -2,15 +2,26 @@ package duke.parser;
 
 import duke.command.*;
 import duke.exceptions.TaskException;
+
 import java.util.Arrays;
 
+/**
+ * Identifies command and executes its class respectively
+ */
 public class Parser {
 
-    // Enum list to contain instructions to be entered by user to control system
+    /**
+     * Contains instructions to be entered by user to control system
+     */
     public enum Instructions {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
     }
 
+    /**
+     * @param input user command is passed in as String
+     * @return command class of type Command
+     * @throws TaskException returns an exception under TaskException class
+     */
     public Command parse(String input) throws TaskException {
         String[] part = input.split(" ");
         int index = 0;

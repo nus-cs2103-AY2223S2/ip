@@ -1,12 +1,16 @@
 package duke.tasklist;
+
 import java.lang.ArrayIndexOutOfBoundsException;
 import java.lang.IndexOutOfBoundsException;
 import java.lang.NullPointerException;
+
 import duke.exceptions.TaskException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-
+/**
+ * Contains task actions
+ */
 public class TaskList {
 
     private Storage storage;
@@ -17,23 +21,47 @@ public class TaskList {
         this.ui = ui;
     }
 
+    /**
+     * Prints list
+     */
     public void printList() {
         this.ui.listMessage();
         this.storage.displayList();
     }
 
+    /**
+     * Marks list item
+     *
+     * @param index items index in array list
+     */
     public void markItem(int index) {
         this.storage.markListItem(index);
     }
 
+    /**
+     * Unmarks list item
+     *
+     * @param index items index in array list
+     */
     public void unmarkItem(int index) {
         this.storage.unmarkListItem(index);
     }
 
+    /**
+     * Deletes list item
+     *
+     * @param index items index in array list
+     */
     public void deleteTask(int index) {
         this.storage.deleteListItem(index);
     }
 
+    /**
+     * Adds list item
+     *
+     * @param instruction command entered by user
+     * @param input       name of the three task types
+     */
     public void addItem(String instruction, String input) {
         try {
             switch (instruction) {

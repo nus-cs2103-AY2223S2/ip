@@ -3,18 +3,31 @@ package duke.command;
 import duke.tasklist.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
+
+/**
+ * Gives command to exit duke
+ */
 public class ByeCommand extends Command {
 
-    private boolean exit;
-
+    /**
+     * Exits duke if it detects bye command
+     *
+     * @return boolean true
+     */
     @Override
     public boolean isExit() {
-        exit = true;
-        return exit;
+        return true;
     }
-    
+
+    /**
+     * Exits duke
+     *
+     * @param taskList arraylist that stores tasks
+     * @param storage  stores data of tasks
+     * @param ui       responds to user input
+     */
     @Override
-    public void execute(TaskList tasklist, Storage storage, Ui ui) {
+    public void execute(TaskList taskList, Storage storage, Ui ui) {
         ui.byeMessage();
         storage.writeToFile();
     }

@@ -1,8 +1,10 @@
 package duke.tasks;
+
 import java.time.LocalDate;
 
-// Event class returns result that is type [E] and a starting time and an ending
-// time
+/**
+ * Stores inputs of event tasks
+ */
 public class Event extends Task {
 
     private final LocalDate startDate;
@@ -12,6 +14,13 @@ public class Event extends Task {
     private final String[] startingPeriod;
     private final String[] endingPeriod;
 
+    /**
+     * Splits inputs into smaller parts and initialises its variables
+     *
+     * @param name         name of the task
+     * @param startingTime start date and time of task
+     * @param endTime      end date and time of task
+     */
     public Event(String name, String startingTime, String endTime) {
         super(name);
         startingPeriod = startingTime.split(" ");
@@ -32,11 +41,13 @@ public class Event extends Task {
         this.endTime = endingPeriod[1];
     }
 
+    /**
+     * Displays name, date and time of the event task
+     *
+     * @return shows the event item
+     */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + startDate.getDayOfMonth() + " " +
-                startDate.getMonth() + " " + startDate.getYear() + ", " + startTime + " to: " +
-                endDate.getDayOfMonth() + " " + endDate.getMonth() + " " + endDate.getYear() + ", "
-                + endTime + " )";
+        return "[E]" + super.toString() + "(from: " + startDate.getDayOfMonth() + " " + startDate.getMonth() + " " + startDate.getYear() + ", " + startTime + " to: " + endDate.getDayOfMonth() + " " + endDate.getMonth() + " " + endDate.getYear() + ", " + endTime + " )";
     }
 }
