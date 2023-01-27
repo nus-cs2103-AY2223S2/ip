@@ -1,5 +1,7 @@
 package leo.storage;
 
+import leo.ui.Ui;
+
 import java.util.List;
 
 /**
@@ -48,6 +50,12 @@ public class TaskList {
      */
     public Task getTask(int num) {
         return taskList.get(num);
+    }
+
+    public void display() {
+        for (int i = 0; i < size(); i++) {
+            Ui.displayMessage((i + 1) + ". " + getTask(i).toString());
+        }
     }
 
 }

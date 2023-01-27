@@ -3,3 +3,5 @@
 [E][ ] staycay | 29012023 18:00 | 30012023 11:00
 [T][X] run
 [T][ ] eat acai
+[T][ ] eat fruits
+[T][X] sleeping

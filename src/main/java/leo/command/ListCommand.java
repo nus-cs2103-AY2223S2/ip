@@ -11,11 +11,7 @@ public class ListCommand extends Command {
 
     public ListCommand(Storage s, String c) {
         super(s, c);
-        try {
-            s.showList();
-        } catch (NoTaskFoundException e) {
-            Ui.displayMessage(Ui.leoResponse(e.getMessage()));
-        }
+        s.showList();
     }
 
 }

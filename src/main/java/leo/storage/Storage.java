@@ -105,17 +105,9 @@ public class Storage {
     /**
      * Prints the list of tasks stored in the data.
      *
-     * @throws NoTaskFoundException If there are no tasks in the list.
      */
-    public void showList() throws NoTaskFoundException {
-        try {
-            int length = data.size();
-            for (int i = 0; i < length; i++) {
-                Ui.displayMessage((i + 1) + ". " + getTask(i).toString());
-            }
-        } catch (LeoException e) {
-            Ui.displayMessage(Ui.leoResponse(e.getMessage()));
-        }
+    public void showList() {
+        data.display();
     }
 
     /**
@@ -176,7 +168,7 @@ public class Storage {
      * @return Task required.
      * @throws NoTaskFoundException If task is not in the list.
      */
-    private Task getTask(int num) throws NoTaskFoundException {
+    public Task getTask(int num) throws NoTaskFoundException {
         try {
             return data.getTask(num);
         } catch (Exception e) {
