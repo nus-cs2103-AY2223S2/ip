@@ -6,16 +6,15 @@ import java.time.LocalDate;
  * Represents a deadline task.
  */
 public class Deadline extends Task {
-    protected MyDateTime by;
-
+    protected MyDateTime dueDateTime;
     /**
      * Creates a new deadline task.
      * @param description Description of the task.
-     * @param by Due date and time of the task.
+     * @param dueDateTime Due date and time of the task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String dueDateTime) {
         super(description);
-        this.by = new MyDateTime(by);
+        this.dueDateTime = new MyDateTime(dueDateTime);
     }
 
     @Override
@@ -25,11 +24,11 @@ public class Deadline extends Task {
 
     @Override
     public String formatForFile() {
-        return String.format("%s|%s|%s", "D", super.formatForFile(), this.by.formatDateTimeForFile());
+        return String.format("%s|%s|%s", "D", super.formatForFile(), this.dueDateTime.formatDateTimeForFile());
     }
 
     public String printDateTime() {
-        return this.by.formatDateTimeForPrint();
+        return this.dueDateTime.formatDateTimeForPrint();
     }
 
     /**
@@ -38,7 +37,7 @@ public class Deadline extends Task {
      * @return True if the task is due on given date, else false.
      */
     public boolean isDeadLine(MyDate other) {
-        LocalDate current = this.by.dateOnly();
+        LocalDate current = this.dueDateTime.dateOnly();
         return other.isEqual(current);
     }
 }

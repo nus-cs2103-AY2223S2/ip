@@ -7,19 +7,18 @@ import java.time.LocalDate;
  */
 public class Event extends Task {
 
-    protected MyDateTime from;
-    protected MyDateTime to;
-
+    protected MyDateTime startDateTime;
+    protected MyDateTime endDateTime;
     /**
      * Creates a new event task.
      * @param description Description of the task.
-     * @param from Start date and time of the task.
-     * @param to End date and time of the task.
+     * @param startDateTime Start date and time of the task.
+     * @param endDateTime End date and time of the task.
      */
-    public Event(String description, String from, String to) {
+    public Event(String description, String startDateTime, String endDateTime) {
         super(description);
-        this.from = new MyDateTime(from);
-        this.to = new MyDateTime(to);
+        this.startDateTime = new MyDateTime(startDateTime);
+        this.endDateTime = new MyDateTime(endDateTime);
     }
 
     @Override
@@ -29,11 +28,11 @@ public class Event extends Task {
     }
 
     public String printFromDateTime() {
-        return this.from.formatDateTimeForPrint();
+        return this.startDateTime.formatDateTimeForPrint();
     }
 
     public String printToDateTime() {
-        return this.to.formatDateTimeForPrint();
+        return this.endDateTime.formatDateTimeForPrint();
     }
 
     /**
@@ -42,14 +41,14 @@ public class Event extends Task {
      * @return True if it occurs on given date, else false.
      */
     public boolean liesBetween(MyDate other) {
-        LocalDate f = this.from.dateOnly();
-        LocalDate t = this.to.dateOnly();
+        LocalDate f = this.startDateTime.dateOnly();
+        LocalDate t = this.endDateTime.dateOnly();
         return other.isBetween(f, t);
     }
 
     @Override
     public String formatForFile() {
         return String.format("%s|%s|%s|%s", "E", super.formatForFile(),
-                this.from.formatDateTimeForFile(), this.to.formatDateTimeForFile());
+                this.startDateTime.formatDateTimeForFile(), this.endDateTime.formatDateTimeForFile());
     }
 }

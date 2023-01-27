@@ -7,37 +7,37 @@ import java.util.List;
  * Represents a task list.
  */
 public class Tasks {
-    private List<Task> l;
+    private List<Task> taskList;
 
     public Tasks() {
-        this.l = new ArrayList<Task>(100);
+        this.taskList = new ArrayList<Task>(100);
     }
 
     /**
      * Prints the tasks in the task list.
      */
     public void printList() {
-        if (l.size() == 0) {
+        if (taskList.size() == 0) {
             System.out.println("You haven't added anything 0_0?");
         } else {
             int count = 1;
-            for (Task task : l) {
+            for (Task task : taskList) {
                 System.out.println(count + ". " + task.printTask());
                 count++;
             }
         }
     }
-
     /**
      * Adds a task to the task list.
      * @param task The task to be added.
      * @param silent True if printing to user is not required, else false.
      */
     public void addToList(Task task, boolean silent) {
-        l.add(task);
+        taskList.add(task);
         if (!silent) {
             System.out.printf("Added to list: %s\n", task.printTask());
-            System.out.printf("Now you've got %d task(s) in your bag, CHOP CHOP GET THEM DONE.\n", l.size());
+            System.out.printf("Now you've got %d task(s) in your bag, CHOP CHOP GET THEM DONE.\n", taskList.size());
+
         }
     }
 
@@ -48,7 +48,7 @@ public class Tasks {
      */
     public void markTaskDone(int num, boolean silent) {
         if (withinRange(num)) {
-            this.l.get(num).markTaskDone(silent);
+            this.taskList.get(num).markTaskDone(silent);
         } else {
             System.out.println("Hey HEY HEY, that's not within range >:[");
         }
@@ -60,7 +60,7 @@ public class Tasks {
      */
     public void markTaskUndone(int num) {
         if (withinRange(num)) {
-            this.l.get(num).markTaskUndone();
+            this.taskList.get(num).markTaskUndone();
         } else {
             System.out.println("Hey HEY HEY, that's not within range >:[");
         }
@@ -72,16 +72,16 @@ public class Tasks {
      */
     public void deleteTask(int num) {
         if (withinRange(num)) {
-            System.out.println("Into the bin it goes! This is now deleted!\n" + this.l.get(num).printTask());
-            this.l.remove(num);
-            System.out.printf("%d task(s) left to go :/\n", this.l.size());
+            System.out.println("Into the bin it goes! This is now deleted!\n" + this.taskList.get(num).printTask());
+            this.taskList.remove(num);
+            System.out.printf("%d task(s) left to go :/\n", this.taskList.size());
         } else {
             System.out.println("Hey HEY HEY, that's not within range >:[");
         }
     }
 
     public boolean withinRange(int num) {
-        return this.l.size() > num && num >= 0;
+        return this.taskList.size() > num && num >= 0;
     }
 
     /**
@@ -89,11 +89,11 @@ public class Tasks {
      * @return A formatted string of all tasks.
      */
     public String formatForFile() {
-        if (l.size() == 0) {
+        if (taskList.size() == 0) {
             return "";
         } else {
             StringBuilder output = new StringBuilder();
-            for (Task task : l) {
+            for (Task task : taskList) {
                 output.append(task.formatForFile()).append("\n");
             }
             return output.toString();
@@ -105,13 +105,13 @@ public class Tasks {
      * @param dateOnly The given date.
      */
     public void filterByDate(String dateOnly) {
-        if (l.size() == 0) {
+        if (taskList.size() == 0) {
             System.out.println("Nothing~");
         } else {
             MyDate date = new MyDate(dateOnly);
             System.out.println("Deadlines due or events ongoing on " + date.printDateTime());
             int count = 1;
-            for (Task task : l) {
+            for (Task task : taskList) {
                 if (task instanceof Deadline) {
                     Deadline d = (Deadline) task;
                     if (d.isDeadLine(date)) {
@@ -134,12 +134,12 @@ public class Tasks {
      * @param keyword The given keyword.
      */
     public void filterByKeyword(String keyword) {
-        if (l.size() == 0) {
+        if (taskList.size() == 0) {
             System.out.println("Nothing~");
         } else {
             System.out.println("Tasks that have " + keyword);
             int count = 1;
-            for (Task task : l) {
+            for (Task task : taskList) {
                 if (task.containsKeyword(keyword)) {
                     System.out.println(count + ". " + task.printTask());
                     count++;
