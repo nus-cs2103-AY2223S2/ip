@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-
-    private static final String dirPath = System.getProperty("user.home") + "/ip/data";
+    private static final String DIR_PATH = System.getProperty("user.home") + "/ip/data";
     private String filePath;
     public Storage(String path) {
         this.filePath = path;
@@ -18,9 +17,9 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            File dir = new File(dirPath);
+            File dir = new File(DIR_PATH);
             dir.mkdirs();
-            File taskFile = new File(dirPath + filePath);
+            File taskFile = new File(DIR_PATH + filePath);
             if (!taskFile.exists()) {
                 taskFile.createNewFile();
             }
@@ -30,7 +29,7 @@ public class Storage {
                 Task task = readTaskString(input);
                 tasks.add(task);
             }
-        } catch(IOException | DukeException e) {
+        } catch (IOException | DukeException e) {
             throw new DukeException(e.getMessage());
         }
         return tasks;
@@ -38,7 +37,7 @@ public class Storage {
 
     public void saveToFile(ArrayList<Task> tasks) throws DukeException  {
         try {
-            FileWriter fw = new FileWriter(dirPath + filePath);
+            FileWriter fw = new FileWriter(DIR_PATH + filePath);
             for (Task task: tasks) {
                 fw.write(task.getText());
                 fw.write(System.lineSeparator());

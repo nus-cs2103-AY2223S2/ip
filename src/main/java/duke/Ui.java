@@ -7,8 +7,8 @@ public class Ui {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    public void showErrorMessage(String e) {
-        System.out.println(e);
+    public void showErrorMessage(String error) {
+        System.out.println(error);
     }
     public void showTasksMessage(ArrayList<Task> tasks) {
         System.out.println("Here are the tasks in your list:");
