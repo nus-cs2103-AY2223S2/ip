@@ -13,7 +13,6 @@ public class Todo extends Task {
      * @param description of the task.
      */
     public Todo(String description) {
-
         super(description);
     }
 
@@ -24,7 +23,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-
         return "[T]" + "[" +this.getStatusIcon() + "] " + this.getDescription();
     }
 }

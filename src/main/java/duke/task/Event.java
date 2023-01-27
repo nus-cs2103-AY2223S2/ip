@@ -33,7 +33,6 @@ public class Event extends Task {
      * @return a string.
      */
     public String getFrom() {
-
         return from;
     }
 
@@ -43,7 +42,6 @@ public class Event extends Task {
      * @return a string.
      */
     public String getTo() {
-
         return to;
     }
 
