@@ -1,18 +1,18 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
 public class DeadlineTest {
     @Test
-    public void testGetDescription() {
+    public void getDescription() {
         try {
             String description = "complete unit tests";
-            Task task = new Deadline(description, false, "26/1/2023 2303");    
+            Task task = new Deadline(description, false, "26/1/2023 2303");
             assertEquals(description, task.getDescription());
         } catch (DukeException e) {
             fail();
@@ -34,8 +34,8 @@ public class DeadlineTest {
         assertEquals(true, Deadline.hasIcon("D"));
     }
 
-    @Test 
-    void hasIcon_notDeadlineIcon_returnsFalse() {
+    @Test
+    public void hasIcon_notDeadlineIcon_returnsFalse() {
         assertEquals(false, Todo.hasIcon("not D"));
     }
 
@@ -50,7 +50,7 @@ public class DeadlineTest {
     }
 
     @Test
-    void testMarkAndUnmark() {
+    public void markAndUnmark() {
         try {
             Task task = new Deadline("complete unit tests", false, "26/1/2023 2303");
             assertEquals(false, task.isCompleted());

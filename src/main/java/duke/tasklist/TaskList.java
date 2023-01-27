@@ -18,7 +18,7 @@ public class TaskList {
         Storage.save(tasks);
     }
 
-    public void load() throws Exception{
+    public void load() throws Exception {
         tasks = Storage.load();
     }
 

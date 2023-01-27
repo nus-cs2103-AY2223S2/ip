@@ -34,7 +34,7 @@ public class Storage {
         return tasks;
     }
 
-    public static void save(List<Task> tasks) throws DukeException  {
+    public static void save(List<Task> tasks) throws DukeException {
         FileWriter fw = null;
         try {
             fw = new FileWriter(DATA_PATH);

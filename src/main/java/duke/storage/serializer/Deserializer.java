@@ -5,5 +5,5 @@ import duke.task.Task;
 
 @FunctionalInterface
 public interface Deserializer {
-    abstract public Task deserialize(Serializer serializer) throws DukeException;
+    public abstract Task deserialize(Serializer serializer) throws DukeException;
 }

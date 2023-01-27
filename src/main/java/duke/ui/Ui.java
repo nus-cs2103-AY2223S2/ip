@@ -6,7 +6,7 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -14,7 +14,7 @@ public class Ui {
 
     public void respond(String... chunks) {
         System.out.println("    ------------------------------DUKE------------------------------");
-        for(String lines : chunks) {
+        for (String lines : chunks) {
             for (String line: lines.split("\n")) {
                 System.out.print("        ");
                 System.out.println(line);
@@ -32,7 +32,7 @@ public class Ui {
 
     public void introduce(String logo) {
         respond(
-            "Hello I am", 
+            "Hello I am",
             logo,
             "",
             "What can I do for you?"
@@ -46,25 +46,25 @@ public class Ui {
 
     public void listTasks(TaskList tasks) {
         respond(
-            "Here are the tasks in your list:", 
+            "Here are the tasks in your list:",
             tasks.toString()
         );
     }
 
     public void markTask(Task task) {
         respond(
-            "Nice! I've marked this task as done:", 
+            "Nice! I've marked this task as done:",
             String.format("=> %s", task
         ));
     }
 
     public void unmarkTask(Task task) {
         respond(
-            "OK, I've marked this task as not done yet:", 
+            "OK, I've marked this task as not done yet:",
             String.format("=> %s", task)
         );
     }
-    
+
     public void addTask(Task task, int length) {
         respond(
             "Got it. I've added this task:",
