@@ -50,6 +50,7 @@ public class Parser {
         case "event":
             try {
                 String[] eventDescription = descriptions[1].split("/from | /to ");
+
                 if (eventDescription.length != 3) {
                     throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
                 }
