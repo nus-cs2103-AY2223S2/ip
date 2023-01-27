@@ -1,3 +1,5 @@
+package Exceptions;
+
 public class IncompleteInputException extends MunchException {
 
     public IncompleteInputException() {

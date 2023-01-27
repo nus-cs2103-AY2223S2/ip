@@ -1,5 +1,9 @@
+import Exceptions.IncompleteInputException;
+import Exceptions.InvalidInputException;
+import Exceptions.MunchException;
 import java.util.ArrayList;
 import java.util.*;
+
 
 public class Munch {
 
@@ -9,9 +13,9 @@ public class Munch {
         System.out.println("How may I help you?");
         System.out.println("__________________________");
         ArrayList<Task> tasks = new ArrayList<>();
+        tasks = FileSave.load(tasks);
         Boolean exit = true;
         Scanner text = new Scanner(System.in);
-        int count = 0;
         while (exit) {
             try {
                 String word = text.nextLine();
@@ -21,6 +25,7 @@ public class Munch {
                 // exit program
                 if (word.equals("bye")) {
                     System.out.println("See ya champ! Enjoy your day!");
+                    FileSave.save(tasks);
                     exit = false;
 
                     // generate list of tasks
@@ -38,8 +43,7 @@ public class Munch {
                     System.out.println("Aites, I've deleted this task for you :)");
                     System.out.println(tasks.get(i));
                     tasks.remove(i);
-                    count--;
-                    System.out.println("Now you have " + count + " task(s) in the list ~~");
+                    System.out.println("Now you have " + tasks.size() + " task(s) in the list ~~");
                 } else if (words[0].equals("todo")) {
                     String separator = "todo";
                     int sepPos = word.indexOf(separator);
@@ -49,10 +53,8 @@ public class Munch {
                         tasks.add(todos);
                         System.out.println("Aites, I've added this task for you :)");
                         System.out.println(todos);
-                        count++;
-                        System.out.println("Now you have " + count + " task(s) in the list ~~");
+                        System.out.println("Now you have " + tasks.size() + " task(s) in the list ~~");
                     } else {
-                        count--;
                         throw new IncompleteInputException();
                     }
 
@@ -68,10 +70,8 @@ public class Munch {
                         tasks.add(deadline);
                         System.out.println("Aites, I've added this task for you :)");
                         System.out.println(deadline);
-                        count++;
-                        System.out.println("Now you have " + count + " task(s) in the list ~~");
+                        System.out.println("Now you have " + tasks.size() + " task(s) in the list ~~");
                     } else {
-                        count--;
                         throw new IncompleteInputException();
                     }
 
@@ -90,10 +90,8 @@ public class Munch {
                         tasks.add(event);
                         System.out.println("Aites, I've added this task for you :)");
                         System.out.println(event);
-                        count++;
-                        System.out.println("Now you have " + count + " task(s) in the list ~~");
+                        System.out.println("Now you have " + tasks.size() + " task(s) in the list ~~");
                     } else {
-                        count--;
                         throw new IncompleteInputException();
                     }
 
@@ -101,6 +99,7 @@ public class Munch {
                     throw new InvalidInputException();
                 }
                 System.out.println("__________________________");
+                FileSave.save(tasks);
             } catch (IncompleteInputException | InvalidInputException e) {
                 System.out.println(e.getMessage());
             }
