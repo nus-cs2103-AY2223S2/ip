@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void testToDoWithoutTaskDescriptionError() {
+    public void testToDo_withoutTaskDescription_exceptionThrown() {
         try {
             Parser.parseString("todo");
         } catch (JeoException e) {
@@ -16,7 +16,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testMarkTaskUsingStringAndNotIntegerError() {
+    public void testMarkTask_usingStringAndNotInteger_exceptionThrown() {
         try {
             Parser.parseString("mark two");
         } catch (JeoException e) {

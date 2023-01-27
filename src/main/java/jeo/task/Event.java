@@ -38,7 +38,7 @@ public class Event extends Task {
      * @return the parsed start date-time.
      */
     public LocalDateTime getDateTimeFrom() {
-        return this.fromDateTime;
+        return fromDateTime;
     }
 
     /**
@@ -46,7 +46,7 @@ public class Event extends Task {
      * @return the parsed end date-time.
      */
     public LocalDateTime getDateTimeTo() {
-        return this.toDateTime;
+        return toDateTime;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Event extends Task {
      * @return the formatted start date-time.
      */
     public String getFormattedFrom() {
-        return this.from;
+        return from;
     }
 
     /**
@@ -62,7 +62,7 @@ public class Event extends Task {
      * @return the formatted end date-time.
      */
     public String getFormattedTo() {
-        return this.to;
+        return to;
     }
 
     /**

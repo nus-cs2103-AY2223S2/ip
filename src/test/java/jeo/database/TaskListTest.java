@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskListTest {
 
     @Test
-    public void testNumberOfTasksAfterAdding() {
+    public void testNumberOfTasks_afterAdding() {
         TaskList testTaskList = new TaskList();
         testTaskList.addTask(new StubTask("run"));
         testTaskList.addTask(new StubTask("bathe"));
@@ -17,7 +17,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testNumberOfTasksAfterDeleting() {
+    public void testNumberOfTasks_afterDeleting() {
         TaskList testTaskList = new TaskList();
         testTaskList.addTask(new StubTask("run"));
         testTaskList.addTask(new StubTask("bathe"));
@@ -27,7 +27,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testTaskAtIndex() {
+    public void testTask_atIndex() {
         TaskList testTaskList = new TaskList();
         testTaskList.addTask(new StubTask("run"));
         testTaskList.addTask(new StubTask("bathe"));

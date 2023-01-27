@@ -1,7 +1,8 @@
 package jeo.parser;
 
-import java.util.HashMap;
 import jeo.exception.JeoException;
+
+import java.util.HashMap;
 
 /**
  * Represents the parser which parses user input as a string.
@@ -48,8 +49,8 @@ public class Parser {
                 throw new JeoException("Please enter a task description.");
             }
             if (by.isEmpty()) {
-                throw new JeoException("Please enter a date-time in the format " +
-                        "\"yyyy-MM-dd HH:mm\" after \"/by\".");
+                throw new JeoException("Please enter a date-time in the format "
+                        + "\"yyyy-MM-dd HH:mm\" after \"/by\".");
             }
             hm.put("description", desc);
             hm.put("by", by);
@@ -59,8 +60,8 @@ public class Parser {
             if (!str.toLowerCase().contains("/from") || !str.toLowerCase().contains("/to")) {
                 throw new JeoException(str.isEmpty()
                         ? "Please enter a task description."
-                        : "Please follow the format: event <description> " +
-                        "/from <yyyy-MM-dd HH:mm> /to <yyyy-MM-dd HH:mm>");
+                        : "Please follow the format: event <description> "
+                        + "/from <yyyy-MM-dd HH:mm> /to <yyyy-MM-dd HH:mm>");
             }
             String[] arr = parseSubstringTasks(str, "event1");
             String desc = arr[0];
@@ -72,16 +73,16 @@ public class Parser {
                 throw new JeoException("Please enter a task description.");
             }
             if (from.isEmpty() && to.isEmpty()) {
-                throw new JeoException("Please enter a date-time in the format " +
-                        "\"yyyy-MM-dd HH:mm\" after \"/from\" and \"/to\".");
+                throw new JeoException("Please enter a date-time in the format "
+                        + "\"yyyy-MM-dd HH:mm\" after \"/from\" and \"/to\".");
             }
             if (from.isEmpty()) {
-                throw new JeoException("Please enter a date-time in the format " +
-                        "\"yyyy-MM-dd HH:mm\" after \"/from\".");
+                throw new JeoException("Please enter a date-time in the format "
+                        + "\"yyyy-MM-dd HH:mm\" after \"/from\".");
             }
             if (to.isEmpty()) {
-                throw new JeoException("Please enter a date-time in the format " +
-                        "\"yyyy-MM-dd HH:mm\" after \"/to\".");
+                throw new JeoException("Please enter a date-time in the format "
+                        + "\"yyyy-MM-dd HH:mm\" after \"/to\".");
             }
             hm.put("description", desc);
             hm.put("from", from);

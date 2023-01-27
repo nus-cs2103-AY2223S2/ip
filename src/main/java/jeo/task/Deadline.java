@@ -25,7 +25,7 @@ public class Deadline extends Task {
         DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_TIME_TO_PARSE);
         DateTimeFormatter formatterPrint = DateTimeFormatter.ofPattern(DATE_TIME_TO_PRINT);
         this.byDateTime = LocalDateTime.parse(by, formatterParse);
-        this.by = this.byDateTime.format(formatterPrint);
+        this.by = byDateTime.format(formatterPrint);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Deadline extends Task {
      * @return the parsed due date-time.
      */
     public LocalDateTime getDateTimeBy() {
-        return this.byDateTime;
+        return byDateTime;
     }
 
     /**
@@ -41,7 +41,7 @@ public class Deadline extends Task {
      * @return the formatted due date-time.
      */
     public String getFormattedBy() {
-        return this.by;
+        return by;
     }
 
     /**

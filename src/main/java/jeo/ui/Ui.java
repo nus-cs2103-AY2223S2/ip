@@ -28,7 +28,8 @@ public class Ui {
      * Prints a divider for command response messages.
      */
     public void showBodyDivider() {
-        System.out.println("_________________________________________________________________________________________");
+        System.out.println("________________________________________________________________" +
+                "_________________________");
     }
 
     /**
@@ -65,8 +66,8 @@ public class Ui {
      * Prints the error message when unable to convert a string to a date-time object.
      */
     public void showDateTimeParsingError() {
-        System.out.println("[Error] Unable to parse date-time. " +
-                "Please input date in the format: \"yyyy-MM-dd HH:mm\".");
+        System.out.println("[Error] Unable to parse date-time. "
+                + "Please input date in the format: \"yyyy-MM-dd HH:mm\".");
     }
 
     /**
