@@ -18,11 +18,11 @@ public class Storage {
         } 
     }
 
-    private static void writeStringToFile(String filePath, String content) {
+    private static void writeStringToFile(String filePath, String content) throws DukeSaveLoadException {
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.write(content); 
         } catch(IOException e) {
-            // Handle the exception
+            throw new DukeSaveLoadException("There's an error writing to save file.");
         }
     }
 
@@ -41,7 +41,7 @@ public class Storage {
         return output;
     }
 
-    public void save(TaskList tasks) {
+    public void save(TaskList tasks) throws DukeSaveLoadException {
         Storage.writeStringToFile(this.filePath, tasks.encodeAsString());
     }
 }
