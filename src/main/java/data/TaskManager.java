@@ -1,6 +1,6 @@
 package data;
 import errors.DukeInvalidCommandException;
-import formatters.Response;
+import ui.Response;
 import task.Task;
 import java.util.ArrayList;
 
@@ -20,33 +20,6 @@ public class TaskManager {
      */
     public ArrayList<Task> getTasks() {
         return this.taskList;
-    }
-
-    /**
-     * Prints out the users tasks
-     *
-     * Calls the toString() method of each task type and formats the lists of tasks
-     * by printing to the console line by line
-     *
-     * @param showMessage description of the parameter
-     */
-    public String displayTasks(boolean showMessage) {
-        StringBuilder response = new StringBuilder();
-
-        if (this.taskList.size() == 0) {
-            return Response.NO_TASK.toString();
-        }
-
-        if (showMessage) {
-            response.append("Heww are your tasks UwU!\n");
-        }
-
-        for (int i = 0; i < this.taskList.size(); i++) {
-            Task task = this.taskList.get(i);
-            String lineItem = (i + 1) + ". " + task.toString() + "\n";
-            response.append(lineItem);
-        }
-        return response.toString();
     }
 
     /**

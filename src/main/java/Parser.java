@@ -1,7 +1,8 @@
 import data.TaskManager;
 import errors.DukeInvalidCommandException;
 import errors.DukeRuntimeException;
-import formatters.Response;
+import ui.Format;
+import ui.Response;
 import task.Deadline;
 import task.Event;
 import task.ToDo;
@@ -70,7 +71,7 @@ public class Parser {
 
         Event event = new Event(details, startDate, endDate);
         taskManager.addTask(event);
-        output =  Response.EVENT_ADDED + "\n" + taskManager.displayTasks(false);
+        output =  Response.EVENT_ADDED + "\n" + Format.displayTasks(false, taskManager);
         return output;
     }
 
@@ -94,7 +95,7 @@ public class Parser {
         }
         Deadline deadline = new Deadline(details, deadlineDate);
         taskManager.addTask(deadline);
-        output = Response.DEADLINE_ADDED + "\n" + taskManager.displayTasks(false);
+        output = Response.DEADLINE_ADDED + "\n" + Format.displayTasks(false, taskManager);
         return output;
     }
 
@@ -115,7 +116,7 @@ public class Parser {
         }
         ToDo todo = new ToDo(parsedDetails.get("details"));
         taskManager.addTask(todo);
-        output = Response.TODO_ADDED + "\n" + taskManager.displayTasks(false);
+        output = Response.TODO_ADDED + "\n" + Format.displayTasks(false, taskManager);
         return output;
     }
 
@@ -140,10 +141,10 @@ public class Parser {
         }
 
         if (isCompleted) {
-            output =  Response.COMPLETED_TASK + "\n" + taskManager.displayTasks(false);
+            output =  Response.COMPLETED_TASK + "\n" + Format.displayTasks(false, taskManager);
             return output;
         }
-        output =  Response.INCOMPLETE_TASK + "\n" + taskManager.displayTasks(false);
+        output =  Response.INCOMPLETE_TASK + "\n" + Format.displayTasks(false, taskManager);
         return output;
     }
 
@@ -161,7 +162,7 @@ public class Parser {
         } catch (DukeInvalidCommandException e) {
             return e.getMessage();
         }
-        output = Response.TASK_DELETED + "\n" + taskManager.displayTasks(false);
+        output = Response.TASK_DELETED + "\n" + Format.displayTasks(false, taskManager);
         return output;
     }
 
@@ -179,7 +180,7 @@ public class Parser {
         switch (action) {
         case "list":
 
-            output = taskManager.displayTasks(true);
+            output = Format.displayTasks(true, taskManager);
             break;
 
         case "mark":

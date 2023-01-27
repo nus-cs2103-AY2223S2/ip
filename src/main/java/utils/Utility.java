@@ -1,6 +1,6 @@
 package utils;
 import errors.DukeInvalidCommandException;
-import formatters.Response;
+import ui.Response;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +22,21 @@ public class Utility {
         return dateTime;
     }
 
+    // for reading writing
+    public static LocalDateTime convertStringToDateTime(String dateTimeString) {
+        LocalDateTime dateTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm").withResolverStyle(ResolverStyle.LENIENT);;
+            dateTime = LocalDateTime.parse(dateTimeString, formatter);
+        return dateTime;
+    }
+
+//    for reading writing
+    public static String convertDateTimeToString(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        return dateTime.format(formatter);
+    }
+
+    // for user
     public static String getDateTimeString(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
         return dateTime.format(formatter);

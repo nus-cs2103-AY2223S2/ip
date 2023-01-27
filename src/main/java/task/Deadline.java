@@ -3,8 +3,8 @@ package task;
 import errors.DukeInsufficientArgumentException;
 import errors.DukeInvalidCommandException;
 import errors.DukeRuntimeException;
-import formatters.Format;
-import formatters.Response;
+import ui.Format;
+import ui.Response;
 import utils.Utility;
 
 import java.time.LocalDateTime;
@@ -27,7 +27,7 @@ public class Deadline extends Task{
         this.deadline = deadline;
     }
 
-    public Deadline(String details, String deadline, boolean isCompleted) {
+    public Deadline(String details, LocalDateTime deadline, boolean isCompleted) {
         super(details);
         this.deadline = deadline;
         super.changeStatus(isCompleted);
@@ -43,12 +43,12 @@ public class Deadline extends Task{
     }
 
     /**
-     * Returns the value of the private field 'deadline'.
+     * Returns the value of the private field 'deadline' for storage as a String.
      *
-     * @return The current value of 'deadline'.
+     * @return The current value of 'deadline' formatted as a String.
      */
     public String getDeadline() {
-        return this.deadline;
+        return Utility.convertDateTimeToString(this.deadline);
     }
 
 

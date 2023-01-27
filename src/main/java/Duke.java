@@ -1,7 +1,7 @@
 import data.TaskFileReaderWriter;
 import data.TaskManager;
-import formatters.Format;
-import formatters.Response;
+import ui.Format;
+import ui.Response;
 import java.util.Scanner;
 
 /**

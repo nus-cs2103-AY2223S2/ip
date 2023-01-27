@@ -3,8 +3,8 @@ package task;
 import errors.DukeInsufficientArgumentException;
 import errors.DukeInvalidCommandException;
 import errors.DukeRuntimeException;
-import formatters.Format;
-import formatters.Response;
+import ui.Format;
+import ui.Response;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -3,8 +3,8 @@ package task;
 import errors.DukeInsufficientArgumentException;
 import errors.DukeInvalidCommandException;
 import errors.DukeRuntimeException;
-import formatters.Format;
-import formatters.Response;
+import ui.Format;
+import ui.Response;
 import utils.Utility;
 
 import java.time.LocalDateTime;
@@ -27,7 +27,7 @@ public class Event extends Task{
         this.end = end;
     }
 
-    public Event(String details, String start, String end, boolean isCompleted) {
+    public Event(String details, LocalDateTime start, LocalDateTime end, boolean isCompleted) {
         super(details);
         this.start = start;
         this.end = end;
@@ -35,21 +35,21 @@ public class Event extends Task{
     }
 
     /**
-     * Returns the value of the private field 'start' representing the event start date.
+     * Returns the value of the private field 'start' representing the event start date as string for storage
      *
-     * @return The current value of 'start'.
+     * @return The current value of 'start' formatted as a string.
      */
     public String getStart() {
-        return this.start;
+        return Utility.convertDateTimeToString(this.start);
     }
 
     /**
-     * Returns the value of the private field 'end' representing the event end date.
+     * Returns the value of the private field 'end' representing the event end date as string for storage
      *
-     * @return The current value of 'end'.
+     * @return The current value of 'end' formatted as a string.
      */
     public String getEnd() {
-        return this.end;
+        return Utility.convertDateTimeToString(this.end);
     }
 
     /**

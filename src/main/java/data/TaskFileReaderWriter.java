@@ -1,10 +1,13 @@
 package data;
+import jdk.jshell.execution.Util;
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.ToDo;
+import utils.Utility;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 /**
@@ -66,12 +69,15 @@ public class TaskFileReaderWriter {
         switch (category) {
             case "Deadline":
                 String deadline = taskArr[3];
-                newTask = new Deadline(details, deadline, isCompleted);
+                LocalDateTime deadlineDate = Utility.convertStringToDateTime(deadline);
+                newTask = new Deadline(details, deadlineDate, isCompleted);
                 break;
             case "Event":
                 String start = taskArr[3];
                 String end = taskArr[4];
-                newTask = new Event(details, start, end, isCompleted);
+                LocalDateTime startDate = Utility.convertStringToDateTime(start);
+                LocalDateTime endDate = Utility.convertStringToDateTime(end);
+                newTask = new Event(details, startDate, endDate, isCompleted);
                 break;
             case "To-Do":
                 newTask = new ToDo(details, isCompleted);
