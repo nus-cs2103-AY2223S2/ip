@@ -51,7 +51,7 @@ public class Duke {
                                     "This is already done. You can't mark it again. :0 \n" +
                                     "try again.");
                         } else if (splitArr[0].equals("unmark") &&
-                                tasks.getTask(Integer.parseInt(splitArr[1]) - 1).
+                                tasks.getTask(Integer.parseInt(splitArr[1])).
                                         getMark() != true) {
                             throw new WrongBooleanException("Hey! \n" +
                                     "This is undone. You can't mark it undone again. :0 \n" +
@@ -65,7 +65,7 @@ public class Duke {
                                     "Please try again!");
                         }
                         Task newTask = tasks.getTask(Integer.parseInt(splitArr[1]) - 1);
-                        tasks.removeTask(Integer.parseInt(splitArr[1]));
+                        tasks.removeTask(Integer.parseInt(splitArr[1]) - 1);
                         System.out.println(formatStr(tasks.deleteReport(newTask)));
                     } else if (splitArr[0].equals("todo")) {
                         Todo newTodo = new Todo(input);

@@ -1,5 +1,4 @@
-[T] [ ] work
+[T] [X] work
 [T] [X] banna
-[T] [ ] pokemon card
-[E] [X] make pie    (by: Mon 5 to: Tue 4)
 [T] [X] level 8 right now
+[T] [X] edwin
