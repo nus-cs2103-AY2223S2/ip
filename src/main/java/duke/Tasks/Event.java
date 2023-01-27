@@ -32,9 +32,8 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + "[" + getStatusIcon() + "] " + getDescription() +
-                " (" + "from: " + this.from
-                + " " + "to: " + this.to+ ")";
+        return "[E]" + "[" + getStatusIcon() + "] " + getDescription()
+                + " (" + "from: " + this.from + " " + "to: " + this.to+ ")";
     }
 
     /**
@@ -44,8 +43,6 @@ public class Event extends Task{
     @Override
     public String file() {
         String status = isDone? "1" : "0";
-        return "E | " + status + " | " + getDescription() + " | "
-                + this.from
-                + " | " + this.to;
+        return "E | " + status + " | " + getDescription() + " | " + this.from + " | " + this.to;
     }
 }
