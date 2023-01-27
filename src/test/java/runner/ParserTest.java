@@ -25,7 +25,7 @@ public class ParserTest {
     }
 
     @Test
-    public void markTest () {
+    public void readTest2 () {
         Parser a = new Parser(new Duke());
         a.read("mark 2");
         assertEquals("Index Out", outputStreamCaptor.toString().trim());
