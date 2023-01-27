@@ -10,10 +10,9 @@ import java.util.ArrayList;
 class Save {
     /**
      * Initliaze ArrayList of Task.
-     * 
-     * if file "save" does not exist, create it and return empty ArrayList of Task else load contentes of "save" into the ArrayList of Task
-     *  
-     * @return ArrayList<Task> object
+     * if file "save" does not exist, create it and return empty ArrayList of Task
+     * else load contentes of "save" into the ArrayList of Task
+     * @return ArrayList of Task
      */
     public static ArrayList<Task> loadSave() {
         File file = new File("./save");
@@ -24,11 +23,10 @@ class Save {
                 @SuppressWarnings("unchecked")
                 ArrayList<Task> tasks = (ArrayList<Task>) ois.readObject();
                 return tasks;
-                            
             } catch (IOException exception) {
-                System.out.println("Wrong format object");  
+                System.out.println("Wrong format object");
             } catch (ClassNotFoundException exception) {
-                System.out.println("object can't be loaded");  
+                System.out.println("object can't be loaded");
             }
             return new ArrayList<Task>();
         } else {
@@ -38,7 +36,7 @@ class Save {
                 System.out.println("cant create new file");
             }
             return new ArrayList<Task>();
-        }         
+        }
     }
 
     /**
@@ -49,7 +47,7 @@ class Save {
         try (FileOutputStream fos = new FileOutputStream("./save");
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
         ) {
-            oos.writeObject(tasks); 
+            oos.writeObject(tasks);
         } catch (IOException exception) {
             exception.printStackTrace();
         }

@@ -2,9 +2,9 @@ package duke;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-class Task implements Serializable{
-    boolean done;
-    String name;
+class Task implements Serializable {
+    protected boolean done;
+    protected String name;
     /**
      * Initialize a Task Based on nameString.
      * @param nameString
@@ -15,7 +15,6 @@ class Task implements Serializable{
 
     /**
      * Set this.done to value of isMarked.
-     * 
      * @param isMarked
      */
     public void mark(boolean isMarked) {
@@ -25,10 +24,11 @@ class Task implements Serializable{
     /**
      * String representation of Task.
      */
-    public String toString(){
-        return String.format("[%s] %s",this.done ? "X" : " ", this.name);
+    public String toString() {
+        return String.format("[%s] %s", this.done ? "X" : " ", this.name);
     }
 }
+
 class Todo extends Task {
     /**
      * initialize todo.
@@ -41,12 +41,12 @@ class Todo extends Task {
     /**
      * String representation of todo.
      */
-    public String toString(){
-        return String.format("[T][%s] %s",this.done ? "X" : " ", this.name);
+    public String toString() {
+        return String.format("[T][%s] %s", this.done ? "X" : " ", this.name);
     }
 }
 class Deadline extends Task {
-    LocalDate by;
+    private LocalDate by;
 
     /**
      * Initialize deadline.
@@ -61,17 +61,16 @@ class Deadline extends Task {
     /**
      * String representation of deadline.
      */
-    public String toString(){
-        return String.format("[D][%s] %s (by: %s)",this.done ? "X" : " ", this.name, this.by);
+    public String toString() {
+        return String.format("[D][%s] %s (by: %s)", this.done ? "X" : " ", this.name, this.by);
     }
 }
 class Event extends Task {
-    LocalDate from;
-    LocalDate to;
+    private LocalDate from;
+    private LocalDate to;
 
     /**
      * Initialize event.
-     * 
      * @param nameString
      * @param fromOption
      * @param toOption
@@ -83,9 +82,9 @@ class Event extends Task {
     }
 
     /**
-     * String representation of event 
+     * String representation of event.
      */
-    public String toString(){
-        return String.format("[E][%s] %s (from: %s to %s)",this.done ? "X" : " ", this.name, this.from, this.to);
+    public String toString() {
+        return String.format("[E][%s] %s (from: %s to %s)", this.done ? "X" : " ", this.name, this.from, this.to);
     }
 }

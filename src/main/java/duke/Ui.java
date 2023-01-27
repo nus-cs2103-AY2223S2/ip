@@ -6,11 +6,11 @@ class Ui {
      * Print intro.
      */
     public static void intro() {
-        System.out.println("Hello! I am your anime waifu!"); 
-        System.out.println("What can I do for you my husbando?");        
-        System.out.println(" (*_*)");        
-        System.out.println("|(   )|");        
-        System.out.println("  |-|");        
+        System.out.println("Hello! I am your anime waifu!");
+        System.out.println("What can I do for you my husbando?");
+        System.out.println(" (*_*)");
+        System.out.println("|(   )|");
+        System.out.println("  |-|");
     }
 
     /**
@@ -98,7 +98,9 @@ class Ui {
      * @param option
      */
     public static void missingOptions(String option) {
-        System.out.format("please ensure u have a %s option and that %s option argument exist (order should be followed if command has multiple option)%n", option);
+        System.out.format(
+                "ensure %s option and %s option argument exist (in that order if command has multiple option)%n",
+                option);
     }
 
     /**

@@ -10,47 +10,47 @@ enum Query { LIST, FIND, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE }
 class Parser {
     /**
      * Get input string, parses it and run corresponding functions.
-     * 
      * some corresponding function modifies TaskList object
-     *  
      * @param input
      * @param tasks
      * @throws IllegalArgumentException
      * @throws IndexOutOfBoundsException
      */
-    public static void parseRawString(String input, TaskList tasks) throws IllegalArgumentException, IndexOutOfBoundsException {
-        String[] tokens = input.split(" ",2);
+    public static void parseRawString(String input, TaskList tasks) throws IllegalArgumentException,
+            IndexOutOfBoundsException {
+        String[] tokens = input.split(" ", 2);
         Query query = Query.valueOf(tokens[0].toUpperCase());
         switch (query) {
-            case LIST: 
-                list(tasks);
-                break; 
-            case FIND: 
-                find(tasks, tokens[1]);
-                break; 
-            case MARK:
-                mark(true, tasks, tokens[1]);
-                break;
-            case UNMARK:
-                mark(false, tasks, tokens[1]);
-                break;
-            case TODO:
-                addTodo(tasks, tokens[1]);
-                break;
-            case DEADLINE:
-                addDeadline(tasks, tokens[1]);
-                break;
-            case EVENT:
-                addEvent(tasks, tokens[1]);
-                break;
-            case DELETE:
-                delete(tasks, tokens[1]);
-                break;
+        case LIST:
+            list(tasks);
+            break;
+        case FIND:
+            find(tasks, tokens[1]);
+            break;
+        case MARK:
+            mark(true, tasks, tokens[1]);
+            break;
+        case UNMARK:
+            mark(false, tasks, tokens[1]);
+            break;
+        case TODO:
+            addTodo(tasks, tokens[1]);
+            break;
+        case DEADLINE:
+            addDeadline(tasks, tokens[1]);
+            break;
+        case EVENT:
+            addEvent(tasks, tokens[1]);
+            break;
+        case DELETE:
+            delete(tasks, tokens[1]);
+            break;
+        default:
+            break;
         }
     }
     /**
      * Pass ArrayList of Task to UI.
-     * 
      * @param tasks
      */
     private static void list(TaskList tasks) {
@@ -58,25 +58,27 @@ class Parser {
     }
 
     /**
-     * Find task containing search string. 
-     * 
+     * Find task containing search string.
      * @param tasks
      * @param searchString
      */
     private static void find(TaskList tasks, String searchString) {
-        List<Task> listTask = tasks.get().stream().filter(task -> task.toString().contains(searchString)).collect(Collectors.toList());
+        List<Task> listTask = tasks
+                .get()
+                .stream()
+                .filter(task -> task.toString()
+                .contains(searchString))
+                .collect(Collectors.toList());
         Ui.find(new ArrayList<Task>(listTask));
-        
     }
 
     /**
      * Mark or unmark a task based on input.
-     * 
      * @param isMark
      * @param tasks
      * @param numString
      */
-    private static void mark(boolean isMark ,TaskList tasks, String numString) {
+    private static void mark(boolean isMark, TaskList tasks, String numString) {
         try {
             int num = Integer.parseInt(numString);
             Task task = tasks.mark(isMark, num - 1);
@@ -90,7 +92,7 @@ class Parser {
     /**
      * Adds a todo.
      * @param tasks
-     * @param nameString 
+     * @param nameString
      */
     private static void addTodo(TaskList tasks, String nameString) {
         Todo task = new Todo(nameString);
@@ -101,14 +103,14 @@ class Parser {
     /**
      * Adds a deadline.
      * @param tasks
-     * @param paramString 
+     * @param paramString
      */
     private static void addDeadline(TaskList tasks, String paramString) {
         try {
             String[] tokens = paramString.split(" /by ");
             String name = tokens[0];
             String by = tokens[1];
-            Deadline task = new Deadline(name, parseDate(by));            
+            Deadline task = new Deadline(name, parseDate(by));
             tasks.add(task);
             Ui.addTask("deadline", task);
         } catch (IndexOutOfBoundsException exception) {
@@ -131,14 +133,14 @@ class Parser {
             String[] options = tmpToken.split(" /to ");
             String from = options[0];
             String to = options[1];
-            Event task = new Event(name, parseDate(from), parseDate(to));            
+            Event task = new Event(name, parseDate(from), parseDate(to));
             tasks.add(task);
             Ui.addTask("event", task);
-        } catch (IndexOutOfBoundsException exception) { 
+        } catch (IndexOutOfBoundsException exception) {
             Ui.missingOptions("/from /to");
         } catch (DateTimeParseException exception) {
             Ui.missingOptions("/by");
-        }    
+        }
     }
 
     /**

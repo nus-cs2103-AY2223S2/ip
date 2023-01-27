@@ -7,8 +7,8 @@ class TaskList {
     }
 
     /**
-     * Get ArrayList<Task> object.
-     * @return ArrayList<Task> object
+     * Get ArrayList of Task object.
+     * @return ArrayList of Task object
      */
     public ArrayList<Task> get() {
         return tasks;
@@ -16,15 +16,13 @@ class TaskList {
 
     /**
      * Mark a task done or undone by 0th based index.
-     * 
      * after marking, make a save to "save" file
-     * 
      * @param isMark
      * @param index
      * @return the Task object that is marked
      * @throws IndexOutOfBoundsException
      */
-    public Task mark(boolean isMark, int index) throws IndexOutOfBoundsException{
+    public Task mark(boolean isMark, int index) throws IndexOutOfBoundsException {
         Task task = tasks.get(index);
         task.mark(isMark);
         Save.makeSave(tasks);
@@ -33,7 +31,6 @@ class TaskList {
 
     /**
      * Add Task object.
-     * 
      * @param task
      */
     public void add(Task task) {
