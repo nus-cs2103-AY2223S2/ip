@@ -30,19 +30,19 @@ public class Event extends Task {
     }
 
     public LocalDateTime getDateTimeFrom() {
-        return this.fromDateTime;
+        return fromDateTime;
     }
 
     public LocalDateTime getDateTimeTo() {
-        return this.toDateTime;
+        return toDateTime;
     }
 
     public String getFormattedFrom() {
-        return this.from;
+        return from;
     }
 
     public String getFormattedTo() {
-        return this.to;
+        return to;
     }
 
     /**

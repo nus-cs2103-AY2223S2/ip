@@ -23,15 +23,15 @@ public class Deadline extends Task {
         DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_TIME_TO_PARSE);
         DateTimeFormatter formatterPrint = DateTimeFormatter.ofPattern(DATE_TIME_TO_PRINT);
         this.byDateTime = LocalDateTime.parse(by, formatterParse);
-        this.by = this.byDateTime.format(formatterPrint);
+        this.by = byDateTime.format(formatterPrint);
     }
 
     public LocalDateTime getDateTimeBy() {
-        return this.byDateTime;
+        return byDateTime;
     }
 
     public String getFormattedBy() {
-        return this.by;
+        return by;
     }
 
     /**

@@ -21,7 +21,7 @@ public abstract class Task {
      * @return task description
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -36,14 +36,14 @@ public abstract class Task {
      * Marks the task as done
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
      * Marks the task as not done
      */
     public void unmarkFromDone() {
-        this.isDone = false;
+        isDone = false;
     }
 
     /**

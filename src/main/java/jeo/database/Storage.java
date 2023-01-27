@@ -23,7 +23,7 @@ public class Storage {
 
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> arr = new ArrayList<>();
-        File f = new File(this.path);
+        File f = new File(path);
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {
             String taskString = sc.nextLine();
@@ -35,28 +35,27 @@ public class Storage {
     }
 
     public void save(ArrayList<Task> taskList) throws IOException {
-        FileWriter fw = new FileWriter(this.path);
+        FileWriter fw = new FileWriter(path);
         for (Task task: taskList) {
             DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_TIME_TO_PARSE);
-            StringBuilder sb = new StringBuilder(task.getStatusIcon());
-            sb.append("\\");
-            sb.append(task.getDescription());
-            sb.append("\\");
-            // X\desc\T
+            StringBuilder sb = new StringBuilder(task.getStatusIcon())
+                    .append("\\")
+                    .append(task.getDescription())
+                    .append("\\");
             if (task instanceof ToDo) {
                 sb.append("T");
                 fw.write(sb + System.lineSeparator());
-            } else if (task instanceof Deadline) { // X\desc\D\By
-                sb.append("D");
-                sb.append("\\");
-                sb.append(((Deadline) task).getDateTimeBy().format(formatterParse));
+            } else if (task instanceof Deadline) {
+                sb.append("D")
+                        .append("\\")
+                                .append(((Deadline) task).getDateTimeBy().format(formatterParse));
                 fw.write(sb + System.lineSeparator());
             } else {
-                sb.append("E");
-                sb.append("\\");
-                sb.append(((Event) task).getDateTimeFrom().format(formatterParse)); // X\desc\E\From\To
-                sb.append("\\");
-                sb.append(((Event) task).getDateTimeTo().format(formatterParse));
+                sb.append("E")
+                        .append("\\")
+                                .append(((Event) task).getDateTimeFrom().format(formatterParse))
+                                        .append("\\")
+                                                .append(((Event) task).getDateTimeTo().format(formatterParse));
                 fw.write(sb + System.lineSeparator());
             }
 
@@ -65,9 +64,8 @@ public class Storage {
     }
 
     public Task parse(String str) {
-        Task task;
+        Task task = null;
         String[] arr = str.split("\\\\");
-
         switch (arr[2]) {
             case "T":
                 task = new ToDo(arr[1]);

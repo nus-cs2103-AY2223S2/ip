@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Ui {
-
     protected final String BOT_NAME = "JeoBot";
     protected final String DATE_TO_PRINT = "d MMM yyyy";
 
@@ -18,7 +17,8 @@ public class Ui {
     }
 
     public void showBodyDivider() {
-        System.out.println("_________________________________________________________________________________________");
+        System.out.println("________________________________________________________________" +
+                "_________________________");
     }
 
     public void showGreetingMessage() {
@@ -40,8 +40,8 @@ public class Ui {
     }
 
     public void showDateTimeParsingError() {
-        System.out.println("[Error] Unable to parse date-time. " +
-                "Please input date in the format: \"yyyy-MM-dd HH:mm\".");
+        System.out.println("[Error] Unable to parse date-time. "
+                + "Please input date in the format: \"yyyy-MM-dd HH:mm\".");
     }
 
     public void showJeoErrorMessage(String msg) {

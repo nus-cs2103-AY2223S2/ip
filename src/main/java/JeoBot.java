@@ -51,7 +51,6 @@ public class JeoBot {
             String s = sc.nextLine();
             try {
                 ui.showBodyDivider();
-                // Parse
                 HashMap<String, String> hm = Parser.parseString(s);
                 Command command = Command.valueOf(hm.get("command").toUpperCase());
                 switch (command) {
