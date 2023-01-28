@@ -19,15 +19,15 @@ public class Parser {
 
     public boolean processInput(String input) {
         String[] argFrags = input.split(" ", 2);
-        boolean continueLoop = true;
 
         Matcher m;
+
         try {
             switch (argFrags[0]) {
                 case "bye":
                     ui.print("Goodbye. Shutting down.");
-                    continueLoop = false;
-                    break;
+                    return false;
+                    // Break not required as returns ends switch
                 case "list":
                     ui.print(tasks.toStringList());
                     break;
@@ -83,7 +83,7 @@ public class Parser {
         } catch (UnrecognisedCommandException e) {
             ui.print("Command not recognised. Please try again.");
         }
-        return continueLoop;
+        return false;
     }
 
 }
