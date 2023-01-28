@@ -1,10 +1,15 @@
 package task;
 
-public class Task {
+public abstract class Task {
 
     private final String details;
     private boolean isCompleted = false;
 
+    /**
+     * Creates a new Task parent object with the given details
+     *
+     * @param details a string describing the task
+     */
     public Task(String details) {
         this.details = details;
     }

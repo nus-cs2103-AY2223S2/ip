@@ -1,26 +1,38 @@
 package task;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
 import errors.DukeInsufficientArgumentException;
 import errors.DukeInvalidCommandException;
 import errors.DukeRuntimeException;
 import ui.Format;
 import ui.Response;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * A generic Task-like event without any additional details
  * @author Nicholas Lee
  */
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
+    /**
+     * Creates a new To-Do object with the given details
+     *
+     * @param details a string describing the task
+     */
     public ToDo(String details) {
         super(details);
     }
 
+    /**
+     * Creates a new To-Do object with the given details
+     *
+     * @param details a string describing the task
+     * @param isCompleted a boolean indicating whether the to-do has been completed
+     */
     public ToDo(String details, boolean isCompleted) {
         super(details);
         super.changeStatus(isCompleted);
@@ -38,9 +50,9 @@ public class ToDo extends Task{
      * Throws a DukeInsufficientArgumentException if the input is unable to be parsed correctly
      *
      * @param input A to-do user command
+     * @return A hashmap with key "details"
      * @exception DukeInsufficientArgumentException if the user did not include any details with the "to-do" command
      * @exception DukeInvalidCommandException If the to-do details are out of order
-     * @return A hashmap with key "details"
      */
     public static HashMap<String, String> parse(String input) throws DukeRuntimeException {
 

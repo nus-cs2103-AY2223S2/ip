@@ -1,8 +1,10 @@
+import java.util.Scanner;
+
 import data.TaskFileReaderWriter;
 import data.TaskManager;
 import ui.Format;
 import ui.Response;
-import java.util.Scanner;
+
 
 /**
  * A bot with an UwU personality to help users keep track

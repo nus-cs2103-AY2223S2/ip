@@ -1,5 +1,10 @@
 package task;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
 import errors.DukeInsufficientArgumentException;
 import errors.DukeInvalidCommandException;
 import errors.DukeRuntimeException;
@@ -7,26 +12,36 @@ import ui.Format;
 import ui.Response;
 import utils.Utility;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 /**
  * A Task with added start and end details
  * @author Nicholas Lee
  */
-
-public class Event extends Task{
+public class Event extends Task {
 
     private final LocalDateTime start;
     private final LocalDateTime end;
 
+    /**
+     * Creates a new Event object with the given details and start/end time.
+     *
+     * @param details a string describing the event
+     * @param start the LocalDateTime object representing the start of the event
+     * @param end the LocalDateTime object representing the end of the event
+     */
     public Event(String details, LocalDateTime start, LocalDateTime end) {
         super(details);
         this.start = start;
         this.end = end;
     }
 
+    /**
+     * Creates a new Event object with the given details and start/end time.
+     *
+     * @param details a string describing the event
+     * @param start the LocalDateTime object representing the start of the event
+     * @param end the LocalDateTime object representing the end of the event
+     * @param isCompleted a boolean indicating whether the event has been completed
+     */
     public Event(String details, LocalDateTime start, LocalDateTime end, boolean isCompleted) {
         super(details);
         this.start = start;
@@ -57,8 +72,9 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return ("EVENT: " + super.getDetails() + " (From " + Utility.getDateTimeString(start) +" to " + Utility.getDateTimeString(end) + ")" +
-                Format.getCompletionDisplay(super.isCompleted()));
+        return ("EVENT: " + super.getDetails() + " (From " + Utility.getDateTimeString(start)
+                + " to " + Utility.getDateTimeString(end) + ")"
+                + Format.getCompletionDisplay(super.isCompleted()));
     }
 
     /**
@@ -68,9 +84,9 @@ public class Event extends Task{
      * Throws a DukeInsufficientArgumentException if the input is unable to be parsed correctly
      *
      * @param input An event user command
+     * @return A hashmap with keys "details", "from" and "to"
      * @exception DukeInsufficientArgumentException if the user did not include any details with the "event" command
      * @exception DukeInvalidCommandException If the event details are out of order
-     * @return A hashmap with keys "details", "from" and "to"
      */
     public static HashMap<String, String> parse(String input) throws DukeRuntimeException {
 

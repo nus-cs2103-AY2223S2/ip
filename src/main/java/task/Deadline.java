@@ -1,5 +1,10 @@
 package task;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
 import errors.DukeInsufficientArgumentException;
 import errors.DukeInvalidCommandException;
 import errors.DukeRuntimeException;
@@ -7,26 +12,34 @@ import ui.Format;
 import ui.Response;
 import utils.Utility;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 
 /**
  * A Task with a deadline
  * @author Nicholas Lee
  */
-
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     private final LocalDateTime deadline;
 
+    /**
+     * Creates a new Deadline object with the given details and deadline time.
+     *
+     * @param details a string describing the task associated with the deadline
+     * @param deadline the LocalDateTime object representing the deadline of the task
+     */
     public Deadline(String details, LocalDateTime deadline) {
         super(details);
         this.deadline = deadline;
     }
 
+    /**
+     * Creates a new Deadline object with the given details and deadline time.
+     *
+     * @param details a string describing the task associated with the deadline
+     * @param deadline the LocalDateTime object representing the deadline of the task
+     * @param isCompleted a boolean indicating whether the task has been completed
+     */
     public Deadline(String details, LocalDateTime deadline, boolean isCompleted) {
         super(details);
         this.deadline = deadline;
@@ -38,8 +51,9 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return ("DEADLINE: " + super.getDetails() +
-                " (By " + Utility.getDateTimeString(deadline) +")" + Format.getCompletionDisplay(super.isCompleted()));
+        return ("DEADLINE: " + super.getDetails()
+                + " (By " + Utility.getDateTimeString(deadline) + ")"
+                + Format.getCompletionDisplay(super.isCompleted()));
     }
 
     /**
@@ -59,9 +73,9 @@ public class Deadline extends Task{
      * Throws a DukeInsufficientArgumentException if the input is unable to be parsed correctly
      *
      * @param input A deadline user command
+     * @return A hashmap with keys "details" and "deadline"
      * @exception DukeInsufficientArgumentException if the user did not include any details with the "deadline" command
      * @exception DukeInvalidCommandException If the deadline details are out of order
-     * @return A hashmap with keys "details" and "deadline"
      */
     public static HashMap<String, String> parse(String input) throws DukeRuntimeException {
 

@@ -1,19 +1,20 @@
 package utils;
-import errors.DukeInvalidCommandException;
-import ui.Response;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
+import errors.DukeInvalidCommandException;
+import ui.Response;
+
 
 public class Utility {
 
-
     public static LocalDateTime parseDateTime(String dateTimeString) throws DukeInvalidCommandException {
         LocalDateTime dateTime;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm").withResolverStyle(ResolverStyle.LENIENT);;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm")
+                .withResolverStyle(ResolverStyle.LENIENT);
         try {
             dateTime = LocalDateTime.parse(dateTimeString, formatter);
         } catch (DateTimeParseException e) {
@@ -25,7 +26,8 @@ public class Utility {
     // for reading writing
     public static LocalDateTime convertStringToDateTime(String dateTimeString) {
         LocalDateTime dateTime;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm").withResolverStyle(ResolverStyle.LENIENT);;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm")
+                .withResolverStyle(ResolverStyle.LENIENT);
             dateTime = LocalDateTime.parse(dateTimeString, formatter);
         return dateTime;
     }
@@ -41,15 +43,4 @@ public class Utility {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
         return dateTime.format(formatter);
     }
-
-
-
-
-
-
-
-
-
-
-
 }
