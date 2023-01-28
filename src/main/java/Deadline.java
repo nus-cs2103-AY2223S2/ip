@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 /**
  * Class that defines the Deadline type of tasks
  */
@@ -5,6 +7,7 @@ public class Deadline extends Task {
 
     /** The end date of this deadline object */
     protected String byDate;
+    protected LocalDate endDate;
 
     /**
      * Constructor for objects of type Deadline
@@ -14,11 +17,12 @@ public class Deadline extends Task {
     public Deadline(boolean isCompleted, String userInput) {
         super(isCompleted, userInput.substring(9, userInput.indexOf("/by ") - 1), 'D');
         this.byDate = userInput.substring(userInput.indexOf("/by ") + 4);
+        this.endDate = LocalDate.parse(byDate);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + byDate + ")";
+        return super.toString() + " (by: " + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
