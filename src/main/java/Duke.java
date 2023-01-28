@@ -1,7 +1,14 @@
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Duke {
+
     public static void main(String[] args) throws DukeException {
         Scanner scanner = new Scanner(System.in);
 
@@ -23,10 +30,12 @@ public class Duke {
 
                 if (command.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
+                    saveTodoList(tasksList);
                     break;
                 } else if (command.equals("list")) {
                     int taskNumber = 1;
                     System.out.println("Here are the tasks in your list:");
+                    // this is the code to copy for Level-7 Save
                     for (Task t : tasksList) {
                         System.out.println(Integer.toString(taskNumber) + ". " + t);
                         taskNumber++;
@@ -34,9 +43,11 @@ public class Duke {
                 } else if (command.equals("mark")) {
                     int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
                     tasksList.get(taskNumber).markAsDone();
+                    saveTodoList(tasksList);
                 } else if (command.equals("unmark")) {
                     int taskNumber = Integer.parseInt(input.split(" ")[1]) - 1;
                     tasksList.get(taskNumber).markAsNotDone();
+                    saveTodoList(tasksList);
                 } else if (command.equals("todo")) {
                     try {
                         String inputWithoutCommand = input.substring(5);
@@ -47,6 +58,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         System.out.println(toDo);
                         System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
+                        saveTodoList(tasksList);
                     } catch (StringIndexOutOfBoundsException e) {
                         e.printStackTrace();
                         System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -65,8 +77,8 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(deadline);
                     System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
+                    saveTodoList(tasksList);
                 } else if (command.equals("event")) {
-                    // TODO
                     String inputWithoutCommand = input.substring(6);
 
                     int indexOfFromSubstring = inputWithoutCommand.indexOf("/from ");
@@ -82,6 +94,7 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(event);
                     System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
+                    saveTodoList(tasksList);
                 } else if (command.equals("delete")) {
                     int indexToBeRemoved = Integer.parseInt(input.split(" ")[1]);
 
@@ -91,7 +104,7 @@ public class Duke {
                     System.out.println(removedTask);
                     System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
 
-                    //tasksList.remove(indexToBeRemoved - 1);
+                    saveTodoList(tasksList);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -99,6 +112,44 @@ public class Duke {
                 // if you try and catch the exception, you can still continue to run the program! WOW!
                 e.printStackTrace();
             }
+        }
+    }
+
+    // saves TodoList whenever there is a change
+    static void saveTodoList(ArrayList<Task> tasksList) {
+        int taskNumber = 1;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        // this is how to get the path to duke.txt
+        Path path = Paths.get("data", "duke.txt");
+
+        for (Task t : tasksList) {
+            stringBuilder.append(Integer.toString(taskNumber)).append(". ").append(t).append("\n");
+            taskNumber++;
+        }
+
+        // tries to create a file
+        try {
+            File newFile = new File(path.toUri());
+            if (newFile.createNewFile()) {
+                // System.out.println("File created: " + newFile.getName());
+            } else {
+                // System.out.println("duke.txt already exists.");
+            }
+        } catch (IOException e) {
+            // System.out.println("An error occurred");
+            e.printStackTrace();
+        }
+
+        // write into the file
+        try {
+            FileWriter fileWriter = new FileWriter(path.toFile());
+            fileWriter.write(stringBuilder.toString());
+            fileWriter.close();
+            // System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            // System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 
