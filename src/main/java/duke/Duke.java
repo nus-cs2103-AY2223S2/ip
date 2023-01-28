@@ -1,17 +1,15 @@
 package duke;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Scanner;
 public class Duke {
 
     public static final String DIRECTORY_PATH = "data";
     public static final String FILE_PATH = "data/duke.txt";
     Storage storage;
     TaskList<Task> taskList;
+
+    Parser parser;
+    Ui ui;
 
     public Duke(String filePath, String directoryPath) {
         this.storage = new Storage(filePath, directoryPath);
@@ -20,30 +18,31 @@ public class Duke {
         } catch (NeroException e) {
             this.taskList = new TaskList<Task>();
         }
+        this.ui = new Ui();
+        this.parser = new Parser();
     }
 
     public TaskList<Task> getTaskList() {
         return taskList;
     }
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Parser parser = new Parser();
-        Duke nero = new Duke(FILE_PATH, DIRECTORY_PATH);
-        System.out.println("Hi, I'm Nero and I am an automated chat bot" + "\n" + "What would you like to do?");
-        TaskList<Task> taskList = nero.getTaskList();
-        Storage storage = nero.storage;
+
+    public void run() {
+        ui.printWelcomeMessage();
         boolean toEnd = false;
         while (!toEnd) {
-            String originalString = sc.nextLine();
+            String originalString = ui.readLine();
             try {
-                toEnd = parser.parseCommand(originalString, taskList);
+                toEnd = parser.parseCommand(originalString, taskList, ui);
                 storage.saveFile(taskList);
             } catch (IOException e) {
-                System.out.println("File not found :((");
+                ui.printFileNotFound();
             } catch (NeroException ne) {
                 ne.printStackTrace();
             }
         }
+    }
+    public static void main(String[] args) {
+        new Duke(FILE_PATH, DIRECTORY_PATH).run();
     }
 }
 
