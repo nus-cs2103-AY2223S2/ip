@@ -14,6 +14,8 @@ import commands.ExitCommand;
 import commands.FindCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
+import javafx.scene.layout.VBox;
+import storage.Storage;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -65,8 +67,10 @@ public class Parser {
 	 * @param input
 	 * @param tasklist
 	 * @param ui
+	 * @param storage
+	 * @param dialogContainer
 	 */
-	public void parseAndSetData(String input, TaskList tasklist, Ui ui) {
+	public void parseAndSetData(String input, TaskList tasklist, Ui ui, Storage storage, VBox dialogContainer) {
 		String inputLower = input.toLowerCase();
 		if (inputLower.isBlank()) {
 			return;
@@ -86,13 +90,13 @@ public class Parser {
 				break;
 
 			case DEADLINE:
-				newTask = new Deadline(inputArr[2], parseDateTimeStr(inputArr[3], ui));
+				newTask = new Deadline(inputArr[2], parseDateTimeStr(inputArr[3], ui, storage, dialogContainer));
 				break;
 
 			case EVENT:
 				newTask = new Event(inputArr[2],
-						new LocalDateTime[] { parseDateTimeStr(inputArr[3], ui),
-								parseDateTimeStr(inputArr[4], ui) });
+						new LocalDateTime[] { parseDateTimeStr(inputArr[3], ui, storage, dialogContainer),
+								parseDateTimeStr(inputArr[4], ui, storage, dialogContainer) });
 				break;
 
 			default:
@@ -110,20 +114,21 @@ public class Parser {
 	 * @param ui
 	 * @return LocalDateTime
 	 */
-	public LocalDateTime parseDateTimeStr(String dateTimeStr, Ui ui) {
+	public LocalDateTime parseDateTimeStr(String dateTimeStr, Ui ui, Storage storage, VBox dialogContainer) {
 		if (dateTimeStr.isBlank()) {
 			return null;
 		}
 		String[] dateTimeArr = dateTimeStr.split(" ");
 		LocalTime time = LocalTime.MIN;
 		Integer[] dateArr;
+		String errorMessage = "Oops! Time format needs to be specified in proper form.";
 		if (dateTimeArr.length > 1) {
 			try {
 				int hr = Integer.parseInt(dateTimeArr[1].substring(0, 2));
 				int min = Integer.parseInt(dateTimeArr[1].substring(2, 4));
 				time = LocalTime.of(hr, min);
 			} catch (NumberFormatException ex) {
-				ui.printError("Oops! Time format needs to be specified in proper form.");
+				ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 				return null;
 			}
 		}
@@ -138,7 +143,7 @@ public class Parser {
 			dateArr = Stream.of(dateTimeArr[0].split("-")).map(Integer::valueOf).toArray(Integer[]::new);
 			return LocalDateTime.of(LocalDate.of(dateArr[0], dateArr[1], dateArr[2]), time);
 		} catch (ArrayIndexOutOfBoundsException ex) {
-			ui.printError("Oops! Time format needs to be specified in proper form.");
+			ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 			return null;
 		}
 
@@ -149,13 +154,15 @@ public class Parser {
 	 * 
 	 * @param inputArr
 	 * @param ui
+	 * @param storage
+	 * @param dialogContainer
 	 * @return LocalDateTime
 	 */
-	public LocalDateTime getBy(String[] inputArr, Ui ui) {
+	public LocalDateTime getBy(String[] inputArr, Ui ui, Storage storage, VBox dialogContainer) {
 		int l = inputArr.length;
 		for (int i = 0; i < l; i++) {
 			if (i < l - 1 && inputArr[i].equals("/by")) {
-				return parseDateTimeStr(sliceArrAndConcate(inputArr, i + 1, l), ui);
+				return parseDateTimeStr(sliceArrAndConcate(inputArr, i + 1, l), ui, storage, dialogContainer);
 			}
 		}
 		return null;
@@ -166,9 +173,11 @@ public class Parser {
 	 * 
 	 * @param inputArr
 	 * @param ui
+	 * @param storage
+	 * @param dialogContainer
 	 * @return LocalDateTime[]
 	 */
-	public LocalDateTime[] getFromTo(String[] inputArr, Ui ui) {
+	public LocalDateTime[] getFromTo(String[] inputArr, Ui ui, Storage storage, VBox dialogContainer) {
 		int l = inputArr.length;
 		int fromStartIdx = -1, fromEndIdx = l, toStartIdx = -1;
 		LocalDateTime from = LocalDateTime.MIN;
@@ -185,10 +194,11 @@ public class Parser {
 			}
 		}
 		if (fromStartIdx > -1) {
-			from = parseDateTimeStr(sliceArrAndConcate(inputArr, fromStartIdx, fromEndIdx), ui);
+			from = parseDateTimeStr(sliceArrAndConcate(inputArr, fromStartIdx, fromEndIdx), ui, storage,
+					dialogContainer);
 		}
 		if (toStartIdx > -1) {
-			to = parseDateTimeStr(sliceArrAndConcate(inputArr, toStartIdx, l), ui);
+			to = parseDateTimeStr(sliceArrAndConcate(inputArr, toStartIdx, l), ui, storage, dialogContainer);
 		}
 		return new LocalDateTime[] { from, to };
 	}

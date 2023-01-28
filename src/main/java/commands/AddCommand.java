@@ -7,6 +7,7 @@ import task.Todo;
 
 import java.time.LocalDateTime;
 
+import javafx.scene.layout.VBox;
 import parser.Parser;
 import storage.Storage;
 import tasklist.TaskList;
@@ -39,32 +40,37 @@ public class AddCommand extends Command {
 						: TaskType.EVENT;
 	}
 
-	private boolean setTask(String[] inputArr, Ui ui, Parser parser) {
+	private boolean setTask(String[] inputArr, Ui ui, Parser parser, Storage storage, VBox dialogContainer) {
 		String description = parser.sliceArrAndConcate(inputArr, 1, inputArr.length);
+		String errorMessage;
 		switch (taskType) {
 			case TODO:
 				task = new Todo(description);
 				break;
 
 			case DEADLINE:
-				LocalDateTime by = parser.getBy(inputArr, ui);
+				LocalDateTime by = parser.getBy(inputArr, ui, storage, dialogContainer);
 				if (by == null) {
-					ui.printError("Oops! The description of deadline must include a completion date/time.");
+					errorMessage = "Oops! The description of DEADLINE must include a BY date/time.";
+					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 					return false;
 				}
 				task = new Deadline(parser.trimDate(description), by);
 				break;
 
 			case EVENT:
-				LocalDateTime[] fromTo = parser.getFromTo(inputArr, ui);
+				LocalDateTime[] fromTo = parser.getFromTo(inputArr, ui, storage, dialogContainer);
 				if (fromTo[0] == LocalDateTime.MIN) {
-					ui.printError("The description of event must include a from date/time.");
+					errorMessage = "Oops! The description of EVENT must include a FROM date/time.";
+					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 					return false;
 				}
 				if (fromTo[1] == LocalDateTime.MIN) {
-					ui.printError("The description of event must include a to date/time.");
+					errorMessage = "Oops! The description of EVENT must include a TO date/time.";
+					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 					return false;
 				}
+
 				task = new Event(parser.trimDate(description), fromTo);
 				break;
 
@@ -81,22 +87,25 @@ public class AddCommand extends Command {
 		Parser parser = (Parser) args[1];
 		Storage storage = (Storage) args[2];
 		TaskList tasklist = (TaskList) args[3];
+		VBox dialogContainer = (VBox) args[4];
 		String[] inputArr = getMessageArray();
+		String errorMessage;
 		if (inputArr.length < 2) {
-			String errorMsg = String.format("Oops! The description of a %s cannot be empty.",
-					this.taskType);
-			ui.printError(errorMsg);
+			errorMessage = String.format(
+					"Oops! The description of a %s cannot be empty.", this.taskType);
+			ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 			return;
 		}
 		try {
-			if (setTask(inputArr, ui, parser)) {
+			if (setTask(inputArr, ui, parser, storage, dialogContainer)) {
 				tasklist.add(task);
 				storage.saveNewData(task, ui);
-				ui.printAddedTask(task, tasklist.size());
+				ui.printAddedTask(task, tasklist.size(), dialogContainer, storage);
 				return;
 			}
 		} catch (NumberFormatException ex) {
-			ui.printError("Oops! An item number must be provided.");
+			errorMessage = "Oops! The description of DEADLINE must include a BY datetime.";
+			ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 		}
 	}
 

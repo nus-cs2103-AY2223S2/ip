@@ -14,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import parser.Parser;
 import storage.Storage;
 import tasklist.TaskList;
@@ -41,7 +40,7 @@ public class Shao extends Application {
         setGUILayout(stage);
         ui.greetUser(dialogContainer, storage);
 
-        storage.getFile(tasklist, parser, ui);
+        storage.getFile(tasklist, parser, ui, storage, dialogContainer);
     }
 
     private void initServices() {
@@ -100,7 +99,9 @@ public class Shao extends Application {
         sendButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                run(stage);
+                if (!userInput.getText().isBlank()) {
+                    run(stage);
+                }
             }
         });
 
@@ -108,7 +109,9 @@ public class Shao extends Application {
             @Override
             public void handle(KeyEvent k) {
                 if (k.getCode().equals(KeyCode.ENTER)) {
-                    run(stage);
+                    if (!userInput.getText().isBlank()) {
+                        run(stage);
+                    }
                 }
             }
         });
@@ -117,36 +120,19 @@ public class Shao extends Application {
 
     /** Run the program until it terminates */
     public void run(Stage stage) {
-        // initServices();
-
-        // storage.getFile(tasklist, parser, ui);
-
-        // boolean isExit = false;
-        // while (!isExit) {
-        // String fullCommand = ui.readCommand();
-        // Command c = parser.parseInput(fullCommand);
-        // ui.printRowDivider();
-        // c.execute(ui, parser, storage, tasklist);
-        // ui.printRowDivider();
-        // isExit = c.isExit();
-        // }
-        // ui.cleanUp();
         String fullCommand = userInput.getText();
         userInput.setText("");
 
         ui.sendInput(dialogContainer, storage, fullCommand);
         Command c = parser.parseInput(fullCommand);
         c.execute(ui, parser, storage, tasklist, dialogContainer);
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
         isExit = c.isExit();
 
         if (isExit) {
-            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                @Override
-                public void handle(WindowEvent e) {
-                    Platform.exit();
-                    System.exit(0);
-                }
-            });
+            Platform.exit();
+            System.exit(0);
         }
     }
 

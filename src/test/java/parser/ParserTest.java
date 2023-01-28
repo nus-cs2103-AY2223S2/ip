@@ -17,12 +17,16 @@ import commands.DeleteCommand;
 import commands.ExitCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
+import javafx.scene.layout.VBox;
+import storage.Storage;
 import ui.Ui;
 
 public class ParserTest {
 
 	Parser parser = new Parser();
 	Ui ui = new Ui();
+	Storage storage = new Storage();
+	VBox dialogContainer = new VBox();
 
 	String[] inputArrDeadline = new String[] {
 			"deadline", "work", "on", "programming",
@@ -112,8 +116,8 @@ public class ParserTest {
 		String dateFormat1 = "2019-12-02";
 		String dateFormat2 = "2/12/2019";
 		LocalDateTime expected = LocalDateTime.of(LocalDate.of(2019, 12, 2), LocalTime.MIN);
-		assertEquals(expected, parser.parseDateTimeStr(dateFormat1, ui));
-		assertEquals(expected, parser.parseDateTimeStr(dateFormat2, ui));
+		assertEquals(expected, parser.parseDateTimeStr(dateFormat1, ui, storage, dialogContainer));
+		assertEquals(expected, parser.parseDateTimeStr(dateFormat2, ui, storage, dialogContainer));
 	}
 
 	@Test
@@ -121,8 +125,8 @@ public class ParserTest {
 		String dateTimeFormat1 = "2019-12-02 1530";
 		String dateTimeFormat2 = "2/12/2019 1530";
 		LocalDateTime expected = LocalDateTime.of(LocalDate.of(2019, 12, 2), LocalTime.of(15, 30));
-		assertEquals(expected, parser.parseDateTimeStr(dateTimeFormat1, ui));
-		assertEquals(expected, parser.parseDateTimeStr(dateTimeFormat2, ui));
+		assertEquals(expected, parser.parseDateTimeStr(dateTimeFormat1, ui, storage, dialogContainer));
+		assertEquals(expected, parser.parseDateTimeStr(dateTimeFormat2, ui, storage, dialogContainer));
 	}
 
 	@Test
@@ -130,7 +134,7 @@ public class ParserTest {
 
 		LocalDateTime expected = LocalDateTime.of(
 				LocalDate.of(2019, 3, 1), LocalTime.of(8, 15));
-		assertEquals(expected, parser.getBy(inputArrDeadline, ui));
+		assertEquals(expected, parser.getBy(inputArrDeadline, ui, storage, dialogContainer));
 	}
 
 	@Test
@@ -141,7 +145,7 @@ public class ParserTest {
 				LocalDateTime.of(
 						LocalDate.of(2019, 3, 1), LocalTime.of(10, 30)),
 		};
-		assertArrayEquals(expected, parser.getFromTo(inputArrEvent, ui));
+		assertArrayEquals(expected, parser.getFromTo(inputArrEvent, ui, storage, dialogContainer));
 	}
 
 	@Test

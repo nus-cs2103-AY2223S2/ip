@@ -19,6 +19,8 @@ import tasklist.TaskList;
 
 public class Ui {
 
+	final private int BOX_PADDING = 20;
+
 	private Scanner scan = new Scanner(System.in);
 
 	/**
@@ -49,15 +51,24 @@ public class Ui {
 	 * 
 	 * @param task
 	 * @param tasksCnt
+	 * @param dialogContainer
+	 * @param storage
 	 */
-	public void printAddedTask(Task task, int tasksCnt) {
+	public void printAddedTask(Task task, int tasksCnt, VBox dialogContainer, Storage storage) {
 		String msg1 = "Noted. I've added this task:";
 		String msg2 = String.format("You have %d %s in your list currently.",
 				tasksCnt, tasksCnt > 1 ? "tasks" : "task");
+		String taskItem = "  " + task.toString();
 
-		println(msg1);
-		println("  " + task.toString());
-		println(msg2);
+		VBox messages = new VBox();
+		messages.getChildren().addAll(createLabel(msg1), createLabel(taskItem), createLabel(msg2));
+		sendResponse(dialogContainer, storage, messages);
+	}
+
+	public Label createLabel(String message) {
+		Label label = new Label(message);
+		label.setWrapText(true);
+		return label;
 	}
 
 	/**
@@ -66,12 +77,13 @@ public class Ui {
 	 * @param task
 	 * @param isMark
 	 */
-	public void printMarkedTask(Task task, boolean isMark) {
+	public void printMarkedTask(Task task, boolean isMark, Storage storage, VBox dialogContainer) {
 		String body = isMark
 				? "Nice! I've marked this task as done:"
 				: "OK, I've marked this task as not done yet:";
-		println(body);
-		println(task.toString());
+		VBox messages = new VBox();
+		messages.getChildren().addAll(createLabel(body), createLabel(task.toString()));
+		sendResponse(dialogContainer, storage, messages);
 	}
 
 	/**
@@ -79,13 +91,18 @@ public class Ui {
 	 * 
 	 * @param task
 	 * @param tasksCnt
+	 * @param dialogContainer
+	 * @param storage
 	 */
-	public void printDeletedTask(Task task, int tasksCnt) {
-		println("Sure, I've removed this task:");
-		println("  " + task.toString());
-		println(String.format(
+	public void printDeletedTask(Task task, int tasksCnt, VBox dialogContainer, Storage storage) {
+		String header = "Sure, I've removed this task:";
+		String taskItem = "  " + task.toString();
+		String body = String.format(
 				"You have %d %s in your list currently.",
-				tasksCnt, tasksCnt > 1 ? "tasks" : "task"));
+				tasksCnt, tasksCnt > 1 ? "tasks" : "task");
+		VBox messages = new VBox();
+		messages.getChildren().addAll(createLabel(header), createLabel(taskItem), createLabel(body));
+		sendResponse(dialogContainer, storage, messages);
 	}
 
 	/**
@@ -93,16 +110,20 @@ public class Ui {
 	 * 
 	 * @param tasklist
 	 */
-	public void printList(TaskList tasklist) {
+	public void printList(TaskList tasklist, Storage storage, VBox dialogContainer) {
 		int numItems = tasklist.size();
 		String header = numItems == 0 ? "There are no tasks in your list. Please add one."
 				: "Here are the tasks in your list: ";
 
-		println(header);
+		VBox messages = new VBox();
+		messages.getChildren().add(createLabel(header));
+
 		for (int i = 0; i < numItems; i++) {
 			Task curTask = tasklist.get(i);
-			println(String.format("%d.%s", i + 1, curTask));
+			Label curTaskDetails = createLabel(String.format("%d. %s", i + 1, curTask));
+			messages.getChildren().add(curTaskDetails);
 		}
+		sendResponse(dialogContainer, storage, messages);
 	}
 
 	/**
@@ -112,11 +133,13 @@ public class Ui {
 	 * @param dateTimeStr
 	 * @param parser
 	 */
-	public void printDeadlineEventOnDatetime(TaskList tasklist, String dateTimeStr, Parser parser) {
+	public void printDeadlineEventOnDatetime(TaskList tasklist, Storage storage,
+			Parser parser, VBox dialogContainer, String dateTimeStr) {
 		boolean hasItem = false;
-		LocalDateTime dateTime = parser.parseDateTimeStr(dateTimeStr, this);
+		LocalDateTime dateTime = parser.parseDateTimeStr(dateTimeStr, this, storage, dialogContainer);
 		String dtStrOutput = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
 		String header = String.format("These are the deadline/events that occur on %s", dtStrOutput);
+		VBox messages = new VBox();
 
 		int itemNum = 1;
 		for (int i = 0; i < tasklist.size(); i++) {
@@ -125,10 +148,11 @@ public class Ui {
 				Deadline deadline = (Deadline) curTask;
 				if (deadline.getBy().equals(dateTime)) {
 					if (!hasItem) {
-						println(header);
+						messages.getChildren().add(createLabel(header));
 					}
 					hasItem = true;
-					println(String.format("%d.%s", itemNum, deadline));
+					messages.getChildren().add(
+							createLabel(String.format("%d. %s", itemNum, deadline)));
 					itemNum += 1;
 				}
 			}
@@ -136,18 +160,21 @@ public class Ui {
 				Event event = (Event) curTask;
 				if (event.getFrom().equals(dateTime) || event.getTo().equals(dateTime)) {
 					if (!hasItem) {
-						println(header);
+						messages.getChildren().add(createLabel(header));
 					}
 					hasItem = true;
-					println(String.format("%d.%s", itemNum, event));
+					messages.getChildren().add(
+							createLabel(String.format("%d. %s", itemNum, event)));
 					itemNum += 1;
 				}
 			}
 		}
 		if (!hasItem) {
-			println(String.format(
-					"No deadline/events occur on %s", dtStrOutput));
+			header = String.format("No deadline/events occur on %s", dtStrOutput);
+			sendResponse(dialogContainer, storage, createLabel(header));
+			return;
 		}
+		sendResponse(dialogContainer, storage, messages);
 	}
 
 	/**
@@ -155,55 +182,58 @@ public class Ui {
 	 * 
 	 * @param tasklist
 	 * @param keyword
+	 * @param dialogContainer
+	 * @param storage
 	 */
-	public void printMatchedTasks(TaskList tasklist, String keyword) {
+	public void printMatchedTasks(TaskList tasklist, Storage storage, VBox dialogContainer, String keyword) {
 		boolean hasItem = false;
 		String header = "Here are the matching tasks in your list:";
+		VBox messages = new VBox();
 
 		int itemNum = 1;
 		for (int i = 0; i < tasklist.size(); i++) {
 			Task curTask = tasklist.get(i);
 			if (curTask.getDescription().contains(keyword)) {
 				if (!hasItem) {
-					println(header);
+					messages.getChildren().add(createLabel(header));
 				}
 				hasItem = true;
-				println(String.format("%d.%s", itemNum, curTask));
+				messages.getChildren().add(
+						createLabel(String.format("%d. %s", itemNum, curTask)));
 				itemNum += 1;
 			}
 		}
 		if (!hasItem) {
-			println("There are no matching tasks.");
+			header = "There are no matching tasks.";
+			sendResponse(dialogContainer, storage, createLabel(header));
+			return;
 		}
+		sendResponse(dialogContainer, storage, messages);
 	}
 
 	public void greetUser(VBox dialogContainer, Storage storage) {
 		String s1 = "Hi There! I'm Shao";
 		String s2 = "What can I do for you?";
 		VBox messages = new VBox();
-		messages.getChildren().addAll(new Label(s1), new Label(s2));
+		messages.getChildren().addAll(createLabel(s1), createLabel(s2));
 		sendResponse(dialogContainer, storage, messages);
 	}
 
 	public void sendResponse(VBox dialogContainer, Storage storage, Node messages) {
 		HBox rowContainer = new HBox();
 		rowContainer.setAlignment(Pos.CENTER_LEFT);
-		rowContainer.setPadding(new Insets(20, 0, 0, 20));
+		rowContainer.setPadding(new Insets(BOX_PADDING));
 		rowContainer.setSpacing(10);
 		rowContainer.getChildren().addAll(storage.getBotImageView(), messages);
 		dialogContainer.getChildren().add(rowContainer);
 	}
 
-	public void sendInput(VBox dialogContainer, Storage storage, String input) {
+	public void sendInput(VBox dialogContainer, Storage storage, String message) {
 		HBox rowContainer = new HBox();
 		rowContainer.setAlignment(Pos.CENTER_RIGHT);
-		rowContainer.setPadding(new Insets(20, 20, 0, 0));
+		rowContainer.setPadding(new Insets(BOX_PADDING));
 		rowContainer.setSpacing(10);
-
-		Label message = new Label(input);
-		message.setWrapText(true);
-
-		rowContainer.getChildren().addAll(message, storage.getUserImageView());
+		rowContainer.getChildren().addAll(createLabel(message), storage.getUserImageView());
 		dialogContainer.getChildren().add(rowContainer);
 	}
 

@@ -1,5 +1,7 @@
 package commands;
 
+import javafx.scene.layout.VBox;
+import storage.Storage;
 import ui.Ui;
 
 public class ExitCommand extends Command {
@@ -16,7 +18,10 @@ public class ExitCommand extends Command {
 	@Override
 	public void execute(Object... args) {
 		Ui ui = (Ui) args[0];
-		ui.println("Bye! Have a nice day!");
+		Storage storage = (Storage) args[2];
+		VBox dialogContainer = (VBox) args[4];
+		ui.sendResponse(dialogContainer, storage,
+				ui.createLabel("Bye! Have a nice day!"));
 	}
 
 }

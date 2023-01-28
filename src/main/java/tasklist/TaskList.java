@@ -3,6 +3,7 @@ package tasklist;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.layout.VBox;
 import storage.Storage;
 import task.Task;
 import ui.Ui;
@@ -48,21 +49,22 @@ public class TaskList {
 	 * @param ui
 	 * @throws NumberFormatException
 	 */
-	public void markItem(String itemNum, boolean isMark, Storage storage, Ui ui) throws NumberFormatException {
+	public void markItem(String itemNum, boolean isMark, Storage storage, Ui ui, VBox dialogContainer)
+			throws NumberFormatException {
 		int idx = Integer.parseInt(itemNum) - 1;
 		try {
 			Task task = tasks.get(idx);
 			if (isMark) {
 				task.markAsDone();
-				ui.printMarkedTask(task, true);
-				storage.markSavedTask(idx, true, ui);
-				return;
+			} else {
+				task.markAsUndone();
 			}
-			task.markAsUndone();
-			ui.printMarkedTask(task, false);
-			storage.markSavedTask(idx, false, ui);
+			ui.printMarkedTask(task, isMark, storage, dialogContainer);
+			storage.markSavedTask(idx, isMark, ui);
 		} catch (IndexOutOfBoundsException ex) {
-			ui.printError(String.format("Oops! Please select item from 1 to %d inclusive.", tasks.size()));
+			String errorMessage = String.format(
+					"Oops! Please select item from 1 to %d inclusive.", tasks.size());
+			ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 		}
 	}
 
@@ -72,15 +74,18 @@ public class TaskList {
 	 * @param itemNum
 	 * @param storage
 	 * @param ui
+	 * @param dialogContainer
 	 * @throws NumberFormatException
 	 */
-	public void deleteTask(String itemNum, Storage storage, Ui ui) throws NumberFormatException {
+	public void deleteTask(Ui ui, Storage storage, VBox dialogContainer, String itemNum) throws NumberFormatException {
 		try {
 			int idx = Integer.parseInt(itemNum) - 1;
 			storage.deleteLineFile(idx + 1, ui);
-			ui.printDeletedTask(tasks.remove(idx), tasks.size());
+			ui.printDeletedTask(tasks.remove(idx), tasks.size(), dialogContainer, storage);
 		} catch (IndexOutOfBoundsException ex) {
-			ui.printError(String.format("Oops! Please select item from 1 to %d inclusive.", tasks.size()));
+			String errorMessage = String.format(
+					"Oops! Please select item from 1 to %d inclusive.", tasks.size());
+			ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 		}
 	}
 

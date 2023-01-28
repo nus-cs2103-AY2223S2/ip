@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import parser.Parser;
 import task.Task;
 import tasklist.TaskList;
@@ -54,12 +55,14 @@ public class Storage {
 	 * @param tasklist
 	 * @param parser
 	 * @param ui
+	 * @param storage
+	 * @param dialogContainer
 	 */
-	public void getFile(TaskList tasklist, Parser parser, Ui ui) {
+	public void getFile(TaskList tasklist, Parser parser, Ui ui, Storage storage, VBox dialogContainer) {
 		try {
 			Scanner myReader = new Scanner(myFile);
 			while (myReader.hasNextLine()) {
-				parser.parseAndSetData(myReader.nextLine().trim(), tasklist, ui);
+				parser.parseAndSetData(myReader.nextLine().trim(), tasklist, ui, storage, dialogContainer);
 			}
 			myReader.close();
 		} catch (FileNotFoundException e) {
