@@ -6,7 +6,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * The duke.commands.DeleteCommand class implements the action of deleting tasks.
+ * The DeleteCommand class implements the action of deleting tasks.
  *
  * @author Chia Jeremy
  */
@@ -15,10 +15,22 @@ public class DeleteCommand extends Command {
 
     private final int index;
 
+    /**
+     * Class constructor for the delete command.
+     *
+     * @param index the index of the task to delete
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Executes the delete command.
+     *
+     * @param storage the file to save the tasks
+     * @param tasks   the task lists
+     * @param ui      the interface that deals with interactions with the user
+     */
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         Task task = tasks.getTask(index);

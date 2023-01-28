@@ -5,13 +5,20 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * The duke.commands.ListCommand class implements the action of listing all saved tasks.
+ * The ListCommand class implements the action of listing all saved tasks.
  *
  * @author Chia Jeremy
  */
 
 public class ListCommand extends Command {
 
+    /**
+     * Executes the list command.
+     *
+     * @param storage the file to save the tasks
+     * @param tasks   the task lists
+     * @param ui      the interface that deals with interactions with the user
+     */
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         StringBuilder sb = new StringBuilder();

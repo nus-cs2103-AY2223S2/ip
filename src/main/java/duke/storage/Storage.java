@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The duke.storage.Storage class implements a repository that deals with the
+ * The Storage class implements a repository that deals with the
  * loading of tasks from the file and saving tasks in the file.
  *
  * @author Chia Jeremy
@@ -25,14 +25,29 @@ public class Storage {
 
     private final File file;
 
+    /**
+     * Class constructor for storage.
+     *
+     * @param filePath the location of the storage file
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
     }
 
+    /**
+     * Returns the saved tasks as a list.
+     *
+     * @return the saved tasks as a list
+     */
     public List<String> load() {
         return getSavedTasksAsList();
     }
 
+    /**
+     * Adds the task into storage.
+     *
+     * @param task the task to be added into storage
+     */
     public void add(Task task) {
         try {
             FileWriter fw = new FileWriter(this.file, true);
@@ -55,6 +70,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Mark the saved task.
+     *
+     * @param index the index of the task to mark
+     */
     public void mark(int index) {
         List<String> tasks = getSavedTasksAsList();
         StringBuilder sb = new StringBuilder(tasks.get(index));
@@ -62,6 +82,11 @@ public class Storage {
         replaceLineInFile(index, sb.toString());
     }
 
+    /**
+     * Unmark the saved task.
+     *
+     * @param index the index of the task to unmark
+     */
     public void unmark(int index) {
         List<String> tasks = getSavedTasksAsList();
         StringBuilder sb = new StringBuilder(tasks.get(index));
@@ -69,6 +94,11 @@ public class Storage {
         replaceLineInFile(index, sb.toString());
     }
 
+    /**
+     * Delete the saved task.
+     *
+     * @param index the index of the task to delete
+     */
     public void delete(int index) {
         replaceLineInFile(index, "");
     }

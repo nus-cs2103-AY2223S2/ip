@@ -26,12 +26,20 @@ public class Duke {
     private final TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Initializes a new Duke instance.
+     *
+     * @param filePath the location of the storage file
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.tasks = new TaskList(storage.load());
         this.ui = new Ui();
     }
 
+    /**
+     * Executes the Duke chatbot.
+     */
     public void run() {
         this.ui.greet(LOGO);
         Scanner scn = new Scanner(System.in);
