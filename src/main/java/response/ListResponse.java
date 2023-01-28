@@ -16,6 +16,11 @@ public class ListResponse extends Response {
         return taskList.toString();
     }
 
+    /**
+     * Custom equals operator to compare ListResponse objects
+     * @param obj The other ListResponse object to compare to
+     * @return boolean if the two are the same ListResponse
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

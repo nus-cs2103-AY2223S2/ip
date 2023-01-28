@@ -13,7 +13,6 @@ public class Event extends Task {
 
     /**
      * Creates a new Event with the specified description
-     *
      * @param description The specified description
      */
     public Event(String description, LocalDate from, LocalDate to) {
@@ -22,6 +21,10 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Custom string to represent an event for printing
+     * @return Custom string
+     */
     @Override
     public String toString() {
         return String.format("[E]%s (from: %s to: %s)", super.toString(),
@@ -29,6 +32,10 @@ public class Event extends Task {
                 to.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 
+    /**
+     * Custom string to represent an event data to be saved
+     * @return Custom string
+     */
     @Override
     public String toData() {
         return String.format("E | %s | %s - %s", super.toData(), from, to);

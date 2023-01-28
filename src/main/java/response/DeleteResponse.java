@@ -42,6 +42,11 @@ public class DeleteResponse extends Response {
                 taskList.count());
     }
 
+    /**
+     * Custom equals operator to compare DeleteResponse objects
+     * @param obj The other DeleteResponse object to compare to
+     * @return boolean if the two are the same DeleteResponse
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

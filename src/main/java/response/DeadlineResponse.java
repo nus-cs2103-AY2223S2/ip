@@ -65,6 +65,11 @@ public class DeadlineResponse extends Response {
                 taskList.count());
     }
 
+    /**
+     * Custom equals operator to compare DeadlineResponse objects
+     * @param obj The other DeadlineResponse object to compare to
+     * @return boolean if the two are the same DeadlineResponse
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

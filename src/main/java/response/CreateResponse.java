@@ -41,6 +41,11 @@ public class CreateResponse extends Response {
                 taskList.count());
     }
 
+    /**
+     * Custom equals operator to compare CreateResponse objects
+     * @param obj The other CreateResponse object to compare to
+     * @return boolean if the two are the same CreateResponse
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

@@ -38,6 +38,11 @@ public class MarkResponse extends Response {
         return String.format("Nice! I've marked this task as done:\n\t\t%s", currTask.toString());
     }
 
+    /**
+     * Custom equals operator to compare MarkResponse objects
+     * @param obj The other MarkResponse object to compare to
+     * @return boolean if the two are the same MarkResponse
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
