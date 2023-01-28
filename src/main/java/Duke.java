@@ -85,7 +85,7 @@ public class Duke {
                     int indexOfToSubstring = inputWithoutCommand.indexOf("/to ");
 
                     String description = inputWithoutCommand.substring(0, indexOfFromSubstring);
-                    String startTime = inputWithoutCommand.substring(indexOfFromSubstring + 6, indexOfToSubstring);
+                    String startTime = inputWithoutCommand.substring(indexOfFromSubstring + 6, indexOfToSubstring - 1);
                     String endTime = inputWithoutCommand.substring(indexOfToSubstring + 4);
 
                     Event event = new Event(description, startTime, endTime);
@@ -103,7 +103,6 @@ public class Duke {
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(removedTask);
                     System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
-
                     saveTodoList(tasksList);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -114,7 +113,6 @@ public class Duke {
             }
         }
     }
-
     // saves TodoList whenever there is a change
     static void saveTodoList(ArrayList<Task> tasksList) {
         int taskNumber = 1;
@@ -150,100 +148,6 @@ public class Duke {
         } catch (IOException e) {
             // System.out.println("An error occurred.");
             e.printStackTrace();
-        }
-    }
-
-    public static class Task {
-        protected  String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public String getStatusIcon() {
-            return (isDone ? "[X]" : "[ ]"); // mark done task with X
-        }
-
-        @Override
-        public String toString() {
-            return getStatusIcon() + " " + this.description;
-        }
-
-        public void markAsDone() {
-            this.isDone = true;
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(this);
-        }
-
-        public void markAsNotDone() {
-            this.isDone = false;
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(this);
-        }
-    }
-
-    public static class ToDo extends Task {
-        private final String taskType = "[T]";
-
-        public ToDo(String description) {
-            super(description);
-        }
-
-        @Override
-        public String toString() {
-            return taskType + super.toString();
-        }
-    }
-
-    public static class Deadline extends Task {
-        private final String taskType = "[D]";
-        private String byString;
-
-        public Deadline(String description, String by) {
-            super(description);
-            this.byString = by;
-        }
-
-        @Override
-        public String toString() {
-            return taskType + super.toString() + " (by: " + this.byString + ")";
-        }
-    }
-
-    public static class Event extends Task{
-        private final String taskType = "[E]";
-        private String startTime;
-        private String endTime;
-
-        public Event(String description, String startTime, String endTime) {
-            super(description);
-            this.startTime = startTime;
-            this.endTime = endTime;
-        }
-
-        @Override
-        public String toString() {
-            return taskType + super.toString() + " (from: " + this.startTime + " to: " + this.endTime + ")";
-        }
-    }
-
-    public static class DukeException extends Exception {
-         public DukeException() {
-             super();
-         }
-
-         public DukeException(String message, Throwable cause) {
-             super(message, cause);
-         }
-
-        public DukeException(String message) {
-            super(message);
-        }
-
-        public DukeException(Throwable cause) {
-            super(cause);
         }
     }
 }
