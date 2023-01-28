@@ -27,14 +27,18 @@ public class Deadline extends Task {
                 this.byTime = LocalTime.parse(arr.get(1), DateTimeFormatter.ofPattern("HHmm"));
                 byTimeStr = byTime.format(DateTimeFormatter.ofPattern("HHmm"));
             }
-//            System.out.println("Excellent sir, I've added the task: ");
-//            System.out.println(this.toString());
         } catch (DateTimeParseException d) {
             System.out.println(dateTimeParseErrMsg);
         }
     }
 
-    public Deadline(String description, String by) {
+    /**
+     * Creates a new Deadline task with description and formatted-time input
+     * @param description describes the task details
+     * @param by a String which details the deadline date-time in yyyy-mm-dd hhmm format
+     * @throws BotException if the datetime cannot be parsed
+     */
+    public Deadline(String description, String by) throws BotException {
         super(description, false);
         this.by = by;
         ArrayList<String> arr = new ArrayList<>(List.of(by.split(" ")));
@@ -47,10 +51,9 @@ public class Deadline extends Task {
                 this.byTime = LocalTime.parse(arr.get(1), DateTimeFormatter.ofPattern("HHmm"));
                 byTimeStr = byTime.format(DateTimeFormatter.ofPattern("HHmm"));
             }
-            System.out.println("Excellent sir, I've added the task: ");
-            System.out.println(this);
         } catch (DateTimeParseException d) {
-            System.out.println(dateTimeParseErrMsg);
+            throw new BotException(dateTimeParseErrMsg);
+
         }
     }
 

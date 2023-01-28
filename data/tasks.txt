@@ -1,3 +1,0 @@
-T | 1 | this
-E | 1 | eve2 | now | then
-D | 0 | cs | tmr
