@@ -171,7 +171,7 @@ public class Functions {
     /**
      * Method to define function of event command. Create event task
      *
-     * @param inp Descript of event task. Define event with "/from ... /to ...".
+     * @param inp Description of event task. Define event with "/from ... /to ...".
      *            Example: deadline task1 /from 12/12/2023 12:12 /to 12/12/2023 23:59
      * @throws DukeException
      */

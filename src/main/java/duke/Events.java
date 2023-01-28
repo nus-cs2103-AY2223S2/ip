@@ -61,7 +61,7 @@ public class Events extends TimedTask {
     /**
      * Method to display start date time onto console
      *
-     * @return String represention of display
+     * @return String representation of display
      */
     public String toStringConsoleStart() {
         return this.consoleStartString;
@@ -70,7 +70,7 @@ public class Events extends TimedTask {
     /**
      * Method to display start date time onto file
      *
-     * @return String represention of display
+     * @return String representation of display
      */
     public String toStringFileStart() {
         return this.fileStartString;
@@ -88,7 +88,7 @@ public class Events extends TimedTask {
     /**
      * Method to display status of task onto file
      *
-     * @return String representaion of display
+     * @return String representation of display
      */
     @Override
     public String toString() {

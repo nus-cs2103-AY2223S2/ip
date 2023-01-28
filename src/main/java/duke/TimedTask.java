@@ -53,7 +53,7 @@ public abstract class TimedTask extends Task {
     }
 
     /**
-     * Method to assist with laoding from file.
+     * Method to assist with loading from file.
      *
      * @param des String representation loaded from file
      */

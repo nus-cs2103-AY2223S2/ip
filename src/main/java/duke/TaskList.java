@@ -19,7 +19,7 @@ public class TaskList {
     /**
      * Method to add task into the Duke program
      *
-     * @param t Task object representating task created
+     * @param t Task object representing task created
      */
     public void addTask(Task t) {
         this.list.add(t);
