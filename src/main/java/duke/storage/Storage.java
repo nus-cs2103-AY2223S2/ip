@@ -4,6 +4,7 @@ import duke.tasks.Deadlines;
 import duke.tasks.Events;
 import duke.exceptions.LoadException;
 import duke.tasks.Task;
+import duke.tasks.Todos;
 
 import java.io.FileNotFoundException;
 import java.io.File;

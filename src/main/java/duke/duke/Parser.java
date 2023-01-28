@@ -1,6 +1,6 @@
 package duke.duke;
 
-import duke.storage.Todos;
+import duke.tasks.Todos;
 import duke.tasks.Deadlines;
 import duke.tasks.Events;
 import duke.commands.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class Parser {
 
-    Parser() {
+    public Parser() {
 
     }
 
