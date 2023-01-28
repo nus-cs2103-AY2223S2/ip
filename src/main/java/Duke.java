@@ -11,6 +11,7 @@ import java.nio.file.Path;
 public class Duke {
 
     private static Ui ui = new Ui();
+    private static Storage storage;
 
     private static Scanner getInput = new Scanner(System.in); // Create a static Scanner object
 
@@ -18,10 +19,14 @@ public class Duke {
 
     public static void main(String[] args) throws IOException {
 
+        String unixFilePath = "data/duke.txt"; // ~/data/duke
+
         // Print introduction
         ui.printIntro();
 
         // Open file
+        storage = new Storage(unixFilePath);
+
         String home = System.getProperty("user.home"); // Get home directory
         Files.createDirectories(Paths.get(home,"data")); // Create directory if it does not exist
         Path filePath = Paths.get(home, "data", "duke.txt");
