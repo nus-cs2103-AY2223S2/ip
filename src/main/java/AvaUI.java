@@ -36,7 +36,6 @@ public class AvaUI {
      * Intialises the UI
      */
     public void intialise() {
-        try {
         this.displayIntro();
         Scanner myObj = new Scanner(System.in);
         this.tasks = new TaskList();
@@ -64,9 +63,7 @@ public class AvaUI {
                 this.displayOutput(e.getMessage());
             }
         }
-        } catch (AvaException e){
-            this.displayOutput(e.getMessage());
-        }
+
     }
 
     /**
