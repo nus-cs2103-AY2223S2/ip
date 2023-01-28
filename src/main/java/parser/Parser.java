@@ -121,7 +121,7 @@ public class Parser {
 		String[] dateTimeArr = dateTimeStr.split(" ");
 		LocalTime time = LocalTime.MIN;
 		Integer[] dateArr;
-		String errorMessage = "Oops! Time format needs to be specified in proper form.";
+		String errorMessage = "Oops! Datetime format needs to be specified in proper form.";
 		if (dateTimeArr.length > 1) {
 			try {
 				int hr = Integer.parseInt(dateTimeArr[1].substring(0, 2));
@@ -135,12 +135,16 @@ public class Parser {
 
 		try {
 			if (dateTimeStr.contains("/")) { // Input Format: dd/MM/YYYY
-				dateArr = Stream.of(dateTimeArr[0].split("/")).map(Integer::valueOf).toArray(Integer[]::new);
+				dateArr = Stream.of(dateTimeArr[0].split("/"))
+						.map(Integer::valueOf)
+						.toArray(Integer[]::new);
 				return LocalDateTime.of(LocalDate.of(dateArr[2], dateArr[1], dateArr[0]), time);
 			}
 
 			// Input Format: YYYY-MM-dd
-			dateArr = Stream.of(dateTimeArr[0].split("-")).map(Integer::valueOf).toArray(Integer[]::new);
+			dateArr = Stream.of(dateTimeArr[0].split("-"))
+					.map(Integer::valueOf)
+					.toArray(Integer[]::new);
 			return LocalDateTime.of(LocalDate.of(dateArr[0], dateArr[1], dateArr[2]), time);
 		} catch (ArrayIndexOutOfBoundsException ex) {
 			ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
@@ -165,6 +169,8 @@ public class Parser {
 				return parseDateTimeStr(sliceArrAndConcate(inputArr, i + 1, l), ui, storage, dialogContainer);
 			}
 		}
+		String errorMessage = "Oops! The description of a DEADLINE must include a BY datetime";
+		ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 		return null;
 	}
 
@@ -180,8 +186,8 @@ public class Parser {
 	public LocalDateTime[] getFromTo(String[] inputArr, Ui ui, Storage storage, VBox dialogContainer) {
 		int l = inputArr.length;
 		int fromStartIdx = -1, fromEndIdx = l, toStartIdx = -1;
-		LocalDateTime from = LocalDateTime.MIN;
-		LocalDateTime to = LocalDateTime.MIN;
+		LocalDateTime from = null;
+		LocalDateTime to = null;
 		for (int i = 0; i < l; i++) {
 			if (i < l - 1) {
 				if (inputArr[i].equals("/from")) {
@@ -196,9 +202,9 @@ public class Parser {
 		if (fromStartIdx > -1) {
 			from = parseDateTimeStr(sliceArrAndConcate(inputArr, fromStartIdx, fromEndIdx), ui, storage,
 					dialogContainer);
-		}
-		if (toStartIdx > -1) {
-			to = parseDateTimeStr(sliceArrAndConcate(inputArr, toStartIdx, l), ui, storage, dialogContainer);
+			if (from != null && toStartIdx > -1) {
+				to = parseDateTimeStr(sliceArrAndConcate(inputArr, toStartIdx, l), ui, storage, dialogContainer);
+			}
 		}
 		return new LocalDateTime[] { from, to };
 	}

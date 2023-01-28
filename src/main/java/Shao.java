@@ -118,7 +118,11 @@ public class Shao extends Application {
 
     }
 
-    /** Run the program until it terminates */
+    /**
+     * Run the program until it terminates
+     * 
+     * @throws InterruptedException
+     */
     public void run(Stage stage) {
         String fullCommand = userInput.getText();
         userInput.setText("");
@@ -132,8 +136,8 @@ public class Shao extends Application {
 
         if (isExit) {
             Platform.exit();
-            System.exit(0);
         }
+
     }
 
 }
