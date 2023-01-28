@@ -3,9 +3,9 @@
 
   **Pix helps to remember stuff for you so that you do not have to! It is a Command-Line-Interface based task manager that is ~~easy~~ super easy to learn and quick to use.**
 
-- [Installation](https://github.com/zenithyap/ip/edit/master/README.md#installation)
-- [Features](https://github.com/zenithyap/ip/edit/master/README.md#features)
-- [Commands](https://github.com/zenithyap/ip/edit/master/README.md#commands)
+- [Installation](https://github.com/zenithyap/ip#installation)
+- [Features](https://github.com/zenithyap/ip#features)
+- [Commands](https://github.com/zenithyap/ip#commands)
 
 ## Installation
 1. Ensure that you have java `11` installed.
