@@ -1,10 +1,7 @@
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.io.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -15,7 +12,6 @@ public class Duke {
         List<Task> list = new ArrayList<Task>();
         String input = scanner.nextLine();
         int i = 1;
-
 
         while (!input.equals("bye")) {
             Integer len = input.length();

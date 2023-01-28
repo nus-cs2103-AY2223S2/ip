@@ -41,19 +41,22 @@ public class Database {
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()){
                 String data = reader.nextLine();
-                System.out.println(data);
-                String[] data_parts = data.split(" | ");
+                System.out.println("data here: " + data);
+                String[] data_parts = data.split("/");
+                System.out.println(Arrays.toString(data_parts));
                 String type = data_parts[0];
                 switch (type){
                     case "T":
-                        arrayList.add(new ToDos(data_parts[4]));
+                        System.out.println(Arrays.toString(data_parts));
+                        arrayList.add(new ToDos(data_parts[2]));
                         break;
                     case "D":
                         System.out.println(Arrays.toString(data_parts));
-                        arrayList.add(new Deadline(data_parts[4], data_parts[6]));
+                        arrayList.add(new Deadline(data_parts[2], data_parts[3]));
                         break;
                     case "E":
-                        arrayList.add(new Event(data_parts[4], data_parts[6]));
+                        System.out.println(Arrays.toString(data_parts));
+                        arrayList.add(new Event(data_parts[2], data_parts[3]));
                         break;
                 }
             }
@@ -61,7 +64,7 @@ public class Database {
         } catch (IOException e){
             System.out.println(e);
         }
-//        System.out.println(Arrays.deepToString(arrayList.toArray()));
+        System.out.println("getdata function: " + Arrays.deepToString(arrayList.toArray()));
         return arrayList;
     }
 

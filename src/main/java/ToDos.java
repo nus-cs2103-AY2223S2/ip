@@ -13,9 +13,9 @@ public class ToDos extends Task{
     @Override
     public String dataFormat(){
         if (isDone) {
-            return "T | 1 | " + description;
+            return "T/1/" + description;
         }else {
-            return "T | 0 | " + description;
+            return "T/0/" + description;
         }
     }
 

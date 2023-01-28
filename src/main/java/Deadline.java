@@ -15,9 +15,9 @@ public class Deadline extends Task{
     @Override
     public String dataFormat(){
         if (isDone) {
-            return "D | 1 | " + description + " | " + by;
+            return "D/1/" + description + "/" + by;
         }else {
-            return "D | 0 | " + description + " | " + by;
+            return "D/0/" + description + "/" + by;
         }
     }
     @Override
