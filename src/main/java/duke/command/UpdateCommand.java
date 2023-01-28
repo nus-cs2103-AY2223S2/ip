@@ -65,7 +65,7 @@ public class UpdateCommand extends Command{
         // Check if the task index is valid
         if (!isValidIndex(tasks)) {
             String errorMessage = String.format(ErrorMessage.INVALID_INDEX_ERROR,
-                    tasks.getNoOfTasks()) + ErrorMessage.INPUT_VALID_INDEX;
+                    tasks.getNoOfTasks());
             throw new InvalidInputException(errorMessage);
         }
 

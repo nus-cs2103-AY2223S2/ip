@@ -7,6 +7,8 @@ public class ErrorMessage {
     public static final String EMPTY_EVENT_ERROR = "OOPS!!! The description of an event cannot be empty.";
     public static final String EMPTY_TODO_ERROR = "OOPS!!! The description of a todo cannot be empty.";
     public static final String INVALID_DESCRIPTION_ERROR = "OOPS!!! The description cannot be empty.";
+    public static final String INVALID_HELP_COMMAND_ERROR = "OOPS!!! Unrecognized help Command.\nPlease try:\n" +
+            "- help\n- help date\n- help time";
 
     // Errors related to task index
     public static final String INVALID_INDEX_ERROR = "OOPS!!! The input index is not within the range of [1, %d]. "
@@ -16,11 +18,13 @@ public class ErrorMessage {
 
     // Errors related to date and time
     public static final String INVALID_DATE_ERROR = "OOPS!!! The input date format is invalid. "
-            + "Please input the date in the format of yyyy-mm-dd.";
+            + "Type \"help date\" to check the date format";
+    public static final String INVALID_DATETIME_ERROR = "OOPS!!! The input date time format is invalid. "
+            + "Type \"help date\" to check the date time format";;
     public static final String INVALID_DEADLINE_FORMAT_ERROR = "OOPS!!! Please input the deadline in the "
-            + "correct format. Example: deadline Assignment 1 /by 2023-12-31";
+            + "correct format. Example: deadline Assignment 1 /by 15/01/2023 1500";
     public static final String INVALID_EVENT_FORMAT_ERROR = "OOPS!!! Please input the event in the "
-            + "correct format. Example: event Team Meeting /from 2020-12-31 /to 2020-12-31";
+            + "correct format. Example: event Team Meeting /from 16/01/2023 1500 /to 16/01/2023 1900";
     public static final String INVALID_FROM_AND_TO_ERROR = "OOPS!!! Start date can not be after than the End date";
 
     // Other errors

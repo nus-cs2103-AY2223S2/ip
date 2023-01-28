@@ -60,7 +60,7 @@ public class Parser {
         //Reused from https://github.com/wweqg/ip/blob/master/src/main/java/duke/parser/Parser.java
         //with minor modification, it is a pretty clean and concise regular expression for general instructions
         Matcher instructionExtractor = Pattern
-                .compile("(?<instructionTag>\\S++)(?<information>.*)").matcher(input.strip());
+                .compile("(?<instructionTag>\\S++)(?<information>.*)").matcher(input.trim());
         //@@author
 
         // Check if the input matches the regular expression
@@ -71,7 +71,6 @@ public class Parser {
         // Return the Matcher object that contains the instruction tag and information
         return instructionExtractor;
     }
-
 
     /**
      * Matches the instruction tag with the corresponding instruction enum.
@@ -108,42 +107,42 @@ public class Parser {
             case REMINDER:
                 //create and return ReminderCommand
                 return new ReminderCommand();
-            case HELP:
-                //create and return HelpCommand
-                return new HelpCommand();
             case MASSDELETE:
                 //create and return MassDeleteCommand
                 return new MassDeleteCommand();
             case FREE:
                 //create and return FindFreeTimeCommand
                 return new FindFreeTimeCommand();
+            case HELP:
+                //create and return command to mark item using helpDecoder in Decipherer
+                return Decipherer.parseHelpCommand(information);
             case MARK:
                 //create and return command to mark item using markDecoder in Decipherer
-                return Decipherer.markDecoder(information);
+                return Decipherer.parseMarkCommand(information);
             case UNMARK:
                 //create and return command to unmark item using unmarkDecoder in Decipherer
-                return Decipherer.unmarkDecoder(information);
+                return Decipherer.parseUnmarkCommand(information);
             case DELETE:
                 //create and return command to delete item using deleteDecoder in Decipherer
-                return Decipherer.deleteDecoder(information);
+                return Decipherer.parseDeleteCommand(information);
             case TODO:
                 //create and return command to create to-do item using todoDecoder in Decipherer
-                return Decipherer.todoDecoder(information);
+                return Decipherer.parseTodoCommand(information);
             case DEADLINE:
                 //create and return command to create deadline item using deadlineDecoder in Decipherer
-                return Decipherer.deadlineDecoder(information);
+                return Decipherer.parseDeadlineCommand(information);
             case EVENT:
                 //create and return command to create event item using eventDecoder in Decipherer
-                return Decipherer.eventDecoder(information);
+                return Decipherer.parseEventCommand(information);
             case FIND:
                 //create and return command to find item using findDecoder in Decipherer
-                return Decipherer.findDecoder(information);
+                return Decipherer.parseFindCommand(information);
             case VIEW:
                 //create and return command to view item using viewDecoder in Decipherer
-                return Decipherer.viewDecoder(information);
+                return Decipherer.parseViewCommand(information);
             case UPDATE:
                 //create and return command to update item using updateDecoder in Decipherer
-                return Decipherer.updateDecoder(information);
+                return Decipherer.parseUpdateCommand(information);
             case UNDO:
                 //create and return UndoCommand
                 return new UndoCommand();

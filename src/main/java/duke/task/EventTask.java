@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -12,10 +13,10 @@ import duke.parser.ErrorMessage;
  * dates of a Deadline Task.
  */
 public class EventTask extends DukeTask {
-    private final LocalDate from;
-    private final LocalDate to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
     private static final String STORAGE_FORMAT = "[E] | %s %s | %s | %s";
-    private static final String FORMAT = "[E] %s (from: %s to: %s)";
+    private static final String FORMAT = "[E]%s %s ( from: %s to: %s )";
 
     /**
      * Constructor for EventTask that takes in the information of the task
@@ -23,10 +24,10 @@ public class EventTask extends DukeTask {
      *
      * @param info The information of the task
      * @param from The starting date of the task
-     * @param to The ending date of the task
+     * @param to   The ending date of the task
      * @throws InvalidInputException Throws exception when the staring date is after the end date
      */
-    public EventTask(String info, LocalDate from, LocalDate to) throws InvalidInputException {
+    public EventTask(String info, LocalDateTime from, LocalDateTime to) throws InvalidInputException {
         super(info, TaskType.EVENT);
         this.from = from;
         this.to = to;
@@ -40,7 +41,7 @@ public class EventTask extends DukeTask {
      *
      * @return the starting date of the task
      */
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return this.from;
     }
 
@@ -49,7 +50,7 @@ public class EventTask extends DukeTask {
      *
      * @return the ending date of the task
      */
-    public LocalDate getEndDate() {
+    public LocalDateTime getEndDate() {
         return this.to;
     }
 
@@ -73,47 +74,53 @@ public class EventTask extends DukeTask {
      */
     @Override
     public boolean matchesDate(LocalDate date) {
-        return date.isEqual(this.from) || date.isEqual(this.to)
-                || (date.isAfter(this.from) && date.isBefore(this.to));
+        LocalDate fromDate = this.from.toLocalDate();
+        LocalDate toDate = this.to.toLocalDate();
+        return date.isEqual(fromDate) || date.isEqual(toDate)
+                || (date.isAfter(fromDate) && date.isBefore(toDate));
     }
 
     /**
-     * Returns a string representation of the task in a specific format, indicating the task type, whether the task is
-     * done or not, the information of the task, start date and end date of event.
+     * Returns a string representation of the task in a specific format, indicating the information of the task,
+     * start date, and end date of the event.
      *
      * @return A string representation of the task
      */
     @Override
     public String toString() {
-        // Use a constant for the date format pattern
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-        // Store the formatted dates in a local variable
-        String formattedFrom = this.from.format(formatter);
-        String formattedTo = this.to.format(formatter);
-        return String.format(FORMAT, super.toString(), formattedFrom, formattedTo);
+        String status = this.getStatus() ? "[X]" : "[ ]";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return String.format(FORMAT, status,
+                this.getInformation(), this.from.format(formatter), this.to.format(formatter));
     }
 
-
     /**
-     * Check whether this event task is equal to the given object
+     * Returns true if the given object is equal to this EventTask.
+     * Two EventTasks are considered equal if they have the same information, start date, and end date.
      *
-     * @param obj the object to check against
-     * @return true if the objects are equal, false otherwise
+     * @param obj The object to compare to this EventTask
+     * @return true if the given object is equal to this EventTask
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) {
+        if (this == obj) {
             return true;
         }
-        if (!(obj instanceof EventTask)) {
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
-        EventTask eventObj = (EventTask) obj;
+        EventTask other = (EventTask) obj;
+        return this.getInformation().equals(other.getInformation()) && this.from.equals(other.from)
+                && this.to.equals(other.to);
+    }
 
-        // Compare the information and the from and to dates
-        return Objects.equals(this.getInformation(), eventObj.getInformation())
-                && this.getStatus() == eventObj.getStatus()
-                && this.from.isEqual(eventObj.from)
-                && this.to.isEqual(eventObj.to);
+    /**
+     * Returns the hash code value of this EventTask
+     *
+     * @return the hash code value of this EventTask
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getInformation(), this.from, this.to);
     }
 }

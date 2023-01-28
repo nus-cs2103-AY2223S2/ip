@@ -52,14 +52,13 @@ public class MarkAsDoneCommand extends Command {
         commandHistory.saveState(tasks);
         if (tasks.isEmpty()) {
             // throw an error message if task list is empty
-            String errorMessage = ErrorMessage.TASK_LIST_EMPTY_MESSAGE + ErrorMessage.ADD_MORE_TASKS;
+            String errorMessage = ErrorMessage.TASK_LIST_EMPTY_ERROR + ErrorMessage.ADD_MORE_TASKS;
             throw new InvalidInputException(errorMessage);
         }
 
         if (!isValidIndex(tasks)) {
             // throw an error message if the input index is invalid
-            String errorMessage = String.format(ErrorMessage.INVALID_INDEX_ERROR
-                    + ErrorMessage.INPUT_VALID_INDEX, tasks.getNoOfTasks());
+            String errorMessage = String.format(ErrorMessage.INVALID_INDEX_ERROR, tasks.getNoOfTasks());
             throw new InvalidInputException(errorMessage);
         } else {
             // Mark the task as done

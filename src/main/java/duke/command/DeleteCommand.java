@@ -61,14 +61,13 @@ public class DeleteCommand extends Command {
         commandHistory.saveState(tasks);
         if (isEmpty(tasks)) {
             //if the task list is empty, throw an exception
-            String errorMessage = ErrorMessage.TASK_LIST_EMPTY_MESSAGE + ErrorMessage.ADD_MORE_TASKS;
+            String errorMessage = ErrorMessage.TASK_LIST_EMPTY_ERROR + ErrorMessage.ADD_MORE_TASKS;
             throw new InvalidInputException(errorMessage);
         }
 
         if (!isValidIndex(tasks)) {
             //if the index passed is not valid, throw an exception
-            String errorMessage = String.format(ErrorMessage.INVALID_INDEX_ERROR
-                    + ErrorMessage.INPUT_VALID_INDEX, tasks.getNoOfTasks());
+            String errorMessage = String.format(ErrorMessage.INVALID_INDEX_ERROR, tasks.getNoOfTasks());
             throw new InvalidInputException(errorMessage);
         } else {
             //delete the task from the list, store the task that was deleted

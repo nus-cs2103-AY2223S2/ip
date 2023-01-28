@@ -6,7 +6,6 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TodoTask;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,7 +49,7 @@ public class Decipherer {
      * @return an UpdateCommand object
      * @throws InvalidInputException if the input task index is not a number or the description is empty
      */
-    public static UpdateCommand updateDecoder(String information) throws InvalidInputException {
+    public static UpdateCommand parseUpdateCommand(String information) throws InvalidInputException {
         //split the input into index and task description
         String[] parts = splitString(information);
         //parse the index and convert it to zero-indexed
@@ -80,7 +79,7 @@ public class Decipherer {
      * @return an MarkAsDoneCommand object
      * @throws InvalidInputException if the input task index is not a number
      */
-    public static MarkAsDoneCommand markDecoder(String information) throws InvalidInputException {
+    public static MarkAsDoneCommand parseMarkCommand(String information) throws InvalidInputException {
         // Use regular expression to check if the input is a number
         Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
 
@@ -101,7 +100,7 @@ public class Decipherer {
      * @return an UnmarkCommand object
      * @throws InvalidInputException if the input task index is not a number
      */
-    public static UnmarkCommand unmarkDecoder(String information) throws InvalidInputException {
+    public static UnmarkCommand parseUnmarkCommand(String information) throws InvalidInputException {
         // Use regular expression to check if the input is a number
         Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
 
@@ -122,7 +121,7 @@ public class Decipherer {
      * @return a DeleteCommand object
      * @throws InvalidInputException if the input task index is not a number
      */
-    public static DeleteCommand deleteDecoder(String information) throws InvalidInputException {
+    public static DeleteCommand parseDeleteCommand(String information) throws InvalidInputException {
         // Use regular expression to check if the input is a number
         Matcher numberChecker = Pattern.compile("\\d+?").matcher(information);
 
@@ -143,7 +142,7 @@ public class Decipherer {
      * @return an AddTaskCommand object
      * @throws InvalidInputException if the input task description is empty
      */
-    public static AddTaskCommand todoDecoder(String information) throws InvalidInputException {
+    public static AddTaskCommand parseTodoCommand(String information) throws InvalidInputException {
         // check if the input is not empty
         if (!emptyStringChecker.matcher(information).matches()) {
             throw new InvalidInputException(ErrorMessage.EMPTY_TODO_ERROR);
@@ -162,26 +161,27 @@ public class Decipherer {
      * @throws InvalidInputException if the input task description is empty,
      * the input date format is invalid, or the input format is incorrect
      */
-    public static AddTaskCommand deadlineDecoder(String information) throws InvalidInputException {
+    public static AddTaskCommand parseDeadlineCommand(String information) throws InvalidInputException {
         // check if the input is not empty
         if (!emptyStringChecker.matcher(information).matches()) {
             throw new InvalidInputException(ErrorMessage.EMPTY_DEADLINE_ERROR);
         } else {
             // Use regular expression to extract the name and date
-            Matcher dateChecker = Pattern.compile("(?<name>.)/by(?<date>.)").matcher(information);
+            Matcher dateChecker = Pattern.compile("(?<name>.*)/by\\s*(?<date>.*)").matcher(information);
+
             if (dateChecker.matches()) {
-                String name = dateChecker.group("name").strip();
-                String date = dateChecker.group("date").strip();
+                String name = dateChecker.group("name").trim();
+                String date = dateChecker.group("date").trim();
                 try {
                     // create a new DeadlineTask and return an AddTaskCommand with it
-                    return new AddTaskCommand(new DeadlineTask(name, LocalDate.parse(date)));
+                    return new AddTaskCommand(new DeadlineTask(name, DateHandler.parseToLocalDateTime(date)));
                 } catch (DateTimeParseException e) {
                     // if the input date format is invalid, throw an exception
-                    throw new InvalidInputException(ErrorMessage.INVALID_DATE_ERROR);
+                    throw new InvalidInputException(ErrorMessage.INVALID_DATETIME_ERROR);
                 }
             } else {
                 // if the input format is incorrect, throw an exception
-               throw new InvalidInputException(ErrorMessage.INVALID_DEADLINE_FORMAT_ERROR);
+                throw new InvalidInputException(ErrorMessage.INVALID_DEADLINE_FORMAT_ERROR);
             }
         }
     }
@@ -195,7 +195,7 @@ public class Decipherer {
      * @throws InvalidInputException if the input task description is empty,
      * the input date format is invalid, or the input format is incorrect
      */
-    public static AddTaskCommand eventDecoder(String information) throws InvalidInputException {
+    public static AddTaskCommand parseEventCommand(String information) throws InvalidInputException {
         // check if the input is not empty
         if (!emptyStringChecker.matcher(information).matches()) {
             throw new InvalidInputException(ErrorMessage.EMPTY_EVENT_ERROR);
@@ -204,16 +204,16 @@ public class Decipherer {
             Matcher intervalChecker = Pattern.compile("(?<name>.*)/from(?<from>.*)/to(?<to>.*)")
                     .matcher(information);
             if (intervalChecker.matches()) {
-                String name = intervalChecker.group("name").strip();
-                String from = intervalChecker.group("from").strip();
-                String to = intervalChecker.group("to").strip();
+                String name = intervalChecker.group("name").trim();
+                String from = intervalChecker.group("from").trim();
+                String to = intervalChecker.group("to").trim();
                 try {
                     // create a new EventTask and return an AddTaskCommand with it
                     return new AddTaskCommand(
-                            new EventTask(name, LocalDate.parse(from), LocalDate.parse(to)));
+                            new EventTask(name, DateHandler.parseToLocalDateTime(from), DateHandler.parseToLocalDateTime(to)));
                 } catch (DateTimeParseException e) {
                     // if the input date format is invalid, throw an exception
-                    throw new InvalidInputException(ErrorMessage.INVALID_DATE_ERROR);
+                    throw new InvalidInputException(ErrorMessage.INVALID_DATETIME_ERROR);
                 }
             } else {
                 // if the input format is incorrect, throw an exception
@@ -229,7 +229,7 @@ public class Decipherer {
      * @return a FindCommand object
      * @throws InvalidInputException if the input task description is empty
      */
-    public static FindCommand findDecoder(String information) throws InvalidInputException {
+    public static FindCommand parseFindCommand(String information) throws InvalidInputException {
         // check if the input is not empty
         if (!emptyStringChecker.matcher(information).matches()) {
             throw new InvalidInputException(ErrorMessage.INVALID_DESCRIPTION_ERROR);
@@ -248,18 +248,26 @@ public class Decipherer {
      * @throws InvalidInputException if the input task description is empty,
      * or the input date format is invalid
      */
-    public static ViewScheduleCommand viewDecoder(String information) throws InvalidInputException {
+    public static ViewScheduleCommand parseViewCommand(String information) throws InvalidInputException {
         // check if the input is not empty
         if (!emptyStringChecker.matcher(information).matches()) {
             throw new InvalidInputException(ErrorMessage.INVALID_DESCRIPTION_ERROR);
         } else {
             try {
                 // create a new ViewScheduleCommand with the date
-                return new ViewScheduleCommand(LocalDate.parse(information));
+                return new ViewScheduleCommand(DateHandler.parseToLocalDate(information));
             } catch (DateTimeParseException e) {
                 // if the input date format is invalid, throw an exception
-                throw new InvalidInputException(ErrorMessage.INVALID_DATE_FORMAT_ERROR);
+                throw new InvalidInputException(ErrorMessage.INVALID_DATE_ERROR);
             }
+        }
+    }
+
+    public static HelpCommand parseHelpCommand(String information) throws InvalidInputException {
+        if (!emptyStringChecker.matcher(information).matches()) {
+            return new HelpCommand("normal");
+        } else {
+            return new HelpCommand(information);
         }
     }
 }

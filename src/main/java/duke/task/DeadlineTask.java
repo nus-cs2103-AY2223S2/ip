@@ -1,46 +1,47 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
-/**
- * A DeadlineTask that encapsulates the information and deadline date of a Deadline Task.
- */
 public class DeadlineTask extends DukeTask {
-    private static final String FORMAT = "[D] | %s %s | %s";
-
-    /** The deadline date of the task */
-    public final LocalDate deadline;
+    /**
+     * The deadline date and time of the task
+     */
+    public final LocalDateTime deadline;
+    private static final String STORAGE_FORMAT = "[D] | %s | %s | %s";
+    private static final String FORMAT = "[D]%s %s ( by: %s )";
 
     /**
      * Constructor for DeadlineTask that takes in the information of the task and its Deadline.
      *
-     * @param info The information of the task
+     * @param info     The information of the task
      * @param deadline The deadline of the task
      */
-    public DeadlineTask(String info, LocalDate deadline) {
+    public DeadlineTask(String info, LocalDateTime deadline) {
         super(info, TaskType.DEADLINE);
         this.deadline = deadline;
     }
 
     /**
-     * Returns true if the given date is equal to the deadline of the task.
+     * Returns true if the given date and time is equal to the deadline of the task.
      *
-     * @param date The date to check
-     * @return true if the date is equal to the deadline, false otherwise
+     * @param date The date and time to check
+     * @return true if the date and time is equal to the deadline, false otherwise
      */
     @Override
     public boolean matchesDate(LocalDate date) {
-        return date.isEqual(this.deadline);
+        LocalDate deadlineDate = this.deadline.toLocalDate();
+        return date.isEqual(deadlineDate);
     }
 
+
     /**
-     * Returns the deadline date of the task.
+     * Returns the deadline date and time of the task.
      *
-     * @return The deadline date of the task
+     * @return The deadline date and time of the task
      */
-    public LocalDate getEndDate() {
+    public LocalDateTime getEndDate() {
         return this.deadline;
     }
 
@@ -54,10 +55,9 @@ public class DeadlineTask extends DukeTask {
     public String storageString() {
         // Format the task status, task information, and deadline into a single string
         String isCompleted = this.getStatus() ? "[X]" : "[ ]";
-        return String.format(FORMAT, isCompleted, this.getInformation().strip(),
-                this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        return String.format(STORAGE_FORMAT, isCompleted, this.getInformation().strip(),
+                this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm")));
     }
-
 
     /**
      * Returns a string representation of the task in a specific format, indicating the task type, whether the task is
@@ -67,32 +67,8 @@ public class DeadlineTask extends DukeTask {
      */
     @Override
     public String toString() {
-        // format the string to include the task's description and deadline in the desired format
-        return String.format("[D] %s (by: %s)", super.toString(),
-                this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        String status = this.getStatus() ? "[X]" : "[ ]";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return String.format(FORMAT, status ,this.getInformation(), this.deadline.format(formatter));
     }
-
-    /**
-     * Compares this task object to the passed object and returns true if they are equal.
-     * Two DeadlineTask objects are considered equal if their information and deadline are equal.
-     *
-     * @param obj The object to compare
-     * @return true if the objects are equal, false otherwise
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (!(obj instanceof DeadlineTask)) {
-            return false;
-        }
-        DeadlineTask ddlObj = (DeadlineTask) obj;
-
-        // Compare task information and deadline
-        return Objects.equals(this.getInformation(), ddlObj.getInformation())
-                && this.getStatus() == ddlObj.getStatus()
-                && this.deadline.isEqual(ddlObj.deadline);
-    }
-
 }

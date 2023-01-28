@@ -1,12 +1,11 @@
 package duke.storage;
 
 import duke.exception.InvalidInputException;
+import duke.parser.DateHandler;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TaskList;
 import duke.task.TodoTask;
-
-import java.time.LocalDate;
 
 /**
  * The Decoder class is responsible for decoding the information provided in the storage file and creating the
@@ -21,7 +20,7 @@ public class Decoder {
      * @param description the description of the TodoTask
      * @param isDone whether the TodoTask is done or not
      */
-    public static void todoDecoder(TaskList list, String description, boolean isDone) {
+    public static void decodeTodo(TaskList list, String description, boolean isDone) {
         // Create a new TodoTask with the given description
         TodoTask todo = new TodoTask(description.strip());
 
@@ -42,9 +41,11 @@ public class Decoder {
      * @param isDone whether the DeadlineTask is done or not
      * @param date the deadline date of the task as a string in the format "yyyy-MM-dd"
      */
-    public static void deadlineDecoder(TaskList list, String description, boolean isDone, String date) {
+    public static void decodeDeadline(TaskList list, String description, boolean isDone, String date)
+            throws InvalidInputException {
         // Create a new DeadlineTask with the given description and deadline date
-        DeadlineTask deadline = new DeadlineTask(description.strip(), LocalDate.parse(date));
+        DeadlineTask deadline = new DeadlineTask(description.trim(),
+                DateHandler.parseToLocalDateTime(date));
 
         // If the DeadlineTask is done, mark it as done
         if (isDone) {
@@ -54,7 +55,6 @@ public class Decoder {
         // Add the DeadlineTask to the given TaskList
         list.addTask(deadline);
     }
-
 
     /**
      * Decodes an EventTask and adds it to a TaskList.
@@ -66,10 +66,11 @@ public class Decoder {
      * @param to the end date of the event as a string in the format "yyyy-MM-dd"
      * @throws InvalidInputException if the input is invalid
      */
-    public static void eventDecoder(TaskList list, String description, boolean isDone, String from, String to)
+    public static void decodeEvent(TaskList list, String description, boolean isDone, String from, String to)
             throws InvalidInputException {
         // Create a new EventTask with the given description and event dates
-        EventTask event = new EventTask(description.strip(), LocalDate.parse(from), LocalDate.parse(to));
+        EventTask event = new EventTask(description.strip(), DateHandler.parseToLocalDateTime(from),
+                DateHandler.parseToLocalDateTime(to));
 
         // If the EventTask is done, mark it as done
         if (isDone) {

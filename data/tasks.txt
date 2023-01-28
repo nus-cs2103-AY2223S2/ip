@@ -1,5 +1,3 @@
-[D] | [ ] |  party | 1919-08-10
-[D] | [X] |  make love | 1919-08-10
-[D] | [ ] |  examination | 1900-10-20
-[T] | [X] | read book
-[T] | [ ] | baseball
+[T] | [X] | eat
+[D] | [X] | eat | Jan 15 2021 03:00
+[E] | [X] |  eat | 2023-01-28T15:00 | 2023-01-31T15:00

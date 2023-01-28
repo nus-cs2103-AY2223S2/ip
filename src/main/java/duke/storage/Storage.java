@@ -58,7 +58,7 @@ public class Storage {
 
 
     /**
-     * Load the TaskList from the given data file. If the file does not exist return
+     * Loads the TaskList from the given data file. If the file does not exist return
      * a new empty TaskList.
      *
      * @return Return the TaskList parsed from the given file
@@ -130,15 +130,15 @@ public class Storage {
         switch (taskTag) {
             case TODO_TAG:
                 // Decode the to-do task information
-                Decoder.todoDecoder(list, information[2], isDone);
+                Decoder.decodeTodo(list, information[2], isDone);
                 break;
             case DEADLINE_TAG:
                 // Decode the deadline task information
-                Decoder.deadlineDecoder(list, information[2], isDone, information[3]);
+                Decoder.decodeDeadline(list, information[2], isDone, information[3]);
                 break;
             case EVENT_TAG:
                 // Decode the event task information
-                Decoder.eventDecoder(list, information[2], isDone, information[3], information[4]);
+                Decoder.decodeEvent(list, information[2], isDone, information[3], information[4]);
                 break;
             default:
                 // Throw an exception if the task tag is not recognized
@@ -147,7 +147,7 @@ public class Storage {
     }
 
     /**
-     * Check if the input for the task tag and isDone match the expected format.
+     * Checks if the input for the task tag and isDone match the expected format.
      *
      * @param tag The task tag of the task
      * @param isDone The status of the task

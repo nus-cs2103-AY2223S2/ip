@@ -10,6 +10,8 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * The FindFreeTimeCommand class that finds the nearest date with no tasks
  */
@@ -54,7 +56,6 @@ public class FindFreeTimeCommand extends Command {
             ui.appendResponse(String.format(NEAREST_FREE_TIME_MESSAGE, nearestFreeDate));
         }
     }
-
 
     /**
      * Check whether the given date is free of tasks
@@ -103,8 +104,10 @@ public class FindFreeTimeCommand extends Command {
      * @return true if the task is scheduled on the date, false otherwise
      */
     private boolean isEventTaskScheduledOnDate(LocalDate date, EventTask task) {
-    // Check if the input date is between the start and end date of the event task
-        return (date.isAfter(task.getStartDate()) || date.isEqual(task.getStartDate()))
-                && (date.isBefore(task.getEndDate()) || date.isEqual(task.getEndDate()));
+        LocalDateTime start = LocalDateTime.of(date, task.getStartDate().toLocalTime());
+        LocalDateTime end = LocalDateTime.of(date, task.getEndDate().toLocalTime());
+        // Check if the input date is between the start and end date of the event task
+        return (start.isAfter(task.getStartDate()) || start.isEqual(task.getStartDate()))
+                && (end.isBefore(task.getEndDate()) || end.isEqual(task.getEndDate()));
     }
 }
