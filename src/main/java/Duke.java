@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.StringBuilder;
+import java.io.IOException;
 
 public class Duke {
     private static final String intro = "Hi! I'm Duke! :)\nHow may I help?";
@@ -15,7 +16,7 @@ public class Duke {
     private static void addToList(Task t) {
         list.add(t);
         System.out.print("Duke: ");
-        System.out.println("added " + t.getName() + "!");
+        System.out.println("added " + t.getTask() + "!");
         System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 
@@ -121,14 +122,20 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println(intro);
         System.out.println();
+        Data saved = new Data("./dukeSaved.txt");
+        if(saved.isSaved()) {
+            System.out.println("Duke: Previously saved list available!");
+            list = saved.load();
+        } else {
+            System.out.println("Duke: No previously saved list found.");
+        }
         System.out.print("User: ");
         String[] raw = sc.nextLine().split(" ");
         String input = raw[0];
-
         
         while(!input.equals("bye")) {
             if (input.equals("list")) {
@@ -181,6 +188,7 @@ public class Duke {
             raw = sc.nextLine().split(" ");
             input = raw[0];
         }
+        saved.save(list);
         sc.close();
         System.out.print("Duke: ");
         System.out.println(outro);

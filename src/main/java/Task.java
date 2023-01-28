@@ -7,7 +7,7 @@ public class Task {
         this.done = false;
     }
 
-    public String getName() {
+    public String getTask() {
         return this.name;
     }
 
@@ -17,6 +17,10 @@ public class Task {
 
     public void unmark() {
         this.done = false;
+    }
+
+    public boolean isMarked() {
+        return this.done;
     }
 
     @Override
