@@ -1,17 +1,37 @@
-public class Deadline extends Task {
-    protected String by;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    protected LocalDateTime byDateTime;
+    protected LocalDate byDate;
+
+    public Deadline(String description, LocalDateTime by) {
         super(description);
-        this.by = by;
+        this.byDateTime = by;
+    }
+
+    public Deadline(String description, LocalDate by) {
+        super(description);
+        this.byDate = by;
     }
 
     public String getFileRepresentation() {
-        return "deadline " + this.isDone + " " + this.description + " /by " + this.by;
+        if (byDateTime != null) {
+            return "deadline " + this.isDone + " " + this.description + " /by "
+                    + this.byDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } else {
+            return "deadline " + this.isDone + " " + this.description + " /by "
+                    + this.byDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        if (byDateTime != null) {
+            return "[D]" + super.toString() + " (by: " + this.byDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        } else {
+            return "[D]" + super.toString() + " (by: " + this.byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        }
     }
 }
