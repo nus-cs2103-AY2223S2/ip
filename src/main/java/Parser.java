@@ -38,6 +38,24 @@ public class Parser {
     }
 
     /**
+     * This method is used to parse user input and obtain the user's search query
+     *
+     * @param input the raw input string provided by the user
+     * @return a String representing the user's query of a task
+     * @throws DukeInvalidCommandException if the input provided by the user could not be parsed
+     */
+    public String getSearchKeyword(String input) throws DukeInvalidCommandException {
+        String[] segments = input.split(" ", 2);
+        String result;
+        try {
+            result = segments[1];
+        } catch (ArrayIndexOutOfBoundsException e1) {
+            throw new DukeInvalidCommandException(Response.INVALID_COMMAND.toString());
+        }
+        return result;
+    }
+
+    /**
      * This method is used to parse user input and obtain the bot keyword provided by the user.
      *
      * @param input the input string provided by the user
@@ -101,7 +119,7 @@ public class Parser {
 
 
     /**
-     * This method is used to create an event by parsing user input and creating a new ToDo object.
+     * This method is used to create an event by parsing user input and creating a new to-do object.
      *
      * @param input the input string provided by the user
      * @return a string indicating the bot response to the to-do creation outcome (either success or failure)
@@ -166,6 +184,17 @@ public class Parser {
         return output;
     }
 
+    public String findTaskEvent(String input) {
+        String keyword;
+        try {
+            keyword = getSearchKeyword(input);
+        } catch (DukeInvalidCommandException e) {
+            return e.getMessage();
+        }
+        TaskManager taskView = taskManager.filterTasks(keyword);
+        return Format.displayFilteredTasks(taskView);
+    }
+
     /**
      * This method processes user input and delegates the corresponding actions by executing specific bot actions.
      *
@@ -211,6 +240,9 @@ public class Parser {
 
             output = createDeadline(input);
             break;
+
+        case "find":
+            output = findTaskEvent(input);
         }
         return output;
     }

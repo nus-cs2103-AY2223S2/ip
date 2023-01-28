@@ -103,6 +103,13 @@ public enum Response {
         }
     },
 
+    NO_MATCHING_TASKS {
+        @Override
+        public String toString() {
+            return "ahh I can't find any tasks matching that keyword! Perhaps twy again?";
+        }
+    },
+
     DEFAULT {
         @Override
         public String toString() {
