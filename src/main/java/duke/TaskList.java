@@ -38,7 +38,8 @@ public class TaskList<Task> {
         try {
             this.taskList.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new NeroException("Please enter a valid index from 0 to " + (this.taskList.size() - 1));
+            throw new NeroException("Please enter a valid index from 0 to "
+                    + (this.taskList.size() - 1));
         }
     }
 
