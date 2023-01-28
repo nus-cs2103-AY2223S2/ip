@@ -28,8 +28,6 @@ public class Storage {
         this.f = new File(fp);
         if (f.createNewFile()) {
         }
-
-        this.taskMap = TaskMap.tm;
     }
 
     /**
@@ -44,7 +42,7 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String l = sc.nextLine();
                 String[] line = l.split(" \\| ");
-                Task t = taskMap.get(line[0]);
+                Task t = TaskMap.get(line[0]);
                 t.setStatus(line[1].equals("X") ? true : false);
                 t.configure(Arrays.copyOfRange(line, 2, line.length));
                 tl.loadTask(t);
@@ -74,8 +72,6 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println(e);
-        } catch (DukeException e) {
             System.out.println(e);
         }
     }

@@ -1,14 +1,19 @@
 package duke;
 
-import java.util.Map;
-
 public class TaskMap {
     /**
      * Assists in loading from file
      */
-    static Map<String, Task> tm = Map.of(
-            "T", new ToDos(),
-            "E", new Events(),
-            "D", new Deadlines()
-    );
+
+    static public Task get(String s) {
+        switch (s) {
+        case "T":
+            return new ToDos();
+        case "E":
+            return new Events();
+        case "D":
+            return new Deadlines();
+        }
+        return new Task();
+    }
 }

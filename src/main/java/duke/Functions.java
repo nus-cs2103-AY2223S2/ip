@@ -1,6 +1,7 @@
 package duke;
 
-import java.util.Arrays;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
 public class Functions {
     /**
@@ -8,6 +9,7 @@ public class Functions {
      */
     TaskList tl;
     Storage st;
+    Pane outputLayout;
 
     /**
      * Constructor for an instance of Function.
@@ -20,17 +22,114 @@ public class Functions {
         this.st = st;
     }
 
+    public void setOutputLayout(Pane outputLayout) {
+        this.outputLayout = outputLayout;
+    }
+
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
     /**
-     * Method to define function of list command
+     * Method to define function of todo command. Creates todo task
      *
+     * @param inp Description of todo task
+     */
+    public void todo(String inp) {
+        ToDos td = new ToDos(false, inp);
+        String s = tl.addTask(td);
+        outputLayout.getChildren().add(getDialogLabel(s));
+        this.st.save(tl);
+    }
+
+    /**
+     * Method to define function of deadline command. Create deadline task
+     *
+     * @param inp Description of deadline task. Define deadline after "/by".
+     *            Example: deadline task1 /by 2023-12-12 12:12
      * @throws DukeException
      */
-    public void list() throws DukeException {
-        System.out.println("Here are the tasks in your list:");
+    public void deadline(String des, String end) {
+        Deadlines dl = new Deadlines(false, des, end);
+        String s = tl.addTask(dl);
+        outputLayout.getChildren().add(getDialogLabel(s));
+        this.st.save(tl);
+    }
+
+    /**
+     * Method to define function of event command. Create event task
+     *
+     * @param inp Description of event task. Define event with "/from ... /to ...".
+     *            Example: deadline task1 /from 12/12/2023 12:12 /to 12/12/2023 23:59
+     */
+    public void events(String des, String start, String end) {
+        Events ev = new Events(false, des, start, end);
+        String s = tl.addTask(ev);
+        outputLayout.getChildren().add(getDialogLabel(s));
+        this.st.save(tl);
+    }
+
+    /**
+     * Method to define function of list command
+     */
+    public void list() {
+        String h = "Here are the tasks in your list:\n";
+        String l = "";
         for (int i = 0; i < tl.count(); i++) {
-            System.out.print(i + 1 + ".");
-            tl.getTask(i).printStatus();
+            String s = i + 1 + "." + tl.getTask(i).printStatus();
+            l += s;
         }
+        outputLayout.getChildren().add(getDialogLabel(h + l));
+    }
+
+    /**
+     * Method to define function of mark command
+     *
+     * @param inp Index of task specified
+     * @throws DukeException
+     */
+    public void mark(String inp) {
+        int index = Integer.parseInt(inp) - 1;
+        Task t = tl.getTask(index);
+        t.setStatus(true);
+        String h = "Nice! I've marked this task as done:\n";
+        outputLayout.getChildren().add(getDialogLabel(h + t.printStatus()));
+        this.st.save(tl);
+    }
+
+    /**
+     * Method to define function of unmark command
+     *
+     * @param inp Index of task specified
+     * @throws DukeException
+     */
+    public void unmark(String inp) {
+        int index = Integer.parseInt(inp) - 1;
+        Task t = tl.getTask(index);
+        t.setStatus(false);
+        String h = "OK, I've marked this task as not done yet:\n";
+        outputLayout.getChildren().add(getDialogLabel(h + t.printStatus()));
+        this.st.save(tl);
+    }
+
+    /**
+     * Method to define function of delete command
+     *
+     * @param inp Index of task specified
+     * @throws DukeException
+     */
+    public void delete(String inp) {
+        int index = Integer.parseInt(inp) - 1;
+        String h = "Noted. I've removed this task:\n";
+        String des = tl.getTask(index).printStatus();
+        tl.removeTask(index);
+        String c = tl.printCount();
+        outputLayout.getChildren().add(getDialogLabel(h + des + c));
+        this.st.save(tl);
     }
 
     /**
@@ -38,27 +137,31 @@ public class Functions {
      *
      * @param s User input
      */
-    public void find(String s) {
-        String query = s.split(" ")[1];
+    public void find(String query) {
         boolean flag = false;
         boolean printed = false;
         int i = 1;
+        String h = "";
+        String task = "";
+
         for (Task t : tl.iterable()) {
             if (t.getDes().contains(query)) {
                 flag = true;
                 if (flag && !printed) {
-                    System.out.println("Here are the matching tasks in your list:");
+                    h = "Here are the matching tasks in your list:\n";
                     printed = true;
                 }
-                System.out.print(i + ".");
-                t.printStatus();
+                task += i + ".";
+                task += t.printStatus();
                 i++;
             }
         }
         if (!flag) {
-            System.out.println("No matching tasks are found in your list");
+            String s = "No matching tasks are found in your list\n";
+            outputLayout.getChildren().add(getDialogLabel(s));
         } else {
-            System.out.println("Search done!");
+            String t = "Search done!\n";
+            outputLayout.getChildren().add(getDialogLabel(h + task + t));
         }
     }
 
@@ -70,120 +173,5 @@ public class Functions {
     public boolean bye() {
         System.out.println("Bye. Hope to see you again soon!");
         return false;
-    }
-
-    /**
-     * Method to define function of mark command
-     *
-     * @param inp Index of task specified
-     * @throws DukeException
-     */
-    public void mark(String inp) throws DukeException {
-        String[] s = inp.split(" ");
-        if (s.length < 2) {
-            throw new markException();
-        }
-        int index = Integer.parseInt(s[1]) - 1;
-        Task t = tl.getTask(index);
-        t.setStatus(true);
-        System.out.println("Nice! I've marked this task as done:");
-        t.printStatus();
-        this.st.save(tl);
-    }
-
-    /**
-     * Method to define function of unmark command
-     *
-     * @param inp Index of task specified
-     * @throws DukeException
-     */
-    public void unmark(String inp) throws DukeException {
-
-        String[] s = inp.split(" ");
-        if (s.length < 2) {
-            throw new markException();
-        }
-        int index = Integer.parseInt(s[1]) - 1;
-        Task t = tl.getTask(index);
-        t.setStatus(false);
-        System.out.println("OK, I've marked this task as not done yet:");
-        t.printStatus();
-        this.st.save(tl);
-    }
-
-    /**
-     * Method to define function of delete command
-     *
-     * @param inp Index of task specified
-     * @throws DukeException
-     */
-    public void delete(String inp) throws DukeException {
-        String[] s = inp.split(" ");
-        if (s.length < 2) {
-            throw new deleteException();
-        }
-        int index = Integer.parseInt(s[1]) - 1;
-        System.out.println("Noted. I've removed this task:");
-        tl.getTask(index).printStatus();
-        tl.removeTask(index);
-        tl.printCount();
-        this.st.save(tl);
-    }
-
-    /**
-     * Method to define function of todo command. Creates todo task
-     *
-     * @param inp Description of todo task
-     * @throws DukeException
-     */
-    public void todo(String inp) throws DukeException {
-        String[] s = inp.split(" ");
-        if (s.length < 2) {
-            throw new todoException();
-        }
-        String[] temp = Arrays.copyOfRange(s, 1, s.length);
-        String taskDes = String.join(" ", temp);
-        ToDos td = new ToDos(false, taskDes);
-        tl.addTask(td);
-        this.st.save(tl);
-    }
-
-    /**
-     * Method to define function of deadline command. Create deadline task
-     *
-     * @param inp Description of deadline task. Define deadline after "/by".
-     *            Example: deadline task1 /by 12/12/2023 12:12
-     * @throws DukeException
-     */
-    public void deadline(String inp) throws DukeException {
-        String[] s = inp.split(" ");
-        if (s.length < 2) {
-            throw new deadlineException();
-        }
-        String[] temp = Arrays.copyOfRange(s, 1, s.length);
-        String taskDes = String.join(" ", temp);
-        System.out.println(taskDes);
-        Deadlines dl = new Deadlines(false, taskDes);
-        tl.addTask(dl);
-        this.st.save(tl);
-    }
-
-    /**
-     * Method to define function of event command. Create event task
-     *
-     * @param inp Description of event task. Define event with "/from ... /to ...".
-     *            Example: deadline task1 /from 12/12/2023 12:12 /to 12/12/2023 23:59
-     * @throws DukeException
-     */
-    public void events(String inp) throws DukeException {
-        String[] s = inp.split(" ");
-        if (s.length < 2) {
-            throw new eventException();
-        }
-        String[] temp = Arrays.copyOfRange(s, 1, s.length);
-        String taskDes = String.join(" ", temp);
-        Events ev = new Events(false, taskDes);
-        tl.addTask(ev);
-        this.st.save(tl);
     }
 }

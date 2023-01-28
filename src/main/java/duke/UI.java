@@ -1,6 +1,11 @@
 package duke;
 
-import java.util.Scanner;
+import duke.buttons.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UI {
     /**
@@ -19,54 +24,26 @@ public class UI {
         this.fn = fn;
     }
 
-    /**
-     * Method to get user input from console
-     */
-    public void getInput() {
-        Scanner sc = new Scanner(System.in);
-        this.inp = sc.nextLine();
-        this.inpLine = inp.split(" ");
+    public void setFn(Functions fn) {
+        this.fn = fn;
     }
 
-    /**
-     * Method to determine what action to do from user input
-     *
-     * @return boolean flag to indicate program is closing
-     * @throws DukeException Catch general DukeExceptions. For testing
-     */
-    public boolean action() throws DukeException {
-        boolean flag = true;
-        switch (inpLine[0]) {
-        case "bye":
-            flag = fn.bye();
-            break;
-        case "list":
-            fn.list();
-            break;
-        case "find":
-            fn.find(inp);
-            break;
-        case "mark":
-            fn.mark(inp);
-            break;
-        case "unmark":
-            fn.unmark(inp);
-            break;
-        case "delete":
-            fn.delete(inp);
-            break;
-        case "todo":
-            fn.todo(inp);
-            break;
-        case "deadline":
-            fn.deadline(inp);
-            break;
-        case "event":
-            fn.events(inp);
-            break;
-        default:
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public HBox createButtons(Pane inputLayout, Pane outputLayout) {
+        HBox buttonLayout = new HBox();
+        List<DukeButton> buttonList = new ArrayList<>();
+        buttonList.add(new TodoButton("To do", inputLayout, outputLayout, fn));
+        buttonList.add(new DeadlineButton("Deadline", inputLayout, outputLayout, fn));
+        buttonList.add(new EventButton("Event", inputLayout, outputLayout, fn));
+        buttonList.add(new ListButton("List", inputLayout, outputLayout, fn));
+        buttonList.add(new MarkButton("Mark", inputLayout, outputLayout, fn));
+        buttonList.add(new UnmarkButton("UnMark", inputLayout, outputLayout, fn));
+        buttonList.add(new DeleteButton("Delete", inputLayout, outputLayout, fn));
+        buttonList.add(new FindButton("Find", inputLayout, outputLayout, fn));
+
+        for (DukeButton b : buttonList) {
+            buttonLayout.getChildren().add(b.getButton());
         }
-        return flag;
+
+        return buttonLayout;
     }
 }

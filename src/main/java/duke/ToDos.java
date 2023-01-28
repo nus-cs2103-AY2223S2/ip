@@ -26,9 +26,9 @@ public class ToDos extends Task {
      * Method to display status of todo task
      */
     @Override
-    public void printStatus() {
+    public String printStatus() {
         String s = (status) ? "X" : " ";
-        System.out.println("[T][" + s + "] " + this.des);
+        return "[T][" + s + "] " + this.des + "\n";
     }
 
     /**

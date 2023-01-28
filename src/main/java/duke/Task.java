@@ -30,8 +30,8 @@ public class Task {
      *
      * @param des
      */
-    public void configure(String[] des) {
-        setDes(des);
+    public void configure(String[] s) {
+        setDes(s[0]);
     }
 
     /**
@@ -48,8 +48,8 @@ public class Task {
      *
      * @param des Description of task
      */
-    public void setDes(String[] des) {
-        this.des = des[0];
+    public void setDes(String des) {
+        this.des = des;
     }
 
     /**
@@ -70,12 +70,9 @@ public class Task {
         this.status = status;
     }
 
-    /**
-     * Method to display status of task on console
-     */
-    public void printStatus() {
+    public String printStatus() {
         String s = (status) ? "X" : " ";
-        System.out.println("[" + s + "] " + this.des);
+        return "[" + s + "] " + this.des + "\n";
     }
 
     /**
