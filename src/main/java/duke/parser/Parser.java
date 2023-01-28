@@ -4,6 +4,7 @@ import duke.commands.AddCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
@@ -26,6 +27,7 @@ public class Parser {
         TODO, DEADLINE, EVENT,
         DELETE,
         MARK, UNMARK,
+        FIND,
         LIST,
         HELP,
         EXIT,
@@ -53,6 +55,8 @@ public class Parser {
             return Command_Code.MARK;
         case "unmark":
             return Command_Code.UNMARK;
+        case "find":
+            return Command_Code.FIND;
         case "list":
             return Command_Code.LIST;
         case "help":
@@ -85,6 +89,8 @@ public class Parser {
             return prepareMark(input.substring(4).trim());
         case UNMARK:
             return prepareUnmark(input.substring(6).trim());
+        case FIND:
+            return prepareFind(input.substring(4).trim());
         case LIST:
             return new ListCommand();
         case HELP:
@@ -172,6 +178,10 @@ public class Parser {
     private Command prepareUnmark(String args) {
         int index = Integer.parseInt(args);
         return new UnmarkCommand(index - 1);
+    }
+
+    private Command prepareFind(String args) {
+        return new FindCommand(args);
     }
 
     private void checkParamExists(Boolean isExists, String errorMessage) throws DukeException {
