@@ -77,6 +77,8 @@ public class Duke {
   }
 
   public static void bye() {
+    taskDB.close();
+
     System.out.println("toodeloo!\n");
   }
 
@@ -129,7 +131,7 @@ public class Duke {
       taskDB.add(task);
       System.out.println(task);
       System.out.println("Now you have " + Duke.taskDB.size() + " tasks in the list.\n");
-      
+
       return task;
     } catch (RequestException error) {
       throw new EmptyTaskArgumentException("☹ OOPS!!! Missing argument to create ToDo");
@@ -147,7 +149,7 @@ public class Duke {
       taskDB.add(task);
       System.out.println(task);
       System.out.println("Now you have " + Duke.taskDB.size() + " tasks in the list.\n");
-      
+
       return task;
     } catch (RequestException error) {
       throw new EmptyTaskArgumentException("☹ OOPS!!! Missing argument to create Deadline");
@@ -166,7 +168,7 @@ public class Duke {
       taskDB.add(task);
       System.out.println(task);
       System.out.println("Now you have " + Duke.taskDB.size() + " tasks in the list.\n");
-      
+
       return task;
     } catch (RequestException error) {
       System.out.println(error);
