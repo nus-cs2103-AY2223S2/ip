@@ -6,7 +6,7 @@ import duke.utilities.TaskManager;
 import duke.utilities.UserInterface;
 
 /**
- * Main class represents Duke chat-bot
+ * Main class represents Duke chatbot
  */
 public class Duke {
     private TaskManager _taskManger;
