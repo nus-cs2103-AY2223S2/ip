@@ -45,6 +45,198 @@ public class Duke {
     }
 
     /**
+     * Returns the response from Duke based on user input.
+     *
+     * @param userInput User input.
+     * @return Respnose from Duke.
+     */
+    public String getResponse(String userInput) {
+        Parser parser = new Parser();
+        String command = parser.getCommand(userInput);
+        StringBuilder response = new StringBuilder();
+        int index;
+        switch (command) {
+        case "mark":
+            try {
+                index = Integer.parseInt(parser.getCommandDetails(userInput)) - 1;
+                tasks = tasks.set(index, tasks.get(index).markAsDone());
+                response.append(ui.lineTop());
+                response.append("nice! i've marked this task as done:\n"
+                        + tasks.get(index));
+                response.append(ui.lineBottom());
+            } catch (IndexOutOfBoundsException | NumberFormatException ex) {
+                response.append(ui.lineTop());
+                response.append(new DukeException("pls specify an existing task number in the task list!\n"
+                        + "use the format: mark [task number]"));
+                response.append(ui.lineBottom());
+            }
+            break;
+        case "unmark":
+            try {
+                index = Integer.parseInt(parser.getCommandDetails(userInput)) - 1;
+                tasks = tasks.set(index, tasks.get(index).unmarkAsDone());
+                response.append(ui.lineTop());
+                response.append("ok, i've marked this task as not done yet:\n"
+                        + tasks.get(index));
+                response.append(ui.lineBottom());
+            } catch (IndexOutOfBoundsException | NumberFormatException ex) {
+                response.append(ui.lineTop());
+                response.append(new DukeException("pls specify an existing task number in the task list!\n"
+                        + "use the format: unmark [task number]"));
+                response.append(ui.lineBottom());
+            }
+            break;
+        case "bye":
+            response.append(ui.bye());
+            // System.exit(0);
+            break;
+        case "list":
+            response.append(ui.lineTop());
+            response.append(tasks);
+            response.append(ui.lineBottom());
+            break;
+        case "todo":
+            try {
+                Todo newTodo = new Todo(parser.getCommandDetails(userInput));
+                tasks = tasks.add(newTodo);
+                response.append(ui.lineTop());
+                response.append("i've added this task:\n" + newTodo + "\n");
+                if (tasks.size() == 1) {
+                    response.append("you have 1 task in the list");
+                } else {
+                    response.append("you have " + tasks.size() + " tasks in the list");
+                }
+                response.append(ui.lineBottom());
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                response.append(ui.lineTop());
+                response.append(new DukeException("pls add a description for this task!"));
+                response.append(ui.lineBottom());
+            }
+            break;
+        case "deadline":
+            try {
+                String deadlineStr = parser.getDeadline(userInput);
+                String[] split = deadlineStr.split(" ");
+                LocalDate deadlineDate = LocalDate.parse(split[0]);
+                Optional<LocalTime> deadlineTime;
+                if (split.length > 1) {
+                    // Time is specified by user
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+                    deadlineTime = Optional.of(LocalTime.parse(split[1], formatter));
+                } else {
+                    deadlineTime = Optional.empty();
+                }
+                Deadline newDeadline = new Deadline(parser.getDeadlineDesc(userInput),
+                        parser.getDeadline(userInput));
+                tasks = tasks.add(newDeadline);
+                response.append(ui.lineTop());
+                response.append("i've added this task with deadline:\n" + newDeadline + "\n");
+                if (tasks.size() == 1) {
+                    response.append("you have 1 task in the list");
+                } else {
+                    response.append("you have " + tasks.size() + " tasks in the list");
+                }
+                response.append(ui.lineBottom());
+            } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
+                response.append(ui.lineTop());
+                response.append(new DukeException("pls specify the description and deadline for this task!\n"
+                        + "use the format: deadline [description] /by yyyy-MM-dd HHmm"));
+                response.append(ui.lineBottom());
+            }
+            break;
+        case "event":
+            try {
+                String eventFromStr = parser.getEventFrom(userInput);
+                String[] splitFrom = eventFromStr.split(" ");
+                LocalDate eventFromDate = LocalDate.parse(splitFrom[0]);
+                Optional<LocalTime> eventFromTime;
+                if (splitFrom.length > 1) {
+                    // Time is specified by user
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+                    eventFromTime = Optional.of(LocalTime.parse(splitFrom[1], formatter));
+                } else {
+                    eventFromTime = Optional.empty();
+                }
+
+                String eventToStr = parser.getEventTo(userInput);
+                String[] splitTo = eventToStr.split(" ");
+                LocalDate eventToDate = LocalDate.parse(splitTo[0]);
+                Optional<LocalTime> eventToTime;
+                if (splitTo.length > 1) {
+                    // Time is specified by user
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+                    eventToTime = Optional.of(LocalTime.parse(splitTo[1], formatter));
+                } else {
+                    eventToTime = Optional.empty();
+                }
+
+                Event newEvent = new Event(parser.getEventDesc(userInput),
+                        parser.getEventFrom(userInput), parser.getEventTo(userInput));
+                tasks = tasks.add(newEvent);
+                response.append(ui.lineTop());
+                response.append("i've added this event:\n" + newEvent + "\n");
+                if (tasks.size() == 1) {
+                    response.append("you have 1 task in the list");
+                } else {
+                    response.append("you have " + tasks.size() + " tasks in the list");
+                }
+                response.append(ui.lineBottom());
+            } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
+                response.append(ui.lineTop());
+                response.append(new DukeException("pls specify the description and duration for this event!\n"
+                        + "use the format: event [description] /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm"));
+                response.append(ui.lineBottom());
+            }
+            break;
+        case "delete":
+            try {
+                index = Integer.parseInt(parser.getCommandDetails(userInput)) - 1;
+                response.append(ui.lineTop() + "i've removed this task:\n" + tasks.get(index) + "\n");
+                tasks = tasks.remove(index);
+                if (tasks.size() == 1) {
+                    response.append("you have 1 task in the list");
+                } else {
+                    response.append("you have " + tasks.size() + " tasks in the list");
+                }
+                response.append(ui.lineBottom());
+            } catch (IndexOutOfBoundsException | NumberFormatException ex) {
+                response.append(ui.lineTop());
+                response.append(new DukeException("pls specify an existing task number in the task list!\n"
+                        + "use the format: delete [task number]"));
+                response.append(ui.lineBottom());
+            }
+            break;
+        case "find":
+            try {
+                TaskList taskListKeyword = tasks.findKeyword(parser.getCommandDetails(userInput));
+                response.append(ui.lineTop());
+                if (taskListKeyword.size() == 0) {
+                    response.append("there are no matching tasks in your list");
+                } else {
+                    response.append("here are the matching items in your list:\n" + taskListKeyword);
+                }
+                response.append(ui.lineBottom());
+            } catch (IndexOutOfBoundsException ex) {
+                response.append(ui.lineTop());
+                response.append(new DukeException("pls specify a keyword to find!\n"
+                        + "use the format: find [keyword]"));
+                response.append(ui.lineBottom());
+            }
+            break;
+        default:
+            response.append(ui.lineTop());
+            response.append(new DukeException("invalid command"));
+            response.append(ui.lineBottom());
+        }
+        try {
+            saveTaskList(tasks.getTasks());
+        } catch (IOException e) {
+            response.append("Something went wrong!");
+        }
+        return response.toString();
+    }
+
+    /**
      * Takes in user input and addresses it accordingly.
      */
     public void run() {
