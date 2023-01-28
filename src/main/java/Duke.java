@@ -194,7 +194,13 @@ public class Duke {
         String[] arr = userInput.split(" ");
         int num = Integer.parseInt(arr[1]);
 
-        Task t = storedInputs.get(num-1);
+        Task t;
+        try {
+            t = storedInputs.get(num-1);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid item");
+            return;
+        }
         t.markDone();
         System.out.println("\nNice! I've marked this task as done:\n  " + t + "\n");
     }
@@ -203,7 +209,13 @@ public class Duke {
         String[] arr = userInput.split(" ");
         int num = Integer.parseInt(arr[1]);
 
-        Task t = storedInputs.get(num-1);
+        Task t;
+        try {
+            t = storedInputs.get(num-1);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid item");
+            return;
+        }
         t.markUnDone();
         System.out.println("\nOK, I've marked this task as not done yet:\n  " + t + "\n");
     }
@@ -212,26 +224,16 @@ public class Duke {
         String[] arr = userInput.split(" ");
         int num = Integer.parseInt(arr[1]);
 
-        Task t = storedInputs.remove(num-1);
+        Task t;
+        try {
+            t = storedInputs.remove(num-1);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid item");
+            return;
+        }
+
         System.out.println("\nNoted. I've removed this task:\n  " + t);
         printTotalTasks();
-    }
-
-   /**
-    * Remove the first word of the user input leaving only the decription 
-    * of the task.
-    *
-    * @param s a string that represent the user input
-    * @throws DukeException if there is only a single word
-    * @return the same string without the first word
-    */
-    private static String removeFirstWord(String s) throws DukeException {
-        try {
-            s = s.substring(s.indexOf(" ")).trim();
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-        }
-        return s;
     }
 
     private static String removeKeyword(String s) throws DukeException {
@@ -273,10 +275,14 @@ public class Duke {
         Task newTask;
         try {
             String[] info = userInput.split("/by");
+            if (info[0].trim().isEmpty()) {
+                System.out.println("EXCUSE ME!!!, details cannot be empty");
+                return;
+            }
             newTask = new Deadline(info[0].trim(), info[1].trim());
             storedInputs.add(newTask);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("EXCUSE ME!!!, please follow the format\ndeadline /by dd/mm/yyyy");
+            System.out.println("EXCUSE ME!!!, please follow the format\ndeadline <detail> /by dd/mm/yyyy");
             return;
         }
         catch (DateTimeParseException e) {
@@ -300,10 +306,14 @@ public class Duke {
         try {
             String[] infoA = userInput.split("/from");
             String[] infoB = infoA[1].split("/to");
+            if (infoA[0].trim().isEmpty()) {
+                System.out.println("EXCUSE ME!!!, details cannot be empty");
+                return;
+            }
             newTask = new Event(infoA[0].trim(), infoB[0].trim(), infoB[1].trim());
             storedInputs.add(newTask);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("EXCUSE ME!!!, please follow the format\nevent /from dd/mm/yyyy /to dd/mm/yyyy");
+            System.out.println("EXCUSE ME!!!, please follow the format\nevent <details> /from dd/mm/yyyy /to dd/mm/yyyy");
             return;
         } catch (DateTimeParseException e) {
             System.out.println("EXCUSE ME!!!, please use the correct date format\n dd/mm/yyyy");
@@ -322,27 +332,6 @@ public class Duke {
         return s.toString();
     }
 
-    private static String saveList() {
-        StringBuilder s = new StringBuilder();
-        for (int i = 1; i <= storedInputs.size(); i++) {
-            s.append(convertStringToFileFormat(storedInputs.get(i - 1).toString())).append("\n");
-        }
-        return s.toString();
-    }
-
-    private static String convertStringToFileFormat(String line) {
-        String task, status, details;
-        line = line.substring(line.indexOf("[") + 1);
-        task = line.substring(0, line.indexOf("]"));
-
-        line = line.substring(line.indexOf("[") + 1);
-        status = line.substring(0, line.indexOf("]"));
-
-        details = line.substring(line.indexOf("]") + 1).trim();
-
-        return task + "|" + status + "|" + details;
-    }
-
     private static void printConfirmationMessage(Task task) {
         System.out.println("\nYAY! Task Added:\n " + task );
     }
@@ -353,8 +342,8 @@ public class Duke {
 
     private static String prepareWriteContents() {
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < storedInputs.size(); i++) {
-            s.append(storedInputs.get(i).writeToFile());
+        for (Task storedInput : storedInputs) {
+            s.append(storedInput.writeToFile());
             s.append("\n");
         }
         return s.toString();
