@@ -44,3 +44,12 @@ shadowJar {
 run{
     standardInput = System.in
 }
+
+apply plugin : "java"
+ext {
+    javaMainClass = "iris.Iris"
+}
+
+application {
+    mainClassName = javaMainClass
+}

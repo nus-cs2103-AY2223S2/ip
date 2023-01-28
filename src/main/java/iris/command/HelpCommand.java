@@ -28,4 +28,9 @@ public class HelpCommand extends Command {
     public void execute(TaskList tasks, Ui ui, TaskStore taskStore) {
         Ui.output(HELP_TEXT);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof HelpCommand;
+    }
 }

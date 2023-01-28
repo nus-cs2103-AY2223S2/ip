@@ -1,11 +1,11 @@
 package iris.command;
 
+import iris.exception.UnknownTaskException;
 import iris.TaskList;
 import iris.Ui;
 import iris.exception.IrisException;
-import iris.exception.UnknownTaskException;
-import iris.task.*;
 import iris.TaskStore;
+import iris.task.Task;
 
 public class MarkTaskCommand extends Command {
     int index;
@@ -26,5 +26,15 @@ public class MarkTaskCommand extends Command {
         taskStore.updateTasks(tasks);
         Ui.output("Good job! I've marked this task done:");
         Ui.output(task.toString());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof MarkTaskCommand) {
+            MarkTaskCommand c = (MarkTaskCommand) o;
+            return this.index == c.index;
+        } else {
+            return false;
+        }
     }
 }

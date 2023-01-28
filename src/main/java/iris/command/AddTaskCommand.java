@@ -1,12 +1,12 @@
 package iris.command;
 
 import iris.TaskList;
-import iris.Ui;
-import iris.task.*;
 import iris.TaskStore;
+import iris.task.Task;
+import iris.Ui;
 
 public class AddTaskCommand extends Command {
-    Task task;
+    private Task task;
 
     public AddTaskCommand(Task task) {
         this.task = task;
@@ -20,9 +20,18 @@ public class AddTaskCommand extends Command {
                 ? ""
                 : tasks.size() > 10
                 ? "What?!! You're going to dieee!\n"
-                : "Another task? Phew >:(.\n" ;
-
-        Ui.output(out + "Added your task: "  + this.task);
+                : "Another task? Phew >:(.\n";
+        Ui.output(out + "Added your task: " + this.task);
         Ui.output("You have " + tasks.size() + " tasks.");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof AddTaskCommand) {
+            AddTaskCommand atc = (AddTaskCommand) o;
+            return this.task.equals(atc.task);
+        } else {
+            return false;
+        }
     }
 }

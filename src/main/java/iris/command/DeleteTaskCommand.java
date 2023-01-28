@@ -1,11 +1,11 @@
 package iris.command;
 
 import iris.TaskList;
-import iris.Ui;
+import iris.TaskStore;
 import iris.exception.IrisException;
 import iris.exception.UnknownTaskException;
-import iris.task.*;
-import iris.TaskStore;
+import iris.task.Task;
+import iris.Ui;
 
 public class DeleteTaskCommand extends Command {
     int i;
@@ -25,5 +25,15 @@ public class DeleteTaskCommand extends Command {
         taskStore.updateTasks(tasks);
         Ui.output("I've removed this task");
         Ui.output(task.toString());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof DeleteTaskCommand) {
+            DeleteTaskCommand dtc = (DeleteTaskCommand) o;
+            return this.i == dtc.i;
+        } else {
+            return false;
+        }
     }
 }

@@ -1,10 +1,10 @@
 package iris.command;
 
 import iris.TaskList;
-import iris.Ui;
-import iris.TaskStore;
 import iris.exception.DateTimeException;
 import iris.exception.IrisException;
+import iris.Ui;
+import iris.TaskStore;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,5 +39,15 @@ public class FilterCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, TaskStore taskStore) throws IrisException {
         Ui.output(tasks.dateFilter(start, end));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof FilterCommand) {
+            FilterCommand c = (FilterCommand) o;
+            return this.start.equals(c.start) && this.end.equals(c.end);
+        } else {
+            return false;
+        }
     }
 }

@@ -1,7 +1,7 @@
 package iris;
 
-import iris.task.Deadline;
 import iris.task.Event;
+import iris.task.Deadline;
 import iris.task.Task;
 
 import java.time.LocalDateTime;
