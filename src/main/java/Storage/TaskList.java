@@ -86,4 +86,19 @@ public class TaskList {
         }
         return str.substring(0, str.length() - 1);
     }
+
+    /**
+     * Returns all the matching tasks in string representation.
+     * @param description The description to be matched.
+     * @return The string representation of all matching tasks.
+     */
+    public String getMatchingTasks(String description) {
+        String str = "";
+        for (int i = 1; i <= this.db.size(); i++) {
+            if (this.db.get(i - 1).getDescription().contains(description)) {
+                str += (i + "." + this.db.get(i - 1) + "\n");
+            }
+        }
+        return str.substring(0, str.length() - 1);
+    }
 }

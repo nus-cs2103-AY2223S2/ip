@@ -67,11 +67,9 @@ public class Ui {
         System.out.println(e.getMessage());
     }
 
-    /**
-     * Print the farewell message.
-     */
-    public void showFarewell() {
+    public void showFarewell() throws IOException {
         System.out.println(FAREWELL);
+        br.close();
     }
 
     /**

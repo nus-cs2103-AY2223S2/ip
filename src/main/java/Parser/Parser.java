@@ -4,6 +4,7 @@ import Commands.DeadlineCommand;
 import Commands.DeleteCommand;
 import Commands.EndCommand;
 import Commands.EventCommand;
+import Commands.FindCommand;
 import Commands.MarkCommand;
 import Commands.ReadCommand;
 import Commands.TodoCommand;
@@ -21,7 +22,7 @@ public class Parser {
      * The enum for all the commands available.
      */
     protected static enum CommandList {
-        LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE;
+        LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND;
 
         /**
          * Find the command based on the user input.
@@ -73,6 +74,9 @@ public class Parser {
         case DELETE:
             checkForDescription(userInput);
             return new DeleteCommand(userInput);
+        case FIND:
+            checkForDescription(userInput);
+            return new FindCommand(userInput);
         default:
             throw new InvalidInputException(null);
         }
