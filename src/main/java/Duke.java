@@ -1,24 +1,39 @@
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.nio.file.Files;
 
 public class Duke {
-    static ArrayList<Task> tasks = new ArrayList<Task>();
+
     public enum Command {
         bye, list, mark, unmark, todo, deadline, event, delete, err
     }
-    public static void main(String[] args) throws DukeException {
-        /*String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);*/
+
+    private static File taskList  = retrieveTaskList();
+
+    private static FileWriter taskWriter = createTaskWriter();
+
+    private static int numberOfTasks = 0;
+
+    public static void main(String[] args) {
+
         //open scanner to accept user input
         Scanner userInput = new Scanner(System.in);
+
+        Scanner numberOfLinesReader = createTaskReader();
+        while (numberOfLinesReader.hasNextLine()) {
+            numberOfTasks ++;
+            numberOfLinesReader.nextLine();
+        }
+        numberOfLinesReader.close();
+
         //greet user
         System.out.println(makeOutput(" Hello! I'm Duke\n" + " What can I do for you?"));
 
-        while(true) {
+        while (true) {
             String newInput = userInput.nextLine();
             String[] parsedInput = newInput.split(" ");
             Command command;
@@ -32,7 +47,8 @@ public class Duke {
             try {
                 switch (command) {
                     case bye:
-                        exit(userInput);
+                        userInput.close();
+                        exit();
                         break;
                     case list:
                         showList();
@@ -56,18 +72,60 @@ public class Duke {
                         delete(processMarkUnmarkDel(newInput));
                         break;
                     case err:
-                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                        handleUnknownCommand();
                 }
-            } catch (DukeException d) {
+            } catch (Exception d) {
                 System.out.println(makeOutput("☹ OOPS!!! " +d.getMessage()));
             }
         }
     }
 
-    public static void exit(Scanner input){
+    public static File retrieveTaskList(){
+        File taskList = null;
+        try {
+            File dataFolder = new File("data");
+            if (!dataFolder.exists()) {
+                dataFolder.mkdir();
+            }
+            taskList = new File(dataFolder.getAbsolutePath() + File.separator + "duke.txt");
+            if (!taskList.exists()) {
+                boolean taskListExists = taskList.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println(makeOutput("☹ OOPS!!! " +e.getMessage()));
+            exit();
+        }
+        return taskList;
+    }
+
+    public static FileWriter createTaskWriter(){
+        FileWriter taskWriter = null;
+        try {
+            taskWriter = new FileWriter(taskList, true);
+        } catch (IOException e) {
+            System.out.println(makeOutput("☹ OOPS!!! " +e.getMessage()));
+            exit();
+        }
+        return taskWriter;
+    }
+
+    public static Scanner createTaskReader() {
+        Scanner taskReader = null;
+        try {
+            taskReader = new Scanner(taskList);
+        } catch (FileNotFoundException e) {
+            System.out.println(makeOutput("☹ OOPS!!! " + e.getMessage()));
+        }
+        return taskReader;
+    }
+
+    public static void handleUnknownCommand() throws DukeException{
+        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+    }
+
+    public static void exit(){
         //exit protocol
         System.out.println(makeOutput("Bye. Hope to see you again soon!"));
-        input.close();
         System.exit(0);
     }
 
@@ -76,23 +134,28 @@ public class Duke {
     }
 
     public static void addTodo(String description) throws DukeException{
-        if(description.equals("")){
+        if (description.equals("")){
             throw new DukeException("The description of a todo cannot be empty.");
         }
         Todo newTodo = new Todo(description);
-        tasks.add(newTodo);
+        try {
+            taskWriter.write(newTodo.toString() + "\n");
+            taskWriter.flush();
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
         System.out.println(makeOutput(String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list."
-                ,newTodo, tasks.size())));
+                ,newTodo, ++numberOfTasks)));
     }
 
     public static int processMarkUnmarkDel(String input) throws DukeException{
         String[] parsedInput = input.split(" ");
-        if(parsedInput.length != 2) {
+        if (parsedInput.length != 2) {
             throw new DukeException("index of task to delete is missing");
         }
-        try{
+        try {
             int index = Integer.parseInt(parsedInput[1]);
-            if(index > tasks.size()) {
+            if(index > numberOfTasks) {
                 throw new DukeException("invalid task index");
             }
             return index - 1;
@@ -103,11 +166,11 @@ public class Duke {
 
     public static void processDeadline(String input) throws DukeException{
         String raw = input.split("deadline", 2)[1];
-        if(raw.equals("")){
+        if (raw.equals("")) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
         String[] parsed = raw.split("/by", 2);
-        if(parsed.length < 2){
+        if (parsed.length < 2) {
             throw new DukeException("When the deadline should be completed by should be specified using /by.");
         }
         addDeadline(parsed[0], parsed[1]);
@@ -115,65 +178,108 @@ public class Duke {
 
     public static void processEvent(String input) throws DukeException{
         String raw = input.split("event", 2)[1];
-        if(raw.equals("")){
+        if (raw.equals("")) {
             throw new DukeException("The description of a event cannot be empty.");
         }
         String[] parsed1 = raw.split("/from", 2);
-        if(parsed1.length < 2){
+        if (parsed1.length < 2) {
             throw new DukeException("The event's timeline should be specified using /from and /to.");
         }
         String[] parsed2 = parsed1[1].split("/to", 2);
-        if(parsed2.length < 2){
+        if (parsed2.length < 2) {
             throw new DukeException("The event's timeline should be specified using /from and /to.");
         }
         addEvent(parsed1[0], parsed2[0], parsed2[1]);
     }
 
-    public static void addDeadline(String description, String by){
+    public static void addDeadline(String description, String by) throws DukeException {
         Deadline newDd = new Deadline(description, by);
-        tasks.add(newDd);
+        try {
+            taskWriter.write(newDd.toString() + "\n");
+            taskWriter.flush();
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
         System.out.println(makeOutput(String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list."
-                ,newDd, tasks.size())));
+                ,newDd, ++numberOfTasks)));
     }
 
-    public static void addEvent(String description, String from, String to) {
+    public static void addEvent(String description, String from, String to) throws DukeException {
         Event newEvent = new Event(description, from, to);
-        tasks.add(newEvent);
+        try {
+            taskWriter.write(newEvent.toString() + "\n");
+            taskWriter.flush();
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
         System.out.println(makeOutput(String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list."
-                ,newEvent, tasks.size())));
+                ,newEvent, ++numberOfTasks)));
     }
 
-    public static void showList(){
-        int len = tasks.size();
-        if(len == 0){
-            System.out.println(makeOutput(""));
-            return;
+    public static void showList() throws IOException {
+        String currentList = "";
+        int lineNumber = 1;
+        for (String line : Files.readAllLines(Paths.get(taskList.getAbsolutePath()), StandardCharsets.UTF_8)) {
+            if (lineNumber < numberOfTasks) {
+                currentList += lineNumber + "." + line + "\n";
+            } else {
+                currentList += lineNumber + "." + line;
+            }
+            lineNumber ++;
         }
-        String result = "Here are the tasks in your list:\n";
-        for(int i = 0; i < len - 1; i ++){
-            result += (i + 1) + "." + tasks.get(i) + "\n";
-        }
-        result += len + "." + tasks.get(len - 1);
-        System.out.println(makeOutput(result));
+        System.out.println(makeOutput(currentList));
     }
 
-    public static void markTask(int taskNo){
-        tasks.get(taskNo).mark();
+    public static void markTask(int taskNo) throws IOException {
+        List<String> newLines = new ArrayList<>();
         String result = "Nice! I've marked this task as done:\n";
-        result += tasks.get(taskNo);
+        int currentLine = 0;
+        for (String line : Files.readAllLines(Paths.get(taskList.getAbsolutePath()), StandardCharsets.UTF_8)) {
+            if (currentLine == taskNo) {
+                String markedLine = line.replace("[ ]", "[X]");
+                newLines.add(markedLine);
+                result += markedLine;
+            } else {
+                newLines.add(line);
+            }
+            currentLine ++;
+        }
+        Files.write(Paths.get(taskList.getAbsolutePath()), newLines, StandardCharsets.UTF_8);
         System.out.println(makeOutput(result));
     }
 
-    public static void unmarkTask(int taskNo){
-        tasks.get(taskNo).unmark();
+    public static void unmarkTask(int taskNo) throws IOException {
+        List<String> newLines = new ArrayList<>();
         String result = "OK, I've marked this task as not done yet:\n";
-        result += tasks.get(taskNo);
+        int currentLine = 0;
+        for (String line : Files.readAllLines(Paths.get(taskList.getAbsolutePath()), StandardCharsets.UTF_8)) {
+            if (currentLine == taskNo) {
+                String unmarkedLine = line.replace("[X]", "[ ]");
+                newLines.add(unmarkedLine);
+                result += unmarkedLine;
+            } else {
+                newLines.add(line);
+            }
+            currentLine++;
+        }
+        Files.write(Paths.get(taskList.getAbsolutePath()), newLines, StandardCharsets.UTF_8);
         System.out.println(makeOutput(result));
     }
 
-    public static void delete(int taskNo){
-        Task deleted = tasks.remove(taskNo);
+    public static void delete(int taskNo) throws IOException {
+        List<String> newLines = new ArrayList<>();
+        String deleted = "";
+        int currentLine = 0;
+        for (String line : Files.readAllLines(Paths.get(taskList.getAbsolutePath()), StandardCharsets.UTF_8)) {
+            if (currentLine == taskNo) {
+                deleted = line;
+            } else {
+                newLines.add(line);
+            }
+            currentLine++;
+        }
+        Files.write(Paths.get(taskList.getAbsolutePath()), newLines, StandardCharsets.UTF_8);
         System.out.println(makeOutput(String.format("Noted. I've removed this task:\n%s\n" +
-                "Now you have %d tasks in the list.", deleted, tasks.size())));
+                "Now you have %d tasks in the list.", deleted, --numberOfTasks)));
     }
 }
