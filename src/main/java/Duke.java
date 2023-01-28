@@ -66,14 +66,13 @@ public class Duke {
                     System.out.println(deadline);
                     System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
                 } else if (command.equals("event")) {
-                    // TODO
                     String inputWithoutCommand = input.substring(6);
 
                     int indexOfFromSubstring = inputWithoutCommand.indexOf("/from ");
                     int indexOfToSubstring = inputWithoutCommand.indexOf("/to ");
 
                     String description = inputWithoutCommand.substring(0, indexOfFromSubstring);
-                    String startTime = inputWithoutCommand.substring(indexOfFromSubstring + 6, indexOfToSubstring);
+                    String startTime = inputWithoutCommand.substring(indexOfFromSubstring + 6, indexOfToSubstring - 1);
                     String endTime = inputWithoutCommand.substring(indexOfToSubstring + 4);
 
                     Event event = new Event(description, startTime, endTime);
@@ -90,8 +89,6 @@ public class Duke {
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(removedTask);
                     System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
-
-                    //tasksList.remove(indexToBeRemoved - 1);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
