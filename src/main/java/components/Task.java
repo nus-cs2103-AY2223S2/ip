@@ -1,8 +1,16 @@
 package components;
+
+/**
+ * Class for Task object encapsulate commonalities in subclasses.
+ */
 public class Task {
     public int done;
     public String msg;
 
+    /**
+     * Constructor for a Task object.
+     * @param msg Description of the task.
+     */
     public Task(String msg) {
         this.msg = msg;
         this.done = 0;

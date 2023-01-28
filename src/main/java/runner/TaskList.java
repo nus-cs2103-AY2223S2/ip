@@ -4,6 +4,9 @@ import components.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for taskList to store tasks.
+ */
 public class TaskList {
     protected List<Task> task_list;
 

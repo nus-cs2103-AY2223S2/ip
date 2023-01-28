@@ -6,12 +6,24 @@ import components.Todo;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser to parse the command process the necessary actions.
+ */
 public class Parser {
     private final Duke duke;
+
+    /**
+     * Constructor for Parser.
+     * @param duke a Duke chat-bot to work on.
+     */
     public Parser(Duke duke) {
         this.duke = duke;
     }
 
+
+    /**
+     * @param info The information given by the user.
+     */
     public void handle(String info) {
         if (info.equals("bye")) {
             terminate();

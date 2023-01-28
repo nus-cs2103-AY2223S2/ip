@@ -10,13 +10,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class for Storage object.
+ * Aim to manage the saving and retrieval of the user's tasks.
+ */
 public class Storage {
     private final TaskList taskList;
 
+
+    /**
+     * Constructor for Storage.
+     * @param taskList One taskList to manage.
+     */
     public Storage (TaskList taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Load taskList from the existing file.
+     */
     public void loadList() {
         try {
             File f = new File("src/main/data/task_list.txt");
@@ -64,6 +76,9 @@ public class Storage {
         taskList.add(t);
     }
 
+    /**
+     * Save tasks to the existing file.
+     */
     public void saveList() {
         try {
             FileWriter fw = new FileWriter("src/main/data/task_list.txt");
