@@ -33,7 +33,9 @@ public class Duke {
     }
 
     public void run() {
+        ui.showLogo();
         ui.showWelcome();
+
         Parser parser = new Parser();
         boolean isBye = false;
         while (!isBye) {
