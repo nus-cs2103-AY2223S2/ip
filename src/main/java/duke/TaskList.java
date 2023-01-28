@@ -67,4 +67,11 @@ public class TaskList {
     public Task get(Integer i) {
         return arrayList.get(i);
     }
+    public String toString() {
+        String str = "";
+        for (int i = 1; i < arrayList.size() + 1; i++) {
+            str = str + i + ". " + arrayList.get(i - 1) + "\n";
+        }
+        return str;
+    }
 }

@@ -3,7 +3,6 @@ T/1/hdhdh
 T/0/todo urmom
 D/1/dff/2003-04-05T15:00
 E/0/lsfj/2003-03-03T03:01/2003-03-03T03:01
-T/0/todo here
 T/0/todo eat
 D/0/hdskjs/2009-09-09T09:09
 E/0/ldjs/2005-05-05T09:09/2005-05-05T09:09
