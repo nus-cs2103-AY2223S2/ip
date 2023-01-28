@@ -1,9 +1,7 @@
 package duke;
 
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
-import duke.Tasks.Task;
-import duke.Tasks.Todo;
+import duke.Tasks.*;
+
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -62,6 +60,25 @@ public class Parser {
                 } catch (Exception e) {
                     System.out.println(Indentation + Horizontal);
                     System.out.println("  ☹ OOPS!!! The index number cannot be empty.");
+                    System.out.println(Indentation + Horizontal);
+                }
+
+            } else if (words[0].equals("find") ) {
+                try {
+                    info = command.substring(command.indexOf(" ") + 1);
+                    //System.out.println(info);
+
+                    for (int i = 0; i < tasks.size(); i++) {
+                        if(tasks.get(i).getDescription().contains(info)) {
+                            System.out.println(Indentation + Horizontal);
+                            System.out.println(Indentation + "Here are the matching tasks in your list:");
+                            System.out.println(Indentation + (i + 1) + "." + tasks.get(i).toString());
+                            System.out.println(Indentation + Horizontal);
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println(Indentation + Horizontal);
+                    System.out.println("  ☹ OOPS!!! The description of a todo cannot be empty.");
                     System.out.println(Indentation + Horizontal);
                 }
 
