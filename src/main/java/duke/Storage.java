@@ -3,21 +3,31 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
-
+/**
+ * Handles the reading, writing and saving of duke.txt file
+ */
 public class Storage {
 
     String filePath;
     String directoryPath;
 
+    /**
+     * Constructor for Storage
+     * @param filePath String containing file path where duke.txt is stored
+     * @param directoryPath String containing directory path where duke.txt is stored
+     */
     public Storage(String filePath, String directoryPath) {
         this.filePath = filePath;
         this.directoryPath = directoryPath;
     }
 
+    /**
+     * Reads the duke.txt file and saves the saved tasks into a task list
+     * @return Task list containing saved tasks
+     * @throws NeroException Throws when file is not found
+     */
     TaskList<Task> readFile() throws NeroException {
         TaskList<Task> taskList = new TaskList<Task>();
         File directory = new File(directoryPath);
@@ -40,7 +50,8 @@ public class Storage {
                     String[] splitDates = cleanedInputs[3].split(" ");
                     String cleanedStartDate = splitDates[0].replace("from: ", "");
                     String cleanedEndDate = splitDates[1].replace("to: ", "");
-                    taskList.addTask(new Event(cleanedInputs[2], isDone, cleanedStartDate, cleanedEndDate));
+                    taskList.addTask(new Event(cleanedInputs[2], isDone,
+                            cleanedStartDate, cleanedEndDate));
                 }
             }
             sc.close();
@@ -50,6 +61,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current task list into duke.txt file
+     * @param taskList Task list containing all current tasks
+     * @throws IOException Throws when file is not found
+     */
     void saveFile(TaskList<Task> taskList) throws IOException {
         try {
             FileWriter fw = new FileWriter(filePath);

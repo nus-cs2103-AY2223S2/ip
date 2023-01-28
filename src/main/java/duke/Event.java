@@ -2,21 +2,26 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+
+/**
+ * Event is a subclass of Task. It specifies the start date and
+ * end date of a task.
+ */
 public class Event extends Task {
 
     LocalDate startDate;
     LocalDate endDate;
-    public Event(String description, String startDate, String endDate) throws NeroException {
-        super(description);
-        try {
-            this.startDate = LocalDate.parse(startDate.trim());
-            this.endDate = LocalDate.parse(endDate.trim());
-        } catch (DateTimeParseException e) {
-            throw new NeroException("Invalid Date!");
-        }
-}
 
-    public Event(String description, boolean isDone, String startDate, String endDate) throws NeroException {
+    /**
+     * Constructor for Event
+     * @param description Contains details on the Event
+     * @param isDone Keeps track of whether the Event is completed
+     * @param startDate Date where the Event starts
+     * @param endDate Date where the Event ends
+     * @throws NeroException Thrown when date is formatted incorrectly (not in yyyy-mm-dd)
+     */
+    public Event(String description, boolean isDone,
+                 String startDate, String endDate) throws NeroException {
         super(description, isDone);
         try {
             this.startDate = LocalDate.parse(startDate);
@@ -25,16 +30,43 @@ public class Event extends Task {
             throw new NeroException("Invalid Date!");
         }
     }
+
+    /**
+     * Same as above constructor, except isDone is initialised to False
+     * @param description
+     * @param startDate
+     * @param endDate
+     * @throws NeroException
+     */
+    public Event(String description, String startDate,
+            String endDate) throws NeroException {
+        super(description);
+        try {
+            this.startDate = LocalDate.parse(startDate.trim());
+            this.endDate = LocalDate.parse(endDate.trim());
+        } catch (DateTimeParseException e) {
+            throw new NeroException("Invalid Date!");
+        }
+    }
+
+    /**
+     *
+     * @return String formatted as d MMM yyyy
+     */
     public String dateFormatter() {
         return "from: " + startDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " to: "
                 + endDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
+
     public String getTaskIcon() {
         return "E";
     }
 
 
-
+    /**
+     *
+     * @return String with task formatted to be saved into duke.txt
+     */
     public String toSave() {
         return this.getTaskIcon() + SEPARATOR + convertBoolean()
                 + SEPARATOR + this.getDescription()
@@ -42,8 +74,9 @@ public class Event extends Task {
     }
     @Override
     public String toString() {
-        return String.format("[%s]%s %s %s", this.getTaskIcon(), this.getStatusIcon(),
-                this.getDescription(), this.dateFormatter());
+        return String.format("[%s]%s %s %s", this.getTaskIcon(),
+                this.getStatusIcon(), this.getDescription(),
+                this.dateFormatter());
     }
 
 }

@@ -1,5 +1,9 @@
 package duke;
 import java.io.IOException;
+
+/**
+ * Duke is the main class of this app and runs the program.
+ */
 public class Duke {
 
     public static final String DIRECTORY_PATH = "data";
@@ -10,6 +14,11 @@ public class Duke {
     Parser parser;
     Ui ui;
 
+    /**
+     * Constructor for Duke
+     * @param filePath Contains file path to the saved duke.txt file
+     * @param directoryPath Contains directory path to the saved duke.txt file
+     */
     public Duke(String filePath, String directoryPath) {
         this.storage = new Storage(filePath, directoryPath);
         try {
@@ -21,10 +30,11 @@ public class Duke {
         this.parser = new Parser();
     }
 
-    public TaskList<Task> getTaskList() {
-        return taskList;
-    }
-
+    /**
+     * Runs the program and catches IOException if file is not found
+     * or NeroException if an error occurs, printing the error message
+     * accordingly
+     */
     public void run() {
         ui.printWelcomeMessage();
         boolean toEnd = false;
@@ -40,6 +50,8 @@ public class Duke {
             }
         }
     }
+
+
     public static void main(String[] args) {
         new Duke(FILE_PATH, DIRECTORY_PATH).run();
     }

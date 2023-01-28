@@ -1,9 +1,16 @@
 package duke;
 import java.util.ArrayList;
 
+/**
+ * TaskList stores all current tasks
+ * @param <Task>
+ */
 public class TaskList<Task> {
     ArrayList<Task> taskList;
 
+    /**
+     * Constructor for TaskList, uses an ArrayList containing tasks
+     */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
@@ -13,10 +20,20 @@ public class TaskList<Task> {
         this.taskList.add(task);
     }
 
+    /**
+     *
+     * @param index location of the task in the TaskList
+     * @return Task at the index of the TaskList
+     */
     Task get(int index) {
         return taskList.get(index);
     }
 
+    /**
+     * Removes task from taskList
+     * @param index location of the task to be removed
+     * @throws NeroException Throws when index does not exist
+     */
     void removeTask(int index) throws NeroException {
         try {
             this.taskList.remove(index);
@@ -25,6 +42,9 @@ public class TaskList<Task> {
         }
     }
 
+    /**
+     * Prints the toString of all tasks in the taskList
+     */
     void printTasks() {
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(taskList.get(i));
