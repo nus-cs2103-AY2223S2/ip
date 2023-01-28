@@ -1,5 +1,4 @@
 import duke.*;
-import duke.packages.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -40,36 +39,37 @@ public class Duke {
                 mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
                 break;
             case "unmark":
-                Task completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
+                completedTask = getTaskForMarking(toFindFirstWord, mainTaskList);
                 completedTask.setCompletion();
                 mainUi.printReply("unmark", completedTask);
 
-                String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+                parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
                 mainStorage.changeTaskCompletion(Integer.parseInt(parsed[1]));
                 break;
+
             case "delete":
                 Task toDelete = getTaskForMarking(toFindFirstWord, mainTaskList);
 
-                String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+                parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
                 mainStorage.deleteTask(Integer.parseInt(parsed[1]));
 
                 mainUi.printReply("delete", toDelete);
                 break;
             case "deadline":
-                String[] parsed = Parser.parse(command, Parser.ParseFunctions.DEADLINE);
+                parsed = Parser.parse(command, Parser.ParseFunctions.DEADLINE);
                 Task newDeadline = new Deadline(parsed[1], LocalDate.parse(parsed[2]));
                 mainStorage.addTask(newDeadline);
                 mainUi.printReply("deadline", newDeadline);
                 break;
             case "event":
-                String[] parsed = Parser.parse(command, Parser.ParseFunctions.EVENT);
+                parsed = Parser.parse(command, Parser.ParseFunctions.EVENT);
                 Task newEvent = new Event(parsed[1], LocalDate.parse(parsed[2]), LocalDate.parse(parsed[3]));
                 mainStorage.addTask(newEvent);
                 mainUi.printReply("event", newEvent);
                 break;
             case "todo":
                 try {
-                    String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+                    parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
                     ToDo newToDo = new ToDo(parsed[1]);
                     mainStorage.addTask(newToDo);
                     mainUi.printReply("todo", newToDo);
