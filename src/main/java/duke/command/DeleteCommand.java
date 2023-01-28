@@ -4,6 +4,10 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.ui.Ui;
 
+
+/**
+ * Class of DeleteCommand that remove tasks.
+ */
 public class DeleteCommand extends Command {
     private int id;
 

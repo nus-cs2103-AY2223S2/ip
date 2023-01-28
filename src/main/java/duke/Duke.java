@@ -1,3 +1,4 @@
+//Reference from the given code provided on CS2103 module website
 package duke;
 
 import duke.command.Command;
@@ -6,6 +7,10 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+
+/**
+ * Duke Class that runs the whole chatbot.
+ */
 public class Duke {
 
     private Storage storage;
@@ -23,6 +28,10 @@ public class Duke {
         }
     }
 
+
+    /**
+     * Method which runs the chatbot based on the commands given.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

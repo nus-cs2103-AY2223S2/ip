@@ -3,6 +3,11 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
+
+
+/**
+ * Class of ListCommand that shows all the tasks.
+ */
 public class ListCommand extends Command {
 
     public ListCommand(String cmd) {

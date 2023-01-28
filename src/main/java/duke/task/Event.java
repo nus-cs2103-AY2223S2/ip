@@ -1,8 +1,12 @@
 package duke.task;
 
+
+/**
+ * Class of Event which creates the task with to and from timing.
+ */
 public class Event extends Task {
-    protected String from;
-    protected String to;
+    private String from;
+    private String to;
 
     public Event(String activity, String from, String to) {
         super(activity);

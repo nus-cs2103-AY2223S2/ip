@@ -6,6 +6,10 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.ui.Ui;
 
+
+/**
+ * Class of DeadlineCommand that set deadline for tasks.
+ */
 public class DeadlineCommand extends Command {
     private String activity;
     private String date;

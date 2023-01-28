@@ -5,9 +5,13 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.Ui;
+
+
+/**
+ * Class of TodoCommand that add task to the list.
+ */
 public class TodoCommand extends Command {
     private String activity;
-
     public TodoCommand(String cmd) {
         try {
             checkCommand(cmd);

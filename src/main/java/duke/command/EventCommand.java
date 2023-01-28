@@ -5,6 +5,11 @@ import duke.task.Event;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.ui.Ui;
+
+
+/**
+ * Class of EventCommand that set events with to and from timings.
+ */
 public class EventCommand extends Command {
     private String activity;
     private String from;

@@ -4,6 +4,10 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.ui.Ui;
 
+
+/**
+ * Class of UnmarkCommand that set task as incomplete.
+ */
 public class UnmarkCommand extends Command {
     private int id;
 

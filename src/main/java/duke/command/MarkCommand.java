@@ -4,6 +4,10 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.ui.Ui;
 
+
+/**
+ * Class of MarkCommand that set task as completed.
+ */
 public class MarkCommand extends Command {
     private int id;
 
