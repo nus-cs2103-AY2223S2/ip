@@ -239,6 +239,11 @@ public class Duke {
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("details cannot be empty");
         }
+
+        if (s.isEmpty()) {
+            throw new DukeException("details cannot be empty");
+        }
+
         return s;
     }
 
@@ -246,7 +251,7 @@ public class Duke {
         try {
             userInput = removeKeyword(userInput);
         } catch (DukeException e) {
-            System.out.println("Oi!, todo " + e.getMessage());
+            System.out.println("EXCUSE ME!!!, 'todo' " + e.getMessage());
             return;
         }
 
