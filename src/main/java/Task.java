@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected final String description;
     protected boolean isDone;
@@ -13,6 +15,10 @@ public class Task {
 
     public void unmarkTask() {
         this.isDone = false;
+    }
+
+    public boolean containsDate(LocalDate date) {
+        return false;
     }
 
     @Override

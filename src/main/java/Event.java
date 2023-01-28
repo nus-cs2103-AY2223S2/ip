@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
@@ -11,6 +12,11 @@ public class Event extends Task {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         this.startDate = LocalDateTime.parse(startDate, format);
         this.endDate = LocalDateTime.parse(endDate, format);
+    }
+
+    @Override
+    public boolean containsDate(LocalDate date) {
+        return startDate.toLocalDate().isEqual(date) || endDate.toLocalDate().isEqual(date);
     }
 
     @Override

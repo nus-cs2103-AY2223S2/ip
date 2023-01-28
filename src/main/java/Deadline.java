@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,6 +10,11 @@ public class Deadline extends Task {
         super(description);
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         this.deadline = LocalDateTime.parse(deadline, format);
+    }
+
+    @Override
+    public boolean containsDate(LocalDate date) {
+        return deadline.toLocalDate().isEqual(date);
     }
 
     @Override

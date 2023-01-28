@@ -1,4 +1,7 @@
+import javax.print.attribute.standard.DateTimeAtProcessing;
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -33,6 +36,15 @@ public class Alfred {
                     Alfred.unmarkItem(lineArr[1]);
                 } else if (command.equals("delete") && lineArr.length == 2) {
                     Alfred.deleteItem(lineArr[1]);
+                } else if (command.equals("list") && lineArr.length == 2){
+                    String second = lineArr[1];
+                    try {
+                        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy");
+                        LocalDate date = LocalDate.parse(second, format);
+                        Alfred.listItems(date);
+                    } catch (DateTimeParseException e) {
+                        throw new AlfredException("The date format should be given as dd/mm/yyyy\n");
+                    }
                 } else {
                     Alfred.addItem(commandLine);
                 }
@@ -76,7 +88,7 @@ public class Alfred {
                     throw new AlfredException("Deadlines should have a due date ." +
                             "Eg: \"<TaskName> /by <DueDate>\"\n");
                 }
-                descriptionArr = lineArr[0].split(" ");
+                descriptionArr = lineArr[0].split(" ", 2);
                 if (descriptionArr.length == 1) {
                     throw new AlfredException("Deadlines should have a due date ." +
                             "Eg: \"<TaskName> /by <DueDate>\"\n");
@@ -94,7 +106,7 @@ public class Alfred {
                     throw new AlfredException("Events should have start and end time. " +
                             "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"\n");
                 }
-                descriptionArr = lineArr[0].split(" ");
+                descriptionArr = lineArr[0].split(" ", 2);
                 if (descriptionArr.length == 1) {
                     throw new AlfredException("Events should have start and end time. " +
                             "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"\n");
@@ -175,6 +187,25 @@ public class Alfred {
         }
         String numTasks = itemsList.size() == 1 ? "task" : "tasks";
         command.append(String.format("    You have %d %s in the list\n", itemsList.size(), numTasks));
+        Alfred.echoCommand(command.toString());
+    }
+
+    private static void listItems(LocalDate date) {
+        int itemIndex = 1;
+        String initial = String.format("Here are your pending tasks on %s: \n", date);
+        StringBuilder command = new StringBuilder(initial);
+        if (itemsList.isEmpty()) {
+            Alfred.echoCommand("Woohoo! You have no pending tasks\n");
+            return;
+        }
+        for (Task item : itemsList) {
+            if (item.containsDate(date)) {
+                command.append(String.format("    %d. %s\n", itemIndex, item));
+                itemIndex++;
+            }
+        }
+        String numTasks = itemIndex == 1 ? "task" : "tasks";
+        command.append(String.format("    You have %d %s on %s in the list\n", itemIndex - 1, numTasks, date));
         Alfred.echoCommand(command.toString());
     }
 
