@@ -48,7 +48,6 @@ public class Duke {
                 c.execute(list, ui, storage);
                 isBye = c.isBye();
             } catch (Exception err) {
-
                 ui.showError(err);
             }
         }

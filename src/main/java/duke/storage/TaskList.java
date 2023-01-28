@@ -76,7 +76,6 @@ public class TaskList {
      * @param index
      * @return the removed task.
      */
-
     public Task remove(int index) {
         return this.storer.remove(index - 1);
     }

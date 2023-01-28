@@ -50,6 +50,14 @@ public abstract class Task {
      */
     public abstract String formatText();
 
+    /**
+     * Obtains the description of a task.
+     * @return a string representing a task's description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     public abstract List<String> getKeywords();
 
 

@@ -11,7 +11,7 @@ import duke.tasks.Deadlines;
 import duke.tasks.Events;
 import duke.commands.ByeCommand;
 import duke.commands.DeadLineCommand;
-
+import duke.commands.FindCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidException;
 import duke.exceptions.NoArgsException;
@@ -97,6 +97,10 @@ public class Parser {
                 c = new ByeCommand();
                 break;
 
+            case "find":
+                String query = this.queries(line, List.<String>of()).get(0);
+                c = new FindCommand(query);
+                break;
             default:
                 throw new EmptyException();
         }
