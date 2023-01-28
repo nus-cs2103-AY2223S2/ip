@@ -39,4 +39,8 @@ public class Task {
     public String getTask() {
         return this.task;
     }
+
+    public boolean hasTask(String task) {
+        return (this.task.contains(task));
+    }
 }
