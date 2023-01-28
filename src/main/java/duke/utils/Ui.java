@@ -17,6 +17,9 @@ public class Ui {
         println("Sad...Alright bye!");
     }
 
+    /**
+     * Prints the string representation of all tasks in the TaskList to the output.
+     */
     public static void printList(TaskList allTasks) {
         if (allTasks.size() == 0) {
             println("You have zero tasks now!");
@@ -50,6 +53,11 @@ public class Ui {
         printDottedLine();
     }
 
+    /**
+     * Listens to and returns the user input.
+     *
+     * @return the String representing the user input.
+     */
     public static String listen() {
         return sc.nextLine();
     }

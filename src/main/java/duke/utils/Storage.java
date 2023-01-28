@@ -13,10 +13,14 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.MemoryFailedException;
 import duke.tasks.Task;
 import duke.tasks.TaskType;
 
+/**
+ * Handles the loading of data from and storage of data to memory.
+ */
 public class Storage {
 
     private Path memoryPath;
@@ -28,6 +32,12 @@ public class Storage {
         this.memory = new File(String.valueOf(memoryPath));
     }
 
+    /**
+     * Loads tasks from memory into the TaskList in the application.
+     *
+     * @param allTasks the TaskList containing all the tasks logged in by the user.
+     * @throws MemoryFailedException if there is an issue retrieving data from memory.
+     */
     public void loadTasks(TaskList allTasks) throws MemoryFailedException {
         try {
             boolean success = this.memory.createNewFile();
@@ -41,6 +51,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses each line within the memory file, converts it into a Task object,
+     * and adds it to the TaskList in the application.
+     *
+     * @param taskLine a String from memory, representing a Task object.
+     * @param allTasks the TaskList containing all the tasks logged in by the user.
+     */
     private void loadTaskLine(String taskLine, TaskList allTasks) {
         // TODO: Handle corruption in file, leading to incorrect syntax
         // TODO: Edit such that it doesn't print anything
@@ -65,6 +82,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks from the TaskList in the application into memory.
+     *
+     * @param allTasks the TaskList containing all the tasks logged in by the user.
+     */
     public void saveTasks(TaskList allTasks) {
         // TODO: Handle case where file is destroyed while script is running
         try {

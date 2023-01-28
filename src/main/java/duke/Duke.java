@@ -7,6 +7,9 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+/**
+ * Represents the entry point for the Duke application. The main function resides in this class.
+ */
 public class Duke {
 
     private Storage storage;
@@ -22,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke application.
+     */
     public void run() {
         Ui.printOnStartup();
         boolean promptAgain = true;
@@ -38,6 +44,9 @@ public class Duke {
         this.storage.saveTasks(this.allTasks);
     }
 
+    /**
+     * Acts as the entry point for the Duke application.
+     */
     public static void main(String[] args) {
         String[] memoryPathArray = {".", "memory.txt"};
         new Duke(memoryPathArray).run();

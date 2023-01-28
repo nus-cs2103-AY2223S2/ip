@@ -8,8 +8,20 @@ import duke.exceptions.DukeException;
 import duke.exceptions.IllegalCommandException;
 import duke.tasks.TaskType;
 
+/**
+ * Acts as the parser to listen to and act upon user input in the command line interface.
+ */
 public class Parser {
 
+    /**
+     * Parses the raw command entered by the user and acts upon it. Returns a boolean representing if
+     * the application should continue prompting the user for input.
+     *
+     * @param rawCommand a string representing the command entered by the user.
+     * @param allTasks the TaskList containing all the tasks logged in by the user.
+     * @return A boolean representing if the application should continue prompting the user for input.
+     * @throws DukeException if the user input is not recognized.
+     */
     public static boolean handleCommands(String rawCommand, TaskList allTasks) throws DukeException {
         int commandIndex = rawCommand.indexOf(' ');
         String command = rawCommand;
