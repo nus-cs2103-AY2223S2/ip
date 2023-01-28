@@ -1,2 +1,3 @@
 T | 0 | yeet
 T | 1 | eat some bread
+E | 1 | pet some cats | 2023-12-02

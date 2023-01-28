@@ -5,10 +5,10 @@ package seedu.duke;
  * The Duke bot as a tasklist, a storage, a user interface and a parser.
  */
 public class Duke {
-    TaskList taskList;
-    Storage storage;
-    Ui ui;
-    Parser parser;
+    private TaskList taskList;
+    private Storage storage;
+    private Ui ui;
+    private Parser parser;
 
     /**
      * Creates a Duke object.

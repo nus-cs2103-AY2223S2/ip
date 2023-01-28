@@ -130,8 +130,8 @@ public class TaskList {
      */
     public TaskList findTasks(String keyword) {
         TaskList temp = new TaskList();
-        for(Task t: taskList) {
-            if(t.description.contains(keyword)) {
+        for (Task t: taskList) {
+            if (t.description.contains(keyword)) {
                 temp.addTask(t);
             }
         }

@@ -31,7 +31,7 @@ public class Event extends Task {
      */
     public static void createEvent(TaskList taskList, String desc) {
         Ui.addedTask();
-        String[] inputSplit = desc.split("/",2);
+        String[] inputSplit = desc.split("/", 2);
         String input = inputSplit[0];
         String[] dateSplit = inputSplit[1].split(" ", 2);
         String date = dateSplit[1];

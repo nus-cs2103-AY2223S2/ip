@@ -1,11 +1,11 @@
 package seedu.duke;
 
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.time.LocalDate;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Scanner;
 
 /**
  * Represents the Storage object.
@@ -66,39 +66,40 @@ public class Storage {
                 String[] s = task.split("\\|");
                 String taskType = s[0].substring(0, 1);
                 switch (taskType) {
+                // for Duke.Todo
+                case "T":
+                    String todoName = s[2].substring(1);
+                    Todo todo = new Todo(todoName);
+                    if (s[1].charAt(1) == '1') {
+                        todo.toMark(true);
+                    }
+                    taskList.addTask(todo);
+                    break;
 
-                    // for Duke.Todo
-                    case "T":
-                        String todoName = s[2].substring(1);
-                        Todo todo = new Todo(todoName);
-                        if (s[1].charAt(1) == '1') {
-                            todo.toMark(true);
-                        }
-                        taskList.addTask(todo);
-                        break;
-
-                    //for Duke.Deadline
-                    case "D":
-                        String deadlineName = s[2].substring(1);
-                        String[] deadlineDescription = s[3].substring(1).split(" ");
-                        String deadlineDate = deadlineDescription[0];
-                        Deadline deadline = new Deadline(deadlineName, LocalDate.parse(deadlineDate));
-                        if (s[1].charAt(1) == '1') {
-                            deadline.toMark(true);
-                        }
-                        taskList.addTask(deadline);
-                        break;
-                    // for Duke.Event
-                    case "E":
-                        String eventName = s[2].substring(1);
-                        String[] eventDescription = s[3].substring(1).split(" ");
-                        String eventDate = eventDescription[0];
-                        Event event = new Event(eventName, LocalDate.parse(eventDate));
-                        if (s[1].charAt(1) == '1') {
-                            event.toMark(true);
-                        }
-                        taskList.addTask(event);
-                        break;
+                //for Duke.Deadline
+                case "D":
+                    String deadlineName = s[2].substring(1);
+                    String[] deadlineDescription = s[3].substring(1).split(" ");
+                    String deadlineDate = deadlineDescription[0];
+                    Deadline deadline = new Deadline(deadlineName, LocalDate.parse(deadlineDate));
+                    if (s[1].charAt(1) == '1') {
+                        deadline.toMark(true);
+                    }
+                    taskList.addTask(deadline);
+                    break;
+                // for Duke.Event
+                case "E":
+                    String eventName = s[2].substring(1);
+                    String[] eventDescription = s[3].substring(1).split(" ");
+                    String eventDate = eventDescription[0];
+                    Event event = new Event(eventName, LocalDate.parse(eventDate));
+                    if (s[1].charAt(1) == '1') {
+                        event.toMark(true);
+                    }
+                    taskList.addTask(event);
+                    break;
+                default:
+                    break;
                 }
             }
             return taskList;

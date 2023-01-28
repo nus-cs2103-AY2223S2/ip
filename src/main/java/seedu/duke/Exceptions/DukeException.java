@@ -1,5 +1,8 @@
 package seedu.duke.Exceptions;
 
+/**
+ * DukeException to catch exceptions from DukeBot.
+ */
 public class DukeException extends Exception {
 
     /**

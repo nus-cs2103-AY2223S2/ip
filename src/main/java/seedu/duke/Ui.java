@@ -16,6 +16,11 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Takes user input.
+     *
+     * @return s The user input into the bot.
+     */
     public String userCommand() {
         String s = this.sc.nextLine();
         return s;

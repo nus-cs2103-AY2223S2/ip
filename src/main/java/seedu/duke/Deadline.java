@@ -31,7 +31,7 @@ public class Deadline extends Task {
      */
     public static void createDeadline(TaskList taskList, String desc) {
         Ui.addedTask();
-        String[] inputSplit = desc.split("/",2);
+        String[] inputSplit = desc.split("/", 2);
         String input = inputSplit[0];
         String[] dateSplit = inputSplit[1].split(" ", 2);
         String date = dateSplit[1];
@@ -58,7 +58,7 @@ public class Deadline extends Task {
      * @return String format of a Deadline object in saved file form.
      */
     @Override
-    public String toSave () {
+    public String toSave() {
         return "D | " + super.toSave() + "| " + by;
     }
 
