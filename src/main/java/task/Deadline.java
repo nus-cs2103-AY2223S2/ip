@@ -30,7 +30,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";
-        String formatted_dueDate = dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
-        return "[D][" + statusIcon + "] " + this.task + " (by: " + formatted_dueDate + ")";
+        String formattedDueDate = dueDate.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
+        return "[D][" + statusIcon + "] " + this.task + " (by: " + formattedDueDate + ")";
     }
 }

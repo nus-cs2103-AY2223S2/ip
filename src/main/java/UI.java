@@ -46,7 +46,7 @@ public class UI {
         sc.close();
     }
 
-     /**
+    /**
      * Exit the program with an outro
      */
     public static void exit() {

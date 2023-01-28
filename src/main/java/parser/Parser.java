@@ -1,7 +1,14 @@
 package parser;
 
-import command.*;
-import dukeException.*;
+import command.AddDeadlineCommand;
+import command.AddEventCommand;
+import command.AddTodoCommand;
+import command.Command;
+import command.ListCommand;
+import command.MarkCommand;
+import command.RemoveCommand;
+import command.UnmarkCommand;
+import dukeException.UnknownCommandException;
 import storage.TaskList;
 
 /**
@@ -32,22 +39,22 @@ public class Parser {
         String[] req = this.request.split(" ");
         String command = req[0];
         switch (command) {
-            case "list":
-                return new ListCommand();
-            case "mark":
-                return new MarkCommand(this.request);
-            case "unmark":
-                return new UnmarkCommand(this.request);
-            case "todo":
-                return new AddTodoCommand(this.request);
-            case "deadline":
-                return new AddDeadlineCommand(this.request);
-            case "event":
-                return new AddEventCommand(request);
-            case "delete":
-                return new RemoveCommand(request);
-            default:
-                throw new UnknownCommandException();
+        case "list":
+            return new ListCommand();
+        case "mark":
+            return new MarkCommand(this.request);
+        case "unmark":
+            return new UnmarkCommand(this.request);
+        case "todo":
+            return new AddTodoCommand(this.request);
+        case "deadline":
+            return new AddDeadlineCommand(this.request);
+        case "event":
+            return new AddEventCommand(request);
+        case "delete":
+            return new RemoveCommand(request);
+        default:
+            throw new UnknownCommandException();
         }
     }
 
