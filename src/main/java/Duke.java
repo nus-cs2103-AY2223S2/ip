@@ -12,7 +12,7 @@ public class Duke {
 
         Scanner scanner = new Scanner(System.in);
 
-        DukeBot bot = new DukeBot(scanner);
+        DukeBot bot = new DukeBot(scanner, "data/tasks.txt");
         bot.activate();
     }
 }

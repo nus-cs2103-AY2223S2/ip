@@ -1,7 +1,17 @@
 package DukeBot;
 
 public enum Types {
-    TODO,
-    DEADLINE,
-    EVENT
+    TODO("T"),
+    DEADLINE("D"),
+    EVENT("E");
+
+    private final String identifier;
+
+    Types(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
 }

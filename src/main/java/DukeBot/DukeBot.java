@@ -10,8 +10,12 @@ import DukeBot.Exception.InvalidDateException;
 import DukeBot.Exception.TaskNumberNotFoundException;
 import DukeBot.Exception.UnknownCommandError;
 
+<<<<<<< HEAD
 import java.time.DateTimeException;
 import java.time.format.DateTimeParseException;
+=======
+import java.io.IOException;
+>>>>>>> branch-Level-7
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -21,23 +25,25 @@ public class DukeBot {
 
     private final ArrayList<Task> list;
     private int lengthOfList;
-    private final String frame = "    ____________________________________________________________\n";
+    private static final String FRAME = "    ____________________________________________________________\n";
     private final Scanner scanner;
     private boolean isActive;
+    private final Database dataBase;
 
 
-    public DukeBot(Scanner scanner) {
+    public DukeBot(Scanner scanner, String filePath) {
         this.scanner = scanner;
         this.isActive = true;
-        this.list = new ArrayList<>();
-        this.lengthOfList = 0;
+        this.dataBase = new Database(filePath);
+        this.list = this.dataBase.load();
+        this.lengthOfList = this.list.size();
     }
 
     public void activate() {
-        System.out.println(this.frame +
+        System.out.println(FRAME +
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
-                this.frame);
+                FRAME);
         while (this.isActive && this.scanner.hasNextLine()) {
             String line = this.scanner.nextLine();
             try {
@@ -45,11 +51,17 @@ public class DukeBot {
             } catch (BlankFieldException | UnknownCommandError | TaskNumberNotFoundException | IncludeException |
                     InvalidDateException e){
                 System.out.println(e.getLocalizedMessage());
+            } catch (IOException e) {
+                System.out.println("Oh no something went bad bad");
             }
         }
     }
 
+<<<<<<< HEAD
     public String text(String line) throws BlankFieldException, UnknownCommandError, TaskNumberNotFoundException, IncludeException, InvalidDateException {
+=======
+    public String text(String line) throws BlankFieldException, UnknownCommandError, TaskNumberNotFoundException, IncludeException, IOException {
+>>>>>>> branch-Level-7
 
 
         if (Objects.equals(line, "list")) {
@@ -122,9 +134,9 @@ public class DukeBot {
                 }
         }
 
-        throw new UnknownCommandError("\n" + this.frame + "\n" +
+        throw new UnknownCommandError("\n" + this.FRAME + "\n" +
                 "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n" +
-                this.frame);
+                this.FRAME);
 
     }
 
@@ -132,41 +144,41 @@ public class DukeBot {
         String task = this.list.get(taskNumber - 1).status();
         this.list.remove(taskNumber - 1);
         this.lengthOfList -= 1;
-        return this.frame +
+        return FRAME +
                 " Noted. I've removed this task:\n" +
                 "       " + task +
                 "     Now you have " + this.lengthOfList + " tasks in the list." + "\n"
-                + this.frame;
+                + FRAME;
     }
 
     private String unmark(int taskNumber) {
 
         Task task = this.list.get(taskNumber - 1);
         task.incomplete();
-        return this.frame +
+        return FRAME +
                 "     OK, I've marked this task as not done yet:\n" +
                 "       [ ] " + task.details + "\n" +
-                this.frame;
+                FRAME;
     }
 
     private String mark(int taskNumber) {
 
         Task task = this.list.get(taskNumber - 1);
         task.complete();
-        return this.frame +
+        return FRAME +
                 "     Nice! I've marked this task as done:\n" +
                 "       [X] " + task.details + "\n" +
-                this.frame;
+                FRAME;
     }
 
     private String list() {
-        StringBuilder res = new StringBuilder(this.frame);
+        StringBuilder res = new StringBuilder(FRAME);
         for (int i = 0; i < this.list.size(); i++) {
             Task task = this.list.get(i);
             res.append("     ").append(i + 1).append(". ").
                     append(task.status()).append("\n");
         }
-        return res.append(this.frame).toString();
+        return res.append(FRAME).toString();
     }
 
 
@@ -175,11 +187,11 @@ public class DukeBot {
         ToDo newToDo = new ToDo(parameters);
         this.list.add(newToDo);
         this.lengthOfList += 1;
-        return this.frame + "\n" +
+        return FRAME + "\n" +
                 "     Got it. I've added this task:" + "\n" +
                 "     " + newToDo.status() + "\n" +
                 "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
-                this.frame;
+                FRAME;
     }
 
     public String addDeadline(String parameters) throws IncludeByException, BlankFieldDeadlineException, InvalidDateException {
@@ -207,6 +219,7 @@ public class DukeBot {
             throw new BlankFieldDeadlineException();
         }
 
+<<<<<<< HEAD
         try {
             Deadline newDeadline = new Deadline(task.toString(), deadline.toString().stripLeading());
             this.list.add(newDeadline);
@@ -219,6 +232,16 @@ public class DukeBot {
         } catch (DateTimeParseException e) {
             throw new InvalidDateException();
         }
+=======
+        Deadline newDeadline = new Deadline(task.toString(), deadline.toString());
+        this.list.add(newDeadline);
+        this.lengthOfList += 1;
+        return FRAME + "\n" +
+                "     Got it. I've added this task:" + "\n" +
+                "     " + newDeadline.status() + "\n" +
+                "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
+                FRAME;
+>>>>>>> branch-Level-7
     }
 
     public String addEvent(String parameters) throws IncludeToAndFromException, BlankFieldEventException, InvalidDateException {
@@ -261,6 +284,7 @@ public class DukeBot {
             throw new BlankFieldEventException();
         }
 
+<<<<<<< HEAD
         try {
             Event newEvent = new Event(task.toString(), startDate.toString(), endDate.toString());
             this.list.add(newEvent);
@@ -273,14 +297,26 @@ public class DukeBot {
         } catch (DateTimeException e) {
             throw new InvalidDateException();
         }
+=======
+        Event newEvent = new Event(task.toString(), startDate.toString(), endDate.toString());
+
+        this.list.add(newEvent);
+        this.lengthOfList += 1;
+        return FRAME + "\n" +
+                "     Got it. I've added this task:" + "\n" +
+                "     " + newEvent.status() + "\n" +
+                "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
+                FRAME;
+>>>>>>> branch-Level-7
     }
 
 
-    public String bye() {
+    public String bye() throws IOException {
         this.isActive = false;
-        return this.frame +
+        this.dataBase.update(this.list);
+        return FRAME +
                 "     Bye. Hope to see you again soon!\n" +
-                this.frame;
+                FRAME;
     }
 
 }
