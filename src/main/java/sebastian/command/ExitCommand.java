@@ -4,17 +4,21 @@ import sebastian.main.Storage;
 import sebastian.main.TaskList;
 import sebastian.main.Ui;
 
-public class ExitCommand extends Command{
+/**
+ * Class used to handle a command to exit the current session
+ */
+public class ExitCommand extends Command {
     /**
      * To exit the current session
      * @param taskList taskList instance created at the start of the session
      * @param ui ui instance created at the start of the session
      * @param storage storage instance created at the start of the session
+     * @return a string representing the result of task execution
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         String res = "Bye. It's my pleasure to serve you";
-        ui.printFormattedString(res);
+        return ui.getFormattedString(res);
     }
 
     @Override

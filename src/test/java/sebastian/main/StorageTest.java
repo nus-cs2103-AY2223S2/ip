@@ -2,7 +2,7 @@ package sebastian.main;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import sebastian.sebastianExceptions.CannotLoadDataException;
+import sebastian.exceptions.CannotLoadDataException;
 
 public class StorageTest {
     @Test

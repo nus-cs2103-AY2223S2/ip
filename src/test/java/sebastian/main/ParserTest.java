@@ -2,7 +2,7 @@ package sebastian.main;
 
 import org.junit.jupiter.api.Test;
 import sebastian.command.*;
-import sebastian.sebastianExceptions.IllegalInputException;
+import sebastian.exceptions.IllegalInputException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {

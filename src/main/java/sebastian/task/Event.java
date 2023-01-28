@@ -1,15 +1,24 @@
 package sebastian.task;
 
-import sebastian.time.Duration;
-
 import java.time.LocalDate;
 
+import sebastian.time.Duration;
 
+/**
+ * Class representing an event
+ */
 public class Event extends Task {
 
-    private Duration duration;
     private static String taskType = "E";
 
+    private Duration duration;
+
+    /**
+     * Constructor
+     * @param isCompleted whether the event is completed; 0 for not completed, 1 for completed
+     * @param taskDescription description of the event
+     * @param duration the duration of the event
+     */
     public Event(int isCompleted, String taskDescription, Duration duration) {
         super(taskDescription, isCompleted);
         this.duration = duration;
@@ -35,6 +44,6 @@ public class Event extends Task {
      */
     @Override
     public String formatForSave() {
-        return taskType + "<>" +super.formatForSave() + "<>" + this.duration.formatForSave();
+        return taskType + "<>" + super.formatForSave() + "<>" + this.duration.formatForSave();
     }
 }

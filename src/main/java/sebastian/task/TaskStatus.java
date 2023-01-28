@@ -9,12 +9,16 @@ public enum TaskStatus {
 
     private final String status;
 
+    /**
+     * Constructor
+     * @param status completion status of the task
+     */
     TaskStatus(String status) {
         this.status = status;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[" + this.status + "]";
     }
 }

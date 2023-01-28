@@ -1,7 +1,7 @@
 package sebastian.main;
 
 import org.junit.jupiter.api.Test;
-import sebastian.sebastianExceptions.DeadlineFormatMismatchException;
+import sebastian.exceptions.DeadlineFormatMismatchException;
 import sebastian.task.Deadline;
 import sebastian.task.Task;
 import sebastian.task.Todo;

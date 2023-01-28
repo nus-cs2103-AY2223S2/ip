@@ -5,12 +5,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A duration
+ * Class representing a duration
  */
 public class Duration {
     private LocalDateTime from;
     private LocalDateTime to;
 
+    /**
+     * Constructor
+     * @param from start time
+     * @param to end time
+     */
     public Duration(LocalDateTime from, LocalDateTime to) {
         this.from = from;
         this.to = to;

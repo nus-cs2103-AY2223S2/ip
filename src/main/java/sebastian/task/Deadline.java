@@ -1,17 +1,26 @@
 package sebastian.task;
 
+import java.time.LocalDate;
+
 import sebastian.time.EndTime;
 
-import java.time.LocalDate;
+
 
 /**
  * Class representing a deadline
  */
 public class Deadline extends Task {
 
-    private EndTime endTime;
     private static final String taskType = "D";
 
+    private EndTime endTime;
+
+    /**
+     * Constructor
+     * @param isCompleted whether the deadline is completed; 0 for not completed, 1 for completed
+     * @param taskDescription description of the deadline
+     * @param endTime the time the deadline is due
+     */
     public Deadline(int isCompleted, String taskDescription, EndTime endTime) {
         super(taskDescription, isCompleted);
         this.endTime = endTime;
@@ -28,7 +37,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "["+ taskType +"]" + super.toString() + " " + this.endTime.toString();
+        return "[" + taskType + "]" + super.toString() + " " + this.endTime.toString();
     }
 
     /**

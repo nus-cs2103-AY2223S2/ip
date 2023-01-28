@@ -15,7 +15,7 @@ public enum DatePattern {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.format;
     }
 }

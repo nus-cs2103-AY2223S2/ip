@@ -1,15 +1,24 @@
 package sebastian.task;
 
-public class Todo extends Task{
+/**
+ * Class represring a todo
+ */
+public class Todo extends Task {
+
     private static final String taskType = "T";
 
+    /**
+     * Constructor
+     * @param isCompleted whether the to-do is completed; 0 for not completed, 1 for completed
+     * @param taskDescription description of the to-do
+     */
     public Todo(int isCompleted, String taskDescription) {
         super(taskDescription, isCompleted);
     }
 
     @Override
     public String toString() {
-        return "["+ taskType +"]" + super.toString();
+        return "[" + taskType + "]" + super.toString();
     }
 
     /**

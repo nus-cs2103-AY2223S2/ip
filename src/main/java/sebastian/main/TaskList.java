@@ -1,7 +1,14 @@
 package sebastian.main;
 
-import sebastian.sebastianExceptions.DeadlineFormatMismatchException;
-import sebastian.sebastianExceptions.EventFormatMismatchException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
+import sebastian.exceptions.DeadlineFormatMismatchException;
+import sebastian.exceptions.EventFormatMismatchException;
 import sebastian.task.Deadline;
 import sebastian.task.Event;
 import sebastian.task.Task;
@@ -10,18 +17,11 @@ import sebastian.time.DatePattern;
 import sebastian.time.Duration;
 import sebastian.time.EndTime;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * This class represents a list of all tasks
  */
 public class TaskList {
+
     private final List<Task> taskList;
 
     public TaskList() {
@@ -50,7 +50,8 @@ public class TaskList {
      * @param taskDescription a description of the deadline to be added
      * @return the deadline generated
      */
-    public Task addDeadline(int isCompleted, String taskDescription, String endTime) throws DeadlineFormatMismatchException{
+    public Task addDeadline(int isCompleted, String taskDescription, String endTime) throws
+            DeadlineFormatMismatchException {
         try {
             Task newTask = new Deadline(isCompleted, taskDescription, new EndTime(convertStringToDate(endTime)));
             this.taskList.add(newTask);
@@ -66,9 +67,11 @@ public class TaskList {
      * @param taskDescription a description of the event to be added
      * @return the event generated
      */
-    public Task addEvent(int isCompleted, String taskDescription, String from, String to) throws EventFormatMismatchException {
+    public Task addEvent(int isCompleted, String taskDescription, String from, String to) throws
+            EventFormatMismatchException {
         try {
-            Task newTask = new Event(isCompleted, taskDescription, new Duration(convertStringToDate(from), convertStringToDate(to)));
+            Task newTask = new Event(isCompleted, taskDescription,
+                    new Duration(convertStringToDate(from), convertStringToDate(to)));
             this.taskList.add(newTask);
             return newTask;
         } catch (DateTimeParseException e) {
@@ -89,7 +92,7 @@ public class TaskList {
      */
     public Task markTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException {
         try {
-            return this.taskList.get(taskIndex-1).mark();
+            return this.taskList.get(taskIndex - 1).mark();
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException();
         }
@@ -103,7 +106,7 @@ public class TaskList {
      */
     public Task unmarkTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException {
         try {
-            return this.taskList.get(taskIndex-1).unmark();
+            return this.taskList.get(taskIndex - 1).unmark();
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException();
         }
@@ -117,7 +120,7 @@ public class TaskList {
      */
     public Task deleteTaskAtIndex(int taskIndex) throws IndexOutOfBoundsException {
         try {
-            return this.taskList.remove(taskIndex-1);
+            return this.taskList.remove(taskIndex - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException();
         }
@@ -129,19 +132,19 @@ public class TaskList {
      * @return a Tasklist containing tasks occurring on the specific date
      * @throws DateTimeParseException when date provided is invalid or is in the wrong format
      */
-    public TaskList getTasksOnDate(String date) throws DateTimeParseException{
+    public TaskList getTasksOnDate(String date) throws DateTimeParseException {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DatePattern.TASK_ON_DATE_FORMAT.toString());
         LocalDate ld = LocalDate.parse(date, dtf);
         List<Task> tasksOnDate = new ArrayList<>();
-        for(Task t: taskList) {
-            if(t instanceof Deadline) {
+        for (Task t : taskList) {
+            if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
-                if(d.isOnSameDay(ld)) {
+                if (d.isOnSameDay(ld)) {
                     tasksOnDate.add(t);
                 }
-            } else if(t instanceof Event) {
+            } else if (t instanceof Event) {
                 Event e = (Event) t;
-                if(e.isOnSameDay(ld)) {
+                if (e.isOnSameDay(ld)) {
                     tasksOnDate.add(t);
                 }
             }
@@ -156,8 +159,8 @@ public class TaskList {
      */
     public TaskList findTasks(String keyword) {
         List<Task> res = new ArrayList<>();
-        for(Task t:taskList) {
-            if(t.containsKeyword(keyword)) {
+        for (Task t : taskList) {
+            if (t.containsKeyword(keyword)) {
                 res.add(t);
             }
         }
@@ -176,12 +179,12 @@ public class TaskList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int totalTasks = this.getTotalTasks();
-        for(int i = 0; i < totalTasks; i ++ ) {
+        for (int i = 0; i < totalTasks; i++) {
             Task t = taskList.get(i);
-            sb.append(i+1).append(".").append(t.toString()).append("\n");
+            sb.append(i + 1).append(".").append(t.toString()).append("\n");
         }
-        if(sb.length()!=0) {
-            sb.delete(sb.length()-1, sb.length());
+        if (sb.length() != 0) {
+            sb.delete(sb.length() - 1, sb.length());
         }
         return sb.toString();
     }
@@ -192,11 +195,11 @@ public class TaskList {
      */
     public String formatTaskListForSave() {
         StringBuilder sb = new StringBuilder();
-        for(Task task: this.taskList){
+        for (Task task : this.taskList) {
             sb.append(task.formatForSave()).append("\n");
         }
-        if(sb.length()>0){
-            return sb.substring(0,sb.length()-1);
+        if (sb.length() > 0) {
+            return sb.substring(0, sb.length() - 1);
         }
         return sb.toString();
     }

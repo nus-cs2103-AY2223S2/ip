@@ -1,15 +1,20 @@
 package sebastian.task;
 
 /**
- * This class represents a task
+ * Class representing a task
  */
 public class Task {
     private final String taskDescription;
     private TaskStatus taskStatus;
 
+    /**
+     * Constructor
+     * @param taskDescription description of the task
+     * @param isCompleted whether the task is completed; 0 for not completed, 1 for completed
+     */
     public Task(String taskDescription, int isCompleted) {
         this.taskDescription = taskDescription;
-        this.taskStatus = isCompleted == 0? TaskStatus.NOT_DONE : TaskStatus.DONE;
+        this.taskStatus = isCompleted == 0 ? TaskStatus.NOT_DONE : TaskStatus.DONE;
     }
 
     /**
@@ -35,7 +40,7 @@ public class Task {
      * @param keyword the keyword to be checked against
      * @return whether the task description contains the keyword
      */
-    public boolean containsKeyword(String keyword){
+    public boolean containsKeyword(String keyword) {
         return taskDescription.contains(keyword);
     }
 
@@ -49,7 +54,7 @@ public class Task {
      * @return the formatted String representation
      */
     public String formatForSave() {
-        int isCompleted = taskStatus == TaskStatus.DONE? 1 : 0;
+        int isCompleted = taskStatus == TaskStatus.DONE ? 1 : 0;
         return isCompleted + "<>" + taskDescription;
     }
 }

@@ -1,14 +1,14 @@
 package sebastian.command;
 
+import sebastian.exceptions.LackOfArgumentException;
 import sebastian.main.Storage;
 import sebastian.main.TaskList;
 import sebastian.main.Ui;
-import sebastian.sebastianExceptions.LackOfArgumentException;
 
 /**
- * Class representing a find command
+ * Class used to handle a command to find tasks based on a keyword
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private final String instruction;
 
@@ -21,16 +21,18 @@ public class FindCommand extends Command{
      * @param taskList TaskList instance created at the start of the session
      * @param ui Ui instance created at the start of the session
      * @param storage Storage instance created at the start of the session
+     * @return a string representing the result of task execution
      * @throws LackOfArgumentException when user did not specify a keyword
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws LackOfArgumentException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws LackOfArgumentException {
         String[] insArr = instruction.split(" ");
-        if(insArr.length == 1) {
+        if (insArr.length == 1) {
             throw new LackOfArgumentException();
         } else {
             String keyword = instruction.substring(5).trim();
-            ui.printFormattedString(taskList.findTasks(keyword).toString());
+            String res = taskList.findTasks(keyword).toString();
+            return ui.getFormattedString(res);
         }
     }
 }
