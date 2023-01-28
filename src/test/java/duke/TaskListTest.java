@@ -1,10 +1,11 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {
-    private TaskList tl = new TaskList();
+    private final TaskList tl = new TaskList();
 
     @Test
     public void testFind() {
