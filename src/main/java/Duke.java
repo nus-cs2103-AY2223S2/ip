@@ -22,7 +22,7 @@ public class Duke {
             TaskList tasks = new TaskList();
             if (!file.exists()) {
                 System.out.println(formatStr("Oh dear! There is no save file. Let me create one for you."));
-                System.out.println("........CREATING.......");
+                System.out.println("........CREATING......."); 
                 file.createNewFile();
             }
             PrintWriter pw = new PrintWriter(new FileWriter(textDir, true));
