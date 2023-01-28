@@ -1,4 +1,5 @@
 import java.text.NumberFormat;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -58,12 +59,13 @@ public class Alfred {
     private static void addItem(String commandLine) throws AlfredException {
         String[] commandArr = commandLine.split(" ", 2);
         String typeTask = commandArr[0];
+        String[] descriptionArr;
         String[] lineArr;
         Task task;
         switch (typeTask) {
             case "todo":
                 if (commandArr.length == 1) {
-                    throw new AlfredException("The description of a todo cannot be empty");
+                    throw new AlfredException("The description of a todo cannot be empty\n");
                 }
                 task = new ToDo(commandArr[1]);
                 itemsList.add(task);
@@ -72,22 +74,40 @@ public class Alfred {
                 lineArr = commandLine.split("/by ");
                 if (lineArr.length == 1) {
                     throw new AlfredException("Deadlines should have a due date ." +
-                            "Eg: \"<TaskName> /by <DueDate>\"");
+                            "Eg: \"<TaskName> /by <DueDate>\"\n");
                 }
-                task = new Deadline(lineArr[0], lineArr[1]);
-                itemsList.add(task);
-                break;
+                descriptionArr = lineArr[0].split(" ");
+                if (descriptionArr.length == 1) {
+                    throw new AlfredException("Deadlines should have a due date ." +
+                            "Eg: \"<TaskName> /by <DueDate>\"\n");
+                }
+                try {
+                    task = new Deadline(descriptionArr[1], lineArr[1]);
+                    itemsList.add(task);
+                    break;
+                } catch (DateTimeParseException e) {
+                    throw new AlfredException("The date format should be given as dd/mm/yyyy 24hr-time\n");
+                }
             case "event": // need to consider what if no '/from' and '/or is not given?
                 lineArr = commandLine.split("/from | /to ");
                 if (lineArr.length < 2) { // not sure how to check if theres /from and /to
                     throw new AlfredException("Events should have start and end time. " +
-                            "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"");
+                            "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"\n");
                 }
-                task = new Event(lineArr[0], lineArr[1], lineArr[2]);
-                itemsList.add(task);
-                break;
+                descriptionArr = lineArr[0].split(" ");
+                if (descriptionArr.length == 1) {
+                    throw new AlfredException("Events should have start and end time. " +
+                            "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"\n");
+                }
+                try {
+                    task = new Event(descriptionArr[1], lineArr[1], lineArr[2]);
+                    itemsList.add(task);
+                    break;
+                } catch (DateTimeParseException e) {
+                    throw new AlfredException("The date format should be given as dd/mm/yyyy 24hr-time\n");
+                }
             default:
-                throw new AlfredException("I'm sorry, but I don't know what that means :<");
+                throw new AlfredException("I'm sorry, but I don't know what that means :<\n");
         }
         String numTasks = itemsList.size() == 1 ? "task" : "tasks";
         String command = String.format("Noted, task added: \n      %s\n" +
