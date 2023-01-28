@@ -4,8 +4,9 @@ import java.util.ArrayList;
 public class Duke {
 
     //private static Task[] taskstorage = new Task[101];
-    private static ArrayList<Task> taskstorage = new ArrayList<Task>(); // Create an ArrayList object
-    private static int ind = 0;
+    private static ArrayList<Task> taskstorage = new ArrayList<Task>();
+    // Tasks are indexed from 0 in taskstorage.
+    private static int ind = 0; //Number of Current Tasks
     public static void addTask(Task t) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + t);
@@ -26,7 +27,7 @@ public class Duke {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         StringBuilder sb = new StringBuilder();
-
+        TaskManagement taskManager = new TaskManagement(); // to manage saved data
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -66,7 +67,7 @@ public class Duke {
                     //System.out.println("Nice! I've marked this task as done:");
                     try {
                         int taskNo = Integer.parseInt(input[1]);
-                        if (taskNo >= ind || taskNo <= 0) {
+                        if (taskNo > ind || taskNo <= 0) {
                             throw new DukeException("Give a vaild number");
                         }
                         taskstorage.get(taskNo - 1).markasDone();
@@ -81,7 +82,7 @@ public class Duke {
                 case "unmark":
                     try {
                         int taskNoUnmark = Integer.parseInt(input[1]);
-                        if (taskNoUnmark >= ind || taskNoUnmark <= 0) {
+                        if (taskNoUnmark > ind || taskNoUnmark <= 0) {
                             throw new DukeException("Give a valid number");
                         }
                         taskstorage.get(taskNoUnmark - 1).markasUnDone();
@@ -172,7 +173,10 @@ public class Duke {
                 default:
                     DukeException dukeException = new DukeException();
                     System.out.println(dukeException.getMessage());
+
+
             }
+            taskManager.save(taskstorage);
             System.out.println(line);
             if (inp.equals("bye")) {
                 break;
