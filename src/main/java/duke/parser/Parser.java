@@ -95,17 +95,22 @@ public class Parser {
 
     private Command prepareDeadline(String args) {
         try {
+            // Check the required keyword exists
             String by = "/by";
             checkParamExists(args.contains(by), "Parameter /by in the DEADLINE command is missing.");
 
+            // Check the method parameters exists
             int byIndex = args.indexOf(by);
             String descr = args.substring(0, byIndex).trim();
             String dateTime = args.substring(byIndex + by.length()).trim();
             checkParamExists(!descr.isBlank(), "Description of a DEADLINE command cannot be empty.");
-            checkParamExists(!dateTime.isBlank(), "Datetime of a TODO command cannot be empty.");
+            checkParamExists(!dateTime.isBlank(), "Datetime of a DEADLINE command cannot be empty.");
 
+            // Format date and time
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime dt = LocalDateTime.parse(dateTime, formatter);
+
+            // Instantiate command
             return new AddCommand(descr, dt);
         } catch (DukeException e) {
             throw new RuntimeException(e);
@@ -114,23 +119,28 @@ public class Parser {
 
     private Command prepareEvent(String args) {
         try {
+            // Check the required keyword exists
             String from = "/from";
             String to = "/to";
             checkParamExists(args.contains(from), "Parameter /from in the EVENT command is missing.");
             checkParamExists(args.contains(to), "Parameter /to in the EVENT command is missing.");
 
+            // Check the method parameters exists
             int fromIndex = args.indexOf(from);
             int toIndex = args.indexOf(to);
             String descr = args.substring(0, fromIndex).trim();
             String startDateTime = args.substring(fromIndex + from.length(), toIndex).trim();
             String endDateTime = args.substring(toIndex + to.length()).trim();
             checkParamExists(!descr.isBlank(), "Description of a EVENT command cannot be empty.");
-            checkParamExists(!startDateTime.isBlank(), "Start datetime of a TODO command cannot be empty.");
-            checkParamExists(!endDateTime.isBlank(), "End datetime of a TODO command cannot be empty.");
+            checkParamExists(!startDateTime.isBlank(), "Start datetime of a EVENT command cannot be empty.");
+            checkParamExists(!endDateTime.isBlank(), "End datetime of a EVENT command cannot be empty.");
 
+            // Format date and time
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime startDt = LocalDateTime.parse(startDateTime, formatter);
             LocalDateTime endDt = LocalDateTime.parse(endDateTime, formatter);
+
+            // Instantiate command
             return new AddCommand(descr, startDt, endDt);
         } catch (DukeException e) {
             throw new RuntimeException(e);
