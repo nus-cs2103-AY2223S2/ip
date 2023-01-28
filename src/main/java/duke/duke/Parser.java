@@ -1,5 +1,6 @@
 package duke.duke;
 
+import duke.storage.Todos;
 import duke.tasks.Deadlines;
 import duke.tasks.Events;
 import duke.commands.*;
@@ -35,7 +36,6 @@ public class Parser {
         Command c;
         ArrayList<String> queries;
         switch(this.readCommand(line)) {
-
 
             case "list":
                 c = new ListCommand();
