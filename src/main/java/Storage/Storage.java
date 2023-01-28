@@ -40,9 +40,9 @@ public class Storage {
      */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> db = new ArrayList<Task>(100);
-        BufferedReader br_file = new BufferedReader(new FileReader(this.filePath));
+        BufferedReader brFile = new BufferedReader(new FileReader(this.filePath));
         String input;
-        while ((input = br_file.readLine()) != null) {
+        while ((input = brFile.readLine()) != null) {
             String[] temp = input.split(" \\| ");
             Task task;
             if (temp[0].equals("T")) {
@@ -58,7 +58,7 @@ public class Storage {
             }
             db.add(task);
         }
-        br_file.close();
+        brFile.close();
         return db;
     }
 

@@ -59,7 +59,6 @@ public class Ui {
 
     /**
      * Print the error message under a DukeException.
-     *
      * @param e A DukeException error.
      * @throws IOException Throws if there is an I/O error.
      */
@@ -67,6 +66,10 @@ public class Ui {
         System.out.println(e.getMessage());
     }
 
+    /**
+     * Print the farewell message.
+     * @throws IOException Throws if there is an I/O error.
+     */
     public void showFarewell() throws IOException {
         System.out.println(FAREWELL);
         br.close();
@@ -74,7 +77,6 @@ public class Ui {
 
     /**
      * Print the message for marking a task.
-     *
      * @param task Task that is marked.
      */
     public void showMarkTask(Task task) {
@@ -83,7 +85,6 @@ public class Ui {
 
     /**
      * Print the message for unmarking a task.
-     *
      * @param task Task that is unmarked.
      */
     public void showUnmarkTask(Task task) {
@@ -92,7 +93,6 @@ public class Ui {
 
     /**
      * Print the message for deleting a task.
-     *
      * @param task Task that is deleted.
      * @param size Number of tasks in the list.
      */
@@ -102,7 +102,6 @@ public class Ui {
 
     /**
      * Print the message for adding a task.
-     *
      * @param task Task that is added.
      * @param size Number of task in the list.
      */
