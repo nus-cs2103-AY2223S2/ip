@@ -1,6 +1,5 @@
-package Tasks;
-import Exceptions.DateTimeNotParsed;
-import Tasks.Task;
+package Ava.Tasks;
+import Ava.Exceptions.DateTimeNotParsed;
 
 public class Event extends Task {
     public static final String TASK_SIGN = "[E]";

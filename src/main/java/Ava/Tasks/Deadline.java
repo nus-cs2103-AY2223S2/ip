@@ -1,7 +1,6 @@
-package Tasks;
+package Ava.Tasks;
 
-import Exceptions.DateTimeNotParsed;
-import Tasks.Task;
+import Ava.Exceptions.DateTimeNotParsed;
 
 
 public class Deadline extends Task {

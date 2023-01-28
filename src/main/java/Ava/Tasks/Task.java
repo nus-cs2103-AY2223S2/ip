@@ -1,4 +1,4 @@
-package Tasks;
+package Ava.Tasks;
 
 public class Task {
     protected String message;

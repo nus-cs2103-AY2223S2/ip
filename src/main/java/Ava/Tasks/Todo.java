@@ -1,6 +1,4 @@
-package Tasks;
-
-import Tasks.Task;
+package Ava.Tasks;
 
 public class Todo extends Task {
     public static final String TASK_SIGN = "[T]";

@@ -1,13 +1,12 @@
-package Tasks;
+package Ava.Tasks;
 
-import Exceptions.DateTimeNotParsed;
+import Ava.Exceptions.DateTimeNotParsed;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
 public class TimeParser {
@@ -25,7 +24,7 @@ public class TimeParser {
             this.ld = LocalDate.parse(DateTime[0], DATE_PARSE_FORMAT); // dd/mm/yyyy
             this.lt = LocalTime.parse(DateTime[1], TIME_PARSE_FORMAT);// HHMM
             this.ldt = LocalDateTime.of(ld, lt);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException  e) {
             throw new DateTimeNotParsed(input);
         }
     }

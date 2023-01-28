@@ -1,4 +1,4 @@
-package Exceptions;
+package Ava.Exceptions;
 
 public class DateTimeNotParsed extends AvaException{
     private final String ERROR_PROMPT = "I don't recognize the date and time , follow this format 'd/mm/yy HHMM'" +

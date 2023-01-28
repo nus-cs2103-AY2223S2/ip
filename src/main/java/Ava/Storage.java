@@ -1,3 +1,4 @@
+package Ava;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,6 +8,8 @@ import java.util.Scanner;
 
 public class Storage {
     private final static String STORAGE_DIR = "storage/";
+    // File Name is stored here , so all storage functionality remains in the storage class
+    private final static String FILE_NAME = "tasks.txt";
 
     public Storage(){
         File directory = new File(STORAGE_DIR);
@@ -19,13 +22,13 @@ public class Storage {
         }
     }
 
-    public void writeToStorage(String fileName, String input, boolean canAppend) /*throws AvaErrorUnableToStoreException*/ {
-        File file  = new File(STORAGE_DIR + fileName);
+    public void writeToStorage(String input) /*throws AvaErrorUnableToStoreException*/ {
+        File file  = new File(STORAGE_DIR + FILE_NAME);
         try {
         if (!file.exists()) {
             boolean s = file.createNewFile();
         }
-            FileWriter fw = new FileWriter(file, canAppend);
+            FileWriter fw = new FileWriter(file, true);
             //Design Decesion that each input will be stored in a new line
             fw.write(input + "\n");
             fw.flush();
@@ -35,9 +38,9 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
-    public ArrayList<String> readStorage(String fileName)/*throws AvaErrorUnableToReadStorageException*/ {
+    public ArrayList<String> readStorage()/*throws AvaErrorUnableToReadStorageException*/ {
         ArrayList<String> res = new ArrayList<>();
-        File file  = new File(STORAGE_DIR + fileName);
+        File file  = new File(STORAGE_DIR + FILE_NAME);
         try {
             if (!file.exists()) {
                 // Creates a new file if file does not exists .
@@ -54,8 +57,8 @@ public class Storage {
         return res;
     }
 
-    public void deleteFile(String fileName) {
-        File file  = new File(STORAGE_DIR + fileName);
+    public void deleteFile() {
+        File file  = new File(STORAGE_DIR + FILE_NAME);
         boolean success = file.delete();
         if (!success) {
             // Throw Error
