@@ -27,6 +27,10 @@ public class Task implements Serializable{
         this.done = false;
     }
 
+    public boolean contains(String keyword) {
+        return this.taskName.contains(keyword);
+    }
+
     @Override
     public String toString() {
         if (this.done) {

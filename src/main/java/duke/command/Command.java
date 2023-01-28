@@ -16,7 +16,7 @@ public class Command {
 
 
     private enum CommandName {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND
     }
 
     //for bye and list
@@ -30,7 +30,7 @@ public class Command {
         this.index = index;
     }
 
-    // for todo
+    // for todo and find
     public Command(String commandName, String taskName) {
         this.commandName = commandName;
         this.taskName = taskName;
@@ -95,6 +95,18 @@ public class Command {
                 storage.saveTasks(tasks);
                 System.out.println("Noted. I've removed this task: \n" + task);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                break;
+
+            case FIND:
+                int counter = 0;
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task findTask = tasks.get(i);
+                    if (findTask.contains(taskName)) {
+                        System.out.println("Here are the matching tasks in your list:");
+                        counter++;
+                        System.out.print(counter + ". " + findTask + "\n");
+                    }
+                }
                 break;
 
             case TODO:
