@@ -13,27 +13,16 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private String filePath;
+    private String input;
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String input) {
+        this.input = input;
     }
 
     public ArrayList<String> load() {
-        try {
             ArrayList<String> result = new ArrayList<>();
-            File f = new File(filePath); // create a File for the given file path
-            Scanner s = new Scanner(f); // create a Scanner using the File as the source
-            while (s.hasNext()) {
-                String task = s.nextLine();
-                result.add(task);
-            }
+            result.add(input);
             return result;
-        } catch (FileNotFoundException e) {
-            System.out.println("Error! Please check FIlename!");
-            e.printStackTrace();
-            return null;
-        }
     }
 
     public void store(ArrayList<Task> list) {

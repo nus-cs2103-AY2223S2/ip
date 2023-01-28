@@ -35,13 +35,14 @@ public class MarkCommand extends Command {
      * @param storage Storage class that handles the file input and output (saving)
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (this.markOrNot.equals("unmark")) {
-            tasks.unmark(taskNumber);
+            return tasks.unmark(taskNumber);
         } else if (this.markOrNot.equals("mark")) {
-            tasks.mark(taskNumber);
+            return tasks.mark(taskNumber);
 
         }
+        return null;
 
     }
 

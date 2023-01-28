@@ -1,26 +1,31 @@
+package duke;
+
 import duke.Ui.Ui;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.*;
 import duke.command.*;
+
 /**
  * Main Duke class which keep track a list of tasks
 
  */
-class Duke {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+
+
     /**
      * Duke constructor that creates a new list with the specified input file directory
-     * @param filePath a file location that has all the commands to Duke
      */
-    public Duke(String filePath) {
+
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -32,28 +37,26 @@ class Duke {
     /**
      * Main Program that reads the commands and processes them onto DUKE
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        int currIteration = 0;
-        while (!isExit) {
+    public String run(String input) {
             try {
-                String fullCommand = ui.readCommand(tasks, currIteration);
-                ui.showLine(); // show the divider line ("_______")
+                String fullCommand = input;
+                //ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-                currIteration++;
+                return c.execute(tasks, ui, storage);
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+               return ui.showError(e.getMessage());
             } finally {
-                ui.showLine();
+                //ui.showLine();
             }
-        }
+
+    }
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return this.run(input);
     }
 
-    public static void main(String[] args) {
-        new Duke("./././text-ui-test/input.txt").run();
-    }
 
 }

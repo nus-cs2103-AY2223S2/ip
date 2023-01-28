@@ -32,7 +32,7 @@ public class Parser {
         } else if (command.equals((ActionP.find.name()))) {
             return new FindCommand(s);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
     }

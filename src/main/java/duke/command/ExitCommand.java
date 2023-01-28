@@ -25,9 +25,10 @@ public class ExitCommand extends Command{
      */
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        storage.store(tasks.getDataBase());
-        System.out.println("Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        //storage.store(tasks.getDataBase());
+        return "Bye. Hope to see you again soon!";
+        //System.out.println("Bye. Hope to see you again soon!");
     }
 
 

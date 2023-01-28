@@ -16,29 +16,39 @@ public class TaskList {
     public TaskList() {
     }
 
-    public void printList() {
+    public String printList() {
+        String result = "Here are the tasks in your list\n ";
         System.out.println("Here are the tasks in your list");
         for (int i = 0; i < listDataBase.size(); i++) {
-            System.out.print(i + 1 + ".");
-            System.out.println(listDataBase.get(i).toString());
+            result += i + 1 + ".";
+            //System.out.print(i + 1 + ".");
+            result += listDataBase.get(i).toString() + "\n";
+            //System.out.println(listDataBase.get(i).toString());
         }
+        return result;
     }
 
-    public void unmark(int taskNumber) {
+    public String unmark(int taskNumber) {
         Task taskName = listDataBase.get(taskNumber - 1);
         taskName.unMark();
-        System.out.println("OK, I've marked this task as not done yet");
-        System.out.println(taskName.toString());
+        String result = "OK, I've marked this task as not done yet \n";
+        //System.out.println("OK, I've marked this task as not done yet");
+        result += taskName.toString();
+        return result;
+        //System.out.println(taskName.toString());
     }
 
-    public void mark(int taskNumber) {
+    public String mark(int taskNumber) {
         Task taskName = listDataBase.get(taskNumber - 1);
         taskName.markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(taskName.toString());
+        String result = "Nice! I've marked this task as done:\n";
+        //System.out.println("Nice! I've marked this task as done:");
+        result += taskName.toString();
+        return result;
+        //System.out.println(taskName.toString());
     }
 
-    public void todo(String[] s) throws DukeException {
+    public String todo(String[] s) throws DukeException {
         String taskDescription = "";
         if (s.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -48,18 +58,22 @@ public class TaskList {
             taskDescription += " ";
         }
         ToDos taskName = new ToDos(taskDescription);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(taskName.toString());
+        String result = "Got it. I've added this task:\n";
+        //System.out.println("Got it. I've added this task:");
+        result += taskName.toString() + "\n";
+        //System.out.println(taskName.toString());
         listDataBase.add(taskName);
-        System.out.println("Now you have " + listDataBase.size() + " tasks in the list.");
+        result += "Now you have " + listDataBase.size() + " tasks in the list.";
+        //System.out.println("Now you have " + listDataBase.size() + " tasks in the list.");
+        return result;
     }
 
-    public void deadline(String[] s) throws DukeException {
+    public String deadline(String[] s) throws DukeException {
         String taskDescription = "";
         boolean isTime = false;
         String time = "";
         if (s.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
         for (int j = 1; j < s.length; j++) {
             if (s[j].equals("/by")) {
@@ -77,20 +91,24 @@ public class TaskList {
             }
         }
         Deadlines taskName = new Deadlines(taskDescription, time);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(taskName.toString());
+        String result = "Got it. I've added this task:\n";
+        //System.out.println("Got it. I've added this task:");
+        result += taskName.toString() + "\n";
+        //System.out.println(taskName.toString());
         listDataBase.add(taskName);
-        System.out.println("Now you have " + listDataBase.size() + " tasks in the list.");
+        result += "Now you have " + listDataBase.size() + " tasks in the list.";
+        //System.out.println("Now you have " + listDataBase.size() + " tasks in the list.");
+        return result;
     }
 
-    public void event(String[] s) throws DukeException {
+    public String event(String[] s) throws DukeException {
         String taskDescription = "";
         boolean isStartTime = false;
         boolean isEndTime = false;
         String startTime = "";
         String endTime = "";
         if (s.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         }
         for (int j = 1; j < s.length; j++) {
             if (s[j].equals("/from")) {
@@ -113,18 +131,26 @@ public class TaskList {
             }
         }
         Events taskName = new Events(taskDescription, startTime, endTime);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(taskName.toString());
+        String result = "Got it. I've added this task:\n";
+        //System.out.println("Got it. I've added this task:");
+        result += taskName.toString() + "\n";
+        //System.out.println(taskName.toString());
         listDataBase.add(taskName);
-        System.out.println("Now you have " + listDataBase.size() + " tasks in the list.");
+        result += "Now you have " + listDataBase.size() + " tasks in the list.";
+        //System.out.println("Now you have " + listDataBase.size() + " tasks in the list.");
+        return result;
     }
 
-    public void delete(int taskNumberDelete) throws DukeException {
+    public String delete(int taskNumberDelete) throws DukeException {
         Task currentTask = listDataBase.get(taskNumberDelete - 1);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(currentTask.toString());
+        String result = "Noted. I've removed this task:\n";
+        //System.out.println("Noted. I've removed this task:");
+        result += currentTask.toString() + "\n";
+        //System.out.println(currentTask.toString());
         listDataBase.remove(taskNumberDelete - 1);
-        System.out.println("Now you have " + listDataBase.size() + " tasks in the list");
+        result += "Now you have " + listDataBase.size() + " tasks in the list";
+        //System.out.println("Now you have " + listDataBase.size() + " tasks in the list");
+        return result;
     }
 
     public ArrayList<Task> getDataBase() {
@@ -137,17 +163,22 @@ public class TaskList {
         }
         return null;
     }
-    public void find(String word) {
+    public String find(String word) {
         int count = 1;
-        System.out.println("Here are the matching tasks in your list:");
+        String result = "Here are the matching tasks in your list:\n";
+        //System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < listDataBase.size(); i++) {
             Task task = listDataBase.get(i);
             if(task.find(word)) {
-                System.out.print(count);
-                System.out.print('.');
-                System.out.println(task.toString());
+                result += count;
+                result += '.';
+                result += task.toString();
+                //System.out.print(count);
+                //System.out.print('.');
+                //System.out.println(task.toString());
                 count++;
             }
         }
+        return result;
     }
 }

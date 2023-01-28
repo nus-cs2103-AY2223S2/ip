@@ -11,13 +11,13 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String task = "";
         for (int  i = 1; i < s.length; i++) {
             task += s[i];
             task += " ";
         }
-        tasks.find(task);
+        return tasks.find(task);
     }
 
     @Override
