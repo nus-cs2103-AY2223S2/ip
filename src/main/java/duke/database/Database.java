@@ -58,53 +58,6 @@ public class Database {
         this.updateFile();
     }
 
-    private void loadFromFile() {
-        try {
-            boolean directoryExists = java.nio.file.Files.exists(dataPath);
-
-            if (!directoryExists) {
-                try {
-                    new File("./data", "duke.txt").createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            File dukeFile = new File("./data/duke.txt");
-            Scanner scanner = new Scanner(dukeFile);
-
-            while (scanner.hasNextLine()) {
-                String data = scanner.nextLine();
-                Task task = this.deserialiseTask(data);
-                this.add(task);
-            }
-
-            scanner.close();
-        } catch (FileNotFoundException error) {
-        }
-    }
-
-    private void updateFile() {
-        boolean directoryExists = java.nio.file.Files.exists(dataPath);
-
-        if (!directoryExists) {
-            try {
-                new File("./data", "duke.txt").createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        try {
-            FileWriter writerObj = new FileWriter("./data/duke.txt", false);
-            for (int i = 0; i < this.size(); i++)
-                writerObj.write(this.serialiseTask(this.get(i)) + "\n");
-            writerObj.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public String serialiseTask(Task task) {
         String data = "";
         String isDone = (task.getIsDone() ? "1" : "0");
@@ -159,5 +112,52 @@ public class Database {
         }
 
         return task;
+    }
+
+    private void loadFromFile() {
+        try {
+            boolean directoryExists = java.nio.file.Files.exists(dataPath);
+
+            if (!directoryExists) {
+                try {
+                    new File("./data", "duke.txt").createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            File dukeFile = new File("./data/duke.txt");
+            Scanner scanner = new Scanner(dukeFile);
+
+            while (scanner.hasNextLine()) {
+                String data = scanner.nextLine();
+                Task task = this.deserialiseTask(data);
+                this.add(task);
+            }
+
+            scanner.close();
+        } catch (FileNotFoundException error) {
+        }
+    }
+
+    private void updateFile() {
+        boolean directoryExists = java.nio.file.Files.exists(dataPath);
+
+        if (!directoryExists) {
+            try {
+                new File("./data", "duke.txt").createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            FileWriter writerObj = new FileWriter("./data/duke.txt", false);
+            for (int i = 0; i < this.size(); i++)
+                writerObj.write(this.serialiseTask(this.get(i)) + "\n");
+            writerObj.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
