@@ -1,65 +1,61 @@
 package duke.tasklist;
 
-import duke.task.Task;
 import java.util.ArrayList;
 
-//TODO: consider changing to TaskManager class; handles everything related to tasks
+import duke.task.Task;
+
 /**
- * This class encapsulates everything the duke.task.Task arraylist needs to do. Also
- * handles saving tasks to duke.Duke.txt.
+ * This class encapsulates everything the <code>Task</code> arraylist needs to do.
  */
 public class TaskList {
-
     /**
-     * The arraylist storing all of duke.Duke's tasks.
+     * The <code>ArrayList</code> storing all of <code>Duke</code>'s <code>Task</code>s.
      */
     private ArrayList<Task> taskList;
 
     /**
-     * Constructor for duke.tasklist.TaskList. Takes care of file access of duke.Duke.
+     * Constructor for <code>TaskList</code>.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
-
+    /**
+     * Alternative constructor for <code>TaskList</code>.
+     */
     public TaskList(ArrayList<Task> loadedList) {
         this.taskList = loadedList;
     }
-
     /**
-     * Getter for a task given its index.
+     * Getter for a <code>Task</code> given its index.
      *
-     * @param index Index of duke.task.Task instance of interest.
+     * @param index Index of <code>Task</code> instance of interest.
      *
-     * @return duke.task.Task instance of given index.
+     * @return <code>Task</code> instance of given index.
      */
     public Task getTask(int index) {
         return taskList.get(index);
     }
-
     /**
-     * Returns string representation of a task given its index.
+     * Returns string representation of a <code>Task</code> given its index.
      *
-     * @param index Index of duke.task.Task instance of interest.
+     * @param index Index of <code>Task</code> instance of interest.
      *
-     * @return String representation of given task.
+     * @return String representation of given <code>Task</code>.
      */
     public String taskToString(int index) {
         Task curTask = taskList.get(index);
         return curTask.toString();
     }
-
     /**
      * Appends a task to arraylist.
      *
-     * @param t duke.task.Task to be appended.
+     * @param t <code>Task</code> to be appended.
      */
     public void append(Task t) {
         taskList.add(t);
     }
-
     /**
-     * Prints out all tasks for the "list" command.
+     * Prints out all <code>Task</code>s for the "list" command.
      */
     public void list() {
         int index = 1;
@@ -69,9 +65,8 @@ public class TaskList {
             index++;
         }
     }
-
     /**
-     * Marks given task as done for the "mark" command.
+     * Marks given <code>Task</code> as done for the "mark" command.
      *
      * @param index Index of task to be marked.
      */
@@ -79,9 +74,8 @@ public class TaskList {
         Task curTask = taskList.get(index);
         curTask.markAsDone();
     }
-
     /**
-     * Unmarks given task as done for the "unmark" command.
+     * Unmarks given <code>Task</code> as done for the "unmark" command.
      *
      * @param index Index of task to be unmarked.
      */
@@ -89,22 +83,20 @@ public class TaskList {
         Task curTask = taskList.get(index);
         curTask.markAsNotDone();
     }
-
     /**
-     * Returns total number of tasks.
+     * Returns total number of <code>Task</code>s.
      *
      * @return Length of arraylist.
      */
     public int getLength() {
         return taskList.size();
     }
-
     /**
-     * Removes a task from the arraylist.
+     * Removes a <code>Task</code> from the arraylist.
      *
      * @param index Index of task to be removed.
      *
-     * @return Removed task.
+     * @return Removed <code>Task</code>.
      */
     public Task delete(int index) {
         Task removed = taskList.get(index);
@@ -112,6 +104,9 @@ public class TaskList {
         return removed;
     }
 
+    /**
+     * Removes all <code>Task</code> from arraylist.
+     */
     public void clearAllTasks() {
         while (taskList.size() != 0) {
             delete(0);

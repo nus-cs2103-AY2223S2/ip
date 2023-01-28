@@ -1,19 +1,36 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.exception.DukeBadInstructionFormatException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.util.Arrays;
-
+/**
+ * Encapsulates the 'deadline' <code>Command</code>> from the user.
+ *
+ * @author Bo Kuan (LG17)
+ * @version CS2103T AY22/23 Semester 2
+ */
 public class DeadlineCommand extends Command {
-
+    /**
+     * Constructor for an instance of a <code>DeadlineCommand</code>.
+     *
+     * @param fullCommand A <code>String</code> of the user's full input.
+     */
     public DeadlineCommand(String fullCommand) {
         super(fullCommand);
     }
-
+    /**
+     * Executes the logic behind <code>DeadlineCommand</code>, adding a <code>Deadline</code>
+     * to <code>tasks</code>.
+     * @param tasks The <code>TaskList</code> associated with Duke
+     * @param ui The <code>Ui</code> associated with Duke
+     * @param storage The <code>Storage</code> associated with Duke
+     * @throws DukeBadInstructionFormatException If user input is wrong.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeBadInstructionFormatException {
@@ -31,8 +48,8 @@ public class DeadlineCommand extends Command {
 
         //Handle no 'by' in instruction
         if (byStartIndex == -1) {
-            throw new DukeBadInstructionFormatException("Usage of deadline: " +
-                    "deadline [description] /by[date]");
+            throw new DukeBadInstructionFormatException("Usage of deadline: "
+                    + "deadline [description] /by[date]");
         }
 
         //Make description and by string
@@ -49,13 +66,16 @@ public class DeadlineCommand extends Command {
         }
 
         //Make duke.task.Deadline
-        Deadline current_task = new Deadline(description, by);
-        storage.fileAppend(current_task);
-        tasks.append(current_task);
-        ui.showAddedTask(current_task, tasks);
+        Deadline currentTask = new Deadline(description, by);
+        storage.fileAppend(currentTask);
+        tasks.append(currentTask);
+        ui.showAddedTask(currentTask, tasks);
 
     }
-
+    /**
+     * Returns true if <code>Command</code> is <code>ByeCommand</code>.
+     * @return <code>false</code>
+     */
     @Override
     public boolean isExit() {
         return false;
