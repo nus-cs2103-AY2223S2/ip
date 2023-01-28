@@ -13,7 +13,16 @@ public class Ui {
     }
 
     /**
+
      * Prints out that it is loading when it faces a loading error
+
+     * Prints hello message to user
+     */
+
+
+    /**
+     * It prints Loadding error message to user
+
      */
     public void showLoadingError() {
         System.out.println("Loading...");

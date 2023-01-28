@@ -5,7 +5,11 @@ package Week2.src.main;
  */
 public class Parser {
 
+    /**
+     * Parser constructor
+     */
     public Parser() {
 
     }
+
 }

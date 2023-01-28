@@ -8,8 +8,13 @@ import java.io.IOException;
 import java.time.*;
 
 /**
+<<<<<<< HEAD
  * A simple todo bot to manage my todo list.
  * It can mark done jobs or unmark.
+=======
+ * A simple todo bot that helps you to manage your tasks with deadline or occuring time.
+ * @author Park Hyunjin
+>>>>>>> branch-A-JavaDoc
  */
 public class Duke {
     private static Storage storage;
@@ -17,8 +22,14 @@ public class Duke {
     private static TaskList tasklist;
 
     /**
+<<<<<<< HEAD
      * Constructor of Duke.
      * It begins the basic operation of the program when it is constructed.
+=======
+     * Duke constructor.
+     * Takes filePath from main and creates Ui and storage from it.
+     * It can load previous data from the file path.
+>>>>>>> branch-A-JavaDoc
      * @param filePath
      * @throws IOException
      */
@@ -35,7 +46,11 @@ public class Duke {
     }
 
     /**
+<<<<<<< HEAD
      * Prints out a line
+=======
+     * @return a line to divide outcomes.
+>>>>>>> branch-A-JavaDoc
      */
     public static void lining() {
         System.out.println("____________________________________________________________");
@@ -52,8 +67,13 @@ public class Duke {
     }
 
     /**
+<<<<<<< HEAD
      * Writes information of the task on the file
      * @param currtask Current task that user has entered
+=======
+     * It uses a file writer to write the data on the file according to the user's input.
+     * @param currtask takes the current task to write (todo, deadline, or event)
+>>>>>>> branch-A-JavaDoc
      * @throws IOException
      */
     public static void writeOn(Task currtask) throws IOException {
@@ -61,8 +81,12 @@ public class Duke {
     }
 
     /**
+<<<<<<< HEAD
      * Main method to manage my todo list
      * Takes inputs from the user and send them to right classes.
+=======
+     * Main method of the todo bot. It generally manages inputs and outputs.
+>>>>>>> branch-A-JavaDoc
      * @param args
      * @throws IOException
      */
