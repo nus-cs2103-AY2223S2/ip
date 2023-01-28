@@ -3,20 +3,21 @@ package app.task;
 import app.command.CommandNotFoundException;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 
-public class TaskList {
+public class TaskList implements Iterable<Task> {
     private List<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
-    public Task getTask(int i) {
-        return this.tasks.get(i);
+    public Task getTask(int listIndex) {
+        return this.tasks.get(listIndex);
     }
 
     public List<Task> getAllTasks() {
@@ -28,7 +29,7 @@ public class TaskList {
     }
 
 
-    public Task addTask(TaskType.Type type, Map<String,String> args) throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
+    public Task addTask(TaskTypes.Type type, Map<String,String> args) throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
         Task newTask;
         String desc;
         switch (type) {
@@ -71,7 +72,7 @@ public class TaskList {
         return newTask;
     }
 
-    public Task addDoneTask(TaskType.Type type, Map<String,String> args) throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
+    public Task addDoneTask(TaskTypes.Type type, Map<String,String> args) throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
         Task newTask = addTask(type, args); // add to end of list
         int index = this.tasks.size() - 1; // mark last(est) item as done
         markAsDone(index);
@@ -123,4 +124,8 @@ public class TaskList {
         }
     }
 
+    @Override
+    public Iterator<Task> iterator() {
+        return this.tasks.iterator();
+    }
 }

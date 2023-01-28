@@ -4,15 +4,15 @@ import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.Task;
 import app.task.TaskList;
-import app.task.TaskType;
+import app.task.TaskTypes;
 
 import java.util.Map;
 
 public class AddCommand extends Command {
     private Map<String,String> args;
-    private TaskType.Type taskType;
+    private TaskTypes.Type taskType;
 
-    public AddCommand(TaskType.Type type, Map<String, String> args) {
+    public AddCommand(TaskTypes.Type type, Map<String, String> args) {
         this.isExit = false;
         this.args = args;
         this.taskType = type;

@@ -8,7 +8,8 @@ import app.command.ExitCommand;
 import app.command.ListCommand;
 import app.command.MarkAsDoneCommand;
 import app.command.MarkAsUndoneCommand;
-import static app.task.TaskType.inputToTask;
+import app.task.TaskTypes;
+
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -66,10 +67,10 @@ public class Parser {
             case "bye":
                 return new ExitCommand();
             default:
-                if (inputToTask.containsKey(command)) { // check if command is to add a task
+                if (TaskTypes.inputToTask.getValue().containsKey(command)) { // check if command is to add a task
                     String desc = argValues.get(command);
                     argValues.put("Description", desc); // change the for description from the name of Command
-                    return new AddCommand(inputToTask.get(command), argValues);
+                    return new AddCommand(TaskTypes.inputToTask.getValue().get(command), argValues);
                 }
                 throw new CommandNotFoundException("I'm sorry, I don't recognise this command :/");
         }

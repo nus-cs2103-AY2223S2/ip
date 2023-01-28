@@ -18,7 +18,7 @@ public class TaskListTest {
             args.put("Description", "it can be anything");
             args.put("from", "2023/01/27");
             // missing "to" -> <some valid date>
-            tl.addDoneTask(TaskType.Type.EVENT, args);
+            tl.addDoneTask(TaskTypes.Type.EVENT, args);
         });
 
         assertEquals("eh need to specify ur event from when to when - event <desc> /from <when> /to <when>", thrown.getMessage());

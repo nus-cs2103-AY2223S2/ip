@@ -2,7 +2,7 @@ package app.chatbot;
 
 import app.task.Task;
 import app.task.TaskList;
-import app.task.TaskType;
+import app.task.TaskTypes;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -58,7 +58,7 @@ public class Storage {
 
                 // get task type
                 String symbol = args.get(0);
-                TaskType.Type taskType = TaskType.symbolToTask.get(symbol);
+                TaskTypes.Type taskType = TaskTypes.symbolToTask.getValue().get(symbol);
 
                 // get arg map
                 Map<String,String> argValues = new HashMap<>();
