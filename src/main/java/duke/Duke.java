@@ -47,34 +47,34 @@ public class Duke {
         
             try {
                 switch (this.currentCommand.baseCommand) {
-                    case "todo":
-                        this.addTodo();
-                        break;
-                    case "deadline":
-                        this.addDeadline();
-                        break;
-                    case "event":
-                        this.addEvent();
-                        break;
-                    case "mark":
-                        this.mark();
-                        break;
-                    case "unmark":
-                        this.unmark();
-                        break;
-                    case "delete":
-                        this.delete();
-                        break;
-                    case "list":
-                        this.list();
-                        break;
-                    case "quit":
-                    case "exit":
-                    case "bye":
-                        this.ui.show("Bye. Hope to see you again soon!");
-                        break whileLoop;
-                    default:
-                        throw new DukeInvalidCommandException();
+                case "todo":
+                    this.addTodo();
+                    break;
+                case "deadline":
+                    this.addDeadline();
+                    break;
+                case "event":
+                    this.addEvent();
+                    break;
+                case "mark":
+                    this.mark();
+                    break;
+                case "unmark":
+                    this.unmark();
+                    break;
+                case "delete":
+                    this.delete();
+                    break;
+                case "list":
+                    this.list();
+                    break;
+                case "quit":
+                case "exit":
+                case "bye":
+                    this.ui.show("Bye. Hope to see you again soon!");
+                    break whileLoop;
+                default:
+                    throw new DukeInvalidCommandException();
                 }
 
                 this.storage.save(this.tasks);
