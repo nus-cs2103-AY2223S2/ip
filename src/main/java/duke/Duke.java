@@ -16,7 +16,7 @@ import task.Task;
 import task.Todo;
 
 public class Duke {
-  static Database<Task> taskDB = new Database<Task>();
+  static Database taskDB = new Database();
 
   public static void main(String[] args) {
     greet();
@@ -82,7 +82,7 @@ public class Duke {
 
   public static void listTasks() {
     System.out.println("Here are the tasks in your list:");
-    taskDB.listItems();
+    taskDB.list();
   }
 
   public static void unmarkTask(Request request) throws UnmarkIndexDoesNotExistException {
@@ -93,7 +93,7 @@ public class Duke {
         throw new UnmarkIndexDoesNotExistException("☹ OOPS!!! unmark index does not exist");
       }
 
-      Task task = Duke.taskDB.getItem(index);
+      Task task = Duke.taskDB.get(index);
       task.markAsNotDone();
 
       System.out.println(String.format("OK, I've marked this task as not done yet:\n%s\n", task));
@@ -110,7 +110,7 @@ public class Duke {
         throw new MarkIndexDoesNotExistException("☹ OOPS!!! mark index does not exist");
       }
 
-      Task task = Duke.taskDB.getItem(index);
+      Task task = Duke.taskDB.get(index);
       task.markAsDone();
 
       System.out.println(String.format("Nice! I've marked this task as done:\n%s\n", task));
@@ -126,7 +126,7 @@ public class Duke {
 
       Task task = new Todo(description);
       System.out.println("Got it. I've added this task:");
-      taskDB.addItem(task);
+      taskDB.add(task);
       System.out.println(task);
       System.out.println("Now you have " + Duke.taskDB.size() + " tasks in the list.\n");
       
@@ -144,7 +144,7 @@ public class Duke {
 
       Task task = new Deadline(description, by);
       System.out.println("Got it. I've added this task:");
-      taskDB.addItem(task);
+      taskDB.add(task);
       System.out.println(task);
       System.out.println("Now you have " + Duke.taskDB.size() + " tasks in the list.\n");
       
@@ -163,7 +163,7 @@ public class Duke {
 
       Task task = new Event(description, from, to);
       System.out.println("Got it. I've added this task:");
-      taskDB.addItem(task);
+      taskDB.add(task);
       System.out.println(task);
       System.out.println("Now you have " + Duke.taskDB.size() + " tasks in the list.\n");
       
@@ -182,7 +182,7 @@ public class Duke {
         throw new MarkIndexDoesNotExistException("☹ OOPS!!! delete index does not exist");
       }
 
-      Task task = Duke.taskDB.deleteItem(index);
+      Task task = Duke.taskDB.delete(index);
       System.out.println("Noted. I've removed this task:");
       System.out.println(task);
       System.out.println("Now you have " + Duke.taskDB.size() + " tasks in the list.\n");

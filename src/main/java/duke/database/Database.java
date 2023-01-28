@@ -10,35 +10,36 @@ import task.Todo;
 import task.Event;
 import task.Task;
 
-public class Database<T> {
+public class Database {
     // Directory path to data/duke.txt
     String cwd = System.getProperty("user.dir");
     java.nio.file.Path dataPath = java.nio.file.Paths.get(cwd, "data", "duke.txt");
 
-    ArrayList<T> items = new ArrayList<T>();
+    ArrayList<Task> items = new ArrayList<Task>();
 
     public Database() {
-        this.loadFromFile();
+        this.loadFromTaskFile();
     }
 
-    public void listItems() {
+    public void list() {
         int size = this.size();
 
         for (int i = 0; i < size; i++)
-            System.out.println((i + 1) + ". " + this.getItem(i));
+            System.out.println((i + 1) + ". " + this.get(i));
 
         System.out.println();
     }
 
-    public void addItem(T item) {
+    public void add(Task item) {
         this.items.add(item);
+        this.updateFile();
     }
 
-    public T getItem(int id) {
+    public Task get(int id) {
         return this.items.get(id);
     }
 
-    public T deleteItem(int id) throws DatabaseException {
+    public Task delete(int id) throws DatabaseException {
         if (id >= this.size()) {
             throw new DatabaseException("☹ OOPS!!! delete index does not exist");
         }
