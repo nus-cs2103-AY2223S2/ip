@@ -1,7 +1,11 @@
 package berry.task;
 
+/**
+ * Represents a task class.
+ */
 public abstract class Task {
 
+    /** Indicates if the task is done */
     protected boolean isDone;
     protected String description;
 
@@ -10,22 +14,44 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Marks a task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
         System.out.println(this.toString());
     }
 
+    /**
+     * Marks a task as not done.
+     */
     public void markAsNotDone() {
         this.isDone = false;
         System.out.println(this.toString());
     }
 
+    /**
+     * Returns a representative string to indicate its isDone status.
+     *
+     * @return a string representing its isDone status
+     */
     public String getStatusIcon() {
         return isDone ? "X" : " ";
     }
 
+    /**
+     * Translates a task to a formatted string to be saved into a file.
+     *
+     * @return a formatted string based on its task type
+     */
     public abstract String interpretTaskToString();
 
+    /**
+     * Translates a given string in a certain format to a task variable.
+     *
+     * @param s is the line read from the file
+     * @return a task class which is interpreted based on the file input
+     */
     public static Task interpretStringToTask(String s) {
         String isDoneStatus = s.split(" \\| ")[1];
         boolean isDone = isDoneStatus.equals("X") ? true : false;

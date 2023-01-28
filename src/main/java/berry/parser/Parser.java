@@ -18,7 +18,7 @@ import berry.task.Event;
 import berry.task.Todo;
 
 /**
- * Deals with making sense of the user command.
+ * Parses user input.
  */
 
 public class Parser {
@@ -27,6 +27,13 @@ public class Parser {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
     }
 
+    /**
+     * Parses user input into command word and arguments for execution.
+     *
+     * @param input is the full user input string
+     * @return the command based on the user input
+     * @throws BerryException if the given string cannot be parsed
+     */
     public static Command parseCommand(String input) throws BerryException {
         String[] splitInput = input.split(" ");
         String[] listStr;
@@ -65,6 +72,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the given arguments are valid for its task to be created.
+     *
+     * @param commandType is the type of the task
+     * @param input is the full user input string
+     * @throws BerryException if the given string has missing or incomplete arguments
+     */
     private static void validate(CommandType commandType, String input) throws BerryException {
         String com = input.split(" ")[0];
 

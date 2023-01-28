@@ -1,5 +1,8 @@
 package berry.exception;
 
+/**
+ * Signals that the given string as date is not in the acceptable format.
+ */
 public class IncorrectDateException extends BerryException {
 
     public IncorrectDateException() {

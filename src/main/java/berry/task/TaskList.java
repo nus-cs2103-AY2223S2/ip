@@ -22,27 +22,53 @@ public class TaskList {
         return listOfTasks;
     }
 
+    /**
+     * Adds a new task into the task list.
+     *
+     * @param task is the task to be added
+     */
     public void addTask(Task task) {
         listOfTasks.add(task);
         System.out.println(task.toString());
     }
 
+    /**
+     * Deletes an existing task.
+     *
+     * @param index is the number identifying the task given by the user as seen from the task list
+     */
     public void deleteTask(int index){
         System.out.println(listOfTasks.get(index - 1).toString());
         listOfTasks.remove(index - 1);
         printNumberOfTasks();
     }
 
+    /**
+     * Marks the task as done.
+     *
+     * @param index is the number identifying the task given by the user as seen from the task list
+     */
     public void markDone(int index) {
         Task t = listOfTasks.get(index - 1);
         t.markAsDone();
     }
 
+    /**
+     * Marks the task as not done.
+     *
+     * @param index is the number identifying the task given by the user as seen from the task list
+     */
     public void markNotDone(int index) {
         Task t = listOfTasks.get(index - 1);
         t.markAsNotDone();
     }
 
+    /**
+     * Checks if the index given is within range to be handled by commands.
+     *
+     * @param index is the number identifying the task given by the user as seen from the task list
+     * @return true if the index is within range
+     */
     public boolean isIndexWithinRange(int index) {
         if (index > 0 && index <= listOfTasks.size()) {
             return true;
@@ -50,6 +76,9 @@ public class TaskList {
         return false;
     }
 
+    /**
+     * Prints the number of tasks in the task list.
+     */
     public void printNumberOfTasks() {
         System.out.println("You now have " + listOfTasks.size() + " tasks in the list ૮꒰ˊᗜˋ* ꒱ა");
     }
