@@ -29,8 +29,8 @@ public class DeleteCommand extends Command {
         } else {
 
             Task E = tasks.remove(this.num);
-            String speech = "Noted. I've removed this task:\n" +
-                    E + "\n Now you have " + tasks.size() + " tasks in the list.";
+            String speech = "Noted. I've removed this task:\n"
+                    + E + "\n Now you have " + tasks.size() + " tasks in the list.";
             ui.display(speech);
             try {
                 storage.dumpFile(tasks);

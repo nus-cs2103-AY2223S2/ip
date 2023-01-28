@@ -23,7 +23,7 @@ public class TaskList {
 
     /**
      * Obtains and returns a list of tasks in a format to be displayed.
-     * @return
+     * @return a list of tasks in the appropriate format.
      * @throws StorerEmptyException
      */
     public String getTaskStrings() throws StorerEmptyException {
@@ -65,7 +65,7 @@ public class TaskList {
     /**
      * Obtain a task by its task number.
      * @param index
-     * @return
+     * @return the task at the given index.
      */
     public Task get(int index) {
         return this.storer.get(index - 1);
@@ -74,7 +74,7 @@ public class TaskList {
     /**
      * Removes a task given its task number.
      * @param index
-     * @return
+     * @return the removed task.
      */
 
     public Task remove(int index) {

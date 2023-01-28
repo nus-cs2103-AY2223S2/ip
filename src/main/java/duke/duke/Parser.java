@@ -1,10 +1,24 @@
 package duke.duke;
 
+import duke.commands.DeleteCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.Command;
+import duke.commands.TodoCommand;
+import duke.commands.EventCommand;
 import duke.tasks.Todos;
 import duke.tasks.Deadlines;
 import duke.tasks.Events;
-import duke.commands.*;
-import duke.exceptions.*;
+import duke.commands.ByeCommand;
+import duke.commands.DeadLineCommand;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidException;
+import duke.exceptions.NoArgsException;
+import duke.exceptions.EmptyException;
+
+import duke.exceptions.IncompleteException;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +49,7 @@ public class Parser {
     /**
      * Parses a processed form of the user input and matches it to the correct command.
      * @param line
-     * @return
+     * @return an appropriate command.
      * @throws DukeException
      */
     public Command parse(String[] line) throws DukeException {
@@ -94,7 +108,7 @@ public class Parser {
      * Obtains a set of queries/arguments for commands.
      * @param readLine
      * @param keywords
-     * @return
+     * @return an array-list of queries.
      * @throws DukeException
      */
     public ArrayList<String> queries(
@@ -105,7 +119,7 @@ public class Parser {
             int index = 0;
             String concat = "";
 
-            for (int i = 1; i < readLine.length; i++){
+            for (int i = 1; i < readLine.length; i++) {
                 String s = readLine[i];
                 if (s.charAt(0) != '/') {
                     concat += s + " ";
@@ -122,7 +136,6 @@ public class Parser {
             arr.add(concat.substring(0, concat.length() - 1));
 
         } catch (Exception err) {
-
             throw new InvalidException();
         }
 
