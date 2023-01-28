@@ -1,10 +1,12 @@
+import java.time.LocalDate;
+
 public class Deadline extends Task {
 
-    private String endTime;
+    private LocalDate endTime;
 
     public Deadline(String s, String endTime) {
         super(s);
-        this.endTime = endTime;
+        this.endTime = LocalDate.parse(endTime);
     }
 
     public Deadline(Boolean isTaskDone, String taskDetails, String taskDate) {
@@ -12,7 +14,7 @@ public class Deadline extends Task {
         if (isTaskDone) {
             this.markDone();
         }
-        this.endTime = taskDate;
+        this.endTime = LocalDate.parse(taskDate);
     }
 
     @Override
