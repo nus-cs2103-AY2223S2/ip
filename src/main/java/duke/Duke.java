@@ -21,7 +21,6 @@ public class Duke {
         storage = new Storage();
         taskList = new TaskList();
         parser = new Parser();
-
         try {
             storage.loadFromSave(taskList);
         } catch (DukeException e) {
@@ -32,7 +31,6 @@ public class Duke {
     public void run() {
         Scanner s = new Scanner(System.in);
         String text;
-        Commands command;
         boolean isExit = false;
 
         ui.printWelcome();
