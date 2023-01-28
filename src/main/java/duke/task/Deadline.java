@@ -29,6 +29,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
+    @Override
     public String getSymbol() {
         return "D";
     }

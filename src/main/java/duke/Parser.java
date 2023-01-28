@@ -32,6 +32,19 @@ public class Parser {
                 case list:
                     cur = new ListCommand();
                     break;
+            case find:
+                String keyword = "";
+                for(int i = 1; i < temp.length; i++) {
+                    keyword += temp[i];
+                    if (i != temp.length - 1) {
+                        keyword += " ";
+                    }
+                }
+                if (keyword.equals("")) {
+                    throw new DukeException("☹ OOPS!!! The keyword cannot be empty.");
+                }
+                cur = new FindCommand(keyword);
+                break;
                 case mark:
                     int idx = Integer.parseInt(temp[1]);
                     if (idx > tasks.size()) {

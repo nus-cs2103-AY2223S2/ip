@@ -18,6 +18,10 @@ public class Task {
         return this.description;
     }
 
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }

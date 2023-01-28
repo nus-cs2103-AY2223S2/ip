@@ -23,6 +23,10 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+    @Override
     public String getSymbol() {
         return "E";
     }

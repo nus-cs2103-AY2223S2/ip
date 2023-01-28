@@ -41,6 +41,17 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    public TaskList find(String keyword) {
+        TaskList res = new TaskList();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            String cur = this.tasks.get(i).getDetailedDescription();
+            if (cur.contains(keyword)) {
+                res.add(this.tasks.get(i));
+            }
+        }
+        return res;
+    }
+
     @Override
     public String toString() {
         String msg = "";
