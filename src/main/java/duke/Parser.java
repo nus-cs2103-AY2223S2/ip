@@ -14,7 +14,7 @@ public class Parser {
 
     private Ui ui;
     private StringTokenizer tk;
-    private String fullcommand;
+    private String fullCommand;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyyHHmm");
 
     /**
@@ -24,16 +24,18 @@ public class Parser {
 
     }
 
+
     /**
      * Convert user input into command and provide validation of the user input
      *
-     * @param fullcommand = User input
+     * @param fullCommand = User input
      * @param ui = User interface class
      * @return = return the command Duke thinks from the User Input
      */
-    public Command parse(String fullcommand, Ui ui) {
-        this.fullcommand = fullcommand;
-        this.tk = new StringTokenizer(fullcommand);
+
+    public Command parse(String fullCommand, Ui ui) {
+        this.fullCommand = fullCommand;
+        this.tk = new StringTokenizer(fullCommand);
         this.ui = ui;
 
         String action = tk.nextToken();
@@ -41,67 +43,66 @@ public class Parser {
         Task t;
 
         switch (action) {
-            case "list":
-                c = new ListCommand();
-                break;
-            case "mark": {
-                int index = getIndex();
-                c = new MarkCommand(index);
-                break;
+        case "list":
+            c = new ListCommand();
+            break;
+        case "mark": {
+            int index = getIndex();
+            c = new MarkCommand(index);
+            break;
+        }
+        case "delete": {
+            int index = getIndex();
+            c = new DeleteCommand(index);
+            break;
+        }
+        case "todo": {
+            String value = getToDo();
+            if (value != null) {
+                t = new Todo(value, false);
+                c = new AddCommand(t);
             }
-            case "delete": {
-                int index = getIndex();
-                c = new DeleteCommand(index);
-                break;
-            }
-            case "todo": {
-                String value = getToDo();
-                if (value != null) {
-                    t = new Todo(value, false);
+            break;
+        }
+        case "deadline": {
+            String nextString;
+            String value = "";
+            String date ;
+            while ((nextString = getString()) != null) {
+                if (nextString.equals("/by")) {
+                    date = getString() + getString();
+                    LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+                    t = new Deadline(value, dateTime, false);
                     c = new AddCommand(t);
-                }
-                break;
+                    break;
+                } else
+                    value = value + nextString;
             }
-            case "deadline": {
-                String nextString;
-                String value = "";
-                String date ;
-                while ((nextString = getString()) != null) {
-                    if (nextString.equals("/by")) {
-                        date = getString() + getString();
-                        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
-                        t = new Deadline(value, dateTime, false);
-                        c = new AddCommand(t);
-                        break;
-                    } else
-                        value = value + nextString;
-                }
-
-                break;
+            break;
+        }
+        case "event": {
+            String nextString;
+            String value = "";
+            String from;
+            String to ;
+            while ((nextString = getString()) != null) {
+                if (nextString.equals("/from")) {
+                    from = getString() + getString();
+                    getString();
+                    to = getString() + getString();
+                    LocalDateTime dateTime = LocalDateTime.parse(from, formatter);
+                    LocalDateTime dateTime2 = LocalDateTime.parse(to, formatter);
+                    t = new Event(value, dateTime, dateTime2, false);
+                    c = new AddCommand(t);
+                    break;
+                } else
+                    value = value + nextString;
             }
-            case "event": {
-                String nextString;
-                String value = "";
-                String from;
-                String to ;
-                while ((nextString = getString()) != null) {
-                    if (nextString.equals("/from")) {
-                        from = getString() + getString();
-                        getString();
-                        to = getString() + getString();
-                        LocalDateTime dateTime = LocalDateTime.parse(from, formatter);
-                        LocalDateTime dateTime2 = LocalDateTime.parse(to, formatter);
-                        t = new Event(value, dateTime, dateTime2, false);
-                        c = new AddCommand(t);
-                        break;
-                    } else
-                        value = value + nextString;
-                }
-                break;
-            }
-            default:
-                c = new CommandNotFound();
-                break;
+            break;
+        }
+        default:
+            c = new CommandNotFound();
+            break;
         }
 
         return c;
@@ -119,7 +120,7 @@ public class Parser {
 
     //Custom method for ToDo action
     public String getToDo() {
-        String[] arr = fullcommand.split(" ", 2);
+        String[] arr = fullCommand.split(" ", 2);
         try {
             return arr[1];
         } catch(ArrayIndexOutOfBoundsException e) {
