@@ -18,8 +18,9 @@ public class Deadline extends Task {
     }
     @Override
     public String addToFile() {
-        String str = String.format("D | %d | %s | %s ",
-                isDone ? 1 : 0, this.description, this.deadline);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        String str = String.format("D | %d | %s | %s",
+                isDone ? 1 : 0, this.description, this.deadline.format(formatter));
         return str + "\n";
     }
     @Override

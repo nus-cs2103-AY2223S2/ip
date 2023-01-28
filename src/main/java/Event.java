@@ -20,9 +20,10 @@ public class Event extends Task {
     }
     @Override
     public String addToFile() {
-        String str = String.format("E | %d | %s | %s-%s ",
-                isDone ? 1 : 0, this.description, this.startDate,
-                this.endDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        String str = String.format("E | %d | %s | %s-%s",
+                isDone ? 1 : 0, this.description, this.startDate.format(formatter),
+                this.endDate.format(formatter));
         return str + "\n";
     }
 

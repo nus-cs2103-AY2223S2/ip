@@ -6,7 +6,7 @@ public class ToDo extends Task{
 
     @Override
     public String addToFile() {
-        String str = String.format("T | %d | %s ",
+        String str = String.format("T | %d | %s",
                 isDone ? 1 : 0, this.description);
         return str + "\n";
     }

@@ -18,7 +18,7 @@ public class Task {
     }
 
     public String addToFile() {
-        String str = String.format(" | %d | %s ",
+        String str = String.format(" | %d | %s",
                 isDone ? 1 : 0, this.description);
         return str + "\n";
     }
