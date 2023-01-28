@@ -1,20 +1,33 @@
-public class Event extends Task{
-    private final String fromStr;
-    private final String toStr;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
-    public Event(String task, String from, String to) {
+public class Event extends Task{
+    private final LocalDateTime startsAt;
+    private final LocalDateTime endsAt;
+
+    public Event(String task, LocalDateTime from, LocalDateTime to) {
         super(task);
-        fromStr = from;
-        toStr = to;
+        startsAt = from;
+        endsAt = to;
+    }
+
+    private String formatDate(LocalDateTime date) {
+        return date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (From " + fromStr + " to " + toStr + ")";
+        return "[E]" + super.toString()
+                + " (" + formatDate(startsAt)
+                + " – " + formatDate(endsAt) + ")";
     }
 
     @Override
     public String toCommand() {
-        return "event " + super.description + " /from " + fromStr + " /to " + toStr + (super.isDone ? "\nmark last": "");
+        return "event " + super.description
+                + " /from " + startsAt
+                + " /to " + endsAt
+                + (super.isDone ? "\nmark last": "");
     }
 }

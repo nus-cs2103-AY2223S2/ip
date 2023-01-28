@@ -19,7 +19,7 @@ import org.apache.commons.text.WordUtils;
  */
 public class CatBot {
     /* The maximum length of CatBot's output */
-    private static final int MAX_LINE_LENGTH = 80;
+    private static final int MAX_LINE_LENGTH = 120;
 
     private static final ArrayList<Task> tasks = new ArrayList<>();
     private static File saveFile;
