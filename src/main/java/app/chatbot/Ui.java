@@ -26,7 +26,10 @@ public class Ui {
                 + "What can I do for you?\n");
     }
 
-
+    /**
+     * Prints out the input as an indented message to the user.
+     * @param s
+     */
     public void reply(String s) {
         if (!s.endsWith("\n")) {
             s += '\n';

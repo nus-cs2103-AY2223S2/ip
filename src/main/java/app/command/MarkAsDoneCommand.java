@@ -13,6 +13,15 @@ public class MarkAsDoneCommand extends Command {
         this.markAtIndex = index;
     }
 
+    /**
+     * Marks the Task at markAtIndex as Done. Notifies the user if the Task was
+     * already previously done. Throws a message for formatting issues, or if the
+     * corresponding Task to markAtIndex does not exist in the list.
+     * @param tl
+     * @param ui
+     * @param storage
+     * @throws Exception
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         boolean alreadyMarked;

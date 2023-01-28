@@ -17,7 +17,11 @@ import app.task.Task;
 import app.task.TaskList;
 import app.task.TaskTypes;
 
-
+/**
+ * Handles Storage of data. Converts Task data saved in text file into
+ * Tasks the user interacts with during runtime. Saves Tasks into txt file
+ * and overwrites changes.
+ */
 public class Storage {
     public static final String SEPARATOR_REGEX = " \\| ";
     public static final String SEPARATOR = " | ";
@@ -25,6 +29,14 @@ public class Storage {
     private Path path;
     private final File file;
 
+    /**
+     * Creates a new Storage object. A file is created at the stated path to store
+     * data. If the path location does not exist, the necessary files and directories
+     * are created.
+     *
+     * @param path the relative path for which the text data file will be stored
+     * @throws IOException
+     */
     Storage(Path path) throws IOException {
         this.path = path;
         this.file = new File(path.toString());
@@ -40,11 +52,13 @@ public class Storage {
      * Loads a single line in storage into a given task.TaskList.
      *
      * It is assumed that a line in storage follows the format specified here:
-     * task_symbol | isDone | desc | addtl-arg1:values | addtl-arg2:value ...
+     * taskSymbol | isDone | desc | addtl-arg1:value | addtl-arg2:value ...
      *
      * For example, a project meeting task.Event from 1pm to 3pm marked done:
      * E | 1 | project meeting | from:1pm | to:3pm
      *
+     * @param tl empty TaskList, assuming this is executed upon startup of app.
+     * @return totalSuccess, the number of lines that have been successfully loaded into the tl.
      */
     public int loadIntoTaskList(TaskList tl) throws Exception {
 
@@ -93,6 +107,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Overwrites the storage file <strong>completely</strong> with data for the TaskList passed in.
+     * Thus, this should only be executed when the TaskList contains the right information.
+     *
+     * @param tl TaskList with updated data to be stored.
+     * @return int value of 1 is returned for successful writing of data.
+     * @throws Exception
+     */
     public int saveToStorage(TaskList tl) throws Exception {
         BufferedWriter br = new BufferedWriter(new FileWriter(this.file));
         for (Task task : tl.getAllTasks()) {

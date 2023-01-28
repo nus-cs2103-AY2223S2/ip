@@ -14,6 +14,16 @@ public class ListCommand extends Command {
         this.isSave = false;
     }
 
+    /**
+     * Lists the Tasks in the TaskList. If there are no tasks, replies with
+     * a different message instead.
+     * <br>
+     * Note that the tasks are numbered from 1 onwards. Order of tasks follows
+     * the indexing of the TaskList.
+     * @param tl
+     * @param ui
+     * @param storage
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) {
         List<Task> listTasks = tl.getAllTasks();

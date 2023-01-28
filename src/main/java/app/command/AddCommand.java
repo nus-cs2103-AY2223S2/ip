@@ -8,10 +8,20 @@ import app.task.Task;
 import app.task.TaskList;
 import app.task.TaskTypes;
 
+/**
+ * Functions as an executor to convert user-input arguments
+ * into a Task, and add into the TaskList.
+ */
 public class AddCommand extends Command {
     private Map<String, String> args;
     private TaskTypes.Type taskType;
 
+    /**
+     * Constructs an AddCommand.
+     * @param type type of Task as specified by TaskTypes
+     * @param args mapping of arguments needed for the Task and its arguments,
+     *             created by the Parser
+     */
     public AddCommand(TaskTypes.Type type, Map<String, String> args) {
         this.isExit = false;
         this.args = args;
@@ -19,6 +29,13 @@ public class AddCommand extends Command {
         this.isSave = true;
     }
 
+    /**
+     * Adds a Task into the TaskList and informs the user of the Task added.
+     * @param tl
+     * @param ui
+     * @param storage
+     * @throws Exception
+     */
     @Override
     public void execute(TaskList tl, Ui ui, Storage storage) throws Exception {
         try {
