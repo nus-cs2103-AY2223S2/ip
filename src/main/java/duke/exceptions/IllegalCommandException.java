@@ -2,6 +2,9 @@ package duke.exceptions;
 
 import duke.commands.Commands;
 
+/**
+ * Represents an exception thrown by Duke due to an unrecognized command found in the user's input.
+ */
 public class IllegalCommandException extends DukeException {
 
     private Commands c;
@@ -10,6 +13,11 @@ public class IllegalCommandException extends DukeException {
         this.c = c;
     }
 
+    /**
+     * Returns a string describing the IllegalCommandException, depending on the unrecognized command type.
+     *
+     * @return String representation of the IllegalCommandException.
+     */
     @Override
     public String toString() {
         switch (this.c) {
