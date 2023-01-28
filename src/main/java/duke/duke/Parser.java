@@ -17,14 +17,6 @@ import duke.exceptions.NoArgsException;
 import duke.tasks.Deadlines;
 import duke.tasks.Events;
 import duke.tasks.Todos;
-
-
-
-
-
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,8 +84,9 @@ public class Parser {
                 if (line.length == 1) {
                     throw new NoArgsException("deadline");
                 }
-                queries = this.queries(line, List.<String>of("from, to"));
-                c = new EventCommand(new Events(queries));
+                queries = this.queries(line, List.<String>of("from", "to"));
+                Events event = new Events(queries);
+                c = new EventCommand(event);
                 break;
 
             case "deadline":

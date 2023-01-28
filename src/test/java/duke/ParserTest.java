@@ -3,8 +3,10 @@ package duke;
 
 import duke.duke.Parser;
 import duke.exceptions.DukeException;
+import duke.tasks.Events;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParserTest {
@@ -14,12 +16,16 @@ public class ParserTest {
         System.out.println("Test1");
         Parser p = new Parser();
         String readLine =
-                "event hello /from 2000-01-01 00:00 /to 2000-01-02 00:01";
+                "event hello boss /from 2000-01-01 00:00 /to 2000-01-02 00:01";
+        ArrayList<String> str = new ArrayList<>();
         try {
-            System.out.println(p.queries(readLine.split(" "), List.<String>of("from", "to")));
+            str = p.queries(readLine.split(" "), List.<String>of("from", "to"));
+            System.out.println(str);
         } catch (DukeException err) {
             System.out.println("Exception");
         }
+
+
 
 
     }
