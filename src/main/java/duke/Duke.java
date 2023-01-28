@@ -80,6 +80,7 @@ public class Duke {
                 case "find":
                     this.find();
                     break;
+                case "q":
                 case "quit":
                 case "exit":
                 case "bye":
