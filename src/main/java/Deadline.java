@@ -1,10 +1,20 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate bydate = null;
+    protected LocalTime bytime = null;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        // eg. 2019-12-01 10:15
+        String[] strs = by.split(" ");
+        this.bydate = LocalDate.parse(strs[0]);
+        if (strs.length == 2) {
+            this.bytime = LocalTime.parse(strs[1]);
+        }
     }
 
     @Override
@@ -15,7 +25,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String result = "[D]" + super.toString() + " (by: "
+                + bydate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        if (bytime != null) {
+            result = result + " " + bytime.toString();
+        }
+        return result + ")";
     }
 
 }
