@@ -25,7 +25,7 @@ public class TodoTask extends DukeTask {
         if (this.getStatus()) {
             status = "[X] | ";
         }
-        return "[T] | " + status + this.getInformation();
+        return "[T] | " + status + this.getInformation().trim();
     }
 
     /**

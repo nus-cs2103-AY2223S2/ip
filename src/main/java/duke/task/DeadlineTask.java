@@ -55,7 +55,7 @@ public class DeadlineTask extends DukeTask {
     public String storageString() {
         // Format the task status, task information, and deadline into a single string
         String isCompleted = this.getStatus() ? "[X]" : "[ ]";
-        return String.format(STORAGE_FORMAT, isCompleted, this.getInformation().strip(),
+        return String.format(STORAGE_FORMAT, isCompleted, this.getInformation().trim(),
                 this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm")));
     }
 
@@ -68,7 +68,7 @@ public class DeadlineTask extends DukeTask {
     @Override
     public String toString() {
         String status = this.getStatus() ? "[X]" : "[ ]";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return String.format(FORMAT, status ,this.getInformation(), this.deadline.format(formatter));
     }
 }

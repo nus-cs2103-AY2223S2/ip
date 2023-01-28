@@ -63,7 +63,7 @@ public class EventTask extends DukeTask {
     @Override
     public String storageString() {
         String status = this.getStatus() ? "[X] | " : "[ ] | ";
-        return String.format(STORAGE_FORMAT, status, this.getInformation(), this.from, this.to);
+        return String.format(STORAGE_FORMAT, status, this.getInformation().trim(), this.from, this.to);
     }
 
     /**
@@ -89,7 +89,7 @@ public class EventTask extends DukeTask {
     @Override
     public String toString() {
         String status = this.getStatus() ? "[X]" : "[ ]";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return String.format(FORMAT, status,
                 this.getInformation(), this.from.format(formatter), this.to.format(formatter));
     }

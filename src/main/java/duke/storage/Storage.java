@@ -30,6 +30,7 @@ public class Storage {
     private final String TODO_TAG = "[T]";
     private final String DEADLINE_TAG = "[D]";
     private final String EVENT_TAG = "[E]";
+    private final String FIXED_DURATION_TAG = "[F]";
     private final String IS_DONE_TAG = "[X]";
     private final String NOT_DONE_TAG = "[ ]";
 
@@ -140,6 +141,9 @@ public class Storage {
                 // Decode the event task information
                 Decoder.decodeEvent(list, information[2], isDone, information[3], information[4]);
                 break;
+            case FIXED_DURATION_TAG:
+                Decoder.decodeFixedDuration(list, information[2], isDone, information[3]);
+                break;
             default:
                 // Throw an exception if the task tag is not recognized
                 throw new InvalidInputException("Unrecognized task tag: " + taskTag);
@@ -155,7 +159,8 @@ public class Storage {
     private void storageFormatChecker(String tag, String isDone) {
         // Type tag of event should be [T], [D], or [E]
         String errorMessage = "Type tag of event should be [T], [D], or [E]";
-        assert Objects.equals(tag, TODO_TAG) || Objects.equals(tag, DEADLINE_TAG) || Objects.equals(tag, EVENT_TAG)
+        assert Objects.equals(tag, TODO_TAG) || Objects.equals(tag, DEADLINE_TAG)
+                || Objects.equals(tag, EVENT_TAG) || Objects.equals(tag, FIXED_DURATION_TAG)
                 : errorMessage;
 
         // IsDone tag of event should be [ ], or [X]

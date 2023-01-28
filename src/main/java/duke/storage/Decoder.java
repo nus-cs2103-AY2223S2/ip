@@ -1,11 +1,10 @@
 package duke.storage;
 
 import duke.exception.InvalidInputException;
-import duke.parser.DateHandler;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
-import duke.task.TaskList;
-import duke.task.TodoTask;
+import duke.parser.TimeHandler;
+import duke.task.*;
+
+import java.time.Duration;
 
 /**
  * The Decoder class is responsible for decoding the information provided in the storage file and creating the
@@ -45,7 +44,7 @@ public class Decoder {
             throws InvalidInputException {
         // Create a new DeadlineTask with the given description and deadline date
         DeadlineTask deadline = new DeadlineTask(description.trim(),
-                DateHandler.parseToLocalDateTime(date));
+                TimeHandler.parseToLocalDateTime(date));
 
         // If the DeadlineTask is done, mark it as done
         if (isDone) {
@@ -69,8 +68,8 @@ public class Decoder {
     public static void decodeEvent(TaskList list, String description, boolean isDone, String from, String to)
             throws InvalidInputException {
         // Create a new EventTask with the given description and event dates
-        EventTask event = new EventTask(description.strip(), DateHandler.parseToLocalDateTime(from),
-                DateHandler.parseToLocalDateTime(to));
+        EventTask event = new EventTask(description.strip(), TimeHandler.parseToLocalDateTime(from),
+                TimeHandler.parseToLocalDateTime(to));
 
         // If the EventTask is done, mark it as done
         if (isDone) {
@@ -79,5 +78,19 @@ public class Decoder {
 
         // Add the EventTask to the given TaskList
         list.addTask(event);
+    }
+
+    public static void decodeFixedDuration(TaskList list, String description, boolean isDone, String duration) {
+        // Create a new DeadlineTask with the given description and deadline date
+        FixedDurationTask fixedDuration = new FixedDurationTask(description.trim(),
+                Duration.parse(duration));
+
+        // If the DeadlineTask is done, mark it as done
+        if (isDone) {
+            fixedDuration.markAsDone();
+        }
+
+        // Add the DeadlineTask to the given TaskList
+        list.addTask(fixedDuration);
     }
 }

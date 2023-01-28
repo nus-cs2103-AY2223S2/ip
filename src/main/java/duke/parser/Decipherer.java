@@ -4,8 +4,10 @@ import duke.command.*;
 import duke.exception.InvalidInputException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
+import duke.task.FixedDurationTask;
 import duke.task.TodoTask;
 
+import java.time.Duration;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -174,7 +176,7 @@ public class Decipherer {
                 String date = dateChecker.group("date").trim();
                 try {
                     // create a new DeadlineTask and return an AddTaskCommand with it
-                    return new AddTaskCommand(new DeadlineTask(name, DateHandler.parseToLocalDateTime(date)));
+                    return new AddTaskCommand(new DeadlineTask(name, TimeHandler.parseToLocalDateTime(date)));
                 } catch (DateTimeParseException e) {
                     // if the input date format is invalid, throw an exception
                     throw new InvalidInputException(ErrorMessage.INVALID_DATETIME_ERROR);
@@ -210,7 +212,7 @@ public class Decipherer {
                 try {
                     // create a new EventTask and return an AddTaskCommand with it
                     return new AddTaskCommand(
-                            new EventTask(name, DateHandler.parseToLocalDateTime(from), DateHandler.parseToLocalDateTime(to)));
+                            new EventTask(name, TimeHandler.parseToLocalDateTime(from), TimeHandler.parseToLocalDateTime(to)));
                 } catch (DateTimeParseException e) {
                     // if the input date format is invalid, throw an exception
                     throw new InvalidInputException(ErrorMessage.INVALID_DATETIME_ERROR);
@@ -255,7 +257,7 @@ public class Decipherer {
         } else {
             try {
                 // create a new ViewScheduleCommand with the date
-                return new ViewScheduleCommand(DateHandler.parseToLocalDate(information));
+                return new ViewScheduleCommand(TimeHandler.parseToLocalDate(information));
             } catch (DateTimeParseException e) {
                 // if the input date format is invalid, throw an exception
                 throw new InvalidInputException(ErrorMessage.INVALID_DATE_ERROR);
@@ -268,6 +270,29 @@ public class Decipherer {
             return new HelpCommand("normal");
         } else {
             return new HelpCommand(information);
+        }
+    }
+
+    public static Command parseFixedDurationCommand(String information) throws InvalidInputException {
+        if (!emptyStringChecker.matcher(information).matches()) {
+            throw new InvalidInputException(ErrorMessage.EMPTY_FIXED_DURATION_DESCRIPTION_ERROR);
+        } else {
+            // Use regular expression to extract the name and duration
+            Matcher durationChecker = Pattern.compile("(?<name>.*)/within\\s*(?<duration>.*)").matcher(information);
+
+            if (durationChecker.matches()) {
+                String name = durationChecker.group("name").trim();
+                String duration = durationChecker.group("duration").trim();
+                try {
+                    // create a new FixedDurationTask and return an AddTaskCommand with it
+                    return new AddTaskCommand(new FixedDurationTask(name, Duration.parse(duration)));
+                } catch (DateTimeParseException e) {
+                    throw new InvalidInputException(ErrorMessage.INVALID_DURATION_FORMAT);
+                }
+            } else {
+                // if the input format is incorrect, throw an exception
+                throw new InvalidInputException(ErrorMessage.INVALID_FIXED_DURATION_FORMAT_ERROR);
+            }
         }
     }
 }

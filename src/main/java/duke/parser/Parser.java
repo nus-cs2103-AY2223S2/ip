@@ -28,7 +28,8 @@ public class Parser {
         VIEW,
         UPDATE,
         UNDO,
-        FREE;
+        FREE,
+        FIXED;
     }
 
     /**
@@ -128,6 +129,9 @@ public class Parser {
             case TODO:
                 //create and return command to create to-do item using todoDecoder in Decipherer
                 return Decipherer.parseTodoCommand(information);
+            case FIXED:
+                //create and return command to create to-do item using todoDecoder in Decipherer
+                return Decipherer.parseFixedDurationCommand(information);
             case DEADLINE:
                 //create and return command to create deadline item using deadlineDecoder in Decipherer
                 return Decipherer.parseDeadlineCommand(information);

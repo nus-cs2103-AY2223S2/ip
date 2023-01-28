@@ -2,11 +2,12 @@ package duke.parser;
 
 import duke.exception.InvalidInputException;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class DateHandler {
+public class TimeHandler {
     //@@author Yufannn-reused
     //Reused from https://github.com/RussellDash332/ip/blob/master/src/main/java/stashy/parser/Parser.java
     //with minor modification, it is a pretty good way to organise and extend the acceptable date format.
@@ -72,6 +73,17 @@ public class DateHandler {
             }
         }
         throw new InvalidInputException(ErrorMessage.INVALID_DATETIME_ERROR);
+    }
+    //@@author
+
+    //@@author Yufannnn-reused
+    //Reused from https://stackoverflow.com/questions/3471397/how-can-i-pretty-print-a-duration-in-java
+    //with minor modification, a nice way to print out duration in a human-readable way
+    public static String humanReadableFormat(Duration duration) {
+        return duration.toString()
+                .substring(2)
+                .replaceAll("(\\d[HMS])(?!$)", "$1 ")
+                .toLowerCase();
     }
     //@@author
 }

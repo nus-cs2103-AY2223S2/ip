@@ -13,7 +13,7 @@
         <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="620.0" />
     </ScrollPane>
     <HBox layoutY="558.0" prefHeight="46.0" prefWidth="600.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <TextField fx:id="userInput" layoutY="358.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="500.0" promptText="How Can I Help You?" style="-fx-background-color: #fcfce3;" AnchorPane.bottomAnchor="1.0" HBox.hgrow="ALWAYS">
+        <TextField fx:id="userInput" layoutY="358.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="500.0" promptText="Hi, I am Mr. Bear. How can I help you?" style="-fx-background-color: #fcfce3;" AnchorPane.bottomAnchor="1.0" HBox.hgrow="ALWAYS">
             <font>
                 <Font name="Comic Sans MS Italic" size="14.0" />
             </font>

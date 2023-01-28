@@ -8,11 +8,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.Objects;
-
 public class HelpCommand extends Command {
     private enum helpType {
-        NORMAL, DATE, TIME
+        NORMAL, DATE, TIME, DURATION
     }
     private final helpType type;
 
@@ -29,7 +27,7 @@ public class HelpCommand extends Command {
     private final static String PROMPT = "All the command keywords are case insensitive!";
 
     private final String VALID_DATE_TIME_FORMAT =
-            "Here are all the valid date time format" +
+            "Here are all the valid date time format:\n\n" +
             "MMM d yyyy H:mm, MMM d yyyy HHmm\n" +
                     "MMM d yyyy HH:mm, yyyy-MM-d H:mm\n" +
                     "yyyy-MM-d HHmm, yyyy-MM-d HH:mm\n" +
@@ -44,38 +42,61 @@ public class HelpCommand extends Command {
                     "MMM d, yyyy HH:mm, d-MM-yyyy H:mm";
 
     private final String VALID_DATE_FORMAT =
-            "Here are all the valid date time format" +
+            "Here are all the valid date time format:\n\n" +
                     "MMM dd yyyy, yyyy-MM-dd\n" +
                     "dd/MM/yyyy, yyyy/MM/dd\n" +
                     "dd MMM yyyy, MMM dd, yyyy\n" +
                     "dd-mm-yyyy";
+
+    private final String VAILD_DURATION_FORMAT =
+            "Here is the correct format to input a duration:\n\n" +
+                    "\"PT20.345S\" -- parses as \"20.345 seconds\"\n" +
+            "\"PT15M\"     -- parses as \"15 minutes\" (where a minute is 60 seconds)\n" +
+            "\"PT10H\"     -- parses as \"10 hours\" (where an hour is 3600 seconds)\n" +
+            "\"P2D\"       -- parses as \"2 days\" (where a day is 24 hours or 86400 seconds)\n" +
+            "\"P2DT3H4M\"  -- parses as \"2 days, 3 hours and 4 minutes\"\n" +
+            "\"P-6H3M\"    -- parses as \"-6 hours and +3 minutes\"\n" +
+            "\"-P6H3M\"    -- parses as \"-6 hours and -3 minutes\"\n" +
+            "\"-P-6H+3M\"  -- parses as \"+6 hours and -3 minutes\"\n\n" +
+            "The letter \"P\" is next in upper or lower case. There are then four sections, " +
+            "each consisting of a number and a suffix. The sections have suffixes in ASCII of \"D\", \"H\", " +
+            "\"M\" and \"S\" for days, hours, minutes and seconds, accepted in upper or lower case. " +
+            "The suffixes must occur in order. The ASCII letter \"T\" must occur before the first occurrence, " +
+            "if any, of an hour, minute or second section. At least one of the four sections must be present, " +
+            "and if \"T\" is present there must be at least one section after the \"T\". The number part of each " +
+            "section must consist of one or more ASCII digits. The number may be prefixed by the ASCII negative" +
+            "or positive symbol. The number of days, hours and minutes must parse to an long. The number of " +
+            "seconds must parse to an long with optional fraction. The decimal point may be either a dot or a comma. " +
+            "The fractional part may have from zero to 9 digits.";
 
     /**
      * Enum to represent the different types of commands supported by the application
      */
     private enum CommandType {
         BYE("bye", "Exit the program"),
-        DEADLINE("deadline [description] /by [date time]", "Add a deadline event with its " +
+        DEADLINE("deadline [description] /by [date time]", "Add a deadline task with its " +
                 "deadline specified, type \"help time\" to check all the available date format"),
         DELETE("delete [taskIndex]", "Delete the task specified by the given index"),
-        EVENT("event [description] /by [date time] /from [date time]", "Add a deadline event " +
+        EVENT("event [description] /by [date time] /from [date time]", "Add a event task " +
                 "with its starting and ending date specified, type \"help time\" " +
                 "to check all the available date format"),
         FIND("find [keyword]", "List all the events that matches the input keyword. " +
                 "(case insensitive)"),
+        FIXED("fixed [description] /within [duration]", "Add a fixed duration task with its " +
+                "duration specified, type \"help time\" to check the correct format of a duration"),
         Free("free","Find the next free date in the next month"),
         HELP("help", "Show help menu"),
         LIST("list", "Display all tasks in the current Task List"),
         MARK("mark [taskIndex]", "Mark the task specified by the given index as done"),
         MASS_DELETE("massDelete", "Delete all the tasks that have been marked as done"),
-        VIEW("view [date]", "List all the Deadline tasks and Event tasks that takes " +
-                "place on the given day, type \"help date\" to check all the available date format"),
+        TODO("todo [description]", "Add a todo task"),
         UNMARK("unmark [taskIndex]", "Mark the task specified by the given index as undone"),
         UPDATE("update [taskIndex] [description]", "Update the description of the task specified " +
                 "by the given index to be the new description"),
-        TODO("todo [description]", "Add a todo event");
+        VIEW("view [date]", "List all the Deadline tasks and Event tasks that takes " +
+                "place on the given day, type \"help date\" to check all the available date format");
 
-        private final String command;
+    private final String command;
         private final String description;
 
         /**
@@ -135,6 +156,8 @@ public class HelpCommand extends Command {
             ui.appendResponse(VALID_DATE_FORMAT);
         } else if (type == helpType.TIME) {
             ui.appendResponse(VALID_DATE_TIME_FORMAT);
+        } else if (type == helpType.DURATION) {
+            ui.appendResponse(VAILD_DURATION_FORMAT);
         }
     }
 }
