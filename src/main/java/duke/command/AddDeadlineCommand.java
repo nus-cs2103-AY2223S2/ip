@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.TaskList;
+import duke.ui.Ui;
 import java.io.IOException;
 
 public class AddDeadlineCommand extends Command {
@@ -12,7 +18,7 @@ public class AddDeadlineCommand extends Command {
         this.time = time;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Deadline t = new Deadline(desc, date, time);
         tasks.add(t);
         ui.showBunny();

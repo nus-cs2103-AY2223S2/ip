@@ -1,10 +1,15 @@
+package duke.ui;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
 
     private final Scanner sc = new Scanner(System.in);
     public boolean firstTime = false;
-    void showWelcome() {
+    public void showWelcome() {
         System.out.println("૮₍ ˃ ᵕ ˂ ₎ა");
         System.out.println("Hello! I'm Duke, your favourite pink bunny.");
         System.out.println("What can I do for you today?");
@@ -15,16 +20,16 @@ public class Ui {
         }
     }
 
-    String readCommand() {
+    public String readCommand() {
         return sc.nextLine();
     }
-    void showBunny() {
+    public void showBunny() {
         System.out.println("(\\ (\\\n" +
                 "(„• ֊ •„) ♡\n" +
                 "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     }
 
-    void showError(Exception err) {
+    public void showError(Exception err) {
         String msg = err.getMessage();
         System.out.println(msg);
         if (msg.equals("Hmm, your command format's a little off!")) {
@@ -40,27 +45,27 @@ public class Ui {
         }
     }
 
-    void sayBye() {
+    public void sayBye() {
         System.out.println("Bye bye :( Hope to see you again soon!");
     }
 
-    void mark(Task t) {
+    public void mark(Task t) {
         System.out.println("Okie! I've marked this task as done:");
         System.out.println(t);
     }
 
-    void unmark(Task t) {
+    public void unmark(Task t) {
         System.out.println("Okie! I've marked this task as not done yet:");
         System.out.println(t);
     }
 
-    void add(Task t, TaskList tasks) {
+    public void add(Task t, TaskList tasks) {
         System.out.println("Alright! I've added this task:");
         System.out.println(t);
         showTaskListStatus(tasks);
     }
 
-    void delete(Task t, TaskList tasks) {
+    public void delete(Task t, TaskList tasks) {
         System.out.println("Okie! I've removed this task:");
         System.out.println(t);
         showTaskListStatus(tasks);
@@ -74,7 +79,7 @@ public class Ui {
         }
     }
 
-    void list(TaskList tasks) {
+    public void list(TaskList tasks) {
         if (tasks.isEmpty()) {
             System.out.println("Your list is currently empty!");
         } else {

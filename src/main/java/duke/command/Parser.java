@@ -1,6 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidCommandException;
+
 public class Parser {
 
-    static Command parse(String line) throws DukeException {
+    public static Command parse(String line) throws DukeException {
         String[] chunked = line.split(" ");
         String command = chunked[0];
         if (command.equals("bye")) {

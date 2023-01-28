@@ -1,7 +1,11 @@
+package duke.storage;
+
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -10,11 +14,11 @@ public class Storage {
     private final String dirPath;
     private final String filePath;
 
-    Storage(String dirPath) {
+    public Storage(String dirPath) {
         this.dirPath = dirPath;
         this.filePath = dirPath + "tasks.txt";
     }
-    ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() throws FileNotFoundException {
         File file = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<Task>();
 
@@ -51,7 +55,7 @@ public class Storage {
         fw.close();
     }
 
-    void saveTasks(TaskList tasks) throws IOException {
+    public void saveTasks(TaskList tasks) throws IOException {
 
         File file = new File(filePath);
         File dir = new File(dirPath);

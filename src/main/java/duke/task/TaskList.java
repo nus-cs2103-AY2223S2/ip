@@ -1,18 +1,22 @@
+package duke.task;
+
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidArgumentException;
 import java.util.ArrayList;
 
 public class TaskList {
 
     private final ArrayList<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    String generateTaskDetails() {
+    public String generateTaskDetails() {
         String str = "";
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
@@ -24,15 +28,15 @@ public class TaskList {
         return str;
     }
 
-    Task get(int num) {
+    public Task get(int num) {
         return tasks.get(num);
     }
 
-    int size() {
+    public int size() {
         return tasks.size();
     }
 
-    Task mark(int num) throws DukeException {
+    public Task mark(int num) throws DukeException {
         Task t = tasks.get(num);
         if (t.isDone()) {
             throw new DukeInvalidArgumentException("Huh? You've already done this task!");
@@ -42,7 +46,7 @@ public class TaskList {
         return t;
     }
 
-    Task unmark(int num) throws DukeException {
+    public Task unmark(int num) throws DukeException {
         Task t = tasks.get(num);
         if (!t.isDone()) {
             throw new DukeInvalidArgumentException("Huh? You haven't even done this task!");
@@ -52,17 +56,17 @@ public class TaskList {
         return t;
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         tasks.add(task);
     }
 
-    Task delete(int num) {
+    public Task delete(int num) {
         Task t = tasks.get(num - 1);
         tasks.remove(num - 1);
         return t;
     }
 
-    boolean isEmpty() {
+    public boolean isEmpty() {
         return tasks.isEmpty();
     }
 }

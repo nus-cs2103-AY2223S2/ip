@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.ui.Ui;
 import java.io.IOException;
 
 public class AddEventCommand extends Command {
@@ -16,7 +22,7 @@ public class AddEventCommand extends Command {
         this.timeTo = timeTo;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Event t = new Event(desc, dateFrom, timeFrom, dateTo, timeTo);
         tasks.add(t);
         ui.showBunny();
