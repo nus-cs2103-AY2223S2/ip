@@ -27,7 +27,6 @@ public class Storage {
                 }
                 scanner.close();
                 taskList.loadTasks(taskArray);
-//                System.out.println("Retrieved saved tasks from storage");
             } catch (IOException e) {
                 throw new DukeException("Error when loading from save");
             }
@@ -41,9 +40,7 @@ public class Storage {
             FileWriter myWriter = new FileWriter(SAVE_DIR + SAVE_NAME);
             myWriter.write(taskList.encode());
             myWriter.close();
-//            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
-//            System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
