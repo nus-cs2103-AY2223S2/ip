@@ -3,7 +3,6 @@ package berry.ui;
 import berry.task.Task;
 import berry.task.TaskList;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,7 +43,6 @@ public class Ui {
     public static void showError(String message) {
         System.out.println(message);
     }
-
 
     public static void showListOfTasks(TaskList tasks) {
         ArrayList<Task> listOfTasks = tasks.getList();
