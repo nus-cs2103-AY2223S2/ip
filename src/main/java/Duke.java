@@ -33,18 +33,23 @@ public class Duke {
                     }
                     ToDo newToDo = new ToDo(inp.substring(5));
                     toDoList.add(newToDo);
-                } else if (inpArr[0].equals("deadline")) {
+                    System.out.println("added >.<");
+                } else if (inpArr[0].equals("deadline")) { // need to handle exception
                     String[] processedString = stringProcessor(true, inp.substring(9));
                     Deadline newDeadline = new Deadline(processedString[0], processedString[1]);
                     toDoList.add(newDeadline);
-                } else if (inpArr[0].equals("event")){
+                    System.out.println("added >.<");
+                } else if (inpArr[0].equals("event")){ // need to handle exception
                     String[] processedString = stringProcessor(false, inp.substring(6));
                     Event newEvent = new Event(processedString[0], processedString[1], processedString[2]);
                     toDoList.add(newEvent);
+                    System.out.println("added >.<");
+                } else if (inpArr[0].equals("delete")){ // need to handle exception
+                    toDoList.remove(Integer.parseInt(inpArr[1])-1);
+                    System.out.println("deleted *.*");
                 } else {
                     throw new DukeException("Invalid Input!");
                 }
-                System.out.println("added >.<");
             }
             inp = myObj.nextLine();
             inpArr = inp.split(" ");
