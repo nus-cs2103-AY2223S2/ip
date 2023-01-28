@@ -24,15 +24,15 @@ public class ListCommand extends Command {
     public ListCommand(String body, List<Command> subCommands) {
         super(Action.LIST, body, subCommands);
 
-        String afterDate = null;
-        String beforeDate = null;
-        for (Command command : subCommands) {
-            if (command.hasAction(Action.DEADLINE_BY, Action.EVENT_TO) && beforeDate == null) {
-                beforeDate = command.getBody();
-            } else if (command.hasAction(Action.EVENT_FROM) && afterDate == null) {
-                afterDate = command.getBody();
-            }
-        }
+        Command fromCommand = this.getSubCommand(Action.EVENT_FROM);
+        Command toCommand = this.getSubCommand(Action.DEADLINE_BY, Action.EVENT_TO);
+        String afterDate = Command.hasBody(fromCommand)
+                ? fromCommand.getBody()
+                : null;
+        String beforeDate = Command.hasBody(toCommand)
+                ? toCommand.getBody()
+                : null;
+
         try {
             this.filter = new TaskFilter()
                     .setAfterDate(afterDate)

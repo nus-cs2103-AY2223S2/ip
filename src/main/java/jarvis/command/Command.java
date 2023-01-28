@@ -57,6 +57,8 @@ public abstract class Command {
                     }
                 }
             }
+
+            // String does not match any keyword.
             throw new InvalidActionException("Invalid action string");
         }
     }
@@ -90,6 +92,18 @@ public abstract class Command {
         for (Command command : subCommands) {
             this.commandMap.put(command.action, command);
         }
+    }
+
+    /**
+     * Determines whether the given command has a body.
+     *
+     * @param command Command of interest.
+     * @return Whether the command has a body.
+     */
+    public static boolean hasBody(Command command) {
+        return command != null
+                && command.body != null
+                && !command.body.isBlank();
     }
 
     /**
@@ -129,12 +143,18 @@ public abstract class Command {
     }
 
     /**
-     * Returns the subcommand with the given action, if any.
+     * Returns the subcommand with the first matching action, if any.
      *
-     * @param action Action of the subcommand.
-     * @return Command with the associated action.
+     * @param actions Arrays of actions.
+     * @return Command with the first matching action.
      */
-    public Command getSubCommand(Action action) {
-        return this.commandMap.getOrDefault(action, null);
+    public Command getSubCommand(Action ...actions) {
+        for (Action action : actions) {
+            Command subCommand = this.commandMap.getOrDefault(action, null);
+            if (subCommand != null) {
+                return subCommand;
+            }
+        }
+        return null;
     }
 }

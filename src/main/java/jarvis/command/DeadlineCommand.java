@@ -21,7 +21,7 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         Command byCommand = this.getSubCommand(Action.DEADLINE_BY);
-        if (byCommand == null || byCommand.getBody() == null) {
+        if (!Command.hasBody(byCommand)) {
             ui.printError("The deadline ('/by ...') is missing.");
             return;
         }
