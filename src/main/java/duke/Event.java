@@ -107,6 +107,11 @@ public class Event extends Task {
         return "E / " + getStatusNum() + " / " + getDesc() + " / " + from + " / " + to;
     }
 
+    /**
+     * Returns the details of the Event task.
+     *
+     * @return Details of the Event task.
+     */
     @Override
     public String toString() {
         if (fromTime.isEmpty() && toTime.isEmpty()) {

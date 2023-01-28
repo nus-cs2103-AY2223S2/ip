@@ -96,6 +96,11 @@ public class TaskList {
         return new TaskList(newList);
     }
 
+    /**
+     * Returns the tasks in the task list.
+     *
+     * @return Tasks in the task list.
+     */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

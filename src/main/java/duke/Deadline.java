@@ -85,6 +85,11 @@ public class Deadline extends Task {
         return "D / " + getStatusNum() + " / " + getDesc() + " / " + by;
     }
 
+    /**
+     * Returns the details of the Deadline task.
+     *
+     * @return Details of the Deadline task.
+     */
     @Override
     public String toString() {
         if (byTime.isEmpty()) {
