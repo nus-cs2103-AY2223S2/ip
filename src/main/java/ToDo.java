@@ -4,6 +4,13 @@ public class ToDo extends Task {
         super(s);
     }
 
+    public ToDo(Boolean isTaskDone, String taskDetails) {
+        super(taskDetails);
+        if (isTaskDone) {
+            this.markDone();
+        }
+    }
+
     @Override
     public String toString() {
         if (!taskDone) {

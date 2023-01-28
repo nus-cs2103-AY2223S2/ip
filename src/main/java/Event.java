@@ -9,6 +9,15 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    public Event(Boolean isTaskDone, String taskDetails, String taskDate) {
+        super(taskDetails);
+        if (isTaskDone) {
+            this.markDone();
+        }
+        this.startTime = taskDate;
+        this.endTime = taskDate;
+    }
+
     @Override
     public String toString() {
         if (!taskDone) {

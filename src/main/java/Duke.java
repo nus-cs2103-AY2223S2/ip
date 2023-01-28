@@ -22,6 +22,34 @@ public class Duke {
         Files.createDirectories(Paths.get(home,"data")); //create directory if it does not exist
         Path filePath = Paths.get(home,"data", "duke.txt");
 
+        String[] savedTask = Files.readString(filePath).split("\n");
+        Boolean isTaskDone;
+        String taskDetails, taskDate;
+        for (String s : savedTask) {
+            switch (decodeTaskType(s)) {
+                case 'T':
+                    isTaskDone = getIsTaskDone(s);
+                    taskDetails = getTaskDetails(s);
+                    storedInputs.add(new ToDo(isTaskDone, taskDetails));
+                    break;
+
+                case 'D':
+                    isTaskDone = getIsTaskDone(s);
+                    taskDetails = getTaskDetails(s);
+                    taskDate = getTaskDate(s);
+                    storedInputs.add(new Deadline(isTaskDone, taskDetails, taskDate));
+                    break;
+                case 'E':
+                    isTaskDone = getIsTaskDone(s);
+                    taskDetails = getTaskDetails(s);
+                    taskDate = getTaskDate(s);
+                    storedInputs.add(new Event(isTaskDone, taskDetails, taskDate));
+                    break;
+                }
+            }
+
+        System.out.println(printList());
+
         loop: while (true) {
 
             userInput = askForInput();
@@ -67,6 +95,33 @@ public class Duke {
         }
 
         System.out.println(outro());
+    }
+
+    private static char decodeTaskType(String s) {
+        return s.charAt(0);
+    }
+
+    private static Boolean getIsTaskDone(String s) {
+        String line = s.substring(s.indexOf("|") + 1);
+        return line.substring(0, line.indexOf("|")).equals("X");
+    }
+
+    private static String getTaskDetails(String s) {
+        String line = s.substring(s.indexOf("|") + 1);
+        line = line.substring(line.indexOf("|") + 1);
+
+        if (!line.contains("|")) {
+            return line;
+        }
+
+        return line.substring(0, line.indexOf("|"));
+    }
+
+    private static String getTaskDate(String s) {
+        String line = s.substring(s.indexOf("|") + 1);
+        line = line.substring(line.indexOf("|") + 1);
+        line = line.substring(line.indexOf("|") + 1);
+        return line;
     }
 
     private static String logo() {

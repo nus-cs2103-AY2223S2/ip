@@ -7,6 +7,14 @@ public class Deadline extends Task {
         this.endTime = endTime;
     }
 
+    public Deadline(Boolean isTaskDone, String taskDetails, String taskDate) {
+        super(taskDetails);
+        if (isTaskDone) {
+            this.markDone();
+        }
+        this.endTime = taskDate;
+    }
+
     @Override
     public String toString() {
         if (!taskDone) {
