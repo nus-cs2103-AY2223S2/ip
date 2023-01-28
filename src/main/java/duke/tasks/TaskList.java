@@ -1,12 +1,26 @@
 package duke.tasks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
  * A list of tasks.
  */
 public class TaskList extends ArrayList<Task> {
+    public TaskList() {
+
+    }
+
+    public TaskList(Collection<? extends Task> tasks) {
+        super(tasks);
+    }
+    
+    public TaskList(Task[] tasks) {
+        super(Arrays.asList(tasks));
+    }
+
     /**
      * Gets the summary status message to be displayed in Duke. 
      * 
@@ -41,7 +55,7 @@ public class TaskList extends ArrayList<Task> {
         }
         
         int listIndex = 1;
-        StringBuilder output = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder output = new StringBuilder();
         for (Task task : this) {
             output.append(listIndex + ". " + task.toString() + "\n");
             listIndex++;
