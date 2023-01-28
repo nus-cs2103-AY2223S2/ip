@@ -8,6 +8,10 @@ public class Event extends Task {
         this.to = to;
     }
 
+    public String getFileRepresentation() {
+        return "event " + this.isDone + " " + this.description + " /from " + this.from + " /to " + this.to;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";

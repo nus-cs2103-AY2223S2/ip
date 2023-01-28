@@ -19,6 +19,8 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public abstract String getFileRepresentation();
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
