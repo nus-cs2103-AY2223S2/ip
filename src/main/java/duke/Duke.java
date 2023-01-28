@@ -1,9 +1,12 @@
 package duke;
 
+/**
+ * Entry point
+ */
 public class Duke {
-    public static void main(String[] args) {
-        String SAVE_FOLDER = "data/save.txt";
+    static final String SAVE_FOLDER = "data/save.txt";
 
+    public static void main(String[] args) {
         Ui ui = new Ui();
         Storage storage = new Storage(SAVE_FOLDER);
         ui.showWelcome();

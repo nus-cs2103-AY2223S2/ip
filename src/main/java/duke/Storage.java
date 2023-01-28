@@ -37,8 +37,7 @@ public class Storage {
      */
     TaskList load() {
         try (FileInputStream fileInputStream = new FileInputStream(
-                SAVE_PATH); ObjectInputStream objectInputStream = new ObjectInputStream(
-                fileInputStream)) {
+                SAVE_PATH); ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             return (TaskList) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException | ClassCastException e) {
             System.out.println("No save file");

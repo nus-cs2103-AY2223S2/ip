@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    LocalDate from;
-    LocalDate to;
+    private LocalDate from;
+    private LocalDate to;
 
     public Event(String desc, String from, String to) throws TaskCreationException {
         super(desc);
