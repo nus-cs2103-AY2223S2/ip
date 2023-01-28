@@ -23,7 +23,7 @@ public class AvaUI {
     private final String EXIT_MESSAGE = "Have a nice day !!";
 
     //App Variables
-    private TaskList tasks = new TaskList();
+    private TaskList tasks;
 
     /**
      * Calls the Intialisation function
@@ -36,24 +36,25 @@ public class AvaUI {
      * Intialises the UI
      */
     public void intialise() {
+        try {
         this.displayIntro();
         Scanner myObj = new Scanner(System.in);
-
+        this.tasks = new TaskList();
         while (true) {
             try {
                 this.ask();
                 String input = myObj.nextLine().toLowerCase();
                 String output = "";
-                if (input.contains("bye")){
+                if (input.contains("bye")) {
                     this.displayExit();
                     break;
-                } else if(input.contains("list")) {
+                } else if (input.contains("list")) {
                     output = this.LIST_MESSAGE + "\n" + this.tasks.formatTasks(FORMAT_SPACE);
-                } else if (input.contains("unmark")){
+                } else if (input.contains("unmark")) {
                     output = this.UNMARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
                 } else if (input.contains("mark")) {
                     output = this.MARK_TASK_MESSAGE + "\n" + this.tasks.toggleTask(input, FORMAT_SPACE);
-                }  else if(input.contains("delete")) {
+                } else if (input.contains("delete")) {
                     output = this.DELETE_TASK_MESSAGE + "\n" + this.tasks.deleteTask(input, FORMAT_SPACE);
                 } else {
                     output = this.ADD_TASK_MESSAGE + "\n" + this.tasks.addTasks(input, FORMAT_SPACE);
@@ -62,6 +63,9 @@ public class AvaUI {
             } catch (AvaException e){
                 this.displayOutput(e.getMessage());
             }
+        }
+        } catch (AvaException e){
+            this.displayOutput(e.getMessage());
         }
     }
 

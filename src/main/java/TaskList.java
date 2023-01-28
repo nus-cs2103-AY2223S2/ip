@@ -1,4 +1,6 @@
+import Exceptions.AvaException;
 import Exceptions.CommandNotFoundException;
+import Exceptions.DateTimeNotParsed;
 import Exceptions.NonExistentTask;
 import Tasks.Deadline;
 import Tasks.Event;
@@ -11,34 +13,38 @@ import java.util.ArrayList;
 public class TaskList {
     private  ArrayList<Task> tasks = new ArrayList<>();
     private int taskCount = 0;
+    private String FILE_NAME = "tasks.txt";
+
 
     /**
      * Adds Task to the List , and returns the success Message
      * @param input
      * @return
      */
-    public String addTasks(String input,String formatSpace) throws CommandNotFoundException{
-        String[] splitCommand = input.trim().split(" ", 2);
-        String command = splitCommand[0].toLowerCase();
-        if (splitCommand.length == 1) {
+    public String addTasks(String input,String formatSpace) throws AvaException {
+        try {
+            String[] splitCommand = input.trim().split(" ", 2);
+            String command = splitCommand[0].toLowerCase();
+            String message = splitCommand[1];
+            Task newTask = null;
+            if (command.equals("todo")) {
+                newTask = new Todo(message);
+            } else if (command.equals("deadline")) {
+                String[] parsedMessage = this.parseDeadline(message);
+                newTask = new Deadline(parsedMessage[0], parsedMessage[1]);
+            } else if (command.equals("event")) {
+                String[] parsedMessage = this.parseEvent(message);
+                newTask = new Event(parsedMessage[0], parsedMessage[1], parsedMessage[2]);
+            } else {
+                // Throw Error
+                throw new CommandNotFoundException(input);
+            }
+            tasks.add(newTask);
+            taskCount++;
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new CommandNotFoundException(input);
         }
-        String message = splitCommand[1];
-        Task newTask = null;
-        if (command.equals("todo")) {
-            newTask = new Todo(message);
-        } else if (command.equals("deadline")) {
-            String[] parsedMessage = this.parseDeadline(message);
-            newTask = new Deadline(parsedMessage[0] , parsedMessage[1]);
-        } else if (command.equals("event")) {
-            String[] parsedMessage = this.parseEvent(message);
-            newTask = new Event(parsedMessage[0] , parsedMessage[1], parsedMessage[2]);
-        } else {
-            // Throw Error
-            throw new CommandNotFoundException(input);
-        }
-        tasks.add(newTask);
-        taskCount++;
+
         return formatSpace + tasks.get(taskCount - 1).getRepresentation();
     }
 

@@ -1,20 +1,25 @@
 package Tasks;
 
+import Exceptions.DateTimeNotParsed;
 import Tasks.Task;
+
 
 public class Deadline extends Task {
     private final String TASK_SIGN = "[D]";
     private String by;
+    private TimeParser tpBy;
 
-    public Deadline(String message, String by){
+    public Deadline(String message, String by) throws DateTimeNotParsed {
         super(message);
         this.by = by;
+        this.tpBy = new TimeParser(this.by);
     }
 
     @Override
     public String getMessage(){
-        return this.message + " (by: " + this.by + ")";
+        return this.message + " (BY: " + this.tpBy + ")";
     }
+
 
     @Override
     public String getRepresentation(){
