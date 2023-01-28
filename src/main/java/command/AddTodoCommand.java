@@ -4,6 +4,10 @@ import dukeException.MissingArgumentException;
 import storage.TaskList;
 import task.Todo;
 
+/**
+ * Class use to handle command: add todo.
+ * Allows user to add todo task into the task list.
+ */
 public class AddTodoCommand extends Command {
     private String request;
 

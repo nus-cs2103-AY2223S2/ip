@@ -8,6 +8,10 @@ import dukeException.MissingArgumentException;
 import storage.TaskList;
 import task.Event;
 
+/**
+ * Class use to handle command: add event.
+ * Allows user to add event into the task list.
+ */
 public class AddEventCommand extends Command {
 
     private String request;

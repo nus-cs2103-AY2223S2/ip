@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Todo item of the user.
+ */
 public class Todo extends Task {
 
     /**

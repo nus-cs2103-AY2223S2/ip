@@ -4,6 +4,10 @@ import dukeException.IndexOutOfBoundException;
 import dukeException.MissingArgumentException;
 import storage.TaskList;
 
+/**
+ * Class use to handle command: mark task as done.
+ * Allows user to mark specific in the task list as done.
+ */
 public class MarkCommand extends Command {
     private String request;
 

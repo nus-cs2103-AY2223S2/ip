@@ -4,6 +4,10 @@ import dukeException.IndexOutOfBoundException;
 import dukeException.MissingArgumentException;
 import storage.TaskList;
 
+/**
+ * Class use to handle command: unmark task.
+ * Allows user to unmark specific task in the task list.
+ */
 public class UnmarkCommand extends Command {
     private String request;
 

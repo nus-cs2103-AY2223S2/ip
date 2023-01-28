@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * UI to print the response after performing action.
+ */
 public class UI {
 
     /**

@@ -8,6 +8,10 @@ import dukeException.MissingArgumentException;
 import storage.TaskList;
 import task.Deadline;
 
+/**
+ * Class use to handle command: add deadline.
+ * Allows user to add deadline into the task list.
+ */
 public class AddDeadlineCommand extends Command {
 
     private String request;

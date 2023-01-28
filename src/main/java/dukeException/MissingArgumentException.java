@@ -1,5 +1,8 @@
 package dukeException;
 
+/**
+ * Exception for when user missed out arguments that are supposed to be in the command.
+ */
 public class MissingArgumentException extends DukeException {
 
     /**

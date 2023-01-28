@@ -1,5 +1,9 @@
 package dukeException;
 
+/**
+ * Exception for when users keyed in an unknown command.
+ * Duke doesn't know what to do.
+ */
 public class UnknownCommandException extends DukeException {
 
     /**

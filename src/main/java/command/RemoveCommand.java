@@ -4,6 +4,10 @@ import dukeException.IndexOutOfBoundException;
 import dukeException.MissingArgumentException;
 import storage.TaskList;
 
+/**
+ * Class use to handle command: delete task.
+ * Allows user to delete specific task from the task list.
+ */
 public class RemoveCommand extends Command {
     private String request;
 

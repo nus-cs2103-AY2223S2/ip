@@ -2,6 +2,9 @@ package command;
 
 import storage.TaskList;
 
+/**
+ * Abstract class that is the parent class for all commands.
+ */
 public abstract class Command {
     /**
      * abstract method to execute the user's request and return the response

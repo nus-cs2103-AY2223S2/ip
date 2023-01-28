@@ -9,6 +9,9 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+/**
+ * List to keep track of user's tasks.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -21,6 +24,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor to instantiate new task list with data from local file prepended.
+     * @param file
+     */
     public TaskList(File file) {
         this.tasks = new ArrayList<>();
         this.file = file;

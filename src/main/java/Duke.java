@@ -6,6 +6,9 @@ import parser.Parser;
 import storage.LocalStorage;
 import storage.TaskList;
 
+/**
+ * Duke Chat Bot!
+ */
 public class Duke {
 
     private TaskList tasks;
