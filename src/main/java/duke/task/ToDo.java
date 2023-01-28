@@ -7,6 +7,9 @@ import duke.utilities.Parser;
  */
 public class ToDo extends Task {
 
+    /**
+     * The Raw input.
+     */
     public final String rawInput;
 
     /**

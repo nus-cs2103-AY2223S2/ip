@@ -6,26 +6,43 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.print.PrinterAbortException;
 import java.util.Objects;
 
+/**
+ * The type Duke gui.
+ */
 public class Duke_GUI extends Application {
-    private final Image user = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Handsome.jpg")));
-    private final Image duke = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.jpg")));
+    private final Image user = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/User.png")));
+    private final Image duke = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/duke.png")));
+    /**
+     * The Input.
+     */
     public String input;
+    /**
+     * The Output.
+     */
     public String output;
+    /**
+     * The Dialog contrainer.
+     */
     VBox dialogContrainer = new VBox();
+    /**
+     * The User input.
+     */
     TextField userInput = new TextField();
 
     @Override
-    public void start(Stage stage)  {
+    public void start(Stage stage) {
         ScrollPane scrollPane = new ScrollPane();
 
         scrollPane.setContent(dialogContrainer);
@@ -79,8 +96,6 @@ public class Duke_GUI extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
-
-
     }
 
     private Label getDialogLabel(String text) {
@@ -92,7 +107,7 @@ public class Duke_GUI extends Application {
     }
 
     @FXML
-    private void handleUserInput(){
+    private void handleUserInput() {
         input = userInput.getText();
         output = getResponse(input);
 
@@ -101,23 +116,31 @@ public class Duke_GUI extends Application {
                 DialogBox.getDukeDialog(output, duke)
         );
         userInput.clear();
+        //close();
     }
 
-    private void welcome(){
-        input = "Lets Go buddy\n";
+    private void welcome() {
         output = Parser.WRONG_INPUT;
 
         dialogContrainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, user),
                 DialogBox.getDukeDialog(output, duke)
         );
         userInput.clear();
     }
 
+    private void close() {
+        Platform.exit();
+        System.exit(0);
+    }
 
+    /**
+     * Gets response.
+     *
+     * @param input the input
+     * @return the response
+     */
     String getResponse(String input) {
         return menu.In_Out(input);
-        //+ input;
     }
 
 }

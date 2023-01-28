@@ -8,7 +8,13 @@ import duke.utilities.Parser;
 public class menu {
     static TaskList manager = new TaskList("/Users/s.f/ip/src/Data/duke.txt");
 
-    public static String In_Out(String input){
+    /**
+     * In out string.
+     *
+     * @param input the input
+     * @return the string
+     */
+    public static String In_Out(String input) {
         String[] tokens = input.split(" ");
         String without_key = input.replace(tokens[0], "");
         switch (tokens[0]) {
@@ -32,7 +38,7 @@ public class menu {
 
             case "deadline":
                 Deadlines deadlines = new Deadlines(without_key, false);
-               return manager.gui_add(deadlines);
+                return manager.gui_add(deadlines);
 
 
             case "event":
@@ -41,10 +47,10 @@ public class menu {
 
 
             case "delete":
-               return manager.gui_delete(Integer.parseInt(tokens[1]) - 1);
+                return manager.gui_delete(Integer.parseInt(tokens[1]) - 1);
 
             case "find":
-               return manager.gui_find(without_key);
+                return manager.gui_find(without_key);
             default:
                 return Parser.WRONG_INPUT;
         }

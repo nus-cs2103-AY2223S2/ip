@@ -7,8 +7,17 @@ import duke.utilities.Parser;
  */
 public class Events extends Task {
 
+    /**
+     * The Raw input.
+     */
     public final String rawInput;
+    /**
+     * The Start.
+     */
     String start;
+    /**
+     * The End.
+     */
     String end;
 
     /**

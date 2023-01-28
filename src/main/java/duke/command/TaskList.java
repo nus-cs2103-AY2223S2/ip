@@ -34,7 +34,13 @@ public class TaskList {
         init();
     }
 
-    public String gui_add(Task input){
+    /**
+     * Gui add string.
+     *
+     * @param input the input
+     * @return the string
+     */
+    public String gui_add(Task input) {
         try {
             String str;
             if (input.taskName.equals("") || input.taskName.equals(" ")) {
@@ -66,6 +72,11 @@ public class TaskList {
         return null;
     }
 
+    /**
+     * Gui display all string.
+     *
+     * @return the string
+     */
     public String gui_displayAll() {
         System.out.println(Parser.THE_TASKS_IN_YOUR_LIST);
         StringBuilder str = new StringBuilder(Parser.THE_TASKS_IN_YOUR_LIST);
@@ -76,6 +87,12 @@ public class TaskList {
         return str.toString();
     }
 
+    /**
+     * Gui mark string.
+     *
+     * @param index the index
+     * @return the string
+     */
     public String gui_mark(int index) {
         try {
             String str;
@@ -90,6 +107,12 @@ public class TaskList {
         return null;
     }
 
+    /**
+     * Gui unmark string.
+     *
+     * @param index the index
+     * @return the string
+     */
     public String gui_unmark(int index) {
         try {
             String str;
@@ -109,6 +132,7 @@ public class TaskList {
      * delete task at given index
      *
      * @param index the index
+     * @return the string
      */
     public String gui_delete(int index) {
         try {
@@ -153,6 +177,12 @@ public class TaskList {
         storage.writeAll();
     }
 
+    /**
+     * Gui find string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String gui_find(String key) {
         int[] indexes = new int[ListOfTasks.size()];
         int count = 0;

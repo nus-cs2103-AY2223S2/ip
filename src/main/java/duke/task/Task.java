@@ -4,12 +4,33 @@ package duke.task;
  * The type Task.
  */
 public abstract class Task {
+    /**
+     * The Task name.
+     */
     public String taskName;
+    /**
+     * The Message add.
+     */
     public String messageAdd;
+    /**
+     * The Message marked.
+     */
     public String messageMarked;
+    /**
+     * The Message unmarked.
+     */
     public String messageUnmarked;
+    /**
+     * The Message display.
+     */
     public String messageDisplay;
+    /**
+     * The Message delete.
+     */
     public String messageDelete;
+    /**
+     * The Done.
+     */
     public boolean done;
 
     /**

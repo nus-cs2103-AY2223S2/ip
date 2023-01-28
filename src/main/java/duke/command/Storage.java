@@ -11,9 +11,21 @@ import java.util.Scanner;
  * The type Storage.
  */
 class Storage {
+    /**
+     * The Writer.
+     */
     FileWriter writer;
+    /**
+     * The Reader.
+     */
     Scanner reader;
+    /**
+     * The Records.
+     */
     ArrayList<String> records;
+    /**
+     * The Path.
+     */
     String path;
 
     /**

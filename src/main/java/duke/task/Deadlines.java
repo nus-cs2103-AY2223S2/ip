@@ -8,8 +8,17 @@ import duke.utilities.Parser;
  */
 public class Deadlines extends Task {
 
+    /**
+     * The Raw input.
+     */
     public final String rawInput;
+    /**
+     * The End date.
+     */
     String endDate;
+    /**
+     * The Date translator.
+     */
     DateTranslator dateTranslator;
 
     /**
