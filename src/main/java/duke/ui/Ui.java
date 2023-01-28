@@ -3,19 +3,26 @@ package duke.ui;
 import java.util.Scanner;
 
 public class Ui {
+    /**
+     * Returns the string inputted by the user.
+     *
+     * @return String inputted by the user.
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
-    public void showLoadingError(){
-        System.out.println("can't load tasks");
-    }
-
+    /**
+     * Prints a line.
+     */
     public void showLine(){
         System.out.println("_______");
     }
 
+    /**
+     * Prints welcome message.
+     */
     public void showWelcome(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -27,6 +34,9 @@ public class Ui {
         System.out.println("Hello, I am Duke. \nWhat can I do for you?");
     }
 
+    /**
+     * Prints farewell message when user exits.
+     */
     public void farewellMessage() {
         System.out.println("Bye. Hope to see you again soon!");
     }

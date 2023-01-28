@@ -11,10 +11,20 @@ import java.util.ArrayList;
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor for Storage object.
+     *
+     * @param filePath The path of where tasks objects are stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loop through taskList and store each task object into a file.
+     *
+     * @param taskList TaskList object containing the list of tasks.
+     */
     public void saveTasks(TaskList taskList) {
         try {
             FileOutputStream fos = new FileOutputStream(this.filePath);
@@ -28,6 +38,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loop through all objects in the file and stores each into an arrayList to be returned.
+     * If file has not been created yet, create the file for future use.
+     *
+     * @return ArrayList of task objects that are read from a text file.
+     */
     public ArrayList<Task> load() throws IOException {
         File file = new File(this.filePath);
         ArrayList<Task> tasks = new ArrayList<>();
