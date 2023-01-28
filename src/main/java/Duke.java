@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 class DukeException extends Exception {
@@ -17,45 +21,92 @@ public class Duke {
         if (inp.equals("")) {
             throw new DukeException("Empty Input!");
         }
-        String[] inpArr = inp.split(" ");
         while (!inp.equals("bye")) {
-            if (inp.equals("list")) {
-                list();
-            } else if (inpArr[0].equals("mark")) {
-                toDoList.get(Integer.parseInt(inpArr[1]) - 1).markDone();
-            } else if (inpArr[0].equals("unmark")) {
-                toDoList.get(Integer.parseInt(inpArr[1]) - 1).markUndone();
-            } else {
-                // add tasks
-                if (inpArr[0].equals("todo")) {
-                    if (inp.length() == 4) {
-                        throw new DukeException("Description cannot be empty!");
-                    }
-                    ToDo newToDo = new ToDo(inp.substring(5));
-                    toDoList.add(newToDo);
-                    System.out.println("added >.<");
-                } else if (inpArr[0].equals("deadline")) { // need to handle exception
-                    String[] processedString = stringProcessor(true, inp.substring(9));
-                    Deadline newDeadline = new Deadline(processedString[0], processedString[1]);
-                    toDoList.add(newDeadline);
-                    System.out.println("added >.<");
-                } else if (inpArr[0].equals("event")){ // need to handle exception
-                    String[] processedString = stringProcessor(false, inp.substring(6));
-                    Event newEvent = new Event(processedString[0], processedString[1], processedString[2]);
-                    toDoList.add(newEvent);
-                    System.out.println("added >.<");
-                } else if (inpArr[0].equals("delete")){ // need to handle exception
-                    toDoList.remove(Integer.parseInt(inpArr[1])-1);
-                    System.out.println("deleted *.*");
-                } else {
-                    throw new DukeException("Invalid Input!");
-                }
-            }
+            operationHandler(inp);
+            System.out.println("done >.<");
             inp = myObj.nextLine();
-            inpArr = inp.split(" ");
         }
         System.out.println("Bye. Hope to see you again soon!");
         return false;
+    }
+
+
+    private static void operationHandler(String task) throws DukeException{
+        String[] inpArr = task.split(" ");
+        if (inpArr[0].equals("list")) {
+            list();
+        } else if (inpArr[0].equals("mark")) {
+            toDoList.get(Integer.parseInt(inpArr[1]) - 1).markDone();
+        } else if (inpArr[0].equals("unmark")) {
+            toDoList.get(Integer.parseInt(inpArr[1]) - 1).markUndone();
+        } else {
+            // add tasks
+            if (inpArr[0].equals("todo")) {
+                if (task.length() == 4) {
+                    throw new DukeException("Description cannot be empty!");
+                }
+                ToDo newToDo = new ToDo(task.substring(5), task);
+                toDoList.add(newToDo);
+            } else if (inpArr[0].equals("deadline")) { // need to handle exception
+                String[] processedString = stringProcessor(true, task.substring(9));
+                Deadline newDeadline = new Deadline(processedString[0], task, processedString[1]);
+                toDoList.add(newDeadline);
+            } else if (inpArr[0].equals("event")){ // need to handle exception
+                String[] processedString = stringProcessor(false, task.substring(6));
+                Event newEvent = new Event(processedString[0], task, processedString[1], processedString[2]);
+                toDoList.add(newEvent);
+            } else if (inpArr[0].equals("delete")){ // need to handle exception
+                toDoList.remove(Integer.parseInt(inpArr[1])-1);
+            } else {
+                throw new DukeException("Invalid Input!");
+            }
+        }
+    }
+
+    private static void listReader(){
+        try {
+            File myObj = new File("data/duke.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String[] dataArr = data.split("@");
+                fileInpProcessor(dataArr);
+            }
+            System.out.println("loaded your past list *.*");
+            list();
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Starting a fresh list :)");
+            File dir = new File("data");
+            boolean dirCreated = dir.mkdir();
+            //dir.createNewFile();
+            File file = new File("data/duke.txt");
+            try {
+                if (dir.createNewFile()) {
+                    System.out.println("File created: " + dir.getName());
+                }
+            } catch (IOException err) {
+                System.out.println("An error occurred.");
+                err.printStackTrace();
+            }
+        }
+    }
+
+    private static void fileInpProcessor(String[] dataArr){
+        try {
+            //if (dataArr[0].equals("todo ")) {
+            operationHandler(dataArr[0]);
+            /*} else if (dataArr[0].equals("deadline ")) {
+                operationHandler("deadline" + dataArr[2] + "/by" + dataArr[3]);
+            } else if (dataArr[0].equals("event ")) {
+                operationHandler("event" + dataArr[2] + "/from" + dataArr[3] + "/to" + dataArr[4]);
+            }*/
+            if (dataArr[1].equals(" 1 ")) {
+                operationHandler("mark " + Integer.toString(toDoList.size()));
+            }
+        } catch (DukeException e){
+            System.out.println(e.toString());
+        }
     }
 
     private static String[] stringProcessor(boolean isDeadline, String s){ // isDeadline = false meaning isEvent
@@ -101,12 +152,26 @@ public class Duke {
         System.out.println("Hello from " + name);
         System.out.println("talk to me :)");
         boolean isRunning = true;
+        listReader();
         while (isRunning) {
             try {
                 isRunning = talk();
             } catch (DukeException e) {
                 System.out.println(e.toString());
             }
+        }
+
+        try {
+            FileWriter myWriter = new FileWriter("data/duke.txt");
+            for (int i=0; i<toDoList.size(); i++) {
+                Task tempTask = toDoList.get(i);
+                myWriter.write(tempTask.toString());
+            }
+            myWriter.close();
+            System.out.println("Saved your list :).");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 
