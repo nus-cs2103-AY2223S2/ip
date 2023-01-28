@@ -14,7 +14,6 @@ import java.util.List;
  * A generic Task-like event without any additional details
  * @author Nicholas Lee
  */
-
 public class ToDo extends Task{
 
     public ToDo(String details) {

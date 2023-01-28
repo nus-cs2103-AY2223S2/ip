@@ -3,7 +3,6 @@ package ui;
 /**
  * Various responses of UwU_TaskMaster
  */
-
 public enum Response {
 
     INVALID_COMMAND {
