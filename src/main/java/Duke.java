@@ -239,6 +239,7 @@ public class Duke {
                     }
                 }
             }
+
             catch(ToDoException e) {
                 System.out.println(e.toString());
 
@@ -258,6 +259,10 @@ public class Duke {
                         "  ☹ OOPS!!! File not found, please create the text file first\n" +
                         "____________________________________________________________");
             }
+            catch (IOException e) {
+                System.out.println(e);
+            }
+
 
 
             finally {
