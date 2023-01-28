@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
     enum TaskType {
@@ -74,20 +75,35 @@ public class Duke {
                 Todo todoTask = new Todo(description);
                 list.add(todoTask);
                 System.out.println("Got it. I've added this task:\n" + todoTask);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
                 break;
             case EVENT:
-                String modifiedDescription = description.split(" /from ")[1];
-                Event eventTask = new Event(description.split(" /from ")[0], modifiedDescription.split(" /to ")[0], modifiedDescription.split(" /to ")[1]);
-                list.add(eventTask);
-                System.out.println("Got it. I've added this task:\n" + eventTask);
-                break;
+                try {
+                    String modifiedDescription = description.split(" /from ")[1];
+                    LocalDate fromDate = LocalDate.parse(modifiedDescription.split(" /to ")[0]);
+                    LocalDate toDate = LocalDate.parse(modifiedDescription.split(" /to ")[1]);
+                    Event eventTask = new Event(description.split(" /from ")[0], fromDate, toDate);
+                    list.add(eventTask);
+                    System.out.println("Got it. I've added this task:\n" + eventTask);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Invalid format, please try again using [task] /from [YYYY-MM-DD] /to [YYYY-MM-DD] format!");
+                    break;
+                }
             case DEADLINE:
-                Deadline deadlineTask = new Deadline(description.split(" /by ")[0], description.split(" /by ")[1]);
-                list.add(deadlineTask);
-                System.out.println("Got it. I've added this task:\n" + deadlineTask);
-                break;
+                try {
+                    Deadline deadlineTask = new Deadline(description.split(" /by ")[0], LocalDate.parse(description.split(" /by ")[1]));
+                    list.add(deadlineTask);
+                    System.out.println("Got it. I've added this task:\n" + deadlineTask);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Invalid format, please try again using [task] /by [YYYY-MM-DD] format!");
+                    break;
+                }
+
         }
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
         saveToFile();
     }
 
@@ -130,11 +146,11 @@ public class Duke {
         System.out.println(logo + "Hello! I'm MEL\nWhat can I do for you?\n-----------------------");
 
         Scanner sc = new Scanner(System.in);
-        boolean quit = false;
+        boolean isQuit = false;
 
         initalizeList();
 
-        while (!quit) {
+        while (!isQuit) {
             System.out.print("> ");
             String userInput = sc.nextLine();
             String cmd = userInput.split(" ")[0];
@@ -142,7 +158,7 @@ public class Duke {
             try {
                 switch (cmd) {
                     case "bye":
-                        quit = true;
+                        isQuit = true;
                         System.out.println("MEL: Bye. Hope to see you again soon!");
                         break;
                     case "list":
