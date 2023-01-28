@@ -19,11 +19,11 @@ import berry.task.Todo;
 
 public class Parser {
     private enum CommandType {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE
     }
 
     public static Command parseCommand(String input) throws BerryException {
-        String[] splitInput = input.split(" ");
+        String[] splitInput = input.split(" ", 2);
         String[] listStr;
         CommandType commandType;
 
@@ -55,6 +55,8 @@ public class Parser {
             return new AddTaskCommand(new Event(splitInput[0], listStrTwo[0], listStrTwo[1]));
         case DELETE:
             return new DeleteCommand(Integer.parseInt(splitInput[1]));
+        case FIND:
+            return new FindCommand(splitInput[1]);
         default:
             throw new UnknownCommandException();
         }

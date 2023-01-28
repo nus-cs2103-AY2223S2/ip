@@ -70,6 +70,10 @@ public class Ui {
         System.out.println("Here you go! I've deleted this task for ya.");
     }
 
+    public static void showFind() {
+        System.out.println("Here's what I found for ya!");
+    }
+
     public static void showLoadingError() {
         System.out.println("I can't seem to load the file ૮ ˶> _ <˶ ა");
     }

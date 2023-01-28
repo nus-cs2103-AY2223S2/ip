@@ -23,6 +23,16 @@ public abstract class Task {
         return isDone ? "X" : " ";
     }
 
+    /**
+     * Checks if the task description contains the keyword.
+     *
+     *  @param keyword the string to check if description contains it
+     * @return true if keyword is contained
+     */
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     public abstract String interpretTaskToString();
 
     public static Task interpretStringToTask(String s) {

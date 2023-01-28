@@ -42,6 +42,14 @@ public class TaskList {
         t.markAsNotDone();
     }
 
+    public void findTaskIndexWithKeyword(String keyword) {
+        for (Task t : listOfTasks) {
+            if (t.hasKeyword(keyword)) {
+                System.out.println((listOfTasks.indexOf(t) + 1) + ". " + t.toString());
+            }
+        }
+    }
+
     public boolean isIndexWithinRange(int index) {
         if (index > 0 && index <= listOfTasks.size()) {
             return true;
