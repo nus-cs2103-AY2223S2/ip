@@ -7,6 +7,7 @@ import berry.command.ExitCommand;
 import berry.command.ListCommand;
 import berry.command.MarkCommand;
 import berry.command.UnmarkCommand;
+import berry.command.FindCommand;
 import berry.exception.BerryException;
 import berry.exception.EmptyClauseException;
 import berry.exception.EmptyDescriptionException;
@@ -24,7 +25,7 @@ import berry.task.Todo;
 public class Parser {
 
     private enum CommandType {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
+        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, BYE
     }
 
     /**
@@ -35,7 +36,7 @@ public class Parser {
      * @throws BerryException if the given string cannot be parsed
      */
     public static Command parseCommand(String input) throws BerryException {
-        String[] splitInput = input.split(" ");
+        String[] splitInput = input.split(" ", 2);
         String[] listStr;
         CommandType commandType;
 
@@ -59,14 +60,16 @@ public class Parser {
         case TODO:
             return new AddTaskCommand(new Todo(splitInput[1]));
         case DEADLINE:
-            listStr = input.split(" /by ");
-            return new AddTaskCommand(new Deadline(splitInput[0], listStr[1]));
+            listStr = splitInput[1].split(" /by ");
+            return new AddTaskCommand(new Deadline(listStr[0], listStr[1]));
         case EVENT:
-            listStr = input.split(" /from ");
+            listStr = splitInput[1].split(" /from ");
             String[] listStrTwo = listStr[1].split(" /to ");
-            return new AddTaskCommand(new Event(splitInput[0], listStrTwo[0], listStrTwo[1]));
+            return new AddTaskCommand(new Event(listStr[0], listStrTwo[0], listStrTwo[1]));
         case DELETE:
             return new DeleteCommand(Integer.parseInt(splitInput[1]));
+        case FIND:
+            return new FindCommand(splitInput[1]);
         default:
             throw new UnknownCommandException();
         }
