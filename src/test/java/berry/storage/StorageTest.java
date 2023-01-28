@@ -1,22 +1,14 @@
 package berry.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.FileNotFoundException;
-import java.nio.file.Path;
-
-
-import berry.exception.IllegalValueException;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import berry.exception.IllegalValueException;
 
 public class StorageTest {
-    @TempDir
-    public static Path testFolder;
 
     public static final String TEST_DATA_FOLDER = "test/data/StorageTest";
-    public static final String NON_EXISTANT_FILE_NAME = "ThisFileDoesNotExist.txt";
 
     @Test
     public void constructor_nullFilePath_exceptionThrown() throws Exception {

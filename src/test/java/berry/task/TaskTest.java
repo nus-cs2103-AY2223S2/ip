@@ -1,12 +1,9 @@
 package berry.task;
 
-import berry.exception.IncorrectDateException;
-import berry.task.Deadline;
-import berry.task.Todo;
-import berry.task.Event;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import berry.exception.IncorrectDateException;
 
 public class TaskTest {
     @Test

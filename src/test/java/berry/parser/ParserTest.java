@@ -1,23 +1,16 @@
 package berry.parser;
 
 import berry.command.Command;
-import berry.command.DeleteCommand;
 import berry.command.ExitCommand;
 import berry.command.ListCommand;
 import berry.exception.BerryException;
 
-import berry.task.Task;
-import berry.task.Todo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class ParserTest {
-
     private Parser parser;
 
     @BeforeEach
