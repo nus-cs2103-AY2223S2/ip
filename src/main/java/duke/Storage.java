@@ -80,7 +80,8 @@ public class Storage {
                 fw.write("D/" + t.getStatusIconBinary() + "/" + t.getDescription() + "/" + ((Deadline) t).getBy());
             }
             if (t instanceof Event) {
-                fw.write("E/" + t.getStatusIconBinary() + "/" + t.getDescription() + "/" + ((Event) t).getFrom() + "/" + ((Event) t).getTo());
+                fw.write("E/" + t.getStatusIconBinary() + "/" + t.getDescription()
+                        + "/" + ((Event) t).getFrom() + "/" + ((Event) t).getTo());
             }
 
             fw.write(System.lineSeparator());

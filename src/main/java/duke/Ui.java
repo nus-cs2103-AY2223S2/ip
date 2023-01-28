@@ -16,23 +16,23 @@ public class Ui {
         System.out.println("Meow I'm Toto! What can I for you?");
     }
 
-    public void goodbye() {
+    public void sayGoodbye() {
         System.out.println("Byebye CATch you later!");
     }
 
-    public void marked(Task task) {
+    public void showMarked(Task task) {
         System.out.println("I've marked this task as done: " + task);
     }
 
-    public void unmarked(Task task) {
+    public void showUnmarked(Task task) {
         System.out.println("I've marked this task as not done yet: " + task);
     }
 
-    public void deleted(Task task) {
+    public void showDeleted(Task task) {
         System.out.println("I've deleted this task: " + task);
     }
 
-    public void addedTask(Task task) {
+    public void showAddTask(Task task) {
         System.out.println("Meow! Just added: \n" + task);
     }
 
