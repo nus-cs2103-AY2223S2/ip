@@ -1,7 +1,7 @@
 package duke;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import duke.enums.Views;
 import duke.task.Task;
