@@ -10,7 +10,7 @@ public class DukeException extends Exception {
     private String description;
 
     /**
-     * Create a DukeException object with given exception description
+     * Creates a DukeException object with given exception description
      *
      * @param description The description for the exception from Duke
      */

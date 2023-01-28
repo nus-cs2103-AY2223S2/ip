@@ -9,7 +9,7 @@ public class Deadline extends Task {
     private String by;
 
     /**
-     * Create a Deadline task with given description and deadline time
+     * Creates a Deadline task with given description and deadline time
      *
      * @param description The description for the task
      * @param by The deadline of the task

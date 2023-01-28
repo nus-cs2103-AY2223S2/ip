@@ -9,7 +9,7 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Create a Task object with given description
+     * Creates a Task object with given description
      *
      * @param description The description for the task
      */
@@ -34,7 +34,7 @@ public class Task {
     }
 
     /**
-     * Unmark the current task as not done.
+     * Unmarks the current task as not done.
      */
     public void unmark() {
         this.isDone = false;
