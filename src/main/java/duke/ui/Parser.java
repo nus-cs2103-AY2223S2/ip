@@ -1,8 +1,5 @@
 package duke.ui;
 
-<<<<<<< HEAD
-import duke.command.*;
-=======
 import duke.command.Command;
 import duke.command.Commands;
 import duke.command.DeadlineCommand;
@@ -13,8 +10,8 @@ import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.ToDoCommand;
 import duke.command.UnmarkCommand;
+import duke.command.FindCommand;
 
->>>>>>> branch-A-JavaDoc
 import duke.exception.DukeException;
 
 /**
@@ -138,6 +135,7 @@ public class Parser {
             }
         }
     }
+
     private static String parseFindCommand(String userInput) throws DukeException {
         String[] splitStr = userInput.split(" ", 2);
         if (splitStr.length < 2) {
