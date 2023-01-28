@@ -3,13 +3,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class Duke {
 
-    static List<Task> taskList = new ArrayList<Task>();
+    static TaskList taskList = new TaskList();
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -28,13 +27,13 @@ public class Duke {
                         isRunning = false;
                         break;
                     case "list":
-                        if (taskList.size() == 0) {
+                        if (taskList.getSize() == 0) {
                             System.out.println("You have no tasks in your list!");
                             break;
                         }
                         System.out.println("Here are the tasks in your list:");
-                        for (int i = 0; i < taskList.size(); i++) {
-                            Task task = taskList.get(i);
+                        for (int i = 0; i < taskList.getSize(); i++) {
+                            Task task = taskList.getAtIndex(i);
                             System.out.println(i + 1 + "." + task);
                         }
                         break;
@@ -49,12 +48,12 @@ public class Duke {
                             ex.printStackTrace();
                             break;
                         }
-                        if (taskIndex < 0 || taskIndex > taskList.size()) {
+                        if (taskIndex < 0 || taskIndex > taskList.getSize()) {
                             System.out.println("invalid task index!");
                             break;
                         }
                         System.out.println("Nice! I've marked this task as done:");
-                        Task task = taskList.get(taskIndex);
+                        Task task = taskList.getAtIndex(taskIndex);
                         task.setDone(true);
                         System.out.println(task);
                         break;
@@ -68,12 +67,12 @@ public class Duke {
                             ex.printStackTrace();
                             break;
                         }
-                        if (taskIndex < 0 || taskIndex > taskList.size()) {
+                        if (taskIndex < 0 || taskIndex > taskList.getSize()) {
                             System.out.println("invalid task index!");
                             break;
                         }
                         System.out.println("OK, I've marked this task as not done yet:");
-                        task = taskList.get(taskIndex);
+                        task = taskList.getAtIndex(taskIndex);
                         task.setDone(false);
                         System.out.println(task);
                         break;
@@ -81,20 +80,20 @@ public class Duke {
                         if (splitInput.length == 1) {
                             throw new DukeException("'todo' requires additional arguments!");
                         }
-                        taskList.add(new ToDo(splitInput[1]));
-                        System.out.println("Added Todo task:\n" + taskList.get(taskList.size() - 1));
-                        System.out.println("Now you have " + taskList.size() + " tasks in the list!");
+                        taskList.addTask(new ToDo(splitInput[1]));
+                        System.out.println("Added Todo task:\n" + taskList.getAtIndex(taskList.getSize() - 1));
+                        System.out.println("Now you have " + taskList.getSize() + " tasks in the list!");
                         break;
                     case "deadline":
                         if (splitInput.length == 1) {
                             throw new DukeException("'deadline' requires additional arguments!");
                         }
                         Integer indexBy = splitInput[1].indexOf("/by ");
-                        taskList.add(
+                        taskList.addTask(
                             new Deadline(splitInput[1].substring(0, indexBy - 1),
                                 splitInput[1].substring(indexBy + 4)));
-                        System.out.println("Added Deadline task:\n" + taskList.get(taskList.size() - 1));
-                        System.out.println("Now you have " + taskList.size() + " tasks in the list!");
+                        System.out.println("Added Deadline task:\n" + taskList.getAtIndex(taskList.getSize() - 1));
+                        System.out.println("Now you have " + taskList.getSize() + " tasks in the list!");
                         break;
                     case "event":
                         if (splitInput.length == 1) {
@@ -102,12 +101,12 @@ public class Duke {
                         }
                         Integer indexFrom = splitInput[1].indexOf("/from ");
                         Integer indexTo = splitInput[1].indexOf("/to ");
-                        taskList.add(new Event(
+                        taskList.addTask(new Event(
                             splitInput[1].substring(0, indexFrom - 1),
                             splitInput[1].substring(indexFrom + 6, indexTo - 1),
                             splitInput[1].substring(indexTo + 4)));
-                        System.out.println("Added Event task:\n" + taskList.get(taskList.size() - 1));
-                        System.out.println("Now you have " + taskList.size() + " tasks in the list!");
+                        System.out.println("Added Event task:\n" + taskList.getAtIndex(taskList.getSize() - 1));
+                        System.out.println("Now you have " + taskList.getSize() + " tasks in the list!");
                         break;
                     case "delete":
                         if (splitInput.length == 1) {
@@ -120,13 +119,13 @@ public class Duke {
                             break;
                         }
 
-                        if (taskIndex < 0 || taskIndex > taskList.size()) {
+                        if (taskIndex < 0 || taskIndex > taskList.getSize()) {
                             System.out.println("invalid task index!");
                             break;
                         }
                         System.out.println("Gotcha, removed this task: ");
-                        System.out.println(taskList.get(taskIndex));
-                        taskList.remove(taskIndex.intValue());
+                        System.out.println(taskList.getAtIndex(taskIndex));
+                        taskList.removeAtIndex(taskIndex.intValue());
                         break;
                     default:
                         throw new DukeException("Please enter a valid command!");
@@ -140,9 +139,9 @@ public class Duke {
 
     public static void updateSave() {
         String toSave = "";
-        for (int i = 0; i < taskList.size(); i++) {
-            
-            toSave += taskList.get(i).serialize() + "\n";
+        for (int i = 0; i < taskList.getSize(); i++) {
+
+            toSave += taskList.getAtIndex(i).serialize() + "\n";
         }
         try {
             FileWriter writer = new FileWriter("donkey.txt");
@@ -161,7 +160,7 @@ public class Duke {
             if (save.exists()) {
                 Scanner scanner = new Scanner(save);
                 while (scanner.hasNextLine()) {
-                    taskList.add(deserializeTask(scanner.nextLine()));
+                    taskList.addTask(deserializeTask(scanner.nextLine()));
                 }
             } else {
                 createSave();
