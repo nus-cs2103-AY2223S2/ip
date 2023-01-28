@@ -34,7 +34,6 @@ public class Database {
 
     public void add(Task item) {
         this.items.add(item);
-        this.updateFile();
     }
 
     public Task get(int id) {
@@ -47,13 +46,16 @@ public class Database {
         }
 
         Task task = this.items.remove(id);
-        this.updateFile();
 
         return task;
     }
 
     public int size() {
         return this.items.size();
+    }
+
+    public void close() {
+        this.updateFile();
     }
 
     private void loadFromFile() {
