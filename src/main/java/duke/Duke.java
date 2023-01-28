@@ -68,6 +68,9 @@ public class Duke {
                     case "list":
                         this.list();
                         break;
+                    case "find":
+                        this.find();
+                        break;
                     case "quit":
                     case "exit":
                     case "bye":
@@ -250,5 +253,19 @@ public class Duke {
     private void list() {
         String header = "Here are the tasks in your list:\n";
         this.ui.show(header + this.tasks.toString());
+    }
+
+    /**
+     * Handles the finding of tasks using keywords, by the "find" command.
+     */
+    private void find() {
+        String keyword = this.currentCommand.body;
+        Task[] matchingTasks = this.tasks.stream()
+                .filter(task -> task.description.contains(keyword))
+                .toArray(Task[]::new);
+        TaskList matchingTaskList = new TaskList(matchingTasks);
+
+        String header = "Here are the matching tasks in your list:\n";
+        this.ui.show(header + matchingTaskList.toString());
     }
 }
