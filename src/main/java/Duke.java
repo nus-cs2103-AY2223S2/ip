@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     static ArrayList<Task> tasks = new ArrayList<Task>();
@@ -106,9 +109,12 @@ public class Duke {
         if(raw.equals("")){
             throw new DukeException("The description of a deadline cannot be empty.");
         }
-        String[] parsed = raw.split("/by", 2);
+        String[] parsed = raw.split("/by ", 2);
         if(parsed.length < 2){
             throw new DukeException("When the deadline should be completed by should be specified using /by.");
+        }
+        if(!parsed[1].matches("\\d{4}-\\d{2}-\\d{2}")) {
+            throw new DukeException("Please specify deadline in the format '{description} /by {yyyy-mm-dd}");
         }
         addDeadline(parsed[0], parsed[1]);
     }
@@ -118,11 +124,11 @@ public class Duke {
         if(raw.equals("")){
             throw new DukeException("The description of a event cannot be empty.");
         }
-        String[] parsed1 = raw.split("/from", 2);
+        String[] parsed1 = raw.split("/from ", 2);
         if(parsed1.length < 2){
             throw new DukeException("The event's timeline should be specified using /from and /to.");
         }
-        String[] parsed2 = parsed1[1].split("/to", 2);
+        String[] parsed2 = parsed1[1].split("/to ", 2);
         if(parsed2.length < 2){
             throw new DukeException("The event's timeline should be specified using /from and /to.");
         }
@@ -130,7 +136,7 @@ public class Duke {
     }
 
     public static void addDeadline(String description, String by){
-        Deadline newDd = new Deadline(description, by);
+        Deadline newDd = new Deadline(description, LocalDate.parse(by));
         tasks.add(newDd);
         System.out.println(makeOutput(String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list."
                 ,newDd, tasks.size())));
