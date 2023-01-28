@@ -56,7 +56,7 @@ public class TaskList {
      * @param end the end date and time of the task, if applicable.
      * @param done the completion status of the task.
      * @param shouldPrintOutput a boolean specifying if the function should print
-     * an output as acknowledgement for adding the task to the TaskList.
+     *     an output as acknowledgement for adding the task to the TaskList.
      */
     public void addToList(String title, TaskType type, LocalDateTime start,
                           LocalDateTime end, boolean done, boolean shouldPrintOutput) {
