@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.command.*;
+
 public class Parser {
     static String[] arr;
 
