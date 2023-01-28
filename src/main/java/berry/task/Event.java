@@ -7,8 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    protected LocalDate from;
-    protected LocalDate to;
+
+    private LocalDate from;
+    private LocalDate to;
 
     public Event(String description, String from, String to) throws IncorrectDateException {
         super(description);

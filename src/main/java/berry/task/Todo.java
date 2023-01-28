@@ -1,6 +1,7 @@
 package berry.task;
 
 public class Todo extends Task {
+
     public Todo(String description) {
         super(description);
     }
@@ -13,7 +14,6 @@ public class Todo extends Task {
     public String interpretTaskToString() {
         return "T | " + this.getStatusIcon() + " | " + this.description;
     }
-
 
     @Override
     public String toString() {

@@ -11,6 +11,7 @@ import berry.parser.Parser;
 import java.io.FileNotFoundException;
 
 public class Berry {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

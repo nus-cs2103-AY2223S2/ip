@@ -12,12 +12,12 @@ import berry.task.Deadline;
 import berry.task.Event;
 import berry.task.Todo;
 
-
 /**
  * Deals with making sense of the user command.
  */
 
 public class Parser {
+
     private enum CommandType {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
     }
