@@ -20,7 +20,6 @@ public class TaskList {
     public int size() {
         return this.storer.size();
     }
-
     /**
      * Obtains and returns a list of tasks in a format to be displayed.
      * @return a list of tasks in the appropriate format.
