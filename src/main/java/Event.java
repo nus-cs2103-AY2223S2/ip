@@ -20,10 +20,6 @@ public class Event extends Task {
         String from = taskDate.substring(0, taskDate.indexOf("|"));
         String to = taskDate.substring(taskDate.indexOf("|") + 1);
 
-        System.out.println(from);
-        System.out.println(to);
-
-
         this.startTime = LocalDate.parse(from, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.endTime = LocalDate.parse(to, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }

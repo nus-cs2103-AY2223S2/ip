@@ -15,7 +15,7 @@ public class Duke {
 
     private static Scanner getInput = new Scanner(System.in); // Create a static Scanner object
 
-    private static List<Task> storedInputs = new LinkedList<>(); // List to store inputs
+    private static List<Task> storedInputs; // List to store inputs
 
     public static void main(String[] args) throws IOException {
 
@@ -26,43 +26,9 @@ public class Duke {
 
         // Open file
         storage = new Storage(unixFilePath);
+        // Load file
+        storedInputs = new LinkedList<>(storage.loadFile());
 
-        String home = System.getProperty("user.home"); // Get home directory
-        Files.createDirectories(Paths.get(home,"data")); // Create directory if it does not exist
-        Path filePath = Paths.get(home, "data", "duke.txt");
-        try {
-            Files.createFile(filePath); // Create empty file if it does not exist
-        } catch (FileAlreadyExistsException ignored) {
-        }
-
-        // Load file content into list
-        String[] savedTask = Files.readString(filePath).split("\n"); // Read file
-        Boolean isTaskDone;
-        String taskDetails, taskDate;
-        for (String s : savedTask) {
-            if (s.isBlank()) {
-                break;
-            }
-            switch (decodeTaskType(s)) {
-                case 'T':
-                    isTaskDone = getIsTaskDone(s);
-                    taskDetails = getTaskDetails(s);
-                    storedInputs.add(new ToDo(isTaskDone, taskDetails));
-                    break;
-                case 'D':
-                    isTaskDone = getIsTaskDone(s);
-                    taskDetails = getTaskDetails(s);
-                    taskDate = getTaskDate(s);
-                    storedInputs.add(new Deadline(isTaskDone, taskDetails, taskDate));
-                    break;
-                case 'E':
-                    isTaskDone = getIsTaskDone(s);
-                    taskDetails = getTaskDetails(s);
-                    taskDate = getTaskDate(s);
-                    storedInputs.add(new Event(isTaskDone, taskDetails, taskDate));
-                    break;
-                }
-            }
         ui.printList(storedInputs);
 
         // Execute inputs
@@ -90,59 +56,32 @@ public class Duke {
                 break;
             case MARK:
                 markEvent(userInput);
-                replaceFileContents(filePath, prepareWriteContents());
+                storage.overwriteFile(storedInputs);
                 break;
             case UNMARK:
                 unmarkEvent(userInput);
-                replaceFileContents(filePath, prepareWriteContents());
+                storage.overwriteFile(storedInputs);
                 break;
             case DELETE:
                 deleteEvent(userInput);
-                replaceFileContents(filePath, prepareWriteContents());
+                storage.overwriteFile(storedInputs);
                 break;
             case TODO:
                 todoEvent(userInput);
-                replaceFileContents(filePath, prepareWriteContents());
+                storage.overwriteFile(storedInputs);
                 break;
             case DEADLINE:
                 deadlineEvent(userInput);
-                replaceFileContents(filePath, prepareWriteContents());
+                storage.overwriteFile(storedInputs);
                 break;
             case EVENT:
                 eventEvent(userInput);
-                replaceFileContents(filePath, prepareWriteContents());
+                storage.overwriteFile(storedInputs);
                 break;
             }
         }
 
         ui.printOutro();
-    }
-
-    private static char decodeTaskType(String s) {
-        return s.charAt(0);
-    }
-
-    private static Boolean getIsTaskDone(String s) {
-        String line = s.substring(s.indexOf("|") + 1);
-        return line.substring(0, line.indexOf("|")).equals("X");
-    }
-
-    private static String getTaskDetails(String s) {
-        String line = s.substring(s.indexOf("|") + 1);
-        line = line.substring(line.indexOf("|") + 1);
-
-        if (!line.contains("|")) {
-            return line;
-        }
-
-        return line.substring(0, line.indexOf("|"));
-    }
-
-    private static String getTaskDate(String s) {
-        String line = s.substring(s.indexOf("|") + 1);
-        line = line.substring(line.indexOf("|") + 1);
-        line = line.substring(line.indexOf("|") + 1);
-        return line;
     }
 
     private static String askForInput() {
@@ -315,16 +254,4 @@ public class Duke {
         ui.printTotalTask(storedInputs);
     }
 
-    private static String prepareWriteContents() {
-        StringBuilder s = new StringBuilder();
-        for (Task storedInput : storedInputs) {
-            s.append(storedInput.writeToFile());
-            s.append("\n");
-        }
-        return s.toString();
-    }
-
-    private static void replaceFileContents(Path path, String newContents) throws IOException {
-        Files.writeString(path, newContents);
-    }
 }

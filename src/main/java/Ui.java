@@ -27,8 +27,8 @@ public class Ui {
     }
 
     public void printListWithAttitude(List<Task> storedInputs) {
-        this.printList(storedInputs);
         System.out.println("\nTsk... here is your list:\n");
+        this.printList(storedInputs);
     }
 
     public void printIndexOutOfBoundMessage() {
