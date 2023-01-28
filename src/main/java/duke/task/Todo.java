@@ -13,7 +13,7 @@ public class Todo extends Task {
      * @throws DukeException
      */
     public Todo(String title) throws DukeException {
-        super(title);
+        this(title, false);
     }
 
     /**

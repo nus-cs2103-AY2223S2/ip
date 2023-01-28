@@ -22,12 +22,7 @@ public class Deadline extends Task {
      * @throws DukeException
      */
     public Deadline(String title, String by) throws DukeException {
-        super(title);
-        try {
-            this.by = LocalDateTime.parse(by.replace("/by", "").trim());
-        } catch (java.time.format.DateTimeParseException e) {
-            throw new DukeException(Views.DATE_PARSE_ERR_STRING.eng());
-        }
+        this(title, by, false);
     }
 
     /**

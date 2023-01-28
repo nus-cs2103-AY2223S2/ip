@@ -14,7 +14,7 @@ public class TaskList {
     /**
      * For creating a taskList from storage
      *
-     * @param tasksList
+     * @param tasksList as an ArrayList
      * @throws DukeException
      */
     TaskList(ArrayList<Task> tasksList) throws DukeException {
@@ -31,8 +31,8 @@ public class TaskList {
     /**
      * Gets the Task at the index specified
      *
-     * @param index
-     * @return Task
+     * @param index of the task in the ArrayList
+     * @return Task found from the ArrayList
      * @throws DukeException
      */
     public Task get(int index) throws DukeException {
@@ -77,7 +77,7 @@ public class TaskList {
     /**
      * Adds a new task into the list
      *
-     * @param newTask
+     * @param newTask new Task object to be added into the list
      */
     public void add(Task newTask) {
         this.tasksList.add(newTask);
@@ -86,7 +86,7 @@ public class TaskList {
     /**
      * Removes the task given the index of it
      *
-     * @param taskNo
+     * @param taskNo int index of task in the ArrayList
      */
     public void remove(int taskNo) {
         this.tasksList.remove(taskNo);

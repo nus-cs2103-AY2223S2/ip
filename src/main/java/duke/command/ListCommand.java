@@ -12,9 +12,9 @@ public class ListCommand extends Command {
     /**
      * Executes the command
      *
-     * @param tasks
-     * @param ui
-     * @param storage
+     * @param tasks   TaskList object to get and set the list
+     * @param ui      object to reply to user after the command has executed
+     * @param storage object required when command writes to file
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

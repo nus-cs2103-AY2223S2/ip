@@ -24,16 +24,7 @@ public class Event extends Task {
      * @throws DukeException
      */
     public Event(String title, String from, String to) throws DukeException {
-        super(title);
-        try {
-            this.from = LocalDateTime.parse(from.replace("/from", "").trim());
-            this.to = LocalDateTime.parse(to.replace("/to", "").trim());
-        } catch (java.time.format.DateTimeParseException e) {
-            throw new DukeException(Views.DATE_PARSE_ERR_STRING.eng());
-        }
-        if (this.to.isBefore(this.from)) {
-            throw new DukeException(Views.DATE_WRONG_ORDER_STRING.eng());
-        }
+        this(title, from, to, false);
     }
 
     /**

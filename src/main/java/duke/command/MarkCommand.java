@@ -14,7 +14,7 @@ public class MarkCommand extends Command {
     /**
      * Takes in the task number to mark as complete
      *
-     * @param taskNo
+     * @param taskNo int index of task in the ArrayList
      */
     public MarkCommand(int taskNo) {
         this.taskNo = taskNo;
@@ -23,9 +23,9 @@ public class MarkCommand extends Command {
     /**
      * Executes the command
      *
-     * @param tasks
-     * @param ui
-     * @param storage
+     * @param tasks   TaskList object to get and set the list
+     * @param ui      object to reply to user after the command has executed
+     * @param storage object required when command writes to file
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

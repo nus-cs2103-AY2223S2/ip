@@ -26,7 +26,7 @@ public class Storage {
     /**
      * Given a list of tasks, it will save it into a txt file
      *
-     * @param tasks
+     * @param tasks TaskList object to get and set the list
      */
     public void save(TaskList tasks) {
         File dukeData = new File("duke_data.txt");

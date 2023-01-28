@@ -25,7 +25,7 @@ public class Parser {
      * Given the user input, sort it out and returns the command associated with the
      * input
      *
-     * @param input
+     * @param input string from the user
      * @return Command object that matches the user input
      * @throws DukeException
      */
@@ -79,9 +79,9 @@ public class Parser {
     /**
      * Gathers the numbers found from a string
      *
-     * @param input
-     * @return int
-     * @throws DukeException
+     * @param input string from the user
+     * @return int number found from regex
+     * @throws DukeException when no number is found
      */
     private static int getNumbers(String input) throws DukeException {
         Pattern pattern = Pattern.compile("\\d+");

@@ -19,7 +19,7 @@ public enum Commands {
     private final String cmd;
 
     /**
-     * @param cmd
+     * @param cmd given in the enum
      */
     Commands(String cmd) {
         this.cmd = cmd;

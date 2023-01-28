@@ -22,7 +22,7 @@ public class Ui {
     /**
      * Reads the input given by the user
      *
-     * @return String
+     * @return String input from the user
      */
     public String readCommand() {
         return sc.nextLine();
@@ -44,8 +44,8 @@ public class Ui {
     /**
      * Takes in a list of tasks and prints it all out
      *
-     * @param tasks
-     * @throws DukeException
+     * @param tasks TaskList object to print the list
+     * @throws DukeException when the task is not found in the list
      */
     public void showList(TaskList tasks) throws DukeException {
         if (tasks.size() == 0) {
@@ -62,7 +62,7 @@ public class Ui {
     /**
      * Takes in a ArrayList of tasks and prints it all out
      *
-     * @param tasks
+     * @param tasks TaskList object to print the list
      * @throws DukeException
      */
 
@@ -81,9 +81,9 @@ public class Ui {
     /**
      * Prints out the task that is marked done
      *
-     * @param tasks
-     * @param taskNo
-     * @throws DukeException
+     * @param tasks  TaskList object to get the task
+     * @param taskNo int index of task in the ArrayList
+     * @throws DukeException when the task is not found in the list
      */
     public void showMarkDone(TaskList tasks, int taskNo) throws DukeException {
         printer(Views.MARK_DONE_STRING.eng() + tasks.get(taskNo));
@@ -92,9 +92,9 @@ public class Ui {
     /**
      * Prints out the task that is marked undone
      *
-     * @param tasks
-     * @param taskNo
-     * @throws DukeException
+     * @param tasks  TaskList object to get the task
+     * @param taskNo int index of task in the ArrayList
+     * @throws DukeException when the task is not found in the list
      */
     public void showUnmarkDone(TaskList tasks, int taskNo) throws DukeException {
         printer(Views.UNMARK_DONE_STRING.eng() + tasks.get(taskNo));
@@ -103,7 +103,7 @@ public class Ui {
     /**
      * Prints out the task that is newly added
      *
-     * @param newTask
+     * @param newTask new Task object to be printed
      */
     public void showAdd(Task newTask) {
         printer("added: " + newTask);
@@ -112,8 +112,8 @@ public class Ui {
     /**
      * Prints out the task that is deleted and show the number of tasks left
      *
-     * @param delTask
-     * @param task
+     * @param delTask task that is deleted
+     * @param task    TaskList object to get the count
      */
     public void showDel(Task delTask, TaskList task) {
         String returnString = Views.DELETE_DONE_STRING.eng();

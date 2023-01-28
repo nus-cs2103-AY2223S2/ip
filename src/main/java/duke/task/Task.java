@@ -17,10 +17,7 @@ public abstract class Task {
      * @throws DukeException
      */
     Task(String title) throws DukeException {
-        if (title.trim().length() == 0) {
-            throw new DukeException(Views.EMPTY_ERR_STRING.eng());
-        }
-        this.title = title.trim();
+        this(title, false);
     }
 
     /**

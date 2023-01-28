@@ -18,7 +18,7 @@ public class DeadlineCommand extends Command {
      * Creates a deadline command given a title and deadline String
      *
      * @param title    of the Task that that is being created
-     * @param deadline
+     * @param deadline String input from the user
      */
     public DeadlineCommand(String title, String deadline) {
         this.title = title;
@@ -28,9 +28,9 @@ public class DeadlineCommand extends Command {
     /**
      * Executes the command
      *
-     * @param tasks
-     * @param ui
-     * @param storage
+     * @param tasks   TaskList object to get and set the list
+     * @param ui      object to reply to user after the command has executed
+     * @param storage object required when command writes to file
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
