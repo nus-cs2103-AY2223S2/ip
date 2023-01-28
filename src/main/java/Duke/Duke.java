@@ -4,55 +4,47 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.String;
 
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Tasks.Task;
-import Duke.Tasks.ToDo;
+import Duke.Commands.Tasks.Deadline;
+import Duke.Commands.Tasks.Event;
+import Duke.Commands.Tasks.Task;
+import Duke.Commands.Tasks.ToDo;
+import Duke.Commands.Parser;
+import Duke.Commands.Command;
+import Duke.Commands.Delete;
+import Duke.Commands.Exit;
+import Duke.Commands.Add;
+import Duke.Commands.ListTasks;
+import Duke.Commands.Unmark;
+import Duke.Commands.Mark;
+
+import Duke.dukeexception.DukeException;
 
 /**
  * @author Shi Jiaao
  */
 
 public class Duke {
-    private static String printList(ArrayList<Task> toDoList) {
-        String res = "";
-        res += "here are your tasks\n";
-        for (int i = 0; i < toDoList.size(); i++) {
-            res += String.format("%d.%s\n", i + 1, toDoList.get(i));
-        }
-        return res;
-    }
-
-    private static String printTaskAdd(Task task, ArrayList<Task> toDoList) {
-        return String.format("Got it! I've added this task:\n" +
-                "    %s\n" +
-                "Now you have %d tasks in the list.",
-                task.toString(), toDoList.size());
-    }
-
-    private static void checkLength(String str) throws DukeException {
-        if (str.length() == 0) {
-            throw new DukeException("empty String");
-        }
-    }
-
     public static void main(String[] args) {
-        /*
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        // System.out.println("Hello from\n" + logo);
-        */
-
-        /* project starts here */
         System.out.println("Hello! I'm Duke.Duke\n" +
                 "What can I do for you?\n");
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> toDoList = new ArrayList<>();
         while (true) {
             String command = sc.nextLine();
+            Parser parser = new Parser(command);
+            Command curCommand;
+            try {
+                curCommand = parser.process();
+                curCommand.execute(toDoList);
+            } catch (DukeException ex) {
+                System.out.println(ex.getMessage());
+                continue;
+            }
+            curCommand.execute(toDoList);
+            if (curCommand instanceof Exit) {
+                break;
+            }
+            /*
             String[] commandArr = command.split(" ");
             int editIndex = Character.getNumericValue
                     (command.charAt(command.length() - 1)) - 1;
@@ -160,6 +152,8 @@ public class Duke {
                 default:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+             */
         }
+        sc.close();
     }
 }

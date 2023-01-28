@@ -1,4 +1,6 @@
-package Duke.Tasks;
+package Duke.Commands.Tasks;
+
+import Duke.dukeexception.DukeException;
 
 // skeleton code for this class is taken from cs2103 website
 public class Task {
@@ -6,7 +8,7 @@ public class Task {
     protected boolean isDone;
 
     public Task(String description) {
-        this.description = description;
+        this.description = description.trim();
         this.isDone = false;
     }
 

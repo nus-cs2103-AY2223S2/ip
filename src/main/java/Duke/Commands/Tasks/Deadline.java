@@ -1,4 +1,4 @@
-package Duke.Tasks;
+package Duke.Commands.Tasks;
 
 public class Deadline extends Task {
     protected String deadline;
