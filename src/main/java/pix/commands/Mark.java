@@ -1,8 +1,11 @@
-package duke.commands;
+package pix.commands;
 
-import duke.data.MyData;
-import duke.ui.Ui;
+import pix.data.MyData;
+import pix.ui.Ui;
 
+/**
+ * Mark class to mark a task in the list of tasks.
+ */
 public class Mark extends Command {
     /** Index to mark. */
     private final int id;
@@ -16,10 +19,15 @@ public class Mark extends Command {
         this.id = id;
     }
 
+    /**
+     * Executes the mark command and displays the result.
+     *
+     * @param data Data storing the tasks.
+     * @param ui Ui object which handles interaction with user.
+     */
     public void execute(MyData data, Ui ui) {
         data.markDone(this.id);
         data.saveToFile();
         ui.mark(data.getData(this.id));
     }
 }
-

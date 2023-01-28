@@ -1,8 +1,11 @@
-package duke.commands;
+package pix.commands;
 
-import duke.data.MyData;
-import duke.ui.Ui;
+import pix.data.MyData;
+import pix.ui.Ui;
 
+/**
+ * Find class which finds tasks in list of task containing a keyword.
+ */
 public class Find extends Command {
     /** Keyword to search tasks by. */
     private final String keyword;

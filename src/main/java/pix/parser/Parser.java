@@ -1,25 +1,27 @@
-package duke.parser;
+package pix.parser;
 
-import duke.commands.Command;
-import duke.commands.Bye;
-import duke.commands.List;
-import duke.commands.ListDate;
-import duke.commands.Mark;
-import duke.commands.Unmark;
-import duke.commands.AddToDo;
-import duke.commands.AddEvent;
-import duke.commands.AddDeadline;
-import duke.commands.Delete;
-import duke.commands.Find;
-
-import duke.data.MyData;
-import duke.exceptions.DukeException;
-import duke.ui.Ui;
-
-import java.util.Arrays;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
+import pix.commands.AddDeadline;
+import pix.commands.AddEvent;
+import pix.commands.AddToDo;
+import pix.commands.Bye;
+import pix.commands.Command;
+import pix.commands.Delete;
+import pix.commands.Find;
+import pix.commands.List;
+import pix.commands.ListDate;
+import pix.commands.Mark;
+import pix.commands.Unmark;
+import pix.data.MyData;
+import pix.exceptions.PixException;
+import pix.ui.Ui;
+
+/**
+ * Parser class to parse commands by the user.
+ */
 public class Parser {
     /** Data object containing list of tasks. */
     private final MyData data;
@@ -56,17 +58,17 @@ public class Parser {
      *
      * @param commandArr Date of tasks to be displayed.
      * @return ListDate object.
-     * @throws DukeException If no date given or if invalid date given.
+     * @throws PixException If no date given or if invalid date given.
      */
-    public Command parseListDate(String[] commandArr) throws DukeException{
+    public Command parseListDate(String[] commandArr) throws PixException {
         if (commandArr.length <= 1) {
-            throw new DukeException(Ui.wrapLines("Please enter a date e.g. listdate 'yyyy-MM-dd'"));
+            throw new PixException(Ui.wrapLines("Please enter a date e.g. listdate 'yyyy-MM-dd'"));
         }
         try {
             LocalDate date = LocalDate.parse(commandArr[1]);
             return new ListDate(date);
         } catch (DateTimeParseException e) {
-            throw new DukeException(Ui.wrapLines("Please enter a date e.g. listdate 'yyyy-MM-dd'"));
+            throw new PixException(Ui.wrapLines("Please enter a date e.g. listdate 'yyyy-MM-dd'"));
         }
     }
 
@@ -75,15 +77,15 @@ public class Parser {
      *
      * @param commandArr Index to be marked.
      * @return Mark object.
-     * @throws DukeException If index not given or index not in valid range.
+     * @throws PixException If index not given or index not in valid range.
      */
-    public Command parseMark(String[] commandArr) throws DukeException {
+    public Command parseMark(String[] commandArr) throws PixException {
         if (commandArr.length <= 1) {
-            throw new DukeException(Ui.wrapLines("Please enter a index to mark."));
+            throw new PixException(Ui.wrapLines("Please enter a index to mark."));
         }
         int id = Integer.parseInt(commandArr[1]);
         if (id > data.len() || id < 0) {
-            throw new DukeException(Ui.wrapLines("Please enter a valid number."));
+            throw new PixException(Ui.wrapLines("Please enter a valid number."));
         }
         return new Mark(id - 1);
     }
@@ -93,15 +95,15 @@ public class Parser {
      *
      * @param commandArr Index to be un-marked.
      * @return Unmark object.
-     * @throws DukeException If index not given or index not in valid range.
+     * @throws PixException If index not given or index not in valid range.
      */
-    public Command parseUnmark(String[] commandArr) throws DukeException {
+    public Command parseUnmark(String[] commandArr) throws PixException {
         if (commandArr.length <= 1) {
-            throw new DukeException(Ui.wrapLines("Please enter a index to unmark."));
+            throw new PixException(Ui.wrapLines("Please enter a index to unmark."));
         }
         int id = Integer.parseInt(commandArr[1]);
         if (id > data.len() || id < 0) {
-            throw new DukeException(Ui.wrapLines("Please enter a valid number."));
+            throw new PixException(Ui.wrapLines("Please enter a valid number."));
         }
         return new Unmark(id - 1);
     }
@@ -111,12 +113,12 @@ public class Parser {
      *
      * @param command Command entered by the user.
      * @return Add To Do object.
-     * @throws DukeException If no description given.
+     * @throws PixException If no description given.
      */
-    public Command parseTodo(String command) throws DukeException {
+    public Command parseTodo(String command) throws PixException {
         String description = removeCommand(command);
         if (description.isEmpty()) {
-            throw new DukeException(Ui.wrapLines("Cannot have an empty task."));
+            throw new PixException(Ui.wrapLines("Cannot have an empty task."));
         }
         return new AddToDo(description);
     }
@@ -126,16 +128,18 @@ public class Parser {
      *
      * @param slashed Array of description and due date.
      * @return AddDeadline object.
-     * @throws DukeException If no description, due date or invalid format of date given.
+     * @throws PixException If no description, due date or invalid format of date given.
      */
-    public Command parseDeadline(String[] slashed) throws DukeException {
+    public Command parseDeadline(String[] slashed) throws PixException {
         if (slashed.length != 2 || removeCommand(slashed[0]).isEmpty() || removeCommand(slashed[1]).isEmpty()) {
-            throw new DukeException(Ui.wrapLines("Invalid format.\n    e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'"));
+            throw new PixException(Ui.wrapLines("Invalid format.\n    "
+                    + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'"));
         }
         try {
             return new AddDeadline(removeCommand(slashed[0]), removeCommand(slashed[1]));
         } catch (DateTimeParseException e) {
-            throw new DukeException(Ui.wrapLines("Invalid format.\n    e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'"));
+            throw new PixException(Ui.wrapLines("Invalid format.\n    "
+                    + "e.g. deadline 'description' / 'yyyy-MM-dd HH-mm'"));
         }
     }
 
@@ -144,23 +148,23 @@ public class Parser {
      *
      * @param slashed Array of description, from date and to date.
      * @return AddEvent object.
-     * @throws DukeException If no description, from date, to date, or invalid format of date given.
+     * @throws PixException If no description, from date, to date, or invalid format of date given.
      */
-    public Command parseEvent(String[] slashed) throws DukeException {
+    public Command parseEvent(String[] slashed) throws PixException {
         if (slashed.length != 3
                 || removeCommand(slashed[0]).isEmpty()
                 || removeCommand(slashed[1]).isEmpty()
                 || removeCommand(slashed[2]).isEmpty()) {
-            throw new DukeException(Ui.wrapLines("Invalid format. From and To formatted as 'yyyy-MM-dd HH-mm'" +
-                    "\n    e.g. event 'description' / 'From' / 'To'"));
+            throw new PixException(Ui.wrapLines("Invalid format. From and To formatted as 'yyyy-MM-dd HH-mm'"
+                    + "\n    e.g. event 'description' / 'From' / 'To'"));
         }
         try {
             return new AddEvent(removeCommand(slashed[0]),
                     removeCommand(slashed[1]),
                     removeCommand(slashed[2]));
         } catch (DateTimeParseException e) {
-            throw new DukeException(Ui.wrapLines("Invalid format. From and To formatted as 'yyyy-MM-dd HH-mm'" +
-                    "\n    e.g. event 'description' / 'From' / 'To'"));
+            throw new PixException(Ui.wrapLines("Invalid format. From and To formatted as 'yyyy-MM-dd HH-mm'"
+                    + "\n    e.g. event 'description' / 'From' / 'To'"));
         }
 
     }
@@ -170,15 +174,15 @@ public class Parser {
      *
      * @param commandArr Index of task to be deleted.
      * @return Delete object.
-     * @throws DukeException If index not given or index not in valid range.
+     * @throws PixException If index not given or index not in valid range.
      */
-    public Command parseDelete(String[] commandArr) throws DukeException {
+    public Command parseDelete(String[] commandArr) throws PixException {
         if (commandArr.length <= 1) {
-            throw new DukeException(Ui.wrapLines("Please enter a index to delete."));
+            throw new PixException(Ui.wrapLines("Please enter a index to delete."));
         }
         int id = Integer.parseInt(commandArr[1]);
         if (id > data.len() || id < 0) {
-            throw new DukeException(Ui.wrapLines("Please enter a valid number."));
+            throw new PixException(Ui.wrapLines("Please enter a valid number."));
         }
         return new Delete(id - 1);
     }
@@ -188,11 +192,11 @@ public class Parser {
      *
      * @param commandArr Keyword to seach task by.
      * @return Tasks if keyword is in the description.
-     * @throws DukeException If no keyword is given.
+     * @throws PixException If no keyword is given.
      */
-    public Command parseFind(String[] commandArr) throws DukeException {
+    public Command parseFind(String[] commandArr) throws PixException {
         if (commandArr.length <= 1) {
-            throw new DukeException(Ui.wrapLines("Please enter a keyword"));
+            throw new PixException(Ui.wrapLines("Please enter a keyword"));
         }
         String keyword = commandArr[1];
         return new Find(keyword);
@@ -215,34 +219,34 @@ public class Parser {
      *
      * @param command Command that the user inputs.
      * @return The corresponding command that is parsed.
-     * @throws DukeException If any errors related to formatting and indexing occurs.
+     * @throws PixException If any errors related to formatting and indexing occurs.
      */
-    public Command parse(String command) throws DukeException {
+    public Command parse(String command) throws PixException {
         String[] commandArr = command.split(" ");
         String[] slashed = command.split("/");
         switch (commandArr[0]) {
-            case "bye":
-                return parseBye();
-            case "list":
-                return parseList();
-            case "listdate":
-                return parseListDate(commandArr);
-            case "mark":
-                return parseMark(commandArr);
-            case "unmark":
-                return parseUnmark(commandArr);
-            case "todo":
-                return parseTodo(command);
-            case "deadline":
-                return parseDeadline(slashed);
-            case "event":
-                return parseEvent(slashed);
-            case "delete":
-                return parseDelete(commandArr);
-            case "find":
-                return parseFind(commandArr);
-            default:
-                throw new DukeException(Ui.wrapLines("I am not sure what that means."));
+        case "bye":
+            return parseBye();
+        case "ls":
+            return parseList();
+        case "lsd":
+            return parseListDate(commandArr);
+        case "mk":
+            return parseMark(commandArr);
+        case "unmk":
+            return parseUnmark(commandArr);
+        case "todo":
+            return parseTodo(command);
+        case "dline":
+            return parseDeadline(slashed);
+        case "event":
+            return parseEvent(slashed);
+        case "rm":
+            return parseDelete(commandArr);
+        case "find":
+            return parseFind(commandArr);
+        default:
+            throw new PixException(Ui.wrapLines("I am not sure what that means."));
         }
     }
 }

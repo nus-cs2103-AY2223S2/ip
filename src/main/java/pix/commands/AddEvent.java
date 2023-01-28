@@ -1,9 +1,12 @@
-package duke.commands;
+package pix.commands;
 
-import duke.data.MyData;
-import duke.tasks.Event;
-import duke.ui.Ui;
+import pix.data.MyData;
+import pix.tasks.Event;
+import pix.ui.Ui;
 
+/**
+ * AddEvent class to add event to list of tasks.
+ */
 public class AddEvent extends Command {
     /** Event object to be added. */
     protected Event event;
@@ -19,6 +22,12 @@ public class AddEvent extends Command {
         this.event = new Event(description, from, to);
     }
 
+    /**
+     * Executes the AddEvent command and displays result.
+     *
+     * @param data Data storing the tasks.
+     * @param ui Ui object which handles interaction with user.
+     */
     public void execute(MyData data, Ui ui) {
         data.setData(event);
         data.saveToFile();

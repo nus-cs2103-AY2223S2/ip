@@ -1,8 +1,11 @@
-package duke.commands;
+package pix.commands;
 
-import duke.data.MyData;
-import duke.ui.Ui;
+import pix.data.MyData;
+import pix.ui.Ui;
 
+/**
+ * Unmark class which unmarks a task from the list of tasks.
+ */
 public class Unmark extends Command {
     /** Index to remove mark. */
     private final int id;
@@ -16,10 +19,15 @@ public class Unmark extends Command {
         this.id = id;
     }
 
+    /**
+     * Executes the unmark command and displays the result.
+     *
+     * @param data Data storing the tasks.
+     * @param ui Ui object which handles interaction with user.
+     */
     public void execute(MyData data, Ui ui) {
         data.markUndone(this.id);
         data.saveToFile();
         ui.unmark(data.getData(this.id));
     }
 }
-

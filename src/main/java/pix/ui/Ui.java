@@ -1,42 +1,57 @@
-package duke.ui;
-
-import duke.data.MyData;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
+package pix.ui;
 
 import java.time.LocalDate;
 
+import pix.data.MyData;
+import pix.tasks.Deadline;
+import pix.tasks.Event;
+import pix.tasks.Task;
+
+/**
+ * Ui class which deals with the interactions with user.
+ */
 public class Ui {
-    /** Visual logo of duke. */
-    private static final String logo = "    ______    __  ___   ___ \n" +
-            "    |   _  \\  |  | \\  \\ /  / \n" +
-            "    |  |_)  | |  |  \\  V  /  \n" +
-            "    |   ___/  |  |   >   <   \n" +
-            "    |  |      |  |  /  .  \\  \n" +
-            "    | _|      |__| /__/ \\__\\\n";
+    /** Visual logo of Pix. */
+    private static final String logo = "    ______    __  ___   ___ \n"
+            + "    |   _  \\  |  | \\  \\ /  / \n"
+            + "    |  |_)  | |  |  \\  V  /  \n"
+            + "    |   ___/  |  |   >   <   \n"
+            + "    |  |      |  |  /  .  \\  \n"
+            + "    | _|      |__| /__/ \\__\\\n";
 
-    /** Duke's greeting. */
-    private static final String greet = "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"+
-            "    How can I assist you?\n" +
-            "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    /** Pix's greeting. */
+    private static final String greet = "    --------------------------------------------------------------\n"
+            + "     How can I assist you?\n"
+            + "    --------------------------------------------------------------";
 
-    private static final String line = "    ____________________________________________________________\n";
+    /** Line in string. */
+    private static final String line = "    --------------------------------------------------------------\n";
 
     /**
-     * Displays duke's introduction.
+     * Displays Pix's introduction.
      */
     public static void display() {
-        System.out.println("    Hello, this is Pix!\n" + logo);
+        System.out.println("    Hello, this is\n" + logo);
         System.out.println(greet);
     }
 
+    /**
+     * Wraps the message in lines to display.
+     *
+     * @param message Message to be displayed.
+     * @return A String with the message wrapped in lines.
+     */
     public static String wrapLines(String message) {
-        return "    ____________________________________________________________\n" +
-                "    " + message + "\n" +
-                "    ____________________________________________________________";
+        return "    --------------------------------------------------------------\n"
+                + "     " + message + "\n"
+                + "    --------------------------------------------------------------";
     }
 
+    /**
+     * Returns a line.
+     *
+     * @return A String line.
+     */
     public static String line() {
         return line;
     }
@@ -45,9 +60,9 @@ public class Ui {
      * Prints bye.
      */
     public void bye() {
-        System.out.print(Ui.line() +
-                "    Bye. Hope to see you again soon!\n" +
-                Ui.line());
+        System.out.print(Ui.line()
+                + "     Bye. Hope to see you again soon!\n"
+                + Ui.line());
     }
 
     /**
@@ -57,11 +72,11 @@ public class Ui {
      * @param listLen Number of tasks after adding tasks.
      */
     public void add(String description, int listLen) {
-        System.out.print(Ui.line() +
-                "     Okay! I've added this task:\n" +
-                "       " + description + "\n" +
-                "     Now you have " + listLen + " tasks in the list.\n" +
-                Ui.line());
+        System.out.print(Ui.line()
+                + "     Okay! I've added this task:\n"
+                + "       " + description + "\n"
+                + "     Now you have " + listLen + " tasks in the list.\n"
+                + Ui.line());
     }
 
     /**
@@ -71,11 +86,11 @@ public class Ui {
      * @param listLen Number of tasks after deleting task.
      */
     public void delete(Task task, int listLen) {
-        System.out.print(Ui.line() +
-                "     Understood! The following task is now deleted:\n" +
-                "       " + task + "\n" +
-                "     Now you have " + listLen + " tasks in the list.\n" +
-                Ui.line());
+        System.out.print(Ui.line()
+                + "     Understood! The following task is now gone:\n"
+                + "       " + task + "\n"
+                + "     Now you have " + listLen + " tasks in the list.\n"
+                + Ui.line());
     }
 
     /**
@@ -86,7 +101,7 @@ public class Ui {
     public void list(MyData data) {
         System.out.print(Ui.line());
         for (int i = 0; i < data.len(); i++) {
-            System.out.printf("    %d. %s%n", i + 1, data.getData(i));
+            System.out.printf("     %d. %s%n", i + 1, data.getData(i));
         }
         System.out.print(Ui.line());
     }
@@ -103,13 +118,13 @@ public class Ui {
             Task task = data.getData(i);
             if (task instanceof Deadline) {
                 if (((Deadline) task).getDate().equals(date)) {
-                    System.out.printf("    %d. %s%n", i + 1, data.getData(i));
+                    System.out.printf("     %d. %s%n", i + 1, data.getData(i));
                 }
             }
             if (task instanceof Event) {
                 Event taskEvent = (Event) task;
                 if (date.isAfter(taskEvent.getFromDate()) && date.isBefore(taskEvent.getToDate())) {
-                    System.out.printf("    %d. %s%n", i + 1, data.getData(i));
+                    System.out.printf("     %d. %s%n", i + 1, data.getData(i));
                 }
             }
         }
@@ -122,10 +137,10 @@ public class Ui {
      * @param task Task to be marked.
      */
     public void mark(Task task) {
-        System.out.print(Ui.line() +
-                "    Well done! You have completed the following task:\n" +
-                "    " + task + "\n" +
-                Ui.line());
+        System.out.print(Ui.line()
+                + "     Well done! You have completed the following task:\n"
+                + "     " + task + "\n"
+                + Ui.line());
     }
 
     /**
@@ -134,17 +149,24 @@ public class Ui {
      * @param task Task to un-mark.
      */
     public void unmark(Task task) {
-        System.out.print(Ui.line() +
-                "    Stop procrastinating and complete the following task:\n" +
-                "    " + task + "\n" +
-                Ui.line());
+        System.out.print(Ui.line()
+                + "     Stop procrastinating and complete the following task:\n"
+                + "     " + task + "\n"
+                + Ui.line());
     }
 
+
+    /**
+     * Finds tasks that contain the keyword.
+     *
+     * @param data Data containing ArrayList of tasks.
+     * @param keyword Keyword to search tasks by.
+     */
     public void find(MyData data, String keyword) {
         System.out.print(Ui.line());
         for (int i = 0; i < data.len(); i++) {
             if (data.getData(i).inDescription(keyword)) {
-                System.out.printf("    %d. %s%n", i + 1, data.getData(i));
+                System.out.printf("     %d. %s%n", i + 1, data.getData(i));
             }
         }
         System.out.print(Ui.line());

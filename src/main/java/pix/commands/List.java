@@ -1,8 +1,11 @@
-package duke.commands;
+package pix.commands;
 
-import duke.data.MyData;
-import duke.ui.Ui;
+import pix.data.MyData;
+import pix.ui.Ui;
 
+/**
+ * List class which displays the list of tasks.
+ */
 public class List extends Command {
     public void execute(MyData data, Ui ui) {
         ui.list(data);

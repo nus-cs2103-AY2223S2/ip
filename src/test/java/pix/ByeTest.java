@@ -1,9 +1,9 @@
-package duke;
+package pix;
 
-import duke.data.MyData;
-import duke.ui.Ui;
+import pix.data.MyData;
+import pix.ui.Ui;
 import org.junit.jupiter.api.Test;
-import duke.commands.Bye;
+import pix.commands.Bye;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

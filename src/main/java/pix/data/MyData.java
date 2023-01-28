@@ -1,19 +1,21 @@
-package duke.data;
+package pix.data;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-import duke.tasks.Task;
-import duke.tasks.ToDo;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
+import pix.tasks.Deadline;
+import pix.tasks.Event;
+import pix.tasks.Task;
+import pix.tasks.ToDo;
 
+/**
+ * MyDate class to keep track of the list of tasks.
+ */
 public class MyData {
     /** Arraylist to keep track of all tasks. */
     private final ArrayList<Task> data = new ArrayList<Task>();
@@ -33,8 +35,9 @@ public class MyData {
      *
      * @param index Index of task to delete.
      */
-    public void deleteData(int index) { this.data.remove(index); }
-
+    public void deleteData(int index) {
+        this.data.remove(index);
+    }
 
     /**
      * Adds task to the list of tasks.
@@ -107,18 +110,18 @@ public class MyData {
                 String command = arr[0];
                 String marked = arr[1];
                 switch (command) {
-                    case "T":
-                        ToDo todo = new ToDo(arr[2]);
-                        setData(todo);
-                        break;
-                    case "D":
-                        Deadline deadline = new Deadline(arr[2], arr[3]);
-                        setData(deadline);
-                        break;
-                    case "E":
-                        Event event = new Event(arr[2], arr[3], arr[4]);
-                        setData(event);
-                        break;
+                case "T":
+                    ToDo todo = new ToDo(arr[2]);
+                    setData(todo);
+                    break;
+                case "D":
+                    Deadline deadline = new Deadline(arr[2], arr[3]);
+                    setData(deadline);
+                    break;
+                default:
+                    Event event = new Event(arr[2], arr[3], arr[4]);
+                    setData(event);
+                    break;
                 }
                 if (marked.equals("1")) {
                     markDone(id);

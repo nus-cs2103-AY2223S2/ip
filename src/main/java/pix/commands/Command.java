@@ -1,8 +1,11 @@
-package duke.commands;
+package pix.commands;
 
-import duke.data.MyData;
-import duke.ui.Ui;
+import pix.data.MyData;
+import pix.ui.Ui;
 
+/**
+ * Parent Command class.
+ */
 public abstract class Command {
     /**
      * Executes the command.

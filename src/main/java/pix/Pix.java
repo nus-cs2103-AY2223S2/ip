@@ -1,17 +1,20 @@
-package duke;
-
-import duke.data.MyData;
-import duke.exceptions.DukeException;
-import duke.parser.Parser;
-import duke.commands.Command;
-import duke.ui.Ui;
+package pix;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Duke {
+import pix.commands.Command;
+import pix.data.MyData;
+import pix.exceptions.PixException;
+import pix.parser.Parser;
+import pix.ui.Ui;
+
+/**
+ * Main Pix class which runs the logic of Pix.
+ */
+public class Pix {
     /**
-     * Main function which runs Duke's logic.
+     * Main function which runs Pix's logic.
      *
      * @param args Arguments provided.
      */
@@ -33,7 +36,7 @@ public class Duke {
             try {
                 Command parsed = parser.parse(command);
                 parsed.execute(data, ui);
-            } catch (DukeException e) {
+            } catch (PixException e) {
                 System.out.println(e.getMessage());
             }
             if (command.equals("bye")) {
@@ -43,3 +46,4 @@ public class Duke {
         sc.close();
     }
 }
+

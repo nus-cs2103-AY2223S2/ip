@@ -1,13 +1,16 @@
-package duke.commands;
-
-import duke.data.MyData;
-import duke.ui.Ui;
+package pix.commands;
 
 import java.time.LocalDate;
 
+import pix.data.MyData;
+import pix.ui.Ui;
+
+/**
+ * ListDate class which displays list of tasks that occurs on / due by a date.
+ */
 public class ListDate extends Command {
     /** Date to search for. */
-    LocalDate date;
+    private final LocalDate date;
 
     /**
      * Constructs a new ListDate command.

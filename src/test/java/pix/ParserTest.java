@@ -1,9 +1,9 @@
-package duke;
+package pix;
 
-import duke.commands.Command;
-import duke.parser.Parser;
-import duke.commands.Bye;
-import duke.data.MyData;
+import pix.commands.Command;
+import pix.parser.Parser;
+import pix.commands.Bye;
+import pix.data.MyData;
 
 import org.junit.jupiter.api.Test;
 

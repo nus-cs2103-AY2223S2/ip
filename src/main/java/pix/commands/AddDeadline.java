@@ -1,9 +1,12 @@
-package duke.commands;
+package pix.commands;
 
-import duke.data.MyData;
-import duke.tasks.Deadline;
-import duke.ui.Ui;
+import pix.data.MyData;
+import pix.tasks.Deadline;
+import pix.ui.Ui;
 
+/**
+ * AddDeadline class to add deadline to list of tasks.
+ */
 public class AddDeadline extends Command {
     /** Deadline object to be added. */
     protected Deadline deadline;
@@ -18,6 +21,12 @@ public class AddDeadline extends Command {
         this.deadline = new Deadline(description, by);
     }
 
+    /**
+     * Executes the AddDeadline command and displays result.
+     *
+     * @param data Data storing the tasks.
+     * @param ui Ui object which handles interaction with user.
+     */
     public void execute(MyData data, Ui ui) {
         data.setData(deadline);
         data.saveToFile();

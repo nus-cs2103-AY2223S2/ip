@@ -1,9 +1,12 @@
-package duke.commands;
+package pix.commands;
 
-import duke.data.MyData;
-import duke.tasks.ToDo;
-import duke.ui.Ui;
+import pix.data.MyData;
+import pix.tasks.ToDo;
+import pix.ui.Ui;
 
+/**
+ * AddToDo class to add to do to list of tasks.
+ */
 public class AddToDo extends Command {
     /** To do object to be added. */
     protected ToDo todo;
@@ -17,6 +20,12 @@ public class AddToDo extends Command {
         this.todo = new ToDo(description);
     }
 
+    /**
+     * Executes the Add To Do command and displays result.
+     *
+     * @param data Data storing the tasks.
+     * @param ui Ui object which handles interaction with user.
+     */
     public void execute(MyData data, Ui ui) {
         data.setData(todo);
         data.saveToFile();

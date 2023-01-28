@@ -1,12 +1,15 @@
 package pix.exceptions;
 
-public class DukeException extends Exception {
+/**
+ * PixException class to raise exceptions specific to pix.
+ */
+public class PixException extends Exception {
     /**
      * Raises a duke exception.
      *
      * @param error Error message to be displayed.
      */
-    public DukeException(String error) {
+    public PixException(String error) {
         super(error);
     }
 }

@@ -1,8 +1,11 @@
-package duke.commands;
+package pix.commands;
 
-import duke.data.MyData;
-import duke.ui.Ui;
+import pix.data.MyData;
+import pix.ui.Ui;
 
+/**
+ * Delete class to delete task from list of tasks.
+ */
 public class Delete extends Command {
     /** Index to delete task. */
     private final int id;
@@ -16,6 +19,12 @@ public class Delete extends Command {
         this.id = id;
     }
 
+    /**
+     * Executes the delete command and displays result.
+     *
+     * @param data Data storing the tasks.
+     * @param ui Ui object which handles interaction with user.
+     */
     public void execute(MyData data, Ui ui) {
         int itemCount = data.len() - 1;
         ui.delete(data.getData(this.id), itemCount);

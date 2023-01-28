@@ -1,7 +1,10 @@
-package duke.tasks;
+package pix.tasks;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parent task class containing description of task.
+ */
 public class Task {
     /** Description of task. */
     protected String description;
@@ -34,7 +37,9 @@ public class Task {
      *
      * @return Formatted of tasks to save locally.
      */
-    public String toSave() { return isDone ? " 1 / " + description : " 0 / " + description; }
+    public String toSave() {
+        return isDone ? " 1 / " + description : " 0 / " + description;
+    }
 
     /**
      * Marks the task as done.

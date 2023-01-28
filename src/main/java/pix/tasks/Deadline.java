@@ -1,8 +1,11 @@
-package duke.tasks;
+package pix.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * Deadline task containing the description and due date.
+ */
 public class Deadline extends Task {
     /** Date and time of deadline. */
     protected LocalDateTime by;
@@ -29,8 +32,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() +
-                " (by: " + by.format(formatOutput) + ")";
+        return "[D]" + super.toString()
+                + " (by: " + by.format(formatOutput) + ")";
     }
 
     @Override

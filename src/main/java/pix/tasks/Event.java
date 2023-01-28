@@ -1,8 +1,11 @@
-package duke.tasks;
+package pix.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * Event task which contains the description, from date and to date.
+ */
 public class Event extends Task {
     /** Date and time event starts. */
     protected LocalDateTime from;
@@ -44,9 +47,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() +
-                " (from: " + from.format(formatOutput) + " " +
-                "\n              to: " + to.format(formatOutput) + ")";
+        return "[E]" + super.toString() + " (from: " + from.format(formatOutput) + " "
+                + "\n              to: " + to.format(formatOutput) + ")";
     }
 
     @Override
