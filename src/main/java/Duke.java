@@ -84,27 +84,27 @@ public class Duke {
                 break;
             case MARK:
                 markEvent(userInput);
-                replaceFileContents(filePath,saveList());
+                replaceFileContents(filePath, prepareWriteContents());
                 break;
             case UNMARK:
                 unmarkEvent(userInput);
-                replaceFileContents(filePath,saveList());
+                replaceFileContents(filePath, prepareWriteContents());
                 break;
             case DELETE:
                 deleteEvent(userInput);
-                replaceFileContents(filePath,saveList());
+                replaceFileContents(filePath, prepareWriteContents());
                 break;
             case TODO:
                 todoEvent(userInput);
-                replaceFileContents(filePath,saveList());
+                replaceFileContents(filePath, prepareWriteContents());
                 break;
             case DEADLINE:
                 deadlineEvent(userInput);
-                replaceFileContents(filePath,saveList());
+                replaceFileContents(filePath, prepareWriteContents());
                 break;
             case EVENT:
                 eventEvent(userInput);
-                replaceFileContents(filePath,saveList());
+                replaceFileContents(filePath, prepareWriteContents());
                 break;
             }
         }
@@ -315,28 +315,6 @@ public class Duke {
         printTotalTasks();
     }
 
-    /**
-    * Remove the first word of every chunk and whitespaces 
-    * at the two ends of the String
-    *
-    * @param s An array of Strings
-    */
-    private static String[] removeFirstWord(String[] s) throws DukeException {
-        // no arguments, guaranteed to have at least 1
-        if (s.length == 1) {
-            throw new DukeException("Invalid!! Empty Input");
-        }
-        for (int i = 0; i < s.length; i++) {
-            s[i] = s[i].substring(s[i].indexOf(" ")).trim();
-        }
-        return s;
-    }
-
-
-
-
-
-
     private static String printList() {
         StringBuilder s = new StringBuilder();
         for (int i = 1; i <= storedInputs.size(); i++) {
@@ -366,16 +344,21 @@ public class Duke {
         return task + "|" + status + "|" + details;
     }
 
-    private static void printConfirmation() {
-        System.out.println("\nYAY! Task Added:");
-    }
-
     private static void printConfirmationMessage(Task task) {
         System.out.println("\nYAY! Task Added:\n " + task );
     }
 
     private static void printTotalTasks() {
         System.out.println("Now you have " + Task.count  + " tasks in the list.\n");
+    }
+
+    private static String prepareWriteContents() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < storedInputs.size(); i++) {
+            s.append(storedInputs.get(i).writeToFile());
+            s.append("\n");
+        }
+        return s.toString();
     }
 
     private static void replaceFileContents(Path path, String newContents) throws IOException {

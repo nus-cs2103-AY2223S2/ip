@@ -8,7 +8,7 @@ public class Event extends Task {
 
     public Event(String s, String startTime, String endTime) {
         super(s);
-        this.startTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.startTime = LocalDate.parse(startTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.endTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
@@ -17,17 +17,45 @@ public class Event extends Task {
         if (isTaskDone) {
             this.markDone();
         }
-        this.startTime = LocalDate.parse(taskDate);
+        String from = taskDate.substring(0, taskDate.indexOf("|"));
+        String to = taskDate.substring(taskDate.indexOf("|") + 1);
+
+        System.out.println(from);
+        System.out.println(to);
+
+
+        this.startTime = LocalDate.parse(from, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.endTime = LocalDate.parse(to, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    @Override
+    public String writeToFile() {
+        if (!taskDone) {
+            return "E| |"
+                    + this.taskName
+                    + "|"
+                    + this.startTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                    + "|"
+                    + this.endTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        }
+        return "E|X|"
+                + this.taskName
+                + "|"
+                + this.startTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                + "|"
+                + this.endTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     @Override
     public String toString() {
         if (!taskDone) {
             return "[E][ ] " + this.taskName
-                + " (from: " + this.startTime + " to: " + this.endTime + ")";
+                + " (from: " + this.startTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                + " to: " + this.endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
         }
-        return "[E][X] " + this.taskName 
-            + " (from: " + this.startTime + " to: " + this.endTime;
+        return "[E][X] " + this.taskName
+                + " (from: " + this.startTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                + " to: " + this.endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
     }
 
 }

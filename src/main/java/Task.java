@@ -19,6 +19,11 @@ public class Task {
         this.taskDone = false;
     }
 
+    //to override
+    public String writeToFile() {
+        return "";
+    }
+
     @Override
     public String toString() {
         if (!taskDone) {
@@ -26,5 +31,4 @@ public class Task {
         }
         return "[X] " + this.taskName;
     }
-
 }

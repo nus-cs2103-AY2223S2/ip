@@ -10,6 +10,13 @@ public class ToDo extends Task {
             this.markDone();
         }
     }
+    @Override
+    public String writeToFile() {
+        if (!taskDone) {
+            return "T| |" + this.taskName;
+        }
+        return "T|X|" + this.taskName;
+    }
 
     @Override
     public String toString() {

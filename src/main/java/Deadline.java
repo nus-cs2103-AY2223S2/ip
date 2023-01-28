@@ -15,15 +15,31 @@ public class Deadline extends Task {
         if (isTaskDone) {
             this.markDone();
         }
-        this.endTime = LocalDate.parse(taskDate);
+        this.endTime = LocalDate.parse(taskDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    @Override
+    public String writeToFile() {
+        if (!taskDone) {
+            return "D| |"
+                    + this.taskName
+                    + "|"
+                    + this.endTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        }
+        return "D|X|"
+                + this.taskName
+                + "|"
+                + this.endTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     @Override
     public String toString() {
         if (!taskDone) {
-            return "[D][ ] " + this.taskName + " (by: " + this.endTime + ")";
+            return "[D][ ] " + this.taskName
+                    + " (by: " + this.endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
         }
-        return "[D][X] " + this.taskName + " (by: " + this.endTime + ")";
+        return "[D][X] " + this.taskName
+                + " (by: " + this.endTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
     }
 
 }
