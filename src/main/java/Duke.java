@@ -35,20 +35,6 @@ public class Duke {
         this.ui.showWelcome();
         Parser parser = new Parser();
 
-        /*
-        String[] readLine = parser.readLine();
-        ArrayList<String> kw = new ArrayList<>();
-        kw.add("from");
-        kw.add("to");
-
-        try {
-            ArrayList<String> queries = parser.queries(readLine, kw);
-            System.out.println(queries);
-        } catch (DukeException dk) {
-            System.out.println(dk.getMessage());
-        }
-        */
-
         String command = "";
         Scanner sc = new Scanner(System.in);
 
