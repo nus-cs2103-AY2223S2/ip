@@ -1,3 +1,5 @@
+package tasks;
+
 public class Task {
     private String input;
     private boolean status;
@@ -13,6 +15,7 @@ public class Task {
         this.status = false;
     }
 
+    @Override
     public String toString() {
         if (this.status) {
             return String.format("[X] " + this.input);

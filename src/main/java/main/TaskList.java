@@ -1,10 +1,13 @@
-import java.io.*;
-import java.util.*;
+package main;
+import tasks.Task;
+import java.util.ArrayList;
 
 public class TaskList {
-    private List<Task> toDoList;
+
+    private ArrayList<Task> toDoList;
+
     public TaskList() {
-        this.toDoList = new ArrayList<>();
+        this.toDoList = new ArrayList<Task>();
     }
 
     public Task get(int i) {
@@ -23,7 +26,6 @@ public class TaskList {
     public String toString() {
         return "" + this.toDoList;
     }
-
 
 }
 
