@@ -46,6 +46,22 @@ public class TaskList {
         }
     }
 
+    public void printMatchingList(String keyword) throws DukeException {
+        if (keyword.isEmpty()) {
+            throw new DukeException("empty keyword");
+        }
+        System.out.println("Here are the matching tasks in your list :)");
+        int count = 0;
+        for (int i = 0; i < this.getSize(); i++) {
+            Task task = this.getTask(i);
+            String taskName = task.getTaskName();
+            if (taskName.contains(keyword)) {
+                count++;
+                System.out.println(String.format("%d. %s", count, task));
+            }
+        }
+    }
+
     public Task getTask(int index) {
         return this.lst.get(index);
     }

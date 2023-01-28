@@ -13,6 +13,7 @@ public class DukeException extends Exception{
                     "updating file", "saving changes to file", "file not found", "empty line in file"));
     protected ArrayList<String> formatError = new ArrayList<>(
             Arrays.asList("date format", "wrong order"));
+    protected ArrayList<String> findError = new ArrayList<>(Arrays.asList("empty keyword"));
     protected String errorMsg;
 
     public DukeException(String command) {
@@ -40,6 +41,8 @@ public class DukeException extends Exception{
             this.errorMsg = "The command shouldn't be followed by other details!";
         } else if (command.equals("input type")) {
             this.errorMsg = "The input following the command is the wrong type!";
+        } else if (findError.contains(command)) {
+            this.errorMsg = "Find keyword cannot be empty!";
         } else {
             this.errorMsg = "I'm sorry but I don't know what that means :(";
         }
