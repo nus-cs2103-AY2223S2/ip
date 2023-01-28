@@ -26,7 +26,6 @@ public class Duke {
             String input = sc.nextLine();
             Matcher matchMark = mark.matcher(input);
             Matcher matchIndex = index.matcher(input);
-            //Matcher matchTaskType = taskType.matcher(input);
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again!");
                 break;
