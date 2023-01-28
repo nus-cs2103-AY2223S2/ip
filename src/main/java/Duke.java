@@ -1,121 +1,43 @@
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 
-import java.nio.file.Files;
-
-import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Scanner;
 
 public class Duke {
-    static String processCommand(String command, TaskList taskList) throws DukeException {
-        String[] commandArr = command.split(" ");
-        switch (commandArr[0]) {
-            case "list":
-                return taskList.toString();
-            case "mark":
-                return taskList.markTask(Integer.parseInt(commandArr[1]));
-            case "unmark":
-                return taskList.unmarkTask(Integer.parseInt(commandArr[1]));
-            case "delete":
-                return taskList.deleteTask(Integer.parseInt(commandArr[1]));
-        }
-        return taskList.parseCommand(command);
-    }
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    static String greetings() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
-    }
-
-    static String goodbye() {
-        return "Bye. Hope to see you soon!";
-    }
-
-    static TaskList getTaskList(String filePath, TaskList taskList) throws FileNotFoundException {
-        File file = new File(filePath);
-        Scanner sc = new Scanner(file);
-        while (sc.hasNextLine()) {
-            String task = sc.nextLine().trim();
-            taskList.addTask(parseTask(task));
-        }
-        return taskList;
-    }
-
-    static Task parseTask(String task) {
-        String[] taskArray = task.split("\\|");
-        String taskType = taskArray[0].trim();
-        if (taskType.equals("T")) {
-            return new ToDo(taskArray[2].trim(), taskArray[1].trim().equals("X"));
-        } else if (taskType.equals("D")) {
-            return new Deadline(taskArray[2].trim(), taskArray[1].trim().equals("X"),
-                    parseDateTime(taskArray[3].trim().substring(4)));
-        } else {
-            return new Event(taskArray[2].trim(), taskArray[1].trim().equals("X"),
-                    parseDateTime(taskArray[3].trim().substring(6)),
-                    parseDateTime(taskArray[4].trim().substring(4)));
-        }
-    }
-
-    static LocalDateTime parseDateTime(String dateTimeString) {
-        String[] dateTimeArray = dateTimeString.split(" ");
-        LocalDate date = LocalDate.parse(dateTimeArray[0]);
-        LocalTime time = LocalTime.parse(dateTimeArray[1]);
-        return LocalDateTime.of(date, time);
-    }
-
-    static void saveTasksInFile(String filePath, TaskList taskList) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(taskList.getListOfTasks());
-        fw.close();
-    }
-
-    static String display(String response) {
-        String horizontalLine = "\t______________________________________\n";
-        String[] responseArr = response.split("\\r?\\n");
-        StringBuilder responseFinal = new StringBuilder();
-        //add indentation
-        for (String r: responseArr) {
-            responseFinal.append("\t").append(r).append("\n");
-        }
-        return String.format("%s%s%s", horizontalLine, responseFinal, horizontalLine);
-    }
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println(display(greetings()));
-        String command = "", printable = "";
-        TaskList taskList = new TaskList();
-
-        String directoryPath = "../../../data";
-        String filePath = "../../../data/duke.txt";
-
-        if (!Files.exists(Path.of(directoryPath))) {
-            new File(directoryPath).mkdirs();
-        }
-
+    public Duke(String directoryPath, String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(directoryPath, filePath);
         try {
-            taskList = getTaskList(filePath, taskList);
-        } catch (FileNotFoundException e) {
-            new File(filePath);
+            this.tasks = storage.load();
+        } catch (DukeException | FileNotFoundException e){
+            ui.showLoadingError();
+            this.tasks = new TaskList();
         }
+    }
 
-        while (!(command = sc.nextLine()).equals("bye")) {
+    public void run() {
+        ui.showGreetingsMessage();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                printable = processCommand(command, taskList);
+                isExit = ui.acceptCommand(tasks);
             } catch (Exception e) {
-                printable = "OOPS! " + e.getMessage();
-            } finally {
-                System.out.println(display(printable));
+                ui.showErrorMessage(e);
             }
         }
         try {
-            saveTasksInFile(filePath, taskList);
+            storage.saveTasksInFile(tasks);
         } catch (IOException e) {
-            System.out.println("Error saving task list!");
+            ui.showSavingError();
         }
-        System.out.println(display(goodbye()));
+        ui.showGoodbyeMessage();
     }
+
+    public static void main(String[] args) {
+        new Duke("data", "data/tasks.txt").run();
+    }
+
 }

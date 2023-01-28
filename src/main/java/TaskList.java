@@ -11,46 +11,8 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
-    String parseCommand(String command) throws DukeException {
-        String[] commandArr = command.split(" ");
-        String taskType = commandArr[0];
-        String description; Task task;
-        switch (taskType) {
-        case "todo":
-            if (commandArr.length == 1) {
-                throw new EmptyTaskDescriptionException();
-            }
-            description = command.substring(5);
-            task = new ToDo(description);
-            break;
-        case "deadline":
-            int doneByIndex = command.indexOf("/by");
-            description = command.substring(9, doneByIndex - 1);
-            String doneByString = command.substring(doneByIndex + 4);
-            task = new Deadline(description, parseDateTime(doneByString));
-            break;
-        case "event":
-            int startIndex = command.indexOf("/from"), endIndex = command.indexOf("/to");
-            description = command.substring(6, startIndex - 1);
-            String startString = command.substring(startIndex + 6, endIndex - 1);
-            String endString = command.substring(endIndex + 4);
-            task = new Event(description, parseDateTime(startString), parseDateTime(endString));
-            break;
-        default:
-            throw new InvalidCommandException();
-        }
-        addTask(task);
-        return addTaskText(task);
-    }
-
     void addTask(Task task) {
         taskList.add(task);
-    }
-    LocalDateTime parseDateTime(String dateTimeString) {
-        String[] dateTimeArray = dateTimeString.split(" ");
-        LocalDate date = LocalDate.parse(dateTimeArray[0]);
-        LocalTime time = LocalTime.parse(dateTimeArray[1]);
-        return LocalDateTime.of(date, time);
     }
 
     String deleteTask(int taskNum) {
