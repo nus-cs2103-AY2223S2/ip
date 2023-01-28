@@ -4,17 +4,20 @@ import duke.command.Command;
 
 import duke.exception.DukeException;
 
+import duke.gui.GuiText;
+
 /** Class that encapsulates the Duke chatbot */
 public class Duke {
 
-    /** Relative path to the data directory used for storing tasks */
-    private static final String dirPath = "./data/";
     /** Storage object to interact with storage */
     private Storage storage;
     /** TaskList object to store tasks */
     private TaskList tasks;
     /** UI object to display user interface and read user input */
-    private Ui ui;
+    private GuiText guiText;
+
+    private boolean isExit = false;
+    private boolean isLoadSuccessful = true;
 
     /**
      * Constructs a Duke object with a specified path
@@ -24,44 +27,45 @@ public class Duke {
      *                used for storing tasks.
     */
     public Duke(String dirPath) {
-        this.ui = new Ui();
+        this.guiText = new GuiText();
         this.storage = new Storage(dirPath);
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            this.ui.showErrorMessage(e);
+            this.isLoadSuccessful = false;
             this.tasks = new TaskList();
         }
     }
 
     /**
-     * Runs the main loop of the Duke chatbot
-     * where Duke takes in user input
-     * and responds to the commands given.
+     * Runs the given command.
+     *
+     * @param command Given command.
+     * @return The text response.
      */
-    public void run() {
-        this.ui.showGreeting();
-        this.ui.showSeparator();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                ui.showArrow();
-                String fullCommand = this.ui.readCommand();
-                ui.showSeparator();
-                Command c = Parser.parseCommand(fullCommand);
-                c.execute(this.tasks, this.ui, this.storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showErrorMessage(e);
-            } finally {
-                ui.showSeparator();
-            }
+    public String runCommand(String command) {
+        try {
+            Command c = Parser.parseCommand(command);
+            this.isExit = c.isExit();
+            return c.execute(this.tasks, this.guiText, this.storage);
+        } catch (DukeException e) {
+            return this.guiText.showErrorMessage(e);
         }
-        ui.closeScanner();
     }
 
-    public static void main(String[] args) {
-        new Duke(Duke.dirPath).run();
+    public boolean isExit() {
+        return this.isExit;
+    }
+
+    /**
+     * Returns the text indicating whether
+     * loading from storage was successful.
+     *
+     * @return Text indicating whether loading
+     *         from storage was successful.
+     */
+    public String displayLoadStatus() {
+        return this.guiText.showLoad(isLoadSuccessful);
     }
 
 }

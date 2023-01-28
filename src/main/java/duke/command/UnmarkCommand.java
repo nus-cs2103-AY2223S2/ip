@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
+import duke.gui.GuiText;
 import duke.task.Task;
 
 public class UnmarkCommand extends Command {
@@ -16,10 +16,10 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, GuiText guiText, Storage storage) throws DukeException {
         Task task = tasks.unmarkTask(index);
-        ui.showUnmarkTask(task);
         storage.save(tasks.createTaskListString());
+        return guiText.showUnmarkTask(task);
     }
 
 }

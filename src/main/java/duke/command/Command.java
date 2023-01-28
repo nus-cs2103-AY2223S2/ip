@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
+import duke.gui.GuiText;
 
 /** Class that represents a user command */
 public abstract class Command {
@@ -25,11 +25,11 @@ public abstract class Command {
      * Executes this command.
      *
      * @param tasks Current task list.
-     * @param ui User interface.
+     * @param guiText User interface.
      * @param storage Storage.
      * @throws DukeException if execution fails.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, GuiText guiText, Storage storage) throws DukeException;
 
     public boolean isExit() {
         return this.isExit;

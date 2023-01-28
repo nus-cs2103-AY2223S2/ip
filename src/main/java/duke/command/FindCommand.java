@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.gui.GuiText;
 
 public class FindCommand extends Command {
 
@@ -14,8 +14,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showFind(tasks.findTasksByKeyword(this.keyword));
+    public String execute(TaskList tasks, GuiText guiText, Storage storage) {
+        return guiText.showFind(tasks.findTasksByKeyword(this.keyword));
     }
 
 }
