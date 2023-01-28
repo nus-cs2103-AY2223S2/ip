@@ -1,6 +1,9 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.task.TaskList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -52,7 +55,6 @@ public class Storage {
                             list.add(deadlineTask);
                             break;
                     }
-
                 }
             }
         } catch (IOException e) {

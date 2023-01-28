@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
@@ -12,15 +13,19 @@ public class Parser {
         return input.split(" ")[1];
     }
 
-    public String preDescription(String description, String split) {
+    public String getPreDescription(String description, String split) {
         return description.split(split)[0];
     }
 
-    public String postDescription(String description, String split) {
+    public String getPostDescription(String description, String split) {
         return description.split(split)[1];
     }
 
-    public LocalDate dateTime(String description) {
+    public LocalDate getDateTime(String description) {
         return LocalDate.parse(description);
+    }
+
+    public LocalDate getDateTime(String description, DateTimeFormatter formatter) {
+        return LocalDate.parse(description, formatter);
     }
 }
