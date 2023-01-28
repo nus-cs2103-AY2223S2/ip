@@ -67,6 +67,10 @@ public class Duke {
         ui.displayTotalNumList(list.size());
     }
 
+    private static void find(String searchInput) {
+        ui.displayResults(list, searchInput);
+    }
+
 
     public static void main(String[] args) {
         ui.displayIntro();
@@ -104,6 +108,9 @@ public class Duke {
                         break;
                     case "delete":
                         delete(Integer.parseInt(parser.getDescription(userInput)) - 1);
+                        break;
+                    case "find":
+                        find(parser.getDescription(userInput));
                         break;
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means");

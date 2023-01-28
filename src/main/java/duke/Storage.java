@@ -40,15 +40,15 @@ public class Storage {
                             list.add(todoTask);
                             break;
                         case 'E':
-                            String modifiedDescription = description.split("\\(from: ")[1];
+                            String modifiedDescription = description.split(" \\(from: ")[1];
                             LocalDate fromDate = LocalDate.parse(modifiedDescription.split(" to: ")[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
                             LocalDate toDate = LocalDate.parse(modifiedDescription.split(" to: ")[1].split("\\)")[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
-                            Event eventTask = new Event(description.split("\\(from: ")[0], isMarked, fromDate, toDate);
+                            Event eventTask = new Event(description.split(" \\(from: ")[0], isMarked, fromDate, toDate);
                             list.add(eventTask);
                             break;
                         case 'D':
-                            LocalDate byDate = LocalDate.parse(description.split("\\(by: ")[1].split("\\)")[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
-                            Deadline deadlineTask = new Deadline(description.split("\\(by: ")[0], isMarked, byDate);
+                            LocalDate byDate = LocalDate.parse(description.split(" \\(by: ")[1].split("\\)")[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
+                            Deadline deadlineTask = new Deadline(description.split(" \\(by: ")[0], isMarked, byDate);
                             list.add(deadlineTask);
                             break;
                     }
