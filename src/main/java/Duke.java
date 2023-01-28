@@ -1,10 +1,13 @@
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     public static String projName = " ____        _        \n"
@@ -22,6 +25,7 @@ public class Duke {
 
     public boolean readInput(String input) throws DukeException, IOException {
         String firstInput = input.split(" ")[0];
+        LocalDate now = LocalDate.now();
 
         try {
             switch (firstInput) {
@@ -84,7 +88,12 @@ public class Duke {
                     throw new DukeException("Wait a minute, you're missing something! Could be the name or date...");
                 }
                 String deadlineName = deadlineDetails.split(" /by ")[0];
-                String deadlineDate = deadlineDetails.split(" /by ")[1];
+                String deadlineDateStr = deadlineDetails.split(" /by ")[1];
+                LocalDate deadlineDate = LocalDate.parse(deadlineDateStr);
+                // make sure date not before curr date
+                if (deadlineDate.isBefore(now)) {
+                    throw new DukeException("Wait! Time travelling is not in my kit!");
+                }
                 DeadlineTask deadlineTask = new DeadlineTask(deadlineName, deadlineDate);
                 addTask(deadlineTask, deadlineName);
                 return true;
@@ -96,8 +105,16 @@ public class Duke {
                 }
                 String eventName = eventDetails.split(" /from ")[0];
                 String eventDate = eventDetails.split(" /from ")[1];
-                String eventStart = eventDate.split(" /to ")[0];
-                String eventEnd = eventDate.split(" /to ")[1];
+                String eventStartStr = eventDate.split(" /to ")[0];
+                String eventEndStr = eventDate.split(" /to ")[1];
+                LocalDate eventStart = LocalDate.parse(eventStartStr);
+                LocalDate eventEnd = LocalDate.parse(eventEndStr);
+                if (eventStart.isBefore(now) || eventEnd.isBefore(now)) {
+                    throw new DukeException("Wait! Time travelling is not in my kit!");
+                }
+                if (eventStart.isAfter(eventEnd)) {
+                    throw new DukeException("Ohhh I wasn't aware time travels backwards for you :O");
+                }
                 EventTask eventTask = new EventTask(eventName, eventStart, eventEnd);
                 addTask(eventTask, eventName);
                 return true;
@@ -133,14 +150,15 @@ public class Duke {
                     fileWriter.write(System.lineSeparator());
                 }
                 fileWriter.close();
-                break;
+                return true;
             default:
                 throw new DukeException("Oops I do not recognise this command...");
             }
         } catch (IOException io) {
             throw new DukeException("Something is up with your files it seems");
+        } catch (DateTimeParseException dl) {
+            throw new DukeException("Beep boop this robot can only understand dates in the form yyyy-mm-dd");
         }
-        return true;
     }
 
     public void load() {
@@ -171,13 +189,16 @@ public class Duke {
                     case "[D]":
                         String deadlineName = taskDetails.split(" \\(by: ")[0];
                         String date = taskDetails.split(" \\(by: ")[1].split("\\)")[0];
-                        task = new DeadlineTask(deadlineName, date, complete);
+                        LocalDate deadLine = LocalDate.parse(date);
+                        task = new DeadlineTask(deadlineName, deadLine, complete);
                         break;
                     case "[E]":
                         String eventName = taskDetails.split(" \\(from:")[0];
                         String eventPeriod = taskDetails.split("\\(from: ")[1];
-                        String start = eventPeriod.split(" to: ")[0];
-                        String end = eventPeriod.split(" to: ")[1].split("\\)")[0];
+                        String startStr = eventPeriod.split(" to: ")[0];
+                        String endStr = eventPeriod.split(" to: ")[1].split("\\)")[0];
+                        LocalDate start = LocalDate.parse(startStr);
+                        LocalDate end = LocalDate.parse(endStr);
                         task = new EventTask(eventName, start, end, complete);
                         break;
                     default:

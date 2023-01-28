@@ -9,30 +9,30 @@ Oh boy a new user! What's up?
 Item added: read book
 Item added: drink water
 Item added: finish project
-Item added: Jason Birthday
+Item added: Jerome Birthday
 Here are the tasks you asked for!
 1: [T] [ ] read book
 2: [T] [ ] drink water
-3: [D] [ ] finish project (by: March 20)
-4: [E] [ ] Jason Birthday (from: 5pm to: 10pm)
+3: [D] [ ] finish project (by: 01 Jun 2023)
+4: [E] [ ] Jerome Birthday (from: 17 Jan 2024 to: 17 Jan 2024)
 You now have 4 items in your list.
 Done! I've marked this task as done :D
-[D] [X] finish project (by: March 20)
+[D] [X] finish project (by: 01 Jun 2023)
 Done! I've marked this task as done :D
-[E] [X] Jason Birthday (from: 5pm to: 10pm)
+[E] [X] Jerome Birthday (from: 17 Jan 2024 to: 17 Jan 2024)
 Here are the tasks you asked for!
 1: [T] [ ] read book
 2: [T] [ ] drink water
-3: [D] [X] finish project (by: March 20)
-4: [E] [X] Jason Birthday (from: 5pm to: 10pm)
+3: [D] [X] finish project (by: 01 Jun 2023)
+4: [E] [X] Jerome Birthday (from: 17 Jan 2024 to: 17 Jan 2024)
 You now have 4 items in your list.
 This task is apparently not done huh D:
-[D] [ ] finish project (by: March 20)
+[D] [ ] finish project (by: 01 Jun 2023)
 Here are the tasks you asked for!
 1: [T] [ ] read book
 2: [T] [ ] drink water
-3: [D] [ ] finish project (by: March 20)
-4: [E] [X] Jason Birthday (from: 5pm to: 10pm)
+3: [D] [ ] finish project (by: 01 Jun 2023)
+4: [E] [X] Jerome Birthday (from: 17 Jan 2024 to: 17 Jan 2024)
 You now have 4 items in your list.
 Oops I do not recognise this command...
 Mark? Mark what?
@@ -48,8 +48,12 @@ Delete? Delete what?
 Done! [T] [ ] drink water has been deleted for good.
 Here are the tasks you asked for!
 1: [T] [ ] read book
-2: [D] [ ] finish project (by: March 20)
-3: [E] [X] Jason Birthday (from: 5pm to: 10pm)
+2: [D] [ ] finish project (by: 01 Jun 2023)
+3: [E] [X] Jerome Birthday (from: 17 Jan 2024 to: 17 Jan 2024)
 You now have 3 items in your list.
 Oops, that task number does not exist
+Beep boop this robot can only understand dates in the form yyyy-mm-dd
+Wait! Time travelling is not in my kit!
+Wait! Time travelling is not in my kit!
+Ohhh I wasn't aware time travels backwards for you :O
 It was a pleasure to help, goodbye!

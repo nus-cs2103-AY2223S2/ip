@@ -1,7 +1,7 @@
 todo read book
 todo drink water
-deadline finish project /by March 20
-event Jason Birthday /from 5pm /to 10pm
+deadline finish project /by 2023-06-01
+event Jerome Birthday /from 2024-01-17 /to 2024-01-17
 list
 mark 3
 mark 4
@@ -22,4 +22,8 @@ delete
 delete 2
 list
 delete 6
+deadline write book /by monday
+deadline write book /by 1999-01-01
+event travel to Japan /from 1999-01-01 /to 2030-01-01
+event travel to Japan /from 2031-01-01 /to 2030-01-01
 bye
