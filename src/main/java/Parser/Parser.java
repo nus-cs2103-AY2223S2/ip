@@ -6,7 +6,7 @@ import Exceptions.NoDescriptionException;
 
 public class Parser {
     protected static enum CommandList {
-        LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE;
+        LIST, BYE, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND;
         public static CommandList findCommand(String name) {
             for (CommandList command : CommandList.values()) {
                 if (command.name().equalsIgnoreCase(name)) {
@@ -47,6 +47,9 @@ public class Parser {
             case DELETE:
                 checkForDescription(userInput);    
                 return new DeleteCommand(userInput);
+            case FIND:
+                checkForDescription(userInput);
+                return new FindCommand(userInput);
             default:
                 throw new InvalidInputException(null);
         }

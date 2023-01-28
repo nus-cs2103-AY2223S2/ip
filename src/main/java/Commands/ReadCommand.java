@@ -12,7 +12,7 @@ public class ReadCommand extends Command {
             throw new NoTaskException(null);
         }
         ui.showList();
-        tasks.showTasks();
+        ui.showAllTasks(tasks.getTasks());
     }
 
     @Override

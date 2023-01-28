@@ -40,8 +40,9 @@ public class Ui {
         System.out.println(e.getMessage());
     }
 
-    public void showFarewell() {
+    public void showFarewell() throws IOException {
         System.out.println(FAREWELL);
+        br.close();
     }
 
     public void showMarkTask(Task task) {
@@ -58,5 +59,9 @@ public class Ui {
 
     public void showAddTask(Task task, int size) {
         System.out.println(ADDED_TASK + "\n" + task + "\n" + "Now you have " + size + " tasks in the list");
+    }
+
+    public void showAllTasks(String tasks) {
+        System.out.println(tasks);
     }
 }
