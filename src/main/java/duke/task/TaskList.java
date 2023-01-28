@@ -134,6 +134,12 @@ public class TaskList {
         this.taskCount = taskList.size();
     }
 
+    /**
+     * Finds all Tasks that have names containing the given String.
+     *
+     * @param str String to search task names.
+     * @return String representation of all Tasks containing given String
+     */
     public String findTasks(String str) {
         String result = "";
         result += "Here are the matching tasks in your list:\n";
