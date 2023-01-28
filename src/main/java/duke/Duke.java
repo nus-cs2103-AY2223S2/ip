@@ -3,11 +3,6 @@ import duke.command.Command;
 
 /** The Duke class contains variables and methods related to running an instance of Duke. */
 public class Duke {
-    protected static String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
     protected static final String PATH = "src/data/duke.txt";
     protected TaskList lst;
     protected final Storage storage;

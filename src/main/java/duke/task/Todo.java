@@ -26,14 +26,7 @@ public class Todo extends Task {
         return String.format("T | %s\n", super.toFile());
     }
 
-    /**
-     * Creates Todo task from strinh from file.
-     * @param taskNameData String containing taskName.
-     * @param doneData String containing whether task is done from file string.
-     * @return Todo task.
-     * @throws DukeException If string input is empty or of the wrong format.
-     */
-    public static Todo toTodoFromFileStr(String taskNameData, String doneData) throws DukeException{
+    public static Todo toTodoFromFileStr(String taskNameData, String doneData) throws DukeException {
         doneData = doneData.trim();
         taskNameData = taskNameData.trim();
         if (taskNameData.isEmpty()) {

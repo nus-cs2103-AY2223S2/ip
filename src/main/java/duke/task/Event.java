@@ -2,7 +2,6 @@ package duke.task;
 
 import duke.DukeException;
 import duke.TaskList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -95,11 +94,11 @@ public class Event extends Task {
         String start = this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String endDate = this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         if (this.completed) {
-            s = "[E]" + super.toString() +
-                    " (from: " + start + " to: " + endDate + ")";
+            s = "[E]" + super.toString()
+                    + " (from: " + start + " to: " + endDate + ")";
         } else {
-            s = "[E]"  + super.toString() +
-                    " (from: " + start + " to: " + endDate + ")";
+            s = "[E]" + super.toString()
+                    + " (from: " + start + " to: " + endDate + ")";
         }
         return s;
     }

@@ -33,15 +33,15 @@ public class DukeException extends Exception {
         } else if (command.equals("missing details")) {
             this.errorMsg = "The task input is missing some details!";
         } else if (fileError.contains(command)) {
-            this.errorMsg =  "An error occurred when/as " + command;
+            this.errorMsg = "An error occurred when/as " + command;
         } else if (command.equals("date format")) {
-            this.errorMsg = "The date is not the correct format!\n" +
-                    "Please enter a date with this format: yyyy-mm-dd";
+            this.errorMsg = "The date is not the correct format!\n"
+                    + "Please enter a date with this format: yyyy-mm-dd";
         } else if (command.equals("wrong order")) {
-            this.errorMsg = "The dates entered are in the wrong order!\n" +
-                    "The correct formats are as follows:\n" +
-                        "deadline task_name/by yyyy-mm-dd\n" +
-                            "event task_name/from yyyy-mm-dd/by yyyy-mm-dd";
+            this.errorMsg = "The dates entered are in the wrong order!\n"
+                    + "The correct formats are as follows:\n"
+                    + "deadline task_name/by yyyy-mm-dd\n"
+                    + "event task_name/from yyyy-mm-dd/by yyyy-mm-dd";
         } else if (command.equals("too many details")) {
             this.errorMsg = "The command shouldn't be followed by other details!";
         } else if (command.equals("input type")) {

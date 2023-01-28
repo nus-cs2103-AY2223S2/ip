@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.Deadline;
 import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Deadline;
 
 public class DeadlineCommand extends Command {
     public static final String DEADLINE_COMMAND = "deadline";

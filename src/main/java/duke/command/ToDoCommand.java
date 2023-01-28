@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.DukeException;
 import duke.TaskList;
-import duke.task.Todo;
 import duke.Ui;
+import duke.task.Todo;
 
 public class ToDoCommand extends Command {
     public static final String TODO_COMMAND = "todo";

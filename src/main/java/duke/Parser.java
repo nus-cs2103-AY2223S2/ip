@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -12,9 +15,6 @@ import duke.command.UnmarkCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /** Class parses user input into commands. */
 public class Parser {
@@ -40,75 +40,69 @@ public class Parser {
         Command command = null;
 
         switch (commandType) {
-            case "bye":
-                if (!single) {
-                    throw new DukeException("too many details");
-                }
-                command = new ByeCommand();
-                break;
-            case "list":
-                if (!single) {
-                    throw new DukeException("too many details");
-                }
-                command = new ListCommand();
-                break;
-            case "mark":
-                if (single) {
-                    throw new DukeException(commandType);
-                }
-                index = parseIntArg(arguments);
-                command = new MarkCommand(index - 1);
-                break;
-            case "unmark":
-                if (single) {
-                    throw new DukeException(commandType);
-                }
-                index = parseIntArg(arguments);
-                command = new UnmarkCommand(index - 1);
-                break;
-            case "delete":
-                if (single) {
-                    throw new DukeException(commandType);
-                }
-                index = parseIntArg(arguments);
-                command = new DeleteCommand(index - 1);
-                break;
-            case "find":
-                if (single) {
-                    throw new DukeException("empty keyword");
-                }
-                command = new FindCommand(arguments);
-                break;
-            case "todo":
-                if (single) {
-                    throw new DukeException(commandType);
-                }
-                Todo todo = new Todo(parseTodo(arguments));
-                command = new ToDoCommand(todo);
-                break;
-            case "deadline":
-                if (single) {
-                    throw new DukeException(commandType);
-                }
-                String[] deadlineDetails = parseDeadline(arguments);
-                taskName = deadlineDetails[0];
-                endDate = LocalDate.parse(deadlineDetails[1]);
-                Deadline deadline = new Deadline(taskName, endDate);
-                command = new DeadlineCommand(deadline);
-                break;
-            case "event":
-                if (single) {
-                    throw new DukeException(commandType);
-                }
-                String[] eventDetails = parseEvent(arguments);
-                taskName = eventDetails[0];
-                startDate = LocalDate.parse(eventDetails[1]);
-                endDate = LocalDate.parse(eventDetails[2]);
-                Event event = new Event(taskName, startDate, endDate);
-                command = new EventCommand(event);
-                break;
-            default:
-                throw new DukeException("none");
+        case "bye":
+            if (!single) {
+                throw new DukeException("too many details");
+            }
+            command = new ByeCommand();
+            break;
+        case "list":
+            if (!single) {
+                throw new DukeException("too many details");
+            }
+            command = new ListCommand();
+            break;
+        case "mark":
+            if (single) {
+                throw new DukeException(commandType);
+            }
+            index = parseIntArg(arguments);
+            command = new MarkCommand(index - 1);
+            break;
+        case "unmark":
+            if (single) {
+                throw new DukeException(commandType);
+            }
+            index = parseIntArg(arguments);
+            command = new UnmarkCommand(index - 1);
+            break;
+        case "delete":
+            if (single) {
+                throw new DukeException(commandType);
+            }
+            index = parseIntArg(arguments);
+            command = new DeleteCommand(index - 1);
+            break;
+        case "todo":
+            if (single) {
+                throw new DukeException(commandType);
+            }
+            Todo todo = new Todo(parseTodo(arguments));
+            command = new ToDoCommand(todo);
+            break;
+        case "deadline":
+            if (single) {
+                throw new DukeException(commandType);
+            }
+            String[] deadlineDetails = parseDeadline(arguments);
+            taskName = deadlineDetails[0];
+            endDate = LocalDate.parse(deadlineDetails[1]);
+            Deadline deadline = new Deadline(taskName, endDate);
+            command = new DeadlineCommand(deadline);
+            break;
+        case "event":
+            if (single) {
+                throw new DukeException(commandType);
+            }
+            String[] eventDetails = parseEvent(arguments);
+            taskName = eventDetails[0];
+            startDate = LocalDate.parse(eventDetails[1]);
+            endDate = LocalDate.parse(eventDetails[2]);
+            Event event = new Event(taskName, startDate, endDate);
+            command = new EventCommand(event);
+            break;
+        default:
+            throw new DukeException("none");
         }
         return command;
     }
