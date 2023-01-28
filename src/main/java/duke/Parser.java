@@ -19,13 +19,13 @@ public class Parser {
                     queue.add(new Delete(input));
                 } else if (input.matches("^deadline\\s.*$") || input.matches("^event\\s.*$") || input.matches("^todo\\s.*$")) {
                     if (input.split(" ").length < 2) {
-                        throw new InsufficientAruments("☹ OOPS!!! The description of a " +
+                        throw new InsufficientAruments("OOPS!!! The description of a " +
                                 input.split(" ")[0] + " cannot be empty.");
                     } else {
                         queue.add(new ExecuteCommandQueue(input));
                     }
                 } else {
-                    throw new UnknownCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new UnknownCommand("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
                 break;
             }
