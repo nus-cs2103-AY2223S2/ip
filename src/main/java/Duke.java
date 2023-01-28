@@ -1,6 +1,11 @@
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.time.LocalTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 public class Duke {
     public static void main(String[] args) {
 
@@ -29,9 +34,7 @@ public class Duke {
         Scanner keyboard = new Scanner(System.in);
         String userInput;
 
-        boolean flag = true;
-
-        while (flag) {
+        while (true) {
             userInput = keyboard.next();
             System.out.println("--------------------------------");
             switch (userInput) {
@@ -52,13 +55,14 @@ public class Duke {
                             }
                         }
                     } else {
-                        System.out.println("Please key in *list* to check the task list.");
+                        System.out.println("Please key in [list] to check the task list.");
                     }
                     break;
                 }
                 case "todo": {
                     String name = keyboard.nextLine();
                     if (name.trim().isEmpty()){
+                        System.out.println("Adding new todo failed");
                         System.out.println("The task name cannot be empty");
                     } else {
                         System.out.println("This task had been added!");
@@ -74,22 +78,33 @@ public class Duke {
                     userInput = keyboard.nextLine();
                     if (userInput.trim().isEmpty()){
                         System.out.println("The task name cannot be empty");
+                        System.out.println("Please enter the task with the format [name /ddMMyyyy HHmm /ddMMyyyy HMmm]");
                     } else {
                         try {
                             int first = userInput.indexOf('/');
                             int last = userInput.lastIndexOf('/');
                             String eventName = userInput.substring(0, first);
-                            String from = userInput.substring(first + 1, last);
+                            String from = userInput.substring(first + 1, last-1);
                             String to = userInput.substring(last + 1);
-                            System.out.println("This event had been added! Hope you will enjoy it :D");
+                            try {
+                                DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("ddMMuuuu HHmm");
+                                LocalDateTime fromDate = LocalDateTime.parse(from, dateformatter);
+                                LocalDateTime toDate = LocalDateTime.parse(to, dateformatter);
 
-                            Event t = new Event(eventName, from, to);
-                            System.out.println("  " + t);
+                                System.out.println("This event had been added! Hope you will enjoy it :D");
 
-                            taskList.add(t);
-                            System.out.println("Now you have " + taskList.size() + " tasks in the list");
+                                Event t = new Event(eventName, fromDate, toDate);
+                                System.out.println("  " + t);
+
+                                taskList.add(t);
+                                System.out.println("Now you have " + taskList.size() + " tasks in the list");
+                            } catch (DateTimeParseException e) {
+                                System.out.println("Adding new event failed");
+                                System.out.println("Please enter the task with the format [name /ddMMyyyy HHmm /ddMMyyyy HMmm]");
+                            }
                         } catch (StringIndexOutOfBoundsException e){
-                            System.out.println("Please specify the starting and ending time of the event");
+                            System.out.println("Adding new event failed");
+                            System.out.println("Please enter the event with the format [name /ddMMyyyy HHmm /ddMMyyyy HMmm]");
                         }
                     }
                     break;
@@ -99,19 +114,30 @@ public class Duke {
                     userInput = keyboard.nextLine();
                     if (userInput.trim().isEmpty()){
                         System.out.println("The task name cannot be empty");
+                        System.out.println("Please enter the task with format [name /ddmmyyyy time]");
                     } else {
                         try {
                             int dateID = userInput.indexOf('/');
                             String eventName = userInput.substring(0, dateID);
-                            String date = userInput.substring(dateID + 1);
-                            System.out.println("This deadline had been added! Try to finish it early 0v0");
-                            Deadline t = new Deadline(eventName, date);
-                            System.out.println("  " + t);
+                            String details = userInput.substring(dateID + 1);
 
-                            taskList.add(t);
-                            System.out.println("Now you have " + taskList.size() + " tasks in the list");
+                            try {
+                                DateTimeFormatter dateformatter = DateTimeFormatter.ofPattern("ddMMuuuu HHmm");
+                                LocalDateTime by = LocalDateTime.parse(details, dateformatter);
+                                System.out.println("This deadline had been added! Try to finish it early 0v0");
+                                Deadline t = new Deadline(eventName, by);
+                                System.out.println("  " + t);
+
+                                taskList.add(t);
+                                System.out.println("Now you have " + taskList.size() + " tasks in the list");
+                            } catch (DateTimeParseException e) {
+                                System.out.println("Adding new deadline failed");
+                                System.out.println("Please enter the task with format [name /ddmmyyyy time]");
+                            }
+
                         } catch (StringIndexOutOfBoundsException e){
-                            System.out.println("Please specify the deadline");
+                            System.out.println("Adding new deadline failed");
+                            System.out.println("Please enter the task with format [name /ddmmyyyy time]");
                         }
                     }
                     break;
@@ -170,6 +196,5 @@ public class Duke {
             }
             System.out.println("--------------------------------");
         }
-        return true;
     }
 }
