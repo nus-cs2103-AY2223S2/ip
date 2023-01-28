@@ -11,9 +11,16 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+/**
+ * Local storage to store the data from local file.
+ */
 public class LocalStorage {
     private File file;
 
+    /**
+     * Constructor to create a local storage using the data from local file.
+     * @param path
+     */
     public LocalStorage(String path) {
         File local_file = readFile(path);
         this.file = local_file;

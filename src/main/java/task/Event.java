@@ -3,6 +3,9 @@ package task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event that runs for a duration.
+ */
 public class Event extends Task {
     private final LocalDate from;
     private final LocalDate to;

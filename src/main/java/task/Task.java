@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * General task.
+ */
 public class Task {
 
     protected String task;

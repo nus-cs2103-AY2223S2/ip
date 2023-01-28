@@ -4,6 +4,9 @@ import command.*;
 import dukeException.*;
 import storage.TaskList;
 
+/**
+ * Class to parse user's request and perform user's desired action.
+ */
 public class Parser {
 
     private final String request;
