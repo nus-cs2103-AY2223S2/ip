@@ -1,6 +1,13 @@
+package Duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.String;
+
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.Task;
+import Duke.Tasks.ToDo;
 
 /**
  * @author Shi Jiaao
@@ -30,15 +37,17 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        /*
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         // System.out.println("Hello from\n" + logo);
+        */
 
         /* project starts here */
-        System.out.println("Hello! I'm Duke\n" +
+        System.out.println("Hello! I'm Duke.Duke\n" +
                 "What can I do for you?\n");
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> toDoList = new ArrayList<>();
