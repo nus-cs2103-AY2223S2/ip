@@ -1,15 +1,15 @@
+package components;
+
+import exceptions.DukeException;
+
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 
 public class Storage {
     String filePath;
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-    public TaskList load() throws DukeException{
+    public TaskList load() throws DukeException {
         try{
             FileInputStream readData = new FileInputStream(filePath);
             ObjectInputStream readStream = new ObjectInputStream(readData);

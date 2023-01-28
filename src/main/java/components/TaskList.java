@@ -1,3 +1,7 @@
+package components;
+
+import tasks.Task;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

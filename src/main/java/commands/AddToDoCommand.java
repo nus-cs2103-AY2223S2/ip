@@ -1,3 +1,9 @@
+package commands;
+
+import commands.AddCommand;
+import exceptions.DukeException;
+import tasks.ToDo;
+
 import java.util.ArrayList;
 
 public class AddToDoCommand extends AddCommand {

@@ -1,3 +1,13 @@
+package components;
+
+import commands.AddCommand;
+import commands.DeleteCommand;
+import commands.MarkCommand;
+import commands.UnmarkCommand;
+import components.TaskList;
+import exceptions.DukeException;
+import tasks.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -17,8 +27,13 @@ public class Ui {
     }
 
 
-    public String readCommand() {
-        return inputScanner.nextLine();
+    public String readCommand() throws DukeException {
+
+        String userIn = inputScanner.nextLine();
+        if (userIn.isBlank()) {
+            throw new DukeException("empty command received, type a command!");
+        }
+        return userIn;
     }
 
     public void showLine() {

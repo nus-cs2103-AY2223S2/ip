@@ -1,6 +1,15 @@
+package commands;
+
+import commands.Command;
+import components.Storage;
+import components.TaskList;
+import components.Ui;
+import exceptions.DukeException;
+import tasks.Task;
+
 import java.util.ArrayList;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     static final int commandLength = 2;
     static final int indexOfIndex = 1;
 

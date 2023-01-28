@@ -1,9 +1,15 @@
+import commands.Command;
+import components.Parser;
+import components.Storage;
+import components.TaskList;
+import components.Ui;
+import exceptions.DukeException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+
 public class Duke {
 
     private Storage storage;
@@ -20,7 +26,6 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
 
     public void run() {
         ui.showWelcome();
@@ -46,7 +51,6 @@ public class Duke {
 
     private static String getFilePath() {
         Path dirPath = Paths.get(".", "data");
-        boolean directoryExists = java.nio.file.Files.exists(dirPath);
         try {
             //This method creates a directory if it does not exist yet, but will not
             //throw an error even if it exists, and so is safe to call.

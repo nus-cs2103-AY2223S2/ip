@@ -1,7 +1,9 @@
+package tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate from;
     static DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy");
     protected LocalDate to;
