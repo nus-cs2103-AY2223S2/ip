@@ -2,33 +2,36 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String LINE = "------------------------------------------------------------";
+    private final Ui ui = new Ui();
+    private final TaskList taskList = new TaskList();
+    private final Parser parser = new Parser(this.taskList);
 
-    private static void start() {
+    private void start() {
+
+        ui.greet();
 
         Scanner commandScanner = new Scanner(System.in);
-        TaskManager taskManager = new TaskManager();
+        boolean toExit = false;
 
         while (true) {
-            System.out.print("You:\n");
-            String command = commandScanner.nextLine().strip().replaceAll("( )+", " ");
 
-            System.out.println("\nDuke:");
+            String userCommand = ui.getUserCommand(commandScanner);
 
-            if (command.equalsIgnoreCase("bye")) {
-                System.out.println("Bye. Have a nice day!\n");
-                System.out.println(LINE);
+            try {
+                Command command = parser.parse(userCommand);
+                command.execute();
+                toExit = command.isExitCommand();
+
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+
+            } finally {
+                ui.endCommand();
+
+            }
+
+            if (toExit) {
                 break;
-
-            } else {
-                try {
-                    taskManager.processCommand(command);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                } finally {
-                    System.out.println("\n" + LINE + "\n");
-                }
-
             }
 
         }
@@ -38,17 +41,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("\nHello from\n" + logo);
-
-        System.out.println("How can I help you?\n");
-        System.out.println(LINE + "\n");
-
-        start();
+        Duke bot = new Duke();
+        bot.start();
 
     }
 }
