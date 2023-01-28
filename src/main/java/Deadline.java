@@ -13,4 +13,9 @@ public class Deadline extends Task{
     public String toString(){
         return "[D]" + this.getStatusIcon() + " " + this.description + " (by:" + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
+
+    @Override
+    public String toSaveableString() {
+        return String.format("D | %d | %s | %s", isDone? 1 : 0, description, by);
+    }
 }

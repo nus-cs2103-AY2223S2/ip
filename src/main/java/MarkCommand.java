@@ -1,0 +1,22 @@
+public class MarkCommand extends Command{
+
+    private int index;
+    private boolean isMarked;
+
+    public MarkCommand(int index, boolean isMarked) {
+        super();
+        this.index = index;
+        this.isMarked = isMarked;
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ui.showLine();
+        if (isMarked) {
+            ui.showAction(tasks.markTask(index));
+        } else {
+            ui.showAction(tasks.unmarkTask(index));
+        }
+        ui.showLine();
+    }
+}
