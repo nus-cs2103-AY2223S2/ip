@@ -11,6 +11,7 @@ public class C4PO {
         ui = new Ui();
         parser = new Parser();
         this.storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
             tasks.printList();

@@ -10,6 +10,8 @@ import java.util.List;
 public class Deadline extends Task {
 
     protected String by;
+
+    protected String byStr;
     protected String byTimeStr = "";
     protected LocalDate byDate;
     protected LocalTime byTime = LocalTime.now();
@@ -23,7 +25,7 @@ public class Deadline extends Task {
 
         try {
             this.byDate = LocalDate.parse(arr.get(0));
-            this.by = byDate.format(DateTimeFormatter.ofPattern("EEEE MMM d yyyy"));
+            this.byStr = byDate.format(DateTimeFormatter.ofPattern("EEEE MMM d yyyy"));
 
             if (arr.size() > 1) {
                 this.byTime = LocalTime.parse(arr.get(1), DateTimeFormatter.ofPattern("HHmm"));
@@ -47,7 +49,7 @@ public class Deadline extends Task {
 
         try {
             this.byDate = LocalDate.parse(arr.get(0));
-            this.by = byDate.format(DateTimeFormatter.ofPattern("EEEE MMM d yyyy"));
+            this.byStr = byDate.format(DateTimeFormatter.ofPattern("EEEE MMM d yyyy"));
 
             if (arr.size() > 1) {
                 this.byTime = LocalTime.parse(arr.get(1), DateTimeFormatter.ofPattern("HHmm"));
@@ -75,12 +77,11 @@ public class Deadline extends Task {
 
     @Override
     public String getTaskInline(Integer index) {
-//        System.out.println(getDateTimeFormatted());
-        return index.toString() + ". [D]" + super.getTaskInline() + " (by: " + by + " " + byTimeStr + ")";
+        return index.toString() + ". [D]" + super.getTaskInline() + " (by: " + byStr + " " + byTimeStr + ")";
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + by + " " + byTimeStr + ")";
+        return "[D] " + super.toString() + " (by: " + byStr + " " + byTimeStr + ")";
     }
 }

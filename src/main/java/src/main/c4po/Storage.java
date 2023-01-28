@@ -28,7 +28,7 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         List<String> direPath = Arrays.asList(filePath.split("/"));
-        ArrayList<String> dirPath = new ArrayList(direPath);
+        ArrayList<String> dirPath = new ArrayList<>(direPath);
         dirPath.remove(dirPath.size()-1);
 
         this.directoryPath = String.join("/", dirPath);
