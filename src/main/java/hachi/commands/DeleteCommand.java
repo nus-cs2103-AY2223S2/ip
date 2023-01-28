@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList toDoList, Ui ui, Storage storage) {
+    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
         try {
             if (input.length() < 7) {
                 throw new HachiExceptions("☹ Ohno! I don't know which task to delete :(");
@@ -31,5 +31,6 @@ public class DeleteCommand extends Command {
         } catch (IndexOutOfBoundsException e1) {
             System.out.println("  There is no task to be deleted..");
         }
+        return false;
     }
 }

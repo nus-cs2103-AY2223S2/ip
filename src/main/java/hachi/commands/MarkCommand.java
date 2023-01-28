@@ -14,7 +14,7 @@ public class MarkCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList toDoList, Ui ui, Storage storage) {
+    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
         try {
             if (input.length() <= 5 || !Character.isDigit(input.charAt(5))) {
                 throw new HachiExceptions("☹ Ohno! I don't know which task to mark/unmark :(");
@@ -24,11 +24,15 @@ public class MarkCommand extends Command {
             task.mark();
             storage.saveTaskList(toDoList);
             System.out.println("   good job! I've marked this task as done: " + "\n" + task);
+            return true;
         } catch (HachiExceptions e) {
             System.out.println(e.getMessage());
+            return false;
         }
         catch (IndexOutOfBoundsException e1) {
             System.out.println(" There is no task to be marked");
+            return false;
         }
+
     }
 }

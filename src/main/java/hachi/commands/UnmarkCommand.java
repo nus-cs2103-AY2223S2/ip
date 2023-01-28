@@ -14,7 +14,7 @@ public class UnmarkCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList toDoList, Ui ui, Storage storage) {
+    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
         try {
             if (input.length() <= 7 || !Character.isDigit(input.charAt(7))) {
                 throw new HachiExceptions("☹ Ohno! I don't know which task to mark/unmark :(");
@@ -29,5 +29,6 @@ public class UnmarkCommand extends Command {
         } catch (IndexOutOfBoundsException e1) {
             System.out.println(" There is no task to be unmarked");
         }
+        return false;
     }
 }

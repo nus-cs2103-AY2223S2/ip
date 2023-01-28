@@ -14,7 +14,7 @@ public class EventCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList toDoList, Ui ui, Storage storage) {
+    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
         try {
             int index_e1 = input.indexOf("/");
             int index_e2 = input.lastIndexOf("/");
@@ -37,5 +37,6 @@ public class EventCommand extends Command {
         } catch (HachiExceptions e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 }

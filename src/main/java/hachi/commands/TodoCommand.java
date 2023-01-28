@@ -13,7 +13,7 @@ public class TodoCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList toDoList, Ui ui, Storage storage) {
+    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
         try {
             if (input.length() <= 5) {
                 throw new HachiExceptions("☹ Ohno! The description cannot be empty.");
@@ -26,5 +26,6 @@ public class TodoCommand extends Command {
         } catch (HachiExceptions e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 }

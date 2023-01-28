@@ -12,9 +12,10 @@ public class ExitCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList toDoList, Ui ui, Storage storage) {
+    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
         storage.saveTaskList(toDoList);
         System.out.println(separator + "\n" + "   Ciao ~ see you again soon!");
+        return false;
     }
 
 }

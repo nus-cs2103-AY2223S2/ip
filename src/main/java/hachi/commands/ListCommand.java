@@ -11,7 +11,7 @@ public class ListCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList toDoList, Ui ui, Storage storage) {
+    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
         if (toDoList.size() > 0) {
             System.out.println(separator + "\n" + "   Here are the tasks in your list:");
             for (int i = 0; i < toDoList.size(); i++) {
@@ -21,5 +21,6 @@ public class ListCommand extends Command {
         } else {
             System.out.print(separator + "\n" + "   You don't have any tasks at the moment" + "\n");
         }
+        return false;
     }
 }

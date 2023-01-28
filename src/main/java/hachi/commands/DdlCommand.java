@@ -13,7 +13,7 @@ public class DdlCommand extends Command {
         this.input = input;
     }
 
-    public void execute(TaskList toDoList, Ui ui, Storage storage) {
+    public boolean execute(TaskList toDoList, Ui ui, Storage storage) {
         try {
             int index_ddl = input.indexOf("/");
             if (input.length() > 9 && !input.contains("/")) {
@@ -33,6 +33,7 @@ public class DdlCommand extends Command {
         catch (DateTimeParseException e1) {
             System.out.println("   Key in deadline in the format of yyyy-mm-dd");
         }
+        return false;
     }
 
 }
