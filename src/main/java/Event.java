@@ -1,16 +1,19 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 public class Event extends Task {
 
-    protected String start;
-    protected String end;
+    protected LocalDate from;
+    protected LocalDate to;
 
-    public Event(String description, String start, String end) {
+    public Event(String description, LocalDate from, LocalDate to) {
         super(description);
-        this.start = start;
-        this.end = end;
+        this.from = from;
+        this.to = to;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
+        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 }

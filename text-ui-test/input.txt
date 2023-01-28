@@ -1,6 +1,6 @@
 todo eat
-deadline play /by 5pm
-event sleep /from 12am /to 6am
+deadline play /by: 5pm
+event play with me /from: 2023-12-20 /to: 2023-12-21
 mark 2
 unmark 2
 list

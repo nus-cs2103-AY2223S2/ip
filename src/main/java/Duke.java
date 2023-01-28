@@ -1,7 +1,20 @@
 import java.util.Scanner;
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
+
+    private static final String FILE_PATH = "./data/duke.txt";
+    private static final String FILE_DIRECTORY = "data";
+    private static final String FILE_NAME = "duke.txt";
+
     public static void main(String[] args) {
 
         System.out.println("Hello! I'm Mash \nWhat can I do for you?");
@@ -86,21 +99,43 @@ public class Duke {
 
                     //if task is a deadline
                 } else if (input.length() > 8 && input.substring(0, 8).equals("deadline")) {
-                    int slashIndex = input.lastIndexOf("/");
-                    String date = input.substring(slashIndex + 4);
-                    Task t  = new Deadline(input.substring(9, slashIndex-1), date);
+                   //split into 2, first part is task type, second part is descripiton and time
+                    String[] parts = input.split(" ", 2);
+                    String tasktype = parts[0];
+
+                    //split into descrpition and time
+                    String desarr[] = parts[1].split("/by:", 2);
+                    String description = desarr[0];
+
+                    String time = desarr[1].trim();
+
+                    LocalDate date = LocalDate.parse(time);
+
+                    Task t = new Deadline(description, date);
                     list.add(t);
                     System.out.println("Got it. I've added this task: \n"
-                            + t.toString()
+                                    + t.toString()
                             + "\nNow you have " + list.size() + " tasks in the list.");
 
                     //if task is an Event
                 } else if (input.length() > 5 && input.substring(0, 5).equals("event")) {
-                    int fromIndex = input.lastIndexOf("from");
-                    int toIndex = input.lastIndexOf("to");
-                    String startDate = input.substring(fromIndex + 5, toIndex - 2);
-                    String endDate = input.substring(toIndex + 3);
-                    Task t  = new Event(input.substring(6, fromIndex - 2), startDate, endDate);
+                    //split into 2, first part is task type, second part is descripiton and time
+                    String[] parts = input.split(" ", 2);
+                    String tasktype = parts[0];
+
+                    //split into descrpition and time
+                    String desarr[] = parts[1].split("/from:", 2);
+
+                    String description = desarr[0];
+
+                    String timearr[] = desarr[1].split("/to:", 2);
+                    String from = timearr[0].trim();
+                    String to = timearr[1].trim();
+
+                    LocalDate fromdate = LocalDate.parse(from);
+                    LocalDate todate = LocalDate.parse(to);
+
+                    Task t  = new Event(description, fromdate, todate);
                     list.add(t);
                     System.out.println("Got it. I've added this task: \n"
                             + t.toString()
