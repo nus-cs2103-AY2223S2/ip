@@ -20,8 +20,7 @@ public class Task {
 
 
     public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+        this(description, false);
     }
 
     public Task(String description, boolean isDone) {
