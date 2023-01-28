@@ -19,31 +19,58 @@ public class Command {
         BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
     }
 
-    //for bye and list
+    /**
+     * Constructor for commands 'bye' and 'list'.
+     *
+     * @param commandName The name of the command.
+     */
     public Command(String commandName) {
         this.commandName = commandName;
     }
 
-    // for mark, unmark, delete
+    /**
+     * Constructor for commands "mark", "unmark" and "delete".
+     *
+     * @param commandName The name of the command.
+     * @param index The index of the task in taskList to be executed on.
+     */
     public Command(String commandName, int index) {
         this.commandName = commandName;
         this.index = index;
     }
 
-    // for todo
+    /**
+     * Constructor for command "todo".
+     *
+     * @param commandName The name of the command.
+     * @param taskName The name of the todo task.
+     */
     public Command(String commandName, String taskName) {
         this.commandName = commandName;
         this.taskName = taskName;
     }
 
-    // for deadline
+    /**
+     * Constructor for command "deadline".
+     *
+     * @param commandName The name of the command.
+     * @param taskName The name of the deadline task.
+     * @param by The date of the deadline, must be in yyyy-mm-dd format.
+     */
     public Command(String commandName, String taskName, String by) {
         this.commandName = commandName;
         this.taskName = taskName;
         this.by = by;
     }
 
-    // for event
+    /**
+     * Constructor for command "deadline".
+     *
+     * @param commandName The name of the command.
+     * @param taskName The name of the event task.
+     * @param from The event start date.
+     * @param to The event end date.
+     */
     public Command(String commandName, String taskName, String from, String to) {
         this.commandName = commandName;
         this.taskName = taskName;
@@ -51,6 +78,14 @@ public class Command {
         this.to = to;
     }
 
+    /**
+     * Executes the given command.
+     * Throws exception if the argument is not recognized or in a wrong format.
+     *
+     * @param tasks TaskList object containing the list of tasks
+     * @param ui The Ui object to display messages.
+     * @param storage The Storage object to save the task after execution.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         CommandName cn = CommandName.valueOf(this.commandName.toUpperCase());
         Task task;
@@ -126,10 +161,20 @@ public class Command {
         }
     }
 
+    /**
+     * Returns false by default and true if "bye" command is executed
+     *
+     * @return false by default and true if "bye" command is executed
+     */
     public boolean isExit() {
         return this.isExit;
     }
 
+    /**
+     * Returns command name for testing
+     *
+     * @return String of command name of the command object.
+     */
     @Override
     public String toString() {
         return "commandName = " + commandName;

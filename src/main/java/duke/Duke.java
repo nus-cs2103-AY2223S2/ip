@@ -13,6 +13,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke object.
+     *
+     * @param filePath Path of the file where the task objects are stored.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +28,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the chat flow.
+     * Prints the welcome message when user first starts up the chat.
+     * Loops while getting user input for commands until user inputs "bye".
+     * Exits chat and prints farewell message.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -41,6 +52,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method which runs the duke object.
+     */
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }

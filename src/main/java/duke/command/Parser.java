@@ -4,6 +4,14 @@ import duke.exception.DukeException;
 
 public class Parser {
 
+    /**
+     * Deals with making sense of the user input.
+     * Returns a command object after decoding the user input.
+     * Throws exception if user input is not a recognizable command.
+     *
+     * @param input Contains the command name or other information to create command object.
+     * @return The appropriate command object that can be executed.
+     */
     public static Command parse(String input) throws DukeException {
         String[] commandString = input.split(" ");
 
