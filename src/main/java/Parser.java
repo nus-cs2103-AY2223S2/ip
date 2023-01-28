@@ -3,14 +3,12 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 public class Parser {
-    private final Scanner scanner;
+
     Parser() {
-        this.scanner = new Scanner(System.in);
+
     }
 
-    public String[] readLine() {
-        return this.scanner.nextLine().split(" ");
-    }
+
 
     public String readCommand(String[] readLine) {
         return readLine[0];
@@ -18,7 +16,6 @@ public class Parser {
 
     public int singleQueryInteger(String[] readLine) throws DukeException {
         int s;
-
         try {
             s = Integer.valueOf(readLine[1]);
         } catch (NumberFormatException arr) {
@@ -29,13 +26,59 @@ public class Parser {
         return s;
     }
 
+    public Command parse(String[] line) throws DukeException {
+        Command c;
+        ArrayList<String> queries;
+        switch(this.readCommand(line)) {
+
+
+            case "list":
+                c = new ListCommand();
+                break;
+            case "delete":
+                c = new DeleteCommand(this.singleQueryInteger(line));
+                break;
+            case "mark":
+                c = new MarkCommand(this.singleQueryInteger(line));
+                break;
+
+            case "todo":
+                if (line.length == 1) {
+                    throw new NoArgsException("deadline");
+                }
+
+                String description = this.queries(line, List.<String>of()).get(0);
+                c = new TodoCommand(new Todos(description));
+                break;
+            case "event":
+                if (line.length == 1) {
+                    throw new NoArgsException("deadline");
+                }
+                queries = this.queries(line, List.<String>of("from, to"));
+                c = new EventCommand(new Events(queries));
+                break;
+
+            case "deadline":
+                if (line.length == 1) {
+                    throw new NoArgsException("deadline");
+                }
+                queries = this.queries(line, List.<String>of("by"));
+                c = new DeadLineCommand(new Deadlines(queries));
+                break;
+            case "bye":
+                c = new ByeCommand();
+                break;
+
+            default:
+                throw new EmptyException();
+        }
+
+        return c;
+    }
+
     public ArrayList<String> queries(
             String[] readLine, List<String> keywords) throws DukeException {
-
         ArrayList<String> arr = new ArrayList<>();
-
-
-
 
         try {
             int index = 0;
@@ -43,8 +86,6 @@ public class Parser {
 
             for (int i = 1; i < readLine.length; i++){
                 String s = readLine[i];
-
-
                 if (s.charAt(0) != '/') {
                     concat += s + " ";
 
@@ -56,8 +97,6 @@ public class Parser {
                 } else {
                     throw new InvalidException();
                 }
-
-
             }
             arr.add(concat.substring(0, concat.length() - 1));
 
@@ -68,10 +107,6 @@ public class Parser {
 
         return arr;
     }
-
-
-
-
 
 
 }
