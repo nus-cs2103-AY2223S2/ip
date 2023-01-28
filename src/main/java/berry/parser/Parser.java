@@ -1,7 +1,12 @@
 package berry.parser;
 
-import berry.command.*;
-
+import berry.command.Command;
+import berry.command.AddTaskCommand;
+import berry.command.DeleteCommand;
+import berry.command.ExitCommand;
+import berry.command.ListCommand;
+import berry.command.MarkCommand;
+import berry.command.UnmarkCommand;
 import berry.exception.BerryException;
 import berry.exception.EmptyClauseException;
 import berry.exception.EmptyDescriptionException;
