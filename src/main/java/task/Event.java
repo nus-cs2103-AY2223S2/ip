@@ -26,4 +26,17 @@ public class Event extends Task {
         return (this.isDone ? this.MARKED : this.UNMARKED) + " " + this.description
                 + " (from: " + this.fromDate + ", to: " + this.toDate + ")";
     }
+
+    /**
+     * Returns String representation of the Event object for data storage.
+     * Saves the content of the Event, including its isDone status, description,and the to/from date
+     * into a String with the delimiter "|" to be written into a data file.
+     *
+     * @return A String representing this Event object.
+     */
+    public String toSaveFormat() {
+        return "E|" + (this.isDone ? 1 : 0) + "|" + this.description + "|" + this.fromDate + "|"
+                + this.toDate;
+
+    };
 }
