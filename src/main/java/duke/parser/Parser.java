@@ -44,6 +44,10 @@ public class Parser {
             Command clearC = new ClearCommand(fullCommand);
             return clearC;
 
+        case "find":
+            Command findC = new FindCommand(fullCommand);
+            return findC;
+
         default:
             Command unknownC = new UnknownCommand(fullCommand);
             return unknownC;
