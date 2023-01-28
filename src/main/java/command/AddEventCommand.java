@@ -1,13 +1,12 @@
-package Command;
-
-import DukeException.InvalidArgumentException;
-import DukeException.MissingArgumentException;
-import Storage.TaskList;
-import Task.Event;
+package command;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.Date;
+
+import dukeException.InvalidArgumentException;
+import dukeException.MissingArgumentException;
+import storage.TaskList;
+import task.Event;
 
 public class AddEventCommand extends Command {
 
@@ -38,7 +37,7 @@ public class AddEventCommand extends Command {
             throw new MissingArgumentException("Please insert an start date.");
         }
 
-        String duration[] = req[1].split(" /to ");
+        String[] duration = req[1].split(" /to ");
 
         if (duration.length < 2) {
             throw new MissingArgumentException("Please insert an end date.");
@@ -62,10 +61,11 @@ public class AddEventCommand extends Command {
                 throw new InvalidArgumentException("Your start date should be before your end date!");
             }
 
-            return "Great! I've added this task for you \n" + newEvent +
-                    "\nYou have " + tasks.numOfTask() + " tasks in the list";
+            return "Great! I've added this task for you \n" + newEvent
+                    + "\nYou have " + tasks.numOfTask() + " tasks in the list";
         } catch (DateTimeException error) {
-            throw new InvalidArgumentException("Wrong date format! Please follow the format YYYY-MM-DD (e.g. 2000-01-01)");
+            throw new InvalidArgumentException("Wrong date format! "
+                    + "Please follow the format YYYY-MM-DD (e.g. 2000-01-01)");
         }
     }
 }

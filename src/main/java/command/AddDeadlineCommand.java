@@ -1,12 +1,12 @@
-package Command;
-
-import DukeException.InvalidArgumentException;
-import DukeException.MissingArgumentException;
-import Storage.TaskList;
-import Task.Deadline;
+package command;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+
+import dukeException.InvalidArgumentException;
+import dukeException.MissingArgumentException;
+import storage.TaskList;
+import task.Deadline;
 
 public class AddDeadlineCommand extends Command {
 
@@ -38,11 +38,12 @@ public class AddDeadlineCommand extends Command {
         try {
             LocalDate dueDate = LocalDate.parse(deadline);
             Deadline newDeadline = tasks.addDeadline(task, dueDate);
-            return "Great! I've added this task for you \n" + newDeadline +
-                    "\nYou have " + tasks.numOfTask() + " tasks in the list";
+            return "Great! I've added this task for you \n" + newDeadline
+                    + "\nYou have " + tasks.numOfTask() + " tasks in the list";
 
         } catch (DateTimeException error) {
-            throw new InvalidArgumentException("Please insert your date using the format, YYYY-MM-DD (e.g. 2000-01-01)");
+            throw new InvalidArgumentException("Please insert your date using the format, "
+                    + "YYYY-MM-DD (e.g. 2000-01-01)");
         }
     }
 }

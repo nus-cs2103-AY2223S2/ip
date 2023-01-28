@@ -1,11 +1,10 @@
-package Task;
+package task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-//    final private String deadline;
-    final private LocalDate dueDate;
+    private final LocalDate dueDate;
 
     /**
      * Constructor method for Deadline

@@ -1,15 +1,15 @@
-package Storage;
-
-import DukeException.DukeException;
-import DukeException.InvalidArgumentException;
-import Task.Deadline;
-import Task.Event;
-import Task.Task;
-import Task.Todo;
+package storage;
 
 import java.io.*;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+
+import dukeException.DukeException;
+import dukeException.InvalidArgumentException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 public class LocalStorage {
     private File file;

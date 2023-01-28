@@ -1,11 +1,11 @@
-package Task;
+package task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    final private LocalDate from;
-    final private LocalDate to;
+    private final LocalDate from;
+    private final LocalDate to;
 
     /**
      * Constructor to create a new event
@@ -29,6 +29,6 @@ public class Event extends Task {
         String statusIcon = this.completed ? "X" : " ";
         String formatted_start = from.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
         String formatted_end = to.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
-        return "[E][" + statusIcon + "]" + this.task + "(from: " + formatted_start + " to: " + formatted_end +")";
+        return "[E][" + statusIcon + "]" + this.task + "(from: " + formatted_start + " to: " + formatted_end + ")";
     }
 }

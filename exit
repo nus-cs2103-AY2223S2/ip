@@ -20,7 +20,7 @@
 [33m6428278[m HEAD@{19}: commit: A-TextUiTesting: Added input text and expected result
 [33md4dde8e[m[33m ([m[1;33mtag: Level-4[m[33m)[m HEAD@{20}: commit: Level-04: Added ToDo, Event and Deadline
 [33m3eba56c[m[33m ([m[1;33mtag: Level-3[m[33m)[m HEAD@{21}: commit: Level-03: Added javadocs
-[33m2842556[m HEAD@{22}: commit: Level-03: Added Request Class to handle the user's request
+[33m2842556[m HEAD@{22}: commit: Level-03: Added parser.Parser Class to handle the user's parser
 [33mb8584a6[m HEAD@{23}: commit: Level-03: Added mark and unmark function
 [33mad39336[m[33m ([m[1;33mtag: Level-2[m[33m)[m HEAD@{24}: commit: Level-02: Added Add and List method
 [33m0f7476b[m[33m ([m[1;33mtag: Level-1[m[33m)[m HEAD@{25}: commit: Level-01: Added javadocs

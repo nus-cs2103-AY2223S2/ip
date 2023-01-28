@@ -1,8 +1,8 @@
-package Command;
+package command;
 
-import DukeException.IndexOutOfBoundException;
-import Storage.TaskList;
-import Task.Task;
+import dukeException.IndexOutOfBoundException;
+import dukeException.MissingArgumentException;
+import storage.TaskList;
 
 public class RemoveCommand extends Command {
     private String request;
@@ -14,13 +14,16 @@ public class RemoveCommand extends Command {
     @Override
     public String execute(TaskList tasks) throws IndexOutOfBoundException {
         String[] req = request.trim().split("delete ");
+        if (req.length < 2) {
+            throw new MissingArgumentException("Missing index for deletion!");
+        }
         Integer idx = Integer.parseInt(req[1]) - 1;
         if (idx >= tasks.numOfTask()) {
             throw new IndexOutOfBoundException();
         }
-        String deleted_task = tasks.getTask(idx).toString();
+        String deletedTask = tasks.getTask(idx).toString();
         tasks.deleteTask(idx);
-        return "Noted. I've removed this task:\n" + deleted_task +
-                "\nNow you have "+ tasks.numOfTask() + " in the list.";
+        return "Noted. I've removed this task:\n" + deletedTask
+                + "\nNow you have " + tasks.numOfTask() + " in the list.";
     }
 }

@@ -1,6 +1,6 @@
-package Command;
+package command;
 
-import Storage.TaskList;
+import storage.TaskList;
 
 public abstract class Command {
     /**

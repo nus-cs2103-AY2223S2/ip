@@ -35,7 +35,7 @@ public class UI {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while(!input.equalsIgnoreCase("bye")) {
+        while (!input.equalsIgnoreCase("bye")) {
             printRes(input);
             input = sc.nextLine();
         }

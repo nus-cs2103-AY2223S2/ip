@@ -1,8 +1,8 @@
-package Command;
+package command;
 
-import Task.Todo;
-import Storage.TaskList;
-import DukeException.MissingArgumentException;
+import dukeException.MissingArgumentException;
+import storage.TaskList;
+import task.Todo;
 
 public class AddTodoCommand extends Command {
     private String request;
@@ -22,7 +22,7 @@ public class AddTodoCommand extends Command {
             throw new MissingArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         Todo newTodo = tasks.addTodo(task[1]);
-        return "Great! I've added this task for you \n" + newTodo +
-                "\nYou have " + tasks.numOfTask() + " tasks in the list";
+        return "Great! I've added this task for you \n" + newTodo
+                + "\nYou have " + tasks.numOfTask() + " tasks in the list";
     }
 }

@@ -1,4 +1,4 @@
-package DukeException;
+package dukeException;
 
 public class DukeException extends RuntimeException {
 

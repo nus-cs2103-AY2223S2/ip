@@ -1,4 +1,4 @@
-package DukeException;
+package dukeException;
 
 public class IndexOutOfBoundException extends DukeException {
     public IndexOutOfBoundException() {
