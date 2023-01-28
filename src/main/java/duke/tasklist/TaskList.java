@@ -103,7 +103,21 @@ public class TaskList {
         taskList.remove(index);
         return removed;
     }
-
+    /**
+     * Prints all <code>Task</code>s in <code>TaskList</code> that contains
+     * <code>keyword</code>.
+     * @param keyword Keyword to check all <code>Task</code>s for.
+     */
+    public void findInTaskList(String keyword) {
+        ArrayList<Task> foundList = new ArrayList<>();
+        for (int i = 0; i < this.getLength(); i++) {
+            Task curTask = this.getTask(i);
+            String cur = curTask.toString();
+            if (cur.contains(keyword)) {
+                System.out.println("\t" + (i + 1) + ". " + curTask);
+            }
+        }
+    }
     /**
      * Removes all <code>Task</code> from arraylist.
      */

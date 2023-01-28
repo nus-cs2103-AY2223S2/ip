@@ -49,4 +49,14 @@ public abstract class Command {
         String[] splitted = command.split(" ");
         return Integer.parseInt(splitted[1]);
     }
+
+    /**
+     * Returns the keyword of a find <code>Command</code>.
+     * @param command The find <code>Command</code> from the user.
+     * @return The keyword the user wants to find.
+     */
+    public static String getFindKeyword(String command) {
+        String[] splitted = command.split(" ");
+        return splitted[1];
+    }
 }
