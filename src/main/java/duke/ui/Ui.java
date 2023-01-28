@@ -8,10 +8,10 @@ import java.util.Scanner;
 public class Ui {
     private Scanner scanner = new Scanner(System.in);
     private static String formatMessage(String message) {
-        String FORMAT_LINE = "___________________________";
-        return FORMAT_LINE + "\n"
+        String formatLine = "___________________________";
+        return formatLine + "\n"
                 + message + "\n"
-                + FORMAT_LINE;
+                + formatLine;
     }
 
     /**

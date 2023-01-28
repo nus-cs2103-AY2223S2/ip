@@ -3,6 +3,9 @@ package duke.commands;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandDukeException;
 
+/**
+ * Commands accepted.
+ */
 public enum CommandType {
     EXIT("bye"),
     DISPLAY_LIST("list"),

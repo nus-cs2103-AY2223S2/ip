@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a command to display tasks that match a keyword.
+ */
 public class FindCommand extends Command {
     private String keyword;
 

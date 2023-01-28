@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a command to mark a task as not done.
+ */
 public class MarkTaskAsUndoneCommand extends Command {
     private int number;
 

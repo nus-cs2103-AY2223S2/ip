@@ -12,6 +12,7 @@ public abstract class Task {
 
     /**
      * Creates a task.
+     *
      * @param description The description of a task.
      * @param eventSymbol The symbol for the type of task.
      */
@@ -22,6 +23,7 @@ public abstract class Task {
 
     /**
      * Returns the icon for the completion status of the task.
+     *
      * @return "X" if the task is done, else " ".
      */
     public String getStatusIcon() {
@@ -31,18 +33,20 @@ public abstract class Task {
 
     /**
      * Sets the task's completion status as done or undone.
+     *
      * @param value The new status of the task.
      */
     public void setDone(boolean value) {
         isDone = value;
     }
-    
+
     public boolean matchesKeyword(String keyword) {
         return description.contains(keyword);
     }
-    
+
     /**
      * Returns the string representation of the task.
+     *
      * @return The string representation of the task.
      */
     @Override
@@ -53,6 +57,7 @@ public abstract class Task {
     /**
      * Returns the string representation of the task for saving. It can be
      * parsed to create a task.
+     *
      * @param storage A storage object to be used in formatting time.
      * @return A string representation of the task for saving.
      */

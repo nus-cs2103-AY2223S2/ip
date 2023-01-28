@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.storage.Storage;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.storage.Storage;
 
 /**
  * Represents a deadline task.
@@ -15,8 +15,9 @@ public class DeadlineTask extends Task {
 
     /**
      * Creates a deadline task.
+     *
      * @param description The description of the task.
-     * @param endTime The time of the deadline.
+     * @param endTime     The time of the deadline.
      */
     public DeadlineTask(String description, LocalDateTime endTime) {
         super(description, EVENT_SYMBOL);
