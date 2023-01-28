@@ -14,6 +14,11 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath Filepath where previous data is stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }

@@ -39,6 +39,11 @@ public class Todo extends Task {
         return "T / " + getStatusNum() + " / " + getDesc();
     }
 
+    /**
+     * Returns the details of the Todo task.
+     *
+     * @return Details of the Todo task.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

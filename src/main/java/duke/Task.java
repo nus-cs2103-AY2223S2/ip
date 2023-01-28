@@ -76,6 +76,11 @@ public class Task {
         return "task";
     }
 
+    /**
+     * Returns the details of the task.
+     *
+     * @return Details of the task.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
