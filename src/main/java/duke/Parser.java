@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Parser {
     /** The full command, including any descriptions/params. */
     private final String fullCommand;
-    /** The base command. (eg. the "todo" in full command: "todo DESCRIPTION") */
+    /** The base command (eg. the "todo" in full command: "todo DESCRIPTION"). */
     public final String baseCommand;
     /** 
      * The main body of the command; excluding any params.
@@ -47,7 +47,8 @@ public class Parser {
     }
 
     /**
-     * Checks if the command's body is empty. (ie. command has no body)
+     * Checks if the command's body is empty (ie. command has no body).
+     * 
      * @return Whether the command's body is empty.
      */
     public boolean hasEmptyBody() {

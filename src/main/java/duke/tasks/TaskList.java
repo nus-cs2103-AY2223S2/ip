@@ -7,7 +7,11 @@ import java.util.stream.Collectors;
  * A list of tasks.
  */
 public class TaskList extends ArrayList<Task> {
-    /** The summary status message to be displayed in Duke. */
+    /**
+     * Gets the summary status message to be displayed in Duke. 
+     * 
+     * @return Summary status message.
+     */
     public String getStatus() {
         switch (this.size()) {
             case 0:
@@ -21,6 +25,7 @@ public class TaskList extends ArrayList<Task> {
     
     /**
      * Encodes this task list into a string.
+     * 
      * @return The encoded task list.
      */
     public String encodeAsString() {

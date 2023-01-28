@@ -22,14 +22,14 @@ public abstract class Task {
     }
 
     /**
-     * Mark the task as done.
+     * Marks the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Mark the task as not done.
+     * Marks the task as not done.
      */
     public void markAsNotDone() {
         this.isDone = false;
@@ -40,6 +40,7 @@ public abstract class Task {
      * saving into a file.
      * Since the delimiter " | " is used in the encoding, any vertical bar "|" 
      * in the values is escaped.
+     * 
      * @param values The array of values to encode.
      * @return The encoded values.
      */
@@ -51,10 +52,11 @@ public abstract class Task {
     }
 
     /**
-     * Decode an encoded string of values (encoded by 'encodeValues') into an 
+     * Decodes an encoded string of values (encoded by 'encodeValues') into an 
      * array.
      * Since the delimiter " | " is used in the encoding, any escaped vertical 
      * bar "|" in encoded string is unescaped before returning.
+     * 
      * @param encodedValues The encoded values.
      * @return The deencoded array of values.
      */
@@ -67,6 +69,7 @@ public abstract class Task {
 
     /**
      * Parses a task that has been encoded into a string, into a 'Task' instance.
+     * 
      * @param input The encoded task.
      * @return The task that was encoded.
      * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.
@@ -89,6 +92,7 @@ public abstract class Task {
     
     /**
      * Encodes this task into a string.
+     * 
      * @return The encoded task.
      */
     public abstract String encodeAsString();
@@ -101,6 +105,7 @@ public abstract class Task {
 
     /**
      * Formats a date for displaying in Duke.
+     * 
      * @param date The date to format.
      * @return The formatted date string.
      */

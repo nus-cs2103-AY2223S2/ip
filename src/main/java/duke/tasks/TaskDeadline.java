@@ -17,6 +17,7 @@ public class TaskDeadline extends Task {
     /**
      * Parses a deadline task that has been encoded into a string, into a 
      * 'TaskDeadline' instance.
+     * 
      * @param input The encoded deadline task.
      * @return The deadline task that was encoded.
      * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.

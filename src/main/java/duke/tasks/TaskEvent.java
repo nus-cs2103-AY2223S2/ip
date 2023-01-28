@@ -20,6 +20,7 @@ public class TaskEvent extends Task {
     /**
      * Parses a event task that has been encoded into a string, into a 
      * 'TaskEvent' instance.
+     * 
      * @param input The encoded event task.
      * @return The event task that was encoded.
      * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.
