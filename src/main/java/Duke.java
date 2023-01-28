@@ -1,5 +1,10 @@
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     public static String projName = " ____        _        \n"
@@ -8,16 +13,18 @@ public class Duke {
                                     + "| |_| | |_| |   <  __/\n"
                                     + "|____/ \\__,_|_|\\_\\___|\n";
     ArrayList<Task> taskList = new ArrayList<>();
+    private final static String SAVED_PATH = "data/tasks.txt";
 
     private void addTask(Task task, String name) {
         taskList.add(task);
         System.out.println("Item added: " + name);
     }
 
-    public boolean readInput(String input) throws DukeException{
+    public boolean readInput(String input) throws DukeException, IOException {
         String firstInput = input.split(" ")[0];
 
-        switch(firstInput) {
+        try {
+            switch (firstInput) {
             case "list":
                 System.out.println("Here are the tasks you asked for!");
                 for (int i = 0; i < taskList.size(); i += 1) {
@@ -108,18 +115,93 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Oops, that task number does not exist");
                 }
-
-
+            case "save":
+                File f = new File(SAVED_PATH);
+                if (!f.getParentFile().exists()) { //check if directory exists, else make one
+                    if (!f.getParentFile().mkdirs()) {
+                        throw new DukeException("Directories can't be made? Or did something go wrong...");
+                    }
+                }
+                if (!f.exists()) {
+                    if (!f.createNewFile()) {
+                        throw new DukeException("This file both doesn't exist and cannot be made D:");
+                    }
+                }
+                FileWriter fileWriter = new FileWriter(f);
+                for (Task task : taskList) {
+                    fileWriter.write(task.toString());
+                    fileWriter.write(System.lineSeparator());
+                }
+                fileWriter.close();
+                break;
             default:
                 throw new DukeException("Oops I do not recognise this command...");
+            }
+        } catch (IOException io) {
+            throw new DukeException("Something is up with your files it seems");
+        }
+        return true;
+    }
+
+    public void load() {
+        File f = new File(SAVED_PATH);
+        try {
+            if (!f.exists()) { //file didn't exist yet
+                System.out.println("Oh boy a new user! What's up?");
+            } else {
+                System.out.println("Welcome back!");
+                System.out.println("Here's the tasks you have:");
+                Scanner scanner = new Scanner(f);
+                while (scanner.hasNextLine()) {
+                    Task task;
+                    String currTask = scanner.nextLine();
+                    String taskType = currTask.split(" ")[0];
+                    String taskCompletion = currTask.substring(4,7);
+                    Boolean complete = Objects.equals(taskCompletion, "[X]");
+                    String taskDetails;
+                    if (complete) {
+                        taskDetails = currTask.split(" \\[X] ")[1];
+                    } else {
+                        taskDetails = currTask.split(" \\[ ] ")[1];
+                    }
+                    switch (taskType){
+                    case "[T]":
+                        task = new TodoTask(taskDetails, complete);
+                        break;
+                    case "[D]":
+                        String deadlineName = taskDetails.split(" \\(by: ")[0];
+                        String date = taskDetails.split(" \\(by: ")[1].split("\\)")[0];
+                        task = new DeadlineTask(deadlineName, date, complete);
+                        break;
+                    case "[E]":
+                        String eventName = taskDetails.split(" \\(from:")[0];
+                        String eventPeriod = taskDetails.split("\\(from: ")[1];
+                        String start = eventPeriod.split(" to: ")[0];
+                        String end = eventPeriod.split(" to: ")[1].split("\\)")[0];
+                        task = new EventTask(eventName, start, end, complete);
+                        break;
+                    default:
+                        task = new Task(taskDetails);
+                    }
+                    taskList.add(task);
+                }
+                for (int i = 0; i < taskList.size(); i += 1) {
+                    int currItem = i + 1;
+                    System.out.println(currItem + ": " + taskList.get(i));
+                }
+                System.out.println("How might I help you today?");
+            }
+        } catch (IOException io) {
+            System.out.println("Haha noob");
         }
     }
 
-    public static void main(String[] args) throws DukeException{
+    public static void main(String[] args) throws DukeException, IOException {
         System.out.println("Yo! The name is\n" + projName);
-        System.out.println("How might I help you today?");
-        Scanner scanner = new Scanner(System.in);
+
         Duke duke = new Duke();
+        duke.load();
+        Scanner scanner = new Scanner(System.in);
 
         boolean cont = true;
 
@@ -128,9 +210,10 @@ public class Duke {
             try {
                 cont = duke.readInput(input);
             } catch (DukeException e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
         }
+
         scanner.close();
     }
 }

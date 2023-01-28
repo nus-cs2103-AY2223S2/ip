@@ -6,8 +6,13 @@ public class DeadlineTask extends Task{
     this.date = date;
   }
 
+  public DeadlineTask(String name, String date, Boolean isDone) {
+    super(name, isDone);
+    this.date = date;
+  }
+
   @Override
   public String toString() {
-    return "[D]" + super.toString() + " (by: " + this.date + ")";
+    return "[D] " + super.toString() + " (by: " + this.date + ")";
   }
 }
