@@ -82,7 +82,12 @@ public class TaskManager {
         }
     }
 
-
+    /**
+     * Filters tasks in the main TaskManager based on the provided keyword by the user.
+     * @param keyword The keyword to filter the tasks by.
+     * @return A new TaskManager object containing only the tasks that contain
+     *     the keyword as a substring their details.
+     */
     public TaskManager filterTasks(String keyword) {
         TaskManager taskView = new TaskManager();
         for (Task task: this.taskList) {
@@ -93,17 +98,5 @@ public class TaskManager {
         }
         return taskView;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

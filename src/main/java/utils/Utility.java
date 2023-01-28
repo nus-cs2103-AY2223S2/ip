@@ -25,7 +25,7 @@ public class Utility {
     public static LocalDateTime parseDateTime(String dateTimeString) throws DukeInvalidCommandException {
         LocalDateTime dateTime;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm")
-                .withResolverStyle(ResolverStyle.LENIENT);
+            .withResolverStyle(ResolverStyle.LENIENT);
         try {
             dateTime = LocalDateTime.parse(dateTimeString, formatter);
         } catch (DateTimeParseException e) {
@@ -58,8 +58,9 @@ public class Utility {
      */
     public static LocalDateTime convertStringToDateTime(String dateTimeString) {
         LocalDateTime dateTime;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm").withResolverStyle(ResolverStyle.LENIENT);;
-            dateTime = LocalDateTime.parse(dateTimeString, formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm")
+            .withResolverStyle(ResolverStyle.LENIENT);
+        dateTime = LocalDateTime.parse(dateTimeString, formatter);
         return dateTime;
     }
 

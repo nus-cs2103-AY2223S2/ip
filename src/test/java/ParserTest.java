@@ -1,17 +1,18 @@
-import data.TaskManager;
-import errors.DukeInvalidCommandException;
-import org.junit.jupiter.api.Test;
-import ui.Response;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import data.TaskManager;
+import errors.DukeInvalidCommandException;
+import ui.Response;
 
 
 public class ParserTest {
 
 
     @Test
-    public void getSelectionTest(){
+    public void getSelectionTest() {
         // Valid input
         Parser parser = new Parser(new TaskManager());
         int expected = 2;
@@ -48,7 +49,8 @@ public class ParserTest {
 
         // valid input
         String input = "event meeting with Alice /from 23/1/2023 1800 /to 30/2/2024 1645";
-        String expectedOutput = Response.EVENT_ADDED + "\n1. EVENT: meeting with Alice (From Jan 23 2023 6:00PM to Mar 01 2024 4:45PM)[ ]\n";
+        String expectedOutput = Response.EVENT_ADDED
+                + "\n1. EVENT: meeting with Alice (From Jan 23 2023 6:00PM to Mar 01 2024 4:45PM)[ ]\n";
         String actualOutput = parser.createEvent(input);
         assertEquals(expectedOutput, actualOutput);
 

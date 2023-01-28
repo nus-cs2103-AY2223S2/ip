@@ -189,6 +189,13 @@ public class Parser {
         return output;
     }
 
+
+    /**
+     * Gets a preview of filtered tasks matching an input string.
+     * @param input the input string to search for a task event
+     * @return bot response including a string representation of the filtered tasks that matched the input,
+     *         or an error message if the input is invalid
+     */
     public String findTaskEvent(String input) {
         String keyword;
         try {
@@ -209,7 +216,7 @@ public class Parser {
     public String processInput(String input) {
 
         String action = getAction(input);
-        String output = Response.DEFAULT.toString();
+        String output;
 
         switch (action) {
         case "list":
@@ -248,10 +255,11 @@ public class Parser {
 
         case "find":
             output = findTaskEvent(input);
+            break;
 
         default:
 
-            output = "";
+            output = Response.DEFAULT.toString();
             break;
         }
         return output;

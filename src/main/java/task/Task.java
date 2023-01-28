@@ -1,5 +1,9 @@
 package task;
 
+/**
+ * A Task object representing a task
+ * @author Nicholas Lee
+ */
 public abstract class Task {
 
     private final String details;

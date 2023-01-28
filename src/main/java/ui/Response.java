@@ -115,10 +115,5 @@ public enum Response {
             return "I don't understand! Type in a c-c-command and ill hewp *sweats* you out!";
         }
     }
-
-
-
-
-
 }
 
