@@ -36,22 +36,23 @@ public class Duke {
      * Read and process user commands
      */
     public void run() {
-        boolean terminate = false;
+        boolean isTerminate = false;
 
-        while (!terminate) {
+        while (!isTerminate) {
             try {
                 ui.printLine();
 
                 String input = ui.readCommand();
                 Command cmd = Parser.parse(input, taskList, ui, storage);
-                terminate = cmd.execute();
+                isTerminate = cmd.execute();
 
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             }
         }
     }
-    public static void main(String[] args)  {
+
+    public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }
 }

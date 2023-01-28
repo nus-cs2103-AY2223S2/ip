@@ -10,14 +10,15 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private String filePath;
-    private Ui ui;
+    private final String filePath;
+    private final Ui ui;
 
     private enum TaskType {
         TODO,
         DEADLINE,
         EVENT
     }
+
     public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
         this.ui = ui;
@@ -60,26 +61,26 @@ public class Storage {
             TaskType taskType = TaskType.valueOf(inputs[0].toUpperCase());
 
             String task = inputs[2];
-            boolean status = Boolean. parseBoolean(inputs[1]);
+            boolean status = Boolean.parseBoolean(inputs[1]);
 
-            switch(taskType) {
-                case TODO:
-                    Task todo = new ToDo(task, status);
-                    ui.printTask(todo);
-                    taskList.add(todo);
-                    break;
-                case DEADLINE:
-                    Task deadline = new Deadline(task, status, inputs[3]);
-                    ui.printTask(deadline);
-                    taskList.add(deadline);
-                    break;
-                case EVENT:
-                    Task event = new Event(task, status, inputs[3], inputs[4]);
-                    ui.printTask(event);
-                    taskList.add(event);
-                    break;
-                default:
-                    // Will not reach here
+            switch (taskType) {
+            case TODO:
+                Task todo = new ToDo(task, status);
+                ui.printTask(todo);
+                taskList.add(todo);
+                break;
+            case DEADLINE:
+                Task deadline = new Deadline(task, status, inputs[3]);
+                ui.printTask(deadline);
+                taskList.add(deadline);
+                break;
+            case EVENT:
+                Task event = new Event(task, status, inputs[3], inputs[4]);
+                ui.printTask(event);
+                taskList.add(event);
+                break;
+            default:
+                // Will not reach here
             }
         }
 
