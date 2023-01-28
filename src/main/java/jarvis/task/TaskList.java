@@ -37,6 +37,7 @@ public class TaskList {
      * @return List of response lines.
      */
     public List<String> addTask(Task task) {
+        assert task != null;
         this.tasks.add(task);
         return List.of(
                 String.format("Got it! I've added task %d to the list.", this.tasks.size()),

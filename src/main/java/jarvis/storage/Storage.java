@@ -50,6 +50,7 @@ public class Storage {
      * @throws TaskIoException If the tasks cannot be saved.
      */
     public void saveTasks(List<Task> tasks) throws TaskIoException {
+        assert tasks != null;
         try {
             FileWriter writer = new FileWriter(this.getFile());
             for (Task task : tasks) {

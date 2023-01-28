@@ -32,6 +32,7 @@ public class Ui {
      * @param name Name of the bot.
      */
     public Ui(String name) {
+        assert name != null && !name.isBlank();
         this.name = name;
         this.responses = new LinkedList<>();
     }
@@ -47,16 +48,23 @@ public class Ui {
         return dump;
     }
 
+    /**
+     * Formats and prints the given lines of response.
+     *
+     * @param lines Array of response lines.
+     */
     public void print(String ...lines) {
+        assert lines != null;
         this.print(List.of(lines));
     }
 
     /**
      * Formats and prints the given lines of response.
      *
-     * @param lines Response lines.
+     * @param lines List of response lines.
      */
     public void print(List<String> lines) {
+        assert lines != null;
         // Print bot name
         System.out.printf("| %s:%n", name);
         // Print lines
@@ -74,6 +82,7 @@ public class Ui {
      * @param response Type of response.
      */
     public void printStandard(Response response) {
+        assert response != null;
         String standard;
         switch (response) {
         case INTRO:
