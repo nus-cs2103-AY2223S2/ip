@@ -28,13 +28,13 @@ public class MainWindow extends AnchorPane {
     private static final Image lloydNeutralImage = new Image(MainWindow.class
             .getResourceAsStream("../resources/images/Lloyd_Neutral.gif"));
     private static final Image coletteNeutralImage = new Image(MainWindow.class
-            .getResourceAsStream("../resources/images/Colette_Neutral.png"));
+            .getResourceAsStream("../resources/images/Colette_Neutral.gif"));
     private static final Image coletteHappyImage = new Image(MainWindow.class
-            .getResourceAsStream("../resources/images/Colette_Happy.png"));
+            .getResourceAsStream("../resources/images/Colette_Happy.gif"));
     private static final Image coletteSurprisedImage = new Image(MainWindow.class
-            .getResourceAsStream("../resources/images/Colette_Surprised.png"));
+            .getResourceAsStream("../resources/images/Colette_Surprised.gif"));
     private static final Image coletteSadImage = new Image(MainWindow.class
-            .getResourceAsStream("../resources/images/Colette_Sad.png"));
+            .getResourceAsStream("../resources/images/Colette_Sad.gif"));
     private static Image currentColetteImage = MainWindow.coletteNeutralImage;
 
     /** JavaFX GUI objects */

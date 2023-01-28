@@ -9,10 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 /**
  * A custom control using FXML that handles the Dialogue Box in the GUI.
@@ -22,8 +23,10 @@ import javafx.scene.layout.HBox;
 */
 public class DialogBox extends HBox {
 
+    private static final float WRAPPING_WIDTH = 250;
+
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -40,6 +43,17 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        dialog.setWrappingWidth(DialogBox.WRAPPING_WIDTH);
+    }
+
+    /**
+     * Sets the font color of the
+     * text component.
+     *
+     * @param color Color to set font to.
+     */
+    public void setFontColor(Color color) {
+        this.dialog.setFill(color);
     }
 
     /**
@@ -62,7 +76,9 @@ public class DialogBox extends HBox {
      * @return User DialogBox.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setFontColor(Color.CRIMSON);
+        return db;
     }
 
     /**
@@ -76,6 +92,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setFontColor(Color.CORNFLOWERBLUE);
         db.flip();
         return db;
     }
