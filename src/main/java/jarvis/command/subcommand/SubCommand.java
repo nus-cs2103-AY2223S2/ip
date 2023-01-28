@@ -14,5 +14,7 @@ public abstract class SubCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {}
+    public void execute(Ui ui, TaskList taskList, Storage storage) {
+        // Subcommands do nothing when executed, as they only carry data.
+    }
 }

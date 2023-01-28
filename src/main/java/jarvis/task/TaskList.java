@@ -110,6 +110,7 @@ public class TaskList {
      * @return List of response lines.
      */
     public List<String> getTasksForPrint(TaskFilter filter) {
+        // List of tasks after applying the filter
         List<Task> filteredTasks = this.tasks
                 .stream()
                 .filter(task -> task.satisfies(filter))
