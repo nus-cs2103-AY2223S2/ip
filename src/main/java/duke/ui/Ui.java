@@ -87,5 +87,4 @@ public class Ui {
     public void appendResponse(String message) {
         this.response.append(message);
     }
-
 }
