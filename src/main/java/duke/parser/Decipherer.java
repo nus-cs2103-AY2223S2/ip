@@ -1,6 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddTaskCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.MarkAsDoneCommand;
+import duke.command.UnmarkCommand;
+import duke.command.UpdateCommand;
+import duke.command.ViewScheduleCommand;
 import duke.exception.InvalidInputException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;

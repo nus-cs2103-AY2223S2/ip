@@ -9,16 +9,27 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class HelpCommand extends Command {
+    /**
+     * Enum class to represent different types of help commands.
+     */
     private enum helpType {
         NORMAL, DATE, TIME, DURATION
     }
     private final helpType type;
 
+    /**
+     * Initializes the HelpCommand with the corresponding helpType.
+     *
+     * @param information The type of help command.
+     * @throws InvalidInputException If the input is invalid.
+     */
     public HelpCommand(String information) throws InvalidInputException {
         super();
         try {
+            //convert the string to upper case and try to match with the enum
             this.type = helpType.valueOf(information.toUpperCase());
         } catch (IllegalArgumentException e) {
+            //If the input is invalid, throws InvalidInputException
             throw new InvalidInputException(ErrorMessage.INVALID_HELP_COMMAND_ERROR);
         }
     }
@@ -73,27 +84,28 @@ public class HelpCommand extends Command {
      * Enum to represent the different types of commands supported by the application
      */
     private enum CommandType {
-        BYE("bye", "Exit the program"),
-        DEADLINE("deadline [description] /by [date time]", "Add a deadline task with its " +
+        BYE("bye", "Exits the program"),
+        DEADLINE("deadline [description] /by [date time]", "Adds a deadline task with its " +
                 "deadline specified, type \"help time\" to check all the available date format"),
-        DELETE("delete [taskIndex]", "Delete the task specified by the given index"),
-        EVENT("event [description] /by [date time] /from [date time]", "Add a event task " +
+        DELETE("delete [taskIndex]", "Deletes the task specified by the given index"),
+        EVENT("event [description] /by [date time] /from [date time]", "Adds a event task " +
                 "with its starting and ending date specified, type \"help time\" " +
                 "to check all the available date format"),
-        FIND("find [keyword]", "List all the events that matches the input keyword. " +
+        FIND("find [keyword]", "Lists all the events that matches the input keyword. " +
                 "(case insensitive)"),
-        FIXED("fixed [description] /within [duration]", "Add a fixed duration task with its " +
+        FIXED("fixed [description] /within [duration]", "Adds a fixed duration task with its " +
                 "duration specified, type \"help time\" to check the correct format of a duration"),
-        Free("free","Find the next free date in the next month"),
-        HELP("help", "Show help menu"),
-        LIST("list", "Display all tasks in the current Task List"),
-        MARK("mark [taskIndex]", "Mark the task specified by the given index as done"),
-        MASS_DELETE("massDelete", "Delete all the tasks that have been marked as done"),
-        TODO("todo [description]", "Add a todo task"),
-        UNMARK("unmark [taskIndex]", "Mark the task specified by the given index as undone"),
-        UPDATE("update [taskIndex] [description]", "Update the description of the task specified " +
+        Free("free","Finds the next free date in the next month"),
+        HELP("help", "Shows help menu"),
+        LIST("list", "Displays all tasks in the current Task List"),
+        MARK("mark [taskIndex]", "Marks the task specified by the given index as done"),
+        MASS_DELETE("massDelete", "Deletes all the tasks that have been marked as done"),
+        SORT("sort", "Sorts all the event in the task list according to their type"),
+        TODO("todo [description]", "Adds a todo task"),
+        UNMARK("unmark [taskIndex]", "Marks the task specified by the given index as undone"),
+        UPDATE("update [taskIndex] [description]", "Updates the description of the task specified " +
                 "by the given index to be the new description"),
-        VIEW("view [date]", "List all the Deadline tasks and Event tasks that takes " +
+        VIEW("view [date]", "Lists all the Deadline tasks and Event tasks that takes " +
                 "place on the given day, type \"help date\" to check all the available date format");
 
     private final String command;

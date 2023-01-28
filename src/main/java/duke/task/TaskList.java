@@ -58,7 +58,6 @@ public class TaskList implements Cloneable {
         return taskToDelete;
     }
 
-
     /**
      * Indicates the number of the task on the list.
      *
@@ -88,12 +87,28 @@ public class TaskList implements Cloneable {
     }
 
     /**
+     * Clears the task list by creating a new empty ArrayList.
+     */
+    public void clearTasks() {
+        this.tasks = new ArrayList<>();
+    }
+
+    /**
      * Sets the ArrayList of DukeTask.
      *
      * @param tasks The ArrayList of DukeTask
      */
     public void setTasks(ArrayList<DukeTask> tasks) {
         this.tasks = tasks;
+    }
+
+    /**
+     * Check if the task list is empty.
+     *
+     * @return true if the task list is empty, false otherwise
+     */
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
     }
 
     /**
@@ -120,14 +135,46 @@ public class TaskList implements Cloneable {
     }
 
     /**
-     * Check if the task list is empty.
+     * Categorizes the tasks in the task list into four different task lists: deadline, event, fixed duration, and to-do.
      *
-     * @return true if the task list is empty, false otherwise
+     * @return an array of task lists containing the categorized tasks. The order of the task lists in the array is
+     * [deadline, event, fixed duration, to-do].
      */
-    public boolean isEmpty() {
-        return this.tasks.isEmpty();
+    public TaskList[] categorizeTask() {
+        TaskList[] listOfLists = new TaskList[4];
+
+        // Initialize task lists for each task type
+        TaskList deadlineList = new TaskList();
+        TaskList eventList = new TaskList();
+        TaskList fixedDurationList = new TaskList();
+        TaskList todoList = new TaskList();
+
+        // Iterate through all tasks in the master task list
+        for (DukeTask task : this.tasks) {
+            if (task.getType() == TaskType.DEADLINE) {
+                // Add task to deadline list if it is a deadline task
+                deadlineList.addTask(task);
+            } else if (task.getType() == TaskType.EVENT) {
+                // Add task to event list if it is an event task
+                eventList.addTask(task);
+            } else if (task.getType() == TaskType.FIXED_DURATION) {
+                // Add task to fixed duration list if it is a fixed duration task
+                fixedDurationList.addTask(task);
+            } else if (task.getType() == TaskType.TODO) {
+                // Add task to to-do list if it is a to-do task
+                todoList.addTask(task);
+            }
+        }
+
+        // Add all task lists to the list of lists
+        listOfLists[0] = deadlineList;
+        listOfLists[1] = eventList;
+        listOfLists[2] = fixedDurationList;
+        listOfLists[3] = todoList;
+
+        return listOfLists;
     }
-    
+
     /**
      * Returns a string representation of the task list in the format "index. task\n".
      *

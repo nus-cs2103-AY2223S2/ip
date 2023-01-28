@@ -1,13 +1,13 @@
 package duke.command;
 
-import java.time.LocalDate;
-
 import duke.exception.InvalidInputException;
 import duke.storage.CommandHistory;
 import duke.storage.Storage;
 import duke.task.DukeTask;
 import duke.task.TaskList;
 import duke.ui.Ui;
+
+import java.time.LocalDate;
 
 /**
  * A ViewScheduleCommand class that takes in a date and finds all tasks that take place on that date.

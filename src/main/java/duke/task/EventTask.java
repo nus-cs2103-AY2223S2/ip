@@ -1,12 +1,12 @@
 package duke.task;
 
+import duke.exception.InvalidInputException;
+import duke.parser.ErrorMessage;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-
-import duke.exception.InvalidInputException;
-import duke.parser.ErrorMessage;
 
 /**
  * A DeadlineTask that encapsulates the information and starting and ending

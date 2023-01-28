@@ -208,7 +208,6 @@ public class Storage {
         }
     }
 
-
     /**
      * Creates the parent folder of the file associated with this StorageFile object if it does not exist.
      */

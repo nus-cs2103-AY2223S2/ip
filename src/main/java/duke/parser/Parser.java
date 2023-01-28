@@ -1,9 +1,15 @@
 package duke.parser;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.FindFreeTimeCommand;
+import duke.command.ListCommand;
+import duke.command.MassDeleteCommand;
+import duke.command.ReminderCommand;
+import duke.command.SortCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 
@@ -29,7 +35,7 @@ public class Parser {
         UPDATE,
         UNDO,
         FREE,
-        FIXED;
+        FIXED, SORT;
     }
 
     /**
@@ -114,6 +120,9 @@ public class Parser {
             case FREE:
                 //create and return FindFreeTimeCommand
                 return new FindFreeTimeCommand();
+            case SORT:
+                //create and return FindFreeTimeCommand
+                return new SortCommand();
             case HELP:
                 //create and return command to mark item using helpDecoder in Decipherer
                 return Decipherer.parseHelpCommand(information);

@@ -2,7 +2,11 @@ package duke.storage;
 
 import duke.exception.InvalidInputException;
 import duke.parser.TimeHandler;
-import duke.task.*;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.FixedDurationTask;
+import duke.task.TaskList;
+import duke.task.TodoTask;
 
 import java.time.Duration;
 
@@ -80,17 +84,26 @@ public class Decoder {
         list.addTask(event);
     }
 
+    /**
+     * Decodes the given description, done status, and duration into a FixedDurationTask and adds it to the given TaskList.
+     *
+     * @param list the TaskList to add the FixedDurationTask to
+     * @param description the description of the FixedDurationTask
+     * @param isDone whether the FixedDurationTask is done or not
+     * @param duration the duration of the FixedDurationTask in the format "PT1H30M"
+     */
     public static void decodeFixedDuration(TaskList list, String description, boolean isDone, String duration) {
-        // Create a new DeadlineTask with the given description and deadline date
+        // Create a new FixedDurationTask with the given description and duration
         FixedDurationTask fixedDuration = new FixedDurationTask(description.trim(),
                 Duration.parse(duration));
 
-        // If the DeadlineTask is done, mark it as done
+        // If the FixedDurationTask is done, mark it as done
         if (isDone) {
             fixedDuration.markAsDone();
         }
 
-        // Add the DeadlineTask to the given TaskList
+        // Add the FixedDurationTask to the given TaskList
         list.addTask(fixedDuration);
     }
+
 }

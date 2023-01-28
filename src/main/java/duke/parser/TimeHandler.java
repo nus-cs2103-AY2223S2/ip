@@ -28,7 +28,6 @@ public class TimeHandler {
             "dd MMM yyyy", "MMM dd, yyyy", "dd-mm-yyyy"
     };
 
-
     //@@author Yufannnn-reused
     //Reused from https://github.com/wweqg/ip/blob/master/src/main/java/duke/parser/Parser.java
     //with minor modification, it is a pretty clean and concise regular expression for general instructions
@@ -47,8 +46,7 @@ public class TimeHandler {
     public static LocalDate parseToLocalDate(String date) throws InvalidInputException {
         for (String dateFormat : ACCEPTABLE_DATE_FORMATS) {
             try {
-                return LocalDate.parse(date,
-                        DateTimeFormatter.ofPattern(dateFormat));
+                return LocalDate.parse(date, DateTimeFormatter.ofPattern(dateFormat));
             } catch (Exception e) {
                 // Go to the next dateFormat
             }
@@ -56,8 +54,10 @@ public class TimeHandler {
         throw new InvalidInputException(ErrorMessage.INVALID_DATE_ERROR);
     }
 
+
     /**
-     * Parses a string to a LocalDateTime object using the acceptable date time formats defined in {@link #ACCEPTABLE_DATETIME_FORMATS}.
+     * Parsess a string to a LocalDateTime object using the acceptable date time formats defined
+     * in {@link #ACCEPTABLE_DATETIME_FORMATS}.
      *
      * @param date The date string to be parsed
      * @return The parsed LocalDateTime object
@@ -79,11 +79,18 @@ public class TimeHandler {
     //@@author Yufannnn-reused
     //Reused from https://stackoverflow.com/questions/3471397/how-can-i-pretty-print-a-duration-in-java
     //with minor modification, a nice way to print out duration in a human-readable way
+    /**
+     * Returns the human-readable format of a given duration.
+     *
+     * @param duration the duration to be converted to human-readable format
+     * @return the human-readable format of the duration
+     */
     public static String humanReadableFormat(Duration duration) {
         return duration.toString()
                 .substring(2)
                 .replaceAll("(\\d[HMS])(?!$)", "$1 ")
                 .toLowerCase();
     }
+
     //@@author
 }
