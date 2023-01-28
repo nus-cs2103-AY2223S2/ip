@@ -4,6 +4,8 @@ package duke;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Ui class that handles the User interface, that the user sees.
@@ -56,5 +58,12 @@ public class Ui {
 
     public void byeMessage() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public void printList(List<Task> list) {
+        for (int i = 0; i < list.size(); i++) {
+            int j = i + 1;
+            System.out.println(j + "." + list.get(i));
+        }
     }
 }
