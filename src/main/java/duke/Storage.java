@@ -4,7 +4,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 import duke.task.TaskList;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

@@ -34,7 +34,7 @@ public class Parser {
      * @param split String to split the description.
      * @return Front part of the description as String.
      */
-    public String preDescription(String description, String split) {
+    public String getPreDescription(String description, String split) {
         return description.split(split)[0];
     }
 
@@ -45,7 +45,7 @@ public class Parser {
      * @param split String to split the description.
      * @return Back part of the description as String.
      */
-    public String postDescription(String description, String split) {
+    public String getPostDescription(String description, String split) {
         return description.split(split)[1];
     }
 
@@ -55,7 +55,7 @@ public class Parser {
      * @param description Description of task.
      * @return Date/time format of given description as LocalDate.
      */
-    public LocalDate dateTime(String description) {
+    public LocalDate getDateTime(String description) {
         return LocalDate.parse(description);
     }
 
