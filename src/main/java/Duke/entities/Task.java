@@ -32,6 +32,10 @@ public class Task {
         return String.format("0 | %s", this.description);
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
