@@ -25,7 +25,6 @@ public class Duke {
         }
     }
 
-
     public void run() {
         AsciiArt asciiArt = new AsciiArt();
         asciiArt.printArt();
@@ -37,7 +36,6 @@ public class Duke {
             isBye = parser.parse(line, todolist, storage);
         }
     }
-
 
     public static void main(String[] args) {
         new Duke("./data/jarvis.txt").run();
