@@ -4,6 +4,11 @@ import genie.command.Command;
 import genie.exception.DukeException;
 
 import java.io.*;
+
+/**
+ * The main class for Genie, a Command-line Interface bot. Primarily functions as a task planner that responds to
+ * and recognises user commands.
+ */
 public class Genie {
     private Storage storage;
     private TaskList taskList;
@@ -18,9 +23,17 @@ public class Genie {
         }
     }
 
+    /**
+     * This driver creates the Genie bot.
+     * @param args an array of command-line arguments
+     */
     public static void main(String[] args) {
         new Genie().activate();
     }
+
+    /**
+     * Starts up the Genie bot on the command-line interface.
+     */
     public void activate() {
         ui.bootLogo();
         ui.greet();

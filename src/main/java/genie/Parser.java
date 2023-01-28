@@ -5,8 +5,21 @@ import genie.exception.DukeException;
 import genie.exception.EmptyInputException;
 import genie.exception.InvalidInputException;
 
+/**
+ * Deals with making sense of the user command on Genie. Creates the required action upon retrieving a user command.
+ */
 public class Parser {
+    /**
+     * A constructor for Parser class.
+     */
     public Parser() {}
+
+    /**
+     * Takes in a user input and returns its corresponding command for further action by Genie.
+     * @param in user input
+     * @return <Code>Command</Code> aligning to the user's input
+     * @throws DukeException if error occurs in parsing
+     */
     public Command parse(String in) throws DukeException {
         String i = in.toLowerCase();
         if (i.equals("bye")) {

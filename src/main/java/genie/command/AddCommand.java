@@ -9,7 +9,7 @@ public class AddCommand extends Command {
     private String taskType;
     private String fullCommand;
     private Task task;
-    public AddCommand(String taskType, String fullCommand) {
+    public AddCommand(String taskType, String fullCommand) { //todo javadoc for command package
         this.taskType = taskType;
         this.fullCommand = fullCommand;
     }
