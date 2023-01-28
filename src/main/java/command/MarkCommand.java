@@ -1,7 +1,6 @@
 package command;
 
 import duke.DukeException;
-import duke.Ui;
 import task.Task;
 import task.TaskList;
 
@@ -27,10 +26,9 @@ public class MarkCommand extends Command {
      *     marked does not exist.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         Task markedTask = tasks.mark(this.taskNo);
-        ui.showSuccess("ok i've marked this task as done:");
-        ui.showSuccess(markedTask.toString());
+        return "ok i've marked this task as done:\n\n" + markedTask;
     }
 
     /**

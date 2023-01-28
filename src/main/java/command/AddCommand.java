@@ -1,6 +1,5 @@
 package command;
 
-import duke.Ui;
 import task.Task;
 import task.TaskList;
 
@@ -24,11 +23,11 @@ public class AddCommand extends Command {
      * @param ui The ui of Duke chat.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks) {
         tasks.add(this.task);
-        ui.showSuccess("Got it. I've added this task:");
-        ui.showSuccess(this.task.toString());
-        ui.showSuccess("Now there are " + tasks.getNoOfTasks() + " tasks in your list.");
+        return "Got it. I've added this task:\n\n" + this.task + "\n\n"
+                + "Now there are " + tasks.getNoOfTasks()
+                + " tasks in your list.";
     }
 
     /**

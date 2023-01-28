@@ -1,6 +1,5 @@
 package command;
 
-import duke.Ui;
 import task.TaskList;
 
 /**
@@ -13,10 +12,8 @@ public class ExitCommand extends Command {
      * @param ui The ui of Duke chat.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        /* Put this line before tasks.save() because we want it to be executed
-        regardless of whether the tasks could be saved to local file. */
-        ui.showSuccess("ok bye");
+    public String execute(TaskList tasks) {
+        return "ok bye";
     }
 
     /**

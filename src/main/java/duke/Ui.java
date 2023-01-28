@@ -1,66 +1,49 @@
 package duke;
 
-import java.util.Scanner;
+import duke.controllers.MainWindow;
 
 /**
- * Ui deals with interactions with the user (e.g. displays pretty-formatted messages).
+ * Ui collates methods to deal with display of text messages on the GUI.
  */
 public class Ui {
-    private Scanner userInput;
+    private MainWindow app;
 
     /**
-     * Constructor for Ui to instantiate scanner for user text input.
+     * Constructor for Ui to instantiate the GUI (app).
      */
-    public Ui() {
-        this.userInput = new Scanner(System.in);
+    public Ui(MainWindow app) {
+        this.app = app;
     }
 
     /**
-     * Displays a greeting message to the user at the start of the chat session.
+     * Displays the user text input on the GUI.
+     * @param input The user text input.
+     */
+    public void showUserInput(String input) {
+        this.app.addUserDialog(input);
+    }
+
+    /**
+     * Displays a greeting message on the GUI by Duke.
      */
     public void showWelcome() {
-        String greeting = "Yo i'm SmartDuke.\n"
-                + "     how can i help you?";
-        System.out.println(greeting);
+        String greeting = "Yo how can I help you?";
+        this.app.addDukeDialog(greeting);
     }
 
     /**
-     * Displays a success message when a successful task is completed by Duke.
+     * Displays a success message on the GUI when a successful task is completed by Duke.
      * @param succMsg The success message.
      */
     public void showSuccess(String succMsg) {
-        System.out.println(succMsg);
+        this.app.addDukeDialog(succMsg);
     }
 
     /**
-     * Displays an error message when there is a failure encountered by Duke.
+     * Displays an error message on the GUI when there is a failure encountered by Duke.
      * @param errMsg The error message.
      */
     public void showError(String errMsg) {
-        System.out.println(errMsg);
-    }
-
-    /**
-     * Displays a line to differentiate between two adjacent chat replies.
-     */
-    public void showLine() {
-        System.out.println("--------------------------");
-    }
-
-    /**
-     * Reads the next line of input by the user.
-     * @return The input string by the user.
-     */
-    public String readCommand() {
-        String userCommand = this.userInput.nextLine();
-        return userCommand;
-    }
-
-    /**
-     * Closes the scanner object so that no more input is accepted. This is called
-     * at the end of the chat session.
-     */
-    public void close() {
-        this.userInput.close();
+        this.app.addDukeDialog(errMsg);
     }
 }

@@ -1,0 +1,59 @@
+/* ================================ GLOBAL VARIABLES ================================ */
+* {
+    /* ================= COLOR THEME ================= */
+    -black: #585858;
+    -white: #F6F5F5;
+    -light-grey: #E2E2E1;
+    -dark-grey: #8A9298;
+    -light-blue: #D3E0EA;
+    -seaweed-blue: #276678;
+}
+
+/* ================================ MAIN WINDOW ================================ */
+.app-container {
+    -fx-min-height: 200;
+    -fx-pref-width: 600;
+    -fx-padding: 10;
+    -fx-font-size: 14;
+    -fx-font-family: monospace;
+    -fx-font-weight: bold;
+    -fx-background-color: -white;
+}
+
+/* ================================ HEADER ================================ */
+.header-title {
+    -fx-pref-height: 75;
+    -fx-max-width: Infinity;
+    -fx-text-fill: -black;
+    -fx-font-size: 28;
+    -fx-alignment: top-right;
+}
+
+
+/* ================================ SCROLLPANE ================================ */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-min-height: 50;
+    -fx-pref-height: 600;
+    -fx-fit-to-width: true;
+}
+
+/* Hide scroll-bar's top and bottom arrows */
+ .scroll-bar:vertical .increment-arrow,
+ .scroll-bar:vertical .decrement-arrow,
+ .scroll-bar:vertical .increment-button,
+ .scroll-bar:vertical .decrement-button {
+    -fx-padding: 0;
+    -fx-opacity: 0;
+}
+/* Customize scroll-bar's styles */
+ .scroll-bar:vertical {
+    -fx-pref-width: 10;
+    -fx-background-color: -white;
+ }
+ .scroll-bar:vertical .thumb {
+    -fx-background-color: -light-grey;
+ }
+
+.dialog-container {
+}

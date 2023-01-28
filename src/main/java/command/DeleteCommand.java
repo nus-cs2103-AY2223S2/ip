@@ -1,7 +1,6 @@
 package command;
 
 import duke.DukeException;
-import duke.Ui;
 import task.Task;
 import task.TaskList;
 
@@ -27,11 +26,10 @@ public class DeleteCommand extends Command {
      *     deleted does not exist.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         Task removedTask = tasks.delete(this.taskNo);
-        ui.showSuccess("Noted. I've removed this task:");
-        ui.showSuccess(removedTask.toString());
-        ui.showSuccess("Now there are " + tasks.getNoOfTasks() + " tasks in your list.");
+        return "Noted. I've removed this task:\n\n" + removedTask + "\n\n"
+                + "Now there are " + tasks.getNoOfTasks() + " tasks in your list.";
     }
 
     /**

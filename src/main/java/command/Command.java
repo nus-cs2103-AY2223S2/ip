@@ -1,7 +1,6 @@
 package command;
 
 import duke.DukeException;
-import duke.Ui;
 import task.TaskList;
 
 /**
@@ -14,7 +13,7 @@ public abstract class Command {
      * @param ui The ui of Duke chat.
      * @throws DukeException If there is an error encountered during the execution of the command.
      */
-    public abstract void execute(TaskList tasks, Ui ui) throws DukeException;
+    public abstract String execute(TaskList tasks) throws DukeException;
 
     /**
      * Determines if the current command is an exit command.

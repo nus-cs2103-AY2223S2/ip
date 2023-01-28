@@ -1,10 +1,9 @@
 package command;
 
-import java.util.Iterator;
-
-import duke.Ui;
 import task.Task;
 import task.TaskList;
+
+import java.util.Iterator;
 
 /**
  * Command to list all the latest recorded tasks of the current chat session.
@@ -16,19 +15,23 @@ public class ListCommand extends Command {
      * @param ui The ui of Duke chat.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks) {
         Iterator<Task> tasksIterator = tasks.list().iterator();
         if (!tasksIterator.hasNext()) {
-            ui.showSuccess("There are currently no tasks in your list.");
-            return;
+            return "There are currently no tasks in your list...";
         }
-        ui.showSuccess("Here are the tasks in your list:");
+        StringBuilder response = new StringBuilder();
+
+        response.append("Here are the tasks in your list:\n\n");
+
         int taskNo = 1;
         while (tasksIterator.hasNext()) {
             Task task = tasksIterator.next();
-            ui.showSuccess(taskNo + ". " + task.toString());
+            response.append(taskNo + ". " + task + "\n");
             taskNo += 1;
         }
+
+        return response.toString();
     }
 
     /**

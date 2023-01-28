@@ -1,7 +1,6 @@
 package command;
 
 import duke.DukeException;
-import duke.Ui;
 import task.Task;
 import task.TaskList;
 
@@ -27,10 +26,9 @@ public class UnmarkCommand extends Command {
      *     unmarked does not exist.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         Task unmarkedTask = tasks.unmark(this.taskNo);
-        ui.showSuccess("ok i've marked this task as not done yet");
-        ui.showSuccess(unmarkedTask.toString());
+        return "ok i've marked this task as not done yet:\n\n" + unmarkedTask;
     }
 
     /**

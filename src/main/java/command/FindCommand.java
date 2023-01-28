@@ -1,10 +1,9 @@
 package command;
 
-import java.util.Iterator;
-
-import duke.Ui;
 import task.Task;
 import task.TaskList;
+
+import java.util.Iterator;
 
 /**
  * Command to find tasks given a query string.
@@ -26,21 +25,24 @@ public class FindCommand extends Command {
      * @param ui The ui of Duke chat.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks) {
         Iterator<Task> resultsIterator = tasks.find(this.query).iterator();
         if (!resultsIterator.hasNext()) {
-            ui.showSuccess("There are no matching tasks in your list:");
-            return;
+            return "There are no matching tasks in your list...";
         }
 
-        ui.showSuccess("Here are the matching tasks in your list:");
+        StringBuilder response = new StringBuilder();
+
+        response.append("Here are the matching tasks in your list:\n\n");
 
         int taskNo = 1;
         while (resultsIterator.hasNext()) {
             Task task = resultsIterator.next();
-            ui.showSuccess(taskNo + ". " + task.toString());
+            response.append(taskNo + ". " + task + "\n");
             taskNo += 1;
         }
+
+        return response.toString();
     }
 
     /**

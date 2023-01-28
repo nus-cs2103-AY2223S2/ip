@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import duke.controllers.UserControl?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.controllers.MainWindow" styleClass="app-container">
+    <top>
+        <Label text="/* ask-prof-duke */" styleClass="header-title" />
+    </top>
+    <center>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" vvalue="1.0" styleClass="scroll-pane">
+            <content>
+                <VBox fx:id="dialogContainer" styleClass="dialog-container" />
+            </content>
+        </ScrollPane>
+    </center>
+<!--    <children>-->
+
+        <bottom>
+            <UserControl fx:id="userControl" />
+        </bottom>
+
+<!--        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="100.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" styleClass="text-field" />-->
+<!--        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />-->
+<!--    </children>-->
+    <stylesheets>
+        <URL value="@main-window.css" />
+    </stylesheets>
+</BorderPane>

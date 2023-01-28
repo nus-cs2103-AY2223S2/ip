@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import java.net.URL?>
+
+<?import javafx.scene.control.TextField?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<fx:root type="javafx.scene.layout.StackPane" xmlns:fx="http://javafx.com/fxml" styleClass="user-control-outer-container">
+    <children>
+        <StackPane alignment="CENTER">
+            <BorderPane styleClass="user-control-inner-container">
+                <left>
+                    <TextField fx:id="userInput" promptText="Ask prof duke to do something..." styleClass="user-input" />
+                </left>
+                <right>
+                    <Button fx:id="sendButton" styleClass="send-button">
+                        <graphic>
+                            <ImageView fx:id="sendIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
+                        </graphic>
+                    </Button>
+                </right>
+            </BorderPane>
+
+        </StackPane>
+
+    </children>
+    <stylesheets>
+        <URL value="@user-control.css" />
+    </stylesheets>
+</fx:root>

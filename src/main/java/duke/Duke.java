@@ -1,69 +1,55 @@
 package duke;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import command.Command;
+import duke.controllers.MainWindow;
 import task.TaskList;
+
+import java.nio.file.Path;
 
 /**
  * The Duke ChatBot.
  */
 public class Duke {
-    private TaskList taskList;
+    private MainWindow app;
     private Ui ui;
     private Storage storage;
+    private TaskList taskList;
 
     /**
      * Constructor for Duke.
+     * @param app The GUI instance.
      * @param filePath The path of the local file where tasks are stored from the previous session.
      */
-    public Duke(Path filePath) {
-        this.ui = new Ui();
+    public Duke(MainWindow app, Path filePath) {
+        this.app = app;
+        this.ui = new Ui(app);
         this.storage = new Storage(filePath);
         try {
             this.taskList = new TaskList(this.storage.load());
+            this.ui.showWelcome();
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            this.app.addDukeDialog(e.getMessage());
             this.taskList = new TaskList();
         }
     }
 
     /**
-     * Begins the chat session with the user
+     * Handles the user text input by parsing it, executing the relevant command and
+     * returning the text response by Duke.
+     * @param input The user text input.
      */
-    public void run() {
-        /* Greet the user */
-        ui.showLine();
-        ui.showWelcome();
-        ui.showLine();
-
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String userCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(userCommand);
-                c.execute(this.taskList, this.ui);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-
-        ui.close();
-
+    public void handleUserInput(String input) {
         try {
-            this.storage.save(this.taskList);
+            this.ui.showUserInput(input);
+            Command c = Parser.parse(input);
+            String response = c.execute(this.taskList);
+            this.ui.showSuccess(response);
+            if (c.isExit()) {
+                this.storage.save(this.taskList); /* save tasks at the end of the chat session */
+                this.app.terminate();
+            }
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            this.ui.showError(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke(Paths.get(".", "data", "duke.txt")).run();
     }
 }
