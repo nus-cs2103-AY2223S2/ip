@@ -12,6 +12,7 @@ import java.util.Date;
 import static uitilties.UserInterface.receptor;
 
 public class Duke {
+    //for level 8
     static ArrayList<ITask> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
