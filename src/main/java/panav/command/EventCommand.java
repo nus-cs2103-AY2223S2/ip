@@ -30,6 +30,7 @@ public class EventCommand extends Command {
      * @param ui ui to interact with user.
      * @param storage storage to read/write text in file.
      */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task curr = new Event(eventMessage, from, to);
         tasks.addTask(curr);

@@ -8,6 +8,7 @@ import panav.command.DeadlineCommand;
 import panav.command.EditCommand;
 import panav.command.ExitCommand;
 import panav.command.DeleteCommand;
+import panav.command.FindCommand;
 
 import panav.exception.InvalidInputException;
 
@@ -69,6 +70,9 @@ public class Parser {
                 return new ExitCommand();
             case "delete":
                 return new DeleteCommand(fullCommand);
+            case "find":
+                String keyWord = fullCommand.replace("find", "").trim();
+                return new FindCommand(keyWord);
             default:
                 throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
