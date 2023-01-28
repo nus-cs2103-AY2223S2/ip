@@ -8,8 +8,11 @@ public class Deadline extends Task {
         super(description);
         String[] temp = by.split(" ");
         String[] date = temp[0].split("-");
-        if (temp.length == 1) { this.by = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]), 00, 00); 
-        } else { this.by = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]), Integer.parseInt(temp[1].substring(0,2)), Integer.parseInt(temp[1].substring(2))); }
+        if (temp.length == 1) {
+            this.by = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]), 00, 00); 
+        } else {
+            this.by = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]), Integer.parseInt(temp[1].substring(0,2)), Integer.parseInt(temp[1].substring(2)));
+        }
 
     }
 
