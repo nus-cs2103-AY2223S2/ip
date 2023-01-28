@@ -12,7 +12,7 @@ public class Event extends Task {
         this.to = to;
     }
 
-    public Event(String description, boolean marked, String from, String to) {
+    public Event(String description, boolean marked, LocalDate from, LocalDate to) {
         super(description, marked);
         this.from = from;
         this.to = to;

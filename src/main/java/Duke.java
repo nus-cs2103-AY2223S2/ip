@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -20,25 +21,28 @@ public class Duke {
                 while ((line = br.readLine()) != null) {
                     char taskType = line.charAt(1);
 
-                    boolean marked = false;
+                    boolean isMarked = false;
                     Character markedChar = line.charAt(4);
 
                     String description = line.substring(7);
                     if (markedChar.equals('X')) {
-                        marked = true;
+                        isMarked = true;
                     }
                     switch (taskType) {
                         case 'T':
-                            Todo todoTask = new Todo(description, marked);
+                            Todo todoTask = new Todo(description, isMarked);
                             list.add(todoTask);
                             break;
                         case 'E':
                             String modifiedDescription = description.split("\\(from: ")[1];
-                            Event eventTask = new Event(description.split("\\(from: ")[0], marked, modifiedDescription.split(" to: ")[0], modifiedDescription.split(" to: ")[1].split("\\)")[0]);
+                            LocalDate fromDate = LocalDate.parse(modifiedDescription.split(" to: ")[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
+                            LocalDate toDate = LocalDate.parse(modifiedDescription.split(" to: ")[1].split("\\)")[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
+                            Event eventTask = new Event(description.split("\\(from: ")[0], isMarked, fromDate, toDate);
                             list.add(eventTask);
                             break;
                         case 'D':
-                            Deadline deadlineTask = new Deadline(description.split("\\(by: ")[0], marked, description.split("\\(by: ")[1].split("\\)")[0]);
+                            LocalDate byDate = LocalDate.parse(description.split("\\(by: ")[1].split("\\)")[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
+                            Deadline deadlineTask = new Deadline(description.split("\\(by: ")[0], isMarked, byDate);
                             list.add(deadlineTask);
                             break;
                     }
