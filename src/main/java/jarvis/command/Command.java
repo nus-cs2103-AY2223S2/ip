@@ -18,10 +18,9 @@ public abstract class Command {
      * Enum of command actions with their associated keywords.
      */
     public enum Action {
-        INTRO("hi"),
-        BYE("bye"),
-        LIST("list"),
-        FIND("find"),
+        INTRO("hi", "hello", "hey"),
+        BYE("bye", "goodbye"),
+        LIST("list", "find"),
         MARK_DONE("mark"),
         MARK_UNDONE("unmark"),
         CREATE_TODO("todo"),
@@ -32,10 +31,10 @@ public abstract class Command {
         EVENT_FROM("from"),
         EVENT_TO("to");
 
-        private final String keyword;
+        private final String[] keywords;
 
-        Action(String keyword) {
-            this.keyword = keyword;
+        Action(String ...keywords) {
+            this.keywords = keywords;
         }
 
         // @@author hansstanley-reused
@@ -49,12 +48,14 @@ public abstract class Command {
          * @throws InvalidActionException If the raw string does not match any Action.
          */
         public static Action fromString(String str) throws InvalidActionException {
-            if (str != null) {
-                str = str.trim();
-                for (Action action : Action.values()) {
-                    if (action.keyword.equalsIgnoreCase(str)) {
-                        return action;
-                    }
+            if (str == null) {
+                throw new InvalidActionException("Action string cannot be null");
+            }
+
+            str = str.trim().toLowerCase();
+            for (Action action : Action.values()) {
+                if (List.of(action.keywords).contains(str)) {
+                    return action;
                 }
             }
 
