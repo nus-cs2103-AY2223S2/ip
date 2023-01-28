@@ -1,6 +1,11 @@
 package storage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
@@ -15,8 +20,8 @@ public class LocalStorage {
     private File file;
 
     public LocalStorage(String path) {
-        File local_file = readFile(path);
-        this.file = local_file;
+        File localFile = readFile(path);
+        this.file = localFile;
     }
 
     /**
@@ -53,50 +58,52 @@ public class LocalStorage {
             while (line != null) {
                 try {
                     String[] args = line.split("\\|");
-                    String task_type = args[0].trim();
-                    String task_status = args[1].trim();
-                    String task_desc = args[2];
-                    switch (task_type) {
-                        case "T":
-                            Todo todo = new Todo(task_desc);
-                            if (task_status.equals("1")) {
-                                todo.markComplete();
+                    String taskType = args[0].trim();
+                    String taskStatus = args[1].trim();
+                    String taskDesc = args[2];
+                    switch (taskType) {
+                    case "T":
+                        Todo todo = new Todo(taskDesc);
+                        if (taskStatus.equals("1")) {
+                            todo.markComplete();
+                        }
+                        tasks.add(todo);
+                        break;
+                    case "D":
+                        String dueDate = args[3].trim();
+                        try {
+                            LocalDate formattedDueDate = LocalDate.parse(dueDate);
+                            Deadline deadline = new Deadline(taskDesc, formattedDueDate);
+                            if (taskStatus.equals("1")) {
+                                deadline.markComplete();
                             }
-                            tasks.add(todo);
+                            tasks.add(deadline);
                             break;
-                        case "D":
-                            String due_date = args[3].trim();
-                            try {
-                                LocalDate dueDate = LocalDate.parse(due_date);
-                                Deadline deadline = new Deadline(task_desc, dueDate);
-                                if (task_status.equals("1")) {
-                                    deadline.markComplete();
-                                }
-                                tasks.add(deadline);
-                                break;
-                            } catch (DateTimeException error) {
-                                throw new InvalidArgumentException("Wrong date format! Please follow the format YYYY-MM-DD (e.g. 2000-01-01)");
+                        } catch (DateTimeException error) {
+                            throw new InvalidArgumentException("Wrong date format! Please follow the format "
+                                    + "YYYY-MM-DD (e.g. 2000-01-01)");
+                        }
+                    case "E":
+                        String from = args[3].trim();
+                        String to = args[4].trim();
+                        try {
+                            LocalDate startDate = LocalDate.parse(from);
+                            LocalDate endDate = LocalDate.parse(to);
+                            Event event = new Event(taskDesc, startDate, endDate);
+                            if (startDate.isAfter(endDate)) {
+                                throw new InvalidArgumentException("Your start date should be before your end date!");
                             }
-                        case "E":
-                            String from = args[3].trim();
-                            String to = args[4].trim();
-                            try {
-                                LocalDate startDate = LocalDate.parse(from);
-                                LocalDate endDate = LocalDate.parse(to);
-                                Event event = new Event(task_desc, startDate, endDate);
-                                if (startDate.isAfter(endDate)) {
-                                    throw new InvalidArgumentException("Your start date should be before your end date!");
-                                }
-                                if (task_status.equals("1")) {
-                                    event.markComplete();
-                                }
-                                tasks.add(event);
-                                break;
-                            } catch (DateTimeException error) {
-                                throw new InvalidArgumentException("Wrong date format! Please follow the format YYYY-MM-DD (e.g. 2000-01-01)");
+                            if (taskStatus.equals("1")) {
+                                event.markComplete();
                             }
-                        default:
+                            tasks.add(event);
                             break;
+                        } catch (DateTimeException error) {
+                            throw new InvalidArgumentException("Wrong date format! Please follow the format "
+                                    + "YYYY-MM-DD (e.g. 2000-01-01)");
+                        }
+                    default:
+                        break;
                     }
                     line = reader.readLine();
                 } catch (DukeException duke_error) {
