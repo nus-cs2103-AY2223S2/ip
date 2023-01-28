@@ -88,4 +88,15 @@ public class Ui {
     public void displayUnmarked(String taskUnmarked) {
         System.out.println("OK, I've marked this task as not done yet:\n" + taskUnmarked);
     }
+
+    public void displayResults(TaskList list, String searchInput) {
+        System.out.println("Here are the matching tasks in your list:");
+        int count = 1;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).toString().contains(searchInput)) {
+                System.out.println(count + "." + list.get(i));
+                count++;
+            }
+        }
+    }
 }
