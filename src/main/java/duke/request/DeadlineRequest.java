@@ -1,6 +1,8 @@
 package request;
 
 import java.util.Arrays;
+
+import dukeDateTimeFormatter.DukeDateTimeFormatter;
 import dukeexception.RequestException;
 
 public class DeadlineRequest extends Request {
@@ -19,6 +21,7 @@ public class DeadlineRequest extends Request {
         int byIndex = Arrays.asList(values).indexOf("/by");
         String description = String.join(" ", Arrays.copyOfRange(values, 1, byIndex));
         String by = String.join(" ", Arrays.copyOfRange(values, byIndex + 1, values.length));
+        by = DukeDateTimeFormatter.format(by);
 
         return new String[] { description, by };
     }
@@ -41,3 +44,4 @@ public class DeadlineRequest extends Request {
         }
     }
 }
+

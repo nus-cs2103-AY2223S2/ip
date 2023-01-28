@@ -1,6 +1,8 @@
 package request;
 
 import java.util.Arrays;
+
+import dukeDateTimeFormatter.DukeDateTimeFormatter;
 import dukeexception.RequestException;
 
 public class EventRequest extends Request {
@@ -20,7 +22,9 @@ public class EventRequest extends Request {
         int toIndex = Arrays.asList(values).indexOf("/to");
         String description = String.join(" ", Arrays.copyOfRange(values, 1, fromIndex));
         String from = String.join(" ", Arrays.copyOfRange(values, fromIndex + 1, toIndex));
+        from = DukeDateTimeFormatter.format(from);
         String to = String.join(" ", Arrays.copyOfRange(values, toIndex + 1, values.length));
+        to = DukeDateTimeFormatter.format(to);
 
         return new String[] { description, from, to };
     }
@@ -51,3 +55,4 @@ public class EventRequest extends Request {
         }
     }
 }
+
