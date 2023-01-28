@@ -32,7 +32,7 @@ public class AddDeadlineCommand extends Command {
             throw new MissingArgumentException("☹ OOPS!!! You're missing the task deadline");
         }
 
-        String task = req[0];
+        String task = req[0].strip();
         String deadline = req[1].trim();
 
         try {
