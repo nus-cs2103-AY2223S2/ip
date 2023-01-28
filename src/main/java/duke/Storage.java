@@ -4,7 +4,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,13 +16,29 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class deals with loading tasks from the
+ * file and saving tasks in the file.
+ */
 public class Storage {
+    /** Path of the task file */
     private final String filePath;
 
+    /**
+     * Initializes the path of the task file.
+     *
+     * @param filePath Path of the task file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves the list of tasks to the task file.
+     *
+     * @param listOfTasks Array list of tasks.
+     * @throws DukeException If the tasks cannot be saved to the file.
+     */
     public void save(ArrayList<Task> listOfTasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -51,6 +66,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the tasks from the task file.
+     *
+     * @return Array list of tasks.
+     * @throws DukeException If the file could not be found or has incorrect date time format.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> listOfTasks = new ArrayList<>(100);
         try {

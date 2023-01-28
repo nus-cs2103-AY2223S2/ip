@@ -6,11 +6,29 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Main class for the chatbot.
+ */
 public class Duke {
+    /** Deals with loading tasks from the file and saving tasks in the file */
     private Storage storage;
+
+    /** Contains the task list */
     private TaskList tasks;
+
+    /** Deals with interactions with the user */
     private Ui ui;
 
+    /**
+     * Initializes the Ui, Storage and TaskList classes.
+     * TaskList is initialized by loading the tasks
+     * from the task file using the Storage.
+     * If the task file does not exist, it will print
+     * the error and create the task file.
+     *
+     * @param foldPath Path of the folder.
+     * @param filePath Path of the file.
+     */
     public Duke(Path foldPath, Path filePath) {
         ui = new Ui();
         storage = new Storage(filePath.toString());
@@ -23,6 +41,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates the folder and file to save and
+     * load tasks if they do not already exist.
+     *
+     * @param foldPath Path of the folder.
+     * @param filePath Path of the file.
+     */
     public void createFile(Path foldPath, Path filePath) {
         try {
             if (!Files.isDirectory(foldPath)) {
@@ -36,6 +61,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the chatbot by first printing the
+     * welcome message and then reading the
+     * commands input by the user. The commands
+     * read will then be parsed and executed.
+     */
     public void run() throws DukeException {
         ui.showWelcome();
         boolean isExit = false;
@@ -46,6 +77,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Initializes the Duke class and calls
+     * the run function.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) throws DukeException {
         String fileSep = System.getProperty("file.separator");
         String userDir = System.getProperty("user.dir");

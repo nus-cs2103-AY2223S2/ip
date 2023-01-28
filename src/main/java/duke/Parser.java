@@ -4,7 +4,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This class deals with making sense of the user command.
+ */
 public class Parser {
+    /**
+     * Parses the command input by the user and executes it.
+     *
+     * @param command Command input by the user.
+     * @param ui User interface to interact with the user.
+     * @param tasks Task operations.
+     * @param storage Storage to save tasks.
+     * @throws DukeException  If string index is out of range or incorrect date time format.
+     */
     public static void parse(String command, Ui ui, TaskList tasks, Storage storage) throws DukeException {
         String firstWord = command.split(" ")[0].toLowerCase();
         String description;
