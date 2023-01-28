@@ -4,22 +4,22 @@ import java.io.FileNotFoundException;
 
 public class Duke {
 
-    private Storage storage;
+    private final Storage STORAGE;
     private ToDoList todolist;
     private Ui ui;
-    private Parser parser;
+    private final Parser PARSER;
     boolean isBye;
 
     public Duke(String dataPath) {
-        storage = new Storage(dataPath);
+        STORAGE = new Storage(dataPath);
         todolist = new ToDoList();
         ui = new Ui();
-        parser = new Parser();
+        PARSER = new Parser();
         isBye = false;
 
         // Print previous data
         try {
-            storage.loadTasks(todolist);
+            STORAGE.loadTasks(todolist);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -33,7 +33,7 @@ public class Duke {
 
         while(!isBye) {
             String line = ui.getNextCommand();
-            isBye = parser.parse(line, todolist, storage);
+            isBye = PARSER.parse(line, todolist, STORAGE);
         }
     }
 
