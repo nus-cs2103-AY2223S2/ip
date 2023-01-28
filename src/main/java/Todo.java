@@ -10,7 +10,6 @@ public class Todo extends Task{
         super(description);
         this.todo = description.split(" ",2)[1];
     }
-
     /**
      * String representation of the task
      * @return string with task details
@@ -18,12 +17,20 @@ public class Todo extends Task{
     public String toString() {
         return "[T]" + "[" + super.getStatusIcon()+ "] " + this.todo;
     }
-
     /**
      * Get the type of task
      * @return a string "todo"
      */
     public String getType() {
-        return "todo";
+        return "T";
+    }
+    /**
+     * Gets the type of task
+     * @return a String representing event detail
+     */
+    public String getDetail() {
+        return this.todo;
     }
 }
+
+

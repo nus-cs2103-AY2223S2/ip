@@ -2,6 +2,8 @@ public class Deadline extends Task{
 
     protected String eventDetail;
 
+    protected String timeDescription;
+
     protected String time;
 
     /**
@@ -12,9 +14,9 @@ public class Deadline extends Task{
         super(description);
         String detail = description.split("/")[0].split(" ", 2)[1];
         this.eventDetail = detail;
-        String time = description.split("/")[1].split(" ")[0] + ": " + description.split("/")[1].split(" ",2)[1];
-        this.time = time;
-
+        String timeDescription = description.split("/")[1].split(" ")[0] + ": " + description.split("/")[1].split(" ",2)[1];
+        this.timeDescription = timeDescription;
+        this.time = timeDescription.split(": ",2)[1];
     }
 
     /**
@@ -23,14 +25,28 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + "[" + this.getStatusIcon() + "] " + eventDetail + "(" + time + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + eventDetail + "(" + timeDescription + ")";
     }
-
     /**
-     * Get the type of task
+     * Gets the type of task
      * @return a string "deadline"
      */
     public String getType() {
-        return "deadline";
+        return "D";
     }
+    /**
+     * Gets the type of task
+     * @return a String representing event detail
+     */
+    public String getDetail() {
+        return this.eventDetail;
+    }
+    /**
+     * Gets the time of task
+     * @return a String representing time
+     */
+    public String getTime() {
+        return this.time;
+    }
+
 }

@@ -23,15 +23,17 @@ public class Task {
     }
 
     /**
-     * Get the type of the task
+     * Gets the type of the task
      * @return a string "task"
      */
     public String getType() {
         return "task";
     }
 
+
+
     /**
-     * Method to know the status of the task
+     * Gets the status of the task
      * @return a String representing whether task is done
      */
     public String getStatusIcon() {
@@ -47,17 +49,25 @@ public class Task {
     }
 
     /**
-     * Mark the task as finished
+     * Marks the task as finished
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Mark the task as unfinished
+     * Marks the task as unfinished
      */
     public void markAsUnDone() {
         this.isDone = false;
+    }
+
+    /**
+     * Gets the type of task
+     * @return a String representing event detail
+     */
+    public String getDetail() {
+        return this.description;
     }
 
     /**
@@ -68,4 +78,13 @@ public class Task {
     public String toString() {
         return this.description;
     }
+
+    /**
+     * Gets the time of task
+     * @return a String representing time
+     */
+    public String getTime() {
+        return "";
+    }
+
 }

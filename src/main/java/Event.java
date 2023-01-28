@@ -4,6 +4,8 @@ public class Event extends Task{
 
     protected String time;
 
+    protected String timeDescription;
+
     /**
      * Constructor
      * @param description the entire description including task name and time of the task
@@ -12,10 +14,10 @@ public class Event extends Task{
         super(description);
         String detail = description.split("/")[0].split(" ", 2)[1];
         this.eventDetail = detail;
-        String time = description.split("/")[1].split(" ")[0] + ": " + description.split("/")[1].split(" ",2)[1] +
+        String timeDescription = description.split("/")[1].split(" ")[0] + ": " + description.split("/")[1].split(" ",2)[1] +
                 description.split("/")[2].split(" ")[0] + ": " + description.split("/")[2].split(" ",2)[1];
-        this.time = time;
-
+        this.timeDescription = timeDescription;
+        this.time = timeDescription.split(": ",2)[1].split(":", 2)[0] + timeDescription.split(":",2)[1].split(":", 2)[1];;
     }
 
     /**
@@ -24,7 +26,7 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + "[" + super.getStatusIcon() + "] " + eventDetail + "(" + time +  ")";
+        return "[E]" + "[" + super.getStatusIcon() + "] " + eventDetail + "(" + timeDescription +  ")";
     }
 
     /**
@@ -32,7 +34,22 @@ public class Event extends Task{
      * @return a string "event"
      */
     public String getType() {
-        return "event";
+        return "E";
     }
 
+    /**
+     * Gets the type of task
+     * @return a String representing event detail
+     */
+    public String getDetail() {
+        return this.eventDetail;
+    }
+
+    /**
+     * Gets the time of task
+     * @return a String representing time
+     */
+    public String getTime() {
+        return time;
+    }
 }
