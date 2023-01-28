@@ -59,7 +59,7 @@ public class Parser {
                 try {
                     String[] splitString = originalString.split("/");
                     String description = splitString[0].replace("deadline", "");
-                    String duration = splitString[1].replace("by", "by:");
+                    String duration = splitString[1].replace("by", "");
                     Task newTask = new Deadline(description, duration);
                     taskList.addTask(newTask);
                     System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.toString() + "\n" + "Now you have " + taskList.getSize() +
@@ -72,8 +72,9 @@ public class Parser {
                 try {
                     String[] splitString = originalString.split("/");
                     String description = splitString[0].replace("event", "");
-                    String duration = splitString[1].replace("from", "from:") + splitString[2].replace("to", "to:");
-                    Task newTask = new Event(description, duration);
+                    String startDate = splitString[1].replace("from", "") ;
+                    String endDate = splitString[2].replace("to", "");
+                    Task newTask = new Event(description, startDate, endDate);
                     taskList.addTask(newTask);
                     System.out.println("Got it! I've added this task to the list!" + "\n" + newTask.toString() + "\n" + "Now you have " + taskList.getSize() +
                             " tasks in the list!" + "\n");

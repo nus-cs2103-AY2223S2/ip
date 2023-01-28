@@ -1,6 +1,3 @@
 T | 0 | eat food
-T | 1 | read book
-T | 0 | run around
-T | 0 | sleep
-D | 0 |  return book  | from 7 may
-E | 0 |  panic  | from: 2 aug to: 3 aug
+D | 0 |  return book  | 2019-01-01
+E | 0 |  run  | 2019-02-02 2020-01-01

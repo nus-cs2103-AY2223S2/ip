@@ -32,19 +32,23 @@ public class Storage {
                 String line = sc.nextLine();
                 String[] cleanedInputs = line.split(" \\| ");
                 boolean isDone = (cleanedInputs[1].equals("0")) ? false : true;
-                if (cleanedInputs[0].toUpperCase().equals("T")) {
+                if (cleanedInputs[0].equals("T")) {
                     taskList.addTask(new ToDo(cleanedInputs[2], isDone));
-                } else if (cleanedInputs[0].toUpperCase().equals("D")) {
-                    taskList.addTask(new Deadline(cleanedInputs[2], isDone, cleanedInputs[3]));
-                } else if (cleanedInputs[0].toUpperCase().equals("E")) {
-                    taskList.addTask(new Event(cleanedInputs[2], isDone, cleanedInputs[3]));
+                } else if (cleanedInputs[0].equals("D")) {
+                    String cleanedDuration = cleanedInputs[3].replace("by:", "");
+                    taskList.addTask(new Deadline(cleanedInputs[2], isDone, cleanedDuration));
+                } else if (cleanedInputs[0].equals("E")) {
+                    String[] splitDates = cleanedInputs[3].split(" ");
+                    String cleanedStartDate = splitDates[0].replace("from: ", "");
+                    String cleanedEndDate = splitDates[1].replace("to: ", "");
+                    taskList.addTask(new Event(cleanedInputs[2], isDone, cleanedStartDate, cleanedEndDate));
                 }
             }
             sc.close();
+            return taskList;
         } catch (FileNotFoundException e) {
             throw new NeroException("File was not found!");
         }
-        return taskList;
     }
 
     void saveFile(TaskList<Task> taskList) throws IOException {

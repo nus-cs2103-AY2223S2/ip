@@ -1,20 +1,34 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
-    String duration;
-    public Event(String description, String duration) {
+    LocalDate startDate;
+    LocalDate endDate;
+    public Event(String description, String startDate, String endDate) throws NeroException {
         super(description);
-        this.duration = duration;
-    }
+        try {
+            this.startDate = LocalDate.parse(startDate.trim());
+            this.endDate = LocalDate.parse(endDate.trim());
+        } catch (DateTimeParseException e) {
+            throw new NeroException("Invalid Date!");
+        }
+}
 
-    public Event(String description, boolean isDone, String duration) {
+    public Event(String description, boolean isDone, String startDate, String endDate) throws NeroException {
         super(description, isDone);
-        this.duration = duration;
+        try {
+            this.startDate = LocalDate.parse(startDate);
+            this.endDate = LocalDate.parse(endDate);
+        } catch (DateTimeParseException e) {
+            throw new NeroException("Invalid Date!");
+        }
     }
-
-    public String getDuration() {
-        return duration;
+    public String dateFormatter() {
+        return "from: " + startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: "
+                + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
     public String getTaskIcon() {
         return "E";
@@ -23,15 +37,14 @@ public class Event extends Task {
 
 
     public String toSave() {
-        return this.getTaskIcon() + SEPARATOR + convertBoolean() + SEPARATOR + this.getDescription()
-                + SEPARATOR + this.getDuration();
+        return this.getTaskIcon() + SEPARATOR + convertBoolean()
+                + SEPARATOR + this.getDescription()
+                + SEPARATOR + this.startDate + " " + this.endDate;
     }
-
     @Override
     public String toString() {
-        return "[" + this.getTaskIcon() + "]"
-                + this.getStatusIcon() + " " + this.getDescription()
-                + " (" + this.getDuration() + ")";
+        return String.format("[%s]%s %s %s", this.getTaskIcon(), this.getStatusIcon(),
+                this.getDescription(), this.dateFormatter());
     }
 
 }

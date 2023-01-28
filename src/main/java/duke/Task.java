@@ -4,6 +4,7 @@ public abstract class Task {
     public static final String SEPARATOR = " | ";
     String description;
     boolean isDone;
+    
     public Task(String description) {
         this.description = description;
         this.isDone = false;
