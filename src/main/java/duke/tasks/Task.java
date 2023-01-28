@@ -7,8 +7,13 @@ import duke.exceptions.DukeSaveLoadException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A task.
+ */
 public abstract class Task {
+    /** The description of the task. */
     public final String description;
+    /** Whether the task is done. */
     protected boolean isDone;
 
     public Task(String description) {
@@ -16,14 +21,29 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Marks the task as not done.
+     */
     public void markAsNotDone() {
         this.isDone = false;
     }
 
+    /**
+     * Encodes an array of arbitrary values into a single-line string for 
+     * saving into a file.
+     * Since the delimiter " | " is used in the encoding, any vertical bar "|" 
+     * in the values is escaped.
+     * 
+     * @param values The array of values to encode.
+     * @return The encoded values.
+     */
     protected static String encodeValues(String[] values) {
         UnaryOperator<String> escapeVerticalBar = str -> str.replace("|", "\\|");
         return Stream.of(values)
@@ -31,6 +51,15 @@ public abstract class Task {
             .collect(Collectors.joining(" | "));
     }
 
+    /**
+     * Decodes an encoded string of values (encoded by 'encodeValues') into an 
+     * array.
+     * Since the delimiter " | " is used in the encoding, any escaped vertical 
+     * bar "|" in encoded string is unescaped before returning.
+     * 
+     * @param encodedValues The encoded values.
+     * @return The deencoded array of values.
+     */
     protected static String[] decodeValues(String encodedValues) {
         UnaryOperator<String> unescapeVerticalBar = str -> str.replace("\\|", "|");
         return Stream.of(encodedValues.split(" \\| "))
@@ -38,6 +67,13 @@ public abstract class Task {
             .toArray(String[]::new);
     }
 
+    /**
+     * Parses a task that has been encoded into a string, into a 'Task' instance.
+     * 
+     * @param input The encoded task.
+     * @return The task that was encoded.
+     * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.
+     */
     public static Task loadFromString(String input) throws DukeSaveLoadException {
         String[] values = Task.decodeValues(input);
         String taskType = values[0];
@@ -53,7 +89,12 @@ public abstract class Task {
                 throw new DukeSaveLoadException(errorMessage);
         }
     }
-
+    
+    /**
+     * Encodes this task into a string.
+     * 
+     * @return The encoded task.
+     */
     public abstract String encodeAsString();
 
     @Override
@@ -62,6 +103,12 @@ public abstract class Task {
         return String.format("[%s] %s", statusIcon, description);
     }
 
+    /**
+     * Formats a date for displaying in Duke.
+     * 
+     * @param date The date to format.
+     * @return The formatted date string.
+     */
     protected static String formatDate(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }

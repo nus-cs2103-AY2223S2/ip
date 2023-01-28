@@ -2,8 +2,13 @@ package duke.tasks;
 
 import java.time.LocalDate;
 
+/**
+ * A task with a specified starting and ending times.
+ */
 public class TaskEvent extends Task {
+    /** The starting time for this event task. */
     public final LocalDate fromTime;
+    /** The ending time for this event task. */
     public final LocalDate toTime;
 
     public TaskEvent(String description, String fromTime, String toTime) {
@@ -12,6 +17,14 @@ public class TaskEvent extends Task {
         this.toTime = LocalDate.parse(toTime);
     }
 
+    /**
+     * Parses a event task that has been encoded into a string, into a 
+     * 'TaskEvent' instance.
+     * 
+     * @param input The encoded event task.
+     * @return The event task that was encoded.
+     * @throws DukeSaveLoadException If there's a problem in parsing the encoded task.
+     */
     public static TaskEvent loadFromString(String input) {
         String[] values = Task.decodeValues(input);
         boolean isDone = values[1].equals("1");
