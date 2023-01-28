@@ -38,9 +38,15 @@ public class Parser {
      * @return an array with description, start time and end time
      */
     public static String[] parseEvent (String command) {
+
         return command.split(" ", 2)[1].split("/from | /to ");
     }
 
+    /**
+     * Parse a find query
+     * @param command the entire find query
+     * @return the words that user wants to find
+     */
     public static String parseQuery (String command) {
         return command.split(" ", 2)[1];
     }

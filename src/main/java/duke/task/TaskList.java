@@ -7,14 +7,15 @@ import java.util.ArrayList;
 import java.time.format.DateTimeParseException;
 
 /**
- * Encapsulates an arraylist of Task
+ * Encapsulates an arraylist of Task with the various methods
  */
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<Task>();
 
-    public ArrayList<Task> getList () {
+   public ArrayList<Task> getList() {
         return this.list;
     }
+
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
@@ -66,6 +67,11 @@ public class TaskList {
         System.out.println("OK, I've marked this duke.task as not done yet:\n" + list.get(i));
     }
 
+    /**
+     * Add a todo task into tasklist
+     * @param command the full command
+     */
+
     public void addTodo(String command) {
         try {
             String description = Parser.getDescription(command);
@@ -76,6 +82,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add a deadline task into tasklist
+     * @param command the full command
+     */
     public void addDeadline(String command) {
         try {
             String[] parsed = Parser.parseDeadline(command);
@@ -91,6 +101,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add an event task into tasklist
+     * @param command the full command
+     */
     public void addEvent(String command) {
         try {
             String[] parsed = Parser.parseEvent(command);
@@ -106,6 +120,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds tasks with matching regex and prints them out
+     * @param command the command with the find keyword
+     */
     public void find(String command) {
         String keyword = Parser.parseQuery(command);
         ArrayList<Task> temp = new ArrayList<Task>();

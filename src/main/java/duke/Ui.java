@@ -12,6 +12,10 @@ public class Ui {
         this.reader = new Scanner(System.in);
     }
 
+    /**
+     * Method to read commands interactively
+     * @return command that is inputted by user
+     */
     public String readCommand() {
         System.out.println("Enter your command!");
         return this.reader.nextLine();

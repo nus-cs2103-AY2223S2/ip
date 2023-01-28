@@ -1,9 +1,10 @@
 package duke;
-
 import duke.task.TaskList;
-
 import java.util.ArrayList;
 
+/**
+ * A Duke class
+ */
 public class Duke {
     private static String[] spStg;
     private Ui ui;
@@ -23,6 +24,9 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Run the duke instance
+     */
     public void run() {
         ui.showWelcome();
 

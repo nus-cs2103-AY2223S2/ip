@@ -16,6 +16,10 @@ import java.io.FileWriter;
  */
 public class Storage {
 
+    /**
+     * Method that saves the tasks in tasklist to hard drive
+     * @param list
+     */
     public static void saveToFile(ArrayList<Task> list) {
         try {
             FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/data/duke.Duke.txt");
@@ -30,6 +34,11 @@ public class Storage {
 
     }
 
+    /**
+     * Loads data from file into tasklist
+     * @return tasklist
+     * @throws IOException
+     */
     public static ArrayList<Task> loadFile() throws IOException {
         String home = System.getProperty("user.dir");
         File f = new File(home +"/data/duke.Duke.txt");
