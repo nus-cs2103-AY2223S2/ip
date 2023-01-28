@@ -21,6 +21,10 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 
+tasks.named('test', Test) {
+    useJUnitPlatform()
+}
+
 test {
     useJUnitPlatform()
 
@@ -33,10 +37,12 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+
+    systemProperty("junit.platform.output.capture.stdout", true)
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
