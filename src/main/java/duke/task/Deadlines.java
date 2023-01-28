@@ -39,7 +39,7 @@ public class Deadlines extends Task {
             String[] tokens = taskName.split("/");
             taskName = tokens[0];
 
-            if (!DateTranslator.is_date(rawInput)) {
+            if (!DateTranslator.isDate(rawInput)) {
 
                 String[] date = tokens[1].split(" ");
                 StringBuilder temp = new StringBuilder("(" + date[0] + ": ");
@@ -57,7 +57,7 @@ public class Deadlines extends Task {
             } else {
 
                 dateTranslator = new DateTranslator(rawInput);
-                endDate = dateTranslator.output;
+                endDate = dateTranslator.getOutput();
                 System.out.println(endDate);
             }
         } catch (ArrayIndexOutOfBoundsException e) {

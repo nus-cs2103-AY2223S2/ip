@@ -18,9 +18,9 @@ class DateTranslatorTest {
      */
     @Test
     void identifyDateFormat1() {
-        assertTrue(DateTranslator.is_date("return book /by 2/12/2019 1800"));
-        assertTrue(DateTranslator.is_date("return book /by 2/12/2019"));
-        assertTrue(DateTranslator.is_date("return book /by 2019/2/12"));
+        assertTrue(DateTranslator.isDate("return book /by 2/12/2019 1800"));
+        assertTrue(DateTranslator.isDate("return book /by 2/12/2019"));
+        assertTrue(DateTranslator.isDate("return book /by 2019/2/12"));
 
     }
 
@@ -30,9 +30,9 @@ class DateTranslatorTest {
      */
     @Test
     void identifyDateFormat2() {
-        assertTrue(DateTranslator.is_date("return book /by 2019-11-12"));
-        assertTrue(DateTranslator.is_date("return book /by 2019-11-12 1800"));
-        assertFalse(DateTranslator.is_date("return book /by 2019-11"));
+        assertTrue(DateTranslator.isDate("return book /by 2019-11-12"));
+        assertTrue(DateTranslator.isDate("return book /by 2019-11-12 1800"));
+        assertFalse(DateTranslator.isDate("return book /by 2019-11"));
     }
 
     /**
@@ -41,8 +41,8 @@ class DateTranslatorTest {
      */
     @Test
     void identifyWrongFormat() {
-        assertFalse(DateTranslator.is_date("return book /by dance"));
-        assertFalse(DateTranslator.is_date("return book /by 2019"));
-        assertFalse(DateTranslator.is_date("return book /by "));
+        assertFalse(DateTranslator.isDate("return book /by dance"));
+        assertFalse(DateTranslator.isDate("return book /by 2019"));
+        assertFalse(DateTranslator.isDate("return book /by "));
     }
 }
