@@ -86,6 +86,12 @@ public class Parser {
                 throw new IllegalCommandException(Commands.DELETE);
             }
             break;
+        case "find":
+            try {
+                allTasks.find(arguments);
+            } catch (Throwable e) {
+                throw new IllegalCommandException(Commands.FIND);
+            }
         default:
             throw new IllegalCommandException(Commands.UNRECOGNIZED);
         }
