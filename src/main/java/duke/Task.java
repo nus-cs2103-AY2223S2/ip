@@ -59,6 +59,16 @@ public abstract class Task {
     }
 
 
+    /**
+     * Finds tasks that contain word in their description
+     * @param word String containing common prefix
+     * @return true if the description of the task contains word
+     * else false
+     */
+    boolean containsWord(String word) {
+        return (description.indexOf(word) == -1) ? false : true;
+    }
+
     public abstract String toSave();
 }
 

@@ -86,4 +86,12 @@ public class Ui {
         System.out.println("File not found :(((");
     }
 
+    void printMatchingTasks() {
+        System.out.println("Here are the matching tasks in your list: ");
+    }
+
+    void printNoMatchingTasks() {
+        System.out.println("Unfortunately there are no matching tasks :((");
+    }
+
 }
