@@ -1,3 +1,5 @@
+package src.main.c4po;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -37,6 +39,9 @@ public class Ui {
 
     }
 
+    public static void showCommandError() {
+        System.out.println("Failed to execute command");
+    }
 
 
     /**

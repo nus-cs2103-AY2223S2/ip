@@ -1,3 +1,5 @@
+package src.main.c4po;
+
 public class Event extends Task{
     protected String start;
     protected String end;

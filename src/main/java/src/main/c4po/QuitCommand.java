@@ -1,3 +1,4 @@
+package src.main.c4po;
 public class QuitCommand extends Command {
 
     protected boolean toQuit;

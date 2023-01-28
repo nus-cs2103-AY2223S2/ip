@@ -1,4 +1,6 @@
-abstract class Command {
+package src.main.c4po;
+
+public abstract class Command {
     public boolean toQuit;
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws BotException;

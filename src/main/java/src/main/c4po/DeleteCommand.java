@@ -1,3 +1,5 @@
+package src.main.c4po;
+
 public class DeleteCommand extends Command {
 
     private final Integer toDeletePosition;

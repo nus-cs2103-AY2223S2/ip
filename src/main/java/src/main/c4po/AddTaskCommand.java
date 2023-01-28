@@ -1,3 +1,5 @@
+package src.main.c4po;
+
 public class AddTaskCommand extends Command {
 
     private final Task task;

@@ -1,28 +1,31 @@
-public class UnmarkCommand extends Command {
+package src.main.c4po;
 
-    private Integer indexToUnmark;
-    public UnmarkCommand(Integer index) {
-        this.indexToUnmark = index;
+
+public class MarkCommand extends Command {
+
+    Integer indexToMark;
+
+    public MarkCommand(Integer index) {
+        indexToMark = index;
     }
-
-
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
-
         try {
-            boolean success = tasks.mark(indexToUnmark, "unmark");
+            boolean success = tasks.mark(indexToMark, "mark");
             if (success) {
-                Ui.showUnmarked();
+                Ui.showMarkedDone();
+                //override storage file with all new tasks
                 storage.writeToFile(tasks);
             } else {
                 Ui.showMarkFail();
             }
-            Ui.print(tasks.getItem(indexToUnmark).getTaskInline());
+
+            Ui.print(tasks.getItem(indexToMark).getTaskInline());
+
         } catch (Exception e) {
             String markErr = "Sir! Index for toggling mark cannot be empty";
-            throw new BotException(e.getMessage() + markErr);
+            throw new BotException(markErr);
         }
-
     }
 
     @Override

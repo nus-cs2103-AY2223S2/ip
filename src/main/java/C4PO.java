@@ -1,12 +1,10 @@
-
+import src.main.c4po.*;
 public class C4PO {
 
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
-
     private final Parser parser;
-
     protected static final String FILE_P = "./data/tasks.txt";
 
     public C4PO(String filePath) {
@@ -17,14 +15,14 @@ public class C4PO {
             tasks = new TaskList(storage.load());
             tasks.printList();
         } catch (Exception e) {
-            System.out.println(e);
+            Ui.print(e.getMessage());
             Ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
     /**
-     * Main loop of the bot interaction
+     * Main loop of the bot interaction, run this to start bot
      */
     public void run() {
 
@@ -33,7 +31,6 @@ public class C4PO {
 
         //Main Loop
         //From here, append newly added Tasks to the file
-
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -42,14 +39,11 @@ public class C4PO {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (Exception e) {
-                System.out.println(e);
+                Ui.showCommandError();
             } finally {
                 Ui.printDashLine(1);
             }
-
-
         }
-
     }
 
     public static void main(String[] args) {
