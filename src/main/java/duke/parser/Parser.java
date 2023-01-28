@@ -31,7 +31,7 @@ public abstract class Parser {
             new Command(CommandType.INVALID) {
                 @Override
                 public String execute(Supplier<? extends TaskList> taskList) throws DukeException {
-                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("I'm sorry, but I don't know what that means :(");
                 }
             };
 

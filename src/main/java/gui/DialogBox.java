@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.util.Collections;
 
+import duke.views.UI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
 /**
- * An example of a custom control using FXML.
+ * A custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
@@ -40,7 +41,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         username.setText(user);
-        dialog.setFont(new Font("Courier New", 14));
+        dialog.setFont(new Font(UI.fontType, UI.pFont));
+        username.setFont(new Font(UI.fontType, UI.smallFont));
         dialog.setWrapText(true);
         dialog.setMnemonicParsing(false);
         dialog.setMaxWidth(750);
@@ -58,7 +60,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, "user");
+        return new DialogBox(text, img, "jinx");
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {

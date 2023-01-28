@@ -40,14 +40,20 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage =
             new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Silco.jpg")));
 
+    private final Font appFont = new Font(UI.fontType, UI.pFont);
+
+    /**
+     * This function is called when the GUI window starts.
+     * It is used to set icons, title, and on start-up commands.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         validateInput();
         appLabel.setText("Duke");
-        userInput.setFont(new Font("Courier New", 15));
-        appLabel.setFont(new Font("Courier New", 30));
-        sendButton.setFont(new Font("Courier New", 15));
+        userInput.setFont(appFont);
+        sendButton.setFont(appFont);
+        appLabel.setFont(new Font(UI.fontType, UI.h1Font));
         modalContainer.getChildren().add(DialogBox.getDukeDialog(UI.helpMessage(), dukeImage));
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(UI.welcomeMessage(), dukeImage));
     }
@@ -65,7 +71,7 @@ public class MainWindow extends AnchorPane {
     private void toggleModal() {
         modalContainer.setVisible(!modalContainer.isVisible());
         if (modalContainer.isVisible()) {
-            dialogContainer.setOpacity(0.3);
+            dialogContainer.setOpacity(0.1);
         } else {
             dialogContainer.setOpacity(1);
         }
@@ -86,7 +92,6 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        System.out.println(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
