@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class to represent the storage facility of the program. It loads up the existing task list
+ * when chatbot starts, and writes any changes if they are made.
+ */
 public class Storage {
 
     private String filePath;
@@ -21,6 +25,7 @@ public class Storage {
     /**
      * Reads the existing list of tasks from text file.
      *
+     * @return an arrayList of tasks.
      * @throws FileNotFoundException if text file doesn't exist.
      * @throws ToDoDescriptionException if todo is missing description.
      */

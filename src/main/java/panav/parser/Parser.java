@@ -3,9 +3,17 @@ package panav.parser;
 import panav.command.*;
 import panav.exception.InvalidInputException;
 
+/**
+ * Class to represent the parser which takes in the users command and makes sense of the command.
+ */
 public class Parser {
 
 
+    /**
+     * Method takes in the full user input string and decodes it to the respective command.
+     * @param fullCommand the full user input.
+     * @return the decoded command from among the list of available commands.
+     */
     public static Command parse(String fullCommand) {
         String[] temp = fullCommand.split(" ");
         String first = temp[0];
