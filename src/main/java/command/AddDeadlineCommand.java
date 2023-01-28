@@ -13,8 +13,8 @@ public class AddDeadlineCommand extends Command {
     private String request;
 
     /**
-     * Constructor to create deadline according user's request
-     * @param request user's request to be processed into deadline
+     * Constructor to create deadline task according user's request.
+     * @param request user's request to be processed into deadline task.
      */
     public AddDeadlineCommand(String request) {
         this.request = request;

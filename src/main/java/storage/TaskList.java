@@ -26,9 +26,14 @@ public class TaskList {
         this.file = file;
     }
 
+    /**
+     * Return the task array list.
+     * @return the task list.
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
+
     /**
      * Add new task to current task list
      * @param task new task to be added into the task list

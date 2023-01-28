@@ -7,6 +7,10 @@ import storage.TaskList;
 public class RemoveCommand extends Command {
     private String request;
 
+    /**
+     * Constructor to remove task command according to user's request.
+     * @param request user's request to remove the task.
+     */
     public RemoveCommand(String request) {
         this.request = request;
     }

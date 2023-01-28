@@ -19,6 +19,10 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Convert the Event task into data from for storage into file.
+     * @return String representation of the data.
+     */
     public String toData() {
         String status = this.completed ? "1" : "0";
         return "E | " + status + " |" + this.task + "| " + this.from + " | " + this.to;

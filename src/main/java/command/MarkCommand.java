@@ -8,8 +8,8 @@ public class MarkCommand extends Command {
     private String request;
 
     /**
-     * Constructor to create mark command according to user's request
-     * @param request user's request
+     * Constructor to create mark task command according to user's request.
+     * @param request user's request to mark the task.
      */
     public MarkCommand(String request) {
         this.request = request;

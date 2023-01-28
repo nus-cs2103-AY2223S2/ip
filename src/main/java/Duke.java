@@ -11,6 +11,10 @@ public class Duke {
     private TaskList tasks;
     private LocalStorage localStorage;
 
+    /**
+     * Constructor to instantiate Duke bot.
+     * @param file_path path of local storage file.
+     */
     public Duke(String file_path) {
         TaskList tasks = new TaskList();
         this.localStorage = new LocalStorage(file_path);
@@ -18,6 +22,9 @@ public class Duke {
         this.tasks = tasks;
     }
 
+    /**
+     * Function to run Duke bot.
+     */
     public void run() {
         UI.greet();
         Scanner sc = new Scanner(System.in);

@@ -9,7 +9,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Constructor to create unmark command
-     * @param request user's request
+     * @param request user's request to unmark task.
      */
     public UnmarkCommand(String request) {
         this.request = request;

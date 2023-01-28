@@ -19,6 +19,11 @@ public class LocalStorage {
         this.file = local_file;
     }
 
+    /**
+     * Read from file in local storage.
+     * @param path Path to the file in the local storage.
+     * @return File obtained from local storage
+     */
     public static File readFile(String path) {
         File file = new File(path);
         file.getParentFile().mkdirs();
@@ -36,6 +41,10 @@ public class LocalStorage {
         return file;
     }
 
+    /**
+     * Load tasks from file.
+     * @param tasks List to add the tasks read from file.
+     */
     public void loadTasks(TaskList tasks) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.file));
@@ -101,6 +110,10 @@ public class LocalStorage {
         }
     }
 
+    /**
+     * Save tasks in the list into local storage before leaving the program.
+     * @param tasks list to be saved into the file in local storage.
+     */
     public void saveFile(TaskList tasks) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(this.file));

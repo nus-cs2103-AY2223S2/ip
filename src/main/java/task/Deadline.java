@@ -16,6 +16,10 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Convert the Deadline task into data from for storage into file.
+     * @return String representation of the data.
+     */
     public String toData() {
         String status = this.completed ? "1" : "0";
         return "D | " + status + " | " + this.task + " | " + this.dueDate;

@@ -13,8 +13,8 @@ public class AddEventCommand extends Command {
     private String request;
 
     /**
-     * Constructor to add event according to user's request
-     * @param request user's request to be processed into event
+     * Constructor to add event task according to user's request.
+     * @param request user's request to be processed into event task.
      */
     public AddEventCommand(String request) {
         this.request = request;

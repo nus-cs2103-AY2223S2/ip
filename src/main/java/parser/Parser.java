@@ -23,6 +23,7 @@ public class Parser {
 
     /**
      * Function to process the user's request and get the response
+     * @return
      */
     public Command processRequest() {
         String[] req = this.request.split(" ");

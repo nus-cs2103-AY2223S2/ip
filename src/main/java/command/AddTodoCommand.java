@@ -8,8 +8,8 @@ public class AddTodoCommand extends Command {
     private String request;
 
     /**
-     * Constructor to create add todo according to user's request
-     * @param request user's request to be processed into todo
+     * Constructor to create add todo task according to user's request
+     * @param request user's request to be processed into todo task.
      */
     public AddTodoCommand(String request) {
         this.request = request;

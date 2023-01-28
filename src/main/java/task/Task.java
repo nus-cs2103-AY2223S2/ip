@@ -28,6 +28,10 @@ public class Task {
         this.completed = false;
     }
 
+    /**
+     * Placeholder for toData function for Task.
+     * @return Empty String
+     */
     public String toData() {
         return "";
     }
