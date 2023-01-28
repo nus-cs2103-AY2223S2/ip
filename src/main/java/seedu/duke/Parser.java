@@ -56,6 +56,16 @@ public class Parser {
                 System.out.println("Sir, that task does not exist.");
             }
 
+        } else if (command.matches("find(.*)")) {
+            int spacer = command.indexOf(" ");
+            String task = command.substring(spacer + 1);
+
+            if (todolist.hasTask(task)) {
+                todolist.printTasks(task);
+            } else {
+                System.out.println("Sir, that task does not exist.");
+            }
+
         } else if (command.matches("todo(.*)")) {
             try {
                 addToDo(todolist, command);

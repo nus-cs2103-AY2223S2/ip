@@ -126,4 +126,25 @@ public class ToDoList {
     public int getCount() {
         return count;
     }
+
+    public boolean hasTask(String task) {
+
+        boolean res = false;
+
+        for (int i = 0; i < count; i++) {
+            if (todolist.get(i).hasTask(task)) {
+                res = true;
+            }
+        }
+
+        return res;
+    }
+
+    public void printTasks(String task) {
+        for (int i = 0; i < count; i++) {
+            if (todolist.get(i).hasTask(task)) {
+                System.out.println(todolist.get(i).printTask());
+            }
+        }
+    }
 }
