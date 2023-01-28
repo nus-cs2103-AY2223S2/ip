@@ -61,7 +61,6 @@ public class Parser {
         case BYE:
             return new ByeCommand();
         case LIST:
-        case FIND:
             return new ListCommand(body, subCommands);
         case MARK_DONE:
             return new MarkCommand(body, true);
