@@ -12,4 +12,9 @@ public class Deadline extends Task {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         return "[D]" + super.getStatusIcon() + " (by: " + dateFormat.format(this.by) + ")";
     }
+
+    @Override
+    public String toRecord() {
+        return "D|" + super.toRecord() + "|" + by;
+    }
 }

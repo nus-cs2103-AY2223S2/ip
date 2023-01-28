@@ -17,4 +17,9 @@ public class Event extends Task {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         return "[E]" + super.getStatusIcon() + " (from: " + dateFormat.format(this.from) + " to: " + dateFormat.format(this.to) + ")";
     }
+
+    @Override
+    public String toRecord() {
+        return "E|" + super.toRecord() + "|" + from + "|" + to;
+    }
 }

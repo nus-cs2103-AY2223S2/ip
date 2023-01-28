@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.time.LocalTime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+
 public class Duke {
     public static void main(String[] args) {
 
@@ -20,6 +24,37 @@ public class Duke {
         boolean isOnline = true;
         ArrayList<Task> taskList = new ArrayList<>();
 
+        File savedTasks = new File("saved_tasks_list.txt");
+        try {
+            if (!savedTasks.createNewFile()) {
+                // Load the exist file
+                Scanner fileScanner = new Scanner(savedTasks);
+                while (fileScanner.hasNextLine()) {
+                    String record = fileScanner.nextLine();
+                    String[] fields = record.split("\\|");
+                    Task currTask;
+                    if (fields[0].equals("T")) {
+                        currTask = new Todo(fields[2]);
+                    } else if (fields[0].equals("D")) {
+                        currTask = new Deadline(fields[2], fields[3]);
+                    } else if (fields[0].equals("E")) {
+                        currTask = new Event(fields[2], fields[3], fields[4]);
+                    } else {
+                        currTask = new Task("");
+                    }
+
+                    if (fields[1].equals("1")) {
+                        currTask.setDone();
+                    } else {
+                        currTask.setNotDone();
+                    }
+                    taskList.add(currTask);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         while (isOnline) {
             try {
                 isOnline = takeRequest(taskList);
@@ -27,6 +62,16 @@ public class Duke {
             catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
+        }
+
+        try {
+            FileWriter writer = new FileWriter("saved_tasks_list.txt");
+            for (int i = 0; i < taskList.size(); i++) {
+                writer.write(taskList.get(i).toRecord() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

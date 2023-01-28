@@ -19,5 +19,9 @@ public class Task {
         this.isDone = false;
     }
 
+    public String toRecord() {
+        return (isDone ? "1|" : "0|") + description;
+    }
+
     //...
 }
