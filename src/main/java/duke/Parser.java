@@ -14,6 +14,9 @@ public final class Parser {
         return input.split(" ")[0];
     }
 
+    public static String getFindKeyword(String input) {
+        return input.substring(5);
+    }
     public static Task translateTaskLogToTask(String taskLog) {
         Task taskToReturn = new Task();
         String[] taskLogCommands = taskLog.split(" \\| ");

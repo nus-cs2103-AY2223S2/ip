@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,12 +11,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        //try {
-            tasks = new TaskList(storage.loadTasksFromTaskLog());
-        //} catch (duke.DukeException e) {
-        //    ui.showError(e);
-        //    tasks = new duke.TaskList();
-        //}
+        tasks = new TaskList(storage.loadTasksFromTaskLog());
     }
 
     public void run() {
@@ -45,6 +41,11 @@ public class Duke {
                     toMarkTask.markTask();
                     ui.informTaskIsMarked(toMarkTask);
                     storage.saveTasksToTaskLog(tasks);
+                    break;
+                case "find":
+                    String keyword = Parser.getFindKeyword(userInput);
+                    ArrayList<Task> foundTasks = tasks.filterTasks(keyword);
+                    ui.printFoundTasks(foundTasks);
                     break;
                 case "todo":
                 case "deadline":
