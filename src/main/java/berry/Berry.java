@@ -2,6 +2,7 @@ package berry;
 
 import berry.command.Command;
 import berry.exception.BerryException;
+import berry.exception.IllegalValueException;
 import berry.storage.Storage;
 import berry.task.TaskList;
 import berry.ui.Ui;
@@ -13,7 +14,7 @@ public class Berry {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    public Berry(String filePath) {
+    public Berry(String filePath) throws Storage.InvalidStorageFilePathException {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -42,7 +43,7 @@ public class Berry {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalValueException {
         new Berry("data/tasks.txt").run();
     }
 }
