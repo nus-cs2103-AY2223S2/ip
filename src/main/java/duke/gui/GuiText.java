@@ -28,6 +28,8 @@ public class GuiText {
         return e.getMessage();
     }
 
+    //public static String a bunch of erorr stuff...
+
     /**
      * Generates text response listing user's tasks.
      *
@@ -36,9 +38,9 @@ public class GuiText {
      */
     public String showList(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            return "There are currently no tasks in your list.";
+            return "There are currently no tasks in your list. Would you like to add some?";
         } else {
-            return "Here are the tasks in your list:\n"
+            return "Here are all the tasks in your list:\n"
                 + tasks;
         }
     }
@@ -51,7 +53,7 @@ public class GuiText {
      * @return Text response for adding task to task list.
      */
     public String showAddTask(Task task, TaskList tasks) {
-        return "Got it. I've added this task:\n"
+        return "Got it! I've added this task:\n"
                 + task + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
@@ -63,7 +65,7 @@ public class GuiText {
      * @return Text response for marking task.
      */
     public String showMarkTask(Task task) {
-        return "Nice! I've marked this task as done:\n" + task;
+        return "Yay! I've marked this task as done:\n" + task;
     }
 
     /**
@@ -73,7 +75,7 @@ public class GuiText {
      * @return Text response for unmarking task.
      */
     public String showUnmarkTask(Task task) {
-        return "Got it. I've marked this task as not done:\n" + task;
+        return "Okay! I've marked this task as not done:\n" + task;
     }
 
     /**
@@ -84,7 +86,7 @@ public class GuiText {
      * @return Text response for deleting task.
      */
     public String showDeleteTask(Task task, TaskList tasks) {
-        return "Noted. I've removed this task:\n"
+        return "Alright! I've removed this task:\n"
                 + task + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
@@ -108,7 +110,7 @@ public class GuiText {
         if (tasks.getSize() == 0) {
             return "There are no matching tasks.";
         } else {
-            return "Here are the matching tasks in your list:\n"
+            return "Here are all the matching tasks in your list:\n"
                     + tasks;
         }
     }

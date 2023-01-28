@@ -47,7 +47,7 @@ public class Storage {
             }
             return Files.readString(Paths.get(this.dirPath + this.fileName));
         } catch (IOException e) {
-            throw new DukeException("Reading from storage failed");
+            throw new DukeException("I couldn't read from storage. There was a rock blocking the way...");
         }
     }
 
@@ -63,7 +63,7 @@ public class Storage {
             fw.write(taskList);
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Writing to storage failed");
+            throw new DukeException("I couldn't write to storage. I tripped past the entranceway.");
         }
     }
 

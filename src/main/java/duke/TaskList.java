@@ -49,9 +49,10 @@ public class TaskList {
      */
     public Task deleteTask(int index) throws DukeException {
         if (index >= this.getSize()) {
-            throw new DukeException("There aren't that many tasks in the list!");
+            throw new DukeException("There aren't that many tasks in the list."
+                    + " Would you like to add more...?");
         } else if (index < 0) {
-            throw new DukeException("I don't recognise that task number.");
+            throw new DukeException("I can only count in positive numbers...");
         }
         Task task = this.getTaskAtIndex(index);
         this.tasks.remove(index);
@@ -67,9 +68,10 @@ public class TaskList {
      */
     public Task markTaskDone(int index) throws DukeException {
         if (index >= this.getSize()) {
-            throw new DukeException("There aren't that many tasks in the list!");
+            throw new DukeException("There aren't that many tasks in the list."
+            + " Would you like to add more...?");
         } else if (index < 0) {
-            throw new DukeException("I don't recognise that task number.");
+            throw new DukeException("I can only count in positive numbers...");
         }
         this.getTaskAtIndex(index).setDone(true);
         return this.getTaskAtIndex(index);
@@ -84,9 +86,10 @@ public class TaskList {
      */
     public Task unmarkTask(int index) throws DukeException {
         if (index >= this.getSize()) {
-            throw new DukeException("There aren't that many tasks in the list!");
+            throw new DukeException("There aren't that many tasks in the list."
+            + " Would you like to add more...?");
         } else if (index < 0) {
-            throw new DukeException("I don't recognise that task number.");
+            throw new DukeException("I can only count in positive numbers...");
         }
         this.getTaskAtIndex(index).setDone(false);
         return this.getTaskAtIndex(index);

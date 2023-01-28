@@ -23,10 +23,17 @@ public class MainWindow extends AnchorPane {
     private Duke duke = new Duke(dirPath);
 
     /** Images to be used in GUI */
-    private Image userImage = new Image(this.getClass()
-            .getResourceAsStream("../resources/images/DaUser.png"));
-    private Image coletteImage = new Image(this.getClass()
+    private static final Image lloydNeutralImage = new Image(MainWindow.class
+            .getResourceAsStream("../resources/images/Lloyd_Neutral.gif"));
+    private static final Image coletteNeutralImage = new Image(MainWindow.class
             .getResourceAsStream("../resources/images/Colette_Neutral.png"));
+    private static final Image coletteHappyImage = new Image(MainWindow.class
+            .getResourceAsStream("../resources/images/Colette_Happy.png"));
+    private static final Image coletteSurprisedImage = new Image(MainWindow.class
+            .getResourceAsStream("../resources/images/Colette_Surprised.png"));
+    private static final Image coletteSadImage = new Image(MainWindow.class
+            .getResourceAsStream("../resources/images/Colette_Sad.png"));
+    private static Image currentColetteImage = MainWindow.coletteNeutralImage;
 
     /** JavaFX GUI objects */
     @FXML
@@ -55,8 +62,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = this.duke.runCommand(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, coletteImage)
+                DialogBox.getUserDialog(input, MainWindow.lloydNeutralImage),
+                DialogBox.getDukeDialog(response, MainWindow.currentColetteImage)
         );
         userInput.clear();
         if (this.duke.isExit()) {
@@ -68,12 +75,30 @@ public class MainWindow extends AnchorPane {
     private void entry() {
         String loadStatus = this.duke.displayLoadStatus();
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog(loadStatus, coletteImage)
+            DialogBox.getDukeDialog(loadStatus, MainWindow.currentColetteImage)
         );
+        MainWindow.changeSpriteExpression(SpriteEmotion.NEUTRAL);
         String greetingText = GuiText.showGreeting();
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog(greetingText, coletteImage)
+            DialogBox.getDukeDialog(greetingText, MainWindow.currentColetteImage)
         );
+    }
+
+    public static void changeSpriteExpression(SpriteEmotion emotion) {
+        switch (emotion) {
+        case NEUTRAL:
+            MainWindow.currentColetteImage = MainWindow.coletteNeutralImage;
+            break;
+        case HAPPY:
+            MainWindow.currentColetteImage = MainWindow.coletteHappyImage;
+            break;
+        case SAD:
+            MainWindow.currentColetteImage = MainWindow.coletteSadImage;
+            break;
+        case SURPRISED:
+            MainWindow.currentColetteImage = MainWindow.coletteSurprisedImage;
+            break;
+        }    
     }
 
 }
