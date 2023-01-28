@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class FileManager {
+public class Storage {
 
     // Create the file to write to, if it doesn't already exist
 
     /**
      * Constructor for a fileManager object
      */
-    public FileManager() {
+    public Storage() {
         File folder = new File("./data/");
         File dataFile = new File("./data/duke.txt");
         try {
@@ -29,10 +29,11 @@ public class FileManager {
         }
     }
 
-    public void writeToFile(ArrayList<Task> taskList) {
+    public void writeToFile(TaskList taskList) {
         try {
             FileWriter myWriter = new FileWriter("./data/duke.txt");
-            for (Task task : taskList) {
+            for (int pos = 0; pos < taskList.size(); pos++) {
+                Task task = taskList.getTask(pos);
                 myWriter.write(task.encode() + "\n"); // Code out this decode function in Tasks class to return string
             }
                 myWriter.close();
@@ -82,14 +83,14 @@ public class FileManager {
         return currentTask;
     }
 
-    public ArrayList<Task> read() {
-        ArrayList<Task> retrievedList = new ArrayList<>();
+    public TaskList read() {
+        TaskList retrievedList = new TaskList();
         try {
             File myObj = new File("./data/duke.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                retrievedList.add(this.decode(data));
+                retrievedList.addTask(this.decode(data));
             }
             myReader.close();
         } catch (FileNotFoundException e) {

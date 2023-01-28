@@ -1,5 +1,5 @@
 T |   | borrow book
-D | X | return book | Sunday
-E |   | project meeting | Mon 2pm | 4pm
-T | X | eat edamame
-D |   | consume medicine | 6pm
+D | X | return book | 2019-10-15
+T |   | sell book
+D |   | eat banana | 2020-02-23
+E |   | meeting bob | 2021-03-15 | 2022-04-23
