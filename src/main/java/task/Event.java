@@ -34,8 +34,8 @@ public class Event extends Task {
     @Override
     public String toString() {
         String statusIcon = this.completed ? "X" : " ";
-        String formattedStart = from.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
-        String formattedEnd = to.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
-        return "[E][" + statusIcon + "] " + this.task + "(from: " + formattedStart + " to: " + formattedEnd + ")";
+        String formatted_start = from.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
+        String formatted_end = to.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
+        return "[E][" + statusIcon + "] " + this.task + " (from: " + formatted_start + " to: " + formatted_end + ")";
     }
 }

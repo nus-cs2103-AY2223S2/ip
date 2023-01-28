@@ -33,7 +33,7 @@ public class AddEventCommand extends Command {
         }
 
         req = req[1].split("/from ");
-        String task = req[0];
+        String task = req[0].strip();
 
         if (task.equals("")) {
             throw new MissingArgumentException("Missing task description!");
@@ -47,8 +47,8 @@ public class AddEventCommand extends Command {
             throw new MissingArgumentException("Please insert an end date.");
         }
 
-        String from = duration[0].trim();
-        String to = duration[1].trim();
+        String from = duration[0].strip();
+        String to = duration[1].strip();
 
         if (from.equals("")) {
             throw new MissingArgumentException("Please insert a start date.");

@@ -21,11 +21,11 @@ public class AddTodoCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) throws MissingArgumentException {
-        String[] task = request.trim().split("todo");
+        String[] task = request.strip().split("todo");
         if (task.length == 0) {
             throw new MissingArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        Todo newTodo = tasks.addTodo(task[1]);
+        Todo newTodo = tasks.addTodo(task[1].strip());
         return "Great! I've added this task for you \n" + newTodo
                 + "\nYou have " + tasks.numOfTask() + " tasks in the list";
     }

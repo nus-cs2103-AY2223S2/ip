@@ -65,9 +65,9 @@ public class LocalStorage {
             while (line != null) {
                 try {
                     String[] args = line.split("\\|");
-                    String taskType = args[0].trim();
-                    String taskStatus = args[1].trim();
-                    String taskDesc = args[2];
+                    String taskType = args[0].strip();
+                    String taskStatus = args[1].strip();
+                    String taskDesc = args[2].strip();
                     switch (taskType) {
                     case "T":
                         Todo todo = new Todo(taskDesc);
@@ -91,8 +91,8 @@ public class LocalStorage {
                                     + "YYYY-MM-DD (e.g. 2000-01-01)");
                         }
                     case "E":
-                        String from = args[3].trim();
-                        String to = args[4].trim();
+                        String from = args[3].strip();
+                        String to = args[4].strip();
                         try {
                             LocalDate startDate = LocalDate.parse(from);
                             LocalDate endDate = LocalDate.parse(to);

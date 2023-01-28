@@ -121,6 +121,20 @@ public class TaskList {
     }
 
     /**
+     * Function to find tasks using keyword.
+     * @param keyword keyword the user wish to find the task
+     * @return list of tasks that contain the keyword.
+     */
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.toString().contains(keyword)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+    /**
      * Get the number of tasks in the list
      * @return number of tasks
      */

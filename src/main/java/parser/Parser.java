@@ -4,6 +4,7 @@ import command.AddDeadlineCommand;
 import command.AddEventCommand;
 import command.AddTodoCommand;
 import command.Command;
+import command.FindCommand;
 import command.ListCommand;
 import command.MarkCommand;
 import command.RemoveCommand;
@@ -53,6 +54,8 @@ public class Parser {
             return new AddEventCommand(request);
         case "delete":
             return new RemoveCommand(request);
+        case "find":
+            return new FindCommand(request);
         default:
             throw new UnknownCommandException();
         }
