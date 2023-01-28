@@ -1,36 +1,28 @@
-import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Paths;
-import java.time.format.DateTimeParseException;
-import java.util.List; // Import List class
-import java.util.LinkedList; // Import LinkedList class
-import java.util.Scanner;  // Import the Scanner class
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.Scanner;
 
 public class Duke {
 
-    private static Ui ui = new Ui();
-    private static Storage storage;
+    private Scanner getInput;
+    private Ui ui;
+    private Storage storage;
+    private TaskList taskList;
 
-    private static Scanner getInput = new Scanner(System.in); // Create a static Scanner object
+    private Duke(String filePath) {
+        this.getInput = new Scanner(System.in);
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        this.taskList = new TaskList(storage.loadFile());
 
-    private static List<Task> storedInputs; // List to store inputs
-
-    public static void main(String[] args) throws IOException {
-
-        String unixFilePath = "data/duke.txt"; // ~/data/duke
-
-        // Print introduction
         ui.printIntro();
+        ui.printList(taskList);
+    }
 
-        // Open file
-        storage = new Storage(unixFilePath);
-        // Load file
-        storedInputs = new LinkedList<>(storage.loadFile());
+    private String askForInput() {
+        System.out.print("> ");
+        return getInput.nextLine();
+    }
 
-        ui.printList(storedInputs);
-
+    private void run() {
         // Execute inputs
         String userInput;
         EventType curEvent;
@@ -49,178 +41,42 @@ public class Duke {
 
             // If valid keyword, execute input
             switch (curEvent) {
-            case BYE:
-                break loop;
-            case LIST:
-                ui.printListWithAttitude(storedInputs);
-                break;
-            case MARK:
-                markEvent(userInput);
-                storage.overwriteFile(storedInputs);
-                break;
-            case UNMARK:
-                unmarkEvent(userInput);
-                storage.overwriteFile(storedInputs);
-                break;
-            case DELETE:
-                deleteEvent(userInput);
-                storage.overwriteFile(storedInputs);
-                break;
-            case TODO:
-                todoEvent(userInput);
-                storage.overwriteFile(storedInputs);
-                break;
-            case DEADLINE:
-                deadlineEvent(userInput);
-                storage.overwriteFile(storedInputs);
-                break;
-            case EVENT:
-                eventEvent(userInput);
-                storage.overwriteFile(storedInputs);
-                break;
+                case BYE:
+                    break loop;
+                case LIST:
+                    ui.printListWithAttitude(taskList);
+                    break;
+                case MARK:
+                    taskList.markEvent(userInput);
+                    storage.overwriteFile(taskList);
+                    break;
+                case UNMARK:
+                    taskList.unmarkEvent(userInput);
+                    storage.overwriteFile(taskList);
+                    break;
+                case DELETE:
+                    taskList.deleteEvent(userInput);
+                    storage.overwriteFile(taskList);
+                    break;
+                case TODO:
+                    taskList.addToDoEvent(userInput);
+                    storage.overwriteFile(taskList);
+                    break;
+                case DEADLINE:
+                    taskList.addDeadlineEvent(userInput);
+                    storage.overwriteFile(taskList);
+                    break;
+                case EVENT:
+                    taskList.addEventEvent(userInput);
+                    storage.overwriteFile(taskList);
+                    break;
             }
         }
-
         ui.printOutro();
     }
 
-    private static String askForInput() {
-        System.out.print("> ");
-        return getInput.nextLine();
-    }
-    
-    private static void markEvent(String userInput) {
-        String[] arr = userInput.split(" ");
-        int num = Integer.parseInt(arr[1]);
-
-        Task t;
-        try {
-            t = storedInputs.get(num-1);
-        } catch (IndexOutOfBoundsException e) {
-            ui.printIndexOutOfBoundMessage();
-            return;
-        }
-        t.markDone();
-        ui.printMarkMessage(t);
-    }
-
-    private static void unmarkEvent(String userInput) {
-        String[] arr = userInput.split(" ");
-        int num = Integer.parseInt(arr[1]);
-
-        Task t;
-        try {
-            t = storedInputs.get(num-1);
-        } catch (IndexOutOfBoundsException e) {
-            ui.printIndexOutOfBoundMessage();
-            return;
-        }
-        t.markUnDone();
-        ui.printUnMarkMessage(t);
-    }
-
-    public static void deleteEvent(String userInput) {
-        String[] arr = userInput.split(" ");
-        int num = Integer.parseInt(arr[1]);
-
-        Task t;
-        try {
-            t = storedInputs.remove(num-1);
-        } catch (IndexOutOfBoundsException e) {
-            ui.printIndexOutOfBoundMessage();
-            return;
-        }
-
-        ui.printDeleteSuccessfulMessage(t);
-        ui.printTotalTask(storedInputs);
-    }
-
-    private static String removeKeyword(String s) throws DukeException {
-        try {
-            s = s.substring(s.indexOf(" ")).trim();
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("details cannot be empty");
-        }
-
-        if (s.isEmpty()) {
-            throw new DukeException("details cannot be empty");
-        }
-
-        return s;
-    }
-
-    private static void todoEvent(String userInput) {
-        try {
-            userInput = removeKeyword(userInput);
-        } catch (DukeException e) {
-            ui.printEmptyDetailsMessage("todo");
-            return;
-        }
-
-        Task newTask = new ToDo(userInput.trim());
-        storedInputs.add(newTask);
-        ui.printAddTaskSuccessfulMessage(newTask);
-        ui.printTotalTask(storedInputs);
-    }
-
-    private static void deadlineEvent(String userInput) {
-        try {
-            userInput = removeKeyword(userInput);
-        } catch (DukeException e) {
-            ui.printEmptyDetailsMessage("deadline");
-            return;
-        }
-
-        Task newTask;
-        try {
-            String[] info = userInput.split("/by");
-            if (info[0].trim().isEmpty()) {
-                ui.printEmptyDetailsMessage("deadline");
-                return;
-            }
-            newTask = new Deadline(info[0].trim(), info[1].trim());
-            storedInputs.add(newTask);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            ui.printDeadlineFormat();
-            return;
-        }
-        catch (DateTimeParseException e) {
-            ui.printDateFormat();
-            return;
-        }
-
-        ui.printAddTaskSuccessfulMessage(newTask);
-        ui.printTotalTask(storedInputs);
-    }
-
-    private static void eventEvent(String userInput) {
-        try {
-            userInput = removeKeyword(userInput);
-        } catch (DukeException e) {
-            ui.printEmptyDetailsMessage("event");
-            return;
-        }
-
-        Task newTask;
-        try {
-            String[] infoA = userInput.split("/from");
-            String[] infoB = infoA[1].split("/to");
-            if (infoA[0].trim().isEmpty()) {
-                ui.printEmptyDetailsMessage("event");
-                return;
-            }
-            newTask = new Event(infoA[0].trim(), infoB[0].trim(), infoB[1].trim());
-            storedInputs.add(newTask);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            ui.printEventFormat();
-            return;
-        } catch (DateTimeParseException e) {
-            ui.printDateFormat();
-            return;
-        }
-
-        ui.printAddTaskSuccessfulMessage(newTask);
-        ui.printTotalTask(storedInputs);
+    public static void main(String[] args) {
+        new Duke("data/duke.txt").run();
     }
 
 }

@@ -4,7 +4,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Storage {
 
@@ -105,9 +104,9 @@ public class Storage {
         return line;
     }
 
-    public void overwriteFile(List<Task> storedInputs) {
+    public void overwriteFile(TaskList taskList) {
         StringBuilder s = new StringBuilder();
-        for (Task storedInput : storedInputs) {
+        for (Task storedInput : taskList.getList()) {
             s.append(storedInput.writeToFile());
             s.append("\n");
         }
