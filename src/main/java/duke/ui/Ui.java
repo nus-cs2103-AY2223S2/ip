@@ -1,24 +1,41 @@
 package duke.ui;
 
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Prints messages with desired formatting.
+ *
+ * @author Lian Kok Hai
+ */
 public class Ui {
-    private String str;
     private int maxCharPerLine = 100;
-    private int maxLines = 500;
     private String horizontal;
 
+    /**
+     * Constructs default Ui object with maxCharPerLine = 100.
+     */
     public Ui() {
         this.horizontal = "_".repeat(this.maxCharPerLine + 4);
     }
 
-    public Ui(int maxCharPerLine, int maxLines) {
-        this.maxLines = maxLines;
+    /**
+     * Constructs custom Ui object.
+     *
+     * @param maxCharPerLine Maximum number of characters per line printed.
+     */
+    public Ui(int maxCharPerLine) {
         this.maxCharPerLine = maxCharPerLine;
         this.horizontal = "_".repeat(maxCharPerLine + 4);
     }
 
+    /**
+     * Prints formatted string - encloses string in box.
+     *
+     * @param str Input string.
+     */
     public void print(String str) {
         String[] lines = str.split("\n");
         ArrayList<String> result = new ArrayList<>();
@@ -45,13 +62,35 @@ public class Ui {
         System.out.println(horizontal);
     }
 
+    /**
+     * Prints exit message.
+     */
     public void printExit() {
         String exitMessage = "Bye! Hope to see you again soon!";
         print(exitMessage);
     }
 
+    /**
+     * Prints welcome message.
+     */
     public void printWelcome() {
         String welcomeMessage = "Hello! I'm duke.Duke \nWhat can I do for you";
         print(welcomeMessage);
     }
+
+    /**
+     * Prints add task message.
+     * @param task New task to be added.
+     * @param taskCount Number of tasks after new task is added.
+     */
+    public void printAddTaskMessage(Task task, int taskCount) {
+        String addTaskMessage = "Got it. I've added this task:\n     " + task + "\nNow you have " + taskCount + " tasks in the list";
+        print(addTaskMessage);
+    }
+
+    public void printDeleteTaskMessage(Task task, int taskCount) {
+        String deleteTaskMessage = "Noted. I've removed this task:\n     " + task + "\nNow you have " + taskCount + " tasks in the list";
+        print(deleteTaskMessage);
+    }
+
 }

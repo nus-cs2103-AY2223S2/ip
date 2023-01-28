@@ -1,12 +1,17 @@
-package duke.task;//import java.util.HashMap;
-import duke.exception.DukeException;
+package duke.task;
 
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
+
+/**
+ * Represents a list of Task objects.
+ * Supports add, delete, mark, unmark operations.
+ *
+ * @author Lian Kok Hai
+ */
 
 public class TaskList {
-    protected final String SAVE_DIR = "./data";
-    protected final String SAVE_NAME = "/duke.txt";
     protected ArrayList<Task> taskList;
     protected int taskCount;
 
@@ -19,26 +24,17 @@ public class TaskList {
         return taskCount;
     }
 
-    private String addTaskMessage(Task task) {
-        return "Got it. I've added this task:\n     " + task + "\nNow you have " + this.taskCount + " tasks in the list";
-    }
-
-    public String addTask(Task task) {
+    public void addTask(Task task) {
         this.taskList.add(task);
         taskCount++;
-        return addTaskMessage(task);
     }
 
-    private String deleteTaskMessage(Task task) {
-        return "Noted. I've removed this task:\n     " + task + "\nNow you have " + this.taskCount + " tasks in the list";
-    }
-
-    public String deleteTask(int taskNumber) throws DukeException {
+    public Task deleteTask(int taskNumber) throws DukeException {
         try {
             Task deletedTask = this.taskList.get(taskNumber - 1);
             this.taskList.remove(taskNumber - 1);
             taskCount--;
-            return deleteTaskMessage(deletedTask);
+            return deletedTask;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("No task with given task number of " + taskNumber);
         }
