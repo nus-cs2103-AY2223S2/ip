@@ -1,4 +1,4 @@
-package duke.exceptions;
+package pix.exceptions;
 
 public class DukeException extends Exception {
     /**

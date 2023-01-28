@@ -9,17 +9,17 @@ import java.time.LocalDate;
 
 public class Ui {
     /** Visual logo of duke. */
-    private static final String logo = "     ____        _\n"
-            + "    |  _ \\ _   _| | _____\n"
-            + "    | | | | | | | |/ / _ \\\n"
-            + "    | |_| | |_| |   <  __/\n"
-            + "    |____/ \\__,_|_|\\_\\___|\n";
+    private static final String logo = "    ______    __  ___   ___ \n" +
+            "    |   _  \\  |  | \\  \\ /  / \n" +
+            "    |  |_)  | |  |  \\  V  /  \n" +
+            "    |   ___/  |  |   >   <   \n" +
+            "    |  |      |  |  /  .  \\  \n" +
+            "    | _|      |__| /__/ \\__\\\n";
 
     /** Duke's greeting. */
-    private static final String greet = "    ____________________________________________________________\n"+
-            "    Hello! I'm Duke\n" +
-            "    What can I do for you?\n" +
-            "    ____________________________________________________________";
+    private static final String greet = "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"+
+            "    How can I assist you?\n" +
+            "    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
     private static final String line = "    ____________________________________________________________\n";
 
@@ -27,7 +27,7 @@ public class Ui {
      * Displays duke's introduction.
      */
     public static void display() {
-        System.out.println("    Hello from\n" + logo);
+        System.out.println("    Hello, this is Pix!\n" + logo);
         System.out.println(greet);
     }
 
@@ -58,7 +58,7 @@ public class Ui {
      */
     public void add(String description, int listLen) {
         System.out.print(Ui.line() +
-                "     Got it. I've added this task:\n" +
+                "     Okay! I've added this task:\n" +
                 "       " + description + "\n" +
                 "     Now you have " + listLen + " tasks in the list.\n" +
                 Ui.line());
@@ -72,7 +72,7 @@ public class Ui {
      */
     public void delete(Task task, int listLen) {
         System.out.print(Ui.line() +
-                "     Noted. I've removed this task:\n" +
+                "     Understood! The following task is now deleted:\n" +
                 "       " + task + "\n" +
                 "     Now you have " + listLen + " tasks in the list.\n" +
                 Ui.line());
@@ -123,7 +123,7 @@ public class Ui {
      */
     public void mark(Task task) {
         System.out.print(Ui.line() +
-                "    Nice! I've marked this task as done:\n" +
+                "    Well done! You have completed the following task:\n" +
                 "    " + task + "\n" +
                 Ui.line());
     }
@@ -135,7 +135,7 @@ public class Ui {
      */
     public void unmark(Task task) {
         System.out.print(Ui.line() +
-                "    OK, I've marked this task as not done yet:\n" +
+                "    Stop procrastinating and complete the following task:\n" +
                 "    " + task + "\n" +
                 Ui.line());
     }
