@@ -1,7 +1,7 @@
-package commands;
-import main.Storage;
-import main.TaskList;
-import main.Ui;
+package hachi.commands;
+import hachi.main.Storage;
+import hachi.main.TaskList;
+import hachi.main.Ui;
 
 
 public class ExitCommand extends Command {

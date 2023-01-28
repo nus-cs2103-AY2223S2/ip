@@ -1,4 +1,4 @@
-package tasks;
+package hachi.tasks;
 
 public class Todo extends Task {
     public Todo(String input) {

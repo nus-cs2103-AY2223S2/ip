@@ -1,7 +1,7 @@
-package commands;
-import main.TaskList;
-import main.Ui;
-import main.Storage;
+package hachi.commands;
+import hachi.main.TaskList;
+import hachi.main.Ui;
+import hachi.main.Storage;
 
 public class ListCommand extends Command {
     private String input;

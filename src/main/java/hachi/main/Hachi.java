@@ -1,5 +1,5 @@
-package main;
-import commands.Command;
+package hachi.main;
+import hachi.commands.Command;
 
 public class Hachi {
     private Storage storage;

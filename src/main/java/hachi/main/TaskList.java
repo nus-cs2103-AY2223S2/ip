@@ -1,5 +1,5 @@
-package main;
-import tasks.Task;
+package hachi.main;
+import hachi.tasks.Task;
 import java.util.ArrayList;
 
 public class TaskList {

@@ -1,10 +1,10 @@
-package commands;
+package hachi.commands;
 
-import main.HachiExceptions;
-import main.Storage;
-import main.TaskList;
-import main.Ui;
-import tasks.Task;
+import hachi.main.HachiExceptions;
+import hachi.main.Storage;
+import hachi.main.TaskList;
+import hachi.main.Ui;
+import hachi.tasks.Task;
 
 
 public class MarkCommand extends Command {

@@ -1,4 +1,4 @@
-package tasks;
+package hachi.tasks;
 
 public class Task {
     private String input;

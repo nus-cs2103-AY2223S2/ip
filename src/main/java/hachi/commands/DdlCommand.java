@@ -1,9 +1,9 @@
-package commands;
-import main.HachiExceptions;
-import main.TaskList;
-import tasks.Ddl;
-import main.Ui;
-import main.Storage;
+package hachi.commands;
+import hachi.main.HachiExceptions;
+import hachi.main.TaskList;
+import hachi.tasks.Ddl;
+import hachi.main.Ui;
+import hachi.main.Storage;
 import java.time.format.DateTimeParseException;
 
 public class DdlCommand extends Command {

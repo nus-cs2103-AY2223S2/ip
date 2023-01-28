@@ -1,7 +1,7 @@
-package main;
+package hachi.main;
 
 
-import commands.*;
+import hachi.commands.*;
 
 
 public class Parser {

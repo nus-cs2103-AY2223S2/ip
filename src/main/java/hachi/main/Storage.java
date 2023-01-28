@@ -1,4 +1,4 @@
-package main;
+package hachi.main;
 import java.io.*;
 import java.util.stream.Stream;
 
@@ -47,7 +47,7 @@ public class Storage {
                 file.createNewFile();
 
                 FileWriter writer = new FileWriter(file);
-                writer.write("   You do not have a to-do list yet!\n Create one by adding your hachi.tasks here!");
+                writer.write("   You do not have a to-do list yet!\n Create one by adding your hachi.hachi.tasks here!");
                 writer.close();
                 System.out.println("   Sorry i have encountered an error..");
             } catch (IOException e2) {

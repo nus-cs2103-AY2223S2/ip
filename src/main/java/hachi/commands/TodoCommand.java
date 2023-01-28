@@ -1,10 +1,10 @@
-package commands;
+package hachi.commands;
 
-import main.HachiExceptions;
-import main.Storage;
-import main.TaskList;
-import main.Ui;
-import tasks.Todo;
+import hachi.main.HachiExceptions;
+import hachi.main.Storage;
+import hachi.main.TaskList;
+import hachi.main.Ui;
+import hachi.tasks.Todo;
 
 public class TodoCommand extends Command {
     private String input;
@@ -22,7 +22,7 @@ public class TodoCommand extends Command {
             System.out.println("   okie dokie. I've added this task:" + "\n" + tdTask);
             toDoList.add(tdTask);
             storage.saveTaskList(toDoList);
-            System.out.println("   Now you have " + toDoList.size() + " hachi.tasks in the list.");
+            System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
         } catch (HachiExceptions e) {
             System.out.println(e.getMessage());
         }

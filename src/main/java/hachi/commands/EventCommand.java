@@ -1,10 +1,10 @@
-package commands;
+package hachi.commands;
 
-import main.HachiExceptions;
-import main.Storage;
-import main.TaskList;
-import main.Ui;
-import tasks.Event;
+import hachi.main.HachiExceptions;
+import hachi.main.Storage;
+import hachi.main.TaskList;
+import hachi.main.Ui;
+import hachi.tasks.Event;
 
 
 public class EventCommand extends Command {
@@ -33,7 +33,7 @@ public class EventCommand extends Command {
             System.out.println("   okie dokie. I've added this task:" + "\n" + eventTask);
             toDoList.add(eventTask);
             storage.saveTaskList(toDoList);
-            System.out.println("   Now you have " + toDoList.size() + " hachi.tasks in the list.");
+            System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
         } catch (HachiExceptions e) {
             System.out.println(e.getMessage());
         }

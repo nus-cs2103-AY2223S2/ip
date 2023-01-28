@@ -1,4 +1,4 @@
-package main;
+package hachi.main;
 import java.util.Scanner;
 
 public class Ui {
@@ -8,7 +8,7 @@ public class Ui {
     }
 
     public void showLoadingError(){
-        System.out.println("Unable to load tasks from storage");
+        System.out.println("Unable to load hachi.tasks from storage");
     }
 
     public void welcomeMessage() {
