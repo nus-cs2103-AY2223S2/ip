@@ -29,6 +29,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(Starts from " + this.getStartDate() + "; ends at " + this.getEndDate() + ")";
+        return "[E]" + super.toString() + " (Starts from " + this.getStartDate() + "; ends at " + this.getEndDate() + ")";
     }
 }
