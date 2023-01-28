@@ -9,13 +9,9 @@ import DukeBot.Exception.IncludeExceptions.IncludeToAndFromException;
 import DukeBot.Exception.InvalidDateException;
 import DukeBot.Exception.TaskNumberNotFoundException;
 import DukeBot.Exception.UnknownCommandError;
-
-<<<<<<< HEAD
 import java.time.DateTimeException;
 import java.time.format.DateTimeParseException;
-=======
 import java.io.IOException;
->>>>>>> branch-Level-7
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -57,12 +53,7 @@ public class DukeBot {
         }
     }
 
-<<<<<<< HEAD
-    public String text(String line) throws BlankFieldException, UnknownCommandError, TaskNumberNotFoundException, IncludeException, InvalidDateException {
-=======
-    public String text(String line) throws BlankFieldException, UnknownCommandError, TaskNumberNotFoundException, IncludeException, IOException {
->>>>>>> branch-Level-7
-
+    public String text(String line) throws BlankFieldException, UnknownCommandError, TaskNumberNotFoundException, IncludeException, IOException, InvalidDateException {
 
         if (Objects.equals(line, "list")) {
             return this.list();
@@ -134,9 +125,9 @@ public class DukeBot {
                 }
         }
 
-        throw new UnknownCommandError("\n" + this.FRAME + "\n" +
+        throw new UnknownCommandError("\n" + FRAME + "\n" +
                 "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" + "\n" +
-                this.FRAME);
+                FRAME);
 
     }
 
@@ -219,32 +210,21 @@ public class DukeBot {
             throw new BlankFieldDeadlineException();
         }
 
-<<<<<<< HEAD
         try {
             Deadline newDeadline = new Deadline(task.toString(), deadline.toString().stripLeading());
             this.list.add(newDeadline);
             this.lengthOfList += 1;
-            return this.frame + "\n" +
+            return FRAME + "\n" +
                     "     Got it. I've added this task:" + "\n" +
                     "     " + newDeadline.status() + "\n" +
                     "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
-                    this.frame;
+                    FRAME;
         } catch (DateTimeParseException e) {
             throw new InvalidDateException();
         }
-=======
-        Deadline newDeadline = new Deadline(task.toString(), deadline.toString());
-        this.list.add(newDeadline);
-        this.lengthOfList += 1;
-        return FRAME + "\n" +
-                "     Got it. I've added this task:" + "\n" +
-                "     " + newDeadline.status() + "\n" +
-                "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
-                FRAME;
->>>>>>> branch-Level-7
     }
 
-    public String addEvent(String parameters) throws IncludeToAndFromException, BlankFieldEventException, InvalidDateException {
+    public String addEvent(String parameters) throws IncludeToAndFromException, BlankFieldEventException, InvalidDateException, IOException {
 
         // Extract event's start date and end date
         String[] lines = parameters.split(" ");
@@ -262,15 +242,15 @@ public class DukeBot {
             } else if (Objects.equals(line, "/to") && state == 1) {
                 state = 2;
             } else switch (state) {
-                case 0:
-                    task.append(" ").append(line);
-                    break;
-                case 1:
-                    startDate.append(" ").append(line);
-                    break;
-                case 2:
-                    endDate.append(" ").append(line);
-                    break;
+            case 0:
+                task.append(" ").append(line);
+                break;
+            case 1:
+                startDate.append(" ").append(line);
+                break;
+            case 2:
+                endDate.append(" ").append(line);
+                break;
             }
         }
 
@@ -284,32 +264,19 @@ public class DukeBot {
             throw new BlankFieldEventException();
         }
 
-<<<<<<< HEAD
         try {
-            Event newEvent = new Event(task.toString(), startDate.toString(), endDate.toString());
+            Event newEvent = new Event(task.toString(), startDate.toString().stripLeading(), endDate.toString().stripLeading());
             this.list.add(newEvent);
             this.lengthOfList += 1;
-            return this.frame + "\n" +
+            return FRAME + "\n" +
                     "     Got it. I've added this task:" + "\n" +
                     "     " + newEvent.status() + "\n" +
                     "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
-                    this.frame;
-        } catch (DateTimeException e) {
+                    FRAME;
+        } catch (DateTimeParseException e) {
             throw new InvalidDateException();
         }
-=======
-        Event newEvent = new Event(task.toString(), startDate.toString(), endDate.toString());
-
-        this.list.add(newEvent);
-        this.lengthOfList += 1;
-        return FRAME + "\n" +
-                "     Got it. I've added this task:" + "\n" +
-                "     " + newEvent.status() + "\n" +
-                "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
-                FRAME;
->>>>>>> branch-Level-7
     }
-
 
     public String bye() throws IOException {
         this.isActive = false;

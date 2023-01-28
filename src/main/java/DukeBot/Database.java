@@ -35,7 +35,6 @@ public class Database {
             ArrayList<Task> tasks = new ArrayList<>();
             while (dataScanner.hasNextLine()) {
                 String[] taskData = dataScanner.nextLine().split(this.delimiter);
-                System.out.println(Arrays.toString(taskData));
                 switch (taskData[0]) {
                 case "T":
                     tasks.add(new ToDo(taskData));

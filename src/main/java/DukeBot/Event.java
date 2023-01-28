@@ -1,44 +1,44 @@
 package DukeBot;
 
-<<<<<<< HEAD
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-
-public class Event extends Task{
-    private static final String typeToString = "[E]";
-    private final LocalDateTime startDateTime;
-    private final LocalDateTime endDateTime;
-=======
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Event extends Task{
     private static final String typeToString = "E";
-    private final String startDate;
-    private final String endDate;
->>>>>>> branch-Level-7
+    private final LocalDateTime startDateTime;
+    private final LocalDateTime endDateTime;
+    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-    public Event(String task, String startDateTime, String endDateTime) throws DateTimeException {
+
+    public Event(String task, String startDateTime, String endDateTime) throws DateTimeParseException {
         super(task);
         this.type = Types.EVENT;
-        this.startDateTime = LocalDateTime.parse(startDateTime);
-        this.endDateTime = LocalDateTime.parse(endDateTime);
+
+        this.startDateTime = LocalDateTime.parse(startDateTime, FORMATTER);
+        this.endDateTime = LocalDateTime.parse(endDateTime, FORMATTER);
     }
 
     public Event(String[] data) {
         super(data[2]);
         this.completed = Objects.equals(data[1], "X");
-        this.startDate = data[3];
-        this.endDate = data[4];
+        this.startDateTime = LocalDateTime.parse(data[3]);
+        this.endDateTime = LocalDateTime.parse(data[4]);
     }
 
     @Override
     public String status() {
         String status = this.completed ? "[X]" : "[ ]";
-<<<<<<< HEAD
-        return typeToString + status + details + " (from:" + this.startDateTime + " to:" + this.endDateTime + ")";
-=======
-        return "[" + typeToString + "]" + status + this.details + " (from:" + this.startDate + " to:" + this.endDate + ")";
+        return "[" + typeToString + "]" + status + this.details +
+                " (from: " + this.startDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " [" +
+                this.startDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")" + " to: " +
+                this.endDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " [" +
+                this.endDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")" + ")";
     }
 
     @Override
@@ -47,9 +47,8 @@ public class Event extends Task{
         data.add(typeToString);
         data.add(this.completed ? "X" : " ");
         data.add(this.details);
-        data.add(this.startDate);
-        data.add(this.endDate);
+        data.add(this.startDateTime.toString());
+        data.add(this.endDateTime.toString());
         return data;
->>>>>>> branch-Level-7
     }
 }
