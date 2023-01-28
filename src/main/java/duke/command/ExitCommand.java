@@ -1,11 +1,11 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.task.TaskList;
 
 public class ExitCommand extends Command {
-    CommandType command;
+    private CommandType command;
 
     public ExitCommand() {
         this.command = CommandType.bye;
@@ -14,6 +14,6 @@ public class ExitCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String msg = "Bye. Hope to see you again soon!";
         ui.show(msg);
-        super.isExit = true;
+        super.setExit();
     }
 }

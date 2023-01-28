@@ -3,7 +3,7 @@ package duke.task;
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<Task>();
@@ -44,7 +44,7 @@ public class TaskList {
     @Override
     public String toString() {
         String msg = "";
-        for(int i = 0; i < this.tasks.size(); i++) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             msg += (i + 1) + ". ";
             msg += this.tasks.get(i);
             msg += "\n";

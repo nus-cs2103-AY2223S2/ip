@@ -1,6 +1,6 @@
 package duke;
 
-import duke.task.*;
+import static java.lang.Boolean.parseBoolean;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -9,10 +9,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static java.lang.Boolean.parseBoolean;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 public class Storage {
-    java.nio.file.Path filePath;
+    private java.nio.file.Path filePath;
     public Storage(java.nio.file.Path filePath) {
         this.filePath = filePath;
     }
@@ -23,11 +27,7 @@ public class Storage {
             ArrayList<Task> tasks = new ArrayList<Task>();
             while (scanner.hasNextLine()) {
                 String cur = scanner.nextLine();
-//                System.out.println(cur);
                 String[] temp = cur.split(" \\| ");
-//                for(int i = 0; i < temp.length; i++) {
-//                    System.out.println(temp[i]);
-//                }
                 if (temp[0].equals("T")) {
                     tasks.add(new Todo(temp[2], parseBoolean(temp[1])));
                 } else if (temp[0].equals("D")) {

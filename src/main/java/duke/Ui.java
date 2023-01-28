@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    String lines = "____________________________________________________________";
+    private String lines = "____________________________________________________________";
 
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);

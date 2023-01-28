@@ -1,12 +1,12 @@
 package duke.command;
 
 import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
 
 public class MarkCommand extends Command {
-    int idx;
+    private int idx;
 
     public MarkCommand(int idx) {
         this.idx = idx;

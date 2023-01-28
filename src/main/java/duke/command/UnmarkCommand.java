@@ -1,12 +1,12 @@
 package duke.command;
 
 import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
 
 public class UnmarkCommand extends Command {
-    int idx;
+    private int idx;
 
     public UnmarkCommand(int idx) {
         this.idx = idx;
