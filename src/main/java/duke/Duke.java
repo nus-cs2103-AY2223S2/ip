@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Main logic of Duke the chat bot which tracks the user's tasks.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;

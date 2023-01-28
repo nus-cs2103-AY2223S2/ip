@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.exception.DukeException;
 
+/**
+ * Deals with making sense of the user input.
+ */
 public class Parser {
 
     /**
@@ -34,8 +37,8 @@ public class Parser {
             return new Command("delete", index);
 
         } else if (input.startsWith("find")) {
-            String taskName = input.substring(5);
-            return new Command("delete", taskName);
+            String keyword = input.substring(5);
+            return new Command("find", keyword);
 
         } else if (input.startsWith("todo")) {
             String taskName = input.substring(5);

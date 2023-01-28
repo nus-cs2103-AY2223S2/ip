@@ -5,6 +5,9 @@ import duke.task.*;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Executes a command based on parsed inputs.
+ */
 public class Command {
     private String commandName;
     private String taskName;

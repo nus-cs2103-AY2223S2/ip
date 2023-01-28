@@ -2,6 +2,9 @@ package duke.task;
 
 import java.io.Serializable;
 
+/**
+ * Class for task object.
+ */
 public class Task implements Serializable{
     private String taskName;
     private boolean done;

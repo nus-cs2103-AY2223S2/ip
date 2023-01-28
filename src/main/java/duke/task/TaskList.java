@@ -3,6 +3,9 @@ package duke.task;
 import java.util.ArrayList;
 import java.io.Serializable;
 
+/**
+ * Class that contains the list of task objects.
+ */
 public class TaskList implements Serializable {
     private ArrayList<Task> tasks;
 

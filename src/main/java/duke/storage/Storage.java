@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 // learned from https://www.youtube.com/watch?v=TkC3sZxW2wY
 
+/**
+ * Stores and loads tasks from a text file.
+ */
 public class Storage {
     private String filePath;
 
