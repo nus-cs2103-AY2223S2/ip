@@ -248,6 +248,7 @@ public class Duke {
     }
 
     private void list() {
-        this.ui.show(this.tasks.toString());
+        String header = "Here are the tasks in your list:\n";
+        this.ui.show(header + this.tasks.toString());
     }
 }
