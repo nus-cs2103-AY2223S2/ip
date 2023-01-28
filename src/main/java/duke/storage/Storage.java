@@ -1,3 +1,8 @@
+package duke.storage;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.*;
 import java.util.ArrayList;
 

@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.*;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 public class Command {
     private String commandName;
     private String taskName;
