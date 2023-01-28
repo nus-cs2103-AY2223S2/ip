@@ -15,14 +15,11 @@ public class Storage {
     private String filePath = "";
 
     /**
-<<<<<<< HEAD
      * Storage Constructor.
      * It contains the file path to store or load data.
      * @param filePath
-=======
      * Storage constructor
      * @param filePath Takes filePath to save or load from
->>>>>>> branch-A-JavaDoc
      * @throws IOException
      */
     public Storage(String filePath) throws IOException {
@@ -30,13 +27,10 @@ public class Storage {
     }
 
     /**
-<<<<<<< HEAD
      * Returns file path to load data.
      * @return
-=======
      * Load the file
      * @return returns filePath to use in other classes.
->>>>>>> branch-A-JavaDoc
      */
     public String load() {
         return filePath;

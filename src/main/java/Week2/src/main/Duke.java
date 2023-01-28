@@ -1,35 +1,27 @@
 package Week2.src.main;
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.lang.*;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.*;
 
 /**
-<<<<<<< HEAD
  * A simple todo bot to manage my todo list.
  * It can mark done jobs or unmark.
-=======
  * A simple todo bot that helps you to manage your tasks with deadline or occuring time.
  * @author Park Hyunjin
->>>>>>> branch-A-JavaDoc
  */
 public class Duke {
     private static Storage storage;
     private Ui ui;
     private static TaskList tasklist;
+    static boolean isBye = false;
 
     /**
-<<<<<<< HEAD
      * Constructor of Duke.
      * It begins the basic operation of the program when it is constructed.
-=======
      * Duke constructor.
      * Takes filePath from main and creates Ui and storage from it.
      * It can load previous data from the file path.
->>>>>>> branch-A-JavaDoc
      * @param filePath
      * @throws IOException
      */
@@ -39,18 +31,21 @@ public class Duke {
         try {
             ui.hello();
             tasklist = new TaskList(storage.load());
-        } catch(Exception e) {
+            run();
+            ui.bye();
+        } catch (IndexOutOfBoundsException e) {
+            ui.showEmptyError();
+        } catch (FileNotFoundException e) {
+            ui.showFileError();
+        } catch (Exception e) {
             ui.showLoadingError();
             tasklist = new TaskList();
         }
     }
 
     /**
-<<<<<<< HEAD
      * Prints out a line
-=======
      * @return a line to divide outcomes.
->>>>>>> branch-A-JavaDoc
      */
     public static void lining() {
         System.out.println("____________________________________________________________");
@@ -67,142 +62,124 @@ public class Duke {
     }
 
     /**
-<<<<<<< HEAD
      * Writes information of the task on the file
      * @param currtask Current task that user has entered
-=======
      * It uses a file writer to write the data on the file according to the user's input.
      * @param currtask takes the current task to write (todo, deadline, or event)
->>>>>>> branch-A-JavaDoc
      * @throws IOException
      */
     public static void writeOn(Task currtask) throws IOException {
         fw.write(currtask.toString() +System.lineSeparator());
     }
 
+    public static void run() throws IOException {
+        String comm = "";
+        Parser parser = new Parser();
+        while(!isBye) {
+            String c = parser.getCommand();
+            if (c.equals("list")) {
+                lining();
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < tasklist.size(); i++) {
+                    Task current = (Task) tasklist.get(i);
+                    int curnum = i+1;
+                    System.out.println(curnum +"."+current.toString());
+                }
+                lining();
+
+            } else if (c.startsWith("mark")) {
+                String str = c.substring(c.length() - 1);
+                int marking = Integer.parseInt(str);
+                Task current = (Task) tasklist.get(marking - 1);
+                current.setDone();
+                lining();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[X] " + current.content);
+                lining();
+                writeOn(current);
+
+            } else if (c.startsWith("unmark")) {
+                String str = c.substring(c.length() - 1);
+                int marking = Integer.parseInt(str);
+                Task current = (Task) tasklist.get(marking - 1);
+                current.setNotDone();
+                lining();
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("[ ]" +current.content);
+                lining();
+                writeOn(current);
+
+            } else if(c.startsWith("delete")) {
+                String str = c.substring(c.length() - 1);
+                int marking = Integer.parseInt(str);
+                Task current = (Task) tasklist.get(marking - 1);
+                tasklist.remove(marking-1);
+                lining();
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(current.toString());
+                System.out.println("Now you have " +tasklist.size()+ " tasks in the list");
+                lining();
+
+            }else if (c.startsWith("todo")) {
+                String doit = c.substring(5, c.length());
+                Task current = new Todo(doit);
+                tasklist.add(current);
+                lining();
+                System.out.println("Got it. I've added this task:");
+                System.out.println(current.toString());
+                System.out.println("Now you have " + tasklist.size() + " tasks in the list");
+                lining();
+                writeOn(current);
+
+            } else if (c.startsWith("deadline")) {
+                String doit = c.substring(9, c.length());
+                String[] parts = doit.split("/by");
+                Task current = new Deadline(parts[0], parts[1]);
+                tasklist.add(current);
+                lining();
+                System.out.println("Got it. I've added this task:");
+                System.out.println(current.toString());
+                System.out.println("Now you have " + tasklist.size() + " tasks in the list");
+                lining();
+                writeOn(current);
+
+            } else if (c.startsWith("event")) {
+                String doit = c.substring(6, c.length());
+                String[] froms = doit.split("/from");
+                String[] fromses = froms[1].split("/to");
+                String[] tos = doit.split("/to");
+                Task current = new Event(froms[0], fromses[0], tos[1]);
+                tasklist.add(current);
+                lining();
+                System.out.println("Got it. I've added this task:");
+                System.out.println(current.toString());
+                lining();
+                writeOn(current);
+
+            } else if (c.startsWith("find")) {
+                String keyword = c.substring(6, c.length());
+                Search sr = new Search(tasklist);
+                Search.find(keyword);
+
+            } else if (!c.equals("bye")){
+                lining();
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                lining();
+            }
+
+            if(c.equals("bye")) {
+                break;
+            }
+        }
+    }
     /**
-<<<<<<< HEAD
      * Main method to manage my todo list
      * Takes inputs from the user and send them to right classes.
-=======
      * Main method of the todo bot. It generally manages inputs and outputs.
->>>>>>> branch-A-JavaDoc
      * @param args
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        new Duke("saves/data.txt");
-
-        String comm = "";
-
-        //tasklist = new TaskList();
-
-        try {
-            while (!comm.equals("bye")) {
-                comm = sc.nextLine();
-                if (comm.equals("list")) {
-                    lining();
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < tasklist.size(); i++) {
-                        Task current = (Task) tasklist.get(i);
-                        int curnum = i+1;
-                        System.out.println(curnum +"."+current.toString());
-                    }
-                    lining();
-
-                } else if (comm.startsWith("mark")) {
-                    String str = comm.substring(comm.length() - 1);
-                    int marking = Integer.parseInt(str);
-                    Task current = (Task) tasklist.get(marking - 1);
-                    current.setDone();
-                    lining();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("[X] " + current.content);
-                    lining();
-                    writeOn(current);
-
-                } else if (comm.startsWith("unmark")) {
-                    String str = comm.substring(comm.length() - 1);
-                    int marking = Integer.parseInt(str);
-                    Task current = (Task) tasklist.get(marking - 1);
-                    current.setDone();
-                    lining();
-                    System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println("[ ]" +current.content);
-                    lining();
-                    writeOn(current);
-
-                } else if(comm.startsWith("delete")) {
-                    String str = comm.substring(comm.length() - 1);
-                    int marking = Integer.parseInt(str);
-                    Task current = (Task) tasklist.get(marking - 1);
-                    tasklist.remove(marking-1);
-                    lining();
-                    System.out.println("Noted. I've removed this task:");
-                    System.out.println(current.toString());
-                    System.out.println("Now you have " +tasklist.size()+ " tasks in the list");
-                    lining();
-
-                }else if (comm.startsWith("todo")) {
-                    String doit = comm.substring(5, comm.length());
-                    Task current = new Todo(doit);
-                    tasklist.add(current);
-                    lining();
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(current.toString());
-                    System.out.println("Now you have " + tasklist.size() + " tasks in the list");
-                    lining();
-                    writeOn(current);
-
-                } else if (comm.startsWith("deadline")) {
-                    String doit = comm.substring(9, comm.length());
-                    String[] parts = doit.split("/by");
-                    Task current = new Deadline(parts[0], parts[1]);
-                    tasklist.add(current);
-                    if(parts[1].contains("/")) {
-                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/mm/yyyy");
-                        LocalDate date = LocalDate.parse(parts[1], dtf);
-                    }
-                    lining();
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(current.toString());
-                    System.out.println("Now you have " + tasklist.size() + " tasks in the list");
-                    lining();
-                    writeOn(current);
-
-                } else if (comm.startsWith("event")) {
-                    String doit = comm.substring(6, comm.length());
-                    String[] froms = doit.split("/from");
-                    String[] fromses = froms[1].split("to");
-                    String[] tos = doit.split("/to");
-                    Task current = new Event(froms[0], fromses[1], tos[1]);
-                    tasklist.add(current);
-                    lining();
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(current.toString());
-                    lining();
-                    writeOn(current);
-
-                } else if (comm.startsWith("find")) {
-                    String keyword = comm.substring(6, comm.length());
-                    Search sr = new Search(tasklist);
-                    Search.find(keyword);
-
-                } else if (!comm.equals("bye")){
-                    lining();
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    lining();
-                }
-            }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("OOPS!!! The description of a todo cannot be empty.");
-            System.out.println("OOPS!!! The description of a todo cannot be empty.");
-        } catch (FileNotFoundException e) {
-            System.out.println("File doesn't exist!");
-        }
-            lining();
-            System.out.println("Bye. Hope to see you again soon!");
-            lining();
+        new Duke("saves/data.txt").run();
     }
 }

@@ -13,16 +13,7 @@ public class Ui {
     }
 
     /**
-
-     * Prints out that it is loading when it faces a loading error
-
-     * Prints hello message to user
-     */
-
-
-    /**
      * It prints Loadding error message to user
-
      */
     public void showLoadingError() {
         System.out.println("Loading...");
@@ -42,5 +33,19 @@ public class Ui {
         Duke.lining();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         Duke.lining();
+    }
+
+    public void bye() {
+        Duke.lining();
+        System.out.println("Bye. Hope to see you again soon!");
+        Duke.lining();
+    }
+
+    public void showEmptyError() {
+        System.out.println("OOPS!!! The description of a todo cannot be empty.");
+    }
+
+    public void showFileError(){
+        System.out.println("File doesn't exist!");
     }
 }

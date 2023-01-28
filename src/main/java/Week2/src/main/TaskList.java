@@ -8,11 +8,8 @@ import java.io.File;
 import java.util.Scanner;
 
 /**
-<<<<<<< HEAD
  * List of tasks
-=======
  * List of tasks which is made of a custom type Task
->>>>>>> branch-A-JavaDoc
  * @param <Task>
  */
 public class TaskList<Task> {
@@ -29,16 +26,13 @@ public class TaskList<Task> {
     }
 
     /**
-<<<<<<< HEAD
      * TaskList constructor that loads data from the file of the path.
      * @param path File to load
-=======
      * TaskList constructor.
      * It creates a new ArrayList to contain Task information in it.
      * It first figures out what type of task it is (todo, deadline, or event),
      * and divide the command and contents
      * @param path
->>>>>>> branch-A-JavaDoc
      * @throws FileNotFoundException
      */
     @SuppressWarnings("unchecked")
@@ -65,11 +59,8 @@ public class TaskList<Task> {
     }
 
     /**
-<<<<<<< HEAD
      * Size of the list
-=======
      * It returns the size of the list
->>>>>>> branch-A-JavaDoc
      * @return size of the list
      */
     public int size() {
@@ -77,15 +68,12 @@ public class TaskList<Task> {
     }
 
     /**
-<<<<<<< HEAD
      * Gives the task at the given index
      * @param index
      * @return The task at the index
-=======
      * Gives the task of the given index
      * @param index index of the tasklist
      * @return task of the given index
->>>>>>> branch-A-JavaDoc
      */
     public Task get(int index) {
         return this.list.get(index);
@@ -93,24 +81,18 @@ public class TaskList<Task> {
 
     /**
      * Removes the task at the given index
-<<<<<<< HEAD
      * @param index
-=======
      * @param index index of the task that user wants to remove
->>>>>>> branch-A-JavaDoc
      */
     public void remove(int index) {
         this.list.remove(index);
     }
 
     /**
-<<<<<<< HEAD
      * Add a new task that user has entered
      * @param t new task
-=======
      * It adds a new task
      * @param t New task that user wants to add on the list
->>>>>>> branch-A-JavaDoc
      */
     public void add(Task t) {
         this.list.add(t);
