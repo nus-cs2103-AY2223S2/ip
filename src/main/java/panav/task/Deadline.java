@@ -4,6 +4,7 @@ package panav.task;
  * Class to represent a Deadline task. It has attributes for its deadline time.
  */
 public class Deadline extends Task{
+
     protected String by;
 
     public Deadline(String description, String by) {

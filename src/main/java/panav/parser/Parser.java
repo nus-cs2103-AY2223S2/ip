@@ -1,6 +1,14 @@
 package panav.parser;
 
-import panav.command.*;
+import panav.command.Command;
+import panav.command.ListCommand;
+import panav.command.TodoCommand;
+import panav.command.EventCommand;
+import panav.command.DeadlineCommand;
+import panav.command.EditCommand;
+import panav.command.ExitCommand;
+import panav.command.DeleteCommand;
+
 import panav.exception.InvalidInputException;
 
 /**
@@ -16,9 +24,9 @@ public class Parser {
      */
     public static Command parse(String fullCommand) {
         String[] temp = fullCommand.split(" ");
-        String first = temp[0];
+        String firstWord = temp[0];
         try {
-            switch (first) {
+            switch (firstWord) {
             case "list":
                 return new ListCommand();
             case "todo":
@@ -62,7 +70,6 @@ public class Parser {
             case "delete":
                 return new DeleteCommand(fullCommand);
             default:
-
                 throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (InvalidInputException e) {

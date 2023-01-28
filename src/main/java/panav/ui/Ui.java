@@ -11,7 +11,9 @@ import java.util.Scanner;
 public class Ui {
 
     Scanner sc = new Scanner(System.in);
+
     private static final String LINE_DIVIDER = "____________________________________________________________";
+
 
     /**
      * Method to print the error while loading tasks from saved file.

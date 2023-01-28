@@ -5,7 +5,7 @@ import panav.exception.ToDoDescriptionException;
 /**
  * Class to represent an ToDo task. It contains attributes for it's description.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     public ToDo(String description) throws ToDoDescriptionException {
         super(description);

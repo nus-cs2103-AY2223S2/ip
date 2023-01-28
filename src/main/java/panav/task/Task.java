@@ -4,8 +4,9 @@ package panav.task;
  * Abstract class to represent a Task in the TaskList.
  */
 public abstract class Task {
+
     protected String description;
-    public boolean isDone;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -27,11 +28,20 @@ public abstract class Task {
         this.isDone = true;
     }
 
+
     /**
      * Method to mark a task as not done.
      */
     public void markAsNotDone() {
         this.isDone = false;
+    }
+
+    /**
+     * Method to check if a task is done or not.
+     * @return true if done, false otherwise.
+     */
+    public boolean isDone() {
+        return this.isDone;
     }
 
     @Override

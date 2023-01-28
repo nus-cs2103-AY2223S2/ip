@@ -1,7 +1,12 @@
 package panav.storage;
 
 import panav.exception.ToDoDescriptionException;
-import panav.task.*;
+
+import panav.task.Task;
+import panav.task.ToDo;
+import panav.task.Deadline;
+import panav.task.Event;
+import panav.task.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -74,7 +79,7 @@ public class Storage {
             int indexBy = str.indexOf("by:");
             int indexFrom = str.indexOf("from:");
             int indexTo = str.indexOf("to:");
-            int check = task.isDone ? 1 : 0;
+            int check = task.isDone() ? 1 : 0;
             int length = str.length();
             if (indexBy != -1) {
                 textToAdd += String.format("%c ~ %d ~ %s ~ %s %n", str.charAt(1), check,
