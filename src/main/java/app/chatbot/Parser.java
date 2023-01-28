@@ -5,6 +5,7 @@ import app.command.Command;
 import app.command.CommandNotFoundException;
 import app.command.DeleteCommand;
 import app.command.ExitCommand;
+import app.command.FindCommand;
 import app.command.ListCommand;
 import app.command.MarkAsDoneCommand;
 import app.command.MarkAsUndoneCommand;
@@ -64,6 +65,8 @@ public class Parser {
                 return new MarkAsUndoneCommand(argValues.get(command)); // pass in index to command
             case "delete":
                 return new DeleteCommand(argValues.get(command)); // pass in index to command
+            case "find":
+                return new FindCommand(argValues.get(command));
             case "bye":
                 return new ExitCommand();
             default:
