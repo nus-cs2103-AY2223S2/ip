@@ -67,6 +67,7 @@ public class Parser {
                 try {
                     info = command.substring(command.indexOf(" ") + 1);
                     //System.out.println(info);
+
                     for (int i = 0; i < tasks.size(); i++) {
                         if(tasks.get(i).getDescription().contains(info)) {
                             System.out.println(Indentation + Horizontal);
