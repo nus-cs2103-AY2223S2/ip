@@ -4,6 +4,7 @@ import crystal.task.Task;
 import crystal.task.Todo;
 import crystal.task.Deadline;
 import crystal.task.Event;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -37,43 +38,43 @@ public class Ui {
     }
 
     public void printUnmark(TaskList task, int num) {
-        Task t = task.get(num-1);
+        Task unmarkTask = task.get(num-1);
         System.out.println(" ____________________________________________________________");
         System.out.println("Alright, I've marked this task as not done: ");
-        t.isDone = false;
-        System.out.println(t.toString());
+        unmarkTask.isDone = false;
+        System.out.println(unmarkTask.toString());
         System.out.println(" ____________________________________________________________");
     }
 
     public void printMark(TaskList task, int num) {
-        Task t = task.get(num - 1);
+        Task markTask = task.get(num - 1);
         System.out.println(" ____________________________________________________________");
         System.out.println("Alright, I've marked the task as done: ");
-        t.isDone = true;
-        System.out.println(t.toString());
+        markTask.isDone = true;
+        System.out.println(markTask.toString());
         System.out.println(" ____________________________________________________________");
     }
 
-    public void printTodo(TaskList task, Todo t) {
+    public void printTodo(TaskList task, Todo td) {
         System.out.println(" ____________________________________________________________");
         System.out.println("Alright, I've added this task: ");
-        System.out.println(t.toString());
+        System.out.println(td.toString());
         System.out.println("Current number of tasks : " + task.size());
         System.out.println(" ____________________________________________________________");
     }
 
-    public void printDeadline(TaskList task, Deadline d) {
+    public void printDeadline(TaskList task, Deadline dl) {
         System.out.println(" ____________________________________________________________");
         System.out.println("Alright, I've added this task: ");
-        System.out.println(d.toString());
+        System.out.println(dl.toString());
         System.out.println("Current number of tasks : " + task.size());
         System.out.println(" ____________________________________________________________");
     }
 
-    public void printEvent(TaskList task, Event e) {
+    public void printEvent(TaskList task, Event evt) {
         System.out.println(" ____________________________________________________________");
         System.out.println("Alright, I've added this task: ");
-        System.out.println(e.toString());
+        System.out.println(evt.toString());
         System.out.println("Current number of tasks: " + task.size());
         System.out.println(" ____________________________________________________________");
     }

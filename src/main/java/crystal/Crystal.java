@@ -1,6 +1,7 @@
 package crystal;
 
 import crystal.command.Command;
+
 import java.io.File;
 
 class Crystal {
@@ -27,10 +28,10 @@ class Crystal {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                Command cmd = Parser.parse(fullCommand);
+                cmd.execute(tasks, ui, storage);
                 storage.saveFile(tasks);
-                isExit = c.isExit();
+                isExit = cmd.isExit();
             } catch (CrystalException e) {
                 ui.showError(e);
 

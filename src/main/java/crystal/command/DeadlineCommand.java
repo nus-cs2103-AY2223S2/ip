@@ -8,18 +8,16 @@ import crystal.task.Deadline;
 
 
 public class DeadlineCommand extends Command{
-    public String s;
+    public String by;
     public String description;
-    public DeadlineCommand(String description, String s) {
+    public DeadlineCommand(String description, String by) {
         this.description = description;
-        this.s = s;
+        this.by = by;
     }
-    public void execute(TaskList tasks, Ui ui,Storage storage) throws CrystalException {
-
-        Deadline d = new Deadline(description, s);
-        tasks.add(d);
-        ui.printDeadline(tasks, d);
-
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws CrystalException {
+        Deadline deadline = new Deadline(description, by);
+        tasks.add(deadline);
+        ui.printDeadline(tasks, deadline);
     }
 
     public boolean isExit() {
