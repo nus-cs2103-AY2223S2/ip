@@ -14,8 +14,10 @@ public class Parser {
         DELETE,
         TODO,
         DEADLINE,
-        EVENT
+        EVENT,
+        FIND
     }
+
     public static Command parse(String input, TaskList taskList, Ui ui, Storage storage)
             throws DukeException {
 
@@ -24,32 +26,35 @@ public class Parser {
             CommandType commandType = CommandType.valueOf(inputs[0].toUpperCase());
 
             switch (commandType) {
-                case BYE:
-                    return new ByeCommand(taskList, ui, storage);
+            case BYE:
+                return new ByeCommand(taskList, ui, storage);
 
-                case LIST:
-                    return new ListCommand(taskList, ui);
+            case LIST:
+                return new ListCommand(taskList, ui);
 
-                case MARK:
-                    return new MarkCommand(input, taskList, ui);
+            case MARK:
+                return new MarkCommand(input, taskList, ui);
 
-                case UNMARK:
-                    return new UnmarkCommand(input, taskList, ui);
+            case UNMARK:
+                return new UnmarkCommand(input, taskList, ui);
 
-                case DELETE:
-                    return new DeleteCommand(input, taskList, ui);
+            case DELETE:
+                return new DeleteCommand(input, taskList, ui);
 
-                case TODO:
-                    return new TodoCommand(input, taskList, ui);
+            case TODO:
+                return new TodoCommand(input, taskList, ui);
 
-                case DEADLINE:
-                    return new DeadlineCommand(input, taskList, ui);
+            case DEADLINE:
+                return new DeadlineCommand(input, taskList, ui);
 
-                case EVENT:
-                    return new EventCommand(input, taskList, ui);
+            case EVENT:
+                return new EventCommand(input, taskList, ui);
 
-                default:
-                    throw new DukeException("☹ OOPS!!! Something went wrong.");
+            case FIND:
+                return new FindCommand(input, taskList, ui);
+
+            default:
+                throw new DukeException("☹ OOPS!!! Something went wrong.");
             }
         } catch (IllegalArgumentException e) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
