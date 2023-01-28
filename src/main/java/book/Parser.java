@@ -28,12 +28,12 @@ public final class Parser {
      * Parses {@code String} input and returns the relevant {@code Command}.
      * @param command {@code String} input to be parsed and returned as a {@code Command}.
      * @return {@code Command} parsed from the {@code String} input, initialized with relevant
-     *     additional arguments.
+     *         additional arguments.
      * @throws IncompleteInputException if {@code String} input is incomplete for processing a
-     *     {@code Command}.
+     *         {@code Command}.
      * @throws InvalidFormatException if {@code String} input provided has invalid format.
      * @throws InvalidInputException if {@code String} input provided does not match any
-     *     {@code Command}.
+     *         {@code Command}.
      */
     public static Command parse(String command) throws IncompleteInputException,
             InvalidFormatException, InvalidInputException {

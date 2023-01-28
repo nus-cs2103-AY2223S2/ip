@@ -27,13 +27,13 @@ public class AddCommand extends Command {
      * @param storage {@code Storage} associated with the {@code AddCommand}.
      * @param list {@code TaskList} associated with the {@code AddCommand}.
      * @param ui {@code Ui} associated with the {@code AddCommand}.
+     * @return {@code String} to be displayed on the {@code Gui}.
      * @throws SaveException if an error occurs with updating the {@code Storage}.
      */
     @Override
-    public void execute(Storage storage, TaskList list, Ui ui) throws SaveException {
+    public String execute(Storage storage, TaskList list, Ui ui) throws SaveException {
         list.addTask(this.task);
         storage.save(list);
-        ui.showAdd(this.task);
-        ui.showTaskListSize(list);
+        return ui.showAdd(this.task) + "\n" + ui.showTaskListSize(list);
     }
 }

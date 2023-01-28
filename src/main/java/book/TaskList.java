@@ -67,7 +67,7 @@ public class TaskList {
      * keyword in {@code TaskList}.
      * @param keyword {@code String} keyword to match {@code Task}s in {@code TaskList}.
      * @return {@code String} representation of {@code Task}s matching the given {@code String}
-     *     keyword in {@code TaskList}.
+     *         keyword in {@code TaskList}.
      */
     public String matchingTasks(String keyword) {
         int index = 1;

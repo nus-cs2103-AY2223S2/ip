@@ -14,12 +14,13 @@ public class ExitCommand extends Command {
      * @param storage {@code Storage} associated with the {@code Command}.
      * @param list {@code TaskList} associated with the {@code Command}.
      * @param ui {@code Ui} associated with the {@code Command}.
+     * @return {@code String} to be displayed on the {@code Gui}.
      * @throws SaveException if an error occurs with updating the {@code Storage}.
      */
     @Override
-    public void execute(Storage storage, TaskList list, Ui ui) throws SaveException {
+    public String execute(Storage storage, TaskList list, Ui ui) throws SaveException {
         storage.save(list);
-        ui.showExit();
+        return ui.showExit();
     }
 
     /**

@@ -14,10 +14,10 @@ public class ListCommand extends Command {
      * @param storage {@code Storage} associated with the {@code Command}.
      * @param list {@code TaskList} associated with the {@code Command}.
      * @param ui {@code Ui} associated with the {@code Command}.
+     * @return {@code String} to be displayed on the {@code Gui}.
      */
     @Override
-    public void execute(Storage storage, TaskList list, Ui ui) {
-        ui.showList(list);
-        ui.showTaskListSize(list);
+    public String execute(Storage storage, TaskList list, Ui ui) {
+        return ui.showList(list) + "\n" + ui.showTaskListSize(list);
     }
 }

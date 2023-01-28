@@ -71,7 +71,7 @@ public class Storage {
      * Returns an {@code ArrayList<Task>} loaded with the {@code Task}s stored in the associated
      * save {@code File}.
      * @return {@code ArrayList<Task>} loaded with the {@code Task}s stored in the associated save
-     *     {@code File}.
+     *         {@code File}.
      * @throws LoadException if an error occurs with loading the save {@code File}.
      */
     public ArrayList<Task> load() throws LoadException {

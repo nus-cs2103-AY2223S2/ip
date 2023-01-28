@@ -27,8 +27,9 @@ public class FindCommand extends Command {
      * @param storage {@code Storage} associated with the {@code Command}.
      * @param list {@code TaskList} associated with the {@code Command}.
      * @param ui {@code Ui} associated with the {@code Command}.
+     * @return {@code String} to be displayed on the {@code Gui}.
      */
-    public void execute(Storage storage, TaskList list, Ui ui) {
-        ui.showMatchingTasksList(list, this.keyword);
+    public String execute(Storage storage, TaskList list, Ui ui) {
+        return ui.showMatchingTasksList(list, this.keyword);
     }
 }

@@ -5,11 +5,16 @@ import java.nio.file.Paths;
 
 import book.command.Command;
 import book.exception.BookException;
+import book.gui.Gui;
+import javafx.application.Application;
+import javafx.application.Platform;
 
 /**
  * Main class of {@code Book}.
  */
 public class Book {
+    /** Default {@code Path} to the save. */
+    private static final Path DEFAULT_PATH = Paths.get("save", "book.txt");
     /** {@code Storage} associated with {@code Book}. */
     private Storage storage;
     /** {@code TaskList} associated with {@code Book}. */
@@ -18,13 +23,12 @@ public class Book {
     private Ui ui;
 
     /**
-     * Initializes a {@code Book} with the given {@code Path} to the {@code Book} save, if no save
+     * Initializes a {@code Book} with a fixed {@code Path} to the {@code Book} save, if no save
      * is found, initializes an empty {@code Book}.
-     * @param filePath {@code Path} for locating the saved {@code Book}.
      */
-    public Book(Path filePath) {
+    public Book() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(DEFAULT_PATH);
         try {
             this.list = new TaskList(this.storage.load());
         } catch (BookException exception) {
@@ -34,26 +38,25 @@ public class Book {
     }
 
     /**
-     * Runs the {@code Book}.
+     * Passes any {@code String userInput} from the {@code Gui} to {@code Parser}, then executes
+     * the returned {@code Command} and returns the resulting {@code String}.
+     * @param userInput {@code String userInput} from the {@code Gui}.
+     * @return {@code String} to be displayed on the {@code Gui}.
      */
-    public void run() {
-        this.ui.showWelcome();
-        this.ui.showLine();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                Command command = Parser.parse(ui.readCommand());
-                command.execute(this.storage, this.list, this.ui);
-                isExit = command.isExit();
-            } catch (BookException exception) {
-                this.ui.showError(exception.getMessage());
-            } finally {
-                this.ui.showLine();
+    public String parseAndReturn(String userInput) {
+        try {
+            Command command = Parser.parse(userInput);
+            String returnFromCommand = command.execute(this.storage, this.list, this.ui);
+            if (command.isExit()) {
+                Platform.exit();
             }
+            return returnFromCommand;
+        } catch (BookException exception) {
+            return this.ui.showError(exception.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        new Book(Paths.get("save", "book.txt")).run();
+        Application.launch(Gui.class, args);
     }
 }
