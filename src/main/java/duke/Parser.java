@@ -6,7 +6,21 @@ import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 
+/**
+ * Parser class parses the full user's input to understand what command the user has typed.
+ */
 public class Parser {
+    /**
+     * Split the input string from the user to interpret what command is typed by the user.
+     * Returns a Command that is meant by the user.
+     * If the input from the user is incomplete, it will throw an error.
+     *
+     * @param inp Full input from the user.
+     * @param ui UI of the current session.
+     * @param tasks Tasks for the current session.
+     * @return Command Type.
+     * @throws DukeException If user input is incomplete.
+     */
     public static Command parse(String inp, Ui ui, TaskList tasks) throws DukeException {
         String[] temp = inp.split(" ");
         CommandType c;
