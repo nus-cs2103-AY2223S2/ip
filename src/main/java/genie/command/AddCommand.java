@@ -15,7 +15,7 @@ public class AddCommand extends Command {
     }
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        switch(taskType) {
+        switch (taskType) {
         case "todo":
             task = taskList.addToDoFromUser(fullCommand);
             break;
@@ -29,5 +29,7 @@ public class AddCommand extends Command {
         ui.showAddTaskMessage(task, taskList.getTasks().size());
     }
     @Override
-    public boolean isExitCommand() { return false; }
+    public boolean isExitCommand() {
+        return false;
+    }
 }

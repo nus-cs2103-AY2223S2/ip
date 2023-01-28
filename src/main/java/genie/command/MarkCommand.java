@@ -17,5 +17,7 @@ public class MarkCommand extends Command {
         ui.showMarkDoneMessage(t);
     }
     @Override
-    public boolean isExitCommand() { return false; }
+    public boolean isExitCommand() {
+        return false;
+    }
 }

@@ -11,5 +11,7 @@ public class ListCommand extends Command {
         ui.printList(taskList.getTasks());
     }
     @Override
-    public boolean isExitCommand() { return false; }
+    public boolean isExitCommand() {
+        return false;
+    }
 }
