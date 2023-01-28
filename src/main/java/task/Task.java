@@ -1,6 +1,6 @@
 package task;
 
-public class Task {
+public abstract class Task {
     private boolean markedDone = false;
     private final String taskName; // Do not allow task name to change for now
 
