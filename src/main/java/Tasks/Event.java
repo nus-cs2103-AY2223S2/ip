@@ -3,7 +3,7 @@ import Exceptions.DateTimeNotParsed;
 import Tasks.Task;
 
 public class Event extends Task {
-    private final String TASK_SIGN = "[E]";
+    public static final String TASK_SIGN = "[E]";
     private String from;
     private String to;
     private TimeParser fromTp;
@@ -20,6 +20,11 @@ public class Event extends Task {
     @Override
     public String getMessage(){
         return this.message + " (FROM: " + this.fromTp + " TO: " + this.toTp + ")";
+    }
+
+    @Override
+    public String getStorageFormat() {
+        return TASK_SIGN + "," +this.isMarked()+","+this.message+"," +this.to + "," + this.from;
     }
 
     @Override

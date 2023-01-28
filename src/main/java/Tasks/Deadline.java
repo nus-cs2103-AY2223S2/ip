@@ -5,7 +5,7 @@ import Tasks.Task;
 
 
 public class Deadline extends Task {
-    private final String TASK_SIGN = "[D]";
+    public static final String TASK_SIGN = "[D]";
     private String by;
     private TimeParser tpBy;
 
@@ -24,5 +24,10 @@ public class Deadline extends Task {
     @Override
     public String getRepresentation(){
         return TASK_SIGN + this.getStatusIcon() + " " + this.getMessage();
+    }
+
+    @Override
+    public String getStorageFormat() {
+        return TASK_SIGN + "," +this.isMarked()+","+this.message+"," +this.by;
     }
 }

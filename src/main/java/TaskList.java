@@ -15,12 +15,18 @@ public class TaskList {
     private int taskCount = 0;
     private String FILE_NAME = "tasks.txt";
 
+    private Storage storage = new Storage();
+
+    public TaskList() throws AvaException {
+        this.addFromStorage();
+    }
 
     /**
      * Adds Task to the List , and returns the success Message
      * @param input
      * @return
      */
+
     public String addTasks(String input,String formatSpace) throws AvaException {
         try {
             String[] splitCommand = input.trim().split(" ", 2);
@@ -112,6 +118,38 @@ public class TaskList {
         output[1] = fromTo[0];
         output[2] = fromTo[1];
         return output;
+    }
+    public void addToStorage() {
+        boolean canAppend = true;
+        storage.deleteFile(FILE_NAME);
+        for (Task t : tasks) {
+            storage.writeToStorage(FILE_NAME, t.getStorageFormat(), canAppend);
+        }
+    }
+
+
+    private void addFromStorage() throws AvaException {
+        ArrayList<String> taskStrings = storage.readStorage(FILE_NAME);
+        for (String task : taskStrings){
+            String[] parsed = task.split(",");
+
+            Task newTask = null;
+            if (parsed[0].contains(Todo.TASK_SIGN)) {
+                newTask = new Todo(parsed[2]);
+            } else if (parsed[0].contains(Deadline.TASK_SIGN) ) {
+                newTask = new Deadline(parsed[2] , parsed[3]);
+            } else if (parsed[0].contains(Event.TASK_SIGN) ) {
+                newTask = new Event(parsed[2] , parsed[3], parsed[4]);
+            } else {
+                //Uknown ouput
+            }
+            if (Boolean.valueOf(parsed[1])) {
+                newTask.mark();
+            }
+            tasks.add(newTask);
+            taskCount++;
+        }
+
     }
 
 
