@@ -67,7 +67,9 @@ public class Parser {
                 try {
                     info = command.substring(command.indexOf(" ") + 1);
                     //System.out.println(info);
+
                     for (int i = 0; i < tasks.size(); i++) {
+                        //if the existed task name contain info
                         if(tasks.get(i).getDescription().contains(info)) {
                             System.out.println(Indentation + Horizontal);
                             System.out.println(Indentation + "Here are the matching tasks in your list:");
