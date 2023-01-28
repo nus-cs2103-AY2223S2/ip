@@ -12,6 +12,7 @@ public class TaskDeadlineTest {
         TaskDeadlineTest.TEST_ESCAPED_DESC, 
         TaskDeadlineTest.TEST_END_DATE
     );
+    
     private static TaskDeadline getTestTask() {
         TaskDeadline task = new TaskDeadline(
             TaskDeadlineTest.TEST_UNESCAPED_DESC, 
