@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event task.
+ */
 public class Event extends Task {
     protected LocalDate from;
     protected LocalDate to;
@@ -27,6 +30,12 @@ public class Event extends Task {
         this.to = LocalDate.parse(to);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return a string representing an event task to be saved into the file
+     */
+    @Override
     public String interpretTaskToString() {
         return "E | " + this.getStatusIcon() + " | " + this.description + " | " + this.from + " | " + this.to;
     }

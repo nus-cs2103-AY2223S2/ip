@@ -6,6 +6,9 @@ import berry.storage.Storage;
 import berry.exception.BerryException;
 import berry.exception.IndexOutOfRangeException;
 
+/**
+ * Deletes a task identified by its last displayed index from the task list.
+ */
 public class DeleteCommand extends Command {
     private static int taskIndex;
 
@@ -13,6 +16,9 @@ public class DeleteCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
         if (tasks.isIndexWithinRange(taskIndex)) {

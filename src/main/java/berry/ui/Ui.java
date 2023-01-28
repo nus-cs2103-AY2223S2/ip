@@ -14,10 +14,16 @@ import java.util.Scanner;
 public class Ui {
     private static Scanner sc = new Scanner(System.in);
 
+    /** Divider line */
     public static void showLine() {
         System.out.println("✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦");
     }
 
+    /**
+     * Reads the user input.
+     *
+     * @return the user input as a string
+     */
     public static String readCommand() {
         return sc.nextLine();
     }
@@ -26,12 +32,12 @@ public class Ui {
         showLine();
         String logo =
                 " _______  _______  ______    ______    __   __ \n" +
-                        "|  _    ||       ||    _ |  |    _ |  |  | |  |\n" +
-                        "| |_|   ||    ___||   | ||  |   | ||  |  |_|  |\n" +
-                        "|       ||   |___ |   |_||_ |   |_||_ |       |\n" +
-                        "|  _   | |    ___||    __  ||    __  ||_     _|\n" +
-                        "| |_|   ||   |___ |   |  | ||   |  | |  |   |  \n" +
-                        "|_______||_______||___|  |_||___|  |_|  |___|  ";
+                "|  _    ||       ||    _ |  |    _ |  |  | |  |\n" +
+                "| |_|   ||    ___||   | ||  |   | ||  |  |_|  |\n" +
+                "|       ||   |___ |   |_||_ |   |_||_ |       |\n" +
+                "|  _   | |    ___||    __  ||    __  ||_     _|\n" +
+                "| |_|   ||   |___ |   |  | ||   |  | |  |   |  \n" +
+                "|_______||_______||___|  |_||___|  |_|  |___|  ";
         System.out.println(logo + "\nHey there! I'm Berry the Bunny~ ૮ ˶ᵔ ᵕ ᵔ˶ ა\n"
                 + "What are you looking to plan today?");
         showLine();
@@ -44,7 +50,6 @@ public class Ui {
     public static void showError(String message) {
         System.out.println(message);
     }
-
 
     public static void showListOfTasks(TaskList tasks) {
         ArrayList<Task> listOfTasks = tasks.getList();

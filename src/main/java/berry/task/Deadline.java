@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a deadline task.
+ */
 public class Deadline extends Task {
     protected LocalDate by;
 
@@ -24,6 +27,12 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return a string representing a deadline task to be saved into the file
+     */
+    @Override
     public String interpretTaskToString() {
         return "D | " + this.getStatusIcon() + " | " + this.description + " | " + this.by;
     }

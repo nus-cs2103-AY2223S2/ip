@@ -8,10 +8,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -31,6 +27,9 @@ public class Storage {
         this(DEFAULT_STORAGE_FILEPATH);
     }
 
+    /**
+     * @throws InvalidStorageFilePathException if the given file path is invalid
+     */
     public Storage(String filePath) throws InvalidStorageFilePathException {
         this.filePath = filePath;
         if (!isValidPath(filePath)) {
@@ -39,13 +38,18 @@ public class Storage {
     }
 
     /**
-     * Returns true if the given path is acceptable as a storage file.
-     * The file path is considered acceptable if it ends with '.txt'
+     * Returns true if the given path is valid as a storage file.
+     * The file path is considered valid if it ends with '.txt'
      */
     private static boolean isValidPath(String filePath) {
         return filePath.endsWith(".txt");
     }
 
+    /**
+     * Saves the data in the task list into the storage file.
+     *
+     * @param tasks are the tasks to be added into the storage file.
+     */
     public void saveTasks(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(createFile());
@@ -58,6 +62,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the data from this storage file to store into the task list.
+     *
+     * @return an empty task list if the file does not exist, or is not a regular file.
+     *      else returns a task list filled with tasks from the storage file.
+     * @throws FileNotFoundException if the file could not be found.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> listOfTasks = new ArrayList<Task>();
 
@@ -69,6 +80,11 @@ public class Storage {
         return listOfTasks;
     }
 
+    /**
+     * Creates a new file.
+     *
+     * @return the new file created if it does not exist, else returns the existing file.
+     */
     private File createFile() {
         File dataFile = new File(filePath);
         File folder =  new File(filePath.split("/")[0]);
