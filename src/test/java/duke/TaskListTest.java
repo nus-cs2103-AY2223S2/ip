@@ -21,10 +21,6 @@ public class TaskListTest {
         Task task1 = new Todo("return book");
         Task task2 = new Deadline("assignment", by);
         Task task3 = new Event("project meeting", from, to);
-        ArrayList<Task> listOfTasks = new ArrayList<>();
-        listOfTasks.add(task1);
-        listOfTasks.add(task2);
-        listOfTasks.add(task3);
         TaskList tasks = new TaskList();
 
         tasks.saveTask("return book");
