@@ -1,9 +1,11 @@
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
+package duke.duke;
+
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+
 public class Duke {
     private Ui ui;
     private Storage storage;

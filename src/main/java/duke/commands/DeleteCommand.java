@@ -1,7 +1,16 @@
+package duke.commands;
+
+import duke.duke.Ui;
+import duke.exceptions.DukeException;
+import duke.exceptions.StorerEmptyException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.tasks.Task;
+
 import java.io.IOException;
 public class DeleteCommand extends Command {
     private final int num;
-    DeleteCommand(int num) {
+    public DeleteCommand(int num) {
         this.num = num;
     }
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

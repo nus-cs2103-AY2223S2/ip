@@ -1,5 +1,10 @@
-import java.util.Scanner;
-import java.util.Arrays;
+package duke.duke;
+
+import duke.tasks.Deadlines;
+import duke.tasks.Events;
+import duke.commands.*;
+import duke.exceptions.*;
+
 import java.util.ArrayList;
 import java.util.List;
 public class Parser {
@@ -39,7 +44,10 @@ public class Parser {
                 c = new DeleteCommand(this.singleQueryInteger(line));
                 break;
             case "mark":
-                c = new MarkCommand(this.singleQueryInteger(line));
+                c = new MarkCommand(this.singleQueryInteger(line), true);
+                break;
+            case "unmark":
+                c = new MarkCommand(this.singleQueryInteger(line), false);
                 break;
 
             case "todo":

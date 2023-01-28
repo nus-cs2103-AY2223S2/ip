@@ -1,7 +1,9 @@
+package duke.tasks;
+
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-abstract class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected static final DateTimeFormatter FORMATTER =
@@ -39,12 +41,16 @@ abstract class Task {
         this.isDone = true;
     }
 
+    public void unmark() {
+        this.isDone = false;
+    }
+
     /**
      * Formats the task into a form where it will be dumped into data.txt.
      */
-    abstract String formatText();
+    public abstract String formatText();
 
-    abstract List<String> getKeywords();
+    public abstract List<String> getKeywords();
 
 
 }

@@ -1,8 +1,16 @@
+package duke.commands;
+
+import duke.duke.Todos;
+import duke.duke.Ui;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+
 import java.io.IOException;
 
 public class TodoCommand extends Command {
     private final Todos todo;
-    TodoCommand(Todos todo) {
+    public TodoCommand(Todos todo) {
         this.todo = todo;
     }
 

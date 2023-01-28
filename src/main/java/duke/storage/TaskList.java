@@ -1,11 +1,16 @@
+package duke.storage;
+
+import duke.tasks.Task;
+import duke.exceptions.StorerEmptyException;
+
 import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> storer;
 
-    TaskList(ArrayList<Task> storer) {
+    public TaskList(ArrayList<Task> storer) {
         this.storer = storer;
     }
-    TaskList() {
+    public TaskList() {
         this.storer = new ArrayList<Task>();
     }
     public void add(Task taskNew) {
@@ -36,6 +41,10 @@ public class TaskList {
     }
     public void markTask(int index) {
         this.storer.get(index - 1).mark();
+    }
+
+    public void unmarkTask(int index) {
+        this.storer.get(index - 1).unmark();
     }
 
     public Task get(int index) {

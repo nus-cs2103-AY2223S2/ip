@@ -1,3 +1,5 @@
+package duke.duke;
+
 import java.util.Scanner;
 public class Ui {
     private static String logo;

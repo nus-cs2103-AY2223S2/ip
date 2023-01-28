@@ -1,3 +1,7 @@
+package duke.duke;
+
+import duke.tasks.Task;
+
 import java.util.List;
 
 public class Todos extends Task {

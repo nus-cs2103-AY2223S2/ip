@@ -1,9 +1,17 @@
+package duke.commands;
+
+import duke.duke.Ui;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.tasks.Deadlines;
+
 import java.io.IOException;
 
 public class DeadLineCommand extends Command {
     private final Deadlines deadline;
 
-    DeadLineCommand(Deadlines deadline) {
+    public DeadLineCommand(Deadlines deadline) {
         this.deadline = deadline;
     }
 

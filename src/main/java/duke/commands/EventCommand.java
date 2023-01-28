@@ -1,9 +1,17 @@
+package duke.commands;
+
+import duke.duke.Ui;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.tasks.Events;
+
 import java.io.IOException;
 
 public class EventCommand extends Command {
     private final Events event;
 
-    EventCommand(Events event) {
+    public EventCommand(Events event) {
         this.event = event;
     }
 

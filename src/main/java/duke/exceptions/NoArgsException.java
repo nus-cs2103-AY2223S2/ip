@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class NoArgsException extends DukeException {
 
     public NoArgsException(String str) {
