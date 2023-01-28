@@ -1,14 +1,16 @@
 package data;
-import errors.DukeInvalidCommandException;
-import ui.Response;
-import task.Task;
+
 import java.util.ArrayList;
+
+import errors.DukeInvalidCommandException;
+import task.Task;
+import ui.Response;
+
 
 /**
  * Storage medium to manage tasks created by the user
  * @author Nicholas Lee
  */
-
 public class TaskManager {
 
     private final ArrayList<Task> taskList = new ArrayList<>();

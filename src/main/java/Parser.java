@@ -1,16 +1,15 @@
-import data.TaskManager;
-import errors.DukeInvalidCommandException;
-import errors.DukeRuntimeException;
-import ui.Format;
-import ui.Response;
-import task.Deadline;
-import task.Event;
-import task.ToDo;
-import utils.Utility;
-
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+import data.TaskManager;
+import errors.DukeInvalidCommandException;
+import errors.DukeRuntimeException;
+import task.Deadline;
+import task.Event;
+import task.ToDo;
+import ui.Format;
+import ui.Response;
+import utils.Utility;
 
 /**
  * Responsible for the high-level parsing of user inputs and delegating relevant actions
@@ -25,7 +24,8 @@ public class Parser {
     }
 
     /**
-     * This method is used to parse user input and obtain an integer representing the user's selection of an item from the task list.
+     * This method is used to parse user input and obtain an integer representing the
+     * user's selection of an item from the task list.
      *
      * @param input the raw input string provided by the user
      * @return an integer representing the user's selection of an item from the task list
@@ -94,7 +94,7 @@ public class Parser {
 
         Event event = new Event(details, startDate, endDate);
         taskManager.addTask(event);
-        output =  Response.EVENT_ADDED + "\n" + Format.displayTasks(false, taskManager);
+        output = Response.EVENT_ADDED + "\n" + Format.displayTasks(false, taskManager);
         return output;
     }
 
@@ -164,10 +164,10 @@ public class Parser {
         }
 
         if (isCompleted) {
-            output =  Response.COMPLETED_TASK + "\n" + Format.displayTasks(false, taskManager);
+            output = Response.COMPLETED_TASK + "\n" + Format.displayTasks(false, taskManager);
             return output;
         }
-        output =  Response.INCOMPLETE_TASK + "\n" + Format.displayTasks(false, taskManager);
+        output = Response.INCOMPLETE_TASK + "\n" + Format.displayTasks(false, taskManager);
         return output;
     }
 
@@ -248,6 +248,11 @@ public class Parser {
 
         case "find":
             output = findTaskEvent(input);
+
+        default:
+
+            output = "";
+            break;
         }
         return output;
     }

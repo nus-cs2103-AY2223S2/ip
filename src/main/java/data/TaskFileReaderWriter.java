@@ -1,14 +1,17 @@
 package data;
-import jdk.jshell.execution.Util;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Scanner;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.ToDo;
 import utils.Utility;
-
-import java.io.*;
-import java.time.LocalDateTime;
-import java.util.Scanner;
 
 /**
  * The TaskFileReaderWriter class provides methods for reading and writing tasks to and from a file.
@@ -67,21 +70,23 @@ public class TaskFileReaderWriter {
         Task newTask = null;
 
         switch (category) {
-            case "Deadline":
-                String deadline = taskArr[3];
-                LocalDateTime deadlineDate = Utility.convertStringToDateTime(deadline);
-                newTask = new Deadline(details, deadlineDate, isCompleted);
-                break;
-            case "Event":
-                String start = taskArr[3];
-                String end = taskArr[4];
-                LocalDateTime startDate = Utility.convertStringToDateTime(start);
-                LocalDateTime endDate = Utility.convertStringToDateTime(end);
-                newTask = new Event(details, startDate, endDate, isCompleted);
-                break;
-            case "To-Do":
-                newTask = new ToDo(details, isCompleted);
-                break;
+        case "Deadline":
+            String deadline = taskArr[3];
+            LocalDateTime deadlineDate = Utility.convertStringToDateTime(deadline);
+            newTask = new Deadline(details, deadlineDate, isCompleted);
+            break;
+        case "Event":
+            String start = taskArr[3];
+            String end = taskArr[4];
+            LocalDateTime startDate = Utility.convertStringToDateTime(start);
+            LocalDateTime endDate = Utility.convertStringToDateTime(end);
+            newTask = new Event(details, startDate, endDate, isCompleted);
+            break;
+        case "To-Do":
+            newTask = new ToDo(details, isCompleted);
+            break;
+        default:
+            break;
 
         }
         return newTask;
@@ -123,10 +128,9 @@ public class TaskFileReaderWriter {
                     isCompleted = toDoTask.isCompleted();
                     taskString = "To-Do|" + isCompleted + "|" + details;
                 }
-                fileWriter.write(taskString + System.getProperty( "line.separator" ));
+                fileWriter.write(taskString + System.getProperty("line.separator"));
             }
         } catch (IOException e) {
-            System.out.println(e.toString());
             e.printStackTrace();
             return false;
         }

@@ -1,18 +1,19 @@
 package utils;
-import errors.DukeInvalidCommandException;
-import ui.Response;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
+import errors.DukeInvalidCommandException;
+import ui.Response;
+
+
 /**
  * Utility class which contains functions for utility purposes, such as conversion of date and times
  * @author Nicholas Lee
  */
 public class Utility {
-
     // For user
 
     /**
@@ -23,7 +24,8 @@ public class Utility {
      */
     public static LocalDateTime parseDateTime(String dateTimeString) throws DukeInvalidCommandException {
         LocalDateTime dateTime;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm").withResolverStyle(ResolverStyle.LENIENT);;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm")
+                .withResolverStyle(ResolverStyle.LENIENT);
         try {
             dateTime = LocalDateTime.parse(dateTimeString, formatter);
         } catch (DateTimeParseException e) {
@@ -31,6 +33,7 @@ public class Utility {
         }
         return dateTime;
     }
+
 
     /**
      * Takes a LocalDateTime object as input and converts it to a string
@@ -43,7 +46,6 @@ public class Utility {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
         return dateTime.format(formatter);
     }
-
 
 
     // For read-write operations
@@ -73,5 +75,4 @@ public class Utility {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         return dateTime.format(formatter);
     }
-
 }
