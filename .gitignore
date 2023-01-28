@@ -22,3 +22,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 *.class
 /docs
 /.vscode/
+*.txt
