@@ -70,6 +70,10 @@ public class Parser {
             } catch(StringIndexOutOfBoundsException e) {
                 throw new DukeException(firstWord);
             }
+        case "find":
+            description = command.substring(5);
+            tasks.findTask(description);
+            break;
         default:
             throw new DukeException();
         }

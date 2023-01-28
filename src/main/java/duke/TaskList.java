@@ -68,6 +68,17 @@ public class TaskList {
         }
     }
 
+    public void findTask(String description) {
+        ArrayList<Task> matchedListOfTasks = new ArrayList<>();
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            Task task = listOfTasks.get(i);
+            if (task.toString().indexOf(description) > 0) {
+                matchedListOfTasks.add(task);
+            }
+        }
+        ui.printMatchingTasks(matchedListOfTasks);
+    }
+
     public ArrayList<Task> getListOfTasks() {
         return listOfTasks;
     }
