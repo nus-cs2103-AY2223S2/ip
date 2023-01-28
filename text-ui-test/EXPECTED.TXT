@@ -9,35 +9,35 @@ Hello! I'm Duke
 What can I do for you?
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [T][ ] read book
  Now you have 1 tasks in the list.
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [D][ ] return book (by: Oct 15 2019 06:00 PM)
  Now you have 2 tasks in the list.
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
  Now you have 3 tasks in the list.
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [T][ ] join sports club
  Now you have 4 tasks in the list.
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-Nice! I've marked this task as done:
+Nice! I've marked this duke.task as done:
 [T][X] read book
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-Nice! I've marked this task as done:
+Nice! I've marked this duke.task as done:
 [T][X] join sports club
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [T][ ] borrow book
  Now you have 5 tasks in the list.
 --------------------------------------------------------------------
@@ -50,28 +50,28 @@ Got it. I've added this task:
 
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [D][ ] return book (by: Dec 2 2023 01:50 PM)
  Now you have 6 tasks in the list.
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [E][ ] project meeting (from: Mon 2pm to: 4pm)
  Now you have 7 tasks in the list.
 --------------------------------------------------------------------
-DukeException: ☹ OOPS!!! I'm sorry, but list cannot have a description.
+duke.exception.DukeException: ☹ OOPS!!! I'm sorry, but list cannot have a description.
 --------------------------------------------------------------------
-DukeException: ☹ OOPS!!! The description of a todo cannot be empty.
+duke.exception.DukeException: ☹ OOPS!!! The description of a todo cannot be empty.
 --------------------------------------------------------------------
-DukeException: ☹ OOPS!!! The format of a deadline: deadline {activity} /by {date}.
+duke.exception.DukeException: ☹ OOPS!!! The format of a deadline: deadline {activity} /by {date}.
 --------------------------------------------------------------------
-DukeException: ☹ OOPS!!! The format of a event: event {activity} /from {datetime} /to {datetime}.
+duke.exception.DukeException: ☹ OOPS!!! The format of a event: event {activity} /from {datetime} /to {datetime}.
 --------------------------------------------------------------------
 --------------------------------------------------------------------
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-Noted. I've removed this task:
+Noted. I've removed this duke.task:
 [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
  Now you have 6 tasks in the list.
 --------------------------------------------------------------------
@@ -85,7 +85,7 @@ Noted. I've removed this task:
 
 --------------------------------------------------------------------
 --------------------------------------------------------------------
-Noted. I've removed this task:
+Noted. I've removed this duke.task:
 [D][ ] return book (by: Oct 15 2019 06:00 PM)
  Now you have 5 tasks in the list.
 --------------------------------------------------------------------

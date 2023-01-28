@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 public abstract class Command {
     public abstract boolean execute(Storage tasks, Ui ui, Storage storage);
 
@@ -7,7 +13,7 @@ public abstract class Command {
 
     public static boolean checkCommand(String cmd) throws DukeException {
         String cmdtype = cmd.split(" ")[0];
-        // check that command list must not have any more description
+        // check that duke.command list must not have any more description
         if (cmdtype.equals("list") && cmdtype.length() != cmd.length()) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but list cannot have a description.");
         } else if (cmdtype.equals("todo") && cmdtype.length() == cmd.length()) {

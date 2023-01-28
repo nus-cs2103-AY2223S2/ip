@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.Event;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.ui.Ui;
 public class EventCommand extends Command {
     private String activity;
     private String from;
@@ -22,7 +29,7 @@ public class EventCommand extends Command {
     public boolean execute(Storage tl, Ui ui, Storage storage) {
         Task t = new Event(activity, from, to);
         tl.addTask(t);
-        System.out.println("Got it. I've added this task:\n" + t
+        System.out.println("Got it. I've added this duke.task:\n" + t
                 + "\n Now you have " + tl.getSize() + " tasks in the list.");
         return true;
     }

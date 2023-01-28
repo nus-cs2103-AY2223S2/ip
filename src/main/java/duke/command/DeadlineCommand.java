@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.ui.Ui;
+
 public class DeadlineCommand extends Command {
     private String activity;
     private String date;
@@ -21,7 +29,7 @@ public class DeadlineCommand extends Command {
     public boolean execute(Storage tl, Ui ui, Storage storage) {
         Task t = new Deadline(this.activity, this.date, this.time);
         tl.addTask(t);
-        System.out.println("Got it. I've added this task:\n" + t
+        System.out.println("Got it. I've added this duke.task:\n" + t
                 + "\n Now you have " + tl.getSize() + " tasks in the list.");
         return true;
     }
