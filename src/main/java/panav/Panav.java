@@ -12,7 +12,9 @@ import panav.ui.Ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
+/**
+ * The class where Panav starts. It contains the main() and all functionality starts here.
+ */
 public class Panav {
     private Storage storage;
     private TaskList tasks;
@@ -31,6 +33,10 @@ public class Panav {
 
     }
 
+    /**
+     * The method which is called as soon as Panav is loaded up. Controls the flow of the
+     * program and runs till user types 'bye'.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

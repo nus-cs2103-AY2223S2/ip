@@ -6,6 +6,9 @@ import panav.storage.Storage;
 import panav.task.TaskList;
 import panav.ui.Ui;
 
+/**
+ * Class to encapsulate a 'mark' or 'unmark' command, extends from Command.
+ */
 public class EditCommand extends Command {
 
     private String fullCommand;
@@ -16,6 +19,13 @@ public class EditCommand extends Command {
     }
     public final String COMMAND_WORD = this.isMark ? "mark" : "unmark";
 
+    /**
+     * Specifies the behaviour of 'mark' or 'unmark' command when called to execute. Reads from the user
+     * input the task index, and either marks or unmarks the task in the list.
+     * @param tasks the list of tasks.
+     * @param ui ui to interact with user.
+     * @param storage storage to read/write text in file.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showLine();
         try {

@@ -6,6 +6,9 @@ import panav.task.Task;
 import panav.task.TaskList;
 import panav.ui.Ui;
 
+/**
+ * Class to encapsulate a 'event' command, extends from Command.
+ */
 public class EventCommand extends Command {
 
     public static final String COMMAND_WORD = "event";
@@ -18,6 +21,13 @@ public class EventCommand extends Command {
         this.to = to;
     }
 
+    /**
+     * Specifies the behaviour of 'event' command when called to execute. Creates a new event
+     * with the provided information and adds it to the list of tasks.
+     * @param tasks the list of tasks.
+     * @param ui ui to interact with user.
+     * @param storage storage to read/write text in file.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task curr = new Event(eventMessage, from, to);
         tasks.addTask(curr);

@@ -7,6 +7,9 @@ import panav.task.Task;
 import panav.task.TaskList;
 import panav.ui.Ui;
 
+/**
+ * Class to encapsulate a 'delete' command, extends from Command.
+ */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
@@ -15,6 +18,14 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
+
+    /**
+     * Specifies the behaviour of 'delete' command when called to execute. It reads from user
+     * input the task index and removes that task from the list of tasks.
+     * @param tasks the list of tasks.
+     * @param ui ui to interact with user.
+     * @param storage storage to read/write text in file.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int deleteIndex = readNumber(fullCommand, tasks.getLength());
