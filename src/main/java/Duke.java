@@ -102,97 +102,70 @@ public class Duke {
         }
     }
 
-    public static class Task {
-        protected  String description;
-        protected boolean isDone;
+//    public static class Task {
+//
+//    }
 
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
+//    public static class ToDo extends Task {
+//        private final String taskType = "[T]";
+//
+//        public ToDo(String description) {
+//            super(description);
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return taskType + super.toString();
+//        }
+//    }
 
-        public String getStatusIcon() {
-            return (isDone ? "[X]" : "[ ]"); // mark done task with X
-        }
+//    public static class Deadline extends Task {
+//        private final String taskType = "[D]";
+//        private String byString;
+//
+//        public Deadline(String description, String by) {
+//            super(description);
+//            this.byString = by;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return taskType + super.toString() + " (by: " + this.byString + ")";
+//        }
+//    }
 
-        @Override
-        public String toString() {
-            return getStatusIcon() + " " + this.description;
-        }
+//    public static class Event extends Task{
+//        private final String taskType = "[E]";
+//        private String startTime;
+//        private String endTime;
+//
+//        public Event(String description, String startTime, String endTime) {
+//            super(description);
+//            this.startTime = startTime;
+//            this.endTime = endTime;
+//        }
+//
+//        @Override
+//        public String toString() {
+//            return taskType + super.toString() + " (from: " + this.startTime + " to: " + this.endTime + ")";
+//        }
+//    }
 
-        public void markAsDone() {
-            this.isDone = true;
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(this);
-        }
-
-        public void markAsNotDone() {
-            this.isDone = false;
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(this);
-        }
-    }
-
-    public static class ToDo extends Task {
-        private final String taskType = "[T]";
-
-        public ToDo(String description) {
-            super(description);
-        }
-
-        @Override
-        public String toString() {
-            return taskType + super.toString();
-        }
-    }
-
-    public static class Deadline extends Task {
-        private final String taskType = "[D]";
-        private String byString;
-
-        public Deadline(String description, String by) {
-            super(description);
-            this.byString = by;
-        }
-
-        @Override
-        public String toString() {
-            return taskType + super.toString() + " (by: " + this.byString + ")";
-        }
-    }
-
-    public static class Event extends Task{
-        private final String taskType = "[E]";
-        private String startTime;
-        private String endTime;
-
-        public Event(String description, String startTime, String endTime) {
-            super(description);
-            this.startTime = startTime;
-            this.endTime = endTime;
-        }
-
-        @Override
-        public String toString() {
-            return taskType + super.toString() + " (from: " + this.startTime + " to: " + this.endTime + ")";
-        }
-    }
-
-    public static class DukeException extends Exception {
-         public DukeException() {
-             super();
-         }
-
-         public DukeException(String message, Throwable cause) {
-             super(message, cause);
-         }
-
-        public DukeException(String message) {
-            super(message);
-        }
-
-        public DukeException(Throwable cause) {
-            super(cause);
-        }
-    }
+//    public static class DukeException extends Exception {
+//         public DukeException() {
+//             super();
+//         }
+//
+//         public DukeException(String message, Throwable cause) {
+//             super(message, cause);
+//         }
+//
+//        public DukeException(String message) {
+//            super(message);
+//        }
+//
+//        public DukeException(Throwable cause) {
+//            super(cause);
+//        }
+//    }
 }
