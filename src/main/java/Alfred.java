@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -48,6 +51,15 @@ public class Alfred {
                     Alfred.unmarkItem(lineArr[1]);
                 } else if (command.equals("delete") && lineArr.length == 2) {
                     Alfred.deleteItem(lineArr[1]);
+                } else if (command.equals("list") && lineArr.length == 2){
+                    String second = lineArr[1];
+                    try {
+                        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy");
+                        LocalDate date = LocalDate.parse(second, format);
+                        Alfred.listItems(date);
+                    } catch (DateTimeParseException e) {
+                        throw new AlfredException("The date format should be given as dd/mm/yyyy\n");
+                    }
                 } else {
                     Alfred.addItem(commandLine);
                 }
@@ -136,13 +148,14 @@ public class Alfred {
     private static void addItem(String commandLine) throws AlfredException {
         String[] commandArr = commandLine.split(" ", 2);
         String typeTask = commandArr[0];
+        String[] descriptionArr;
         String[] lineArr;
         Task task;
         // Handling the type of task
         switch (typeTask) {
             case "todo":
                 if (commandArr.length == 1) {
-                    throw new AlfredException("The description of a todo cannot be empty");
+                    throw new AlfredException("The description of a todo cannot be empty\n");
                 }
                 task = new ToDo(commandArr[1]);
                 itemsList.add(task);
@@ -151,22 +164,40 @@ public class Alfred {
                 lineArr = commandLine.split("/by ");
                 if (lineArr.length == 1) {
                     throw new AlfredException("Deadlines should have a due date ." +
-                            "Eg: \"<TaskName> /by <DueDate>\"");
+                            "Eg: \"<TaskName> /by <DueDate>\"\n");
                 }
-                task = new Deadline(lineArr[0], lineArr[1]);
-                itemsList.add(task);
-                break;
+                descriptionArr = lineArr[0].split(" ", 2);
+                if (descriptionArr.length == 1) {
+                    throw new AlfredException("Deadlines should have a due date ." +
+                            "Eg: \"<TaskName> /by <DueDate>\"\n");
+                }
+                try {
+                    task = new Deadline(descriptionArr[1], lineArr[1]);
+                    itemsList.add(task);
+                    break;
+                } catch (DateTimeParseException e) {
+                    throw new AlfredException("The date format should be given as dd/mm/yyyy 24hr-time\n");
+                }
             case "event": // need to consider what if no '/from' and '/or is not given?
                 lineArr = commandLine.split("/from | /to ");
                 if (lineArr.length < 2) { // not sure how to check if theres /from and /to
                     throw new AlfredException("Events should have start and end time. " +
-                            "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"");
+                            "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"\n");
                 }
-                task = new Event(lineArr[0], lineArr[1], lineArr[2]);
-                itemsList.add(task);
-                break;
+                descriptionArr = lineArr[0].split(" ", 2);
+                if (descriptionArr.length == 1) {
+                    throw new AlfredException("Events should have start and end time. " +
+                            "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"\n");
+                }
+                try {
+                    task = new Event(descriptionArr[1], lineArr[1], lineArr[2]);
+                    itemsList.add(task);
+                    break;
+                } catch (DateTimeParseException e) {
+                    throw new AlfredException("The date format should be given as dd/mm/yyyy 24hr-time\n");
+                }
             default:
-                throw new AlfredException("I'm sorry, but I don't know what that means :<");
+                throw new AlfredException("I'm sorry, but I don't know what that means :<\n");
         }
         // Alfred's response to remaining tasks
         String numTasks = itemsList.size() == 1 ? "task" : "tasks";
@@ -235,6 +266,25 @@ public class Alfred {
         }
         String numTasks = itemsList.size() == 1 ? "task" : "tasks";
         command.append(String.format("    You have %d %s in the list\n", itemsList.size(), numTasks));
+        Alfred.echoCommand(command.toString());
+    }
+
+    private static void listItems(LocalDate date) {
+        int itemIndex = 1;
+        String initial = String.format("Here are your pending tasks on %s: \n", date);
+        StringBuilder command = new StringBuilder(initial);
+        if (itemsList.isEmpty()) {
+            Alfred.echoCommand("Woohoo! You have no pending tasks\n");
+            return;
+        }
+        for (Task item : itemsList) {
+            if (item.containsDate(date)) {
+                command.append(String.format("    %d. %s\n", itemIndex, item));
+                itemIndex++;
+            }
+        }
+        String numTasks = itemIndex == 1 ? "task" : "tasks";
+        command.append(String.format("    You have %d %s on %s in the list\n", itemIndex - 1, numTasks, date));
         Alfred.echoCommand(command.toString());
     }
 

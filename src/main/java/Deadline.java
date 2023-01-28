@@ -1,10 +1,20 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    protected String deadline;
+    protected LocalDateTime deadline;
 
     public Deadline(String description, String deadline) {
         super(description);
-        this.deadline = deadline;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        this.deadline = LocalDateTime.parse(deadline, format);
+    }
+
+    @Override
+    public boolean containsDate(LocalDate date) {
+        return deadline.toLocalDate().isEqual(date);
     }
     @Override
     public String addToFile() {
@@ -14,8 +24,9 @@ public class Deadline extends Task {
     }
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
         return String.format("[D][%s] %s(by: %s)",
                 this.isDone ? "X" : " ", this.description,
-                this.deadline);
+                this.deadline.format(formatter));
     }
 }
