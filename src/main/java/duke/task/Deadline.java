@@ -9,8 +9,8 @@ public class Deadline extends Task {
         private LocalDate bydate;
         private LocalTime bytime;
 
-        public Deadline(String description, String bydate, String bytime) {
-            super(description);
+        public Deadline(String activity, String bydate, String bytime) {
+            super(activity);
             this.bydate = LocalDate.parse(bydate);
             this.bytime = LocalTime.parse(bytime, DateTimeFormatter.ofPattern("HHmm"));
         }
