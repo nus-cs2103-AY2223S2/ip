@@ -1,7 +1,6 @@
 package duke;
 
-import java.io.*;
-
+import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 
 import duke.command.*;
@@ -9,12 +8,19 @@ import duke.exception.*;
 import duke.task.*;
 import duke.util.*;
 
-
+/**
+ * Duke class: serves as the entry class to the application
+ */
 public class Duke {
     private TaskList taskList;
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * Duke class constructor
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         ui.printWelcome();
@@ -26,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Read and process user commands
+     */
     public void run() {
         boolean terminate = false;
 

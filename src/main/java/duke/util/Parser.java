@@ -4,8 +4,14 @@ import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+/**
+ * Parser class: handles user inputs
+ */
 public class Parser {
 
+    /**
+     * Enum CommandType to identify different commands
+     */
     private enum CommandType {
         BYE,
         LIST,
@@ -16,6 +22,17 @@ public class Parser {
         DEADLINE,
         EVENT
     }
+
+    /**
+     * Parse user input into an executable command
+     *
+     * @param input User inputs as String
+     * @param taskList Existing TaskList
+     * @param ui Instance of Ui
+     * @param storage Instance of Storage
+     * @return command
+     * @throws DukeException Checks for invalid inputs
+     */
     public static Command parse(String input, TaskList taskList, Ui ui, Storage storage)
             throws DukeException {
 
@@ -49,6 +66,7 @@ public class Parser {
                     return new EventCommand(input, taskList, ui);
 
                 default:
+                    // Should not reach here
                     throw new DukeException("☹ OOPS!!! Something went wrong.");
             }
         } catch (IllegalArgumentException e) {
