@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.Iterator;
 import java.util.List;
 import java.io.File;
@@ -25,12 +24,47 @@ public class Duke {
             String description = currLine[2];
             switch (type) {
                 case "D": {
-                    String deadline = currLine[3];
-                    newTask = new Deadline(description, deadline);
+                    String[] deadline = currLine[3].split(" ");
+                    String[] date = deadline[0].split("/");
+                    for (int i = 0; i < date.length; i++) {
+                        if (date[i].length() < 2) {
+                            date[i] = "0" + date[i];
+                        }
+                    }
+                    String newDate = date[2] + "-" + date[1] + "-" + date[0];
+                    if (deadline.length == 1) {
+                        newTask = new Deadline(description, newDate);
+                    } else {
+                        String[] time = deadline[1].split("");
+                        String newTime = time[0] + time[1] + ":" + time[2] + time[3];
+                        newTask = new Deadline(description, newDate, newTime);
+                    }
                     break;
                 }
                 case "E": {
-                    newTask = new Event(description, currLine[3], currLine[4]);
+                    String[] start = currLine[3].split(" ");
+                    String[] end = currLine[4].split(" ");
+                    String[] startDate = start[0].split("/");
+                    String[] endDate = end[0].split("/");
+                    for (int i = 0; i < startDate.length; i++) {
+                        if (startDate[i].length() < 2) {
+                            startDate[i] = "0" + startDate[i];
+                        }
+                        if (endDate[i].length() < 2) {
+                            endDate[i] = "0" + endDate[i];
+                        }
+                    }
+                    String newStartDate = startDate[2] + "-" + startDate[1] + "-" + startDate[0];
+                    String newEndDate = endDate[2] + "-" + endDate[1] + "-" + endDate[0];
+                    if (start.length > 1) {
+                        String[] startTime = start[1].split("");
+                        String newStartTime = startTime[0] + startTime[1] + ":" + startTime[2] + startTime[3];
+                        String[] endTime = end[1].split("");
+                        String newEndTime = endTime[0] + endTime[1] + ":" + endTime[2] + endTime[3];
+                        newTask = new Event(description, newStartDate, newEndDate, newStartTime, newEndTime);
+                    } else {
+                        newTask = new Event(description, newStartDate, newEndDate);
+                    }
                     break;
                 }
                 default: {
