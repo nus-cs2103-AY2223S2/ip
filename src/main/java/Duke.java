@@ -2,33 +2,47 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+class DukeException extends Exception {
+
+    public DukeException(String errorMessage){
+        super(errorMessage);
+    }
+}
 public class Duke {
 
     private static List<Task> toDoList = new ArrayList<>();
-    private static void talk(){
+    private static boolean talk() throws DukeException{
         Scanner myObj = new Scanner(System.in);
         String inp = myObj.nextLine();
+        if (inp.equals("")) {
+            throw new DukeException("Empty Input!");
+        }
         String[] inpArr = inp.split(" ");
         while (!inp.equals("bye")) {
             if (inp.equals("list")) {
                 list();
-            } else if (inpArr[0].equals("mark")){
-                toDoList.get(Integer.parseInt(inpArr[1])-1).markDone();
-            } else if (inpArr[0].equals("unmark")){
-                toDoList.get(Integer.parseInt(inpArr[1])-1).markUndone();
+            } else if (inpArr[0].equals("mark")) {
+                toDoList.get(Integer.parseInt(inpArr[1]) - 1).markDone();
+            } else if (inpArr[0].equals("unmark")) {
+                toDoList.get(Integer.parseInt(inpArr[1]) - 1).markUndone();
             } else {
                 // add tasks
-                if (inp.substring(0,4).equals("todo")){
+                if (inpArr[0].equals("todo")) {
+                    if (inp.length() == 4) {
+                        throw new DukeException("Description cannot be empty!");
+                    }
                     ToDo newToDo = new ToDo(inp.substring(5));
                     toDoList.add(newToDo);
-                } else if (inp.substring(0,8).equals("deadline")) {
+                } else if (inpArr[0].equals("deadline")) {
                     String[] processedString = stringProcessor(true, inp.substring(9));
                     Deadline newDeadline = new Deadline(processedString[0], processedString[1]);
                     toDoList.add(newDeadline);
-                } else {
+                } else if (inpArr[0].equals("event")){
                     String[] processedString = stringProcessor(false, inp.substring(6));
                     Event newEvent = new Event(processedString[0], processedString[1], processedString[2]);
                     toDoList.add(newEvent);
+                } else {
+                    throw new DukeException("Invalid Input!");
                 }
                 System.out.println("added >.<");
             }
@@ -36,6 +50,7 @@ public class Duke {
             inpArr = inp.split(" ");
         }
         System.out.println("Bye. Hope to see you again soon!");
+        return false;
     }
 
     private static String[] stringProcessor(boolean isDeadline, String s){ // isDeadline = false meaning isEvent
@@ -80,7 +95,14 @@ public class Duke {
         String name = "chatty bot";
         System.out.println("Hello from " + name);
         System.out.println("talk to me :)");
-        talk();
+        boolean isRunning = true;
+        while (isRunning) {
+            try {
+                isRunning = talk();
+            } catch (DukeException e) {
+                System.out.println(e.toString());
+            }
+        }
     }
 
 
