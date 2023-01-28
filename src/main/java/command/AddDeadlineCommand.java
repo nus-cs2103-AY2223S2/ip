@@ -33,7 +33,7 @@ public class AddDeadlineCommand extends Command {
         }
 
         String task = req[0].strip();
-        String deadline = req[1].trim();
+        String deadline = req[1].strip();
 
         try {
             LocalDate dueDate = LocalDate.parse(deadline);

@@ -33,6 +33,6 @@ public class Event extends Task {
         String statusIcon = this.completed ? "X" : " ";
         String formatted_start = from.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
         String formatted_end = to.format(DateTimeFormatter.ofPattern("MMM dd yyy"));
-        return "[E][" + statusIcon + "] " + this.task + "(from: " + formatted_start + " to: " + formatted_end + ")";
+        return "[E][" + statusIcon + "] " + this.task + " (from: " + formatted_start + " to: " + formatted_end + ")";
     }
 }

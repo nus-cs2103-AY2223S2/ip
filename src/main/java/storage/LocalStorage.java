@@ -53,9 +53,9 @@ public class LocalStorage {
             while (line != null) {
                 try {
                     String[] args = line.split("\\|");
-                    String task_type = args[0].trim();
-                    String task_status = args[1].trim();
-                    String task_desc = args[2];
+                    String task_type = args[0].strip();
+                    String task_status = args[1].strip();
+                    String task_desc = args[2].strip();
                     switch (task_type) {
                         case "T":
                             Todo todo = new Todo(task_desc);
@@ -65,7 +65,7 @@ public class LocalStorage {
                             tasks.add(todo);
                             break;
                         case "D":
-                            String due_date = args[3].trim();
+                            String due_date = args[3].strip();
                             try {
                                 LocalDate dueDate = LocalDate.parse(due_date);
                                 Deadline deadline = new Deadline(task_desc, dueDate);
@@ -78,8 +78,8 @@ public class LocalStorage {
                                 throw new InvalidArgumentException("Wrong date format! Please follow the format YYYY-MM-DD (e.g. 2000-01-01)");
                             }
                         case "E":
-                            String from = args[3].trim();
-                            String to = args[4].trim();
+                            String from = args[3].strip();
+                            String to = args[4].strip();
                             try {
                                 LocalDate startDate = LocalDate.parse(from);
                                 LocalDate endDate = LocalDate.parse(to);
