@@ -1,20 +1,22 @@
 package storage;
 
-import exception.DukeException;
-import exception.InvalidArgumentException;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+import exception.DukeException;
+import exception.InvalidArgumentException;
 
+/**
+ * Represents the Storage class that handles saving and loading the task list
+ */
 public class Storage {
     private Path path;
 
@@ -22,6 +24,10 @@ public class Storage {
         this.path = Paths.get("./data/duke.txt");
     }
 
+    /**
+     * Handles saving the task list to local storage
+     * @param todoList The task list to be saved
+     */
     public void saveTaskList(TaskList todoList) {
         // Convert TaskList into ArrayList<String>
         ArrayList<String> todoStringList = todoList.getDataList();
@@ -42,6 +48,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Handles loading the task list to local storage
+     */
     public TaskList loadTaskList() {
         List<String> lines = Collections.emptyList();
 
@@ -55,7 +64,7 @@ public class Storage {
 
         TaskList res = new TaskList();
         if (!lines.isEmpty()) {
-            lines.forEach(line -> {
+            lines.forEach((String line) -> {
                 // Split up the line
                 String[] lineArr = line.split("\\|");
 
@@ -77,8 +86,8 @@ public class Storage {
                     try {
                         byDate = LocalDate.parse(by);
                     } catch (DateTimeParseException e) {
-                        throw new InvalidArgumentException("Start date format should be in the format " +
-                                "YYYY-MM-DD (e.g. 2007-12-03)");
+                        throw new InvalidArgumentException("Start date format should be in the format "
+                                + "YYYY-MM-DD (e.g. 2007-12-03)");
                     }
                     task = new Deadline(content, byDate);
                     break;
@@ -95,8 +104,8 @@ public class Storage {
                         fromDate = LocalDate.parse(from);
                         toDate = LocalDate.parse(to);
                     } catch (DateTimeParseException e) {
-                        throw new InvalidArgumentException("Start date format should be in the format " +
-                                "YYYY-MM-DD (e.g. 2007-12-03)");
+                        throw new InvalidArgumentException("Start date format should be in the format "
+                                + "YYYY-MM-DD (e.g. 2007-12-03)");
                     }
 
                     task = new Event(content, fromDate, toDate);

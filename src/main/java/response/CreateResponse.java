@@ -27,16 +27,16 @@ public class CreateResponse extends Response {
      * @return String to indicate that a new task was created successfully
      */
     @Override
-    public String exec(TaskList taskList) throws MissingArgumentException{
+    public String exec(TaskList taskList) throws MissingArgumentException {
         if (this.todo.equals("")) {
             throw new MissingArgumentException("The description of a todo cannot be empty.");
         }
         Todo newTodo = new Todo(this.todo);
         taskList.createToDo(newTodo);
         return String.format(
-                "Alright! This task has been added into the list:" +
-                        "\n\t   %s" +
-                        "\n\t Now you have %d task(s) in the list.",
+                "Alright! This task has been added into the list:"
+                        + "\n\t   %s"
+                        + "\n\t Now you have %d task(s) in the list.",
                 newTodo,
                 taskList.count());
     }

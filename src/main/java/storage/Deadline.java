@@ -3,6 +3,9 @@ package storage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the Deadline task
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;

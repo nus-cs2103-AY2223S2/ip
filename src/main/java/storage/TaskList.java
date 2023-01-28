@@ -12,7 +12,7 @@ public class TaskList {
     /**
      * Represents the to do list
      */
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     /**
      * Creates an empty ArrayList of Strings as an empty to do list
@@ -65,7 +65,7 @@ public class TaskList {
      * @param i The index of the task to unmark
      * @return Returns the unmarked task for printing
      */
-    public Task unmark(Integer i) throws InvalidArgumentException{
+    public Task unmark(Integer i) throws InvalidArgumentException {
         try {
             Task curr = this.taskList.get(i - 1);
             curr.unmarkAsDone();
@@ -100,9 +100,7 @@ public class TaskList {
 
     public ArrayList<String> getDataList() {
         ArrayList<String> res = new ArrayList<>();
-        this.taskList.forEach(task -> {
-            res.add(task.toData());
-        });
+        this.taskList.forEach(task -> res.add(task.toData()));
         return res;
     }
 }

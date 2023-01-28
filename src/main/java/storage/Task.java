@@ -49,6 +49,10 @@ public class Task {
         return String.format("[%s] %s", status, this.description);
     }
 
+    /**
+     * Converts each task into a String in the data format to be saved
+     * @return String formatted into data to be saved
+     */
     public String toData() {
         int status = this.isDone ? 1 : 0;
         return String.format("%d | %s", status, this.description);

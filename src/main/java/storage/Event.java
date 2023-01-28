@@ -3,6 +3,9 @@ package storage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents the Event task
+ */
 public class Event extends Task {
 
     protected LocalDate from;

@@ -2,14 +2,21 @@ package parser;
 
 import exception.InvalidArgumentException;
 import exception.MissingArgumentException;
-import response.*;
+import response.CreateResponse;
+import response.DeadlineResponse;
+import response.DeleteResponse;
+import response.EventResponse;
+import response.ListResponse;
+import response.MarkResponse;
+import response.Response;
+import response.UnMarkResponse;
 
 /**
  * Represents the parser for the user input
  */
 public class Parser {
 
-    private enum Types {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE}
+    private enum Types { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE }
 
     /**
      * Represents the user input
@@ -34,30 +41,30 @@ public class Parser {
     public Response parse() throws MissingArgumentException, InvalidArgumentException {
         categorisation();
         switch (this.inputType) {
-            case "LIST":
-                return new ListResponse();
-            case "MARK":
-                return new MarkResponse(this.inputContent);
-            case "UNMARK":
-                return new UnMarkResponse(this.inputContent);
-            case "TODO":
-                return new CreateResponse(this.inputContent);
-            case "DEADLINE":
-                return new DeadlineResponse(this.inputContent);
-            case "EVENT":
-                return new EventResponse(this.inputContent);
-            case "DELETE":
-                return new DeleteResponse(this.inputContent);
-            default:
-                throw new MissingArgumentException(
-                        "I'm sorry, but I don't know what that means :-(" +
-                                "\n\t  To create a new todo, use 'todo ...'," +
-                                "\n\t  To create a new event, use 'event ... /from ... /to ...'," +
-                                "\n\t  To create a new deadline, use 'deadline ... /by ...'," +
-                                "\n\t  To list all tasks, use 'list'," +
-                                "\n\t  To mark a task, use 'mark ' with a number," +
-                                "\n\t  To unmark a task, use 'unmark ' with a number," +
-                                "\n\t  Finally to exit the program, use 'bye'!");
+        case "LIST":
+            return new ListResponse();
+        case "MARK":
+            return new MarkResponse(this.inputContent);
+        case "UNMARK":
+            return new UnMarkResponse(this.inputContent);
+        case "TODO":
+            return new CreateResponse(this.inputContent);
+        case "DEADLINE":
+            return new DeadlineResponse(this.inputContent);
+        case "EVENT":
+            return new EventResponse(this.inputContent);
+        case "DELETE":
+            return new DeleteResponse(this.inputContent);
+        default:
+            throw new MissingArgumentException(
+                    "I'm sorry, but I don't know what that means :-("
+                            + "\n\t  To create a new todo, use 'todo ...',"
+                            + "\n\t  To create a new event, use 'event ... /from ... /to ...',"
+                            + "\n\t  To create a new deadline, use 'deadline ... /by ...',"
+                            + "\n\t  To list all tasks, use 'list',"
+                            + "\n\t  To mark a task, use 'mark ' with a number,"
+                            + "\n\t  To unmark a task, use 'unmark ' with a number,"
+                            + "\n\t  Finally to exit the program, use 'bye'!");
         }
     }
 
@@ -109,7 +116,7 @@ public class Parser {
                 Types.valueOf(currType); // checking if currType exists in Types
                 this.inputType = currType;
                 this.inputContent = arrStr[1];
-            } catch  (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 throw new InvalidArgumentException("Remember to specify the type of request in your input!");
             }
         } else if (arrStr.length == 1) { // user input is only one word

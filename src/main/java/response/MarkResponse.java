@@ -1,8 +1,8 @@
 package response;
 
 import exception.InvalidArgumentException;
-import storage.TaskList;
 import storage.Task;
+import storage.TaskList;
 
 /**
  * Represents a response to mark a task in the to do list
@@ -13,6 +13,11 @@ public class MarkResponse extends Response {
      */
     private Integer idxToMark;
 
+    /**
+     * Constructor for the MarkResponse class
+     * @param inputContent String that contains the index to mark
+     * @throws InvalidArgumentException when a user inputs anything other than an integer
+     */
     public MarkResponse(String inputContent) throws InvalidArgumentException {
         try {
             this.idxToMark = Integer.parseInt(inputContent);

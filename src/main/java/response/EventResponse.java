@@ -1,19 +1,22 @@
 package response;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import exception.InvalidArgumentException;
 import exception.MissingArgumentException;
 import storage.Event;
 import storage.TaskList;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
+/**
+ * Represents the response for the event task
+ */
 public class EventResponse extends Response {
 
     /**
      * Represents the new event to be created
      */
-    private String event;
+    private final String event;
 
     /**
      * Creates a response with the specified new event
@@ -41,32 +44,33 @@ public class EventResponse extends Response {
         String[] splitTo = splitFrom[1].split(" /to ", 2);
         String from = splitTo[0].trim();
         if (from.equals("")) {
-            throw new MissingArgumentException("The start date cannot be empty." +
-                    "Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
+            throw new MissingArgumentException("The start date cannot be empty."
+                    + "Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
         } else if (splitTo.length != 2
                 || splitTo[1].trim().equals("")) {
-            throw new MissingArgumentException("The end date cannot be empty." +
-                    "Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
+            throw new MissingArgumentException("The end date cannot be empty."
+                    + "Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
         }
         String to = splitTo[1].trim();
 
         // Try to create LocalDate objects from String
-        LocalDate fromDate, toDate;
+        LocalDate fromDate;
+        LocalDate toDate;
         try {
             fromDate = LocalDate.parse(from);
             toDate = LocalDate.parse(to);
         } catch (DateTimeParseException e) {
-            throw new InvalidArgumentException("Start and end date format should be in the format " +
-                    "YYYY-MM-DD (e.g. 2007-12-03)");
+            throw new InvalidArgumentException("Start and end date format should be in the format "
+                    + "YYYY-MM-DD (e.g. 2007-12-03)");
         }
 
         // Create Event object, add to list and print
         Event newEvent = new Event(des, fromDate, toDate);
         taskList.createToDo(newEvent);
         return String.format(
-                "Alright! This task has been added into the list:" +
-                        "\n\t   %s" +
-                        "\n\t Now you have %d task(s) in the list.",
+                "Alright! This task has been added into the list:"
+                    + "\n\t   %s"
+                    + "\n\t Now you have %d task(s) in the list.",
                 newEvent,
                 taskList.count());
     }

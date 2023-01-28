@@ -1,25 +1,29 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import exception.DukeException;
 import parser.Parser;
-
 import response.Response;
 import storage.Storage;
 import storage.TaskList;
 import ui.Ui;
 
+/**
+ * Represents the Duke class
+ */
 public class Duke {
-
+    /**
+     * Main entry point of the application
+     * @param args The command line arguments
+     */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+        Scanner scanner = new Scanner(System.in); // Create a Scanner object
         Storage storage = new Storage(); // Create a Storage object
-        TaskList taskList = storage.loadTaskList();  // Create a TaskList object based on saved list
+        TaskList taskList = storage.loadTaskList(); // Create a TaskList object based on saved list
         Ui ui = new Ui(); // Create Ui object to handle interactions with user
         ui.printIntro();
 
         while (true) {
-            String req = scanner.nextLine();  // Read user req
+            String req = scanner.nextLine(); // Read user req
 
             // Check if user wants to exit
             if (req.equalsIgnoreCase("bye")) {

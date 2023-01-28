@@ -5,7 +5,7 @@ import storage.TaskList;
 /**
  * Represents a response to list everything in the to do list
  */
-public class ListResponse extends Response{
+public class ListResponse extends Response {
     /**
      * List everything in the to do list
      * @param taskList The to do list to be printed
