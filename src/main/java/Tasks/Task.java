@@ -3,6 +3,7 @@ package Tasks;
 public class Task {
     protected String message;
     protected boolean marked = false;
+    public static final String TASK_SIGN = "";
 
     /**
      * Constructor for the Task
@@ -17,6 +18,7 @@ public class Task {
      * @return this.message
      */
     public String getMessage(){
+
         return this.message;
     }
 
@@ -25,10 +27,24 @@ public class Task {
      * @return String of marked or unmarked icon
      */
     public String getStatusIcon(){
+
         return (this.isMarked()? "[X]": "[ ]");
     }
 
+    /**
+     * Return the Storage Representation of the Task
+     * @return
+     */
+    public String getStorageFormat() {
+        return TASK_SIGN + "," + this.isMarked()+","+this.getMessage();
+    }
+
+    /**
+     *
+     * @return
+     */
     public String getRepresentation(){
+
         return this.getStatusIcon() + " " + this.getMessage();
     }
 
@@ -36,6 +52,7 @@ public class Task {
      * Toggles the marked boolean to true
      */
     public void mark() {
+
         this.marked = true;
     }
 
@@ -43,6 +60,7 @@ public class Task {
      * toggles the marked boolean to false
      */
     public void unmark(){
+
         this.marked = false;
     }
 
@@ -51,6 +69,7 @@ public class Task {
      * @return this.marked
      */
     public boolean isMarked(){
+
         return this.marked;
     }
 
