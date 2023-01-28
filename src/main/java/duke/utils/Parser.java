@@ -20,35 +20,18 @@ public class Parser {
         } else if (action.equalsIgnoreCase("list")) {
             return new ListCommand(ui, commandList);
         } else if (action.equalsIgnoreCase("mark")) {
-            try {
-                return new MarkCommand(ui, commandList,
-                        Integer.parseInt(strArray[1]) - 1, storage, file);
-            } catch (InvalidCmdValueException e) {
-                throw e;
-            }
+            return new MarkCommand(ui, commandList,
+                    Integer.parseInt(strArray[1]) - 1, storage, file);
         } else if (action.equalsIgnoreCase("unmark")) {
-            try {
-                return new UnmarkCommand(ui, commandList,
-                        Integer.parseInt(strArray[1]) - 1, storage, file);
-            } catch (InvalidCmdValueException e) {
-                throw e;
-            }
+            return new UnmarkCommand(ui, commandList,
+                    Integer.parseInt(strArray[1]) - 1, storage, file);
         } else if (action.equalsIgnoreCase("delete")) {
-            try {
-                return new DeleteCommand(ui, commandList,
-                        Integer.parseInt(strArray[1]) - 1, storage, file);
-            } catch (InvalidCmdValueException e) {
-                throw e;
-            }
+            return new DeleteCommand(ui, commandList,
+                    Integer.parseInt(strArray[1]) - 1, storage, file);
         } else {
-            try {
-                TaskTypes type = getTaskType(action);
-                Task task = getTask(type, strArray);
-                return new AddCommand(ui, commandList, task, storage, file);
-            } catch (InvalidTaskTypeException | EmptyCommandException | InvalidTimeException |
-                     InvalidDateException e) {
-                throw e;
-            }
+            TaskTypes type = getTaskType(action);
+            Task task = getTask(type, strArray);
+            return new AddCommand(ui, commandList, task, storage, file);
         }
     }
 
