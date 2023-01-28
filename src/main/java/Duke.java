@@ -1,14 +1,21 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
+    static List<Task> taskList = new ArrayList<Task>();
+
     public static void main(String[] args) {
-        List<Task> taskList = new ArrayList<Task>();
         Scanner input = new Scanner(System.in);
         System.out.println("Hello! I'm DonkeyChat!\nWhat can I do for you?");
         boolean isRunning = true;
+        loadSave();
         while (isRunning) {
             String currInput = input.nextLine();
             String[] splitInput = currInput.split(" ", 2);
@@ -124,9 +131,75 @@ public class Duke {
                     default:
                         throw new DukeException("Please enter a valid command!");
                 }
+                updateSave();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
+        }
+    }
+
+    public static void updateSave() {
+        String toSave = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            
+            toSave += taskList.get(i).serialize() + "\n";
+        }
+        try {
+            FileWriter writer = new FileWriter("donkey.txt");
+            writer.write(toSave);
+            writer.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadSave() {
+        try {
+            File save = new File("donkey.txt");
+            if (save.exists()) {
+                Scanner scanner = new Scanner(save);
+                while (scanner.hasNextLine()) {
+                    taskList.add(deserializeTask(scanner.nextLine()));
+                }
+            } else {
+                createSave();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void createSave() {
+        try {
+            File save = new File("donkey.txt");
+            if (save.createNewFile()) {
+                System.out.println("Save created: " + save.getName());
+            } else {
+                System.out.println("Save already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static Task deserializeTask(String data) {
+        String[] splitData = data.split(" \\| ");
+
+        switch (splitData[0]) {
+            case "T":
+                return new ToDo(splitData[2], splitData[1].equals("1"));
+            case "E":
+                return new Event(splitData[2], splitData[1].equals("1"), splitData[3], splitData[4]);
+            case "D":
+                return new Deadline(splitData[2], splitData[1].equals("1"), splitData[3]);
+            default:
+                System.out.println("Attempting to deserialize wrongly formatted task: ");
+                System.out.println(data);
+                return null;
         }
     }
 }
