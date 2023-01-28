@@ -36,13 +36,15 @@ public class Ui {
 
         try { 
             isCommandBye = parser.runCommand(tasks, storage, words);
-        } catch(IndexOutOfBoundsException e) {
-            System.out.println("Number out of range/empty. Please try again!");
-        } catch(NumberFormatException e) {
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Number out of range/Input empty. Please try again!");
+        } catch (NumberFormatException e) {
             System.out.println("Invalid number. Please enter a number!");
-        } catch(InvalidCommandException e) {
+        } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
-        } 
+        } catch (EmptyDescriptionException e) {
+            System.out.println(e.getMessage());
+        }
         horizontalLine();
         return isCommandBye;
     }

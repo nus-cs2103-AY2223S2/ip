@@ -29,12 +29,12 @@ public class TaskList {
      * @param words Description given by user input
      * @param type The type of task
      * @return true if task has been added successfully, else false
+     * @throws EmptyDescriptionException when user gives an empty description
      */ 
-    public boolean addTask(String[] words, String type) {
+    public boolean addTask(String[] words, String type) throws EmptyDescriptionException {
         Task task;
         if (words.length == 0) {
-            System.out.println("The description of " + type + " cannot be empty. Please try again");
-            return false;
+            throw new EmptyDescriptionException("The description of " + type + " cannot be empty. Please try again");
         }
         if (type.equals("TODO")) {
             task = new Todo(String.join(" ", words ));
@@ -43,8 +43,7 @@ public class TaskList {
             if (type.equals("DEADLINE")) {
                 int indexForBy = Parser.getIndexOfWord(words, "/by");
                 if (indexForBy == 0) {
-                    System.out.println("The description of " + type + " cannot be empty. Please try again");
-                    return false;
+                    throw new EmptyDescriptionException("The description of " + type + " cannot be empty. Please try again");
                 }
                 LocalDateTime dateTimeBy = DateTime.getDateTime(words,indexForBy);
                 if (dateTimeBy == null) {
@@ -57,8 +56,7 @@ public class TaskList {
             else {
                 int indexForFrom = Parser.getIndexOfWord(words, "/from");
                 if (indexForFrom == 0) {
-                    System.out.println("The description of " + type + " cannot be empty. Please try again");
-                    return false;
+                    throw new EmptyDescriptionException("The description of " + type + " cannot be empty. Please try again");
                 }
                 int indexForTo = Parser.getIndexOfWord(words, "/to");
 
@@ -109,6 +107,7 @@ public class TaskList {
      * 
      * @param num Index of the task to retrieve
      * @return returns a Task object
+     * @throws IndexOutOfBoundsException When accessed index is not within the list length
      */ 
     public Task getTask(int num) throws IndexOutOfBoundsException {
         return tasks.get(num-1);
@@ -121,5 +120,23 @@ public class TaskList {
      */
     public ArrayList<Task> getListOfTask() {
         return tasks;
+    }
+
+    public void findTask(String description) {
+        boolean hasFound = false;
+        int index = 1;
+        for (Task task : tasks) {
+            if (task.getDescription().contains(description)) {
+                if (!hasFound) {
+                    hasFound = true;
+                    System.out.println("Here are the matching tasks in your list:");
+                }
+                System.out.println(index + ". " + task.toString());
+                index++;
+            }
+        }
+        if (!hasFound) {
+            System.out.println("No matching tasks found in your list:");
+        }
     }
 }

@@ -18,9 +18,10 @@ public class Parser {
      * @throws IndexOutOfBoundsException When index given is larger than the taskList
      * @throws NumberFormatException When a string is given instead of a number for some commmands
      * @throws InvalidCommandException When user inputs an invalid command
+     * @throws EmptyDescriptionException When user inputs an empty description
      */
     public boolean runCommand(TaskList tasks, Storage storage, String[] words) throws IndexOutOfBoundsException,
-            NumberFormatException, InvalidCommandException {
+            NumberFormatException, InvalidCommandException, EmptyDescriptionException {
 
         boolean hasTaskChanged = false;
         words[0] = words[0].toUpperCase();
@@ -53,6 +54,13 @@ public class Parser {
             break;
         case "DELETE":
             hasTaskChanged = tasks.deleteTask(Integer.parseInt(words[1]));
+            break;
+        case "FIND":
+            if (words.length <= 1) {
+                throw new EmptyDescriptionException("Search keyword cannot be empty");
+            }
+            String[] findWords = Arrays.copyOfRange(words, 1, words.length);
+            tasks.findTask(String.join(" ", findWords));
             break;
         default:
             throw new InvalidCommandException("Invalid command. Please try again");

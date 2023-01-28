@@ -3,14 +3,14 @@ package duke;
 /*
  * Exception for when command is invalid
  */
-public class InvalidCommandException extends Exception {
+public class EmptyDescriptionException extends Exception {
     
     /**
-     * Constructs a new InvalidCommandException instance
+     * Constructs a new EmptyDescriptionException instance
      * 
      * @param errorMessage Error message to display when exception thrown
      */
-    public InvalidCommandException(String errorMessage) {
+    public EmptyDescriptionException(String errorMessage) {
         super(errorMessage);
     }
 
