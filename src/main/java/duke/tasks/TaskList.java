@@ -17,8 +17,8 @@ public class TaskList extends ArrayList<Task> {
 
     public String encodeAsString() {
         return this.stream()
-            .map(task -> task.encodeAsString())
-            .collect(Collectors.joining("\n"));
+                .map(task -> task.encodeAsString())
+                .collect(Collectors.joining("\n"));
     }
 
     @Override

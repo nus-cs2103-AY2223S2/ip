@@ -27,15 +27,15 @@ public abstract class Task {
     protected static String encodeValues(String[] values) {
         UnaryOperator<String> escapeVerticalBar = str -> str.replace("|", "\\|");
         return Stream.of(values)
-            .map(escapeVerticalBar)
-            .collect(Collectors.joining(" | "));
+                .map(escapeVerticalBar)
+                .collect(Collectors.joining(" | "));
     }
 
     protected static String[] decodeValues(String encodedValues) {
         UnaryOperator<String> unescapeVerticalBar = str -> str.replace("\\|", "|");
         return Stream.of(encodedValues.split(" \\| "))
-            .map(unescapeVerticalBar)
-            .toArray(String[]::new);
+                .map(unescapeVerticalBar)
+                .toArray(String[]::new);
     }
 
     public static Task loadFromString(String input) throws DukeSaveLoadException {

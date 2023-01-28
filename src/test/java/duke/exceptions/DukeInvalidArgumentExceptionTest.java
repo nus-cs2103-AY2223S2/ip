@@ -17,8 +17,7 @@ public class DukeInvalidArgumentExceptionTest {
         DukeInvalidArgumentException exception = new DukeInvalidArgumentException(message);
         assertEquals(exception.getMessage(), message);
         assertEquals(
-            exception.getDukeMessage(), 
-            DukeException.DUKE_MESSAGE_PREFIX + message
-        );
+                exception.getDukeMessage(), 
+                DukeException.DUKE_MESSAGE_PREFIX + message);
     }
 }

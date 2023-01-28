@@ -25,7 +25,7 @@ public class Storage {
 
     private static void writeStringToFile(String filePath, String content) throws DukeSaveLoadException {
         try (FileWriter writer = new FileWriter(filePath)) {
-            writer.write(content); 
+            writer.write(content);
         } catch (IOException e) {
             throw new DukeSaveLoadException("There's an error writing to save file.");
         }

@@ -7,9 +7,8 @@ public class TaskTodoTest {
     private static final String TEST_UNESCAPED_DESC = "VERTICAL | BAR";
     private static final String TEST_ESCAPED_DESC = "VERTICAL \\| BAR";
     private static final String TEST_ENCODED_TASK = String.format(
-        "T | 1 | %s", 
-        TaskTodoTest.TEST_ESCAPED_DESC
-    );
+            "T | 1 | %s", 
+            TaskTodoTest.TEST_ESCAPED_DESC);
 
     private static TaskTodo getTestTask() {
         TaskTodo task = new TaskTodo(TaskTodoTest.TEST_UNESCAPED_DESC);
