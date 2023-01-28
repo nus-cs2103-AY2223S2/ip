@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-import java.util.*;
-=======
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -12,7 +9,6 @@ import java.util.Scanner;
 import leo.task.LeoTaskException;
 import leo.task.TaskList;
 
->>>>>>> Stashed changes
 
 public class Leo {
 
@@ -32,16 +28,12 @@ public class Leo {
 
         Scanner sc = new Scanner(System.in);
         String cmd = sc.nextLine(); // reads in command fed by user
-<<<<<<< Updated upstream
-
-=======
         readFile();
 
         if (taskList == null) {
             taskList = new TaskList();
         }
         
->>>>>>> Stashed changes
         while (!cmd.equals("bye")) {
             taskList.processRequest(cmd);
             cmd = sc.nextLine();
