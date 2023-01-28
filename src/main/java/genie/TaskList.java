@@ -7,19 +7,43 @@ import genie.task.ToDo;
 
 import java.util.ArrayList;
 
+/**
+ * Contains the task list and has operations to perform actions on it.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
+
+    /**
+     * A constructor that initialises <code>ArrayList&lt;Task&gt; of size 100.</code>
+     */
     public TaskList() {
         this.taskList = new ArrayList<>(100);
     }
+
+    /**
+     * Stores task into the task list.
+     * @param t task
+     */
     public void storeTask(Task t) {
         this.taskList.add(t);
     }
+
+    /**
+     * Adds <code>ToDo</code> into task list from user's input.
+     * @param i user's input
+     * @return task
+     */
     public Task addToDoFromUser(String i) {
         ToDo t = new ToDo(i.replace("todo ", ""));
         storeTask(t);
         return t;
     }
+
+    /**
+     * Adds <code>ToDo</code> into task list from .txt file input.
+     * @param sf .txt input
+     * @return task
+     */
     public Task addToDoFromFile(String sf) {
         char status = sf.charAt(4);
         ToDo t = new ToDo(sf.substring(7));
@@ -29,12 +53,23 @@ public class TaskList {
         }
         return t;
     }
+
+    /**
+     * Adds <code>Deadline</code> into task list from user's input.
+     * @param i user's input
+     * @return task
+     */
     public Task addDeadlineFromUser(String i) {
         String[] contents = i.split(" /by ");
         Deadline d = new Deadline(contents[0].replace("deadline ", ""), contents[1]);
         storeTask(d);
         return d;
     }
+    /**
+     * Adds <code>Deadline</code> into task list from .txt file input.
+     * @param sf .txt input
+     * @return task
+     */
     public Task addDeadlineFromFile(String sf) {
         char status = sf.charAt(4);
         String[] contents = sf.substring(7).split(" \\| ");
@@ -47,6 +82,11 @@ public class TaskList {
         }
         return d;
     }
+    /**
+     * Adds <code>Event</code> into task list from user's input.
+     * @param i user's input
+     * @return task
+     */
     public Task addEventFromUser(String i) {
         String[] contents = i.split(" /from ");
         String[] fromTo = contents[1].split(" /to ");
@@ -54,6 +94,11 @@ public class TaskList {
         storeTask(e);
         return e;
     }
+    /**
+     * Adds <code>Event</code> into task list from .txt file input.
+     * @param sf .txt input
+     * @return task
+     */
     public Task addEventFromFile(String sf) {
         char status = sf.charAt(4);
         String[] contents = sf.substring(7).split(" \\| ");
@@ -68,9 +113,19 @@ public class TaskList {
         }
         return e;
     }
+
+    /**
+     * Delete task at index of task list.
+     * @param index of task list to be deleted
+     */
     public void deleteTask(int index) {
         taskList.remove(index);
     }
+
+    /**
+     * Get task list.
+     * @return task list
+     */
     public ArrayList<Task> getTasks() {
         return this.taskList;
     }
