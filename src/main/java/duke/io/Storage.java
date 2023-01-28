@@ -9,7 +9,7 @@ public interface Storage {
     /**
      * Returns true if the storage exist, otherwise, returns false.
      *
-     * @return True if the storage exist, otherwise, false.
+     * @return True if the storage exist, otherwise, returns false.
      * @throws DukeException Indicates failure to check for file.
      */
     boolean doesExist() throws DukeException;

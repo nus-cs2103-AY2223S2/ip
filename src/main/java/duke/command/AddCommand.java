@@ -9,7 +9,7 @@ import duke.task.TaskList;
  */
 public abstract class AddCommand implements Command {
     /**
-     * Create a task using the specified input, add it to tasks, and return an acknowledgement message.
+     * Creates a task using the specified input, adds it to tasks, and returns an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}

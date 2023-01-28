@@ -21,7 +21,7 @@ public class Duke {
     private static TaskList tasks;
 
     /**
-     * Main method for the app.
+     * Runs the app.
      *
      * @param args Command-line arguments.
      */

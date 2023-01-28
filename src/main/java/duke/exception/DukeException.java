@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * An exception thrown when an error to be printed to output occurs during the apps execution.
+ * An exception thrown when an error to be printed to output occurs during the app's execution.
  */
 public class DukeException extends Exception {
     /**

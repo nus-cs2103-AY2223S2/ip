@@ -41,11 +41,11 @@ public class Event extends Task {
             throw new DukeException("An event in storage has missing data!");
         }
 
-        if (!BooleanUtils.isBooleanString(args[1])) {
+        if (!BooleanUtils.isBooleanStr(args[1])) {
             throw new DukeException("An event in storage has an incorrect data type!");
         }
 
-        args = Task.formatStringsFromStorage(args);
+        args = Task.formatStrsFromStorage(args);
 
         LocalDateTime start;
         try {
@@ -65,11 +65,11 @@ public class Event extends Task {
     }
 
     @Override
-    public String getStorageString() {
-        String startStr = Task.formatStringForStorage(start.toString());
-        String endStr = Task.formatStringForStorage(end.toString());
+    public String getStorageStr() {
+        String startStr = Task.formatStrForStorage(start.toString());
+        String endStr = Task.formatStrForStorage(end.toString());
 
-        return String.format("E | %s | %s | %s", super.getStorageString(), startStr, endStr);
+        return String.format("E | %s | %s | %s", super.getStorageStr(), startStr, endStr);
     }
 
     @Override

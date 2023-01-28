@@ -8,7 +8,7 @@ import duke.task.TaskList;
  */
 public interface Command {
     /**
-     * Run the command and return the response message.
+     * Runs the command and returns the response message.
      *
      * @param input User's input.
      * @param tasks User's tasks.

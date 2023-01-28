@@ -40,8 +40,8 @@ public abstract class Task {
      *
      * @return A string containing data about the task.
      */
-    public String getStorageString() {
-        return String.format("%s | %s", isDone, formatStringForStorage(description));
+    public String getStorageStr() {
+        return String.format("%s | %s", isDone, formatStrForStorage(description));
     }
 
     @Override
@@ -55,18 +55,18 @@ public abstract class Task {
      * @param string The string to be formatted.
      * @return The string formatted to be suited for writing to storage.
      */
-    protected static String formatStringForStorage(String string) {
+    protected static String formatStrForStorage(String string) {
         return string.replace("|", "\\|");
     }
 
     /**
      * Takes an array of strings that were loaded from storage, undo the formatting from
-     * {@link duke.task.Task#formatStringForStorage}, and return the strings.
+     * {@link duke.task.Task#formatStrForStorage}, and return the strings.
      *
      * @param strings The strings that are to be formatted.
-     * @return The strings with formatting from {@link duke.task.Task#formatStringForStorage} undone.
+     * @return The strings with formatting from {@link duke.task.Task#formatStrForStorage} undone.
      */
-    protected static String[] formatStringsFromStorage(String[] strings) {
+    protected static String[] formatStrsFromStorage(String[] strings) {
         String[] formatted = new String[strings.length];
 
         for (int i = 0; i < strings.length; ++i) {

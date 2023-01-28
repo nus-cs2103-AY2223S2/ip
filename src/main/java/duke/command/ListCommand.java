@@ -7,13 +7,13 @@ import duke.task.TaskList;
  */
 public class ListCommand implements Command {
     /**
-     * Returns a message listing out each task in tasks if tasks is not empty. Otherwise, return a message informing the
-     * user of the empty task list.
+     * Returns a message listing out each task in tasks if tasks is not empty. Otherwise, returns a message informing
+     * the user of the empty task list.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
-     * @return A message listing out each task in tasks if tasks is not empty. Otherwise, return a message informing the
-     *         user of the empty task list.
+     * @return A message listing out each task in tasks if tasks is not empty. Otherwise, returns a message informing
+     *         the user of the empty task list.
      */
     @Override
     public String run(String input, TaskList tasks) {

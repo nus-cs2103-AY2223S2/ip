@@ -9,7 +9,7 @@ import duke.task.TaskList;
  */
 public class DeleteCommand implements Command {
     /**
-     * Delete the task specified in the input from tasks and return an acknowledgement message.
+     * Deletes the task specified in the input from tasks and returns an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}

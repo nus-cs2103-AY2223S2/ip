@@ -11,14 +11,12 @@ import java.util.List;
  */
 public class FindCommand implements Command {
     /**
-     * Returns a message listing out each task whose description contains the keyword or keyphrase specified in the
-     * input.
+     * Returns a message listing out each task whose description contains the keyword or keyphrase specified in input.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
-     * @return A message listing out each task whose description contains the keyword or keyphrase specified in the
-     *         input.
-     * @throws DukeException Indicates that no keyword/keyphrase was specified in the input.
+     * @return A message listing out each task whose description contains the keyword or keyphrase specified in input.
+     * @throws DukeException Indicates that no keyword/keyphrase was specified in input.
      */
     @Override
     public String run(String input, TaskList tasks) throws DukeException {

@@ -14,7 +14,7 @@ public class FileStorage implements Storage {
     private final Path path;
 
     /**
-     * Creates a file storage.
+     * Creates a FileStorage object.
      *
      * @param path The path of the file to use for storage.
      */

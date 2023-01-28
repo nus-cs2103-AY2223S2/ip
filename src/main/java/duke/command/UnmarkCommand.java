@@ -8,7 +8,7 @@ import duke.task.TaskList;
  */
 public class UnmarkCommand extends SetDoneCommand {
     /**
-     * Set the done status of the task specified in the input to false and return an acknowledgement message.
+     * Sets the done status of the task specified in the input to false and returns an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}

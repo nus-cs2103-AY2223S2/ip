@@ -39,7 +39,7 @@ public class ToDoTest {
         String expected = "T | false | Hello world!";
 
         ToDo toDo = new ToDo(false, "Hello world!");
-        String actual = toDo.getStorageString();
+        String actual = toDo.getStorageStr();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -49,7 +49,7 @@ public class ToDoTest {
         String expected = "T | false | Hello \\| world!";
 
         ToDo toDo = new ToDo(false, "Hello | world!");
-        String actual = toDo.getStorageString();
+        String actual = toDo.getStorageStr();
 
         Assertions.assertEquals(expected, actual);
     }

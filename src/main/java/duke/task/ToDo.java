@@ -29,18 +29,18 @@ public class ToDo extends Task {
             throw new DukeException("A to-do in storage has missing data!");
         }
 
-        if (!BooleanUtils.isBooleanString(args[1])) {
+        if (!BooleanUtils.isBooleanStr(args[1])) {
             throw new DukeException("A to-do in storage has an incorrect data type!");
         }
 
-        args = Task.formatStringsFromStorage(args);
+        args = Task.formatStrsFromStorage(args);
 
         return new ToDo(Boolean.parseBoolean(args[1]), args[2]);
     }
 
     @Override
-    public String getStorageString() {
-        return String.format("T | %s", super.getStorageString());
+    public String getStorageStr() {
+        return String.format("T | %s", super.getStorageStr());
     }
 
     @Override

@@ -38,11 +38,11 @@ public class Deadline extends Task {
             throw new DukeException("A deadline in storage has missing data!");
         }
 
-        if (!BooleanUtils.isBooleanString(args[1])) {
+        if (!BooleanUtils.isBooleanStr(args[1])) {
             throw new DukeException("A deadline in storage has an incorrect data type!");
         }
 
-        args = Task.formatStringsFromStorage(args);
+        args = Task.formatStrsFromStorage(args);
 
         LocalDateTime cutoff;
         try {
@@ -55,8 +55,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getStorageString() {
-        return String.format("D | %s | %s", super.getStorageString(), Task.formatStringForStorage(cutoff.toString()));
+    public String getStorageStr() {
+        return String.format("D | %s | %s", super.getStorageStr(), Task.formatStrForStorage(cutoff.toString()));
     }
 
     @Override

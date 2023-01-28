@@ -11,7 +11,7 @@ public class Ui {
     /**
      * Creates a Ui object.
      *
-     * @param printStream The PrintStream object to print messages to.
+     * @param printStream The stream to print messages to.
      */
     public Ui(PrintStream printStream) {
         this.printStream = printStream;

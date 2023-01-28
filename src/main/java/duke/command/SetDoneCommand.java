@@ -9,7 +9,7 @@ import duke.task.TaskList;
  */
 public abstract class SetDoneCommand implements Command {
     /**
-     * Update the done status of the task specified in the input and return an acknowledgement message.
+     * Updates the done status of the task specified in the input and returns an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}

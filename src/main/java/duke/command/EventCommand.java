@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
  */
 public class EventCommand extends AddCommand {
     /**
-     * Create an event using the specified input, add it to tasks, and return an acknowledgement message.
+     * Creates an event using the specified input, adds it to tasks, and returns an acknowledgement message.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}

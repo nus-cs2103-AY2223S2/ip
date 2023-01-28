@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represent a task list.
+ * Represents a task list.
  */
 public class TaskList {
     private List<Task> tasks;
@@ -63,7 +63,7 @@ public class TaskList {
     }
 
     /**
-     * Add the specified task to the end of the list and write the updated task list to storage.
+     * Adds the specified task to the end of the list and writes the updated task list to storage.
      *
      * @param task The task to be added.
      * @throws DukeException Indicates failure to write to storage.
@@ -80,7 +80,7 @@ public class TaskList {
     }
 
     /**
-     * Remove the task at the specified index, write the updated task list to storage, and return the removed task.
+     * Removes the task at the specified index, writes the updated task list to storage, and returns the removed task.
      *
      * @param index The index of the task to be removed.
      * @return The removed task.
@@ -101,7 +101,7 @@ public class TaskList {
     }
 
     /**
-     * Update the task at index.
+     * Updates the task at index.
      *
      * @param index The index of the task to be updated.
      * @param task The updated task.
@@ -151,7 +151,7 @@ public class TaskList {
         StringBuilder taskStr = new StringBuilder();
 
         for (Task task : tasks) {
-            taskStr.append(task.getStorageString());
+            taskStr.append(task.getStorageStr());
             taskStr.append("\n");
         }
 

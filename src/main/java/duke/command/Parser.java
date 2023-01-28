@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Handles parsing of user input.
+ * Handles parsing of user inputs.
  */
 public class Parser {
     private final Map<String, Command> strToCommand;
@@ -47,10 +47,10 @@ public class Parser {
     }
 
     /**
-     * Returns true if the input contains a bye command, otherwise, return false.
+     * Returns true if the input contains a bye command, otherwise, returns false.
      *
      * @param input The input which is to be checked for whether it contains a bye command.
-     * @return True if the input contains a bye command, otherwise, false.
+     * @return True if the input contains a bye command, otherwise, returns false.
      */
     public boolean isByeCommand(String input) {
         return input.split(" ")[0].equals("bye");
