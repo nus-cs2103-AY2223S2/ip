@@ -2,6 +2,9 @@ package seedu.duke;
 
 import java.io.FileNotFoundException;
 
+/**
+ * The Duke chatbot
+ */
 public class Duke {
 
     private Storage storage;
@@ -25,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke chatbot.
+     */
     public void run() {
         AsciiArt asciiArt = new AsciiArt();
         asciiArt.printArt();

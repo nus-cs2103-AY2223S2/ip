@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Handles data read and write.
+ */
 public class Storage {
 
     private String dataPath;
@@ -16,6 +19,13 @@ public class Storage {
         this.dataPath = dataPath;
     }
 
+    /**
+     * Writes the tasks in current list onto text file.
+     * Path of text file to be specified on instantiation.
+     *
+     * @param todolist the ToDoList to be associated with this storage
+     * @throws IOException If format of tasks saved incorrectly on text file
+     */
     public void saveTasks(ToDoList todolist) throws IOException {
         FileWriter fw = new FileWriter(dataPath);
 
@@ -25,6 +35,13 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Writes the tasks in current list onto text file.
+     * Path of text file to be specified on instantiation.
+     *
+     * @param todolist the ToDoList to be associated with this storage
+     * @throws FileNotFoundException If file not found at the path specified
+     */
     public void loadTasks(ToDoList todolist) throws FileNotFoundException {
         System.out.println("\tTasks from the previous session:\n");
         System.out.println("\t--------------------------");

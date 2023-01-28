@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * The Ascii art to be printed.
+ */
 public class AsciiArt {
 
     private String computer =
@@ -29,6 +32,9 @@ public class AsciiArt {
 
     public AsciiArt() {};
 
+    /**
+     * Prints the Ascii art.
+     */
     public void printArt() {
         System.out.println(computer);
     }

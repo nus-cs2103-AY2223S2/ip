@@ -4,10 +4,21 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deals with understanding user commands.
+ */
 public class Parser {
 
     public Parser() {};
 
+    /**
+     * Parses the user commands.
+     *
+     * @param command user command
+     * @param todolist the current ToDoList
+     * @param storage the storage associated with the current ToDoList
+     * @return isBye boolean indicated the ending 'bye' command
+     */
     public boolean parse(String command, ToDoList todolist, Storage storage) {
 
         if (command.equals("bye")) {
@@ -112,12 +123,26 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Checks whether the Task number exists.
+     *
+     * @param toDo the current ToDoList
+     * @param num the task number
+     * @throws NoTaskFoundException If no task at specified number exists
+     */
     public static void validateTask(ToDoList toDo, int num) throws NoTaskFoundException {
         if (num > toDo.getCount()) {
             throw new NoTaskFoundException("");
         }
     }
 
+    /**
+     * Instantiates a new Todo Task.
+     *
+     * @param toDo the current ToDoList
+     * @param line user command containing task to be instantiate Todo with
+     * @throws JarvisException If task not in proper format
+     */
     public static void addToDo(ToDoList toDo, String line) throws JarvisException {
         try {
             String task = line.substring(5);

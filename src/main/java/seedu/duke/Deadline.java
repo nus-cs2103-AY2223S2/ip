@@ -3,6 +3,9 @@ package seedu.duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Deadline Task.
+ */
 public class Deadline extends Task {
 
     private LocalDate timeParsed;
@@ -12,6 +15,9 @@ public class Deadline extends Task {
         this.timeParsed = timeParsed;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String printTask() {
 
