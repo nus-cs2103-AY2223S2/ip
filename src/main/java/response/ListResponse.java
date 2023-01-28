@@ -15,4 +15,15 @@ public class ListResponse extends Response {
     public String exec(TaskList taskList) {
         return taskList.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ListResponse)) {
+            return false;
+        }
+        return true;
+    }
 }

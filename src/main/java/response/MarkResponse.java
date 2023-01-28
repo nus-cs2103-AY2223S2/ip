@@ -37,4 +37,16 @@ public class MarkResponse extends Response {
         Task currTask = taskList.mark(idxToMark);
         return String.format("Nice! I've marked this task as done:\n\t\t%s", currTask.toString());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof MarkResponse)) {
+            return false;
+        }
+        MarkResponse that = (MarkResponse) obj;
+        return idxToMark == that.idxToMark;
+    }
 }

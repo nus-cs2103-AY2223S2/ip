@@ -34,7 +34,7 @@ public class DeadlineResponse extends Response {
     @Override
     public String exec(TaskList taskList) throws MissingArgumentException, InvalidArgumentException {
         // Parsing the String to get the task description and deadline
-        String[] splitBy = deadline.split(" /by ", 2);
+        String[] splitBy = deadline.split("/by", 2);
         String des = splitBy[0].trim();
         if (des.equals("")) {
             throw new MissingArgumentException("The description of a deadline cannot be empty.");
@@ -50,7 +50,7 @@ public class DeadlineResponse extends Response {
         try {
             byDate = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
-            throw new InvalidArgumentException("Start date format should be in the format "
+            throw new InvalidArgumentException("Deadline date format should be in the format "
                     + "YYYY-MM-DD (e.g. 2007-12-03)");
         }
 
@@ -63,5 +63,17 @@ public class DeadlineResponse extends Response {
                         + "\n\t Now you have %d task(s) in the list.",
                 newD,
                 taskList.count());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof DeadlineResponse)) {
+            return false;
+        }
+        DeadlineResponse that = (DeadlineResponse) obj;
+        return this.deadline.equals(that.deadline);
     }
 }

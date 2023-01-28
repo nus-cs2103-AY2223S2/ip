@@ -40,4 +40,16 @@ public class CreateResponse extends Response {
                 newTodo,
                 taskList.count());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof CreateResponse)) {
+            return false;
+        }
+        CreateResponse that = (CreateResponse) obj;
+        return this.todo.equals(that.todo);
+    }
 }

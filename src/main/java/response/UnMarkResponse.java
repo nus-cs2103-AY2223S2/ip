@@ -36,4 +36,16 @@ public class UnMarkResponse extends Response {
         Task currTask = taskList.unmark(idxToUnMark);
         return String.format("OK, I've marked this task as not done yet:\n\t\t%s", currTask.toString());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof UnMarkResponse)) {
+            return false;
+        }
+        UnMarkResponse that = (UnMarkResponse) obj;
+        return idxToUnMark == that.idxToUnMark;
+    }
 }

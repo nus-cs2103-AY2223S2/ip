@@ -41,4 +41,16 @@ public class DeleteResponse extends Response {
                 removedTask,
                 taskList.count());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof DeleteResponse)) {
+            return false;
+        }
+        DeleteResponse that = (DeleteResponse) obj;
+        return idxToDelete == that.idxToDelete;
+    }
 }
