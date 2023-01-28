@@ -1,5 +1,5 @@
 todo eat
-deadline play /by: 5pm
+deadline play /by: 2023-12-20
 event play with me /from: 2023-12-20 /to: 2023-12-21
 mark 2
 unmark 2
