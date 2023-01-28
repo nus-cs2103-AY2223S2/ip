@@ -9,6 +9,9 @@ import duke.task.Todo;
 
 import java.time.LocalDate;
 
+/**
+ * Handles Duke, a Personal Assistant Chatbot that helps a person to keep track of various things.
+ */
 public class Duke {
     public enum TaskType {
         TODO,
@@ -20,6 +23,12 @@ public class Duke {
     private static final Storage storage = new Storage(list);
     private static final Parser parser = new Parser();
 
+    /**
+     * Adds task into task list.
+     *
+     * @param description Description of task to be added.
+     * @param taskType Task type of task to be added.
+     */
     private static void addTask(String description, TaskType taskType) {
         switch (taskType) {
             case TODO:
@@ -55,18 +64,33 @@ public class Duke {
         storage.saveToFile();
     }
 
+    /**
+     * Marks task from task list.
+     *
+     * @param itemNo Item number in list to be marked.
+     */
     private static void mark(int itemNo) throws DukeException {
         list.get(itemNo).setStatus(true);
         ui.displayMarked(list.get(itemNo).toString());
         storage.saveToFile();
     }
 
+    /**
+     * Unmarks task from task list.
+     *
+     * @param itemNo Item number in list to be unmarked.
+     */
     private static void unmark(int itemNo) {
         list.get(itemNo).setStatus(false);
         ui.displayUnmarked(list.get(itemNo).toString());
         storage.saveToFile();
     }
 
+    /**
+     * Deletes task from task list.
+     *
+     * @param itemNo Item number in list to be deleted.
+     */
     private static void delete(int itemNo) {
         ui.displayDeleted(list.get(itemNo).toString());
         list.remove(itemNo);
@@ -74,11 +98,21 @@ public class Duke {
         ui.displayTotalNumList(list.size());
     }
 
+    /**
+     * Searches task containing search inputs.
+     * 
+     * @param searchInput Substring to find if any tasks contains it.
+     */
     private static void find(String searchInput) {
         ui.displayResults(list, searchInput);
     }
 
 
+    /**
+     * Entry point to Duke application where Duke is initialized.
+     * 
+     * @param args Unused arguments that user optionally provides when Duke is launched.
+     */
     public static void main(String[] args) {
         ui.displayIntro();
         boolean isQuit = false;
