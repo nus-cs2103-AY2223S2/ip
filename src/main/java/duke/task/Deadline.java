@@ -3,8 +3,8 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.enums.Views;
 import duke.DukeException;
+import duke.enums.Views;
 
 /**
  * Deadline, task with a date

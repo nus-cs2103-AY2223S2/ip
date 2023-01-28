@@ -2,8 +2,8 @@ package duke;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
 import duke.enums.Views;
+import duke.task.Task;
 
 /**
  * TaskList object to store the list of tasks

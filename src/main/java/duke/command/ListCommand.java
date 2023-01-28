@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Ui;
 import duke.DukeException;
 import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Command: to list out the commands

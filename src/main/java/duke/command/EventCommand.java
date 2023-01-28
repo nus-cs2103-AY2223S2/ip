@@ -2,10 +2,10 @@ package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 import duke.task.Event;
 import duke.task.Task;
-import duke.TaskList;
 
 /**
  * Command: Creates a Event Task

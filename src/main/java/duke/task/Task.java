@@ -1,7 +1,7 @@
 package duke.task;
 
-import duke.enums.Views;
 import duke.DukeException;
+import duke.enums.Views;
 
 /**
  * Abstract class for the Task. Every todo / deadline / event item is here

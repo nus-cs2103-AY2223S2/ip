@@ -3,14 +3,14 @@ package duke;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import duke.task.Task;
 import duke.enums.Views;
+import duke.task.Task;
 
 /**
  * Class to interact with the user via commands and messages
  */
 public class Ui {
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     /**
      * Constructs the UI

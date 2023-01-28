@@ -1,17 +1,17 @@
 package duke;
 
 import java.io.File;
-import java.io.PrintWriter;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.enums.Commands;
+import duke.enums.Views;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.enums.Commands;
-import duke.enums.Views;
 
 /**
  * Class to manage storage of persistent files
