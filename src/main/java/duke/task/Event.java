@@ -1,40 +1,40 @@
 package duke.task;
 
-import duke.exception.DukeBadInstructionFormatException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import duke.exception.DukeBadInstructionFormatException;
+
 /**
- * Subclass of duke.task.Task class used by duke.Duke to keep track of user's tasks inputted.
+ * Subclass of <code>Task</code> class used by duke.Duke to keep track of user's tasks inputted.
  *
  * @author Bo Kuan (LG17)
  * @version CS2103T AY22/23 Semester 2
  */
-
 public class Event extends Task {
-
     /**
-     * A string representing the start of this duke.task.Event instance.
+     * A <code>LocalDateTime</code> representing the start of the <code>Event</code> instance.
      */
     private LocalDateTime from;
-
     /**
-     * A string representation of the end of this duke.task.Event instance.
+     * A <code>LocalDateTime</code> representing the end of the <code>Event</code> instance.
      */
     private LocalDateTime to;
-
+    /**
+     * A <code>String</code> representing the start of the <code>Event</code> instance.
+     */
     private String fromString;
-
+    /**
+     * A <code>String</code> representing the end of the <code>Event</code> instance.
+     */
     private String toString;
 
     /**
-     * Constructor for an duke.task.Event instance.
+     * Constructor for an <code>Event</code> instance.
      *
-     * @param description String describing this duke.task.Deadline.
-     *
-     * @param from String representing the start of this duke.task.Event.
-     *
-     * @param to String representing the end of this duke.task.Event.
+     * @param description String describing this <code>Event</code>.
+     * @param from String representing the start of this <code>Event</code>.
+     * @param to String representing the end of this <code>Event</code>.
      */
     public Event(String description, String from, String to)
             throws DukeBadInstructionFormatException {
@@ -46,22 +46,25 @@ public class Event extends Task {
             this.from = Task.getLocalDateTime(from);
             this.to = Task.getLocalDateTime(to);
         } catch (DateTimeParseException e) {
-            throw new DukeBadInstructionFormatException("Use date/time format: " +
-                    Task.STORE_DATE_TIME_FORMAT);
+            throw new DukeBadInstructionFormatException("Use date/time format: "
+                    + Task.STORE_DATE_TIME_FORMAT);
         }
     }
-
     /**
-     * Returns the string representation of an duke.task.Event.
+     * Returns the string representation of an <code>Event</code>.
      *
-     * @return The string representation of an duke.task.Event.
+     * @return The string representation of an <code>Event</code>.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + Task.getDateTimeString(this.from) +
-                " to: " + Task.getDateTimeString(this.to) + ")";
+        return "[E]" + super.toString() + " (from: " + Task.getDateTimeString(this.from)
+                + " to: " + Task.getDateTimeString(this.to) + ")";
     }
-
+    /**
+     * Returns the string representation of a <code>Event</code> for storage.
+     *
+     * @return The string representation of a <code>Event</code> for storage.
+     */
     @Override
     public String getFileFormatString() {
         //to be split using "|"

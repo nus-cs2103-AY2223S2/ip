@@ -1,31 +1,33 @@
 package duke.task;
 
-import duke.exception.DukeBadInstructionFormatException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import duke.exception.DukeBadInstructionFormatException;
+
 /**
- * Subclass of duke.task.Task class used by duke.Duke to keep track of user's tasks inputted.
+ * Subclass of <code>Task</code> class used by <code>Duke</code> to keep track of user's
+ * <code>Task</code>s inputted.
  *
  * @author Bo Kuan (LG17)
  * @version CS2103T AY22/23 Semester 2
  */
-
 public class Deadline extends Task {
-
     /**
-     * A string representing the deadline of the duke.task.Deadline instance.
+     * A <code>LocalDateTime</code> representing the deadline of the <code>Deadline</code> instance.
      */
     private LocalDateTime by;
-
+    /**
+     * A <code>String</code> representing the deadline of the <code>Deadline</code> instance.
+     */
     private String byString;
 
     /**
-     * Constructor for a duke.task.Deadline instance.
+     * Constructor for a <code>Deadline</code> instance.
      *
-     * @param description String describing this duke.task.Deadline.
+     * @param description String describing this <code>Deadline</code>.
      *
-     * @param by deadline of this duke.task.Deadline.
+     * @param by deadline of this <code>Deadline</code>.
      */
     public Deadline(String description, String by) throws DukeBadInstructionFormatException {
         super(description);
@@ -34,15 +36,14 @@ public class Deadline extends Task {
             this.byString = by;
             this.by = Task.getLocalDateTime(by);
         } catch (DateTimeParseException e) {
-            throw new DukeBadInstructionFormatException("Use date/time format: " +
-                    Task.STORE_DATE_TIME_FORMAT);
+            throw new DukeBadInstructionFormatException("Use date/time format: "
+                    + Task.STORE_DATE_TIME_FORMAT);
         }
     }
-
     /**
-     * Returns the string representation of a duke.task.Deadline.
+     * Returns the string representation of a <code>Deadline</code>.
      *
-     * @return The string representation of a duke.task.Deadline.
+     * @return The string representation of a <code>Deadline</code>.
      */
     @Override
     public String toString() {
