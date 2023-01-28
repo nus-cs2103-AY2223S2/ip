@@ -13,6 +13,11 @@ public class Duke {
     private Parser parser;
     boolean isBye;
 
+    /**
+     * Duke Constructor.
+     *
+     * @param dataPath
+     */
     public Duke(String dataPath) {
         storage = new Storage(dataPath);
         todolist = new ToDoList();
