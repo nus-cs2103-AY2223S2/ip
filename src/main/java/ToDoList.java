@@ -1,9 +1,12 @@
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import java.nio.file.Path;
+
 
 
 public class ToDoList {
@@ -58,7 +61,9 @@ public class ToDoList {
     }
 
     public void save() throws IOException {
-        FileWriter fw = new FileWriter("./data.txt"); //file structure
+        String home = System.getProperty("user.home");
+        Path path = java.nio.file.Paths.get(home, "iP-data", "Ip-data.txt");
+        FileWriter fw = new FileWriter(path.toString()); //file structure
         for (int i=1; i<=this.toDoCount; i++) {
             fw.write(arr.get(i).save());
         }
@@ -66,11 +71,16 @@ public class ToDoList {
     }
 
     public static ToDoList load() throws IOException {
-        File f = new File("./data.txt"); //file structure
-        ToDoList ls = new ToDoList();
-        if (!f.exists()) {
-            f.createNewFile();
+        String home = System.getProperty("user.home");
+        Path path = java.nio.file.Paths.get(home, "iP-data", "Ip-data.txt");
+        if (!Files.exists(path)) {
+            if (!Files.exists(path.getParent())) {
+                Files.createDirectories(path.getParent());
+            }
+            Files.createFile(path);
         }
+        File f = new File(path.toString()); //file structure
+        ToDoList ls = new ToDoList();
         Scanner sc = new Scanner(f);
         while (sc.hasNext()) {
             String[] input = sc.nextLine().split(" ");
