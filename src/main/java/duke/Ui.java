@@ -39,6 +39,17 @@ public class Ui {
         printLine();
     }
 
+    public void printMatchingTasks(ArrayList<Task> listOfTasks) {
+        Task task;
+        printLine();
+        System.out.println("\tHere are the matching tasks in your list:");
+        for (int i = 1; i <= listOfTasks.size(); i++) {
+            task = listOfTasks.get(i - 1);
+            System.out.println("\t" + i + "." + task);
+        }
+        printLine();
+    }
+
     public void printSaveTask(Task task, ArrayList<Task> listOfTasks) {
         printLine();
         System.out.println("\tGot it. I've added this task:");
