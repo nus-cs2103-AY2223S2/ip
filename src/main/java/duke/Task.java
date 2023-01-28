@@ -1,5 +1,9 @@
 package duke;
 
+
+/**
+ * Parent class for all the tasks
+ */
 public class Task {
     private boolean mark;
     private String value;

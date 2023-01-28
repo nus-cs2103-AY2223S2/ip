@@ -7,12 +7,26 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Storage class to handle file operations.
+ */
 public class Storage {
     private String filepath;
+
+    /**
+     * Public constructor
+     * @param filepath = filepath of where txt is stored.
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Read tasks from file, and add them all into a list.
+     *
+     * @return ArrayList<Task> that contains all the tasks
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws IOException {
 
         ArrayList<Task> list = new ArrayList <Task>();
@@ -43,6 +57,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Write a new line to the file
+     * @param t = task
+     */
     public void write(Task t){
         try {
             FileWriter fw = new FileWriter("data/duke.txt", true);
