@@ -1,3 +1,5 @@
+import exceptions.DukeException;
+import exceptions.GlobalExceptionHandler;
 import interfaces.*;
 import model.TaskModel;
 import presenter.TaskPresenter;
@@ -11,11 +13,11 @@ public class Duke {
     private void exit() {
         this.exit = true;
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Duke duke = new Duke();
         TaskModel taskModel = new TaskModel();
         TaskView taskView = new TaskView();
-
+        GlobalExceptionHandler exceptionHandler = new GlobalExceptionHandler(taskView);
         CommandEventListener exitEventListener = command -> {
             if (command.equalsIgnoreCase("bye")) {
                 // cleanup code here
@@ -25,7 +27,11 @@ public class Duke {
 
         Presenter presenter = new TaskPresenter(taskModel, taskView, exitEventListener);
         while(!duke.exit) {
-            presenter.handleInput(taskView.getUserInput());
+            try {
+                presenter.handleInput(taskView.getUserInput());
+            } catch (DukeException e) {
+                exceptionHandler.handleException(e);
+            }
         }
     }
 }

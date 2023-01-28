@@ -1,5 +1,7 @@
 package command;
 
+import command.exceptions.CommandExecutionError;
+import exceptions.CommandException;
 import interfaces.Command;
 import model.Task;
 import model.TaskModel;
@@ -15,7 +17,11 @@ public class DeleteTaskCommand implements Command {
         this.indexToDelete = indexToDelete;
     }
     @Override
-    public void execute() {
+    public void execute() throws CommandExecutionError {
+        int numTasks = taskModel.getNumberOfTasks();
+        if (indexToDelete >= numTasks || indexToDelete < 0) {
+            throw new CommandExecutionError(String.format("You have only %d tasks", numTasks));
+        }
         Task taskToDelete = taskModel.getTask(indexToDelete);
         taskModel.deleteTask(indexToDelete);
         taskView.showMessage("Noted, I've removed this task:\n  " + taskToDelete.toString()

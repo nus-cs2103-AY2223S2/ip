@@ -8,10 +8,8 @@ import java.util.Scanner;
 
 public class TaskView implements View {
     private final Scanner sc;
-    private List<Task> tasks;
     public TaskView() {
         this.sc = new Scanner(System.in);
-        this.tasks = new ArrayList<>();
     }
 
     @Override
@@ -19,6 +17,12 @@ public class TaskView implements View {
         System.out.println("____________________________________________________________");
         System.out.println(string);
         System.out.println("____________________________________________________________");
+    }
+
+    @Override
+    public void showError(String string) {
+
+        System.err.println(string);
     }
 
     @Override

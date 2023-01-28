@@ -1,5 +1,8 @@
 package command;
 
+import command.exceptions.CommandExecutionError;
+import command.exceptions.InvalidParameterError;
+import exceptions.CommandException;
 import interfaces.Command;
 import model.TaskModel;
 import view.TaskView;
@@ -15,7 +18,7 @@ public class CommandFactory {
         this.taskView = taskView;
     }
 
-    public Command createCommand(CommandType type, String... args) {
+    public Command createCommand(CommandType type, String... args) throws InvalidParameterError {
         switch (type) {
             case GREET:
                 return new GreetingCommand(taskView);
@@ -24,11 +27,21 @@ public class CommandFactory {
             case LIST:
                 return new ListTasksCommand(taskModel, taskView);
             case MARK_DONE:
-                int markIndex = Integer.parseInt(args[0]);
-                return new MarkDoneCommand(taskView, taskModel, markIndex);
+                try {
+                    int markIndex = Integer.parseInt(args[0]) - 1;
+                    return new MarkDoneCommand(taskView, taskModel, markIndex);
+                } catch (NumberFormatException e) {
+                    throw new InvalidParameterError("Invalid number provided");
+                }
+
             case MARK_UNDONE:
-                int unmarkIndex = Integer.parseInt(args[0]); // handle parseInt error
-                return new MarkUndoneCommand(taskView, taskModel, unmarkIndex);
+                try {
+                    int unmarkIndex = Integer.parseInt(args[0]) - 1; // handle parseInt error
+                    return new MarkUndoneCommand(taskView, taskModel, unmarkIndex);
+                } catch (NumberFormatException e) {
+                    throw new InvalidParameterError("Invalid number provided");
+                }
+
             case CREATE_TODO:
                 return new AddToDoCommand(taskView, taskModel, args[0]);
             case CREATE_DEADLINE:
@@ -36,7 +49,7 @@ public class CommandFactory {
             case CREATE_EVENT:
                 return new AddEventCommand(taskView, taskModel, args[0], args[1], args[2]);
             case DELETE_TASK:
-                int indexToDelete = Integer.parseInt(args[0]) - 1; // handle error
+                int indexToDelete = Integer.parseInt(args[0]) - 1;
                 return new DeleteTaskCommand(taskView, taskModel, indexToDelete);
             default:
                 // in case we add more to CommandType and forget to add here
