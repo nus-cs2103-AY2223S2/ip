@@ -4,16 +4,34 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class for Parser which translates between different task formats
+ */
 public final class Parser {
 
+    /**
+     * Converts string representation of a date time to LocalDateTime object
+     * @param dateTime Date Time to be converted
+     * @return Date Time as a LocalDateTime object
+     */
     public static LocalDateTime dateFormatter(String dateTime) {
         return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
+    /**
+     * Get command from user input
+     * @param input User input
+     * @return command String
+     */
     public static String getCommand(String input) {
         return input.split(" ")[0];
     }
 
+    /**
+     * Translate a task log line to its respective Task object
+     * @param taskLog Task log to be translated
+     * @return Task which was represented by its task log format
+     */
     public static Task translateTaskLogToTask(String taskLog) {
         Task taskToReturn = new Task();
         String[] taskLogCommands = taskLog.split(" \\| ");
@@ -44,6 +62,11 @@ public final class Parser {
         return taskToReturn;
     }
 
+    /**
+     * Translates user input to a Task object
+     * @param commandLine User input
+     * @return Task according to user input
+     */
     public static Task translateUserInputToTask(String commandLine) {
         boolean isAbleToReturn = true;
         Task taskToReturn = new Task();

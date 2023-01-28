@@ -7,13 +7,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class for Storage
+ */
 public class Storage {
     private static String filePath;
 
+    /**
+     * Constructor for Storage
+     * @param newFilePath File path to task log
+     */
     public Storage(String newFilePath) {
         filePath = newFilePath;
     }
 
+    /**
+     * Loads tasks from task log file
+     * @return An ArrayList of Tasks from task log
+     */
     public ArrayList<Task> loadTasksFromTaskLog() {
         File taskLog = new File(filePath);
         Scanner taskLogScanner = null;
@@ -32,6 +43,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Save tasks to task log file
+     * @param taskList TaskList to be saved into task log file
+     */
     public static void saveTasksToTaskLog(TaskList taskList) {
         try {
             FileWriter taskLog = new FileWriter(filePath);

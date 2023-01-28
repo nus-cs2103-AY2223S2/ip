@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Objects;
 
+/**
+ * Class for Ui
+ */
 public class Ui {
     private final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -9,16 +12,27 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    /**
+     * Greet user
+     */
     public void greetUser() {
         System.out.println(LOGO);
         System.out.println("Hello I'm duke.Duke\n"
                 + "What can I do for you?\n");
     }
 
+    /**
+     * Say goodbye to user
+     */
     public void sayGoodbye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Inform user that task has been deleted
+     * @param toDelete Task to be deleted
+     * @param tasksSize Current task list size
+     */
     public void informDeletion(Task toDelete, int tasksSize) {
         String taskCount = (tasksSize - 1 == 1) ? "task" : "tasks";
         System.out.println("Got it. I've removed this task:\n   "
@@ -26,11 +40,29 @@ public class Ui {
                 + "\nNow you have " + (tasksSize - 1) + " " + taskCount + " in your list\n");
     }
 
+    /**
+     * Inform user that task has been marked
+     * @param toMarkTask Task that has been marked
+     */
     public void informTaskIsMarked(Task toMarkTask) {
         System.out.println("Nice! I've marked this task as done:\n   "
                 + toMarkTask + "\n");
     }
 
+    /**
+     * Inform user that task has been unmarked
+     * @param toUnMarkTask Task that has been unmarked
+     */
+    public void informTaskIsUnMarked(Task toUnMarkTask) {
+        System.out.println("Nice! I've unmarked this task as incomplete:\n   "
+                + toUnMarkTask + "\n");
+    }
+
+    /**
+     * Inform user that task has been added to list of existing tasks
+     * @param task Task that has been added
+     * @param size Size of new task list
+     */
     public static void informTaskIsAdded(Task task, int size) {
         if(Objects.isNull(task)) {
             return;
@@ -41,6 +73,10 @@ public class Ui {
                 + "\nNow you have " + size + " " + taskCount + " in your list\n");
     }
 
+    /**
+     * Print all tasks in current Task List
+     * @param tasks TaskList of existing tasks
+     */
     public void printTasks(TaskList tasks) {
         int taskNumber = 1;
         for(int i = 0; i < tasks.getSize(); i++) {
@@ -50,6 +86,10 @@ public class Ui {
         System.out.print("\n");
     }
 
+    /**
+     * Shows error message to user
+     * @param e Exception thrown
+     */
     public void showError(Exception e) {
         System.out.print(e.getMessage());
     }
