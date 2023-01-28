@@ -1,12 +1,23 @@
 package iris;
 
-import iris.command.*;
+import iris.command.AddTaskCommand;
+import iris.command.Command;
+import iris.command.DeleteTaskCommand;
+import iris.command.ExitCommand;
+import iris.command.FilterCommand;
+import iris.command.HelpCommand;
+import iris.command.ListCommand;
+import iris.command.MarkTaskCommand;
+import iris.command.ResetCommand;
+import iris.command.UnmarkTaskCommand;
+
+import iris.exception.IrisException;
 import iris.exception.MissingFieldException;
+import iris.exception.NoTaskException;
+
+import iris.task.Deadline;
 import iris.task.Event;
 import iris.task.Todo;
-import iris.exception.IrisException;
-import iris.exception.NoTaskException;
-import iris.task.Deadline;
 
 public class Parser {
     enum CommandWord {
