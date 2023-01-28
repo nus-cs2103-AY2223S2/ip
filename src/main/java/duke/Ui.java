@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import duke.task.Task;
 import duke.enums.Views;
@@ -31,6 +32,18 @@ public class Ui {
             printer(Views.EMPTY_LIST_STRING.eng());
         } else {
             String toPrint = "";
+            for (int i = 0; i < tasks.size(); i++) {
+                toPrint += ((i + 1) + "." + tasks.get(i)) + "\n      ";
+            }
+            printer(toPrint.substring(0, toPrint.length() - 7));
+        }
+    }
+
+    public void showList(ArrayList<Task> tasks) throws DukeException {
+        if (tasks.size() == 0) {
+            printer(Views.CANNOT_FIND_STRING.eng());
+        } else {
+            String toPrint = Views.FOUND_LIST_STRING.eng();
             for (int i = 0; i < tasks.size(); i++) {
                 toPrint += ((i + 1) + "." + tasks.get(i)) + "\n      ";
             }

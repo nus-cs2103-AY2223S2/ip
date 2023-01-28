@@ -10,7 +10,8 @@ public enum Commands {
     MARK("mark"),
     UNMARK("unmark"),
     DELETE("delete"),
-    DEL("del");
+    DEL("del"),
+    FIND("find");
 
     private final String cmd;
 

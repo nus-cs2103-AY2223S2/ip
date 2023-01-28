@@ -28,6 +28,16 @@ public class TaskList {
         return tasksList;
     }
 
+    public ArrayList<Task> search(String query) {
+        ArrayList<Task> result = new ArrayList<Task>();
+        for (Task task : this.tasksList) {
+            if (task.getTitle().toLowerCase().contains(query.trim().toLowerCase())) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
     public int size() {
         return tasksList.size();
     }
@@ -43,4 +53,5 @@ public class TaskList {
     public void clear() {
         this.tasksList.clear();
     }
+
 }

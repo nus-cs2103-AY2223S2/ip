@@ -30,6 +30,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
     public String toExport() {
         return this.toString();
     }

@@ -8,6 +8,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.TodoCommand;
@@ -56,6 +57,9 @@ public class Parser {
                 } else if (input.startsWith(Commands.DEL.cmd())) {
                     int taskNo = getNumbers(input) - 1;
                     return new DeleteCommand(taskNo);
+                } else if (input.startsWith(Commands.FIND.cmd())) {
+                    String query = input.substring(Commands.FIND.cmd().length());
+                    return new FindCommand(query);
                 } else {
                     throw new DukeException(Views.UNKNOWN_CMD_ERR_STRING.eng());
                 }
