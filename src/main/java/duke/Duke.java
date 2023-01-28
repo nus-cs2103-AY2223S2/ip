@@ -22,6 +22,7 @@ public class Duke {
         p.parse();
         storage.store(tasks);
     }
+
     public static void main(String[] args) {
         String filePath = "./data/duke.txt";
         Duke d = new Duke(filePath);
