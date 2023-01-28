@@ -8,8 +8,8 @@ public class Event extends Task {
     protected String end;
     protected LocalTime endTime = LocalTime.of(23,59);
 
-    public Event(String description, String start, String end) {
-        super(description);
+    public Event(String description, String start, String end, String remarks) {
+        super(description, remarks);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy");
         LocalDate s = LocalDate.parse(start);
         this.start = s.format(dtf);
@@ -17,19 +17,12 @@ public class Event extends Task {
         this.end = e.format(dtf);
     }
 
-    public Event(String description, String start, String end, String startTime, String endTime) {
-        this(description, start, end);
+    public Event(String description, String start, String end, String startTime, String endTime, String remarks) {
+        this(description, start, end, remarks);
         this.startTime = LocalTime.parse(startTime);
         this.endTime = LocalTime.parse(endTime);
     }
 
-    public String getStart() {
-        return start;
-    }
-
-    public String getEnd() {
-        return end;
-    }
 
     @Override
     public String toString() {

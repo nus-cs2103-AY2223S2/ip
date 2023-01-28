@@ -5,14 +5,15 @@ public class Deadline extends Task {
     protected String date;
     protected LocalTime time = LocalTime.of(23,59);
 
-    public Deadline(String description, String date) {
-        super(description);
+
+    public Deadline(String description, String date, String remarks) {
+        super(description, remarks);
         LocalDate d = LocalDate.parse(date);
         this.date = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
-    public Deadline(String description, String date, String time) {
-        this(description, date);
+    public Deadline(String description, String date, String time, String remarks) {
+        this(description, date, remarks);
         this.time = LocalTime.parse(time);
     }
 
