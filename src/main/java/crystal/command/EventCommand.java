@@ -1,5 +1,6 @@
 package crystal.command;
 
+import crystal.CrystalException;
 import crystal.TaskList;
 import crystal.Ui;
 import crystal.Storage;
@@ -13,7 +14,7 @@ public class EventCommand extends Command{
         this.from = from;
         this.to = to;
     }
-    public void execute(TaskList tasks, Ui ui,Storage storage) {
+    public void execute(TaskList tasks, Ui ui,Storage storage) throws CrystalException {
         Event e = new Event(description, from, to);
         tasks.add(e);
         ui.printEvent(tasks, e);

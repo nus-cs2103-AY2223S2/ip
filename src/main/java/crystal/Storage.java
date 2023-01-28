@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 import crystal.task.Task;
@@ -39,9 +42,9 @@ public class Storage {
                     str.append(s + "\n");
                 }
 
-            } else if (tasks.get(i).toString().startsWith("[D]")) {
-                String s = tasks.get(i).toString().replace("[D]", "D ");
-                if (tasks.get(i).toString().contains("[X]")) {
+            } else if (tasks.get(i).toPrint().startsWith("[D]")) {
+                String s = tasks.get(i).toPrint().replace("[D]", "D ");
+                if (tasks.get(i).toPrint().contains("[X]")) {
                     s = s.replace("[X]", "| 0 |");
                     s = s.replace("(by:", "|");
                     s = s.replace(")", "");
@@ -53,12 +56,12 @@ public class Storage {
                     str.append(s + "\n");
                 }
 
-            } else if (tasks.get(i).toString().startsWith("[E]")) {
-                String s = tasks.get(i).toString().replace("[E]", "E ");
-                if (tasks.get(i).toString().contains("[X]")) {
+            } else if (tasks.get(i).toPrint().startsWith("[E]")) {
+                String s = tasks.get(i).toPrint().replace("[E]", "E ");
+                if (tasks.get(i).toPrint().contains("[X]")) {
                     s = s.replace("[X]", "| 0 |");
                     s = s.replace("(from:", "|");
-                    s = s.replace("to:", "-");
+                    s = s.replace("to:", " - ");
                     s = s.replace(")", "");
                     str.append(s + "\n");
                 } else {
@@ -81,7 +84,7 @@ public class Storage {
     }
 
     //Load file
-    public ArrayList<Task> readFileContents() {
+    public ArrayList<Task> readFileContents() throws CrystalException{
 
         File f = new File(this.filepath); // create a File for the given file path
         ArrayList<Task> temp = new ArrayList<Task>();
@@ -108,28 +111,37 @@ public class Storage {
                         int index = description.lastIndexOf("|");
                         String time = description.substring(description.lastIndexOf("|") + 1);
                         description = description.replace(description.substring(index), "");
-                        System.out.println(time);
-                        Task n = new Deadline(description.trim(), time.trim());
-                        n.isDone = true;
-                        temp.add(n);
+                        try {
+                            Task n = new Deadline(description.trim(), time.trim());
+                            n.isDone = true;
+                            temp.add(n);
+                        } catch (CrystalException e) {
+                            System.out.println("Wrong date format! Please change!");
+                        }
+
                     } else {
                         String description = t.replace("D | 1 |", "");
                         int index = description.lastIndexOf("|");
                         String time = description.substring(description.lastIndexOf("|") + 1);
                         description = description.replace(description.substring(index), "");
-                        Task n = new Deadline(description.trim(), time.trim());
-                        n.isDone = false;
-                        temp.add(n);
+                        try {
+                            Task n = new Deadline(description.trim(), time.trim());
+                            n.isDone = false;
+                            temp.add(n);
+                        } catch (CrystalException e) {
+                            System.out.println("Wrong date format! Please change!");
+                        }
                     }
+
                 } else if (t.startsWith("E")) {
                     if (t.contains("| 0 |")) {
                         String description = t.replace("E | 0 |", "");
                         int index = description.lastIndexOf("|");
                         int index2 = description.lastIndexOf("-");
                         String time = description.substring(description.lastIndexOf("|") + 1);
-                        int index3 = time.lastIndexOf("-");
+                        int index3 = time.lastIndexOf(" - ");
                         time = time.replace(time.substring(index3), "");
-                        String endtime = description.substring(description.lastIndexOf("-") + 1);
+                        String endtime = description.substring(description.lastIndexOf(" - ") + 3);
                         description = description.replace(description.substring(index), "");
                         Task n = new Event(description.trim(), time.trim(), endtime.trim());
                         n.isDone = true;
@@ -139,9 +151,9 @@ public class Storage {
                         int index = description.lastIndexOf("|");
                         int index2 = description.lastIndexOf("-");
                         String time = description.substring(description.lastIndexOf("|") + 1);
-                        int index3 = time.lastIndexOf("-");
+                        int index3 = time.lastIndexOf(" - ");
                         time = time.replace(time.substring(index3), "");
-                        String endtime = description.substring(description.lastIndexOf("-") + 1);
+                        String endtime = description.substring(description.lastIndexOf(" - ") + 3);
                         description = description.replace(description.substring(index), "");
                         Task n = new Event(description.trim(), time.trim(), endtime.trim());
                         n.isDone = false;

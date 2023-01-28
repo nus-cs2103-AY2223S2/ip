@@ -1,5 +1,6 @@
 package crystal.command;
 
+import crystal.CrystalException;
 import crystal.TaskList;
 import crystal.Ui;
 import crystal.Storage;
@@ -13,7 +14,8 @@ public class DeadlineCommand extends Command{
         this.description = description;
         this.s = s;
     }
-    public void execute(TaskList tasks, Ui ui,Storage storage) {
+    public void execute(TaskList tasks, Ui ui,Storage storage) throws CrystalException {
+
         Deadline d = new Deadline(description, s);
         tasks.add(d);
         ui.printDeadline(tasks, d);

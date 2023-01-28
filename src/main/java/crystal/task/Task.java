@@ -5,7 +5,7 @@ public abstract class Task {
     public boolean isDone;
 
     public Task(String description) {
-        this.description = description;
+        this.description = description.trim();
         this.isDone = false;
     }
 
@@ -16,6 +16,12 @@ public abstract class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+
+    public String toPrint() {
+        return this.toString();
+    }
+
 
 
 }
