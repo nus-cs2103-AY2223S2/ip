@@ -1,10 +1,8 @@
 import java.io.File;
-import java.util.Scanner;
 
 public class Todo extends Task{
 
     private static StringBuilder strBuild = new StringBuilder();
-    private static Scanner sc = new Scanner(System.in);
 
     public Todo(String name, boolean done) {
         super(name, done);
@@ -17,11 +15,11 @@ public class Todo extends Task{
     public static void createTodo(String[] split) {
         if (split.length == 1) {
             System.out.println("What do u need to do ah? u never write.");
-            String s = sc.nextLine();
+            String s = Ui.readCommand();
             Todo t = new Todo(s, false);
             strBuild.setLength(0);
-            Task.addToList(t);
-            Task.printDefault(t);
+            TaskList.addToList(t);
+            Ui.printDefault(t);
         } else {
             for (int i = 1; i < split.length; i++) {
                 strBuild.append(split[i]);
@@ -31,8 +29,8 @@ public class Todo extends Task{
             }
             Todo t = new Todo(strBuild.toString(), false);
             strBuild.setLength(0);
-            Task.addToList(t);
-            Task.printDefault(t);
+            TaskList.addToList(t);
+            Ui.printDefault(t);
         }
     }
     @Override

@@ -2,11 +2,9 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Scanner;
 
 public class Event extends Task{
     private static StringBuilder strBuild = new StringBuilder();
-    private static Scanner sc = new Scanner(System.in);
     private final LocalDateTime start;
     private final LocalDateTime end;
 
@@ -23,7 +21,6 @@ public class Event extends Task{
         boolean isName = true;
         boolean isStart = false;
         boolean isEnd = false;
-        boolean needSpace = true;
         String n = " ", s = " ", e = " ";
         for (int i = 1; i < split.length; i++) {
             if (isName) {
@@ -60,8 +57,8 @@ public class Event extends Task{
         e = strBuild.toString();
         strBuild.setLength(0);
         Event event = new Event(n, s, e, false);
-        Task.addToList(event);
-        Task.printDefault(event);
+        TaskList.addToList(event);
+        Ui.printDefault(event);
     }
 
     @Override

@@ -2,13 +2,10 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Scanner;
 
 public class Deadline extends Task{
 
     private static StringBuilder strBuild = new StringBuilder();
-    private static Scanner sc = new Scanner(System.in);
-
     private final LocalDateTime end;
     public Deadline(String name, String end, boolean done) {
         super(name, done);
@@ -42,8 +39,8 @@ public class Deadline extends Task{
         strBuild.setLength(0);
         System.out.println(e);
         Deadline d = new Deadline(n, e, false);
-        Task.addToList(d);
-        Task.printDefault(d);
+        TaskList.addToList(d);
+        Ui.printDefault(d);
     }
 
     @Override
