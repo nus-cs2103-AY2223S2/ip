@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.Objects;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.dukeexception.DukeException;
 import duke.parser.Parser;
@@ -7,8 +10,6 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.util.Objects;
-import java.util.Scanner;
 
 /**
  * A class for managing tasks
@@ -27,7 +28,7 @@ public class Duke {
         Parser parser = new Parser();
         storage.populate(tl);
         ui.showIntro();
-        while (true){
+        while (true) {
             try {
                 String str = sc.nextLine();
                 System.out.println(str);
@@ -44,6 +45,11 @@ public class Duke {
         ui.showOutro();
     }
 
+    /**
+     * Main function to run Duke CLI
+     *
+     * @param args Input to main function
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();

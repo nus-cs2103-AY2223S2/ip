@@ -17,7 +17,7 @@ public class Todo extends Task {
         if (super.getIsCompleted()) {
             return String.format("[T][X] %s\n", super.getTaskName());
         } else {
-            return String.format("[T][ ] %s\n",super.getTaskName());
+            return String.format("[T][ ] %s\n", super.getTaskName());
         }
     }
 }

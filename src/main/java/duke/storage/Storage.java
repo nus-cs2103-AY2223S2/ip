@@ -1,13 +1,5 @@
 package duke.storage;
 
-
-import duke.datetime.DateTime;
-import duke.parser.Parser;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.tasklist.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
@@ -17,12 +9,23 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.datetime.DateTime;
+import duke.parser.Parser;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+
 /**
  * Task to manage and store tasks created by user in data.txt
  */
 public class Storage {
     private static final String DATAPATH = "src/main/java/Duke/Storage/data.txt";
 
+    /**
+     * Constructor class for Storage
+     * Creates data.txt if not present
+     */
     public Storage() {
         try {
             File data = new File(Storage.DATAPATH);
@@ -60,7 +63,7 @@ public class Storage {
     public void add(String str) {
         try {
             Path filePath = Paths.get(Storage.DATAPATH);
-            Files.write(filePath,  (str + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
+            Files.write(filePath, (str + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
         } catch (java.io.IOException e) {
             System.out.println("storage add() Error:" + e);
         }
@@ -119,8 +122,8 @@ public class Storage {
             res += "E,";
             res += completed + ",";
             res += task.getTaskName() + ",";
-            res += DateTime.getDateTimeString(((Event) task).getFrom()) + ",";
-            res += DateTime.getDateTimeString(((Event) task).getTo());
+            res += DateTime.getDateTimeString(((Event) task).getStartTime()) + ",";
+            res += DateTime.getDateTimeString(((Event) task).getEndTime());
         } else if (task instanceof Deadline) {
             res += "D,";
             res += completed + ",";

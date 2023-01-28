@@ -1,29 +1,35 @@
 package duke.task;
 
+import java.time.LocalDateTime;
 
 import duke.datetime.DateTime;
-
-import java.time.LocalDateTime;
 
 /**
  * Task to represent Event task created by user
  */
 public class Event extends Task {
-    private LocalDateTime from;
-    private LocalDateTime to;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
+    /**
+     * Constructor class for Event
+     *
+     * @param name Name of Task
+     * @param from Task's starting time
+     * @param to Task's ending time
+     */
     public Event(String name, LocalDateTime from, LocalDateTime to) {
         super(name);
-        this.from = from;
-        this.to = to;
+        this.startTime = from;
+        this.endTime = to;
     }
 
-    public LocalDateTime getFrom() {
-        return this.from;
+    public LocalDateTime getStartTime() {
+        return this.startTime;
     }
 
-    public LocalDateTime getTo() {
-        return this.to;
+    public LocalDateTime getEndTime() {
+        return this.endTime;
     }
 
     /**
@@ -31,8 +37,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String from = DateTime.getDateTimeString(this.from);
-        String to = DateTime.getDateTimeString(this.to);
+        String from = DateTime.getDateTimeString(this.startTime);
+        String to = DateTime.getDateTimeString(this.endTime);
         if (super.getIsCompleted()) {
             return String.format("[E][X] %s (from: %s to: %s)\n", super.getTaskName(), from, to);
         } else {

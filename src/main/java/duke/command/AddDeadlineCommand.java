@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import duke.datetime.DateTime;
 import duke.dukeexception.DukeException;
 import duke.storage.Storage;
@@ -7,16 +10,19 @@ import duke.task.Deadline;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-
-
 /**
  * Class in charge of handling the case of adding Deadline Task
  */
-public class AddDeadlineCommand extends Command{
+public class AddDeadlineCommand extends Command {
     private String deadlineString;
     private String name;
+
+    /**
+     * Constructor to create a AddDeadlineCommand
+     *
+     * @param name deadline name
+     * @param deadlineString Task's deadline in string form
+     */
     public AddDeadlineCommand(String name, String deadlineString) {
         this.name = name;
         this.deadlineString = deadlineString;
@@ -38,8 +44,8 @@ public class AddDeadlineCommand extends Command{
             storage.add(storage.getStorageTaskString(dl));
             ui.showAddDeadlineResult(dl.toString(), tl.getSize());
         } catch (DateTimeParseException e) {
-            throw new DukeException("Wrong format for deadline, " +
-                    "please follow deadline name /by datetime(yyyy-mm-dd HH:mm)");
+            throw new DukeException("Wrong format for deadline, "
+                    + "please follow deadline name /by datetime(yyyy-mm-dd HH:mm)");
         }
     }
 }

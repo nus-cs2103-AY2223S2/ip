@@ -8,7 +8,7 @@ import duke.ui.Ui;
 /**
  * Class in charge of handling the case of adding a Todotask
  */
-public class AddTodoCommand extends Command{
+public class AddTodoCommand extends Command {
     private String name;
     public AddTodoCommand(String name) {
         this.name = name;

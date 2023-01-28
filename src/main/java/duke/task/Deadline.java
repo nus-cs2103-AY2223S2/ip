@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.datetime.DateTime;
-
 import java.time.LocalDateTime;
+
+import duke.datetime.DateTime;
 
 /**
  * Task to represent Deadline task created by user
@@ -10,6 +10,12 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
+    /**
+     * Constructor for Deadline
+     *
+     * @param name Name of task
+     * @param deadline Task's deadline
+     */
     public Deadline(String name, LocalDateTime deadline) {
         super(name);
         this.deadline = deadline;
@@ -28,7 +34,7 @@ public class Deadline extends Task {
         if (super.getIsCompleted()) {
             return String.format("[D][X] %s (by: %s)\n", super.getTaskName(), deadline);
         } else {
-            return String.format("[D][ ] %s (by: %s)\n",super.getTaskName(), deadline);
+            return String.format("[D][ ] %s (by: %s)\n", super.getTaskName(), deadline);
         }
     }
 }

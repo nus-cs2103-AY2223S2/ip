@@ -1,14 +1,14 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import duke.datetime.DateTime;
 import duke.dukeexception.DukeException;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * Class in charge of handling the case of adding Event task
@@ -17,6 +17,15 @@ public class AddEventCommand extends Command {
     private String fromString;
     private String toString;
     private String name;
+
+
+    /**
+     * Constructor to create AddEventCommand
+     *
+     * @param name Name of task
+     * @param fromString Task's starting time in string
+     * @param toString Task's ending time in string
+     */
     public AddEventCommand(String name, String fromString, String toString) {
         this.fromString = fromString;
         this.toString = toString;
@@ -40,8 +49,8 @@ public class AddEventCommand extends Command {
             storage.add(storage.getStorageTaskString(ev));
             ui.showAddEventResult(ev.toString(), tl.getSize());
         } catch (DateTimeParseException e) {
-            throw new DukeException("Wrong format for event, " +
-                    "please follow deadline name /from datetime /to datetime(yyyy-mm-dd hh:mm)");
+            throw new DukeException("Wrong format for event, "
+                    + "please follow deadline name /from datetime /to datetime(yyyy-mm-dd hh:mm)");
         }
     }
 }

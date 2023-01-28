@@ -5,7 +5,7 @@ import java.lang.StringBuilder;
 /**
  * Class to manage problems during execution of Duke CLI
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     private static final String STARTING = "    ____________________________________________________________\n";
     private static final String ENDING = "    ____________________________________________________________\n";
     private static final String SPACING = "     ☹ OOPS!!! ";

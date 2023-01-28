@@ -1,9 +1,9 @@
 package duke.ui;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 import duke.tasklist.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * Ui class to perform the outputting tasks to user
@@ -12,13 +12,13 @@ public class Ui {
     private final String STARTING = "    ____________________________________________________________\n";
     private final String ENDING = "    ____________________________________________________________\n";
     private final String SPACING = "     ";
-    private static final String INTRO = "    ____________________________________________________________\n" +
-            "     Hello! I'm Duke\n" +
-            "     What can I do for you?\n" +
-            "    ____________________________________________________________\n";
-    private static final String OUTRO = "    ____________________________________________________________\n" +
-            "     Bye. Hope to see you again soon!\n" +
-            "    ____________________________________________________________\n";
+    private static final String INTRO = "    ____________________________________________________________\n"
+            + "     Hello! I'm Duke\n"
+            + "     What can I do for you?\n"
+            + "    ____________________________________________________________\n";
+    private static final String OUTRO = "    ____________________________________________________________\n"
+            + "     Bye. Hope to see you again soon!\n"
+            + "    ____________________________________________________________\n";
 
     public Ui() {}
 

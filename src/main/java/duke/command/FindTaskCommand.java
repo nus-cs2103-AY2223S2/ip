@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Class in charge of handling the case to display all task matching keyword
