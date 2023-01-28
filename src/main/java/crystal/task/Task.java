@@ -1,23 +1,48 @@
 package crystal.task;
 
+/**
+ * Represents the abstract task class for all tasks.
+ *
+ */
 public abstract class Task {
+
     protected String description;
     public boolean isDone;
 
+
+    /**
+     * Constructor for Task class.
+     *
+     * @param description Task description
+     *
+     */
     public Task(String description) {
         this.description = description.trim();
         this.isDone = false;
     }
 
+    /**
+     *  Returns a String X if isDone is true else
+     *  returns an empty string
+     *
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     *  Returns the printed output format shown in the list
+     *
+     */
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
 
+    /**
+     *  Returns the String output for when saving the list
+     *
+     */
     public String toPrint() {
         return this.toString();
     }

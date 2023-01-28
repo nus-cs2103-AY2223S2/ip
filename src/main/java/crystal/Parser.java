@@ -10,7 +10,20 @@ import crystal.command.EventCommand;
 import crystal.command.ByeCommand;
 import crystal.command.DeleteCommand;
 
+/**
+ * Represents the Parser task.
+ *
+ */
+
 public class Parser {
+
+    /**
+     * Returns the respective command object based on the command
+     * the user enters.
+     *
+     * @param command User command
+     * @throws CrystalException When user command is not recognised
+     */
     public static Command parse(String command) throws CrystalException {
         if (command.equals("list")) {
             return new ListCommand();

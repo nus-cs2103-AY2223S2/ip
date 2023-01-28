@@ -1,21 +1,26 @@
 package crystal.task;
 
 import crystal.CrystalException;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
+/**
+ * Represents the deadline task.
+ *
+ */
 
 public class Deadline extends Task {
 
-    //protected String by;
     public LocalDateTime by;
 
 
+    /**
+     * Constructor for Deadline class.
+     *
+     * @param description Task description
+     * @param by Task date and time
+     * @throws CrystalException When user input is in the incorrect format
+     */
     public Deadline(String description, String by) throws CrystalException {
         super(description);
 
@@ -26,20 +31,27 @@ public class Deadline extends Task {
             throw new CrystalException("Please change the input date format to yyyy-MMM-dThh:mm!");
         }
 
-
-
-
     }
 
 
+    /**
+     *  Returns the printed output shown in the list
+     *
+     */
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmm a")) + ")";
+        return "[D]" + super.toString() + " (by: " +
+                this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmm a")) + ")";
     }
 
+    /**
+     *  Returns the String output when saving the list
+     *
+     */
     @Override
     public String toPrint() {
+
         return "[D]" + super.toString() + " (by: " + this.by + ")";
     }
 }

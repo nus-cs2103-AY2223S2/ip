@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 import crystal.task.Task;
@@ -14,13 +11,32 @@ import crystal.task.Todo;
 import crystal.task.Deadline;
 import crystal.task.Event;
 
+/**
+ * Represents the Storage task.
+ *
+ */
+
 public class Storage {
     String filepath;
+
+    /**
+     * Constructor for Storage class.
+     *
+     * @param filepath filepath where the list is stored at.
+     *
+     */
 
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Method to write to the file.
+     *
+     * @param filepath Filepath to store the list at
+     * @param textToAdd Text to be printed on the file
+     *
+     */
     //Save to file
     public void writeToFile(String filepath,String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filepath);
@@ -28,6 +44,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Method to save the file.
+     *
+     * @param tasks Tasklist to be saved
+     *
+     */
     public void saveFile(TaskList tasks) {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
@@ -83,6 +105,11 @@ public class Storage {
 
     }
 
+    /**
+     * Method to read the file and return a Task arraylist.
+     * @throws CrystalException When the date format is not recognised
+     *
+     */
     //Load file
     public ArrayList<Task> readFileContents() throws CrystalException{
 
