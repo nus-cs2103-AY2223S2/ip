@@ -26,7 +26,7 @@ public class Deadline extends Duke.Task {
                 Integer.parseInt(strArrDate[2].substring(5,7)),
                 Integer.parseInt(strArrDate[2].substring(7)));
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MMM-YYYY");
-        return "(" + "by: " + dtf.format(dateTypeDeadline) + ")";
+        return "(" + "by: " + dtf.format(dateTypeDeadline) + ")"; 
     }
 
     public Deadline(String content, boolean mark) {
