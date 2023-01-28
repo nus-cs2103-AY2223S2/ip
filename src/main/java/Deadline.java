@@ -4,31 +4,31 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    protected LocalDate bydate = null;
-    protected LocalTime bytime = null;
+    protected LocalDate byDate = null;
+    protected LocalTime byTime = null;
 
     public Deadline(String description, String by) {
         super(description);
         // eg. 2019-12-01 10:15
         String[] strs = by.split(" ");
-        this.bydate = LocalDate.parse(strs[0]);
+        this.byDate = LocalDate.parse(strs[0]);
         if (strs.length == 2) {
-            this.bytime = LocalTime.parse(strs[1]);
+            this.byTime = LocalTime.parse(strs[1]);
         }
     }
 
     @Override
     public String storageStr() {
         return "D | " + super.getStatusValue() + " | " + super.description
-                + " | " + this.by;
+                + " | " + this.byDate + (this.byTime != null? " " + this.byTime : "");
     }
 
     @Override
     public String toString() {
         String result = "[D]" + super.toString() + " (by: "
-                + bydate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        if (bytime != null) {
-            result = result + " " + bytime.toString();
+                + byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        if (byTime != null) {
+            result = result + " " + byTime.toString();
         }
         return result + ")";
     }

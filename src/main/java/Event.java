@@ -25,7 +25,8 @@ public class Event extends Task {
     @Override
     public String storageStr() {
         return "E | " + super.getStatusValue() + " | " + super.description
-                + " | " + this.from + " | " + this.to;
+                + " | " + this.fromDate + (this.fromTime != null? " " + this.fromTime : "")
+                + " | " + this.toDate + (this.toTime != null? " " + this.toTime : "");
     }
 
     @Override

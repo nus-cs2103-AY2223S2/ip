@@ -21,7 +21,6 @@ public class Duke {
             result += storage.get(i).storageStr();
             result += "\n";
         }
-        System.out.println(result);
         return result;
     }
 
