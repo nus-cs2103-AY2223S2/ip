@@ -72,6 +72,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints all tasks in the list which contain the keyword.
+     * @param keyword String keyword from find command.
+     * @throws DukeException If keyword is empty.
+     */
     public void printMatchingList(String keyword) throws DukeException {
         if (keyword.isEmpty()) {
             throw new DukeException("empty keyword");

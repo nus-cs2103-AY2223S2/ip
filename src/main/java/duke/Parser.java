@@ -3,15 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.EventCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.ToDoCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -72,6 +64,12 @@ public class Parser {
             }
             index = parseIntArg(arguments);
             command = new DeleteCommand(index - 1);
+            break;
+        case "find":
+            if (single) {
+                throw new DukeException("empty keyword");
+            }
+            command = new FindCommand(arguments);
             break;
         case "todo":
             if (single) {
