@@ -12,23 +12,8 @@ import duke.command.TodoCommand;
 import duke.command.DeleteCommand;
 import duke.exception.DukeException;
 
-
-
-
 public class Parser {
-    public static Commands getCommand(String userInput) throws DukeException {
-        String strCommand = userInput.split(" ", 2)[0];
-        try {
-            Commands command = Commands.valueOf(strCommand.toUpperCase());
-            return command;
-        } catch (IllegalArgumentException e) {
-            throw new DukeException("Invalid command");
-        } catch (NullPointerException e) {
-            throw new DukeException("No command given");
-        }
-    }
-
-    public static Command parse(String userInput) throws DukeException {
+    public Command parse(String userInput) throws DukeException {
         Commands command = Parser.getCommand(userInput); // will catch any invalid command alrdy
         Command c = null;
         switch (command) {
@@ -65,7 +50,19 @@ public class Parser {
         return c;
     }
 
-    public static int parseMarkOrDeleteCommands(String userInput) throws DukeException {
+    private static Commands getCommand(String userInput) throws DukeException {
+        try {
+            String strCommand = userInput.split(" ", 2)[0];
+            Commands command = Commands.valueOf(strCommand.toUpperCase());
+            return command;
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("Invalid command");
+        } catch (NullPointerException e) {
+            throw new DukeException("Null exception encountered");
+        }
+    }
+
+    private static int parseMarkOrDeleteCommands(String userInput) throws DukeException {
         String[] splitStr = userInput.split(" ", 2);
         if (splitStr.length < 2) {
             throw new DukeException("Mark / Unmark / Delete commands require an integer argument referring to task number");
@@ -79,7 +76,7 @@ public class Parser {
         }
     }
 
-    public static String parseTodoCommand(String userInput) throws DukeException {
+    private static String parseTodoCommand(String userInput) throws DukeException {
         String[] splitStr = userInput.split(" ", 2);
         if (splitStr.length < 2) {
             throw new DukeException("Todo command requires a task description");
@@ -88,7 +85,7 @@ public class Parser {
         }
     }
 
-    public static String[] parseDeadlineCommand(String userInput) throws DukeException {
+    private static String[] parseDeadlineCommand(String userInput) throws DukeException {
         String[] splitStr = userInput.split(" ", 2);
         if (splitStr.length < 2) {
             throw new DukeException("duke.Task.Deadline command requires task description and /by argument");
@@ -102,7 +99,7 @@ public class Parser {
         }
     }
 
-    public static String[] parseEventCommand(String userInput) throws DukeException {
+    private static String[] parseEventCommand(String userInput) throws DukeException {
         String[] splitStr = userInput.split(" ", 2);
         if (splitStr.length < 2) {
             throw new DukeException("duke.Task.Event command requires task description, /from argument and /to argument");
