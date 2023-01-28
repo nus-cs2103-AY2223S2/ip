@@ -2,12 +2,18 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * Main class that runs the chatbot
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * @param filePath
+     */
     public Duke(String filePath) {
         // TODO use filePath
         ui = new Ui();
@@ -20,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the chatbot
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

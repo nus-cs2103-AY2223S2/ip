@@ -6,9 +6,21 @@ import java.time.format.DateTimeFormatter;
 import duke.enums.Views;
 import duke.DukeException;
 
+/**
+ * Deadline, task with a date
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
+    /**
+     * Creates a Deadline
+     *
+     * Will try and parse it as date and throw exception when it cannot
+     *
+     * @param title of the Task that that is being created
+     * @param by    the deadline of the Task
+     * @throws DukeException
+     */
     public Deadline(String title, String by) throws DukeException {
         super(title);
         try {
@@ -18,6 +30,14 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Creates a Deadline, with isDone field. Mostly used by Storage
+     *
+     * @param title  of the Task that that is being created
+     * @param by     the deadline of the Task
+     * @param isDone status of the Task
+     * @throws DukeException
+     */
     public Deadline(String title, String by, boolean isDone) throws DukeException {
         super(title, isDone);
         try {
@@ -27,11 +47,21 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Method for formatting the Task to store in a txt file
+     *
+     * @return String of the Task
+     */
     @Override
     public String toExport() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
+    /**
+     * Get a String representation to display to user of a Task
+     *
+     * @return String representation of the Task
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm")) + ")";

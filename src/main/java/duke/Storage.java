@@ -13,6 +13,9 @@ import duke.task.Todo;
 import duke.enums.Commands;
 import duke.enums.Views;
 
+/**
+ * Class to manage storage of persistent files
+ */
 public class Storage {
     // private final String filePath;
 
@@ -20,6 +23,11 @@ public class Storage {
     // this.filePath = filePath;
     // }
 
+    /**
+     * Given a list of tasks, it will save it into a txt file
+     *
+     * @param tasks
+     */
     public void save(TaskList tasks) {
         File dukeData = new File("duke_data.txt");
         try (PrintWriter writer = new PrintWriter(new FileWriter(dukeData));) {
@@ -39,6 +47,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the items from storage
+     *
+     * @return Array of tasks
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasksList = new ArrayList<Task>(100);
         try {

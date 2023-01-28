@@ -18,7 +18,18 @@ import duke.enums.Views;
 
 import java.util.regex.Matcher;
 
+/**
+ * Parses the input given from the user and returns the appropriate commands
+ */
 public class Parser {
+    /**
+     * Given the user input, sort it out and returns the command associated with the
+     * input
+     *
+     * @param input
+     * @return Command object that matches the user input
+     * @throws DukeException
+     */
     public static Command parse(String input) throws DukeException {
         switch (input) {
             case "list":
@@ -66,6 +77,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Gathers the numbers found from a string
+     *
+     * @param input
+     * @return int
+     * @throws DukeException
+     */
     private static int getNumbers(String input) throws DukeException {
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(input);

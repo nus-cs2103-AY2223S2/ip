@@ -6,10 +6,23 @@ import java.time.format.DateTimeFormatter;
 import duke.DukeException;
 import duke.enums.Views;
 
+/**
+ * Event object that has a to and from date object
+ */
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
 
+    /**
+     * Takes in title and from and to to create an event
+     *
+     * Will try and parse it as date and throw exception when it cannot
+     *
+     * @param title of the Task that that is being created
+     * @param from  of the event starting date
+     * @param to    of the event ending date
+     * @throws DukeException
+     */
     public Event(String title, String from, String to) throws DukeException {
         super(title);
         try {
@@ -23,6 +36,15 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * This method sets the isDone status directly. Mostly used from Storage
+     *
+     * @param title  of the Task that that is being created
+     * @param from   of the event starting date
+     * @param to     of the event ending date
+     * @param isDone status of the Task
+     * @throws DukeException
+     */
     public Event(String title, String from, String to, boolean isDone) throws DukeException {
         super(title, isDone);
         try {
@@ -36,11 +58,21 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Method for formatting the Task to store in a txt file
+     *
+     * @return String of the Task
+     */
     @Override
     public String toExport() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 
+    /**
+     * Get a String representation to display to user of a Task
+     *
+     * @return String representation of the Task
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM d yyyy HHmm"))

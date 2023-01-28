@@ -1,5 +1,8 @@
 package duke.enums;
 
+/**
+ * Enum for every spoken line from Duke
+ */
 public enum Views {
     LINE_STRING("____________________________________________________________"),
     WELCOME_STRING("Hello! I'm Duke\n      What can I do for grades?"),

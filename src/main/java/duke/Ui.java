@@ -6,17 +6,31 @@ import java.util.ArrayList;
 import duke.task.Task;
 import duke.enums.Views;
 
+/**
+ * Class to interact with the user via commands and messages
+ */
 public class Ui {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Constructs the UI
+     */
     Ui() {
 
     }
 
+    /**
+     * Reads the input given by the user
+     *
+     * @return String
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Prints out the welcome message
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ / _   _| | _____ \n"
@@ -27,6 +41,12 @@ public class Ui {
         printer(Views.WELCOME_STRING.eng());
     }
 
+    /**
+     * Takes in a list of tasks and prints it all out
+     *
+     * @param tasks
+     * @throws DukeException
+     */
     public void showList(TaskList tasks) throws DukeException {
         if (tasks.size() == 0) {
             printer(Views.EMPTY_LIST_STRING.eng());
@@ -38,6 +58,13 @@ public class Ui {
             printer(toPrint.substring(0, toPrint.length() - 7));
         }
     }
+
+    /**
+     * Takes in a ArrayList of tasks and prints it all out
+     *
+     * @param tasks
+     * @throws DukeException
+     */
 
     public void showList(ArrayList<Task> tasks) throws DukeException {
         if (tasks.size() == 0) {
@@ -51,18 +78,43 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints out the task that is marked done
+     *
+     * @param tasks
+     * @param taskNo
+     * @throws DukeException
+     */
     public void showMarkDone(TaskList tasks, int taskNo) throws DukeException {
         printer(Views.MARK_DONE_STRING.eng() + tasks.get(taskNo));
     }
 
+    /**
+     * Prints out the task that is marked undone
+     *
+     * @param tasks
+     * @param taskNo
+     * @throws DukeException
+     */
     public void showUnmarkDone(TaskList tasks, int taskNo) throws DukeException {
         printer(Views.UNMARK_DONE_STRING.eng() + tasks.get(taskNo));
     }
 
+    /**
+     * Prints out the task that is newly added
+     *
+     * @param newTask
+     */
     public void showAdd(Task newTask) {
         printer("added: " + newTask);
     }
 
+    /**
+     * Prints out the task that is deleted and show the number of tasks left
+     *
+     * @param delTask
+     * @param task
+     */
     public void showDel(Task delTask, TaskList task) {
         String returnString = Views.DELETE_DONE_STRING.eng();
         returnString += delTask.toString();
@@ -73,22 +125,41 @@ public class Ui {
         printer(returnString);
     }
 
+    /**
+     * Prints out to user to show that the task has been cleared
+     */
     public void showClear() {
         printer(Views.CLEAR_LIST_STRING.eng());
     }
 
+    /**
+     * Prints out bye message
+     */
     public void showEnd() {
         printer(Views.END_STRING.eng());
     }
 
+    /**
+     * Prints out the error given in as a String
+     *
+     * @param err
+     */
     public void showError(String err) {
         printer(err);
     }
 
+    /**
+     * Print out load error when loading from a file
+     */
     public void showLoadingError() {
         printer("File load has error");
     }
 
+    /**
+     * Private method to print with lines and indents
+     *
+     * @param to of the event ending datePrint
+     */
     private static void printer(String toPrint) {
         System.out.println("    " + Views.LINE_STRING.eng());
         System.out.println("      " + toPrint);
