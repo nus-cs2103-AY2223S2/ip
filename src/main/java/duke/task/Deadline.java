@@ -38,7 +38,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * {@inheritDoc}
+     * Get the String representation of the task type
+     *
+     * @return String representation of the task type
      */
     @Override
     public String getTaskType() {
@@ -46,7 +48,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * {@inheritDoc}
+     * Get the String representation of the completion status
+     *
+     * @return String representation of the completion status
      */
     @Override
     public String getStatus() {
@@ -54,7 +58,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * {@inheritDoc}
+     * Get the String representation of the task description
+     *
+     * @return String representation of the task description
      */
     @Override
     public String getDescription() {
@@ -62,7 +68,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * {@inheritDoc}
+     * Override toString method
+     *
+     * @return String representation of task object including completion status
      */
     @Override
     public String toString() {
