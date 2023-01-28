@@ -1,9 +1,23 @@
 package duke.tasks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class TaskList extends ArrayList<Task> {
+    public TaskList() {
+
+    }
+
+    public TaskList(Collection<? extends Task> tasks) {
+        super(tasks);
+    }
+    
+    public TaskList(Task[] tasks) {
+        super(Arrays.asList(tasks));
+    }
+
     public String getStatus() {
         switch (this.size()) {
             case 0:
