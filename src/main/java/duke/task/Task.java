@@ -31,13 +31,7 @@ public abstract class Task {
     }
 
     public String toExport() {
-        String returnString = "";
-        if (isDone) {
-            returnString = "[X] ";
-        } else {
-            returnString = "[ ] ";
-        }
-        return returnString + title;
+        return this.toString();
     }
 
     @Override
