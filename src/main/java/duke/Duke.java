@@ -7,6 +7,7 @@ import java.util.*;
 public class Duke {
     public static boolean offBot = false;
     public static void main(String[] args) {
+        Locale.setDefault(Locale.ENGLISH);
         System.out.println("Hello! I'm Duke.Duke\n" +
                 "What can I do for you?");
         //CommandCreator creator = new CommandCreator();

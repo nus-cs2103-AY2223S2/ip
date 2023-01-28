@@ -2,12 +2,14 @@ package duke.task;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 public class Deadline extends Tasks {
     private LocalDateTime time = null;
     public Deadline(String content, String date, boolean isDone) {
         super(content, isDone);
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        format.withLocale(Locale.ENGLISH);
         this.time = LocalDateTime.parse(date, format);
         this.type = 'D';
     }
