@@ -1,6 +1,14 @@
 package duke;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.ToDoCommand;
+import duke.command.UnmarkCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -8,9 +16,18 @@ import duke.task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/** Class parses user input into commands. */
 public class Parser {
+
+    /** Empty constructor creates an instance of Parser. */
     public Parser() {}
 
+    /**
+     * Returns an appropriate command based on user input.
+     * @param userInput String containing user input.
+     * @return Command object based on user input.
+     * @throws DukeException If user provides an inappropriate command format.
+     */
     public Command parse(String userInput) throws DukeException {
         String[] commandDetails = userInput.trim().split(" ", 2);
         boolean single = commandDetails.length < 2;
@@ -96,6 +113,12 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Returns an integer from parsed string argument if a valid argument is given.
+     * @param argument Parsed string argument that should contain an integer.
+     * @return Parsed integer.
+     * @throws DukeException If argument given is empty or not an integer.
+     */
     public int parseIntArg(String argument) throws DukeException {
         int intArgument;
         try {
@@ -106,6 +129,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the taskname for a Todotask from the given argument.
+     * @param argument String containing user input for a Todotask command.
+     * @return taskName for a Todotask.
+     * @throws DukeException If argument is empty.
+     */
     public String parseTodo(String argument) throws DukeException {
         String taskName = argument.trim();
         if (taskName.isEmpty()) {
@@ -115,6 +144,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns parsed inputs for creating a Deadline from the given user input.
+     * @param argument String contains user input for creating a Deadline.
+     * @return An array of strings containing the taskName and deadline for creating a Deadline.
+     * @throws DukeException If any of the user inputs are empty or of the wrong format.
+     */
     public String[] parseDeadline(String argument) throws DukeException {
         argument = argument.trim();
         if (argument.isEmpty()) {
@@ -132,6 +167,12 @@ public class Parser {
         return deadlineDetails;
     }
 
+    /**
+     * Returns parsed inputs for creating an Event from the given user input.
+     * @param argument String contains user input for creating an Event.
+     * @return An array of strings containing the taskName, startDate and endDate for creating an Event.
+     * @throws DukeException If any of the user inputs are empty or of the wrong format.
+     */
     public String[] parseEvent(String argument) throws DukeException {
         argument = argument.trim();
         if (argument.isEmpty()) {

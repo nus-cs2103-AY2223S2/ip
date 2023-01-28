@@ -7,9 +7,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class contains variables and methods related to a Deadline task.
+ */
 public class Deadline extends Task {
     protected LocalDate deadline;
 
+    /**
+     * Creates an instance of Deadline.
+     * @param taskName String of Deadline task name.
+     * @param deadline contains LocalDate deadline of Deadline.
+     */
     public Deadline(String taskName, LocalDate deadline) {
         super(taskName);
         this.deadline = deadline;
@@ -39,6 +47,14 @@ public class Deadline extends Task {
         return String.format("D | %s | %s\n", super.toFile(), deadline);
     }
 
+    /**
+     * Creates Deadline task from String from file.
+     * @param taskNameData String containing taskName from file.
+     * @param doneData String containing whether task is done from file string.
+     * @param deadlineData String containing deadline from file.
+     * @return Deadline created from file input.
+     * @throws DukeException If string input is empty or of the wrong format.
+     */
     public static Deadline toDeadlineFromFileStr(String taskNameData, String doneData, String deadlineData)
             throws DukeException {
         Deadline d = null;

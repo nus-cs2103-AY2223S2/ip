@@ -7,13 +7,24 @@ import duke.task.Todo;
 
 import java.util.LinkedList;
 
+/**
+ * Class contains variables and methods related to modifying a list of Tasks.
+ */
 public class TaskList {
     protected LinkedList<Task> lst;
 
+    /**
+     * Creates an instance of TaskList.
+     */
     public TaskList() {
         this.lst = new LinkedList<>();
     }
 
+    /**
+     * Marks the task at the given index of the TaskList as done.
+     * @param taskNum index of task to be marked as done in the TaskList.
+     * @throws DukeException If index given is out of bounds.
+     */
     public void mark(int taskNum) throws DukeException {
         if (taskNum < 0 || taskNum > lst.size() - 1) {
             throw new DukeException("bounds");
@@ -22,6 +33,11 @@ public class TaskList {
         t.markAsDone();
     }
 
+    /**
+     * Marks the task at the given index in TaskList as unDone.
+     * @param taskNum index of task to be marked as unDone.
+     * @throws DukeException If index given is out of bounds.
+     */
     public void unmark(int taskNum) throws DukeException{
         if (taskNum < 0 || taskNum > lst.size() - 1) {
             throw new DukeException("bounds");
@@ -30,6 +46,11 @@ public class TaskList {
         t.markAsUndone();
     }
 
+    /**
+     * Removes task at given index of TaskList.
+     * @param taskNum index of task to be removed.
+     * @throws DukeException If index given is out of bounds.
+     */
     public void deleteTask(int taskNum) throws DukeException{
         if (taskNum < 0 || taskNum > lst.size() - 1) {
             throw new DukeException("bounds");
@@ -38,6 +59,9 @@ public class TaskList {
 
     }
 
+    /**
+     * Prints all the tasks in the list.
+     */
     public void printList() {
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < lst.size(); i++) {
@@ -62,12 +86,28 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns task at given index of the list.
+     * @param index index of task to be retrieved.
+     * @return Task at given index of the list.
+     */
     public Task getTask(int index) {
         return this.lst.get(index);
     }
 
-    public void addTask(Task t) { this.lst.add(t); }
+    /**
+     * Adds a task to the list.
+     * @param t Task to be added.
+     */
+    public void addTask(Task t) {
+        this.lst.add(t);
+    }
 
+    /**
+     * Parses String into a Task and adds it to the list.
+     * @param data contains inputs to creating a Task.
+     * @throws DukeException If given input is empty or if the given input is of the wrong format.
+     */
     public void addTaskFromString(String data) throws DukeException{
         Task task = null;
         if (data.trim().isEmpty()) {
@@ -99,6 +139,10 @@ public class TaskList {
         this.lst.add(task);
     }
 
+    /**
+     * Returns size of list.
+     * @return int size of list.
+     */
     public int getSize() {
         return this.lst.size();
     }

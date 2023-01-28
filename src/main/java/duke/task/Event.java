@@ -7,10 +7,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class contains variables and methods related to Event tasks.
+ */
 public class Event extends Task {
     protected LocalDate start;
     protected LocalDate end;
 
+    /**
+     * Creates an instance of Event task.
+     * @param taskName name of Event task.
+     * @param start LocalDate start date of Event task.
+     * @param end LocalDate end date of Event task.
+     */
     public Event(String taskName, LocalDate start, LocalDate end) {
         super(taskName);
         this.start = start;
@@ -43,6 +52,15 @@ public class Event extends Task {
         return String.format("E | %s | %s | %s\n", super.toFile(), this.start, this.end);
     }
 
+    /**
+     * Creates Event task from string from file.
+     * @param taskNameData String containing taskName from file.
+     * @param doneData String containing whether task is done from file string.
+     * @param startData String containing start date from file.
+     * @param endData String containing end date from file.
+     * @return Event task.
+     * @throws DukeException If String from file input is empty or of the wrong format.
+     */
     public static Event toEventFromFileStr(String taskNameData, String doneData,
                                                 String startData, String endData) throws DukeException {
         Event event = null;
