@@ -28,9 +28,9 @@ public class Parser {
      */
     public Parser(String command) {
         this.fullCommand = command;
-        String[] temp = command.split(" +", 2);
-        this.baseCommand = temp[0];
-        String rawBody = temp.length > 1 ? temp[1].trim() : "";
+        String[] splittedCommand = command.split(" +", 2);
+        this.baseCommand = splittedCommand[0];
+        String rawBody = splittedCommand.length > 1 ? splittedCommand[1].trim() : "";
         String body = "";
 
         boolean isFirstElement = true;
@@ -40,8 +40,8 @@ public class Parser {
                 body = str;
                 continue;
             }
-            String[] temp2 = str.split(" +", 2);
-            namedParameters.put(temp2[0], temp2.length > 1 ? temp2[1] : "");
+            String[] splittedParam = str.split(" +", 2);
+            namedParameters.put(splittedParam[0], splittedParam.length > 1 ? splittedParam[1] : "");
         }
         this.body = body;
     }

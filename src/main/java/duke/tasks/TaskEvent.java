@@ -42,22 +42,20 @@ public class TaskEvent extends Task {
     @Override
     public String encodeAsString() {
         return Task.encodeValues(new String[]{ 
-            "E", 
-            this.isDone ? "1" : "0", 
-            this.description, 
-            this.fromTime.toString(), 
-            this.toTime.toString()
-        });
+                "E", 
+                this.isDone ? "1" : "0", 
+                this.description, 
+                this.fromTime.toString(), 
+                this.toTime.toString() });
     }
 
     @Override
     public String toString() {
         return String.format(
-            "[E]%s (from: %s to: %s)", 
-            super.toString(), 
-            Task.formatDate(this.fromTime), 
-            Task.formatDate(this.toTime)
-        );
+                "[E]%s (from: %s to: %s)", 
+                super.toString(), 
+                Task.formatDate(this.fromTime), 
+                Task.formatDate(this.toTime));
     }
 
     @Override

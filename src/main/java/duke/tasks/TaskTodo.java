@@ -31,10 +31,9 @@ public class TaskTodo extends Task {
     @Override
     public String encodeAsString() {
         return Task.encodeValues(new String[]{ 
-            "T", 
-            this.isDone ? "1" : "0", 
-            this.description
-        });
+                "T", 
+                this.isDone ? "1" : "0", 
+                this.description });
     }
 
     @Override

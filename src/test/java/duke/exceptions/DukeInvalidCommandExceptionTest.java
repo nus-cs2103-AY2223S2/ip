@@ -17,8 +17,7 @@ public class DukeInvalidCommandExceptionTest {
         DukeInvalidCommandException exception = new DukeInvalidCommandException();
         assertEquals(exception.getMessage(), message);
         assertEquals(
-            exception.getDukeMessage(), 
-            DukeException.DUKE_MESSAGE_PREFIX + message
-        );
+                exception.getDukeMessage(), 
+                DukeException.DUKE_MESSAGE_PREFIX + message);
     }
 }

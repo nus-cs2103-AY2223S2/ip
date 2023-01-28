@@ -37,21 +37,19 @@ public class TaskDeadline extends Task {
 
     @Override
     public String encodeAsString() {
-        return Task.encodeValues(new String[]{ 
-            "D", 
-            this.isDone ? "1" : "0", 
-            this.description.toString(), 
-            this.endTime.toString()
-        });
+        return Task.encodeValues(new String[]{
+                "D", 
+                this.isDone ? "1" : "0", 
+                this.description.toString(), 
+                this.endTime.toString() });
     }
 
     @Override
     public String toString() {
         return String.format(
-            "[D]%s (by: %s)", 
-            super.toString(), 
-            Task.formatDate(this.endTime)
-        );
+                "[D]%s (by: %s)", 
+                super.toString(), 
+                Task.formatDate(this.endTime));
     }
 
     @Override

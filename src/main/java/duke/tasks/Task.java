@@ -47,8 +47,8 @@ public abstract class Task {
     protected static String encodeValues(String[] values) {
         UnaryOperator<String> escapeVerticalBar = str -> str.replace("|", "\\|");
         return Stream.of(values)
-            .map(escapeVerticalBar)
-            .collect(Collectors.joining(" | "));
+                .map(escapeVerticalBar)
+                .collect(Collectors.joining(" | "));
     }
 
     /**
@@ -63,8 +63,8 @@ public abstract class Task {
     protected static String[] decodeValues(String encodedValues) {
         UnaryOperator<String> unescapeVerticalBar = str -> str.replace("\\|", "|");
         return Stream.of(encodedValues.split(" \\| "))
-            .map(unescapeVerticalBar)
-            .toArray(String[]::new);
+                .map(unescapeVerticalBar)
+                .toArray(String[]::new);
     }
 
     /**
@@ -78,15 +78,15 @@ public abstract class Task {
         String[] values = Task.decodeValues(input);
         String taskType = values[0];
         switch (taskType) {
-            case "T":
-                return TaskTodo.loadFromString(input);
-            case "D":
-                return TaskDeadline.loadFromString(input);
-            case "E":
-                return TaskEvent.loadFromString(input);
-            default:
-                String errorMessage = String.format("Unknown task in save-file: \"%s\"", input);
-                throw new DukeSaveLoadException(errorMessage);
+        case "T":
+            return TaskTodo.loadFromString(input);
+        case "D":
+            return TaskDeadline.loadFromString(input);
+        case "E":
+            return TaskEvent.loadFromString(input);
+        default:
+            String errorMessage = String.format("Unknown task in save-file: \"%s\"", input);
+            throw new DukeSaveLoadException(errorMessage);
         }
     }
     

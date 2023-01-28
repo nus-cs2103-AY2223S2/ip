@@ -28,7 +28,7 @@ public class Duke {
         // Attempt to load task list from save file.
         try {
             this.tasks = this.storage.load();
-        } catch(DukeSaveLoadException e) {
+        } catch (DukeSaveLoadException e) {
             this.ui.showError(e);
             this.tasks = new TaskList();
         }
@@ -56,34 +56,34 @@ public class Duke {
         
             try {
                 switch (this.currentCommand.baseCommand) {
-                    case "todo":
-                        this.addTodo();
-                        break;
-                    case "deadline":
-                        this.addDeadline();
-                        break;
-                    case "event":
-                        this.addEvent();
-                        break;
-                    case "mark":
-                        this.mark();
-                        break;
-                    case "unmark":
-                        this.unmark();
-                        break;
-                    case "delete":
-                        this.delete();
-                        break;
-                    case "list":
-                        this.list();
-                        break;
-                    case "quit":
-                    case "exit":
-                    case "bye":
-                        this.ui.show("Bye. Hope to see you again soon!");
-                        break whileLoop;
-                    default:
-                        throw new DukeInvalidCommandException();
+                case "todo":
+                    this.addTodo();
+                    break;
+                case "deadline":
+                    this.addDeadline();
+                    break;
+                case "event":
+                    this.addEvent();
+                    break;
+                case "mark":
+                    this.mark();
+                    break;
+                case "unmark":
+                    this.unmark();
+                    break;
+                case "delete":
+                    this.delete();
+                    break;
+                case "list":
+                    this.list();
+                    break;
+                case "quit":
+                case "exit":
+                case "bye":
+                    this.ui.show("Bye. Hope to see you again soon!");
+                    break whileLoop;
+                default:
+                    throw new DukeInvalidCommandException();
                 }
 
                 this.storage.save(this.tasks);
@@ -112,11 +112,9 @@ public class Duke {
         String description = this.currentCommand.body;
         Task task = new TaskTodo(description);
         this.tasks.add(task);
-        this.ui.show(
-            "Got it. I've added this task:\n"
+        this.ui.show("Got it. I've added this task:\n"
                 + "  " + task.toString() + "\n"
-                + this.tasks.getStatus()
-        );
+                + this.tasks.getStatus());
     }
 
     /**
@@ -139,15 +137,12 @@ public class Duke {
             String description = this.currentCommand.body;
             Task task = new TaskDeadline(description, this.currentCommand.namedParameters.get("by"));
             this.tasks.add(task);
-            this.ui.show(
-                "Got it. I've added this task:\n"
+            this.ui.show("Got it. I've added this task:\n"
                     + "  " + task.toString() + "\n"
-                    + this.tasks.getStatus()
-            );
+                    + this.tasks.getStatus());
         } catch (DateTimeParseException e) {
             throw new DukeInvalidArgumentException(
-                "The \"/by\" value must be in the form \"yyyy-mm-dd\" (eg. 2019-10-15)."
-            );
+                    "The \"/by\" value must be in the form \"yyyy-mm-dd\" (eg. 2019-10-15).");
         }
     }
 
@@ -176,20 +171,16 @@ public class Duke {
         try {
             String description = this.currentCommand.body;
             Task task = new TaskEvent(
-                description, 
-                this.currentCommand.namedParameters.get("from"), 
-                this.currentCommand.namedParameters.get("to")
-            );
+                    description, 
+                    this.currentCommand.namedParameters.get("from"), 
+                    this.currentCommand.namedParameters.get("to"));
             this.tasks.add(task);
-            this.ui.show(
-                "Got it. I've added this task:\n"
+            this.ui.show("Got it. I've added this task:\n"
                     + "  " + task.toString() + "\n"
-                    + this.tasks.getStatus()
-            );
+                    + this.tasks.getStatus());
         } catch (DateTimeParseException e) {
             throw new DukeInvalidArgumentException(
-                "The \"/from\" and \"/to\" values must be in the form \"yyyy-mm-dd\" (eg. 2019-10-15)."
-            );
+                    "The \"/from\" and \"/to\" values must be in the form \"yyyy-mm-dd\" (eg. 2019-10-15).");
         }
     }
 
@@ -205,23 +196,18 @@ public class Duke {
         
         Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
         int taskIndex = Optional.of(this.currentCommand.body)
-            .filter(isNumeric)
-            .map(body -> Integer.parseInt(body) - 1)
-            .filter(i -> i >= 0)
-            .orElseThrow(() -> new DukeInvalidArgumentException(
-                "Invalid task index. Index needs to be a positive integer."
-            ));
+                .filter(isNumeric)
+                .map(body -> Integer.parseInt(body) - 1)
+                .filter(i -> i >= 0)
+                .orElseThrow(() -> new DukeInvalidArgumentException(
+                        "Invalid task index. Index needs to be a positive integer."));
         Task task = Optional.of(taskIndex)
-            .filter(index -> index < this.tasks.size())
-            .map(index -> this.tasks.get(index))
-            .orElseThrow(() -> new DukeInvalidArgumentException(
-                "Task index is beyond the range of the task list."
-            ));
+                .filter(index -> index < this.tasks.size())
+                .map(index -> this.tasks.get(index))
+                .orElseThrow(() -> new DukeInvalidArgumentException(
+                        "Task index is beyond the range of the task list."));
         task.markAsDone();
-        this.ui.show(
-            "Nice! I've marked this task as done:\n"
-                + "  " + task.toString()
-        );
+        this.ui.show("Nice! I've marked this task as done:\n" + "  " + task.toString());
     }
 
     /**
@@ -236,23 +222,18 @@ public class Duke {
         
         Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
         int taskIndex = Optional.of(this.currentCommand.body)
-            .filter(isNumeric)
-            .map(body -> Integer.parseInt(body) - 1)
-            .filter(i -> i >= 0)
-            .orElseThrow(() -> new DukeInvalidArgumentException(
-                "Invalid task index. Index needs to be a positive integer."
-            ));
+                .filter(isNumeric)
+                .map(body -> Integer.parseInt(body) - 1)
+                .filter(i -> i >= 0)
+                .orElseThrow(() -> new DukeInvalidArgumentException(
+                        "Invalid task index. Index needs to be a positive integer."));
         Task task = Optional.of(taskIndex)
-            .filter(index -> index < this.tasks.size())
-            .map(index -> this.tasks.get(index))
-            .orElseThrow(() -> new DukeInvalidArgumentException(
-                "Task index is beyond the range of the task list."
-            ));
+                .filter(index -> index < this.tasks.size())
+                .map(index -> this.tasks.get(index))
+                .orElseThrow(() -> new DukeInvalidArgumentException(
+                        "Task index is beyond the range of the task list."));
         task.markAsNotDone();
-        this.ui.show(
-            "OK, I've marked this task as not done yet:\n"
-                + "  " + task.toString()
-        );
+        this.ui.show("OK, I've marked this task as not done yet:\n" + "  " + task.toString());
     }
 
 
@@ -268,23 +249,18 @@ public class Duke {
         
         Predicate<String> isNumeric = str -> str.matches("^-?\\d+$");
         int taskIndex = Optional.of(this.currentCommand.body)
-            .filter(isNumeric)
-            .map(body -> Integer.parseInt(body) - 1)
-            .filter(i -> i >= 0)
-            .orElseThrow(() -> new DukeInvalidArgumentException(
-                "Invalid task index. Index needs to be a positive integer."
-            ));
+                .filter(isNumeric)
+                .map(body -> Integer.parseInt(body) - 1)
+                .filter(i -> i >= 0)
+                .orElseThrow(() -> new DukeInvalidArgumentException(
+                        "Invalid task index. Index needs to be a positive integer."));
         Task task = Optional.of(taskIndex)
-            .filter(index -> index < this.tasks.size())
-            .map(index -> this.tasks.get(index))
-            .orElseThrow(() -> new DukeInvalidArgumentException(
-                "Task index is beyond the range of the task list."
-            ));
+                .filter(index -> index < this.tasks.size())
+                .map(index -> this.tasks.get(index))
+                .orElseThrow(() -> new DukeInvalidArgumentException(
+                        "Task index is beyond the range of the task list."));
         this.tasks.remove(taskIndex);
-        this.ui.show(
-            "Noted. I've removed this task:\n"
-                + "  " + task.toString()
-        );
+        this.ui.show("Noted. I've removed this task:\n" + "  " + task.toString());
     }
 
     /**

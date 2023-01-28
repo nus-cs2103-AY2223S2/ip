@@ -33,7 +33,7 @@ public class Storage {
     private static String readFile(String filePath) {
         try {
             return new String(Files.readAllBytes(Paths.get(filePath)));
-        } catch(IOException e) {
+        } catch (IOException e) {
             return null;
         } 
     }
@@ -47,8 +47,8 @@ public class Storage {
      */
     private static void writeStringToFile(String filePath, String content) throws DukeSaveLoadException {
         try (FileWriter writer = new FileWriter(filePath)) {
-            writer.write(content); 
-        } catch(IOException e) {
+            writer.write(content);
+        } catch (IOException e) {
             throw new DukeSaveLoadException("There's an error writing to save file.");
         }
     }
