@@ -27,7 +27,7 @@ public class Duke {
             }
 
             storage = new Storage(path);
-            TaskList taskList = new TaskList(storage.load());
+            taskList = new TaskList(storage.load());
         } catch (InvalidPathException err) {
             ui.showLoadingError();
         } catch (IOException errIO){
@@ -43,10 +43,14 @@ public class Duke {
         try {
             Storage store = new Storage(path);
             while (true) {
-                Parser parser = new Parser(ui.getInput());
-                Command command = parser.parseArgs();
-                command.execArgs(taskList);
-                store.editFile(this.taskList.loadTaskList());
+                try {
+                    Parser parser = new Parser(ui.getInput());
+                    Command command = parser.parseArgs();
+                    command.execArgs(taskList);
+                    store.editFile(this.taskList.loadTaskList());
+                } catch (DukeException err) {
+                    ui.displayError(err);
+                }
             }
         } catch (DukeException err){
             ui.displayError(err);

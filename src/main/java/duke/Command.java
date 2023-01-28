@@ -6,13 +6,13 @@ public class Command {
     private String command;
     private String args;
 
-    public Command(String command, String args){
+    public Command(String command, String args) {
         this.command = command;
         this.args = args;
     }
 
     public void execArgs(TaskList taskList) throws DukeException {
-        switch(this.command.toLowerCase()){
+        switch(this.command.toLowerCase()) {
             case "bye":
                 UI.end();
                 break;
@@ -44,35 +44,44 @@ public class Command {
 
     private void todo(TaskList taskList) throws DukeException {
         if (this.args.length() == 0){
-            throw new DukeException("What is the duke.task.ToDo task???");
+            throw new DukeException("What is the ToDo task???");
         } else {
-            taskList.add(new ToDo(this.args.trim()));
+            Task addTask = new ToDo(this.args.trim());
+            taskList.add(addTask);
+            System.out.println();
+            System.out.println("Got it. I've added this task:\n" +
+                    addTask.toString() + "\n" +
+                    "Now you have " + taskList.taskCount() +
+                    "in the list.\n");
         }
     }
 
     private void deadline(TaskList taskList) throws DukeException {
-        if (args.length() == 0){
-            throw new DukeException("What is the duke.task.Deadline task???");
+        if (args.length() == 0) {
+            throw new DukeException("What is the Deadline task???");
         } else {
-            String desc = args.substring(
-                    args.indexOf("deadline") + "deadline ".length(),
-                    args.indexOf("/by")
-            );
+            String desc = this.args.substring(0,
+                    this.args.indexOf("/by")
+            ).trim();
 
             String by = args.substring(
                     args.indexOf("/by") + "/by ".length()
             );
 
-            taskList.add(new Deadline(desc, by));
+            Task addTask = new Deadline(desc, by);
+            taskList.add(addTask);
+            System.out.println("Got it. I've added this task:\n" +
+                    addTask.toString() + "\n" +
+                    "Now you have " + taskList.taskCount() +
+                    "in the list.\n");
         }
     }
 
     private void event(TaskList taskList) throws DukeException {
-        if (args.length() == 0){
+        if (args.length() == 0) {
             throw new DukeException("What is the Event task???");
         } else {
-            String desc = args.substring(
-                    args.indexOf("events") + "events ".length(),
+            String desc = args.substring(0,
                     args.indexOf("/from")
             );
 
@@ -85,7 +94,12 @@ public class Command {
                     args.indexOf("/to") + "/to ".length()
             );
 
-            taskList.add(new Events(desc, from, to));
+            Task addTask = new Events(desc, from, to);
+            taskList.add(addTask);
+            System.out.println("Got it. I've added this task:\n" +
+                    addTask.toString() + "\n" +
+                    "Now you have " + taskList.taskCount() +
+                    "in the list.\n");
         }
     }
 
@@ -99,5 +113,10 @@ public class Command {
 
     private void delete(TaskList taskList){
         taskList.remove(Integer.parseInt(this.args));
+    }
+
+    @Override
+    public String toString(){
+        return this.command + " " + this.args;
     }
 }

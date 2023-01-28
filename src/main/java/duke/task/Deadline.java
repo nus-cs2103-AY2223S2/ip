@@ -12,7 +12,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString(){
-        return "D" + "|" + super.toString() + "(by: " + this.deadline.toString() + ")";
+        return "D" + " | " + super.toString() + " (by: " + this.deadline.toString() + ")";
     }
 
     private LocalDateTime parseDateTime(String deadline){

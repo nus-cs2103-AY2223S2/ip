@@ -6,19 +6,19 @@ public class Events extends Task{
     protected LocalDateTime from;
     protected LocalDateTime to;
 
-    public Events(String description, String from, String to){
+    public Events(String description, String from, String to) {
         super(description);
         this.from = parseDateTime(from);
         this.to = parseDateTime(to);
     }
 
     @Override
-    public String toString(){
-        return "E" + "|" + super.toString() + "(from: " + this.from
+    public String toString() {
+        return "E" + " | " + super.toString() + " (from: " + this.from
                 + "to: " + this.to + ")";
     }
 
-    private LocalDateTime parseDateTime(String period){
+    private LocalDateTime parseDateTime(String period) {
         String[] dateAndTime = period.split(" ");
         String[] dayMonthYear = dateAndTime[0].split("/");
         int hour = Integer.valueOf(dateAndTime[1])/100;

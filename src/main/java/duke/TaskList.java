@@ -1,9 +1,6 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Events;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,5 +98,13 @@ public class TaskList {
 
     public ArrayList<Task> loadTaskList(){
         return this.storage;
+    }
+
+    public String taskCount(){
+        if (this.storage.size() == 1){
+            return "1 task";
+        } else {
+            return this.storage.size() + "tasks";
+        }
     }
 }

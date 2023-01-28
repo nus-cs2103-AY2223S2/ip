@@ -47,11 +47,8 @@ public class Storage {
                     } else if (!lines.get(i).equalsIgnoreCase(lineInQuestion)){
                         lines.add(i, lineInQuestion);
                     }
-
-                    Files.write(this.filePath, lines.get(i).getBytes(),
-                            StandardOpenOption.APPEND,
-                            StandardOpenOption.TRUNCATE_EXISTING);
                 }
+                Files.write(this.filePath, lines);
             } catch (IOException err){
                 throw new DukeException("Unable to write to File!");
             }

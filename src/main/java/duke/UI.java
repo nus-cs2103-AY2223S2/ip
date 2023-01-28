@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class UI {
     private static Scanner sc = new Scanner(System.in);
-    public UI() {}
+    public UI() {
+    }
 
     public void welcome() {
         String logo = " ____        _        \n"
