@@ -1,12 +1,13 @@
 package Tasks;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 public class DeadlineTest {
-    Deadline deadline = new Deadline("Read book", "2019-10-05 1530");
+    private Deadline deadline = new Deadline("Read book", "2019-10-05 1530");
     @Test
-    public void initialiseTest(){
+    public void initialiseTest() {
         assertEquals(deadline.toString(), "[D][ ] Read book (by: OCT 5 2019, 15:30)");
     }
 

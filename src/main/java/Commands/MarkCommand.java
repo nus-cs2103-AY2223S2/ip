@@ -5,18 +5,36 @@ import Storage.TaskList;
 import Tasks.Task;
 import Ui.Ui;
 
+/**
+ * This class is used to mark a task.
+ */
 public class MarkCommand extends Command {
     private int taskNumber;
 
+    /**
+     * Constructor for the MarkCommand.
+     * @param userInput The user input.
+     */
     public MarkCommand(String userInput) {
         this.taskNumber = getTaskNumber(userInput);
     }
 
+    /**
+     * Returns the task number from the database.
+     * @param userInput The user input.
+     * @return The task number from the database.
+     */
     private int getTaskNumber(String userInput) {
         int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
         return taskNumber;
     }
 
+    /**
+     * Mark the task.
+     * @param tasks The database.
+     * @param ui The user interface.
+     * @param storage The storage.s
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTaskByIndex(this.taskNumber - 1);
@@ -24,6 +42,10 @@ public class MarkCommand extends Command {
         ui.showMarkTask(task);
     }
 
+    /**
+     * Check to continue the conversation.
+     * @return True.
+     */
     @Override
     public boolean isContinueConvo() {
         return true;

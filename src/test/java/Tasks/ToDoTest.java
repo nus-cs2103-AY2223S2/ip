@@ -1,15 +1,13 @@
 package Tasks;
 
-import org.junit.jupiter.api.Test;
-
-import Commands.TodoCommand;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 public class ToDoTest {
-    ToDo todo = new ToDo("Read book");
+    private ToDo todo = new ToDo("Read book");
     @Test
-    public void initialiseTest(){
+    public void initialiseTest() {
         assertEquals(todo.toString(), "[T][ ] Read book");
     }
 

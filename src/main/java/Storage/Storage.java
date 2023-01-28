@@ -12,10 +12,18 @@ import Tasks.Event;
 import Tasks.Task;
 import Tasks.ToDo;
 
+/**
+ * This class is used to represent the Storage, which will load and store the database from the local file.
+ */
 public class Storage {
     private String filePath;
     private File file;
 
+    /**
+     * Constructor for the Storage.
+     * @param filePath The filepath for the database.
+     * @throws IOException Throws if there is an I/O error.
+     */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         this.file = new File(filePath);
@@ -25,6 +33,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the database from the local file.
+     * @return The database
+     * @throws IOException Throws if there is an I/O error.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> db = new ArrayList<Task>(100);
         BufferedReader br_file = new BufferedReader(new FileReader(this.filePath));
@@ -40,7 +53,7 @@ public class Storage {
                 task = new Event(temp[2], temp[3], temp[4]);
             }
 
-            if (temp[1].equals("X")){
+            if (temp[1].equals("X")) {
                 task.setDone();
             }
             db.add(task);
@@ -49,6 +62,11 @@ public class Storage {
         return db;
     }
 
+    /**
+     * Store the database back into the local file.
+     * @param tasks The tasks to be stored.
+     * @throws IOException Throws if there is an I/O error.
+     */
     public void store(TaskList tasks) throws IOException {
         ArrayList<Task> db = tasks.getDb();
         StringBuilder sb = new StringBuilder();
