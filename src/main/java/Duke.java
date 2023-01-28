@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * The Duke program implements a 'to-do' list
@@ -62,16 +66,19 @@ public class Duke {
     }
 
     public static class Deadline extends Task {
-        protected String by;
+        protected LocalDate by;
+        protected LocalTime when;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
-        public Deadline(String description, String by) {
+        public Deadline(String description, LocalDate by, LocalTime when) {
             super(description);
             this.by = by;
+            this.when = when;
         }
 
         @Override
         public String toString() {
-            return "[D]" + super.toString() + " (by: " + by + ")";
+            return "[D]" + super.toString() + " (by: " + formatter.format(by) + " " + when + ")";
         }
     }
 
@@ -106,10 +113,12 @@ public class Duke {
                 String data = fileReader.nextLine();
                 char taskType = data.charAt(4);
                 boolean taskDone = (data.charAt(7) == 'X');
-                String taskName = data.substring(10, data.length());
+                String taskName = "";
+                
 
                 switch(taskType) {
                 case 'T':
+                    taskName = data.substring(10, data.length());
                     Todo newTodo = new Todo(taskName);
                     if (taskDone) {
                         newTodo.markDone();
@@ -117,14 +126,20 @@ public class Duke {
                     listOfThings.add(newTodo);
                     break;
                 case 'D':
-                    String byWhen = data.substring(data.indexOf("by:") + 4, data.length() - 1);
-                    Deadline newDeadline = new Deadline(taskName, byWhen);
+                    taskName = data.substring(10, data.indexOf("(by:") - 1);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+                    String byWhen = data.substring(data.indexOf("by:") + 4, data.length() - 7);
+                    LocalDate date = LocalDate.parse(byWhen, formatter);
+                    String byTime = data.substring(data.length() - 6, data.length() - 1);
+                    LocalTime time = LocalTime.parse(byTime);
+                    Deadline newDeadline = new Deadline(taskName, date, time);
                     if (taskDone) {
                         newDeadline.markDone();
                     }
                     listOfThings.add(newDeadline);
                     break;
                 case 'E':
+                    taskName = data.substring(10, data.indexOf("(from:") - 1);
                     String fromWhen = data.substring(data.indexOf("from:") + 6, data.indexOf("to:") - 1);
                     String toWhen = data.substring(data.indexOf("to:") + 4, data.length() - 1);
                     Event newEvent = new Event(taskName, fromWhen, toWhen);
@@ -199,7 +214,8 @@ public class Duke {
             }
             
             Integer secondInt = 0;
-            String byWhen = "";
+            String byDate = "";
+            String byTime = "";
             String fromWhen = "";
             String toWhen = "";
 
@@ -278,9 +294,15 @@ public class Duke {
                 break;
             case DEADLINE:
                 try {
-                    firstWord = msg.substring(msg.indexOf(" ") + 1, msg.indexOf("/by") - 1);
-                    byWhen = msg.substring(msg.indexOf("/by") + 4, msg.length());
-                    Deadline newDeadline = new Deadline(firstWord, byWhen);
+                    String[] splitted = msg.split("\\s+");
+                    firstWord = splitted[1];
+                    byDate = splitted[3];
+                    byTime = splitted[4];
+                    System.out.println(byDate);
+                    System.out.println(byTime);
+                    LocalDate d1 = LocalDate.parse(byDate);
+                    LocalTime t1 = LocalTime.parse(byTime);
+                    Deadline newDeadline = new Deadline(firstWord, d1, t1);
                     listOfThings.add(newDeadline);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newDeadline);
@@ -291,7 +313,8 @@ public class Duke {
                         System.err.println("Error! There is no save file!");
                     }
                 } catch (Exception ex) {
-                    System.err.println("Whoops! Please enter the deadline followed by its due date preceeded by a '/by'");
+                    System.err.println("Whoops! Please enter the deadline followed by its due date preceeded by a '/by'." +
+                        "The date time format should be yyyy-mm-dd hh:mm");
                 }
                 break;
             case EVENT:
