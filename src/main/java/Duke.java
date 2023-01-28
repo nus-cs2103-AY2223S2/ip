@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -82,6 +86,43 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         ArrayList<Task> taskArray = new ArrayList<>();
         int index = 0;
+        try {
+            File file = new File("data/duke.txt");
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                Task tasks;
+                String data = sc.nextLine();
+                String[] commandInFile = data.split("\\|");
+                boolean isDoneInFile = commandInFile[1].charAt(0) == 'X';
+                if (commandInFile[0].equals("T")) {
+                    tasks = new Todo(data.substring(6));
+                    tasks.isDone = isDoneInFile;
+                    taskArray.add(tasks);
+                    index++;
+                } else if (commandInFile[0].equals("D")) {
+                    tasks = new Deadline(commandInFile[2].substring(1), commandInFile[3].substring(1));
+                    tasks.isDone = isDoneInFile;
+                    taskArray.add(tasks);
+                    index++;
+                } else if (commandInFile[0].equals("E")) {
+                    String[] splitString = commandInFile[3].substring(1).split("-");
+                    tasks = new Event(commandInFile[2].substring(1), splitString[0], splitString[1].substring(1));
+                    tasks.isDone = isDoneInFile;
+                    taskArray.add(tasks);
+                    index++;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not found, created new file for you");
+            File newFile = new File("data/duke.txt");
+            File folder = new File("data/duke.txt".split("/")[0]);
+            try {
+                folder.mkdir();
+                newFile.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Handle exception here");
+            }
+        }
 
         Scanner scan = new Scanner(System.in);
 
@@ -112,8 +153,13 @@ public class Duke {
             }
         }
 
-        String after = arrNext[1];
-
+        String after = null;
+        try {
+            after = arrNext[1];
+        } catch (ArrayIndexOutOfBoundsException exc) {
+            System.out.println("I will show your saved tasks.");
+        }
+        
         Task input = null;
         switch (next) {
             case "todo":
@@ -249,6 +295,25 @@ public class Duke {
                 after = arrNext[1];
             }
 
+        }
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            for (int j = 0; j < taskArray.size(); j++) {
+                Task currentTask = taskArray.get(j);
+                String statusOfTask = currentTask.getStatusIcon();
+                String descriptionOfTask = currentTask.description;
+                String taskType = currentTask.toString().substring(1,2);
+                if (currentTask instanceof Todo) {
+                    fw.write(taskType + "|" + statusOfTask + " | " + descriptionOfTask + "\n");
+                } else if (currentTask instanceof Deadline) {
+                    fw.write(taskType + "|" + statusOfTask + " | " + descriptionOfTask + "| " + ((Deadline) currentTask).by + "\n");
+                } else if (currentTask instanceof Event) {
+                    fw.write(taskType + "|" + statusOfTask + " | " + descriptionOfTask + "| " + ((Event) currentTask).from + "- " + ((Event) currentTask).to + "\n");
+                }
+            }
+            fw.close();
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
