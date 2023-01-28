@@ -41,7 +41,6 @@ public class Duke {
                     taskDetails = getTaskDetails(s);
                     storedInputs.add(new ToDo(isTaskDone, taskDetails));
                     break;
-
                 case 'D':
                     isTaskDone = getIsTaskDone(s);
                     taskDetails = getTaskDetails(s);
@@ -58,20 +57,23 @@ public class Duke {
             }
         System.out.println(printList());
 
+        // Execute inputs
         String userInput;
         EventType curEvent;
-
         loop: while (true) {
 
+            // Get inputs
             userInput = askForInput();
 
+            // Check if valid
             try {
                 curEvent = decodeInput(userInput);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
-                continue;
+                continue; // skip the rest of the code and go to next iteration
             }
 
+            // If valid keyword, execute input
             switch (curEvent) {
             case BYE:
                 break loop;
@@ -156,6 +158,7 @@ public class Duke {
         return getInput.nextLine();
     }
 
+    // Throws exception if invalid keyword
     private static EventType decodeInput(String input) throws DukeException {
         String[] arr = input.split(" ");
         
@@ -230,19 +233,27 @@ public class Duke {
         return s;
     }
 
+    private static String removeKeyword(String s) throws DukeException {
+        try {
+            s = s.substring(s.indexOf(" ")).trim();
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("details cannot be empty");
+        }
+        return s;
+    }
+
     private static void todoEvent(String userInput) {
         try {
-            userInput = removeFirstWord(userInput);
+            userInput = removeKeyword(userInput);
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Oi!, todo " + e.getMessage());
             return;
         }
 
-        Task temp = new ToDo(userInput);
-        storedInputs.add(temp);
+        Task newTask = new ToDo(userInput);
+        storedInputs.add(newTask);
         
-        printConfirmation();
-        System.out.println("  " + temp);
+        printConfirmationMessage(newTask);
         printTotalTasks();
     }
 
@@ -323,6 +334,10 @@ public class Duke {
 
     private static void printConfirmation() {
         System.out.println("\nYAY! Task Added:");
+    }
+
+    private static void printConfirmationMessage(Task task) {
+        System.out.println("\nYAY! Task Added:\n " + task );
     }
 
     private static void printTotalTasks() {
