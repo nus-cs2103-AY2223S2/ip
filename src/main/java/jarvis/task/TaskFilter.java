@@ -111,7 +111,7 @@ public class TaskFilter {
             return this;
         }
         List<String> words = Arrays.stream(fromLine.split("\\s"))
-                .filter(s -> !s.isBlank())
+                .filter(s -> !s.isBlank()) // Remove empty and whitespace strings
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
         this.keywords.addAll(words);
