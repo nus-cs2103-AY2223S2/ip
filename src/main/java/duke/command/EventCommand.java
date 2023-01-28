@@ -7,12 +7,23 @@ import duke.task.Task;
 import duke.ui.Ui;
 import duke.exception.DukeException;
 
-
+/**
+ * Command to add new Event Task to TaskList.
+ *
+ * @author Lian Kok Hai
+ */
 public class EventCommand extends Command {
     protected String taskName;
     protected String from;
     protected String to;
 
+    /**
+     * Constructs new EventCommand.
+     *
+     * @param taskName Name of Event.
+     * @param from Date of beginning of event.
+     * @param to Date of end of event.
+     */
     public EventCommand(String taskName, String from, String to) {
         this.taskName = taskName;
         this.from = from;
@@ -22,7 +33,8 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task newTask = new Event(taskName, from, to);
-        ui.print(taskList.addTask(newTask));
+        taskList.addTask(newTask);
+        ui.printAddTaskMessage(newTask, taskList.getCount());
         storage.saveTaskList(taskList);
     }
 }

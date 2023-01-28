@@ -1,9 +1,36 @@
 package duke.ui;
 
+<<<<<<< HEAD
 import duke.command.*;
+=======
+import duke.command.Command;
+import duke.command.Commands;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.ToDoCommand;
+import duke.command.UnmarkCommand;
+
+>>>>>>> branch-A-JavaDoc
 import duke.exception.DukeException;
 
+/**
+ * Parses user input and returns Command.
+ *
+ * @author Lian Kok Hai
+ */
 public class Parser {
+    /**
+     * Parses user input and returns Command or throws
+     * DukeException when invalid input encountered.
+     *
+     * @param userInput User's string input.
+     * @return Command object to be executed.
+     * @throws DukeException
+     */
     public Command parse(String userInput) throws DukeException {
         Commands command = Parser.getCommand(userInput); // will catch any invalid command alrdy
         Command c = null;
@@ -27,7 +54,7 @@ public class Parser {
                 c = new DeleteCommand(index);
                 break;
             case TODO:
-                c = new TodoCommand(Parser.parseTodoCommand(userInput));
+                c = new ToDoCommand(Parser.parseTodoCommand(userInput));
                 break;
             case DEADLINE:
                 String[] parsed = Parser.parseDeadlineCommand(userInput); // parsed[0] is description of task; parsed[1] is by
@@ -111,7 +138,6 @@ public class Parser {
             }
         }
     }
-
     private static String parseFindCommand(String userInput) throws DukeException {
         String[] splitStr = userInput.split(" ", 2);
         if (splitStr.length < 2) {

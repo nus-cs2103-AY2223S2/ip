@@ -5,8 +5,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents Deadline task with due by date.
+ *
+ * @author Lian Kok Hai
+ */
 public class Deadline extends Task{
     private LocalDate by;
+
+    /**
+     * Constructs Deadline object.
+     *
+     * @param taskName Name of Deadline task.
+     * @param by Due date of task.
+     * @throws DukeException Thrown when format of date not recognized.
+     */
     public Deadline(String taskName, String by) throws DukeException {
         super(taskName);
         this.type = "D";

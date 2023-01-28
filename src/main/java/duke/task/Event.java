@@ -5,9 +5,24 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
+/**
+ * Represents Event tasks with from and to date.
+ *
+ * @author Lian Kok Hai
+ */
 public class Event extends Task {
     private LocalDate from;
     private LocalDate to;
+
+    /**
+     * Constructs an Event object.
+     *
+     * @param taskName Name of Event.
+     * @param from Date of beginning of event.
+     * @param to Date of end of event.
+     * @throws DukeException Thrown when format of dates not recognized.
+     */
     public Event(String taskName, String from, String to) throws DukeException {
         super(taskName);
         this.type ="E";

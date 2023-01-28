@@ -10,11 +10,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import duke.exception.DukeException;
 
-
+/**
+ * Supports operations related to saving and loading TaskList from text file.
+ *
+ * @author Lian Kok Hai
+ */
 public class Storage {
     protected final String SAVE_DIR = "./data";
     protected final String SAVE_NAME = "/duke.txt";
 
+    /**
+     * Loads a TaskList object with Tasks based on text file in save directory.
+     *
+     * @param taskList TaskList to be loaded from save.
+     * @throws DukeException Thrown when IO error encountered.
+     */
     public void loadFromSave(TaskList taskList) throws DukeException {
         File file = new File(SAVE_DIR + SAVE_NAME);
         ArrayList<Task> taskArray = new ArrayList<>();
@@ -33,6 +43,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves a TaskList object as text file into save directory.
+     * Used when TaskList is updated - mark, unmark, delete, add task.
+     *
+     * @param taskList TaskList to be saved.
+     */
     public void saveTaskList(TaskList taskList) {
         try {
             boolean dataDir = new File(SAVE_DIR).mkdirs();

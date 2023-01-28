@@ -6,18 +6,27 @@ import duke.task.ToDo;
 import duke.task.Task;
 import duke.ui.Ui;
 
-
-public class TodoCommand extends Command {
+/**
+ * Command to add ToDo Task to TaskList.
+ *
+ */
+public class ToDoCommand extends Command {
     protected String taskName;
 
-    public TodoCommand(String taskName) {
+    /**
+     * Creates new ToDoCommand.
+     *
+     * @param taskName Name of ToDo Task.
+     */
+    public ToDoCommand(String taskName) {
         this.taskName = taskName;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask = new ToDo(taskName);
-        ui.print(taskList.addTask(newTask));
+        taskList.addTask(newTask);
+        ui.printAddTaskMessage(newTask, taskList.getCount());
         storage.saveTaskList(taskList);
     }
 }
