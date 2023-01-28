@@ -3,14 +3,14 @@ package app.chatbot;
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner sc;
-    private String LOGO = "       _             _    _    _                _                \n" +
-            "  ___ | |__    __ _ | |_ | |_ (_) _ __    __ _ | |_  ___   _ __  \n" +
-            " / __|| '_ \\  / _` || __|| __|| || '_ \\  / _` || __|/ _ \\ | '_ \\ \n" +
-            "| (__ | | | || (_| || |_ | |_ | || | | || (_| || |_| (_) || | | |\n" +
-            " \\___||_| |_| \\__,_| \\__| \\__||_||_| |_| \\__, | \\__|\\___/ |_| |_|\n" +
-            "                                         |___/                   ";
+    private static final String LOGO = "       _             _    _    _                _                \n"
+            + "  ___ | |__    __ _ | |_ | |_ (_) _ __    __ _ | |_  ___   _ __  \n"
+            + " / __|| '_ \\  / _` || __|| __|| || '_ \\  / _` || __|/ _ \\ | '_ \\ \n"
+            + "| (__ | | | || (_| || |_ | |_ | || | | || (_| || |_| (_) || | | |\n"
+            + " \\___||_| |_| \\__,_| \\__| \\__||_||_| |_| \\__, | \\__|\\___/ |_| |_|\n"
+            + "                                         |___/                   ";
 
+    private Scanner sc;
 
     Ui() {
         this.sc = new Scanner(System.in);
@@ -20,10 +20,10 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void showWelcome(){
+    public void showWelcome() {
         reply("Hello from\n" + LOGO);
-        reply("This is Chattington the Chatter, I'll chat with you.\n" +
-                "What can I do for you?\n");
+        reply("This is Chattington the Chatter, I'll chat with you.\n"
+                + "What can I do for you?\n");
     }
 
 

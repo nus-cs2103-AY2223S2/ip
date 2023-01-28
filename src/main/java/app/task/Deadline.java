@@ -22,9 +22,9 @@ public class Deadline extends Task {
         }
 
         if (Objects.isNull(this.deadline)) {
-            throw new InvalidDateTimeException("Try reformatting your date/time to the supported formats:\n" +
-                    "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm\n" +
-                    "Make sure that the date/time is valid!");
+            throw new InvalidDateTimeException("Try reformatting your date/time to the supported formats:\n"
+                    + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm\n"
+                    + "Make sure that the date/time is valid!");
         }
     }
 

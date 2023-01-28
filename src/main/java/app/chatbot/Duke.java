@@ -1,13 +1,13 @@
 package app.chatbot;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import app.command.Command;
 import app.command.LoadCommand;
 import app.command.SaveCommand;
 import app.task.TaskList;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Duke {
     private static final Path STORAGE_LOCATION = Paths.get(".", "data", "storage.txt");
@@ -22,7 +22,7 @@ public class Duke {
         try {
             this.storage = new Storage(path);
             this.taskList = new TaskList();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

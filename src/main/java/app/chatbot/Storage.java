@@ -1,9 +1,5 @@
 package app.chatbot;
 
-import app.task.Task;
-import app.task.TaskList;
-import app.task.TaskTypes;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,6 +12,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import app.task.Task;
+import app.task.TaskList;
+import app.task.TaskTypes;
+
 
 public class Storage {
     public static final String SEPARATOR_REGEX = " \\| ";
@@ -35,10 +36,11 @@ public class Storage {
         }
     }
 
-    /** Loads a single line in storage into a given task.TaskList.
+    /**
+     * Loads a single line in storage into a given task.TaskList.
      *
-     *  It is assumed that a line in storage follows the format specified here:
-     *  <task symbol> | <isDone> | <desc> | <addtl-arg1>:<values> | <addtl-arg2>:<value> ...
+     * It is assumed that a line in storage follows the format specified here:
+     * task_symbol | isDone | desc | addtl-arg1:values | addtl-arg2:value ...
      *
      * For example, a project meeting task.Event from 1pm to 3pm marked done:
      * E | 1 | project meeting | from:1pm | to:3pm
@@ -61,14 +63,14 @@ public class Storage {
                 TaskTypes.Type taskType = TaskTypes.symbolToTask.getValue().get(symbol);
 
                 // get arg map
-                Map<String,String> argValues = new HashMap<>();
+                Map<String, String> argValues = new HashMap<>();
                 boolean isDone = args.get(1).equals("1");
                 argValues.put("Description", args.get(2));
 
                 // remaining named arguments
                 if (args.size() > 3) {
-                    for (String pair : args.subList(3,args.size())) {
-                        String[] split = pair.split(SUB_SEPARATOR,2);
+                    for (String pair : args.subList(3, args.size())) {
+                        String[] split = pair.split(SUB_SEPARATOR, 2);
                         argValues.put(split[0], split[1]);
                     }
                 }
@@ -102,7 +104,7 @@ public class Storage {
         return 1;
     }
 
-    public static class InvalidStorageException extends Exception{
+    public static class InvalidStorageException extends Exception {
         InvalidStorageException(String msg) {
             super(msg);
         }

@@ -32,8 +32,8 @@ public class Event extends Task {
         }
 
         if (Objects.isNull(this.from) || Objects.isNull(this.to)) {
-            throw new InvalidDateTimeException("Try reformatting your date/time to the supported formats:\n" +
-                    "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm");
+            throw new InvalidDateTimeException("Try reformatting your date/time to the supported formats:\n"
+                    + "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm");
         }
     }
     @Override
@@ -43,7 +43,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (from: " + this.from.format(OUTPUT_FORMAT) + ", to: " + this.to.format(OUTPUT_FORMAT) + ")";
+        return super.toString() + " (from: " + this.from.format(OUTPUT_FORMAT)
+                + ", to: " + this.to.format(OUTPUT_FORMAT) + ")";
     }
 
 }

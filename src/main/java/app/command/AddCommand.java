@@ -1,15 +1,15 @@
 package app.command;
 
+import java.util.Map;
+
 import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.Task;
 import app.task.TaskList;
 import app.task.TaskTypes;
 
-import java.util.Map;
-
 public class AddCommand extends Command {
-    private Map<String,String> args;
+    private Map<String, String> args;
     private TaskTypes.Type taskType;
 
     public AddCommand(TaskTypes.Type type, Map<String, String> args) {

@@ -1,11 +1,11 @@
 package app.command;
 
+import java.util.List;
+
 import app.chatbot.Storage;
 import app.chatbot.Ui;
 import app.task.Task;
 import app.task.TaskList;
-
-import java.util.List;
 
 public class ListCommand extends Command {
 
@@ -22,7 +22,7 @@ public class ListCommand extends Command {
         } else {
             StringBuilder output = new StringBuilder("Eh this is what you've written down so far:\n");
             for (int i = 0; i < listTasks.size(); i++) {
-                output.append(i+1);
+                output.append(i + 1);
                 output.append(": " + listTasks.get(i));
                 output.append("\n");
             }

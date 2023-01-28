@@ -1,32 +1,27 @@
 package app.task;
 
-import app.chatbot.Storage;
-
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.chatbot.Storage;
+
 public abstract class Task {
+    protected static final List<DateTimeFormatter> SUPPORTED_DATE_TIME_INPUT = new ArrayList<>();
+    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yy hh:mma");
+
     protected String description;
     protected boolean isDone;
     protected String symbol;
-    protected static final List<DateTimeFormatter> SUPPORTED_DATE_TIME_INPUT = new ArrayList<>();
-    protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("EEE, dd MMM yy hh:mma");
     static {
         SUPPORTED_DATE_TIME_INPUT.add(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         SUPPORTED_DATE_TIME_INPUT.add(DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"));
         SUPPORTED_DATE_TIME_INPUT.add(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
-    public Task(String description)  {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
-    }
-
-    // constructor for preloaded tasks
-    public Task(String description, String isDone) {
-        this.description = description;
-        this.isDone = Integer.parseInt(isDone) == 1;
     }
 
     public String getStatusIcon() {
@@ -63,6 +58,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + this.symbol + "][" + this.getStatusIcon() +"] " + this.description;
+        return "[" + this.symbol + "][" + this.getStatusIcon() + "] " + this.description;
     }
 }

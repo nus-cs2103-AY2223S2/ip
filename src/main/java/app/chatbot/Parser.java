@@ -1,5 +1,10 @@
 package app.chatbot;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import app.command.AddCommand;
 import app.command.Command;
 import app.command.CommandNotFoundException;
@@ -10,31 +15,29 @@ import app.command.MarkAsDoneCommand;
 import app.command.MarkAsUndoneCommand;
 import app.task.TaskTypes;
 
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-
 public class Parser {
 
-    /**Splits a String line of input into its command (the first word), and its subsequent arguments.
+    /**
+     * Splits a String line of input into its command (the first word), and its subsequent arguments.
      * By default, the key "Command" maps to the name of the command input (the first word).
-     * The name of the Command is also a key to its default arguments; for eg: "delete 1" creates a mapping of "delete" -> "1".
-     * In the case of adding a new event, the name of the command is mapped to its description; for eg: "event" -> "attend wedding"
+     * The name of the Command is also a key to its default arguments;
+     * for eg: "delete 1" creates a mapping of "delete" -> "1".
+     * <br>
+     * In the case of adding a new event, the name of the command is mapped to its description;
+     * for eg: "event" -> "attend wedding"
      *
      * @param input arguments to be split
      * @return map a mapping of each argument name to its value
      */
-    private static Map<String,String> splitArgs(String input) {
+    private static Map<String, String> splitArgs(String input) {
         // returns a Map mapping name of arg to arg value based on the raw format
         // raw format according to task is /<name> <value>
 
-        Map<String,String> map = new HashMap<String,String>();
+        Map<String, String> map = new HashMap<>();
         String[] args = input.split(" /");
 
         // process main command
-        String[] mainCommand = args[0].split(" ",2);
+        String[] mainCommand = args[0].split(" ", 2);
         map.put("Command", mainCommand[0]);
         String desc = mainCommand.length == 1 ? "" : mainCommand[1].stripTrailing();
         map.put(mainCommand[0], desc); // 0 refers to name of command, 1 refers to its additional desc
@@ -53,26 +56,26 @@ public class Parser {
     }
 
     public static Command parse(String input) throws CommandNotFoundException {
-        Map<String,String> argValues = Parser.splitArgs(input);
+        Map<String, String> argValues = Parser.splitArgs(input);
         String command = argValues.get("Command");
         switch (command) {
-            case "list":
-                return new ListCommand();
-            case "mark":
-                return new MarkAsDoneCommand(argValues.get(command)); // pass in index to command
-            case "unmark":
-                return new MarkAsUndoneCommand(argValues.get(command)); // pass in index to command
-            case "delete":
-                return new DeleteCommand(argValues.get(command)); // pass in index to command
-            case "bye":
-                return new ExitCommand();
-            default:
-                if (TaskTypes.inputToTask.getValue().containsKey(command)) { // check if command is to add a task
-                    String desc = argValues.get(command);
-                    argValues.put("Description", desc); // change the for description from the name of Command
-                    return new AddCommand(TaskTypes.inputToTask.getValue().get(command), argValues);
-                }
-                throw new CommandNotFoundException("I'm sorry, I don't recognise this command :/");
+        case "list":
+            return new ListCommand();
+        case "mark":
+            return new MarkAsDoneCommand(argValues.get(command)); // pass in index to command
+        case "unmark":
+            return new MarkAsUndoneCommand(argValues.get(command)); // pass in index to command
+        case "delete":
+            return new DeleteCommand(argValues.get(command)); // pass in index to command
+        case "bye":
+            return new ExitCommand();
+        default:
+            if (TaskTypes.inputToTask.getValue().containsKey(command)) { // check if command is to add a task
+                String desc = argValues.get(command);
+                argValues.put("Description", desc); // change the for description from the name of Command
+                return new AddCommand(TaskTypes.inputToTask.getValue().get(command), argValues);
+            }
+            throw new CommandNotFoundException("I'm sorry, I don't recognise this command :/");
         }
     }
 }
