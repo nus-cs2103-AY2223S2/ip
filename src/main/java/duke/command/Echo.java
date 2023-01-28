@@ -1,3 +1,5 @@
+package Duke;
+
 public class Echo extends Commands {
     public Echo(String str) {
         this.setCommandStorage(str);

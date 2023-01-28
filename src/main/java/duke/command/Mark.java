@@ -1,3 +1,5 @@
+package Duke;
+
 public class Mark extends Commands {
     public Mark(String str) {
         this.setCommandStorage(str);

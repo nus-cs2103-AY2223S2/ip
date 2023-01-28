@@ -1,3 +1,5 @@
+package Duke;
+
 public class Delete extends Commands{
     public Delete(String str) {
         this.setCommandStorage(str);

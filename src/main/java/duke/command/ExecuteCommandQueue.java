@@ -1,3 +1,5 @@
+package Duke;
+
 //A CLASS THAT STORE THE TASKS
 public class ExecuteCommandQueue extends Commands {
     public ExecuteCommandQueue(String str) {

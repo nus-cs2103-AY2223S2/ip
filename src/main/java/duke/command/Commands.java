@@ -1,3 +1,5 @@
+package Duke;
+
 public abstract class Commands {
     private int commandIds;
     private String commandStorage;

@@ -1,3 +1,5 @@
+package Duke;
+
 public class List extends Commands{
     public List(String str) {
         this.setCommandStorage(str);
