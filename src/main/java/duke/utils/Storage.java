@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
-import duke.exceptions.DukeException;
 import duke.exceptions.MemoryFailedException;
 import duke.tasks.Task;
 import duke.tasks.TaskType;

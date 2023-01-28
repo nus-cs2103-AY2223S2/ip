@@ -3,7 +3,6 @@ package duke.utils;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import duke.exceptions.MemoryFailedException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
