@@ -129,4 +129,9 @@ public class Command {
     public boolean isExit() {
         return this.isExit;
     }
+
+    @Override
+    public String toString() {
+        return "commandName = " + commandName;
+    }
 }
