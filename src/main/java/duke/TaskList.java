@@ -3,6 +3,8 @@ package duke;
 import duke.Task;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
+
 public class TaskList {
     private ArrayList<Task> list;
 
@@ -15,6 +17,10 @@ public class TaskList {
 
     public Task get(int index) {
         return this.list.get(index);
+    }
+
+    public ArrayList<Task> getList() {
+        return this.list;
     }
 
     public void add(Task t) {
@@ -32,12 +38,15 @@ public class TaskList {
     public int size() {
         return this.list.size();
     }
-    public void print() {
-        for (int i = 0; i < list.size(); i++) {
-            int j = i + 1;
-            System.out.println(j + "." + list.get(i));
-        }
+
+    public Stream<Task> stream() {
+        return this.list.stream();
     }
+
+    public int indexOf(String value) {
+        return this.list.indexOf(value);
+    }
+
 
 
 

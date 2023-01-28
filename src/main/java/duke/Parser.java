@@ -22,7 +22,7 @@ public class Parser {
         this.tk = new StringTokenizer(fullcommand);
         this.ui = ui;
 
-        String action = tk.nextToken();
+        String action = nextString();
         Command c = null;
         Task t;
 
@@ -40,6 +40,13 @@ public class Parser {
                 c = new DeleteCommand(index);
                 break;
             }
+            case "find": {
+                String value = nextString();
+                if (value != null) {
+                    c = new FindCommand(value);
+                }
+                break;
+            }
             case "todo": {
                 String value = getToDo();
                 if (value != null) {
@@ -49,39 +56,39 @@ public class Parser {
                 break;
             }
             case "deadline": {
-                String nextString;
+                String input;
                 String value = "";
                 String date ;
-                while ((nextString = getString()) != null) {
-                    if (nextString.equals("/by")) {
-                        date = getString() + getString();
+                while ((input = nextString()) != null) {
+                    if (input.equals("/by")) {
+                        date = nextString() + nextString();
                         LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
                         t = new Deadline(value, dateTime, false);
                         c = new AddCommand(t);
                         break;
                     } else
-                        value = value + nextString;
+                        value = value + input;
                 }
 
                 break;
             }
             case "event": {
-                String nextString;
+                String input;
                 String value = "";
                 String from;
                 String to ;
-                while ((nextString = getString()) != null) {
-                    if (nextString.equals("/from")) {
-                        from = getString() + getString();
-                        getString();
-                        to = getString() + getString();
+                while ((input = nextString()) != null) {
+                    if (input.equals("/from")) {
+                        from = nextString() + nextString();
+                        nextString();
+                        to = nextString() + nextString();
                         LocalDateTime dateTime = LocalDateTime.parse(from, formatter);
                         LocalDateTime dateTime2 = LocalDateTime.parse(to, formatter);
                         t = new Event(value, dateTime, dateTime2, false);
                         c = new AddCommand(t);
                         break;
                     } else
-                        value = value + nextString;
+                        value = value + input;
                 }
                 break;
             }
@@ -113,7 +120,7 @@ public class Parser {
         return null;
     }
 
-    public String getString() {
+    public String nextString() {
         try {
             return tk.nextToken();
         } catch (NoSuchElementException e) {

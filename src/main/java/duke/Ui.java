@@ -5,6 +5,8 @@ import duke.Task;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ui {
     public Ui() {
@@ -54,5 +56,12 @@ public class Ui {
 
     public void byeMessage() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public void printList(List<Task> list) {
+        for (int i = 0; i < list.size(); i++) {
+            int j = i + 1;
+            System.out.println(j + "." + list.get(i));
+        }
     }
 }

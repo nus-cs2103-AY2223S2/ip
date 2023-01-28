@@ -1,0 +1,36 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.Task;
+
+import java.util.stream.Collectors;
+import java.util.List;
+import java.util.ArrayList;
+
+
+
+/**
+ * FindCommand - User enters the find command
+ */
+public class FindCommand extends Command {
+
+    private String value;
+
+    public FindCommand(String value) {
+        this.value = value;
+    }
+
+    /**
+     * Finds given value in all the tasks in the TaskList
+     */
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        List<Task> matches = tasks.stream()
+                .filter(it -> it.getValue().contains( this.value ))
+                .collect(Collectors.toList());
+
+        ui.printList(matches);
+    }
+}
