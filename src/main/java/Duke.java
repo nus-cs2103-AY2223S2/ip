@@ -14,7 +14,7 @@ public class Duke {
     static String MSG_LINE = "____________________________________________________________\n";
 
     /** Message to be printed before to greet the user */
-    static String[] MSG_GREET = {"Hello! I'm Duke", " What can I do for you?"};
+    static String[] MSG_GREET = {"Hello! I'm Duke", "What can I do for you?"};
 
     /** Message to be printed before exiting */
     static String MSG_EXIT = "Bye. Hope to see you again soon!";
@@ -24,6 +24,9 @@ public class Duke {
 
     /** Message to be printed after changing status of task to not done */
     static String MSG_UNMARK = "OK, I've marked this task as not done yet:";
+
+    /** Message to be printed after adding task to list of tasks */
+    static String[] MSG_ADD = {"Got it. I've added this task:", "Now you have ", " tasks in the list."};
 
     /** Indentation level of messages to be printed to console */
     static int INDENTATION_LEVEL = 4;
@@ -40,11 +43,22 @@ public class Duke {
         while (isContinue_decisionLoop) {
             // Get user's input
             Scanner sc = new Scanner(System.in);
-            String input = sc.nextLine();
-            String[] inputs = input.split(" ", 2);
+            String[] inputs = sc.nextLine().split(" ", 2);
 
             // Decision Tree
             switch (inputs[0]) {
+            case "todo":
+                add(tasks, new Todo(inputs[1]));
+                break;
+            case "deadline":
+                String[] deadlineVariable = inputs[1].split(" /by ", 2);
+                add(tasks, new Deadline(deadlineVariable[0], deadlineVariable[1]));
+                break;
+            case "event":
+                String[] eventVariable = inputs[1].split(" /from ", 2);
+                String[] eventDuration = eventVariable[1].split(" /to ", 2);
+                add(tasks, new Event(eventVariable[0], eventDuration[0], eventDuration[1]));
+                break;
             case "mark":
                 mark(tasks, inputs[1]);
                 break;
@@ -56,9 +70,6 @@ public class Duke {
                 break;
             case "bye":
                 isContinue_decisionLoop = false;
-                break;
-            default:
-                add(tasks, input);
                 break;
             }
         }
@@ -134,7 +145,7 @@ public class Duke {
      */
     static void greet() {
         System.out.println("Hello from\n" + MSG_LOGO);
-        int[] indentLevel = {1};
+        int[] indentLevel = {1, 1};
         echo(MSG_GREET, indentLevel);
     }
 
@@ -154,6 +165,22 @@ public class Duke {
     static void add(ArrayList<Task> tasks, String task) {
         tasks.add(new Task(task));
         echo("added: " + task, 1);
+    }
+
+    /**
+     * Adds specified task to specified list of tasks.
+     *
+     * @param tasks list of tasks to add task to.
+     * @param task task to be added to tasks.
+     */
+    static void add(ArrayList<Task> tasks, Task task) {
+        tasks.add(task);
+        String[] output = {MSG_ADD[0],
+                task.toString(),
+                MSG_ADD[1] + tasks.size() + MSG_ADD[2]};
+        int[] indentLevel = {1, 3, 1};
+
+        echo(output, indentLevel);
     }
 
     /**
