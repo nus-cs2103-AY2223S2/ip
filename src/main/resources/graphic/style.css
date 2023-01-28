@@ -3,21 +3,25 @@
 }
 
 .speech-bubble {
-    -fx-background-color: rgb(63, 197, 53);
+    -bubble-fill-color: rgb(63, 197, 53);
 }
 
-.speech-bubble.main-speech-bubble-left {
+.speech-bubble .main-speech-bubble-left {
+    -fx-background-color: -bubble-fill-color;
     -fx-background-radius: 10 10 10 0;
 }
 
-.speech-bubble.speech-bubble-pointer-left {
+.speech-bubble .speech-bubble-pointer-left {
+    -fx-background-color: -bubble-fill-color;
     -fx-shape: "M 100 0 L 100 100 L 10 100 C -5 100 -5 85 10 80 S 100 50 100 0 Z"
 }
 
-.speech-bubble.main-speech-bubble-right {
+.speech-bubble .main-speech-bubble-right {
+    -fx-background-color: -bubble-fill-color;
     -fx-background-radius: 10 10 0 10;
 }
 
-.speech-bubble.speech-bubble-pointer-right {
+.speech-bubble .speech-bubble-pointer-right {
+    -fx-background-color: -bubble-fill-color;
     -fx-shape: "M 0 0 L 0 100 L 90 100 C 105 100 105 85 90 80 S 0 50 0 0 Z"
 }
