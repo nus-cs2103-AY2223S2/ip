@@ -1,5 +1,12 @@
-import duke.*;
-import duke.task.*;
+import duke.DukeException;
+import duke.Ui;
+import duke.Parser;
+import duke.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 import java.time.LocalDate;
 
 public class Duke {
@@ -8,10 +15,10 @@ public class Duke {
         EVENT,
         DEADLINE
     }
-    private static TaskList list = new TaskList();
-    private static Ui ui = new Ui();
-    private static Storage storage = new Storage(list);
-    private static Parser parser = new Parser();
+    private static final TaskList list = new TaskList();
+    private static final Ui ui = new Ui();
+    private static final Storage storage = new Storage(list);
+    private static final Parser parser = new Parser();
 
     private static void addTask(String description, TaskType taskType) {
         switch (taskType) {
@@ -22,10 +29,10 @@ public class Duke {
                 break;
             case EVENT:
                 try {
-                    String modifiedDescription = parser.postDescription(description, " /from ");
-                    LocalDate fromDate = parser.dateTime(parser.preDescription(modifiedDescription, " /to "));
-                    LocalDate toDate = parser.dateTime(parser.postDescription(modifiedDescription, " /to "));
-                    Event eventTask = new Event(parser.preDescription(description, " /from "), fromDate, toDate);
+                    String modifiedDescription = parser.getPostDescription(description, " /from ");
+                    LocalDate fromDate = parser.getDateTime(parser.getPreDescription(modifiedDescription, " /to "));
+                    LocalDate toDate = parser.getDateTime(parser.getPostDescription(modifiedDescription, " /to "));
+                    Event eventTask = new Event(parser.getPreDescription(description, " /from "), fromDate, toDate);
                     list.add(eventTask);
                     ui.displayAdded(eventTask.toString(), list.size());
                     break;
@@ -35,8 +42,8 @@ public class Duke {
                 }
             case DEADLINE:
                 try {
-                    Deadline deadlineTask = new Deadline(parser.preDescription(description, " /by "),
-                            parser.dateTime(parser.postDescription(description, " /by ")));
+                    Deadline deadlineTask = new Deadline(parser.getPreDescription(description, " /by "),
+                            parser.getDateTime(parser.getPostDescription(description, " /by ")));
                     list.add(deadlineTask);
                     ui.displayAdded(deadlineTask.toString(), list.size());
                     break;
@@ -108,7 +115,7 @@ public class Duke {
                     default:
                         throw new DukeException("I'm sorry, but I don't know what that means");
                 }
-            } catch(DukeException exception) {
+            } catch (DukeException exception) {
                 System.out.println(exception.getMessage());
             } catch (IndexOutOfBoundsException e) {
                 ui.displayInvalidInputFormat();
