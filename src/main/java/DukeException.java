@@ -19,18 +19,23 @@ public class DukeException extends Exception {
     private static final String MSG_ERR_DEADLINE_DESC = "The description of a deadline cannot be empty.";
     private static final String MSG_ERR_DEADLINE_TIME = "The deadline of a deadline cannot be empty.";
 
+    // Error messages for issues with deleting task from the list of tasks
+    private static final String MSG_ERR_DELETE_EMPTY = "The index of the task to be deleted cannot be empty.";
+    private static final String MSG_ERR_DELETE_BOUND = "The index of the task to be deleted must be in the list.";
+    private static final String MSG_ERR_DELETE_NONINT = "The index of the task to be deleted must be an integer.";
+
     // Error messages for issues with marking task as complete
-    private static final String MSG_ERR_MARK_EMPTY = "The task index to be marked as done cannot be empty.";
-    private static final String MSG_ERR_MARK_BOUND = "The task index to be marked as done must be in the list.";
-    private static final String MSG_ERR_MARK_NONINT = "The task index to be marked as done must be an integer.";
+    private static final String MSG_ERR_MARK_EMPTY = "The index of the task to be marked as done cannot be empty.";
+    private static final String MSG_ERR_MARK_BOUND = "The index of the task to be marked as done must be in the list.";
+    private static final String MSG_ERR_MARK_NONINT = "The index of the task to be marked as done must be an integer.";
 
     private static final String MSG_ERR_TODO_DESC = "The description of a todo cannot be empty.";
     private static final String MSG_ERR_UNKNOWN = "I'm sorry, but I don't know what that means.";
 
     // Error messages for issues with changing the status of task to not complete
-    private static final String MSG_ERR_UNMARK_EMPTY = "The task index to be marked as not done cannot be empty.";
-    private static final String MSG_ERR_UNMARK_BOUND = "The task index to be marked as not done must be in the list.";
-    private static final String MSG_ERR_UNMARK_NONINT = "The task index to be marked as not done must be an integer.";
+    private static final String MSG_ERR_UNMARK_EMPTY = "The index of the task to be marked as not done cannot be empty.";
+    private static final String MSG_ERR_UNMARK_BOUND = "The index of the task to be marked as not done must be in the list.";
+    private static final String MSG_ERR_UNMARK_NONINT = "The index of the task to be marked as not done must be an integer.";
 
     public DukeException(String errorMessage) {
         super(MSG_ERR_PREFIX
@@ -87,6 +92,16 @@ public class DukeException extends Exception {
                     throw new DukeException(MSG_ERR_UNMARK_BOUND);
                 case "Not Integer":
                     throw new DukeException(MSG_ERR_UNMARK_NONINT);
+            }
+            break;
+        case "Delete":
+            switch (errorMessage) {
+                case "Empty Index":
+                    throw new DukeException(MSG_ERR_DELETE_EMPTY);
+                case "Out of Bound":
+                    throw new DukeException(MSG_ERR_DELETE_BOUND);
+                case "Not Integer":
+                    throw new DukeException(MSG_ERR_DELETE_NONINT);
             }
             break;
         case "List":

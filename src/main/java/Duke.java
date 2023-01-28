@@ -4,32 +4,35 @@ import java.util.Scanner;
 public class Duke {
 
     /** The Logo of Duke */
-    static String MSG_LOGO = " ____        _        \n"
+    private static final String MSG_LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     /** Line to be appended before and after a message */
-    static String MSG_LINE = "____________________________________________________________\n";
+    private static final String MSG_LINE = "____________________________________________________________\n";
 
     /** Message to be printed before to greet the user */
-    static String[] MSG_GREET = {"Hello! I'm Duke", "What can I do for you?"};
+    private static final String[] MSG_GREET = {"Hello! I'm Duke", "What can I do for you?"};
 
     /** Message to be printed before exiting */
-    static String MSG_EXIT = "Bye. Hope to see you again soon!";
+    private static final String MSG_EXIT = "Bye. Hope to see you again soon!";
 
     /** Message to be printed after marking task as done */
-    static String MSG_MARK = "Nice! I've marked this task as done:";
+    private static final String MSG_MARK = "Nice! I've marked this task as done:";
 
     /** Message to be printed after changing status of task to not done */
-    static String MSG_UNMARK = "OK, I've marked this task as not done yet:";
+    private static final String MSG_UNMARK = "OK, I've marked this task as not done yet:";
 
     /** Message to be printed after adding task to list of tasks */
-    static String[] MSG_ADD = {"Got it. I've added this task:", "Now you have ", " tasks in the list."};
+    private static final String[] MSG_ADD = {"Got it. I've added this task:", "Now you have ", " tasks in the list."};
+
+    /** Message to be printed after adding task to list of tasks */
+    private static final String MSG_DELETE = "Noted. I've removed this task:";
 
     /** Indentation level of messages to be printed to console */
-    static int INDENTATION_LEVEL = 4;
+    private static final int INDENTATION_LEVEL = 4;
 
     public static void main(String[] args) {
         // Greets the user
@@ -53,29 +56,32 @@ public class Duke {
             try {
                 // Decision Tree
                 switch (cmd) {
-                    case "todo":
-                        add(tasks, Todo.generate(input));
-                        break;
-                    case "deadline":
-                        add(tasks, Deadline.generate(input));
-                        break;
-                    case "event":
-                        add(tasks, Event.generate(input));
-                        break;
-                    case "mark":
-                        mark(tasks, input);
-                        break;
-                    case "unmark":
-                        unmark(tasks, input);
-                        break;
-                    case "list":
-                        list(tasks);
-                        break;
-                    case "bye":
-                        isContinue_decisionLoop = false;
-                        break;
-                    default:
-                        throw new DukeException("Unknown", "Unknown Command");
+                case "todo":
+                    add(tasks, Todo.generate(input));
+                    break;
+                case "deadline":
+                    add(tasks, Deadline.generate(input));
+                    break;
+                case "event":
+                    add(tasks, Event.generate(input));
+                    break;
+                case "mark":
+                    mark(tasks, input);
+                    break;
+                case "unmark":
+                    unmark(tasks, input);
+                    break;
+                case "delete":
+                    delete(tasks, input);
+                    break;
+                case "list":
+                    list(tasks);
+                    break;
+                case "bye":
+                    isContinue_decisionLoop = false;
+                    break;
+                default:
+                    throw new DukeException("Unknown", "Unknown Command");
                 }
             } catch (DukeException e) {
                 echo(e.getMessage());
@@ -114,6 +120,7 @@ public class Duke {
      *
      * @param msg Array of message to be printed on console.
      * @param indentLevel Array representing the indent level of each message.
+     * @throws DukeException If length of msg and indentLevel do not match
      */
     static void echo(String[] msg, int[] indentLevel) throws DukeException {
         if (indentLevel.length != msg.length) {
@@ -147,6 +154,8 @@ public class Duke {
 
     /**
      * Prints greeting message on console.
+     *
+     * @throws DukeException If length of MSG_GREET and indentLevel do not match
      */
     static void greet() throws DukeException {
         System.out.println("Hello from\n" + MSG_LOGO);
@@ -166,14 +175,16 @@ public class Duke {
      *
      * @param tasks List of tasks to add task to.
      * @param task Task to be added to tasks.
+     * @throws DukeException If length of output and indentLevel do not match
      */
     static void add(ArrayList<Task> tasks, Task task) throws DukeException {
         tasks.add(task);
         String[] output = {MSG_ADD[0],
                 task.toString(),
-                MSG_ADD[1] + tasks.size() + MSG_ADD[2]};
+                MSG_ADD[1]
+                        + tasks.size()
+                        + MSG_ADD[2]};
         int[] indentLevel = {1, 3, 1};
-
         echo(output, indentLevel);
     }
 
@@ -181,6 +192,7 @@ public class Duke {
      * Prints specified list of tasks on console.
      *
      * @param tasks List of tasks to print on console.
+     * @throws DukeException If list of tasks is empty
      */
     static void list(ArrayList<Task> tasks) throws DukeException {
         if (tasks.size() < 1) {
@@ -202,6 +214,9 @@ public class Duke {
      *
      * @param tasks List of tasks to get specified task from.
      * @param input User's input.
+     * @throws DukeException If list of tasks is empty
+     * @throws DukeException If index is out of bound
+     * @throws DukeException If the specified index is not an integer
      */
     static void mark(ArrayList<Task> tasks, String input) throws DukeException {
         int index = input.trim().indexOf(" ");
@@ -212,15 +227,15 @@ public class Duke {
             index = Integer.parseInt(input
                     .substring(index + 1)) - 1;
             tasks.get(index).mark();
+            int[] indentLevel = {1, 3};
+            String[] message = {MSG_MARK,
+                    tasks.get(index).toString()};
+            echo(message, indentLevel);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Mark", "Out of Bound");
         } catch (NumberFormatException e) {
             throw new DukeException("Mark", "Not Integer");
         }
-        int[] indentLevel = {1, 3};
-        String[] message = {MSG_MARK,
-                tasks.get(index).toString()};
-        echo(message, indentLevel);
     }
 
     /**
@@ -228,6 +243,9 @@ public class Duke {
      *
      * @param tasks List of tasks to get specified task from.
      * @param input User's input.
+     * @throws DukeException If list of tasks is empty
+     * @throws DukeException If index is out of bound
+     * @throws DukeException If the specified index is not an integer
      */
     static void unmark(ArrayList<Task> tasks, String input) throws DukeException {
         int index = input.trim().indexOf(" ");
@@ -238,14 +256,46 @@ public class Duke {
             index = Integer.parseInt(input
                     .substring(index + 1)) - 1;
             tasks.get(index).unmark();
+            int[] indentLevel = {1, 3};
+            String[] message = {MSG_UNMARK,
+                    tasks.get(index).toString()};
+            echo(message, indentLevel);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Unmark", "Out of Bound");
         }  catch (NumberFormatException e) {
             throw new DukeException("Unmark", "Not Integer");
         }
-        int[] indentLevel = {1, 3};
-        String[] message = {MSG_UNMARK,
-                tasks.get(index).toString()};
-        echo(message, indentLevel);
+    }
+
+    /**
+     * Removes specified task from the specified list of tasks.
+     *
+     * @param tasks List of tasks to get specified task from.
+     * @param input User's input.
+     * @throws DukeException If list of tasks is empty
+     * @throws DukeException If index is out of bound
+     * @throws DukeException If the specified index is not an integer
+     */
+    static void delete(ArrayList<Task> tasks, String input) throws DukeException {
+        int index = input.trim().indexOf(" ");
+        if (index < 0) {
+            throw new DukeException("Delete", "Empty Index");
+        }
+        try {
+            index = Integer.parseInt(input
+                    .substring(index + 1)) - 1;
+            Task task = tasks.remove(index);
+            int[] indentLevel = {1, 3, 1};
+            String[] message = {MSG_DELETE,
+                    task.toString(),
+                    MSG_ADD[1]
+                            + tasks.size()
+                            + MSG_ADD[2]};
+            echo(message, indentLevel);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Delete", "Out of Bound");
+        }  catch (NumberFormatException e) {
+            throw new DukeException("Delete", "Not Integer");
+        }
     }
 }
