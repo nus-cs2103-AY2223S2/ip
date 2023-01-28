@@ -19,6 +19,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String getTaskName(){
+        return this.taskName;
+    }
+
     abstract public String encode();
 
     public static Task decode(String str) throws DukeException {
@@ -38,7 +42,6 @@ public abstract class Task {
         if (splitStr[1].equals("true")) {
             result.markDone();
         }
-
         return result;
     }
 

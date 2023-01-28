@@ -85,4 +85,17 @@ public class TaskList {
         this.taskList = taskList;
         this.taskCount = taskList.size();
     }
+
+    public String findTasks(String str) {
+        String result = "";
+        result += "Here are the matching tasks in your list:\n";
+        int counter = 0;
+        for (int i = 0; i < this.taskCount; i++) {
+            if (this.taskList.get(i).getTaskName().contains(str)) {
+                counter++;
+                result += String.format("%d. %s \n", counter, this.taskList.get(i));
+            }
+        }
+        return result;
+    }
 }

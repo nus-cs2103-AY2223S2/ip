@@ -1,15 +1,6 @@
 package duke.ui;
 
-import duke.command.Command;
-import duke.command.Commands;
-import duke.command.EventCommand;
-import duke.command.ExitCommand;
-import duke.command.DeadlineCommand;
-import duke.command.UnmarkCommand;
-import duke.command.MarkCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
-import duke.command.DeleteCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 public class Parser {
@@ -46,6 +37,9 @@ public class Parser {
                 parsed = Parser.parseEventCommand(userInput);
                 c = new EventCommand(parsed[0], parsed[1], parsed[2]);
                 break;
+            case FIND:
+                String toFind = Parser.parseFindCommand(userInput);
+                c = new FindCommand(toFind);
         }
         return c;
     }
@@ -118,8 +112,12 @@ public class Parser {
         }
     }
 
-
-
-
-
+    private static String parseFindCommand(String userInput) throws DukeException {
+        String[] splitStr = userInput.split(" ", 2);
+        if (splitStr.length < 2) {
+            throw new DukeException("duke.Task.Find command requires String to base search on");
+        } else {
+            return splitStr[1];
+        }
+    }
 }
