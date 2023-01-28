@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
@@ -6,7 +7,7 @@ public class Deadline extends Task {
 
     public Deadline(String s, String endTime) {
         super(s);
-        this.endTime = LocalDate.parse(endTime);
+        this.endTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public Deadline(Boolean isTaskDone, String taskDetails, String taskDate) {

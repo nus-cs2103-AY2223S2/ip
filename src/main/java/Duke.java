@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Paths;
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 import java.util.List; // Import List class
 import java.util.LinkedList; // Import LinkedList class
 import java.util.Scanner;  // Import the Scanner class
@@ -257,7 +259,33 @@ public class Duke {
 
         Task newTask = new ToDo(userInput);
         storedInputs.add(newTask);
-        
+        printConfirmationMessage(newTask);
+        printTotalTasks();
+    }
+
+    private static void deadlineEvent(String userInput) {
+        try {
+            userInput = removeKeyword(userInput);
+        } catch (DukeException e) {
+            System.out.println("EXCUSE ME!!!, 'deadline' " + e.getMessage());
+            return;
+        }
+
+        String[] info = userInput.split("/by");
+
+        Task newTask;
+        try {
+            newTask = new Deadline(info[0], info[1].trim());
+            storedInputs.add(newTask);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("EXCUSE ME!!!, please follow the format\ndeadline /by dd/mm/yyyy");
+            return;
+        }
+        catch (DateTimeParseException e) {
+            System.out.println("EXCUSE ME!!!, please use the correct date format\n dd/mm/yyyy");
+            return;
+        }
+
         printConfirmationMessage(newTask);
         printTotalTasks();
     }
@@ -280,19 +308,7 @@ public class Duke {
     }
 
 
-    private static void deadlineEvent(String userInput) {
-        try {
-            String[] s = removeFirstWord(userInput.split("/"));
-            Task temp = new Deadline(s[0], s[1]);
-            storedInputs.add(temp);
-            printConfirmation();
-            System.out.println("  " + temp);
-            printTotalTasks();
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-    }
+
 
     private static void eventEvent(String userInput) {
         try {
