@@ -73,6 +73,7 @@ public abstract class Command {
      * @param body Supplementary information for the command.
      */
     public Command(Action action, String body) {
+        assert action != null;
         this.action = action;
         this.body = body;
         this.commandMap = new HashMap<>();
@@ -121,6 +122,7 @@ public abstract class Command {
      * @return Whether this command is of the given actions' natures.
      */
     public boolean hasAction(Action ...actions) {
+        assert actions != null;
         for (Action action : actions) {
             if (this.action == action) {
                 return true;

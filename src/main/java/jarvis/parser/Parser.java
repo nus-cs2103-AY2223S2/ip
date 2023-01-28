@@ -34,6 +34,7 @@ public class Parser {
      * @throws InvalidActionException If command keyword is invalid.
      */
     public static Command parse(String commandLine) throws InvalidActionException {
+        assert commandLine != null;
         return Parser.parse(new Scanner(commandLine));
     }
 
@@ -45,6 +46,7 @@ public class Parser {
      * @throws InvalidActionException If command keyword is invalid.
      */
     public static Command parse(Scanner scanner) throws InvalidActionException {
+        assert scanner != null;
         Command.Action action = Command.Action.fromString(scanner.hasNext() ? scanner.next() : null);
         String body = Objects.toString(scanner.skip("\\s*").findInLine("[^/]*"), "").trim();
         List<Command> subCommands = new LinkedList<>();
