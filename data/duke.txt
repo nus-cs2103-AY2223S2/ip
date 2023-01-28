@@ -1,5 +1,4 @@
 T | 0 | eat food
-T | 1 | return tiemtable
 T | 0 | run around
 D | 0 |  tern  | 2022-01-02
 E | 0 |  turn aorund  | 2011-09-02 2011-01-02

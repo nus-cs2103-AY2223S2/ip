@@ -1,5 +1,4 @@
 package duke;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
@@ -27,8 +26,8 @@ public class Event extends Task {
         }
     }
     public String dateFormatter() {
-        return "from: " + startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: "
-                + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "from: " + startDate.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " to: "
+                + endDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
     public String getTaskIcon() {
         return "E";
