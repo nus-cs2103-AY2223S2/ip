@@ -32,12 +32,8 @@ test {
     }
 }
 
-application {
-    mainClassName = "seedu.duke.Duke"
-}
-
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "iris"
     archiveClassifier = null
 }
 
@@ -46,10 +42,7 @@ run{
 }
 
 apply plugin : "java"
-ext {
-    javaMainClass = "iris.Iris"
-}
 
 application {
-    mainClassName = javaMainClass
+    mainClassName = "iris.Iris"
 }
