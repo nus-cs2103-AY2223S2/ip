@@ -53,7 +53,7 @@ public class Ui {
     }
 
     public void showDeleteTask(Task task, int size) {
-        System.out.println(DELETED_TASK + "\n" + task + "\n" +  "Now you have " + size + " tasks in the list");
+        System.out.println(DELETED_TASK + "\n" + task + "\n" + "Now you have " + size + " tasks in the list");
     }
 
     public void showAddTask(Task task, int size) {
