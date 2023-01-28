@@ -37,7 +37,7 @@ public class Parser {
             Ui.printGoodbye();
             return false;
         case "list":
-            Ui.printList(allTasks);
+            Ui.printAllTasks(allTasks);
             break;
         case "mark":
             try {
@@ -96,6 +96,13 @@ public class Parser {
                 allTasks.deleteTask(deleteIndex);
             } catch (Throwable e) {
                 throw new IllegalCommandException(Commands.DELETE);
+            }
+            break;
+        case "find":
+            try {
+                allTasks.find(arguments);
+            } catch (Throwable e) {
+                throw new IllegalCommandException(Commands.FIND);
             }
             break;
         default:

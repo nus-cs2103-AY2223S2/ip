@@ -20,14 +20,18 @@ public class Ui {
     /**
      * Prints the string representation of all tasks in the TaskList to the output.
      */
-    public static void printList(TaskList allTasks) {
+    public static void printAllTasks(TaskList allTasks) {
         if (allTasks.size() == 0) {
             println("You have zero tasks now!");
             return;
         }
         println("Your tasks so far!!");
-        for (int i = 0; i < allTasks.size(); i++) {
-            Task task = allTasks.getTask(i);
+        printTaskList(allTasks);
+    }
+
+    public static void printTaskList(TaskList taskList) {
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.getTask(i);
             String toPrint = String.format("%d. %s", i + 1, task.toString());
             println(toPrint);
         }

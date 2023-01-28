@@ -40,6 +40,8 @@ public class IllegalCommandException extends DukeException {
                     + "/by date-of-deadline (format: yyyy-MM-dd HH:mm)\n";
         case DELETE:
             return "Command Exception: Make sure that your delete command is as such\n\ndelete index-of-task\n";
+        case FIND:
+            return "Command Exception: Make sure that your find command is as such\n\nfind enter-keyword-here\n";
         case UNRECOGNIZED:
             return "Command Exception: That is not a recognized command!\n";
         default:
