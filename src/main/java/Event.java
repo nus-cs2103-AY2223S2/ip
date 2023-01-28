@@ -13,14 +13,19 @@ public class Event extends Task {
      *
      * @param userInput specifies the fromDate, toDate and title of an Event object
      */
-    public Event(String userInput) {
-        super(userInput.substring(6, userInput.indexOf("/from ") - 1));
+    public Event(boolean isCompleted, String userInput) {
+        super(isCompleted, userInput.substring(6, userInput.indexOf("/from ") - 1), 'E');
         this.fromDate = userInput.substring(userInput.indexOf("/from ") + 6, userInput.indexOf("/to ") - 1);
         this.toDate = userInput.substring(userInput.indexOf("/to ") + 4);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + fromDate + " to: " + toDate + ")";
+        return super.toString() + " (from: " + fromDate + " to: " + toDate + ")";
+    }
+
+    @Override
+    public String encode() {
+        return super.encode() + " | " + this.fromDate + " | " + this.toDate;
     }
 }

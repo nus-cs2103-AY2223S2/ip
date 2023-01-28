@@ -6,15 +6,19 @@ public class Task {
     protected boolean isCompleted = false;
     /** Description of the task */
     protected String title;
+    /** Type of Task */
+    protected char taskType; // can be T, D or E
 
     /**
      * Default constructor for Task objects
      *
      * @param title specifies the description of this task object
+     * @param taskType specifies whether the task is a deadline, todo or event
      */
-    public Task(String title) {
-        this.isCompleted = false;
+    public Task(boolean isCompleted, String title, char taskType) {
+        this.isCompleted = isCompleted;
         this.title = title;
+        this.taskType = taskType;
     }
 
     /**
@@ -29,9 +33,9 @@ public class Task {
     // Methods:
     public String toString() {
         if (this.isCompleted) {
-            return "[X] " + title;
+            return "[" + taskType + "]" + " [X] " + title;
         }
-        return "[ ] " + title;
+        return "[" + taskType + "]" + " [ ] " + title;
     }
 
     public void setCompleted(boolean setting) {
@@ -43,6 +47,15 @@ public class Task {
         else {
             System.out.println("OK, I've marked this task as incomplete:");
             System.out.println(" " + this.toString() + "\n");
+        }
+    }
+
+    public String encode() {
+        if (this.isCompleted) {
+            return taskType + " | " + "X" + " | " + this.title;
+        }
+        else {
+            return taskType + " | " + " " + " | " + this.title;
         }
     }
 }

@@ -8,12 +8,12 @@ public class Todo extends Task {
      *
      * @param userInput Specifies the todo task's title
      */
-    public Todo(String userInput) {
-        super(userInput.substring(5));
+    public Todo(boolean isCompleted, String userInput) {
+        super(isCompleted, userInput.substring(5), 'T');
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return super.toString();
     }
 }

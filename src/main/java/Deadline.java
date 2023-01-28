@@ -11,13 +11,18 @@ public class Deadline extends Task {
      *
      * @param userInput specifies the byDate and title of a Deadline object
      */
-    public Deadline(String userInput) {
-        super(userInput.substring(9, userInput.indexOf("/by ") - 1));
+    public Deadline(boolean isCompleted, String userInput) {
+        super(isCompleted, userInput.substring(9, userInput.indexOf("/by ") - 1), 'D');
         this.byDate = userInput.substring(userInput.indexOf("/by ") + 4);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + byDate + ")";
+        return super.toString() + " (by: " + byDate + ")";
+    }
+
+    @Override
+    public String encode() {
+        return super.encode() + " | " + this.byDate;
     }
 }

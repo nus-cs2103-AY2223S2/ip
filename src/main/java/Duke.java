@@ -70,7 +70,7 @@ public class Duke {
     public static void displayList() {
         int pos = 0;
         System.out.println("Here are the tasks in your list:");
-        while (pos < listIndex) {
+        while (pos < taskList.size()) {
             System.out.println((pos + 1) + ". " + taskList.get(pos).toString());
             pos++;
         }
@@ -100,9 +100,11 @@ public class Duke {
      * Greets user, awaits user input and updates/displays taskList accordingly.
      *
      * @param args Commands from user, to interact with taskList
-     * @return Output based on user's input command
      */
     public static void main(String[] args) {
+        FileManager fileManager = new FileManager();
+        taskList = fileManager.read();
+        listIndex = taskList.size();
         Scanner sc = new Scanner(System.in);
         greet();
         String userInput =  sc.nextLine();
@@ -124,7 +126,7 @@ public class Duke {
                 // If input is a deadline, create deadline and add to task list
                 else if (userInput.startsWith("deadline ")) {
                     if (userInput.contains("/by ")) {
-                        addToList(new Deadline(userInput));
+                        addToList(new Deadline(false, userInput));
                     } else {
                         try {
                             throwException("deadline");
@@ -137,7 +139,7 @@ public class Duke {
                 // If input is an event, create event and add to task list
                 else if (userInput.startsWith("event ")) {
                     if (userInput.contains("/from ") && userInput.contains("/to ")) {
-                        addToList(new Event(userInput));
+                        addToList(new Event(false, userInput));
                     } else {
                         try {
                             throwException("event");
@@ -150,7 +152,7 @@ public class Duke {
                 // If input is a ToDos item, create ToDos item and add to task list
                 else if (userInput.startsWith("todo ")) {
                     if (userInput.length() > 5) {
-                        addToList(new Todo(userInput));
+                        addToList(new Todo(false, userInput));
                     } else {
                         try {
                             throwException("todo");
@@ -182,6 +184,7 @@ public class Duke {
                     }
                 }
                 // Insert call on method that writes curr version of taskList to data/duke.txt
+                fileManager.writeToFile(taskList);
             }
             else {
                 displayList();
