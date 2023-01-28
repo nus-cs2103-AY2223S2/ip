@@ -11,13 +11,13 @@ import java.util.ArrayList;
  * Contains the task list and has operations to perform actions on it.
  */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
     /**
      * A constructor that initialises <code>ArrayList&lt;Task&gt; of size 100.</code>
      */
     public TaskList() {
-        this.taskList = new ArrayList<>(100);
+        this.tasks = new ArrayList<>(100);
     }
 
     /**
@@ -25,7 +25,7 @@ public class TaskList {
      * @param t task
      */
     public void storeTask(Task t) {
-        this.taskList.add(t);
+        this.tasks.add(t);
     }
 
     /**
@@ -48,7 +48,7 @@ public class TaskList {
         char status = sf.charAt(4);
         ToDo t = new ToDo(sf.substring(7));
         storeTask(t);
-        if(status == 'X') {
+        if (status == 'X') {
             t.markDone();
         }
         return t;
@@ -77,7 +77,7 @@ public class TaskList {
         String deadlineBy = contents[1];
         Deadline d = new Deadline(deadlineDesc, deadlineBy);
         storeTask(d);
-        if(status == 'X') {
+        if (status == 'X') {
             d.markDone();
         }
         return d;
@@ -108,7 +108,7 @@ public class TaskList {
         String eventTo = eventFromTo[1];
         Event e = new Event(eventDesc, eventFrom, eventTo);
         storeTask(e);
-        if(status == 'X') {
+        if (status == 'X') {
             e.markDone();
         }
         return e;
@@ -119,7 +119,7 @@ public class TaskList {
      * @param index of task list to be deleted
      */
     public void deleteTask(int index) {
-        taskList.remove(index);
+        tasks.remove(index);
     }
 
     /**
@@ -127,6 +127,6 @@ public class TaskList {
      * @return task list
      */
     public ArrayList<Task> getTasks() {
-        return this.taskList;
+        return this.tasks;
     }
 }

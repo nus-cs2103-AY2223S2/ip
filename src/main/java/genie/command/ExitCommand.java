@@ -15,5 +15,7 @@ public class ExitCommand extends Command {
         storage.closeFileWriter();
     }
     @Override
-    public boolean isExitCommand() { return true; }
+    public boolean isExitCommand() {
+        return true;
+    }
 }

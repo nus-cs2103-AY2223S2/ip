@@ -15,14 +15,14 @@ import java.util.Scanner;
 public class Storage {
     private static final String PATH = "./data/duke.txt";
     private static FileWriter fw;
-    private ArrayList<String> loadedTaskList;
+    private ArrayList<String> loadedTasks;
 
     /**
      * A constructor for Storage class. Creates an <code>ArrayList&lt;String&gt</code> to store all the read tasks
      * from file.
      */
     public Storage() {
-        this.loadedTaskList = new ArrayList<>();
+        this.loadedTasks = new ArrayList<>();
     }
 
     /**
@@ -31,58 +31,59 @@ public class Storage {
      * @return <code>TaskList</code> containing an array of Tasks read from the file
      * @throws IOException if an error occurs while loading the data
      */
-    /* code reused from:
-https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
-author Aaron D
- */
+    //@author mandykqh-reused
+    //Reused from https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then
+    // -create-the-files-in-that-direct
+    //with minor modifications
     public TaskList loadData() throws IOException {
         File directory = new File("./data");
         if (!directory.exists()){
             directory.mkdir();
         }
         File file = new File(PATH);
-        if(file.createNewFile()) {
+        if (file.createNewFile()) {
             System.out.println("Seems like you're new here. Welcome onboard and let's get started! ^-^");
             return new TaskList();
         } else {
             return readTextFileToList(file);
         }
     }
-
+    //@author
     /**
      * Reads contents of the loaded .txt file into a <code>TaskList</code>.
      * @param f loaded file
      * @return <code>TaskList</code>
      * @throws IOException if an error occurs in reading the file
      */
+
     public TaskList readTextFileToList(File f) throws IOException {
         Scanner fs = new Scanner(f);
-        TaskList taskList = new TaskList();
+        TaskList tasks = new TaskList();
         while (fs.hasNext()) {
             String strTask = fs.nextLine();
             char taskLetter = strTask.charAt(1);
-            loadedTaskList.add(strTask);
+            loadedTasks.add(strTask);
             switch (taskLetter) {
             case 'T':
-                taskList.addToDoFromFile(strTask);
+                tasks.addToDoFromFile(strTask);
                 break;
             case 'E':
-                taskList.addEventFromFile(strTask);
+                tasks.addEventFromFile(strTask);
                 break;
             case 'D':
-                taskList.addDeadlineFromFile(strTask);
+                tasks.addDeadlineFromFile(strTask);
                 break;
             }
         }
-        saveListToFile(taskList.getTasks()); //TODO save by each task as stopping program/bugs wipes all data
-        return taskList;
+        saveListToFile(tasks.getTasks()); //TODO save by each task as stopping program/bugs wipes all data
+        return tasks;
     }
     /*
     public void saveTaskToFile(genie.task.Task t) throws IOException {
         fw.write(t.toString());
         fw.write("\n");
-    } */
-
+    }
+    */
     /**
      * Closes <code>FileWriter</code>.
      * @throws IOException if an error occurs in closing <code>FileWriter</code>
@@ -110,6 +111,6 @@ author Aaron D
      * @return task list in <code>ArrayList&lt;String&gt;</code>
      */
     public ArrayList<String> getLoadedTaskList() {
-        return this.loadedTaskList;
+        return this.loadedTasks;
     }
 }

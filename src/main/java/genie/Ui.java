@@ -9,14 +9,9 @@ import java.util.Scanner;
  * Deals with interactions with the user.
  */
 public class Ui {
-    private final static String logo =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|";
-    // credits to: https://patorjk.com/
-    private final static String genieLogo =
+
+    // Art generated from: https://patorjk.com/
+    private final static String GENIE_LOGO =
                             "     *          *          *              *     *         *    *\n " +
                             "               ▄████ ▓█████  ███▄ * ▒█ ▒██ ▓█████               \n" +
                             " *       *    ▄▒█▀ ▀█ ▒██  ▀  ▒██▀█▄ ▒█ ▄▄▄ ▒▓█  ▀ *          * \n" +
@@ -50,7 +45,7 @@ public class Ui {
      */
     public void bootLogo() {
         printLine();
-        System.out.println(genieLogo);
+        System.out.println(GENIE_LOGO);
         printLine();
     }
 
@@ -58,9 +53,7 @@ public class Ui {
      * Prints a line.
      */
     public void printLine() {
-        //System.out.println("_____________________________________________________________________");
         System.out.println("==============================================================================");
-        //System.out.println("~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~");
     }
 
     /**
@@ -68,9 +61,9 @@ public class Ui {
      * @param tasks
      */
     public void printList(ArrayList<Task> tasks) {
-        if(tasks.size() > 0) {
+        if (tasks.size() > 0) {
             System.out.println("Here are the tasks in your list:");
-            for(int i = 1; i <= tasks.size(); i++) {
+            for (int i = 1; i <= tasks.size(); i++) {
                 Task t = tasks.get(i - 1);
                 System.out.println(i + ". " + t.toString());
             }
@@ -148,7 +141,7 @@ public class Ui {
      * @param tl task list
      */
     public void printLoadedTaskList(ArrayList<String> tl) {
-        if(tl.isEmpty()) {
+        if (tl.isEmpty()) {
             showEmptyListMessage();
         } else {
             System.out.println("Here is a record of your task list from where you had previously left off:");

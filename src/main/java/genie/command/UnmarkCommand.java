@@ -17,5 +17,7 @@ public class UnmarkCommand extends Command {
         ui.showUnmarkDoneMessage(t);
     }
     @Override
-    public boolean isExitCommand() { return false; }
+    public boolean isExitCommand() {
+        return false;
+    }
 }

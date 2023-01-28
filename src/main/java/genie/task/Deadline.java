@@ -32,7 +32,7 @@ public class Deadline extends Task {
             String formattedDate = new SimpleDateFormat("EEE, dd/MM/yyyy, h:mm a").format(date);
             this.by = formattedDate;
             return "[D]" + super.toString() + " (by: " + formattedDate + ")";
-        } catch(ParseException e) {
+        } catch (ParseException e) {
             //return "Sorry, I can't recognize this date format! ><\n" +
             //        "Try this format instead: deadline xxx /by YYYY-MM-DD hh:mm";
             return "[D]" + super.toString() + " (by: " + this.by + ")";
@@ -50,7 +50,7 @@ public class Deadline extends Task {
             String formattedDate = new SimpleDateFormat("EEE, dd/MM/yyyy, h:mm a").format(date);
             this.by = formattedDate;
             return "[D]" + super.toString() + " | " + formattedDate;
-        } catch(ParseException e) {
+        } catch (ParseException e) {
             //return "Sorry, I can't recognize this date format! ><\n" +
             //        "Try this format instead: deadline xxx /by YYYY-MM-DD hh:mm";
             return "[D]" + super.toString() + " | " + this.by;
@@ -63,7 +63,7 @@ public class Deadline extends Task {
             Date d = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(this.by);
             String formattedDate = new SimpleDateFormat("EEE, dd/MM/yyyy, hma").format(d);
             return formattedDate;
-        } catch(ParseException e) {
+        } catch (ParseException e) {
             //return "Sorry, I can't recognize this date format! ><\n" +
             //        "Try this format instead: deadline xxx /by YYYY-MM-DD hh:mm";
             return date;

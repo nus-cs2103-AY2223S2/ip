@@ -17,5 +17,7 @@ public class DeleteCommand extends Command {
         ui.showDeleteTaskMessage(t, taskList.getTasks().size());
     }
     @Override
-    public boolean isExitCommand() { return false; }
+    public boolean isExitCommand() {
+        return false;
+    }
 }
