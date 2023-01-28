@@ -1,19 +1,19 @@
 package iris.command;
 
-import iris.TaskList;
-import iris.exception.DateTimeException;
-import iris.exception.IrisException;
-import iris.Ui;
-import iris.TaskStore;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import iris.TaskList;
+import iris.TaskStore;
+import iris.Ui;
+import iris.exception.DateTimeException;
+import iris.exception.IrisException;
+
 public class FilterCommand extends Command {
-    LocalDateTime start;
-    LocalDateTime end;
+    private final LocalDateTime start;
+    private final LocalDateTime end;
 
     public FilterCommand(String str) throws DateTimeException {
         try {

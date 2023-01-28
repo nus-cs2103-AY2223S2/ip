@@ -16,13 +16,15 @@ public class Task {
      * Marks the task done
      */
     public void mark() {
-        isDone = true;}
+        isDone = true;
+    }
 
     /**
      * Marks the task not done
      */
     public void unmark() {
-        isDone = false;}
+        isDone = false;
+    }
 
     /**
      * Returns the name of the task
@@ -49,7 +51,9 @@ public class Task {
     }
 
     public static Task parse(String str) throws IrisException {
-        Task task; String type; String mark;
+        Task task;
+        String type;
+        String mark;
         String[] strArray = str.split("\\|");
         try {
             type = strArray[0];

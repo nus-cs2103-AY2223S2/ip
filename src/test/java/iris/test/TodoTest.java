@@ -1,9 +1,10 @@
 package iris.test;
 
-import iris.task.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import iris.task.Todo;
 
 public class TodoTest {
     @Test

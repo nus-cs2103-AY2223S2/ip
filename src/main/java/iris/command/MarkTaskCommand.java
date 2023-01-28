@@ -1,14 +1,14 @@
 package iris.command;
 
-import iris.exception.UnknownTaskException;
 import iris.TaskList;
+import iris.TaskStore;
 import iris.Ui;
 import iris.exception.IrisException;
-import iris.TaskStore;
+import iris.exception.UnknownTaskException;
 import iris.task.Task;
 
 public class MarkTaskCommand extends Command {
-    int index;
+    private final int index;
 
     public MarkTaskCommand(int i) {
         this.index = i;

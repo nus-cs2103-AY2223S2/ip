@@ -1,6 +1,6 @@
 package iris.exception;
 
-public class IrisException extends Exception{
+public class IrisException extends Exception {
     private final String message;
     public IrisException() {
         this.message = "OOPS!!! Something went wrong." + " Type \"help\" to see the commands.";

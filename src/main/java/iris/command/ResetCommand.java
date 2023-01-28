@@ -2,8 +2,8 @@ package iris.command;
 
 import iris.TaskList;
 import iris.TaskStore;
-import iris.exception.IrisException;
 import iris.Ui;
+import iris.exception.IrisException;
 
 public class ResetCommand extends Command {
     @Override

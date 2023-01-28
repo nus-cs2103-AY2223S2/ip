@@ -1,11 +1,11 @@
 package iris;
 
-import iris.task.Event;
-import iris.task.Deadline;
-import iris.task.Task;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import iris.task.Deadline;
+import iris.task.Event;
+import iris.task.Task;
 
 public class TaskList extends ArrayList<Task> {
 
@@ -73,7 +73,7 @@ public class TaskList extends ArrayList<Task> {
     public String toString() {
         String str = "";
         for (int i = 0; i < this.size(); i++) {
-            str = String.join("",str, String.valueOf(i + 1), ". ", this.get(i).toString(), "\n");
+            str = String.join("", str, String.valueOf(i + 1), ". ", this.get(i).toString(), "\n");
         }
         return str;
     }

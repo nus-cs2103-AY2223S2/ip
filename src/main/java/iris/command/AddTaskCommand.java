@@ -2,8 +2,8 @@ package iris.command;
 
 import iris.TaskList;
 import iris.TaskStore;
-import iris.task.Task;
 import iris.Ui;
+import iris.task.Task;
 
 public class AddTaskCommand extends Command {
     private Task task;
