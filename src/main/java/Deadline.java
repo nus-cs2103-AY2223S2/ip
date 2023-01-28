@@ -1,10 +1,14 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Deadline extends Task{
 
     protected String eventDetail;
 
     protected String timeDescription;
 
-    protected String time;
+    protected LocalDate time;
 
     /**
      * Constructor
@@ -16,7 +20,7 @@ public class Deadline extends Task{
         this.eventDetail = detail;
         String timeDescription = description.split("/")[1].split(" ")[0] + ": " + description.split("/")[1].split(" ",2)[1];
         this.timeDescription = timeDescription;
-        this.time = timeDescription.split(": ",2)[1];
+        this.time = LocalDate.parse(timeDescription.split(": ",2)[1]);
     }
 
     /**
@@ -46,7 +50,7 @@ public class Deadline extends Task{
      * @return a String representing time
      */
     public String getTime() {
-        return this.time;
+        return this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
 }
