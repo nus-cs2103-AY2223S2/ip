@@ -10,6 +10,8 @@ import java.nio.file.Path;
 
 public class Duke {
 
+    private static Ui ui = new Ui();
+
     private static Scanner getInput = new Scanner(System.in); // Create a static Scanner object
 
     private static List<Task> storedInputs = new LinkedList<>(); // List to store inputs
@@ -17,7 +19,7 @@ public class Duke {
     public static void main(String[] args) throws IOException {
 
         // Print introduction
-        System.out.println(intro());
+        ui.printIntro();
 
         // Open file
         String home = System.getProperty("user.home"); // Get home directory
@@ -56,7 +58,7 @@ public class Duke {
                     break;
                 }
             }
-        System.out.println(printList());
+        ui.printList(storedInputs);
 
         // Execute inputs
         String userInput;
@@ -79,7 +81,7 @@ public class Duke {
             case BYE:
                 break loop;
             case LIST:
-                System.out.println("\nHere are the tasks in your list:\n" + printList());
+                ui.printListWithAttitude(storedInputs);
                 break;
             case MARK:
                 markEvent(userInput);
@@ -108,7 +110,7 @@ public class Duke {
             }
         }
 
-        System.out.println(outro());
+        ui.printOutro();
     }
 
     private static char decodeTaskType(String s) {
@@ -136,22 +138,6 @@ public class Duke {
         line = line.substring(line.indexOf("|") + 1);
         line = line.substring(line.indexOf("|") + 1);
         return line;
-    }
-
-    private static String logo() {
-        return " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    }
-
-    private static String intro() {
-        return "Hello! I'm\n" + logo() + "\nWhat can I do for you?";
-    }
-
-    private static String outro() {
-        return "Good Riddance!";
     }
 
     private static String askForInput() {
@@ -198,11 +184,11 @@ public class Duke {
         try {
             t = storedInputs.get(num-1);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid item");
+            ui.printIndexOutOfBoundMessage();
             return;
         }
         t.markDone();
-        System.out.println("\nNice! I've marked this task as done:\n  " + t + "\n");
+        ui.printMarkMessage(t);
     }
 
     private static void unmarkEvent(String userInput) {
@@ -213,11 +199,11 @@ public class Duke {
         try {
             t = storedInputs.get(num-1);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid item");
+            ui.printIndexOutOfBoundMessage();
             return;
         }
         t.markUnDone();
-        System.out.println("\nOK, I've marked this task as not done yet:\n  " + t + "\n");
+        ui.printUnMarkMessage(t);
     }
 
     public static void deleteEvent(String userInput) {
@@ -228,12 +214,12 @@ public class Duke {
         try {
             t = storedInputs.remove(num-1);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid item");
+            ui.printIndexOutOfBoundMessage();
             return;
         }
 
-        System.out.println("\nNoted. I've removed this task:\n  " + t);
-        printTotalTasks();
+        ui.printDeleteSuccessfulMessage(t);
+        ui.printTotalTask(storedInputs);
     }
 
     private static String removeKeyword(String s) throws DukeException {
@@ -254,21 +240,21 @@ public class Duke {
         try {
             userInput = removeKeyword(userInput);
         } catch (DukeException e) {
-            System.out.println("EXCUSE ME!!!, 'todo' " + e.getMessage());
+            ui.printEmptyDetailsMessage("todo");
             return;
         }
 
         Task newTask = new ToDo(userInput.trim());
         storedInputs.add(newTask);
-        printConfirmationMessage(newTask);
-        printTotalTasks();
+        ui.printAddTaskSuccessfulMessage(newTask);
+        ui.printTotalTask(storedInputs);
     }
 
     private static void deadlineEvent(String userInput) {
         try {
             userInput = removeKeyword(userInput);
         } catch (DukeException e) {
-            System.out.println("EXCUSE ME!!!, 'deadline' " + e.getMessage());
+            ui.printEmptyDetailsMessage("deadline");
             return;
         }
 
@@ -276,29 +262,29 @@ public class Duke {
         try {
             String[] info = userInput.split("/by");
             if (info[0].trim().isEmpty()) {
-                System.out.println("EXCUSE ME!!!, details cannot be empty");
+                ui.printEmptyDetailsMessage("deadline");
                 return;
             }
             newTask = new Deadline(info[0].trim(), info[1].trim());
             storedInputs.add(newTask);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("EXCUSE ME!!!, please follow the format\ndeadline <detail> /by dd/mm/yyyy");
+            ui.printDeadlineFormat();
             return;
         }
         catch (DateTimeParseException e) {
-            System.out.println("EXCUSE ME!!!, please use the correct date format\n dd/mm/yyyy");
+            ui.printDateFormat();
             return;
         }
 
-        printConfirmationMessage(newTask);
-        printTotalTasks();
+        ui.printAddTaskSuccessfulMessage(newTask);
+        ui.printTotalTask(storedInputs);
     }
 
     private static void eventEvent(String userInput) {
         try {
             userInput = removeKeyword(userInput);
         } catch (DukeException e) {
-            System.out.println("EXCUSE ME!!!, 'event' " + e.getMessage());
+            ui.printEmptyDetailsMessage("event");
             return;
         }
 
@@ -307,37 +293,21 @@ public class Duke {
             String[] infoA = userInput.split("/from");
             String[] infoB = infoA[1].split("/to");
             if (infoA[0].trim().isEmpty()) {
-                System.out.println("EXCUSE ME!!!, details cannot be empty");
+                ui.printEmptyDetailsMessage("event");
                 return;
             }
             newTask = new Event(infoA[0].trim(), infoB[0].trim(), infoB[1].trim());
             storedInputs.add(newTask);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("EXCUSE ME!!!, please follow the format\nevent <details> /from dd/mm/yyyy /to dd/mm/yyyy");
+            ui.printEventFormat();
             return;
         } catch (DateTimeParseException e) {
-            System.out.println("EXCUSE ME!!!, please use the correct date format\n dd/mm/yyyy");
+            ui.printDateFormat();
             return;
         }
 
-        printConfirmationMessage(newTask);
-        printTotalTasks();
-    }
-
-    private static String printList() {
-        StringBuilder s = new StringBuilder();
-        for (int i = 1; i <= storedInputs.size(); i++) {
-            s.append(i).append(". ").append(storedInputs.get(i - 1)).append("\n");
-        }
-        return s.toString();
-    }
-
-    private static void printConfirmationMessage(Task task) {
-        System.out.println("\nYAY! Task Added:\n " + task );
-    }
-
-    private static void printTotalTasks() {
-        System.out.println("Now you have " + Task.count  + " tasks in the list.\n");
+        ui.printAddTaskSuccessfulMessage(newTask);
+        ui.printTotalTask(storedInputs);
     }
 
     private static String prepareWriteContents() {
