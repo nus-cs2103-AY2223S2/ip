@@ -34,6 +34,8 @@ public class Duke {
     /** Indentation level of messages to be printed to console */
     private static final int INDENTATION_LEVEL = 4;
 
+    protected enum Command {TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, BYE};
+
     public static void main(String[] args) {
         // Greets the user
         try {
@@ -51,40 +53,52 @@ public class Duke {
             // Get user's input
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
-            String cmd = input.split(" ", 2)[0];
 
             try {
+                Command cmd = Command.valueOf(input.split(" ", 2)[0].trim().toUpperCase());
                 // Decision Tree
                 switch (cmd) {
-                case "todo":
+                case TODO:
                     add(tasks, Todo.generate(input));
                     break;
-                case "deadline":
+                case DEADLINE:
                     add(tasks, Deadline.generate(input));
                     break;
-                case "event":
+                case EVENT:
                     add(tasks, Event.generate(input));
                     break;
-                case "mark":
+                case MARK:
                     mark(tasks, input);
                     break;
-                case "unmark":
+                case UNMARK:
                     unmark(tasks, input);
                     break;
-                case "delete":
+                case DELETE:
                     delete(tasks, input);
                     break;
-                case "list":
+                case LIST:
                     list(tasks);
                     break;
-                case "bye":
+                case BYE:
                     isContinue_decisionLoop = false;
                     break;
-                default:
-                    throw new DukeException("Unknown", "Unknown Command");
                 }
             } catch (DukeException e) {
                 echo(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                // If user's input is not a valid command
+                try {
+                    throw new DukeException("Unknown", "Unknown Command");
+                } catch (DukeException de) {
+                    echo(de.getMessage());
+                }
+            } catch (NullPointerException e) {
+                // If user's input is not a valid command
+                try {
+                    throw new DukeException("Unknown", "No Command");
+                } catch (DukeException de) {
+                    echo(de.getMessage());
+                }
             } catch (Exception e) {
                 // Catches exceptions whose behaviour has not yet been implemented
                 try {

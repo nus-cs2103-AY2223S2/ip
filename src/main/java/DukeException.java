@@ -29,6 +29,8 @@ public class DukeException extends Exception {
     private static final String MSG_ERR_MARK_BOUND = "The index of the task to be marked as done must be in the list.";
     private static final String MSG_ERR_MARK_NONINT = "The index of the task to be marked as done must be an integer.";
 
+    private static final String MSG_ERR_NONE = "There seems to be no input.";
+
     private static final String MSG_ERR_TODO_DESC = "The description of a todo cannot be empty.";
     private static final String MSG_ERR_UNKNOWN = "I'm sorry, but I don't know what that means.";
 
@@ -37,84 +39,118 @@ public class DukeException extends Exception {
     private static final String MSG_ERR_UNMARK_BOUND = "The index of the task to be marked as not done must be in the list.";
     private static final String MSG_ERR_UNMARK_NONINT = "The index of the task to be marked as not done must be an integer.";
 
+    protected enum ErrorType {UNKNOWN, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST};
+
+
+    /**
+     * Holds the error message of the exception
+     *
+     * @param errorMessage Error message of the exception
+     */
     public DukeException(String errorMessage) {
         super(MSG_ERR_PREFIX
                 + " " + errorMessage
                 + " " + MSG_ERR_SUFFIX);
     }
 
+    /**
+     * Handles the different type of errors in Duke
+     *
+     * @param type Type of method that caused the exception
+     * @param errorMessage Type of exception
+     * @throws DukeException For each type of errors
+     */
     public DukeException(String type, String errorMessage) throws DukeException {
-        super(errorMessage);
-        switch (type) {
-        case "Unknown":
-            if (errorMessage.equals("Unknown Command")) {
-                throw new DukeException(MSG_ERR_UNKNOWN);
+        super(type + " " + errorMessage);
+        try {
+            ErrorType errType = ErrorType.valueOf(type
+                    .trim()
+                    .toUpperCase());
+
+            switch (errType) {
+            case UNKNOWN:
+                switch (errorMessage) {
+                case "Unknown Command":
+                    throw new DukeException(MSG_ERR_UNKNOWN);
+                case "No Command":
+                    throw new DukeException(MSG_ERR_NONE);
+                }
+                break;
+            case TODO:
+                if (errorMessage.equals("Empty description")) {
+                    throw new DukeException(MSG_ERR_TODO_DESC);
+                }
+                break;
+            case DEADLINE:
+                switch (errorMessage) {
+                    case "Empty description":
+                        throw new DukeException(MSG_ERR_DEADLINE_DESC);
+                    case "Empty deadline":
+                        throw new DukeException(MSG_ERR_DEADLINE_TIME);
+                }
+                break;
+            case EVENT:
+                switch (errorMessage) {
+                    case "Empty description":
+                        throw new DukeException(MSG_ERR_EVENT_EMPTY);
+                    case "Empty From Time":
+                        throw new DukeException(MSG_ERR_EVENT_FROM);
+                    case "Empty To Time":
+                        throw new DukeException(MSG_ERR_EVENT_TO);
+                }
+                break;
+            case MARK:
+                switch (errorMessage) {
+                    case "Empty Index":
+                        throw new DukeException(MSG_ERR_MARK_EMPTY);
+                    case "Out of Bound":
+                        throw new DukeException(MSG_ERR_MARK_BOUND);
+                    case "Not Integer":
+                        throw new DukeException(MSG_ERR_MARK_NONINT);
+                }
+                break;
+            case UNMARK:
+                switch (errorMessage) {
+                    case "Empty Index":
+                        throw new DukeException(MSG_ERR_UNMARK_EMPTY);
+                    case "Out of Bound":
+                        throw new DukeException(MSG_ERR_UNMARK_BOUND);
+                    case "Not Integer":
+                        throw new DukeException(MSG_ERR_UNMARK_NONINT);
+                }
+                break;
+            case DELETE:
+                switch (errorMessage) {
+                    case "Empty Index":
+                        throw new DukeException(MSG_ERR_DELETE_EMPTY);
+                    case "Out of Bound":
+                        throw new DukeException(MSG_ERR_DELETE_BOUND);
+                    case "Not Integer":
+                        throw new DukeException(MSG_ERR_DELETE_NONINT);
+                }
+                break;
+            case LIST:
+                switch (errorMessage) {
+                    case "Empty List":
+                        throw new DukeException(MSG_ERR_LIST_EMPTY);
+                    case "Unbalanced List":
+                        throw new DukeException(MSG_ERR_LIST_ECHO);
+                }
+                break;
             }
-            break;
-        case "ToDo":
-            if (errorMessage.equals("Empty description")) {
-                throw new DukeException(MSG_ERR_TODO_DESC);
-            }
-            break;
-        case "Deadline":
-            switch (errorMessage) {
-                case "Empty description":
-                    throw new DukeException(MSG_ERR_DEADLINE_DESC);
-                case "Empty deadline":
-                    throw new DukeException(MSG_ERR_DEADLINE_TIME);
-            }
-            break;
-        case "Event":
-            switch (errorMessage) {
-                case "Empty description":
-                    throw new DukeException(MSG_ERR_EVENT_EMPTY);
-                case "Empty From Time":
-                    throw new DukeException(MSG_ERR_EVENT_FROM);
-                case "Empty To Time":
-                    throw new DukeException(MSG_ERR_EVENT_TO);
-            }
-            break;
-        case "Mark":
-            switch (errorMessage) {
-                case "Empty Index":
-                    throw new DukeException(MSG_ERR_MARK_EMPTY);
-                case "Out of Bound":
-                    throw new DukeException(MSG_ERR_MARK_BOUND);
-                case "Not Integer":
-                    throw new DukeException(MSG_ERR_MARK_NONINT);
-            }
-            break;
-        case "Unmark":
-            switch (errorMessage) {
-                case "Empty Index":
-                    throw new DukeException(MSG_ERR_UNMARK_EMPTY);
-                case "Out of Bound":
-                    throw new DukeException(MSG_ERR_UNMARK_BOUND);
-                case "Not Integer":
-                    throw new DukeException(MSG_ERR_UNMARK_NONINT);
-            }
-            break;
-        case "Delete":
-            switch (errorMessage) {
-                case "Empty Index":
-                    throw new DukeException(MSG_ERR_DELETE_EMPTY);
-                case "Out of Bound":
-                    throw new DukeException(MSG_ERR_DELETE_BOUND);
-                case "Not Integer":
-                    throw new DukeException(MSG_ERR_DELETE_NONINT);
-            }
-            break;
-        case "List":
-            switch (errorMessage) {
-                case "Empty List":
-                    throw new DukeException(MSG_ERR_LIST_EMPTY);
-                case "Unbalanced List":
-                    throw new DukeException(MSG_ERR_LIST_ECHO);
-            }
-            break;
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("Invalid Error Type");
+        } catch (NullPointerException e) {
+            throw new DukeException("Error Type cannot be empty");
         }
     }
 
+    /**
+     * Prints error message for unimplemented exceptions
+     *
+     * @param e The unimplemented exception
+     * @return String array of the error message to be printed to console
+     */
     public static String[] unimplemented(Exception e) {
         return new String[]{MSG_ERR_DEFAULT,
                 "Error Message ("
