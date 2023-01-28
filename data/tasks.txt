@@ -1,4 +1,2 @@
-T | 1 | study
-D | 0 | hi | Jan 1 2019 1800
-E | 1 | gh | Jan 1 2019 1830 | Feb 2 2019 1830
-T | 1 | what
+T | 1 | w
+T | 0 | study
