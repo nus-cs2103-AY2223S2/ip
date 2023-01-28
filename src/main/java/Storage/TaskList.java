@@ -1,6 +1,8 @@
 package Storage;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import Exceptions.SelectOutOfIndexException;
 import Tasks.Task;
@@ -60,14 +62,6 @@ public class TaskList {
     }
 
     /**
-     * Returns the database.
-     * @return The database.
-     */
-    protected ArrayList<Task> getDb() {
-        return this.db;
-    }
-
-    /**
      * Checks if the database is empty.
      * @return A boolean value based on whether the database is empty.
      */
@@ -76,29 +70,25 @@ public class TaskList {
     }
 
     /**
-     * Returns all the tasks iteratively in string representation.
-     * @return The tasks in string representation.
+     * Returns all the tasks in an unmodifiable list.
+     * @return All tasks.
      */
-    public String getTasks() {
-        String str = "";
-        for (int i = 1; i <= this.db.size(); i++) {
-            str += (i + "." + this.db.get(i - 1) + "\n");
-        }
-        return str.substring(0, str.length() - 1);
+    public List<Task> getTasks() {
+        return Collections.unmodifiableList(this.db);
     }
 
     /**
-     * Returns all the matching tasks in string representation.
+     * Returns all the matching tasks in an unmodifiable list.
      * @param description The description to be matched.
-     * @return The string representation of all matching tasks.
+     * @return All matching tasks.
      */
-    public String getMatchingTasks(String description) {
-        String str = "";
+    public List<Task> getMatchingTasks(String description) {
+        ArrayList<Task> temp = new ArrayList<>();
         for (int i = 1; i <= this.db.size(); i++) {
             if (this.db.get(i - 1).getDescription().contains(description)) {
-                str += (i + "." + this.db.get(i - 1) + "\n");
+                temp.add(this.db.get(i - 1));
             }
         }
-        return str.substring(0, str.length() - 1);
+        return Collections.unmodifiableList(temp);
     }
 }

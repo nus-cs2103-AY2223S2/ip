@@ -3,6 +3,7 @@ package Ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import Exceptions.DukeException;
 import Tasks.Task;
@@ -113,7 +114,11 @@ public class Ui {
      * Print all the tasks iteratively.
      * @param tasks The tasks.
      */
-    public void showAllTasks(String tasks) {
-        System.out.println(tasks);
+    public void showAllTasks(List<Task> tasks) {
+        String str = "";
+        for (int i = 1; i <= tasks.size(); i++) {
+            str += i + "." + tasks.get(i - 1) + "\n";
+        }
+        System.out.print(str);
     }
 }

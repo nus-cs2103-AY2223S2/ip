@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import Tasks.Deadline;
 import Tasks.Event;
@@ -68,7 +69,7 @@ public class Storage {
      * @throws IOException Throws if there is an I/O error.
      */
     public void store(TaskList tasks) throws IOException {
-        ArrayList<Task> db = tasks.getDb();
+        List<Task> db = tasks.getTasks();
         StringBuilder sb = new StringBuilder();
         for (Task task: db) {
             if (task instanceof ToDo) {
