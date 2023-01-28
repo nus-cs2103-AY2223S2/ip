@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, GuiText guiText, Storage storage) throws DukeException {
-        Task task = tasks.deleteTask(this.index);
+        Task task = tasks.processTaskAtIndex(CommandType.DELETE, this.index);
         storage.save(tasks.createTaskListString());
         MainWindow.changeSpriteExpression(SpriteEmotion.NEUTRAL);
         return guiText.showDeleteTask(task, tasks);

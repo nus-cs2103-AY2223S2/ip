@@ -20,9 +20,11 @@ import javafx.stage.Stage;
 public class MainWindow extends AnchorPane {
 
     private static final String dirPath = "./data/";
-    private Duke duke = new Duke(dirPath);
 
-    /** Images to be used in GUI */
+    /**
+     * Images to be used in GUI.
+     * Obtained from https://talesofanswers.tumblr.com/private/78610087338/tumblr_n1y0bhROrr1rsepsd
+     */
     private static final Image lloydNeutralImage = new Image(MainWindow.class
             .getResourceAsStream("../resources/images/Lloyd_Neutral.gif"));
     private static final Image coletteNeutralImage = new Image(MainWindow.class
@@ -46,6 +48,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Stage stage;
+
+    private Duke duke = new Duke(dirPath);
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -84,6 +88,12 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Changes the expression of the sprite displayed by
+     * Duke's dialogue box.
+     *
+     * @param emotion The emotion of the sprite to be displayed.
+     */
     public static void changeSpriteExpression(SpriteEmotion emotion) {
         switch (emotion) {
         case NEUTRAL:
@@ -98,7 +108,9 @@ public class MainWindow extends AnchorPane {
         case SURPRISED:
             MainWindow.currentColetteImage = MainWindow.coletteSurprisedImage;
             break;
-        }    
+        default:
+            break;
+        }
     }
 
 }

@@ -2,7 +2,9 @@ package duke.gui;
 
 import duke.TaskList;
 import duke.exception.DukeException;
+import duke.exception.IndexErrorType;
 import duke.task.Task;
+import duke.task.TaskType;
 
 /** Class that handles the text of the graphical user interface */
 public class GuiText {
@@ -28,7 +30,89 @@ public class GuiText {
         return e.getMessage();
     }
 
-    //public static String a bunch of erorr stuff...
+    /**
+     * Generates the error message to do
+     * with failing to parse a date.
+     *
+     * @return Error message.
+     */
+    public static String generateDateErrorMessage() {
+        return "I can't read these dates. I only know dates in the format \'YYYY-MM-DD\'.";
+    }
+
+    /**
+     * Generates the error message to do
+     * with provided task list index being
+     * invalid.
+     *
+     * @param indexErrorType What is invalid about provided task list index.
+     * @return Error message.
+     */
+    public static String generateIndexErrorMessage(IndexErrorType indexErrorType) {
+        switch (indexErrorType) {
+        case NO_NUMBER:
+            return "You didn't provide a task number. Unless it's invisible?!";
+        case OUT_OF_BOUNDS:
+            return "There aren't that many tasks in the list."
+                    + " Would you like to add more...?";
+        case NOT_A_NUMBER:
+            return "That's not a number! At least, I don't think it is...";
+        case NEGATIVE:
+            return "I can only count in positive numbers...";
+        case TOO_MANY_NUMBERS:
+            return "That's too many numbers! I can only handle one...";
+        default:
+            return null;
+        }
+    }
+
+    /**
+     * Generates the error message to do with
+     * not providing enough arguments for
+     * the creation of a task.
+     *
+     * @param taskType Type of task that failed to be created.
+     * @return Error message.
+     */
+    public static String generateMissingArgumentErrorMessage(TaskType taskType) {
+        String suggestedName = "For the description, what about something like pet every dog?\n"
+                + "That's something I want to do.";
+        switch (taskType) {
+        case TODO:
+            return "The description's missing!\n"
+                    + suggestedName;
+        case EVENT:
+            return "Something's missing here! Either the description, the start date or the end date.\n"
+                    + suggestedName;
+        case DEADLINE:
+            return "Something's missing here. Either the description or the date.\n"
+                    + suggestedName;
+        default:
+            return null;
+        }
+    }
+
+    /**
+     * Generates the command to do with
+     * receiving an unknown command.
+     *
+     * @return Error message.
+     */
+    public static String generateUnknownCommandErrorMessage() {
+        return "I don't know what that means. I must have forgotten.\n"
+                + "You can see what I remember using \'help\'.";
+    }
+
+    /**
+     * Generates the command to do with
+     * not receiving a keyword when finding
+     * tasks.
+     *
+     * @return Error message.
+     */
+    public static String generateMissingKeywordErrorMessage() {
+        return "I'm lost. You need to give me a keyword to look for!";
+    }
 
     /**
      * Generates text response listing user's tasks.
@@ -115,6 +199,13 @@ public class GuiText {
         }
     }
 
+    /**
+     * Generates text showing what happened
+     * when loading from storage.
+     *
+     * @param isSuccessful Whether loading from storage succeeded.
+     * @return Text showing what happened when loading from storage.
+     */
     public String showLoad(boolean isSuccessful) {
         return isSuccessful ? "Tasks successfully loaded from storage!" : "Loading from storage failed.";
     }

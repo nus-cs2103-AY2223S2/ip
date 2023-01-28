@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 /** Class that represents a task */
 public abstract class Task {
 
@@ -71,6 +73,31 @@ public abstract class Task {
 
     public boolean nameContainsKeyword(String keyword) {
         return this.name.contains(keyword);
+    }
+
+    /**
+     * Creates a task using the arguments provided.
+     *
+     * @param taskType Type of task to create.
+     * @param arguments Arguments to create the task with.
+     * @return Created task.
+     * @throws DukeException If task cannot be created.
+     */
+    public static Task createTask(TaskType taskType, String ... arguments) throws DukeException {
+        String name = arguments[0];
+        switch (taskType) {
+        case TODO:
+            return new Todo(name);
+        case DEADLINE:
+            String by = arguments[1];
+            return new Deadline(name, by);
+        case EVENT:
+            String from = arguments[1];
+            String to = arguments[2];
+            return new Event(name, from, to);
+        default:
+            return null;
+        }
     }
 
 }

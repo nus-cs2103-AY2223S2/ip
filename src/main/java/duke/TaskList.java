@@ -3,8 +3,10 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.command.CommandType;
 import duke.exception.DukeException;
-
+import duke.exception.IndexErrorType;
+import duke.gui.GuiText;
 import duke.task.Task;
 
 /** Contains task list */
@@ -41,58 +43,34 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task at the given index.
+     * Processes the task at the given index.
      *
-     * @param index Index to delete task from.
-     * @return Deleted task.
+     * @param commandType What to do with the task at the given index.
+     * @param index Index the task to process is at.
+     * @return Processed task.
      * @throws DukeException if index is not valid.
      */
-    public Task deleteTask(int index) throws DukeException {
+    public Task processTaskAtIndex(CommandType commandType, int index) throws DukeException {
         if (index >= this.getSize()) {
-            throw new DukeException("There aren't that many tasks in the list."
-                    + " Would you like to add more...?");
+            throw new DukeException(GuiText.generateIndexErrorMessage(IndexErrorType.OUT_OF_BOUNDS));
         } else if (index < 0) {
-            throw new DukeException("I can only count in positive numbers...");
+            throw new DukeException(GuiText.generateIndexErrorMessage(IndexErrorType.NEGATIVE));
         }
         Task task = this.getTaskAtIndex(index);
-        this.tasks.remove(index);
+        switch (commandType) {
+        case MARK:
+            task.setDone(true);
+            break;
+        case UNMARK:
+            task.setDone(false);
+            break;
+        case DELETE:
+            this.tasks.remove(index);
+            break;
+        default:
+            break;
+        }
         return task;
-    }
-
-    /**
-     * Marks the task at the given index.
-     *
-     * @param index Index to mark tast at.
-     * @return Task that was marked.
-     * @throws DukeException if index is not valid.
-     */
-    public Task markTaskDone(int index) throws DukeException {
-        if (index >= this.getSize()) {
-            throw new DukeException("There aren't that many tasks in the list."
-            + " Would you like to add more...?");
-        } else if (index < 0) {
-            throw new DukeException("I can only count in positive numbers...");
-        }
-        this.getTaskAtIndex(index).setDone(true);
-        return this.getTaskAtIndex(index);
-    }
-
-    /**
-     * Unmarks the test at the given index.
-     *
-     * @param index Index to unmark test at.
-     * @return Task that was unmarked.
-     * @throws DukeException if index is not valid.
-     */
-    public Task unmarkTask(int index) throws DukeException {
-        if (index >= this.getSize()) {
-            throw new DukeException("There aren't that many tasks in the list."
-            + " Would you like to add more...?");
-        } else if (index < 0) {
-            throw new DukeException("I can only count in positive numbers...");
-        }
-        this.getTaskAtIndex(index).setDone(false);
-        return this.getTaskAtIndex(index);
     }
 
     /**

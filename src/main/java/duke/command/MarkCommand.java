@@ -19,7 +19,7 @@ public class MarkCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, GuiText guiText, Storage storage) throws DukeException {
-        Task task = tasks.markTaskDone(index);
+        Task task = tasks.processTaskAtIndex(CommandType.MARK, index);
         storage.save(tasks.createTaskListString());
         MainWindow.changeSpriteExpression(SpriteEmotion.HAPPY);
         return guiText.showMarkTask(task);
