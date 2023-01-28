@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     public static Integer count = 0;
 

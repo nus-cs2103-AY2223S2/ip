@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
 
     protected static EventType parse(String input) throws DukeException {
