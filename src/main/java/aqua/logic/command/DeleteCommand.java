@@ -4,9 +4,9 @@ import aqua.aquatask.AquaTask;
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.ProcedureExecutionException;
 import aqua.logic.ArgumentMap;
-import aqua.logic.ExecutionDispatcher;
+import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 
 
 /**
@@ -14,11 +14,11 @@ import aqua.manager.AppManager;
  * will delete an AquaTask from the task manager and then save the state of the
  * task manager to hard disk.
  */
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
     @Override
-    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
-        return ExecutionDispatcher.of(new DeleteTask(args, manager))
-                .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
+    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
+        return ExecutionService.of(new DeleteTask(args, manager))
+                .setFollowUp(new WriteTaskCommand().getService(args, manager));
     }
 
 
@@ -26,13 +26,13 @@ public class DeleteCommand implements Command {
 
 
     private class DeleteTask extends ExecutionTask<AquaTask> {
-        DeleteTask(ArgumentMap args, AppManager manager) {
+        DeleteTask(ArgumentMap args, LogicManager manager) {
             super(args, manager);
         }
 
 
         @Override
-        public AquaTask process(ArgumentMap args, AppManager manager)
+        public AquaTask process(ArgumentMap args, LogicManager manager)
                     throws IllegalSyntaxException, ProcedureExecutionException {
             try {
                 // get task index string
@@ -54,7 +54,7 @@ public class DeleteCommand implements Command {
 
 
         @Override
-        public String getDataDisplay(AquaTask task, AppManager manager) {
+        public String getDataDisplay(AquaTask task, LogicManager manager) {
             return String.format(String.join("\n",
                             "I have deleted the task:",
                             "  %s",
@@ -64,13 +64,13 @@ public class DeleteCommand implements Command {
         }
 
 
-        private String getRemainingMessage(AppManager manager) {
+        private String getRemainingMessage(LogicManager manager) {
             int numTask = manager.getTaskManager().size();
             if (numTask > 0) {
-                return String.format("You have %d task(s) left, all the best",
+                return String.format("You have %d task(s) left, all the best ( ง*`꒳´*)ว",
                         numTask);
             }
-            return "You have no task left~";
+            return "٩ (ˊᗜˋ *) و You have no task left~ ☆";
         }
     }
 }

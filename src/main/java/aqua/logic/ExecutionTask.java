@@ -2,7 +2,9 @@ package aqua.logic;
 
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.ProcedureExecutionException;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
+
+import javafx.concurrent.Task;
 
 
 /**
@@ -10,11 +12,11 @@ import aqua.manager.AppManager;
  * 
  * @param <T> the return type of the result after execution.
  */
-public abstract class ExecutionTask<T> {
+public abstract class ExecutionTask<T> extends Task<String> {
     /** The arguments to work on. */
     private final ArgumentMap args;
     /** The AppManager to work on. */
-    private final AppManager manager;
+    private final LogicManager manager;
 
 
     /**
@@ -23,7 +25,7 @@ public abstract class ExecutionTask<T> {
      * @param args - the argument map to work on.
      * @param manager - the AppManager to work on.
      */
-    public ExecutionTask(ArgumentMap args, AppManager manager) {
+    public ExecutionTask(ArgumentMap args, LogicManager manager) {
         this.args = args;
         this.manager = manager;
     }
@@ -40,7 +42,7 @@ public abstract class ExecutionTask<T> {
      * @throws ProcedureExecutionException - if the task failed to execute
      *      completely.
      */
-    public abstract T process(ArgumentMap args, AppManager manager)
+    public abstract T process(ArgumentMap args, LogicManager manager)
             throws IllegalSyntaxException, ProcedureExecutionException;
 
     /**
@@ -49,7 +51,7 @@ public abstract class ExecutionTask<T> {
      * @param data - the data produced after execution of the task.
      * @param manager - the AppManager to pull additional data from.
      */
-    public abstract String getDataDisplay(T data, AppManager manager);
+    public abstract String getDataDisplay(T data, LogicManager manager);
 
 
     /**
@@ -64,5 +66,11 @@ public abstract class ExecutionTask<T> {
     public String execute() throws IllegalSyntaxException, ProcedureExecutionException {
         T data = process(args, manager);
         return getDataDisplay(data, manager);
+    }
+
+
+    @Override
+    protected String call() throws IllegalSyntaxException, ProcedureExecutionException {
+        return execute();
     }
 }

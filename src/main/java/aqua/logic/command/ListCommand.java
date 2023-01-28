@@ -1,9 +1,9 @@
 package aqua.logic.command;
 
 import aqua.logic.ArgumentMap;
-import aqua.logic.ExecutionDispatcher;
+import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 import aqua.manager.TaskManager;
 
 
@@ -11,20 +11,20 @@ import aqua.manager.TaskManager;
  * An implementation of Command that will produce an ExecutionDispatcher that
  * will display the state the task manager.
  */
-public class ListCommand implements Command {
+public class ListCommand extends Command {
     @Override
-    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
-        return ExecutionDispatcher.of(new ExecutionTask<TaskManager>(args, manager) {
+    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
+        return ExecutionService.of(new ExecutionTask<TaskManager>(args, manager) {
             @Override
-            public TaskManager process(ArgumentMap args, AppManager manager) {
+            public TaskManager process(ArgumentMap args, LogicManager manager) {
                 return manager.getTaskManager();
             }
 
             
             @Override
-            public String getDataDisplay(TaskManager taskManager, AppManager manager) {
+            public String getDataDisplay(TaskManager taskManager, LogicManager manager) {
                 return String.format(String.join("\n",
-                                "Here is your task list",
+                                "Here is your task list ( ꜆ 'ᵕ' )꜆",
                                 "%s"),
                         getListMessage(taskManager));
             }
@@ -36,6 +36,6 @@ public class ListCommand implements Command {
         if (manager.size() > 0) {
             return manager.toString();
         }
-        return "Nothing!!";
+        return "Nothing!! - ̗̀ ( ˶'ᵕ'˶) ̖́-";
     }
 }

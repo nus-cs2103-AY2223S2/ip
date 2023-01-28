@@ -3,21 +3,21 @@ package aqua.logic.command;
 import java.io.IOException;
 
 import aqua.logic.ArgumentMap;
-import aqua.logic.ExecutionDispatcher;
+import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 
 
 /**
  * An implementation of Command that will produce an ExecutionDispatcher that
  * will save the state of the task manager to hard disk.
  */
-public class WriteTaskCommand implements Command {
+public class WriteTaskCommand extends Command {
     @Override
-    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
-        return ExecutionDispatcher.of(new ExecutionTask<String>(args, manager) {
+    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
+        return ExecutionService.of(new ExecutionTask<String>(args, manager) {
             @Override
-            public String process(ArgumentMap args, AppManager manager) {
+            public String process(ArgumentMap args, LogicManager manager) {
                 try {
                     manager.getTaskManager().saveToFile();
                 } catch (IOException ioEx) {
@@ -28,12 +28,12 @@ public class WriteTaskCommand implements Command {
                                     "If you leave me I might forget everything!!"),
                             ioEx.getMessage());
                 }
-                return "Safely stored hehe";
+                return "Safely stored hehe (  •̀֊•́ )";
             }
 
             
             @Override
-            public String getDataDisplay(String data, AppManager manager) {
+            public String getDataDisplay(String data, LogicManager manager) {
                 return data;
             }
         });

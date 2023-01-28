@@ -1,15 +1,15 @@
 package aqua.logic.command;
 
 import aqua.logic.ArgumentMap;
-import aqua.logic.ExecutionDispatcher;
-import aqua.manager.AppManager;
+import aqua.logic.ExecutionService;
+import aqua.manager.LogicManager;
 
 
 /**
  * Represents a command that accepts an ArgumentMap and an AppManager to
  * produce an ExecutionDispatcher that will execute the command.
  */
-public interface Command {
+public abstract class Command {
     /**
      * Produces an ExecutionDispater from the given argument and manager.
      * 
@@ -17,5 +17,9 @@ public interface Command {
      * @param manager - the application AppManager.
      * @return an ExecutionDispatcher to execute the command.
      */
-    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager);
+    public ExecutionService getService(ArgumentMap args, LogicManager manager) {
+        return getService(args, manager, false);
+    }
+
+    public abstract ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading);
 }

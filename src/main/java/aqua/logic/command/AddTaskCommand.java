@@ -3,9 +3,9 @@ package aqua.logic.command;
 import aqua.aquatask.AquaTask;
 import aqua.exception.IllegalSyntaxException;
 import aqua.logic.ArgumentMap;
-import aqua.logic.ExecutionDispatcher;
+import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 
 
 /**
@@ -13,7 +13,7 @@ import aqua.manager.AppManager;
  * ExecutionDispatcher that will create and add an AquaTask to the task manager
  * and then save the state of the task manager to hard disk.
  */
-public abstract class AddTaskCommand implements Command {
+public abstract class AddTaskCommand extends Command {
     /**
      * Creates an AquaTask from the given argument map.
      * 
@@ -25,9 +25,12 @@ public abstract class AddTaskCommand implements Command {
 
 
     @Override
-    public ExecutionDispatcher getDispatcher(ArgumentMap args, AppManager manager) {
-        return ExecutionDispatcher.of(new AddTask(args, manager))
-                .setFollowUp(new WriteTaskCommand().getDispatcher(args, manager));
+    public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
+        ExecutionService service = ExecutionService.of(new AddTask(args, manager));
+        if (isLoading) {
+            return service;
+        }
+        return service.setFollowUp(new WriteTaskCommand().getService(args, manager));
     }
 
 
@@ -35,13 +38,13 @@ public abstract class AddTaskCommand implements Command {
 
 
     private class AddTask extends ExecutionTask<AquaTask> {
-        AddTask(ArgumentMap args, AppManager manager) {
+        AddTask(ArgumentMap args, LogicManager manager) {
             super(args, manager);
         }
 
 
         @Override
-        public AquaTask process(ArgumentMap args, AppManager manager) throws IllegalSyntaxException {
+        public AquaTask process(ArgumentMap args, LogicManager manager) throws IllegalSyntaxException {
             // create task
             AquaTask task = createTask(args);
 
@@ -52,12 +55,12 @@ public abstract class AddTaskCommand implements Command {
 
 
         @Override
-        public String getDataDisplay(AquaTask task, AppManager manager) {
+        public String getDataDisplay(AquaTask task, LogicManager manager) {
             return String.format(String.join("\n",
                             "Hai okay desu! I have added the task:",
-                            "/",
+                            "/／",
                             "  %s",
-                            "\\",
+                            "\\＼",
                             "You now have %d tasks."),
                     task.toString(),
                     manager.getTaskManager().size());

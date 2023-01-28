@@ -4,17 +4,18 @@ import java.util.Optional;
 
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.ProcedureExecutionException;
+import javafx.concurrent.Service;
 
 
 /**
  * Dispatcher that dispatches the execution of ExecutionTasks.
  */
-public abstract class ExecutionDispatcher {
+public abstract class ExecutionService extends Service<String> {
     /** The task to dispatch. */
     private final ExecutionTask<?> task;
 
 
-    private ExecutionDispatcher(ExecutionTask<?> task) {
+    private ExecutionService(ExecutionTask<?> task) {
         this.task = task;
     }
 
@@ -28,11 +29,11 @@ public abstract class ExecutionDispatcher {
      * @return a ExecutionDispatcher that dispatches the given tasks in
      *      the given order.
      */
-    public static ExecutionDispatcher of(ExecutionTask<?> ... tasks) {
-        ExecutionDispatcher startingDispatcher = null;
+    public static ExecutionService of(ExecutionTask<?> ... tasks) {
+        ExecutionService startingDispatcher = null;
         for (int i = 0; i < tasks.length; i++) {
             ExecutionTask<?> task = tasks[tasks.length - i - 1];
-            startingDispatcher = ExecutionDispatcher.of(task).setFollowUp(startingDispatcher);
+            startingDispatcher = ExecutionService.of(task).setFollowUp(startingDispatcher);
         }
         return startingDispatcher;
     }
@@ -46,10 +47,10 @@ public abstract class ExecutionDispatcher {
      * @return a dispatcher that will dispatch the specifed task without follow
      *      up dispatchers.
      */
-    public static ExecutionDispatcher of(ExecutionTask<?> task) {
-        return new ExecutionDispatcher(task) {
+    public static ExecutionService of(ExecutionTask<?> task) {
+        return new ExecutionService(task) {
             @Override
-            public Optional<ExecutionDispatcher> followUpDispatcher() {
+            public Optional<ExecutionService> followUpDispatcher() {
                 return Optional.empty();
             }
         };
@@ -63,7 +64,7 @@ public abstract class ExecutionDispatcher {
      * 
      * @return the follow up dispatcher wrapped around an {@code Optional}.
      */
-    public abstract Optional<ExecutionDispatcher> followUpDispatcher();
+    public abstract Optional<ExecutionService> followUpDispatcher();
 
 
     /**
@@ -73,8 +74,14 @@ public abstract class ExecutionDispatcher {
      * @throws ProcedureExecutionExecution if the task fail to execute
      *      completely.
      */
-    public String dispatch() throws IllegalSyntaxException, ProcedureExecutionException {
+    public String execute() throws IllegalSyntaxException, ProcedureExecutionException {
         return task.execute();
+    }
+
+
+    @Override
+    public ExecutionTask<?> createTask() {
+        return task;
     }
 
 
@@ -85,10 +92,10 @@ public abstract class ExecutionDispatcher {
      * @return a dispatcher of this dispatcher with its follow up task set to
      *      the dispatcher specified.
      */
-    public ExecutionDispatcher setFollowUp(ExecutionDispatcher dispatcher) {
-        return new ExecutionDispatcher(this.task) {
+    public ExecutionService setFollowUp(ExecutionService dispatcher) {
+        return new ExecutionService(this.task) {
             @Override
-            public Optional<ExecutionDispatcher> followUpDispatcher() {
+            public Optional<ExecutionService> followUpDispatcher() {
                 return Optional.ofNullable(dispatcher);
             }
         };

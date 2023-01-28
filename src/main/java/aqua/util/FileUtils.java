@@ -3,12 +3,15 @@ package aqua.util;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 
 /** A utility class for file reading and writing functions. */
@@ -87,5 +90,22 @@ public class FileUtils {
      */
     public static Path getFilePath(String path) {
         return Paths.get(path);
+    }
+
+
+    /**
+     * Returns the URL of the specified String path of the file in the resource
+     * folder.
+     * 
+     * @param pathString - the String path to the file.
+     * @return the URL of the specified String path of the file in the resource
+     *      folder.
+     * @throws FileNotFoundException if the file cannot be found.
+     * @throws NullPointerException if {@code pathString} is {@code null}.
+     */
+    public static URL getResourceUrl(String pathString) throws FileNotFoundException {
+        return Optional.ofNullable(FileUtils.class.getResource(pathString))
+                .orElseThrow(() -> new FileNotFoundException(
+                        String.format("Resource file %s not found", pathString)));
     }
 }

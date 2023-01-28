@@ -1,7 +1,7 @@
 package aqua.logic;
 
 import aqua.logic.command.Command;
-import aqua.manager.AppManager;
+import aqua.manager.LogicManager;
 
 
 /** 
@@ -25,7 +25,12 @@ public class CommandLineInput {
      * @param manager - the AppManager for the command to wrok on.
      * @returnt he ExecutionDispatcher of the command.
      */
-    public ExecutionDispatcher getDispatcher(AppManager manager) {
-        return command.getDispatcher(args, manager);
+    public ExecutionService getService(LogicManager manager) {
+        return command.getService(args, manager);
+    }
+
+
+    public ExecutionService getService(LogicManager manager, boolean isLoading) {
+        return command.getService(args, manager, isLoading);
     }
 }
