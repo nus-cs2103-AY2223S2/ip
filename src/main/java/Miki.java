@@ -19,7 +19,7 @@ public class Miki {
         }
 
         Ui ui = new Ui(asciiOnly);
-        Storage storage = new Storage();
+        Storage storage = new Storage("./data/");
         TaskList tasks = new TaskList();
         ui.printIntro();
 

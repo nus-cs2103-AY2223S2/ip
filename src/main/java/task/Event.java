@@ -94,7 +94,7 @@ public class Event extends Task {
             event.done = done;
             return event;
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
-            throw new TaskParseException("task.Event data is malformed:\n" + ex.getMessage());
+            throw new TaskParseException("Event data is malformed:\n" + ex.getMessage());
         }
     }
     

@@ -19,14 +19,14 @@ public class Storage {
         }
     }
 
-    private static final String DATA_PATH = "./data/";
+    private final String dataPath;
 
-    public Storage() {
-
+    public Storage(String dataPath) {
+        this.dataPath = dataPath;
     }
 
     private void createSaveDir() {
-        File dir = new File(DATA_PATH);
+        File dir = new File(dataPath);
         if (!dir.mkdirs()) {
             //no perms/dir locked? consider warning user
         }
@@ -34,7 +34,7 @@ public class Storage {
 
     public String[] listSaves() throws MikiLoadException {
         createSaveDir();
-        File dir = new File(DATA_PATH);
+        File dir = new File(dataPath);
         if (dir == null) {
             throw new MikiLoadException("(default save location is missing?!)");
         }
@@ -48,7 +48,7 @@ public class Storage {
 
     public void save(String pathString, TaskList tasks) throws IOException {
         createSaveDir();
-        Path path = FileSystems.getDefault().getPath(DATA_PATH).resolve(pathString);
+        Path path = FileSystems.getDefault().getPath(dataPath).resolve(pathString);
         BufferedWriter bw = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
         try {
             bw.write(Integer.toString(tasks.size()));
@@ -69,7 +69,7 @@ public class Storage {
     public void load(String pathString, TaskList tasks) throws IOException, MikiLoadException {
         createSaveDir();
         tasks.clear();
-        Path path = FileSystems.getDefault().getPath(DATA_PATH).resolve(pathString);
+        Path path = FileSystems.getDefault().getPath(dataPath).resolve(pathString);
         BufferedReader br = Files.newBufferedReader(path, StandardCharsets.UTF_8);
         try {
             int numTasks = Integer.parseInt(br.readLine());

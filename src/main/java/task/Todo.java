@@ -33,7 +33,7 @@ public class Todo extends Task {
             todo.done = done;
             return todo;
         } catch (ArrayIndexOutOfBoundsException ex) {
-            throw new TaskParseException("task.Todo data is malformed:\n" + ex.getMessage());
+            throw new TaskParseException("Todo data is malformed:\n" + ex.getMessage());
         }
     }
 
