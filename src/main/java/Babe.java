@@ -1,6 +1,7 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -279,7 +280,7 @@ public class Babe {
     private void load() {
         try {
             Scanner scanner = new Scanner(new File(fileAddress));
-            while(scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
                 String[] arr = s.split("\\|");
                 String taskType = arr[0].strip();
@@ -313,6 +314,25 @@ public class Babe {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Formats date specified by user.
+     * The date will be formatted using java.LocalDate.
+     *
+     * @param dateAndTime A String that contains date and time specified by the user.
+     * @return A String containing the formatted date and original specified time.
+     */
+    private String formatDate(String dateAndTime) {
+        String[] words = dateAndTime.split(" ");
+
+        LocalDate d1 = LocalDate.parse(words[0]);
+        String formattedDateAndTime = Integer.toString(d1.getDayOfMonth()) + " "
+                + d1.getMonth() + " " + d1.getYear() + " "
+                + (words.length == 2 ? words[1] : "");
+
+        return formattedDateAndTime;
+
     }
 
     public static void main(String[] args) {
@@ -355,25 +375,54 @@ public class Babe {
                     if (inputLength == 1) {
                         throw new NoDescriptionException();
                     }
-                    int deadline = chatBot.findArgument("/by");
-                    chatBot.addDeadline(chatBot.rebuildUserInput(1, deadline - 1),
-                            chatBot.rebuildUserInput(deadline, inputLength),
-                            true);
-                    chatBot.save();
+
+                    int deadlineIndex = chatBot.findArgument("/by");
+                    String deadline = "";
+
+                    try {
+                        deadline = chatBot.formatDate(chatBot.rebuildUserInput(deadlineIndex,
+                                inputLength));
+                        chatBot.addDeadline(chatBot.rebuildUserInput(1, deadlineIndex - 1),
+                                deadline,
+                                true);
+                        chatBot.save();
+                    } catch (Exception e) {
+                        Babe.drawLine();
+                        System.out.println("The date format should be yyyy-mm-dd, luv. Please try again.");
+                        Babe.drawLine();
+                    }
+
 
                 } else if (instruction.equalsIgnoreCase("event")) {
                     if (inputLength == 1) {
                         throw new NoDescriptionException();
                     }
-                    int startDate = chatBot.findArgument("/from");
-                    int endDate = chatBot.findArgument("/to");
-                    chatBot.addEvent(chatBot.rebuildUserInput(1, startDate - 1),
-                            chatBot.rebuildUserInput(startDate, endDate - 1),
-                            chatBot.rebuildUserInput(endDate, inputLength),
-                            true);
-                    chatBot.save();
-                    
-                } else if (instruction.equalsIgnoreCase("delete")) {
+
+                    int startDateIndex = chatBot.findArgument("/from");
+                    int endDateIndex = chatBot.findArgument("/to");
+                    String startDateAndTime = "";
+                    String endDateAndTime = "";
+
+                    try {
+                        startDateAndTime = chatBot.formatDate(chatBot.rebuildUserInput(startDateIndex,
+                                endDateIndex - 1));
+                        endDateAndTime = chatBot.formatDate(chatBot.rebuildUserInput(endDateIndex,
+                                inputLength));
+                        chatBot.addEvent(chatBot.rebuildUserInput(1, startDateIndex - 1),
+                                startDateAndTime,
+                                endDateAndTime,
+                                true);
+                        chatBot.save();
+
+                    } catch (Exception e) {
+                        Babe.drawLine();
+                        System.out.println("The date format should be yyyy-mm-dd, luv. Please try again.");
+                        Babe.drawLine();
+                    }
+
+
+                }
+                else if (instruction.equalsIgnoreCase("delete")) {
                     if (inputLength == 1) {
                         throw new NoDescriptionException();
                     }
@@ -394,8 +443,6 @@ public class Babe {
                 Babe.drawLine();
             }
         }
-
     }
-
 
 }
