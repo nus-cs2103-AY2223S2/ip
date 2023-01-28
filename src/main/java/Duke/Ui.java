@@ -1,9 +1,13 @@
-import java.util.ListIterator;
+package Duke;
+
+import Task.Task;
+
+import java.util.Dictionary;
 import java.util.Scanner;
 
 public class Ui {
 
-    static final String DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    private static final String DIVIDER = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
     private static Scanner sc = new Scanner(System.in);
 
@@ -22,6 +26,9 @@ public class Ui {
     public static void printDelete(Task task) {
         System.out.println(DIVIDER + "Alright, deleted task:\n" + task
                 + "\n" + task.numberTask() + " tasks left!\n" + DIVIDER);
+    }
+    public static void printDivider() {
+        System.out.println(DIVIDER);
     }
     public static void printInit() {
         System.out.println(DIVIDER + "Welcome hooman!\nCome add some tasks today!\n" + DIVIDER);

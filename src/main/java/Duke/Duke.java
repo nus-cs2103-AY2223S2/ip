@@ -1,19 +1,20 @@
-import java.io.*;
-import java.nio.file.FileAlreadyExistsException;
-import java.util.*;
-import java.nio.file.Paths;
-import java.nio.file.Files;
+package Duke;
+
+import Command.DeleteCommand;
+import Command.MarkCommand;
+import Command.UnMarkCommand;
+import Task.Deadline;
+import Task.Event;
+import Task.TaskList;
+import Task.Todo;
 
 public class Duke {
     static final String DIRPATH = "./data";
     static final String FILEPATH = "./data/tasks.txt";
-    private static final ArrayList<Task> al = new ArrayList<>();
-    private static final StringBuilder sb = new StringBuilder();
-    private static final Scanner sc = new Scanner(System.in);
 
-    private Ui ui;
-    private Storage storage;
-    private Parser parser;
+    private final Ui ui;
+    private final Storage storage;
+    private final Parser parser;
 
 
     public Duke(String dirPath, String filePath) throws Exception {

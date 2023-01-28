@@ -1,3 +1,9 @@
+package Command;
+
+import Duke.Ui;
+import Task.Task;
+import Task.TaskList;
+
 public class DeleteCommand {
     private int number;
     public DeleteCommand(String number) {

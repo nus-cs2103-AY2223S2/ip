@@ -1,3 +1,6 @@
+package Task;
+
+import Duke.Ui;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -65,7 +68,7 @@ public class TaskList {
                 System.out.print(curr);
                 count++;
             }
-            System.out.println(Ui.DIVIDER);
+            Ui.printDivider();
         }
     }
 

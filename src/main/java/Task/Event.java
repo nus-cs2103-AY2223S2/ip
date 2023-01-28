@@ -1,9 +1,13 @@
+package Task;
+
+import Duke.Ui;
+
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class Event extends Task{
+public class Event extends Task {
     private static StringBuilder strBuild = new StringBuilder();
     private final LocalDateTime start;
     private final LocalDateTime end;

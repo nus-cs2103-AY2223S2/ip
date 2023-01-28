@@ -1,6 +1,10 @@
+package Task;
+
+import Duke.Ui;
+
 import java.io.File;
 
-public class Todo extends Task{
+public class Todo extends Task {
 
     private static StringBuilder strBuild = new StringBuilder();
 

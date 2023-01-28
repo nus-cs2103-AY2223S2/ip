@@ -1,9 +1,13 @@
+package Task;
+
+import Duke.Ui;
+
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     private static StringBuilder strBuild = new StringBuilder();
     private final LocalDateTime end;
@@ -37,7 +41,6 @@ public class Deadline extends Task{
         }
         e = strBuild.toString();
         strBuild.setLength(0);
-        System.out.println(e);
         Deadline d = new Deadline(n, e, false);
         TaskList.addToList(d);
         Ui.printDefault(d);
