@@ -11,13 +11,24 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Handles loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private TaskList list;
 
+    /**
+     * Constructor for Storage class.
+     *
+     * @param list Task list to read/write from the current list of tasks.
+     */
     public Storage(TaskList list) {
         this.list = list;
     }
 
+    /**
+     * Reads from file and store data (tasks) into tasks list.
+     */
     public void initalizeList() {
         try {
             File yourFile = new File("duke.txt");
@@ -60,6 +71,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Gets tasks from tasks list and write data (tasks) into file.
+     */
     public void saveToFile() {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("duke.txt"));
