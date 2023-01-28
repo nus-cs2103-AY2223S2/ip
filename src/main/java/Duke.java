@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Paths;
 import java.util.List; // Import List class
 import java.util.LinkedList; // Import LinkedList class
@@ -13,19 +14,27 @@ public class Duke {
     private static List<Task> storedInputs = new LinkedList<>(); // List to store inputs
 
     public static void main(String[] args) throws IOException {
+
+        // Print introduction
         System.out.println(intro());
-        
-        String userInput;
-        EventType curEvent;
 
-        String home = System.getProperty("user.home"); //home directory OS independent
-        Files.createDirectories(Paths.get(home,"data")); //create directory if it does not exist
-        Path filePath = Paths.get(home,"data", "duke.txt");
+        // Open file
+        String home = System.getProperty("user.home"); // Get home directory
+        Files.createDirectories(Paths.get(home,"data")); // Create directory if it does not exist
+        Path filePath = Paths.get(home, "data", "duke.txt");
+        try {
+            Files.createFile(filePath); // Create empty file if it does not exist
+        } catch (FileAlreadyExistsException ignored) {
+        }
 
-        String[] savedTask = Files.readString(filePath).split("\n");
+        // Load file content into list
+        String[] savedTask = Files.readString(filePath).split("\n"); // Read file
         Boolean isTaskDone;
         String taskDetails, taskDate;
         for (String s : savedTask) {
+            if (s.isBlank()) {
+                break;
+            }
             switch (decodeTaskType(s)) {
                 case 'T':
                     isTaskDone = getIsTaskDone(s);
@@ -47,8 +56,10 @@ public class Duke {
                     break;
                 }
             }
-
         System.out.println(printList());
+
+        String userInput;
+        EventType curEvent;
 
         loop: while (true) {
 
