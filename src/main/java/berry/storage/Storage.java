@@ -20,6 +20,7 @@ import java.util.Scanner;
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
+
     private String filePath;
     /** Default file path used if the user doesn't provide the file name. */
     public static final String DEFAULT_STORAGE_FILEPATH = "berry.txt";

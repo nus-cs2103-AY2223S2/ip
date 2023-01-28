@@ -7,6 +7,7 @@ import berry.exception.BerryException;
 import berry.exception.IndexOutOfRangeException;
 
 public class UnmarkCommand extends Command {
+
     private static int taskIndex;
 
     public UnmarkCommand(int taskIndex) {
