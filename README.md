@@ -1,4 +1,4 @@
-#### DukeDeluxe
+# DukeDeluxe
 > Where you talk to a robot instead of your friends
 DukePro frees your mind of having to remember things you need to do. It's,
 - a robot
