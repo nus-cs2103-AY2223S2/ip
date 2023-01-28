@@ -1,3 +1,7 @@
+import duke.exceptions.OutOfIndexException;
+import duke.exceptions.VagueInputException;
+import duke.exceptions.WrongBooleanException;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
