@@ -8,6 +8,10 @@ public class Tasks {
         return this.tasksArray;
     }
 
+    public int getNumTasks() {
+        return this.numTasks;
+    }
+
     public void printAll() {
         for (int i = 0; i < numTasks; i++) {
             String printedString = String.format("%d. %s ", i + 1, tasksArray[i].toString());

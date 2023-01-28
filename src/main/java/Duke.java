@@ -1,5 +1,6 @@
 import tasks.Deadline;
 import tasks.Event;
+import tasks.Task;
 import tasks.Tasks;
 import tasks.ToDo;
 import java.util.Scanner;
@@ -49,6 +50,7 @@ public class Duke {
                 switch (command) {
                     case LIST: {
                         System.out.println(BAR);
+                        System.out.println(INDENTATION + "list");
                         tasks.printAll();
                         System.out.println(BAR);
                         break;
@@ -61,19 +63,31 @@ public class Duke {
                     case DEADLINE: {
                         String description = commandArgs[0];
                         String by = commandArgs[1];
-                        tasks.addTask(new Deadline(description, by));
+                        Deadline deadline = new Deadline(description, by);
+                        tasks.addTask(deadline);
+                        int numTasks = tasks.getNumTasks();
+                        echo("Got it. I've added this task:", "  " + deadline.toString(),
+                                "Now you have " + numTasks + " tasks in the list.");
                         break;
                     }
                     case EVENT: {
                         String description = commandArgs[0];
                         String from = commandArgs[1];
                         String to = commandArgs[2];
-                        tasks.addTask(new Event(description, from, to));
+                        Event event = new Event(description, from, to);
+                        tasks.addTask(event);
+                        int numTasks = tasks.getNumTasks();
+                        echo("Got it. I've added this task:", "  " + event.toString(),
+                                "Now you have " + numTasks + " tasks in the list.");
                         break;
                     }
                     case TODO: {
                         String description = commandArgs[0];
-                        tasks.addTask(new ToDo(description));
+                        Task task = new ToDo(description);
+                        tasks.addTask(task);
+                        int numTasks = tasks.getNumTasks();
+                        echo("Got it. I've added this task:", "  " + task.toString(),
+                                "Now you have " + numTasks + " tasks in the list.");
                         break;
                     }
                     case MARK: {

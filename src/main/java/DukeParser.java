@@ -46,8 +46,8 @@ public class DukeParser {
             case DEADLINE: {
                 int offset = DukeCommand.DEADLINE.text.length();
                 int byIndex = inputString.indexOf("/by", offset);
-                boolean isByKeyordExist = byIndex != -1;
-                if (!isByKeyordExist)
+                boolean isByKeywordExist = byIndex != -1;
+                if (!isByKeywordExist)
                     throw new Error("Invalid argument!");
                 String description = inputString.substring(offset, byIndex).strip();
                 String deadline = inputString.substring(byIndex + ("/by".length())).strip();
