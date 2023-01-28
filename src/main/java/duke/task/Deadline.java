@@ -17,6 +17,10 @@ public class Deadline extends Task {
     protected LocalDate d1;
     protected boolean haveFormatErr;
 
+    /**
+     * @param description
+     * @param by
+     */
     public Deadline(String description, String by) {
         super(description);
         String[] byarr = by.split(" ");
@@ -28,7 +32,8 @@ public class Deadline extends Task {
         if (matcher.matches() && matcher2.matches()) {
             this.d1 = LocalDate.parse(byarr[0]);
             this.bydate = d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            this.result = LocalTime.parse(byarr[1], DateTimeFormatter.ofPattern("HH:mm")).format(DateTimeFormatter.ofPattern("hh:mm a"));
+            this.result = LocalTime.parse(byarr[1], DateTimeFormatter.ofPattern("HH:mm"))
+                    .format(DateTimeFormatter.ofPattern("hh:mm a"));
             this.haveFormatErr = false;
         }
     }
@@ -38,7 +43,6 @@ public class Deadline extends Task {
      *
      * @return boolean - true or false if there is a formatting error.
      */
-
     public boolean checkFormat() {
         return this.haveFormatErr;
     }

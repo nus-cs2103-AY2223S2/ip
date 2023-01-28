@@ -1,14 +1,14 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * This class loads the path of the stored commands and updates it when the bot is closed.
@@ -18,6 +18,9 @@ public class StorageList {
     private ArrayList<Task> list;
     private String path;
 
+    /**
+     * @param path
+     */
     public StorageList(String path) {
         this.list = new ArrayList<>();
         this.path = path;
@@ -27,7 +30,7 @@ public class StorageList {
     /**
      * This method loads the data of the previous commands from a textfile.
      *
-     * @return ArrayList<Task> - Returns the arraylist that is loaded from the stored textfile.
+     * @return ArrayList - Returns the arraylist that is loaded from the stored textfile.
      * @throws DukeException - File not found error will cause this exception to be thrown.
      */
     public ArrayList<Task> load() throws DukeException {
@@ -56,7 +59,9 @@ public class StorageList {
     public void updateStorage() {
         try {
             File dir = new File("data");
-            if (!dir.exists()) dir.mkdirs();
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
             java.nio.file.Path path = java.nio.file.Paths.get("data", "duke.txt");
             FileWriter writer = new FileWriter(String.valueOf(path));
             for (Task str : list) {

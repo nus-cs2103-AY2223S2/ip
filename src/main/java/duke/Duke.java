@@ -1,11 +1,11 @@
 package duke;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.StorageList;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.exception.DukeException;
 
 /**
  * Main Class which runs the whole chatbot.
@@ -16,6 +16,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for class Duke
+     * @param filePath Directory of the textfile to be used for the saved commands
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new StorageList(filePath);
@@ -54,7 +58,6 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
-
 
 }
 

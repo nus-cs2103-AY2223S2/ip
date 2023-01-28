@@ -9,6 +9,12 @@ import duke.ui.Ui;
  **/
 public class ByeCommand extends Command {
 
+    /**
+     * @param tasks   - task list of the current tasks.
+     * @param ui      - interface of the command.
+     * @param storage - database of the history of commands.
+     * @return boolean
+     */
     public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
         System.out.println("See you soon!");
         return true;
@@ -18,4 +24,5 @@ public class ByeCommand extends Command {
     public boolean isExit() {
         return true;
     }
+
 }

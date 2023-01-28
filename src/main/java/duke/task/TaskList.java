@@ -1,8 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -91,6 +88,10 @@ public class TaskList {
         System.out.print("Now you have " + this.lengthOflist() + " tasks in your list.\n");
     }
 
+    /**
+     * @param message
+     * @return
+     */
     public ArrayList<Task> find(String message) {
         ArrayList<Task> arrStr = new ArrayList<>();
         for (Task t: list) {

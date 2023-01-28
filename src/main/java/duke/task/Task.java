@@ -10,6 +10,11 @@ public class Task {
     protected String typeofTask = "";
     protected String doneStr;
 
+    /**
+     * @param description
+     * @param typeOfTask
+     * @param doneStr
+     */
     public Task(String description, String typeOfTask, String doneStr) {
         this.description = description;
         this.doneStr = doneStr;
@@ -18,6 +23,9 @@ public class Task {
 
     }
 
+    /**
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -31,7 +39,9 @@ public class Task {
     public boolean checkisdonestr() {
         if (this.doneStr.equals("X")) {
             this.isDone = true;
-        } else this.isDone = false;
+        } else {
+            this.isDone = false;
+        }
         return this.isDone;
     }
 
@@ -60,10 +70,13 @@ public class Task {
         System.out.println("OK, I've marked this task as not done yet:\n");
     }
 
+    /**
+     * @return String
+     */
     public String toString() {
-        if (typeofTask.equals(""))
+        if (typeofTask.equals("")) {
             return "[" + this.getStatusIcon() + "]" + " " + this.description;
-        else {
+        } else {
             return "[" + typeofTask + "]" + "[" + this.getStatusIcon() + "]" + " " + this.description;
         }
     }

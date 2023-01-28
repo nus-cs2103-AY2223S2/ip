@@ -1,6 +1,15 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.TodoCommand;
+import duke.command.UnmarkCommand;
 
 /**
  * This class allows commands to be stored and checked, whether they are in the system
@@ -30,35 +39,36 @@ public class Parser {
         String[] input2 = input.split(" ");
         Type t = Type.valueOf(input2[0].toLowerCase());
         switch (t) {
-            case todo:
-                return new TodoCommand(input);
+        case todo:
+            return new TodoCommand(input);
 
-            case deadline:
-                return new DeadlineCommand(input);
+        case deadline:
+            return new DeadlineCommand(input);
 
-            case mark:
-                return new MarkCommand(input2[1]);
+        case mark:
+            return new MarkCommand(input2[1]);
 
-            case unmark:
-                return new UnmarkCommand(input2[1]);
+        case unmark:
+            return new UnmarkCommand(input2[1]);
 
-            case list:
-                return new ListCommand();
+        case list:
+            return new ListCommand();
 
-            case bye:
-                return new ByeCommand();
+        case bye:
+            return new ByeCommand();
 
-            case delete:
-                return new DeleteCommand(input2[1]);
+        case delete:
+            return new DeleteCommand(input2[1]);
 
-            case event:
-                return new EventCommand(input);
+        case event:
+            return new EventCommand(input);
 
-            case find:
-                return new FindCommand(input);
+        case find:
+            return new FindCommand(input);
 
-            default:
-                throw new IllegalArgumentException();
+        default:
+            throw new IllegalArgumentException();
         }
     }
+
 }

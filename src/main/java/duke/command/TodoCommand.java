@@ -11,11 +11,20 @@ import duke.ui.Ui;
 public class TodoCommand extends Command {
     private String message;
 
+    /**
+     * @param fullCommand
+     */
     public TodoCommand(String fullCommand) {
         String[] checker = fullCommand.split("todo ");
         this.message = checker[1];
     }
 
+    /**
+     * @param tasks   - task list of the current tasks.
+     * @param ui      - interface of the command.
+     * @param storage - database of the history of commands.
+     * @return
+     */
     public boolean execute(TaskList tasks, Ui ui, StorageList storage) {
         Todo t = new Todo(message);
         tasks.addToList(t);
@@ -24,4 +33,6 @@ public class TodoCommand extends Command {
         tasks.statement();
         return true;
     }
+
 }
+
