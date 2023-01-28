@@ -1,8 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Event extends Task{
 
     protected String eventDetail;
 
-    protected String time;
+    protected LocalDate time;
 
     protected String timeDescription;
 
@@ -17,7 +21,7 @@ public class Event extends Task{
         String timeDescription = description.split("/")[1].split(" ")[0] + ": " + description.split("/")[1].split(" ",2)[1] +
                 description.split("/")[2].split(" ")[0] + ": " + description.split("/")[2].split(" ",2)[1];
         this.timeDescription = timeDescription;
-        this.time = timeDescription.split(": ",2)[1].split(":", 2)[0] + timeDescription.split(":",2)[1].split(":", 2)[1];;
+        this.time = LocalDate.parse(timeDescription.split(": ",2)[1].split(":", 2)[0] + timeDescription.split(":",2)[1].split(":", 2)[1]);
     }
 
     /**
@@ -50,6 +54,6 @@ public class Event extends Task{
      * @return a String representing time
      */
     public String getTime() {
-        return time;
+        return this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 }
