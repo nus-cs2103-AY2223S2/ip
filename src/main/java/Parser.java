@@ -7,19 +7,19 @@ public class Parser {
             return new ByeCommand();
         } else if (command.equals("mark")) {
             if (chunked.length == 1) {
-                throw new DukeInvalidCommandException("Huh? You didn't give me a task to mark!");
+                throw new DukeInvalidCommandException();
             } else {
                 return new MarkCommand(Integer.parseInt(chunked[1]));
             }
         } else if (command.equals("unmark")) {
             if (chunked.length == 1) {
-                throw new DukeInvalidCommandException("Huh? You didn't give me a task to unmark!");
+                throw new DukeInvalidCommandException();
             } else {
                 return new UnmarkCommand(Integer.parseInt(chunked[1]));
             }
         } else if (command.equals("delete")) {
             if (chunked.length == 1) {
-                throw new DukeInvalidCommandException("Huh? You didn't give me a task to delete!");
+                throw new DukeInvalidCommandException();
             } else {
                 return new DeleteCommand(Integer.parseInt(chunked[1]));
             }
@@ -28,88 +28,45 @@ public class Parser {
         } else if (command.equals("todo")) {
             String rest = line.substring(4).trim();
             if (rest.isBlank()) {
-                throw new DukeInvalidCommandException("Hey! You didn't give me a task description.");
+                throw new DukeInvalidCommandException();
             } else {
                 return new AddToDoCommand(rest);
             }
         } else if (command.equals("deadline")) {
             String rest = line.substring(8).trim();
+            String pattern = ".+ /by [0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9] [0-9][0-9][0-9][0-9]";
 
-            // to fix
-            // not perfect error checking; might be e.g. "deadline /from x /to x"
-            if (rest.isEmpty()) {
-                throw new DukeInvalidCommandException("Hey! You didn't give me a task description.");
+            if (!rest.matches(pattern)) {
+                throw new DukeInvalidCommandException();
             }
-            // possible improvement: regex, throw error as long as doesn't meet format
-            // and ui shows some sort of msg with the correct format to follow?
-            String[] d = rest.split(" /by ");
-            if (d.length != 2) {
-                throw new DukeInvalidCommandException("Hmm! You're missing a deadline D:");
-            }
-            String[] datetime = d[1].split(" ");
-            if (datetime.length != 2) {
-                throw new DukeInvalidCommandException("Hmm! You're missing either a date or a time D:");
-            }
-            String date = datetime[0];
-            String[] ddmmyyyy = date.split("/");
-            if (ddmmyyyy.length != 3) {
-                throw new DukeInvalidCommandException("Hey, get your date format right!");
-            }
-            String time = datetime[1];
-            if (time.length() != 4) {
-                throw new DukeInvalidCommandException("Hey, get your time format right!");
-            }
-            return new AddDeadlineCommand(d[0], date, time);
+
+            String desc = rest.substring(0, rest.indexOf(" /by"));
+            String[] by = rest.substring(rest.indexOf("/by")).split(" ");
+            String date = by[1];
+            String time = by[2];
+
+            return new AddDeadlineCommand(desc, date, time);
+
         } else if (command.equals("event")) {
-            // similar issues to deadline above; to fix
             String rest = line.substring(5).trim();
+            String pattern = ".+ /from [0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9] [0-9][0-9][0-9][0-9]" +
+                    " /to [0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9] [0-9][0-9][0-9][0-9]";
 
-            if (rest.isEmpty()) {
-                throw new DukeInvalidArgumentException("Hey! You didn't give me a task description.");
-            }
-            String[] d = rest.split(" /from ");
-            if (d.length != 2) {
-                throw new DukeInvalidArgumentException("Hmm! You're missing a from parameter D:");
-            }
-            String[] fromTo = d[1].split(" /to ");
-            if (fromTo.length != 2) {
-                throw new DukeInvalidArgumentException("Hmm! You're missing a to parameter D:");
+            if (!rest.matches(pattern)) {
+                throw new DukeInvalidCommandException();
             }
 
-            String from = fromTo[0];
-            String to = fromTo[1];
+            String desc = rest.substring(0, rest.indexOf(" /from"));
+            String[] fromTo = rest.substring(rest.indexOf("/from")).split(" ");
+            String dateFrom = fromTo[1];
+            String timeFrom = fromTo[2];
+            String dateTo = fromTo[4];
+            String timeTo = fromTo[5];
 
-            String[] datetimeFrom = from.split(" ");
-            if (datetimeFrom.length != 2) {
-                throw new DukeInvalidArgumentException("Hmm! You're missing either a from date or a from time D:");
-            }
+            return new AddEventCommand(desc, dateFrom, timeFrom, dateTo, timeTo);
 
-            String[] datetimeTo = to.split(" ");
-            if (datetimeTo.length != 2) {
-                throw new DukeInvalidArgumentException("Hmm! You're missing either a to date or a to time D:");
-            }
-
-            String[] dateFrom = datetimeFrom[0].split("/");
-            if (dateFrom.length != 3) {
-                throw new DukeInvalidArgumentException("Hey, get your from date format right!");
-            }
-            String timeFrom = datetimeFrom[1];
-            if (timeFrom.length() != 4) {
-                throw new DukeInvalidArgumentException("Hey, get your from time format right!");
-            }
-
-            String[] dateTo = datetimeTo[0].split("/");
-            if (dateTo.length != 3) {
-                throw new DukeInvalidArgumentException("Hey, get your to date format right!");
-            }
-            String timeTo = datetimeTo[1];
-            if (timeTo.length() != 4) {
-                throw new DukeInvalidArgumentException("Hey, get your to time format right!");
-            }
-
-            return new AddEventCommand(d[0], datetimeFrom[0], timeFrom, datetimeTo[0], timeTo);
         } else {
-            throw new DukeInvalidCommandException("Huh? Sorry, I don't know what this means :(");
+            throw new DukeInvalidCommandException("Huh? Sorry I don't know what this means :(");
         }
     }
 }

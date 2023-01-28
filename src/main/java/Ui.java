@@ -25,7 +25,19 @@ public class Ui {
     }
 
     void showError(Exception err) {
-        System.out.println(err.getMessage());
+        String msg = err.getMessage();
+        System.out.println(msg);
+        if (msg.equals("Hmm, your command format's a little off!")) {
+            System.out.println("Here are the appropriate formats to use:");
+            System.out.println("todo <desc>");
+            System.out.println("deadline <desc> /by dd/mm/yyyy hhmm");
+            System.out.println("event <desc> /from dd/mm/yyyy hhmm /to dd/mm/yyyy hhmm");
+            System.out.println("list");
+            System.out.println("mark <integer>");
+            System.out.println("unmark <integer>");
+            System.out.println("delete <integer>");
+            System.out.println("bye");
+        }
     }
 
     void sayBye() {

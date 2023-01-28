@@ -23,11 +23,29 @@ Here are all the things on your list!
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Hmm! You're missing a to parameter D:
+Hmm, your command format's a little off!
+Here are the appropriate formats to use:
+todo <desc>
+deadline <desc> /by dd/mm/yyyy hhmm
+event <desc> /from dd/mm/yyyy hhmm /to dd/mm/yyyy hhmm
+list
+mark <integer>
+unmark <integer>
+delete <integer>
+bye
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Hey, get your from date format right!
+Hmm, your command format's a little off!
+Here are the appropriate formats to use:
+todo <desc>
+deadline <desc> /by dd/mm/yyyy hhmm
+event <desc> /from dd/mm/yyyy hhmm /to dd/mm/yyyy hhmm
+list
+mark <integer>
+unmark <integer>
+delete <integer>
+bye
 (\ (\
 („• ֊ •„) ♡
 ━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
