@@ -5,51 +5,51 @@ Yo! The name is
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-How might I help you today?
+Oh boy a new user! What's up?
 Item added: read book
 Item added: drink water
 Item added: finish project
 Item added: Jason Birthday
 Here are the tasks you asked for!
-1: [T][ ] read book
-2: [T][ ] drink water
-3: [D][ ] finish project (by: March 20)
-4: [E][ ] Jason Birthday (from: 5pm to: 10pm)
+1: [T] [ ] read book
+2: [T] [ ] drink water
+3: [D] [ ] finish project (by: March 20)
+4: [E] [ ] Jason Birthday (from: 5pm to: 10pm)
 You now have 4 items in your list.
 Done! I've marked this task as done :D
-[D][X] finish project (by: March 20)
+[D] [X] finish project (by: March 20)
 Done! I've marked this task as done :D
-[E][X] Jason Birthday (from: 5pm to: 10pm)
+[E] [X] Jason Birthday (from: 5pm to: 10pm)
 Here are the tasks you asked for!
-1: [T][ ] read book
-2: [T][ ] drink water
-3: [D][X] finish project (by: March 20)
-4: [E][X] Jason Birthday (from: 5pm to: 10pm)
+1: [T] [ ] read book
+2: [T] [ ] drink water
+3: [D] [X] finish project (by: March 20)
+4: [E] [X] Jason Birthday (from: 5pm to: 10pm)
 You now have 4 items in your list.
 This task is apparently not done huh D:
-[D][ ] finish project (by: March 20)
+[D] [ ] finish project (by: March 20)
 Here are the tasks you asked for!
-1: [T][ ] read book
-2: [T][ ] drink water
-3: [D][ ] finish project (by: March 20)
-4: [E][X] Jason Birthday (from: 5pm to: 10pm)
+1: [T] [ ] read book
+2: [T] [ ] drink water
+3: [D] [ ] finish project (by: March 20)
+4: [E] [X] Jason Birthday (from: 5pm to: 10pm)
 You now have 4 items in your list.
-DukeException: Oops I do not recognise this command...
-DukeException: Mark? Mark what?
-DukeException: Oops, that task number does not exist
-DukeException: Unmark? Unmark what?
-DukeException: Oops, that task number does not exist
-DukeException: Oops, you can't enter an empty task!
-DukeException: Wait a minute, you're missing something! Could be the name or date...
-DukeException: Wait a minute, you're missing something! Could be the name or date...
-DukeException: Hold up, you might be missing something here buddy!
-DukeException: Hold up, you might be missing something here buddy!
-DukeException: Delete? Delete what?
-Done! [T][ ] drink water has been deleted for good.
+Oops I do not recognise this command...
+Mark? Mark what?
+Oops, that task number does not exist
+Unmark? Unmark what?
+Oops, that task number does not exist
+Oops, you can't enter an empty task!
+Wait a minute, you're missing something! Could be the name or date...
+Wait a minute, you're missing something! Could be the name or date...
+Hold up, you might be missing something here buddy!
+Hold up, you might be missing something here buddy!
+Delete? Delete what?
+Done! [T] [ ] drink water has been deleted for good.
 Here are the tasks you asked for!
-1: [T][ ] read book
-2: [D][ ] finish project (by: March 20)
-3: [E][X] Jason Birthday (from: 5pm to: 10pm)
+1: [T] [ ] read book
+2: [D] [ ] finish project (by: March 20)
+3: [E] [X] Jason Birthday (from: 5pm to: 10pm)
 You now have 3 items in your list.
-DukeException: Oops, that task number does not exist
+Oops, that task number does not exist
 It was a pleasure to help, goodbye!
