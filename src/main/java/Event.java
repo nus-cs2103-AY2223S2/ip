@@ -1,12 +1,14 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
 
-    private String startTime;
-    private String endTime;
+    private LocalDate startTime;
+    private LocalDate endTime;
 
     public Event(String s, String startTime, String endTime) {
         super(s);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = LocalDate.parse(startTime);
+        this.endTime = LocalDate.parse(endTime);
     }
 
     public Event(Boolean isTaskDone, String taskDetails, String taskDate) {
@@ -14,8 +16,7 @@ public class Event extends Task {
         if (isTaskDone) {
             this.markDone();
         }
-        this.startTime = taskDate;
-        this.endTime = taskDate;
+        this.startTime = LocalDate.parse(taskDate);
     }
 
     @Override
