@@ -13,7 +13,7 @@ public class Ui {
     // Art generated from: https://patorjk.com/
     private final static String GENIE_LOGO =
                             "     *          *          *              *     *         *    *\n " +
-                            "               ▄████ ▓█████  ███▄ * ▒█ ▒██ ▓█████               \n" +
+                            "               ▄████ ▓█████  ███▄ * ▒█ ▒██ ▓█████              \n" +
                             " *       *    ▄▒█▀ ▀█ ▒██  ▀  ▒██▀█▄ ▒█ ▄▄▄ ▒▓█  ▀ *          * \n" +
                             "              ▒██ ▄▄▄ ▒██▒▄   ▒██ ▀▒ ▒█ ▒██ ▒██▒▄       *       \n" +
                             "       *      ░▓█ ▀░█ ░▓█  ▄  ░██  ░▌░█ ░██ ░▓█  ▄   *          \n" +
@@ -158,5 +158,20 @@ public class Ui {
      */
     public void showEmptyListMessage() {
         System.out.println("Your task list is currently empty! Let's get started! ^-^");
+    }
+    public void printMatchingTaskList(ArrayList<Task> tasks) {
+        if(tasks.size() > 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            for(int i = 1; i <= tasks.size(); i++) {
+                Task t = tasks.get(i - 1);
+                System.out.println(i + ". " + t.toString());
+            }
+        } else {
+            showEmptyMatchingTasksMessage();
+        }
+        printLine();
+    }
+    public void showEmptyMatchingTasksMessage() {
+        System.out.println("There are no matching tasks for your search :(");
     }
 }

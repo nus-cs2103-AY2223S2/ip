@@ -40,13 +40,16 @@ public class Parser {
                 index = Integer.parseInt(i.split(" ")[1]);
                 return new DeleteCommand(index);
             case "todo":
-            case "deadline" :
+            case "deadline":
             case "event":
                 String taskType = i.split(" ")[0];
                 if (i.split(" ").length == 1) {
                     throw new EmptyInputException(taskType);
                 }
                 return new AddCommand(taskType, i);
+            case "find":
+                String keyword = i.replace("find ", "");
+                return new FindCommand(keyword);
             default:
                 throw new InvalidInputException();
             }
