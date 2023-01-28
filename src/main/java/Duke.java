@@ -49,7 +49,13 @@ public class Duke {
                 System.out.println(indent + "  " + task + "\n" + line);
             } else {
                 System.out.print(line);
-                if (command.compareTo("todo") == 0) {
+                if (command.compareTo("delete") == 0) {
+                    int index = Integer.parseInt(instrSplit[1]);
+                    task = taskList.get(index - 1);
+                    taskList.remove(index - 1);
+                    System.out.println(indent + "Noted. I've removed this task:");
+                    System.out.println(indent + "  " + task);
+                } else if (command.compareTo("todo") == 0) {
                     if (instrSplit.length == 1) {
                         System.out.println(indent + "☹ OOPS!!! The description of a todo cannot be empty.\n" + line);
                         continue;
