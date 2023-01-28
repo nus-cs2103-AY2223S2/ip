@@ -33,6 +33,10 @@ public class TaskList {
         return this.array.get(taskIndex);
     }
 
+    public void addToList(Task task) {
+        this.array.add(task);
+    }
+
     public void addToList(String title, TaskType type, LocalDateTime start,
                           LocalDateTime end, boolean done, boolean shouldPrintOutput) {
         Task task;
@@ -73,4 +77,21 @@ public class TaskList {
         Ui.println(toPrint);
     }
 
+    public void find(String keyword) {
+        TaskList result = new TaskList();
+        for (Task t: this.array) {
+            String taskDescription = t.toString();
+            boolean containsKeyword = taskDescription.contains(keyword);
+            if (containsKeyword) {
+                result.addToList(t);
+            }
+        }
+
+        if (result.size() == 0) {
+            Ui.println("There are no matching tasks in your list!");
+            return;
+        }
+        Ui.println("Here are the matching tasks in your list:");
+        Ui.printTaskList(result);
+    }
 }

@@ -25,7 +25,7 @@ public class Parser {
             Ui.printGoodbye();
             return false;
         case "list":
-            Ui.printList(allTasks);
+            Ui.printAllTasks(allTasks);
             break;
         case "mark":
             try {
@@ -92,6 +92,7 @@ public class Parser {
             } catch (Throwable e) {
                 throw new IllegalCommandException(Commands.FIND);
             }
+            break;
         default:
             throw new IllegalCommandException(Commands.UNRECOGNIZED);
         }
