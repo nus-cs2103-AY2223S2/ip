@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class Parser<T> {
     private final Function<String, Result<T>> fn;
@@ -132,6 +133,14 @@ public class Parser<T> {
         });
     }
 
+    public Parser<T> overrideMsg(String errorMsg) {
+        return new Parser<>(inp -> this.parse(inp).overrideMsg(errorMsg));
+    }
+
+    public Parser<T> satisfy(Predicate<T> condition) {
+        return new Parser<>(inp -> this.parse(inp).filter(condition));
+    }
+
     public <U> Parser<U> map(Function<? super T, ? extends U> f) {
         return new Parser<>(inp -> {
             return this.parse(inp).map(f);
@@ -142,13 +151,17 @@ public class Parser<T> {
         return new Parser<>(inp -> Result.ok(res, inp));
     }
 
-    public static Parser<Character> charParser(char c) {
+    public static Parser<Character> anyCharParser() {
         return new Parser<>(inp -> {
-            if (inp.isEmpty() || inp.charAt(0) != c) {
-                return Result.error(String.format("Character %s not found.", c));
+            if (inp.isEmpty()) {
+                return Result.error("End of input.");
             }
-            return Result.ok(c, inp.substring(1));
+            return Result.ok(inp.charAt(0), inp.substring(1));
         });
+    }
+
+    public static Parser<Character> charParser(char c) {
+        return anyCharParser().satisfy(x -> x == c).overrideMsg(String.format("Character %s not found.", c));
     }
 
     public static Parser<String> strParser(String str) {
@@ -170,12 +183,57 @@ public class Parser<T> {
         });
     }
 
+    public static Parser<String> nextStrParser() {
+        return skipSpace()
+                .ignoreThen(anyCharParser()
+                        .satisfy(c -> !WS.contains(c))
+                        .some()
+                        .map(lst -> lst.stream().map(c -> c.toString()).reduce("", (a, b) -> a + b)));
+    }
+
+    public static Parser<String> nextLineParser() {
+        return anyCharParser()
+                .manyUntil(endOfLine())
+                .map(lst -> lst.stream().map(c -> c.toString()).reduce("", (a, b) -> a + b));
+    }
+
+    public static Parser<Integer> unisgnedIntParser() {
+        return anyCharParser().satisfy(c -> c >= 48 && c < 58)
+                .some()
+                .map(lst -> lst.stream().map(c -> c.toString()).reduce("", (a, b) -> a + b))
+                .map(s -> Integer.parseInt(s))
+                .overrideMsg("Failed to parse unsigned integer.");
+    }
+
+    public static Parser<Integer> signedIntParser() {
+        return charParser('-')
+                .ignoreThen(unisgnedIntParser())
+                .map(x -> -x)
+                .overrideMsg("Failed to parse signed integer.");
+    }
+
+    public static Parser<Integer> intParser() {
+        return unisgnedIntParser().or(signedIntParser());
+    }
+
     public static Parser<Void> skipSpace() {
         return new Parser<>(inp -> {
             while (!inp.isEmpty() && WS.contains(inp.charAt(0))) {
                 inp = inp.substring(1);
             }
             return Result.ok(null, inp);
+        });
+    }
+
+    public static Parser<Void> endOfLine() {
+        return new Parser<>(inp -> {
+            if (inp.isEmpty()) {
+                return Result.ok(null, inp);
+            }
+            if (inp.charAt(0) == '\n') {
+                return Result.ok(null, inp.substring(1));
+            }
+            return Result.error("Not EOL yet.");
         });
     }
 }
