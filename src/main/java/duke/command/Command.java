@@ -16,7 +16,7 @@ public class Command {
 
 
     private enum CommandName {
-        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
+        BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND
     }
 
     /**
@@ -40,7 +40,7 @@ public class Command {
     }
 
     /**
-     * Constructor for command "todo".
+     * Constructor for command "todo" and "find".
      *
      * @param commandName The name of the command.
      * @param taskName The name of the todo task.
@@ -138,6 +138,18 @@ public class Command {
             storage.saveTasks(tasks);
             System.out.println("Got it. I've added this task: \n" + todo);
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            break;
+
+        case FIND:
+            int counter = 0;
+            for (int i = 0; i < tasks.size(); i++) {
+                Task findTask = tasks.get(i);
+                if (findTask.contains(taskName)) {
+                    System.out.println("Here are the matching tasks in your list:");
+                    counter++;
+                    System.out.print(counter + ". " + findTask + "\n");
+                }
+            }
             break;
 
         case DEADLINE:

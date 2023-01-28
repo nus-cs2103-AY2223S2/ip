@@ -33,6 +33,10 @@ public class Parser {
             int index = Integer.parseInt(commandString[1]) - 1;
             return new Command("delete", index);
 
+        } else if (input.startsWith("find")) {
+            String taskName = input.substring(5);
+            return new Command("delete", taskName);
+
         } else if (input.startsWith("todo")) {
             String taskName = input.substring(5);
             return new Command("todo", taskName);

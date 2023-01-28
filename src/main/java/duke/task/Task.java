@@ -31,6 +31,15 @@ public class Task implements Serializable{
     }
 
     /**
+     * Returns true if taskName contains keyword and false otherwise
+     *
+     * @return True if taskName contains keyword and false otherwise
+     */
+    public boolean contains(String keyword) {
+        return this.taskName.contains(keyword);
+    }
+
+    /**
      * Returns string representation of the task and its status.
      *
      * @return String representation of the task and the marked status.
