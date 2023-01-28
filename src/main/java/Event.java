@@ -13,4 +13,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.getStatusIcon() + " (from: " + this.from + " to: " + this.to + ")";
     }
+
+    @Override
+    public String toRecord() {
+        return "E|" + super.toRecord() + "|" + from + "|" + to;
+    }
 }
