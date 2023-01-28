@@ -8,7 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-
+/**
+ * Represents the List of Tasks, and the primary class that the
+ * app interacts with. A TaskList allows for modification of the Tasks contained
+ * within, including deletion and insertion, getting a Task at a specified index,
+ * and iterating through each contained Task.
+ *
+ * Modification of Tasks contained in the TaskList can only be done through the
+ * TaskList.
+ */
 public class TaskList implements Iterable<Task> {
     private List<Task> tasks;
 
@@ -28,7 +36,21 @@ public class TaskList implements Iterable<Task> {
         return this.tasks.size();
     }
 
-
+    /**
+     * Adds a task to the TaskList. Requires a task type as specified by TaskTypes,
+     * and the correct mappings of the task. Throws exceptions for if the inputs are invalid.
+     * <br>
+     * Tasks are always added to the end of the TaskList.
+     * <br>
+     * This method is under rework, as checking of arguments is done here and not in the respective
+     * Task constructors - to move the check and exceptions to each individual task type.
+     * @param type one of the available task types provided in TaskTypes.
+     * @param args map of argument names to their values.
+     * @return the same Task object that was added into the TaskList
+     * @throws InvalidDateTimeException
+     * @throws CommandNotFoundException
+     * @throws InvalidInputException
+     */
     public Task addTask(TaskTypes.Type type, Map<String,String> args) throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
         Task newTask;
         String desc;
@@ -72,12 +94,29 @@ public class TaskList implements Iterable<Task> {
         return newTask;
     }
 
+    /**
+     * Adds a task following addTask. Additionally, marks a task done after adding.
+     * @param type one of the available task types provided in TaskTypes.
+     * @param args map of argument names to their values.
+     * @return the same Task object that was added into the TaskList
+     * @throws InvalidDateTimeException
+     * @throws CommandNotFoundException
+     * @throws InvalidInputException
+     */
     public Task addDoneTask(TaskTypes.Type type, Map<String,String> args) throws InvalidDateTimeException, CommandNotFoundException, InvalidInputException {
         Task newTask = addTask(type, args); // add to end of list
         int index = this.tasks.size() - 1; // mark last(est) item as done
         markAsDone(index);
         return newTask;
     }
+
+    /**
+     * Pops (deletes and returns) a task from the TaskList, given the index of the task.
+     * Note that the index is starts from zero - Commands accept user input which starts from 1.
+     * @param index of the Task - starts from zero.
+     * @return the deleted Task.
+     * @throws InvalidInputException
+     */
     public Task deleteTask(int index) throws InvalidInputException {
         //removes a task at given index
 
@@ -95,6 +134,13 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Marks a task as done at the given index.
+     * Note that the index is starts from zero - Commands accept user input which starts from 1.
+     * @param index of the Task - starts from zero.
+     * @return returns true if task is already marked done, false if not.
+     * @throws IndexOutOfBoundsException
+     */
     public boolean markAsDone(int index) throws IndexOutOfBoundsException {
 
         boolean alreadyMarked = false;
@@ -110,6 +156,13 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Marks a task as UNdone at the given index.
+     * Note that the index is starts from zero - Commands accept user input which starts from 1.
+     * @param index of the Task - starts from zero.
+     * @return returns true if task is already marked UNdone, false if not.
+     * @throws IndexOutOfBoundsException
+     */
     public boolean unmarkDone(int index) throws IndexOutOfBoundsException {
         boolean alreadyMarked = false;
         try {

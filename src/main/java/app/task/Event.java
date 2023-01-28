@@ -36,6 +36,11 @@ public class Event extends Task {
                     "yyyy-MM-dd HHmm or yyyy/MM/dd HHmm");
         }
     }
+
+    /**
+     * Formats the task as data to be stored in text file.
+     * @return data format recognisable by the app
+     */
     @Override
     public String asDataFormat() {
         return super.asDataFormat("from:" + this.from, "to:" + this.to);

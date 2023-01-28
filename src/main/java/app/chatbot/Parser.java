@@ -16,12 +16,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
+/**
+ * Contains methods for parsing user input into the command line,
+ * and converting input into executable Commands.
+ */
 public class Parser {
 
-    /**Splits a String line of input into its command (the first word), and its subsequent arguments.
+    /**
+     * Splits a String line of input into its command (the first word), and its subsequent arguments.
      * By default, the key "Command" maps to the name of the command input (the first word).
-     * The name of the Command is also a key to its default arguments; for eg: "delete 1" creates a mapping of "delete" -> "1".
-     * In the case of adding a new event, the name of the command is mapped to its description; for eg: "event" -> "attend wedding"
+     * <br>
+     * The name of the Command is also a key to its default arguments;
+     * for eg: "delete 1" creates a mapping of "delete" -> "1".
+     * <br>
+     * In the case of adding a new event, the name of the command is mapped to its description;
+     * for eg: "event" -> "attend wedding"
      *
      * @param input arguments to be split
      * @return map a mapping of each argument name to its value
@@ -52,6 +61,15 @@ public class Parser {
         return map;
     }
 
+    /**
+     * Parses an untreated string from the command line (entered by the user)
+     * and returns a Command to be executed. If the command is not recognised, throws a
+     * CommandNotFoundException.
+     *
+     * @param input untreated String entered into command line by user.
+     * @return an executeable Command containing info given by user.
+     * @throws CommandNotFoundException
+     */
     public static Command parse(String input) throws CommandNotFoundException {
         Map<String,String> argValues = Parser.splitArgs(input);
         String command = argValues.get("Command");

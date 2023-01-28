@@ -27,6 +27,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the chatbot session. Upon startup, attempts to load in stored data
+     * for tasks at the location <i>"./data/storage"</i>. Ends session when user types in
+     * <i>"bye"</i>.
+     */
     public void run() {
         ui.showWelcome();
 
