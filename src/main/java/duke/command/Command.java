@@ -91,73 +91,73 @@ public class Command {
         Task task;
 
         switch(cn) {
-            case BYE:
-                ui.farewellMessage();
-                this.isExit = true;
-                break;
+        case BYE:
+            ui.farewellMessage();
+            this.isExit = true;
+            break;
 
-            case LIST:
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.println(i + 1 + ". " + tasks.get(i));
-                }
-                break;
+        case LIST:
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(i + 1 + ". " + tasks.get(i));
+            }
+            break;
 
-            case MARK:
-                if (index + 1 == 0) {
-                    throw new DukeException("cannot mark a number not in the list!");
-                }
-                task = tasks.get(index);
-                task.mark();
-                storage.saveTasks(tasks);
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(task);
-                break;
+        case MARK:
+            if (index + 1 == 0) {
+                throw new DukeException("cannot mark a number not in the list!");
+            }
+            task = tasks.get(index);
+            task.mark();
+            storage.saveTasks(tasks);
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(task);
+            break;
 
-            case UNMARK:
-                if (index+1 == 0) {
-                    throw new DukeException("cannot unmark a number not in the list!");
-                }
-                task = tasks.get(index);
-                task.unmark();
-                storage.saveTasks(tasks);
-                System.out.println("OK, I've marked this task as not done yet:");
-                System.out.println(task);
-                break;
+        case UNMARK:
+            if (index+1 == 0) {
+                throw new DukeException("cannot unmark a number not in the list!");
+            }
+            task = tasks.get(index);
+            task.unmark();
+            storage.saveTasks(tasks);
+            System.out.println("OK, I've marked this task as not done yet:");
+            System.out.println(task);
+            break;
 
-            case DELETE:
-                task = tasks.get(index);
-                tasks.delete(index);
-                storage.saveTasks(tasks);
-                System.out.println("Noted. I've removed this task: \n" + task);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                break;
+        case DELETE:
+            task = tasks.get(index);
+            tasks.delete(index);
+            storage.saveTasks(tasks);
+            System.out.println("Noted. I've removed this task: \n" + task);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            break;
 
-            case TODO:
-                Todo todo = new Todo(taskName);
-                tasks.add(todo);
-                storage.saveTasks(tasks);
-                System.out.println("Got it. I've added this task: \n" + todo);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                break;
+        case TODO:
+            Todo todo = new Todo(taskName);
+            tasks.add(todo);
+            storage.saveTasks(tasks);
+            System.out.println("Got it. I've added this task: \n" + todo);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            break;
 
-            case DEADLINE:
-                Deadline deadline = new Deadline(taskName, by);
-                tasks.add(deadline);
-                storage.saveTasks(tasks);
-                System.out.println("Got it. I've added this task: \n" + deadline);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                break;
+        case DEADLINE:
+            Deadline deadline = new Deadline(taskName, by);
+            tasks.add(deadline);
+            storage.saveTasks(tasks);
+            System.out.println("Got it. I've added this task: \n" + deadline);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            break;
 
-            case EVENT:
-                Event event = new Event(taskName, from, to);
-                tasks.add(event);
-                storage.saveTasks(tasks);
-                System.out.println("Got it. I've added this task: \n" + event);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                break;
+        case EVENT:
+            Event event = new Event(taskName, from, to);
+            tasks.add(event);
+            storage.saveTasks(tasks);
+            System.out.println("Got it. I've added this task: \n" + event);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            break;
 
-            default:
-                throw new IllegalArgumentException();
+        default:
+            throw new IllegalArgumentException();
         }
     }
 
