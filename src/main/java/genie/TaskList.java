@@ -74,4 +74,18 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return this.taskList;
     }
+    //@@author mandykqh-reused
+    //Reused from https://stackoverflow.com/questions/17134773/to-check-if-string-contains-particular-word
+    //with minor modifications
+    public ArrayList<Task> searchMatchingTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task t = taskList.get(i);
+            if (t.containsWord(keyword)) {
+                matchingTasks.add(t);
+            }
+        }
+        return matchingTasks;
+    }
+    //@@author
 }

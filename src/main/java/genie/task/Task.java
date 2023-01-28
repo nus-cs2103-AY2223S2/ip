@@ -1,5 +1,8 @@
 package genie.task;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -27,6 +30,17 @@ public class Task {
     }
     public String toFileFormat() {
         return this.getStatusBox() + this.description;
+    }
+    public boolean contains(String keyword) {
+        return description.contains(keyword);
+    }
+    public String getDescription() {
+        return description;
+    }
+    public boolean containsWord(String keyword) {
+        Pattern pattern = Pattern.compile("\\b" + keyword + "\\b", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(description);
+        return matcher.find();
     }
 }
 
