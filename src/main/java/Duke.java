@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class Duke implements a chatbot encapsulates user's tasks and show it
+ * to the user later by processing the inputs.
+ *
+ * @author hhchinh2002
+ */
 public class Duke {
     private static final String DIVIDER_LINE = "____________________________________________________\n";
     private static ArrayList<Task> TASKS = new ArrayList<Task>();

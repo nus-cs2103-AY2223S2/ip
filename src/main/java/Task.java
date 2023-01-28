@@ -1,7 +1,18 @@
+/**
+ * Class Tasks encapsulate details
+ * about a user's task in stored in a Duke object.
+ *
+ * @author hhchinh2002
+ */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
+    /**
+     * Create a Task object with given description
+     *
+     * @param description The description for the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -15,10 +26,16 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Marks the current task as done.
+     */
     public void mark() {
         this.isDone = true;
     }
 
+    /**
+     * Unmark the current task as not done.
+     */
     public void unmark() {
         this.isDone = false;
     }

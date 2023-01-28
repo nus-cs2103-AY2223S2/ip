@@ -1,4 +1,15 @@
+/**
+ * Class ToDo is a subclass of Task, encapsulate details
+ * about a task that the user need to do.
+ *
+ * @author hhchinh2002
+ */
 public class ToDo extends Task {
+    /**
+     * Create a ToDo task object with given description
+     *
+     * @param description The description for the ToDo task
+     */
     public ToDo(String description) {
         super(description);
     }
@@ -7,7 +18,7 @@ public class ToDo extends Task {
     public boolean equals(Object o) {
         if (o instanceof ToDo) {
             ToDo target = (ToDo) o;
-            return target.description.equals(this.description) ;
+            return target.getDescription().equals(this.getDescription()) ;
         }
         return false;
     }
