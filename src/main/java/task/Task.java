@@ -35,7 +35,7 @@ public abstract class Task {
 
     @Override
     /**
-     * Prints the item with its corresponding format.
+     * Returns String representation of the Task item.
      * Each subclass of Task has a designated String format.
      */
     public abstract String toString();
@@ -55,5 +55,14 @@ public abstract class Task {
     public void unmark() {
         isDone = false;
     }
+
+    /**
+     * Returns String representation of the Task item for data storage.
+     * Saves the content of the Task, including its isDone, subtype and description into a String with the delimiter
+     * "|" to be written into a data file.
+     *
+     * @return A String representing this Task object.
+     */
+    public abstract String toSaveFormat();
 
 }
