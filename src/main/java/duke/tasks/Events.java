@@ -20,6 +20,8 @@ public class Events extends Task {
         this.start = LocalDateTime.parse(start, Task.FORMATTER);
         this.end = LocalDateTime.parse(end, Task.FORMATTER);
     }
+
+
     public Events(List<String> queries) {
         this(queries.get(0), queries.get(1), queries.get(2));
     }

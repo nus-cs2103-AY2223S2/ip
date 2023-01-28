@@ -14,7 +14,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * A class which handles reading and writing data onto a file.
+ * This is needed for saving the task list.
+ */
 public class Storage {
     private final String filePath;
     public Storage(String filePath) {
@@ -23,6 +26,8 @@ public class Storage {
 
     /**
      * Reads and loads the data from data.txt.
+     * Each line is read and a corresponding task is created.
+     * From there, a new task list is constructed.
      * @return
      * @throws FileNotFoundException
      */
@@ -72,6 +77,8 @@ public class Storage {
 
     /**
      * Dumps the ArrayList dumpFile into data.txt.
+     * Each task in a task list is converted into a readable format.
+     * The task list is then dumped into the file.
      * @param dumpFile
      * @throws IOException
      */

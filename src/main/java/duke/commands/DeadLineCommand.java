@@ -15,6 +15,13 @@ public class DeadLineCommand extends Command {
         this.deadline = deadline;
     }
 
+    /**
+     * Adds a deadline to the task list before saving the list.
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(this.deadline);
         ui.display("Got it. I've added this task:\n" + this.deadline +

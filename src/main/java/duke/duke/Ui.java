@@ -44,22 +44,41 @@ public class Ui {
 
     }
 
+    /**
+     * Reads user input and converts into a more readable form for the parser.
+     * @return
+     */
     public String[] readLine() {
 
         return this.scanner.nextLine().split(" ");
     }
 
+    /**
+     * Shows the logo.
+     */
     public void showLogo() {
         System.out.println(this.logo);
     }
+
+    /**
+     * Displays the welcome message.
+     */
     public void showWelcome() {
         display(this.welcome);
     };
 
+    /**
+     * Displays text on the screen.
+     * @param str
+     */
     public void display(String str) {
         System.out.println(this.divider + str + this.divider);
     }
 
+    /**
+     * Displays error messages.
+     * @param err
+     */
     public void showError(Exception err) {
         display(err.getMessage());
     }

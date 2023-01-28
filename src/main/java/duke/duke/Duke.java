@@ -32,6 +32,9 @@ public class Duke {
         instance.run();
     }
 
+    /**
+     * Runs the Duke programme.
+     */
     public void run() {
         ui.showLogo();
         ui.showWelcome();

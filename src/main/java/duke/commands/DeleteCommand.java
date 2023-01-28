@@ -13,6 +13,15 @@ public class DeleteCommand extends Command {
     public DeleteCommand(int num) {
         this.num = num;
     }
+
+    /**
+     * Deletes a task from the task list, specified by the number.
+     * Saves the task list afterwards.
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
         if (tasks.size() == 0) {

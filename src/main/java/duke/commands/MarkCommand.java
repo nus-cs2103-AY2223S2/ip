@@ -14,6 +14,15 @@ public class MarkCommand extends Command {
         this.num = num;
         this.isMarking = isMarking;
     }
+
+    /**
+     * Marks and unmarks a task in the task list.
+     * This task is identified by its number.
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws DukeException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (isMarking) {
             tasks.markTask(num);

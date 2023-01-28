@@ -32,6 +32,12 @@ public class Parser {
         return s;
     }
 
+    /**
+     * Parses a processed form of the user input and matches it to the correct command.
+     * @param line
+     * @return
+     * @throws DukeException
+     */
     public Command parse(String[] line) throws DukeException {
         Command c;
         ArrayList<String> queries;
@@ -84,6 +90,13 @@ public class Parser {
         return c;
     }
 
+    /**
+     * Obtains a set of queries/arguments for commands.
+     * @param readLine
+     * @param keywords
+     * @return
+     * @throws DukeException
+     */
     public ArrayList<String> queries(
             String[] readLine, List<String> keywords) throws DukeException {
         ArrayList<String> arr = new ArrayList<>();

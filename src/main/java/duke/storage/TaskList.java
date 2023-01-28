@@ -21,6 +21,11 @@ public class TaskList {
         return this.storer.size();
     }
 
+    /**
+     * Obtains and returns a list of tasks in a format to be displayed.
+     * @return
+     * @throws StorerEmptyException
+     */
     public String getTaskStrings() throws StorerEmptyException {
 
         String concat = "";
@@ -36,20 +41,41 @@ public class TaskList {
         return concat;
     }
 
+
     public ArrayList<Task> getStorer() {
         return this.storer;
     }
+
+    /**
+     * Marks a task as done.
+     * @param index
+     */
     public void markTask(int index) {
         this.storer.get(index - 1).mark();
     }
 
+    /**
+     * Unmarks a task as done.
+     * @param index
+     */
     public void unmarkTask(int index) {
         this.storer.get(index - 1).unmark();
     }
 
+    /**
+     * Obtain a task by its task number.
+     * @param index
+     * @return
+     */
     public Task get(int index) {
         return this.storer.get(index - 1);
     }
+
+    /**
+     * Removes a task given its task number.
+     * @param index
+     * @return
+     */
 
     public Task remove(int index) {
         return this.storer.remove(index - 1);
