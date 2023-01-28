@@ -84,7 +84,7 @@ public abstract class Task {
      * @return String of task's information.
      */
     public String encode() {
-        return getType() + "," + getStatus() + "," + getDescription();
+        return getType() + " | " + getStatus() + " | " + getDescription();
     }
 
     /**
@@ -94,7 +94,7 @@ public abstract class Task {
      * @return Create a specific task using the String of task information.
      */
     public static Task decode(String task) {
-        String[] taskInfo = task.split(",");
+        String[] taskInfo = task.split(" \\| ");
         String type = taskInfo[0];
         boolean status = taskInfo[1].equals("1");
         String name = taskInfo[2];

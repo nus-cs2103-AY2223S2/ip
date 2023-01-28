@@ -48,7 +48,7 @@ public class Event extends Task{
 
     @Override
     public String getDescription() {
-        return name + "," + from + "," + to;
+        return name + " | " + from + " | " + to;
     }
     @Override
     public String toString() {
