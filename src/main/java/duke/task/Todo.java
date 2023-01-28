@@ -24,7 +24,7 @@ public class Todo extends Task {
         return String.format("T | %s\n", super.toFile());
     }
 
-    public static Todo toTodoFromFileStr(String taskNameData, String doneData) throws DukeException{
+    public static Todo toTodoFromFileStr(String taskNameData, String doneData) throws DukeException {
         doneData = doneData.trim();
         taskNameData = taskNameData.trim();
         if (taskNameData.isEmpty()) {

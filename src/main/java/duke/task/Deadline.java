@@ -2,7 +2,6 @@ package duke.task;
 
 import duke.DukeException;
 import duke.TaskList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -72,7 +71,7 @@ public class Deadline extends Task {
         if (this.completed) {
             s = "[D]" + super.toString() + " (by: " + deadline + ")";
         } else {
-            s = "[D]" + super.toString()  + " (by: " + deadline + ")";
+            s = "[D]" + super.toString() + " (by: " + deadline + ")";
         }
         return s;
     }

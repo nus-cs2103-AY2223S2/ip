@@ -47,7 +47,7 @@ public class Storage {
     public void loadFileInto(TaskList lst) throws DukeException {
         try {
             Scanner fileData = new Scanner(this.file);
-            while(fileData.hasNextLine()) {
+            while (fileData.hasNextLine()) {
                 String taskString = fileData.nextLine();
                 lst.addTaskFromString(taskString);
             }

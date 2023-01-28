@@ -25,7 +25,9 @@ public abstract class Task {
         return this.completed;
     }
 
-    public void setCompleted(boolean status) { this.completed = status; }
+    public void setCompleted(boolean status) {
+        this.completed = status;
+    }
 
     public String toFile() {
         if (this.completed) {
