@@ -16,6 +16,14 @@ public class FindCommand extends Command {
         this.query = query;
     }
 
+    /**
+     * Searches for tasks which contain the keyword specified by the user.
+     * Displays these tasks with the help of the UI.
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws Exception
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws Exception {
         ArrayList<String> searchWords = new ArrayList<>();
         for (int i = 1; i <= tasks.size(); i++) {

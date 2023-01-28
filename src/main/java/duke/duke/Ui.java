@@ -55,7 +55,6 @@ public class Ui {
      *
      */
     public String[] readLine() {
-
         return this.scanner.nextLine().split(" ");
     }
 

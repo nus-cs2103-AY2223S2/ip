@@ -22,6 +22,11 @@ import duke.exceptions.IncompleteException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * A class that interprets user-input.
+ * Delegates appropriate commands to handling inputs.
+ */
 public class Parser {
 
     public Parser() {

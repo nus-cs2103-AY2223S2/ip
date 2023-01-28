@@ -18,7 +18,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Adds a todo to the task list before saving the list.
+     * Adds a to-do to the task list before saving the list.
      * @param tasks
      * @param ui
      * @param storage

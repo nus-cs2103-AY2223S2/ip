@@ -6,6 +6,9 @@ import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.storage.TaskList;
 
+/**
+ * The main class of the programme.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;

@@ -4,9 +4,12 @@ import duke.tasks.Task;
 import duke.exceptions.StorerEmptyException;
 
 import java.util.ArrayList;
+
+/**
+ * A List of tasks that are kept track of.
+ */
 public class TaskList {
     private ArrayList<Task> storer;
-
     public TaskList(ArrayList<Task> storer) {
         this.storer = storer;
     }

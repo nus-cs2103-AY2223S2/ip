@@ -41,6 +41,9 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Unmarks the task as complete.
+     */
     public void unmark() {
         this.isDone = false;
     }

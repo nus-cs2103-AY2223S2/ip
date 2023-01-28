@@ -13,7 +13,6 @@ import java.io.IOException;
  */
 public class EventCommand extends Command {
     private final Events event;
-
     public EventCommand(Events event) {
         this.event = event;
     }

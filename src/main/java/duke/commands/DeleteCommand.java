@@ -8,6 +8,11 @@ import duke.storage.TaskList;
 import duke.tasks.Task;
 
 import java.io.IOException;
+
+/**
+ * A command for deleting a task.
+ * Stores a number, the index of a task in the task list.
+ */
 public class DeleteCommand extends Command {
     private final int num;
     public DeleteCommand(int num) {
