@@ -1,7 +1,9 @@
 package panav.task;
+
 public class Task {
+
     protected String description;
-    public boolean isDone;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -14,8 +16,13 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
     public void markAsNotDone() {
         this.isDone = false;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     @Override

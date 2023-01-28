@@ -27,8 +27,7 @@ public class TaskList {
     }
 
     public Task removeTask(int index) {
-        Task removed = tasks.remove(index);
-        return removed;
+        return tasks.remove(index);
     }
 
     public void addTask(Task task) {
@@ -41,6 +40,7 @@ public class TaskList {
         task.markAsDone();
         System.out.println(task);
     }
+
     public void unmarkTask(int index) {
         System.out.println("OK, I've marked this task as not done yet:");
         Task task = tasks.get(index);

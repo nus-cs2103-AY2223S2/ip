@@ -4,10 +4,13 @@ import panav.task.Task;
 import panav.task.TaskList;
 
 import java.util.Scanner;
+
 public class Ui {
 
     Scanner sc = new Scanner(System.in);
+
     private static final String LINE_DIVIDER = "____________________________________________________________";
+
     public void showLoadingError() {
         System.out.println("Oops!! There was an error in loading text from your file");
         System.out.println("Make sure your file exists in the correct location");

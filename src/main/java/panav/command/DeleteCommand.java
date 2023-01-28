@@ -2,9 +2,12 @@ package panav.command;
 
 import panav.exception.DukeException;
 import panav.exception.InvalidNumberException;
+
 import panav.storage.Storage;
+
 import panav.task.Task;
 import panav.task.TaskList;
+
 import panav.ui.Ui;
 
 public class DeleteCommand extends Command {
@@ -15,6 +18,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
+
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int deleteIndex = readNumber(fullCommand, tasks.getLength());
