@@ -21,14 +21,12 @@ public class EventCommand extends Command {
     public void execute(Ui ui, TaskList taskList, Storage storage) {
         Command fromCommand = this.getSubCommand(Action.EVENT_FROM);
         Command toCommand = this.getSubCommand(Action.EVENT_TO);
-        String fromDate = null;
-        String toDate = null;
-        if (fromCommand != null && fromCommand.getBody() != null) {
-            fromDate = fromCommand.getBody();
-        }
-        if (toCommand != null && toCommand.getBody() != null) {
-            toDate = toCommand.getBody();
-        }
+        String fromDate = Command.hasBody(fromCommand)
+                ? fromCommand.getBody()
+                : null;
+        String toDate = Command.hasBody(toCommand)
+                ? toCommand.getBody()
+                : null;
 
         try {
             ui.print(taskList.addTask(new EventTask(this.getBody(), fromDate, toDate)));
