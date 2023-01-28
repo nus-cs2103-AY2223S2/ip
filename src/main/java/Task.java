@@ -1,6 +1,7 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
+    public abstract String storageStr();
 
     public Task(String description) {
         this.description = description;
@@ -9,6 +10,10 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    public String getStatusValue() {
+        return (isDone ? "1" : "0"); // mark done task with 1
     }
 
     public String outputMarked() {
@@ -21,7 +26,12 @@ public class Task {
         return "Noted. I've marked this tasked as undone:\n";
     }
 
+    public void mark() {
+        isDone = true;
+    }
+
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
 }

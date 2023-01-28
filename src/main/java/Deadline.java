@@ -8,6 +8,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String storageStr() {
+        return "D | " + super.getStatusValue() + " | " + super.description
+                + " | " + this.by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
