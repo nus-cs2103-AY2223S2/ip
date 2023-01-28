@@ -1,16 +1,17 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.exception.DukeBadInstructionFormatException;
 import duke.storage.Storage;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.util.Arrays;
-
 public class TodoCommand extends Command {
 
     public TodoCommand(String fullCommand) {
+
         super(fullCommand);
     }
 

@@ -14,11 +14,6 @@ import java.time.format.DateTimeParseException;
 
 public abstract class Task {
 
-    /**
-     * String describing task.
-     */
-    protected String description;
-
     public static final String STORE_DATE_TIME_FORMAT = "dd/MM/yyyy HHmm";
 
     public static final String DISPLAY_DATE_TIME_FORMAT = "dd LLL yyyy HHmm";
@@ -28,6 +23,10 @@ public abstract class Task {
      * otherwise.
      */
     protected boolean isDone;
+    /**
+     * String describing task.
+     */
+    protected String description;
 
     /**
      * Constructor for a task.

@@ -1,15 +1,6 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
-import duke.command.TodoCommand;
-import duke.command.DeadlineCommand;
-import duke.command.EventCommand;
-import duke.command.DeleteCommand;
-import duke.command.ByeCommand;
-import duke.command.UnknownCommand;
+import duke.command.*;
 
 public class Parser {
 
@@ -47,7 +38,11 @@ public class Parser {
 
         case "bye":
             Command byeC = new ByeCommand(fullCommand);
-            return  byeC;
+            return byeC;
+
+        case "clear":
+            Command clearC = new ClearCommand(fullCommand);
+            return clearC;
 
         default:
             Command unknownC = new UnknownCommand(fullCommand);

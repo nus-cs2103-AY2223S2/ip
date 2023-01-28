@@ -3,10 +3,7 @@ package duke.storage;
 import duke.task.Task;
 import duke.exception.DukeBadInstructionFormatException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -159,5 +156,15 @@ public class Storage {
         }
 
         this.taskFilePath = dukeDirectory + '/' + dirAndFileName[1];
+    }
+
+    public void clearAllTasks() {
+        try {
+            PrintWriter writer = new PrintWriter(this.taskFilePath);
+            writer.print("");
+            writer.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Tried to clear storage when it doesn't exist.");
+        }
     }
 }

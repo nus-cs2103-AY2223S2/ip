@@ -1,9 +1,9 @@
 package duke.ui;
 
-import duke.tasklist.TaskList;
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.tasklist.TaskList;
 
 public class Ui {
 
@@ -64,6 +64,10 @@ public class Ui {
         System.out.println("\tNoted. I've removed this task:\n\t  " +
                 t.toString() + String.format("\n\tNow you have %d tasks in the list."
                 , tl.getLength()));
+    }
+
+    public void showClearTasksMessage() {
+        System.out.println("\tI have cleared the task list.");
     }
 
     public void showByeMessage() {

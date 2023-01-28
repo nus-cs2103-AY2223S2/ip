@@ -112,4 +112,10 @@ public class TaskList {
         return removed;
     }
 
+    public void clearAllTasks() {
+        while (taskList.size() != 0) {
+            delete(0);
+        }
+    }
+
 }
