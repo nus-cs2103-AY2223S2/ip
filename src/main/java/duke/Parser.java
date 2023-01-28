@@ -56,6 +56,12 @@ public class Parser {
                 index = parseIntArg(arguments);
                 command = new DeleteCommand(index - 1);
                 break;
+            case "find":
+                if (single) {
+                    throw new DukeException("empty keyword");
+                }
+                command = new FindCommand(arguments);
+                break;
             case "todo":
                 if (single) {
                     throw new DukeException(commandType);
