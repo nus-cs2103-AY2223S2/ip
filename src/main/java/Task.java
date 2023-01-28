@@ -7,7 +7,7 @@ public abstract class Task {
         this.done = false;
     }
 
-    public static Task dataToTask(String data) throws InvalidTaskTypeException{
+    public static Task dataToTask(String data) throws InvalidTaskTypeException, InvalidDateException {
         Task task;
 
         //| is a metacharacter in regex. You'd need to escape it:

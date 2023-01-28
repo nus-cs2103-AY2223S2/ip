@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
@@ -9,15 +10,20 @@ public class Event extends Task {
     private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-    public Event(String command, String start, String end) {
+    public Event(String command, String start, String end) throws InvalidDateException {
         super(command);
-        this.start = LocalDate.parse(start);
-        this.end = LocalDate.parse(end);
+        try {
+            this.start = LocalDate.parse(start);
+            this.end = LocalDate.parse(end);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from:" + start.format(formatter) + "to:" + end.format(formatter) + ")";
+        return "[E]" + super.toString() + "(from: " + start.format(formatter) +
+                " to:" + end.format(formatter) + ")";
     }
 
     @Override

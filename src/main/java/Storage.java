@@ -25,7 +25,7 @@ public class Storage {
             while (line != null) {
                 try {
                     taskList.add(Task.dataToTask(line));
-                } catch (InvalidTaskTypeException e) {
+                } catch (InvalidTaskTypeException | InvalidDateException e) {
                     System.out.println(Duke.HORIZONTAL_LINE + "\n" + e.getMessage() +
                             "\n" + Duke.HORIZONTAL_LINE);
                 }
@@ -53,16 +53,6 @@ public class Storage {
 
     }
 
-    public static void main(String[] args) {
-        Storage data = new Storage();
-        List<Task> newTaskList = new ArrayList<>();
-        newTaskList.add(new Deadline("Do task", "September"));
-        newTaskList.add(new ToDo(("Todo task")));
-        newTaskList.add(new Event("Event task", "October", "November"));
-        data.editStorage(newTaskList);
-        data.saveToFile(new File("savedFile.txt"));
-        data.loadFromFile(new File("savedFile.txt"));
-    }
 
 
 

@@ -1,18 +1,24 @@
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     private LocalDate deadline;
     private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("MMM dd yyyy");
-    public Deadline(String command, String deadline) {
+    public Deadline(String command, String deadline) throws InvalidDateException {
         super(command);
-        this.deadline = LocalDate.parse(deadline);
+        try {
+            this.deadline = LocalDate.parse(deadline);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + deadline.format(formatter) + ")";
+        return "[D]" + super.toString() + "(by: " + deadline.format(formatter) + ")";
     }
 
     @Override
