@@ -1,11 +1,18 @@
+package duke;
+
+import duke.commands.Command;
+import duke.exceptions.*;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+import duke.utils.Parser;
+import duke.utils.Storage;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
 
 public class Duke {
-    public static final String HORIZONTAL_LINE =
-            "____________________________________________________________";
     private TaskList commandList;
     private Ui ui;
     private Storage storage;
@@ -40,14 +47,14 @@ public class Duke {
 
         ui.greetingMessage();
         Scanner scanner = new Scanner(System.in);
-        boolean isOver = false;
         while (scanner.hasNext()) {
             String userCommands = scanner.nextLine();
             Command command;
             try {
                 command = parser.parse(userCommands, commandList, storage, ui, savedFile);
                 command.action();
-            } catch (InvalidCmdValueException e) {
+            } catch (InvalidCmdValueException | InvalidTaskTypeException |
+                     EmptyCommandException | InvalidTimeException | InvalidDateException e) {
                 System.out.println(Ui.HORIZONTAL_LINE + "\n" + e.getMessage() + "\n" + Ui.HORIZONTAL_LINE);
             }
         }

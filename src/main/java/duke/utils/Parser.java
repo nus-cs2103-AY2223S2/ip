@@ -1,9 +1,17 @@
+package duke.utils;
+
+import duke.commands.*;
+import duke.exceptions.*;
+import duke.tasks.*;
+import duke.ui.Ui;
+
 import java.io.File;
 
 public class Parser {
 
     public Command parse(String userCommands, TaskList commandList, Storage storage, Ui ui, File file)
-            throws InvalidCmdValueException {
+            throws InvalidCmdValueException, InvalidTaskTypeException, EmptyCommandException,
+            InvalidTimeException, InvalidDateException {
         String[] strArray = userCommands.split(" ", 2);
         String action = strArray[0];
 
@@ -16,21 +24,21 @@ public class Parser {
                 return new MarkCommand(ui, commandList,
                         Integer.parseInt(strArray[1]) - 1, storage, file);
             } catch (InvalidCmdValueException e) {
-                throw new InvalidCmdValueException();
+                throw e;
             }
         } else if (action.equalsIgnoreCase("unmark")) {
             try {
                 return new UnmarkCommand(ui, commandList,
                         Integer.parseInt(strArray[1]) - 1, storage, file);
             } catch (InvalidCmdValueException e) {
-                throw new InvalidCmdValueException();
+                throw e;
             }
         } else if (action.equalsIgnoreCase("delete")) {
             try {
                 return new DeleteCommand(ui, commandList,
                         Integer.parseInt(strArray[1]) - 1, storage, file);
             } catch (InvalidCmdValueException e) {
-                throw new InvalidCmdValueException();
+                throw e;
             }
         } else {
             try {
@@ -39,10 +47,9 @@ public class Parser {
                 return new AddCommand(ui, commandList, task, storage, file);
             } catch (InvalidTaskTypeException | EmptyCommandException | InvalidTimeException |
                      InvalidDateException e) {
-                System.out.println(Ui.HORIZONTAL_LINE + "\n" + e.getMessage() + "\n" + Ui.HORIZONTAL_LINE);
+                throw e;
             }
         }
-        return new ByeCommand(ui);
     }
 
     public TaskTypes getTaskType(String action) throws InvalidTaskTypeException {

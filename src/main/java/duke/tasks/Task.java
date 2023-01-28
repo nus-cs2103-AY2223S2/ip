@@ -1,3 +1,8 @@
+package duke.tasks;
+
+import duke.exceptions.InvalidDateException;
+import duke.exceptions.InvalidTaskTypeException;
+
 public abstract class Task {
     private final String task;
     private boolean done;

@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+
 public class Ui {
 
     public static final String HORIZONTAL_LINE =

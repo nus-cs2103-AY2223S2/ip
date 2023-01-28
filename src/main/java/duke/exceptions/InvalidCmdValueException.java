@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class InvalidCmdValueException extends Exception {
 
     public InvalidCmdValueException() {

@@ -1,3 +1,10 @@
+package duke.utils;
+
+import duke.exceptions.InvalidDateException;
+import duke.exceptions.InvalidTaskTypeException;
+import duke.tasks.Task;
+import duke.ui.Ui;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +33,8 @@ public class Storage {
                 try {
                     taskList.add(Task.dataToTask(line));
                 } catch (InvalidTaskTypeException | InvalidDateException e) {
-                    System.out.println(Duke.HORIZONTAL_LINE + "\n" + e.getMessage() +
-                            "\n" + Duke.HORIZONTAL_LINE);
+                    System.out.println(Ui.HORIZONTAL_LINE + "\n" + e.getMessage() +
+                            "\n" + Ui.HORIZONTAL_LINE);
                 }
                 line = bufReader.readLine();
             }

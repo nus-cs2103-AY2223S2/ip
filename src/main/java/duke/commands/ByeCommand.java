@@ -1,3 +1,7 @@
+package duke.commands;
+
+import duke.ui.Ui;
+
 public class ByeCommand extends Command {
 
     private Ui ui;

@@ -1,4 +1,4 @@
 [T] | 0 | ride bicycle
-[D] | 1 | complete duke | 2000-11-20
-[E] | 1 | do this | 2023-01-28 | 2023-01-28
+[D] | 0 | complete duke | 2000-11-20
 [T] | 0 | ride bicycle
+[E] | 0 |  | 2023-01-29 | 2023-01-29
