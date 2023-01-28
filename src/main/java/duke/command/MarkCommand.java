@@ -6,10 +6,19 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.exception.DukeException;
 
-
+/**
+ * Command to mark Task as done.
+ *
+ * @author Lian Kok Hai
+ */
 public class MarkCommand extends Command {
     int index;
 
+    /**
+     * Constructs new MarkCommand.
+     *
+     * @param index 1-based index of Task to be marked.
+     */
     public MarkCommand(int index) {
         this.index = index;
     }

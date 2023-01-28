@@ -6,10 +6,19 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.exception.DukeException;
 
-
+/**
+ * Command to mark Task as undone.
+ *
+ * @author Lian Kok Hai
+ */
 public class UnmarkCommand extends Command {
     int index;
 
+    /**
+     * Constructs new UnmarkCommand.
+     *
+     * @param index 1-based index of Task to be unmarked.
+     */
     public UnmarkCommand(int index) {
         this.index = index;
     }

@@ -8,7 +8,7 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
-import duke.command.TodoCommand;
+import duke.command.ToDoCommand;
 import duke.command.UnmarkCommand;
 
 import duke.exception.DukeException;
@@ -50,7 +50,7 @@ public class Parser {
                 c = new DeleteCommand(index);
                 break;
             case TODO:
-                c = new TodoCommand(Parser.parseTodoCommand(userInput));
+                c = new ToDoCommand(Parser.parseTodoCommand(userInput));
                 break;
             case DEADLINE:
                 String[] parsed = Parser.parseDeadlineCommand(userInput); // parsed[0] is description of task; parsed[1] is by

@@ -5,11 +5,29 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.exception.DukeException;
 
+/**
+ * Abstract class representing a command a user can input to Duke.
+ *
+ * @author Lian Kok Hai
+ */
 public abstract class Command {
     boolean isExit = false;
 
+    /**
+     * Executes the function of command.
+     *
+     * @param taskList Tasklist object to be manipulated.
+     * @param ui Ui object for printing.
+     * @param storage Storage object for loading and saving.
+     * @throws DukeException Thrown when error occurs in execution of command.
+     */
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
+    /**
+     * Returns true if command is ExitCommand.
+     *
+     * @return True if command is ExitCommand.
+     */
     public boolean isExit() {
         return isExit;
     }

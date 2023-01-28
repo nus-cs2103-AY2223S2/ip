@@ -6,10 +6,19 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.exception.DukeException;
 
-
+/**
+ * Command to delete Task from TaskList.
+ *
+ * @author Lian Kok Hai
+ */
 public class DeleteCommand extends Command {
     int index;
 
+    /**
+     * Constructs new DeleteCommand.
+     *
+     * @param index 1-based index of task to be deleted.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }
