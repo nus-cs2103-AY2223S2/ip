@@ -69,6 +69,13 @@ public class Parser {
                     int index = Integer.parseInt(inputList[1]);
                     return new DeleteCommand(index);
                 }
+                case FIND: {
+                    if (tooFewArgs) {
+                        throw new DukeException("Please specify a search term!");
+                    }
+                    String searchTerm = input.replaceFirst("find ", "");
+                    return new FindCommand(searchTerm);
+                }
                 case BYE: {
                     return new ByeCommand();
                 }

@@ -35,6 +35,7 @@ public class UI {
                         + indentString("mark [index]")
                         + indentString("unmark [index]")
                         + indentString("delete [index]")
+                        + indentString("find [search term]")
                         + indentString("bye"));
     }
 
