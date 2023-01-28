@@ -1,4 +1,6 @@
-package Duke;
+package duke.command;
+
+import duke.task.*;
 
 //A CLASS THAT STORE THE TASKS
 public class ExecuteCommandQueue extends Commands {

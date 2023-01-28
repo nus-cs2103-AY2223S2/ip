@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 public class InsufficientAruments extends DukeException {
     public InsufficientAruments(String message) {

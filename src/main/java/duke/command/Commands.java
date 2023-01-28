@@ -1,4 +1,6 @@
-package Duke;
+package duke.command;
+
+import duke.task.TaskList;
 
 public abstract class Commands {
     private int commandIds;

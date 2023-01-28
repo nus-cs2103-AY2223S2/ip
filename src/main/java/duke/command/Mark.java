@@ -1,4 +1,6 @@
-package Duke;
+package duke.command;
+
+import duke.task.TaskList;
 
 public class Mark extends Commands {
     public Mark(String str) {

@@ -1,4 +1,6 @@
-package Duke;
+package duke.command;
+
+import duke.task.TaskList;
 
 public class Delete extends Commands{
     public Delete(String str) {

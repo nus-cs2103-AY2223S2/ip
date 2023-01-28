@@ -1,4 +1,6 @@
-package Duke;
+package duke.command;
+
+import duke.task.TaskList;
 
 public class List extends Commands{
     public List(String str) {

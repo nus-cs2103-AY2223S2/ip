@@ -1,3 +1,11 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.InsufficientAruments;
+import duke.exception.UnknownCommand;
+import duke.task.TaskList;
+
 public class Parser {
     private static CommandQueue queue = new CommandQueue();
     public static void createCommand (String input) throws DukeException {

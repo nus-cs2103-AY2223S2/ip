@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 public class Todo extends Tasks {
     public Todo(String content, boolean isDone) {

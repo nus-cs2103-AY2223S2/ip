@@ -1,4 +1,6 @@
-package Duke;
+package duke.command;
+
+import duke.task.TaskList;
 
 public class Echo extends Commands {
     public Echo(String str) {
