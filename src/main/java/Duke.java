@@ -4,15 +4,10 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        String line = "    ______________________________________________________\n";
+        String line = "    ____________________________________________________________\n";
         String indent = "      ";
-        String logo = indent + " ____        _        \n"
-                + indent + "|  _ \\ _   _| | _____ \n"
-                + indent + "| | | | | | | |/ / _ \\\n"
-                + indent + "| |_| | |_| |   <  __/\n"
-                + indent + "|____/ \\__,_|_|\\_\\___|\n";
 
-        System.out.println(line + indent + "Hello! I'm\n" + logo);
+        System.out.println(line + indent + "Hello! I'm DUKE");
         System.out.println(indent + "What can I do for you?\n" + line);
 
         Scanner sc = new Scanner(System.in);
@@ -54,30 +49,41 @@ public class Duke {
                 System.out.println(indent + "  " + task + "\n" + line);
             } else {
                 System.out.print(line);
-                System.out.println(indent + "Got it. I've added this task:");
                 if (command.compareTo("todo") == 0) {
+                    if (instrSplit.length == 1) {
+                        System.out.println(indent + "☹ OOPS!!! The description of a todo cannot be empty.\n" + line);
+                        continue;
+                    }
+                    System.out.println(indent + "Got it. I've added this task:");
                     Todo todo = new Todo(instruction.substring(5));
                     taskList.add(todo);
                     System.out.println(indent + "  " + todo);
                 } else if (command.compareTo("deadline") == 0) {
+                    if (instrSplit.length == 1) {
+                        System.out.println(indent + "☹ OOPS!!! The description of a deadline cannot be empty.\n" + line);
+                        continue;
+                    }
+                    System.out.println(indent + "Got it. I've added this task:");
                     Deadline deadline = new Deadline(instruction.substring(9));
                     taskList.add(deadline);
                     System.out.println(indent + "  " + deadline);
                 } else if (command.compareTo("event") == 0) {
+                    if (instrSplit.length == 1) {
+                        System.out.println(indent + "☹ OOPS!!! The description of an event cannot be empty.\n" + line);
+                        continue;
+                    }
+                    System.out.println(indent + "Got it. I've added this task:");
                     Event event = new Event(instruction.substring(6));
                     taskList.add(event);
                     System.out.println(indent + "  " + event);
                 } else {
-                    System.out.println(indent + line + "Cancel last, invalid command" + line);
+                    System.out.println(indent + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + line);
+                    continue;
                 }
                 String s = taskList.size() > 1 ? "tasks" : "task";
                 System.out.println(indent + "Now you have " + taskList.size() + " " + s + " in the list.");
                 System.out.println(line);
             }
-
-//            task = new Task(instruction);
-//            taskList.add(task);
-//            System.out.println(line + indent + "added: " + task.getDescription() + "\n" + line);
         }
     }
 }
