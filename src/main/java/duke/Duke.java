@@ -62,6 +62,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException {
-        new Duke("data/duke.Duke.txt").run();
+        new Duke("./data/Duke.txt").run();
     }
 }
