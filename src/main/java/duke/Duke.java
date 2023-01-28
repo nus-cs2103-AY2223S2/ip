@@ -1,18 +1,24 @@
 package duke;
 import duke.command.Command;
 
+/** The Duke class contains variables and methods related to running an instance of Duke. */
 public class Duke {
     protected static String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+    protected static final String PATH = "src/data/duke.txt";
     protected TaskList lst;
-    protected static final String path = "src/data/duke.txt";
     protected final Storage storage;
     protected final Parser parser;
     protected final Ui ui;
 
+    /**
+     * Creates an instance of Duke.
+     *
+     * @param filePath path of the file containing data for Duke
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -25,10 +31,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Reads user input and loads data from file into an instance of Duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String userInput = this.ui.readCommand();
                 ui.showLine();
@@ -44,6 +53,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(path).run();
+        new Duke(PATH).run();
     }
 }

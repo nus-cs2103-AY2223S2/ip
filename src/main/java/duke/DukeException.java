@@ -3,7 +3,8 @@ package duke;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DukeException extends Exception{
+/** Class contains all exceptions thrown by Duke. */
+public class DukeException extends Exception {
     protected ArrayList<String> commandError = new ArrayList<>(
             Arrays.asList("todo", "deadline", "event", "missing details"));
     protected ArrayList<String> indexError = new ArrayList<>(
@@ -15,6 +16,10 @@ public class DukeException extends Exception{
             Arrays.asList("date format", "wrong order"));
     protected String errorMsg;
 
+    /**
+     * Creates an instance of DukeException.
+     * @param command type of exception thrown.
+     */
     public DukeException(String command) {
         if (commandError.contains(command)) {
             this.errorMsg = "The task description cannot be empty.";
@@ -45,6 +50,10 @@ public class DukeException extends Exception{
         }
     }
 
+    /**
+     * Overrides toString and returns a String containing exception message.
+     * @return String containing exception message.
+     */
     @Override
     public String toString() {
         return "Oh no!! " + this.errorMsg;

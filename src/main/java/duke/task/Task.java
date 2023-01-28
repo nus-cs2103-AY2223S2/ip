@@ -1,18 +1,31 @@
 package duke.task;
 
+/**
+ * Abstract class contains variables and methods related to Tasks.
+ */
 public abstract class Task {
     protected boolean completed;
     protected String taskName;
 
+    /**
+     * Creates an instance of a Task.
+     * @param taskname String name of task.
+     */
     public Task(String taskname) {
         this.taskName = taskname;
         this.completed = false;
     }
 
+    /**
+     * Marks task as done.
+     */
     public void markAsDone() {
         this.completed = true;
     }
 
+    /**
+     * Marks task as undone.
+     */
     public void markAsUndone() {
         this.completed = false;
     }
@@ -25,8 +38,16 @@ public abstract class Task {
         return this.completed;
     }
 
+    /**
+     * Marks task as done or undone depending on status.
+     * @param status
+     */
     public void setCompleted(boolean status) { this.completed = status; }
 
+    /**
+     * Returns Task as a String formatted for saving into a file.
+     * @return String formatted for fie input.
+     */
     public String toFile() {
         if (this.completed) {
             return String.format("1 | %s", this.taskName);
@@ -35,6 +56,10 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Returns Task as a String.
+     * @return Task formatted as a String.
+     */
     @Override
     public String toString() {
         String s;

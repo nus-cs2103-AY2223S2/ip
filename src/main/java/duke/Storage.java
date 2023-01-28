@@ -6,15 +6,29 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The Storage class contains variables and methods related to handling a data file for Duke.
+ */
 public class Storage {
     private String filePath;
     private File file;
 
+    /**
+     * Creates an instance of Storage.
+     * @param filePath Path of the file containing data for Duke or destination file to
+     *                 contain data for Duke.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
     }
 
+    /**
+     * Creates a file if the file does not exist.
+     * @param filePath Path of the file containing data for Duke or destination file to contain
+     *                 data for Duke.
+     * @throws DukeException If file does not exist.
+     */
     public void createFile(String filePath) throws DukeException {
         try {
             this.filePath = filePath;
@@ -31,6 +45,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Stores data in given list of tasks into the file path of Storage.
+     * @param lst contains list of tasks from an instance of Duke.
+     */
     public void saveToFile(TaskList lst) {
         try {
             FileWriter writer = new FileWriter(this.filePath);
@@ -44,6 +62,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads file data into a TaskList.
+     * @param lst TaskList file data is to be laoded into.
+     * @throws DukeException If file does not exist.
+     */
     public void loadFileInto(TaskList lst) throws DukeException {
         try {
             Scanner fileData = new Scanner(this.file);
@@ -51,9 +74,7 @@ public class Storage {
                 String taskString = fileData.nextLine();
                 lst.addTaskFromString(taskString);
             }
-            if (fileData != null) {
-                fileData.close();
-            }
+            fileData.close();
         } catch (FileNotFoundException e) {
             this.createFile(this.filePath);
             this.loadFileInto(lst);
