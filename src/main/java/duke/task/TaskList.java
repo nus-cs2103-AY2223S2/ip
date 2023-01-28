@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class TaskList implements Iterable<Task> {
-    
-    private ArrayList<Task> taskList;
+
+    private final ArrayList<Task> taskList;
 
     /**
      * TaskList class constructor
@@ -59,6 +59,11 @@ public class TaskList implements Iterable<Task> {
     public void remove(int index) {
         this.taskList.remove(index);
     }
+
+    public boolean isEmpty() {
+        return this.taskList.isEmpty();
+    }
+
 
     @Override
     public Iterator<Task> iterator() {

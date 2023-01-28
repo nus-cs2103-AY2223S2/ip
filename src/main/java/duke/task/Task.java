@@ -2,7 +2,7 @@ package duke.task;
 
 public abstract class Task {
     private boolean isCompleted; //by default the task should not be completed
-    private String task;
+    private final String task;
 
     public Task(String task, boolean isCompleted) {
         this.task = task;
@@ -29,6 +29,7 @@ public abstract class Task {
      * @return String representation of the task description
      */
     public abstract String getDescription();
+
 
     /**
      * Get the completion status of task
@@ -69,6 +70,10 @@ public abstract class Task {
      */
     public String encode() {
         return getTaskType() + " | " + getStatus() + " | " + getDescription();
+    }
+
+    public boolean containsKeyword(String keyword) {
+        return this.task.contains(keyword);
     }
 
     /**

@@ -1,12 +1,13 @@
 package duke.command;
+
 import duke.exception.*;
 
 public abstract class Command {
-    
+
     /*
      * Method called to handle the various command types
      * @ throws DukeException
-     * 
+     *
      */
     public abstract boolean execute() throws DukeException;
 
@@ -28,9 +29,15 @@ public abstract class Command {
 
             int startIndex = command.indexOf(startWord) + startWord.length();
             int endIndex = command.indexOf(endWord);
-            if (startIndex < startWord.length()) throw new DukeException("☹ OOPS!!! Missing Task Name.");
-            if (endIndex == -1 ) throw new DukeException("☹ OOPS!!! Missing" + endWord + " keyword.");
-            if (endIndex < startIndex) throw new DukeException("☹ OOPS!!! Missing Task Name.");
+            if (startIndex < startWord.length()) {
+                throw new DukeException("☹ OOPS!!! Missing Task Name.");
+            }
+            if (endIndex == -1) {
+                throw new DukeException("☹ OOPS!!! Missing" + endWord + " keyword.");
+            }
+            if (endIndex < startIndex) {
+                throw new DukeException("☹ OOPS!!! Missing Task Name.");
+            }
             return command.substring(startIndex, endIndex);
         }
     }
@@ -44,9 +51,15 @@ public abstract class Command {
         String endWord = " /to";
         int startIndex = command.indexOf(startWord) + startWord.length() + 1;
         int endIndex = command.indexOf(endWord);
-        if (startIndex > command.length()) throw new DukeException("☹ OOPS!!! Missing Start Date.");
-        if (endIndex == -1) throw new DukeException("☹ OOPS!!! Missing" + endWord + " keyword.");
-        if (endIndex < startIndex) throw new DukeException("☹ OOPS!!! Missing Start Date.");
+        if (startIndex > command.length()) {
+            throw new DukeException("☹ OOPS!!! Missing Start Date.");
+        }
+        if (endIndex == -1) {
+            throw new DukeException("☹ OOPS!!! Missing" + endWord + " keyword.");
+        }
+        if (endIndex < startIndex) {
+            throw new DukeException("☹ OOPS!!! Missing Start Date.");
+        }
         return command.substring(startIndex, endIndex);
     }
 
@@ -57,7 +70,17 @@ public abstract class Command {
     public static String getEndDate(String type, String command) throws DukeException {
         String keyword = type.equals("deadline") ? "/by" : "/to";
         int startIndex = command.indexOf(keyword) + keyword.length() + 1;
-        if (startIndex > command.length()) throw new DukeException("☹ OOPS!!! Missing End Date.");
+        if (startIndex > command.length()) {
+            throw new DukeException("☹ OOPS!!! Missing End Date.");
+        }
         return command.substring(startIndex);
+    }
+
+    public static String getKeyword(String command) throws DukeException {
+        String[] words = command.split(" ");
+        if (words.length <= 1) {
+            throw new DukeException("☹ OOPS!!! Missing Keyword.");
+        }
+        return command.substring(words[0].length() + 1);
     }
 }

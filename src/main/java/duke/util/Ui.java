@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Ui {
-    private static String line = "    ----------------------------------------";
-    private static String logo =  "____    ____  __    __   __    __  \n"
+    private static final String line = "    ----------------------------------------";
+    private static final String logo = "____    ____  __    __   __    __  \n"
             + "\\   \\  /   / |  |  |  | |  |  |  |\n"
             + " \\   \\/   /  |  |  |  | |  |  |  | \n"
             + "  \\_    _/   |  |  |  | |  |  |  | \n"
@@ -20,6 +20,7 @@ public class Ui {
     public Ui() {
         br = new BufferedReader(new InputStreamReader(System.in));
     }
+
     public void printWelcome() {
         System.out.println("           Hello! I am\n" + logo);
         System.out.println("    What can I do for you?");
@@ -71,7 +72,21 @@ public class Ui {
 
         for (int i = 0; i < taskList.size(); i++) {
             Task toDo = taskList.get(i);
-            System.out.println("    " + (i+1) + "." + toDo);
+            System.out.println("    " + (i + 1) + "." + toDo);
+        }
+    }
+
+    public void printNoTaskWithKeywordFound(String keyword) {
+        System.out.printf("    Sorry. No tasks were found to contain '%s' keyword.", keyword);
+        System.out.println();
+    }
+
+    public void printFoundList(TaskList taskList) {
+        System.out.println("    Here are the matching tasks in your list: ");
+
+        for (int i = 0; i < taskList.size(); i++) {
+            Task toDo = taskList.get(i);
+            System.out.println("    " + (i + 1) + "." + toDo);
         }
     }
 
@@ -89,6 +104,7 @@ public class Ui {
         System.out.println("    Noted. I've removed this task:");
         System.out.println("      " + task);
     }
+
     public void printAddedTask(Task task, TaskList taskList) {
         System.out.println("    Got it. I've added this task:");
         System.out.println("      " + task);
