@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
@@ -7,8 +8,8 @@ public class Event extends Task {
 
     public Event(String s, String startTime, String endTime) {
         super(s);
-        this.startTime = LocalDate.parse(startTime);
-        this.endTime = LocalDate.parse(endTime);
+        this.startTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.endTime = LocalDate.parse(endTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public Event(Boolean isTaskDone, String taskDetails, String taskDate) {

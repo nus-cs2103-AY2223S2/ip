@@ -257,7 +257,7 @@ public class Duke {
             return;
         }
 
-        Task newTask = new ToDo(userInput);
+        Task newTask = new ToDo(userInput.trim());
         storedInputs.add(newTask);
         printConfirmationMessage(newTask);
         printTotalTasks();
@@ -271,17 +271,42 @@ public class Duke {
             return;
         }
 
-        String[] info = userInput.split("/by");
-
         Task newTask;
         try {
-            newTask = new Deadline(info[0], info[1].trim());
+            String[] info = userInput.split("/by");
+            newTask = new Deadline(info[0].trim(), info[1].trim());
             storedInputs.add(newTask);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("EXCUSE ME!!!, please follow the format\ndeadline /by dd/mm/yyyy");
             return;
         }
         catch (DateTimeParseException e) {
+            System.out.println("EXCUSE ME!!!, please use the correct date format\n dd/mm/yyyy");
+            return;
+        }
+
+        printConfirmationMessage(newTask);
+        printTotalTasks();
+    }
+
+    private static void eventEvent(String userInput) {
+        try {
+            userInput = removeKeyword(userInput);
+        } catch (DukeException e) {
+            System.out.println("EXCUSE ME!!!, 'event' " + e.getMessage());
+            return;
+        }
+
+        Task newTask;
+        try {
+            String[] infoA = userInput.split("/from");
+            String[] infoB = infoA[1].split("/to");
+            newTask = new Event(infoA[0].trim(), infoB[0].trim(), infoB[1].trim());
+            storedInputs.add(newTask);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("EXCUSE ME!!!, please follow the format\nevent /from dd/mm/yyyy /to dd/mm/yyyy");
+            return;
+        } catch (DateTimeParseException e) {
             System.out.println("EXCUSE ME!!!, please use the correct date format\n dd/mm/yyyy");
             return;
         }
@@ -310,19 +335,7 @@ public class Duke {
 
 
 
-    private static void eventEvent(String userInput) {
-        try {
-            String[] s = removeFirstWord(userInput.split("/"));
-            Task temp = new Event(s[0], s[1], s[2]);
-            storedInputs.add(temp);
-            printConfirmation();
-            System.out.println("  " + temp);
-            printTotalTasks();
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-    }
+
 
     private static String printList() {
         StringBuilder s = new StringBuilder();
