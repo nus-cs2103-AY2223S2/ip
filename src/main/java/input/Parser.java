@@ -1,6 +1,6 @@
 package input;
 
-import exception.DukeException;
+import output.DukeException;
 
 public class Parser {
     
