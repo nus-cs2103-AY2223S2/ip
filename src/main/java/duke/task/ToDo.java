@@ -1,6 +1,16 @@
 package duke.task;
 
+/**
+ * Represents ToDo task.
+ *
+ * @author Lian Kok Hai
+ */
 public class ToDo extends Task {
+    /**
+     * Constructs ToDo object.
+     *
+     * @param taskName Name of todo task.
+     */
     public ToDo(String taskName) {
         super(taskName);
         this.type = "T";

@@ -88,9 +88,32 @@ public class Ui {
         print(addTaskMessage);
     }
 
+    /**
+     * Prints delete task message.
+     * @param task Task to be deleted.
+     * @param taskCount Number of tasks after task is deleted.
+     */
     public void printDeleteTaskMessage(Task task, int taskCount) {
         String deleteTaskMessage = "Noted. I've removed this task:\n     " + task + "\nNow you have " + taskCount + " tasks in the list";
         print(deleteTaskMessage);
+    }
+
+    /**
+     * Prints mark task message.
+     *
+     * @param task Task to be marked as done.
+     */
+    public void printMarkTaskMessage(Task task) {
+        print("Nice! I've marked this task as done: \n" + task);
+    }
+
+    /**
+     * Prints unmark task message.
+     *
+     * @param task Task to be marked as undone.
+     */
+    public void printUnmarkTaskMessage(Task task) {
+        print("OK, I've marked this task as not done yet: \n" + task);
     }
 
 }
