@@ -81,6 +81,18 @@ public class TaskManager {
     }
 
 
+    public TaskManager filterTasks(String keyword) {
+        TaskManager taskView = new TaskManager();
+        for (Task task: this.taskList) {
+            String details = task.getDetails();
+            if (details.contains(keyword)) {
+                taskView.addTask(task);
+            }
+        }
+        return taskView;
+    }
+
+
 
 
 

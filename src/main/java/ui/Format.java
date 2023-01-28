@@ -56,4 +56,31 @@ public class Format {
     }
 
 
+    /**
+     * Prints out the tasks matching a user's keywords as part of "find" feature
+     *
+     * Calls the toString() method of each task type and formats the lists of tasks
+     * by printing to the console line by line
+     *
+     * @param taskManager instance of a taskManager
+     */
+    public static String displayFilteredTasks(TaskManager taskManager) {
+        StringBuilder response = new StringBuilder();
+        ArrayList<Task> taskList = taskManager.getTasks();
+
+        if (taskList.size() == 0) {
+            return Response.NO_MATCHING_TASKS.toString();
+        }
+
+        String message = "I found " + taskList.size() + " matching tasks in your list UwU!\n";
+
+        response.append(message);
+
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            String lineItem = (i + 1) + ". " + task.toString() + "\n";
+            response.append(lineItem);
+        }
+        return response.toString();
+    }
 }
