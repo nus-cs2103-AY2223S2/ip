@@ -7,20 +7,15 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private static boolean isExit = false;
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        //try {
-            tasks = new TaskList(storage.loadTasksFromTaskLog());
-        //} catch (duke.DukeException e) {
-        //    ui.showError(e);
-        //    tasks = new duke.TaskList();
-        //}
+        tasks = new TaskList(storage.loadTasksFromTaskLog());
     }
 
     public void run() {
         ui.greetUser();
-
         while (!isExit) {
             Scanner sc = new Scanner(System.in);
             String userInput = sc.nextLine();
