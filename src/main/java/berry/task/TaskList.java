@@ -42,7 +42,7 @@ public class TaskList {
         t.markAsNotDone();
     }
 
-    public boolean indexWithinRange(int index) {
+    public boolean isIndexWithinRange(int index) {
         if (index > 0 && index <= listOfTasks.size()) {
             return true;
         }

@@ -6,7 +6,6 @@ import berry.ui.Ui;
 import berry.storage.Storage;
 import berry.exception.BerryException;
 
-
 public class AddTaskCommand extends Command {
     private final Task task;
 
@@ -21,4 +20,5 @@ public class AddTaskCommand extends Command {
         storage.saveTasks(tasks);
     }
 }
+
 

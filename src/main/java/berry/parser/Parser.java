@@ -22,7 +22,7 @@ public class Parser {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
     }
 
-    public static Command parse(String input) throws BerryException {
+    public static Command parseCommand(String input) throws BerryException {
         String[] splitInput = input.split(" ");
         String[] listStr;
         CommandType commandType;

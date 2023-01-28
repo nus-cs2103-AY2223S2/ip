@@ -15,7 +15,7 @@ public class UnmarkCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BerryException {
-        if (tasks.indexWithinRange(taskIndex)) {
+        if (tasks.isIndexWithinRange(taskIndex)) {
             ui.showUnmark();
             tasks.markNotDone(taskIndex);
         } else {
