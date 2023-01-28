@@ -10,6 +10,8 @@ import berry.exception.IndexOutOfRangeException;
  * Marks the task as done as identified by its last displayed index from the task list.
  */
 public class MarkCommand extends Command {
+
+    /** The index of the task to be marked */
     private static int taskIndex;
 
     public MarkCommand(int taskIndex) {

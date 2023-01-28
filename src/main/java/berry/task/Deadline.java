@@ -10,6 +10,8 @@ import java.time.format.DateTimeParseException;
  * Represents a deadline task.
  */
 public class Deadline extends Task {
+
+    /** The date to do the task by */
     protected LocalDate by;
 
     public Deadline(String description, String by) throws IncorrectDateException {

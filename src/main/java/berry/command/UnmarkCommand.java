@@ -10,6 +10,8 @@ import berry.exception.IndexOutOfRangeException;
  * Unmarks the task as done as identified by its last displayed index from the task list.
  */
 public class UnmarkCommand extends Command {
+
+    /** The index of the task to be unmarked */
     private static int taskIndex;
 
     public UnmarkCommand(int taskIndex) {

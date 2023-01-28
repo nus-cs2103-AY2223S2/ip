@@ -10,6 +10,8 @@ import java.time.format.DateTimeParseException;
  * Represents an event task.
  */
 public class Event extends Task {
+
+    /** The date the task will range from and to */
     protected LocalDate from;
     protected LocalDate to;
 

@@ -6,8 +6,6 @@ import java.util.ArrayList;
  * Contains the task list.
  */
 public class TaskList {
-    private static String HOR_BAR = "✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦";
-
     private static ArrayList<Task> listOfTasks;
 
     public TaskList() {

@@ -4,6 +4,8 @@ package berry.task;
  * Represents a task class.
  */
 public abstract class Task {
+
+    /** Indicates if the task is done */
     protected boolean isDone;
     protected String description;
 

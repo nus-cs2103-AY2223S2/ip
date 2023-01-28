@@ -11,6 +11,8 @@ import berry.exception.BerryException;
  * Adds a task to the task list.
  */
 public class AddTaskCommand extends Command {
+
+    /** The task to be added */
     private final Task task;
 
     public AddTaskCommand(Task task) {

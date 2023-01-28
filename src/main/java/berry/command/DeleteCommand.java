@@ -10,6 +10,8 @@ import berry.exception.IndexOutOfRangeException;
  * Deletes a task identified by its last displayed index from the task list.
  */
 public class DeleteCommand extends Command {
+
+    /** The index of the task to be deleted */
     private static int taskIndex;
 
     public DeleteCommand(int taskIndex) {
