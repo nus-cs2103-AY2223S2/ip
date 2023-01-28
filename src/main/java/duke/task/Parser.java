@@ -66,6 +66,8 @@ public class Parser {
             case "list":
                 parsedCommand = new ListCommand();
                 break;
+            default:
+                System.out.println("No such command!");
         }
         return parsedCommand;
     }

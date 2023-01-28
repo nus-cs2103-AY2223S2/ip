@@ -11,11 +11,6 @@ public class ExitCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.exit();
         isExit();
-        try {
-            storage.store(tasks);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public boolean isExit(){

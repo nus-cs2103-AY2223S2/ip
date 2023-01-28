@@ -6,6 +6,7 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -39,10 +40,16 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         switch (taskType) {
             case "todo":
+                try {
                     Todo todo = new Todo(taskDesc);
                     tasks.addTask(todo);
                     ui.showAddTaskMsg(todo, String.valueOf(tasks.getLength()));
+                    storage.update(todo);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
                     break;
+                }
             case "deadline":
                 try {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
@@ -50,16 +57,25 @@ public class AddCommand extends Command {
                     Deadline deadline = new Deadline(taskDesc, dueDate);
                     tasks.addTask(deadline);
                     ui.showAddTaskMsg(deadline, String.valueOf(tasks.getLength()));
+                    storage.update(deadline);
                 } catch (DateTimeException e) {
                     System.out.println("ERROR!! Please key in valid date format: dd-MM-yyyy HHmm");
-                } finally {
+                } catch (IOException e) {
+                  e.printStackTrace();
+            }   finally {
                     break;
                 }
             case "event":
+                try {
                     Event event = new Event(taskDesc, from.substring(5), by.substring(3));
                     tasks.addTask(event);
                     ui.showAddTaskMsg(event, String.valueOf(tasks.getLength()));
+                    storage.update(event);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
                     break;
+                }
             default:
                 break;
         }

@@ -34,13 +34,14 @@ public class Storage {
             case "D":
                     String updatedStr = str.substring(8).replace("(", "").replace(")", "").trim();
                     String[] paraForDeadline = updatedStr.split("by: ", 2);
-
+                System.out.println(paraForDeadline[1]);
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm a");
                     LocalDateTime tempDueDate = LocalDateTime.parse(paraForDeadline[1], formatter);
 
                     DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
                     String finalDueDate = tempDueDate.format(newFormatter);
                 System.out.println(finalDueDate);
+
                 LocalDateTime dueDate = LocalDateTime.parse(finalDueDate, newFormatter);
                 task = new Deadline(paraForDeadline[0], dueDate);
                 break;
@@ -64,6 +65,7 @@ public class Storage {
     }
 
     public ArrayList<Task> load() throws DukeException {
+
         try {
             BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
             String line = bufReader.readLine();
@@ -72,6 +74,7 @@ public class Storage {
                 taskList.add(addTask);
                 System.out.println(addTask);
                 line = bufReader.readLine();
+                System.out.println(line);
             }
             bufReader.close();
         } catch (FileNotFoundException e) {
@@ -83,7 +86,7 @@ public class Storage {
         }
     }
 
-    public void store(TaskList tasks) throws IOException {
+    public void update(Task task) throws IOException {
         Path dataDir = Paths.get("ip/data");
         Path dataFile = Paths.get("ip/data/tasks.txt");
         // directory does not exists
@@ -97,15 +100,10 @@ public class Storage {
             }
         }
         writer = new FileWriter("ip/data/tasks.txt", true);
-        int length = tasks.getLength();
-        int i = 0;
         String finalTasks = "";
-        while (i < length) {
-            String taskInfo = tasks.getTask(i).toString().replace("[ ]", " | 0 |").replace("[X]", "| 1 |");
-            taskInfo = taskInfo.replace("[", "").replace("]", "");
-            finalTasks = finalTasks + taskInfo + "\n";
-            i++;
-        }
+        String taskInfo = task.toString().replace("[ ]", " | 0 |").replace("[X]", "| 1 |");
+        taskInfo = taskInfo.replace("[", "").replace("]", "");
+        finalTasks = finalTasks + taskInfo + "\n";
         writer.write(finalTasks);
         writer.close();
     }
