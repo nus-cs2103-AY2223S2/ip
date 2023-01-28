@@ -4,28 +4,31 @@ import java.util.ArrayList;
 // learned from https://www.youtube.com/watch?v=TkC3sZxW2wY
 
 public class Storage {
-    private String fileName = "taskList.txt";
+    private String filePath;
 
-    public void saveTasks(ArrayList<Task> tasks) {
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public void saveTasks(TaskList taskList) {
         try {
-            FileOutputStream fos = new FileOutputStream(this.fileName);
+            FileOutputStream fos = new FileOutputStream(this.filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            for (Task task : tasks) {
-                oos.writeObject(task);
+            for (int i = 0; i < taskList.size(); i++) {
+                oos.writeObject(taskList.get(i));
             }
-            System.out.println("saved");
             oos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<Task> loadTasks() throws IOException {
-        File file = new File("taskList.txt");
+    public ArrayList<Task> load() throws IOException {
+        File file = new File(this.filePath);
         ArrayList<Task> tasks = new ArrayList<>();
         if (file.exists()) {
             try {
-                FileInputStream fis = new FileInputStream(this.fileName);
+                FileInputStream fis = new FileInputStream(this.filePath);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 Object o;
                 while (true) {
@@ -45,7 +48,11 @@ public class Storage {
                 e.printStackTrace();
             }
         } else {
-            file.createNewFile();
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
         }
         return tasks;
     }
