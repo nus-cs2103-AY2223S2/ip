@@ -10,9 +10,8 @@ public class Event extends Task {
     private LocalDate to;
     public Event(String taskName, String from, String to) throws DukeException {
         super(taskName);
-            this.type ="E";
-
-            try {
+        this.type ="E";
+        try {
             LocalDate fromDate = LocalDate.parse(from);
             LocalDate toDate = LocalDate.parse(to);
             this.from = fromDate;

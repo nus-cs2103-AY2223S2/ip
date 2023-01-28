@@ -23,33 +23,11 @@ public class TaskList {
         return "Got it. I've added this task:\n     " + task + "\nNow you have " + this.taskCount + " tasks in the list";
     }
 
-    //==== OVERLOADED METHOD addTask =====
     public String addTask(Task task) {
         this.taskList.add(task);
         taskCount++;
         return addTaskMessage(task);
     }
-//
-//    public String addTask(String str) {
-//        duke.Task newTask = new ToDo(str);
-//        this.taskList.add(newTask);
-//        taskCount++;
-//        return addTaskMessage(newTask);
-//    }
-//    public String addTask(String task, String deadline) throws DukeException {
-//        duke.Task newTask = new Deadline(task, deadline);
-//        this.taskList.add(newTask);
-//        taskCount++;
-//        return addTaskMessage(newTask);
-//    }
-//
-//    public String addTask(String task, String from, String to) throws DukeException {
-//        duke.Task newTask = new Event(task, from, to);
-//        this.taskList.add(newTask);
-//        taskCount++;
-//        return addTaskMessage(newTask);
-//    }
-    //======================================
 
     private String deleteTaskMessage(Task task) {
         return "Noted. I've removed this task:\n     " + task + "\nNow you have " + this.taskCount + " tasks in the list";
