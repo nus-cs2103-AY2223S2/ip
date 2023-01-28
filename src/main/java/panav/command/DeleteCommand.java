@@ -15,6 +15,8 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
+
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int deleteIndex = readNumber(fullCommand, tasks.getLength());

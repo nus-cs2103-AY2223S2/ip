@@ -17,7 +17,7 @@ public class TaskList {
     }
 
     public void printAllTasks() {
-        for (Task task : tasks) {
+        for (Task task : this.tasks) {
             System.out.println(task);
         }
     }
@@ -50,5 +50,19 @@ public class TaskList {
 
     public Task getTask(int index) {
         return tasks.get(index);
+    }
+
+    /**
+     * Method to print all tasks in the list which contain a particular word.
+     * @param keyWord the word to be searched.
+     */
+    public void printTasksContainingKeyword(String keyWord) {
+        int counter = 0;
+        for (Task task : this.tasks) {
+            if (task.toString().matches("(.*)" + keyWord + "(.*)")) {
+                counter++;
+                System.out.println(counter + "." + task);
+            }
+        }
     }
 }

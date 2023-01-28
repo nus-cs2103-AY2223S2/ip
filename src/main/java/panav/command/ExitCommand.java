@@ -7,6 +7,8 @@ import panav.ui.Ui;
 public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
+
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showLine();
         System.out.println("Bye. Hope to see you again soon!");

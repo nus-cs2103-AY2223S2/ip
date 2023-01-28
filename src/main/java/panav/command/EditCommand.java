@@ -16,6 +16,7 @@ public class EditCommand extends Command {
     }
     public final String COMMAND_WORD = this.isMark ? "mark" : "unmark";
 
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showLine();
         try {
