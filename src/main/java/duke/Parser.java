@@ -10,10 +10,20 @@ public class Parser {
     protected String answer;
     protected String description;
 
+    /**
+     * Constructor for Parser object.
+     * @param answer Command user inputs.
+     */
     public Parser(String answer) {
         this.answer = answer;
     }
 
+    /**
+     * Returns the index of the task which the user wants to mark.
+     * @param tasksLength Length of task list.
+     * @return Integer of index of task.
+     * @throws DukeException If no index is given or index is out of bounds.
+     */
     public Integer getMarkIndex(int tasksLength) throws DukeException {
         if (answer.substring(5, answer.length()).isEmpty()) {
             throw new DukeInvalidArgumentException("Mark cannot be empty");
@@ -25,6 +35,12 @@ public class Parser {
         return index;
     }
 
+    /**
+     * Returns the index of the task which the user wants to unmark.
+     * @param tasksLength Length of task list.
+     * @return Integer of index of task.
+     * @throws DukeException If no index is given or index is out of bounds.
+     */
     public Integer getUnmarkIndex(int tasksLength) throws DukeException {
         if (answer.substring(7, answer.length()).isEmpty()) {
             throw new DukeInvalidArgumentException("Unmark cannot be empty");
@@ -36,6 +52,12 @@ public class Parser {
         return index;
     }
 
+    /**
+     * Returns the index of the task which the user wants to delete.
+     * @param tasksLength Length of task list.
+     * @return Integer of index of task.
+     * @throws DukeException If no index is given or index is out of bounds.
+     */
     public Integer getDeleteIndex(int tasksLength) throws DukeException {
         if (answer.substring(7, answer.length()).isEmpty()) {
             throw new DukeInvalidArgumentException("Delete cannot be empty");
@@ -48,6 +70,11 @@ public class Parser {
     }
 
 
+    /**
+     * Returns the description of todo task the user inputs.
+     * @return Description of task.
+     * @throws DukeInvalidArgumentException If description input by user is empty.
+     */
     public String getTodoDescription() throws DukeInvalidArgumentException {
         if (answer.substring(5, answer.length()).isEmpty()) {
             throw new DukeInvalidArgumentException("Todo cannot be empty");
@@ -55,6 +82,11 @@ public class Parser {
         return answer.substring(5, answer.length());
     }
 
+    /**
+     * Returns the description of deadline task the user inputs.
+     * @return Description of task.
+     * @throws DukeInvalidArgumentException If description input by user is empty.
+     */
     public String getDeadlineDescription() throws DukeInvalidArgumentException {
         if (answer.substring(9, answer.length()).isEmpty()) {
             throw new DukeInvalidArgumentException("Deadline cannot be empty");
@@ -62,6 +94,11 @@ public class Parser {
         return answer.substring(9, answer.length());
     }
 
+    /**
+     * Returns the due date of deadline task the user inputs.
+     * @return Due date of task.
+     * @throws DukeInvalidArgumentException If description input by user is empty.
+     */
     public LocalDateTime getDeadlineBy(String byString) throws DukeInvalidArgumentException{
         if (byString.isEmpty()) {
             throw new DukeInvalidArgumentException("By is empty, please input task again");
@@ -77,6 +114,11 @@ public class Parser {
     }
 
 
+    /**
+     * Returns the description of event task the user inputs.
+     * @return Description of task.
+     * @throws DukeInvalidArgumentException If description input by user is empty.
+     */
     public String getEventDescription() throws DukeInvalidArgumentException {
         if (answer.substring(6, answer.length()).isEmpty()) {
             throw new DukeInvalidArgumentException("Event cannot be empty");
@@ -85,6 +127,11 @@ public class Parser {
     }
 
 
+    /**
+     * Returns the start date of event task the user inputs.
+     * @return Start date of task.
+     * @throws DukeInvalidArgumentException If description input by user is empty.
+     */
     public LocalDateTime getEventFrom(String fromString) throws DukeInvalidArgumentException {
         if (fromString.isEmpty()) {
             throw new DukeInvalidArgumentException("From is empty, please input task again");
@@ -100,6 +147,11 @@ public class Parser {
         return from;
     }
 
+    /**
+     * Returns the end date of event task the user inputs.
+     * @return End date of task.
+     * @throws DukeInvalidArgumentException If description input by user is empty.
+     */
     public LocalDateTime getEventTo(String toString) throws DukeInvalidArgumentException {
         if (toString.isEmpty()) {
             throw new DukeInvalidArgumentException("To is empty, please input task again");

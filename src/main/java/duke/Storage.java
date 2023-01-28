@@ -17,6 +17,12 @@ import static java.nio.file.Files.createFile;
 public class Storage {
     protected String filePath;
     protected String dirPath;
+
+    /**
+     * Constructor for Storage object.
+     * @param filePath Filepath of where txt file is write into.
+     * @param dirPath Directory path of where txt file is put into.
+     */
     public Storage(String filePath, String dirPath) {
         this.filePath = filePath;
         this.dirPath = dirPath;
@@ -34,12 +40,22 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates file if it doesn't exist.
+     * @param filePath Path where file is made.
+     * @throws IOException If file cannot be accessed.
+     */
     private static void createFile(String filePath) throws IOException {
         File file = new File(filePath);
 
         file.createNewFile();
     }
 
+    /**
+     * Loads tasks into an ArrayList from the filepath.
+     * @return ArrayList where tasks are loaded into.
+     * @throws FileNotFoundException If the filepath doesn't exist.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
@@ -67,6 +83,11 @@ public class Storage {
         return arrayList;
     }
 
+    /**
+     * Stores tasks into filepath from the task list.
+     * @param tasks Task list to be written from.
+     * @throws IOException If file cannot be accessed.
+     */
     public void store(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
 

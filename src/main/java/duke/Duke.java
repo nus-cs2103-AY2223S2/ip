@@ -10,6 +10,12 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Constructor for Duke object.
+     * @param filePath Filepath of where txt file is write into.
+     * @param dirPath Directory path of where txt file is put into.
+     */
     public Duke(String filePath, String dirPath) {
         ui = new Ui();
         storage = new Storage("src/main/data/duke.txt", "src/main/data");
@@ -19,6 +25,7 @@ public class Duke {
             throw new RuntimeException(e);
         } // change to DukeException bruh
     }
+
 
     public void run() {
         ui.greet();

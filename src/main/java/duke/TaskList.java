@@ -11,28 +11,53 @@ import java.util.ArrayList;
 public class TaskList {
 
     protected ArrayList<Task> arrayList;
+
+    /**
+     * Constructor for TaskList.
+     * @param arrayList ArrayList to be wrapped around TaskList.
+     */
     public TaskList(ArrayList<Task> arrayList) {
         this.arrayList = arrayList;
     }
 
+    /**
+     * Marks the task and returns it.
+     * @param index Index of task in the list.
+     * @return Marked task.
+     */
     public Task mark(Integer index)  {
 
         arrayList.get(index - 1).markAsDone();
         return arrayList.get(index - 1);
     }
 
+    /**
+     * Unmarks the task and returns it.
+     * @param index Index of task in the list.
+     * @return Unmarked task.
+     */
     public Task unmark(Integer index) {
 
         arrayList.get(index - 1).markAsUndone();
         return arrayList.get(index - 1 );
     }
 
+    /**
+     * Deletes task from the list and returns it.
+     * @param index Index of task in the list.
+     * @return Deleted Task.
+     */
     public Task delete(Integer index) {
         Task t = arrayList.get(index - 1 );
         arrayList.remove(index - 1);
         return t;
     }
 
+    /**
+     * Adds a Todo task in the list and returns it.
+     * @param description Description of todo task.
+     * @return Added task.
+     */
     public Task addTodo(String description) {
 
         Task t = new Todo(description);
@@ -40,6 +65,12 @@ public class TaskList {
         return t;
     }
 
+    /**
+     * Adds a Deadline task in the list and returns it.
+     * @param description Description of deadline task.
+     * @param by Date when deadline is due.
+     * @return Added task.
+     */
     public Task addDeadline(String description, LocalDateTime by) {
 
         Task t = new Deadline(description, by);
@@ -47,6 +78,13 @@ public class TaskList {
         return t;
     }
 
+    /**
+     * Adds a Event task in the list and returns it.
+     * @param description Description of event task.
+     * @param from Date when event starts.
+     * @param to Date when event ends.
+     * @return Added task.
+     */
     public Task addEvent(String description, LocalDateTime from, LocalDateTime to) {
 
         Task t = new Event(description, from, to);
@@ -54,19 +92,36 @@ public class TaskList {
         return t;
     }
 
+    /**
+     * Lists out the task list in order when they are added in.
+     */
     public void list() {
         for (int i = 1; i < arrayList.size() + 1; i++) {
             System.out.println(i + ". " + arrayList.get(i - 1));
         }
     }
 
+    /**
+     * Returns the length of the list.
+     * @return Length of list.
+     */
     public Integer getLength() {
         return arrayList.size();
     }
 
+    /**
+     * Returns a task.
+     * @param i Index of task.
+     * @return Task.
+     */
     public Task get(Integer i) {
         return arrayList.get(i);
     }
+
+    /**
+     * Returns a string of the tasks in order of when they are added.
+     * @return String of the task list.
+     */
     public String toString() {
         String str = "";
         for (int i = 1; i < arrayList.size() + 1; i++) {
