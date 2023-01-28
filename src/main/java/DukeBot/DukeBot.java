@@ -6,9 +6,12 @@ import DukeBot.Exception.BlankFieldExceptions.BlankFieldTodoException;
 import DukeBot.Exception.IncludeExceptions.IncludeByException;
 import DukeBot.Exception.IncludeExceptions.IncludeException;
 import DukeBot.Exception.IncludeExceptions.IncludeToAndFromException;
+import DukeBot.Exception.InvalidDateException;
 import DukeBot.Exception.TaskNumberNotFoundException;
 import DukeBot.Exception.UnknownCommandError;
 
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -39,13 +42,14 @@ public class DukeBot {
             String line = this.scanner.nextLine();
             try {
                 System.out.println(this.text(line));
-            } catch (BlankFieldException | UnknownCommandError | TaskNumberNotFoundException | IncludeException e) {
+            } catch (BlankFieldException | UnknownCommandError | TaskNumberNotFoundException | IncludeException |
+                    InvalidDateException e){
                 System.out.println(e.getLocalizedMessage());
             }
         }
     }
 
-    public String text(String line) throws BlankFieldException, UnknownCommandError, TaskNumberNotFoundException, IncludeException {
+    public String text(String line) throws BlankFieldException, UnknownCommandError, TaskNumberNotFoundException, IncludeException, InvalidDateException {
 
 
         if (Objects.equals(line, "list")) {
@@ -178,7 +182,7 @@ public class DukeBot {
                 this.frame;
     }
 
-    public String addDeadline(String parameters) throws IncludeByException, BlankFieldDeadlineException {
+    public String addDeadline(String parameters) throws IncludeByException, BlankFieldDeadlineException, InvalidDateException {
 
 
         // Extract deadline date and task item.
@@ -203,17 +207,21 @@ public class DukeBot {
             throw new BlankFieldDeadlineException();
         }
 
-        Deadline newDeadline = new Deadline(task.toString(), deadline.toString());
-        this.list.add(newDeadline);
-        this.lengthOfList += 1;
-        return this.frame + "\n" +
-                "     Got it. I've added this task:" + "\n" +
-                "     " + newDeadline.status() + "\n" +
-                "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
-                this.frame;
+        try {
+            Deadline newDeadline = new Deadline(task.toString(), deadline.toString().stripLeading());
+            this.list.add(newDeadline);
+            this.lengthOfList += 1;
+            return this.frame + "\n" +
+                    "     Got it. I've added this task:" + "\n" +
+                    "     " + newDeadline.status() + "\n" +
+                    "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
+                    this.frame;
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
     }
 
-    public String addEvent(String parameters) throws IncludeToAndFromException, BlankFieldEventException {
+    public String addEvent(String parameters) throws IncludeToAndFromException, BlankFieldEventException, InvalidDateException {
 
         // Extract event's start date and end date
         String[] lines = parameters.split(" ");
@@ -253,15 +261,18 @@ public class DukeBot {
             throw new BlankFieldEventException();
         }
 
-        Event newEvent = new Event(task.toString(), startDate.toString(), endDate.toString());
-
-        this.list.add(newEvent);
-        this.lengthOfList += 1;
-        return this.frame + "\n" +
-                "     Got it. I've added this task:" + "\n" +
-                "     " + newEvent.status() + "\n" +
-                "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
-                this.frame;
+        try {
+            Event newEvent = new Event(task.toString(), startDate.toString(), endDate.toString());
+            this.list.add(newEvent);
+            this.lengthOfList += 1;
+            return this.frame + "\n" +
+                    "     Got it. I've added this task:" + "\n" +
+                    "     " + newEvent.status() + "\n" +
+                    "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
+                    this.frame;
+        } catch (DateTimeException e) {
+            throw new InvalidDateException();
+        }
     }
 
 
