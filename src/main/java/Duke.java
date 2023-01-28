@@ -2,142 +2,135 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 public class Duke {
+    private Ui ui;
+
+    private Storage storage;
+    private TaskList list;
+
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        TaskList temp;
+        try {
+            temp = this.storage.loadFile();
+        } catch (DukeException e) {
+            this.ui.display(e.getMessage());
+            temp = new TaskList();
+        }
+        this.list = temp;
+
+    }
     public static void main(String[] args) {
-        String echo = "";
-        Scanner sc = new Scanner(System.in);
-        String logo = "\n____________________________________________________________\n";
+        String txtDir = System.getProperty("user.dir") + "/data/tasks.txt";
 
+        Duke instance = new Duke(txtDir);
+        instance.run();
+    }
+    public void run() {
 
-        say("Hello! I'm GPT0.01!\nWhat can I do for you?", logo);
+        this.ui.showLogo();
+        this.ui.showWelcome();
+        Parser parser = new Parser();
 
-        String txtDir = System.getProperty("user.dir") + "/data.txt";
-        File file = new File("data.txt");
-        ArrayList<Task> storer;
-
+        /*
+        String[] readLine = parser.readLine();
+        ArrayList<String> kw = new ArrayList<>();
+        kw.add("from");
+        kw.add("to");
 
         try {
-            storer = FileReadWriter.loadFile(txtDir);
-        } catch (FileNotFoundException err) {
-            storer = new ArrayList<>();
+            ArrayList<String> queries = parser.queries(readLine, kw);
+            System.out.println(queries);
+        } catch (DukeException dk) {
+            System.out.println(dk.getMessage());
         }
+        */
+
+        String command = "";
+        Scanner sc = new Scanner(System.in);
 
 
-
-        while (!echo.equals("bye")) {
+        while (!command.equals("bye")) {
             try {
-                echo = sc.nextLine();
-                String[] commands = echo.split(" ");
-                if (echo.equals("list")) {
+                String[] line = parser.readLine();
+                command = parser.readCommand(line);
+                if (command.equals("list")) {
+                    String items = list.getTaskStrings();
+                    ui.display(items);
 
-                    String concat = "";
-                    for (int i = 1; i <= storer.size(); i++) {
-                        int j = i - 1;
-                        concat = concat + "\n" + i + ". " + storer.get(j);
-
-                    }
-
-                    if (concat == "") {
-                        throw new StorerEmptyException();
-                    } else {
-                        say(concat, logo);
-                    }
-
-
-                } else if (commands[0].equals("mark")) {
-                    int num = Integer.valueOf(commands[1]);
-                    storer.get(num - 1).mark();
-                    say(String.format(
-                            "Nice! I've marked this task as done:\n %s", storer.get(num - 1)), logo);
-
+                } else if (command.equals("mark")) {
+                    int num = parser.singleQueryInteger(line);
+                    list.markTask(num);
+                    ui.display(String.format(
+                            "Nice! I've marked this task as done:\n %s", list.get(num)));
                 } else {
                     Task taskNew;
-
-                    if (commands[0].equals("todo")) {
-
-                        if (commands.length == 1) {
+                    if (command.equals("todo")) {
+                        if (line.length == 1) {
                             throw new NoArgsException("todo");
                         } else {
-                            String description = echo.substring(5);
-                            addTask(new Todos(description), storer, logo);
+                            String description = parser.queries(line, List.<String>of()).get(0);
+                            System.out.println(description);
+                            addTask(new Todos(description), list, ui);
                         }
-
-                    } else if (commands[0].equals("deadline")) {
-
-                        if (commands.length == 1) {
+                    } else if (command.equals("deadline")) {
+                        if (line.length == 1) {
                             throw new NoArgsException("deadline");
                         } else {
-                            String[] queries = echo.split(" /");
-                            if (queries.length < 2 || commands.length < 4 || queries[0].equals(commands[0])) {
-                                throw new IncompleteException();
-                            } else {
-                                String description = queries[0].substring(9);
-                                String deadline = queries[1].substring(3);
-                                addTask(new Deadlines(description, deadline), storer, logo);
-                            }
+                            addTask(
+                                    new Deadlines(parser.queries(line, List.<String>of("by"))), list, ui);
+
                         }
-                    } else if (commands[0].equals("event")) {
-                        if (commands.length == 1) {
+                    } else if (command.equals("event")) {
+                        if (line.length == 1) {
                             throw new NoArgsException("event");
                         } else {
-                            String[] queries = echo.split(" /");
-                            if (queries.length < 3 || commands.length < 5 ||
-                                    queries[0].equals(commands[0])) {
-                                throw new IncompleteException();
-                            } else {
-                                String description = queries[0].substring(6);
-                                String from = queries[1].substring(5);
-                                String to = queries[2].substring(3);
-                                addTask(new Events(description, from, to), storer, logo);
-                            }
+                            addTask(
+                                    new Events(
+                                            parser.queries(line, List.<String>of("from", "to"))), list, ui);
+
                         }
-
-                    } else if (commands[0].equals("delete")) {
-
-                        if (commands.length == 1) {
+                    } else if (command.equals("delete")) {
+                        if (line.length == 1) {
                             throw new NoArgsException("delete command");
-                        } else if (commands.length > 1 && !commands[1].matches("\\d")) {
+                        } else if (line.length > 1 && !line[1].matches("\\d")) {
                             throw new DukeException("☹☹☹☹☹☹ OOPS!!! Provide a number!");
-                        } else if (storer.size() == 0) {
+                        } else if (list.size() == 0) {
                             throw new StorerEmptyException();
                         } else {
-                            int index = Integer.valueOf(commands[1]);
-                            Task E = storer.remove(index - 1);
+                            int index = Integer.valueOf(line[1]);
+                            Task E = list.remove(index);
                             String speech = "Noted. I've removed this task:\n" +
-                                    E + "\n Now you have " + storer.size() + " tasks in the list.";
-                            say(speech, logo);
-
+                                    E + "\n Now you have " + list.size() + " tasks in the list.";
+                            ui.display(speech);
                         }
-                    } else if (echo.equals("bye")){
+                    } else if (command.equals("bye")) {
                         break;
-
                     } else {
                         throw new EmptyException();
-
                     }
 
-                    FileReadWriter.dumpFile(txtDir, storer);
+                    this.storage.dumpFile(list);
                 }
             } catch (Exception err) {
-                say(err.getMessage(), logo);
+                ui.display(err.getMessage());
             }
 
-
         }
-        say("Bye. Hope to see you again soon!", logo);
+        ui.display("Bye. Hope to see you again soon!");
     }
 
-    static void addTask(Task taskNew, ArrayList<Task> storer, String logo) {
-        storer.add(taskNew);
-        say("Got it. I've added this task:\n" + taskNew +
-                String.format("\nNow you have %s tasks in the list.", storer.size()), logo);
-
+    static void addTask(Task taskNew, TaskList list, Ui ui) {
+        list.add(taskNew);
+        ui.display("Got it. I've added this task:\n" + taskNew +
+                String.format("\nNow you have %s tasks in the list.", list.size()));
 
     }
 
-    static void say(String str, String logo) {
-        System.out.println(logo + str + logo);
-    }
+
 
 
 }

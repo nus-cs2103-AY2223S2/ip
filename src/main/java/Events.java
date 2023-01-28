@@ -1,10 +1,15 @@
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
+
 public class Events extends Task {
     protected LocalDateTime start;
+    private static final List<String> keywords = List.<String>of("from", "to");
 
     protected LocalDateTime end;
+
     public Events(String description, String start, String end) {
 
         this(false, description, start, end);
@@ -12,9 +17,12 @@ public class Events extends Task {
 
     public Events(boolean isDone, String description, String start, String end) {
         super(isDone, description);
-        this.start = LocalDateTime.parse(start.substring(5), FORMATTER);
-        this.end = LocalDateTime.parse(end.substring(3), FORMATTER);
 
+        this.start = LocalDateTime.parse(start, FORMATTER);
+        this.end = LocalDateTime.parse(end, FORMATTER);
+    }
+    public Events(List<String> queries) {
+        this(queries.get(0), queries.get(1), queries.get(2));
     }
     @Override
     public String toString() {
@@ -29,6 +37,10 @@ public class Events extends Task {
         String divider = " | ";
         String isMarked = this.isDone ? "1" : "0";
         return "E" + divider + isMarked + divider + this.description + divider +
-                this.start + divider + this.end;
+                this.start.format(FORMATTER) + divider + this.end.format(FORMATTER);
+    }
+
+    public List<String> getKeywords() {
+        return this.keywords;
     }
 }

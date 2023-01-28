@@ -1,4 +1,5 @@
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 abstract class Task {
     protected String description;
@@ -42,6 +43,8 @@ abstract class Task {
      * Formats the task into a form where it will be dumped into data.txt.
      */
     abstract String formatText();
+
+    abstract List<String> getKeywords();
 
 
 }
