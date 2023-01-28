@@ -3,6 +3,9 @@ package duke.tasks;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * A specific kind of task with a time-window.
+ */
 public class Events extends Task {
     protected LocalDateTime start;
     private static final List<String> keywords = List.<String>of("from", "to");

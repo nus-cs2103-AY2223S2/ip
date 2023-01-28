@@ -7,6 +7,10 @@ import duke.storage.TaskList;
 
 import java.io.IOException;
 
+/**
+ * A command for the command "mark".
+ * Serves to mark and unmark tasks as done.
+ */
 public class MarkCommand extends Command {
     private final int num;
     private final boolean isMarking;

@@ -8,6 +8,9 @@ import duke.storage.TaskList;
 
 import java.io.IOException;
 
+/**
+ * A command for adding a to-do to the task list.
+ */
 public class TodoCommand extends Command {
     private final Todos todo;
     public TodoCommand(Todos todo) {
