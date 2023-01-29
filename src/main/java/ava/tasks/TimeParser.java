@@ -1,6 +1,6 @@
-package ava.tasks;
+package Ava.Tasks;
 
-import ava.exceptions.DateTimeNotParsed;
+import Ava.Exceptions.DateTimeNotParsed;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
@@ -9,9 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
-/**
- * Parses Date and Time String
- */
 public class TimeParser {
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("E,dd'%s' MMMM,yyyy ha", Locale.ENGLISH);
     private static final DateTimeFormatter DATE_PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/y", Locale.ENGLISH);
@@ -21,11 +18,6 @@ public class TimeParser {
     private LocalDateTime ldt;
 
 
-    /**
-     * TimeParser Constructor
-     * @param input Date and Time String
-     * @throws DateTimeNotParsed indicate Date and Time formatted incorrectly
-     */
     public TimeParser(String input) throws DateTimeNotParsed {
         try {
             String[] DateTime = input.trim().split(" ");
@@ -37,21 +29,14 @@ public class TimeParser {
         }
     }
 
-    /**
-     * @return Formatted Date Time String
-     */
+    //This was adapted from https://stackoverflow.com/questions/4011075/how-do-you-format-the-day-of-the-month-to-say-11th-21st-or-23rd-ordinal
     @Override
     public String toString(){
-        //This was adapted from https://stackoverflow.com/questions/4011075/how-do-you-format-the-day-of-the-month-to-say-11th-21st-or-23rd-ordinal
         int day = ldt.getDayOfMonth();
         String daySuff = this.getDaySuffix(day);
         return String.format(DATE_TIME_PATTERN.format(ldt), daySuff);
     }
 
-    /**
-     * @param day
-     * @return suffix for days
-     */
     public String getDaySuffix(int day) {
             if (day  == 1 || day == 21 || day == 31) {
                 return "st";

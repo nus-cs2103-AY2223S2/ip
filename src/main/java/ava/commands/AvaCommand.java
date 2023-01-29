@@ -1,7 +1,7 @@
-package ava.commands;
-import ava.exceptions.AvaException;
-import ava.Storage;
-import ava.TaskList;
+package Ava.Commands;
+import Ava.Exceptions.AvaException;
+import Ava.Storage;
+import Ava.TaskList;
 
 public interface AvaCommand {
     /**

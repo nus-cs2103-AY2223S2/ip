@@ -1,4 +1,4 @@
-package ava.exceptions;
+package Ava.Exceptions;
 
 
 public abstract class AvaException extends Exception {

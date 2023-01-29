@@ -1,4 +1,4 @@
-package ava;
+package Ava;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

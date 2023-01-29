@@ -1,4 +1,7 @@
-package ava;
+package Ava;
+import Ava.Commands.AvaCommand;
+import Ava.Exceptions.AvaException;
+import java.util.Scanner;
 
 public class Ui {
     //ASCII Emoticons

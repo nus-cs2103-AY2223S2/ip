@@ -1,8 +1,8 @@
-package ava;
+package Ava;
 
 
-import ava.commands.AvaCommand;
-import ava.exceptions.AvaException;
+import Ava.Commands.AvaCommand;
+import Ava.Exceptions.AvaException;
 
 import java.util.Scanner;
 public class Ava {

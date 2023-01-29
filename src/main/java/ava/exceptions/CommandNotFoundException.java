@@ -1,4 +1,4 @@
-package ava.exceptions;
+package Ava.Exceptions;
 
 public class CommandNotFoundException extends AvaException {
     private final String ERROR_PROMPT = "Command Not Complete or Possible !!";

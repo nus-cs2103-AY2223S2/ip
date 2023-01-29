@@ -1,8 +1,8 @@
-package ava;
+package Ava;
 
-import ava.commands.*;
-import ava.exceptions.AvaException;
-import ava.exceptions.CommandNotFoundException;
+import Ava.Commands.*;
+import Ava.Exceptions.AvaException;
+import Ava.Exceptions.CommandNotFoundException;
 
 
 
@@ -15,32 +15,32 @@ public class Parser {
         try {
             String indentifier = inputArray[0];
             switch (indentifier) {
-            case "todo":
-                command = new AddTask(parseTodo(inputArray[1]), Ava.TASK_TYPE.TODO);
-                break;
-            case "deadline":
-                command = new AddTask(parseDeadline(inputArray[1]), Ava.TASK_TYPE.DEADLINE);
-                break;
-            case "event" :
-                command = new AddTask(parseEvent(inputArray[1]), Ava.TASK_TYPE.EVENT);
-                break;
-            case "mark":
-                command = new MarkTask(parseMarkUnmark(inputArray[1]));
-                break;
-            case "unmark":
-                command = new UnmarkTask(parseMarkUnmark(inputArray[1]));
-                break;
-            case "delete":
-                command = new DeleteTask(parseDelete(inputArray[1]));
-                break;
-            case "list" :
-                command = new ListTask();
-                break;
-            case "bye" :
-                command = new Exit();
-                break;
-            default:
-                throw new CommandNotFoundException(input);
+                case "todo":
+                    command = new AddTask(parseTodo(inputArray[1]), Ava.TASK_TYPE.TODO);
+                    break;
+                case "deadline":
+                    command = new AddTask(parseDeadline(inputArray[1]), Ava.TASK_TYPE.DEADLINE);
+                    break;
+                case "event" :
+                    command = new AddTask(parseEvent(inputArray[1]), Ava.TASK_TYPE.EVENT);
+                    break;
+                case "mark":
+                    command = new MarkTask(parseMarkUnmark(inputArray[1]));
+                    break;
+                case "unmark":
+                    command = new UnmarkTask(parseMarkUnmark(inputArray[1]));
+                    break;
+                case "delete":
+                    command = new DeleteTask(parseDelete(inputArray[1]));
+                    break;
+                case "list" :
+                    command = new ListTask();
+                    break;
+                case "bye" :
+                    command = new Exit();
+                    break;
+                default:
+                    throw new CommandNotFoundException(input);
             }
             return command;
         }catch (ArrayIndexOutOfBoundsException e){

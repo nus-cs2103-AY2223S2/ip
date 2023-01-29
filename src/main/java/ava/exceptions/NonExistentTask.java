@@ -1,4 +1,4 @@
-package ava.exceptions;
+package Ava.Exceptions;
 
 public class NonExistentTask extends AvaException {
     private final String ERROR_PROMPT = "Cannot be done, you have not made a task like that yet!!";

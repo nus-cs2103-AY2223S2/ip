@@ -1,4 +1,4 @@
-package ava.tasks;
+package Ava.Tasks;
 
 public class Task {
     protected String message;
@@ -7,7 +7,7 @@ public class Task {
 
     /**
      * Constructor for the Task
-     * @param m message string
+     * @param m
      */
     public Task(String m) {
         this.message = m;
@@ -32,14 +32,16 @@ public class Task {
     }
 
     /**
-     * @return Return the Storage Representation of the Task
+     * Return the Storage Representation of the Task
+     * @return
      */
     public String getStorageFormat() {
         return TASK_SIGN + "," + this.isMarked()+","+this.getMessage();
     }
 
     /**
-     * @return mark/unmark sign + message
+     *
+     * @return
      */
     public String getRepresentation(){
 
