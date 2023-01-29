@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Duke {
@@ -129,7 +131,7 @@ public class Duke {
                     /**
                      * creates and adds an event task to the arraylist of all tasks
                      */
-                        String[] parts1 = inputLine.split("/");
+                        String[] parts1 = inputLine.split(" /");
                         Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
 
                         tasks.add(event);
@@ -162,6 +164,7 @@ public class Duke {
                 printToFormat("    " + e.getMessage());
             }
             if (byeIndicator == 1) {
+                sc.close();
                 break;
             }
         }
@@ -255,6 +258,11 @@ class Task {
         return dateTime;
     }
 
+    protected static String reverseFormatDateTime(LocalDateTime input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        return input.format(formatter);
+    }
+
     protected static String TransformDateTime(LocalDateTime dateTime) {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy 'at' HH:mm");
         return dateTime.format(outputFormatter);
@@ -271,7 +279,7 @@ class Deadline extends Task {
      * @param status: a String indicating whether the task is done or not
      * @param deadline: a string indicating the deadline of the task
      */
-    Deadline (String name, int status, String deadline) {
+    Deadline (String name, int status, String dlString) {
         super(name, status);
         this.deadline = formatDateTime(dlString);
     }
@@ -287,11 +295,11 @@ class Deadline extends Task {
      * overrides the toString method
      */
     public String toString() {
-        return "[D]" + status + " " + name + "(" + TransformDateTime(deadline) + ")";
+        return "[D]" + status + " " + name + "(by " + TransformDateTime(deadline) + ")";
     }
     
     public String toStoreFormatString() {
-        return String.format("D/%s/%d/%s", super.name, this.getStatusNo(), deadline);
+        return String.format("D/%s/%d/%s", super.name, this.getStatusNo(), reverseFormatDateTime(deadline));
     }
 }
 
@@ -328,7 +336,7 @@ class Event extends Task {
     }
     
     public String toStoreFormatString() {
-        return String.format("E/%s/%d/%s/%s", super.name, this.getStatusNo(), from, to);
+        return String.format("E/%s/%d/%s/%s", super.name, this.getStatusNo(), reverseFormatDateTime(from), reverseFormatDateTime(to));
     }
 }
 

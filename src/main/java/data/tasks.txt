@@ -1,8 +1,8 @@
-D/Return books/0/Sunday
+D/Return books/0/06-09-2000 1800
 T/Borrow book/0
-E/project/0/from Mon 2pm /to 4pm
-D/do/0/by Sunday
-T/do homework/0
-E/have/0/from 20:00 /to 22:00
-E/have a meeting /0/from 20 /to 21
-D/do homework /0/by Sunday
+E/project/0/27-01-2023 0000/29-01-2023 2359
+D/reach diamond in league of legends /0/08-08-2023 2359
+T/reach diamond in league of legends/0
+E/reach diamond in league of legends/0/01-01-2023 0000/08-08-2023 2359
+D/testwrite /0/01-01-2023 0000
+E/reach diamond/0/01-01-2023 0000/08-08-2023 2359
