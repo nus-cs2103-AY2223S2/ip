@@ -1,8 +1,8 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 public class Ui {
     private static String logo = " ____        _        \n"
@@ -13,11 +13,11 @@ public class Ui {
     private final Scanner sc;
 
     public Ui() {
-       this.sc = new Scanner(System.in);
+        this.sc = new Scanner(System.in);
     }
 
     public void showWelcome() {
-        System.out.println("Hello from\n" + logo+ "Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello from\n" + logo + "Hello! I'm Duke\nWhat can I do for you?");
     }
 
     public String readCommand() {
@@ -33,11 +33,13 @@ public class Ui {
     }
 
     public void showDeleteMessage(Task task, String tasksLen) {
-        System.out.println("Noted. I've removed this task:\n  " + task + "\nNow you have " + tasksLen + " tasks in the list." );
+        System.out.println("Noted. I've removed this task:\n  "
+                + task + "\nNow you have " + tasksLen + " tasks in the list.");
 
     }
     public void showAddTaskMsg(Task task, String tasksLen) {
-        System.out.println("Got it. I've added this task:\n  " + task + "\nNow you have " + tasksLen + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n  "
+                + task + "\nNow you have " + tasksLen + " tasks in the list.");
     }
 
     public void exit() {

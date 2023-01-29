@@ -1,9 +1,23 @@
 package duke.task;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 
 public class Parser {
-    static String[] arr;
+    private static String[] arr;
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String DELETE = "delete";
+    private static final String EVENT = "event";
+    private static final String LIST = "list";
+    private static final String MARK = "mark";
+    private static final String UNMARK = "unmark";
+    private static final String BYE = "bye";
 
     public static String[] splitCommand(String command) {
         if (command.contains("/")) {
@@ -30,40 +44,40 @@ public class Parser {
         String commandType = arr[0];
 
         switch (commandType) {
-            case "bye":
-                parsedCommand = new ExitCommand();
+        case BYE:
+            parsedCommand = new ExitCommand();
+            break;
+        case DELETE:
+            int taskNum = Integer.parseInt(arr[1]);
+            parsedCommand = new DeleteCommand(taskNum);
+            break;
+        case TODO:
+            try {
+                parsedCommand = new AddCommand(arr[0], arr[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("task cannot be empty!");
+            } finally {
                 break;
-            case "delete":
-                int taskNum = Integer.parseInt(arr[1]);
-                parsedCommand = new DeleteCommand(taskNum);
-                break;
-            case "todo":
-                try {
-                    parsedCommand = new AddCommand(arr[0], arr[1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("task cannot be empty!");
-                } finally {
-                    break;
-                }
-            case "deadline":
-                parsedCommand = new AddCommand(arr[0], arr[1], arr[2]);
-                break;
-            case "event":
-                parsedCommand = new AddCommand(arr[0], arr[1], arr[2], arr[3]);
-                break;
-            case "unmark":
-                int taskNumber = Integer.parseInt(arr[1]);
-                parsedCommand = new UnmarkCommand(taskNumber);
-                break;
-            case "mark":
-                int getTaskNum = Integer.parseInt(arr[1]);
-                parsedCommand = new MarkCommand(getTaskNum);
-                break;
-            case "list":
-                parsedCommand = new ListCommand();
-                break;
-            default:
-                System.out.println("No such command!");
+            }
+        case DEADLINE:
+            parsedCommand = new AddCommand(arr[0], arr[1], arr[2]);
+            break;
+        case EVENT:
+            parsedCommand = new AddCommand(arr[0], arr[1], arr[2], arr[3]);
+            break;
+        case UNMARK:
+            int taskNumber = Integer.parseInt(arr[1]);
+            parsedCommand = new UnmarkCommand(taskNumber);
+            break;
+        case MARK:
+            int getTaskNum = Integer.parseInt(arr[1]);
+            parsedCommand = new MarkCommand(getTaskNum);
+            break;
+        case LIST:
+            parsedCommand = new ListCommand();
+            break;
+        default:
+            System.out.println("No such command!");
         }
         return parsedCommand;
     }
