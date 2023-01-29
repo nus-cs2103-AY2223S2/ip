@@ -50,7 +50,7 @@ public abstract class Command {
                 String date = cmd.substring(indexOfDate);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("☹ OOPS!!! The format of a deadline: " +
-                        "deadline {activity} /by {yyyy-mm-dd} {hhmm}.");
+                        "deadline {activity} /by {yyyy-mm-dd} {hhmm}");
             }
         } else if (cmdtype.equals("event")) {
             try {
@@ -63,7 +63,7 @@ public abstract class Command {
                 String to = cmd.substring(indexOfToTime);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("☹ OOPS!!! The format of a event: " +
-                        "event {activity} /from {datetime} /to {datetime}.");
+                        "event {activity} /from {datetime} /to {datetime}");
             }
         }
         return true;
