@@ -9,13 +9,11 @@ public class Ui {
     }
 
     public static void showLine() {
-        System.out.println("____________________________________________________________\n");
+        System.out.println("\n____________________________________________________________\n");
     }
 
     public static void showError(String errorMessage) {
-        showLine();
         System.out.println("☹ OOPS!!! " + errorMessage);
-        showLine();
     }
 
     public static String readCommand() {

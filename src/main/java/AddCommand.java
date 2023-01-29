@@ -35,7 +35,6 @@ public class AddCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showLine();
         switch (this.type) {
             case "E":
                 tasks.addEvent(description, from, to);
@@ -50,6 +49,5 @@ public class AddCommand extends Command{
                 ui.showTask(new Todo(description), tasks.size());
                 break;
         }
-        ui.showLine();
     }
 }

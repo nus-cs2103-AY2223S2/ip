@@ -31,7 +31,7 @@ public class TaskList {
                 case "E":
                     tasks.add(new Event(parsedTask[2], parsedTask[3], parsedTask[4]));
             }
-            if (!parsedTask[1].equals("1")) {
+            if (parsedTask[1].equals("1")) {
                tasks.get(tasks.size() - 1).mark();
             }
         }
@@ -75,16 +75,19 @@ public class TaskList {
         result += tasks.get(taskNo);
         return result;
     }
+
     public String unmarkTask(int taskNo){
         tasks.get(taskNo).unmark();
         String result = "OK, I've marked this task as not done yet:\n";
         result += tasks.get(taskNo);
         return result;
     }
+
     public String delete(int taskNo){
         Task deleted = tasks.remove(taskNo);
         return String.format("OK, I've deleted: %s\n", deleted);
     }
+
     public List<String> getTasksToSave() {
         List<String> toSave = new ArrayList<>();
         for(int i = 0; i < tasks.size(); i ++) {

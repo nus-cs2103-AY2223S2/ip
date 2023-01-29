@@ -36,7 +36,6 @@ public class Storage {
 
     public void save(List<String> tasksToSave) throws IOException {
         Files.write(Paths.get(taskList.getAbsolutePath()), tasksToSave);
-
     }
 
 }

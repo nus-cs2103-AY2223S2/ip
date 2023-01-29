@@ -1,5 +1,7 @@
 public abstract class Task {
+
     protected String description;
+
     protected boolean isDone;
 
     public Task(String description) {
@@ -25,4 +27,5 @@ public abstract class Task {
     }
 
     public abstract String toSaveableString();
+
 }

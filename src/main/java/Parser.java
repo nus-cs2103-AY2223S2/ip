@@ -36,7 +36,7 @@ public class Parser {
     }
 
     public static String[] parseTask(String taskString) {
-        return taskString.split(" | ");
+        return taskString.split(" \\| ");
     }
 
     public static int processMarkUnmarkDel(String input) throws DukeException{

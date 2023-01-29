@@ -11,12 +11,10 @@ public class MarkCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showLine();
         if (isMarked) {
             ui.showAction(tasks.markTask(index));
         } else {
             ui.showAction(tasks.unmarkTask(index));
         }
-        ui.showLine();
     }
 }
