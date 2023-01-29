@@ -54,5 +54,19 @@ public class TaskList {
         this.numTasks -= 1;
         return "Task " + index + " deleted.";
     }
-    
+
+    public String findTasks(String query){
+        int matches = 0;
+        String output = "Here are your matching tasks:\n";
+        for (int i = 0; i < this.numTasks; i++) {
+            if(taskList.get(i).toString().contains(query)){
+                matches += 1;
+                output+= i +". " + taskList.get(i) + "\n";
+            }
+        }
+        if(matches == 0){
+            return "Oops! Could not find any tasks matching your query";
+        }
+        return output;
+    }
 }

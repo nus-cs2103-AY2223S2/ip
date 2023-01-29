@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 public class Duke {
     private enum Commands {
-         BYE, LIST, MARK, UNMARK, DELETE, TODO, EVENT, DEADLINE
+         BYE, LIST, MARK, UNMARK, DELETE, TODO, EVENT, DEADLINE, FIND
     }
 
     private static Enum getCommand(String input){ //get the command
@@ -20,7 +20,8 @@ public class Duke {
     }
 
     private static String[] parseParameters(Enum command, String[] parameters){ //get only the useful tokens
-        if(command.equals(Commands.MARK) || command.equals(Commands.UNMARK) || command.equals(Commands.DELETE)){
+        if(command.equals(Commands.MARK) || command.equals(Commands.UNMARK) || command.equals(Commands.DELETE) ||
+        command.equals(Commands.FIND)){
             String[] cleanedParameters = new String[1];
             cleanedParameters[0] = parameters[0];
             return cleanedParameters;
@@ -78,6 +79,8 @@ public class Duke {
                 } else if (command.equals(Commands.EVENT)) {
                     System.out.println(taskList.addTask(parameters[0], LocalDate.parse(parameters[1]),
                             LocalDate.parse(parameters[2])));
+                } else if (command.equals(Commands.FIND)) {
+                    System.out.println(taskList.findTasks(parameters[0]));
                 }
             }
         }
