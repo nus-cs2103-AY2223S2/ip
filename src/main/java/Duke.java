@@ -3,6 +3,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -177,8 +181,20 @@ public class Duke {
         @SuppressWarnings("unchecked")  // args already takes in objects that are subclasses of String, so it is a safe typecast
         List<String> description = (List<String>) args.subList(0, byIndex);
         @SuppressWarnings("unchecked")
-        List<String> byDate = (List<String>) args.subList(byIndex + 1, args.size());
-        Deadline newTask = new Deadline(String.join(" ", description), String.join(" ", byDate));
+        List<String> byDateArgs = (List<String>) args.subList(byIndex + 1, args.size());
+        String byDate = String.join(" ", byDateArgs);
+        Deadline newTask = null;
+
+        if (isDateTime(byDate)) {
+            LocalDateTime localDateTime = LocalDateTime.parse(byDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            newTask = new Deadline(String.join(" ", description), localDateTime);
+        } else if (isDate(byDate)) {
+            LocalDate localDate = LocalDate.parse(byDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            newTask = new Deadline(String.join(" ", description), localDate);
+        } else {
+            throw new IllegalArgumentException();
+        }
+
         taskList.add(newTask);
         return newTask;
     }
@@ -202,11 +218,31 @@ public class Duke {
             @SuppressWarnings("unchecked")  // args already takes in objects that are subclasses of String so it is a safe typecast
             List<String> description = (List<String>) args.subList(0, fromIndex);
             @SuppressWarnings("unchecked")
-            List<String> fromDate = (List<String>) args.subList(fromIndex + 1, toIndex);
+            List<String> fromDateArgs = (List<String>) args.subList(fromIndex + 1, toIndex);
+            String fromDateStr = String.join(" ", fromDateArgs);
             @SuppressWarnings("unchecked")
-            List<String> toDate = (List<String>) args.subList(toIndex + 1, args.size());
+            List<String> toDateArgs = (List<String>) args.subList(toIndex + 1, args.size());
+            String toDateStr = String.join(" ", toDateArgs);
 
-            newTask = new Event(String.join(" ", description), String.join(" ", fromDate), String.join(" ", toDate));
+            if (isDateTime(fromDateStr) && isDateTime(toDateStr)) {
+                LocalDateTime fromDateTime = LocalDateTime.parse(fromDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                LocalDateTime toDateTime = LocalDateTime.parse(toDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                newTask = new Event(String.join(" ", description), fromDateTime, toDateTime);
+            } else if (isDate(fromDateStr) && isDateTime(toDateStr)) {
+                LocalDate fromDate = LocalDate.parse(fromDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalDateTime toDateTime = LocalDateTime.parse(toDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                newTask = new Event(String.join(" ", description), fromDate, toDateTime);
+            } else if (isDateTime(fromDateStr) && isDate(toDateStr)) {
+                LocalDateTime fromDateTime = LocalDateTime.parse(fromDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                LocalDate toDate = LocalDate.parse(toDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                newTask = new Event(String.join(" ", description), fromDateTime, toDate);
+            } else if (isDate(fromDateStr) && isDate(toDateStr)) {
+                LocalDate fromDate = LocalDate.parse(fromDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalDate toDate = LocalDate.parse(toDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                newTask = new Event(String.join(" ", description), fromDate, toDate);
+            } else {
+                throw new IllegalArgumentException();
+            }
         } else {
             if (toIndex + 1 == fromIndex) {
                 throw new EmptyBodyException();
@@ -214,11 +250,31 @@ public class Duke {
             @SuppressWarnings("unchecked")
             List<String> description = (List<String>) args.subList(0, toIndex);
             @SuppressWarnings("unchecked")
-            List<String> toDate = (List<String>) args.subList(toIndex + 1, fromIndex);
+            List<String> toDateArgs = (List<String>) args.subList(toIndex + 1, fromIndex);
+            String toDateStr = String.join(" ", toDateArgs);
             @SuppressWarnings("unchecked")
-            List<String> fromDate = (List<String>) args.subList(fromIndex + 1, args.size());
+            List<String> fromDateArgs = (List<String>) args.subList(fromIndex + 1, args.size());
+            String fromDateStr = String.join(" ", fromDateArgs);
 
-            newTask = new Event(String.join(" ", description), String.join(" ", fromDate), String.join(" ", toDate));
+            if (isDateTime(fromDateStr) && isDateTime(toDateStr)) {
+                LocalDateTime fromDateTime = LocalDateTime.parse(fromDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                LocalDateTime toDateTime = LocalDateTime.parse(toDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                newTask = new Event(String.join(" ", description), fromDateTime, toDateTime);
+            } else if (isDate(fromDateStr) && isDateTime(toDateStr)) {
+                LocalDate fromDate = LocalDate.parse(fromDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalDateTime toDateTime = LocalDateTime.parse(toDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                newTask = new Event(String.join(" ", description), fromDate, toDateTime);
+            } else if (isDateTime(fromDateStr) && isDate(toDateStr)) {
+                LocalDateTime fromDateTime = LocalDateTime.parse(fromDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                LocalDate toDate = LocalDate.parse(toDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                newTask = new Event(String.join(" ", description), fromDateTime, toDate);
+            } else if (isDate(fromDateStr) && isDate(toDateStr)) {
+                LocalDate fromDate = LocalDate.parse(fromDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                LocalDate toDate = LocalDate.parse(toDateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                newTask = new Event(String.join(" ", description), fromDate, toDate);
+            } else {
+                throw new IllegalArgumentException();
+            }
         }
 
         taskList.add(newTask);
@@ -371,6 +427,24 @@ public class Duke {
             if (isDone.equals("true") && task != null) {
                 task.markAsDone();
             }
+        }
+    }
+
+    private boolean isDateTime(String args) {
+        try {
+            LocalDateTime.parse(args, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    private boolean isDate(String args) {
+        try {
+            LocalDate.parse(args, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
         }
     }
 }
