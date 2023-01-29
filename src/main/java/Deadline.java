@@ -5,6 +5,7 @@
  */
 public class Deadline extends Task {
 
+    private static final String TASK_TYPE = "D";
     protected String by;
 
     /**
@@ -19,6 +20,18 @@ public class Deadline extends Task {
     }
 
     /**
+     * Creates a deadline object
+     *
+     * @param description Description of the deadline task
+     * @param isDone Completion status of the deadline task
+     * @param by Deadline time of the deadline
+     */
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
+
+    /**
      * Creates a deadline object from user input
      * Handles exceptions
      *
@@ -28,6 +41,8 @@ public class Deadline extends Task {
      * @throws DukeException If deadline of the deadline is empty
      */
     public static Deadline generate(String input) throws DukeException {
+        DukeException.ErrorType errType = DukeException.ErrorType.DEADLINE;
+
         // Cleans input command
         input = input.trim();
 
@@ -35,21 +50,40 @@ public class Deadline extends Task {
         int indexDesc = input.indexOf(" ");
         int indexTime = input.indexOf(" /by ");
         if (indexDesc < 0) {
-            throw new DukeException("Deadline", "Empty description");
+            throw new DukeException(errType, "Empty description");
         } else if (indexTime < 0) {
-            throw new DukeException("Deadline", "Empty deadline");
+            throw new DukeException(errType, "Empty deadline");
         }
 
         // Cleans and checks variables
         String description = input.substring(indexDesc + 1, indexTime).trim();
         String deadline = input.substring(indexTime + 5).trim();
         if (description.equals("")) {
-            throw new DukeException("Deadline", "Empty description");
+            throw new DukeException(errType, "Empty description");
         } else if (deadline.equals("")) {
-            throw new DukeException("Deadline", "Empty deadline");
+            throw new DukeException(errType, "Empty deadline");
         }
 
         return new Deadline(description, deadline);
+    }
+
+    /**
+     * Returns deadline task from save string
+     *
+     * @param details details of the deadline task
+     * @param status Completion status of the deadline task
+     * @return Task in save string format
+     */
+    public static Deadline load(String details, String status, String divider) throws DukeException {
+        try {
+            boolean isDone = status.equals("X");
+            String[] data = details.split(divider, 2);
+            String description = data[0];
+            String deadline = data[1];
+            return new Deadline(description, isDone, deadline);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(DukeException.ErrorType.FILE, "Incorrect Save Format");
+        }
     }
 
     /**
@@ -63,5 +97,19 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString()
                 + " (by: " + by + ")";
+    }
+
+    /**
+     * Returns deadline task in save string format
+     *
+     * @param divider Divider used to separate fields
+     * @return Task in save string format
+     */
+    @Override
+    public String toSave(String divider) {
+        return TASK_TYPE
+                + divider + getStatusIcon()
+                + divider + description
+                + divider + by;
     }
 }

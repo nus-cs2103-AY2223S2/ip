@@ -5,6 +5,8 @@
  */
 public class Event extends Task {
 
+    private static final String TASK_TYPE = "E";
+
     protected String from;
     protected String to;
 
@@ -22,6 +24,20 @@ public class Event extends Task {
     }
 
     /**
+     * Creates a deadline object
+     *
+     * @param description Description of the deadline task
+     * @param isDone Completion status of the deadline task
+     * @param from Starting time of the event
+     * @param to Ending time of the event
+     */
+    public Event(String description, boolean isDone, String from, String to) {
+        super(description, isDone);
+        this.from = from;
+        this.to = to;
+    }
+
+    /**
      * Creates a deadline object from user input
      * Handles exceptions
      *
@@ -32,6 +48,8 @@ public class Event extends Task {
      * @throws DukeException If end time of the event is empty
      */
     public static Event generate(String input) throws DukeException {
+        DukeException.ErrorType errType = DukeException.ErrorType.EVENT;
+
         // Cleans input command
         input = input.trim();
 
@@ -40,11 +58,11 @@ public class Event extends Task {
         int indexFrom = input.indexOf(" /from ");
         int indexTime = input.indexOf(" /to ");
         if (indexDesc < 0) {
-            throw new DukeException("Event", "Empty description");
+            throw new DukeException(errType, "Empty description");
         } else if (indexFrom < 0) {
-            throw new DukeException("Event", "Empty From Time");
+            throw new DukeException(errType, "Empty From Time");
         } else if (indexTime < 0) {
-            throw new DukeException("Event", "Empty To Time");
+            throw new DukeException(errType, "Empty To Time");
         }
 
         // Cleans and checks variables
@@ -52,14 +70,42 @@ public class Event extends Task {
         String timeFrom = input.substring(indexFrom + 7, indexTime).trim();
         String timeTo = input.substring(indexTime + 5).trim();
         if (description.equals("")) {
-            throw new DukeException("Event", "Empty description");
+            throw new DukeException(errType, "Empty description");
         } else if (timeFrom.equals("")) {
-            throw new DukeException("Event", "Empty From Time");
+            throw new DukeException(errType, "Empty From Time");
         } else if (timeTo.equals("")) {
-            throw new DukeException("Event", "Empty To Time");
+            throw new DukeException(errType, "Empty To Time");
         }
 
         return new Event(description, timeFrom, timeTo);
+    }
+
+    /**
+     * Returns deadline task from save string
+     *
+     * @param details details of the deadline task
+     * @param status Completion status of the deadline task
+     * @return Task in save string format
+     */
+    public static Event load(String details, String status, String divider) throws DukeException {
+        try {
+            boolean isDone = status.equals("X");
+            String[] data = details.split(divider, 2);
+            String description = data[0];
+            String[] duration = data[1].split(" - ", 2);
+            return new Event(description, isDone, duration[0], duration[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(DukeException.ErrorType.FILE, "Incorrect Save Format");
+        }
+    }
+
+    /**
+     * Returns the start time to end time of event
+     *
+     * @return Duration of event
+     */
+    public String getDuration() {
+        return from + " - " + to;
     }
 
     /**
@@ -74,5 +120,20 @@ public class Event extends Task {
         return "[E]" + super.toString()
                 + " (from: " + from
                 + " to: " + to + ")";
+    }
+
+    /**
+     * Returns event task in save string format
+     *
+     * @param divider Divider used to separate fields
+     * @return Task in save string format
+     */
+    @Override
+    public String toSave(String divider) {
+        String duration = getDuration();
+        return TASK_TYPE
+                + divider + getStatusIcon()
+                + divider + description
+                + divider + duration;
     }
 }

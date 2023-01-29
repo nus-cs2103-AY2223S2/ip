@@ -31,6 +31,12 @@ public class DukeException extends Exception {
 
     private static final String MSG_ERR_NONE = "There seems to be no input.";
 
+    // Error Messages for
+    private static final String MSG_ERR_FILE_CREATE = "There was an I/O error when trying to create the necessary directory and files to store list of tasks.";
+    private static final String MSG_ERR_FILE_FORMAT = "The save file was corrupted.";
+    private static final String MSG_ERR_FILE_LOAD = "There was an I/O error when trying to load the saved list of tasks.";
+    private static final String MSG_ERR_FILE_SAVE = "There was an I/O error when trying to save the list of tasks.";
+
     private static final String MSG_ERR_TODO_DESC = "The description of a todo cannot be empty.";
     private static final String MSG_ERR_UNKNOWN = "I'm sorry, but I don't know what that means.";
 
@@ -39,7 +45,7 @@ public class DukeException extends Exception {
     private static final String MSG_ERR_UNMARK_BOUND = "The index of the task to be marked as not done must be in the list.";
     private static final String MSG_ERR_UNMARK_NONINT = "The index of the task to be marked as not done must be an integer.";
 
-    protected enum ErrorType {UNKNOWN, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST};
+    protected enum ErrorType {UNKNOWN, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, FILE};
 
 
     /**
@@ -60,14 +66,10 @@ public class DukeException extends Exception {
      * @param errorMessage Type of exception
      * @throws DukeException For each type of errors
      */
-    public DukeException(String type, String errorMessage) throws DukeException {
-        super(type + " " + errorMessage);
+    public DukeException(ErrorType type, String errorMessage) throws DukeException {
+        super(type.toString() + " " + errorMessage);
         try {
-            ErrorType errType = ErrorType.valueOf(type
-                    .trim()
-                    .toUpperCase());
-
-            switch (errType) {
+            switch (type) {
             case UNKNOWN:
                 switch (errorMessage) {
                 case "Unknown Command":
@@ -137,7 +139,19 @@ public class DukeException extends Exception {
                         throw new DukeException(MSG_ERR_LIST_ECHO);
                 }
                 break;
-            }
+            case FILE:
+                switch (errorMessage) {
+                case "IOException Create":
+                    throw new DukeException(MSG_ERR_FILE_CREATE);
+                case "IOException Save":
+                    throw new DukeException(MSG_ERR_FILE_SAVE);
+                case "IOException Load":
+                    throw new DukeException(MSG_ERR_FILE_LOAD);
+                case "Incorrect Save Format":
+                    throw new DukeException(MSG_ERR_FILE_FORMAT);
+                }
+                break;
+        }
         } catch (IllegalArgumentException e) {
             throw new DukeException("Invalid Error Type");
         } catch (NullPointerException e) {

@@ -1,4 +1,11 @@
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -33,6 +40,7 @@ public class Duke {
 
     /** Indentation level of messages to be printed to console */
     private static final int INDENTATION_LEVEL = 4;
+    private static final String DATA_FILE_DIVIDER = " | ";
 
     protected enum Command {TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, BYE};
 
@@ -46,6 +54,12 @@ public class Duke {
 
         // Initialise variables
         ArrayList<Task> tasks = new ArrayList<>();
+        try {
+            tasks = loadTask();
+        } catch (DukeException e) {
+            echo(e.getMessage());
+        }
+        DukeException.ErrorType errType = DukeException.ErrorType.UNKNOWN;
 
         // Decision loop
         boolean isContinue_decisionLoop = true;
@@ -55,7 +69,21 @@ public class Duke {
             String input = sc.nextLine();
 
             try {
-                Command cmd = Command.valueOf(input.split(" ", 2)[0].trim().toUpperCase());
+                // Cleans user's command input
+                Command cmd;
+                try {
+                    cmd = Command.valueOf(input
+                            .split(" ", 2)[0]
+                            .trim()
+                            .toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    // If user's input is not a valid command
+                    throw new DukeException(errType, "Unknown Command");
+                } catch (NullPointerException e) {
+                    // If user's input is null
+                    throw new DukeException(errType, "No Command");
+                }
+
                 // Decision Tree
                 switch (cmd) {
                 case TODO:
@@ -85,20 +113,6 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 echo(e.getMessage());
-            } catch (IllegalArgumentException e) {
-                // If user's input is not a valid command
-                try {
-                    throw new DukeException("Unknown", "Unknown Command");
-                } catch (DukeException de) {
-                    echo(de.getMessage());
-                }
-            } catch (NullPointerException e) {
-                // If user's input is not a valid command
-                try {
-                    throw new DukeException("Unknown", "No Command");
-                } catch (DukeException de) {
-                    echo(de.getMessage());
-                }
             } catch (Exception e) {
                 // Catches exceptions whose behaviour has not yet been implemented
                 try {
@@ -138,7 +152,7 @@ public class Duke {
      */
     static void echo(String[] msg, int[] indentLevel) throws DukeException {
         if (indentLevel.length != msg.length) {
-            throw new DukeException("List", "Unbalanced List");
+            throw new DukeException(DukeException.ErrorType.LIST, "Unbalanced List");
         }
         String indent = indent(INDENTATION_LEVEL);
 
@@ -193,6 +207,7 @@ public class Duke {
      */
     static void add(ArrayList<Task> tasks, Task task) throws DukeException {
         tasks.add(task);
+        saveTask(tasks);
         String[] output = {MSG_ADD[0],
                 task.toString(),
                 MSG_ADD[1]
@@ -210,7 +225,7 @@ public class Duke {
      */
     static void list(ArrayList<Task> tasks) throws DukeException {
         if (tasks.size() < 1) {
-            throw new DukeException("List", "Empty List");
+            throw new DukeException(DukeException.ErrorType.LIST, "Empty List");
         }
         String[] output = new String[tasks.size()];
         int[] indentLevel = new int[tasks.size()];
@@ -233,22 +248,25 @@ public class Duke {
      * @throws DukeException If the specified index is not an integer
      */
     static void mark(ArrayList<Task> tasks, String input) throws DukeException {
+        DukeException.ErrorType errType = DukeException.ErrorType.MARK;
         int index = input.trim().indexOf(" ");
         if (index < 0) {
-            throw new DukeException("Mark", "Empty Index");
+            throw new DukeException(errType, "Empty Index");
         }
         try {
             index = Integer.parseInt(input
                     .substring(index + 1)) - 1;
-            tasks.get(index).mark();
+            tasks.get(index)
+                    .mark();
+            saveTask(tasks);
             int[] indentLevel = {1, 3};
             String[] message = {MSG_MARK,
                     tasks.get(index).toString()};
             echo(message, indentLevel);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Mark", "Out of Bound");
+            throw new DukeException(errType, "Out of Bound");
         } catch (NumberFormatException e) {
-            throw new DukeException("Mark", "Not Integer");
+            throw new DukeException(errType, "Not Integer");
         }
     }
 
@@ -262,22 +280,25 @@ public class Duke {
      * @throws DukeException If the specified index is not an integer
      */
     static void unmark(ArrayList<Task> tasks, String input) throws DukeException {
+        DukeException.ErrorType errType = DukeException.ErrorType.UNMARK;
         int index = input.trim().indexOf(" ");
         if (index < 0) {
-            throw new DukeException("Unmark", "Empty Index");
+            throw new DukeException(errType, "Empty Index");
         }
         try {
             index = Integer.parseInt(input
                     .substring(index + 1)) - 1;
-            tasks.get(index).unmark();
+            tasks.get(index)
+                    .unmark();
+            saveTask(tasks);
             int[] indentLevel = {1, 3};
             String[] message = {MSG_UNMARK,
                     tasks.get(index).toString()};
             echo(message, indentLevel);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Unmark", "Out of Bound");
+            throw new DukeException(errType, "Out of Bound");
         }  catch (NumberFormatException e) {
-            throw new DukeException("Unmark", "Not Integer");
+            throw new DukeException(errType, "Not Integer");
         }
     }
 
@@ -291,14 +312,16 @@ public class Duke {
      * @throws DukeException If the specified index is not an integer
      */
     static void delete(ArrayList<Task> tasks, String input) throws DukeException {
+        DukeException.ErrorType errType = DukeException.ErrorType.DELETE;
         int index = input.trim().indexOf(" ");
         if (index < 0) {
-            throw new DukeException("Delete", "Empty Index");
+            throw new DukeException(errType, "Empty Index");
         }
         try {
             index = Integer.parseInt(input
                     .substring(index + 1)) - 1;
             Task task = tasks.remove(index);
+            saveTask(tasks);
             int[] indentLevel = {1, 3, 1};
             String[] message = {MSG_DELETE,
                     task.toString(),
@@ -307,9 +330,112 @@ public class Duke {
                             + MSG_ADD[2]};
             echo(message, indentLevel);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Delete", "Out of Bound");
+            throw new DukeException(errType, "Out of Bound");
         }  catch (NumberFormatException e) {
-            throw new DukeException("Delete", "Not Integer");
+            throw new DukeException(errType, "Not Integer");
+        }
+    }
+
+    /**
+     * Saves list of task in the hard disk
+     *
+     */
+    static Path getTaskFile() throws DukeException {
+        try {
+            // Gets path of project root
+            String root = System.getProperty("user.dir");
+
+            // Gets path to directory that contains the file that stores the list of tasks
+            Path dir = Paths.get(root, "data");
+            if (!Files.exists(dir)) {
+                Files.createDirectories(dir);
+            }
+
+            // Gets path of the file that stores the list of tasks
+            Path path = Paths.get(dir.toString(), "duke.txt");
+            if (!Files.exists(path)) {
+                Files.createFile(path);
+            }
+
+            return path;
+        } catch (IOException e) {
+            throw new DukeException(DukeException.ErrorType.FILE, "IOException Create");
+        }
+    }
+
+    /**
+     * Saves list of task to the hard disk
+     *
+     * @param tasks List of tasks to save.
+     */
+    static void saveTask(ArrayList<Task> tasks) throws DukeException {
+        try {
+            // Gets path of the file that stores the list of tasks
+            Path path = getTaskFile();
+
+            // Converts list of tasks to save file format
+            StringBuilder output = new StringBuilder();
+            int noOfTasks = tasks.size();
+            if (noOfTasks > 0) {
+                output.append(tasks
+                        .get(0)
+                        .toSave(DATA_FILE_DIVIDER));
+                for (int i = 1; i < noOfTasks; i++) {
+                    output.append("\n")
+                            .append(tasks
+                                    .get(i)
+                                    .toSave(DATA_FILE_DIVIDER));
+                }
+            }
+            Files.write(path, output.toString().getBytes());
+        } catch (IOException e) {
+            throw new DukeException(DukeException.ErrorType.FILE, "IOException Save");
+        }
+    }
+
+    /**
+     * Returns the list of task from the hard disk
+     *
+     * @return List of tasks from the hard disk .
+     */
+    static ArrayList<Task> loadTask() throws DukeException {
+        try {
+            // Gets saved data from hard disk
+            Path path = getTaskFile();
+            List<String> saveData = Files.readAllLines(path);
+
+            // Load list of tasks from saved data
+            String divider = "\\Q" + DATA_FILE_DIVIDER + "\\E";
+            ArrayList<Task> tasks = new ArrayList<>();
+            for (String save: saveData) {
+                // Partition each line of saved data
+                String[] data = save.split(divider, 3);
+                if (data.length < 3) {
+                    throw new DukeException(DukeException.ErrorType.FILE, "Incorrect Save Format");
+                }
+
+                String taskType = data[0];
+                String status = data[1];
+                String details = data[2];
+
+                switch (taskType) {
+                case " ":
+                    tasks.add(Task.load(details, status));
+                    break;
+                case "T":
+                    tasks.add(Todo.load(details, status));
+                    break;
+                case "D":
+                    tasks.add(Deadline.load(details, status, divider));
+                    break;
+                case "E":
+                    tasks.add(Event.load(details, status, divider));
+                    break;
+                }
+            }
+            return tasks;
+        } catch (IOException e) {
+            throw new DukeException(DukeException.ErrorType.FILE, "IOException Load");
         }
     }
 }
