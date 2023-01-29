@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * TaskList class to help manage Tasks.
+ *
+ * @author Merrick
+ */
 public class TaskList {
     private static int TASK_TYPE = 0;
     private static int TASK_NAME = 1;
@@ -17,23 +22,36 @@ public class TaskList {
     protected ArrayList<Task> taskList = new ArrayList<>();
     protected BufferedReader br;
 
-    // T | false | book buy | false
-
+    /**
+     * Empty constructor for TaskList.
+     */
     public TaskList() {}
 
+    /**
+     * Constructor of TaskList with tasks loaded from storage.
+     * @param br Saved-data loaded stored in BufferedReader object.
+     * @throws DukeException If data is unable to be read from BufferedReader object br.
+     */
     public TaskList(BufferedReader br) throws DukeException{
         this.br = br;
         this.load();
     }
 
-    // Add new taskList to the list
-    // Outputs a String with the details of the task and the number of taskList in the list
+    /**
+     * Adds a new task to be tracked by TaskList.
+     * <br>
+     * Displays the number of tasks after addition of task.
+     * @param task Task object to be tracked.
+     */
     public void addTask(Task task) {
         taskList.add(task);
         System.out.println(String.format("     Got it. I've added this task:\n" +
                 "       %s\n" + this.numTasks(), task));
     }
 
+    /**
+     * Displays the tasks being tracked by TaskList.
+     */
     public void listTasks() {
         System.out.println("    Here are the tasks in your list:");
         int counter = 1;
@@ -43,6 +61,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Loads the tasks stored in the BufferedReader object into the task list.
+     * @throws DukeException If IOException from the BufferedReader object is encountered.
+     */
     public void load() throws DukeException {
         try {
             while (true) {
@@ -51,9 +73,6 @@ public class TaskList {
                     break;
                 }
                 String[] taskArr = taskLine.split("\\|");
-//                for (String s: taskArr) {
-//                    System.out.println(s);
-//                }
                 String taskType = taskArr[TASK_TYPE];
                 if (taskType.equals("T")) {
                     boolean completion = Boolean.parseBoolean(taskArr[IS_DONE]);
@@ -79,6 +98,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Outputs the String to be saved in storage duke.txt file.
+     * @return String representation of the tasks currently being tracked to be saved.
+     */
     public String saveTaskList() {
         StringBuilder sb = new StringBuilder();
         for (Task t: taskList) {
@@ -87,6 +110,11 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Sets completion status or delete tasks for Tasks being tracked by TaskList.
+     * @param command Input from the User.
+     * @throws DukeException If the input command or task number is invalid.
+     */
     public void manageTask(String command) throws DukeException {
         String[] input = command.split(" ");
         if ((input.length != 2)) {
@@ -107,6 +135,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Outputs the number of tasks being tracked.
+     * @return String representation the tasks tracked by TaskList.
+     */
     public String numTasks() {
         return String.format("     Now you have %d tasks in the list", taskList.size());
     }

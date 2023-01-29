@@ -8,10 +8,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Subclass of Task which has a start and end datetime.
+ *
+ * @author Merrick
+ */
 public class Event extends Task{
     protected LocalDateTime start;
     protected LocalDateTime end;
 
+    /**
+     * Constructor of Event.
+     * @param taskName Description of Event Task.
+     * @param start Start datetime for the Event.
+     * @param end End datetime for the Event.
+     */
     public Event(String taskName, LocalDateTime start, LocalDateTime end) {
         super(taskName);
         this.start = start;
@@ -19,6 +30,13 @@ public class Event extends Task{
         this.taskType = "E";
     }
 
+    /**
+     * Constructor of Event.
+     * @param taskName Description of Event Task.
+     * @param start Start datetime for the Event.
+     * @param end End datetime for the Event.
+     * @param completed Completion status for the Event.
+     */
     public Event(String taskName, LocalDateTime start, LocalDateTime end, boolean completed) {
         super(taskName, completed);
         this.start = start;
@@ -26,6 +44,12 @@ public class Event extends Task{
         this.taskType = "E";
     }
 
+    /**
+     * Static method to create a Event Task from user input.
+     * @param command User input to be used to create the Event Task.
+     * @param t TaskList object to add the newly created Task into the list of tasks.
+     * @throws DukeException If command is invalid.
+     */
     public static void createEvent(String command, TaskList t) throws DukeException {
         ArrayList<String> input = new ArrayList(Arrays.asList(command.split(" ")));
         if (input.size() <= 1) throw new DukeException("event");

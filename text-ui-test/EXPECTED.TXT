@@ -1,9 +1,9 @@
     ____________________________________________________________
-    Hello! I'm duke.Duke
+    Hello! I'm Duke
     What can I do for you?
     ____________________________________________________________
     ____________________________________________________________
-     Got it. I've added this duke:
+     Got it. I've added this duke.duke:
          [D][ ] do homework (by: no idea :-p)
      Now you have 1 taskList in the list
     ____________________________________________________________
