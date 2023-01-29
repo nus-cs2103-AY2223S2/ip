@@ -2,11 +2,18 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * The ChatBot Duke.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * The Duke object's constructor.
+     * @param filePath Relative filepath to load past data and save new data.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         try {
@@ -18,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts running Duke.
+     */
     public void run() {
         this.ui.showWelcome();
         boolean isExit = false;
@@ -38,7 +48,10 @@ public class Duke {
         }
     }
 
-
+    /**
+     * The main method.
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

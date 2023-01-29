@@ -2,10 +2,17 @@ package duke;
 
 import duke.task.Task;
 
+/**
+ * Stores the list of Task objects.
+ */
 public class TaskList {
     private int index;
     private Task[] tasks;
 
+    /**
+     * The TaskList constructor used when there are past Task objects to be inputted.
+     * @param tasks The array of past Task objects
+     */
     public TaskList(Task[] tasks) {
         this.index = 0;
         this.tasks = tasks;
@@ -14,15 +21,22 @@ public class TaskList {
                 this.index = i;
                 break;
             }
-            continue;
         }
     }
 
+    /**
+     * The TaskList constructor used to create an empty TaskList object.
+     */
     public TaskList() {
         this.index = 0;
         this.tasks = new Task[100];
     }
 
+    /**
+     * Add task to task list.
+     * @param task The Task object to be added.
+     * @return The Duke chatbot's reply after adding a task.
+     */
     public String addTask(Task task) {
         this.tasks[this.index] = task;
         String str = "Got it! This task has been added:\n";
@@ -33,9 +47,14 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Delete task from task list.
+     * @param index Index of task in task list to be deleted.
+     * @return The Duke chatbot's reply after deleting a task.
+     */
     public String deleteTask(int index) {
         if (index < 0 || index > 99 || tasks[index] == null) {
-            throw new RuntimeException("duke.task.Task does not exist!");
+            throw new RuntimeException("Task does not exist!");
         }
         String str = "Got it! This task has been removed:\n";
         str += this.printTask(index) + "\n";
@@ -49,9 +68,14 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Mark a task in task list as done.
+     * @param index Index of task to be marked as done.
+     * @return The Duke chatbot's reply after marking a task as done.
+     */
     public String markTask(int index) {
         if (index < 0 || index > 99 || tasks[index] == null) {
-            throw new RuntimeException("duke.task.Task does not exist!");
+            throw new RuntimeException("Task does not exist!");
         }
         this.tasks[index].mark();
         String str = "Great job! This task has been marked as done:\n";
@@ -59,9 +83,14 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Marking a task as undone.
+     * @param index Index of task to be marked as undone.
+     * @return The Duke chatbot's reply after marking a task as undone.
+     */
     public String unMarkTask(int index) {
         if (index < 0 || index > 99 || tasks[index] == null) {
-            throw new RuntimeException("duke.task.Task does not exist!");
+            throw new RuntimeException("Task does not exist!");
         }
         this.tasks[index].unMark();
         String str = "Noted! This task has been marked as undone:\n";
@@ -69,10 +98,14 @@ public class TaskList {
         return str;
     }
 
-    public String printTask(int index) {
+    private String printTask(int index) {
         return tasks[index].toString();
     }
 
+    /**
+     * Create a string to represent all the tasks in task list to be saved in file.
+     * @return String representing all the tasks in task list.
+     */
     public String taskListToSavedForm() {
         String str = "";
         for (int i = 0; i < this.index; i ++) {
@@ -81,6 +114,10 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Lists out all the tasks in task list.
+     * @return List of all tasks in task list.
+     */
     @Override
     public String toString() {
         String str = "";
