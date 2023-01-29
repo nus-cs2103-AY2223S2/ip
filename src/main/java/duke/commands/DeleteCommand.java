@@ -6,8 +6,10 @@ import duke.exceptions.StorerEmptyException;
 import duke.storage.Storage;
 import duke.storage.TaskList;
 import duke.tasks.Task;
-
 import java.io.IOException;
+
+
+
 
 /**
  * A command for deleting a task.
@@ -33,9 +35,9 @@ public class DeleteCommand extends Command {
             throw new StorerEmptyException();
         } else {
 
-            Task E = tasks.remove(this.num);
+            Task e = tasks.remove(this.num);
             String speech = "Noted. I've removed this task:\n"
-                    + E + "\n Now you have " + tasks.size() + " tasks in the list.";
+                    + e + "\n Now you have " + tasks.size() + " tasks in the list.";
             ui.display(speech);
             try {
                 storage.dumpFile(tasks);
