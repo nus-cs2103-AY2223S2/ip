@@ -1,5 +1,8 @@
 package uwuke.input;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import uwuke.output.DukeException;
 
 /**
@@ -127,5 +130,19 @@ public abstract class Parser {
         } catch (Exception e) {
             throw new DukeException("Unexpected error occured");
         }
+    }
+
+    public static String parseFind(String input) throws DukeException {
+        try {
+            Pattern p = Pattern.compile("find\\s(.+)");
+            Matcher m = p.matcher(input);
+            m.find();
+            return m.group(1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Unexpected input format, could not parse find properly.");
+        } catch (Exception e) {
+            throw new DukeException("Unexpected error occured");
+        }
+
     }
 }

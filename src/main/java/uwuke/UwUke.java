@@ -30,6 +30,8 @@ public class UwUke {
             return Command.TODO;
         } else if (input.matches("^delete\\s\\d+$")) {
             return Command.DELETE;
+        } else if (input.matches("find\\s.+")) {
+            return Command.FIND;
         } else {
             return Command.UNKNOWN;
         }
@@ -73,6 +75,9 @@ public class UwUke {
                     break;
                 case DELETE:
                     tasks.deleteTask(input);
+                    break;
+                case FIND:
+                    tasks.findTask(input);
                     break;
                 default:
                     Printer.printWithDecorations(Advisor.advise(input));

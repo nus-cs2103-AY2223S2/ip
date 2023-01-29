@@ -131,5 +131,23 @@ public class Printer {
                                  grammar);
         printWithDecorations(s);    
     }
+
+    public static void printFindResults(ArrayList<Task> matchingTasks) {
+        String s;
+
+        if (matchingTasks.size() <= 0) {
+            s = "No task found with the given keyword! Please choose a different keyword.";
+        } else if (matchingTasks.size() == 1) {
+            s = "Here is a matching task in your list:\n";
+        } else {
+            s = "Here are the matching tasks in your list:\n";
+        }
+        
+        StringBuilder sb = new StringBuilder(s);
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            sb.append(String.format("%d.%s\n", i+1, matchingTasks.get(i).toString()));
+        }
+        printWithDecorations(sb.toString());
+    }
     
 }
