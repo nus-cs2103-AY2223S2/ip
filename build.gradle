@@ -2,6 +2,7 @@ plugins {
     id 'checkstyle'
     id 'java'
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -11,6 +12,11 @@ checkstyle {
 
 repositories {
     mavenCentral()
+}
+
+javafx {
+    version = "11"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 dependencies {
@@ -33,15 +39,19 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "fea.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "fea"
     archiveClassifier = null
 }
 
-run{
+run {
     standardInput = System.in
     enableAssertions = true
+}
+
+processResources {
+    from 'src/main/resources'
 }

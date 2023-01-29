@@ -1,8 +1,8 @@
-# DukePro
+# Fate Eggplant Assistant (FEA)
 
-> "Your mind is for having ideas, not holding them." -- David Allen ([source](https://dansilvestre.com/productivity-quotes))
+> "The Archer class really is made up of archers!" -- Rin Tohsaka ([source](https://www.youtube.com/watch?v=7jUjBzop7lE))
 
-DukePro frees your mind of having to remember things you need to do. It's,
+FEA lets you focus on defeating lostbelts by having Mash remember things you need to do. It's,
 
 -   text-based
 -   easy to learn
@@ -11,9 +11,9 @@ DukePro frees your mind of having to remember things you need to do. It's,
 All you need to do is,
 
 1.  Download it from [here](https://github.com/Jarrett0203/ip/releases).
-2.  Find the latest version and install duke.jar.
+2.  Find the latest version and install fea.jar.
 3.  Add your tasks.
-4.  Let it manage your tasks for you :wink:
+4.  Let Mash manage your tasks for you :wink:
 
 And it is **FREE**!
 
@@ -24,13 +24,12 @@ Features:
 
 ***
 
-If you Java programmer, you can use it to practice Java too. Here's the `main` method:
+If you are a Java programmer, you can use it to practice Java too. Here's the `main` method:
 
 ```java
 public class Duke {
    public static void main(String[] args) { 
-      String filePath = String.format("data%sduketxt", File.separator); 
-      new Duke(filePath).run();    
+      Application.launch(Fea.class, args);
    }
 }
 ```
