@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import duke.DukeException;
 
@@ -73,10 +73,10 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task with the same index.
+     * Deletes the duke.task with the same index.
      *
-     * @param idx Index of the task in the list.
-     * @return task.Task deleted.
+     * @param idx Index of the duke.task in the list.
+     * @return duke.task.Task deleted.
      * @throws DukeException If index is out of bounds.
      */
     public Task deleteTask(int idx) throws DukeException {

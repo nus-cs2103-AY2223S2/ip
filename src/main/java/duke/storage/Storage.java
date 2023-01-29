@@ -1,10 +1,10 @@
-package storage;
+package duke.storage;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
-import ui.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,10 +29,10 @@ public class Storage {
     }
 
     /**
-     * Adds a task from saved file to the task list.
+     * Adds a duke.task from saved file to the duke.task list.
      */
     private void loadTaskFromFile(String task) {
-        // ui.Parser
+        // duke.ui.Parser
         String[] command = task.split("\\|");
         String taskType = command[0];
         String description = command[2];
@@ -120,7 +120,7 @@ public class Storage {
     }
 
     /**
-     * Saves the task list to hard drive.
+     * Saves the duke.task list to hard drive.
      */
     public void save(List<Task> tasks) {
         ui.showSavingFile();

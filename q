@@ -2,7 +2,7 @@
 Author: rockman007372 <rockman007372@gmail.com>
 Date:   Thu Jan 19 14:41:38 2023 +0800
 
-    Add task.Task class
+    Add duke.task.Task class
 
 [33mcommit d3e6e6e7828f8489fa40e38c0d006d248bd9452c[m[33m ([m[1;33mtag: Level-2[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
 Author: rockman007372 <rockman007372@gmail.com>
@@ -28,7 +28,7 @@ Date:   Thu Dec 29 13:56:26 2022 +0800
 
     .gitignore: Fix ACTUAL.txt -> ACTUAL.TXT  (#73)
     
-    text-ui-test/runtest.bat|sh scripts generate a file ACTUAL.TXT.
+    text-duke.ui-test/runtest.bat|sh scripts generate a file ACTUAL.TXT.
     However, .gitignore uses ACTUAL.txt, which means the generated
     file will not be ignored by Git on non-Windows OS.
     
@@ -63,7 +63,7 @@ Date:   Tue Aug 25 17:23:26 2020 +0800
 
     Improve runtest.* scripts
     
-    * Improve the javac command to work for multiple java files.
+    * Improve the javac duke.command to work for multiple java files.
     * In runtest.bat, delete ACTUAL.TXT only if it exists.
 
 [33mcommit 87eb8b818ae0e244a172420fdab8c46c45c43e0b[m
@@ -76,7 +76,7 @@ Date:   Sat Jul 4 01:45:26 2020 +0800
 Author: damithc <damithch@damithch-mbp.comp.nus.edu.sg>
 Date:   Mon May 25 00:03:55 2020 +0800
 
-    Add text-ui-test files
+    Add text-duke.ui-test files
 
 [33mcommit 71d7ea84f3d61821643e505e532051fcc09ec2b1[m
 Author: damithc <damithch@damithch-mbp.comp.nus.edu.sg>

@@ -1,6 +1,6 @@
-package ui;
+package duke.ui;
 
-import command.*;
+import duke.command.*;
 import duke.DukeException;
 
 import java.time.LocalDate;
@@ -23,7 +23,7 @@ public class Parser {
         Operation op = Operation.valueOf(command[0].toUpperCase());
 
         if (!op.equals(Operation.LIST) && command.length < 2) {
-            throw new DukeException("No command description given.");
+            throw new DukeException("No duke.command description given.");
         }
 
         switch (op) {
@@ -41,7 +41,7 @@ public class Parser {
                 return deleteTaskParser(input);
         }
 
-        return null; // cannot reach here, as command.Operation.valueOf throws IllegalArgumentException
+        return null; // cannot reach here, as duke.command.Operation.valueOf throws IllegalArgumentException
     }
 
     public static Command markTaskParser(String input) throws NumberFormatException {

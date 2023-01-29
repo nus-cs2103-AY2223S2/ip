@@ -1,10 +1,10 @@
 package duke;
 
-import command.Command;
-import storage.Storage;
-import task.TaskList;
-import ui.Parser;
-import ui.Ui;
+import duke.command.Command;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Parser;
+import duke.ui.Ui;
 
 import java.time.format.DateTimeParseException;
 
@@ -39,7 +39,7 @@ public class Duke {
             } catch (NumberFormatException e) {
                 ui.showError("Task must be referenced by its index.");
             } catch (IllegalArgumentException e) {
-                ui.showError("Invalid command.");
+                ui.showError("Invalid duke.command.");
             } catch (DateTimeParseException e) {
                 ui.showError("Wrong date format given.");
             }

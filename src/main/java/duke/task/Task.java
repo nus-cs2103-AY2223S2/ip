@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 public class Task {
     protected String description = "";
@@ -18,7 +18,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (this.isDone ? "X" : " "); // mark done task with X
+        return (this.isDone ? "X" : " "); // mark done duke.task with X
     }
 
     @Override
