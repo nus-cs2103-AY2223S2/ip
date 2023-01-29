@@ -16,14 +16,14 @@ public class Parser {
      * @return Indicates if the Duke Program should continue to run.
      * @throws DukeException
      */
-    public static boolean handleGeneralCommand(String command, TaskList tasks) throws DukeException {
+    public static boolean handleGeneralCommand(String command, TaskList tasks, Storage storage) throws DukeException {
         if (command.startsWith("list")) {
             tasks.listTasks();
         } else if ((command.startsWith("mark")) || (command.startsWith("unmark"))
                 || command.startsWith("delete")) {
             tasks.manageTask(command);
         } else if (command.equals("bye")) {
-            tasks.saveTaskList();
+            storage.saveTasks(tasks);
             return false;
         } else if (command.startsWith("event")) {
             Event.createEvent(command, tasks);
@@ -31,6 +31,8 @@ public class Parser {
             DeadlineTask.createDeadlineTask(command, tasks);
         } else if (command.startsWith("todo")) {
             ToDo.createToDo(command, tasks);
+        } else if (command.startsWith("find")) {
+            tasks.findTasks(command);
         }
         else {
             throw new DukeException();

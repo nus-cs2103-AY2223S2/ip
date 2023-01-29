@@ -63,6 +63,24 @@ public class TaskList {
     }
 
     /**
+     * Displays the tasks in the TaskList that contains the keyword specified.
+     * @param command Keyword to check with the tasks in the TaskList.
+     */
+    public void findTasks(String command) {
+        System.out.println("  Here are the matching tasks in your list:");
+        String[] keyword = command.split(" ");
+        int counter = 1;
+        for (Task t: taskList) {
+            // Iterate through the ArrayList to find if a Task matches
+            if (t.containsKeyword(keyword[1])) {
+                System.out.println(counter + ". " + t.toString());
+                counter++;
+            }
+        }
+
+    }
+
+    /**
      * Loads the tasks stored in the BufferedReader object into the task list.
      * @throws DukeException If IOException from the BufferedReader object is encountered.
      */
@@ -95,8 +113,8 @@ public class TaskList {
                     this.taskList.add(e);
                     break;
                 }
-                br.close();
             }
+            br.close();
         } catch (IOException e) {
             throw new DukeException("Unable to read from file, creating a new file");
         }
