@@ -53,4 +53,31 @@ public class TaskList {
     public int size() {
         return this.taskList.size();
     }
+
+    /**
+     * Finds all tasks in tasklist that contains keyword in task title
+     * @param keyword String of matching text to be found
+     * @return TaskList containing all tasks in tasklist that contain keyword in task title
+     */
+    public TaskList findTasks(String keyword) {
+        TaskList resultList = new TaskList();
+        for (Task currTask : this.taskList) {
+            if (currTask.title.contains(keyword)) {
+                resultList.addTask(currTask);
+            }
+        }
+        return resultList;
+    }
+
+    /**
+     * Prints the tasks in taskList in an indexed manner
+     */
+    public void printList() {
+        int pos = 0;
+        while (pos < this.taskList.size()) {
+            System.out.println((pos + 1) + ". " + this.taskList.get(pos).toString());
+            pos++;
+        }
+        System.out.println("End of list!\n");
+    }
 }

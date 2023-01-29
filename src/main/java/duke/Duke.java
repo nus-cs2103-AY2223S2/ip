@@ -46,13 +46,8 @@ public class Duke {
      * Prints the contents of the taskList
      */
     public static void displayList() {
-        int pos = 0;
         System.out.println("Here are the tasks in your list:");
-        while (pos < taskList.size()) {
-            System.out.println((pos + 1) + ". " + taskList.getTask(pos).toString());
-            pos++;
-        }
-        System.out.println("End of list!\n");
+        taskList.printList();
     }
 
     /**

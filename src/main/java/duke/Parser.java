@@ -13,14 +13,23 @@ public class Parser {
      */
     public void parse(String userInput, TaskList taskList, Storage fileManager) {
         if (!userInput.equals("list")) {
+
+            // If input = "find x" return all tasks that contain keyword: x
+            if (userInput.startsWith("find ")) {
+                String keyword = userInput.substring(5);
+                TaskList tempTaskList = taskList.findTasks(keyword);
+                System.out.println("Here are the matching tasks in your list:");
+                tempTaskList.printList();
+            }
+
             // If input = "mark x" set task x completed? to True
-            if (userInput.startsWith("mark ")){
+            else if (userInput.startsWith("mark ")) {
                 int taskNum = Integer.parseInt(userInput.substring(5));
                 taskList.getTask(taskNum - 1).setCompleted(true);
             }
 
             // If input = "unmark x" set task x completed? to False
-            else if (userInput.startsWith("unmark ")){
+            else if (userInput.startsWith("unmark ")) {
                 int taskNum = Integer.parseInt(userInput.substring(7));
                 taskList.getTask(taskNum - 1).setCompleted(false);
             }

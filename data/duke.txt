@@ -1,5 +1,5 @@
 T |   | borrow book
 D | X | return book | 2019-10-15
-T |   | sell book
+T | X | sell book
 D | X | eat banana | 2020-02-23
 E |   | meeting bob | 2021-03-15 | 2022-04-23
