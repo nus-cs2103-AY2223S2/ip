@@ -5,6 +5,7 @@ class DoTask extends Event {
     boolean firstGreet;
     String lastCommand;
     TaskList taskList;
+    String removedTask;
 
     public DoTask() {
         super(false);
@@ -18,6 +19,14 @@ class DoTask extends Event {
         this.firstGreet = firstGreet;
         this.lastCommand = lastCommand;
         this.taskList = taskList;
+    }
+
+    public DoTask(boolean firstGreet, String lastCommand, TaskList taskList, String removedTask) {
+        super(false);
+        this.firstGreet = firstGreet;
+        this.lastCommand = lastCommand;
+        this.taskList = taskList;
+        this.removedTask = removedTask;
     }
     public Event toNext() {
         Scanner sc = new Scanner(System.in);
@@ -62,6 +71,10 @@ class DoTask extends Event {
                     String eventEnd = timeLineSplit.get(1);
                     return new DoTask(false, eventPhraseList.get(1), this.taskList.addTask(new ScheduledEvent(eventBegin, eventEnd, eventPhraseList.get(1))));
                 }
+                if (words.get(0).equals("DELETE")) {
+                    this.removedTask = this.taskList.getTask(Integer.valueOf(words.get(1)) - 1);
+                    return new DoTask(false, nextTask, this.taskList.removeTask(Integer.valueOf(words.get(1)) - 1),this.removedTask);
+                }
             }
         }
         return this;
@@ -87,13 +100,30 @@ class DoTask extends Event {
                         toPrintOut += "HAVING OTHER PLANS I SEE..." + '\n';
                         toPrintOut += this.taskList.getTask(Integer.valueOf(words.get(1)) - 1) + '\n';
                     } else {
-                        toPrintOut += "SO YOU WANT TO ADD " + '"' + this.lastCommand + '"' + ". VERY WELL..." + '\n';
-                        toPrintOut += '\n' + "ADDED: " + lastCommand + '\n';
-                        toPrintOut += '\n' + "WHAT ELSE?" + '\n';
+                        if (words.get(0).equals("DELETE")) {
+                            toPrintOut += "KABOOM. GONE. REDUCED TO ATOMS. HOW EXCITING!" + '\n';
+                            toPrintOut += '\n' + "TASK " + this.removedTask + " NO LONGER EXISTED" + '\n';
+                            int numberOfTasks = this.taskList.getSize();
+                            if (numberOfTasks > 1) {
+                                toPrintOut += numberOfTasks + " TASKS LEFT. BETTER HURRY." + '\n';
+                            } else {
+                                toPrintOut += "ONLY " + numberOfTasks + " TASK LEFT. BORING DAYS AHEAD." + '\n';
+                            }
+                        } else {
+                            toPrintOut += "SO YOU WANT TO ADD " + '"' + this.lastCommand + '"' + ". VERY WELL..." + '\n';
+                            toPrintOut += '\n' + "ADDED: " + lastCommand + '\n';
+                            int numberOfTasks = this.taskList.getSize();
+                            if (numberOfTasks > 1) {
+                                toPrintOut += numberOfTasks + " TASKS. BETTER HURRY." + '\n';
+                            } else {
+                                toPrintOut += "ONLY " + numberOfTasks + " TASK. BORING DAYS AHEAD." + '\n';
+                            }
+                        }
                     }
                 }
             }
         }
+        toPrintOut += '\n' + "WHAT ELSE?" + '\n';
         toPrintOut += "_".repeat(22) + '\n';
         return toPrintOut;
     }

@@ -29,6 +29,15 @@ class TaskList {
         return this.listTask.get(index).toString();
     }
 
+    int getSize() {
+        return this.listTask.size();
+    }
+
+    TaskList removeTask(int index) {
+        this.listTask.remove(index);
+        return this;
+    }
+
     @Override
     public String toString() {
         if (this.listTask.isEmpty()) {
