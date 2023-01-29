@@ -129,5 +129,22 @@ public class TaskList {
 
     }
 
+    /**
+     * Find keyword inside the List
+     * @param keyword
+     * @param formatSpace indentation required by UI
+     * @return representations of task containing keyword
+     */
+    public String find(String keyword, String formatSpace){
+        String  res = "";
+        for (int i = 0; i < taskCount; i++){
+            if (this.tasks.get(i).taskContains(keyword)) {
+                res += formatSpace + (i + 1) + ". " + tasks.get(i).getRepresentation() + "\n";
+            }
+        }
+
+        return res;
+    }
+
 
 }
