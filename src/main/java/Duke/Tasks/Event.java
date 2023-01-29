@@ -1,5 +1,8 @@
-import DukeExceptions.DukeEmptyInputException;
-import DukeExceptions.DukeInvalidInputException;
+package Duke.Tasks;
+
+import Duke.DateHandler;
+import Duke.DukeExceptions.DukeEmptyInputException;
+import Duke.DukeExceptions.DukeInvalidInputException;
 
 public class Event extends Task {
     protected String from;

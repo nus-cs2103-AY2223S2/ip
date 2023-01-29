@@ -1,4 +1,4 @@
-package DukeExceptions;
+package Duke.DukeExceptions;
 
 public class DukeTooManyInputsException extends DukeInvalidInputException {
     public DukeTooManyInputsException() {

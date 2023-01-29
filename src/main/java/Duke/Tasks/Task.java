@@ -1,5 +1,7 @@
-import DukeExceptions.DukeEmptyInputException;
-import DukeExceptions.DukeInvalidInputException;
+package Duke.Tasks;
+
+import Duke.DukeExceptions.DukeEmptyInputException;
+import Duke.DukeExceptions.DukeInvalidInputException;
 
 public class Task {
     protected String name;

@@ -1,4 +1,6 @@
-import DukeExceptions.DukeInvalidInputException;
+package Duke.Tasks;
+
+import Duke.DukeExceptions.DukeInvalidInputException;
 
 public class Todo extends Task {
     private Todo(String name) {

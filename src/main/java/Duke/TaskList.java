@@ -1,16 +1,20 @@
-import DukeExceptions.DukeEmptyInputException;
-import DukeExceptions.DukeException;
-import DukeExceptions.DukeInvalidInputException;
-import DukeExceptions.DukeTooManyInputsException;
+package Duke;
+
+import Duke.DukeExceptions.DukeEmptyInputException;
+import Duke.DukeExceptions.DukeException;
+import Duke.DukeExceptions.DukeInvalidInputException;
+import Duke.DukeExceptions.DukeTooManyInputsException;
+import Duke.Tasks.Task;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.lang.StringBuilder;
 
 import java.util.ArrayList;
-public class ToDoList {
+public class TaskList {
     private ArrayList<Task> list;
 
-    public ToDoList() {
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 

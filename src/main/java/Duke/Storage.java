@@ -1,16 +1,19 @@
+package Duke;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
+import Duke.DukeExceptions.DukeCannotFindFileException;
 
-public class StateSaver {
+public class Storage {
     private final String saveLocation = "data/savestate.txt";
     private final String saveFolder = "data";
     private boolean isFolderCreated = false;
     private boolean isFileCreated = false;
 
-    public StateSaver() {
+    public Storage() {
         File folder = new File(saveFolder);
         if (folder.exists()) {
             isFileCreated = true;
@@ -21,7 +24,7 @@ public class StateSaver {
         }
     }
 
-    public void saveState(ToDoList lst) {
+    public void saveState(TaskList lst) {
         if (!isFolderCreated) {
             File folder = new File(saveFolder);
             if (!folder.mkdir()) {
@@ -50,9 +53,9 @@ public class StateSaver {
         }
     }
 
-    public void loadState(ToDoList lst) {
+    public void loadState(TaskList lst) throws DukeCannotFindFileException {
         if (!isFileCreated) {
-            return;
+            throw new DukeCannotFindFileException();
         }
         File savedFile = new File(saveLocation);
         try {

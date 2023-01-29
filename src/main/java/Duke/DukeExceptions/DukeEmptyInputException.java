@@ -1,4 +1,4 @@
-package DukeExceptions;
+package Duke.DukeExceptions;
 
 public class DukeEmptyInputException extends DukeException {
     public DukeEmptyInputException() {
