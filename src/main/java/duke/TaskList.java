@@ -8,11 +8,11 @@ public class TaskList {
     private final ArrayList<Task> TASKS;
 
     public TaskList() {
-        this.TASKS = new ArrayList<Task>();
+        TASKS = new ArrayList<Task>();
     }
 
     public TaskList(ArrayList<Task> tasks) {
-        this.TASKS = tasks;
+        TASKS = tasks;
     }
 
     public ArrayList<Task> getTasks() {
@@ -20,10 +20,10 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
-        this.TASKS.add(task);
+        TASKS.add(task);
     }
 
     public int size() {
-        return this.TASKS.size();
+        return TASKS.size();
     }
 }

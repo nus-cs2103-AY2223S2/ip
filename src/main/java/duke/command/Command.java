@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Command {
-    private final Commands COMMAND;
+    private final AvailableCommands CURRENT_COMMAND;
     private final String COMMAND_STRING;
 
-    public enum Commands {
+    public enum AvailableCommands {
         EXIT,
         LIST,
         MARK,
@@ -24,22 +24,22 @@ public class Command {
         ADD_EVENT
     }
 
-    public Command(Commands COMMAND, String COMMAND_STRING) {
-        this.COMMAND = COMMAND;
-        this.COMMAND_STRING = COMMAND_STRING;
+    public Command(AvailableCommands currentCommand, String commandString) {
+        CURRENT_COMMAND = currentCommand;
+        COMMAND_STRING = commandString;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showError(String.format("Error processing %s command", this.COMMAND_STRING));
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        ui.showError(String.format("Error processing %s command", COMMAND_STRING));
     }
 
     public boolean isExit() {
-        return COMMAND == Commands.EXIT;
+        return CURRENT_COMMAND == AvailableCommands.EXIT;
     }
 
     protected int isValidIndex(String indexStr, ArrayList<Task> tasks) throws DukeException {
-        Pattern p = Pattern.compile("^[0-9]+$");
-        boolean isNumber = p.matcher(indexStr).matches();
+        Pattern pattern = Pattern.compile("^[0-9]+$");
+        boolean isNumber = pattern.matcher(indexStr).matches();
 
         if (!isNumber) {
             throw new DukeException("Index provided is not an integer.");

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -10,19 +11,19 @@ import java.util.ArrayList;
 public class DeleteCommand extends Command {
     private final String INDEX_STRING;
 
-    public DeleteCommand(String commandString, String INDEX_STRING) {
-        super(Commands.DELETE, commandString);
-        this.INDEX_STRING = INDEX_STRING;
+    public DeleteCommand(String commandString, String indexString) {
+        super(AvailableCommands.DELETE, commandString);
+        INDEX_STRING = indexString;
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ArrayList<Task> t = tasks.getTasks();
-        int index = this.isValidIndex(this.INDEX_STRING, t);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        ArrayList<Task> tasks = taskList.getTasks();
+        int index = isValidIndex(INDEX_STRING, tasks);
 
-        Task task = t.get(index);
-        t.remove(index);
+        Task task = tasks.get(index);
+        tasks.remove(index);
 
-        ui.showDeleteTask(task.toString(), t.size());
+        ui.showDeleteTask(task.toString(), tasks.size());
     }
 }

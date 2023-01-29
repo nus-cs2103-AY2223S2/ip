@@ -10,13 +10,13 @@ import duke.task.Task;
 public class AddEventCommand extends Command {
     private final String DATA;
 
-    public AddEventCommand(String commandString, String DATA) {
-        super(Commands.ADD_EVENT, commandString);
-        this.DATA = DATA;
+    public AddEventCommand(String commandString, String data) {
+        super(AvailableCommands.ADD_EVENT, commandString);
+        DATA = data;
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] splitData1 = DATA.split(" /from ", 2);
         if (splitData1.length < 2) {
             throw new DukeException("Event command format error. Missing /from");
@@ -28,8 +28,8 @@ public class AddEventCommand extends Command {
         }
 
         Task event = new Event(splitData1[0], splitData2[0], splitData2[1]);
-        tasks.addTask(event);
+        taskList.addTask(event);
 
-        ui.showAddTask(event.toString(), tasks.size());
+        ui.showAddTask(event.toString(), taskList.size());
     }
 }

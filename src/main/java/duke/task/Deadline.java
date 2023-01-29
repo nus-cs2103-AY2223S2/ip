@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
             this.by = LocalDate.parse(by);
@@ -24,7 +24,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by, boolean isMarked) {
         this(description, by);
-        this.isDone = isMarked;
+        isDone = isMarked;
     }
 
     @Override
@@ -36,7 +36,8 @@ public class Deadline extends Task {
     @Override
     public String toData() {
         String formattedBy = by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return String.format("Deadline | marked: %s ; description: %s ; deadline: %s", this.isMarked(), this.description, formattedBy);
+        return String.format("Deadline | marked: %s ; description: %s ; deadline: %s", getMarkedStatus(),
+                this.description, formattedBy);
     }
 
     public static Task fromData(String data) {

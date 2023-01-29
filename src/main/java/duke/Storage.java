@@ -15,11 +15,11 @@ import java.util.Scanner;
 public class Storage {
     private final String FILE_PATH;
 
-    public Storage(String FILE_PATH) {
-        this.FILE_PATH = FILE_PATH;
+    public Storage(String filePath) {
+        FILE_PATH = filePath;
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File file = new File(this.FILE_PATH);
@@ -49,21 +49,20 @@ public class Storage {
         return tasks;
     }
 
-    public void updateData(TaskList tasks) throws DukeException {
+    public void updateData(TaskList taskList) throws DukeException {
         try {
-            FileWriter myWriter = new FileWriter(this.FILE_PATH);
-            String data = toData(tasks);
-            myWriter.write(data);
-            myWriter.close();
+            FileWriter fileWriter = new FileWriter(this.FILE_PATH);
+            String data = toData(taskList);
+            fileWriter.write(data);
+            fileWriter.close();
         } catch (IOException e) {
-            System.out.println(e);
             throw new DukeException("Error has occurred when saving data.");
         }
     }
 
-    private String toData(TaskList tasks) {
+    private String toData(TaskList taskList) {
         String output = "";
-        for (Task task : tasks.getTasks()) {
+        for (Task task : taskList.getTasks()) {
             output += task.toData();
             output += "\n";
         }

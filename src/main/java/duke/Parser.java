@@ -1,9 +1,10 @@
 package duke;
 
+
 import duke.command.*;
 
 public class Parser {
-    public static Command parse(String fullCommand) {
+    public static Command parse(String fullCommand) throws DukeException {
         String[] inputSplit = fullCommand.split(" ", 2);
         String command = inputSplit[0];
         switch (command) {
