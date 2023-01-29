@@ -5,7 +5,12 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.Scanner;
+import java.util.Date;
 
 
 
@@ -35,7 +40,7 @@ public class Duke {
                     pw.println(type + "-" + isMark + "-" + name + "-" + time);
                 } else if (type.equals("E")) {
                     String time = task.getTime();
-                    String startEnd [] = time.split("//", 2);
+                    String startEnd [] = time.split("-", 2);
 
                     pw.println(type + "-" + isMark + "-" + name + "-" + startEnd[0] + "-" + startEnd[1]);
                 } else {
@@ -71,11 +76,17 @@ public class Duke {
 
                 } else if (lines[0].equals("D")) {
                     String nameTime[] = lines[2].split("-", 2);
-                    task = new Deadline(nameTime[0], lines[0], "by " + nameTime[1]);
+
+                    SimpleDateFormat converterDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    Date date = converterDate.parse(nameTime[1]);
+                    task = new Deadline(nameTime[0], lines[0], date, nameTime[1]);
 
                 } else {
                     String nameStartEnd[] = lines[2].split("-", 3);
-                    task = new Event(nameStartEnd[0], lines[0], "from " + nameStartEnd[1], "to " + nameStartEnd[2]);
+                    SimpleDateFormat converterDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    Date date1 = converterDate.parse(nameStartEnd[1]);
+                    Date date2 = converterDate.parse(nameStartEnd[2]);
+                    task = new Event(nameStartEnd[0], lines[0], date1, date2, nameStartEnd[1], nameStartEnd[2]);
 
                 }
 
@@ -89,6 +100,9 @@ public class Duke {
 
         } catch (IOException i) {
             i.printStackTrace();
+        } catch (ParseException e) {
+            System.out.println("Unable to load file. Please check your that the item's date where it should be in the form of" +
+                    " dd/MM/yyyy HH:mm");
         }
 
     }
@@ -204,35 +218,70 @@ public class Duke {
                         } else if (time[1].trim().isEmpty()) {
                             throw new ArgumentException("A blank time I see");
                         }
+                        String deadlineTime = itemANDtime[1].split(" ", 2)[1];
+
+                        SimpleDateFormat converterDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        Date date = converterDate.parse(deadlineTime);
 
                         System.out.println("Got it. I've added this task:");
-                        toDo.addItemDeadline("D", itemANDtime[0], itemANDtime[1]);
+                        toDo.addItemDeadline("D", itemANDtime[0], date, deadlineTime);
 
                     } else {
-                        String itemANDtime[] = item.split("/", 3);
-                        if(itemANDtime.length <= 2){
-                            throw new ArgumentException("How interesting an event without proper timing?");
+
+                        if(!item.contains("/from") || !item.contains("/to")) {
+                            throw new ArgumentException("For event please enter the format: event nameOfEvent /from dd/MM/yyyy HH:mm" +
+                                    " /to dd/MM/yyyy HH:mm");
+                        }
+
+                        String itemANDtime[] = item.split(" /from ", 2);
+
+                        if (itemANDtime.length < 2) {
+                            throw new ArgumentException("You forget the event name!");
                         } else if(itemANDtime[0].trim().isEmpty()) {
                             throw new ArgumentException("Oh? Looks like your item disappeared into space.");
-                        } else if(itemANDtime[1].trim().isEmpty() || itemANDtime[2].trim().isEmpty()) {
-                            throw new ArgumentException("Hiding from reality I see. Too bad time waits for no man");
                         }
 
-                        String start[] = itemANDtime[1].split(" ", 2);
-                        String end[] = itemANDtime[2].split(" ", 2);
+                        String nameItem = itemANDtime[0];
 
-                        if (!start[0].equals("from")) {
-                            throw new ArgumentException("You know, eveything starts FROM somewhere. Where did your FROM go?");
-                        } else if (start[1].trim().isEmpty()) {
-                            throw new ArgumentException("A blank time I see");
-                        } else if (!end[0].equals("to")){
-                            throw new ArgumentException("Where did your TO go?");
-                        } else if (end[1].trim().isEmpty()) {
-                            throw new ArgumentException("Cool event! Too bad I don't know what time it ends");
+                        String startEnd [] = itemANDtime[1].split(" /to ");
+
+                        if(startEnd.length <2) {
+                            throw new ArgumentException("Please enter the format: event nameOfEvent /from xxx /to xxx");
                         }
+
+                        if(startEnd[0].trim().isEmpty() || startEnd[1].trim().isEmpty()) {
+                            throw new ArgumentException("Please do not leave the timing blank!");
+                        }
+
+                        SimpleDateFormat converterStartDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        Date startDate = converterStartDate.parse(startEnd[0]);
+                        Date endDate =  converterStartDate.parse(startEnd[1]);
+
+
+//                        if(itemANDtime.length <= 2){
+//                            throw new ArgumentException("How interesting an event without proper timing?");
+//                        } else if(itemANDtime[0].trim().isEmpty()) {
+//                            throw new ArgumentException("Oh? Looks like your item disappeared into space.");
+//                        } else if(itemANDtime[1].trim().isEmpty() || itemANDtime[2].trim().isEmpty()) {
+//                            throw new ArgumentException("Hiding from reality I see. Too bad time waits for no man");
+//                        }
+
+//                        String start[] = itemANDtime[1].split(" ", 2);
+//                        String end[] = itemANDtime[2].split(" ", 2);
+//
+//                        if (!start[0].equals("from")) {
+//                            throw new ArgumentException("You know, eveything starts FROM somewhere. Where did your FROM go?");
+//                        } else if (start[1].trim().isEmpty()) {
+//                            throw new ArgumentException("A blank time I see");
+//                        } else if (!end[0].equals("to")){
+//                            throw new ArgumentException("Where did your TO go?");
+//                        } else if (end[1].trim().isEmpty()) {
+//                            throw new ArgumentException("Cool event! Too bad I don't know what time it ends");
+//                        }
 
                         System.out.println("Got it. I've added this task:");
-                        toDo.addItemEvent("E", itemANDtime[0], itemANDtime[1], itemANDtime[2]);
+                        toDo.addItemEvent("E", nameItem, startDate, endDate, startEnd[0], startEnd[1]);
+//                        toDo.addItemEvent("E", itemANDtime[0], itemANDtime[1], itemANDtime[2]);
                     }
 
                     System.out.println("Now you have " + toDo.numberOfTask() + " tasks in the list.");
@@ -245,6 +294,8 @@ public class Duke {
             System.out.println(ex.getMessage());
             } catch (ArgumentException ex2) {
                 System.out.println(ex2.getMessage());
+            } catch (ParseException e) {
+                System.out.println("Please enter the time of the format dd/MM/yyyy HH:mm");
             }
 
             input = sc.nextLine();

@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 import java.io.IOException;
 
-
-
+import java.util.Date;
 public class toDoList {
 
     ArrayList<Task> allTasks;
@@ -29,14 +28,15 @@ public class toDoList {
         System.out.println(" " + newTask.toString());
     }
 
-    public void addItemDeadline(String type, String item, String time) {
-        Task newTask = new Deadline(item, type, time);
+
+    public void addItemDeadline(String type, String item, Date time, String timeString) {
+        Task newTask = new Deadline(item, type, time, timeString);
         allTasks.add(newTask);
         System.out.println(" " + newTask.toString());
     }
 
-    public void addItemEvent(String type, String item, String time1, String time2) {
-        Task newTask = new Event(item, type, time1, time2);
+    public void addItemEvent(String type, String item, Date time1, Date time2, String start, String end) {
+        Task newTask = new Event(item, type, time1, time2, start, end);
         allTasks.add(newTask);
         System.out.println(" " + newTask.toString());
     }
