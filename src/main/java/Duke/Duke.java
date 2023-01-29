@@ -25,8 +25,8 @@ import Duke.dukeexception.DukeException;
 
 public class Duke {
     public static void main(String[] args) {
-        System.out.println("Hello! I'm Duke.Duke\n" +
-                "What can I do for you?\n");
+        Ui ui = new Ui();
+        ui.printWelcome();
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> toDoList = new ArrayList<>();
         while (true) {
@@ -35,13 +35,15 @@ public class Duke {
             Command curCommand;
             try {
                 curCommand = parser.process();
-                curCommand.execute(toDoList);
+                //curCommand.execute(toDoList);
+                //ui.printCommandMessage(curCommand);
+                //ui.printList(toDoList);
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
                 continue;
             }
-            curCommand.execute(toDoList);
             if (curCommand instanceof Exit) {
+                ui.printGoodbye();
                 break;
             }
         }

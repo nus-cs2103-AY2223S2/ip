@@ -15,16 +15,14 @@ public class Add extends Command {
         this.task = task;
     }
 
-    private static String printTaskAdd(Task task, ArrayList<Task> toDoList) {
-        return String.format("Got it! I've added this task:\n" +
-                        "    %s\n" +
-                        "Now you have %d tasks in the list.",
-                task.toString(), toDoList.size());
-    }
-
     @Override
     public void execute(ArrayList<Task> toDoList) {
         toDoList.add(this.task);
-        System.out.println(printTaskAdd(this.task, toDoList));
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Got it! I've added this task:\n" + "    %s\n",
+                this.task.toString());
     }
 }

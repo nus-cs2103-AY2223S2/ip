@@ -9,17 +9,18 @@ public class ListTasks extends Command {
         super(message);
     }
 
-    private static String printList(ArrayList<Task> toDoList) {
-        String res = "";
-        res += "here are your tasks\n";
-        for (int i = 0; i < toDoList.size(); i++) {
-            res += String.format("%d.%s\n", i + 1, toDoList.get(i));
-        }
-        return res;
+    private static String getPrintOutput() {
+        // fix
+        return "";
     }
 
     @Override
     public void execute(ArrayList<Task> toDoList) {
-        System.out.println(printList(toDoList));
+        // empty
+    }
+
+    @Override
+    public String toString() {
+        return "Printing tasks:";
     }
 }
