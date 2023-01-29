@@ -5,32 +5,42 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> taskList;
+    ArrayList<Task> tasks;
 
     TaskList() {
-        taskList = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     void addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     String deleteTask(int taskNum) {
-        Task task = taskList.remove(taskNum - 1);
+        Task task = tasks.remove(taskNum - 1);
         return String.format("Noted, I've removed this task:\n   %s\nYou now have %d tasks in the list\n",
                 task.toString(), getNumOfTasks());
     }
 
     String markTask(int taskNum) {
-        Task task = taskList.get(taskNum - 1);
+        Task task = tasks.get(taskNum - 1);
         task.completeTask();
         return String.format("Nice! I've marked this task as done:\n   %s\n", task);
     }
 
     String unmarkTask(int taskNum) {
-        Task task = taskList.get(taskNum - 1);
+        Task task = tasks.get(taskNum - 1);
         task.undoTask();
         return String.format("OK, I've unmarked this task as not done yet:\n   %s\n", task);
+    }
+
+    String findTask(String keyword) {
+        TaskList tasksFound = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDescription().indexOf(keyword) != -1) {
+                tasksFound.addTask(task);
+            }
+        }
+        return tasksFound.getListOfTasks();
     }
 
     String addTaskText(Task task) {
@@ -39,14 +49,22 @@ public class TaskList {
     }
 
     int getNumOfTasks() {
-        return taskList.size();
+        return tasks.size();
     }
-    String getListOfTasks() {
+    String getSavedListOfTasks() {
         StringBuilder listString = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            listString.append(String.format("%s\n", taskList.get(i).getSaveTaskString()));
+        for (int i = 0; i < tasks.size(); i++) {
+            listString.append(String.format("%s\n", tasks.get(i).getSaveTaskString()));
         }
         return listString.toString();
+    }
+
+    String getListOfTasks() {
+        StringBuilder listOfTasks = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            listOfTasks.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+        }
+        return listOfTasks.toString();
     }
 
     /**
@@ -54,17 +72,13 @@ public class TaskList {
      *
      * @return String representation of the task list numbered.
      */
-
     @Override
     public String toString() {
-        if (taskList.isEmpty()) {
+        if (tasks.isEmpty()) {
             return "There are no tasks in your list";
         }
         StringBuilder printedList = new StringBuilder("Here are the tasks in your list:\n");
-        for (int i = 0; i < taskList.size(); i++) {
-            printedList.append(String.format("%d. %s\n", i + 1, taskList.get(i)));
-        }
+        printedList.append(getListOfTasks());
         return printedList.toString();
     }
-
 }

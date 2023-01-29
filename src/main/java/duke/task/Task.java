@@ -39,11 +39,16 @@ public abstract class Task {
         return dateTime.format(formatter);
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Returns String representation of task to be saved in file.
      *
      * @return String representation of task to be saved in file.
      */
+
     public abstract String getSaveTaskString();
 
     /**

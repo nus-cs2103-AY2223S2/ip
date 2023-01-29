@@ -24,6 +24,8 @@ public class Parser {
             return tasks.unmarkTask(Integer.parseInt(commandArr[1]));
         case "delete":
             return tasks.deleteTask(Integer.parseInt(commandArr[1]));
+        case "find":
+            return tasks.findTask(commandArr[1]);
         }
         return parseCommand(command, tasks);
     }

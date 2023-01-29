@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidTaskException;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -38,7 +39,7 @@ public class Storage {
         return parseFile(new File(filePath));
     }
 
-    TaskList parseFile(File file) throws FileNotFoundException {
+    TaskList parseFile(File file) throws DukeException, FileNotFoundException {
         Scanner sc = new Scanner(file);
         TaskList tasks = new TaskList();
         while (sc.hasNextLine()) {
@@ -48,7 +49,7 @@ public class Storage {
         return tasks;
     }
 
-    Task parseLine(String data) {
+    Task parseLine(String data) throws InvalidTaskException {
         String[] taskData = data.split("\\|");
         String taskType = taskData[0].trim();
         switch (taskType) {
@@ -57,16 +58,18 @@ public class Storage {
         case "D":
             return new Deadline(taskData[2].trim(), taskData[1].trim().equals("X"),
                     Parser.parseDateTime(taskData[3].trim().substring(4)));
-        default: //switch to case "E" later and throw invalid task type after
+        case "E":
             return new Event(taskData[2].trim(), taskData[1].trim().equals("X"),
                     Parser.parseDateTime(taskData[3].trim().substring(6)),
                     Parser.parseDateTime(taskData[4].trim().substring(4)));
+        default:
+            throw new InvalidTaskException();
         }
     }
 
     void saveTasksInFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        fw.write(tasks.getListOfTasks());
+        fw.write(tasks.getSavedListOfTasks());
         fw.close();
     }
 }
