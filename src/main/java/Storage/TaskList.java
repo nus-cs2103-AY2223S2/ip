@@ -1,11 +1,11 @@
-package Storage;
+package storage;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import Exceptions.SelectOutOfIndexException;
-import Tasks.Task;
+import exceptions.SelectOutOfIndexException;
+import tasks.Task;
 
 /**
  * This class is used to store all the tasks.

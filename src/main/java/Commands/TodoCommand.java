@@ -1,9 +1,9 @@
-package Commands;
+package commands;
 
-import Storage.Storage;
-import Storage.TaskList;
-import Tasks.ToDo;
-import Ui.Ui;
+import storage.Storage;
+import storage.TaskList;
+import tasks.ToDo;
+import ui.Ui;
 
 /**
  * This class is used to create a new To Do task.

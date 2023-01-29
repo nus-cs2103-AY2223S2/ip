@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 /**
  * This class is used to throw an exception for selecting an item that is not in the list.

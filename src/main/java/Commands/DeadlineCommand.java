@@ -1,9 +1,9 @@
-package Commands;
+package commands;
 
-import Storage.Storage;
-import Storage.TaskList;
-import Tasks.Deadline;
-import Ui.Ui;
+import storage.Storage;
+import storage.TaskList;
+import tasks.Deadline;
+import ui.Ui;
 
 /**
  * This class is used to create a new Deadline task.

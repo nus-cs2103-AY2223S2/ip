@@ -1,9 +1,9 @@
-package Commands;
+package commands;
 
-import Exceptions.NoTaskException;
-import Storage.Storage;
-import Storage.TaskList;
-import Ui.Ui;
+import exceptions.NoTaskException;
+import storage.Storage;
+import storage.TaskList;
+import ui.Ui;
 
 /**
  * This class helps to find all matching tasks.

@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * This abstract class is used to represent a Task.

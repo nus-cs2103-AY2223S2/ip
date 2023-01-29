@@ -1,11 +1,13 @@
+package duke;
+
 import java.io.IOException;
 
-import Commands.Command;
-import Exceptions.DukeException;
-import Parser.Parser;
-import Storage.Storage;
-import Storage.TaskList;
-import Ui.Ui;
+import commands.Command;
+import exceptions.DukeException;
+import parser.Parser;
+import storage.Storage;
+import storage.TaskList;
+import ui.Ui;
 
 /**
  * This program allows you to keep track of your upcoming To Dos, Deadlines and Events.

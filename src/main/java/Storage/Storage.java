@@ -1,4 +1,4 @@
-package Storage;
+package storage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.ToDo;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.ToDo;
 
 /**
  * This class is used to represent the Storage, which will load and store the database from the local file.

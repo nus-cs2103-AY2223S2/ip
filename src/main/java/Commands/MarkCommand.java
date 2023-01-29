@@ -1,9 +1,9 @@
-package Commands;
+package commands;
 
-import Storage.Storage;
-import Storage.TaskList;
-import Tasks.Task;
-import Ui.Ui;
+import storage.Storage;
+import storage.TaskList;
+import tasks.Task;
+import ui.Ui;
 
 /**
  * This class is used to mark a task.

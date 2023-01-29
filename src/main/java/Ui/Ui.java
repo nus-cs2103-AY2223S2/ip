@@ -1,12 +1,12 @@
-package Ui;
+package ui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-import Exceptions.DukeException;
-import Tasks.Task;
+import exceptions.DukeException;
+import tasks.Task;
 
 /**
  * This class handles the user interface of Duke.

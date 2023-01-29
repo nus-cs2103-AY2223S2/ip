@@ -1,17 +1,18 @@
-package Parser;
-import Commands.Command;
-import Commands.DeadlineCommand;
-import Commands.DeleteCommand;
-import Commands.EndCommand;
-import Commands.EventCommand;
-import Commands.FindCommand;
-import Commands.MarkCommand;
-import Commands.ReadCommand;
-import Commands.TodoCommand;
-import Commands.UnmarkCommand;
-import Exceptions.InvalidInputException;
-import Exceptions.NoDateException;
-import Exceptions.NoDescriptionException;
+package parser;
+
+import commands.Command;
+import commands.DeadlineCommand;
+import commands.DeleteCommand;
+import commands.EndCommand;
+import commands.EventCommand;
+import commands.FindCommand;
+import commands.MarkCommand;
+import commands.ReadCommand;
+import commands.TodoCommand;
+import commands.UnmarkCommand;
+import exceptions.InvalidInputException;
+import exceptions.NoDateException;
+import exceptions.NoDescriptionException;
 
 /**
  * This class is used to parse the user input into the correct command.

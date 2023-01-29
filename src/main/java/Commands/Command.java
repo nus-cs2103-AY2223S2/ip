@@ -1,10 +1,10 @@
-package Commands;
+package commands;
 
 import java.io.IOException;
 
-import Storage.Storage;
-import Storage.TaskList;
-import Ui.Ui;
+import storage.Storage;
+import storage.TaskList;
+import ui.Ui;
 
 /**
  * An abstract class to represent the various commands.

@@ -1,4 +1,4 @@
-package Tasks;
+package tasks;
 
 /**
  * This class is used to represent a To Do task.

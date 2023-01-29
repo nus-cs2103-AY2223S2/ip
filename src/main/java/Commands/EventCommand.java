@@ -1,9 +1,9 @@
-package Commands;
+package commands;
 
-import Storage.Storage;
-import Storage.TaskList;
-import Tasks.Event;
-import Ui.Ui;
+import storage.Storage;
+import storage.TaskList;
+import tasks.Event;
+import ui.Ui;
 
 /**
  * This class is used to create a new Event task.
