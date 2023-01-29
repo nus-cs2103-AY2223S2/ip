@@ -54,9 +54,9 @@ public class TaskList {
         StringBuilder sb = new StringBuilder("These are the tasks you asked for.");
         while (it.hasNext()) {
             if (index) {
-                sb.append(UI.indentMessage(String.valueOf(it.nextIndex() + 1))).append(". ").append(it.next());
+                sb.append("\n").append(it.nextIndex() + 1).append(". ").append(it.next());
             } else {
-                sb.append(UI.indentMessage(String.valueOf(it.next())));
+                sb.append("\n").append(it.next());
             }
         }
         return sb.toString();

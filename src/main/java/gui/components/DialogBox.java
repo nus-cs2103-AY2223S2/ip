@@ -1,4 +1,4 @@
-package gui;
+package gui.components;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -41,11 +41,11 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         username.setText(user);
-        dialog.setFont(new Font(UI.fontType, UI.pFont));
-        username.setFont(new Font(UI.fontType, UI.smallFont));
+        dialog.setFont(new Font(UI.FONT_TYPE, UI.P_FONT));
+        username.setFont(new Font(UI.FONT_TYPE, UI.SMALL_FONT));
         dialog.setWrapText(true);
         dialog.setMnemonicParsing(false);
-        dialog.setMaxWidth(750);
+        dialog.setMaxWidth(650);
         displayPicture.setImage(img);
     }
 

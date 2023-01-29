@@ -1,4 +1,4 @@
-package gui;
+package gui.components;
 
 import java.util.Objects;
 
@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 /**
- * Controller for gui.MainWindow. Provides the layout for the other controls.
+ * Controller for gui.components.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -40,7 +40,7 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage =
             new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Silco.jpg")));
 
-    private final Font appFont = new Font(UI.fontType, UI.pFont);
+    private final Font appFont = new Font(UI.FONT_TYPE, UI.P_FONT);
 
     /**
      * This function is called when the GUI window starts.
@@ -50,10 +50,10 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         validateInput();
-        appLabel.setText("Duke");
+        appLabel.setText("DUKE");
         userInput.setFont(appFont);
         sendButton.setFont(appFont);
-        appLabel.setFont(new Font(UI.fontType, UI.h1Font));
+        appLabel.setFont(new Font(UI.FONT_TYPE, UI.H1_FONT));
         modalContainer.getChildren().add(DialogBox.getDukeDialog(UI.helpMessage(), dukeImage));
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(UI.welcomeMessage(), dukeImage));
     }
@@ -71,7 +71,7 @@ public class MainWindow extends AnchorPane {
     private void toggleModal() {
         modalContainer.setVisible(!modalContainer.isVisible());
         if (modalContainer.isVisible()) {
-            dialogContainer.setOpacity(0.1);
+            dialogContainer.setOpacity(0.7);
         } else {
             dialogContainer.setOpacity(1);
         }

@@ -4,16 +4,17 @@ package duke.views;
  * Represents the duke.views of the program. Contains methods for printing to console.
  */
 public class UI {
-    public static final String fontType = "Courier New";
-    public static final Integer h1Font = 30;
-    public static final Integer pFont = 15;
-    public static final Integer smallFont = 12;
+    /** Font options **/
+    public static final String FONT_TYPE = "Courier New";
+    public static final Integer H1_FONT = 30;
+    public static final Integer P_FONT = 15;
+    public static final Integer SMALL_FONT = 12;
 
     private static final String DATE_FORMAT = "YYYY-MM-DD";
     private static final String INDENT_SPACES = "    ";
 
     public static String separatorLine() {
-        return "\n--------------------------------------------------------------------------------------";
+        return "\n--------------------------------------------------------------------";
     }
 
     public static String indentMessage(String message) {
