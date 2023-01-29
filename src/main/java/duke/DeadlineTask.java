@@ -55,25 +55,27 @@ public class DeadlineTask extends Task {
      * @throws DukeException If command is invalid.
      */
     public static void createDeadlineTask(String command, TaskList t) throws DukeException {
-        ArrayList<String> input = new ArrayList(Arrays.asList(command.split(" ")));
-        if (input.size() <= 1) throw new DukeException("deadline");
+        ArrayList<String> input = new ArrayList<>(Arrays.asList(command.split(" ")));
+        if (input.size() <= 1) {
+            throw new DukeException("deadline");
+        }
         int byIndex = input.indexOf("/by");
-        String taskName = "";
-        String deadline = "";
+        StringBuilder taskName = new StringBuilder();
+        StringBuilder deadline = new StringBuilder();
         for (int i = 1; i < input.size(); i++) {
             if (i < byIndex) {
-                taskName += input.get(i);
+                taskName.append(input.get(i));
                 if (i < byIndex - 1) {
-                    taskName += " ";
+                    taskName.append(" ");
                 }
             } else if (i > byIndex) {
-                deadline += input.get(i);
+                deadline.append(input.get(i));
                 if (i < input.size() - 1) {
-                    deadline += " ";
+                    deadline.append(" ");
                 }
             }
         }
-        DeadlineTask d = new DeadlineTask(taskName, DateTimeParser.dateTimeParser(deadline));
+        DeadlineTask d = new DeadlineTask(taskName.toString(), DateTimeParser.dateTimeParser(deadline.toString()));
         t.addTask(d);
     }
 

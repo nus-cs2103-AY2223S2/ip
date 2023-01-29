@@ -4,12 +4,11 @@ import java.util.Scanner;
 
 /**
  * Class to handle the User Interface of the Duke program.
- *
  * @author Merrick
  */
 public class Ui {
-    protected static String divider = "    ____________________________________________________________";
-    private Scanner command;
+    private static final String divider = "    ____________________________________________________________";
+    private final Scanner command;
 
     /**
      * Constructor of Ui class.

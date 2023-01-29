@@ -1,16 +1,18 @@
 package util;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Storage class to help with loading and storing of Tasks in duke.txt.
- *
  * @author Merrick
  */
 public class Storage {
-    private String filePath;
-    private String fileDir;
-
+    private final String filePath;
+    private final String fileDir;
     /**
      * Constructor of Storage class
      * @param fileDir Directory of duke.txt file.
@@ -47,7 +49,7 @@ public class Storage {
 
     /**
      * Saves the tasks stored TaskList into the duke.txt file.
-     * @throws DukeException If IOException from writing to duke.txt is encountered.
+     * @throws IOException If IOException from writing to duke.txt is encountered.
      */
     public void saveTasks(TaskList tasks) throws IOException {
         try {

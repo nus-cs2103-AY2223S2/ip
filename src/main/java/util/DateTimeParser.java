@@ -6,13 +6,9 @@ import java.time.format.DateTimeParseException;
 
 /**
  * DateTimeParser class to handle DateTime manipulation.
- *
  * @author Merrick
  */
 public class DateTimeParser {
-    // Format deadline into a Datetime object
-    // Format expected is 08/12/2023 1800
-
     /**
      * Static method to format datetime string into a LocalDateTime object.
      * @param input String input for datetime.
@@ -22,8 +18,7 @@ public class DateTimeParser {
     public static LocalDateTime dateTimeParser(String input) throws DukeException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         try {
-            LocalDateTime dateTime = LocalDateTime.parse(input, format);
-            return dateTime;
+            return LocalDateTime.parse(input, format);
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid Date and Time provided");
         }

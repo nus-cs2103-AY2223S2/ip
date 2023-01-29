@@ -4,16 +4,17 @@ import util.DateTimeParser;
 import util.DukeException;
 import util.TaskList;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.time.LocalDateTime;
+
 
 /**
  * Subclass of Task which has a start and end datetime.
  *
  * @author Merrick
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDateTime start;
     protected LocalDateTime end;
 
@@ -51,18 +52,20 @@ public class Event extends Task{
      * @throws DukeException If command is invalid.
      */
     public static void createEvent(String command, TaskList t) throws DukeException {
-        ArrayList<String> input = new ArrayList(Arrays.asList(command.split(" ")));
-        if (input.size() <= 1) throw new DukeException("event");
+        ArrayList<String> input = new ArrayList<>(Arrays.asList(command.split(" ")));
+        if (input.size() <= 1) {
+            throw new DukeException("event");
+        }
         int fromIndex = input.indexOf("/from");
         int toIndex = input.indexOf("/to");
-        String taskName = "";
+        StringBuilder taskName = new StringBuilder();
         String start = "";
-        String end = "";
+        StringBuilder end = new StringBuilder();
         for (int i = 1; i < input.size(); i++) {
             if (i < fromIndex) {
-                taskName += input.get(i);
+                taskName.append(input.get(i));
                 if (i < fromIndex - 1) {
-                    taskName += " ";
+                    taskName.append(" ");
                 }
             } else if ((i > fromIndex) && (i < toIndex)) {
                 start += input.get(i);
@@ -70,14 +73,15 @@ public class Event extends Task{
                     start += " ";
                 }
             } else if (i > toIndex) {
-                end += input.get(i);
+                end.append(input.get(i));
                 if (i < input.size() - 1) {
-                    end += " ";
+                    end.append(" ");
                 }
             }
         }
         System.out.println(taskName);
-        Event e = new Event(taskName, DateTimeParser.dateTimeParser(start.stripTrailing()), DateTimeParser.dateTimeParser(end));
+        Event e = new Event(taskName.toString(), DateTimeParser.dateTimeParser(start.stripTrailing()),
+                DateTimeParser.dateTimeParser(end.toString()));
         t.addTask(e);
     }
 
