@@ -1,10 +1,14 @@
+package duke.task;
+
+import duke.task.Task;
+
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
 
     private final LocalDateTime by;
 
-    Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }

@@ -1,3 +1,12 @@
+package duke.tasklist;
+
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidArgumentException;
+
+import duke.storage.Storage;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -42,7 +51,7 @@ public class TaskList {
             this.taskStorage.writeTasksToFile(this.tasks);
 
         } else {
-            throw new DukeInvalidCommandException("Sorry... That is an invalid task number :/");
+            throw new DukeInvalidArgumentException("Sorry... That is an invalid task number :/");
         }
 
     }
@@ -75,7 +84,7 @@ public class TaskList {
             System.out.println("You now have " + this.tasks.size() + " task(s) in the list.");
 
         } else {
-            throw new DukeInvalidCommandException("Sorry... That is an invalid task number :/");
+            throw new DukeInvalidArgumentException("Sorry... That is an invalid task number :/");
         }
 
     }

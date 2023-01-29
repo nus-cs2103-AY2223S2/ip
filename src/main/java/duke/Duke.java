@@ -1,10 +1,21 @@
+package duke;
+
+import duke.command.Command;
+
+import duke.exception.DukeException;
+
+import duke.parser.Parser;
+
+import duke.tasklist.TaskList;
+
+import duke.ui.Ui;
+
 import java.util.Scanner;
 
 public class Duke {
 
     private final Ui ui = new Ui();
     private final TaskList taskList = new TaskList();
-    private final Parser parser = new Parser(this.taskList);
 
     private void start() {
 
@@ -18,8 +29,8 @@ public class Duke {
             String userCommand = ui.getUserCommand(commandScanner);
 
             try {
-                Command command = parser.parse(userCommand);
-                command.execute();
+                Command command = Parser.parse(userCommand);
+                command.execute(this.taskList);
                 toExit = command.isExitCommand();
 
             } catch (DukeException e) {

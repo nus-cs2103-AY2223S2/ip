@@ -1,19 +1,33 @@
+package duke.parser;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
+
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidArgumentException;
+import duke.exception.DukeInvalidCommandException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
 
-    private final TaskList taskList;
-
-    Parser(TaskList taskList) {
-        this.taskList = taskList;
-    }
-
     private static LocalDateTime parseDateTime(String dateTimeText) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy kkmm");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         LocalDateTime dateTime;
 
         try {
@@ -28,9 +42,9 @@ public class Parser {
 
     }
 
-    private Command parseList(String[] commandParts) throws DukeException {
+    private static Command parseList(String[] commandParts) throws DukeException {
         if (commandParts.length == 1) {
-            return new ListCommand(this.taskList);
+            return new ListCommand();
 
         } else {
             throw new DukeInvalidCommandException("Sorry. That is an invalid command :/");
@@ -38,7 +52,7 @@ public class Parser {
 
     }
 
-    private Command parseDelete(String[] commandParts) throws DukeException {
+    private static Command parseDelete(String[] commandParts) throws DukeException {
 
         if (commandParts.length != 2) {
             throw new DukeInvalidCommandException("Sorry... That is an invalid command :/");
@@ -46,7 +60,7 @@ public class Parser {
 
         try {
             int taskNumber = Integer.parseInt(commandParts[1]);
-            return new DeleteCommand(this.taskList, taskNumber);
+            return new DeleteCommand(taskNumber);
 
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException("Sorry... That is an invalid task number :/");
@@ -54,7 +68,7 @@ public class Parser {
 
     }
 
-    private Command parseMarkUnmark(String commandHeader, String[] commandParts) throws DukeException {
+    private static Command parseMarkUnmark(String commandHeader, String[] commandParts) throws DukeException {
 
         if (commandParts.length != 2) {
             throw new DukeInvalidCommandException("Sorry... That is an invalid command :/");
@@ -64,9 +78,9 @@ public class Parser {
             int taskNumber = Integer.parseInt(commandParts[1]);
 
             if (commandHeader.equals("mark")) {
-                return new MarkCommand(this.taskList, taskNumber);
+                return new MarkCommand(taskNumber);
             } else {
-                return new UnmarkCommand(this.taskList, taskNumber);
+                return new UnmarkCommand(taskNumber);
             }
 
         } catch (NumberFormatException e) {
@@ -75,7 +89,7 @@ public class Parser {
 
     }
 
-    private Command parseToDo(String[] commandParts) throws DukeException {
+    private static Command parseToDo(String[] commandParts) throws DukeException {
         if (commandParts.length == 1) {
             throw new DukeInvalidArgumentException("Uh-oh. The description of the to-do is empty :/");
         }
@@ -85,11 +99,11 @@ public class Parser {
 
         Task toDo = new ToDo(description);
 
-        return new AddCommand(this.taskList, toDo, "to-do");
+        return new AddCommand(toDo, "to-do");
 
     }
 
-    private Command parseDeadline(String[] commandParts) throws DukeException {
+    private static Command parseDeadline(String[] commandParts) throws DukeException {
         if (commandParts.length == 1) {
             throw new DukeInvalidCommandException("Uh-oh. There is no about the deadline :/");
         }
@@ -124,11 +138,11 @@ public class Parser {
         }
 
         Task deadline = new Deadline(description, byDateTime);
-        return new AddCommand(this.taskList, deadline, "deadline");
+        return new AddCommand(deadline, "deadline");
 
     }
 
-    private Command parseEvent(String[] commandParts) throws DukeException {
+    private static Command parseEvent(String[] commandParts) throws DukeException {
         if (commandParts.length == 1) {
             throw new DukeInvalidCommandException("Uh-oh. There is no information about the event :/");
         }
@@ -195,11 +209,11 @@ public class Parser {
         }
 
         Task event = new Event(description, fromDateTime, toDateTime);
-        return new AddCommand(this.taskList, event, "event");
+        return new AddCommand(event, "event");
 
     }
 
-    public Command parse(String userCommand) throws DukeException {
+    public static Command parse(String userCommand) throws DukeException {
 
         String command = userCommand.strip().replaceAll("( )+", " ");
 

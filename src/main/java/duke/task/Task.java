@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
@@ -7,7 +9,7 @@ public abstract class Task {
     protected final String description;
     protected boolean isDone;
 
-    Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -43,7 +45,7 @@ public abstract class Task {
     }
 
     public static String getDateTimeString(LocalDateTime dateTime) {
-        DateTimeFormatter formatToPrint = DateTimeFormatter.ofPattern("MMM dd yyyy KK:mm a");
+        DateTimeFormatter formatToPrint = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
         return dateTime.format(formatToPrint);
 
     }
