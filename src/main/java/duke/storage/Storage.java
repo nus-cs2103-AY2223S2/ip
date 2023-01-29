@@ -14,16 +14,33 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
+/**
+ * Storage class to store the tasks in text file.
+ *
+ * @author Gao Mengqi
+ * @version CS2103T AY22/23 Semester 2
+ */
 public class Storage {
     private String filePath;
     private FileWriter writer;
     private ArrayList<Task> taskList = new ArrayList<>();
     private Task task;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Convert the task information in the txt file to Task objects.
+     *
+     * @param str
+     * @return Task objects.
+     */
 
     private Task convertStrToTask(String str) {
         String getTaskType = str.substring(0, 1);
@@ -63,6 +80,13 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Load the existing task list to Duke.
+     *
+     * @return TaskList.
+     * @throws DukeException
+     */
+
     public ArrayList<Task> load() throws DukeException {
         try {
             BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
@@ -81,6 +105,13 @@ public class Storage {
             return taskList;
         }
     }
+
+    /**
+     * Update the text file whenever a new task is added by the user.
+     *
+     * @param task
+     * @throws IOException
+     */
 
     public void update(Task task) throws IOException {
         Path dataDir = Paths.get("ip/data");

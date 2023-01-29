@@ -7,11 +7,22 @@ import duke.task.Parser;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class for the Duke object.
+ *
+ * @author Gao Mengqi
+ * @version CS2103T AY22/23 Semester 2
+ */
 public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Constructor for Duke object.
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,7 +34,9 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Start the Duke program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -41,6 +54,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Initialise the Duke object.
+     *
+     * @param args
+     * @throws DukeException
+     */
     public static void main(String[] args) throws DukeException {
         new Duke("ip/data/tasks.txt").run();
     }

@@ -7,11 +7,24 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Find command used for duke.
+ *
+ * @author Gao Mengqi
+ * @version CS2103T AY22/23 Semester 2
+ */
 public class FindCommand extends Command {
     private String keyword;
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
+
+    /**
+     * Store all the tasks containing the keyword in an arraylist and print it out.
+     * @param tasks
+     * @param ui
+     * @param storage
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         int lenOfTaskList = tasks.getLength();
@@ -25,6 +38,11 @@ public class FindCommand extends Command {
         ui.showRelevantTasks(relevantTasks);
     }
 
+    /**
+     * Check if this command will result in termination of duke.
+     *
+     * @return whether the program is exited.
+     */
     @Override
     public boolean isExit() {
         return false;
