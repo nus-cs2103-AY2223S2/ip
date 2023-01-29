@@ -12,6 +12,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -33,16 +38,21 @@ public class Task {
         return this.equals(EMPTY_TASK);
     }
 
+    public String isMarked() {
+        return this.isDone ? "1" : "0";
+    }
+
     public String toData() {
-        return String.format("Task | description: %s", this.description);
+        return String.format("Task | marked: %s ; description: %s", this.isMarked() ,this.description);
     }
 
     public static Task fromData(String data) {
-        Pattern pattern = Pattern.compile("(description:) (.*)");
+        Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*)");
         Matcher matcher = pattern.matcher(data);
         if (matcher.matches()) {
-            String description = matcher.group(2);
-            return new Task(description);
+            boolean isMarked = matcher.group(2).equals("1") ? true : false;
+            String description = matcher.group(4);
+            return new Task(description, isMarked);
         }
         return Task.EMPTY_TASK;
     }

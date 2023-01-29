@@ -18,6 +18,11 @@ public class Deadline extends Task {
         }
     }
 
+    public Deadline(String description, String by, boolean isMarked) {
+        this(description, by);
+        this.isDone = isMarked;
+    }
+
     @Override
     public String toString() {
         String formattedBy = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -27,16 +32,17 @@ public class Deadline extends Task {
     @Override
     public String toData() {
         String formattedBy = by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return String.format("Deadline | description: %s ; deadline: %s", this.description, formattedBy);
+        return String.format("Deadline | marked: %s ; description: %s ; deadline: %s", this.isMarked(), this.description, formattedBy);
     }
 
     public static Task fromData(String data) {
-        Pattern pattern = Pattern.compile("(description:) (.*) ; (deadline:) (.*)");
+        Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*) ; (deadline:) (.*)");
         Matcher matcher = pattern.matcher(data);
         if (matcher.matches()) {
-            String description = matcher.group(2);
-            String deadline = matcher.group(4);
-            return new Deadline(description, deadline);
+            boolean isMarked = matcher.group(2).equals("1") ? true : false;
+            String description = matcher.group(4);
+            String deadline = matcher.group(6);
+            return new Deadline(description, deadline, isMarked);
         }
         return Task.EMPTY_TASK;
     }

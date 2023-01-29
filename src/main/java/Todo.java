@@ -7,6 +7,11 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, boolean isMarked) {
+        this(description);
+        this.isDone = isMarked;
+    }
+
     @Override
     public String toString() {
         return String.format("[T]%s", super.toString());
@@ -14,15 +19,16 @@ public class Todo extends Task {
 
     @Override
     public String toData() {
-        return String.format("Todo | description: %s", this.description);
+        return String.format("Todo | marked: %s ; description: %s", this.isMarked(), this.description);
     }
 
     public static Task fromData(String data) {
-        Pattern pattern = Pattern.compile("(description:) (.*)");
+        Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*)");
         Matcher matcher = pattern.matcher(data);
         if (matcher.matches()) {
-            String description = matcher.group(2);
-            return new Todo(description);
+            boolean isMarked = matcher.group(2).equals("1") ? true : false;
+            String description = matcher.group(4);
+            return new Todo(description, isMarked);
         }
         return Task.EMPTY_TASK;
     }

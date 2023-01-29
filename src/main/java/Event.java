@@ -21,6 +21,11 @@ public class Event extends Task {
         }
     }
 
+    public Event(String description, String from, String to, boolean isMarked) {
+        this(description, from, to);
+        this.isDone = isMarked;
+    }
+
     @Override
     public String toString() {
         String formattedFrom = from.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
@@ -32,17 +37,18 @@ public class Event extends Task {
     public String toData() {
         String formattedFrom = from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String formattedTo = to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return String.format("Event | description: %s ; from: %s ; to: %s", this.description, formattedFrom, formattedTo);
+        return String.format("Event | marked: %s ; description: %s ; from: %s ; to: %s", this.isMarked(), this.description, formattedFrom, formattedTo);
     }
 
     public static Task fromData(String data) {
-        Pattern pattern = Pattern.compile("(description:) (.*) ; (from:) (.*) ; (to:) (.*)");
+        Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*) ; (from:) (.*) ; (to:) (.*)");
         Matcher matcher = pattern.matcher(data);
         if (matcher.matches()) {
-            String description = matcher.group(2);
-            String from = matcher.group(4);
-            String to = matcher.group(6);
-            return new Event(description, from, to);
+            boolean isMarked = matcher.group(2).equals("1") ? true : false;
+            String description = matcher.group(4);
+            String from = matcher.group(6);
+            String to = matcher.group(8);
+            return new Event(description, from, to, isMarked);
         }
         return Task.EMPTY_TASK;
     }
