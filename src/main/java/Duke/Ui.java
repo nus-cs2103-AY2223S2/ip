@@ -2,6 +2,9 @@ package Duke;
 
 import Duke.Exceptions.DukeException;
 import Duke.Tasks.TaskList;
+import Duke.Tasks.Task;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.String;
 
@@ -84,10 +87,17 @@ public class Ui {
 
     }
 
+    /**
+     * The method of findTask
+     * @param list
+     * @parma task
+     */
+
+
 
     /**
-     * The method of DukeExeptionMsg()
-     * @arg e the exception catched
+     * The method of DukeExeptionMsg
+     * @param e the exception catched
      */
 
     public void DukeExceptionMsg(DukeException e) {

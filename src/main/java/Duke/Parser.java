@@ -9,6 +9,7 @@ import java.lang.String;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * Contains Parser object that deals with making sense of the user command
@@ -26,7 +27,7 @@ public class Parser {
     private static void addTodo(String description, TaskList list) {
         ToDo tdItem = new ToDo(description);
         list.addTask(tdItem);
-        System.out.println("\tGot it. I have added this task:\n" + tdItem.toString());
+        System.out.println("\tGot it. I have added this task:\n" + "\t" + tdItem.toString());
         System.out.printf("\tNow you have %d tasks in the list.\n", list.size());
     }
 
@@ -40,7 +41,7 @@ public class Parser {
     private static void addEvents(String description, TaskList list, LocalDateTime start, LocalTime end) {
         Events evItem = new Events(description, start, end);
         list.addTask(evItem);
-        System.out.println("\tGot it. I have added this task:\n " + evItem.toString());
+        System.out.println("\tGot it. I have added this task:\n " + "\t" + evItem.toString());
         System.out.printf("\tNow you have %d tasks in the list.\n", list.size());
     }
 
@@ -54,7 +55,7 @@ public class Parser {
     private static void addDeadline(String description, TaskList list, LocalDateTime doneBy) {
         Deadline dlItem = new Deadline(description, doneBy);
         list.addTask(dlItem);
-        System.out.println("\tGot it. I have added this task:\n " + dlItem.toString());
+        System.out.println("\tGot it. I have added this task:\n " + "\t" + dlItem.toString());
         System.out.printf("\tYou have %d tasks in the list.\n\n", list.size());
     }
 
@@ -71,6 +72,27 @@ public class Parser {
         Ui.showDeleteMessage();
         System.out.println(String.format("\t%s removed", removed.toString()));
         System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+    }
+    public static void findTask(TaskList list, String wantedTask) {
+        ArrayList<Task> containingList = new ArrayList<>();
+        for (int i = 1; i <= list.size(); i++) {
+            Task task = list.get(i);
+            if (task.contains(wantedTask)) {
+                containingList.add(task);
+            }
+        }
+        if (containingList.size() == 0) {
+            System.out.println("\tSorry you have no matching tasks.\n");
+            return;
+        }
+        System.out.println("\tHere are the matching tasks in your list:");
+        for (int i = 1; i <= containingList.size(); i++) {
+            System.out.println("\t" + i + "." + containingList.get(i - 1));
+
+
+        }
+        System.out.println();
+
     }
 
 
@@ -145,7 +167,13 @@ public class Parser {
                     Ui.Underline();
 
 
-                }  else {
+                } else if (instct.split(" ")[0].equals("find")) {
+                    Ui.Underline();
+                    String wantedTask = instct.split(" ")[1];
+                    findTask(list, wantedTask);
+                    Ui.Underline();
+
+                } else {
                     throw new unknownCommandException();
                 }
 
