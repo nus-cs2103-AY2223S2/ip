@@ -69,7 +69,7 @@ public class Storage {
 
     void saveTasksInFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        fw.write(tasks.getListOfTasks());
+        fw.write(tasks.getSavedListOfTasks());
         fw.close();
     }
 }

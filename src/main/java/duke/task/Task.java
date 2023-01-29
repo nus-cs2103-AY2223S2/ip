@@ -33,6 +33,9 @@ public abstract class Task {
         return dateTime.format(formatter);
     }
 
+    public String getDescription() {
+        return description;
+    }
     public abstract String getSaveTaskString();
 
     @Override
