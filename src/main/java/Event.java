@@ -12,7 +12,7 @@ public class Event extends Task {
     private String end;
 
     /**
-     * Create a Event task object with given description and starting, ending time
+     * Creates an Event task object with given description and starting, ending time
      *
      * @param description The description for the Event task
      * @param start The starting time of the Event

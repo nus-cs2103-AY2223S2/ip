@@ -1,3 +1,8 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,26 +15,99 @@ import java.util.Scanner;
 public class Duke {
     private static final String DIVIDER_LINE = "____________________________________________________\n";
     private static ArrayList<Task> TASKS = new ArrayList<Task>();
+    private static final Path tasksFilePath = Paths.get(".", ".", ".", "data", "duke.txt");
+    private static final Path tempTasksFilePath = Paths.get(".", ".", ".", "data", "temp_duke.txt");
 
-    private static void displayIntro() {
+    private static void start() {
         System.out.println(reply("Hello! I'm Duke\n What can I do for you?" + "\n"));
+        try {
+            Files.createFile(tasksFilePath);
+        } catch (FileAlreadyExistsException e) {
+            readFile();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void displayOutro() {
         System.out.println(reply("Bye. Hope to see you again soon!" + "\n"));
     }
 
+    private static void readFile() {
+        Scanner reader = null;
+        try {
+            reader = new Scanner(tasksFilePath);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        if (reader != null) {
+            String pointer;
+            String description;
+            Task newTask;
+            while (reader.hasNext()) {
+                pointer = reader.nextLine();
+
+                //checks which kinds of task is stored in this current line
+                if (pointer.startsWith("[T]")) {
+                    description = pointer.substring(7);
+                    newTask = new ToDo(description);
+                } else if (pointer.startsWith("[E]")) {
+                    description = pointer.substring(7, pointer.indexOf("(from: ") - 1);
+                    String start = pointer.substring(pointer.indexOf("(from: ") + 7, pointer.indexOf(" to:"));
+                    String end = pointer.substring(pointer.indexOf("to: ") + 4, pointer.lastIndexOf(")"));
+                    newTask = new Event(description, start, end);
+                } else {
+                    description = pointer.substring(7, pointer.indexOf("(by: ") - 1);
+                    String by = pointer.substring(pointer.indexOf("(by: ") + 5, pointer.lastIndexOf(")"));
+                    newTask = new Deadline(description, by);
+                }
+
+                TASKS.add(newTask);
+                //checks whether this tasks is marked as done or not
+                if (pointer.substring(3).startsWith("[X]")) {
+                    newTask.mark();
+                }
+            }
+            reader.close();
+        }
+    }
+
+    private static void writeFile() {
+        Scanner reader = null;
+        String text = "";
+        try {
+            Files.deleteIfExists(tempTasksFilePath);
+            Files.createFile(tempTasksFilePath);
+            for (int i = 0; i < TASKS.size(); i++) {
+                text += TASKS.get(i) + "\n";
+            }
+            Files.writeString(tempTasksFilePath, text);
+            Files.deleteIfExists(tasksFilePath);
+            Files.move(tempTasksFilePath, tasksFilePath);
+        } catch (IOException e) {
+            System.out.print(e.getMessage());
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+    }
+
     private static void addTask(Task newTask) {
         TASKS.add(newTask);
+        writeFile();
         System.out.println(reply("Got it. I've added this task:\n  "
-                + newTask
-                + "\nNow you have " + TASKS.size() + " tasks in the list\n"));
+                    + newTask
+                    + "\nNow you have " + TASKS.size() + " tasks in the list\n"));
+
     }
 
     private static void mark(String command) {
         int index = Integer.valueOf(command.substring(5)) - 1;
         Task target = TASKS.get(index);
         target.mark();
+        writeFile();
         System.out.println(reply("Nice! I've marked this task as above:\n  " + target + "\n"));
     }
 
@@ -37,6 +115,7 @@ public class Duke {
         int index = Integer.valueOf(command.substring(7)) - 1;
         Task target = TASKS.get(index);
         target.unmark();
+        writeFile();
         System.out.println(reply("OK, I've marked this task as not done yet:\n  " + target + "\n"));
     }
 
@@ -56,6 +135,7 @@ public class Duke {
         System.out.println(reply("Noted. I've removed this task:\n"
                 + target + "\nNow you have " + TASKS.size() + "in the list\n"));
         TASKS.remove(index);
+        writeFile();
     }
 
     private static void handleTaskInput(Scanner input) {
@@ -126,9 +206,10 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        displayIntro();
+        start();
         Scanner input = new Scanner(System.in);
         handleTaskInput(input);
         displayOutro();
+        input.close();
     }
 }

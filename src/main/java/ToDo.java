@@ -6,7 +6,7 @@
  */
 public class ToDo extends Task {
     /**
-     * Create a ToDo task object with given description
+     * Creates a ToDo task object with given description
      *
      * @param description The description for the ToDo task
      */
