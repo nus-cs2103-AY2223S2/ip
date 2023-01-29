@@ -3,10 +3,18 @@ package donkeychat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A task that contains a complete-by date.
+ */
 public class Deadline extends Task {
 
     protected LocalDateTime by;
 
+    /**
+     * Creates a new Deadline task.
+     * @param description Description of the task.
+     * @param by Complete-by date for the task.
+     */
     public Deadline(String description, String by) {
         this(description, false, by);
 

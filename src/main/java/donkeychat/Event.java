@@ -3,11 +3,20 @@ package donkeychat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A task that contains a from date and to date.
+ */
 public class Event extends Task {
 
     protected LocalDateTime from;
     protected LocalDateTime to;
 
+    /**
+     * Creates a new Deadline task.
+     * @param description Description of the task.
+     * @param from From date for the task.
+     * @param to To date for the task.
+     */
     public Event(String description, String from, String to) {
         this(description, false, from, to);
     }

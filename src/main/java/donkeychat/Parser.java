@@ -5,7 +5,14 @@ public class Parser {
     public Parser() {
 
     }
-
+    /**
+     * Parses user input.
+     * @param currInput User input in string form.
+     * @param taskList Current TaskList object.
+     * @param storage  Current Storage object.
+     * @param ui Current Ui object.
+     * @return Whether to continue running the program.
+     */
     public boolean parse(String currInput, TaskList taskList, Storage storage, Ui ui) {
         String[] splitInput = currInput.split(" ", 2);
         String currCommand = splitInput[0];

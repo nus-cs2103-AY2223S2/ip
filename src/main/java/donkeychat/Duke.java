@@ -2,6 +2,9 @@ package donkeychat;
 
 import java.util.Scanner;
 
+/**
+ * Chatbot that handles task tracking.
+ */
 public class Duke {
 
     private TaskList taskList = new TaskList();
@@ -14,6 +17,9 @@ public class Duke {
         storage = new Storage();
     }
 
+    /**
+     * Starts the chatbot.
+     */
     public void run() {
         ui.displayIntro();
         boolean isRunning = true;
