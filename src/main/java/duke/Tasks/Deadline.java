@@ -10,6 +10,10 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Process Deadline to String to store in duke.txt
+     * @return Processed String
+     */
     public String toFile() {
         return "D|" + this.isDone + "|" + this.desc + "|" + this.deadline;
     }

@@ -13,7 +13,12 @@ public class Event extends Task {
         this.end = end;
     }
 
+    /**
+     * Process Event to String to store in duke.txt
+     * @return Processed String
+     */
     public String toFile() {
+
         return "E|" + this.isDone + "|" + this.desc + "|" + this.start + "|" + this.end;
     }
 

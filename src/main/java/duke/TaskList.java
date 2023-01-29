@@ -1,18 +1,24 @@
 package duke;
 
 import duke.Tasks.*;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/** List containing all Tasks*/
 public class TaskList {
+    /** ArrayList containing all Tasks*/
     private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
-
+    /**
+     * Processes all input commands
+     * @param input is user's input
+     * @throws DukeExceptions if input format is wrong
+     * @throws Exception if input is invalid
+     */
     public void handleInput(String input) {
         if (input.equals("list")) {
             try { //check if list is empty

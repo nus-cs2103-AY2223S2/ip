@@ -10,13 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 import duke.Tasks.*;
 
-//deals with loading tasks from the file and saving tasks in the file
+/** Loads and saves tasks from file*/
 public class Storage {
+    /** User's root directory path*/
     private static final String userDir = System.getProperty("user.dir");
+    /** Data directory path*/
     private static final Path dataDirPath = Paths.get(userDir, "data");
+    /** duke.txt file path*/
     private static final Path dataFilePath = Paths.get(userDir, "data", "duke.Duke.txt");
 
-    //Create the data dir if it doesn't exist
+    /**
+     * Creates data directory if it doesn't exist
+     * @throws IOException if directory cannot be created
+     */
     public static void createDataDir() {
         try {
             if(!Files.exists(dataDirPath)) {
@@ -28,7 +34,11 @@ public class Storage {
         }
     }
 
-    //Read existing data from duke.Duke.txt
+    /**
+     * Creates duke.txt if it doesn't exist. Reads data from duke.txt otherwise
+     * @return ArrayList of all Tasks in duke.txt
+     * @throws IOException if duke.txt cannot be created
+     */
     public static ArrayList<Task> load() {
         //Create duke.Duke.txt inside data dir if it doesn't exist
         if(!Files.exists(dataFilePath)) {

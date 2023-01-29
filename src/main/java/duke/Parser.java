@@ -5,7 +5,13 @@ import duke.Tasks.*;
 import java.time.LocalDate;
 
 public class Parser {
-
+    /**
+     * Parses user input to a ToDo object
+     * @param size the size of TaskList containing this object
+     * @param input the user input given
+     * @return a ToDo object
+     * @throws DukeExceptions if description given is empty
+     */
     public static ToDo parseToDo(int size, String input) {
         String td = input.substring(5);
         try {
@@ -18,6 +24,13 @@ public class Parser {
         return new ToDo(size + 1, td);
     }
 
+    /**
+     * Parses user input to a Deadline object
+     * @param size the size of TaskList containing this object
+     * @param input the user input given
+     * @return a Deadline object
+     * @throws DukeExceptions if input given is empty
+     */
     public static Deadline parseDeadline(int size, String input) {
         try { //catching no desc and no deadline
             if(input.substring(9).equals("")) {
