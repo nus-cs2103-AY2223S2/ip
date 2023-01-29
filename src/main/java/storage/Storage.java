@@ -33,6 +33,11 @@ public class Storage {
 
 	private File myFile = new File(dataFilePath);
 
+	/**
+	 * Load and retrieve bot ImageView component.
+	 * 
+	 * @return ImageView
+	 */
 	public ImageView getBotImageView() {
 		try {
 			return loadImageFile("bot.png");
@@ -41,6 +46,11 @@ public class Storage {
 		}
 	}
 
+	/**
+	 * Load and retrieve user ImageView component.
+	 * 
+	 * @return ImageView
+	 */
 	public ImageView getUserImageView() {
 		try {
 			return loadImageFile("user.png");
@@ -175,6 +185,11 @@ public class Storage {
 		}
 	}
 
+	/**
+	 * @param imageFileName
+	 * @return ImageView
+	 * @throws FileNotFoundException
+	 */
 	private ImageView loadImageFile(String imageFileName) throws FileNotFoundException {
 		Image image = new Image(new FileInputStream(imageFilePath + imageFileName));
 
@@ -194,4 +209,5 @@ public class Storage {
 
 		return imageView;
 	}
+
 }

@@ -2,7 +2,6 @@ package ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +20,63 @@ public class Ui {
 
 	final private int BOX_PADDING = 20;
 
-	private Scanner scan = new Scanner(System.in);
+	/**
+	 * Create a wrapped label.
+	 * 
+	 * @param message
+	 * @return Label
+	 */
+	public Label createLabel(String message) {
+		Label label = new Label(message);
+		label.setWrapText(true);
+		return label;
+	}
+
+	/**
+	 * A welcome message.
+	 * 
+	 * @param dialogContainer
+	 * @param storage
+	 */
+	public void greetUser(VBox dialogContainer, Storage storage) {
+		String s1 = "Hi There! I'm Shao";
+		String s2 = "What can I do for you?";
+		VBox messages = new VBox();
+		messages.getChildren().addAll(createLabel(s1), createLabel(s2));
+		sendResponse(dialogContainer, storage, messages);
+	}
+
+	/**
+	 * Print a response from the bot.
+	 * 
+	 * @param dialogContainer
+	 * @param storage
+	 * @param messages
+	 */
+	public void sendResponse(VBox dialogContainer, Storage storage, Node messages) {
+		HBox rowContainer = new HBox();
+		rowContainer.setAlignment(Pos.CENTER_LEFT);
+		rowContainer.setPadding(new Insets(BOX_PADDING));
+		rowContainer.setSpacing(10);
+		rowContainer.getChildren().addAll(storage.getBotImageView(), messages);
+		dialogContainer.getChildren().add(rowContainer);
+	}
+
+	/**
+	 * Print a request from the user.
+	 * 
+	 * @param dialogContainer
+	 * @param storage
+	 * @param message
+	 */
+	public void sendInput(VBox dialogContainer, Storage storage, String message) {
+		HBox rowContainer = new HBox();
+		rowContainer.setAlignment(Pos.CENTER_RIGHT);
+		rowContainer.setPadding(new Insets(BOX_PADDING));
+		rowContainer.setSpacing(10);
+		rowContainer.getChildren().addAll(createLabel(message), storage.getUserImageView());
+		dialogContainer.getChildren().add(rowContainer);
+	}
 
 	/**
 	 * Print a line of error message.
@@ -32,17 +87,12 @@ public class Ui {
 		println(errorMessage);
 	}
 
-	/** Print a row separator line. */
-	public void printRowDivider() {
-		println("________________________________________________________");
-	}
-
 	/**
 	 * Print line of a provided string.
 	 * 
 	 * @param s
 	 */
-	public void println(String s) {
+	private void println(String s) {
 		System.out.println("\t" + s);
 	}
 
@@ -65,17 +115,13 @@ public class Ui {
 		sendResponse(dialogContainer, storage, messages);
 	}
 
-	public Label createLabel(String message) {
-		Label label = new Label(message);
-		label.setWrapText(true);
-		return label;
-	}
-
 	/**
 	 * Print a response when a new task is marked or unmarked.
 	 * 
 	 * @param task
 	 * @param isMark
+	 * @param storage
+	 * @param dialogContainer
 	 */
 	public void printMarkedTask(Task task, boolean isMark, Storage storage, VBox dialogContainer) {
 		String body = isMark
@@ -109,6 +155,8 @@ public class Ui {
 	 * Print the set of recorded tasks.
 	 * 
 	 * @param tasklist
+	 * @param storage
+	 * @param dialogContainer
 	 */
 	public void printList(TaskList tasklist, Storage storage, VBox dialogContainer) {
 		int numItems = tasklist.size();
@@ -130,8 +178,10 @@ public class Ui {
 	 * Print the events and deadlines which falls on the specified datetime.
 	 * 
 	 * @param tasklist
-	 * @param dateTimeStr
+	 * @param storage
 	 * @param parser
+	 * @param dialogContainer
+	 * @param dateTimeStr
 	 */
 	public void printDeadlineEventOnDatetime(TaskList tasklist, Storage storage,
 			Parser parser, VBox dialogContainer, String dateTimeStr) {
@@ -181,9 +231,9 @@ public class Ui {
 	 * Print the tasks that matches the search keyword.
 	 * 
 	 * @param tasklist
-	 * @param keyword
-	 * @param dialogContainer
 	 * @param storage
+	 * @param dialogContainer
+	 * @param keyword
 	 */
 	public void printMatchedTasks(TaskList tasklist, Storage storage, VBox dialogContainer, String keyword) {
 		boolean hasItem = false;
@@ -209,50 +259,6 @@ public class Ui {
 			return;
 		}
 		sendResponse(dialogContainer, storage, messages);
-	}
-
-	public void greetUser(VBox dialogContainer, Storage storage) {
-		String s1 = "Hi There! I'm Shao";
-		String s2 = "What can I do for you?";
-		VBox messages = new VBox();
-		messages.getChildren().addAll(createLabel(s1), createLabel(s2));
-		sendResponse(dialogContainer, storage, messages);
-	}
-
-	public void sendResponse(VBox dialogContainer, Storage storage, Node messages) {
-		HBox rowContainer = new HBox();
-		rowContainer.setAlignment(Pos.CENTER_LEFT);
-		rowContainer.setPadding(new Insets(BOX_PADDING));
-		rowContainer.setSpacing(10);
-		rowContainer.getChildren().addAll(storage.getBotImageView(), messages);
-		dialogContainer.getChildren().add(rowContainer);
-	}
-
-	public void sendInput(VBox dialogContainer, Storage storage, String message) {
-		HBox rowContainer = new HBox();
-		rowContainer.setAlignment(Pos.CENTER_RIGHT);
-		rowContainer.setPadding(new Insets(BOX_PADDING));
-		rowContainer.setSpacing(10);
-		rowContainer.getChildren().addAll(createLabel(message), storage.getUserImageView());
-		dialogContainer.getChildren().add(rowContainer);
-	}
-
-	/**
-	 * Receive user input
-	 * 
-	 * @return String
-	 */
-	public String readCommand() {
-		if (!scan.hasNextLine()) {
-			return "";
-		}
-		String input = scan.nextLine().trim();
-		return input;
-	}
-
-	/** Operations performed before program terminates */
-	public void cleanUp() {
-		scan.close();
 	}
 
 }

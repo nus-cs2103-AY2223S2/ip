@@ -34,6 +34,11 @@ public class Shao extends Application {
     private Button sendButton;
     private Scene scene;
 
+    /**
+     * Call upon the launch of Shao application.
+     * 
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         initServices();
@@ -50,6 +55,11 @@ public class Shao extends Application {
         tasklist = new TaskList();
     }
 
+    /**
+     * Initialise GUI components and user input events.
+     * 
+     * @param stage
+     */
     private void setGUILayout(Stage stage) {
         // Step 1. Formatting the window to look as expected.
         scrollPane = new ScrollPane();
@@ -100,7 +110,7 @@ public class Shao extends Application {
             @Override
             public void handle(ActionEvent e) {
                 if (!userInput.getText().isBlank()) {
-                    run(stage);
+                    readCommand(stage);
                 }
             }
         });
@@ -110,7 +120,7 @@ public class Shao extends Application {
             public void handle(KeyEvent k) {
                 if (k.getCode().equals(KeyCode.ENTER)) {
                     if (!userInput.getText().isBlank()) {
-                        run(stage);
+                        readCommand(stage);
                     }
                 }
             }
@@ -119,11 +129,11 @@ public class Shao extends Application {
     }
 
     /**
-     * Run the program until it terminates
+     * Read and parse user input to command until user terminates the application.
      * 
-     * @throws InterruptedException
+     * @param stage
      */
-    public void run(Stage stage) {
+    public void readCommand(Stage stage) {
         String fullCommand = userInput.getText();
         userInput.setText("");
 

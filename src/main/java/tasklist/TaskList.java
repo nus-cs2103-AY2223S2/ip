@@ -47,10 +47,9 @@ public class TaskList {
 	 * @param isMark
 	 * @param storage
 	 * @param ui
-	 * @throws NumberFormatException
+	 * @param dialogContainer
 	 */
-	public void markItem(String itemNum, boolean isMark, Storage storage, Ui ui, VBox dialogContainer)
-			throws NumberFormatException {
+	public void markItem(String itemNum, boolean isMark, Storage storage, Ui ui, VBox dialogContainer) {
 		int idx = Integer.parseInt(itemNum) - 1;
 		try {
 			Task task = tasks.get(idx);
@@ -71,13 +70,12 @@ public class TaskList {
 	/**
 	 * Delete a task from existing tasks.
 	 * 
-	 * @param itemNum
-	 * @param storage
 	 * @param ui
+	 * @param storage
 	 * @param dialogContainer
-	 * @throws NumberFormatException
+	 * @param itemNum
 	 */
-	public void deleteTask(Ui ui, Storage storage, VBox dialogContainer, String itemNum) throws NumberFormatException {
+	public void deleteTask(Ui ui, Storage storage, VBox dialogContainer, String itemNum) {
 		try {
 			int idx = Integer.parseInt(itemNum) - 1;
 			storage.deleteLineFile(idx + 1, ui);

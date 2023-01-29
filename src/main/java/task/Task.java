@@ -12,6 +12,9 @@ abstract public class Task {
 		this.isDone = false;
 	}
 
+	/**
+	 * @return String
+	 */
 	public String getDescription() {
 		return this.description;
 	}
@@ -25,10 +28,12 @@ abstract public class Task {
 		return (isDone ? "X" : " "); // mark done task with X
 	}
 
+	/** Mark task as done. */
 	public void markAsDone() {
 		this.isDone = true;
 	}
 
+	/** Mark task as not done. */
 	public void markAsUndone() {
 		this.isDone = false;
 	}
@@ -53,6 +58,11 @@ abstract public class Task {
 		return dt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
 	}
 
+	/**
+	 * A String representation of a task.
+	 * 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return String.format("[%s] %s", getStatusIcon(), description);

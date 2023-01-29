@@ -31,6 +31,11 @@ public class AddCommand extends Command {
 		return this.taskType;
 	}
 
+	/**
+	 * Set task type from user input.
+	 * 
+	 * @param message
+	 */
 	private void setTaskType(String message) {
 		String commandLower = message.toLowerCase();
 		this.taskType = commandLower.startsWith("todo")
@@ -40,6 +45,16 @@ public class AddCommand extends Command {
 						: TaskType.EVENT;
 	}
 
+	/**
+	 * Set task from task type.
+	 * 
+	 * @param inputArr
+	 * @param ui
+	 * @param parser
+	 * @param storage
+	 * @param dialogContainer
+	 * @return boolean
+	 */
 	private boolean setTask(String[] inputArr, Ui ui, Parser parser, Storage storage, VBox dialogContainer) {
 		String description = parser.sliceArrAndConcate(inputArr, 1, inputArr.length);
 		String errorMessage = String.format(
