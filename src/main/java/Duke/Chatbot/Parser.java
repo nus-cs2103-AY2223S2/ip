@@ -4,11 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
+/**
+ * Converts user input to make sense of user command
+ */
 public class Parser {
     public static final Map<String, BiPredicate<Chatbot, String>> commands = new HashMap<String, BiPredicate<Chatbot, String>>();
     private final Chatbot chatbot;
     private final Ui ui;
 
+    /**
+     * Hooks onto a chatbot and its ui
+     *
+     * @param chatbot chatbot to connect to
+     * @param ui      ui of chatbot
+     */
     public Parser(Chatbot chatbot, Ui ui) {
         this.chatbot = chatbot;
         this.ui = ui;
@@ -122,6 +131,12 @@ public class Parser {
 
     }
 
+    /**
+     * Checks if the Userinput is valid and calls the corresponding BiFunction
+     * to execute the command
+     *
+     * @param nextLine Next line of User Input
+     */
     public void parse(String nextLine) {
         //Assuming commands start with a space.
         String[] userCommand = nextLine.split(" ", 2);

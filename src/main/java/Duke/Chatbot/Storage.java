@@ -44,7 +44,6 @@ public class Storage {
             fileReader.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
             throw new DukeException();
         }
         return fileContent;
