@@ -9,11 +9,11 @@ import duke.Ui;
 import duke.task.Task;
 
 public class MarkCommand extends Command {
-    private final boolean toMarkorUnmark;
+    private final boolean isMark;
     private final int taskIndex;
 
     public MarkCommand(boolean toMarkorUnmark, int taskIndex) {
-        this.toMarkorUnmark = toMarkorUnmark;
+        this.isMark = toMarkorUnmark;
         this.taskIndex = taskIndex;
     }
 
@@ -24,7 +24,7 @@ public class MarkCommand extends Command {
             throw new DukeException(errorMessage);
         } else {
             Task t = tasks.get(taskIndex);
-            if (toMarkorUnmark) {
+            if (isMark) {
                 t.mark();
                 ui.showMessage("Congratulations for completing the task ^^ I've marked it as done:");
             } else {

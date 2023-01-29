@@ -1,7 +1,16 @@
 package duke;
 
-import duke.command.*;
-import duke.task.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 public class Parser {
     public static Command parse(String input) throws DukeException, NumberFormatException {
@@ -20,7 +29,7 @@ public class Parser {
             if (inputs.length <= 1) {
                 throw new DukeException("Please input the numbering of the task you want to " + command + " as well!");
             } else {
-                String number = inputs[1]; // might have Number Format Exception here
+                String number = inputs[1]; // might throw Number Format Exception here
                 int num = Integer.parseInt(number);
                 if (command.equals("mark")) {
                     return new MarkCommand(true, num - 1);

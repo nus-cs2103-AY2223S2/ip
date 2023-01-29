@@ -15,8 +15,7 @@ public class Task {
     
     @Override
     public String toString() {
-        String s = "[" + this.getStatusIcon() + "] " + this.description;
-        return s;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
     public void mark() {
