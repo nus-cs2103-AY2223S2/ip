@@ -5,8 +5,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+// for serialization and deserialization
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 public class Acerizm {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String personal_logo = "                      - \n"
                              + "    /                (_) \n"
                              + "   /  \\   ___ ___ _ __ _ _____ __ ___ \n"
@@ -20,10 +27,11 @@ public class Acerizm {
 
     // Chat method is for level 1 of chatbot
     // Level 3: Refactor code to manage tasks using Task class
-    public static void chat(){
+    public static void chat() throws Exception{
 
         // level 2: added a temporary list to store items
-        List<Task> taskList = new ArrayList<Task>();
+        //List<Task> taskList = new ArrayList<Task>();
+        List<Task> taskList = loadTasks();
         Scanner scanner = new Scanner(System.in);
         System.out.println("*-".repeat(100));
         System.out.println("What can I do for you?");
@@ -35,6 +43,8 @@ public class Acerizm {
                 // first expected error
                 TypeOfTask actionTaken = convertToAction(input[0]);
                 if(actionTaken == TypeOfTask.bye) {
+                    // level-7 added saving at the end of the program
+                    saveTasks(taskList);
                     System.out.println("*-".repeat(100));
                     System.out.println("Bye. Hope to see you again soon!");
                     System.out.println("*-".repeat(100));
@@ -126,6 +136,7 @@ public class Acerizm {
                 System.out.println("*-".repeat(100));
             }
         }
+        scanner.close();
     }
 
     /*
@@ -213,7 +224,7 @@ public class Acerizm {
             case delete: {
                 if(input.length == 1)
                     throw new DukeException(TypeOfTask.delete,0);
-                else if(input.length >= 2)
+                else if(input.length > 2)
                     throw new DukeException(TypeOfTask.delete,1);
                 else
                     return input[1];
@@ -249,4 +260,30 @@ public class Acerizm {
         }
     }
 
+    /*
+     * Load tasks from the file while using deserialization
+     */
+    public static List<Task> loadTasks() {
+        String filePath = "data" + File.separator + "acerizm.txt";
+        try (ObjectInputStream load = new ObjectInputStream(new FileInputStream(filePath))) {
+            List<Task> taskList = (List<Task>) load.readObject();
+            return taskList;
+        } catch(Exception e){
+            System.out.println("file is mssing!");
+            return new ArrayList<Task>();
+        }
+    }
+
+    /*
+     * Save tasks to the .txt file while using serialization
+     */
+    public static void saveTasks(List<Task> taskList) {
+        String filePath = "data" + File.separator + "acerizm.txt";
+        try (ObjectOutputStream save = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            save.writeObject(taskList);
+            
+        } catch (Exception e) {
+            System.out.println("Cannot save");
+        }
+    }
 }
