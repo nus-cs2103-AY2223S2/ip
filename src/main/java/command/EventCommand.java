@@ -5,6 +5,9 @@ import dukeexeption.InvalidArgumentException;
 import storage.TaskList;
 import task.Event;
 
+/**
+ * Command component that executes an event command.
+ */
 public class EventCommand extends Command {
     private final String task;
     private final LocalDate startTime;

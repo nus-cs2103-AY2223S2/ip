@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import storage.TaskList;
 import task.Deadline;
 
+/**
+ * Command component that executes a deadline command.
+ */
 public class DeadlineCommand extends Command {
     private final String task;
     private final LocalDate deadline;

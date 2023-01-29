@@ -4,6 +4,9 @@ import command.Command;
 import command.TodoCommand;
 import dukeexeption.MissingArgumentException;
 
+/**
+ * Parser that handles command that starts with todo keyword.
+ */
 public class TodoParser implements Parser {
     @Override
     public Command parse(String requestContent) throws MissingArgumentException {

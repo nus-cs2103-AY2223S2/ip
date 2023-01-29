@@ -2,6 +2,9 @@ package command;
 
 import storage.TaskList;
 
+/**
+ * Command component that executes a list command.
+ */
 public class ListCommand extends Command {
     @Override
     public String run(TaskList taskList) {

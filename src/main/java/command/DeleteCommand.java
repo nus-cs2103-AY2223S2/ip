@@ -3,6 +3,9 @@ package command;
 import dukeexeption.InvalidArgumentException;
 import storage.TaskList;
 
+/**
+ * Command component that executes a delete command.
+ */
 public class DeleteCommand extends Command {
     private final int index;
 

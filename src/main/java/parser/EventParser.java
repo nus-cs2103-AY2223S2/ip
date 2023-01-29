@@ -7,6 +7,9 @@ import command.EventCommand;
 import dukeexeption.InvalidArgumentException;
 import dukeexeption.MissingArgumentException;
 
+/**
+ * Parser that handles command that starts with event keyword.
+ */
 public class EventParser implements Parser {
     @Override
     public Command parse(String requestContent) throws MissingArgumentException, InvalidArgumentException {

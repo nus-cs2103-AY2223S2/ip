@@ -3,6 +3,9 @@ package command;
 import dukeexeption.InvalidArgumentException;
 import storage.TaskList;
 
+/**
+ * Command component that executes an unmark command.
+ */
 public class UnmarkCommand extends Command {
     private final int index;
 

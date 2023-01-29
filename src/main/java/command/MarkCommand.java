@@ -3,6 +3,9 @@ package command;
 import dukeexeption.InvalidArgumentException;
 import storage.TaskList;
 
+/**
+ * Command component that executes a mark command.
+ */
 public class MarkCommand extends Command {
     private final int index;
 

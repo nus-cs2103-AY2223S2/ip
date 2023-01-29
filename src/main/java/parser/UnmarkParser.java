@@ -5,6 +5,9 @@ import command.UnmarkCommand;
 import dukeexeption.InvalidArgumentException;
 import dukeexeption.MissingArgumentException;
 
+/**
+ * Parser that handles command that starts with unmark keyword.
+ */
 public class UnmarkParser implements Parser {
     @Override
     public Command parse(String requestContent) throws MissingArgumentException, InvalidArgumentException {

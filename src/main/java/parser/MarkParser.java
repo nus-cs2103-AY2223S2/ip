@@ -5,6 +5,9 @@ import command.MarkCommand;
 import dukeexeption.InvalidArgumentException;
 import dukeexeption.MissingArgumentException;
 
+/**
+ * Parser that handles command that starts with mark keyword.
+ */
 public class MarkParser implements Parser {
     @Override
     public Command parse(String requestContent) throws MissingArgumentException, InvalidArgumentException {

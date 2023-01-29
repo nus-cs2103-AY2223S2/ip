@@ -9,6 +9,9 @@ import task.Deadline;
 import task.Event;
 import task.Task;
 
+/**
+ * Command component that executes an on command.
+ */
 public class OnCommand extends Command {
     private final LocalDate queryDate;
 

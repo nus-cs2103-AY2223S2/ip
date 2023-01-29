@@ -3,6 +3,9 @@ package command;
 import storage.TaskList;
 import task.Todo;
 
+/**
+ * Command component that executes an todo command.
+ */
 public class TodoCommand extends Command {
     private final String task;
 
