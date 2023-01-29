@@ -1,5 +1,5 @@
 [E][ ] birthday /from 2012-12-23 12:00 /to 2012-12-24
 [E][ ] birthday /from 2012-12-23 14:00 /to 2012-12-24 15:00
 [D][ ] assignment 1 /by 2012-12-23 
-[D][X] assignment 2 /by 2012-12-23 12:00
+[D][ ] assignment 2 /by 2012-12-23 12:00
 [T][X] borrow book

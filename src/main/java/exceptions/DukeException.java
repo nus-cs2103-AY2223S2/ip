@@ -1,9 +1,12 @@
+package exceptions;
+
 import java.lang.StringBuilder;
+
 import java.io.File;
 
 public class DukeException {
     private static int expectedArgs = 1;
-    static void validate(boolean secondaryCheck, String command, String[] text) throws IncorrectNoOfArgumentException {
+    public static void validate(boolean secondaryCheck, String command, String[] text) throws IncorrectNoOfArgumentException {
         StringBuilder sb = new StringBuilder();
         if (secondaryCheck) {
             expectedArgs = 2;
@@ -22,7 +25,7 @@ public class DukeException {
         }
     }
 
-    static void validate(String text, String command) throws IncorrectNoOfArgumentException {
+    public static void validate(String text, String command) throws IncorrectNoOfArgumentException {
         // Checking for blank spaces
         StringBuilder sb = new StringBuilder();
         if ( (text.equals("")) || (text.isBlank()) ) {
@@ -34,7 +37,7 @@ public class DukeException {
         }
     }
 
-    static void validate2() throws InvalidCommandException {
+    public static void validate2() throws InvalidCommandException {
         StringBuilder sb = new StringBuilder();
         sb.append("\n    ____________________________________________________________\n")
                 .append("     ☹ OOPS!!! This is an incorrect command!\n")
@@ -43,7 +46,7 @@ public class DukeException {
         throw new InvalidCommandException(sb.toString());
     }
 
-    static void folderCheck(String str) throws FolderNotFoundException {
+    public static void folderCheck(String str) throws FolderNotFoundException {
         File tempFolder = new File(str);
         if ( (!tempFolder.isDirectory()) || (!tempFolder.exists()) ) {
             StringBuilder sb = new StringBuilder();
@@ -54,23 +57,5 @@ public class DukeException {
                     .append("    ____________________________________________________________\n");
             throw new FolderNotFoundException(sb.toString());
         }
-    }
-}
-
-class IncorrectNoOfArgumentException extends Exception {
-    public IncorrectNoOfArgumentException (String str) {
-        super(str);
-    }
-}
-
-class InvalidCommandException extends Exception {
-    public InvalidCommandException (String str) {
-        super(str);
-    }
-}
-
-class FolderNotFoundException extends Exception {
-    public FolderNotFoundException (String str) {
-        super(str);
     }
 }

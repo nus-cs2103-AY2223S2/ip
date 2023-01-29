@@ -1,3 +1,5 @@
+package classes;
+
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
@@ -13,6 +15,11 @@ import java.lang.StringBuilder;
 import java.util.ArrayList;
 
 import java.time.format.DateTimeParseException;
+
+import exceptions.DukeException;
+import exceptions.FolderNotFoundException;
+import exceptions.InvalidCommandException;
+import exceptions.IncorrectNoOfArgumentException;
 
 public class Duke {
 
