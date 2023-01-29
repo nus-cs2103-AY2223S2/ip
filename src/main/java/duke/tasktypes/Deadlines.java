@@ -98,7 +98,7 @@ public class Deadlines extends Task {
 
     public String taskDate() {
         String toReturn = "";
-        if (this.dueDateBy.equals(null)) {
+        if (this.dueDateBy == null) {
             toReturn = "This task does not have a valid due date! Please input the date in this format: YYYY-MM-DD";
         } else {
             DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("MMM/d/uuuu");
