@@ -22,6 +22,13 @@ public class Storage {
 
     private List<Task> taskList = new ArrayList<>();
 
+    /**
+     * Constructor for storage.
+     *
+     * @param fileDirectory Directory of the save file.
+     * @param fileName Name of the save file.
+     * @param ui Ui instance to take care of user interface.
+     */
     public Storage(String fileDirectory, String fileName, Ui ui) {
         this.fileDirectory = fileDirectory;
         this.fileName = fileName;
@@ -29,15 +36,15 @@ public class Storage {
     }
 
     /**
-     * Adds a duke.task from saved file to the duke.task list.
+     * Adds a task from the save file to the task list.
      */
     private void loadTaskFromFile(String task) {
-        // duke.ui.Parser
+        // Parser
         String[] command = task.split("\\|");
         String taskType = command[0];
         String description = command[2];
 
-        Task t = new Task("placeholder");
+        Task t = new Task("");
 
         switch (taskType) {
             case "T":
@@ -120,7 +127,7 @@ public class Storage {
     }
 
     /**
-     * Saves the duke.task list to hard drive.
+     * Saves the task list to hard drive.
      */
     public void save(List<Task> tasks) {
         ui.showSavingFile();
@@ -135,7 +142,7 @@ public class Storage {
             fw.close();
 
         } catch (IOException e) {
-            ui.showError("Something went wrong with saving file");
+            ui.showError("Something went wrong with saving file.");
         }
     }
 }

@@ -11,6 +11,11 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Creates a decorated response message with self-adjusting width
+     * to match message length.
+     * @param s Message.
+     */
     public void formResponse(String s) {
         String opener = "*";
         String ender = "*";
@@ -48,14 +53,24 @@ public class Ui {
                 + "\n" + ender + "\n");
     }
 
+    /**
+     * Shows welcome message.
+     */
     public void showWelcome() {
         this.formResponse(botName + "Bot activated.");
     }
 
+    /**
+     * Reads user input and returns it.
+     * @return User's input.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
+    /**
+     * Displays terminating message and closes the scanner.
+     */
     public void terminate() {
         this.formResponse("Bot terminated.");
         this.sc.close();

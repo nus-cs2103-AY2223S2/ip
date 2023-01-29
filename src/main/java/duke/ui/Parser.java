@@ -11,6 +11,16 @@ public class Parser {
     public Parser() {
     }
 
+    /**
+     * Parses the user input into a meaningful command.
+     *
+     * @param input User input.
+     * @return Command instance derived from the user input.
+     * @throws DukeException If no command description is given.
+     * @throws IllegalArgumentException If command given is not valid.
+     * @throws DateTimeParseException If the date format is not valid.
+     * @throws NumberFormatException If format of task index is invalid.
+     */
     public static Command parse(String input) throws DukeException, IllegalArgumentException,
             DateTimeParseException, NumberFormatException {
 
@@ -44,18 +54,38 @@ public class Parser {
         return null; // cannot reach here, as duke.command.Operation.valueOf throws IllegalArgumentException
     }
 
+    /**
+     * Parses the mark command input.
+     *
+     * @param input User input.
+     * @return MarkTaskCommand instance.
+     * @throws NumberFormatException If format of task index is invalid.
+     */
     public static Command markTaskParser(String input) throws NumberFormatException {
         String[] command = input.split(" ", 2);
         int taskIndex = Integer.parseInt(command[1]); // Throws exception if not valid string as id
         return new MarkTaskCommand(taskIndex);
     }
 
+    /**
+     * Parses the unmark command input.
+     *
+     * @param input User input.
+     * @return UnmarkTaskCommand instance.
+     * @throws NumberFormatException If format of task index is invalid.
+     */
     public static Command unmarkTaskParser(String input) throws NumberFormatException {
         String[] command = input.split(" ", 2);
         int taskIndex = Integer.parseInt(command[1]); // Throws exception if not valid string as id
         return new UnmarkTaskCommand(taskIndex);
     }
 
+    /**
+     * Parses the command to add a task.
+     * @param input User input.
+     * @return A Command instance representing the type of task to add.
+     * @throws DateTimeParseException If the date format is invalid.
+     */
     public static Command addTaskParser(String input) throws DateTimeParseException {
         String[] command = input.split(" ", 2);
         Operation op = Operation.valueOf(command[0].toUpperCase());
@@ -85,6 +115,12 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Parses the command to delete a task.
+     * @param input User input.
+     * @return A Command instance to delete a task.
+     * @throws NumberFormatException If the date format is invalid.
+     */
     public static Command deleteTaskParser(String input) throws NumberFormatException {
         String[] command = input.split(" ", 2);
         int taskIndex = Integer.parseInt(command[1]); // Throws exception if not valid string as id

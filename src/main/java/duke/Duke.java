@@ -18,6 +18,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for the bot.
+     */
     public Duke() {
         this.ui = new Ui("Tyrone");
         this.storage = new Storage(FILE_DIRECTORY, FILE_NAME, ui);
@@ -25,6 +28,9 @@ public class Duke {
     }
 
 
+    /**
+     * Activates the bot.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
