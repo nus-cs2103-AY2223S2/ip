@@ -6,6 +6,7 @@ import command.DeleteCommand;
 import command.DoesNotExistCommand;
 import command.EventCommand;
 import command.ExitCommand;
+import command.FindCommand;
 import command.ListCommand;
 import command.MarkCommand;
 import command.ToDoCommand;
@@ -13,13 +14,15 @@ import command.UnMarkComamnd;
 import command.Command.Commands;
 
 public class Parser {
-    
+
     public static Command parse(String input) {
         Commands cmd = Command.getCommand(input);
 
         switch (cmd) {
             case LIST:
                 return new ListCommand();
+            case FIND:
+                return new FindCommand(input);
             case UNMARK:
                 return new UnMarkComamnd(input);
             case MARK:
