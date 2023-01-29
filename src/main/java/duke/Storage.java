@@ -16,6 +16,11 @@ public class Storage {
         File dataFile = new File(filepath);
         this.dataFile = dataFile;
     }
+
+    /**
+     * Loads tasks from data file into Duke
+     * @return list of Tasks
+     */
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
@@ -33,6 +38,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks to data file
+     * @param tasks List of tasks to be saved
+     */
     public void save(ArrayList<Task> tasks) {
         try {
             PrintWriter writer = new PrintWriter(dataFile);

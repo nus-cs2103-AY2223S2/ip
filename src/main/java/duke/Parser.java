@@ -21,7 +21,14 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     private static DateTimeFormatter savedDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    static Task parseSavedTask(String savedTask) {
+
+    /**
+     * Returns Task by parsing a saved string.
+     *
+     * @param savedTask
+     * @return Task
+     */
+    public static Task parseSavedTask(String savedTask) {
         String[] taskArr = savedTask.split("\\|");
         Task newTask;
         if (taskArr[0].equals("T")) {
@@ -39,6 +46,12 @@ public class Parser {
         return newTask;
     }
 
+    /**
+     * Returns command of parsed string
+     *
+     * @param cmd String to be parsed
+     * @return parsed Command
+     */
     public static Command parse(String cmd) {
         switch (cmd) {
         case "list":
