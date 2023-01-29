@@ -9,15 +9,33 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles user data by creating, loading, updating the task list
+ * in the user's hard drive.
+ */
 public class Storage {
     private final String filePath;
     private ArrayList<Task> list;
 
+    /**
+     * Constructor to instantiate the file path
+     * and array list.
+     *
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Loads data from the user's storage to the task list.
+     * If there isn't existing data, a data directory and
+     * duke.txt will be created.
+     *
+     * @return A task list for instantiating a TaskList.
+     * @throws EmptyStorageException Thrown when no existing data found.
+     */
     public ArrayList<Task> load() throws EmptyStorageException {
         try {
             File f = new File(this.filePath);
@@ -60,6 +78,13 @@ public class Storage {
         return this.list;
     }
 
+    /**
+     * Creates the relevant task type for loading
+     * into the task list.
+     *
+     * @param inputArr Input received from parser.
+     * @param taskType The type of task received.
+     */
     public void loadTasks(String[] inputArr, String taskType) {
         switch (taskType) {
             case "T":
@@ -80,6 +105,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates duke.txt with the appropriate format.
+     * E.g T|1|This is a to-do task, represents a to-do task
+     * with done status and description of "This is a to-do task".
+     * @param tasklist The current task list instance.
+     * @throws IOException An error when there's an issue with file writing.
+     */
     public void updateStorage(TaskList tasklist) throws IOException {
 //        System.out.println("entered update storage");
         Task task;

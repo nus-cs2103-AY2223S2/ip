@@ -7,9 +7,15 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+/**
+ * Parses the user's commands into a readable
+ * format for the other classes.
+ */
 public class Parser {
 
-
+    /**
+     * Represents all the valid commands that the user can input.
+     */
     enum Commands {
         TODO,
         DEADLINE,
@@ -26,6 +32,18 @@ public class Parser {
 
     }
 
+    /**
+     * Matches the appropriate enum to the input converted
+     * into a string, then creates the relevant command to be
+     * executed. When an input is gibberish, an exception is
+     * also thrown.
+     *
+     * @param fullCommand String representation of user input.
+     * @return A command to be executed.
+     * @throws UnknownCommandException Error when input does not match
+     * any of the commands allowed.
+     * @throws EmptyDescException Input does not contain a description.
+     */
     public static Command parse(String fullCommand) throws UnknownCommandException, EmptyDescException {
         try {
             String[] inputArr = fullCommand.split(" ");
