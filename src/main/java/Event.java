@@ -1,16 +1,19 @@
-public class Event extends Task{
-    protected String eventStart;
-    protected String eventEnd;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-    public Event(String item, String type, String time1, String time2) {
+public class Event extends Task{
+    protected Date eventStart;
+    protected Date eventEnd;
+
+    public Event(String item, String type, Date start, Date end) {
         super(item,type);
-        String x1[] = time1.split(" ", 2);
-        String x2[] = time2.split(" ", 2);
-        eventStart = x1[1];
-        eventEnd = x2[1];
+        eventStart = start;
+        eventEnd = end;
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (From: " + eventStart + " to: " + eventEnd + ")";
+        SimpleDateFormat convertToString = new SimpleDateFormat("dd MMM yyyy HH:mm a", Locale.ENGLISH);
+        return "[E]" + super.toString() + " (From: " + convertToString.format(eventStart) + " To: " + convertToString.format(eventEnd) + ")";
     }
 }

@@ -1,15 +1,19 @@
-public class Deadline extends Task{
-    protected String deadLineTime;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
-    public Deadline(String item, String type, String time) {
+public class Deadline extends Task {
+    protected Date deadLineTime;
+
+    public Deadline(String item, String type, Date date) {
         super(item,type);
-        String x[] = time.split(" ", 2);
-        deadLineTime =  x[1];
+        deadLineTime = date;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadLineTime + ")";
+        SimpleDateFormat convertToString = new SimpleDateFormat("dd MMM yyyy HH:mm a", Locale.ENGLISH);
+        return "[D]" + super.toString() + " (by: " + convertToString.format(deadLineTime) + ")";
     }
 
 }

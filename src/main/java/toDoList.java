@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.util.Date;
 public class toDoList {
 
     ArrayList<Task> allTasks;
@@ -26,7 +26,7 @@ public class toDoList {
         System.out.println(" " + newTask.toString());
     }
 
-    public void addItemDeadline(String type, String item, String time) {
+    public void addItemDeadline(String type, String item, Date time) {
 
         Task newTask = new Deadline(item, type, time);
         allTasks.add(newTask);
@@ -34,10 +34,9 @@ public class toDoList {
         System.out.println(" " + newTask.toString());
     }
 
-    public void addItemEvent(String type, String item, String time1, String time2) {
+    public void addItemEvent(String type, String item, Date time1, Date time2) {
         Task newTask = new Event(item, type, time1, time2);
 
-        //newTask.setEventTime(time1, time2);
         allTasks.add(newTask);
         System.out.println(" " + newTask.toString());
     }
