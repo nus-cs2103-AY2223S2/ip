@@ -25,6 +25,14 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Get description of task.
+     * @return Description of task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     public String getStatusIcon() {
         return (this.isDone ? "X" : " ");
     }
