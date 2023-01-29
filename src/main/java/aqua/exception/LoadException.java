@@ -7,7 +7,7 @@ public class LoadException extends Exception {
 
     /**
      * Constructs a LoadException with the specified message.
-     * 
+     *
      * @param msg - the message of the exception.
      */
     public LoadException(String msg) {
@@ -16,7 +16,7 @@ public class LoadException extends Exception {
 
     /**
      * Constructs a LoadException with the specified cause.
-     * 
+     *
      * @param cause - the cause of the exception.
      */
     public LoadException(Throwable cause) {
@@ -25,7 +25,7 @@ public class LoadException extends Exception {
 
     /**
      * Constructs a LoadException with the specified message and cause.
-     * 
+     *
      * @param msg - the message of the exception.
      * @param cause - the cause of the exception.
      */

@@ -24,17 +24,17 @@ public class TaskManager implements Reloadable {
 
     /**
      * Adds the specified task.
-     * 
+     *
      * @param task - the task to add.
      */
     public void add(AquaTask task) {
         tasks.add(task);
     }
 
-    
+
     /**
      * Marks task in the at the given index as specified.
-     * 
+     *
      * @param taskNum - the index of the task to mark.
      * @param isComplete - {@code true} to mark the task as complete and
      *      {@code false} as incomplete.
@@ -49,7 +49,7 @@ public class TaskManager implements Reloadable {
 
     /**
      * Deletes the task at the given index.
-     * 
+     *
      * @param taskNum - the index of the task to delete.
      * @return the deleted task.
      * @throws IndexOutOfBoundsException if taskNum is out of range.
@@ -64,7 +64,7 @@ public class TaskManager implements Reloadable {
      * with names matching the specified patteren. Task number in the returned
      * hash map is 1 based and the iteration order is sorted according to the
      * task's task number within this task manager.
-     * 
+     *
      * @param pattern - the String character sequence of the task's name to
      *      include.
      * @return a LinkedHashMap of task number - task pair containing the
@@ -82,7 +82,7 @@ public class TaskManager implements Reloadable {
 
     /**
      * Returns the number of tasks stored.
-     * 
+     *
      * @return the number of tasks stored.
      */
     public int size() {
@@ -92,7 +92,7 @@ public class TaskManager implements Reloadable {
 
     /**
      * Saves the state of this task manager to hard disk.
-     * 
+     *
      * @throws IOException if an I/O error occurs.
      */
     public void saveToFile() throws IOException {
@@ -106,7 +106,7 @@ public class TaskManager implements Reloadable {
 
     /**
      * Returns the path of the file where the state is saved.
-     * 
+     *
      * @return the path of the file where the state is saved.
      */
     public Path getSavePath() {

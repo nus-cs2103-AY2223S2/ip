@@ -20,7 +20,7 @@ public class ListCommand extends Command {
                 return manager.getTaskManager();
             }
 
-            
+
             @Override
             public String getDataDisplay(TaskManager taskManager, LogicManager manager) {
                 return String.format(String.join("\n",

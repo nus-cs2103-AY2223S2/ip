@@ -12,7 +12,7 @@ import aqua.manager.LogicManager;
 public abstract class Command {
     /**
      * Produces an ExecutionDispater from the given argument and manager.
-     * 
+     *
      * @param args - the argument map.
      * @param manager - the application AppManager.
      * @return an ExecutionDispatcher to execute the command.

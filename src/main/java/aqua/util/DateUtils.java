@@ -15,7 +15,7 @@ public class DateUtils {
      * <li> {@code yyyy-MM-ddThh:mm}
      * <li> {@code yyyy-MM-dd hhmm}
      * <li> {@code yyyy-MM-dd} (assume time to be 0000)
-     * 
+     *
      * @param dateString - the date String to parse.
      * @return the parsed LocalDateTime.
      * @throws IllegalSyntaxException if the given String cannot be parsed.
@@ -53,7 +53,7 @@ public class DateUtils {
 
     /**
      * Formats the date to a the format {@code d LLL yyyy HHmm}.
-     * 
+     *
      * @param time - the time to format.
      * @return the formatted date.
      */

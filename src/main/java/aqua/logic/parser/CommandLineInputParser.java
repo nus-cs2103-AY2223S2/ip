@@ -25,7 +25,7 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
     /**
      * Constructs a CommandLineInputParser that uses the given ArgumentParser
      * to parse arguments.
-     * 
+     *
      * @param argumentParser - the ArgumentParser to use.
      */
     public CommandLineInputParser(ArgumentParser argumentParser) {

@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
                 // get task index string
                 String indexString = args.getMainInput().filter(num -> !num.isBlank())
                         .orElseThrow(() -> new IllegalSyntaxException("Task number disappered!"));
-                
+
                 // parse index string
                 int index = Integer.parseInt(indexString) - 1;
 

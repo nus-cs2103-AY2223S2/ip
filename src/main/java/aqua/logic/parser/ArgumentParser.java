@@ -40,7 +40,7 @@ public class ArgumentParser implements Parser<ArgumentMap> {
         return new ArgumentMap(inputMap);
     }
 
-    
+
     private static void addInput(String token, HashMap<String, String> inputMap)
                 throws IllegalSyntaxException {
         try (Scanner scanner = new Scanner(token)) {

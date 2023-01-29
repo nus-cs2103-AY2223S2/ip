@@ -24,7 +24,7 @@ public class AquaEvent extends AquaTask {
     /**
      * Constructs an AquaEvent from the given parameters while setting the
      * event completion status to {@code false}.
-     * 
+     *
      * @param name - the name of the event.
      * @param from - the time the event starts.
      * @param to - the time the event ends.
@@ -35,7 +35,7 @@ public class AquaEvent extends AquaTask {
 
     /**
      * Constructs an AquaEvent from the given parameters.
-     * 
+     *
      * @param name - the name of the event.
      * @param isCompelte - if the event is completed.
      * @param from - the time the event starts.
@@ -72,7 +72,7 @@ public class AquaEvent extends AquaTask {
         return Optional.ofNullable(to);
     }
 
-    
+
     @Override
     public String getReloadString() {
         return String.format("event %s /%s %s /%s %s /%s %s",

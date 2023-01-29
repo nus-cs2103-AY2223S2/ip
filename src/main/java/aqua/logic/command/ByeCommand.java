@@ -6,7 +6,7 @@ import aqua.logic.ExecutionTask;
 import aqua.manager.LogicManager;
 
 
-/** 
+/**
  * An implementation of Command to produce an ExecutionDispatcher that will
  * exit the application.
  */

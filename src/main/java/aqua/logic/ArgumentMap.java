@@ -19,7 +19,7 @@ public class ArgumentMap {
     /**
      * Constructs an ArgumentMap containing tag-value mappings similar to the
      * given hash map.
-     * 
+     *
      * @param inputMap - the hash map to construct the argument map from.
      */
     public ArgumentMap(HashMap<String, String> inputMap) {
@@ -31,7 +31,7 @@ public class ArgumentMap {
      * Returns the argument's main input value wrapped in an {@code Optional}.
      * If there are no mappings to this tag, {@code Optional.empty} is
      * returned.
-     * 
+     *
      * @return the main input value wrapped in an {@code Optional}.
      */
     public Optional<String> getMainInput() {
@@ -43,7 +43,7 @@ public class ArgumentMap {
      * Returns the value that is mapped to the specified tag wrapped in an
      * {@code Optional}. If there are no mappings to the tag,
      * {@code Optional.empty} is returned.
-     * 
+     *
      * @param key - the tag of the value to return.
      * @return the associated value of the tag specified wrapped in an
      *      {@code Optional}.

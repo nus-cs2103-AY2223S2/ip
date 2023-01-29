@@ -6,11 +6,11 @@ public class AquaToDo extends AquaTask {
     /** If the task is completed. */
     private final boolean isComplete;
 
-    
+
     /**
      * Constructs an AquaToDo with the given name while setting the task
      * completion status to {@code false}.
-     * 
+     *
      * @param name - the name of the task.
      */
     public AquaToDo(String name) {
@@ -20,7 +20,7 @@ public class AquaToDo extends AquaTask {
 
     /**
      * Constructs an AquaToDo with the given parameters.
-     * 
+     *
      * @param name - the name of the task.
      * @param isCompleted - if the task is completed.
      */
@@ -35,7 +35,7 @@ public class AquaToDo extends AquaTask {
         return new AquaToDo(getName(), isComplete);
     }
 
-    
+
     @Override
     public boolean isComplete() {
         return isComplete;

@@ -8,7 +8,7 @@ public class IllegalSyntaxException extends Exception {
 
     /**
      * Constructs an IllegalSyntaxException with the specified message.
-     * 
+     *
      * @param description - the message of the exception.
      */
     public IllegalSyntaxException(String description) {
@@ -18,7 +18,7 @@ public class IllegalSyntaxException extends Exception {
 
     /**
      * Constructs an IllegalSyntaxException with the given message and cause.
-     * 
+     *
      * @param description - the message of the exception.
      * @param cause - the cause of the exception.
      */
@@ -28,7 +28,7 @@ public class IllegalSyntaxException extends Exception {
 
     /**
      * Constructs an IllegalSyntaxException with the given cause.
-     * 
+     *
      * @param cause - the cause of the exception.
      */
     public IllegalSyntaxException(Throwable cause) {

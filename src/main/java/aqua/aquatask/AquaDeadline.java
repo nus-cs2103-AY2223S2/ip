@@ -19,7 +19,7 @@ public class AquaDeadline extends AquaTask {
     /**
      * Constructs an AquaDeadline from the given parameters while setting the
      * task completion to {@code false}.
-     * 
+     *
      * @param name - the name of the task.
      * @param by - the time the task is due.
      */
@@ -29,7 +29,7 @@ public class AquaDeadline extends AquaTask {
 
     /**
      * Constructs an AquaDeadline from the given parameters.
-     * 
+     *
      * @param name - the name of the task.
      * @param isComplete - if the task is completed.
      * @param by - the time the task is due.
@@ -57,8 +57,8 @@ public class AquaDeadline extends AquaTask {
     public Optional<LocalDateTime> getEnd() {
         return Optional.ofNullable(by);
     }
-    
-    
+
+
     @Override
     public String getReloadString() {
         return String.format("deadline %s /%s %s /%s %s",

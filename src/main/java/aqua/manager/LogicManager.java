@@ -15,7 +15,7 @@ import aqua.storage.Loadable;
 public class LogicManager implements Loadable {
     private final CommandLineInputParser inputParser;;
     private final TaskManager taskManager;
-    
+
     private boolean isClosed = false;
 
 

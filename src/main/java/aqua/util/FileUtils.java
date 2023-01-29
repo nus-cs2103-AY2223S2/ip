@@ -23,7 +23,7 @@ public class FileUtils {
     /**
      * Returns the contents in the file in the specified path. Contents are
      * decoded in the default charset.
-     * 
+     *
      * @param path - the path of the file to read
      * @return the contents in the file in the specified path
      * @throws IOException if an I/O error occurs
@@ -42,7 +42,7 @@ public class FileUtils {
 
     /**
      * Returns the input stream of the file in the given path.
-     * 
+     *
      * @return the input stream of the file in the given path.
      * @throws IOException if an I/O error occurs.
      */
@@ -54,7 +54,7 @@ public class FileUtils {
     /**
      * Writes the given content to the file in the specified path. Content is
      * encoded in the default charset.
-     * 
+     *
      * @param path - the path of the file to write to
      * @param content - the contents to write
      * @throws IOException if an I/O error occurs
@@ -69,7 +69,7 @@ public class FileUtils {
     /**
      * Creates the directory of the specified path including any parent
      * directories.
-     * 
+     *
      * @param path - the path of the directory to create
      * @return {@code true} if the directory exists after execution and
      *      {@code false} otherwise
@@ -84,7 +84,7 @@ public class FileUtils {
 
     /**
      * Converts the given String path to a {@code Path}.
-     * 
+     *
      * @param path - the String path to convert
      * @return the {@code Path} object of the specified String path
      */
@@ -96,7 +96,7 @@ public class FileUtils {
     /**
      * Returns the URL of the specified String path of the file in the resource
      * folder.
-     * 
+     *
      * @param pathString - the String path to the file.
      * @return the URL of the specified String path of the file in the resource
      *      folder.

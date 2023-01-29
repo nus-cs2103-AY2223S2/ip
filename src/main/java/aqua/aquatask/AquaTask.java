@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import aqua.storage.Reloadable;
 
+
 /** Represents a task that the user wishes to track. */
 public abstract class AquaTask implements Reloadable {
     /** Tag of {@code isCompleted} argument when parsing. */
@@ -16,7 +17,7 @@ public abstract class AquaTask implements Reloadable {
 
     /**
      * Constructs a task with the specified name.
-     * 
+     *
      * @param name - the name of the task.
      */
     public AquaTask(String name) {
@@ -26,7 +27,7 @@ public abstract class AquaTask implements Reloadable {
 
     /**
      * Constructs a task with the same name as the given AquaTask.
-     * 
+     *
      * @param task - the task to construct the new task from.
      */
     public AquaTask(AquaTask task) {
@@ -36,15 +37,16 @@ public abstract class AquaTask implements Reloadable {
 
     /**
      * Sets the task's completion status as specified
-     * 
+     *
      * @param isComplete - if the task is completed.
      * @return a task of this task with its completion status set as specified.
      */
     public abstract AquaTask mark(boolean isComplete);
-    
+
+
     /**
      * Returns if the task is completed.
-     * 
+     *
      * @return {@code true} if the task is completed and {@code false}
      *      otherwise.
      */
@@ -53,7 +55,7 @@ public abstract class AquaTask implements Reloadable {
 
     /**
      * Returns the name of the task.
-     * 
+     *
      * @return the name of the task.
      */
     public String getName() {
@@ -64,7 +66,7 @@ public abstract class AquaTask implements Reloadable {
     /**
      * Returns the starting time of the task wrapped in an {@code Optional}. If
      * the task has no starting time, {@code Optional.empty} is returned.
-     * 
+     *
      * @return the starting time of the task wrapped in an {@code Optional}.
      */
     public Optional<LocalDateTime> getStart() {
@@ -74,7 +76,7 @@ public abstract class AquaTask implements Reloadable {
 
     /**
      * Returns if the task has started.
-     * 
+     *
      * @return {@code true} if the task has started and {@code false}
      *      otherwise.
      */
@@ -88,7 +90,7 @@ public abstract class AquaTask implements Reloadable {
     /**
      * Returns the ending time of the task wrapped in an {@code Optional}. If
      * the task has no ending time, {@code Optional.empty} is returned.
-     * 
+     *
      * @return the ending time of the task wrapped in an {@code Optional}.
      */
     public Optional<LocalDateTime> getEnd() {
@@ -98,7 +100,7 @@ public abstract class AquaTask implements Reloadable {
 
     /**
      * Returns if the task has ended.
-     * 
+     *
      * @return {@code true} if the task has ended and {@code false} otherwise.
      */
     public boolean isEnded() {
@@ -110,7 +112,7 @@ public abstract class AquaTask implements Reloadable {
 
     /**
      * Returns the String representation of the task.
-     * 
+     *
      * @return the String representation of the task.
      */
     @Override
@@ -124,7 +126,7 @@ public abstract class AquaTask implements Reloadable {
 
     /**
      * Returns the String representation of the completion status of the task.
-     * 
+     *
      * @return the String representation of the completion status of the task.
      */
     private String getMarkString() {
@@ -135,7 +137,7 @@ public abstract class AquaTask implements Reloadable {
     /**
      * Returns the status of the task. If the task has ended, is ongoing or is
      * upcoming.
-     * 
+     *
      * @return the String representation of the status of the task.
      */
     private String getStatusString() {

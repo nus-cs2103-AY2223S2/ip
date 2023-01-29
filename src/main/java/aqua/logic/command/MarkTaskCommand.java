@@ -21,7 +21,7 @@ public class MarkTaskCommand extends Command {
     /**
      * Constructs a MarkTaskCommand that will produce executor dispatchers that
      * will mark tasks as specified.
-     * 
+     *
      * @param isCompleteMarker - {@code true} to mark task as complete and
      *      {@code false} as incomplete.
      */
@@ -53,7 +53,7 @@ public class MarkTaskCommand extends Command {
                 // get index String
                 String indexString = args.getMainInput().filter(num -> !num.isBlank())
                         .orElseThrow(() -> new IllegalSyntaxException("Task number disappered!"));
-                
+
                 // parse index String (minus 1 as user enters 1 based index)
                 int index = Integer.parseInt(indexString) - 1;
 

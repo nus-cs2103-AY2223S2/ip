@@ -9,7 +9,7 @@ import javafx.concurrent.Task;
 
 /**
  * Represents a task that can be executed to produce a result.
- * 
+ *
  * @param <T> the return type of the result after execution.
  */
 public abstract class ExecutionTask<T> extends Task<String> {
@@ -21,7 +21,7 @@ public abstract class ExecutionTask<T> extends Task<String> {
 
     /**
      * Constructs an ExecutionTask with the given parameters.
-     * 
+     *
      * @param args - the argument map to work on.
      * @param manager - the AppManager to work on.
      */
@@ -33,7 +33,7 @@ public abstract class ExecutionTask<T> extends Task<String> {
 
     /**
      * Processes the arguments and execute the task to produce a result.
-     * 
+     *
      * @param args - the argument to process.
      * @param manager - the AppManager to work on.
      * @return the result of the execution.
@@ -47,7 +47,7 @@ public abstract class ExecutionTask<T> extends Task<String> {
 
     /**
      * Returns the message of the execution of the task.
-     * 
+     *
      * @param data - the data produced after execution of the task.
      * @param manager - the AppManager to pull additional data from.
      */
@@ -56,7 +56,7 @@ public abstract class ExecutionTask<T> extends Task<String> {
 
     /**
      * Executes the task.
-     * 
+     *
      * @return the success message of the task execution.
      * @throws IllegalSyntaxException if the argument given contains invalid
      *      syntax.

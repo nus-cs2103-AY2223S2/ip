@@ -7,7 +7,7 @@ public class ProcedureExecutionException extends Exception {
 
     /**
      * Constructs a ProcedureExecutionException with the specified message.
-     * 
+     *
      * @param msg - the message of the exception.
      */
     public ProcedureExecutionException(String msg) {
@@ -16,7 +16,7 @@ public class ProcedureExecutionException extends Exception {
 
     /**
      * Constructs a ProcedureExecutionException with the specified cause.
-     * 
+     *
      * @param cause - the cause of the exception.
      */
     public ProcedureExecutionException(Throwable cause) {
@@ -26,12 +26,12 @@ public class ProcedureExecutionException extends Exception {
     /**
      * Constructs a ProcedureExecutionException with the specified message and
      * cause.
-     * 
+     *
      * @param msg - the message of the exception.
      * @param cause - the cause of the exception.
      */
 
-    
+
     public ProcedureExecutionException(String msg, Throwable cause) {
         super(msg, cause);
     }

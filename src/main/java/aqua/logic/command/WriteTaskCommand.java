@@ -31,7 +31,7 @@ public class WriteTaskCommand extends Command {
                 return "Safely stored hehe (  •̀֊•́ )";
             }
 
-            
+
             @Override
             public String getDataDisplay(String data, LogicManager manager) {
                 return data;

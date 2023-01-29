@@ -24,7 +24,7 @@ public abstract class ExecutionService extends Service<String> {
      * Creates dispatchers that dispatches the given tasks in the given
      * order. The follow up tasks of the dispatchers is set to the
      * dispatcher created from the next task in the given tasks.
-     * 
+     *
      * @param tasks - the tasks to dispatch.
      * @return a ExecutionDispatcher that dispatches the given tasks in
      *      the given order.
@@ -42,7 +42,7 @@ public abstract class ExecutionService extends Service<String> {
     /**
      * Creates a dispatcher that will dispatch and execute the specified task.
      * Created dispatcher will have no follow up dispatchers.
-     * 
+     *
      * @param task - the task to dispatch and execute.
      * @return a dispatcher that will dispatch the specifed task without follow
      *      up dispatchers.
@@ -61,7 +61,7 @@ public abstract class ExecutionService extends Service<String> {
      * of this dispatcher is dispatched and executed successfully, wrapped in
      * an {@code Optinoal}. If there is no follow dispatcher,
      * {@code Optional.empty} is returned.
-     * 
+     *
      * @return the follow up dispatcher wrapped around an {@code Optional}.
      */
     public abstract Optional<ExecutionService> followUpDispatcher();
@@ -69,7 +69,7 @@ public abstract class ExecutionService extends Service<String> {
 
     /**
      * Dispatches and executes the task.
-     * 
+     *
      * @throws IllegalSyntaxException if there are syntax errors.
      * @throws ProcedureExecutionExecution if the task fail to execute
      *      completely.
@@ -87,7 +87,7 @@ public abstract class ExecutionService extends Service<String> {
 
     /**
      * Sets the follow up dispatcher.
-     * 
+     *
      * @param dispatcher - the follow up dispatcher to set to.
      * @return a dispatcher of this dispatcher with its follow up task set to
      *      the dispatcher specified.

@@ -13,7 +13,7 @@ public class AddToDoCommand extends AddTaskCommand {
      * {@inheritDoc}
      * <p>
      * Specifically, an AquaToDo.
-     * 
+     *
      * @return an AquaToDo created from the given arguments.
      */
     @Override
@@ -22,12 +22,12 @@ public class AddToDoCommand extends AddTaskCommand {
         String name = args.getMainInput()
                 .filter(n -> !n.isBlank())
                 .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
-        
+
         // get is complete
         boolean isComplete = args.get(AquaToDo.TAG_IS_COMPLETE)
                     .map(isComp -> Boolean.parseBoolean(isComp))
                     .orElse(false);
-        
+
         // return formed todo task
         return new AquaToDo(name, isComplete);
     }

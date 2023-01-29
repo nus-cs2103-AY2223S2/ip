@@ -16,7 +16,7 @@ public class AddEventCommand extends AddTaskCommand {
      * {@inheritDoc}
      * <p>
      * Specifically, an AquaEvent.
-     * 
+     *
      * @return an AquaEvent created from the given arguments.
      */
     @Override
@@ -24,7 +24,7 @@ public class AddEventCommand extends AddTaskCommand {
         // get name
         String name = args.getMainInput().filter(n -> !n.isBlank())
                 .orElseThrow(() -> new IllegalSyntaxException("Name disappeared!"));
-        
+
         // get from date
         String fromString = args.get(AquaEvent.TAG_FROM)
                 .orElseThrow(() -> new IllegalSyntaxException("[from] disappeared!"));
@@ -39,7 +39,7 @@ public class AddEventCommand extends AddTaskCommand {
         boolean isCompleted = args.get(AquaEvent.TAG_IS_COMPLETE)
                 .map(isComp -> Boolean.parseBoolean(isComp))
                 .orElse(false);
-        
+
         // return formed event
         return new AquaEvent(name, isCompleted, from, to);
     }

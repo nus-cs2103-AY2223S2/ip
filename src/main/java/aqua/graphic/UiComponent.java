@@ -9,7 +9,7 @@ import javafx.scene.Node;
 
 /**
  * A custom JavaFx node created from an FXML file.
- * 
+ *
  * @param <T> the type of the root node.
  */
 public abstract class UiComponent<T extends Node> {
@@ -23,7 +23,7 @@ public abstract class UiComponent<T extends Node> {
     /**
      * Constructs a UiComponent by loading the FXML file in the specified
      * location.
-     * 
+     *
      * @param filePath - the String path of the FXML file to load in the
      *      resource folder relative to the fxml directory.
      */
@@ -35,7 +35,7 @@ public abstract class UiComponent<T extends Node> {
     /**
      * Loads the FXML file in the specified path String, setting the controller
      * as this object.
-     * 
+     *
      * @param filePath - the path String to the FXML file relative to the FXML
      *      directory folder.
      * @throws RuntimeException if an error occurs while loading the file.
@@ -54,7 +54,7 @@ public abstract class UiComponent<T extends Node> {
 
     /**
      * Returns the root node of this component.
-     * 
+     *
      * @return the root node of this component.
      */
     public T getRoot() {

@@ -16,7 +16,7 @@ public class AddDeadlineCommand extends AddTaskCommand {
      * {@inheritDoc}
      * <p>
      * Specifically, an AquaDeadline.
-     * 
+     *
      * @return an AquaDeadline created from the given arguments.
      */
     @Override

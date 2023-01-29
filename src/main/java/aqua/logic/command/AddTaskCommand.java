@@ -16,7 +16,7 @@ import aqua.manager.LogicManager;
 public abstract class AddTaskCommand extends Command {
     /**
      * Creates an AquaTask from the given argument map.
-     * 
+     *
      * @param args - the argument map.
      * @return an AquaTask created from the given arguments.
      * @throws IllegalSyntaxException if the arguments are of invalid syntax.
