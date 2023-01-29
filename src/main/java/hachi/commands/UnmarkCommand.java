@@ -6,10 +6,17 @@ import hachi.main.TaskList;
 import hachi.main.Ui;
 import hachi.tasks.Task;
 
-
+/**
+ * Encapsulates a user instruction to mark a task as not done in the to-do list.
+ */
 public class UnmarkCommand extends Command {
     private String input;
 
+    /**
+     * UnmarkCommand constructor.
+     *
+     * @param input The user's input string.
+     */
     public UnmarkCommand(String input) {
         this.input = input;
     }

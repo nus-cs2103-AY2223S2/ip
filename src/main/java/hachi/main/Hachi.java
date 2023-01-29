@@ -1,11 +1,20 @@
 package hachi.main;
 import hachi.commands.Command;
 
+/**
+ * Hachi, a virtual assistant, that process user instruction
+ * and helps to store tasks and events.
+ */
 public class Hachi {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Hachi constructuor.
+     *
+     * @param filePath The relative path to the file containing saved tasks.
+     */
     public Hachi(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -17,6 +26,9 @@ public class Hachi {
         }
     }
 
+    /**
+     * Runs the program by reading user instruction and executing it.
+     */
     public void run() {
         this.ui.welcomeMessage();
         boolean isExit = false;

@@ -3,8 +3,27 @@ import hachi.main.TaskList;
 import hachi.main.Storage;
 import hachi.main.Ui;
 
+/**
+ * Encapsulates the type of command
+ */
 public abstract class Command {
+
+    /**
+     * Executes the command by user
+     *
+     * @param tasks To-do list
+     * @param ui Ui object
+     * @param storage storage object that stores the to-do list
+     * @return True if execution is successful, false if it is not.
+     */
+
     public abstract boolean execute(TaskList tasks, Ui ui, Storage storage);
+
+    /**
+     * Indicates whether the program exits
+     *
+     * @return True if the program needs to exit, false if it does not.
+     */
 
     public boolean isExit(){
         return false;
