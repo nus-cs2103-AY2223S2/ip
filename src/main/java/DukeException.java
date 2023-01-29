@@ -13,8 +13,13 @@ public class DukeException extends Exception {
                 break;
             case TASK_NOT_EXIST:
                 System.out.println("Sorry, There is no such task for this command");
+                break;
             case NO_NUMBER:
                 System.out.println("Please key in number for this command");
+                break;
+            case UNCLEAR_COMMAND:
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means.");
+                break;
         }
 
     }

@@ -5,7 +5,7 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList) {
+    public void execute(TaskList taskList) throws DukeException {
         taskList.delete(deleteIndex);
     }
 

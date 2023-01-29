@@ -1,10 +1,10 @@
-public class MarkCommand implements Command{
+public class MarkCommand implements Command {
     private int markIndex;
     MarkCommand(int i) {
         markIndex = i;
     }
     @Override
-    public void execute(TaskList taskList) {
+    public void execute(TaskList taskList) throws DukeException {
         taskList.mark(markIndex);
     }
 

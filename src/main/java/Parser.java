@@ -17,7 +17,7 @@ public class Parser {
         int firstBlank = input.indexOf(" ");
         // No description of task
         if (firstBlank == -1) {
-            throw new DukeException(ExceptionType.DESCRIPTION_EMPTY);
+                throw new DukeException(ExceptionType.DESCRIPTION_EMPTY);
         }
         String header = input.substring(0, firstBlank);
 
@@ -31,40 +31,34 @@ public class Parser {
             newTask = Deadline.createDeadline(input);
             return new DeadlineCommand(newTask);
         }
-        if (header.equals("Event")) {
+        if (header.equals("event")) {
             newTask = Event.createEvent(input);
             return new EventCommand(newTask);
         }
         if (header.equals("delete")) {
-            int index;
             try {
-                index = Integer.parseInt(input.substring(7));
+                int index = Integer.parseInt(input.substring(7)) - 1;
                 return new DeleteCommand(index);
-            } catch (NumberFormatException e) {
-                throw new DukeException(ExceptionType.TASK_NOT_EXIST);
             } catch (NumberFormatException e) {
                 throw new DukeException(ExceptionType.NO_NUMBER);
             }
         }
         if (header.equals("mark")) {
             try {
-                int index = Integer.parseInt(input.substring(5));
+                int index = Integer.parseInt(input.substring(5)) - 1;
                 return new MarkCommand(index);
-            } catch (IndexOutOfBoundsException IOBE) {
-                throw new DukeException(ExceptionType.TASK_NOT_EXIST);
             } catch (NumberFormatException e) {
                 throw new DukeException(ExceptionType.NO_NUMBER);
             }
         }
         if (header.equals("unmark")) {
             try {
-                int index = Integer.parseInt(input.substring(7));
+                int index = Integer.parseInt(input.substring(7)) - 1;
                 return new MarkCommand(index);
-            } catch (IndexOutOfBoundsException IOBE) {
-                throw new DukeException(ExceptionType.TASK_NOT_EXIST);
             } catch (NumberFormatException e) {
                 throw new DukeException(ExceptionType.NO_NUMBER);
             }
         }
+        throw new DukeException(ExceptionType.UNCLEAR_COMMAND);
     }
 }
