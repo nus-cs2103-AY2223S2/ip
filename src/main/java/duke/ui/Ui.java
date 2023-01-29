@@ -1,7 +1,9 @@
 package duke.ui;
 
 import duke.task.Task;
+import duke.task.TaskList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -53,6 +55,13 @@ public class Ui {
         System.out.println("Ok, I've marked this as not done yet:\n" + task);
     }
 
+    public void showRelevantTasks(ArrayList<Task> tasklist) {
+        System.out.println("Here are the matching tasks in your list:\n");
+        int counter = 1;
+        for (int i = 0; i < tasklist.size(); i++) {
+            System.out.println(counter+ "." + tasklist.get(i));
+        }
+    }
 
     public void showLoadingError() {
         System.out.println("No existing tasklist!");

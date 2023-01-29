@@ -62,6 +62,9 @@ public class Parser {
             case "list":
                 parsedCommand = new ListCommand();
                 break;
+            case "find":
+                parsedCommand = new FindCommand(arr[1]);
+                break;
             default:
                 System.out.println("No such command!");
         }
