@@ -10,7 +10,7 @@ import duke.task.Todo;
 
 import java.time.LocalDate;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     private String type;
 

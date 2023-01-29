@@ -5,7 +5,7 @@ import duke.Ui;
 import duke.Storage;
 import duke.DukeException;
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
 
     private int index;
     private boolean isMarked;
