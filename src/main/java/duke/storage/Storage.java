@@ -47,18 +47,18 @@ public class Storage {
         Task t = new Task("");
 
         switch (taskType) {
-            case "T":
-                t = new ToDo(description);
-                break;
-            case "D":
-                LocalDate by = LocalDate.parse(command[3].trim());
-                t = new Deadline(description, by);
-                break;
-            case "E":
-                LocalDate from = LocalDate.parse(command[3].trim());
-                LocalDate to = LocalDate.parse(command[4].trim());
-                t = new Event(description, from, to);
-                break;
+        case "T":
+            t = new ToDo(description);
+            break;
+        case "D":
+            LocalDate by = LocalDate.parse(command[3].trim());
+            t = new Deadline(description, by);
+            break;
+        case "E":
+            LocalDate from = LocalDate.parse(command[3].trim());
+            LocalDate to = LocalDate.parse(command[4].trim());
+            t = new Event(description, from, to);
+            break;
         }
 
         boolean isMarked = command[1].equals("1");
