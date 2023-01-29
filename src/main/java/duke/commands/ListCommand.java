@@ -3,17 +3,28 @@ package duke.commands;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * ListCommand represents a command to list all tasks.
+ */
 public class ListCommand extends Command {
     private Ui ui;
-    private TaskList tasks;
+    private TaskList taskList;
 
-    public ListCommand(Ui ui, TaskList tasks) {
+    /**
+     * Creates a ListCommand to list all task of the TaskList.
+     * @param ui The ui used.
+     * @param taskList The TaskList to list the tasks.
+     */
+    public ListCommand(Ui ui, TaskList taskList) {
         this.ui = ui;
-        this.tasks = tasks;
+        this.taskList = taskList;
     }
 
+    /**
+     * List all task of the TaskList.
+     */
     @Override
     public void action() {
-        ui.listResponse(tasks);
+        ui.listResponse(taskList);
     }
 }

@@ -9,21 +9,40 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage handles loading data from and saving data to files.
+ */
 public class Storage {
     private List<Task> taskList;
 
+    /**
+     * Creates a new Storage object.
+     */
     public Storage() {
         this.taskList = new ArrayList<>();
     }
 
+    /**
+     * Edit existing storage given a task list.
+     * @param taskList The edited task list.
+     */
     public void editStorage(List<Task> taskList) {
         this.taskList = taskList;
     }
 
+
+    /**
+     * Return task list from existing storage.
+     * @return The task list stored in storage
+     */
     public List<Task> getStorage() {
         return this.taskList;
     }
 
+    /**
+     * Load storage with the specified file.
+     * @param file The file that stores required data.
+     */
     public void loadFromFile(File file) {
         try {
             BufferedReader bufReader = new BufferedReader(new FileReader(file));
@@ -46,6 +65,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the tasks into the Storage file.
+     * @param file The file to write tasks in.
+     */
     public void saveToFile(File file) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));

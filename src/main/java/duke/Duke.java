@@ -11,7 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-
+/**
+ * Duke is the class that represents the chat bot.
+ */
 public class Duke {
     private TaskList commandList;
     private Ui ui;
@@ -24,12 +26,18 @@ public class Duke {
         duke.run();
     }
 
+    /**
+     * Before setup for Duke
+     */
     public Duke() {
         ui = new Ui();
         commandList = new TaskList();
         parser = new Parser();
     }
 
+    /**
+     * Runs Duke.
+     */
     public void run() {
         //Creating/Loading from storage
         this.storage = new Storage();

@@ -8,6 +8,9 @@ import duke.utils.Storage;
 
 import java.io.File;
 
+/**
+ * MarkCommand represents a command to mark a task on the TaskList.
+ */
 public class MarkCommand extends Command {
 
     private Ui ui;
@@ -16,6 +19,14 @@ public class MarkCommand extends Command {
     private Storage storage;
     private File file;
 
+    /**
+     * Creates a MarkCommand to mark a ToDo, Event or Deadline on the TaskList.
+     * @param ui The ui used.
+     * @param taskList The TaskList to mark the task.
+     * @param index The specified task to be marked.
+     * @param storage The storage to store the changes.
+     * @param file The specified file to store the changes.
+     */
     public MarkCommand(Ui ui, TaskList taskList, int index, Storage storage, File file) throws
             InvalidCmdValueException {
         if (index + 1 > taskList.getSize() || index < 0) {
@@ -28,6 +39,9 @@ public class MarkCommand extends Command {
         this.file = file;
     }
 
+    /**
+     * Marks the task on the TaskList.
+     */
     @Override
     public void action() {
         Task task = taskList.markTask(index);

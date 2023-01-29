@@ -4,11 +4,28 @@ import duke.commands.*;
 import duke.exceptions.*;
 import duke.tasks.*;
 import duke.ui.Ui;
-
 import java.io.File;
 
+/**
+ * Parser to convert user inputs to executable commands.
+ */
 public class Parser {
 
+    /**
+     * Parses a command from a string.
+     *
+     * @param userCommands The string command to parse.
+     * @param commandList The task list that has list of tasks.
+     * @param storage The storage that store tasks from previous and new sessions.
+     * @param ui The ui used for the bot.
+     * @param file The file that data is read and written from.
+     * @return The command corresponding to the user input.
+     * @throws InvalidCmdValueException If a delete, mark or unmark command specify a wrong index.
+     * @throws InvalidTaskTypeException If no such task type exists.
+     * @throws EmptyCommandException If the existing command is empty
+     * @throws InvalidTimeException If the format of event or deadline is unrecognised.
+     * @throws InvalidDateException If the date entered for event or deadline is unrecognised.
+     */
     public Command parse(String userCommands, TaskList commandList, Storage storage, Ui ui, File file)
             throws InvalidCmdValueException, InvalidTaskTypeException, EmptyCommandException,
             InvalidTimeException, InvalidDateException {
@@ -35,6 +52,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Retrieve a task type for a given action.
+     *
+     * @param action The string command to parse.
+     * @return The task type corresponding to the action.
+     * @throws InvalidTaskTypeException If no such task type exists.
+     */
     public TaskTypes getTaskType(String action) throws InvalidTaskTypeException {
         if (action.equalsIgnoreCase("todo")) {
             return TaskTypes.TODO;
@@ -47,6 +71,17 @@ public class Parser {
         }
     }
 
+    /**
+     * Return a task for given its type and string array input.
+     *
+     * @param type The task type to convert.
+     * @param strArray The string array of the command
+     * @return The task corresponding to its type and string array.
+     * @throws InvalidTaskTypeException If no such task type exists.
+     * @throws EmptyCommandException If the existing command is empty
+     * @throws InvalidTimeException If the format of event or deadline is unrecognised.
+     * @throws InvalidDateException If the date entered for event or deadline is unrecognised.
+     */
     public Task getTask(TaskTypes type, String[] strArray) throws InvalidTaskTypeException,
             EmptyCommandException, InvalidTimeException, InvalidDateException {
         String command;

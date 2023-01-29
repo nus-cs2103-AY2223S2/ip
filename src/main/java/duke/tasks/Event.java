@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Event is a task that happens from a start date/time to an end period.
+ */
 public class Event extends Task {
 
     private final LocalDate start;
@@ -14,6 +17,14 @@ public class Event extends Task {
     private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("MMM dd yyyy");
 
+    /**
+     * Constructor for Event.
+     *
+     * @param command Description of the Event.
+     * @param start The date/time when the Event is supposed to start.
+     * @param end The date/time when the Event is supposed to end
+     * @throws InvalidDateException If the date is invalid.
+     */
     public Event(String command, String start, String end) throws InvalidDateException {
         super(command);
         try {
@@ -24,12 +35,23 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the String representation of the Event.
+     *
+     * @return String representation of the Event.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + start.format(formatter) +
                 " to: " + end.format(formatter) + ")";
     }
 
+
+    /**
+     * Returns the String representation of Event to be stored.
+     *
+     * @return The string storage representation of the Event.
+     */
     @Override
     public String taskToData() {
         int done = isDone() ? 1 : 0;
