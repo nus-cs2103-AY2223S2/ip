@@ -1,6 +1,4 @@
-import exception.TreeBotException;
-
-import java.io.IOException;
+import treebot.TreeBot;
 
 public class Main {
     public static void main(String[] args) {

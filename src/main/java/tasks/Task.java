@@ -1,3 +1,5 @@
+package tasks;
+
 public abstract class Task {
     protected boolean isDone = false;
     protected String taskDescription;
