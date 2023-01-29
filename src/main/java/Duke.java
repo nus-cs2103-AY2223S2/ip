@@ -1,10 +1,16 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String bannerLine = "_".repeat(30);
+    private static final String BANNER_LINE = "_".repeat(30);
     private final List<Task> taskList = new ArrayList<>();
+    private static final String SAVE_PATH = "./tasklist.txt";
 
     public static void main(String[] args) {
         String logo = " ,ggg, ,ggggggg,                                                               ,ggg,\n"
@@ -31,6 +37,7 @@ public class Duke {
 
     public void run() {
         greet();
+        loadTasklistFromFile();
         commandLoop();
     }
 
@@ -50,6 +57,7 @@ public class Duke {
             }
 
             String cmdVerb = args.get(0);
+            Task newTask = null;
             switch (cmdVerb) {
                 case "bye":
                     acceptingInputs = false;
@@ -60,6 +68,7 @@ public class Duke {
                 case "mark":
                     try {
                         changeTaskStatus(args, true);
+                        saveTasklistToFile();
                     } catch (InvalidIndexException e) {
                         printErrorMessage(ErrorEnum.INVALID_INDEX);
                     } catch (IllegalArgumentException e) {
@@ -69,6 +78,7 @@ public class Duke {
                 case "unmark":
                     try {
                         changeTaskStatus(args, false);
+                        saveTasklistToFile();
                     } catch (InvalidIndexException e) {
                         printErrorMessage(ErrorEnum.INVALID_INDEX);
                     } catch (IllegalArgumentException e) {
@@ -77,7 +87,8 @@ public class Duke {
                     break;
                 case "todo":
                     try {
-                        addTodo(args.subList(1, args.size()));
+                        newTask = addTodo(args.subList(1, args.size()));
+                        saveTasklistToFile();
                     } catch (EmptyBodyException e) {
                         printErrorMessage(ErrorEnum.EMPTY_BODY);
                     }
@@ -85,7 +96,8 @@ public class Duke {
                     break;
                 case "deadline":
                     try {
-                        addDeadline(args.subList(1, args.size()));
+                        newTask = addDeadline(args.subList(1, args.size()));
+                        saveTasklistToFile();
                     } catch (EmptyBodyException e) {
                         printErrorMessage(ErrorEnum.EMPTY_BODY);
                     } catch (IllegalArgumentException e) {
@@ -95,7 +107,8 @@ public class Duke {
                     break;
                 case "event":
                     try {
-                        addEvent(args.subList(1, args.size()));
+                        newTask = addEvent(args.subList(1, args.size()));
+                        saveTasklistToFile();
                     } catch (EmptyBodyException e) {
                         printErrorMessage(ErrorEnum.EMPTY_BODY);
                     } catch (IllegalArgumentException e) {
@@ -105,6 +118,7 @@ public class Duke {
                 case "delete":
                     try {
                         deleteTask(args);
+                        saveTasklistToFile();
                     } catch (InvalidIndexException e) {
                         printErrorMessage(ErrorEnum.INVALID_INDEX);
                     } catch (IllegalArgumentException e) {
@@ -115,14 +129,17 @@ public class Duke {
                     printErrorMessage(ErrorEnum.UNKNOWN_INPUT);
                     break;
             }
+            if (newTask != null) {
+                printInBanner("Don't forget to do this task yo~\n  " + newTask + getTasklistSize());
+            }
         }
         printInBanner("Otsunakiri~\nByebye!~");
     }
 
     private void printInBanner(String message) {
-        System.out.println(bannerLine);
+        System.out.println(BANNER_LINE);
         System.out.println(message);
-        System.out.println(bannerLine);
+        System.out.println(BANNER_LINE);
     }
 
     private void printTasks() {
@@ -136,7 +153,7 @@ public class Duke {
         printInBanner(toPrint.toString());
     }
 
-    private void addTodo(List<? extends String> args) throws EmptyBodyException {
+    private Task addTodo(List<? extends String> args) throws EmptyBodyException {
         if (args.size() == 0) {
             throw new EmptyBodyException();
         }
@@ -144,10 +161,10 @@ public class Duke {
         String cmd = String.join(" ", args);
         Todo newTask = new Todo(cmd);
         taskList.add(newTask);
-        printInBanner("Don't forget to do this task yo~\n  " + newTask + getTasklistSize());
+        return newTask;
     }
 
-    private void addDeadline(List<? extends String> args) throws IllegalArgumentException {
+    private Task addDeadline(List<? extends String> args) throws IllegalArgumentException {
         int byIndex = args.indexOf("/by");
         if (byIndex == -1 || byIndex == args.size() - 1) {
             throw new IllegalArgumentException();
@@ -163,10 +180,10 @@ public class Duke {
         List<String> byDate = (List<String>) args.subList(byIndex + 1, args.size());
         Deadline newTask = new Deadline(String.join(" ", description), String.join(" ", byDate));
         taskList.add(newTask);
-        printInBanner("Don't forget to do this task yo~\n  " + newTask + getTasklistSize());
+        return newTask;
     }
 
-    private void addEvent(List<? extends String> args) throws IllegalArgumentException {
+    private Task addEvent(List<? extends String> args) throws IllegalArgumentException {
         int fromIndex = args.indexOf("/from");
         int toIndex = args.indexOf("/to");
         if (fromIndex == -1 || fromIndex == args.size() - 1 || toIndex == -1 || toIndex == args.size() - 1) {
@@ -205,7 +222,7 @@ public class Duke {
         }
 
         taskList.add(newTask);
-        printInBanner("Don't forget to do this task yo~\n  " + newTask + getTasklistSize());
+        return newTask;
     }
 
     private void changeTaskStatus(List<? extends String> args, boolean done) throws InvalidIndexException {
@@ -261,6 +278,11 @@ public class Duke {
             case EMPTY_BODY:
                 printInBanner("What do you wanna do yo~");
                 break;
+            case FILE_SAVE_ERROR:
+                printInBanner("Yabai! Could not save to file dayo...");
+                break;
+            case FILE_LOAD_ERROR:
+                printInBanner("Yabai! Could not load from file dayo... dousyou...");
             case ILLEGAL_ARGUMENT:
             default:
                 printInBanner("Wakandeyo!!! >:(");
@@ -270,5 +292,85 @@ public class Duke {
 
     private String getTasklistSize() {
         return "\nNow you have " + taskList.size() + " items on your list.";
+    }
+
+    private void saveTasklistToFile() {
+        Path file = Paths.get(SAVE_PATH);
+        try {
+            Files.deleteIfExists(file);
+            Files.createFile(file);
+        } catch (IOException e) {
+            printErrorMessage(ErrorEnum.FILE_SAVE_ERROR);
+        }
+
+        for (Task task : taskList) {
+            try {
+                Files.writeString(file, task.getFileRepresentation() + System.lineSeparator(),
+                        StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                System.out.println("Error when writing task " + task + " to file");
+            }
+        }
+    }
+
+    private void loadTasklistFromFile() {
+        Path file = Paths.get(SAVE_PATH);
+        if (!Files.exists(file)) {
+            return;
+        }
+
+        List<String> tasks;
+        try {
+            tasks = Files.readAllLines(file);
+        } catch (IOException e) {
+            printErrorMessage(ErrorEnum.FILE_LOAD_ERROR);
+            return;
+        }
+
+        for (String str: tasks) {
+            List<String> args = List.of(str.split(" "));
+            if (args.size() < 2) {
+                continue;
+            }
+
+            String taskType = args.get(0);
+            String isDone = args.get(1);
+            Task task = null;
+            switch (taskType) {
+                case "todo":
+                    try {
+                        task = addTodo(args.subList(2, args.size()));
+                    } catch (EmptyBodyException e) {
+                        printErrorMessage(ErrorEnum.EMPTY_BODY);
+                    }
+
+                    break;
+                case "deadline":
+                    try {
+                        task = addDeadline(args.subList(2, args.size()));
+                    } catch (EmptyBodyException e) {
+                        printErrorMessage(ErrorEnum.EMPTY_BODY);
+                    } catch (IllegalArgumentException e) {
+                        printErrorMessage(ErrorEnum.ILLEGAL_ARGUMENT);
+                    }
+
+                    break;
+                case "event":
+                    try {
+                        task = addEvent(args.subList(2, args.size()));
+                    } catch (EmptyBodyException e) {
+                        printErrorMessage(ErrorEnum.EMPTY_BODY);
+                    } catch (IllegalArgumentException e) {
+                        printErrorMessage(ErrorEnum.ILLEGAL_ARGUMENT);
+                    }
+                    break;
+                default:
+                    printErrorMessage(ErrorEnum.UNKNOWN_INPUT);
+            }
+
+            if (isDone.equals("true") && task != null) {
+                task.markAsDone();
+            }
+        }
     }
 }

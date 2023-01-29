@@ -6,6 +6,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public String getFileRepresentation() {
+        return "deadline " + this.isDone + " " + this.description + " /by " + this.by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
