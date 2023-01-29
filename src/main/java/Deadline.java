@@ -7,7 +7,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getTaskInfoStatus() {
+        return "[D]" + super.getTaskInfoStatus() + " (by:" + this.dateToComplete + ")";
+    }
+
+    @Override
     public String getTaskInfo() {
-        return "[D]" + super.getTaskInfo() + " (by:" + dateToComplete + ")";
+        return "[D]" + super.getTaskInfoStatus() + "/by" + this.dateToComplete;
     }
 }
