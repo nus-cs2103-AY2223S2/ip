@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class GetAllTaskCommand extends Command {
 
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
-        ui.showGetAllTaskResult(tl);
+    public String execute(TaskList tl, Ui ui, Storage storage) {
+        return ui.showGetAllTaskResult(tl);
     }
 }

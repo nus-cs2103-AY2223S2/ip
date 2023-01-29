@@ -9,5 +9,5 @@ import duke.ui.Ui;
  * Command class, with a function execute() to execute the command
  */
 public abstract class Command {
-    public abstract void execute(TaskList tl, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tl, Ui ui, Storage storage) throws DukeException;
 }

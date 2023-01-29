@@ -18,7 +18,7 @@ public class FindTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         ArrayList<Task> taskArr = new ArrayList<Task>();
         for (int i = 0; i < tl.getSize(); i++) {
             Task task = tl.getTask(i);
@@ -27,6 +27,6 @@ public class FindTaskCommand extends Command {
                 taskArr.add(task);
             }
         }
-        ui.showFindTaskResult(taskArr);
+        return ui.showFindTaskResult(taskArr);
     }
 }

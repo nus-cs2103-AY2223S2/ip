@@ -22,9 +22,9 @@ public class UnmarkTaskCommand extends Command {
      * @param storage Storage to modify if necessary
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         tl.unmark(this.index - 1);
         storage.modify(storage.getStorageTaskString(tl.getTask(this.index - 1)), this.index);
-        ui.showUnmarkResult(tl.getTask(this.index - 1).toString(), this.index);
+        return ui.showUnmarkResult(tl.getTask(this.index - 1).toString(), this.index);
     }
 }

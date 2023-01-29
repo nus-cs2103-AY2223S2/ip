@@ -36,13 +36,13 @@ public class AddDeadlineCommand extends Command {
      * @param storage Storage to modify if necessary
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         try {
             LocalDateTime deadline = DateTime.parseDateTimeString(this.deadlineString);
             Deadline dl = new Deadline(this.name, deadline);
             tl.addTask(dl);
             storage.add(storage.getStorageTaskString(dl));
-            ui.showAddDeadlineResult(dl.toString(), tl.getSize());
+            return ui.showAddDeadlineResult(dl.toString(), tl.getSize());
         } catch (DateTimeParseException e) {
             throw new DukeException("Wrong format for deadline, "
                     + "please follow deadline name /by datetime(yyyy-mm-dd HH:mm)");
