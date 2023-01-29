@@ -15,8 +15,8 @@ public class EventCommand extends Command{
     @Override
     public void execute(Ui ui, TaskList list, String command) throws DukeException {
         String[] parts = command.split("\\s+");
-        int fromIndex = Parser.indexOf(parts, "/from");
-        int toIndex = Parser.indexOf(parts, "/to");
+        int fromIndex = Parser.getIndexOf(parts, "/from");
+        int toIndex = Parser.getIndexOf(parts, "/to");
 
         // Get task name.
         StringBuilder taskName = new StringBuilder();

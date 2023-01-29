@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class ParserTest {
 
     @Test
-    public void parse_listInput_ListCommand() throws Exception {
+    public void parse_listInput_listCommand() throws Exception {
         Parser parser = new Parser();
         assertEquals(parser.parse("list"), new ListCommand());
     }
 
-    @Test public void parse_invalidInput_DukeException() {
+    @Test public void parse_invalidInput_dukeExceptionThrown() {
         Parser parser = new Parser();
         try {
             assertNull(parser.parse("randomness :)"));
