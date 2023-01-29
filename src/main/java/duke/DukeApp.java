@@ -1,14 +1,19 @@
 package duke;
 
+import java.io.IOException;
+
+import duke.ui.MainWindow;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
  * Graphical user interface app for Duke.
  */
 public class DukeApp extends Application {
+    /** Duke for the app */
+    private final Duke duke = new Duke();
 
     /**
      * Starts the app.
@@ -20,11 +25,14 @@ public class DukeApp extends Application {
      */
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!");
-        Scene scene = new Scene(helloWorld);
-
-        stage.setScene(scene);
-        stage.show();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(DukeApp.class.getResource("/view/MainWindow.fxml"));
+            stage.setScene(new Scene(fxmlLoader.load()));
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

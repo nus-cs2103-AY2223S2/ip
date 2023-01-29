@@ -69,6 +69,16 @@ public class Duke {
     }
 
     /**
+     * Echos the given input.
+     *
+     * @param input Input.
+     * @return Echoed input.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+    /**
      * Executes a command.
      *
      * @param command Command to execute.
