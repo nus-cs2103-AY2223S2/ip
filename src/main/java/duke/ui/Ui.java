@@ -11,7 +11,7 @@ import duke.tasktypes.Task;
 public class Ui {
 
     /** Scanner Object for reading User input. */
-    public Scanner sc;
+    private Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);

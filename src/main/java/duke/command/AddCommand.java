@@ -2,8 +2,9 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 import duke.tasktypes.Task;
+import duke.ui.Ui;
+
 
 /**
  * Represents an add task command.

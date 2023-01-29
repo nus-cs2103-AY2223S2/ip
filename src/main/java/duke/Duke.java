@@ -1,11 +1,12 @@
 package duke;
 
-import duke.tasklist.TaskList;
-import duke.storage.Storage;
-import duke.ui.Ui;
-import duke.command.*;
-import duke.parser.Parser;
+import duke.command.Command;
 import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 
 /**
  * Represents a build instance of Duke.
@@ -17,6 +18,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Duke instance to run Duke program.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(ui);
