@@ -7,8 +7,14 @@ import java.time.format.DateTimeFormatter;
  * A task subclass to represent a Deadline (due date).
  */
 public class Deadline extends Task{
+    /** Due-date of the task. */
     private LocalDate dueDate;
 
+    /**
+     * Constructor for Deadline class.
+     * @param description The deadline details.
+     * @param dueDate The LocalDate for the deadline in "yyyy-mm-dd" format.
+     */
     public Deadline(String description, LocalDate dueDate) {
         super(description);
         this.dueDate = dueDate;

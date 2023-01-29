@@ -14,7 +14,7 @@ import duke.command.UnmarkCommand;
  * A class to parse commands received from user input.
  */
 public class Parser {
-    /** Check for program exit (true when bye command entered).*/
+    // Check for program exit (true when bye command entered).
     private boolean isExit;
 
     /**
@@ -69,6 +69,10 @@ public class Parser {
         return -1;
     }
 
+    /**
+     * Gets whether the program needs to exit (has received a 'bye' command).
+     * @return true if program must exit now; false otherwise.
+     */
     public boolean getIsExit() {
         return isExit;
     }

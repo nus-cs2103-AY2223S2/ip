@@ -4,6 +4,11 @@ package duke.task;
  * A task subclass to represent a ToDo (no date).
  */
 public class ToDo extends Task{
+
+    /**
+     * Constructor for ToDo class.
+     * @param description The todo details.
+     */
     public ToDo(String description) {
         super(description);
     }
