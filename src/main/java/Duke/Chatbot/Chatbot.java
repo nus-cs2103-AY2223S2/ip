@@ -163,4 +163,9 @@ public class Chatbot {
     }
 
 
+    public void find(String args) {
+        ui.showFindMessage(args);
+        TaskList foundTasks = tasks.findKeyword(args);
+        ui.showTasksMessage(foundTasks.toString());
+    }
 }

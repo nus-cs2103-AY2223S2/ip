@@ -198,7 +198,23 @@ public class TaskList {
     }
 
     /**
-     * Specifies the Tasktypes currently supported by TaskList
+     * Returns a new TaskList where each element's User Representation contains the keyword
+     *
+     * @param keyword keyword to search for
+     * @return new TaskList containing relevant Tasks
+     */
+    public TaskList findKeyword(String keyword) {
+        TaskList foundTasks = new TaskList();
+        for (Task task : tasks) {
+            if (task.toString().contains(keyword)) {
+                foundTasks.addTask(task);
+            }
+        }
+        return foundTasks;
+    }
+
+    /**
+     *  Specifies the Tasktypes currently supported by TaskList
      */
     public enum Tasktype {
         TODO,

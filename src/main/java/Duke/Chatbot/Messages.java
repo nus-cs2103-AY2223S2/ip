@@ -21,5 +21,6 @@ public class Messages {
 
     final static String MESSAGE_DELETE_ALL_DATA = "DELETEALL";
 
+    final static String MESSAGE_FIND = "FIND";
 
 }

@@ -130,6 +130,14 @@ public class Parser {
             return true;
         });
 
+        commands.put(Messages.MESSAGE_FIND, (chatbot, args) -> {
+            if (args == "") {
+                ui.showEmptyFindKeywordError();
+            }
+            chatbot.find(args);
+            return true;
+        });
+
     }
 
     /**
