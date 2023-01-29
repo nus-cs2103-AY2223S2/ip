@@ -26,6 +26,7 @@ public class Storage {
         try {
             File existingList = new File(filepath);
             if (!existingList.exists()) {
+                existingList.getParentFile().mkdirs();
                 existingList.createNewFile();
             }
             taskList = existingList;

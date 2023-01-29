@@ -9,7 +9,7 @@ public class Parser {
     }
 
     public static Command parse(String input) {
-        String[] parsedInput = input.split(" ");
+        String[] parsedInput = input.split(" ", 2);
         Keywords command;
         try {
             command = Keywords.valueOf(parsedInput[0]);
