@@ -63,7 +63,6 @@ public class ToDoList {
     public void save() throws IOException {
         String home = System.getProperty("user.dir");
         Path path = java.nio.file.Paths.get(home, "iP-data", "Ip-data.txt");
-        System.out.println(path);
         FileWriter fw = new FileWriter(path.toString()); //file structure
         for (int i=1; i<=this.toDoCount; i++) {
             fw.write(arr.get(i).save());
