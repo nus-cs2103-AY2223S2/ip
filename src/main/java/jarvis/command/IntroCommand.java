@@ -1,4 +1,4 @@
-package jarvis.command.subcommand;
+package jarvis.command;
 
 import jarvis.command.Command;
 import jarvis.storage.Storage;
