@@ -63,6 +63,13 @@ public class Duke {
             unmark(lst.get(Integer.parseInt((str.split(" ", 2)[1])) - 1));
             reply();
         }
+        else if((str.split(" ", 2)[0]).equals("delete")) {
+            System.out.println("Noted. I've removed this task:");
+            System.out.println("  " + lst.get(Integer.parseInt((str.split(" ", 2)[1])) - 1).toString());
+            lst.remove(Integer.parseInt((str.split(" ", 2)[1])) - 1);
+            System.out.println("Now you have " + lst.size() + " tasks in the list.");
+            reply();
+        }
         else {
             try {
                 add_to_list(str);
