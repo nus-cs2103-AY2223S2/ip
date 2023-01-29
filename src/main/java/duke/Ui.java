@@ -55,6 +55,23 @@ public class Ui {
      * @param task Task that is added.
      */
     public void addedTask(Task task) {
+    public void sayGoodbye() {
+        System.out.println("Byebye CATch you later!");
+    }
+
+    public void showMarked(Task task) {
+        System.out.println("I've marked this task as done: " + task);
+    }
+
+    public void showUnmarked(Task task) {
+        System.out.println("I've marked this task as not done yet: " + task);
+    }
+
+    public void showDeleted(Task task) {
+        System.out.println("I've deleted this task: " + task);
+    }
+
+    public void showAddTask(Task task) {
         System.out.println("Meow! Just added: \n" + task);
     }
 

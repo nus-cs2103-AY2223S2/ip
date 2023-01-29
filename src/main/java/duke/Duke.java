@@ -1,8 +1,12 @@
 package duke;
+
+import duke.exception.DukeException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import duke.exception.DukeException;
+
+
 
 
 public class Duke {
@@ -36,7 +40,7 @@ public class Duke {
                 Parser parser = new Parser(answer);
                 int length = tasks.getLength();
                 if (answer.equals("bye")) {
-                    ui.goodbye();
+                    ui.sayGoodbye();
                     try {
                         storage.store(tasks);
                     } catch (IOException e) {
@@ -51,22 +55,22 @@ public class Duke {
 
                 if (answer.startsWith("mark ")) {
                     Integer index = parser.getMarkIndex(length);
-                    ui.marked(tasks.mark(index));
+                    ui.showMarked(tasks.mark(index));
                     continue;
                 }
                 if (answer.startsWith("unmark ")) {
                     Integer index = parser.getUnmarkIndex(length);
-                    ui.unmarked(tasks.unmark(index));
+                    ui.showUnmarked(tasks.unmark(index));
                     continue;
                 }
                 if (answer.startsWith("delete ")) {
                     Integer index = parser.getDeleteIndex(length);
-                    ui.deleted(tasks.delete(index));
+                    ui.showDeleted(tasks.delete(index));
                     continue;
                 }
                 if (answer.startsWith("todo ")) {
                     String description = parser.getTodoDescription();
-                    ui.addedTask(tasks.addTodo(answer));
+                    ui.showAddTask(tasks.addTodo(answer));
                     continue;
                 }
                 if (answer.startsWith("deadline ")) {
@@ -74,7 +78,7 @@ public class Duke {
                     ui.askBy();
                     String askBy = ui.readCommand();
                     LocalDateTime by = parser.getDeadlineBy(askBy);
-                    ui.addedTask(tasks.addDeadline(description, by));
+                    ui.showAddTask(tasks.addDeadline(description, by));
                     continue;
                 }
                 if (answer.startsWith("event ")) {
@@ -85,7 +89,7 @@ public class Duke {
                     ui.askTo();
                     String askTo = ui.readCommand();
                     LocalDateTime to = parser.getEventTo(askTo);
-                    ui.addedTask(tasks.addEvent(description, from, to));
+                    ui.showAddTask(tasks.addEvent(description, from, to));
                     continue;
                 }
                 throw new DukeException("I don't know that one!");
@@ -100,14 +104,10 @@ public class Duke {
 
     }
 
-
     public static void main(String[] args) {
         new Duke("src/main/data/duke.txt", "src/main/data").run();
 
     }
-
-
-
 
 }
 

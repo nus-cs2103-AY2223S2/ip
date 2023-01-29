@@ -1,14 +1,15 @@
 package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import duke.exception.DukeException;
+
 import duke.exception.DukeInvalidArgumentException;
 import duke.exception.DukeInvalidIndexException;
 public class Parser {
 
     protected String answer;
-    protected String description;
 
     /**
      * Constructor for Parser object.
@@ -156,7 +157,9 @@ public class Parser {
         if (toString.isEmpty()) {
             throw new DukeInvalidArgumentException("To is empty, please input task again");
         }
+
         LocalDateTime to;
+
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             to = LocalDateTime.parse(toString, formatter);
