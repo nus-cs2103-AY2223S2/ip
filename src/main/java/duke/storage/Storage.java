@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * Class of Storage that saves and loads the given tasks by the user.
+ */
 public class Storage {
     private ArrayList<Task> tasklst;
 
@@ -23,46 +27,54 @@ public class Storage {
         this.tasklst = tasklst;
     }
 
-
     public Storage(String filepath) {
         this.filepath = filepath;
         this.tasklst = new ArrayList<>();
     }
 
+    /**
+     * This method returns the task based on the id.
+     *
+     * @param i - index of the id.
+     * @return Task - Returns the task of given id.
+     */
     public Task getTask(int i) {
         return this.tasklst.get(i);
     }
 
+    /**
+     * This method removes and returns the task based on the selected id.
+     *
+     * @param i - index of the id.
+     * @return Task - Returns the task of the given id being removed.
+     */
     public Task removeTask(int i) {
         return this.tasklst.remove(i);
     }
 
+    /**
+     * This method adds a new task to the current tasklist.
+     *
+     * @param t - The given task.
+     */
     public void addTask(Task t) {
         this.tasklst.add(t);
     }
 
+    /**
+     * This method returns the size of tasks in the list.
+     *
+     * @return int - Returns the size of the tasklist.
+     */
     public int getSize() {
         return this.tasklst.size();
     }
 
-    public ArrayList<Task> load() throws DukeException {
-        try {
-            File file = new File(this.filepath);
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] lineArr = line.split("\\] ");
-                String[] lineType = lineArr[0].split("\\]");
-                this.addTask(new Task(lineType[0].substring(1),
-                        lineType[1].substring(1), lineArr[1]));
-            }
-            scanner.close();
-            return this.tasklst;
-        } catch (FileNotFoundException e) {
-            throw new DukeException("File is not found!");
-        }
-    }
-
+    /**
+     * This method returns the tasklist in a string format.
+     *
+     * @return String - Returns the output of the list of tasks.
+     */
     public String getTasks() {
         String res = "";
         int counter = 1;
@@ -72,12 +84,40 @@ public class Storage {
         return res;
     }
 
+    /**
+     * This method loads the data of the stored tasks from a textfile.
+     *
+     * @return ArrayList<Task> - Returns the Task arraylist that is loaded from the textfile.
+     * @throws DukeException - Error of the filed not being found.
+     */
+    public ArrayList<Task> load() throws DukeException {
+        try {
+            File file = new File(this.filepath);
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] lineArr = line.split("\\] ");
+                String[] lineType = lineArr[0].split("\\]");
+                Task t = new Task(lineType[0].substring(4),
+                        lineType[1].substring(1), lineArr[1]);
+                this.addTask(t);
+            }
+            scanner.close();
+            return this.tasklst;
+        } catch (FileNotFoundException e) {
+            throw new DukeException("The loading of file \"duke.txt\" is not found!");
+        }
+    }
+
+    /**
+     * This method will update the textfile based on the current commands inputed by the user.
+     */
     public void updateStorage() {
         // create the directory if it is not found
         String DIRECTORY = "./data";
         try {
             File directory = new File(DIRECTORY);
-            if (!directory.exists()){
+            if (!directory.exists()) {
                 directory.mkdir();
             }
             String res = this.getTasks();

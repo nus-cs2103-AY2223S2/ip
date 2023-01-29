@@ -5,17 +5,18 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.ui.Ui;
+
+
+/**
+ * Class of TodoCommand that add task to the list.
+ */
 public class TodoCommand extends Command {
     private String activity;
 
     public TodoCommand(String cmd) {
-        try {
-            checkCommand(cmd);
-            String c = cmd.split(" ")[0];
-            this.activity = cmd.substring(c.length() + 1);
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
+        System.out.println(cmd);
+        String c = cmd.split(" ")[0];
+        this.activity = cmd.substring(c.length() + 1);
     }
 
     public boolean execute(Storage tl, Ui ui, Storage storage) {

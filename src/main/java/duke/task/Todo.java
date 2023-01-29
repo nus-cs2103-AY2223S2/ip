@@ -1,7 +1,10 @@
 package duke.task;
 
-public class Todo extends Task {
 
+/**
+ * Class of Todo which creates the task.
+ */
+public class Todo extends Task {
     public Todo(String activity) {
         super(activity);
     }
