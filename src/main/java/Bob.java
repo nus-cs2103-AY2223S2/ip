@@ -1,5 +1,8 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -16,6 +19,8 @@ public class Bob {
     private static final Integer spacing = 5;
 
     private static final String wrapper = padLeft("~".repeat(30));
+
+    private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd[ ha]");
 
     private static String padLeft (String s) {
         return " ".repeat(spacing) + s;
@@ -63,6 +68,16 @@ public class Bob {
         }
 
         return true;
+    }
+
+    // Check if string can be parsed to LocalDate
+    private static boolean isDate(String s) {
+        try {
+            LocalDate.parse(s, format);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
     private void handleMarkCommand(String s) throws BobException{
         String[] commands = s.split(" ");
@@ -118,21 +133,25 @@ public class Bob {
         // A valid command would have 3 different sections with this split
         String[] splitCommand = s.split(" /from | /to ");
 
-        // A valid command has at least 2 sections
+        // Check if a description exists
         String[] command_desc = splitCommand[0].split(" ");
+
+
         return validMatches
                 && splitCommand.length == 3
                 && command_desc.length > 1
                 && command_desc[0].equals("event")
-                && s.indexOf("/from") < s.indexOf("/to"); // A valid command has /from before /to
+                && s.indexOf("/from") < s.indexOf("/to") // A valid command has /from before /to
+                && isDate(splitCommand[1])
+                && isDate(splitCommand[2]);
     }
 
     private void addEvent(String s) {
         String[] command = s.split( " /from | /to ");
         String[] command_desc = command[0].split(" ", 2);
         String description = command_desc[1];
-        String start = command[1];
-        String end = command[2];
+        LocalDate start = LocalDate.parse(command[1], format);
+        LocalDate end = LocalDate.parse(command[2], format);
 
         Event e = new Event(description, start, end);
         taskList.add(e);
@@ -142,15 +161,19 @@ public class Bob {
     private boolean isDeadline(String s) {
         String[] splitCommand = s.split(" /by ");
         String[] command_desc = splitCommand[0].split(" ", 2);
-        return splitCommand.length == 2 && command_desc.length == 2 && command_desc[0].equals("deadline");
+
+        return splitCommand.length == 2
+                && command_desc.length == 2
+                && command_desc[0].equals("deadline")
+                && isDate(splitCommand[1]);
     }
 
     private void addDeadline(String s) {
         String[] splitCommand = s.split(" /by ");
         String[] command_desc = splitCommand[0].split(" ", 2);
-        String description = command_desc[1], deadline = splitCommand[1];
+        String description = command_desc[1];
+        LocalDate deadline = LocalDate.parse(splitCommand[1], format);
         Deadline d = new Deadline(description, deadline);
-
         taskList.add(d);
     }
     private void addTask(String input) throws BobException {
@@ -237,12 +260,12 @@ public class Bob {
             t = new Todo(desc);
             break;
         case "D":
-            String deadline = input[3];
+            LocalDate deadline = LocalDate.parse(input[3]);
             t = new Deadline(desc, deadline);
             break;
         case "E":
-            String start = input[3];
-            String end = input[4];
+            LocalDate start = LocalDate.parse(input[3]);
+            LocalDate end = LocalDate.parse(input[4]);
             t = new Event(desc, start, end);
             break;
         default:
