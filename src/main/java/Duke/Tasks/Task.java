@@ -25,6 +25,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public boolean contains(String task) {
+        return  description.contains(task);
+    }
+
 
     @Override
     public String toString(){
