@@ -15,8 +15,8 @@ public class Event extends Task {
     public Event(String description, boolean isDone, String from, String to) {
         super(description, isDone);
         try {
-            this.from = LocalDateTime.parse(from, DATE_TIME_FORMAT);
-            this.to = LocalDateTime.parse(to, DATE_TIME_FORMAT);
+            this.from = LocalDateTime.parse(from, FORMAT_DATE_TIME);
+            this.to = LocalDateTime.parse(to, FORMAT_DATE_TIME);
         } catch (DateTimeParseException e) {
             System.out.println("Please use the correct format for dates, i.e. '12-10-2023 16:00'");
             System.out.println(e.getMessage());
@@ -26,12 +26,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " +
-            from.format(PRINT_FORMAT) +
-            " to: " + to.format(PRINT_FORMAT) + ")";
+            from.format(FORMAT_PRINT) +
+            " to: " + to.format(FORMAT_PRINT) + ")";
     }
 
     @Override
     public String serialize() {
-        return "E | " + super.serialize() + " | " + from.format(PRINT_FORMAT) + " | " + to.format(PRINT_FORMAT);
+        return "E | " + super.serialize() + " | " + from.format(FORMAT_PRINT) + " | " + to.format(FORMAT_PRINT);
     }
 }

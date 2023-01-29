@@ -15,7 +15,7 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone);
         try {
-            this.by = LocalDateTime.parse(by, DATE_TIME_FORMAT);
+            this.by = LocalDateTime.parse(by, FORMAT_DATE_TIME);
         } catch (DateTimeParseException e) {
             System.out.println("Please use the correct format for dates, i.e. '12-10-2023 16:00'");
             System.out.println(e.getMessage());
@@ -24,11 +24,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(PRINT_FORMAT) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(FORMAT_PRINT) + ")";
     }
 
     @Override
     public String serialize() {
-        return "D | " + super.serialize() + " | " + by.format(PRINT_FORMAT);
+        return "D | " + super.serialize() + " | " + by.format(FORMAT_PRINT);
     }
 }
