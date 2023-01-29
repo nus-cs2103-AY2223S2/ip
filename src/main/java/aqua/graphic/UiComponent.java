@@ -10,6 +10,9 @@ import javafx.scene.Node;
 /**
  * A custom JavaFx node created from an FXML file.
  *
+ * <p>Structure adapted from
+ * https://github.com/se-edu/addressbook-level3/blob/master/src/main/java/seedu/address/ui/UiPart.java
+ *
  * @param <T> the type of the root node.
  */
 public abstract class UiComponent<T extends Node> {
