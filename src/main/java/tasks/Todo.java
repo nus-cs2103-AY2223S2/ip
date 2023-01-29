@@ -1,8 +1,14 @@
 package tasks;
-
 import tasks.Task;
 
+/**
+ * Represents Todo type task
+ */
 public class Todo extends Task {
+    /**
+     * Construcutor for Todo object
+     * @param desc Description of task
+     */
     public Todo(String desc) {
         super(desc);
     }

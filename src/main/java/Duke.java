@@ -5,11 +5,18 @@ import ui.Ui;
 import tasks.TaskList;
 import java.util.Scanner;
 
+/**
+ * Represents the Duke chatbot
+ */
 public class Duke {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
     private StringParser sp;
+
+    /**
+     * Constructor for Duke object
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -21,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Begins Duke's interaction with user
+     */
     public void run(){
         boolean isBye = false;
         Scanner sc = new Scanner(System.in);
@@ -38,6 +48,11 @@ public class Duke {
         }
 
     }
+
+    /**
+     * Runs the whole program
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

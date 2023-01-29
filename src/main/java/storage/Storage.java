@@ -12,11 +12,19 @@ import java.util.List;
 import java.util.ArrayList;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Represents the tasks stored on harddrive
+ */
 public class Storage {
     private String dataFolder = new File("data").getAbsolutePath();
     private String tasksFile = new File("data/duke.txt").getAbsolutePath();
     private Path tfPath = Paths.get(tasksFile);
     private ArrayList<String> stringTaskList = new ArrayList<String>();
+
+    /**
+     * Constructor for storage object.
+     * If data folder or duke.txt folder does not exist, creates them in directory.
+     */
     public Storage(){
         //if data folder does not exist
         File f = new File(dataFolder);
@@ -44,6 +52,11 @@ public class Storage {
             }
         }
     }
+
+    /**
+     * Updates the Storage object to reflect current tasks at hand
+     * @param taskList TaskList object containing current tasks
+     */
     public void updateFile(TaskList taskList){
         try{
             //generate string array of all tasks

@@ -16,21 +16,34 @@ public abstract class Task {
         this.isDone = !this.isDone;
     }
 
+    /**
+     * Returns description of task
+     * @return task description
+     */
     public String getDescription(){
         return this.description;
     }
 
+    /**
+     * Returns String representation of task to be output in terminal
+     * @return String representation of task
+     */
     @Override
     public String toString() {
         return (this.isDone ? "[X] " : "[ ] ") + this.description;
     }
 
-    private String getMark() {
-        return this.isDone ? "X" : " ";
-    }
+    /**
+     * Returns boolean which states whether task is marked
+     * @return marked status of task
+     */
     public Boolean isDone(){
         return this.isDone;
     }
 
+    /**
+     * Generates a String representation of task to be stored in harddrive
+     * @return String representation of task
+     */
     public abstract String toFileString();
 }
