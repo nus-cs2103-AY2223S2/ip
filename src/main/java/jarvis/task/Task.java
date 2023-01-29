@@ -79,14 +79,14 @@ public abstract class Task {
 
         try {
             switch (type) {
-            case "T":
+            case ToDoTask.ID:
                 return new ToDoTask(description, isDone);
-            case "D":
+            case DeadlineTask.ID:
                 if (scanner.hasNext()) {
                     deadline = scanner.next();
                 }
                 return new DeadlineTask(description, deadline, isDone);
-            case "E":
+            case EventTask.ID:
                 if (scanner.hasNext()) {
                     fromDateTime = scanner.next();
                 }

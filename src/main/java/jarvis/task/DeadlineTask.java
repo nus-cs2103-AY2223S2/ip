@@ -12,6 +12,8 @@ import jarvis.exception.MissingParameterException;
  * with 'by' information.
  */
 public class DeadlineTask extends Task {
+    public static final String ID = "D";
+
     private final LocalDate deadline;
 
     /**
@@ -57,12 +59,12 @@ public class DeadlineTask extends Task {
 
     @Override
     public String serialize() {
-        String[] data = {"D", String.valueOf(this.isDone()), this.getDescription(), String.valueOf(this.deadline)};
+        String[] data = {ID, String.valueOf(this.isDone()), this.getDescription(), String.valueOf(this.deadline)};
         return String.join(" / ", data);
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.deadline);
+        return String.format("[%s]%s (by: %s)", ID, super.toString(), this.deadline);
     }
 }

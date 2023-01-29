@@ -12,6 +12,8 @@ import jarvis.exception.MissingParameterException;
  * with 'from' and 'to' information.
  */
 public class EventTask extends Task {
+    public static final String ID = "E";
+
     private final LocalDate fromDate;
     private final LocalDate toDate;
 
@@ -86,7 +88,7 @@ public class EventTask extends Task {
     @Override
     public String serialize() {
         String[] data = {
-            "E",
+            ID,
             String.valueOf(this.isDone()),
             this.getDescription(),
             String.valueOf(this.fromDate),
@@ -98,7 +100,8 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         return String.format(
-                "[E]%s (from: %s, to: %s)",
+                "[%s]%s (from: %s, to: %s)",
+                ID,
                 super.toString(),
                 this.fromDate,
                 this.toDate

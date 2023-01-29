@@ -6,6 +6,8 @@ import jarvis.exception.MissingParameterException;
  * Task class representing a todo task.
  */
 public class ToDoTask extends Task {
+    public static final String ID = "T";
+
     /**
      * Constructor of a todo task, marked as undone.
      *
@@ -37,12 +39,12 @@ public class ToDoTask extends Task {
 
     @Override
     public String serialize() {
-        String[] data = {"T", String.valueOf(this.isDone()), this.getDescription()};
+        String[] data = {ID, String.valueOf(this.isDone()), this.getDescription()};
         return String.join(" / ", data);
     }
 
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%s]%s", ID, super.toString());
     }
 }
