@@ -2,7 +2,6 @@ package duke.task;
 
 import duke.DukeException;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class TaskList {
@@ -58,10 +57,10 @@ public class TaskList {
     }
 
     /**
-     * Deletes the duke.task with the same index.
+     * Deletes the task with the same index.
      *
-     * @param idx Index of the duke.task in the list.
-     * @return duke.task.Task deleted.
+     * @param idx Index of the task in the list.
+     * @return Task deleted.
      * @throws DukeException If index is out of bounds.
      */
     public Task deleteTask(int idx) throws DukeException {
@@ -75,5 +74,20 @@ public class TaskList {
         return taskList.get(index);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof TaskList)) {
+            return false;
+        }
+
+        // Typecast o to TaskList since we know it is of type TaskList
+        TaskList task = (TaskList) o;
+
+        return task.taskList.equals(this.taskList);
+    }
 
 }
