@@ -74,7 +74,7 @@ public class Parser {
 
         case "find ":
             inputArr = fullCommand.split(" ", 2);
-            String toFind = inputArr[1];
+            String[] toFind = inputArr[1].split(" ");
             return new FindCommand(toFind);
         }
 

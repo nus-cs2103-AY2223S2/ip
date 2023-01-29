@@ -100,13 +100,13 @@ public class TaskList {
     /**
      * Returns a new TaskList object containing tasks that matched given keyword.
      *
-     * @param keyword String keyword to be matched with task descriptions.
+     * @param keywords String array keywords to containing words to be matched with task descriptions.
      * @return Returns a new TaskList object containing matching tasks.
      */
-    public TaskList getMatchingTasks(String keyword) {
+    public TaskList getMatchingTasks(String[] keywords) {
         TaskList matchTasks = new TaskList(this.ui);
         for (Task task : this.taskStorage) {
-            if (task.matchKeyword(keyword)) {
+            if (task.matchKeywords(keywords)) {
                 matchTasks.loadTask(task);
             }
         }

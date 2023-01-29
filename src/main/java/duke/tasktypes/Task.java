@@ -59,8 +59,21 @@ public abstract class Task {
      */
     public abstract String getSaveFormat();
 
-    public boolean matchKeyword(String keyword) {
-        return this.description.contains(keyword);
+    /**
+     * Returns true if description contains at least one keyword. False otherwise.
+     *
+     * @param keywords String array containing keywords.
+     * @return Boolean variable indicating match result.
+     */
+    public boolean matchKeywords(String[] keywords) {
+        boolean isContained = false;
+        for (String s : keywords) {
+            if (this.description.contains(s)) {
+                isContained = true;
+                break;
+            }
+        }
+        return isContained;
     }
 }
 
