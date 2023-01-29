@@ -64,7 +64,7 @@ public abstract class Task implements Storable {
      */
     @Override
     public String toCsv() {
-        return (isDone ? "true":"false") + "," + description;
+        return (isDone ? "true" : "false") + "," + description;
     }
 
     /**

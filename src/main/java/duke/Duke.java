@@ -45,8 +45,9 @@ public class Duke {
             ui.println("Your list is empty.");
         } else {
             ui.println("You have the following task(s):");
-            for (int i = 0; i < taskList.size(); i++)
+            for (int i = 0; i < taskList.size(); i++) {
                 ui.println("\t" + (i + 1) + ". " + taskList.get(i));
+            }
         }
     }
 
@@ -85,13 +86,16 @@ public class Duke {
 
         //Initialise variables used inside the program loop
         boolean isContinue = true;
-        int taskIdx, descIdx;
+        int taskIdx;
+        int descIdx;
         Task activeTask;
-        String cmd, userCmd, taskDescription;
+        String cmd;
+        String userCmd;
+        String taskDescription;
         String[] inputs;
 
         // Program Loop
-        while(isContinue) {
+        while (isContinue) {
             System.out.print("\n > ");
             userCmd = sc.nextLine();
 
@@ -113,7 +117,7 @@ public class Duke {
 
                     descIdx = userCmd.indexOf("deadline "); // 9 chars
                     int dueIdx = userCmd.indexOf(" /by "); // 5 chars
-                    Duke.assertThis(descIdx+9 < dueIdx, "Task description cannot be empty.");
+                    Duke.assertThis((descIdx + 9) < dueIdx, "Task description cannot be empty.");
 
                     taskDescription = userCmd.substring(descIdx + 9, dueIdx).trim();
                     String duedate = userCmd.substring(dueIdx + 5).trim();
@@ -131,8 +135,8 @@ public class Duke {
                     descIdx = userCmd.indexOf("event "); // 6 chars
                     int fromIdx = userCmd.indexOf(" /from "); // 7 chars
                     int toIdx = userCmd.indexOf(" /to "); // 5 chars
-                    Duke.assertThis(descIdx+6 < fromIdx, "Task description cannot be empty.");
-                    Duke.assertThis(fromIdx+7 < toIdx, "Start date/time cannot be empty.");
+                    Duke.assertThis((descIdx + 6) < fromIdx, "Task description cannot be empty.");
+                    Duke.assertThis((fromIdx + 7) < toIdx, "Start date/time cannot be empty.");
 
                     taskDescription = userCmd.substring(descIdx + 6, fromIdx).trim();
                     String start = userCmd.substring(fromIdx + 7, toIdx).trim();
@@ -180,9 +184,9 @@ public class Duke {
                             activeTask.setDone(isMark); // Note: false means unmark
                             duke.storage.saveDataToFile();
                             duke.ui.println("\t" + activeTask);
-                        } catch(NumberFormatException e) {
+                        } catch (NumberFormatException e) {
                             duke.ui.warn("'" + input + "' is not a number.");
-                        } catch(DukeException e) {
+                        } catch (DukeException e) {
                             duke.ui.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
                         }
                     } // for loop
@@ -207,9 +211,9 @@ public class Duke {
                             Duke.assertThis(taskIdx >= 0 && taskIdx < duke.taskList.size(), "");
 
                             markedDelete.add(taskIdx);
-                        } catch(NumberFormatException e) {
+                        } catch (NumberFormatException e) {
                             duke.ui.warn("'" + input + "' is not a number.");
-                        } catch(DukeException e) {
+                        } catch (DukeException e) {
                             duke.ui.warn("Task " + Integer.parseInt(inputs[i]) + " does not exist.");
                         }
                     }
@@ -261,9 +265,9 @@ public class Duke {
                     isContinue = false;
                     break;
 
-                    default:
-                        duke.ui.warn("Sorry, I don't understand your request :(");
-                        duke.ui.println("Did you spell something wrongly?");
+                default:
+                    duke.ui.warn("Sorry, I don't understand your request :(");
+                    duke.ui.println("Did you spell something wrongly?");
                 } // switch case
             } catch (DukeException e) {
                 duke.ui.warn(e.getMessage());
