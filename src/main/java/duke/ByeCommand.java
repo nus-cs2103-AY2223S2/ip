@@ -15,7 +15,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Executes the bye command with given task list,
+     * Executes the bye command with given task list
      * ui and storage.
      *
      * @param taskList TaskList for Duke.
