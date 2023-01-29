@@ -10,7 +10,9 @@ import Ava.Tasks.Todo;
 
 import java.util.ArrayList;
 
-
+/**
+ * Wrapper for List Containing Task Objects
+ */
 public class TaskList {
     private  ArrayList<Task> tasks = new ArrayList<>();
     private int taskCount = 0;
@@ -18,12 +20,21 @@ public class TaskList {
 
     private Storage storage = new Storage();
 
-
+    /**
+     * Add Task to the list and increments taskCount
+     * @param t Task Object
+     */
     public void addTask(Task t) {
         tasks.add(t);
         taskCount++;
     }
 
+    /**
+     * deletes task from List
+     * @param index delete task index
+     * @return deleted Task
+     * @throws NonExistentTask indicate task does not exist
+     */
     public Task deleteTask(int index) throws NonExistentTask {
         index -= 1;
         if (index >= this.taskCount) {
@@ -35,7 +46,12 @@ public class TaskList {
         return temp;
     }
 
-
+    /**
+     * mark task from List
+     * @param index int indicate index of task to be marked
+     * @return marked task
+     * @throws NonExistentTask indicate task does not exist
+     */
     public Task mark(int index) throws NonExistentTask{
         index -= 1;
         if (index >= this.taskCount) {
@@ -45,6 +61,12 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * unmark task from List
+     * @param index int indicate index of task to be unmarked
+     * @return unmarked task
+     * @throws NonExistentTask indicate task does not exist
+     */
     public Task unmark(int index) throws NonExistentTask{
         index = index - 1;
         if (index >= this.taskCount) {
@@ -56,7 +78,7 @@ public class TaskList {
 
     /**
      * Retreives Tasks from the list and formats according to UI specifications.
-     * @param formatSpace
+     * @param formatSpace indentation reuired by UI
      * @return formatted tasks from taskList
      */
     public String formatTasks(String formatSpace) {
@@ -67,6 +89,11 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Update current TaskList to storage
+     * @param storage a storage Object
+     * @throws AvaException indicate problem in updating storage from TaskList
+     */
     public void updateStorage(Storage storage) throws AvaException {
         storage.deleteFile();
         for(Task t: tasks){
@@ -74,6 +101,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * retrieve current Storage to TaskList
+     * @param storage a storage Object
+     * @throws AvaException indicate problem in reading storage
+     */
     public void retreiveStorage(Storage storage) throws AvaException {
         ArrayList<String> taskStrings = storage.readStorage();
         for (String task : taskStrings){
