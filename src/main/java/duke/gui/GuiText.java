@@ -75,7 +75,7 @@ public class GuiText {
      * @return Error message.
      */
     public static String generateMissingArgumentErrorMessage(TaskType taskType) {
-        String suggestedName = "For the description, what about something like pet every dog?\n"
+        String suggestedName = "For the description, what about something like pet every dog? "
                 + "That's something I want to do.";
         switch (taskType) {
         case TODO:
@@ -103,6 +103,7 @@ public class GuiText {
      */
     public static String generateUnknownCommandErrorMessage() {
         return "I don't know what that means. I must have forgotten.\n"
+                + "\n"
                 + "You can see what I remember using \'help\'.";
     }
 
@@ -142,6 +143,7 @@ public class GuiText {
     public String showAddTask(Task task, TaskList tasks) {
         return "Got it! I've added this task:\n"
                 + task + "\n"
+                + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
@@ -162,7 +164,7 @@ public class GuiText {
      * @return Text response for unmarking task.
      */
     public String showUnmarkTask(Task task) {
-        return "Okay! I've marked this task as not done:\n" + task;
+        return "Okay. I've marked this task as not done:\n" + task;
     }
 
     /**
@@ -173,8 +175,9 @@ public class GuiText {
      * @return Text response for deleting task.
      */
     public String showDeleteTask(Task task, TaskList tasks) {
-        return "Alright! I've removed this task:\n"
+        return "Alright. I've removed this task:\n"
                 + task + "\n"
+                + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 

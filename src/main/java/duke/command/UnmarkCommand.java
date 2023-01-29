@@ -21,7 +21,7 @@ public class UnmarkCommand extends Command {
     public String execute(TaskList tasks, GuiText guiText, Storage storage) throws DukeException {
         Task task = tasks.processTaskAtIndex(CommandType.UNMARK, index);
         storage.save(tasks.createTaskListString());
-        MainWindow.changeSpriteExpression(SpriteEmotion.NEUTRAL);
+        MainWindow.changeSpriteExpression(SpriteEmotion.SURPRISED);
         return guiText.showUnmarkTask(task);
     }
 

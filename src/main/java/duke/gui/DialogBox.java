@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 /**
@@ -24,6 +25,11 @@ import javafx.scene.text.Text;
 public class DialogBox extends HBox {
 
     private static final float WRAPPING_WIDTH = 250;
+    private static final float IMAGE_LENGTH = 70;
+    private static final float ROUNDED_CORNERS_LENGTH = 25;    
+
+    private static final Color DUKE_COLOR = Color.CORNFLOWERBLUE;
+    private static final Color USER_COLOR = Color.CRIMSON;
 
     @FXML
     private Text dialog;
@@ -42,8 +48,17 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
         dialog.setWrappingWidth(DialogBox.WRAPPING_WIDTH);
+
+        displayPicture.setImage(img);
+        DialogBox.roundCornersOfImage(displayPicture);
+    }
+
+    private static void roundCornersOfImage(ImageView initialImage) {
+        Rectangle roundRect = new Rectangle(0, 0, DialogBox.IMAGE_LENGTH, DialogBox.IMAGE_LENGTH);
+        roundRect.setArcHeight(DialogBox.ROUNDED_CORNERS_LENGTH);
+        roundRect.setArcWidth(DialogBox.ROUNDED_CORNERS_LENGTH);
+        initialImage.setClip(roundRect);
     }
 
     /**
@@ -77,7 +92,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setFontColor(Color.CRIMSON);
+        db.setFontColor(DialogBox.USER_COLOR);
         return db;
     }
 
@@ -92,7 +107,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setFontColor(Color.CORNFLOWERBLUE);
+        db.setFontColor(DialogBox.DUKE_COLOR);
         db.flip();
         return db;
     }
