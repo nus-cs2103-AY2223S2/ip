@@ -29,6 +29,9 @@ class TaskList {
         return this.listTask.get(index).toString();
     }
 
+    Task getTaskAtIndex(int index) {
+        return this.listTask.get(index);
+    }
     int getSize() {
         return this.listTask.size();
     }

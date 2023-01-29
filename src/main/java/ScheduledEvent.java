@@ -8,6 +8,11 @@ class ScheduledEvent extends Task {
     }
 
     @Override
+    String getAdditionalInfo() {
+        return " (FROM: " + dateBegin + " TO: " + dateEnd + ")";
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " (FROM: " + dateBegin + " TO: " + dateEnd + ")";
     }

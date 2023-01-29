@@ -17,6 +17,11 @@ class UserInteraction {
                 nextEvent = nextEvent.toNext();
                 System.out.println(nextEvent.toString());
             }
+            System.out.println("SAVE YOUR GRAND PLAN FOR ANOTHER DAY? ");
+            String isSaving = sc.nextLine();
+            if (isSaving.equals("YES")) {
+                SaveFile.saveProgress(nextEvent.getTaskList());
+            }
         } else {
             while (!isPlaying.equals("YES") && !isPlaying.equals("NO")) {
                 System.out.println("_".repeat(22));

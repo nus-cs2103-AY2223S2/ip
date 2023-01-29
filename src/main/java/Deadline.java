@@ -6,6 +6,11 @@ class Deadline extends Task {
     }
 
     @Override
+    String getAdditionalInfo() {
+        return " (BY: " + this.deadline + ")";
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " (BY: " + this.deadline + ")";
     }

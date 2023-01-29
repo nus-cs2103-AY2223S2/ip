@@ -32,12 +32,10 @@ class DoTask extends Event {
         Scanner sc = new Scanner(System.in);
         String nextTask = sc.nextLine();
         if (nextTask.equals("BYE")) {
-            return new Ending();
+            return new Ending(this.taskList);
         } else {
             try {
                 UserInputException.checkUserInput(nextTask, this.taskList.getSize());
-
-
                 if (nextTask.equals("LIST")) {
                     return new DoTask(false, nextTask, this.taskList);
                 } else {
@@ -87,6 +85,10 @@ class DoTask extends Event {
             }
         }
         return this;
+    }
+
+    TaskList getTaskList() {
+        return this.taskList;
     }
 
     @Override

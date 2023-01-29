@@ -19,6 +19,10 @@ class Greeting extends Event {
         }
     }
 
+    TaskList getTaskList() {
+        return new TaskList();
+    }
+
     @Override
     public String toString() {
         String toPrintOut = "";

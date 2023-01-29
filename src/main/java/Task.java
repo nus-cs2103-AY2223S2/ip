@@ -18,6 +18,10 @@ class Task {
         return this;
     }
 
+    String getAdditionalInfo () {
+        return "";
+    }
+
     @Override
     public String toString() {
         String toPrintOut = "";

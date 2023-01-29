@@ -6,6 +6,8 @@ abstract class Event {
     }
     abstract Event toNext();
 
+    abstract TaskList getTaskList();
+
     boolean getStatus() {
         return this.isFinalEvent;
     }
