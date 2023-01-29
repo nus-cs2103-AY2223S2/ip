@@ -1,3 +1,4 @@
+package Duke;
 import java.time.LocalDate;
 public class Event extends Task {
     private LocalDate start;

@@ -1,4 +1,5 @@
-import java.io.File; 
+package Duke;
+import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.util.ArrayList;
