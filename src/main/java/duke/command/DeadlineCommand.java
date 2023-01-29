@@ -1,8 +1,9 @@
 package command;
 
 import java.util.Arrays;
-import dukeDateTimeFormatter.DukeDateTimeFormatter;
+
 import dukeexception.CommandException;
+import parser.DateTimeParser;
 import storage.Storage;
 import task.Deadline;
 import task.Task;
@@ -39,7 +40,7 @@ public class DeadlineCommand extends Command {
         int byIndex = Arrays.asList(values).indexOf("/by");
         String description = String.join(" ", Arrays.copyOfRange(values, 1, byIndex));
         String by = String.join(" ", Arrays.copyOfRange(values, byIndex + 1, values.length));
-        by = DukeDateTimeFormatter.format(by);
+        by = DateTimeParser.parse(by);
 
         return new String[] { description, by };
     }

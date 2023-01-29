@@ -1,8 +1,9 @@
 package command;
 
 import java.util.Arrays;
-import dukeDateTimeFormatter.DukeDateTimeFormatter;
+
 import dukeexception.CommandException;
+import parser.DateTimeParser;
 import storage.Storage;
 import task.Event;
 import task.Task;
@@ -40,9 +41,9 @@ public class EventCommand extends Command {
         int toIndex = Arrays.asList(values).indexOf("/to");
         String description = String.join(" ", Arrays.copyOfRange(values, 1, fromIndex));
         String from = String.join(" ", Arrays.copyOfRange(values, fromIndex + 1, toIndex));
-        from = DukeDateTimeFormatter.format(from);
+        from = DateTimeParser.parse(from);
         String to = String.join(" ", Arrays.copyOfRange(values, toIndex + 1, values.length));
-        to = DukeDateTimeFormatter.format(to);
+        to = DateTimeParser.parse(to);
 
         return new String[] { description, from, to };
     }
