@@ -10,14 +10,11 @@ public enum TaskType {
      * @return
      */
     public static TaskType matchStringToTaskType(String uppercaseCommand) {
-        if (uppercaseCommand.equals(DEADLINE.name())) {
-            return DEADLINE;
-        } else if (uppercaseCommand.equals(TODO.name())) {
-            return TODO;
-        } else if (uppercaseCommand.equals(EVENT.name())) {
-            return EVENT;
-        } else {
-            return null;
+        for (TaskType t : TaskType.values()) {
+            if (uppercaseCommand.equals(t.name())) {
+                return t;
+            }
         }
+        return null;
     }
 }

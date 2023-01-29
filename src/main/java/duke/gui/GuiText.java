@@ -80,12 +80,15 @@ public class GuiText {
         switch (taskType) {
         case TODO:
             return "The description's missing!\n"
+                    + "\n"
                     + suggestedName;
         case EVENT:
             return "Something's missing here! Either the description, the start date or the end date.\n"
+                    + "\n"
                     + suggestedName;
         case DEADLINE:
             return "Something's missing here. Either the description or the date.\n"
+                    + "\n"
                     + suggestedName;
         default:
             return null;
