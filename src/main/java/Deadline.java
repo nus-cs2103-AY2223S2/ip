@@ -30,6 +30,6 @@ public class Deadline extends Task {
     @Override
     public String toSaveString() {
         // D | 0 | return book | June 6th
-        return "D | " + (isDone ? 1 : 0) + " | " + super.toString() + " | " + by;
+        return "D | " + (isDone ? 1 : 0) + " | " + super.toString() + " | " + by.format(dateTimeFormatter);
     }
 }

@@ -17,16 +17,16 @@ public class Event extends Task {
         return outputFormatter.format(from);
     }
 
+    public void setFrom(String from) {
+        this.from = LocalDateTime.parse(from, dateTimeFormatter);
+    }
+
     public String getTo() {
         return outputFormatter.format(to);
     }
 
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
     public void setTo(String to) {
-        this.to = to;
+        this.to = LocalDateTime.parse(to, dateTimeFormatter);
     }
 
     @Override
@@ -37,6 +37,6 @@ public class Event extends Task {
     @Override
     public String toSaveString() {
         // E | 0 | project meeting | Aug 6th 2-4pm
-        return "E | " + (isDone ? 1 : 0) + " | " + super.toString() + " | " + from + " | " + to;
+        return "E | " + (isDone ? 1 : 0) + " | " + super.toString() + " | " + from.format(dateTimeFormatter) + " | " + to.format(dateTimeFormatter);
     }
 }
