@@ -1,10 +1,13 @@
 /**
  * Project Name: Duke
  * Duke is a Chatbot that helps to keep track of stuff to do.
+ *
  * @author Darius Ng Teng Wee
  */
 package duke;
+
 import duke.command.Command;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,13 +21,14 @@ public class Duke {
 
     /**
      * A constructor for Duke.
+     *
      * @param filepath the filepath where data is saved.
      */
     public Duke(String filepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath);
         try {
-            this.tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(storage.loadTaskListFromFile());
         } catch (FileNotFoundException e) {
             this.tasks = new TaskList();
         } catch (DukeException e) {

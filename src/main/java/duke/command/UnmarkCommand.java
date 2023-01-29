@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -13,6 +14,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Constructor for UnmarkCommand.
+     *
      * @param index Index of specific task in the tasklist to be unmark.
      */
     public UnmarkCommand(int index) {
@@ -22,6 +24,7 @@ public class UnmarkCommand extends Command {
 
     /**
      * Unmarks the specifc task in the tasklist and show message to user.
+     *
      * @param task Tasklist containing the list of tasks.
      * @param storage Saves tasks into the file locally.
      * @param ui Deals with interactions with user.
@@ -31,6 +34,6 @@ public class UnmarkCommand extends Command {
     public void execute(TaskList task, Storage storage, Ui ui) throws DukeException {
         task.unmarkTask(index);
         ui.showUnmark(task.getTask(index));
-        storage.save(task.getListOfTasks());
+        storage.saveTasksToFile(task.getListOfTasks());
     }
 }

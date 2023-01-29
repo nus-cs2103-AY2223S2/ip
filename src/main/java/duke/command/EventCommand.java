@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -15,6 +16,7 @@ public class EventCommand extends Command {
 
     /**
      * Constructor for EventCommand.
+     *
      * @param description Description of Event.
      * @param from Start date of Event.
      * @param by End date of Event.
@@ -28,6 +30,7 @@ public class EventCommand extends Command {
 
     /**
      * Creates a new Event task and adds it into the tasklist.
+     *
      * @param task Tasklist containing the list of tasks.
      * @param storage Saves tasks into the file locally.
      * @param ui Deals with interactions with user.
@@ -35,10 +38,10 @@ public class EventCommand extends Command {
      */
     @Override
     public void execute(TaskList task, Storage storage, Ui ui) throws DukeException {
-        task.addEvent(description,from,by);
+        task.addEvent(description, from, by);
         int size = task.getSize();
         Task temp = task.getTask(size - 1);
         ui.showAdd(temp, size);
-        storage.save(task.getListOfTasks());
+        storage.saveTasksToFile(task.getListOfTasks());
     }
 }

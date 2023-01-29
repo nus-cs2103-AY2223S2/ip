@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -17,14 +18,15 @@ public class ByeCommand extends Command {
 
     /**
      * Displays bye message to user.
-     * @param task Tasklist containing the list of tasks.
+     *
+     * @param task    Tasklist containing the list of tasks.
      * @param storage Saves tasks into the file locally.
-     * @param ui Deals with interactions with user.
+     * @param ui      Deals with interactions with user.
      * @throws DukeException if command cannot be recognised.
      */
     @Override
     public void execute(TaskList task, Storage storage, Ui ui) {
-        storage.save(task.getListOfTasks());
+        storage.saveTasksToFile(task.getListOfTasks());
         ui.byeMessage();
     }
 }

@@ -1,5 +1,7 @@
 package duke.tasks;
+
 import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,14 +10,13 @@ import java.time.format.DateTimeParseException;
  * Event is a task that has a from and to date.
  */
 public class Event extends Task {
-    protected String by;
     private LocalDate from;
     private LocalDate to;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    protected boolean isDone;
 
     /**
-     * Contructor for Event.
+     * Constructor for Event.
+     *
      * @param description Description of Event.
      * @param from Event start date.
      * @param to Event end date.
@@ -34,6 +35,7 @@ public class Event extends Task {
 
     /**
      * A method that converts the Event into its String representation.
+     *
      * @return String representation of Event.
      */
     @Override
@@ -45,9 +47,10 @@ public class Event extends Task {
 
     /**
      * Converts the Event into the String format required to be saved in the Storage.
+     *
      * @return String formatted data of Event.
      */
-    public String saveFormat(){
+    public String saveFormat() {
         return String.format("E | %s | %s to %s", super.saveFormat(), this.from, this.to);
     }
 }

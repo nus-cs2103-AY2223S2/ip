@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -6,7 +7,7 @@ import duke.Ui;
 import duke.tasks.Task;
 
 /**
- * DeleteCommand is a command that deletes a task from the tasklist
+ * DeleteCommand is a command that deletes a task from the task list
  */
 
 public class DeleteCommand extends Command {
@@ -14,7 +15,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand.
-     * @param index Index of task to be deleted from tasklist.
+     *
+     * @param index Index of task to be deleted from task list.
      */
     public DeleteCommand(int index) {
         super(false);
@@ -22,10 +24,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * A method that deletes a task from the tasklist.
-     * @param task Tasklist containing the list of tasks.
+     * A method that deletes a task from the task list.
+     *
+     * @param task    Task list containing the list of tasks.
      * @param storage Saves tasks into the file locally.
-     * @param ui Deals with interactions with user.
+     * @param ui      Deals with interactions with user.
      * @throws DukeException if command cannot be recognised or task number does not exist.
      */
     @Override
@@ -37,7 +40,7 @@ public class DeleteCommand extends Command {
                 Task deletedTask = task.deleteTask(index);
                 int size = task.getSize();
                 ui.showDelete(deletedTask, size);
-                storage.save(task.getListOfTasks());
+                storage.saveTasksToFile(task.getListOfTasks());
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("\tTask number does not exist!");
             }

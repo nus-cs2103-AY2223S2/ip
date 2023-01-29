@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -13,6 +14,7 @@ public class ToDoCommand extends Command {
 
     /**
      * Constructor for ToDoCommand.
+     *
      * @param description Description of ToDo task.
      */
     public ToDoCommand(String description) {
@@ -23,6 +25,7 @@ public class ToDoCommand extends Command {
 
     /**
      * Adds the todo task into tasklist.
+     *
      * @param task Tasklist containing the list of tasks, displays the add message to user.
      * @param storage Saves tasks into the file locally.
      * @param ui Deals with interactions with user.
@@ -34,6 +37,6 @@ public class ToDoCommand extends Command {
         int size = task.getSize();
         Task temp = task.getTask(size - 1);
         ui.showAdd(temp, size);
-        storage.save(task.getListOfTasks());
+        storage.saveTasksToFile(task.getListOfTasks());
     }
 }

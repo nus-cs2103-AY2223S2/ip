@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -14,19 +15,22 @@ public class DeadlineCommand extends Command {
 
     /**
      * Contructor for DeadlineCommand
+     *
      * @param description Description of deadline.
-     * @param by Due date of deadline.
+     * @param by          Due date of deadline.
      */
     public DeadlineCommand(String description, String by) {
         super(false);
         this.description = description;
         this.by = by;
     }
+
     /**
      * Adds a deadline task into the tasklist.
-     * @param task Tasklist containing the list of tasks.
+     *
+     * @param task    Tasklist containing the list of tasks.
      * @param storage Saves tasks into the file locally.
-     * @param ui Deals with interactions with user.
+     * @param ui      Deals with interactions with user.
      * @throws DukeException if command cannot be recognised.
      */
     @Override
@@ -35,6 +39,6 @@ public class DeadlineCommand extends Command {
         int size = task.getSize();
         Task temp = task.getTask(size - 1);
         ui.showAdd(temp, size);
-        storage.save(task.getListOfTasks());
+        storage.saveTasksToFile(task.getListOfTasks());
     }
 }

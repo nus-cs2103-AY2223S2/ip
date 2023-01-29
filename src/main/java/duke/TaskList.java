@@ -1,30 +1,33 @@
 package duke;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
+
 import java.util.ArrayList;
 
 /**
  * TaskList contains the list of Tasks and methods to modify the list.
  */
-public class TaskList{
+public class TaskList {
     private ArrayList<Task> listOfTasks;
 
     /**
-     * Contructor for TaskList without any saved data.
+     * Constructor for TaskList without any saved data.
      */
-    public TaskList(){
+    public TaskList() {
         this.listOfTasks = new ArrayList<>();
     }
 
     /**
-     * Contructor for TaskList with data previously stored in the file.
+     * Constructor for TaskList with data previously stored in the file.
+     *
      * @param taskList contains data of saved task obtains from file.
      * @throws DukeException if duke cannot recognise the command.
      */
     public TaskList(ArrayList<String> taskList) throws DukeException {
-        this.listOfTasks = new ArrayList<Task>();
+        this.listOfTasks = new ArrayList<>();
         for (String data : taskList) {
             listOfTasks.add(Task.loadTask(data));
         }
@@ -33,8 +36,9 @@ public class TaskList{
 
     /**
      * Creates a new Deadline object.
+     *
      * @param description Description of the Deadline object.
-     * @param by The due date of the deadline.
+     * @param by          The due date of the deadline.
      */
     public void addDeadline(String description, String by) throws DukeException {
         Deadline deadline = new Deadline(description, by, false);
@@ -43,6 +47,7 @@ public class TaskList{
 
     /**
      * Creates a new ToDo object.
+     *
      * @param description Description of the ToDo object.
      */
     public void addToDo(String description) {
@@ -53,9 +58,10 @@ public class TaskList{
 
     /**
      * Creates a new Event object.
+     *
      * @param description Description of the Event object.
-     * @param from The start of the event.
-     * @param to The end of the event.
+     * @param from        The start of the event.
+     * @param to          The end of the event.
      */
 
     public void addEvent(String description, String from, String to) throws DukeException {
@@ -64,7 +70,8 @@ public class TaskList{
     }
 
     /**
-     * Deletes task in the tasklist.
+     * Deletes task in the task list.
+     *
      * @param index Index of task to be deleted.
      * @return The deleted task.
      */
@@ -74,6 +81,7 @@ public class TaskList{
 
     /**
      * Marks the task as done.
+     *
      * @param index Index of task to be marked done.
      */
     public void markTask(int index) {
@@ -81,7 +89,8 @@ public class TaskList{
     }
 
     /**
-     * Unmarks the task.
+     * Unmark the task.
+     *
      * @param index Index of task to be marked unDone.
      */
     public void unmarkTask(int index) {
@@ -94,7 +103,7 @@ public class TaskList{
     public void printList() {
         int i = 1;
         System.out.println("\n\tHere are the tasks in your list:");
-        for(Task task : listOfTasks) {
+        for (Task task : listOfTasks) {
             System.out.println("\t"
                     + i
                     + ". "
@@ -103,10 +112,16 @@ public class TaskList{
         }
     }
 
-    public ArrayList<String> findTask(String taskname){
+    /**
+     * Finds specific task(s) that match the keyword inputted by user in the task list.
+     *
+     * @param keyword Specific keyword(s) of task to be found in the task list.
+     * @return ArrayList consisting of tasks that match the keyword.
+     */
+    public ArrayList<String> findTaskMatchingKeyword(String keyword) {
         ArrayList<String> matchingTasks = new ArrayList<>();
-        for(Task task : listOfTasks) {
-            if(task.getDescription().contains(taskname)) {
+        for (Task task : listOfTasks) {
+            if (task.getDescription().contains(keyword)) {
                 matchingTasks.add(task.toString());
             }
         }
@@ -114,25 +129,28 @@ public class TaskList{
     }
 
     /**
-     * Gets the size of the tasklist.
-     * @return Size of the tasklist.
+     * Gets the size of the task list.
+     *
+     * @return Size of the task list.
      */
     public int getSize() {
         return listOfTasks.size();
     }
 
     /**
-     * Checks if the tasklist is empty.
+     * Checks if the task list is empty.
+     *
      * @return Is the list empty.
      */
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return listOfTasks.isEmpty();
     }
 
     /**
-     * Gets the task at the specific index in the tasklist.
-     * @param index Index of task in the tasklist.
-     * @return Task at the specific index of the tasklist.
+     * Gets the task at the specific index in the task list.
+     *
+     * @param index Index of task in the task list.
+     * @return Task at the specific index of the task list.
      */
     public Task getTask(int index) {
         return listOfTasks.get(index);
@@ -140,9 +158,10 @@ public class TaskList{
 
     /**
      * Gets the list of tasks.
+     *
      * @return Arraylist which consist of the tasks.
      */
-    public ArrayList<Task> getListOfTasks(){
+    public ArrayList<Task> getListOfTasks() {
         return listOfTasks;
     }
 }

@@ -1,4 +1,5 @@
 package duke.tasks;
+
 import duke.DukeException;
 
 /**
@@ -10,7 +11,8 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Contructor for task.
+     * Constructor for task.
+     *
      * @param description Description of task.
      * @param isDone Completion status of task.
      */
@@ -21,6 +23,7 @@ public class Task {
 
     /**
      * Gets status icon of task.
+     *
      * @return String representation of the status of task.
      */
     public String getStatusIcon() {
@@ -30,22 +33,24 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+
     /**
      * Sets the isDone parameter to true.
      */
-    public void markDone(){
+    public void markDone() {
         this.isDone = true;
     }
 
     /**
      * Sets the isDone parameter to false.
      */
-    public void markUnDone(){
+    public void markUnDone() {
         this.isDone = false;
     }
 
     /**
      * Converts the Task into its string representation.
+     *
      * @return String representation of task.
      */
     public String toString() {
@@ -54,20 +59,22 @@ public class Task {
 
     /**
      * Converts boolean to int.
+     *
      * @return Int representation of isDone.
      */
-    public int isDoneToInt(){
+    public int isDoneToInt() {
         return isDone ? 1 : 0;
     }
 
     /**
      * Method that creates specific task given input data.
+     *
      * @param data String formatted data of the Task that is retrieved from Storage.
      * @return Task created from data input.
      * @throws DukeException if task type is not recognised by duke.
      */
     public static Task loadTask(String data) throws DukeException {
-        String [] dataSplit = data.trim().split("\\|",4);
+        String[] dataSplit = data.trim().split("\\|", 4);
         boolean isDone = dataSplit[1].equals("1");
         char taskType = dataSplit[0].charAt(0);
         String description = dataSplit[2].trim();
@@ -77,8 +84,8 @@ public class Task {
         case 'D':
             return new Deadline(description, dataSplit[3].trim(), isDone);
         case 'E':
-            return new Event(description, dataSplit[3].split("to",2)[0],
-                    dataSplit[3].split("to",2)[1], isDone);
+            return new Event(description, dataSplit[3].split("to", 2)[0],
+                    dataSplit[3].split("to", 2)[1], isDone);
         default:
             throw new DukeException("☹ OOPS!!! Unrecognised task type!");
         }
@@ -88,9 +95,10 @@ public class Task {
 
     /**
      * Converts Task into string representation to be saved in storage.
+     *
      * @return Formatted String representation of data.
      */
-    public String saveFormat(){
+    public String saveFormat() {
         return String.format("%d | %s", isDoneToInt(), this.description);
     }
 

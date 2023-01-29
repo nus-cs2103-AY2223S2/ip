@@ -1,4 +1,5 @@
 package duke;
+
 import duke.command.ByeCommand;
 import duke.command.FindCommand;
 import duke.command.MarkCommand;
@@ -10,6 +11,9 @@ import duke.command.ToDoCommand;
 import duke.command.DeleteCommand;
 import duke.command.Command;
 
+/**
+ * Parser class deals with making sense of the user command.
+ */
 public class Parser {
     public enum Commands {
         bye,
@@ -23,6 +27,13 @@ public class Parser {
         find
     }
 
+    /**
+     * The parse method creates new commands.
+     *
+     * @param inputCommand Input command from the user.
+     * @return Command that corresponds to the user input.
+     * @throws DukeException If the user input cannot be recognised.
+     */
     public static Command parse(String inputCommand) throws DukeException {
         try {
             String[] splitString = inputCommand.split(" ", 2);
@@ -78,7 +89,7 @@ public class Parser {
                     return new DeleteCommand(Integer.parseInt(splitString[1].trim()) - 1);
                 }
             case find:
-                if (splitString[1].trim().equals("") ) {
+                if (splitString[1].trim().equals("")) {
                     throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!.");
                 } else {
                     return new FindCommand(splitString[1]);

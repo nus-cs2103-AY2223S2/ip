@@ -10,6 +10,7 @@ public class ToDo extends Task {
 
     /**
      * Creates the string representation of todo task.
+     *
      * @return The string representation of todo task.
      */
     @Override
@@ -19,9 +20,10 @@ public class ToDo extends Task {
 
     /**
      * Converts Todo task into a string representation to be saved into storage.
+     *
      * @return String representation of todo task.
      */
-    public String saveFormat(){
+    public String saveFormat() {
         return String.format("T | %s", super.saveFormat());
     }
 
