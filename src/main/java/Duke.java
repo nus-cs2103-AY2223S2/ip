@@ -5,6 +5,11 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("_".repeat(22));
         System.out.println("Hello from\n" + logo);
+        System.out.println("_".repeat(22));
+        System.out.println("");
+        UserInteraction chatBot = new UserInteraction();
+        chatBot.chat();
     }
 }
