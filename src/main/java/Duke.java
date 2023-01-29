@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Duke {
@@ -82,7 +84,7 @@ public class Duke {
                      * creates and adds a deadline task to the arraylist of all tasks
                      */
                         String[] parts = inputLine.split("/");
-                        Deadline task = new Deadline(parts[0].split(" ")[1], false, parts[1]);
+                        Deadline task = new Deadline(parts[0].split(" ", 2)[1], false, parts[1]);
                         tasks.add(task);
                         printToFormat("    Successfully added the following task:\n    " + task);
                         break;
@@ -90,8 +92,8 @@ public class Duke {
                     /**
                      * creates and adds an event task to the arraylist of all tasks
                      */
-                        String[] parts1 = inputLine.split("/");
-                        Event event = new Event(parts1[0].split(" ")[1], false, parts1[1], parts1[2]);
+                        String[] parts1 = inputLine.split(" /");
+                        Event event = new Event(parts1[0].split(" ", 2)[1], false, parts1[1], parts1[2]);
                         tasks.add(event);
                         printToFormat("    Successfully added the following task:\n    " + event);
                         break;
@@ -160,33 +162,44 @@ class Task {
     public void unmark() {
         this.status = "[ ]";
     }
+
+    protected static LocalDateTime formatDateTime(String input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
+        return dateTime;
+    }
+
+    protected static String TransformDateTime(LocalDateTime dateTime) {
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy 'at' HH:mm");
+        return dateTime.format(outputFormatter);
+    }
 }
 /**
  * Creates a Deadline class that inherits from Task
  * to handle deadline tasks
  */
 class Deadline extends Task {
-    protected final String deadline;
+    protected final LocalDateTime deadline;
     /**
      * @param name: a string indicating the name of the task
      * @param status: a String indicating whether the task is done or not
      * @param deadline: a string indicating the deadline of the task
      */
-    Deadline (String name, boolean status, String deadline) {
+    Deadline (String name, boolean status, String dlString) {
         super(name, status);
-        this.deadline = deadline;
+        this.deadline = formatDateTime(dlString);
     }
     /**
      * overrides the toString method
      */
     public String toString() {
-        return "[D]" + status + " " + name + "(" + deadline + ")";
+        return "[D]" + status + " " + name + "(" + TransformDateTime(deadline) + ")";
     }
 }
 
 class Event extends Task {
-    protected final String from;
-    protected final String to;
+    protected final LocalDateTime from;
+    protected final LocalDateTime to;
     /**
      * 
      * @param name: a string indicating thename of the Event task
@@ -196,14 +209,16 @@ class Event extends Task {
      */
     Event(String name, boolean status, String from, String to) {
         super(name, status);
-        this.from = from;
-        this.to = to;
+        this.from = formatDateTime(from);
+        this.to = formatDateTime(to);
     }
+
     /**
      * overrrides toString method
      */
     public String toString() {
-        return "[E]" + status + " " + name + "(" + from + to + ")";
+        return String.format("[E]%s %s (from %s to %s)", status, name, TransformDateTime(from), 
+        TransformDateTime(to));
     }
 }
 
