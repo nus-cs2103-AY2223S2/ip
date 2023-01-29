@@ -3,15 +3,16 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         //init
+        Storage storage = new Storage("./ip-data/Ip-data.txt");
         Scanner sc = new Scanner(System.in);
         ToDoList ls;
 
-        ls = Duke.startUp();
+        ls = Duke.startUp(storage);
         Duke.input(sc, ls);
-        Duke.shutDown(ls);
+        Duke.shutDown(storage, ls);
     }
 
-    private static ToDoList startUp() {
+    private static ToDoList startUp(Storage storage) {
         try {
             String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -21,18 +22,18 @@ public class Duke {
             System.out.println("Hello from\n" + logo);
             String divider = "____________________________________________________________\n";
             System.out.println(divider + "What can the Duke help you with today?\n" + divider);
-            return ToDoList.load();
-        } catch(Exception e) {
+            return storage.load();
+        } catch (Exception e) {
             return new ToDoList();
         }
     }
 
-    private static void shutDown(ToDoList ls) {
+    private static void shutDown(Storage storage, ToDoList ls) {
         try {
-            ls.save();
+            storage.save(ls);
             String divider = "____________________________________________________________\n";
             System.out.println(divider + "Goodbye, feel free to call the Duke again whenever you need.\n" + divider);
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
     }
@@ -45,30 +46,30 @@ public class Duke {
                 String sub;
 
                 switch (command) {
-                    case "bye":
-                        return;
-                    case "list":
-                        System.out.println(ls);
-                        break;
-                    case "mark":
-                        sub = input[1];
-                        ls.markTask(Integer.parseInt(sub)); //numbersformatexception to be handled
-                        break;
-                    case "unmark":
-                        sub = input[1];
-                        ls.unmarkTask(Integer.parseInt(sub)); //numbersformatexception to be handled
-                        break;
-                    case "delete":
-                        sub = input[1];
-                        ls.delete(Integer.parseInt(sub)); //numbersformatexception to be handled
-                        break;
-                    case "todo":
-                    case "event":
-                    case "deadline":
-                        Duke.taskCommandHandler(input, ls);
-                        break;
-                    default:
-                        throw new DukeException("The Duke does not understand your words!");
+                case "bye":
+                    return;
+                case "list":
+                    System.out.println(ls);
+                    break;
+                case "mark":
+                    sub = input[1];
+                    ls.markTask(Integer.parseInt(sub)); //numbersformatexception to be handled
+                    break;
+                case "unmark":
+                    sub = input[1];
+                    ls.unmarkTask(Integer.parseInt(sub)); //numbersformatexception to be handled
+                    break;
+                case "delete":
+                    sub = input[1];
+                    ls.delete(Integer.parseInt(sub)); //numbersformatexception to be handled
+                    break;
+                case "todo":
+                case "event":
+                case "deadline":
+                    Duke.taskCommandHandler(input, ls);
+                    break;
+                default:
+                    throw new DukeException("The Duke does not understand your words!");
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -76,7 +77,7 @@ public class Duke {
         }
     }
 
-    private static String[] commandHandler(String input, String regex,int limit, int minSize) throws DukeException {
+    private static String[] commandHandler(String input, String regex, int limit, int minSize) throws DukeException {
         String[] sub = input.split(regex, limit);
         if (sub.length < minSize) {
             throw new InputDukeException();
