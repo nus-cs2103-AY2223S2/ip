@@ -6,16 +6,14 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class Saver {
-    public Saver(){
+    protected final String PATH = "./data";
+    protected final String FILE_NAME = "/tasks.txt";
 
-    }
-    public String save(TaskList taskList){
-        return "Tasks saved.";
+    public void save(TaskList taskList){
     }
 
-    public TaskList load(){ //create the tasks file if it doesnt exist, otherwise returns the tasklist
-        TaskList taskList = new TaskList();;
-        return taskList;
+    public void load(){
+
     }
 
 }
