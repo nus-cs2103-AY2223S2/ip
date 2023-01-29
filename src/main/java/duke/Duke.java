@@ -1,29 +1,49 @@
 package duke;
 
+import duke.exception.InvalidFormatException;
+import duke.exception.UnrecognisedCommandException;
+
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
-    private Parser p;
-    private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
+    private final Parser p;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
 
     public Duke() {
         ui = new Ui();
         storage = new Storage("./data", "duke.txt");
         tasks = new TaskList(ui, storage);
-        p = new Parser(ui, tasks);
-        tasks.init();
+        p = new Parser(
+                ui,
+                tasks,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd"),
+                DateTimeFormatter.ofPattern("dd-MMM-yyyy (EEE)")
+        );
+        storage.p = p;
+        tasks.init(p);
     }
 
     public void run() {
-        boolean continueLoop = true;
-        while (continueLoop) {
-            String input = ui.nextLine();
-            continueLoop = p.processInput(input);
+        while (true) {
+            try {
+                if (!p.processInput(ui.nextLine())) {
+                    break;
+                }
+            } catch (InvalidFormatException e) {
+                ui.print(e.getMessage());
+            } catch (UnrecognisedCommandException e) {
+                ui.print("Command not recognised. Please try again.");
+            } catch (DateTimeParseException e) {
+                ui.print("Wrong date time format");
+            }
         }
     }
 

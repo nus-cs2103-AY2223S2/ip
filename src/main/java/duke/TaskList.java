@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.InvalidFormatException;
 import duke.task.Task;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class TaskList {
         tasks = new LinkedList<>();
     }
 
-    public void init() {
+    public void init(Parser p) {
         Scanner sc;
         try {
             sc = new Scanner(storage.log);
@@ -26,11 +27,14 @@ public class TaskList {
                 tasks.add(Task.factory(
                         row.charAt(1),
                         row.charAt(4),
-                        row.substring(7)
+                        row.substring(7),
+                        p
                 ));
             }
         } catch (IOException e) {
-            System.out.println( "Error: unable to access " + storage.log.getAbsoluteFile());
+            System.out.println("Error: unable to access " + storage.log.getAbsoluteFile());
+        } catch (InvalidFormatException e) {
+            System.out.println("Error in logfile, please check or delete it");
         }
     }
 

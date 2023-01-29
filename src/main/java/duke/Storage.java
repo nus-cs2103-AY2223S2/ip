@@ -9,6 +9,7 @@ import java.util.LinkedList;
 
 public class Storage {
     public File log;
+    public Parser p;
 
     public Storage (String parent, String child) {
         log = new File(parent, child);
@@ -27,7 +28,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(log);
             for (Task item : tasks) {
-                fw.write(item.toLog() + "\n");
+                fw.write(item.toLog(p) + "\n");
             }
             fw.close();
         } catch (IOException e) {

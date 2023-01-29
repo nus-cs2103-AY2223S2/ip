@@ -1,18 +1,18 @@
 package duke.task;
 
-import java.time.format.DateTimeFormatter;
+import duke.Parser;
+import duke.exception.InvalidFormatException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Task {
-    public static final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    public static final DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd-MMM-yyyy (EEE)");
     public static final Pattern p = null;
     protected String classIcon;
     protected String description;
     protected boolean isDone;
 
-    public static Task factory(char type, char done, String text) {
+    public static Task factory(char type, char done, String text, Parser p) throws InvalidFormatException {
         Task curr;
 
         Matcher m;
@@ -21,18 +21,21 @@ public class Task {
                 curr = new Todo(text);
                 break;
             case 'D':
-                m = Deadline.p.matcher(text);
-                m.find();
-                curr = new Deadline(m.group(1), m.group(2));
+                m = Pattern.compile("(.+) (.+)$").matcher(text);
+                if (!m.find()) {
+                    throw new InvalidFormatException();
+                }
+                curr = new Deadline(m.group(1), m.group(2), p);
                 break;
             case 'E':
-                m = Event.p.matcher(text);
-                m.find();
-                curr = new Event(m.group(1), m.group(2), m.group(3));
+                m = Pattern.compile("(.+) (.+) (.+)$").matcher(text);
+                if (!m.find()) {
+                    throw new InvalidFormatException();
+                }
+                curr = new Event(m.group(1), m.group(2), m.group(3), p);
                 break;
             default:
-                //Error here, maybe enum?
-                return null;
+                throw new InvalidFormatException();
         }
 
         if (done == 'X') {
@@ -40,6 +43,10 @@ public class Task {
         }
 
         return curr;
+    }
+
+    public static InvalidFormatException getInvalidFormatException() {
+        return new InvalidFormatException("task name");
     }
 
     public Task(String description) {
@@ -61,7 +68,12 @@ public class Task {
         return String.format("[%s][%s] %s", classIcon, getStatusIcon(), description);
     }
 
-    public String toLog() {
+    public String toString(Parser p) {
+        return String.format("[%s][%s] %s", classIcon, getStatusIcon(), description);
+    }
+
+    public String toLog(Parser p) {
         return toString();
     }
+
 }

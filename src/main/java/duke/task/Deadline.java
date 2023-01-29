@@ -1,26 +1,50 @@
 package duke.task;
 
+import duke.Parser;
+import duke.exception.InvalidFormatException;
+
 import java.time.LocalDate;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Deadline extends Task {
-    public static final Pattern p = Pattern.compile("(.+) /by (\\d{4}-\\d{2}-\\d{2})");
+    public static final Pattern pattern = Pattern.compile("(.+) /by (.+)");
     protected LocalDate by;
 
-    public Deadline(String description, String by) {
+    public static InvalidFormatException getInvalidFormatException() {
+        return new InvalidFormatException("deadline name /by yyyy-MM-dd");
+    }
+
+    public Deadline(String description, String preBy, Parser p) {
         super(description);
-        this.by = LocalDate.parse(by);
+        this.by = LocalDate.parse(preBy, p.inputFormat);
+        classIcon = "D";
+    }
+
+    public Deadline(String input, Parser p) throws InvalidFormatException{
+        super(null);
+        Matcher m = pattern.matcher(input);
+        if (!m.find()) {
+            throw getInvalidFormatException();
+        }
+        this.description = m.group(1);
+        this.by = LocalDate.parse(m.group(2), p.inputFormat);
         classIcon = "D";
     }
 
     @Override
     public String toString() {
-        return String.format("%s By: %s", super.toString(), by.format(Task.outputFormat));
+        return String.format("%s By: %s", super.toString(), by);
     }
 
     @Override
-    public String toLog() {
-        return String.format("%s /by %s", super.toString(), by.format(Task.inputFormat));
+    public String toString(Parser p) {
+        return String.format("%s By: %s", super.toString(), p.convertDateToOutputFormat(by));
+    }
+
+    @Override
+    public String toLog(Parser p) {
+        return String.format("%s %s", super.toString(), p.convertDateToInputFormat(by));
     }
 
 }
