@@ -27,6 +27,7 @@ public class HelpCommand extends Command {
             + "To get a list of deadlines and events on a particular day, type \"filter \" + date (dd-MM-yyyy).\n"
             + "To get a list of deadlines and events during a period of time, type\n"
             + "\"filter \" + start of period \" /to \" end of period (dd-MM-yyyy HHmm).\n"
+            + "To find a task, type \"find <keywords>\""
             + "To close me, type \"bye\".\n"
             + "Have fun!";
 
