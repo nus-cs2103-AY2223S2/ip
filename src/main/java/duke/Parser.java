@@ -6,33 +6,58 @@ public class Parser {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Parameterized constructor to create a Parser
+     * @param taskList the TaskList which has to be parsed
+     * @param ui the Ui of the agent on which messages have to be displayed
+     */
     public Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
         this.ui = ui;
     }
 
+    /**
+     * Displays the current list of tasks
+     */
     private void showList() {
         ui.showTaskList(taskList);
     }
 
+    /**
+     * Marks the Task at a specified index as done
+     * @param index the index of the Task to be marked as done
+     */
     private void mark(int index) {
         taskList.mark(index);
         Task task = taskList.get(index);
         ui.showMarkMessage(task, index);
     }
 
+    /**
+     * Marks the Task at a specified index as undone
+     * @param index the index of the Task to be marked as undone
+     */
     private void unmark(int index) {
         taskList.unmark(index);
         Task task = taskList.get(index);
         ui.showUnmarkMessage(task, index);
     }
 
+    /**
+     * Deletes the Task at a specified index
+     * @param index the index of the Task to be deleted
+     */
     private void delete(int index) {
         Task deletedTask = taskList.delete(index);
         int len = taskList.size();
         ui.showDeleteMessage(deletedTask, len);
     }
 
+    /**
+     * Adds a Todo to the TaskList
+     * @param task the String representing the Todo to be added
+     * @throws DukeException if the description of the Todo is empty
+     */
     private void addTodo(String task) throws DukeException {
         String description = task.substring(5);
         if (description.trim().equals("")) {
@@ -41,6 +66,10 @@ public class Parser {
         taskList.add(new Todo(description));
     }
 
+    /**
+     * Adds a Deadline to the TaskList
+     * @param task the String representing the Deadline to be added
+     */
     private void addDeadline(String task) {
         String[] arr = task.split("/");
         String description = arr[0].substring(9).trim();
@@ -48,6 +77,10 @@ public class Parser {
         taskList.add(new Deadline(description, by));
     }
 
+    /**
+     * Adds an Event to the TaskList
+     * @param task the String representing the Event to be added
+     */
     private void addEvent(String task) {
         String[] arr = task.split("/");
         String description = arr[0].substring(6).trim();
@@ -56,12 +89,21 @@ public class Parser {
         taskList.add(new Event(description, from, to));
     }
 
+    /**
+     * Finds an event with a given keyword in the TaskList
+     * @param task the String representing the Task with the keyword to be found
+     */
     private void find(String task) {
         String keyword = task.substring(5);
         TaskList matchingTasks = taskList.find(keyword);
         ui.showTaskList(matchingTasks);
     }
 
+    /**
+     * Parses a single line of user input
+     * @param task the String containing a single line of user input
+     * @throws DukeException if an invalid command is entered
+     */
     public void parse(String task) throws DukeException {
         if (task.equals("list")) {
             showList();
@@ -92,6 +134,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input until the termination command "bye" is entered
+     */
     public void parseAll() {
         Scanner sc = new Scanner(System.in);
 
