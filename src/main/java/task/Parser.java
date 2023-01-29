@@ -1,13 +1,18 @@
-import command.*;
+package task;
+
+import command.AddTask;
+import command.Command;
+import command.Delete;
+import command.ExceptionPrint;
+import command.Exit;
+import command.List;
+import command.Load;
+import command.Mark;
+import command.Save;
+import command.Unmark;
 import exception.MikiArgsException;
 import exception.TaskParseException;
-import storage.Storage;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
@@ -17,27 +22,33 @@ public class Parser {
     public static List parseList(String[] args) throws MikiArgsException {
         String from = "";
         String to = "";
-        boolean token_from = false;
-        boolean token_to = false;
-        if (Collections.frequency(Arrays.asList(args), "/from") > 1) throw new MikiArgsException("too many filter-froms...");
-        if (Collections.frequency(Arrays.asList(args), "/to") > 1) throw new MikiArgsException("too many filter-tos...");
+        boolean isInTokenFrom = false;
+        boolean isInTokenTo = false;
+        if (Collections.frequency(Arrays.asList(args), "/from") > 1) {
+            throw new MikiArgsException("too many filter-froms...");
+        }
+        if (Collections.frequency(Arrays.asList(args), "/to") > 1) {
+            throw new MikiArgsException("too many filter-tos...");
+        }
+
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("/from")) {
-                token_from = true;
-                token_to = false;
+                isInTokenFrom = true;
+                isInTokenTo = false;
                 continue;
             }
             if (args[i].equals("/to")) {
-                token_from = false;
-                token_to = true;
+                isInTokenFrom = false;
+                isInTokenTo = true;
                 continue;
             }
-            if (token_from) {
+            if (isInTokenFrom) {
                 from += (from.isEmpty() ? "" : " ") + args[i];
-            } else if (token_to) {
+            } else if (isInTokenTo) {
                 to += (to.isEmpty() ? "" : " ") + args[i];
             }
         }
+
         LocalDateTime fromDate = null;
         LocalDateTime toDate = null;
         if (!from.isEmpty()) {
@@ -54,6 +65,7 @@ public class Parser {
                 throw new MikiArgsException(to + " needs to be formatted as " + Task.DATE_IN_FMT_STR + "!");
             }
         }
+
         return new List(fromDate, toDate);
     }
 
@@ -78,7 +90,7 @@ public class Parser {
         return path;
     }
 
-    public static boolean parseExit(String cmdLine) {
+    public static boolean isExitCommand(String cmdLine) {
         return cmdLine.split(" ")[0].toLowerCase().equals("bye");
     }
 
@@ -88,30 +100,31 @@ public class Parser {
         if (cmdLine.contains(" ")) {
             args = cmdLine.substring(cmd.length() + 1).split(" ");
         }
+
         try {
             switch (cmd) {
-                case "bye":
-                    return new Exit();
-                case "list":
-                    return parseList(args);
-                case "mark":
-                    return new Mark(parseTaskIndex(args));
-                case "unmark":
-                    return new Unmark(parseTaskIndex(args));
-                case "todo":
-                    return new AddTask(Todo.parseArgs(args));
-                case "deadline":
-                    return new AddTask(Deadline.parseArgs(args));
-                case "event":
-                    return new AddTask(Event.parseArgs(args));
-                case "delete":
-                    return new Delete(parseTaskIndex(args));
-                case "save":
-                    return new Save(parsePath(args));
-                case "load":
-                    return new Load(parsePath(args));
-                default:
-                    throw new MikiArgsException("\"" + cmd + "\" isn't a real word!");
+            case "bye":
+                return new Exit();
+            case "list":
+                return parseList(args);
+            case "mark":
+                return new Mark(parseTaskIndex(args));
+            case "unmark":
+                return new Unmark(parseTaskIndex(args));
+            case "todo":
+                return new AddTask(Todo.parseArgs(args));
+            case "deadline":
+                return new AddTask(Deadline.parseArgs(args));
+            case "event":
+                return new AddTask(Event.parseArgs(args));
+            case "delete":
+                return new Delete(parseTaskIndex(args));
+            case "save":
+                return new Save(parsePath(args));
+            case "load":
+                return new Load(parsePath(args));
+            default:
+                throw new MikiArgsException("\"" + cmd + "\" isn't a real word!");
             }
         } catch (TaskParseException | MikiArgsException ex) {
             return new ExceptionPrint(ex);

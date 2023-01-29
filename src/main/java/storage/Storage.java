@@ -1,7 +1,10 @@
 package storage;
 
 import exception.TaskParseException;
-import task.*;
+import task.Deadline;
+import task.Event;
+import task.TaskList;
+import task.Todo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,12 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Storage {
-    public static class MikiLoadException extends Exception {
-        protected MikiLoadException(String message) {
-            super(message);
-        }
-    }
-
     private final String dataPath;
 
     public Storage(String dataPath) {
@@ -41,7 +38,7 @@ public class Storage {
         File[] saves = dir.listFiles();
         String[] filenames = new String[saves.length];
         for (int i = 0; i < saves.length; i++) {
-            filenames[i]  = saves[i].getName();
+            filenames[i] = saves[i].getName();
         }
         return filenames;
     }
@@ -80,23 +77,29 @@ public class Storage {
                     repres[j] = br.readLine();
                 }
                 switch (repres[0].charAt(0)) {
-                    case 'T':
-                        tasks.add(Todo.parseLoad(repres));
-                        break;
-                    case 'D':
-                        tasks.add(Deadline.parseLoad(repres));
-                        break;
-                    case 'E':
-                        tasks.add(Event.parseLoad(repres));
-                        break;
-                    default:
-                        //back-compat? try to handle
+                case 'T':
+                    tasks.add(Todo.parseLoad(repres));
+                    break;
+                case 'D':
+                    tasks.add(Deadline.parseLoad(repres));
+                    break;
+                case 'E':
+                    tasks.add(Event.parseLoad(repres));
+                    break;
+                default:
+                    //back-compat? try to handle
                 }
             }
         } catch (NumberFormatException | TaskParseException ex) {
             throw new MikiLoadException("this file is corrupt...");
         } finally {
             br.close();
+        }
+    }
+
+    public static class MikiLoadException extends Exception {
+        protected MikiLoadException(String message) {
+            super(message);
         }
     }
 }

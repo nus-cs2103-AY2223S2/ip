@@ -2,9 +2,9 @@ package task;
 
 import exception.TaskParseException;
 
-import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -22,32 +22,42 @@ public class Event extends Task {
         String objective = "";
         String from = "";
         String to = "";
-        boolean token_from = false;
-        boolean token_to = false;
-        if (Collections.frequency(Arrays.asList(args), "/from") > 1) throw new TaskParseException("This event has too many start-times!");
-        if (Collections.frequency(Arrays.asList(args), "/to") > 1) throw new TaskParseException("This event has too many end-times!");
+        boolean isInTokenFrom = false;
+        boolean isInTokenTo = false;
+        if (Collections.frequency(Arrays.asList(args), "/from") > 1) {
+            throw new TaskParseException("This event has too many start-times!");
+        }
+        if (Collections.frequency(Arrays.asList(args), "/to") > 1) {
+            throw new TaskParseException("This event has too many end-times!");
+        }
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("/from")) {
-                token_from = true;
-                token_to = false;
+                isInTokenFrom = true;
+                isInTokenTo = false;
                 continue;
             }
             if (args[i].equals("/to")) {
-                token_from = false;
-                token_to = true;
+                isInTokenFrom = false;
+                isInTokenTo = true;
                 continue;
             }
-            if (token_from) {
+            if (isInTokenFrom) {
                 from += (from.isEmpty() ? "" : " ") + args[i];
-            } else if (token_to) {
+            } else if (isInTokenTo) {
                 to += (to.isEmpty() ? "" : " ") + args[i];
             } else {
                 objective += (objective.isEmpty() ? "" : " ") + args[i];
             }
         }
-        if (objective.isEmpty()) throw new TaskParseException("This event is missing its body text!");
-        if (from.isEmpty()) throw new TaskParseException("This event is missing its start-time! Use /from [date]");
-        if (to.isEmpty()) throw new TaskParseException("This event is missing its end-time! Use /to [date]");
+        if (objective.isEmpty()) {
+            throw new TaskParseException("This event is missing its body text!");
+        }
+        if (from.isEmpty()) {
+            throw new TaskParseException("This event is missing its start-time! Use /from [date]");
+        }
+        if (to.isEmpty()) {
+            throw new TaskParseException("This event is missing its end-time! Use /to [date]");
+        }
         LocalDateTime fromDate;
         LocalDateTime toDate;
         try {
@@ -63,21 +73,13 @@ public class Event extends Task {
         return new Event(objective, fromDate, toDate);
     }
 
-    @Override
-    public boolean beforeDate(LocalDateTime date) {
-        return from.isBefore(date) || from.isEqual(date);
-    }
-
-    @Override
-    public boolean afterDate(LocalDateTime date) {
-        return to.isAfter(date) || to.isEqual(date);
-    }
-
     public static Event parseLoad(String[] data) throws TaskParseException {
         try {
             String[] header = data[0].split(" ");
-            if (!header[0].equals("E")) throw new TaskParseException("Invalid event data format");
-            boolean done = Boolean.parseBoolean(header[1]);
+            if (!header[0].equals("E")) {
+                throw new TaskParseException("Invalid event data format");
+            }
+            boolean isDone = Boolean.parseBoolean(header[1]);
             int objLines = Integer.parseInt(header[2]);
             int fromLines = Integer.parseInt(header[3]);
             int toLines = Integer.parseInt(header[4]);
@@ -85,24 +87,40 @@ public class Event extends Task {
             String from = "";
             String to = "";
             int seek = 1;
-            for (int i = 0; i < objLines; i++) objective += (i > 0 ? "\n" : "") + data[seek++];
-            for (int i = 0; i < fromLines; i++) from += (i > 0 ? "\n" : "") + data[seek++];
-            for (int i = 0; i < toLines; i++) to += (i > 0 ? "\n" : "") + data[seek++];
+            for (int i = 0; i < objLines; i++) {
+                objective += (i > 0 ? "\n" : "") + data[seek++];
+            }
+            for (int i = 0; i < fromLines; i++) {
+                from += (i > 0 ? "\n" : "") + data[seek++];
+            }
+            for (int i = 0; i < toLines; i++) {
+                to += (i > 0 ? "\n" : "") + data[seek++];
+            }
             Event event = new Event(objective,
                     LocalDateTime.parse(from, DATE_IN_FMT),
                     LocalDateTime.parse(to, DATE_IN_FMT));
-            event.done = done;
+            event.isDone = isDone;
             return event;
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException ex) {
             throw new TaskParseException("Event data is malformed:\n" + ex.getMessage());
         }
     }
-    
+
+    @Override
+    public boolean isBeforeDate(LocalDateTime date) {
+        return from.isBefore(date) || from.isEqual(date);
+    }
+
+    @Override
+    public boolean isAfterDate(LocalDateTime date) {
+        return to.isAfter(date) || to.isEqual(date);
+    }
+
     @Override
     public String[] save() {
         ArrayList<String> repres = new ArrayList<>();
         String cur;
-        cur = "E " + done
+        cur = "E " + isDone
                 + " " + (objective.codePoints().filter(c -> c == '\n').count() + 1)
                 + " " + (from.format(DATE_IN_FMT).codePoints().filter(c -> c == '\n').count() + 1)
                 + " " + (to.format(DATE_IN_FMT).codePoints().filter(c -> c == '\n').count() + 1);

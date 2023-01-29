@@ -16,8 +16,11 @@ public class TaskList {
             return tasks.get(i);
         } catch (IndexOutOfBoundsException ex) {
             String message = "There's no task #" + i + "! ";
-            if (tasks.size() == 1) message += "There is currently 1 task...";
-            else message += "There are currently " + tasks.size() + " tasks...";
+            if (tasks.size() == 1) {
+                message += "There is currently 1 task...";
+            } else {
+                message += "There are currently " + tasks.size() + " tasks...";
+            }
             throw new TaskListIndexException(message);
         }
     }
@@ -31,8 +34,11 @@ public class TaskList {
             return tasks.remove(i);
         } catch (IndexOutOfBoundsException ex) {
             String message = "There's no task #" + i + "! ";
-            if (tasks.size() == 1) message += "There is currently 1 task...";
-            else message += "There are currently " + tasks.size() + " tasks...";
+            if (tasks.size() == 1) {
+                message += "There is currently 1 task...";
+            } else {
+                message += "There are currently " + tasks.size() + " tasks...";
+            }
             throw new TaskListIndexException(message);
         }
     }

@@ -4,34 +4,35 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
-    protected String objective;
-    protected boolean done;
-
     public static final String DATE_IN_FMT_STR = "yyyy-MM-dd HH:mm";
     public static final String DATE_OUT_FMT_STR = "dd LLL yyyy hh:mm a";
-    public static final DateTimeFormatter DATE_IN_FMT = DateTimeFormatter.ofPattern(DATE_IN_FMT_STR);
+    protected static final DateTimeFormatter DATE_IN_FMT = DateTimeFormatter.ofPattern(DATE_IN_FMT_STR);
     protected static final DateTimeFormatter DATE_OUT_FMT = DateTimeFormatter.ofPattern(DATE_OUT_FMT_STR);
+
+    protected String objective;
+    protected boolean isDone;
 
     public Task(String objective) {
         this.objective = objective;
-        this.done = false;
+        this.isDone = false;
     }
 
     public void mark() {
-        done = true;
+        isDone = true;
     }
 
     public void unmark() {
-        done = false;
+        isDone = false;
     }
 
     public abstract String[] save();
 
-    public abstract boolean beforeDate(LocalDateTime date);
-    public abstract boolean afterDate(LocalDateTime date);
+    public abstract boolean isBeforeDate(LocalDateTime date);
+
+    public abstract boolean isAfterDate(LocalDateTime date);
 
     @Override
     public String toString() {
-        return "[" + (done ? 'X' : ' ') + "] " + objective;
+        return "[" + (isDone ? 'X' : ' ') + "] " + objective;
     }
 }

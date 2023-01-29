@@ -3,15 +3,13 @@ package shigure;
 import java.util.Scanner;
 
 public class Ui {
-    private boolean asciiOnly;
-    private boolean autoDiv = true;
-
+    private static final String DIV = "    ____________________________________________________________________________";
+    private boolean isAsciiOnly;
+    private boolean isAutoDiv = true;
     private Scanner sc = new Scanner(System.in);
 
-    private static final String DIV = "    ____________________________________________________________________________";
-
-    public Ui(boolean asciiOnly) {
-        this.asciiOnly = asciiOnly;
+    public Ui(boolean isAsciiOnly) {
+        this.isAsciiOnly = isAsciiOnly;
     }
 
     public String readLine() {
@@ -24,7 +22,7 @@ public class Ui {
     }
 
     public void printAutoDiv() {
-        if (autoDiv) {
+        if (isAutoDiv) {
             printDiv();
         }
     }
@@ -37,7 +35,7 @@ public class Ui {
         printAutoDiv();
         String username = System.getProperty("user.name");
         print("in honour / fuzuki miki / 2020 | 2021");
-        if (!asciiOnly) {
+        if (!isAsciiOnly) {
             print("\uD83C\uDF80✨");
             print("Hello " + username + " !! Konmiki! ＼(￣▽￣)/");
         } else {
