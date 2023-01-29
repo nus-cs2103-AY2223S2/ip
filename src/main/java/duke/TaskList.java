@@ -48,6 +48,13 @@ public class TaskList {
         }
         return listString.toString();
     }
+
+    /**
+     * Returns String representation of the task list numbered.
+     *
+     * @return String representation of the task list numbered.
+     */
+
     @Override
     public String toString() {
         if (taskList.isEmpty()) {

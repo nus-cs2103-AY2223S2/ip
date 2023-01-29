@@ -2,10 +2,18 @@ package duke.exception;
 public class DukeException extends Exception {
     String errorMessage;
 
+    /**
+     * DukeException constructor.
+     *
+     * @param errorMessage Error message of exception.
+     */
     public DukeException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public String getMessage() {
         return errorMessage;
