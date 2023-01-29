@@ -26,8 +26,7 @@ public class Duke {
         this.storage = new Storage(FILE_DIRECTORY, FILE_NAME, ui);
         this.tasks = new TaskList(storage.load());
     }
-
-
+    
     /**
      * Activates the bot.
      */
