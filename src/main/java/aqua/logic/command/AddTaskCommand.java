@@ -55,7 +55,7 @@ public abstract class AddTaskCommand extends Command {
 
 
         @Override
-        public String getDataDisplay(AquaTask task, LogicManager manager) {
+        public String formDisplayMessage(AquaTask task, LogicManager manager) {
             return String.format(String.join("\n",
                             "Hai okay desu! I have added the task:",
                             "/／",

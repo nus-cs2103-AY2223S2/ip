@@ -54,7 +54,7 @@ public class DeleteCommand extends Command {
 
 
         @Override
-        public String getDataDisplay(AquaTask task, LogicManager manager) {
+        public String formDisplayMessage(AquaTask task, LogicManager manager) {
             return String.format(String.join("\n",
                             "I have deleted the task:",
                             "  %s",

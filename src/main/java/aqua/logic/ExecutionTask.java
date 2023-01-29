@@ -53,7 +53,7 @@ public abstract class ExecutionTask<T> extends Task<String> {
      * @param data - the data produced after execution of the task.
      * @param manager - the AppManager to pull additional data from.
      */
-    protected abstract String getDataDisplay(T data, LogicManager manager);
+    protected abstract String formDisplayMessage(T data, LogicManager manager);
 
 
     /**
@@ -67,7 +67,7 @@ public abstract class ExecutionTask<T> extends Task<String> {
      */
     public String execute() throws IllegalSyntaxException, ProcedureExecutionException {
         T data = process(args, manager);
-        return getDataDisplay(data, manager);
+        return formDisplayMessage(data, manager);
     }
 
 

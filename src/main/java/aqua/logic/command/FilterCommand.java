@@ -20,7 +20,7 @@ public class FilterCommand extends Command {
             }
 
             @Override
-            public String getDataDisplay(LinkedHashMap<Integer, AquaTask> map, LogicManager manager) {
+            public String formDisplayMessage(LinkedHashMap<Integer, AquaTask> map, LogicManager manager) {
                 return String.format("Here are your matching tasks:\n%s", formatMap(map));
             }
         });

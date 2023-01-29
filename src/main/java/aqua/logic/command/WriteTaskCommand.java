@@ -33,7 +33,7 @@ public class WriteTaskCommand extends Command {
 
 
             @Override
-            public String getDataDisplay(String data, LogicManager manager) {
+            public String formDisplayMessage(String data, LogicManager manager) {
                 return data;
             }
         });

@@ -21,7 +21,7 @@ public class ByeCommand extends Command {
             }
 
             @Override
-            public String getDataDisplay(String msg, LogicManager manager) {
+            public String formDisplayMessage(String msg, LogicManager manager) {
                 return msg;
             }
         });

@@ -68,7 +68,7 @@ public class MarkTaskCommand extends Command {
         }
 
         @Override
-        public String getDataDisplay(AquaTask task, LogicManager manager) {
+        public String formDisplayMessage(AquaTask task, LogicManager manager) {
             if (isCompletedMarker) {
                 return String.format(String.join("\n",
                                 "I have marked this task:",

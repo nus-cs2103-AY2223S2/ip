@@ -22,7 +22,7 @@ public class ListCommand extends Command {
 
 
             @Override
-            public String getDataDisplay(TaskManager taskManager, LogicManager manager) {
+            public String formDisplayMessage(TaskManager taskManager, LogicManager manager) {
                 return String.format(String.join("\n",
                                 "Here is your task list ( ꜆ 'ᵕ' )꜆",
                                 "%s"),
