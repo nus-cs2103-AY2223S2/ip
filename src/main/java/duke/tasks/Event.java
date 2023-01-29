@@ -1,18 +1,17 @@
 package duke.tasks;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
 /**
  * Event is a task that has a from and to date.
  */
 public class Event extends Task {
     private LocalDate from;
     private LocalDate to;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
      * Constructor for Event.

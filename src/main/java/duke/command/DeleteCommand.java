@@ -11,7 +11,7 @@ import duke.tasks.Task;
  */
 
 public class DeleteCommand extends Command {
-    int index;
+    private int index;
 
     /**
      * Constructor for DeleteCommand.

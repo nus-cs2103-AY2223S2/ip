@@ -10,7 +10,7 @@ import duke.tasks.Task;
  * ToDo Command is a command that creates a new todo task.
  */
 public class ToDoCommand extends Command {
-    String description;
+    private String description;
 
     /**
      * Constructor for ToDoCommand.

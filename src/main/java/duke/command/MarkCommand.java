@@ -9,7 +9,7 @@ import duke.Ui;
  * MarkCommand is a command that marks a task as done.
  */
 public class MarkCommand extends Command {
-    int index;
+    private int index;
 
     /**
      * Constructor for MarkCommand.

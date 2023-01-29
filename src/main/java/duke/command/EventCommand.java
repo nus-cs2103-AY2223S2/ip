@@ -10,9 +10,9 @@ import duke.tasks.Task;
  * EventCommand is a command that creates a new Event.
  */
 public class EventCommand extends Command {
-    String description;
-    String from;
-    String by;
+    private String description;
+    private String from;
+    private String by;
 
     /**
      * Constructor for EventCommand.

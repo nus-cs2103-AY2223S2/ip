@@ -1,6 +1,5 @@
 package duke;
 
-import duke.tasks.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,19 +8,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.tasks.Task;
+
+
+
 /**
  * Storage class deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    private final String FILEPATH;
+    private String filePath;
 
     /**
      * Contructor for Storage.
      *
-     * @param filepath The filepath where data is saved.
+     * @param filePath The filepath where data is saved.
      */
-    public Storage(String filepath) {
-        this.FILEPATH = filepath;
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
     /**
@@ -30,7 +33,7 @@ public class Storage {
      * @return filepath where data is saved.
      */
     public String getFilepath() {
-        return FILEPATH;
+        return filePath;
     }
 
     /**
@@ -40,7 +43,7 @@ public class Storage {
      */
     public void saveTasksToFile(ArrayList<Task> dataArray) {
         try {
-            FileWriter fw = new FileWriter(FILEPATH);
+            FileWriter fw = new FileWriter(filePath);
             for (Task data : dataArray) {
                 String text = data.saveFormat();
                 fw.write(text + "\n");
@@ -59,7 +62,7 @@ public class Storage {
      */
     public ArrayList<String> loadTaskListFromFile() throws FileNotFoundException {
         ArrayList<String> data = new ArrayList<>();
-        File file = new File(FILEPATH);
+        File file = new File(filePath);
         Scanner loader = new Scanner(file);
         while (loader.hasNextLine()) {
             data.add(loader.nextLine());

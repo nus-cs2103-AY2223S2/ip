@@ -1,27 +1,27 @@
 package duke.tasks;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 /**
  * Deadline is a Task with a due date.
  */
 
 public class Deadline extends Task {
-    protected String by;
-    LocalDate dateTime;
+    private String by;
+    private LocalDate dateTime;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
-     * Constructor for deadline.
-     *
+     * Constructor for Deadline.
      * @param description Description of Deadline.
-     * @param by Due date of deadline.
-     * @param isDone Completion status of Deadline.
+     * @param by Due date of Deadline.
+     * @param isDone Completetion status of Deadline.
+     * @throws DukeException if duke input format cannot by parse by LocalDate.
      */
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     public Deadline(String description, String by, boolean isDone) throws DukeException {
         super(description, isDone);
