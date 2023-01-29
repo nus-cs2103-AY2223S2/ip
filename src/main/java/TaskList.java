@@ -18,7 +18,7 @@ public class TaskList {
     }
 
     public void deleteFromTaskList(int taskNum) {
-        this.tasksList.remove(taskNum);
+        this.tasksList.remove(taskNum - 1);
     }
 
     public void list() {
@@ -28,18 +28,18 @@ public class TaskList {
     }
 
     public void mark(int num) {
-        Task currTask = this.tasksList.get(num);
+        Task currTask = this.tasksList.get(num - 1);
         currTask.check();
-        this.tasksList.set(num, currTask);
+        this.tasksList.set(num - 1, currTask);
     }
 
     public void unMark(int num) {
-        Task currTask = this.tasksList.get(num);
+        Task currTask = this.tasksList.get(num - 1);
         currTask.uncheck();
-        this.tasksList.set(num, currTask);
+        this.tasksList.set(num - 1, currTask);
     }
 
     public Task get(int num) {
-        return this.tasksList.get(num);
+        return this.tasksList.get(num - 1);
     }
 }

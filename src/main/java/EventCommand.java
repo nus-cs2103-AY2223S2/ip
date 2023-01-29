@@ -11,6 +11,7 @@ public class EventCommand extends Command {
         String description = detailArray[0].strip();
         String from = detailArray[1].strip();
         String to = detailArray[1].strip();
+        System.out.println(from);
         Task event = new Event(description, from, to);
         tasksList.addToTaskList(event);
         ui.showAddTaskMessage(event);

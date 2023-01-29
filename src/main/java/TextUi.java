@@ -11,6 +11,7 @@ public class TextUi {
             "            [ Format : EVENT_<EVENT_DESCRIPTION>_/<DATE_TIME_FROM>_/<DATE_TIME_TO> ] ( DATE_TIME = YYYY-MM-DD HHMM )" + '\n' +
             "DEADLINE  :  Adds a task with a deadline at specific date and time" + '\n' +
             "            [ Format : DEADLINE_<TASK_DESCRIPTION>_/<DATE_TIME_BY> ( DATE_TIME = YYYY-MM-DD HHMM )" + '\n' +
+            "DELETE  :  Remove task from task list    [ Format :  DELETE_<TASK_NUMBER> ]" +'\n' +
             "BYE  :  Exits the app" + '\n' +
             DASH + '\n' ;
     private final static String ADD_TASK_MESSAGE = "Nice! I've added this task to your task list :" ;

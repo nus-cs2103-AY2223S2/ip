@@ -1,6 +1,6 @@
 public class Parser {
     public static Command parse(String command) throws DukeException {
-            String[] commandArray = command.split(" ");
+            String[] commandArray = command.split(" ", 2);
             switch (commandArray[0].toUpperCase()) {
                 case "TODO": {
                     if (commandArray.length == 1) {
@@ -13,10 +13,16 @@ public class Parser {
                     return new ListCommand();
                 }
                 case "MARK": {
+                    if (commandArray.length == 1) {
+                        throw new DukeException("You have to tell me which task you want to mark as done!");
+                    }
                     String taskNum = commandArray[1].strip();
                     return new MarkCommand(taskNum);
                 }
                 case "UNMARK": {
+                    if (commandArray.length == 1) {
+                        throw new DukeException("You have to tell me which task you want to mark as undone!");
+                    }
                     String taskNum = commandArray[1].strip();
                     return new UnmarkCommand(taskNum);
                 }

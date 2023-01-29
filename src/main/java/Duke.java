@@ -6,13 +6,13 @@ public class Duke {
     private TextUi ui;
 
     public Duke(String filePath) {
-        ui = new TextUi();
-        storage = new Storage(filePath);
+        this.ui = new TextUi();
+        this.storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.loadFromFile());
+            this.tasks = new TaskList(storage.loadFromFile());
         } catch (FileNotFoundException e) {
             ui.showLoadingError();
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
     }
 

@@ -1,3 +1,4 @@
+import java.util.*;
 public class DeadlineCommand extends Command {
     private final String DETAILS;
 
@@ -8,6 +9,8 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasksList, TextUi ui, Storage storage) {
         String[] detailArray = DETAILS.split("/");
+        System.out.println(DETAILS);
+        System.out.println(Arrays.toString(detailArray));
         String description = detailArray[0].strip();
         String by = detailArray[1].strip();
         Task deadline = new Deadline(description, by);
