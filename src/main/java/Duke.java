@@ -1,10 +1,15 @@
+import java.io.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws FileNotFoundException {
+        ArrayList<Task> storeTasks = getFileContents();
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> storeTasks = new ArrayList<Task>(100);
-        int numElem = 0;
+        int numElem = storeTasks.size();
+        System.out.println(storeTasks);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -83,8 +88,8 @@ public class Duke {
             }
             commandToEcho = sc.nextLine();
         }
+        saveTasks(storeTasks);
         System.out.println("Bye. Hope to see you again soon!");
-
     }
 
     static int getTaskIndex(String commandToEcho) {
@@ -185,5 +190,61 @@ public class Duke {
         }
         req = req + front;
         return req;
+    }
+
+    private static ArrayList<Task> getFileContents() throws FileNotFoundException {
+        File folder = new File("data");
+        if (!folder.exists()) {
+            throw new FileNotFoundException("Folder does not exist!");
+        }
+        File f = new File("data/duke.txt");
+        if (!f.exists()) {
+            throw new FileNotFoundException("File does not exist!");
+        }
+        Scanner sc = new Scanner(f);
+        ArrayList<Task> storeTasks = new ArrayList<Task>();
+        int numElem = 0;
+        while (sc.hasNext()) {
+            String currentLine = sc.nextLine();
+            String[] arrOfStr = currentLine.split("\\[");
+            char typeOfTask = arrOfStr[1].charAt(0);
+            char marker = arrOfStr[2].charAt(0);
+            boolean isMarked = (marker=='X') ? true : false;
+            if (typeOfTask == 'T') {
+                String desc = arrOfStr[2].replace("]","");
+                storeTasks.add(new Todo(desc.substring(2)));
+            } else if (typeOfTask == 'D') {
+                String desc = arrOfStr[2].substring(3);
+                String byWhen = arrOfStr[3].replace("]","");
+                storeTasks.add(new Deadline(desc,byWhen));
+            } else if (typeOfTask == 'E') {
+                String desc = arrOfStr[2].substring(3);
+                String byWhen = arrOfStr[3].replace("]","");
+                String[] arrOfFromTo = byWhen.split(":");
+                String from = arrOfFromTo[1].split("to")[0].substring(1);
+                String to = arrOfFromTo[2].substring(1);
+                storeTasks.add(new Event(desc,from,to));
+            }
+            if (isMarked) {
+                storeTasks.get(numElem).markAsDone();
+            }
+            numElem++;
+        }
+        return storeTasks;
+    }
+
+    private static void saveTasks(ArrayList<Task> storeTasks) {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            fw.write(storeTasks.get(0).toString() + "\n");
+            fw.close();
+            fw = new FileWriter("data/duke.txt", true);
+            for (int i = 1; i < storeTasks.size(); i++) {
+                fw.write(storeTasks.get(i).toString() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Error with saving TODO task");
+        }
     }
 }

@@ -1,0 +1,7 @@
+[T][ ] borrow book
+[D][X] return book [by June 6th]
+[E][X] project meeting [from: Aug 6th 2pm to: 4pm]
+[T][ ] new task
+[D][ ] sleep [by tonight]
+[E][ ] sp concert [from: 3am to: 5pm]
+[T][ ] eat food
