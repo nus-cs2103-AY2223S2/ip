@@ -5,15 +5,15 @@ import duke.ui.Ui;
 
 public class ListCommand extends Command {
     private Ui ui;
-    private TaskList tasks;
+    private TaskList taskList;
 
-    public ListCommand(Ui ui, TaskList tasks) {
+    public ListCommand(Ui ui, TaskList taskList) {
         this.ui = ui;
-        this.tasks = tasks;
+        this.taskList = taskList;
     }
 
     @Override
     public void action() {
-        ui.listResponse(tasks);
+        ui.listResponse(taskList);
     }
 }

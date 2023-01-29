@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
 
@@ -39,6 +40,12 @@ public class TaskList {
         Task task = taskList.get(index);
         task.unmark();
         return task;
+    }
+
+    public List<Task> findTask(String s) {
+        return taskList.stream()
+                .filter(task -> task.getTask().contains(s))
+                .collect(Collectors.toList());
     }
 
 
