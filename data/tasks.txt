@@ -1,7 +1,5 @@
 T | 0 | gym
-T | 0 | return book
 E | 0 | project meeting (from: Mon 2pm to: 4pm)
 D | 0 | return book (by: Dec 02 2019 0600 pm )
-T | 0 | vibee
-D | 0 | return home (by: Dec 04 2019 0600 pm )
 T | 0 | incline walk
+T | 0 | drink water

@@ -34,13 +34,11 @@ public class Storage {
             case "D":
                 String updatedStr = str.substring(8).replace("(", "").replace(")", "").trim();
                 String[] paraForDeadline = updatedStr.split("by: ", 2);
-                System.out.println(paraForDeadline[1]);
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm a");
                 LocalDateTime tempDueDate = LocalDateTime.parse(paraForDeadline[1], formatter);
 
                 DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
                 String finalDueDate = tempDueDate.format(newFormatter);
-                System.out.println(finalDueDate);
 
                 LocalDateTime dueDate = LocalDateTime.parse(finalDueDate, newFormatter);
                 task = new Deadline(paraForDeadline[0], dueDate);
@@ -72,9 +70,7 @@ public class Storage {
             while (line != null) {
                 Task addTask = convertStrToTask(line);
                 taskList.add(addTask);
-                System.out.println(addTask);
                 line = bufReader.readLine();
-                System.out.println(line);
             }
             bufReader.close();
         } catch (FileNotFoundException e) {
@@ -87,10 +83,11 @@ public class Storage {
     }
 
     public void update(Task task) throws IOException {
-        Path dataDir = Paths.get("data");
-        Path dataFile = Paths.get("data/tasks.txt");
+        Path dataDir = Paths.get("ip/data");
+        Path dataFile = Paths.get("ip/data/tasks.txt");
         // directory does not exists
         if (!Files.isDirectory(dataDir)) {
+            System.out.println("hi");
             Files.createDirectory(dataDir);
             Files.createFile(dataFile);
         } else {
@@ -99,7 +96,7 @@ public class Storage {
                 Files.createFile(dataFile);
             }
         }
-        writer = new FileWriter("data/tasks.txt", true);
+        writer = new FileWriter("ip/data/tasks.txt", true);
         String finalTasks = "";
         String taskInfo = task.toString().replace("[ ]", " | 0 |").replace("[X]", "| 1 |");
         taskInfo = taskInfo.replace("[", "").replace("]", "");
