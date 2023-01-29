@@ -8,7 +8,8 @@ import javafx.concurrent.Service;
 
 
 /**
- * Dispatcher that dispatches the execution of ExecutionTasks.
+ * Implementation of {@link Service} to handle the execution of its
+ * encapsulated {@link ExecutionTask}.
  */
 public abstract class ExecutionService extends Service<String> {
     /** The task to dispatch. */
@@ -68,8 +69,10 @@ public abstract class ExecutionService extends Service<String> {
 
 
     /**
-     * Dispatches and executes the task.
+     * Executes the encapsulated task on the same thread where the method is
+     * called.
      *
+     * @return the result message of the task's execution.
      * @throws IllegalSyntaxException if there are syntax errors.
      * @throws ProcedureExecutionExecution if the task fail to execute
      *      completely.

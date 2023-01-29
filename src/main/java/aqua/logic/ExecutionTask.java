@@ -8,7 +8,9 @@ import javafx.concurrent.Task;
 
 
 /**
- * Represents a task that can be executed to produce a result.
+ * An implementation of {@link Task} that can be executed to produce a result
+ * and from that a String result message to be displayed. The result message is
+ * retrieved by {@link #valueProperty()} instead of {@link #messageProperty()}.
  *
  * @param <T> the return type of the result after execution.
  */
@@ -55,12 +57,12 @@ public abstract class ExecutionTask<T> extends Task<String> {
 
 
     /**
-     * Executes the task.
+     * Executes the task on the same thread where this method is called.
      *
-     * @return the success message of the task execution.
+     * @return the String result message to be displayed.
      * @throws IllegalSyntaxException if the argument given contains invalid
      *      syntax.
-     * @throws ProcedureExecutionException - if the task failed to execute
+     * @throws ProcedureExecutionException if the task failed to execute
      *      completely.
      */
     public String execute() throws IllegalSyntaxException, ProcedureExecutionException {
@@ -69,6 +71,15 @@ public abstract class ExecutionTask<T> extends Task<String> {
     }
 
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return the String result message to be displayed.
+     * @throws IllegalSyntaxException if the argument given contains invalid
+     *      syntax.
+     * @throws ProcedureExecutionException if the task failed to execute
+     *      completely.
+     */
     @Override
     protected String call() throws IllegalSyntaxException, ProcedureExecutionException {
         return execute();
