@@ -1,6 +1,17 @@
 package uwuke.input;
 
+/**
+ * Advises users on potential solutions when no matching command is found.
+ * 
+ * TODO: Add more functionality to the class in the future, advise is not that helpful currently.
+ */
 public class Advisor {
+    /**
+     * Advise users on potential fixes
+     * 
+     * @param input faulty input string given by user
+     * @return advise based on faulty input
+     */
     public static String advise(String input) {
         if (input.contains("deadline") && !input.contains("/by")) {
             return "Please add a description for deadline using the \"/by\" keyword. :c\nExample: deadline a /by b";

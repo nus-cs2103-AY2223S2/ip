@@ -4,13 +4,24 @@ import java.util.ArrayList;
 
 import uwuke.task.Task;
 
+/**
+ * Helper class that prints out everything in required format to System.out
+ */
 public class Printer {
+    /**
+     * Prints the string with some OwO's
+     * 
+     * @param input message that should be displayed
+     */
     public static void printWithDecorations(String input) {
         System.out.println("\nOwO OwO OwO OwO OwO OwO");
         System.out.println(input);
         System.out.println("OwO OwO OwO OwO OwO OwO\n");
     }
 
+    /**
+     * Prints a boring welcome message
+     */
     public static void printWelcome() {
         String welcomeString = 
                 "Hello from\n"
@@ -23,6 +34,9 @@ public class Printer {
         printWithDecorations(welcomeString);
     }
 
+    /**
+     * Prints out a giant uwu
+     */
     public static void uwu() {
         String uwu =
         "Hewwo from\n"+
@@ -39,11 +53,20 @@ public class Printer {
         System.out.print(uwu);
     }
 
+    /**
+     * Prints the goodbye message
+     */
     public static void printBye() {
         String bye = "Bye. Hope to see you again soon!";
         printWithDecorations(bye);
     }
 
+    /**
+     * Prints out all the tasks that the user currently has stored in the list.
+     * Runtime grows linearly with total number of characters in all tasks.
+     * 
+     * @param tasks list of all tasks
+     */
     public static void printTasks(ArrayList<Task> tasks) {
         String s;
 
@@ -62,21 +85,44 @@ public class Printer {
         printWithDecorations(sb.toString());
     }
 
+    /**
+     * Prints out a confirmation message when a task is added successfully.
+     * Should only be called after the actual add operation.
+     * 
+     * @param task task that was added
+     * @param numTasks number of tasks after adding this new task
+     */
     public static void printAddedConfirmation(Task task, int numTasks) {
         String grammar = numTasks <= 1 ? "task" : "tasks";
         String s = String.format("Got it. I've added this task:\n   %s\nNow you have %d %s in the list.", task.toString(), numTasks, grammar);
         printWithDecorations(s);
     }
 
+    /**
+     * Prints out a warning message when list has reach it's capacity
+     */
     public static void printNotEnoughSpace() {
         Printer.printWithDecorations("You have added too many tasks!");
     }
 
+    /**
+     * Prints out an error message.
+     * Should only be used when an error is encountered.
+     *
+     * @param errorMessage description of the error
+     */
     public static void printError(String errorMessage) {
         System.err.println(errorMessage);
         System.err.println("Please try again.");
     }
 
+    /**
+     * Prints out a confirmation when a task is deleted successfully.
+     * Should only be used after the actual delete operation.
+     * 
+     * @param task task that was just deleted
+     * @param numTasksAfterDelete number of tasks after deleting the task
+     */
     public static void printDeleteConfirmation(Task task, int numTasksAfterDelete) {
         String grammar = numTasksAfterDelete == 1 ? "task" : "tasks";
         String s = String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.", 
