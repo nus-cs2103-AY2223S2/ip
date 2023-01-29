@@ -2,7 +2,6 @@ package tasks;
 
 /**
  * Deadline class extends the Task class.
- * 
  * @author Leng Wei Cong, Justin
  */
 public class Deadline extends Task {
@@ -10,7 +9,6 @@ public class Deadline extends Task {
 
     /**
      * Constructor.
-     * 
      * @param description the description of the deadline task
      * @param by          the end datetime of the deadline task
      */
@@ -21,7 +19,6 @@ public class Deadline extends Task {
 
     /**
      * Returns the end datetime.
-     * 
      * @return the end datetime.
      */
     public String getBy() {
@@ -30,7 +27,6 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation of the task.
-     * 
      * @return the string representation of the task.
      */
     @Override

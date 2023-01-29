@@ -3,7 +3,7 @@ package command;
 import dukeexception.CommandException;
 import dukeexception.UnmarkIndexDoesNotExistException;
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import tasks.Task;
 import ui.Ui;
 
@@ -14,7 +14,6 @@ public class UnMarkComamnd extends Command {
 
     /**
      * Constructor.
-     * 
      * @param input the user input
      */
     public UnMarkComamnd(String input) {
@@ -23,7 +22,6 @@ public class UnMarkComamnd extends Command {
 
     /**
      * Unmark the task by the 1-based specified id.
-     * 
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance

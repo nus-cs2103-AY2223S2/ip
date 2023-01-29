@@ -8,7 +8,7 @@ public class TodoTest {
     @Test
     public void testInitialisation() {
         Task task = new Todo("Test");
-        
+
         assertEquals("Test", task.getDescription());
     }
 

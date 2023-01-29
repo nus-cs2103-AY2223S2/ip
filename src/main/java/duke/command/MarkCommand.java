@@ -3,7 +3,7 @@ package command;
 import dukeexception.CommandException;
 import dukeexception.MarkIndexDoesNotExistException;
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import tasks.Task;
 import ui.Ui;
 
@@ -14,7 +14,6 @@ public class MarkCommand extends Command {
 
     /**
      * Constructor.
-     * 
      * @param input the user input
      */
     public MarkCommand(String input) {
@@ -23,7 +22,6 @@ public class MarkCommand extends Command {
 
     /**
      * Mark the task by the 1-based specified id.
-     * 
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance

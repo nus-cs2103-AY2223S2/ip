@@ -1,10 +1,11 @@
 package command;
 
 import java.util.Arrays;
+
 import dukeexception.CommandException;
 import parser.DateTimeParser;
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import tasks.Deadline;
 import tasks.Task;
 import ui.Ui;
@@ -16,7 +17,6 @@ public class DeadlineCommand extends Command {
 
     /**
      * Constructor.
-     * 
      * @param request the request from the user
      */
     public DeadlineCommand(String request) {
@@ -25,7 +25,6 @@ public class DeadlineCommand extends Command {
 
     /**
      * Creates the deadline task and store it into the task list.
-     * 
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance
@@ -45,35 +44,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Unwraps the user's command into a string array that holds the following
-     * information:
-     * <ol>
-     * <li>Description - the description of the task</li>
-     * <li>By - the end datetime of the task</li>
-     * </ol>
-     * 
-     * @return a string array that stores the description and the end datetime of
-     *         the task.
-     * @throws CommandException
-     */
-    @Override
-    public String[] unwrap() throws CommandException {
-        String[] values = super.getRequest().split(" ");
-
-        // Throws RequestExecution if there are any issues with the request
-        checkCommandRequirement();
-
-        int byIndex = Arrays.asList(values).indexOf("/by");
-        String description = String.join(" ", Arrays.copyOfRange(values, 1, byIndex));
-        String by = String.join(" ", Arrays.copyOfRange(values, byIndex + 1, values.length));
-        by = DateTimeParser.parse(by);
-
-        return new String[] { description, by };
-    }
-
-    /**
      * Checks if the command has the inputs that it needs for the creation of task.
-     * 
      * @throws CommandException
      */
     @Override
@@ -92,5 +63,31 @@ public class DeadlineCommand extends Command {
         if (!message.isEmpty()) {
             throw new CommandException(message);
         }
+    }
+
+    /**
+     * Unwraps the user's command into a string array that holds the following
+     * information:
+     * <ol>
+     * <li>Description - the description of the task</li>
+     * <li>By - the end datetime of the task</li>
+     * </ol>
+     * @return a string array that stores the description and the end datetime of
+     *         the task.
+     * @throws CommandException
+     */
+    @Override
+    public String[] unwrap() throws CommandException {
+        String[] values = super.getRequest().split(" ");
+
+        // Throws RequestExecution if there are any issues with the request
+        checkCommandRequirement();
+
+        int byIndex = Arrays.asList(values).indexOf("/by");
+        String description = String.join(" ", Arrays.copyOfRange(values, 1, byIndex));
+        String by = String.join(" ", Arrays.copyOfRange(values, byIndex + 1, values.length));
+        by = DateTimeParser.parse(by);
+
+        return new String[] { description, by };
     }
 }

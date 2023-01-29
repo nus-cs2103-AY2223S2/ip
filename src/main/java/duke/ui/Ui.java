@@ -3,6 +3,7 @@ package ui;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
+
 import dukeexception.DukeException;
 import tasks.Task;
 
@@ -10,19 +11,16 @@ import tasks.Task;
  * The Ui class handles all the UI related operations, such as printing
  * messages, displaying errors and dividing lines.
  * It also reads commands from the user and prints out the list of tasks.
- * 
  * @author Leng Wei Cong, Justin
  */
 public class Ui {
     /**
      * Scanner object for reading user commands.
      */
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     /**
      * Displays divider line on the console.
-     * 
-     * @return nothing
      */
     public void showDivider() {
         System.out.println("\n_______________________________\n");
@@ -30,9 +28,7 @@ public class Ui {
 
     /**
      * Displays error message on the console.
-     * 
      * @param error the error caught
-     * @return nothing
      */
     public void showError(DukeException error) {
         System.out.println(error.getMessage());
@@ -40,8 +36,6 @@ public class Ui {
 
     /**
      * Displays loading error on the console.
-     * 
-     * @return nothing
      */
     public void showLoadingError() {
 
@@ -49,8 +43,6 @@ public class Ui {
 
     /**
      * Displays welcome message on the console.
-     * 
-     * @return nothing
      */
     public void showWelcome() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?\n");
@@ -59,8 +51,6 @@ public class Ui {
 
     /**
      * Displays exit message on the console.
-     * 
-     * @return nothing
      */
     public void showExit() {
         this.close();
@@ -69,7 +59,6 @@ public class Ui {
 
     /**
      * Reads user command.
-     * 
      * @return user input
      */
     public String readCommand() {
@@ -78,8 +67,6 @@ public class Ui {
 
     /**
      * Closes the scanner.
-     * 
-     * @return nothing
      */
     public void close() {
         scanner.close();
@@ -87,10 +74,8 @@ public class Ui {
 
     /**
      * Displays message on the console when task is added.
-     * 
      * @param task      the task that is being added
      * @param tasksSize the size of the taskList
-     * @return nothing
      */
     public void showTaskAdded(Task task, int tasksSize) {
         System.out.println("Got it. I've added this task:");
@@ -100,10 +85,8 @@ public class Ui {
 
     /**
      * Displays message on the console when task is removed.
-     * 
      * @param task      the task that is being added
      * @param tasksSize the size of the taskList
-     * @return nothing
      */
     public void showTaskRemoved(Task task, int tasksSize) {
         System.out.println("Noted. I've removed this task:");
@@ -113,9 +96,7 @@ public class Ui {
 
     /**
      * Displays the a list of task from taskList on the console.
-     * 
      * @param tasks the taskList
-     * @return nothing
      */
     public void showTaskList(List<Task> tasks) {
         IntStream.range(0, tasks.size())
@@ -126,7 +107,6 @@ public class Ui {
 
     /**
      * Displays message on the console.
-     * 
      * @param message
      */
     public void showMessage(String message) {

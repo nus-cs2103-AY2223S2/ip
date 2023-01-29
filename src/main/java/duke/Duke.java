@@ -1,7 +1,7 @@
 import command.Command;
 import parser.Parser;
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import ui.Ui;
 
 /**
@@ -18,10 +18,9 @@ public class Duke {
 	private Ui ui;
 
 	/**
-	 * Constructor
-	 * 
-	 * @param filePath the path to the text file that stores the tasks
-	 */
+	* Constructor.
+	* @param filePath the path to the text file that stores the tasks
+	*/
 	public Duke(String filePath) {
 		this.ui = new Ui();
 		this.storage = new Storage(filePath);
@@ -29,8 +28,8 @@ public class Duke {
 	}
 
 	/**
-	 * Runs Duke.
-	 */
+	* Runs Duke.
+	*/
 	public void run() {
 		this.ui.showWelcome();
 		this.handleRequest();
@@ -38,8 +37,8 @@ public class Duke {
 	}
 
 	/**
-	 * Handles the request from user input.
-	 */
+	* Handles the request from user input.
+	*/
 	public void handleRequest() {
 		while (true) {
 			try {
@@ -61,19 +60,17 @@ public class Duke {
 	}
 
 	/**
-	 * Prints whatever the user inputs.
-	 * 
-	 * @param input the user input
-	 */
+	* Prints whatever the user inputs.
+	* @param input the user input
+	*/
 	public void echo(String input) {
 		ui.showMessage(input);
 	}
 
 	/**
-	 * This is the main method which makes use of run method.
-	 * 
-	 * @param args Unused.
-	 */
+	* This is the main method which makes use of run method.
+	* @param args Unused.
+	*/
 	public static void main(String[] args) {
 		new Duke("data/duke.txt").run();
 	}

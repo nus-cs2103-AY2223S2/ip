@@ -1,8 +1,9 @@
 package command;
 
 import java.util.List;
+
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import tasks.Task;
 import ui.Ui;
 
@@ -20,7 +21,6 @@ public class ListCommand extends Command {
 
     /**
      * Displays the list of task.
-     * 
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance

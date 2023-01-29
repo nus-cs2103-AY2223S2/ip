@@ -7,7 +7,6 @@ public class UnmarkIndexDoesNotExistException extends DukeException {
 
     /**
      * Constructor.
-     * 
      * @param message the error message
      */
     public UnmarkIndexDoesNotExistException(String message) {

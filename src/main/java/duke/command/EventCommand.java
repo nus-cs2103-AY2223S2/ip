@@ -1,10 +1,11 @@
 package command;
 
 import java.util.Arrays;
+
 import dukeexception.CommandException;
 import parser.DateTimeParser;
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import tasks.Event;
 import tasks.Task;
 import ui.Ui;
@@ -16,7 +17,6 @@ public class EventCommand extends Command {
 
     /**
      * Constructor.
-     * 
      * @param request the request from the user
      */
     public EventCommand(String request) {
@@ -25,7 +25,6 @@ public class EventCommand extends Command {
 
     /**
      * Creates the event task and store it into the task list.
-     * 
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance
@@ -46,40 +45,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Unwraps the user's command into a string array that holds the following
-     * information:
-     * <ol>
-     * <li>Description - the description of the task</li>
-     * <li>From - the start datetime of the task</li>
-     * <li>To - the end datetime of the task</li>
-     * </ol>
-     * 
-     * @return a string array that stores the description, start datetime and end
-     *         datetime of
-     *         the task.
-     * @throws CommandException
-     */
-    @Override
-    public String[] unwrap() throws CommandException {
-        String[] values = super.getRequest().split(" ");
-
-        // Throws RequestExecution if there are any issues with the request
-        checkCommandRequirement();
-
-        int fromIndex = Arrays.asList(values).indexOf("/from");
-        int toIndex = Arrays.asList(values).indexOf("/to");
-        String description = String.join(" ", Arrays.copyOfRange(values, 1, fromIndex));
-        String from = String.join(" ", Arrays.copyOfRange(values, fromIndex + 1, toIndex));
-        from = DateTimeParser.parse(from);
-        String to = String.join(" ", Arrays.copyOfRange(values, toIndex + 1, values.length));
-        to = DateTimeParser.parse(to);
-
-        return new String[] { description, from, to };
-    }
-
-    /**
      * Checks if the command has the inputs that it needs for the creation of task.
-     * 
      * @throws CommandException
      */
     @Override
@@ -106,5 +72,36 @@ public class EventCommand extends Command {
         if (!message.isEmpty()) {
             throw new CommandException(message);
         }
+    }
+
+    /**
+     * Unwraps the user's command into a string array that holds the following
+     * information:
+     * <ol>
+     * <li>Description - the description of the task</li>
+     * <li>From - the start datetime of the task</li>
+     * <li>To - the end datetime of the task</li>
+     * </ol>
+     * @return a string array that stores the description, start datetime and end
+     *         datetime of
+     *         the task.
+     * @throws CommandException
+     */
+    @Override
+    public String[] unwrap() throws CommandException {
+        String[] values = super.getRequest().split(" ");
+
+        // Throws RequestExecution if there are any issues with the request
+        checkCommandRequirement();
+
+        int fromIndex = Arrays.asList(values).indexOf("/from");
+        int toIndex = Arrays.asList(values).indexOf("/to");
+        String description = String.join(" ", Arrays.copyOfRange(values, 1, fromIndex));
+        String from = String.join(" ", Arrays.copyOfRange(values, fromIndex + 1, toIndex));
+        from = DateTimeParser.parse(from);
+        String to = String.join(" ", Arrays.copyOfRange(values, toIndex + 1, values.length));
+        to = DateTimeParser.parse(to);
+
+        return new String[] { description, from, to };
     }
 }

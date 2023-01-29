@@ -1,7 +1,7 @@
 package command;
 
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import ui.Ui;
 
 /**
@@ -11,7 +11,6 @@ public class ExitCommand extends Command {
 
     /**
      * Constructor.
-     * 
      * @param input
      */
     public ExitCommand() {

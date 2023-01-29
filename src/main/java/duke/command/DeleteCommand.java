@@ -3,7 +3,7 @@ package command;
 import dukeexception.CommandException;
 import dukeexception.StorageException;
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import tasks.Task;
 import ui.Ui;
 
@@ -14,7 +14,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor.
-     * 
      * @param input the user command
      */
     public DeleteCommand(String input) {
@@ -23,7 +22,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes the task from the task list.
-     * 
      * @param tasks   the task list
      * @param ui      the ui instance
      * @param storage the storage instance

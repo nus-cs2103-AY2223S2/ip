@@ -1,14 +1,14 @@
-package taskList;
+package tasklist;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import dukeexception.StorageException;
 import tasks.Task;
 
 /**
- * TaskList class extends from ArrayList<Task>
- * 
+ * TaskList class extends from {@link ArrayList} of {@link Task} class.
  * @author Leng Wei Cong, Justin
  */
 public class TaskList extends ArrayList<Task> {
@@ -22,7 +22,6 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Another constructor.
-     * 
      * @param tasks the taskList
      */
     public TaskList(TaskList tasks) {
@@ -31,7 +30,6 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Returns the list of task.
-     * 
      * @return the list of task
      */
     public List<Task> getList() {
@@ -40,7 +38,6 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Appends task to the end of the list.
-     * 
      * @param task the task to be added
      * @return true
      */
@@ -52,7 +49,6 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Returns task at a specific id.
-     * 
      * @param id the 1-based id of task to be retrieve
      * @return the task of the specified id
      */
@@ -62,7 +58,6 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Deletes task at a specific id.
-     * 
      * @param id the 1-based id of task to be removed
      * @return the task removed
      * @throws StorageException
@@ -79,7 +74,6 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Returns the size of the list.
-     * 
      * @return the size of the list
      */
     public int size() {

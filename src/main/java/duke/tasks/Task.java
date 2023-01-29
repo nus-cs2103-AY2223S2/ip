@@ -2,16 +2,14 @@ package tasks;
 
 /**
  * Task is the abstract base class for all tasks
- * 
  * @author Leng Wei Cong, Justin
  */
-abstract public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
     /**
      * Constructor.
-     * 
      * @param description
      */
     public Task(String description) {
@@ -21,7 +19,6 @@ abstract public class Task {
 
     /**
      * Returns the status icon of the task based {@link #isDone}.
-     * 
      * @return a string that repesents true as X and false as " "
      */
     private String getStatusIcon() {
@@ -30,8 +27,6 @@ abstract public class Task {
 
     /**
      * Marks the task as done.
-     * 
-     * @return nothing
      */
     public void markAsDone() {
         this.isDone = true;
@@ -39,8 +34,6 @@ abstract public class Task {
 
     /**
      * Marks the task as not done.
-     * 
-     * @return nothing
      */
     public void markAsNotDone() {
         this.isDone = false;
@@ -48,7 +41,6 @@ abstract public class Task {
 
     /**
      * Returns the description of the task.
-     * 
      * @return the description of the task
      */
     public String getDescription() {
@@ -57,7 +49,6 @@ abstract public class Task {
 
     /**
      * Returns the boolean of the task done status.
-     * 
      * @return the boolean of the task done status
      */
     public boolean getIsDone() {
@@ -66,7 +57,6 @@ abstract public class Task {
 
     /**
      * Returns a string representation of the task.
-     * 
      * @return a string representation of the task
      */
     @Override

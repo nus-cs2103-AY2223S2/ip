@@ -1,9 +1,10 @@
 package command;
 
 import java.util.Arrays;
+
 import dukeexception.CommandException;
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import ui.Ui;
 
 /**
@@ -14,24 +15,15 @@ public abstract class Command {
     private Commands command;
     private boolean isExit = false;
 
+    /**
+     * The Command types supported by Duke.
+     */
     public enum Commands {
         LIST, UNMARK, MARK, TODO, DEADLINE, EVENT, DELETE, EXIT, DOES_NOT_EXIST
     };
 
     /**
-     * Executes the creation and adding of task to the task list.
-     * 
-     * @param tasks   the task list
-     * @param ui      the ui instance
-     * @param storage the storage intance
-     * 
-     * @return nothing
-     */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
-
-    /**
      * Constructor.
-     * 
      * @param command the command type
      */
     public Command(Commands command) {
@@ -40,7 +32,6 @@ public abstract class Command {
 
     /**
      * Another constructor.
-     * 
      * @param request the user command
      */
     public Command(String request) {
@@ -49,8 +40,22 @@ public abstract class Command {
     }
 
     /**
+     * Executes the creation and adding of task to the task list.
+     * @param tasks   the task list
+     * @param ui      the ui instance
+     * @param storage the storage intance
+     */
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+
+    /**
+     * Checks if the command has the inputs that it needs for the creation of task.
+     * @throws CommandException
+     */
+    public void checkCommandRequirement() throws CommandException {
+    }
+
+    /**
      * Retuns a boolean to tell if the command is an exist command.
-     * 
      * @return a boolean to tell if the command is an exist command
      */
     public boolean isExit() {
@@ -59,8 +64,6 @@ public abstract class Command {
 
     /**
      * Toggles isExit.
-     * 
-     * @return nothing
      */
     public void toggleIsExit() {
         this.isExit = !this.isExit;
@@ -68,7 +71,6 @@ public abstract class Command {
 
     /**
      * Returns the string of the original user command.
-     * 
      * @return the string of the original user command
      */
     public String getRequest() {
@@ -76,18 +78,8 @@ public abstract class Command {
     }
 
     /**
-     * Returns the command type.
-     * 
-     * @return the command type
-     */
-    public Commands getCommand() {
-        return this.command;
-    }
-
-    /**
      * Unwraps the user's command into a string array that holds information for the
      * command to work with.
-     * 
      * @return a string array that stores the task description.
      * @throws CommandException
      */
@@ -105,16 +97,15 @@ public abstract class Command {
     }
 
     /**
-     * Checks if the command has the inputs that it needs for the creation of task.
-     * 
-     * @throws CommandException
+     * Returns the command type.
+     * @return the command type
      */
-    public void checkCommandRequirement() throws CommandException {
+    public Commands getCommand() {
+        return this.command;
     }
 
     /**
      * Returns the command type of from the user request
-     * 
      * @param request the user input
      * @return the command type
      */
@@ -122,24 +113,24 @@ public abstract class Command {
         String cmd = request.split(" ")[0];
 
         switch (cmd) {
-            case "list":
-                return Commands.LIST;
-            case "unmark":
-                return Commands.UNMARK;
-            case "mark":
-                return Commands.MARK;
-            case "todo":
-                return Commands.TODO;
-            case "deadline":
-                return Commands.DEADLINE;
-            case "event":
-                return Commands.EVENT;
-            case "delete":
-                return Commands.DELETE;
-            case "bye":
-                return Commands.EXIT;
-            default:
-                return Commands.DOES_NOT_EXIST;
+        case "list":
+            return Commands.LIST;
+        case "unmark":
+            return Commands.UNMARK;
+        case "mark":
+            return Commands.MARK;
+        case "todo":
+            return Commands.TODO;
+        case "deadline":
+            return Commands.DEADLINE;
+        case "event":
+            return Commands.EVENT;
+        case "delete":
+            return Commands.DELETE;
+        case "bye":
+            return Commands.EXIT;
+        default:
+            return Commands.DOES_NOT_EXIST;
         }
     }
 }

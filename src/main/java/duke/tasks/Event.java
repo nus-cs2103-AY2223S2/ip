@@ -2,7 +2,6 @@ package tasks;
 
 /**
  * Event class extends the Task class.
- * 
  * @author Leng Wei Cong, Justin
  */
 public class Event extends Task {
@@ -11,7 +10,6 @@ public class Event extends Task {
 
     /**
      * Constructor.
-     * 
      * @param description the description of the event task
      * @param from        the start datetime of the event task
      * @param to          the end datetime of the event task
@@ -24,7 +22,6 @@ public class Event extends Task {
 
     /**
      * Returns the start datetime.
-     * 
      * @return the start datetime
      */
     public String getFrom() {
@@ -33,7 +30,6 @@ public class Event extends Task {
 
     /**
      * Returns the end datetime.
-     * 
      * @return the end datetime
      */
     public String getTo() {
@@ -42,7 +38,6 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of the task.
-     * 
      * @return the string representation of the task
      */
     @Override

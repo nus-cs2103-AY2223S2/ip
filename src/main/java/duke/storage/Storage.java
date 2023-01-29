@@ -5,7 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import taskList.TaskList;
+
+import tasklist.TaskList;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -20,8 +21,16 @@ public class Storage {
     private String dataPathString;
 
     /**
+     * Constructor.
+     * @param filePath the path to the text file that stores the serialised tasks
+     */
+    public Storage(String filePath) {
+        this.dataPath = java.nio.file.Paths.get(cwd, filePath.split("/"));
+        this.dataPathString = dataPath.toString();
+    }
+
+    /**
      * Serialises task into a string that is storable in the text file.
-     * 
      * @param task the task to be serialise
      * @return the string of the serialised task
      */
@@ -52,7 +61,6 @@ public class Storage {
 
     /**
      * Deserialises the task string to a Task instance.
-     * 
      * @param data the serialised task
      * @return the task that has been deserialised from the input
      */
@@ -88,18 +96,7 @@ public class Storage {
     }
 
     /**
-     * Constructor.
-     * 
-     * @param filePath the path to the text file that stores the serialised tasks
-     */
-    public Storage(String filePath) {
-        this.dataPath = java.nio.file.Paths.get(cwd, filePath.split("/"));
-        this.dataPathString = dataPath.toString();
-    }
-
-    /**
      * Returns the tasks from the text file.
-     * 
      * @return the task list from the text file
      */
     public TaskList load() {
@@ -140,7 +137,6 @@ public class Storage {
 
     /**
      * Saves the tasks into the text file.
-     * 
      * @param tasks the task list to be saved
      */
     public void save(TaskList tasks) {
