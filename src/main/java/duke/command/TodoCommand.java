@@ -12,14 +12,11 @@ import duke.ui.Ui;
  */
 public class TodoCommand extends Command {
     private String activity;
+
     public TodoCommand(String cmd) {
-        try {
-            checkCommand(cmd);
-            String c = cmd.split(" ")[0];
-            this.activity = cmd.substring(c.length() + 1);
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
+        System.out.println(cmd);
+        String c = cmd.split(" ")[0];
+        this.activity = cmd.substring(c.length() + 1);
     }
 
     public boolean execute(Storage tl, Ui ui, Storage storage) {

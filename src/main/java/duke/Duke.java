@@ -38,10 +38,13 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine();
+                Command.isValidCommand(fullCommand);
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
+            } catch (DukeException e) {
+                System.out.println(e);
             } catch (IllegalArgumentException e) {
                 ui.showLoadingError("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } finally {

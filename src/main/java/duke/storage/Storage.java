@@ -2,6 +2,7 @@ package duke.storage;
 
 import duke.exception.DukeException;
 import duke.task.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -35,7 +36,6 @@ public class Storage {
      * This method returns the task based on the id.
      *
      * @param i - index of the id.
-     *
      * @return Task - Returns the task of given id.
      */
     public Task getTask(int i) {
@@ -46,7 +46,6 @@ public class Storage {
      * This method removes and returns the task based on the selected id.
      *
      * @param i - index of the id.
-     *
      * @return Task - Returns the task of the given id being removed.
      */
     public Task removeTask(int i) {
@@ -99,8 +98,9 @@ public class Storage {
                 String line = scanner.nextLine();
                 String[] lineArr = line.split("\\] ");
                 String[] lineType = lineArr[0].split("\\]");
-                this.addTask(new Task(lineType[0].substring(1),
-                        lineType[1].substring(1), lineArr[1]));
+                Task t = new Task(lineType[0].substring(4),
+                        lineType[1].substring(1), lineArr[1]);
+                this.addTask(t);
             }
             scanner.close();
             return this.tasklst;
@@ -117,7 +117,7 @@ public class Storage {
         String DIRECTORY = "./data";
         try {
             File directory = new File(DIRECTORY);
-            if (!directory.exists()){
+            if (!directory.exists()) {
                 directory.mkdir();
             }
             String res = this.getTasks();

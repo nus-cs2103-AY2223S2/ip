@@ -17,6 +17,7 @@ public class Task {
         this.description = description;
         isTaskDone(this.doneStatus);
     }
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -35,7 +36,6 @@ public class Task {
      * Checks if current status of the task is completed.
      *
      * @param doneStatus - the status of the task if it is done.
-     *
      * @return boolean - Returns true or false based on the task.
      */
     public boolean isTaskDone(String doneStatus) {
@@ -48,19 +48,23 @@ public class Task {
     /**
      * Marks the task as completed.
      */
-    public void mark() {
+    public void setMark() {
         this.isDone = true;
     }
 
     /**
-     * Marks the task as incomplete.
+     * Unmarks the task as incomplete.
      */
-    public void unmark() {
+    public void setUnmark() {
         this.isDone = false;
     }
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "]" + " " + this.description;
+        if (this.type == null)
+            return "[" + this.getStatusIcon() + "]" + " " + this.description;
+        else {
+            return "[" + this.type + "]" + "[" + this.getStatusIcon() + "]" + " " + this.description;
+        }
     }
 }

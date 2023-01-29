@@ -32,11 +32,10 @@ public abstract class Command {
      * Check if the format of the commands are correct.
      *
      * @param cmd - The given command description entered by the user.
-     *
      * @return boolean - true or false according to the formatting.
      * @throws DukeException - Error of the format of the command is incorrect.
      */
-    public boolean checkCommand(String cmd) throws DukeException {
+    public static boolean isValidCommand(String cmd) throws DukeException {
         String cmdtype = cmd.split(" ")[0];
         // check that duke.command list must not have any more description
         if (cmdtype.equals("list") && cmdtype.length() != cmd.length()) {
@@ -50,7 +49,8 @@ public abstract class Command {
                 String activity = cmd.substring(cmdtype.length() + 1, indexOfBy - 1);
                 String date = cmd.substring(indexOfDate);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The format of a deadline: deadline {activity} /by {date}.");
+                throw new DukeException("☹ OOPS!!! The format of a deadline: " +
+                        "deadline {activity} /by {yyyy-mm-dd} {hhmm}.");
             }
         } else if (cmdtype.equals("event")) {
             try {
@@ -62,7 +62,8 @@ public abstract class Command {
                 String from = cmd.substring(indexOfFromTime, indexOfTo - 1);
                 String to = cmd.substring(indexOfToTime);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The format of a event: event {activity} /from {datetime} /to {datetime}.");
+                throw new DukeException("☹ OOPS!!! The format of a event: " +
+                        "event {activity} /from {datetime} /to {datetime}.");
             }
         }
         return true;

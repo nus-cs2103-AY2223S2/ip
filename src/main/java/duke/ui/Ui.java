@@ -16,8 +16,9 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("I am Duke the Chatbot!\nHow may i help you today?\n");
+        this.showLine();
+        System.out.println(logo + "\nHello! I'm Duke\nWhat can I do for you?");
+        this.showLine();
     }
 
     /**
@@ -32,7 +33,7 @@ public class Ui {
      *
      * @return String - Returns the command of the next line.
      */
-    public String readCommand(){
+    public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }

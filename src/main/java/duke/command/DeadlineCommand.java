@@ -16,18 +16,13 @@ public class DeadlineCommand extends Command {
     private String time;
 
     public DeadlineCommand(String cmd) {
-        try {
-            checkCommand(cmd);
-            String c = cmd.split(" ")[0];
-            int indexOfBy = cmd.indexOf("/by ");
-            int indexOfDate = indexOfBy + 4; // "/by "
-            this.activity = cmd.substring(c.length() + 1, indexOfBy - 1);
-            String datetime = cmd.substring(indexOfDate);
-            this.date = datetime.split(" ")[0];
-            this.time = datetime.split(" ")[1];
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
+        String c = cmd.split(" ")[0];
+        int indexOfBy = cmd.indexOf("/by ");
+        int indexOfDate = indexOfBy + 4; // "/by "
+        this.activity = cmd.substring(c.length() + 1, indexOfBy - 1);
+        String datetime = cmd.substring(indexOfDate);
+        this.date = datetime.split(" ")[0];
+        this.time = datetime.split(" ")[1];
     }
 
     public boolean execute(Storage tl, Ui ui, Storage storage) {
