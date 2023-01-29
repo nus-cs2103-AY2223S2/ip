@@ -30,7 +30,7 @@ public class Duke {
 
 
     /**
-     * Method which runs the chatbot based on the commands given.
+     * Method that runs the chatbot based on the commands given.
      */
     public void run() {
         ui.showWelcome();

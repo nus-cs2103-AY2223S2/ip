@@ -75,13 +75,22 @@ public class Storage {
      *
      * @return String - Returns the output of the list of tasks.
      */
-    public String getTasks() {
+    public String getTasksString() {
         String res = "";
         int counter = 1;
         for (Task tmp : this.tasklst) {
             res += counter++ + ". " + tmp.toString() + "\n";
         }
         return res;
+    }
+
+    /**
+     * This method returns the ArrayList of tasklist.
+     *
+     * @return ArrayList<Task> - Returns the ArrayList of Tasks.
+     */
+    public ArrayList<Task> getTasks() {
+        return this.tasklst;
     }
 
     /**
@@ -98,8 +107,7 @@ public class Storage {
                 String line = scanner.nextLine();
                 String[] lineArr = line.split("\\] ");
                 String[] lineType = lineArr[0].split("\\]");
-                Task t = new Task(lineType[0].substring(4),
-                        lineType[1].substring(1), lineArr[1]);
+                Task t = new Task(lineType[0].substring(4), lineType[1].substring(1), lineArr[1]);
                 this.addTask(t);
             }
             scanner.close();
@@ -120,7 +128,7 @@ public class Storage {
             if (!directory.exists()) {
                 directory.mkdir();
             }
-            String res = this.getTasks();
+            String res = this.getTasksString();
             FileWriter myWriter = new FileWriter(this.filepath);
             myWriter.write(res);
             myWriter.close();
