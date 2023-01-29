@@ -1,14 +1,14 @@
 package duke.task;
 
 /**
- * This class represents task of the type 'Todo'.
+ * Represents task of the type 'Todo'.
  */
 public class Todo extends Tasks {
 
     /**
-     * Construct a new Todo objcet with the given content and state.
-     * @param content
-     * @param isDone
+     * Constructs a new Todo objcet with the given content and state.
+     * @param content The content of the Todo object.
+     * @param isDone The state of the Todo object.
      */
     public Todo(String content, boolean isDone) {
         super(content, isDone);
@@ -16,8 +16,8 @@ public class Todo extends Tasks {
     }
 
     /**
-     * Return the string representation of Todo object.
-     * @return String
+     * Returns the string representation of Todo object.
+     * @return String representation of Todo object.
      */
     @Override
     public String toString() {

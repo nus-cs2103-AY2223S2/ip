@@ -4,16 +4,16 @@ import duke.task.TaskList;
 import java.util.*;
 
 /**
- * This class defines the main logic of the Duke bot.
+ * Defines the main logic of the Duke bot.
  */
 public class Duke {
 
     public static boolean offBot = false;
 
     /**
-     * This method defines the main logic of the Duke bot. The bot runs in a loop that awaits users' input
+     * Defines the main logic of the Duke bot. The bot runs in a loop that awaits users' input
      * until state offBot is set to True.
-     * @param args
+     * @param args The user input arguments.
      */
     public static void main(String[] args) {
         Locale.setDefault(Locale.ENGLISH);

@@ -4,18 +4,19 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 /**
- * This class represents task of the type 'Event'.
+ * Represents task of the type 'Event'.
  */
 public class Event extends Tasks {
     private LocalDateTime from = null;
     private LocalDateTime to = null;
 
     /**
-     * Construct a new Event instance with the given content, from_date and isDone state.
-     * This method stores the string data as a LocalDateTime object.
-     * @param content
-     * @param from
-     * @param isDone
+     * Constructs a new Event instance with the given content, from_date and isDone state.
+     * It also stores the string data as a LocalDateTime object.
+     * @param content The content of the event.
+     * @param isDone Whether the task is completed.
+     * @param from The starting time of the event.
+     * @param to The ending time of the event.
      */
     public Event(String content, boolean isDone, String from, String to) {
         super(content, isDone);
@@ -26,8 +27,8 @@ public class Event extends Tasks {
     }
 
     /**
-     * This method returns the string representation of the Event object.
-     * @return String
+     * Returns the string representation of the Event object.
+     * @return String The string representation of the Event object.
      */
     @Override
     public String toString() {

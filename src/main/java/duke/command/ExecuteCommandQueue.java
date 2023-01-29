@@ -2,7 +2,7 @@ package duke.command;
 import duke.task.*;
 
 /**
- * This class executes the task creation commands stored in the command queue, by parsing the user input.
+ * Executes the task creation commands stored in the command queue, by parsing the user input.
  */
 public class ExecuteCommandQueue extends Commands {
 
@@ -10,6 +10,10 @@ public class ExecuteCommandQueue extends Commands {
         this.setCommandStorage(str);
     }
 
+    /**
+     * Executes the task creation commands stored in the command queue, by parsing the user input.
+     * @param list the list of tasks to execute the commands on.
+     */
     @Override
     public void execute(TaskList list){
         String content = this.getCommandStorage();

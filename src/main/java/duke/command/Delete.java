@@ -3,7 +3,7 @@ package duke.command;
 import duke.task.TaskList;
 
 /**
- * This class implements the delete command.
+ * Implements the delete command.
  */
 public class Delete extends Commands{
     public Delete(String str) {
@@ -11,9 +11,9 @@ public class Delete extends Commands{
     }
 
     /**
-     * This method removes the selected task from the task list, and decrement the task count by 1.
-     * It then print the message to show the user the task deleted.
-     * @param list
+     * Removes the selected task from the task list, and decrement the task count by 1.
+     * Print the message to show the user the task deleted.
+     * @param list The list of tasks from which task needs to be deleted.
      */
     @Override
     public void execute(TaskList list) {

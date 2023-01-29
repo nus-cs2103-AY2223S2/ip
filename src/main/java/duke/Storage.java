@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 /**
- * This class represents the local storage of task list.
+ * Represents the local storage of task list.
  */
 public class Storage {
 
@@ -17,8 +17,8 @@ public class Storage {
     }
 
     /**
-     * This method stores an ArrayList of Tasks in local hard disk.
-     * @param task
+     * Stores an ArrayList of Tasks in local hard disk.
+     * @param task The ArrayList of Tasks to store in the local hard disk.
      */
     //adapted from CHATGPT
     public void saveTasks(ArrayList<Tasks> task) {
@@ -33,7 +33,7 @@ public class Storage {
     }
 
     /**
-     * This method retrieves an ArrayList of Tasks from the local hard disk.
+     * Retrieves an ArrayList of Tasks from the local hard disk.
      * @return ArrayList of Tasks.
      */
     //adapted from CHATGPT

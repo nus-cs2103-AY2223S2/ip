@@ -3,7 +3,7 @@ package duke.command;
 import duke.task.TaskList;
 
 /**
- * This class marks a particular task in the task list as not done.
+ * Marks a particular task in the task list as not done.
  */
 public class Unmark extends Commands {
     public Unmark(String str) {
@@ -11,8 +11,9 @@ public class Unmark extends Commands {
     }
 
     /**
-     * This function takes in a task list, and mark a specified task in the task list as not done.
-     * Then it increments the task count.
+     * Marks a specified task in the task list as not done.
+     * Then increments the task count.
+     * @param tasks the task list to execute the command on.
      */
     @Override
     public void execute(TaskList tasks) {

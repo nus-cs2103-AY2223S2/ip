@@ -5,17 +5,17 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 
 /**
- * This class represents task of the type 'deadline'.
+ * Represents task of the type 'deadline'.
  */
 public class Deadline extends Tasks {
     private LocalDateTime time = null;
 
     /**
-     * Construct a new Deadline instance with the given content, date and isDone state.
-     * This method stores the string data as a LocalDateTime object.
-     * @param content
-     * @param date
-     * @param isDone
+     * Constructs a new Deadline instance with the given content, date and isDone state.
+     * It also stores the string data as a LocalDateTime object.
+     * @param content content of the task.
+     * @param date deadline of the task.
+     * @param isDone whether the task is done.
      */
     public Deadline(String content, String date, boolean isDone) {
         super(content, isDone);

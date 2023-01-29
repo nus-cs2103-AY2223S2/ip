@@ -7,8 +7,7 @@ import duke.exception.UnknownCommand;
 import duke.task.TaskList;
 
 /**
- * This class implements the parsing of command line arguments, and
- * create and put the corresponding command with the parsed input
+ * Implements the parsing of command line arguments, and create and put the corresponding command with the parsed input
  * arguments into the command queue.
  */
 public class Parser {
@@ -18,7 +17,7 @@ public class Parser {
      * Creates a command according to the user input, parse it,
      * and pass the relevant input into the command created,
      * and store the command in the command queue.
-     * @param input
+     * @param input The CLI input from the user.
      * @throws DukeException
      */
     public static void createCommand (String input) throws DukeException {
@@ -47,7 +46,7 @@ public class Parser {
                 break;
             }
             case "bye" : {
-                queue.add(new Bye(input));
+                queue.add(new Bye());
                 break;
             }
         }
@@ -55,8 +54,7 @@ public class Parser {
 
     /***
      * Executes all commands waiting in the queue.
-     * This method returns nothing.
-     * @param list
+     * @param list the list of commands to execute.
      */
     public static void executeQueue (TaskList list){
         queue.executeQueue(list);

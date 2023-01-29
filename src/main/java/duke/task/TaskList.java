@@ -3,7 +3,7 @@ import duke.Storage;
 import java.util.ArrayList;
 
 /**
- * This class represents the list of tasks submitted by the user.
+ * Represents the list of tasks submitted by the user.
  */
 public class TaskList {
 
@@ -14,7 +14,7 @@ public class TaskList {
     /**
      * Construct a task list object from the local storage of previous instance.
      * Set the taskCount to reflect the correct number of tasks.
-     * @param storage
+     * @param storage The storage object of the task list.
      */
     public TaskList(Storage storage) {
         this.storage = storage;
@@ -23,7 +23,7 @@ public class TaskList {
     }
 
     /**
-     * This method adds a new task in to the task list, and increments the task count by 1.
+     * Adds a new task in to the task list, and increments the task count by 1.
      */
     public void addTask(Tasks task) {
         this.tasks.add(task);
@@ -32,7 +32,7 @@ public class TaskList {
     }
 
     /**
-     * This method print out the list of tasks in the TaskList object.
+     * Print out the list of tasks in the TaskList object.
      */
     //Credits: adapted from CHATGPT
     public void listTasks() {
@@ -45,17 +45,17 @@ public class TaskList {
     }
 
     /**
-     * This method returns the current task count.
-     * @return int
+     * Returns the current task count.
+     * @return int the current task count.
      */
     public int getTaskCount() {
         return taskCount;
     }
 
     /**
-     * This method mark the task at the indicated index in the task list as the indicated state 'done'.
-     * @param index
-     * @param done
+     * Mark the task at the indicated index in the task list as the indicated state 'done'.
+     * @param index The index of the task to be marked.
+     * @param done  The state that the task needs to be marked as.
      */
     public void markTask(int index, boolean done){
         this.tasks.get(index).markTask(done);
@@ -63,9 +63,9 @@ public class TaskList {
     }
 
     /**
-     * This method deletes the task at the indicated index in the task list, and decrement the task count.
-     * @param index
-     * @return
+     * Deletes the task at the indicated index in the task list, and decrement the task count.
+     * @param index the index of the task to be deleted.
+     * @return Message indicating the number of tasks left.
      */
     public String deleteTask(int index) {
         String returnString = this.tasks.get(index).toString();
@@ -77,18 +77,18 @@ public class TaskList {
     }
 
     /**
-     * This method prints out the string representation of the task state, whether done or not done.
-     * @param index
-     * @return
+     * Prints out the string representation of the task state, whether done or not done.
+     * @param index The index of the task to get state icon from.
+     * @return The string representation of the task status.
      */
     public String getTaskIcon(int index) {
         return this.tasks.get(index).getStatusIcon();
     }
 
     /**
-     * This method returns the content of the task at the given index in the task list.
-     * @param index
-     * @return
+     * Returns the content of the task at the given index in the task list.
+     * @param index The index of the task to retrieve the content from.
+     * @return The content of the task at the given index.
      */
     public String getTaskContent(int index) {
         return this.tasks.get(index).seeTaskContent();

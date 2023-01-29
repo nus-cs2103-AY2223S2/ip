@@ -3,7 +3,7 @@ package duke.command;
 import duke.task.TaskList;
 
 /**
- * This class implements echo functionality, which repeat the command that user gave.
+ * Implements echo functionality, which repeat the command that user gave.
  */
 public class Echo extends Commands {
     public Echo(String str) {
@@ -11,8 +11,8 @@ public class Echo extends Commands {
     }
 
     /**
-     * This method simply prints the content of the user input stored in the command.
-     * @param tasks
+     * Prints the content of the user input stored in the command.
+     * @param tasks List of tasks relevant to this command.
      */
     @Override
     public void execute(TaskList tasks) {

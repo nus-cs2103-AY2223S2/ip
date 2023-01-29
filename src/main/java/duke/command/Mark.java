@@ -11,9 +11,9 @@ public class Mark extends Commands {
     }
 
     /**
-     * This function takes in a task list, and mark a specified task in the task list as done.
-     * Then it decrements the task count.
-     * @param tasks
+     * Mark a specified task in the task list as done.
+     * Then decrements the task count.
+     * @param tasks the list of tasks to execute the command on.
      */
     @Override
     public void execute(TaskList tasks) {
