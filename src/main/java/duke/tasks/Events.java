@@ -1,5 +1,8 @@
 package duke.tasks;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.FormatException;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,20 +15,23 @@ public class Events extends Task {
 
     protected LocalDateTime end;
 
-    public Events(String description, String start, String end) {
-
+    public Events(String description, String start, String end) throws DukeException {
         this(false, description, start, end);
     }
 
-    public Events(boolean isDone, String description, String start, String end) {
+    public Events(boolean isDone, String description, String start, String end) throws DukeException {
         super(isDone, description);
+        try {
+            this.start = LocalDateTime.parse(start, Task.FORMATTER);
+            this.end = LocalDateTime.parse(end, Task.FORMATTER);
+        } catch (Exception err) {
+            throw new FormatException("yyyy-MM-dd HH:mm");
+        }
 
-        this.start = LocalDateTime.parse(start, Task.FORMATTER);
-        this.end = LocalDateTime.parse(end, Task.FORMATTER);
+
     }
-
-
-    public Events(List<String> queries) {
+    
+    public Events(List<String> queries) throws DukeException {
         this(queries.get(0), queries.get(1), queries.get(2));
     }
     @Override
