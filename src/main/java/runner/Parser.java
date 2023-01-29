@@ -80,6 +80,10 @@ public class Parser {
         duke.exit = 1;
     }
 
+    /**
+     * Actions when finding keywords.
+     * @param key Keyword input.
+     */
     public void find(String key) {
         TaskList ans = new TaskList();
         for(Task tk: duke.taskList.get_list()) {
