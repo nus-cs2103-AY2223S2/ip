@@ -28,6 +28,15 @@ public final class Parser {
     }
 
     /**
+     * Get keyword from find command
+     * @param input User input containing find command
+     * @return String representation of keyword
+     */
+    public static String getFindKeyword(String input) {
+        return input.substring(5);
+    }
+
+    /**
      * Translate a task log line to its respective Task object
      * @param taskLog Task log to be translated
      * @return Task which was represented by its task log format

@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -58,6 +59,11 @@ public class Duke {
                     toUnMarkTask.unmarkTask();
                     ui.informTaskIsUnMarked(toUnMarkTask);
                     Storage.saveTasksToTaskLog(tasks);
+                    break;
+                case "find":
+                    String keyword = Parser.getFindKeyword(userInput);
+                    ArrayList<Task> foundTasks = tasks.filterTasks(keyword);
+                    ui.printFoundTasks(foundTasks);
                     break;
                 case "todo":
                 case "deadline":

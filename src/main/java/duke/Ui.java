@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -17,7 +18,7 @@ public class Ui {
      */
     public void greetUser() {
         System.out.println(LOGO);
-        System.out.println("Hello I'm duke.Duke\n"
+        System.out.println("Hello I'm Duke\n"
                 + "What can I do for you?\n");
     }
 
@@ -79,8 +80,26 @@ public class Ui {
      */
     public void printTasks(TaskList tasks) {
         int taskNumber = 1;
-        for(int i = 0; i < tasks.getSize(); i++) {
+        for (int i = 0; i < tasks.getSize(); i++) {
             System.out.println(taskNumber + ". " + tasks.getTask(i).toString());
+            taskNumber++;
+        }
+        System.out.print("\n");
+    }
+
+    /**
+     * Print all tasks containing keyword
+     * @param tasks ArrayList of tasks containing keyword
+     */
+    public void printFoundTasks(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
+            System.out.println("There are no matching tasks\n");
+            return;
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        int taskNumber = 1;
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(taskNumber + ". " + tasks.get(i).toString());
             taskNumber++;
         }
         System.out.print("\n");
