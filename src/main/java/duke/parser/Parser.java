@@ -1,3 +1,7 @@
+//@@author pzaiming-reused
+//Reused from https://github.com/RyanQiu1
+// with minor modifications
+
 package duke.parser;
 
 import duke.command.*;

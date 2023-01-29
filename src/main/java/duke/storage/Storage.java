@@ -100,6 +100,9 @@ public class Storage {
      * @throws DukeException - Error of the filed not being found.
      */
     public ArrayList<Task> load() throws DukeException {
+        //@@author pzaiming-reused
+        //Reused from https://github.com/RyanQiu1
+        // with minor modifications
         try {
             File file = new File(this.filepath);
             Scanner scanner = new Scanner(file);
