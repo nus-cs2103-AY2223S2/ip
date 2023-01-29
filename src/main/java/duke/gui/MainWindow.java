@@ -25,17 +25,17 @@ public class MainWindow extends AnchorPane {
      * Images to be used in GUI.
      * Obtained from https://talesofanswers.tumblr.com/private/78610087338/tumblr_n1y0bhROrr1rsepsd
      */
-    private static final Image lloydNeutralImage = new Image(MainWindow.class
+    private static final Image USER_NEUTRAL_IMAGE = new Image(MainWindow.class
             .getResourceAsStream("../resources/images/Lloyd_Neutral.gif"));
-    private static final Image coletteNeutralImage = new Image(MainWindow.class
+    private static final Image DUKE_NEUTRAL_IMAGE = new Image(MainWindow.class
             .getResourceAsStream("../resources/images/Colette_Neutral.gif"));
-    private static final Image coletteHappyImage = new Image(MainWindow.class
+    private static final Image DUKE_HAPPY_IMAGE = new Image(MainWindow.class
             .getResourceAsStream("../resources/images/Colette_Happy.gif"));
-    private static final Image coletteSurprisedImage = new Image(MainWindow.class
+    private static final Image DUKE_SURPRISED_IMAGE = new Image(MainWindow.class
             .getResourceAsStream("../resources/images/Colette_Surprised.gif"));
-    private static final Image coletteSadImage = new Image(MainWindow.class
+    private static final Image DUKE_SAD_IMAGE = new Image(MainWindow.class
             .getResourceAsStream("../resources/images/Colette_Sad.gif"));
-    private static Image currentColetteImage = MainWindow.coletteNeutralImage;
+    private static Image currentColetteImage = MainWindow.DUKE_NEUTRAL_IMAGE;
 
     /** JavaFX GUI objects */
     @FXML
@@ -66,7 +66,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = this.duke.runCommand(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, MainWindow.lloydNeutralImage),
+                DialogBox.getUserDialog(input, MainWindow.USER_NEUTRAL_IMAGE),
                 DialogBox.getDukeDialog(response, MainWindow.currentColetteImage)
         );
         userInput.clear();
@@ -75,7 +75,6 @@ public class MainWindow extends AnchorPane {
         }
     }
 
-    @FXML
     private void entry() {
         String loadStatus = this.duke.displayLoadStatus();
         dialogContainer.getChildren().addAll(
@@ -97,16 +96,16 @@ public class MainWindow extends AnchorPane {
     public static void changeSpriteExpression(SpriteEmotion emotion) {
         switch (emotion) {
         case NEUTRAL:
-            MainWindow.currentColetteImage = MainWindow.coletteNeutralImage;
+            MainWindow.currentColetteImage = MainWindow.DUKE_NEUTRAL_IMAGE;
             break;
         case HAPPY:
-            MainWindow.currentColetteImage = MainWindow.coletteHappyImage;
+            MainWindow.currentColetteImage = MainWindow.DUKE_HAPPY_IMAGE;
             break;
         case SAD:
-            MainWindow.currentColetteImage = MainWindow.coletteSadImage;
+            MainWindow.currentColetteImage = MainWindow.DUKE_SAD_IMAGE;
             break;
         case SURPRISED:
-            MainWindow.currentColetteImage = MainWindow.coletteSurprisedImage;
+            MainWindow.currentColetteImage = MainWindow.DUKE_SURPRISED_IMAGE;
             break;
         default:
             break;
