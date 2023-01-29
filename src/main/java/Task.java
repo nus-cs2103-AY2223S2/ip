@@ -1,7 +1,7 @@
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class Task {
+public abstract class Task {
     private String description;
     DateFormat readFormat = new SimpleDateFormat( "dd/mm/yyyy hhmm");
     DateFormat writeFormat = new SimpleDateFormat( "E, MMM dd yyyy, h:mm aa");
@@ -22,6 +22,7 @@ public class Task {
     public void unmark() {
         this.isComplete = false;
     }
+    public abstract String save();
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -1,5 +1,9 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+
 public class DataHandler {
     public static boolean createDataFile() throws SundayException{
         try {
@@ -29,9 +33,6 @@ public class DataHandler {
             while (reader.hasNextLine()) {
                 String data = reader.nextLine();
                 String[] strArr = data.split("]");
-                //strArr[0] = "[T" or "[D" or "[E"
-                //strArr[1] = "[" or "[X"
-                //strArr[2] = " \(description)"
 
                 switch (strArr[0].charAt(1)) {
                 case 'T':

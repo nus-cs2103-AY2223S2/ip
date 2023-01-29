@@ -3,6 +3,10 @@ public class ToDo extends Task{
         super(description);
     }
     @Override
+    public String save() {
+        return this.toString();
+    }
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[T]");

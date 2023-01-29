@@ -13,6 +13,15 @@ public class Deadline extends Task{
         }
     }
     @Override
+    public String save() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[D]");
+        sb.append(super.toString()).append(" (by: ");
+        sb.append(super.readFormat.format(this.deadline));
+        sb.append(")");
+        return sb.toString();
+    }
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[D]");
