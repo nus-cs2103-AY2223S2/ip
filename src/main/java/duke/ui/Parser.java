@@ -23,7 +23,7 @@ public class Parser {
         Operation op = Operation.valueOf(command[0].toUpperCase());
 
         if (!op.equals(Operation.LIST) && command.length < 2) {
-            throw new DukeException("No duke.command description given.");
+            throw new DukeException("No command description given.");
         }
 
         switch (op) {

@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.storage.Storage;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -19,8 +20,9 @@ public class AddEventCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task event = tasks.addEvent(description, from, to);
-        ui.formResponse("New event duke.task added: " + event);
+        Task event = new Event(description, from, to);
+        tasks.addTask(event);
+        ui.formResponse("New event task added: " + event);
         storage.save(tasks.getList());
     }
 }

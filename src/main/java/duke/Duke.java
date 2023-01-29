@@ -39,7 +39,7 @@ public class Duke {
             } catch (NumberFormatException e) {
                 ui.showError("Task must be referenced by its index.");
             } catch (IllegalArgumentException e) {
-                ui.showError("Invalid duke.command.");
+                ui.showError("Invalid duke command.");
             } catch (DateTimeParseException e) {
                 ui.showError("Wrong date format given.");
             }

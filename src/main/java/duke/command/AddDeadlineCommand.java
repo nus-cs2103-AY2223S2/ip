@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.storage.Storage;
+import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -18,8 +19,9 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task deadline = tasks.addDeadline(deadlineDescription, by);
-        ui.formResponse("New deadline duke.task added: " + deadline);
+        Task deadline = new Deadline(deadlineDescription, by);
+        tasks.addTask(deadline);
+        ui.formResponse("New deadline task added: " + deadline);
         storage.save(tasks.getList());
     }
 }

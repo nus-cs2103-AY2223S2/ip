@@ -16,23 +16,8 @@ public class TaskList {
         return this.taskList;
     }
 
-    public Task addToDo(String description) {
-        Task todo = new ToDo(description);
-        taskList.add(todo);
-        return todo;
-    }
-
-    public Task addDeadline(String description, LocalDate by) {
-        Task deadline = new Deadline(description, by);
-        taskList.add(deadline);
-        return deadline;
-    }
-
-
-    public Task addEvent(String description, LocalDate from, LocalDate to) {
-        Task event = new Event(description, from, to);
-        taskList.add(event);
-        return event;
+    public void addTask(Task task) {
+        taskList.add(task);
     }
 
     public String listTasks() throws DukeException {
