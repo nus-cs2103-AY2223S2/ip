@@ -11,11 +11,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-    /**
-     * Update the text file whenever a task is added, removed or modified.
-     * 
-     * @param entireList A list in which all tasks are stored
-     */
     public static void updateFile(ArrayList<Task> entireList) throws FileNotFoundException {
         try {
             PrintWriter pw = new PrintWriter(new FileOutputStream("/Users/kristen/Documents/NUS/CS2109S/ip/data/duke.txt"));
@@ -49,12 +44,6 @@ public class Duke {
             i.printStackTrace();
         }
     }
-
-    /**
-     * Loads the text of the file into an array.
-     * 
-     * @param entireList A list in which all tasks are stored
-     */
 
     public static void loadFile(ArrayList<Task> entireList) throws FileNotFoundException {
         try {
