@@ -18,7 +18,7 @@ public class Duke {
   private Ui ui;
 
   /**
-   * A constructor for Duke
+   * Constructor
    * 
    * @param filePath the path to the text file that stores the tasks
    * @return nothing
@@ -30,7 +30,7 @@ public class Duke {
   }
 
   /**
-   * Runs Duke
+   * Runs Duke.
    * 
    * @return nothing
    */
@@ -41,7 +41,7 @@ public class Duke {
   }
 
   /**
-   * Handles the request from user input
+   * Handles the request from user input.
    * 
    * @return nothing
    */
@@ -66,7 +66,7 @@ public class Duke {
   }
 
   /**
-   * Prints whatever the user inputs
+   * Prints whatever the user inputs.
    * 
    * @param input the user input
    * @return nothing
