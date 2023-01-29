@@ -25,8 +25,8 @@ public class Ui {
         // Create adjustable text box
         for (int i = 0; i < maxLen; i++) {
             if (i == maxLen - 1) {
-                opener += "*";
-                ender += "*";
+                opener += "-*";
+                ender += "-*";
             } else {
                 opener += "-";
                 ender += "-";
@@ -34,7 +34,7 @@ public class Ui {
         }
 
         // Change String array to a StringBuilder
-        // Append line separator + append " " space character to each line
+        // Append line separator + space character " " to each line
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < stringArr.length; i++) {
             sb.append(" " + stringArr[i]);
@@ -57,7 +57,7 @@ public class Ui {
     }
 
     public void terminate() {
-        this.formResponse("Bot terminated");
+        this.formResponse("Bot terminated.");
         this.sc.close();
     }
 

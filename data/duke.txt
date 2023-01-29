@@ -1,5 +1,5 @@
 D|1|daddy |2023-01-28
 T|0|complete ip
 E|1|please |2023-01-29|2023-01-30
-T|1|im so tired
-D|0|die |2023-01-29
+T|0|im so tired
+D|1|die |2023-01-29
