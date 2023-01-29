@@ -9,7 +9,7 @@ public class TaskList {
 
     private int taskCount = 0;
     private Storage storage = null;
-    private ArrayList<Tasks> tasks = new ArrayList<>();
+    private ArrayList<Tasks> tasks = new ArrayList<Tasks>();
 
     /**
      * Construct a task list object from the local storage of previous instance.
@@ -37,7 +37,6 @@ public class TaskList {
     //Credits: adapted from CHATGPT
     public void listTasks() {
         int i = 1;
-        System.out.println("Here are the tasks in your list: \n");
         for (Tasks tasks : tasks) {
             System.out.println( i + "." + tasks);
             i++;
@@ -74,6 +73,21 @@ public class TaskList {
         System.out.println("Now you have " + this.taskCount + " tasks in the list.");
         this.storage.saveTasks(this.tasks);
         return returnString;
+    }
+
+    /**
+     * Find the tasks with content same as the input string, and return a new task list containing found tasks.
+     * @param taskContent The content of the task to search for.
+     * @return New TaskList object containing the found tasks
+     */
+    public TaskList findTask(String taskContent) {
+        TaskList foundTasks = new TaskList(new Storage("temp"));
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (this.getTaskContent(i).contains(taskContent)) {
+                foundTasks.addTask(this.tasks.get(i));
+            }
+        }
+        return foundTasks;
     }
 
     /**

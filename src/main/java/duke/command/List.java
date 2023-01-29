@@ -11,6 +11,7 @@ public class List extends Commands{
     }
     @Override
     public void execute(TaskList tasks) {
+        System.out.println("Here are the tasks in your list: \n");
         tasks.listTasks();
     }
 }

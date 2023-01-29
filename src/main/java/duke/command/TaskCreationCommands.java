@@ -4,9 +4,9 @@ import duke.task.*;
 /**
  * Executes the task creation commands stored in the command queue, by parsing the user input.
  */
-public class ExecuteCommandQueue extends Commands {
+public class TaskCreationCommands extends Commands {
 
-    public ExecuteCommandQueue(String str) {
+    public TaskCreationCommands(String str) {
         this.setCommandStorage(str);
     }
 

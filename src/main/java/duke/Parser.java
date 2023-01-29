@@ -29,12 +29,14 @@ public class Parser {
                     queue.add(new Unmark(input));
                 } else if (input.matches("delete+ [0-9]+")) {
                     queue.add(new Delete(input));
+                } else if (input.matches("find\\s.*$")){
+                    queue.add(new Find(input));
                 } else if (input.matches("^deadline\\s.*$") || input.matches("^event\\s.*$") || input.matches("^todo\\s.*$")) {
                     if (input.split(" ").length < 2) {
                         throw new InsufficientAruments("OOPS!!! The description of a " +
                                 input.split(" ")[0] + " cannot be empty.");
                     } else {
-                        queue.add(new ExecuteCommandQueue(input)); //if the command is a valid task creation command
+                        queue.add(new TaskCreationCommands(input)); //if the command is a valid task creation command
                     }
                 } else {
                     throw new UnknownCommand("OOPS!!! I'm sorry, but I don't know what that means :-(");
