@@ -62,7 +62,7 @@ public class TaskList {
     public String formatTasks(String formatSpace) {
         String  res = "";
         for (int i = 0; i < taskCount; i++){
-                res +=  formatSpace + i + ". " + tasks.get(i).getRepresentation() + "\n";
+                res +=  formatSpace + (i+1) + ". " + tasks.get(i).getRepresentation() + "\n";
         }
         return res;
     }
