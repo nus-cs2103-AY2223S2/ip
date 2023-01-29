@@ -25,14 +25,14 @@ public class Parser {
             HashMap<String, String> parsed = new HashMap<>();
             for (String word : chat.split(" ")) {
                 if (waitingForKeyword < keywords.size() && word.equals(keywords.get(waitingForKeyword))) {
-                    parsed.put(currentKey, currentValue);
+                    parsed.put(currentKey, currentValue.trim());
                     currentKey = keywords.get(waitingForKeyword++);
                     currentValue = "";
                 } else {
                     currentValue += word + " ";
                 }
             }
-            parsed.put(currentKey, currentValue);
+            parsed.put(currentKey, currentValue.trim());
             return parsed;
         };
     }
