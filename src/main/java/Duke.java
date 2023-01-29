@@ -24,7 +24,7 @@ public class Duke {
 
     public static ArrayList<Task> list;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println(ENTRY);
         Scanner sc = new Scanner(System.in);
         list = new ArrayList<Task>();
