@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 public class Task {
-    public String title;
+    private String title;
     private Boolean isDone;
 
     public Task(String title) {
