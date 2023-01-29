@@ -30,8 +30,6 @@ public class Duke {
 
 	/**
 	 * Runs Duke.
-	 * 
-	 * @return nothing
 	 */
 	public void run() {
 		this.ui.showWelcome();
@@ -41,8 +39,6 @@ public class Duke {
 
 	/**
 	 * Handles the request from user input.
-	 * 
-	 * @return nothing
 	 */
 	public void handleRequest() {
 		while (true) {
@@ -68,7 +64,6 @@ public class Duke {
 	 * Prints whatever the user inputs.
 	 * 
 	 * @param input the user input
-	 * @return nothing
 	 */
 	public void echo(String input) {
 		ui.showMessage(input);
@@ -78,7 +73,6 @@ public class Duke {
 	 * This is the main method which makes use of run method.
 	 * 
 	 * @param args Unused.
-	 * @return Nothing.
 	 */
 	public static void main(String[] args) {
 		new Duke("data/duke.txt").run();
