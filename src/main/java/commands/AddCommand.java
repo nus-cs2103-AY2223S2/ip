@@ -54,6 +54,11 @@ public class AddCommand extends Command {
 				if (by == null) {
 					return false;
 				}
+				if (by.isBefore(LocalDateTime.now())) {
+					errorMessage = "Oops! BY datetime must be after the current datetime";
+					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
+					return false;
+				}
 				task = new Deadline(parser.trimDate(description), by);
 				break;
 
@@ -69,6 +74,16 @@ public class AddCommand extends Command {
 				}
 				if (fromTo[1] == null) {
 					errorMessage += "must include a TO datetime.";
+					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
+					return false;
+				}
+				if (fromTo[0].isBefore(LocalDateTime.now())) {
+					errorMessage = "Oops! FROM datetime must be after the current datetime";
+					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
+					return false;
+				}
+				if (fromTo[0].isAfter(fromTo[1])) {
+					errorMessage = "Oops! FROM datetime should be later than TO date/time.";
 					ui.sendResponse(dialogContainer, storage, ui.createLabel(errorMessage));
 					return false;
 				}
