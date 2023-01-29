@@ -12,6 +12,7 @@ import java.nio.file.Path;
 public class ToDoList {
     private ArrayList<Task> arr = new ArrayList<>(); //1-based index
     private int toDoCount;
+
     public ToDoList() {
         arr.add(new ToDoTask("0index")); //1-based index
         this.toDoCount = 0;

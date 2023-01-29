@@ -15,8 +15,6 @@ abstract public class Task {
         this.isDone = false;
     }
 
-    abstract public String save();
-
     @Override
     public String toString() {
         String status = this.isDone ? "[x] " : "[ ] ";

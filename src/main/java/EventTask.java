@@ -1,10 +1,29 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class EventTask extends Task {
-    String from;
-    String to;
+    private String from;
+    private String to;
+    private LocalDate fromDate;
+    private LocalDate toDate;
+
     public EventTask(String title, String from, String to) {
         super(title);
-        this.from = from;
-        this.to = to;
+        this.from = formatIfDate(from, fromDate);
+        this.to = formatIfDate(to, toDate);
+    }
+
+    private String formatIfDate(String input, LocalDate date) {
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/uuuu");
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd LLL uuuu");
+        try {
+            LocalDate output = LocalDate.parse(input, inputFormat);
+            date =  output;
+            return output.format(outputFormat);
+        } catch (DateTimeParseException e) {
+            return input;
+        }
     }
 
     public String save() {
