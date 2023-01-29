@@ -1,7 +1,10 @@
 package james;
 
-import james.task.*;
-
+import james.task.TaskList;
+import james.task.Task;
+import james.task.ToDo;
+import james.task.Deadline;
+import james.task.Event;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

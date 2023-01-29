@@ -18,10 +18,12 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     private String parseTask(String input) {
+
         return input.split(" ", 2)[1];
     }
 
     private String parseDescription(String input) {
+
         return parseTask(input).split(" /by ")[0];
     }
 

@@ -7,6 +7,7 @@ public class AddMarkCommand extends Command {
     private int taskNumber;
 
     public AddMarkCommand(int taskNumber) {
+
         this.taskNumber = taskNumber;
     }
 
