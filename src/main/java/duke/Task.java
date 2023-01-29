@@ -11,7 +11,6 @@ public abstract class Task {
 
     /**
      * Constructs a task with the given description.
-     * 
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -21,7 +20,6 @@ public abstract class Task {
 
     /**
      * Constructs a task with the given description and isDone.
-     * 
      * @param description Description of the deadline task.
      * @param isDone      Whether the deadline task is done.
      */

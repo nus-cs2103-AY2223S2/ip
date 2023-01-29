@@ -1,7 +1,7 @@
 package duke;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * This class is a event task. It contains
@@ -15,7 +15,6 @@ public class Event extends Task {
 
     /**
      * Constructs an event with the given description, from and to.
-     * 
      * @param description Description of the deadline task.
      * @param from        The time the event task starts.
      * @param to          The time the event task ends.
@@ -28,7 +27,6 @@ public class Event extends Task {
 
     /**
      * Constructs an event with the given description, isDone, from and to.
-     * 
      * @param description Description of the deadline task.
      * @param isDone      Whether the deadline task is done.
      * @param from        The time the event task starts.
@@ -40,6 +38,7 @@ public class Event extends Task {
         this.to = to;
     }
 
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: "
                 + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))

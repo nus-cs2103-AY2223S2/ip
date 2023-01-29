@@ -8,14 +8,14 @@ public class Parser {
     /**
      * Parses the input string and calls the correct
      * execution method.
-     * 
      * @param userInput User Input.
      * @param taskList  TaskList.
      * @param storage   Storage.
      * @param textUi    TextUi.
      */
-    public void parse(String userInput, TaskList taskList
-            , Storage storage, TextUi textUi) throws DukeException {
+    public void parse(
+            String userInput, TaskList taskList, Storage storage, TextUi textUi)
+            throws DukeException {
 
         String command;
         String body;
@@ -29,32 +29,32 @@ public class Parser {
         }
 
         switch (command) {
-            case "list":
-                Commands.executeListCommand(textUi, taskList);
-                break;
-            case "mark":
-                Commands.executeMarkCommand(body, textUi, taskList, storage);
-                break;
-            case "unmark":
-                Commands.executeUnmarkCommand(body, textUi, taskList, storage);
-                break;
-            case "delete":
-                Commands.executeDeleteCommand(body, textUi, taskList, storage);
-                break;
-            case "todo":
-                Commands.executeToDoCommand(body, textUi, taskList, storage);
-                break;
-            case "deadline":
-                Commands.executeDeadlineCommand(body, textUi, taskList, storage);
-                break;
-            case "event":
-                Commands.executeEventCommand(body, textUi, taskList, storage);
-                break;
-            case "find":
-                Commands.executeFindCommand(body, textUi, taskList);
-                break;
-            default:
-                throw new DukeException("I'm sorry, I don't know what that means!");
+        case "list":
+            Commands.executeListCommand(textUi, taskList);
+            break;
+        case "mark":
+            Commands.executeMarkCommand(body, textUi, taskList, storage);
+            break;
+        case "unmark":
+            Commands.executeUnmarkCommand(body, textUi, taskList, storage);
+            break;
+        case "delete":
+            Commands.executeDeleteCommand(body, textUi, taskList, storage);
+            break;
+        case "todo":
+            Commands.executeToDoCommand(body, textUi, taskList, storage);
+            break;
+        case "deadline":
+            Commands.executeDeadlineCommand(body, textUi, taskList, storage);
+            break;
+        case "event":
+            Commands.executeEventCommand(body, textUi, taskList, storage);
+            break;
+        case "find":
+            Commands.executeFindCommand(body, textUi, taskList);
+            break;
+        default:
+            throw new DukeException("I'm sorry, I don't know what that means!");
         }
     }
 

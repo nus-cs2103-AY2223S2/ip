@@ -22,7 +22,6 @@ public class Storage {
 
     /**
      * Loads and parses saved content into a TaskList.
-     * 
      * @return TaskList of user.
      */
     public TaskList readSavedFile() {
@@ -52,7 +51,6 @@ public class Storage {
 
     /**
      * Takes in a String and returns a Task.
-     * 
      * @param string List of tasks in use by the app.
      * @return Task.
      */
@@ -67,6 +65,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasklist to file.
+     * @param taskList Lists of tasks in use by the app.
+     *
+     */
     public void saveTaskListToStorage(TaskList taskList) {
         try {
             FileWriter myWriter = new FileWriter(file); // this truncates the duke.txt to size 0
