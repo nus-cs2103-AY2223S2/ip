@@ -1,9 +1,11 @@
+package duke;
+
 import java.io.IOException;
 
 class Joe {
     private Storage storage;
     private TaskList taskList;
-    private TaskParser parser;
+    private Parser parser;
 
     public Joe() {
         try {
@@ -13,7 +15,7 @@ class Joe {
             System.out.println(e.getMessage());
             taskList = new TaskList();
         }
-        parser = new TaskParser(taskList);
+        parser = new Parser(taskList);
     }
     String handleResponse(String input) {
         String out = parser.parse(input);;

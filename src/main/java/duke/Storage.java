@@ -1,8 +1,8 @@
+package duke;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Scanner;
@@ -22,7 +22,7 @@ class Storage {
 
     TaskList load() throws IOException, DukeException {
         TaskList tl = new TaskList();
-        TaskParser tp = new TaskParser(tl);
+        Parser tp = new Parser(tl);
         String[] task;
         Scanner sc = new Scanner(new FileReader(fileName));
         while (sc.hasNextLine()) {
