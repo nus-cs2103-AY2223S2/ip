@@ -3,7 +3,6 @@ import components.Deadline;
 import components.Event;
 import components.Task;
 import components.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -69,9 +68,9 @@ public class Storage {
 
     public void check_add(String line, Task t) {
         if (line.charAt(1) == '0') {
-            t.done = 0;
+            t.uncomplete();
         } else {
-            t.done = 1;
+            t.complete();
         }
         taskList.add(t);
     }
@@ -82,8 +81,8 @@ public class Storage {
     public void saveList() {
         try {
             FileWriter fw = new FileWriter("src/main/data/task_list.txt");
-            for (Task tk : taskList.task_list) {
-                fw.write(tk.getInfo().toString()+"\n");
+            for (Task tk : taskList.get_list()) {
+                fw.write(tk.getInfo()+"\n");
             }
             fw.close();
         } catch (IOException e) {

@@ -1,6 +1,5 @@
 package runner;
 import components.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,15 +16,17 @@ public class TaskList {
         this.task_list = new ArrayList<>();
     }
 
-
     /**
      * Return a task specified by the index.
      * @param n Index of the task.
      */
-    public Task get(int n) {
+    public Task get_task(int n) {
         return task_list.get(n);
     }
 
+    public List<Task> get_list() {
+        return this.task_list;
+    }
 
     /**
      * Return the size of a TaskList.

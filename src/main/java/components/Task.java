@@ -4,7 +4,7 @@ package components;
  * Class for Task object encapsulate commonalities in subclasses.
  */
 public class Task {
-    public int done;
+    private int done;
     public String msg;
 
     /**
@@ -16,10 +16,18 @@ public class Task {
         this.done = 0;
     }
 
+    public void complete() {
+        this.done = 1;
+    }
+
+    public void uncomplete() {
+        this.done = 0;
+    }
+
     /**
      * Store the information of the task into one line.
      */
-    public StringBuffer getInfo() {
+    public String getInfo() {
         StringBuffer sb = new StringBuffer("");
         if (this instanceof Todo) {
             sb.append('T');
@@ -46,7 +54,7 @@ public class Task {
             }
             sb.append(this.msg + " /from " + ((Event) this).from + " /to " + ((Event) this).to);
         }
-        return sb;
+        return sb.toString();
     }
 
     @Override
