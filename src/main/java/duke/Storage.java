@@ -11,10 +11,19 @@ public class Storage {
     private ArrayList<Task> init;
     private String filePath;
 
+    /**
+     * Parameterized constructor to create a Storage object
+     * @param filePath the path of the file to be read from and written to
+     */
     public Storage(String filePath) {
         this.init = new ArrayList<>();
         this.filePath = filePath;
     }
+
+    /**
+     * Stores the list of tasks into a specified file
+     * @param taskList the TaskList to be stored into the file
+     */
     public void store(TaskList taskList) {
         try {
             File f = new File(filePath);
@@ -30,6 +39,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses file input
+     * @param s the String containing a single line from the file
+     */
     private void parse(String s) {
         String[] arr = s.split("/");
         char eventType = arr[0].charAt(0);
@@ -50,6 +63,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a list of previously saved tasks from the file
+     * @return a list containing the saved tasks
+     * @throws DukeException if the file contains no tasks
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File f = new File(filePath);
@@ -59,10 +77,10 @@ public class Storage {
                 parse(s);
             }
             sc.close();
-//
-//            if (init.isEmpty()) {
-//                throw new DukeException("No saved tasks to load");
-//            }
+
+            if (init.isEmpty()) {
+                throw new DukeException("No saved tasks to load");
+            }
 
             return init;
         } catch (FileNotFoundException e) {
