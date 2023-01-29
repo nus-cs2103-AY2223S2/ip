@@ -1,3 +1,5 @@
+package tasks;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -5,12 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.regex.Pattern;
+import exception.DukeException;
 
 public class TaskList extends ArrayList<Task>{
     private static String tasksFile = new File("data/duke.txt").getAbsolutePath();
     private static Path tfPath = Paths.get(tasksFile);
-    public TaskList(){
+    public TaskList() throws DukeException {
         super();
         File f = new File(tasksFile);
         //if file exists
@@ -52,7 +54,7 @@ public class TaskList extends ArrayList<Task>{
                     }
                 }
             } catch(IOException e){
-                System.out.println(e.getMessage());
+                throw new DukeException("Failed to load tasks from storage");
             }
         }
     }

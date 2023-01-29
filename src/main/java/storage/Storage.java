@@ -1,3 +1,7 @@
+package storage;
+
+import tasks.Task;
+import tasks.TaskList;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
@@ -8,12 +12,12 @@ import java.util.List;
 import java.util.ArrayList;
 import java.nio.charset.StandardCharsets;
 
-public class Harddrive {
+public class Storage {
     private String dataFolder = new File("data").getAbsolutePath();
     private String tasksFile = new File("data/duke.txt").getAbsolutePath();
     private Path tfPath = Paths.get(tasksFile);
     private ArrayList<String> stringTaskList = new ArrayList<String>();
-    public Harddrive(){
+    public Storage(){
         //if data folder does not exist
         File f = new File(dataFolder);
         if (!f.exists()){

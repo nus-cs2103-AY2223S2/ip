@@ -1,3 +1,5 @@
+package tasks;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -20,7 +22,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return (this.isDone ? "[X]" : "[ ]") + this.description;
+        return (this.isDone ? "[X] " : "[ ] ") + this.description;
     }
 
     private String getMark() {
