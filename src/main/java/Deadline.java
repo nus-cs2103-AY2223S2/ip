@@ -1,14 +1,19 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    private String by;
+    private LocalDateTime dueDate;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, d LLL uuuu, hh:mm a");
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime dueDate) {
         super(description);
-        this.by = by;
+        this.dueDate = dueDate;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() +
+                " (by: " + this.dueDate.format(formatter) + ")";
     }
 }

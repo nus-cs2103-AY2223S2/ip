@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -42,6 +45,16 @@ public class Duke {
                 + "\nNow you have " + nTasks + " task(s) in the list.");
     }
 
+    private static LocalDateTime parseDateTime(String dateTime) throws DukeException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+        try {
+            return LocalDateTime.parse(dateTime, formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidArgumentException("Please enter a valid datetime: dd-MM-yyyy HH:mm");
+        }
+    }
+
     private static void addDeadline(String userCommand) throws DukeException {
 
         String[] userCommandParts = userCommand.split(" /by", 2);
@@ -60,7 +73,7 @@ public class Duke {
             throw new DukeInvalidArgumentException("Please provide due date after `/by` parameter");
         }
 
-        String dueDate = userCommandParts[1].trim();
+        LocalDateTime dueDate = parseDateTime(userCommandParts[1].trim()) ;
         Deadline deadline = new Deadline(description, dueDate);
         TASK_LIST.add(deadline);
         nTasks++;
@@ -93,8 +106,12 @@ public class Duke {
             throw new DukeInvalidArgumentException("Please provide end date/time after `/to` parameter");
         }
 
-        String startDateTime = timeParts[0].trim();
-        String endDateTime = timeParts[1].trim();
+        LocalDateTime startDateTime = parseDateTime(timeParts[0].trim());
+        LocalDateTime endDateTime = parseDateTime(timeParts[1].trim());
+
+        if (!endDateTime.isAfter(startDateTime)) {
+            throw new DukeInvalidArgumentException("The end date/time should be after the start date/time");
+        }
 
         Event event = new Event(description, startDateTime, endDateTime);
         TASK_LIST.add(event);
