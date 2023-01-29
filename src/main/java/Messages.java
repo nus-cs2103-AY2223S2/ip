@@ -1,19 +1,21 @@
 public class Messages {
 
-    final static String MESSAGE_END= "Goodbye";
-    final static String MESSAGE_TERMINATE = "bye";
-    final static String MESSAGE_LIST = "list";
+    final static String MESSAGE_END= "GOODBYE";
+    final static String MESSAGE_LIST = "LIST";
 
-    final static String MESSAGE_MARK = "mark";
+    final static String MESSAGE_MARK = "MARK";
 
-    final static String MESSAGE_UNMARK = "unmark";
+    final static String MESSAGE_UNMARK = "UNMARK";
 
-    final static String MESSAGE_TODO = "todo";
-    final static String MESSAGE_DEADLINE = "deadline";
+    final static String MESSAGE_TODO = "TODO";
+    final static String MESSAGE_DEADLINE = "DEADLINE";
 
-    final static String MESSAGE_EVENT = "event";
+    final static String MESSAGE_EVENT = "EVENT";
 
-    final static String MESSAGE_DELETE = "delete";
+    final static String MESSAGE_DELETE = "DELETE";
 
+    final static String MESSAGE_DELETE_ALL_DATA = "DELETEALL";
 
+    final static String SAVE_LOCATION = "data/save.txt";
+    final static String SAVE_DIRECTORY = "data";
 }

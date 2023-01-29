@@ -1,9 +1,12 @@
-import Tasks.Deadline;
-import Tasks.Events;
+import Tasks.DeadlineTask;
+import Tasks.EventTask;
 import Tasks.Task;
-import Tasks.Todo;
+import Tasks.TodoTask;
 
-import java.rmi.UnexpectedException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.function.BiPredicate;
 
@@ -13,6 +16,9 @@ public class Chatbot {
     public static final Map<String, BiPredicate<Chatbot, String>> commands = new HashMap<String, BiPredicate<Chatbot, String>>();
 
     private boolean isChatbotActive = true;
+
+    private File savefile;
+
     static{
         commands.put(Messages.MESSAGE_END, (chatbot, args) -> {
             System.out.println(Messages.MESSAGE_END);
@@ -85,7 +91,7 @@ public class Chatbot {
                 System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                 return true;
             }
-            Todo toAdd = new Todo(args.trim());
+            TodoTask toAdd = new TodoTask(args.trim());
             chatbot.addTask(toAdd);
             return true;
         });
@@ -104,7 +110,7 @@ public class Chatbot {
             }
 
 
-            Deadline toAdd = new Deadline(inputs[0].trim(), inputs[1].trim());
+            DeadlineTask toAdd = new DeadlineTask(inputs[0].trim(), inputs[1].trim());
             chatbot.addTask(toAdd);
             return true;
         });
@@ -122,7 +128,7 @@ public class Chatbot {
             }
 
 
-            Events toAdd = new Events(inputs[0].trim(), inputs[1].trim(), inputs[2].trim());
+            EventTask toAdd = new EventTask(inputs[0].trim(), inputs[1].trim(), inputs[2].trim());
             chatbot.addTask(toAdd);
             return true;
         });
@@ -144,10 +150,27 @@ public class Chatbot {
             return true;
         });
 
+        commands.put(Messages.MESSAGE_DELETE_ALL_DATA, (chatbot, args) -> {
+            for(int i = 0 ; i < chatbot.tasks.size() ; i++) {
+                chatbot.removeTask(0);
+            }
+            System.out.println("Deletion complete!");
+            return true;
+        });
 
     }
 
-
+    public static Chatbot loadFromData(File saveFile) throws FileNotFoundException {
+        Scanner fileReader = new Scanner(saveFile);
+        Chatbot result = new Chatbot();
+        while(fileReader.hasNextLine()) {
+            String data = fileReader.nextLine();
+            result.loadData(data);
+        }
+        result.savefile = saveFile;
+        fileReader.close();
+        return result;
+    }
 
     public void readInput(){
         Scanner input = new Scanner(System.in);
@@ -160,10 +183,11 @@ public class Chatbot {
     public void processInput(String nextLine){
         //Assuming commands start with a space.
         String[] userCommand = nextLine.split(" ", 2);
-        if (commands.containsKey(userCommand[0])) {
-            boolean processedCommandState = commands.get(userCommand[0]).test(this, userCommand.length > 1 ? userCommand[1] : "");
+        String upperCaseUserCommand = userCommand[0].toUpperCase();
+        if (commands.containsKey(upperCaseUserCommand)) {
+            boolean processedCommandState = commands.get(upperCaseUserCommand).test(this, userCommand.length > 1 ? userCommand[1] : "");
             if (!processedCommandState) {
-                //isChatbotActive = false;
+                isChatbotActive = false;
                 throw new RuntimeException();
             }
         } else {
@@ -183,6 +207,7 @@ public class Chatbot {
     public void onEditTask(Task change){
         System.out.println("\t" + change);
         System.out.println("Now you have " + tasks.size() + " tasks in the list");
+        saveData();
     }
 
     public void removeTask(int toRemove){
@@ -216,5 +241,53 @@ public class Chatbot {
         tasks.get(index).toggleState();
 
     }
+
+    private void saveData() {
+        if(savefile == null) {
+            return;
+        }
+
+        try {
+            FileWriter writerObj = new FileWriter(savefile.getPath(), false);
+            writerObj.write(toSaveData());
+            writerObj.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+    }
+
+    public String toSaveData() {
+        String output = new String();
+        for(Task nextTask : tasks) {
+            output += nextTask.toSaveData();
+            output += "\n";
+        }
+        return output;
+    }
+
+    public void loadData(String data) throws IllegalArgumentException {
+        if(data.length() == 0) {
+            return;
+        }
+        Task todo;
+        switch(data.charAt(0)) {
+            case 'T':
+                todo = TodoTask.loadData(data);
+                break;
+            case 'D':
+                todo = DeadlineTask.loadData(data);
+                break;
+            case 'E':
+                todo = EventTask.loadData(data);
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+
+        tasks.add(todo);
+    }
+
+
 
 }

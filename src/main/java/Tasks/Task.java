@@ -3,17 +3,14 @@ package Tasks;
 public abstract class Task {
 
     private boolean completionStatus;
-    private String taskName;
+    protected String taskName;
 
 
     public Task(String taskName) {
-        this(taskName,false);
-    }
-
-    public Task(String taskName, boolean state){
-        this.completionStatus = state;
+        this.completionStatus = false;
         this.taskName = taskName;
     }
+
     public void toggleState(){
         completionStatus = !completionStatus;
     }
@@ -21,6 +18,13 @@ public abstract class Task {
     public boolean getCompletionStatus(){
         return completionStatus;
     }
+
+    public void loadCompletionStatus(String inp) {
+        completionStatus = (inp == "1");
+    }
+
+    public abstract String toSaveData();
+
 
     @Override
     public String toString(){

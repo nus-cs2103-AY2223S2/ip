@@ -1,5 +1,5 @@
 @ECHO OFF
-
+del /s /q data
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
 
