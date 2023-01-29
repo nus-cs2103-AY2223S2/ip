@@ -169,7 +169,7 @@ public class TaskList {
         //System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < listDataBase.size(); i++) {
             Task task = listDataBase.get(i);
-            if(task.find(word)) {
+            if (task.find(word)) {
                 result += count;
                 result += '.';
                 result += task.toString();

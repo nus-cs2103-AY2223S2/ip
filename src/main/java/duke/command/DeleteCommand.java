@@ -1,14 +1,14 @@
 package duke.command;
 
-import duke.Ui.Ui;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * DeleteCommand class that handles the actions of the delete command
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     protected int taskNumber;
 
     /**
@@ -28,7 +28,7 @@ public class DeleteCommand extends Command{
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-            return tasks.delete(taskNumber);
+        return tasks.delete(taskNumber);
 
     }
     /**

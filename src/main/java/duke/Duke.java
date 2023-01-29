@@ -1,11 +1,12 @@
 package duke;
 
-import duke.Ui.Ui;
+
+import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.*;
-import duke.command.*;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Main Duke class which keep track a list of tasks
@@ -38,16 +39,16 @@ public class Duke {
      * Main Program that reads the commands and processes them onto DUKE
      */
     public String run(String input) {
-            try {
-                String fullCommand = input;
-                //ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                return c.execute(tasks, ui, storage);
-            } catch (DukeException e) {
-               return ui.showError(e.getMessage());
-            } finally {
-                //ui.showLine();
-            }
+        try {
+            String fullCommand = input;
+            //ui.showLine(); // show the divider line ("_______")
+            Command c = Parser.parse(fullCommand);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        } finally {
+            //ui.showLine();
+        }
 
     }
     /**

@@ -1,14 +1,14 @@
 package duke.command;
 
-import duke.Ui.Ui;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * AddCommand class that encompasses the todo, deadline, event commands
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     protected String fullCommand;
     protected String[] s;
 
@@ -31,7 +31,7 @@ public class AddCommand extends Command{
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (s[0].equals("todo")){
+        if (s[0].equals("todo")) {
             return tasks.todo(s);
         } else if (s[0].equals("deadline")) {
             return tasks.deadline(s);

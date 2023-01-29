@@ -1,8 +1,8 @@
-package duke.Ui;
+package duke.ui;
 
 import duke.exception.DukeException;
-import duke.task.TaskList;
 import duke.Duke;
+import duke.task.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,11 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
-public class Ui  extends Application {
+
+public class Ui extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -25,6 +26,10 @@ public class Ui  extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
     private Duke dukeList;
+
+    public Ui() {
+
+    }
     @Override
     public void start(Stage stage) {
         stage.setScene(scene); // Setting the stage to show our screen
@@ -42,7 +47,6 @@ public class Ui  extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-
         stage.setScene(scene);
         stage.show();
 
@@ -122,13 +126,8 @@ public class Ui  extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
+
         return dukeList.run(input);
-    }
-
-
-
-    public Ui() {
-
     }
 
 

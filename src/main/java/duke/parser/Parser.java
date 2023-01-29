@@ -1,8 +1,10 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.exception.DukeException;
@@ -23,8 +25,8 @@ public class Parser {
         } else if (command.equals(ActionP.unmark.name()) || command.equals(ActionP.mark.name())) {
             int taskNumber = Integer.parseInt(s[1]);
             return new MarkCommand(fullCommand, command, taskNumber);
-        } else if (command.equals(ActionP.todo.name()) || command.equals(ActionP.deadline.name()) ||
-                command.equals(ActionP.event.name())) {
+        } else if (command.equals(ActionP.todo.name()) || command.equals(ActionP.deadline.name())
+                || command.equals(ActionP.event.name())) {
             return new AddCommand(fullCommand, s);
         } else if (command.equals(ActionP.delete.name())) {
             int taskNumberDelete = Integer.parseInt(s[1]);

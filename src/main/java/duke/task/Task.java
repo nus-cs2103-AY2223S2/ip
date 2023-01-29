@@ -42,7 +42,7 @@ public class Task {
     }
 
     public boolean find(String word) {
-        if(word.equals(this.description)) {
+        if (word.equals(this.description)) {
             return true;
         }
         return false;
