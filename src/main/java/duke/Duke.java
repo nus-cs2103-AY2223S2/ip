@@ -27,8 +27,9 @@ public class Duke {
         this.tasks = new TaskList(storage.load());
     }
 
-
-
+    /**
+     * Activates the bot.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
