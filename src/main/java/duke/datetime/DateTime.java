@@ -12,10 +12,10 @@ import java.time.format.FormatStyle;
 public class DateTime {
 
     /** date of the instance */
-    private LocalDate date;
+    private final LocalDate date;
 
     /** time of the instance */
-    private LocalTime time;
+    private final LocalTime time;
 
     /**
      * An instance of date and time.

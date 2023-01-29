@@ -8,14 +8,16 @@ import duke.command.Parser;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.MainWindow;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
- * Duke command line tool that helps to track tasks.
+ * Graphical user interface app for Duke.
  */
-public class Duke {
-    /** Whether the duke is running or has been commanded to stop running */
-    private boolean isRunning;
+public class Duke extends Application {
 
     /** Storage to load and save tasks on disk */
     private final Storage storage;
@@ -23,8 +25,11 @@ public class Duke {
     /** Task list to store tasks in memory */
     private final TaskList tasks;
 
-    /** Ui to handle user interface */
-    private final Ui ui;
+    /** Graphical user interface stage */
+    private Stage stage;
+
+    /** Graphical user interface main window controller */
+    private MainWindow controller;
 
     /**
      * Constructs a duke.
@@ -32,50 +37,50 @@ public class Duke {
     public Duke() {
         storage = new Storage("./data/tasks.txt");
         tasks = new TaskList();
-        ui = new Ui();
-        isRunning = false;
-        ui.printGreeting();
+    }
+
+    /**
+     * Starts the app.
+     *
+     * @param stage the primary stage for this application,
+     *      onto which the application scene can be set.
+     *      Applications may create other stages, if needed,
+     *      but they will not be primary stages.
+     */
+    @Override
+    public void start(Stage stage) {
+        this.stage = stage;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            stage.setScene(new Scene(fxmlLoader.load()));
+            controller = fxmlLoader.getController();
+            controller.setDuke(this);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        controller.showGreeting();
         try {
             tasks.load(storage.getScanner());
         } catch (FileNotFoundException e) {
-            ui.printStorageLoadFailure();
+            controller.showStorageLoadFailure();
+        } catch (IOException e) {
+            controller.showStorageCorrupted(e.getMessage());
         }
+        controller.showPrompt();
     }
 
     /**
-     * Entry point to start and run duke.
+     * Handles user input.
      *
-     * @param args Command line arguments.
+     * @param input User input.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
-    /**
-     * Runs the duke.
-     */
-    public void run() {
-        isRunning = true;
-        ui.printPrompt();
-        while (isRunning) {
-            try {
-                execute(Parser.parse(ui.readCommand()));
-            } catch (IllegalArgumentException e) {
-                ui.printBadCommandMessage(e.getMessage());
-            }
+    public void handleUserInput(String input) {
+        try {
+            execute(Parser.parse(input));
+        } catch (IllegalArgumentException e) {
+            controller.showBadCommandMessage(e.getMessage());
         }
-        exit();
-    }
-
-    /**
-     * Echos the given input.
-     *
-     * @param input Input.
-     * @return Echoed input.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 
     /**
@@ -88,28 +93,28 @@ public class Duke {
         case NO_OP:
             break;
         case BYE:
-            isRunning = false;
+            exit();
             break;
         case TODO:
             // FallThrough
         case DEADLINE:
             // FallThrough
         case EVENT:
-            ui.printAddTaskSuccessMessage(tasks.execute(command));
+            controller.showAddTaskSuccessMessage(tasks.execute(command));
             break;
         case LIST:
-            ui.printAllTasks(tasks);
+            controller.showAllTasks(tasks);
             break;
         case FIND:
-            ui.printTasksWithKeyword(tasks,
-                    command.getArgumentValue(Command.Argument.FIND));
+            controller.showTasksWithKeyword(tasks.findAll(
+                    command.getArgumentValue(Command.Argument.FIND)));
             break;
         case MARK:
             Task task = tasks.execute(command);
-            ui.printMarkTaskSuccessMessage(task);
+            controller.showMarkTaskSuccessMessage(task);
             break;
         case DELETE:
-            ui.printDeleteTaskSuccessMessage(tasks.execute(command));
+            controller.showDeleteTaskSuccessMessage(tasks.execute(command));
             break;
         default:
             // Do nothing
@@ -124,9 +129,9 @@ public class Duke {
         try {
             tasks.save(storage.getFileWriter());
         } catch (IOException e) {
-            ui.printStorageSaveFailure();
+            controller.showStorageSaveFailure();
         }
-        ui.printFareWell();
-        ui.close();
+        controller.showFarewellMessage();
+        stage.close();
     }
 }

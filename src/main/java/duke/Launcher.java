@@ -13,6 +13,6 @@ public class Launcher {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        Application.launch(DukeApp.class, args);
+        Application.launch(Duke.class, args);
     }
 }
