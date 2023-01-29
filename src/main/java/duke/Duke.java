@@ -12,6 +12,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
+ *
+ * @author dfordarius
+ */
+
 public class Duke {
     private Storage storage;
     private Ui ui;
@@ -55,6 +61,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method of Duke.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         String filepath = System.getProperty("user.home") + "/data/data.txt";
         File file = new File(filepath);
