@@ -1,3 +1,7 @@
+package Duke.Chatbot;
+
+import Duke.Exceptions.DukeException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,4 +1,8 @@
-import Tasks.Task;
+package Duke.Chatbot;
+
+import Duke.Exceptions.DukeException;
+import Duke.Exceptions.UnimplementedTaskTypeException;
+import Duke.Tasks.Task;
 
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;

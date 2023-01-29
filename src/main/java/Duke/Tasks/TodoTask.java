@@ -1,14 +1,11 @@
-package Tasks;
+package Duke.Tasks;
 
-public class TodoTask extends Task{
+public class TodoTask extends Task {
 
-    public TodoTask(String taskName){
+    public TodoTask(String taskName) {
         super(taskName);
     }
-    @Override
-    public String toString(){
-        return "[T]" + super.toString();
-    }
+
     public static Task loadData(String input) {
         String[] inputEvent = input.split("\\|", 3);
 
@@ -22,6 +19,11 @@ public class TodoTask extends Task{
     public String toSaveData() {
         return "T|" + (getCompletionStatus() ? "1" : "0") +
                 "|" + taskName;
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
     }
 
 }

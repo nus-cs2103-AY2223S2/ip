@@ -1,3 +1,5 @@
+package Duke.Chatbot;
+
 public class Messages {
 
     final static String MESSAGE_END = "GOODBYE";

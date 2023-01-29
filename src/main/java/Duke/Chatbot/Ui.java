@@ -1,3 +1,5 @@
+package Duke.Chatbot;
+
 public class Ui {
 
     public void showLoadingError() {

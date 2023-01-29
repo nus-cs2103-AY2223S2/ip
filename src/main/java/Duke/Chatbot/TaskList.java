@@ -1,7 +1,10 @@
-import Tasks.DeadlineTask;
-import Tasks.EventTask;
-import Tasks.Task;
-import Tasks.TodoTask;
+package Duke.Chatbot;
+
+import Duke.Exceptions.UnimplementedTaskTypeException;
+import Duke.Tasks.DeadlineTask;
+import Duke.Tasks.EventTask;
+import Duke.Tasks.Task;
+import Duke.Tasks.TodoTask;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
