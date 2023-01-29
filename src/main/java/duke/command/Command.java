@@ -15,6 +15,7 @@ public abstract class Command {
     private Commands command;
     private boolean isExit = false;
 
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     public Command(Commands command) {
         this.command = command;
