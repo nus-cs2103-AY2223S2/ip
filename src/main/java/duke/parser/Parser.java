@@ -42,7 +42,7 @@ abstract public class Parser {
             case DELETE:
                 return new DeleteCommand(input);
             case EXIT:
-                return new ExitCommand(input);
+                return new ExitCommand();
             default:
                 return new DoesNotExistCommand();
         }
