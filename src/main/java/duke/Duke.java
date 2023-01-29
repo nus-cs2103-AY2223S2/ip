@@ -28,9 +28,7 @@ public class Duke {
     }
 
 
-    /**
-     * Activates the bot.
-     */
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
