@@ -1,3 +1,11 @@
+package duke;
+
+import command.Command;
+import storage.Storage;
+import task.TaskList;
+import ui.Parser;
+import ui.Ui;
+
 import java.time.format.DateTimeParseException;
 
 public class Duke {
@@ -33,7 +41,7 @@ public class Duke {
             } catch (IllegalArgumentException e) {
                 ui.showError("Invalid command.");
             } catch (DateTimeParseException e) {
-                ui.showError("Wrong date format given");
+                ui.showError("Wrong date format given.");
             }
         }
 

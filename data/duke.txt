@@ -1,5 +1,3 @@
-T|1|eat
-T|0|me
-T|1|please
-D|0|daddy |2023-01-28
-E|0|school |2023-01-29|2023-01-29
+D|1|daddy |2023-01-28
+T|0|complete ip
+E|0|please |2023-01-29|2023-01-30

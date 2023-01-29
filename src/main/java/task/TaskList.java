@@ -1,3 +1,7 @@
+package task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -72,7 +76,7 @@ public class TaskList {
      * Deletes the task with the same index.
      *
      * @param idx Index of the task in the list.
-     * @return Task deleted.
+     * @return task.Task deleted.
      * @throws DukeException If index is out of bounds.
      */
     public Task deleteTask(int idx) throws DukeException {

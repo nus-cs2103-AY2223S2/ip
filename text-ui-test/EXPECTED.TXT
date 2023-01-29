@@ -10,15 +10,15 @@
     > 3. [T][ ] repeat
     > chu gave me no task
     > aint no such task available
-    > Task masked as done: [T][X] eat
+    > task.Task masked as done: [T][X] eat
     > 1. [T][X] eat
     > 2. [T][ ] sleep
     > 3. [T][ ] repeat
-    > Task masked as undone: [T][ ] eat
+    > task.Task masked as undone: [T][ ] eat
     > 1. [T][ ] eat
     > 2. [T][ ] sleep
     > 3. [T][ ] repeat
-    > Task deleted: [T][ ] sleep
+    > task.Task deleted: [T][ ] sleep
     > Chu have 2 task(s) remained.
     > aint no such task available
     > Got chu homie, new deadline added: [D][ ] sleep (by: 10pm)

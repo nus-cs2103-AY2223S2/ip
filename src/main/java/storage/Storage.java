@@ -1,3 +1,11 @@
+package storage;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+import ui.Ui;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -24,7 +32,7 @@ public class Storage {
      * Adds a task from saved file to the task list.
      */
     private void loadTaskFromFile(String task) {
-        // Parser
+        // ui.Parser
         String[] command = task.split("\\|");
         String taskType = command[0];
         String description = command[2];

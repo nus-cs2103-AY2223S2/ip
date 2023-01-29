@@ -2,7 +2,7 @@
 Author: rockman007372 <rockman007372@gmail.com>
 Date:   Thu Jan 19 14:41:38 2023 +0800
 
-    Add Task class
+    Add task.Task class
 
 [33mcommit d3e6e6e7828f8489fa40e38c0d006d248bd9452c[m[33m ([m[1;33mtag: Level-2[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
 Author: rockman007372 <rockman007372@gmail.com>
@@ -194,10 +194,10 @@ Date:   Wed Aug 14 15:30:37 2019 +0800
 Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
 Date:   Mon Aug 12 14:24:27 2019 +0800
 
-    Adapt JavaFX tutorial for Duke
+    Adapt JavaFX tutorial for duke.Duke
     
-    Rather than to have distinct tutorials building up to a Duke-like
-    application, let'description merge the tutorials into Duke'description tutorials
+    Rather than to have distinct tutorials building up to a duke.Duke-like
+    application, let'description merge the tutorials into duke.Duke'description tutorials
     to enhance cohesiveness in the course material.
     
     We also merge the gradle/gradleless tutorials into one by providing a
@@ -206,7 +206,7 @@ Date:   Mon Aug 12 14:24:27 2019 +0800
     
     Fix header levels in JavaFX Tutorial 1.
     
-    Change code samples to use Duke.
+    Change code samples to use duke.Duke.
     
     Add hints on required import statements.
     
@@ -280,7 +280,7 @@ Date:   Mon Aug 5 19:26:04 2019 +0800
 Author: damithc <damith@gmail.com>
 Date:   Mon Aug 5 19:08:53 2019 +0800
 
-    Move Duke.java out of the package
+    Move duke.Duke.java out of the package
 
 [33mcommit 6bb6b9f6c525f5343fdc6dd3a43a086a11e9708e[m
 Author: damithc <damith@gmail.com>
