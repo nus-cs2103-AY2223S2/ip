@@ -58,5 +58,9 @@ public class Task {
         }
         return Task.EMPTY_TASK;
     }
+
+    public boolean isInDescription(String term) {
+        return description.contains(term);
+    }
 }
 

@@ -41,6 +41,11 @@ public class Parser {
                 throw new DukeException("Delete command missing list numbering.");
             }
             return new DeleteCommand(command, inputSplit[1]);
+        case "find":
+            if (inputSplit.length < 2) {
+                throw new DukeException("Find command missing terms.");
+            }
+            return new FindCommand(command, inputSplit[1]);
         default:
             throw new DukeException("Sorry but I don't understand what this means.");
         }
