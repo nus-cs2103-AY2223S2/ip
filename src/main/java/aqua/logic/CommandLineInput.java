@@ -1,6 +1,6 @@
 package aqua.logic;
 
-import aqua.logic.command.ServiceProvider;
+import aqua.logic.command.Command;
 import aqua.manager.LogicManager;
 
 
@@ -9,11 +9,11 @@ import aqua.manager.LogicManager;
  * when given an AppManager.
  */
 public class CommandLineInput {
-    private final ServiceProvider command;
+    private final Command command;
     private final ArgumentMap args;
 
 
-    public CommandLineInput(ServiceProvider command, ArgumentMap args) {
+    public CommandLineInput(Command command, ArgumentMap args) {
         this.command = command;
         this.args = args;
     }
@@ -26,11 +26,11 @@ public class CommandLineInput {
      * @returnt he ExecutionDispatcher of the command.
      */
     public ExecutionService getService(LogicManager manager) {
-        return command.getService(args, manager);
+        return command.getServiceProvider().getService(args, manager);
     }
 
 
     public ExecutionService getService(LogicManager manager, boolean isLoading) {
-        return command.getService(args, manager, isLoading);
+        return command.getServiceProvider().getService(args, manager, isLoading);
     }
 }
