@@ -1,7 +1,6 @@
 /**
  * Project name: Duke
- * @author Tan Jun Da
- * Student Number: A0234893U
+ * @author Tan Jun Da A023489eU
  */
 
 package seedu.duke.task;
@@ -24,7 +23,7 @@ public class Deadline extends Task {
      * @param description The description of the deadline task.
      * @param by The deadline of the deadline task.
      */
-    public Deadline(String description, String by){
+    public Deadline(String description, String by) {
         super(description.trim());
         this.by = LocalDate.parse(by.trim());
     }

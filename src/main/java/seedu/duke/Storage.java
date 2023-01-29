@@ -1,24 +1,22 @@
 /**
  * Project name: Duke
- * @author Tan Jun Da
- * Student Number: A0234893U
+ * @author Tan Jun Da A023489eU
  */
 
 package seedu.duke;
-
-import seedu.duke.task.Deadline;
-import seedu.duke.task.Event;
-import seedu.duke.task.Task;
-import seedu.duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Task;
+import seedu.duke.task.Todo;
 
 /**
  * Represents the storage for the Duke program.
@@ -45,7 +43,7 @@ public class Storage {
      * @return The List of tasks.
      * @throws DukeException If file not found.
      */
-    public List<Task> load() throws DukeException{
+    public List<Task> load() throws DukeException {
         try {
             return readAddFileContents(filePath);
         } catch (FileNotFoundException e) {
@@ -79,7 +77,9 @@ public class Storage {
         FileWriter fw = new FileWriter(filePath);
         for (Task element : storage) {
             String mark = "0";
-            if (element.getStatusIcon().equals("X")) mark = "1";
+            if (element.getStatusIcon().equals("X")) {
+                mark = "1";
+            }
             if (element instanceof Todo) {
                 fw.write("T | " + mark + " | " + element.getDescription());
             }
@@ -87,7 +87,8 @@ public class Storage {
                 fw.write("D | " + mark + " | " + element.getDescription() + " | " + ((Deadline) element).getBy());
             }
             if (element instanceof Event) {
-                fw.write("E | " + mark + " | " + element.getDescription() + " | " + ((Event) element).getFrom() + " | " + ((Event) element).getTo());
+                fw.write("E | " + mark + " | " + element.getDescription() + " | "
+                        + ((Event) element).getFrom() + " | " + ((Event) element).getTo());
             }
             fw.write(System.lineSeparator());
         }
@@ -109,7 +110,9 @@ public class Storage {
         while (fileScanner.hasNext()) {
             String[] currArray = fileScanner.nextLine().split("\\|");
             boolean mark = false;
-            if (currArray[1].trim().equals("1")) mark = true;
+            if (currArray[1].trim().equals("1")) {
+                mark = true;
+            }
             if (currArray[0].trim().equals("T")) {
                 Todo t = new Todo(currArray[2].trim());
                 if (mark) {

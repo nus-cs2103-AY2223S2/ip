@@ -1,13 +1,13 @@
 /**
  * Project name: Duke
- * @author Tan Jun Da
- * Student Number: A0234893U
+ * @author Tan Jun Da A023489eU
  */
 
 package seedu.duke.task;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Represents a test for Event class.
@@ -20,7 +20,7 @@ public class EventTest {
     @Test
     public void testStringConversion() {
         assertEquals("[E] [ ] 123 (from: 123 to: 123 )",
-                    new Event("123","123","123").toString());
+                new Event("123", "123", "123").toString());
     }
 
     /**
@@ -29,7 +29,7 @@ public class EventTest {
     @Test
     public void getFromSuccess() {
         assertEquals("123",
-                new Event("123","123","123").getFrom());
+                new Event("123", "123", "123").getFrom());
     }
 
     /**
@@ -38,6 +38,6 @@ public class EventTest {
     @Test
     public void getToSuccess() {
         assertEquals("123",
-                new Event("123","123","123").getTo());
+                new Event("123", "123", "123").getTo());
     }
 }

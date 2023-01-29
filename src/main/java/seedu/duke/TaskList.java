@@ -1,18 +1,17 @@
 /**
  * Project name: Duke
- * @author Tan Jun Da
- * Student Number: A0234893U
+ * @author Tan Jun Da A023489eU
  */
 
 package seedu.duke;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents a taskList in an ArrayList format.
@@ -21,8 +20,8 @@ import java.util.List;
  */
 public class TaskList {
 
-    List<Task> tasksList;
-    int counter;
+    protected List<Task> tasksList;
+    protected int counter;
 
     /**
      * Constructor for the TaskList class.
@@ -71,7 +70,7 @@ public class TaskList {
      * @param userParse The input from the user.
      * @throws DukeException If there is an empty description.
      */
-    public void addTodo(String description, Parser userParse) throws DukeException{
+    public void addTodo(String description, Parser userParse) throws DukeException {
         int inputArrLength = userParse.inputArr.length;
         String[] inputArr = userParse.inputArr;
         for (int i = 1; i < inputArrLength; i++) {
@@ -117,7 +116,7 @@ public class TaskList {
             tasksList.add(new Deadline(userParse.checkDescription(description, "deadline"),
                     userParse.checkTime(deadline, "deadline", "by")));
             counter++;
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             throw e;
         }
     }

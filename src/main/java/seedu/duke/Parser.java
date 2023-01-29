@@ -1,7 +1,6 @@
 /**
  * Project name: Duke
- * @author Tan Jun Da
- * Student Number: A0234893U
+ * @author Tan Jun Da A023489eU
  */
 
 package seedu.duke;
@@ -38,7 +37,7 @@ public class Parser {
      * @throws DukeException If str is empty.
      */
     public String checkDescription(String str, String task) throws DukeException {
-        if(str.equals("")) {
+        if (str.equals("")) {
             String message = "☹ OOPS!!! The description of a " + task + " cannot be empty.";
             throw new DukeException(message);
         }
@@ -56,7 +55,7 @@ public class Parser {
      * @throws DukeException If str is empty.
      */
     public String checkTime(String str, String task, String type) throws DukeException {
-        if(str.equals("")) {
+        if (str.equals("")) {
             String message = "☹ OOPS!!! The /" + type + " part of a " + task + " cannot be empty.";
             throw new DukeException(message);
         }
@@ -74,7 +73,9 @@ public class Parser {
     public Duke.Commands checkCommand(String command) throws DukeException {
         boolean flag = true;
         for (Duke.Commands c : Duke.Commands.values()) {
-            if(command.equals(c.name())) flag = false;
+            if (command.equals(c.name())) {
+                flag = false;
+            }
         }
         if (flag) {
             String message = "____________________________________________________________\n"
