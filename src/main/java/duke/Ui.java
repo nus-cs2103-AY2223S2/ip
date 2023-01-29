@@ -51,26 +51,40 @@ public class Ui {
     }
 
     /**
-     * Prints out note after a task is added to the task list.
-     * @param task Task that is added.
+     * Prints out note after user inputs bye.
      */
-    public void addedTask(Task task) {
     public void sayGoodbye() {
         System.out.println("Byebye CATch you later!");
     }
 
+    /**
+     * Prints out note after a task is marked.
+     * @param task Task that is marked.
+     */
     public void showMarked(Task task) {
         System.out.println("I've marked this task as done: " + task);
     }
 
+    /**
+     * Prints out note after a task is unmarked.
+     * @param task Task that is unmarked.
+     */
     public void showUnmarked(Task task) {
         System.out.println("I've marked this task as not done yet: " + task);
     }
 
+    /**
+     * Prints out note after a task is deleted.
+     * @param task Task that is deleted.
+     */
     public void showDeleted(Task task) {
         System.out.println("I've deleted this task: " + task);
     }
 
+    /**
+     * Prints out note after a task is added.
+     * @param task Task that is added.
+     */
     public void showAddTask(Task task) {
         System.out.println("Meow! Just added: \n" + task);
     }
