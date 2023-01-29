@@ -1,9 +1,14 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 public class Sunday {
     private static State state;
-    private static Printer printer = new Printer();
     public static void main(String[] args) {
-        greet();
+        try {
+            State.GREET.execute("create/load data file");
+        } catch (SundayException e) {
+            Printer.printException(e);
+        }
         Scanner sc = new Scanner(System.in);
         while (state != State.BYE) {
             try {
@@ -12,15 +17,9 @@ public class Sunday {
                 state = State.determine(command);
                 state.execute(input);
             } catch (SundayException e) {
-                printer.printException(e);
+                Printer.printException(e);
             }
         }
         sc.close();
-    }
-    private static void greet() {
-        printer.printBar();
-        printer.printText("Hi! I'm Sunday, pleasure to meet you!");
-        printer.printText("How can I help?");
-        printer.printBar();
     }
 }

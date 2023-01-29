@@ -32,14 +32,22 @@ public class Record {
         }
         return count;
     }
+    public void save() {
+        DataHandler.writeToDataFile(this.toString());
+    }
+    public void load() throws SundayException{
+        if (!DataHandler.createDataFile()) {
+            DataHandler.readFromDataFile();
+        }
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             if (i > 0) {
-                sb.append("\n    ");
+                sb.append("\n");
             }
-            sb.append((i+1) + ". " + this.taskToString(i));
+            sb.append(this.taskToString(i));
         }
         return sb.toString();
     }
