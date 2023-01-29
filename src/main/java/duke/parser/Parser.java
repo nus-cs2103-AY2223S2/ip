@@ -17,7 +17,6 @@ public class Parser {
         event,
         delete,
         find;
-
     }
 
     /**
