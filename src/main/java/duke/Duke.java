@@ -2,6 +2,12 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Creates a new Duke bot that tracks tasks.
+ *
+ * @author Evan Lee
+ * @version CS2103 AY22/23 Semester 2
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -34,7 +40,6 @@ public class Duke {
                 Ui.exitMsg();
                 return;
             }
-            
             Parser.parseInput(this.tasks, taskType, descriptions);
         }
     }
