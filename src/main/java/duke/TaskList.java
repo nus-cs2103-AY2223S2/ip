@@ -21,7 +21,6 @@ public class TaskList {
                 this.index = i;
                 break;
             }
-            continue;
         }
     }
 
@@ -55,7 +54,7 @@ public class TaskList {
      */
     public String deleteTask(int index) {
         if (index < 0 || index > 99 || tasks[index] == null) {
-            throw new RuntimeException("duke.task.Task does not exist!");
+            throw new RuntimeException("Task does not exist!");
         }
         String str = "Got it! This task has been removed:\n";
         str += this.printTask(index) + "\n";
@@ -76,7 +75,7 @@ public class TaskList {
      */
     public String markTask(int index) {
         if (index < 0 || index > 99 || tasks[index] == null) {
-            throw new RuntimeException("duke.task.Task does not exist!");
+            throw new RuntimeException("Task does not exist!");
         }
         this.tasks[index].mark();
         String str = "Great job! This task has been marked as done:\n";
@@ -91,7 +90,7 @@ public class TaskList {
      */
     public String unMarkTask(int index) {
         if (index < 0 || index > 99 || tasks[index] == null) {
-            throw new RuntimeException("duke.task.Task does not exist!");
+            throw new RuntimeException("Task does not exist!");
         }
         this.tasks[index].unMark();
         String str = "Noted! This task has been marked as undone:\n";
