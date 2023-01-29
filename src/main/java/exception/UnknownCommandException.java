@@ -1,4 +1,4 @@
-package dukeException;
+package exception;
 
 /**
  * Exception for when users keyed in an unknown command.

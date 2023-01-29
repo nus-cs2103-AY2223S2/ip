@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-import dukeException.DukeException;
-import dukeException.InvalidArgumentException;
+import exception.DukeException;
+import exception.InvalidArgumentException;
 import task.Deadline;
 import task.Event;
 import task.Task;

@@ -1,7 +1,7 @@
 package command;
 
-import dukeException.IndexOutOfBoundException;
-import dukeException.MissingArgumentException;
+import exception.IndexOutOfBoundException;
+import exception.MissingArgumentException;
 import storage.TaskList;
 
 /**

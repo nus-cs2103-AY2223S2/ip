@@ -1,4 +1,4 @@
-package dukeException;
+package exception;
 
 /**
  * Exception when index requested by the user is out of range.

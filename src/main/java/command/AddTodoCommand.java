@@ -1,6 +1,6 @@
 package command;
 
-import dukeException.MissingArgumentException;
+import exception.MissingArgumentException;
 import storage.TaskList;
 import task.Todo;
 

@@ -1,7 +1,11 @@
 import java.util.Scanner;
 
 import command.Command;
-import dukeException.DukeException;
+import exception.DukeException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import parser.Parser;
 import storage.LocalStorage;
 import storage.TaskList;
@@ -9,20 +13,29 @@ import storage.TaskList;
 /**
  * Duke Chat Bot!
  */
-public class Duke {
+public class Duke extends Application {
 
     private TaskList tasks;
     private LocalStorage localStorage;
 
     /**
      * Constructor to instantiate Duke bot.
-     * @param file_path path of local storage file.
+     * @param filePath path of local storage file.
      */
-    public Duke(String file_path) {
+    public Duke(String filePath) {
         TaskList tasks = new TaskList();
-        this.localStorage = new LocalStorage(file_path);
+        this.localStorage = new LocalStorage(filePath);
         this.localStorage.loadTasks(tasks);
         this.tasks = tasks;
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     /**
@@ -64,6 +77,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
+        new Duke("./data/duke.txt").run();;
     }
 }

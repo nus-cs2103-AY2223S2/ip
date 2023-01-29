@@ -1,4 +1,4 @@
-package dukeException;
+package exception;
 
 /**
  * Exception when user inserted invalid argument for specific command.

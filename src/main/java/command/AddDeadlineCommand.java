@@ -3,8 +3,8 @@ package command;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
-import dukeException.InvalidArgumentException;
-import dukeException.MissingArgumentException;
+import exception.InvalidArgumentException;
+import exception.MissingArgumentException;
 import storage.TaskList;
 import task.Deadline;
 

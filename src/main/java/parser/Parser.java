@@ -9,7 +9,7 @@ import command.ListCommand;
 import command.MarkCommand;
 import command.RemoveCommand;
 import command.UnmarkCommand;
-import dukeException.UnknownCommandException;
+import exception.UnknownCommandException;
 import storage.TaskList;
 
 /**

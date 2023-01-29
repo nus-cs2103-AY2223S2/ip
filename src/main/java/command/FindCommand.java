@@ -2,13 +2,21 @@ package command;
 
 import java.util.ArrayList;
 
-import dukeException.MissingArgumentException;
+import exception.MissingArgumentException;
 import storage.TaskList;
 import task.Task;
 
+/**
+ * Command to search task with specific keyword.
+ */
 public class FindCommand extends Command {
 
     private String request;
+
+    /**
+     * Constructor method to create find command.
+     * @param request User's request to find task.
+     */
     public FindCommand(String request) {
         this.request = request;
     }

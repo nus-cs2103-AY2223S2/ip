@@ -1,4 +1,4 @@
-package dukeException;
+package exception;
 
 /**
  * Exception for when user missed out arguments that are supposed to be in the command.

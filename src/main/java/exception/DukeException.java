@@ -1,4 +1,4 @@
-package dukeException;
+package exception;
 
 /**
  * Runtime exception specially made to handle exception Duke may encounter.

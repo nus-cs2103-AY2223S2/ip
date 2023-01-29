@@ -1,14 +1,15 @@
 package command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import storage.TaskList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import storage.TaskList;
 
 public class AddTodoCommandTest {
 
-    TaskList tasks;
+    private TaskList tasks;
 
     @BeforeEach
     public void init() {
