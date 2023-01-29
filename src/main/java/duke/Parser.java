@@ -42,9 +42,7 @@ public class Parser {
             break;
         case "deadline":
             int doneByIndex = command.indexOf("/by");
-            System.out.println("a");
             description = command.substring(9, doneByIndex - 1);
-            System.out.println("b");
             String doneByString = command.substring(doneByIndex + 4);
             task = new Deadline(description, parseDateTime(doneByString));
             break;
