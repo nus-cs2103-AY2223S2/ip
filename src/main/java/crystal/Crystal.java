@@ -3,11 +3,22 @@ package crystal;
 import crystal.command.Command;
 import java.io.File;
 
+/**
+ * Represents the Crystal class.
+ *
+ */
 class Crystal {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Constructor for Crystal class.
+     *
+     * @param filePath filepath to load the file from
+     *
+     */
 
     public Crystal(String filePath) {
         ui = new Ui();
@@ -20,6 +31,13 @@ class Crystal {
         }
     }
 
+    /**
+     * Runs the program.
+     * Shows the welcome message.
+     * While isExit is false, loads the previous saved file and
+     * takes in user commands for the list.
+     *
+     */
 
     public void run() {
         ui.showWelcome();
@@ -37,6 +55,13 @@ class Crystal {
             }
         }
     }
+
+
+    /**
+     * Main method which calls the run method.
+     *
+     */
+
 
     public static void main(String[] args) {
         String file2 = "/repos/Independentproject/myfiles/Crystal.txt";
