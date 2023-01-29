@@ -1,9 +1,12 @@
-package seedu;
+package james.command;
 
-public class addMarkCommand extends Command {
+import james.JamesException;
+import james.task.Task;
+
+public class addUnmarkCommand extends Command {
     private int taskNumber;
 
-    public addMarkCommand(int taskNumber) {
+    public addUnmarkCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
@@ -13,10 +16,8 @@ public class addMarkCommand extends Command {
             throw new JamesException("Task number is out of range!");
         }
         Task task = taskList.getTask(taskNumber);
-        task.markDone();
-        ui.markTask(task);
+        task.markUnDone();
+        ui.unmarkTask(task);
     }
 }
-
-
 

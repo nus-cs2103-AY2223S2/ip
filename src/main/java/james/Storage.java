@@ -1,4 +1,6 @@
-package seedu;
+package james;
+
+import james.task.*;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,4 +1,8 @@
-package seedu;
+package james.command;
+
+import james.JamesException;
+import james.task.TaskList;
+import james.UI;
 
 public class addListCommand extends Command {
     public addListCommand() {

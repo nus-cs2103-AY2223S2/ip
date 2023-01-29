@@ -1,4 +1,7 @@
-package seedu;
+package james;
+
+import james.task.Task;
+import james.task.TaskList;
 
 import java.util.Scanner;
 

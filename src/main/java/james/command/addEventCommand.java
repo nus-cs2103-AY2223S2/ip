@@ -1,4 +1,7 @@
-package seedu;
+package james.command;
+
+import james.JamesException;
+import james.task.Event;
 
 public class addEventCommand extends Command {
     private Event event;

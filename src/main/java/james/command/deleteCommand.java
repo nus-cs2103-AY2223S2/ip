@@ -1,4 +1,7 @@
-package seedu;
+package james.command;
+
+import james.JamesException;
+import james.task.Task;
 
 public class deleteCommand extends Command {
     private int index;

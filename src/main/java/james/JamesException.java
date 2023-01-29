@@ -1,4 +1,4 @@
-package seedu;
+package james;
 
 public class JamesException extends Exception {
 

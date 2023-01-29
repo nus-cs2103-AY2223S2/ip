@@ -1,4 +1,6 @@
-package seedu;
+package james.task;
+
+import james.JamesException;
 
 public class ToDo extends Task {
     public ToDo(String description) throws JamesException {

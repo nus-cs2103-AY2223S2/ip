@@ -1,4 +1,8 @@
-package seedu;
+package james;
+
+import james.command.Command;
+import james.parser.Parser;
+import james.task.TaskList;
 
 public class James {
         private UI ui;

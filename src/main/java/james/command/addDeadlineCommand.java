@@ -1,4 +1,7 @@
-package seedu;
+package james.command;
+
+import james.JamesException;
+import james.task.Deadline;
 
 public class addDeadlineCommand extends Command {
     private Deadline deadline;

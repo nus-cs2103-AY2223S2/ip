@@ -1,4 +1,7 @@
-package seedu;
+package james.command;
+
+import james.JamesException;
+import james.task.ToDo;
 
 public class addToDoCommand extends Command {
     private ToDo toDo;

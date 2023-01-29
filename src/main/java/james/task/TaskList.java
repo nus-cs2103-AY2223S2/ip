@@ -1,4 +1,6 @@
-package seedu;
+package james.task;
+
+import james.task.Task;
 
 import java.util.ArrayList;
 
