@@ -26,10 +26,11 @@ public class Duke {
         this.storage = new Storage(filePath);
         try {
             this.taskList = new TaskList(this.storage.load());
-            this.ui.showWelcome();
         } catch (DukeException e) {
             this.app.addDukeDialog(e.getMessage());
             this.taskList = new TaskList();
+        } finally {
+            this.ui.showWelcome();
         }
     }
 
@@ -39,17 +40,23 @@ public class Duke {
      * @param input The user text input.
      */
     public void handleUserInput(String input) {
+        boolean isExit = false;
+
         try {
             this.ui.showUserInput(input);
             Command c = Parser.parse(input);
             String response = c.execute(this.taskList);
             this.ui.showSuccess(response);
-            if (c.isExit()) {
+            isExit = c.isExit();
+            if (isExit) {
                 this.storage.save(this.taskList); /* save tasks at the end of the chat session */
-                this.app.terminate();
             }
         } catch (DukeException e) {
             this.ui.showError(e.getMessage());
+        } finally {
+            if (isExit) {
+                this.app.terminate();
+            }
         }
     }
 }
