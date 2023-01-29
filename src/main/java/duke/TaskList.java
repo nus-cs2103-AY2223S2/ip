@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -189,6 +190,26 @@ class TaskList {
         } catch (Exception e) {
             System.out.println("I do not understand what you type >.< !! Enter in by/ YYYY-MM-DD");
         }
+    }
+
+    /***
+     *
+     * @param key the input value to search for
+     * @param taskArrayList an arraylist containing all the tasks
+     */
+    public void find(String key, ArrayList<Task> taskArrayList) {
+        boolean noResult = true;
+            for(int i=0; i < taskArrayList.size();i++) {
+                    Task task = taskArrayList.get(i);
+                    if(task.toString().contains(key)) {
+                        noResult = false;
+                        System.out.println(task);
+                    }
+            }
+
+            if(noResult) {
+                System.out.println("No Matching Result Found");
+            }
     }
 
     /***
