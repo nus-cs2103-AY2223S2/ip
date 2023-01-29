@@ -1,3 +1,8 @@
 D/Return books/0/Sunday
 T/Borrow book/0
 E/project/0/from Mon 2pm /to 4pm
+D/do/0/by Sunday
+T/do homework/0
+E/have/0/from 20:00 /to 22:00
+E/have a meeting /0/from 20 /to 21
+D/do homework /0/by Sunday
