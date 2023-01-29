@@ -55,32 +55,22 @@ public class Parser {
             return parseList();
 
         case "todo":
+            checkAddCommand();
+            return parseTodo();
+
         case "deadline":
+            checkAddCommand();
+            return parseDeadline();
+
         case "event":
+            checkAddCommand();
+            return parseEvent();
+
         case "listTime":
+            return parseListTime();
+
         case "find":
-            switch (command) {
-            case "todo":
-                checkAddCommand();
-                return parseTodo();
-
-            case "deadline":
-                checkAddCommand();
-                return parseDeadline();
-
-            case "event":
-                checkAddCommand();
-                return parseEvent();
-
-            case "listTime":
-                return parseListTime();
-
-            case "find":
-                return parseFind();
-
-            default:
-                throw new ChattimeException(UNRECOGNISED_COMMAND);
-            }
+            return parseFind();
 
         case "mark":
         case "unmark":
