@@ -67,6 +67,10 @@ public class TaskList {
         Ui.separator();
     }
 
+    /**
+     *  Filters the tasklist based on input and returns if task contains words from the input.
+     * @param input String.
+     */
     public void find(String input) {
         int counter = 1;
         Ui.separator();
