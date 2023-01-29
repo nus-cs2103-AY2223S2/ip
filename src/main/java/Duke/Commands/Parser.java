@@ -1,13 +1,13 @@
 package Duke.Commands;
 
-import Duke.Commands.Command;
 import Duke.Commands.Tasks.Deadline;
 import Duke.Commands.Tasks.Event;
-import Duke.Commands.Tasks.Task;
 import Duke.Commands.Tasks.ToDo;
-import Duke.Duke;
-import Duke.dukeexception.DukeException;
+import Duke.DukeException.DukeException;
 
+/**
+ * This class interprets the user command
+ */
 public class Parser {
     private final String command;
 
@@ -75,6 +75,12 @@ public class Parser {
         return new String[]{from, to};
     }
 
+    /**
+     * Interprets the command stored internally within the class
+     *
+     * @return The command to be executed in a Command class
+     * @throws DukeException when command is invalid
+     */
     public Command process() throws DukeException {
         String[] commandArr = this.command.split(" ");
         int editIndex = Character.getNumericValue

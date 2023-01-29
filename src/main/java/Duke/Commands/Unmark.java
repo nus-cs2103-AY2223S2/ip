@@ -3,8 +3,9 @@ package Duke.Commands;
 import Duke.Commands.Tasks.Task;
 import Duke.TaskList;
 
-import java.util.ArrayList;
-
+/**
+ * This class handles the command to unmark tasks as completed (i.e. they are incomplete)
+ */
 public class Unmark extends Command {
     private final int index;
 
@@ -13,6 +14,11 @@ public class Unmark extends Command {
         this.index = index;
     }
 
+    /**
+     * Marks a task as incomplete
+     *
+     * @param toDoList The task list to be edited
+     */
     @Override
     public void execute(TaskList toDoList) {
         toDoList.get(this.index).markUndone();

@@ -1,17 +1,16 @@
 package Duke.Commands;
 
-import Duke.Commands.Tasks.Task;
 import Duke.TaskList;
 
-import java.util.ArrayList;
-
+/**
+ * This class represents the command to list all current tasks
+ */
 public class ListTasks extends Command {
     public ListTasks(String message) {
         super(message);
     }
 
     private static String getPrintOutput() {
-        // fix
         return "";
     }
 

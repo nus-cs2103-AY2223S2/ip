@@ -3,8 +3,9 @@ package Duke.Commands;
 import Duke.Commands.Tasks.Task;
 import Duke.TaskList;
 
-import java.util.ArrayList;
-
+/**
+ * This class handles the command to mark tasks as done
+ */
 public class Mark extends Command {
     private final int index;
 
@@ -13,6 +14,11 @@ public class Mark extends Command {
         this.index = index;
     }
 
+    /**
+     * Marks a task at index to indicate that it has been completed
+     *
+     * @param toDoList The task list to be edited
+     */
     @Override
     public void execute(TaskList toDoList) {
         toDoList.get(this.index).markDone();

@@ -3,12 +3,14 @@ package Duke.Commands;
 import Duke.Commands.Tasks.Task;
 import Duke.TaskList;
 
-import java.util.ArrayList;
-
+/**
+ * This class handles deletion commands
+ */
 public class Delete extends Command {
     private final int index;
     private Task removed;
     private int newSize;
+
     public Delete(String message, int index) {
         super(message);
         this.index = index;
@@ -16,6 +18,11 @@ public class Delete extends Command {
         this.newSize = 0;
     }
 
+    /**
+     * Deletes a task from the task list
+     *
+     * @param toDoList The task list to be edited
+     */
     @Override
     public void execute(TaskList toDoList) {
         this.removed = toDoList.get(this.index);

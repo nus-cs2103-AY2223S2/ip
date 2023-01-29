@@ -1,7 +1,5 @@
 package Duke.Commands.Tasks;
 
-import Duke.dukeexception.DukeException;
-
 public class Event extends Task {
     protected String from;
     protected String to;

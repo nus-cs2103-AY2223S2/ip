@@ -1,14 +1,20 @@
 package Duke.Commands;
 
-import Duke.Commands.Tasks.Task;
 import Duke.TaskList;
 
-import java.util.ArrayList;
-
+/**
+ * This class represents the command to exit the program
+ */
 public class Exit extends Command {
     public Exit(String message) {
         super(message);
     }
+
+    /**
+     * Does nothing; exits the program
+     *
+     * @param toDoList The list at the end of the program
+     */
     @Override
     public void execute(TaskList toDoList) {
         // nothing to do

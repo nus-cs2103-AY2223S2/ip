@@ -1,21 +1,29 @@
 package Duke.Commands;
-import Duke.Commands.Tasks.Deadline;
-import Duke.Commands.Tasks.Event;
 import Duke.Commands.Tasks.Task;
-import Duke.Commands.Tasks.ToDo;
 import Duke.TaskList;
-import Duke.dukeexception.DukeException;
 
-import java.util.ArrayList;
-
+/**
+ * This class handles addition commands
+ */
 public class Add extends Command {
     private final Task task;
 
+    /**
+     * Constructor
+     *
+     * @param message The full command represented by this class
+     * @param task The task to be added to the task list
+     */
     public Add(String message, Task task) {
         super(message);
         this.task = task;
     }
 
+    /**
+     * Adds the task to the specified list
+     *
+     * @param toDoList The task list to be edited
+     */
     @Override
     public void execute(TaskList toDoList) {
         toDoList.add(this.task);

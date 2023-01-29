@@ -1,10 +1,10 @@
 package Duke.Commands;
 
-import Duke.Commands.Tasks.Task;
 import Duke.TaskList;
 
-import java.util.ArrayList;
-
+/**
+ * This class is an abstract class representing all commands
+ */
 public abstract class Command {
     // message is the command input
     private final String message;
@@ -13,5 +13,10 @@ public abstract class Command {
         this.message = message;
     }
 
+    /**
+     * Executes this command
+     *
+     * @param toDoList The task list to be edited
+     */
     abstract public void execute(TaskList toDoList);
 }

@@ -1,7 +1,5 @@
 package Duke.Commands.Tasks;
 
-import Duke.dukeexception.DukeException;
-
 // skeleton code for this class is taken from cs2103 website
 public class Task {
     protected String description;
