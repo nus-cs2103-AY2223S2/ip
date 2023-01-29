@@ -17,5 +17,5 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 
-# Local duke.Storage
+# Local rick.Storage
 data/
