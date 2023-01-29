@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private final LocalDate byDate;
-    private final LocalTime byTime;
+    private LocalDate byDate;
+    private LocalTime byTime;
 
     /**
      * Creates Deadline object with parent constructor and parsed description.
@@ -19,10 +19,14 @@ public class Deadline extends Task {
      * @param bDate Deadline date description of task.
      * @param bTime Deadline time description of task.
      */
-    public Deadline(String description, LocalDate bDate, LocalTime bTime) {
+    public Deadline(String description, LocalDate bDate, LocalTime... bTime) {
         super(description);
         byDate = bDate;
-        byTime = bTime;
+        try {
+            byTime = bTime[0];
+        } catch (IndexOutOfBoundsException e) {
+            byTime = null;
+        }
     }
 
     /**
@@ -32,7 +36,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toDataString() {
-        return "D" + super.toDataString() + " @ " + byDate + " @ " + (byTime == null ? "0" : byTime);
+        return TaskType.DEADLINE + super.toDataString() + " @ " + byDate + " @ " + (byTime == null ? "0" : byTime);
     }
 
     /**
@@ -53,7 +57,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
+        return "[" + TaskType.DEADLINE + "]" + super.toString() + " (by: "
                 + byDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy "))
                 + (byTime == null ? "" : byTime.format(DateTimeFormatter.ofPattern("hh:mm a"))) + ")";
     }

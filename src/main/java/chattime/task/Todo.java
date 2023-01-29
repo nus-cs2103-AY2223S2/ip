@@ -21,7 +21,7 @@ public class Todo extends Task {
      */
     @Override
     public String toDataString() {
-        return "T" + super.toDataString();
+        return TaskType.TODO + super.toDataString();
     }
 
     /**
@@ -31,6 +31,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[" + TaskType.TODO + "]" + super.toString();
     }
 }

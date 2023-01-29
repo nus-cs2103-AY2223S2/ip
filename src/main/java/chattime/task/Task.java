@@ -14,6 +14,21 @@ public class Task {
     private boolean isDone;
 
     /**
+     * Available types of tasks.
+     */
+    enum TaskType {
+        TODO("T"), DEADLINE("D"), EVENT("E");
+        private String taskCode;
+        TaskType(String code) {
+            taskCode = code;
+        }
+        @Override
+        public String toString() {
+            return taskCode;
+        }
+    }
+
+    /**
      * Creates Task object with corresponding description.
      *
      * @param content Describes the task.

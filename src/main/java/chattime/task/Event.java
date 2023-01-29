@@ -39,7 +39,7 @@ public class Event extends Task {
      */
     @Override
     public String toDataString() {
-        return "E" + super.toDataString() + " @ " + fromDate + " @ " + fromTime
+        return TaskType.EVENT + super.toDataString() + " @ " + fromDate + " @ " + fromTime
                 + " @ " + toDate + " @ " + toTime;
     }
 
@@ -63,7 +63,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: "
+        return "[" + TaskType.EVENT + "]" + super.toString() + " (from: "
                 + fromDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy "))
                 + (fromTime == null ? "" : fromTime.format(DateTimeFormatter.ofPattern("hh:mm a ")))
                 + "to: " + toDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy "))

@@ -34,13 +34,15 @@ public class Chattime {
     public void run() {
         Scanner sc = new Scanner(System.in);
         String userInput;
+        Command cmd;
 
         while (ui.getExecuteStatus()) {
 
             userInput = sc.nextLine();
 
             try {
-                Command cmd = Parser.parse(userInput);
+                cmd = Parser.parse(userInput);
+
                 if (cmd != null) {
                     cmd.execute(ui, tasks, storage);
                 }

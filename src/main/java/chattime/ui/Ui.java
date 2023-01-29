@@ -66,7 +66,7 @@ public class Ui {
     }
 
     /**
-     * Returns unmarke task message.
+     * Returns unmarked task message.
      *
      * @param task Task unmarked recently.
      */
@@ -75,7 +75,7 @@ public class Ui {
     }
 
     /**
-     * Returns marke task message.
+     * Returns marked task message.
      *
      * @param task Task marked recently.
      */

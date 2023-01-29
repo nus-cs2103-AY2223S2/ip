@@ -196,7 +196,6 @@ public class Parser {
      *
      * @return DeadlineCommand object.
      * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
-     *
      */
     private static AddCommand parseDeadline() throws ChattimeException {
         String[] splitBy = description.split(" /by ", 2);
@@ -213,7 +212,7 @@ public class Parser {
             String[] time = splitBy[1].split(" ", 2);
             LocalDate byDate = LocalDate.parse(time[0]);
             if (time.length == 1) {
-                deadlineTask = new Deadline(task, byDate, null);
+                deadlineTask = new Deadline(task, byDate);
             } else {
                 LocalTime byTime = LocalTime.parse(time[1]);
                 deadlineTask = new Deadline(task, byDate, byTime);
@@ -231,8 +230,8 @@ public class Parser {
      *
      * @return EventCommand object.
      * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
-     *
      */
+    @SuppressWarnings("checkstyle:Regexp")
     private static AddCommand parseEvent() throws ChattimeException {
         String[] splitTask = description.split(" /from ", 2);
         String task = splitTask[0];
@@ -252,10 +251,22 @@ public class Parser {
         try {
             String[] from = splitFrom[0].split(" ", 2);
             String[] to = splitFrom[1].split(" ", 2);
+
             LocalDate fromDate = LocalDate.parse(from[0]);
-            LocalTime fromTime = LocalTime.parse(from[1]);
+            LocalTime fromTime;
+            if (from.length == 1) {
+                fromTime = LocalTime.of(0, 0);
+            } else {
+                fromTime = LocalTime.parse(from[1]);
+            }
+
             LocalDate toDate = LocalDate.parse(to[0]);
-            LocalTime toTime = LocalTime.parse(to[1]);
+            LocalTime toTime;
+            if (to.length == 1) {
+                toTime = LocalTime.of(23, 59);
+            } else {
+                toTime = LocalTime.parse(to[1]);
+            }
 
             Event eventTask = new Event(task, fromDate, fromTime, toDate, toTime);
             return new AddCommand(eventTask);
@@ -270,7 +281,6 @@ public class Parser {
      *
      * @return ListCommand object.
      * @throws ChattimeException If wrong-formatted input detected, returns error message with instructions to user.
-     *
      */
     private static ListCommand parseListTime() throws ChattimeException {
         if (description == null) {
@@ -292,7 +302,6 @@ public class Parser {
      *
      * @return FindCommand object.
      * @throws ChattimeException If no description detected, returns error message to user.
-     *
      */
     public static FindCommand parseFind() throws ChattimeException {
         if (description == null) {

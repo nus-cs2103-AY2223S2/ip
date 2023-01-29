@@ -19,7 +19,7 @@ public class MarkCommand extends Command {
      * @param taskIsDone true if mark as done, false if mark as undone.
      */
     public MarkCommand(int index, boolean taskIsDone) {
-        taskIndex = taskIndex;
+        taskIndex = index;
         isDone = taskIsDone;
     }
 
