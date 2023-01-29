@@ -1,4 +1,5 @@
 package hachi.main;
+
 import java.util.Scanner;
 
 /**
@@ -6,14 +7,15 @@ import java.util.Scanner;
  */
 public class Ui {
     static String separator = "‿୨♡୧‿︵‿︵︵‿︵‿୨♡୧‿︵‿︵︵‿︵‿୨♡୧‿";
-    public void showLine(){
+
+    public void showLine() {
         System.out.println(separator);
     }
 
     /**
      * Prints an error message if it fails to load saved tasks in storage.
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.out.println("Unable to load hachi.tasks from storage");
     }
 
@@ -51,7 +53,7 @@ public class Ui {
                 "\n     deadline \"task\" /by \"yyyy-mm-dd\" | Add a task to complete by the specified deadline" +
                 "\n     event \"event\" /from \"yyyy-mm-dd\" | Add an event on the specified date" +
                 "\n     /to \"yyyy-mm-dd\"" +
-                "\n     mark \"num\"                       | Mark the (num)th item in your list as completed"+
+                "\n     mark \"num\"                       | Mark the (num)th item in your list as completed" +
                 "\n     unmark \"num\"                     | Mark the (num)th item in your list as uncompleted" +
                 "\n     bye                              | Quit hachi.Hachi\n");
     }
@@ -66,6 +68,5 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
-
 }
 

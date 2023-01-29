@@ -14,6 +14,7 @@ public class TodoCommand extends Command {
 
     /**
      * TodoCommand constructor.
+     *
      * @param input The user's input string.
      */
     public TodoCommand(String input) {

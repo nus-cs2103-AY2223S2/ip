@@ -35,8 +35,7 @@ public class MarkCommand extends Command {
         } catch (HachiExceptions e) {
             System.out.println(e.getMessage());
             return false;
-        }
-        catch (IndexOutOfBoundsException e1) {
+        } catch (IndexOutOfBoundsException e1) {
             System.out.println(" There is no task to be marked");
             return false;
         }

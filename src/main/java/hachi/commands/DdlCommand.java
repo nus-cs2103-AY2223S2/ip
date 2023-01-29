@@ -1,9 +1,11 @@
 package hachi.commands;
+
 import hachi.main.HachiExceptions;
 import hachi.main.TaskList;
 import hachi.tasks.Ddl;
 import hachi.main.Ui;
 import hachi.main.Storage;
+
 import java.time.format.DateTimeParseException;
 
 /**
@@ -37,8 +39,7 @@ public class DdlCommand extends Command {
             System.out.println("   Now you have " + toDoList.size() + " tasks in the list.");
         } catch (HachiExceptions e) {
             System.out.println(e.getMessage());
-        }
-        catch (DateTimeParseException e1) {
+        } catch (DateTimeParseException e1) {
             System.out.println("   Key in deadline in the format of yyyy-mm-dd");
         }
         return false;

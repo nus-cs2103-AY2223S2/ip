@@ -1,5 +1,10 @@
 package hachi.main;
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.util.stream.Stream;
 
 /**
@@ -25,7 +30,7 @@ public class Storage {
      */
     public void saveTaskList(TaskList tl) {
         try {
-            FileWriter writer = new FileWriter( filePath);
+            FileWriter writer = new FileWriter(filePath);
             String msg = "   your to-do list: ";
             for (int i = 0; i < tl.size(); i++) {
                 msg += "\n   " + tl.get(i).toString();
@@ -60,7 +65,6 @@ public class Storage {
             return tl;
         } else {
             try {
-
                 file.getParentFile().mkdirs();
                 file.createNewFile();
 
@@ -73,6 +77,5 @@ public class Storage {
             }
             return new TaskList();
         }
-
     }
 }

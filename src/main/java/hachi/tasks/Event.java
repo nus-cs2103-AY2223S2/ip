@@ -11,8 +11,8 @@ public class Event extends Task {
      * Event constructor.
      *
      * @param input The description of the task.
-     * @param from The starting date of the task.
-     * @param to The ending date of the task.
+     * @param from  The starting date of the task.
+     * @param to    The ending date of the task.
      */
     public Event(String input, String from, String to) {
         super(input);
@@ -27,7 +27,7 @@ public class Event extends Task {
      * @return String representation of the Event object
      */
     public String toString() {
-        return "   [E]" + super.toString() + " (from: " + from +" (to: " + to + ")";
+        return "   [E]" + super.toString() + " (from: " + from + " (to: " + to + ")";
     }
 
 }
