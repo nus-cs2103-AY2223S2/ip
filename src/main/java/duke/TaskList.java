@@ -26,7 +26,7 @@ public class TaskList {
     public String addTask(Task task) {
         this.tasks[this.index] = task;
         String str = "Got it! This task has been added:\n";
-        str += this.printTask(index);
+        str += this.printTask(index) + "\n";
         this.index++;
         String sp = this.index == 1 ? "task" : "tasks";
         str += "You now have " + this.index + " " + sp + " in the list.";
