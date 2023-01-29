@@ -8,8 +8,17 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 
+/** A speech bubble to display messages. */
 public class SpeechBubble extends UiComponent<Region> {
+    /**
+     * String path to the left side bubble FXML file relative to the FXML
+     * directory.
+     */
     private static final String PATH_FXML_LEFT_SIDE = "SpeechBubbleLeft.fxml";
+    /**
+     * String path to the right side bubble FXML file relative to the FXML
+     * directory.
+     */
     private static final String PATH_FXML_RIGHT_SIDE = "SpeechBubbleRight.fxml";
 
     private final boolean isUser;
@@ -17,17 +26,34 @@ public class SpeechBubble extends UiComponent<Region> {
     @FXML private VBox bubbleDisplayArea;
 
 
+    /**
+     * Constructs a SpeechBubble from the specified parameters.
+     *
+     * @param isUser - {@code true} if the bubble is for the user and
+     *      {@code false} otherwise.
+     */
     public SpeechBubble(boolean isUser) {
         super(getPath(isUser));
         this.isUser = isUser;
     }
 
 
+    /**
+     * Returns the path to the FXML file.
+     *
+     * @param isUser - {@code true} if the bubble is for the user and
+     *      {@code false} otherwise.
+     */
     private static String getPath(boolean isUser) {
         return (isUser) ? PATH_FXML_RIGHT_SIDE : PATH_FXML_LEFT_SIDE;
     }
 
 
+    /**
+     * Sets the text being displayed on the speech bubble.
+     *
+     * @param text - the text to display.
+     */
     public void setText(String text) {
         Label label = new Label(text);
         label.setWrapText(true);
