@@ -7,8 +7,8 @@ import java.time.temporal.ChronoUnit;
  * Task component representing an event task.
  */
 public class Event extends Task {
-    private final LocalDate startTime;
-    private final LocalDate endTime;
+    private LocalDate startTime;
+    private LocalDate endTime;
 
     public Event(String task, LocalDate startTime, LocalDate endTime) {
         super(task, false);

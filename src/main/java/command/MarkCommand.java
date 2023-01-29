@@ -7,7 +7,7 @@ import storage.TaskList;
  * Command component that executes a mark command.
  */
 public class MarkCommand extends Command {
-    private final int index;
+    private int index;
 
     /**
      * Constructor for a mark task command.

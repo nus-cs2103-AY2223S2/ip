@@ -9,9 +9,9 @@ import task.Event;
  * Command component that executes an event command.
  */
 public class EventCommand extends Command {
-    private final String task;
-    private final LocalDate startTime;
-    private final LocalDate endTime;
+    private String task;
+    private LocalDate startTime;
+    private LocalDate endTime;
 
     /**
      * Constructor for a create event command.

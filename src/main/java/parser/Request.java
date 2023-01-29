@@ -9,7 +9,7 @@ import dukeexeption.UnknownCommandException;
  * The entry point of user input commands.
  */
 public class Request {
-    private final String request;
+    private String request;
     private String requestType;
     private String requestContent;
 

@@ -7,7 +7,7 @@ import task.Todo;
  * Command component that executes an todo command.
  */
 public class TodoCommand extends Command {
-    private final String task;
+    private String task;
 
     /**
      * Constructor for a create todo command.

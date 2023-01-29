@@ -12,8 +12,8 @@ import ui.Ui;
  * The main duke program.
  */
 public class Duke {
-    private final TaskList tasks;
-    private final Ui ui;
+    private TaskList tasks;
+    private Ui ui;
     private LocalStorage localTaskList;
 
     public Duke(String filepath) {

@@ -6,7 +6,7 @@ import storage.TaskList;
 import task.Task;
 
 public class FindCommand extends Command {
-    private final String query;
+    private String query;
 
     /**
      * Constructor for query command.

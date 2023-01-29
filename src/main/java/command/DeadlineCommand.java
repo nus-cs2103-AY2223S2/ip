@@ -8,8 +8,8 @@ import task.Deadline;
  * Command component that executes a deadline command.
  */
 public class DeadlineCommand extends Command {
-    private final String task;
-    private final LocalDate deadline;
+    private String task;
+    private LocalDate deadline;
 
     /**
      * Constructor for a create deadline command.

@@ -11,7 +11,7 @@ import task.Todo;
  * Program memory that stores a task list.
  */
 public class TaskList {
-    private final ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for the task list.

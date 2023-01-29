@@ -7,7 +7,7 @@ import storage.TaskList;
  * Command component that executes a delete command.
  */
 public class DeleteCommand extends Command {
-    private final int index;
+    private int index;
 
     /**
      * Constructor for a delete task command.

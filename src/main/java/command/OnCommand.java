@@ -13,7 +13,7 @@ import task.Task;
  * Command component that executes an on command.
  */
 public class OnCommand extends Command {
-    private final LocalDate queryDate;
+    private LocalDate queryDate;
 
     /**
      * Constructor for a date query on command.
