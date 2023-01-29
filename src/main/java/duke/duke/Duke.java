@@ -42,7 +42,6 @@ public class Duke {
                 } else if (command.equals("list")) {
                     int taskNumber = 1;
                     System.out.println("Here are the tasks in your list:");
-                    // this is the code to copy for Level-7 Save
                     for (Task t : tasksList) {
                         System.out.println(Integer.toString(taskNumber) + ". " + t);
                         taskNumber++;
@@ -111,6 +110,19 @@ public class Duke {
                     System.out.println(removedTask);
                     System.out.println("Now you have " + tasksList.size() + " tasks in the list.");
                     saveTodoList(tasksList);
+                } else if (command.equals("find")) {
+                    String findString = input.substring(5);
+
+                    int taskNumber = 1;
+
+                    System.out.println("Here are the matching tasks in your list:");
+
+                    for (Task t : tasksList) {
+                        if (t.toString().contains(findString)) {
+                            System.out.println(Integer.toString(taskNumber) + ". " + t);
+                            taskNumber++;
+                        }
+                    }
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
