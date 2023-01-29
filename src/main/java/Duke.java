@@ -74,8 +74,8 @@ public class Duke {
                 Command command = Command.valueOf(words[0].toUpperCase());
                 switch (command) {
                     case BYE: 
-                        printToFormat("    GoodBye, have a nice day!");
                         byeIndicator = 1;
+                        printToFormat("    Bye, have a nice day!");
                         break;
                     case LIST:
                     /**
@@ -121,7 +121,7 @@ public class Duke {
                      * creates and adds a deadline task to the arraylist of all tasks
                      */
                         String[] parts = inputLine.split("/");
-                        Deadline task = new Deadline(parts[0].split(" ")[1], 0, parts[1]);
+                        Deadline task = new Deadline(parts[0].split(" ", 2)[1], 0, parts[1]);
                         tasks.add(task);
                         printToFormat("    Successfully added the following task:\n    " + task);
                         break;
@@ -130,7 +130,7 @@ public class Duke {
                      * creates and adds an event task to the arraylist of all tasks
                      */
                         String[] parts1 = inputLine.split("/");
-                        Event event = new Event(parts1[0].split(" ")[1], 0, parts1[1], parts1[2]);
+                        Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
                         tasks.add(event);
                         printToFormat("    Successfully added the following task:\n    " + event);
                         break;
@@ -148,6 +148,11 @@ public class Duke {
                      */
                         printToFormat("    The following task is removed:\n    " + tasks.remove(Integer.parseInt(words[1]) - 1));
                         break;
+                    }
+                    try {
+                        updateAllTasks(tasks, allTasks);
+                    } catch (IOException e) {
+                        System.out.println("local update failed: " + e.getMessage());
                     }
             } catch (DukeException e) {
                 /**
@@ -188,6 +193,14 @@ public class Duke {
             }
         }
         s.close();
+    }
+
+    private static void updateAllTasks(ArrayList<Task> tasks, File allTasks) throws IOException {
+        FileWriter fw = new FileWriter(allTasks);
+        for (Task task : tasks) {
+            fw.write(task.toStoreFormatString() + System.lineSeparator());
+        }
+        fw.close();
     }
 }
 
@@ -231,6 +244,10 @@ class Task {
     public void unmark() {
         this.status = "[ ]";
     }
+
+    public String toStoreFormatString() {
+        return "";
+    }
 }
 /**
  * Creates a Deadline class that inherits from Task
@@ -247,11 +264,23 @@ class Deadline extends Task {
         super(name, status);
         this.deadline = deadline;
     }
+
+    private int getStatusNo() {
+        if (super.status.equals("[ ]")) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
     /**
      * overrides the toString method
      */
     public String toString() {
         return "[D]" + status + " " + name + "(" + deadline + ")";
+    }
+    
+    public String toStoreFormatString() {
+        return String.format("D/%s/%d/%s", super.name, this.getStatusNo(), deadline);
     }
 }
 
@@ -270,11 +299,23 @@ class Event extends Task {
         this.from = from;
         this.to = to;
     }
+
+    private int getStatusNo() {
+        if (super.status.equals("[ ]")) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
     /**
      * overrrides toString method
      */
     public String toString() {
         return "[E]" + status + " " + name + "(" + from + to + ")";
+    }
+    
+    public String toStoreFormatString() {
+        return String.format("E/%s/%d/%s/%s", super.name, this.getStatusNo(), from, to);
     }
 }
 
@@ -287,11 +328,23 @@ class Todo extends Task {
     Todo(String name, int status) {
         super(name, status);
     }
+
+    private int getStatusNo() {
+        if (super.status.equals("[ ]")) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
     /**
      * overrides toString method
      */
     public String toString() {
         return "[T]" + status + " " + name;
+    }
+
+    public String toStoreFormatString() {
+        return String.format("T/%s/%d", super.name, this.getStatusNo());
     }
 }
 
