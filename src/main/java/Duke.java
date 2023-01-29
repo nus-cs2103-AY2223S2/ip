@@ -3,9 +3,13 @@ import java.util.ArrayList;
 public class Duke {
     public static Scanner sc = new Scanner(System.in);
     public static ArrayList<Task> lst = new ArrayList<Task>();
-    public static void add_to_list(String str) {
+    public static void add_to_list(String str) throws InvalidCommandException, NoDescriptionException{
 
-        if((str.split(" ", 2)[0]).equals("todo")) {
+        if((str.split(" ", 2).length == 1)) {
+            throw new NoDescriptionException();
+        }
+        else if((str.split(" ", 2)[0]).equals("todo")) {
+
             lst.add(new Todo(str));
         }
         else if((str.split(" ", 2)[0]).equals("deadline")) {
@@ -15,7 +19,7 @@ public class Duke {
             lst.add(new Event(str));
         }
         else {
-            System.out.println("error input");
+            throw new InvalidCommandException();
         }
         int size = lst.size();
         System.out.println("Got it. I've added this task:");
@@ -60,7 +64,15 @@ public class Duke {
             reply();
         }
         else {
-            add_to_list(str);
+            try {
+                add_to_list(str);
+            }
+            catch(InvalidCommandException e) {
+                System.out.println("the command is invalid");
+            }
+            catch(NoDescriptionException e) {
+                System.out.println("the task needs to have a description");
+            }
             reply();
         }
     }
