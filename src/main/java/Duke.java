@@ -9,6 +9,8 @@ import java.lang.StringBuilder;
 
 import java.util.ArrayList;
 
+import java.time.format.DateTimeParseException;
+
 public class Duke {
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
@@ -117,7 +119,24 @@ public class Duke {
                         goNext = true;
                         break;
                     }
-                    newTask = new Deadline(tempText2[0], tempText2[1]);
+
+                    String time;
+                    String[] tempDateTime = tempText2[1].split(" ");
+                    if (tempDateTime.length != 3) {
+                        time = "";
+                    } else {
+                        time = tempDateTime[2];
+                    }
+
+                    try {
+                        newTask = new Deadline(tempText2[0], tempDateTime[1], time);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid inputs!\n");
+                        System.out.println("Please enter your date & time in the format: YYYY-MM-DD HH:MM \n");
+                        System.out.println("Please also ensure they are valid values!\n");
+                        goNext = true;
+                        break;
+                    }
                     break;
                 case "event":
                     String[] tempText3 = tempText[1].split("/from", 2);
@@ -128,6 +147,15 @@ public class Duke {
                         goNext = true;
                         break;
                     }
+
+                    String startTime;
+                    String[] tempStartDateTime = tempText3[1].split(" ");
+                    if (tempStartDateTime[2].equals("/to")) {
+                        startTime = "";
+                    } else {
+                        startTime = tempStartDateTime[2];
+                    }
+
                     String[] tempText4 = tempText3[1].split("/to", 2);
                     try {
                         DukeException.validate(true, tempCmd, tempText4);
@@ -136,7 +164,25 @@ public class Duke {
                         goNext = true;
                         break;
                     }
-                    newTask = new Event(tempText3[0], tempText4[0], tempText4[1]);
+
+                    String endTime;
+                    String[] tempEndDateTime = tempText4[1].split(" ");
+                    if (tempEndDateTime.length != 3) {
+                        endTime = "";
+                    } else {
+                        endTime = tempEndDateTime[2];
+                    }
+
+                    try {
+                        newTask = new Event(tempText3[0], tempStartDateTime[1], tempEndDateTime[1],
+                                startTime, endTime);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid inputs!\n");
+                        System.out.println("Please enter your date & time in the format: YYYY-MM-DD HH:MM \n");
+                        System.out.println("Please also ensure they are valid values!\n");
+                        goNext = true;
+                        break;
+                    }
                     break;
                 default:    // throw an error as the user is trying to call a function that does not exist
                     try {
