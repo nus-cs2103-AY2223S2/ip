@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Class DeadLine is a subclass of Task, encapsulate details
  * about a type of user's tasks which has a deadline.
@@ -6,7 +9,7 @@
  */
 public class Deadline extends Task {
     //The deadline of the task
-    private String by;
+    private LocalDate by;
 
     /**
      * Creates a Deadline task with given description and deadline time
@@ -14,12 +17,12 @@ public class Deadline extends Task {
      * @param description The description for the task
      * @param by The deadline of the task
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
 
-    public String getDeadline() {
+    public LocalDate getDeadline() {
         return this.by;
     }
 
@@ -35,6 +38,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

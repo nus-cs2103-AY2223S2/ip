@@ -1,8 +1,7 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -175,16 +174,18 @@ public class Duke {
                     if (description.length() <= 9) {
                         throw new DukeException(reply("The description of a deadline cannot be empty.\n"));
                     }
-                    String by = description.substring(description.indexOf(" /by ") + 5);
+                    LocalDate by = LocalDate.parse(description.substring(description.indexOf(" /by ") + 5),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     description = description.substring(9, description.indexOf(" /by "));
                     newTask = new Deadline(description, by);
                 } else if (command.startsWith("event")) {
                     if (description.length() <= 6) {
                         throw new DukeException(reply("The description of a event cannot be empty.\n"));
                     }
-                    String start = description.substring(description.indexOf(" /from ") + 7,
-                            description.indexOf(" /to "));
-                    String end = description.substring(description.indexOf(" /to ") + 5);
+                    LocalDate start = LocalDate.parse(description.substring(description.indexOf(" /from ") + 7,
+                            description.indexOf(" /to ")), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    LocalDate end = LocalDate.parse(description.substring(description.indexOf(" /to ") + 5),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     description = description.substring(6, description.indexOf(" /from "));
                     newTask = new Event(description, start, end);
                 } else {

@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Class Event is a subclass of Task, encapsulate details
  * about a type of user's tasks which happen during a period
@@ -7,9 +10,9 @@
  */
 public class Event extends Task {
     // The starting time of the Event
-    private String start;
+    private LocalDate start;
     //The ending time of the Event
-    private String end;
+    private LocalDate end;
 
     /**
      * Creates an Event task object with given description and starting, ending time
@@ -18,17 +21,17 @@ public class Event extends Task {
      * @param start The starting time of the Event
      * @param end The ending time fo the Event
      */
-    public Event(String description, String start, String end) {
+    public Event(String description, LocalDate start, LocalDate end) {
         super(description);
         this.start = start;
         this.end = end;
     }
 
-    public String getStartTime() {
+    public LocalDate getStartTime() {
         return this.start;
     }
 
-    public String getEndTime() {
+    public LocalDate getEndTime() {
         return this.end;
     }
 
@@ -46,6 +49,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString()
-                + " (from: " + this.start + " to: " + this.end + ")";
+                + " (from: " + this.start.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " to: " + this.end.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
