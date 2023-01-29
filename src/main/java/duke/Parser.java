@@ -2,7 +2,16 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Makes sense of the user's commands.
+ */
 public class Parser {
+    /**
+     * Returns corresponding command objects from user commands given in strings.
+     * @param str User command
+     * @return Command object corresponding to the user command.
+     * @throws RuntimeException If user commands don't make sense or conform to the various command formats and standards.
+     */
     public static Command parse(String str) {
         Command command;
         boolean todoCheck, deadlineCheck, eventCheck, deleteCheck, markCheck, unMarkCheck, listCheck, exitCheck, nothingCheck;

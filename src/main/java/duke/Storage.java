@@ -8,11 +8,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Used to store data from past lists and save new data inputted by user.
+ */
 public class Storage {
     private String filepath;
     private String path;
     private File file;
 
+    /**
+     * Constructor for Storage class.
+     * @param filepath Relative filepath to load past data and save new data.
+     * @throws DukeException The custom exception when user commands don't make sense or conform to formats and standards.
+     */
     public Storage(String filepath) throws DukeException {
         this.filepath = filepath;
         int ptr = this.filepath.indexOf("/");
@@ -34,6 +42,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load past data inputted by user.
+     * @return An array of tasks containing the list of tasks still in the list after user previously exited.
+     * @throws DukeException When filepath of file that is supposed to store past data cannot be created or found.
+     */
     public Task[] load() throws DukeException {
         Task[] tasks = new Task[100];
         try {
@@ -56,6 +69,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Save new data inputted by user.
+     * @param taskList The TaskList object storing the list of Task objects.
+     * @throws DukeException When filepath of file that is supposed to store new data cannot be created or found.
+     */
     public void save(TaskList taskList) throws DukeException {
         try {
             FileWriter writer = new FileWriter(this.filepath);
