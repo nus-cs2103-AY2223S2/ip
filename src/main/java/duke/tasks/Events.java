@@ -25,7 +25,7 @@ public class Events extends Task {
             this.start = LocalDateTime.parse(start, Task.FORMATTER);
             this.end = LocalDateTime.parse(end, Task.FORMATTER);
         } catch (Exception err) {
-            throw new FormatException("yyyy-MM-dd HH:mm");
+            throw new FormatException("yyyy-MM-dd HH:mm", err.getMessage());
         }
 
 

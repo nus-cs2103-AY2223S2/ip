@@ -22,7 +22,7 @@ public class Deadlines extends Task {
         try {
             this.deadline = LocalDateTime.parse(deadline, FORMATTER);
         } catch (Exception err) {
-            throw new FormatException("yyyy-MM-dd HH:mm");
+            throw new FormatException("yyyy-MM-dd HH:mm", err.getMessage());
         }
 
     }
