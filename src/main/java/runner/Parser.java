@@ -3,7 +3,6 @@ import components.Deadline;
 import components.Event;
 import components.Task;
 import components.Todo;
-
 import java.time.format.DateTimeParseException;
 
 public class Parser {

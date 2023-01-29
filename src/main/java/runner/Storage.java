@@ -3,7 +3,6 @@ import components.Deadline;
 import components.Event;
 import components.Task;
 import components.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
