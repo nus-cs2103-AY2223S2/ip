@@ -16,10 +16,17 @@ public class Task {
         this.done = 0;
     }
 
+
+    /**
+     * Mark done after complete the Task.
+     */
     public void complete() {
         this.done = 1;
     }
 
+    /**
+     * Unmark done if Task not completed.
+     */
     public void uncomplete() {
         this.done = 0;
     }
@@ -59,8 +66,11 @@ public class Task {
 
     @Override
     public String toString() {
-        if (this.done==0)  return "[ ] " + this.msg;
-        else               return "[X] " + this.msg;
+        if (this.done==0)  {
+            return "[ ] " + this.msg;
+        } else {
+            return "[X] " + this.msg;
+        }
     }
 }
 
