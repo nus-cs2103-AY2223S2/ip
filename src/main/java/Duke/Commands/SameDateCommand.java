@@ -9,12 +9,23 @@ import java.time.LocalDate;
 
 import Duke.Ui.Ui;
 
+/**
+ * Represents the Duke.Commands.SameDateCommand of the Chat bot.
+ */
 public class SameDateCommand extends Command {
     @Override
     public void processCommand() {
         System.out.println("abstract method invoked");
     }
 
+    /**
+     * Overloaded processCommand method from the abstract class Command.
+     * Processes the command for a SameDateCommand.
+     *
+     * @param list The TaskList object that stores Tasks.
+     * @param date The date to be searched for in the TaskList.
+     * @param ui User interface of the Chat bot.
+     */
     public void processCommand(TaskList list, String date, Ui ui) {
         LocalDate now = LocalDate.parse(date.trim());
         ui.print("Tasks occurring on " + now.toString() + ":");

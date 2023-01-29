@@ -1,3 +1,4 @@
+package Duke;
 import Duke.Parser.Parser;
 import Duke.Ui.Ui;
 import Duke.entities.TaskList;
@@ -5,12 +6,21 @@ import Duke.exceptions.DukeException;
 import Duke.storage.Storage;
 import Duke.Commands.*;
 
+/**
+ * Represents the Duke.Duke Chat bot.
+ * Running a duke object loads data from the specified file into memory,
+ * and exiting the program writes data to the hard disk.
+ */
 public class Duke {
     private TaskList list;
     private Storage storage;
     private Ui ui;
     private Parser parser;
-
+    /**
+     * Duke.Duke Constructor for initializing the Duke object.
+     *
+     * @param filePath of the storage
+     */
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();
@@ -24,11 +34,21 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException {
+    /**
+     * duke.Duke Main method that runs the duke chatbot.
+     *
+     * @param args arguments of the main function
+     */
+    public static void main(String[] args)  {
         new Duke("duke.txt").run();
     }
 
-    private void run() throws DukeException {
+    /**
+     * Runs the Chat bot and processes the inputs given by user.
+     * Parses each input string and runs the corresponding command.
+     * Saves the output into the read file.
+     */
+    private void run() {
         ui.showWelcome();
         ui.startScanner();
         String input = ui.readCommand();
