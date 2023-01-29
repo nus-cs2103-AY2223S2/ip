@@ -15,14 +15,31 @@ import duke.tasktypes.Events;
 import duke.tasktypes.ToDo;
 import duke.tasktypes.Task;
 
+/**
+ * Class used to help in storing and loading user's list of tasks for Duke chatbot.
+ */
 public class Storage {
     
-    Path dataPath;
+    protected Path dataPath;
 
+    /**
+     * Constructor to initiate a Storage instance.
+     * @param filePath  directory whereby the list of tasks should be stored.
+     * @param fileName file in which the list of tasks should or will be stored.
+     * @throws IOException if force-closed.
+     */
     public Storage(String filePath, String fileName) throws IOException {
         this.dataPath = getData(filePath, fileName);
     }
 
+    /**
+     *
+     * @param filePath
+     * @param fileName
+     * @return Path whereby the file containing the list of tasks is supposed to be. If there is no such file, the
+     *         file will be created in the specified filePath with fileName.
+     * @throws IOException
+     */
     public Path getData(String filePath, String fileName) throws IOException {
         Path toCheck = Paths.get(filePath);
         if (!Files.exists(toCheck)) {
@@ -36,6 +53,13 @@ public class Storage {
         return fileToCheck;
     }
 
+    /**
+     * Helper method to handle loading of ToDo tasks from the file into the Duke chatbot.
+     * @param isDone Character read from the file to indicate whether the task is done or not.
+     * @param nameOfTask A string containing the name of the task to be handled.
+     * @param listOfTasks The list which will have tasks written into from the file.
+     * @throws DukeExceptions
+     */
     public void handleToDo(Character isDone, String nameOfTask, ArrayList<Task> listOfTasks) throws DukeExceptions {
         Task toAdd = new ToDo(nameOfTask);
         if (isDone.equals('X')) {
@@ -44,6 +68,13 @@ public class Storage {
         listOfTasks.add(toAdd);
     }
 
+    /**
+     * Helper method to handle loading of Deadlines tasks from the file into the Duke chatbot.
+     * @param isDone Character read from the file to indicate whether the task is done or not.
+     * @param listOfTasks The list which will have tasks written into from the file.
+     * @param requiredInformation A string containing the full name of the task as written into the file previously.
+     * @throws DukeExceptions
+     */
     public void handleDeadline(Character isDone, ArrayList<Task> listOfTasks, String requiredInformation) throws DukeExceptions {
                 String deadlineWithBy = requiredInformation.substring(requiredInformation.lastIndexOf("("));
                 String rawDate = deadlineWithBy.split("\\(by: ")[1].split("\\)")[0];
@@ -63,6 +94,13 @@ public class Storage {
                 listOfTasks.add(toAdd);
     }
 
+    /**
+     * Helper method to handle loading of Events tasks from the file into the Duke chatbot.
+     * @param isDone Character read from the file to indicate whether the task is done or not.
+     * @param listOfTasks The list which will have tasks written into from the file.
+     * @param requiredInformation A string containing the full name of the task as written into the file previously.
+     * @throws DukeExceptions
+     */
     public void handleEvents(Character isDone, ArrayList<Task> listOfTasks, String requiredInformation) throws DukeExceptions {
                 String timeframe = requiredInformation.substring(requiredInformation.lastIndexOf("("));
                 String from = timeframe.substring(1).split(" to:")[0].substring(5);
@@ -83,6 +121,12 @@ public class Storage {
                 listOfTasks.add(toAdd); 
     }
 
+    /**
+     * Function to load tasks from stored dataPath into an arraylist to be used by the Duke chatbot.
+     * @return An arraylist which contains the tasks as stored from the previous session.
+     * @throws IOException
+     * @throws DukeExceptions
+     */
     public ArrayList<Task> loadTask() throws IOException, DukeExceptions {
         ArrayList<Task> useThis = new ArrayList<>();
         Scanner scannerForFileData = new Scanner(this.dataPath);
@@ -113,6 +157,11 @@ public class Storage {
         return useThis;
     }
 
+    /**
+     * Function to store the list of tasks from the current Duke chatbot session into the dataPath file.
+     * @param listOfTasks The list of tasks from the current Duke chatbot session.
+     * @throws IOException
+     */
     public void storeTask(ArrayList<Task> listOfTasks) throws IOException {
         if (listOfTasks.size() == 0) {
             Files.write(dataPath, "".getBytes());

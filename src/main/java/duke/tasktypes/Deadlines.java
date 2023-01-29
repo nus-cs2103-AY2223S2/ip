@@ -7,6 +7,9 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeExceptions;
 
+/**
+ * Class which represents a Task with a deadline.
+ */
 public class Deadlines extends Task {
     protected String endsBy;
     protected LocalDate dueDateBy;
@@ -14,6 +17,12 @@ public class Deadlines extends Task {
     protected boolean validTime = false;
 
 
+    /**
+     * Constructor to initialize a Deadlines task/
+     * @param taskName String containing the task's name and due date.
+     * @throws DukeExceptions if the task name is empty.
+     * @throws DateTimeParseException if the due date is an invalid format.
+     */
     public Deadlines(String taskName) throws DukeExceptions, DateTimeParseException{
         super(taskName.split("/by ")[0]);
         if (taskName.length() <= 0 || taskName.isBlank()) {
@@ -34,6 +43,10 @@ public class Deadlines extends Task {
         }
     }
 
+    /**
+     * Function to format the time of the due date if it is a valid time but not in correct format.
+     * @param toFormat String representation of the time to be formatted.
+     */
     public void formatTimeIfValid(String toFormat) {
         if (toFormat.length() == 4) {
             String firstTwo = toFormat.substring(0, 2);
@@ -55,6 +68,10 @@ public class Deadlines extends Task {
         return this.validTime;
     }
 
+    /**
+     * Function to reformat the stored date when reading from the stored list due to differences in input and
+     * output date format.
+     */
     public void reformat() {
         String[] reconstructedDateArr = this.endsBy.split(" ");
         String reconstructedDateInString = reconstructedDateArr[0] + " " + reconstructedDateArr[1] + " " + reconstructedDateArr[2];
@@ -64,6 +81,12 @@ public class Deadlines extends Task {
         this.dueDateBy = reconstructedDate;
     }
 
+    /**
+     * Function to check the validity of the due date when first input by the user.
+     * @param toCheck String representation of the date input by the user.
+     * @return boolean indicating if the date input by the user is valid.
+     * @throws DateTimeParseException if the date input is invalid.
+     */
     public boolean checkValidityOfInitialInputDate(String toCheck) throws DateTimeParseException {
         boolean isValid = true;
         try {
@@ -74,6 +97,12 @@ public class Deadlines extends Task {
         return isValid;
     }
 
+    /**
+     * Function to check the validity of the due date when reading from the stored list.
+     * @param toCheck String representation of the date when read from stored list.
+     * @return boolean indicating if the date read from the stored list is valid.
+     * @throws DateTimeParseException if the date read is invalid.
+     */
     public boolean checkValidityOfDateFromList(String toCheck) throws DateTimeParseException {
         boolean isValid = true;
         try {
@@ -85,6 +114,12 @@ public class Deadlines extends Task {
         return isValid;
     }
 
+    /**
+     * Function to check if the time input by the user is valid
+     * @param toCheck String representation of the time.
+     * @return boolean indicating if the time is valid.
+     * @throws DateTimeParseException if the time is invalid.
+     */
     public boolean checkValidityOfTime(String toCheck) throws DateTimeParseException {
         boolean isValid = true;
         try {
@@ -95,6 +130,11 @@ public class Deadlines extends Task {
         return isValid;
     }
 
+    /**
+     * Function to format the deadline task's due date if it is a valid input.
+     * @return String representation of the due date if valid, else string representation of prompting valid input
+     * is returned.
+     */
     public String taskDate() {
         String toReturn = "";
         if (this.dueDateBy == null) {
@@ -111,6 +151,10 @@ public class Deadlines extends Task {
         return toReturn;
     }
 
+    /**
+     * Function to check, and accordingly print String representation of deadline.
+     * @return String representation of deadline task.
+     */
     @Override
     public String toString() {
         String toReturn = "";

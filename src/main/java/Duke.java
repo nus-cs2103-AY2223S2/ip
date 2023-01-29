@@ -10,6 +10,9 @@ import duke.DukeExceptions;
 
 import duke.tasktypes.Task;
 
+/**
+ * Main Duke class whereby an instance of the Duke chatbot is initialized.
+ */
 public class Duke {
 
     static ArrayList<Task> storedText = new ArrayList<Task>();
@@ -18,6 +21,11 @@ public class Duke {
     static Storage DukeStorage;
     static TaskList DukeTaskList;
 
+    /**
+     * Constructor to create an instance of Duke chatbot.
+     * @throws IOException
+     * @throws DukeExceptions
+     */
     Duke() throws IOException, DukeExceptions {
         DukeUi = new Ui();
         DukeParser = new Parser();
@@ -30,6 +38,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke chatbot program.
+     * @throws IOException
+     * @throws DukeExceptions
+     */
     public void run() throws IOException, DukeExceptions {
         String input = DukeUi.gettingUserInput();
 
@@ -39,7 +52,10 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws IOException, DukeExceptions, StringIndexOutOfBoundsException{
+    /**
+     * Initializes, runs and stores the resulting list of tasks for Duke chatbot.
+     */
+    public static void main(String[] args) throws IOException, DukeExceptions {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
