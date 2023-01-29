@@ -1,9 +1,11 @@
+package duke.task;
+
 public class Task {
     protected String item;
     protected boolean status;
     protected String types; // toDo, deadline, events
 
-    Task(String x, String y) {
+    public Task(String x, String y) {
         item = x;
         types = y;
         status = false;
@@ -11,6 +13,17 @@ public class Task {
 
     public String getTime() {
         return "";
+    }
+
+    public String getItem() {
+        return item;
+    }
+    public boolean getStatus() {
+        return status;
+    }
+
+    public String getTypes() {
+        return types;
     }
 
     @Override

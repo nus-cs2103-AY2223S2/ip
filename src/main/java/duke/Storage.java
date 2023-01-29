@@ -1,3 +1,9 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,9 +35,9 @@ public class Storage {
             for (int i = 0; i < entireList.size(); i++) {
                 Task task = entireList.get(i);
 
-                boolean isMark = task.status;
-                String type = task.types;
-                String name = task.item;
+                boolean isMark = task.getStatus();
+                String type = task.getTypes();
+                String name = task.getItem();
 
 
                 if (type.equals("D")){

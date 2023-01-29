@@ -1,3 +1,8 @@
+package duke;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 import java.util.Date;
@@ -24,20 +29,20 @@ public class TaskList {
     public void addItem(String type, String item) {
         Task newTask = new Task(item, type);
         allTasks.add(newTask);
-        System.out.println(" " + newTask.toString());
+        System.out.println(" " + newTask);
     }
 
 
     public void addItemDeadline(String type, String item, Date time, String timeString) {
         Task newTask = new Deadline(item, type, time, timeString);
         allTasks.add(newTask);
-        System.out.println(" " + newTask.toString());
+        System.out.println(" " + newTask);
     }
 
     public void addItemEvent(String type, String item, Date time1, Date time2, String start, String end) {
         Task newTask = new Event(item, type, time1, time2, start, end);
         allTasks.add(newTask);
-        System.out.println(" " + newTask.toString());
+        System.out.println(" " + newTask);
     }
 
     public void changingStatus(int x, int index) {

@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 
 public class Duke {
@@ -5,7 +7,6 @@ public class Duke {
     public Ui ui;
     public Storage storage;
     public TaskList listOfTasks;
-    public Parser parser;
 
     public Duke()  {
         ui = new Ui();

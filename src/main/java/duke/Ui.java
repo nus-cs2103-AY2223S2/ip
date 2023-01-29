@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -24,7 +26,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello I'm duke.\nWhat can I do for you?");
     }
 
     public void showLine() {
