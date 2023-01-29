@@ -57,6 +57,7 @@ public class Parser {
     public Command parse(String[] line) throws DukeException {
         Command c;
         ArrayList<String> queries;
+        String joined = String.join("", line);
         switch(this.readCommand(line)) {
 
             case "list":
@@ -83,7 +84,10 @@ public class Parser {
             case "event":
                 if (line.length == 1) {
                     throw new NoArgsException("deadline");
+                } else if (joined.split("/").length != 3) {
+                    throw new InvalidException();
                 }
+
                 queries = this.queries(line, List.<String>of("from", "to"));
                 Events event = new Events(queries);
                 c = new EventCommand(event);
@@ -92,7 +96,10 @@ public class Parser {
             case "deadline":
                 if (line.length == 1) {
                     throw new NoArgsException("deadline");
+                } else if (joined.split("/").length != 2) {
+                    throw new InvalidException();
                 }
+
                 queries = this.queries(line, List.<String>of("by"));
                 c = new DeadLineCommand(new Deadlines(queries));
                 break;
@@ -101,13 +108,15 @@ public class Parser {
                 break;
 
             case "find":
+                if (line.length == 1) {
+                    throw new NoArgsException("deadline");
+                }
                 String query = this.queries(line, List.<String>of()).get(0);
                 c = new FindCommand(query);
                 break;
             default:
                 throw new EmptyException();
         }
-
         return c;
     }
 
