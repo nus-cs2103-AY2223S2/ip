@@ -170,6 +170,11 @@ public class Parser {
         return to;
     }
 
+    /**
+     * Returns the keyword the user inputs.
+     * @return Keyword.
+     * @throws DukeInvalidArgumentException If keyword is empty. 
+     */
     public String getFindKeyword() throws DukeInvalidArgumentException {
         if (answer.substring(5, answer.length()).isEmpty()) {
             throw new DukeInvalidArgumentException("Keyword is empty, please input command again");
