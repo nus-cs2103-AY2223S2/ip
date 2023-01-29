@@ -7,6 +7,11 @@ public class EventTask extends Task {
         this.to = to;
     }
 
+    public String save() {
+        String status = this.isDone ? "DONE " : "NOTDONE ";
+        return "EVENT " + status + this.from + " " + this.to + "\n";
+    }
+
     @Override
     public String toString() {
         String status = this.isDone ? "[x] " : "[ ] ";

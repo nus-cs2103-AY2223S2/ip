@@ -5,6 +5,11 @@ public class DeadlineTask extends Task {
         this.by = by;
     }
 
+    public String save() {
+        String status = this.isDone ? "DONE " : "NOTDONE ";
+        return "DEADLINE " + status + this.by + "\n";
+    }
+
     @Override
     public String toString() {
         String status = this.isDone ? "[x] " : "[ ] ";
