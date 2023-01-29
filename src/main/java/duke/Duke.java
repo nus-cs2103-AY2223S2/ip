@@ -10,11 +10,20 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * The main class that represents the chatbot, Duke, which helps
+ * to build a checklist consisting of todos, deadlines, events.
+ */
 public class Duke {
     private final Storage storage;
     private TaskList taskList;
     private final Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath For Duke to find the path to an existing data.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,6 +35,11 @@ public class Duke {
         }
     }
 
+    /**
+     * The function that handles the parsing, storage
+     * and ui of Duke. Also handles the exceptions coming
+     * from Command.
+     */
     public void run() {
         this.ui.welcome();
         boolean isExit = false;
@@ -44,6 +58,12 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method. Initialises a Duke instance and
+     * starts up the cogwheel.
+     *
+     * @param args Takes in the command line argument.
+     */
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
 
