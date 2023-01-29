@@ -1,4 +1,6 @@
 package duke.task;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Task {
     protected String description;
@@ -7,6 +9,14 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String encode() {
+        return this.description + isDone;
     }
 
     public String getStatusIcon() {
@@ -24,5 +34,7 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+
 }
 

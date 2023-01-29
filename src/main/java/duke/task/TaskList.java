@@ -14,6 +14,10 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
+    public TaskList(List<Task> list) {
+        this.list = list;
+    }
+
     public List<Task> getTaskList() {
         return this.list;
     }
@@ -93,7 +97,7 @@ public class TaskList {
                 //split into descrpition and time
                 String part2[] = parts[1].split("/by:", 2);
 
-                String deadlineDescription = part2[0];
+                String deadlineDescription = part2[0].trim();
                 String time = part2[1].trim();
 
                 //turn String date into LocalDate object date
@@ -107,7 +111,7 @@ public class TaskList {
                 //split into descrpition and time
                 String part3[] = parts[1].split("/from:", 2);
 
-                String eventDescription = part3[0];
+                String eventDescription = part3[0].trim();
 
                 String timearr[] = part3[1].split("/to:", 2);
                 String from = timearr[0].trim();

@@ -3,24 +3,24 @@ package duke;
 import duke.command.Parser;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import duke.storage.Storage;
 
 public class Duke {
-
-    private static final String FILE_PATH = "./data/duke.txt";
-    private static final String FILE_DIRECTORY = "data";
-    private static final String FILE_NAME = "duke.txt";
     private final Parser parser;
     private Ui ui;
     private TaskList taskList;
+    private Storage storage;
 
     public Duke() {
-        this.taskList = new TaskList();
+        this.storage = new Storage();
+        this.taskList = new TaskList(storage.load());
         this.ui = new Ui(taskList);
         this.parser = new Parser(taskList);
     }
     public void run() {
         ui.greet();
         parser.getTaskType();
+        storage.save(taskList);
     }
     public static void main(String[] args) {
         Duke duke = new Duke();
