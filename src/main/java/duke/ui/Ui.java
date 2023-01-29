@@ -4,7 +4,6 @@ import duke.task.Task;
 
 import java.util.Scanner;
 
-
 public class Ui {
     private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -40,6 +39,7 @@ public class Ui {
     public void showAddTaskMsg(Task task, String tasksLen) {
         System.out.println("Got it. I've added this task:\n  " + task + "\nNow you have " + tasksLen + " tasks in the list.");
     }
+
     public void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
@@ -48,9 +48,11 @@ public class Ui {
         System.out.println("Nice! I've marked this task as done:\n" + task);
     }
 
+
     public void showUnmarkedMsg(Task task) {
         System.out.println("Ok, I've marked this as not done yet:\n" + task);
     }
+
 
     public void showLoadingError() {
         System.out.println("No existing tasklist!");

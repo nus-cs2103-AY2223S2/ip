@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
 
     @Test
-    public void splitDeadlineDateCommandTest(){
+    public void splitDeadlineDateCommandTest() {
         String command = "deadline return book /by 02/12/2019 1800";
         String[] splitCommand = Parser.splitCommand(command);
         assertEquals("by 02-12-2019 1800", splitCommand[2]);

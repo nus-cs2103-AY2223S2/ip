@@ -1,17 +1,18 @@
 package duke.storage;
 
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class Storage {
@@ -19,7 +20,6 @@ public class Storage {
     private FileWriter writer;
     private ArrayList<Task> taskList = new ArrayList<>();
     private Task task;
-
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -63,7 +63,6 @@ public class Storage {
     }
 
     public ArrayList<Task> load() throws DukeException {
-
         try {
             BufferedReader bufReader = new BufferedReader(new FileReader(filePath));
             String line = bufReader.readLine();

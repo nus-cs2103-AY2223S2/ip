@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class AddCommand extends Command {
+
     private String taskType;
     private String taskDesc;
     private String deadline;

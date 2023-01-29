@@ -5,10 +5,6 @@ import duke.command.*;
 public class Parser {
     static String[] arr;
 
-    public Parser() {
-
-    }
-
     public static String[] splitCommand(String command) {
         if (command.contains("/")) {
             String[] temp2;
