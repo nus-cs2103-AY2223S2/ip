@@ -1,4 +1,5 @@
 package lulu.task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -6,7 +7,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-     }
+    }
 
     public void markAsDone() {
         this.isDone = true;
@@ -18,6 +19,10 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
+    }
+
+    public boolean containsDescription(String s) {
+        return this.description.contains(s);
     }
 
     @Override
