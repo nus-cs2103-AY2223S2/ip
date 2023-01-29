@@ -2,7 +2,7 @@ package james.command;
 
 import james.JamesException;
 import james.task.TaskList;
-import james.UI;
+import james.ui.UI;
 
 public class addListCommand extends Command {
     public addListCommand() {

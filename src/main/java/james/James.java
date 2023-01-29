@@ -3,8 +3,18 @@ package james;
 import james.command.Command;
 import james.parser.Parser;
 import james.task.TaskList;
+import james.ui.UI;
 
+/**
+ * The main class of James Program.
+ */
 public class James {
+    /**
+     * The main method of James Program.
+     */
+    public static void main(String[] args) throws JamesException {
+        new James();
+    }
         private UI ui;
         private Storage storage;
         private TaskList taskList;
@@ -32,10 +42,6 @@ public class James {
             }
             storage.writeToFile(taskList);
             ui.exit();
-        }
-
-        public static void main(String[] args) throws JamesException {
-            new James();
         }
     }
 
