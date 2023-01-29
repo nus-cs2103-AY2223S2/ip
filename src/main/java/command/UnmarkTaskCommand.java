@@ -1,6 +1,5 @@
 package command;
 
-import command.Command;
 import duke.DukeException;
 import storage.Storage;
 import task.TaskList;
@@ -16,7 +15,7 @@ public class UnmarkTaskCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.unmarkTask(idx - 1);
-        ui.formResponse("Task masked as done: " + tasks.getTask(idx - 1));
+        ui.formResponse("Task marked as undone: " + tasks.getTask(idx - 1));
         storage.save(tasks.getList());
     }
 }

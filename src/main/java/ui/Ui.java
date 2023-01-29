@@ -12,8 +12,8 @@ public class Ui {
     }
 
     public void formResponse(String s) {
-        String opener = "◤";
-        String ender = "◣";
+        String opener = "*";
+        String ender = "*";
 
         // Find max length of a line
         String[] stringArr = s.split(System.lineSeparator());
@@ -25,11 +25,11 @@ public class Ui {
         // Create adjustable text box
         for (int i = 0; i < maxLen; i++) {
             if (i == maxLen - 1) {
-                opener += "◥";
-                ender += "◢";
+                opener += "*";
+                ender += "*";
             } else {
-                opener += "━";
-                ender += "━";
+                opener += "-";
+                ender += "-";
             }
         }
 

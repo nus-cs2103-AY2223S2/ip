@@ -18,7 +18,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui("Tyrone");
         this.storage = new Storage(FILE_DIRECTORY, FILE_NAME, ui);
         this.tasks = new TaskList(storage.load());
@@ -50,7 +50,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke bot = new Duke(FILE_PATH);
+        Duke bot = new Duke();
         bot.run();
     }
 }

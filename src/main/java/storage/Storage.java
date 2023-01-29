@@ -138,17 +138,4 @@ public class Storage {
             ui.showError("Something went wrong with saving file");
         }
     }
-
-
-    //    /**
-//     * Gets the directories to the save file.
-//     *
-//     * @return String representing the directories to the save file.
-//     */
-//    public String getDir() {
-//        String home = System.getProperty("user.dir");
-//        Path path = java.nio.file.Paths.get(home, "data");
-//        return path.toString();
-//    }
-
 }
