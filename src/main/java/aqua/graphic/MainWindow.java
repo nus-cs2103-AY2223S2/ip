@@ -10,20 +10,28 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+
+/** The main window of the application. */
 public class MainWindow extends UiComponent<VBox> {
+    /** String path to FXML file relative to the FXML directory. */
     private static final String PATH_FXML_FILE = "MainWindow.fxml";
 
-    private final AppManager executor;
+    private final AppManager manager;
 
     @FXML private ScrollPane textScrollPane;
     @FXML private VBox textDisplayArea;
     @FXML private TextField inputField;
 
 
+    /**
+     * Constructs a MainWindow from the given LogicManager.
+     *
+     * @param logicManager - the LogicManager to handle logical processes.
+     */
     public MainWindow(LogicManager logicManager) {
         super(PATH_FXML_FILE);
 
-        this.executor = initialiseExecutor(logicManager);
+        this.manager = initialiseAppManager(logicManager);
 
         // add listener to auto scroll to bottom
         textDisplayArea.heightProperty().addListener((ob, o, n) -> {
@@ -46,17 +54,33 @@ public class MainWindow extends UiComponent<VBox> {
     }
 
 
-    public void start() {
-        executor.start();
-    }
-
-
-    private AppManager initialiseExecutor(LogicManager logicManager) {
+    /**
+     * Initialises an AppManager with the specified LogicManager that has its
+     * I/O functions binded to this window.
+     *
+     * @param logicManager - the LogicManager to handle logical processes.
+     * @return the AppManager to run the app.
+     */
+    private AppManager initialiseAppManager(LogicManager logicManager) {
         IoManager ioManager = new IoManager(this::getInput, this::displayReply);
         return new AppManager(logicManager, ioManager);
     }
 
 
+    /** Executes the starting processes. */
+    public void start() {
+        manager.start();
+    }
+
+
+    /**
+     * Returns the user's input.
+     *
+     * <p>{@code inputField} is cleared and the user's input message is
+     * displayed in the process.
+     *
+     * @return the user's input.
+     */
     private String getInput() {
         String input = inputField.getText();
         inputField.setText("");
@@ -67,6 +91,11 @@ public class MainWindow extends UiComponent<VBox> {
     }
 
 
+    /**
+     * Displays the specified reply.
+     *
+     * @param reply - the reply message to display.
+     */
     private void displayReply(String reply) {
         SpeechBubble bubble = new SpeechBubble(false);
         bubble.setText(reply);
@@ -74,13 +103,26 @@ public class MainWindow extends UiComponent<VBox> {
     }
 
 
+    /**
+     * Queues the specified bubble to be displayed in the JavaFx Application
+     * Thread.
+     *
+     * @param bubble - the SpeechBubble to display.
+     */
     private void displaySpeechBubble(SpeechBubble bubble) {
         Platform.runLater(() -> textDisplayArea.getChildren().add(bubble.getRoot()));
     }
 
 
+    /**
+     * Handles the ActionEvent when the send button is pressed.
+     *
+     * <p>The user's input is processed and executed.
+     *
+     * @param event - the event that occured.
+     */
     @FXML
-    public void handleSend(ActionEvent event) {
-        executor.processInput();
+    private void handleSend(ActionEvent event) {
+        manager.processInput();
     }
 }
