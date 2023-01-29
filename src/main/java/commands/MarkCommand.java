@@ -8,7 +8,7 @@ import tasks.TaskList;
 
 import views.UI;
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     int index;
 
     public MarkCommand(int index) {

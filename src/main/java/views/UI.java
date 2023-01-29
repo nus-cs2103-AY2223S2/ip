@@ -3,7 +3,7 @@ package views;
 import commands.Command;
 
 /**
- * Handles display of program output to user
+ * Handles display of program output to user.
  */
 public class UI {
     private static final String DATE_FORMAT = "dd/mm/yyyy";
@@ -27,13 +27,17 @@ public class UI {
         return "\n\t" + s;
     }
 
+    /**
+     * Displays a list of possible commands
+     * to the user
+     */
     public void printCommands() {
         System.out.println(
                 "Here is the list of available commands I can do:"
                         + indentString("bye")
                         + indentString("todo [name]")
                         + indentString("deadline [name] /by [" + DATE_FORMAT + "]")
-                        + indentString("event [name] /from [" + DATE_FORMAT + "] /to [" + DATE_FORMAT + "]" )
+                        + indentString("event [name] /from [" + DATE_FORMAT + "] /to [" + DATE_FORMAT + "]")
                         + indentString("list")
                         + indentString("mark [index]")
                         + indentString("unmark [index]")

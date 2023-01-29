@@ -1,12 +1,12 @@
 package exceptions;
 
 /**
- * General exception class for displaying error messages to users
+ * General exception class for displaying error messages to users.
  */
 public class DukeException extends Exception {
 
     /**
-     * Constructor for DukeException that stores an error message
+     * Constructor for DukeException that stores an error message.
      * @param message Main body of error message
      */
     public DukeException(String message) {

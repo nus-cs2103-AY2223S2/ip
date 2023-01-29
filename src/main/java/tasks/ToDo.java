@@ -1,12 +1,12 @@
 package tasks;
 
 /**
- * A class representing a ToDo task
+ * A class representing a ToDo task.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
-     * Constructor for a ToDo task
+     * Constructor for a ToDo task.
      * @param name
      */
     public ToDo(String name) {

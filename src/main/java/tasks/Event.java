@@ -1,22 +1,21 @@
 package tasks;
 
-import exceptions.DukeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A class representing an Event task
+ * A class representing an Event task.
  */
-public class Event extends Task{
+public class Event extends Task {
 
-    /** The starting date of this task **/
+    /** The starting date of this task. **/
     private LocalDateTime startDate;
 
-    /** The ending date of this task **/
+    /** The ending date of this task. **/
     private LocalDateTime endDate;
 
     /**
-     * Constructor for an Event task
+     * Constructor for an Event task.
      * @param name Name of the task
      * @param startDate Starting date of the task
      * @param endDate Ending date of the task

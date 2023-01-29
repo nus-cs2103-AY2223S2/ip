@@ -31,7 +31,7 @@ public class Parser {
             CommandType commandType = CommandType.valueOf(inputList[0].toUpperCase().strip());
 
             boolean tooFewArgs = inputList.length <= 1;
-            switch(commandType) {
+            switch (commandType) {
                 case LIST:
                     return new ListCommand();
                 case DEADLINE: {
@@ -98,12 +98,12 @@ public class Parser {
                     return new ByeCommand();
                 }
                 default:
-                    throw new DukeException("Sorry, that command is not recognised. \n" +
-                            "P.S. Maybe you could contact @dsja612 on github to request for more types of commands :)");
+                    throw new DukeException("Sorry, that command is not recognised. \n"
+                            + "P.S. Maybe you could contact @dsja612 on github to request for more types of commands :)");
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("Sorry, that command is not recognised. \n" +
-                    "P.S. Maybe you could contact @dsja612 on github to request for more types of commands :)");
+            throw new DukeException("Sorry, that command is not recognised. \n"
+                    + "P.S. Maybe you could contact @dsja612 on github to request for more types of commands :)");
         }
     }
 }

@@ -6,10 +6,10 @@ import tasks.TaskList;
 import views.UI;
 
 /**
- * Abstract command class for all Duke commands
+ * Abstract command class for all Duke commands.
  */
 public abstract class Command {
-    /** The status of the command after execution **/
+    /** The status of the command after execution. **/
     String commandStatus;
     boolean isExit = false;
 

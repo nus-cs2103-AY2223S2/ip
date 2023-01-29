@@ -8,7 +8,7 @@ import tasks.TaskList;
 
 import views.UI;
 
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
     int index;
 
     public UnmarkCommand(int index) {

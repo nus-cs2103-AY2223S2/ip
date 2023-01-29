@@ -1,18 +1,17 @@
 package tasks;
-import exceptions.DukeException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class representing a Deadline task
+ * Class representing a Deadline task.
  */
-public class Deadline extends Task{
-    /** The deadline of this task **/
+public class Deadline extends Task {
+    /** The deadline of this task. **/
     private LocalDateTime deadline;
 
     /**
-     * Constructor for a Deadline task
+     * Constructor for a Deadline task.
      * @param name Name of the task
      * @param deadline Deadline of the task
      */

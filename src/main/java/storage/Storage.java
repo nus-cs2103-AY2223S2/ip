@@ -18,19 +18,19 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 
 /**
- * Handles loading and saving of tasks to local storage
+ * Handles loading and saving of tasks to local storage.
  */
 public class Storage {
     private final Path HOME_DIRECTORY = Path.of(System.getProperty("user.dir") + "/data");
     private File dataFile;
     private final TaskList tasks;
 
-    public Storage (TaskList tasks) {
+    public Storage(TaskList tasks) {
         this.tasks = tasks;
     }
 
     /**
-     * Loads tasks from a local file into a TaskList, creates one if one does not exist
+     * Loads tasks from a local file into a TaskList, creates one if one does not exist.
      * @throws IOException If fail to load/create a storage file
      */
     public void load() throws IOException {
@@ -59,7 +59,7 @@ public class Storage {
     }
 
     /**
-     * Saves current TaskList into local file
+     * Saves current TaskList into local file.
      * @throws IOException If fail to save tasks into file
      */
     public void save() throws IOException {
@@ -76,7 +76,7 @@ public class Storage {
     }
 
     /**
-     * Parse input from file into tasks
+     * Parse input from file into tasks.
      * @param input Line from local file
      * @param tasks TaskList to store tasks
      * @throws DukeException If fail to create task from invalid input
@@ -102,6 +102,8 @@ public class Storage {
                 LocalDateTime endDate = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
                 tasks.addTask(new Event(taskName, startDate, endDate));
                 break;
+            default:
+                throw new DukeException("Unable to parse this line: " + input);
         }
     }
 }

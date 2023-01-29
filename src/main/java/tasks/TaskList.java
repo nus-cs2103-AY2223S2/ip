@@ -3,21 +3,21 @@ package tasks;
 import java.util.ArrayList;
 
 /**
- * A wrapper class for a list of tasks
+ * A wrapper class for a list of tasks.
  */
 public class TaskList {
-    /** ArrayList to store the tasks **/
+    /** ArrayList to store the tasks. **/
     private final ArrayList<Task> taskList;
 
     /**
-     * A Constructor for a TaskList object
+     * A Constructor for a TaskList object.
      */
     public TaskList() {
         taskList = new ArrayList<>();
     }
 
     /**
-     * Adds a task to the TaskList
+     * Adds a task to the TaskList.
      * @param task
      */
     public void addTask(Task task) {
@@ -33,7 +33,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from this TaskList based on its index
+     * Deletes a task from this TaskList based on its index.
      * @param index Index of the task in 1-based indexing format
      * @return Task that is deleted
      */
@@ -42,7 +42,7 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as done in this TaskList based on its index
+     * Marks a task as done in this TaskList based on its index.
      * @param index Index of the task in 1-based indexing format
      */
     public void markDone(int index) {
@@ -51,7 +51,7 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as not done in this TaskList based on its index
+     * Marks a task as not done in this TaskList based on its index.
      * @param index Index of the task in 1-based indexing format
      */
     public void markUndone(int index) {

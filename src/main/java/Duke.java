@@ -1,18 +1,17 @@
 import commands.Command;
 import exceptions.DukeException;
+import java.io.IOException;
+import java.util.Scanner;
 import storage.Storage;
 import tasks.TaskList;
 import utils.Parser;
 import views.UI;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 /**
- * Main driver class for Duke
+ * Main driver class for Duke.
  */
 
-public class Duke{
+public class Duke {
     private static final TaskList tasks = new TaskList();
     private static final Scanner sc = new Scanner(System.in);
     private static final UI ui = new UI();
@@ -31,10 +30,10 @@ public class Duke{
     }
 
     /**
-     * Takes in input from the user, and passes it to Parser to get the appropriate command
-     * and execute it.
+     * Takes in input from the user, and passes it to Parser
+     * to get the appropriate command and execute it.
      */
-    private static void acceptCommands(){
+    private static void acceptCommands() {
         boolean isExit = false;
         while (!isExit) {
             try {
