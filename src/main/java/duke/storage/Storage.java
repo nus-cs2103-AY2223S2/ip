@@ -2,16 +2,15 @@ package duke.storage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.Todo;
-import duke.Event;
 import duke.Deadline;
-import duke.TaskList;
+import duke.Event;
 import duke.Parser;
+import duke.TaskList;
+import duke.Todo;
 import duke.Ui;
 
 /**
