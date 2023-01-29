@@ -6,13 +6,28 @@ import task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * A command loading the contents of a file to a <code>TaskList</code>.
+ */
 public class Load implements Command {
     private final String path;
 
+    /**
+     * Creates a load command.
+     *
+     * @param path path of the file to load from
+     */
     public Load(String path) {
         this.path = path;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param tasks tasklist to perform the action on
+     * @param ui ui to perform the action on
+     * @param storage storage to perform the action on
+     */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
         if (!path.equals("")) {

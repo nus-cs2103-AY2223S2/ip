@@ -8,16 +8,34 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * Implementation of a <code>Task</code> with a chronological start-time and end-time.
+ */
 public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
 
+    /**
+     * Creates an event with the specified objective,
+     * and the specified starting and ending timings.
+     *
+     * @param objective the description of this event's objective
+     * @param from the start-time of this event
+     * @param to the end-time of this event
+     */
     public Event(String objective, LocalDateTime from, LocalDateTime to) {
         super(objective);
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Parses the supplied <code>String[]</code> command-line arguments to create an event.
+     *
+     * @param args the arguments containing the event to be parsed
+     * @return an event represented by <code>args</code>
+     * @throws TaskParseException if <code>args</code> does not represent a valid event
+     */
     public static Event parseArgs(String[] args) throws TaskParseException {
         String objective = "";
         String from = "";
@@ -63,16 +81,29 @@ public class Event extends Task {
         return new Event(objective, fromDate, toDate);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean beforeDate(LocalDateTime date) {
         return from.isBefore(date) || from.isEqual(date);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean afterDate(LocalDateTime date) {
         return to.isAfter(date) || to.isEqual(date);
     }
 
+    /**
+     * Parses the supplied <code>String[]</code> save data to create an event.
+     *
+     * @param data the data containing the event to be parsed
+     * @return an event represented by <code>data</code>
+     * @throws TaskParseException if <code>data</code> does not represent a valid event
+     */
     public static Event parseLoad(String[] data) throws TaskParseException {
         try {
             String[] header = data[0].split(" ");
@@ -97,7 +128,10 @@ public class Event extends Task {
             throw new TaskParseException("Event data is malformed:\n" + ex.getMessage());
         }
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String[] save() {
         ArrayList<String> repres = new ArrayList<>();
@@ -113,6 +147,9 @@ public class Event extends Task {
         return repres.toArray(new String[repres.size()]);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (" + from.format(DATE_OUT_FMT) + " - " + to.format(DATE_OUT_FMT) + ")";

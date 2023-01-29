@@ -4,13 +4,27 @@ import exception.TaskListIndexException;
 
 import java.util.ArrayList;
 
+/**
+ * A wrapper for <code>ArrayList<Task></code> with custom
+ * <code>IndexOutOfBoundsException</code> handling.
+ */
 public class TaskList {
-    ArrayList<Task> tasks = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Creates an empty tasklist.
+     */
     public TaskList() {
 
     }
 
+    /**
+     * Returns the <code>Task</code> at the specified position of the wrapped <code>ArrayList</code>.
+     *
+     * @param i index of the <code>Task</code> to return
+     * @return the <code>Task</code> at the specified position
+     * @throws TaskListIndexException if no <code>Task</code> exists at the specified position
+     */
     public Task get(int i) throws TaskListIndexException {
         try {
             return tasks.get(i);
@@ -22,10 +36,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * Appends the specified <code>Task</code> to the end of the wrapped <code>ArrayList</code>.
+     *
+     * @param t <code>Task</code> to be appended
+     */
     public void add(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Deletes the <code>Task</code> at the specified position of the wrapped <code>ArrayList</code>.
+     *
+     * @param i index of the <code>Task</code> to return
+     * @return the <code>Task</code> deleted from the specified position
+     * @throws TaskListIndexException if no <code>Task</code> exists at the specified position
+     */
     public Task delete(int i) throws TaskListIndexException {
         try {
             return tasks.remove(i);
@@ -37,10 +63,18 @@ public class TaskList {
         }
     }
 
+    /**
+     * Clears the wrapped <code>ArrayList</code>.
+     */
     public void clear() {
         tasks.clear();
     }
 
+    /**
+     * Returns the size of the wrapped <code>ArrayList</code>.
+     *
+     * @return the size of the wrapped <code>ArrayList</code>
+     */
     public int size() {
         return tasks.size();
     }

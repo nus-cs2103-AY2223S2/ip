@@ -12,8 +12,19 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * A storage handler for reading and writing to a filesystem.
+ */
 public class Storage {
+    /**
+     * Thrown when a file could not be parsed as a valid Miki save file.
+     */
     public static class MikiLoadException extends Exception {
+        /**
+         * Constructs a <code>MikiLoadException</code> with the specified detail message.
+         *
+         * @param message the detail message
+         */
         protected MikiLoadException(String message) {
             super(message);
         }
@@ -21,10 +32,18 @@ public class Storage {
 
     private final String dataPath;
 
+    /**
+     * Creates a new storage handler with a specified base directory for file paths.
+     *
+     * @param dataPath base directory of file paths
+     */
     public Storage(String dataPath) {
         this.dataPath = dataPath;
     }
 
+    /**
+     * Creates the base directory (and any required ancestors) if it does not exist yet.
+     */
     private void createSaveDir() {
         File dir = new File(dataPath);
         if (!dir.mkdirs()) {
@@ -32,6 +51,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Searches the base directory for loadable files and
+     * returns their filenames as a <code>String</code> array.
+     *
+     * @return the filenames of files in the base directory
+     * @throws MikiLoadException if the base directory does not exist and
+     * cannot be created
+     */
     public String[] listSaves() throws MikiLoadException {
         createSaveDir();
         File dir = new File(dataPath);
@@ -46,6 +73,13 @@ public class Storage {
         return filenames;
     }
 
+    /**
+     * Saves a <code>TaskList</code> to a file, in a loadable format.
+     *
+     * @param pathString path of the file to save to
+     * @param tasks tasklist to save
+     * @throws IOException if the file could not be written to
+     */
     public void save(String pathString, TaskList tasks) throws IOException {
         createSaveDir();
         Path path = FileSystems.getDefault().getPath(dataPath).resolve(pathString);
@@ -66,6 +100,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads a file as a <code>TaskList</code>.
+     *
+     * @param pathString path of the file to load from
+     * @param tasks tasklist to load to
+     * @throws IOException if the file could not be read from
+     * @throws MikiLoadException if the file did not represent a correctly-encoded TaskList
+     */
     public void load(String pathString, TaskList tasks) throws IOException, MikiLoadException {
         createSaveDir();
         tasks.clear();

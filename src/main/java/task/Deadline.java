@@ -8,14 +8,31 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * Implementation of a <code>Task</code> with one chronological deadline.
+ */
 public class Deadline extends Task {
     private LocalDateTime by;
 
+    /**
+     * Creates a deadline with the specified objective,
+     * and the specified deadline timing.
+     *
+     * @param objective the description of this deadline's objective
+     * @param by the deadline time of this deadline
+     */
     public Deadline(String objective, LocalDateTime by) {
         super(objective);
         this.by = by;
     }
 
+    /**
+     * Parses the supplied <code>String[]</code> command-line arguments to create a deadline.
+     *
+     * @param args the arguments containing the deadline to be parsed
+     * @return a deadline represented by <code>args</code>
+     * @throws TaskParseException if <code>args</code> does not represent a valid deadline
+     */
     public static Deadline parseArgs(String args[]) throws TaskParseException {
         String objective = "";
         String by = "";
@@ -41,16 +58,29 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean beforeDate(LocalDateTime date) {
         return by.isBefore(date) || by.isEqual(date);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean afterDate(LocalDateTime date) {
         return by.isAfter(date) || by.isEqual(date);
     }
 
+    /**
+     * Parses the supplied <code>String[]</code> save data to create a deadline.
+     *
+     * @param data the data containing the deadline to be parsed
+     * @return a deadline represented by <code>data</code>
+     * @throws TaskParseException if <code>data</code> does not represent a valid deadline
+     */
     public static Deadline parseLoad(String[] data) throws TaskParseException {
         try {
             String[] header = data[0].split(" ");
@@ -71,6 +101,9 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String[] save() {
         ArrayList<String> repres = new ArrayList<>();
@@ -84,6 +117,9 @@ public class Deadline extends Task {
         return repres.toArray(new String[repres.size()]);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (" + by.format(DATE_OUT_FMT) + ")";
