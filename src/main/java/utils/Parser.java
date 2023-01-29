@@ -5,8 +5,18 @@ import enums.CommandType;
 import exceptions.DukeException;
 import tasks.TaskList;
 
+/**
+ * Parse user input into commands for Duke.
+ */
+
 public class Parser {
 
+    /**
+     * Parses user input into a command.
+     * @param input User input
+     * @return Command corresponding to user input
+     * @throws DukeException If input is invalid for any command
+     */
     public static Command parse(String input) throws DukeException {
         try {
             String[] inputList = input.split(" ");

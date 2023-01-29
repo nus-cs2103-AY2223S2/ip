@@ -1,9 +1,19 @@
 package tasks;
 
+/**
+ * An abstract class to represent a Task object
+ */
 public abstract class Task {
+    /** The name or description of this task **/
     String name;
+
+    /** Represents if the task is marked as done or not **/
     private boolean isDone;
 
+    /**
+     * Constructor for a task
+     * @param name The name of the task
+     */
     public Task(String name){
         this.name = name;
         this.isDone = false;
@@ -21,6 +31,10 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Format when saving task to local storage
+     * @return A formatted string
+     */
     public abstract String toSaveFormat();
 
     public String getName() {

@@ -5,10 +5,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class representing a Deadline task
+ */
 public class Deadline extends Task{
+    /** The deadline of this task **/
     private LocalDateTime deadline;
 
-    public Deadline(String name, LocalDateTime deadline) throws DukeException {
+    /**
+     * Constructor for a Deadline task
+     * @param name Name of the task
+     * @param deadline Deadline of the task
+     */
+    public Deadline(String name, LocalDateTime deadline) {
         super(name);
         this.deadline = deadline;
     }
