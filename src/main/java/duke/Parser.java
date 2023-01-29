@@ -24,9 +24,9 @@ public class Parser {
      * @return boolean return false if the user indicates the end of current session
      */
 
-    public boolean parseInput(String input) {
+    public String parseInput(String input) {
         if (input.equals("bye")) {
-            return false;
+            return ".";
         } else {
             if (input.contains("unmark")) {
                 int i = Integer.parseInt(input.substring(7, 8));
@@ -36,7 +36,7 @@ public class Parser {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Ui.printUnmark(taskList, i);
+                return Ui.printUnmark(taskList, i);
             } else if (input.contains("mark")) {
                 int i = Integer.parseInt(input.substring(5, 6));
                 Task t = taskList.markTask(i);
@@ -45,25 +45,23 @@ public class Parser {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Ui.printMark(taskList, i);
+                return Ui.printMark(taskList, i);
             } else if (input.contains("delete")) {
-                int i = Integer.parseInt(input.substring(7, 8));
-                Ui.printDelete(taskList, i, this.size);
-                taskList.delete(i);
+                int i = Integer.parseInt(input.substring(7, 8));;
                 try {
                     FileReadWrite.writeDelete(i);
+                    return Ui.printDelete(taskList.delete(i), i, this.size);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 this.size--;
             } else if (input.contains("find")) {
                 String keyword = input.substring(5);
-                Ui.printFindList(taskList, keyword);
+                return Ui.printFindList(taskList, keyword);
             } else {
                 switch (input) {
                 case "list":
-                    Ui.printListCommand(taskList);
-                    break;
+                    return Ui.printListCommand(taskList);
                 default:
                     try {
                         Task newTask = createTask(input);
@@ -74,17 +72,17 @@ public class Parser {
                             e.printStackTrace();
                         }
                         this.size++;
-                        Ui.printAddTask(newTask, size);
+                        return Ui.printAddTask(newTask, size);
                     } catch (EmptyArgException e) {
-                        Ui.emptyError();
+                        return Ui.emptyError();
                     } catch (UnknownInputException u) {
-                        Ui.invalidInputError();
+                        return Ui.invalidInputError();
                     }
                 }
 
             }
         }
-        return true;
+        return " ";
     }
 
     /**

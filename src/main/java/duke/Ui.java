@@ -29,113 +29,87 @@ public class Ui {
      * Prints welcome statement upon starting the duke app
      *
      */
-    public void start() {
+    public static String start() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        line();
-        indent("Hi, I'm Duke ");
-        indent("What can I do for you :) ?\n");
-        line();
+        String output = "Hello from\n" + logo;
+
+        output = output + "Hi, I'm Duke ";
+        output = output + "What can I do for you :) ?\n";
+        return output;
     }
 
     /**
      * Prints ending message when user terminates the duke app
      *
      */
-    public void end() {
-        line();
-        indent("Bye. Hope to hear from you again! :)");
-        line();
+    public String end() {
+        return "Bye. Hope to hear from you again! :)";
     }
 
     /**
      * Prints error message for when user provides empty dates.
      */
-    public static void emptyError() {
-        indent("Sorry! You provided an empty description. Pls provide a correct input :)");
-        line();
+    public static String emptyError() {
+        return "Sorry! You provided an empty description. Pls provide a correct input :)";
     }
 
     /**
      * Error message for when the user input an invalid statement
      */
-    public static void invalidInputError() {
-        indent("Sorry! I did not quite understand what you meant :( Pls try again!");
-        line();
+    public static String invalidInputError() {
+        return "Sorry! I did not quite understand what you meant :( Pls try again!";
     }
 
     /**
      * Message for un-mark operation
      */
-    public static void printUnmark(TaskList taskList, int i) {
-        line();
-        indent("Alright! I've unmarked this task :(\n");
-        indent("  " + taskList.get(i - 1));
-        line();
+    public static String printUnmark(TaskList taskList, int i) {
+        return "Alright! I've unmarked this task :(\n" + taskList.get(i - 1);
     }
 
     /**
      * Message for mark operation
      */
-    public static void printMark(TaskList taskList, int i) {
-        line();
-        indent("Alright! I've marked this task as done :) !\n");
-        indent("  " + taskList.get(i - 1));
-        line();
+    public static String printMark(TaskList taskList, int i) {
+        return "Alright! I've marked this task as done :) !\n" + taskList.get(i - 1);
     }
 
     /**
      * Message for delete operation
      */
-    public static void printDelete(TaskList taskList, int i, int size) {
-        line();
-        indent("OK! I've deleted this task :)\n");
-        indent("  " + taskList.get(i - 1));
-        indent(String.format("Now you have %d tasks in the list", size - 1));
-        line();
+    public static String printDelete(Task task, int i, int size) {
+        String s = "OK! I've deleted this task :)\n";
+        s = s + task;
+        s = s + String.format("Now you have %d tasks in the list", size - 1);
+        return s;
     }
 
     /**
      * Message for list operation
      */
-    public static void printListCommand(TaskList taskList) {
-        line();
-        indent("Here are the remaining tasks in your list:\n");
-        taskList.printList();
-        line();
+    public static String printListCommand(TaskList taskList) {
+        return "Here are the remaining tasks in your list:\n" + taskList.printList();
     }
 
     /**
      * Message for add task operation
      */
-    public static void printAddTask(Task task, int size) {
-        line();
-        indent("Roger! I've added this task to the list:\n");
-        indent(task + "\n");
-        indent(String.format("Now you have %d tasks left in the list", size));
-        line();
+    public static String printAddTask(Task task, int size) {
+        String s = "Roger! I've added this task to the list:\n";
+        s = s + task + "\n";
+        s = s + String.format("Now you have %d tasks left in the list", size);
+        return s;
     }
 
 
-    /**
-     * function to indent duke system messages
-     */
-    public static void indent(String txt) {
-        System.out.println("     " + txt);
+
+    public static String printFindList(TaskList taskList, String input) {
+        String s = "Here are the matching tasks in your list";
+        return s + taskList.findList(input);
     }
 
-    public static void printFindList(TaskList taskList, String input) {
-        line();
-        indent("Here are the matching tasks in your list");
-        taskList.findList(input);
-        line();
-    }
-
-    public static void line() {
-        System.out.println("____________________________________________________________________________________");
-    }
 }

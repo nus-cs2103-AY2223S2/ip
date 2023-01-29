@@ -18,25 +18,27 @@ public class TaskList extends ArrayList<Task> {
      *
      */
 
-    public void printList() {
+    public String printList() {
+        String output = "";
         for (int i = 0; i < this.size(); i++) {
             int num = i + 1;
-            String output = num + ". " + this.get(i);
-            Ui.indent(output);
+            output = output + num + ". " + this.get(i) + "\n";
         }
+        return output;
     }
 
-    public void findList(String input) {
+    public String findList(String input) {
         int size = this.size();
         int index = 1;
+        String output = "";
         for (int i = 0; i < size; i++) {
             Task t = this.get(i);
             if (t.getTask().contains(input)) {
-                String output = index + ". " + t;
-                Ui.indent(output);
+                output = output + index + ". " + t + "\n";
                 index++;
             }
         }
+        return output;
     }
 
     /**
@@ -74,7 +76,7 @@ public class TaskList extends ArrayList<Task> {
      * @param index Index of task user wish to delete from the TaskList.
      */
 
-    public void delete(int index) {
-        this.remove(index - 1);
+    public Task delete(int index) {
+        return this.remove(index - 1);
     }
 }

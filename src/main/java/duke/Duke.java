@@ -13,6 +13,7 @@ public class Duke {
     private Parser parser;
 
 
+
     public Duke() {
         this.taskList = new TaskList();
         this.ui = new Ui();
@@ -24,19 +25,10 @@ public class Duke {
         this.parser = new Parser(taskList);
     }
 
-    /**
-     * Runs the duke application.
-     *
-     * @throws IOException  if failed I/O operation
-     */
-    public void run() throws IOException {
-        ui.start();
-        while (parser.parseInput(ui.input())) {
-        }
-        ui.end();
-    }
 
-    public static void main(String[] args) throws IOException {
-        new Duke().run();
+
+
+    public String getResponse(String input) {
+        return "Duke: " + parser.parseInput(input);
     }
 }
