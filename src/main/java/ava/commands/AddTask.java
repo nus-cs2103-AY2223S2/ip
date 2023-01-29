@@ -9,18 +9,34 @@ import Ava.Tasks.Event;
 import Ava.Tasks.Task;
 import Ava.Tasks.Todo;
 
+/**
+ * Add Task to the TaskList
+ */
 public class AddTask implements AvaCommand {
     String[] parsedInput;
     private final static String MESSAGE = "Added this task for you: ";
     Task newTask;
     TASK_TYPE task;
 
+    /**
+     * Constructor for AddTask Command
+     * @param input string array containing parsed task message
+     * @param t enum containing the task types
+     * @throws CommandNotFoundException parsedInput is incorrect
+     */
     public AddTask(String[] input, TASK_TYPE t) throws CommandNotFoundException {
         this.parsedInput = input;
         this.task = t;
         this.isInputCorrect();
     }
 
+    /**
+     * Add Task to TaskList and Add Task to Storage
+     * @param t TaskList object
+     * @param s Storage object
+     * @return Nothing
+     * @throws AvaException CommandNotFoundException if parsedInput's contents are not correct
+     */
     @Override
     public boolean run(TaskList t, Storage s) throws AvaException {
        switch (this.task) {
@@ -41,6 +57,11 @@ public class AddTask implements AvaCommand {
         return true;
     }
 
+    /**
+     *
+     * @param formatSpace identation required by the UI
+     * @return  return UI Message + Task representation
+     */
     @Override
     public String output(String formatSpace) {
         return MESSAGE + "\n" + formatSpace + newTask.getRepresentation();
@@ -48,7 +69,7 @@ public class AddTask implements AvaCommand {
 
     /**
      * Before Adding the Task , check if the parsedInputArray is correct
-     * @throws CommandNotFoundException
+     * @throws CommandNotFoundException parsedInput is incorrect
      */
     private void  isInputCorrect() throws CommandNotFoundException  {
         switch (this.task) {

@@ -7,7 +7,7 @@ public class Task {
 
     /**
      * Constructor for the Task
-     * @param m
+     * @param m message string
      */
     public Task(String m) {
         this.message = m;
@@ -32,16 +32,14 @@ public class Task {
     }
 
     /**
-     * Return the Storage Representation of the Task
-     * @return
+     * @return Return the Storage Representation of the Task
      */
     public String getStorageFormat() {
         return TASK_SIGN + "," + this.isMarked()+","+this.getMessage();
     }
 
     /**
-     *
-     * @return
+     * @return mark/unmark sign + message
      */
     public String getRepresentation(){
 
