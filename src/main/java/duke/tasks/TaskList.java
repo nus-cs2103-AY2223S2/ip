@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * TaskList represents the list of tasks.
@@ -83,6 +84,12 @@ public class TaskList {
         Task task = taskList.get(index);
         task.unmark();
         return task;
+    }
+
+    public List<Task> findTask(String s) {
+        return taskList.stream()
+                .filter(task -> task.getTask().contains(s))
+                .collect(Collectors.toList());
     }
 
 

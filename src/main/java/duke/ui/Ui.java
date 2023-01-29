@@ -2,10 +2,12 @@ package duke.ui;
 
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import java.util.List;
 
 /**
  * Ui handles user interaction.
  */
+
 public class Ui {
 
     public static final String HORIZONTAL_LINE =
@@ -80,6 +82,17 @@ public class Ui {
         System.out.println(HORIZONTAL_LINE + "\n" + "Got it. I've added this task:"
                 + "\n" + task + "\n" + "Now you have " + taskList.getSize()
                 + " tasks in the list." + "\n" + HORIZONTAL_LINE);
+    }
+
+    public void findResponse(List<Task> taskList) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+        int i = 1;
+        for (Task task : taskList) {
+            sb.append(String.format("%d.%s\n", i, task.toString()));
+            ++i;
+        }
+        System.out.print(HORIZONTAL_LINE+ "\n" + sb + HORIZONTAL_LINE + "\n");
     }
 
 }

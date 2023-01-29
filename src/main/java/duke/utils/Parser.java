@@ -47,6 +47,8 @@ public class Parser {
         } else if (action.equalsIgnoreCase("delete")) {
             return new DeleteCommand(ui, commandList,
                     Integer.parseInt(strArray[1]) - 1, storage, file);
+        } else if (action.equalsIgnoreCase("find")) {
+            return new FindCommand(ui, commandList, strArray[1]);
         } else {
             TaskTypes type = getTaskType(action);
             Task task = getTask(type, strArray);
