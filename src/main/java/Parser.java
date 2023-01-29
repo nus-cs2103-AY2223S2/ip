@@ -28,13 +28,12 @@ public class Parser {
                         break;
                     }
                     if (taskIndex < 0 || taskIndex > taskList.getSize()) {
-                        System.out.println("invalid task index!");
+                        ui.displayText("invalid task index!");
                         break;
                     }
-                    System.out.println("Nice! I've marked this task as done:");
                     Task task = taskList.getAtIndex(taskIndex);
                     task.setDone(true);
-                    System.out.println(task);
+                    ui.displayMarkTask(true, task);
                     break;
                 case "unmark":
                     if (splitInput.length == 1) {
@@ -50,18 +49,16 @@ public class Parser {
                         System.out.println("invalid task index!");
                         break;
                     }
-                    System.out.println("OK, I've marked this task as not done yet:");
                     task = taskList.getAtIndex(taskIndex);
                     task.setDone(false);
-                    System.out.println(task);
+                    ui.displayMarkTask(false, task);
                     break;
                 case "todo":
                     if (splitInput.length == 1) {
                         throw new DukeException("'todo' requires additional arguments!");
                     }
                     taskList.addTask(new ToDo(splitInput[1]));
-                    System.out.println("Added Todo task:\n" + taskList.getAtIndex(taskList.getSize() - 1));
-                    System.out.println("Now you have " + taskList.getSize() + " tasks in the list!");
+                    ui.displayAddTask(taskList);
                     break;
                 case "deadline":
                     if (splitInput.length == 1) {
@@ -71,8 +68,7 @@ public class Parser {
                     taskList.addTask(
                         new Deadline(splitInput[1].substring(0, indexBy - 1),
                             splitInput[1].substring(indexBy + 4)));
-                    System.out.println("Added Deadline task:\n" + taskList.getAtIndex(taskList.getSize() - 1));
-                    System.out.println("Now you have " + taskList.getSize() + " tasks in the list!");
+                    ui.displayAddTask(taskList);
                     break;
                 case "event":
                     if (splitInput.length == 1) {
@@ -84,8 +80,7 @@ public class Parser {
                         splitInput[1].substring(0, indexFrom - 1),
                         splitInput[1].substring(indexFrom + 6, indexTo - 1),
                         splitInput[1].substring(indexTo + 4)));
-                    System.out.println("Added Event task:\n" + taskList.getAtIndex(taskList.getSize() - 1));
-                    System.out.println("Now you have " + taskList.getSize() + " tasks in the list!");
+                    ui.displayAddTask(taskList);
                     break;
                 case "delete":
                     if (splitInput.length == 1) {
@@ -102,8 +97,7 @@ public class Parser {
                         System.out.println("invalid task index!");
                         break;
                     }
-                    System.out.println("Gotcha, removed this task: ");
-                    System.out.println(taskList.getAtIndex(taskIndex));
+                    ui.displayDeleteTask(taskList.getAtIndex(taskIndex));
                     taskList.removeAtIndex(taskIndex.intValue());
                     break;
                 default:
