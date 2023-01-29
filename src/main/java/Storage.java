@@ -29,7 +29,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> readData() {
+    public TaskList readData() {
         ArrayList<Task> arrayList = new ArrayList<>();
         File file = new File(filePath);
         Scanner scanner = null;
@@ -53,12 +53,13 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return arrayList;
+        return new TaskList(arrayList);
     }
 
-    public void writeData(ArrayList<Task> arrayList) {
+    public void writeData(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
+            ArrayList<Task> arrayList = taskList.getStore();
             for (Task task : arrayList) {
                 System.out.println(task.storeTaskString() + "\n");
                 fileWriter.write(task.storeTaskString() + "\n");

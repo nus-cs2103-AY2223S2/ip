@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class Duke {
     private final static String FILE_PATH = "src/data/tasks.txt";
@@ -16,7 +15,7 @@ public class Duke {
         Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String str = bufferedReader.readLine();
-        ArrayList<Task> store = storage.readData();
+        TaskList taskList = storage.readData();
         while (!str.equals("bye")) {
             String[] arr = str.split(" ", 2);
             try {
@@ -25,32 +24,32 @@ public class Duke {
                         if (arr.length > 1) {
                             throw new DukeException("Invalid format");
                         }
-                        listTask(store);
+                        taskList.listTask();
                         break;
                     case "mark":
                         if (arr.length < 2) {
                             throw new DukeException("Invalid format, please give numbers");
                         }
-                        marking(true, store, arr);
-                        storage.writeData(store);
+                        taskList.markTask(true, arr);
+                        storage.writeData(taskList);
                         break;
                     case "unmark":
                         if (arr.length < 2) {
                             throw new DukeException("Invalid format, please give numbers");
                         }
-                        marking(false, store, arr);
-                        storage.writeData(store);
+                        taskList.markTask(false, arr);
+                        storage.writeData(taskList);
                         break;
                     case "todo":
                         if (arr.length < 2) {
                             throw new DukeException("Missing description");
                         }
                         ToDo todo = new ToDo(arr[1], false);
-                        store.add(todo);
-                        storage.writeData(store);
+                        taskList.addTask(todo);
+                        storage.writeData(taskList);
 
                         System.out.println("Got it. I've added this task:\n  [T][ ] " +
-                                arr[1] + "\n Now you have " + store.size() + " tasks in the list");
+                                arr[1] + "\n Now you have " + taskList.getSize() + " tasks in the list");
                         break;
                     case "deadline":
                         if (arr.length < 2) {
@@ -62,12 +61,12 @@ public class Duke {
                         }
                         DeadLine deadline = new DeadLine(toPrintSplit[0], false);
                         deadline.setDateTime(toPrintSplit[1]);
-                        store.add(deadline);
-                        storage.writeData(store);
+                        taskList.addTask(deadline);
+                        storage.writeData(taskList);
 
                         System.out.println("Got it. I've added this task:\n  [D][ ] " +
                                 toPrintSplit[0] + " (by: " + toPrintSplit[1] + ")\n Now you have " +
-                                store.size() + " tasks in the list");
+                                taskList.getSize() + " tasks in the list");
                         break;
                     case "event":
                         if (arr.length < 2) {
@@ -83,19 +82,19 @@ public class Duke {
                         }
                         Event event = new Event(startEndTime[0], false);
                         event.setStartEnd(dateTime[0], dateTime[1]);
-                        store.add(event);
-                        storage.writeData(store);
+                        taskList.addTask(event);
+                        storage.writeData(taskList);
 
                         System.out.println("Got it. I've added this task:\n  [E][ ] " +
                                 startEndTime[0] + " (from: " + dateTime[0] + " to: " + dateTime[1] +
-                                ")\n Now you have " + store.size() + " tasks in the list");
+                                ")\n Now you have " + taskList.getSize() + " tasks in the list");
                         break;
                     case "delete":
                         if (arr.length < 2) {
                             throw new DukeException("Invalid format, please give numbers");
                         }
-                        deleteTask(store, arr[1]);
-                        storage.writeData(store);
+                        taskList.deleteTask(arr[1]);
+                        storage.writeData(taskList);
 
                         break;
                     default:
@@ -114,42 +113,5 @@ public class Duke {
 
         System.out.println("Bye. Hope to see you again soon!");
     }
-
-    public static void listTask(ArrayList<Task> store) {
-        int number = 1;
-        for (Task stored : store) {
-            System.out.println(number + ". " + stored.toString());
-            number++;
-        }
-    }
-    public static void marking(boolean b, ArrayList<Task> store, String[] arr) throws DukeException {
-        int index = Integer.parseInt(arr[1]) - 1;
-        int size = store.size();
-        if (index >= size | index < 0) {
-            throw new DukeException("Index out of bounds");
-        }
-        Task task = store.get(index);
-        task.setChecked(b);
-        if (b) {
-            System.out.println("Nice! I've marked this task as done: \n" + "[x] " + task.getStr());
-        } else {
-            System.out.println("OK, I've marked this task as not done yet: \n" + "[ ] " + task.getStr());
-        }
-    }
-
-    public static void deleteTask(ArrayList<Task> store, String num) throws DukeException {
-        int index = Integer.parseInt(num) - 1;
-        int size = store.size();
-        int dsize = size - 1;
-        if (index >= size | index < 0) {
-            throw new DukeException("Index out of bounds");
-        }
-        Task task = store.get(index);
-        System.out.println("Noted. I've removed this task:\n  " +
-                task.toString() +
-                "\nNow you have " + dsize + " tasks in the list.");
-        store.remove(index);
-    }
-
 
 }
