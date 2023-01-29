@@ -1,10 +1,6 @@
-<<<<<<<< HEAD:src/main/java/james/task/ToDo.java
 package james.task;
 
 import james.JamesException;
-========
-package seedu;
->>>>>>>> 9a38ae0 (Update testing classes for tasks):src/main/java/seedu/ToDo.java
 
 public class ToDo extends Task {
     public ToDo(String description) throws JamesException {
