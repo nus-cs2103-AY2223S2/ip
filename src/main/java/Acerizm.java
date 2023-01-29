@@ -45,9 +45,6 @@ public class Acerizm {
                     System.out.println("Here are the tasks in your list:");
                     for(int i=0; i < taskList.size();i++){
                         Task currentTask = taskList.get(i);
-                        String description = currentTask.getDescription();
-                        String isMarked = currentTask.getStatusIcon();
-                        String currentStatus = currentTask.getTypeOfTask();
                         System.out.println(String.format("%d. %s",i+1,currentTask.toString()));
                     }
                     System.out.println("*-".repeat(100));
@@ -84,8 +81,8 @@ public class Acerizm {
                     System.out.println("*-".repeat(100));
                     String userInput = convertToUserInput(input,TypeOfTask.deadline,"");
                     // added additional variable to store the date of the deadline
-                    String day = convertToUserInput(input,TypeOfTask.deadline,"/by");
-                    Task newTask = new Deadline(userInput,day);
+                    String[] dateTime = convertToUserInput(input,TypeOfTask.deadline,"/by").split(" ");
+                    Task newTask = new Deadline(userInput,dateTime[0],dateTime[1]);
                     taskList.add(newTask);
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newTask.toString());
@@ -108,9 +105,6 @@ public class Acerizm {
                 } else if(actionTaken == TypeOfTask.delete) {
                     int taskIndexDelete = Integer.parseInt(convertToUserInput(input,TypeOfTask.delete,"")) - 1;
                     Task taskToBeDeleted = taskList.get(taskIndexDelete);
-                    String description = taskToBeDeleted.getDescription();
-                    String isMarked = taskToBeDeleted.getStatusIcon();
-                    String currentStatus = taskToBeDeleted.getTypeOfTask();
                     System.out.println("Noted! I've removed this task:");
                     System.out.println(String.format("%d. %s",taskIndexDelete+1,taskToBeDeleted.toString()));
                     taskList.remove(taskIndexDelete);
@@ -161,7 +155,7 @@ public class Acerizm {
                         }
                     }
                 } else {
-                    // to get the day after "/by"
+                    // to get the date and time after "/by"
                     for (int i = 1; i < input.length; i++) {
                         if (input[i].equals("/by")) {
                             for(int j = i + 1; j < input.length; j++){
