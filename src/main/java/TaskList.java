@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.time.LocalDate;
 public class TaskList {
     private ArrayList<Task> taskList;
     private int numTasks;
@@ -18,12 +18,12 @@ public class TaskList {
         return processTask(task);
     }
 
-    public String addTask(String name, String end){ //deadline
+    public String addTask(String name, LocalDate end){ //deadline
         Task task = new Deadline(name,end);
         return processTask(task);
     }
 
-    public String addTask(String name, String start, String end){ //event
+    public String addTask(String name, LocalDate  start, LocalDate  end){ //event
         Task task = new Event(name,start,end);
         return processTask(task);
     }
