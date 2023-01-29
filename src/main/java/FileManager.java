@@ -7,27 +7,37 @@ import java.util.ArrayList;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 public class FileManager {
-    public ArrayList<Task> getFile() {
+    private String filePath;
+    private Ui ui;
+
+    public FileManager(String filePath) {
+        this.filePath = filePath;
+        this.ui = new Ui();
+    }
+    public TaskList getFile() {
         try {
-            FileInputStream fis = new FileInputStream("data\\pandora.txt");
+            FileInputStream fis = new FileInputStream(this.filePath);
             ObjectInputStream ois = new ObjectInputStream(fis);
             ArrayList<Task> toDoList = (ArrayList<Task>) ois.readObject();
-            System.out.println("[Saved file loaded~]");
-            return toDoList;
+            System.out.println(this.ui.savedFileFound());
+            TaskList taskList = new TaskList(toDoList);
+            return taskList;
         } catch (IOException e) {
-            System.out.println("[No saved file available, new To-Do-List created~]");
+            System.out.println(this.ui.savedFileNotFound());
             ArrayList<Task> toDoList = new ArrayList<Task>();
-            return toDoList;
+            TaskList taskList = new TaskList(toDoList);
+            return taskList;
         } catch (ClassNotFoundException e) {
-            System.out.println("[No saved file available, new To-Do-List created~]");
+            System.out.println(this.ui.savedFileNotFound());
             ArrayList<Task> toDoList = new ArrayList<Task>();
-            return toDoList;
+            TaskList taskList = new TaskList(toDoList);
+            return taskList;
         }
     }
 
     public void saveFile(ArrayList<Task> toDoList) {
         try {
-            FileOutputStream fos = new FileOutputStream("data\\pandora.txt");
+            FileOutputStream fos = new FileOutputStream(this.filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(toDoList);
             oos.close();
