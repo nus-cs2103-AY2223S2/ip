@@ -191,7 +191,7 @@ public class Duke {
         }
     }
 
-    private static void processCommand(String userCommand) throws DukeException {
+    private static void processCommand(String userCommand, Storage storage) throws DukeException {
 
         if (userCommand.isEmpty()) {
             throw new DukeInvalidCommandException("Please enter a command");
@@ -229,14 +229,15 @@ public class Duke {
                 throw new DukeInvalidCommandException("beep...boop... unrecognized command!");
         }
 
-        TaskFileHandler.storeTaskList(TASK_LIST);
+        storage.storeTaskList(TASK_LIST);
     }
 
     public static void start() {
         Ui ui = new Ui();
-        ui.greet();
+        Storage storage = new Storage();
 
-        TASK_LIST = TaskFileHandler.loadTaskList();
+        ui.greet();
+        TASK_LIST = storage.loadTaskList();
 
         // Ready for commands
         Scanner scanner = new Scanner(System.in);
@@ -249,7 +250,7 @@ public class Duke {
                 break;
             }
             try {
-                processCommand(input);
+                processCommand(input, storage);
 
             } catch (DukeException exception) {
                 System.out.println(exception.getMessage());

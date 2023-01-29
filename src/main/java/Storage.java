@@ -7,11 +7,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskFileHandler {
+public class Storage {
     private static final Path dataPath = Paths.get("data");
     private static final Path taskListPath = Paths.get("data", "duke.txt");
 
-    private static ArrayList<Task> parseTaskList() throws IOException {
+    private ArrayList<Task> parseTaskList() throws IOException {
         List<String> lines = Files.readAllLines(taskListPath);
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -47,7 +47,7 @@ public class TaskFileHandler {
         }
         return taskList;
     }
-    public static ArrayList<Task> loadTaskList() {
+    public ArrayList<Task> loadTaskList() {
         try {
             if (!Files.exists(dataPath)) {
                 System.out.println("Creating data folder . . .");
@@ -66,7 +66,7 @@ public class TaskFileHandler {
         return null;
     }
 
-    public static void storeTaskList(ArrayList<Task> taskList) {
+    public void storeTaskList(ArrayList<Task> taskList) {
         try {
             BufferedWriter bufferedWriter = Files.newBufferedWriter(taskListPath);
             for (Task task : taskList) {
