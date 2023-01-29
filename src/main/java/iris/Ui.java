@@ -2,6 +2,9 @@ package iris;
 
 import java.util.Scanner;
 
+/**
+ * The user interface: takes care og getting input and showing output to the user
+ */
 public class Ui {
     Scanner inputGetter;
 
@@ -15,14 +18,25 @@ public class Ui {
             "Type \"help\" to see the commands.\n" +
             "What are you waiting for? Let's get started!";
 
+    /**
+     * outputs a String to the user
+     * @param out the String to be shown
+     */
     public static void output(String out) {
         System.out.println("\033[35m" + out);
     }
 
+    /**
+     * gets input from the user
+     * @return the input
+     */
     public String readInput() {
         return inputGetter.nextLine();
     }
 
+    /**
+     * initial greeting to the user
+     */
     public void greet() {
         output(GREETING);
     }

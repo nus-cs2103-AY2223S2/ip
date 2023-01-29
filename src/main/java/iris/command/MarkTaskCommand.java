@@ -7,6 +7,9 @@ import iris.exception.IrisException;
 import iris.TaskStore;
 import iris.task.Task;
 
+/**
+ * marks a task as done
+ */
 public class MarkTaskCommand extends Command {
     int index;
 
@@ -14,6 +17,9 @@ public class MarkTaskCommand extends Command {
         this.index = i;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, TaskStore taskStore) throws IrisException {
         Task task;
@@ -28,6 +34,9 @@ public class MarkTaskCommand extends Command {
         Ui.output(task.toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (o instanceof MarkTaskCommand) {

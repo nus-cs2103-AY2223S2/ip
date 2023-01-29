@@ -19,6 +19,9 @@ import iris.exception.NoTaskException;
 import iris.task.Deadline;
 import iris.task.Event;
 
+/**
+ * Parses the user inputs
+ */
 public class Parser {
     enum CommandWord {
         help, bye, list, mark, unmark, delete, todo, deadline, event, reset, filter
@@ -29,6 +32,13 @@ public class Parser {
             throw new MissingFieldException(message);
         }
     }
+
+    /**
+     * parses the input of the user
+     * @param input user input
+     * @return Command corresponding to the input
+     * @throws IrisException when there is a problem with the input
+     */
     public static Command parse(String input) throws IrisException {
         String[] arr;
         String name, from, to, by;

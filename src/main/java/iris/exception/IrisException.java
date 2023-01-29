@@ -1,5 +1,8 @@
 package iris.exception;
 
+/**
+ * Wraps all errors encountered while chatting and provides a custom message
+ */
 public class IrisException extends Exception{
     private final String message;
     public IrisException() {

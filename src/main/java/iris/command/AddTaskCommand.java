@@ -5,12 +5,19 @@ import iris.TaskStore;
 import iris.task.Task;
 import iris.Ui;
 
+/**
+ * Command to add a task to the task list
+ */
 public class AddTaskCommand extends Command {
     private Task task;
 
     public AddTaskCommand(Task task) {
         this.task = task;
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, TaskStore taskStore) {
         tasks.add(this.task);
@@ -24,7 +31,9 @@ public class AddTaskCommand extends Command {
         Ui.output(out + "Added your task: " + this.task);
         Ui.output("You have " + tasks.size() + " tasks.");
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (o instanceof AddTaskCommand) {

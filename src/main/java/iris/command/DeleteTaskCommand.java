@@ -7,12 +7,17 @@ import iris.exception.UnknownTaskException;
 import iris.task.Task;
 import iris.Ui;
 
+/**
+ * Deletes task at given index
+ */
 public class DeleteTaskCommand extends Command {
     int i;
     public DeleteTaskCommand(int i) {
         this.i = i;
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, TaskStore taskStore) throws IrisException {
         Task task;
@@ -26,7 +31,9 @@ public class DeleteTaskCommand extends Command {
         Ui.output("I've removed this task");
         Ui.output(task.toString());
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (o instanceof DeleteTaskCommand) {

@@ -15,6 +15,9 @@ public class Iris {
     private final TaskStore taskStore;
     private final Ui ui;
 
+    /**
+     * Constructor that initiates the UI, task storage and task list for the bot
+     */
     public Iris() {
         this.ui = new Ui();
         this.taskStore = new TaskStore();
@@ -29,6 +32,9 @@ public class Iris {
         }
     }
 
+    /**
+     * runs the chatbot
+     */
     private void run() {
         ui.greet();
         boolean isEnd = false;

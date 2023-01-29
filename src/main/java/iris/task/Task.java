@@ -4,7 +4,10 @@ import iris.exception.IrisException;
 import iris.exception.MissingFieldException;
 import iris.exception.NoTaskException;
 
-public class Task {
+/**
+ * Abstract class that wraps the tasks - Deadline, Event and ToDo classes
+ */
+public abstract class Task {
     private boolean isDone = false;
     private final String name;
 
@@ -48,6 +51,12 @@ public class Task {
         }
     }
 
+    /**
+     * parses the description of task in storage format and returns Task objects
+     * @param str description of task stores in storage format
+     * @return Task object
+     * @throws IrisException when there are fields missing in the task description
+     */
     public static Task parse(String str) throws IrisException {
         Task task; String type; String mark;
         String[] strArray = str.split("\\|");
@@ -76,10 +85,17 @@ public class Task {
         return task;
     }
 
+    /**
+     * returns description of task in a format easy to store and parse
+     * @return description of task in storage format
+     */
     public String storageFormat() {
         return String.join("|", this.status(), this.name);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[" + this.status() + "] " + this.name;

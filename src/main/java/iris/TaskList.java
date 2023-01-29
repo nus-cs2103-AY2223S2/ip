@@ -7,31 +7,41 @@ import iris.task.Task;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * An ArrayList of tasks with additional functionality
+ */
 public class TaskList extends ArrayList<Task> {
-
     public TaskList() {
         super();
     }
 
-    public int countMarkedTasks() {
+    /**
+     * counts the number of pending tasks
+     * @return the number of pending tasks
+     */
+    public int countUnmarkedTasks() {
         int count = 0;
         for (Task task : this) {
-            count += task.isDone() ? 1 : 0;
+            count += task.isDone() ? 0 : 1;
         }
         return count;
     }
 
-    public String dateFilter(LocalDateTime startDate, LocalDateTime endDate) {
-        StringBuilder str = new StringBuilder();
-        int count = 0;
+    /**
+     * filters task list to describe list of deadlines and events in a certain period of time
+     * @param startDate start of period
+     * @param endDate end of period
+     * @return String description of tasks that fulfill the criteria
+     */
+    public TaskList dateFilter(LocalDateTime startDate, LocalDateTime endDate) {
+        TaskList filtered = new TaskList();
         for (Task task : this) {
             if (task instanceof Deadline) {
                 Deadline d = (Deadline) task;
                 LocalDateTime t = d.getDeadline();
                 if (t.isBefore(endDate)
                         && t.isAfter(startDate)) {
-                    count++;
-                    str.append(count).append(". ").append(d).append("\n");
+                    filtered.add(d);
                 }
             } else if (task instanceof Event) {
                 Event e = (Event) task;
@@ -39,28 +49,17 @@ public class TaskList extends ArrayList<Task> {
                 LocalDateTime t = e.getTo();
                 if (t.isBefore(endDate)
                         && f.isAfter(startDate)) {
-                    count++;
-                    str.append(count).append(". ").append(e).append("\n");
+                    filtered.add(e);
                 }
-
             }
         }
-        return str + "You have " + count + " tasks in this period.";
+        return filtered;
     }
 
-    public String list() {
-        if (this.size() == 0) {
-            return "You have no tasks.";
-        }
-
-        String str = this.size() < 10
-                ? "(So few~ good going!)\n"
-                : "(So many >:O)\n";
-        str = String.join(" ", "You have the following tasks:", str);
-
-        return str + this + "You have " + this.size() + " tasks.";
-    }
-
+    /**
+     * returns description of tasklist in a format easy to store and parse
+     * @return description of task list
+     */
     public String storageFormat() {
         StringBuilder str = new StringBuilder();
         for (Task task : this) {
@@ -69,6 +68,9 @@ public class TaskList extends ArrayList<Task> {
         return str.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         String str = "";

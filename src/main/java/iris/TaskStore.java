@@ -9,8 +9,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * stores list of tasks in hard drive to keep it saved even when chatbot is closed
+ */
 public class TaskStore {
     private final File taskFile;
+
+    /**
+     * initiates the file and created one if it's not present
+     */
     public TaskStore() {
         File dir = new File("./data");
         this.taskFile = new File("./data/TaskList.txt");
@@ -26,6 +33,10 @@ public class TaskStore {
         }
     }
 
+    /**
+     * adds a tasks to the stored file
+     * @param task the task to be added
+     */
     public void addTask(Task task) {
         try {
             FileWriter fw = new FileWriter(taskFile, true);
@@ -36,6 +47,10 @@ public class TaskStore {
         }
     }
 
+    /**
+     * updates the file to contain the given task list
+     * @param tasks the task list to be updated
+     */
     public void updateTasks(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(this.taskFile);
@@ -46,7 +61,9 @@ public class TaskStore {
         }
     }
 
-
+    /**
+     * clears all tasks from the stored task list
+     */
     public void reset() {
         try {
             FileWriter fw = new FileWriter(this.taskFile);
@@ -57,6 +74,11 @@ public class TaskStore {
         }
     }
 
+    /**
+     * parses the stored file to return task list
+     * @return the task list stored in the file
+     * @throws IrisException if there is a problem in the stored file
+     */
     public TaskList parse() throws IrisException {
         TaskList tasks = new TaskList();
         try {
@@ -71,7 +93,6 @@ public class TaskStore {
         } catch (IOException e) {
             Ui.output("Something went wrong while reading the task file: " + e.getMessage());
         }
-
         return tasks;
     }
 }

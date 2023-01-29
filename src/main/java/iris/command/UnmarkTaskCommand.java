@@ -7,13 +7,18 @@ import iris.exception.IrisException;
 import iris.TaskStore;
 import iris.task.Task;
 
+/**
+ * Marks the task at given index as not done
+ */
 public class UnmarkTaskCommand extends Command {
     int index;
 
     public UnmarkTaskCommand(int i) {
         this.index = i;
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, TaskStore taskStore) throws IrisException {
         Task task;
@@ -27,7 +32,9 @@ public class UnmarkTaskCommand extends Command {
         Ui.output("Bummer! Have fun doing this:");
         Ui.output(task.toString());
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (o instanceof UnmarkTaskCommand) {

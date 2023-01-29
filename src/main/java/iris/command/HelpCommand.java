@@ -4,6 +4,9 @@ import iris.TaskList;
 import iris.Ui;
 import iris.TaskStore;
 
+/**
+ * displays the help message with all commands
+ */
 public class HelpCommand extends Command {
     private static final String HELP_TEXT = "Hello! You can use the following commands:\n" +
             "To add a todo task, type \"todo \" + your task.\n" +
@@ -23,12 +26,17 @@ public class HelpCommand extends Command {
             "\"filter \" + start of period \" /to \" end of period (dd-MM-yyyy HHmm).\n" +
             "To close me, type \"bye\".\n" +
             "Have fun!";
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, TaskStore taskStore) {
         Ui.output(HELP_TEXT);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         return o instanceof HelpCommand;

@@ -11,10 +11,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * filters deadlines and events that fall in a certain period or on a certain date
+ */
 public class FilterCommand extends Command {
     LocalDateTime start;
     LocalDateTime end;
 
+    /**
+     * Constructor to filter events and deadlines on a certain date
+     * @param str date to filter events and deadlines on in the following format: {dd-MM-yyyy}
+     * @throws DateTimeException when the input is wrong
+     */
     public FilterCommand(String str) throws DateTimeException {
         try {
             start = LocalDate.parse(str, DateTimeFormatter.ofPattern("dd-MM-yyyy")).atStartOfDay().minusNanos(1);
@@ -25,7 +33,12 @@ public class FilterCommand extends Command {
         }
     }
 
-
+    /**
+     * Constructor to filter events and deadlines in a certain period of time
+     * @param str1 start date of period in the following format: {dd-MM-yyyy}
+     * @param str2 end date of period in the following format: {dd-MM-yyyy}
+     * @throws DateTimeException when the input is wrong
+     */
     public FilterCommand(String str1, String str2) throws DateTimeException {
         try {
             start = LocalDateTime.parse(str1, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")).minusNanos(1);
@@ -36,11 +49,17 @@ public class FilterCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, TaskStore taskStore) throws IrisException {
-        Ui.output(tasks.dateFilter(start, end));
+        Ui.output("In this period: " + tasks.dateFilter(start, end).toString());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (o instanceof FilterCommand) {
