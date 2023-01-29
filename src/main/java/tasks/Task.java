@@ -9,10 +9,12 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
+
         return (isDone ? "X" : " "); // mark done task with X
     }
 
     public void updateState() {
+
         this.isDone = !this.isDone;
     }
 
@@ -30,6 +32,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
+
         return (this.isDone ? "[X] " : "[ ] ") + this.description;
     }
 
