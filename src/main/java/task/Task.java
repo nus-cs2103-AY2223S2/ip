@@ -42,11 +42,11 @@ public abstract class Task {
      */
     public abstract String toDataString();
 
-    public String formattedStatus() {
+    public String getFormattedStatus() {
         return isCompleted ? "[X]" : "[ ]";
     }
 
-    public String formattedDate(LocalDate date) {
+    public String getFormattedDate(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 

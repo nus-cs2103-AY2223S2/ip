@@ -40,8 +40,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s %s (from: %s to: %s)", super.formattedStatus(), super.task,
-                super.formattedDate(this.startTime), super.formattedDate(this.endTime));
+        return String.format("[E]%s %s (from: %s to: %s)", super.getFormattedStatus(), super.task,
+                super.getFormattedDate(this.startTime), super.getFormattedDate(this.endTime));
     }
 
     @Override

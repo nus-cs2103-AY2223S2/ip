@@ -14,7 +14,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[T]%s %s", super.formattedStatus(), super.task);
+        return String.format("[T]%s %s", super.getFormattedStatus(), super.task);
     }
 
     @Override
