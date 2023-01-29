@@ -5,11 +5,11 @@ import commands.Command;
 import commands.DeadlineCommand;
 import commands.DeleteCommand;
 import commands.EventCommand;
+import commands.FindCommand;
 import commands.ListCommand;
 import commands.MarkCommand;
 import commands.ToDoCommand;
 import commands.UnmarkCommand;
-
 import enums.CommandType;
 import exceptions.DukeException;
 
