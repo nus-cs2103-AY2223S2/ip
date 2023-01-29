@@ -60,28 +60,28 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
     }
 
 
-    private static Command getCommand(String input) throws IllegalSyntaxException {
+    private Command getCommand(String input) throws IllegalSyntaxException {
         switch (input) {
-            case "list":
-                return new ListCommand();
-            case "mark":
-                return new MarkTaskCommand(true);
-            case "unmark":
-                return new MarkTaskCommand(false);
-            case "todo":
-                return new AddToDoCommand();
-            case "event":
-                return new AddEventCommand();
-            case "deadline":
-                return new AddDeadlineCommand();
-            case "delete":
-                return new DeleteCommand();
-            case "find":
-                return new FilterCommand();
-            case "bye":
-                return new ByeCommand();
-            default:
-                throw new IllegalSyntaxException("I do not know what command is suppose to do");
+        case "list":
+            return new ListCommand();
+        case "mark":
+            return new MarkTaskCommand(true);
+        case "unmark":
+            return new MarkTaskCommand(false);
+        case "todo":
+            return new AddToDoCommand();
+        case "event":
+            return new AddEventCommand();
+        case "deadline":
+            return new AddDeadlineCommand();
+        case "delete":
+            return new DeleteCommand();
+        case "find":
+            return new FilterCommand();
+        case "bye":
+            return new ByeCommand();
+        default:
+            throw new IllegalSyntaxException("I do not know what command is suppose to do");
         }
     }
 }
