@@ -20,12 +20,13 @@ public class Todo extends Task {
      *
      * @param taskList the TaskList to add the Todo object into.
      * @param desc     String input for description of a Todo object.
+     *
+     * @return String for Todo creation.
      */
-    public static void createTodo(TaskList taskList, String desc) {
-        Ui.addedTask();
+    public static String createTodo(TaskList taskList, String desc) {
         Todo todo = new Todo(desc);
         taskList.addTask(todo);
-        Ui.indent("" + todo);
+        return Ui.addedTask() + Ui.indent(todo.toString());
     }
 
     /**
@@ -34,10 +35,11 @@ public class Todo extends Task {
      *
      * @param taskList    the TaskList to add the Todo object into.
      * @param description String input for description of a Todo object with task name.
+     *
+     * @return String for Todo creation.
      */
-    public static void runTodo(TaskList taskList, String description) {
-        createTodo(taskList, description);
-        Ui.checkList(taskList);
+    public static String runTodo(TaskList taskList, String description) {
+        return createTodo(taskList, description) + "\n" + Ui.checkList(taskList);
     }
 
     /**

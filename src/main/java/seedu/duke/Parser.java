@@ -13,9 +13,6 @@ public class Parser {
     public enum Commands {
         BYE, LIST, FIND, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT }
 
-    /** Status of the Bot */
-    public boolean isExit;
-
     /**
      * The Parser parses the commands based on the user input.
      *
@@ -23,11 +20,15 @@ public class Parser {
      * @param storage  manages saving and loading the files from taskList.txt.
      * @param ui       manages the user interface and the output text from Duke.
      * @param s        the user input.
+     *
+     * @return String Duke's response.
+     *
      * @throws ArrayIndexOutOfBoundsException If there is an empty input.
-     * @throws IllegalArgumentException       If there is an unknown command.
+     * @throws DukeException       If there is an unknown command.
      */
 
-    public void parser(TaskList taskList, Storage storage, Ui ui, String s) {
+    public String parse(TaskList taskList, Storage storage, Ui ui, String s) throws DukeException {
+        String response = "";
         try {
             // Split the user input into an array with the command and the description
             String[] description = s.split(" ", 2);
@@ -35,41 +36,40 @@ public class Parser {
             String command = description[0];
             Commands currCommand = Commands.valueOf(command.toUpperCase());
 
-            switch (currCommand) {
+        switch (currCommand) {
             // Command for bye
             case BYE:
-                ui.displayExit();
-                this.isExit = true;
+                response = ui.displayExit();
                 break;
-            // Command for list
+                // Command for list
             case LIST: {
-                ui.displayTaskList(taskList);
+                response = ui.displayTaskList(taskList);
                 break;
             }
             // Command for find
             case FIND: {
                 String keyword = description[1];
-                ui.displayFindList(taskList.findTasks(keyword), keyword);
+                response = ui.displayFindList(taskList.findTasks(keyword), keyword);
                 break;
             }
             // Command to mark as done
             case MARK: {
                 String input = description[1];
-                TaskList.markTask(taskList, input);
+                response = TaskList.markTask(taskList, input);
                 storage.write(taskList);
                 break;
             }
             // Command to unmark
             case UNMARK: {
                 String input = description[1];
-                TaskList.unmarkTask(taskList, input);
+                response = TaskList.unmarkTask(taskList, input);
                 storage.write(taskList);
                 break;
             }
             // Command to remove task
             case DELETE: {
                 String input = description[1];
-                TaskList.removeTask(taskList, input);
+                response = TaskList.removeTask(taskList, input);
                 storage.write(taskList);
                 break;
             }
@@ -77,10 +77,10 @@ public class Parser {
             case TODO: {
                 try {
                     String input = description[1];
-                    Todo.runTodo(taskList, input);
+                    response = Todo.runTodo(taskList, input);
                     storage.write(taskList);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Hey! The description of a todo cannot be empty!");
+                    return "Hey! The description of a todo cannot be empty!";
                 }
                 break;
             }
@@ -88,10 +88,10 @@ public class Parser {
             case DEADLINE: {
                 try {
                     String input = description[1];
-                    Deadline.runDeadline(taskList, input);
+                    response = Deadline.runDeadline(taskList, input);
                     storage.write(taskList);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Hey! The description of a deadline cannot be empty!");
+                    return "Hey! The description of a deadline cannot be empty!";
                 }
                 break;
             }
@@ -99,18 +99,17 @@ public class Parser {
             case EVENT: {
                 try {
                     String input = description[1];
-                    Event.runEvent(taskList, input);
+                    response = Event.runEvent(taskList, input);
                     storage.write(taskList);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Hey! The description of an event cannot be empty!");
+                    return "Hey! The description of an event cannot be empty!";
                 }
-            }
-            default: {
-                // Fallthrough
+                break;
             }
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("I don't know what that means :<");
+            return "I don't know what that means :(";
         }
+        return response;
     }
 }

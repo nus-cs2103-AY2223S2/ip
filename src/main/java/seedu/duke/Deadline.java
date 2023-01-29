@@ -28,16 +28,17 @@ public class Deadline extends Task {
      *
      * @param taskList the TaskList to add the Deadline object into.
      * @param desc     String input for description of a Deadline object.
+     *
+     * @return String for Deadline creation
      */
-    public static void createDeadline(TaskList taskList, String desc) {
-        Ui.addedTask();
+    public static String createDeadline(TaskList taskList, String desc) {
         String[] inputSplit = desc.split("/", 2);
         String input = inputSplit[0];
         String[] dateSplit = inputSplit[1].split(" ", 2);
         String date = dateSplit[1];
         Deadline deadline = new Deadline(input, LocalDate.parse(date));
         taskList.addTask(deadline);
-        Ui.indent("" + deadline);
+        return Ui.addedTask() + Ui.indent(deadline.toString());
     }
 
     /**
@@ -46,10 +47,11 @@ public class Deadline extends Task {
      *
      * @param taskList    the TaskList to add the Deadline object into.
      * @param description String input for description of a Deadline object, with task name and deadline date.
+     *
+     * @return String for Deadline creation
      */
-    public static void runDeadline(TaskList taskList, String description) {
-        createDeadline(taskList, description);
-        Ui.checkList(taskList);
+    public static String runDeadline(TaskList taskList, String description) {
+        return createDeadline(taskList, description) + "\n" + Ui.checkList(taskList);
     }
 
     /**

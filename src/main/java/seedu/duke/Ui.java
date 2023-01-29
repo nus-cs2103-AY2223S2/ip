@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
     /** Scanner to take user input */
-    private Scanner sc;
+    private final Scanner sc;
 
     /**
      * Creates a Ui object.
@@ -17,43 +17,33 @@ public class Ui {
     }
 
     /**
-     * Takes user input.
-     *
-     * @return s The user input into the bot.
-     */
-    public String userCommand() {
-        String s = this.sc.nextLine();
-        return s;
-    }
-
-    /**
      * Returns text to display on bot initialization.
+     *
+     * @return String for welcome.
      */
-    public void spawnBot() {
-        line();
-        greet();
-        line();
+    public String spawnBot() {
+        return "HEY! I'm GRUMMY!\nHow can I help you?";
     }
 
     /**
      * Returns text to display on bot exit.
+     *
+     * @return String for exit.
      */
-    public void displayExit() {
-        line();
-        bye();
-        line();
+    public String displayExit() {
+        return "Goodbye! Hope to see you again :>";
     }
 
     /**
      * Returns the number of tasks in the TaskList.
      *
      * @param taskList the TaskList to return the number of tasks from.
+     *
+     * @return String for tasks left.
      */
-    public void displayTaskList(TaskList taskList) {
+    public String displayTaskList(TaskList taskList) {
         if (taskList.size() == 0) {
-            line();
-            System.out.println("You have no tasks. Hooray!");
-            line();
+            return "You have no tasks. Hooray!";
         } else {
             int index = 1;
             String list = "";
@@ -61,10 +51,8 @@ public class Ui {
                 list = list + "\n   " + index + ". " + taskList.get(index - 1).toString();
                 index++;
             }
-            line();
-            System.out.println("Here are your tasks:" + list);
-            checkList(taskList);
-            line();
+            String hasTasks = "Here are your tasks:";
+            return hasTasks + "\n" + list;
         }
     }
 
@@ -72,12 +60,13 @@ public class Ui {
      * Returns the number of found tasks in the TaskList.
      *
      * @param taskList the TaskList to return the number of found tasks from.
+     * @param keyword the keyword to search for.
+     *
+     * @return String the number of tasks in the TaskList
      */
-    public void displayFindList(TaskList taskList, String keyword) {
+    public String displayFindList(TaskList taskList, String keyword) {
         if (taskList.size() == 0) {
-            line();
-            System.out.println("There are no such tasks.");
-            line();
+            return "There are no such tasks.";
         } else {
             int index = 1;
             String list = "";
@@ -85,10 +74,8 @@ public class Ui {
                 list = list + "\n   " + index + ". " + taskList.get(index - 1).toString();
                 index++;
             }
-            line();
-            System.out.println("Here are the tasks with the keyword: " + keyword + list);
-            checkList(taskList);
-            line();
+            String hasTasks = "Here are the tasks with the keyword: ";
+            return hasTasks + keyword + "\n" + list + "\n" + checkList(taskList);
         }
     }
 
@@ -97,19 +84,12 @@ public class Ui {
      *
      * @param taskList the TaskList to mark the task.
      * @param index    the index of the task to be marked.
+     *
+     * @return String for marked.
      */
-    public static void displayMarked(TaskList taskList, int index) {
-        if (taskList.get(index).isDone) {
-            line();
-            System.out.println("You've already marked this task as done.");
-            line();
-        } else {
-            line();
-            System.out.println("Alright, marking this task as done:");
-            taskList.get(index).markAsDone();
-            indent("" + taskList.get(index));
-            line();
-        }
+    public static String displayMarked(TaskList taskList, int index) {
+        String markingTask = "Alright, marking this task as done:";
+        return markingTask + "\n\n" + indent(taskList.get(index).toString());
     }
 
     /**
@@ -117,19 +97,12 @@ public class Ui {
      *
      * @param taskList the TaskList to unmark the task.
      * @param index    the index of the task to be unmarked.
+     *
+     * @return String for unmarked.
      */
-    public static void displayUnmarked(TaskList taskList, int index) {
-        if (!taskList.get(index).isDone) {
-            line();
-            System.out.println("You've already marked this task as not done yet.");
-            line();
-        } else {
-            line();
-            System.out.println("Alright, marking this task not done yet:");
-            taskList.get(index).markAsUndone();
-            indent("" + taskList.get(index));
-            line();
-        }
+    public static String displayUnmarked(TaskList taskList, int index) {
+        String unmarkingTask = "Alright, marking this task not done yet:";
+        return unmarkingTask + "\n\n" + indent(taskList.get(index).toString());
     }
 
     /**
@@ -137,60 +110,50 @@ public class Ui {
      *
      * @param taskList the TaskList to delete the task from.
      * @param index    the index of the task to be removed.
+     *
+     * @return String for deleted.
      */
-    public static void displayDelete(TaskList taskList, int index) {
-        line();
-        System.out.println("Noted, removing this task:");
-        indent("" + taskList.get(index));
-        taskList.remove(index);
-        line();
-    }
-
-    /** The welcome text. */
-    // Greet format
-    public static void greet() {
-        System.out.println("HEY! I'm GRUMMY!\nHow can I help you?");
-    }
-
-    /** The exit text. */
-    // Bye format
-    public static void bye() {
-        System.out.println("Goodbye! Hope to see you again :>");
-    }
-
-    /** Lines for readability. */
-    // Create lines
-    public static void line() {
-        System.out.println("-------------------------");
+    public static String displayDelete(TaskList taskList, int index) {
+        String removingTask = "Noted, removing this task:";
+        Task t = taskList.get(index);
+        return removingTask + "\n\n" + indent(t.toString());
     }
 
     /**
      * Indents the current line.
      *
      * @param output String of the response to be indented.
+     *
+     * @return Indented output.
      */
     // Create indents
-    public static void indent(String output) {
-        System.out.println("    " + output);
+    public static String indent(String output) {
+        return "    " + output;
     }
 
     /**
      * Checks the grammar of the TaskList return.
      *
      * @param taskList the TaskList to check.
+     *
+     * @return String for TaskList size.
      */
-    public static void checkList(TaskList taskList) {
+    public static String checkList(TaskList taskList) {
         if (taskList.size() == 1) {
-            System.out.println("You have 1 task in the list.");
+            return "You have 1 task in the list.";
         } else if (taskList.size() == 0) {
-            System.out.println("You have no tasks in the list.");
+            return "You have no tasks in the list.";
         } else {
-            System.out.println("You have " + taskList.size() + " tasks in the list.");
+            return "You have " + taskList.size() + " tasks in the list.";
         }
     }
 
-    /** The text when a task is added. */
-    public static void addedTask() {
-        System.out.println("Got it. I've added this task:");
+    /**
+     * The text when a task is added.
+     *
+     * @return String for addedTask.
+     */
+    public static String addedTask() {
+        return "Got it. I've added this task:\n";
     }
 }

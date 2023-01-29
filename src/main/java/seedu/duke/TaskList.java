@@ -6,9 +6,7 @@ import java.util.ArrayList;
  * Represents the TaskList object.
  */
 public class TaskList {
-    /** The TaskList object */
     protected ArrayList<Task> taskList;
-    /** Size of the task list */
     protected int size;
 
     /**
@@ -62,21 +60,23 @@ public class TaskList {
      *
      * @param taskList    the TaskList to mark the object.
      * @param description takes the String to parse into an integer to use as the index.
+     *
+     * @return String to mark task as done.
      */
-    public static void markTask(TaskList taskList, String description) {
+    public static String markTask(TaskList taskList, String description) {
+        String response;
         try {
             int index = Integer.parseInt(description) - 1;
             if (index >= 0 && index < taskList.size()) {
-                Ui.displayMarked(taskList, index);
+                taskList.get(index).markAsDone();
+                response = Ui.displayMarked(taskList, index);
             } else {
-                Ui.line();
-                System.out.println("Please enter a valid number!");
-                Ui.checkList(taskList);
-                Ui.line();
+                response = "Please enter a valid number!\n" + Ui.checkList(taskList);
             }
         } catch (NumberFormatException e) {
-            System.out.println("enter valid number");
+            return "Please enter a valid number!";
         }
+        return response;
     }
 
     /**
@@ -84,21 +84,23 @@ public class TaskList {
      *
      * @param taskList    the TaskList to unmark the object.
      * @param description takes the String to parse into an integer to use as the index.
+     *
+     * @return String to mark task as undone.
      */
-    public static void unmarkTask(TaskList taskList, String description) {
+    public static String unmarkTask(TaskList taskList, String description) {
+        String response;
         try {
             int index = Integer.parseInt(description) - 1;
             if (index >= 0 && index < taskList.size()) {
-                Ui.displayUnmarked(taskList, index);
+                taskList.get(index).markAsUndone();
+                response = Ui.displayUnmarked(taskList, index);
             } else {
-                Ui.line();
-                System.out.println("Please enter a valid number!");
-                Ui.checkList(taskList);
-                Ui.line();
+                response = "Please enter a valid number!\n" + Ui.checkList(taskList);
             }
         } catch (NumberFormatException e) {
-            System.out.println("enter valid number");
+            return "Please enter a valid number!";
         }
+        return response;
     }
 
     /**
@@ -106,35 +108,39 @@ public class TaskList {
      *
      * @param taskList    the TaskList to remove the object from.
      * @param description takes the String to parse into an integer to use as the index.
+     *
+     * @return String to mark task as removed.
      */
-    public static void removeTask(TaskList taskList, String description) {
+    public static String removeTask(TaskList taskList, String description) {
+        String response;
         try {
             int index = Integer.parseInt(description) - 1;
             if (index >= 0 && index < taskList.size()) {
-                Ui.displayDelete(taskList, index);
+                response = Ui.displayDelete(taskList, index);
+                taskList.remove(index);
             } else {
-                Ui.line();
-                System.out.println("Please enter a valid number!");
-                Ui.checkList(taskList);
-                Ui.line();
+                response = "Please enter a valid number!\n" + Ui.checkList(taskList);
             }
         } catch (NumberFormatException e) {
-            System.out.println("enter valid number");
+            return "Please enter a valid number!";
         }
+        return response;
     }
 
     /**
      * Method to find the task from a given keyword.
      *
      * @param keyword the keyword of the tasks to be found.
+     *
+     * @return TaskList of found tasks.
      */
     public TaskList findTasks(String keyword) {
-        TaskList temp = new TaskList();
+        TaskList tempList = new TaskList();
         for (Task t: taskList) {
             if (t.description.contains(keyword)) {
-                temp.addTask(t);
+                tempList.addTask(t);
             }
         }
-        return temp;
+        return tempList;
     }
 }

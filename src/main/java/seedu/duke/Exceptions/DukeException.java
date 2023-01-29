@@ -10,7 +10,6 @@ public class DukeException extends Exception {
      * Returns an error message for Duke.
      *
      * @param e String of error message to be returned.
-     * @return  error message.
      */
 
     public DukeException(String e) {

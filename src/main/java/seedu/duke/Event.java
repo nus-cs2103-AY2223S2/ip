@@ -28,16 +28,17 @@ public class Event extends Task {
      *
      * @param taskList the TaskList to add the Event object into.
      * @param desc     String input for the description of an Event object.
+     *
+     * @return String for Event creation
      */
-    public static void createEvent(TaskList taskList, String desc) {
-        Ui.addedTask();
+    public static String createEvent(TaskList taskList, String desc) {
         String[] inputSplit = desc.split("/", 2);
         String input = inputSplit[0];
         String[] dateSplit = inputSplit[1].split(" ", 2);
         String date = dateSplit[1];
         Event event = new Event(input, LocalDate.parse(date));
         taskList.addTask(event);
-        Ui.indent("" + event);
+        return Ui.addedTask() + Ui.indent(event.toString());
     }
 
     /**
@@ -46,10 +47,11 @@ public class Event extends Task {
      *
      * @param taskList    the TaskList to add the Event object into.
      * @param description String input for description of an Event object, with task name and event date.
+     *
+     * @return String for Event creation
      */
-    public static void runEvent(TaskList taskList, String description) {
-        createEvent(taskList, description);
-        Ui.checkList(taskList);
+    public static String runEvent(TaskList taskList, String description) {
+        return createEvent(taskList, description) + "\n" + Ui.checkList(taskList);
     }
 
     /**
