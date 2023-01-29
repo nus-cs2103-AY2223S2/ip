@@ -7,16 +7,30 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * The type Storage.
+ */
 public class Storage {
 
     private File taskList;
 
     private String filepath;
 
+    /**
+     * Instantiates a new Storage.
+     *
+     * @param filepath the filepath
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Loads saved tasks from hard-disk.
+     *
+     * @return the list
+     * @throws DukeException the duke exception
+     */
     public List<String> load() throws DukeException {
         List<String> loadedFile;
         try {
@@ -33,6 +47,12 @@ public class Storage {
         return loadedFile;
     }
 
+    /**
+     * Saves tasks to hard-disk.
+     *
+     * @param tasksToSave the tasks to save
+     * @throws IOException the io exception
+     */
     public void save(List<String> tasksToSave) throws IOException {
         Files.write(Paths.get(taskList.getAbsolutePath()), tasksToSave);
     }

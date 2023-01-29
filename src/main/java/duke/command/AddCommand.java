@@ -10,7 +10,10 @@ import duke.task.Todo;
 
 import java.time.LocalDate;
 
-public class AddCommand extends Command {
+/**
+ * The type Add command.
+ */
+public class AddCommand extends Command{
 
     private String type;
 
@@ -22,12 +25,23 @@ public class AddCommand extends Command {
 
     private String to;
 
+    /**
+     * Instantiates a new Add command.
+     *
+     * @param description the description
+     */
     public AddCommand(String description) {
         super();
         this.description = description;
         this.type = "T";
     }
 
+    /**
+     * Instantiates a new Add command.
+     *
+     * @param description the description
+     * @param by          the by
+     */
     public AddCommand(String description, String by) {
         super();
         this.description = description;
@@ -35,6 +49,13 @@ public class AddCommand extends Command {
         this.type = "D";
     }
 
+    /**
+     * Instantiates a new Add command.
+     *
+     * @param description the description
+     * @param from        the from
+     * @param to          the to
+     */
     public AddCommand(String description, String from, String to) {
         super();
         this.description = description;

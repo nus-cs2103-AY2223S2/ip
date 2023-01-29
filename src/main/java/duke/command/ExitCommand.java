@@ -6,7 +6,10 @@ import duke.Ui;
 import duke.Storage;
 import duke.DukeException;
 
-public class ExitCommand extends Command {
+/**
+ * The type Exit command.
+ */
+public class ExitCommand extends Command{
 
     @Override
     public boolean isExit() {

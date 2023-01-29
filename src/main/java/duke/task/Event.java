@@ -1,9 +1,20 @@
 package duke.task;
 
-public class Event extends Task {
+/**
+ * The type Event.
+ */
+public class Event extends Task{
+
     private String to;
     private String from;
 
+    /**
+     * Instantiates a new Event.
+     *
+     * @param description the description
+     * @param from        the from
+     * @param to          the to
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.to = to;

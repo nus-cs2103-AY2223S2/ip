@@ -7,14 +7,29 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Task list.
+ */
 public class TaskList {
 
+    /**
+     * The Tasks.
+     */
     ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Instantiates a new Task list.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Instantiates a new Task list.
+     *
+     * @param storedTasks the stored tasks
+     * @throws DukeException the duke exception
+     */
     public TaskList(List<String> storedTasks) throws DukeException {
         for (String task: storedTasks) {
             String[] parsedTask = Parser.parseTask(task);
@@ -38,24 +53,50 @@ public class TaskList {
 
     }
 
-    public void addTodo(String description) throws DukeException {
-        if (description.equals("")) {
+    /**
+     * Add todo.
+     *
+     * @param description the description
+     * @throws DukeException the duke exception
+     */
+    public void addTodo(String description) throws DukeException{
+        if (description.equals("")){
             throw new DukeException("The description of a todo cannot be empty.");
         }
         Todo newTodo = new Todo(description);
         tasks.add(newTodo);
     }
 
+    /**
+     * Add deadline.
+     *
+     * @param description the description
+     * @param by          the by
+     * @throws DukeException the duke exception
+     */
     public void addDeadline(String description, String by) throws DukeException {
         Deadline newDd = new Deadline(description, LocalDate.parse(by));
         tasks.add(newDd);
     }
 
+    /**
+     * Add event.
+     *
+     * @param description the description
+     * @param from        the from
+     * @param to          the to
+     * @throws DukeException the duke exception
+     */
     public void addEvent(String description, String from, String to) throws DukeException {
         Event newEvent = new Event(description, from, to);
         tasks.add(newEvent);
     }
 
+    /**
+     * Output TaskList object as a string to view.
+     *
+     * @return the string
+     */
     public String showList() {
         int len = tasks.size();
         if (len == 0) {
@@ -69,25 +110,48 @@ public class TaskList {
         return result;
     }
 
-    public String markTask(int taskNo) {
+    /**
+     * Mark Task object as done.
+     *
+     * @param taskNo the task no
+     * @return the string
+     */
+    public String markTask(int taskNo){
         tasks.get(taskNo).mark();
         String result = "Nice! I've marked this task as done:\n";
         result += tasks.get(taskNo);
         return result;
     }
 
-    public String unmarkTask(int taskNo) {
+    /**
+     * Mark Task object as incomplete
+     *
+     * @param taskNo the task no
+     * @return the string
+     */
+    public String unmarkTask(int taskNo){
         tasks.get(taskNo).unmark();
         String result = "OK, I've marked this task as not done yet:\n";
         result += tasks.get(taskNo);
         return result;
     }
 
-    public String delete(int taskNo) {
+    /**
+     * Delete Task from Tasklist.
+     *
+     * @param taskNo the task no
+     * @return the string
+     */
+    public String delete(int taskNo){
         Task deleted = tasks.remove(taskNo);
         return String.format("OK, I've deleted: %s\n", deleted);
     }
 
+    /**
+     * Gets tasks to save to storage as a List.
+     *
+     * @return the tasks to save
+     */
     public List<String> getTasksToSave() {
         List<String> toSave = new ArrayList<>();
         for(int i = 0; i < size(); i++) {
@@ -97,6 +161,11 @@ public class TaskList {
         return toSave;
     }
 
+    /**
+     * Returns number of tasks in a TaskList object.
+     *
+     * @return the int
+     */
     public int size() {
         return tasks.size();
     }
