@@ -3,10 +3,10 @@ package james.command;
 import james.JamesException;
 import james.task.ToDo;
 
-public class addToDoCommand extends Command {
+public class AddToDoCommand extends Command {
     private ToDo toDo;
 
-    public addToDoCommand(ToDo task) {
+    public AddToDoCommand(ToDo task) {
         this.toDo = task;
     }
 

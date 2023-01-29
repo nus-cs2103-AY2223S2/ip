@@ -3,10 +3,10 @@ package james.command;
 import james.JamesException;
 import james.task.Task;
 
-public class addMarkCommand extends Command {
+public class AddUnmarkCommand extends Command {
     private int taskNumber;
 
-    public addMarkCommand(int taskNumber) {
+    public AddUnmarkCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
@@ -16,10 +16,8 @@ public class addMarkCommand extends Command {
             throw new JamesException("Task number is out of range!");
         }
         Task task = taskList.getTask(taskNumber);
-        task.markDone();
-        ui.markTask(task);
+        task.markUnDone();
+        ui.unmarkTask(task);
     }
 }
-
-
 

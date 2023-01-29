@@ -3,10 +3,10 @@ package james.command;
 import james.JamesException;
 import james.task.Deadline;
 
-public class addDeadlineCommand extends Command {
+public class AddDeadlineCommand extends Command {
     private Deadline deadline;
 
-    public addDeadlineCommand(Deadline deadline) {
+    public AddDeadlineCommand(Deadline deadline) {
         this.deadline = deadline;
     }
 
