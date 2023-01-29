@@ -1,7 +1,10 @@
 package storage;
 
 import exception.TaskParseException;
-import task.*;
+import task.Deadline;
+import task.Event;
+import task.TaskList;
+import task.Todo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,7 +26,7 @@ public class Storage {
         /**
          * Constructs a <code>MikiLoadException</code> with the specified detail message.
          *
-         * @param message the detail message
+         * @param message the detail message.
          */
         protected MikiLoadException(String message) {
             super(message);
@@ -35,7 +38,7 @@ public class Storage {
     /**
      * Creates a new storage handler with a specified base directory for file paths.
      *
-     * @param dataPath base directory of file paths
+     * @param dataPath base directory of file paths.
      */
     public Storage(String dataPath) {
         this.dataPath = dataPath;
@@ -55,9 +58,9 @@ public class Storage {
      * Searches the base directory for loadable files and
      * returns their filenames as a <code>String</code> array.
      *
-     * @return the filenames of files in the base directory
+     * @return the filenames of files in the base directory.
      * @throws MikiLoadException if the base directory does not exist and
-     * cannot be created
+     *                           cannot be created.
      */
     public String[] listSaves() throws MikiLoadException {
         createSaveDir();
@@ -68,7 +71,7 @@ public class Storage {
         File[] saves = dir.listFiles();
         String[] filenames = new String[saves.length];
         for (int i = 0; i < saves.length; i++) {
-            filenames[i]  = saves[i].getName();
+            filenames[i] = saves[i].getName();
         }
         return filenames;
     }
@@ -76,9 +79,9 @@ public class Storage {
     /**
      * Saves a <code>TaskList</code> to a file, in a loadable format.
      *
-     * @param pathString path of the file to save to
-     * @param tasks tasklist to save
-     * @throws IOException if the file could not be written to
+     * @param pathString path of the file to save to.
+     * @param tasks      tasklist to save.
+     * @throws IOException if the file could not be written to.
      */
     public void save(String pathString, TaskList tasks) throws IOException {
         createSaveDir();
@@ -103,10 +106,10 @@ public class Storage {
     /**
      * Loads a file as a <code>TaskList</code>.
      *
-     * @param pathString path of the file to load from
-     * @param tasks tasklist to load to
-     * @throws IOException if the file could not be read from
-     * @throws MikiLoadException if the file did not represent a correctly-encoded TaskList
+     * @param pathString path of the file to load from.
+     * @param tasks      tasklist to load to.
+     * @throws IOException       if the file could not be read from.
+     * @throws MikiLoadException if the file did not represent a correctly-encoded TaskList.
      */
     public void load(String pathString, TaskList tasks) throws IOException, MikiLoadException {
         createSaveDir();
@@ -122,17 +125,17 @@ public class Storage {
                     repres[j] = br.readLine();
                 }
                 switch (repres[0].charAt(0)) {
-                    case 'T':
-                        tasks.add(Todo.parseLoad(repres));
-                        break;
-                    case 'D':
-                        tasks.add(Deadline.parseLoad(repres));
-                        break;
-                    case 'E':
-                        tasks.add(Event.parseLoad(repres));
-                        break;
-                    default:
-                        //back-compat? try to handle
+                case 'T':
+                    tasks.add(Todo.parseLoad(repres));
+                    break;
+                case 'D':
+                    tasks.add(Deadline.parseLoad(repres));
+                    break;
+                case 'E':
+                    tasks.add(Event.parseLoad(repres));
+                    break;
+                default:
+                    //back-compat? try to handle
                 }
             }
         } catch (NumberFormatException | TaskParseException ex) {

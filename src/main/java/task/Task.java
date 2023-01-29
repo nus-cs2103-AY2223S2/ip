@@ -8,47 +8,49 @@ import java.time.format.DateTimeFormatter;
  * and some chronological order.
  */
 public abstract class Task {
-    protected String objective;
-    protected boolean done;
-
     /** <code>DateTimeFormatter</code> format for parsing supplied time <code>String</code>s. */
     public static final String DATE_IN_FMT_STR = "yyyy-MM-dd HH:mm";
     /** <code>DateTimeFormatter</code> format for outputting time <code>String</code>s. */
     public static final String DATE_OUT_FMT_STR = "dd LLL yyyy hh:mm a";
     /** <code>DateTimeFormatter</code> for parsing supplied time <code>String</code>s. */
-    public static final DateTimeFormatter DATE_IN_FMT = DateTimeFormatter.ofPattern(DATE_IN_FMT_STR);
+    protected static final DateTimeFormatter DATE_IN_FMT = DateTimeFormatter.ofPattern(DATE_IN_FMT_STR);
     /** <code>DateTimeFormatter</code> for outputting time <code>String</code>s. */
     protected static final DateTimeFormatter DATE_OUT_FMT = DateTimeFormatter.ofPattern(DATE_OUT_FMT_STR);
+
+    /** The textual objective of this task. */
+    protected String objective;
+    /** The completion status of this task. */
+    protected boolean isDone;
 
     /**
      * Creates a task with the specified textual objective.
      *
-     * @param objective the description of this task's objective
+     * @param objective description of this task's objective.
      */
     public Task(String objective) {
         this.objective = objective;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
      * Marks this task as completed.
      */
     public void mark() {
-        done = true;
+        isDone = true;
     }
 
     /**
      * Marks this task as not completed.
      */
     public void unmark() {
-        done = false;
+        isDone = false;
     }
 
     /**
      * Returns a <code>String</code> array encoding of this task,
      * to be used to create an exact copy of this task.
      *
-     * @return the <code>String[]</code> encoding of this task
+     * @return the <code>String[]</code> encoding of this task.
      */
     public abstract String[] save();
 
@@ -56,25 +58,25 @@ public abstract class Task {
      * Returns <code>true</code> if this task occurs on
      * or before <code>date</code>.
      *
-     * @param date the date to compare against
-     * @return true if this task occurs on or before <code>date</code>
+     * @param date date to compare against.
+     * @return true if this task occurs on or before <code>date</code>.
      */
-    public abstract boolean beforeDate(LocalDateTime date);
+    public abstract boolean isBeforeDate(LocalDateTime date);
 
     /**
      * Returns <code>true</code> if this task occurs on
      * or after <code>date</code>.
      *
-     * @param date the date to compare against
-     * @return true if this task occurs on or after <code>date</code>
+     * @param date date to compare against.
+     * @return true if this task occurs on or after <code>date</code>.
      */
-    public abstract boolean afterDate(LocalDateTime date);
+    public abstract boolean isAfterDate(LocalDateTime date);
 
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return "[" + (done ? 'X' : ' ') + "] " + objective;
+        return "[" + (isDone ? 'X' : ' ') + "] " + objective;
     }
 }

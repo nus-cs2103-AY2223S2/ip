@@ -14,19 +14,12 @@ public class AddTask implements Command {
     /**
      * Creates an add-task command.
      *
-     * @param task task to be added
+     * @param task task to be added.
      */
     public AddTask(Task task) {
         this.task = task;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @param tasks tasklist to perform the action on
-     * @param ui ui to perform the action on
-     * @param storage storage to perform the action on
-     */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(task);

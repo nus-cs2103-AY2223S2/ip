@@ -23,28 +23,21 @@ public class ListTasks implements Command {
     /**
      * Creates a list-tasks command with time window filtering.
      *
-     * @param from start of the time window. May be left null for no window start filtering
-     * @param to end of the time window. May be left null for no window end filtering
+     * @param from start of the time window. May be left null for no window start filtering.
+     * @param to   end of the time window. May be left null for no window end filtering.
      */
     public ListTasks(LocalDateTime from, LocalDateTime to) {
         this.from = from;
         this.to = to;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @param tasks tasklist to perform the action on
-     * @param ui ui to perform the action on
-     * @param storage storage to perform the action on
-     */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
         ui.print("caught in 4k:");
         for (int i = 0; i < tasks.size(); i++) {
-            if ((from == null || tasks.get(i).afterDate(from))
-                    && (to == null || tasks.get(i).beforeDate(to))) {
-                ui.print(Integer.toString(i + 1) + ". " + tasks.get(i));
+            if ((from == null || tasks.get(i).isAfterDate(from))
+                    && (to == null || tasks.get(i).isBeforeDate(to))) {
+                ui.print(i + 1 + ". " + tasks.get(i));
             }
         }
     }

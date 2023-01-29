@@ -7,7 +7,7 @@ public class TaskListIndexException extends ArrayIndexOutOfBoundsException {
     /**
      * Constructs a <code>TaskListIndexException</code> with the specified detail message.
      *
-     * @param message the detail message
+     * @param message the detail message.
      */
     public TaskListIndexException(String message) {
         super(message);

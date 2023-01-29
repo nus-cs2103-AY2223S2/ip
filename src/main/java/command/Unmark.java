@@ -14,19 +14,12 @@ public class Unmark implements Command {
     /**
      * Creates an unmark command.
      *
-     * @param idx index to be unmarked
+     * @param idx index to be unmarked.
      */
     public Unmark(int idx) {
         this.idx = idx;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @param tasks tasklist to perform the action on
-     * @param ui ui to perform the action on
-     * @param storage storage to perform the action on
-     */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
         try {

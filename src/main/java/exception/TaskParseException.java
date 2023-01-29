@@ -7,7 +7,7 @@ public class TaskParseException extends Exception {
     /**
      * Constructs a <code>TaskParseException</code> with the specified detail message.
      *
-     * @param message the detail message
+     * @param message the detail message.
      */
     public TaskParseException(String message) {
         super(message);

@@ -6,26 +6,24 @@ import java.util.Scanner;
  * A UI controller for Miki interactive command-line I/O.
  */
 public class Ui {
-    private boolean asciiOnly;
-    private boolean autoDiv = true;
-
-    private Scanner sc = new Scanner(System.in);
-
     private static final String DIV = "    ____________________________________________________________________________";
+    private final boolean isAsciiOnly;
+    private final boolean isAutoDiv = true;
+    private final Scanner sc = new Scanner(System.in);
 
     /**
      * Creates a new UI, optionally using ASCII-only versions of built-in <code>Strings</code>.
      *
-     * @param asciiOnly whether this Ui shall operate in ASCII-only mode
+     * @param isAsciiOnly whether this Ui shall operate in ASCII-only mode.
      */
-    public Ui(boolean asciiOnly) {
-        this.asciiOnly = asciiOnly;
+    public Ui(boolean isAsciiOnly) {
+        this.isAsciiOnly = isAsciiOnly;
     }
 
     /**
      * Prints an output prompt and reads a single line of input.
      *
-     * @return the read line of user input
+     * @return the read line of user input.
      */
     public String readLine() {
         System.out.print(">");
@@ -43,7 +41,7 @@ public class Ui {
      * If automatic internal line dividers are enabled, prints a line divider.
      */
     public void printAutoDiv() {
-        if (autoDiv) {
+        if (isAutoDiv) {
             printDiv();
         }
     }
@@ -52,7 +50,7 @@ public class Ui {
      * Prints a line of output to the user interface,
      * formatted with indentation for clarity.
      *
-     * @param s <code>String</code> to be printed
+     * @param s <code>String</code> to be printed.
      */
     public void print(String s) {
         System.out.println("     " + s);
@@ -65,7 +63,7 @@ public class Ui {
         printAutoDiv();
         String username = System.getProperty("user.name");
         print("in honour / fuzuki miki / 2020 | 2021");
-        if (!asciiOnly) {
+        if (!isAsciiOnly) {
             print("\uD83C\uDF80✨");
             print("Hello " + username + " !! Konmiki! ＼(￣▽￣)/");
         } else {

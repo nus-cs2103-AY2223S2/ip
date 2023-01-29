@@ -15,19 +15,12 @@ public class Load implements Command {
     /**
      * Creates a load command.
      *
-     * @param path path of the file to load from
+     * @param path path of the file to load from.
      */
     public Load(String path) {
         this.path = path;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @param tasks tasklist to perform the action on
-     * @param ui ui to perform the action on
-     * @param storage storage to perform the action on
-     */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
         if (!path.equals("")) {

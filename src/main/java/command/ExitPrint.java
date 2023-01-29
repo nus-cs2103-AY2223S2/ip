@@ -15,13 +15,6 @@ public class ExitPrint implements Command {
 
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @param tasks tasklist to perform the action on
-     * @param ui ui to perform the action on
-     * @param storage storage to perform the action on
-     */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
         ui.print("Otsumiki!~ I'll see you later!");

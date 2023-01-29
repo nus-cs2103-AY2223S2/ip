@@ -7,7 +7,7 @@ public class MikiArgsException extends Exception {
     /**
      * Constructs a <code>MikiArgsException</code> with the specified detail message.
      *
-     * @param message the detail message
+     * @param message the detail message.
      */
     public MikiArgsException(String message) {
         super(message);

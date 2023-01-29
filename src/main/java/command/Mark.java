@@ -14,19 +14,12 @@ public class Mark implements Command {
     /**
      * Creates a mark command.
      *
-     * @param idx index to be marked
+     * @param idx index to be marked.
      */
     public Mark(int idx) {
         this.idx = idx;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @param tasks tasklist to perform the action on
-     * @param ui ui to perform the action on
-     * @param storage storage to perform the action on
-     */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
         try {
