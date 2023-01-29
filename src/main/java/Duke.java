@@ -22,8 +22,8 @@ public class Duke {
          * allTasks: the file that constains all the tasks
          * taskFolder: the folder taht contains allTasks
          */
-        File allTasks = new File("data/tasks.txt");
-        File taskFolder = new File("data");
+        File allTasks = new File("src/main/java/data/tasks.txt");
+        File taskFolder = new File("src/main/java/data");
         ArrayList<Task> tasks = new ArrayList<Task>();
 
         /**
