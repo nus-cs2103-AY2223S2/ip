@@ -130,7 +130,7 @@ public class TaskManager implements Reloadable {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             builder.append(String.format("%d. %s\n",
-                    i+1,
+                    i + 1,
                     tasks.get(i).toString()));
         }
         return builder.toString().strip();

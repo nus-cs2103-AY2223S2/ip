@@ -5,21 +5,27 @@ import aqua.logic.ExecutionService;
 import aqua.manager.LogicManager;
 
 
-/**
- * Represents a command that accepts an ArgumentMap and an AppManager to
- * produce an ExecutionDispatcher that will execute the command.
- */
+/** A provider of ExecutionService when given an ArgumentMap and LogicManager. */
 public abstract class ServiceProvider {
     /**
-     * Produces an ExecutionDispater from the given argument and manager.
+     * Produces an ExecutionService from the given argument and manager.
+     * {@code isLoading} parameter is set to {@code false}.
      *
-     * @param args - the argument map.
-     * @param manager - the application AppManager.
-     * @return an ExecutionDispatcher to execute the command.
+     * @param args - the argument map to work on.
+     * @param manager - the LogicManager to work on.
+     * @return an ExecutionService to execute the command.
      */
     public ExecutionService getService(ArgumentMap args, LogicManager manager) {
         return getService(args, manager, false);
     }
 
+    /**
+     * Produces an ExecutionService from the given argument and manager.
+     *
+     * @param args - the argument map to work on.
+     * @param manager - the LogicManager to work on.
+     * @param isLoading - if the command purpose is to load a previous state.
+     * @return an ExecutionService to execute the command.
+     */
     public abstract ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading);
 }

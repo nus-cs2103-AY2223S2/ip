@@ -7,7 +7,7 @@ import aqua.manager.LogicManager;
 
 
 /**
- * An implementation of Command to produce an ExecutionDispatcher that will
+ * An implementation of Command to produce an ExecutionService that will
  * exit the application.
  */
 public class ByeCommand extends ServiceProvider {

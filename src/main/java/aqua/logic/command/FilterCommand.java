@@ -9,7 +9,10 @@ import aqua.logic.ExecutionService;
 import aqua.logic.ExecutionTask;
 import aqua.manager.LogicManager;
 
-
+/**
+ * An implementation of Command that will produce an ExecutionService that
+ * will display a filtered list of the user's current tasks.
+ */
 public class FilterCommand extends ServiceProvider {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {

@@ -15,6 +15,7 @@ public class DateUtils {
      * <li> {@code yyyy-MM-ddThh:mm}
      * <li> {@code yyyy-MM-dd hhmm}
      * <li> {@code yyyy-MM-dd} (assume time to be 0000)
+     * </ul>
      *
      * @param dateString - the date String to parse.
      * @return the parsed LocalDateTime.

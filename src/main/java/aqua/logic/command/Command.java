@@ -1,6 +1,7 @@
 package aqua.logic.command;
 
 
+/** Enumeration of commands. */
 public enum Command {
     LIST(new ListCommand()),
     MARK(new MarkTaskCommand(true)),
@@ -21,6 +22,11 @@ public enum Command {
     }
 
 
+    /**
+     * Returns the ServiceProvider of the command.
+     *
+     * @return the ServiceProvider of the command.
+     */
     public ServiceProvider getServiceProvider() {
         return serviceProvider;
     }

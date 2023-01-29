@@ -13,7 +13,7 @@ import aqua.storage.Loadable;
 
 /** Manager of the application's logical processes. */
 public class LogicManager implements Loadable {
-    private final CommandLineInputParser inputParser;;
+    private final CommandLineInputParser inputParser;
     private final TaskManager taskManager;
 
     private boolean isClosed = false;

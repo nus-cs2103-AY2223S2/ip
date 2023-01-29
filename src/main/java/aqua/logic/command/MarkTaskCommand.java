@@ -9,7 +9,7 @@ import aqua.logic.ExecutionTask;
 import aqua.manager.LogicManager;
 
 /**
- * An implementation of Command that will produce an ExecutionDispatcher that
+ * An implementation of Command that will produce an ExecutionService that
  * will mark an AquaTask in the task manager and then save the state of the
  * task manager to hard disk.
  */

@@ -47,7 +47,7 @@ public class DateUtilsTest {
 
 
     @Test
-    public void parse_invalidFormat__exceptionThrown() {
+    public void parse_invalidFormat_exceptionThrown() {
         try {
             DateUtils.parse("random day");
             fail("No exception thrown");

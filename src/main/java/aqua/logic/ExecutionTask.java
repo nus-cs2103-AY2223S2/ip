@@ -3,7 +3,6 @@ package aqua.logic;
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.ProcedureExecutionException;
 import aqua.manager.LogicManager;
-
 import javafx.concurrent.Task;
 
 

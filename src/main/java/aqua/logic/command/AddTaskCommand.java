@@ -10,7 +10,7 @@ import aqua.manager.LogicManager;
 
 /**
  * An abstract implementation of Command that will produce an
- * ExecutionDispatcher that will create and add an AquaTask to the task manager
+ * ExecutionService that will create and add an AquaTask to the task manager
  * and then save the state of the task manager to hard disk.
  */
 public abstract class AddTaskCommand extends ServiceProvider {
