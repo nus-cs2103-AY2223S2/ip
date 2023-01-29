@@ -7,15 +7,19 @@ import output.DukeException;
 import output.Printer;
 
 /**
- * Specialised ArrayList to help with task operations
+ * Encapsulates an ArrayList to help with task operations
  */
-public class TaskList extends ArrayList<Task> {
+public class TaskList {
 
     private static final int CAPACITY = 100;
     private ArrayList<Task> tasks;
 
     public TaskList(int capacity) {
         this.tasks = new ArrayList<>(capacity);
+    }
+    
+    public TaskList() {
+        this.tasks = new ArrayList<>(CAPACITY);
     }
 
     private boolean isValidIndex(int index) {
@@ -82,5 +86,13 @@ public class TaskList extends ArrayList<Task> {
             tasks.remove(deleteIndex);
             Printer.printDeleteConfirmation(removedTask, tasks.size());
         }
+    }
+
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    public ArrayList<Task> getList() {
+        return this.tasks;
     }
 }

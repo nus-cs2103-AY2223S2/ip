@@ -10,6 +10,7 @@ import output.Printer;
 import output.Storage;
 
 import task.Task;
+import task.TaskList;
 import task.Deadline;
 import task.Event;
 import task.Todo;
@@ -17,18 +18,6 @@ import task.Todo;
 public class UwUke {
 
     private final static int CAPACITY = 100;
-
-    private static boolean isValidIndex(ArrayList<Task> tasks, int index) {
-        if (index < 0 || index >= tasks.size()) {
-            Printer.printWithDecorations("Index out of bounds!");
-            return false;
-        } else if (tasks.get(index) == null) {
-            Printer.printWithDecorations("Task not initialised!");
-            return false;
-        } else {
-            return true;
-        }
-    }
 
     private static Command getCommand(String input) {
         if (input.equals("list")) {
@@ -52,12 +41,12 @@ public class UwUke {
 
     public static void main(String[] args) {
         Printer.uwu();
-        ArrayList<Task> tasks;
+        TaskList tasks = new TaskList(CAPACITY);
         try {
             tasks = Storage.readSavedTasks();
         } catch (Exception e) {
             Printer.printError("Could not load save file");
-            tasks = new ArrayList<Task>(CAPACITY); 
+            tasks = new TaskList();
         }
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -67,61 +56,27 @@ public class UwUke {
                 if (input.contains(",")) { // Can potentially cause fatal errors when trying to read files if commas were allowed.
                     throw new DukeException("Please do not use reserved character \',\'.");
                 }
-
                 switch (getCommand(input)) {
                 case LIST:
-                    Printer.printTasks(tasks);
+                    Printer.printTasks(tasks.getList());
                     break;
                 case DEADLINE:
-                    if (tasks.size() >= CAPACITY) {
-                        Printer.printNotEnoughSpace();
-                        break;
-                    }
-
-                    String[] dt = Parser.parseDeadline(input);
-                    Deadline dl = new Deadline(dt[0], dt[1]);
-                    tasks.add(dl);
-                    Printer.printAddedConfirmation(dl, tasks.size());
+                    tasks.addDeadline(input);
                     break;
                 case EVENT:
-                    if (tasks.size() >= CAPACITY) {
-                        Printer.printNotEnoughSpace();
-                        break;
-                    }
-
-                    String[] et = Parser.parseEvent(input);
-                    Event e = new Event(et[0], et[1], et[2]);
-                    tasks.add(e);
-                    Printer.printAddedConfirmation(e, tasks.size());
+                    tasks.addEvent(input);
                     break;
                 case TODO:
-                    if (tasks.size() >= CAPACITY) {
-                        Printer.printNotEnoughSpace();
-                        break;
-                    }
-
-                    Todo td = new Todo(Parser.parseTodo(input));
-                    tasks.add(td);
-                    Printer.printAddedConfirmation(td, tasks.size());
+                    tasks.addTodo(input);
                     break;
                 case MARK:
-                    int markIndex = Parser.parseMark(input);
-                    if (isValidIndex(tasks, markIndex)) // Note that this check also prints out error messages if any
-                        Printer.printWithDecorations(tasks.get(markIndex).markDone());
+                    tasks.markTask(input);
                     break;
                 case UNMARK:
-                    int unmarkIndex = Parser.parseUnmark(input);
-                    if (isValidIndex(tasks, unmarkIndex)) // Note that this check also prints out error messages if any
-                        Printer.printWithDecorations(tasks.get(unmarkIndex).unmarkDone());
+                    tasks.unmarkTask(input);
                     break;
                 case DELETE:
-                    int deleteIndex = Parser.parseDelete(input);
-                    if (isValidIndex(tasks, deleteIndex)) {
-                        Task removedTask = tasks.get(deleteIndex);
-                        tasks.remove(deleteIndex);
-                        Printer.printDeleteConfirmation(removedTask, tasks.size());
-                    }
-
+                    tasks.deleteTask(input);
                     break;
                 default:
                     Printer.printWithDecorations(Advisor.advise(input));
@@ -138,7 +93,7 @@ public class UwUke {
         }
 
         try {
-            Storage.saveTasks(tasks);
+            Storage.saveTasks(tasks.getList());
         } catch (Exception e) {
             Printer.printWithDecorations("Error occured when trying to save tasks");
         }

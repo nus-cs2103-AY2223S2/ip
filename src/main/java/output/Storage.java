@@ -4,12 +4,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import java.util.Collection;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import task.Deadline;
 import task.Event;
 import task.Task;
+import task.TaskList;
 import task.Todo;
 
 /**
@@ -29,13 +29,13 @@ public class Storage {
         Files.write(dataFile, Arrays.toString(tasks.toArray()).getBytes());
     }
 
-    public static ArrayList<Task> readSavedTasks() throws Exception {
+    public static TaskList readSavedTasks() throws Exception {
         String rawString = Files.readString(dataFile);
         String[] taskStrings = rawString.split(", ");
         taskStrings = cleanTaskString(taskStrings);
-        ArrayList<Task> tasks = new ArrayList<>(taskStrings.length);
+        TaskList tasks = new TaskList();
         for (String s : taskStrings) {
-            tasks.add(getTaskFromString(s));
+            tasks.addTask(getTaskFromString(s));
         }
         return tasks;
     }
