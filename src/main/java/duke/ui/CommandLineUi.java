@@ -1,16 +1,27 @@
 package duke.ui;
 
 public class CommandLineUi implements Ui {
+    /**
+     * Displays text on command line.
+     *
+     * @param text The text to be displayed.
+     */
     @Override
     public void showText(String text) {
         System.out.printf("     %s\n", text);
     }
 
+    /**
+     * Displays horizontal line on the command line.
+     */
     @Override
     public void showLine() {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Displays startup text on the command line.
+     */
     @Override
     public void showStartup() {
         String logo =

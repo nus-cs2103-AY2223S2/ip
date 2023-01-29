@@ -38,6 +38,16 @@ public class CommandParser {
         Command listCommand = new ListCommand();
         commandMap.put(listCommand.getCommandName(), listCommand);
     }
+
+    /**
+     * Parses input and execute the respective command with arguments from input.
+     *
+     * @param input Raw input.
+     * @param ui User interface.
+     * @param taskList Task list.
+     * @param storage Storage.
+     * @throws DukeException If command is unknown or does not match the command syntax.
+     */
     public void parseInputAndExecuteCommand(String input, Ui ui, TaskList taskList, Storage storage) throws DukeException {
         String commandName = input.split(" ")[0];
 
@@ -69,6 +79,11 @@ public class CommandParser {
         command.run(args, ui, taskList, storage);
     }
 
+    /**
+     * Returns whether the user has quit.
+     *
+     * @return Whether the user has quit.
+     */
     public boolean hasUserQuit() {
         return hasUserQuit;
     }

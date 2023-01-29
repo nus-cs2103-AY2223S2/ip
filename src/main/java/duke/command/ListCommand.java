@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -20,6 +21,14 @@ public class ListCommand implements Command {
         return "list";
     }
 
+    /**
+     * Lists tasks in task list.
+     *
+     * @param args Argument list; Does not take in any arguments.
+     * @param ui User interface.
+     * @param taskList Task list.
+     * @param storage Storage.
+     */
     @Override
     public void run(String[] args, Ui ui, TaskList taskList, Storage storage) {
         ui.showLine();

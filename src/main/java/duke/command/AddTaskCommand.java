@@ -7,6 +7,16 @@ import duke.ui.Ui;
 import duke.task.TaskList;
 
 public abstract class AddTaskCommand implements Command {
+
+    /**
+     * Adds task to task list and saves the new task list into storage.
+     *
+     * @param task Task to be added.
+     * @param ui User interface.
+     * @param taskList Task list.
+     * @param storage Storage.
+     * @throws DukeException If saving to storage fails.
+     */
     protected void addTask(Task task, Ui ui, TaskList taskList, Storage storage) throws DukeException {
         ui.showLine();
 
