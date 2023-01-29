@@ -1,5 +1,7 @@
-public class WrongTask extends Exception {
-    public WrongTask(String message) {
+package duke;
+
+public class OutOfBounds extends Exception {
+    public OutOfBounds(String message) {
         super(message);
     }
 
@@ -8,4 +10,3 @@ public class WrongTask extends Exception {
         return "OOPS!!!" + getMessage();
     }
 }
-

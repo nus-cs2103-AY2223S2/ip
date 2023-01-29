@@ -1,5 +1,7 @@
-public class EmptyDescription extends Exception {
-    public EmptyDescription(String message) {
+package duke;
+
+public class WrongTask extends Exception {
+    public WrongTask(String message) {
         super(message);
     }
 
@@ -8,3 +10,4 @@ public class EmptyDescription extends Exception {
         return "OOPS!!!" + getMessage();
     }
 }
+

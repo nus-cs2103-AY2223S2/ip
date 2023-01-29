@@ -1,5 +1,7 @@
-public class OutOfBounds extends Exception {
-    public OutOfBounds(String message) {
+package duke;
+
+public class EmptyDescription extends Exception {
+    public EmptyDescription(String message) {
         super(message);
     }
 
