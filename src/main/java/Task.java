@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-public class Task {
-=======
 import java.io.Serializable;
-
 public class Task implements Serializable {
->>>>>>> branch-Level-7
     protected String description;
     protected boolean isDone;
     protected TypeOfTask type;
