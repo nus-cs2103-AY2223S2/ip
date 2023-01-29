@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.Storage;
+import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 public interface Command {
     String getCommandName();

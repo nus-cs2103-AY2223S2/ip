@@ -1,23 +1,26 @@
-package duke;
+package duke.ui;
 
-public class Ui {
-    public void printText(String text) {
+public class CommandLineUi implements Ui {
+    @Override
+    public void showText(String text) {
         System.out.printf("     %s\n", text);
     }
 
-    public void printHorizontal() {
+    @Override
+    public void showLine() {
         System.out.println("    ____________________________________________________________");
     }
 
-    public void printStartup() {
+    @Override
+    public void showStartup() {
         String logo =
                 " /\\_/\\\n" +
                         "( o.o )   ~meow~\n" +
                         " > ^ <";
         System.out.println(logo);
-        printHorizontal();
-        printText("Hello! I'm duke.Duke");
-        printText("What can I do for you?");
-        printHorizontal();
+        showLine();
+        showText("Hello! I'm duke.Duke");
+        showText("What can I do for you?");
+        showLine();
     }
 }

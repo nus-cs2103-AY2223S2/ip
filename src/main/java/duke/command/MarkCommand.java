@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.ui.Ui;
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -29,16 +30,16 @@ public class MarkCommand implements Command {
             Task task = taskList.getTask(taskNo);
             task.setIsDone(true);
 
-            ui.printHorizontal();
-            ui.printText("Nice! I've marked this task as done:");
-            ui.printText(task.toString());
-            ui.printHorizontal();
+            ui.showLine();
+            ui.showText("Nice! I've marked this task as done:");
+            ui.showText(task.toString());
+            ui.showLine();
 
             storage.save(taskList.getAllTasks());
         } else {
-            ui.printHorizontal();
-            ui.printText("Invalid task number!");
-            ui.printHorizontal();
+            ui.showLine();
+            ui.showText("Invalid task number!");
+            ui.showLine();
         }
     }
 }

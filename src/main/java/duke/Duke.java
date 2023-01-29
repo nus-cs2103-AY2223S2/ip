@@ -2,7 +2,11 @@ package duke;
 
 import duke.command.CommandParser;
 import duke.exception.DukeException;
+import duke.storage.FileStorage;
+import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.CommandLineUi;
+import duke.ui.Ui;
 
 import java.util.Scanner;
 
@@ -11,6 +15,7 @@ public class Duke {
     private static final String SAVE_DATA_DIR_PATH = "./data";
 
     private Ui ui;
+
     private Storage storage;
 
     private TaskList taskList;
@@ -18,14 +23,14 @@ public class Duke {
     private CommandParser commandParser;
 
     public Duke(String saveDataDirPath, String saveDataFilePath) {
-        ui = new Ui();
-        storage = new Storage(saveDataDirPath, saveDataFilePath);
+        ui = new CommandLineUi();
+        storage = new FileStorage(saveDataDirPath, saveDataFilePath);
         taskList = new TaskList(storage.load());
         commandParser = new CommandParser();
     }
 
     public void run() {
-        ui.printStartup();
+        ui.showStartup();
 
         Scanner scanner = new Scanner(System.in);
         while (!commandParser.hasUserQuit()) {
@@ -35,9 +40,9 @@ public class Duke {
             try {
                 commandParser.parseInputAndExecuteCommand(input, ui, taskList, storage);
             } catch (DukeException exception) {
-                ui.printHorizontal();
-                ui.printText(exception.getMessage());
-                ui.printHorizontal();
+                ui.showLine();
+                ui.showText(exception.getMessage());
+                ui.showLine();
             }
         }
     }

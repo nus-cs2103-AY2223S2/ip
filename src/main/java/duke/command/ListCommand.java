@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
+import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 public class ListCommand implements Command {
     @Override
@@ -22,11 +22,11 @@ public class ListCommand implements Command {
 
     @Override
     public void run(String[] args, Ui ui, TaskList taskList, Storage storage) {
-        ui.printHorizontal();
-        ui.printText("Here are the tasks in your list:");
+        ui.showLine();
+        ui.showText("Here are the tasks in your list:");
         for (int taskNo = 1; taskNo <= taskList.getTotalTasks(); taskNo++) {
-            ui.printText(String.format("%d. %s", taskNo, taskList.getTask(taskNo).toString()));
+            ui.showText(String.format("%d. %s", taskNo, taskList.getTask(taskNo).toString()));
         }
-        ui.printHorizontal();
+        ui.showLine();
     }
 }

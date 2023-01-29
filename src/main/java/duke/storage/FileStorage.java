@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -16,15 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Storage {
+public class FileStorage implements Storage {
     private final String directoryPath;
     private final String fileName;
 
-    public Storage(String directoryPath, String fileName) {
+    public FileStorage(String directoryPath, String fileName) {
         this.directoryPath = directoryPath;
         this.fileName = fileName;
     }
 
+    @Override
     public List<Task> load() {
         List<Task> savedTasks = new ArrayList<>();
 
@@ -76,6 +77,7 @@ public class Storage {
         return savedTasks;
     }
 
+    @Override
     public void save(List<Task> tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(String.format("%s/%s", directoryPath, fileName));

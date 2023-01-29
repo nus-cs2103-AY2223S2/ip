@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.Storage;
-import duke.Ui;
+import duke.ui.Ui;
+import duke.storage.Storage;
 import duke.task.TaskList;
 
 import java.util.HashMap;
@@ -42,9 +42,9 @@ public class CommandParser {
         String commandName = input.split(" ")[0];
 
         if (commandName.equals("bye")) {
-            ui.printHorizontal();
-            ui.printText("Bye. Hope to see you again soon!");
-            ui.printHorizontal();
+            ui.showLine();
+            ui.showText("Bye. Hope to see you again soon!");
+            ui.showLine();
 
             hasUserQuit = true;
             return;

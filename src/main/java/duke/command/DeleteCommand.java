@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.ui.Ui;
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -28,17 +29,17 @@ public class DeleteCommand implements Command {
         if (taskNo > 0 && taskNo <= taskList.getTotalTasks()) {
             Task removedTask = taskList.deleteTask(taskNo);
 
-            ui.printHorizontal();
-            ui.printText("Noted. I've removed this task:");
-            ui.printText(removedTask.toString());
-            ui.printText(String.format("Now you have %d tasks in the list.", taskList.getTotalTasks()));
-            ui.printHorizontal();
+            ui.showLine();
+            ui.showText("Noted. I've removed this task:");
+            ui.showText(removedTask.toString());
+            ui.showText(String.format("Now you have %d tasks in the list.", taskList.getTotalTasks()));
+            ui.showLine();
 
             storage.save(taskList.getAllTasks());
         } else {
-            ui.printHorizontal();
-            ui.printText("Invalid task number!");
-            ui.printHorizontal();
+            ui.showLine();
+            ui.showText("Invalid task number!");
+            ui.showLine();
         }
     }
 }
