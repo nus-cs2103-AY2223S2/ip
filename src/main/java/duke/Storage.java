@@ -28,7 +28,6 @@ public class Storage {
     public ArrayList<Task> loadTasksFromTaskLog() {
         File taskLog = new File(filePath);
         Scanner taskLogScanner = null;
-
         try {
             taskLogScanner = new Scanner(taskLog);
         } catch (FileNotFoundException e) {

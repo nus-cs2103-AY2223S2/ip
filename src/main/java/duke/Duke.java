@@ -15,6 +15,7 @@ public class Duke {
      * Constructor for Duke Class
      * @param filePath File path to task log
      */
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,7 +27,6 @@ public class Duke {
      */
     public void run() {
         ui.greetUser();
-
         while (!isExit) {
             Scanner sc = new Scanner(System.in);
             String userInput = sc.nextLine();
