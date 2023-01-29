@@ -4,6 +4,7 @@ import duke.command.ListCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
@@ -17,7 +18,7 @@ public class ParserTest {
     @Test public void parse_invalidInput_DukeException() {
         Parser parser = new Parser();
         try {
-            assertEquals(parser.parse("randomness :)"), null);
+            assertNull(parser.parse("randomness :)"));
             fail();
         } catch (DukeException de) {
             assertEquals(de.getMessage(), "Invalid command");
