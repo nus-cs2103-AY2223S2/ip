@@ -1,15 +1,26 @@
 package rick;
 
+import rick.command.Command;
+import rick.command.DateFilterCommand;
+import rick.command.DeadlineCommand;
+import rick.command.DeleteCommand;
+import rick.command.ErrorCommand;
+import rick.command.EventCommand;
+import rick.command.ExitCommand;
+import rick.command.FindCommand;
+import rick.command.ListCommand;
+import rick.command.MarkCommand;
+import rick.command.TodoCommand;
+import rick.command.UnmarkCommand;
 import rick.exceptions.RickException;
 import rick.exceptions.RickInvalidCommandException;
 import rick.exceptions.RickTaskIndexMissingException;
-import rick.command.*;
 
 /**
  * The main class for parsing commands given to the rick.Rick app via the
  * command line.
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class Parser {
     /**
@@ -103,6 +114,8 @@ public class Parser {
                 return new UnmarkCommand(idx);
             case "delete":
                 return new DeleteCommand(idx);
+            default:
+                break;
             }
         } catch (NumberFormatException e) {
             return new ErrorCommand(new RickException(

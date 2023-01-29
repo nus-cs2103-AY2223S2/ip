@@ -1,16 +1,16 @@
 package rick.command;
 
+import rick.TaskList;
+import rick.Ui;
 import rick.exceptions.RickEmptyTaskException;
 import rick.exceptions.TaskListFullException;
-import rick.TaskList;
 import rick.task.TodoTask;
-import rick.Ui;
 
 /**
  * The command that creates a Todo task.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class TodoCommand extends Command {
     private final String task;

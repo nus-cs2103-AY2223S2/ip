@@ -1,9 +1,10 @@
 package rick.command;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 
 /**
  * Tests all commands that affect the App's operation:
@@ -13,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * </ul>
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class MainCommandTest extends CommandTest {
     /**
@@ -22,7 +23,7 @@ public class MainCommandTest extends CommandTest {
     @Test
     public void testErrorCommand() {
         Command error = new ErrorCommand("This is an error");
-        String actualUi = error.execute(taskList, ui);
+        String actualUi = error.execute(TASK_LIST, UI);
 
         String expectedUi = "This is an error";
         assertEquals(expectedUi, actualUi);
@@ -35,11 +36,10 @@ public class MainCommandTest extends CommandTest {
     public void testExitCommand() {
         Command exit = new ExitCommand();
         assertTrue(exit.isExit());
-        String actualUi = exit.execute(taskList, ui);
+        String actualUi = exit.execute(TASK_LIST, UI);
 
-        String expectedUi ="It was okay serving you. Might/might not see you again.\n" +
-                "Exiting...";
+        String expectedUi = "It was okay serving you. Might/might not see you again.\n"
+                + "Exiting...";
         assertEquals(expectedUi, actualUi);
-
     }
 }

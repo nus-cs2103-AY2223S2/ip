@@ -8,11 +8,18 @@ import java.time.format.DateTimeFormatter;
  * The class representing an Event task.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class EventTask extends RickTask {
     private final LocalDateTime from;
     private final LocalDateTime to;
+
+    /**
+     * The default constructor for this Task.
+     * @param task The task description.
+     * @param from The event start dateTime
+     * @param to The event end dateTime
+     */
     public EventTask(String task, LocalDateTime from, LocalDateTime to) {
         super(task);
         this.from = from;
@@ -40,9 +47,9 @@ public class EventTask extends RickTask {
      */
     @Override
     public boolean isOnDate(LocalDate dtParsed) {
-        return dtParsed.isAfter(this.from.toLocalDate()) && dtParsed.isBefore(this.to.toLocalDate()) ||
-                dtParsed.equals(this.from.toLocalDate()) ||
-                dtParsed.equals(this.to.toLocalDate());
+        return dtParsed.isAfter(this.from.toLocalDate()) && dtParsed.isBefore(this.to.toLocalDate())
+                || dtParsed.equals(this.from.toLocalDate())
+                || dtParsed.equals(this.to.toLocalDate());
     }
 
     /**

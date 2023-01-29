@@ -5,7 +5,7 @@ package rick.exceptions;
  * a RickStore instance.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class TaskListInvalidAccessException extends RickException {
     /**

@@ -1,20 +1,21 @@
 package rick.task;
 
-import rick.RickUtils;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import rick.RickUtils;
+
 
 /**
  * Tests the static methods of the {@code RickTask} class.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class RickTaskTest {
     /**
@@ -51,24 +52,20 @@ public class RickTaskTest {
         String doneTodo = "T|1|task four";
         RickTask todoTask = new TodoTask("task four");
         todoTask.setDone();
-        assertAll(
-                () -> assertEquals(
+        assertAll(() -> assertEquals(
                    new TodoTask("task three").toString(),
                    RickTask.fromDbSchema(todo).toString()
-                ),
-                () -> assertEquals(
+                ), () -> assertEquals(
                     new DeadlineTask("task two", RickUtils.parseDateTime("2/2/23 0001")).toString(),
                     RickTask.fromDbSchema(deadline).toString()
-                ),
-                () -> assertEquals(
+                ), () -> assertEquals(
                     new EventTask(
                             "task one",
                             RickUtils.parseDateTime("2/2/23 0000"),
                             RickUtils.parseDateTime("2/2/23 0001")
                             ).toString(),
                     RickTask.fromDbSchema(event).toString()
-                ),
-                () -> assertEquals(
+                ), () -> assertEquals(
                         todoTask.toString(),
                         RickTask.fromDbSchema(doneTodo).toString()
                 )
@@ -83,19 +80,15 @@ public class RickTaskTest {
         RickTask stub = new TaskStub();
         RickTask stubTwo = new TaskStub();
         stubTwo.setDone();
-        assertAll(
-                () -> assertEquals(
+        assertAll(() -> assertEquals(
                         "[ ] val",
                         stub.toString()
-                ),
-                () -> assertFalse(
+                ), () -> assertFalse(
                         stub.isOnDate(RickUtils.parseDate("2/2/23"))
-                ),
-                () -> assertEquals(
+                ), () -> assertEquals(
                         "0|val",
                         stub.toDbSchema()
-                ),
-                () -> assertEquals(
+                ), () -> assertEquals(
                         "[X] val",
                         stubTwo.toString()
                 )

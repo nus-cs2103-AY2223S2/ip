@@ -1,14 +1,14 @@
 package rick.command;
 
-import rick.exceptions.TaskListInvalidAccessException;
 import rick.TaskList;
 import rick.Ui;
+import rick.exceptions.TaskListInvalidAccessException;
 
 /**
  * The command to delete a task in the list.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class DeleteCommand extends Command {
     private final int idx;

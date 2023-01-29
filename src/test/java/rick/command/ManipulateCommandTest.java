@@ -1,8 +1,8 @@
 package rick.command;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests all commands that manipulate tasks in the App's storage:
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * attempts to manipulate a task in the app with the wrong numeric Index.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class ManipulateCommandTest extends CommandTest {
     /**
@@ -24,14 +24,14 @@ public class ManipulateCommandTest extends CommandTest {
     @Test
     public void testMark() {
         Command todo = new TodoCommand("task one");
-        long size = storage.size();
-        todo.execute(taskList, ui);
+        long size = STORAGE.size();
+        todo.execute(TASK_LIST, UI);
 
         Command mark = new MarkCommand(Integer.parseInt(String.valueOf(size + 1)));
-        String actualUi = mark.execute(taskList, ui);
-        storage.delete(Integer.parseInt(String.valueOf(size)));
-        String expectedUi = "Nice! I've marked this task as done:\n" +
-                "  [T][X] task one";
+        String actualUi = mark.execute(TASK_LIST, UI);
+        STORAGE.delete(Integer.parseInt(String.valueOf(size)));
+        String expectedUi = "Nice! I've marked this task as done:\n"
+                + "  [T][X] task one";
         assertEquals(expectedUi, actualUi);
     }
 
@@ -41,14 +41,14 @@ public class ManipulateCommandTest extends CommandTest {
     @Test
     public void testUnmark() {
         Command todo = new TodoCommand("task one");
-        int size = Integer.parseInt(String.valueOf(storage.size()));
-        todo.execute(taskList, ui);
+        int size = Integer.parseInt(String.valueOf(STORAGE.size()));
+        todo.execute(TASK_LIST, UI);
 
-        Command unmark = new UnmarkCommand(size);
-        String actualUi = unmark.execute(taskList, ui);
-        storage.delete(size);
-        String expectedUi = "OK, I've marked this task as not done yet:\n" +
-                "  [T][ ] task one";
+        Command unmark = new UnmarkCommand(size + 1);
+        String actualUi = unmark.execute(TASK_LIST, UI);
+        STORAGE.delete(size);
+        String expectedUi = "OK, I've marked this task as not done yet:\n"
+                + "  [T][ ] task one";
 
         assertEquals(expectedUi, actualUi);
     }
@@ -59,15 +59,15 @@ public class ManipulateCommandTest extends CommandTest {
     @Test
     public void testDelete() {
         Command todo = new TodoCommand("task one");
-        int size = Integer.parseInt(String.valueOf(storage.size()));
-        todo.execute(taskList, ui);
+        int size = Integer.parseInt(String.valueOf(STORAGE.size()));
+        todo.execute(TASK_LIST, UI);
 
 
         Command delete = new DeleteCommand(size + 1);
-        String actualUi = delete.execute(taskList, ui);
-        String expectedUi = "Noted. I've removed this task:\n" +
-                "  [T][ ] task one\n" +
-                String.format("Now you have %s task%s in the list.", size, size == 1 ? "": "s");
+        String actualUi = delete.execute(TASK_LIST, UI);
+        String expectedUi = "Noted. I've removed this task:\n"
+                + "  [T][ ] task one\n"
+                + String.format("Now you have %s task%s in the list.", size, size == 1 ? "" : "s");
 
         assertEquals(expectedUi, actualUi);
     }
@@ -77,13 +77,13 @@ public class ManipulateCommandTest extends CommandTest {
      */
     @Test
     public void testInvalidIndex() {
-        int beforeSize = Integer.parseInt(String.valueOf(storage.size()));
+        int beforeSize = Integer.parseInt(String.valueOf(STORAGE.size()));
         Command todo = new TodoCommand("task one");
-        todo.execute(taskList, ui);
+        todo.execute(TASK_LIST, UI);
 
         Command invalidIndex = new MarkCommand(beforeSize + 2);
-        storage.delete(beforeSize);
-        String actualUi = invalidIndex.execute(taskList, ui);
+        STORAGE.delete(beforeSize);
+        String actualUi = invalidIndex.execute(TASK_LIST, UI);
         String expectedUi = "An invalid index was entered. Please try again.";
 
         assertEquals(expectedUi, actualUi);

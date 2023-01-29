@@ -8,10 +8,10 @@ import rick.Ui;
  * Main template to test Commands.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public abstract class CommandTest {
-    static final Storage storage = Storage.create();
-    static final Ui ui = new Ui();
-    static final TaskList taskList = TaskList.create(storage, ui);
+    static final Storage STORAGE = Storage.create();
+    static final Ui UI = new Ui();
+    static final TaskList TASK_LIST = TaskList.create(STORAGE, UI);
 }

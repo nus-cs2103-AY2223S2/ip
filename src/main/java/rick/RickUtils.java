@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 /**
  * The main utility class for providing Dates, DateTimes, and other common formatting.
  * @author SeeuSim
+ *         AY22/23-S2 CS2103T
  */
 public class RickUtils {
     /**
@@ -17,7 +18,7 @@ public class RickUtils {
      * @param s The datetime string to be parsed.
      * @return The formatted datetime object.
      * @throws DateTimeParseException The error arising from an incorrectly
-     * formatted string.
+     *                                formatted string.
      */
     public static LocalDateTime parseDateTime(String s) throws DateTimeParseException {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("d/M/yy HHmm");
@@ -30,7 +31,7 @@ public class RickUtils {
      * @param dte The date string to be parsed.
      * @return The formatted date object.
      * @throws DateTimeParseException The error arising from an incorrectly
-     * formatted string.
+     *                                formatted string.
      */
     public static LocalDate parseDate(String dte) throws DateTimeParseException {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("d/M/yy");

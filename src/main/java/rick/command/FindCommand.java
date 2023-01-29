@@ -7,7 +7,7 @@ import rick.Ui;
  * The command to find a task in the list by a given term.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class FindCommand extends Command {
     private final String searchTerm;

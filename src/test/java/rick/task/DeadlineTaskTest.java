@@ -1,15 +1,16 @@
 package rick.task;
 
-import rick.RickUtils;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import rick.RickUtils;
 
 /**
  * Tests the {@code DeadlineTask} class.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class DeadlineTaskTest {
     /**

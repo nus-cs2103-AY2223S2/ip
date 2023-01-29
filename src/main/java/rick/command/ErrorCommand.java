@@ -1,14 +1,14 @@
 package rick.command;
 
-import rick.exceptions.RickException;
 import rick.TaskList;
 import rick.Ui;
+import rick.exceptions.RickException;
 
 /**
  * The command that represents an error parsing the user given command.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class ErrorCommand extends Command {
     private final String msg;

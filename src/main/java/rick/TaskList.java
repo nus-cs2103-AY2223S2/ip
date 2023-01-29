@@ -1,24 +1,24 @@
 package rick;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import rick.exceptions.RickException;
 import rick.exceptions.TaskListFullException;
 import rick.exceptions.TaskListInvalidAccessException;
 import rick.task.RickTask;
 
-import java.time.LocalDate;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * The main store class to store user input into the rick.Rick system.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class TaskList {
     private static final int recordSize = 100;
-    private static int ID = 0;
+    private static int iD = 0;
 
     //The store instance that writes to storage
     private Storage storage;
@@ -35,8 +35,8 @@ public class TaskList {
      * @param ui The UI of the app.
      */
     private TaskList(Storage s, Ui ui) {
-        this.id = TaskList.ID + 1;
-        TaskList.ID += 1;
+        this.id = TaskList.iD + 1;
+        TaskList.iD += 1;
         this.storage = s;
         this.ui = ui;
     }
@@ -56,9 +56,9 @@ public class TaskList {
      * Given a Rick.task.RickTask, attempts to add it to the store.
      *
      * @param input The task to be input.
-     * @throws TaskListFullException The exception indicating that the store
-     * can no longer accept any more tasks.
      * @return The system-generated UI to output to the user.
+     * @throws TaskListFullException The exception indicating that the store
+     *                               can no longer accept any more tasks.
      */
     public String add(RickTask input) throws TaskListFullException {
         long count;
@@ -82,9 +82,9 @@ public class TaskList {
      * Given the index of a task in the Store, attempts to mark it as done.
      *
      * @param i The index of the task within the Store.
-     * @throws TaskListInvalidAccessException The exception indicating that an
-     * invalid index was provided.
      * @return The system-generated UI to output to the user.
+     * @throws TaskListInvalidAccessException The exception indicating that an
+     *                                        invalid index was provided.
      */
     public String mark(int i) throws TaskListInvalidAccessException {
         if (i < 0 || i >= this.storage.size()) { //Unassigned, invalid index
@@ -101,9 +101,9 @@ public class TaskList {
      * Given the index of a task in the Store, attempts to mark it as not done.
      *
      * @param i The index of the task within the Store.
-     * @throws TaskListInvalidAccessException The exception indicating that an
-     * invalid index was provided.
      * @return The system-generated UI to output to the user.
+     * @throws TaskListInvalidAccessException The exception indicating that an
+     *                                        invalid index was provided.
      */
     public String unMark(int i) throws TaskListInvalidAccessException {
         if (i < 0 || i >= this.storage.size()) { //Unassigned, invalid index
@@ -120,9 +120,9 @@ public class TaskList {
      * Given the index of a task in the Store, attempts to delete it.
      *
      * @param i The index of the task in the Store
-     * @throws TaskListInvalidAccessException The exception indicating that an
-     * invalid index was provided.
      * @return The system-generated UI to output to the user.
+     * @throws TaskListInvalidAccessException The exception indicating that an
+     *                                        invalid index was provided.
      */
     public String delete(int i) throws TaskListInvalidAccessException {
         long size = this.storage.size();
@@ -133,7 +133,7 @@ public class TaskList {
         return ui.section(
                 "Noted. I've removed this task:",
                 "  " + task,
-                String.format("Now you have %s task%s in the list.", size - 1, size - 1 == 1L? "": "s")
+                String.format("Now you have %s task%s in the list.", size - 1, size - 1 == 1L ? "" : "s")
         );
     }
 

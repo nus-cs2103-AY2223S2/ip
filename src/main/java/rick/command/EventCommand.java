@@ -1,21 +1,20 @@
 package rick.command;
 
+import java.time.format.DateTimeParseException;
+
+import rick.RickUtils;
+import rick.TaskList;
+import rick.Ui;
 import rick.exceptions.RickEmptyTaskException;
 import rick.exceptions.RickInvalidDateException;
 import rick.exceptions.TaskListFullException;
-
-import rick.RickUtils;
 import rick.task.EventTask;
-import rick.TaskList;
-import rick.Ui;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * The command that creates an Event task.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class EventCommand extends Command {
     private final String slug;

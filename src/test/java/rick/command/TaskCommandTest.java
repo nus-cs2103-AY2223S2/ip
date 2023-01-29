@@ -1,8 +1,8 @@
 package rick.command;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests all commands that insert tasks in the App's storage:
@@ -13,21 +13,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * </ul>
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
-public class TaskCommandTest extends CommandTest{
+public class TaskCommandTest extends CommandTest {
     /**
      * Tests a valid {@code TodoCommand} class.
      */
     @Test
     public void testValidTodo() {
         TodoCommand todo = new TodoCommand("val");
-        long beforeSize = storage.size();
-        String actualUi = todo.execute(taskList, ui);
-        storage.delete(Integer.parseInt(String.valueOf(storage.size() - 1)));
-        String expectedUi = "Got it. I've added this task:\n" +
-                        "  [T][ ] val\n" +
-                        String.format("Now you have %s tasks in the list.", beforeSize + 1);
+        long beforeSize = STORAGE.size();
+        String actualUi = todo.execute(TASK_LIST, UI);
+        STORAGE.delete(Integer.parseInt(String.valueOf(STORAGE.size() - 1)));
+        String expectedUi = "Got it. I've added this task:\n"
+                + "  [T][ ] val\n"
+                + String.format("Now you have %s tasks in the list.", beforeSize + 1);
         assertEquals(expectedUi, actualUi);
     }
 
@@ -38,7 +38,7 @@ public class TaskCommandTest extends CommandTest{
     @Test
     public void testInvalidTodo() {
         Command todo = new TodoCommand();
-        String actualUi = todo.execute(taskList, ui);
+        String actualUi = todo.execute(TASK_LIST, UI);
         String expectedUi = "The description of a Todo cannot be empty.";
         assertEquals(expectedUi, actualUi);
     }
@@ -51,13 +51,13 @@ public class TaskCommandTest extends CommandTest{
         Command deadline = new DeadlineCommand(
                 "task one /by 2/2/23 0000"
         );
-        long beforeSize = storage.size();
-        String actualUi = deadline.execute(taskList, ui);
-        storage.delete(Integer.parseInt(String.valueOf(beforeSize)));
+        long beforeSize = STORAGE.size();
+        String actualUi = deadline.execute(TASK_LIST, UI);
+        STORAGE.delete(Integer.parseInt(String.valueOf(beforeSize)));
 
-        String expectedUi = "Got it. I've added this task:\n" +
-                        "  [D][ ] task one (by: Feb 02 2023 12:00AM)\n" +
-                        String.format("Now you have %s tasks in the list.", beforeSize + 1);
+        String expectedUi = "Got it. I've added this task:\n"
+                + "  [D][ ] task one (by: Feb 02 2023 12:00AM)\n"
+                + String.format("Now you have %s tasks in the list.", beforeSize + 1);
         assertEquals(expectedUi, actualUi);
     }
 
@@ -81,17 +81,17 @@ public class TaskCommandTest extends CommandTest{
 
         Command deadlineEmpty = new DeadlineCommand();
 
-        String actualUiOne = deadlineInvalidUsage.execute(taskList, ui);
+        String actualUiOne = deadlineInvalidUsage.execute(TASK_LIST, UI);
         String expectedUiOne = "Usage: deadline {task} /by {deadline}";
         assertEquals(expectedUiOne, actualUiOne);
 
-        String actualUiTwo = deadlineInvalidDate.execute(taskList, ui);
-        String expectedUiTwo = "An invalid date was entered. Please use this format:\n" +
-                        "{day}/{month}/{year} {hour}{minute}\n" +
-                        "Example: 2/2/23 1200";
+        String actualUiTwo = deadlineInvalidDate.execute(TASK_LIST, UI);
+        String expectedUiTwo = "An invalid date was entered. Please use this format:\n"
+                + "{day}/{month}/{year} {hour}{minute}\n"
+                + "Example: 2/2/23 1200";
         assertEquals(expectedUiTwo, actualUiTwo);
 
-        String actualUiThree = deadlineEmpty.execute(taskList, ui);
+        String actualUiThree = deadlineEmpty.execute(TASK_LIST, UI);
         String expectedUiThree =
                 "The description of a Deadline cannot be empty.";
         assertEquals(expectedUiThree, actualUiThree);
@@ -106,12 +106,12 @@ public class TaskCommandTest extends CommandTest{
                 "task one /from 2/2/23 0000 /to 2/2/23 0001"
         );
 
-        long beforeSize = storage.size();
-        String actualUi = event.execute(taskList, ui);
-        storage.delete(Integer.parseInt(String.valueOf(beforeSize)));
-        String expectedUi = "Got it. I've added this task:\n" +
-                        "  [E][ ] task one (from: Feb 2 2023 12:00AM to: Feb 2 2023 12:01AM)\n" +
-                        String.format("Now you have %s tasks in the list.", beforeSize + 1);
+        long beforeSize = STORAGE.size();
+        String actualUi = event.execute(TASK_LIST, UI);
+        STORAGE.delete(Integer.parseInt(String.valueOf(beforeSize)));
+        String expectedUi = "Got it. I've added this task:\n"
+                + "  [E][ ] task one (from: Feb 2 2023 12:00AM to: Feb 2 2023 12:01AM)\n"
+                + String.format("Now you have %s tasks in the list.", beforeSize + 1);
         assertEquals(expectedUi, actualUi);
     }
 
@@ -137,18 +137,18 @@ public class TaskCommandTest extends CommandTest{
         Command eventEmpty = new EventCommand();
 
         String expectedUiOne = "Usage: event {task} /from {start} /to {end}";
-        String actualUiOne = eventWrongFormat.execute(taskList, ui);
+        String actualUiOne = eventWrongFormat.execute(TASK_LIST, UI);
         assertEquals(expectedUiOne, actualUiOne);
 
-        String expectedUiTwo = "An invalid date was entered. Please use this format:\n" +
-                        "{day}/{month}/{year} {hour}{minute}\n" +
-                        "Example: 2/2/23 1200";
-        String actualUiTwo = eventImproperDate.execute(taskList, ui);
+        String expectedUiTwo = "An invalid date was entered. Please use this format:\n"
+                + "{day}/{month}/{year} {hour}{minute}\n"
+                + "Example: 2/2/23 1200";
+        String actualUiTwo = eventImproperDate.execute(TASK_LIST, UI);
         assertEquals(expectedUiTwo, actualUiTwo);
 
         String expectedUiThree = "The description of a Event cannot be empty.";
 
-        String actualUiThree = eventEmpty.execute(taskList, ui);
+        String actualUiThree = eventEmpty.execute(TASK_LIST, UI);
         assertEquals(expectedUiThree, actualUiThree);
     }
 }

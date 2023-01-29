@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * The class representing a Deadline task.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class DeadlineTask extends RickTask {
     private final LocalDateTime deadline;

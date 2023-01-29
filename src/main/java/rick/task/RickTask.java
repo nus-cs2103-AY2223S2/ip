@@ -1,14 +1,14 @@
 package rick.task;
 
-import rick.RickUtils;
-
 import java.time.LocalDate;
+
+import rick.RickUtils;
 
 /**
  * The abstraction behind the tasks stored by the rick.Rick chat-bot.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public abstract class RickTask {
     private boolean isDone = false;
@@ -46,7 +46,7 @@ public abstract class RickTask {
     @Override
     public String toString() {
         return String.format(
-                "[%s] %s", (this.isDone ? "X": " "), this.value
+                "[%s] %s", (this.isDone ? "X" : " "), this.value
         );
     }
 
@@ -59,7 +59,7 @@ public abstract class RickTask {
     public String toDbSchema() {
         return String.format(
                 "%s|%s",
-                this.isDone? 1 : 0,
+                this.isDone ? 1 : 0,
                 this.value
         );
     }
@@ -97,8 +97,9 @@ public abstract class RickTask {
                 todo.setDone();
             }
             return todo;
+        default:
+            return null;
         }
-        return null;
     }
 
     /**

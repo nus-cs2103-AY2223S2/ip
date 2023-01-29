@@ -7,7 +7,7 @@ import rick.Ui;
  * The command that lists all tasks in the current list.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class ListCommand extends Command {
     /**

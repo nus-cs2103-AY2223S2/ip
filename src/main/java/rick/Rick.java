@@ -6,7 +6,7 @@ import rick.command.Command;
  * The main class to interface with the Rick server.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class Rick {
     private Storage storage;

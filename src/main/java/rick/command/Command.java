@@ -7,7 +7,7 @@ import rick.Ui;
  * The main abstraction that represents user commands issued to the rick.Rick app.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public abstract class Command {
     /**

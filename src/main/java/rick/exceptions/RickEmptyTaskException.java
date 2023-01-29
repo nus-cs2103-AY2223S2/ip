@@ -4,14 +4,16 @@ package rick.exceptions;
  * The exception that arises from an empty task description.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class RickEmptyTaskException extends RickException {
+    /**
+     * The types of tasks that can cause this Exception.
+     */
     public static enum TaskType {
         TYPE_Todo,
         TYPE_Deadline,
-        TYPE_Event,
-        TYPE_Unknown
+        TYPE_Event
     }
 
     /**

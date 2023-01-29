@@ -1,14 +1,14 @@
 package rick.command;
 
-import rick.exceptions.TaskListInvalidAccessException;
 import rick.TaskList;
 import rick.Ui;
+import rick.exceptions.TaskListInvalidAccessException;
 
 /**
  * The command that marks a task in the list as not completed.
  *
  * @author SeeuSim
- * AY2223-S2 CS2103T
+ *         AY2223-S2 CS2103T
  */
 public class UnmarkCommand extends Command {
     private final int idx;

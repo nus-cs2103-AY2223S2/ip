@@ -1,7 +1,5 @@
 package rick.gui;
 
-import rick.Rick;
-
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -12,13 +10,14 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import rick.Rick;
 
 /**
  * The main window for the app.
  * This serves as the main UI layout for the GUI.
  *
  * @author SeeuSim
- * AY22/23-S2 CS2103T
+ *         AY22/23-S2 CS2103T
  */
 public class MainWindow extends AnchorPane {
     @FXML

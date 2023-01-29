@@ -1,17 +1,13 @@
 package rick.gui;
 
 import java.io.IOException;
-
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import javafx.geometry.Pos;
-
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -25,7 +21,7 @@ import javafx.scene.shape.Circle;
  * a FXML layout.
  *
  * @author SeeuSim
- * AY22/23-S2 CS2103T
+ *         AY22/23-S2 CS2103T
  */
 public class DialogBox extends HBox {
     @FXML
@@ -53,7 +49,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setTranslateX(isFlipped? 15: -15);
+        dialog.setTranslateX(isFlipped ? 15 : -15);
         dialog.setTranslateY(20);
         userFrame.setFill(new ImagePattern(img));
     }
