@@ -9,7 +9,7 @@ import aqua.manager.LogicManager;
  * Represents a command that accepts an ArgumentMap and an AppManager to
  * produce an ExecutionDispatcher that will execute the command.
  */
-public abstract class Command {
+public abstract class ServiceProvider {
     /**
      * Produces an ExecutionDispater from the given argument and manager.
      *

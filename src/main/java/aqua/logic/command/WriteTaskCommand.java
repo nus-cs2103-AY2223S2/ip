@@ -12,7 +12,7 @@ import aqua.manager.LogicManager;
  * An implementation of Command that will produce an ExecutionDispatcher that
  * will save the state of the task manager to hard disk.
  */
-public class WriteTaskCommand extends Command {
+public class WriteTaskCommand extends ServiceProvider {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new ExecutionTask<String>(args, manager) {

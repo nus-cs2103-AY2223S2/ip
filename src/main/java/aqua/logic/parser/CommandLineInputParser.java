@@ -8,7 +8,7 @@ import aqua.logic.command.AddDeadlineCommand;
 import aqua.logic.command.AddEventCommand;
 import aqua.logic.command.AddToDoCommand;
 import aqua.logic.command.ByeCommand;
-import aqua.logic.command.Command;
+import aqua.logic.command.ServiceProvider;
 import aqua.logic.command.DeleteCommand;
 import aqua.logic.command.FilterCommand;
 import aqua.logic.command.ListCommand;
@@ -36,7 +36,7 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
     @Override
     public CommandLineInput parse(String input) throws IllegalSyntaxException {
         String argString = "";
-        Command command;
+        ServiceProvider command;
 
         // parse
         try (Scanner scanner = new Scanner(input)) {
@@ -60,7 +60,7 @@ public class CommandLineInputParser implements Parser<CommandLineInput> {
     }
 
 
-    private Command getCommand(String input) throws IllegalSyntaxException {
+    private ServiceProvider getCommand(String input) throws IllegalSyntaxException {
         switch (input) {
         case "list":
             return new ListCommand();
