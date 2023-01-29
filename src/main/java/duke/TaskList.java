@@ -38,4 +38,17 @@ public class TaskList {
     public int size() {
         return taskList.size();
     }
+
+    public TaskList find(String keyword) {
+        TaskList matchingTasks = new TaskList();
+
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            if (task.description.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+
+        return matchingTasks;
+    }
 }

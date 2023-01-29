@@ -12,22 +12,25 @@ public class Parser {
     }
 
     private void showList() {
-        ui.showTaskList();
+        ui.showTaskList(taskList);
     }
 
     private void mark(int index) {
         taskList.mark(index);
-        ui.showMarkMessage(index);
+        Task task = taskList.get(index);
+        ui.showMarkMessage(task, index);
     }
 
     private void unmark(int index) {
         taskList.unmark(index);
-        ui.showUnmarkMessage(index);
+        Task task = taskList.get(index);
+        ui.showUnmarkMessage(task, index);
     }
 
     private void delete(int index) {
         Task deletedTask = taskList.delete(index);
-        ui.showDeleteMessage(deletedTask);
+        int len = taskList.size();
+        ui.showDeleteMessage(deletedTask, len);
     }
 
     private void addTodo(String task) throws DukeException {
@@ -40,20 +43,56 @@ public class Parser {
 
     private void addDeadline(String task) {
         String[] arr = task.split("/");
-        String description = arr[0].substring(9);
-        String by = arr[1].substring(3);
+        String description = arr[0].substring(9).trim();
+        String by = arr[1].substring(3).trim();
         taskList.add(new Deadline(description, by));
     }
 
     private void addEvent(String task) {
         String[] arr = task.split("/");
-        String description = arr[0].substring(6);
-        String from = arr[1].substring(5);
-        String to = arr[2].substring(3);
+        String description = arr[0].substring(6).trim();
+        String from = arr[1].substring(5).trim();
+        String to = arr[2].substring(3).trim();
         taskList.add(new Event(description, from, to));
     }
 
-    public void parse() {
+    private void find(String task) {
+        String keyword = task.substring(5);
+        TaskList matchingTasks = taskList.find(keyword);
+        ui.showTaskList(matchingTasks);
+    }
+
+    public void parse(String task) throws DukeException {
+        if (task.equals("list")) {
+            showList();
+        } else if (task.startsWith("mark")) {
+            int index = Integer.parseInt(task.substring(5)) - 1;
+            mark(index);
+        } else if (task.startsWith("unmark")) {
+            int index = Integer.parseInt(task.substring(7)) - 1;
+            unmark(index);
+        } else if (task.startsWith("delete")) {
+            int index = Integer.parseInt(task.substring(7)) - 1;
+            delete(index);
+        } else if (task.startsWith("find")) {
+            find(task);
+        } else {
+            if (task.startsWith("todo")) {
+                addTodo(task);
+            } else if (task.startsWith("deadline")) {
+                addDeadline(task);
+            } else if (task.startsWith("event")) {
+                addEvent(task);
+            } else {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+            int len = taskList.size();
+            Task t = taskList.get(len - 1);
+            ui.showAddMessage(t, len);
+        }
+    }
+
+    public void parseAll() {
         Scanner sc = new Scanner(System.in);
 
         try {
@@ -62,31 +101,9 @@ public class Parser {
                 if (task.equals("bye")) {
                     ui.showByeMessage();
                     break;
-                } else if (task.equals("list")) {
-                    showList();
-                } else if (task.startsWith("mark")) {
-                    int index = Integer.parseInt(task.substring(5)) - 1;
-                    mark(index);
-                } else if (task.startsWith("unmark")) {
-                    int index = Integer.parseInt(task.substring(7)) - 1;
-                    unmark(index);
-                } else if (task.startsWith("delete")) {
-                    int index = Integer.parseInt(task.substring(7)) - 1;
-                    delete(index);
+                } else {
+                    parse(task);
                 }
-                else {
-                    if (task.startsWith("todo")) {
-                        addTodo(task);
-                    } else if (task.startsWith("deadline")) {
-                        addDeadline(task);
-                    } else if (task.startsWith("event")) {
-                        addEvent(task);
-                    } else {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
-                    ui.showAddMessage();
-                }
-
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());

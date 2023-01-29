@@ -34,17 +34,17 @@ public class Storage {
         String[] arr = s.split("/");
         char eventType = arr[0].charAt(0);
         boolean isDone = (arr[1].charAt(0) == '1');
-        String description = arr[2];
+        String description = arr[2].trim();
         if (eventType == 'T') {
             Todo t = new Todo(description, isDone);
             init.add(t);
         } else if (eventType == 'D') {
-            String by = arr[3].substring(4);
+            String by = arr[3].substring(4).trim();
             Deadline d = new Deadline(description, isDone, by);
             init.add(d);
         } else if (eventType == 'E') {
-            String from = arr[3].substring(6);
-            String to = arr[4].substring(4);
+            String from = arr[3].substring(6).trim();
+            String to = arr[4].substring(4).trim();
             Event e = new Event(description, isDone, from, to);
             init.add(e);
         }

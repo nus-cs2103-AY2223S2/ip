@@ -2,17 +2,12 @@ package duke;
 
 public class Ui {
     private final static String INDENT_LINE = "____________________________________________________________";
-    private TaskList taskList;
-
-    public Ui(TaskList taskList) {
-        this.taskList = taskList;
-    }
 
     private void printFormatted(String toDisplay) {
         System.out.println(INDENT_LINE + "\n" + toDisplay + "\n" + INDENT_LINE);
     }
 
-    private String getTaskList() {
+    private String getTaskList(TaskList taskList) {
         String taskListString = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size() - 1; i++) {
             taskListString += (i + 1) + "." + taskList.get(i) + "\n";
@@ -21,8 +16,8 @@ public class Ui {
         return taskListString;
     }
 
-    public void showTaskList() {
-        printFormatted(getTaskList());
+    public void showTaskList(TaskList taskList) {
+        printFormatted(getTaskList(taskList));
     }
 
     public void showInitMessage() {
@@ -33,24 +28,23 @@ public class Ui {
         printFormatted("Bye. Hope to see you again soon!");
     }
 
-    public void showDeleteMessage(Task deletedTask) {
+    public void showDeleteMessage(Task deletedTask, int len) {
         printFormatted("Noted. I've removed this task:\n" + deletedTask + "\nNow you have " +
-                taskList.size() + " tasks in the list.");
+                len + " tasks in the list.");
     }
 
-    public void showMarkMessage(int index) {
+    public void showMarkMessage(Task task, int index) {
         printFormatted("Nice! I've marked this task as done:\n" +
-                (index + 1) + "." + taskList.get(index));
+                (index + 1) + "." + task);
     }
 
-    public void showUnmarkMessage(int index) {
+    public void showUnmarkMessage(Task task, int index) {
         printFormatted("OK, I've marked this task as not done yet:\n" +
-                (index + 1) + "." + taskList.get(index));
+                (index + 1) + "." + task);
     }
 
-    public void showAddMessage() {
-        int len = taskList.size();
-        printFormatted("Got it. I've added this task:\n" + taskList.get(len - 1) +
+    public void showAddMessage(Task task, int len) {
+        printFormatted("Got it. I've added this task:\n" + task +
                 "\nNow you have " + len + " tasks in the list.");
     }
 
