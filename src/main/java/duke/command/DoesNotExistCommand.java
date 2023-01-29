@@ -1,7 +1,7 @@
 package command;
 
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import ui.Ui;
 
 public class DoesNotExistCommand extends Command {

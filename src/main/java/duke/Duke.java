@@ -1,7 +1,7 @@
 import command.Command;
 import parser.Parser;
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import ui.Ui;
 
 public class Duke {

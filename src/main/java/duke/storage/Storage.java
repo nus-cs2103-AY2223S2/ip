@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import taskList.TaskList;
+import tasklist.TaskList;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;

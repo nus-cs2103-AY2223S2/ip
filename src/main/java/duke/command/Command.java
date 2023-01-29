@@ -3,7 +3,7 @@ package command;
 import java.util.Arrays;
 import dukeexception.CommandException;
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import ui.Ui;
 
 public abstract class Command {

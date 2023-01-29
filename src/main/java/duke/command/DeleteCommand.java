@@ -3,7 +3,7 @@ package command;
 import dukeexception.CommandException;
 import dukeexception.StorageException;
 import storage.Storage;
-import taskList.TaskList;
+import tasklist.TaskList;
 import tasks.Task;
 import ui.Ui;
 
