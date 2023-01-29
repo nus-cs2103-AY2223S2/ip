@@ -28,6 +28,11 @@ public class LogicManager implements Loadable {
     }
 
 
+    /**
+     * Loades the state of the previous run.
+     *
+     * @throws LoadException {@inheritDoc}
+     */
     @Override
     public void load() throws LoadException {
         Path path = taskManager.getSavePath();
