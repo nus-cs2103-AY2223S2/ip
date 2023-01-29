@@ -8,7 +8,6 @@ public class ToDo extends Task {
         super(taskName);
         if (taskName.length() <= 0 || taskName.isBlank()) {
             throw new DukeExceptions("todo");
-            // throw new StringIndexOutOfBoundsException("TestingException");
         }
     }
 

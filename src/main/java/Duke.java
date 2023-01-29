@@ -1,12 +1,12 @@
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
 
-import duke.DukeExceptions;
 import duke.tasktypes.Task;
-import duke.TaskList;
 import duke.Ui;
 import duke.Parser;
 import duke.Storage;
+import duke.TaskList;
+import duke.DukeExceptions;
 
 public class Duke {
 
