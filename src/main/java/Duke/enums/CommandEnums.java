@@ -12,6 +12,7 @@ public enum CommandEnums {
     MARK("mark"),
     UNMARK("unmark"),
     DATE("date"),
+    FIND("find"),
     DELETE("delete");
 
     private final String command;

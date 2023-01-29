@@ -12,7 +12,7 @@ import Duke.Ui.Ui;
 /**
  * Represents the Duke.Commands.SearchCommand of the Chat bot.
  */
-public class SearchCommand extends Command {
+public class SearchDateCommand extends Command {
     @Override
     public void processCommand() {
         System.out.println("abstract method invoked");
