@@ -1,10 +1,24 @@
 package duke;
 
+/**
+ * A parser class to make sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * Constructs the parser.
+     */
     public Parser() {
         //
     }
+
+    /**
+     * Parses the input command from the user.
+     *
+     * @param input Input command from user.
+     * @return Command to be executed.
+     * @throws DukeException If error occurs.
+     */
     public static Command parse(String input) throws DukeException{
         try {
             String[] inputSplit = input.split(" ");
