@@ -1,9 +1,9 @@
-package Duke;
+package seedu.duke;
 
-import java.util.HashMap;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     private LocalDateTime by;
 
@@ -20,7 +20,7 @@ public class Deadline extends Task{
         int year = Integer.valueOf(date[2]);
         String time = by.split(" ")[1];
         int hour = Integer.valueOf(time.substring(0, 2));
-        int minute = Integer.valueOf(time.substring(2,4));
+        int minute = Integer.valueOf(time.substring(2, 4));
         LocalDateTime dateTime = LocalDateTime.of(year, month, day, hour, minute);
         return dateTime;
     }

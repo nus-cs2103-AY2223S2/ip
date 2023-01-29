@@ -1,7 +1,14 @@
-package Duke;
+package seedu.duke;
 
-import java.io.*;
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class Storage {
 
@@ -32,18 +39,19 @@ public class Storage {
             while (task != null) {
                 keyword = task.split(" ")[0];
                 switch (keyword) {
-                    case ("todo"): {
-                        ls.addToDo(task);
-                        break;
-                    }
-                    case ("deadline"): {
-                        ls.addDeadline(task);
-                        break;
-                    }
-                    case ("event"): {
-                        ls.addEvent(task);
-                        break;
-                    }
+                case ("todo"): {
+                    ls.addToDo(task);
+                    break;
+                }
+                case ("deadline"): {
+                    ls.addDeadline(task);
+                    break;
+                }
+                case ("event"): {
+                    ls.addEvent(task);
+                    break;
+                }
+                default:
                 }
                 task = r.readLine();
             }

@@ -1,4 +1,4 @@
-package Duke;
+package seedu.duke;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,6 +11,12 @@ public class Parser {
     private static Function<String, HashMap<String, String>> deadlineParser = createDeadlineParser();
     private static Function<String, HashMap<String, String>> eventParser = createEventParser();
 
+    /**
+     * Creates a parser that is able to take in a String and parse it into components.
+     * The components are defined by the keywords.
+     * @param keywords Defines the components to parse
+     * @return The created parser
+     */
     private static Function<String, HashMap<String, String>> createParser(ArrayList<String> keywords) {
         return (String chat) -> {
             int waitingForKeyword = 0;
@@ -30,13 +36,6 @@ public class Parser {
             return parsed;
         };
     }
-
-    /**
-     * Creates a parser that is able to take in a String and parse it into components.
-     * The components are defined by the keywords.
-     * @param keywords (Defines the components to parse)
-     * @return Function<String, HashMap<String, String>>
-     */
 
     /**
      * Creates a parser that converts a user inputted String into a HashMap containing: "ToDo"

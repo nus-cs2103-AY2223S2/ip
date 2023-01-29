@@ -1,14 +1,11 @@
-package Duke;
+package seedu.duke;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.function.Function;
 
 public class TaskList {
 
     public ArrayList<Task> list = new ArrayList<>();
-
     public ArrayList<Task> getList() {
         return list;
     }

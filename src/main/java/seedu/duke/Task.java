@@ -1,4 +1,4 @@
-package Duke;
+package seedu.duke;
 
 public abstract class Task {
 
@@ -37,7 +37,7 @@ public abstract class Task {
         if (isDone) {
             status = "X";
         }
-        String response =  "[" + abbreviation + "]" + "[" + status + "] " + task;
+        String response = "[" + abbreviation + "][" + status + "] " + task;
         return response.trim();
     }
 
