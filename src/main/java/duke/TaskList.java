@@ -1,6 +1,6 @@
 package duke;
 
-import duke.Tasks.*;
+import duke.tasks.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,10 +22,10 @@ public class TaskList {
     public void handleInput(String input) {
         if (input.equals("list")) {
             try { //check if list is empty
-                if(tasks.isEmpty()) {
+                if (tasks.isEmpty()) {
                     throw new DukeExceptions("List is empty!");
                 }
-            } catch(DukeExceptions de) {
+            } catch (DukeExceptions de) {
                 System.out.println("List is empty!");
             }
             tasks.forEach(x -> {
@@ -36,39 +36,39 @@ public class TaskList {
             System.out.println("See you again, thanks for visiting!");
             Storage.upload(this.tasks);
         }
-        if(input.startsWith("mark ")) {
+        if (input.startsWith("mark ")) {
             String[] inp = input.split(" ");
             int id = Integer.parseInt(inp[1]);
             try {
                 Task marked = tasks.get(id - 1);
                 marked.setIsDone(true);
                 System.out.println("Good job! This task is now marked done!\n" + marked);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println("No such task found!");
             }
         }
-        if(input.startsWith("unmark ")) {
+        if (input.startsWith("unmark ")) {
             String[] inp = input.split(" ");
             int id = Integer.parseInt(inp[1]);
             try {
                 Task unmarked = tasks.get(id - 1);
                 unmarked.setIsDone(false);
                 System.out.println("What a bummer! This task is now unmarked\n" + unmarked);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println("No such task found!");
             }
         }
-        if(input.startsWith("todo ")) {
+        if (input.startsWith("todo ")) {
             ToDo processed = Parser.parseToDo(tasks.size(), input);
             tasks.add(processed);
         }
-        if(input.startsWith("deadline ")) {
+        if (input.startsWith("deadline ")) {
             Deadline dl = Parser.parseDeadline(tasks.size(), input);
             try { //catching no desc and no deadline
-                if(input.substring(9).equals("")) {
+                if (input.substring(9).equals("")) {
                     throw new DukeExceptions("Input cannot be empty!");
                 }
-            } catch(DukeExceptions e) {
+            } catch (DukeExceptions e) {
                 System.out.println("Input cannot be empty!");
             }
             String[] inp = input.split("/");
@@ -78,32 +78,32 @@ public class TaskList {
                 try { //catching no description
                     String undesc = inp[0];
                     String desc = undesc.substring(9);
-                    if(desc.equals("")) {
+                    if (desc.equals("")) {
                         throw new DukeExceptions("Input cannot be empty!");
                     }
                     tasks.add(new Deadline(tasks.size() + 1, desc, date));
-                } catch(DukeExceptions e){
+                } catch (DukeExceptions e){
                     System.out.println("Description cannot be empty!");
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println(e);
                 System.out.println("Please input a deadline!");
             }
         }
-        if(input.startsWith("event ")) {
+        if (input.startsWith("event ")) {
             try { //catching no desc and no deadline
-                if(input.substring(6).equals("")) {
+                if (input.substring(6).equals("")) {
                     throw new DukeExceptions("Input cannot be empty!");
                 }
-            } catch(DukeExceptions e) {
+            } catch (DukeExceptions e) {
                 System.out.println("Input cannot be empty!");
             }
             String[] inp = input.split("/");
             try { //Catching for input format error
-                if(inp.length != 3) {
+                if (inp.length != 3) {
                     throw new DukeExceptions("Format is task, start, end!");
                 }
-            } catch(DukeExceptions de) {
+            } catch (DukeExceptions de) {
                 System.out.println("Format is task, /start, /end!");
             }
             String start = inp[1].substring(5);
@@ -119,10 +119,10 @@ public class TaskList {
             String undesc = inp[0];
             String desc = undesc.substring(6);
             try { //catching for empty description
-                if(desc.equals("")) {
+                if (desc.equals("")) {
                     throw new DukeExceptions("Description cannot be empty!");
                 }
-            } catch(DukeExceptions e) {
+            } catch (DukeExceptions e) {
                 System.out.println("Description cannot be empty!");
             }
             Event ev = new Event(tasks.size() + 1, desc, startDnT, endDnT);
@@ -134,7 +134,7 @@ public class TaskList {
             try {
                 tasks.remove(id - 1);
                 tasks.forEach(x -> x.setId(tasks.indexOf(x) + 1)); //update id of all items after removing
-            } catch(Exception e) {
+            } catch (Exception e) {
                 System.out.println("No such task found!");
             }
         }

@@ -8,8 +8,8 @@ public class Duke {
         Storage.createDataDir();
         TaskList tasks = new TaskList(Storage.load());
         Scanner myObj = new Scanner(System.in);
-        System.out.println("Hey! This is duke.Duke at your service!");
-        while(myObj.hasNext()) {
+        System.out.println("Hey! This is Duke at your service!");
+        while (myObj.hasNext()) {
             String input = myObj.nextLine();
             tasks.handleInput(input);
         }

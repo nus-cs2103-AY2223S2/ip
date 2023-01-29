@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import duke.Tasks.*;
+import duke.tasks.*;
 
 /** Loads and saves tasks from file*/
 public class Storage {
@@ -25,7 +25,7 @@ public class Storage {
      */
     public static void createDataDir() {
         try {
-            if(!Files.exists(dataDirPath)) {
+            if (!Files.exists(dataDirPath)) {
                 Files.createDirectory(dataDirPath);
             }
         } catch (IOException e) {
@@ -41,7 +41,7 @@ public class Storage {
      */
     public static ArrayList<Task> load() {
         //Create duke.Duke.txt inside data dir if it doesn't exist
-        if(!Files.exists(dataFilePath)) {
+        if (!Files.exists(dataFilePath)) {
             try {
                 Files.createFile(dataFilePath);
             } catch (IOException e) {
@@ -53,28 +53,28 @@ public class Storage {
         //if duke.Duke.txt exists, read from it
         try {
             data = Files.readAllLines(dataFilePath);
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("An error occurred while trying to read duke.Duke.txt");
             e.printStackTrace();
         }
         ArrayList<Task> tasks = new ArrayList<>();
         assert data != null;
-        for(String x: data) {
+        for (String x: data) {
             String[] inp = x.split("\\|");
             String type = inp[0];
-            if(type.equals("T")) {
+            if (type.equals("T")) {
                 Task tsk = new Task(tasks.size() + 1, inp[1]);
                 tsk.setIsDone(Boolean.parseBoolean(inp[1]));
                 tasks.add(tsk);
-            } else if(type.equals("TD")) {
+            } else if (type.equals("TD")) {
                 ToDo td = new ToDo(tasks.size() + 1, inp[2]);
                 td.setIsDone(Boolean.parseBoolean(inp[1]));
                 tasks.add(td);
-            } else if(type.equals("D")) {
+            } else if (type.equals("D")) {
                 Deadline d = new Deadline(tasks.size() + 1, inp[2], LocalDate.parse(inp[3]));
                 d.setIsDone(Boolean.parseBoolean(inp[1]));
                 tasks.add(d);
-            } else if(type.equals("E")) {
+            } else if (type.equals("E")) {
                 Event e = new Event(tasks.size() + 1, inp[2], LocalDateTime.parse(inp[3]),
                         LocalDateTime.parse(inp[4]));
                 e.setIsDone(Boolean.parseBoolean(inp[1]));
@@ -87,7 +87,7 @@ public class Storage {
     //Write into duke.Duke.txt
     public static void upload(ArrayList<Task> allData) {
         ArrayList<String> writing = new ArrayList<>();
-        for(Task x : allData) {
+        for (Task x : allData) {
             writing.add(x.toFile());
         }
         try {

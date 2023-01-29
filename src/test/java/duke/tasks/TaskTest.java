@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,21 +7,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TaskTest {
     @Test
-    public void testSetIsDone() {
+    public void setIsDone_true_returnTrue() {
         Task tsk = new Task(1, "run");
         tsk.setIsDone(true);
         assertTrue(tsk.isDone);
     }
 
     @Test
-    public void testGetStatusIconFalse() {
+    public void getStatusIcon_false_returnSpace() {
         Task tsk = new Task(1, "run");
         String ans = tsk.getStatusIcon();
         assertEquals(" ", ans);
     }
 
     @Test
-    public void testGetStatusIconTrue() {
+    public void getStatusIcon_true_returnX() {
         Task tsk = new Task(1, "run");
         tsk.setIsDone(true);
         String ans = tsk.getStatusIcon();
@@ -29,21 +29,21 @@ public class TaskTest {
     }
 
     @Test
-    public void testSetId() {
+    public void setId_2_return2() {
         Task tsk = new Task(1, "run");
         tsk.setId(2);
         assertEquals(2, tsk.id);
     }
 
     @Test
-    public void testToFile() {
+    public void toFile_format_returnFormatted() {
         Task tsk = new Task(1, "run");
         String expected = "T|run";
         assertEquals(expected, tsk.toFile());
     }
 
     @Test
-    public void testToString() {
+    public void toString_format_returnFormatted() {
         Task tsk = new Task(1, "run");
         String expected = "1. [ ] run";
         assertEquals(expected, tsk.toString());

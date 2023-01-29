@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -18,7 +18,6 @@ public class Event extends Task {
      * @return Processed String
      */
     public String toFile() {
-
         return "E|" + this.isDone + "|" + this.desc + "|" + this.start + "|" + this.end;
     }
 

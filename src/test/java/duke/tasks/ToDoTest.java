@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,13 +10,13 @@ public class ToDoTest {
     ToDo td = new ToDo(1, "run");
 
     @Test
-    public void testToFile() {
+    public void toFile_format_returnFormatted() {
         String expected = "TD|false|run";
         assertEquals(td.toFile(), expected);
     }
 
     @Test
-    public void testToString() {
+    public void toString_format_returnFormatted() {
         String expected = "1. [T][ ] run";
         assertEquals(expected, td.toString());
     }

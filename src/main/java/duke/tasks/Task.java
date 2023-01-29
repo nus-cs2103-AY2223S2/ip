@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 public class Task {
     /** integer identifier in the TaskList*/
@@ -19,9 +19,7 @@ public class Task {
     public void setIsDone(boolean status) {
         this.isDone = status;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
     /**
      * Process Task to String to store in duke.txt
