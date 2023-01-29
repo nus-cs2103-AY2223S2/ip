@@ -1,12 +1,10 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,7 +18,17 @@ import java.util.ArrayList;
  * @author Gao Mengqi
  * @version CS2103T AY22/23 Semester 2
  */
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class Storage {
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+
     private String filePath;
     private FileWriter writer;
     private ArrayList<Task> taskList = new ArrayList<>();
@@ -46,30 +54,30 @@ public class Storage {
         String getTaskType = str.substring(0, 1);
         String getStatus = str.substring(4, 5);
         switch (getTaskType) {
-            case "T":
-                task = new Todo(str.substring(8));
-                break;
-            case "D":
-                String updatedStr = str.substring(8).replace("(", "").replace(")", "").trim();
-                String[] paraForDeadline = updatedStr.split("by: ", 2);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm a");
-                LocalDateTime tempDueDate = LocalDateTime.parse(paraForDeadline[1], formatter);
+        case TODO:
+            task = new Todo(str.substring(8));
+            break;
+        case DEADLINE:
+            String updatedStr = str.substring(8).replace("(", "").replace(")", "").trim();
+            String[] paraForDeadline = updatedStr.split("by: ", 2);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm a");
+            LocalDateTime tempDueDate = LocalDateTime.parse(paraForDeadline[1], formatter);
 
-                DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                String finalDueDate = tempDueDate.format(newFormatter);
+            DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+            String finalDueDate = tempDueDate.format(newFormatter);
 
-                LocalDateTime dueDate = LocalDateTime.parse(finalDueDate, newFormatter);
-                task = new Deadline(paraForDeadline[0], dueDate);
-                break;
-            case "E":
-                String updatedStrr = str.substring(8).replace("(", "").replace(")", "");
-                String[] getParas = updatedStrr.split("from: ", 2);
-                String getDesc = getParas[0];
-                String[] getFromBy = getParas[1].split("to: ", 2);
-                task = new Event(getDesc, getFromBy[0], getFromBy[1]);
-                break;
-            default:
-                break;
+            LocalDateTime dueDate = LocalDateTime.parse(finalDueDate, newFormatter);
+            task = new Deadline(paraForDeadline[0], dueDate);
+            break;
+        case EVENT:
+            String updatedStrr = str.substring(8).replace("(", "").replace(")", "");
+            String[] getParas = updatedStrr.split("from: ", 2);
+            String getDesc = getParas[0];
+            String[] getFromBy = getParas[1].split("to: ", 2);
+            task = new Event(getDesc, getFromBy[0], getFromBy[1]);
+            break;
+        default:
+            break;
         }
 
         if (getStatus.equals("0")) {

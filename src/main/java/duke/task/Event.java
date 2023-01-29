@@ -8,8 +8,8 @@ package duke.task;
  */
 
 public class Event extends Task {
-    String from;
-    String to;
+    private String from;
+    private String to;
 
     /**
      * Constructor for Event.

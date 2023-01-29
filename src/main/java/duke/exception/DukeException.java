@@ -22,4 +22,5 @@ public class DukeException extends Exception {
     public String getMessage() {
         return "OOPS! " + super.getMessage();
     }
+
 }

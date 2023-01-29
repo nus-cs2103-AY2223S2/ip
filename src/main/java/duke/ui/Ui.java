@@ -1,7 +1,6 @@
 package duke.ui;
 
 import duke.task.Task;
-import duke.task.TaskList;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,6 +12,7 @@ import java.util.Scanner;
  * @author Gao Mengqi
  * @version CS2103T AY22/23 Semester 2
  */
+
 public class Ui {
     private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -67,8 +67,8 @@ public class Ui {
      * @param tasksLen
      */
     public void showDeleteMessage(Task task, String tasksLen) {
-        System.out.println("Noted. I've removed this task:\n  " + task + "\nNow you have " + tasksLen + " tasks in the list.");
-
+        System.out.println("Noted. I've removed this task:\n  "
+                + task + "\nNow you have " + tasksLen + " tasks in the list.");
     }
 
     /**
@@ -78,7 +78,8 @@ public class Ui {
      * @param tasksLen
      */
     public void showAddTaskMsg(Task task, String tasksLen) {
-        System.out.println("Got it. I've added this task:\n  " + task + "\nNow you have " + tasksLen + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n  "
+                + task + "\nNow you have " + tasksLen + " tasks in the list.");
     }
 
     /**
