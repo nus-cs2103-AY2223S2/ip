@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -9,8 +10,10 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'org.apache.commons', name: 'commons-text', version: '1.10.0'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+
 }
 
 test {
@@ -28,12 +31,16 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "catbot.Main"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "catbot"
     archiveClassifier = null
+}
+
+checkstyle {
+    toolVersion = '10.2'
 }
 
 run{

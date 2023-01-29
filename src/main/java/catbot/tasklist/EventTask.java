@@ -4,10 +4,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class EventTask extends Task{
+/**
+ * Stores an event task which happens from a certain time to a certain time.
+ */
+public class EventTask extends Task {
     private final LocalDateTime startsAt;
     private final LocalDateTime endsAt;
 
+    /**
+     * Initialises a new EventTask.
+     * @param task is the description of the task.
+     * @param from is when the task starts.
+     * @param to is when the task ends.
+     */
     public EventTask(String task, LocalDateTime from, LocalDateTime to) {
         super(task);
         startsAt = from;
@@ -30,6 +39,6 @@ public class EventTask extends Task{
         return "event " + super.description
                 + " /from " + startsAt
                 + " /to " + endsAt
-                + (super.isDone ? "\nmark 0": "");
+                + (super.isDone ? "\nmark 0" : "");
     }
 }

@@ -1,13 +1,29 @@
 package catbot.parser;
 
-import catbot.CatBotException;
-import catbot.commands.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
+import catbot.CatBotException;
+import catbot.commands.AddCommand;
+import catbot.commands.Command;
+import catbot.commands.DeleteCommand;
+import catbot.commands.EchoCommand;
+import catbot.commands.ListCommand;
+import catbot.commands.MarkCommand;
+import catbot.commands.SaveCommand;
+
+/**
+ * Handles parsing user input.
+ */
 public class Parser {
+
+    /**
+     * Parses an input string to figure out the command.
+     * @param command is the user input for a command.
+     * @return a {@code Command} object for the user command.
+     * @throws CatBotException if the user input is malformed.
+     */
     public static Command parse(String command) throws CatBotException {
         String[] cmd = command.split(" ", 2);
         String[] temp;

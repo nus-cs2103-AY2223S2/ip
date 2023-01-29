@@ -5,6 +5,9 @@ import catbot.storage.Storage;
 import catbot.tasklist.TaskList;
 import catbot.ui.Ui;
 
+/**
+ * Handles saving the entire task list while exiting the program.
+ */
 public class SaveCommand extends Command {
 
     public SaveCommand() {

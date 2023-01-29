@@ -1,15 +1,18 @@
 package catbot;
 
+import java.util.ArrayList;
+
 import catbot.commands.Command;
 import catbot.parser.Parser;
 import catbot.storage.Storage;
 import catbot.tasklist.TaskList;
 import catbot.ui.Ui;
 
-import java.util.ArrayList;
+
 
 /**
- * This is the main class
+ * Entry point of the CatBot application.
+ * Initiates all the required components and begins interaction with the user.
  */
 public class CatBot {
 
@@ -17,6 +20,10 @@ public class CatBot {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Initialises a new CatBot instance and loads from the save file.
+     * @param saveFile is the path to the save file for persistent task storage.
+     */
     public CatBot(String saveFile) {
         ui = new Ui();
         try {
@@ -28,6 +35,9 @@ public class CatBot {
         }
     }
 
+    /**
+     * Interacts with the user and handles commands.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -47,7 +57,7 @@ public class CatBot {
 
 
     public static void main(String[] args) {
-        (new CatBot("./data/tasklist.txt")).run();
+        new CatBot("./data/tasklist.txt").run();
     }
 
 }

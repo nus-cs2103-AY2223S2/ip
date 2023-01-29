@@ -1,20 +1,22 @@
 package catbot.tasklist;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
+
 import catbot.CatBotException;
 import catbot.ui.ConsoleColors;
 
-import java.util.Locale;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-
 /**
  * The parent class of all tasks.
- * Takes in a string description of the task
  */
-public abstract class Task{
+public abstract class Task {
+    protected boolean isDone;
     final String description;
-    boolean isDone;
 
+    /**
+     * Enum to express the type of task.
+     */
     public enum TaskType {
         TODO,
         DEADLINE,

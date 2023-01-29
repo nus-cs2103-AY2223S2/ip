@@ -4,7 +4,10 @@ import catbot.storage.Storage;
 import catbot.tasklist.TaskList;
 import catbot.ui.Ui;
 
-public class EchoCommand extends Command{
+/**
+ * Handles echoing a message back to the user.
+ */
+public class EchoCommand extends Command {
     private final String message;
 
     public EchoCommand(String message) {

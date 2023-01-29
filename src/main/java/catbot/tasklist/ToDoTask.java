@@ -1,5 +1,8 @@
 package catbot.tasklist;
 
+/**
+ * Stores a task which just has a description.
+ */
 public class ToDoTask extends Task {
 
     public ToDoTask(String task) {
@@ -13,6 +16,6 @@ public class ToDoTask extends Task {
 
     @Override
     public String toCommand() {
-        return "todo " + super.description + (super.isDone ? "\nmark 0": "");
+        return "todo " + super.description + (super.isDone ? "\nmark 0" : "");
     }
 }

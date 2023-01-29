@@ -1,13 +1,16 @@
 package catbot.commands;
 
+import java.util.ArrayList;
+
 import catbot.CatBotException;
 import catbot.storage.Storage;
 import catbot.tasklist.Task;
 import catbot.tasklist.TaskList;
 import catbot.ui.Ui;
 
-import java.util.ArrayList;
-
+/**
+ * Parent class for all commands.
+ */
 public abstract class Command {
     private boolean isExit = false;
 

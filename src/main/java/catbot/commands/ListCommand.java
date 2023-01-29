@@ -5,6 +5,9 @@ import catbot.tasklist.Task;
 import catbot.tasklist.TaskList;
 import catbot.ui.Ui;
 
+/**
+ * Handles listing the entire task list to the user.
+ */
 public class ListCommand extends Command {
 
     @Override

@@ -1,10 +1,5 @@
 package catbot.storage;
 
-import catbot.CatBotException;
-import catbot.parser.Parser;
-import catbot.tasklist.Task;
-import catbot.tasklist.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,14 +10,30 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import catbot.CatBotException;
+import catbot.parser.Parser;
+import catbot.tasklist.Task;
+import catbot.tasklist.TaskList;
+
+/**
+ * Handles all operations relating to saving and loading from disk.
+ */
 public class Storage {
     private final File saveFile;
 
+    /**
+     * Initialises a new Storage instance.
+     * @param saveFilePath is the path for the save file to use.
+     * @throws CatBotException if there is an error while trying to create possibly required directories.
+     */
     public Storage(String saveFilePath) throws CatBotException {
         Path path = Paths.get(saveFilePath);
         if (Files.notExists(path)) {
             try {
-                Files.createDirectories(path);
+                Files.createDirectories(path.getParent());
+                if (!path.toFile().createNewFile()) {
+                    throw new CatBotException("Error while creating new save file.");
+                }
             } catch (IOException e) {
                 throw new CatBotException("Error while loading storage.");
             }
@@ -30,6 +41,11 @@ public class Storage {
         saveFile = path.toFile();
     }
 
+    /**
+     * Loads from a save file.
+     * @return an {@code ArrayList} containing all the tasks loaded in from the file.
+     * @throws CatBotException if there was an error while parsing the save file.
+     */
     public ArrayList<Task> load() throws CatBotException {
         ArrayList<Task> tasks = new ArrayList<>();
 
