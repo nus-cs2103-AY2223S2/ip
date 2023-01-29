@@ -20,7 +20,7 @@ import java.io.FileNotFoundException;
 public class Storage {
     private final Path HOME_DIRECTORY = Path.of(System.getProperty("user.dir") + "/data");
     private File dataFile;
-    private TaskList tasks;
+    private final TaskList tasks;
 
     public Storage (TaskList tasks) {
         this.tasks = tasks;
@@ -32,15 +32,15 @@ public class Storage {
                 Files.createDirectories(HOME_DIRECTORY);
             }
 
-            File file = new File(this.HOME_DIRECTORY + "/duke.txt");
+            this.dataFile = new File(this.HOME_DIRECTORY + "/duke.txt");
             boolean isCreated = true;
-            if (!file.exists()) {
-                isCreated = file.createNewFile();
+            if (!this.dataFile.exists()) {
+                isCreated = this.dataFile.createNewFile();
             }
             if (!isCreated) {
                 throw new DukeException("Failed to create storage file!");
             }
-            Scanner sc = new Scanner(file);
+            Scanner sc = new Scanner(this.dataFile);
             while (sc.hasNextLine()) {
                 String input = sc.nextLine();
                 parseFile(input, tasks);
@@ -53,7 +53,7 @@ public class Storage {
 
     public void save() throws IOException {
         try {
-            FileWriter fileWriter = new FileWriter(this.HOME_DIRECTORY + "/duke.txt");
+            FileWriter fileWriter = new FileWriter(this.dataFile);
             for (int i = 0; i < this.tasks.size(); i++) {
                 String line = tasks.get(i).toSaveFormat();
                 fileWriter.write(line);
