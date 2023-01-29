@@ -8,7 +8,8 @@ import uwuke.output.DukeException;
 /**
  * Main input processor with only static methods that attempts to extract useful information from user input.
  * Note that this class should only be used when the type of command is identified and is of the correct format. 
- * Methods implemented in this class assumes a specific regex, very limited debugging information is given by this class when a string in the wrong format is passed in to any of the methods.
+ * Methods implemented in this class assumes a specific regex, very limited debugging information is given 
+ * by this class when a string in the wrong format is passed in to any of the methods.
  */
 public abstract class Parser {
     /**
