@@ -9,7 +9,7 @@ import java.nio.file.Path;
 
 import Duke.Parser.Parser;
 import Duke.entities.*;
-import Duke.exceptions.DukeFileNotFoundException;
+import Duke.exceptions.DukeException;
 
 public class Storage {
     private final Path HOME_DIRECTORY = Path.of(System.getProperty("user.dir") + "/data");
@@ -21,9 +21,9 @@ public class Storage {
         this.parser = new Parser();
     }
 
-    public void connect() throws DukeFileNotFoundException {
+    public void connect() throws DukeException {
         if (!file.exists()) {
-            throw new DukeFileNotFoundException("An error occurred when connecting to the database!");
+            throw new DukeException("An error occurred when connecting to the database!");
         }
     }
 

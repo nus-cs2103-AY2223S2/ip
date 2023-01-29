@@ -5,71 +5,75 @@ import Duke.entities.Deadline;
 import Duke.entities.Event;
 import Duke.entities.Todo;
 import Duke.enums.CommandEnums;
-import Duke.exceptions.EmptyDescException;
-import Duke.exceptions.InvalidInputException;
+import Duke.exceptions.DukeException;
 import Duke.entities.TaskList;
 
 public class Parser {
-    public Command parseCommand(String input) throws InvalidInputException {
+    public Command parseCommand(String input) throws DukeException, IllegalArgumentException {
         String[] split = input.split(" ");
-        CommandEnums type = CommandEnums.valueOf(split[0].toUpperCase().strip());
-        switch (type) {
-        case LIST:
-            return new ListCommand();
-
-        case MARK:
-            if (isValidCommand(split)) {
-                return new MarkCommand();
-            } else {
-                throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-            }
-
-        case UNMARK:
-            if (isValidCommand(split)) {
-                return new UnmarkCommand();
-            } else {
-                throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-            }
-
-        case TODO:
-            if (isValidCommand(split)) {
-                return new TodoCommand();
-            } else {
-                throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-            }
-
-        case DEADLINE:
-            if (isValidCommand(split)) {
-                return new DeadlineCommand();
-            } else {
-                throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-            }
-
-        case EVENT:
-            if (isValidCommand(split)) {
-                return new EventCommand();
-            } else {
-                throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-            }
-
-        case DELETE:
-            if (isValidCommand(split)) {
-                return new DeleteCommand();
-            } else {
-                throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-            }
-
-        case DATE:
-            if (isValidCommand(split)) {
-                return new SameDateCommand();
-            } else {
-                throw new EmptyDescException("Sorry! you can't have empty descriptions!");
-            }
-        case BYE:
-            return new ExitCommand();
-        default:
-            throw new InvalidInputException("Sorry! I have no idea what that means ??? >:c");
+        CommandEnums type;
+        try {
+            type = CommandEnums.valueOf(split[0].toUpperCase().strip());
+        } catch(IllegalArgumentException e) {
+            System.out.println("Sorry! I have no idea what that means ??? >:c");
+            return null;
         }
+            switch (type) {
+            case LIST:
+                return new ListCommand();
+
+            case MARK:
+                if (isEmptyCommand(split)) {
+                    return new MarkCommand();
+                } else {
+                    throw new DukeException("Sorry! you can't have empty descriptions!");
+                }
+
+            case UNMARK:
+                if (isEmptyCommand(split)) {
+                    return new UnmarkCommand();
+                } else {
+                    throw new DukeException("Sorry! you can't have empty descriptions!");
+                }
+
+            case TODO:
+                if (isEmptyCommand(split)) {
+                    return new TodoCommand();
+                } else {
+                    throw new DukeException("Sorry! you can't have empty descriptions!");
+                }
+
+            case DEADLINE:
+                if (isEmptyCommand(split)) {
+                    return new DeadlineCommand();
+                } else {
+                    throw new DukeException("Sorry! you can't have empty descriptions!");
+                }
+
+            case EVENT:
+                if (isEmptyCommand(split)) {
+                    return new EventCommand();
+                } else {
+                    throw new DukeException("Sorry! you can't have empty descriptions!");
+                }
+
+            case DELETE:
+                if (isEmptyCommand(split)) {
+                    return new DeleteCommand();
+                } else {
+                    throw new DukeException("Sorry! you can't have empty descriptions!");
+                }
+            case DATE:
+                if (isEmptyCommand(split)) {
+                    return new SameDateCommand();
+                } else {
+                    throw new DukeException("Sorry! you can't have empty descriptions!");
+                }
+            case BYE:
+                return new ExitCommand();
+            default:
+                throw new DukeException("Sorry! I have no idea what that means ??? >:c");
+            }
     }
 
     public boolean parseText(String input, TaskList list) {
@@ -107,16 +111,16 @@ public class Parser {
         }
     }
 
-    public String parseDescription(String input) throws InvalidInputException {
+    public String parseDescription(String input) throws DukeException {
         String[] split = input.split(" ");
-        if (isValidCommand(split)) {
+        if (isEmptyCommand(split)) {
             return split[1];
         } else {
-            throw new InvalidInputException("Sorry! you can't have empty descriptions!");
+            throw new DukeException("Sorry! you can't have empty descriptions!");
         }
     }
 
-    public int parseIndex(String input) throws InvalidInputException {
+    public int parseIndex(String input) throws DukeException {
         String[] split = input.split(" ");
         return Integer.parseInt(split[1]) - 1;
     }
@@ -133,12 +137,8 @@ public class Parser {
         return res;
     }
 
-    public boolean isValidCommand(String[] input) {
-        if (input.length < 2) {
-            return false;
-        } else {
-            return true;
-        }
+    public boolean isEmptyCommand(String[] input) {
+        return input.length < 2;
     }
 
 

@@ -1,13 +1,9 @@
 import Duke.Parser.Parser;
 import Duke.Ui.Ui;
 import Duke.entities.TaskList;
-import Duke.exceptions.DukeFileNotFoundException;
-import Duke.exceptions.EmptyDescException;
-import Duke.exceptions.InvalidInputException;
+import Duke.exceptions.DukeException;
 import Duke.storage.Storage;
 import Duke.Commands.*;
-
-import java.io.FileNotFoundException;
 
 public class Duke {
     private TaskList list;
@@ -23,19 +19,16 @@ public class Duke {
             storage.connect();
             ui.print("Successfully connected to the database!");
             list = new TaskList(storage);
-        } catch (FileNotFoundException e) {
-            ui.printError(e.getMessage());
-        } catch (InvalidInputException e) {
+        } catch (Exception e) {
             ui.printError(e.getMessage());
         }
-
     }
 
-    public static void main(String[] args) throws EmptyDescException, InvalidInputException, DukeFileNotFoundException {
+    public static void main(String[] args) throws DukeException {
         new Duke("duke.txt").run();
     }
 
-    private void run() throws InvalidInputException, EmptyDescException {
+    private void run() throws DukeException {
         ui.showWelcome();
         ui.startScanner();
         String input = ui.readCommand();
@@ -64,7 +57,7 @@ public class Duke {
                 } else if (command instanceof SameDateCommand) {
                     ((SameDateCommand) command).processCommand(list, parser.parseDescription(input), ui);
                 }
-            } catch (InvalidInputException e) {
+            } catch (DukeException e) {
                 ui.printError(e.getMessage());
                 ui.printDivider();
             }
