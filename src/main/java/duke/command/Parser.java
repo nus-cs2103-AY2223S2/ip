@@ -5,7 +5,7 @@ import duke.DukeException;
 public class Parser {
 
     public enum Keywords {
-        bye, list, mark, unmark, todo, deadline, event, delete, err
+        bye, list, mark, unmark, todo, deadline, event, delete, find
     }
 
     public static Command parse(String input) {
@@ -32,6 +32,8 @@ public class Parser {
                     return new AddCommand(parsedEvent[0], parsedEvent[1], parsedEvent[2]);
                 case delete:
                     return new DeleteCommand(processMarkUnmarkDel(input));
+                case find:
+                    return new FindCommand(parsedInput[1]);
             }
         } catch (Exception e) {
             return new UnknownCommand();

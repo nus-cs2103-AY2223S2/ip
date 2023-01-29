@@ -87,15 +87,38 @@ public class TaskList {
 
     public List<String> getTasksToSave() {
         List<String> toSave = new ArrayList<>();
-        for(int i = 0; i < tasks.size(); i ++) {
-            Task t = tasks.get(i);
-            toSave.add(t.toSaveableString());
+        for(int i = 0; i < size(); i ++) {
+            Task taskToSave = tasks.get(i);
+            toSave.add(taskToSave.toSaveableString());
         }
         return toSave;
     }
 
     public int size() {
         return tasks.size();
+    }
+
+    /**
+     * Returns tasks that match search string.
+     *
+     * @param search word to be searched
+     * @return matching tasks from list or failure message
+     */
+    public String find(String search) {
+        String result = "Here are the matching tasks in your list:\n";
+        int numOfResultsFound = 0;
+        for(int i = 0; i < size(); i++) {
+            Task taskMatch = tasks.get(i);
+            if (taskMatch.toString().contains(search)) {
+                result += String.format("%d. %s\n", ++numOfResultsFound,
+                        taskMatch);
+            }
+        }
+        if (numOfResultsFound == 0) {
+            result = "Sorry, there are no matching tasks in your list.\n";
+        }
+
+        return result;
     }
 
 }
