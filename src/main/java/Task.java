@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String taskInfo;
     protected boolean isCompleted;
 
@@ -9,19 +9,21 @@ public class Task {
 
     public String markAsDone() {
         this.isCompleted = true;
-        return "     Nice! I've marked this task as done:\n       " + this.getTaskInfo();
+        return "     Nice! I've marked this task as done:\n       " + this.getTaskInfoStatus();
     }
 
     public String markAsIncomplete() {
         this.isCompleted = false;
-        return "     Alright, I've marked this task as not done yet:\n       " + this.getTaskInfo();
+        return "     Alright, I've marked this task as not done yet:\n       " + this.getTaskInfoStatus();
     }
 
-    public String getTaskInfo() {
+    public String getTaskInfoStatus() {
         if (isCompleted) {
             return "[X] " + this.taskInfo;
         } else {
             return "[ ] " + this.taskInfo;
         }
     }
+
+    public abstract String getTaskInfo();
 }

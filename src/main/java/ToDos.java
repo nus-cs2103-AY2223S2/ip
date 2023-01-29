@@ -3,7 +3,12 @@ public class ToDos extends Task {
         super(taskInfo);
     }
     @Override
+    public String getTaskInfoStatus() {
+        return "[T]" + super.getTaskInfoStatus();
+    }
+
+    @Override
     public String getTaskInfo() {
-        return "[T]" + super.getTaskInfo();
+        return "[T]" + super.getTaskInfoStatus();
     }
 }

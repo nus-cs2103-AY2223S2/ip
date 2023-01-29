@@ -1,2 +1,3 @@
-todo borrow book
-todo sleep
+[T][X] borrow book
+[D][X] Assignment 1 /by Today 9pm
+[E][ ] Birthday /from Today 8pm /to Tomorrow 9pm

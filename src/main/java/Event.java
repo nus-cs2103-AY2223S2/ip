@@ -8,7 +8,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String getTaskInfoStatus() {
+        return "[E]" + super.getTaskInfoStatus() + "(from:" + this.startDate + "to:" + this.endDate + ")";
+    }
+
+    @Override
     public String getTaskInfo() {
-        return "[E]" + super.getTaskInfo() + "(from:" + startDate + "to:" + endDate + ")";
+        return "[E]" + super.getTaskInfoStatus() + "/from" + this.startDate + "/to" + this.endDate;
     }
 }
