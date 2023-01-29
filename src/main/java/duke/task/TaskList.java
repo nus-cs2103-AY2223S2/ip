@@ -89,6 +89,12 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Get the TaskList that contains the task with the keyword given.
+     *
+     * @param keyword The keyword to be searched.
+     * @return TaskList of current tasks filtered by the keyword.
+     */
     public TaskList find(String keyword) {
         TaskList res = new TaskList();
         for (int i = 0; i < this.tasks.size(); i++) {
