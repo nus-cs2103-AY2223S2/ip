@@ -1,3 +1,4 @@
+
 public class DukeException extends Exception {
     DukeException(ExceptionType e) {
         switch (e) {
@@ -5,7 +6,7 @@ public class DukeException extends Exception {
                 System.out.println("Unknown error occured");
                 break;
             case DESCRIPTION_EMPTY:
-                System.out.println("OOPS!!! The description of a task cannot be empty.");
+                System.out.println("OOPS!!! The description cannot be empty.");
                 break;
             case TASK_FORMAT_ERROR:
                 System.out.println("Sorry, the format of task is incorrect");

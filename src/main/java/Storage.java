@@ -5,12 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Save {
+public class Storage {
     protected String home = System.getProperty("user.home");
     protected Path path;
     protected File file;
 
-    Save() {
+    Storage() {
         path = Paths.get(home,"data","duke.txt");
         try {
             file = new File(path.toString());

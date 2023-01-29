@@ -1,21 +1,18 @@
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 public class Duke {
     private ArrayList<Task> list;
-    Save s;
+    private Storage s;
     Duke() {
         list = new ArrayList<>(100);
-        s = new Save();
+        s = new Storage();
     }
 
     public static void main(String[] args) {
         Duke a = new Duke();
-        System.out.println(a.greeting());
+        Ui ui = new Ui();
+        ui.sayHello();
         a.echo();
-    }
-
-    private String greeting() {
-        return "Hello! I'm Luminus\nWhat can I do for you?";
     }
 
     /**

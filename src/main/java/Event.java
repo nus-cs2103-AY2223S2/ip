@@ -7,9 +7,12 @@ public class Event extends Task{
         this.to = new Times(to);
     }
 
-    public static Event createEvent(String input) {
+    public static Event createEvent(String input) throws DukeException{
         int index1 = input.indexOf("/");
         int index2 = input.lastIndexOf("/");
+        if (index1 == -1 || index2 == -1) {
+            throw new DukeException(ExceptionType.TASK_FORMAT_ERROR);
+        }
         String description = input.substring(6,index1 - 1);
         String from = input.substring(index1 + 6, index2 - 1);
         String to = input.substring(index2 + 4);
