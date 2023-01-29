@@ -16,6 +16,7 @@ public class EndCommand extends Command {
         } catch(IOException e) {
             System.out.println("Error during saving");
         }
+        ui.end();
     }
 
     @Override

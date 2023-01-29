@@ -16,7 +16,7 @@ public class FormatChecker {
     }
 
     public static boolean isCorrectDateInput(String dateString) {
-        if (dateString.matches("^(\\d)+/(\\d)+/(\\d)+$")) {
+        if (dateString.matches("^(\\d)+/(\\d)+/(\\d)+(\\s)(\\d)+:(\\d)+$")) {
             return true;
         }
         return false;
