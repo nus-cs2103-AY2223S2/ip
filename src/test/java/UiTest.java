@@ -1,7 +1,12 @@
 import org.junit.jupiter.api.Test;
 import shigure.Ui;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,7 +19,7 @@ public class UiTest {
         ui.printIntro();
         String out = outStream.toString();
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
-        assertEquals(5, out.codePoints().filter(c -> c =='\n').count());
+        assertEquals(5, out.codePoints().filter(c -> c == '\n').count());
     }
 
     @Test
@@ -25,7 +30,7 @@ public class UiTest {
         ui.printIntro();
         String out = outStream.toString();
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
-        assertEquals(5, out.codePoints().filter(c -> c =='\n').count());
+        assertEquals(5, out.codePoints().filter(c -> c == '\n').count());
     }
 
     @Test

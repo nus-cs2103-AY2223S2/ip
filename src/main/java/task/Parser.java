@@ -5,6 +5,7 @@ import command.Command;
 import command.Delete;
 import command.ExceptionPrint;
 import command.ExitPrint;
+import command.Find;
 import command.ListTasks;
 import command.Load;
 import command.Mark;
@@ -102,18 +103,18 @@ public class Parser {
     }
 
     /**
-     * Forms a single <code>String</code> representing a file path by combining
-     * consecutive fragmented <code>String</code>s in a <code>String[]</code> of space-separated tokens.
+     * Recombines a fragmented <code>String[]</code> of consecutive
+     * space-separated tokens into a single <code>String</code>.
      *
-     * @param args fragmented <code>String[]</code> to combine.
-     * @return the file path represented by <code>args</code>.
+     * @param args <code>String[]</code> to recombine.
+     * @return the <code>String</code> produced by recombining <code>args</code>.
      */
-    public static String parsePath(String[] args) {
-        String path = "";
+    public static String recombine(String[] args) {
+        String arg = "";
         for (int i = 0; i < args.length; i++) {
-            path += (i > 0 ? " " : "") + args[i];
+            arg += (i > 0 ? " " : "") + args[i];
         }
-        return path;
+        return arg;
     }
 
     /**
@@ -136,7 +137,7 @@ public class Parser {
         String cmd = cmdLine.split(" ")[0].toLowerCase();
         String[] args = {};
         if (cmdLine.contains(" ")) {
-            args = cmdLine.substring(cmd.length() + 1).split(" ");
+            args = cmdLine.substring(cmd.length() + 1).split(" ", -1);
         }
 
         try {
@@ -158,9 +159,11 @@ public class Parser {
             case "delete":
                 return new Delete(parseTaskIndex(args));
             case "save":
-                return new Save(parsePath(args));
+                return new Save(recombine(args));
             case "load":
-                return new Load(parsePath(args));
+                return new Load(recombine(args));
+            case "find":
+                return new Find(".*" + recombine(args) + ".*");
             default:
                 throw new MikiArgsException("\"" + cmd + "\" isn't a real word!");
             }

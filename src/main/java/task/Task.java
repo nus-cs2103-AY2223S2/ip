@@ -73,6 +73,17 @@ public abstract class Task {
     public abstract boolean isAfterDate(LocalDateTime date);
 
     /**
+     * Returns <code>true</code> if this task's objective
+     * matches the specified regular expression.
+     *
+     * @param regex regular expression to match against.
+     * @return true if this task's objective matches <code>regex</code>.
+     */
+    public boolean hasMatchingObjective(String regex) {
+        return objective.matches(regex);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
