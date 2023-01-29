@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.Duke;
 import duke.DukeException;
 
 import java.util.List;
@@ -73,6 +74,37 @@ public class TaskList {
     public Task getTask(int index) {
         return taskList.get(index);
     }
+
+    /**
+     * Finds all the tasks matching the keyword.
+     *
+     * @param keyword Keyword to find the tasks.
+     * @return String representation of all the matching tasks.
+     */
+    public String findTasks(String keyword) throws DukeException {
+        StringBuilder foundTasks = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            Task t = taskList.get(i);
+            String description = t.getDescription();
+
+            if (description.contains(keyword)) {
+                foundTasks.append((i + 1) + ". " + t);
+
+                if (i < taskList.size() - 1) {
+                    foundTasks.append(System.lineSeparator());
+                }
+            }
+
+
+        }
+
+        if (foundTasks.length() == 0) {
+            throw new DukeException("No matching task found.");
+        }
+
+        return foundTasks.toString();
+    }
+
 
     @Override
     public boolean equals(Object o) {
