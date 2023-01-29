@@ -23,7 +23,8 @@ public class ArgumentParser implements Parser<ArgumentMap> {
         }
 
         // format main input to fit argument parsing syntax
-        input = input.strip() + " ";    // extra space so that last empty '/'
+        // extra space so that last empty '/'
+        input = input.strip() + " ";
         if (!input.startsWith("/" + ArgumentMap.TAG_MAIN_INPUT)) {
             input = String.format("/%s %s", ArgumentMap.TAG_MAIN_INPUT, input);
         }
@@ -31,7 +32,7 @@ public class ArgumentParser implements Parser<ArgumentMap> {
         // parse tags
         try (Scanner scanner = new Scanner(input)) {
             scanner.useDelimiter("[\\s]*/");
-            while(scanner.hasNext()) {
+            while (scanner.hasNext()) {
                 addInput(scanner.next(), inputMap);
             }
         }
