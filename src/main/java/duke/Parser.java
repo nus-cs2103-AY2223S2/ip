@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.*;
+
 public class Parser {
     public static Command parse(String command) throws DukeException {
             String[] commandArray = command.split(" ", 2);
