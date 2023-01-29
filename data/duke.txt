@@ -1,2 +1,4 @@
 E | 1 | say hi | from 2 to 5
-D | 1 | do homework | 2021-02-02
+E | 0 | say hi | from 2 to 5
+T | 0 | hi
+D | 0 | say hi | 2023-01-01

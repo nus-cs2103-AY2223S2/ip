@@ -1,6 +1,12 @@
-import java.lang.module.FindException;
+package duke.command;
 
-public class DeleteCommand extends Command{
+import duke.TaskList;
+import duke.command.Command;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.ui.Ui;
+
+public class DeleteCommand extends Command {
 
     protected int index;
 

@@ -1,10 +1,15 @@
+package duke.storage;
+
+import duke.TaskList;
+import duke.exceptions.DirectoryNotFoundException;
+import duke.ui.Ui;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class Storage {
 

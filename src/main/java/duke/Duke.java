@@ -1,9 +1,13 @@
+package duke;
+
+import duke.command.Command;
+import duke.exceptions.DirectoryNotFoundException;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 import java.io.*;
-import java.nio.file.NotDirectoryException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class Duke {

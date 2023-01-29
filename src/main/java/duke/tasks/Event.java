@@ -1,6 +1,8 @@
+package duke.tasks;
 
+import duke.tasks.Task;
 
-public class Event extends Task{
+public class Event extends Task {
 
     protected String eventDetail;
 
