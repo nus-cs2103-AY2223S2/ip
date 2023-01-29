@@ -1,12 +1,13 @@
 package response;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import parser.Parser;
 import storage.TaskList;
 import storage.Todo;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FindResponseTest {
     private TaskList taskList;
