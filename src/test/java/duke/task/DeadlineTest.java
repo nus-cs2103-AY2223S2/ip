@@ -10,7 +10,7 @@ public class DeadlineTest {
     public void deadline_marked() {
         Deadline deadLine = new Deadline("Do homework", "2022-01-29 23:59");
         deadLine.toggleDone();
-        assertEquals("deadline Do homework /by 29 January 2022 23:59\nmark 6",
+        assertEquals("deadline Do homework /by 2022-01-29 23:59\nmark 6",
                 deadLine.getRecreateCommand(6));
     }
 }
