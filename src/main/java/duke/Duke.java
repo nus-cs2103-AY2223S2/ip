@@ -10,7 +10,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Duke {
-
+    /**
+     * main class for Duke todolist
+     * @param args
+     * @throws DukeException
+     */
     public static void main(String[] args) throws DukeException {
         Scanner scanner = new Scanner(System.in);
 
@@ -116,6 +120,12 @@ public class Duke {
         }
     }
     // saves TodoList whenever there is a change
+
+    /**
+     * Saves the tasks in ArrayList<Task> tasksList
+     * whenever there is a change
+     * @param tasksList
+     */
     static void saveTodoList(ArrayList<Task> tasksList) {
         int taskNumber = 1;
         StringBuilder stringBuilder = new StringBuilder();
