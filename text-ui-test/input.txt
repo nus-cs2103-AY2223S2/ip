@@ -8,22 +8,30 @@ todo git-push
 mark 4
 unmark bread
 todo
+find ^lunch$
 mark 1
 list
 unmark 3
 mark
 unmark 4
 deadline
+find bread
 delete
 deadline ip /by 2023-02-01 23:59 /by 2023-02-02 14:00
 event lecture /to 2023-02-02 16:00 /from 2023-02-02 14:00
 list
+find [a-z]{5}
+find \b[a-z]{5}\b
 save test1.txt
 mark 4
+find l.*c
 mark 2
+deadline bread /by 2023-03-17 18:00
 delete 4
 unmark 1
 list
+find bread
+find  bread
 load test1.txt
 list
 list /from 2023-02-02 14:00 /to 2023-05-01 13:00

@@ -29,6 +29,9 @@ public abstract class Task {
 
     public abstract boolean beforeDate(LocalDateTime date);
     public abstract boolean afterDate(LocalDateTime date);
+    public boolean hasMatchingObjective(String regex) {
+        return objective.matches(regex);
+    }
 
     @Override
     public String toString() {

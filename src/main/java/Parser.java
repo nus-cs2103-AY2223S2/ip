@@ -70,12 +70,12 @@ public class Parser {
         return idx;
     }
 
-    public static String parsePath(String[] args) {
-        String path = "";
+    public static String recombine(String[] args) {
+        String arg = "";
         for (int i = 0; i < args.length; i++) {
-            path += (i > 0 ? " " : "") + args[i];
+            arg += (i > 0 ? " " : "") + args[i];
         }
-        return path;
+        return arg;
     }
 
     public static boolean parseExit(String cmdLine) {
@@ -86,7 +86,7 @@ public class Parser {
         String cmd = cmdLine.split(" ")[0].toLowerCase();
         String[] args = {};
         if (cmdLine.contains(" ")) {
-            args = cmdLine.substring(cmd.length() + 1).split(" ");
+            args = cmdLine.substring(cmd.length() + 1).split(" ", -1);
         }
         try {
             switch (cmd) {
@@ -107,9 +107,11 @@ public class Parser {
                 case "delete":
                     return new Delete(parseTaskIndex(args));
                 case "save":
-                    return new Save(parsePath(args));
+                    return new Save(recombine(args));
                 case "load":
-                    return new Load(parsePath(args));
+                    return new Load(recombine(args));
+                case "find":
+                    return new Find(".*" + recombine(args) + ".*");
                 default:
                     throw new MikiArgsException("\"" + cmd + "\" isn't a real word!");
             }
