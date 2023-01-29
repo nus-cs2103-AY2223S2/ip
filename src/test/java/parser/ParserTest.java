@@ -2,11 +2,12 @@ package parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static ui.Ui.LS;
+import static duke.ui.Ui.LS;
 
 import org.junit.jupiter.api.Test;
 
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
+import duke.parser.Parser;
 
 public class ParserTest {
     //following test from https://www.baeldung.com/junit-assert-exception
