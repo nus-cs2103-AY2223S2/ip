@@ -1,14 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.TodoCommand;
-import duke.command.DeadlineCommand;
-import duke.command.EventCommand;
-import duke.command.DeleteCommand;
-import duke.command.ListCommand;
-import duke.command.ExitCommand;
-import duke.command.TickCommand;
-import duke.command.UntickCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -75,6 +67,8 @@ public class Parser {
             return parseEvent(cmd);
         case "delete":
             return new DeleteCommand(Integer.parseInt(cmdArr[1]) - 1);
+        case "find":
+            return new FindCommand(cmd.replaceAll("find", "").trim());
         }
 
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

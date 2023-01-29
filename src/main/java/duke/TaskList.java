@@ -7,6 +7,9 @@ import duke.task.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -100,4 +103,9 @@ public class TaskList {
         return tasks.remove(taskIndex);
     }
 
+    public TaskList find(String query) {
+        ArrayList<Task> foundTasks = this.tasks.stream().filter(t -> t.getTitle().contains(query))
+                                                        .collect(Collectors.toCollection(ArrayList::new));
+        return new TaskList(foundTasks);
+    }
 }

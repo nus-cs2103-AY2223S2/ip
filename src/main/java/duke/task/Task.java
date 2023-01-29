@@ -2,6 +2,8 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
+
 public class Task {
     private String title;
     private Boolean isDone;
@@ -42,6 +44,10 @@ public class Task {
      */
     public String toSavedString() {
         return (this.isDone ? "1" : "0") + "|" + this.title;
+    }
+
+    public String getTitle() {
+        return this.title;
     }
 }
 
