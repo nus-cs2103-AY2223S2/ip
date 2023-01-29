@@ -20,8 +20,8 @@ public class EventCommand extends Command {
      * @param list The TaskList object that stores Tasks.
      * @param desc The description of the Event.
      * @param from The starting date of the Event.
-     * @param to The ending date of the Event.
-     * @param ui User interface of the Chat bot.
+     * @param to   The ending date of the Event.
+     * @param ui   User interface of the Chat bot.
      */
     public void processCommand(TaskList list, String desc, String from, String to, Ui ui) {
         Event event = new Event(desc, from, to);

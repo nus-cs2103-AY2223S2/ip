@@ -18,7 +18,7 @@ public class Parser {
      *
      * @param input The full line of the command and arguments.
      * @return The command of the input.
-     * @throws DukeException if the input contains empty descriptions
+     * @throws DukeException            if the input contains empty descriptions
      * @throws IllegalArgumentException if the input contains an invalid command or arguments
      */
     public Command parseCommand(String input) throws DukeException, IllegalArgumentException {
@@ -26,73 +26,73 @@ public class Parser {
         CommandEnums type;
         try {
             type = CommandEnums.valueOf(split[0].toUpperCase().strip());
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println("Sorry! I have no idea what that means ??? >:c");
             return null;
         }
-            switch (type) {
-            case LIST:
-                return new ListCommand();
+        switch (type) {
+        case LIST:
+            return new ListCommand();
 
-            case MARK:
-                if (isEmptyCommand(split)) {
-                    return new MarkCommand();
-                } else {
-                    throw new DukeException("Sorry! you can't have empty descriptions!");
-                }
-
-            case UNMARK:
-                if (isEmptyCommand(split)) {
-                    return new UnmarkCommand();
-                } else {
-                    throw new DukeException("Sorry! you can't have empty descriptions!");
-                }
-
-            case TODO:
-                if (isEmptyCommand(split)) {
-                    return new TodoCommand();
-                } else {
-                    throw new DukeException("Sorry! you can't have empty descriptions!");
-                }
-
-            case DEADLINE:
-                if (isEmptyCommand(split)) {
-                    return new DeadlineCommand();
-                } else {
-                    throw new DukeException("Sorry! you can't have empty descriptions!");
-                }
-
-            case EVENT:
-                if (isEmptyCommand(split)) {
-                    return new EventCommand();
-                } else {
-                    throw new DukeException("Sorry! you can't have empty descriptions!");
-                }
-
-            case DELETE:
-                if (isEmptyCommand(split)) {
-                    return new DeleteCommand();
-                } else {
-                    throw new DukeException("Sorry! you can't have empty descriptions!");
-                }
-            case DATE:
-                if (isEmptyCommand(split)) {
-                    return new SameDateCommand();
-                } else {
-                    throw new DukeException("Sorry! you can't have empty descriptions!");
-                }
-            case BYE:
-                return new ExitCommand();
-            default:
-                throw new DukeException("Sorry! I have no idea what that means ??? >:c");
+        case MARK:
+            if (isEmptyCommand(split)) {
+                return new MarkCommand();
+            } else {
+                throw new DukeException("Sorry! you can't have empty descriptions!");
             }
+
+        case UNMARK:
+            if (isEmptyCommand(split)) {
+                return new UnmarkCommand();
+            } else {
+                throw new DukeException("Sorry! you can't have empty descriptions!");
+            }
+
+        case TODO:
+            if (isEmptyCommand(split)) {
+                return new TodoCommand();
+            } else {
+                throw new DukeException("Sorry! you can't have empty descriptions!");
+            }
+
+        case DEADLINE:
+            if (isEmptyCommand(split)) {
+                return new DeadlineCommand();
+            } else {
+                throw new DukeException("Sorry! you can't have empty descriptions!");
+            }
+
+        case EVENT:
+            if (isEmptyCommand(split)) {
+                return new EventCommand();
+            } else {
+                throw new DukeException("Sorry! you can't have empty descriptions!");
+            }
+
+        case DELETE:
+            if (isEmptyCommand(split)) {
+                return new DeleteCommand();
+            } else {
+                throw new DukeException("Sorry! you can't have empty descriptions!");
+            }
+        case DATE:
+            if (isEmptyCommand(split)) {
+                return new SearchCommand();
+            } else {
+                throw new DukeException("Sorry! you can't have empty descriptions!");
+            }
+        case BYE:
+            return new ExitCommand();
+        default:
+            throw new DukeException("Sorry! I have no idea what that means ??? >:c");
+        }
     }
 
     /**
      * Parses the input string taken from the text file into Tasks in the TaskList.
      *
      * @param input The full line of the command and arguments.
-     * @param list The TaskList of the Chat bot.
+     * @param list  The TaskList of the Chat bot.
      * @return A boolean representing the success of the parsing.
      */
     public boolean parseText(String input, TaskList list) {

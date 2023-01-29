@@ -7,21 +7,21 @@ import java.time.format.DateTimeFormatter;
  * Represents the Deadline Task of the Chat bot.
  */
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected LocalDate deadline;
 
     /**
      * Instantiates a Deadline Object that can be placed into the TaskList.
      *
      * @param description The description of the task.
-     * @param by The date of the Deadline.
+     * @param deadline    The date of the Deadline.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String deadline) {
         super(description);
-        this.by = LocalDate.parse(by.trim());
+        this.deadline = LocalDate.parse(deadline.trim());
     }
 
     public LocalDate getBy() {
-        return this.by;
+        return this.deadline;
     }
 
     /**
@@ -32,9 +32,9 @@ public class Deadline extends Task {
     @Override
     public String toSave() {
         if (super.isDone == true) {
-            return String.format("D | 1 | %s | %s\n", super.getDescription(), this.by);
+            return String.format("D | 1 | %s | %s\n", super.getDescription(), this.deadline);
         }
-        return String.format("D | 0 | %s | %s\n", super.getDescription(), this.by);
+        return String.format("D | 0 | %s | %s\n", super.getDescription(), this.deadline);
     }
 
     /**
@@ -44,6 +44,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

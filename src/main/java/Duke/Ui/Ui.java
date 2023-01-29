@@ -23,7 +23,7 @@ public class Ui {
     }
 
     public void showCommandList() {
-        String commands = "Available commands:\n"
+        String availableCommands = "Available commands:\n"
                 + "todo [description]\n"
                 + "event [description] /from [date] /to [date]\n"
                 + "deadline [description] /by [date]\n"
@@ -32,7 +32,7 @@ public class Ui {
                 + "list\n"
                 + "delete [index]\n"
                 + "date [date]";
-        System.out.println(commands);
+        System.out.println(availableCommands);
         printDivider();
     }
 

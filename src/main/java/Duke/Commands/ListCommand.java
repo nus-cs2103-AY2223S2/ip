@@ -19,7 +19,7 @@ public class ListCommand extends Command {
      * Processes the command for a ListCommand.
      *
      * @param list The TaskList object that stores Tasks.
-     * @param ui User interface of the Chat bot.
+     * @param ui   User interface of the Chat bot.
      */
     public void processCommand(TaskList list, Ui ui) {
         for (int i = 0; i < list.getSize(); i++) {

@@ -19,7 +19,7 @@ public class TodoCommand extends Command {
      *
      * @param list The TaskList object that stores Tasks.
      * @param desc The description of the Task.
-     * @param ui User interface of the Chat bot.
+     * @param ui   User interface of the Chat bot.
      */
     public void processCommand(TaskList list, String desc, Ui ui) {
         Todo task = new Todo(desc);

@@ -10,9 +10,9 @@ import java.time.LocalDate;
 import Duke.Ui.Ui;
 
 /**
- * Represents the Duke.Commands.SameDateCommand of the Chat bot.
+ * Represents the Duke.Commands.SearchCommand of the Chat bot.
  */
-public class SameDateCommand extends Command {
+public class SearchCommand extends Command {
     @Override
     public void processCommand() {
         System.out.println("abstract method invoked");
@@ -20,11 +20,11 @@ public class SameDateCommand extends Command {
 
     /**
      * Overloaded processCommand method from the abstract class Command.
-     * Processes the command for a SameDateCommand.
+     * Processes the command for a SearchCommand.
      *
      * @param list The TaskList object that stores Tasks.
      * @param date The date to be searched for in the TaskList.
-     * @param ui User interface of the Chat bot.
+     * @param ui   User interface of the Chat bot.
      */
     public void processCommand(TaskList list, String date, Ui ui) {
         LocalDate now = LocalDate.parse(date.trim());
@@ -36,7 +36,7 @@ public class SameDateCommand extends Command {
                     ui.print(currTask.toString());
                 }
             } else if (currTask instanceof Event) {
-                if (now.equals(((Event) currTask).getTo()) || now.equals(((Event) currTask).getFrom())) {
+                if (now.equals(((Event) currTask).getEndDate()) || now.equals(((Event) currTask).getStartDate())) {
                     ui.print(currTask.toString());
                 }
             }
