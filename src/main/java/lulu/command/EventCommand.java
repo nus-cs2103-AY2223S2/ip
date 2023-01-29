@@ -28,6 +28,14 @@ public class EventCommand extends Command {
         this.from = toFrom[0];
         this.to = toFrom[1];
     }
+
+    /**
+     * This method adds an event task to tasks upon execution
+     *
+     * @param tasks the TaskList to be added with an event task
+     * @param ui the UI that displays messages
+     * @param storage the Storage is not relevant in this command
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         Task t = new Event(description, from, to);
         tasks.add(t);

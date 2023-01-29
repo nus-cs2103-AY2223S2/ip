@@ -16,6 +16,14 @@ public class TodoCommand extends Command {
         }
         this.description = rest;
     }
+
+    /**
+     * This method adds a todo task to tasks upon execution.
+     *
+     * @param tasks the TaskList to be added with a todo task
+     * @param ui the UI that displays messages
+     * @param storage the Storage is not relevant in this command
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         Task t = new Todo(description);
         tasks.add(t);

@@ -22,6 +22,13 @@ public class UnmarkCommand extends Command {
         }
     }
 
+    /**
+     * This method unmarks the specified task upon execution.
+     *
+     * @param tasks the TaskList with the task to be unmarked.
+     * @param ui the UI that displays messages
+     * @param storage the storage is not relevant in this command
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         tasks.unmarkTask(taskNumber);
         ui.showUnmarkText(tasks.getTaskDescription(taskNumber).toString());

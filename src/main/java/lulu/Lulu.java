@@ -22,6 +22,9 @@ public class Lulu {
         this.storage = new Storage(filePath);
     }
 
+    /**
+     * This method runs the chatbot task manager.
+     */
     public void run() {
         ui.showGreetText();
         if (storage.isSavePresent()) {

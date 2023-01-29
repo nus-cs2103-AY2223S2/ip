@@ -46,6 +46,15 @@ public class TaskList {
     }
 
     /** this method may be in the wrong spot but will be left here for now */
+    /**
+     * This method loads tasks into the TaskList, provided it follows a given convention.
+     * The convention must be as follows "X`i`Y",
+     * where X is the type of task, todo, event or deadline
+     * i is whether the task has been completed, 0 or 1
+     * Y is the task description, additional description can be separated by `.
+     *
+     * @param s the task to be loaded
+     */
     public void load(String s) {
         String[] command = s.split("`");
         switch (command[0]) {
