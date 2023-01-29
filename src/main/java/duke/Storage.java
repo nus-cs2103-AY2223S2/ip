@@ -1,19 +1,15 @@
 package duke;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Storage {
 
-    private File taskList = null;
+    private File taskList;
 
     private String filepath;
 

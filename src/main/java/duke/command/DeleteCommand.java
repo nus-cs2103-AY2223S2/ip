@@ -5,7 +5,7 @@ import duke.Ui;
 import duke.Storage;
 import duke.DukeException;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     private int indexOfTaskToDelete;
 

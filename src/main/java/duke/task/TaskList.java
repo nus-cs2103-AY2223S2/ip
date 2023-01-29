@@ -16,7 +16,7 @@ public class TaskList {
     }
 
     public TaskList(List<String> storedTasks) throws DukeException {
-        for(String task: storedTasks) {
+        for (String task: storedTasks) {
             String[] parsedTask = Parser.parseTask(task);
             switch (parsedTask[0]) {
                 case "T":
@@ -27,6 +27,9 @@ public class TaskList {
                     break;
                 case "E":
                     tasks.add(new Event(parsedTask[2], parsedTask[3], parsedTask[4]));
+                    break;
+                default:
+                    throw new DukeException("encountered invalid saved task");
             }
             if (parsedTask[1].equals("1")) {
                tasks.get(tasks.size() - 1).mark();
@@ -35,8 +38,8 @@ public class TaskList {
 
     }
 
-    public void addTodo(String description) throws DukeException{
-        if (description.equals("")){
+    public void addTodo(String description) throws DukeException {
+        if (description.equals("")) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
         Todo newTodo = new Todo(description);
@@ -55,39 +58,39 @@ public class TaskList {
 
     public String showList() {
         int len = tasks.size();
-        if(len == 0){
+        if (len == 0) {
             return "";
         }
         String result = "Here are the tasks in your list:\n";
-        for(int i = 0; i < len - 1; i ++){
+        for (int i = 0; i < len - 1; i++) {
             result += (i + 1) + "." + tasks.get(i) + "\n";
         }
         result += len + "." + tasks.get(len - 1);
         return result;
     }
 
-    public String markTask(int taskNo){
+    public String markTask(int taskNo) {
         tasks.get(taskNo).mark();
         String result = "Nice! I've marked this task as done:\n";
         result += tasks.get(taskNo);
         return result;
     }
 
-    public String unmarkTask(int taskNo){
+    public String unmarkTask(int taskNo) {
         tasks.get(taskNo).unmark();
         String result = "OK, I've marked this task as not done yet:\n";
         result += tasks.get(taskNo);
         return result;
     }
 
-    public String delete(int taskNo){
+    public String delete(int taskNo) {
         Task deleted = tasks.remove(taskNo);
         return String.format("OK, I've deleted: %s\n", deleted);
     }
 
     public List<String> getTasksToSave() {
         List<String> toSave = new ArrayList<>();
-        for(int i = 0; i < tasks.size(); i ++) {
+        for(int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             toSave.add(t.toSaveableString());
         }

@@ -31,8 +31,8 @@ public class Ui {
     }
 
     public static void showTask(Task newTask, int numOfTasks) {
-        System.out.println(String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list."
-                ,newTask, numOfTasks));
+        System.out.println(String.format("Got it. I've added this task:\n %s\n Now you have %d tasks in the list.",
+                newTask, numOfTasks));
     }
 
     public static void sayGoodbye() {

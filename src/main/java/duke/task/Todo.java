@@ -1,17 +1,17 @@
 package duke.task;
 
-public class Todo extends Task{
+public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + this.getStatusIcon() + " " + this.description;
     }
 
     @Override
     public String toSaveableString() {
-        return String.format("T | %d | %s", isDone? 1 : 0, description);
+        return String.format("T | %d | %s", isDone ? 1 : 0, description);
     }
 }
