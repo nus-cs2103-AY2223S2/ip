@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
         store.save(list);
         ui.showMessage("Noted. I've removed this task:");
         ui.showMessage(removed.toString());
-        ui.showMessage("Now you have " + list.size() +" tasks in the list.");
+        ui.showMessage("Now you have " + list.size() + " tasks in the list.");
     }
 
     @Override

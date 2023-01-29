@@ -1,14 +1,20 @@
 package duke.commands;
 
-import duke.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Task;
+import duke.TaskList;
+import duke.Ui;
 
 public class MarkCommandTest {
 
     @Test
-    public void executeTest(){
+    public void executeTest() {
         Ui ui = new Ui();
         Storage storage = new Storage();
         TaskList tasks = new TaskList();

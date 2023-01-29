@@ -31,7 +31,7 @@ public class Storage {
         try {
             f = new FileInputStream(dataPath);
             f1 = new ObjectInputStream(f);
-            todo = (TaskList)f1.readObject();
+            todo = (TaskList) f1.readObject();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -54,7 +54,7 @@ public class Storage {
             f2.writeObject(todo);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }finally {
+        } finally {
             try {
                 f2.close();
                 f1.close();

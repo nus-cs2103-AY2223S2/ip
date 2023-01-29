@@ -30,7 +30,7 @@ public class DeadlineCommand extends Command {
         store.save(list);
         ui.showMessage("Got it. I've added this task:");
         ui.showMessage(list.get(list.size() - 1).toString());
-        ui.showMessage("Now you have " + list.size() +" tasks in the list.");
+        ui.showMessage("Now you have " + list.size() + " tasks in the list.");
     }
 
     @Override

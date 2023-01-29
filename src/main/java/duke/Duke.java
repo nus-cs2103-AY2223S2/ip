@@ -1,7 +1,6 @@
 package duke;
 
-import duke.commands.*;
-
+import duke.commands.Command;
 
 public class Duke {
 

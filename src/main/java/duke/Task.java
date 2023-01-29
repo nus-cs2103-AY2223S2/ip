@@ -1,6 +1,5 @@
 package duke;
 
-import javax.print.DocFlavor;
 import java.io.Serializable;
 
 public class Task implements Serializable {
