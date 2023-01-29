@@ -21,7 +21,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("./data.txt").run();
+        new Duke("./src/main/java/duke/data.txt").run();
     }
 
     public void run() {
