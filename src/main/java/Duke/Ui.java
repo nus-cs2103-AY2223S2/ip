@@ -1,9 +1,6 @@
 package Duke;
 
 import Duke.Commands.Command;
-import Duke.Commands.Tasks.Task;
-
-import java.util.ArrayList;
 
 public class Ui {
     private static final String WELCOME = "Hello! Welcome to Duke. Let's start task tracking!";
@@ -14,7 +11,7 @@ public class Ui {
         // empty
     }
 
-    public void printList(ArrayList<Task> tasks) {
+    public void printList(TaskList tasks) {
         String res = "";
         for (int i = 0; i < tasks.size(); i++) {
             res += String.format("%d.%s\n", i + 1, tasks.get(i));

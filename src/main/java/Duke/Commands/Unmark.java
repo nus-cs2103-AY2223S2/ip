@@ -1,6 +1,7 @@
 package Duke.Commands;
 
 import Duke.Commands.Tasks.Task;
+import Duke.TaskList;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class Unmark extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> toDoList) {
+    public void execute(TaskList toDoList) {
         toDoList.get(this.index).markUndone();
         System.out.println("OK, I've marked this task as not done yet:\n" + "    " +
                 toDoList.get(this.index));

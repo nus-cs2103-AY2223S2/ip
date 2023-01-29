@@ -1,6 +1,7 @@
 package Duke.Commands;
 
 import Duke.Commands.Tasks.Task;
+import Duke.TaskList;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class ListTasks extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> toDoList) {
+    public void execute(TaskList toDoList) {
         // empty
     }
 

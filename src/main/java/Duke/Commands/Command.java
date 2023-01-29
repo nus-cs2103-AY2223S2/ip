@@ -1,6 +1,7 @@
 package Duke.Commands;
 
 import Duke.Commands.Tasks.Task;
+import Duke.TaskList;
 
 import java.util.ArrayList;
 
@@ -12,5 +13,5 @@ public abstract class Command {
         this.message = message;
     }
 
-    abstract public void execute(ArrayList<Task> toDoList);
+    abstract public void execute(TaskList toDoList);
 }

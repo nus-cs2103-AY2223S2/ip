@@ -27,17 +27,17 @@ public class Duke {
     public static void main(String[] args) {
         Ui ui = new Ui();
         ui.printWelcome();
+        TaskList toDoList = new TaskList();
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> toDoList = new ArrayList<>();
         while (true) {
             String command = sc.nextLine();
             Parser parser = new Parser(command);
             Command curCommand;
             try {
                 curCommand = parser.process();
-                //curCommand.execute(toDoList);
-                //ui.printCommandMessage(curCommand);
-                //ui.printList(toDoList);
+                curCommand.execute(toDoList);
+                ui.printCommandMessage(curCommand);
+                ui.printList(toDoList);
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
                 continue;

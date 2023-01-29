@@ -3,6 +3,7 @@ import Duke.Commands.Tasks.Deadline;
 import Duke.Commands.Tasks.Event;
 import Duke.Commands.Tasks.Task;
 import Duke.Commands.Tasks.ToDo;
+import Duke.TaskList;
 import Duke.dukeexception.DukeException;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Add extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> toDoList) {
+    public void execute(TaskList toDoList) {
         toDoList.add(this.task);
     }
 
