@@ -1,4 +1,7 @@
-import java.util.ArrayList;
+package duke;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -59,10 +62,6 @@ public class Ui {
     }
     public void printError(String errMsg) {
         System.out.println(errMsg);
-    }
-
-    public void printEmptyDescriptionError(String type) {
-        System.out.println("☹ OOPS!!! The description of a " + type + " cannot be empty.");
     }
 
     public void printGoodbyeMsg() {

@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.task.Task;
 public class TickCommand extends Command{
     private int taskIndex;
 
