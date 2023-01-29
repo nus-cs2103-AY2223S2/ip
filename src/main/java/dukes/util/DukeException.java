@@ -1,5 +1,10 @@
 package dukes.util;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * The exception class that handles all the run-time exceptions.
  */

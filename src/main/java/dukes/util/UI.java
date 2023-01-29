@@ -4,6 +4,11 @@ import dukes.task.Task;
 
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * The util class for reading inputs and providing feedbacks to user.
  */

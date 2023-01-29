@@ -12,10 +12,15 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * The main driver class of Duke software.
  */
-public class Duke {
+public class Duke extends Application {
 
     /** Handles loading and saving information to hard disk. */
     private Storage storage;
@@ -25,6 +30,11 @@ public class Duke {
     private Parser parser;
     /** Handles interactions with user. */
     private UI ui;
+
+    // public Duke() {}
+    // When JavaFX build the Application, "Application.launch(Duke.class, args)",
+    // it is actually trying to create Duke().
+    // But if your code does not have this constructor, it will fail.
 
     /**
      * Constructor of Duke class.
@@ -76,6 +86,15 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

@@ -8,6 +8,11 @@ import java.util.regex.Pattern;
 import java.util.List;
 import java.util.ArrayList;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * The util class containing the list of tasks.
  */
