@@ -21,7 +21,6 @@ public class Duke {
 	 * Constructor
 	 * 
 	 * @param filePath the path to the text file that stores the tasks
-	 * @return nothing
 	 */
 	public Duke(String filePath) {
 		this.ui = new Ui();
