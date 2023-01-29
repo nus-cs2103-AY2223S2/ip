@@ -53,12 +53,18 @@ public class Duke {
                     newTask = new ToDo(description);
                 } else if (pointer.startsWith("[E]")) {
                     description = pointer.substring(7, pointer.indexOf("(from: ") - 1);
-                    String start = pointer.substring(pointer.indexOf("(from: ") + 7, pointer.indexOf(" to:"));
-                    String end = pointer.substring(pointer.indexOf("to: ") + 4, pointer.lastIndexOf(")"));
+                    LocalDate start = LocalDate.parse(
+                            pointer.substring(pointer.indexOf("(from: ") + 7, pointer.indexOf(" to:")),
+                            DateTimeFormatter.ofPattern("MMM d yyyy"));
+                    LocalDate end = LocalDate.parse(
+                            pointer.substring(pointer.indexOf("to: ") + 4, pointer.lastIndexOf(")")),
+                            DateTimeFormatter.ofPattern("MMM d yyyy"));
                     newTask = new Event(description, start, end);
                 } else {
                     description = pointer.substring(7, pointer.indexOf("(by: ") - 1);
-                    String by = pointer.substring(pointer.indexOf("(by: ") + 5, pointer.lastIndexOf(")"));
+                    LocalDate by = LocalDate.parse(
+                            pointer.substring(pointer.indexOf("(by: ") + 5, pointer.lastIndexOf(")")),
+                            DateTimeFormatter.ofPattern("MMM d yyyy"));
                     newTask = new Deadline(description, by);
                 }
 
