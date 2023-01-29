@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.CommandType;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -51,6 +52,19 @@ public class Parser {
                 break;
             case list:
                 cur = new ListCommand();
+                break;
+            case find:
+                String keyword = "";
+                for (int i = 1; i < temp.length; i++) {
+                    keyword += temp[i];
+                    if (i != temp.length - 1) {
+                        keyword += " ";
+                    }
+                }
+                if (keyword.equals("")) {
+                    throw new DukeException("☹ OOPS!!! The keyword cannot be empty.");
+                }
+                cur = new FindCommand(keyword);
                 break;
             case mark:
                 int idx = Integer.parseInt(temp[1]);

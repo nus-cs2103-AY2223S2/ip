@@ -59,6 +59,11 @@ public class Deadline extends Task {
      * @return The symbol of a deadline.
      */
     @Override
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
+    @Override
     public String getSymbol() {
         return "D";
     }

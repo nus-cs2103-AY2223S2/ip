@@ -42,6 +42,16 @@ public class Task {
     }
 
     /**
+     * Get a boolean value of whether the current task's description contains the keyword.
+     *
+     * @param keyword Keyword to be searched.
+     * @return Boolean value of whether the description contains the keyword.
+     */
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
+    /**
      * Get the status of a task.
      *
      * @return Status of a task.
