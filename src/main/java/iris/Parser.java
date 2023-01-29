@@ -1,17 +1,8 @@
 package iris;
 
-import iris.command.ListCommand;
+import iris.command.*;
 import iris.exception.MissingFieldException;
 import iris.task.Todo;
-import iris.command.AddTaskCommand;
-import iris.command.Command;
-import iris.command.DeleteTaskCommand;
-import iris.command.ExitCommand;
-import iris.command.FilterCommand;
-import iris.command.HelpCommand;
-import iris.command.MarkTaskCommand;
-import iris.command.ResetCommand;
-import iris.command.UnmarkTaskCommand;
 
 import iris.exception.IrisException;
 import iris.exception.NoTaskException;
@@ -21,7 +12,7 @@ import iris.task.Event;
 
 public class Parser {
     enum CommandWord {
-        help, bye, list, mark, unmark, delete, todo, deadline, event, reset, filter
+        help, bye, list, mark, unmark, delete, todo, deadline, event, reset, filter, find
     }
 
     private static void checkNotEmpty(String str, String message) throws MissingFieldException {
@@ -65,9 +56,15 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 throw new MissingFieldException("Date for filter");
             }
+        case find:
+            try {
+                return new FindCommand(input.substring(5).trim());
+            } catch (IndexOutOfBoundsException e) {
+                throw new MissingFieldException("keyword for find");
+            }
         case todo:
             try {
-                name = input.substring(5);
+                name = input.substring(5).trim();
             } catch (IndexOutOfBoundsException e) {
                 throw new MissingFieldException("Description of Todo task");
             }
@@ -76,13 +73,13 @@ public class Parser {
         case deadline:
             try {
                 arr = input.split("/by");
-                name = arr[0].substring(9);
+                name = arr[0].substring(9).trim();
             } catch (IndexOutOfBoundsException e) {
                 throw new MissingFieldException("Description of deadline");
             }
             checkNotEmpty(name, "Description of deadline");
             try {
-                by = arr[1].substring(1);
+                by = arr[1].substring(1).trim();
             } catch (IndexOutOfBoundsException e) {
                 throw new MissingFieldException("Deadline date");
             }
@@ -91,19 +88,19 @@ public class Parser {
         case event:
             try {
                 arr = input.split("/");
-                name = arr[0].substring(6);
+                name = arr[0].substring(6).trim();
             } catch (IndexOutOfBoundsException e) {
                 throw new MissingFieldException("Description of event");
             }
             checkNotEmpty(name, "Description of event");
             try {
-                from = arr[1].substring(5);
+                from = arr[1].substring(5).trim();
             } catch (IndexOutOfBoundsException e) {
                 throw new MissingFieldException("Start date of event");
             }
             checkNotEmpty(from, "Start date of event");
             try {
-                to = arr[2].substring(3);
+                to = arr[2].substring(3).trim();
             } catch (IndexOutOfBoundsException e) {
                 throw new MissingFieldException("End date of event");
             }

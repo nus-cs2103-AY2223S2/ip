@@ -21,6 +21,21 @@ public class TaskList extends ArrayList<Task> {
         return count;
     }
 
+    /**
+     * filters task list to return tasks with given keyword in description
+     * @param keyword the word to filter the tasks
+     * @return filtered tasks
+     */
+    public TaskList findTask(String keyword) {
+        TaskList filtered = new TaskList();
+        for (Task task : this) {
+            if (task.getName().contains(keyword)) {
+                filtered.add(task);
+            }
+        }
+        return filtered;
+    }
+
     public String dateFilter(LocalDateTime startDate, LocalDateTime endDate) {
         StringBuilder str = new StringBuilder();
         int count = 0;
