@@ -1,12 +1,15 @@
 package duke.command;
-
 import duke.task.*;
 
-//A CLASS THAT STORE THE TASKS
+/**
+ * This class executes the task creation commands stored in the command queue, by parsing the user input.
+ */
 public class ExecuteCommandQueue extends Commands {
+
     public ExecuteCommandQueue(String str) {
         this.setCommandStorage(str);
     }
+
     @Override
     public void execute(TaskList list){
         String content = this.getCommandStorage();
@@ -23,7 +26,7 @@ public class ExecuteCommandQueue extends Commands {
             String from = dates[0];
             String to = dates[1];
             task = new Event(substrings[0], false, from, to);
-        } else if (content.matches("^todo\\s.*$")){
+        } else if (content.matches("^todo\\s.*$")) {
             String desc = content.substring(5);
             task = new Todo(desc, false);
         }

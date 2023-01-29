@@ -2,11 +2,19 @@ package duke.command;
 
 import duke.task.TaskList;
 
+/**
+ * This class marks a particular task in the task list as done.
+ */
 public class Mark extends Commands {
     public Mark(String str) {
         this.setCommandStorage(str);
     }
 
+    /**
+     * This function takes in a task list, and mark a specified task in the task list as done.
+     * Then it decrements the task count.
+     * @param tasks
+     */
     @Override
     public void execute(TaskList tasks) {
         String content = this.getCommandStorage();

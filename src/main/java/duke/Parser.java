@@ -6,8 +6,21 @@ import duke.exception.InsufficientAruments;
 import duke.exception.UnknownCommand;
 import duke.task.TaskList;
 
+/**
+ * This class implements the parsing of command line arguments, and
+ * create and put the corresponding command with the parsed input
+ * arguments into the command queue.
+ */
 public class Parser {
     private static CommandQueue queue = new CommandQueue();
+
+    /**
+     * Creates a command according to the user input, parse it,
+     * and pass the relevant input into the command created,
+     * and store the command in the command queue.
+     * @param input
+     * @throws DukeException
+     */
     public static void createCommand (String input) throws DukeException {
         switch (input){
             default : {
@@ -22,7 +35,7 @@ public class Parser {
                         throw new InsufficientAruments("OOPS!!! The description of a " +
                                 input.split(" ")[0] + " cannot be empty.");
                     } else {
-                        queue.add(new ExecuteCommandQueue(input));
+                        queue.add(new ExecuteCommandQueue(input)); //if the command is a valid task creation command
                     }
                 } else {
                     throw new UnknownCommand("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -39,6 +52,12 @@ public class Parser {
             }
         }
     }
+
+    /***
+     * Executes all commands waiting in the queue.
+     * This method returns nothing.
+     * @param list
+     */
     public static void executeQueue (TaskList list){
         queue.executeQueue(list);
     }

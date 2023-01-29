@@ -1,11 +1,20 @@
 package duke;
-
 import duke.exception.DukeException;
 import duke.task.TaskList;
-
 import java.util.*;
+
+/**
+ * This class defines the main logic of the Duke bot.
+ */
 public class Duke {
+
     public static boolean offBot = false;
+
+    /**
+     * This method defines the main logic of the Duke bot. The bot runs in a loop that awaits users' input
+     * until state offBot is set to True.
+     * @param args
+     */
     public static void main(String[] args) {
         Locale.setDefault(Locale.ENGLISH);
         System.out.println("Hello! I'm Duke.Duke\n" +

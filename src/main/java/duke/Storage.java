@@ -1,10 +1,13 @@
 package duke;
 
 import duke.task.Tasks;
-
 import java.io.*;
 import java.util.ArrayList;
 
+
+/**
+ * This class represents the local storage of task list.
+ */
 public class Storage {
 
     String fileName = "";
@@ -13,6 +16,11 @@ public class Storage {
         this.fileName = fileName;
     }
 
+    /**
+     * This method stores an ArrayList of Tasks in local hard disk.
+     * @param task
+     */
+    //adapted from CHATGPT
     public void saveTasks(ArrayList<Tasks> task) {
         try {
             FileOutputStream file = new FileOutputStream(this.fileName);
@@ -23,6 +31,11 @@ public class Storage {
             System.out.println("file error");
         }
     }
+
+    /**
+     * This method retrieves an ArrayList of Tasks from the local hard disk.
+     * @return ArrayList of Tasks.
+     */
     //adapted from CHATGPT
     public ArrayList<Tasks> loadTasks() {
         try {
