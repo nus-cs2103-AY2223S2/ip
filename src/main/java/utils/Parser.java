@@ -1,9 +1,17 @@
 package utils;
 
-import commands.*;
+import commands.ByeCommand;
+import commands.Command;
+import commands.DeadlineCommand;
+import commands.DeleteCommand;
+import commands.EventCommand;
+import commands.ListCommand;
+import commands.MarkCommand;
+import commands.ToDoCommand;
+import commands.UnmarkCommand;
+
 import enums.CommandType;
 import exceptions.DukeException;
-import tasks.TaskList;
 
 /**
  * Parse user input into commands for Duke.

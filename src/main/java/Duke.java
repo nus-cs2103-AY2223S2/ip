@@ -1,7 +1,7 @@
 import commands.Command;
 import exceptions.DukeException;
 import storage.Storage;
-import tasks.*;
+import tasks.TaskList;
 import utils.Parser;
 import views.UI;
 
@@ -15,8 +15,8 @@ import java.util.Scanner;
 public class Duke{
     private static final TaskList tasks = new TaskList();
     private static final Scanner sc = new Scanner(System.in);
-    private static UI ui = new UI();
-    private static Storage storage = new Storage(tasks);
+    private static final UI ui = new UI();
+    private static final Storage storage = new Storage(tasks);
 
 
     public static void main(String[] args) throws IOException {
