@@ -1,0 +1,3 @@
+D/Return books/0/Sunday
+T/Borrow book/0
+E/project/0/from Mon 2pm /to 4pm
