@@ -1,0 +1,20 @@
+@font-face {
+  font-family: default;
+  src: url("../fonts/font.otf");
+}
+
+.root * {
+  -fx-font: 14px default;
+  -fx-font-weight: bold;
+}
+
+.scroll-pane .viewport {
+  -fx-background-image: url("../images/black-bg.png");
+  -fx-background-size: cover;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center center;
+}
+
+#dialogContainer .viewport {
+  -fx-padding: 10px;
+}
