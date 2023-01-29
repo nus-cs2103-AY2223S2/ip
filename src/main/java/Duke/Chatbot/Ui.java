@@ -111,4 +111,23 @@ public class Ui {
     public void showNoTasksMessage() {
         System.out.println("There are no tasks to print!");
     }
+
+    /**
+     * Error message to be shown when Find command is called
+     * when no Keyword is specified
+     */
+    public void showEmptyFindKeywordError() {
+        System.out.println("Error: Find has no keyword to find for");
+
+    }
+
+    /**
+     * Message to be shown when Find command is called
+     *
+     * @param args Keyword entered into find command
+     */
+
+    public void showFindMessage(String args) {
+        System.out.println("Finding tasks related to keyword: " + args);
+    }
 }

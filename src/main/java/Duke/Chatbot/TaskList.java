@@ -85,10 +85,6 @@ public class TaskList {
         tasks.get(index).toggleState();
     }
 
-    public void addTask(Task toAdd) {
-        tasks.add(toAdd);
-    }
-
     @Override
     public String toString() {
         String result = "";
@@ -117,6 +113,26 @@ public class TaskList {
 
     public void removeAllTasks() {
         tasks.clear();
+    }
+
+    /**
+     * Returns a new TaskList where each element's User Representation contains the keyword
+     *
+     * @param keyword keyword to search for
+     * @return new TaskList containing relevant Tasks
+     */
+    public TaskList findKeyword(String keyword) {
+        TaskList foundTasks = new TaskList();
+        for (Task task : tasks) {
+            if (task.toString().contains(keyword)) {
+                foundTasks.addTask(task);
+            }
+        }
+        return foundTasks;
+    }
+
+    public void addTask(Task toAdd) {
+        tasks.add(toAdd);
     }
 
     public enum Tasktype {
