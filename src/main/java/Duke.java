@@ -10,7 +10,8 @@ public class Duke {
 
     public static void main(String[] args) throws IncorrectInputException {
         Pattern mark = Pattern.compile("(mark|unmark)([0-9])?");
-        Pattern index = Pattern.compile("(mark|unmark)?([0-9])");
+        Pattern index = Pattern.compile("(mark|unmark|delete)?([0-9])");
+        Pattern delete = Pattern.compile("(delete)\\s([0-9])");
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in );
 
@@ -27,6 +28,7 @@ public class Duke {
                 String input = sc.nextLine();
                 Matcher matchMark = mark.matcher(input);
                 Matcher matchIndex = index.matcher(input);
+                Matcher matchDelete = delete.matcher(input);
                 if (input.equals("bye")) {
                     System.out.println("Bye. Hope to see you again!");
                     break;
@@ -75,6 +77,12 @@ public class Duke {
                     }
                     System.out.println("Got it. I've added this task:");
                     System.out.println(toAdd.toString());
+                    System.out.println("Now you have " + tasks.size() + Duke.numOfTasks(tasks) + "in the list.");
+                } else if (matchDelete.find()) {
+                    Task toDelete = tasks.get(Integer.parseInt(matchDelete.group(2))-1);
+                    System.out.println("Alright, removing this task:");
+                    System.out.println(toDelete.toString());
+                    tasks.remove(toDelete);
                     System.out.println("Now you have " + tasks.size() + Duke.numOfTasks(tasks) + "in the list.");
                 } else {
                     throw new IncorrectInputException("Enter a valid task!");
