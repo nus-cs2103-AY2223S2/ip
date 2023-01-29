@@ -1,5 +1,10 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class Task {
     private String description;
+    DateFormat readFormat = new SimpleDateFormat( "dd/mm/yyyy hhmm");
+    DateFormat writeFormat = new SimpleDateFormat( "E, MMM dd yyyy, h:mm aa");
     private boolean isComplete;
     public Task(String description) {
         this.description = description;
@@ -20,7 +25,8 @@ public class Task {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("[] " + this.description);
+        sb.append("[] ");
+        sb.append(this.description);
         if (this.isComplete) {
             sb.insert(1, "X");
         }
