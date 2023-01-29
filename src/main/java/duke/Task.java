@@ -1,9 +1,14 @@
 package duke;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
+/**
+ * Abstract class which specifies the structure of a Task.
+ * <p>
+ * Subclasses of <b>Task</b> are:
+ * <li>ToDo
+ * <li> DeadlineTask
+ * <li>Event </p>
+ * @author Merrick
+ */
 public abstract class Task {
     protected String taskName;
     protected boolean completed = false;
@@ -11,17 +16,31 @@ public abstract class Task {
     protected static int numTasks = 0;
     protected boolean deleted = false;
 
+    /**
+     * Constructor for Task class.
+     *
+     * @param taskName Description of task.
+     * @param completed Specifies if the task is completed.
+     */
     public Task(String taskName, boolean completed) {
         this.taskName = taskName;
         this.completed = completed;
         numTasks++;
     }
 
+    /**
+     * Constructor for Task class
+     * @param taskName Description of task.
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         numTasks++;
     }
 
+    /**
+     * Marks a task as done and prints out action done.
+     * @param completion Completion status of the task.
+     */
     public void setCompletion(boolean completion) {
         this.completed = completion;
         if (completion) {
@@ -31,10 +50,18 @@ public abstract class Task {
         }
     }
 
+    /**
+     * Outputs the type of task.
+     * @return String representing the type of the Task
+     */
     public String displayType() {
         return String.format("[%s]", this.taskType);
     }
 
+    /**
+     * Outputs completion status of task
+     * @return String represented the completion status of the Task.
+     */
     public String displayMark() {
         if (this.completed) {
             return "X";
@@ -42,23 +69,10 @@ public abstract class Task {
         return " ";
     }
 
-
-    public static void saveTaskData(Task t, int isAppend) {
-        String PATH = "src/main/data";
-        File directory = new File("src/main/data/");
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-        try {
-            FileWriter fw = new FileWriter("src/main/data/seedu.duke.txt", true);
-            String description = String.format("%s|%d|%s\n", t.taskType, isAppend, t.taskName);
-            fw.write(description);
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Unable to save information into the file");
-        }
-    }
-
+    /**
+     * Returns the Task string to be stored in a .txt file for saving.
+     * @return String to be saved in Task history.
+     */
     public String saveTaskString() {
         return String.format("%s|%s|%b", this.taskType, this.taskName, this.completed);
     }
