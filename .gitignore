@@ -7,7 +7,7 @@
 
 
 # Data logger file
-src/main/data/duke.txt
+src/main/data/seedu.duke.txt
 
 # Gradle build files
 /.gradle/

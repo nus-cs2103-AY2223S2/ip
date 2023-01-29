@@ -34,8 +34,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/main/data/", "src/main/data/duke.txt").run();
-
+        new Duke("src/main/data/", "src/main/data/seedu.duke.txt").run();
     }
 
     public Duke(String fileDir, String filePath) {

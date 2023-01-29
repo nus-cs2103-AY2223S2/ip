@@ -50,7 +50,7 @@ public abstract class Task {
             directory.mkdir();
         }
         try {
-            FileWriter fw = new FileWriter("src/main/data/duke.txt", true);
+            FileWriter fw = new FileWriter("src/main/data/seedu.duke.txt", true);
             String description = String.format("%s|%d|%s\n", t.taskType, isAppend, t.taskName);
             fw.write(description);
             fw.close();

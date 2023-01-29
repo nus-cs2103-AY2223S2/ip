@@ -47,7 +47,6 @@ public class DeadlineTask extends Task {
                 }
             }
         }
-
         DeadlineTask d = new DeadlineTask(taskName, DateTimeParser.dateTimeParser(deadline));
         t.addTask(d);
     }
