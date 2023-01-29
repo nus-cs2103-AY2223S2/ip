@@ -1,6 +1,6 @@
 package aqua.graphic;
 
-import aqua.logic.Executor;
+import aqua.manager.AppManager;
 import aqua.manager.IoManager;
 import aqua.manager.LogicManager;
 import javafx.application.Platform;
@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 public class MainWindow extends UiComponent<VBox> {
     private static final String PATH_FXML_FILE = "MainWindow.fxml";
 
-    private final Executor executor;
+    private final AppManager executor;
 
     @FXML private ScrollPane textScrollPane;
     @FXML private VBox textDisplayArea;
@@ -51,9 +51,9 @@ public class MainWindow extends UiComponent<VBox> {
     }
 
 
-    private Executor initialiseExecutor(LogicManager logicManager) {
+    private AppManager initialiseExecutor(LogicManager logicManager) {
         IoManager ioManager = new IoManager(this::getInput, this::displayReply);
-        return new Executor(logicManager, ioManager);
+        return new AppManager(logicManager, ioManager);
     }
 
 

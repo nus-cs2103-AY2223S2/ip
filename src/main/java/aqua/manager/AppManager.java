@@ -1,20 +1,20 @@
-package aqua.logic;
+package aqua.manager;
 
-import aqua.manager.LogicManager;
 import aqua.exception.LoadException;
+import aqua.logic.CommandLineInput;
+import aqua.logic.ExecutionService;
 import aqua.logic.command.ListCommand;
-import aqua.manager.IoManager;
 
 
 /**
  * The executor of ExecutionService.
  */
-public class Executor {
+public class AppManager {
     private final LogicManager manager;
     private final IoManager ioManager;
 
 
-    public Executor(LogicManager manager, IoManager uiManager) {
+    public AppManager(LogicManager manager, IoManager uiManager) {
         this.manager = manager;
         this.ioManager = uiManager;
     }
