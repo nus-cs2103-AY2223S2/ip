@@ -102,6 +102,13 @@ public class Parser {
                     ui.displayDeleteTask(taskList.getAtIndex(taskIndex));
                     taskList.removeAtIndex(taskIndex.intValue());
                     break;
+                case "find":
+                    if (splitInput.length == 1) {
+                        throw new DukeException("'find' requires additional arguments!");
+                    }
+                    ui.displayMatchingTasks(taskList,splitInput[1]);
+
+                    break;
                 default:
                     throw new DukeException("Please enter a valid command!");
             }

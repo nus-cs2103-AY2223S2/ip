@@ -22,6 +22,25 @@ public class Ui {
         }
     }
 
+    public void displayMatchingTasks(TaskList taskList, String toMatch) {
+        if (taskList.getSize() == 0) {
+            System.out.println("You have no tasks in your list!");
+            return;
+        }
+        boolean hasFoundMatch = false;
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < taskList.getSize(); i++) {
+            Task task = taskList.getAtIndex(i);
+            if(task.description.contains(toMatch)) {
+                System.out.println(i + 1 + "." + task);
+                hasFoundMatch = true;
+            }
+        }
+        if(!hasFoundMatch) {
+            System.out.println("No Tasks with matching Description found!");
+        }
+    }
+
     public void displayText(String text) {
         System.out.println(text);
     }
