@@ -50,14 +50,4 @@ public class TaskList {
     public void remove(int n) {
         task_list.remove(n);
     }
-
-    /**
-     * Show the TaskList.
-     */
-    public void showList() {
-        System.out.println("Here are the tasks in your list:");
-        for (Task tk : task_list) {
-            System.out.println( (task_list.indexOf(tk)+1) + "." + tk.toString());
-        }
-    }
 }

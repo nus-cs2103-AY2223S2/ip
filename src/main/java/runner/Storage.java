@@ -66,15 +66,6 @@ public class Storage {
         }
     }
 
-    public void check_add(String line, Task t) {
-        if (line.charAt(1) == '0') {
-            t.uncomplete();
-        } else {
-            t.complete();
-        }
-        taskList.add(t);
-    }
-
     /**
      * Save tasks to the existing file.
      */
@@ -88,5 +79,19 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    /**
+     * Check the status of the Task and add it to the TaskList.
+     * @param line Description of a Task.
+     * @param t Task checked.
+     */
+    public void check_add(String line, Task t) {
+        if (line.charAt(1) == '0') {
+            t.uncomplete();
+        } else {
+            t.complete();
+        }
+        taskList.add(t);
     }
 }

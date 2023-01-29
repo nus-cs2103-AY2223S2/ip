@@ -33,7 +33,7 @@ public class Ui {
      */
     public static void markMSG(Task t) {
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[X] " + t.msg);
+        System.out.println("[X] " + t.getMsg());
     }
 
     /**
@@ -42,7 +42,7 @@ public class Ui {
      */
     public static void unmarkMSG(Task t) {
         System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println("[ ] " + t.msg);
+        System.out.println("[ ] " + t.getMsg());
     }
 
 
@@ -66,5 +66,25 @@ public class Ui {
         System.out.println("Got it. I've added this task:");
         System.out.println(t);
         System.out.println("Now you have " + n + " tasks in the list.");
+    }
+
+    /**
+     * Show the TaskList of a Duke.
+     */
+    public static void showList(TaskList t) {
+        System.out.println("Here are the tasks in your list:");
+        for (Task tk : t.get_list()) {
+            System.out.println( (t.get_list().indexOf(tk)+1) + "." + tk.toString());
+        }
+    }
+
+    /**
+     * Show the TaskList after find keywords.
+     */
+    public static void findList(TaskList t) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task tk : t.get_list()) {
+            System.out.println( (t.get_list().indexOf(tk)+1) + "." + tk.toString());
+        }
     }
 }

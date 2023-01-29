@@ -27,7 +27,7 @@ public class Parser {
         if (info.equals("bye")) {
             terminate();
         } else if (info.equals("list")) {
-            duke.taskList.showList();
+            Ui.showList(duke.taskList);
         } else {
             read(info);
         }
@@ -58,6 +58,9 @@ public class Parser {
                 case "event":
                     add_event(arg);
                     break;
+                case "find":
+                    find(arg);
+                    break;
                 case "delete":
                     delete(arg);
                     break;
@@ -75,6 +78,16 @@ public class Parser {
     public void terminate() {
         Ui.ending();
         duke.exit = 1;
+    }
+
+    public void find(String key) {
+        TaskList ans = new TaskList();
+        for(Task tk: duke.taskList.get_list()) {
+            if (tk.getMsg().contains(key)) {
+                ans.add(tk);
+            }
+        }
+        Ui.findList(ans);
     }
 
     /**

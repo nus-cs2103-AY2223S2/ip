@@ -5,7 +5,7 @@ package components;
  */
 public class Task {
     private int done;
-    public String msg;
+    private final String msg;
 
     /**
      * Constructor for a Task object.
@@ -16,6 +16,12 @@ public class Task {
         this.done = 0;
     }
 
+    /**
+     * Get the msg of a Task.
+     */
+    public String getMsg() {
+        return this.msg;
+    }
 
     /**
      * Mark done after complete the Task.
@@ -35,7 +41,7 @@ public class Task {
      * Store the information of the task into one line.
      */
     public String getInfo() {
-        StringBuffer sb = new StringBuffer("");
+        StringBuilder sb = new StringBuilder("");
         if (this instanceof Todo) {
             sb.append('T');
             if (this.done == 0) {
