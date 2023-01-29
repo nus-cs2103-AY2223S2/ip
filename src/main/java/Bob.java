@@ -1,6 +1,12 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 import org.apache.commons.lang3.StringUtils;
 
 public class Bob {
@@ -14,6 +20,9 @@ public class Bob {
     private static String padLeft (String s) {
         return " ".repeat(spacing) + s;
     }
+
+    private final Path dataDirectoryPath = Paths.get("data/");
+    private final Path dataFilePath = Paths.get("data/taskList.txt");
 
     // Accepts strings that can be separated by \n
     private void formattedPrint(String s) {
@@ -30,6 +39,7 @@ public class Bob {
     }
     private void printList() {
         System.out.println(wrapper);
+        System.out.println(padLeft("Current task list: "));
         // Iterate through list items sequentially
         for (int i = 0, n = this.taskList.size(); i < n; i++) {
             Task t = this.taskList.get(i);
@@ -176,16 +186,8 @@ public class Bob {
         taskList.remove(index - 1);
     }
 
-    /**
-     * Main program for Bob, our chat-bot
-     */
-    public void start() {
+    private void readTaskList() {
         String flag = "bye";
-
-        //Introduction message
-        formattedPrint("Hi, my name is Bob :)\n" +
-                "How may I help you?");
-
         String input = scanner.nextLine();
 
         while (!input.equals(flag)) {
@@ -204,6 +206,108 @@ public class Bob {
             }
             input = scanner.nextLine();
         }
+    }
+
+    private String encodeTask(Task t) {
+        String common = String.format("%s | %s | %s", t.type, t.isDone, t.description);
+        StringBuilder encode = new StringBuilder(common);
+        switch (t.type) {
+        case "D":
+            Deadline d = (Deadline) t;
+            encode.append(String.format(" | %s", d.deadline));
+            break;
+        case "E":
+            Event e = (Event) t;
+            encode.append(String.format(" | %s | %s", e.start, e.end));
+            break;
+        }
+        return encode.toString();
+    }
+
+    private Task decodeTask(String s) throws IOException {
+        Task t;
+        // Separator is " | ", \\ for regex since | is a special character
+        String[] input = s.split(" \\| ");
+        String type = input[0];
+        Boolean isDone = Boolean.parseBoolean(input[1]);
+        String desc = input[2];
+
+        switch (type) {
+        case "T":
+            t = new Todo(desc);
+            break;
+        case "D":
+            String deadline = input[3];
+            t = new Deadline(desc, deadline);
+            break;
+        case "E":
+            String start = input[3];
+            String end = input[4];
+            t = new Event(desc, start, end);
+            break;
+        default:
+            throw new IOException("Invalid file input encountered!");
+        }
+        t.isDone = isDone;
+        return t;
+    }
+
+    // Using java.nio.file packages for cross-platform compatibility
+    private void saveList() {
+        try {
+            // Create data directory if it does not exist
+            // Assume that a non-directory data file does not exist
+            if (!Files.exists(dataDirectoryPath)) {
+                Files.createDirectory(dataDirectoryPath);
+            }
+            BufferedWriter fw = Files.newBufferedWriter(dataFilePath);
+            for (Task t : taskList) {
+                String outputLine = encodeTask(t);
+                fw.write(outputLine); // Write to buffer
+                fw.newLine();
+            }
+            fw.flush(); // Write to file
+        } catch (IOException e) {
+            String errorMessage = "Error while saving to file - " + e.getMessage();
+            formattedPrint(errorMessage);
+        };
+    }
+
+    private void loadList() {
+        try {
+            if (Files.exists(dataFilePath)) {
+                BufferedReader fr = Files.newBufferedReader(dataFilePath);
+
+                String line = fr.readLine();
+                while (line != null) { // While not EOF
+                    Task t = decodeTask(line);
+                    taskList.add(t);
+                    line = fr.readLine();
+                }
+            }
+        } catch (IOException e) {
+            String errorMessage = "Error while opening file - " + e.getMessage();
+            formattedPrint(errorMessage);
+        } finally {
+            printList();
+        }
+    }
+    /**
+     * Main program for Bob, our chat-bot
+     */
+    public void start() {
+        //Introduction message
+        formattedPrint("Hi, my name is Bob :)\n" +
+                "How may I help you?");
+
+        // Load task list from file
+        loadList();
+
+        // Read tasks from user
+        readTaskList();
+
+        // Save task list to file
+        saveList();
 
         // Goodbye message
         formattedPrint("See you soon!");
