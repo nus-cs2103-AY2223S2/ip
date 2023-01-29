@@ -22,7 +22,7 @@ public class TaskStorage {
     }
 
     public Task getTask(int i) {
-        return this.taskstorage.get(i);
+        return taskstorage.get(i);
     }
     public static void deleteTask(Task t) {
         System.out.println("Noted. I've removed this task:");
