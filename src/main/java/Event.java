@@ -10,16 +10,13 @@ public class Event extends Task{
 
     /**
      * Constructor
-     * @param description the entire description including task name and time of the task
+     * @param detail the description including task name of the task
+     * @param time the time of the task
      */
-    public Event(String description) {
-        super(description);
-        String detail = description.split("/")[0].split(" ", 2)[1];
+    public Event(String detail, String time) {
+        super(detail);
         this.eventDetail = detail;
-        String timeDescription = description.split("/")[1].split(" ")[0] + ": " + description.split("/")[1].split(" ",2)[1] +
-                description.split("/")[2].split(" ")[0] + ": " + description.split("/")[2].split(" ",2)[1];
-        this.timeDescription = timeDescription;
-        this.time = timeDescription.split(": ",2)[1].split(":", 2)[0] + timeDescription.split(":",2)[1].split(":", 2)[1];
+        this.time = time;
     }
 
     /**
@@ -28,7 +25,8 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + "[" + super.getStatusIcon() + "] " + eventDetail + "(" + timeDescription +  ")";
+        return "[E]" + "[" + super.getStatusIcon() + "] " + eventDetail + "(from: " + time.split("from ")[1].split(" to ")[0] + " to:"
+                + time.split("from ", 2)[1].split(" to")[1] +  ")";
     }
 
     /**

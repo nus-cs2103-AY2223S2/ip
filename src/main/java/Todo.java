@@ -8,7 +8,7 @@ public class Todo extends Task{
      */
     public Todo(String description) {
         super(description);
-        this.todo = description.split(" ",2)[1];
+        this.todo = description;
     }
     /**
      * String representation of the task

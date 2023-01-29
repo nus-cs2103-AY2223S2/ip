@@ -6,21 +6,17 @@ public class Deadline extends Task{
 
     protected String eventDetail;
 
-    protected String timeDescription;
-
     protected LocalDate time;
 
     /**
      * Constructor
-     * @param description a string description of the entire description of the task
+     * @param detail a string description of the entire description of the task
+     * @param time deadline date
      */
-    public Deadline(String description) {
-        super(description);
-        String detail = description.split("/")[0].split(" ", 2)[1];
+    public Deadline(String detail, LocalDate time) {
+        super(detail);
         this.eventDetail = detail;
-        String timeDescription = description.split("/")[1].split(" ")[0] + ": " + description.split("/")[1].split(" ",2)[1];
-        this.timeDescription = timeDescription;
-        this.time = LocalDate.parse(timeDescription.split(": ",2)[1]);
+        this.time = time;
     }
 
     /**
@@ -29,7 +25,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + "[" + this.getStatusIcon() + "] " + eventDetail + "(" + timeDescription + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + eventDetail + "(by: " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
     /**
      * Gets the type of task
@@ -50,7 +46,7 @@ public class Deadline extends Task{
      * @return a String representing time
      */
     public String getTime() {
-        return this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return time.toString();
     }
 
 }
