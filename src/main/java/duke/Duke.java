@@ -4,10 +4,10 @@ import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.io.FileStorage;
 import duke.task.TaskList;
+import duke.ui.Cli;
 import duke.ui.Ui;
 
 import java.nio.file.Path;
-import java.util.Scanner;
 
 /**
  * Main class of the app.
@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Duke {
     private static final Path saveFilePath = Path.of("./save-data/task-list.csv");
 
-    private static final Ui ui = new Ui(System.out);
+    private static final Ui ui = new Cli(System.out, System.in);
     private static final Parser parser = new Parser();
 
     private static TaskList tasks;
@@ -56,10 +56,8 @@ public class Duke {
     }
 
     private static void runInputLoop() {
-        Scanner scanner = new Scanner(System.in);
-
         while (true) {
-            String input = scanner.nextLine();
+            String input = ui.getInput();
 
             String message;
             try {
@@ -76,6 +74,6 @@ public class Duke {
             }
         }
 
-        scanner.close();
+        ui.close();
     }
 }
