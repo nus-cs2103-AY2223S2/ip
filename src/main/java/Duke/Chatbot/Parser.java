@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 
 public class Parser {
-    public static final Map<String, BiPredicate<Chatbot, String>> commands = new HashMap<String, BiPredicate<Chatbot, String>>();
+    public static final Map<String, BiPredicate<Chatbot, String>> commands
+            = new HashMap<String, BiPredicate<Chatbot, String>>();
     private final Chatbot chatbot;
     private final Ui ui;
 
@@ -127,7 +128,8 @@ public class Parser {
         String[] userCommand = nextLine.split(" ", 2);
         String upperCaseUserCommand = userCommand[0].toUpperCase();
         if (commands.containsKey(upperCaseUserCommand)) {
-            boolean processedCommandState = commands.get(upperCaseUserCommand).test(chatbot, userCommand.length > 1 ? userCommand[1] : "");
+            boolean processedCommandState = commands.get(upperCaseUserCommand)
+                    .test(chatbot, userCommand.length > 1 ? userCommand[1] : "");
             if (!processedCommandState) {
                 chatbot.isActive = false;
                 throw new RuntimeException();

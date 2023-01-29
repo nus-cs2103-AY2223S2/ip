@@ -101,12 +101,14 @@ public class TaskList {
         return result;
     }
 
-    public Task convertToTask(Tasktype type, String[] arguments) throws DateTimeParseException, UnimplementedTaskTypeException {
+    public Task convertToTask(Tasktype type, String[] arguments)
+            throws DateTimeParseException, UnimplementedTaskTypeException {
         switch (type) {
             case TODO:
                 return new TodoTask(arguments[0]);
             case EVENT:
-                return new EventTask(arguments[0], LocalDateTime.parse(arguments[1]), LocalDateTime.parse(arguments[2]));
+                return new EventTask(arguments[0], LocalDateTime.parse(arguments[1]),
+                        LocalDateTime.parse(arguments[2]));
             case DEADLINE:
                 return new DeadlineTask(arguments[0], LocalDateTime.parse(arguments[1]));
             default:

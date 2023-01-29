@@ -14,7 +14,8 @@ public class EventTask extends Task {
 
     public static Task loadData(String input) {
         String[] inputEvent = input.split("\\|", 5);
-        Task newEvent = new EventTask(inputEvent[2], LocalDateTime.parse(inputEvent[3]), LocalDateTime.parse(inputEvent[4]));
+        Task newEvent = new EventTask(inputEvent[2], LocalDateTime.parse(inputEvent[3]),
+                LocalDateTime.parse(inputEvent[4]));
         newEvent.loadCompletionStatus(inputEvent[1]);
         return newEvent;
     }
@@ -27,6 +28,7 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + displayLocalDate(startDate) + " to: " + displayLocalDate(dueDate) + ")";
+        return "[E]" + super.toString() + "(from: " + displayLocalDate(startDate)
+                + " to: " + displayLocalDate(dueDate) + ")";
     }
 }
