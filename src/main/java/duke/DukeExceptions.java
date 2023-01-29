@@ -19,6 +19,9 @@ public class DukeExceptions extends Exception {
         if (printThisOut.equals("event")) {
             toReturn = ":( Sorry, the description of an " + this.printThisOut + " cannot be empty!";
         }
+        if (printThisOut.equals("find")) {
+            toReturn = ":( Sorry, please input a keyword!";
+        }
         return toReturn;
     }
 }

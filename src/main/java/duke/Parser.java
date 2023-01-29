@@ -20,6 +20,11 @@ public class Parser {
                 return;
             }
 
+            if (input.startsWith("find")) {
+                handleFindTask(input, listOfTasks);
+                return;
+            }
+
             if (input.startsWith("deadline")) {
                 handleDeadlineTask(input, listOfTasks);
                 return;
@@ -56,6 +61,19 @@ public class Parser {
             }
 
             throw new DukeExceptions("");
+        } catch (DukeExceptions DE) {
+            System.out.println(DE.toString());
+        }
+    }
+
+    public void handleFindTask(String input, TaskList listOfTasks) throws DukeExceptions {
+        try {
+            String[] checkForKeywordArr = input.split(" ");
+            if (checkForKeywordArr.length < 2) {
+                throw new DukeExceptions("find");
+            }
+            String keyword = input.substring(4);
+            listOfTasks.findTasks(keyword);
         } catch (DukeExceptions DE) {
             System.out.println(DE.toString());
         }

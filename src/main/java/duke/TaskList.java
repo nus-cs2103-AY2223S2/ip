@@ -41,6 +41,20 @@ public class TaskList {
         }
     }
 
+    public void findTasks(String keyword) {
+        String starter = "Here are the matching tasks in your list:";
+        Integer firstIndex = 1;
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            Task currTask = listOfTasks.get(i);
+            if (currTask.getName().contains(keyword)) {
+                String printThis = "\n" + firstIndex.toString() + "." + currTask.toString();
+                firstIndex++;
+                starter += printThis;
+            }
+        }
+        System.out.println(starter);
+    }
+
     public void addTask(Task toAdd) {
         listOfTasks.add(toAdd);
         String toPrint = "";
