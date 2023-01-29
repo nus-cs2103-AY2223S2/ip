@@ -16,6 +16,7 @@ public class SaveCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws CatBotException {
+        ui.setNextOutput("Nice to meet mew!");
         storage.saveToFile(tasks);
     }
 }
