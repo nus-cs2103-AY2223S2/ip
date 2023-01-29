@@ -2,13 +2,16 @@ package duke;
 
 import duke.task.*;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Command {
     private String command;
     private String args;
 
     public Command(String command, String args) {
-        this.command = command;
-        this.args = args;
+        this.command = command.trim();
+        this.args = args.trim();
     }
 
     public void execArgs(TaskList taskList) throws DukeException {
@@ -60,20 +63,26 @@ public class Command {
         if (args.length() == 0) {
             throw new DukeException("What is the Deadline task???");
         } else {
-            String desc = this.args.substring(0,
-                    this.args.indexOf("/by")
-            ).trim();
+            Pattern deadlinePattern = Pattern.compile(".+/by \\d{2}/\\d{2}/\\d{4} \\d{4}");
+            Matcher matchDeadline = deadlinePattern.matcher(this.args);
+            if (matchDeadline.find()) {
+                String desc = this.args.substring(0,
+                        this.args.indexOf("/by")
+                ).trim();
 
-            String by = args.substring(
-                    args.indexOf("/by") + "/by ".length()
-            );
-
-            Task addTask = new Deadline(desc, by);
-            taskList.add(addTask);
-            System.out.println("Got it. I've added this task:\n" +
-                    addTask.toString() + "\n" +
-                    "Now you have " + taskList.taskCount() +
-                    "in the list.\n");
+                String by = args.substring(
+                        args.indexOf("/by") + "/by ".length()
+                );
+                Task addTask = new Deadline(desc, by);
+                taskList.add(addTask);
+                System.out.println("Got it. I've added this task:\n" +
+                        addTask.toString() + "\n" +
+                        "Now you have " + taskList.taskCount() +
+                        "in the list.\n");
+            } else {
+                throw new DukeException("Incorrect format!\n" +
+                        "Format should be: <desc> /by dd/MM/yy HHmm");
+            }
         }
     }
 
@@ -81,37 +90,46 @@ public class Command {
         if (args.length() == 0) {
             throw new DukeException("What is the Event task???");
         } else {
-            String desc = args.substring(0,
-                    args.indexOf("/from")
-            );
+            Pattern eventPattern = Pattern.compile(".+/from \\d{2}/\\d{2}/\\d{4} \\d{4} /to \\d{2}/\\d{2}/\\d{4} \\d{4}");
+            Matcher matchEvent = eventPattern.matcher(this.args);
+            if (matchEvent.find()) {
+                String desc = args.substring(0,
+                        args.indexOf("/from")
+                );
 
-            String from = args.substring(
-                    args.indexOf("/from") + "/from ".length(),
-                    args.indexOf("/to")
-            );
+                String from = args.substring(
+                        args.indexOf("/from") + "/from ".length(),
+                        args.indexOf("/to")
+                );
 
-            String to = args.substring(
-                    args.indexOf("/to") + "/to ".length()
-            );
+                String to = args.substring(
+                        args.indexOf("/to") + "/to ".length()
+                );
 
-            Task addTask = new Events(desc, from, to);
-            taskList.add(addTask);
-            System.out.println("Got it. I've added this task:\n" +
-                    addTask.toString() + "\n" +
-                    "Now you have " + taskList.taskCount() +
-                    "in the list.\n");
+                Task addTask = new Events(desc, from, to);
+                taskList.add(addTask);
+                System.out.println("Got it. I've added this task:\n" +
+                        addTask.toString() + "\n" +
+                        "Now you have " + taskList.taskCount() +
+                        "in the list.\n");
+            } else {
+                String errMessage = "Incorrect format!\n" +
+                        "Format should be: <desc> /from dd/MM/yy HHmm" +
+                        " /to dd/MM/yy HHmm";
+                throw new DukeException(errMessage);
+            }
         }
     }
 
-    private void mark(TaskList taskList) {
+    private void mark(TaskList taskList) throws DukeException {
         taskList.markTask(Integer.parseInt(this.args));
     }
 
-    private void unMark(TaskList taskList) {
+    private void unMark(TaskList taskList) throws DukeException {
         taskList.unMarkTask(Integer.parseInt(this.args));
     }
 
-    private void delete(TaskList taskList){
+    private void delete(TaskList taskList) throws DukeException {
         taskList.remove(Integer.parseInt(this.args));
     }
 

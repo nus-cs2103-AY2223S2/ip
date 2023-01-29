@@ -2,6 +2,7 @@ package duke;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,6 +14,9 @@ import java.util.List;
 public class DukeTest {
     @Test
     public void allCommandTest() throws DukeException {
+
+        ArrayList<DukeException> dukeExceptions = new ArrayList<>(100);
+
         String[] commands = {
                 "todo shut Suigen up",
                 "deadline kill Suigen /by 28/01/2023 2300",
@@ -24,13 +28,17 @@ public class DukeTest {
                 "list",
                 "bye"
         };
-        Storage store = new Storage(Paths.get(System.getProperty("user.dir"), "data", "Duke.txt"));
-        TaskList taskList = new TaskList(store.load());
+        try {
+            Storage store = new Storage(Paths.get(System.getProperty("user.dir"), "data", "Duke.txt"));
+            TaskList taskList = new TaskList(store.load());
 
-        for (String command : commands){
-            Parser parse = new Parser(command);
-            Command cmd = parse.parseArgs();
-            cmd.execArgs(taskList);
+            for (String command : commands) {
+                Parser parse = new Parser(command);
+                Command cmd = parse.parseArgs();
+                cmd.execArgs(taskList);
+            }
+        } catch (DukeException dukeErr){
+            fail(dukeErr.errorMessage);
         }
     }
 

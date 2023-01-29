@@ -80,20 +80,44 @@ public class TaskList {
     }
 
 
-    public void add(Task task) {
-        storage.add(task);
+    public void add(Task task) throws DukeException{
+        try {
+            storage.add(task);
+        } catch (IndexOutOfBoundsException err){
+            throw new DukeException("Invalid Index given!");
+        }
     }
 
-    public void remove(int index) {
-        storage.remove(index);
+    public void remove(int index) throws DukeException{
+        try {
+            storage.remove(index);
+        } catch (IndexOutOfBoundsException err){
+            throw new DukeException("Invalid Index given!");
+        }
     }
 
-    public void markTask(int index) {
-        storage.get(index).markAsDone();
+    public void markTask(int index) throws DukeException{
+        try {
+            storage.get(index).markAsDone();
+            System.out.println("_____________________________________\n" +
+                    "Nice! I've marked this task as done:\n" +
+                    storage.get(index).toString() + "\n" +
+                    "_____________________________________\n");
+        } catch (IndexOutOfBoundsException err){
+            throw new DukeException("Invalid Index given!");
+        }
     }
 
-    public void unMarkTask(int index) {
-        storage.get(index).unMark();
+    public void unMarkTask(int index) throws DukeException{
+        try {
+            storage.get(index).unMark();
+            System.out.println("_____________________________________\n" +
+                    "Ok. I've marked this task as not done yet:\n" +
+                    storage.get(index).toString() + "\n" +
+                    "_____________________________________\n");
+        } catch (IndexOutOfBoundsException err){
+            throw new DukeException("Invalid Index given!");
+        }
     }
 
     public ArrayList<Task> loadTaskList(){
@@ -102,9 +126,9 @@ public class TaskList {
 
     public String taskCount(){
         if (this.storage.size() == 1){
-            return "1 task";
+            return "1 task ";
         } else {
-            return this.storage.size() + "tasks";
+            return this.storage.size() + " tasks ";
         }
     }
 }
