@@ -2,33 +2,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 class TaskList {
-    List<Pair<String, Boolean>> listTask;
+    List<Task> listTask;
 
     public TaskList() {
-        this.listTask = new ArrayList<Pair<String, Boolean>>();
+        this.listTask = new ArrayList<Task>();
     }
 
     TaskList markDone(int index) {
-        Pair currentPair = this.listTask.get(index);
-        Pair newPair = new Pair(currentPair.first(), true);
-        this.listTask.set(index, newPair);
+        Task currentTask = this.listTask.get(index);
+        this.listTask.set(index, currentTask.markDone());
         return this;
     }
 
     TaskList unMark(int index) {
-        Pair currentPair = this.listTask.get(index);
-        Pair newPair = new Pair(currentPair.first(), false);
-        this.listTask.set(index, newPair);
+        Task currentTask = this.listTask.get(index);
+        this.listTask.set(index, currentTask.unMark());
         return this;
     }
 
-    TaskList addTask(String task) {
-        this.listTask.add(new Pair(task, false));
+    TaskList addTask(Task task) {
+        this.listTask.add(task);
         return this;
     }
 
     String getTask(int index) {
-        return this.listTask.get(index).first();
+        return this.listTask.get(index).toString();
     }
 
     @Override
@@ -38,12 +36,7 @@ class TaskList {
         } else {
             String toPrintOut = "";
             for (int i = 0; i < this.listTask.size(); i++) {
-                Pair currentPair = this.listTask.get(i);
-                if (currentPair.second().equals(true)) {
-                    toPrintOut += (i + 1) + ". [X] " + this.listTask.get(i).first() + '\n';
-                } else {
-                    toPrintOut += (i + 1) + ". [ ] " + this.listTask.get(i).first() + '\n';
-                }
+                toPrintOut += (i + 1) + ". " + this.listTask.get(i).toString() + '\n';
             }
             return toPrintOut;
         }
