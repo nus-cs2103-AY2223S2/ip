@@ -27,18 +27,18 @@ public class Parser {
         }
 
         switch (op) {
-            case MARK:
-                return markTaskParser(input);
-            case UNMARK:
-                return unmarkTaskParser(input);
-            case TODO:
-            case DEADLINE:
-            case EVENT:
-                return addTaskParser(input);
-            case LIST:
-                return new ListTasksCommand();
-            case DELETE:
-                return deleteTaskParser(input);
+        case MARK:
+            return markTaskParser(input);
+        case UNMARK:
+            return unmarkTaskParser(input);
+        case TODO:
+        case DEADLINE:
+        case EVENT:
+            return addTaskParser(input);
+        case LIST:
+            return new ListTasksCommand();
+        case DELETE:
+            return deleteTaskParser(input);
         }
 
         return null; // cannot reach here, as duke.command.Operation.valueOf throws IllegalArgumentException
@@ -62,24 +62,24 @@ public class Parser {
         String description = command[1];
 
         switch (op) {
-            case TODO:
-                return new AddTodoCommand(description);
-            case DEADLINE:
-                String[] deadlineString = description.split("/by", 2);
-                String deadlineDescription = deadlineString[0];
-                LocalDate by = LocalDate.parse(deadlineString[1].trim());
+        case TODO:
+            return new AddTodoCommand(description);
+        case DEADLINE:
+            String[] deadlineString = description.split("/by", 2);
+            String deadlineDescription = deadlineString[0];
+            LocalDate by = LocalDate.parse(deadlineString[1].trim());
 
-                return new AddDeadlineCommand(deadlineDescription, by);
-            case EVENT:
-                String[] eventString = description.split("/from", 2);
-                String eventDescription = eventString[0];
+            return new AddDeadlineCommand(deadlineDescription, by);
+        case EVENT:
+            String[] eventString = description.split("/from", 2);
+            String eventDescription = eventString[0];
 
-                // Parse the string to get to and from dates of the event
-                String[] fromAndTo = eventString[1].split("/to", 2);
-                LocalDate from = LocalDate.parse(fromAndTo[0].trim());
-                LocalDate to = LocalDate.parse(fromAndTo[1].trim());
+            // Parse the string to get to and from dates of the event
+            String[] fromAndTo = eventString[1].split("/to", 2);
+            LocalDate from = LocalDate.parse(fromAndTo[0].trim());
+            LocalDate to = LocalDate.parse(fromAndTo[1].trim());
 
-                return new AddEventCommand(eventDescription, from, to);
+            return new AddEventCommand(eventDescription, from, to);
         }
 
         return null;
