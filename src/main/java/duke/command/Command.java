@@ -29,7 +29,7 @@ public abstract class Command {
     }
 
     /**
-     * Check if the format of the commands are correct.
+     * Check that the format of the commands are correct.
      *
      * @param cmd - The given command description entered by the user.
      * @return boolean - true or false according to the formatting.
