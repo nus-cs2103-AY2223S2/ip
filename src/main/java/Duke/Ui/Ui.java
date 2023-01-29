@@ -2,9 +2,15 @@ package Duke.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Represents the user interface of the Chat bot.
+ */
 public class Ui {
     Scanner sc;
 
+    /**
+     * Prints the welcome message.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -12,7 +18,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke.Duke\nWhat can I do for you?");
         printDivider();
     }
 
@@ -24,6 +30,9 @@ public class Ui {
         System.out.println(err);
     }
 
+    /**
+     * Starts and initializes the scanner.
+     */
     public void startScanner() {
         this.sc = new Scanner(System.in).useDelimiter(" ");
     }
