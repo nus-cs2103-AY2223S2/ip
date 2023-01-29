@@ -6,34 +6,26 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 
 /**
- * Ui class to perform the outputting tasks to user
+ * Ui class to perform the outputting to user
  */
 public class Ui {
-    private final String STARTING = "    ____________________________________________________________\n";
-    private final String ENDING = "    ____________________________________________________________\n";
-    private final String SPACING = "     ";
-    private static final String INTRO = "    ____________________________________________________________\n"
-            + "     Hello! I'm Duke\n"
-            + "     What can I do for you?\n"
-            + "    ____________________________________________________________\n";
-    private static final String OUTRO = "    ____________________________________________________________\n"
-            + "     Bye. Hope to see you again soon!\n"
-            + "    ____________________________________________________________\n";
+    private static final String INTRO = "Hello! I'm Duke\nWhat can I do for you?\n";
+    private static final String OUTRO = "Bye. Hope to see you again soon!\n";
 
     public Ui() {}
 
     /**
      * Print the intro of Duke CLI
      */
-    public void showIntro() {
-        System.out.println(Ui.INTRO);
+    public String getIntro() {
+        return Ui.INTRO;
     }
 
     /**
      * Print the outro of Duke CLI
      */
-    public void showOutro() {
-        System.out.println(Ui.OUTRO);
+    public String getOutro() {
+        return Ui.OUTRO;
     }
 
     /**
@@ -48,9 +40,8 @@ public class Ui {
         //wrap string with the correct indentation and lines when returning add task string
         //assumes s contains the nextline character
         StringBuilder sb = new StringBuilder();
-        sb.append(this.STARTING).append(this.SPACING).append("Got it. I've added this task:\n  ");
-        sb.append(this.SPACING).append(s).append(this.SPACING);
-        sb.append(String.format("Now you have %d tasks in the list.\n", size)).append(this.ENDING);
+        sb.append("Got it. I've added this task:\n  ").append(s);
+        sb.append(String.format("Now you have %d tasks in the list.\n", size));
         return sb.toString();
     }
 
@@ -60,8 +51,8 @@ public class Ui {
      * @param taskString String version of the Deadline task
      * @param size Size of TaskList after adding
      */
-    public void showAddDeadlineResult(String taskString, int size) {
-        System.out.println(this.wrap(taskString, size));
+    public String showAddDeadlineResult(String taskString, int size) {
+        return this.wrap(taskString, size);
     }
 
     /**
@@ -70,8 +61,8 @@ public class Ui {
      * @param taskString String version of Event task
      * @param size Size of TaskList after adding
      */
-    public void showAddEventResult(String taskString, int size) {
-        System.out.println(this.wrap(taskString, size));
+    public String showAddEventResult(String taskString, int size) {
+        return this.wrap(taskString, size);
     }
 
     /**
@@ -80,8 +71,8 @@ public class Ui {
      * @param taskString String version of Todo task
      * @param size Size of TaskList after adding
      */
-    public void showAddTodoResult(String taskString, int size) {
-        System.out.println(this.wrap(taskString, size));
+    public String showAddTodoResult(String taskString, int size) {
+        return this.wrap(taskString, size);
     }
 
     /**
@@ -90,10 +81,10 @@ public class Ui {
      * @param taskString
      * @param index
      */
-    public void showMarkResult(String taskString, int index) {
-        String s = this.STARTING + this.SPACING + "Nice! I've marked this task as done:\n";
-        s += this.SPACING + "  " + taskString + this.ENDING;
-        System.out.println(s);
+    public String showMarkResult(String taskString, int index) {
+        String s = "Nice! I've marked this task as done:\n";
+        s += "  " + taskString;
+        return s;
     }
 
     /**
@@ -102,10 +93,10 @@ public class Ui {
      * @param taskString
      * @param index
      */
-    public void showUnmarkResult(String taskString, int index) {
-        String s = this.STARTING + this.SPACING + "OK, I've marked this task as not done yet:\n";
-        s += this.SPACING + "  " + taskString + this.ENDING;
-        System.out.println(s);
+    public String showUnmarkResult(String taskString, int index) {
+        String s = "OK, I've marked this task as not done yet:\n";
+        s += "  " + taskString;
+        return s;
     }
 
     /**
@@ -114,12 +105,11 @@ public class Ui {
      * @param taskString String version of Task deleted
      * @param size Size of TaskList after delete
      */
-    public void showDeleteResult(String taskString, int size) {
+    public String showDeleteResult(String taskString, int size) {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.STARTING).append(this.SPACING).append("Noted. I've removed this task:\n  ");
-        sb.append(this.SPACING).append(taskString).append(this.SPACING);
-        sb.append(String.format("Now you have %d tasks in the list.\n", size)).append(this.ENDING);
-        System.out.println(sb);
+        sb.append("Noted. I've removed this task:\n  ").append(taskString);
+        sb.append(String.format("Now you have %d tasks in the list.\n", size));
+        return sb.toString();
     }
 
     /**
@@ -127,16 +117,15 @@ public class Ui {
      *
      * @param taskArr ArrayList containing tasks with matching taskname
      */
-    public void showFindTaskResult(ArrayList<Task> taskArr) {
+    public String showFindTaskResult(ArrayList<Task> taskArr) {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.STARTING).append(this.SPACING).append("Here are the matching tasks in your list:\n");
+        sb.append("Here are the matching tasks in your list:\n");
         int counter = 1;
         for (Task task : taskArr) {
-            sb.append(String.format("%s%d.%s", this.SPACING, counter, task.toString()));
+            sb.append(String.format("%s%d.%s", " ", counter, task.toString()));
             counter += 1;
         }
-        sb.append(this.ENDING);
-        System.out.println(sb);
+        return sb.toString();
     }
 
     /**
@@ -144,14 +133,12 @@ public class Ui {
      *
      * @param tl TaskList containing all the task
      */
-    public void showGetAllTaskResult(TaskList tl) {
+    public String showGetAllTaskResult(TaskList tl) {
         StringBuilder s = new StringBuilder();
-        s.append(this.STARTING);
-        s.append(this.SPACING).append("Here are the tasks in your list:\n");
+        s.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tl.getSize(); i++) {
-            s.append(String.format("%s%d.%s", this.SPACING, i + 1, tl.getTask(i).toString()));
+            s.append(String.format("%s%d.%s", " ", i + 1, tl.getTask(i).toString()));
         }
-        s.append(this.ENDING);
-        System.out.println(s);
+        return s.toString();
     }
 }

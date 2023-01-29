@@ -22,10 +22,10 @@ public class DeleteTaskCommand extends Command {
      * @param storage Storage to modify if necessary
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         storage.delete(index);
         Task t = tl.getTask(index - 1);
         tl.remove(index - 1);
-        ui.showDeleteResult(t.toString(), tl.getSize());
+        return ui.showDeleteResult(t.toString(), tl.getSize());
     }
 }

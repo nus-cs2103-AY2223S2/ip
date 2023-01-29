@@ -40,14 +40,14 @@ public class AddEventCommand extends Command {
      * @param storage Storage to modify if necessary
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         try {
             LocalDateTime from = DateTime.parseDateTimeString(this.fromString);
             LocalDateTime to = DateTime.parseDateTimeString(this.toString);
             Event ev = new Event(this.name, from, to);
             tl.addTask(ev);
             storage.add(storage.getStorageTaskString(ev));
-            ui.showAddEventResult(ev.toString(), tl.getSize());
+            return ui.showAddEventResult(ev.toString(), tl.getSize());
         } catch (DateTimeParseException e) {
             throw new DukeException("Wrong format for event, "
                     + "please follow deadline name /from datetime /to datetime(yyyy-mm-dd hh:mm)");

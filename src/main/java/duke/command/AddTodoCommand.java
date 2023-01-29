@@ -22,10 +22,10 @@ public class AddTodoCommand extends Command {
      * @param storage Storage to modify if necessary
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) {
+    public String execute(TaskList tl, Ui ui, Storage storage) {
         Todo td = new Todo(this.name);
         tl.addTask(td);
         storage.add(storage.getStorageTaskString(td));
-        ui.showAddTodoResult(td.toString(), tl.getSize());
+        return ui.showAddTodoResult(td.toString(), tl.getSize());
     }
 }
