@@ -1,9 +1,9 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 
 /**
@@ -115,7 +115,7 @@ public class Ui {
         System.out.println("Here are the matching tasks in your list:\n");
         int counter = 1;
         for (int i = 0; i < tasklist.size(); i++) {
-            System.out.println(counter+ "." + tasklist.get(i));
+            System.out.println(counter + "." + tasklist.get(i));
         }
     }
 
