@@ -7,6 +7,15 @@ public class Parser {
     private enum Commands {
         LIST, MARK, UNMARK, DELETE, DEADLINE, EVENT, TODO, BYE
     }
+
+    /**
+     * This method parses the string of text by the user into a given command.
+     * If no command is found in the text, an InvalidCommandException will be thrown.
+     *
+     * @param inputCommand the string provided by the user
+     * @return the command generated from the users' text
+     * @throws LuluException when command is invalid or command is valid with subsequent invalid inputs
+     */
     public static Command parse(String inputCommand) throws LuluException {
         int size = inputCommand.length();
         int i = inputCommand.indexOf(" ");

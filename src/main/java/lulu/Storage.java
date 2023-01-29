@@ -14,6 +14,14 @@ public class Storage {
         path = filePath;
     }
 
+    /**
+     * Returns true or false for whether a file at a specified location is present.
+     *
+     * This method checks if a file at a specified directory is present. If it is not, a file will be created at the
+     * specified location.
+     *
+     * @return true if file at specified location is present, false otherwise.
+     */
     public boolean isSavePresent() {
         try {
             boolean isPresent = !(file.createNewFile());
@@ -27,6 +35,11 @@ public class Storage {
         }
     }
 
+    /**
+     * This method writes whatever is in the list to the file at the specified location
+     *
+     * @param list the array of string to be written
+     */
     public void writeSave(ArrayList<String> list) {
         try {
             FileWriter myWriter = new FileWriter(path);
@@ -40,6 +53,11 @@ public class Storage {
         }
     }
 
+    /**
+     * This method reads the file at the specified location and loads it into a TaskList.
+     *
+     * @param tasks the TaskList which loads the data
+     */
     public void readSave(TaskList tasks) {
         try {
             Scanner myReader = new Scanner(file);

@@ -22,6 +22,13 @@ public class MarkCommand extends Command {
         }
     }
 
+    /**
+     * This method marks the specified task upon execution.
+     *
+     * @param tasks the TaskList with the task to be marked.
+     * @param ui the UI that displays messages
+     * @param storage the storage is not relevant in this command
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         tasks.markTask(taskNumber);
         ui.showMarkText(tasks.getTaskDescription(taskNumber));

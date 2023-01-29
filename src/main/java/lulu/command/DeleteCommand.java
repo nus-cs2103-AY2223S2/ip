@@ -22,6 +22,14 @@ public class DeleteCommand extends Command {
             throw new InvalidCommandException();
         }
     }
+
+    /**
+     * This method deletes a task from tasks upon execution.
+     *
+     * @param tasks the TaskList to be deleted with a task
+     * @param ui the UI that displays messages
+     * @param storage the Storage is not relevant in this command
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         ui.showDeleteText(tasks.getTaskDescription(taskNumber), tasks.getSize()-1);
         tasks.remove(taskNumber);
