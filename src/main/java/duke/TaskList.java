@@ -72,7 +72,7 @@ public class TaskList {
         ui.printTotalTask(storedInputs);
     }
 
-    private String removeKeyword(String s) throws DukeException {
+    String removeKeyword(String s) throws DukeException {
         try {
             s = s.substring(s.indexOf(" ")).trim();
         } catch (StringIndexOutOfBoundsException e) {
