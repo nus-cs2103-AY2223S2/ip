@@ -11,21 +11,21 @@ public class TaskTest {
         assertEquals("[T][ ] visit park", todo.toString());
     }
     @Test
-    public void testTaskMarkMethod() {
+    public void testTaskMark() {
         ToDo todo = new ToDo("visit park");
         todo.mark();
         assertEquals("[T][X] visit park", todo.toString());
     }
 
     @Test
-    public void testTaskUnmarkedMethod() {
+    public void testTaskUnmarked() {
         ToDo todo = new ToDo("visit park");
         todo.unmarked();
         assertEquals("[T][ ] visit park", todo.toString());
     }
 
     @Test
-    public void testIsDoneMethod() {
+    public void testIsDone() {
         ToDo todo = new ToDo("visit park");
         todo.mark();
         assertEquals("[T][X] visit park", todo.toString());
