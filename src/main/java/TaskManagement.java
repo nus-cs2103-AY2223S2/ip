@@ -29,11 +29,11 @@ public class TaskManagement {
         }
     }
 
-    public void save(ArrayList<Task> taskStorage) {
+    public void save(TaskStorage taskStorage) {
         try {
             FileWriter fw = new FileWriter(this.path);
-            for (int i = 0; i < taskStorage.size(); i++) {
-                fw.write(taskStorage.get(i).toString());
+            for (int i = 0; i < taskStorage.noTasks(); i++) {
+                fw.write(taskStorage.getTask(i).toString());
                 fw.write(System.lineSeparator());
             }
             fw.close();
