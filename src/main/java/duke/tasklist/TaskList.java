@@ -1,8 +1,10 @@
 package duke.tasklist;
 
-import java.util.*;
-import duke.ui.Ui;
+import java.util.ArrayList;
+
 import duke.tasktypes.Task;
+import duke.ui.Ui;
+
 
 /**
  * Represents a collection of tasks.

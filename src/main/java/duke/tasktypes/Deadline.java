@@ -3,7 +3,6 @@ package duke.tasktypes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
@@ -31,15 +30,15 @@ public class Deadline extends Task {
         String[] dateAndTime = by.split(" ");
         String date = dateAndTime[0];
         String time = dateAndTime[1];
-        date = date.replace('/','-');
+        date = date.replace('/', '-');
         this.forSaving = date + " " + time;
         time = time.substring(0, 2) + ':' + time.substring(2);
 
         this.byDate = LocalDate.parse(date);
         this.byTime = LocalTime.parse(time);
         this.byDateTime = LocalDateTime.of(this.byDate, this.byTime);
-        this.doneBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT).
-                format(this.byDateTime);
+        this.doneBy = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
+                        .format(this.byDateTime);
     }
 
     @Override

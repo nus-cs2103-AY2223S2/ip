@@ -1,22 +1,17 @@
 package duke.storage;
 
-import duke.tasklist.TaskList;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
+import duke.tasklist.TaskList;
 import duke.tasktypes.Deadline;
 import duke.tasktypes.Event;
 import duke.tasktypes.Task;
 import duke.tasktypes.ToDo;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import java.util.List;
-
-
 import duke.ui.Ui;
 
 /**
@@ -79,13 +74,13 @@ public class Storage {
                 case "T":
                     task = new ToDo(taskSplit[2]);
                     break;
-
                 case "D":
                     task = new Deadline(taskSplit[2], taskSplit[3]);
                     break;
-
                 case "E":
                     task = new Event(taskSplit[2], taskSplit[3], taskSplit[4]);
+                    break;
+                default:
                     break;
                 }
 
@@ -105,7 +100,6 @@ public class Storage {
         } catch (IOException e) {
             ui.showError(e);
         }
-
         return tasks;
     }
 
