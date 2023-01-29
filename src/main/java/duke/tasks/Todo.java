@@ -19,7 +19,7 @@ public class Todo extends Task {
     /**
      * Returns a string representation of the Todo Object.
      * 
-     * @return String a string in the format "[T] description"
+     * @return a string in the format "[T] description"
      */
     @Override
     public String toString() {
