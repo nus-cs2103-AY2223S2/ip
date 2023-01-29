@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * A Ui class to manage the user interface
+ * A class to manage the user interface
  * and deal with interactions with the user.
  */
 public class Ui {
@@ -143,6 +143,32 @@ public class Ui {
      */
     public void showLine() {
         System.out.println(dashes);
+    }
+
+    /**
+     * Displays the matching tasks message to the user.
+     */
+    public void showMatchingTasksMessage() {
+        System.out.println(formatMessage("Matching tasks are shown below: "));
+    }
+
+    /**
+     * Displays the found task with numbering.
+     *
+     * @param number Task number.
+     * @param task Task found.
+     */
+    public void displayFoundTask(int number, Task task) {
+        System.out.println(formatMessage(number + "." + task));
+    }
+
+    /**
+     * Displays message with formatting to user.
+     *
+     * @param message Message to be displayed.
+     */
+    public void displayFormattedMessage(String message) {
+        System.out.println(formatMessage(message));
     }
 
     /**

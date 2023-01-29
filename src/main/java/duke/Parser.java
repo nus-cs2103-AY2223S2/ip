@@ -39,6 +39,8 @@ public class Parser {
                     return new UnmarkCommand(input.replaceFirst("unmark", "").trim());
                 case "bye":
                     return new ByeCommand(input.replaceFirst("bye", "").trim());
+                case "find":
+                    return new FindCommand(input.replaceFirst("find", "").trim());
                 default:
                     throw new DukeException("No such command!");
             }

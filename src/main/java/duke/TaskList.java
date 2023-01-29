@@ -43,6 +43,16 @@ public class TaskList {
     }
 
     /**
+     * Gets task from task list given task number.
+     *
+     * @param taskNumber Task number.
+     * @return Task with specified task number.
+     */
+    public Task getTask(int taskNumber) {
+        return this.tasks.get(taskNumber - 1);
+    }
+
+    /**
      * Adds given task into the task list.
      *
      * @param task Task to be added into the list.
