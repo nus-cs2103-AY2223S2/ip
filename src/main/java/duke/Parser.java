@@ -109,7 +109,7 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             by = LocalDateTime.parse(byString, formatter);
         } catch (DateTimeParseException e){
-            throw new DukeInvalidArgumentException("Wrong date/time format, please input task again");
+            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), please input task again");
         }
         return by;
     }
@@ -143,7 +143,7 @@ public class Parser {
             from = LocalDateTime.parse(fromString, formatter);
 
         } catch (DateTimeParseException e){
-            throw new DukeInvalidArgumentException("Wrong date/time format, please input task again");
+            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), please input task again");
         }
         return from;
     }
@@ -165,8 +165,15 @@ public class Parser {
             to = LocalDateTime.parse(toString, formatter);
 
         } catch (DateTimeParseException e){
-            throw new DukeInvalidArgumentException("Wrong date/time format, please input task again");
+            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), please input task again");
         }
         return to;
+    }
+
+    public String getFindKeyword() throws DukeInvalidArgumentException {
+        if (answer.substring(5, answer.length()).isEmpty()) {
+            throw new DukeInvalidArgumentException("Keyword is empty, please input command again");
+        }
+        return answer.substring(5, answer.length());
     }
 }

@@ -53,6 +53,11 @@ public class Duke {
                     continue;
                 }
 
+                if (answer.startsWith("find ")) {
+                    String keyword = parser.getFindKeyword();
+                    tasks.find(keyword);
+                    continue;
+                }
                 if (answer.startsWith("mark ")) {
                     Integer index = parser.getMarkIndex(length);
                     ui.showMarked(tasks.mark(index));
