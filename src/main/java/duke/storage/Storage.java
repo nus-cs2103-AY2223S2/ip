@@ -9,11 +9,20 @@ import java.util.Scanner;
 
 import duke.task.*;
 
+/**
+ * Storage class to remember previous input and load them upon next run
+ *
+ * @author Pearl Twe
+ * @version CS2103T AY22/23 Semester 2
+ */
 public class Storage {
     private File file;
     private String filePath;
     private String dataDirectory;
 
+    /**
+     * Constructor for Storage
+     */
     public Storage() {
         this.dataDirectory = "./data/";
         this.filePath = this.dataDirectory + "duke.txt";
@@ -31,6 +40,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the user input into duke.txt file.
+     * @param taskList list of tasks inputted by user.
+     */
     public void save(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(this.filePath);
@@ -43,6 +56,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads previous taskList saved in duke.txt
+     * @return List that was previously saved
+     */
     public List<Task> load() {
         List<Task> list = new ArrayList<>();
         Scanner scanner = null;
