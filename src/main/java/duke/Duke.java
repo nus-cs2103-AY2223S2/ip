@@ -26,7 +26,7 @@ public class Duke {
   }
 
   public void handleRequest() {
-    loop: while (true) {
+    while (true) {
       try {
         String fullcommand = ui.readCommand();
         Command command = Parser.parse(fullcommand);
