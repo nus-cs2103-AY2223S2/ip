@@ -4,6 +4,7 @@ import genie.command.Command;
 import genie.exception.DukeException;
 
 import java.io.*;
+import java.util.Scanner;
 
 /**
  * The main class for Genie, a Command-line Interface bot. Primarily functions as a task planner that responds to
@@ -39,9 +40,11 @@ public class Genie {
         ui.greet();
         boolean isExit = false;
         ui.printLoadedTaskList(storage.getLoadedTaskList());
+        Scanner sc = new Scanner(System.in);
         while (!isExit) {
             try {
-                String i = ui.readCommand();
+                //String i = ui.readCommand();
+                String i = sc.nextLine();
                 ui.printLine();
                 Parser parser = new Parser();
                 Command c = parser.parse(i);

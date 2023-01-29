@@ -134,8 +134,8 @@ public class TaskList {
     //with minor modifications
     public ArrayList<Task> searchMatchingTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task t = taskList.get(i);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
             if (t.containsWord(keyword)) {
                 matchingTasks.add(t);
             }

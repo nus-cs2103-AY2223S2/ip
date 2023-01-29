@@ -1,5 +1,0 @@
-[T][ ] hw
-[D][X] lecture | 22/1
-[E][ ] meeting | 8 - 9
-[T][ ] lecture
-[E][ ] meetin | 3 - 9

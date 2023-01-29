@@ -42,7 +42,7 @@ public class Storage {
         }
         File file = new File(PATH);
         if (file.createNewFile()) {
-            System.out.println("Seems like you're new here. Welcome onboard and let's get started! ^-^");
+            //System.out.println("Seems like you're new here. Welcome onboard and let's get started! ^-^");
             return new TaskList();
         } else {
             return readTextFileToList(file);
