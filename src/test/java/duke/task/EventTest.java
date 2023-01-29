@@ -1,16 +1,19 @@
 package duke.task;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EventTest {
+    @DisplayName("Event toString Test")
     @Test
     public void toStringTest() {
         Event event = new Event("test", "2022-01-01", "2023-01-01");
         assertEquals("[E][ ] test (from: Jan 1 2022, to: Jan 1 2023)", event.toString());
     }
 
+    @DisplayName("Event (un)marking Test")
     @Test
     public void markUnmarkTest() {
         Event event = new Event("test", "2022-01-01", "2023-01-01");
@@ -21,6 +24,7 @@ class EventTest {
         assertEquals("[E][ ] test (from: Jan 1 2022, to: Jan 1 2023)", event.toString());
     }
 
+    @DisplayName("Event Export Test")
     @Test
     public void exportDataTest() {
         Event event = new Event("test", "2022-01-01", "2023-01-01");

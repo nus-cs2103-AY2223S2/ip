@@ -1,16 +1,19 @@
 package duke.task;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTest {
+    @DisplayName("Todo toString Test")
     @Test
     public void toStringTest() {
         Todo todo = new Todo("test");
         assertEquals("[T][ ] test", todo.toString());
     }
 
+    @DisplayName("Todo (un)marking Test")
     @Test
     public void markUnmarkTest() {
         Todo todo = new Todo("test");
@@ -21,6 +24,7 @@ public class TodoTest {
         assertEquals("[T][ ] test", todo.toString());
     }
 
+    @DisplayName("Todo Export Test")
     @Test
     public void exportDataTest() {
         Todo todo = new Todo("test");
