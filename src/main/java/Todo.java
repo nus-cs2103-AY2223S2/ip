@@ -16,4 +16,9 @@ public class Todo extends Task {
     public String toString() {
         return String.format("[T]%s", super.toString());
     }
+
+    @Override
+    public String toText() {
+        return String.format("T %d %s\n", super.isDone ? 1 : 0, super.name);
+    }
 }

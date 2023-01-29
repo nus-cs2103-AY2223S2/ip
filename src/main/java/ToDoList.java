@@ -1,8 +1,10 @@
 import DukeExceptions.DukeEmptyInputException;
+import DukeExceptions.DukeException;
 import DukeExceptions.DukeInvalidInputException;
 import DukeExceptions.DukeTooManyInputsException;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.lang.StringBuilder;
 
 import java.util.ArrayList;
 public class ToDoList {
@@ -25,6 +27,9 @@ public class ToDoList {
         for (Task t : list) {
             str.append(String.format("%d. %s\n", count, t.toString()));
             count++;
+        }
+        if (str.length() == 0) {
+            return "You currently have no items in the list. Add some tasks to see your list!";
         }
         str.deleteCharAt(str.length() - 1);
         return String.format("Here are the tasks in your list:\n%s", str);
@@ -70,6 +75,22 @@ public class ToDoList {
         } catch (NumberFormatException e) {
             throw new DukeInvalidInputException("Sorry but I can only delete it if you give me its number. " +
                     "Try inputting a number instead!");
+        }
+    }
+
+    public String listToText() {
+        StringBuilder textString = new StringBuilder();
+        for (Task t : list) {
+            textString.append(t.toText());
+        }
+        return textString.toString();
+    }
+
+    public void loadTask(String taskText) {
+        try {
+            list.add(Task.fromText(taskText));
+        } catch (DukeException e) {
+            System.out.println("Text is formatted wrongly");
         }
     }
 }
