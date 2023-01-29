@@ -27,7 +27,7 @@ public class Duke {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         StringBuilder sb = new StringBuilder();
-        //TaskManagement taskManager = new TaskManagement(); // to manage saved data
+        TaskManagement taskManager = new TaskManagement(); // to manage saved data
         TaskStorage taskstorage = new TaskStorage();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -176,7 +176,7 @@ public class Duke {
 
 
             }
-            //taskManager.save(taskstorage);
+            taskManager.save(taskstorage);
             System.out.println(line);
             if (inp.equals("bye")) {
                 break;
