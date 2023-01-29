@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+
 import crystal.task.Task;
 import crystal.task.Todo;
 import crystal.task.Deadline;
@@ -55,48 +57,48 @@ public class Storage {
         for (int i = 0; i < tasks.size(); i++) {
 
             if (tasks.get(i).toString().startsWith("[T]")) {
-                String s = tasks.get(i).toString().replace("[T]", "T ");
+                String stringReplaceT = tasks.get(i).toString().replace("[T]", "T ");
                 if (tasks.get(i).toString().contains("[X]")) {
-                    s = s.replace("[X]", "| 0 |"); //task done
-                    str.append(s + "\n");
+                    stringReplaceT = stringReplaceT.replace("[X]", "| 0 |"); //task done
+                    str.append(stringReplaceT + "\n");
                 } else {
-                    s = s.replace("[ ]", "| 1 |");
-                    str.append(s + "\n");
+                    stringReplaceT = stringReplaceT.replace("[ ]", "| 1 |");
+                    str.append(stringReplaceT + "\n");
                 }
 
             } else if (tasks.get(i).toPrint().startsWith("[D]")) {
-                String s = tasks.get(i).toPrint().replace("[D]", "D ");
+                String stringReplaceD = tasks.get(i).toPrint().replace("[D]", "D ");
                 if (tasks.get(i).toPrint().contains("[X]")) {
-                    s = s.replace("[X]", "| 0 |");
-                    s = s.replace("(by:", "|");
-                    s = s.replace(")", "");
-                    str.append(s + "\n");
+                    stringReplaceD = stringReplaceD.replace("[X]", "| 0 |");
+                    stringReplaceD = stringReplaceD.replace("(by:", "|");
+                    stringReplaceD = stringReplaceD.replace(")", "");
+                    str.append(stringReplaceD + "\n");
                 } else {
-                    s = s.replace("[ ]", "| 1 |");
-                    s = s.replace("(by:", "|");
-                    s = s.replace(")", "");
-                    str.append(s + "\n");
+                    stringReplaceD = stringReplaceD.replace("[ ]", "| 1 |");
+                    stringReplaceD = stringReplaceD.replace("(by:", "|");
+                    stringReplaceD = stringReplaceD.replace(")", "");
+                    str.append(stringReplaceD + "\n");
                 }
 
             } else if (tasks.get(i).toPrint().startsWith("[E]")) {
-                String s = tasks.get(i).toPrint().replace("[E]", "E ");
+                String stringReplaceE = tasks.get(i).toPrint().replace("[E]", "E ");
                 if (tasks.get(i).toPrint().contains("[X]")) {
-                    s = s.replace("[X]", "| 0 |");
-                    s = s.replace("(from:", "|");
-                    s = s.replace("to:", " - ");
-                    s = s.replace(")", "");
-                    str.append(s + "\n");
+                    stringReplaceE = stringReplaceE.replace("[X]", "| 0 |");
+                    stringReplaceE = stringReplaceE.replace("(from:", "|");
+                    stringReplaceE = stringReplaceE.replace("to:", " - ");
+                    stringReplaceE = stringReplaceE.replace(")", "");
+                    str.append(stringReplaceE + "\n");
                 } else {
-                    s = s.replace("[ ]", "| 1 |");
-                    s = s.replace("(from:", "|");
-                    s = s.replace("to:", "-");
-                    s = s.replace(")", "");
-                    str.append(s + "\n");
+                    stringReplaceE = stringReplaceE.replace("[ ]", "| 1 |");
+                    stringReplaceE = stringReplaceE.replace("(from:", "|");
+                    stringReplaceE = stringReplaceE.replace("to:", "-");
+                    stringReplaceE = stringReplaceE.replace(")", "");
+                    str.append(stringReplaceE + "\n");
                 }
             }
 
-
         }
+
         try {
             writeToFile(this.filepath, str + System.lineSeparator());
         } catch (IOException e) {
@@ -113,78 +115,78 @@ public class Storage {
     //Load file
     public ArrayList<Task> readFileContents() throws CrystalException{
 
-        File f = new File(this.filepath); // create a File for the given file path
+        File file = new File(this.filepath); // create a File for the given file path
         ArrayList<Task> temp = new ArrayList<Task>();
         try {
-            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            Scanner s = new Scanner(file); // create a Scanner using the File as the source
             while (s.hasNext()) {
-                String t = s.nextLine();
-                if (t.startsWith("T")) {
-                    if (t.contains("| 0 |")) {
-                        String description = t.replace("T | 0 |", "");
-                        Task n = new Todo(description.trim());
-                        n.isDone = true;
-                        temp.add(n);
+                String nextInput = s.nextLine();
+                if (nextInput.startsWith("T")) {
+                    if (nextInput.contains("| 0 |")) {
+                        String description = nextInput.replace("T | 0 |", "");
+                        Task newTask = new Todo(description.trim());
+                        newTask.isDone = true;
+                        temp.add(newTask);
                     } else {
-                        String description = t.replace("T | 1 |", "");
-                        Task n = new Todo(description.trim());
-                        n.isDone = false;
-                        temp.add(n);
+                        String description = nextInput.replace("T | 1 |", "");
+                        Task newTask = new Todo(description.trim());
+                        newTask.isDone = false;
+                        temp.add(newTask);
                     }
 
-                } else if (t.startsWith("D")) {
-                    if (t.contains("| 0 |")) {
-                        String description = t.replace("D | 0 |", "");
+                } else if (nextInput.startsWith("D")) {
+                    if (nextInput.contains("| 0 |")) {
+                        String description = nextInput.replace("D | 0 |", "");
                         int index = description.lastIndexOf("|");
                         String time = description.substring(description.lastIndexOf("|") + 1);
                         description = description.replace(description.substring(index), "");
                         try {
-                            Task n = new Deadline(description.trim(), time.trim());
-                            n.isDone = true;
-                            temp.add(n);
+                            Task newTask = new Deadline(description.trim(), time.trim());
+                            newTask.isDone = true;
+                            temp.add(newTask);
                         } catch (CrystalException e) {
                             System.out.println("Wrong date format! Please change!");
                         }
 
                     } else {
-                        String description = t.replace("D | 1 |", "");
+                        String description = nextInput.replace("D | 1 |", "");
                         int index = description.lastIndexOf("|");
                         String time = description.substring(description.lastIndexOf("|") + 1);
                         description = description.replace(description.substring(index), "");
                         try {
-                            Task n = new Deadline(description.trim(), time.trim());
-                            n.isDone = false;
-                            temp.add(n);
+                            Task newTask = new Deadline(description.trim(), time.trim());
+                            newTask.isDone = false;
+                            temp.add(newTask);
                         } catch (CrystalException e) {
                             System.out.println("Wrong date format! Please change!");
                         }
                     }
 
-                } else if (t.startsWith("E")) {
-                    if (t.contains("| 0 |")) {
-                        String description = t.replace("E | 0 |", "");
+                } else if (nextInput.startsWith("E")) {
+                    if (nextInput.contains("| 0 |")) {
+                        String description = nextInput.replace("E | 0 |", "");
                         int index = description.lastIndexOf("|");
                         int index2 = description.lastIndexOf("-");
                         String time = description.substring(description.lastIndexOf("|") + 1);
                         int index3 = time.lastIndexOf(" - ");
                         time = time.replace(time.substring(index3), "");
-                        String endtime = description.substring(description.lastIndexOf(" - ") + 3);
+                        String endTime = description.substring(description.lastIndexOf(" - ") + 3);
                         description = description.replace(description.substring(index), "");
-                        Task n = new Event(description.trim(), time.trim(), endtime.trim());
-                        n.isDone = true;
-                        temp.add(n);
+                        Task newTask = new Event(description.trim(), time.trim(), endTime.trim());
+                        newTask.isDone = true;
+                        temp.add(newTask);
                     } else {
-                        String description = t.replace("E | 1 |", "");
+                        String description = nextInput.replace("E | 1 |", "");
                         int index = description.lastIndexOf("|");
                         int index2 = description.lastIndexOf("-");
                         String time = description.substring(description.lastIndexOf("|") + 1);
                         int index3 = time.lastIndexOf(" - ");
                         time = time.replace(time.substring(index3), "");
-                        String endtime = description.substring(description.lastIndexOf(" - ") + 3);
+                        String endTime = description.substring(description.lastIndexOf(" - ") + 3);
                         description = description.replace(description.substring(index), "");
-                        Task n = new Event(description.trim(), time.trim(), endtime.trim());
-                        n.isDone = false;
-                        temp.add(n);
+                        Task newTask = new Event(description.trim(), time.trim(), endTime.trim());
+                        newTask.isDone = false;
+                        temp.add(newTask);
                     }
                 }
 

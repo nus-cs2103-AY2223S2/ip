@@ -38,9 +38,9 @@ public class EventCommand extends Command{
      *
      */
     public void execute(TaskList tasks, Ui ui,Storage storage) throws CrystalException {
-        Event e = new Event(description, from, to);
-        tasks.add(e);
-        ui.printEvent(tasks, e);
+        Event event = new Event(description, from, to);
+        tasks.add(event);
+        ui.printEvent(tasks, event);
 
     }
 

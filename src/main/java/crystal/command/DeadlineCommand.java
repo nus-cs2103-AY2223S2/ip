@@ -12,20 +12,22 @@ import crystal.task.Deadline;
  */
 
 public class DeadlineCommand extends Command{
-    public String s;
+    public String by;
     public String description;
 
     /**
      * Constructor for DeadlineCommand class.
      *
      * @param description Description of the task.
-     * @param s The date time portion of the task.
+     * @param by The date time portion of the task.
      *
      */
-    public DeadlineCommand(String description, String s) {
+
+    public DeadlineCommand(String description, String by) {
         this.description = description;
-        this.s = s;
+        this.by = by;
     }
+
 
     /**
      * Executes the deadline command to print the deadline message.
@@ -36,11 +38,9 @@ public class DeadlineCommand extends Command{
      * @throws CrystalException if the user input is incorrectly formatted
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws CrystalException {
-
-        Deadline d = new Deadline(description, s);
-        tasks.add(d);
-        ui.printDeadline(tasks, d);
-
+        Deadline deadline = new Deadline(description, by);
+        tasks.add(deadline);
+        ui.printDeadline(tasks, deadline);
     }
 
     /**

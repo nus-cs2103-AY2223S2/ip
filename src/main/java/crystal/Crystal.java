@@ -1,6 +1,7 @@
 package crystal;
 
 import crystal.command.Command;
+
 import java.io.File;
 
 /**
@@ -19,7 +20,6 @@ class Crystal {
      * @param filePath filepath to load the file from
      *
      */
-
     public Crystal(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -38,17 +38,16 @@ class Crystal {
      * takes in user commands for the list.
      *
      */
-
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                Command cmd = Parser.parse(fullCommand);
+                cmd.execute(tasks, ui, storage);
                 storage.saveFile(tasks);
-                isExit = c.isExit();
+                isExit = cmd.isExit();
             } catch (CrystalException e) {
                 ui.showError(e);
 
@@ -61,8 +60,6 @@ class Crystal {
      * Main method which calls the run method.
      *
      */
-
-
     public static void main(String[] args) {
         String file2 = "/repos/Independentproject/myfiles/Crystal.txt";
         String base = "/repos/Independentproject";

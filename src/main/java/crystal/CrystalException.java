@@ -1,5 +1,6 @@
 package crystal;
 
+
 /**
  * Represents the CrystalException class.
  *

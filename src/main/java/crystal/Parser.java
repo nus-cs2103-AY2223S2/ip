@@ -28,39 +28,39 @@ public class Parser {
         if (command.equals("list")) {
             return new ListCommand();
         } else if (command.contains("unmark")) {
-            String getnum = command.replaceAll("[^0-9]", "");
-            int num = Integer.parseInt(getnum);
+            String getNum = command.replaceAll("[^0-9]", "");
+            int num = Integer.parseInt(getNum);
             return new UnmarkCommand(num);
         } else if (command.contains("mark")) {
-            String getnum = command.replaceAll("[^0-9]", "");
-            int num = Integer.parseInt(getnum);
+            String getNum = command.replaceAll("[^0-9]", "");
+            int num = Integer.parseInt(getNum);
             return new MarkCommand(num);
         } else if (command.contains("todo")) {
-            String s = command.replace("todo", "");
-            if (s.length() == 0) {
+            String stringNoTodo = command.replace("todo", "");
+            if (stringNoTodo.length() == 0) {
                 throw new CrystalException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            return new TodoCommand(s);
+            return new TodoCommand(stringNoTodo);
         } else if (command.contains("deadline")) {
-            String s = command.replace("deadline", "");
-            int index = s.lastIndexOf("/by");
-            String description = s.replace(s.substring(index), ""); //description of task
-            s = s.substring(index + 3); //date/time for by portion
-            return new DeadlineCommand(description, s);
+            String stringNoDeadline = command.replace("deadline", "");
+            int index = stringNoDeadline.lastIndexOf("/by");
+            String description = stringNoDeadline.replace(stringNoDeadline.substring(index), ""); //description of task
+            stringNoDeadline = stringNoDeadline.substring(index + 3); //date/time for by portion
+            return new DeadlineCommand(description, stringNoDeadline);
         } else if (command.contains("event")) {
-            String s = command.replace("event", "");
-            String[] arr = s.split("/");
-            String subs = arr[0]; //description
-            String n = arr[1];
-            String subsubs = n.replace("from", ""); //from
-            String t = arr[2];
-            String sublastsub = t.replace("to", ""); //to
-            return new EventCommand(subs, subsubs, sublastsub);
+            String stringNoEvent = command.replace("event", "");
+            String[] arr = stringNoEvent.split("/");
+            String subString = arr[0]; //description
+            String temp = arr[1];
+            String subStringNoFrom = temp.replace("from", ""); //from
+            String tempOne = arr[2];
+            String subStringNoTo = tempOne.replace("to", ""); //to
+            return new EventCommand(subString, subStringNoFrom, subStringNoTo);
         } else if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.contains("delete")) {
-            String getnum = command.replaceAll("[^0-9]", "");
-            int num = Integer.parseInt(getnum);
+            String getNum = command.replaceAll("[^0-9]", "");
+            int num = Integer.parseInt(getNum);
             return new DeleteCommand(num);
         } else {
             throw new CrystalException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
