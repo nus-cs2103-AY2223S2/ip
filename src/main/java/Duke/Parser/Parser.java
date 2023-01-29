@@ -33,51 +33,51 @@ public class Parser {
         switch (type) {
         case LIST:
             return new ListCommand();
-
         case MARK:
-            if (isEmptyCommand(split)) {
+            if (!isEmptyCommand(split)) {
                 return new MarkCommand();
             } else {
                 throw new DukeException("Sorry! you can't have empty descriptions!");
             }
-
         case UNMARK:
-            if (isEmptyCommand(split)) {
+            if (!isEmptyCommand(split)) {
                 return new UnmarkCommand();
             } else {
                 throw new DukeException("Sorry! you can't have empty descriptions!");
             }
-
         case TODO:
-            if (isEmptyCommand(split)) {
+            if (!isEmptyCommand(split)) {
                 return new TodoCommand();
             } else {
                 throw new DukeException("Sorry! you can't have empty descriptions!");
             }
-
         case DEADLINE:
-            if (isEmptyCommand(split)) {
+            if (!isEmptyCommand(split)) {
                 return new DeadlineCommand();
             } else {
                 throw new DukeException("Sorry! you can't have empty descriptions!");
             }
-
         case EVENT:
-            if (isEmptyCommand(split)) {
+            if (!isEmptyCommand(split)) {
                 return new EventCommand();
             } else {
                 throw new DukeException("Sorry! you can't have empty descriptions!");
             }
-
         case DELETE:
-            if (isEmptyCommand(split)) {
+            if (!isEmptyCommand(split)) {
                 return new DeleteCommand();
             } else {
                 throw new DukeException("Sorry! you can't have empty descriptions!");
             }
         case DATE:
-            if (isEmptyCommand(split)) {
-                return new SearchCommand();
+            if (!isEmptyCommand(split)) {
+                return new SearchDateCommand();
+            } else {
+                throw new DukeException("Sorry! you can't have empty descriptions!");
+            }
+        case FIND:
+            if (!isEmptyCommand(split)) {
+                return new FindCommand();
             } else {
                 throw new DukeException("Sorry! you can't have empty descriptions!");
             }
@@ -139,7 +139,7 @@ public class Parser {
      */
     public String parseDescription(String input) throws DukeException {
         String[] split = input.split(" ");
-        if (isEmptyCommand(split)) {
+        if (!isEmptyCommand(split)) {
             return split[1];
         } else {
             throw new DukeException("Sorry! you can't have empty descriptions!");
@@ -183,7 +183,11 @@ public class Parser {
     }
 
     public boolean isEmptyCommand(String[] input) {
-        return input.length < 2;
+        if(input.length < 2) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

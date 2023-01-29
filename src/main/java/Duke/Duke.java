@@ -77,8 +77,10 @@ public class Duke {
                             eventlist[0], eventlist[1], ui);
                 } else if (command instanceof ExitCommand) {
                     ((ExitCommand) command).processCommand(ui);
-                } else if (command instanceof SearchCommand) {
-                    ((SearchCommand) command).processCommand(list, parser.parseDescription(input), ui);
+                } else if (command instanceof SearchDateCommand) {
+                    ((SearchDateCommand) command).processCommand(list, parser.parseDescription(input), ui);
+                } else if (command instanceof FindCommand) {
+                    ((FindCommand) command).processCommand(list, parser.parseDescription(input), ui);
                 }
             } catch (DukeException e) {
                 ui.printError(e.getMessage());
