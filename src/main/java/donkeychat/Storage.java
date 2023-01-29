@@ -8,6 +8,10 @@ import java.util.Scanner;
 
 public class Storage {
 
+    /**
+     * Overwrites existing save file with provided TaskList.
+     * @param taskList TaskList to be serialized.
+     */
     public void updateSave(TaskList taskList) {
         String toSave = "";
         for (int i = 0; i < taskList.getSize(); i++) {
@@ -25,6 +29,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads existing save file into provided TaskList.
+     * @param loadTo TaskList to be deserialized into.
+     */
     public void loadSave(TaskList loadTo) {
         try {
             File save = new File("donkey.txt");
@@ -42,6 +50,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates new empty save file if none exists.
+     */
     public void createSave() {
         try {
             File save = new File("donkey.txt");

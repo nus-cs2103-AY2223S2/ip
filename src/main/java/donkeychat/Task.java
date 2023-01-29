@@ -43,6 +43,9 @@ public class Task {
         isDone = done;
     }
 
+    /**
+     * Generates a serialized form of the task.
+     */
     public String serialize() {
         return (isDone ? "1" : "0") + " | " + description;
     }
