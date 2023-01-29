@@ -5,29 +5,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static ArrayList<Task> TASK_LIST = new ArrayList<>();
-
-    private static void greet() {
-        String greeting = "____________________________________________________________\n"
-                + "Hello! I'm Duke\n"
-                + "What can I do for you?\n"
-                + "____________________________________________________________\n";
-        System.out.println(LOGO);
-        System.out.println(greeting);
-    }
-
-    private static void exit() {
-        String exitMessage = "____________________________________________________________\n"
-                + "Bye. Hope to see you again soon!\n"
-                + "____________________________________________________________";
-        System.out.println(exitMessage);
-    }
 
     private static void addToDo(String userCommand) throws DukeException {
 
@@ -254,7 +233,9 @@ public class Duke {
     }
 
     public static void start() {
-        Duke.greet();
+        Ui ui = new Ui();
+        ui.greet();
+
         TASK_LIST = TaskFileHandler.loadTaskList();
 
         // Ready for commands
@@ -264,7 +245,7 @@ public class Duke {
             System.out.print("$ ");
             String input = scanner.nextLine().trim();
             if (input.equals("bye")) {
-                Duke.exit();
+                ui.exit();
                 break;
             }
             try {
