@@ -1,9 +1,9 @@
-package CatBot.Commands;
+package catbot.commands;
 
-import CatBot.Storage.Storage;
-import CatBot.TaskList.Task;
-import CatBot.TaskList.TaskList;
-import CatBot.Ui.Ui;
+import catbot.storage.Storage;
+import catbot.tasklist.Task;
+import catbot.tasklist.TaskList;
+import catbot.ui.Ui;
 
 public class ListCommand extends Command {
 

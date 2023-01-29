@@ -1,7 +1,7 @@
-package CatBot.Parser;
+package catbot.parser;
 
-import CatBot.CatBotException;
-import CatBot.Commands.*;
+import catbot.CatBotException;
+import catbot.commands.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;

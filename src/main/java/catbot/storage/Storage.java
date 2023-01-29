@@ -1,9 +1,9 @@
-package CatBot.Storage;
+package catbot.storage;
 
-import CatBot.CatBotException;
-import CatBot.Parser.Parser;
-import CatBot.TaskList.Task;
-import CatBot.TaskList.TaskList;
+import catbot.CatBotException;
+import catbot.parser.Parser;
+import catbot.tasklist.Task;
+import catbot.tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;

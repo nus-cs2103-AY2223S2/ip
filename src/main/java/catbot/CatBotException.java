@@ -1,4 +1,4 @@
-package CatBot;
+package catbot;
 
 public class CatBotException extends Exception {
     /**

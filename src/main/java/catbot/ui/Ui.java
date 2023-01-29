@@ -1,4 +1,4 @@
-package CatBot.Ui;
+package catbot.ui;
 
 import org.apache.commons.text.WordUtils;
 

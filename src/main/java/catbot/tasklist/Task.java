@@ -1,7 +1,7 @@
-package CatBot.TaskList;
+package catbot.tasklist;
 
-import CatBot.CatBotException;
-import CatBot.Ui.ConsoleColors;
+import catbot.CatBotException;
+import catbot.ui.ConsoleColors;
 
 import java.util.Locale;
 import java.time.LocalDateTime;

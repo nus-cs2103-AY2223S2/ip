@@ -1,6 +1,6 @@
-package CatBot.TaskList;
+package catbot.tasklist;
 
-import CatBot.CatBotException;
+import catbot.CatBotException;
 
 import java.util.ArrayList;
 import java.util.Iterator;

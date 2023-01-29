@@ -1,4 +1,4 @@
-package CatBot.TaskList;
+package catbot.tasklist;
 
 public class ToDoTask extends Task {
 

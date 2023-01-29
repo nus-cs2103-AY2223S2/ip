@@ -1,10 +1,10 @@
-package CatBot.Commands;
+package catbot.commands;
 
-import CatBot.CatBotException;
-import CatBot.Storage.Storage;
-import CatBot.TaskList.*;
-import CatBot.TaskList.Task.TaskType;
-import CatBot.Ui.Ui;
+import catbot.CatBotException;
+import catbot.storage.Storage;
+import catbot.tasklist.*;
+import catbot.tasklist.Task.TaskType;
+import catbot.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

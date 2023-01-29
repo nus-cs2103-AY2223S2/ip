@@ -1,8 +1,8 @@
-package CatBot.Commands;
+package catbot.commands;
 
-import CatBot.Storage.Storage;
-import CatBot.TaskList.TaskList;
-import CatBot.Ui.Ui;
+import catbot.storage.Storage;
+import catbot.tasklist.TaskList;
+import catbot.ui.Ui;
 
 public class EchoCommand extends Command{
     private final String message;

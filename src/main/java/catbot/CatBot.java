@@ -1,10 +1,10 @@
-package CatBot;
+package catbot;
 
-import CatBot.Commands.Command;
-import CatBot.Parser.Parser;
-import CatBot.Storage.Storage;
-import CatBot.TaskList.TaskList;
-import CatBot.Ui.Ui;
+import catbot.commands.Command;
+import catbot.parser.Parser;
+import catbot.storage.Storage;
+import catbot.tasklist.TaskList;
+import catbot.ui.Ui;
 
 import java.util.ArrayList;
 

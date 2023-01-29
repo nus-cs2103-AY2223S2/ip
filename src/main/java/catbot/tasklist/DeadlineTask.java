@@ -1,4 +1,4 @@
-package CatBot.TaskList;
+package catbot.tasklist;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
