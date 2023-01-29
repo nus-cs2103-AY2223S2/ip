@@ -3,7 +3,18 @@ package duke;
 import duke.command.*;
 import duke.task.*;
 
+/**
+ * Encapsulates the parsing of user input.
+ */
 public class Parser {
+
+    /**
+     * Parses the user input to obtain the intended Command.
+     * @param input read from System.in by the Ui
+     * @return the corresponding Command
+     * @throws DukeException
+     * @throws NumberFormatException
+     */
     public static Command parse(String input) throws DukeException, NumberFormatException {
         String[] inputs = input.split(" ", 2);
         String command = inputs[0];

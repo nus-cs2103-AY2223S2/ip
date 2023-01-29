@@ -4,11 +4,22 @@ import java.io.IOException;
 
 import duke.command.Command;
 
+/**
+ * Represents an instance of the Duke program.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for an instance of Duke.
+     * Contains a Ui for interacting with user,
+     * Storage for saving and retrieving tasks from a file,
+     * and Tasklist for storing the tasks.
+     * Catches any errors thrown when the program is running.
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,6 +33,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Dictates program flow for Duke.
+     * Catches any errors thrown when parsing user inputs.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

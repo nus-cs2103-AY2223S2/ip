@@ -8,13 +8,25 @@ import java.util.Scanner;
 
 import duke.task.*;
 
+/**
+ * Represents the file to store tasks the user has inputted.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Creates a storage file at the intended file path.
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves user-inputted tasks into a file.
+     * @param tasks
+     * @throws IOException
+     */
     public void saveTasks(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         StringBuilder textToAdd = new StringBuilder();
@@ -25,6 +37,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Retrieves tasks previously saved in a file for the user.
+     * @return ArrayList of Tasks that were saved previously
+     * @throws IOException
+     * @throws DukeException
+     */
     public ArrayList<Task> retrieveTasks() throws IOException, DukeException {
         File f = new File(this.filePath);
         f.getParentFile().mkdirs();
