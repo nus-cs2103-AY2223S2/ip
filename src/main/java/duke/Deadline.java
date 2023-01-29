@@ -1,12 +1,16 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 /**
  * Class that defines the Deadline type of tasks
  */
 public class Deadline extends Task {
 
-    /** The end date of this deadline object */
+    /** The end date of this deadline object stored as a String*/
     protected String byDate;
+    /** The end date of this deadline object stored as a LocalDate*/
     protected LocalDate endDate;
 
     /**

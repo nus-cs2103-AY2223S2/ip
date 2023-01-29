@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Class to define the methods used to interact with user
  */

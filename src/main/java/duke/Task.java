@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Class that defines the Task object
  */
@@ -50,6 +52,11 @@ public class Task {
         }
     }
 
+    /**
+     * Encodes a Task object into an 'easy to decode' String object
+     *
+     * @return String representation of a Task object, for storage in a text file
+     */
     public String encode() {
         if (this.isCompleted) {
             return taskType + " | " + "X" + " | " + this.title;

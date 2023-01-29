@@ -1,17 +1,18 @@
+package duke;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Class that deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
 
-    // Create the file to write to, if it doesn't already exist
-
     /**
-     * Constructor for a fileManager object
+     * Constructor for a Storage object
      */
     public Storage() {
         File folder = new File("./data/");
@@ -29,12 +30,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes tasks to a specified file for it to be saved
+     *
+     * @param taskList TaskList object from which the tasks to be written are taken
+     */
     public void writeToFile(TaskList taskList) {
         try {
             FileWriter myWriter = new FileWriter("./data/duke.txt");
             for (int pos = 0; pos < taskList.size(); pos++) {
                 Task task = taskList.getTask(pos);
-                myWriter.write(task.encode() + "\n"); // Code out this decode function in Tasks class to return string
+                myWriter.write(task.encode() + "\n");
             }
                 myWriter.close();
         } catch (IOException e) {
@@ -43,6 +49,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Decodes String version of tasks from text file into corresponding Task objects
+     *
+     * @param data String version of a task object
+     * @return A task object
+     */
     public Task decode(String data) {
         // Use examples in qn page to decode into tasks
         char taskType = data.charAt(0);
@@ -83,6 +95,11 @@ public class Storage {
         return currentTask;
     }
 
+    /**
+     * Reads tasks from text file and stored them in a TaskList object
+     *
+     * @return TaskList object that contains the tasks read from specified text file
+     */
     public TaskList read() {
         TaskList retrievedList = new TaskList();
         try {

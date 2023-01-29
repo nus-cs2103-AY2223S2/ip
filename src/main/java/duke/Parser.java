@@ -1,6 +1,16 @@
-import java.util.ArrayList;
+package duke;
 
+/**
+ * Class that deals with making sense of the user command
+ */
 public class Parser {
+    /**
+     * Makes sense of the user command and calls corresponding methods
+     *
+     * @param userInput String of user input read from command line
+     * @param taskList TaskList object to which tasks are added to or deleted from
+     * @param fileManager Storage object that deals with loading tasks from file and saving tasks in file
+     */
     public void parse(String userInput, TaskList taskList, Storage fileManager) {
         if (!userInput.equals("list")) {
             // If input = "mark x" set task x completed? to True

@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Class that defines types of excpetions specific to Duke
+ * Class that defines types of exceptions specific to Duke
  */
 public class DukeException extends IllegalArgumentException {
 

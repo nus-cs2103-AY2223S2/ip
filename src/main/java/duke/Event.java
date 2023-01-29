@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -6,11 +8,13 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    /** Start date for this event */
+    /** Start date for this event stored as a String*/
     protected String fromDate;
+    /** Start date for this event stored as a LocalDate*/
     protected LocalDate startDate;
     /** End date for this event */
     protected String toDate;
+    /** End date for this event stored as a LocalDate*/
     protected LocalDate endDate;
 
     /**
@@ -28,7 +32,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (from: " + startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " to: " + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return super.toString() + " (from: " + startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
+                " to: " + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
