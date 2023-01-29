@@ -10,6 +10,9 @@ public class Duke {
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * Constructor
+     */
     public Duke() {
         ui = new Ui();
 
@@ -31,8 +34,6 @@ public class Duke {
             parser.parse(ui.userInput());
         }
     }
-
-
     /**
      * This is the main method that starts the Duke ToDoList command line interface.
      *
