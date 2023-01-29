@@ -1,5 +1,9 @@
 package duke.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
 import duke.commands.AddTodoCommand;
@@ -20,10 +24,6 @@ import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * A class that deals with making sense of the user command and saved content.
  */
@@ -31,6 +31,7 @@ public class Parser {
 
     /**
      * Converts a string to a LocalDateTime.
+     *
      * @param str The given string.
      * @return The time converted from the given string.
      * @throws DateTimeParseException If the string is not in the correct format.
@@ -42,6 +43,7 @@ public class Parser {
 
     /**
      * Converts a line of string to a task.
+     *
      * @param line A line of string in a save format.
      * @return A task converted from the given string.
      * @throws CannotReadFileDukeException If the string is not formatted correctly.
@@ -73,6 +75,7 @@ public class Parser {
 
     /**
      * Converts a string to a command.
+     *
      * @param input A string.
      * @return A command converted from the given string.
      * @throws DukeException If the string is not formatted correctly.
@@ -87,6 +90,7 @@ public class Parser {
             return new ExitCommand();
         case DISPLAY_LIST:
             return new DisplayListCommand();
+        default:
         }
 
         // duke.commands with arguments
@@ -143,6 +147,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new EmptyArgumentDukeException();
             }
+        default:
         }
 
         return null;

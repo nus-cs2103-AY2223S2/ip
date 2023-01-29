@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.storage.Storage;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.storage.Storage;
 
 /**
  * Represents a task list.
@@ -13,6 +13,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list.
+     *
      * @param task The task to be added.
      */
     public void add(Task task) {
@@ -21,6 +22,7 @@ public class TaskList {
 
     /**
      * Marks a task in the list as done.
+     *
      * @param number The index of the task in the list, starting from 1.
      */
     public void markTaskAsDone(int number) {
@@ -29,6 +31,7 @@ public class TaskList {
 
     /**
      * Marks a task in the list as not done.
+     *
      * @param number The index of the task in the list, starting from 1.
      */
     public void markTaskAsNotDone(int number) {
@@ -37,6 +40,7 @@ public class TaskList {
 
     /**
      * Removes a task from the list.
+     *
      * @param number The index of the task in the list, starting from 1.
      */
     public void remove(int number) {
@@ -45,6 +49,7 @@ public class TaskList {
 
     /**
      * Returns the string representation of a task in the list.
+     *
      * @param number The index of the task in the list, starting from 1.
      * @return The string representation of the task.
      */
@@ -68,8 +73,9 @@ public class TaskList {
 
     /**
      * Returns the string representation of the list.
+     *
      * @return Each task in the list in order, preceded by a number which
-     * is its index in the list starting from 1.
+     *         is its index in the list starting from 1.
      */
     @Override
     public String toString() {
@@ -86,9 +92,10 @@ public class TaskList {
     /**
      * Returns the string representation of all the tasks in the list,
      * formatted for saving.
+     *
      * @param storage The storage object to be used in formatting.
      * @return The string representation of all the tasks in the list, formatted
-     * for saving.
+     *         for saving.
      */
     public String toSaveString(Storage storage) {
         String res = "";

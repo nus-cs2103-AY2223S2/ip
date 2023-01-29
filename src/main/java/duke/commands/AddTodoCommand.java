@@ -6,6 +6,9 @@ import duke.task.TaskList;
 import duke.task.ToDoTask;
 import duke.ui.Ui;
 
+/**
+ * Represents a command to add a Todo task to a tasklist.
+ */
 public class AddTodoCommand extends Command {
     private String description;
 

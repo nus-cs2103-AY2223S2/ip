@@ -1,12 +1,5 @@
 package duke.storage;
 
-import duke.exception.CannotReadFileDukeException;
-import duke.exception.CannotWriteFileDukeException;
-import duke.exception.DukeException;
-import duke.parser.Parser;
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +8,13 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import duke.exception.CannotReadFileDukeException;
+import duke.exception.CannotWriteFileDukeException;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Class that deals with loading tasks and saving tasks in a file.
@@ -25,6 +25,7 @@ public class Storage {
 
     /**
      * Creates a storage instance.
+     *
      * @param filePath The file path for the save file.
      */
     public Storage(String filePath) {
@@ -33,6 +34,7 @@ public class Storage {
 
     /**
      * Save the given task list.
+     *
      * @param taskList The task list to be saved.
      * @throws DukeException If the file cannot be opened or written to.
      */
@@ -51,6 +53,7 @@ public class Storage {
 
     /**
      * Returns a LocalDateTime formatted to a string used for saving.
+     *
      * @param dateTime A time.
      * @return The string representation of the given LocalDateTime used for saving.
      */
@@ -60,6 +63,7 @@ public class Storage {
 
     /**
      * Loads a task list from the save file.
+     *
      * @param parser A parser to convert the content of the file to tasks.
      * @return A task list with tasks from the save file.
      * @throws DukeException If the file cannot be opened or read.

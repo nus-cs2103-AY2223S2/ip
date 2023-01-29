@@ -46,11 +46,11 @@ public class Duke {
             // Split into two parts at the first space
             try {
                 Command command = parser.parseCommand(input);
-                 if(command.isExit()) {
-                     return;
-                 } else {
-                     command.execute(taskList, ui, storage);
-                 }
+                if (command.isExit()) {
+                    return;
+                } else {
+                    command.execute(taskList, ui, storage);
+                }
                 storage.save(taskList);
             } catch (DukeException e) {
                 ui.printMessage(e.toString());

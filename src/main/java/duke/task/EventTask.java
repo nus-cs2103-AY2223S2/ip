@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.storage.Storage;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.storage.Storage;
 
 /**
  * Represents an Event Task.
@@ -16,9 +16,10 @@ public class EventTask extends Task {
 
     /**
      * Creates an Event Task.
+     *
      * @param description The description of the task.
-     * @param startTime The start time of the event.
-     * @param endTime The ending time of the event.
+     * @param startTime   The start time of the event.
+     * @param endTime     The ending time of the event.
      */
     public EventTask(String description, LocalDateTime startTime, LocalDateTime endTime) {
         super(description, EVENT_SYMBOL);
