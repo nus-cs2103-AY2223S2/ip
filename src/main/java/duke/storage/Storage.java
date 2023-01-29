@@ -107,8 +107,7 @@ public class Storage {
                 String line = scanner.nextLine();
                 String[] lineArr = line.split("\\] ");
                 String[] lineType = lineArr[0].split("\\]");
-                Task t = new Task(lineType[0].substring(4),
-                        lineType[1].substring(1), lineArr[1]);
+                Task t = new Task(lineType[0].substring(4), lineType[1].substring(1), lineArr[1]);
                 this.addTask(t);
             }
             scanner.close();
