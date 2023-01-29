@@ -1,10 +1,14 @@
+package duke.data.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Event extends Task {
 
-    protected LocalDate fromDate, toDate = null;
-    protected LocalTime fromTime, toTime = null;
+    protected LocalDate fromDate = null;
+    protected LocalTime fromTime = null;
+    protected LocalDate toDate = null;
+    protected LocalTime toTime = null;
 
     public Event(String description, String from, String to) {
         super(description);
@@ -35,7 +39,7 @@ public class Event extends Task {
         if (fromTime != null) {
             result = result + " " + fromTime.toString();
         }
-        result += " to: ";
+        result = result + " to: " + toDate;
         if (toTime != null) {
             result =result + " " + toTime.toString();
         }

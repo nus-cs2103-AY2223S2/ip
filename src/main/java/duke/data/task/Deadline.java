@@ -1,3 +1,5 @@
+package duke.data.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -20,7 +22,7 @@ public class Deadline extends Task {
     @Override
     public String storageStr() {
         return "D | " + super.getStatusValue() + " | " + super.description
-                + " | " + this.byDate + (this.byTime != null? " " + this.byTime : "");
+                + " | " + this.byDate + (this.byTime != null ? " " + this.byTime : "");
     }
 
     @Override
