@@ -37,6 +37,9 @@ public class CommandParser {
 
         Command listCommand = new ListCommand();
         commandMap.put(listCommand.getCommandName(), listCommand);
+
+        Command findCommand = new FindCommand();
+        commandMap.put(findCommand.getCommandName(), findCommand);
     }
 
     /**
