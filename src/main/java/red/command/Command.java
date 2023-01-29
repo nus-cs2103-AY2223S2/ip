@@ -6,28 +6,27 @@ import red.task.TaskList;
 import red.ui.UI;
 
 /**
- * An abstract instruction class encapsulating a user input instruction in Duke, which can be extended
- * by more specific input instructions like addToDoInstruction, ExitInstructions, etc.
+ * This abstract class is the parent class of methods that alter the current list of tasks.
  */
 
 public abstract class Command {
     /**
      * Indicates whether the Command is the Exit Command.
      *
-     * @return whether the command is the exit command.
+     * @return true if command is the exit command and false if it is not.
      */
     public boolean isExit() {
         return false;
     }
 
     /**
-     * Execute the respective instructions.
+     * Executes the specified command.
      *
-     * @param tasks The user TaskList that contains all the task to be manipulated
-     * @param ui The ui Object used to display information
-     * @param storage The Storage Object used to save and load the TaskList
-     * @throws RedException Throws Exception when the user inputs invalid instruction or
-     * when encountering issues reading or writing to the storage file.
+     * @param tasks The TaskList that contains the current list of tasks.
+     * @param ui The UI that interprets any user inputs.
+     * @param storage The Storage that keeps track of how the list of tasks changes from user input.
+     * @throws RedException Throws Exception when the user inputs invalid instruction.
+     *
      */
     public abstract void execute(TaskList tasks, UI ui, Storage storage) throws RedException;
 }

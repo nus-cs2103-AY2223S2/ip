@@ -7,26 +7,28 @@ import red.task.TaskList;
 import red.ui.UI;
 
 /**
- * A more specific instruction class that encapsulates the action of adding a task
- * into the given TaskList.
+ * This class specifies the act of adding a class to the current list of tasks.
  */
 
 public class AddCommand extends Command {
     private final Task task;
 
     /**
-     * The constructor of AddTaskCommand that takes in the task to be added.
+     * The constructor of AddCommand that takes in the task to be added.
      *
-     * @param task The task to be added
+     * @param task The task to be added.
      */
     public AddCommand(Task task) {
         this.task = task;
     }
 
     /**
-     * Adds the given task to the TaskList and display relevant information with the customized format.
+     * Adds the given task to the TaskList.
      *
-     * @param tasks The user TaskList that contains all the task to be manipulated
+     * @param tasks The TaskList that contains the current list of tasks.
+     * @param ui The UI that interprets any user inputs.
+     * @param storage The Storage that keeps track of how the list of tasks changes from user input.
+     * @throws RedException Throws Exception when the user inputs invalid instruction.
      */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws RedException {
@@ -36,7 +38,7 @@ public class AddCommand extends Command {
     /**
      * Compares this object to the specified object.
      *
-     * @param obj the object to compare with
+     * @param obj the object to compare with.
      * @return true if the objects are the same; false otherwise.
      */
     @Override
@@ -53,9 +55,9 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Returns a string representation of the AddTaskCommand in the format "Add Task: task".
+     * Returns a string representation of the AddCommand in the format "Add Task: task".
      *
-     * @return A string representation of the AddTaskCommand
+     * @return A string representation of the AddCommand.
      */
     @Override
     public String toString() {

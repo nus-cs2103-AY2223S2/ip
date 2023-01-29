@@ -7,14 +7,14 @@ import red.task.TaskList;
 import red.ui.UI;
 
 /**
- * A "delete" instruction that remove a particular task with the given index in the TaskList. `
+ * This class specifies the act of deleting a class from the current list of tasks.
  */
 
 public class DeleteCommand extends Command {
     private final int taskIndex;
 
     /**
-     * Constructor for DeleteCommand that takes in the index of the task to be deleted.
+     * The constructor for DeleteCommand that takes in the index of the task to be deleted.
      *
      * @param taskIndex the index of the task to be deleted
      */
@@ -23,26 +23,27 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Remove a particular task with the given index in the TaskList and display
-     * the relevant information of the task and the remaining TaskList.
+     * Remove the specified task(by index) from the current list of tasks.
      *
-     * @param tasks The user TaskList that contains all the task to be manipulated
-     * @param ui The ui Object used to display information
-     * @param storage The Storage Object used to save and load the TaskList
+     * @param tasks The TaskList that contains the current list of tasks.
+     * @param ui The UI that interprets any user inputs.
+     * @param storage The Storage that keeps track of how the list of tasks changes from user input.
+     * @throws RedException Throws Exception when the user inputs invalid instruction.
+     *
      */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws RedException {
-        final String TASK_LIST_IS_EMPTY_ERROR = "OOPS!!! Your task list is currently empty\nPlease add in more tasks";
-        final String INVALID_INDEX_ERROR = "OOPS!!! The input index is not within the range of [1, %d]\nPlease input a valid index";
 
         if (tasks.getTaskListSize() < 1) {
-            throw new RedException(TASK_LIST_IS_EMPTY_ERROR);
+            throw new RedException("There are no tasks to be removed");
         }
         if (tasks.getTaskListSize() < this.taskIndex) {
-            throw new RedException(String.format(INVALID_INDEX_ERROR, tasks.getTaskListSize()));
+            throw new RedException(String.format("The task with the specified index does not exist",
+                    tasks.getTaskListSize()));
         } else {
             Task deletedTask = tasks.deleteTask(this.taskIndex);
-            String message = String.format("Noted. I've removed this task:\n %s \nNow you have %d tasks in the list.", deletedTask.toString(), tasks.getTaskListSize());
+            String message = String.format("Noted. I've removed this task:\n %s \nNow you have %d tasks in the list.",
+                    deletedTask.toString(), tasks.getTaskListSize());
         }
     }
 

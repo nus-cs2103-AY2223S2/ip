@@ -6,11 +6,16 @@ import red.task.Task;
 import red.task.TaskList;
 import red.ui.UI;
 
+/**
+ * This class specifies the marking of a task in the current list of tasks as not completed.
+ */
+
+
 public class UnmarkCommand extends Command {
     private final int taskIndex;
 
     /**
-     * Constructor of UnmarkCommand that takes in the index of the task to unmarked.
+     * The constructor of UnmarkCommand that takes in the index of the task to be unmarked.
      *
      * @param taskIndex The index of the task to be marked
      */
@@ -19,13 +24,12 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Marks the list with the given index as not done.
+     * Marks the task in the current list of tasks with the given index as not done.
      *
-     * @param tasks The user TaskList that contains all the task to be manipulated
-     * @param ui The ui Object used to display information
-     * @param storage The Storage Object used to save and load the TaskList
-     * @throws RedException Throws exception if the list is empty
-     * or the given index is our of range
+     * @param tasks The TaskList that contains the current list of tasks.
+     * @param ui The UI that interprets any user inputs.
+     * @param storage The Storage that keeps track of how the list of tasks changes from user input.
+     * @throws RedException Throws Exception when the user inputs invalid instruction.
      */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws RedException {
