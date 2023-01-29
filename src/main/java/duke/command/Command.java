@@ -6,6 +6,9 @@ import storage.Storage;
 import taskList.TaskList;
 import ui.Ui;
 
+/**
+ * Command is a base abstract class for all commands.
+ */
 public abstract class Command {
     private String request;
     private Commands command;
@@ -15,47 +18,106 @@ public abstract class Command {
         LIST, UNMARK, MARK, TODO, DEADLINE, EVENT, DELETE, EXIT, DOES_NOT_EXIST
     };
 
+    /**
+     * Executes the creation and adding of task to the task list.
+     * 
+     * @param tasks   the task list
+     * @param ui      the ui instance
+     * @param storage the storage intance
+     * 
+     * @return nothing
+     */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
+    /**
+     * Constructor.
+     * 
+     * @param command the command type
+     */
     public Command(Commands command) {
         this.command = command;
     }
 
+    /**
+     * Another constructor.
+     * 
+     * @param request the user command
+     */
     public Command(String request) {
         this.request = request;
         this.command = getCommand(request);
     }
 
+    /**
+     * Retuns a boolean to tell if the command is an exist command.
+     * 
+     * @return a boolean to tell if the command is an exist command
+     */
     public boolean isExit() {
         return this.isExit;
     }
 
+    /**
+     * Toggles isExit.
+     * 
+     * @return nothing
+     */
     public void toggleIsExit() {
         this.isExit = !this.isExit;
     }
 
+    /**
+     * Returns the string of the original user command.
+     * 
+     * @return the string of the original user command
+     */
     public String getRequest() {
         return this.request;
     }
 
+    /**
+     * Returns the command type.
+     * 
+     * @return the command type
+     */
     public Commands getCommand() {
         return this.command;
     }
 
+    /**
+     * Unwraps the user's command into a string array that holds information for the
+     * command to work with.
+     * 
+     * @return a string array that stores the task description.
+     * @throws CommandException
+     */
     public String[] unwrap() throws CommandException {
+        // 1. Prepare the string by extracting everything after the command.
         String[] values = this.request.split(" ");
         String description = String.join(" ", Arrays.copyOfRange(values, 1, values.length));
 
+        // 2. Checks that non-LIST commands have a description.
         if (this.command != Commands.LIST && description.isEmpty()) {
-            throw new CommandException("Command description cannot be empty!");
+            throw new CommandException("Description cannot be empty!");
         }
 
         return new String[] { description };
     }
 
-    public void checkRequestRequirement() throws CommandException {
+    /**
+     * Checks if the command has the inputs that it needs for the creation of task.
+     * 
+     * @throws CommandException
+     */
+    public void checkCommandRequirement() throws CommandException {
     }
 
+    /**
+     * Returns the command type of from the user request
+     * 
+     * @param request the user input
+     * @return the command type
+     */
     public static Commands getCommand(String request) {
         String cmd = request.split(" ")[0];
 

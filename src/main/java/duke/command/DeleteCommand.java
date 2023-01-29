@@ -7,12 +7,27 @@ import taskList.TaskList;
 import tasks.Task;
 import ui.Ui;
 
+/**
+ * DeleteCommand class extends from Command class.
+ */
 public class DeleteCommand extends Command {
 
+    /**
+     * Constructor.
+     * 
+     * @param input the user command
+     */
     public DeleteCommand(String input) {
         super(input);
     }
 
+    /**
+     * Deletes the task from the task list.
+     * 
+     * @param tasks   the task list
+     * @param ui      the ui instance
+     * @param storage the storage instance
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String[] values = this.unwrap();

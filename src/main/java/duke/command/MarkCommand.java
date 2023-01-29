@@ -7,12 +7,27 @@ import taskList.TaskList;
 import tasks.Task;
 import ui.Ui;
 
+/**
+ * MarkCommand class extends from Command class.
+ */
 public class MarkCommand extends Command {
 
+    /**
+     * Constructor.
+     * 
+     * @param input the user input
+     */
     public MarkCommand(String input) {
         super(input);
     }
 
+    /**
+     * Mark the task by the 1-based specified id.
+     * 
+     * @param tasks   the task list
+     * @param ui      the ui instance
+     * @param storage the storage instance
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             int id = Integer.parseInt(this.unwrap()[0]);

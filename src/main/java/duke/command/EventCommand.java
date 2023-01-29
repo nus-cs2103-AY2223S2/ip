@@ -9,12 +9,27 @@ import tasks.Event;
 import tasks.Task;
 import ui.Ui;
 
+/**
+ * EventCommand extends from Command.
+ */
 public class EventCommand extends Command {
-    
+
+    /**
+     * Constructor.
+     * 
+     * @param request the request from the user
+     */
     public EventCommand(String request) {
         super(request);
     }
 
+    /**
+     * Creates the event task and store it into the task list.
+     * 
+     * @param tasks   the task list
+     * @param ui      the ui instance
+     * @param storage the storage instance
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String[] values = this.unwrap();
@@ -30,12 +45,26 @@ public class EventCommand extends Command {
 
     }
 
+    /**
+     * Unwraps the user's command into a string array that holds the following
+     * information:
+     * <ol>
+     * <li>Description - the description of the task</li>
+     * <li>From - the start datetime of the task</li>
+     * <li>To - the end datetime of the task</li>
+     * </ol>
+     * 
+     * @return a string array that stores the description, start datetime and end
+     *         datetime of
+     *         the task.
+     * @throws CommandException
+     */
     @Override
     public String[] unwrap() throws CommandException {
         String[] values = super.getRequest().split(" ");
 
         // Throws RequestExecution if there are any issues with the request
-        checkRequestRequirement();
+        checkCommandRequirement();
 
         int fromIndex = Arrays.asList(values).indexOf("/from");
         int toIndex = Arrays.asList(values).indexOf("/to");
@@ -48,8 +77,13 @@ public class EventCommand extends Command {
         return new String[] { description, from, to };
     }
 
+    /**
+     * Checks if the command has the inputs that it needs for the creation of task.
+     * 
+     * @throws CommandException
+     */
     @Override
-    public void checkRequestRequirement() throws CommandException {
+    public void checkCommandRequirement() throws CommandException {
         String[] values = super.getRequest().split(" ");
         String message = "";
 

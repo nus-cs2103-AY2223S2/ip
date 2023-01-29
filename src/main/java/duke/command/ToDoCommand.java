@@ -1,6 +1,5 @@
 package command;
 
-import java.util.Arrays;
 import dukeexception.CommandException;
 import storage.Storage;
 import taskList.TaskList;
@@ -8,12 +7,27 @@ import tasks.Task;
 import tasks.Todo;
 import ui.Ui;
 
+/**
+ * ToDoCommand class extends from Command class.
+ */
 public class ToDoCommand extends Command {
 
+    /**
+     * Constructor.
+     * 
+     * @param request the request from the user
+     */
     public ToDoCommand(String request) {
         super(request);
     }
 
+    /**
+     * Creates the todo task and store it into the task list.
+     * 
+     * @param tasks   the task list
+     * @param ui      the ui instance
+     * @param storage the storage instance
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String[] values = this.unwrap();
@@ -27,30 +41,6 @@ public class ToDoCommand extends Command {
             storage.save(tasks);
         } catch (CommandException error) {
             ui.showError(error);
-        }
-    }
-
-    @Override
-    public String[] unwrap() throws CommandException {
-        String[] values = super.getRequest().split(" ");
-
-        // Throws RequestExecution if there are any issues with the request
-        checkRequestRequirement();
-
-        String description = String.join(" ", Arrays.copyOfRange(values, 1, values.length));
-        return new String[] { description };
-    }
-
-    @Override
-    public void checkRequestRequirement() throws CommandException {
-        String message = "";
-
-        if (super.getRequest().split(" ").length <= 1) {
-            message = "Description cannot be empty";
-        }
-
-        if (!message.isEmpty()) {
-            throw new CommandException(message);
         }
     }
 }

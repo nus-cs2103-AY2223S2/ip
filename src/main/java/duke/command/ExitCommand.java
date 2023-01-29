@@ -4,13 +4,24 @@ import storage.Storage;
 import taskList.TaskList;
 import ui.Ui;
 
+/**
+ * ExitCommand class extends from Command class.
+ */
 public class ExitCommand extends Command {
-    
-    public ExitCommand(String input) {
-        super(input);
+
+    /**
+     * Constructor.
+     * 
+     * @param input
+     */
+    public ExitCommand() {
+        super(Commands.EXIT);
         super.toggleIsExit();
     }
 
+    /**
+     * Does nothing.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
     }
 }
