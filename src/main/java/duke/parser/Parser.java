@@ -18,7 +18,7 @@ import command.Command.Commands;
 abstract public class Parser {
 
     /**
-     * Parse the commands of the user.
+     * Parses the commands of the user.
      * 
      * @param input the commands from the user
      * @return the Command
