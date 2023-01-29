@@ -1,8 +1,8 @@
 import duke.*;
-import duke.packages.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -71,6 +71,16 @@ public class Duke {
                     Task newEvent = new Event(parsed[1], LocalDate.parse(parsed[2]), LocalDate.parse(parsed[3]));
                     mainStorage.addTask(newEvent);
                     mainUi.printReply("event", newEvent);
+                    break;
+                }
+                case "find": {
+                    String[] parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
+
+                    // ask mainStorage to return an ArrayList of matching tasks
+                    ArrayList<Task> matchingTasks = mainStorage.getMatchingTasks(parsed[1]);
+
+                    // ask mainUi to print out each task one by one
+                    mainUi.printMatchingTasks(matchingTasks);
                     break;
                 }
                 case "todo": {

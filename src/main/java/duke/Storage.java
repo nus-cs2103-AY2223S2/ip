@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
 
 public class Storage {
     private TaskList myTaskList;
@@ -129,5 +129,15 @@ public class Storage {
         dukeWriter.close();
         Files.delete(dukeFilePath);
         Files.move(tempPath, dukeFilePath); // move from src to dest (replace)
+    }
+    public ArrayList<Task> getMatchingTasks(String targetDescription) {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (int i = 0; i < myTaskList.countTasks(); i++) {
+            String descriptionForThisTask = myTaskList.getTaskAtIndex(i).getDescription();
+            if (descriptionForThisTask.contains(targetDescription)) {
+                temp.add(myTaskList.getTaskAtIndex(i));
+            }
+        }
+        return temp;
     }
 }

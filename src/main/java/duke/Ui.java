@@ -1,4 +1,5 @@
 package duke;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui { // handles I/O things
@@ -65,6 +66,12 @@ public class Ui { // handles I/O things
             case "todo":
                 printNewTask(currTask);
                 break;
+        }
+    }
+    public void printMatchingTasks(ArrayList<Task> matchingTasks) {
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            System.out.println("You have " + String.valueOf(matchingTasks.size()) + " matching tasks");
+            System.out.println("  " + matchingTasks.get(i));
         }
     }
 }
