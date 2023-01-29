@@ -49,6 +49,8 @@ public class Parser {
             return new ListTasksCommand();
         case DELETE:
             return deleteTaskParser(input);
+        case FIND:
+            return findTaskParser(input);
         }
 
         return null; // cannot reach here, as duke.command.Operation.valueOf throws IllegalArgumentException
@@ -127,7 +129,9 @@ public class Parser {
         return new DeleteTaskCommand(taskIndex);
     }
 
-
-
-
+    public static Command findTaskParser(String input) throws DukeException {
+        String[] command = input.split(" ", 2);
+        String keyword = command[1];
+        return new FindCommand(keyword);
+    }
 }
