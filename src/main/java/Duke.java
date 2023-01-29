@@ -124,6 +124,7 @@ public class Duke {
                         String deadLineTaskStr = inputDeadline[0];
                         String end = inputDeadline[1].substring(3);
                         Task deadLineTask = new Deadline(deadLineTaskStr, end);
+                        //System.out.println(end);
                         taskstorage.addTask(deadLineTask);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
@@ -145,6 +146,7 @@ public class Duke {
                         }
                         String eventTaskStr = eventStrsplit[0];
                         String eventBegin = eventStrsplit[1].substring(5);
+                        eventBegin = eventBegin.substring(0, eventBegin.length() - 1);
                         String eventEnd = eventStrsplit[2].substring(3);
                         Task eventTask = new Event(eventTaskStr, eventBegin, eventEnd);
                         taskstorage.addTask(eventTask);
