@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 public class Task {
     private String description;
     private boolean isDone;
-    private static Pattern p = Pattern.compile("(todo|event|deadline)\\s(.*)");
+    private static Pattern p = Pattern.compile("(todo|event|deadline).*");
 
     public Task (String input) {
         this.description = input;
@@ -15,10 +15,10 @@ public class Task {
         return p.matcher(input).find();
     }
 
-    public static String[] taskType(String input) {
+    public static String taskType(String input) {
         Matcher m = p.matcher(input);
         m.find();
-        return new String[] {m.group(1), m.group(2)};
+        return m.group(1);
     }
     public String getDescription() {
         return this.description;
