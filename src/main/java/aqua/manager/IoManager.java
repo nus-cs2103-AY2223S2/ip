@@ -19,33 +19,39 @@ public class IoManager {
             "I remembered all your previous tasks! Praise me (⋈◍＞◡＜◍)。✧♡";
 
     /** Syntax exception message format. */
-    private static final String EXCEPTION_FORMAT_SYNTAX =
-            "Hanya??\n" +
-            "I do not understand because:\n" +
-            "  %s\n" +
-            "Gomennasai!! (╥﹏╥)";
+    private static final String EXCEPTION_FORMAT_SYNTAX = String.join("\n",
+            "Hanya??",
+            "I do not understand because:",
+            "  %s",
+            "Gomennasai!! (╥﹏╥)");
     /** Execution exception message format. */
-    private static final String EXCEPTION_FORMAT_EXECUTION =
-            "Hanya??\n" +
-            "I was doing what you told me to do half way but messed up because:\n" +
-            "  %s\n" +
-            "Gomennasai!! (╥﹏╥)";
+    private static final String EXCEPTION_FORMAT_EXECUTION = String.join("\n",
+            "Hanya??",
+            "I was doing what you told me to do half way but messed up because:",
+            "  %s",
+            "Gomennasai!! (╥﹏╥)");
     /** Load exception message format. */
-    private static final String EXCEPTION_FORMAT_LOAD =
-            "Hanya??\n" +
-            "I was looking through my notes and could not remember your previous tasks because:\n" +
-            "  %s\n" +
-            "Gomennasai!! But you did not touch it right? ( ･̆-･̆)";
+    private static final String EXCEPTION_FORMAT_LOAD = String.join("\n",
+            "Hanya??",
+            "I was looking through my notes and could not remember your previous tasks because:",
+            "  %s",
+            "Gomennasai!! But you did not touch it right? ( ･̆-･̆)");
     /** All other exception message format. */
-    private static final String EXCEPTION_FORMAT_DEATH =
-            "UWAWAWA!!\n" +
-            "I messed up big time...\n" +
-            "  %s";
+    private static final String EXCEPTION_FORMAT_DEATH = String.join("\n",
+            "UWAWAWA!!",
+            "I messed up big time...",
+            "  %s");
 
     private final Supplier<String> inputSupplier;
     private final Consumer<String> outputConsumer;
 
 
+    /**
+     * Constructs an IoManager from the specified parameters.
+     *
+     * @param inputSupplier - the supplier to get user input from.
+     * @param outputConsumer - the consumer to display messages to the user.
+     */
     public IoManager(Supplier<String> inputSupplier, Consumer<String> outputConsumer) {
         this.inputSupplier = inputSupplier;
         this.outputConsumer = outputConsumer;
@@ -64,15 +70,20 @@ public class IoManager {
 
 
     /**
-     * Formats and prints exception.
+     * Displays information about the given exception.
      *
-     * @param ex - the exception to print.
+     * @param ex - the exception to display.
      */
     public void replyException(Throwable ex) {
         reply(getExceptionReply(ex));
     }
 
 
+    /**
+     * Gets the formatted information String of the given exception.
+     *
+     * @param ex - the exception whose information is to be formed.
+     */
     private String getExceptionReply(Throwable ex) {
         try {
             throw ex;
