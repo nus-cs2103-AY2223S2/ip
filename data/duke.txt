@@ -1,2 +1,1 @@
-1.[T][X] read book
-2.[D][ ] return book (by: 6 June)
+1.[T][ ] buy book
