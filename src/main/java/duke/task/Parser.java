@@ -2,12 +2,22 @@ package duke.task;
 
 import duke.command.*;
 
+/**
+ * Class for Parser object.
+ *
+ * @author Gao Mengqi
+ * @version CS2103T AY22/23 Semester 2
+ */
+
 public class Parser {
     static String[] arr;
 
-    public Parser() {
-
-    }
+    /**
+     * Split the command into different parts.
+     *
+     * @param command
+     * @return a String array containing useful information about the command.
+     */
 
     public static String[] splitCommand(String command) {
         if (command.contains("/")) {
@@ -27,6 +37,13 @@ public class Parser {
         }
         return arr;
     }
+
+    /**
+     * Parse the command.
+     *
+     * @param command
+     * @return Command object.
+     */
 
     public static Command parse(String command) {
         Command parsedCommand = null;
