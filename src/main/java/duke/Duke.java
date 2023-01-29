@@ -60,6 +60,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/data/Duke").run();
+        new Duke("data/Duke").run();
     }
 }
