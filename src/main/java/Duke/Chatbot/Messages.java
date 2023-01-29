@@ -1,5 +1,8 @@
 package Duke.Chatbot;
 
+/**
+ * Specifies the names of commands Duke uses
+ */
 public class Messages {
 
     final static String MESSAGE_END = "GOODBYE";
