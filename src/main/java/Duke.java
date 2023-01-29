@@ -1,12 +1,14 @@
 import java.io.IOException;
+
 import java.util.ArrayList;
 
-import duke.tasktypes.Task;
 import duke.Ui;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.DukeExceptions;
+
+import duke.tasktypes.Task;
 
 public class Duke {
 

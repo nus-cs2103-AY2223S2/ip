@@ -6,9 +6,7 @@ import java.io.IOException;
 
 public class Ui {
     
-    BufferedReader readingInput;
-    Parser currentStatus;
-
+    protected BufferedReader readingInput;
     public Ui() {
         this.readingInput = new BufferedReader(new InputStreamReader(System.in));
     }

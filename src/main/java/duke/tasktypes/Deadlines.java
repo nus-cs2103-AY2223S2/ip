@@ -1,18 +1,17 @@
 package duke.tasktypes;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.DukeExceptions;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 public class Deadlines extends Task {
-    String endsBy;
-    LocalDate dueDateBy;
-    LocalTime dueTime;
-    boolean validTime = false;
+    protected String endsBy;
+    protected LocalDate dueDateBy;
+    protected LocalTime dueTime;
+    protected boolean validTime = false;
 
 
     public Deadlines(String taskName) throws DukeExceptions, DateTimeParseException{
@@ -134,22 +133,22 @@ public class Deadlines extends Task {
             String newFormatOfDate = this.dueDateBy.format(newFormat).replace("/", " ");
             if (this.done) {
                 if (validTime) {
-                    toReturn = "[D][X]" + this.name + "(by: " + newFormatOfDate + " " + this.dueTime.toString() + ")";
+                    toReturn = "[D][X]" + this.getName() + "(by: " + newFormatOfDate + " " + this.dueTime.toString() + ")";
                 } else {
-                    toReturn = "[D][X]" + this.name + "(by: " + newFormatOfDate + ")";
+                    toReturn = "[D][X]" + this.getName() + "(by: " + newFormatOfDate + ")";
                 }
             } else {
                 if (validTime) {
-                    toReturn = "[D][ ]" + this.name + "(by: " + newFormatOfDate + " " + this.dueTime.toString() + ")";
+                    toReturn = "[D][ ]" + this.getName() + "(by: " + newFormatOfDate + " " + this.dueTime.toString() + ")";
                 } else {
-                    toReturn = "[D][ ]" + this.name + "(by: " + newFormatOfDate + ")";
+                    toReturn = "[D][ ]" + this.getName() + "(by: " + newFormatOfDate + ")";
                 }
             }
         } else {
             if (this.done) {
-                toReturn = "[D][X]" + this.name + "(by: " + this.endsBy + ")";
+                toReturn = "[D][X]" + this.getName() + "(by: " + this.endsBy + ")";
             } else {
-                toReturn = "[D][ ]" + this.name + "(by: " + this.endsBy + ")";
+                toReturn = "[D][ ]" + this.getName() + "(by: " + this.endsBy + ")";
             }
         }
         return toReturn;

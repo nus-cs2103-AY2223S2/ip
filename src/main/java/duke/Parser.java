@@ -7,14 +7,11 @@ import duke.tasktypes.Task;
 
 public class Parser {
     
-    public Parser() {
-
-    }
+    public Parser() {}
 
     public void readInput(String input, TaskList listOfTasks) throws DukeExceptions {
         
         try {
-
             if (input.startsWith("todo")) {
                 handleToDoTask(input, listOfTasks);
                 return;
