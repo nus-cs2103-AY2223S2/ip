@@ -19,8 +19,8 @@ public class UnmarkCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
 
         try {
-            boolean success = tasks.mark(indexToUnmark, "unmark");
-            if (success) {
+            boolean isSuccess = tasks.mark(indexToUnmark, "unmark");
+            if (isSuccess) {
                 Ui.showUnmarked();
                 storage.writeToFile(tasks);
             } else {

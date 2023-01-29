@@ -19,8 +19,8 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
         try {
-            boolean success = tasks.mark(indexToMark, "mark");
-            if (success) {
+            boolean isSuccess = tasks.mark(indexToMark, "mark");
+            if (isSuccess) {
                 Ui.showMarkedDone();
                 //override storage file with all new tasks
                 storage.writeToFile(tasks);

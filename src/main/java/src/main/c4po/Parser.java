@@ -74,9 +74,9 @@ public class Parser {
             if (desc.isBlank()) {
                 throw new BotException(errEvent);
             }
-            String[] stringarr = desc.split(" /from ");
-            String[] strarr = stringarr[1].split(" /to ");
-            Event newEvent = new Event(stringarr[0], strarr[0], strarr[1]);
+            String[] stringArr = desc.split(" /from ");
+            String[] strArr = stringArr[1].split(" /to ");
+            Event newEvent = new Event(stringArr[0], strArr[0], strArr[1]);
 
             return new AddTaskCommand(newEvent, true);
 
@@ -84,8 +84,8 @@ public class Parser {
             Integer index = Integer.valueOf(receive.substring(6).strip());
             return new DeleteCommand(index);
         } else {
-            String takFaham = Ui.UNABLE_TO_UNDERSTAND_QUOTE;
-            throw new BotException(takFaham);
+            String unableToUnderstandQuote = Ui.UNABLE_TO_UNDERSTAND_QUOTE;
+            throw new BotException(unableToUnderstandQuote);
         }
     }
 }

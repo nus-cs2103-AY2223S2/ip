@@ -1,7 +1,5 @@
 package src.main.c4po;
 
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -39,8 +37,8 @@ public class Storage {
             storageFile = new File(filePath);
 
             if (!storageFile.exists()) {
-                boolean success = storageFile.createNewFile();
-                if (success) {
+                boolean isSuccess = storageFile.createNewFile();
+                if (isSuccess) {
                     Ui.showCreatedDbMsg();
                 } else {
                     Ui.showCreateDbError();
