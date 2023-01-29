@@ -46,6 +46,7 @@ public class Duke {
 
         // Initialise variables
         ArrayList<Task> tasks = new ArrayList<>();
+        DukeException.ErrorType errType = DukeException.ErrorType.UNKNOWN;
 
         // Decision loop
         boolean isContinue_decisionLoop = true;
@@ -88,14 +89,14 @@ public class Duke {
             } catch (IllegalArgumentException e) {
                 // If user's input is not a valid command
                 try {
-                    throw new DukeException("Unknown", "Unknown Command");
+                    throw new DukeException(errType, "Unknown Command");
                 } catch (DukeException de) {
                     echo(de.getMessage());
                 }
             } catch (NullPointerException e) {
                 // If user's input is not a valid command
                 try {
-                    throw new DukeException("Unknown", "No Command");
+                    throw new DukeException(errType, "No Command");
                 } catch (DukeException de) {
                     echo(de.getMessage());
                 }
@@ -138,7 +139,7 @@ public class Duke {
      */
     static void echo(String[] msg, int[] indentLevel) throws DukeException {
         if (indentLevel.length != msg.length) {
-            throw new DukeException("List", "Unbalanced List");
+            throw new DukeException(DukeException.ErrorType.LIST, "Unbalanced List");
         }
         String indent = indent(INDENTATION_LEVEL);
 
@@ -210,7 +211,7 @@ public class Duke {
      */
     static void list(ArrayList<Task> tasks) throws DukeException {
         if (tasks.size() < 1) {
-            throw new DukeException("List", "Empty List");
+            throw new DukeException(DukeException.ErrorType.LIST, "Empty List");
         }
         String[] output = new String[tasks.size()];
         int[] indentLevel = new int[tasks.size()];
@@ -234,8 +235,9 @@ public class Duke {
      */
     static void mark(ArrayList<Task> tasks, String input) throws DukeException {
         int index = input.trim().indexOf(" ");
+        DukeException.ErrorType errType = DukeException.ErrorType.MARK;
         if (index < 0) {
-            throw new DukeException("Mark", "Empty Index");
+            throw new DukeException(errType, "Empty Index");
         }
         try {
             index = Integer.parseInt(input
@@ -246,9 +248,9 @@ public class Duke {
                     tasks.get(index).toString()};
             echo(message, indentLevel);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Mark", "Out of Bound");
+            throw new DukeException(errType, "Out of Bound");
         } catch (NumberFormatException e) {
-            throw new DukeException("Mark", "Not Integer");
+            throw new DukeException(errType, "Not Integer");
         }
     }
 
@@ -263,8 +265,9 @@ public class Duke {
      */
     static void unmark(ArrayList<Task> tasks, String input) throws DukeException {
         int index = input.trim().indexOf(" ");
+        DukeException.ErrorType errType = DukeException.ErrorType.UNMARK;
         if (index < 0) {
-            throw new DukeException("Unmark", "Empty Index");
+            throw new DukeException(errType, "Empty Index");
         }
         try {
             index = Integer.parseInt(input
@@ -275,9 +278,9 @@ public class Duke {
                     tasks.get(index).toString()};
             echo(message, indentLevel);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Unmark", "Out of Bound");
+            throw new DukeException(errType, "Out of Bound");
         }  catch (NumberFormatException e) {
-            throw new DukeException("Unmark", "Not Integer");
+            throw new DukeException(errType, "Not Integer");
         }
     }
 
@@ -292,8 +295,9 @@ public class Duke {
      */
     static void delete(ArrayList<Task> tasks, String input) throws DukeException {
         int index = input.trim().indexOf(" ");
+        DukeException.ErrorType errType = DukeException.ErrorType.DELETE;
         if (index < 0) {
-            throw new DukeException("Delete", "Empty Index");
+            throw new DukeException(errType, "Empty Index");
         }
         try {
             index = Integer.parseInt(input
@@ -307,9 +311,9 @@ public class Duke {
                             + MSG_ADD[2]};
             echo(message, indentLevel);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Delete", "Out of Bound");
+            throw new DukeException(errType, "Out of Bound");
         }  catch (NumberFormatException e) {
-            throw new DukeException("Delete", "Not Integer");
+            throw new DukeException(errType, "Not Integer");
         }
     }
 }

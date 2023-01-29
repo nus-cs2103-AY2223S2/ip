@@ -25,17 +25,18 @@ public class Todo extends Task {
     public static Todo generate(String input) throws DukeException {
         // Cleans input command
         input = input.trim();
+        DukeException.ErrorType errType = DukeException.ErrorType.TODO;
 
         // Checks format of input command
         int index = input.indexOf(" ");
         if (index < 0) {
-            throw new DukeException("ToDo", "Empty description");
+            throw new DukeException(errType, "Empty description");
         }
 
         // Cleans and checks variables
         String description = input.substring(index + 1).trim();
         if (description.equals("")) {
-            throw new DukeException("ToDo", "Empty description");
+            throw new DukeException(errType, "Empty description");
         }
 
         return new Todo(description);
