@@ -16,10 +16,10 @@ Nice! I've marked this task as done:
 Here are the tasks in your list:
 1.[T][ ] drink coffee
 2.[T][X] dunk on a noob
-Added Event task:
+Added donkeychat.Event task:
 [E][ ] slap a duck's bum (from: yesterday to: today)
 Now you have 3 tasks in the list!
-Added Deadline task:
+Added donkeychat.Deadline task:
 [D][ ] chinese new year (by: saturday)
 Now you have 4 tasks in the list!
 Nice! I've marked this task as done:

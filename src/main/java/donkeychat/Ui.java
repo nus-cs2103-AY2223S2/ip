@@ -1,3 +1,5 @@
+package donkeychat;
+
 public class Ui {
 
     public void displayIntro() {
@@ -40,10 +42,10 @@ public class Ui {
             System.out.println("Added Todo task:\n" + task);
             System.out.println("Now you have " + taskList.getSize() + " tasks in the list!");
         } else if (task instanceof Event) {
-            System.out.println("Added Event task:\n" + task);
+            System.out.println("Added donkeychat.Event task:\n" + task);
             System.out.println("Now you have " + taskList.getSize() + " tasks in the list!");
         } else if (task instanceof Deadline) {
-            System.out.println("Added Deadline task:\n" + task);
+            System.out.println("Added donkeychat.Deadline task:\n" + task);
             System.out.println("Now you have " + taskList.getSize() + " tasks in the list!");
         }
     }

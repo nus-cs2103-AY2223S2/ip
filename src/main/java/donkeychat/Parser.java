@@ -1,3 +1,5 @@
+package donkeychat;
+
 public class Parser {
 
     public Parser() {
