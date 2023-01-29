@@ -18,6 +18,10 @@ public class ToDoList {
         this.toDoCount = 0;
     }
 
+    public int getToDoCount() {
+        return this.toDoCount;
+    }
+
     public void add(Task task) {
         String divider = "@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@\n";
         ++this.toDoCount;
