@@ -17,20 +17,20 @@ import uwuke.task.Todo;
  */
 public class Storage {
 
-    private static final Path dataDirectory = Path.of("data");
-    private static final Path dataFile = Path.of("data", "tasks.dat");
+    private static final Path DATA_DIRECTORY = Path.of("data");
+    private static final Path DATA_FILE = Path.of("data", "tasks.dat");
 
     public static void saveTasks(Collection<? super Task> tasks) throws Exception {
-        if (!Files.exists(dataDirectory)) {
-            Files.createDirectory(dataDirectory);
+        if (!Files.exists(DATA_DIRECTORY)) {
+            Files.createDirectory(DATA_DIRECTORY);
         }
         
         // Creates .dat file if it doesn't exist, removes all content originally there
-        Files.write(dataFile, Arrays.toString(tasks.toArray()).getBytes());
+        Files.write(DATA_FILE, Arrays.toString(tasks.toArray()).getBytes());
     }
 
     public static TaskList readSavedTasks() throws Exception {
-        String rawString = Files.readString(dataFile);
+        String rawString = Files.readString(DATA_FILE);
         String[] taskStrings = rawString.split(", ");
         taskStrings = cleanTaskString(taskStrings);
         TaskList tasks = new TaskList();
