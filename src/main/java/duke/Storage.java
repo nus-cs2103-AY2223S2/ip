@@ -63,19 +63,19 @@ public class Storage {
             String[] inp = x.split("\\|");
             String type = inp[0];
             if (type.equals("T")) {
-                Task tsk = new Task(tasks.size() + 1, inp[1]);
+                Task tsk = new Task(inp[1]);
                 tsk.setIsDone(Boolean.parseBoolean(inp[1]));
                 tasks.add(tsk);
             } else if (type.equals("TD")) {
-                ToDo td = new ToDo(tasks.size() + 1, inp[2]);
+                ToDo td = new ToDo(inp[2]);
                 td.setIsDone(Boolean.parseBoolean(inp[1]));
                 tasks.add(td);
             } else if (type.equals("D")) {
-                Deadline d = new Deadline(tasks.size() + 1, inp[2], LocalDate.parse(inp[3]));
+                Deadline d = new Deadline(inp[2], LocalDate.parse(inp[3]));
                 d.setIsDone(Boolean.parseBoolean(inp[1]));
                 tasks.add(d);
             } else if (type.equals("E")) {
-                Event e = new Event(tasks.size() + 1, inp[2], LocalDateTime.parse(inp[3]),
+                Event e = new Event(inp[2], LocalDateTime.parse(inp[3]),
                         LocalDateTime.parse(inp[4]));
                 e.setIsDone(Boolean.parseBoolean(inp[1]));
                 tasks.add(e);
@@ -84,7 +84,11 @@ public class Storage {
         return tasks;
     }
 
-    //Write into duke.Duke.txt
+    /**
+     * Writes into duke.txt
+     * @param allData is an ArrayList containing all Tasks
+     * @throws IOException if error in writing
+     */
     public static void upload(ArrayList<Task> allData) {
         ArrayList<String> writing = new ArrayList<>();
         for (Task x : allData) {

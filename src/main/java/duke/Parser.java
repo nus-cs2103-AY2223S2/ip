@@ -21,7 +21,7 @@ public class Parser {
         } catch (DukeExceptions e) {
             System.out.println("Description cannot be empty!");
         }
-        return new ToDo(size + 1, td);
+        return new ToDo(td);
     }
 
     /**
@@ -59,6 +59,6 @@ public class Parser {
         LocalDate date = LocalDate.parse(deadline);
         String undesc = inp[0];
         String desc = undesc.substring(9);
-        return new Deadline(size + 1, desc, date);
+        return new Deadline(desc, date);
     }
 }

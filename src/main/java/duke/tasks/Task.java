@@ -1,15 +1,12 @@
 package duke.tasks;
 
 public class Task {
-    /** integer identifier in the TaskList*/
-    protected int id;
     /** Description of the task*/
     protected String desc;
     /** if task is completed*/
     protected boolean isDone;
 
-    public Task(int id, String description) {
-        this.id = id;
+    public Task(String description) {
         this.desc = description;
         this.isDone = false;
     }
@@ -19,7 +16,7 @@ public class Task {
     public void setIsDone(boolean status) {
         this.isDone = status;
     }
-    public void setId(int id) { this.id = id; }
+    public String getDesc() { return this.desc; }
 
     /**
      * Process Task to String to store in duke.txt
@@ -31,6 +28,6 @@ public class Task {
     @Override
     public String toString() {
         String statusIcon = this.getStatusIcon();
-        return id + ". [" + statusIcon + "] " + this.desc;
+        return "[" + statusIcon + "] " + this.desc;
     }
 }

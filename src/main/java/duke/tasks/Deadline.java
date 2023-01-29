@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDate deadline;
 
-    public Deadline(int id, String description, LocalDate deadline) {
-        super(id, description);
+    public Deadline(String description, LocalDate deadline) {
+        super(description);
         this.deadline = deadline;
     }
 
@@ -22,6 +22,6 @@ public class Deadline extends Task {
     public String toString() {
         String statusIcon = this.getStatusIcon();
         String parsedDeadline = deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return id + ". [D][" + statusIcon + "] " + this.desc + "(" + parsedDeadline + ")";
+        return "[D][" + statusIcon + "] " + this.desc + "(" + parsedDeadline + ")";
     }
 }

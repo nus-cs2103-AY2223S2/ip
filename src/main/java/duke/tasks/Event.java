@@ -7,8 +7,8 @@ public class Event extends Task {
     protected LocalDateTime start;
     protected LocalDateTime end;
 
-    public Event(int id, String description, LocalDateTime start, LocalDateTime end) {
-        super(id, description);
+    public Event(String description, LocalDateTime start, LocalDateTime end) {
+        super(description);
         this.start = start;
         this.end = end;
     }
@@ -26,6 +26,6 @@ public class Event extends Task {
         String statusIcon = this.getStatusIcon();
         String startDnT = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(start);
         String endDnT = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(end);
-        return id + ". [E][" + statusIcon + "] " + this.desc + "(from: " + startDnT + " to: " + endDnT + ")";
+        return "[E][" + statusIcon + "] " + this.desc + "(from: " + startDnT + " to: " + endDnT + ")";
     }
 }

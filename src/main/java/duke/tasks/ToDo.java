@@ -1,8 +1,8 @@
 package duke.tasks;
 
 public class ToDo extends Task {
-    public ToDo(int id, String description) {
-        super(id, description);
+    public ToDo(String description) {
+        super(description);
     }
 
     /**
@@ -18,6 +18,6 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         String statusIcon = this.getStatusIcon();
-        return this.id + ". [T][" + statusIcon + "] " + this.desc;
+        return "[T][" + statusIcon + "] " + this.desc;
     }
 }
