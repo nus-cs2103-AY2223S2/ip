@@ -3,6 +3,10 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is a TaskList that keeps track of
+ * user's list of tasks.
+ */
 public class TaskList {
 
     private List<Task> taskList;

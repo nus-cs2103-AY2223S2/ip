@@ -5,6 +5,10 @@ import java.io.PrintStream;
 
 import java.util.Scanner;
 
+/**
+ * This is a TextUi that contains methods read and write
+ * on Duke.
+ */
 class TextUi {
 
     public final Scanner in;

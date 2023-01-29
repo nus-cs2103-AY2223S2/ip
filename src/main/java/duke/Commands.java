@@ -1,11 +1,20 @@
-
 package duke;
 
 import java.time.LocalDate;
 
+/**
+ * This class contains the Commands for Duke.
+ */
 public class Commands {
+
+    /**
+     * Executes the list command.
+     * @param textUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     */
     public static void executeListCommand(TextUi textUi, TaskList taskList) {
         textUi.printLine();
+
         if (taskList.isEmpty()) {
             System.out.println("You currently have no task.");
         } else {
@@ -19,6 +28,41 @@ public class Commands {
         textUi.printLine();
     }
 
+    /**
+     * Executes the find command.
+     *
+     * @param textUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     */
+    public static void executeFindCommand(String toFind, TextUi textUi, TaskList taskList) {
+        textUi.printLine();
+        if (taskList.isEmpty()) {
+            System.out.println("You currently have no task.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            int count = 1;
+            for (int i = 0; i < taskList.getArraySize(); i++) {
+                String currentTaskDescription = taskList.getTask(i).getDescription();
+                if (currentTaskDescription.contains(toFind)) {
+                    System.out.println(count + ". " + taskList.getTask(i));
+                    count++;
+                }
+            }
+            if (count == 1) {
+                System.out.println("Here are no matching task in your list.");
+            }
+        }
+        textUi.printLine();
+    }
+
+    /**
+     * Executes the mark command.
+     * @param input    input String.
+     * @param textUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException If there is no such task.
+     */
     public static void executeMarkCommand(
             String input, TextUi textUi, TaskList taskList, Storage storage)
             throws DukeException {
@@ -33,6 +77,14 @@ public class Commands {
         }
     }
 
+    /**
+     * Executes the unmark command.
+     * @param input    input String.
+     * @param textUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException
+     */
     public static void executeUnmarkCommand(
             String input, TextUi textUi, TaskList taskList, Storage storage)
             throws DukeException {
@@ -47,8 +99,15 @@ public class Commands {
         }
     }
 
-    public static void executeDeleteCommand(
-            String input, TextUi textUi, TaskList taskList, Storage storage)
+    /**
+     * Executes the delete command.
+     * @param input    input String.
+     * @param textUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException
+     */
+    public static void executeDeleteCommand(String input, TextUi textUi, TaskList taskList, Storage storage)
             throws DukeException {
         int indexToDelete = Integer.parseInt(input) - 1;
         if (indexToDelete < taskList.getArraySize()) {
@@ -60,8 +119,15 @@ public class Commands {
         }
     }
 
-    public static void executeToDoCommand(
-            String input, TextUi textUi, TaskList taskList, Storage storage)
+    /**
+     * Executes the todo command.
+     * @param input    input String.
+     * @param textUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException If the given string is empty.
+     */
+    public static void executeToDoCommand(String input, TextUi textUi, TaskList taskList, Storage storage)
             throws DukeException {
         String check = Parser.removeWhiteSpaces(input);
         if (check.equals("todo")) {
@@ -73,8 +139,15 @@ public class Commands {
         storage.saveTaskListToStorage(taskList);
     }
 
-    public static void executeDeadlineCommand(
-            String input, TextUi textUi, TaskList taskList, Storage storage)
+    /**
+     * Executes the deadline command.
+     * @param input    input String.
+     * @param textUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException If the given string is empty.
+     */
+    public static void executeDeadlineCommand(String input, TextUi textUi, TaskList taskList, Storage storage)
             throws DukeException {
         String check = Parser.removeWhiteSpaces(input);
         if (check.equals("deadline")) {
@@ -88,8 +161,15 @@ public class Commands {
         storage.saveTaskListToStorage(taskList);
     }
 
-    public static void executeEventCommand(
-            String input, TextUi textUi, TaskList taskList, Storage storage)
+    /**
+     * Executes the event command.
+     * @param input    input String.
+     * @param textUi   TextUi for Duke.
+     * @param taskList TaskList for Duke.
+     * @param storage  Storage for Duke.
+     * @throws DukeException If the given string is empty.
+     */
+    public static void executeEventCommand(String input, TextUi textUi, TaskList taskList, Storage storage)
             throws DukeException {
         String check = Parser.removeWhiteSpaces(input);
         if (check.equals("event")) {

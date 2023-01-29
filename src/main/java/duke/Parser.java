@@ -1,7 +1,19 @@
 package duke;
 
+/**
+ * This class is a parser that reads user inputs.
+ */
 public class Parser {
 
+    /**
+     * Parses the input string and calls the correct
+     * execution method.
+     * 
+     * @param userInput User Input.
+     * @param taskList  TaskList.
+     * @param storage   Storage.
+     * @param textUi    TextUi.
+     */
     public void parse(String userInput, TaskList taskList
             , Storage storage, TextUi textUi) throws DukeException {
 
@@ -37,6 +49,9 @@ public class Parser {
                 break;
             case "event":
                 Commands.executeEventCommand(body, textUi, taskList, storage);
+                break;
+            case "find":
+                Commands.executeFindCommand(body, textUi, taskList);
                 break;
             default:
                 throw new DukeException("I'm sorry, I don't know what that means!");
