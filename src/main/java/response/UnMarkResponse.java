@@ -37,6 +37,11 @@ public class UnMarkResponse extends Response {
         return String.format("OK, I've marked this task as not done yet:\n\t\t%s", currTask.toString());
     }
 
+    /**
+     * Custom equals operator to compare UnMarkResponse objects
+     * @param obj The other UnMarkResponse object to compare to
+     * @return boolean if the two are the same UnMarkResponse
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

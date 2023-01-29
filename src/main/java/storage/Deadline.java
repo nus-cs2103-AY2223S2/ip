@@ -12,7 +12,6 @@ public class Deadline extends Task {
 
     /**
      * Creates a new deadline with the specified description
-     *
      * @param description The specified description
      */
     public Deadline(String description, LocalDate by) {
@@ -20,11 +19,19 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Custom string to represent a deadline for printing
+     * @return Custom string
+     */
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 
+    /**
+     * Custom string to represent a deadline data to be saved
+     * @return Custom string
+     */
     @Override
     public String toData() {
         return String.format("D | %s | %s", super.toData(), by);

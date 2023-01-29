@@ -76,6 +76,11 @@ public class EventResponse extends Response {
                 taskList.count());
     }
 
+    /**
+     * Custom equals operator to compare EventResponse objects
+     * @param obj The other EventResponse object to compare to
+     * @return boolean if the two are the same EventResponse
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

@@ -21,7 +21,6 @@ public class Ui {
 
     /**
      * Prints formatted response to the console.
-     *
      * @param s string that will be printed
      */
     public void printResponse(String s) {
