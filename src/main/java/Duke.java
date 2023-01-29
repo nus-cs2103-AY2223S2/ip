@@ -1,6 +1,6 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
 public class Duke {
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -8,8 +8,7 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final List<Task> TASK_LIST =  new ArrayList<>();
-    private static int nTasks = 0;
+    private static ArrayList<Task> TASK_LIST = new ArrayList<>();
 
     private static void greet() {
         String greeting = "____________________________________________________________\n"
@@ -37,9 +36,8 @@ public class Duke {
         String taskDescription = userCommandParts[1].trim();
         ToDo toDo = new ToDo(taskDescription);
         TASK_LIST.add(toDo);
-        nTasks++;
         System.out.println("Got it. I've added this task:\n\t" + toDo
-                + "\nNow you have " + nTasks + " task(s) in the list.");
+                + "\nNow you have " + TASK_LIST.size() + " task(s) in the list.");
     }
 
     private static void addDeadline(String userCommand) throws DukeException {
@@ -63,10 +61,9 @@ public class Duke {
         String dueDate = userCommandParts[1].trim();
         Deadline deadline = new Deadline(description, dueDate);
         TASK_LIST.add(deadline);
-        nTasks++;
 
         System.out.println("Got it. I've added this task:\n\t" + deadline
-                + "\nNow you have " + nTasks + " task(s) in the list.");
+                + "\nNow you have " + TASK_LIST.size() + " task(s) in the list.");
     }
 
     private static void addEvent(String userCommand) throws DukeException {
@@ -98,18 +95,17 @@ public class Duke {
 
         Event event = new Event(description, startDateTime, endDateTime);
         TASK_LIST.add(event);
-        nTasks++;
 
         System.out.println("Got it. I've added this task:\n\t" + event
-                + "\nNow you have " + nTasks + " task(s) in the list.");
+                + "\nNow you have " + TASK_LIST.size() + " task(s) in the list.");
     }
 
     private static void printTaskList() {
-        if (nTasks == 0) {
+        if (TASK_LIST.size() == 0) {
             System.out.println("There are no tasks in your Task List!");
         } else {
             System.out.println("Your Tasks:");
-            for (int i = 0; i < nTasks; i++) {
+            for (int i = 0; i < TASK_LIST.size(); i++) {
                 System.out.println((i + 1) + ". " + TASK_LIST.get(i));
             }
         }
@@ -125,13 +121,17 @@ public class Duke {
             String taskNumber = userCommandParts[1];
             int taskIndex = Integer.parseInt(taskNumber) - 1;
 
-            if (nTasks == 0) {
+            if (TASK_LIST.size() == 0) {
                 System.out.println("There are no tasks in your Task List!");
-            } else if (0 <= taskIndex && taskIndex < nTasks) {
-                TASK_LIST.get(taskIndex).setDone();
+
+            } else if (0 <= taskIndex && taskIndex < TASK_LIST.size()) {
+                Task task = TASK_LIST.get(taskIndex);
+                task.setDone();
+                System.out.println("Task marked as completed\n" + task);
+
             } else {
                 throw new DukeInvalidArgumentException("Please provide a valid Task number\n" +
-                        "You have " + nTasks + " task(s) in your Task List");
+                        "You have " + TASK_LIST.size() + " task(s) in your Task List");
             }
 
         } catch (NumberFormatException exception) {
@@ -149,13 +149,17 @@ public class Duke {
             String taskNumber = userCommandParts[1];
             int taskIndex = Integer.parseInt(taskNumber) - 1;
 
-            if (nTasks == 0) {
+            if (TASK_LIST.size() == 0) {
                 System.out.println("There are no tasks in your Task List!");
-            } else if (0 <= taskIndex && taskIndex < nTasks) {
-                TASK_LIST.get(taskIndex).setNotDone();
+
+            } else if (0 <= taskIndex && taskIndex < TASK_LIST.size()) {
+                Task task = TASK_LIST.get(taskIndex);
+                task.setNotDone();
+                System.out.println("Task marked as not completed\n" + task);
+
             } else {
                 throw new DukeInvalidArgumentException("Please provide a valid Task number\n" +
-                        "You have " + nTasks + " task(s) in your Task List");
+                        "You have " + TASK_LIST.size() + " task(s) in your Task List");
             }
 
         } catch (NumberFormatException exception) {
@@ -163,7 +167,6 @@ public class Duke {
         }
 
     }
-
     private static void deleteTask(String userCommand) throws DukeException {
         try {
             String[] userCommandParts = userCommand.split(" ");
@@ -174,17 +177,17 @@ public class Duke {
             String taskNumber = userCommandParts[1];
             int taskIndex = Integer.parseInt(taskNumber) - 1;
 
-            if (nTasks == 0) {
+            if (TASK_LIST.size() == 0) {
                 System.out.println("There are no tasks in your Task List!");
-            } else if (0 <= taskIndex && taskIndex < nTasks) {
+            } else if (0 <= taskIndex && taskIndex < TASK_LIST.size()) {
                 Task task = TASK_LIST.get(taskIndex);
                 TASK_LIST.remove(taskIndex);
-                nTasks--;
+
                 System.out.println("Noted. I've deleted this task:\n\t" + task
-                        + "\nNow you have " + nTasks + " task(s) in the list.");
+                        + "\nNow you have " + TASK_LIST.size() + " task(s) in the list.");
             } else {
                 throw new DukeInvalidArgumentException("Please provide a valid Task number\n" +
-                        "You have " + nTasks + " task(s) in your Task List");
+                        "You have " + TASK_LIST.size() + " task(s) in your Task List");
             }
 
         } catch (NumberFormatException exception) {
@@ -229,10 +232,15 @@ public class Duke {
             default:
                 throw new DukeInvalidCommandException("beep...boop... unrecognized command!");
         }
+
+        TaskFileHandler.storeTaskList(TASK_LIST);
     }
 
     public static void start() {
         Duke.greet();
+        TASK_LIST = TaskFileHandler.loadTaskList();
+
+        // Ready for commands
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -244,6 +252,7 @@ public class Duke {
             }
             try {
                 processCommand(input);
+
             } catch (DukeException exception) {
                 System.out.println(exception.getMessage());
             }
