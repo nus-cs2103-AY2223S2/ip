@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClassName = "UwUke"
+    mainClassName = "uwuke.UwUke"
 }
 
 shadowJar {
