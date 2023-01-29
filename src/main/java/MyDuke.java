@@ -3,27 +3,28 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.*;
+import java.util.function.Consumer;
 
 public class MyDuke {
+    private static DukeIO dukeIo = new DukeIO();
     private static ArrayList<Task> allTasks = new ArrayList<Task>();
-    private static Map<String, Consumer<String[]>> MAP = new HashMap<>();
+    private static Map<String, Consumer<String[]>> cmdMap = new HashMap<>();
     private static int taskCount = 0;
 
     public void init() {
-        DukeIO.printHello();
+        dukeIo.printHello();
         populateCommands();
     }
 
     public void quit() {
-        DukeIO.printQuit();
+        dukeIo.printQuit();
     }
 
     public void exec(String[] tokens) throws InvalidCommandException {
         try {
-            MAP.get(tokens[0]).accept(tokens);
+            cmdMap.get(tokens[0]).accept(tokens);
         } catch (NullPointerException n) {
-            DukeIO.showInvalidCommand();
+            dukeIo.showInvalidCommand();
             return;
         }
     }
@@ -42,13 +43,13 @@ public class MyDuke {
     }
 
     private void populateCommands() {
-        MAP.put("list", (tokens) -> DukeIO.showAll());
-        MAP.put("todo", (tokens) -> addTodo(tokens));
-        MAP.put("deadline", (tokens) -> addDeadline(tokens));
-        MAP.put("event", (tokens) -> addEvent(tokens));
-        MAP.put("mark", (tokens) -> toggle(tokens));
-        MAP.put("unmark", (tokens) -> toggle(tokens));
-        MAP.put("delete", (tokens) -> delete(tokens));
+        cmdMap.put("list", (tokens) -> dukeIo.showAll());
+        cmdMap.put("todo", (tokens) -> addTodo(tokens));
+        cmdMap.put("deadline", (tokens) -> addDeadline(tokens));
+        cmdMap.put("event", (tokens) -> addEvent(tokens));
+        cmdMap.put("mark", (tokens) -> toggle(tokens));
+        cmdMap.put("unmark", (tokens) -> toggle(tokens));
+        cmdMap.put("delete", (tokens) -> delete(tokens));
     }
 
 
@@ -73,25 +74,25 @@ public class MyDuke {
             }
         // NaN input from user to mark/unmark task
         } catch (NumberFormatException e) {
-            DukeIO.showError(new InvalidCommandException(
+            dukeIo.showError(new InvalidCommandException(
                 InvalidCommandException.MARK_FORMAT_EXCEPTION));
             return;
         } catch (InvalidCommandException e) {
-            DukeIO.showError(e);
+            dukeIo.showError(e);
             return;
         }
 
         Task task = allTasks.get(taskIndex-1);
         if (!task.isDone() && tokens[0].equals("mark")) {
             task.toggleDoneOrNot();
-            DukeIO.notifySuccessComplete(task); 
+            dukeIo.notifySuccessComplete(task); 
         } else if (task.isDone() && tokens[0].equals("unmark")) {
             task.toggleDoneOrNot();
-            DukeIO.notifyUnmark(task);
+            dukeIo.notifyUnmark(task);
         } else if (!task.isDone() && tokens[0].equals("unmark")) {
-            DukeIO.notifyUnmarkFail(task);
+            dukeIo.notifyUnmarkFail(task);
         } else if (task.isDone() && tokens[0].equals("mark")) {
-            DukeIO.nofifyMarkFail(task);
+            dukeIo.nofifyMarkFail(task);
         }
     }
 
@@ -105,7 +106,7 @@ public class MyDuke {
                     + ToDo.showFormat());
             }
         } catch (InvalidCommandException e) {
-            DukeIO.showError(e);
+            dukeIo.showError(e);
             return;
         }
 
@@ -118,8 +119,8 @@ public class MyDuke {
 
         ToDo todo = new ToDo(t);
         addTask(todo);
-        DukeIO.notifySuccessAdd(todo);
-        DukeIO.showCount();
+        dukeIo.notifySuccessAdd(todo);
+        dukeIo.showCount();
     }
 
     private void addDeadline(String[] tokens) {
@@ -143,7 +144,7 @@ public class MyDuke {
                     + Deadline.showFormat());
             }
         } catch (InvalidCommandException e) {
-            DukeIO.showError(e);
+            dukeIo.showError(e);
             return;
         }
 
@@ -151,8 +152,8 @@ public class MyDuke {
         String byString = String.join(" ", t.subList(byIndex+1, t.size()));
         Deadline d = new Deadline(desc, byString);
         addTask(d);
-        DukeIO.notifySuccessAdd(d);
-        DukeIO.showCount();          
+        dukeIo.notifySuccessAdd(d);
+        dukeIo.showCount();          
     }
 
     private void addEvent(String[] tokens) {
@@ -172,7 +173,7 @@ public class MyDuke {
                     + Event.showFomat());
             }
         } catch (InvalidCommandException e) {
-            DukeIO.showError(e);
+            dukeIo.showError(e);
             return;
         }
 
@@ -181,8 +182,8 @@ public class MyDuke {
         String to = String.join(" ", t.subList(toIndex+1, t.size()));
         Event e = new Event(desc, from, to);
         addTask(e);
-        DukeIO.notifySuccessAdd(e);
-        DukeIO.showCount();
+        dukeIo.notifySuccessAdd(e);
+        dukeIo.showCount();
     }
 
     private void delete(String[] tokens) {
@@ -200,17 +201,17 @@ public class MyDuke {
                     InvalidCommandException.TASK_NOT_FOUND_EXCEPTION);
             }
         } catch (NumberFormatException e) {
-            DukeIO.showError(new InvalidCommandException(
+            dukeIo.showError(new InvalidCommandException(
                 InvalidCommandException.DELETE_FORMAT_EXCEPTION));
             return;
         } catch (InvalidCommandException e) {
-            DukeIO.showError(e);
+            dukeIo.showError(e);
             return;
         }
 
         System.out.println(allTasks.get(taskIndex-1).toString() + " deleted.");
         allTasks.remove(taskIndex-1);
         taskCount--;
-        DukeIO.showCount();
+        dukeIo.showCount();
     }
 }

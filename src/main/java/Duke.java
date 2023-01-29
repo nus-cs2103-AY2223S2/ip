@@ -13,6 +13,7 @@ public class Duke {
 
     private static Scanner sc = new Scanner(System.in);
     private static MyDuke duke = new MyDuke();
+    private static DukeIO dukeIo = new DukeIO();
 
     public static void main(String[] args) 
             throws InvalidCommandException, IOException, ClassNotFoundException {
@@ -22,7 +23,7 @@ public class Duke {
         try {
             load();
         } catch (FileNotFoundException p) {
-            DukeIO.echoMessage("Nothing to load");
+            dukeIo.echoMessage("Nothing to load");
         }
 
         processCommands();        
@@ -31,12 +32,12 @@ public class Duke {
     public static void processCommands() 
             throws InvalidCommandException, IOException {
         boolean isBye = false;
-        DukeIO.showPrompt();
+        dukeIo.showPrompt();
         while (!isBye) {
-            String[] tokens = DukeIO.tokenise(sc);
+            String[] tokens = dukeIo.tokenise(sc);
             isBye = handle(tokens);
             if (!isBye) {
-                DukeIO.showPrompt();
+                dukeIo.showPrompt();
             }
         }
         save();
@@ -65,7 +66,7 @@ public class Duke {
         MyDuke.loadTask(loadedTasks);
 
         ois.close();
-        DukeIO.notifyLoad();
+        dukeIo.notifyLoad();
     }
     
     private static void save() throws IOException {
@@ -82,7 +83,7 @@ public class Duke {
         
             o.close();
             out.close();
-            DukeIO.notifySave();
+            dukeIo.notifySave();
         }
     }
 }

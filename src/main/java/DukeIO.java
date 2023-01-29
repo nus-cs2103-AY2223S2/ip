@@ -41,48 +41,48 @@ public class DukeIO {
                                     + SEPERATOR;
      
 
-    public static void echoMessage(String message) {
+    public void echoMessage(String message) {
         System.out.println(message);
     }
     
-    public static String[] tokenise(Scanner sc) {
+    public String[] tokenise(Scanner sc) {
         String[] tokens = sc.nextLine().split(" ");
         return tokens;
     }
     
-    public static void printHello() {
+    public void printHello() {
         System.out.print(HELLO);
     }
 
-    public static void printQuit() {
+    public void printQuit() {
         System.out.print(QUIT);
     }
 
-    public static void showPrompt() {
+    public void showPrompt() {
         System.out.print(INPUT_PROMPT);
     }
 
-    public static void notifySuccessAdd(Task t) {
+    public void notifySuccessAdd(Task t) {
         System.out.println(REPLY + "Successfully added: " + t.toString());
     }
 
-    public static void notifySuccessComplete(Task t) {
+    public void notifySuccessComplete(Task t) {
         System.out.println(REPLY + "Successfully completed: " + t.toString());
     }
 
-    public static void notifyUnmark(Task t) {
+    public void notifyUnmark(Task t) {
         System.out.println(REPLY + "Unmarked task: " + t.toString());
     }
 
-    public static void nofifyMarkFail(Task t) {
+    public void nofifyMarkFail(Task t) {
         System.out.println(REPLY + "Cannot mark completed task: " + t.toString());
     }
 
-    public static void notifyUnmarkFail(Task t) {
+    public void notifyUnmarkFail(Task t) {
         System.out.println(REPLY + "Cannot unmark incomplete task: " + t.toString());
     }
 
-    public static void showCount() {
+    public void showCount() {
         String isare;
         String s;
         int taskCount = MyDuke.getTaskCount();
@@ -97,7 +97,7 @@ public class DukeIO {
                             + s + " in the list.\n");
     }
 
-    public static void showAll() {
+    public void showAll() {
         int taskCount = MyDuke.getTaskCount();
         ArrayList<Task> allTasks = MyDuke.getAllTasks();
         System.out.println("All Tasks:");
@@ -109,21 +109,21 @@ public class DukeIO {
         System.out.println();
     }
 
-    public static void showInvalidCommand() {
+    public void showInvalidCommand() {
         System.out.println(SEPERATOR
                         + REPLY + "Invalid Command!\n"
                         + CMD_LIST);
     }
 
-    public static void showError(Exception e) {
+    public void showError(Exception e) {
         System.out.println(e.getMessage());
     }
 
-    public static void notifyLoad() {
+    public void notifyLoad() {
         System.out.println("Loaded successfully from previous session.");
     }
 
-    public static void notifySave() {
+    public void notifySave() {
         System.out.println(SAVE_SUCCESS);
     }
     
