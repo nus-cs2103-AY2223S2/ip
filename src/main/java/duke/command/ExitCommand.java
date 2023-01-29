@@ -1,14 +1,14 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * Command to exit the current session.
  */
 public class ExitCommand extends Command {
-    CommandType command;
+    private CommandType command;
 
     /**
      * Main constructor.
@@ -29,6 +29,6 @@ public class ExitCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String msg = "Bye. Hope to see you again soon!";
         ui.show(msg);
-        super.isExit = true;
+        super.setExit();
     }
 }

@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Deals with interactions with the user (e.g. reading inputs, showing outputs).
  */
 public class Ui {
-    String lines = "____________________________________________________________";
+    private String lines = "____________________________________________________________";
 
     /**
      * Read user's inputs.

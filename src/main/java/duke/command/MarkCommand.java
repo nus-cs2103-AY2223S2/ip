@@ -1,16 +1,16 @@
 package duke.command;
 
 import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
 
 /**
  * Mark task as done.
  */
 public class MarkCommand extends Command {
     /** Index of the task to be marked **/
-    int idx;
+    private int idx;
 
     /**
      * Main constructor.

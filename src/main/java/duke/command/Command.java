@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.TaskList;
 import duke.Ui;
+import duke.task.TaskList;
 
 /**
  * Command meant by the user input.
@@ -11,7 +11,7 @@ import duke.Ui;
  */
 public abstract class Command {
     /** Determines whether the program should be ended **/
-    boolean isExit = false;
+    private boolean isExit = false;
 
     /**
      * Execute the current command.
@@ -29,5 +29,9 @@ public abstract class Command {
      */
     public boolean isExit() {
         return this.isExit;
+    }
+
+    public void setExit() {
+        this.isExit = true;
     }
 }

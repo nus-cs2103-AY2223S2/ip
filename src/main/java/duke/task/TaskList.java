@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     /** ArrayList of current tasks **/
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Main constructor (for invocation if file in hard disk is not present)
@@ -92,7 +92,7 @@ public class TaskList {
     @Override
     public String toString() {
         String msg = "";
-        for(int i = 0; i < this.tasks.size(); i++) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             msg += (i + 1) + ". ";
             msg += this.tasks.get(i);
             msg += "\n";

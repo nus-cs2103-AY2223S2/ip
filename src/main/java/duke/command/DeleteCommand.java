@@ -1,16 +1,16 @@
 package duke.command;
 
 import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
 
 /**
  * Command to delete a task from the task list.
  */
 public class DeleteCommand extends Command {
     /** Index of the task to be deleted in the task list. **/
-    int idx;
+    private int idx;
 
     /**
      * Main constructor

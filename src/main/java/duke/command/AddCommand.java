@@ -1,16 +1,16 @@
 package duke.command;
 
 import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.Ui;
 
 /**
  * Command to add a task to the TaskList.
  */
 public class AddCommand extends Command {
     /** The task to be added **/
-    Task task;
+    private Task task;
 
     /**
      * Main constructor
@@ -35,7 +35,7 @@ public class AddCommand extends Command {
         storage.refresh(tasks);
         String msg = "Got it. I've added this task:\n";
         msg += cur + "\n";
-        msg += "Now you have " + tasks.size() +" tasks in the list.";
+        msg += "Now you have " + tasks.size() + " tasks in the list.";
         ui.show(msg);
     }
 }
