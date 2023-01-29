@@ -36,7 +36,9 @@ public class ToDo extends Task {
      */
     public static void createToDo(String command, TaskList t) throws DukeException {
         String[] input = command.split(" ");
-        if (input.length <= 1) throw new DukeException("todo");
+        if (input.length <= 1) {
+            throw new DukeException("todo");
+        }
         StringBuilder taskName = new StringBuilder();
         for (int i = 1; i < input.length; i++) {
             taskName.append(input[i]);

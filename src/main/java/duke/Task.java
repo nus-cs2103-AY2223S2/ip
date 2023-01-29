@@ -10,12 +10,9 @@ package duke;
  * @author Merrick
  */
 public abstract class Task {
-    protected String taskName;
-    protected boolean completed = false;
     protected String taskType = "T";
-    protected static int numTasks = 0;
-    protected boolean deleted = false;
-
+    private final String taskName;
+    private boolean completed = false;
     /**
      * Constructor for Task class.
      *
@@ -25,7 +22,6 @@ public abstract class Task {
     public Task(String taskName, boolean completed) {
         this.taskName = taskName;
         this.completed = completed;
-        numTasks++;
     }
 
     /**
@@ -34,7 +30,6 @@ public abstract class Task {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        numTasks++;
     }
 
     /**
@@ -44,7 +39,7 @@ public abstract class Task {
     public void setCompletion(boolean completion) {
         this.completed = completion;
         if (completion) {
-            System.out.println("    Nice! I've marked this task as done:\n" + "     "+ this);
+            System.out.println("    Nice! I've marked this task as done:\n" + "     " + this);
         } else {
             System.out.println("    OK, I've marked this task as not done yet:\n" + "       " + this);
         }
