@@ -6,6 +6,9 @@ import duke.Ui;
 import duke.Storage;
 import duke.DukeException;
 
+/**
+ * The type Exit command.
+ */
 public class ExitCommand extends Command{
 
     @Override

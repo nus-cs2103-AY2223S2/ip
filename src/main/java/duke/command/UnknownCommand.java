@@ -5,6 +5,9 @@ import duke.Storage;
 import duke.DukeException;
 import duke.task.TaskList;
 
+/**
+ * The type Unknown command.
+ */
 public class UnknownCommand extends Command{
 
     @Override

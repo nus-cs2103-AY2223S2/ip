@@ -5,6 +5,9 @@ import duke.Ui;
 import duke.Storage;
 import duke.DukeException;
 
+/**
+ * The type List command.
+ */
 public class ListCommand extends Command{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

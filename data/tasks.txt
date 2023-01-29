@@ -1,2 +1,5 @@
-E | 0 |  birthday  | today  | tomorrow
+E | 1 |  birthday  | today  | tomorrow
 D | 0 |  hw  | 2023-01-30
+T | 0 | iron
+T | 0 | charge phone
+T | 0 | make bed and breakfast

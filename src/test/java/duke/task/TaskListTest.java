@@ -6,8 +6,16 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * The type Task list test.
+ */
 public class TaskListTest {
 
+    /**
+     * Add and delete test for TaskList.
+     *
+     * @throws DukeException the duke exception
+     */
     @Test
     public void addAndDeleteTest() throws DukeException {
         TaskList testTaskList = new TaskList();

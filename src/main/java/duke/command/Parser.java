@@ -2,12 +2,59 @@ package duke.command;
 
 import duke.DukeException;
 
+/**
+ * The type Parser.
+ */
 public class Parser {
 
+    /**
+     * The enum Keywords.
+     */
     public enum Keywords {
-        bye, list, mark, unmark, todo, deadline, event, delete, err
+        /**
+         * Bye keywords.
+         */
+        bye,
+        /**
+         * List keywords.
+         */
+        list,
+        /**
+         * Mark keywords.
+         */
+        mark,
+        /**
+         * Unmark keywords.
+         */
+        unmark,
+        /**
+         * Todo keywords.
+         */
+        todo,
+        /**
+         * Deadline keywords.
+         */
+        deadline,
+        /**
+         * Event keywords.
+         */
+        event,
+        /**
+         * Delete keywords.
+         */
+        delete,
+        /**
+         * Err keywords.
+         */
+        err
     }
 
+    /**
+     * Parse user input and output intended command
+     *
+     * @param input the input
+     * @return the command
+     */
     public static Command parse(String input) {
         String[] parsedInput = input.split(" ", 2);
         Keywords command;
@@ -39,10 +86,23 @@ public class Parser {
         return new UnknownCommand();
     }
 
+    /**
+     * Parse task string [ ].
+     *
+     * @param taskString the task string
+     * @return the string [ ]
+     */
     public static String[] parseTask(String taskString) {
         return taskString.split(" \\| ");
     }
 
+    /**
+     * Process input that has a task number and output that task number
+     *
+     * @param input the input
+     * @return the int
+     * @throws DukeException the duke exception
+     */
     public static int processMarkUnmarkDel(String input) throws DukeException {
         String[] parsedInput = input.split(" ");
         if (parsedInput.length != 2) {
@@ -56,6 +116,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Process deadline string [ ].
+     *
+     * @param input the input
+     * @return the string [ ]
+     * @throws DukeException the duke exception
+     */
     public static String[] processDeadline(String input) throws DukeException{
         String raw = input.split("deadline", 2)[1];
         if (raw.equals("")) {
@@ -72,6 +139,13 @@ public class Parser {
         return parsed;
     }
 
+    /**
+     * Process event string [ ].
+     *
+     * @param input the input
+     * @return the string [ ]
+     * @throws DukeException the duke exception
+     */
     public static String[] processEvent(String input) throws DukeException{
         String raw = input.split("event", 2)[1];
         if (raw.equals("")) {
