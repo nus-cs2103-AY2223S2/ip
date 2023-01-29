@@ -1,7 +1,6 @@
 package command;
 
 import java.util.Arrays;
-
 import dukeexception.CommandException;
 import parser.DateTimeParser;
 import storage.Storage;
@@ -11,6 +10,7 @@ import tasks.Task;
 import ui.Ui;
 
 public class EventCommand extends Command {
+    
     public EventCommand(String request) {
         super(request);
     }

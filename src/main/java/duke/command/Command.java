@@ -1,20 +1,19 @@
 package command;
 
 import java.util.Arrays;
-
 import dukeexception.CommandException;
 import storage.Storage;
 import taskList.TaskList;
 import ui.Ui;
 
 public abstract class Command {
-    public enum Commands {
-        LIST, UNMARK, MARK, TODO, DEADLINE, EVENT, DELETE, EXIT, DOES_NOT_EXIST
-    };
-
     private String request;
     private Commands command;
     private boolean isExit = false;
+
+    public enum Commands {
+        LIST, UNMARK, MARK, TODO, DEADLINE, EVENT, DELETE, EXIT, DOES_NOT_EXIST
+    };
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 

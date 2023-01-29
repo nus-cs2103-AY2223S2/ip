@@ -17,6 +17,62 @@ public class Storage {
     private java.nio.file.Path dataPath;
     private String dataPathString;
 
+    private String serialise(Task task) {
+        String data = "";
+        String isDone = (task.getIsDone() ? "1" : "0");
+        String description = task.getDescription();
+
+        if (task instanceof Todo) {
+            data = String.join(" | ", "T", isDone, description);
+        }
+
+        if (task instanceof Deadline) {
+            Deadline deadline = (Deadline) task;
+            String by = deadline.getBy();
+            data = String.join(" | ", "D", isDone, description, by);
+        }
+
+        if (task instanceof Event) {
+            Event event = (Event) task;
+            String from = event.getFrom();
+            String to = event.getTo();
+            data = String.join(" | ", "E", isDone, description, from, to);
+        }
+
+        return data;
+    }
+
+    private Task deserialise(String data) {
+        String[] params = data.split("\\|");
+        String taskType = params[0].strip();
+        Boolean isCompleted = params[1].contains("1");
+        String description = params[2].strip();
+        Task task = null;
+
+        if (taskType.equals("T")) {
+            task = new Todo(description);
+        }
+
+        if (taskType.equals("D")) {
+            String by = params[3].strip();
+            task = new Deadline(description, by);
+
+        }
+
+        if (taskType.equals("E")) {
+            String from = params[3].strip();
+            String to = params[4].strip();
+            task = new Event(description, from, to);
+
+        }
+
+        if (isCompleted && task != null) {
+            task.markAsDone();
+        }
+
+        return task;
+    }
+
     public Storage(String filePath) {
         this.dataPath = java.nio.file.Paths.get(cwd, filePath.split("/"));
         this.dataPathString = dataPath.toString();
@@ -72,61 +128,5 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private String serialise(Task task) {
-        String data = "";
-        String isDone = (task.getIsDone() ? "1" : "0");
-        String description = task.getDescription();
-
-        if (task instanceof Todo) {
-            data = String.join(" | ", "T", isDone, description);
-        }
-
-        if (task instanceof Deadline) {
-            Deadline deadline = (Deadline) task;
-            String by = deadline.getBy();
-            data = String.join(" | ", "D", isDone, description, by);
-        }
-
-        if (task instanceof Event) {
-            Event event = (Event) task;
-            String from = event.getFrom();
-            String to = event.getTo();
-            data = String.join(" | ", "E", isDone, description, from, to);
-        }
-
-        return data;
-    }
-
-    private Task deserialise(String data) {
-        String[] params = data.split("\\|");
-        String taskType = params[0].strip();
-        Boolean isCompleted = params[1].contains("1");
-        String description = params[2].strip();
-        Task task = null;
-
-        if (taskType.equals("T")) {
-            task = new Todo(description);
-        }
-
-        if (taskType.equals("D")) {
-            String by = params[3].strip();
-            task = new Deadline(description, by);
-
-        }
-
-        if (taskType.equals("E")) {
-            String from = params[3].strip();
-            String to = params[4].strip();
-            task = new Event(description, from, to);
-
-        }
-
-        if (isCompleted && task != null) {
-            task.markAsDone();
-        }
-
-        return task;
     }
 }

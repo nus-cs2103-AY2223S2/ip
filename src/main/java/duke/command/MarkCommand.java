@@ -8,6 +8,7 @@ import tasks.Task;
 import ui.Ui;
 
 public class MarkCommand extends Command {
+
     public MarkCommand(String input) {
         super(input);
     }

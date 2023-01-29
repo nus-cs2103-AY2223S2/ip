@@ -5,6 +5,7 @@ import taskList.TaskList;
 import ui.Ui;
 
 public class ExitCommand extends Command {
+    
     public ExitCommand(String input) {
         super(input);
         super.toggleIsExit();

@@ -1,7 +1,6 @@
 package command;
 
 import java.util.Arrays;
-
 import dukeexception.CommandException;
 import parser.DateTimeParser;
 import storage.Storage;

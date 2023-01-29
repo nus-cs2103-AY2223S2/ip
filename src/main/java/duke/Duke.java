@@ -21,10 +21,6 @@ public class Duke {
     this.ui.showExit();
   }
 
-  public static void main(String[] args) {
-    new Duke("data/duke.txt").run();
-  }
-
   public void handleRequest() {
     while (true) {
       try {
@@ -47,4 +43,7 @@ public class Duke {
     ui.showMessage(input);
   }
 
+  public static void main(String[] args) {
+    new Duke("data/duke.txt").run();
+  }
 }

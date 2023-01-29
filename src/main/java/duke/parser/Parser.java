@@ -13,6 +13,7 @@ import command.UnMarkComamnd;
 import command.Command.Commands;
 
 public class Parser {
+    
     public static Command parse(String input) {
         Commands cmd = Command.getCommand(input);
 
