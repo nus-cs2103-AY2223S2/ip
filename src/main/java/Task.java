@@ -1,8 +1,8 @@
 public abstract class Task {
     protected String description;
-    private boolean isDone;
+    protected boolean isDone;
 
-    private String type;
+    protected String type;
 
     public Task(String description, String type) {
         this.description = description;

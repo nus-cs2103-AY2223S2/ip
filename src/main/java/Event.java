@@ -1,6 +1,6 @@
 public class Event extends Task {
-    private String start;
-    private String end;
+    protected String start;
+    protected String end;
     public Event(String description, String start, String end) {
         super(description, "E");
         this.start = start;

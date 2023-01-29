@@ -1,0 +1,3 @@
+T | false | task
+E | true | this | today | tmr
+D | false | this | yesterday
