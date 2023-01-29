@@ -12,12 +12,12 @@ import java.time.format.DateTimeParseException;
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<Task>();
 
-   public ArrayList<Task> getList() {
-        return this.list;
-    }
-
     public TaskList(ArrayList<Task> list) {
         this.list = list;
+    }
+
+    public ArrayList<Task> getList() {
+        return this.list;
     }
 
     /**
@@ -26,7 +26,7 @@ public class TaskList {
     public void list() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(i+1 + ". " + list.get(i));
+            System.out.println(i + 1 + ". " + list.get(i));
         }
     }
 
@@ -96,8 +96,8 @@ public class TaskList {
         } catch (DateTimeParseException e) {
             Ui.wrongDateFormat();
         } catch (Exception e) {
-            System.out.println("☹ OOPS!!! Unrecognizable formet\n Please write it in this format: deadline xxx /by " +
-                    "YYYY-MM-DD HH:mm.");
+            System.out.println("☹ OOPS!!! Unrecognizable formet\n Please write it in this format: deadline xxx /by "
+                    + "YYYY-MM-DD HH:mm.");
         }
     }
 
@@ -128,17 +128,17 @@ public class TaskList {
         String keyword = Parser.parseQuery(command);
         ArrayList<Task> temp = new ArrayList<Task>();
         for (Task t: list) {
-            if(t.description.matches("(.*)"+keyword+"(.*)")) {
+            if (t.description.matches("(.*)" + keyword + "(.*)")) {
                 temp.add(t);
             }
         }
         System.out.println("Here are the matching tasks in your list:");
-        if (temp.size()==0) {
+        if (temp.size() == 0) {
             System.out.println("No matching task!");
             return;
         }
         for (int i = 0; i < temp.size(); i++) {
-            System.out.println(i+1 + ". " + temp.get(i));
+            System.out.println(i + 1 + ". " + temp.get(i));
         }
     }
 }

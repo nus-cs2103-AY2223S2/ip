@@ -3,7 +3,7 @@ package duke.task;
 import java.io.Serializable;
 
 /**
- * Represents a task that has a description, an boolean whether it is done or not done
+ * Represents a task that has a description, a boolean whether it is done or not done
  */
 public class Task implements Serializable {
     protected String description;

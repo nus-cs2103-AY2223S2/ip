@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Parses String and returns type of info that is required for input
  */
@@ -11,7 +9,7 @@ public class Parser {
     }
 
     public static int getIndex(String command) {
-        return Integer.parseInt( command.split(" ", 2)[1]) - 1;
+        return Integer.parseInt(command.split(" ", 2)[1]) - 1;
     }
 
     /**
@@ -28,7 +26,7 @@ public class Parser {
      * @param command full command
      * @return an array with description + deadline
      */
-    public static String[]  parseDeadline (String command) {
+    public static String[] parseDeadline(String command) {
         return command.split(" ", 2)[1].split(" /by ");
     }
 
@@ -37,7 +35,7 @@ public class Parser {
      * @param command full command
      * @return an array with description, start time and end time
      */
-    public static String[] parseEvent (String command) {
+    public static String[] parseEvent(String command) {
 
         return command.split(" ", 2)[1].split("/from | /to ");
     }
@@ -47,7 +45,7 @@ public class Parser {
      * @param command the entire find query
      * @return the words that user wants to find
      */
-    public static String parseQuery (String command) {
+    public static String parseQuery(String command) {
         return command.split(" ", 2)[1];
     }
 

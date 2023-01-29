@@ -24,7 +24,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(System.getProperty("user.dir") + "/data/duke.Duke.txt");
             for (Task t: list) {
-                fw.write(t.parse() +  System.lineSeparator());
+                fw.write(t.parse() + System.lineSeparator());
             }
             fw.close();
 
@@ -41,9 +41,9 @@ public class Storage {
      */
     public static ArrayList<Task> loadFile() throws IOException {
         String home = System.getProperty("user.dir");
-        File f = new File(home +"/data/duke.Duke.txt");
+        File f = new File(home + "/data/duke.Duke.txt");
         File directory = new File(home + "/data");
-        if (! directory.exists()) {
+        if (!directory.exists()) {
             directory.mkdir();
         }
         f.createNewFile();
@@ -55,11 +55,9 @@ public class Storage {
             String[] curr = s.nextLine().split(" \\| ");
             if (curr[0].equals("T")) {
                 list.add(new Todo(curr[2], Boolean.valueOf(curr[1])));
-            }
-            else if (curr[0].equals("D")) {
+            } else if (curr[0].equals("D")) {
                 list.add(new Deadline(curr[2], curr[3], Boolean.valueOf(curr[1])));
-            }
-            else if (curr[0].equals("E")) {
+            } else if (curr[0].equals("E")) {
                 list.add(new Event(curr[2], curr[3], curr[4], Boolean.valueOf(curr[1])));
             }
         }

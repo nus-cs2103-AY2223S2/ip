@@ -1,6 +1,7 @@
 package duke;
-import duke.task.TaskList;
 import java.util.ArrayList;
+import duke.task.TaskList;
+
 
 /**
  * A Duke class
@@ -35,45 +36,45 @@ public class Duke {
             String firstWord = Parser.getFirstWord(fullCommand);
 
             switch (firstWord) {
-                case "bye":
-                    ui.showBye();
-                    return;
+            case "bye":
+                ui.showBye();
+                return;
 
-                case "list":
-                    tasks.list();
-                    break;
+            case "list":
+                tasks.list();
+                break;
 
-                case "delete":
-                    tasks.delete(Parser.getIndex(fullCommand));
-                    break;
+            case "delete":
+                tasks.delete(Parser.getIndex(fullCommand));
+                break;
 
-                case "mark":
-                    tasks.mark(Parser.getIndex(fullCommand));
-                    break;
+            case "mark":
+                tasks.mark(Parser.getIndex(fullCommand));
+                break;
 
-                case "unmark":
-                    tasks.unmark(Parser.getIndex(fullCommand));
-                    break;
+            case "unmark":
+                tasks.unmark(Parser.getIndex(fullCommand));
+                break;
 
-                case "todo":
-                    tasks.addTodo(fullCommand);
-                    break;
+            case "todo":
+                tasks.addTodo(fullCommand);
+                break;
 
-                case "deadline":
-                    tasks.addDeadline(fullCommand);
-                    break;
+            case "deadline":
+                tasks.addDeadline(fullCommand);
+                break;
 
-                case "event":
-                    tasks.addEvent(fullCommand);
-                    break;
+            case "event":
+                tasks.addEvent(fullCommand);
+                break;
 
-                case "find":
-                    tasks.find(fullCommand);
-                    break;
+            case "find":
+                tasks.find(fullCommand);
+                break;
 
-                default:
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    continue;
+            default:
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                continue;
             }
 
             Storage.saveToFile(tasks.getList());
