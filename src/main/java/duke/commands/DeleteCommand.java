@@ -15,8 +15,9 @@ public class DeleteCommand extends Command {
     private Storage storage;
     private File file;
 
-    public DeleteCommand(Ui ui, TaskList taskList, int index, Storage storage, File file) throws
-            InvalidCmdValueException {
+    public DeleteCommand(Ui ui, TaskList taskList, int index,
+                         Storage storage, File file)
+            throws InvalidCmdValueException {
         if (index + 1 > taskList.getSize() || index < 0) {
             throw new InvalidCmdValueException();
         }

@@ -14,7 +14,8 @@ public class Event extends Task {
     private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("MMM dd yyyy");
 
-    public Event(String command, String start, String end) throws InvalidDateException {
+    public Event(String command, String start, String end)
+            throws InvalidDateException {
         super(command);
         try {
             this.start = LocalDate.parse(start);

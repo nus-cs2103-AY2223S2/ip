@@ -10,7 +10,8 @@ public class Deadline extends Task {
     private LocalDate deadline;
     private static final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("MMM dd yyyy");
-    public Deadline(String command, String deadline) throws InvalidDateException {
+    public Deadline(String command, String deadline)
+            throws InvalidDateException {
         super(command);
         try {
             this.deadline = LocalDate.parse(deadline);
