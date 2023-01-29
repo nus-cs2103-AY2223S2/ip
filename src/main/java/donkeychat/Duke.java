@@ -4,24 +4,24 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private TaskList taskList = new TaskList();
+    private TaskList tasks = new TaskList();
     private Storage storage = new Storage();
     private Parser parser = new Parser();
     private Ui ui = new Ui();
 
     public Duke() {
-        taskList = new TaskList();
+        tasks = new TaskList();
         storage = new Storage();
     }
 
     public void run() {
         ui.displayIntro();
         boolean isRunning = true;
-        storage.loadSave(taskList);
+        storage.loadSave(tasks);
         Scanner input = new Scanner(System.in);
         while (isRunning) {
             String currInput = input.nextLine();
-            isRunning = parser.parse(currInput, taskList, storage, ui);
+            isRunning = parser.parse(currInput, tasks, storage, ui);
         }
     }
 
