@@ -1,3 +1,5 @@
+package duke;
+
 import javax.print.DocFlavor;
 import java.io.Serializable;
 

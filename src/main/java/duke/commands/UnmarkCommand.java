@@ -1,3 +1,10 @@
+package duke.commands;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 public class UnmarkCommand extends Command {
 
     private int unmarkNumber;

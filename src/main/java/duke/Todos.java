@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Task;
+
 public class Todos extends Task {
 
     public Todos(String name) {
