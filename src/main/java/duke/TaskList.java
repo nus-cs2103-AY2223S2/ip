@@ -5,10 +5,17 @@ import java.util.ArrayList;
 import duke.tasktypes.Deadlines;
 import duke.tasktypes.Task;
 
+/**
+ * Class containing the list of tasks for Duke chatbot.
+ */
 public class TaskList {
     
-    ArrayList<Task> listOfTasks;
+    protected ArrayList<Task> listOfTasks;
 
+    /**
+     * Constructor to initialize a TaskList instance.
+     * @param listOfTasks An arraylist containing a list of tasks from the Duke chatbot.
+     */
     public TaskList(ArrayList<Task> listOfTasks) {
         this.listOfTasks = listOfTasks;
     }
@@ -17,6 +24,9 @@ public class TaskList {
         return this.listOfTasks;
     }
 
+    /**
+     * Function to print out the list of tasks currently stored in the list to the user.
+     */
     public void toRead() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < listOfTasks.size(); i++) {
@@ -27,6 +37,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the task at the indicated index.
+     * @param index The index which the task is stored at.
+     * @throws DukeExceptions
+     */
     public void deleteTask(int index) throws DukeExceptions {
         try {
             int indexToUse = index - 1;
@@ -41,6 +56,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a task to the list of tasks.
+     * @param toAdd The task which will be added to the list.
+     */
     public void addTask(Task toAdd) {
         listOfTasks.add(toAdd);
         String toPrint = "";
@@ -52,6 +71,11 @@ public class TaskList {
         System.out.println(toPrint);
     }
 
+    /**
+     * Marks the task at the indicated index as done.
+     * @param index The index at which the task should be marked as done.
+     * @throws DukeExceptions if the indicated index is invalid (<= 0 or larger than the size of the list)
+     */
     public void markTask(int index) throws DukeExceptions {
         try {
             int indexToUse = index - 1;
@@ -67,6 +91,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the task at the indicated index as not done.
+     * @param index The index at which the task should be marked as not done.
+     * @throws DukeExceptions if the indicated index is invalid (<= 0 or larger than the list size)
+     */
     public void unmarkTask(int index) throws DukeExceptions {
         try {
             int indexToUse = index - 1;
@@ -82,6 +111,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Checks the due date of the task if it is applicable.
+     * @param index The index at which to find out the due date of.
+     */
     public void checkDueDate(int index) {
         int indexToUse = index - 1;
         if (listOfTasks.get(indexToUse) instanceof Deadlines) {
