@@ -1,5 +1,9 @@
 import java.util.Locale;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 
 public class Duke {
     private enum Commands {
@@ -69,9 +73,10 @@ public class Duke {
                 } else if (command.equals(Commands.DELETE)) {
                     System.out.println(taskList.deleteTask(Integer.parseInt(parameters[0])));
                 } else if (command.equals(Commands.DEADLINE)) {
-                    System.out.println(taskList.addTask(parameters[0], parameters[1]));
+                    System.out.println(taskList.addTask(parameters[0], LocalDate.parse(parameters[1])));
                 } else if (command.equals(Commands.EVENT)) {
-                    System.out.println(taskList.addTask(parameters[0], parameters[1], parameters[2]));
+                    System.out.println(taskList.addTask(parameters[0], LocalDate.parse(parameters[1]),
+                            LocalDate.parse(parameters[2])));
                 }
             }
         }
