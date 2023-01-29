@@ -1,7 +1,10 @@
 package duke.command;
 
+import java.util.function.Consumer;
+
 import duke.constant.Message;
 import duke.database.DukeRepo;
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.ui.Ui;
 
@@ -45,6 +48,28 @@ public class MarkCommand extends Command {
         }
     }
 
+    
+    @Override
+    public void execute(DukeRepo db, Consumer<String> con) throws DukeException {
+        StringBuilder sb = new StringBuilder();
+        try {
+            Task tk = db.getTask(taskId);
+
+            if (markDone) {
+                tk.markAsDone();
+                sb.append(Message.MARK_TASK + "\n");
+            } else {
+                tk.unmarkDone();
+                sb.append(Message.UNMARK_TASK + "\n");
+            }
+
+            sb.append("\t" + tk);
+        } catch (IndexOutOfBoundsException e) {
+            sb.append(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
+        }
+        con.accept(sb.toString());
+    }
+
     /**
      * @see Command#isExit()
      */
@@ -52,5 +77,6 @@ public class MarkCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
 
 }

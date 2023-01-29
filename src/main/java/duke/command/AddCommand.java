@@ -1,10 +1,12 @@
 package duke.command;
 
 import java.time.LocalDateTime;
+import java.util.function.Consumer;
 
 import duke.constant.DukeCommand;
 import duke.constant.Message;
 import duke.database.DukeRepo;
+import duke.exception.DukeException;
 import duke.exception.InvalidTaskTypeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -61,7 +63,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Add task to database and print the output.
+     * Adds task to database and print the output.
      * 
      * @see Command#execute(DukeRepo, Ui)
      */
@@ -70,6 +72,18 @@ public class AddCommand extends Command {
         ui.println(Message.ADD_TASK);
         ui.println("\t" + db.addTask(getTask()));
         ui.println(String.format(Message.COUNT_TASK, db.count()));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(DukeRepo db, Consumer<String> con) throws DukeException {
+        StringBuilder sb = new StringBuilder();
+        sb.append(Message.ADD_TASK + "\n");
+        sb.append("\t" + db.addTask(getTask()) + "\n");
+        sb.append(String.format(Message.COUNT_TASK, db.count()) + "\n");
+        con.accept(sb.toString());
     }
 
     /**
@@ -98,4 +112,5 @@ public class AddCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
 }

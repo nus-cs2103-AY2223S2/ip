@@ -1,10 +1,6 @@
-import java.io.IOException;
-
 import duke.Duke;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -19,5 +15,10 @@ public class Main extends Application {
         Scene scene = new Scene(new MainWindow(duke));
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        duke.close();
     }
 }

@@ -1,8 +1,8 @@
 package duke;
 
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.function.Consumer;
 
 import duke.command.Command;
 import duke.database.DukeRepo;
@@ -34,14 +34,11 @@ public class Duke extends Application{
     private Button sendButton;
     private Scene scene;
 
-    private ByteArrayOutputStream out = new ByteArrayOutputStream();
-
     /**
      * Default constructor.
      */
     public Duke() {
         db = new DukeRepoImpl();
-        ui = new Ui(System.in, new PrintStream(out));
     }
 
     /**
@@ -71,15 +68,6 @@ public class Duke extends Application{
                 ui.showLine();
             }
         }
-    }
-
-    /**
-     * Main entry
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke().run();
     }
 
     /**
@@ -137,18 +125,18 @@ public class Duke extends Application{
     }
 
     /**
-     * Generate a response to user input.
+     * Generates a response to user input.
      */
-    public String getResponse(String input) {
+    public void getResponse(String input, Consumer<String> con) {
         try {
-            //TODO: redirect output stream to ui
             Command c = Parser.parse(input);
-            c.execute(db, ui);
-            return out.toString();
+            c.execute(db, con);
         } catch (DukeException e) {
-            return e.getMessage();
+            con.accept(e.getMessage());
         }
     }
 
-
+    public void close() {
+        db.close();
+    }
 }
