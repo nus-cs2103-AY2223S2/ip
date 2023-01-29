@@ -31,11 +31,17 @@ public class DukeException extends Exception {
 
     private static final String MSG_ERR_NONE = "There seems to be no input.";
 
-    // Error Messages for
+    // Error Messages for file handling issues
     private static final String MSG_ERR_FILE_CREATE = "There was an I/O error when trying to create the necessary directory and files to store list of tasks.";
     private static final String MSG_ERR_FILE_FORMAT = "The save file was corrupted.";
     private static final String MSG_ERR_FILE_LOAD = "There was an I/O error when trying to load the saved list of tasks.";
     private static final String MSG_ERR_FILE_SAVE = "There was an I/O error when trying to save the list of tasks.";
+
+    // Error Messages for datetime issues
+    private static final String MSG_ERR_TIME_PARSE = "The time cannot cannot be parsed.";
+    private static final String MSG_ERR_TIME_DEADLINE = "The deadline has already been reached.";
+    private static final String MSG_ERR_TIME_EVENT_OVER = "The event is already over.";
+    private static final String MSG_ERR_TIME_EVENT_INVALID = "The end time of the event is before the start time of the event.";
 
     private static final String MSG_ERR_TODO_DESC = "The description of a todo cannot be empty.";
     private static final String MSG_ERR_UNKNOWN = "I'm sorry, but I don't know what that means.";
@@ -45,7 +51,7 @@ public class DukeException extends Exception {
     private static final String MSG_ERR_UNMARK_BOUND = "The index of the task to be marked as not done must be in the list.";
     private static final String MSG_ERR_UNMARK_NONINT = "The index of the task to be marked as not done must be an integer.";
 
-    protected enum ErrorType {UNKNOWN, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, FILE};
+    protected enum ErrorType {UNKNOWN, TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, FILE, TIME};
 
 
     /**
@@ -85,58 +91,70 @@ public class DukeException extends Exception {
                 break;
             case DEADLINE:
                 switch (errorMessage) {
-                    case "Empty description":
-                        throw new DukeException(MSG_ERR_DEADLINE_DESC);
-                    case "Empty deadline":
-                        throw new DukeException(MSG_ERR_DEADLINE_TIME);
+                case "Empty description":
+                    throw new DukeException(MSG_ERR_DEADLINE_DESC);
+                case "Empty deadline":
+                    throw new DukeException(MSG_ERR_DEADLINE_TIME);
                 }
                 break;
             case EVENT:
                 switch (errorMessage) {
-                    case "Empty description":
-                        throw new DukeException(MSG_ERR_EVENT_EMPTY);
-                    case "Empty From Time":
-                        throw new DukeException(MSG_ERR_EVENT_FROM);
-                    case "Empty To Time":
-                        throw new DukeException(MSG_ERR_EVENT_TO);
+                case "Empty description":
+                    throw new DukeException(MSG_ERR_EVENT_EMPTY);
+                case "Empty From Time":
+                    throw new DukeException(MSG_ERR_EVENT_FROM);
+                case "Empty To Time":
+                    throw new DukeException(MSG_ERR_EVENT_TO);
                 }
                 break;
             case MARK:
                 switch (errorMessage) {
-                    case "Empty Index":
-                        throw new DukeException(MSG_ERR_MARK_EMPTY);
-                    case "Out of Bound":
-                        throw new DukeException(MSG_ERR_MARK_BOUND);
-                    case "Not Integer":
-                        throw new DukeException(MSG_ERR_MARK_NONINT);
+                case "Empty Index":
+                    throw new DukeException(MSG_ERR_MARK_EMPTY);
+                case "Out of Bound":
+                    throw new DukeException(MSG_ERR_MARK_BOUND);
+                case "Not Integer":
+                    throw new DukeException(MSG_ERR_MARK_NONINT);
                 }
                 break;
             case UNMARK:
                 switch (errorMessage) {
-                    case "Empty Index":
-                        throw new DukeException(MSG_ERR_UNMARK_EMPTY);
-                    case "Out of Bound":
-                        throw new DukeException(MSG_ERR_UNMARK_BOUND);
-                    case "Not Integer":
-                        throw new DukeException(MSG_ERR_UNMARK_NONINT);
+                case "Empty Index":
+                    throw new DukeException(MSG_ERR_UNMARK_EMPTY);
+                case "Out of Bound":
+                    throw new DukeException(MSG_ERR_UNMARK_BOUND);
+                case "Not Integer":
+                    throw new DukeException(MSG_ERR_UNMARK_NONINT);
                 }
                 break;
             case DELETE:
                 switch (errorMessage) {
-                    case "Empty Index":
-                        throw new DukeException(MSG_ERR_DELETE_EMPTY);
-                    case "Out of Bound":
-                        throw new DukeException(MSG_ERR_DELETE_BOUND);
-                    case "Not Integer":
-                        throw new DukeException(MSG_ERR_DELETE_NONINT);
+                case "Empty Index":
+                    throw new DukeException(MSG_ERR_DELETE_EMPTY);
+                case "Out of Bound":
+                    throw new DukeException(MSG_ERR_DELETE_BOUND);
+                case "Not Integer":
+                    throw new DukeException(MSG_ERR_DELETE_NONINT);
                 }
                 break;
             case LIST:
                 switch (errorMessage) {
-                    case "Empty List":
-                        throw new DukeException(MSG_ERR_LIST_EMPTY);
-                    case "Unbalanced List":
-                        throw new DukeException(MSG_ERR_LIST_ECHO);
+                case "Empty List":
+                    throw new DukeException(MSG_ERR_LIST_EMPTY);
+                case "Unbalanced List":
+                    throw new DukeException(MSG_ERR_LIST_ECHO);
+                }
+                break;
+            case TIME:
+                switch (errorMessage) {
+                case "DateTime Parse Exception":
+                    throw new DukeException(MSG_ERR_TIME_PARSE);
+                case "Deadline reached":
+                    throw new DukeException(MSG_ERR_TIME_DEADLINE);
+                case "Event Ended":
+                    throw new DukeException(MSG_ERR_TIME_EVENT_OVER);
+                case "Invalid Event Duration":
+                    throw new DukeException(MSG_ERR_TIME_EVENT_INVALID);
                 }
                 break;
             case FILE:

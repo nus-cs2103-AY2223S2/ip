@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Contains information of a deadline
@@ -6,7 +9,7 @@
 public class Deadline extends Task {
 
     private static final String TASK_TYPE = "D";
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Creates a deadline object
@@ -14,9 +17,17 @@ public class Deadline extends Task {
      * @param description The description of the deadline
      * @param by Deadline time of the deadline
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = by;
+        DukeException.ErrorType errType = DukeException.ErrorType.TIME;
+        try {
+            this.by = LocalDate.parse(by);
+            if (LocalDate.now().isAfter(this.by)) {
+                throw new DukeException(errType, "Deadline reached");
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException(errType, "DateTime Parse Exception");
+        }
     }
 
     /**
@@ -26,9 +37,17 @@ public class Deadline extends Task {
      * @param isDone Completion status of the deadline task
      * @param by Deadline time of the deadline
      */
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, String by) throws DukeException {
         super(description, isDone);
-        this.by = by;
+        DukeException.ErrorType errType = DukeException.ErrorType.TIME;
+        try {
+            this.by = LocalDate.parse(by);
+            if (LocalDate.now().isAfter(this.by)) {
+                throw new DukeException(errType, "Deadline reached");
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException(errType, "DateTime Parse Exception");
+        }
     }
 
     /**
@@ -96,7 +115,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + by + ")";
+                + " (by: " + by.format(DateTimeFormatter
+                        .ofPattern("MMM d yyyy"))
+                + ")";
     }
 
     /**
