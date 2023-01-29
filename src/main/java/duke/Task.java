@@ -4,7 +4,7 @@ package duke;
  *  The superclass of all types of Tasks created by the user
  */
 public class Task {
-    private final String details;
+    private String details;
     private boolean status;
 
     /***

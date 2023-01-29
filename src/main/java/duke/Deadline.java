@@ -7,7 +7,7 @@ import java.time.LocalTime;
  * A subclass of Task containing list of deadline tasks
  */
 public class Deadline extends Task {
-    String icon = "[D]";
+    final String icon = "[D]";
     LocalDate date;
     LocalTime time;
 

@@ -4,7 +4,7 @@ package duke;
  * A subclass of task indicating the type of task
  */
 class ToDo extends Task {
-    String icon = "[T]";
+    final String icon = "[T]";
 
     /***
      * @param details details of the task

@@ -32,7 +32,7 @@ public class DateStringConverter {
     /***
      *  A method to convert a String type to a LocalTime type
      * @param input a String input of time
-     * @return
+     * @return a LocalTime object converted from String type
      */
     public LocalTime convertTimeInput(String input) {
         String hour = input.substring(0, 2);

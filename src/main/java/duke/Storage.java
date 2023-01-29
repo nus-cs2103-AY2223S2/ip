@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * The class to store and load the ArrayList contents into a txt file and vice-versa
  */
 public class Storage {
-    private final File file;
+    private File file;
 
     /***
      *

@@ -4,7 +4,7 @@ package duke;
  * Event class type, a subclass of Task
  */
 public class Event extends Task {
-    String icon = "[E]";
+    final String ICON = "[E]";
     String from;
     String to;
 
@@ -34,6 +34,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return icon + super.toString() + " (from:" + from + " to:" + to + ")";
+        return ICON + super.toString() + " (from:" + from + " to:" + to + ")";
     }
 }
