@@ -1,13 +1,8 @@
-package parser;
+package duke;
 
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import task.Task;
-import tasklist.Tasklist;
-import storage.Storage;
-import ui.Ui;
 
 public class Parser {
     

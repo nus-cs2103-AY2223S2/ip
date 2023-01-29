@@ -1,4 +1,4 @@
-package storage;
+package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,9 +8,6 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
-import task.Task;
-import tasklist.Tasklist;
 
 public class Storage {
     public static final String SAVE_LOCATION = "src/duke.txt";

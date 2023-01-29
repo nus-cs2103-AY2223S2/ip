@@ -1,19 +1,15 @@
+package duke;
+
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
-
-
-import parser.Parser;
-import storage.Storage;
-import tasklist.Tasklist;
-import ui.Ui;
 
 /**
  * The Duke program implements a 'to-do' list
  * where users can add, mark and delete tasks 
  */
 
-public class Duke {
+public class Main {
 
     public static void main(String[] args) {
 
