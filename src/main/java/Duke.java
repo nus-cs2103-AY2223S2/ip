@@ -1,10 +1,8 @@
-import com.sun.java.accessibility.util.EventQueueMonitor;
-
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+
 
 public class Duke {
 
