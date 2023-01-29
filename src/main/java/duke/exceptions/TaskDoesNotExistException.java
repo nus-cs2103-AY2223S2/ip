@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class TaskDoesNotExistException extends Exception {
 
     public TaskDoesNotExistException() {
