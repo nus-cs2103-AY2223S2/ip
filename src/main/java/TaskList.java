@@ -1,12 +1,11 @@
 import java.util.ArrayList;
-import java.io.IOException;
 
 import java.util.Date;
-public class toDoList {
+public class TaskList {
 
     ArrayList<Task> allTasks;
 
-    toDoList(){
+    TaskList(){
         allTasks =  new ArrayList<Task>();
     }
 
