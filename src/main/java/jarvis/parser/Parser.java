@@ -10,13 +10,15 @@ import jarvis.command.Command;
 import jarvis.command.DeadlineCommand;
 import jarvis.command.DeleteCommand;
 import jarvis.command.EventCommand;
+import jarvis.command.IntroCommand;
 import jarvis.command.ListCommand;
 import jarvis.command.MarkCommand;
+import jarvis.command.TimedCommand;
 import jarvis.command.ToDoCommand;
 import jarvis.command.UnknownCommand;
 import jarvis.command.subcommand.ByCommand;
+import jarvis.command.subcommand.DurationCommand;
 import jarvis.command.subcommand.FromCommand;
-import jarvis.command.subcommand.IntroCommand;
 import jarvis.command.subcommand.ToCommand;
 import jarvis.exception.InvalidActionException;
 
@@ -76,12 +78,18 @@ public class Parser {
             return new DeadlineCommand(body, subCommands);
         case CREATE_EVENT:
             return new EventCommand(body, subCommands);
+        case CREATE_TIMED:
+            return new TimedCommand(body, subCommands);
         case DEADLINE_BY:
             return new ByCommand(body);
         case EVENT_FROM:
             return new FromCommand(body);
         case EVENT_TO:
             return new ToCommand(body);
+        case DURATION_DAYS:
+        case DURATION_HOURS:
+        case DURATION_MINUTES:
+            return new DurationCommand(action, body);
         default:
             return new UnknownCommand();
         }

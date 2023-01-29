@@ -1,6 +1,5 @@
 package jarvis.command;
 
-import jarvis.command.Command;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
 import jarvis.ui.Ui;

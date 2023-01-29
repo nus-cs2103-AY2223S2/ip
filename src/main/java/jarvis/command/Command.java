@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jarvis.exception.CommandParseException;
 import jarvis.exception.InvalidActionException;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
@@ -26,10 +27,14 @@ public abstract class Command {
         CREATE_TODO("todo"),
         CREATE_DEADLINE("deadline"),
         CREATE_EVENT("event"),
+        CREATE_TIMED("timed"),
         DELETE_TASK("delete"),
         DEADLINE_BY("by"),
         EVENT_FROM("from"),
-        EVENT_TO("to");
+        EVENT_TO("to"),
+        DURATION_DAYS("day", "days"),
+        DURATION_HOURS("hour", "hours"),
+        DURATION_MINUTES("minute", "minutes", "min", "mins");
 
         private final String[] keywords;
 
@@ -129,6 +134,17 @@ public abstract class Command {
      */
     public String getBody() {
         return this.body;
+    }
+
+    public int getBodyAsInt() throws CommandParseException {
+        try {
+            return Integer.parseInt(body);
+        } catch (NumberFormatException e) {
+            throw new CommandParseException(
+                    "Cannot convert body to int",
+                    String.format("'%s' is not an integer.", body)
+            );
+        }
     }
 
     /**
