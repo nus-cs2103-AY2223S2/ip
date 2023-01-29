@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.DukeException;
+
 public class Parser {
 
     public enum Keywords {
@@ -39,7 +43,7 @@ public class Parser {
         return taskString.split(" \\| ");
     }
 
-    public static int processMarkUnmarkDel(String input) throws DukeException{
+    public static int processMarkUnmarkDel(String input) throws DukeException {
         String[] parsedInput = input.split(" ");
         if (parsedInput.length != 2) {
             throw new DukeException("index of task to delete is missing");

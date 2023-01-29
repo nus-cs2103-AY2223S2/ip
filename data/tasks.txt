@@ -1,2 +1,2 @@
 E | 0 |  birthday  | today  | tomorrow
-T | 1 | hair
+D | 0 |  hw  | 2023-01-30

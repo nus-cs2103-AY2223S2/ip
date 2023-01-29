@@ -1,14 +1,11 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+package duke.task;
+
+import duke.DukeException;
+import duke.command.Parser;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class TaskList {
 
@@ -18,7 +15,7 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
-    public TaskList(List<String> storedTasks) throws DukeException{
+    public TaskList(List<String> storedTasks) throws DukeException {
         for(String task: storedTasks) {
             String[] parsedTask = Parser.parseTask(task);
             switch (parsedTask[0]) {
