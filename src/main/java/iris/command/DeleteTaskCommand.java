@@ -2,16 +2,16 @@ package iris.command;
 
 import iris.TaskList;
 import iris.TaskStore;
+import iris.Ui;
 import iris.exception.IrisException;
 import iris.exception.UnknownTaskException;
 import iris.task.Task;
-import iris.Ui;
 
 /**
  * Deletes task at given index
  */
 public class DeleteTaskCommand extends Command {
-    int i;
+    private final int i;
     public DeleteTaskCommand(int i) {
         this.i = i;
     }

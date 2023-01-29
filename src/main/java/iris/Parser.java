@@ -1,23 +1,21 @@
 package iris;
 
-import iris.command.ListCommand;
-import iris.exception.MissingFieldException;
-import iris.task.Todo;
 import iris.command.AddTaskCommand;
 import iris.command.Command;
 import iris.command.DeleteTaskCommand;
 import iris.command.ExitCommand;
 import iris.command.FilterCommand;
 import iris.command.HelpCommand;
+import iris.command.ListCommand;
 import iris.command.MarkTaskCommand;
 import iris.command.ResetCommand;
 import iris.command.UnmarkTaskCommand;
-
 import iris.exception.IrisException;
+import iris.exception.MissingFieldException;
 import iris.exception.NoTaskException;
-
 import iris.task.Deadline;
 import iris.task.Event;
+import iris.task.Todo;
 
 /**
  * Parses the user inputs
@@ -41,7 +39,10 @@ public class Parser {
      */
     public static Command parse(String input) throws IrisException {
         String[] arr;
-        String name, from, to, by;
+        String name;
+        String from;
+        String to;
+        String by;
         CommandWord command;
         try {
             command = CommandWord.valueOf(input.split(" ")[0]);

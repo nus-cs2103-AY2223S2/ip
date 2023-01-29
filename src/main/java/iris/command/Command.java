@@ -1,9 +1,9 @@
 package iris.command;
 
 import iris.TaskList;
-import iris.exception.IrisException;
-import iris.Ui;
 import iris.TaskStore;
+import iris.Ui;
+import iris.exception.IrisException;
 
 /**
  * Abstract class to execute commands

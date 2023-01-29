@@ -1,13 +1,15 @@
 package iris.command;
 
 import iris.TaskList;
-import iris.Ui;
 import iris.TaskStore;
+import iris.Ui;
 
 /**
  * closes the chat
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
+    private static final String EXIT_TEXT = "Bye! Hope to see you soon!";
+
     /**
      * {@inheritDoc}
      */
@@ -15,8 +17,6 @@ public class ExitCommand extends Command{
     public boolean isEnd() {
         return true;
     }
-    private static final String EXIT_TEXT = "Bye! Hope to see you soon!";
-
     /**
      * {@inheritDoc}
      */

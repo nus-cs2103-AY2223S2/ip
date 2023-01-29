@@ -1,13 +1,13 @@
 package iris;
 
-import iris.exception.IrisException;
-import iris.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import iris.exception.IrisException;
+import iris.task.Task;
 
 /**
  * stores list of tasks in hard drive to keep it saved even when chatbot is closed

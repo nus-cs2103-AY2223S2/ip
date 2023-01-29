@@ -1,13 +1,13 @@
 package iris.command;
 
 import iris.TaskList;
-import iris.Ui;
 import iris.TaskStore;
+import iris.Ui;
 
 /**
  * lists all tasks, events and deadlines
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     /**
      * {@inheritDoc}
      */

@@ -1,11 +1,12 @@
 package iris.test;
 
-import iris.exception.DateTimeException;
-import iris.task.Deadline;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import iris.exception.DateTimeException;
+import iris.task.Deadline;
 
 public class DeadlineTest {
     @Test

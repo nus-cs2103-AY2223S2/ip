@@ -6,17 +6,17 @@ import java.util.Scanner;
  * The user interface: takes care og getting input and showing output to the user
  */
 public class Ui {
-    Scanner inputGetter;
+    private static final String GREETING = "Welcome to Lavender Network!\n"
+            + "I'm Iris, your favourite teenage chatbot.\n"
+            + "I'm here to keep track of your tasks so you don't have to :)\n"
+            + "Type \"help\" to see the commands.\n"
+            + "What are you waiting for? Let's get started!";
+    private final Scanner inputGetter;
 
     public Ui() {
         this.inputGetter = new Scanner(System.in);
     }
 
-    private static final String GREETING = "Welcome to Lavender Network!\n" +
-            "I'm Iris, your favourite teenage chatbot.\n" +
-            "I'm here to keep track of your tasks so you don't have to :)\n" +
-            "Type \"help\" to see the commands.\n" +
-            "What are you waiting for? Let's get started!";
 
     /**
      * outputs a String to the user

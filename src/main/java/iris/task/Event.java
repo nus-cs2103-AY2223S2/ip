@@ -1,15 +1,15 @@
 package iris.task;
 
-import iris.exception.DateTimeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import iris.exception.DateTimeException;
+
 /**
  * Represents an event with a start and end date
  */
-public class Event extends Task{
+public class Event extends Task {
     private final LocalDateTime from;
     private final LocalDateTime to;
 

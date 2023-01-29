@@ -2,14 +2,14 @@ package iris.command;
 
 import iris.TaskList;
 import iris.TaskStore;
-import iris.task.Task;
 import iris.Ui;
+import iris.task.Task;
 
 /**
  * Command to add a task to the task list
  */
 public class AddTaskCommand extends Command {
-    private Task task;
+    private final Task task;
 
     public AddTaskCommand(Task task) {
         this.task = task;

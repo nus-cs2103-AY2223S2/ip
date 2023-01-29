@@ -37,7 +37,7 @@ public class Deadline extends Task {
     @Override
     public String storageFormat() {
         return String.join("|", "D", super.storageFormat(),
-                deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")))  + "\n";
+                deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"))) + "\n";
     }
 
     /**

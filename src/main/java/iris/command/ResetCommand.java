@@ -2,8 +2,8 @@ package iris.command;
 
 import iris.TaskList;
 import iris.TaskStore;
-import iris.exception.IrisException;
 import iris.Ui;
+import iris.exception.IrisException;
 
 /**
  * removes all tasks from both hard drive and current task list
