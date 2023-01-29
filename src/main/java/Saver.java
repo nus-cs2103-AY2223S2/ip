@@ -1,19 +1,20 @@
 import java.io.File; 
 import java.io.IOException;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Saver {
     public Saver(){
 
     }
-    public String save(Task[] tasks){
+    public String save(TaskList taskList){
         return "Tasks saved.";
     }
 
-    public String delete(Task task){
-        return "Task deleted";
-    }
-    public String load(){
-        return "Tasks loaded.";
+    public TaskList load(){ //create the tasks file if it doesnt exist, otherwise returns the tasklist
+        TaskList taskList = new TaskList();;
+        return taskList;
     }
 
 }

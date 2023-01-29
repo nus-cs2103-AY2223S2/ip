@@ -28,6 +28,9 @@ public class TaskList {
         return processTask(task);
     }
 
+    public ArrayList getTasks(){
+        return taskList;
+    }
     public String listTasks(){
         String output = "";
         for(int i = 0; i<taskList.size(); i++){
@@ -50,4 +53,5 @@ public class TaskList {
         this.numTasks -= 1;
         return "Task " + index + " deleted.";
     }
+
 }
