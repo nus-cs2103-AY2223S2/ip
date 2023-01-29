@@ -49,8 +49,8 @@ public abstract class Command {
                 String activity = cmd.substring(cmdtype.length() + 1, indexOfBy - 1);
                 String date = cmd.substring(indexOfDate);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The format of a deadline: deadline {activity}" +
-                        " /by {yyyy-mm-dd} {hhmm}.");
+                throw new DukeException("☹ OOPS!!! The format of a deadline: " +
+                        "deadline {activity} /by {yyyy-mm-dd} {hhmm}.");
             }
         } else if (cmdtype.equals("event")) {
             try {
