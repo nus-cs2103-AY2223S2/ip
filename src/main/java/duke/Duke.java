@@ -9,7 +9,7 @@ public class Duke {
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
-            ui = new Ui(tasks);
+            ui = new Ui();
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -19,7 +19,7 @@ public class Duke {
     public void run() {
         ui.showInitMessage();
         Parser p = new Parser(tasks, ui);
-        p.parse();
+        p.parseAll();
         storage.store(tasks);
     }
 
