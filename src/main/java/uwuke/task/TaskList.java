@@ -95,4 +95,15 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return this.tasks;
     }
+
+    public void findTask(String input) throws DukeException {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        String keyword = Parser.parseFind(input);
+        for (Task t : tasks) {
+            if (t.toString().contains(keyword)) {
+                matchingTasks.add(t);
+            }
+        }
+        Printer.printFindResults(matchingTasks);
+    }
 }

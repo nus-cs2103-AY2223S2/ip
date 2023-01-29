@@ -20,7 +20,7 @@ public class Deadline extends Task {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             this.deadlineTime = Optional.of(LocalDateTime.parse(deadline, formatter));
         } catch (DateTimeParseException e) {
-            Printer.printError("Could not parse date");
+            Printer.printError("Could not parse date. Ignore this if you weren't trying to input a date!");
         }
     }
 
