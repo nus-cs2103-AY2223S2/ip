@@ -12,8 +12,17 @@ import command.ToDoCommand;
 import command.UnMarkComamnd;
 import command.Command.Commands;
 
-public class Parser {
-    
+/**
+ * An abstract class to make sense of the user command.
+ */
+abstract public class Parser {
+
+    /**
+     * Parse the commands of the user.
+     * 
+     * @param input the commands from the user
+     * @return the Command
+     */
     public static Command parse(String input) {
         Commands cmd = Command.getCommand(input);
 
