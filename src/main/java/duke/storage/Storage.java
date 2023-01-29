@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import duke.exceptions.DukeException;
 import duke.tasklist.TaskList;
 import duke.tasktypes.Deadline;
 import duke.tasktypes.Event;
@@ -98,6 +99,8 @@ public class Storage {
             }
 
         } catch (IOException e) {
+            ui.showError(e);
+        } catch (DukeException e) {
             ui.showError(e);
         }
         return tasks;
