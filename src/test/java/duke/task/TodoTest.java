@@ -1,4 +1,4 @@
-package seedu.duke.task;
+package duke.task;
 
 import duke.task.Todo;
 import org.junit.Test;

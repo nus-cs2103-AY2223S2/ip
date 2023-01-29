@@ -1,4 +1,4 @@
-package seedu.duke.task;
+package duke.task;
 
 public class DeadlineTest {
 }
