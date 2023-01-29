@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Tasks that have to be done by a certain deadline.
+ */
 public class Deadline extends Task {
     private String description;
     private LocalDateTime deadline;
@@ -16,6 +19,11 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Factory method of Deadline objects.
+     * @param str String containing deadline description and date and time of deadline.
+     * @return Deadline object.
+     */
     public static Deadline to(String str) {
         String target = " /by ";
         LocalDateTime dateTime;
@@ -36,6 +44,10 @@ public class Deadline extends Task {
         return new Deadline(description, dateTime);
     }
 
+    /**
+     * Creates a string representing the deadline object so that it can be saved by Storage object.
+     * @return String representing the deadline object.
+     */
     @Override
     public String taskToSavedForm() {
         DateTimeFormatter outFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
@@ -43,6 +55,10 @@ public class Deadline extends Task {
         return "deadline " + this.description + " /by " + this.deadline.format(outFormatter) + marked;
     }
 
+    /**
+     * Creates custom string containing Deadline object's description and date and time of deadline.
+     * @return String representing Deadline object.
+     */
     @Override
     public String toString() {
         DateTimeFormatter outFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");

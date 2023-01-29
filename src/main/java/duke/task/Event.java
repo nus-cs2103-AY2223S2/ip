@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Tasks that place from a certain date and time to another date and time.
+ */
 public class Event extends Task {
     private String description;
     private LocalDateTime start;
@@ -18,6 +21,11 @@ public class Event extends Task {
         this.end = end;
     }
 
+    /**
+     * Factory method of Event objects.
+     * @param str String containing description of event and start and end dates and times.
+     * @return Event object.
+     */
     public static Event to(String str) {
         String target1 = " /from ";
         String target2 = " /to ";
@@ -50,6 +58,10 @@ public class Event extends Task {
         return new Event(description, startDateTime, endDateTime);
     }
 
+    /**
+     * Creates a string representing the event object so that it can be saved by Storage object.
+     * @return String representing the event object.
+     */
     @Override
     public String taskToSavedForm() {
         DateTimeFormatter outFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
@@ -57,11 +69,15 @@ public class Event extends Task {
         return "event " + this.description + " /from " + this.start.format(outFormatter) + " /to " + this.end.format(outFormatter) + marked;
     }
 
+    /**
+     * Creates custom string containing Event object's description and start and end dates and times.
+     * @return String representing Event object.
+     */
     @Override
     public String toString() {
         DateTimeFormatter outFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
         String str = super.toString();
-        str += " (from: " + this.start.format(outFormatter) + " to: " + this.end.format(outFormatter) + ")" /*+ "\n"*/;
+        str += " (from: " + this.start.format(outFormatter) + " to: " + this.end.format(outFormatter) + ")";
         return str;
     }
 }
