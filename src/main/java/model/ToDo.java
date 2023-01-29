@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Represents a basic <code>Task</code> object.
+ */
 public class ToDo extends Task {
     public static final String TAG = "[T]";
 

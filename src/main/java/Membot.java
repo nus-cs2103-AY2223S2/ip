@@ -1,12 +1,13 @@
+import java.io.IOException;
+import java.util.Scanner;
+
 import commands.Command;
 import model.Task;
 import storage.StorageManager;
-import utils.*;
+import utils.EmptyInputException;
+import utils.InvalidCommandException;
 import view.Printable;
 import view.Printer;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Main application class.

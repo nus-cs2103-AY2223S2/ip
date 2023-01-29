@@ -1,13 +1,14 @@
 package view;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 public class PrinterTest {
     private final PrintStream standardOut = System.out;
@@ -34,8 +35,8 @@ public class PrinterTest {
 
         String[] list3 = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
         Printer.listPrint(list3);
-        assertEquals("\t1. 1\n\t2. 2\n\t3. 3\n\t4. 4\n\t5. 5\n\t6. 6\n\t7. 7\n\t8. 8\n\t9. 9\n\t10. 10" +
-                        "\n====================", outputStreamCaptor.toString().stripTrailing());
+        assertEquals("\t1. 1\n\t2. 2\n\t3. 3\n\t4. 4\n\t5. 5\n\t6. 6\n\t7. 7\n\t8. 8\n\t9. 9\n\t10. 10"
+                + "\n====================", outputStreamCaptor.toString().stripTrailing());
     }
 
     @AfterEach

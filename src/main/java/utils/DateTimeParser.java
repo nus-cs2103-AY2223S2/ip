@@ -20,7 +20,7 @@ public class DateTimeParser {
      * @param dateTime A <code>String</code> representation of a dateTime.
      * @return A <code>LocalDateTime</code> object that corresponds to the <code>String</code> representation.
      * @throws DateTimeParseException If the <code>String</code> representation
-     * cannot be converted to a <code>LocalDateTime</code> object.
+     *      cannot be converted to a <code>LocalDateTime</code> object.
      */
     public static LocalDateTime parse(String dateTime) throws DateTimeParseException {
         try {

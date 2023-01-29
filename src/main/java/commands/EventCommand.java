@@ -1,11 +1,14 @@
 package commands;
 
+import java.time.DateTimeException;
+
 import model.Event;
 import model.Task;
-import utils.*;
+import utils.InputValidator;
+import utils.InvalidCommandException;
+import utils.NoEndDateTimeFoundException;
+import utils.NoStartDateTimeFoundException;
 import view.Printable;
-
-import java.time.DateTimeException;
 
 /**
  * Represents a command which creates a <code>Task</code> that has a start and end dateTime attached to it.
@@ -33,10 +36,10 @@ public class EventCommand extends Command {
 
             this.ui.printIndent("");
             new ListCommand(this.ui).execute();
-        } catch (IndexOutOfBoundsException | InvalidCommandException | NoStartDateTimeFoundException |
-                 NoEndDateTimeFoundException e) {
-            this.ui.printlnError("Invalid Syntax - \"event [title] /from [start] /to [end]\"" +
-                    "(e.g. \"event piano concert /from tomorrow 3pm /to tomorrow 6pm\")");
+        } catch (IndexOutOfBoundsException | InvalidCommandException | NoStartDateTimeFoundException
+                 | NoEndDateTimeFoundException e) {
+            this.ui.printlnError("Invalid Syntax - \"event [title] /from [start] /to [end]\""
+                    + "(e.g. \"event piano concert /from tomorrow 3pm /to tomorrow 6pm\")");
         } catch (DateTimeException e) {
             Task.deleteLast();
             this.ui.printlnError(e.getMessage());

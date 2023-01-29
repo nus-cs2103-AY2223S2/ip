@@ -1,8 +1,8 @@
 package commands;
 
 import model.Task;
-import view.Printer;
 import view.Printable;
+import view.Printer;
 
 /**
  * Represents a command which lists out all created <code>Task</code> and their

@@ -1,20 +1,28 @@
 package model;
 
-import storage.Outputable;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.LinkedList;
 
-abstract public class Task {
+import storage.Outputable;
+
+/**
+ * Represents a <code>Task</code> object.
+ */
+public abstract class Task {
     protected static final String EMPTY = "~";
     private static LinkedList<Task> tasks = new LinkedList<>();
 
     private final String title;
     private TaskStatus status;
 
+    /**
+     * Generates a <code>Task</code> object.
+     *
+     * @param title The title of the task to be completed.
+     */
     protected Task(String title) {
         this.title = title;
         this.status = TaskStatus.NEW;
@@ -41,6 +49,13 @@ abstract public class Task {
         Task.tasks.get(id - 1).setStatus(TaskStatus.NEW);
     }
 
+    /**
+     * Deletes a <code>Task</code> from the list of tasks with its <code>id</code>.
+     *
+     * @param id The <code>id</code> of the <code>Task</code> to be deleted.
+     * @return The deleted <code>Task</code> object.
+     * @throws IndexOutOfBoundsException If the <code>id</code> provided is not within range.
+     */
     public static Task delete(int id) throws IndexOutOfBoundsException {
         if (!Task.isIdValid(id)) {
             throw new IndexOutOfBoundsException();
@@ -49,6 +64,11 @@ abstract public class Task {
         return Task.tasks.remove(id - 1);
     }
 
+    /**
+     * Deletes the last <code>Task</code> from the list.
+     * @return The deleted <code>Task</code> object.
+     * @throws IndexOutOfBoundsException If the list of tasks is empty.
+     */
     public static Task deleteLast() throws IndexOutOfBoundsException {
         return Task.tasks.removeLast();
     }
@@ -57,6 +77,12 @@ abstract public class Task {
         this.status = status;
     }
 
+    /**
+     * Retrieves all <code>Task</code> in the task list and returns their
+     * titles as a string array.
+     *
+     * @return A string array of all the <code>Task</code> titles.
+     */
     public static String[] listAll() {
         ArrayList<String> tasks = new ArrayList<>();
         for (int i = 0; i < Task.tasks.size(); ++i) {
@@ -65,6 +91,13 @@ abstract public class Task {
         return tasks.toArray(new String[Task.tasks.size()]);
     }
 
+    /**
+     * Retrieves a <code>Task</code> title via its <code>id</code>.
+     *
+     * @param id The <code>id</code> of the <code>Task</code> to be retrieved.
+     * @return The title of the specified <code>Task</code>.
+     * @throws IndexOutOfBoundsException If the <code>id</code> is invalid.
+     */
     public static String listOne(int id) throws IndexOutOfBoundsException {
         if (!Task.isIdValid(id)) {
             throw new IndexOutOfBoundsException();
@@ -85,6 +118,12 @@ abstract public class Task {
         }
     }
 
+    /**
+     * Writes the lists of <code>Task</code> objects to an <code>Outputable</code>.
+     *
+     * @param out An <code>Outputable</code> object that handles saving of <code>Task</code> objects.
+     * @throws IOException If some sort of IO error occurs during the process of writing.
+     */
     public static void save(Outputable out) throws IOException {
         Base64.Encoder e = Base64.getEncoder();
         StringBuilder sb = new StringBuilder();
@@ -103,6 +142,11 @@ abstract public class Task {
         out.write(sb.toString());
     }
 
+    /**
+     * Reads and decodes an array of <code>Task</code> data to be used by Membot.
+     *
+     * @param in The array of data to be loaded.
+     */
     public static void load(ArrayList<String> in) {
         Base64.Decoder d = Base64.getDecoder();
         for (String s : in) {
@@ -129,12 +173,20 @@ abstract public class Task {
                         new String(startDateTime, StandardCharsets.UTF_8),
                         new String(endDateTime, StandardCharsets.UTF_8));
                 break;
+            default:
+                break;
             }
 
             restoredTask.setStatus(TaskStatus.valueOf(new String(status, StandardCharsets.UTF_8)));
         }
     }
 
+    /**
+     * Finds all <code>Task</code> that has titles that contains the specified keyword.
+     *
+     * @param keyword The keyword to be used to find <code>Task</code>.
+     * @return The list of <code>Task</code> objects that have titles containing the keyword.
+     */
     public static ArrayList<Task> find(String keyword) {
         ArrayList<Task> res = new ArrayList<>();
         for (Task t : Task.tasks) {
@@ -151,28 +203,28 @@ abstract public class Task {
      *
      * @return The <code>Task</code> type.
      */
-    abstract public TaskType getTaskType();
+    public abstract TaskType getTaskType();
 
     /**
      * Returns the deadline attached to the <code>Task</code>.
      *
      * @return The deadline attached to the <code>Task</code>.
      */
-    abstract public String getDeadline();
+    public abstract String getDeadline();
 
     /**
      * Returns the start dateTime attached to the <code>Task</code>.
      *
      * @return The start dateTime attached to the <code>Task</code>.
      */
-    abstract public String getStartDateTime();
+    public abstract String getStartDateTime();
 
     /**
      * Returns the end dateTime attached to the <code>Task</code>.
      *
      * @return The end dateTime attached to the <code>Task</code>.
      */
-    abstract public String getEndDateTime();
+    public abstract String getEndDateTime();
 
     /**
      * Returns a <code>String</code> representation of the <code>Task</code>.
@@ -185,7 +237,7 @@ abstract public class Task {
     }
 }
 
- enum TaskStatus {
+enum TaskStatus {
     NEW,
     COMPLETED
 }

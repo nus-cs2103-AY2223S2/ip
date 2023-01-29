@@ -4,9 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a helper class that validates and cleanses inputs by users.
+ */
 public class InputValidator {
     private static final String[] RESERVED = new String[]{"/by", "/to", "/from"};
 
+    /**
+     * Validates if commands in the form of <code>[command] [integer]</code> is valid.
+     *
+     * @param input The command to be validated.
+     * @return True if command is valid, else false.
+     */
     public static boolean isCheckInputValid(String input) {
         String[] split = input.split(" ");
 
@@ -22,17 +31,30 @@ public class InputValidator {
         }
     }
 
+    /**
+     * Validates if the find command is valid.
+     *
+     * @param input The find command.
+     * @return True if command is valid, else false.
+     */
     public static boolean isFindInputValid(String input) {
         String[] split = input.split(" ");
 
         return split.length >= 2;
     }
 
+    /**
+     * Cleanses and normalises a <code>todo</code> command.
+     *
+     * @param input The <code>todo</code> command.
+     * @return The normalised command in a form of a <code>String</code> array.
+     * @throws InvalidCommandException If the command parsed is invalid.
+     */
     public static String[] normaliseTodoInput(String input) throws InvalidCommandException {
         String[] split = input.split(" ");
-        List<String> RESERVED_AL = Arrays.asList(RESERVED);
+        List<String> reservedList = Arrays.asList(RESERVED);
         for (String s : split) {
-            if (RESERVED_AL.contains(s)) {
+            if (reservedList.contains(s)) {
                 throw new InvalidCommandException("There should not be any reserved keywords");
             }
         }
@@ -48,18 +70,26 @@ public class InputValidator {
         return res;
     }
 
+    /**
+     * Cleanses and normalises a <code>deadline</code> command.
+     *
+     * @param input The <code>deadline</code> command.
+     * @return The normalised command in a form of a <code>String</code> array.
+     * @throws InvalidCommandException If the command parsed is invalid.
+     * @throws NoDeadlineFoundException If no deadline can be found in the command.
+     */
     public static String[] normaliseDeadlineInput(String input) throws
             InvalidCommandException, NoDeadlineFoundException {
         String[] split = input.split(" ");
         if (split.length < 4) {
-            throw new InvalidCommandException("Invalid Syntax - \"deadline [title] /by [deadline]\" " +
-                    "(e.g. \"deadline physics project /by tomorrow 3pm\"");
+            throw new InvalidCommandException("Invalid Syntax - \"deadline [title] /by [deadline]\" "
+                    + "(e.g. \"deadline physics project /by tomorrow 3pm\"");
         }
         int totalKeywords = 0;
-        List<String> RESERVED_AL = Arrays.asList(RESERVED);
+        List<String> reservedList = Arrays.asList(RESERVED);
         ArrayList<String> keywords = new ArrayList<>();
         for (String s : split) {
-            if (RESERVED_AL.contains(s)) {
+            if (reservedList.contains(s)) {
                 totalKeywords++;
                 keywords.add(s);
             }
@@ -89,6 +119,15 @@ public class InputValidator {
         return res;
     }
 
+    /**
+     * Cleanses and normalises an <code>event</code> command.
+     *
+     * @param input The <code>event</code> command.
+     * @return The normalised command in a form of a <code>String</code> array.
+     * @throws InvalidCommandException If the command parsed is invalid.
+     * @throws NoStartDateTimeFoundException If no start dateTime can be found in the command.
+     * @throws NoEndDateTimeFoundException If no end dateTime can be found in the command.
+     */
     public static String[] normaliseEventInput(String input) throws InvalidCommandException,
             NoStartDateTimeFoundException, NoEndDateTimeFoundException {
         String[] split = input.split(" ");
@@ -96,11 +135,11 @@ public class InputValidator {
             throw new InvalidCommandException("Invalid syntax");
         }
         int totalKeywords = 0;
-        List<String> RESERVED_AL = Arrays.asList(RESERVED);
+        List<String> reservedList = Arrays.asList(RESERVED);
         ArrayList<String> keywords = new ArrayList<>();
         String firstKeyword = "";
         for (String s : split) {
-            if (RESERVED_AL.contains(s)) {
+            if (reservedList.contains(s)) {
                 totalKeywords++;
                 keywords.add(s);
 

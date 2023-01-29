@@ -1,17 +1,29 @@
 package model;
 
-import utils.DateTimeParser;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import utils.DateTimeParser;
+
+/**
+ * Represents a <code>Task</code> that contains a start dateTime and
+ * an end dateTime of the task.
+ */
 public class Event extends Task {
     public static final String TAG = "[E]";
 
     private String start;
     private String end;
 
+    /**
+     * Generates a <code>Event</code> object.
+     *
+     * @param title The title of the task to be completed.
+     * @param start The start dateTime of the task.
+     * @param end The end dateTime of the task.
+     * @throws DateTimeException If the end dateTime is earlier than the start dateTime.
+     */
     public Event(String title, String start, String end) throws DateTimeException {
         super(title);
 

@@ -1,12 +1,16 @@
 package commands;
 
+import java.util.ArrayList;
+
 import model.Task;
 import utils.InputValidator;
 import view.Printable;
 import view.Printer;
 
-import java.util.ArrayList;
-
+/**
+ * Represents a command which finds a <code>Task</code> that contains a certain keyword
+ * in its title.
+ */
 public class FindCommand extends Command {
     public FindCommand(String input, Printable ui) {
         super(input, ui);

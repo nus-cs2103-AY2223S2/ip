@@ -1,15 +1,25 @@
 package model;
 
-import utils.DateTimeParser;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import utils.DateTimeParser;
+
+/**
+ * Represents a <code>Task</code> that contains a deadline for the task
+ * to be completed by.
+ */
 public class Deadline extends Task {
     public static final String TAG = "[D]";
 
     private String deadline;
 
+    /**
+     * Generates a <code>Deadline</code> object.
+     *
+     * @param title The title of the task to be completed.
+     * @param deadline The deadline for the task to be completed by.
+     */
     public Deadline(String title, String deadline) {
         super(title);
 

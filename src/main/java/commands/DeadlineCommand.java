@@ -33,8 +33,8 @@ public class DeadlineCommand extends Command {
             this.ui.printIndent("");
             new ListCommand(this.ui).execute();
         } catch (IndexOutOfBoundsException | NoDeadlineFoundException | InvalidCommandException e) {
-            this.ui.printlnError("Invalid Syntax - \"deadline [title] /by [deadline]\"" +
-                    "(e.g. \"deadline physics project /by tomorrow 3pm\")");
+            this.ui.printlnError("Invalid Syntax - \"deadline [title] /by [deadline]\""
+                    + "(e.g. \"deadline physics project /by tomorrow 3pm\")");
         }
     }
 }

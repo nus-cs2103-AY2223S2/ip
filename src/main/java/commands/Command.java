@@ -8,7 +8,7 @@ import view.Printable;
  * Represents a command based on the user input. A <code>Command</code> object has its own
  * characteristic based on its <code>execute()</code> function.
  */
-abstract public class Command {
+public abstract class Command {
     protected String input;
     protected Printable ui;
     protected boolean isExit = false;
@@ -90,7 +90,7 @@ abstract public class Command {
     /**
      * Runs a chunk of code depending on the <code>Command</code> type.
      */
-    abstract public void execute();
+    public abstract void execute();
 }
 
 /**
