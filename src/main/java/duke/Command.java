@@ -44,22 +44,22 @@ public class Command {
                 taskList.generate();
                 break;
             case "todo":
-                todo(taskList);
+                addToDoTask(taskList);
                 break;
             case "deadline":
-                deadline(taskList);
+                addDeadlineTask(taskList);
                 break;
             case "event":
-                event(taskList);
+                addEventTask(taskList);
                 break;
             case "mark":
                 mark(taskList);
                 break;
             case "unmark":
-                unMark(taskList);
+                unmark(taskList);
                 break;
             case "delete":
-                delete(taskList);
+                deleteTask(taskList);
                 break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -71,17 +71,17 @@ public class Command {
      * @param taskList {@code TaskList} object which keeps track of tasks
      * @throws DukeException when there is no description of task given
      */
-    private void todo(TaskList taskList) throws DukeException {
-        if (this.args.length() == 0){
+    private void addToDoTask(TaskList taskList) throws DukeException {
+        if (this.args.length() == 0) {
             throw new DukeException("What is the ToDo task???");
         } else {
-            Task addTask = new ToDo(this.args.trim());
-            taskList.add(addTask);
+            Task taskToAdd = new ToDo(this.args.trim());
+            taskList.addTask(taskToAdd);
             System.out.println();
-            System.out.println("Got it. I've added this task:\n" +
-                    addTask.toString() + "\n" +
-                    "Now you have " + taskList.taskCount() +
-                    "in the list.\n");
+            System.out.println("Got it. I've added this task:\n"
+                    + taskToAdd + "\n"
+                    + "Now you have " + taskList.taskCount()
+                    + "in the list.\n");
         }
     }
 
@@ -91,7 +91,7 @@ public class Command {
      * @throws DukeException when description of task, deadline is missing
      * or format of deadline is incorrect
      */
-    private void deadline(TaskList taskList) throws DukeException {
+    private void addDeadlineTask(TaskList taskList) throws DukeException {
         if (args.length() == 0) {
             throw new DukeException("What is the Deadline task???");
         } else {
@@ -105,15 +105,15 @@ public class Command {
                 String by = args.substring(
                         args.indexOf("/by") + "/by ".length()
                 );
-                Task addTask = new Deadline(desc, by);
-                taskList.add(addTask);
-                System.out.println("Got it. I've added this task:\n" +
-                        addTask.toString() + "\n" +
-                        "Now you have " + taskList.taskCount() +
-                        "in the list.\n");
+                Task taskToAdd = new Deadline(desc, by);
+                taskList.addTask(taskToAdd);
+                System.out.println("Got it. I've added this task:\n" 
+                        + taskToAdd + "\n" 
+                        + "Now you have " + taskList.taskCount() 
+                        + "in the list.\n");
             } else {
-                throw new DukeException("Incorrect format!\n" +
-                        "Format should be: <desc> /by dd/MM/yy HHmm");
+                throw new DukeException("Incorrect format!\n" 
+                        + "Format should be: <desc> /by dd/MM/yy HHmm");
             }
         }
     }
@@ -124,11 +124,12 @@ public class Command {
      * @throws DukeException when description, start or end of event is missing or
      * incorrect format is given for start or end of event
      */
-    private void event(TaskList taskList) throws DukeException {
+    private void addEventTask(TaskList taskList) throws DukeException {
         if (args.length() == 0) {
             throw new DukeException("What is the Event task???");
         } else {
-            Pattern eventPattern = Pattern.compile(".+/from \\d{2}/\\d{2}/\\d{4} \\d{4} /to \\d{2}/\\d{2}/\\d{4} \\d{4}");
+            Pattern eventPattern = Pattern
+                    .compile(".+/from \\d{2}/\\d{2}/\\d{4} \\d{4} /to \\d{2}/\\d{2}/\\d{4} \\d{4}");
             Matcher matchEvent = eventPattern.matcher(this.args);
             if (matchEvent.find()) {
                 String desc = args.substring(0,
@@ -144,16 +145,16 @@ public class Command {
                         args.indexOf("/to") + "/to ".length()
                 );
 
-                Task addTask = new Events(desc, from, to);
-                taskList.add(addTask);
-                System.out.println("Got it. I've added this task:\n" +
-                        addTask.toString() + "\n" +
-                        "Now you have " + taskList.taskCount() +
-                        "in the list.\n");
+                Task taskToAdd = new Events(desc, from, to);
+                taskList.addTask(taskToAdd);
+                System.out.println("Got it. I've added this task:\n" 
+                        + taskToAdd + "\n" 
+                        + "Now you have " + taskList.taskCount() 
+                        + "in the list.\n");
             } else {
-                String errMessage = "Incorrect format!\n" +
-                        "Format should be: <desc> /from dd/MM/yy HHmm" +
-                        " /to dd/MM/yy HHmm";
+                String errMessage = "Incorrect format!\n"
+                        + "Format should be: <desc> /from dd/MM/yy HHmm"
+                        + " /to dd/MM/yy HHmm";
                 throw new DukeException(errMessage);
             }
         }
@@ -173,7 +174,7 @@ public class Command {
      * @param taskList {@code TaskList} object which keeps track of tasks
      * @throws DukeException when index given is less than 0 or greater than size of taskList - 1
      */
-    private void unMark(TaskList taskList) throws DukeException {
+    private void unmark(TaskList taskList) throws DukeException {
         taskList.unMarkTask(Integer.parseInt(this.args));
     }
 
@@ -182,8 +183,8 @@ public class Command {
      * @param taskList {@code TaskList} object which keeps track of tasks
      * @throws DukeException when index given is less than 0 or greater than size of taskList - 1
      */
-    private void delete(TaskList taskList) throws DukeException {
-        taskList.remove(Integer.parseInt(this.args));
+    private void deleteTask(TaskList taskList) throws DukeException {
+        taskList.removeTask(Integer.parseInt(this.args));
     }
 
     /**

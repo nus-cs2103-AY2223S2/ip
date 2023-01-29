@@ -34,9 +34,8 @@ public class Task {
     /**
      * Marks task as done
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
-
     }
 
     /**
@@ -51,7 +50,7 @@ public class Task {
      * @return String representation of task
      */
     @Override
-    public String toString(){
+    public String toString() {
         String output = "[" + getStatusIcon() + "]" + " | "  +this.description;
         return output;
     }

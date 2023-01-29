@@ -21,7 +21,7 @@ public class TaskList {
      * Constructor method for TaskList class
      * @param lines list of lines that convert into tasks, if not empty
      */
-    public TaskList(List<String> lines){
+    public TaskList(List<String> lines) {
         this.storage = new ArrayList<>(100);
         if (lines.size() != 0){
             fillStorage(lines);
@@ -33,10 +33,10 @@ public class TaskList {
      * before being added into taskList
      * @param lines list of lines read from file
      */
-    private void fillStorage(List<String> lines){
-        for (String line: lines){
+    private void fillStorage(List<String> lines) {
+        for (String line: lines) {
             String[] arguments = line.split (" | ");
-            switch(arguments[1]){
+            switch(arguments[1]) {
                 case "T":
                     storeTodoTask(arguments);
                     break;
@@ -54,13 +54,13 @@ public class TaskList {
      * stores ToDo tasks into taskList NOSONAR
      * @param args array of arguments from a line
      */
-    private void storeTodoTask(String[] args){
-        Task addTask = new ToDo(args[3].trim());
-        if (args[2].contains("X")){
-            addTask.markAsDone();
+    private void storeTodoTask(String[] args) {
+        Task taskToAdd = new ToDo(args[3].trim());
+        if (args[2].contains("X")) {
+            taskToAdd.markAsDone();
         }
 
-        storage.add(addTask);
+        storage.add(taskToAdd);
     }
 
     /**
@@ -69,43 +69,43 @@ public class TaskList {
      */
     private void storeDeadlineTask(String[] args){
         String desc =  args[3].substring(0, args[3].indexOf("(by:")).trim();
-        String deadline = args[3].substring(args[3].indexOf("(by:") +
-                "(by:".length(), args[3].indexOf(")")).trim();
+        String deadline = args[3].substring(args[3].indexOf("(by:")
+                    + "(by:".length(), args[3].indexOf(")")).trim();
 
-        Task addTask = new Deadline(desc, deadline);
+        Task taskToAdd = new Deadline(desc, deadline);
         if (args[2].contains("X")){
-            addTask.markAsDone();
+            taskToAdd.markAsDone();
         }
 
-        storage.add(addTask);
+        storage.add(taskToAdd);
     }
 
     /**
      * stores Event tasks into taskList
      * @param args array of arguments from a line
      */
-    private void storeEventTask(String[] args){
+    private void storeEventTask(String[] args) {
         String desc = args[3].substring(0, args[3].indexOf("(from:")).trim();
-        String from = args[3].substring(args[3].indexOf("(from:") +
-                "(from:".length(), args[3].indexOf("to:")).trim();
-        String to = args[3].substring(args[3].indexOf("to:") +
-                "to:".length(), args[3].indexOf(")")).trim();
+        String from = args[3].substring(args[3].indexOf("(from:")
+                + "(from:".length(), args[3].indexOf("to:")).trim();
+        String to = args[3].substring(args[3].indexOf("to:")
+                + "to:".length(), args[3].indexOf(")")).trim();
 
-        Task addTask = new Events(desc, from, to);
-        if (args[2].contains("X")){
-            addTask.markAsDone();
+        Task taskToAdd = new Events(desc, from, to);
+        if (args[2].contains("X")) {
+            taskToAdd.markAsDone();
         }
 
-        storage.add(addTask);
+        storage.add(taskToAdd);
     }
 
     /**
      * Prints out contents of taskList
      */
-    public void generate(){
+    public void generate() {
         System.out.println("_____________________________________\n");
-        for (Task task : storage){
-            System.out.println(storage.indexOf(task) + " | " + task.toString() + "\n");
+        for (Task task : storage) {
+            System.out.println(storage.indexOf(task) + " | " + task + "\n");
         }
         System.out.println("_____________________________________\n");
     }
@@ -115,7 +115,7 @@ public class TaskList {
      * Adds task into taskList
      * @param task Task to be added
      */
-    public void add(Task task){
+    public void addTask(Task task) {
         storage.add(task);
     }
 
@@ -124,10 +124,10 @@ public class TaskList {
      * @param index index of taskList to remove
      * @throws DukeException when index is less than 0 or greater than size of taskList - 1
      */
-    public void remove(int index) throws DukeException{
+    public void removeTask(int index) throws DukeException {
         try {
             storage.remove(index);
-        } catch (IndexOutOfBoundsException err){
+        } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Invalid Index given!");
         }
     }
@@ -137,14 +137,14 @@ public class TaskList {
      * @param index index of taskList to remove
      * @throws DukeException when index is less than 0 or greater than size of taskList - 1
      */
-    public void markTask(int index) throws DukeException{
+    public void markTask(int index) throws DukeException {
         try {
             storage.get(index).markAsDone();
-            System.out.println("_____________________________________\n" +
-                    "Nice! I've marked this task as done:\n" +
-                    storage.get(index).toString() + "\n" +
-                    "_____________________________________\n");
-        } catch (IndexOutOfBoundsException err){
+            System.out.println("_____________________________________\n"
+                    + "Nice! I've marked this task as done:\n"
+                    + storage.get(index) + "\n"
+                    + "_____________________________________\n");
+        } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Invalid Index given!");
         }
     }
@@ -154,14 +154,14 @@ public class TaskList {
      * @param index index of taskList to remove
      * @throws DukeException when index is less than 0 or greater than size of taskList - 1
      */
-    public void unMarkTask(int index) throws DukeException{
+    public void unMarkTask(int index) throws DukeException {
         try {
             storage.get(index).unMark();
-            System.out.println("_____________________________________\n" +
-                    "Ok. I've marked this task as not done yet:\n" +
-                    storage.get(index).toString() + "\n" +
-                    "_____________________________________\n");
-        } catch (IndexOutOfBoundsException err){
+            System.out.println("_____________________________________\n"
+                    + "Ok. I've marked this task as not done yet:\n"
+                    + storage.get(index)+ "\n"
+                    + "_____________________________________\n");
+        } catch (IndexOutOfBoundsException err) {
             throw new DukeException("Invalid Index given!");
         }
     }
@@ -170,7 +170,7 @@ public class TaskList {
      * Provides list of tasks
      * @return list of tasks
      */
-    public ArrayList<Task> loadTaskList(){
+    public ArrayList<Task> loadTaskList() {
         return this.storage;
     }
 
@@ -178,8 +178,8 @@ public class TaskList {
      * Gives string representation of number of tasks in taskList
      * @return string representation of size of taskList
      */
-    public String taskCount(){
-        if (this.storage.size() == 1){
+    public String taskCount() {
+        if (this.storage.size() == 1) {
             return "1 task ";
         } else {
             return this.storage.size() + " tasks ";

@@ -70,7 +70,7 @@ public class UI {
      * Prompts user to give input on command line
      * @return input from user
      */
-    public String getInput(){
+    public String getInput() {
         return sc.nextLine();
     }
 }

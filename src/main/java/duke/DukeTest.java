@@ -39,12 +39,12 @@ public class DukeTest {
         };
         try {
             Storage store = new Storage(Paths.get(System.getProperty("user.dir"), "data", "Duke.txt"));
-            TaskList taskList = new TaskList(store.load());
+            TaskList taskList = new TaskList(store.loadLines());
 
             for (String command : commands) {
                 Parser parse = new Parser(command);
-                Command cmd = parse.parseArgs();
-                cmd.execArgs(taskList);
+                Command cmdHandle = parse.parseArgs();
+                cmdHandle.execArgs(taskList);
             }
         } catch (DukeException dukeErr){
             fail(dukeErr.errorMessage);
@@ -67,7 +67,7 @@ public class DukeTest {
         Files.write(filePath, inputLines);
 
         List<String> testLines = Files.readAllLines(filePath);
-        for (int i = 0; i < testLines.size(); i++){
+        for (int i = 0; i < testLines.size(); i++) {
             assertEquals(testLines.get(i), inputLines.get(i));
         }
     }

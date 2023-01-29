@@ -22,10 +22,11 @@ public class Parser {
      * splits raw input array of string to be passed as inputs for {@code Command} class
      * @return new Command object
      */
-    public Command parseArgs(){
-        if (this.args.length < 2){
+    public Command parseArgs() {
+        if (this.args.length < 2) {
             return new Command(this.args[0], "");
+        } else {
+            return new Command(this.args[0], this.args[1]);
         }
-        return new Command(this.args[0], this.args[1]);
     }
 }

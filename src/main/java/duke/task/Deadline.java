@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * {@code Deadline} class encapsulates a deadline Task.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     /**
      * {@code LocalDateTime} object that stores date and time
      * of deadline
@@ -17,7 +17,7 @@ public class Deadline extends Task{
      * @param description description of Deadline Task
      * @param deadline String representation of date and time of deadline to be reached
      */
-    public Deadline(String description, String deadline){
+    public Deadline(String description, String deadline) {
         super(description);
         this.deadline = parseDateTime(deadline);
     }
@@ -37,16 +37,16 @@ public class Deadline extends Task{
      * @param deadline String representation of day and time of deadline
      * @return new {@code LocalDateTime} object containing day and time
      */
-    private LocalDateTime parseDateTime(String deadline){
+    private LocalDateTime parseDateTime(String deadline) {
         String[] dateAndTime = deadline.split(" ");
         String[] dayMonthYear = dateAndTime[0].split("/");
-        int hour = Integer.valueOf(dateAndTime[1])/100;
-        int minute = Integer.valueOf(dateAndTime[1])%100;
-        int[] ddMMYY = new int[3];
-        for (int i = 0; i < dayMonthYear.length;i++){
-            ddMMYY[i] = Integer.valueOf(dayMonthYear[i]);
+        int hour = Integer.parseInt(dateAndTime[1])/100;
+        int minute = Integer.parseInt(dateAndTime[1])%100;
+        int[] dateNumbers = new int[3];
+        for (int i = 0; i < dayMonthYear.length;i++) {
+            dateNumbers[i] = Integer.parseInt(dayMonthYear[i]);
         }
 
-        return LocalDateTime.of(ddMMYY[2], ddMMYY[1], ddMMYY[0], hour, minute);
+        return LocalDateTime.of(dateNumbers[2], dateNumbers[1], dateNumbers[0], hour, minute);
     }
 }

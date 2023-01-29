@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 /**
  * {@code Events} class encapsulates an event Task.
  */
-public class Events extends Task{
+public class Events extends Task {
     /**
      * {@code LocalDateTime} object that stores date and time
      * of start of event
@@ -49,13 +49,13 @@ public class Events extends Task{
     private LocalDateTime parseDateTime(String period) {
         String[] dateAndTime = period.split(" ");
         String[] dayMonthYear = dateAndTime[0].split("/");
-        int hour = Integer.valueOf(dateAndTime[1])/100;
-        int minute = Integer.valueOf(dateAndTime[1])%100;
-        int[] ddMMYY = new int[3];
-        for (int i = 0; i < dayMonthYear.length;i++){
-            ddMMYY[i] = Integer.valueOf(dayMonthYear[i]);
+        int hour = Integer.parseInt(dateAndTime[1])/100;
+        int minute = Integer.parseInt(dateAndTime[1])%100;
+        int[] dateNumbers = new int[3];
+        for (int i = 0; i < dayMonthYear.length; i++) {
+            dateNumbers[i] = Integer.parseInt(dayMonthYear[i]);
         }
 
-        return LocalDateTime.of(ddMMYY[2], ddMMYY[1], ddMMYY[0], hour, minute);
+        return LocalDateTime.of(dateNumbers[2], dateNumbers[1], dateNumbers[0], hour, minute);
     }
 }

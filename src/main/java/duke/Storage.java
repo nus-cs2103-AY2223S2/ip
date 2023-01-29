@@ -30,11 +30,11 @@ public class Storage {
      * @param filePath
      * @throws DukeException
      */
-    public Storage(Path filePath) throws DukeException{
+    public Storage(Path filePath) throws DukeException {
         this.filePath = filePath;
         try {
             this.lines = Files.lines(this.filePath).collect(Collectors.toList());
-        } catch (IOException err){
+        } catch (IOException err) {
             this.lines = new ArrayList<>();
             throw new DukeException("Unable to access content of files!");
         }
@@ -44,7 +44,7 @@ public class Storage {
      * Loads lines read from file
      * @return list of string lines
      */
-    public List<String> load(){
+    public List<String> loadLines() {
         return this.lines;
     }
 
@@ -53,29 +53,29 @@ public class Storage {
      * @param taskList task list that keeps track of tasks
      * @throws DukeException when file fails to be written to
      */
-    public void editFile(ArrayList<Task> taskList) throws DukeException{
-        if (taskList.size() > lines.size()){
+    public void editFile(ArrayList<Task> taskList) throws DukeException {
+        if (taskList.size() > lines.size()) {
             try {
                 for (int i = lines.size(); i < taskList.size(); i++) {
                     Files.write(this.filePath,
                             (i + " | " + taskList.get(i).toString() + "\n").getBytes(),
                             StandardOpenOption.APPEND);
                 }
-            } catch (IOException err){
+            } catch (IOException err) {
                 throw new DukeException("Unable to write to File!");
             }
         } else {
             try {
                 for (int i = 0; i < Math.min(taskList.size(), lines.size()); i++) {
                     String lineInQuestion = i + " | " + taskList.get(i).toString() + "\n";
-                    if (!lines.get(i).contains(lineInQuestion)){
+                    if (!lines.get(i).contains(lineInQuestion)) {
                         lines.remove(i);
-                    } else if (!lines.get(i).equalsIgnoreCase(lineInQuestion)){
+                    } else if (!lines.get(i).equalsIgnoreCase(lineInQuestion)) {
                         lines.add(i, lineInQuestion);
                     }
                 }
                 Files.write(this.filePath, lines);
-            } catch (IOException err){
+            } catch (IOException err) {
                 throw new DukeException("Unable to write to File!");
             }
         }

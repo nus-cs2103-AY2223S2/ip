@@ -18,7 +18,7 @@ public class ToDo extends Task {
      * @return String representation of todo task 
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "T" + " | " + super.toString();
     }
 }

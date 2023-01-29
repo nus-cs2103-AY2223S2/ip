@@ -37,13 +37,13 @@ public class Duke {
                 Files.createFile(path);
             }
             Storage storage = new Storage(path);
-            taskList = new TaskList(storage.load());
+            taskList = new TaskList(storage.loadLines());
         } catch (InvalidPathException err) {
             ui.showLoadingError();
-        } catch (IOException errIO){
+        } catch (IOException errIO) {
             System.out.println("Unable to create File!");
             System.exit(-1);
-        } catch (DukeException dukeErr){
+        } catch (DukeException dukeErr) {
             ui.displayError(dukeErr);
         }
     }
@@ -51,21 +51,21 @@ public class Duke {
     /**
      * runs Duke program
      */
-    public void run(){
+    public void run() {
         ui.welcome();
         try {
             Storage store = new Storage(path);
             while (true) {
                 try {
                     Parser parser = new Parser(ui.getInput());
-                    Command command = parser.parseArgs();
-                    command.execArgs(taskList);
+                    Command commandHandler = parser.parseArgs();
+                    commandHandler.execArgs(taskList);
                     store.editFile(this.taskList.loadTaskList());
                 } catch (DukeException err) {
                     ui.displayError(err);
                 }
             }
-        } catch (DukeException err){
+        } catch (DukeException err) {
             ui.displayError(err);
         }
     }
@@ -73,9 +73,8 @@ public class Duke {
     /**
      * @param args array of command line arguments if any
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Duke mainProgram = new Duke(System.getProperty("user.dir"));
         mainProgram.run();
     }
-
 }
