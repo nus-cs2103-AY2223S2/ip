@@ -1,6 +1,7 @@
 package duke;
 import java.time.LocalDateTime;
 
+import duke.exception.DukeTaskNotFoundException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -33,6 +34,19 @@ public class TaskList {
         return t;
     }
 
+    public void find(String keyword) throws DukeTaskNotFoundException {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (int i = 0; i < arrayList.size(); i++) {
+            if (arrayList.get(i).toString().indexOf(keyword) != -1) {
+                temp.add(arrayList.get(i));
+            }
+        }
+        if (temp.isEmpty()) {
+            throw new DukeTaskNotFoundException("No task with that keyword!");
+        }
+        TaskList tempTaskList = new TaskList(temp);
+        tempTaskList.list();
+    }
     public Task addTodo(String description) {
 
         Task t = new Todo(description);

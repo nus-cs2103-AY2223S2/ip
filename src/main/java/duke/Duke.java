@@ -42,6 +42,11 @@ public class Duke {
                     continue;
                 }
 
+                if (answer.startsWith("find ")) {
+                    String keyword = parser.getFindKeyword();
+                    tasks.find(keyword);
+                    continue;
+                }
                 if (answer.startsWith("mark ")) {
                     Integer index = parser.getMarkIndex(length);
                     ui.marked(tasks.mark(index));
@@ -59,7 +64,7 @@ public class Duke {
                 }
                 if (answer.startsWith("todo ")) {
                     String description = parser.getTodoDescription();
-                    ui.addedTask(tasks.addTodo(answer));
+                    ui.addedTask(tasks.addTodo(description));
                     continue;
                 }
                 if (answer.startsWith("deadline ")) {
