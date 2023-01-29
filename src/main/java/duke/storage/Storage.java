@@ -1,10 +1,5 @@
 package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +8,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * The Storage class implements a repository that deals with the
@@ -126,9 +126,9 @@ public class Storage {
             List<String> tasks = getSavedTasksAsList();
             FileWriter fw = new FileWriter(this.file, false);
             for (int i = 0; i < tasks.size(); i++) {
-                if (i != index) {               // not the line we want to replace
+                if (i != index) { // not the line we want to replace
                     fw.write(tasks.get(i) + System.lineSeparator());
-                } else if (!text.isEmpty()) {   // only replace line if is not empty, else delete line
+                } else if (!text.isEmpty()) { // only replace line if is not empty, else delete line
                     fw.write(text + System.lineSeparator());
                 }
                 fw.flush();
