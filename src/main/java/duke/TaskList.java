@@ -63,7 +63,7 @@ public class TaskList {
             String toOutput = "Nice! I've marked this task as done:\n  " + currTask.toString();
             System.out.println(toOutput);
         } catch (DukeExceptions DE) {
-            DE.toString();
+            System.out.println(DE.toString());
         }
     }
 
@@ -78,7 +78,7 @@ public class TaskList {
             String toOutput = "Ok, I've marked this task as not done yet:\n  " + currTask.toString();
             System.out.println(toOutput);
         } catch (DukeExceptions DE) {
-            DE.toString();
+            System.out.println(DE.toString());
         }
     }
 

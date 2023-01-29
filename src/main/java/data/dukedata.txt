@@ -1,2 +1,2 @@
-1.[T][X] test1    
-2.[T][X] test3    
+1.[T][ ] test1     
+2.[T][X] test2     

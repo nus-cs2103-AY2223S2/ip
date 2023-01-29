@@ -12,37 +12,52 @@ public class Parser {
     }
 
     public void readInput(String input, TaskList listOfTasks) throws DukeExceptions {
+        
+        try {
 
-        if (input.startsWith("todo")) {
-            handleToDoTask(input, listOfTasks);
-        }
+            if (input.startsWith("todo")) {
+                handleToDoTask(input, listOfTasks);
+                return;
+            }
 
-        if (input.startsWith("deadline")) {
-            handleDeadlineTask(input, listOfTasks);
-        }
+            if (input.startsWith("deadline")) {
+                handleDeadlineTask(input, listOfTasks);
+                return;
+            }
 
-        if (input.startsWith("event")) {
-            handleEventTask(input, listOfTasks);
-        }
+            if (input.startsWith("event")) {
+                handleEventTask(input, listOfTasks);
+                return;
+            }
 
-        if (input.equals("list")) {
-            handleList(listOfTasks);
-        }
+            if (input.equals("list")) {
+                handleList(listOfTasks);
+                return;
+            }
 
-        if (input.startsWith("delete")) {
-            handleDelete(input, listOfTasks);
-        }
+            if (input.startsWith("delete")) {
+                handleDelete(input, listOfTasks);
+                return;
+            }
 
-        if (input.startsWith("checkdue")) {
-            handleCheckDue(input, listOfTasks);
-        }
+            if (input.startsWith("checkdue")) {
+                handleCheckDue(input, listOfTasks);
+                return;
+            }
 
-        if (input.startsWith("mark")) {
-            handleMark(input, listOfTasks);
-        }
+            if (input.startsWith("mark")) {
+                handleMark(input, listOfTasks);
+                return;
+            }
 
-        if (input.startsWith("unmark")) {
-            handleUnmark(input, listOfTasks);
+            if (input.startsWith("unmark")) {
+                handleUnmark(input, listOfTasks);
+                return;
+            }
+
+            throw new DukeExceptions("");
+        } catch (DukeExceptions DE) {
+            System.out.println(DE.toString());
         }
     }
 
