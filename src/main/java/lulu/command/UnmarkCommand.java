@@ -1,6 +1,13 @@
-public class MarkCommand extends Command {
+package lulu.command;
+
+import lulu.TaskList;
+import lulu.UI;
+import lulu.Storage;
+
+import lulu.exception.InvalidCommandException;
+public class UnmarkCommand extends Command {
     private int taskNumber;
-    public MarkCommand(String rest) throws InvalidCommandException {
+    public UnmarkCommand(String rest) throws InvalidCommandException {
         if (rest.isEmpty()) {
             throw new InvalidCommandException();
         }
@@ -16,7 +23,7 @@ public class MarkCommand extends Command {
     }
 
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        tasks.markTask(taskNumber);
-        ui.showMarkText(tasks.getTaskDescription(taskNumber));
+        tasks.unmarkTask(taskNumber);
+        ui.showUnmarkText(tasks.getTaskDescription(taskNumber).toString());
     }
 }

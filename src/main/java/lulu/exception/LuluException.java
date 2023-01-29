@@ -1,3 +1,4 @@
+package lulu.exception;
 public class LuluException extends Exception {
     public LuluException(String message) {
         super(message);

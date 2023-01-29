@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package lulu;
 public class UI {
     private static final String LINE = "____________________________________________________________";
 
@@ -60,10 +60,7 @@ public class UI {
         System.out.println("loading complete.");
     }
 
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
-        sc.close();
-        return command;
+    public void showOutOfBounds() {
+        System.out.println("(=ಠᆽಠ=) That is out of bounds!");
     }
 }

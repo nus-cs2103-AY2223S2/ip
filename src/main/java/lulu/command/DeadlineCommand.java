@@ -1,6 +1,17 @@
+package lulu.command;
+
+import lulu.TaskList;
+import lulu.UI;
+import lulu.Storage;
+
+import lulu.task.Task;
+import lulu.task.Deadline;
+
+import lulu.exception.LuluException;
+
 public class DeadlineCommand extends Command {
-    String description;
-    String by;
+    private String description;
+    private String by;
     public DeadlineCommand(String rest) throws LuluException {
         if (rest.isEmpty()) {
             throw new LuluException("(=✖ ᆺ ✖=) The description of a deadline cannot be empty.");

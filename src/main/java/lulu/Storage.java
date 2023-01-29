@@ -1,3 +1,4 @@
+package lulu;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
@@ -6,9 +7,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    //public static final String NAME = "./data/lulu.txt";
-    public File file;
-    public String path;
+    private File file;
+    private String path;
     public Storage(String filePath) {
         this.file = new File(filePath);
         path = filePath;

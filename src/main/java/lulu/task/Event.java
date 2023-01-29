@@ -1,11 +1,13 @@
+package lulu.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    protected LocalDate fromDate;
-    protected String from;
-    protected LocalDate toDate;
-    protected String to;
+    private LocalDate fromDate;
+    private String from;
+    private LocalDate toDate;
+    private String to;
 
     public Event(String description, String from, String to) {
         super(description);

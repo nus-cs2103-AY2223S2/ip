@@ -1,10 +1,12 @@
+package lulu.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
-    protected LocalDate byDate;
-    protected String by;
+    private LocalDate byDate;
+    private String by;
 
     public Deadline(String description, String by) {
         super(description);

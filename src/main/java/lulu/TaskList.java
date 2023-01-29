@@ -1,3 +1,9 @@
+package lulu;
+import lulu.task.Deadline;
+import lulu.task.Event;
+import lulu.task.Task;
+import lulu.task.Todo;
+
 import java.util.ArrayList;
 
 public class TaskList {

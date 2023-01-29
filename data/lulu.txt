@@ -7,6 +7,7 @@ E`1`running ` 2023-05-12` 2080-05-12
 D`0`run ` tomorrow
 D`0`run ` tomorrowwww qasfawr
 E`0`run ` today ` tomorrow
-E`0`run ` today to to to ` tomorrow
-T`0`runn run run
-E`0`run ` 2000-05-12` 2010-06-12
+E`1`run ` today to to to ` tomorrow
+T`1`runn run run
+E`1`run ` 2000-05-12` 2010-06-12
+T`0`run

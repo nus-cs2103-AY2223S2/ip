@@ -1,7 +1,17 @@
+package lulu.command;
+
+import lulu.TaskList;
+import lulu.UI;
+import lulu.Storage;
+
+import lulu.task.Task;
+import lulu.task.Event;
+
+import lulu.exception.LuluException;
 public class EventCommand extends Command {
-    String description;
-    String from;
-    String to;
+    private String description;
+    private String from;
+    private String to;
     public EventCommand(String rest) throws LuluException {
         if (rest.isEmpty()) {
             throw new LuluException("(=✖ ᆺ ✖=) The description of a event cannot be empty.");

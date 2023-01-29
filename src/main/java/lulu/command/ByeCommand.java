@@ -1,3 +1,9 @@
+package lulu.command;
+
+import lulu.TaskList;
+import lulu.UI;
+import lulu.Storage;
+
 import java.util.ArrayList;
 
 public class ByeCommand extends Command {
