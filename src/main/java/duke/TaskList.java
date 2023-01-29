@@ -41,7 +41,7 @@ public class TaskList {
 
     public void add(String input, String from, String to, boolean needPrint) throws DukeException {
         if (input.equals("") || from.equals("") || to.equals("")) {
-            throw new DukeException("The descriptiom and duration of an event cannot be empty.");
+            throw new DukeException("The description and duration of an event cannot be empty.");
         }
         Event newTask = new Event(input, from, to);
         this.list.add(newTask);

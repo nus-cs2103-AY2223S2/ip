@@ -1,19 +1,5 @@
 package duke;
-
-import duke.command.TodoCommand;
-import duke.command.UnknownCommand;
-
-import duke.command.GuideCommand;
-import duke.command.MarkCommand;
-import duke.command.PrintListCommand;
-
-import duke.command.EndCommand;
-import duke.command.EventCommand;
-
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-
-import duke.command.Command;
+import duke.command.*;
 
 public class Parser {
     public Parser() {}
@@ -35,7 +21,7 @@ public class Parser {
             return new MarkCommand(markIdx);
         case "unmark":
             int unmarkIdx = Integer.parseInt(content);
-            return new MarkCommand(unmarkIdx);
+            return new UnmarkCommand(unmarkIdx);
         case "todo":
             return new TodoCommand(content);
         case "deadline":
