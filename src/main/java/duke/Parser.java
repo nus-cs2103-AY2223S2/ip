@@ -72,6 +72,12 @@ public class Parser {
                 }
                 tasks.add(new Event(argFrags[1], this));
                 break;
+            case "find":
+                if (argFrags.length < 2) {
+                    throw Event.getInvalidFormatException();
+                }
+                tasks.find(argFrags[1], this);
+                break;
             default:
                 throw new UnrecognisedCommandException();
         }

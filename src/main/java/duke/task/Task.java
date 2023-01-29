@@ -76,4 +76,7 @@ public class Task {
         return toString();
     }
 
+    public String getDescription() {
+        return this.description;
+    }
 }
