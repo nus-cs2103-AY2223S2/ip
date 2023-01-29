@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.io.IOException;
+
 public class Duke {
 
     final static String ENTRY = "Hello! I'm Duke\nWhat can I do for you?";
@@ -10,7 +13,7 @@ public class Duke {
 
     public static ArrayList<Task> list;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println(ENTRY);
         Scanner sc = new Scanner(System.in);
         list = new ArrayList<Task>();
@@ -44,6 +47,8 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
+        save();
+        sc.close();
     }
 
     public static void handleDelete(String[] inputWords) {
@@ -138,6 +143,15 @@ public class Duke {
         if (inputWords.length < 2) {
             throw new EmptyDescriptionException();
         }
+    }
+
+    public static void save() throws IOException {
+        PrintWriter output = new PrintWriter( "ip/data/duke.txt");
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            output.println(i+1 + "." + task.toString());
+        }
+        output.close();
     }
 }
 
