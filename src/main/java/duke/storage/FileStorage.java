@@ -25,6 +25,11 @@ public class FileStorage implements Storage {
         this.fileName = fileName;
     }
 
+    /**
+     * Loads saved tasks from file.
+     *
+     * @return List of tasks saved from file.
+     */
     @Override
     public List<Task> load() {
         List<Task> savedTasks = new ArrayList<>();
@@ -77,6 +82,12 @@ public class FileStorage implements Storage {
         return savedTasks;
     }
 
+    /**
+     * Saves tasks to file.
+     *
+     * @param tasks Tasks to be saved.
+     * @throws DukeException If I/O errors are encountered.
+     */
     @Override
     public void save(List<Task> tasks) throws DukeException {
         try {

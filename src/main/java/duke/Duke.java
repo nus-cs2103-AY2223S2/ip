@@ -29,6 +29,9 @@ public class Duke {
         commandParser = new CommandParser();
     }
 
+    /**
+     * Runs the chatbot by listening to input and executing commands.
+     */
     public void run() {
         ui.showStartup();
 

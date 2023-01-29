@@ -22,6 +22,15 @@ public class DeleteCommand implements Command {
         return "delete <taskNo>";
     }
 
+    /**
+     * Deletes task from task list.
+     *
+     * @param args Argument list in order: task number (whole number format).
+     * @param ui User interface.
+     * @param taskList Task list.
+     * @param storage Storage.
+     * @throws DukeException If task number < 0 or > total tasks or invalid task number.
+     */
     @Override
     public void run(String[] args, Ui ui, TaskList taskList, Storage storage) throws DukeException {
         int taskNo = Integer.parseInt(args[0]);
