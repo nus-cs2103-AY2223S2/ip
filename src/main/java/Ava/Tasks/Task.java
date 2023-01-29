@@ -73,5 +73,14 @@ public class Task {
         return this.marked;
     }
 
+    /**
+     * Check if the task message contains key
+     * @param key string to be checked
+     * @return boolean indicate if message is contained
+     */
+    public boolean taskContains(String key){
+        return this.message.contains(key);
+    }
+
 
 }
