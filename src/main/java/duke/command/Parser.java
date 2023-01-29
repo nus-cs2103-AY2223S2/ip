@@ -2,15 +2,12 @@ package duke.command;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.TaskDoesNotExistException;
 import duke.task.TaskList;
-
 import java.util.Scanner;
-
 
 public class Parser {
     public TaskList taskList;
     public Scanner scanner;
     String input;
-
 
     public Parser(TaskList taskList) {
         this.taskList = taskList;
@@ -54,7 +51,6 @@ public class Parser {
             }
             input = scanner.nextLine();
         }
-
 
         System.out.println("Bye. Hope to see you again soon!");
     }
