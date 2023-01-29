@@ -9,6 +9,9 @@ public class Saver {
         return "Tasks saved.";
     }
 
+    public String delete(Task task){
+        return "Task deleted";
+    }
     public String load(){
         return "Tasks loaded.";
     }
