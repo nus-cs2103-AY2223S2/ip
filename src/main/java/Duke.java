@@ -12,6 +12,8 @@ import java.lang.StringBuilder;
 
 import java.util.ArrayList;
 
+import java.time.format.DateTimeParseException;
+
 public class Duke {
 
     private static ArrayList<String> getFileContents(String filePath, String folderPath) throws IOException,
@@ -57,6 +59,7 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("An unexpected error has occurred: " + e.getMessage());
         }
+
         if (fileTasks.size() != 0) {
             FileWriter fw = new FileWriter("data/storage.txt");
             for (int i = 0; i < fileTasks.size(); i++) {
@@ -143,9 +146,13 @@ public class Duke {
                 case "[E][ ":
                     tempCmd = "event";
                     break;
-                default:
+                case "[E][X":
                     tempCmd = "event";
                     isTaskCompleted = true;
+                    break;
+                default:
+                    tempCmd = "";
+                    isTaskCompleted = false;
                     break;
                 }
             } else {
@@ -172,7 +179,8 @@ public class Duke {
                 sb.append("    ____________________________________________________________\n")
                         .append("    Here are the tasks in your list:\n");
                 for (int i = 0; i < taskList.size(); i++) {
-                    sb.append("    ").append(i + 1).append(".").append(taskList.get(i).getTaskInfoStatus()).append("\n");
+                    sb.append("    ").append(i + 1).append(".").append(taskList.get(i).getTaskInfoStatus())
+                            .append("\n");
                 }
                 sb.append("    ____________________________________________________________\n");
                 break;
@@ -254,7 +262,25 @@ public class Duke {
                         hasIssue = true;
                         break;
                     }
-                    newTask = new Deadline(tempText2[0], tempText2[1]);
+
+                    String time;
+                    String[] tempDateTime = tempText2[1].split(" ");
+                    if (tempDateTime.length != 3) {
+                        time = "";
+                    } else {
+                        time = tempDateTime[2];
+                    }
+
+                    try {
+                        newTask = new Deadline(tempText2[0], tempDateTime[1], time);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid inputs!\n");
+                        System.out.println("Please enter your date & time in the format: YYYY-MM-DD HH:MM \n");
+                        System.out.println("Please also ensure they are valid values!\n");
+                        hasIssue = true;
+                        break;
+                    }
+
                     if (isTaskCompleted) {
                         newTask.markAsDone();
                     }
@@ -268,6 +294,15 @@ public class Duke {
                         hasIssue = true;
                         break;
                     }
+
+                    String startTime;
+                    String[] tempStartDateTime = tempText3[1].split(" ");
+                    if (tempStartDateTime[2].equals("/to")) {
+                        startTime = "";
+                    } else {
+                        startTime = tempStartDateTime[2];
+                    }
+
                     String[] tempText4 = tempText3[1].split("/to", 2);
                     try {
                         DukeException.validate(true, tempCmd, tempText4);
@@ -276,7 +311,26 @@ public class Duke {
                         hasIssue = true;
                         break;
                     }
-                    newTask = new Event(tempText3[0], tempText4[0], tempText4[1]);
+
+                    String endTime;
+                    String[] tempEndDateTime = tempText4[1].split(" ");
+                    if (tempEndDateTime.length != 3) {
+                        endTime = "";
+                    } else {
+                        endTime = tempEndDateTime[2];
+                    }
+
+                    try {
+                        newTask = new Event(tempText3[0], tempStartDateTime[1], tempEndDateTime[1],
+                                startTime, endTime);
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid inputs!\n");
+                        System.out.println("Please enter your date & time in the format: YYYY-MM-DD HH:MM \n");
+                        System.out.println("Please also ensure they are valid values!\n");
+                        hasIssue = true;
+                        break;
+                    }
+
                     if (isTaskCompleted) {
                         newTask.markAsDone();
                     }
