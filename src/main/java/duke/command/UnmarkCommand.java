@@ -11,6 +11,7 @@ public class UnmarkCommand extends Command {
     public UnmarkCommand(int taskNum) {
         this.taskNum = taskNum;
     }
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskToBeUnmarked = tasks.getTask(taskNum - 1);

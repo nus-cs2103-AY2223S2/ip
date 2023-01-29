@@ -25,21 +25,21 @@ public class Storage {
     }
 
     private Task convertStrToTask(String str) {
-        String getTaskType = str.substring(0,1);
-        String getStatus = str.substring(4,5);
+        String getTaskType = str.substring(0, 1);
+        String getStatus = str.substring(4, 5);
         switch (getTaskType) {
             case "T":
                 task = new Todo(str.substring(8));
                 break;
             case "D":
-                    String updatedStr = str.substring(8).replace("(", "").replace(")", "").trim();
-                    String[] paraForDeadline = updatedStr.split("by: ", 2);
+                String updatedStr = str.substring(8).replace("(", "").replace(")", "").trim();
+                String[] paraForDeadline = updatedStr.split("by: ", 2);
                 System.out.println(paraForDeadline[1]);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm a");
-                    LocalDateTime tempDueDate = LocalDateTime.parse(paraForDeadline[1], formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy hhmm a");
+                LocalDateTime tempDueDate = LocalDateTime.parse(paraForDeadline[1], formatter);
 
-                    DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                    String finalDueDate = tempDueDate.format(newFormatter);
+                DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                String finalDueDate = tempDueDate.format(newFormatter);
                 System.out.println(finalDueDate);
 
                 LocalDateTime dueDate = LocalDateTime.parse(finalDueDate, newFormatter);
@@ -87,19 +87,19 @@ public class Storage {
     }
 
     public void update(Task task) throws IOException {
-        Path dataDir = Paths.get("ip/data");
-        Path dataFile = Paths.get("ip/data/tasks.txt");
+        Path dataDir = Paths.get("data");
+        Path dataFile = Paths.get("data/tasks.txt");
         // directory does not exists
-        if (! Files.isDirectory(dataDir)) {
+        if (!Files.isDirectory(dataDir)) {
             Files.createDirectory(dataDir);
             Files.createFile(dataFile);
         } else {
             // if directory exist, check if duke.txt exists
-            if (! Files.exists(dataFile)) {
+            if (!Files.exists(dataFile)) {
                 Files.createFile(dataFile);
             }
         }
-        writer = new FileWriter("ip/data/tasks.txt", true);
+        writer = new FileWriter("data/tasks.txt", true);
         String finalTasks = "";
         String taskInfo = task.toString().replace("[ ]", " | 0 |").replace("[X]", "| 1 |");
         taskInfo = taskInfo.replace("[", "").replace("]", "");

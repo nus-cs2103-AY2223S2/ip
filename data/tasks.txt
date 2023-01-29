@@ -4,3 +4,4 @@ E | 0 | project meeting (from: Mon 2pm to: 4pm)
 D | 0 | return book (by: Dec 02 2019 0600 pm )
 T | 0 | vibee
 D | 0 | return home (by: Dec 04 2019 0600 pm )
+T | 0 | incline walk

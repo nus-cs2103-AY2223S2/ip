@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -10,6 +11,7 @@ public class MarkCommand extends Command {
     public MarkCommand(int taskNum) {
         this.taskNum = taskNum;
     }
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task taskToBeMarked = tasks.getTask(taskNum - 1);

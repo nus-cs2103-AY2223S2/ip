@@ -28,7 +28,7 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-            String fullCommand = ui.readCommand();
+                String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
@@ -41,6 +41,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException {
-        new Duke("ip/data/tasks.txt").run();
+        new Duke("data/tasks.txt").run();
     }
 }

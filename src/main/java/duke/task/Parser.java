@@ -37,7 +37,7 @@ public class Parser {
             case "bye":
                 parsedCommand = new ExitCommand();
                 break;
-            case "delete" :
+            case "delete":
                 int taskNum = Integer.parseInt(arr[1]);
                 parsedCommand = new DeleteCommand(taskNum);
                 break;

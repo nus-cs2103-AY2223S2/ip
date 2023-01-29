@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -13,7 +14,7 @@ public class ExitCommand extends Command {
         isExit();
     }
 
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 }
