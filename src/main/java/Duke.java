@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -122,6 +121,7 @@ public class Duke {
                      */
                         String[] parts = inputLine.split("/");
                         Deadline task = new Deadline(parts[0].split(" ", 2)[1], 0, parts[1]);
+
                         tasks.add(task);
                         printToFormat("    Successfully added the following task:\n    " + task);
                         break;
@@ -131,6 +131,7 @@ public class Duke {
                      */
                         String[] parts1 = inputLine.split("/");
                         Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
+
                         tasks.add(event);
                         printToFormat("    Successfully added the following task:\n    " + event);
                         break;
@@ -248,13 +249,23 @@ class Task {
     public String toStoreFormatString() {
         return "";
     }
+    protected static LocalDateTime formatDateTime(String input) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
+        return dateTime;
+    }
+
+    protected static String TransformDateTime(LocalDateTime dateTime) {
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy 'at' HH:mm");
+        return dateTime.format(outputFormatter);
+    }
 }
 /**
  * Creates a Deadline class that inherits from Task
  * to handle deadline tasks
  */
 class Deadline extends Task {
-    protected final String deadline;
+    protected final LocalDateTime deadline;
     /**
      * @param name: a string indicating the name of the task
      * @param status: a String indicating whether the task is done or not
@@ -262,7 +273,7 @@ class Deadline extends Task {
      */
     Deadline (String name, int status, String deadline) {
         super(name, status);
-        this.deadline = deadline;
+        this.deadline = formatDateTime(dlString);
     }
 
     private int getStatusNo() {
@@ -276,7 +287,7 @@ class Deadline extends Task {
      * overrides the toString method
      */
     public String toString() {
-        return "[D]" + status + " " + name + "(" + deadline + ")";
+        return "[D]" + status + " " + name + "(" + TransformDateTime(deadline) + ")";
     }
     
     public String toStoreFormatString() {
@@ -285,8 +296,8 @@ class Deadline extends Task {
 }
 
 class Event extends Task {
-    protected final String from;
-    protected final String to;
+    protected final LocalDateTime from;
+    protected final LocalDateTime to;
     /**
      * 
      * @param name: a string indicating thename of the Event task
@@ -296,8 +307,8 @@ class Event extends Task {
      */
     Event(String name, int status, String from, String to) {
         super(name, status);
-        this.from = from;
-        this.to = to;
+        this.from = formatDateTime(from);
+        this.to = formatDateTime(to);
     }
 
     private int getStatusNo() {
@@ -307,11 +318,13 @@ class Event extends Task {
             return 1;
         }
     }
+
     /**
      * overrrides toString method
      */
     public String toString() {
-        return "[E]" + status + " " + name + "(" + from + to + ")";
+        return String.format("[E]%s %s (from %s to %s)", status, name, TransformDateTime(from), 
+        TransformDateTime(to));
     }
     
     public String toStoreFormatString() {
