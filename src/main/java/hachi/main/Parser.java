@@ -1,6 +1,5 @@
 package hachi.main;
 
-
 import hachi.commands.*;
 
 /**
@@ -8,20 +7,19 @@ import hachi.commands.*;
  */
 public class Parser {
     private enum Type {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND
     }
 
     /**
-     * Creates a new instance of Command based on the input string.
      *
      * @param input The user's input string.
      * @return A specific type of command.
      * @throws IllegalArgumentException if command is unknown.
      */
-    public static Command parse(String input) throws IllegalArgumentException{
+    public static Command parse(String input) throws IllegalArgumentException {
         String[] words = input.split(" ");
         Type t = Type.valueOf(words[0].toUpperCase());
-        switch(t) {
+        switch (t) {
             case LIST:
                 return new ListCommand(input);
 
@@ -46,6 +44,8 @@ public class Parser {
             case BYE:
                 return new ExitCommand(input);
 
+            case FIND:
+                return new FindCommand(input);
             default:
                 throw new IllegalArgumentException();
         }

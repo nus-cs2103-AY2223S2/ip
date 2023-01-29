@@ -13,7 +13,7 @@ public class Ddl extends Task {
      * Ddl constructor.
      *
      * @param input The description of the task.
-     * @param time The deadline of the task.
+     * @param time  The deadline of the task.
      */
     public Ddl(String input, String time) {
         super(input);

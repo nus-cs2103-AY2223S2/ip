@@ -1,5 +1,7 @@
 package hachi.main;
+
 import hachi.tasks.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -62,6 +64,4 @@ public class TaskList {
     public String toString() {
         return "" + this.toDoList;
     }
-
 }
-

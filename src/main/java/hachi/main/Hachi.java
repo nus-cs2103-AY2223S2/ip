@@ -1,4 +1,5 @@
 package hachi.main;
+
 import hachi.commands.Command;
 
 /**
