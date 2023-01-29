@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     private final Duke duke;
+
     public Parser(Duke duke) {
         this.duke = duke;
     }
@@ -65,8 +66,8 @@ public class Parser {
     public void mark(String s) {
         try {
             int n = Integer.parseInt(s) - 1;
-            Ui.markMSG(duke.taskList.get(n));
-            duke.taskList.get(n).done = 1;
+            Ui.markMSG(duke.taskList.get_task(n));
+            duke.taskList.get_task(n).complete();
             duke.store.saveList();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Index Out");
@@ -76,8 +77,8 @@ public class Parser {
     public void unmark(String s) {
         try {
             int num = Integer.parseInt(s) - 1;
-            Ui.unmarkMSG(duke.taskList.get(num));
-            duke.taskList.get(num).done = 0;
+            Ui.unmarkMSG(duke.taskList.get_task(num));
+            duke.taskList.get_task(num).uncomplete();
             duke.store.saveList();
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Index Out");
@@ -87,7 +88,7 @@ public class Parser {
     public void delete(String s) {
         try {
             int index = Integer.parseInt(s) - 1;
-            Ui.deleteMSG(duke.taskList.get(index), duke.taskList.size()-1);
+            Ui.deleteMSG(duke.taskList.get_task(index), duke.taskList.size()-1);
             duke.taskList.remove(index);
             duke.store.saveList();
         } catch (IndexOutOfBoundsException a) {

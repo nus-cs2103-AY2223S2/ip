@@ -10,8 +10,12 @@ public class TaskList {
         this.task_list = new ArrayList<>();
     }
 
-    public Task get(int n) {
+    public Task get_task(int n) {
         return task_list.get(n);
+    }
+
+    public List<Task> get_list() {
+        return this.task_list;
     }
 
     public int size() {

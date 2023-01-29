@@ -1,15 +1,23 @@
 package components;
 
 public class Task {
-    public int done;
+    private int done;
     public String msg;
 
     public Task(String msg) {
         this.msg = msg;
         this.done = 0;
     }
+    
+    public void complete() {
+        this.done = 1;
+    }
+    
+    public void uncomplete() {
+        this.done = 0;
+    }
 
-    public StringBuffer getInfo() {
+    public String getInfo() {
         StringBuffer sb = new StringBuffer("");
         if (this instanceof Todo) {
             sb.append('T');
@@ -36,7 +44,7 @@ public class Task {
             }
             sb.append(this.msg + " /from " + ((Event) this).from + " /to " + ((Event) this).to);
         }
-        return sb;
+        return sb.toString();
     }
 
     @Override
