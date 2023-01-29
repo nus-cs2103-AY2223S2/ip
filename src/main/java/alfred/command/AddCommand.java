@@ -1,3 +1,9 @@
+package alfred.command;
+
+import alfred.task.*;
+import alfred.ui.Ui;
+import alfred.storage.Storage;
+import alfred.exceptions.AlfredException;
 import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {

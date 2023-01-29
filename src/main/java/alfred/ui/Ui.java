@@ -1,5 +1,7 @@
-import java.util.Scanner;
+package alfred.ui;
 
+import alfred.exceptions.AlfredException;
+import java.util.Scanner;
 public class Ui {
 
     private Scanner sc;

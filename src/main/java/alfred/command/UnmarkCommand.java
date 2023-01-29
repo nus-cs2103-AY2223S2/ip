@@ -1,3 +1,11 @@
+package alfred.command;
+
+import alfred.task.TaskList;
+import alfred.task.Task;
+import alfred.ui.Ui;
+import alfred.storage.Storage;
+import alfred.exceptions.AlfredException;
+
 public class UnmarkCommand extends Command {
     private int taskIndex;
     public UnmarkCommand(String taskIndex) {

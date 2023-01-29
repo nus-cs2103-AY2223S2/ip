@@ -1,3 +1,6 @@
+package alfred.task;
+
+import alfred.exceptions.AlfredException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

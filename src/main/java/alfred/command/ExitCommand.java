@@ -1,3 +1,10 @@
+package alfred.command;
+
+import alfred.task.TaskList;
+import alfred.ui.Ui;
+import alfred.storage.Storage;
+import alfred.exceptions.AlfredException;
+
 public class ExitCommand extends Command {
 
     @Override
