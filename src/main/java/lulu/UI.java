@@ -1,4 +1,5 @@
 package lulu;
+
 public class UI {
     private static final String LINE = "____________________________________________________________";
 
@@ -34,8 +35,13 @@ public class UI {
         System.out.println("Now you have " + size + " tasks in the list. ฅ(=චᆽච=ฅ)");
         System.out.println(LINE);
     }
+
     public void listText() {
         System.out.println("ฅ(=චᆽච=ฅ) Here are the tasks in your list: ");
+    }
+
+    public void listMatchText() {
+        System.out.println("ฅ(=චᆽච=ฅ) Here are the matching tasks in your list: ");
     }
 
     public void showMarkText(String taskMark) {

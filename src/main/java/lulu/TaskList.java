@@ -46,6 +46,16 @@ public class TaskList {
         list.get(taskNumber - 1).markAsUndone();
     }
 
+    public TaskList find(String description) {
+        TaskList tasks = new TaskList();
+        this.list.forEach((task) -> {
+            if (task.containsDescription(description)) {
+                tasks.add(task);
+            }
+        });
+        return tasks;
+    }
+
     /** this method may be in the wrong spot but will be left here for now */
     /**
      * This method loads tasks into the TaskList, provided it follows a given convention.

@@ -5,7 +5,7 @@ import lulu.exception.LuluException;
 
 public class Parser {
     private enum Commands {
-        LIST, MARK, UNMARK, DELETE, DEADLINE, EVENT, TODO, BYE
+        LIST, MARK, UNMARK, DELETE, DEADLINE, EVENT, TODO, BYE, FIND
     }
 
     /**
@@ -47,6 +47,8 @@ public class Parser {
                 return new TodoCommand(restOfCommand);
             case BYE:
                 return new ByeCommand();
+            case FIND:
+                return new FindCommand(restOfCommand);
             default:
                 throw new InvalidCommandException();
             }
