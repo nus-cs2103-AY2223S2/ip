@@ -14,7 +14,7 @@ public class Parser {
      */
     public static Command parse(String str) {
         Command command;
-        boolean todoCheck, deadlineCheck, eventCheck, deleteCheck, markCheck, unMarkCheck, listCheck, exitCheck, nothingCheck;
+        boolean todoCheck, deadlineCheck, eventCheck, deleteCheck, markCheck, unMarkCheck, listCheck, findCheck, exitCheck, nothingCheck;
         todoCheck = str.startsWith("todo ");
         deadlineCheck = str.startsWith("deadline ");
         eventCheck = str.startsWith("event ");
@@ -22,9 +22,11 @@ public class Parser {
         markCheck = str.startsWith("mark ");
         unMarkCheck = str.startsWith("unmark ");
         listCheck = str.equals("list");
+        findCheck = str.startsWith("find ");
         exitCheck = str.equals("bye");
         nothingCheck = str.equals("");
-        if (str.equals("todo") || str.equals("deadline") || str.equals("event") || str.equals("delete") || str.equals("mark") || str.equals("unmark")) {
+        if (str.equals("todo") || str.equals("deadline") || str.equals("event") || str.equals("delete")
+                || str.equals("mark") || str.equals("unmark") || str.equals("find")) {
             throw new RuntimeException("This command's field cannot be left blank!");
         } else if (todoCheck || deadlineCheck || eventCheck) {
             if (deadlineCheck) {
@@ -40,12 +42,14 @@ public class Parser {
                 String deadline = str.substring(index + 5);
                 int dateTimeLength = deadline.length();
                 if (!(dateTimeLength > 12 && dateTimeLength < 16)) {
-                    throw new RuntimeException("Unable to create Deadline! Check your date and time. They have to be in the format of dd/mm/yyyy hhmm");
+                    throw new RuntimeException("Unable to create Deadline! " +
+                            "Check your date and time. They have to be in the format of dd/mm/yyyy hhmm");
                 }
                 int firstSlash = deadline.indexOf("/");
                 int secondSlash = deadline.indexOf("/", firstSlash + 1);
                 if (firstSlash == -1 || secondSlash == -1) {
-                    throw new RuntimeException("Unable to create Deadline! Check your date format. Use / to separate day, month and year.");
+                    throw new RuntimeException("Unable to create Deadline! " +
+                            "Check your date format. Use / to separate day, month and year.");
                 }
             } else if (eventCheck) {
                 String target1 = " /from ";
@@ -56,7 +60,8 @@ public class Parser {
                 int index1 = str.indexOf(target1);
                 int index2 = str.indexOf(target2);
                 if (index2 - index1 < 0) {
-                    throw new RuntimeException("Unable to create event! The /from field has to be before the /to field.");
+                    throw new RuntimeException("Unable to create event! " +
+                            "The /from field has to be before the /to field.");
                 } else if (index2 - index1 < 20) {
                     throw new RuntimeException("Unable to create event! Please enter a valid /from field.");
                 }
@@ -101,6 +106,12 @@ public class Parser {
             }
         } else if (listCheck) {
             command = new ListCommand();
+        } else if (findCheck) {
+            String keyword = str.substring(5);
+            if (keyword.equals("")) {
+                throw new RuntimeException("What would you like me to find?");
+            }
+            command = new FindCommand(keyword);
         } else if (exitCheck) {
             command = new ExitCommand();
         } else if (nothingCheck) {

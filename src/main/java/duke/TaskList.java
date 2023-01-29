@@ -98,7 +98,28 @@ public class TaskList {
         return str;
     }
 
-    private String printTask(int index) {
+    /**
+     * Find tasks that have descriptions matching keyword
+     * @param keyword Keyword that is being searched for.
+     * @return String representation of the matching tasks.
+     */
+    public String find(String keyword) {
+        String result = "";
+        for (int i = 0; i < this.index; i++) {
+            Task task = this.tasks[i];
+            String taskDescription = task.getDescription();
+            if (taskDescription.contains(keyword)) {
+                if (result.equals("")) {
+                    result += (i + 1) + ". " + task;
+                } else {
+                    result += "\n" + (i + 1) + ". " + task;
+                }
+            }
+        }
+        return result;
+    }
+
+    public String printTask(int index) {
         return tasks[index].toString();
     }
 

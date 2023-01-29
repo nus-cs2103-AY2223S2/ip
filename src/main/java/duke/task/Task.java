@@ -38,6 +38,13 @@ public abstract class Task {
         }
     }
 
+     /** Get description of task.
+     * @return Description of task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Get status icon to mark whether a task is done or not for string representation of task.
      * @return X if task is done or just a blank space if task is not.
