@@ -1,5 +1,8 @@
 package enums;
 
+/**
+ * Types of commands that can be used
+ */
 public enum CommandType {
     BYE("bye"),
     LIST("list"),

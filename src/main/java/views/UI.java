@@ -2,6 +2,9 @@ package views;
 
 import commands.Command;
 
+/**
+ * Handles display of program output to user
+ */
 public class UI {
     private static final String DATE_FORMAT = "dd/mm/yyyy";
 

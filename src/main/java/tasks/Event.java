@@ -5,11 +5,24 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A class representing an Event task
+ */
 public class Event extends Task{
+
+    /** The starting date of this task **/
     private LocalDateTime startDate;
+
+    /** The ending date of this task **/
     private LocalDateTime endDate;
 
-    public Event(String name, LocalDateTime startDate, LocalDateTime endDate) throws DukeException {
+    /**
+     * Constructor for an Event task
+     * @param name Name of the task
+     * @param startDate Starting date of the task
+     * @param endDate Ending date of the task
+     */
+    public Event(String name, LocalDateTime startDate, LocalDateTime endDate) {
         super(name);
         this.startDate = startDate;
         this.endDate = endDate;

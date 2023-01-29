@@ -17,6 +17,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 
+/**
+ * Handles loading and saving of tasks to local storage
+ */
 public class Storage {
     private final Path HOME_DIRECTORY = Path.of(System.getProperty("user.dir") + "/data");
     private File dataFile;
@@ -26,6 +29,10 @@ public class Storage {
         this.tasks = tasks;
     }
 
+    /**
+     * Loads tasks from a local file into a TaskList, creates one if one does not exist
+     * @throws IOException If fail to load/create a storage file
+     */
     public void load() throws IOException {
         try {
             if (!Files.exists(HOME_DIRECTORY)) {
@@ -51,6 +58,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves current TaskList into local file
+     * @throws IOException If fail to save tasks into file
+     */
     public void save() throws IOException {
         try {
             FileWriter fileWriter = new FileWriter(this.HOME_DIRECTORY + "/duke.txt");
@@ -63,6 +74,13 @@ public class Storage {
             System.out.println("Failed to save existing tasks...");
         }
     }
+
+    /**
+     * Parse input from file into tasks
+     * @param input Line from local file
+     * @param tasks TaskList to store tasks
+     * @throws DukeException If fail to create task from invalid input
+     */
     public static void parseFile(String input, TaskList tasks) throws DukeException {
         String[] inputList = input.split(",");
         String taskType = inputList[0];

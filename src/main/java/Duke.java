@@ -8,11 +8,16 @@ import views.UI;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Main driver class for Duke
+ */
+
 public class Duke{
     private static final TaskList tasks = new TaskList();
     private static final Scanner sc = new Scanner(System.in);
     private static UI ui = new UI();
     private static Storage storage = new Storage(tasks);
+
 
     public static void main(String[] args) throws IOException {
         storage.load();
@@ -25,6 +30,10 @@ public class Duke{
         ui.printExitMessage();
     }
 
+    /**
+     * Takes in input from the user, and passes it to Parser to get the appropriate command
+     * and execute it.
+     */
     private static void acceptCommands(){
         boolean isExit = false;
         while (!isExit) {
