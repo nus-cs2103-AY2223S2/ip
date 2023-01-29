@@ -15,7 +15,7 @@ public class TaskList {
     }
 
     public void unmarkTask(int index) {
-        taskList.get(index).markUnDone();
+        taskList.get(index).markUndone();
     }
 
     public Task getTask(int index) {

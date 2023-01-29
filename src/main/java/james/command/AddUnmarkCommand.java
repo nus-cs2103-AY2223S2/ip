@@ -16,7 +16,7 @@ public class AddUnmarkCommand extends Command {
             throw new JamesException("Task number is out of range!");
         }
         Task task = taskList.getTask(taskNumber);
-        task.markUnDone();
+        task.markUndone();
         ui.unmarkTask(task);
     }
 }
