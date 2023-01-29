@@ -1,10 +1,28 @@
 package duke;
 
+/**
+ * A command for event tasks to be added.
+ */
 public class EventCommand extends Command {
+
+    /**
+     * Constructs the event command with given user input.
+     *
+     * @param input Input from user.
+     */
     public EventCommand(String input) {
         super(input);
     }
 
+    /**
+     * Executes the event command with given task list,
+     * ui and storage.
+     *
+     * @param taskList TaskList for Duke.
+     * @param ui Ui for Duke.
+     * @param storage Storage for Duke.
+     * @throws DukeException If task description is empty.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (input.length() == 0) {
             throw new DukeException(

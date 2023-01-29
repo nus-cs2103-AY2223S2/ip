@@ -1,10 +1,19 @@
 package duke;
 
+/**
+ * Class that contains the main method to run the bot.
+ */
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs Duke object with given file path.
+     *
+     * @param filePath String path to file location.
+     */
     public Duke(String filePath){
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -16,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the bot
+     */
     public void run() {
         ui.showWelcome();
         boolean canContinue = true;

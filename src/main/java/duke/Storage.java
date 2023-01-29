@@ -9,14 +9,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Date;
 
+/**
+ * A storage class to help load tasks from and
+ * save tasks to specified file.
+ */
 public class Storage {
     private File path;
 
     private ArrayList<Task> tasks = new ArrayList<Task>();
 
+    /**
+     * Constructs storage object given file path.
+     *
+     * @param filePath Path to specified file.
+     */
     public Storage(String filePath) {
         this.path = new File(filePath);
     }
+
+    /**
+     * Writes tasks to file.
+     *
+     * @param taskListStrings A string of all tasks.
+     */
     public void writeTasksToFile(String taskListStrings) {
         try {
             FileWriter fw = new FileWriter(this.path);
@@ -27,6 +42,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads tasks from file.
+     *
+     * @return ArrayList of tasks read from file.
+     * @throws DukeException If filepath does not exist.
+     */
     public ArrayList<Task> readTasksFromFile() throws DukeException{
         try {
             String path = System.getProperty(("user.dir")) + "/duke.txt";
@@ -35,7 +56,6 @@ public class Storage {
             String[] fileContentsArray = contentsOfFile.split(", ");
             for (String task: fileContentsArray) {
                 processTask(task);
-//                System.out.println(task);
             }
             return this.tasks;
         } catch (IOException e) {
@@ -58,6 +78,12 @@ public class Storage {
         return path.exists();
     }
 
+    /**
+     * Determines what type of task and adds the chosen task
+     * to the task list.
+     *
+     * @param task String of the task.
+     */
     void processTask(String task) {
         try {
             String taskType = "" + task.charAt(1);
@@ -72,6 +98,13 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Adds an event task to the task list.
+     *
+     * @param task String of event task.
+     * @throws ParseException If parsing error occurs.
+     */
     void addEvent(String task) throws ParseException {
         String taskDescriptionWithTime = task.substring(4);
         String[] taskDetails = taskDescriptionWithTime.split("\\(");
@@ -102,6 +135,12 @@ public class Storage {
         curList.add(curTask);
         this.tasks = curList;
     }
+
+    /**
+     * Adds a to do task to the task list.
+     *
+     * @param task String of to do task.s
+     */
     void addTodo(String task) {
         String taskDescription = task.substring(4);
         Task curTask = new Todo(taskDescription);
@@ -112,6 +151,13 @@ public class Storage {
         curList.add(curTask);
         this.tasks = curList;
     }
+
+    /**
+     * Adds a deadline task to the task list.
+     *
+     * @param task String of deadline task.
+     * @throws ParseException If parsing error occurs.
+     */
     void addDeadline(String task) throws ParseException {
         String taskDescriptionWithTime = task.substring(4);
 
@@ -132,7 +178,7 @@ public class Storage {
         if (("" + task.charAt(1)).equals("X")) {
             curTask = curTask.mark();
         }
-        //DateTimeFormatter.ofPattern("MMM d yyyy")
+
         ArrayList<Task> curList = this.tasks;
         curList.add(curTask);
         this.tasks = curList;
