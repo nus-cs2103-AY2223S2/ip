@@ -30,7 +30,7 @@ public class Duke {
         processCommands();        
     }
 
-    public static void processCommands() 
+    private static void processCommands() 
             throws InvalidCommandException, IOException {
         boolean isBye = false;
         dukeIo.showPrompt();
