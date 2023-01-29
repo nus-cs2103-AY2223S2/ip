@@ -59,7 +59,6 @@ public class Duke {
         } catch (IOException e) {
             System.out.println("An unexpected error has occurred: " + e.getMessage());
         }
-
         if (fileTasks.size() != 0) {
             FileWriter fw = new FileWriter("data/storage.txt");
             for (int i = 0; i < fileTasks.size(); i++) {
@@ -91,7 +90,6 @@ public class Duke {
         ArrayList<String> fileTasks = new ArrayList<>();
         ArrayList<Task> taskList = new ArrayList<>();
         String text;
-
         sb.append("    ____________________________________________________________\n")
                 .append("    Hello! I'm Duke.\n")
                 .append("    What can I do for you?\n")
@@ -262,7 +260,6 @@ public class Duke {
                         hasIssue = true;
                         break;
                     }
-
                     String time;
                     String[] tempDateTime = tempText2[1].split(" ");
                     if (tempDateTime.length != 3) {
@@ -270,7 +267,6 @@ public class Duke {
                     } else {
                         time = tempDateTime[2];
                     }
-
                     try {
                         newTask = new Deadline(tempText2[0], tempDateTime[1], time);
                     } catch (DateTimeParseException e) {
@@ -280,7 +276,6 @@ public class Duke {
                         hasIssue = true;
                         break;
                     }
-
                     if (isTaskCompleted) {
                         newTask.markAsDone();
                     }
@@ -294,7 +289,6 @@ public class Duke {
                         hasIssue = true;
                         break;
                     }
-
                     String startTime;
                     String[] tempStartDateTime = tempText3[1].split(" ");
                     if (tempStartDateTime[2].equals("/to")) {
@@ -302,7 +296,6 @@ public class Duke {
                     } else {
                         startTime = tempStartDateTime[2];
                     }
-
                     String[] tempText4 = tempText3[1].split("/to", 2);
                     try {
                         DukeException.validate(true, tempCmd, tempText4);
@@ -311,7 +304,6 @@ public class Duke {
                         hasIssue = true;
                         break;
                     }
-
                     String endTime;
                     String[] tempEndDateTime = tempText4[1].split(" ");
                     if (tempEndDateTime.length != 3) {
@@ -319,7 +311,6 @@ public class Duke {
                     } else {
                         endTime = tempEndDateTime[2];
                     }
-
                     try {
                         newTask = new Event(tempText3[0], tempStartDateTime[1], tempEndDateTime[1],
                                 startTime, endTime);
@@ -330,7 +321,6 @@ public class Duke {
                         hasIssue = true;
                         break;
                     }
-
                     if (isTaskCompleted) {
                         newTask.markAsDone();
                     }
@@ -358,11 +348,9 @@ public class Duke {
                                 .append("\n    Now you have ").append(taskList.size()).append(" tasks in the list.\n")
                                 .append("    ____________________________________________________________\n");
                     }
+                } else {
+                    sb.setLength(0);    // Clear the cache created by the unknown function call by user
                 }
-            }
-            if (hasIssue) {
-                sb.setLength(0);
-                continue;
             }
             if (!isFileData) {  // Prints a message pertaining to the function called by the user
                 printMessage(pw, sb);
