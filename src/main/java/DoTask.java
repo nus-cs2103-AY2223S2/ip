@@ -1,5 +1,6 @@
+import java.util.Arrays;
 import java.util.Scanner;
-
+import java.util.List;
 class DoTask extends Event {
     boolean firstGreet;
     String lastCommand;
@@ -27,7 +28,18 @@ class DoTask extends Event {
             if (nextTask.equals("LIST")) {
                 return new DoTask(false, nextTask, this.taskList);
             } else {
-                return new DoTask(false, nextTask, this.taskList.addTask(nextTask));
+                String[] command = nextTask.split(" ");
+                List<String> words = Arrays.asList(command);
+                if (words.get(0).equals("MARK")) {
+                    return new DoTask(false, nextTask, this.taskList.markDone(Integer.valueOf(words.get(1)) - 1));
+                } else {
+                    if (words.get(0).equals("UNMARK")) {
+                        return new DoTask(false, nextTask, this.taskList.unMark(Integer.valueOf(words.get(1)) - 1));
+                    }
+                    else {
+                        return new DoTask(false, nextTask, this.taskList.addTask(nextTask));
+                    }
+                }
             }
         }
     }
@@ -42,8 +54,21 @@ class DoTask extends Event {
             if (lastCommand.equals("LIST")) {
                 toPrintOut += this.taskList.toString();
             } else {
-                toPrintOut += "SO YOU WANT TO ADD " + '"' + this.lastCommand + '"' + ". VERY WELL..." + '\n';
-                toPrintOut += '\n' + "ADDED: " + lastCommand + '\n';
+                String[] command = lastCommand.split(" ");
+                List<String> words = Arrays.asList(command);
+                if (words.get(0).equals("MARK")) {
+                    toPrintOut += "MARKED. ONE STEP CLOSER..." + '\n';
+                    toPrintOut += "[X] " + this.taskList.getTask(Integer.valueOf(words.get(1)) - 1) + '\n';
+                } else {
+                    if (words.get(0).equals("UNMARK")) {
+                        toPrintOut += "HAVING OTHER PLANS I SEE..." + '\n';
+                        toPrintOut += "[ ] " + this.taskList.getTask(Integer.valueOf(words.get(1)) - 1) + '\n';
+                    } else {
+                        toPrintOut += "SO YOU WANT TO ADD " + '"' + this.lastCommand + '"' + ". VERY WELL..." + '\n';
+                        toPrintOut += '\n' + "ADDED: " + lastCommand + '\n';
+                        toPrintOut += '\n' + "WHAT ELSE?" + '\n';
+                    }
+                }
             }
         }
         toPrintOut += "_".repeat(22) + '\n';
