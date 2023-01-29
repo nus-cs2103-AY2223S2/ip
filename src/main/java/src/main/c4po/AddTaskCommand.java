@@ -9,6 +9,13 @@ public class AddTaskCommand extends Command {
         toAppendFile = toAppend;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param tasks are the list of tasks
+     * @param ui is the instance of UI
+     * @param storage the instance of Storage which holds and writes to the data file
+     * @throws BotException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
         try {
@@ -26,6 +33,10 @@ public class AddTaskCommand extends Command {
 
     }
 
+    /**
+     * {@inheritDoc}
+     * @return
+     */
     @Override
     public boolean isExit() {
         return false;

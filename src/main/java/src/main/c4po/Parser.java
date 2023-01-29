@@ -11,7 +11,9 @@ import java.util.List;
 public class Parser {
 
     /**
-     * Instantiates a instance of Parser
+     * Instantiates an instance of Parser
+     * Parser helps make sense of user commands and creates an instance of executable command
+     * for the bot to execute
      */
     public Parser() {
 

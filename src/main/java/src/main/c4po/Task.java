@@ -12,7 +12,11 @@ public class Task {
     protected static String delimiter = Pattern.quote(" | ");
     public Integer index;
 
-    //Constructor
+    /**
+     * Task item with a description and a boolean representing the done status of the task
+     * @param description
+     * @param isDone
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -22,11 +26,11 @@ public class Task {
     }
 
 
-
-
-
-
-
+    /**
+     * Returns a String formatted for writing to file, using vertical bar as
+     * the delimiter
+     * @return
+     */
     protected String getTaskFileFormat() {
         String statusIcon = this.getStatusIcon();
         String isDone = statusIcon.equals("X") ? "1" : "0";
@@ -34,7 +38,10 @@ public class Task {
     }
 
 
-
+    /**
+     * Returns the done status of the Task
+     * @return a string of "X" for done and " " if undone
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -57,7 +64,11 @@ public class Task {
 
 
 
-    //Get inline print of task description with specified index
+    /**
+     * Returns an inline String that details the task type and the
+     * task details
+     * @return String
+     */
     public String getTaskInline(Integer index) {
         return index.toString() + ". " + this.getTaskInline();
     }
