@@ -31,7 +31,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getRecreateCommand(int id) {
-        String result = "deadline " + description + " /by " + by;
+        String result = "deadline " + description + " /by " + by.getRaw();
         if (isDone) {
             result += "\nmark " + id;
         }
