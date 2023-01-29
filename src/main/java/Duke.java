@@ -1,7 +1,11 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Duke {
+    private final static String FILE_PATH = "src/data/tasks.txt";
+    private final static String DIRECTORY_PATH = "src/data";
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -9,6 +13,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
+        Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String str = bufferedReader.readLine();
         ArrayList<Task> store = new ArrayList<>();
@@ -27,12 +32,14 @@ public class Duke {
                             throw new DukeException("Invalid format, please give numbers");
                         }
                         marking(true, store, arr);
+                        storage.writeData(store);
                         break;
                     case "unmark":
                         if (arr.length < 2) {
                             throw new DukeException("Invalid format, please give numbers");
                         }
                         marking(false, store, arr);
+                        storage.writeData(store);
                         break;
                     case "todo":
                         if (arr.length < 2) {
@@ -40,6 +47,7 @@ public class Duke {
                         }
                         Todo todo = new Todo(arr[1], false);
                         store.add(todo);
+                        storage.writeData(store);
 
                         System.out.println("Got it. I've added this task:\n  [T][ ] " +
                                 arr[1] + "\n Now you have " + store.size() + " tasks in the list");
@@ -55,6 +63,7 @@ public class Duke {
                         Deadline deadline = new Deadline(toPrintSplit[0], false);
                         deadline.setDateTime(toPrintSplit[1]);
                         store.add(deadline);
+                        storage.writeData(store);
 
                         System.out.println("Got it. I've added this task:\n  [D][ ] " +
                                 toPrintSplit[0] + " (by: " + toPrintSplit[1] + ")\n Now you have " +
@@ -75,6 +84,7 @@ public class Duke {
                         Event event = new Event(startEndTime[0], false);
                         event.setStartEnd(dateTime[0], dateTime[1]);
                         store.add(event);
+                        storage.writeData(store);
 
                         System.out.println("Got it. I've added this task:\n  [E][ ] " +
                                 startEndTime[0] + " (from: " + dateTime[0] + " to: " + dateTime[1] +
@@ -85,6 +95,8 @@ public class Duke {
                             throw new DukeException("Invalid format, please give numbers");
                         }
                         deleteTask(store, arr[1]);
+                        storage.writeData(store);
+
                         break;
                     default:
                         throw new DukeException("Unknown format");
@@ -106,13 +118,7 @@ public class Duke {
     public static void listTask(ArrayList<Task> store) {
         int number = 1;
         for (Task stored : store) {
-            if (stored instanceof Todo) {
-                System.out.println(number + ". " + toDoString(stored));
-            } else if (stored instanceof Deadline) {
-                System.out.println(number + ". " + deadLineString(stored));
-            } else if (stored instanceof Event) {
-                System.out.println(number + ". " + eventString(stored));
-            }
+            System.out.println(number + ". " + stored.toString());
             number++;
         }
     }
@@ -139,55 +145,11 @@ public class Duke {
             throw new DukeException("Index out of bounds");
         }
         Task task = store.get(index);
-        if (task instanceof Todo) {
-            System.out.println("Noted. I've removed this task:\n  " +
-                    toDoString(task) +
-                    "\nNow you have " + dsize + " tasks in the list.");
-        } else if (task instanceof Deadline) {
-            System.out.println("Noted. I've removed this task:\n  " +
-                    deadLineString(task) +
-                    "Now you have " + dsize + " tasks in the list.");
-        } else if (task instanceof Event) {
-            System.out.println("Noted. I've removed this task:\n  " +
-                    eventString(task) +
-                    "Now you have " + dsize  + " tasks in the list.");
-        }
+        System.out.println("Noted. I've removed this task:\n  " +
+                task.toString() +
+                "\nNow you have " + dsize + " tasks in the list.");
         store.remove(index);
     }
 
-    public static String toDoString(Task task) {
-        boolean checked = task.isChecked();
-        String str = task.getStr();
-        if (checked) {
-            return "[T][X] " + str;
-        } else{
-            return "[T][ ] " + str;
-        }
-    }
-
-    public static String deadLineString(Task task) {
-        String str = task.getStr();
-        boolean checked = task.isChecked();
-        String dateTime = ((Deadline) task).getDateTime();
-        if (checked) {
-            return "[D][X] " + str + " (by: " + dateTime + ")";
-        } else {
-            return "[D][ ] " + str + " (by: " + dateTime + ")";
-        }
-    }
-
-    public static String eventString(Task task) {
-        String str = task.getStr();
-        boolean checked = task.isChecked();
-        String startTime = ((Event) task).getStart();
-        String endTime = ((Event) task).getEnd();
-        if (checked) {
-            return "[E][X] " + str + " (from: " + startTime +
-            " to: " + endTime + ")";
-        } else {
-            return "[E][ ] " + str + " (from: " + startTime +
-                    " to: " + endTime + ")";
-        }
-    }
 
 }

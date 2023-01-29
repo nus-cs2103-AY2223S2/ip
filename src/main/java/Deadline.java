@@ -11,4 +11,16 @@ public class Deadline extends Task {
     public String getDateTime() {
         return dateTime;
     }
+
+    @Override
+    public String toString() {
+        String str = this.getStr();
+        boolean checked = this.isChecked();
+        String dateTime = this.getDateTime();
+        if (checked) {
+            return "[D][X] " + str + " (by: " + dateTime + ")";
+        } else {
+            return "[D][ ] " + str + " (by: " + dateTime + ")";
+        }
+    }
 }
