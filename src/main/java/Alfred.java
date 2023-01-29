@@ -10,67 +10,44 @@ import java.util.ArrayList;
 public class Alfred {
 
     private static ArrayList<Task> itemsList;
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+    private Parser parser;
 
-    public static void main(String[] args) {
-        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
-        System.out.println("| Your favourite personal assistant:  |");
-        System.out.println("*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*");
-        Alfred.printLogo();
-        Alfred.printIntro();
-
-        String path = "data/alfred.txt";
-        File dataFile = new File(path);
-
-        itemsList = new ArrayList<>();
+    public Alfred(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        parser = new Parser();
         try {
-            Alfred.loadFileContents(dataFile);
-        } catch (IOException e) {
-            Alfred.echoCommand("Error, invalid file path");
-            return;
+            tasks = new TaskList(storage.load());
         } catch (AlfredException e) {
-            Alfred.echoCommand(e.getMessage());
-            return;
+            tasks = new TaskList();
         }
+    }
 
-        Scanner sc = new Scanner(System.in);
-        String commandLine = sc.nextLine();
-
-        while (true) {
-            String[] lineArr = commandLine.split(" ");
-            String command = lineArr[0];
+    public void run() {
+        ui.displayOpening();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                if (command.equals("bye") && lineArr.length == 1) { // So we can still add taskNames that start with bye
-                    Alfred.saysBye();
-                    Alfred.writeToFile(dataFile);   // Handles the adding of the new task into the data file
-                    System.exit(0); // means if the program crashes halfway we won't the files at all
-                } else if (command.equals("list") && lineArr.length == 1) {
-                    Alfred.listItems();
-                } else if (command.equals("mark") && lineArr.length == 2) {
-                    Alfred.markItem(lineArr[1]); // must be int catch error
-                } else if (command.equals("unmark") && lineArr.length == 2) {
-                    Alfred.unmarkItem(lineArr[1]);
-                } else if (command.equals("delete") && lineArr.length == 2) {
-                    Alfred.deleteItem(lineArr[1]);
-                } else if (command.equals("list") && lineArr.length == 2){
-                    String second = lineArr[1];
-                    try {
-                        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy");
-                        LocalDate date = LocalDate.parse(second, format);
-                        Alfred.listItems(date);
-                    } catch (DateTimeParseException e) {
-                        throw new AlfredException("The date format should be given as dd/mm/yyyy\n");
-                    }
-                } else {
-                    Alfred.addItem(commandLine);
-                }
+                String fullCommand = ui.getCommand();
+                Command c = parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
             } catch (AlfredException e) {
-                Alfred.echoCommand(e.toString()); // only valid data can be saved into the file
-            } finally {
-                commandLine = sc.nextLine();
+                ui.displayError(e);
             }
         }
     }
 
+    public static void main(String[] args) {
+        Alfred alfred = new Alfred("data/alfred.txt");
+        alfred.run();
+    }
+
+
+    /*
     private static void loadFileContents(File dataFile) throws IOException, AlfredException {
 
         class CheckMark {
@@ -133,17 +110,6 @@ public class Alfred {
         }
     }
 
-    private static void echoCommand(String command) {
-        Alfred.printLines();
-        command = "    " + command;
-        System.out.println(command);
-        Alfred.printLines();
-    }
-
-    private static void saysBye() {
-        String command = "Bye. Hope to see you again soon!";
-        Alfred.echoCommand(command);
-    }
 
     private static void addItem(String commandLine) throws AlfredException {
         String[] commandArr = commandLine.split(" ", 2);
@@ -287,25 +253,5 @@ public class Alfred {
         command.append(String.format("    You have %d %s on %s in the list\n", itemIndex - 1, numTasks, date));
         Alfred.echoCommand(command.toString());
     }
-
-    private static void printLogo() {
-        System.out.println(" _____ __     ______ _____ ____ ___ ");
-        System.out.println("|  -  |  |   |  ____|  _  |  __| _ \\     ");
-        System.out.println("| | | |  |   | |___ | |_|_| |__|| | |  ");
-        System.out.println("|  -  |  |___|  ___||  _ \\  |__||_| |");
-        System.out.println("|_| |_| ____ |__|   |_| \\_|____|__ /   ");
-
-    }
-
-    private static void printIntro() {
-        String intro = "Hello! I'm Alfred :>\n"
-                + "How can I help you today?";
-        Alfred.printLines();
-        System.out.println(intro);
-        Alfred.printLines();
-    }
-
-    private static void printLines() {
-        System.out.println("    ____________________________________________________________");
-    }
+    */
 }
