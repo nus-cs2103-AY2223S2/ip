@@ -98,9 +98,35 @@ public class TaskList {
         }
     }
 
+    /**
+     * Function to get all the data string representations of the tasks in the taskList
+     * @return An array list of all the data string representations
+     */
     public ArrayList<String> getDataList() {
         ArrayList<String> res = new ArrayList<>();
         this.taskList.forEach(task -> res.add(task.toData()));
         return res;
+    }
+
+    /**
+     * Function to find matching task descriptions from this taskList using a keyword
+     * @param keyword String to find from the descriptions of the tasks
+     * @return A new TaskList containing all the tasks which description contains the keyword
+     */
+    public String findMatchingTasks(String keyword) {
+        TaskList found = new TaskList();
+        taskList.forEach(task -> {
+            if (task.description.contains(keyword)) {
+                found.createToDo(task);
+            }
+        });
+        StringBuilder res = new StringBuilder("Here are the matching tasks in your list:\n");
+        if (found.taskList.size() == 0) {
+            return "There are currently no tasks in your to do list matching the keyword!";
+        }
+        for (int i = 0; i < found.taskList.size(); i++) {
+            res.append(String.format("\t %d.%s\n", i + 1, found.taskList.get(i).toString()));
+        }
+        return res.toString().trim();
     }
 }

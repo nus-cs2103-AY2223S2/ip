@@ -10,11 +10,15 @@ import response.CreateResponse;
 import response.DeadlineResponse;
 import response.DeleteResponse;
 import response.EventResponse;
+import response.FindResponse;
 import response.ListResponse;
 import response.MarkResponse;
 import response.Response;
 import response.UnMarkResponse;
 
+/**
+ * Class to test all parsing returns the correct response to be executed
+ */
 public class ParserTest {
     @Test
     public void testListParse() {
@@ -63,6 +67,13 @@ public class ParserTest {
         Parser parser = new Parser("event test3 /from 2023-01-01 /to 2023-01-02");
         Response actual = parser.parse();
         Response expected = new EventResponse("test3 /from 2023-01-01 /to 2023-01-02");
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void testFindParse() {
+        Parser parser = new Parser("find something");
+        Response actual = parser.parse();
+        Response expected = new FindResponse("something");
         assertEquals(expected, actual);
     }
     @Test

@@ -6,6 +6,7 @@ import response.CreateResponse;
 import response.DeadlineResponse;
 import response.DeleteResponse;
 import response.EventResponse;
+import response.FindResponse;
 import response.ListResponse;
 import response.MarkResponse;
 import response.Response;
@@ -16,7 +17,7 @@ import response.UnMarkResponse;
  */
 public class Parser {
 
-    private enum Types { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE }
+    private enum Types { LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND }
 
     /**
      * Represents the user input
@@ -55,6 +56,8 @@ public class Parser {
             return new EventResponse(this.inputContent);
         case "DELETE":
             return new DeleteResponse(this.inputContent);
+        case "FIND":
+            return new FindResponse(this.inputContent);
         default:
             throw new MissingArgumentException(
                     "I'm sorry, but I don't know what that means :-("
