@@ -16,7 +16,7 @@ public class Duke {
         Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String str = bufferedReader.readLine();
-        ArrayList<Task> store = new ArrayList<>();
+        ArrayList<Task> store = storage.readData();
         while (!str.equals("bye")) {
             String[] arr = str.split(" ", 2);
             try {
@@ -45,7 +45,7 @@ public class Duke {
                         if (arr.length < 2) {
                             throw new DukeException("Missing description");
                         }
-                        Todo todo = new Todo(arr[1], false);
+                        ToDo todo = new ToDo(arr[1], false);
                         store.add(todo);
                         storage.writeData(store);
 
@@ -60,7 +60,7 @@ public class Duke {
                         if (toPrintSplit.length < 2) {
                             throw new DukeException("Missing deadline");
                         }
-                        Deadline deadline = new Deadline(toPrintSplit[0], false);
+                        DeadLine deadline = new DeadLine(toPrintSplit[0], false);
                         deadline.setDateTime(toPrintSplit[1]);
                         store.add(deadline);
                         storage.writeData(store);

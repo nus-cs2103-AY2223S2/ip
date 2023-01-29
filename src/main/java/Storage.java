@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,21 +29,41 @@ public class Storage {
         }
     }
 
-//    private ArrayList<Task> readData() {
-//        ArrayList<Task> = new ArrayList<>();
-//        File file = new File(filePath);
-//        Scanner scanner = new Scanner(file);
-//        while (scanner.hasNext()) {
-//
-//        }
-//    }
+    public ArrayList<Task> readData() {
+        ArrayList<Task> arrayList = new ArrayList<>();
+        File file = new File(filePath);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+            while (scanner.hasNext()) {
+                String nextLine = scanner.nextLine();
+                String[] taskLine = nextLine.trim().split(" \\| ");
+                switch (taskLine[0]) {
+                    case "T":
+                        arrayList.add(ToDo.createTask(taskLine));
+                        break;
+                    case "E":
+                        arrayList.add(Event.createTask(taskLine));
+                        break;
+                    case "D":
+                        arrayList.add(DeadLine.createTask(taskLine));
+                        break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return arrayList;
+    }
 
     public void writeData(ArrayList<Task> arrayList) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
-            for (int i = 0; i < arrayList.size() - 1; i++) {
-                fileWriter.write(arrayList.get(i).toString() + "\n");
+            for (Task task : arrayList) {
+                System.out.println(task.storeTaskString() + "\n");
+                fileWriter.write(task.storeTaskString() + "\n");
             }
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println("Error: Unable to save task");
         }
