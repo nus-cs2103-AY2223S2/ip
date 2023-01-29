@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -11,7 +10,7 @@ import duke.ui.Ui;
 public class ListCommand extends Command {
 
     public boolean execute(Storage tl, Ui ui, Storage storage) {
-        System.out.println(tl.getTasks());
+        System.out.println(tl.getTasksString());
         return true;
     }
 }

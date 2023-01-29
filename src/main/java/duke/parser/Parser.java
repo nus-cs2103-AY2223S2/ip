@@ -8,15 +8,17 @@ import duke.command.*;
  */
 public class Parser {
     private enum CommandType {
-        todo,
-        deadline,
+        list,
         mark,
         unmark,
-        list,
         bye,
+        todo,
+        deadline,
+        event,
         delete,
-        find,
-        event;
+
+        find;
+
     }
 
     /**
@@ -30,22 +32,24 @@ public class Parser {
         String[] cmd2 = cmd.split(" ");
         CommandType commandType = CommandType.valueOf(cmd2[0].toLowerCase());
         switch (commandType) {
-            case todo:
-                return new TodoCommand(cmd);
-            case deadline:
-                return new DeadlineCommand(cmd);
+            case list:
+                return new ListCommand();
             case mark:
                 return new MarkCommand(cmd2[1]);
             case unmark:
                 return new UnmarkCommand(cmd2[1]);
-            case list:
-                return new ListCommand();
             case bye:
                 return new ByeCommand();
-            case delete:
-                return new DeleteCommand(cmd2[1]);
+            case todo:
+                return new TodoCommand(cmd);
+            case deadline:
+                return new DeadlineCommand(cmd);
             case event:
                 return new EventCommand(cmd);
+            case delete:
+                return new DeleteCommand(cmd2[1]);
+            case find:
+                return new FindCommand(cmd);
             default:
                 throw new IllegalArgumentException();
         }
