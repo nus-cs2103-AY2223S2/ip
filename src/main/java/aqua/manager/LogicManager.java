@@ -11,7 +11,7 @@ import aqua.logic.parser.ArgumentParser;
 import aqua.logic.parser.CommandLineInputParser;
 import aqua.storage.Loadable;
 
-/** Application logic manager */
+/** Manager of the application's logical processes. */
 public class LogicManager implements Loadable {
     private final CommandLineInputParser inputParser;;
     private final TaskManager taskManager;
@@ -19,6 +19,9 @@ public class LogicManager implements Loadable {
     private boolean isClosed = false;
 
 
+    /**
+     * Constructs a LogicManager.
+     */
     public LogicManager() {
         inputParser = new CommandLineInputParser(new ArgumentParser());
         taskManager = new TaskManager();
@@ -43,21 +46,43 @@ public class LogicManager implements Loadable {
     }
 
 
+    /**
+     * Returns the input parser.
+     *
+     * @return the input parser.
+     */
     public CommandLineInputParser getInputParser() {
         return inputParser;
     }
 
 
+    /**
+     * Returns the task manager.
+     *
+     * @return the task manager.
+     */
     public TaskManager getTaskManager() {
         return taskManager;
     }
 
 
+    /**
+     * Sets the close state of the application as specified.
+     *
+     * @param isClosed - {@code true} to set the close state to close and
+     *      {@code false} otherwise.
+     */
     public void setClose(boolean isClosed) {
         this.isClosed = isClosed;
     }
 
 
+    /**
+     * Returns if the application is closed.
+     *
+     * @return {@code true} if the application is closed and {@code false}
+     *      otherwise.
+     */
     public boolean isClosed() {
         return isClosed;
     }
