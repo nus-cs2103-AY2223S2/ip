@@ -1,5 +1,4 @@
 package duke;
-
 import duke.command.Parser;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -25,7 +24,6 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
-
     }
 }
 
