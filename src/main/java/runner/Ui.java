@@ -2,6 +2,9 @@ package runner;
 
 import components.Task;
 
+/**
+ * Class for Ui object.
+ */
 public class Ui {
     static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

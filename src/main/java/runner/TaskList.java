@@ -10,26 +10,49 @@ import java.util.List;
 public class TaskList {
     protected List<Task> task_list;
 
+    /**
+     * Constructor for a TaskList.
+     */
     public TaskList() {
         this.task_list = new ArrayList<>();
     }
 
+
+    /**
+     * Return a task specified by the index.
+     * @param n Index of the task.
+     */
     public Task get(int n) {
         return task_list.get(n);
     }
 
+
+    /**
+     * Return the size of a TaskList.
+     */
     public int size() {
         return task_list.size();
     }
 
+    /**
+     * Add one Task to TaskList.
+     * @param tk Task added.
+     */
     public void add(Task tk) {
         task_list.add(tk);
     }
 
+    /**
+     * Remove the task from the TaskList.
+     * @param n Index of the task.
+     */
     public void remove(int n) {
         task_list.remove(n);
     }
 
+    /**
+     * Show the TaskList.
+     */
     public void showList() {
         System.out.println("Here are the tasks in your list:");
         for (Task tk : task_list) {

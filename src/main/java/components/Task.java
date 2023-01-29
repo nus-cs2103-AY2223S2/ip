@@ -16,6 +16,9 @@ public class Task {
         this.done = 0;
     }
 
+    /**
+     * Store the information of the task into one line.
+     */
     public StringBuffer getInfo() {
         StringBuffer sb = new StringBuffer("");
         if (this instanceof Todo) {
