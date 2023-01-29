@@ -28,7 +28,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("%s%s (by: %s)", 
-                    "[D]", 
+                            "[D]", 
                             super.toString(),
                             deadlineTime.map(Object::toString).orElse(deadlineString));
     }
