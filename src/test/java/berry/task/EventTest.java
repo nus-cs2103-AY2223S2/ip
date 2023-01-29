@@ -17,6 +17,6 @@ public class EventTest {
     public void interpretTaskToString_eventTask_success() throws IncorrectDateException {
         final String validDate = "2022-02-02";
         Event event = new Event("some event", validDate, validDate);
-        assertEquals("E |   | some event | 2022-02-02 | 2022-02-02", event.interpretTaskToString());
+        assertEquals("E |   | some event | 2022-02-02 | 2022-02-02", event.interpretTaskToText());
     }
 }

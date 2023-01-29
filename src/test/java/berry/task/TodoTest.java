@@ -15,6 +15,6 @@ public class TodoTest {
     @Test
     public void interpretTaskToString_todoTask_success() throws IncorrectDateException {
         Todo todo = new Todo("some todo");
-        assertEquals("T |   | some todo", todo.interpretTaskToString());
+        assertEquals("T |   | some todo", todo.interpretTaskToText());
     }
 }

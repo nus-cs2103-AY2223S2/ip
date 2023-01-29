@@ -31,22 +31,22 @@ public class Parser {
     /**
      * Parses user input into command word and arguments for execution.
      *
-     * @param input is the full user input string
+     * @param userInput is the full user input string
      * @return the command based on the user input
      * @throws BerryException if the given string cannot be parsed
      */
-    public static Command parseCommand(String input) throws BerryException {
-        String[] splitInput = input.split(" ", 2);
-        String[] listStr;
+    public static Command parseInput(String userInput) throws BerryException {
+        String[] splitDescriptionAndDetails = userInput.split(" ", 2);
+        String[] splitDetails;
         CommandType commandType;
 
         try {
-            commandType = CommandType.valueOf(splitInput[0].toUpperCase());
+            commandType = CommandType.valueOf(splitDescriptionAndDetails[0].toUpperCase());
         } catch (IllegalArgumentException e){
             throw new UnknownCommandException();
         }
 
-        validate(commandType, input);
+        validate(commandType, userInput);
 
         switch (commandType) {
         case BYE:
@@ -54,25 +54,26 @@ public class Parser {
         case LIST:
             return new ListCommand();
         case MARK:
-            return new MarkCommand(Integer.parseInt(splitInput[1]));
+            return new MarkCommand(Integer.parseInt(splitDescriptionAndDetails[1]));
         case UNMARK:
-            return new UnmarkCommand(Integer.parseInt(splitInput[1]));
+            return new UnmarkCommand(Integer.parseInt(splitDescriptionAndDetails[1]));
         case TODO:
-            return new AddTaskCommand(new Todo(splitInput[1]));
+            return new AddTaskCommand(new Todo(splitDescriptionAndDetails[1]));
         case DEADLINE:
-            listStr = splitInput[1].split(" /by ");
-            return new AddTaskCommand(new Deadline(listStr[0], listStr[1]));
+            splitDetails = splitDescriptionAndDetails[1].split(" /by ");
+            return new AddTaskCommand(new Deadline(splitDetails[0], splitDetails[1]));
         case EVENT:
-            listStr = splitInput[1].split(" /from ");
-            String[] listStrTwo = listStr[1].split(" /to ");
-            return new AddTaskCommand(new Event(listStr[0], listStrTwo[0], listStrTwo[1]));
+            splitDetails = splitDescriptionAndDetails[1].split(" /from ");
+            String[] splitFurtherDetails = splitDetails[1].split(" /to ");
+            return new AddTaskCommand(new Event(splitDetails[0], splitFurtherDetails[0], splitFurtherDetails[1]));
         case DELETE:
-            return new DeleteCommand(Integer.parseInt(splitInput[1]));
+            return new DeleteCommand(Integer.parseInt(splitDescriptionAndDetails[1]));
         case FIND:
-            return new FindCommand(splitInput[1]);
+            return new FindCommand(splitDescriptionAndDetails[1]);
         default:
             throw new UnknownCommandException();
         }
+
     }
 
     /**
@@ -83,19 +84,19 @@ public class Parser {
      * @throws BerryException if the given string has missing or incomplete arguments
      */
     private static void validate(CommandType commandType, String input) throws BerryException {
-        String com = input.split(" ")[0];
+        String command = input.split(" ")[0];
 
         switch(commandType) {
         case TODO:
-            if (input.substring(4).isBlank()) { // empty description
-                throw new EmptyDescriptionException(com);
+            if (input.substring(4).isBlank()) {
+                throw new EmptyDescriptionException(command);
             }
             break;
         case DEADLINE:
-            if (!input.contains("/by ") || !input.contains("/by")) { // no by clause
+            if (!input.contains("/by ") || !input.contains("/by")) {
                 throw new MissingClauseException("by");
-            } else if (input.split("/by")[0].substring(8).isBlank()) { // empty description
-                throw new EmptyDescriptionException(com);
+            } else if (input.split("/by")[0].substring(8).isBlank()) {
+                throw new EmptyDescriptionException(command);
             } else if (input.endsWith("/by") || input.split("/by")[1].isBlank()) {
                 throw new EmptyClauseException("by");
             }
@@ -103,8 +104,8 @@ public class Parser {
         case EVENT:
             if (!input.contains("/from ") || !input.contains("/from")) {
                 throw new MissingClauseException("from");
-            } else if (input.split("/from")[0].substring(5).isBlank()) { // empty description
-                throw new EmptyDescriptionException(com);
+            } else if (input.split("/from")[0].substring(5).isBlank()) {
+                throw new EmptyDescriptionException(command);
             } else if (!input.contains("/to ") || !input.contains("/to")) {
                 throw new MissingClauseException("to");
             } else if (input.endsWith("/to") || input.split("/to")[1].isBlank()) {

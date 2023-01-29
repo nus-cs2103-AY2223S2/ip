@@ -36,7 +36,7 @@ public class Berry {
         }
     }
 
-    public static void main(String[] args) throws IllegalValueException {
+    public static void main(String[] args) throws Storage.InvalidStorageFilePathException {
         new Berry("data/tasks.txt").run();
     }
 
@@ -50,7 +50,7 @@ public class Berry {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
-                Command c = Parser.parseCommand(fullCommand);
+                Command c = Parser.parseInput(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (BerryException e) {

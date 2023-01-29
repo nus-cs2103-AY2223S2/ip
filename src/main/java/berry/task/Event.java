@@ -38,7 +38,7 @@ public class Event extends Task {
      * @return a string representing an event task to be saved into the file
      */
     @Override
-    public String interpretTaskToString() {
+    public String interpretTaskToText() {
         return "E | " + this.getStatusIcon() + " | " + this.description + " | " + this.from + " | " + this.to;
     }
 

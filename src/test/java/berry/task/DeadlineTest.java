@@ -17,6 +17,6 @@ public class DeadlineTest {
     public void interpretTaskToString_deadlineTask_success() throws IncorrectDateException {
         final String validDate = "2022-02-02";
         Deadline deadline = new Deadline("some deadline", validDate);
-        assertEquals("D |   | some deadline | 2022-02-02", deadline.interpretTaskToString());
+        assertEquals("D |   | some deadline | 2022-02-02", deadline.interpretTaskToText());
     }
 }

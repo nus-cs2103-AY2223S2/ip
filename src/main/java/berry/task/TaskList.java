@@ -7,13 +7,12 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private static String HOR_BAR = "✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦";
-
     private static ArrayList<Task> listOfTasks;
 
     public TaskList() {
         this.listOfTasks = new ArrayList<Task>();
     }
+
     public TaskList(ArrayList<Task> listOfTasks) {
         this.listOfTasks = listOfTasks;
     }

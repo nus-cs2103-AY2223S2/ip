@@ -47,7 +47,7 @@ public class ParserTest {
      */
     private <T extends Command> T parseAndAssertCommandType(
             String input, Class<T> expectedCommandClass) throws BerryException {
-        final Command result = parser.parseCommand(input);
+        final Command result = parser.parseInput(input);
         assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));
         return (T) result;
     }

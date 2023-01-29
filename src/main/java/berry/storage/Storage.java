@@ -17,10 +17,11 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    /** The filePath given by Berry */
-    private String filePath;
     /** Default file path used if the user doesn't provide the file name. */
     public static final String DEFAULT_STORAGE_FILEPATH = "berry.txt";
+
+    /** The filePath given by Berry */
+    private String filePath;
 
     /**
      * @throws InvalidStorageFilePathException if the default path is invalid
@@ -55,8 +56,8 @@ public class Storage {
     public void saveTasks(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(createFile());
-            for (Task task : tasks.getList()) {
-                writer.write(task.interpretTaskToString() + "\n");
+            for (Task taskToAdd : tasks.getList()) {
+                writer.write(taskToAdd.interpretTaskToText() + "\n");
             }
             writer.close();
         } catch (IOException e) {
@@ -76,8 +77,8 @@ public class Storage {
 
         Scanner sc = new Scanner(createFile());
         while (sc.hasNext()) {
-            Task task = Task.interpretStringToTask(sc.nextLine());
-            listOfTasks.add(task);
+            Task taskToLoad= Task.interpretTextToTask(sc.nextLine());
+            listOfTasks.add(taskToLoad);
         }
         return listOfTasks;
     }
@@ -94,7 +95,7 @@ public class Storage {
             folder.mkdir();
             dataFile.createNewFile();
         } catch (IOException e) {
-            System.out.println("Please re-name your file.");
+            System.err.println("Berry cannot open your file :<");
         }
         return dataFile;
     }

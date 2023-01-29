@@ -15,8 +15,8 @@ public class AddTaskCommand extends Command {
     /** The task to be added */
     private final Task task;
 
-    public AddTaskCommand(Task task) {
-        this.task = task;
+    public AddTaskCommand(Task taskToAdd) {
+        this.task = taskToAdd;
     }
 
     /**

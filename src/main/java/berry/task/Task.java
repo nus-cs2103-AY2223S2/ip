@@ -53,7 +53,7 @@ public abstract class Task {
      *
      * @return a formatted string based on its task type
      */
-    public abstract String interpretTaskToString();
+    public abstract String interpretTaskToText();
 
     /**
      * Translates a given string in a certain format to a task variable.
@@ -61,7 +61,7 @@ public abstract class Task {
      * @param s is the line read from the file
      * @return a task class which is interpreted based on the file input
      */
-    public static Task interpretStringToTask(String s) {
+    public static Task interpretTextToTask(String s) {
         String isDoneStatus = s.split(" \\| ")[1];
         boolean isDone = isDoneStatus.equals("X") ? true : false;
         if (s.split(" \\| ").length == 3) {

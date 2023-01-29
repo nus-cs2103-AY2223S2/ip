@@ -35,7 +35,7 @@ public class Deadline extends Task {
      * @return a string representing a deadline task to be saved into the file
      */
     @Override
-    public String interpretTaskToString() {
+    public String interpretTaskToText() {
         return "D | " + this.getStatusIcon() + " | " + this.description + " | " + this.by;
     }
 

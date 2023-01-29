@@ -20,7 +20,7 @@ public class Todo extends Task {
      * @return a string representing a todo task to be saved into the file
      */
     @Override
-    public String interpretTaskToString() {
+    public String interpretTaskToText() {
         return "T | " + this.getStatusIcon() + " | " + this.description;
     }
 
