@@ -8,16 +8,16 @@ import duke.task.Deadline;
 import duke.task.Task;
 
 public class AddDeadlineCommand extends Command {
-    private String data;
+    private final String DATA;
 
-    public AddDeadlineCommand(String commandString, String data) {
+    public AddDeadlineCommand(String commandString, String DATA) {
         super(Commands.ADD_DEADLINE, commandString);
-        this.data = data;
+        this.DATA = DATA;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String[] splitData = this.data.split(" /by ", 2);
+        String[] splitData = this.DATA.split(" /by ", 2);
         if (splitData.length < 2) {
             throw new DukeException("Deadline command format error. Missing /by");
         }

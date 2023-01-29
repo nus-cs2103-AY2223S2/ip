@@ -8,17 +8,17 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class MarkCommand extends Command {
-    private String indexString;
+    private final String INDEX_STRING;
 
-    public MarkCommand(String commandString, String indexString) {
+    public MarkCommand(String commandString, String INDEX_STRING) {
         super(Commands.MARK, commandString);
-        this.indexString = indexString;
+        this.INDEX_STRING = INDEX_STRING;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> t = tasks.getTasks();
-        int index = this.isValidIndex(this.indexString, t);
+        int index = this.isValidIndex(this.INDEX_STRING, t);
 
         t.get(index).markTask();
 

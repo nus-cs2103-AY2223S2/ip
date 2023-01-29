@@ -5,8 +5,8 @@ import duke.TaskList;
 import duke.Ui;
 
 public class ExitCommand extends Command {
-    public ExitCommand(String commandString) {
-        super(Commands.EXIT, commandString);
+    public ExitCommand(String COMMAND_STRING) {
+        super(Commands.EXIT, COMMAND_STRING);
     }
 
     @Override

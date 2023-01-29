@@ -28,7 +28,7 @@ public class Todo extends Task {
         Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*)");
         Matcher matcher = pattern.matcher(data);
         if (matcher.matches()) {
-            boolean isMarked = matcher.group(2).equals("1") ? true : false;
+            boolean isMarked = matcher.group(2).equals("1");
             String description = matcher.group(4);
             return new Todo(description, isMarked);
         }

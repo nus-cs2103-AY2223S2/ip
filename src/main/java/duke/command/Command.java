@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Command {
-    private Commands command;
-    private String commandString;
+    private final Commands COMMAND;
+    private final String COMMAND_STRING;
 
     public enum Commands {
         EXIT,
@@ -24,17 +24,17 @@ public class Command {
         ADD_EVENT
     }
 
-    public Command(Commands command, String commandString) {
-        this.command = command;
-        this.commandString = commandString;
+    public Command(Commands COMMAND, String COMMAND_STRING) {
+        this.COMMAND = COMMAND;
+        this.COMMAND_STRING = COMMAND_STRING;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showError(String.format("Error processing %s command", this.commandString));
+        ui.showError(String.format("Error processing %s command", this.COMMAND_STRING));
     }
 
     public boolean isExit() {
-        return command == Commands.EXIT;
+        return COMMAND == Commands.EXIT;
     }
 
     protected int isValidIndex(String indexStr, ArrayList<Task> tasks) throws DukeException {

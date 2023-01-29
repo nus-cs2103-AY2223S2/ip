@@ -13,16 +13,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private String filePath;
+    private final String FILE_PATH;
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String FILE_PATH) {
+        this.FILE_PATH = FILE_PATH;
     }
 
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            File file = new File(this.filePath);
+            File file = new File(this.FILE_PATH);
             Scanner scanner = new Scanner(file);
 
             while (scanner.hasNextLine()) {
@@ -38,7 +38,7 @@ public class Storage {
             if (!(e instanceof FileNotFoundException)) {
                 throw new DukeException("Unexpected error when getting data.");
             }
-            File file = new File(this.filePath);
+            File file = new File(this.FILE_PATH);
             try {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
@@ -51,7 +51,7 @@ public class Storage {
 
     public void updateData(TaskList tasks) throws DukeException {
         try {
-            FileWriter myWriter = new FileWriter(this.filePath);
+            FileWriter myWriter = new FileWriter(this.FILE_PATH);
             String data = toData(tasks);
             myWriter.write(data);
             myWriter.close();

@@ -48,7 +48,7 @@ public class Event extends Task {
         Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*) ; (from:) (.*) ; (to:) (.*)");
         Matcher matcher = pattern.matcher(data);
         if (matcher.matches()) {
-            boolean isMarked = matcher.group(2).equals("1") ? true : false;
+            boolean isMarked = matcher.group(2).equals("1");
             String description = matcher.group(4);
             String from = matcher.group(6);
             String to = matcher.group(8);

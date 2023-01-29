@@ -45,14 +45,14 @@ public class Task {
     }
 
     public String toData() {
-        return String.format("Task | marked: %s ; description: %s", this.isMarked() ,this.description);
+        return String.format("Task | marked: %s ; description: %s", this.isMarked(), this.description);
     }
 
     public static Task fromData(String data) {
         Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*)");
         Matcher matcher = pattern.matcher(data);
         if (matcher.matches()) {
-            boolean isMarked = matcher.group(2).equals("1") ? true : false;
+            boolean isMarked = matcher.group(2).equals("1");
             String description = matcher.group(4);
             return new Task(description, isMarked);
         }

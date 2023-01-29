@@ -1,6 +1,0 @@
-Todo | marked: 1 ; description: asdsadas
-Deadline | marked: 0 ; description: asdasd ; deadline: 2022-01-01
-Deadline | marked: 0 ; description: asdasdsa ; deadline: 2023-01-01
-Event | marked: 0 ; description: asdas asdasdas ; from: 2022-01-01 ; to: 2023-01-01
-Todo | marked: 0 ; description: asdasd
-Todo | marked: 1 ; description: asdasdasdasdasdasdas

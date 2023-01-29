@@ -8,16 +8,16 @@ import duke.task.Event;
 import duke.task.Task;
 
 public class AddEventCommand extends Command {
-    private String data;
+    private final String DATA;
 
-    public AddEventCommand(String commandString, String data) {
+    public AddEventCommand(String commandString, String DATA) {
         super(Commands.ADD_EVENT, commandString);
-        this.data = data;
+        this.DATA = DATA;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String[] splitData1 = data.split(" /from ", 2);
+        String[] splitData1 = DATA.split(" /from ", 2);
         if (splitData1.length < 2) {
             throw new DukeException("Event command format error. Missing /from");
         }

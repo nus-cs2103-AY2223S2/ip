@@ -8,8 +8,8 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class ListCommand extends Command {
-    public ListCommand(String commandString) {
-        super(Commands.LIST, commandString);
+    public ListCommand(String COMMAND_STRING) {
+        super(Commands.LIST, COMMAND_STRING);
     }
 
     @Override

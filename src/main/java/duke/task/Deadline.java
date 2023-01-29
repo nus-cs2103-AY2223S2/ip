@@ -43,7 +43,7 @@ public class Deadline extends Task {
         Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*) ; (deadline:) (.*)");
         Matcher matcher = pattern.matcher(data);
         if (matcher.matches()) {
-            boolean isMarked = matcher.group(2).equals("1") ? true : false;
+            boolean isMarked = matcher.group(2).equals("1");
             String description = matcher.group(4);
             String deadline = matcher.group(6);
             return new Deadline(description, deadline, isMarked);

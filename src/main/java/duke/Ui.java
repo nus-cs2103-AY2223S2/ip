@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Ui {
 
     private static final String LINE = "__________________________________________";
-    private Scanner scanner;
+    private final Scanner SCANNER;
 
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        this.SCANNER = new Scanner(System.in);
     }
 
     public void showWelcome() {
@@ -54,10 +54,10 @@ public class Ui {
     }
 
     public String readCommand() {
-        return scanner.nextLine();
+        return SCANNER.nextLine();
     }
 
     public void close() {
-        this.scanner.close();
+        this.SCANNER.close();
     }
 }
