@@ -7,28 +7,28 @@ import java.time.format.DateTimeFormatter;
  * Represents the Event Task of the Chat bot.
  */
 public class Event extends Task {
-    protected LocalDate from;
-    protected LocalDate to;
+    protected LocalDate startDate;
+    protected LocalDate endDate;
 
     /**
      * Instantiates an Event Object that can be placed into the TaskList.
      *
      * @param description The description of the task.
-     * @param from The start date of the event.
-     * @param to The end date of the event.
+     * @param startdate   The start date of the event.
+     * @param enddate     The end date of the event.
      */
-    public Event(String description, String from, String to) {
+    public Event(String description, String startdate, String enddate) {
         super(description);
-        this.to = LocalDate.parse(to.trim());
-        this.from = LocalDate.parse(from.trim());
+        this.startDate = LocalDate.parse(startdate.trim());
+        this.endDate = LocalDate.parse(enddate.trim());
     }
 
-    public LocalDate getFrom() {
-        return this.from;
+    public LocalDate getStartDate() {
+        return this.startDate;
     }
 
-    public LocalDate getTo() {
-        return this.to;
+    public LocalDate getEndDate() {
+        return this.endDate;
     }
 
     /**
@@ -39,9 +39,9 @@ public class Event extends Task {
     @Override
     public String toSave() {
         if (super.isDone == true) {
-            return String.format("E | 1 | %s | %s | %s\n", super.getDescription(), this.from, this.to);
+            return String.format("E | 1 | %s | %s | %s\n", super.getDescription(), this.startDate, this.endDate);
         }
-        return String.format("E | 0 | %s | %s | %s\n", super.getDescription(), this.from, this.to);
+        return String.format("E | 0 | %s | %s | %s\n", super.getDescription(), this.startDate, this.endDate);
     }
 
     /**
@@ -51,8 +51,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + " to: " + to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (from: " + startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " to: " + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
 }

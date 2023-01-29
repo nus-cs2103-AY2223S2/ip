@@ -1,4 +1,5 @@
 package Duke;
+
 import Duke.Parser.Parser;
 import Duke.Ui.Ui;
 import Duke.entities.TaskList;
@@ -16,6 +17,7 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private Parser parser;
+
     /**
      * Duke.Duke Constructor for initializing the Duke object.
      *
@@ -39,7 +41,7 @@ public class Duke {
      *
      * @param args arguments of the main function
      */
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         new Duke("duke.txt").run();
     }
 
@@ -75,8 +77,8 @@ public class Duke {
                             eventlist[0], eventlist[1], ui);
                 } else if (command instanceof ExitCommand) {
                     ((ExitCommand) command).processCommand(ui);
-                } else if (command instanceof SameDateCommand) {
-                    ((SameDateCommand) command).processCommand(list, parser.parseDescription(input), ui);
+                } else if (command instanceof SearchCommand) {
+                    ((SearchCommand) command).processCommand(list, parser.parseDescription(input), ui);
                 }
             } catch (DukeException e) {
                 ui.printError(e.getMessage());

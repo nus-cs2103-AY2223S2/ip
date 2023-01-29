@@ -19,8 +19,8 @@ public class DeadlineCommand extends Command {
      *
      * @param list The TaskList object that stores Tasks.
      * @param desc Description of the Deadline Task.
-     * @param by dateline of the Deadline Task.
-     * @param ui User interface of the Chat bot.
+     * @param by   dateline of the Deadline Task.
+     * @param ui   User interface of the Chat bot.
      */
     public void processCommand(TaskList list, String desc, String by, Ui ui) {
         Deadline deadline = new Deadline(desc, by);
