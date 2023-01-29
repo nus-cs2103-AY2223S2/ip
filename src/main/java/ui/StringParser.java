@@ -1,7 +1,7 @@
 package ui;
 import tasks.TaskList;
 import exception.DukeException;
-
+import command.Find;
 public class StringParser {
     public boolean parse(String answer, TaskList taskList) throws DukeException {
         String[] wordArr = answer.split(" ", 2);
@@ -28,12 +28,15 @@ public class StringParser {
             String desc = wordArr[1].split(" /by ")[0];
             String by = wordArr[1].split(" /by ")[1];
             System.out.println(taskList.addTask(desc, by));
-
         } else if (wordArr[0].equals("event")) {
             String desc = wordArr[1].split(" ", 2)[0];
             String from = wordArr[1].split(" /from ")[1].split(" /to ")[0];
             String to = wordArr[1].split(" /to ", 2)[1];
             System.out.println(taskList.addTask(desc, from, to));
+        } else if (wordArr[0].equals("find")){
+            String keyWord = wordArr[1];
+            Find f = new Find(keyWord, taskList);
+            System.out.println(f.searchForTasks());
         } else{
             throw new DukeException("Sorry, I don't know that command");
         }
