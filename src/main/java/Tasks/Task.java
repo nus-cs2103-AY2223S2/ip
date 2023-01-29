@@ -1,9 +1,12 @@
 package Tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
 
+    protected final String taskName;
     private boolean completionStatus;
-    protected String taskName;
 
 
     public Task(String taskName) {
@@ -15,7 +18,7 @@ public abstract class Task {
         completionStatus = !completionStatus;
     }
 
-    public boolean getCompletionStatus(){
+    public boolean getCompletionStatus() {
         return completionStatus;
     }
 
@@ -27,8 +30,12 @@ public abstract class Task {
 
 
     @Override
-    public String toString(){
-        return "[" + (completionStatus ?"X":" ") + "] " + taskName;
+    public String toString() {
+        return "[" + (completionStatus ? "X" : " ") + "] " + taskName;
+    }
+
+    protected String displayLocalDate(LocalDateTime input) {
+        return input.format(DateTimeFormatter.ofPattern("E h:ma', 'MMM d yyyy"));
     }
 
 }
