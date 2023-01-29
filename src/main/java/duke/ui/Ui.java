@@ -12,7 +12,7 @@ import duke.task.TaskList;
  * @since       0.1
  */
 public class Ui {
-    private String LOGO_AND_GREETINGS = "Hello from\n" 
+    private static final String LOGO_AND_GREETINGS = "Hello from\n"
             + " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"

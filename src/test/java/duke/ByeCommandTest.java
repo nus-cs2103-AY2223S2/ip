@@ -1,10 +1,11 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.ByeCommand;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import duke.command.ByeCommand;
+import duke.command.Command;
 
 public class ByeCommandTest {
 

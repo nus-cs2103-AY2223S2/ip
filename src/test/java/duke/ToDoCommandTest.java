@@ -1,10 +1,11 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.ToDoCommand;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import duke.command.Command;
+import duke.command.ToDoCommand;
 
 public class ToDoCommandTest {
 

@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.ui.Ui;
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Event;
-import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * A subclass of Command that represents the command
@@ -41,7 +41,7 @@ public class EventCommand extends Command {
                     if (command[i].equals("/to")) {
                         t = true;
                         fr = false;
-                        startTime.setLength(startTime.length()- 1);
+                        startTime.setLength(startTime.length() - 1);
                         continue;
                     }
                     startTime.append(command[i]);
@@ -71,5 +71,4 @@ public class EventCommand extends Command {
             ui.eventError();
         }
     }
-    
 }

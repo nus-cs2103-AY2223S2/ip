@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.ui.Ui;
-import duke.storage.Storage;
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * A subclass of Command that represents

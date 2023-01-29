@@ -53,5 +53,4 @@ public class TaskList {
     public void remove(int index) {
         this.taskList.remove(index);
     }
-    
 }

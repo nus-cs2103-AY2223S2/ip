@@ -2,10 +2,10 @@ package duke.command;
 
 import java.util.Scanner;
 
-import duke.ui.Ui;
-import duke.storage.Storage;
 import duke.exception.DukeException;
+import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * A subclass of Command that represents

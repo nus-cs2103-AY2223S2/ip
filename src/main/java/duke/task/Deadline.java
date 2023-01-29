@@ -1,11 +1,10 @@
 package duke.task;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * A subclass of Task that represents
@@ -18,10 +17,12 @@ import java.time.format.DateTimeParseException;
 
 
 public class Deadline extends Task {
+    protected static final DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd"
+            + " HHmm");
+    protected static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM"
+            + " yyyy h:mm a");
     protected LocalDateTime endTime;
     protected HashSet<String> wordsInDescription = new HashSet<>();
-    protected DateTimeFormatter INPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    protected DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
 
     /**
      * Constructor of Deadline.

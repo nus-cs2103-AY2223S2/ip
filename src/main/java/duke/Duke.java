@@ -2,9 +2,9 @@ package duke;
 
 import duke.command.Command;
 import duke.command.Parser;
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
 
 
 /**
@@ -16,9 +16,9 @@ import duke.storage.Storage;
  * @since       0.1
  */
 public class Duke {
-    Storage storage;
-    Ui ui;
-    TaskList tasks;
+    private final Storage storage;
+    private final Ui ui;
+    private final TaskList tasks;
 
 
     /**

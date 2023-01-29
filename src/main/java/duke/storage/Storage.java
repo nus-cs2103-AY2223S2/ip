@@ -1,8 +1,8 @@
 package duke.storage;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
 
 import duke.task.TaskList;
 
@@ -15,8 +15,8 @@ import duke.task.TaskList;
  * @since 0.1
  */
 public class Storage {
+    private static final String FOLDER = "./";
     private File taskStorage;
-    private final String FOLDER = "./";
 
     /**
      * Constructor of Storage.
