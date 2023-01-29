@@ -22,6 +22,20 @@ public class Ui {
         printDivider();
     }
 
+    public void showCommandList() {
+        String commands = "Available commands:\n"
+                + "todo [description]\n"
+                + "event [description] /from [date] /to [date]\n"
+                + "deadline [description] /by [date]\n"
+                + "mark [index]\n"
+                + "unmark [index]\n"
+                + "list\n"
+                + "delete [index]\n"
+                + "date [date]";
+        System.out.println(commands);
+        printDivider();
+    }
+
     public void printDivider() {
         System.out.println("---------------------------------------");
     }

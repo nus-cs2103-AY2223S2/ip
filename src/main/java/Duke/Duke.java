@@ -50,6 +50,7 @@ public class Duke {
      */
     private void run() {
         ui.showWelcome();
+        ui.showCommandList();
         ui.startScanner();
         String input = ui.readCommand();
         while (input.equals("bye") == false) {
