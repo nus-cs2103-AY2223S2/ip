@@ -41,6 +41,8 @@ public class Request {
             return new DeleteParser().parse(this.requestContent);
         case "ON":
             return new OnParser().parse(this.requestContent);
+        case "FIND":
+            return new FindParser().parse(this.requestContent);
         default:
             throw new UnknownCommandException();
         }
