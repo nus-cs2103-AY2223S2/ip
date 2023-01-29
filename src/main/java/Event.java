@@ -27,7 +27,9 @@ public class Event extends Task {
         }
         String[] remainder = arguments[1].split("/to", 2);
         String arg2 = remainder[0].trim();
+        arg2 = DateHandler.parse(arg2);
         String arg3 = remainder[1].trim();
+        arg3 = DateHandler.parse(arg3);
         if (arg1.isEmpty() || arg2.isEmpty() || arg3.isEmpty()) {
             throw new DukeEmptyInputException();
         }
