@@ -1,13 +1,50 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Lulu {
-    public static String LINE = "____________________________________________________________";
-    public static ArrayList<Task> list = new ArrayList<>();
+    private static String LINE = "____________________________________________________________";
+    public static final String NAME = "./data/lulu.txt";
+    //public static ArrayList<Task> list = new ArrayList<>();
+    private TaskList tasks;
+    private UI ui;
+    private Storage storage;
 
-    public Lulu() {
-        this.list = list;
+    public Lulu(String filePath) {
+        this.ui = new UI();
+        //this.list = list;
+        this.tasks = new TaskList();
+        this.storage = new Storage(filePath);
     }
 
+    public void run() {
+        ui.showGreetText();
+        if (storage.isSavePresent()) {
+            Command c = new LoadCommand();
+            c.execute(tasks, ui, storage);
+        }
+
+        Scanner sc = new Scanner(System.in);
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = sc.nextLine();
+                //String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (LuluException e) {
+                ui.showLine();
+                System.out.println(e);
+                ui.showLine();
+            } catch (IndexOutOfBoundsException e) {
+                ui.showLine();
+                System.out.println("(=ಠᆽಠ=) That is out of bounds!");
+                ui.showLine();
+            }
+        }
+    }
+
+    /**
     public void run(String s) {
         try {
             String[] command = s.split(" ");
@@ -69,8 +106,9 @@ public class Lulu {
             System.out.println(e);
             System.out.println(Lulu.LINE);
         }
-    }
+    }*/
 
+    /**
     public void load(String s) {
         String[] command = s.split("`");
         switch (command[0]) {
@@ -93,46 +131,42 @@ public class Lulu {
                 }
                 break;
         }
-    }
+    }*/
 
+    /**
     public void greet() {
-        System.out.println(LINE);
-        System.out.println("Hello! I am lulu (=◕ᆽ◕ฺ=)");
-        System.out.println("What can I do for you?");
-        System.out.println(LINE);
-    }
+        this.ui.showGreetText();
+    }*/
 
-    public void echo(String s) {
-        System.out.println(LINE);
-        System.out.println(s);
-        System.out.println(LINE);
-    }
-
+    /**
     public void exit() {
         ArrayList<String> toWrite = new ArrayList<>();
         int size = this.list.size();
         for (int i = 0; i < size; i ++) {
             toWrite.add(this.list.get(i).toMemory());
         }
-        Save.writeSave(toWrite);
-        System.out.println(LINE);
-        System.out.println("Bye! Hope to see you again soon! (=◉ᆽ◉=)");
-        System.out.println(LINE);
-    }
+        Storage.writeSave(toWrite);
+        this.ui.showExitText();
+    }*/
 
-    public void add(Task t) {
-        this.list.add(t);
-        System.out.println(LINE);
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + list.get(list.size()-1).toString());
-        System.out.println("Now you have " + list.size() + " tasks in the list. ฅ(=චᆽච=ฅ)");
-        System.out.println(LINE);
-    }
-
+    /**
     public void recall(Task t) {
-        this.list.add(t);
-    }
+        this.tasks.add(t);
+    }*/
 
+    /**
+    public void add(Task t) {
+        this.tasks.add(t);
+        this.ui.showAddText(tasks.getRecentTaskDescription(), tasks.getSize());
+    }*/
+
+    /**
+    public void delete(int taskNumber) {
+        this.ui.showDeleteText(tasks.getTaskDescription(taskNumber), tasks.getSize()-1);
+        tasks.remove(taskNumber);
+    }*/
+
+    /**
     public void list() {
         System.out.println(LINE);
         System.out.println("ฅ(=චᆽච=ฅ) Here are the tasks in your list: ");
@@ -142,29 +176,17 @@ public class Lulu {
             System.out.println(". " + list.get(i));
         }
         System.out.println(LINE);
-    }
+    }*/
 
+    /**
     public void mark(int taskNumber) {
-        list.get(taskNumber-1).markAsDone();
-        System.out.println(LINE);
-        System.out.println("(₌♥ᆽ♥₌) Nice! I've marked this task as done:");
-        System.out.println(" " + list.get(taskNumber-1).toString());
-        System.out.println(LINE);
-    }
+        tasks.markTask(taskNumber);
+        this.ui.showMarkText(tasks.getTaskDescription(taskNumber));
+    }*/
 
+    /**
     public void unmark(int taskNumber) {
-        list.get(taskNumber-1).markAsUndone();
-        System.out.println(LINE);
-        System.out.println("(₌ ᵕ̣̣̣̣̣ ᆽ ᵕ̣̣̣̣̣₌) OK, I've marked this task as not done yet:");
-        System.out.println(" " + list.get(taskNumber-1).toString());
-        System.out.println(LINE);
-    }
-    public void delete(int taskNumber) {
-        System.out.println(LINE);
-        System.out.println("Noted! I've removed this task:");
-        System.out.println("  " + list.get(taskNumber-1).toString());
-        System.out.println("Now you have " + (list.size()-1) + " tasks in the list. ฅ(=චᆽච=ฅ)");
-        System.out.println(LINE);
-        list.remove(taskNumber-1);
-    }
+        tasks.unmarkTask(taskNumber);
+        this.ui.showUnmarkText(tasks.getTaskDescription(taskNumber).toString());
+    }*/
 }

@@ -5,11 +5,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Save {
-    public static final String NAME = "./data/lulu.txt";
-    public static File file = new File(NAME);
+public class Storage {
+    //public static final String NAME = "./data/lulu.txt";
+    public File file;
+    public String path;
+    public Storage(String filePath) {
+        this.file = new File(filePath);
+        path = filePath;
+    }
 
-    public static boolean isSavePresent() {
+    public boolean isSavePresent() {
         try {
             boolean isPresent = !(file.createNewFile());
             if (!isPresent) {
@@ -22,9 +27,9 @@ public class Save {
         }
     }
 
-    public static void writeSave(ArrayList<String> list) {
+    public void writeSave(ArrayList<String> list) {
         try {
-            FileWriter myWriter = new FileWriter(NAME);
+            FileWriter myWriter = new FileWriter(path);
             int size = list.size();
             for (int i = 0; i < size; i ++) {
                 myWriter.write(list.get(i));
@@ -35,15 +40,13 @@ public class Save {
         }
     }
 
-    public static void readSave(Lulu lulu) {
+    public void readSave(TaskList tasks) {
         try {
             Scanner myReader = new Scanner(file);
-            System.out.println("loading...");
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                lulu.load(data);
+                tasks.load(data);
             }
-            System.out.println("loading complete.");
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
         }

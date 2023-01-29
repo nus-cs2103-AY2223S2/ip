@@ -4,5 +4,9 @@ E`0`sleep ` today ` tomorrow
 T`1`sleep tomorrow
 D`0`run ` 2022-05-12
 E`1`running ` 2023-05-12` 2080-05-12
-D`1`run ` 2012-05-03
-D`1`run ` today mans
+D`0`run ` tomorrow
+D`0`run ` tomorrowwww qasfawr
+E`0`run ` today ` tomorrow
+E`0`run ` today to to to ` tomorrow
+T`0`runn run run
+E`0`run ` 2000-05-12` 2010-06-12
