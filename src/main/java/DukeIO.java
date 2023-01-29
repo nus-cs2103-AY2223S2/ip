@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DukeIO {
 
@@ -39,15 +38,9 @@ public class DukeIO {
                                     + REPLY + "Quitting Duke...\n"
                                     + REPLY + "See you soon!\n"
                                     + SEPERATOR;
-     
-
+    
     public void echoMessage(String message) {
         System.out.println(message);
-    }
-    
-    public String[] tokenise(Scanner sc) {
-        String[] tokens = sc.nextLine().split(" ");
-        return tokens;
     }
     
     public void printHello() {
@@ -63,29 +56,39 @@ public class DukeIO {
     }
 
     public void notifySuccessAdd(Task t) {
-        System.out.println(REPLY + "Successfully added: " + t.toString());
+        System.out.println(SEPERATOR
+                + REPLY + "Successfully added: " + t.toString() + "\n"
+                + SEPERATOR);
     }
 
     public void notifySuccessComplete(Task t) {
-        System.out.println(REPLY + "Successfully completed: " + t.toString());
+        System.out.println(SEPERATOR
+                + REPLY + "Successfully completed: " + t.toString() + "\n"
+                + SEPERATOR);
     }
 
     public void notifyUnmark(Task t) {
-        System.out.println(REPLY + "Unmarked task: " + t.toString());
+        System.out.println(SEPERATOR
+                + REPLY + "Unmarked task: " + t.toString() + "\n"
+                + SEPERATOR);
     }
 
     public void nofifyMarkFail(Task t) {
-        System.out.println(REPLY + "Cannot mark completed task: " + t.toString());
+        System.out.println(SEPERATOR
+            + REPLY + "Cannot mark completed task: " + t.toString() + "\n"
+            + SEPERATOR);
     }
 
     public void notifyUnmarkFail(Task t) {
-        System.out.println(REPLY + "Cannot unmark incomplete task: " + t.toString());
+        System.out.println(SEPERATOR 
+            + REPLY + "Cannot unmark incomplete task: " + t.toString() + "\n"
+            + SEPERATOR);
     }
 
     public void showCount() {
         String isare;
         String s;
-        int taskCount = MyDuke.getTaskCount();
+        int taskCount = TaskList.taskCount;
         if (taskCount > 1) {
             isare = " are: ";
             s = " tasks";
@@ -94,19 +97,19 @@ public class DukeIO {
             s = " task";
         }
         System.out.println("\nThere" + isare + Integer.toString(taskCount) 
-                            + s + " in the list.\n");
+                            + s + " in the list.\n" + SEPERATOR);
     }
 
     public void showAll() {
-        int taskCount = MyDuke.getTaskCount();
-        ArrayList<Task> allTasks = MyDuke.getAllTasks();
-        System.out.println("All Tasks:");
+        int taskCount = TaskList.taskCount;
+        ArrayList<Task> allTasks = TaskList.allTasks;
+        System.out.println(SEPERATOR + "All Tasks:");
         for (Integer i = 0; i < taskCount; i++) {
             String showString = "   "  + Integer.toString(i+1)+ ": "
                                 + allTasks.get(i).toString();
             System.out.println(showString);     
         }
-        System.out.println();
+        System.out.println(SEPERATOR);
     }
 
     public void showInvalidCommand() {
@@ -116,7 +119,7 @@ public class DukeIO {
     }
 
     public void showError(Exception e) {
-        System.out.println(e.getMessage());
+        System.out.println(SEPERATOR + e.getMessage() + "\n" + SEPERATOR);
     }
 
     public void notifyLoad() {

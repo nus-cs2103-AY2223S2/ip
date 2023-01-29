@@ -1,15 +1,13 @@
 import java.util.List;
 import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
 public class MyDuke {
     private static DukeIO dukeIo = new DukeIO();
-    private static ArrayList<Task> allTasks = new ArrayList<Task>();
+    private static TaskList allTasks;
     private static Map<String, Consumer<String[]>> cmdMap = new HashMap<>();
-    private static int taskCount = 0;
 
     public void init() {
         dukeIo.printHello();
@@ -20,26 +18,14 @@ public class MyDuke {
         dukeIo.printQuit();
     }
 
-    public void exec(String[] tokens) throws InvalidCommandException {
+    public void exec(String[] tokens, TaskList taskList) throws InvalidCommandException {
+        allTasks = taskList;
         try {
             cmdMap.get(tokens[0]).accept(tokens);
         } catch (NullPointerException n) {
             dukeIo.showInvalidCommand();
             return;
         }
-    }
-
-    public static int getTaskCount() { 
-        return taskCount; 
-    }
-
-    public static ArrayList<Task> getAllTasks() {  
-        return allTasks;   
-    }
-
-    public static void loadTask(ArrayList<Task> tasks) {
-        allTasks = tasks;
-        taskCount = tasks.size();
     }
 
     private void populateCommands() {
@@ -52,12 +38,6 @@ public class MyDuke {
         cmdMap.put("delete", (tokens) -> delete(tokens));
     }
 
-
-    private void addTask(Task task) {
-        allTasks.add(task);
-        taskCount++;
-    }
-
     private void toggle(String[] tokens) {
         int taskIndex = 0;
 
@@ -68,7 +48,7 @@ public class MyDuke {
                     InvalidCommandException.MARK_FORMAT_EXCEPTION);
             }
             taskIndex = Integer.parseInt(tokens[1]);
-            if (taskIndex <= 0 || taskIndex > taskCount) {
+            if (taskIndex <= 0 || taskIndex > allTasks.getTaskCount()) {
                 throw new InvalidCommandException(
                     InvalidCommandException.TASK_NOT_FOUND_EXCEPTION);
             }
@@ -82,7 +62,7 @@ public class MyDuke {
             return;
         }
 
-        Task task = allTasks.get(taskIndex-1);
+        Task task = allTasks.getTask(taskIndex-1);
         if (!task.isDone() && tokens[0].equals("mark")) {
             task.toggleDoneOrNot();
             dukeIo.notifySuccessComplete(task); 
@@ -118,7 +98,7 @@ public class MyDuke {
         }
 
         ToDo todo = new ToDo(t);
-        addTask(todo);
+        allTasks.addTask(todo);
         dukeIo.notifySuccessAdd(todo);
         dukeIo.showCount();
     }
@@ -151,7 +131,7 @@ public class MyDuke {
         String desc = String.join(" ",t.subList(1, byIndex));
         String byString = String.join(" ", t.subList(byIndex+1, t.size()));
         Deadline d = new Deadline(desc, byString);
-        addTask(d);
+        allTasks.addTask(d);
         dukeIo.notifySuccessAdd(d);
         dukeIo.showCount();          
     }
@@ -181,7 +161,7 @@ public class MyDuke {
         String from = String.join(" ", t.subList(fromIndex+1, toIndex));
         String to = String.join(" ", t.subList(toIndex+1, t.size()));
         Event e = new Event(desc, from, to);
-        addTask(e);
+        allTasks.addTask(e);
         dukeIo.notifySuccessAdd(e);
         dukeIo.showCount();
     }
@@ -196,7 +176,7 @@ public class MyDuke {
             }
 
             taskIndex = Integer.parseInt(tokens[1]);
-            if (taskIndex <= 0 || taskIndex > taskCount) {
+            if (taskIndex <= 0 || taskIndex > allTasks.getTaskCount()) {
                 throw new InvalidCommandException(
                     InvalidCommandException.TASK_NOT_FOUND_EXCEPTION);
             }
@@ -209,9 +189,8 @@ public class MyDuke {
             return;
         }
 
-        System.out.println(allTasks.get(taskIndex-1).toString() + " deleted.");
-        allTasks.remove(taskIndex-1);
-        taskCount--;
+        System.out.println(allTasks.getTask(taskIndex-1).toString() + " deleted.");
+        allTasks.deleteTask(taskIndex-1);
         dukeIo.showCount();
     }
 }

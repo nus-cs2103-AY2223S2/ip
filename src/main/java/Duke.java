@@ -1,19 +1,13 @@
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Duke {
 
-    private static Scanner sc = new Scanner(System.in);
     private static MyDuke duke = new MyDuke();
     private static DukeIO dukeIo = new DukeIO();
+    private static Storage storage = new Storage();
+    private static TaskList taskList = TaskList.ofNull();
+    private static Parser parser = new Parser();
 
     public static void main(String[] args) 
             throws InvalidCommandException, IOException, ClassNotFoundException {
@@ -21,7 +15,7 @@ public class Duke {
         duke.init();
 
         try {
-            load();
+            taskList.loadFrom(storage.load());
         } catch (FileNotFoundException p) {
             dukeIo.echoMessage("Nothing to load");
         }
@@ -34,16 +28,16 @@ public class Duke {
         boolean isBye = false;
         dukeIo.showPrompt();
         while (!isBye) {
-            String[] tokens = dukeIo.tokenise(sc);
-            isBye = handle(tokens);
+            String[] tokens = parser.tokenise();
+            isBye = handle(tokens, taskList);
             if (!isBye) {
                 dukeIo.showPrompt();
             }
         }
-        save();
+        storage.saveFrom(taskList.getAllTasks());
     }
 
-    private static boolean handle(String[] tokens) throws InvalidCommandException {
+    private static boolean handle(String[] tokens, TaskList taskList) throws InvalidCommandException {
         String cmd = tokens[0];
         if (cmd.length()==0) {  
             return false;    
@@ -51,39 +45,9 @@ public class Duke {
             duke.quit(); 
             return true; 
         } else {   
-            duke.exec(tokens); 
+            duke.exec(tokens, taskList); 
         }
 
         return false;
-    }
-    
-    private static void load() throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream("../../../data/duke.txt");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        
-        @SuppressWarnings("unchecked")
-        ArrayList<Task> loadedTasks = (ArrayList<Task>) ois.readObject();
-        MyDuke.loadTask(loadedTasks);
-
-        ois.close();
-        dukeIo.notifyLoad();
-    }
-    
-    private static void save() throws IOException {
-        ArrayList<Task> allTasks = MyDuke.getAllTasks();
-
-        // creates directory if it doesnt exist        
-        if (allTasks.size() > 0) {
-            Files.createDirectories(Paths.get("../../../data/"));
-
-            FileOutputStream out = new FileOutputStream("../../../data/duke.txt");
-            ObjectOutputStream o = new ObjectOutputStream(out);
-
-            o.writeObject(allTasks);
-        
-            o.close();
-            out.close();
-            dukeIo.notifySave();
-        }
     }
 }
