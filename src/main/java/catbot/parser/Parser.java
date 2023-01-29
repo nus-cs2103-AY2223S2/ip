@@ -9,6 +9,7 @@ import catbot.commands.AddCommand;
 import catbot.commands.Command;
 import catbot.commands.DeleteCommand;
 import catbot.commands.EchoCommand;
+import catbot.commands.FindCommand;
 import catbot.commands.ListCommand;
 import catbot.commands.MarkCommand;
 import catbot.commands.SaveCommand;
@@ -90,6 +91,9 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new CatBotException("That's the wrong format!");
             }
+
+        case "find":
+            return new FindCommand(cmd[1].strip());
 
         case "echo":
             try {
