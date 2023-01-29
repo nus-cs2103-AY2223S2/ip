@@ -20,7 +20,6 @@ public class Database {
         this.data_address = currentRelativePath_name + "\\data\\" + file_name;
         try {
             File file_parent = new File(currentRelativePath_name + "\\data");
-            System.out.println(1);
             if (!file_parent.exists()) {
                 file_parent.mkdir();
             }
@@ -41,22 +40,17 @@ public class Database {
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()){
                 String data = reader.nextLine();
-                System.out.println("data here: " + data);
                 String[] data_parts = data.split("/");
-                System.out.println(Arrays.toString(data_parts));
                 String type = data_parts[0];
                 switch (type){
                     case "T":
-                        System.out.println(Arrays.toString(data_parts));
-                        arrayList.add(new ToDos(data_parts[2]));
+                        arrayList.add(new ToDos(data_parts[2], Integer.valueOf(data_parts[1])));
                         break;
                     case "D":
-                        System.out.println(Arrays.toString(data_parts));
-                        arrayList.add(new Deadline(data_parts[2], data_parts[3]));
+                        arrayList.add(new Deadline(data_parts[2], data_parts[3], Integer.valueOf(data_parts[1])));
                         break;
                     case "E":
-                        System.out.println(Arrays.toString(data_parts));
-                        arrayList.add(new Event(data_parts[2], data_parts[3]));
+                        arrayList.add(new Event(data_parts[2], data_parts[3], Integer.valueOf(data_parts[1])));
                         break;
                 }
             }
@@ -64,7 +58,7 @@ public class Database {
         } catch (IOException e){
             System.out.println(e);
         }
-        System.out.println("getdata function: " + Arrays.deepToString(arrayList.toArray()));
+//        System.out.println("getdata function: " + Arrays.deepToString(arrayList.toArray()));
         return arrayList;
     }
 
@@ -73,8 +67,6 @@ public class Database {
         try {
             FileWriter fw = new FileWriter(this.data_address);
             for (Task t: arrayList){
-                System.out.println(t.toString());
-                System.out.println(t.dataFormat());
                 data += t.dataFormat() + "\n";
             }
             fw.write(data);

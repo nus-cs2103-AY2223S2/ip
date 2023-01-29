@@ -1,10 +1,10 @@
 public class Task {
     protected String description;
-    protected boolean isDone;
+    private int isDone;
 
-    public Task(String description){
+    public Task(String description, Integer isDone){
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public String getType(){
@@ -16,13 +16,13 @@ public class Task {
     }
 
     public String getStatusIcon(){
-        return (isDone? "[X]": "[ ]");
+        return (isDone == 1? "[X]": "[ ]");
     }
     public void markAsDone(){
-        isDone = true;
+        isDone = 1;
     }
     public void unMark(){
-        isDone = false;
+        isDone = 0;
     }
 
     public String dataFormat() {
