@@ -3,6 +3,9 @@ package task;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Task component representing an event task.
+ */
 public class Event extends Task {
     private final LocalDate startTime;
     private final LocalDate endTime;

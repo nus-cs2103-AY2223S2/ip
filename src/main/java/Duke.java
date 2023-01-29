@@ -8,6 +8,9 @@ import storage.TaskList;
 import task.Task;
 import ui.Ui;
 
+/**
+ * The main duke program.
+ */
 public class Duke {
     private final TaskList tasks;
     private final Ui ui;
@@ -29,6 +32,9 @@ public class Duke {
         new Duke("./data/tasks.txt").run();
     }
 
+    /**
+     * Begins the execution of the Duke program.
+     */
     public void run() {
         this.ui.printStartUpMessage();
 

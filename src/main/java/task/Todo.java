@@ -1,5 +1,8 @@
 package task;
 
+/**
+ * Task component representing a todo task.
+ */
 public class Todo extends Task {
     public Todo(String task) {
         super(task, false);

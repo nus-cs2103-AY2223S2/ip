@@ -3,6 +3,9 @@ package task;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Task component representing a deadline task.
+ */
 public class Deadline extends Task {
     private final LocalDate deadline;
 

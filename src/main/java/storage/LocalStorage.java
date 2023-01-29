@@ -17,6 +17,9 @@ import dukeexeption.InvalidArgumentException;
 import dukeexeption.UnknownCommandException;
 import task.Task;
 
+/**
+ * Local storage class that abstracts the communications between local storage and the program task list.
+ */
 public class LocalStorage {
     File dataFile;
 

@@ -7,6 +7,9 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
+/**
+ * Program memory that stores a task list.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
