@@ -66,4 +66,21 @@ public class TaskList {
         }
         return reply;
     }
+
+    /**
+     * Returns tasks containing the substring
+     *
+     * @return a string to look for amongst the tasks
+     */
+    public String findTask(String s) {
+        int len = tasks.size();
+        String reply = "";
+        for (int i = 0; i < len; i++) {
+            String taskStatus = tasks.get(i).status();
+            if (taskStatus.contains(s)) {
+                reply = reply + (i + 1) + ". " + taskStatus + "\n";
+            }
+        }
+        return reply;
+    }
 }

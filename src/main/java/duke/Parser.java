@@ -26,10 +26,13 @@ public class Parser {
      * @throws WrongKeyWord if there is a missing key command
      */
     public static String understandInput(String input, String[] input_arr, TaskList tasks, Storage storage) throws Missing, WrongKeyWord {
+        /** reply to be passed to Ui */
         String reply;
 
         if (input_arr[0].equals("bye")) {
             reply = "bye";
+        } else if (input_arr[0].equals("find")) {
+            reply = tasks.findTask(input_arr[1]);
         }
         else if (input_arr[0].equals("list")) {
             reply = tasks.printTasks();
