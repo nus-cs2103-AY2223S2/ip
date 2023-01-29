@@ -1,4 +1,4 @@
-/*
+package CatBot.Ui;/*
  * Markus Kuhn -- 2007-05-26 (Unicode 5.0)
  *
  * Permission to use, copy, modify, and distribute this software

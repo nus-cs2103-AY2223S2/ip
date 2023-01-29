@@ -1,3 +1,5 @@
+package CatBot;
+
 public class CatBotException extends Exception {
     /**
      * Custom exception class used whenever an error message needs to be

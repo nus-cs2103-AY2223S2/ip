@@ -22,7 +22,7 @@ fi
 echo "********** BUILD SUCCESS **********"
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin:/Users/duck/.m2/repository/org/apache/commons/commons-text/1.10.0/commons-text-1.10.0.jar:/Users/duck/.m2/repository/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar CatBot < input.txt > ACTUAL.TXT
+java -classpath ../bin:/Users/duck/.m2/repository/org/apache/commons/commons-text/1.10.0/commons-text-1.10.0.jar:/Users/duck/.m2/repository/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar CatBot.CatBot < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT

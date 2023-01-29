@@ -1,4 +1,9 @@
+package CatBot.Ui;
+
 // From https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
+/**
+ * This class contains ANSI escape sequences relating to displaying colours.
+ */
 public class ConsoleColors {
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset

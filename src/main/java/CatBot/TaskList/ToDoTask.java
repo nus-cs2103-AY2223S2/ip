@@ -1,6 +1,8 @@
-public class ToDo extends Task {
+package CatBot.TaskList;
 
-    public ToDo(String task) {
+public class ToDoTask extends Task {
+
+    public ToDoTask(String task) {
         super(task);
     }
 
@@ -11,6 +13,6 @@ public class ToDo extends Task {
 
     @Override
     public String toCommand() {
-        return "todo " + super.description + (super.isDone ? "\nmark last": "");
+        return "todo " + super.description + (super.isDone ? "\nmark 0": "");
     }
 }

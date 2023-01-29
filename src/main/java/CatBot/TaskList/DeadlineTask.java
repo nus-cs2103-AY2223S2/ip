@@ -1,11 +1,13 @@
+package CatBot.TaskList;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class Deadline extends Task{
+public class DeadlineTask extends Task{
     private final LocalDateTime dueAt;
 
-    public Deadline(String task, LocalDateTime dueAt) {
+    public DeadlineTask(String task, LocalDateTime dueAt) {
         super(task);
         this.dueAt = dueAt;
     }
@@ -21,6 +23,6 @@ public class Deadline extends Task{
 
     @Override
     public String toCommand() {
-        return "deadline " + super.description + " /by " + dueAt + (super.isDone ? "\nmark last": "");
+        return "deadline " + super.description + " /by " + dueAt + (super.isDone ? "\nmark 0": "");
     }
 }

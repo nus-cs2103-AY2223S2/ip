@@ -1,3 +1,8 @@
+package CatBot.TaskList;
+
+import CatBot.CatBotException;
+import CatBot.Ui.ConsoleColors;
+
 import java.util.Locale;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -10,8 +15,14 @@ public abstract class Task{
     final String description;
     boolean isDone;
 
+    public enum TaskType {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
+
     /**
-     * Constructor for a Task
+     * Constructor for a CatBot.TaskList.Task
      * @param description is the description of the task
      */
     public Task(String description) {
@@ -20,9 +31,9 @@ public abstract class Task{
     }
 
     /**
-     * Creates a Task of a certain type based on a given command
+     * Creates a CatBot.TaskList.Task of a certain type based on a given command
      * @param command is the input typed in by the user
-     * @return the relevant Task subclass
+     * @return the relevant CatBot.TaskList.Task subclass
      * @throws CatBotException if the input is malformed
      */
     public static Task fromCommand(String command) throws CatBotException {
@@ -33,7 +44,7 @@ public abstract class Task{
         String[] temp;
         switch (cmd[0].toLowerCase(Locale.ROOT)) {
         case "todo":
-            return new ToDo(cmd[1].strip());
+            return new ToDoTask(cmd[1].strip());
 
         case "deadline":
             temp = cmd[1].split("/by", 2);
@@ -42,7 +53,7 @@ public abstract class Task{
             }
             try {
                 LocalDateTime by = LocalDateTime.parse(temp[1].strip());
-                return new Deadline(temp[0].strip(), by);
+                return new DeadlineTask(temp[0].strip(), by);
             } catch (DateTimeParseException e) {
                 throw new CatBotException("Dates should be in the format yyyy-MM-ddTHH:mm");
             }
@@ -55,7 +66,7 @@ public abstract class Task{
             try {
                 LocalDateTime from = LocalDateTime.parse(temp[1].strip());
                 LocalDateTime to = LocalDateTime.parse(temp[2].strip());
-                return new Event(temp[0].strip(), from, to);
+                return new EventTask(temp[0].strip(), from, to);
             } catch (DateTimeParseException e) {
                 throw new CatBotException("Dates should be in the format yyyy-MM-ddTHH:mm");
             }
