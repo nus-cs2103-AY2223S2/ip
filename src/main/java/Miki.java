@@ -5,7 +5,16 @@ import task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Main class of the Miki personal-task manager project.
+ * In honour of Fuzuki Miki.
+ */
 public class Miki {
+    /**
+     * Main function of the Miki project.
+     *
+     * @param args command-line arguments from the initial program call
+     */
     public static void main(String[] args) {
         boolean asciiOnly = false;
         boolean noAutoload = false;

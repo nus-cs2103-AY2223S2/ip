@@ -6,11 +6,26 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.time.LocalDateTime;
 
+/**
+ * Implementation of a <code>Task</code> with no particular chronological position.
+ */
 public class Todo extends Task {
+    /**
+     * Creates a todo with the specified textual objective.
+     *
+     * @param objective the description of this todo's objective
+     */
     public Todo(String objective) {
         super(objective);
     }
 
+    /**
+     * Parses the supplied <code>String[]</code> command-line arguments to create a todo.
+     *
+     * @param args the arguments containing the todo to be parsed
+     * @return a todo represented by <code>args</code>
+     * @throws TaskParseException if <code>args</code> does not represent a valid todo
+     */
     public static Todo parseArgs(String[] args) throws TaskParseException {
         String objective = "";
         for (int i = 0; i < args.length; i++) {
@@ -20,6 +35,13 @@ public class Todo extends Task {
         return new Todo(objective);
     }
 
+    /**
+     * Parses the supplied <code>String[]</code> save data to create a todo.
+     *
+     * @param data the data containing the todo to be parsed
+     * @return a todo represented by <code>data</code>
+     * @throws TaskParseException if <code>data</code> does not represent a valid todo
+     */
     public static Todo parseLoad(String[] data) throws TaskParseException {
         try {
             String[] header = data[0].split(" ");
@@ -37,6 +59,9 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String[] save() {
         ArrayList<String> repres = new ArrayList<>();
@@ -47,16 +72,25 @@ public class Todo extends Task {
         return repres.toArray(new String[repres.size()]);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean beforeDate(LocalDateTime date) {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean afterDate(LocalDateTime date) {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

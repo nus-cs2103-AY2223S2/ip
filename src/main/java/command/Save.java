@@ -6,14 +6,28 @@ import task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * A command saving the contents of a <code>TaskList</code> to a file.
+ */
 public class Save implements Command {
     private final String path;
 
+    /**
+     * Creates a save command.
+     *
+     * @param path path of the file to save to
+     */
     public Save(String path) {
         this.path = path;
     }
 
-
+    /**
+     * {@inheritDoc}
+     *
+     * @param tasks tasklist to perform the action on
+     * @param ui ui to perform the action on
+     * @param storage storage to perform the action on
+     */
     @Override
     public void run(TaskList tasks, Ui ui, Storage storage) {
         if (!path.equals("")) {
