@@ -41,7 +41,7 @@ public class DeadlineResponse extends Response {
         } else if (splitBy.length != 2
                 || splitBy[1].trim().equals("")) {
             throw new MissingArgumentException("The deadline cannot be empty."
-                    + "Deadline has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
+                    + " Deadline has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
         }
         String by = splitBy[1].trim();
 

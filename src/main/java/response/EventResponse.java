@@ -39,18 +39,18 @@ public class EventResponse extends Response {
             throw new MissingArgumentException("The description of an event cannot be empty.");
         } else if (splitFrom.length != 2) {
             throw new MissingArgumentException("The start date cannot be empty."
-                    + "Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
+                    + " Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
         }
 
         String[] splitTo = splitFrom[1].split("/to", 2);
         String from = splitTo[0].trim();
         if (from.equals("")) {
             throw new MissingArgumentException("The start date cannot be empty."
-                    + "Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
+                    + " Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
         } else if (splitTo.length != 2
                 || splitTo[1].trim().equals("")) {
             throw new MissingArgumentException("The end date cannot be empty."
-                    + "Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
+                    + " Date has to be in the format of YYYY-MM-DD (e.g. 2007-12-03)");
         }
         String to = splitTo[1].trim();
 
