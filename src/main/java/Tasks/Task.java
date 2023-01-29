@@ -14,7 +14,7 @@ public abstract class Task {
         this.taskName = taskName;
     }
 
-    public void toggleState(){
+    public void toggleState() {
         completionStatus = !completionStatus;
     }
 
@@ -35,7 +35,7 @@ public abstract class Task {
     }
 
     protected String displayLocalDate(LocalDateTime input) {
-        return input.format(DateTimeFormatter.ofPattern("E h:ma', 'MMM d yyyy"));
+        return input.format(DateTimeFormatter.ofPattern("E h:mma', 'MMM d yyyy"));
     }
 
 }

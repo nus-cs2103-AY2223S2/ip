@@ -1,302 +1,121 @@
-import Tasks.DeadlineTask;
-import Tasks.EventTask;
 import Tasks.Task;
-import Tasks.TodoTask;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.*;
-import java.util.function.BiPredicate;
+import java.util.Scanner;
 
 public class Chatbot {
 
-    public static final Map<String, BiPredicate<Chatbot, String>> commands = new HashMap<String, BiPredicate<Chatbot, String>>();
 
-    private final List<Task> tasks = new ArrayList<Task>();
-    
-    private boolean isChatbotActive = true;
+    private final Ui ui;
+    private final Storage storage;
+    private final Parser parser;
+    public boolean isActive = true;
+    private TaskList tasks;
 
-    private File savefile;
-
-    static{
-        commands.put(Messages.MESSAGE_END, (chatbot, args) -> {
-            System.out.println(Messages.MESSAGE_END);
-            chatbot.isChatbotActive = false;
-            return true;
-        });
-
-        commands.put(Messages.MESSAGE_LIST, (chatbot, args) -> {
-            System.out.println("Here are the tasks in your list:");
-            int i = 0;
-            for (Task entry : chatbot.tasks) {
-                i += 1;
-                System.out.println(i + "." + entry);
-            }
-            return true;
-        });
-
-        commands.put(Messages.MESSAGE_MARK, (chatbot, args) -> {
-
-            Integer index = -1;
-            try {
-                index = Integer.valueOf(args);
-            } catch (NumberFormatException ex) {
-                ex.printStackTrace();
-                System.out.println("Error: Index not specified");
-
-                return true;
-            }
-            index -= 1;
-            if (chatbot.getTaskState(index)) {
-                System.out.println("Task is already marked as done.");
-                return true;
-            } else {
-                chatbot.toggleTaskIndex(index);
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("\t" + chatbot.getTask(index));
-            }
-            return true;
-
-        });
-        commands.put(Messages.MESSAGE_UNMARK, (chatbot, args) -> {
-
-            Integer index = -1;
-            try {
-                index = Integer.valueOf(args);
-            } catch (NumberFormatException ex) {
-                ex.printStackTrace();
-                System.out.println("Error: Index not specified");
-                return true;
-            }
-            index -= 1;
-            if (!chatbot.getTaskState(index)) {
-                System.out.println("Task is already unmarked.");
-                return true;
-            } else {
-                chatbot.toggleTaskIndex(index);
-                System.out.println("Nice! I've marked this task as undone:");
-                System.out.println("\t" + chatbot.getTask(index));
-            }
-            return true;
-
-        });
-
-        commands.put(Messages.MESSAGE_TODO, (chatbot, args) -> {
-            if (args.trim() == "") {
-                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                return true;
-            }
-            TodoTask toAdd = new TodoTask(args.trim());
-            chatbot.addTask(toAdd);
-            return true;
-        });
-
-        commands.put(Messages.MESSAGE_DEADLINE, (chatbot, args) -> {
-            String[] inputs = args.split("/by", 2);
-
-            if (inputs.length != 2) {
-                System.out.println("Error: Invalid number of args. Pls add a /by in your command, " +
-                        "or ensure task name is not not empty");
-
-                return true;
-            } else if (inputs[0].trim() == "" || inputs[1].trim() == "") {
-                System.out.println("Description cannot be empty.");
-                return true;
-            }
-
-            try {
-                DeadlineTask toAdd = new DeadlineTask(inputs[0].trim(), LocalDateTime.parse(inputs[1].trim()));
-                chatbot.addTask(toAdd);
-            } catch (DateTimeParseException e) {
-                System.out.println("Error: Input not a date");
-            }
-            return true;
-        });
-
-        commands.put(Messages.MESSAGE_EVENT, (chatbot, args) -> {
-            String[] inputs = args.split("(/from | /to)", 3);
-
-            if (inputs.length != 3) {
-                System.out.println("Error: Invalid number of args. Pls add a /from and /to in your command," +
-                        " or ensure task name is not not empty");
-                return true;
-            } else if (inputs[0].trim() == "" || inputs[1].trim() == "" || inputs[2].trim() == "") {
-                System.out.println("Description cannot be empty.");
-                return true;
-            }
-
-            try {
-                EventTask toAdd = new EventTask(inputs[0].trim(), LocalDateTime.parse(inputs[1].trim()), LocalDateTime.parse(inputs[2].trim()));
-                chatbot.addTask(toAdd);
-            } catch (DateTimeParseException e) {
-                System.out.println("Error: Input not a date");
-            }
-            return true;
-        });
-
-        commands.put(Messages.MESSAGE_DELETE, (chatbot, args) -> {
-            Integer index = -1;
-            try {
-                index = Integer.valueOf(args);
-            } catch (NumberFormatException ex) {
-                ex.printStackTrace();
-                System.out.println("Error: Index not specified");
-
-                return false;
-            }
-            index -= 1;
-            chatbot.removeTask(index);
-
-            return true;
-        });
-
-        commands.put(Messages.MESSAGE_DELETE_ALL_DATA, (chatbot, args) -> {
-            for(int i = 0 ; i < chatbot.tasks.size() ; i++) {
-                chatbot.removeTask(0);
-            }
-            System.out.println("Deletion complete!");
-            return true;
-        });
-
-    }
-
-    public static Chatbot loadFromData(File saveFile) throws FileNotFoundException {
-        Scanner fileReader = new Scanner(saveFile);
-        Chatbot result = new Chatbot();
-        while(fileReader.hasNextLine()) {
-            String data = fileReader.nextLine();
-            result.loadData(data);
+    public Chatbot(String fileDirectory, String fileName) {
+        this.ui = new Ui();
+        this.storage = new Storage(fileDirectory, fileName);
+        this.parser = new Parser(this, this.ui);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
-        result.savefile = saveFile;
-        fileReader.close();
-        return result;
+
     }
 
+    public void run() {
+        ui.showStartupMessage();
+        readInput();
+    }
 
-
-    public void readInput() {
+    private void readInput() {
         Scanner input = new Scanner(System.in);
-        while (isChatbotActive) {
-            String nextLine = input.nextLine();
-            processInput(nextLine);
+        while (isActive) {
+
+            parser.parse(input.nextLine());
 
         }
     }
 
-    public void processInput(String nextLine) {
-        //Assuming commands start with a space.
-        String[] userCommand = nextLine.split(" ", 2);
-        String upperCaseUserCommand = userCommand[0].toUpperCase();
-        if (commands.containsKey(upperCaseUserCommand)) {
-            boolean processedCommandState = commands.get(upperCaseUserCommand).test(this, userCommand.length > 1 ? userCommand[1] : "");
-            if (!processedCommandState) {
-                isChatbotActive = false;
-                throw new RuntimeException();
-            }
-        } else {
-            //Command not found.
-
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public void printTasks() {
+        if (tasks.numTasks() == 0) {
+            ui.showNoTasksMessage();
+            return;
         }
-
+        ui.showTasksMessage(tasks.toString());
     }
 
-    public void addTask(Task toAdd) {
-        System.out.println("Got it. I've added this task:");
-        tasks.add(toAdd);
-        onEditTask(toAdd);
+    public void addTask(TaskList.Tasktype type, String... arguments) {
+        try {
+            Task toAdd = tasks.convertToTask(type, arguments);
+            tasks.addTask(toAdd);
+            ui.showTaskAddedMessage(toAdd.toString(), tasks.numTasks());
+            onEditTask();
+        } catch (DateTimeParseException e) {
+            ui.showDateTimeParseError();
+        } catch (UnimplementedTaskTypeException e) {
+            ui.showUnimplementedTaskTypeError();
+        }
     }
 
-    public void onEditTask(Task change) {
-        System.out.println("\t" + change);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list");
-        saveData();
+    public void onEditTask() {
+        storage.saveTaskList(tasks);
     }
+
 
     public void removeTask(int toRemove) {
-        if (tasks.size() < toRemove) {
-            System.out.println("Error: Index specified must be smaller than current list size.");
+        if (!isIndexInRange(toRemove)) {
             return;
         }
-        System.out.println("Got it. I've removed this task:");
-        Task removedTask = tasks.get(toRemove);
-        tasks.remove(toRemove);
-        onEditTask(removedTask);
+        Task removedTask = tasks.removeTask(toRemove);
+        ui.showRemovedTaskMessage(removedTask.toString(), tasks.numTasks());
+        onEditTask();
 
     }
 
-    public boolean getTaskState(int index) {
-        if (tasks.size() < index) {
-            System.out.println("Error: Index specified must be smaller than current list size.");
+    private boolean isIndexInRange(int index) {
+        if (!tasks.isValidIndex(index)) {
+            ui.showIndexError();
             return false;
         }
-
-        return tasks.get(index).getCompletionStatus();
+        return true;
     }
 
-    public String getTask(int index) {
-        return tasks.get(index).toString();
+    public void removeAllTasks() {
+        tasks.removeAllTasks();
+        ui.showRemoveAllTasksMessage();
+        onEditTask();
     }
 
-    public void toggleTaskIndex(int index) {
-        if (tasks.size() < index) {
-            System.out.println("Error: Index specified must be smaller than current list size.");
+
+    public void markAsIncomplete(int index) {
+        if (!isIndexInRange(index)) {
             return;
         }
-        tasks.get(index).toggleState();
-
-    }
-
-    private void saveData() {
-        if(savefile == null) {
+        if (!tasks.getTaskState(index)) {
+            ui.showTaskStateIncompletedError();
             return;
         }
 
-        try {
-            FileWriter writerObj = new FileWriter(savefile.getPath(), false);
-            writerObj.write(toSaveData());
-            writerObj.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        tasks.toggleState(index);
+        ui.showTaskIncompletedMessage(tasks.getTaskInfo(index));
+    }
+
+
+    public void markAsComplete(int index) {
+        if (!isIndexInRange(index)) {
             return;
         }
-    }
-
-    public String toSaveData() {
-        String output = new String();
-        for(Task nextTask : tasks) {
-            output += nextTask.toSaveData();
-            output += "\n";
-        }
-        return output;
-    }
-
-    public void loadData(String data) throws IllegalArgumentException {
-        if(data.length() == 0) {
+        if (tasks.getTaskState(index)) {
+            ui.showTaskStateCompletedError();
             return;
         }
-        Task todo;
-        switch(data.charAt(0)) {
-            case 'T':
-                todo = TodoTask.loadData(data);
-                break;
-            case 'D':
-                todo = DeadlineTask.loadData(data);
-                break;
-            case 'E':
-                todo = EventTask.loadData(data);
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
 
-        tasks.add(todo);
+        tasks.toggleState(index);
+        ui.showTaskCompletedMessage(tasks.getTaskInfo(index));
     }
-
 
 
 }

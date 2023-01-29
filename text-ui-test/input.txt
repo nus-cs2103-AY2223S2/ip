@@ -1,32 +1,26 @@
 hello
-how are you
-ping
-pong
 list
-deadline greet the world /by today
-event a /from the end of time /to start of the universe
-todo munch on my mochi
-list
-deadline f f 
-deadline /by
-deadline dead /by
-deadline die /by never
-event die
-event die /from/to
-event die /from now /to 
-/event  /from now /to never
-event /from now /to never
-event not die /from now /to never
+mark
+unmark
+TODO slap a rat
+toDO pet a rat
 list
 mark 1
-mark 2
 mark 1
-mark 3
 unmark 1
-unmark 2
-unmark 4
-remove 1
+unmark 1
 delete 1
+delete 1
+
+delete 1
+delete 9999
+deadline drink water /by 2015-01-29 06:00
+deadline drink water /by 2015-01-29T06:00
+event dance On The fl0or /from 2022-01-22T12:34 /to 2059-11-12T00:00
+deadline leap year /by 2028-02-29T00:12
 list
-mark 4
-delete 4
+delete
+DELETEALL
+list
+deleteALL
+lISt

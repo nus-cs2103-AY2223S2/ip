@@ -1,6 +1,6 @@
 public class Messages {
 
-    final static String MESSAGE_END= "GOODBYE";
+    final static String MESSAGE_END = "GOODBYE";
     final static String MESSAGE_LIST = "LIST";
 
     final static String MESSAGE_MARK = "MARK";
@@ -16,6 +16,5 @@ public class Messages {
 
     final static String MESSAGE_DELETE_ALL_DATA = "DELETEALL";
 
-    final static String SAVE_LOCATION = "data/save.txt";
-    final static String SAVE_DIRECTORY = "data";
+
 }
