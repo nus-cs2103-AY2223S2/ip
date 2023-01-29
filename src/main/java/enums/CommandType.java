@@ -5,6 +5,9 @@ import static ui.Ui.LS;
 
 import exceptions.DukeException;
 
+/**
+ * Enumerates all possible command types.
+ */
 public enum CommandType {
     BYE("bye", new DukeException("")),
     LIST("list", new DukeException("")),

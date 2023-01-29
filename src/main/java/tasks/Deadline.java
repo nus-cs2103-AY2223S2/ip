@@ -1,9 +1,15 @@
 package tasks;
 
+/**
+ * Deadline Task class.
+ */
 public class Deadline extends Task {
 
     private String by;
 
+    /**
+     * Constructor for Deadline object.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = super.split(by);

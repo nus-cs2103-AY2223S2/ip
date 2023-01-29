@@ -1,9 +1,15 @@
 package tasks;
 
+/**
+ * Event Task class.
+ */
 public class Event extends Task {
     private String from;
     private String to;
 
+    /**
+     * Constructor for Event object.
+     */
     public Event(String description, String from, String to) {
         super(description);
         this.from = super.split(from);

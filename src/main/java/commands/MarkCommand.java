@@ -6,6 +6,9 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * Mark command to handle task marking logic.
+ */
 public class MarkCommand extends Command {
     private int index;
     public MarkCommand(String message) {

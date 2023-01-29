@@ -7,10 +7,16 @@ import tasks.Deadline;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * Deadline command to handle Deadline task logic.
+ */
 public class DeadlineCommand extends Command {
     private String desc;
     private String by;
 
+    /**
+     * Constructor to create DeadlineCommand object.
+     */
     public DeadlineCommand(String desc, String by) {
         this.desc = desc;
         this.by = by;

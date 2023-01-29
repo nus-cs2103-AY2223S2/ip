@@ -5,6 +5,9 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * Incorrect command to handle incorrect instructions.
+ */
 public class IncorrectCommand extends Command {
     @Override
     public void execute(TaskList tl, Ui ui, Storage s) {

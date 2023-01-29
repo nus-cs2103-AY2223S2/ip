@@ -22,10 +22,18 @@ public class TaskList {
     public void removeTask(int i) {
         tasks.remove(i);
     }
+
+    /**
+     * Mark Task object at index i.
+     */
     public void markTask(int i) {
         Task t = tasks.get(i);
         t.markAsDone();
     }
+
+    /**
+     * Unmark Task object at index i.
+     */
     public void unmarkTask(int i) {
         Task t = tasks.get(i);
         t.unmarkAsDone();
@@ -42,6 +50,10 @@ public class TaskList {
         }
         return formattedList.trim();
     }
+
+    /**
+     * Find tasks that match the provided string.
+     */
     public String findList(String s) {
         String matchList = "";
         for (Object t : this.tasks) {

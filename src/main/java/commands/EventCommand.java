@@ -7,11 +7,17 @@ import tasks.Event;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * Event command to handle Event task logic.
+ */
 public class EventCommand extends Command {
     private String desc;
     private String from;
     private String to;
 
+    /**
+     * Constructor to create EventCommand object.
+     */
     public EventCommand(String desc, String from, String to) {
         this.desc = desc;
         this.from = from;

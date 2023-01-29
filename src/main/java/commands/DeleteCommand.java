@@ -6,8 +6,15 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * Delete command to handle task deleting logic.
+ */
 public class DeleteCommand extends Command {
     private int index;
+
+    /**
+     * Constructor to create DeleteCommand object.
+     */
     public DeleteCommand(String message) {
         index = Integer.parseInt(message) - 1;
     }

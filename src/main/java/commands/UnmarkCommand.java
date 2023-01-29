@@ -6,6 +6,9 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * Unmark command to handle task unmarking logic.
+ */
 public class UnmarkCommand extends Command {
     private int index;
     public UnmarkCommand(String message) {

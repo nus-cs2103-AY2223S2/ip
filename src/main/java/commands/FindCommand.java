@@ -2,11 +2,13 @@ package commands;
 
 import static ui.Ui.LS;
 
-import enums.CommandType;
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * Find command to handle task finding logic.
+ */
 public class FindCommand extends Command {
     private String s;
     public FindCommand(String s) {

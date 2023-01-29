@@ -7,6 +7,9 @@ import tasks.TaskList;
 import tasks.ToDo;
 import ui.Ui;
 
+/**
+ * Todo command to handle ToDo task logic.
+ */
 public class TodoCommand extends Command {
     private String desc;
     public TodoCommand(String message) {

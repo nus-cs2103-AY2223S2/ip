@@ -9,6 +9,10 @@ import java.time.format.DateTimeFormatter;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+
+    /**
+     * Constructor for Task object.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

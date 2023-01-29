@@ -6,6 +6,9 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * List command to handle task listing logic.
+ */
 public class ListCommand extends Command {
     @Override
     public void execute(TaskList tl, Ui ui, Storage s) {

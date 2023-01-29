@@ -4,6 +4,9 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
+/**
+ * Bye command to exit Duke-Gerty.
+ */
 public class ByeCommand extends Command {
     @Override
     public void execute(TaskList tl, Ui ui, Storage s) {
