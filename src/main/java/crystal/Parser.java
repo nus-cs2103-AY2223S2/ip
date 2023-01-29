@@ -9,6 +9,7 @@ import crystal.command.DeadlineCommand;
 import crystal.command.EventCommand;
 import crystal.command.ByeCommand;
 import crystal.command.DeleteCommand;
+import crystal.command.FindCommand;
 
 public class Parser {
     public static Command parse(String command) throws CrystalException {
@@ -43,6 +44,9 @@ public class Parser {
             String t = arr[2];
             String sublastsub = t.replace("to", ""); //to
             return new EventCommand(subs, subsubs, sublastsub);
+        } else if (command.contains("find")) {
+            String stringReplaceFind = command.replace("find", "");
+            return new FindCommand(stringReplaceFind);
         } else if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.contains("delete")) {
