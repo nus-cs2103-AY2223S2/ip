@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 import dukeexception.DukeException;
-import task.Task;
+import tasks.Task;
 
 public class Ui {
     Scanner scanner = new Scanner(System.in);

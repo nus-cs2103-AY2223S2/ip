@@ -5,9 +5,9 @@ import java.util.Arrays;
 import dukeexception.CommandException;
 import parser.DateTimeParser;
 import storage.Storage;
-import task.Deadline;
-import task.Task;
 import taskList.TaskList;
+import tasks.Deadline;
+import tasks.Task;
 import ui.Ui;
 
 public class DeadlineCommand extends Command {

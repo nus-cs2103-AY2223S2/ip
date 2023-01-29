@@ -3,8 +3,8 @@ package command;
 import dukeexception.CommandException;
 import dukeexception.StorageException;
 import storage.Storage;
-import task.Task;
 import taskList.TaskList;
+import tasks.Task;
 import ui.Ui;
 
 public class DeleteCommand extends Command {

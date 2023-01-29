@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import dukeexception.StorageException;
-import task.Task;
+import tasks.Task;
 
 public class TaskList extends ArrayList<Task> {
     public TaskList() {

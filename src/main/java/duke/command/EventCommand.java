@@ -5,9 +5,9 @@ import java.util.Arrays;
 import dukeexception.CommandException;
 import parser.DateTimeParser;
 import storage.Storage;
-import task.Event;
-import task.Task;
 import taskList.TaskList;
+import tasks.Event;
+import tasks.Task;
 import ui.Ui;
 
 public class EventCommand extends Command {

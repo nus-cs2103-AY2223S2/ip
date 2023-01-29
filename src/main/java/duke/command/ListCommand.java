@@ -3,8 +3,8 @@ package command;
 import java.util.List;
 
 import storage.Storage;
-import task.Task;
 import taskList.TaskList;
+import tasks.Task;
 import ui.Ui;
 
 public class ListCommand extends Command {

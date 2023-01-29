@@ -3,8 +3,8 @@ package command;
 import dukeexception.CommandException;
 import dukeexception.UnmarkIndexDoesNotExistException;
 import storage.Storage;
-import task.Task;
 import taskList.TaskList;
+import tasks.Task;
 import ui.Ui;
 
 public class UnMarkComamnd extends Command {

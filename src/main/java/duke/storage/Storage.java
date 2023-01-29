@@ -5,11 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import task.Deadline;
-import task.Todo;
+
 import taskList.TaskList;
-import task.Event;
-import task.Task;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 public class Storage {
     private String cwd = System.getProperty("user.dir");

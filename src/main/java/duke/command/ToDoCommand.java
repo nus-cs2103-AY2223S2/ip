@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 import dukeexception.CommandException;
 import storage.Storage;
-import task.Task;
-import task.Todo;
 import taskList.TaskList;
+import tasks.Task;
+import tasks.Todo;
 import ui.Ui;
 
 public class ToDoCommand extends Command {

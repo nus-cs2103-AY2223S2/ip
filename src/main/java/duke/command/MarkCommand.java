@@ -3,8 +3,8 @@ package command;
 import dukeexception.CommandException;
 import dukeexception.MarkIndexDoesNotExistException;
 import storage.Storage;
-import task.Task;
 import taskList.TaskList;
+import tasks.Task;
 import ui.Ui;
 
 public class MarkCommand extends Command {
