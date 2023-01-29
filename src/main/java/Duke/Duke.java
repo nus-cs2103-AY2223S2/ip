@@ -1,5 +1,7 @@
 package Duke;
 
+import Duke.Chatbot.Chatbot;
+
 public class Duke {
     final static String FILE_NAME = "save.txt";
     final static String SAVE_DIRECTORY = "data";
