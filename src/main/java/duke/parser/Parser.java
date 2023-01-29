@@ -7,6 +7,7 @@ import command.DeleteCommand;
 import command.DoesNotExistCommand;
 import command.EventCommand;
 import command.ExitCommand;
+import command.FindCommand;
 import command.ListCommand;
 import command.MarkCommand;
 import command.ToDoCommand;
@@ -28,6 +29,8 @@ public abstract class Parser {
         switch (cmd) {
         case LIST:
             return new ListCommand();
+        case FIND:
+            return new FindCommand(input);
         case UNMARK:
             return new UnMarkComamnd(input);
         case MARK:
