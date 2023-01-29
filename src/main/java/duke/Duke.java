@@ -1,6 +1,9 @@
+package duke;
+
+import duke.exception.DukeException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 
 public class Duke {
     private Storage storage;
@@ -12,7 +15,7 @@ public class Duke {
         this.storage = new Storage(directoryPath, filePath);
         try {
             this.tasks = storage.load();
-        } catch (DukeException | FileNotFoundException e){
+        } catch (FileNotFoundException | DukeException e){
             ui.showLoadingError();
             this.tasks = new TaskList();
         }

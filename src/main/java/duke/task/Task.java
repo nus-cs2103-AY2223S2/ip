@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,11 +16,11 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    void completeTask() {
+    public void completeTask() {
         this.isDone = true;
     }
 
-    void undoTask() {
+    public void undoTask() {
         this.isDone = false;
     }
     String formatDateTime (LocalDateTime dateTime) {
@@ -31,7 +33,7 @@ public abstract class Task {
         return dateTime.format(formatter);
     }
 
-    abstract String getSaveTaskString();
+    public abstract String getSaveTaskString();
 
     @Override
     public String toString() {
