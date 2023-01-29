@@ -1,25 +1,27 @@
 package aqua.logic.command;
 
-import aqua.logic.ArgumentMap;
-import aqua.logic.ExecutionService;
-import aqua.manager.LogicManager;
+
+public enum Command {
+    LIST(new ListCommand()),
+    MARK(new MarkTaskCommand(true)),
+    UNMARK(new MarkTaskCommand(false)),
+    TODO(new AddToDoCommand()),
+    DEADLINE(new AddDeadlineCommand()),
+    EVENT(new AddEventCommand()),
+    DELETE(new DeleteCommand()),
+    FIND(new FilterCommand()),
+    BYE(new ByeCommand());
 
 
-/**
- * Represents a command that accepts an ArgumentMap and an AppManager to
- * produce an ExecutionDispatcher that will execute the command.
- */
-public abstract class Command {
-    /**
-     * Produces an ExecutionDispater from the given argument and manager.
-     *
-     * @param args - the argument map.
-     * @param manager - the application AppManager.
-     * @return an ExecutionDispatcher to execute the command.
-     */
-    public ExecutionService getService(ArgumentMap args, LogicManager manager) {
-        return getService(args, manager, false);
+    private final ServiceProvider serviceProvider;
+
+
+    Command(ServiceProvider serviceProvider) {
+        this.serviceProvider = serviceProvider;
     }
 
-    public abstract ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading);
+
+    public ServiceProvider getServiceProvider() {
+        return serviceProvider;
+    }
 }

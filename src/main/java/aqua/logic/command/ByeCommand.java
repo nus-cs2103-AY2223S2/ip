@@ -10,7 +10,7 @@ import aqua.manager.LogicManager;
  * An implementation of Command to produce an ExecutionDispatcher that will
  * exit the application.
  */
-public class ByeCommand extends Command {
+public class ByeCommand extends ServiceProvider {
     @Override
     public ExecutionService getService(ArgumentMap args, LogicManager manager, boolean isLoading) {
         return ExecutionService.of(new ExecutionTask<String>(args, manager) {

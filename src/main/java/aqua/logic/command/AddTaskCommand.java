@@ -13,7 +13,7 @@ import aqua.manager.LogicManager;
  * ExecutionDispatcher that will create and add an AquaTask to the task manager
  * and then save the state of the task manager to hard disk.
  */
-public abstract class AddTaskCommand extends Command {
+public abstract class AddTaskCommand extends ServiceProvider {
     /**
      * Creates an AquaTask from the given argument map.
      *

@@ -26,11 +26,11 @@ public class CommandLineInput {
      * @returnt he ExecutionDispatcher of the command.
      */
     public ExecutionService getService(LogicManager manager) {
-        return command.getService(args, manager);
+        return command.getServiceProvider().getService(args, manager);
     }
 
 
     public ExecutionService getService(LogicManager manager, boolean isLoading) {
-        return command.getService(args, manager, isLoading);
+        return command.getServiceProvider().getService(args, manager, isLoading);
     }
 }
