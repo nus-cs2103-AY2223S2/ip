@@ -6,9 +6,16 @@ import hachi.main.TaskList;
 import hachi.main.Ui;
 import hachi.tasks.Todo;
 
+/**
+ * Encapsulates a user instruction to add a task to the to-do list.
+ */
 public class TodoCommand extends Command {
     private String input;
 
+    /**
+     * TodoCommand constructor.
+     * @param input The user's input string.
+     */
     public TodoCommand(String input) {
         this.input = input;
     }

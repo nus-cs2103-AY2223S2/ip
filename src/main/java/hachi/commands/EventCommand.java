@@ -6,10 +6,17 @@ import hachi.main.TaskList;
 import hachi.main.Ui;
 import hachi.tasks.Event;
 
-
+/**
+ * Encapsulates a user instruction to add an event with starting and ending date to the list.
+ */
 public class EventCommand extends Command {
     private String input;
 
+    /**
+     * EventCommand constructor.
+     *
+     * @param input The user's input string.
+     */
     public EventCommand(String input) {
         this.input = input;
     }

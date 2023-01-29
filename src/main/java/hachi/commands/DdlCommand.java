@@ -6,9 +6,17 @@ import hachi.main.Ui;
 import hachi.main.Storage;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates a user instruction to add a task with deadline to the list
+ */
 public class DdlCommand extends Command {
     private String input;
 
+    /**
+     * DdlCommand constructor.
+     *
+     * @param input The user's input string.
+     */
     public DdlCommand(String input) {
         this.input = input;
     }

@@ -6,10 +6,17 @@ import hachi.main.TaskList;
 import hachi.main.Ui;
 import hachi.tasks.Task;
 
-
+/**
+ * Encapsulates a user instruction to delete a saved task from the list.
+ */
 public class DeleteCommand extends Command {
     private String input;
 
+    /**
+     * DeleteCommand constructor.
+     *
+     * @param input The user's input string.
+     */
     public DeleteCommand(String input) {
         this.input = input;
     }

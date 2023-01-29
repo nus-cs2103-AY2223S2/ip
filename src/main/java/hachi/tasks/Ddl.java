@@ -3,9 +3,18 @@ package hachi.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates a Task with a deadline.
+ */
 public class Ddl extends Task {
     private String time;
 
+    /**
+     * Ddl constructor.
+     *
+     * @param input The description of the task.
+     * @param time The deadline of the task.
+     */
     public Ddl(String input, String time) {
         super(input);
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -17,6 +26,12 @@ public class Ddl extends Task {
     }
 
 
+    /**
+     * Returns the string representation of the Ddl object with
+     * specified description and date.
+     *
+     * @return String representation of the Ddl object
+     */
     public String toString() {
         return "   [D]" + super.toString() + " (by: " + this.time + ")";
     }

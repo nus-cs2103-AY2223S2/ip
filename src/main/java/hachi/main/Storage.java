@@ -2,15 +2,27 @@ package hachi.main;
 import java.io.*;
 import java.util.stream.Stream;
 
-
+/**
+ * Deals with saving tasks in the file and loading tasks from the file.
+ */
 public class Storage {
     private String filePath;
     static String separator = "‿୨♡୧‿︵‿︵︵‿︵‿୨♡୧‿︵‿︵︵‿︵‿୨♡୧‿";
 
+    /**
+     * Storage constructor.
+     *
+     * @param filePath The relative path to the file containing saved tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves the TaskList into a text file.
+     *
+     * @param tl TaskList that contains tasks.
+     */
     public void saveTaskList(TaskList tl) {
         try {
             FileWriter writer = new FileWriter( filePath);
@@ -23,8 +35,14 @@ public class Storage {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
+    /**
+     * Loads the TaskList from the text file if the file exists,
+     * or return a new TaskList and creates a new file
+     *
+     * @return List of stored tasks.
+     */
 
     public TaskList loadTaskList() {
         File file = new File(this.filePath);

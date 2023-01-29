@@ -6,10 +6,17 @@ import hachi.main.TaskList;
 import hachi.main.Ui;
 import hachi.tasks.Task;
 
-
+/**
+ * Encapsulates a user instruction to mark a task as done in the to-do list.
+ */
 public class MarkCommand extends Command {
     private String input;
 
+    /**
+     * MarkCommand constructor.
+     *
+     * @param input The user's input string.
+     */
     public MarkCommand(String input) {
         this.input = input;
     }
