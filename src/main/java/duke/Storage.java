@@ -20,7 +20,7 @@ public class Storage {
      * Stores an ArrayList of Tasks in local hard disk.
      * @param task The ArrayList of Tasks to store in the local hard disk.
      */
-    //adapted from CHATGPT
+    //Credits: Adapted from CHATGPT
     public void saveTasks(ArrayList<Tasks> task) {
         try {
             FileOutputStream file = new FileOutputStream(this.fileName);
@@ -36,7 +36,7 @@ public class Storage {
      * Retrieves an ArrayList of Tasks from the local hard disk.
      * @return ArrayList of Tasks.
      */
-    //adapted from CHATGPT
+    //Credits: Adapted from CHATGPT
     public ArrayList<Tasks> loadTasks() {
         try {
             FileInputStream file = new FileInputStream(this.fileName);
