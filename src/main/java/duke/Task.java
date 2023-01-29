@@ -6,7 +6,7 @@ package duke;
  */
 public abstract class Task {
     private final String description;
-    private boolean completed;
+    private boolean isCompleted;
 
     /**
      * Constructor for a task.
@@ -14,16 +14,16 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
     }
     /**
      * Constructor for a task.
      * @param description Description of the task
-     * @param completed Whether the task is completed
+     * @param isCompleted Whether the task is completed
      */
-    public Task(String description, boolean completed) {
+    public Task(String description, boolean isCompleted) {
         this.description = description;
-        this.completed = completed;
+        this.isCompleted = isCompleted;
     }
 
     /**
@@ -39,14 +39,14 @@ public abstract class Task {
      * @return Completion status of the task
      */
     public boolean getCompletion() {
-        return this.completed;
+        return this.isCompleted;
     }
     public void setCompletion() {
-        this.completed = !this.completed;
+        this.isCompleted = !this.isCompleted;
     }
     @Override
     public String toString() {
-        String icon = this.completed ? "[X] " : "[ ] ";
+        String icon = this.isCompleted ? "[X] " : "[ ] ";
         return icon + this.description;
     }
 }

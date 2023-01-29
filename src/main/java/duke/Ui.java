@@ -40,11 +40,9 @@ public class Ui {
     private void printNewTask(Task t) {
         if (t instanceof Event) {
             System.out.println("  new event added!");
-        }
-        else if (t instanceof Deadline) {
+        } else if (t instanceof Deadline) {
             System.out.println("  new deadline added!");
-        }
-        else if (t instanceof ToDo) {
+        } else if (t instanceof ToDo) {
             System.out.println("  new todo added!");
         }
         System.out.println("    " + t.toString());
@@ -77,25 +75,25 @@ public class Ui {
      */
     public void printReply(String inputCommand, Task currTask) throws EmptyDescriptionException {
         switch (inputCommand) {
-            case "mark":
-                System.out.println("  You are done with: ");
-                System.out.println("    " + currTask.toString());
-                break;
-            case "unmark":
-                System.out.println("  OK, continue working on: ");
-                System.out.println("    " + currTask.toString());
-                break;
-            case "delete":
-                System.out.println("  I've removed this task:");
-                System.out.println("    " + currTask.toString());
-                System.out.println("  Now you have "+ String.valueOf(this.myTaskList.countTasks()) +
-                        " tasks in the list!");
-                break;
-            case "deadline":
-            case "event":
-            case "todo":
-                printNewTask(currTask);
-                break;
+        case "mark":
+            System.out.println("  You are done with: ");
+            System.out.println("    " + currTask.toString());
+            break;
+        case "unmark":
+            System.out.println("  OK, continue working on: ");
+            System.out.println("    " + currTask.toString());
+            break;
+        case "delete":
+            System.out.println("  I've removed this task:");
+            System.out.println("    " + currTask.toString());
+            System.out.println("  Now you have "+ String.valueOf(this.myTaskList.countTasks()) +
+                    " tasks in the list!");
+            break;
+        case "deadline":
+        case "event":
+        case "todo":
+            printNewTask(currTask);
+            break;
         }
     }
     public void printMatchingTasks(ArrayList<Task> matchingTasks) {
