@@ -7,7 +7,7 @@ import duke.tasktypes.Task;
 
 public class TaskList {
     
-    ArrayList<Task> listOfTasks;
+    protected ArrayList<Task> listOfTasks;
 
     public TaskList(ArrayList<Task> listOfTasks) {
         this.listOfTasks = listOfTasks;

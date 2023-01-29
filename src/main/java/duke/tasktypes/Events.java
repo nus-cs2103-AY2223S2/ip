@@ -21,9 +21,9 @@ public class Events extends Task {
     public String toString() {
         String toReturn = "";
         if (this.done) {
-            toReturn = "[E][X]" + this.name + "(from: " + this.fromDetails + "to: " + this.toDetails + ")";
+            toReturn = "[E][X]" + this.getName() + "(from: " + this.fromDetails + "to: " + this.toDetails + ")";
         } else {
-            toReturn = "[E][ ]" + this.name + "(from: " + this.fromDetails + "to: " + this.toDetails + ")";
+            toReturn = "[E][ ]" + this.getName() + "(from: " + this.fromDetails + "to: " + this.toDetails + ")";
         }
         return toReturn;
     }
