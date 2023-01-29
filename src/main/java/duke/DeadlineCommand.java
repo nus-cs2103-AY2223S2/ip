@@ -29,7 +29,6 @@ public class DeadlineCommand extends Command {
                     "You cant be doing nothing!! Please try again!");
         }
 
-        // String desc = input.substring(9);
         String[] descSplit = input.split("/");
         Deadline taskDeadline = new Deadline(
                 descSplit[0].substring(0,descSplit[0].length()-1),
