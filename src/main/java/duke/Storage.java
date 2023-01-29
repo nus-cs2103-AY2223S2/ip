@@ -30,11 +30,13 @@ public class Storage {
         }
     }
 
-    private void parse(String s) {
-        String[] arr = s.split("/");
+    private void parse(String lineFromFile) {
+        String[] arr = lineFromFile.split("/");
+
         char eventType = arr[0].charAt(0);
         boolean isDone = (arr[1].charAt(0) == '1');
         String description = arr[2];
+
         if (eventType == 'T') {
             Todo t = new Todo(description, isDone);
             init.add(t);
@@ -54,15 +56,17 @@ public class Storage {
         try {
             File f = new File(filePath);
             Scanner sc = new Scanner(f);
+
             while (sc.hasNextLine()) {
                 String s = sc.nextLine();
                 parse(s);
             }
+
             sc.close();
-//
-//            if (init.isEmpty()) {
-//                throw new DukeException("No saved tasks to load");
-//            }
+
+            if (init.isEmpty()) {
+                throw new DukeException("No saved tasks to load");
+            }
 
             return init;
         } catch (FileNotFoundException e) {
