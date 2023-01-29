@@ -111,17 +111,17 @@ public class MyDuke {
             if (byIndex == -1) {
                 throw new InvalidCommandException(
                     InvalidCommandException.ARG_FORMAT_EXCEPTION
-                    + Deadline.showFormat());
+                    + "\n" + Deadline.showFormat());
             }
             if (byIndex + 1 == t.size()) {
                 throw new InvalidCommandException(
                     InvalidCommandException.ARG_FORMAT_EXCEPTION
-                    + Deadline.showFormat());
+                    + "\n" + Deadline.showFormat());
             }
             if (byIndex == 1) {
                 throw new InvalidCommandException(
                     InvalidCommandException.NAME_FORMAT_EXCEPTION
-                    + Deadline.showFormat());
+                    + "\n" + Deadline.showFormat());
             }
         } catch (InvalidCommandException e) {
             dukeIo.showError(e);
@@ -144,13 +144,13 @@ public class MyDuke {
             if (fromIndex == -1 || toIndex == -1) {
                 throw new InvalidCommandException(
                     InvalidCommandException.ARG_FORMAT_EXCEPTION
-                    + Event.showFomat());
+                    + "\n" + Event.showFomat());
             }
 
             if (fromIndex + 1 == toIndex || toIndex + 1 == t.size()) {
                 throw new InvalidCommandException(
                     InvalidCommandException.ARG_FORMAT_EXCEPTION
-                    + Event.showFomat());
+                    + "\n" + Event.showFomat());
             }
         } catch (InvalidCommandException e) {
             dukeIo.showError(e);

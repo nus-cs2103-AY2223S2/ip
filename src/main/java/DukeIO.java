@@ -57,32 +57,27 @@ public class DukeIO {
 
     public void notifySuccessAdd(Task t) {
         System.out.println(SEPERATOR
-                + REPLY + "Successfully added: " + t.toString() + "\n"
-                + SEPERATOR);
+                + REPLY + "Successfully added: " + t.toString());
     }
 
     public void notifySuccessComplete(Task t) {
         System.out.println(SEPERATOR
-                + REPLY + "Successfully completed: " + t.toString() + "\n"
-                + SEPERATOR);
+                + REPLY + "Successfully completed: " + t.toString());
     }
 
     public void notifyUnmark(Task t) {
         System.out.println(SEPERATOR
-                + REPLY + "Unmarked task: " + t.toString() + "\n"
-                + SEPERATOR);
+                + REPLY + "Unmarked task: " + t.toString());
     }
 
     public void nofifyMarkFail(Task t) {
         System.out.println(SEPERATOR
-            + REPLY + "Cannot mark completed task: " + t.toString() + "\n"
-            + SEPERATOR);
+            + REPLY + "Cannot mark completed task: " + t.toString());
     }
 
     public void notifyUnmarkFail(Task t) {
         System.out.println(SEPERATOR 
-            + REPLY + "Cannot unmark incomplete task: " + t.toString() + "\n"
-            + SEPERATOR);
+            + REPLY + "Cannot unmark incomplete task: " + t.toString());
     }
 
     public void showCount() {
@@ -96,7 +91,7 @@ public class DukeIO {
             isare = " is: ";
             s = " task";
         }
-        System.out.println("\nThere" + isare + Integer.toString(taskCount) 
+        System.out.println(REPLY + "There" + isare + Integer.toString(taskCount) 
                             + s + " in the list.\n" + SEPERATOR);
     }
 
