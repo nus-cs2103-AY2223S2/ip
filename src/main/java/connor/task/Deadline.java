@@ -3,26 +3,29 @@ package connor.task;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
+/**
+ * Deadline object that keeps track of a task to be finished by.
+ */
 public class Deadline extends Task {
 
-    /** LocalDateTime representation of the deadline of the this task. */
+    /** LocalDateTime representation of the deadline of this task. */
     private LocalDateTime deadline;
 
-    /** data format representation of this instance to be stored in memory. */
+    /** Data format representation of this instance to be stored in memory. */
     private String dataFormat;
 
     /**
      * Constructor to instantiate a new Deadline using only taskName and DateTime.
      *
      * @param taskName name of the task.
-     * @param DateTime the due date of this task.
+     * @param dateTime the due date of this task.
      */
-    public Deadline(String taskName, String DateTime) {
+    public Deadline(String taskName, String dateTime) {
         super(taskName);
         this.taskName = taskName;
         try {
-            this.deadline = parseDateTime(DateTime);
-            this.dataFormat = dateTimeFormat(DateTime);
+            this.deadline = parseDateTime(dateTime);
+            this.dataFormat = dateTimeFormat(dateTime);
         } catch (DateTimeException e) {
             System.out.println("        " + e.getMessage());
         }

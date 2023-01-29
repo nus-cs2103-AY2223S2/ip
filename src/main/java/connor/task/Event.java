@@ -3,6 +3,9 @@ package connor.task;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
+/**
+ * Event object that keeps track of the start and end of an event.
+ */
 public class Event extends Task {
 
     /** LocalDateTime representing the start date/time */

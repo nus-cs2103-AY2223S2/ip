@@ -1,11 +1,5 @@
 package connor;
 
-import connor.parser.Parser;
-import connor.storage.Storage;
-import connor.task.TaskList;
-import connor.task.Task;
-import connor.ui.Ui;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,8 +8,20 @@ import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import connor.parser.Parser;
+import connor.storage.Storage;
+import connor.task.Task;
+import connor.task.TaskList;
+import connor.ui.Ui;
+
+/**
+ * Connor object that is the backbone of the program.
+ */
 public class Connor {
 
+    /**
+     * Valid commands that are allowed to be inputted by the user.
+     */
     public enum Commands {
         HI,
         BYE,

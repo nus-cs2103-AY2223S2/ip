@@ -1,10 +1,14 @@
 package connor.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+/**
+ * Testcases for the methods in Task.
+ */
 public class TaskTest {
 
     @Test

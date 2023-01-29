@@ -3,6 +3,9 @@ package connor.task;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
+/**
+ * Task object that is not to be instantiated.
+ */
 public abstract class Task {
 
     /** String that represents the name of the task. */
@@ -102,7 +105,7 @@ public abstract class Task {
      *
      * @param input substring from user input containing date and time.
      * @return LocalDateTime with the date and time of the input.
-     * @throws DateTimeException
+     * @throws DateTimeException when the input is an invalid format that cannot be parsed.
      */
     public LocalDateTime parseDateTime(String input) throws DateTimeException {
         String formattedDateTime = dateTimeFormat(input);

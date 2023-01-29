@@ -1,16 +1,19 @@
 package connor.storage;
 
-import connor.task.Deadline;
-import connor.task.Event;
-import connor.task.Task;
-import connor.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import connor.task.Deadline;
+import connor.task.Event;
+import connor.task.Task;
+import connor.task.Todo;
+
+/**
+ * Storage object to read/write to file(memory).
+ */
 public class Storage {
 
     /** dataFile that stores the tasks between sessions. */

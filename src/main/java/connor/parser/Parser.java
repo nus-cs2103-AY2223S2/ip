@@ -1,9 +1,17 @@
 package connor.parser;
 
 import connor.Connor;
-import connor.task.*;
+import connor.task.Deadline;
+import connor.task.Event;
+import connor.task.InvalidTaskException;
+import connor.task.Task;
+import connor.task.TaskList;
+import connor.task.Todo;
 import connor.ui.Ui;
 
+/**
+ * Parser object that parses information from input and memory.
+ */
 public class Parser {
 
     /**
@@ -71,16 +79,20 @@ public class Parser {
      * @throws InvalidTaskException if taskName is blank spaces.
      */
     public Task parseCommand(String command, String information) throws InvalidTaskException {
-        if (command.equals("TODO")) {
+        switch (command) {
+        case "TODO":
             validateName(information);
             return new Todo(information);
-        } else if (command.equals("DEADLINE")) {
+
+        case "DEADLINE":
             String[] pair = getNameDeadlinePair(information);
             return new Deadline(pair[0], pair[1]);
-        } else if (command.equals("EVENT")){
+
+        case "EVENT":
             String[] tuple = getNameStartEndTuple(information);
             return new Event(tuple[0], tuple[1], tuple[2]);
-        } else {
+
+        default:
             throw new InvalidTaskException();
         }
     }
@@ -167,6 +179,9 @@ public class Parser {
             case FIND:
                 System.out.println(tasks.find(getTask(input)));
                 break;
+
+            default:
+                Ui.printMessage("INVALID COMMAND");
             }
         } catch (IllegalArgumentException e) {
             Ui.printMessage("INVALID COMMAND");

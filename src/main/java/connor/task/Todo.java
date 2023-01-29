@@ -1,5 +1,8 @@
 package connor.task;
 
+/**
+ * Todo object to keep track of a task that has no time constraint.
+ */
 public class Todo extends Task {
 
     /**

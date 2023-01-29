@@ -1,9 +1,12 @@
 package connor.task;
 
-import connor.ui.Ui;
-
 import java.util.LinkedList;
 
+import connor.ui.Ui;
+
+/**
+ * TaskList object to keep track of current commands relating to tasks.
+ */
 public class TaskList {
 
     /** Collections of tasks for this instance. */
@@ -44,7 +47,7 @@ public class TaskList {
                 Task task = this.tasks.remove(value - 1);
                 ui.deleteTaskMessage(task, this.tasks.size());
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new InvalidTaskException();
         }
     }
@@ -112,12 +115,12 @@ public class TaskList {
         StringBuilder str = new StringBuilder();
         str.append(Ui.LINE).append("        HERE ARE THE MATCHING RESULTS:\n");
         int counter = 1;
-        for (int i = 0; i < this.tasks.size(); i++) {
-            if (this.tasks.get(i).getTaskName().contains(keyword)) {
+        for (Task task : this.tasks) {
+            if (task.getTaskName().contains(keyword)) {
                 str.append("        ")
                         .append(counter++)
                         .append(".")
-                        .append(this.tasks.get(i).toString())
+                        .append(task)
                         .append("\n");
             }
         }

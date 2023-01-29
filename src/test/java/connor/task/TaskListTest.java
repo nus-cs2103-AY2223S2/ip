@@ -1,15 +1,14 @@
 package connor.task;
 
-import connor.ui.Ui;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+import connor.ui.Ui;
+
+/**
+ * Testcases for the methods present in TaskList.
+ */
 public class TaskListTest {
 
     @Test
@@ -78,11 +77,11 @@ public class TaskListTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new Todo("work"));
         tasks.addTask(new Deadline("sleep", "2020-05-05 2000"));
-        String ans = "        ________________________________________________________\n" +
-                "\n" +
-                "        1.[T][ ] work\n" +
-                "        2.[D][ ] sleep (by: MAY 5 2020 2000)\n" +
-                "        I have 2 tasks in my memory\n";
+        String ans = "        ________________________________________________________\n"
+                + "\n"
+                + "        1.[T][ ] work\n"
+                + "        2.[D][ ] sleep (by: MAY 5 2020 2000)\n"
+                + "        I have 2 tasks in my memory\n";
         assertEquals(tasks.toString(), ans);
     }
 
@@ -94,9 +93,9 @@ public class TaskListTest {
         tasks.addTask(new Event("assist with work", "2020-05-05 1800", "2020-05-05 2200"));
         String output = tasks.find("work");
         String expected = "        ________________________________________________________\n"
-        + "        HERE ARE THE MATCHING RESULTS:\n"
-        + "        1.[T][ ] work\n"
-        + "        2.[E][ ] assist with work (from: MAY 5 2020 1800 to: MAY 5 2020 2200)\n";
+            + "        HERE ARE THE MATCHING RESULTS:\n"
+            + "        1.[T][ ] work\n"
+            + "        2.[E][ ] assist with work (from: MAY 5 2020 1800 to: MAY 5 2020 2200)\n";
         assertEquals(output, expected);
     }
 }
