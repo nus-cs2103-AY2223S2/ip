@@ -31,7 +31,6 @@ public class Task {
         this.status = false;
     }
 
-
     /**
      * Return the string representation of the task.
      * @return String representation of the task.
