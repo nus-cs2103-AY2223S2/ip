@@ -1,19 +1,13 @@
-import java.util.ArrayList;
+package uwuke;
+
 import java.util.Scanner;
 
-import input.Advisor;
-import input.Command;
-import input.Parser;
-
-import output.DukeException;
-import output.Printer;
-import output.Storage;
-
-import task.Task;
-import task.TaskList;
-import task.Deadline;
-import task.Event;
-import task.Todo;
+import uwuke.input.Advisor;
+import uwuke.input.Command;
+import uwuke.output.DukeException;
+import uwuke.output.Printer;
+import uwuke.output.Storage;
+import uwuke.task.TaskList;
 
 public class UwUke {
 

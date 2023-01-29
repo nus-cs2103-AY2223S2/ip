@@ -1,4 +1,4 @@
-package output;
+package uwuke.output;
 
 public class DukeException extends Exception {
     public DukeException(String e) {

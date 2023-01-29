@@ -1,4 +1,4 @@
-package task;
+package uwuke.task;
 
 public abstract class Task {
     private boolean markedDone = false;

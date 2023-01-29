@@ -1,4 +1,4 @@
-package input;
+package uwuke.input;
 
 public class Advisor {
     public static String advise(String input) {

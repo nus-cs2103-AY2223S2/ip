@@ -1,4 +1,4 @@
-package output;
+package uwuke.output;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

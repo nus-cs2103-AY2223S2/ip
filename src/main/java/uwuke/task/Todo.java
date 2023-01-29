@@ -1,4 +1,4 @@
-package task;
+package uwuke.task;
 
 public class Todo extends Task {
 

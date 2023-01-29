@@ -1,6 +1,6 @@
-package input;
+package uwuke.input;
 
-import output.DukeException;
+import uwuke.output.DukeException;
 
 public class Parser {
     

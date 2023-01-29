@@ -1,8 +1,8 @@
-package output;
+package uwuke.output;
 
 import java.util.ArrayList;
 
-import task.Task;
+import uwuke.task.Task;
 
 public class Printer {
     public static void printWithDecorations(String input) {

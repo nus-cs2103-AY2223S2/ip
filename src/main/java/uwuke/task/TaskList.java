@@ -1,10 +1,10 @@
-package task;
+package uwuke.task;
 
 import java.util.ArrayList;
 
-import input.Parser;
-import output.DukeException;
-import output.Printer;
+import uwuke.input.Parser;
+import uwuke.output.DukeException;
+import uwuke.output.Printer;
 
 /**
  * Encapsulates an ArrayList to help with task operations

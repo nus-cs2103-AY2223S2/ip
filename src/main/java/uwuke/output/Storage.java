@@ -1,4 +1,4 @@
-package output;
+package uwuke.output;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -6,11 +6,11 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Arrays;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.Todo;
+import uwuke.task.Deadline;
+import uwuke.task.Event;
+import uwuke.task.Task;
+import uwuke.task.TaskList;
+import uwuke.task.Todo;
 
 /**
  * Handler for task storage and retrieval
