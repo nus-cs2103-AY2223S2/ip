@@ -44,7 +44,7 @@ public abstract class ExecutionTask<T> extends Task<String> {
      * @throws ProcedureExecutionException - if the task failed to execute
      *      completely.
      */
-    public abstract T process(ArgumentMap args, LogicManager manager)
+    protected abstract T process(ArgumentMap args, LogicManager manager)
             throws IllegalSyntaxException, ProcedureExecutionException;
 
     /**
@@ -53,7 +53,7 @@ public abstract class ExecutionTask<T> extends Task<String> {
      * @param data - the data produced after execution of the task.
      * @param manager - the AppManager to pull additional data from.
      */
-    public abstract String getDataDisplay(T data, LogicManager manager);
+    protected abstract String getDataDisplay(T data, LogicManager manager);
 
 
     /**

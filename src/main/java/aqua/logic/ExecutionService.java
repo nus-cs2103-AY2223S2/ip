@@ -83,7 +83,7 @@ public abstract class ExecutionService extends Service<String> {
 
 
     @Override
-    public ExecutionTask<?> createTask() {
+    protected ExecutionTask<?> createTask() {
         return task;
     }
 
