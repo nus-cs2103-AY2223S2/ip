@@ -1,5 +1,21 @@
+package main;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import command.Bye;
+import command.Command;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.EventsCommand;
+import command.ListCommand;
+import command.MarkCommand;
+import command.TodoCommand;
+import command.UnMarkCommand;
+import exception.DukeException;
+import task.Deadlines;
+import task.Events;
+import task.Task;
+import task.ToDos;
 
 public class Parser {
     private static final int INPUT_LENGTH_VALIDATE= 2;
@@ -28,7 +44,7 @@ public class Parser {
             int inputIndex = Integer.parseInt(splitInput[1]);
             return new UnMarkCommand(inputIndex);
         }
-        else if(command.equals("delete")) {
+        else if(command.equals("delete")) { 
             this.validateInputNotEmpty(splitInput, "☹ OOPS!!! You must specify which task to delete",INPUT_LENGTH_VALIDATE);
             int inputIndex = Integer.parseInt(splitInput[1]);
             return new DeleteCommand(inputIndex);
@@ -103,7 +119,6 @@ public class Parser {
 
     private void checkValidDateFormat(String input, String message) throws DukeException {
         String[] splitInput = input.split("/");
-        System.out.println(splitInput.length);
         if (splitInput.length != 3 || !isNumeric(splitInput[0]) || !isNumeric(splitInput[1])) {
             throw new DukeException("Not valid date format. Format must be dd/mm/yyyy HHmm");
         }
@@ -114,7 +129,7 @@ public class Parser {
         }
     }
     
-    private static boolean isNumeric(String string) {
+    public static boolean isNumeric(String string) {
         try {
             int intValue = Integer.parseInt(string);
             return true;
@@ -124,13 +139,20 @@ public class Parser {
         return false;
     }
 
-    private LocalDateTime parseDate(String date) throws DukeException {
+    public static LocalDateTime parseDate(String date) throws DukeException {
         try {
-            System.out.println(date);
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             return LocalDateTime.parse(date, dateFormatter);
         } catch (Exception e) {
             throw new DukeException("An error occurred while parsing date: " + e);
+        }
+    }
+
+    public static LocalDateTime parseDateStorage(String date) throws DukeException {
+        try {
+            return LocalDateTime.parse(date);
+        } catch (Exception e) {
+            throw new DukeException("An error occurred while parsing date: " +e);
         }
     }
 }
