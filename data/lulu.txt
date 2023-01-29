@@ -11,3 +11,6 @@ E`1`run ` today to to to ` tomorrow
 T`1`runn run run
 E`1`run ` 2000-05-12` 2010-06-12
 T`0`run
+D`0`run ` tomorrow
+E`0`run ` today ` tomorrow
+T`0`run
