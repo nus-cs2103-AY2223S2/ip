@@ -1,3 +1,2 @@
-[T][X] borrow book
-[D][X] Assignment 1 /by Today 9pm
-[E][ ] Birthday /from Today 8pm /to Tomorrow 9pm
+[D][ ] ASSIGNMENT 1 /by 2012-12-23 12:40
+[E][ ] birthday /from 2012-12-23 /to 2012-12-24
