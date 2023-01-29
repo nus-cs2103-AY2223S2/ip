@@ -1,12 +1,6 @@
 package duke;
 
-import util.DukeException;
-import util.Parser;
-import util.Storage;
-import util.TaskList;
-import util.Ui;
-
-import java.io.IOException;
+import util.*;
 
 
 /**
@@ -47,15 +41,15 @@ public class Duke {
             String command = ui.nextInput();
             System.out.println(divider);
             try {
-                repeat = Parser.handleGeneralCommand(command, tasks);
+                repeat = Parser.handleGeneralCommand(command, tasks, storage);
             } catch (DukeException e) {
                 System.out.println(e);
             }
             if (!repeat) {
                 try {
                     storage.saveTasks(tasks);
-                } catch (IOException e) {
-                    System.out.println("Unable to save! Creating new save file!");
+                } catch (DukeException e) {
+                    System.out.println(e);
                 }
                 ui.closeCommand();
             }
@@ -68,6 +62,6 @@ public class Duke {
      * @param args Array of inputs into the command line
      */
     public static void main(String[] args) {
-        new Duke("src/main/data/", "src/main/data/seedu.duke.txt").run();
+        new Duke("src/main/data/", "src/main/data/duke.txt").run();
     }
 }

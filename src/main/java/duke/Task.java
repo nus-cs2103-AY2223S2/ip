@@ -65,6 +65,15 @@ public abstract class Task {
     }
 
     /**
+     * Checks if the task description contains the specified keyword.
+     * @param keyword
+     * @return Boolean indicating if the keyword is found in the task description.
+     */
+    public boolean containsKeyword(String keyword) {
+        return this.taskName.contains(keyword);
+    }
+
+    /**
      * Returns the Task string to be stored in a .txt file for saving.
      * @return String to be saved in Task history.
      */
