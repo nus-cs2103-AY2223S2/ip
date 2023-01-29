@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,12 +27,12 @@ public class TaskFileHandler {
                     newTask = new ToDo(description);
                     break;
                 case "D":
-                    String dueDate = parts[3];
+                    LocalDateTime dueDate = LocalDateTime.parse(parts[3]);
                     newTask = new Deadline(description, dueDate);
                     break;
                 case "E":
-                    String fromDate = parts[3];
-                    String toDate = parts[4];
+                    LocalDateTime fromDate = LocalDateTime.parse(parts[3]);
+                    LocalDateTime toDate = LocalDateTime.parse(parts[4]);
                     newTask = new Event(description, fromDate, toDate);
                     break;
                 default:
