@@ -9,6 +9,7 @@ import crystal.command.DeadlineCommand;
 import crystal.command.EventCommand;
 import crystal.command.ByeCommand;
 import crystal.command.DeleteCommand;
+import crystal.command.FindCommand;
 
 /**
  * Represents the Parser task.
@@ -56,6 +57,9 @@ public class Parser {
             String tempOne = arr[2];
             String subStringNoTo = tempOne.replace("to", ""); //to
             return new EventCommand(subString, subStringNoFrom, subStringNoTo);
+        } else if (command.contains("find")) {
+            String stringReplaceFind = command.replace("find", "");
+            return new FindCommand(stringReplaceFind);
         } else if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.contains("delete")) {

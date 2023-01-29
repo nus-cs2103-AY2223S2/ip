@@ -32,6 +32,14 @@ public abstract class Task {
     }
 
     /**
+     *  Returns the description of the task
+     *
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      *  Returns the printed output format shown in the list
      *
      */
