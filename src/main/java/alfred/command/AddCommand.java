@@ -1,9 +1,14 @@
 package alfred.command;
 
-import alfred.task.*;
-import alfred.ui.Ui;
+import alfred.task.TaskList;
+import alfred.task.Task;
+import alfred.task.ToDo;
+import alfred.task.Deadline;
+import alfred.task.Event;
 import alfred.storage.Storage;
 import alfred.exceptions.AlfredException;
+import alfred.ui.Ui;
+
 import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
@@ -32,13 +37,13 @@ public class AddCommand extends Command {
         case "deadline": // Need to consider what if no '/' is given
             lineArr = fullCommand.split("/by ");
             if (lineArr.length == 1) {
-                throw new AlfredException("Deadlines should have a due date ." +
-                        "Eg: \"<TaskName> /by <DueDate>\"\n");
+                throw new AlfredException("Deadlines should have a due date ."
+                        + "Eg: \"<TaskName> /by <DueDate>\"\n");
             }
             descriptionArr = lineArr[0].split(" ", 2);
             if (descriptionArr.length == 1) {
-                throw new AlfredException("Deadlines should have a due date ." +
-                        "Eg: \"<TaskName> /by <DueDate>\"\n");
+                throw new AlfredException("Deadlines should have a due date ."
+                        + "Eg: \"<TaskName> /by <DueDate>\"\n");
             }
             try {
                 task = new Deadline(descriptionArr[1], lineArr[1]);

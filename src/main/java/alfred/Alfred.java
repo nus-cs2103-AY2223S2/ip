@@ -1,9 +1,9 @@
-import alfred.ui.Ui;
 import alfred.storage.Storage;
 import alfred.task.TaskList;
 import alfred.parser.Parser;
 import alfred.exceptions.AlfredException;
 import alfred.command.Command;
+import alfred.ui.Ui;
 
 public class Alfred {
 
