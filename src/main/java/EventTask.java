@@ -27,8 +27,8 @@ public class EventTask extends Task {
     }
 
     public String save() {
-        String status = this.isDone ? "DONE " : "NOTDONE ";
-        return "EVENT " + status + this.from + " " + this.to + "\n";
+        String status = this.isDone ? "DONE/+/" : "NOTDONE/+/";
+        return "EVENT/+/" + status + this.title + "/+/" + this.from + "/+/" + this.to + "\n";
     }
 
     @Override

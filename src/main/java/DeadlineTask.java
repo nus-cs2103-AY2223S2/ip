@@ -24,8 +24,8 @@ public class DeadlineTask extends Task {
     }
 
     public String save() {
-        String status = this.isDone ? "DONE " : "NOTDONE ";
-        return "DEADLINE " + status + this.by + "\n";
+        String status = this.isDone ? "DONE/+/" : "NOTDONE/+/";
+        return "DEADLINE/+/" + status + this.title + "/+/" + this.by + "\n";
     }
 
     @Override

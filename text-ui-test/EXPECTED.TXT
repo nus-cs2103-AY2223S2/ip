@@ -10,16 +10,8 @@ What can the Duke help you with today?
 ____________________________________________________________
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-TO DO LIST:
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-The Duke does not understand your words!
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has added the following task:
- - [T][ ] exam
+ - [T][x] test
 You now have 1 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
@@ -30,20 +22,27 @@ You now have 2 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][x] test
+2.[D][ ] gaming (by: 29th april 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has added the following task:
- - [E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
+ - [E][ ] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 You now have 3 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
-1.[T][ ] exam
+1.[T][x] test
 2.[D][ ] gaming (by: 29th april 2023)
-3.[E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
+3.[E][ ] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-The Duke does not understand your words!
+Not enough details are given!
+ The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
@@ -53,55 +52,42 @@ Not enough details are given!
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 Not enough details are given!
-The Duke expects more information!
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-Not enough details are given!
-The Duke expects more information!
+ The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
-1.[T][ ] exam
+1.[T][x] test
 2.[D][ ] gaming (by: 29th april 2023)
-3.[E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
+3.[E][ ] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-The Duke does not understand your words!
+Not enough details are given!
+ The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 Not enough details are given!
-The Duke expects more information!
+ The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 Not enough details are given!
-The Duke expects more information!
+ The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 Not enough details are given!
-The Duke expects more information!
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-Not enough details are given!
-The Duke expects more information!
+ The Duke expects more information!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
-1.[T][ ] exam
+1.[T][x] test
 2.[D][ ] gaming (by: 29th april 2023)
-3.[E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
+3.[E][ ] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-The Duke does not understand your words!
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has marked the following task:
@@ -110,27 +96,12 @@ The Duke has marked the following task:
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has marked the following task:
- - [E][x] 2103t (from: 1/1/2023 to: 4/29/2023)
+ - [E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-It seems like the number given isn't on the list!
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-TO DO LIST:
-1.[T][ ] exam
-2.[D][x] gaming (by: 29th april 2023)
-3.[E][x] 2103t (from: 1/1/2023 to: 4/29/2023)
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-The Duke does not understand your words!
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has unmarked the following task:
- - [D][ ] gaming (by: 29th april 2023)
+ - [T][ ] test
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
@@ -139,49 +110,79 @@ It seems like the number given isn't on the list!
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
-1.[T][ ] exam
-2.[D][ ] gaming (by: 29th april 2023)
-3.[E][x] 2103t (from: 1/1/2023 to: 4/29/2023)
+1.[T][ ] test
+2.[D][x] gaming (by: 29th april 2023)
+3.[E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-The Duke does not understand your words!
+It seems like the number given isn't on the list!
 !!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+It seems like the number given isn't on the list!
+!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][ ] test
+2.[D][x] gaming (by: 29th april 2023)
+3.[E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has added the following task:
+ - [D][ ] delete (by: 05 May 2023)
+You now have 4 task!
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][ ] test
+2.[D][x] gaming (by: 29th april 2023)
+3.[E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+4.[D][ ] delete (by: 05 May 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has removed the following task:
- - [D][ ] gaming (by: 29th april 2023)
+ - [E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
+You now have 3 task!
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has marked the following task:
+ - [D][x] delete (by: 05 May 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+TO DO LIST:
+1.[T][ ] test
+2.[D][x] gaming (by: 29th april 2023)
+3.[D][x] delete (by: 05 May 2023)
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+
+@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
+The Duke has removed the following task:
+ - [D][x] delete (by: 05 May 2023)
 You now have 2 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-It seems like the number given isn't on the list!
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-TO DO LIST:
-1.[T][ ] exam
-2.[E][x] 2103t (from: 1/1/2023 to: 4/29/2023)
+The Duke has marked the following task:
+ - [T][x] test
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-The Duke does not understand your words!
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 The Duke has unmarked the following task:
- - [E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
+ - [D][ ] gaming (by: 29th april 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
-1.[T][ ] exam
-2.[E][ ] 2103t (from: 1/1/2023 to: 4/29/2023)
+1.[T][x] test
+2.[D][ ] gaming (by: 29th april 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
-The Duke does not understand your words!
-!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!!!
 
 ____________________________________________________________
 Goodbye, feel free to call the Duke again whenever you need.

@@ -4,9 +4,11 @@ import java.io.FileWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 import java.nio.file.Path;
-
+import java.util.regex.Pattern;
 
 
 public class ToDoList {
@@ -88,15 +90,31 @@ public class ToDoList {
         ToDoList ls = new ToDoList();
         Scanner sc = new Scanner(f);
         while (sc.hasNext()) {
-            String[] input = sc.nextLine().split(" ");
+            String[] input = sc.nextLine().split(Pattern.quote("/+/"));
             String command = input[0];
+            Task task;
             switch (command) { //to settle out index error
                 case "TODO":
-                    ls.add(new ToDoTask(input[1]));
+                    task = new ToDoTask(input[2]);
+                    if (input[1].equals("DONE")) {
+                        task.markDone();
+                    }
+                    ls.add(task);
+                    break;
                 case "DEADLINE":
-                    ls.add(new DeadlineTask(input[1], input[2]));
+                    task = new DeadlineTask(input[2], input[3]);
+                    if (input[1].equals("DONE")) {
+                        task.markDone();
+                    }
+                    ls.add(task);
+                    break;
                 case "EVENT":
-                    ls.add(new EventTask(input[1], input[2], input[3]));
+                    task = new EventTask(input[2], input[3], input[4]);
+                    if (input[1].equals("DONE")) {
+                        task.markDone();
+                    }
+                    ls.add(task);
+                    break;
             }
         }
         return ls;

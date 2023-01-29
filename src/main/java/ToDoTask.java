@@ -4,8 +4,8 @@ public class ToDoTask extends Task {
     }
 
     public String save() {
-        String status = this.isDone ? "DONE " : "NOTDONE ";
-        return "TODO " + status + "\n";
+        String status = this.isDone ? "DONE/+/" : "NOTDONE/+/";
+        return "TODO/+/" + status + this.title + "/+/" + "\n";
     }
 
     @Override
