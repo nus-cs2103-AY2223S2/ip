@@ -70,11 +70,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Terminate the Duke.
+     */
     public void terminate() {
         Ui.ending();
         duke.exit = 1;
     }
 
+    /**
+     * Actions when marking.
+     * @param s String format of the Task index.
+     */
     public void mark(String s) {
         try {
             int n = Integer.parseInt(s) - 1;
@@ -86,6 +93,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Actions when unmarking.
+     * @param s String format of the Task index.
+     */
     public void unmark(String s) {
         try {
             int num = Integer.parseInt(s) - 1;
@@ -97,6 +108,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Actions when deleting.
+     * @param s String format of the Task index.
+     */
     public void delete(String s) {
         try {
             int index = Integer.parseInt(s) - 1;
@@ -110,6 +125,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Actions when adding a Todo.
+     * @param info Description of a Todo.
+     */
     public void add_todo(String info) {
         String action = info.split(" ", 2)[1];
         Task t = new Todo(action);
@@ -118,6 +137,10 @@ public class Parser {
         Ui.addMSG(t, duke.taskList.size());
     }
 
+    /**
+     * Actions when adding a Deadline.
+     * @param s Description of a Deadline.
+     */
     public void add_deadline(String s) {
         try {
             String msg = s.split("/by ", 2)[0];
@@ -131,6 +154,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Actions when adding an Event.
+     * @param s Description of an Event.
+     */
     public void add_event(String s) {
         String event = s.split("/from", 2)[0];
         String time = s.split("/from", 2)[1];
