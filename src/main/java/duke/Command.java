@@ -5,15 +5,36 @@ import duke.task.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * {@code Command} class that executes command inputs
+ */
 public class Command {
+    /**
+     * Key command word
+     */
     private String command;
+
+    /**
+     * string of arguments that is executed together with
+     * command word
+     */
     private String args;
 
+    /**
+     * Constructor method for {@code Command} class
+     * @param command key command word for execution
+     * @param args arguments that are to be executed together with command
+     */
     public Command(String command, String args) {
         this.command = command.trim();
         this.args = args.trim();
     }
 
+    /**
+     * Executes action based on command given
+     * @param taskList {@code TaskList} object which keeps track of tasks
+     * @throws DukeException when command cannot be executed due to incorrect format
+     */
     public void execArgs(TaskList taskList) throws DukeException {
         switch(this.command.toLowerCase()) {
             case "bye":
@@ -45,6 +66,11 @@ public class Command {
         }
     }
 
+    /**
+     * Adds Todo task into taskList
+     * @param taskList {@code TaskList} object which keeps track of tasks
+     * @throws DukeException when there is no description of task given
+     */
     private void todo(TaskList taskList) throws DukeException {
         if (this.args.length() == 0){
             throw new DukeException("What is the ToDo task???");
@@ -59,6 +85,12 @@ public class Command {
         }
     }
 
+    /**
+     * Adds deadline task into taskList
+     * @param taskList {@code TaskList} object which keeps track of tasks
+     * @throws DukeException when description of task, deadline is missing
+     * or format of deadline is incorrect
+     */
     private void deadline(TaskList taskList) throws DukeException {
         if (args.length() == 0) {
             throw new DukeException("What is the Deadline task???");
@@ -86,6 +118,12 @@ public class Command {
         }
     }
 
+    /**
+     * Adds event task into taskList
+     * @param taskList {@code TaskList} object which keeps track of tasks
+     * @throws DukeException when description, start or end of event is missing or
+     * incorrect format is given for start or end of event
+     */
     private void event(TaskList taskList) throws DukeException {
         if (args.length() == 0) {
             throw new DukeException("What is the Event task???");
@@ -121,18 +159,37 @@ public class Command {
         }
     }
 
+    /**
+     * marks specified task in taskList
+     * @param taskList {@code TaskList} object which keeps track of tasks
+     * @throws DukeException when index given is less than 0 or greater than size of taskList - 1
+     */
     private void mark(TaskList taskList) throws DukeException {
         taskList.markTask(Integer.parseInt(this.args));
     }
 
+    /**
+     * unmarks specified task in taskList
+     * @param taskList {@code TaskList} object which keeps track of tasks
+     * @throws DukeException when index given is less than 0 or greater than size of taskList - 1
+     */
     private void unMark(TaskList taskList) throws DukeException {
         taskList.unMarkTask(Integer.parseInt(this.args));
     }
 
+    /**
+     * deletes specified task in taskList
+     * @param taskList {@code TaskList} object which keeps track of tasks
+     * @throws DukeException when index given is less than 0 or greater than size of taskList - 1
+     */
     private void delete(TaskList taskList) throws DukeException {
         taskList.remove(Integer.parseInt(this.args));
     }
 
+    /**
+     * Provides String representation of Command object
+     * @return String representation with command word and arguments
+     */
     @Override
     public String toString(){
         return this.command + " " + this.args;

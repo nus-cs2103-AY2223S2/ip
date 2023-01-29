@@ -11,7 +11,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@code DukeTest} class encapsulates testing of different classes in
+ * Duke program
+ */
 public class DukeTest {
+
+    /**
+     * Tests correctness of command input
+     * @throws DukeException when command input is invalid
+     */
     @Test
     public void allCommandTest() throws DukeException {
 
@@ -43,6 +52,10 @@ public class DukeTest {
     }
 
 
+    /**
+     * Tests file operations within Duke program
+     * @throws IOException when unable to access/edit file at specified filePath
+     */
     @Test
     public void fileEditTest() throws IOException {
         Path filePath = Paths.get(System.getProperty("user.dir"), "data", "Duke.txt");

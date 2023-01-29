@@ -5,10 +5,22 @@ import duke.task.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@code TaskList} class encapsulates a list of tasks
+ * to keep track of
+ */
 public class TaskList {
+
+    /**
+     * a list that keeps track of current and new tasks
+     */
     private ArrayList<Task> storage;
 
 
+    /**
+     * Constructor method for TaskList class
+     * @param lines list of lines that convert into tasks, if not empty
+     */
     public TaskList(List<String> lines){
         this.storage = new ArrayList<>(100);
         if (lines.size() != 0){
@@ -16,6 +28,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Converts each line of {@code String} to {@code Task} object
+     * before being added into taskList
+     * @param lines list of lines read from file
+     */
     private void fillStorage(List<String> lines){
         for (String line: lines){
             String[] arguments = line.split (" | ");
@@ -33,6 +50,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * stores ToDo tasks into taskList NOSONAR
+     * @param args array of arguments from a line
+     */
     private void storeTodoTask(String[] args){
         Task addTask = new ToDo(args[3].trim());
         if (args[2].contains("X")){
@@ -42,10 +63,14 @@ public class TaskList {
         storage.add(addTask);
     }
 
+    /**
+     * stores Deadline tasks into taskList
+     * @param args array of arguments from a line
+     */
     private void storeDeadlineTask(String[] args){
         String desc =  args[3].substring(0, args[3].indexOf("(by:")).trim();
         String deadline = args[3].substring(args[3].indexOf("(by:") +
-                    "(by:".length(), args[3].indexOf(")")).trim();
+                "(by:".length(), args[3].indexOf(")")).trim();
 
         Task addTask = new Deadline(desc, deadline);
         if (args[2].contains("X")){
@@ -55,7 +80,10 @@ public class TaskList {
         storage.add(addTask);
     }
 
-
+    /**
+     * stores Event tasks into taskList
+     * @param args array of arguments from a line
+     */
     private void storeEventTask(String[] args){
         String desc = args[3].substring(0, args[3].indexOf("(from:")).trim();
         String from = args[3].substring(args[3].indexOf("(from:") +
@@ -71,6 +99,9 @@ public class TaskList {
         storage.add(addTask);
     }
 
+    /**
+     * Prints out contents of taskList
+     */
     public void generate(){
         System.out.println("_____________________________________\n");
         for (Task task : storage){
@@ -80,14 +111,19 @@ public class TaskList {
     }
 
 
-    public void add(Task task) throws DukeException{
-        try {
-            storage.add(task);
-        } catch (IndexOutOfBoundsException err){
-            throw new DukeException("Invalid Index given!");
-        }
+    /**
+     * Adds task into taskList
+     * @param task Task to be added
+     */
+    public void add(Task task){
+        storage.add(task);
     }
 
+    /**
+     * Removes task at specified index from taskList
+     * @param index index of taskList to remove
+     * @throws DukeException when index is less than 0 or greater than size of taskList - 1
+     */
     public void remove(int index) throws DukeException{
         try {
             storage.remove(index);
@@ -96,6 +132,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks task at specified index from taskList
+     * @param index index of taskList to remove
+     * @throws DukeException when index is less than 0 or greater than size of taskList - 1
+     */
     public void markTask(int index) throws DukeException{
         try {
             storage.get(index).markAsDone();
@@ -108,6 +149,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unmarks task at specified index from taskList
+     * @param index index of taskList to remove
+     * @throws DukeException when index is less than 0 or greater than size of taskList - 1
+     */
     public void unMarkTask(int index) throws DukeException{
         try {
             storage.get(index).unMark();
@@ -120,10 +166,18 @@ public class TaskList {
         }
     }
 
+    /**
+     * Provides list of tasks
+     * @return list of tasks
+     */
     public ArrayList<Task> loadTaskList(){
         return this.storage;
     }
 
+    /**
+     * Gives string representation of number of tasks in taskList
+     * @return string representation of size of taskList
+     */
     public String taskCount(){
         if (this.storage.size() == 1){
             return "1 task ";

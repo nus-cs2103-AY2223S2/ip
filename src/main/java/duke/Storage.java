@@ -9,10 +9,27 @@ import java.util.List;
 import java.util.stream.Collectors;
 import duke.task.*;
 
+/**
+ * {@code Storage} class encapsulates storage of data
+ * from file at specified filePath
+ */
 public class Storage {
+
+    /**
+     * filePath of file to access
+     */
     private Path filePath;
+
+    /**
+     * List of lines read from file
+     */
     private List<String> lines;
 
+    /**
+     * Constructor method for Storage class
+     * @param filePath
+     * @throws DukeException
+     */
     public Storage(Path filePath) throws DukeException{
         this.filePath = filePath;
         try {
@@ -23,10 +40,19 @@ public class Storage {
         }
     }
 
-    public List<String> load() throws DukeException{
+    /**
+     * Loads lines read from file
+     * @return list of string lines
+     */
+    public List<String> load(){
         return this.lines;
     }
 
+    /**
+     * Edits file with new content or replaces existing lines with updated lines
+     * @param taskList task list that keeps track of tasks
+     * @throws DukeException when file fails to be written to
+     */
     public void editFile(ArrayList<Task> taskList) throws DukeException{
         if (taskList.size() > lines.size()){
             try {
