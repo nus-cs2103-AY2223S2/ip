@@ -2,6 +2,7 @@ package jarvis.task;
 
 import java.util.Scanner;
 
+import jarvis.duration.Duration;
 import jarvis.exception.CommandParseException;
 import jarvis.exception.MissingParameterException;
 
@@ -64,6 +65,7 @@ public abstract class Task {
         String deadline = null;
         String fromDateTime = null;
         String toDateTime = null;
+        String duration = null;
 
         if (scanner.hasNext()) {
             type = scanner.next();
@@ -92,6 +94,11 @@ public abstract class Task {
                     toDateTime = scanner.next();
                 }
                 return new EventTask(description, fromDateTime, toDateTime, isDone);
+            case TimedTask.ID:
+                if (scanner.hasNext()) {
+                    duration = scanner.next();
+                }
+                return new TimedTask(description, Duration.deserialize(duration));
             default:
                 return null;
             }

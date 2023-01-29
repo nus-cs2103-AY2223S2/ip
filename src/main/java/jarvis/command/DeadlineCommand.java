@@ -10,7 +10,7 @@ import jarvis.ui.Ui;
 
 
 /**
- * Command class to delete deadline tasks.
+ * Command class to create deadline tasks.
  */
 public class DeadlineCommand extends Command {
 
