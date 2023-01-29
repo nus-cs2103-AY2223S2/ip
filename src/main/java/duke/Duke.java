@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package duke;
 
 public class Duke {
 
@@ -18,7 +18,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("./data/tasks.txt");
+        Duke duke = new Duke("./data/duke.txt");
         duke.runApp();
     }
 
@@ -27,18 +27,20 @@ public class Duke {
 
         boolean enteredBye = false;
         while (!enteredBye) {
-            String input = ui.readInput();
+
             try {
+                String input = ui.readInput();
                 if (input.equals("bye")) {
                     enteredBye = true;
                 } else {
                     parser.parseInput(input);
                 }
-                storage.save(taskList.getList());
+                storage.save(taskList);
             } catch (DukeException e) {
                 ui.printMessage(e.getMessage());
             }
         }
+        ui.close();
         ui.goodbyeMessage();
     }
 }

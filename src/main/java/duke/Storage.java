@@ -1,3 +1,4 @@
+package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
@@ -6,22 +7,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private String filepath;
+    private File file;
 
     Storage(String filepath) {
-        this.filepath = filepath;
+        this.file = new File(filepath);
     }
 
-    public void save(ArrayList<Task> list) throws DukeException {
+    public void save(TaskList list) throws DukeException {
         ArrayList<String> temp = new ArrayList<>();
         try {
-            File file = new File("./data/duke.txt");
-            file.getParentFile().mkdir();
-
             FileWriter fw = new FileWriter(file);
 
-            for (int i = 0; i < list.size(); i++) {
-                temp.add(list.get(i).sendOutputToFile());
+            for (int i = 1; i <= list.numberOfTasks(); i++) {
+                temp.add(list.getTask(i).sendOutputToFile());
             }
             fw.write(String.join("\n", temp));
             fw.close();
@@ -32,13 +30,10 @@ public class Storage {
 
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
-
         try {
-            File file = new File(filepath);
             if (!file.exists()) {
-                return tasks;
+                file.getParentFile().mkdir();
             }
-            file.getParentFile().mkdirs();
             if (file.exists()) {
                 Scanner scanner = new Scanner(file);
                 while (scanner.hasNext()) {
@@ -79,7 +74,7 @@ public class Storage {
                             throw new DukeException("Error: Wrong task encountered");
                     }
                 }
-
+                scanner.close();
             }
         } catch (Exception ex) {
             throw new DukeException("Exception has occurred");

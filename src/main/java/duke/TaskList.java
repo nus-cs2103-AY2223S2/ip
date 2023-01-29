@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -22,12 +24,17 @@ public class TaskList {
         return tasks.size();
     }
 
-    void markTaskAsDone(int taskNumber) {
+    void markTaskAsDone(int taskNumber) throws DukeException {
+        if (taskNumber < 1 || taskNumber > numberOfTasks()) {
+            throw new DukeException("OOPS!!! Invalid task number. Please try again.");
+        }
         tasks.get(taskNumber - 1).markAsDone();
     }
 
-    void markTaskAsIncomplete(int taskNumber) {
-        tasks.get(taskNumber - 1).markAsNotDone();
+    void markTaskAsIncomplete(int taskNumber) throws DukeException {
+        if (taskNumber < 1 || taskNumber > numberOfTasks()) {
+            throw new DukeException("OOPS!!! Invalid task number. Please try again.");
+        }tasks.get(taskNumber - 1).markAsNotDone();
     }
 
     void add(Task t) {

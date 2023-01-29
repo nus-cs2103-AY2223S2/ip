@@ -1,3 +1,4 @@
+package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,6 +17,10 @@ public class Ui {
 
     String readInput() {
         return scanner.nextLine();
+    }
+
+    void close() {
+        scanner.close();
     }
 
     public void printLongLine() {

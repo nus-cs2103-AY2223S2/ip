@@ -1,3 +1,4 @@
+package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -5,15 +6,18 @@ public class Parser {
 
     private TaskList taskList;
     private Ui ui;
+    private Storage storage;
 
     Parser(TaskList taskList) {
         this.taskList = taskList;
         this.ui = new Ui();
+        this.storage = storage;
     }
 
     public void parseInput(String input) throws DukeException {
         try{
             if (input.equals("bye")) {
+                this.storage.save(taskList);
                 ui.goodbyeMessage();
             } else if (input.equals("list")){
                 ui.printList(taskList.getList());
@@ -26,24 +30,29 @@ public class Parser {
                 unmarkInputChecker(input);
                 int taskNum = Integer.parseInt(input.split(" ")[1]);
                 taskList.markTaskAsIncomplete(taskNum);
+
                 ui.markTaskAsIncompleteMessage(taskList.getTask(taskNum));
             } else if (input.startsWith("delete")) {
                 deleteInputChecker(input);
                 int taskNum = Integer.parseInt(input.split(" ")[1]);
                 Task toDelete = taskList.getTask(taskNum);
                 taskList.deleteTaskFromList(taskNum);
+
                 ui.deletedTaskMessage(toDelete, taskList.numberOfTasks());
             } else if (isEventTask(input)) {
                 eventInputChecker(input);
                 String[] eventConstructor = input.replace("event ", "").split("/at ");
                 String timeModified = eventConstructor[1].replace("from ", "");
                 inputEvent(eventConstructor[0], timeModified);
+
             } else if (isDeadlineTask(input)) {
                 deadlineInputChecker(input);
                 addDeadlineFormatted(input);
+
             } else if (isTodoTask(input)) {
                 todoInputChecker(input);
                 inputTodo(input.replace("todo ", ""));
+
             } else {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
