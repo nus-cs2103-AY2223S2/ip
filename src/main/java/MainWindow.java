@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 import duke.Duke;
+import duke.constant.Message;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -32,16 +33,27 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * 
+     * @param d
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
+    /**
+     * 
+     * @param d
+     */
     public MainWindow(Duke d) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+
+            // Say welcome
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(Message.WELCOME, dukeImage));
         } catch (IOException e) {
             e.printStackTrace();
         }

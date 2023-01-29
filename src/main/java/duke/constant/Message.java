@@ -22,6 +22,13 @@ public class Message {
     public static final String EXCEPTION_INVALID_DATE_FORMAT = "Invalid date argument format.";
 
     /* Normal messages */
+    public static final String WELCOME = "Hello from\n"
+                                        + " ____       _\n"
+                                        + "|  _ \\ _  _| | ____ _\n"
+                                        + "| | | | | |  | |/ / _ \\\n"
+                                        + "| |_| | |_|  |   <  __/\n"
+                                        + "|____/ \\__,_|_|\\_\\___|\n"
+                                        + "What can I do for you?";
     public static final String LIST_TASKS = "Here are the tasks in your list:";
     public static final String BYE = "Bye. Hope to see you again soon!";
     public static final String MARK_TASK = "Nice! I've marked this task as done:";

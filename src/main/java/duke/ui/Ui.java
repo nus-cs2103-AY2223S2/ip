@@ -4,6 +4,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import duke.constant.Message;
+
 /**
  * Handles UI related operations.
  */
@@ -35,13 +37,7 @@ public class Ui {
      * Prints welcome messages.
      */
     public void showWelcome() {
-        String welcome = "Hello from\n"
-                + " ____       _\n"
-                + "|  _ \\ _  _| | ____ _\n"
-                + "| | | | | |  | |/ / _ \\\n"
-                + "| |_| | |_|  |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n"
-                + "What can I do for you?";
+        String welcome = Message.WELCOME;
         println(welcome);
     }
 

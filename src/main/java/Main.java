@@ -10,6 +10,9 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Handles start event
+     */
     @Override
     public void start(Stage stage) {
         Scene scene = new Scene(new MainWindow(duke));
@@ -17,6 +20,9 @@ public class Main extends Application {
         stage.show();
     }
 
+    /**
+     * Handles exit event
+     */
     @Override
     public void stop() throws Exception {
         duke.close();
