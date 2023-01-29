@@ -94,24 +94,24 @@ public class FileStorage implements Storage {
             FileWriter fileWriter = new FileWriter(String.format("%s/%s", directoryPath, fileName));
             for (Task task : tasks) {
                 switch (task.getTaskType()) {
-                    case TODO:
-                        ToDo todo = (ToDo) task;
-                        fileWriter.write(String.format("T;%d;%s\n", todo.isDone() ? 1 : 0, todo.getDescription()));
+                case TODO:
+                    ToDo todo = (ToDo) task;
+                    fileWriter.write(String.format("T;%d;%s\n", todo.isDone() ? 1 : 0, todo.getDescription()));
 
-                        break;
-                    case DEADLINE:
-                        Deadline deadline = (Deadline) task;
-                        fileWriter.write(String.format("D;%d;%s;%s\n", deadline.isDone() ? 1 : 0, deadline.getDescription(),
-                                deadline.getBy().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
+                    break;
+                case DEADLINE:
+                    Deadline deadline = (Deadline) task;
+                    fileWriter.write(String.format("D;%d;%s;%s\n", deadline.isDone() ? 1 : 0, deadline.getDescription(),
+                            deadline.getBy().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
 
-                        break;
-                    case EVENT:
-                        Event event = (Event) task;
-                        fileWriter.write(String.format("E;%d;%s;%s;%s\n", event.isDone() ? 1 : 0, event.getDescription(),
-                                event.getFrom().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT),
-                                event.getTo().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
+                    break;
+                case EVENT:
+                    Event event = (Event) task;
+                    fileWriter.write(String.format("E;%d;%s;%s;%s\n", event.isDone() ? 1 : 0, event.getDescription(),
+                            event.getFrom().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT),
+                            event.getTo().format(DateTimeUtils.DATE_TIME_FORMAT_INPUT)));
 
-                        break;
+                    break;
                 }
             }
             fileWriter.close();
