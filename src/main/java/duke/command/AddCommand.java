@@ -1,4 +1,5 @@
 package duke.command;
+
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -62,8 +63,8 @@ public class AddCommand extends Command {
                 } catch (DateTimeException e) {
                     System.out.println("ERROR!! Please key in valid date format: dd-MM-yyyy HHmm");
                 } catch (IOException e) {
-                  e.printStackTrace();
-            }   finally {
+                    e.printStackTrace();
+                } finally {
                     break;
                 }
             case "event":

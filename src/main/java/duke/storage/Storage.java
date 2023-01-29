@@ -20,6 +20,7 @@ public class Storage {
     private FileWriter writer;
     private ArrayList<Task> taskList = new ArrayList<>();
     private Task task;
+
     public Storage(String filePath) {
         this.filePath = filePath;
     }
