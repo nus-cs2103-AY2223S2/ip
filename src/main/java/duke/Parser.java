@@ -4,6 +4,14 @@ public class Parser {
     public enum ParseFunctions {
         SPLIT_ALL, TODO, DEADLINE, EVENT
     }
+
+    /**
+     * Parses user input.
+     * @param input String that user enters
+     * @param parse_type Type of command
+     * @return List of strings
+     * @throws EmptyDescriptionException
+     */
     public static String[] parse(String input, ParseFunctions parse_type) throws EmptyDescriptionException {
         switch (parse_type) {
             case SPLIT_ALL:

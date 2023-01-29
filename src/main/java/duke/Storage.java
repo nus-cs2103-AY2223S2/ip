@@ -10,9 +10,16 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * A storage object represents tasks in Duke.
+ */
 public class Storage {
     private TaskList myTaskList;
 
+    /**
+     * Constructor for a Storage object
+     * @param myTaskList
+     */
     public Storage(TaskList myTaskList) {
         this.myTaskList = myTaskList;
         try {
@@ -20,6 +27,11 @@ public class Storage {
         }
         catch (IOException ignored) {}
     }
+
+    /**
+     * Loads tasks from a file to RAM.
+     * @throws IOException
+     */
     public void loadFromFile() throws IOException {
         String home = System.getProperty("user.dir");
         Path dukeFolderPath = Paths.get(home, "data");
@@ -57,6 +69,12 @@ public class Storage {
         }
         dukeReader.close();
     }
+
+    /**
+     * Adds a task that the user inputs to the file and to RAM.
+     * @param currTask
+     * @throws IOException
+     */
     public void addTask(Task currTask) throws IOException {
         String home = System.getProperty("user.dir");
         Path dukeFilePath = Paths.get(home, "data", "duke.txt");
@@ -82,6 +100,12 @@ public class Storage {
         Files.write(dukeFilePath, newEntry.getBytes(), StandardOpenOption.APPEND); // don't need to close
         this.myTaskList.addTask(currTask);
     }
+
+    /**
+     * Deletes a task from RAM and the file
+     * @param taskNo
+     * @throws IOException
+     */
     public void deleteTask(int taskNo) throws IOException {
         String home = System.getProperty("user.dir");
         Path dukeFilePath = Paths.get(home, "data", "duke.txt");
@@ -104,6 +128,12 @@ public class Storage {
 
         this.myTaskList.deleteTask(taskNo);
     }
+
+    /**
+     * Changes completion of tasks in RAM and in the file.
+     * @param taskNo
+     * @throws IOException
+     */
     public void changeTaskCompletion(int taskNo) throws IOException {
         String home = System.getProperty("user.dir");
         Path dukeFilePath = Paths.get(home, "data", "duke.txt");

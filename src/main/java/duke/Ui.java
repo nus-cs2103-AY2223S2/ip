@@ -2,20 +2,41 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Ui { // handles I/O things
+/**
+ * Manages I/O functionality of Duke.
+ */
+public class Ui {
     Scanner myScanner;
     TaskList myTaskList;
 
+    /**
+     * Constructor for a Ui object.
+     * @param myTaskList
+     */
     public Ui(TaskList myTaskList) {
         this.myScanner = new Scanner(System.in);
         this.myTaskList = myTaskList;
     }
+
+    /**
+     * Scans for user input.
+     * @return string that user inputs
+     */
     public String getNextTask() {
         return this.myScanner.nextLine();
     }
+
+    /**
+     * Greets user with a custom greeting.
+     */
     public void greetUser() {
         System.out.println("  Insert ingenious greeting here");
     }
+
+    /**
+     * Prints a task to standard output.
+     * @param t any task
+     */
     private void printNewTask(Task t) {
         if (t instanceof Event) {
             System.out.println("  new event added!");
@@ -30,6 +51,11 @@ public class Ui { // handles I/O things
         System.out.println("  Now you have " + String.valueOf(this.myTaskList.countTasks()) +
                 " tasks in the list!");
     }
+
+    /**
+     * Prints a reply to standard output when the user does not enter a task.
+     * @param inputCommand What the user inputs
+     */
     public void printReply(String inputCommand) {
         switch (inputCommand) {
             case "list":
@@ -45,6 +71,10 @@ public class Ui { // handles I/O things
                 break;
         }
     }
+    /**
+     * Prints a reply to standard output given a command to add, mark or delete a task.
+     * @param inputCommand What the user inputs
+     */
     public void printReply(String inputCommand, Task currTask) throws EmptyDescriptionException {
         switch (inputCommand) {
             case "mark":

@@ -8,6 +8,11 @@ public class TaskList {
     public TaskList() {
         this.taskStore = new ArrayList<>();
     }
+
+    /**
+     * Gets the number of tasks in a TaskList.
+     * @return number of tasks
+     */
     public int countTasks() {
         return this.taskStore.size();
     }
