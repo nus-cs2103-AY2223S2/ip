@@ -1,7 +1,6 @@
 import java.util.Scanner;
 public class Sunday {
     private static State state;
-    private static Printer printer = new Printer();
     public static void main(String[] args) {
         greet();
         Scanner sc = new Scanner(System.in);
@@ -12,15 +11,15 @@ public class Sunday {
                 state = State.determine(command);
                 state.execute(input);
             } catch (SundayException e) {
-                printer.printException(e);
+                Printer.printException(e);
             }
         }
         sc.close();
     }
     private static void greet() {
-        printer.printBar();
-        printer.printText("Hi! I'm Sunday, pleasure to meet you!");
-        printer.printText("How can I help?");
-        printer.printBar();
+        Printer.printBar();
+        Printer.printText("Hi! I'm Sunday, pleasure to meet you!");
+        Printer.printText("How can I help?");
+        Printer.printBar();
     }
 }

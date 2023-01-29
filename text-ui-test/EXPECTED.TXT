@@ -4,7 +4,7 @@
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
-      [D][] Complete CS2103 Individual Project Week 2 (by: Friday 20/01/23, 11:59pm)
+      [D][] Complete CS2103 Individual Project Week 2 (by: Fri, Jan 20 2023, 11:59 PM)
     Now you have 1 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
@@ -14,14 +14,14 @@
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
-      [E][] DJ gig at Cherry Discotheque (from: Saturday 21/01/23, 10pm to: 4am)
+      [E][] DJ gig at Cherry Discotheque (from: Thu, Jan 21 0023, 10:00 PM to: Sat, Jan 21 2023, 4:00 AM)
     Now you have 3 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
     Here's everything I've noted down for you:
-    1. [D][] Complete CS2103 Individual Project Week 2 (by: Friday 20/01/23, 11:59pm)
+    1. [D][] Complete CS2103 Individual Project Week 2 (by: Fri, Jan 20 2023, 11:59 PM)
     2. [T][] check email for updates on NOC
-    3. [E][] DJ gig at Cherry Discotheque (from: Saturday 21/01/23, 10pm to: 4am)
+    3. [E][] DJ gig at Cherry Discotheque (from: Thu, Jan 21 0023, 10:00 PM to: Sat, Jan 21 2023, 4:00 AM)
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
@@ -50,9 +50,9 @@
     ____________________________________________________________
     ____________________________________________________________
     Here's everything I've noted down for you:
-    1. [D][] Complete CS2103 Individual Project Week 2 (by: Friday 20/01/23, 11:59pm)
+    1. [D][] Complete CS2103 Individual Project Week 2 (by: Fri, Jan 20 2023, 11:59 PM)
     2. [T][] check email for updates on NOC
-    3. [E][] DJ gig at Cherry Discotheque (from: Saturday 21/01/23, 10pm to: 4am)
+    3. [E][] DJ gig at Cherry Discotheque (from: Thu, Jan 21 0023, 10:00 PM to: Sat, Jan 21 2023, 4:00 AM)
     4. [T][] finalise DJ setlist
     5. [T][X] buy body soap and cleaning wipes
     ____________________________________________________________
@@ -68,8 +68,8 @@
     ____________________________________________________________
     ____________________________________________________________
     Here's everything I've noted down for you:
-    1. [D][] Complete CS2103 Individual Project Week 2 (by: Friday 20/01/23, 11:59pm)
-    2. [E][] DJ gig at Cherry Discotheque (from: Saturday 21/01/23, 10pm to: 4am)
+    1. [D][] Complete CS2103 Individual Project Week 2 (by: Fri, Jan 20 2023, 11:59 PM)
+    2. [E][] DJ gig at Cherry Discotheque (from: Thu, Jan 21 0023, 10:00 PM to: Sat, Jan 21 2023, 4:00 AM)
     3. [T][] finalise DJ setlist
     4. [T][X] buy body soap and cleaning wipes
     ____________________________________________________________

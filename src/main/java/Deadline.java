@@ -1,13 +1,24 @@
+import java.util.Date;
+import java.text.ParseException;
+
 public class Deadline extends Task{
-    private String deadline;
-    public Deadline(String description, String deadline) {
+    private Date deadline;
+    public Deadline(String description, String deadline) throws SundayException{
         super(description);
-        this.deadline = deadline;
+        try {
+            this.deadline = super.readFormat.parse(deadline);
+        } catch (ParseException e) {
+            Printer.printException(new SundayException(
+                    "OOPS! It appears the deadline given was not of the format dd/mm/yyyy hhmm"));
+        }
     }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("[D]" + super.toString() + " (by: " + this.deadline + ")");
+        sb.append("[D]");
+        sb.append(super.toString()).append(" (by: ");
+        sb.append(super.writeFormat.format(this.deadline));
+        sb.append(")");
         return sb.toString();
     }
 }

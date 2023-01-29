@@ -1,13 +1,13 @@
 public class Printer {
-    private String bar = "____________________________________________________________";
-    private String indent = "    ";
-    public void printBar() {
-        System.out.println(this.indent + this.bar);
+    private static String bar = "____________________________________________________________";
+    private static String indent = "    ";
+    public static void printBar() {
+        System.out.println(indent + bar);
     }
-    public void printText(String text) {
-        System.out.println(this.indent + text);
+    public static void printText(String text) {
+        System.out.println(indent + text);
     }
-    public void printException(SundayException e) {
+    public static void printException(SundayException e) {
         printBar();
         printText(e.getMessage());
         printBar();
