@@ -14,6 +14,20 @@ public class Event extends Task{
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof Event) {
+            Event other = (Event) obj;
+            return this.description.equals(other.description)
+                    && this.startDate.equals(other.startDate)
+                    && this.endDate.equals(other.endDate);
+        }
+        return false;
+    }
+
+    @Override
     public String getTaskType() {
         return "E";
     }

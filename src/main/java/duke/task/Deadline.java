@@ -15,6 +15,19 @@ public class Deadline extends Task{
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof Deadline) {
+            Deadline other = (Deadline) obj;
+            return this.description.equals(other.description)
+                    && this.dueDate.equals(other.dueDate);
+        }
+        return false;
+    }
+
+    @Override
     public String getTaskType() {
         return "D";
     }

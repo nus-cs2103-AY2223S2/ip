@@ -7,6 +7,18 @@ import duke.Ui;
  * A Command subclass for the list command.
  */
 public class ListCommand extends Command {
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof ListCommand) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void execute(Ui ui, TaskList list, String command) {
         StringBuilder output = new StringBuilder("Your current task list:\n");

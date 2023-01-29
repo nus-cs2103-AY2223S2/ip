@@ -26,6 +26,18 @@ public class TaskList {
         this.list = list;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof TaskList) {
+            TaskList other = (TaskList) obj;
+            return this.list.equals(other.list);
+        }
+        return false;
+    }
+
     /**
      * Adds a task to the list.
      * @param task Task to be added.

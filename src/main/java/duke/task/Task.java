@@ -44,6 +44,10 @@ public abstract class Task implements java.io.Serializable {
         return String.format("[%s][%s] %s", getTaskType(), getStatusIcon(), getDescription());
     }
 
+    /**
+     * Gets the type of task, as a String
+     * @return 'T' for ToDo; 'D' for Deadline; 'E' for Event.
+     */
     public abstract String getTaskType();
     public abstract String getDescription();
 }
