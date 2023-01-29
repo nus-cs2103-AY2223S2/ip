@@ -26,9 +26,11 @@ public class Parser {
      * @throws InvalidTimeException If the format of event or deadline is unrecognised.
      * @throws InvalidDateException If the date entered for event or deadline is unrecognised.
      */
-    public Command parse(String userCommands, TaskList commandList, Storage storage, Ui ui, File file)
-            throws InvalidCmdValueException, InvalidTaskTypeException, EmptyCommandException,
-            InvalidTimeException, InvalidDateException {
+
+    public Command parse(String userCommands, TaskList commandList,
+                         Storage storage, Ui ui, File file)
+            throws InvalidCmdValueException, InvalidTaskTypeException,
+            EmptyCommandException, InvalidTimeException, InvalidDateException {
         String[] strArray = userCommands.split(" ", 2);
         String action = strArray[0];
 
@@ -59,7 +61,8 @@ public class Parser {
      * @return The task type corresponding to the action.
      * @throws InvalidTaskTypeException If no such task type exists.
      */
-    public TaskTypes getTaskType(String action) throws InvalidTaskTypeException {
+    public TaskTypes getTaskType(String action)
+            throws InvalidTaskTypeException {
         if (action.equalsIgnoreCase("todo")) {
             return TaskTypes.TODO;
         } else if (action.equalsIgnoreCase("deadline")) {
@@ -82,8 +85,9 @@ public class Parser {
      * @throws InvalidTimeException If the format of event or deadline is unrecognised.
      * @throws InvalidDateException If the date entered for event or deadline is unrecognised.
      */
-    public Task getTask(TaskTypes type, String[] strArray) throws InvalidTaskTypeException,
-            EmptyCommandException, InvalidTimeException, InvalidDateException {
+    public Task getTask(TaskTypes type, String[] strArray)
+            throws InvalidTaskTypeException, EmptyCommandException,
+            InvalidTimeException, InvalidDateException {
         String command;
 
         if (strArray.length < 2 || strArray[1].trim().equals("")) {

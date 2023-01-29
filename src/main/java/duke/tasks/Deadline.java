@@ -21,7 +21,8 @@ public class Deadline extends Task {
      * @param deadline The date/time when the Deadline is due.
      * @throws InvalidDateException If the date is invalid.
      */
-    public Deadline(String command, String deadline) throws InvalidDateException {
+    public Deadline(String command, String deadline)
+            throws InvalidDateException {
         super(command);
         try {
             this.deadline = LocalDate.parse(deadline);

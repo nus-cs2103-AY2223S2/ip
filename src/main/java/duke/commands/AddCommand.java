@@ -25,7 +25,8 @@ public class AddCommand extends Command {
      * @param storage The storage to store the changes.
      * @param file The specified file to store the changes.
      */
-    public AddCommand(Ui ui, TaskList taskList, Task task, Storage storage, File file) {
+    public AddCommand(Ui ui, TaskList taskList, Task task,
+                      Storage storage, File file) {
         this.ui = ui;
         this.taskList = taskList;
         this.task = task;

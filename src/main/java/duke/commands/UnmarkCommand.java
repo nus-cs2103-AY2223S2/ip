@@ -26,8 +26,9 @@ public class UnmarkCommand extends Command {
      * @param storage The storage to store the changes.
      * @param file The specified file to store the changes.
      */
-    public UnmarkCommand(Ui ui, TaskList taskList, int index, Storage storage, File file) throws
-            InvalidCmdValueException {
+    public UnmarkCommand(Ui ui, TaskList taskList, int index,
+                         Storage storage, File file)
+            throws InvalidCmdValueException {
         if (index + 1 > taskList.getSize() || index < 0) {
             throw new InvalidCmdValueException();
         }

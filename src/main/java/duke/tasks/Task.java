@@ -26,7 +26,8 @@ public abstract class Task {
      * @param data The Storage String representing the Task.
      * @return The Task represented by the Storage String.
      */
-    public static Task dataToTask(String data) throws InvalidTaskTypeException, InvalidDateException {
+    public static Task dataToTask(String data)
+            throws InvalidTaskTypeException, InvalidDateException {
         Task task;
 
         //| is a metacharacter in regex. You'd need to escape it:

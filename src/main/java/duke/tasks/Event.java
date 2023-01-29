@@ -25,7 +25,9 @@ public class Event extends Task {
      * @param end The date/time when the Event is supposed to end
      * @throws InvalidDateException If the date is invalid.
      */
-    public Event(String command, String start, String end) throws InvalidDateException {
+
+    public Event(String command, String start, String end)
+            throws InvalidDateException {
         super(command);
         try {
             this.start = LocalDate.parse(start);
