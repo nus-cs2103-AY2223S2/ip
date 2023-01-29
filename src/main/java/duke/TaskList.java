@@ -6,14 +6,24 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/***
+ * The class containing the list of Tasks
+ */
 class TaskList {
     Ui userInterface = new Ui();
 
+    /**
+     * Print the bye message
+     */
     public void bye() {
         System.out.println("Bye. Hope to see you again soon!");
         System.exit(0);
     }
 
+    /***
+     * Display all the tasks containing in the tasks arraylist
+     * @param tasks an arraylist containing tasks type element
+     */
     public void showList(ArrayList<Task> tasks) {
         for (int i = 0; i < tasks.size(); i++) {
             int no = i + 1;
@@ -21,9 +31,15 @@ class TaskList {
         }
     }
 
+    /***
+     * Mark the task element icon
+     * @param taskArrayList an arraylist containing tasks type element
+     * @param index the task index
+     * @throws TaskNotExist throws an error if the index overflow or when the task does not exists
+     */
     public void mark(ArrayList<Task> taskArrayList, int index) throws TaskNotExist {
         index -= 1;
-        if (index >= taskArrayList.size()) {
+        if (index >= taskArrayList.size() || index <= -1) {
             throw new TaskNotExist();
         }
         userInterface.setMarkAsDone();
@@ -31,6 +47,12 @@ class TaskList {
         System.out.println(taskArrayList.get(index).toString());
     }
 
+    /***
+     * Unmark the task element icon
+     * @param taskArrayList an arraylist containing tasks type element
+     * @param index the task index
+     * @throws TaskNotExist throws an error if the index overflow or when the task does not exists
+     */
     public void unMark(ArrayList<Task> taskArrayList, int index) throws TaskNotExist {
         index -= 1;
         if (index >= taskArrayList.size()) {
@@ -41,6 +63,12 @@ class TaskList {
         System.out.println(taskArrayList.get(index).toString());
     }
 
+    /***
+     *
+     * @param taskArrayList an arraylist containing tasks type element
+     * @param description description of the task
+     * @throws MissingDescription throws an error when the task given does not contain description
+     */
     public void toDo(ArrayList<Task> taskArrayList, String description) throws MissingDescription {
         if (description == null) {
             throw new MissingDescription();
@@ -52,13 +80,19 @@ class TaskList {
         System.out.println("Now you have " + taskArrayList.size() + " task(s) in the list.");
     }
 
-    public void deadline(ArrayList<Task> taskArrayList, String inputType) throws MissingDescription {
+    /***
+     *
+     * @param taskArrayList an arraylist containing tasks type element
+     * @param description description of the task
+     * @throws MissingDescription throws an error when the task given does not contain description
+     */
+    public void deadline(ArrayList<Task> taskArrayList, String description) throws MissingDescription {
         try {
             DateStringConverter converter = new DateStringConverter();
-            if (!inputType.contains(" ")) {
+            if (!description.contains(" ")) {
                 throw new MissingDescription();
             }
-            String des = inputType.substring(inputType.indexOf(" ")).trim();
+            String des = description.substring(description.indexOf(" ")).trim();
             String[] deadline = des.split("/by");
             String[] timeExists = deadline[1].trim().split(" ");
             if (timeExists.length > 1) {
@@ -85,11 +119,17 @@ class TaskList {
         }
     }
 
-    public void event(ArrayList<Task> taskArrayList, String inputType) throws MissingDescription {
-        if (!inputType.contains(" ")) {
+    /***
+     *
+     * @param taskArrayList an arraylist containing tasks type element
+     * @param description description of the task
+     * @throws MissingDescription throws an error when the task given does not contain description
+     */
+    public void event(ArrayList<Task> taskArrayList, String description) throws MissingDescription {
+        if (!description.contains(" ")) {
             throw new MissingDescription();
         }
-        String des = inputType.substring(inputType.indexOf(" "));
+        String des = description.substring(description.indexOf(" "));
         String[] events = des.split("/");
         Event e = new Event(events[0].trim(), events[1].trim(), events[2].trim());
         taskArrayList.add(e);
@@ -99,14 +139,19 @@ class TaskList {
 
     }
 
-    public void delete(ArrayList<Task> taskArrayList, String inputType) {
+    /***
+     *
+     * @param taskArrayList an arraylist containing tasks type element
+     * @param description description of the task
+     */
+    public void delete(ArrayList<Task> taskArrayList, String description) {
         try {
             Storage storage = new Storage("./userRecords/duke.txt");
-            if (!inputType.contains(" ")) {
+            if (!description.contains(" ")) {
                 throw new DukeException("OOPS!! Please indicate the task index to delete!");
             }
 
-            String[] index = inputType.split(" ");
+            String[] index = description.split(" ");
             if (index[1].equalsIgnoreCase("all")) {
                 storage.deleteAll(taskArrayList);
                 System.out.println("Noted: I've removed all tasks");
@@ -126,9 +171,14 @@ class TaskList {
         }
     }
 
-    public void deadlineChecker(ArrayList<Task> taskArrayList, String inputType) {
+    /***
+     * To return a list of tasks by a given deadline
+     * @param taskArrayList an arraylist containing tasks type element
+     * @param description description of the tas
+     */
+    public void deadlineChecker(ArrayList<Task> taskArrayList, String description) {
         try {
-            String[] index = inputType.split("/");
+            String[] index = description.split("/");
             DateStringConverter converter = new DateStringConverter();
             LocalDate deadline = converter.convertDateInput(index[1].trim());
             ArrayList<Deadline> deadlineTasks = checkDeadlineTask(taskArrayList, deadline);
@@ -141,6 +191,12 @@ class TaskList {
         }
     }
 
+    /***
+     * To return a list of tasks before the deadline given
+     * @param tasks an arraylist containing the list of tasks
+     * @param date indicating the deadline date the user wants
+     * @return an arraylist of type deadline
+     */
     private ArrayList<Deadline> checkDeadlineTask(ArrayList<Task> tasks, LocalDate date) {
         ArrayList<Deadline> deadlineTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {

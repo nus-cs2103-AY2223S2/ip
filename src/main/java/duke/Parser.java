@@ -2,10 +2,20 @@ package duke;
 
 import java.util.ArrayList;
 
+/***
+ * The class handling all the user input
+ */
 public class Parser {
     Ui userInterface = new Ui();
     TaskList handler = new TaskList();
 
+    /***
+     *
+     * @param taskArrayList arraylist containing all the task
+     * @param inputType the user input of the type of tasks
+     * @return boolean type to allow the user know if a task was added into the list
+     * @throws DukeException when there is error in user input
+     */
     public boolean parserInput(ArrayList<Task> taskArrayList, String inputType) throws DukeException {
         String[] tokens = inputType.split("\\s+");
         if (tokens[0].equalsIgnoreCase("bye")) {
