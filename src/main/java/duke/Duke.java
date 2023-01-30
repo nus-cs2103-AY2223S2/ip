@@ -10,7 +10,7 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 /**
- * Represents Duke robot.
+ * Represents Duke application.
  */
 public class Duke {
 
@@ -18,6 +18,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath File path to initialise storage of Duke.
+     * @throws DukeException If loading of saved tasks fails.
+     */
     public Duke(String filePath) throws DukeException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -29,6 +35,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -48,6 +57,12 @@ public class Duke {
         ui.showGoodbye();
     }
 
+    /**
+     * Initialises Duke and runs it.
+     *
+     * @param args Args received.
+     * @throws DukeException If error occurs.
+     */
     public static void main(String[] args) throws DukeException {
         new Duke("src/main/java/duke/data/duke.txt").run();
     }

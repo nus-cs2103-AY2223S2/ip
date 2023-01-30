@@ -12,10 +12,17 @@ import duke.command.UnmarkCommand;
 import duke.data.exception.DukeException;
 
 /**
- * Parses command string and initialises the appropriate command
+ * Represents command parser.
  */
 public class Parser {
 
+    /**
+     * Parses given command, initialising appropriate command.
+     *
+     * @param fullCommand String of full command.
+     * @return Command initialised as appropriate.
+     * @throws DukeException If invalid commands.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] cmdDetails = fullCommand.split(" ", 2);
         String cmd = cmdDetails[0];
