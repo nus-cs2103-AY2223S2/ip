@@ -63,7 +63,13 @@ public class Duke {
                     Event newEvent = new Event(details, To, From);
                     lst.add(newEvent);
                     System.out.println("Got it. I've added this task:" + '\n' + newEvent + '\n' + "Now you have " + lst.size() + " tasks in the list");
-                } else {
+                } else if (action.equals("delete")) {
+                    String details = inputArr[1];
+                    int taskNum = Integer.parseInt(details);
+                    Task currTask = lst.get(taskNum - 1);
+                    lst.remove(taskNum - 1);
+                    System.out.println("Noted. I've removed this task:" + '\n' + currTask  + '\n' + "Now you have " + lst.size() + " tasks in the list");
+                }else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
