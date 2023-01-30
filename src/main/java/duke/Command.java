@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.*;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,6 +62,8 @@ public class Command {
             case "delete":
                 deleteTask(taskList);
                 break;
+            case "find":
+                findTasks(taskList);
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -194,5 +197,30 @@ public class Command {
     @Override
     public String toString(){
         return this.command + " " + this.args;
+    }
+
+    /**
+     * Finds and prints all string representation of task objects that contain
+     * specified word or phrase
+     * @param taskList {@code TaskList} object which keeps track of tasks
+     */
+    private void findTasks(TaskList taskList) {
+        List<String> descOfTasksFound = taskList.getDescMatches(this.args);
+        if (descOfTasksFound.size() <= 0) {
+            System.out.println(
+                    "_____________________________________\n"
+                    + "Sorry! No matches found!\n"
+                    + "_____________________________________\n"
+            );
+        } else {
+            System.out.println(
+                    "_____________________________________\n"
+                            + "Here are the matching tasks in your list:\n"
+            );
+            for (String desc : descOfTasksFound) {
+                System.out.println(desc);
+            }
+            System.out.println("_____________________________________\n");
+        }
     }
 }

@@ -185,4 +185,22 @@ public class TaskList {
             return this.storage.size() + " tasks ";
         }
     }
+
+    /**
+     * Iterates through all tasks and find tasks with matching keyword or
+     * key phrase
+     * @param argument key word or key phrase to find
+     * @return list of strings that contains key word or key phrase
+     */
+    public List<String> getDescMatches(String argument) {
+        List<String> descriptions = new ArrayList<>(100);
+        for (Task task: this.storage) {
+            if (task.toString().contains(argument)) {
+                descriptions.add(this.storage.indexOf(task) + " | "
+                        + task);
+            }
+        }
+
+        return descriptions;
+    }
 }
