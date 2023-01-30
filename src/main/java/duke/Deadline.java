@@ -1,5 +1,9 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 
 
@@ -16,14 +20,20 @@ public class Deadline extends Task {
         this.taskType = "D";
     }
 
+
+    public Deadline(String description, LocalDate by) {
+        super(description);
+        this.by = by.format(DateTimeFormatter.ofPattern("MMM d yyyy")).toString();
+    }
+
     public Deadline(Boolean isDone, String description, String by) {
         super(isDone, description);
         this.by = by;
-        this.taskType = "D";    }
+
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + this.by + ")";
     }
 
     
@@ -53,6 +63,44 @@ public class Deadline extends Task {
                
             String date = splitInput[splitInput.length-1];
             String desc = splitInput[1];
+
+
+            if(isDate(date)){
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+                LocalDate ld = LocalDate.parse(date, formatter);
+                Deadline d = new Deadline(desc, ld);
+                array.add(d);
+                System.out.println(divider);
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("     " + d.toString());
+                System.out.println("     Now you have " + array.size() + " tasks in the list.");
+                System.out.println(divider);
+            } else {
+                Deadline d = new Deadline(desc, date);
+                array.add(d);
+                System.out.println(divider);
+                System.out.println("     Got it. I've added this task:");
+                System.out.println("     " + d.toString());
+                System.out.println("     Now you have " + array.size() + " tasks in the list.");
+                System.out.println(divider);
+            }
+        }
+        
+    }
+    public static boolean isDate(String date) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+        LocalDate ld = null;
+        try {
+            ld = LocalDate.parse(date, formatter);
+            System.out.println(ld);
+        } catch (DateTimeParseException e) {
+            System.out.println("Date " + date + " is not a date.");
+            return false;
+    
+        }
+    
+
             Deadline d = new Deadline(desc, date);
             array.add(d);
             //Deadline.saveTaskData(d, 0);
