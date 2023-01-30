@@ -33,6 +33,8 @@ public class Parser {
             return new DeleteCommand(deleteIdx);
         case "guide":
             return new GuideCommand();
+        case "find":
+            return new FindCommand(content);
         default:
             return new UnknownCommand();
         }
