@@ -1,15 +1,15 @@
 package duke.command;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import duke.TaskList;
-import duke.command.Command;
 import duke.exceptions.DirectoryNotFoundException;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class MarkUndoneCommand extends Command {
 
@@ -19,7 +19,7 @@ public class MarkUndoneCommand extends Command {
         this.index = index;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage)throws FileNotFoundException,
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException,
             IllegalArgumentException, DukeException, DirectoryNotFoundException, IOException {
         Task marked = tasks.unmark(index);
         ui.unmark(marked);

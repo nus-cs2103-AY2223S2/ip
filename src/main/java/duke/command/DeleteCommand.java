@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.command.Command;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.ui.Ui;

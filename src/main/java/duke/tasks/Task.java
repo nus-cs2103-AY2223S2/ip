@@ -1,14 +1,16 @@
 package duke.tasks;
 
 public class Task {
+    protected static int counter = 0;
     protected String description;
     protected boolean isDone;
 
-    public static int counter = 0;
+
 
 
     /**
      * Constructor
+     *
      * @param description the entire description of the task
      */
     public Task(String description) {
@@ -26,6 +28,7 @@ public class Task {
 
     /**
      * Gets the type of the task
+     *
      * @return a string "task"
      */
     public String getType() {
@@ -33,9 +36,9 @@ public class Task {
     }
 
 
-
     /**
      * Gets the status of the task
+     *
      * @return a String representing whether task is done
      */
     public String getStatusIcon() {
@@ -44,6 +47,7 @@ public class Task {
 
     /**
      * Method to get the details of the task
+     *
      * @return a string description of the task
      */
     public String getDescription() {
@@ -66,6 +70,7 @@ public class Task {
 
     /**
      * Gets the type of task
+     *
      * @return a String representing event detail
      */
     public String getDetail() {
@@ -74,6 +79,7 @@ public class Task {
 
     /**
      * String representation of the type of the task
+     *
      * @return a string of task details
      */
     @Override
@@ -83,6 +89,7 @@ public class Task {
 
     /**
      * Gets the time of task
+     *
      * @return a String representing time
      */
     public String getTime() {

@@ -1,17 +1,20 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.TaskList;
 import duke.tasks.Task;
 
+
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Ui {
 
     public static void showWelcome() {
         System.out.println("------------------------------------------------------------------------------");
-        System.out.println("Hello! I'm duke.Duke\n" +
-                "What can I do for you?");
+        System.out.println("Hello! I'm duke.Duke\n"
+            + "What can I do for you?");
         System.out.println("------------------------------------------------------------------------------");
     }
 
@@ -20,7 +23,7 @@ public class Ui {
     }
 
     public static String readCommand() {
-        Scanner sc= new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String cur = sc.nextLine();
         return cur;
     }
@@ -50,26 +53,28 @@ public class Ui {
         System.out.println("------------------------------------------------------------------------------");
     }
 
-    public static void DirectoryExceptionUi() {
-        System.out.println("____________________________________________________________\n" +
-                "   OOPS!!! Directory not found, please create the directory \"data\" first\n" +
-                "____________________________________________________________");
+    public static void directoryExceptionUi() {
+        System.out.println("____________________________________________________________\n"
+            + "   OOPS!!! Directory not found, please create the directory \"data\" first\n"
+            + "____________________________________________________________");
     }
 
-    public static void FileExceptionUi() {
-        System.out.println("____________________________________________________________\n" +
-                "   OOPS!!! File not found, please create the file \"duke.txt\" first\n" +
-                "____________________________________________________________");
+    public static void fileExceptionUi() {
+        System.out.println("____________________________________________________________\n"
+            + "   OOPS!!! File not found, please create the file \"duke.txt\" first\n"
+            + "____________________________________________________________");
+
     }
 
     public static void showError(String error) {
         if (!error.equals("wrong")) {
             System.out.println(error);
-        }
-        else {
-            System.out.println("____________________________________________________________\n" +
-                    "   OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                    "____________________________________________________________");
+
+        } else {
+            System.out.println("____________________________________________________________\n"
+                + "   OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                + "____________________________________________________________");
+
         }
     }
 
