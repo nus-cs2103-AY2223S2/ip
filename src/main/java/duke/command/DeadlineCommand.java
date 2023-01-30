@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class DeadlineCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList list, String command) throws DukeException {
-        String[] parts = command.split("\\s+");
+        String[] parts = command.split(Values.SPACEX);
         int byIndex = Parser.indexOf(parts, "/by");
 
         // Get name of task.

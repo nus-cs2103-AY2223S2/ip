@@ -13,7 +13,7 @@ import duke.Values;
 public class TodoCommand extends Command{
     @Override
     public void execute(Ui ui, TaskList list, String command) throws DukeException {
-        String[] parts = command.split("\\s+");
+        String[] parts = command.split(Values.SPACEX);
         if (parts.length == 1) {
             throw new DukeException("ToDo description cannot be empty.");
         }
