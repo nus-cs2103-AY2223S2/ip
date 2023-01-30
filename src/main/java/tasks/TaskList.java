@@ -68,10 +68,10 @@ public class TaskList {
         StringBuilder result = new StringBuilder();
         result.append("List of Tasks: \n");
         for (int i = 0; i < taskList.size(); i++) {
-            result.append((i + 1));
-            result.append(". ");
-            result.append(taskList.get(i).toString());
-            result.append("\n");
+            result.append((i + 1))
+                    .append(". ")
+                    .append(taskList.get(i).toString())
+                    .append("\n");
         }
         return result.toString();
     }
