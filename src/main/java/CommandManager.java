@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 
 public class CommandManager {
 
@@ -71,7 +73,10 @@ public class CommandManager {
 
     public static void addDeadline(String input, ArrayList<Task> storedTask, int taskCounter) {
         String[] newInput = input.split("/");
-        storedTask.add(taskCounter, new Deadline(newInput[0], newInput[1]));
+        String date = newInput[1] + "/" +  newInput[2]  + "/"  + newInput[3];
+        System.out.println(Arrays.toString(newInput));
+        System.out.println(date);
+        storedTask.add(taskCounter, new Deadline(newInput[0], date));
         taskCounter++;
         System.out.println("Gotchu fam");
         System.out.printf("I've added\n" + storedTask.get(taskCounter-1).toString() +
@@ -82,7 +87,9 @@ public class CommandManager {
 
     public static void addEvent(String input, ArrayList<Task> storedTask, int taskCounter) {
         String[] newInput = input.split("/");
-        storedTask.add(taskCounter, new Event(newInput[0], newInput[1], newInput[2]));
+        String date1 = newInput[1]  + "/" +  newInput[2]  + "/" +  newInput[3];
+        String date2 = newInput[4]  + "/" +  newInput[5]  + "/" +  newInput[6];
+        storedTask.add(taskCounter, new Event(newInput[0], date1, date2));
         taskCounter++;
         System.out.println("Gotchu fam");
         System.out.printf("I've added\n" + storedTask.get(taskCounter-1).toString() +
@@ -106,6 +113,8 @@ public class CommandManager {
         System.out.println("Hope you have a better life now");
         return;
     }
+
+
 
 
 }
