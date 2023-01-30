@@ -7,14 +7,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import javax.xml.stream.events.Comment;
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke(String filePath, String folderPath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, folderPath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -25,22 +27,20 @@ public class Duke {
 
     public void run() {
         ui.welcome();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            ui.handleInput(sc.nextLine(), tasks);
-            if (ui.userSaidBye()) {
-                sc.close();
-                break;
-            }
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                storage.update(tasks);
-            } catch (IOException e) {
-                System.out.println("local update failed: " + e.getMessage());
+                String inputLine = ui.readCommand();
+                Command c = Parser.parse(inputLine);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
     }
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("data/tasks.txt", "data").run();
     }
 }
 
@@ -58,11 +58,18 @@ class Ui {
         System.out.println(welcomeMessage);
     }
 
+    public String readCommand() {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        // sc.close();
+        return input;
+    }
+
     public void showLoadingError() {
-        printToFormat("Sorry, default tasks could not be loaded, starting a fresh task list");
+        this.printToFormat("Sorry, default tasks could not be loaded, starting a fresh task list");
     }
     
-    private static void printToFormat(String message) {
+    public void printToFormat(String message) {
         String lineBreak1 = "-->-->-->-->-->-->-->-->-->-->-->\n    ";
         String lineBreak2 = "\n<--<--<--<--<--<--<--<--<--<--\n\n";
         System.out.println(lineBreak1 + message + lineBreak2);
@@ -71,103 +78,48 @@ class Ui {
     public boolean userSaidBye() {
         return byeIndicator;
     }
-
-    public void handleInput(String inputLine, TaskList tasks) {
-        try {
-            /**
-             * @param inputLine: a String that is the command entered by the user
-             * @param words[]: an array whose elements are from inputline separated by
-             * a space. used to determine which command is entered
-             */
-            DukeException.checkInput(inputLine);
-            String words[] = inputLine.split(" ");
-            Command command = Command.valueOf(words[0].toUpperCase());
-            switch (command) {
-                case BYE:
-                    printToFormat("    Bye, have a nice day!");
-                    this.byeIndicator = true;
-                    break;
-                case LIST:
-                    printToFormat(tasks.toString());
-                    break;
-                case MARK:
-                /**
-                 * change the specified task's status to "[X]"
-                 */
-                    int taskNoMark = Integer.parseInt(words[1]);
-                    try {
-                        printToFormat("Marked ask completed:\n   " + tasks.mark(taskNoMark));
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
-                    break;
-                case UNMARK:
-                /**
-                 * changed the specified task's staus to "[ ]"
-                 */
-                    int taskNoUnmark = Integer.parseInt(words[1]);
-                    try {
-                        printToFormat("Marked ask completed:\n   " + tasks.mark(taskNoUnmark));
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
-                    break;
-                case DEADLINE:
-                /**
-                 * creates and adds a deadline task to the arraylist of all tasks
-                 */
-                    String[] parts = inputLine.split("/");
-                    Deadline task = new Deadline(parts[0].split(" ", 2)[1], 0, parts[1]);
-                    tasks.add(task);
-                    printToFormat("    Successfully added the following task:\n    " + task);
-                    break;
-                case EVENT:
-                /**
-                 * creates and adds an event task to the arraylist of all tasks
-                 */
-                    String[] parts1 = inputLine.split(" /");
-                    Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
-                    tasks.add(event);
-                    printToFormat("    Successfully added the following task:\n    " + event);
-                    break;
-                case TODO:
-                /**
-                 * creates and adds a todo task to the arraylist of all tasks
-                 */
-                    Todo todo = new Todo(inputLine.split(" ", 2)[1], 0);
-                    tasks.add(todo);
-                    printToFormat("    Successfully added the following task:\n    " + todo);
-                    break;
-                case DELETE:
-                /**
-                 * removes the task at the specified index
-                 */
-                    printToFormat("    The following task is removed:\n    " + tasks.remove(Integer.parseInt(words[1])));
-                    break;
-                }
-        } catch (DukeException e) {
-            /**
-             * prints out the error message if an error is caught
-             */
-            printToFormat("    " + e.getMessage());
-        }
-    } 
 }
 
 class Storage {
-    private File defaultTasks;
+    private File allTasks;
+    private File taskFolder;
 
-    Storage(String filePath) {
-        this.defaultTasks = new File(filePath);
+    Storage(String filePath, String folderPath) {
+        this.allTasks = new File(filePath);
+        this.taskFolder = new File(folderPath);
     }
 
     public ArrayList<Task> load() throws DukeException {
-        
-        try {
-            return loadDefaultTasks(new ArrayList<Task>(), defaultTasks);
-        } catch (FileNotFoundException e) {
-            throw new DukeException("Default Tasks not found");
+        ArrayList<Task> defaultTasks = new ArrayList<>();
+        if (!taskFolder.exists()) {
+            System.out.println("---The default Task Folder is not found, creating data folder with task file...");
+            taskFolder.mkdir();
+            System.out.println("---Task Folder created successfully");
+            File f = new File(taskFolder, "task.txt");
+            try {
+                f.createNewFile();
+                System.out.printf("---Task File created successfully\n---ready to create tasks\n");
+            } catch (IOException e) {
+                System.out.println("Error creating file: " + e.getMessage());
+            }
+        } else if (!allTasks.exists()) {
+            System.out.println("The default tasks do not exist, creating default task file...");
+            File f = new File(taskFolder, "task.txt");
+            try {
+                f.createNewFile();
+                System.out.printf("---Task File created successfully\n---ready to create tasks\n");
+            } catch (IOException e) {
+                System.out.println("Error creating file: " + e.getMessage());
+            }
+        } else {
+            try {
+                defaultTasks = loadDefaultTasks(new ArrayList<Task>(), allTasks);
+            } catch (FileNotFoundException e) {
+                System.out.println("Could not load the default tasks: " + e.getMessage());
+            }
+            System.out.println("\n\n---Default Task List successfully loaded\n\n");
         }
+        return defaultTasks;
     }
 
     private static ArrayList<Task> loadDefaultTasks(ArrayList<Task> tasks, File file) throws FileNotFoundException {
@@ -191,7 +143,7 @@ class Storage {
     }
 
     public void update(TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter(this.defaultTasks);
+        FileWriter fw = new FileWriter(this.allTasks);
         fw.write(tasks.getWriteString());
         fw.close();
     }
@@ -303,20 +255,189 @@ class TaskList {
     public String toStoreFormatString() {
         return "";
     }
-    protected static LocalDateTime formatDateTime(String input) {
+}
+
+class Parser {
+    public static Command parse(String inputLine) throws DukeException {    
+        try {
+            /**
+             * @param inputLine: a String that is the command entered by the user
+             * @param words[]: an array whose elements are from inputline separated by
+             * a space. used to determine which command is entered
+             */
+            DukeException.checkInput(inputLine);
+            String words[] = inputLine.split(" ");
+            CommandType commandtype = CommandType.valueOf(words[0].toUpperCase());
+            switch (commandtype) {
+                case BYE:
+                    return new ByeCommand();
+                case LIST:
+                    return new ListCommand();
+                case MARK:
+                /**
+                 * change the specified task's status to "[X]"
+                 */
+                    int taskNoMark = Integer.parseInt(words[1]);
+                    return new MarkCommand(taskNoMark);
+                case UNMARK:
+                /**
+                 * changed the specified task's staus to "[ ]"
+                 */
+                    int taskNoUnmark = Integer.parseInt(words[1]);
+                    return new UnmarkCommand(taskNoUnmark);
+                case DEADLINE:
+                /**
+                 * creates and adds a deadline task to the arraylist of all tasks
+                 */
+                    String[] parts = inputLine.split("/");
+                    Deadline task = new Deadline(parts[0].split(" ", 2)[1], 0, parts[1]);
+                    return new AddCommand(task);
+                case EVENT:
+                /**
+                 * creates and adds an event task to the arraylist of all tasks
+                 */
+                    String[] parts1 = inputLine.split(" /");
+                    Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
+                    return new AddCommand(event);
+                case TODO:
+                /**
+                 * creates and adds a todo task to the arraylist of all tasks
+                 */
+                    Todo todo = new Todo(inputLine.split(" ", 2)[1], 0);
+                    return new AddCommand(todo);
+                case DELETE:
+                /**
+                 * removes the task at the specified index
+                 */
+                    return new DeleteCommand(Integer.parseInt(words[1]));
+                default:
+                    throw new DukeException("Not a valid command: " + inputLine);
+                }
+        } catch (DukeException e) {
+            /**
+             * prints out the error message if an error is caught
+             */
+            throw e;
+        }
+    }
+
+    public static LocalDateTime formatDateTime(String input) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         LocalDateTime dateTime = LocalDateTime.parse(input, formatter);
         return dateTime;
     }
 
-    protected static String reverseFormatDateTime(LocalDateTime input) {
+    public static String reverseFormatDateTime(LocalDateTime input) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         return input.format(formatter);
     }
 
-    protected static String TransformDateTime(LocalDateTime dateTime) {
+    public static String TransformDateTime(LocalDateTime dateTime) {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy 'at' HH:mm");
         return dateTime.format(outputFormatter);
+    }
+}
+
+abstract class Command {    
+    abstract void execute(TaskList tasks, Ui ui, Storage storage);
+
+    public boolean isExit() {
+        return false;
+    }
+}
+
+class AddCommand extends Command {
+    private Task task;
+
+    AddCommand(Task task) {
+        this.task = task;
+    }
+
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        tasks.add(task);
+        ui.printToFormat("Task successfully added:\n    " + task);
+        try {
+            storage.update(tasks);
+        } catch (IOException e) {
+            System.out.println("failed to update tasks locally: " + e.getMessage());
+        }
+    }
+}
+
+class DeleteCommand extends Command {
+    private int taskNo;
+
+    DeleteCommand(int n) {
+        this.taskNo = n;
+    }
+    
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            ui.printToFormat("The following task is removed:\n    " + tasks.remove(taskNo));
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            storage.update(tasks);
+        } catch (IOException e) {
+            System.out.println("failed to update tasks locally: " + e.getMessage());
+        }
+    }
+}
+
+class ListCommand extends Command {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.printToFormat(tasks.toString());
+    }
+}
+
+class MarkCommand extends Command {
+    private int taskNo;
+
+    MarkCommand(int n) {
+        this.taskNo = n;
+    }
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            ui.printToFormat("Marked as completed:\n    " + tasks.mark(taskNo));
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            storage.update(tasks);
+        } catch (IOException e) {
+            System.out.println("failed to update tasks locally: " + e.getMessage());
+        }
+    }
+}
+
+class UnmarkCommand extends Command {
+    private int taskNo;
+
+    UnmarkCommand(int n) {
+        this.taskNo = n;
+    }
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            ui.printToFormat("Marked as yet to complete:\n    " + tasks.unmark(taskNo));
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            storage.update(tasks);
+        } catch (IOException e) {
+            System.out.println("failed to update tasks locally: " + e.getMessage());
+        }
+    }
+}
+
+class ByeCommand extends Command {
+    @Override
+    public boolean isExit() {
+        return true;
+    }
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.printToFormat("Bye, have a nice day.");
     }
 }
 /**
@@ -332,7 +453,7 @@ class Deadline extends Task {
      */
     Deadline (String name, int status, String dlString) {
         super(name, status);
-        this.deadline = formatDateTime(dlString);
+        this.deadline = Parse.formatDateTime(dlString);
     }
 
     private int getStatusNo() {
@@ -346,11 +467,11 @@ class Deadline extends Task {
      * overrides the toString method
      */
     public String toString() {
-        return "[D]" + status + " " + name + "(by " + TransformDateTime(deadline) + ")";
+        return "[D]" + status + " " + name + "(by " + Parse.TransformDateTime(deadline) + ")";
     }
     
     public String toStoreFormatString() {
-        return String.format("D/%s/%d/%s", super.name, this.getStatusNo(), reverseFormatDateTime(deadline));
+        return String.format("D/%s/%d/%s", super.name, this.getStatusNo(), Parse.reverseFormatDateTime(deadline));
     }
 }
 
@@ -366,8 +487,8 @@ class Event extends Task {
      */
     Event(String name, int status, String from, String to) {
         super(name, status);
-        this.from = formatDateTime(from);
-        this.to = formatDateTime(to);
+        this.from = Parse.formatDateTime(from);
+        this.to = Parse.formatDateTime(to);
     }
 
     private int getStatusNo() {
@@ -382,12 +503,12 @@ class Event extends Task {
      * overrrides toString method
      */
     public String toString() {
-        return String.format("[E]%s %s (from %s to %s)", status, name, TransformDateTime(from), 
-        TransformDateTime(to));
+        return String.format("[E]%s %s (from %s to %s)", status, name, Parse.TransformDateTime(from), 
+        Parse.TransformDateTime(to));
     }
     
     public String toStoreFormatString() {
-        return String.format("E/%s/%d/%s/%s", super.name, this.getStatusNo(), reverseFormatDateTime(from), reverseFormatDateTime(to));
+        return String.format("E/%s/%d/%s/%s", super.name, this.getStatusNo(), Parse.reverseFormatDateTime(from), Parse.reverseFormatDateTime(to));
     }
 }
 
@@ -447,6 +568,6 @@ class DukeException extends Exception {
 /**
  * a list of valid Commands as enum
  */
-enum Command {
+enum CommandType {
     BYE, LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT
 }
