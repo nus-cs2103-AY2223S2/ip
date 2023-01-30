@@ -156,6 +156,7 @@
     -->
     <module name="ArrayTypeStyle"/>
 
+
     <!-- Checks if a catch block is empty and does not contain any comments. -->
     <module name="EmptyCatchBlock"/>
 

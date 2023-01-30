@@ -11,8 +11,14 @@ import duke.Task;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * The class to test MarkCommand class.
+ */
 public class MarkCommandTest {
 
+    /**
+     * The test method to test the execute method.
+     */
     @Test
     public void executeTest() {
         Ui ui = new Ui();
