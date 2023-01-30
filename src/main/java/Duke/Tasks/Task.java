@@ -1,20 +1,20 @@
-package Tasks;
+package Duke.Tasks;
 
 public class Task {
     protected String description;
-    protected boolean done;
+    protected boolean isComplete;
 
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isComplete = false;
     }
 
     public void markDone() {
-        this.done = true;
+        this.isComplete = true;
     }
 
     public void markNotDone() {
-        this.done = false;
+        this.isComplete = false;
     }
 
     public String getDescription() {
@@ -22,7 +22,12 @@ public class Task {
     }
 
     public String getTaskStatus() {
-        return done ? "X" : " ";
+        return isComplete ? "X" : " ";
+    }
+
+
+    public String printTask() {
+        return String.format("NA | %d | %s ", isComplete ? 1 : 0, description);
     }
 
     @Override

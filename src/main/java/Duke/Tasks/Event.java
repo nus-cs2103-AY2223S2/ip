@@ -1,4 +1,4 @@
-package Tasks;
+package Duke.Tasks;
 
 public class Event extends Task {
     protected String startingTime;
@@ -7,6 +7,11 @@ public class Event extends Task {
         super(description);
         this.startingTime = startingTime;
         this.endingTime = endingTime;
+    }
+
+    @Override
+    public String printTask() {
+        return String.format("E | %d | %s | %s-%s ", isComplete ? 1 : 0, description, startingTime, endingTime);
     }
 
     @Override

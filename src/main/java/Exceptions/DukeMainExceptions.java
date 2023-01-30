@@ -7,6 +7,6 @@ public class DukeMainExceptions extends RuntimeException{
 
     @Override
     public String toString() {
-        return "☹ OOPS!!! " + super.getMessage();
+        return "OOPS!!! " + super.getMessage();
     }
 }

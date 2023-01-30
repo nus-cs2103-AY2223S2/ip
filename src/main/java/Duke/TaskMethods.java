@@ -1,7 +1,9 @@
-import Tasks.Task;
-import Tasks.Deadline;
-import Tasks.Todo;
-import Tasks.Event;
+package Duke;
+
+import Duke.Tasks.Task;
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Todo;
+import Duke.Tasks.Event;
 import Exceptions.NoDescriptionException;
 import Exceptions.NoDeadlineException;
 
@@ -135,12 +137,6 @@ public class TaskMethods {
         System.out.println("\t--------------------------");
         System.out.println("\tOK, I've marked this task as not done yet:");
         System.out.println("\t\t" + currTask.toString());
-        System.out.println("\t--------------------------");
-    }
-
-    public void bye() {
-        System.out.println("\t--------------------------");
-        System.out.println("\tBye. Hope to see you again soon!");
         System.out.println("\t--------------------------");
     }
 

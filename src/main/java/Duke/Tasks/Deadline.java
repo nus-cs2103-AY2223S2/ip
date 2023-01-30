@@ -1,4 +1,4 @@
-package Tasks;
+package Duke.Tasks;
 
 public class Deadline extends Task {
 
@@ -6,6 +6,11 @@ public class Deadline extends Task {
     public Deadline(String description, String dueDate) {
         super(description);
         this.dueDate = dueDate;
+    }
+
+    @Override
+    public String printTask() {
+        return String.format("D | %d | %s | %s ", isComplete ? 1 : 0, description, dueDate);
     }
 
     @Override
