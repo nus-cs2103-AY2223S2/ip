@@ -42,4 +42,15 @@ public class TaskList {
     public int size() {
         return list.size();
     }
+
+    public TaskList find(String input) {
+        ArrayList<Task> newTaskList = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).toString().contains(input)) {
+                newTaskList.add(list.get(i));
+            }
+        }
+        return new TaskList(newTaskList);
+    }
 }
