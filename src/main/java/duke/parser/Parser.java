@@ -22,9 +22,7 @@ public class Parser {
 
     }
 
-    public Parser() {
 
-    }
 
     public static Command parse(String fullCommand) throws UnknownCommandException, EmptyDescException {
         try {
@@ -35,8 +33,9 @@ public class Parser {
 
             switch (command) {
                 case TODO:
-                    if (inputArr.length == 1)
+                    if (inputArr.length == 1) {
                         throw new EmptyDescException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
                     for (int i = 1; i < inputArr.length; i++) {
                         sb.append(inputArr[i]);
                         if (i != inputArr.length - 1) {
@@ -46,8 +45,9 @@ public class Parser {
                     Todo todo = new Todo(sb.toString().trim());
                     return new TodoCommand(todo);
                 case DEADLINE:
-                    if (inputArr.length == 1)
+                    if (inputArr.length == 1) {
                         throw new EmptyDescException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
                     for (int i = 1; i < inputArr.length; i++) {
                         if (inputArr[i].equals("/by")) {
                             desc = sb.toString();
@@ -63,8 +63,9 @@ public class Parser {
                     Deadline deadline = new Deadline(desc, dateTime[0], dateTime[1]);
                     return new DeadlineCommand(deadline);
                 case EVENT:
-                    if (inputArr.length == 1)
+                    if (inputArr.length == 1) {
                         throw new EmptyDescException("☹ OOPS!!! The description of an event cannot be empty.");
+                    }
                     String from = "local variable not initialised";
                     for (int i = 1; i < inputArr.length; i++) {
                         if (inputArr[i].equals("/from")) {
