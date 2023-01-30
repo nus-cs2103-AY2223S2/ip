@@ -1,2 +1,0 @@
-[ ] Todo : run
-[X] Deadline : no more date with claris [ Feb 11 2023 ]
