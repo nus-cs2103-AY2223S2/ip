@@ -21,7 +21,7 @@ public class UiTest {
     @Test
     void testPrintln() {
         String expected = "test println";
-        ui.println(expected);
+        ui.printConsole(expected);
         assertEquals(expected + "\n", outContent.toString());
     }
 

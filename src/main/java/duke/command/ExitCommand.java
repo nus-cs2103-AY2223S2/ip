@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
     @Override
     public void execute(DukeRepo db, Ui ui) {
         db.close();
-        ui.println(Message.BYE);
+        ui.printConsole(Message.BYE);
     }
 
     /**

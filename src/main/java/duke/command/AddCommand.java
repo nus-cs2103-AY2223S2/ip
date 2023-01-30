@@ -70,9 +70,9 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(DukeRepo db, Ui ui) throws InvalidTaskTypeException {
-        ui.println(Message.ADD_TASK);
-        ui.println("\t" + db.addTask(getTask()));
-        ui.println(String.format(Message.COUNT_TASK, db.count()));
+        ui.printConsole(Message.ADD_TASK);
+        ui.printConsole("\t" + db.addTask(getTask()));
+        ui.printConsole(String.format(Message.COUNT_TASK, db.count()));
     }
 
     /**

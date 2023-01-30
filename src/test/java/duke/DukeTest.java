@@ -31,7 +31,7 @@ public class DukeTest {
         duke.run();
         ui.showWelcome();
         ui.showLine();
-        ui.println(Message.BYE);
+        ui.printConsole(Message.BYE);
         ui.showLine();
         assertEquals(outUiContent.toString(), outDukeContent.toString());
     }
