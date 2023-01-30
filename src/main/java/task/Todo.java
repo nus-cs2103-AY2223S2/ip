@@ -1,4 +1,6 @@
-import java.io.Serializable;
+package task;
+
+import task.Task;
 
 public class Todo extends Task {
 
