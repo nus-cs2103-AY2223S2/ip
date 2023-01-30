@@ -20,7 +20,7 @@ public class Deadline extends Task {
      * @param description Description of Deadline.
      * @param by Due date of Deadline.
      * @param isDone Completetion status of Deadline.
-     * @throws DukeException if duke input format cannot by parse by LocalDate.
+     * @throws DukeException if duke input format cannot be parsed by LocalDate.
      */
 
     public Deadline(String description, String by, boolean isDone) throws DukeException {

@@ -17,7 +17,7 @@ public class DeadlineCommand extends Command {
      * Contructor for DeadlineCommand
      *
      * @param description Description of deadline.
-     * @param by          Due date of deadline.
+     * @param by Due date of deadline.
      */
     public DeadlineCommand(String description, String by) {
         super(false);
@@ -28,9 +28,9 @@ public class DeadlineCommand extends Command {
     /**
      * Adds a deadline task into the tasklist.
      *
-     * @param task    Tasklist containing the list of tasks.
+     * @param task Tasklist containing the list of tasks.
      * @param storage Saves tasks into the file locally.
-     * @param ui      Deals with interactions with user.
+     * @param ui Deals with interactions with user.
      * @throws DukeException if command cannot be recognised.
      */
     @Override

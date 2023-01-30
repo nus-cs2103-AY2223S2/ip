@@ -10,7 +10,7 @@ import duke.Ui;
  */
 public class ByeCommand extends Command {
     /**
-     * Contructor for ByeCommand.
+     * Constructor for ByeCommand.
      */
     public ByeCommand() {
         super(true);
@@ -19,9 +19,9 @@ public class ByeCommand extends Command {
     /**
      * Displays bye message to user.
      *
-     * @param task    Tasklist containing the list of tasks.
+     * @param task Tasklist containing the list of tasks.
      * @param storage Saves tasks into the file locally.
-     * @param ui      Deals with interactions with user.
+     * @param ui Deals with interactions with user.
      * @throws DukeException if command cannot be recognised.
      */
     @Override

@@ -16,9 +16,9 @@ public class ListCommand extends Command {
     /**
      * Shows the list of tasks in the task list to user.
      *
-     * @param task    Task list containing the list of tasks.
+     * @param task Task list containing the list of tasks.
      * @param storage Saves tasks into the file locally.
-     * @param ui      Deals with interactions with user.
+     * @param ui Deals with interactions with user.
      * @throws DukeException if duke does not recognise command.
      */
     @Override
