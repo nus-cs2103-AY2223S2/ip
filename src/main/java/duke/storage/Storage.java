@@ -5,7 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * Class for handling storing of tasks.
