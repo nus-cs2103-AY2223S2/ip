@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import util.*;
@@ -57,5 +60,19 @@ public class Event extends Task {
         }
         
     }
+    public static boolean isDate(String date) {
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+        LocalDate ld = null;
+        try {
+            ld = LocalDate.parse(date, formatter);
+            System.out.println(ld);
+        } catch (DateTimeParseException e) {
+            System.out.println("Date " + date + " is not a date.");
+            return false;
+    
+        }
+    
+        return true;
+    }
 }

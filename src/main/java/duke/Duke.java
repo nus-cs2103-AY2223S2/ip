@@ -1,6 +1,4 @@
 package duke;
-import util.*;
-
 import java.util.Scanner;
 
 
