@@ -11,17 +11,20 @@ public class Parser {
 	 * @param tasks List of tasks.
 	 * @param taskType Type of task.
 	 * @param descriptions The descriptions of the task.
+	 * @return Message containing task result.
 	 */
-	protected static void parseInput(TaskList tasks, String taskType, String[] descriptions) {
+	protected static String parseInput(TaskList tasks, String taskType, String[] descriptions) {
+		String output = "";
+
 		switch (taskType) {
 		case "list":
-			tasks.listTasks();
+			output = tasks.listTasks();
 			break;
 		case "mark":
-			tasks.markTask(tasks.getTask(Integer.parseInt(descriptions[1]) - 1));
+			output = tasks.markTask(tasks.getTask(Integer.parseInt(descriptions[1]) - 1));
 			break;
 		case "unmark":
-			tasks.unmarkTask(tasks.getTask(Integer.parseInt(descriptions[1]) - 1));
+			output = tasks.unmarkTask(tasks.getTask(Integer.parseInt(descriptions[1]) - 1));
 			break;
 		case "todo":
 			try {
@@ -29,9 +32,9 @@ public class Parser {
 					throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
 				}
 
-				tasks.addTask(new ToDo(descriptions[1]));
+				output = tasks.addTask(new ToDo(descriptions[1]));
 			} catch (DukeException error) {
-				Ui.errorMsg(error.getMessage());
+				output = Ui.errorMsg(error.getMessage());
 			}
 			break;
 		case "deadline":
@@ -42,9 +45,9 @@ public class Parser {
 					throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
 				}
 
-                tasks.addTask(new Deadline(deadlineDescription[0], deadlineDescription[1]));
+				output = tasks.addTask(new Deadline(deadlineDescription[0], deadlineDescription[1]));
             } catch (DukeException error) {
-                Ui.errorMsg(error.getMessage());
+				output = Ui.errorMsg(error.getMessage());
             }
             break;
         case "event":
@@ -55,21 +58,23 @@ public class Parser {
                     throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
                 }
 
-				tasks.addTask(new Event(eventDescription[0], eventDescription[1], eventDescription[2]));
+				output = tasks.addTask(new Event(eventDescription[0], eventDescription[1], eventDescription[2]));
 			} catch (DukeException e) {
-				Ui.errorMsg(e.getMessage());
+				output = Ui.errorMsg(e.getMessage());
 			}
 			break;
 		case "delete":
-			tasks.removeTask(Integer.parseInt(descriptions[1]) - 1);
+			output = tasks.removeTask(Integer.parseInt(descriptions[1]) - 1);
 			break;
         case "find":
 			TaskList filteredTasks = new TaskList(tasks.filteredTaskList(descriptions[1]));
-			filteredTasks.listTasks();
+			output = filteredTasks.listTasks();
 			break;
 		default:
-			Ui.unknownInputMsg();
+			output = Ui.unknownInputMsg();
 			break;
 		}
+
+		return output;
 	}
 }

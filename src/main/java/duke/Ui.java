@@ -3,95 +3,100 @@ package duke;
 import duke.task.Task;
 
 public class Ui {
-    /** 
-     * Outputs given string with formatting.
-     * 
-     * @param string String to be outputted.
+
+    /**
+     * Outputs welcome message.
+     *
+     * @return Welcome message.
      */
-    private static void output(String string) {
-        System.out.println("____________________________________________________________\n" +
-                            "  " + string + 
-                            "____________________________________________________________\n");
+    public static String welcomeMsg() {
+        return "Hello! I'm Duke\n  What can I do for you?\n";
     }
 
-    /** Outputs welcome message. */
-    protected static void welcomeMsg() {
-        output("Hello! I'm Duke\n  What can I do for you?\n");
-    }
-    
-    // Outputs exit message.
-    protected static void exitMsg() {
-        output("Bye. Hope to see you again soon!\n");
+    /**
+     * Outputs exit message.
+     *
+     * @return Exit message.
+     */
+    public static String exitMsg() {
+        return "Bye. Hope to see you again soon!\n";
     }
 
 
-    /** 
+    /**
      * Outputs success message when task has been added to task list.
-     * 
+     *
      * @param task Message regarding the task.
      * @param taskListSize Size of task list.
+     * @return Success and add task detail message.
      */
-    protected static void addTaskMsg(Task task, int taskListSize) {
-        output("Got it. I've added this task:\n    " 
-                + task + "\n  "
-                + "Now you have " + taskListSize + (taskListSize == 1 ? " task " : " tasks ") + "in the list.\n");
+    public static String addTaskMsg(Task task, int taskListSize) {
+        return "Got it. I've added this task:\n    "
+                + task + "\n"
+                + "Now you have " + taskListSize + (taskListSize == 1 ? " task " : " tasks ") + "in the list.\n";
     }
 
-    /** 
+    /**
      * Outputs success message when task has been removed from task list.
-     * 
+     *
      * @param task Message regarding the task.
      * @param taskListSize Size of task list.
+     * @return Success and remove task detail message.
      */
-    protected static void removeTaskMsg(Task task, int taskListSize) {
-        output("Noted. I've removed this task:\n    " 
-                + task + "\n  "
-                + "Now you have " + taskListSize + (taskListSize == 1 ? " task " : " tasks ") + "in the list.\n");
+    public static String removeTaskMsg(Task task, int taskListSize) {
+        return "Noted. I've removed this task:\n    "
+                + task + "\n"
+                + "Now you have " + taskListSize + (taskListSize == 1 ? " task " : " tasks ") + "in the list.\n";
     }
 
-    /** 
+    /**
      * Outputs all the tasks stored in task list.
-     * 
+     *
      * @param listOfTasks String of the list of tasks.
+     * @return List of tasks message.
      */
-    protected static void listTasksMsg(String listOfTasks) {
+    public static String listTasksMsg(String listOfTasks) {
         String listMessage = "Here are the tasks in your list:\n";
-        output(listMessage + listOfTasks);
+        return listMessage + listOfTasks;
     }
 
-    /** 
+    /**
      * Outputs success message when task has been marked.
-     * 
+     *
      * @param task Message regarding the task.
+     * @return Success message.
      */
-    protected static void markTaskMsg(Task task) {
-        output("Nice! I've marked this task as done:\n    " + task + "\n");
+    public static String markTaskMsg(Task task) {
+        return "Nice! I've marked this task as done:\n    " + task + "\n";
     }
 
-    /** 
+    /**
      * Outputs success message when task has been unmarked.
-     * 
+     *
      * @param task Message regarding the task.
+     * @return Success message.
      */
-    protected static void unmarkTaskMsg(Task task) {
-        output("OK, I've marked this task as not done yet:\n    " + task + "\n");
+    public static String unmarkTaskMsg(Task task) {
+        return "OK, I've marked this task as not done yet:\n    " + task + "\n";
     }
 
-    /** Handles unknown input. */
-    protected static void unknownInputMsg() {
-        try {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-        } catch (DukeException e) {
-            errorMsg(e.getMessage());
-        }
+    /**
+     * Handles unknown input.
+     *
+     * @return Unknown input message.
+     */
+    public static String unknownInputMsg() {
+        return "I'm sorry, but I don't know what that means :-(\n";
     }
 
-    /** 
+    /**
      * Outputs error message.
-     * 
+     *
      * @param message Error message.
+     * @return Error message.
      */
-    protected static void errorMsg(String message) {
-        output(message);
+    public static String errorMsg(String message) {
+        return message;
     }
 }
+
