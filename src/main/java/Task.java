@@ -19,4 +19,12 @@ public class Task {
         }
         return "[" + checkSymbol + "] " + details;
     }
+
+    public String toStorageString() {
+        String checkSymbol = "0";
+        if (checked) {
+            checkSymbol = "1";
+        }
+        return checkSymbol + "#" + details;
+    }
 }

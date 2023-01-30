@@ -8,4 +8,9 @@ public class Todo extends Task {
         String task = super.toString();
         return "[T] " + task;
     }
+
+    @Override
+    public String toStorageString() {
+        return "T#" + super.toStorageString();
+    }
 }

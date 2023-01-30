@@ -20,4 +20,9 @@ public class Deadline extends Task {
         String task = super.toString();
         return "[D] " + task + " (by: " + dead + ")";
     }
+
+    @Override
+    public String toStorageString() {
+        return "D#" + super.toStorageString() + "#" + dead;
+    }
 }

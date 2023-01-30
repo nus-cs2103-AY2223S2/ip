@@ -17,9 +17,11 @@ public class Event extends Task {
         } catch (DateTimeParseException ignored) {
             if (startString == null) {
                 this.startString = start;
+                this.startDate = null;
             }
             if (endString == null) {
                 this.endString = end;
+                this.endDate = null;
             }
         }
     }
@@ -28,5 +30,10 @@ public class Event extends Task {
     public String toString() {
         String task = super.toString();
         return "[E] " + task + " (from: " + startString + " to: " + endString + ")";
+    }
+
+    @Override
+    public String toStorageString() {
+        return "E#" + super.toStorageString() + "#" + startString + "#" + endString;
     }
 }
