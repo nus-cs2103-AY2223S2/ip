@@ -1,4 +1,5 @@
 package command;
+
 import main.Storage;
 import main.Ui;
 import task.Task;
@@ -6,6 +7,7 @@ import main.TaskList;
 
 public class TodoCommand implements Command {
     private Task newTask;
+
     public TodoCommand(Task newTask) {
         this.newTask = newTask;
     }

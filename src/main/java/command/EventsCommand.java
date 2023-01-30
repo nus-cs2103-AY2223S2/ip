@@ -1,11 +1,13 @@
 package command;
+
 import main.Storage;
 import main.Ui;
 import task.Task;
 import main.TaskList;
 
-public class EventsCommand implements Command{
+public class EventsCommand implements Command {
     private Task newTask;
+
     public EventsCommand(Task newTask) {
         this.newTask = newTask;
     }

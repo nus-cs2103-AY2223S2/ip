@@ -1,4 +1,5 @@
 package main;
+
 import java.util.ArrayList;
 
 import task.Task;
@@ -9,17 +10,17 @@ public class TaskList {
     public TaskList() {
         this.list = new ArrayList<>();
     }
-    
+
     public TaskList(ArrayList<Task> list) {
-        this.list = list;    
+        this.list = list;
     }
 
     public void mark(int inputIndex) {
-        this.list.get(inputIndex-1).mark();
+        this.list.get(inputIndex - 1).mark();
     }
-    
+
     public void unmark(int inputIndex) {
-        this.list.get(inputIndex-1).unmark();
+        this.list.get(inputIndex - 1).unmark();
     }
 
     public void add(Task newTask) {
@@ -27,11 +28,11 @@ public class TaskList {
     }
 
     public void delete(int inputIndex) {
-        this.list.remove(inputIndex-1);
+        this.list.remove(inputIndex - 1);
     }
 
     public Task get(int inputIndex) {
-        return this.list.get(inputIndex-1);
+        return this.list.get(inputIndex - 1);
     }
 
     public ArrayList<Task> getList() {

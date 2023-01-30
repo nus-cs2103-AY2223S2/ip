@@ -19,13 +19,13 @@ public class Duke {
     public void start() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String input = ui.readCommand();
                 Command command = this.parser.parse(input);
                 command.execute(list, ui, storage);
                 isExit = command.isExit();
-                if(command.isExit()) {
+                if (command.isExit()) {
                     ui.close();
                     return;
                 }

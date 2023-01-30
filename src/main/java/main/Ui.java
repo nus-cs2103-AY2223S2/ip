@@ -1,8 +1,8 @@
 package main;
+
 import java.util.Scanner;
 
 import task.Task;
-
 
 public class Ui {
     private StringBuilder output = new StringBuilder();
@@ -60,8 +60,8 @@ public class Ui {
 
     public void list(TaskList list) {
         appendToOutput("Here are the task in your list: " + "\n");
-        for(int i=1; i<list.size() + 1; i++) {
-            appendToOutput(i + "." + list.getList().get(i-1) + "\n");
+        for (int i = 1; i < list.size() + 1; i++) {
+            appendToOutput(i + "." + list.getList().get(i - 1) + "\n");
         }
     }
 

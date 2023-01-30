@@ -1,11 +1,13 @@
 package command;
+
 import main.Storage;
 import main.Ui;
 import task.Task;
 import main.TaskList;
 
-public class DeadlineCommand implements Command{
+public class DeadlineCommand implements Command {
     private Task newTask;
+
     public DeadlineCommand(Task newTask) {
         this.newTask = newTask;
     }
