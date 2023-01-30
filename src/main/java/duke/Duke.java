@@ -4,47 +4,54 @@ import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.io.FileStorage;
 import duke.task.TaskList;
-import duke.ui.Cli;
 import duke.ui.Ui;
 
 import java.nio.file.Path;
 
 /**
- * Main class of the app.
+ * Represents the app.
  */
-public class Duke {
-    private static final Path saveFilePath = Path.of("./save-data/task-list.csv");
+public abstract class Duke {
+    private static final Path SAVE_FILE_PATH = Path.of("./save-data/task-list.csv");
 
-    private static final Ui ui = new Cli(System.out, System.in);
-    private static final Parser parser = new Parser();
+    /** Handles the UI of the app. */
+    protected Ui ui;
+    /** Parses the user's inputs. */
+    protected Parser parser;
 
-    private static TaskList tasks;
+    private TaskList tasks;
 
     /**
-     * Runs the app.
+     * Validates the user's inputs, executes the appropriate command, and returns the response message.
      *
-     * @param args Command-line arguments.
+     * @param input The user's input.
+     * @return The response message.
      */
-    public static void main(String[] args) {
-        if (!setup()) {
-            return;
-        }
-
-        printGreeting();
-        runInputLoop();
-    }
-
-    private static boolean setup() {
+    protected String handleInput(String input) {
+        String message;
         try {
-            tasks = new TaskList(new FileStorage(saveFilePath));
-            return true;
+            message = parser.getCommand(input).run(input, tasks);
         } catch (DukeException e) {
-            ui.print(e.getMessage());
-            return false;
+            message = e.getMessage();
         }
+
+        return message;
     }
 
-    private static void printGreeting() {
+    /**
+     * Loads the previously saved tasks list from storage if it exists. Otherwise, create a new file for storing the
+     * task list.
+     *
+     * @throws DukeException Indicates an error in loading from storage or creating storage.
+     */
+    protected void loadTasks() throws DukeException {
+        tasks = new TaskList(new FileStorage(SAVE_FILE_PATH));
+    }
+
+    /**
+     * Prints a greeting message to the UI.
+     */
+    protected void printGreeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -53,27 +60,5 @@ public class Duke {
         String greeting = String.format("IT IS I!\n%s\nManager of tasks! Tracker of progress!\nHeedless user, what is "
                 + "it that you seek?", logo);
         ui.print(greeting);
-    }
-
-    private static void runInputLoop() {
-        while (true) {
-            String input = ui.getInput();
-
-            String message;
-            try {
-                message = parser.getCommand(input).run(input, tasks);
-            } catch (DukeException e) {
-                ui.print(e.getMessage());
-                continue;
-            }
-
-            ui.print(message);
-
-            if (parser.isByeCommand(input)) {
-                break;
-            }
-        }
-
-        ui.close();
     }
 }
