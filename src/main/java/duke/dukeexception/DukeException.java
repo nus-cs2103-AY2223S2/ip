@@ -8,8 +8,8 @@ public class DukeException extends Exception {
     /**
      * 
      * @param inputLine: a line of command entered by the user, to be checked if it is valid
-     * @throws DukeException: throws a customised exception message if the command input is 
-     * not valid.
+     * @throws DukeException: throws a customised exception message if the command input is not
+     *         valid.
      */
     public static void checkInput(String inputLine) throws DukeException {
         if (inputLine.equals("deadline")) {
@@ -20,6 +20,6 @@ public class DukeException extends Exception {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         } else if (inputLine.equals("delete")) {
             throw new DukeException("☹ OOPS!!! Please specify which task to delete.");
-        } 
+        }
     }
 }

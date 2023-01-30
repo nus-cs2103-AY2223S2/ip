@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
     protected final LocalDateTime deadline;
+
     /**
      * @param name: a string indicating the name of the task
      * @param status: an int indicating whether the task is done or not
@@ -21,6 +22,7 @@ public class Deadline extends Task {
 
     /**
      * private method that helps to store the status of the task as binary numbers
+     * 
      * @return 0 is the task is not done, 1 if the task is done.
      */
     private int getStatusNo() {
@@ -30,6 +32,7 @@ public class Deadline extends Task {
             return 1;
         }
     }
+
     /**
      * overrides the toString method: displays the type, then status, then name, then deadline
      */
@@ -39,9 +42,11 @@ public class Deadline extends Task {
 
     /**
      * method that helps with updating local tasks
+     * 
      * @return a String to be written to local hard disk
      */
     public String toStoreFormatString() {
-        return String.format("D/%s/%d/%s", super.name, this.getStatusNo(), Parser.reverseFormatDateTime(deadline));
+        return String.format("D/%s/%d/%s", super.name, this.getStatusNo(),
+                Parser.reverseFormatDateTime(deadline));
     }
 }

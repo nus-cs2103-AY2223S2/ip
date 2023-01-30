@@ -1,4 +1,5 @@
 package duke.parser;
+
 import duke.command.*;
 import duke.commandtype.CommandType;
 import duke.dukeexception.DukeException;
@@ -14,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class Parser {
     /**
      * method that determines what command to run
+     * 
      * @param inputLine a String input by the user
      * @return a Command depending on what the user has input
      * @throws DukeException if the input is not recognised
@@ -55,7 +57,7 @@ public class Parser {
                     return new FindCommand(inputLine.split(" ", 2)[1]);
                 default:
                     throw new DukeException("Not a valid command: " + inputLine);
-                }
+            }
         } catch (DukeException e) {
             throw e;
         }
@@ -63,6 +65,7 @@ public class Parser {
 
     /**
      * public method to interpret user input time
+     * 
      * @param input a String representing time in the format dd-MM-yyyy HHmm
      * @return a LocalDateTime to be stored in the Task object
      */
@@ -74,6 +77,7 @@ public class Parser {
 
     /**
      * reverse the process of the previous method for easy storage of the tasks
+     * 
      * @param input a LocalDateTime stored by the Task object
      * @return a String representing the original user input time
      */
@@ -84,6 +88,7 @@ public class Parser {
 
     /**
      * Transforms the saved LocalDateTime time to one that is more readable
+     * 
      * @param dateTime LocalDateTime saved by Task object
      * @return a readable time as a String
      */

@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.dukeexception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -16,6 +15,7 @@ public class MarkCommand extends Command {
 
     /**
      * Constructor that takes in the number of the Task to be marked
+     * 
      * @param n
      */
     public MarkCommand(int n) {
@@ -24,6 +24,7 @@ public class MarkCommand extends Command {
 
     /**
      * on execution, mark the target Task in the TaskList as done and print out customised message
+     * 
      * @param tasks TaskList to be updated if needed
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks

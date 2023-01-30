@@ -1,11 +1,9 @@
 package duke.command;
 
-import duke.command.Command;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
 import java.io.IOException;
 
 /**
@@ -16,6 +14,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructor
+     * 
      * @param task Task to be added to TaskList
      */
     public AddCommand(Task task) {
@@ -24,6 +23,7 @@ public class AddCommand extends Command {
 
     /**
      * on execution, add the new Task to the TaskList
+     * 
      * @param tasks TaskList to be updated if needed
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks

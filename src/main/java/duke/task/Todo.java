@@ -17,6 +17,7 @@ public class Todo extends Task {
             return 1;
         }
     }
+
     /**
      * overrides toString method to display the type of the task, its status, and then its name.
      */
@@ -27,6 +28,7 @@ public class Todo extends Task {
 
     /**
      * method that helps with updating local tasks
+     * 
      * @return a String to be written to local hard disk
      */
     @Override

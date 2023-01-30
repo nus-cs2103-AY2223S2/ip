@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Constructor
+     * 
      * @param name the name of the task
      * @param status a number that indicates the task is done if it is 1
      */
@@ -27,6 +28,7 @@ public class Task {
     public void mark() {
         this.status = "[X]";
     }
+
     /**
      * method to update a task as undone
      */
@@ -36,6 +38,7 @@ public class Task {
 
     /**
      * a method that helps with updating local hard disk
+     * 
      * @return a Strnig to be written to the local hard disk
      */
     public String toStoreFormatString() {

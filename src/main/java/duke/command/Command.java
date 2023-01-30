@@ -10,6 +10,7 @@ import duke.ui.Ui;
 public abstract class Command {
     /**
      * method to determine what to be done after a command is given
+     * 
      * @param tasks TaskList to be updated if needed
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks
@@ -18,6 +19,7 @@ public abstract class Command {
 
     /**
      * method that determines whether the user wants to exit the program.
+     * 
      * @return
      */
     public boolean isExit() {

@@ -6,10 +6,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * A TaskList stores all tasks temporarily for easy access of the tasks
- * while the program is running. It behaves like an ArrayList of Tasks but
- * supports more functions such as updating tasks and formatting itself to be
- * saved to the local hard disk.
+ * A TaskList stores all tasks temporarily for easy access of the tasks while the program is
+ * running. It behaves like an ArrayList of Tasks but supports more functions such as updating tasks
+ * and formatting itself to be saved to the local hard disk.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -47,6 +46,7 @@ public class TaskList {
 
     /**
      * a method that marks a particular task as "Done"
+     * 
      * @param taskNumber the number of the Task to be marked
      * @return the updated Task
      * @throws DukeException if the user wants to mark a Task that does not exist
@@ -55,13 +55,15 @@ public class TaskList {
         try {
             tasks.get(taskNumber - 1).mark();
         } catch (Exception e) {
-            throw new DukeException("duke.task.Task does not exist, current number of tasks: " + tasks.size());
+            throw new DukeException(
+                    "duke.task.Task does not exist, current number of tasks: " + tasks.size());
         }
         return tasks.get(taskNumber - 1);
     }
 
     /**
      * Similar to mark, unmark marks a Task as "not done".
+     * 
      * @param taskNumber the number of the Task to be unmarked
      * @return the updated Task
      * @throws DukeException if the user wants to unmark a Task that does not exist
@@ -70,7 +72,8 @@ public class TaskList {
         try {
             tasks.get(taskNumber - 1).unmark();
         } catch (Exception e) {
-            throw new DukeException("duke.task.Task does not exist, current number of tasks: " + tasks.size());
+            throw new DukeException(
+                    "duke.task.Task does not exist, current number of tasks: " + tasks.size());
         }
         return tasks.get(taskNumber - 1);
     }
@@ -92,8 +95,10 @@ public class TaskList {
         }
         return sb.toString();
     }
+
     /**
      * a method that removes a Task from the list
+     * 
      * @param taskNumber the number of the Task to be removed
      * @return the removed Task
      * @throws DukeException if the user wants to remove a task that does not exist
@@ -102,12 +107,14 @@ public class TaskList {
         try {
             return tasks.remove(taskNumber - 1);
         } catch (Exception e) {
-            throw new DukeException("duke.task.Task does not exist, current number of tasks: " + tasks.size());
+            throw new DukeException(
+                    "duke.task.Task does not exist, current number of tasks: " + tasks.size());
         }
     }
 
     /**
      * method that helps write the Tasks to the local hard drive
+     * 
      * @return a String to be written to the local file containing all Tasks.
      */
     public String getWriteString() {

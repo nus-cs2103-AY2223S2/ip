@@ -5,7 +5,6 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -13,6 +12,7 @@ public class Duke {
 
     /**
      * Initialises the Duke object
+     * 
      * @param filePath A string representing the path of the file containing all tasks
      * @param folderPath A string representing the path of the folder containing the above file
      */
@@ -28,8 +28,8 @@ public class Duke {
     }
 
     /**
-     * a function that runs the program by repeatedly accepting user input and respond to them
-     * until the user wants to exit the program.
+     * a function that runs the program by repeatedly accepting user input and respond to them until
+     * the user wants to exit the program.
      */
     public void run() {
         ui.welcome();
