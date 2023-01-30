@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "chungus.Chungus"
+    mainClassName = "chungus.fxui.Launcher"
 }
 
 shadowJar {
