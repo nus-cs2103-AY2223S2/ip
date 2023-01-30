@@ -7,7 +7,6 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-
 /**
  * Represents a build instance of Duke.
  * A Duke object is created when Duke is run.
@@ -56,4 +55,19 @@ public class Duke {
         }
     }
 
+    String greeting() {
+        return ui.greet();
+    }
+
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input, tasks);
+            String output = c.execute(tasks, storage, ui);
+            return output;
+        } catch (DukeException de) {
+            return ui.showError(de);
+        } catch (Exception e) {
+            return "Unaccounted for: " + e.getMessage() + "\n";
+        }
+    }
 }

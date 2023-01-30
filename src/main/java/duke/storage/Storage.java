@@ -111,7 +111,7 @@ public class Storage {
      *
      * @param tasks Updated TaskList with changes to be saved.
      */
-    public void save(TaskList tasks) {
+    public String save(TaskList tasks) {
         this.tasks = tasks;
 
         try {
@@ -130,10 +130,10 @@ public class Storage {
                 }
             }
             writer.close();
-            ui.saved();
+            return ui.saved();
 
         } catch (IOException e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
     }
 

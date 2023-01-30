@@ -25,9 +25,11 @@ public class ExitCommand extends Command {
      * @param ui Ui Object.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
-        storage.save(tasks);
-        ui.goodbye();
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
+        String output = "";
+        output += storage.save(tasks);
+        output += ui.goodbye();
         ui.close();
+        return output;
     }
 }

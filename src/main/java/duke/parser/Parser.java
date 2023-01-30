@@ -19,8 +19,6 @@ import duke.tasktypes.Task;
 import duke.tasktypes.ToDo;
 
 
-
-
 /**
  * Represents an input Parser.
  * A Parser makes sense of User input and decides Duke's follow-up action.
@@ -54,10 +52,16 @@ public class Parser {
         case "unmark ":
             inputArr = fullCommand.split(" ");
             int toUnmark = Integer.parseInt(inputArr[1]);
+            if (toUnmark > tasks.getNumTasks()) {
+                throw new DukeException("Task does not exist! Please enter valid input!");
+            }
             return new UnmarkCommand(toUnmark);
         case "mark ":
             inputArr = fullCommand.split(" ");
             int toMark = Integer.parseInt(inputArr[1]);
+            if (toMark > tasks.getNumTasks()) {
+                throw new DukeException("Task does not exist! Please enter valid input!");
+            }
             return new MarkCommand(toMark);
         case "delete ":
             inputArr = fullCommand.split(" ");

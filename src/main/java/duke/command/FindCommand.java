@@ -33,12 +33,12 @@ public class FindCommand extends Command {
      * @param ui Ui Object.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
         TaskList matchTasks = tasks.getMatchingTasks(this.keywords);
         if (matchTasks.getNumTasks() == 0) {
-            ui.noMatchingTask();
+            return ui.noMatchingTask();
         } else {
-            ui.printTasks(matchTasks);
+            return ui.printTasks(matchTasks);
         }
     }
 }

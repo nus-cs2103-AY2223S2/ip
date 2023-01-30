@@ -35,7 +35,7 @@ public class AddCommand extends Command {
      * @param ui Ui Object.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
-        tasks.addTask(task);
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
+        return tasks.addTask(task);
     }
 }
