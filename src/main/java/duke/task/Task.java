@@ -7,13 +7,12 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
-//    protected static int counter = 0;
 
     /**
      * Creates a task instance, usually stemming
      * from its child instances.
      *
-     * @param description
+     * @param description Description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -33,7 +32,7 @@ public class Task {
      * For its child classes to instantiate and override,
      * not to be run by Task.
      *
-     * @return A string to indicate that this shouldn't be ran
+     * @return A string to indicate that this shouldn't be run
      * by Task.
      */
     public String getName() {
@@ -71,7 +70,7 @@ public class Task {
     }
 
     /**
-     * To be overriden and appended by its child classes.
+     * To be overridden and appended by its child classes.
      *
      * @return A string representation of task.
      */

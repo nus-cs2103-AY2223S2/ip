@@ -13,8 +13,8 @@ import java.io.IOException;
  */
 public abstract class Command {
 
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
-//        throw new UnsupportedOperationException("Method called from main Duke.command class, should be called by child classes");
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage)
+            throws DukeException, IOException;
 
 
     public abstract boolean isExit();

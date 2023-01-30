@@ -1,7 +1,6 @@
 package duke.task;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -33,7 +32,9 @@ public class TaskList {
      * Prints the current list of tasks.
      */
     public void printList() {
-        for (int i = 0; i < this.list.size(); i++) System.out.println((i+1) + "." + this.list.get(i));
+        for (int i = 0; i < this.list.size(); i++) {
+            System.out.println((i+1) + "." + this.list.get(i));
+        }
     }
 
     /**
