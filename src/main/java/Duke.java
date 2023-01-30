@@ -1,7 +1,7 @@
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
-import tasks.Tasks;
+import tasks.TaskList;
 import tasks.ToDo;
 import java.util.Scanner;
 
@@ -33,7 +33,7 @@ public class Duke {
     public static void main(String[] args) {
         greet();
         Scanner scanner = new Scanner(System.in);
-        Tasks tasks = new Tasks();
+        TaskList tasks = new TaskList();
         while (true) {
             try {
                 String inputString = scanner.nextLine();

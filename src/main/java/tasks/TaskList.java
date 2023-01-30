@@ -1,6 +1,6 @@
 package tasks;
 
-public class Tasks {
+public class TaskList {
     private int numTasks = 0;
     private Task[] tasksArray = new Task[100];
 
