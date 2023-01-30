@@ -31,6 +31,14 @@ public class Parser {
                 }
             }
 
+        case "find":
+            if (inputs.length <= 1) {
+                throw new DukeException("Please indicate the keyword you want to search with!");
+            } else {
+                String keyword = inputs[1];
+                return new FindCommand(keyword);
+            }
+
         case "todo":
         case "deadline":
         case "event":
