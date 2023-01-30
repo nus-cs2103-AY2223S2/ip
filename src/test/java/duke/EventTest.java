@@ -11,13 +11,15 @@ public class EventTest {
     @Test
     public void eventDesc_correctDesc_noExceptionThrown() throws InvalidDateTimeException {
             assertEquals("[E][ ] project meeting (from: 2023-01-25 14:00 to: 2023-01-25 14:00)",
-                    Event.createEvent("project meeting /from 25/1/2023 1400 /to 25/1/2023 1600").toString());
+                    new Event("project meeting",
+                            "25/1/2023 1400", "25/1/2023 1600", false).toString());
     }
 
     @Test
     public void eventDesc_wrongDay_exceptionThrown()  {
         InvalidDateTimeException thrown = assertThrows(InvalidDateTimeException.class,
-                () -> Event.createEvent("project meeting /from 40/1/2023 1400 /to 25/1/2023 1600"));
+                () -> new Event("project meeting",
+                        "25/1/2023 1400", "25/1/2023 1600", false));
         assertEquals("OOPS!!! Invalid DateTime inputs!",
                 thrown.toString());
     }

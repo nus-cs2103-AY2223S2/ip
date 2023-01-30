@@ -1,7 +1,12 @@
 package duke.storage;
 
+import duke.exception.InvalidDateTimeException;
+import duke.helper.Parser;
 import duke.helper.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
+import duke.task.ToDo;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -58,7 +63,7 @@ public class FileSystem {
      * @return an ArrayList that contains all the tasks from the file
      * @throws FileNotFoundException If the file cannot be found
      */
-    public ArrayList<Task> loadFromFile() throws FileNotFoundException {
+    public ArrayList<Task> loadFromFile() throws FileNotFoundException, InvalidDateTimeException {
         Scanner scanner = new Scanner(file);
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -70,13 +75,15 @@ public class FileSystem {
 
             switch (taskType) {
             case 'T':
-                tasks.add(new Task("T", isMark, task.substring(7)));
+                tasks.add(new ToDo(task.substring(7), isMark));
                 break;
             case 'D':
-                tasks.add(new Task("D", isMark, task.substring(7)));
+                String[] deadlineDesc = task.substring(7).split(" /by ");
+                tasks.add(new Deadline(deadlineDesc[0], deadlineDesc[1], isMark));
                 break;
             case 'E':
-                tasks.add(new Task("E", isMark, task.substring(7)));
+                String[] eventDesc = Parser.parseEventDesc(task.substring(7));
+                tasks.add(new Event(eventDesc[0], eventDesc[1], eventDesc[2], isMark));
                 break;
             }
 

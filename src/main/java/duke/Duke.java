@@ -24,7 +24,7 @@ public class Duke {
             db = new FileSystem(filePath);
             this.tasks = new TaskList(db.loadFromFile());
             this.parser = new Parser(tasks);
-        } catch (IOException e) {
+        } catch (DukeException | IOException e) {
             System.out.println(e);
         }
     }

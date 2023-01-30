@@ -45,19 +45,21 @@ public class Parser {
 
         case "todo":
             checkTaskDesc(inputs);
-            tasks.addToTasks(new ToDo(inputs[1]));
+            tasks.addToTasks(new ToDo(inputs[1], false));
             tasks.handleTaskOutput();
             break;
 
         case "deadline":
             checkTaskDesc(inputs);
-            tasks.addToTasks(Deadline.createDeadline(inputs[1]));
+            String[] deadlineDesc = inputs[1].split(" /by ");
+            tasks.addToTasks(new Deadline(deadlineDesc[0], deadlineDesc[1], false));
             tasks.handleTaskOutput();
             break;
 
         case "event":
             checkTaskDesc(inputs);
-            tasks.addToTasks(Event.createEvent(inputs[1]));
+            String[] eventDesc = parseEventDesc(inputs[1]);
+            tasks.addToTasks(new Event(eventDesc[0], eventDesc[1], eventDesc[2], false));
             tasks.handleTaskOutput();
             break;
 
@@ -82,9 +84,9 @@ public class Parser {
         }
     }
 
-    public static boolean checkTaskDesc(String[] splitStr) throws EmptyTaskException {
-        if (splitStr.length == 1) {
-            throw new EmptyTaskException(splitStr[0]);
+    public static boolean checkTaskDesc(String[] taskDesc) throws EmptyTaskException {
+        if (taskDesc.length == 1) {
+            throw new EmptyTaskException(taskDesc[0]);
         }
         return true;
     }
@@ -109,5 +111,20 @@ public class Parser {
         } catch (NumberFormatException | IndexOutOfBoundsException | DateTimeException e) {
             throw new InvalidDateTimeException();
         }
+    }
+
+    /**
+     * Split the event desc
+     *
+     * @param desc the desc of an event task
+     * @return a string array with all the parts of an event desc
+     */
+    public static String[] parseEventDesc(String desc) {
+        String[] eventDesc = new String[3];
+        eventDesc[0] = desc.split(" /from ")[0];
+        eventDesc[1] = desc.split(" /from ")[1].split(" /to ")[0];
+        eventDesc[2] = desc.split(" /from ")[1].split(" /to ")[1];
+        return eventDesc;
+
     }
 }
