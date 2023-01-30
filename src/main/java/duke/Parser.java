@@ -13,35 +13,42 @@ public class Parser {
 
             case "mark":
                 if (arr2.length < 2) {
-                    throw new DukeException("OOPS!!! The description of a mark cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of mark cannot be empty.");
                 }
                 int index = Integer.parseInt(arr2[1]);
                 return new MarkCommand(index);
 
             case "unmark":
                 if (arr2.length < 2) {
-                    throw new DukeException("OOPS!!! The description of a unmark cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of unmark cannot be empty.");
                 }
                 int No = Integer.parseInt(arr2[1]);
                 return new UnmarkCommand(No);
 
+            case "find":
+                if (arr2.length < 2) {
+                    throw new DukeException("OOPS!!! The description of find cannot be empty.");
+                }
+                String target = arr1[0].substring(arr1[0].indexOf(" ") + 1);
+                return new FindCommand(target);
+
             case "delete":
                 if (arr2.length < 2) {
-                    throw new DukeException("OOPS!!! The description of a delete cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of delete cannot be empty.");
                 }
                 int d = Integer.parseInt(arr2[1]);
                 return new DeleteCommand(d);
 
             case "todo":
                 if (arr2.length < 2) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of todo cannot be empty.");
                 }
                 String name = arr1[0].substring(arr1[0].indexOf(" ") + 1);
                 return new TodoCommand(name);
 
             case "deadline":
                 if (arr2.length < 2) {
-                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of deadline cannot be empty.");
                 }
                 String dName = arr1[0].substring(arr1[0].indexOf(" ") + 1, arr1[0].length() - 1);
                 String dTime = arr1[1].substring(arr1[1].indexOf(" ") + 1);
@@ -49,7 +56,7 @@ public class Parser {
 
             case "event":
                 if (arr2.length < 2) {
-                    throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of event cannot be empty.");
                 }
                 String eName = arr1[0].substring(arr1[0].indexOf(" ") + 1, arr1[0].length() - 1);
                 String sTime = arr1[1].substring(arr1[1].indexOf(" ") + 1, arr1[1].length() - 1);
