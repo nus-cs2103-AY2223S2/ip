@@ -37,7 +37,7 @@ public class FindCommand extends Command {
         int count = 0;
         for (int i = 0; i < list.size(); i++) {
             int result = list.get(i).getName().indexOf(targetName);
-            if (result >= 0 ) {
+            if (result >= 0) {
                 System.out.print(count + 1 + ".");
                 count++;
                 System.out.println(list.get(i).toString());
