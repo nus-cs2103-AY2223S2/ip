@@ -14,6 +14,7 @@ import duke.utils.CustomValidator;
  * The date command can be used to determine active tasks on a certain date.
  */
 public class DateCommand extends Command {
+    /** Date validation regex **/
     private static final Pattern VALID_DATE =
             Pattern.compile("(?<year>\\d{4})-(?<month>0[0-9]|1[0-2])-(?<day>0[0-9]|1[0-9]|2[0-9]|3[0-1])$");
     private final String args;

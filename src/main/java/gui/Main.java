@@ -12,10 +12,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        // Default stage settings
         stage.setResizable(false);
         stage.setTitle("Duke");
-        RouterManager router = new RouterManager(stage);
-        router.showLandingView();
         stage.show();
+
+        // Initializes the router object
+        RouterManager router = RouterManager.createRouterSingleton(stage);
+        router.showLandingView();
     }
 }

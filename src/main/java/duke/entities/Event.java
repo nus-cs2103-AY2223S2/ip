@@ -10,8 +10,11 @@ import duke.enums.TaskType;
  * Can specify the start date and end date for a task.
  */
 public class Event extends Task {
+    /** Event attributes **/
     protected LocalDate from;
     protected LocalDate to;
+
+    /** Date formatter **/
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**

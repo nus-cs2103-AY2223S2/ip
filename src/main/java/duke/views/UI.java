@@ -1,14 +1,14 @@
 package duke.views;
 
 /**
- * Represents the duke.views of the program. Contains methods for printing to console.
+ * Represents the views of the program. Contains methods for printing to console.
  */
 public class UI {
     /** Font options **/
     public static final String FONT_TYPE = "Courier New";
-    public static final Integer H1_FONT = 30;
-    public static final Integer P_FONT = 15;
-    public static final Integer SMALL_FONT = 12;
+    public static final Integer FONT_SIZE_H1 = 30;
+    public static final Integer FONT_SIZE_P = 15;
+    public static final Integer FONT_SIZE_SMALL = 12;
 
     private static final String DATE_FORMAT = "YYYY-MM-DD";
     private static final String INDENT_SPACES = "    ";
@@ -26,13 +26,20 @@ public class UI {
     }
 
     /**
-     * Welcome message on start.
+     * Returns the welcome message on start.
+     *
+     * @return Welcome message.
      */
     public static String welcomeMessage() {
         return "Hello! I'm Duke. What can i do for you?\n"
                 + "Click on the help button on the top right to view the available commands!";
     }
 
+    /**
+     * Returns the help message.
+     *
+     * @return The list of commands available.
+     */
     public static String helpMessage() {
         return "These are the available commands:"
                 + indentMessage("bye")

@@ -13,14 +13,34 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * Manages different routes in the application.
+ */
 public class RouterManager {
+    private static RouterManager router;
     private final Duke duke = new Duke("duke.txt");
     private final Stage stage;
 
-    public RouterManager(Stage stage) {
+    private RouterManager(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Creates a router manager instance if there is none instantiated, else create one.
+     *
+     * @param stage The stage needed to set the scene.
+     * @return The router singleton.
+     */
+    public static RouterManager createRouterSingleton(Stage stage) {
+        if (router == null) {
+            router = new RouterManager(stage);
+        }
+        return router;
+    }
+
+    /**
+     * Sets the scene to the main application view.
+     */
     public void showMainView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
@@ -33,6 +53,9 @@ public class RouterManager {
         }
     }
 
+    /**
+     * Sets the scene to the landing view.
+     */
     public void showLandingView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/Landing.fxml"));

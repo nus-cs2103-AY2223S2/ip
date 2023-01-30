@@ -10,7 +10,9 @@ import duke.enums.TaskType;
  * Can specify the deadline for a task.
  */
 public class Deadline extends Task {
+    /** Deadline attributes **/
     protected LocalDate by;
+    /** Datetime formatter **/
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**

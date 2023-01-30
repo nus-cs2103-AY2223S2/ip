@@ -12,23 +12,27 @@ import duke.utils.CustomValidator;
  * Represents a Task Object.
  */
 public abstract class Task {
-    public static final Pattern EVENT = Pattern.compile("^(event) (?<description>.+) /from (?<from>.+) /to (?<to>.+)$",
-            Pattern.CASE_INSENSITIVE);
-    public static final Pattern DEADLINE = Pattern.compile("^(deadline) (?<description>.+) /by (?<by>.+)$",
-            Pattern.CASE_INSENSITIVE);
+    /** Task validation **/
+    public static final Pattern EVENT =
+            Pattern.compile("^(event) (?<description>.+) /from (?<from>.+) /to (?<to>.+)$",
+                    Pattern.CASE_INSENSITIVE);
+    public static final Pattern DEADLINE =
+            Pattern.compile("^(deadline) (?<description>.+) /by (?<by>.+)$",
+                    Pattern.CASE_INSENSITIVE);
     public static final Pattern TODO = Pattern.compile("^(todo) (?<description>.+)$", Pattern.CASE_INSENSITIVE);
 
+    /** Date validation **/
     private static final String INVALID_DATE_MESSAGE = "Date is not valid! Please try again.";
     private static final Pattern FORMAT_DATE =
             Pattern.compile("^(?<year>\\d{4})-(?<month>0[0-9]|1[0-2])-(?<day>0[0-9]|1[0-9]|2[0-9]|3[0-1])$");
 
+    /** Task attributes **/
     protected TaskType taskType;
-
     protected String description;
     protected boolean isDone;
 
     /**
-     * Instantiate a Task Object that can be placed into the TaskList.
+     * Instantiates a Task Object that can be placed into the TaskList.
      *
      * @param description The description of the task.
      */
@@ -60,6 +64,11 @@ public abstract class Task {
         return pattern.matches();
     }
 
+    /**
+     * Returns the status of a task.
+     *
+     * @return A string indicating the status of a task.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -98,7 +107,7 @@ public abstract class Task {
     }
 
     /**
-     * Process the given task by creating and storing into the TaskList.
+     * Processes the given task by creating and storing into the TaskList.
      *
      * @param matcher A regex matcher that matches the type of command.
      * @param type Specifies the task type.

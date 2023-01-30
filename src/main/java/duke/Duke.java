@@ -7,7 +7,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 
 /**
- * Represents the duke.Duke Chat bot.
+ * Represents the Duke Chat bot.
  * Running a duke object loads data from the specified file into memory,
  * and exiting the program writes data to the hard disk.
  */
@@ -15,7 +15,7 @@ public class Duke {
     private static TaskList taskList;
 
     /**
-     * duke.Duke Constructor for initializing the duke.Duke Object.
+     * Duke Constructor for initializing the duke.Duke Object.
      *
      * @param filename location of Storage
      */
@@ -37,7 +37,6 @@ public class Duke {
      */
     public String getResponse(String input) {
         Command cmd = Parser.parse(input);
-        System.out.println(input);
         try {
             return cmd.execute(() -> taskList);
         } catch (DukeException e) {

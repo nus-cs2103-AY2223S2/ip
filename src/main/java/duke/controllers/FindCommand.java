@@ -14,11 +14,12 @@ import duke.exceptions.DukeException;
  * Parses through each task and check if it contains the specified string.
  */
 public class FindCommand extends Command {
+    /** Valid filter regex **/
     private static final Pattern VALID_FILTER = Pattern.compile("^(?<cmd>find) (?<filter>.+)$");
     private final String args;
 
     /**
-     * Instantiate the find command.
+     * Instantiates the find command.
      *
      * @param args The args of the command.
      */

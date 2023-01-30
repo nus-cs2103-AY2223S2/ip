@@ -8,13 +8,14 @@ import duke.utils.IUnmarshal;
  * Represents a serializable task.
  */
 public class SerializableTask implements IMarshal<String>, IUnmarshal<Task> {
+    /** Serializable task attributes **/
     private final TaskType taskType;
     private final boolean isDone;
     private final String description;
     private String flags = "";
 
     /**
-     * Initialize a Serializable Task.
+     * Initializes a Serializable Task.
      *
      * @param taskType The type of task.
      * @param done The status of task.
@@ -27,7 +28,7 @@ public class SerializableTask implements IMarshal<String>, IUnmarshal<Task> {
     }
 
     /**
-     * Initialize a Serializable Task.
+     * Initializes a Serializable Task.
      *
      * @param taskType The type of task.
      * @param done The status of task.

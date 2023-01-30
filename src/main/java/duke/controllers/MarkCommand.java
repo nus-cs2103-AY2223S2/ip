@@ -34,7 +34,7 @@ public class MarkCommand extends Command {
         Matcher m = VALID_NUMBER.matcher(args);
         if (m.find()) {
             Integer key = Integer.parseInt(m.group());
-            return store.getTaskandToggle(key, true);
+            return store.getTaskAndToggle(key, true);
         }
         throw new DukeException(INVALID_FORMAT_ERROR + " " + "Please ensure that you specify the task number.");
     }

@@ -14,13 +14,15 @@ import duke.views.UI;
  * TaskList represents a data structure that holds Tasks.
  */
 public class TaskList {
+    /** In memory store **/
     private final List<Task> taskList = new ArrayList<>();
+    /** Hard disk storage **/
     private final Storage storage;
 
     /**
      * Initializes a TaskList with preloaded data.
      *
-     * @param storage duke.storage class for writing to hard disk.
+     * @param storage storage class for writing to hard disk.
      */
     public TaskList(Storage storage) throws DukeException {
         this.storage = storage;
@@ -94,6 +96,13 @@ public class TaskList {
         return (key <= taskList.size() && key > 0);
     }
 
+    /**
+     * Gets the task from the task list.
+     *
+     * @param key The task of choice.
+     * @return The specified task.
+     * @throws DukeException An error indicating there was an error in retrieving the specified task.
+     */
     public Task getTask(Integer key) throws DukeException {
         if (!isValidKey(key)) {
             throw new DukeException("This task don't exists! Please select one from the list.");
@@ -102,7 +111,15 @@ public class TaskList {
         return taskList.get(key - 1);
     }
 
-    public String getTaskandToggle(Integer key, boolean mark) throws DukeException {
+    /**
+     * A generic function used in markTask and unmarkTask to ensure DRY principle.
+     *
+     * @param key The task to toggle.
+     * @param mark Indicates whether to mark or unmark.
+     * @return Success message
+     * @throws DukeException An error indicating that there was an error in toggling the tasks' status.
+     */
+    public String getTaskAndToggle(Integer key, boolean mark) throws DukeException {
         Task task = this.getTask(key);
         String msg = mark ? task.markTask() : task.unmarkTask();
         storage.writeAll(this);
@@ -134,6 +151,10 @@ public class TaskList {
 
     /**
      * Lists the tasks in the TaskList.
+     *
+     * @param predicate The filter function required to select tasks from the list.
+     * @param index the boolean value indicating if tasks should be indexed.
+     * @return The string representing the list of tasks.
      */
     public String listTasks(Predicate<? super Task> predicate, boolean index) {
         return this.filter(predicate, "There are no outstanding tasks!", index);

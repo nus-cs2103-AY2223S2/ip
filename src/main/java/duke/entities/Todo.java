@@ -10,7 +10,7 @@ import duke.enums.TaskType;
 public class Todo extends Task {
 
     /**
-     * Instantiate a todo object.
+     * Instantiates a todo object.
      *
      * @param description the description of the task
      */
@@ -20,7 +20,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Serialize the task.
+     * Serializes the task.
      *
      * @return Returns serialized representation.
      */

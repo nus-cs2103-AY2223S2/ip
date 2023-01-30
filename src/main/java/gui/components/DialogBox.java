@@ -41,8 +41,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         username.setText(user);
-        dialog.setFont(new Font(UI.FONT_TYPE, UI.P_FONT));
-        username.setFont(new Font(UI.FONT_TYPE, UI.SMALL_FONT));
+        dialog.setFont(new Font(UI.FONT_TYPE, UI.FONT_SIZE_P));
+        username.setFont(new Font(UI.FONT_TYPE, UI.FONT_SIZE_SMALL));
         dialog.setWrapText(true);
         dialog.setMnemonicParsing(false);
         dialog.setMaxWidth(650);

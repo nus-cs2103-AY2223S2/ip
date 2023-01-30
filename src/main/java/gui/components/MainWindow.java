@@ -40,7 +40,7 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage =
             new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Silco.jpg")));
 
-    private final Font appFont = new Font(UI.FONT_TYPE, UI.P_FONT);
+    private final Font appFont = new Font(UI.FONT_TYPE, UI.FONT_SIZE_P);
 
     /**
      * This function is called when the GUI window starts.
@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
         appLabel.setText("DUKE");
         userInput.setFont(appFont);
         sendButton.setFont(appFont);
-        appLabel.setFont(new Font(UI.FONT_TYPE, UI.H1_FONT));
+        appLabel.setFont(new Font(UI.FONT_TYPE, UI.FONT_SIZE_H1));
         modalContainer.getChildren().add(DialogBox.getDukeDialog(UI.helpMessage(), dukeImage));
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(UI.welcomeMessage(), dukeImage));
     }
