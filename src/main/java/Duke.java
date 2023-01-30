@@ -7,8 +7,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import javax.xml.stream.events.Comment;
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;
