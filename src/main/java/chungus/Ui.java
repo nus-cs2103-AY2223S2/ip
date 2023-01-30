@@ -1,98 +1,43 @@
 package chungus;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.Writer;
-import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 /**
- * A simple console based UI.
+ * Represents an abstract, basic, I/O user interface.
  */
-class Ui {
-    private Scanner in;
-    private Writer out;
-
+public interface Ui {
     /**
-     * Constructor for a Ui. By default, stdin and stdout are used for I/O.
-     */
-    public Ui() {
-        in = new Scanner(System.in);
-        out = new PrintWriter(System.out);
-    }
-
-    /**
-     * Another constructor for Ui.
+     * Starts the UI instance.
      * 
-     * @param in  Some input.
-     * @param out Some output.
+     * @param handler    A lambda to apply to each line of user input.
+     * @param beforeEach Something to run before each response.
+     * @param afterEach  Something to run after each response.
+     * @param isRunning  Whether the app is still running.
      */
-    public Ui(InputStream in, OutputStream out) {
-        this.in = new Scanner(in);
-        this.out = new PrintWriter(out);
-    }
+    public void startWith(Consumer<String> handler, Runnable beforeEach, Runnable afterEach, AtomicBoolean isRunning);
 
     /**
-     * Gets the next line from input. The line is guaranteed to be trimmed of
-     * whitespaces.
-     * 
-     * @return The next line.
-     */
-    public String nextLine() {
-        return in.nextLine().trim();
-    }
-
-    /**
-     * Prints something to the output with no special formatting.
+     * Displays text.
      * 
      * @param msg  A format string.
      * @param args Arguments for the format string.
-     * @throws RuntimeException If some I/O exception occurs.
      */
-    public void print(String msg, Object... args) {
-        try {
-            out.append(String.format(msg, args)).flush();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public void print(String msg, Object... args);
 
     /**
-     * Displays something and formats it as "information".
+     * Displays text formatted for information.
      * 
      * @param msg  A format string.
      * @param args Arguments for the format string.
-     * @throws RuntimeException If some I/O exception occurs.
      */
-    public void info(String msg, Object... args) {
-        try {
-            out.append("\u001b[36m")
-                    .append(String.format(msg, args))
-                    .append('\n')
-                    .append("\u001b[0m")
-                    .flush();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public void info(String msg, Object... args);
 
     /**
-     * Displays something and formats it as an error.
+     * Displays text formatted as an error.
      * 
      * @param msg  A format string.
      * @param args Arguments for the format string.
-     * @throws RuntimeException If some I/O exception occurs.
      */
-    public void error(String msg, Object... args) {
-        try {
-            out.append("\u001b[31m")
-                    .append(String.format(msg, args))
-                    .append('\n')
-                    .append("\u001b[0m")
-                    .flush();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public void error(String msg, Object... args);
 }
