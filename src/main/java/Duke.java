@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.time.LocalDate;
 
 /** Duke chat bot.
  * @author Hee Jia Yuan
@@ -15,97 +16,87 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
-            try {
-                oneWordCommand(userInput, taskStorage);
-            } catch (Exception e) {
-                respond("I'm sorry, but to use this command, you must have a valid body message.");
-            }
+            oneWordCommand(userInput, taskStorage);
         }
     }
 
-
-    public static void oneWordCommand(String userInput, TaskStorage taskStorage) throws Exception {
+    public static void oneWordCommand(String userInput, TaskStorage taskStorage) {
         String firstWord = userInput.split(" ", 2)[0];
 
-        if (userInput.equals("bye")) {
-            respond("Goodbye! Have a nice day ahead.\n");
-            return;
+        try {
+            if (userInput.equals("bye")) {
+                respond("Goodbye! Have a nice day ahead.\n");
+                return;
+            } else if (userInput.equals("list")) {
+                taskStorage.listTasks();
+                return;
+            } else if (firstWord.equals("mark")) {
+
+
+                String secondWord = userInput.split(" ", 2)[1];
+                int taskNumber = Integer.parseInt(secondWord);
+                taskStorage.updateTask(taskNumber);
+                Task target = taskStorage.getTask(taskNumber);
+                respond("I have marked this task as done! \n" + target.provideDetails());
+                return;
+
+            } else if (firstWord.equals("unmark")) {
+
+                String secondWord = userInput.split(" ", 2)[1];
+                int taskNumber = Integer.parseInt(secondWord);
+                taskStorage.updateTask(taskNumber);
+                Task target = taskStorage.getTask(taskNumber);
+                respond("I have marked this task as undone! \n" + target.provideDetails());
+                return;
+
+            } else if (firstWord.equals("todo")) {
+                String bodyMessage = userInput.split(" ", 2)[1];
+                ToDo newTask = new ToDo(bodyMessage);
+                taskStorage.storeTasks(newTask);
+                respond("I have added this new task:\n" + newTask.provideDetails()
+                        + "\nYou now currently have "
+                        + taskStorage.getStorageCount() + " tasks.");
+                return;
+
+
+            } else if (firstWord.equals("deadline")) {
+
+                String bodyMessage = userInput.split(" ", 2)[1];
+                DeadLine newTask = new DeadLine(bodyMessage);
+                taskStorage.storeTasks(newTask);
+                respond("I have added this new task:\n" + newTask.provideDetails()
+                        + "\nYou now currently have "
+                        + taskStorage.getStorageCount() + " tasks.");
+                return;
+
+
+            } else if (firstWord.equals("event")) {
+                String bodyMessage = userInput.split(" ", 2)[1];
+                Event newTask = new Event(bodyMessage);
+                taskStorage.storeTasks(newTask);
+                respond("I have added this new task:\n" + newTask.provideDetails()
+                        + "\nYou now currently have "
+                        + taskStorage.getStorageCount() + " tasks.");
+
+            } else if (firstWord.equals("delete")) {
+                String bodyMessage = userInput.split(" ", 2)[1];
+                int taskNumber = Integer.parseInt(bodyMessage);
+                Task toDelete = taskStorage.getTask(taskNumber);
+                taskStorage.deleteTask(taskNumber);
+
+
+                respond("We have removed this task: " + toDelete.provideDetails() + "\nYou now have "
+                        + taskStorage.getStorageCount() + " tasks remaining");
+
+
+            } else {
+                respond("OOPS!!! I'm sorry, but I don't know what that means :-(");
+
+            }
         }
-
-        if (userInput.equals("list")) {
-            taskStorage.listTasks();
-            return;
+        catch (Exception e) {
+            e.printStackTrace();
         }
-
-        if (firstWord.equals("mark")) {
-
-            String secondWord = userInput.split(" ", 2)[1];
-            int taskNumber = Integer.parseInt(secondWord);
-            taskStorage.updateTask(taskNumber);
-            Task target = taskStorage.getTask(taskNumber);
-            respond("I have marked this task as done! \n" + target.provideDetails());
-            return;
-
-        }
-
-        if (firstWord.equals("unmark")) {
-
-            String secondWord = userInput.split(" ", 2)[1];
-            int taskNumber = Integer.parseInt(secondWord);
-            taskStorage.updateTask(taskNumber);
-            Task target = taskStorage.getTask(taskNumber);
-            respond("I have marked this task as undone! \n" + target.provideDetails());
-            return;
-
-        }
-
-        if (firstWord.equals("todo")) {
-            String bodyMessage = userInput.split(" ", 2)[1];
-            ToDo newTask = new ToDo(bodyMessage);
-            taskStorage.storeTasks(newTask);
-            respond("I have added this new task:\n" + newTask.provideDetails()
-                    + "\nYou now currently have "
-                    + taskStorage.getStorageCount() + " tasks.");
-            return;
-
-
-        }
-        if (firstWord.equals("deadline")) {
-            String bodyMessage = userInput.split(" ", 2)[1];
-            Deadline newTask = new Deadline(bodyMessage);
-            taskStorage.storeTasks(newTask);
-            respond("I have added this new task:\n" + newTask.provideDetails()
-                    + "\nYou now currently have "
-                    + taskStorage.getStorageCount() + " tasks.");
-            return;
-
-
-        }
-        if (firstWord.equals("event")) {
-            String bodyMessage = userInput.split(" ", 2)[1];
-            Event newTask = new Event(bodyMessage);
-            taskStorage.storeTasks(newTask);
-            respond("I have added this new task:\n" + newTask.provideDetails()
-                    + "\nYou now currently have "
-                    + taskStorage.getStorageCount() + " tasks.");
-
-        } if (firstWord.equals("delete")) {
-            String bodyMessage = userInput.split(" ", 2)[1];
-            int taskNumber = Integer.parseInt(bodyMessage);
-            Task toDelete = taskStorage.getTask(taskNumber);
-            taskStorage.deleteTask(taskNumber);
-
-
-            respond("We have removed this task: " + toDelete.provideDetails() + "\nYou now have "
-                                + taskStorage.getStorageCount() + " tasks remaining");
-
-
-
-        } else {
-            respond("OOPS!!! I'm sorry, but I don't know what that means :-(");
-
-        }
-
 
     }
 
