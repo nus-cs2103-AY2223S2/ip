@@ -1,13 +1,14 @@
 package duke.command;
 
 import java.util.ArrayList;
+
 import duke.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
-    String input;
+    protected String input;
 
     /**
      * Initialises the object

@@ -21,7 +21,7 @@ public abstract class Command {
      * @param storage The storage object
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage)throws FileNotFoundException,
-        IllegalArgumentException, DukeException, DirectoryNotFoundException, IOException;
+            IllegalArgumentException, DukeException, DirectoryNotFoundException, IOException;
     /**
      * Checks if this is exit command
      */

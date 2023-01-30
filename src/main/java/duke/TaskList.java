@@ -14,6 +14,9 @@ import duke.tasks.Todo;
 import duke.ui.Ui;
 
 
+/**
+ * Task List to store all the tasks
+ */
 public class TaskList {
 
     protected ArrayList<Task> taskList;

@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 public class Ui {
 
+    /**
+     * Displays welcome message
+     */
     public static void showWelcome() {
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("Hello! I'm duke.Duke\n"
@@ -18,16 +21,28 @@ public class Ui {
         System.out.println("------------------------------------------------------------------------------");
     }
 
+    /**
+     * Displays a line
+     */
     public static void showLine() {
         System.out.println("------------------------------------------------------------------------------");
     }
 
+    /**
+     * Reads a line from the user
+     */
     public static String readCommand() {
         Scanner sc = new Scanner(System.in);
         String cur = sc.nextLine();
         return cur;
     }
 
+    /**
+     * Adds a task to the task list
+     *
+     * @param task The task created
+     * @param counter The counter of the number of total tasks
+     */
     public void addTask(Task task, int counter) {
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:");
@@ -36,6 +51,11 @@ public class Ui {
         System.out.println("------------------------------------------------------------------------------");
     }
 
+    /**
+     * Displays all the current tasks
+     *
+     * @param list The task list
+     */
     public void listUI(TaskList list) {
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("Here are the tasks in your list:");
@@ -46,6 +66,11 @@ public class Ui {
         System.out.println("------------------------------------------------------------------------------");
     }
 
+    /**
+     * Marks a task as finished and displays to the user
+     *
+     * @param task The task finished
+     */
     public void mark(Task task) {
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("Nice! I've marked this task as done:");
@@ -53,12 +78,18 @@ public class Ui {
         System.out.println("------------------------------------------------------------------------------");
     }
 
+    /**
+     * Displays that the directory is not found
+     */
     public static void directoryExceptionUi() {
         System.out.println("____________________________________________________________\n"
             + "   OOPS!!! Directory not found, please create the directory \"data\" first\n"
             + "____________________________________________________________");
     }
 
+    /**
+     * Displays that the file is not found
+     */
     public static void fileExceptionUi() {
         System.out.println("____________________________________________________________\n"
             + "   OOPS!!! File not found, please create the file \"duke.txt\" first\n"
@@ -66,6 +97,10 @@ public class Ui {
 
     }
 
+    /**
+     * Shows error given as the input
+     * @param error Error input
+     */
     public static void showError(String error) {
         if (!error.equals("wrong")) {
             System.out.println(error);
@@ -79,6 +114,10 @@ public class Ui {
     }
 
 
+    /**
+     * Marks the task as unfinished
+     * @param task The task to be marked
+     */
     public void unmark(Task task) {
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("OK, I've marked this task as not done yet:");
@@ -86,12 +125,21 @@ public class Ui {
         System.out.println("------------------------------------------------------------------------------");
     }
 
+    /**
+     * Displays bye messgae to the user
+     */
     public static void bye() {
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println("------------------------------------------------------------------------------");
     }
 
+    /**
+     * Deletes a task from the task list
+     *
+     * @param task The task to be deleted
+     * @param counter The counter of the total number of tasks
+     */
     public static void delete(Task task, int counter) {
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("Noted. I've removed this task:");
@@ -101,6 +149,12 @@ public class Ui {
     }
 
 
+    /**
+     * Finds tasks in the task list
+     *
+     * @param found The indexes of the tasks found in the task list
+     * @param list The task list
+     */
     public static void find(ArrayList<Integer> found, TaskList list) {
         int counter = 1;
         System.out.println("------------------------------------------------------------------------------");
