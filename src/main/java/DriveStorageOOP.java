@@ -39,7 +39,7 @@ public class DriveStorageOOP {
 
                 if (firstWord.equals("deadline")) {
                     String bodyMessage = nextLine[2];
-                    Deadline newTask = new Deadline("deadline", bodyMessage, completed);
+                    DeadLine newTask = new DeadLine("deadline", bodyMessage, completed);
                     taskStorage.addTask(newTask);
                     continue;
 
