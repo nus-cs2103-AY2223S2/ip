@@ -100,7 +100,8 @@ public class Duke {
                     System.out.println("Now you have " + arraylist.size() + " tasks in the list");
                 } else if (len >= 10 && input.substring(0, 8).equals("deadline")) {
                     String[] ddl_str_arr = input.split(" /");
-                    if (len <= 9 || ddl_str_arr.length <= 1) {
+                    System.out.println(Arrays.toString(ddl_str_arr));
+                    if (len <= 9 || ddl_str_arr.length <= 1 || ddl_str_arr[0].length() < 10) {
                         String err_msg = "☹ OOPS!!! The description or date of a deadline cannot be empty";
                         throw new DukeException(err_msg);
                     }
@@ -121,7 +122,8 @@ public class Duke {
                     }
                 } else if (len >= 7 && input.substring(0, 5).equals("event")) {
                     String[] event_str_arr = input.split(" /");
-                    if (len <= 9 || event_str_arr.length <= 2) {
+                    System.out.println(Arrays.toString(event_str_arr));
+                    if (len <= 9 || event_str_arr.length <= 2 || event_str_arr[0].length() < 7) {
                         String err_msg = "☹ OOPS!!! The description or date of a event cannot be empty";
                         throw new DukeException(err_msg);
                     }
