@@ -1,6 +1,6 @@
-package Duke;
+package duke;
 
-import Duke.DukeExceptions.DukeException;
+import duke.exceptions.DukeException;
 
 import java.util.Scanner;
 
@@ -26,10 +26,6 @@ public class Ui {
 
     public void showError(DukeException e) {
         printResponse(e.getMessage());
-    }
-
-    public void showLoadingError() {
-        printResponse("Hmm I can't seem to find ");
     }
 
     public void sayBye() {

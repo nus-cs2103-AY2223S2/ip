@@ -1,10 +1,10 @@
-package Duke;
+package duke;
 
-import Duke.DukeExceptions.DukeEmptyInputException;
-import Duke.DukeExceptions.DukeException;
-import Duke.DukeExceptions.DukeInvalidInputException;
-import Duke.DukeExceptions.DukeTooManyInputsException;
-import Duke.Tasks.Task;
+import duke.exceptions.DukeEmptyInputException;
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeInvalidInputException;
+import duke.exceptions.DukeTooManyInputsException;
+import duke.tasks.Task;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;

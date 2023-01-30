@@ -1,10 +1,10 @@
-package Duke.Commands;
+package duke.commands;
 
-import Duke.DukeExceptions.DukeEmptyInputException;
-import Duke.DukeExceptions.DukeInvalidInputException;
-import Duke.Storage;
-import Duke.TaskList;
-import Duke.Ui;
+import duke.exceptions.DukeEmptyInputException;
+import duke.exceptions.DukeInvalidInputException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class MarkCommand extends Command {
     public MarkCommand(String input) {

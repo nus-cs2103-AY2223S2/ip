@@ -1,11 +1,11 @@
-package Duke.Commands;
+package duke.commands;
 
-import Duke.TaskList;
-import Duke.Ui;
-import Duke.Storage;
-import Duke.Tasks.Event;
-import Duke.DukeExceptions.DukeEmptyInputException;
-import Duke.DukeExceptions.DukeInvalidInputException;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.tasks.Event;
+import duke.exceptions.DukeEmptyInputException;
+import duke.exceptions.DukeInvalidInputException;
 
 public class EventCommand extends Command {
     public EventCommand(String input) {

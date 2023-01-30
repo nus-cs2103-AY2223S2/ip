@@ -1,8 +1,8 @@
-package Duke.Tasks;
+package duke.tasks;
 
-import Duke.DateHandler;
-import Duke.DukeExceptions.DukeInvalidInputException;
-import Duke.DukeExceptions.DukeEmptyInputException;
+import duke.DateHandler;
+import duke.exceptions.DukeInvalidInputException;
+import duke.exceptions.DukeEmptyInputException;
 
 
 public class Deadline extends Task {

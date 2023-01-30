@@ -1,9 +1,9 @@
-package Duke.Commands;
-import Duke.DukeExceptions.DukeEmptyInputException;
-import Duke.DukeExceptions.DukeInvalidInputException;
-import Duke.TaskList;
-import Duke.Ui;
-import Duke.Storage;
+package duke.commands;
+import duke.exceptions.DukeEmptyInputException;
+import duke.exceptions.DukeInvalidInputException;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
 
 public abstract class Command {
     protected String input;

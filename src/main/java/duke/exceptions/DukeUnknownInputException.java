@@ -1,4 +1,4 @@
-package Duke.DukeExceptions;
+package duke.exceptions;
 
 public class DukeUnknownInputException extends DukeException {
     public DukeUnknownInputException() {

@@ -1,10 +1,10 @@
-package Duke.Commands;
+package duke.commands;
 
-import Duke.TaskList;
-import Duke.Ui;
-import Duke.Storage;
-import Duke.Tasks.Todo;
-import Duke.DukeExceptions.DukeInvalidInputException;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.tasks.Todo;
+import duke.exceptions.DukeInvalidInputException;
 
 public class TodoCommand extends Command {
     public TodoCommand(String input) {

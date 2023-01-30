@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
-import Duke.Commands.Command;
-import Duke.DukeExceptions.*;
+import duke.commands.Command;
+import duke.exceptions.*;
 
 public class Duke {
     private final Ui ui;

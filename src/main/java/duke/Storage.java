@@ -1,11 +1,11 @@
-package Duke;
+package duke;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
-import Duke.DukeExceptions.DukeCannotFindFileException;
+import duke.exceptions.DukeCannotFindFileException;
 
 public class Storage {
     private final String saveLocation = "data/savestate.txt";

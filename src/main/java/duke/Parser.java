@@ -1,11 +1,10 @@
-package Duke;
+package duke;
 
-import Duke.Commands.Command;
-import Duke.DukeExceptions.DukeUnknownInputException;
-import Duke.Commands.*;
+import duke.commands.Command;
+import duke.exceptions.DukeUnknownInputException;
+import duke.commands.*;
 
 public class Parser {
-    private TaskList tasks;
 
     public Parser() {}
 
