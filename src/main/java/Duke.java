@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -43,8 +45,10 @@ public class Duke {
             String[] args = command.split(" ");
             switch (args[0]) {
                 case "bye":
-                    prettyPrint("Hope I helped. Goodbye!");
+                    systemPrint("Saving state, please wait...");
                     saveState();
+                    systemPrint("State successfully saved.");
+                    prettyPrint("Hope I helped. Goodbye!");
                     return false;
                 case "mark":
                     // todo: check if second argument is a valid number
@@ -73,9 +77,19 @@ public class Duke {
                         }
 
                         // startIndex of command.substring() is 9 as "deadline " is 9 chars long
-                        tasks.add(new Deadline(
-                                command.substring(9, byIndex).trim(),
-                                command.substring(byIndex + 4, command.length()).trim()));
+                        try {
+                            LocalDate deadline = LocalDate.parse(
+                                    command.substring(byIndex + 4, command.length()).trim());
+                            tasks.add(new Deadline(
+                                    command.substring(9, byIndex).trim(),
+                                    deadline));
+                        } catch (DateTimeParseException e) {
+                            prettyPrint("Uh-oh, Clippy didn't quite understand the date provided.");
+                            prettyPrint("Deadline not saved. " +
+                                    "Try again with dates in the following format:");
+                            prettyPrint("===> yyyy-mm-dd <====");
+                            return true;
+                        }
                     } else if (args[0].equals("event")) {
                         // todo: check if BOTH '/from' and '/to' exists
                         int fromIndex = command.indexOf("/from ");
@@ -85,11 +99,19 @@ public class Duke {
                             throw new ClippyInvalidEventException();
                         }
 
-                        // startIndex of command.substring() is 6 as "event " is 6 chars long
-                        tasks.add(new Event(
-                                command.substring(6, fromIndex).trim(),
-                                command.substring(fromIndex + 6, toIndex).trim(),
-                                command.substring(toIndex + 4, command.length()).trim()));
+                        try {
+                            // startIndex of command.substring() is 6 as "event " is 6 chars long
+                            tasks.add(new Event(
+                                    command.substring(6, fromIndex).trim(),
+                                    LocalDate.parse(command.substring(fromIndex + 6, toIndex).trim()),
+                                    LocalDate.parse(command.substring(toIndex + 4, command.length()).trim())));
+                        } catch (DateTimeParseException e) {
+                            prettyPrint("Uh-oh, Clippy didn't quite understand the date provided.");
+                            prettyPrint("Deadline not saved. " +
+                                    "Try again with dates in the following format:");
+                            prettyPrint("===> yyyy-mm-dd <====");
+                            return true;
+                        }
                     }
                     prettyPrint("Got it! I've added this task:");
                     prettyPrint(tasks.get(tasks.size() - 1).toString());
@@ -133,36 +155,40 @@ public class Duke {
         System.out.println(">>> " + output);
     }
 
+    private static void systemPrint(String output) {
+        System.out.println("... " + output);
+    }
+
     private static void loadState() {
-        prettyPrint("Loading saved data...");
+        systemPrint("Loading saved data...");
 
         File dir = new File(SAVE_FILE_PATH);
         if (!dir.exists()) {
-            prettyPrint("data directory not found! Creating it now...");
+            systemPrint("data directory not found! Creating it now...");
             if (dir.mkdirs()) {
-                prettyPrint("Successfully created data directory!");
+                systemPrint("Successfully created data directory!");
             }
         }
 
         if (!saveFile.exists()) {
-            prettyPrint("Save file not found! Creating it now...");
+            systemPrint("Save file not found! Creating it now...");
             try {
                 saveFile.createNewFile();
             } catch (IOException e) {
-                prettyPrint("I/O failed: " + e.toString() + ". Data will not be saved!");
+                systemPrint("I/O failed: " + e.toString() + ". Data will not be saved!");
                 return;
             } catch (SecurityException e) {
-                prettyPrint("Write access denied by security manager. Data will not be saved!");
+                systemPrint("Write access denied by security manager. Data will not be saved!");
                 return;
             }
-            prettyPrint("Successfully created save file!");
+            systemPrint("Successfully created save file!");
         } else {
             try {
                 Scanner saveFileScanner = new Scanner(saveFile);
                 while (saveFileScanner.hasNext()) {
                     tasks.add(Task.parseCsvString(saveFileScanner.nextLine()));
                 }
-                prettyPrint("Save file loaded successfully!");
+                systemPrint("Save file loaded successfully!");
             } catch (FileNotFoundException e) {
                 // should not happen since we checked for file existence beforehand
                 System.out.println("Unexpected error occurred - save file not found. Data will not be saved!");

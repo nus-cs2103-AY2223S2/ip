@@ -1,7 +1,10 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String from;
-    private String to;
-    public Event(String description, String from, String to) {
+    private LocalDate from;
+    private LocalDate to;
+    public Event(String description, LocalDate from, LocalDate to) {
         super(description);
         this.from = from;
         this.to = to;
@@ -9,7 +12,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.from, this.to);
+        // only show day of the week + day of the month + month
+        return String.format("[E]%s (from: %s to: %s)",
+                super.toString(),
+                this.from.format(DateTimeFormatter.ofPattern("EEE dd MMM")),
+                this.to.format(DateTimeFormatter.ofPattern("EEE dd MMM")));
     }
 
     @Override
