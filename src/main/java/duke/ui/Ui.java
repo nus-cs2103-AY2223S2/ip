@@ -15,26 +15,29 @@ public class Ui {
     public Ui() {}
 
     /**
-     * Print the intro of Duke CLI
+     * Returns the intro of Duke CLI
+     *
+     * @return output string
      */
     public String getIntro() {
         return Ui.INTRO;
     }
 
     /**
-     * Print the outro of Duke CLI
+     * Returns the outro of Duke CLI
+     *
+     * @return output string
      */
     public String getOutro() {
         return Ui.OUTRO;
     }
 
     /**
-     * Wrap string and size of list between indentations and
-     * horizontal lines
+     * Format the string and tasklist size to return to user
      *
      * @param s String to be wrapped
      * @param size Size of TaskList
-     * @return String wrapped with indentations and horizontal lines
+     * @return Formatted string
      */
     public String wrap(String s, int size) {
         //wrap string with the correct indentation and lines when returning add task string
@@ -46,10 +49,12 @@ public class Ui {
     }
 
     /**
-     * Prints the ouput after adding a Deadline
+     * Returns the ouput string after adding a Deadline
      *
      * @param taskString String version of the Deadline task
      * @param size Size of TaskList after adding
+     *
+     * @return output string
      */
     public String showAddDeadlineResult(String taskString, int size) {
         return this.wrap(taskString, size);
@@ -66,7 +71,7 @@ public class Ui {
     }
 
     /**
-     * Prints the output after adding Todo
+     * Returns the output string after adding Todo
      *
      * @param taskString String version of Todo task
      * @param size Size of TaskList after adding
@@ -76,10 +81,11 @@ public class Ui {
     }
 
     /**
-     * Prints output after marking a Task as done
+     * Returns the string output after marking a Task as done
      *
      * @param taskString
      * @param index
+     * @return output string
      */
     public String showMarkResult(String taskString, int index) {
         String s = "Nice! I've marked this task as done:\n";
@@ -88,10 +94,11 @@ public class Ui {
     }
 
     /**
-     * Prints output after marking Task as undone
+     * Returns the string output after marking Task as undone
      *
      * @param taskString
      * @param index
+     * @return output string
      */
     public String showUnmarkResult(String taskString, int index) {
         String s = "OK, I've marked this task as not done yet:\n";
@@ -100,10 +107,11 @@ public class Ui {
     }
 
     /**
-     * Prints output after deleting Task
+     * Returns the string output after deleting Task
      *
      * @param taskString String version of Task deleted
      * @param size Size of TaskList after delete
+     * @return output string
      */
     public String showDeleteResult(String taskString, int size) {
         StringBuilder sb = new StringBuilder();
@@ -113,9 +121,10 @@ public class Ui {
     }
 
     /**
-     * Print all the task matching to user input
+     * Return the string version of all the task matching to user input
      *
      * @param taskArr ArrayList containing tasks with matching taskname
+     * @return output string
      */
     public String showFindTaskResult(ArrayList<Task> taskArr) {
         StringBuilder sb = new StringBuilder();
@@ -129,9 +138,11 @@ public class Ui {
     }
 
     /**
-     * Print all the Task in TaskList after user calls 'list' command
+     * Return the string version of all the Task in TaskList
+     * after user calls 'list' command
      *
      * @param tl TaskList containing all the task
+     * @return output string
      */
     public String showGetAllTaskResult(TaskList tl) {
         StringBuilder s = new StringBuilder();

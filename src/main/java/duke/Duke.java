@@ -26,11 +26,20 @@ public class Duke{
         this.storage.populate(this.tl);
     }
 
+    /**
+     * @return String version of introduction
+     */
     public String getIntro() {
         return this.ui.getIntro();
     }
 
-    String getResponse(String input) {
+    /**
+     * Returns the response given a user input
+     *
+     * @param input User input string
+     * @return Output string
+     */
+    public String getResponse(String input) {
         try {
             Command command = this.parser.parse(input);
             if (Objects.equals(command, null)) {

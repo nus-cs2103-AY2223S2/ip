@@ -15,11 +15,12 @@ public class DeleteTaskCommand extends Command {
     }
 
     /**
-     * Delete task from TaskList and Storage, and output result using Ui
+     * Delete task from TaskList and Storage, and output result string
      *
      * @param tl TasList to be used to get Task
      * @param ui Ui to output result
      * @param storage Storage to modify if necessary
+     * @return output string
      */
     @Override
     public String execute(TaskList tl, Ui ui, Storage storage) {

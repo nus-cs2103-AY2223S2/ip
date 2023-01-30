@@ -15,11 +15,12 @@ public class UnmarkTaskCommand extends Command {
     }
 
     /**
-     * Marks Task as undone, update it to storage, and output result using Ui
+     * Marks Task as undone, update it to storage, and return result string
      *
      * @param tl TasList to be used to get Task
      * @param ui Ui to output result
      * @param storage Storage to modify if necessary
+     * @return output string
      */
     @Override
     public String execute(TaskList tl, Ui ui, Storage storage) {
