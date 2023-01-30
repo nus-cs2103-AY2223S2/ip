@@ -18,7 +18,6 @@ public class Duke {
         try {
             tasks = storage.load();
         } catch (DukeException e) {
-            //UI can show loading error
             e.getMessage();
             tasks = new TaskList();
         }
