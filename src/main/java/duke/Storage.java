@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Storage {
-    public static final String SAVE_LOCATION = "src/duke.txt";
+    public static final String SAVE_LOCATION = "duke.txt";
 
     public static Tasklist load() throws FileNotFoundException {
         Tasklist listOfThings = new Tasklist();

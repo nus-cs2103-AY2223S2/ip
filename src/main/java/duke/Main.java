@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 
+import static duke.Storage.SAVE_LOCATION;
+
 /**
  * The Duke program implements a 'to-do' list
  * where users can add, mark and delete tasks 
@@ -17,7 +19,7 @@ public class Main {
 
         Tasklist tasklist = new Tasklist();
         try {
-            File saveFile = new File("src/duke.txt");
+            File saveFile = new File(SAVE_LOCATION);
             if (saveFile.createNewFile()) {
                 System.out.println("Save file created: " + saveFile.getName());
             } else {
