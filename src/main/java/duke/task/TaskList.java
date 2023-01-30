@@ -12,6 +12,8 @@ import java.util.List;
 public class TaskList {
     private List<Task> tasks;
 
+    private String filterKeyphrase;
+
     private final Storage storage;
 
     /**
@@ -35,30 +37,50 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+
+        int printIndex = 1;
         for (int i = 0; i < tasks.size(); ++i) {
-            stringBuilder.append(String.format("%d.%s\n", i + 1, tasks.get(i).toString()));
+            if (matchesFilter(i)) {
+                stringBuilder.append(String.format("%d.%s\n", printIndex++, tasks.get(i).toString()));
+            }
         }
 
         return stringBuilder.toString().trim();
     }
 
     /**
-     * Returns the task at the specified index.
+     * Returns the task at the specified index in the filtered task list.
      *
-     * @param index The index of the task to be returned.
+     * @param index The index of the task (in the filtered task list) to be returned.
      * @return The task at the specified index.
      * @throws IndexOutOfBoundsException Indicates that the index is out of range.
      */
     public Task get(int index) {
-        return tasks.get(index);
+        return tasks.get(convertFilteredIndexToListIndex(index));
     }
 
     /**
-     * Returns the number of tasks in the list.
+     * Returns the number of tasks in the task list excluding filtered tasks.
      *
-     * @return The number of tasks in the list.
+     * @return The number of tasks in the task list excluding filtered tasks.
      */
-    public int size() {
+    public int getSize() {
+        int count = 0;
+        for (int i = 0; i < tasks.size(); ++i) {
+            if (matchesFilter(i)) {
+                ++count;
+            }
+        }
+
+        return count;
+    }
+
+    /**
+     * Returns the number of tasks in the task list including those that have been filtered.
+     *
+     * @return The number of tasks in the task list including those that have been filtered.
+     */
+    public int getUnfilteredSize() {
         return tasks.size();
     }
 
@@ -80,7 +102,8 @@ public class TaskList {
     }
 
     /**
-     * Removes the task at the specified index, writes the updated task list to storage, and returns the removed task.
+     * Removes the task at the specified index in the filtered task list, writes the updated task list to storage, and
+     * returns the removed task.
      *
      * @param index The index of the task to be removed.
      * @return The removed task.
@@ -88,12 +111,14 @@ public class TaskList {
      * @throws DukeException Indicates failure to write to storage.
      */
     public Task removeAt(int index) throws DukeException {
-        Task task = tasks.remove(index);
+        int listIndex = convertFilteredIndexToListIndex(index);
+
+        Task task = tasks.remove(listIndex);
 
         try {
             writeToStorage();
         } catch (DukeException e) {
-            tasks.add(index, task);
+            tasks.add(listIndex, task);
             throw e;
         }
 
@@ -101,22 +126,41 @@ public class TaskList {
     }
 
     /**
-     * Updates the task at index.
+     * Updates the task at index in the filtered task list.
      *
-     * @param index The index of the task to be updated.
+     * @param index The index of the task (in the filtered task list) to be updated.
      * @param task The updated task.
+     * @throws IndexOutOfBoundsException Indicates that the index is out of range.
      * @throws DukeException Indicates failure to write to storage.
      */
     public void update(int index, Task task) throws DukeException {
-        Task oldTask = tasks.get(index);
-        tasks.set(index, task);
+        int listIndex = convertFilteredIndexToListIndex(index);
+
+        Task oldTask = tasks.get(listIndex);
+        tasks.set(listIndex, task);
 
         try {
             writeToStorage();
         } catch (DukeException e) {
-            tasks.set(index, oldTask);
+            tasks.set(listIndex, oldTask);
             throw e;
         }
+    }
+
+    /**
+     * Filters the task list, hiding any task that does not match the filter.
+     *
+     * @param filterKeyphrase The keyphrase to filter the task list by.
+     */
+    public void filter(String filterKeyphrase) {
+        this.filterKeyphrase = filterKeyphrase;
+    }
+
+    /**
+     * Clears the filter, un-hiding all filtered tasks.
+     */
+    public void clearFilter() {
+        this.filterKeyphrase = null;
     }
 
     private void loadFromStorage() throws DukeException {
@@ -145,6 +189,25 @@ public class TaskList {
         default:
             throw new DukeException("An unknown task type was found in storage.");
         }
+    }
+
+    private int convertFilteredIndexToListIndex(int filteredIndex) throws IndexOutOfBoundsException {
+        int currFilteredIndex = -1;
+        for (int i = 0; i < tasks.size(); ++i) {
+            if (matchesFilter(i)) {
+                ++currFilteredIndex;
+            }
+
+            if (currFilteredIndex == filteredIndex) {
+                return i;
+            }
+        }
+
+        throw new IndexOutOfBoundsException();
+    }
+
+    private boolean matchesFilter(int listIndex) {
+        return filterKeyphrase == null || tasks.get(listIndex).getDescription().contains(filterKeyphrase);
     }
 
     private void writeToStorage() throws DukeException {

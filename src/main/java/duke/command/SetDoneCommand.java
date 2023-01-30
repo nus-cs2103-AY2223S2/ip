@@ -61,9 +61,8 @@ public abstract class SetDoneCommand implements Command {
             throw new DukeException(String.format("The index of the task to %s must be an integer!", getCommand()));
         }
 
-        if (index >= tasks.size() || index < 0) {
-            String message = String.format("The task to %s doesn't exist!",
-                    getCommand());
+        if (index >= tasks.getSize() || index < 0) {
+            String message = String.format("The task to %s doesn't exist!", getCommand());
             throw new DukeException(message);
         }
 

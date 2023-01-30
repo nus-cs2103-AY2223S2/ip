@@ -7,8 +7,8 @@ import duke.task.TaskList;
  */
 public class ListCommand implements Command {
     /**
-     * Returns a message listing out each task in tasks if tasks is not empty. Otherwise, returns a message informing
-     * the user of the empty task list.
+     * Clears any keyphrase filter applied to the task list and returns a message listing out each task in tasks if
+     * tasks is not empty. Otherwise, returns a message informing the user of the empty task list.
      *
      * @param input {@inheritDoc}
      * @param tasks {@inheritDoc}
@@ -17,6 +17,8 @@ public class ListCommand implements Command {
      */
     @Override
     public String run(String input, TaskList tasks) {
-        return tasks.size() == 0 ? "Nothing to see here. Now go on, scram!" : tasks.toString();
+        tasks.clearFilter();
+
+        return tasks.getUnfilteredSize() == 0 ? "Nothing to see here. Now go on, scram!" : tasks.toString();
     }
 }
