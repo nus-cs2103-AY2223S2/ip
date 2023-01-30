@@ -1,23 +1,28 @@
-import java.util.Scanner;
 public class Sunday {
-    private static State state;
-    public static void main(String[] args) {
+    private Ui ui;
+    public Sunday(String filepath) {
+        this.ui = new Ui();
         try {
-            State.GREET.execute("create/load data file");
+            Command.INITIALIZE.execute("data/sunday.txt");
         } catch (SundayException e) {
-            Printer.printException(e);
+            Ui.printException(e);
         }
-        Scanner sc = new Scanner(System.in);
-        while (state != State.BYE) {
+    }
+
+    private void run() {
+        Command command = null;
+        while (command != Command.BYE) {
             try {
-                String command = sc.next();
-                String input = sc.nextLine();
-                state = State.determine(command);
-                state.execute(input);
+                String[] fullCommand = ui.readCommand();
+                command = Parser.parse(fullCommand);
+                command.execute(fullCommand[1]);
             } catch (SundayException e) {
-                Printer.printException(e);
+                Ui.printException(e);
             }
         }
-        sc.close();
+        this.ui.close();
+    }
+    public static void main(String[] args) {
+        new Sunday("data/sunday.txt").run();
     }
 }

@@ -4,14 +4,14 @@ import java.text.ParseException;
 public class Event extends Task {
     private Date start;
     private Date end;
-    public Event(String description, String start, String end) {
+    public Event(String description, String start, String end) throws SundayException {
         super(description);
         try {
             this.start = super.readFormat.parse(start);
             this.end = super.readFormat.parse(end);
         } catch (ParseException e) {
-            Printer.printException(new SundayException(
-                    "OOPS! It appears the deadline given was not of the format dd/mm/yyyy hhmm"));
+            throw new SundayException(
+                    "OOPS! It appears the deadline given was not of the format dd/mm/yyyy hhmm");
         }
     }
     @Override

@@ -1,27 +1,26 @@
 import java.util.ArrayList;
 
-public class Record {
+public class TaskList {
     private ArrayList<Task> list;
-    public Record() {
+    public TaskList() {
         this.list = new ArrayList<>();
     }
     public void add(Task task) {
         this.list.add(task);
     }
-    public void mark(int index) {
+    public Task mark(int index) {
         this.list.get(index).mark();
+        return this.list.get(index);
     }
-    public void unmark(int index) {
+    public Task unmark(int index) {
         this.list.get(index).unmark();
+        return this.list.get(index);
     }
     public Task delete(int index) {
         return this.list.remove(index);
     }
-    public String taskToString(int index) {
-        return this.list.get(index).toString();
-    }
-    public String latestTaskToString() {
-        return this.list.get(list.size()-1).toString();
+    public Task getTask(int index) {
+        return this.list.get(index);
     }
     public int getUncompletedSize() {
         int count = 0;
@@ -32,7 +31,7 @@ public class Record {
         }
         return count;
     }
-    public void save() {
+    public boolean save() throws SundayException {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             if (i > 0) {
@@ -40,12 +39,17 @@ public class Record {
             }
             sb.append(this.list.get(i).save());
         }
-        DataHandler.writeToDataFile(sb.toString());
+        return Storage.writeToDataFile(sb.toString());
     }
-    public void load() throws SundayException{
-        if (!DataHandler.createDataFile()) {
-            DataHandler.readFromDataFile();
+    public boolean load() throws SundayException{
+        if (Storage.createDataFile()) {
+            return true;
         }
+        Storage.readFromDataFile();
+        return false;
+    }
+    public boolean isEmpty() {
+        return this.list.isEmpty();
     }
     @Override
     public String toString() {
@@ -54,7 +58,7 @@ public class Record {
             if (i > 0) {
                 sb.append("\n");
             }
-            sb.append(this.taskToString(i));
+            sb.append(this.getTask(i));
         }
         return sb.toString();
     }

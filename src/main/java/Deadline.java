@@ -8,8 +8,8 @@ public class Deadline extends Task{
         try {
             this.deadline = super.readFormat.parse(deadline);
         } catch (ParseException e) {
-            Printer.printException(new SundayException(
-                    "OOPS! It appears the deadline given was not of the format dd/mm/yyyy hhmm"));
+            throw new SundayException(
+                    "OOPS! It appears the deadline given was not of the format dd/mm/yyyy hhmm");
         }
     }
     @Override

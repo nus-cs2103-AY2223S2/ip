@@ -1,22 +1,24 @@
-public enum State {
-    GREET ("hello") {
+public enum Command {
+    INITIALIZE ("init") {
         @Override
-        public void execute(String input) throws SundayException {
-            Printer.printBar();
-            Printer.printText("Hi! I'm Sunday, pleasure to meet you!");
-            Printer.printText("How can I help?");
-            Printer.printBar();
-
-            list.load();
+        public void execute(String filepath) throws SundayException {
+            Ui.printWelcome();
+            boolean isFirstLaunch = list.load();
+            if (isFirstLaunch) {
+                Ui.printCreatedSaveFile();
+            } else {
+                Ui.printLoadedSaveFile();
+            }
         }
     },
     LIST ("list") {
         @Override
         public void execute(String input) {
-            Printer.printBar();
-            Printer.printText("Here's everything I've noted down for you:");
-            Printer.printRecords(list);
-            Printer.printBar();
+            if (list.isEmpty()) {
+                Ui.printEmptyTaskList();
+            } else {
+                Ui.printTaskList(list);
+            }
         }
     },
     DEADLINE ("deadline") {
@@ -33,6 +35,7 @@ public enum State {
                     i++;
                 }
                 String description = sb.toString().substring(0, sb.length() - 1);
+
                 sb.setLength(0);
                 i++; // skip "/by" or "(by:"
                 while (i < strArr.length) {
@@ -40,23 +43,21 @@ public enum State {
                     sb.append(" ");
                     i++;
                 }
-                String deadline = sb.toString().substring(0, sb.length() - 1);
-                list.add(new Deadline(description, deadline));
+                String by = sb.toString().substring(0, sb.length() - 1);
+
+                Task deadline = new Deadline(description, by);
+                list.add(deadline);
+                Ui.printAddedTask(deadline, list.getUncompletedSize());
             } catch (StringIndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! The description of a deadline cannot be empty.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! The description of this deadline is invalid.");
             }
-            Printer.printBar();
-            Printer.printText("Got it. I've added this task:");
-            Printer.printText("  " + list.latestTaskToString());
-            Printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
-            Printer.printBar();
         }
     },
     EVENT ("event") {
         @Override
-        public void execute(String input) throws SundayException{
+        public void execute(String input) throws SundayException {
             try {
                 input = input.substring(1);
                 String[] strArr = input.split(" ");
@@ -68,6 +69,7 @@ public enum State {
                     j++;
                 }
                 String description = sb.toString().substring(0, sb.length() - 1);
+
                 sb.setLength(0);
                 j++; // skip "/from" or "(from:"
                 while (!(strArr[j].equals("/to") || strArr[j].equals("to:"))) {
@@ -76,6 +78,7 @@ public enum State {
                     j++;
                 }
                 String start = sb.toString().substring(0, sb.length() - 1);
+
                 sb.setLength(0);
                 j++; // skip "/to" or "to:"
                 while (j < strArr.length) {
@@ -84,33 +87,27 @@ public enum State {
                     j++;
                 }
                 String end = sb.toString().substring(0, sb.length() - 1);
-                list.add(new Event(description, start, end));
+                Task event = new Event(description, start, end);
+                list.add(event);
+                Ui.printAddedTask(event, list.getUncompletedSize());
             } catch (StringIndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! The description of an event cannot be empty.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! The description of this event is invalid.");
             }
-            Printer.printBar();
-            Printer.printText("Got it. I've added this task:");
-            Printer.printText("  " + list.latestTaskToString());
-            Printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
-            Printer.printBar();
         }
     },
     TODO ("todo") {
         @Override
-        public void execute(String input) throws SundayException{
+        public void execute(String input) throws SundayException {
             try {
                 String description = input.substring(1);
-                list.add(new ToDo(description));
+                Task toDo = new ToDo(description);
+                list.add(toDo);
+                Ui.printAddedTask(toDo, list.getUncompletedSize());
             } catch (StringIndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! The description of a todo cannot be empty.");
             }
-            Printer.printBar();
-            Printer.printText("Got it. I've added this task:");
-            Printer.printText("  " + list.latestTaskToString());
-            Printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
-            Printer.printBar();
         }
     },
     MARK ("mark") {
@@ -118,12 +115,8 @@ public enum State {
         public void execute(String input) throws SundayException {
             try {
                 int index = Integer.parseInt(input.substring(1)) - 1;
-                list.mark(index);
-                Printer.printBar();
-                Printer.printText("Well Done! I've marked this task as done:");
-                Printer.printText("  " + list.taskToString(index));
-                Printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
-                Printer.printBar();
+                Task marked = list.mark(index);
+                Ui.printMarkedTask(marked, list.getUncompletedSize());
             } catch (NumberFormatException e) {
                 throw new SundayException("OOPS!!! You did not specify which task you wanted me to mark");
             } catch (IndexOutOfBoundsException e) {
@@ -136,12 +129,8 @@ public enum State {
         public void execute(String input) throws SundayException {
             try {
                 int index = Integer.parseInt(input.substring(1)) - 1;
-                list.unmark(index);
-                Printer.printBar();
-                Printer.printText("OK, I've marked this task as not done yet:");
-                Printer.printText("  " + list.taskToString(index));
-                Printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
-                Printer.printBar();
+                Task unmarked = list.unmark(index);
+                Ui.printUnmarkedTask(unmarked, list.getUncompletedSize());
             }  catch (NumberFormatException e) {
                 throw new SundayException("OOPS!!! You did not specify which task you wanted me to unmark");
             } catch (IndexOutOfBoundsException e) {
@@ -151,15 +140,11 @@ public enum State {
     },
     DELETE ("delete") {
         @Override
-        public void execute(String input) throws SundayException{
+        public void execute(String input) throws SundayException {
             try {
                 int index = Integer.parseInt(String.valueOf(input.substring(1))) - 1;
                 Task deleted = list.delete(index);
-                Printer.printBar();
-                Printer.printText("Noted. I've removed this task:");
-                Printer.printText("  " + deleted.toString());
-                Printer.printText("Now you have " + list.getUncompletedSize() + " task(s) in the list.");
-                Printer.printBar();
+                Ui.printDeletedTask(deleted, list.getUncompletedSize());
             } catch (NumberFormatException e) {
                 throw new SundayException("OOPS!!! You did not specify which task you wanted me to delete");
             } catch (IndexOutOfBoundsException e) {
@@ -169,24 +154,15 @@ public enum State {
     },
     BYE ("bye") {
         @Override
-        public void execute(String input) {
-            list.save();
-            Printer.printBar();
-            Printer.printText("Goodbye and have a pleasant day!");
-            Printer.printBar();
+        public void execute(String input) throws SundayException {
+            boolean didSave = list.save();
+            Ui.printGoodbye(didSave);
         }
     };
     private String command;
-    private static Record list = new Record();
-    State(String command) {
+    private static TaskList list = new TaskList();
+    Command(String command) {
         this.command = command;
     }
     public abstract void execute(String input) throws SundayException;
-    public static State determine(String command) throws SundayException{
-        try {
-            return State.valueOf(command.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new SundayException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-    }
 }
