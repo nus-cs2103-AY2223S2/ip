@@ -16,7 +16,7 @@ public class Deadline extends Task {
      */
     public Deadline(String detail, LocalDate time) {
         super(detail);
-        this.eventDetail = detail;
+        this.eventDetail = detail.trim();
         this.time = time;
     }
 
@@ -26,7 +26,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + "[" + this.getStatusIcon() + "] " + eventDetail + "(by: " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "] " + eventDetail + " (by: " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
     /**
      * Gets the type of task

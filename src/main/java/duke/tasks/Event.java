@@ -17,7 +17,7 @@ public class Event extends Task {
      */
     public Event(String detail, String time) {
         super(detail);
-        this.eventDetail = detail;
+        this.eventDetail = detail.trim();
         this.time = time;
     }
 
@@ -27,7 +27,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + "[" + super.getStatusIcon() + "] " + eventDetail + "(from: " + time.split("from ")[1].split(" to ")[0] + " to:"
+        return "[E]" + "[" + super.getStatusIcon() + "] " + eventDetail + " (from: " + time.split("from ")[1].split(" to ")[0] + " to:"
                 + time.split("from ", 2)[1].split(" to")[1] +  ")";
     }
 

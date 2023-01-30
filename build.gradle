@@ -11,16 +11,12 @@ repositories {
 
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
-    testCompileOnly 'junit:junit:4.13'
+    //testCompileOnly 'junit:junit:4.13'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 
 test {
-    useJUnitPlatform() {
-        includeEngines 'junit-vintage'
-        // excludeEngines 'junit-jupiter'
-    }
-
+    useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
 
