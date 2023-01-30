@@ -29,4 +29,15 @@ public class MarkCommand extends Command {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof MarkCommand)) {
+            return false;
+        }
+        MarkCommand c = (MarkCommand) o;
+        return this.mark == c.mark && this.index == c.index;
+    }
 }
