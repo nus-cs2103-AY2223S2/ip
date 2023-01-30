@@ -1,5 +1,7 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.time.LocalDate;
 
 public class InputParser {
 
@@ -46,10 +48,33 @@ public class InputParser {
             this.inputArguments = new String[2];
             String argString = userInput.substring(9,userInput.length());
             if (argString.contains(" /by ")) {
-                this.inputArguments = argString.split(" /by ", 2);
+                inputArguments = argString.split(" /by ", 2);
+                if (inputArguments[1].matches("\\d++/\\d++/\\d++")) {
+                    String[] timeComponents = inputArguments[1].split("/");
+                    if (timeComponents[0].length() > 2
+                            || timeComponents[1].length() > 2
+                            || timeComponents[2].length() != 4) {
+                        throw new InputError("date should follow the format:\n" +
+                                "  dd/mm/yyyy");
+                    }
+                    if (timeComponents[0].length() == 1) {
+                        timeComponents[0] = "0" + timeComponents[0];
+                    }
+                    if (timeComponents[1].length() == 1) {
+                        timeComponents[1] = "0" + timeComponents[1];
+                    }
+                    String dateTimeString = String.format("%s-%s-%s",
+                            timeComponents[2], timeComponents[1], timeComponents[0]);
+                    try {
+                        LocalDate ld = LocalDate.parse(dateTimeString);
+                        inputArguments[1] = dateTimeString;
+                    } catch (DateTimeParseException e) {
+                        throw new InputError("date entered is invalid!");
+                    }
+                }
             } else {
                 throw new InputError("command should follow the format:\n" +
-                        "deadline *description* /by *timing*");
+                        "  deadline *description* /by *timing*");
             }
         } else if (userInput.startsWith("event ")) {
             this.command = CommandType.EVENT;
@@ -63,7 +88,7 @@ public class InputParser {
                 this.inputArguments[2] = tempArr2[1];
             } else {
                 throw new InputError("command should follow the format:\n" +
-                        "event *description* /from *start time* /to *end time*");
+                        "  event *description* /from *start time* /to *end time*");
             }
         } else if (userInput.startsWith("mark ")) {
             this.command = CommandType.MARK;
