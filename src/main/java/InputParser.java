@@ -92,6 +92,8 @@ public class InputParser {
             } catch (NumberFormatException nfe) {
                 throw new InputError("your argument has to be an integer! (e.g: delete 2");
             }
+        } else {
+            throw new InputError("i don't understand this command!");
         }
     }
 
