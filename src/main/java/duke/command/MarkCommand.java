@@ -25,11 +25,11 @@ public class MarkCommand extends Command {
      * Updates the chosen task in tasks to be marked or unmarked
      * and updates the storage file accordingly.
      * Informs user of successful execution of command via the ui.
-     * @param tasks
-     * @param ui
-     * @param storage
-     * @throws IOException
-     * @throws DukeException
+     * @param tasks TaskList that contains all the current tasks.
+     * @param ui Ui that communicates with the user.
+     * @param storage Storage that backups the saving of tasks.
+     * @throws IOException when storage file cannot be read.
+     * @throws DukeException when user input does not comply with intended uses.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {

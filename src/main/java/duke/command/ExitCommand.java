@@ -15,9 +15,9 @@ public class ExitCommand extends Command {
 
     /**
      * Heeds user goodbye via the ui.
-     * @param tasks
-     * @param ui
-     * @param storage
+     * @param tasks TaskList that contains all the current tasks.
+     * @param ui Ui that communicates with the user.
+     * @param storage Storage that backups the saving of tasks.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

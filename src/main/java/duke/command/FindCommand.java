@@ -5,8 +5,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-import java.util.ArrayList;
-
+/**
+ * Represents the command to find tasks based on a keyword.
+ */
 public class FindCommand extends Command {
     private final String keyword;
 
@@ -14,6 +15,13 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Searches through tasks to find tasks that contain given keyword.
+     * Outputs matching tasks to user via the ui.
+     * @param tasks TaskList that contains all the current tasks.
+     * @param ui Ui that communicates with the user.
+     * @param storage Storage that backups the saving of tasks.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = new TaskList();
