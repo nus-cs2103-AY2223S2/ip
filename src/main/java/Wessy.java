@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Wessy {
-    static String OPENING_LINE = "    -Wessy---------------------------------------------------------------- ";
-    static String CLOSING_LINE = "    ---------------------------------------------------------------------- ";
+    static String OPENING_LINE = "    -Wessy------------------------------" +
+            "---------------------------------- ";
+    static String CLOSING_LINE = "    -----------------------------------" +
+            "----------------------------------- ";
     static List<Task> tasks = new ArrayList<Task>();
 
     public static void main(String[] args) {
@@ -28,7 +30,7 @@ public class Wessy {
             } else if (checkCmd(userInput, CmdType.LIST)) {
                 printList();
             } else {
-                try{
+                try {
                     if (checkCmd(userInput, CmdType.MARK)) {
                         markOrUnmark(userInput, true);
                     } else if (checkCmd(userInput,CmdType.UNMARK)) {
@@ -44,18 +46,22 @@ public class Wessy {
                     } else {
                         throw new CommandNotFoundException();
                     }
-                } catch (WessyException wEx) {
-                    printNormal(String.valueOf(wEx));
+                } catch (WessyException wessyEx) {
+                    printNormal(String.valueOf(wessyEx));
                 } catch (NumberFormatException nfe) {
-                    printNormal("☹ OOPS!!! It is not a number. Please enter a number.");
+                    printNormal("☹ OOPS!!! It is not a number." +
+                            " Please enter a number.");
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    printNormal("☹ OOPS!!! Please enter a valid task number.");
+                    printNormal("☹ OOPS!!! Please enter a " +
+                            "valid task number.");
                 }
             }
         }
     }
 
-    static String[] parse(String description, CmdType type) throws MissingSpacingException, MissingInputException, UnspecifiedTimeException {
+    static String[] parse(String description, CmdType type) throws
+            MissingSpacingException, MissingInputException,
+            UnspecifiedTimeException {
         checkForMissingInput(description, type);
         checkForSpacingAftCmd(description, type);
         String byStr = "/by";
@@ -68,13 +74,15 @@ public class Wessy {
             case DEADLINE:
                 firstIdx = description.indexOf(byStr);
                 return new String[]{description.substring(0, firstIdx - 1),
-                        description.substring(firstIdx + byStr.length() + 1)};
+                        description.substring(firstIdx +
+                                byStr.length() + 1)};
             case EVENT:
                 firstIdx = description.indexOf(fromStr);
                 secondIdx = description.indexOf(toStr);
                 return new String[]{description.substring(0, firstIdx - 1),
                         description.substring(firstIdx + fromStr.length() + 1, secondIdx - 1),
-                        description.substring(secondIdx + toStr.length() + 1)};
+                        description.substring(secondIdx +
+                                toStr.length() + 1)};
             case TODO:
                 return new String[]{description};
         }
@@ -83,10 +91,12 @@ public class Wessy {
 
     static boolean checkCmd(String userInput, CmdType type) {
         int threshold = type.len();
-        return userInput.length() >= threshold && userInput.substring(0,threshold).equalsIgnoreCase(type.toString());
+        return userInput.length() >= threshold && userInput.substring(0,
+                threshold).equalsIgnoreCase(type.toString());
     }
 
-    static void checkForSpacingAftCmd(String userInput, CmdType type) throws MissingSpacingException {
+    static void checkForSpacingAftCmd(String userInput, CmdType type) throws
+            MissingSpacingException {
         String cmd = type.toString();
         if (userInput.charAt(cmd.length()) != ' ') {
             throw new MissingSpacingException(cmd, true);
@@ -102,40 +112,49 @@ public class Wessy {
         return true;
     }
 
-    static void checkForMissingInput(String userInput, CmdType type) throws MissingInputException, MissingSpacingException, UnspecifiedTimeException {
+    static void checkForMissingInput(String userInput, CmdType type) throws
+            MissingInputException, MissingSpacingException,
+            UnspecifiedTimeException {
         String cmd = type.toString();
-        if (userInput.equalsIgnoreCase(cmd) || checkAllSpaces(userInput.substring(cmd.length()))) {
+        if (userInput.equalsIgnoreCase(cmd) || checkAllSpaces(
+                userInput.substring(cmd.length()))) {
             throw new MissingInputException(cmd);
         }
         if (type == CmdType.DEADLINE) {
             checkForTimeKeywordEx(userInput, "/by");
             int idxOfBy = userInput.indexOf("/by");
-            if (idxOfBy == 8 || checkAllSpaces(userInput.substring(8, idxOfBy))) {
+            if (idxOfBy == 8 || checkAllSpaces(userInput.substring(8,
+                    idxOfBy))) {
                 throw new MissingInputException(cmd);
             }
-            if (idxOfBy + 3 == userInput.length() || checkAllSpaces(userInput.substring(idxOfBy + 3))) {
+            if (idxOfBy + 3 == userInput.length() || checkAllSpaces(
+                    userInput.substring(idxOfBy + 3))) {
                 throw new UnspecifiedTimeException("/by");
             }
         }
         if (type == CmdType.EVENT) {
             checkForTimeKeywordEx(userInput, "/from");
             int idxOfFrom = userInput.indexOf("/from");
-            if (idxOfFrom == 5 || checkAllSpaces(userInput.substring(5, idxOfFrom))) {
+            if (idxOfFrom == 5 || checkAllSpaces(userInput.substring(5,
+                    idxOfFrom))) {
                 throw new MissingInputException(cmd);
             }
             checkForTimeKeywordEx(userInput, "/to");
             int idxOfTo = userInput.indexOf("/to");
-            if (idxOfTo == idxOfFrom + 5 || checkAllSpaces(userInput.substring(idxOfFrom + 5, idxOfTo))) {
+            if (idxOfTo == idxOfFrom + 5 || checkAllSpaces(
+                    userInput.substring(idxOfFrom + 5, idxOfTo))) {
                 throw new UnspecifiedTimeException("/from");
             }
-            if (idxOfTo + 3 == userInput.length() || checkAllSpaces(userInput.substring(idxOfTo + 3))) {
+            if (idxOfTo + 3 == userInput.length() || checkAllSpaces(
+                    userInput.substring(idxOfTo + 3))) {
                 throw new UnspecifiedTimeException("/to");
             }
         }
 
     }
 
-    static void checkForTimeKeywordEx(String userInput, String keyword) throws UnspecifiedTimeException, MissingSpacingException {
+    static void checkForTimeKeywordEx(String userInput, String keyword) throws
+            UnspecifiedTimeException, MissingSpacingException {
         int idx = userInput.indexOf(keyword);
         if (idx == -1) {
             throw new UnspecifiedTimeException(keyword);
@@ -143,7 +162,8 @@ public class Wessy {
         if (userInput.charAt(idx - 1) != ' ') {
             throw new MissingSpacingException(keyword, false);
         }
-        if (userInput.length() == idx + keyword.length() || userInput.charAt(idx + keyword.length()) != ' ') {
+        if (userInput.length() == idx + keyword.length() ||
+                userInput.charAt(idx + keyword.length()) != ' ') {
             throw new MissingSpacingException(keyword, true);
         }
     }
@@ -175,8 +195,9 @@ public class Wessy {
     static void println(String str) {
         int length = str.length();
         String message = "   |   " + str;
-        for (int i = 0; i < 70 - length - 3; i++)
+        for (int i = 0; i < 70 - length - 3; i++) {
             message += " ";
+        }
         message += "|";
         System.out.println(message);
     }
@@ -207,18 +228,25 @@ public class Wessy {
         System.out.println(CLOSING_LINE);
     }
 
-    static int parseInt(String userInput, CmdType type) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
+    static int parseInt(String userInput, CmdType type) throws
+            EmptyListException, MissingInputException,
+            MissingSpacingException, NumberFormatException,
+            ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
         checkForEmptyList(type);
         checkForMissingInput(userInput, type);
         checkForSpacingAftCmd(userInput, type);
-        int idx = Integer.parseInt(userInput.substring(type.len() + 1)) - 1;
+        int idx = Integer.parseInt(userInput.substring(
+                type.len() + 1)) - 1;
         if (idx < 0 || idx >= tasks.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }
         return idx;
     }
 
-    static void markOrUnmark(String userInput, boolean isMark) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
+    static void markOrUnmark(String userInput, boolean isMark) throws
+            EmptyListException, MissingInputException,
+            MissingSpacingException, NumberFormatException,
+            ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
         CmdType type = isMark ? CmdType.MARK : CmdType.UNMARK;
         int idx = parseInt(userInput, type);
         String start = isMark ? "Nice! I've" : "OK, I've";
@@ -231,14 +259,21 @@ public class Wessy {
             tasks.get(idx).unmark();
         }
         String end = isMark ? "done:" : "not done yet:";
-        printNormal(start + " marked this task as " + end, "  " + tasks.get(idx));
+        printNormal(start + " marked this task as " + end, "  " +
+                tasks.get(idx));
     }
 
-    static void delete(String userInput) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
+    static void delete(String userInput) throws EmptyListException,
+            MissingInputException, MissingSpacingException,
+            NumberFormatException, ArrayIndexOutOfBoundsException,
+            UnspecifiedTimeException {
         int idx = parseInt(userInput, CmdType.DELETE);
         Task removedTask = tasks.get(idx);
         tasks.remove(idx);
         int size = tasks.size();
-        printNormal("Noted. I've removed this task:", "  " + removedTask, String.format("Now you have %d task%s in the list.", size, size == 1 ? "" : "s"));
+        printNormal("Noted. I've removed this task:", "  " +
+                removedTask, String.format(
+                        "Now you have %d task%s in the list.", size,
+                        size == 1 ? "" : "s"));
     }
 }

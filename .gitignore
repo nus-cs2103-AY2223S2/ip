@@ -17,3 +17,6 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 
 *.class
+
+/src/main/java/checkstyle-8.2-all.jar
+/src/main/java/cs2030_checks.xml
