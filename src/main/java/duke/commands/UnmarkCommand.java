@@ -9,7 +9,6 @@ import duke.ui.Ui;
  *
  * @author Chia Jeremy
  */
-
 public class UnmarkCommand extends Command {
 
     private final int index;
@@ -34,6 +33,6 @@ public class UnmarkCommand extends Command {
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.unmark(this.index);
         storage.unmark(this.index);
-        ui.display("OK, I've marked this task as not done yet:\n" + tasks.getTask(this.index));
+        ui.setResponse("OK, I've marked this task as not done yet:\n" + tasks.getTask(this.index));
     }
 }

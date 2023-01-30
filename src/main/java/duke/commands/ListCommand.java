@@ -9,7 +9,6 @@ import duke.ui.Ui;
  *
  * @author Chia Jeremy
  */
-
 public class ListCommand extends Command {
 
     /**
@@ -27,6 +26,6 @@ public class ListCommand extends Command {
             String s = (i + 1) + ". " + tasks.getTask(i) + "\n";
             sb.append(s);
         }
-        ui.display(sb.toString());
+        ui.setResponse(sb.toString());
     }
 }

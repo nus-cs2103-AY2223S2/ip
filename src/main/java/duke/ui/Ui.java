@@ -1,37 +1,41 @@
 package duke.ui;
 
+import duke.Duke;
+
 /**
- * The duke.ui.Ui class implements the user interactions of the user.
+ * The Ui class implements the user interactions of the user.
  *
  * @author Chia Jeremy
  */
-
 public class Ui {
 
-    private static final String INDENTATION = "    ";
-    private static final String LINE = INDENTATION + "____________________________________________________________";
+    private String message;
 
     /**
-     * Encapsulates the message in indentation and horizontal line, and print out the message.
+     * Returns the response.
      *
-     * @param message the message to be printed.
+     * @return the response
      */
-    public void display(String message) {
-        System.out.println(LINE);
-        String[] lines = message.split("\n");
-        for (String s : lines) {
-            System.out.println(INDENTATION + s);
-        }
-        System.out.println(LINE + "\n");
+    public String getResponse() {
+        return this.message;
     }
 
     /**
-     * The initial greeting when starting up a chatbot.
+     * Sets the response to display.
      *
-     * @param name the name of the chatbot
+     * @param message the response to display
      */
-    public void greet(String name) {
-        display("Hello I'm\n" + name + "What can I do for you?\n\n" + showCommands());
+    public void setResponse(String message) {
+        this.message = message;
+    }
+
+    /**
+     * Duke greets the user when it boots up.
+     *
+     * @return the greeting message
+     */
+    public String greet() {
+        return "Hello I'm\n" + Duke.LOGO + "What can I do for you?\n\n" + showCommands();
     }
 
     /**

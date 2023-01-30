@@ -20,10 +20,9 @@ import duke.exception.DukeException;
  *
  * @author Chia Jeremy
  */
-
 public class Parser {
 
-    private enum Command_Code {
+    private enum CommandCode {
         TODO, DEADLINE, EVENT,
         DELETE,
         MARK, UNMARK,
@@ -40,31 +39,31 @@ public class Parser {
      * @param input the user input
      * @return the command code of the input
      */
-    public static Command_Code getCommand(String input) {
+    public static CommandCode getCommand(String input) {
         String command = input.split(" ", 2)[0].toLowerCase();
         switch (command) {
         case "todo":
-            return Command_Code.TODO;
+            return CommandCode.TODO;
         case "deadline":
-            return Command_Code.DEADLINE;
+            return CommandCode.DEADLINE;
         case "event":
-            return Command_Code.EVENT;
+            return CommandCode.EVENT;
         case "delete":
-            return Command_Code.DELETE;
+            return CommandCode.DELETE;
         case "mark":
-            return Command_Code.MARK;
+            return CommandCode.MARK;
         case "unmark":
-            return Command_Code.UNMARK;
+            return CommandCode.UNMARK;
         case "find":
-            return Command_Code.FIND;
+            return CommandCode.FIND;
         case "list":
-            return Command_Code.LIST;
+            return CommandCode.LIST;
         case "help":
-            return Command_Code.HELP;
+            return CommandCode.HELP;
         case "bye":
-            return Command_Code.EXIT;
+            return CommandCode.EXIT;
         default:
-            return Command_Code.INVALID;
+            return CommandCode.INVALID;
         }
     }
 
@@ -75,7 +74,7 @@ public class Parser {
      * @return the command based on the input
      */
     public Command parseCommand(String input) {
-        Command_Code commandCode = getCommand(input);
+        CommandCode commandCode = getCommand(input);
         switch (commandCode) {
         case TODO:
             return prepareTodo(input.substring(4).trim());

@@ -10,7 +10,6 @@ import duke.ui.Ui;
  *
  * @author Chia Jeremy
  */
-
 public class InvalidCommand extends Command {
 
     /**
@@ -22,6 +21,6 @@ public class InvalidCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
-        ui.display("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        ui.setResponse("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }

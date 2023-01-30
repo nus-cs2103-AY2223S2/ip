@@ -9,7 +9,6 @@ import duke.ui.Ui;
  *
  * @author Chia Jeremy
  */
-
 public class MarkCommand extends Command {
 
     private final int index;
@@ -34,6 +33,6 @@ public class MarkCommand extends Command {
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.mark(this.index);
         storage.mark(this.index);
-        ui.display("Nice! I've marked this task as done:\n" + tasks.getTask(this.index));
+        ui.setResponse("Nice! I've marked this task as done:\n" + tasks.getTask(this.index));
     }
 }

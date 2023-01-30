@@ -9,7 +9,6 @@ import duke.ui.Ui;
  *
  * @author Chia Jeremy
  */
-
 public class HelpCommand extends Command {
 
     /**
@@ -22,6 +21,6 @@ public class HelpCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList tasks, Ui ui) {
-        ui.display(ui.showCommands());
+        ui.setResponse(ui.showCommands());
     }
 }
