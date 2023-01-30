@@ -1,14 +1,6 @@
 package duke.parser;
 
-import duke.command.AddDeadlineCommand;
-import duke.command.AddEventCommand;
-import duke.command.AddTodoCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.data.exception.DukeException;
 
 /**
@@ -66,8 +58,9 @@ public class Parser {
                 throw new DukeException("Unable to delete.");
             }
             return new DeleteCommand(details);
-        }
-        else {
+        } else if (cmd.equals("find")) {
+            return new FindCommand(details);
+        } else {
             throw new DukeException("I do not quite understand that.");
         }
     }

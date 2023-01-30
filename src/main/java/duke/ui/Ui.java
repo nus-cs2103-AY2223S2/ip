@@ -3,6 +3,7 @@ package duke.ui;
 import duke.data.TaskList;
 import duke.data.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -48,6 +49,17 @@ public class Ui {
         } else {
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println((i + 1) + ". " + tasks.get(i).toString());
+            }
+        }
+    }
+
+    public void showMatchingTasks(ArrayList<Task> taskArray) {
+        if (taskArray.size() == 0) {
+            System.out.println("No tasks found.");
+        } else {
+            System.out.println("These are the tasks I have found:");
+            for (int i = 0; i < taskArray.size(); i++) {
+                System.out.println((i + 1) + ". " + taskArray.get(i).toString());
             }
         }
     }

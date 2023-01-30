@@ -32,6 +32,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    public boolean contains(String string) {
+        return this.description.contains(string);
+    }
+
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
