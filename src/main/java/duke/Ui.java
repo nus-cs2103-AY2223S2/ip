@@ -1,6 +1,13 @@
 package duke;
+
 import java.util.Scanner;
+
 import duke.task.Task;
+
+/**
+ * Ui class.
+ * Handles interaction with the user.
+ */
 public class Ui {
     public Ui() {
 

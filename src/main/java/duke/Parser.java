@@ -3,10 +3,15 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import duke.exception.DukeException;
 
+import duke.exception.DukeException;
 import duke.exception.DukeInvalidArgumentException;
 import duke.exception.DukeInvalidIndexException;
+
+/**
+ * Parser class.
+ * Handles user input.
+ */
 public class Parser {
 
     protected String answer;
@@ -100,7 +105,7 @@ public class Parser {
      * @return Due date of task.
      * @throws DukeInvalidArgumentException If description input by user is empty.
      */
-    public LocalDateTime getDeadlineBy(String byString) throws DukeInvalidArgumentException{
+    public LocalDateTime getDeadlineBy(String byString) throws DukeInvalidArgumentException {
         if (byString.isEmpty()) {
             throw new DukeInvalidArgumentException("By is empty, please input task again");
         }
@@ -108,8 +113,9 @@ public class Parser {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             by = LocalDateTime.parse(byString, formatter);
-        } catch (DateTimeParseException e){
-            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), please input task again");
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), "
+                    + "please input task again");
         }
         return by;
     }
@@ -142,8 +148,9 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             from = LocalDateTime.parse(fromString, formatter);
 
-        } catch (DateTimeParseException e){
-            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), please input task again");
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), "
+                    + "please input task again");
         }
         return from;
     }
@@ -164,8 +171,9 @@ public class Parser {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             to = LocalDateTime.parse(toString, formatter);
 
-        } catch (DateTimeParseException e){
-            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), please input task again");
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidArgumentException("Wrong date/time format (correct: yyyy-MM-DD hh:mm), "
+                    + "please input task again");
         }
         return to;
     }
@@ -173,7 +181,7 @@ public class Parser {
     /**
      * Returns the keyword the user inputs.
      * @return Keyword.
-     * @throws DukeInvalidArgumentException If keyword is empty. 
+     * @throws DukeInvalidArgumentException If keyword is empty.
      */
     public String getFindKeyword() throws DukeInvalidArgumentException {
         if (answer.substring(5, answer.length()).isEmpty()) {

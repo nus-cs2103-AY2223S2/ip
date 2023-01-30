@@ -1,5 +1,7 @@
 package duke;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import duke.exception.DukeTaskNotFoundException;
 import duke.task.Deadline;
@@ -7,8 +9,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.util.ArrayList;
 
+/**
+ * TaskList class.
+ * Handles tasks in a list.
+ */
 public class TaskList {
 
     protected ArrayList<Task> arrayList;
@@ -26,8 +31,7 @@ public class TaskList {
      * @param index Index of task in the list.
      * @return Marked task.
      */
-    public Task mark(Integer index)  {
-
+    public Task mark(Integer index) {
         arrayList.get(index - 1).markAsDone();
         return arrayList.get(index - 1);
     }
@@ -38,9 +42,8 @@ public class TaskList {
      * @return Unmarked task.
      */
     public Task unmark(Integer index) {
-
         arrayList.get(index - 1).markAsUndone();
-        return arrayList.get(index - 1 );
+        return arrayList.get(index - 1);
     }
 
     /**
@@ -49,7 +52,7 @@ public class TaskList {
      * @return Deleted Task.
      */
     public Task delete(Integer index) {
-        Task t = arrayList.get(index - 1 );
+        Task t = arrayList.get(index - 1);
         arrayList.remove(index - 1);
         return t;
     }

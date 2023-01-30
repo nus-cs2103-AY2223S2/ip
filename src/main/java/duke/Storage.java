@@ -1,8 +1,4 @@
 package duke;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,8 +8,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static java.nio.file.Files.createFile;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
+
+/**
+ * Storage class.
+ * Handles the storage of tasks into the user's computer.
+ */
 public class Storage {
     protected String filePath;
     protected String dirPath;
@@ -29,7 +33,7 @@ public class Storage {
 
         // to initiate locations
         File theDir = new File(dirPath);
-        if (!theDir.exists()){
+        if (!theDir.exists()) {
             theDir.mkdirs();
         }
 
@@ -64,19 +68,25 @@ public class Storage {
             String[] parts = s.nextLine().split("/");
             if (parts[0].equals("T")) {
                 Task t = new Todo(parts[2]);
-                if (parts[1].equals("1")) t.markAsDone();
+                if (parts[1].equals("1")) {
+                    t.markAsDone();
+                }
                 arrayList.add(t);
 
             }
             if (parts[0].equals("D")) {
                 Task t = new Deadline(parts[2], LocalDateTime.parse(parts[3]));
-                if (parts[1].equals("1")) t.markAsDone();
+                if (parts[1].equals("1")) {
+                    t.markAsDone();
+                }
                 arrayList.add(t);
             }
             if (parts[0].equals("E")) {
                 Task t = new Event(parts[2], LocalDateTime.parse(parts[3]),
                         LocalDateTime.parse(parts[4]));
-                if (parts[1].equals("1")) t.markAsDone();
+                if (parts[1].equals("1")) {
+                    t.markAsDone();
+                }
                 arrayList.add(t);
             }
         }

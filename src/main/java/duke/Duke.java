@@ -1,14 +1,15 @@
 package duke;
 
-import duke.exception.DukeException;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import duke.exception.DukeException;
 
 
-
+/**
+ * Duke class.
+ */
 public class Duke {
 
     private Storage storage;
@@ -30,7 +31,9 @@ public class Duke {
         } // change to DukeException bruh
     }
 
-
+    /**
+     * Runs the main program.
+     */
     public void run() {
         ui.greet();
 
@@ -98,9 +101,7 @@ public class Duke {
                     continue;
                 }
                 throw new DukeException("I don't know that one!");
-            }
-
-            catch (DukeException e) {
+            } catch (DukeException e) {
                 ui.showError(e.toString());
             }
 
@@ -109,6 +110,10 @@ public class Duke {
 
     }
 
+    /**
+     * Main method of Duke, creates a new Duke object and runs the program.
+     * @param args User input arguments.
+     */
     public static void main(String[] args) {
         new Duke("src/main/data/duke.txt", "src/main/data").run();
 

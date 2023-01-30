@@ -1,5 +1,10 @@
 package duke.exception;
-public class DukeInvalidArgumentException extends DukeException{
+
+/**
+ * DukeInvalidArgumentException class.
+ * Handles invalid argument exceptions encountered by Duke.
+ */
+public class DukeInvalidArgumentException extends DukeException {
 
     /**
      * Constructor for DukeException.

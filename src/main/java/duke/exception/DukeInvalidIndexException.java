@@ -1,5 +1,10 @@
 package duke.exception;
-public class DukeInvalidIndexException extends DukeException{
+
+/**
+ * DukeInvalidIndexException class.
+ * Handles invalid index exception in Duke.
+ */
+public class DukeInvalidIndexException extends DukeException {
 
     /**
      * Constructor for DukeException.
