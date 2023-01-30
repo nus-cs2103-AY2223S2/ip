@@ -1,5 +1,7 @@
 package duke.model;
 
+import java.time.LocalDateTime;
+
 public abstract class Task {
     private final String taskDescription;
     private boolean taskDone;
@@ -27,4 +29,9 @@ public abstract class Task {
             return "[ ] " + this.taskDescription;
         }
     }
+
+    boolean isDueOn(LocalDateTime time) {
+        return false; // general tasks don't have a specific deadline
+    }
+
 }

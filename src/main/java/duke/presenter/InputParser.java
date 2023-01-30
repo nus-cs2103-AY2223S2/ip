@@ -36,10 +36,14 @@ public class InputParser {
                 case "bye":
                     exitEventListener.onCommandEvent(input);
                     return commandFactory.createCommand(CommandType.BYE);
-                case "greet":
-                    return commandFactory.createCommand(CommandType.GREET);
                 case "list":
-                    return commandFactory.createCommand(CommandType.LIST);
+                    if (tokens.length == 1) {
+                        return commandFactory.createCommand(CommandType.LIST);
+                    } else if (tokens.length == 2) {
+                        return commandFactory.createCommand(CommandType.LIST, tokens[1]);
+                    } else {
+                        throw new UnsupportedCommandError();
+                    }
                 case "todo":
                     if (tokens.length == 1) {
                         throw new InvalidInputError("Oops! Todo cannot be empty");

@@ -1,9 +1,12 @@
 package duke.model;
-
+import java.time.LocalDateTime;
+import duke.command.utils.DateTimeStringParser;
 public class Event extends Task{
-    private String startTime;
-    private String endTime;
-    protected Event(String taskDescription, String startTime, String endTime) {
+    private final LocalDateTime startTime;
+    private final LocalDateTime endTime;
+
+
+    protected Event(String taskDescription, LocalDateTime startTime, LocalDateTime endTime) {
         super(taskDescription);
         this.startTime = startTime;
         this.endTime = endTime;
@@ -11,6 +14,13 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + startTime + " to: " + endTime + ")";
+        return "[E]" + super.toString() + " (from: " +
+                startTime.format(DateTimeStringParser.displayFormat) + " to: " +
+                endTime.format(DateTimeStringParser.displayFormat) + ")";
+    }
+
+    @Override
+    boolean isDueOn(LocalDateTime time) {
+        return time.isBefore(endTime) && time.isAfter(startTime);
     }
 }

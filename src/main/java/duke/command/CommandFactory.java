@@ -23,7 +23,12 @@ public class CommandFactory {
             case BYE:
                 return new ByeCommand(taskView);
             case LIST:
-                return new ListTasksCommand(taskModel, taskView);
+                if (args.length == 1) {
+                    return new ListTasksCommand(taskModel, taskView, args[0]);
+                } else {
+                    return new ListTasksCommand(taskModel, taskView);
+                }
+
             case MARK_DONE:
                 try {
                     int markIndex = Integer.parseInt(args[0]) - 1;
