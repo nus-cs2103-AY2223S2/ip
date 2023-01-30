@@ -7,14 +7,36 @@ import duke.Ui;
 import duke.task.Event;
 import duke.task.Task;
 
+/**
+ * A command that stores the command to add a new event task. The action of adding the task can be carried out when
+ * called.
+ */
 public class AddEventCommand extends Command {
+    /**
+     * The description, start and end date of the event task.
+     */
     private final String DATA;
 
+    /**
+     * Constructor for a command to add new event task.
+     *
+     * @param commandString The add event command in string representation
+     * @param DATA The description, start and end date of the event task
+     */
     public AddEventCommand(String commandString, String DATA) {
         super(Commands.ADD_EVENT, commandString);
         this.DATA = DATA;
     }
 
+    /**
+     * Adds a new event task into the task list.
+     * The start and end dates are filtered out. If they exist, then an event task will be created. Otherwise, an
+     * exception would be thrown stating that either the start or end dates were not specified.
+     *
+     * @param tasks   List of tasks that are stored
+     * @param ui      UI to deal with the visual output
+     * @param storage Storage to deal with input and output of data
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String[] splitData1 = DATA.split(" /from ", 2);
