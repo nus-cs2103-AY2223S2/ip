@@ -38,10 +38,25 @@ public class TaskList {
     }
 
     /**
+     * Finds the tasks where their description matches
+     * the regex of the query.
+     *
+     * @param regex The description to find.
+     */
+    public void findTasks(String regex) {
+        for (int i = 0; i < this.list.size(); i++) {
+            Task task = this.list.get(i);
+            if (this.list.get(i).getDescription().contains(regex)) {
+                System.out.println((i + 1) + "." + task);
+            }
+        }
+    }
+
+    /**
      * The size of the task list, to be used by
      * other internal methods for calculations.
      *
-     * @return The size of the task list.
+     * @return The size of the current task list.
      */
     public int listSize() {
         return this.list.size();

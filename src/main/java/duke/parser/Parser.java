@@ -17,6 +17,7 @@ public class Parser {
      * Represents all the valid commands that the user can input.
      */
     enum Commands {
+        FIND,
         TODO,
         DEADLINE,
         EVENT,
@@ -113,6 +114,11 @@ public class Parser {
                     return new ListCommand();
                 case BYE:
                     return new ByeCommand();
+                case FIND:
+                    if (inputArr.length == 1) {
+                        throw new EmptyDescException("☹ OOPS!!! You need to specify what you want to find!");
+                    }
+                    return new FindCommand(inputArr[1]);
                 default:
                     throw new UnknownCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
