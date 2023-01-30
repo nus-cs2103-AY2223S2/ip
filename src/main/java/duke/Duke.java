@@ -11,6 +11,7 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.ui.Ui;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -131,6 +132,10 @@ public class Duke extends Application{
         try {
             Command c = Parser.parse(input);
             c.execute(db, con);
+            
+            if (c.isExit()) {
+                close();
+            }
         } catch (DukeException e) {
             con.accept(e.getMessage());
         }
@@ -138,5 +143,6 @@ public class Duke extends Application{
 
     public void close() {
         db.close();
+        Platform.exit();
     }
 }
