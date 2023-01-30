@@ -18,6 +18,15 @@ public class TaskList {
         for (int i = 0; i < this.list.size(); i++) System.out.println((i+1) + "." + this.list.get(i));
     }
 
+    public void findTasks(String regex) {
+        for (int i = 0; i < this.list.size(); i++) {
+            Task task = this.list.get(i);
+            if (this.list.get(i).getDescription().contains(regex)) {
+                System.out.println((i + 1) + "." + task);
+            }
+        }
+    }
+
     public int listSize() {
         return this.list.size();
     }

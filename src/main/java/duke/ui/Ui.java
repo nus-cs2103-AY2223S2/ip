@@ -94,4 +94,9 @@ public class Ui {
         System.out.println("  " + task);
         System.out.println("Now you have " + taskList.listSize() + " in the list!");
     }
+
+    public void printFind(TaskList taskList, String regex) {
+        System.out.println("Here are the matching tasks in your list:");
+        taskList.findTasks(regex);
+    }
 }
