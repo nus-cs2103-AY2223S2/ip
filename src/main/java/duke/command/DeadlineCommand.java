@@ -30,10 +30,10 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         DeadlineTask task = new DeadlineTask(taskDescription, deadlineBy);
         taskList.addTask(task);
-        ui.showTaskCreatedMessage(task);
-        return false;
+
+        return ui.showTaskCreatedMessage(task);
     }
 }

@@ -6,12 +6,10 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
-public class Duke extends Application {
+/**
+ * Main Chatbot logic
+ */
+public class Duke {
 
     public static String LOGO = "______     ______     __     __    \n" +
             "/\\  __ \\   /\\  == \\   /\\ \\   /\\ \\   \n" +
@@ -43,40 +41,17 @@ public class Duke extends Application {
         parser = new Parser(taskList, storage, ui);
     }
 
-    public Duke() {
-        ui = new Ui();
-        storage = null;
-        taskList = new TaskList();
-        parser = new Parser(taskList, storage, ui);
-    }
-
     /**
-     * Starts accepting user commands and responding.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.showWelcomeMessage();
-
-        boolean toExit = false;
-        while (!toExit) {
-            try {
-                String cmd = ui.requestUserInput();
-                Command command = parser.parseUserCommand(cmd);
-                toExit = command.execute();
-            } catch (DukeException e) {
-                System.out.println(e);
-            }
+    public String getResponse(String cmd) {
+        try {
+            Command command = parser.parseUserCommand(cmd);
+            return command.execute();
+        } catch (DukeException e) {
+            return "Sorry, I ran into a problem... Try again";
         }
-
-        ui.close();
-    }
-
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
     }
 
 }

@@ -15,14 +15,17 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean execute() throws DukeException {
-        System.out.printf("Found tasks with keywords: %s\n", keyword);
+    public String execute() throws DukeException {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format("Found tasks with keywords: %s\n", keyword));
         for (Task task : taskList.allTasks()) {
             if (task.containsKeyword(keyword)) {
-                System.out.println(task);
+                stringBuilder.append(task);
+                stringBuilder.append("\n");
             }
         }
 
-        return false;
+        return stringBuilder.toString();
     }
 }

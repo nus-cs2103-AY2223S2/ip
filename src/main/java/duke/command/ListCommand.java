@@ -17,11 +17,13 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public boolean execute() throws DukeException {
-        System.out.println("Arii has retrieved your current tasks...");
+    public String execute() throws DukeException {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("Arii has retrieved your current tasks...\n");
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("%d. %s\n", i + 1, taskList.get(i));
+            stringBuilder.append(String.format("%d. %s\n", i + 1, taskList.get(i)));
         }
-        return false;
+        return stringBuilder.toString();
     }
 }

@@ -23,17 +23,18 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
+        StringBuilder stringBuilder = new StringBuilder();
         taskList.get(taskIndex).setIsDone(isDone);
 
         if (isDone) {
-            System.out.println("This task is now done, what's next?");
+            stringBuilder.append("This task is now done, what's next?\n");
         }
         else {
-            System.out.println("This task is now not done, how disappointing...");
+            stringBuilder.append("This task is now not done, how disappointing...\n");
         }
-        System.out.println(taskList.get(taskIndex));
+        stringBuilder.append(taskList.get(taskIndex));
 
-        return false;
+        return stringBuilder.toString();
     }
 }

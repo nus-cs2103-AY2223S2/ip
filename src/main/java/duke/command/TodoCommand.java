@@ -25,10 +25,9 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         TodoTask task = new TodoTask(taskDescription);
         taskList.addTask(task);
-        ui.showTaskCreatedMessage(task);
-        return false;
+        return ui.showTaskCreatedMessage(task);
     }
 }

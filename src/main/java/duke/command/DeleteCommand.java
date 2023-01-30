@@ -24,10 +24,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         taskList.remove(taskIndex);
 
-        ui.showTaskDeletedMessage();
-        return false;
+        return ui.showTaskDeletedMessage();
     }
 }

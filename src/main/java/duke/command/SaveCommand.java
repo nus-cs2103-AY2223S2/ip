@@ -27,14 +27,12 @@ public class SaveCommand extends Command {
     }
 
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         try {
             storage.save(taskList);
-            ui.showSavedDataMessage();
+            return ui.showSavedDataMessage();
         } catch (IOException e) {
-            throw new DukeException("Arii can't access your files... Fix your system first.");
+            return "Arii can't access your files... Fix your system first.";
         }
-
-        return false;
     }
 }

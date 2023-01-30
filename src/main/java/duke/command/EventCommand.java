@@ -33,10 +33,9 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public boolean execute() throws DukeException {
+    public String execute() throws DukeException {
         EventTask task = new EventTask(taskDescription, eventFrom, eventBy);
         taskList.addTask(task);
-        ui.showTaskCreatedMessage(task);
-        return false;
+        return ui.showTaskCreatedMessage(task);
     }
 }
