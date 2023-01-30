@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * A class to handle storing and loading of task list data.
  */
 public class Storage {
-    /** Path of file to store list data */
+    // Path of file to store list data.
     private String filePath;
 
     /**

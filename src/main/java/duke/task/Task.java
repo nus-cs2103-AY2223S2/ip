@@ -5,10 +5,16 @@ package duke.task;
  * @author mmaimer33
  */
 public abstract class Task implements java.io.Serializable {
+
+    // Details of the task (what the task is).
     protected String description;
+    // Tracks whether the task is done.
     private boolean isDone;
 
-    // Constructor
+    /**
+     * Constructor for Task class.
+     * @param description The task details.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -49,5 +55,10 @@ public abstract class Task implements java.io.Serializable {
      * @return 'T' for ToDo; 'D' for Deadline; 'E' for Event.
      */
     public abstract String getTaskType();
+
+    /**
+     * Gets the Task description (details).
+     * @return String of the description.
+     */
     public abstract String getDescription();
 }

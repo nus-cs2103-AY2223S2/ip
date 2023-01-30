@@ -6,7 +6,7 @@ import java.util.Scanner;
  * A class to handle all User Interactions: getting command input and printing output.
  */
 public class Ui {
-    /** Scanner to get user input */
+    // Scanner to get user input.
     private Scanner scanner;
 
     /**

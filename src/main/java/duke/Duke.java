@@ -8,7 +8,7 @@ import duke.command.ListCommand;
  */
 public class Duke {
 
-    /** Utility class instances */
+    // Utility class instances
     private Ui ui;
     private Storage storage;
     private Parser parser;
@@ -25,7 +25,7 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke program.
+     * Runs the main Duke program.
      */
     public void run() {
         ui.open();
@@ -59,6 +59,10 @@ public class Duke {
 
     }
 
+    /**
+     * Main method of Duke. Runs the program with default settings.
+     * @param args Default main command-line args.
+     */
     public static void main(String[] args) {
         new Duke("data/Duke").run();
     }

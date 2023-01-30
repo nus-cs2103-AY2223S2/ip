@@ -4,9 +4,16 @@ package duke.task;
  * A task subclass to represent an Event (start and end dates).
  */
 public class Event extends Task{
+    // Start and end dates/time.
     private String startDate;
     private String endDate;
 
+    /**
+     * Constructor for Event class.
+     * @param description The event details.
+     * @param startDate The event start date/time.
+     * @param endDate The event end date/time.
+     */
     public Event(String description, String startDate, String endDate) {
         super(description);
         this.startDate = startDate;

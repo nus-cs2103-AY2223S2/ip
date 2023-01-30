@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * A class to encapsulate task list information & behaviour.
  */
 public class TaskList {
-    /** The task list */
+    // The task list.
     private ArrayList<Task> list;
 
     /**
@@ -47,17 +47,6 @@ public class TaskList {
     }
 
     /**
-     * Removes a task from the list.
-     * @param task Task to be removed.
-     */
-    public Task removeTask(Task task) {
-        if (list.remove(task)) {
-            return task;
-        }
-        return null;
-    }
-
-    /**
      * Removes the task at a specific index from the list.
      * @param taskIndex Index of task to be removed.
      */
@@ -82,6 +71,10 @@ public class TaskList {
         return list.size();
     }
 
+    /**
+     * Gets the ArrayList storing the tasks.
+     * @return The list.
+     */
     public ArrayList<Task> getList() {
         return list;
     }
