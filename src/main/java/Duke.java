@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.StringBuilder;
+import java.time.format.DateTimeParseException;
 import java.io.IOException;
 
 public class Duke {
@@ -61,7 +62,7 @@ public class Duke {
         return new ToDo(sb.toString());
     }
 
-    private static Event makeEvent(String[] task) {
+    private static Event makeEvent(String[] task) throws DateTimeParseException {
         StringBuilder start = new StringBuilder();
         StringBuilder end = new StringBuilder();
         StringBuilder desc = new StringBuilder();
@@ -70,12 +71,12 @@ public class Duke {
         boolean second = false;
 
         for(int i = 1; i < task.length; i++) {
-            if(task[i].equals("/from")) {
+            if(task[i].equalsIgnoreCase("/from")) {
                 first = true;
                 isDescripton = false;
                 continue;
             }
-            if(task[i].equals("/to")) {
+            if(task[i].equalsIgnoreCase("/to")) {
                 second = true;
                 first = false;
                 continue;
@@ -93,20 +94,23 @@ public class Duke {
         return new Event(desc.toString(), start.toString(), end.toString());
     }
 
-    private static Deadline makeDeadline(String[] task) {
+    private static Deadline makeDeadline(String[] task) throws DateTimeParseException {
         StringBuilder desc = new StringBuilder();
         StringBuilder by = new StringBuilder();
         boolean isDesc = true;
 
         for(int i = 1; i < task.length; i++) {
-            if(task[i].equals("/by")) {
+            if(task[i].equalsIgnoreCase("/by")) {
                 isDesc = false;
                 continue;
             }
             if(isDesc) {
                 desc.append(task[i] + " ");
             } else {
-                by.append(task[i] + " ");
+                by.append(task[i]);
+                if (i != task.length - 1) {
+                    by.append(" ");
+                }
             }
         }
         return new Deadline(desc.toString(), by.toString());
@@ -122,7 +126,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
         Scanner sc = new Scanner(System.in);
         System.out.println(intro);
         System.out.println();
@@ -137,15 +141,15 @@ public class Duke {
         String[] raw = sc.nextLine().split(" ");
         String input = raw[0];
         
-        while(!input.equals("bye")) {
-            if (input.equals("list")) {
+        while(!input.equalsIgnoreCase("bye")) {
+            if (input.equalsIgnoreCase("list")) {
                 if(list.isEmpty()) {
                     emptyErr();
                 } else {
                     viewList();
                     reset();
                 }
-            } else if (input.equals("mark")) {
+            } else if (input.equalsIgnoreCase("mark")) {
                 if(list.isEmpty()) {
                     emptyErr();
                 } else {
@@ -153,7 +157,7 @@ public class Duke {
                     markTask(num);
                     reset();
                 }
-            } else if (input.equals("unmark")) {
+            } else if (input.equalsIgnoreCase("unmark")) {
                 if(list.isEmpty()) {
                     emptyErr();
                 } else {
@@ -161,19 +165,31 @@ public class Duke {
                     unmarkTask(num);
                     reset();
                 }
-            } else if (input.equals("todo")) {
+            } else if (input.equalsIgnoreCase("todo")) {
                 ToDo temp = makeToDo(raw);
                 addToList(temp);
                 reset();
-            } else if (input.equals("event")) {
-                Event temp = makeEvent(raw);
-                addToList(temp);
-                reset();
-            } else if (input.equals("deadline")) {
-                Deadline temp = makeDeadline(raw);
-                addToList(temp);
-                reset();
-            } else if (input.equals("delete")) {
+            } else if (input.equalsIgnoreCase("event")) {
+                try {
+                    Event temp = makeEvent(raw);
+                    addToList(temp);
+                    reset();
+                } catch (DateTimeParseException e) {
+                    System.out.println("Duke: Wrong date/time format!");
+                    System.out.println("Please enter correct format (yyyy/MM/dd HHmm)!");
+                    ;
+                }
+            } else if (input.equalsIgnoreCase("deadline")) {
+                try {
+                    Deadline temp = makeDeadline(raw);
+                    addToList(temp);
+                    reset();
+                } catch (DateTimeParseException e) {
+                    System.out.println("Duke: Wrong date/time format!");
+                    System.out.println("Please enter correct format (yyyy/MM/dd HHmm)!");
+                    continue;
+                }
+            } else if (input.equalsIgnoreCase("delete")) {
                 if(list.isEmpty()) {
                     emptyErr();
                 } else {

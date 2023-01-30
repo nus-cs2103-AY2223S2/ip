@@ -27,4 +27,8 @@ public class Task {
     public String toString() {
         return this.done ? "[X] " + this.name : "[ ] " + this.name; 
     }
+
+    public String getName() {
+        return null;
+    }
 }
