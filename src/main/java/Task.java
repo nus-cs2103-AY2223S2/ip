@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String description;
     private boolean done;
 
@@ -21,4 +21,29 @@ public class Task {
     public String toString() {
         return (this.done ? "[X] " : "[ ] ") + this.description;
     }
+
+    public String getCsvString() {
+        return String.format("%s,%b", this.description, this.done);
+    }
+
+    public static Task parseCsvString(String csvString) {
+        String[] arguments = csvString.split(",");
+        Task result = null;
+        switch (arguments[0]) {
+        case "D":
+            result = new Deadline(arguments[1], arguments[3]);
+            break;
+        case "T":
+            result = new ToDo(arguments[1]);
+            break;
+        case "E":
+            result = new Event(arguments[1], arguments[3], arguments[4]);
+            break;
+        default:
+            return null;
+        }
+        result.done = Boolean.parseBoolean(arguments[2]);
+        return result;
+    }
+
 }

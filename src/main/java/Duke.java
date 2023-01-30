@@ -1,8 +1,15 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.File;
 public class Duke {
+    private static final String SAVE_FILE_PATH = "./data/";
+    private static final String SAVE_FILE_NAME = "state.data";
+    private static final File saveFile = new File(SAVE_FILE_PATH + SAVE_FILE_NAME);
     private static final List<Task> tasks = new ArrayList<>();
     public static void main(String[] args) {
         final Scanner sc = new Scanner(System.in);
@@ -16,6 +23,7 @@ public class Duke {
                 "               |_|    |_|     |___/ ";
         System.out.println("Hello from\n" + logo);
         prettyPrint("Hello! I'm Clippy, your lightweight personal assistant.");
+        loadState();
         prettyPrint("What can I do for you today?");
 
         while (parseCommand(sc.nextLine().trim()));
@@ -36,6 +44,7 @@ public class Duke {
             switch (args[0]) {
                 case "bye":
                     prettyPrint("Hope I helped. Goodbye!");
+                    saveState();
                     return false;
                 case "mark":
                     // todo: check if second argument is a valid number
@@ -88,6 +97,9 @@ public class Duke {
                             tasks.size(), tasks.size() == 1 ? "" : "s"));
                     return true;
                 case "list":
+                    if (tasks.size() == 0) {
+                        prettyPrint("No tasks found!");
+                    }
                     for (int i = 1; i <= tasks.size(); i++) {
                         prettyPrint(String.format("%d. %s", i, tasks.get(i - 1)));
                     }
@@ -119,5 +131,60 @@ public class Duke {
      */
     private static void prettyPrint(String output) {
         System.out.println(">>> " + output);
+    }
+
+    private static void loadState() {
+        prettyPrint("Loading saved data...");
+
+        File dir = new File(SAVE_FILE_PATH);
+        if (!dir.exists()) {
+            prettyPrint("data directory not found! Creating it now...");
+            if (dir.mkdirs()) {
+                prettyPrint("Successfully created data directory!");
+            }
+        }
+
+        if (!saveFile.exists()) {
+            prettyPrint("Save file not found! Creating it now...");
+            try {
+                saveFile.createNewFile();
+            } catch (IOException e) {
+                prettyPrint("I/O failed: " + e.toString() + ". Data will not be saved!");
+                return;
+            } catch (SecurityException e) {
+                prettyPrint("Write access denied by security manager. Data will not be saved!");
+                return;
+            }
+            prettyPrint("Successfully created save file!");
+        } else {
+            try {
+                Scanner saveFileScanner = new Scanner(saveFile);
+                while (saveFileScanner.hasNext()) {
+                    tasks.add(Task.parseCsvString(saveFileScanner.nextLine()));
+                }
+                prettyPrint("Save file loaded successfully!");
+            } catch (FileNotFoundException e) {
+                // should not happen since we checked for file existence beforehand
+                System.out.println("Unexpected error occurred - save file not found. Data will not be saved!");
+            }
+        }
+    }
+    private static void saveState() {
+        // will save entire `tasks` list for now, will make it more specific
+        // in later iterations
+        try {
+            FileWriter saveFileWriter = new FileWriter(saveFile, false);
+            for (int i = 0; i < tasks.size(); i++) {
+                saveFileWriter.write(tasks.get(i).getCsvString());
+                // add line separator if not last Task in `tasks`
+                if (i < tasks.size() - 1) {
+                    saveFileWriter.write(System.lineSeparator());
+                }
+            }
+            saveFileWriter.close();
+        } catch (IOException e) {
+            prettyPrint("I/O failed: " + e.toString() + ". Data will not be saved!");
+            return;
+        }
     }
 }
