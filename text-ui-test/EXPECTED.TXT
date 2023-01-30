@@ -10,25 +10,13 @@ What can the Duke help you with today?
 ____________________________________________________________
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has added the following task:
- - [T][x] test
-You now have 1 task!
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has added the following task:
- - [D][ ] gaming (by: 29th april 2023)
-You now have 2 task!
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-
-@~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 TO DO LIST:
 1.[T][x] test
 2.[D][ ] gaming (by: 29th april 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has added the following task:
+The Duke has add the following task:
  - [E][ ] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 You now have 3 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
@@ -90,17 +78,17 @@ TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has marked the following task:
+The Duke has mark the following task:
  - [D][x] gaming (by: 29th april 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has marked the following task:
+The Duke has mark the following task:
  - [E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has unmarked the following task:
+The Duke has unmark the following task:
  - [T][ ] test
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
@@ -131,7 +119,7 @@ TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has added the following task:
+The Duke has add the following task:
  - [D][ ] delete (by: 05 May 2023)
 You now have 4 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
@@ -145,13 +133,13 @@ TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has removed the following task:
+The Duke has delete the following task:
  - [E][x] tryout test (from: 29 Jun 2023 to: 01 Oct 2024)
 You now have 3 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has marked the following task:
+The Duke has mark the following task:
  - [D][x] delete (by: 05 May 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
@@ -163,18 +151,18 @@ TO DO LIST:
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has removed the following task:
+The Duke has delete the following task:
  - [D][x] delete (by: 05 May 2023)
 You now have 2 task!
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has marked the following task:
+The Duke has mark the following task:
  - [T][x] test
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
-The Duke has unmarked the following task:
+The Duke has unmark the following task:
  - [D][ ] gaming (by: 29th april 2023)
 @~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~@
 

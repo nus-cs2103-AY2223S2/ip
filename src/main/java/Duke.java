@@ -14,14 +14,7 @@ public class Duke {
 
     private static ToDoList startUp(Storage storage) {
         try {
-            String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-            System.out.println("Hello from\n" + logo);
-            String divider = "____________________________________________________________\n";
-            System.out.println(divider + "What can the Duke help you with today?\n" + divider);
+            UI.welcomeMsg();
             return storage.load();
         } catch (Exception e) {
             return new ToDoList();
@@ -31,8 +24,7 @@ public class Duke {
     private static void shutDown(Storage storage, ToDoList ls) {
         try {
             storage.save(ls);
-            String divider = "____________________________________________________________\n";
-            System.out.println(divider + "Goodbye, feel free to call the Duke again whenever you need.\n" + divider);
+            UI.exitMsg();
         } catch (Exception e) {
 
         }
@@ -43,25 +35,28 @@ public class Duke {
             try {
                 String[] input = Duke.commandHandler(sc.nextLine(), " ", 2, 1);
                 String command = input[0];
-                String sub;
+                int index;
 
                 switch (command) {
                 case "bye":
                     return;
                 case "list":
-                    System.out.println(ls);
+                    UI.listMsg(ls.toString());
                     break;
                 case "mark":
-                    sub = input[1];
-                    ls.markTask(Integer.parseInt(sub)); //numbersformatexception to be handled
+                    index = Integer.parseInt(input[1]);
+                    ls.markTask(index); //numbersformatexception to be handled
+                    UI.taskMarking(ls, index, command);
                     break;
                 case "unmark":
-                    sub = input[1];
-                    ls.unmarkTask(Integer.parseInt(sub)); //numbersformatexception to be handled
+                    index = Integer.parseInt(input[1]);;
+                    ls.unmarkTask(index); //numbersformatexception to be handled
+                    UI.taskMarking(ls, index, command);
                     break;
                 case "delete":
-                    sub = input[1];
-                    ls.delete(Integer.parseInt(sub)); //numbersformatexception to be handled
+                    index = Integer.parseInt(input[1]);
+                    Task removed = ls.delete(index); //numbersformatexception to be handled
+                    UI.taskAddDelete(ls, removed, command);
                     break;
                 case "todo":
                 case "event":
@@ -72,7 +67,7 @@ public class Duke {
                     throw new DukeException("The Duke does not understand your words!");
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                UI.errorMsg(e.getMessage());
             }
         }
     }
@@ -87,22 +82,29 @@ public class Duke {
 
     private static void taskCommandHandler(String[] input, ToDoList ls) throws DukeException {
         String command = input[0];
+
         if (input.length < 2) {
             throw new InputDukeException();
         }
         if (command.equals("todo")) {
-            ls.add(new ToDoTask(input[1]));
+            ToDoTask toAdd = new ToDoTask(input[1]);
+            ls.add(toAdd);
+            UI.taskAddDelete(ls, toAdd, "add");
             return;
         }
         if (command.equals("deadline")) {
             String[] sub = Duke.commandHandler(input[1], " /by ", 2, 2);
-            ls.add(new DeadlineTask(sub[0], sub[1]));
+            DeadlineTask toAdd = new DeadlineTask(sub[0], sub[1]);
+            ls.add(toAdd);
+            UI.taskAddDelete(ls, toAdd, "add");
             return;
         }
         if (command.equals("event")) {
             String[] sub = Duke.commandHandler(input[1], " /from ", 2, 2);
             String[] subDuration = Duke.commandHandler(sub[1], " /to ", 2, 2);
-            ls.add(new EventTask(sub[0], subDuration[0], subDuration[1]));
+            EventTask toAdd = new EventTask(sub[0], subDuration[0], subDuration[1]);
+            ls.add(toAdd);
+            UI.taskAddDelete(ls, toAdd, "add");
         }
     }
 
