@@ -14,6 +14,8 @@ All you need to do is,
 3. add your tasks. 
 4. let it manage your tasks for you 😉
 
+If you are not sure how to use it, check out the [User Guide](https://yufannnn.github.io/ip/)! 
+
 Features:
 
 - [x] Manage task
