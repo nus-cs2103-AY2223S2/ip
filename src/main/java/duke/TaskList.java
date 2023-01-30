@@ -5,6 +5,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -152,9 +153,8 @@ public class TaskList {
                 Task task = new Event(taskName, taskFrom, taskTo);
                 addTaskToList(task, ui);
             } catch (DateTimeParseException e) {
-                ui.displayMessage("Please enter valid dates in the format YYYY-MM-DD/HH:mm\n");
+                throw new DukeException("Please enter valid dates in the format YYYY-MM-DD/HH:mm\n");
             }
-
         }
     }
 
@@ -163,16 +163,15 @@ public class TaskList {
      * @param tokens <code>String[]</code> of arguments from <code>Parser</code>, specifying the index to mark.
      * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      */
-    void markListItem(String[] tokens, Ui ui) {
+    String markListItem(String[] tokens, Ui ui) throws DukeException {
         try {
             int listIndex = Integer.parseInt(tokens[1])-1;
             tasks.get(listIndex).setStatus("X");
-            ui.displayMessage("Nice! I've marked this task as done:\n" +
-                    tasks.get(listIndex).toString() + "\n");
+            return tasks.get(listIndex).toString() + "\n";
         } catch (NumberFormatException e) {
-            ui.displayMessage("Please specify a numerical task index to mark\n");
+            throw new DukeException("Please specify a numerical task index to mark\n");
         } catch (IndexOutOfBoundsException e) {
-            ui.displayMessage("Please specify a valid index to mark\n");
+            throw new DukeException("Please specify a valid index to mark\n");
         }
     }
 
@@ -181,16 +180,15 @@ public class TaskList {
      * @param tokens <code>String[]</code> of arguments from <code>Parser</code>, specifying the index to unmark.
      * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      */
-    void unmarkListItem(String[] tokens, Ui ui) {
+    String unmarkListItem(String[] tokens, Ui ui) throws DukeException {
         try {
             int listIndex = Integer.parseInt(tokens[1]) - 1;
             tasks.get(listIndex).setStatus(" ");
-            ui.displayMessage("OK, I've marked this task as not done yet:\n" +
-                    tasks.get(listIndex).toString() + "\n");
+            return tasks.get(listIndex).toString();
         } catch (NumberFormatException e) {
-            ui.displayMessage("Please specify a numerical task index to unmark\n");
+            throw new DukeException("Please specify a numerical task index to unmark\n");
         } catch (IndexOutOfBoundsException e) {
-            ui.displayMessage("Please specify a valid index to unmark\n");
+            throw new DukeException("Please specify a valid index to unmark\n");
         }
     }
 
@@ -201,7 +199,7 @@ public class TaskList {
      * @throws DukeException In the event that the specified list index is out of bounds, or the argument corresponding
      * to the deletion index is not an integer.
      */
-    void deleteItem(String[] tokens, Ui ui) throws DukeException {
+    String deleteItem(String[] tokens, Ui ui) throws DukeException {
         if (tokens.length != 2) {
             throw new DukeException("please specify delete command as delete [list index]");
         } else if (tasks.size() == 0) {
@@ -210,13 +208,11 @@ public class TaskList {
         try {
             int listIndex = Integer.parseInt(tokens[1]) - 1;
             Task removed = tasks.remove(listIndex);
-            ui.displayMessage("Noted. I've removed this task:\n" +
-                    removed.toString() +
-                    "\nNow you have " + tasks.size() + " tasks in the list\n");
+            return removed.toString();
         } catch (NumberFormatException e) {
-            ui.displayMessage("please specify a valid number to delete entry\n");
+            throw new DukeException("please specify a valid number to delete entry\n");
         } catch (IndexOutOfBoundsException e) {
-            ui.displayMessage("please specify a valid index to delete\n");
+            throw new DukeException("please specify a valid index to delete\n");
         }
     }
 
@@ -224,10 +220,9 @@ public class TaskList {
      * Method to find all items containing keyword in the list, and invokes the associated Ui event to
      * display matching items
      * @param tokens <code>String[]</code> provided by <code>Parser</code>.
-     * @param ui Instance of <code>Ui</code> belonging to the calling instance of <code>Duke</code>.
      * @throws DukeException In the event that no keyword is specified.
      */
-    void findItemInList(String[] tokens, Ui ui) throws DukeException {
+    List<Integer> getMatchingItemsIndices(String[] tokens) throws DukeException {
         if (tokens.length == 1) {
             throw new DukeException("please provide a keyword or keywords to search for");
         }
@@ -243,7 +238,40 @@ public class TaskList {
                 indices.add(i);
             }
         }
-        ui.displayItemsAtIndices(this, indices);
+        return indices;
+    }
+
+    /**
+     * Method to format and get all current tasks in the <code>TaskList</code>.
+     */
+    public String getItemListAsResponseString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb
+                    .append(i+1)
+                    .append(".")
+                    .append(tasks.get(i).toString())
+                    .append("\n");
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Method to get the <code>Task</code> items at the indices specified.
+     * @param indices <code>List<Integer></code> containing desired indices to be obtained
+     */
+    public String getItemListAsResponseString(List<Integer> indices) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the wanted tasks in your list:\n");
+        for (int i : indices) {
+            sb
+                    .append(i+1)
+                    .append(".")
+                    .append(tasks.get(i).toString())
+                    .append("\n");
+        }
+        return sb.toString();
     }
 
     /**

@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.ui.Ui;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
