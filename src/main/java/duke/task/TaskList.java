@@ -23,48 +23,50 @@ public class TaskList {
     /**
      * Nicely prints out all the task
      */
-    public void list() {
-        System.out.println("Here are the tasks in your list:");
+    public String list() {
+        String res = "Here are the tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(i + 1 + ". " + list.get(i));
+            res += i + 1 + ". " + list.get(i) +  "\n";
         }
+        return res;
     }
 
     /**
      * Prints out default message after adding a dask
      */
-    public void addTask() {
-        System.out.println("Got it. I've added this duke.task:\n" + list.get(list.size() - 1));
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    public String addTask() {
+        return "Got it. I've added this duke.task:\n" + list.get(list.size() - 1)
+        + "\n" + "Now you have " + list.size() + " tasks in the list.";
     }
 
     /**
      * Remove a task
      * @param i index of task in arraylist
      */
-    public void delete(int i) {
-        System.out.println("Noted. I've removed this duke.task:");
-        System.out.println(list.get(i));
+    public String delete(int i) {
+        String res = "Noted. I've removed this duke.task:\n";
+        res += list.get(i) + "\n";
         list.remove(i);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        res += "Now you have " + list.size() + " tasks in the list.";
+        return res;
     }
 
     /**
      * Mark a task as done
      * @param i index of task in arraylist
      */
-    public void mark(int i) {
+    public String mark(int i) {
         list.get(i).mark();
-        System.out.println("Nice! I've marked this duke.task as done:\n" + list.get(i));
+        return "Nice! I've marked this duke.task as done:\n" + list.get(i);
     }
 
     /**
      * Mark a task as undone
      * @param i index of task in arraylist
      */
-    public void unmark(int i) {
+    public String unmark(int i) {
         list.get(i).unmark();
-        System.out.println("OK, I've marked this duke.task as not done yet:\n" + list.get(i));
+        return "OK, I've marked this duke.task as not done yet:\n" + list.get(i);
     }
 
     /**
@@ -72,13 +74,13 @@ public class TaskList {
      * @param command the full command
      */
 
-    public void addTodo(String command) {
+    public String addTodo(String command) {
         try {
             String description = Parser.getDescription(command);
             list.add(new Todo(description,false));
-            this.addTask();
+            return this.addTask();
         } catch (Exception e) {
-            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+            return "OOPS!!! The description of a todo cannot be empty.";
         }
     }
 
@@ -86,18 +88,18 @@ public class TaskList {
      * Add a deadline task into tasklist
      * @param command the full command
      */
-    public void addDeadline(String command) {
+    public String addDeadline(String command) {
         try {
             String[] parsed = Parser.parseDeadline(command);
             String deadline = parsed[1];
             String description = parsed[0];
             list.add(new Deadline(description, deadline, false));
-            this.addTask();
+            return this.addTask();
         } catch (DateTimeParseException e) {
-            Ui.wrongDateFormat();
+            return Ui.wrongDateFormat();
         } catch (Exception e) {
-            System.out.println("☹ OOPS!!! Unrecognizable formet\n Please write it in this format: deadline xxx /by "
-                    + "YYYY-MM-DD HH:mm.");
+            return "OOPS!!! Unrecognizable formet\n Please write it in this format: deadline xxx /by "
+                    + "YYYY-MM-DD HH:mm.";
         }
     }
 
@@ -105,18 +107,18 @@ public class TaskList {
      * Add an event task into tasklist
      * @param command the full command
      */
-    public void addEvent(String command) {
+    public String addEvent(String command) {
         try {
             String[] parsed = Parser.parseEvent(command);
             String description = parsed[0];
             String start = parsed[1];
             String end = parsed[2];
             list.add(new Event(description, start, end, false));
-            this.addTask();
+            return this.addTask();
         } catch (DateTimeParseException e) {
-            Ui.wrongDateFormat();
+            return Ui.wrongDateFormat();
         } catch (Exception e) {
-            System.out.println("☹ OOPS!!! Insufficient information or wrong format.");
+          return "OOPS!!! Insufficient information or wrong format.";
         }
     }
 
@@ -124,7 +126,7 @@ public class TaskList {
      * Finds tasks with matching regex and prints them out
      * @param command the command with the find keyword
      */
-    public void find(String command) {
+    public String find(String command) {
         String keyword = Parser.parseQuery(command);
         ArrayList<Task> temp = new ArrayList<Task>();
         for (Task t: list) {
@@ -132,13 +134,13 @@ public class TaskList {
                 temp.add(t);
             }
         }
-        System.out.println("Here are the matching tasks in your list:");
         if (temp.size() == 0) {
-            System.out.println("No matching task!");
-            return;
+            return "No matching task!";
         }
+        String res = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < temp.size(); i++) {
-            System.out.println(i + 1 + ". " + temp.get(i));
+            res += i + 1 + ". " + temp.get(i);
         }
+        return res;
     }
 }

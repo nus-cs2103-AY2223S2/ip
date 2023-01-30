@@ -1,16 +1,33 @@
 package duke;
 import java.util.ArrayList;
 import duke.task.TaskList;
-
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * A Duke class
  */
-public class Duke {
+public class Duke extends Application {
     private static String[] spStg;
     private Ui ui;
     private TaskList tasks;
-
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/scottie.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/scottie.jpg"));
 
     public Duke() {
         ui = new Ui();
@@ -21,64 +38,131 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+//    //public static void main(String[] args) {
+//        new Duke().run();
+//    }
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    private String getResponse(String input) {
+        return this.run(input);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        //Step 1. Setting up required components
+
+        //The container for the content of the chat to scroll.
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+
+        Label userText = new Label(ui.showWelcome());
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user))
+        );
+
+        //Step 2. Formatting the window to look as expected
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        // You will need to import `javafx.scene.layout.Region` for this.
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+        return textToAdd;
     }
 
     /**
      * Run the duke instance
      */
-    public void run() {
-        ui.showWelcome();
-
-        while (true) {
-            String fullCommand = ui.readCommand();
-            String firstWord = Parser.getFirstWord(fullCommand);
-
-            switch (firstWord) {
+    public String run(String fullCommand) {
+        String firstWord = Parser.getFirstWord(fullCommand);
+        switch (firstWord) {
             case "bye":
-                ui.showBye();
-                return;
+                Storage.saveToFile(tasks.getList());
+                return ui.showBye();
 
             case "list":
-                tasks.list();
-                break;
+                return tasks.list();
 
             case "delete":
-                tasks.delete(Parser.getIndex(fullCommand));
-                break;
+                return tasks.delete(Parser.getIndex(fullCommand));
 
             case "mark":
-                tasks.mark(Parser.getIndex(fullCommand));
-                break;
+                return tasks.mark(Parser.getIndex(fullCommand));
 
             case "unmark":
-                tasks.unmark(Parser.getIndex(fullCommand));
-                break;
+                return tasks.unmark(Parser.getIndex(fullCommand));
 
             case "todo":
-                tasks.addTodo(fullCommand);
-                break;
+                return tasks.addTodo(fullCommand);
 
             case "deadline":
-                tasks.addDeadline(fullCommand);
-                break;
+                return tasks.addDeadline(fullCommand);
 
             case "event":
-                tasks.addEvent(fullCommand);
-                break;
+                return tasks.addEvent(fullCommand);
 
             case "find":
-                tasks.find(fullCommand);
-                break;
+                return tasks.find(fullCommand);
 
             default:
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                continue;
+                return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             }
-
-            Storage.saveToFile(tasks.getList());
-        }
     }
 }
 
