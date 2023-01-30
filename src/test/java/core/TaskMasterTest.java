@@ -10,10 +10,10 @@ class TaskMasterTest {
     @Test
     void list_normal_success() {
         TaskMaster testcase = new TaskMaster();
-        assertEquals("Oh my, the list is empty!\n", testcase.list());
+        assertEquals("Oh my, the list is empty!\n", testcase.listAllTasks());
 
         testcase.addToDo("Homework", false);
-        assertEquals("1.[T][ ] Homework\n", testcase.list());
+        assertEquals("1.[T][ ] Homework\n", testcase.listAllTasks());
     }
 
     @Test
@@ -26,7 +26,7 @@ class TaskMasterTest {
         } catch (Index e) {
             throw new RuntimeException(e);
         }
-        assertEquals("1.[T][X] Homework\n", testcase.list());
+        assertEquals("1.[T][X] Homework\n", testcase.listAllTasks());
     }
 
     @Test

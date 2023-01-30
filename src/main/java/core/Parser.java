@@ -175,7 +175,7 @@ public class Parser {
         String[] args;
         switch (this.getKeyword()) {
         case "list":
-            return tm.list();
+            return tm.listAllTasks();
         case "mark":
             return tm.markComplete(extractIndexParams(), true);
         case "unmark":
@@ -190,7 +190,7 @@ public class Parser {
             args = extractTaskParams(Keyword.DEADLINE);
             return tm.addDeadLine(args[0], false, DateHandler.convert(args[1]));
         case "delete":
-            return tm.delete(extractIndexParams());
+            return tm.deleteTask(extractIndexParams());
         case "save":
             DukeIO.writeSave(tm);
             return "Saved!";
@@ -200,7 +200,7 @@ public class Parser {
         case "bye":
             throw new exceptions.Quit();
         case "find":
-            return tm.find(extractTaskParams(Keyword.FIND)[0]);
+            return tm.findTask(extractTaskParams(Keyword.FIND)[0]);
         case "?":
             throw new exceptions.Unimplemented();
         default:

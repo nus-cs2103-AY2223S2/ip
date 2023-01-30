@@ -14,12 +14,12 @@ public class Deadline extends Task {
     /**
      * Constructs a Deadline task with the given name, status and timing details.
      *
-     * @param name The name of this Deadline.
-     * @param status The status of this Deadline.
+     * @param description The name or description of this Deadline.
+     * @param isComplete The status of this Deadline.
      * @param by The end date time of this Deadline
      */
-    public Deadline(String name, boolean status, LocalDateTime by) {
-        super(name, status);
+    public Deadline(String description, boolean isComplete, LocalDateTime by) {
+        super(description, isComplete);
         this.by = by;
     }
 
@@ -40,7 +40,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toCsv() {
-        return String.format("D,%s,%s,%s", this.getTaskName(),
-                this.getStatus(), DateHandler.unconvert(this.by));
+        return String.format("D,%s,%s,%s", this.getTaskDescription(),
+                this.getComplete(), DateHandler.unconvert(this.by));
     }
 }

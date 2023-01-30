@@ -137,8 +137,8 @@ public class DukeIO extends PrintWriter {
         System.out.println(LOCAL_SAVE);
         BufferedWriter file = writeFileBW();
         try {
-            System.out.println(tm.export());
-            file.write(tm.export());
+            System.out.println(tm.exportToCsv());
+            file.write(tm.exportToCsv());
             file.close();
         } catch (IOException | NullPointerException e) {
             System.err.printf("SysErr %s\n", e.getMessage());

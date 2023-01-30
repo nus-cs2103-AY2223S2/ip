@@ -9,13 +9,13 @@ import task.Task;
  * core.TaskMaster is the managing class for all Tasks.
  */
 public class TaskMaster {
-    private final LinkedList<Task> taskList;
+    private final LinkedList<Task> tasks;
 
     /**
      * Constructor which creates a TaskMaster instance.
      */
     public TaskMaster() {
-        taskList = new LinkedList<>();
+        tasks = new LinkedList<>();
     }
 
     /**
@@ -23,13 +23,13 @@ public class TaskMaster {
      *
      * @return The list of stored Tasks
      */
-    public String list() {
+    public String listAllTasks() {
 
         StringBuilder ret = new StringBuilder();
 
-        if (taskList.size() > 0) {
+        if (tasks.size() > 0) {
             int number = 1;
-            for (Task task: taskList) {
+            for (Task task: tasks) {
                 ret.append(String.format("%d.%s\n", number++, task));
             }
         } else {
@@ -45,13 +45,13 @@ public class TaskMaster {
      * @param task The task to be added to this list
      * @return A message indicating that the task has been added
      */
-    private String add(Task task) {
+    private String addTask(Task task) {
         StringBuilder ret = new StringBuilder();
-        taskList.add(task);
+        tasks.add(task);
         ret.append("Got it. I've added this task:\n");
         ret.append(task);
         ret.append("\n");
-        ret.append(String.format("Now you have %d tasks in the list.\n", taskList.size()));
+        ret.append(String.format("Now you have %d tasks in the list.\n", tasks.size()));
         return ret.toString();
     }
 
@@ -65,7 +65,7 @@ public class TaskMaster {
      */
     private Task getTaskAtIndex(int index) throws exceptions.invalid.Index {
         try {
-            return taskList.get(index);
+            return tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
             throw new exceptions.invalid.Index(index + 1);
         }
@@ -84,7 +84,7 @@ public class TaskMaster {
         StringBuilder ret = new StringBuilder();
 
         Task task = this.getTaskAtIndex(index);
-        task.setStatus(status);
+        task.setComplete(status);
         if (status) {
             ret.append("Nice! I've marked this task as done:\n");
         } else {
@@ -102,9 +102,9 @@ public class TaskMaster {
      * @return A message indicating that the task has been deleted
      * @throws exceptions.invalid.Index Thrown when user enters an invalid index
      */
-    public String delete(int index) throws exceptions.invalid.Index {
+    public String deleteTask(int index) throws exceptions.invalid.Index {
         try {
-            taskList.remove(index);
+            tasks.remove(index);
             return "Noted. I've removed this task:";
         } catch (IndexOutOfBoundsException e) {
             throw new exceptions.invalid.Index(index);
@@ -119,7 +119,7 @@ public class TaskMaster {
      * @return A message indicating that this Todo task has been added
      */
     public String addToDo(String taskName, boolean status) {
-        return this.add(new task.ToDo(taskName, status));
+        return this.addTask(new task.ToDo(taskName, status));
     }
 
     /**
@@ -132,7 +132,7 @@ public class TaskMaster {
      *
      */
     public String addDeadLine(String taskName, boolean status, LocalDateTime by) {
-        return this.add(new task.Deadline(taskName, status, by));
+        return this.addTask(new task.Deadline(taskName, status, by));
     }
 
     /**
@@ -145,7 +145,7 @@ public class TaskMaster {
      * @return A message indicating that this Event has been added
      */
     public String addEvent(String taskName, boolean status, LocalDateTime from, LocalDateTime to) {
-        return this.add(new task.Event(taskName, status, from, to));
+        return this.addTask(new task.Event(taskName, status, from, to));
     }
 
     /**
@@ -153,11 +153,11 @@ public class TaskMaster {
      *
      * @return list of all Tasks in CSV format.
      */
-    public String export() {
+    public String exportToCsv() {
         StringBuilder ret = new StringBuilder();
 
-        int tmSize = taskList.size();
-        for (Task task : taskList) {
+        int tmSize = tasks.size();
+        for (Task task : tasks) {
             ret.append(task.toCsv());
             tmSize--;
             if (tmSize > 0) {
@@ -172,15 +172,14 @@ public class TaskMaster {
      * @param keyword The keyword to find stored in the list.
      * @return
      */
-    public String find(String keyword) {
+    public String findTask(String keyword) {
         keyword = keyword.toLowerCase();
         StringBuilder ret = new StringBuilder();
-        if (taskList.size() > 0) {
+        if (tasks.size() > 0) {
             int number = 1;
-            for (Task task: taskList) {
+            for (Task task: tasks) {
                 number++;
-                if (task.getTaskName().toLowerCase().contains(keyword)) {
-                    System.out.println("AAA");
+                if (task.getTaskDescription().toLowerCase().contains(keyword)) {
                     ret.append(String.format("%d.%s\n", number, task));
                 }
             }

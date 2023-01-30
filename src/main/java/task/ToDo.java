@@ -7,13 +7,13 @@ package task;
 public class ToDo extends Task {
 
     /**
-     * Constructs a ToDo task with the given name and status.
+     * Constructs a ToDo task with the given name/description and status.
      *
-     * @param name The name of this Todo task.
-     * @param status The status of this task.
+     * @param description The name of this Todo task.
+     * @param isComplete The status of this task.
      */
-    public ToDo(String name, boolean status) {
-        super(name, status);
+    public ToDo(String description, boolean isComplete) {
+        super(description, isComplete);
     }
 
     /**
@@ -32,6 +32,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toCsv() {
-        return String.format("T,%s,%s", this.getTaskName(), this.getStatus());
+        return String.format("T,%s,%s", this.getTaskDescription(), this.getComplete());
     }
 }

@@ -14,13 +14,13 @@ public class Event extends Task {
     /**
      * Constructs an Event task with the given name, status and timing details.
      *
-     * @param name The name of this Event
-     * @param status The status of this Event
+     * @param description The name of this Event
+     * @param isComplete The status of this Event
      * @param from The start date time of this Event
      * @param to The end date time of this Event
      */
-    public Event(String name, Boolean status, LocalDateTime from, LocalDateTime to) {
-        super(name, status);
+    public Event(String description, Boolean isComplete, LocalDateTime from, LocalDateTime to) {
+        super(description, isComplete);
         this.from = from;
         this.to = to;
     }
@@ -42,7 +42,7 @@ public class Event extends Task {
      */
     @Override
     public String toCsv() {
-        return String.format("E,%s,%s,%s,%s", this.getTaskName(), this.getStatus(),
+        return String.format("E,%s,%s,%s,%s", this.getTaskDescription(), this.getComplete(),
                 DateHandler.unconvert(this.from), DateHandler.unconvert(this.to));
     }
 

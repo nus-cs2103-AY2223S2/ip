@@ -16,34 +16,6 @@ public class DateHandler {
     private static String printPattern = "dd/MM/yyyy HH:mm";
     private static DateTimeFormatter printFormat = DateTimeFormatter.ofPattern(printPattern);
 
-    //    /**
-    //     * Sets pattern for DateTimeFormatter.
-    //     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html">
-    //     *     Java Dcoumentation on Patterns for Formatting and Parsing</a>
-    //     * @param pattern Pattern to set.
-    //     */
-    //    public static void setDTFPattern(String pattern) {
-    //        DateTimeFormatter input = null;
-    //        try {
-    //            input = DateTimeFormatter.ofPattern(pattern);
-    //        } catch (IllegalArgumentException e) {
-    //            throw new IllegalArgumentException(e);
-    //        }
-    //        DTFPattern = pattern;
-    //        dateTimeFormat = DateTimeFormatter.ofPattern(DTFPattern);
-    //    }
-    //
-    //    public static void setPrintPattern(String pattern) {
-    //        DateTimeFormatter input = null;
-    //        try {
-    //            input = DateTimeFormatter.ofPattern(pattern);
-    //        } catch (IllegalArgumentException e) {
-    //            throw new IllegalArgumentException(e);
-    //        }
-    //        printPattern = pattern;
-    //        printFormat = DateTimeFormatter.ofPattern(printPattern);
-    //    }
-
     /**
      * Converts string input into LocalDateTime.
      * By default, format is set by DTFPattern.
@@ -70,23 +42,4 @@ public class DateHandler {
     public static String unconvert(LocalDateTime userin) {
         return userin.format(DateTimeFormatter.ofPattern(dtfPattern));
     }
-
-    //    /**
-    //     * Returns String input formatted according to the stored format
-    //     * @param datetime The time to print
-    //     * @return String representation of Date Time according to the format
-    //     */
-    //    public static String print(LocalDateTime datetime) {
-    //        return print(datetime, printFormat);
-    //    }
-    //
-    //    /**
-    //     * Returns String input formatted according to the given format
-    //     * @param datetime The time to print
-    //     * @param format Custom DateTimeFormatter format
-    //     * @return String representation of Date Time according to the format
-    //     */
-    //    private static String print(LocalDateTime datetime, DateTimeFormatter format) {
-    //        return datetime.format(format);
-    //    }
 }

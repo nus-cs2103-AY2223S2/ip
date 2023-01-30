@@ -3,28 +3,26 @@ package task;
  * Task is the superclass of the activities that can be stored within Duke.
  */
 public abstract class Task {
-    private boolean status;
-    private final String taskName;
-
+    private boolean isComplete;
+    private final String taskDescription;
 
     /**
      * Constructs a Task with the provided name and status.
      *
-     * @param name The name of this task
-     * @param status The status of this task
+     * @param description The description or name of the task
+     * @param isComplete The status of this task
      */
-    protected Task(String name, Boolean status) {
-        this.taskName = name;
-        this.status = status;
+    protected Task(String description, Boolean isComplete) {
+        this.taskDescription = description;
+        this.isComplete = isComplete;
     }
 
     /**
      * Returns the name of the Task.
-     *
-     * @return The name of this Task.
+     * @return The description or name of this Task.
      */
-    public String getTaskName() {
-        return this.taskName;
+    public String getTaskDescription() {
+        return taskDescription;
     }
 
     /**
@@ -37,21 +35,20 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatus() ? "X" : " ", this.taskName);
+        return String.format("[%s] %s", this.getComplete() ? "X" : " ", this.taskDescription);
     }
 
     /**
      * Returns the String representation of the task delimited by commas.
-     *
      * @return The string representation of this task in CSV format
      */
     public abstract String toCsv();
 
-    public boolean getStatus() {
-        return status;
+    public boolean getComplete() {
+        return isComplete;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setComplete(boolean complete) {
+        this.isComplete = complete;
     }
 }

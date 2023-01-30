@@ -11,8 +11,8 @@ import exceptions.DukeException;
  */
 
 public class Duke {
-    private static DukeIO dio;
-    private static TaskMaster tm;
+    private static DukeIO ioHandler;
+    private static TaskMaster taskMaster;
 
     /**
      * Main method for the program
@@ -20,27 +20,26 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        boolean quit = false;
+        boolean shouldQuit = false;
         String userInput;
 
         initialize();
         greet();
 
-
-        while (!quit) {
-            userInput = dio.readLn();
+        while (!shouldQuit) {
+            userInput = ioHandler.readLn();
             if (!userInput.isEmpty()) {
-                dio.lb();
+                ioHandler.lb();
                 try {
-                    Parser a = new Parser(userInput);
-                    dio.println(a.parse(tm));
+                    Parser input = new Parser(userInput);
+                    ioHandler.println(input.parse(taskMaster));
                 } catch (exceptions.Quit e) {
-                    quit = true;
+                    shouldQuit = true;
                 } catch (DukeException de) {
-                    dio.println(de.getMessage());
+                    ioHandler.println(de.getMessage());
                 }
-                dio.lb();
-                dio.flush();
+                ioHandler.lb();
+                ioHandler.flush();
             }
         }
         goodbye();
@@ -50,12 +49,12 @@ public class Duke {
      * Initialize Duke by initializing needed classes.
      */
     public static void initialize() {
-        dio = new DukeIO();
-        tm = new TaskMaster();
+        ioHandler = new DukeIO();
+        taskMaster = new TaskMaster();
         try {
-            dio.readSave(tm);
+            ioHandler.readSave(taskMaster);
         } catch (exceptions.invalid.File e) {
-            // do nothing
+            taskMaster = new TaskMaster();
         } catch (DukeException e) {
             throw new RuntimeException(e); //Figure out who throws tis
         }
@@ -71,21 +70,20 @@ public class Duke {
                 + "\\ \\ /\\ / / _` |  _|  _| |/ _ \\/ __|\n"
                 + " \\ V  V / (_| | | | | | |  __/\\__ \\\n"
                 + "  \\_/\\_/ \\__,_|_| |_| |_|\\___||___/\n";
-        dio.println("Hello from\n" + logo + "\n");
-        dio.println("Hello! I'm " + "Waffles");
-        dio.println("What can I do for you?");
-        dio.flush();
+        ioHandler.println("Hello from\n" + logo + "\n");
+        ioHandler.println("Hello! I'm " + "Waffles");
+        ioHandler.println("What can I do for you?");
+        ioHandler.flush();
     }
 
     /**
      * Prints standard goodby message and closes DIO.
      */
     public static void goodbye() {
-        dio.writeSave(tm);
-        dio.println("Bye. Hope to see you again soon!");
-        dio.flush();
-        dio.close();
+        ioHandler.writeSave(taskMaster);
+        ioHandler.println("Bye. Hope to see you again soon!");
+        ioHandler.flush();
+        ioHandler.close();
     }
-
 }
 
