@@ -10,7 +10,7 @@ public class TaskList {
 
     ArrayList<Task> allTasks;
 
-    TaskList(){
+    public TaskList(){
         allTasks =  new ArrayList<Task>();
     }
 
@@ -18,46 +18,30 @@ public class TaskList {
         return allTasks.size();
     }
 
-    public void printList() {
-        System.out.println("Here are the tasks in your list:");
+    public String printList() {
+        String printedList = "";
         for (int i = 0; i < allTasks.size(); i++) {
             int index = i + 1;
-            System.out.println(index + ". "+ allTasks.get(i).toString());
+            printedList = printedList.concat(index + ". "+ allTasks.get(i).toString()) + "\n";
         }
-    }
 
-    public void addItem(String type, String item) {
-        Task newTask = new Task(item, type);
-        allTasks.add(newTask);
-        System.out.println(" " + newTask);
-    }
-
-
-    public void addItemDeadline(String type, String item, Date time, String timeString) {
-        Task newTask = new Deadline(item, type, time, timeString);
-        allTasks.add(newTask);
-        System.out.println(" " + newTask);
-    }
-
-    public void addItemEvent(String type, String item, Date time1, Date time2, String start, String end) {
-        Task newTask = new Event(item, type, time1, time2, start, end);
-        allTasks.add(newTask);
-        System.out.println(" " + newTask);
-    }
-
-    public void changingStatus(int x, int index) {
-        if(x == 0) { //marked
-            allTasks.get(index-1).mark();
-
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(" " + allTasks.get(index-1).toString());
-
-        } else { //unmarked
-            allTasks.get(index-1).unmark();
-
-            System.out.println("OK, I've marked this task as not done yet:");
-            System.out.println(" " + allTasks.get(index-1).toString());
+        if (allTasks.size() == 0) {
+            return "Your list is currently empty, :)";
         }
+
+        return printedList;
+    }
+
+    public void addTask(Task task) {
+        allTasks.add(task);
+    }
+
+    public void markTask(int index) {
+        allTasks.get(index-1).mark();
+    }
+
+    public void unmarkTask(int index) {
+        allTasks.get(index-1).unmark();
     }
 
     public void deleteTask(int index) {

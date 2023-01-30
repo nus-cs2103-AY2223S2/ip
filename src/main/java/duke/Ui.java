@@ -7,12 +7,10 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner sc;
     private final PrintStream out;
-    private final Parser parser;
 
     public Ui(InputStream in, PrintStream out) {
         this.sc = new Scanner(in);
         this.out = out;
-        parser = new Parser();
     }
 
     public Ui() {
@@ -37,9 +35,8 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void startProgram(String input, TaskList toDo, Storage storage) {
-            parser.commandExecute(input, toDo, storage);
-
+    public void printText(String text) {
+        System.out.println(text);
     }
 
 

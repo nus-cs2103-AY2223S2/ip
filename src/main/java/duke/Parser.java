@@ -1,93 +1,107 @@
 package duke;
 
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
 public class Parser {
-    public void commandExecute (String input, TaskList toDo, Storage storage) {
+    protected Ui ui;
 
+    public Parser(Ui ui) {
+        this.ui = ui;
+    }
 
-        String[] instruction = input.split(" ",2);
+    public Command commandExecute(String input, TaskList toDo, Storage storage) {
+
+        String[] instruction = input.split(" ", 2);
 
         try {
+            if (instruction[0].equals("list")) { // printing list
+                return new ListCommand();
 
-            if(instruction[0].equals("list")) { // printing list
-            toDo.printList();
+            } else if (instruction[0].equals("mark")) { //marking
 
-            } else if (instruction[0].equals("mark")){ //marking
-
-                if(instruction.length <= 1 ){
+                if (instruction.length <= 1) {
                     throw new ArgumentException("What are we marking again?");
-                } else if (! instruction[1].matches("[0-9]+")) {
+                } else if (!instruction[1].matches("[0-9]+")) {
                     throw new ArgumentException("What are we marking again?");
                 }
                 int index = Integer.parseInt(instruction[1]);
-                if ((index -1) < 0 || (index-1) >= toDo.numberOfTask()){
+                if ((index - 1) < 0 || (index - 1) >= toDo.numberOfTask()) {
                     throw new ArgumentException("Can't find the index");
                 }
-                toDo.changingStatus(0, index);
+
+                return new MarkCommand(index);
+
             } else if (instruction[0].equals("unmark")) { //unmarking
 
-                if(instruction.length <= 1 )  {
+                if (instruction.length <= 1) {
                     throw new ArgumentException("What are we unmarking again?");
-                } else if (! instruction[1].matches("[0-9]+")){
+                } else if (!instruction[1].matches("[0-9]+")) {
                     throw new ArgumentException("What are we unmarking again?");
                 }
                 int index = Integer.parseInt(instruction[1]);
-                if ((index -1) < 0 || (index-1) >= toDo.numberOfTask()){
+                if ((index - 1) < 0 || (index - 1) >= toDo.numberOfTask()) {
                     throw new ArgumentException("Can't find the index");
                 }
-                toDo.changingStatus(1, index);
-            } else if(instruction[0].equals("delete")){
 
-                if(instruction.length <= 1 )  {
+                return new UnmarkCommand(index);
+
+            } else if (instruction[0].equals("delete")) {
+
+                if (instruction.length <= 1) {
                     throw new ArgumentException("What are we deleting again?");
-                } else if (! instruction[1].matches("[0-9]+")){
+                } else if (!instruction[1].matches("[0-9]+")) {
                     throw new ArgumentException("What are we deleting again?");
                 }
                 int index = Integer.parseInt(instruction[1]);
 
-                if ((index -1) < 0 || (index-1) >= toDo.numberOfTask()){
+                if ((index - 1) < 0 || (index - 1) >= toDo.numberOfTask()) {
                     throw new ArgumentException("Can't find the index");
                 }
 
-                System.out.println(" Noted. I've removed this task:");
-                toDo.deleteTask(index);
-                System.out.println("Now you have " + toDo.numberOfTask() + " tasks in the list.");
+                return new DeleteCommand(index);
 
+            } else if (instruction[0].equals("bye")) {
+                return new ExitCommand();
 
             } else { // adding into list
                 String command = instruction[0];
 
-                if(!command.equals("todo") && !command.equals("deadline") &&
+                if (!command.equals("todo") && !command.equals("deadline") &&
                         !command.equals("event") && !command.equals("delete")) {
                     throw new DukeException("*sigh* No such commands, please be serious.");
                 }
 
-                if(instruction.length == 1){
+                if (instruction.length == 1) {
                     throw new ArgumentException("Yeah let's keep wasting each other time." +
                             " You're missing the parameters in case you don't already know.");
                 }
 
                 String item = instruction[1];
-                if(item.trim().isEmpty()) {
+                if (item.trim().isEmpty()) {
                     throw new ArgumentException("Spacing out already?");
                 }
 
-                if(command.equals("todo")) {
-                    System.out.println("Got it. I've added this task:");
-                    toDo.addItem("T", item);
+                if (command.equals("todo")) {
+
+                    Task task = new Task(item, "T");
+                    return new AddCommand(task);
 
                 } else if (command.equals("deadline")) {
                     String itemANDtime[] = item.split("/", 2);
 
-                    if(itemANDtime.length== 1){
+                    if (itemANDtime.length == 1) {
                         throw new ArgumentException("How interesting a deadline without a time limit?");
-                    } else if(itemANDtime[0].trim().isEmpty()) {
+                    } else if (itemANDtime[0].trim().isEmpty()) {
                         throw new ArgumentException("Oh? Looks like your item disappeared into space.");
-                    } else if(itemANDtime[1].trim().isEmpty()) {
+                    } else if (itemANDtime[1].trim().isEmpty()) {
                         throw new ArgumentException("Hiding from reality I see. Too bad time waits for no man");
                     }
 
@@ -103,12 +117,12 @@ public class Parser {
                     SimpleDateFormat converterDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     Date date = converterDate.parse(deadlineTime);
 
-                    System.out.println("Got it. I've added this task:");
-                    toDo.addItemDeadline("D", itemANDtime[0], date, deadlineTime);
+                    Deadline deadline = new Deadline(itemANDtime[0], "D", date, deadlineTime);
+                    return new AddCommand(deadline);
 
                 } else {
 
-                    if(!item.contains("/from") || !item.contains("/to")) {
+                    if (!item.contains("/from") || !item.contains("/to")) {
                         throw new ArgumentException("For event please enter the format: event nameOfEvent /from dd/MM/yyyy HH:mm" +
                                 " /to dd/MM/yyyy HH:mm");
                     }
@@ -117,48 +131,40 @@ public class Parser {
 
                     if (itemANDtime.length < 2) {
                         throw new ArgumentException("You forget the event name!");
-                    } else if(itemANDtime[0].trim().isEmpty()) {
+                    } else if (itemANDtime[0].trim().isEmpty()) {
                         throw new ArgumentException("Oh? Looks like your item disappeared into space.");
                     }
 
                     String nameItem = itemANDtime[0];
 
-                    String startEnd [] = itemANDtime[1].split(" /to ");
+                    String startEnd[] = itemANDtime[1].split(" /to ");
 
-                    if(startEnd.length <2) {
+                    if (startEnd.length < 2) {
                         throw new ArgumentException("Please enter the format: event nameOfEvent /from xxx /to xxx");
                     }
 
-                    if(startEnd[0].trim().isEmpty() || startEnd[1].trim().isEmpty()) {
+                    if (startEnd[0].trim().isEmpty() || startEnd[1].trim().isEmpty()) {
                         throw new ArgumentException("Please do not leave the timing blank!");
                     }
 
                     SimpleDateFormat converterStartDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     Date startDate = converterStartDate.parse(startEnd[0]);
-                    Date endDate =  converterStartDate.parse(startEnd[1]);
+                    Date endDate = converterStartDate.parse(startEnd[1]);
 
-
-                    System.out.println("Got it. I've added this task:");
-                    toDo.addItemEvent("E", nameItem, startDate, endDate, startEnd[0], startEnd[1]);
+                    Task task = new Event(nameItem, "E", startDate, endDate, startEnd[0], startEnd[1]);
+                    return new AddCommand(task);
                 }
-
-                System.out.println("Now you have " + toDo.numberOfTask() + " tasks in the list.");
-
             }
 
-           storage.updateFile(toDo.getTasks());
-
         } catch (DukeException ex) {
-        System.out.println(ex.getMessage());
+            System.out.println(ex.getMessage());
         } catch (ArgumentException ex2) {
             System.out.println(ex2.getMessage());
         } catch (ParseException e) {
             System.out.println("Please enter the time of the format dd/MM/yyyy HH:mm");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         }
 
-
-
+        return new InvalidCommand();
     }
+
 }
