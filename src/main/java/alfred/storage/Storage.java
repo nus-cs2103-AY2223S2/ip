@@ -51,8 +51,8 @@ public class Storage {
                             checkMark.isMark(Integer.parseInt(lineArr[1]), task);
                             break;
                         default:
-                            throw new AlfredException("I'm sorry but there is an" +
-                                    " invalid task in the data file");
+                            throw new AlfredException("I'm sorry but there is an"
+                                    + " invalid task in the data file");
                             // No task type
                         }
                         tasks.add(task);
