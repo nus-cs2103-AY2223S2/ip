@@ -56,29 +56,33 @@ public class TaskList {
     /**
      * Prints the size of the task list.
      */
-    public void printSize() {
-        System.out.printf("Now have %d items.%n", this.tasks.size());
+    public String printSize() {
+        return String.format("Now have %d items.%n", this.tasks.size());
     }
 
     /**
      * Adds a Task to the task list.
      * @param task The task to be added.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.tasks.add(task);
-        System.out.println("OK I put in for you: " + task);
+        StringBuilder finalString = new StringBuilder();
+        finalString.append("OK I put in for you:\n" + task);
         this.printSize();
+        return finalString.toString();
     }
 
     /**
      * Deletes the task from the list if the index exists.
      * @param index Index of the task to be deleted.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         this.isInList(index);
-        System.out.println("OK I take out for you: " + this.tasks.get(index));
+        StringBuilder finalString = new StringBuilder();
+        finalString.append("OK I take out for you:\n" + this.tasks.get(index));
         this.tasks.remove(index);
         this.printSize();
+        return finalString.toString();
     }
 
     /**
@@ -93,29 +97,30 @@ public class TaskList {
     /**
      * Prints out all tasks in the list.
      */
-    public void listItems() {
-        this.listItems((t) -> true);
+    public String listItems() {
+        return this.listItems((t) -> true);
     }
 
     /**
      * Prints out some items from the list.
      * @param taskFilter A filter that returns a boolean.
      */
-    public void listItems(Function<Task, Boolean> taskFilter) {
+    public String listItems(Function<Task, Boolean> taskFilter) {
         if (this.isEmpty()) {
-            System.out.println("List empty!");
-            return;
+            return "Haiya list empty!";
         }
 
-        System.out.println("Here's your list:");
+        StringBuilder finalString = new StringBuilder();
+        finalString.append("Here's your list:\n");
         int count = 0;
         for (int id = 0; id < this.tasks.size(); id++) {
             Task task = this.getTask(id);
             if (taskFilter.apply(task)) {
-                System.out.printf("%d. %s\n", count + 1, task);
+                finalString.append(String.format("%d. %s\n", count + 1, task));
                 count += 1;
             }
         }
+        return finalString.toString();
     }
 
     /**
@@ -123,11 +128,11 @@ public class TaskList {
      * @param index The index of the task that needs to be marked.
      * @param isToMark Whether to mark or unmark the task.
      */
-    public void markTask(int index, boolean isToMark) {
+    public String markTask(int index, boolean isToMark) {
         this.isInList(index);
         Task task = this.tasks.get(index);
         task.mark(isToMark);
-        System.out.println(String.format("OK %smark for you already: ", isToMark ? "" : "un") + task);
+        return String.format("OK %smark for you already:\n", isToMark ? "" : "un") + task;
     }
 
     /**

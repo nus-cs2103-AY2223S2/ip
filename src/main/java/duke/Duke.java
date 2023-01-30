@@ -2,57 +2,51 @@ package duke;
 
 import command.Command;
 import dukeexception.DukeException;
+import gui.Gui;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
-import ui.Ui;
 
 /**
  * Duke chatbot that will respond to users' commands.
  */
 public class Duke {
+    private static final String GREETING = "Hallo Hallo niece and nephew! My name is Uncle Roger."
+            + "What you want?";
+    private final Gui gui;
     private final Storage storage;
     private TaskList taskList;
-    private final Ui ui;
 
     /**
      * Constructor for Duke.
      */
-    public Duke() {
+    public Duke(Gui gui) {
         this.storage = new Storage("./data/taskList.txt");
         this.taskList = new TaskList();
-        this.ui = new Ui();
+        this.gui = gui;
+        gui.greet();
         try {
             this.taskList = new TaskList(this.storage.load());
         } catch (DukeException e) {
             this.storage.create();
-            ui.showError(e.getMessage());
+            gui.showError(e.getMessage());
             this.taskList = new TaskList();
         }
     }
 
     /**
-     * Starts the Duke chatbot.
+     * Gets the response based on the user input.
+     * @param input The user input.
      */
-    public void run() {
-        this.ui.sayHi();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(this.taskList, this.ui, this.storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public boolean getResponse(String input) {
+        try {
+            this.gui.echo(input);
+            Command c = Parser.parse(input);
+            c.execute(this.taskList, this.gui, this.storage);
+            return c.isExit();
+        } catch (DukeException e) {
+            this.gui.showError(e.getMessage());
+            return false;
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }

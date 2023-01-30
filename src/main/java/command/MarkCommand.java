@@ -1,9 +1,9 @@
 package command;
 
+import gui.Gui;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
-import ui.Ui;
 
 /**
  * Command for marking a task in a task list.
@@ -23,7 +23,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.markTask(this.index, this.isToMark);
+    public void execute(TaskList taskList, Gui gui, Storage storage) {
+        gui.say(taskList.markTask(this.index, this.isToMark));
     }
 }

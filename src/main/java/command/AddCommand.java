@@ -1,9 +1,9 @@
 package command;
 
+import gui.Gui;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
-import ui.Ui;
 
 /**
  * Command for adding a task to a task list.
@@ -23,8 +23,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Gui gui, Storage storage) {
         Task task = Task.create(this.taskType, this.content);
-        taskList.addTask(task);
+        gui.say(taskList.addTask(task));
     }
 }

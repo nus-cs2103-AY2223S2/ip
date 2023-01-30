@@ -1,21 +1,21 @@
 package command;
 
 import dukeexception.storageexception.SaveFileException;
+import gui.Gui;
 import storage.Storage;
 import task.TaskList;
-import ui.Ui;
 
 /**
  * Command for ending the program.
  */
 public class ExitCommand extends Command {
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.sayBye();
+    public void execute(TaskList taskList, Gui gui, Storage storage) {
+        gui.sayFarewell();
         try {
             storage.save(taskList);
         } catch (SaveFileException e) {
-            ui.showError(e.getMessage());
+            gui.showError(e.getMessage());
         }
     }
 

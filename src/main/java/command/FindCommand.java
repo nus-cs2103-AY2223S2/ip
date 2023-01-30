@@ -1,8 +1,8 @@
 package command;
 
+import gui.Gui;
 import storage.Storage;
 import task.TaskList;
-import ui.Ui;
 
 /**
  * Command for finding matches to user inputs.
@@ -19,7 +19,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.listItems((task) -> task.getContent().contains(this.searchTerm));
+    public void execute(TaskList taskList, Gui gui, Storage storage) {
+        gui.say(taskList.listItems((task) -> task.getContent().contains(this.searchTerm)));
     }
 }

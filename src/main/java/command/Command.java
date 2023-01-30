@@ -1,9 +1,9 @@
 package command;
 
 import dukeexception.commandexception.UnknownCommandException;
+import gui.Gui;
 import storage.Storage;
 import task.TaskList;
-import ui.Ui;
 
 /**
  * Command to be executed.
@@ -41,10 +41,10 @@ public abstract class Command {
     /**
      * Executes the given command and outputs to the ui.
      * @param taskList List of tasks.
-     * @param ui User Interface, which deals with inputs and outputs.
+     * @param gui User Interface, which deals with inputs and outputs.
      * @param storage Storage module, which deals with caching the data of the task list.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Gui gui, Storage storage);
 
     /**
      * Returns whether the command is an exit command.

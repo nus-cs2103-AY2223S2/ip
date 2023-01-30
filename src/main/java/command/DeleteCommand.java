@@ -1,9 +1,9 @@
 package command;
 
+import gui.Gui;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
-import ui.Ui;
 
 /**
  * Command for deleting a task from the task list.
@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.deleteTask(this.index);
+    public void execute(TaskList taskList, Gui gui, Storage storage) {
+        gui.say(taskList.deleteTask(this.index));
     }
 }
