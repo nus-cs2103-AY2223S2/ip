@@ -98,7 +98,7 @@ public class Connor {
     public void run() {
         Scanner sc = new Scanner(System.in);
         boolean isOver = false;
-        while (!isOver && sc.hasNextLine() ) {
+        while (!isOver && sc.hasNextLine()) {
             String input = sc.nextLine().trim();
             isOver = this.parser.parse(input, this.tasks, this.ui);
             this.storage.updateFile(tasks.getList());
