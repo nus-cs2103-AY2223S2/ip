@@ -15,38 +15,30 @@ public class Duke {
             while (!nextLine.equals("bye")) {
                 try {
                 if (nextLine.startsWith("todo")) {
-                    String[] splitArray = nextLine.split(" ");
+                    String[] splitArray = nextLine.split(" ",2);
                     if (splitArray.length < 2) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
-                    String taskName = "";
-                    for (int i = 1; i < splitArray.length; i++) {
-                        taskName += splitArray[i];
-                    }
+                    String taskName = splitArray[1];
 
                     addToTasks(nextLine, new Todo(taskName), tasks);
                     nextLine = sc.nextLine();
 
                 } else if (nextLine.startsWith("deadline")) {
-                    String[] splitArray = nextLine.split("/");
-                    String[] splitTask = splitArray[0].split(" ");
-                    String taskName = "";
-                    for (int i = 1; i < splitTask.length; i++) {
-                        taskName += splitTask[i];
-                    }
+                    String[] splitArray = nextLine.split(" /by ");
+                    String[] splitTask = splitArray[0].split(" ", 2);
+                    String taskName = splitTask[1];
                     String by = splitArray[1];
                     addToTasks(taskName, new Deadline(taskName, by), tasks);
                     nextLine = sc.nextLine();
 
                 } else if (nextLine.startsWith("event")) {
-                    String[] splitArray = nextLine.split("/");
-                    String from = splitArray[1];
-                    String to = splitArray[2];
-                    String[] splitTask = splitArray[0].split(" ");
-                    String taskName = "";
-                    for (int i = 1; i < splitTask.length; i++) {
-                        taskName += splitTask[i];
-                    }
+                    String[] splitFrom = nextLine.split(" /from ", 2);
+                    String[] splitTo = splitFrom[1].split(" /to ", 2);
+                    String from = splitTo[0];
+                    String to = splitTo[1];
+                    String[] splitSpace = splitFrom[0].split(" ", 2);
+                    String taskName = splitSpace[1];
                     addToTasks(taskName, new Event(taskName, from, to), tasks);
                     nextLine = sc.nextLine();
 
@@ -108,38 +100,8 @@ public class Duke {
     }
 
     static void greet() { //to start off with a beautiful totoro
-        String hello = " ╱▔▔▔▔▔▔▔▔▔▔▔▔▔╲\n" +
-                " ▏     ┏┓┏┳━┳┓┏┓┏━━┓      ▕\n" +
-                " ▏     ┃┗┛┃┏┛┃┃┃┃┏┓┃      ▕\n" +
-                " ▏     ┃┏┓┃┗┓┃┃┃┃┗┛┃      ▕\n" +
-                " ▏     ┃┃┃┃┏┛┃┃┃┃┛┗┃      ▕\n" +
-                " ▏     ┃┃┃┃┗┓┗┫┗┫╰╯┃      ▕\n" +
-                " ▏     ┗┛┗┻━┻━┻━┻━━┛      ▕\n" +
-                " ╲▂▂▂▂▂▂▂▂▂▂▂▂▂▂╲\n";
-        String logo =
-                " ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣶⢶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⠃⠀⠹⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠛⢷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⡟⠀⠀⠀⢹⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⠏⠀⠀⠈⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⠁⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⡿⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣇⠀⠀⠀⠀⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡆⠀⠀⠀⠀⢸⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⠀⠀⢀⣼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⢻⣿⣿⣦⡀⠀⠀⣿⣤⠤⠴⠶⠶⠒⠒⠒⠒⠒⣤⣼⣿⣿⠇⠀⣶⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣽⣿⣿⣿⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠀⣤⣿⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⠃ ⢀⠠⠤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀  ⠀⣀⣀⣀⠀⠀⠐⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠤⣤⣀⣀⣀⡀⠀⠀⣠⣿⣿⣿⣿⠊⠀⠰⢿⠿⠀⢢⠀⠀⠀⠠⠤⠤⣄⣀⣀⠀⠄⠀⢠⠋⢿⣿⠆⠈⢢⠀⠘⣧⡀⠀⠀⢀⣀⣀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⠉⠉⠙⠛⣿⣿⣿⣿⣿⠏⠢⣀⠀⠀⣀⡠⠊⠀⠀⠀⠀⠀⠉⠛⠛⠉⠁⠀⠀⠀⠸⣄⠀⠀⠀⢀⠜⠀⣠⡼⢷⠒⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠉⠙⠛⠒⠒⠒⠲⠶⣶⣿⣿⣿⣿⣯⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀    ⠀⠀⠀⠠⠤⠼⢷⡤⠤⠤⠤⠤⠤⠤⠤⠤⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⢀⣀⣀⣿⣿⣿⣿⣿⡃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠒⠺⢷⡶⠶⠦⣤⣤⣄⣀⠀⠀⠀\n" +
-                        "⠀⠒⠛⠛⠉⠉⢉⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢦⡀⠀⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣄⠀⠀⠀⠀⠀⠀\n" +
-                        "⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⠟⠁⠀⣀⣤⣶⠶⠖⠛⠋⠀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠙⠓⠲⠦⢤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢦⠀⠀⠀⠀⠀\n" +
-                        "⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣯⡤⠖⠛⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠳⢦⣄⡀⠀⠀⠀⠀⠀  ⠀⠀⠀⠳⣄⠀⠀⠀\n" +
-                        "⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⠟⠋⠀⢀⣀⣠⣤⣀⠀⠀⠀⠀⠀⠀⣠⣶⣿⣿⣿⣷⣦⣄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⡀⠀⠈⠛⢦⣄⠀⠀⠀⠀⠀⠀⠀⠈⢳⡄⠀\n" +
-                        "⣾⣿⣿⣿⣿⣿⣿⣿⡿⠀⠀⢠⣶⣿⠿⠿⠿⠿⢷⠀⠀⠀⠀⠾⠿⠿⠛⠉⠉⠙⠛⠿⣷⠀⠀⠀⣠⣶⡿⠿⠟⠿⣿⣷⡀⠀⠀⠙⢷⣄⠀⠀⡄⠀⠀⠀⠀⢻⡄\n" +
-                        "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠁⠀⠀⠀⠀⠈⠁⠀⠁⠀⠀⠀⠀⠀⠁";
         printDashedLines();
-        System.out.println("\t\tHola from Tohtoro!\n" + hello + logo);
+        System.out.println("\t\tHola from Tohtoro!");
         printDashedLines();
     }
 
@@ -176,7 +138,7 @@ public class Duke {
         tasks.add(newTask);
         printDashedLines();
         System.out.println("\t  Got it. I've added this task:");
-        System.out.println("\t\tAdded: " + taskName);
+        System.out.println("\t\tAdded: " + newTask);
         System.out.println(returnTasksLeftString(tasks));
         printDashedLines();
     }

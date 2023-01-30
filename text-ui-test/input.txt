@@ -1,0 +1,7 @@
+event event /from friday /to monday
+deadline event2 /by friday tuesday
+todo event 3
+list
+mark 1
+unmark 1
+bye
