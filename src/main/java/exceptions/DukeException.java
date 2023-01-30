@@ -52,8 +52,8 @@ public class DukeException {
             StringBuilder sb = new StringBuilder();
             sb.append("\n    ____________________________________________________________\n")
                     .append("     Folder '").append(str).append("' cannot be found.\n")
-                    .append("     Please download the latest version of Duke or create the folder '")
-                    .append(str).append("' manually!\n")
+                    .append("     A new folder '").append(str).append("' has been created for you!\n")
+                    .append("     A new file 'storage' for storing the tasks has been created for you as well!\n")
                     .append("    ____________________________________________________________\n");
             throw new FolderNotFoundException(sb.toString());
         }

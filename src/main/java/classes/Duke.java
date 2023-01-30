@@ -12,6 +12,10 @@ import java.io.FileNotFoundException;
 
 import java.lang.StringBuilder;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.util.ArrayList;
 
 import java.time.format.DateTimeParseException;
@@ -43,40 +47,85 @@ public class Duke {
         sb.setLength(0);    // Clear string stored in StringBuilder
     }
 
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
-        fw.write(textToAdd);
-        fw.close();
-    }
-
-    private static void writeToFile(String oldText, String newText, int oldTextIndex, PrintWriter pw,
-                                    StringBuilder sb) throws IOException {
+    private static void writeToFile(String filePath, String textToAdd, PrintWriter pw, StringBuilder sb,
+                                    ArrayList<Task> taskList) throws IOException {
         ArrayList<String> fileTasks = new ArrayList<>();
         try {
             fileTasks = getFileContents("data/storage.txt", "data");
         } catch (FolderNotFoundException e) {
+            Path filePath3 = Paths.get("data/storage.txt");
+            Files.createDirectories(filePath3.getParent());
+            Files.createFile(filePath3);
             System.out.println(e);
         } catch (FileNotFoundException e) {
             sb.append("    ____________________________________________________________\n")
-                    .append("    File 'storage' cannot be found.\n")
-                    .append("    Please download the latest version of Duke or create")
-                    .append("\n    'storage.txt' under the folder 'data'.\n")
+                    .append("    File 'storage' cannot be found in the folder 'data'.\n")
+                    .append("    A new file 'storage' has been created for you under the folder 'data'\n")
+                    .append("    for storing the tasks!\n")
                     .append("    ____________________________________________________________\n");
+            Path filePath4 = Paths.get("data/storage.txt");
+            Files.createFile(filePath4);
             printMessage(pw, sb);
         } catch (IOException e) {
             System.out.println("An unexpected error has occurred: " + e.getMessage());
+        } finally {
+            FileWriter fw = new FileWriter(filePath, true);
+            if (fileTasks.size() != 0) {
+                fw.write(textToAdd);
+            } else {
+                for (int i = 0; i < taskList.size(); i++) {
+                    fw.write(taskList.get(i).getTaskInfo() + "\n");
+                }
+            }
+            fw.close();
         }
-        if (fileTasks.size() != 0) {
+    }
+
+    private static void writeToFile(String oldText, String newText, int oldTextIndex, PrintWriter pw,
+                                    StringBuilder sb, ArrayList<Task> taskList) throws IOException {
+        ArrayList<String> fileTasks = new ArrayList<>();
+        try {
+            fileTasks = getFileContents("data/storage.txt", "data");
+        } catch (FolderNotFoundException e) {
+            Path filePath1 = Paths.get("data/storage.txt");
+            Files.createDirectories(filePath1.getParent());
+            Files.createFile(filePath1);
+            System.out.println(e);
+        } catch (FileNotFoundException e) {
+            sb.append("    ____________________________________________________________\n")
+                    .append("    File 'storage' cannot be found in the folder 'data'.\n")
+                    .append("    A new file 'storage' has been created for you under the folder 'data'\n")
+                    .append("    for storing the tasks!\n")
+                    .append("    ____________________________________________________________\n");
+            Path filePath2 = Paths.get("data/storage.txt");
+            Files.createFile(filePath2);
+            printMessage(pw, sb);
+        } catch (IOException e) {
+            System.out.println("An unexpected error has occurred: " + e.getMessage());
+        } finally {
             FileWriter fw = new FileWriter("data/storage.txt");
-            for (int i = 0; i < fileTasks.size(); i++) {
-                if ( (fileTasks.get(i).equals(oldText)) && (i == oldTextIndex) ) {
-                    if (newText.equals("")) {
+            if (fileTasks.size() != 0) {
+                for (int i = 0; i < fileTasks.size(); i++) {
+                    if ( (fileTasks.get(i).equals(oldText)) && (i == oldTextIndex) ) {
+                        if (newText.equals("")) {
+                            continue;
+                        }
+                        fw.write(newText + "\n");
                         continue;
                     }
-                    fw.write(newText + "\n");
-                    continue;
+                    fw.write(fileTasks.get(i) + "\n");
                 }
-                fw.write(fileTasks.get(i) + "\n");
+            } else {
+                for (int i = 0; i < taskList.size(); i++) {
+                    if (i == oldTextIndex) {
+                        if (newText.equals("")) {
+                            continue;
+                        }
+                        fw.write(newText + "\n");
+                        continue;
+                    }
+                    fw.write(taskList.get(i).getTaskInfo() + "\n");
+                }
             }
             fw.close();
         }
@@ -92,7 +141,6 @@ public class Duke {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         StringBuilder sb = new StringBuilder();
-        boolean hasFile = true; // determine if the file exists
         boolean isFileData = true;  // whether to retrieve tasks from the saved file
         ArrayList<String> fileTasks = new ArrayList<>();
         ArrayList<Task> taskList = new ArrayList<>();
@@ -105,20 +153,23 @@ public class Duke {
         try {
             fileTasks = getFileContents("data/storage.txt", "data");
         } catch (FolderNotFoundException e) {
+            Path filePath = Paths.get("data/storage.txt");
+            Files.createDirectories(filePath.getParent());
+            Files.createFile(filePath);
             System.out.println(e);
-            hasFile = false;
         } catch (FileNotFoundException e) {
             sb.append("    ____________________________________________________________\n")
-                    .append("    File 'storage' cannot be found.\n")
-                    .append("    Please download the latest version of Duke or create")
-                    .append("\n    'storage.txt' under the folder 'data'.\n")
+                    .append("    File 'storage' cannot be found in the folder 'data'.\n")
+                    .append("    A new file 'storage' has been created for you under the folder 'data'\n")
+                    .append("    for storing the tasks!\n")
                     .append("    ____________________________________________________________\n");
+            Path filePath1 = Paths.get("data/storage.txt");
+            Files.createFile(filePath1);
             printMessage(pw, sb);
-            hasFile = false;
         } catch (IOException e) {
             System.out.println("An unexpected error has occurred: " + e.getMessage());
         }
-        while (hasFile) {
+        while (true) {
             boolean hasIssue = false;   // check if there's insufficient arguments provided by user
             boolean isAvailable = false;    // check if user is calling a supported function provided by Duke
             boolean isTaskCompleted = false;    // indicates if the task is completed
@@ -199,7 +250,7 @@ public class Duke {
                             .append("\n    ____________________________________________________________\n");
                     taskList.set(taskNumber - 1, tempTask);
                     try {
-                        writeToFile(oldTaskInfo, tempTask.getTaskInfo(), taskNumber - 1, pw, sb);
+                        writeToFile(oldTaskInfo, tempTask.getTaskInfo(), taskNumber - 1, pw, sb, taskList);
                     } catch (IOException e) {
                         System.out.println("An unexpected error has occurred: " + e.getMessage());
                     }
@@ -219,7 +270,7 @@ public class Duke {
                             .append("\n    ____________________________________________________________\n");
                     taskList.set(taskNumber - 1, tempTask);
                     try {
-                        writeToFile(oldTaskInfo, tempTask.getTaskInfo(), taskNumber - 1, pw, sb);
+                        writeToFile(oldTaskInfo, tempTask.getTaskInfo(), taskNumber - 1, pw, sb, taskList);
                     } catch (IOException e) {
                         System.out.println("An unexpected error has occurred: " + e.getMessage());
                     }
@@ -239,7 +290,7 @@ public class Duke {
                             .append("\n    Now you have ").append(taskList.size()).append(" tasks in the list.\n")
                             .append("    ____________________________________________________________\n");
                     try {
-                        writeToFile(tempTask.getTaskInfo(), "", taskNumber - 1, pw, sb);
+                        writeToFile(tempTask.getTaskInfo(), "", taskNumber - 1, pw, sb, taskList);
                     } catch (IOException e) {
                         System.out.println("An unexpected error has occurred: " + e.getMessage());
                     }
@@ -345,7 +396,8 @@ public class Duke {
                     taskList.add(newTask);
                     if (!isFileData) {  // if current task added to taskList is not from the saved file
                         try {
-                            writeToFile("data/storage.txt", newTask.getTaskInfo() + "\n");
+                            writeToFile("data/storage.txt", newTask.getTaskInfo() + "\n", pw, sb,
+                                    taskList);
                         } catch (IOException e) {
                             System.out.println("An unexpected error has occurred: " + e.getMessage());
                         }
