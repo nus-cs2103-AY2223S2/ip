@@ -10,7 +10,6 @@ import duke.ui.Ui;
  *
  * @author Chia Jeremy
  */
-
 public class DeleteCommand extends Command {
 
     private final int index;
@@ -36,7 +35,7 @@ public class DeleteCommand extends Command {
         Task task = tasks.getTask(index);
         tasks.delete(index);
         storage.delete(index);
-        ui.display("Noted. I've removed this task:\n"
+        ui.setResponse("Noted. I've removed this task:\n"
                 + task + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.");
     }

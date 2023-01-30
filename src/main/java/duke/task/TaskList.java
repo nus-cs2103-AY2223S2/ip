@@ -9,7 +9,6 @@ import java.util.List;
  *
  * @author Chia Jeremy
  */
-
 public class TaskList {
 
     private final ArrayList<Task> taskList = new ArrayList<>(100);
@@ -22,7 +21,9 @@ public class TaskList {
     public TaskList(List<String> tasks) {
         for (String t : tasks) {
             String[] data = t.split(" \\| ");
-            String type = data[0], mark = data[1], descr = data[2];
+            String type = data[0];
+            String mark = data[1];
+            String descr = data[2];
             Task task;
             if (type.equals("T")) {
                 task = new Todo(descr);

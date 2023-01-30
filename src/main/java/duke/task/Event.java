@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
  *
  * @author Chia Jeremy
  */
-
 public class Event extends Task {
 
     protected LocalDateTime startDt;

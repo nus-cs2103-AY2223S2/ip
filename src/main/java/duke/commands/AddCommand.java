@@ -15,7 +15,6 @@ import duke.ui.Ui;
  *
  * @author Chia Jeremy
  */
-
 public class AddCommand extends Command {
 
     private final Task task;
@@ -61,7 +60,7 @@ public class AddCommand extends Command {
     public void execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(this.task);
         storage.add(this.task);
-        ui.display("Got it. I've added this task:\n"
+        ui.setResponse("Got it. I've added this task:\n"
                 + this.task + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in the list.");
     }

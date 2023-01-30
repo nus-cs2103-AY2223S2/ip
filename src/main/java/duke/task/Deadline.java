@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
  *
  * @author Chia Jeremy
  */
-
 public class Deadline extends Task {
 
     protected LocalDateTime dateTime;

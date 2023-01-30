@@ -20,7 +20,6 @@ import duke.task.Todo;
  *
  * @author Chia Jeremy
  */
-
 public class Storage {
 
     private final File file;

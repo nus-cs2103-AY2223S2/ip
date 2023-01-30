@@ -9,7 +9,6 @@ import duke.ui.Ui;
  *
  * @author Chia Jeremy
  */
-
 public class FindCommand extends Command {
 
     private final String keyword;
@@ -43,6 +42,6 @@ public class FindCommand extends Command {
                 index++;
             }
         }
-        ui.display(sb.toString());
+        ui.setResponse(sb.toString());
     }
 }

@@ -5,7 +5,6 @@ package duke.task;
  *
  * @author Chia Jeremy
  */
-
 public abstract class Task {
 
     protected String description;
@@ -29,7 +28,7 @@ public abstract class Task {
     }
 
     /**
-     * Unmarks task as done.
+     * Unmark task as done.
      */
     public void unmarkDone() {
         this.isDone = false;
@@ -41,7 +40,7 @@ public abstract class Task {
      * @return the 'X' icon if a task is done. Otherwise, it is empty
      */
     public String getStatusIcon() {
-        return (this.isDone ? "X" : " ");   // mark done task with X
+        return (this.isDone ? "X" : " "); // mark done task with X
     }
 
     /**

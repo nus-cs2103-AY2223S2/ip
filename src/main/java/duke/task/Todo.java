@@ -5,7 +5,6 @@ package duke.task;
  *
  * @author Chia Jeremy
  */
-
 public class Todo extends Task {
 
     /**
