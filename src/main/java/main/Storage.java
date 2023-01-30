@@ -15,14 +15,28 @@ import task.ToDos;
 
 import java.time.LocalDateTime;
 
+/**
+ * Stores the task from the user.
+ */
 public class Storage {
     private File file;
     private String fileName;
 
+    /**
+     * Creates a Storage instance
+     * 
+     * @param fileName the relative pathname
+     */
     public Storage(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * loads the tasks from the storage file.
+     * 
+     * @return TaskList the TaskList will all the tasks
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -40,24 +54,24 @@ public class Storage {
 
                 Task task;
                 switch (taskType) {
-                case "T":
-                    task = new ToDos(splitInput[1]);
-                    break;
-                case "D":
-                    LocalDateTime storageDateTime = Parser.parseDateStorage(splitInput[2]);
-                    task = new Deadlines(splitInput[2], storageDateTime);
-                    break;
-                case "E":
-                    String[] splitDates = splitInput[2].split(":");
-                    String startDate = splitDates[0].substring(1);
-                    String endDate = splitDates[1].substring(0, splitDates[1].length() - 1);
-                    LocalDateTime start = Parser.parseDateStorage(startDate);
-                    LocalDateTime end = Parser.parseDateStorage(endDate);
-                    task = new Events(splitInput[1], start, end);
-                    break;
-                default:
-                    throw new DukeException(
-                            "Error occurred during file parsing, unexpected task type encountered.");
+                    case "T":
+                        task = new ToDos(splitInput[1]);
+                        break;
+                    case "D":
+                        LocalDateTime storageDateTime = Parser.parseDateStorage(splitInput[2]);
+                        task = new Deadlines(splitInput[2], storageDateTime);
+                        break;
+                    case "E":
+                        String[] splitDates = splitInput[2].split(":");
+                        String startDate = splitDates[0].substring(1);
+                        String endDate = splitDates[1].substring(0, splitDates[1].length() - 1);
+                        LocalDateTime start = Parser.parseDateStorage(startDate);
+                        LocalDateTime end = Parser.parseDateStorage(endDate);
+                        task = new Events(splitInput[1], start, end);
+                        break;
+                    default:
+                        throw new DukeException(
+                                "Error occurred during file parsing, unexpected task type encountered.");
                 }
 
                 if (Integer.parseInt(splitInput[1]) == 1) {
@@ -72,6 +86,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the Task into the file
+     * 
+     * @param list the TaskList to store
+     */
     public void save(TaskList list) {
         this.checkAndCreateFile();
         try {
@@ -87,6 +106,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks and create a file to store.
+     */
     private void checkAndCreateFile() {
         this.file = new File(this.fileName);
         if (!file.exists()) {

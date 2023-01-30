@@ -18,6 +18,9 @@ import task.Events;
 import task.Task;
 import task.ToDos;
 
+/**
+ * Parsers the user input
+ */
 public class Parser {
     private static final int INPUT_LENGTH_VALIDATE = 2;
     private static final int INPUT_LENGTH_WITH_DATE = 3;
@@ -25,6 +28,14 @@ public class Parser {
     public Parser() {
     }
 
+    /**
+     * Parses the user input
+     * 
+     * @param input the user's input from the command line
+     * @return A command corresponding to the user's input i.e if user inputs bye it
+     *         will return a bye command.
+     * @throws DukeException
+     */
     public Command parse(String input) throws DukeException {
         input = input.trim();
         String[] splitInput = input.split(" ");
@@ -129,6 +140,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Check whether the string is a real number.
+     * 
+     * @param string any string
+     * @return true if it's a number false otherwise
+     */
     public static boolean isNumeric(String string) {
         try {
             int intValue = Integer.parseInt(string);
@@ -139,6 +156,13 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Parses the string date into an actual LocalDateTime object
+     * 
+     * @param date the date in String format (d/M/yyyy HHmm)
+     * @return LocalDateTime corresponding to the string format
+     * @throws DukeException
+     */
     public static LocalDateTime parseDate(String date) throws DukeException {
         try {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -148,6 +172,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the string date from the storage file into an actual LocalDateTime
+     * object
+     * 
+     * @param date the date from the storage
+     * @return LocalDateTime corresponding to the string format
+     * @throws DukeException
+     */
     public static LocalDateTime parseDateStorage(String date) throws DukeException {
         try {
             return LocalDateTime.parse(date);
