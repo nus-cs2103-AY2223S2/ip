@@ -8,179 +8,169 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        
-        /**
-         * allTasks: the file that constains all the tasks
-         * taskFolder: the folder taht contains allTasks
-         */
-        File allTasks = new File("src/main/java/data/tasks.txt");
-        File taskFolder = new File("src/main/java/data");
-        ArrayList<Task> tasks = new ArrayList<Task>();
-
-        /**
-         * print different starting messages depending on whether allTasks and/or
-         * taskFolder exist
-         */
-        if (!taskFolder.exists()) {
-            printToFormat("The default Task Folder is not found, creating data folder with task file...");
-            taskFolder.mkdir();
-            System.out.println("---Task Folder created successfully");
-            File f = new File(taskFolder, "task.txt");
-            try {
-                f.createNewFile();
-                System.out.printf("---Task File created successfully\n---ready to create tasks\n");
-            } catch (IOException e) {
-                System.out.println("Error creating file: " + e.getMessage());
-            }
-        } else if (!allTasks.exists()) {
-            printToFormat("The default tasks do not exist, creating default task file...");
-            File f = new File(taskFolder, "task.txt");
-            try {
-                f.createNewFile();
-                System.out.printf("---Task File created successfully\n---ready to create tasks\n");
-            } catch (IOException e) {
-                System.out.println("Error creating file: " + e.getMessage());
-            }
-        } else {
-            try {
-                loadDefaultTasks(tasks, allTasks);
-            } catch (FileNotFoundException e) {
-                System.out.println("Could not load the default tasks: " + e.getMessage());
-            }
-            printToFormat("---Default Task List successfully loaded");
-        }
-
-
-
-        while (sc.hasNext()) {
-            int byeIndicator = 0;
-            try {
-                /**
-                 * @param inputLine: a String that is the command entered by the user
-                 * @param words[]: an array whose elements are from inputline separated by
-                 * a space. used to determine which command is entered
-                 */
-                String inputLine = sc.nextLine();
-                DukeException.checkInput(inputLine);
-                String words[] = inputLine.split(" ");
-                Command command = Command.valueOf(words[0].toUpperCase());
-                switch (command) {
-                    case BYE: 
-                        byeIndicator = 1;
-                        printToFormat("    Bye, have a nice day!");
-                        break;
-                    case LIST:
-                    /**
-                     * loop through all tasks in the arraylist and print out each task
-                     */
-                        StringBuilder sb = new StringBuilder();
-                        for (int i = 1; i <= tasks.size(); i++) {
-                            sb.append("    " + i + ". " + tasks.get(i - 1) + "\n");
-                        }
-                        printToFormat(sb.toString());
-                        break;
-                    case MARK:
-                    /**
-                     * change the specified task's status to "[X]"
-                     */
-                        int ind = Integer.parseInt(words[1]);
-                    /**
-                     * prints error message if the index is too large
-                     */
-                        if (ind > tasks.size()) {
-                            printToFormat("    This task does not exist");
-                        } else {
-                            Task updatedTask = tasks.get(ind - 1);
-                            tasks.get(ind - 1).mark();
-                            printToFormat("    Congrats on completing the following task:\n    " + updatedTask);
-                        }
-                        break;
-                    case UNMARK:
-                    /**
-                     * changed the specified task's staus to "[ ]"
-                     */
-                        int ind1 = Integer.parseInt(words[1]);
-                        if (ind1 > tasks.size()) {
-                            printToFormat("    This task does not exist");
-                        } else {
-                            Task updatedTask = tasks.get(ind1 - 1);
-                            tasks.get(ind1 - 1).unmark();
-                            printToFormat("    Unchecked the following task:\n    " + updatedTask);
-                        }
-                        break;
-                    case DEADLINE:
-                    /**
-                     * creates and adds a deadline task to the arraylist of all tasks
-                     */
-                        String[] parts = inputLine.split("/");
-                        Deadline task = new Deadline(parts[0].split(" ", 2)[1], 0, parts[1]);
-
-                        tasks.add(task);
-                        printToFormat("    Successfully added the following task:\n    " + task);
-                        break;
-                    case EVENT:
-                    /**
-                     * creates and adds an event task to the arraylist of all tasks
-                     */
-                        String[] parts1 = inputLine.split(" /");
-                        Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
-
-                        tasks.add(event);
-                        printToFormat("    Successfully added the following task:\n    " + event);
-                        break;
-                    case TODO:
-                    /**
-                     * creates and adds a todo task to the arraylist of all tasks
-                     */
-                        Todo todo = new Todo(inputLine.split(" ", 2)[1], 0);
-                        tasks.add(todo);
-                        printToFormat("    Successfully added the following task:\n    " + todo);
-                        break;
-                    case DELETE:
-                    /**
-                     * removes the task at the specified index
-                     */
-                        printToFormat("    The following task is removed:\n    " + tasks.remove(Integer.parseInt(words[1]) - 1));
-                        break;
-                    }
-                    try {
-                        updateAllTasks(tasks, allTasks);
-                    } catch (IOException e) {
-                        System.out.println("local update failed: " + e.getMessage());
-                    }
-            } catch (DukeException e) {
-                /**
-                 * prints out the error message if an error is caught
-                 */
-                printToFormat("    " + e.getMessage());
-            }
-            if (byeIndicator == 1) {
-                sc.close();
-                break;
-            }
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
 
-    /**
-     * method to print messages in desired format with a starting line and an ending line
-     * @param message a string describing the message
-     */
+    public void run() {
+        ui.welcome();
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            ui.handleInput(sc.nextLine(), tasks);
+            if (ui.userSaidBye()) {
+                sc.close();
+                break;
+            }
+            try {
+                storage.update(tasks);
+            } catch (IOException e) {
+                System.out.println("local update failed: " + e.getMessage());
+            }
+        }
+    }
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+}
+
+
+class Ui {
+    private String welcomeMessage = "Hello from\n" + 
+    " ____        _        \n" +
+    "|  _ \\ _   _| | _____ \n" +
+    "| | | | | | | |/ / _ \\\n" +
+    "| |_| | |_| |   <  __/\n" +
+    "|____/ \\__,_|_|\\_\\___|\n";
+    private boolean byeIndicator = false;
+
+    public void welcome() {
+        System.out.println(welcomeMessage);
+    }
+
+    public void showLoadingError() {
+        printToFormat("Sorry, default tasks could not be loaded, starting a fresh task list");
+    }
+    
     private static void printToFormat(String message) {
-        String lineBreak1 = "-->-->-->-->-->-->-->-->-->-->-->\n";
+        String lineBreak1 = "-->-->-->-->-->-->-->-->-->-->-->\n    ";
         String lineBreak2 = "\n<--<--<--<--<--<--<--<--<--<--\n\n";
         System.out.println(lineBreak1 + message + lineBreak2);
     }
 
-    private static void loadDefaultTasks(ArrayList<Task> tasks, File file) throws FileNotFoundException {
+    public boolean userSaidBye() {
+        return byeIndicator;
+    }
+
+    public void handleInput(String inputLine, TaskList tasks) {
+        try {
+            /**
+             * @param inputLine: a String that is the command entered by the user
+             * @param words[]: an array whose elements are from inputline separated by
+             * a space. used to determine which command is entered
+             */
+            DukeException.checkInput(inputLine);
+            String words[] = inputLine.split(" ");
+            Command command = Command.valueOf(words[0].toUpperCase());
+            switch (command) {
+                case BYE:
+                    printToFormat("    Bye, have a nice day!");
+                    this.byeIndicator = true;
+                    break;
+                case LIST:
+                    printToFormat(tasks.toString());
+                    break;
+                case MARK:
+                /**
+                 * change the specified task's status to "[X]"
+                 */
+                    int taskNoMark = Integer.parseInt(words[1]);
+                    try {
+                        printToFormat("Marked ask completed:\n   " + tasks.mark(taskNoMark));
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case UNMARK:
+                /**
+                 * changed the specified task's staus to "[ ]"
+                 */
+                    int taskNoUnmark = Integer.parseInt(words[1]);
+                    try {
+                        printToFormat("Marked ask completed:\n   " + tasks.mark(taskNoUnmark));
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case DEADLINE:
+                /**
+                 * creates and adds a deadline task to the arraylist of all tasks
+                 */
+                    String[] parts = inputLine.split("/");
+                    Deadline task = new Deadline(parts[0].split(" ", 2)[1], 0, parts[1]);
+                    tasks.add(task);
+                    printToFormat("    Successfully added the following task:\n    " + task);
+                    break;
+                case EVENT:
+                /**
+                 * creates and adds an event task to the arraylist of all tasks
+                 */
+                    String[] parts1 = inputLine.split(" /");
+                    Event event = new Event(parts1[0].split(" ", 2)[1], 0, parts1[1], parts1[2]);
+                    tasks.add(event);
+                    printToFormat("    Successfully added the following task:\n    " + event);
+                    break;
+                case TODO:
+                /**
+                 * creates and adds a todo task to the arraylist of all tasks
+                 */
+                    Todo todo = new Todo(inputLine.split(" ", 2)[1], 0);
+                    tasks.add(todo);
+                    printToFormat("    Successfully added the following task:\n    " + todo);
+                    break;
+                case DELETE:
+                /**
+                 * removes the task at the specified index
+                 */
+                    printToFormat("    The following task is removed:\n    " + tasks.remove(Integer.parseInt(words[1])));
+                    break;
+                }
+        } catch (DukeException e) {
+            /**
+             * prints out the error message if an error is caught
+             */
+            printToFormat("    " + e.getMessage());
+        }
+    } 
+}
+
+class Storage {
+    private File defaultTasks;
+
+    Storage(String filePath) {
+        this.defaultTasks = new File(filePath);
+    }
+
+    public ArrayList<Task> load() throws DukeException {
+        
+        try {
+            return loadDefaultTasks(new ArrayList<Task>(), defaultTasks);
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Default Tasks not found");
+        }
+    }
+
+    private static ArrayList<Task> loadDefaultTasks(ArrayList<Task> tasks, File file) throws FileNotFoundException {
         Scanner s = new Scanner(file);
         while(s.hasNext()) {
             String[] lineArr = s.nextLine().split("/");
@@ -197,14 +187,75 @@ public class Duke {
             }
         }
         s.close();
+        return tasks;
     }
 
-    private static void updateAllTasks(ArrayList<Task> tasks, File allTasks) throws IOException {
-        FileWriter fw = new FileWriter(allTasks);
-        for (Task task : tasks) {
-            fw.write(task.toStoreFormatString() + System.lineSeparator());
-        }
+    public void update(TaskList tasks) throws IOException {
+        FileWriter fw = new FileWriter(this.defaultTasks);
+        fw.write(tasks.getWriteString());
         fw.close();
+    }
+}
+
+class TaskList {
+    private ArrayList<Task> tasks;
+
+    TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    TaskList() {
+        this.tasks = new ArrayList<Task>();
+    }
+
+    public void add(Task task) {
+        tasks.add(task);
+    }
+
+    public String toString() {
+        /**
+         * loop through all tasks in the arraylist and print out each task
+         */
+        StringBuilder sb = new StringBuilder();
+        sb.append("1. " + tasks.get(0) + "\n");
+        for (int i = 2; i <= tasks.size(); i++) {
+            sb.append("    " + i + ". " + tasks.get(i - 1) + "\n");
+        }
+        return sb.toString();
+    }
+
+    public Task mark(int taskNumber) throws DukeException {
+        try {
+            tasks.get(taskNumber - 1).mark();
+        } catch (Exception e) {
+            throw new DukeException("Task does not exist, current number of tasks: " + tasks.size());
+        }
+        return tasks.get(taskNumber - 1);
+    }
+
+    public Task unmark(int taskNumber) throws DukeException {
+        try {
+            tasks.get(taskNumber - 1).unmark();
+        } catch (Exception e) {
+            throw new DukeException("Task does not exist, current number of tasks: " + tasks.size());
+        }
+        return tasks.get(taskNumber - 1);
+    }
+
+    public Task remove(int taskNumber) throws DukeException {
+        try {
+            return tasks.remove(taskNumber - 1);
+        } catch (Exception e) {
+            throw new DukeException("Task does not exist, current number of tasks: " + tasks.size());
+        }
+    }
+
+    public String getWriteString() {
+        StringBuilder sb = new StringBuilder();
+        for (Task task : tasks) {
+            sb.append(task.toStoreFormatString() + System.lineSeparator());
+        }
+        return sb.toString();
     }
 }
 
@@ -212,7 +263,7 @@ public class Duke {
  * Creates a Task class to handle different tasks
  */
 
-class Task {
+ class Task {
     /**
      * @param name: a string indicating the name of the task
      * @param status: a boolean indicating whether the task is done or not
