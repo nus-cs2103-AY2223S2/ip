@@ -24,10 +24,12 @@ public class UserInterface {
      * Speak function to print the content onto the display
      * in pre-define format
      *
-     * @param sentence to print
+     * @param sentences to print
      */
-    public void Speak(String sentence) {
-        System.out.println(sentence);
+    public void Speak(String... sentences) {
+        for (String sentence : sentences) {
+            System.out.println(sentence);
+        }
         String _dialogSeparator = "____________________________________________________________";
         System.out.println(_dialogSeparator);
     }
@@ -50,7 +52,7 @@ public class UserInterface {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        Speak(logo + "\nHello! I'm Duke\nWhat can I do for you?\n");
+        Speak(logo, "Hello! I'm Duke", "What can I do for you?");
     }
 
     /**
