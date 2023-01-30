@@ -32,7 +32,7 @@ public class Storage {
     public TaskList readData() {
         ArrayList<Task> arrayList = new ArrayList<>();
         File file = new File(filePath);
-        Scanner scanner = null;
+        Scanner scanner;
         try {
             scanner = new Scanner(file);
             while (scanner.hasNext()) {
@@ -40,13 +40,13 @@ public class Storage {
                 String[] taskLine = nextLine.trim().split(" \\| ");
                 switch (taskLine[0]) {
                     case "T":
-                        arrayList.add(ToDo.createTask(taskLine));
+                        arrayList.add(ToDo.generateTask(taskLine));
                         break;
                     case "E":
-                        arrayList.add(Event.createTask(taskLine));
+                        arrayList.add(Event.generateTask(taskLine));
                         break;
                     case "D":
-                        arrayList.add(DeadLine.createTask(taskLine));
+                        arrayList.add(DeadLine.generateTask(taskLine));
                         break;
                 }
             }
@@ -61,7 +61,6 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(filePath);
             ArrayList<Task> arrayList = taskList.getStore();
             for (Task task : arrayList) {
-                System.out.println(task.storeTaskString() + "\n");
                 fileWriter.write(task.storeTaskString() + "\n");
             }
             fileWriter.close();

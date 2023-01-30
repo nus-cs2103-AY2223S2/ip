@@ -5,14 +5,16 @@ import java.io.InputStreamReader;
 public class Duke {
     private final static String FILE_PATH = "src/data/tasks.txt";
     private final static String DIRECTORY_PATH = "src/data";
-    public static void main(String[] args) throws IOException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
-        Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH);
+    private Ui ui;
+    private Storage storage;
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(FILE_PATH, DIRECTORY_PATH);
+
+    }
+    public void run() throws IOException {
+        ui.printWelcomeMsg();
+        ui.printLine();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String str = bufferedReader.readLine();
         TaskList taskList = storage.readData();
@@ -21,79 +23,39 @@ public class Duke {
             try {
                 switch (arr[0]) {
                     case "list":
-                        if (arr.length > 1) {
-                            throw new DukeException("Invalid format");
-                        }
-                        taskList.listTask();
+                        taskList.listTask(arr);
                         break;
                     case "mark":
-                        if (arr.length < 2) {
-                            throw new DukeException("Invalid format, please give numbers");
-                        }
-                        taskList.markTask(true, arr);
+                        taskList.markTask(true, arr, ui);
                         storage.writeData(taskList);
                         break;
                     case "unmark":
-                        if (arr.length < 2) {
-                            throw new DukeException("Invalid format, please give numbers");
-                        }
-                        taskList.markTask(false, arr);
+                        taskList.markTask(false, arr, ui);
                         storage.writeData(taskList);
                         break;
                     case "todo":
-                        if (arr.length < 2) {
-                            throw new DukeException("Missing description");
-                        }
-                        ToDo todo = new ToDo(arr[1], false);
-                        taskList.addTask(todo);
+                        ToDo toDo = ToDo.generate(arr);
+                        taskList.addTask(toDo);
                         storage.writeData(taskList);
-
-                        System.out.println("Got it. I've added this task:\n  [T][ ] " +
-                                arr[1] + "\n Now you have " + taskList.getSize() + " tasks in the list");
+                        ui.printAddTaskMsg(taskList, toDo);
                         break;
                     case "deadline":
-                        if (arr.length < 2) {
-                            throw new DukeException("Missing description");
-                        }
-                        String[] toPrintSplit = arr[1].split(" /by ", 2);
-                        if (toPrintSplit.length < 2) {
-                            throw new DukeException("Missing deadline");
-                        }
-                        DeadLine deadline = new DeadLine(toPrintSplit[0], false);
-                        deadline.setDateTime(toPrintSplit[1]);
-                        taskList.addTask(deadline);
+                        DeadLine deadLine = DeadLine.generate(arr);
+                        taskList.addTask(deadLine);
                         storage.writeData(taskList);
-
-                        System.out.println("Got it. I've added this task:\n  [D][ ] " +
-                                toPrintSplit[0] + " (by: " + toPrintSplit[1] + ")\n Now you have " +
-                                taskList.getSize() + " tasks in the list");
+                        ui.printAddTaskMsg(taskList, deadLine);
                         break;
                     case "event":
-                        if (arr.length < 2) {
-                            throw new DukeException("Missing description");
-                        }
-                        String[] startEndTime = arr[1].split(" /from ");
-                        if (startEndTime.length < 2) {
-                            throw new DukeException("Missing Start Time");
-                        }
-                        String[] dateTime = startEndTime[1].split(" /to ");
-                        if (dateTime.length < 2) {
-                            throw new DukeException("Missing End Time");
-                        }
-                        Event event = new Event(startEndTime[0], false);
-                        event.setStartEnd(dateTime[0], dateTime[1]);
+                        Event event = Event.generate(arr);
                         taskList.addTask(event);
                         storage.writeData(taskList);
-
-                        System.out.println("Got it. I've added this task:\n  [E][ ] " +
-                                startEndTime[0] + " (from: " + dateTime[0] + " to: " + dateTime[1] +
-                                ")\n Now you have " + taskList.getSize() + " tasks in the list");
+                        ui.printAddTaskMsg(taskList, event);
                         break;
                     case "delete":
                         if (arr.length < 2) {
                             throw new DukeException("Invalid format, please give numbers");
                         }
-                        taskList.deleteTask(arr[1]);
+                        taskList.deleteTask(arr[1], ui);
                         storage.writeData(taskList);
 
                         break;
@@ -110,8 +72,10 @@ public class Duke {
             str = bufferedReader.readLine();
 
         }
-
-        System.out.println("Bye. Hope to see you again soon!");
+        ui.printByeMsg();
+    }
+    public static void main(String[] args) throws IOException {
+        new Duke().run();
     }
 
 }

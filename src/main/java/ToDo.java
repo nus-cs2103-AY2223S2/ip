@@ -3,9 +3,15 @@ public class ToDo extends Task {
         super(str, checked);
     }
 
-    public static ToDo createTask(String[] taskLine) {
-        boolean check;
-        check = taskLine[1].equals("1");
+    public static ToDo generate(String[] inputLine) throws DukeException {
+        if (inputLine.length < 2) {
+            throw new DukeException("Missing description");
+        }
+        return new ToDo(inputLine[1], false);
+    }
+
+    public static ToDo generateTask(String[] taskLine) {
+        boolean check = taskLine[1].equals("1");
         return new ToDo(taskLine[2], check);
     }
     @Override
