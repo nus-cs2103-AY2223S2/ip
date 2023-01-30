@@ -9,9 +9,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Storage class encapsulates
+ * loading and saving operations.
+ */
 public class Storage {
     public static final String SAVE_LOCATION = "duke.txt";
 
+    /**
+     * Loads the save file from a fixed location
+     *
+     * @return Tasklist loaded from the save file
+     */
     public static Tasklist load() throws FileNotFoundException {
         Tasklist listOfThings = new Tasklist();
         File saveFile = new File(SAVE_LOCATION);
@@ -62,6 +71,11 @@ public class Storage {
         return listOfThings;
     }
 
+    /**
+     * Saves the save file to a specified location.
+     *
+     * @param tasklist Tasklist to be saved
+     */
     public static void save(Tasklist tasklist) throws IOException {
         FileWriter fw = new FileWriter(SAVE_LOCATION);
         fw.write("");

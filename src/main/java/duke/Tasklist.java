@@ -2,13 +2,28 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * The Tasklist class encapsulates
+ * the task list and all operations on it
+ */
+
 public class Tasklist {
     ArrayList<Task> listOfThings = new ArrayList<Task>();
 
+    /**
+     * Add a task to the tasklist
+     *
+     * @param task Task to be added to the Tasklist
+     */
     public void add(Task task) {
         listOfThings.add(task);
     }
 
+    /**
+     * Mark a task as 'done'
+     *
+     * @param i The i-th task to be marked
+     */
     public void mark(int i) {
         Task thisTask = listOfThings.get(i - 1);
         thisTask.markDone();
@@ -17,6 +32,11 @@ public class Tasklist {
         Ui.showToUser(thisTask.toString());
     }
 
+    /**
+     * Mark a task as 'undone'
+     *
+     * @param i The i-th task to be marked
+     */
     public void unmark(int i) {
         Task thisTask = listOfThings.get(i - 1);
         thisTask.markUndone();
@@ -25,6 +45,11 @@ public class Tasklist {
         Ui.showToUser(thisTask.toString());
     }
 
+    /**
+     * Delete a task from the tasklist
+     *
+     * @param i The i-th task to be deleted
+     */
     public void delete(int i) {
         System.out.println("Noted. I've removed this task!");
         System.out.println(listOfThings.get(i - 1));
