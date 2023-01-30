@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,9 +15,9 @@ public class Duke {
         System.out.println();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
+        List<Task> tasks = Save.loadTaskList();
 
         // Greeting
         printHorizontalLine();
@@ -46,12 +47,14 @@ public class Duke {
 
                     if (action.equals("mark")) {
                         currTask.markAsDone();
+                        Save.saveTaskList(tasks);
                         System.out.println(
                             "Congrats, I guess you get a medal?\n" +
                             currTask.toString()
                         );
                     } else if (action.equals("unmark")) {
                         currTask.markAsNotDone();
+                        Save.saveTaskList(tasks);
                         System.out.println(
                             "Why are you so lazy?\n" +
                             currTask.toString()
@@ -61,6 +64,7 @@ public class Duke {
                     int taskNumber = Integer.parseInt(command.split(" ")[1]);
                     Task taskToDelete = tasks.get(taskNumber - 1);
                     tasks.remove(taskToDelete);
+                    Save.saveTaskList(tasks);
 
                     System.out.println(
                         "Okay okay, this has been removed:\n" +
@@ -80,6 +84,7 @@ public class Duke {
                             String todoDescription = commandArr[1];
                             Todo todo = new Todo(todoDescription);
                             tasks.add(todo);
+                            Save.saveTaskList(tasks);
                             System.out.println(
                                 "You better finish this soon:\n" +
                                 todo.toString() +
@@ -99,6 +104,7 @@ public class Duke {
 
                             Deadline deadline = new Deadline(deadlineArr[0], deadlineArr[1]);
                             tasks.add(deadline);
+                            Save.saveTaskList(tasks);
                             System.out.println(
                                 "You better finish this soon:\n" +
                                 deadline.toString() +
@@ -124,6 +130,7 @@ public class Duke {
 
                             Event event = new Event(eventArr[0], fromToArr[0], fromToArr[1]);
                             tasks.add(event);
+                            Save.saveTaskList(tasks);
                             System.out.println(
                                 "You better finish this soon:\n" +
                                 event.toString() +
