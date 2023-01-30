@@ -1,14 +1,25 @@
 package duke.util;
 
-import duke.DukeException;
-import duke.command.*;
-import duke.task.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
+import duke.command.ByeCommand;
+import duke.command.CheckCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.SaveCommand;
+import duke.command.TodoCommand;
+import duke.task.TaskList;
+
 /**
  * The Parser class deals with making sense of the user command.
+ * @author Junyi
  */
 public class Parser {
 
@@ -83,96 +94,96 @@ public class Parser {
 
         try {
             switch(DukeCommand.valueOf(firstCmd)) {
-                case bye:
-                    command = new ByeCommand();
-                    break;
-                case todo:
-                    validateNotEmptyArgs(cmd);
-                    String description = cmd.substring(5);
+            case bye:
+                command = new ByeCommand();
+                break;
+            case todo:
+                validateNotEmptyArgs(cmd);
+                String description = cmd.substring(5);
 
-                    command = new TodoCommand(taskList, description, ui);
-                    break;
+                command = new TodoCommand(taskList, description, ui);
+                break;
 
-                case deadline:
-                    validateNotEmptyArgs(cmd);
-                    String deadlineArgs = cmd.substring(9);
+            case deadline:
+                validateNotEmptyArgs(cmd);
+                String deadlineArgs = cmd.substring(9);
 
-                    // Validation of input
-                    if (deadlineArgs.split(" /by ").length < 2) {
-                        throw new DukeException("Insufficient details given...");
-                    }
+                // Validation of input
+                if (deadlineArgs.split(" /by ").length < 2) {
+                    throw new DukeException("Insufficient details given...");
+                }
 
-                    String deadlineDesc = deadlineArgs.split(" /by ")[0];
-                    LocalDate deadlineBy = LocalDate.parse(deadlineArgs.split(" /by ")[1]);
+                String deadlineDesc = deadlineArgs.split(" /by ")[0];
+                LocalDate deadlineBy = LocalDate.parse(deadlineArgs.split(" /by ")[1]);
 
-                    command = new DeadlineCommand(taskList, deadlineDesc, deadlineBy, ui);
-                    break;
+                command = new DeadlineCommand(taskList, deadlineDesc, deadlineBy, ui);
+                break;
 
-                case event:
-                    validateNotEmptyArgs(cmd);
-                    String eventArgs = cmd.substring(6);
+            case event:
+                validateNotEmptyArgs(cmd);
+                String eventArgs = cmd.substring(6);
 
-                    // Validation of input
-                    if (eventArgs.split(" /from ").length < 2 || eventArgs.split(" /to ").length < 2) {
-                        throw new DukeException("Insufficient details given...");
-                    }
+                // Validation of input
+                if (eventArgs.split(" /from ").length < 2 || eventArgs.split(" /to ").length < 2) {
+                    throw new DukeException("Insufficient details given...");
+                }
 
-                    String eventDesc = eventArgs.split(" /from ")[0];
-                    LocalDate eventFrom = LocalDate.parse(eventArgs.split(" /from ")[1].split(" /to ")[0]);
-                    LocalDate eventBy = LocalDate.parse(eventArgs.split(" /from ")[1].split(" /to ")[1]);
+                String eventDesc = eventArgs.split(" /from ")[0];
+                LocalDate eventFrom = LocalDate.parse(eventArgs.split(" /from ")[1].split(" /to ")[0]);
+                LocalDate eventBy = LocalDate.parse(eventArgs.split(" /from ")[1].split(" /to ")[1]);
 
-                    command = new EventCommand(taskList, eventDesc, eventFrom, eventBy, ui);
-                    break;
+                command = new EventCommand(taskList, eventDesc, eventFrom, eventBy, ui);
+                break;
 
-                case check:
-                    validateNotEmptyArgs(cmd);
-                    String dueArgs = cmd.substring(6);
-                    LocalDate targetDate = LocalDate.parse(dueArgs);
+            case check:
+                validateNotEmptyArgs(cmd);
+                String dueArgs = cmd.substring(6);
+                LocalDate targetDate = LocalDate.parse(dueArgs);
 
-                    command = new CheckCommand(taskList, targetDate);
-                    break;
+                command = new CheckCommand(taskList, targetDate);
+                break;
 
-                case list:
-                    command = new ListCommand(taskList);
-                    break;
+            case list:
+                command = new ListCommand(taskList);
+                break;
 
-                case mark:
-                    validateNotEmptyArgs(cmd);
-                    taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                    validateTaskIndex(taskIndex);
+            case mark:
+                validateNotEmptyArgs(cmd);
+                taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                validateTaskIndex(taskIndex);
 
-                    command = new MarkCommand(taskList, taskIndex, true);
-                    break;
+                command = new MarkCommand(taskList, taskIndex, true);
+                break;
 
-                case unmark:
-                    validateNotEmptyArgs(cmd);
-                    taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                    validateTaskIndex(taskIndex);
+            case unmark:
+                validateNotEmptyArgs(cmd);
+                taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                validateTaskIndex(taskIndex);
 
-                    command = new MarkCommand(taskList, taskIndex, false);
-                    break;
+                command = new MarkCommand(taskList, taskIndex, false);
+                break;
 
-                case delete:
-                    validateNotEmptyArgs(cmd);
-                    taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
-                    validateTaskIndex(taskIndex);
+            case delete:
+                validateNotEmptyArgs(cmd);
+                taskIndex = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                validateTaskIndex(taskIndex);
 
-                    command = new DeleteCommand(taskList, taskIndex, ui);
-                    break;
+                command = new DeleteCommand(taskList, taskIndex, ui);
+                break;
 
-                case save:
-                    command = new SaveCommand(taskList, storage, ui);
-                    break;
+            case save:
+                command = new SaveCommand(taskList, storage, ui);
+                break;
 
-                case find:
-                    validateNotEmptyArgs(cmd);
-                    String keyword = cmd.substring(5);
+            case find:
+                validateNotEmptyArgs(cmd);
+                String keyword = cmd.substring(5);
 
-                    command = new FindCommand(taskList, keyword);
-                    break;
+                command = new FindCommand(taskList, keyword);
+                break;
 
-                default:
-                    throw new DukeException("Arii does not recognise this command...");
+            default:
+                throw new DukeException("Arii does not recognise this command...");
             }
 
         } catch (DateTimeParseException e) {

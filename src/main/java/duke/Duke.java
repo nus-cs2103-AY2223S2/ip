@@ -1,18 +1,16 @@
 package duke;
 
 import duke.command.Command;
-import duke.task.*;
+import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
+/**
+ * The Duke class connects all the components to form the main chatbot logic.
+ * @author Junyi
+ */
 public class Duke {
-
-    public static String LOGO = "______     ______     __     __    \n" +
-            "/\\  __ \\   /\\  == \\   /\\ \\   /\\ \\   \n" +
-            "\\ \\  __ \\  \\ \\  __<   \\ \\ \\  \\ \\ \\  \n" +
-            " \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_\\  \\ \\_\\ \n" +
-            "  \\/_/\\/_/   \\/_/ /_/   \\/_/   \\/_/ \n";
 
     private final TaskList taskList;
     private final Storage storage;
@@ -58,6 +56,10 @@ public class Duke {
         ui.close();
     }
 
+    /**
+     * Entry point for Duke.
+     * @param args Not used.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("./data/data.txt");
         duke.run();

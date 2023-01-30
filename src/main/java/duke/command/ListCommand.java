@@ -3,6 +3,10 @@ package duke.command;
 import duke.DukeException;
 import duke.task.TaskList;
 
+/**
+ * A command that returns the whole list of tasks currently stored.
+ * @author Junyi
+ */
 public class ListCommand extends Command {
 
     private final TaskList taskList;

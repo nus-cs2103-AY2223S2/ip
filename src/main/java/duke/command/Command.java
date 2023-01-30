@@ -2,6 +2,10 @@ package duke.command;
 
 import duke.DukeException;
 
+/**
+ * The command class encapsulates the requests by the user input.
+ * @author Junyi
+ */
 public abstract class Command {
 
     /**

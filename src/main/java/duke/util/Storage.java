@@ -1,8 +1,5 @@
 package duke.util;
 
-import duke.DukeException;
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,8 +7,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.DukeException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TodoTask;
+
 /**
  * The Storage class is responsible for loading tasks from the file and saving tasks in the file.
+ * @author Junyi
  */
 public class Storage {
 
@@ -71,19 +76,19 @@ public class Storage {
                 Task task;
 
                 switch (identifier) {
-                    case "TT":
-                        task = TodoTask.deserialise(data);
-                        break;
-                    case "ET":
-                        task = EventTask.deserialise(data);
-                        break;
-                    case "DT":
-                        task = DeadlineTask.deserialise(data);
-                        break;
-                    case "T":
-                    default:
-                        task = Task.deserialise(data);
-                        break;
+                case "TT":
+                    task = TodoTask.deserialise(data);
+                    break;
+                case "ET":
+                    task = EventTask.deserialise(data);
+                    break;
+                case "DT":
+                    task = DeadlineTask.deserialise(data);
+                    break;
+                case "T":
+                default:
+                    task = Task.deserialise(data);
+                    break;
                 }
                 taskList.add(task);
             }

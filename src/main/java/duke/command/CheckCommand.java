@@ -1,13 +1,17 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.time.LocalDate;
-
+/**
+ * A command that filters tasks that is relevant on a specific date.
+ * @author Junyi
+ */
 public class CheckCommand extends Command {
 
     private final TaskList taskList;
@@ -30,12 +34,11 @@ public class CheckCommand extends Command {
         for (Task task : taskList.allTasks()) {
             if (task instanceof EventTask) {
                 EventTask eventTask = (EventTask) task;
-                if ((eventTask.getFrom().isEqual(targetDate) || eventTask.getFrom().isBefore(targetDate)) &&
-                        (eventTask.getTo().isEqual(targetDate) || eventTask.getTo().isAfter(targetDate))) {
+                if ((eventTask.getFrom().isEqual(targetDate) || eventTask.getFrom().isBefore(targetDate))
+                        && (eventTask.getTo().isEqual(targetDate) || eventTask.getTo().isAfter(targetDate))) {
                     System.out.println(eventTask);
                 }
-            }
-            else if (task instanceof DeadlineTask) {
+            } else if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
                 if (deadlineTask.getBy().isEqual(targetDate) || deadlineTask.getBy().isAfter(targetDate)) {
                     System.out.println(deadlineTask);

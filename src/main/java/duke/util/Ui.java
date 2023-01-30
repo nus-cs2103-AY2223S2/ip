@@ -1,14 +1,15 @@
 package duke.util;
 
-import duke.Duke;
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * The Ui class deals with interactions with the user.
+ * @author Junyi
  */
 public class Ui {
+
     /* Responsible for reading user input */
     private final Scanner scanner;
 
@@ -46,7 +47,12 @@ public class Ui {
      * Displays a welcome message.
      */
     public void showWelcomeMessage() {
-        System.out.println("Hello, I am \n" + Duke.LOGO);
+        String logo = "______     ______     __     __    \n"
+                + "/\\  __ \\   /\\  == \\   /\\ \\   /\\ \\   \n"
+                + "\\ \\  __ \\  \\ \\  __<   \\ \\ \\  \\ \\ \\  \n"
+                + " \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_\\  \\ \\_\\ \n"
+                + "  \\/_/\\/_/   \\/_/ /_/   \\/_/   \\/_/ \n";
+        System.out.println("Hello, I am \n" + logo);
         System.out.println("How shall I assist you today?");
     }
 

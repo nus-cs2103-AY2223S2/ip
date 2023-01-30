@@ -1,12 +1,16 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.DukeException;
 import duke.task.DeadlineTask;
 import duke.task.TaskList;
 import duke.util.Ui;
 
-import java.time.LocalDate;
-
+/**
+ * A command that creates a DeadlineTask
+ * @author Junyi
+ */
 public class DeadlineCommand extends Command {
 
     private final TaskList taskList;

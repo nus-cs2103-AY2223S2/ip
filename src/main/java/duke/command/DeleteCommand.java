@@ -4,6 +4,10 @@ import duke.DukeException;
 import duke.task.TaskList;
 import duke.util.Ui;
 
+/**
+ * A command that deletes a Task from the current store.
+ * @author Junyi
+ */
 public class DeleteCommand extends Command {
 
     private final TaskList taskList;

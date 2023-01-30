@@ -1,6 +1,10 @@
 package duke.task;
 
-public class TodoTask extends Task{
+/**
+ * A task class representing a simple to do task
+ * @author Junyi
+ */
+public class TodoTask extends Task {
 
     /**
      * Constructor to create a new instance of duke.task.Task.
