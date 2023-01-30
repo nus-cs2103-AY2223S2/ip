@@ -23,8 +23,8 @@ public class Todo extends Task {
     @Override
     public String encode() {
         return "todo"
-                + " " + this.description
-                + " " + this.isDone;
+                + " " + this.isDone
+                + " " + this.description;
     }
 
     /**

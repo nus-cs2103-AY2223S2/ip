@@ -67,31 +67,45 @@ public class Storage {
             scanner = new Scanner(this.file);
             while(scanner.hasNextLine()) {
                 String task = scanner.nextLine();
-                String[] encoded = task.split(" ");
+                String encoded[] = task.split(" ", 3);
                 String taskType = encoded[0];
-                String taskDescription = encoded[1];
-                String isDone = encoded[2];
+                String isDone = encoded[1];
+                String parts = encoded[2];
 
                 switch (taskType) {
                     case "todo":
-                        Task decodedTodo = new Todo(taskDescription);
+                        Task decodedTodo = new Todo(parts);
                         list.add(decodedTodo);
                         if (isDone.equals("true")) {
                             decodedTodo.markDone();
                         }
                         break;
                     case "deadline":
-                        LocalDate date = LocalDate.parse(encoded[3]);
-                        Task decodedDeadline = new Deadline(taskDescription, date);
+                        // deadline true eat with me /by: 2023-12-20
+
+                        String parts2[] = parts.split("/by:", 2);
+                        String deadlineDescription = parts2[0].trim();
+                        String dateString = parts2[1].trim();
+                        LocalDate date = LocalDate.parse(dateString);
+                        Task decodedDeadline = new Deadline(deadlineDescription, date);
                         list.add(decodedDeadline);
                         if (isDone.equals("true")) {
                             decodedDeadline.markDone();
                         }
                         break;
                     case "event":
-                        LocalDate from = LocalDate.parse(encoded[3]);
-                        LocalDate to = LocalDate.parse(encoded[4]);
-                        Task decodedEvent = new Event(taskDescription, from, to);
+                        //event false dancing festival /from: 2023-05-23 /to: 2023-12-20
+                        String parts3[] = parts.split("/from:", 2);
+                        String eventDescription = parts3[0].trim();
+
+                        String timearr[] = parts3[1].split("/to:", 2);
+                        String from = timearr[0].trim();
+                        String to = timearr[1].trim();
+
+                        LocalDate fromdate = LocalDate.parse(from);
+                        LocalDate todate = LocalDate.parse(to);
+
+                        Task decodedEvent = new Event(eventDescription, fromdate, todate);
                         list.add(decodedEvent);
                         if (isDone.equals("true")) {
                             decodedEvent.markDone();

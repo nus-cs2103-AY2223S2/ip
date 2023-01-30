@@ -47,10 +47,10 @@ public class Event extends Task {
     @Override
     public String encode() {
         return "event"
-                + " " + this.description
                 + " " + this.isDone
-                + " " + this.from
-                + " " + this.to;
+                + " " + this.description
+                + " " + "/from: " + this.from
+                + " " + "/to:" + this.to;
     }
 
     /**

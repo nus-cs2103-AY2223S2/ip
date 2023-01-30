@@ -1,7 +1,4 @@
-todo play true
-event laugh false 2023-12-20 2023-12-23
-todo dance false
-todo play false
-todo play false
-todo play false
-deadline dance toger false 2023-12-20
+todo true play
+deadline false dance together /by:  2023-12-20
+event true eat a meal /from: 2023-05-23 /to:2023-12-20
+todo false dance

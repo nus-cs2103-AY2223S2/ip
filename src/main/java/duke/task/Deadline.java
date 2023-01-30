@@ -31,8 +31,9 @@ public class Deadline extends Task {
     @Override
     public String encode() {
         return "deadline"
-                + " " + this.description
                 + " " + this.isDone
+                + " " + this.description
+                + " " + "/by: "
                 + " " + this.date;
     }
 
