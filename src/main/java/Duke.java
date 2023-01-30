@@ -36,7 +36,7 @@ public class Duke {
             } catch (DukeException e) {
                 e.getMessage();
             }
-            isExit = parser.checkForExit(fullCommand);
+            isExit = parser.isExit(fullCommand);
         }
         ui.closeScanner();
         ui.printExit();
