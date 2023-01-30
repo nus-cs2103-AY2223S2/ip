@@ -5,6 +5,7 @@
 
 # Gradle build files
 /.gradle/
+/text-ui-test/.gradle/
 /build/
 src/main/resources/docs/
 
