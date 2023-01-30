@@ -17,8 +17,7 @@ public class Duke {
         ArrayList<Task> array=new ArrayList<Task>();
         String divider = "    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══";
 
-        int i = 0;
-        while (i<100) {
+        while (true) {
             String[] splitInput = getInput();
             String combined = String.join(" ", splitInput);
             if(combined.equals("bye")) {
@@ -72,10 +71,8 @@ public class Duke {
     //get user input
     private static String[] getInput(){
         Scanner sc = new Scanner(System.in);
-        String userinput = sc.nextLine();
-        String [] splitted = userinput.split("\\s+");
-
-        return splitted;
+        String userInput = sc.nextLine();
+        return userInput.split("\\s+");
     }
 
     
