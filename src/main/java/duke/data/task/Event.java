@@ -55,13 +55,13 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String result =  "[E]" + super.toString() + " (from: " + fromDate;
+        String result = "[E]" + super.toString() + " (from: " + fromDate;
         if (fromTime != null) {
             result = result + " " + fromTime.toString();
         }
         result = result + " to: " + toDate;
         if (toTime != null) {
-            result =result + " " + toTime.toString();
+            result = result + " " + toTime.toString();
         }
         return result += ")";
     }

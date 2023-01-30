@@ -12,6 +12,13 @@ import duke.ui.Ui;
 public class AddDeadlineCommand extends Command {
     private String details;
     private String by;
+
+    /**
+     * Constructor for add deadline command.
+     *
+     * @param details Description of deadline task.
+     * @param by Deadline of deadline task.
+     */
     public AddDeadlineCommand(String details, String by) {
         this.details = details;
         this.by = by;
