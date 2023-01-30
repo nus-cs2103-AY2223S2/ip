@@ -4,6 +4,9 @@ import main.Storage;
 import main.TaskList;
 import main.Ui;
 
+/**
+ * Encapsulates bye command
+ */
 public class Bye implements Command {
     public Bye() {
 
