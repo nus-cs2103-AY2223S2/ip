@@ -69,6 +69,14 @@ public class Parser {
             }
         }
 
+        // Find task
+        if (command.equals("find")) {
+            if (tokens.length != 2) {
+                throw new DukeException("Please enter a keyword!");
+            }
+            return new FindCommand(tokens[1]);
+        }
+
         // Adding Tasks
         if (command.equals("todo")) {
             if (tokens.length != 2) {
