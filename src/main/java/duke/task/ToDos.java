@@ -29,7 +29,7 @@ public class ToDos extends Task {
      * @return The Task in String form
      */
     @Override
-    public String save(){
+    public String save() {
         return String.format("todo %s-%s\n", this.description, this.isDone);
     }
 }

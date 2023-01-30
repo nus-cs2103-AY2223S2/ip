@@ -5,6 +5,7 @@ package duke.task;
  * {@link #ToDos}
  * {@link #Deadlines}
  * {@link #Events}
+ * @author pzhengze
  */
 public enum TaskType {
     /**

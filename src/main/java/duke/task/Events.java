@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an Events Task.
- * @author pzhengze.
+ * @author pzhengze
  */
 public class Events extends Task {
     /** Storage of the start time of Event. */
@@ -27,7 +27,7 @@ public class Events extends Task {
      * @param startTime The start time of the Event Task.
      * @param endTime The end time of the Event Task.
      */
-    public Events(String description,boolean isDone, LocalDateTime startTime, LocalDateTime endTime) {
+    public Events(String description, boolean isDone, LocalDateTime startTime, LocalDateTime endTime) {
         super(description, isDone);
         this.startTime = startTime;
         this.stringStartTime = startTime.format(DateTimeFormatter.ofPattern("d MMM yyyy HHmm"));

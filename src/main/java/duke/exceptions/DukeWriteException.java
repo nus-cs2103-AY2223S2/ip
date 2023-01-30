@@ -1,6 +1,13 @@
 package duke.exceptions;
 
-public class DukeWriteException extends DukeException{
+/**
+ * Represents an exception that occurs when there is a problem writing to a text file.
+ * @author pzhengze
+ */
+public class DukeWriteException extends DukeException {
+    /**
+     * Constructor for DukeWriteException.
+     */
     public DukeWriteException() {
         super("\t OOPS!!! Failed to write to save file:\n");
     }

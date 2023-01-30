@@ -1,16 +1,25 @@
 package duke.tasklist;
 
-import duke.exceptions.*;
-import duke.task.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import duke.exceptions.DukeInvalidTaskNumberException;
+import duke.exceptions.DukeMissingDeadlineException;
+import duke.exceptions.DukeMissingDescriptionException;
+import duke.exceptions.DukeMissingEventDateException;
+import duke.exceptions.DukeTaskNumberOutOfRangeException;
+import duke.exceptions.DukeUnknownCommandException;
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.TaskType;
+import duke.task.ToDos;
+
 /**
  * Represents the list containing the Tasks objects.
- * @author pzhengze.
+ * @author pzhengze
  */
 public class TaskList {
     /** Reference to the ArrayList object that contains the Task objects. */
@@ -52,7 +61,7 @@ public class TaskList {
      * @throws DukeMissingEventDateException If s does not contain /from or /to which signifies the duration.
      */
     public String add(TaskType type, String s) throws DukeMissingDescriptionException,
-            DukeMissingDeadlineException, DukeMissingEventDateException {
+            DukeMissingDeadlineException, DukeMissingEventDateException, DukeUnknownCommandException {
         String output = "\t Got it. I've added this task:\n";
 
         switch (type) { // Interprets input string differently depending on the input type.
@@ -115,11 +124,11 @@ public class TaskList {
             // Throws DukeMissingEventDateException if not found.
             int fromIndex = s.indexOf(" /from ");
             int toIndex = s.indexOf(" /to ");
-            if (fromIndex == -1 ||
-                    toIndex == -1 ||
-                    toIndex < fromIndex + 7 ||
-                    s.substring(fromIndex + 7, toIndex).isBlank() ||
-                    s.substring(toIndex + 5).isBlank()) {
+            if (fromIndex == -1
+                    || toIndex == -1
+                    || toIndex < fromIndex + 7
+                    || s.substring(fromIndex + 7, toIndex).isBlank()
+                    || s.substring(toIndex + 5).isBlank()) {
                 throw new DukeMissingEventDateException();
             }
 
@@ -139,8 +148,10 @@ public class TaskList {
             // Adds the object into the output string.
             Events event = null;
             try {
-                LocalDateTime localStartTime = LocalDateTime.parse(startTime, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-                LocalDateTime localEndTime = LocalDateTime.parse(endTime, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                LocalDateTime localStartTime = LocalDateTime.parse(startTime,
+                        DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+                LocalDateTime localEndTime = LocalDateTime.parse(endTime,
+                        DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
                 event = new Events(desc, false, localStartTime, localEndTime);
             } catch (DateTimeParseException dateTimeParseException) {
                 event = new Events(desc, false, startTime, endTime);
@@ -150,6 +161,8 @@ public class TaskList {
             }
             break;
         }
+        default:
+            throw new DukeUnknownCommandException();
         }
         return String.format("%s\n\t Now you have %d tasks in the list.", output, tasks.size());
     }

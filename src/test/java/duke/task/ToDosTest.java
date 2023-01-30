@@ -1,11 +1,14 @@
 package duke.task;
 
-import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 public class ToDosTest {
-    ToDos todo;
+    private ToDos todo;
 
     @BeforeEach
     public void setUp() {

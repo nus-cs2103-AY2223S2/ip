@@ -1,6 +1,13 @@
 package duke.exceptions;
 
-public class DukeTaskNumberOutOfRangeException extends DukeException{
+/**
+ * Represents an exception that occurred when task number provided is out of range.
+ * @author pzhengze
+ */
+public class DukeTaskNumberOutOfRangeException extends DukeException {
+    /**
+     * Constructor for DukeTaskNumberOutOfRangeException.
+     */
     public DukeTaskNumberOutOfRangeException() {
         super("\t OOPS!!! Task number out of range.");
     }
