@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import tasks.*;
 
@@ -34,6 +36,7 @@ public class Duke {
         DEADLINE,
         EVENT,
         DELETE,
+        CHECK,
         INVALID
     }
 
@@ -54,6 +57,13 @@ public class Duke {
         switch(job) {
             case LIST:
                 Task.listTasks();
+                break;
+            case CHECK:
+                try {
+                    Task.check(LocalDate.parse(commands[1]));
+                } catch (DateTimeParseException e) {
+                    System.out.println("Please enter the date in the format: yyyy-mm-dd");
+                }
                 break;
             case MARK:
                 Task.markTasks(Integer.parseInt(commands[1])-1);

@@ -39,9 +39,19 @@ Here are the items in your list:
 ----------------------------------
 
 The following task has been added to your list: 
-    [E] [ ] some event ( from: today 3pm ) ( to: friday 5pm )
+    [E] [ ] something ( from: 2032-12-31t19:00 ) ( to: 2033-02-03t03:00 )
  
 Currently, your list has 2 tasks.
+
+----------------------------------
+
+
+----------------------------------
+
+The following task has been added to your list: 
+    [E] [ ] antoher thing ( from: 2022-02-03t18:00 ) ( to: 2033-01-01t10:00 )
+ 
+Currently, your list has 3 tasks.
 
 ----------------------------------
 
@@ -56,9 +66,9 @@ OH NO!! I DONT KNOW WHAT BLAH MEANS!!
 ----------------------------------
 
 The following task has been added to your list: 
-    [D] [ ] homework ( by: tomorrow 23 59 )
+    [D] [ ] d ( by: 2033-01-01t18:00 )
  
-Currently, your list has 3 tasks.
+Currently, your list has 4 tasks.
 
 ----------------------------------
 
@@ -66,7 +76,7 @@ Currently, your list has 3 tasks.
 ----------------------------------
 
 This task is marked as done: 
-    [E] [X] some event ( from: today 3pm ) ( to: friday 5pm )
+    [E] [X] something ( from: 2032-12-31t19:00 ) ( to: 2033-02-03t03:00 )
 
 ----------------------------------
 
@@ -74,7 +84,7 @@ This task is marked as done:
 ----------------------------------
 
 Okay. This task is marked as not done yet: 
-    [D] [ ] homework ( by: tomorrow 23 59 )
+    [E] [ ] antoher thing ( from: 2022-02-03t18:00 ) ( to: 2033-01-01t10:00 )
 
 ----------------------------------
 
@@ -84,8 +94,9 @@ Okay. This task is marked as not done yet:
 Here are the items in your list: 
 
     1) [T] [ ] something 
-    2) [E] [X] some event ( from: today 3pm ) ( to: friday 5pm )
-    3) [D] [ ] homework ( by: tomorrow 23 59 )
+    2) [E] [X] something ( from: 2032-12-31t19:00 ) ( to: 2033-02-03t03:00 )
+    3) [E] [ ] antoher thing ( from: 2022-02-03t18:00 ) ( to: 2033-01-01t10:00 )
+    4) [D] [ ] d ( by: 2033-01-01t18:00 )
 
 ----------------------------------
 
@@ -93,9 +104,9 @@ Here are the items in your list:
 ----------------------------------
 
 The following task has been removed: 
-    [D] [ ] homework ( by: tomorrow 23 59 )
+    [E] [ ] antoher thing ( from: 2022-02-03t18:00 ) ( to: 2033-01-01t10:00 )
  
-Currently, you have 2 tasks left in your list.
+Currently, you have 3 tasks left in your list.
 
 ----------------------------------
 
@@ -105,7 +116,8 @@ Currently, you have 2 tasks left in your list.
 Here are the items in your list: 
 
     1) [T] [ ] something 
-    2) [E] [X] some event ( from: today 3pm ) ( to: friday 5pm )
+    2) [E] [X] something ( from: 2032-12-31t19:00 ) ( to: 2033-02-03t03:00 )
+    3) [D] [ ] d ( by: 2033-01-01t18:00 )
 
 ----------------------------------
 
