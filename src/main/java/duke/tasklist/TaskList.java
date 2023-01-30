@@ -40,10 +40,12 @@ public class TaskList {
     }
 
     /**
+     * Returns task has been added message.
      * Adds task to collection.
      * Informs User upon successful task addition.
      *
      * @param task Task instance to be added.
+     * @return Task has been added message.
      */
     public String addTask(Task task) {
         this.taskStorage.add(task);
@@ -52,10 +54,12 @@ public class TaskList {
     }
 
     /**
+     * Returns task has been deleted message.
      * Deletes task from collection.
      * Informs User upon successful task deletion.
      *
      * @param toDelete Integer index of task to be deleted.
+     * @return Task has been deleted message.
      */
     public String deleteTask(int toDelete) {
         Task deleted = taskStorage.remove(toDelete - 1);
@@ -64,10 +68,12 @@ public class TaskList {
     }
 
     /**
+     * Returns task has been marked done message.
      * Marks specified task in collection as complete.
      * Informs User upon successful operation.
      *
      * @param mark Integer index of task to be mark complete.
+     * @return Task has been marked done message.
      */
     public String markTask(int mark) {
         Task marked = taskStorage.get(mark - 1);
@@ -76,10 +82,12 @@ public class TaskList {
     }
 
     /**
+     * Returns task has been unmarked message.
      * Unmarks specified task in collection as incomplete.
      * Informs User upon successful operation.
      *
      * @param unmark Integer index of task to be mark incomplete.
+     * @return Task has been unmarked message.
      */
     public String unmarkTask(int unmark) {
         Task unmarked = taskStorage.get(unmark - 1);
@@ -88,7 +96,10 @@ public class TaskList {
     }
 
     /**
+     * Returns String representation of tasks in Task collection.
      * Prints all current tasks in collection to standard output.
+     *
+     * @return String representaton of tasks in Task collection.
      */
     public String printTasks() {
         int count = 1;

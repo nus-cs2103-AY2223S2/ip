@@ -17,10 +17,12 @@ public abstract class Command {
 
     /**
      * Executes the command logic.
+     * Returns String representation of operation that was conducted.
      *
      * @param tasks Tasklist object.
      * @param storage Storage object.
      * @param ui Ui Object.
+     * @return String representation of operation conducted.
      */
     public abstract String execute(TaskList tasks, Storage storage, Ui ui);
 }

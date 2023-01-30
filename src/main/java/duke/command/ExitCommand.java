@@ -19,10 +19,12 @@ public class ExitCommand extends Command {
 
     /**
      * Saves existing state of task collection to data file.
+     * Returns message generated from saving Tasklist state.
      *
      * @param tasks Tasklist object.
      * @param storage Storage object.
      * @param ui Ui Object.
+     * @return Messages from saving TaskList instance.
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {

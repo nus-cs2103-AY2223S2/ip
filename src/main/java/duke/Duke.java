@@ -55,10 +55,6 @@ public class Duke {
         }
     }
 
-    String greeting() {
-        return ui.greet();
-    }
-
     String getResponse(String input) {
         try {
             Command c = Parser.parse(input, tasks);

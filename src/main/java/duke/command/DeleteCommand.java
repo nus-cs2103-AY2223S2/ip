@@ -26,10 +26,12 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes tasks from task collection.
+     * Returns task has been deleted message.
      *
      * @param tasks Tasklist object.
      * @param storage Storage object.
      * @param ui Ui Object.
+     * @return Task has been deleted message.
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {

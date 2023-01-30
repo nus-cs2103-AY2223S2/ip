@@ -29,10 +29,12 @@ public class AddCommand extends Command {
 
     /**
      * Adds task to task collection.
+     * Returns task has been added message.
      *
      * @param tasks Tasklist object.
      * @param storage Storage object.
      * @param ui Ui Object.
+     * @return Task has been added message.
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {

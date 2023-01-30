@@ -107,9 +107,11 @@ public class Storage {
     }
 
     /**
+     * Returns Tasks has been successfully saved message.
      * Saves existing tasks in TaskList into data file.
      *
      * @param tasks Updated TaskList with changes to be saved.
+     * @return Task has been saved message.
      */
     public String save(TaskList tasks) {
         this.tasks = tasks;

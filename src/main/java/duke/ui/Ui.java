@@ -32,7 +32,9 @@ public class Ui {
     }
 
     /**
-     * Prints Duke's greeting message.
+     * Returns Duke's greeting message.
+     *
+     * @return Duke's greeting message.
      */
     public String greet() {
         String greeting = "What's up! XyDuke here!\nHow can I be of assistance?\n";
@@ -40,7 +42,9 @@ public class Ui {
     }
 
     /**
-     * Prints Duke's goodbye message.
+     * Returns Duke's goodbye message.
+     *
+     * @return Duke's goodbye message.
      */
     public String goodbye() {
         String goodbye = "Bye. Hope to see you again soon!\n";
@@ -57,47 +61,57 @@ public class Ui {
     }
 
     /**
-     * Prints error message from exception instance.
+     * Returns error message from exception instance.
      *
      * @param e Exception object whose message is to be printed.
+     * @return Error message from exception.
      */
     public String showError(Exception e) {
         return e.getMessage();
     }
 
     /**
-     * Prints directory created message.
+     * Returns directory created message.
+     *
+     * @return Directory created message.
      */
     public String directoryCreate() {
         return "Data folder created!\n";
     }
 
     /**
-     * Prints file created message.
+     * Returns file created message.
+     *
+     * @return Data file created message.
      */
     public String fileCreate() {
         return "Duke data file: duke.txt created!\n";
     }
 
     /**
-     * Prints data is being saved message.
+     * Returns data is being saved message.
+     *
+     * @return Data is being saved message.
      */
     public String uploading() {
         return "Updating your data. Please wait..\n";
     }
 
     /**
-     * Prints data has been saved message.
+     * Returns data has been saved message.
+     *
+     * @return Data has been saved message.
      */
     public String saved() {
         return "All changes saved successfully!\n";
     }
 
     /**
-     * Prints task has been added message.
+     * Returns task has been added message.
      *
      * @param task Task that was added.
      * @param numTasks Current number of tasks in Task collection. (After addition)
+     * @return Task has been added message.
      */
     public String taskAdd(Task task, int numTasks) {
         String output = "";
@@ -108,10 +122,11 @@ public class Ui {
     }
 
     /**
-     * Prints task has been deleted message.
+     * Returns task has been deleted message.
      *
      * @param task Task that was deleted.
      * @param numTasks Current number of tasks in Task collection. (After Deletion)
+     * @return Task has been deleted message.
      */
     public String taskDelete(Task task, int numTasks) {
         String output = "";
@@ -122,34 +137,39 @@ public class Ui {
     }
 
     /**
-     * Prints task has been marked as complete message.
+     * Returns task has been marked as complete message.
      *
      * @param task Task that was marked as complete.
+     * @return Task has been marked as complete message.
      */
     public String markTaskDone(Task task) {
         return "Nice! I've marked this task as done:\n" + task + "\n";
     }
 
     /**
-     * Prints task has been marked as incomplete message.
+     * Returns task has been marked as incomplete message.
      *
      * @param task Task that was marked as incomplete.
+     * @return Task has been marked as incomplete message.
      */
     public String markTaskUndone(Task task) {
         return "OK, I've marked this task as undone:\n" + task + "\n";
     }
 
     /**
-     * Prints there are no matching task message.
+     * Returns there are no matching task message.
+     *
+     * @return No matching tasks message.
      */
     public String noMatchingTask() {
         return "Sorry! There are no matching tasks in your current list!\n";
     }
 
     /**
-     * Prints existing tasks in given TaskList instance.
+     * Returns existing tasks in given TaskList instance.
      *
      * @param tasks TaskList object whose tasks will be printed.
+     * @return String representation of existing tasks in TaskList instance.
      */
     public String printTasks(TaskList tasks) {
         return tasks.printTasks();
