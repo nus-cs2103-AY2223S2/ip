@@ -1,44 +1,37 @@
 import java.io.*;
-import java.util.Collections;
-import java.util.ArrayList;
+
 public class Duke {
 
-//    //private static Task[] taskstorage = new Task[101];
-//    private static ArrayList<Task> taskstorage = new ArrayList<Task>();
-//    // Tasks are indexed from 0 in taskstorage.
-//    private static int ind = 0; //Number of Current Tasks
-//    public static void addTask(Task t) {
-//        System.out.println("Got it. I've added this task:");
-//        System.out.println("  " + t);
-//        taskstorage.add(t);
-//        ind++;
-//        System.out.println("Now you have " + ind + " task(s) in the list.");
-//    }
-//
-//    public static void deleteTask(Task t) {
-//        System.out.println("Noted. I've removed this task:");
-//        System.out.println("  " + t);
-//        taskstorage.remove(t);
-//        ind--;
-//        System.out.println("Now you have " + ind + " task(s) in the list.");
-//    }
+    private TaskManagement taskManager; // to manage saved data
+    private TaskStorage taskStorage;
+    private Ui ui;
+    public Duke(String filepath) {
 
-    public static void main(String[] args) throws IOException, DukeException {
+        taskStorage = new TaskStorage();
+        ui = new Ui();
+        try {
+            taskManager = new TaskManagement(filepath);
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            taskManager = new TaskManagement();
+        }
+    }
+    public void run() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
         StringBuilder sb = new StringBuilder();
-        TaskManagement taskManager = new TaskManagement(); // to manage saved data
-        TaskStorage taskstorage = new TaskStorage();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        ui.showWelcome();
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
         String line = "-------------------------------";
-        System.out.println(line);
-        System.out.println("Hiii Im\n" + logo);
-        System.out.println("What can I do for you hmm?");
-        System.out.println(line);
+//        System.out.println(line);
+//        System.out.println("Hiii Im\n" + logo);
+//        System.out.println("What can I do for you hmm?");
+//        System.out.println(line);
         String inp;
 
         /**
@@ -48,14 +41,14 @@ public class Duke {
         while (true) {
             inp = br.readLine();
             String[] input = inp.split(" ");
-            System.out.println(line);
+            ui.showLine();
             switch(input[0]) {
                 case "list":
                     System.out.println("Tasks:");
                     //System.out.println(taskstorage);
-                    for (int i = 0; i < taskstorage.noTasks(); i++) {
+                    for (int i = 0; i < taskStorage.noTasks(); i++) {
                         System.out.print(i + 1 + ".");
-                        System.out.println(taskstorage.getTask(i));
+                        System.out.println(taskStorage.getTask(i));
                     }
                     break;
 
@@ -67,10 +60,10 @@ public class Duke {
                     //System.out.println("Nice! I've marked this task as done:");
                     try {
                         int taskNo = Integer.parseInt(input[1]);
-                        if (taskNo > taskstorage.noTasks() || taskNo <= 0) {
+                        if (taskNo > taskStorage.noTasks() || taskNo <= 0) {
                             throw new DukeException("Give a vaild number");
                         }
-                        taskstorage.getTask(taskNo - 1).markasDone();
+                        taskStorage.getTask(taskNo - 1).markAsDone();
                     } catch (NumberFormatException e) {
                         System.out.println("Number should be typed in");
                     } catch (DukeException e){
@@ -82,10 +75,10 @@ public class Duke {
                 case "unmark":
                     try {
                         int taskNoUnmark = Integer.parseInt(input[1]);
-                        if (taskNoUnmark > taskstorage.noTasks() || taskNoUnmark <= 0) {
+                        if (taskNoUnmark > taskStorage.noTasks() || taskNoUnmark <= 0) {
                             throw new DukeException("Give a valid number");
                         }
-                        taskstorage.getTask(taskNoUnmark - 1).markasUnDone();
+                        taskStorage.getTask(taskNoUnmark - 1).markAsUnDone();
                     } catch (NumberFormatException e) {
                         System.out.println("Number should be typed in");
                     } catch (DukeException e) {
@@ -102,7 +95,7 @@ public class Duke {
                         }
                         String todoTask = inp.substring(5);
                         Task todo = new Todo(todoTask);
-                        taskstorage.addTask(todo);
+                        taskStorage.addTask(todo);
                         break;
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
@@ -125,7 +118,7 @@ public class Duke {
                         String end = inputDeadline[1].substring(3);
                         Task deadLineTask = new Deadline(deadLineTaskStr, end);
                         //System.out.println(end);
-                        taskstorage.addTask(deadLineTask);
+                        taskStorage.addTask(deadLineTask);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     } finally {
@@ -149,7 +142,7 @@ public class Duke {
                         eventBegin = eventBegin.substring(0, eventBegin.length() - 1);
                         String eventEnd = eventStrsplit[2].substring(3);
                         Task eventTask = new Event(eventTaskStr, eventBegin, eventEnd);
-                        taskstorage.addTask(eventTask);
+                        taskStorage.addTask(eventTask);
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     } finally {
@@ -159,11 +152,11 @@ public class Duke {
                 case "delete":
                     try {
                         int taskNo = Integer.parseInt(input[1]);
-                        if (taskNo > taskstorage.noTasks() || taskNo <= 0) {
+                        if (taskNo > taskStorage.noTasks() || taskNo <= 0) {
                             throw new DukeException("Give a vaild number");
                         }
-                        Task eventTask = taskstorage.getTask(taskNo - 1);
-                        taskstorage.deleteTask(eventTask);
+                        Task eventTask = taskStorage.getTask(taskNo - 1);
+                        taskStorage.deleteTask(eventTask);
                     } catch (NumberFormatException e) {
                         System.out.println("Number should be typed in");
                     } catch (DukeException e){
@@ -178,12 +171,15 @@ public class Duke {
 
 
             }
-            taskManager.save(taskstorage);
-            System.out.println(line);
+            taskManager.save(taskStorage);
+            ui.showLine();
             if (inp.equals("bye")) {
                 break;
             }
 
         }
+    }
+    public static void main(String[] args) throws IOException, DukeException {
+        new Duke("./data/tasks.txt").run();
     }
 }

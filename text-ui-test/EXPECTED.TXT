@@ -1,7 +1,7 @@
 -------------------------------
 Hiii Im
- ____        _        
-|  _ \ _   _| | _____ 
+ ____        _
+|  _ \ _   _| | _____
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
@@ -10,70 +10,73 @@ What can I do for you hmm?
 -------------------------------
 -------------------------------
 Got it. I've added this task:
-  [T][ ] read bookread book
+  [T][ ] read book
 Now you have 1 task(s) in the list.
 -------------------------------
 -------------------------------
 Got it. I've added this task:
-  [D][ ] return book (by: 2019-06-15)
+  [D][ ] return book (by: Jun 15 2019)
 Now you have 2 task(s) in the list.
 -------------------------------
 -------------------------------
 Got it. I've added this task:
-  [E][ ] project meeting (from: 2019-06-15 to: 2019-06-17)
+  [E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
 Now you have 3 task(s) in the list.
 -------------------------------
 -------------------------------
 Got it. I've added this task:
-  [T][ ] join sports clubjoin sports club
+  [T][ ] join sports club
 Now you have 4 task(s) in the list.
 -------------------------------
 -------------------------------
 Got it. I've added this task:
-  [T][ ] borrow bookborrow book
+  [T][ ] borrow book
 Now you have 5 task(s) in the list.
 -------------------------------
 -------------------------------
 Tasks:
-1.[T][ ] read bookread book
-2.[D][ ] return book (by: 2019-06-15)
-3.[E][ ] project meeting (from: 2019-06-15 to: 2019-06-17)
-4.[T][ ] join sports clubjoin sports club
-5.[T][ ] borrow bookborrow book
+1.[T][ ] read book
+2.[D][ ] return book (by: Jun 15 2019)
+3.[E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
+4.[T][ ] join sports club
+5.[T][ ] borrow book
 -------------------------------
 -------------------------------
 Nice! I've marked this task as done:
-[T][X] read bookread book
+[T][X] read book
 -------------------------------
 -------------------------------
 Ok, I've marked this task as not done yet:
-[T][ ] read bookread book
+[T][ ] read book
 -------------------------------
 -------------------------------
 Nice! I've marked this task as done:
-[D][X] return book (by: 2019-06-15)
+[D][X] return book (by: Jun 15 2019)
 -------------------------------
 -------------------------------
 Nice! I've marked this task as done:
-[T][X] join sports clubjoin sports club
+[T][X] join sports club
 -------------------------------
 -------------------------------
 Tasks:
-1.[T][ ] read bookread book
-2.[D][X] return book (by: 2019-06-15)
-3.[E][ ] project meeting (from: 2019-06-15 to: 2019-06-17)
-4.[T][X] join sports clubjoin sports club
-5.[T][ ] borrow bookborrow book
+1.[T][ ] read book
+2.[D][X] return book (by: Jun 15 2019)
+3.[E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
+4.[T][X] join sports club
+5.[T][ ] borrow book
 -------------------------------
 -------------------------------
 Noted. I've removed this task:
-  [E][ ] project meeting (from: 2019-06-15 to: 2019-06-17)
+  [E][ ] project meeting (from: Jun 15 2019 to: Jun 19 2019)
 Now you have 4 task(s) in the list.
 -------------------------------
 -------------------------------
 Tasks:
-1.[T][ ] read bookread book
-2.[D][X] return book (by: 2019-06-15)
-3.[T][X] join sports clubjoin sports club
-4.[T][ ] borrow bookborrow book
+1.[T][ ] read book
+2.[D][X] return book (by: Jun 15 2019)
+3.[T][X] join sports club
+4.[T][ ] borrow book
+-------------------------------
+-------------------------------
+Byeee! Hope to see you again! Signing off, Duke.
 -------------------------------
