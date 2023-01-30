@@ -41,7 +41,10 @@ public abstract class Task {
                     result = new ToDo(arguments[1]);
                     break;
                 case "E":
-                    result = new Event(arguments[1], arguments[3], arguments[4]);
+                    result = new Event(
+                            arguments[1],
+                            LocalDate.parse(arguments[3]),
+                            LocalDate.parse(arguments[4]));
                     break;
                 default:
                     return null;

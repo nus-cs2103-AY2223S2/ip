@@ -45,8 +45,10 @@ public class Duke {
             String[] args = command.split(" ");
             switch (args[0]) {
                 case "bye":
-                    prettyPrint("Hope I helped. Goodbye!");
+                    prettyPrint("Saving state, please wait...");
                     saveState();
+                    prettyPrint("State successfully saved.");
+                    prettyPrint("Hope I helped. Goodbye!");
                     return false;
                 case "mark":
                     // todo: check if second argument is a valid number
@@ -97,11 +99,19 @@ public class Duke {
                             throw new ClippyInvalidEventException();
                         }
 
-                        // startIndex of command.substring() is 6 as "event " is 6 chars long
-                        tasks.add(new Event(
-                                command.substring(6, fromIndex).trim(),
-                                command.substring(fromIndex + 6, toIndex).trim(),
-                                command.substring(toIndex + 4, command.length()).trim()));
+                        try {
+                            // startIndex of command.substring() is 6 as "event " is 6 chars long
+                            tasks.add(new Event(
+                                    command.substring(6, fromIndex).trim(),
+                                    LocalDate.parse(command.substring(fromIndex + 6, toIndex).trim()),
+                                    LocalDate.parse(command.substring(toIndex + 4, command.length()).trim())));
+                        } catch (DateTimeParseException e) {
+                            prettyPrint("Uh-oh, Clippy didn't quite understand the date provided.");
+                            prettyPrint("Deadline not saved. " +
+                                    "Try again with dates in the following format:");
+                            prettyPrint("===> yyyy-mm-dd <====");
+                            return true;
+                        }
                     }
                     prettyPrint("Got it! I've added this task:");
                     prettyPrint(tasks.get(tasks.size() - 1).toString());
