@@ -18,6 +18,8 @@ public class Query {
     static QueryType queryType(String input) {
         if (input.equals("list")) {
             return QueryType.list;
+        } else if (input.equals("bye")) {
+            return QueryType.exit;
         }
         String[] inputArr = input.split(" ");
         if (inputArr.length == 2 && isNumeric(inputArr[1])) {

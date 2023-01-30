@@ -1,24 +1,27 @@
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
     protected LocalDate duedate;
-    public Deadline(String input) throws MissingDescriptionException {
+
+    public Deadline(String input) throws DukeException {
         super(input);
         this.symbol = 'D';
         String[] inputArr = input.split(" ", 2); //split 'deadline' from task input
         if (inputArr.length == 1 || inputArr[1].isBlank()) {
-            throw new MissingDescriptionException("Sorry, the description of a deadline cannot be empty!");
+            throw new DukeException("Sorry, the description of a deadline cannot be empty!");
         }
-        String[] descriptionArr= inputArr[1].split("/"); //split task from due date
-        if (descriptionArr.length == 1 || descriptionArr[1].isBlank()) {
-            throw new MissingDescriptionException("Please include a deadline in the following format: '/<due date>'");
+        String[] descriptionArr = inputArr[1].split("/"); //split task from due date
+        if (descriptionArr.length == 1 || descriptionArr[0].isEmpty()) {
+            throw new DukeException("Please include a deadline in the following format: '/yyyy-MM-dd'");
         }
         this.description = descriptionArr[0];
-        LocalDate inputFormatter = LocalDate.parse(descriptionArr[1]);
-        this.duedate = inputFormatter;
-        this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+            LocalDate inputFormatter = Parser.parseDate(descriptionArr[1]);
+            this.duedate = inputFormatter;
+            this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 
     public Deadline(String input, boolean isDone) {
@@ -30,10 +33,10 @@ public class Deadline extends Task {
         this.duedate = inputFormatter;
         this.duedateString = inputFormatter.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
+
     public String saveTask() {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return this.symbol + "," + isDone + "," + this.description + "," + duedate;
     }
 }
 
-//sample input: deadline do homework /by Sunday 10pm
+//sample input: deadline do homework /2023-01-30

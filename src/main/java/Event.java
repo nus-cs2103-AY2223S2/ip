@@ -5,22 +5,22 @@ public class Event extends Task {
     protected LocalDateTime startTime;
     protected LocalDateTime endTime;
     DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-    public Event(String input) throws MissingDescriptionException {
+    DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+    public Event(String input) throws DukeException {
         super(input);
         this.symbol = 'E';
         String[] inputArr = input.split(" ", 2); //split 'event' from task input
         if (inputArr.length == 1 || inputArr[1].isBlank()) {
-            throw new MissingDescriptionException("Sorry, the description of an event cannot be empty!");
+            throw new DukeException("Sorry, the description of an event cannot be empty!");
         }
         String[] eventArr = inputArr[1].split("/", 2); //split description from timings
         if (eventArr.length == 1 || eventArr[1].isBlank()) {
-            throw new MissingDescriptionException("Please include duration of the event in the following format: /<event start date and time> to <event end date and time>");
+            throw new DukeException("Please include duration of the event in the following format: /<yyyy-MM-dd HHmm> to <yyyy-MM-dd HHmm>");
         }
         this.description = eventArr[0];
         String[] dueArr = eventArr[1].split(" to ");
-        this.startTime = LocalDateTime.parse(dueArr[0], inputFormatter);
-        this.endTime = LocalDateTime.parse(dueArr[1], inputFormatter);
+        this.startTime = Parser.parseDateTime(dueArr[0]);
+        this.endTime = Parser.parseDateTime(dueArr[1]);
         this.duedateString = startTime.format(displayFormatter) + " to " + endTime.format(displayFormatter);
     }
     public Event(String input, boolean isDone) {
@@ -29,8 +29,8 @@ public class Event extends Task {
         String[] temp = input.split(",");
         this.description = temp[0];
         String[] dueArr = temp[1].split(" to ");
-        this.startTime = LocalDateTime.parse(dueArr[0], inputFormatter);
-        this.endTime = LocalDateTime.parse(dueArr[1], inputFormatter);
+        this.startTime = LocalDateTime.parse(dueArr[0]);
+        this.endTime = LocalDateTime.parse(dueArr[1]);
         this.duedateString = startTime.format(displayFormatter) + " to " + endTime.format(displayFormatter);
     }
     public String saveTask() {
