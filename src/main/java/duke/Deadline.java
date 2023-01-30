@@ -29,7 +29,7 @@ public class Deadline extends Task {
     public Deadline(Boolean isDone, String description, String by) {
         super(isDone, description);
         this.by = by;
-
+    }
 
     @Override
     public String toString() {
@@ -63,10 +63,11 @@ public class Deadline extends Task {
                
             String date = splitInput[splitInput.length-1];
             String desc = splitInput[1];
+            System.out.println(isDate(date));
 
 
             if(isDate(date)){
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate ld = LocalDate.parse(date, formatter);
                 Deadline d = new Deadline(desc, ld);
                 array.add(d);
@@ -87,9 +88,10 @@ public class Deadline extends Task {
         }
         
     }
+    
     public static boolean isDate(String date) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate ld = null;
         try {
             ld = LocalDate.parse(date, formatter);
@@ -99,22 +101,9 @@ public class Deadline extends Task {
             return false;
     
         }
-    
-
-            Deadline d = new Deadline(desc, date);
-            array.add(d);
-            //Deadline.saveTaskData(d, 0);
-
-            System.out.println(divider);
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("     " + d.toString());
-            System.out.println("     Now you have " + array.size() + " tasks in the list.");
-            System.out.println(divider);
-           
-        }
-        
+        return true;
     }
-   
+
 
     @Override
     public String saveFormat() {
