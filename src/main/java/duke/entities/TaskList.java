@@ -27,14 +27,15 @@ public class TaskList {
     public TaskList(Storage storage) throws DukeException {
         this.storage = storage;
         try {
+            storage.connect();
             Boolean success = storage.load(this);
             if (success) {
                 System.out.println("Successfully loaded data.");
             } else {
-                System.out.println("Data load unsuccessful. Initializing empty duke.storage.");
+                System.out.println("Data load unsuccessful. Initializing empty storage.");
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage() + "\n Initializing empty duke.storage.");
+            System.out.println(e.getMessage() + "\n Initializing empty storage.");
         }
     }
 

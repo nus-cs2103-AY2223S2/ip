@@ -22,7 +22,6 @@ public class Duke {
     public Duke(String filename) {
         Storage storage = new Storage(filename);
         try {
-            storage.connect();
             taskList = new TaskList(storage);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -42,5 +41,11 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    public static void main(String ...args) throws DukeException {
+        Storage storage = new Storage("test.txt");
+        TaskList taskList = new TaskList(storage);
+        System.out.println(taskList.listTasks(task -> true, true));
     }
 }
