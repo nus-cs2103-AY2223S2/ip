@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Ui {
 
+    private static final String QUOTE_TASKS_FOUND = "Sir, here are the tasks found which match your input:";
+    private static final String QUOTE_NO_TASKS_FOUND = "Sir, there were no tasks found which matched the keyword(s)" ;
     Scanner userInputScan;
 
     //Text print constants
@@ -41,6 +43,14 @@ public class Ui {
 
     public static void showCommandError() {
         System.out.println("Failed to execute command");
+    }
+
+    public static void showTasksFound() {
+        print(QUOTE_TASKS_FOUND);
+    }
+
+    public static void showNoTasksFound() {
+        print(QUOTE_NO_TASKS_FOUND);
     }
 
 

@@ -20,9 +20,10 @@ public class AddTaskCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
         try {
             tasks.addItem(task);
-
+            //error here
             if (toAppendFile) {
                 storage.writeToFile(task.getTaskFileFormat());
+                storage.writeToFile("\n");
             }
             Ui.showTaskAdded();
             Ui.printTask(task);

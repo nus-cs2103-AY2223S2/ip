@@ -18,7 +18,7 @@ public class C4PO {
 
         try {
             tasks = new TaskList(storage.load());
-            tasks.printList();
+            tasks.printList(true);
         } catch (Exception e) {
             Ui.print(e.getMessage());
             Ui.showLoadingError();
@@ -44,6 +44,7 @@ public class C4PO {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (Exception e) {
+                Ui.print(e.getMessage());
                 Ui.showCommandError();
             } finally {
                 Ui.printDashLine(1);

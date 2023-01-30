@@ -1,4 +1,6 @@
 package src.main.c4po;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Task {
@@ -59,6 +61,17 @@ public class Task {
      */
     public void markUndone() {
         this.isDone = false;
+    }
+
+    /**
+     * Returns a ArrayList of Strings of the task's description split into keywords
+     * @return
+     */
+    protected ArrayList<String> getDescInArray() {
+        String str = this.description;
+        String[] stringArr = str.split(" ");
+
+        return new ArrayList<>(List.of(stringArr));
     }
 
 

@@ -1,7 +1,6 @@
 package src.main.c4po;
 
 public abstract class Command {
-    public boolean toQuit;
 
     /**
      * Executes the command with actions specific to each extension of this
