@@ -22,7 +22,7 @@ public abstract class AddCommand implements Command {
         tasks.add(task);
 
         return String.format("A perfect task for a simpleton like you. I've added this task:\n  %s\nNow you have %d "
-                + "tasks in the list.", task.toString(), tasks.getUnfilteredSize());
+                + "tasks in the list.", task.toString(), tasks.size());
     }
 
     /**

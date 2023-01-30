@@ -37,7 +37,7 @@ public class DeleteCommand implements Command {
             throw new DukeException("The index of the task to be deleted must be an integer!");
         }
 
-        if (index >= tasks.getSize() || index < 0) {
+        if (index >= tasks.size() || index < 0) {
             throw new DukeException("The task to be deleted doesn't exist!");
         }
 
@@ -46,6 +46,6 @@ public class DeleteCommand implements Command {
 
     private String getMessage(TaskList tasks, Task task) {
         return String.format("I've removed this task:\n  %s\nNow you have %d tasks in the list.",
-                task.toString(), tasks.getUnfilteredSize());
+                task.toString(), tasks.size());
     }
 }

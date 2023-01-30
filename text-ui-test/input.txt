@@ -44,13 +44,11 @@ todo lorem ipsum
 deadline hello this world /by 01/01/2024 1200
 event this world end /from 01/01/2024 1200 /to 02/01/2024 1300
 list
-find this world
-delete 1
-find no keyword
-delete 1
 find
 find  
-list
+find this world
+find no keyword
+delete 1
 delete 1
 delete 1
 mark
