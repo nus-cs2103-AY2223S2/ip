@@ -19,6 +19,13 @@ public class Duke extends Application {
     private LocalStorage localStorage;
 
     /**
+     * Constructor for Duke
+     */
+    public Duke() {
+        this.tasks = new TaskList();
+    }
+
+    /**
      * Constructor to instantiate Duke bot.
      * @param filePath path of local storage file.
      */
