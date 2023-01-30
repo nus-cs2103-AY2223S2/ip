@@ -1,13 +1,5 @@
 package duke.storage;
 
-import duke.exceptions.DukeFileCreationException;
-import duke.exceptions.DukeReadException;
-import duke.exceptions.DukeWriteException;
-import duke.task.Deadlines;
-import duke.task.Events;
-import duke.task.Task;
-import duke.task.ToDos;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,10 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exceptions.DukeFileCreationException;
+import duke.exceptions.DukeReadException;
+import duke.exceptions.DukeUnknownCommandException;
+import duke.exceptions.DukeWriteException;
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.ToDos;
+
 /**
  * Represents a Storage.
  * Responsible for the reading and writing to save file for Duke.
- * @author pzhengze.
+ * @author pzhengze
  */
 public class Storage {
     /** Relative path of the save file */
@@ -80,7 +81,8 @@ public class Storage {
      * @throws DukeFileCreationException if it fails to create a save file.
      * @throws DukeReadException if it fails to read the save file.
      */
-    public ArrayList<Task> loadSaveFile() throws DukeFileCreationException, DukeReadException {
+    public ArrayList<Task> loadSaveFile() throws DukeFileCreationException,
+            DukeReadException, DukeUnknownCommandException {
         Scanner scanner;
 
         ArrayList<Task> list = new ArrayList<>();
@@ -131,7 +133,10 @@ public class Storage {
                         details[3]
                 ));
                 break;
+            default:
+                throw new DukeUnknownCommandException();
             }
+
         }
         return list;
     }

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Deadlines Task.
- * @author pzhengze.
+ * @author pzhengze
  */
 public class Deadlines extends Task {
     /** Storage of the due date of Deadline. */

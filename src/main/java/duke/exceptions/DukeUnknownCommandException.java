@@ -1,6 +1,13 @@
 package duke.exceptions;
 
-public class DukeUnknownCommandException extends DukeException{
+/**
+ * Represents an exception that occurs when Duke does not understand the input.
+ * @author pzhengze
+ */
+public class DukeUnknownCommandException extends DukeException {
+    /**
+     * Constructor for DukeUnknownCommandException.
+     */
     public DukeUnknownCommandException() {
         super("\t OOPS!!! I'm sorry, but I don't know what that means :-(");
     }

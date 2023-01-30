@@ -1,16 +1,17 @@
 package duke.parser;
 
+import java.util.Arrays;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeUnknownCommandException;
 import duke.task.TaskType;
 import duke.tasklist.TaskList;
 
-import java.util.Arrays;
 
 /**
  * Represents a Parser.
  * Parses user input into different TaskList methods.
- * @author pzhengze.
+ * @author pzhengze
  */
 public class Parser {
     /** Reference to the TaskList it is parsing for */
@@ -42,26 +43,26 @@ public class Parser {
 
         // Interprets the extracted function and executes the correct TaskList method.
         switch(fn) {
-            case "list":
-                return tasks.list();
-            case "mark":
-                return tasks.mark(info.strip());
-            case "unmark":
-                return tasks.unMark(info.strip());
-            case "delete":
-                return tasks.delete(info.strip());
-            case "todo":
-                return tasks.add(TaskType.ToDos, info.strip());
-            case "deadline":
-                return tasks.add(TaskType.Deadlines, info.strip());
-            case "event":
-                return tasks.add(TaskType.Events, info.strip());
-            case "find":
-                return tasks.find(info.strip());
-            case "bye":
-                return "\t Bye. Hope to see you again soon!";
-            default:
-                throw new DukeUnknownCommandException();
+        case "list":
+            return tasks.list();
+        case "mark":
+            return tasks.mark(info.strip());
+        case "unmark":
+            return tasks.unMark(info.strip());
+        case "delete":
+            return tasks.delete(info.strip());
+        case "todo":
+            return tasks.add(TaskType.ToDos, info.strip());
+        case "deadline":
+            return tasks.add(TaskType.Deadlines, info.strip());
+        case "event":
+            return tasks.add(TaskType.Events, info.strip());
+        case "find":
+            return tasks.find(info.strip());
+        case "bye":
+            return "\t Bye. Hope to see you again soon!";
+        default:
+            throw new DukeUnknownCommandException();
         }
     }
 }

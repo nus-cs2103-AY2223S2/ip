@@ -8,7 +8,7 @@ import duke.ui.Ui;
 
 /**
  * Represents the Duke personal assistant.
- * @author pzhengze.
+ * @author pzhengze
  */
 public class Duke {
     /** Reference for the Storage object used for i/o to save file. */
@@ -30,7 +30,7 @@ public class Duke {
         storage = new Storage(path);
         try {
             tasks = new TaskList(storage.loadSaveFile());
-        } catch (DukeException e){
+        } catch (DukeException e) {
             ui.printException(e);
             tasks = new TaskList();
         }
@@ -62,7 +62,7 @@ public class Duke {
 
         try {
             this.storage.save(tasks.getTasks());
-        } catch (DukeException e){
+        } catch (DukeException e) {
             this.ui.printException(e);
         }
     }

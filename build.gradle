@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'checkstyle'
 }
 
 repositories {
@@ -31,6 +32,10 @@ application {
     mainClassName = "duke.Duke"
 }
 
+checkstyle {
+    toolVersion = '10.2'
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
@@ -39,3 +44,5 @@ shadowJar {
 run{
     standardInput = System.in
 }
+
+

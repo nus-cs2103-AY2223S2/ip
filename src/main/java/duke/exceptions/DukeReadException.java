@@ -1,6 +1,13 @@
 package duke.exceptions;
 
-public class DukeReadException extends DukeException{
+/**
+ * Represents an exception while reading a text file.
+ * @author pzhengze
+ */
+public class DukeReadException extends DukeException {
+    /**
+     * Constructor for DukeReadException.
+     */
     public DukeReadException() {
         super("\t OOPS!!! Failed to read from save file.");
     }

@@ -2,7 +2,7 @@ package duke.task;
 
 /**
  * Represents a Task.
- * @author pzhengze.
+ * @author pzhengze
  */
 public abstract class Task {
     /** Storage of the description of Task */
@@ -47,7 +47,7 @@ public abstract class Task {
     public boolean contain(String s) {
         int index = description.indexOf(s);
 
-        return index != - 1;
+        return index != -1;
     }
 
     /**

@@ -1,6 +1,13 @@
 package duke.exceptions;
 
-public class DukeMissingDescriptionException extends DukeException{
+/**
+ * Represents an exception that occurs when description is missing while creating a Task.
+ * @author pzhengze
+ */
+public class DukeMissingDescriptionException extends DukeException {
+    /**
+     * Constructor for DukeMissingDescriptionException.
+     */
     public DukeMissingDescriptionException() {
         super("\t OOPS!!! The description of a task cannot be empty.");
 

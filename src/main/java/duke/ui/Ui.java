@@ -1,8 +1,8 @@
 package duke.ui;
 
-import duke.exceptions.DukeException;
-
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
 
 /**
  * Represents the Ui responsible for the interaction with the user.
@@ -15,7 +15,7 @@ public class Ui {
     /**
      * Constructor for Ui object.
      */
-    public Ui(){}
+    public Ui() {}
 
     /**
      * Prints greeting for user.
