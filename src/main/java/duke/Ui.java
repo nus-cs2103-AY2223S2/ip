@@ -82,22 +82,22 @@ public class Ui {
      * Prints out the task that is marked done
      *
      * @param tasks  TaskList object to get the task
-     * @param taskNo int index of task in the ArrayList
+     * @param taskNum int index of task in the ArrayList
      * @throws DukeException when the task is not found in the list
      */
-    public void showMarkDone(TaskList tasks, int taskNo) throws DukeException {
-        printer(Views.MARK_DONE_STRING.eng() + tasks.get(taskNo));
+    public void showMarkDone(TaskList tasks, int taskNum) throws DukeException {
+        printer(Views.MARK_DONE_STRING.eng() + tasks.get(taskNum));
     }
 
     /**
      * Prints out the task that is marked undone
      *
      * @param tasks  TaskList object to get the task
-     * @param taskNo int index of task in the ArrayList
+     * @param taskNum int index of task in the ArrayList
      * @throws DukeException when the task is not found in the list
      */
-    public void showUnmarkDone(TaskList tasks, int taskNo) throws DukeException {
-        printer(Views.UNMARK_DONE_STRING.eng() + tasks.get(taskNo));
+    public void showUnmarkDone(TaskList tasks, int taskNum) throws DukeException {
+        printer(Views.UNMARK_DONE_STRING.eng() + tasks.get(taskNum));
     }
 
     /**

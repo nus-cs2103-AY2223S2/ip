@@ -9,15 +9,15 @@ import duke.Ui;
  * Command: Marks the Task as complete
  */
 public class MarkCommand extends Command {
-    private int taskNo;
+    private int taskNum;
 
     /**
      * Takes in the task number to mark as complete
      *
-     * @param taskNo int index of task in the ArrayList
+     * @param taskNum int index of task in the ArrayList
      */
-    public MarkCommand(int taskNo) {
-        this.taskNo = taskNo;
+    public MarkCommand(int taskNum) {
+        this.taskNum = taskNum;
     }
 
     /**
@@ -29,8 +29,8 @@ public class MarkCommand extends Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.get(taskNo).markAsDone();
-        ui.showMarkDone(tasks, taskNo);
+        tasks.get(taskNum).markAsDone();
+        ui.showMarkDone(tasks, taskNum);
         storage.save(tasks);
     }
 

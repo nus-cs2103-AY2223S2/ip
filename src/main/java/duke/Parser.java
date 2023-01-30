@@ -41,32 +41,39 @@ public class Parser {
         default:
             // Have to do it at the starts with because what if "todo mark this as done"
             if (input.startsWith(Commands.MARK.cmd())) {
-                int taskNo = getNumbers(input) - 1;
-                return new MarkCommand(taskNo);
+                int taskNum = getNumbers(input) - 1;
+                return new MarkCommand(taskNum);
             } else if (input.startsWith(Commands.UNMARK.cmd())) {
-                int taskNo = getNumbers(input) - 1;
-                return new UnmarkCommand(taskNo);
+                int taskNum = getNumbers(input) - 1;
+                return new UnmarkCommand(taskNum);
             } else if (input.startsWith(Commands.TODO.cmd())) {
                 String title = input.substring(Commands.TODO.cmd().length());
                 return new TodoCommand(title);
             } else if (input.startsWith(Commands.DEADLINE.cmd())) {
+
                 if (input.indexOf(Commands.BY.cmd()) == -1) {
                     throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
                 }
                 String title = input.substring(Commands.DEADLINE.cmd().length(), input.indexOf(Commands.BY.cmd()));
+
                 String deadline = input.substring(input.indexOf(Commands.BY.cmd()));
+
                 return new DeadlineCommand(title, deadline);
             } else if (input.startsWith(Commands.EVENT.cmd())) {
+
                 if (input.indexOf(Commands.FROM.cmd()) == -1 || input.indexOf(Commands.TO.cmd()) == -1) {
                     throw new DukeException(Views.MISSING_ARGS_ERR_STRING.eng());
                 }
                 String title = input.substring(Commands.EVENT.cmd().length(), input.indexOf(Commands.FROM.cmd()));
+
                 String from = input.substring(input.indexOf(Commands.FROM.cmd()), input.indexOf(Commands.TO.cmd()));
+
                 String to = input.substring(input.indexOf(Commands.TO.cmd()));
+
                 return new EventCommand(title, from, to);
             } else if (input.startsWith(Commands.DEL.cmd())) {
-                int taskNo = getNumbers(input) - 1;
-                return new DeleteCommand(taskNo);
+                int taskNum = getNumbers(input) - 1;
+                return new DeleteCommand(taskNum);
             } else if (input.startsWith(Commands.FIND.cmd())) {
                 String query = input.substring(Commands.FIND.cmd().length());
                 return new FindCommand(query);

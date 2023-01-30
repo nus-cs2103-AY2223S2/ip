@@ -9,15 +9,15 @@ import duke.Ui;
  * Command: mark the item as undone
  */
 public class UnmarkCommand extends Command {
-    private int taskNo;
+    private int taskNum;
 
     /**
      * Creates the command to unmark task as done
      *
-     * @param taskNo int index of task in the ArrayList
+     * @param taskNum int index of task in the ArrayList
      */
-    public UnmarkCommand(int taskNo) {
-        this.taskNo = taskNo;
+    public UnmarkCommand(int taskNum) {
+        this.taskNum = taskNum;
     }
 
     /**
@@ -29,8 +29,8 @@ public class UnmarkCommand extends Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.get(taskNo).unmarkAsDone();
-        ui.showUnmarkDone(tasks, taskNo);
+        tasks.get(taskNum).markAsUndone();
+        ui.showUnmarkDone(tasks, taskNum);
         storage.save(tasks);
     }
 

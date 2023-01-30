@@ -58,13 +58,13 @@ public class TaskList {
      * @return ArrayList of found task
      */
     public ArrayList<Task> search(String query) {
-        ArrayList<Task> result = new ArrayList<Task>();
+        ArrayList<Task> results = new ArrayList<Task>();
         for (Task task : this.tasksList) {
             if (task.getTitle().toLowerCase().contains(query.trim().toLowerCase())) {
-                result.add(task);
+                results.add(task);
             }
         }
-        return result;
+        return results;
     }
 
     /**
@@ -86,10 +86,10 @@ public class TaskList {
     /**
      * Removes the task given the index of it
      *
-     * @param taskNo int index of task in the ArrayList
+     * @param taskNum int index of task in the ArrayList
      */
-    public void remove(int taskNo) {
-        this.tasksList.remove(taskNo);
+    public void remove(int taskNum) {
+        this.tasksList.remove(taskNum);
     }
 
     /**

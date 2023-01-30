@@ -10,14 +10,14 @@ import duke.task.Task;
  * Command: Deletes the Task given
  */
 public class DeleteCommand extends Command {
-    private int taskNo;
+    private int taskNum;
 
     /**
      * Creates Delete Command
-     * @param taskNo int index of task in the ArrayList
+     * @param taskNum int index of task in the ArrayList
      */
-    public DeleteCommand(int taskNo) {
-        this.taskNo = taskNo;
+    public DeleteCommand(int taskNum) {
+        this.taskNum = taskNum;
     }
 
     /**
@@ -29,8 +29,8 @@ public class DeleteCommand extends Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task delTask = tasks.get(taskNo);
-        tasks.remove(taskNo);
+        Task delTask = tasks.get(taskNum);
+        tasks.remove(taskNum);
         ui.showDel(delTask, tasks);
         storage.save(tasks);
     }
