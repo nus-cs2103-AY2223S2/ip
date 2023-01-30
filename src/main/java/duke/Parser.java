@@ -85,6 +85,15 @@ public class Parser {
             tasks.deleteTask(numToDelete);
             storage.save(tasks);
             break;
+        case "search":
+            String searchStr;
+            try {
+                searchStr = inputCommand.split(" ", 2)[1];
+            } catch (Exception e) {
+                throw new DukeException("Description of todo cannot be empty!!");
+            }
+            tasks.searchTask(searchStr);
+            break;
         case "Storage":
             //System.out.println("I RAN HERE!");
             tasks = storage.load();

@@ -5,7 +5,7 @@ public abstract class Task {
     /** Boolean used to determine if the task is completed or not. */
     protected boolean isDone = false;
     /** String used to assign the name of the task. */
-    private String name;
+    protected String name;
 
     /**
      * Constructor for the Task class.
