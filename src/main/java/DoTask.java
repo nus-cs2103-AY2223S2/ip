@@ -36,8 +36,6 @@ class DoTask extends Event {
         } else {
             try {
                 UserInputException.checkUserInput(nextTask, this.taskList.getSize());
-
-
                 if (nextTask.equals("LIST")) {
                     return new DoTask(false, nextTask, this.taskList);
                 } else {
