@@ -45,9 +45,9 @@ public class Duke {
             String[] args = command.split(" ");
             switch (args[0]) {
                 case "bye":
-                    prettyPrint("Saving state, please wait...");
+                    systemPrint("Saving state, please wait...");
                     saveState();
-                    prettyPrint("State successfully saved.");
+                    systemPrint("State successfully saved.");
                     prettyPrint("Hope I helped. Goodbye!");
                     return false;
                 case "mark":
@@ -155,36 +155,40 @@ public class Duke {
         System.out.println(">>> " + output);
     }
 
+    private static void systemPrint(String output) {
+        System.out.println("... " + output);
+    }
+
     private static void loadState() {
-        prettyPrint("Loading saved data...");
+        systemPrint("Loading saved data...");
 
         File dir = new File(SAVE_FILE_PATH);
         if (!dir.exists()) {
-            prettyPrint("data directory not found! Creating it now...");
+            systemPrint("data directory not found! Creating it now...");
             if (dir.mkdirs()) {
-                prettyPrint("Successfully created data directory!");
+                systemPrint("Successfully created data directory!");
             }
         }
 
         if (!saveFile.exists()) {
-            prettyPrint("Save file not found! Creating it now...");
+            systemPrint("Save file not found! Creating it now...");
             try {
                 saveFile.createNewFile();
             } catch (IOException e) {
-                prettyPrint("I/O failed: " + e.toString() + ". Data will not be saved!");
+                systemPrint("I/O failed: " + e.toString() + ". Data will not be saved!");
                 return;
             } catch (SecurityException e) {
-                prettyPrint("Write access denied by security manager. Data will not be saved!");
+                systemPrint("Write access denied by security manager. Data will not be saved!");
                 return;
             }
-            prettyPrint("Successfully created save file!");
+            systemPrint("Successfully created save file!");
         } else {
             try {
                 Scanner saveFileScanner = new Scanner(saveFile);
                 while (saveFileScanner.hasNext()) {
                     tasks.add(Task.parseCsvString(saveFileScanner.nextLine()));
                 }
-                prettyPrint("Save file loaded successfully!");
+                systemPrint("Save file loaded successfully!");
             } catch (FileNotFoundException e) {
                 // should not happen since we checked for file existence beforehand
                 System.out.println("Unexpected error occurred - save file not found. Data will not be saved!");
