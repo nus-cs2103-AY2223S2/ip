@@ -3,7 +3,7 @@ package chungus;
 /**
  * An exception related to the Chungus app.
  */
-class ChungusException extends RuntimeException {
+public class ChungusException extends RuntimeException {
     public ChungusException(String msg) {
         super(msg);
     }

@@ -26,9 +26,7 @@ interface Handler {
      * @param tasks The current full list of tasks.
      */
     public static void reportNewTask(Task task, Ui ui, TaskList tasks) {
-        ui.info("Okay, I've added this task:");
-        ui.info("  %s", task);
-        ui.info("Now you have %d %s.", tasks.count(), tasks.count() == 1 ? "task" : "tasks");
+        ui.info("Okay, I've added this task:\n  %s\nNow you have %d task(s).", task, tasks.count());
     }
 
     /**
@@ -39,22 +37,7 @@ interface Handler {
      * @param tasks The current full list of tasks.
      */
     public static void reportDeletedTask(Task task, Ui ui, TaskList tasks) {
-        ui.info("Okay, I've deleted this task:");
-        ui.info("  %s", task);
-        ui.info("Now you have %d %s.", tasks.count(), tasks.count() == 1 ? "task" : "tasks");
-    }
-
-    /**
-     * Prints each task in a list, with two spaces of indentation. Just a
-     * convenience method.
-     * 
-     * @param tasks The list of tasks.
-     * @param ui    The Ui instance to use.
-     */
-    public static void printTasksIndented(TaskList tasks, Ui ui) {
-        tasks.forEach((task, idx) -> {
-            ui.info("  %d.%s", idx + 1, task);
-        });
+        ui.info("Okay, I've deleted this task:\n  %s\nNow you have %d task(s).", task, tasks.count());
     }
 }
 
@@ -81,8 +64,8 @@ class Handlers {
      */
     public static Handler list() {
         return (TaskList tasks, Ui ui, Storage storage) -> {
-            ui.info("Here are the tasks in your list:");
-            Handler.printTasksIndented(tasks, ui);
+            ui.info("Here are the tasks in your list:\n%s", tasks);
+            // Handler.printTasksIndented(tasks, ui);
             return false;
         };
     }
@@ -150,8 +133,7 @@ class Handlers {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             tasks.setDone(idx);
 
-            ui.info("Okay, I've marked this task as completed:");
-            ui.info("  %s", tasks.get(idx));
+            ui.info("Okay, I've marked this task as completed:\n  %s", tasks.get(idx));
 
             return false;
         };
@@ -167,8 +149,7 @@ class Handlers {
         return (TaskList tasks, Ui ui, Storage storage) -> {
             tasks.setNotDone(idx);
 
-            ui.info("Okay, I've marked this task as incomplete:");
-            ui.info("  %s", tasks.get(idx));
+            ui.info("Okay, I've marked this task as incomplete:\n  %s", tasks.get(idx));
 
             return false;
         };
@@ -201,8 +182,7 @@ class Handlers {
             if (filtered.count() == 0) {
                 ui.info("No task matching the term \"%s\" found.", searchTerm);
             } else {
-                ui.info("Here are your task(s) containing the term \"%s\":", searchTerm);
-                Handler.printTasksIndented(filtered, ui);
+                ui.info("Here are your task(s) containing the term \"%s\":\n%s", searchTerm, filtered);
             }
             return false;
         };

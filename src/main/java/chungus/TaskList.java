@@ -125,6 +125,13 @@ class TaskList {
     }
 
     @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        forEach((task, idx) -> sb.append(String.format("  %d.%s\n", idx + 1, task)));
+        return sb.toString();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (!(other instanceof TaskList)) {
             return false;
