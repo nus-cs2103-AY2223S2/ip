@@ -21,7 +21,6 @@ public class Parser {
                 //print List
                 if (input.equals("list")) {
                     taskList.getList();
-                    input = scanner.nextLine();
                 } else {
                     //split into 2, first part is duke.task type, second part is instruction
                     String[] parts = input.split(" ", 2);
@@ -36,6 +35,9 @@ public class Parser {
                             break;
                         case "delete":
                             taskList.deleteTask(parts);
+                            break;
+                        case "find":
+                            taskList.find(parts);
                             break;
                         case "todo":
                         case "deadline":
