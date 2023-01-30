@@ -1,11 +1,8 @@
 package duke;
 
-<<<<<<< HEAD
-
 /**
  * A task type that the chatting bot can create.
  */
->>>>>>> branch-A-JavaDoc
 public class Todos extends Task {
 
     /**

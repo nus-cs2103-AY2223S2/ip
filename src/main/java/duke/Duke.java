@@ -1,12 +1,10 @@
 package duke;
 
-<<<<<<< HEAD
 import duke.commands.Command;
 
 /**
  * The main class of this chatting bot programme.
  */
->>>>>>> branch-A-JavaDoc
 public class Duke {
 
     private Storage storage;
