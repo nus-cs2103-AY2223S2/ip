@@ -51,9 +51,7 @@ public class Result<T> {
 
     public <U> U match(Function<? super Pair<? extends T, String>, ? extends U> okFunction,
             Function<? super String, ? extends U> errorFunction) {
-        return this.result.match(
-                pr -> okFunction.apply(pr),
-                msg -> errorFunction.apply(msg));
+        return this.result.match(okFunction, errorFunction);
     }
 
     public <U> Result<U> map(Function<? super T, ? extends U> f) {
