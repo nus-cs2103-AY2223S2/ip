@@ -60,7 +60,7 @@ public class Parser {
      * @param item The item to find.
      * @return Index of item if present; -1 otherwise.
      */
-    public static int indexOf(String[] arr, String item) {
+    public static int getIndexOf(String[] arr, String item) {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i].equals(item)) {
                 return i;

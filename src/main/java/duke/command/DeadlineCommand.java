@@ -17,7 +17,7 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList list, String command) throws DukeException {
         String[] parts = command.split("\\s+");
-        int byIndex = Parser.indexOf(parts, "/by");
+        int byIndex = Parser.getIndexOf(parts, "/by");
 
         // Get name of task.
         StringBuilder taskName = new StringBuilder();
