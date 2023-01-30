@@ -13,6 +13,8 @@ public interface Either<L, R> {
 
     public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, R>> f);
 
+    public <T> T match(Function<? super L, ? extends T> l, Function<? super R, ? extends T> r);
+
     public static <L, R> Either<L, R> left(L l) {
         return new Either<L, R>() {
             private final L left = l;
@@ -55,6 +57,11 @@ public interface Either<L, R> {
                 }
                 return Either.right(temp.fromRight(null));
             }
+
+            @Override
+            public <T> T match(Function<? super L, ? extends T> l, Function<? super R, ? extends T> r) {
+                return l.apply(this.left);
+            }
         };
     }
 
@@ -95,6 +102,11 @@ public interface Either<L, R> {
             @Override
             public <T> Either<T, R> flatMap(Function<? super L, ? extends Either<? extends T, R>> f) {
                 return Either.<T, R>right(this.right);
+            }
+
+            @Override
+            public <T> T match(Function<? super L, ? extends T> l, Function<? super R, ? extends T> r) {
+                return r.apply(this.right);
             }
         };
     }
