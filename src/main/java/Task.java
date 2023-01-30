@@ -28,16 +28,22 @@ public abstract class Task {
 
     public static Task parseCsvString(String csvString) {
         String[] arguments = csvString.split(",");
+        Task result = null;
         switch (arguments[0]) {
         case "D":
-            return new Deadline(arguments[1], arguments[2]);
+            result = new Deadline(arguments[1], arguments[3]);
+            break;
         case "T":
-            return new ToDo(arguments[1]);
+            result = new ToDo(arguments[1]);
+            break;
         case "E":
-            return new Event(arguments[1], arguments[2], arguments[3]);
+            result = new Event(arguments[1], arguments[3], arguments[4]);
+            break;
         default:
             return null;
         }
+        result.done = Boolean.parseBoolean(arguments[2]);
+        return result;
     }
 
 }

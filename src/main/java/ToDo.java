@@ -10,6 +10,6 @@ public class ToDo extends Task {
 
     @Override
     public String getCsvString() {
-        return String.format("T,%s,%s", super.toString());
+        return String.format("T,%s", super.getCsvString());
     }
 }

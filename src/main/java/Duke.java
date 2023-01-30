@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
@@ -43,6 +44,7 @@ public class Duke {
             switch (args[0]) {
                 case "bye":
                     prettyPrint("Hope I helped. Goodbye!");
+                    saveState();
                     return false;
                 case "mark":
                     // todo: check if second argument is a valid number
@@ -95,6 +97,9 @@ public class Duke {
                             tasks.size(), tasks.size() == 1 ? "" : "s"));
                     return true;
                 case "list":
+                    if (tasks.size() == 0) {
+                        prettyPrint("No tasks found!");
+                    }
                     for (int i = 1; i <= tasks.size(); i++) {
                         prettyPrint(String.format("%d. %s", i, tasks.get(i - 1)));
                     }
@@ -165,6 +170,21 @@ public class Duke {
         }
     }
     private static void saveState() {
-
+        // will save entire `tasks` list for now, will make it more specific
+        // in later iterations
+        try {
+            FileWriter saveFileWriter = new FileWriter(saveFile, false);
+            for (int i = 0; i < tasks.size(); i++) {
+                saveFileWriter.write(tasks.get(i).getCsvString());
+                // add line separator if not last Task in `tasks`
+                if (i < tasks.size() - 1) {
+                    saveFileWriter.write(System.lineSeparator());
+                }
+            }
+            saveFileWriter.close();
+        } catch (IOException e) {
+            prettyPrint("I/O failed: " + e.toString() + ". Data will not be saved!");
+            return;
+        }
     }
 }

@@ -14,6 +14,6 @@ public class Event extends Task {
 
     @Override
     public String getCsvString() {
-        return String.format("E,%s,%s,%s", super.toString(), this.from, this.to);
+        return String.format("E,%s,%s,%s", super.getCsvString(), this.from, this.to);
     }
 }

@@ -12,7 +12,7 @@ public class Deadline extends Task {
 
     @Override
     public String getCsvString() {
-        return String.format("D,%s,%s", super.toString(), this.by);
+        return String.format("D,%s,%s", super.getCsvString(), this.by);
     }
 }
 
