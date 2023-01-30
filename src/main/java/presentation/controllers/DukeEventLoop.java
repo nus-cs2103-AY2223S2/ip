@@ -1,0 +1,81 @@
+package presentation.controllers;
+
+import core.singletons.Singletons;
+import domain.entities.DataLoader;
+import domain.entities.core.*;
+import domain.usecases.ByeUsecase;
+import domain.usecases.TaskManagerUsecase;
+import domain.usecases.UnknownCommandUsecase;
+import presentation.ui.DummyWritable;
+import presentation.ui.SystemErr;
+import presentation.ui.SystemIn;
+import presentation.ui.SystemOut;
+
+/**
+ * The event loop for managing Duke.
+ * <p>
+ * To initialize and facilitate reading data from persistence, use the {@link
+ * #createInitializingLoop()} method.
+ * <p>
+ * To create the actual main event loop, use the {@link #createEventLoop()}
+ * method.
+ */
+public class DukeEventLoop extends EventLoop {
+    /**
+     * Creates a {@link DukeEventLoop} instance.
+     *
+     * @param rootCommandable the root executable that this event loop would
+     *                        iterate over and over again.
+     * @param reader          the reader that this event loop would read from.
+     * @param errorWriter     the error writer that this event loop would write
+     *                        errors to.
+     */
+    private DukeEventLoop(Commandable rootCommandable, StringReadable reader,
+                          Writable errorWriter) {
+        super(rootCommandable, reader, errorWriter);
+    }
+
+    /**
+     * Creates the main event loop for Duke.
+     *
+     * @return the main event loop for Duke.
+     */
+    public static DukeEventLoop createEventLoop() {
+        // creates a new system in instance. We want to make sure that
+        // the scanner is not closed for each event loop, because scanners
+        // are managed by the event loops.
+        final StringReadable reader = new SystemIn();
+        Writable errorWriter = Singletons.get(SystemErr.class);
+        final NestedCommandableObject executable =
+                new NestedCommandableObject(errorWriter);
+        final ByeUsecase bye = Singletons.get(ByeUsecase.class);
+        bye.register(executable);
+        final TaskManagerUsecase manager =
+                Singletons.get(TaskManagerUsecase.class);
+        manager.redirectOutput(Singletons.get(SystemOut.class));
+        manager.register(executable);
+        final UnknownCommandUsecase unknown =
+                Singletons.get(UnknownCommandUsecase.class);
+        unknown.register(executable);
+        final NestedCommandableObject rootExecutable =
+                new NestedCommandableObject(errorWriter);
+        return new DukeEventLoop(executable, reader, errorWriter);
+    }
+
+    /**
+     * Creates the event loop for initializing Duke.
+     *
+     * @return the event loop for initializing Duke.
+     */
+    public static DukeEventLoop createInitializingLoop() {
+        final StringReadable readable = Singletons.get(DataLoader.class);
+        final Writable errorWriter = Singletons.get(SystemErr.class);
+        final NestedCommandableObject executable =
+                new NestedCommandableObject(errorWriter);
+        final TaskManagerUsecase manager =
+                Singletons.get(TaskManagerUsecase.class);
+        manager.redirectOutput(Singletons.get(DummyWritable.class));
+        manager.registerReader(executable);
+        return new DukeEventLoop(executable, readable, errorWriter);
+    }
+}
