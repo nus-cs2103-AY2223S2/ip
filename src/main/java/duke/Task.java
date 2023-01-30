@@ -1,20 +1,34 @@
 package duke;
 
+
 import java.util.ArrayList;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected String taskType = "T";
     static String divider = "    ────────────── ⋆⋅☆⋅⋆ ───────────────";
 
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
+
+    public Task(boolean isDone, String description) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+    
+
+    public abstract String saveFormat();
 
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
+    }
+
+    public boolean getIsDone() {
+        return isDone;
     }
 
     public void markAsDone() {
@@ -26,7 +40,7 @@ public class Task {
     }
 
     public String toString() {
-        return  "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "]" +  this.description;
     }
 
     public static void displayList(ArrayList<Task> array) {
@@ -61,4 +75,5 @@ public class Task {
         System.out.println("      Now you have " + array.size() + " tasks in the list.");
         System.out.println(divider);
     }
+
 }

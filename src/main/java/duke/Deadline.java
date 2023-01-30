@@ -1,7 +1,9 @@
 package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 
 
@@ -15,17 +17,26 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        this.taskType = "D";
     }
+
 
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by.format(DateTimeFormatter.ofPattern("MMM d yyyy")).toString();
     }
 
+    public Deadline(Boolean isDone, String description, String by) {
+        super(isDone, description);
+        this.by = by;
+
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";
     }
+
+    
 
     public static void createDeadlineTask(ArrayList<Task> array, String[] splitInput) {
         if (splitInput.length == 1 || splitInput[1].equals("")){
@@ -52,6 +63,7 @@ public class Deadline extends Task {
                
             String date = splitInput[splitInput.length-1];
             String desc = splitInput[1];
+
 
             if(isDate(date)){
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
@@ -88,6 +100,26 @@ public class Deadline extends Task {
     
         }
     
-        return true;
+
+            Deadline d = new Deadline(desc, date);
+            array.add(d);
+            //Deadline.saveTaskData(d, 0);
+
+            System.out.println(divider);
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("     " + d.toString());
+            System.out.println("     Now you have " + array.size() + " tasks in the list.");
+            System.out.println(divider);
+           
+        }
+        
+    }
+   
+
+    @Override
+    public String saveFormat() {
+        String d = " | ";
+        int marked = this.getIsDone() ? 1 : 0;
+        return "D" + d + marked + d + description + d + by;
     }
 }

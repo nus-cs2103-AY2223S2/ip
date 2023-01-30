@@ -1,19 +1,34 @@
 package duke;
+
 import java.util.Scanner;
 
 
 import java.util.ArrayList;
+import java.io.IOException;
+
+ 
 
 
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+
      
         //print welcome message, ask for user input
         System.out.println("  ───── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ───── \n Hello! I'm Broccoli the dinosaur \n           <|°▿▿▿▿°|/ \n      What can I do for you? \n   ──── ･ ｡ﾟ☆: *.☽ .* :☆ﾟ. ────" ); 
         //getInput();
+        
+
+
         ArrayList<Task> array=new ArrayList<Task>();
         String divider = "    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══";
+        
+        try {
+            SaveData.loadFile(array);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         while (true) {
             String[] splitInput = getInput();
@@ -61,7 +76,14 @@ public class Duke {
                     System.out.println(divider);
                 }
             }
+            try {
+                SaveData.saveToFile(array);
+            } catch (Exception e) {
+               System.out.println(e.getMessage());
+            }
         }
+
+       
         
 
     }

@@ -1,0 +1,4 @@
+D | 0 | hi | now
+E | 0 | gello |  now |  tomorrow
+T | 1 | hellloo
+T | 0 | hello
