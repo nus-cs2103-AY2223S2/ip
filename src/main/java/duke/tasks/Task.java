@@ -1,8 +1,9 @@
-package tasks;
+package duke.tasks;
 
 public class Task {
     private String description;
-    private boolean status; // false meaning not done yet
+    private boolean status;
+
     public Task(String description) {
         this.description = description;
         this.status = false;

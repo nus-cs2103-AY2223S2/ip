@@ -1,4 +1,5 @@
-T | 0 | hello
-T | 0 | hey
-E | 0 | hi | 6pm-8pm
-D | 0 | ok | sun
+T | 1 | hey
+D | 1 | ok | 2023-01-30
+T | 0 | learn korean
+E | 1 | date | 2023-01-30 10:45 to 2023-01-30 11:45
+D | 0 | run | 2023-01-18
