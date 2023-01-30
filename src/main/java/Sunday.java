@@ -1,3 +1,8 @@
+import command.Command;
+import exceptions.SundayException;
+import utilities.Parser;
+import utilities.Ui;
+
 public class Sunday {
     private Ui ui;
     public Sunday(String filepath) {

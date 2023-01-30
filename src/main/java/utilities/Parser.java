@@ -1,3 +1,7 @@
+package utilities;
+import command.Command;
+import exceptions.SundayException;
+
 public class Parser {
     public static Command parse(String[] fullCommand) throws SundayException {
         try {

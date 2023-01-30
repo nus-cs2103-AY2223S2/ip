@@ -1,3 +1,6 @@
+package utilities;
+import command.Command;
+import exceptions.SundayException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,13 +8,12 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    private static String filepath = "Individual Project/data/sunday.txt";
+    private static String filepath = "data/sunday.txt";
     public static boolean createDataFile() throws SundayException {
         try {
             File dataFile = new File(filepath);
             return dataFile.createNewFile();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
             throw new SundayException("ERROR: Unable to initialise data file");
         }
     }
@@ -66,7 +68,6 @@ public class Storage {
             myWriter.close();
             return true;
         } catch (IOException e) {
-            System.out.println(e.getMessage());
             throw new SundayException("ERROR: Unable to write to data file");
         }
     }

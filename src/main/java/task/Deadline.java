@@ -1,16 +1,12 @@
+package task;
 import java.util.Date;
 import java.text.ParseException;
 
 public class Deadline extends Task{
     private Date deadline;
-    public Deadline(String description, String deadline) throws SundayException{
+    public Deadline(String description, String deadline) throws ParseException {
         super(description);
-        try {
-            this.deadline = super.readFormat.parse(deadline);
-        } catch (ParseException e) {
-            throw new SundayException(
-                    "OOPS! It appears the deadline given was not of the format dd/mm/yyyy hhmm");
-        }
+        this.deadline = super.readFormat.parse(deadline);
     }
     @Override
     public String save() {

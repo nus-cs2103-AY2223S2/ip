@@ -1,3 +1,13 @@
+package command;
+import collections.TaskList;
+import exceptions.SundayException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+import utilities.Ui;
+import java.text.ParseException;
+
 public enum Command {
     INITIALIZE ("init") {
         @Override
@@ -52,6 +62,9 @@ public enum Command {
                 throw new SundayException("OOPS!!! The description of a deadline cannot be empty.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! The description of this deadline is invalid.");
+            } catch (ParseException e) {
+                throw new SundayException(
+                        "OOPS! It appears the deadline given was not of the format dd/mm/yyyy hhmm");
             }
         }
     },
@@ -94,6 +107,9 @@ public enum Command {
                 throw new SundayException("OOPS!!! The description of an event cannot be empty.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! The description of this event is invalid.");
+            } catch (ParseException e) {
+                throw new SundayException(
+                        "OOPS! It appears the deadline given was not of the format dd/mm/yyyy hhmm");
             }
         }
     },
