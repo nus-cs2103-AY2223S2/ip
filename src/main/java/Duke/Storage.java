@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
 
 /**
- * Contains Storage object that deals with loading tasks from the file and saving tasks in the file
+ * Contains Storage object that deals with loading listOfTasks from the file and saving listOfTasks in the file
  */
 public class Storage {
     private final static DateTimeFormatter  timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -41,12 +41,12 @@ public class Storage {
     }
 
     /**
-     * The method readnWriteData for reading data from input file path and writing it/ storing it into Arraylist
+     * The method readnWriteData for reading data from input file path and writing it/ storing it into ArraylistOfTasks
      * @return ArrayList<Task>
      */
 
     public  ArrayList<Task> readnWriteData(){
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> listOfTasks = new ArrayList<>();
         try{
             File data = new File(file);
             Scanner sc = new Scanner(data);
@@ -59,7 +59,7 @@ public class Storage {
                 Task addedtask;
                 if (task.equals("T")) {
                     addedtask = new ToDo(description);
-                    list.add(addedtask);
+                    listOfTasks.add(addedtask);
                     if (indicator.equals("1")) {
                         addedtask.markDone();
                     }
@@ -67,7 +67,7 @@ public class Storage {
                 else if (task.equals("D")){
                     LocalDateTime Doneby = LocalDateTime.parse(segments[3],timeFormat);
                     addedtask = new Deadline(description, Doneby);
-                    list.add(addedtask);
+                    listOfTasks.add(addedtask);
                     if (indicator.equals("1")) {
                         addedtask.markDone();
                     }
@@ -76,7 +76,7 @@ public class Storage {
                     LocalDateTime from = LocalDateTime.parse(segments[3],timeFormat);
                     LocalTime to = LocalTime.parse(segments[4],HrFormat);
                     addedtask = new Events(description, from, to);
-                    list.add(addedtask);
+                    listOfTasks.add(addedtask);
                     if (indicator.equals("1")) {
                         addedtask.markDone();
                     }
@@ -86,18 +86,18 @@ public class Storage {
         catch (IOException | ArrayIndexOutOfBoundsException e){
             createDataFile();
         }
-        return list;
+        return listOfTasks;
     }
 
     /**
      * The method of saveData to save the data from a TaskList into file
-     * @param list
+     * @param listOfTasks
      */
 
-    public  void saveData(TaskList list) throws  IOException{
+    public  void saveData(TaskList listOfTasks) throws  IOException{
         FileWriter fwrite = new FileWriter("database/data.txt", false);
-        for (int i = 0; i < list.size(); i++) {
-            fwrite.write(list.get(i+1).changeFormat() + "\n");
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            fwrite.write(listOfTasks.get(i+1).changeFormat() + "\n");
         }
         fwrite.close();
     }

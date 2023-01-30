@@ -22,61 +22,61 @@ public class Parser {
     /**
      * The method for addTodo
      * @param description the description of task to do
-     * @param list the Tasklist where tasks are stored in
+     * @param listOfTasks the TasklistOfTasks where tasks are stored in
      */
-    private static void addTodo(String description, TaskList list) {
+    private static void addTodo(String description, TaskList listOfTasks) {
         ToDo tdItem = new ToDo(description);
-        list.addTask(tdItem);
+        listOfTasks.addTask(tdItem);
         System.out.println("\tGot it. I have added this task:\n" + "\t" + tdItem.toString());
-        System.out.printf("\tNow you have %d tasks in the list.\n", list.size());
+        System.out.printf("\tNow you have %d tasks in the listOfTasks.\n", listOfTasks.size());
     }
 
     /**
      * The method for addEvents
      * @param description of events task
-     * @param list Tasklist where task is going to be stored in
+     * @param listOfTasks TasklistOfTasks where task is going to be stored in
      * @param start the starting time of the event
      * @param end the ending time of the event
      */
-    private static void addEvents(String description, TaskList list, LocalDateTime start, LocalTime end) {
+    private static void addEvents(String description, TaskList listOfTasks, LocalDateTime start, LocalTime end) {
         Events evItem = new Events(description, start, end);
-        list.addTask(evItem);
+        listOfTasks.addTask(evItem);
         System.out.println("\tGot it. I have added this task:\n " + "\t" + evItem.toString());
-        System.out.printf("\tNow you have %d tasks in the list.\n", list.size());
+        System.out.printf("\tNow you have %d tasks in the listOfTasks.\n", listOfTasks.size());
     }
 
     /**
      * The method for addDeadline
      * @param description of deadline task
-     * @param list tasklist where task going to be stored in
+     * @param listOfTasks tasklistOfTasks where task going to be stored in
      * @param doneBy the time of deadline task
      */
 
-    private static void addDeadline(String description, TaskList list, LocalDateTime doneBy) {
+    private static void addDeadline(String description, TaskList listOfTasks, LocalDateTime doneBy) {
         Deadline dlItem = new Deadline(description, doneBy);
-        list.addTask(dlItem);
+        listOfTasks.addTask(dlItem);
         System.out.println("\tGot it. I have added this task:\n " + "\t" + dlItem.toString());
-        System.out.printf("\tYou have %d tasks in the list.\n\n", list.size());
+        System.out.printf("\tYou have %d tasks in the listOfTasks.\n\n", listOfTasks.size());
     }
 
     /**
      * The method for delete
      * @param number the
-     * @param list
+     * @param listOfTasks
      */
-    public static void delete(String number, TaskList list) {
-        Task removed = list.get(Integer.parseInt(number.split(" ")[1]) );
+    public static void delete(String number, TaskList listOfTasks) {
+        Task removed = listOfTasks.get(Integer.parseInt(number.split(" ")[1]) );
         int nummbering = Integer.parseInt(number.split(" ")[1]);
-        list.removeTask(nummbering);
+        listOfTasks.removeTask(nummbering);
         Ui.Underline();
         Ui.showDeleteMessage();
         System.out.println(String.format("\t%s removed", removed.toString()));
-        System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+        System.out.println("\tNow you have " + listOfTasks.size() + " tasks in the listOfTasks.");
     }
-    public static void findTask(TaskList list, String wantedTask) {
+    public static void findTask(TaskList listOfTasks, String wantedTask) {
         ArrayList<Task> containingList = new ArrayList<>();
-        for (int i = 1; i <= list.size(); i++) {
-            Task task = list.get(i);
+        for (int i = 1; i <= listOfTasks.size(); i++) {
+            Task task = listOfTasks.get(i);
             if (task.contains(wantedTask)) {
                 containingList.add(task);
             }
@@ -85,7 +85,7 @@ public class Parser {
             System.out.println("\tSorry you have no matching tasks.\n");
             return;
         }
-        System.out.println("\tHere are the matching tasks in your list:");
+        System.out.println("\tHere are the matching tasks in your listOfTasks:");
         for (int i = 1; i <= containingList.size(); i++) {
             System.out.println("\t" + i + "." + containingList.get(i - 1));
 
@@ -99,17 +99,17 @@ public class Parser {
     /**
      * The method for parse which makes sense of the user input and execute the correct actions
      * @param instct the reader input to parse
-     * @param list Tasklist  which actions are to be performed on
+     * @param listOfTasks TasklistOfTasks  which actions are to be performed on
      * @return int of -1 if bye instruct is parsed else 1 is return to signal program to continue running
      */
-    public static int parse(String instct, TaskList list) throws  IOException  {
+    public static int parse(String instct, TaskList listOfTasks) throws  IOException  {
         String cmd = instct.split(" ")[0];
         try {
-            if (instct.split(" ")[0].equals("list") ) {
+            if (instct.split(" ")[0].equals("listOfTasks") ) {
                 Ui.Underline();
                 Ui.listMsg();
-                for (int i = 0; i < list.size(); i++) {
-                    System.out.println("\t" + (i + 1) + "." + list.get(i+1).toString());
+                for (int i = 0; i < listOfTasks.size(); i++) {
+                    System.out.println("\t" + (i + 1) + "." + listOfTasks.get(i+1).toString());
                 }
                 Ui.Underline();
 
@@ -118,27 +118,27 @@ public class Parser {
                 Ui.sayBye();
                 return -1;
             }
-            else if ((instct.split(" ").length) > 1 && !instct.split(" ")[0].equals("list")) {
+            else if ((instct.split(" ").length) > 1 && !instct.split(" ")[0].equals("listOfTasks")) {
                 if (instct.split(" ")[0].equals("mark")) {
                     int numbering = Integer.parseInt(instct.split(" ")[1]) ;
                     Ui.Underline();
                     Ui.markedMessage();
-                    list.markDone(numbering);
-                    System.out.println("\t" + list.get(numbering).toString());
+                    listOfTasks.markDone(numbering);
+                    System.out.println("\t" + listOfTasks.get(numbering).toString());
                     Ui.Underline();
 
                 } else if (instct.split(" ")[0].equals("unmark")) {
                     int numbering = Integer.parseInt(instct.split(" ")[1]);
                     Ui.Underline();
                     Ui.unMarkedMessage();
-                    list.markNotDone(numbering);
-                    System.out.println("\t" + list.get(numbering).toString());
+                    listOfTasks.markNotDone(numbering);
+                    System.out.println("\t" + listOfTasks.get(numbering).toString());
                     Ui.Underline();
 
                 } else if (instct.split(" ")[0].equals("todo")) {
                     Ui.Underline();
                     String description = instct.split(" ")[1];
-                    addTodo(description, list);
+                    addTodo(description, listOfTasks);
                     Ui.Underline();
 
 
@@ -147,7 +147,7 @@ public class Parser {
                     String description = instct.split(" ")[1];
                     String temp = instct.split(" /by ")[1];
                     LocalDateTime doneBy = LocalDateTime.parse(temp, timeFormat);
-                    addDeadline(description, list, doneBy);
+                    addDeadline(description, listOfTasks, doneBy);
                     Ui.Underline();
 
 
@@ -157,20 +157,20 @@ public class Parser {
                     String[] temp = instct.split("/from | /to ");
                     LocalDateTime from = LocalDateTime.parse(temp[1], timeFormat);
                     LocalTime to = LocalTime.parse(temp[2], HrFormat);
-                    addEvents(description, list, from, to);
+                    addEvents(description, listOfTasks, from, to);
                     Ui.Underline();
 
 
                 } else if (instct.split(" ")[0].equals("delete")) {
 
-                    delete(instct, list);
+                    delete(instct, listOfTasks);
                     Ui.Underline();
 
 
                 } else if (instct.split(" ")[0].equals("find")) {
                     Ui.Underline();
                     String wantedTask = instct.split(" ")[1];
-                    findTask(list, wantedTask);
+                    findTask(listOfTasks, wantedTask);
                     Ui.Underline();
 
                 } else {

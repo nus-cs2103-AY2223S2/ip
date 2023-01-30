@@ -1,6 +1,8 @@
 
 package Duke.Tasks;
-
+/**
+ * Contains the ToDo class
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
