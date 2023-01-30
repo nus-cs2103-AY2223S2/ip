@@ -105,16 +105,6 @@ public class Wessy {
         return tasks[firstUnusedIdx - 1];
     }
 
-    static Task addDeadline(String description, String by) {
-        tasks[firstUnusedIdx++] = new Deadline(description, by);
-        return tasks[firstUnusedIdx - 1];
-    }
-
-    static Task addEvent(String description, String from, String to) {
-        tasks[firstUnusedIdx++] = new Event(description, from, to);
-        return tasks[firstUnusedIdx - 1];
-    }
-
     static void printList() {
         System.out.println(OPENING_LINE);
         if (firstUnusedIdx == 0) {
