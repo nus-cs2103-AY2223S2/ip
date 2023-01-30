@@ -6,7 +6,7 @@ import duke.exceptions.DukeExceptions;
 import duke.exceptions.InvalidIndexException;
 
 public class TaskList {
-    private static ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
 

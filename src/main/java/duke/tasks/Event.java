@@ -1,5 +1,6 @@
 package duke.tasks;
-import java.time.*;
+
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
@@ -14,28 +15,28 @@ public class Event extends Task {
         this.eventEnd = eventEnd;
     }
 
+    public static DateTimeFormatter getEventFormatter() {
+        return EVENT_FORMAT;
+    }
+
     @Override
     public String getDataString() {
         return "E | " + super.getDataString() + " | " + this.eventStart.format(getEventFormatter()) + " to "
                 + this.eventEnd.format(getEventFormatter());
     }
 
-    public static DateTimeFormatter getEventFormatter() {
-        return EVENT_FORMAT;
-    }
-
     @Override
     public String toString() {
         String timeFrame;
-        if((eventStart.getYear() == eventEnd.getYear()) && (eventStart.getDayOfYear() == eventEnd.getDayOfYear())) { // event on same day
+        if((eventStart.getYear() == eventEnd.getYear()) && (eventStart.getDayOfYear() == eventEnd.getDayOfYear())) {
             timeFrame = eventStart.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)) + " " +
-                    eventStart.getHour() + ":" + eventStart.getMinute() +
-                    " to: " + eventEnd.getHour() + ":" + eventEnd.getMinute() + ")";
+                    eventStart.format(DateTimeFormatter.ofPattern("HH:mm")) + " to: " +
+                    eventEnd.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
         } else {
             timeFrame = eventStart.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)) + " " +
-                    eventStart.getHour() + ":" + eventStart.getMinute() +
-                    " to: " + eventEnd.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)) + " " +
-                    eventEnd.getHour() + ":" + eventEnd.getMinute() + ")";
+                    eventStart.format(DateTimeFormatter.ofPattern("HH:mm")) + " to: " +
+                    eventEnd.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)) + " " +
+                    eventEnd.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
         }
         return "[E]" + super.toString() + " (from: " + timeFrame;
     }

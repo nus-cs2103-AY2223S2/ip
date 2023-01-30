@@ -10,7 +10,6 @@ public class Ui {
         System.out.println("｡ﾟﾟ･｡･ﾟﾟ｡\n" + "。 welcome to tigerlily to-do\n" + "　ﾟ･｡･ﾟ\n"
                 + "✎ . . . . add your tasks here");
     }
-
     public void showGoodbye() {
         System.out.println("\n(\\\\ (\\\\ \n" + "(„• ֊ •„)\n" + "━━O━O━━━━━━━━━━━━━━━\n" +
                 "bye, see you again soon!\n" + "━━━━━━━━━━━━━━━━━━━━\n");
