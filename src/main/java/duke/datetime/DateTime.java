@@ -11,11 +11,14 @@ import java.time.format.FormatStyle;
  */
 public class DateTime {
 
-    /** date of the instance */
-    private LocalDate date;
+    /** Raw date time */
+    private final String raw;
 
-    /** time of the instance */
-    private LocalTime time;
+    /** Date of the instance */
+    private final LocalDate date;
+
+    /** Time of the instance */
+    private final LocalTime time;
 
     /**
      * An instance of date and time.
@@ -24,7 +27,7 @@ public class DateTime {
      * @throws IllegalArgumentException When input is not of correct format.
      */
     public DateTime(String input) throws IllegalArgumentException {
-
+        raw = input;
         String[] splitInput = input.split(" ");
         if (splitInput.length != 2) {
             throw new IllegalArgumentException("Invalid format for date and time, "
@@ -32,6 +35,15 @@ public class DateTime {
         }
         date = parseDate(splitInput[0]);
         time = parseTime(splitInput[1]);
+    }
+
+    /**
+     * Returns the raw date time passed into the constructor of this datetime instance.
+     *
+     * @return Raw date time of this datetime instance.
+     */
+    public String getRaw() {
+        return raw;
     }
 
     /**

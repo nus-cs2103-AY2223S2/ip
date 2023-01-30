@@ -28,7 +28,7 @@ public class TaskList {
      *
      * @param scanner Scanner to read saved tasks from.
      */
-    public void load(Scanner scanner) {
+    public void load(Scanner scanner) throws IOException {
         while (scanner.hasNextLine()) {
             parseTask(scanner.nextLine());
         }
@@ -39,11 +39,12 @@ public class TaskList {
      *
      * @param input Input string.
      */
-    private void parseTask(String input) {
+    private void parseTask(String input) throws IOException {
         try {
             execute(Parser.parse(input));
         } catch (IllegalArgumentException e) {
-            System.out.println("Task list on disk corrupted!"
+            e.printStackTrace();
+            throw new IOException("Task list on disk corrupted!"
                     + " Some tasks might be missing or incorrect.");
         }
     }
@@ -108,7 +109,7 @@ public class TaskList {
      * Finds tasks that match a keyword.
      *
      * @param keyword Keyword to match.
-     * @return
+     * @return String representation of list of matched tasks.
      */
     public String findAll(String keyword) {
         StringBuilder result = new StringBuilder();

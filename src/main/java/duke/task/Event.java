@@ -35,7 +35,7 @@ public class Event extends Task {
     @Override
     public String getRecreateCommand(int id) {
         String result = "event " + description + " /from "
-                + from + " /to " + to;
+                + from.getRaw() + " /to " + to.getRaw();
         if (isDone) {
             result += "\nmark " + id;
         }
