@@ -1,18 +1,39 @@
 package duke.command;
 
+import duke.command.exceptions.InvalidParameterError;
+import duke.command.utils.DateTimeStringParser;
 import duke.interfaces.Command;
 import duke.interfaces.Model;
 import duke.interfaces.View;
+import duke.model.TaskModel;
+import duke.view.TaskView;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class ListTasksCommand implements Command {
-    private final Model taskModel;
-    private final View taskView;
-    ListTasksCommand(Model taskModel, View taskView) {
+    private final TaskModel taskModel;
+    private final TaskView taskView;
+
+    private LocalDateTime offset = null;
+    ListTasksCommand(TaskModel taskModel, TaskView taskView) {
         this.taskModel = taskModel;
         this.taskView = taskView;
     }
+
+    ListTasksCommand(TaskModel taskModel, TaskView taskView, String timeOffset) throws InvalidParameterError {
+        this.taskModel = taskModel;
+        this.taskView = taskView;
+        LocalTime defaultTime = LocalTime.MAX;
+        this.offset = DateTimeStringParser.parseDateTimeString(timeOffset, defaultTime);
+    }
     @Override
     public void execute() {
-        taskView.renderTasks(taskModel.getTasks());
+        if (offset != null) {
+
+            taskView.renderTasks(taskModel.getTasksOn(offset));
+        } else {
+            taskView.renderTasks(taskModel.getTasks());
+        }
     }
 }

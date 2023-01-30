@@ -3,8 +3,7 @@ package duke.model;
 import duke.interfaces.Model;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,14 +47,14 @@ public class TaskModel implements Model {
         return newTask;
     }
 
-    public Task createTask(String description, String deadline) {
+    public Task createTask(String description, LocalDateTime deadline) {
         Task newTask = new Deadline(description, deadline);
         this.tasks.add(newTask);
         writeToFile();
         return newTask;
     }
 
-    public Task createTask(String description, String startTime, String endTime) {
+    public Task createTask(String description, LocalDateTime startTime, LocalDateTime endTime) {
         Task newTask = new Event(description, startTime, endTime);
         this.tasks.add(newTask);
         writeToFile();
@@ -67,6 +66,16 @@ public class TaskModel implements Model {
         return this.tasks;
     }
 
+    public List<Task> getTasksOn(LocalDateTime time) {
+        // only deadlines and events
+        List<Task> res = new ArrayList<>();
+        for (Task task: this.tasks) {
+            if (task.isDueOn(time)) {
+                res.add(task);
+            }
+        }
+        return res;
+    }
     public Task getTask(int index) {
         return this.tasks.get(index); // out of bounds exception
     }

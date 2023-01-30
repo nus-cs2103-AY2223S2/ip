@@ -1,6 +1,6 @@
 package duke.model;
 
-
+import java.time.LocalDateTime;
 import java.io.Serializable;
 
 public abstract class Task implements Serializable {
@@ -29,5 +29,9 @@ public abstract class Task implements Serializable {
         } else {
             return "[ ] " + this.taskDescription;
         }
+    }
+
+    boolean isDueOn(LocalDateTime time) {
+        return false; // general tasks don't have a specific deadline
     }
 }
