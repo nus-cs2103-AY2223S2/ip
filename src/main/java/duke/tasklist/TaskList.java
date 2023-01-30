@@ -45,10 +45,10 @@ public class TaskList {
      *
      * @param task Task instance to be added.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.taskStorage.add(task);
         numTasks++;
-        ui.taskAdd(task, numTasks);
+        return ui.taskAdd(task, numTasks);
     }
 
     /**
@@ -57,10 +57,10 @@ public class TaskList {
      *
      * @param toDelete Integer index of task to be deleted.
      */
-    public void deleteTask(int toDelete) {
+    public String deleteTask(int toDelete) {
         Task deleted = taskStorage.remove(toDelete - 1);
         numTasks--;
-        ui.taskDelete(deleted, numTasks);
+        return ui.taskDelete(deleted, numTasks);
     }
 
     /**
@@ -69,10 +69,10 @@ public class TaskList {
      *
      * @param mark Integer index of task to be mark complete.
      */
-    public void markTask(int mark) {
+    public String markTask(int mark) {
         Task marked = taskStorage.get(mark - 1);
         marked.setDone();
-        ui.markTaskDone(marked);
+        return ui.markTaskDone(marked);
     }
 
     /**
@@ -81,22 +81,23 @@ public class TaskList {
      *
      * @param unmark Integer index of task to be mark incomplete.
      */
-    public void unmarkTask(int unmark) {
+    public String unmarkTask(int unmark) {
         Task unmarked = taskStorage.get(unmark - 1);
         unmarked.setUndone();
-        ui.markTaskUndone(unmarked);
+        return ui.markTaskUndone(unmarked);
     }
 
     /**
      * Prints all current tasks in collection to standard output.
      */
-    public void printTasks() {
+    public String printTasks() {
         int count = 1;
-        System.out.println("Here are the tasks in your list:");
+        String output = "";
+        output += "Here are the tasks in your list:\n";
         for (Task task : taskStorage) {
-            String output = String.format("%d.%s", count++, task.toString());
-            System.out.println(output);
+            output += String.format("%d.%s", count++, task.toString()) + "\n";
         }
+        return output;
     }
 
     /**

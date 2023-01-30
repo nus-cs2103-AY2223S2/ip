@@ -22,5 +22,5 @@ public abstract class Command {
      * @param storage Storage object.
      * @param ui Ui Object.
      */
-    public abstract void execute(TaskList tasks, Storage storage, Ui ui);
+    public abstract String execute(TaskList tasks, Storage storage, Ui ui);
 }
