@@ -21,7 +21,7 @@ import java.io.FileNotFoundException;
  * Handles loading and saving of tasks to local storage.
  */
 public class Storage {
-    private final Path HOME_DIRECTORY = Path.of(System.getProperty("user.dir") + "/data");
+    private final Path DUKE_DATA_DIR = Path.of(System.getProperty("user.dir") + "/data");
     private File dataFile;
     private final TaskList tasks;
 
@@ -35,11 +35,11 @@ public class Storage {
      */
     public void load() throws IOException {
         try {
-            if (!Files.exists(HOME_DIRECTORY)) {
-                Files.createDirectories(HOME_DIRECTORY);
+            if (!Files.exists(DUKE_DATA_DIR)) {
+                Files.createDirectories(DUKE_DATA_DIR);
             }
 
-            this.dataFile = new File(this.HOME_DIRECTORY + "/duke.txt");
+            this.dataFile = new File(this.DUKE_DATA_DIR + "/duke.txt");
             boolean isCreated = true;
             if (!this.dataFile.exists()) {
                 isCreated = this.dataFile.createNewFile();
