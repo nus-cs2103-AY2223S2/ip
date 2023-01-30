@@ -1,5 +1,7 @@
 package duke;
+
 import java.util.ArrayList;
+
 
 import util.DukeException;
 
@@ -11,12 +13,20 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        this.taskType = "D";
     }
+
+    public Deadline(Boolean isDone, String description, String by) {
+        super(isDone, description);
+        this.by = by;
+        this.taskType = "D";    }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
+    
 
     public static void createDeadlineTask(ArrayList<Task> array, String[] splitInput) {
         if (splitInput.length == 1 || splitInput[1].equals("")){
@@ -45,6 +55,8 @@ public class Deadline extends Task {
             String desc = splitInput[1];
             Deadline d = new Deadline(desc, date);
             array.add(d);
+            //Deadline.saveTaskData(d, 0);
+
             System.out.println(divider);
             System.out.println("     Got it. I've added this task:");
             System.out.println("     " + d.toString());
@@ -53,5 +65,13 @@ public class Deadline extends Task {
            
         }
         
+    }
+   
+
+    @Override
+    public String saveFormat() {
+        String d = " | ";
+        int marked = this.getIsDone() ? 1 : 0;
+        return "D" + d + marked + d + description + d + by;
     }
 }

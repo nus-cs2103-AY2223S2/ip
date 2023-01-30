@@ -1,22 +1,29 @@
 package duke;
 
 import util.*;
+
+
 import java.util.ArrayList;
 
 public class Todo extends Task {
 
-    protected String duration;
     static String divider = "    ═══*.·:·.☽✧    ✦    ✧☾.·:·.*═══";
 
     public Todo(String description) {
         super(description);
+        this.taskType = "T";
     }
+
+    public Todo(boolean isDone, String description) {
+        super(isDone, description);
+        this.taskType = "T";    }
 
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
-
+    
+  
     public static void createTodoTask(ArrayList<Task> array, String[] splitInput) {
         if (splitInput.length == 1 || splitInput[1].equals("")){
             try {
@@ -34,6 +41,7 @@ public class Todo extends Task {
             String desc = splitInput[1];
             Todo t = new Todo(desc);
             array.add(t);
+
             System.out.println(divider);
             System.out.println("     Got it. I've added this task:");
             System.out.println("     " + t.toString());
@@ -42,4 +50,13 @@ public class Todo extends Task {
         }
         
     }
+
+    @Override
+    public String saveFormat() {
+        String divider = " | ";
+        int marked = this.getIsDone() ? 1 : 0;
+        return "T" + divider + marked + divider + description ;
+    }
+    
+
 }
