@@ -13,12 +13,7 @@ public class MarkCommand extends Command{
     }
 
     /**
-     * Marks the task at the specified index as done.
-     *
-     * @param tasks The current list of tasks.
-     * @param ui Ui displaying the results of execution.
-     * @param storage Storage to update when tasks update.
-     * @throws DukeException When the task cannot be executed or has an error.
+     * @inheritDoc
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -28,9 +23,7 @@ public class MarkCommand extends Command{
     }
 
     /**
-     * Returns false.
-     *
-     * @return A boolean if the command is an ExitCommand.
+     * @inheritDoc
      */
     @Override
     public boolean isExit() {
