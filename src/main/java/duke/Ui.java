@@ -101,6 +101,27 @@ public class Ui {
     }
 
     /**
+     * Prints a message that is displayed if there are any matching tasks to the query.
+     */
+    public void findTasksMessage() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    /**
+     * Prints the tasks found using the query function.
+     * @param taskList The TaskList object containing the ArrayList of tasks
+     * @param taskNumbers The Integer ArrayList containing the task numbers to retrieve from the TaskList.
+     */
+    public void printFoundTasks(TaskList taskList, ArrayList<Integer> taskNumbers) {
+        for (int j = 0; j < taskNumbers.size(); j++) {
+            int tempTaskNumber = taskNumbers.get(j);
+            Task tempTask = taskList.getTask(tempTaskNumber);
+            System.out.println(String.format("\t%d. %s", tempTaskNumber, tempTask));
+        }
+
+    }
+
+    /**
      * Prints a message to confirm that the task has been marked as done.
      * @param t The Task object to be marked as done.
      */

@@ -31,13 +31,11 @@ public class TaskList {
         return this.tasks;
     }
 
-
     /**
      * Gets a specific task from the list.
      * @param taskNumber The number of the task in the list.
      * @return The specified Task object from the list.
      */
-
     Task getTask(int taskNumber) {
         return tasks.get(taskNumber - 1);
     }
@@ -70,7 +68,8 @@ public class TaskList {
     void markTaskAsIncomplete(int taskNumber) throws DukeException {
         if (taskNumber < 1 || taskNumber > numberOfTasks()) {
             throw new DukeException("OOPS!!! Invalid task number. Please try again.");
-        }tasks.get(taskNumber - 1).markAsNotDone();
+        }
+        tasks.get(taskNumber - 1).markAsNotDone();
     }
 
     /**

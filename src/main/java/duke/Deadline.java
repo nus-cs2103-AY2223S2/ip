@@ -1,18 +1,20 @@
 package duke;
-import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+
 
 /**
  * Encapsulates a Deadline as a specific type of Task.
  */
 public class Deadline extends Task {
+    private LocalDate deadline;
 
     /**
      * Creates a Deadline object.
      * @param description The description of the Deadline task.
      * @param deadline The deadline of the task to be input in DD/MM/YYYY format.
      */
-    private LocalDate deadline;
     Deadline(String description, LocalDate deadline) {
         super(description);
         this.deadline = deadline;
