@@ -5,10 +5,20 @@ import duke.TaskCreationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event task
+ */
 public class Event extends Task {
-    private LocalDate from;
-    private LocalDate to;
+    private final LocalDate from;
+    private final LocalDate to;
 
+    /**
+     * Makes an event
+     * @param desc desc of event
+     * @param from from when
+     * @param to to when
+     * @throws TaskCreationException date parsing error
+     */
     public Event(String desc, String from, String to) throws TaskCreationException {
         super(desc);
         try {

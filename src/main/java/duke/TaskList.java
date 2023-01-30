@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class TaskList implements Serializable {
+/**
+ * Represents a list of tasks
+ */
+public class TaskList implements Serializable {
     private final List<Task> list;
 
     public TaskList() {

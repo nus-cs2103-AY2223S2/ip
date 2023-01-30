@@ -1,84 +1,84 @@
 package duke;
 
+/**
+ * Parser for commands
+ */
 public class Parser {
+
+    private String listALl(TaskList tl) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < tl.getList().size(); i++) {
+            str.append(String.format("%d: %s\n", i + 1, tl.getList().get(i)));
+        }
+        return str.toString();
+    }
+
     /**
      * Parses and runs the entered command.
      *
      * @param taskList TaskList to be used for commands
-     * @param ui       Ui object for interacting with the user
      * @param line     line to be parsed
-     * @return boolean indicating end of program
+     * @return String  response
      */
-    boolean parse(Ui ui, TaskList taskList, String line) {
+    public String parse(TaskList taskList, String line) {
         String[] split = line.split(" ");
         String command = split[0];
         switch (command) {
         case "bye":
-            ui.message("Bye, hope to see you again.");
-            return true;
+            return "Bye, hope to see you again";
         case "list":
-            ui.listAllTasks(taskList);
-            break;
+            return listALl(taskList);
         case "mark": {
             int number = Integer.parseInt(split[1]) - 1;
             taskList.mark(number);
-            ui.listAllTasks(taskList);
-            break;
+            return listALl(taskList);
         }
         case "unmark": {
             int number = Integer.parseInt(split[1]) - 1;
             taskList.unmark(number);
-            ui.listAllTasks(taskList);
-            break;
+            return listALl(taskList);
         }
         case "todo": {
             taskList.addTodo(split[1]);
-            break;
+            return listALl(taskList);
         }
         case "deadline": {
             split = line.split(" ");
             if (split.length < 4) {
-                ui.error("Invalid format");
-                break;
+                return "Invalid format";
             }
             taskList.addDeadline(split[1], split[3]);
-            break;
+            return listALl(taskList);
         }
         case "event": {
             split = line.split(" ");
             if (split.length < 6) {
-                ui.error("Invalid format");
-                break;
+                return "Invalid format";
             }
             taskList.addEvent(split[1], split[3], split[5]);
-            break;
+            return listALl(taskList);
         }
         case "find": {
-            ui.listAllTasks(taskList.find(split[1]));
-            break;
+            return listALl(taskList.find(split[1]));
         }
         case "delete": {
             if (split.length != 2) {
-                ui.error("Invalid format");
+                return "Invalid format";
             }
             int itemIndex;
             try {
                 itemIndex = Integer.parseInt(split[1]);
-                ui.removeItemMessage(itemIndex);
                 taskList.delete(itemIndex - 1);
-                ui.message("Removal successful. New list:");
-                ui.listAllTasks(taskList);
+                return "Removal successful. New list:\n" + listALl(taskList);
             } catch (IndexOutOfBoundsException e) {
-                ui.error("Item does not exist");
+                return ("Item does not exist");
             } catch (NumberFormatException e) {
-                ui.error(split[1] + " is not a number");
+                return split[1] + " is not a number";
             }
-            break;
         }
         default:
-            ui.error("Command not found");
+            return "Command not found";
         }
-        return false;
     }
 
 }
