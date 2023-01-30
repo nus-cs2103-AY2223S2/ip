@@ -62,8 +62,7 @@ public abstract class SetDoneCommand implements Command {
         }
 
         if (index >= tasks.size() || index < 0) {
-            String message = String.format("The task to %s doesn't exist!",
-                    getCommand());
+            String message = String.format("The task to %s doesn't exist!", getCommand());
             throw new DukeException(message);
         }
 

@@ -35,6 +35,11 @@ public abstract class Task {
         return task;
     }
 
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", isDone ? "X" : " ", description);
+    }
+
     /**
      * Returns a string containing data about the task. This string is formatted for writing to storage.
      *
@@ -42,11 +47,6 @@ public abstract class Task {
      */
     public String getStorageStr() {
         return String.format("%s | %s", isDone, formatStrForStorage(description));
-    }
-
-    @Override
-    public String toString() {
-        return String.format("[%s] %s", isDone ? "X" : " ", description);
     }
 
     /**

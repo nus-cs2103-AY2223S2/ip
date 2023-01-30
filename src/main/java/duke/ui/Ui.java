@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.io.PrintStream;
-
 /**
  * Handles displaying of messages to the user.
  */
