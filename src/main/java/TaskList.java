@@ -144,4 +144,12 @@ public class TaskList {
         System.out.print(reply);
 
     }
+
+    public String saveTaskList(){
+        String result = "";
+        for (int i = 0; i < this.len; i++){
+            result += list[i].saveTask() + "\n";
+        }
+        return result;
+    }
 }

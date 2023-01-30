@@ -1,11 +1,50 @@
-import java.util.*;
+import java.util.Scanner;
 import dukeexceptions.DukeExceptions;
 import dukeexceptions.UnknownCommandException;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
+    private static File file;
+
+    public static final String PATH = "./data/";
+
+    private static void fileSetup() {
+        File directory = new File(PATH);
+        try {
+            if(!directory.exists()){
+                directory.mkdir();
+            }
+
+            file = new File(PATH, "duke.txt");
+
+            if(!file.exists()){
+                file.createNewFile();
+            }
+        } catch (IOException exception){
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    private static void save(TaskList taskList) {
+        try {
+            FileWriter fileWriter = new FileWriter(file);
+
+            fileWriter.write(taskList.saveTaskList());
+
+            fileWriter.close();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
 
     public static void main(String[] args) {
+
         TaskList taskList = new TaskList();
+        fileSetup();
 
         String intro = "  ________________________________\n"
                 + "  Hello! I'm Duke\n"
@@ -81,6 +120,8 @@ public class Duke {
             }
 
         }
+
+        save(taskList);
 
         String bye = "  ________________________________\n"
                 + "  Bye! have a great day\n"

@@ -21,9 +21,7 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getName(){
-        return this.description;
-    }
+    public String saveTask() { return this.description; }
 
     @Override
     public String toString (){

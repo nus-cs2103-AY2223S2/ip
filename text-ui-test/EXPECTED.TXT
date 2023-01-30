@@ -1,45 +1,11 @@
-  ________________________________
-  Hello! I'm Duke
-  What can I do for you?
-  ________________________________
+    ____________________________________________________________
+     Hello! I'm Duke
+     What can I do for you?
+    ____________________________________________________________
 
 todo borrow book
-  ________________________________
-  Got it. I've added this task:
-    [T][ ] borrow book
-  Now you have 1 tasks in the list.
-  ________________________________
-deadline return book /by Sunday
-  ________________________________
-  Got it. I've added this task:
-    [D][ ] return book (by:Sunday)
-  Now you have 2 tasks in the list.
-  ________________________________
-event project meeting /from Mon 2pm /to 4pm
-  ________________________________
-  Got it. I've added this task:
-    [E][ ] project meeting(from:Mon 2pm to:4pm)
-  Now you have 3 tasks in the list.
-  ________________________________
-mark 1
-  ________________________________
-  Nice! I've marked this task as done:
-    [T][X] borrow book
-  ________________________________
-
-list
-  ________________________________
-  Here are the tasks in your list:
-  1. [T][X] borrow book
-  2. [D][ ] return book (by:Sunday)
-  3. [E][ ] project meeting(from:Mon 2pm to:4pm)
-  ________________________________
-todo
-  ________________________________
-☹ OOPS!!! The description of a todo cannot be empty.
-  ________________________________
-
-blah
-  ________________________________
-☹ OOPS!!! I'm sorry, but I don't know what that means :-(
-  ________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+       [T][ ] borrow book
+     Now you have 1 tasks in the list.
+    ____________________________________________________________
