@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
+
 /**
  * Event is a task that has a from and to date.
  */
@@ -22,7 +23,6 @@ public class Event extends Task {
      * @param isDone Completion status of Event.
      */
     public Event(String description, String from, String to, boolean isDone) throws DukeException {
-
         super(description, isDone);
         try {
             this.from = LocalDate.parse(from.trim());
