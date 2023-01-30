@@ -18,6 +18,7 @@ public class Duke {
         storage.loadData(list);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+
         while (logic.isValidCommand(input)) {
             if (logic.checkList(input)) {
                 ui.listMessage();
@@ -42,6 +43,10 @@ public class Duke {
                 ui.byeMessage();
                 break;
             }
+            input = sc.nextLine();
+        }
+        while (!logic.isValidCommand(input)) {
+            ui.invalidCommandMessage();
             input = sc.nextLine();
         }
     }
