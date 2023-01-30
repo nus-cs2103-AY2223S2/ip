@@ -9,6 +9,10 @@
     -fx-effect: dropshadow(gaussian ,rgba(0,0,0,0.3), 10,0,0,0);
 }
 
+.user-dialog {
+    -fx-background-color: #f07167;
+}
+
 .label:hover {
     -fx-effect: innershadow(gaussian ,rgba(0,0,0,0.5), 10,0,0,0);
 }

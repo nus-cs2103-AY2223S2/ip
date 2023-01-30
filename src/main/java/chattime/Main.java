@@ -26,6 +26,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setBot(chattime);
+            stage.setResizable(false);
             stage.setTitle("CHATTIME");
             stage.show();
         } catch (IOException e) {
