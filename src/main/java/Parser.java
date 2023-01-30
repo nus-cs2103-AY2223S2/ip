@@ -1,7 +1,7 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class Parser<T> {
     private final Function<String, Result<T>> fn;
@@ -17,121 +17,135 @@ public class Parser<T> {
     }
 
     public <U> Parser<U> bind(Function<T, Parser<U>> f) {
-        return new Parser<U>(inp -> {
-            Result<T> temp = this.parse(inp);
-            if (temp.isError()) {
-                return Result.error(temp.getErrorMsg());
-            }
-            Parser<U> next = f.apply(temp.getRes());
-            return next.parse(temp.getRemainInp());
-        });
+        return new Parser<U>(inp -> this.parse(inp).match(
+                pr -> f.apply(pr.first()).parse(pr.second()),
+                msg -> Result.error(msg)));
     }
 
     public <U> Parser<U> ignoreThen(Parser<U> p) {
-        return new Parser<>(inp -> {
-            Result<T> temp = this.parse(inp);
-            if (temp.isError()) {
-                return Result.error(temp.getErrorMsg());
-            }
-            return p.parse(temp.getRemainInp());
-        });
+        return new Parser<>(inp -> this.parse(inp).match(
+                pr -> p.parse(pr.second()),
+                msg -> Result.error(msg)));
     }
 
     public <U> Parser<T> thenIgnore(Parser<U> p) {
-        return new Parser<>(inp -> {
-            Result<T> temp = this.parse(inp);
-            if (temp.isError()) {
-                return Result.error(temp.getErrorMsg());
-            }
-            Result<U> temp2 = p.parse(temp.getRemainInp());
-            if (temp2.isError()) {
-                return Result.error(temp2.getErrorMsg());
-            }
-            return Result.ok(temp.getRes(), temp2.getRemainInp());
-        });
+        return new Parser<>(inp -> this.parse(inp).match(
+                pr -> p.parse(pr.second()).match(
+                        pr2 -> Result.ok(pr.first(), pr2.second()),
+                        msg -> Result.error(msg)),
+                msg -> Result.error(msg)));
     }
 
     public Parser<T> or(Parser<T> p) {
-        return new Parser<>(inp -> {
-            Result<T> temp = this.parse(inp);
-            if (temp.isOk()) {
-                return temp;
-            }
-            return p.parse(inp);
-        });
+        return new Parser<>(inp -> this.parse(inp).match(
+                pr -> Result.ok(pr.first(), pr.second()),
+                msg -> p.parse(inp).match(
+                        pr -> Result.ok(pr.first(), pr.second()),
+                        msg2 -> Result.error(msg + '\n' + msg2))));
     }
 
-    public Parser<List<T>> many() {
-        return new Parser<>(inp -> {
-            List<T> res = new ArrayList<>();
-            String remain = inp;
-            Result<T> temp = this.parse(remain);
-            while (temp.isOk()) {
-                remain = temp.getRemainInp();
-                res.add(temp.getRes());
-                temp = this.parse(remain);
+    public Parser<Stream<T>> many() {
+        // return new Parser<>(inp -> {
+        // List<T> res = new ArrayList<>();
+        // String remain = inp;
+        // Result<T> temp = this.parse(remain);
+        // while (temp.isOk()) {
+        // remain = temp.match(
+        // pr -> pr.second(),
+        // msg -> throw new Exception("This should never happen.")
+        // );
+        // res.add(temp.getRes());
+        // temp = this.parse(remain);
+        // }
+        // return Result.ok(res, remain);
+        // });
+        Function<String, Result<Stream<T>>> f = new Function<>() {
+            @Override
+            public Result<Stream<T>> apply(String inp) {
+                return parse(inp).match(
+                        pr -> {
+                            Result<Stream<T>> prev = this.apply(pr.second());
+                            return prev.map(s -> Stream.concat(Stream.of(pr.first()), s));
+                        },
+                        msg -> Result.ok(Stream.<T>of(), inp));
             }
-            return Result.ok(res, remain);
-        });
+        };
+        return new Parser<>(inp -> f.apply(inp));
+
     }
 
-    public <U> Parser<List<T>> manyUntil(Parser<U> p) {
-        return new Parser<>(inp -> {
-            List<T> res = new ArrayList<>();
-            String remain = inp;
-            Result<T> temp = this.parse(remain);
-            Result<U> until = p.parse(remain);
-            while (until.isError() && temp.isOk()) {
-                remain = temp.getRemainInp();
-                res.add(temp.getRes());
-                temp = this.parse(remain);
-                until = p.parse(remain);
+    public <U> Parser<Stream<T>> manyUntil(Parser<U> p) {
+        // return new Parser<>(inp -> {
+        // List<T> res = new ArrayList<>();
+        // String remain = inp;
+        // Result<T> temp = this.parse(remain);
+        // Result<U> until = p.parse(remain);
+        // while (until.isError() && temp.isOk()) {
+        // remain = temp.getRemainInp();
+        // res.add(temp.getRes());
+        // temp = this.parse(remain);
+        // until = p.parse(remain);
+        // }
+        // if (until.isError()) {
+        // return Result.error(String.format("Ending Flag: %s", until.getErrorMsg()));
+        // }
+        // return Result.ok(res, until.getRemainInp());
+        // });
+        Function<String, Result<Stream<T>>> f = new Function<>() {
+            @Override
+            public Result<Stream<T>> apply(String inp) {
+                return p.parse(inp).match(
+                        pr -> Result.ok(Stream.of(), pr.second()),
+                        e -> parse(inp).match(
+                                pr -> {
+                                    Result<Stream<T>> prev = this.apply(pr.second());
+                                    return prev.map(s -> Stream.concat(Stream.of(pr.first()), s));
+                                },
+                                msg -> Result.error(String.format("Ending Flag: %s", msg))));
             }
-            if (until.isError()) {
-                return Result.error(String.format("Ending Flag: %s", until.getErrorMsg()));
-            }
-            return Result.ok(res, until.getRemainInp());
-        });
+        };
+
+        return new Parser<>(inp -> f.apply(inp));
     }
 
-    public Parser<List<T>> some() {
-        return new Parser<>(inp -> {
-            List<T> res = new ArrayList<>();
-            String remain = inp;
-            Result<T> temp = this.parse(remain);
-            while (temp.isOk()) {
-                remain = temp.getRemainInp();
-                res.add(temp.getRes());
-                temp = this.parse(remain);
+    public Parser<Stream<T>> some() {
+        Function<String, Result<Stream<T>>> f = new Function<>() {
+            @Override
+            public Result<Stream<T>> apply(String inp) {
+                return parse(inp).match(
+                        pr -> parse(pr.second()).match(
+                                pr2 -> {
+                                    Result<Stream<T>> prev = this.apply(pr.second());
+                                    return prev.map(s -> Stream.concat(Stream.of(pr.first()), s));
+                                },
+                                msg -> Result.ok(Stream.of(pr.first()), pr.second())),
+                        msg -> Result.error(msg));
             }
-            if (res.isEmpty()) {
-                return Result.error(temp.getErrorMsg());
-            }
-            return Result.ok(res, remain);
-        });
+        };
+        return new Parser<>(inp -> f.apply(inp));
     }
 
-    public <U> Parser<List<T>> someUntil(Parser<U> p) {
-        return new Parser<>(inp -> {
-            List<T> res = new ArrayList<>();
-            String remain = inp;
-            Result<T> temp = this.parse(remain);
-            Result<U> until = p.parse(remain);
-            while (until.isError() && temp.isOk()) {
-                remain = temp.getRemainInp();
-                res.add(temp.getRes());
-                temp = this.parse(remain);
-                until = p.parse(remain);
-            }
-            if (until.isError()) {
-                return Result.error(String.format("Ending Flag: %s", until.getErrorMsg()));
-            }
-            if (res.isEmpty()) {
-                return Result.error(this.parse(until.getRemainInp()).getErrorMsg());
-            }
-            return Result.ok(res, until.getRemainInp());
-        });
-    }
+    // public <U> Parser<List<T>> someUntil(Parser<U> p) {
+    // return new Parser<>(inp -> {
+    // List<T> res = new ArrayList<>();
+    // String remain = inp;
+    // Result<T> temp = this.parse(remain);
+    // Result<U> until = p.parse(remain);
+    // while (until.isError() && temp.isOk()) {
+    // remain = temp.getRemainInp();
+    // res.add(temp.getRes());
+    // temp = this.parse(remain);
+    // until = p.parse(remain);
+    // }
+    // if (until.isError()) {
+    // return Result.error(String.format("Ending Flag: %s", until.getErrorMsg()));
+    // }
+    // if (res.isEmpty()) {
+    // return Result.error(this.parse(until.getRemainInp()).getErrorMsg());
+    // }
+    // return Result.ok(res, until.getRemainInp());
+    // });
+    // }
 
     public Parser<T> overrideMsg(String errorMsg) {
         return new Parser<>(inp -> this.parse(inp).overrideMsg(errorMsg));
@@ -188,19 +202,19 @@ public class Parser<T> {
                 .ignoreThen(anyCharParser()
                         .satisfy(c -> !WS.contains(c))
                         .some()
-                        .map(lst -> lst.stream().map(c -> c.toString()).reduce("", (a, b) -> a + b)));
+                        .map(s -> s.map(c -> c.toString()).reduce("", (a, b) -> a + b)));
     }
 
     public static Parser<String> nextLineParser() {
         return anyCharParser()
                 .manyUntil(endOfLine())
-                .map(lst -> lst.stream().map(c -> c.toString()).reduce("", (a, b) -> a + b));
+                .map(s -> s.map(c -> c.toString()).reduce("", (a, b) -> a + b));
     }
 
     public static Parser<Integer> unisgnedIntParser() {
         return anyCharParser().satisfy(c -> c >= 48 && c < 58)
                 .some()
-                .map(lst -> lst.stream().map(c -> c.toString()).reduce("", (a, b) -> a + b))
+                .map(s -> s.map(c -> c.toString()).reduce("", (a, b) -> a + b))
                 .map(s -> Integer.parseInt(s))
                 .overrideMsg("Failed to parse unsigned integer.");
     }
@@ -213,7 +227,9 @@ public class Parser<T> {
     }
 
     public static Parser<Integer> intParser() {
-        return unisgnedIntParser().or(signedIntParser());
+        return unisgnedIntParser()
+                .or(signedIntParser())
+                .overrideMsg("Failed to parse integer");
     }
 
     public static Parser<Void> skipSpace() {

@@ -17,21 +17,16 @@ public class Result<T> {
     }
 
     public Result<T> filter(Predicate<T> condition) {
-        if (this.result.isRight()) {
-            return this;
-        }
-        if (condition.test(this.getRes())) {
-            return this;
-        }
-        return error(
-                String.format("%s failed to satisfy condition", this.getRes().toString()));
+        return this.result.match(
+                pr -> condition.test(pr.first()) ? this
+                        : error(String.format("%s failed to satisfy condition.", pr.first())),
+                errorMsg -> this);
     }
 
     public Result<T> overrideMsg(String errorMsg) {
-        if (this.isOk()) {
-            return this;
-        }
-        return error(errorMsg);
+        return this.result.match(
+                pr -> this,
+                msg -> error(errorMsg));
     }
 
     public boolean isOk() {
@@ -42,16 +37,23 @@ public class Result<T> {
         return this.result.isRight();
     }
 
-    public T getRes() {
-        return this.result.fromLeft(null).first();
-    }
+    // public T getRes() {
+    // return this.result.fromLeft(null).first();
+    // }
 
-    public String getRemainInp() {
-        return this.result.fromLeft(null).second();
-    }
+    // public String getRemainInp() {
+    // return this.result.fromLeft(null).second();
+    // }
 
-    public String getErrorMsg() {
-        return this.result.fromRight(null);
+    // public String getErrorMsg() {
+    // return this.result.fromRight(null);
+    // }
+
+    public <U> U match(Function<? super Pair<? extends T, String>, ? extends U> okFunction,
+            Function<? super String, ? extends U> errorFunction) {
+        return this.result.match(
+                pr -> okFunction.apply(pr),
+                msg -> errorFunction.apply(msg));
     }
 
     public <U> Result<U> map(Function<? super T, ? extends U> f) {

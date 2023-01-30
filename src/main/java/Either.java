@@ -90,7 +90,7 @@ public interface Either<L, R> {
             }
 
             @Override
-            public R fromRight(R deg) {
+            public R fromRight(R def) {
                 return this.right; 
             }
 
