@@ -51,6 +51,8 @@ public class Parser {
                     return new AddCommand(todo);
                 case DELETE:
                     return new DeleteCommand(Integer.parseInt(words[1]));
+                case FIND:
+                    return new FindCommand(inputLine.split(" ", 2)[1]);
                 default:
                     throw new DukeException("Not a valid command: " + inputLine);
                 }
