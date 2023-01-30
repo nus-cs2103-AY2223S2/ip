@@ -1,7 +1,5 @@
 package task;
 
-import duke.Ui;
-
 import java.io.File;
 
 public class Todo extends Task {

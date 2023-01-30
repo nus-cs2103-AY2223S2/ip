@@ -1,10 +1,12 @@
 package duke;
 
-import command.*;
-import task.Deadline;
-import task.Event;
+import command.EventCommand;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.MarkCommand;
+import command.TodoCommand;
+import command.UnMarkCommand;
 import task.TaskList;
-import task.Todo;
 
 public class Duke {
     static final String DIRPATH = "./data";

@@ -1,7 +1,5 @@
 package task;
 
-import duke.Ui;
-
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
