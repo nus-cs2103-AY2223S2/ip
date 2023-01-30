@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
  * Encapsulates a parser that parses the user input in the Duke app.
  */
 public class Parser {
-
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
@@ -42,29 +41,24 @@ public class Parser {
                 unmarkInputChecker(input);
                 int taskNum = Integer.parseInt(input.split(" ")[1]);
                 taskList.markTaskAsIncomplete(taskNum);
-
                 ui.markTaskAsIncompleteMessage(taskList.getTask(taskNum));
             } else if (input.startsWith("delete")) {
                 deleteInputChecker(input);
                 int taskNum = Integer.parseInt(input.split(" ")[1]);
                 Task toDelete = taskList.getTask(taskNum);
                 taskList.deleteTaskFromList(taskNum);
-
                 ui.deletedTaskMessage(toDelete, taskList.numberOfTasks());
             } else if (isEventTask(input)) {
                 eventInputChecker(input);
                 String[] eventConstructor = input.replace("event ", "").split("/at ");
                 String timeModified = eventConstructor[1].replace("from ", "");
                 inputEvent(eventConstructor[0], timeModified);
-
             } else if (isDeadlineTask(input)) {
                 deadlineInputChecker(input);
                 addDeadlineFormatted(input);
-
             } else if (isTodoTask(input)) {
                 todoInputChecker(input);
                 inputTodo(input.replace("todo ", ""));
-
             } else {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -203,7 +197,7 @@ public class Parser {
      */
     public void addDeadlineFormatted(String input) throws DukeException {
         String[] constructor = input.replace("deadline ", "").split(" /by ");
-        try{
+        try {
             LocalDate temp = LocalDate.parse(constructor[1], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             inputDeadline(constructor[0], temp);
 

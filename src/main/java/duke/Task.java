@@ -23,10 +23,13 @@ public class Task {
         this.isDone = true;
     }
 
+
     /**
      * Marks the task as incomplete.
      */
-    public void markAsNotDone() { this.isDone = false; }
+    public void markAsNotDone() {
+        this.isDone = false;
+    }
 
     /**
      * Creates a string format of the task reflecting its completion status.

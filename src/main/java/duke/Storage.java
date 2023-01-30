@@ -29,7 +29,6 @@ public class Storage {
         ArrayList<String> temp = new ArrayList<>();
         try {
             FileWriter fw = new FileWriter(file);
-
             for (int i = 1; i <= list.numberOfTasks(); i++) {
                 temp.add(list.getTask(i).sendOutputToFile());
             }
@@ -58,37 +57,36 @@ public class Storage {
                     String taskType = curr[0];
                     Task task;
                     switch (taskType) {
-                        case "E":
-                            task = new Event(curr[2], curr[3]);
-                            if (Integer.parseInt(curr[1]) == 1) {
-                                task.markAsDone();
-                            } else {
-                                task.markAsNotDone();
-                            }
-                            tasks.add(task);
-                            break;
-                        case "D":
-                            LocalDate temp = LocalDate.parse(curr[3], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                            task = new Deadline(curr[2], temp);
-                            if (Integer.parseInt(curr[1]) == 1) {
-                                task.markAsDone();
-                            } else {
-                                task.markAsNotDone();
-                            }
-                            tasks.add(task);
-                            break;
-
-                        case "T":
-                            task = new Todo(curr[2]);
-                            if (Integer.parseInt(curr[1]) == 1) {
-                                task.markAsDone();
-                            } else {
-                                task.markAsNotDone();
-                            }
-                            tasks.add(task);
-                            break;
-                        default:
-                            throw new DukeException("Error: Wrong task encountered");
+                    case "E":
+                        task = new Event(curr[2], curr[3]);
+                        if (Integer.parseInt(curr[1]) == 1) {
+                            task.markAsDone();
+                        } else {
+                            task.markAsNotDone();
+                        }
+                        tasks.add(task);
+                        break;
+                    case "D":
+                        LocalDate temp = LocalDate.parse(curr[3], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        task = new Deadline(curr[2], temp);
+                        if (Integer.parseInt(curr[1]) == 1) {
+                            task.markAsDone();
+                        } else {
+                            task.markAsNotDone();
+                        }
+                        tasks.add(task);
+                        break;
+                    case "T":
+                        task = new Todo(curr[2]);
+                        if (Integer.parseInt(curr[1]) == 1) {
+                            task.markAsDone();
+                        } else {
+                            task.markAsNotDone();
+                        }
+                        tasks.add(task);
+                        break;
+                    default:
+                        throw new DukeException("Error: Wrong task encountered");
                     }
                 }
                 scanner.close();

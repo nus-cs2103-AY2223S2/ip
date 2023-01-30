@@ -26,6 +26,7 @@ public class Ui {
     /**
      * Prints the Duke logo.
      */
+
     void showDuke() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"

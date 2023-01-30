@@ -3,7 +3,8 @@ package duke;
 /**
  * Encapsulates an Event as a specific type of Task.
  */
-public class Event extends Task{
+
+public class Event extends Task {
     private String timeOfEvent;
 
     /**
