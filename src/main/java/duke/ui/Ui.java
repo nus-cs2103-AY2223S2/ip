@@ -1,9 +1,11 @@
 package duke.ui;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.data.TaskList;
 import duke.data.task.Task;
+
 
 /**
  * Ui of application.
@@ -82,6 +84,22 @@ public class Ui {
         } else {
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println((i + 1) + ". " + tasks.get(i).toString());
+            }
+        }
+    }
+
+    /**
+     * Displays tasks that contains a string.
+     *
+     * @param taskArray Array containing the tasks that contain the string.
+     */
+    public void showMatchingTasks(ArrayList<Task> taskArray) {
+        if (taskArray.size() == 0) {
+            System.out.println("No tasks found.");
+        } else {
+            System.out.println("These are the tasks I have found:");
+            for (int i = 0; i < taskArray.size(); i++) {
+                System.out.println((i + 1) + ". " + taskArray.get(i).toString());
             }
         }
     }

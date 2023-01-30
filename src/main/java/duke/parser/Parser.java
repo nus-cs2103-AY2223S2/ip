@@ -6,6 +6,7 @@ import duke.command.AddTodoCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -37,6 +38,7 @@ public class Parser {
         if (len > 1) {
             details = cmdDetails[1];
         }
+
         if (cmd.equals("mark")) {
             if (len == 1) {
                 throw new DukeException("Unable to mark.");
@@ -73,6 +75,8 @@ public class Parser {
                 throw new DukeException("Unable to delete.");
             }
             return new DeleteCommand(details);
+        } else if (cmd.equals("find")) {
+            return new FindCommand(details);
         } else {
             throw new DukeException("I do not quite understand that.");
         }

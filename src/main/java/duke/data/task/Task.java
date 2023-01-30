@@ -68,6 +68,16 @@ public abstract class Task {
     }
 
     /**
+     * Checks if task description contains given string.
+     *
+     * @param string String to check with.
+     * @return Boolean whether task description contains string.
+     */
+    public boolean contains(String string) {
+        return this.description.contains(string);
+    }
+
+    /**
      * String representation of task.
      *
      * @return String of task.
