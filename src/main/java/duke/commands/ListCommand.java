@@ -31,7 +31,7 @@ public class ListCommand extends Command {
     /**
      * The method to see if the programme should exit.
      *
-     * @return a boolean value stating the bot should exit
+     * @return a boolean value stating the bot should not exit
      */
     @Override
     public boolean isExit() {

@@ -26,7 +26,7 @@ public class Command {
     /**
      * The method to see if the programme should exit.
      *
-     * @return a boolean value stating the bot should exit
+     * @return a boolean value
      */
     public boolean isExit() {
         return false;
