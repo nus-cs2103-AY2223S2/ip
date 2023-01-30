@@ -37,7 +37,7 @@ public class Todo extends Task {
 
     @Override
     public String toData() {
-        return String.format("Todo | marked: %s ; description: %s", this.isMarked(), this.description);
+        return String.format("Todo | marked: %s ; description: %s", getMarkedStatus(), description);
     }
 
     /**

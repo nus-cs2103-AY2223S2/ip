@@ -20,28 +20,32 @@ public class Ui {
      * Constructor for a new UI with a scanner.
      */
     public Ui() {
-        this.SCANNER = new Scanner(System.in);
+        SCANNER = new Scanner(System.in);
     }
 
     /**
      * Displays the welcome message when the chatbot is started.
      */
     public void showWelcome() {
-        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
 
-        String introMsg = "Hello! I'm Duke.\n" + "What can I do for you today?";
+        String introMsg = "Hello! I'm Duke.\n What can I do for you today?";
 
-        this.showLine();
-        this.showMsg(logo);
-        this.showMsg(introMsg);
-        this.showLine();
+        showLine();
+        showMsg(logo);
+        showMsg(introMsg);
+        showLine();
     }
 
     /**
      * Display a divider line.
      */
     public void showLine() {
-        this.showMsg(Ui.LINE);
+        showMsg(Ui.LINE);
     }
 
     /**
@@ -59,8 +63,8 @@ public class Ui {
      * @param errorMsg The error/hint message
      */
     public void showError(String errorMsg) {
-        this.showMsg(errorMsg);
-        this.showMsg("Please try again!");
+        showMsg(errorMsg);
+        showMsg("Please try again!");
     }
 
     /**
@@ -74,9 +78,9 @@ public class Ui {
         String msgHeader = "I've added this task into the list:";
         String msgFooter = String.format("Now you have a total of %s tasks in the list", size);
 
-        this.showMsg(msgHeader);
-        this.showMsg(taskString);
-        this.showMsg(msgFooter);
+        showMsg(msgHeader);
+        showMsg(taskString);
+        showMsg(msgFooter);
     }
 
     /**
@@ -90,9 +94,9 @@ public class Ui {
         String msgHeader = "I've deleted this task into the list:";
         String msgFooter = String.format("Now you have a total of %s tasks in the list", size);
 
-        this.showMsg(msgHeader);
-        this.showMsg(taskString);
-        this.showMsg(msgFooter);
+        showMsg(msgHeader);
+        showMsg(taskString);
+        showMsg(msgFooter);
     }
 
     /**
@@ -108,6 +112,6 @@ public class Ui {
      * Closes the scanner that reads user input.
      */
     public void close() {
-        this.SCANNER.close();
+        SCANNER.close();
     }
 }

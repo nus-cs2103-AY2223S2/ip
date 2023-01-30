@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -25,6 +26,11 @@ public class AddTodoCommand extends Command {
     public AddTodoCommand(String commandString, String DATA) {
         super(Commands.ADD_TODO, commandString);
         this.DATA = DATA;
+=======
+    public AddTodoCommand(String commandString, String data) {
+        super(AvailableCommands.ADD_TODO, commandString);
+        DATA = data;
+>>>>>>> branch-A-CodingStandard
     }
 
     /**
@@ -35,10 +41,10 @@ public class AddTodoCommand extends Command {
      * @param storage Storage to deal with input and output of data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task todo = new Todo(this.DATA);
-        tasks.addTask(todo);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        Task todo = new Todo(DATA);
+        taskList.addTask(todo);
 
-        ui.showAddTask(todo.toString(), tasks.size());
+        ui.showAddTask(todo.toString(), taskList.size());
     }
 }

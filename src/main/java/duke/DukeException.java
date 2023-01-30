@@ -4,11 +4,16 @@ package duke;
  * An exception class for the chatbot with the provided hints in the exception message.
  */
 public class DukeException extends RuntimeException {
+<<<<<<< HEAD
     /**
      * A Datetime Format Exception for when the user keys in a datetime format that is not recognised by the chatbot
      * and provides a hint on the structure of the date to be input.
      */
     public static final DukeException DATETIME_FORMAT = new DukeException("Only datetime format of 2023-01-01 is " + "accepted");
+=======
+    public static final DukeException DATETIME_FORMAT = new DukeException(
+            "Only datetime format of 2023-01-01 is accepted");
+>>>>>>> branch-A-CodingStandard
 
     /**
      * Constructor for a new exception that comprised of the hint to be displayed.

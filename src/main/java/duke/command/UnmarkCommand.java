@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -17,6 +18,7 @@ public class UnmarkCommand extends Command {
      */
     private final String INDEX_STRING;
 
+<<<<<<< HEAD
     /**
      * Constructor for a command to unmark a task as not done.
      *
@@ -26,6 +28,11 @@ public class UnmarkCommand extends Command {
     public UnmarkCommand(String commandString, String INDEX_STRING) {
         super(Commands.UNMARK, commandString);
         this.INDEX_STRING = INDEX_STRING;
+=======
+    public UnmarkCommand(String commandString, String indexString) {
+        super(AvailableCommands.UNMARK, commandString);
+        INDEX_STRING = indexString;
+>>>>>>> branch-A-CodingStandard
     }
 
     /**
@@ -38,9 +45,9 @@ public class UnmarkCommand extends Command {
      * @param storage Storage to deal with input and output of data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> t = tasks.getTasks();
-        int index = this.isValidIndex(this.INDEX_STRING, t);
+        int index = isValidIndex(INDEX_STRING, t);
 
         t.get(index).unmarkTask();
 

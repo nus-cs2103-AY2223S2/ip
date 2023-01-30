@@ -17,7 +17,7 @@ public class TaskList {
      * Constructor for a new empty list of tasks.
      */
     public TaskList() {
-        this.TASKS = new ArrayList<Task>();
+        TASKS = new ArrayList<Task>();
     }
 
     /**
@@ -26,7 +26,7 @@ public class TaskList {
      * @param tasks The list of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
-        this.TASKS = tasks;
+        TASKS = tasks;
     }
 
     /**
@@ -44,7 +44,7 @@ public class TaskList {
      * @param task New task to be added into the list
      */
     public void addTask(Task task) {
-        this.TASKS.add(task);
+        TASKS.add(task);
     }
 
     /**
@@ -53,6 +53,6 @@ public class TaskList {
      * @return The number of tasks in the list
      */
     public int size() {
-        return this.TASKS.size();
+        return TASKS.size();
     }
 }

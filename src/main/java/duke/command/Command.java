@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
  * that correspond towards the actions specified.
  */
 public class Command {
+<<<<<<< HEAD
     /**
      * The command stored.
      */
@@ -27,6 +28,12 @@ public class Command {
      * The list of commands that are available for use.
      */
     public enum Commands {
+=======
+    private final AvailableCommands CURRENT_COMMAND;
+    private final String COMMAND_STRING;
+
+    public enum AvailableCommands {
+>>>>>>> branch-A-CodingStandard
         EXIT,
         LIST,
         MARK,
@@ -38,6 +45,7 @@ public class Command {
         FIND
     }
 
+<<<<<<< HEAD
     /**
      * Constructor for a command object.
      *
@@ -58,6 +66,15 @@ public class Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showError(String.format("Error processing %s command", this.COMMAND_STRING));
+=======
+    public Command(AvailableCommands currentCommand, String commandString) {
+        CURRENT_COMMAND = currentCommand;
+        COMMAND_STRING = commandString;
+    }
+
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        ui.showError(String.format("Error processing %s command", COMMAND_STRING));
+>>>>>>> branch-A-CodingStandard
     }
 
     /**
@@ -66,7 +83,7 @@ public class Command {
      * @return Boolean result on whether it is the exit command
      */
     public boolean isExit() {
-        return COMMAND == Commands.EXIT;
+        return CURRENT_COMMAND == AvailableCommands.EXIT;
     }
 
     /**
@@ -80,8 +97,8 @@ public class Command {
      * @throws DukeException If the string representation of index is not an integer or out of bounds of task list
      */
     protected int isValidIndex(String indexStr, ArrayList<Task> tasks) throws DukeException {
-        Pattern p = Pattern.compile("^[0-9]+$");
-        boolean isNumber = p.matcher(indexStr).matches();
+        Pattern pattern = Pattern.compile("^[0-9]+$");
+        boolean isNumber = pattern.matcher(indexStr).matches();
 
         if (!isNumber) {
             throw new DukeException("Index provided is not an integer.");

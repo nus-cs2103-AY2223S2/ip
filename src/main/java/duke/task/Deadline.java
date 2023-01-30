@@ -18,6 +18,7 @@ public class Deadline extends Task {
      */
     protected LocalDate by;
 
+<<<<<<< HEAD
     /**
      * Constructor for a deadline task with the given description and due date. It checks on whether the due date is
      * in the appropriate format first. If it is not, an exception is throw to provide hints on the due date format.
@@ -26,6 +27,9 @@ public class Deadline extends Task {
      * @param by          The due date of the deadline task
      */
     public Deadline(String description, String by) {
+=======
+    public Deadline(String description, String by) throws DukeException {
+>>>>>>> branch-A-CodingStandard
         super(description);
         try {
             this.by = LocalDate.parse(by);
@@ -47,7 +51,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by, boolean isMarked) {
         this(description, by);
-        this.isDone = isMarked;
+        isDone = isMarked;
     }
 
     @Override
@@ -59,7 +63,8 @@ public class Deadline extends Task {
     @Override
     public String toData() {
         String formattedBy = by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return String.format("Deadline | marked: %s ; description: %s ; deadline: %s", this.isMarked(), this.description, formattedBy);
+        return String.format("Deadline | marked: %s ; description: %s ; deadline: %s", getMarkedStatus(),
+                this.description, formattedBy);
     }
 
     /**

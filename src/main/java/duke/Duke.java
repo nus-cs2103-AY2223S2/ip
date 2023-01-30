@@ -23,6 +23,9 @@ public class Duke {
     /**
      * Sends out the display of the respective tasks.
      */
+=======
+    private TaskList taskList;
+>>>>>>> branch-A-CodingStandard
     private final Ui UI;
 
     /**
@@ -35,10 +38,10 @@ public class Duke {
         UI = new Ui();
         STORAGE = new Storage(filePath);
         try {
-            tasks = new TaskList(STORAGE.load());
+            taskList = new TaskList(STORAGE.load());
         } catch (DukeException e) {
             UI.showError(e.getMessage());
-            tasks = new TaskList();
+            taskList = new TaskList();
         }
     }
 
@@ -66,12 +69,12 @@ public class Duke {
                 String fullCommand = UI.readCommand();
                 UI.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, UI, STORAGE);
+                c.execute(taskList, UI, STORAGE);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 UI.showError(e.getMessage());
             } catch (Exception e) {
-                UI.showMsg("Unknown command/error not caught!\n" + "Please try again!");
+                UI.showMsg("Unknown command/error not caught!\n Please try again!");
             } finally {
                 UI.showLine();
             }

@@ -26,6 +26,11 @@ public class AddDeadlineCommand extends Command {
     public AddDeadlineCommand(String commandString, String DATA) {
         super(Commands.ADD_DEADLINE, commandString);
         this.DATA = DATA;
+=======
+    public AddDeadlineCommand(String commandString, String data) {
+        super(AvailableCommands.ADD_DEADLINE, commandString);
+        DATA = data;
+>>>>>>> branch-A-CodingStandard
     }
 
     /**
@@ -38,15 +43,15 @@ public class AddDeadlineCommand extends Command {
      * @param storage Storage to deal with input and output of data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String[] splitData = this.DATA.split(" /by ", 2);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String[] splitData = DATA.split(" /by ", 2);
         if (splitData.length < 2) {
             throw new DukeException("Deadline command format error. Missing /by");
         }
 
         Task deadline = new Deadline(splitData[0], splitData[1]);
-        tasks.addTask(deadline);
+        taskList.addTask(deadline);
 
-        ui.showAddTask(deadline.toString(), tasks.size());
+        ui.showAddTask(deadline.toString(), taskList.size());
     }
 }

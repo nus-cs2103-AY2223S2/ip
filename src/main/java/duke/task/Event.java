@@ -23,6 +23,7 @@ public class Event extends Task {
      */
     protected LocalDate to;
 
+<<<<<<< HEAD
     /**
      * Constructor for an event task with the given description, start and end date. It checks on whether the start
      * and end dates are in the appropriate format first. If it is not, an exception is throw to provide hints on the
@@ -33,6 +34,9 @@ public class Event extends Task {
      * @param to          The end date of the event
      */
     public Event(String description, String from, String to) {
+=======
+    public Event(String description, String from, String to) throws DukeException {
+>>>>>>> branch-A-CodingStandard
         super(description);
         try {
             this.from = LocalDate.parse(from);
@@ -56,7 +60,7 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to, boolean isMarked) {
         this(description, from, to);
-        this.isDone = isMarked;
+        isDone = isMarked;
     }
 
     @Override
@@ -70,7 +74,8 @@ public class Event extends Task {
     public String toData() {
         String formattedFrom = from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String formattedTo = to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return String.format("Event | marked: %s ; description: %s ; from: %s ; to: %s", this.isMarked(), this.description, formattedFrom, formattedTo);
+        return String.format("Event | marked: %s ; description: %s ; from: %s ; to: %s", getMarkedStatus(),
+                description, formattedFrom, formattedTo);
     }
 
     /**

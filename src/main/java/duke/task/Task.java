@@ -29,7 +29,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Task {
      * @param isDone      Whether the task is done or not
      */
     public Task(String description, boolean isDone) {
-        this.description = description;
+        this(description);
         this.isDone = isDone;
     }
 
@@ -56,14 +56,14 @@ public class Task {
      * Marks the task as done.
      */
     public void markTask() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
      * Unmark the task as not done.
      */
     public void unmarkTask() {
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -73,7 +73,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 
     /**
@@ -82,9 +82,10 @@ public class Task {
      * @return Boolean on whether it is an empty task
      */
     public boolean isEmpty() {
-        return this.equals(EMPTY_TASK);
+        return equals(EMPTY_TASK);
     }
 
+<<<<<<< HEAD
     /**
      * Return string representation of the marked status
      *
@@ -92,6 +93,10 @@ public class Task {
      */
     public String isMarked() {
         return this.isDone ? "1" : "0";
+=======
+    public String getMarkedStatus() {
+        return isDone ? "1" : "0";
+>>>>>>> branch-A-CodingStandard
     }
 
     /**
@@ -100,7 +105,7 @@ public class Task {
      * @return String representation of task to be stored for future imports
      */
     public String toData() {
-        return String.format("Task | marked: %s ; description: %s", this.isMarked(), this.description);
+        return String.format("Task | marked: %s ; description: %s", getMarkedStatus(), description);
     }
 
     /**
