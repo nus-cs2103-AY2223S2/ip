@@ -31,17 +31,21 @@ public class Storage {
     public static TaskList loadData(TaskList taskList, String filePath) throws IOException {
         try {
             taskList = readFromFile(filePath);
+            //System.out.println(taskList.listItems());
             System.out.println("Hrmm Hrmm, some past tasks I see!!\n'list' command to see more, you must enter");
-            System.out.println(BANNER);
+            //System.out.println(BANNER);
+            //return "Hrmm Hrmm, some past tasks I see!!\n'list' command to see more, you must enter";
             return taskList;
         } catch (FileNotFoundException e) {
             Path path = Paths.get("src/main/data");
             Files.createDirectories(path);
             File newTaskFile = new File(filePath);
             newTaskFile.createNewFile();
-            System.out.println("A new file created, I have!");
+            taskList = new TaskList();
+            //System.out.println("A new file created, I have!");
+            return taskList;
         }
-        return new TaskList();
+        //return "A new file created, I have";
     }
 
     /**
@@ -61,6 +65,8 @@ public class Storage {
             taskList.addTaskSilent(task);
         }
         fileScanner.close();
+//        System.out.println("Inside reader");
+//        System.out.println(taskList.listItems());
         return taskList;
     }
 

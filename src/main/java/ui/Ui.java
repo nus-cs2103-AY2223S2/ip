@@ -47,6 +47,13 @@ public class Ui {
     public void displayWelcomeMessage() {
         System.out.println(String.format("%s\n%s\n%s", BANNER, WELCOME_MSG, BANNER));
     }
+    public String getWelcomeMsg() {
+        return WELCOME_MSG;
+    }
+    public String getByeMsg() {
+        return BYE_MSG;
+    }
+
     public void showMessage(String message) {
         System.out.println(message);
     }

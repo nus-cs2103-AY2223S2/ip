@@ -27,6 +27,14 @@ public class TaskList {
         addTaskSilent(task);
         System.out.println(String.format("%d tasks in the list, you have now.", getSize()));
     }
+    public Task get(String idx) {
+        try {
+            int index = Integer.parseInt(idx) - 1;
+            return taskList.get(index);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     /**
      * Adds task to task list without any messages
@@ -120,9 +128,10 @@ public class TaskList {
      * Prints the names of tasks in the list in the top-down list format with numbered indexes
      * starting from 1 added in chronological order whereas returns empty list string if task list is empty.
      */
-    public void listItems() {
+    public String listItems() {
         if (this.getSize() == 0) {
             System.out.println("Empty, this list is !");
+            return "Empty, this list is !";
         } else {
             String out = "";
             for (int i = 0; i < this.getSize() - 1; i++) {
@@ -130,9 +139,10 @@ public class TaskList {
             }
             System.out.println(out + String.format("%d.%s", this.getSize(),
                     taskList.get(this.getSize() - 1).toString()));
+            return out + String.format("%d.%s", this.getSize(),
+                    taskList.get(this.getSize() - 1).toString());
         }
     }
-
     /**
      * Getter method to retrieve the task list.
      * @return
