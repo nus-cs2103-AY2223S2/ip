@@ -2,7 +2,27 @@ package duke.io.input.exception;
 
 import java.util.Arrays;
 import java.util.List;
+
+/**
+ * An implementation of the {@code DukeException} template. It is used
+ * to detect errors within user's input, and throw the corresponding
+ * error message
+ *
+ */
+
 public class UserInputException extends Exception {
+
+    /**
+     * Makes sense of the user's input. Detects incorrect inputs and
+     * OutOfBound errors. Throw corresponding error message when such error
+     * is detected
+     *
+     * @param input the user's newest input
+     * @param currentSize the currentSize of the list of tasks, which is also
+     *                    the current number of tasks
+     * @throws DukeException when input has incorrect format, and when index of list of tasks
+     *                       is OutOfBound
+     */
     public static void checkUserInput(String input, int currentSize) throws DukeException {
         String[] inputSplitArray = input.split(" ");
         List<String> inputSplitList = Arrays.asList(inputSplitArray);

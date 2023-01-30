@@ -10,12 +10,25 @@ import duke.util.service.ToDo;
 import duke.util.service.Deadline;
 import duke.util.service.ScheduledEvent;
 
+/**
+ * A more specific implementation of {@code Event}.
+ *
+ * Part of the workflow where the chatbot determines the next
+ * possible action based on the user's input
+ */
+
 public class DoTask extends Event {
     boolean firstGreet;
     String lastCommand;
     TaskList taskList;
     String removedTask;
 
+    /**
+     * Constructs the initial {@code DoTask} event when
+     * user uses Duke for the first time. The last command,
+     * as well as the taskList, is empty.
+     *
+     */
     public DoTask() {
         super(false);
         this.firstGreet = true;
@@ -23,12 +36,34 @@ public class DoTask extends Event {
         this.taskList = new TaskList();
     }
 
+    /**
+     * Constructs the new {@code DoTask} event after the user has
+     * entered an input.
+     *
+     * @param firstGreet is true if it's the first time user interacts with Duke;
+     *                   false otherwise
+     * @param lastCommand the last input entered by user
+     * @param taskList the current list of tasks at the moment
+     *                 the user enters the new input
+     */
     public DoTask(boolean firstGreet, String lastCommand, TaskList taskList) {
         super(false);
         this.firstGreet = firstGreet;
         this.lastCommand = lastCommand;
         this.taskList = taskList;
     }
+
+    /**
+     * Constructs the new {@code DoTask} event after the user has
+     * deleted a task in the list of tasks.
+     *
+     * @param firstGreet is true if it's the first time user interacts with Duke;
+     *                   false otherwise
+     * @param lastCommand the last input entered by user
+     * @param taskList the current list of tasks at the moment
+     *                 the user enters the new input
+     * @param removedTask the task removed by user from the previous command
+     */
 
     public DoTask(boolean firstGreet, String lastCommand, TaskList taskList, String removedTask) {
         super(false);
@@ -37,6 +72,13 @@ public class DoTask extends Event {
         this.taskList = taskList;
         this.removedTask = removedTask;
     }
+
+    /**
+     * Determines the next possible action after the user has entered an input.
+     *
+     * @return a new event that follows from the last user input
+     */
+
     public Event toNext() {
         Scanner sc = new Scanner(System.in);
         String nextTask = sc.nextLine();
