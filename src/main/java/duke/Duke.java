@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Encapsulates the main Duke app.
+ */
 public class Duke {
 
     private Storage storage;
@@ -7,6 +10,10 @@ public class Duke {
     private Parser parser;
     private Ui ui = new Ui();
 
+    /**
+     * Creates a new Duke object.
+     * @param filepath the filepath to store the list externally.
+     */
     public Duke(String filepath) {
         this.storage = new Storage(filepath);
         try {
@@ -22,6 +29,9 @@ public class Duke {
         duke.runApp();
     }
 
+    /**
+     * Runs the program.
+     */
     public void runApp() {
         ui.showDuke();
         ui.greetingMessage();

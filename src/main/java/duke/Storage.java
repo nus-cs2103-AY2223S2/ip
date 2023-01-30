@@ -6,13 +6,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a store that stores a file containing the list of tasks.
+ */
 public class Storage {
     private File file;
 
+    /**
+     * Creates a new Storage object.
+     * @param filepath The path of the file to be created to store the list.
+     */
     Storage(String filepath) {
         this.file = new File(filepath);
     }
 
+    /**
+     * Stores the current TaskList into a file
+     * @param list The TaskList object containing an ArrayList of Tasks
+     * @throws DukeException Throws a DukeException
+     */
     public void save(TaskList list) throws DukeException {
         ArrayList<String> temp = new ArrayList<>();
         try {
@@ -28,6 +40,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads Tasks from the saved text file to return the ArrayList of Tasks
+     * @return The ArrayList of tasks from the peviously saved text file
+     * @throws DukeException Throws a DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -81,8 +98,4 @@ public class Storage {
         }
         return tasks;
     }
-
-
-
-
 }
