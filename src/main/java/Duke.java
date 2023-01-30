@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
     private static final String greeting = "____________________________________________________________\n" + "Hello! I'm Duke\n" + "What can I do for you?\n" + "____________________________________________________________";
@@ -49,7 +50,7 @@ public class Duke {
                     case "deadline":
                         String deadlineInst = sc.nextLine();
                         String[] deadlineArr = deadlineInst.split("/by");
-                        addTask(new Deadline(deadlineArr[0].trim(), deadlineArr[1].trim()));
+                        addTask(new Deadline(deadlineArr[0].trim(), LocalDate.parse(deadlineArr[1].trim())));
                         break;
                     case "todo":
                         addTask(new Todo(sc.nextLine().trim()));
@@ -57,7 +58,7 @@ public class Duke {
                     case "event":
                         String eventInst = sc.nextLine();
                         String[] eventArr = eventInst.split("/");
-                        addTask(new Event(eventArr[0].trim(), eventArr[1].substring(5).trim(), eventArr[2].substring(3).trim()));
+                        addTask(new Event(eventArr[0].trim(), LocalDate.parse(eventArr[1].substring(5).trim()), LocalDate.parse(eventArr[2].substring(3).trim())));
                         break;
                     case "mark": {
                         int num = sc.nextInt();
@@ -150,14 +151,14 @@ public class Duke {
                         addTask(todo);
                         break;
                     case "D":
-                        Task deadline = new Deadline(task[2], task[3]);
+                        Task deadline = new Deadline(task[2], LocalDate.parse(task[3]));
                         if (task[1].equals("1")) {
                             deadline.markDone();
                         }
                         addTask(deadline);
                         break;
                     case "E":
-                        Task event = new Event(task[2], task[3], task[4]);
+                        Task event = new Event(task[2], LocalDate.parse(task[3]), LocalDate.parse(task[4]));
                         if (task[1].equals("1")) {
                             event.markDone();
                         }
