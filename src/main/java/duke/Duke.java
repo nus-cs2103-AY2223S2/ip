@@ -74,18 +74,29 @@ public class Duke {
         storage.saveData(FILEPATH, taskList);
         System.out.println(BANNER);
     }
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
     public String handleResponse(String input) {
         try {
+            if (isExit && input.isEmpty()) {
+                Stage currentStage = (Stage) dialogContainer.getScene().getWindow();
+                currentStage.close();
+            } else {
+                isExit = true;
+            }
             Command command = commandParser.parse(input);
             String reply = command.execute(taskList, ui, storage);
             isExit = command.isExit();
+            if (isExit) {
+                reply += "\n" + saveTasks()
+                        + "\nPress Enter again to exit";
+            }
             return reply;
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+    public String saveTasks() {
+        String status = storage.saveData(FILEPATH, taskList);
+        return status;
     }
 
     public Ui getUi() {

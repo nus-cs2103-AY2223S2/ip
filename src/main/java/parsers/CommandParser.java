@@ -4,6 +4,7 @@ import commands.*;
 import exceptions.DukeException;
 import exceptions.IncompleteCommandException;
 import exceptions.UnknownCommandException;
+import formatters.StringUtils;
 
 /**
  * Represents a parser which takes a command and outputs a Command object for Duke to execute.
@@ -43,7 +44,8 @@ public class CommandParser extends Parser {
             case EVENT:
                 return new AddTaskCommand(response);
             case FIND:
-                return new FindTaskCommand(commands[1]);
+                String keywords = StringUtils.joinString(commands, 1, commands.length - 1);
+                return new FindTaskCommand(keywords.trim());
             default:
                 throw new UnknownCommandException("Fall to the Dark Side, you must not. "
                         + "Invalid Command!", null);

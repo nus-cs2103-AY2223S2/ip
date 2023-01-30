@@ -65,8 +65,6 @@ public class Storage {
             taskList.addTaskSilent(task);
         }
         fileScanner.close();
-//        System.out.println("Inside reader");
-//        System.out.println(taskList.listItems());
         return taskList;
     }
 
@@ -75,7 +73,7 @@ public class Storage {
      * @param filepath path of the file to write tasks into
      * @param taskList task list containing task to write to file
      */
-    public void saveData(String filepath, TaskList taskList) {
-        DukeFileWriter.writeToFile(filepath, taskList);
+    public String saveData(String filepath, TaskList taskList) {
+        return DukeFileWriter.writeToFile(filepath, taskList);
     }
 }

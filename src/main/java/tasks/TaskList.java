@@ -62,7 +62,7 @@ public class TaskList {
     public TaskList findByKeyword(String keyword) {
         TaskList filteredTasks = new TaskList();
         this.taskList.stream()
-                .filter(x-> x.toString().contains(keyword))
+                .filter(x-> x.toString().trim().contains(keyword))
                 .forEach(x -> {
                     filteredTasks.addTaskSilent(x);
                 });
