@@ -1,5 +1,5 @@
 # User Guide to Mr. Bear!
-
+![Ui](./UI.png)
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
   * [Run the project in intelliJ](#run-the-project-in-intellij)
@@ -34,8 +34,6 @@ The Mr. Bear Application is a chatbot designed to assist users with various task
 This project, Mr. Bear, is based on [Project Duke](https://github.com/nus-cs2103-AY2223S2/ip) and is an educational tool that helps new software developers improve their skills through the gradual construction of the project and the discovery of various software engineering principles.
 
 This is a simple user guide for the usage of Mr. Bear Application.
-
-![Ui](./Ui.png)
 
 ## Quick Start
 
@@ -87,7 +85,7 @@ This is a simple user guide for the usage of Mr. Bear Application.
 5. You should expect to see a Graphical User Interface(GUI) appear in a few second
 6. You should expect to see a window as shown below: 
 
-![GUI of BILL](Ui.png)
+![welcome](welcome.png)
 
 7. Once the application is running, type the help command to view a list of available commands and learn what tasks the chatbot can assist with.
 ```
