@@ -92,14 +92,14 @@ public class Storage {
                 break;
             case "D":
                 String by = inputList[2];
-                LocalDateTime deadline = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                LocalDateTime deadline = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
                 tasks.addTask(new Deadline(taskName, deadline));
                 break;
             case "E":
                 String from = inputList[2];
                 String to = inputList[3];
-                LocalDateTime startDate = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
-                LocalDateTime endDate = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                LocalDateTime startDate = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+                LocalDateTime endDate = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
                 tasks.addTask(new Event(taskName, startDate, endDate));
                 break;
             default:
