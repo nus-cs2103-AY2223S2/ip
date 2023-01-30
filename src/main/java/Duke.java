@@ -73,7 +73,7 @@ public class Duke {
                 mainStorage.addTask(newEvent);
                 mainUi.printReply("event", newEvent);
                 break;
-            case "find": {
+            case "find":
                 parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
 
                 // ask mainStorage to return an ArrayList of matching tasks
@@ -82,7 +82,6 @@ public class Duke {
                 // ask mainUi to print out each task one by one
                 mainUi.printMatchingTasks(matchingTasks);
                 break;
-            }
             case "todo":
                 try {
                     parsed = Parser.parse(command, Parser.ParseFunctions.TODO);
