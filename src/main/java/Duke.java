@@ -120,4 +120,8 @@ public class Duke {
     private static void prettyPrint(String output) {
         System.out.println(">>> " + output);
     }
+
+    private static void saveState() {
+
+    }
 }

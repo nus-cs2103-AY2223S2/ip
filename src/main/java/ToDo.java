@@ -7,4 +7,9 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String getCsvString() {
+        return String.format("T,%s,%s", super.toString());
+    }
 }
