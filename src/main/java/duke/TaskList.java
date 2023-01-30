@@ -1,12 +1,13 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
-    public static ArrayList<Task> allTasks = new ArrayList<>();
+    public static List<Task> allTasks;
     public static int taskCount = 0;
 
-    private TaskList(ArrayList<Task> tasks) {
+    private TaskList(List<Task> tasks) {
         allTasks = tasks;
         taskCount = tasks.size();
     }
@@ -15,7 +16,7 @@ public class TaskList {
         return new TaskList(new ArrayList<Task>());
     }
 
-    public void loadFrom(ArrayList<Task> tasks) {
+    public void loadFrom(List<Task> tasks) {
         allTasks = tasks;
         taskCount = tasks.size();
     }
@@ -29,7 +30,7 @@ public class TaskList {
     } 
 
     public ArrayList<Task> getAllTasks() {
-        return allTasks;
+        return new ArrayList<>(allTasks);
     }
 
     public void addTask(Task task) {

@@ -99,7 +99,7 @@ public class DukeIO {
 
     public void showAll() {
         int taskCount = TaskList.taskCount;
-        ArrayList<Task> allTasks = TaskList.allTasks;
+        ArrayList<Task> allTasks = new ArrayList<>(TaskList.allTasks);
         System.out.println(SEPERATOR + "All Tasks:");
         for (Integer i = 0; i < taskCount; i++) {
             String showString = "   "  + Integer.toString(i+1)+ ": "
