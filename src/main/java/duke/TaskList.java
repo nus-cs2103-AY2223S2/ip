@@ -46,24 +46,17 @@ public class TaskList {
     /**
      * Method to handle adding a task to the underlying list, and trigger corresponding <code>Ui</code> event.
      * @param task Target <code>Task</code> to be added to list.
-     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      */
-    void addTaskToList(Task task, Ui ui) {
+    void addTaskToList(Task task) {
         this.tasks.add(task);
-        ui.displayMessage("Got it. I've added this task:\n" +
-                task.toString() +
-                "\nNow you have " +
-                tasks.size() +
-                " tasks in the list\n");
     }
 
     /**
      * Method to check the validity of the format of a <code>ToDo</code> task, and adds it to the list.
      * @param tokens <code>String[]</code> of arguments from <code>Parser</code>.
-     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      * @throws DukeException In the event that the name of the task is not specified.
      */
-    void addToDo(String[] tokens, Ui ui) throws DukeException {
+    Task addToDo(String[] tokens) throws DukeException {
         StringBuilder sb = new StringBuilder();
         if (tokens.length < 2) {
             throw new DukeException("The description of a todo cannot be empty");
@@ -73,17 +66,17 @@ public class TaskList {
         }
         sb.deleteCharAt(sb.length()-1);
         ToDo td = new ToDo(sb.toString());
-        addTaskToList(td, ui);
+        addTaskToList(td);
+        return td;
     }
 
     /**
      * Method to check the validity of the format of a <code>DeadLine</code> task, and adds it to the list.
      * @param tokens <code>String[]</code> of arguments from <code>Parser</code>.
-     * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      * @throws DukeException In the event that the name of the task is not specified, or the deadline is not specified
      * in the correct format with <code>/by</code> tag.
      */
-    void addDeadline(String[] tokens, Ui ui) throws DukeException {
+    Task addDeadline(String[] tokens) throws DukeException {
         StringBuilder sb = new StringBuilder();
         int idxDelimiter = Arrays.asList(tokens).indexOf("/by");
         if (idxDelimiter == -1) {
@@ -104,9 +97,10 @@ public class TaskList {
             String dueDate = sb.deleteCharAt(sb.length()-1).toString();
             try {
                 Task task = new Deadline(taskName, dueDate);
-                addTaskToList(task, ui);
+                addTaskToList(task);
+                return task;
             } catch (DateTimeParseException e) {
-                ui.displayMessage("Please enter a valid date in the format YYYY-MM-DD/HH:mm\n");
+                throw new DukeException("Please enter a valid date in the format YYYY-MM-DD/HH:mm\n");
             }
         }
     }
@@ -118,7 +112,7 @@ public class TaskList {
      * @throws DukeException In the event that the name of the task is not specified, or the from and to date times are
      * not specified in the correct format with <code>/from</code> and <code>/to</code> tags.
      */
-    void addEvent(String[] tokens, Ui ui) throws DukeException {
+    Task addEvent(String[] tokens, Ui ui) throws DukeException {
         StringBuilder sb = new StringBuilder();
         int idxFrom = Arrays.asList(tokens).indexOf("/from");
         int idxTo = Arrays.asList(tokens).indexOf("/to");
@@ -151,7 +145,8 @@ public class TaskList {
             String taskTo = sb.deleteCharAt(sb.length()-1).toString();
             try {
                 Task task = new Event(taskName, taskFrom, taskTo);
-                addTaskToList(task, ui);
+                addTaskToList(task);
+                return task;
             } catch (DateTimeParseException e) {
                 throw new DukeException("Please enter valid dates in the format YYYY-MM-DD/HH:mm\n");
             }
@@ -163,11 +158,11 @@ public class TaskList {
      * @param tokens <code>String[]</code> of arguments from <code>Parser</code>, specifying the index to mark.
      * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      */
-    String markListItem(String[] tokens, Ui ui) throws DukeException {
+    Task markListItem(String[] tokens, Ui ui) throws DukeException {
         try {
             int listIndex = Integer.parseInt(tokens[1])-1;
             tasks.get(listIndex).setStatus("X");
-            return tasks.get(listIndex).toString() + "\n";
+            return tasks.get(listIndex);
         } catch (NumberFormatException e) {
             throw new DukeException("Please specify a numerical task index to mark\n");
         } catch (IndexOutOfBoundsException e) {
@@ -180,11 +175,11 @@ public class TaskList {
      * @param tokens <code>String[]</code> of arguments from <code>Parser</code>, specifying the index to unmark.
      * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      */
-    String unmarkListItem(String[] tokens, Ui ui) throws DukeException {
+    Task unmarkListItem(String[] tokens, Ui ui) throws DukeException {
         try {
             int listIndex = Integer.parseInt(tokens[1]) - 1;
             tasks.get(listIndex).setStatus(" ");
-            return tasks.get(listIndex).toString();
+            return tasks.get(listIndex);
         } catch (NumberFormatException e) {
             throw new DukeException("Please specify a numerical task index to unmark\n");
         } catch (IndexOutOfBoundsException e) {
@@ -199,7 +194,7 @@ public class TaskList {
      * @throws DukeException In the event that the specified list index is out of bounds, or the argument corresponding
      * to the deletion index is not an integer.
      */
-    String deleteItem(String[] tokens, Ui ui) throws DukeException {
+    Task deleteItem(String[] tokens, Ui ui) throws DukeException {
         if (tokens.length != 2) {
             throw new DukeException("please specify delete command as delete [list index]");
         } else if (tasks.size() == 0) {
@@ -207,8 +202,7 @@ public class TaskList {
         }
         try {
             int listIndex = Integer.parseInt(tokens[1]) - 1;
-            Task removed = tasks.remove(listIndex);
-            return removed.toString();
+            return tasks.remove(listIndex);
         } catch (NumberFormatException e) {
             throw new DukeException("please specify a valid number to delete entry\n");
         } catch (IndexOutOfBoundsException e) {

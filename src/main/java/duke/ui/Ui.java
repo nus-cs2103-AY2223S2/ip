@@ -13,8 +13,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.List;
-
 /**
  * This class handles the formatting and outputting of text based UI to the user.
  */
@@ -31,28 +29,19 @@ public class Ui {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Method to format and print the desired message to stdout.
-     * @param message <code>String</code> of message to be displayed. Include newline character at end of message.
-     */
-    public void displayMessage(String message) {
-        System.out.println(
-                "-----------------------------------------------------------\n" +
-                message +
-                "-----------------------------------------------------------\n"
-        );
-    }//todo
-
-    /**
      * Method to display standard welcome message to user.
      */
-    public void welcomeMessage() {
-        displayMessage("""
-                Hello! I'm Bob
-                What can I do for you?
-                """);
-    }//todo
+    public void displayWelcomeMessage() {
+        Label welcomeText = new Label("""
+                Welcome! My name is Duke.
+                How may I help?""");
+        displayDukeDialog(welcomeText);
+    }
 
-
+    public void displayGoodbyeMessage() {
+        Label goodbyeText = new Label(" Goodbye. Hope to see you again soon.");
+        displayDukeDialog(goodbyeText);
+    }
 
     public Pane initUiElems(Stage stage) {
         scrollPane = new ScrollPane();
@@ -120,10 +109,18 @@ public class Ui {
     private void handleUserInput(Duke context) {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(context.getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
+        displayUserDialog(userText);
+        displayDukeDialog(dukeText);
         userInput.clear();
+    }
+
+    private void displayUserDialog(Label userText) {
+        dialogContainer.getChildren()
+                .add(DialogBox.getUserDialog(userText, new ImageView(user)));
+    }
+
+    private void displayDukeDialog(Label dukeText) {
+        dialogContainer.getChildren()
+                .add(DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
     }
 }
