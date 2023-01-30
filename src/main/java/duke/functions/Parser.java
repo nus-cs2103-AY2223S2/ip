@@ -1,3 +1,13 @@
+package duke.functions;
+
+import duke.ToDoList;
+import duke.exceptions.DukeException;
+import duke.exceptions.InputDukeException;
+import duke.tasks.DeadlineTask;
+import duke.tasks.EventTask;
+import duke.tasks.Task;
+import duke.tasks.ToDoTask;
+
 public class Parser {
     private  Parser() {
     }
@@ -41,7 +51,7 @@ public class Parser {
             Parser.taskCommandHandler(input, ls);
             break;
         default:
-            throw new DukeException("The Duke does not understand your words!");
+            throw new DukeException("The duke.Duke does not understand your words!");
         }
         return false;
     }

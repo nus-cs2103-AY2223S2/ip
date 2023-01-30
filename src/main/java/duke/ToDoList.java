@@ -1,14 +1,10 @@
-import java.nio.file.Files;
+package duke;
+
+import duke.exceptions.IndexDukeException;
+import duke.tasks.Task;
+import duke.tasks.ToDoTask;
+
 import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Scanner;
-import java.nio.file.Path;
-import java.util.regex.Pattern;
 
 
 public class ToDoList {
@@ -33,7 +29,7 @@ public class ToDoList {
         arr.add(task);
     }
 
-    public Task delete(int ind) throws DukeException {
+    public Task delete(int ind) throws IndexDukeException {
         if (ind < 1 || ind > toDoCount) {
             throw new IndexDukeException();
         }
@@ -44,14 +40,14 @@ public class ToDoList {
     }
 
 
-    public void unmarkTask(int ind) throws DukeException {
+    public void unmarkTask(int ind) throws IndexDukeException {
         if (ind < 1 || ind > toDoCount) {
             throw new IndexDukeException();
         }
         arr.get(ind).markNotDone();
     }
 
-    public void markTask(int ind) throws DukeException {
+    public void markTask(int ind) throws IndexDukeException {
         if (ind < 1 || ind > toDoCount) {
             throw new IndexDukeException();
         }
