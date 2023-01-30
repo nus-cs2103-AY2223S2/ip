@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import duke.task.Task;
 
+/**
+ * Encapsulates the list of tasks user has inputted.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -35,6 +38,10 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Prints out all the tasks in the list by numbering them in order.
+     * @return printed tasks for the list command to show to user
+     */
     public String print() {
         StringBuilder msg = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {

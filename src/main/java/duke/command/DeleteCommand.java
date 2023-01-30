@@ -8,6 +8,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Represents the command to delete an existing task.
+ */
 public class DeleteCommand extends Command {
     private final int taskIndex;
 
@@ -15,6 +18,16 @@ public class DeleteCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * Deletes the intended task from tasks and
+     * updates the storage file accordingly.
+     * Informs user of successful execution of command via the ui.
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws IOException
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         if (taskIndex >= tasks.size()) {

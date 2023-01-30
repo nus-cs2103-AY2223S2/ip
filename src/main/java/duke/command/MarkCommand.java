@@ -8,6 +8,10 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Represents the command to mark a task as done
+ * or unmark it as not done.
+ */
 public class MarkCommand extends Command {
     private final boolean isMark;
     private final int taskIndex;
@@ -17,6 +21,16 @@ public class MarkCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * Updates the chosen task in tasks to be marked or unmarked
+     * and updates the storage file accordingly.
+     * Informs user of successful execution of command via the ui.
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @throws IOException
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         if (taskIndex >= tasks.size()) {
