@@ -11,6 +11,9 @@ public class Duke {
         System.out.println("\t Hello! I'm Duke");
         System.out.println("\t What can I do for you?");
 
+        String[] tasks = new String[100];
+        int taskIndex = 0;
+
         Scanner input = new Scanner(System.in);
 
         while (true) {
@@ -19,9 +22,16 @@ public class Duke {
             if (command.equals("bye")) {
                 System.out.println("\t Bye. Hope to see you again soon!");
                 break;
+            } else if (command.equals("list")) {
+                for (int i = 0; i < taskIndex; i++) {
+                    System.out.println("\t " + (i + 1) + ". " + tasks[i]);
+                }
             } else {
-                System.out.println("\t " + command);
+                tasks[taskIndex] = command;
+                taskIndex++;
+                System.out.println("\t added: " + command);
             }
         }
     }
 }
+
