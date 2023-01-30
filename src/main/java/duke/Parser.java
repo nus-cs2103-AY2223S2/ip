@@ -10,8 +10,16 @@ import duke.commands.MarkCommand;
 import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
 
+/**
+ * The class that process the command input by the client.
+ */
 public class Parser {
 
+    /**
+     * A static method that parse the input string.
+     *
+     * @return command objects based on different command keywords.
+     */
     public static Command parse(String input) throws DukeException {
         String[] arr1 = input.split("/");
         String[] arr2 = arr1[0].split(" ");

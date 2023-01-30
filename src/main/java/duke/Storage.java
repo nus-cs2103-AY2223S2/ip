@@ -6,16 +6,27 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * The class that store the data.
+ */
 public class Storage {
 
     private static String dataDir;
     private static String dataPath;
 
+    /**
+     * The constructor of this class.
+     */
     public Storage() {
         dataDir = System.getProperty("user.dir") + File.separator + "data";
         dataPath = dataDir + File.separator + "duke.txt";
     }
 
+    /**
+     * The method that load the data.
+     *
+     * @return the task list which is saved from last access.
+     */
     public TaskList load() {
         File dir = new File(dataDir);
         if (!dir.exists()) {
@@ -45,6 +56,11 @@ public class Storage {
         return todo;
     }
 
+    /**
+     * The method that save the tasks list into the storage file.
+     *
+     * @param todo
+     */
     public void save(TaskList todo) {
         FileOutputStream f1 = null;
         ObjectOutputStream f2 = null;

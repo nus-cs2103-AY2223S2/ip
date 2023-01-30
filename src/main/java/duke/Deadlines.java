@@ -6,11 +6,20 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A task type that the chatting bot can create.
+ */
 public class Deadlines extends Task {
 
     private LocalDate date = null;
     private LocalTime time = null;
 
+    /**
+     * The constructor of this class.
+     *
+     * @param name
+     * @param sTime
+     */
     public Deadlines(String name, String sTime) throws DukeException {
         super(name);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -29,14 +38,29 @@ public class Deadlines extends Task {
         }
     }
 
+    /**
+     * The method that returns the time of the deadline.
+     *
+     * @return the LocalTime variable of the deadline.
+     */
     public LocalTime getTime() {
         return this.time;
     }
 
+    /**
+     * The method that returns the date of the deadline.
+     *
+     * @return the LocalDate variable of the deadline.
+     */
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * The toString method.
+     *
+     * @return the task name with the specific deadline and status.
+     */
     public String toString() {
         DateTimeFormatter tf = DateTimeFormatter.ofPattern("HH:mm");
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy");
