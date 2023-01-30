@@ -80,7 +80,7 @@ public class Fideline {
                     int taskNumMark = Integer.valueOf(parsedInput.getArguments()[0]);
                     if (taskManager.checkTask(taskNumMark)) { // check if index given is valid
                         this.taskManager.markTask(taskNumMark); // marks the valid task
-                        botSays("nice work! i've taken note!:\n"
+                        botSays("nice work! i've taken note!:\n  "
                                 + this.taskManager.getTaskString(taskNumMark)); // success message (marked)
                     } else { // unable to mark, task at given index does not exist
                         botSays("uh hello?? can you check properly?\n "
@@ -91,7 +91,7 @@ public class Fideline {
                     int taskNumUnmark = Integer.valueOf(parsedInput.getArguments()[0]);
                     if (taskManager.checkTask(taskNumUnmark)) { // check if index given is valid
                         this.taskManager.unmarkTask(taskNumUnmark); // unmarks the valid task
-                        botSays("uhh okay... i've unmarked your task:\n"
+                        botSays("uhh okay... i've unmarked your task:\n  "
                                 + this.taskManager.getTaskString(taskNumUnmark)); // success message (unmarked)
                     } else { // unable to unmark, task at given index does not exist
                         botSays("uh hello?? can you check properly?\n "
