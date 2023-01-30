@@ -3,6 +3,9 @@ package duke.data.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Represents an event task.
+ */
 public class Event extends Task {
 
     protected LocalDate fromDate = null;
@@ -10,6 +13,13 @@ public class Event extends Task {
     protected LocalDate toDate = null;
     protected LocalTime toTime = null;
 
+    /**
+     * Constructor of event task.
+     *
+     * @param description Description of task.
+     * @param from Start of event.
+     * @param to End of event.
+     */
     public Event(String description, String from, String to) {
         super(description);
         // eg. 2019-12-01 10:15
@@ -26,13 +36,23 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * String representation of task for storage.
+     *
+     * @return String of task to store.
+     */
     @Override
     public String storageStr() {
         return "E | " + super.getStatusValue() + " | " + super.description
-                + " | " + this.fromDate + (this.fromTime != null? " " + this.fromTime : "")
-                + " | " + this.toDate + (this.toTime != null? " " + this.toTime : "");
+                + " | " + this.fromDate + (this.fromTime != null ? " " + this.fromTime : "")
+                + " | " + this.toDate + (this.toTime != null ? " " + this.toTime : "");
     }
 
+    /**
+     * String representation of task.
+     *
+     * @return String of task.
+     */
     @Override
     public String toString() {
         String result =  "[E]" + super.toString() + " (from: " + fromDate;

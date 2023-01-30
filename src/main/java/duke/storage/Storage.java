@@ -12,13 +12,19 @@ import duke.data.task.Task;
 import duke.data.task.Todo;
 
 /**
- * Represents storage of saved tasks
+ * Represents storage of saved tasks.
  */
 public class Storage {
 
     private String filePath;
     private File f;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath Filepath to create file for loading and saving.
+     * @throws DukeException If file creation fails.
+     */
     public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
         f = new File(filePath);
@@ -32,6 +38,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads in stored tasks from file.
+     *
+     * @return ArrayList of stored tasks.
+     * @throws DukeException If load fails.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -61,6 +73,12 @@ public class Storage {
 
     }
 
+    /**
+     * Saves current tasks to file.
+     *
+     * @param taskListString String containing current tasks.
+     * @throws DukeException If file writing fails
+     */
     public void save(String taskListString) throws DukeException {
         try {
             FileWriter fw = new FileWriter("src/main/java/duke/data/duke.txt");
