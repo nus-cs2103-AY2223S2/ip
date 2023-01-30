@@ -3,6 +3,7 @@ package duke.command;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import duke.constant.Message;
@@ -43,7 +44,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Constructor
+     * Base Constructor
      */
     public ListCommand(Optional<LocalDateTime> filterDate, Optional<String> filterString) {
         this.filterDate = filterDate;
@@ -97,6 +98,70 @@ public class ListCommand extends Command {
             ui.printConsole(Message.LIST_EMPTY);
         }
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(DukeRepo db, Consumer<String> con) {
+        List<Task> filtered;
+        StringBuilder sb = new StringBuilder();
+
+        if(!filterDate.isEmpty()) {
+            sb.append(Message.FIND_TASKS + "\n");
+            filtered = filter(db, filterDate.get());
+        }else if(!filterString.isEmpty()) {
+            sb.append(Message.FIND_TASKS + "\n");
+            filtered = filter(db, filterString.get());
+        } else {
+            sb.append(Message.LIST_TASKS + "\n");
+            filtered = db.getAllTask();
+        }
+
+        for (int i = 0; i < filtered.size(); i++) {
+            sb.append(String.format("\t%d. %s", i + 1, filtered.get(i)) + "\n");
+        }
+
+        con.accept(sb.toString());
+    }
+
+    /**
+     * Filters task list by date.
+     *
+     * @param db
+     * @param date
+     * @return
+     */
+    private List<Task> filter(DukeRepo db, LocalDateTime date) {
+        return db.getAllTask().stream().filter(task -> {
+            if (task instanceof Deadline) {
+                Deadline d = (Deadline) task;
+                if (d.getBy().toLocalDate().equals(date.toLocalDate())) {
+                    return true;
+                }
+            }
+            if (task instanceof Event) {
+                Event e = (Event) task;
+                if (e.getFrom().toLocalDate().equals(date.toLocalDate())) {
+                    return true;
+                }
+            }
+            return false;
+        }).collect(Collectors.toList());
+    }
+
+    /**
+     * Filters task list by keyword.
+     *
+     * @param db
+     * @param keyword
+     * @return
+     */
+    private List<Task> filter(DukeRepo db, String keyword) {
+        return db.getAllTask().stream()
+            .filter(task -> task.toString().contains(keyword))
+            .collect(Collectors.toList());
     }
 
     /**

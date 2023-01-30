@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.function.Consumer;
+
 import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.ui.Ui;
@@ -18,6 +20,15 @@ public class ExitCommand extends Command {
     public void execute(DukeRepo db, Ui ui) {
         db.close();
         ui.printConsole(Message.BYE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(DukeRepo db, Consumer<String> con) {
+        db.close();
+        con.accept(Message.BYE);
     }
 
     /**

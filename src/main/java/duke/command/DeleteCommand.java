@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.function.Consumer;
+
 import duke.constant.Message;
 import duke.database.DukeRepo;
 import duke.ui.Ui;
@@ -34,6 +36,22 @@ public class DeleteCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             ui.printConsole(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(DukeRepo db, Consumer<String> con) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            sb.append(Message.DELETE_TASK + "\n");
+            sb.append("\t" + db.removeTask(taskId) + "\n");
+            sb.append(String.format(Message.COUNT_TASK, db.count()) + "\n");
+        } catch (IndexOutOfBoundsException e) {
+            sb.append(Message.EXCEPTION_INVALID_TASK_ID_ACCESS);
+        }
+        con.accept(sb.toString());
     }
 
     /**
