@@ -6,6 +6,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 /**
  * Represents a Duke chatbot that stores a tasklist.
@@ -17,53 +18,40 @@ public class Duke {
     private static Storage storage;
     private static Ui ui = new Ui();
 
+    public Duke() {
+
+    }
+
     /**
      * Constructor.
      * @param filePath Path of the file where task data is stored.
      */
-    private Duke(String filePath) {
+    public Duke(String filePath) throws DukeException {
         storage = new Storage(filePath);
+        taskList = storage.load(parser);
+    }
+
+    private String acceptOneCommand(String input) {
         try {
-            taskList = storage.load(parser);
-        } catch (DukeException e) {
-            ui.printMessage(e.toString());
-        }
-    }
-
-    private void run() {
-        ui.greet();
-        acceptCommands();
-        ui.sayGoodbye();
-    }
-
-    // Loop for user input
-    private void acceptCommands() {
-        String input;
-        while (true) {
-            ui.printPromptForInput();
-            input = ui.getInputFromUser();
-
-            // Split into two parts at the first space
-            try {
-                Command command = parser.parseCommand(input);
-                if (command.isExit()) {
-                    return;
-                } else {
-                    command.execute(taskList, ui, storage);
-                }
-                storage.save(taskList);
-            } catch (DukeException e) {
-                ui.printMessage(e.toString());
+            Command command = parser.parseCommand(input);
+            if (command.isExit()) {
+                Platform.exit();
+            } else {
+                return command.execute(taskList, ui, storage);
             }
+            storage.save(taskList);
+            return null;
+        } catch (DukeException e) {
+            return e.toString();
         }
     }
 
     /**
-     * The main methods. Creates and runs a Duke instance.
-     * @param args The command line arguments.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
-        duke.run();
+    public String getResponse(String input) {
+        return acceptOneCommand(input);
     }
+
 }

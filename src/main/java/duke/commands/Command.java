@@ -18,7 +18,8 @@ public abstract class Command {
      * @param taskList The task list to be used.
      * @param ui The ui to be used.
      * @param storage The storage to be used.
+     * @return The string to be printed.
      * @throws DukeException If the command cannot be executed correctly.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 }

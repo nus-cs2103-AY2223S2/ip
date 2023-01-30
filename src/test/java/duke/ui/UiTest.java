@@ -45,7 +45,7 @@ public class UiTest {
 
     @Test
     public void testGreet() {
-        ui.greet();
+        ui.getGreeting();
         assertEquals("___________________________\n"
                 + "Hello, I am Duke.\n"
                 + "What can I do for you?\n"

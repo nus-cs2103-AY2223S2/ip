@@ -20,13 +20,12 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidArgumentDukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidArgumentDukeException {
         try {
             String taskString = taskList.getTaskString(number);
             taskList.remove(number);
-            ui.printMessage("Ok. I have deleted this task:\n"
-                    + taskString
-            );
+            return "Ok. I have deleted this task:\n"
+                    + taskString;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidArgumentDukeException();
         }
