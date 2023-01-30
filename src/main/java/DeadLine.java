@@ -1,6 +1,6 @@
 public class DeadLine extends Task {
     private String dateTime;
-    public DeadLine(String str, boolean checked, String dateTime) {
+    private DeadLine(String str, boolean checked, String dateTime) {
         super(str, checked);
         this.dateTime = dateTime;
     }

@@ -15,8 +15,7 @@ public class Duke {
     public void run() throws IOException {
         ui.printWelcomeMsg();
         ui.printLine();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        String str = bufferedReader.readLine();
+        String str = ui.readCommand();
         TaskList taskList = storage.readData();
         while (!str.equals("bye")) {
             String[] arr = str.split(" ", 2);
@@ -69,8 +68,7 @@ public class Duke {
             } catch (Exception e) {
                 System.out.println("Unknown error");
             }
-            str = bufferedReader.readLine();
-
+            str = ui.readCommand();
         }
         ui.printByeMsg();
     }

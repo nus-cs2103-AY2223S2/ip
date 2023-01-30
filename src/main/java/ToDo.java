@@ -1,5 +1,5 @@
 public class ToDo extends Task {
-    public ToDo(String str, boolean checked) {
+    private ToDo(String str, boolean checked) {
         super(str, checked);
     }
 

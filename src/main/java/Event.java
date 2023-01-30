@@ -1,7 +1,7 @@
 public class Event extends Task {
     private final String start;
     private final String end;
-    public Event(String str, boolean checked, String start, String end) {
+    private Event(String str, boolean checked, String start, String end) {
         super(str, checked);
         this.start = start;
         this.end = end;

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Ui {
     private final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -7,7 +9,13 @@ public class Ui {
 
     private final String DIVIDER_LINE = "_________________________________________________\n";
     private final String BYE_MSG = "Bye. Hope to see you again soon!";
+
+    private Scanner scanner;
     public Ui() {
+        scanner = new Scanner(System.in);
+    }
+    public String readCommand() {
+        return scanner.nextLine();
     }
     public void printWelcomeMsg() {
         System.out.println("Hello from\n" + LOGO + "\nWhat can I do for you?");
