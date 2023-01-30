@@ -4,6 +4,11 @@
  * @author JamesLiuZX
  * AY2223-S2 CS2103T
  */
+package duke.tasks;
+
+import duke.functions.DatabaseWriter;
+import duke.functions.Ui;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;

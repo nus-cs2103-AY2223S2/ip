@@ -1,16 +1,13 @@
-import javax.xml.crypto.Data;
-import java.io.*;
+package duke.functions;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.FileAlreadyExistsException;
+import duke.tasks.Task;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.List;
 
-import java.util.Objects;
-import java.util.stream.Stream;
 
 public class DatabaseWriter {
     private static final String folderPath = "data";

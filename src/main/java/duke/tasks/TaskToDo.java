@@ -4,6 +4,7 @@
  * @author JamesLiuZX
  * AY2223-S2 CS2103T
  */
+package duke.tasks;
 
 public class TaskToDo extends Task {
     public TaskToDo(String s) {

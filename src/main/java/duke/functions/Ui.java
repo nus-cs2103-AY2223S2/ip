@@ -1,9 +1,15 @@
+package duke.functions;
+
+import duke.exceptions.EmptyInputException;
+import duke.exceptions.InvalidCommandException;
+import duke.tasks.TaskList;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Ui {
-    protected static ArrayList<String> commandList = new ArrayList<>(Arrays.asList
+    public static ArrayList<String> commandList = new ArrayList<>(Arrays.asList
             ("todo", "deadline", "event", "mark", "unmark", "list", "bye", "delete"));
     public void run(TaskList records) {
         greet();

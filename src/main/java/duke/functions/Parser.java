@@ -1,3 +1,7 @@
+package duke.functions;
+
+import duke.tasks.TaskList;
+
 public class Parser {
     private TaskList list;
 

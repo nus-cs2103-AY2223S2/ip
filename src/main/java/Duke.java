@@ -1,3 +1,7 @@
+import duke.functions.Storage;
+import duke.tasks.TaskList;
+import duke.functions.Ui;
+
 public class Duke {
     protected static final String filePath = "./data/duke.txt";
     protected static final String database = "duke.txt";
@@ -21,4 +25,4 @@ public class Duke {
         d.storage.readDatabase(list);
         d.ui.run(list);
     }
-    }
+}

@@ -1,3 +1,7 @@
+package duke.functions;
+
+import duke.tasks.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -57,7 +61,7 @@ public class Storage {
 
     private void initialiseDatabase() {
         File f = new File(filePath);
-        File dir = new File(Duke.database);
+        File dir = new File("duke.txt");
         dir.mkdir();
         try {
             f.createNewFile();
