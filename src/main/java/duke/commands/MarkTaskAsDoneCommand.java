@@ -16,12 +16,11 @@ public class MarkTaskAsDoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws InvalidArgumentDukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidArgumentDukeException {
         try {
             taskList.markTaskAsDone(number);
-            ui.printMessage("Good job. You have finished this task:\n"
-                    + taskList.getTaskString(number)
-            );
+            return "Good job. You have finished this task:\n"
+                    + taskList.getTaskString(number);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidArgumentDukeException();
         }

@@ -16,9 +16,9 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         TaskList matchingList = taskList.getMatchingTasks(keyword);
-        ui.printMessage("These are the matching tasks in your list:\n"
-                + matchingList);
+        return "These are the matching tasks in your list:\n"
+                + matchingList;
     }
 }
