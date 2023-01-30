@@ -1,12 +1,10 @@
-package Duke;
+package duke;
 
-import Command.DeleteCommand;
-import Command.MarkCommand;
-import Command.UnMarkCommand;
-import Task.Deadline;
-import Task.Event;
-import Task.TaskList;
-import Task.Todo;
+import command.*;
+import task.Deadline;
+import task.Event;
+import task.TaskList;
+import task.Todo;
 
 public class Duke {
     static final String DIRPATH = "./data";
@@ -40,13 +38,13 @@ public class Duke {
                     new UnMarkCommand(splitCommand[1]).unmark();
                     break;
                 case "TODO":
-                    Todo.createTodo(splitCommand);
+                    new TodoCommand(splitCommand).create();
                     break;
                 case "EVENT":
-                    Event.createEvent(splitCommand);
+                    new EventCommand(splitCommand).create();
                     break;
                 case "DEADLINE":
-                    Deadline.createDeadline(splitCommand);
+                    new DeadlineCommand(splitCommand).create();
                     break;
                 case "DELETE":
                     new DeleteCommand(splitCommand[1]).delete();

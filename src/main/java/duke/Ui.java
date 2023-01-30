@@ -1,8 +1,7 @@
-package Duke;
+package duke;
 
-import Task.Task;
+import task.Task;
 
-import java.util.Dictionary;
 import java.util.Scanner;
 
 public class Ui {
@@ -45,6 +44,10 @@ public class Ui {
     public static void printMark(Task task) {
         System.out.println(DIVIDER + "Congrats this has been d:\n"
             + task + "\n down, Leskooo!\n" + DIVIDER);
+    }
+
+    public static void printTodoError() {
+        System.out.println("What do u need to do ah? u never write.");
     }
     public static void printUnmark(Task task) {
         System.out.println(DIVIDER + "Alright, new task:\n" + task

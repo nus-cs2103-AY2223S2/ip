@@ -1,6 +1,6 @@
-package Task;
+package task;
 
-import Duke.Ui;
+import duke.Ui;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +23,7 @@ public class TaskList {
             init();
         }
     }
-    protected static void addToList(Task t) {
+    public static void addToList(Task t) {
         taskList.add(t);
     }
 

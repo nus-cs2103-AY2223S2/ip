@@ -1,5 +1,5 @@
-package Duke;
-import Task.TaskList;
+package duke;
+import task.TaskList;
 import java.io.File;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
