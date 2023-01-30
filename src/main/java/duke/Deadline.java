@@ -14,8 +14,9 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline with the given description and date.
+     *
      * @param description Description of the deadline task.
-     * @param by          The deadline.
+     * @param by The deadline.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -24,9 +25,10 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline with the given description, isDone and date.
+     *
      * @param description Description of the deadline task.
-     * @param isDone      Whether the deadline task is done.
-     * @param by          The deadline.
+     * @param isDone Whether the deadline task is done.
+     * @param by The deadline.
      */
     public Deadline(String description, boolean isDone, LocalDate by) {
         super(description, isDone);
@@ -40,7 +42,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toStorableString() {
+    public String convertToStorableString() {
         return String.format("D,%s,%s,%s",
                 this.isDone() ? "1" : "0",
                 this.getDescription(),

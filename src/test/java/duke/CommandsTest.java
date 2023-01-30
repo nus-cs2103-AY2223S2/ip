@@ -18,7 +18,7 @@ public class CommandsTest {
             Commands.executeToDoCommand("Duke", TextUi, taskList, storage);
             indexOfNewTask = taskList.getArraySize() - 1;
         } catch (DukeException e) {
-            TextUi.getCustomMessage(e.getMessage());
+            throw new RuntimeException(e);
         }
         assertEquals(taskList.getTask(indexOfNewTask).toString(), new ToDo("Duke").toString());
     }

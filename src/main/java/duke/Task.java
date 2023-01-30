@@ -11,6 +11,7 @@ public abstract class Task {
 
     /**
      * Constructs a task with the given description.
+     *
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -20,6 +21,7 @@ public abstract class Task {
 
     /**
      * Constructs a task with the given description and isDone.
+     *
      * @param description Description of the deadline task.
      * @param isDone      Whether the deadline task is done.
      */
@@ -28,7 +30,7 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    public abstract String toStorableString();
+    public abstract String convertToStorableString();
 
     public boolean isDone() {
         return this.isDone;

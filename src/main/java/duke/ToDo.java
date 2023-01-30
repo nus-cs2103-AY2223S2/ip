@@ -8,6 +8,7 @@ public class ToDo extends Task {
 
     /**
      * Constructs a deadline with the given description.
+     *
      * @param description Description of the ToDo task.
      */
     public ToDo(String description) {
@@ -16,6 +17,7 @@ public class ToDo extends Task {
 
     /**
      * Constructs a ToDo with the given description, isDone and date.
+     *
      * @param description Description of the ToDo task.
      * @param isDone      Whether the ToDo task is done.
      */
@@ -29,7 +31,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String toStorableString() {
+    public String convertToStorableString() {
         return String.format("T,%s,%s",
                 this.isDone() ? "1" : "0",
                 this.getDescription()

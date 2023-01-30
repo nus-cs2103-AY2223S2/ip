@@ -15,9 +15,10 @@ public class Event extends Task {
 
     /**
      * Constructs an event with the given description, from and to.
+     *
      * @param description Description of the deadline task.
-     * @param from        The time the event task starts.
-     * @param to          The time the event task ends.
+     * @param from The time the event task starts.
+     * @param to The time the event task ends.
      */
     public Event(String description, LocalDate from, LocalDate to) {
         super(description);
@@ -27,10 +28,11 @@ public class Event extends Task {
 
     /**
      * Constructs an event with the given description, isDone, from and to.
+     *
      * @param description Description of the deadline task.
-     * @param isDone      Whether the deadline task is done.
-     * @param from        The time the event task starts.
-     * @param to          The time the event task ends.
+     * @param isDone Whether the deadline task is done.
+     * @param from The time the event task starts.
+     * @param to The time the event task ends.
      */
     public Event(String description, boolean isDone, LocalDate from, LocalDate to) {
         super(description, isDone);
@@ -46,7 +48,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String toStorableString() {
+    public String convertToStorableString() {
         return String.format("E,%s,%s,%s,%s",
                 this.isDone() ? "1" : "0",
                 this.getDescription(),

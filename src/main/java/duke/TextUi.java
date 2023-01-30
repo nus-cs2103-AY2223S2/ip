@@ -30,16 +30,6 @@ class TextUi {
         return "Bye. Hope to see you again soon!";
     }
 
-    public void printLine() {
-        out.println("____________________");
-    }
-
-    public void getCustomMessage(String message) {
-        out.println("____________________");
-        out.println(message);
-        out.println("____________________");
-    }
-
     public String getTaskAddedMessage(Task task, int sizeOfList) {
         return String.format("Got it. I've added this task:\n%s\nNow you have %s task%s in the list.",
                 task,

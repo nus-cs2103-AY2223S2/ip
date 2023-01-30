@@ -9,8 +9,9 @@ public class Commands {
 
     /**
      * Executes the list command.
+     *
      * @param taskList TaskList for Duke.
-     * @return String
+     * @return String to display.
      */
     public static String executeListCommand(TaskList taskList) {
         if (taskList.isEmpty()) {
@@ -30,11 +31,11 @@ public class Commands {
     /**
      * Executes the find command.
      *
-     * @param textUi   TextUi for Duke.
+     * @param textUi TextUi for Duke.
      * @param taskList TaskList for Duke.
+     * @return String to display.
      */
-    public static String executeFindCommand(String toFind, TextUi textUi, TaskList taskList) {
-        textUi.printLine();
+    public static String executeFindCommand(String searchTerm, TextUi textUi, TaskList taskList) {
         if (taskList.isEmpty()) {
             return "You currently have no task.";
         } else {
@@ -43,7 +44,7 @@ public class Commands {
             int count = 1;
             for (int i = 0; i < taskList.getArraySize(); i++) {
                 String currentTaskDescription = taskList.getTask(i).getDescription();
-                if (currentTaskDescription.contains(toFind)) {
+                if (currentTaskDescription.contains(searchTerm)) {
                     String currentString = count + ". " + taskList.getTask(i) + "\n";
                     outputString.append(currentString);
                     count++;
@@ -59,9 +60,11 @@ public class Commands {
 
     /**
      * Executes the mark command.
-     * @param input    input String.
+     *
+     * @param input Input String.
      * @param taskList TaskList for Duke.
-     * @param storage  Storage for Duke.
+     * @param storage Storage for Duke.
+     * @return String to display.
      * @throws DukeException If there is no such task.
      */
     public static String executeMarkCommand(
@@ -80,9 +83,11 @@ public class Commands {
 
     /**
      * Executes the unmark command.
-     * @param input    input String.
+     *
+     * @param input Input String.
      * @param taskList TaskList for Duke.
-     * @param storage  Storage for Duke.
+     * @param storage Storage for Duke.
+     * @return String to display.
      * @throws DukeException If there is no such task
      */
     public static String executeUnmarkCommand(String input, TaskList taskList, Storage storage)
@@ -100,10 +105,12 @@ public class Commands {
 
     /**
      * Executes the delete command.
-     * @param input    input String.
-     * @param textUi   TextUi for Duke.
+     *
+     * @param input Input String.
+     * @param textUi TextUi for Duke.
      * @param taskList TaskList for Duke.
-     * @param storage  Storage for Duke.
+     * @param storage Storage for Duke.
+     * @return String to display.
      * @throws DukeException If there is no such task.
      */
     public static String executeDeleteCommand(String input, TextUi textUi, TaskList taskList, Storage storage)
@@ -120,16 +127,18 @@ public class Commands {
 
     /**
      * Executes the todo command.
-     * @param input    input String.
-     * @param textUi   TextUi for Duke.
+     *
+     * @param input Input String.
+     * @param textUi TextUi for Duke.
      * @param taskList TaskList for Duke.
-     * @param storage  Storage for Duke.
+     * @param storage Storage for Duke.
+     * @return String to display.
      * @throws DukeException If the given string is empty.
      */
     public static String executeToDoCommand(String input, TextUi textUi, TaskList taskList, Storage storage)
             throws DukeException {
-        String check = Parser.removeWhiteSpaces(input);
-        if (check.equals("todo")) {
+        String processedString = Parser.removeWhiteSpaces(input);
+        if (processedString.equals("todo")) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
         Task newTask = new ToDo(input);
@@ -140,16 +149,18 @@ public class Commands {
 
     /**
      * Executes the deadline command.
-     * @param input    input String.
-     * @param textUi   TextUi for Duke.
+     *
+     * @param input Input String.
+     * @param textUi TextUi for Duke.
      * @param taskList TaskList for Duke.
-     * @param storage  Storage for Duke.
+     * @param storage Storage for Duke.
+     * @return String to display.
      * @throws DukeException If the given string is empty.
      */
     public static String executeDeadlineCommand(String input, TextUi textUi, TaskList taskList, Storage storage)
             throws DukeException {
-        String check = Parser.removeWhiteSpaces(input);
-        if (check.equals("deadline")) {
+        String processedString = Parser.removeWhiteSpaces(input);
+        if (processedString.equals("deadline")) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
         String[] str = input.split("/");
@@ -163,16 +174,18 @@ public class Commands {
 
     /**
      * Executes the event command.
-     * @param input    input String.
-     * @param textUi   TextUi for Duke.
+     *
+     * @param input Input String.
+     * @param textUi TextUi for Duke.
      * @param taskList TaskList for Duke.
-     * @param storage  Storage for Duke.
+     * @param storage Storage for Duke.
+     * @return String to display.
      * @throws DukeException If the given string is empty.
      */
     public static String executeEventCommand(String input, TextUi textUi, TaskList taskList, Storage storage)
             throws DukeException {
-        String check = Parser.removeWhiteSpaces(input);
-        if (check.equals("event")) {
+        String processedString = Parser.removeWhiteSpaces(input);
+        if (processedString.equals("event")) {
             throw new DukeException("The description of a event cannot be empty.");
         }
         String[] str = input.split("/");

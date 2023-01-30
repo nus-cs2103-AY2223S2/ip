@@ -76,7 +76,7 @@ public class Storage {
         try {
             FileWriter myWriter = new FileWriter(file); // this truncates the duke.txt to size 0
             for (int i = 0; i < taskList.getArraySize(); i++) {
-                myWriter.write(taskList.getTask(i).toStorableString() + "\n");
+                myWriter.write(taskList.getTask(i).convertToStorableString() + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
