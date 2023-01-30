@@ -16,7 +16,7 @@ public class Duke {
     public Duke()  {
         ui = new Ui();
         storage = new Storage("/Users/kristen/Documents/NUS/CS2109S/ip/data/duke.txt");
-        parser = new Parser(ui);
+        parser = new Parser();
 
         try {
             listOfTasks = new TaskList();
