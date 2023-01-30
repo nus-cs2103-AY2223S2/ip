@@ -115,7 +115,6 @@ public class Duke {
         ioHandler.writeSave(taskMaster);
     }
 
-
     /**
      * Process user commands and returns appropriate message.
      * @param userInput String from the user

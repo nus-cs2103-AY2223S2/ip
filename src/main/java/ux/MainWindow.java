@@ -37,11 +37,11 @@ public class MainWindow extends AnchorPane {
     public void setDuke(core.Duke d) {
         duke = d;
         duke.initialize();
-        String response = duke.getResponse(core.Duke.greet());
+        System.out.println(core.Duke.greet());
+        String response = core.Duke.greet();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        userInput.clear();
     }
 
     /**
