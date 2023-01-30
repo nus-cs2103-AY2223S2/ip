@@ -1,3 +1,6 @@
+package duke.event;
+import duke.data.TypeOfTask;
+
 public class Todo extends Task {
 
     //default constructor

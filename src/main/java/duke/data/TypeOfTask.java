@@ -1,3 +1,5 @@
+package duke.data;
+
 public enum TypeOfTask {
     mark,
     unmark,
@@ -6,5 +8,7 @@ public enum TypeOfTask {
     todo,
     deadline,
     event,
-    delete
+    delete,
+    parser,
+    storage
 }

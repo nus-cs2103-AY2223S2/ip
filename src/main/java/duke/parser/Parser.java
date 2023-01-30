@@ -1,4 +1,24 @@
-public class Parser {
+package duke.parser;
+import java.util.Arrays;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.TodoCommand;
+import duke.command.UnmarkCommand;
+import duke.data.TypeOfTask;
+import duke.exception.DukeException;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+public class Parser implements Serializable {
 
     public Parser() {
 
@@ -8,7 +28,7 @@ public class Parser {
         switch(action){
             case todo: {
                 // changed the way the string is outputted from the array
-                String userInput = String.join(" ", Arrays.copyOfRange(input, 1, input.length));
+                String userInput = String.join(" ", Arrays.copyOfRange(input, 0, input.length));
                 if (userInput.equals("") || userInput == null)
                     throw new DukeException(TypeOfTask.todo, 0);
                 else
@@ -18,7 +38,7 @@ public class Parser {
                 // algo to detect deadline's input content
                 String userInput = "";
                 if(!limiter.equals("/by")){
-                    for (int i = 1; i < input.length; i++) {
+                    for (int i = 0; i < input.length; i++) {
                         if (input[i].equals("/by")) {
                             break;
                         } else {
@@ -27,7 +47,7 @@ public class Parser {
                     }
                 } else {
                     // to get the date and time after "/by"
-                    for (int i = 1; i < input.length; i++) {
+                    for (int i = 0; i < input.length; i++) {
                         if (input[i].equals("/by")) {
                             for(int j = i + 1; j < input.length; j++){
                                 userInput += input[j] + " ";
@@ -45,7 +65,7 @@ public class Parser {
             case event: {
                 String userInput = "";
                 if(limiter.equals("/from")){
-                    for(int i = 1; i < input.length; i++){
+                    for(int i = 0; i < input.length; i++){
                         if(input[i].equals("/from")){
                             for(int j = i + 1; j < input.length; j++){
                                 if(input[j].equals("/to")){
@@ -58,7 +78,7 @@ public class Parser {
                         }
                     }
                 } else if (limiter.equals("/to")) {
-                    for(int i = 1; i < input.length; i++){
+                    for(int i = 0; i < input.length; i++){
                         if(input[i].equals("/to")){
                             for(int j = i + 1; j < input.length; j++){
                                 userInput += input[j] + " ";
@@ -68,7 +88,7 @@ public class Parser {
                     }
                 } else {
                     // to get the user's input before the "/from" limiter
-                    for (int i = 1; i < input.length; i++) {
+                    for (int i = 0; i < input.length; i++) {
                         if (input[i].equals("/from")) {
                             break;
                         } else {
@@ -82,40 +102,75 @@ public class Parser {
                     return userInput;
             }
             case delete: {
-                if(input.length == 1)
+                if(input.length == 0)
                     throw new DukeException(TypeOfTask.delete,0);
-                else if(input.length > 2)
+                else if(input.length > 1)
                     throw new DukeException(TypeOfTask.delete,1);
                 else
-                    return input[1];
+                    return input[0];
             }
             default:
                 throw new DukeException();
         }
     }
 
+    public LocalDate covertToLocalDate(String date) throws DukeException {
+        String[] dateFormats = {"dd/MM/yyyy", "yyyy-MM-dd", "MM-dd-yyyy","d/MM/yyyy","d/M/yyyy"};
+        LocalDate localDate;
+        for (String dateFormat : dateFormats) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+                localDate = LocalDate.parse(date, formatter);
+                return localDate;
+            } catch (DateTimeParseException e) {
+                // continue trying other formats
+                continue;
+            }
+        }
+        throw new DukeException(TypeOfTask.parser,0);
+    }
+
+    public LocalTime convertToLocalTime(String time) throws DukeException{
+        String[] timeFormats = {"h:mm a", "HH:mm", "hh:mm a", "HH:mm:ss","HHmm","h:mma","hh:mma","h:a"};
+        LocalTime localTime;
+        for (String timeFormat : timeFormats) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(timeFormat);
+                localTime = LocalTime.parse(time.toUpperCase(), formatter);
+                return localTime;
+            } catch (DateTimeParseException e) {
+                // continue trying other formats
+                continue;
+            }
+        }
+        throw new DukeException(TypeOfTask.parser,1);
+    }
+
     /*
         convert the beginning of the user's input into a TypeOfTask enum type
      */
-    public TypeOfTask convertToAction(String input) throws DukeException {
-        switch(input){
+    public Command parse(String command) throws DukeException {
+        String[] input = command.split(" ");
+        String typeOfTask = input[0];
+        String[] contents = Arrays.copyOfRange(input, 1, input.length);
+        switch(typeOfTask) {
             case "mark":
-                return TypeOfTask.mark;
+                return new MarkCommand(contents);
             case "unmark":
-                return TypeOfTask.unmark;
+                return new UnmarkCommand(contents);
             case "list":
-                return TypeOfTask.list;
+                return new ListCommand(contents);
             case "bye":
             case "quit":
-                return TypeOfTask.bye;
+                return new ByeCommand();
             case "todo":
-                return TypeOfTask.todo;
+                return new TodoCommand(contents);
             case "deadline":
-                return TypeOfTask.deadline;
+                return new DeadlineCommand(contents);
             case "event":
-                return TypeOfTask.event;
+                return new EventCommand(contents);
             case "delete":
-                return TypeOfTask.delete;
+                return new DeleteCommand(contents);
             default: throw new DukeException();
         }
     }

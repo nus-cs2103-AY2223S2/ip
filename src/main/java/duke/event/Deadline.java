@@ -1,18 +1,19 @@
+package duke.event;
+import duke.data.TypeOfTask;
+import duke.exception.DukeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    //protected String day;
-    protected LocalDate date;
-    protected LocalTime time;
-    static protected String DESIRED_DATE_FORMAT = "MMM dd yyyy";
+    private LocalDate date;
+    private LocalTime time;
+    static private String DESIRED_DATE_FORMAT = "MMM dd yyyy";
 
-    public Deadline(String description,String date, String time) throws Exception {
+    public Deadline(String description,String date, String time) throws DukeException {
         super(description,TypeOfTask.deadline);
-        //this.day = day;
-        this.date = covertToLocalDate(date);
-        this.time = convertToLocalTime(time);
+        this.date = super.parser.covertToLocalDate(date);
+        this.time = super.parser.convertToLocalTime(time);
     }
 
     public LocalDate getDate(){

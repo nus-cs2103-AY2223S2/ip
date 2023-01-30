@@ -1,17 +1,20 @@
+package duke.event;
+import duke.data.TypeOfTask;
+import duke.exception.DukeException;
 import java.time.LocalTime;
 import java.util.Arrays;
 
 public class Event extends Task{
 
     //default constructor
-    protected LocalTime startTime;
-    protected LocalTime endTime;
-    protected String startDay;
-    protected String endDay;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private String startDay;
+    private String endDay;
 
-    public Event(String description,String startTime,String endTime) throws Exception {
+
+    public Event(String description,String startTime,String endTime) throws DukeException {
         super(description,TypeOfTask.event);
-
         // to check if the user specifies the day also
         String[] startTimeArray = startTime.split(" ");
         String[] endTimeArray = endTime.split(" ");
@@ -27,21 +30,21 @@ public class Event extends Task{
             this.startDay = startTimeArray[0];
             String slicedStartTime = String.join(" ",Arrays.copyOfRange(startTimeArray, 1, startTimeArray.length));
             String slicedEndTime = String.join(" ",Arrays.copyOfRange(endTimeArray, 1, endTimeArray.length));
-            this.startTime = convertToLocalTime(slicedStartTime);
+            this.startTime = super.parser.convertToLocalTime(slicedStartTime);
             this.endDay = endTimeArray[0];
-            this.endTime = convertToLocalTime(slicedEndTime);
+            this.endTime = super.parser.convertToLocalTime(slicedEndTime);
         }
         // Example: /by Mon 2 pm /to 4 pm
         else if (startTimeArray.length > 2 && endTimeArray.length == 2) {
             this.startDay = startTimeArray[0];
             String slicedStartTime = String.join(" ",Arrays.copyOfRange(startTimeArray, 1, startTimeArray.length));
             String slicedEndTime = String.join(" ",endTimeArray);
-            this.startTime = convertToLocalTime(slicedStartTime);
+            this.startTime = super.parser.convertToLocalTime(slicedStartTime);
             this.endDay = null;
-            this.endTime = convertToLocalTime(slicedEndTime);
+            this.endTime = super.parser.convertToLocalTime(slicedEndTime);
         } else {
-            throw new Exception("Please check your inputs again for the days and time given");
-        }
+            throw new DukeException(TypeOfTask.event,1);
+        } 
     }
 
 
