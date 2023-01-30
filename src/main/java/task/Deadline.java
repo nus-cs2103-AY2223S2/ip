@@ -17,12 +17,9 @@ public class Deadline extends Task {
         this.by = LocalDateTime.parse(by, inputFormatter);
     }
 
-    public LocalDateTime getBy() {
-        return by;
-    }
-
+    // to write to file or other internal use
     public String getBy() {
-        return this.by;
+        return this.by.format(inputFormatter);
     }
 
     @Override

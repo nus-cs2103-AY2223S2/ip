@@ -21,12 +21,13 @@ public class Event extends Task {
         this.to = LocalDateTime.parse(to, inputFormatter);;
     }
 
+    // to write to file or other internal use
     public String getFrom() {
-        return this.from;
+        return this.from.format(inputFormatter);
     }
 
     public String getTo() {
-        return this.to;
+        return this.to.format(inputFormatter);
     }
 
     @Override
