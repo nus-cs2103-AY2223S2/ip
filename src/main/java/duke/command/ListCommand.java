@@ -21,7 +21,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String reply = tasks.print();
-        ui.showMessageWithoutNewline(reply);
+        ui.showMessageWithoutNewline(tasks.print());
     }
 }

@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.command.AddCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 
@@ -49,6 +50,14 @@ public class Parser {
                 } else {
                     return new DeleteCommand(num - 1);
                 }
+            }
+
+        case "find":
+            if (inputs.length <= 1) {
+                throw new DukeException("Please indicate the keyword you want to search with!");
+            } else {
+                String keyword = inputs[1];
+                return new FindCommand(keyword);
             }
 
         case "todo":
