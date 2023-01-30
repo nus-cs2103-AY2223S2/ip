@@ -1,25 +1,26 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDate by;
 
-    public Deadline(String description, String by) throws DukeException{
+    public Deadline(String description, LocalDate by) throws DukeException{
         super(description);
         this.by = by;
-        if (by.isBlank() || description.isBlank()) {
-            throw new DukeException(" ☹ OOPS!!! The description or time/date of a deadline cannot be empty.\n");
-        }
     }
 
-    public String getBy() {
+    public LocalDate getBy() {
         return this.by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + by + ")";
+        String dateFormat = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        return "[D]" + super.toString() + "(by: " + dateFormat + ")";
     }
     @Override
     public String toFileString() {
-        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, by);
+        String dateFormat = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, dateFormat);
     }
 }
