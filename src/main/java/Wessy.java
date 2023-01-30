@@ -5,12 +5,13 @@ import Exceptions.MissingSpacingException;
 import Exceptions.UnspecifiedTimeException;
 import Exceptions.WessyException;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Wessy {
     static String OPENING_LINE = "    -Wessy---------------------------------------------------------------- ";
     static String CLOSING_LINE = "    ---------------------------------------------------------------------- ";
-    static Task[] tasks = new Task[100];
-    static int firstUnusedIdx = 0;
+    static List<Task> tasks = new ArrayList<Task>();
 
     public static void main(String[] args) {
         System.out.println(OPENING_LINE);
@@ -29,9 +30,11 @@ public class Wessy {
             } else {
                 try{
                     if (checkCmd(userInput, "mark")) {
-                        printMarkOrUnmark(userInput, true);
+                        markOrUnmark(userInput, true);
                     } else if (checkCmd(userInput,"unmark")) {
-                        printMarkOrUnmark(userInput, false);
+                        markOrUnmark(userInput, false);
+                    } else if (checkCmd(userInput, "delete")) {
+                        delete(userInput);
                     } else if (checkCmd(userInput, "todo")) {
                         printAdded(add(parse(userInput, "todo")));
                     } else if (checkCmd(userInput, "deadline")) {
@@ -64,13 +67,13 @@ public class Wessy {
         if (cmd.charAt(0) == 'd') {
             firstIdx = description.indexOf(byStr);
             return new String[] {description.substring(0, firstIdx - 1),
-                    description.substring(firstIdx + byStr.length())};
+                    description.substring(firstIdx + byStr.length() + 1)};
         } else if (cmd.charAt(0) == 'e') {
             firstIdx = description.indexOf(fromStr);
             secondIdx = description.indexOf(toStr);
             return new String[] {description.substring(0, firstIdx - 1),
-                    description.substring(firstIdx - 1 + fromStr.length(), secondIdx - 1),
-                    description.substring(secondIdx - 1 + toStr.length())};
+                    description.substring(firstIdx + fromStr.length() + 1, secondIdx - 1),
+                    description.substring(secondIdx + toStr.length() + 1)};
         } else if (cmd.charAt(0) == 't') {
             return new String[] {description};
         }
@@ -142,8 +145,8 @@ public class Wessy {
         }
     }
 
-    static void checkForEmptyListBeforeMarking(String cmd) throws EmptyListException {
-        if (firstUnusedIdx == 0) {
+    static void checkForEmptyList(String cmd) throws EmptyListException {
+        if (tasks.isEmpty()) {
             throw new EmptyListException(cmd);
         }
     }
@@ -157,8 +160,9 @@ public class Wessy {
     }
 
     static void printAdded(Task task) {
-        String numOfTasks = " " + firstUnusedIdx + " task";
-        if (firstUnusedIdx > 1) {
+        int size = tasks.size();
+        String numOfTasks = " " + size + " task";
+        if (size > 1) {
             numOfTasks += "s";
         }
         printNormal("Got it. I've added this task:",
@@ -177,48 +181,61 @@ public class Wessy {
     static Task add(String[] strings) {
         int len = strings.length;
         if (len == 1) {
-            tasks[firstUnusedIdx++] = new ToDo(strings[0]);
+            tasks.add(new ToDo(strings[0]));
         } else if (len == 2) {
-            tasks[firstUnusedIdx++] = new Deadline(strings[0], strings[1]);
+            tasks.add(new Deadline(strings[0], strings[1]));
         } else if (len == 3) {
-            tasks[firstUnusedIdx++] = new Event(strings[0], strings[1], strings[2]);
+            tasks.add(new Event(strings[0], strings[1], strings[2]));
         }
-        return tasks[firstUnusedIdx - 1];
+        return tasks.get(tasks.size() - 1);
     }
 
     static void printList() {
+        int size = tasks.size();
         System.out.println(OPENING_LINE);
-        if (firstUnusedIdx == 0) {
+        if (size == 0) {
             println("WOOHOO! You do not have any task on the list.");
         } else {
             println("Here are the tasks in your list:");
-            for (int i = 0; i < firstUnusedIdx; i++) {
-                println((i + 1) + "." + tasks[i]);
+            for (int i = 0; i < size; i++) {
+                println((i + 1) + "." + tasks.get(i));
             }
         }
         System.out.println(CLOSING_LINE);
     }
 
-    static void printMarkOrUnmark(String userInput, boolean isMark) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
-        int minLen = isMark ? 4 : 6;
-        String cmd = isMark ? "mark" : "unmark";
-        checkForEmptyListBeforeMarking(cmd);
+    static int parseInt(String userInput, String cmd) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
+        checkForEmptyList(cmd);
         checkForMissingInput(userInput, cmd);
         checkForSpacingAftCmd(userInput, cmd);
-        int idx = Integer.parseInt(userInput.substring(minLen + 1)) - 1;
-        if (idx < 0 || idx >= firstUnusedIdx) {
+        int idx = Integer.parseInt(userInput.substring(cmd.length() + 1)) - 1;
+        if (idx < 0 || idx >= tasks.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }
+        return idx;
+    }
+
+    static void markOrUnmark(String userInput, boolean isMark) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
+        String cmd = isMark ? "mark" : "unmark";
+        int idx = parseInt(userInput, cmd);
         String start = isMark ? "Nice! I've" : "OK, I've";
-        if (isMark == tasks[idx].isDone) {
+        if (isMark == tasks.get(idx).isDone) {
             start = "You have already";
         }
         if (isMark) {
-            tasks[idx].mark();
+            tasks.get(idx).mark();
         } else {
-            tasks[idx].unmark();
+            tasks.get(idx).unmark();
         }
         String end = isMark ? "done:" : "not done yet:";
-        printNormal(start + " marked this task as " + end, "  " + tasks[idx]);
+        printNormal(start + " marked this task as " + end, "  " + tasks.get(idx));
+    }
+
+    static void delete(String userInput) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
+        int idx = parseInt(userInput, "delete");
+        Task removedTask = tasks.get(idx);
+        tasks.remove(idx);
+        int size = tasks.size();
+        printNormal("Noted. I've removed this task:", "  " + removedTask, String.format("Now you have %d task%s in the list.", size, size == 1 ? "" : "s"));
     }
 }
