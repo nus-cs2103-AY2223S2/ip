@@ -67,4 +67,15 @@ public class TaskList {
         }
         return tasksStr;
     }
+
+    public TaskList findKeywordTasks(String keyword) {
+        TaskList keywordTasks = new TaskList();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.hasKeyword(keyword)) {
+                keywordTasks.addTask(task);
+            }
+        }
+        return keywordTasks;
+    }
 }

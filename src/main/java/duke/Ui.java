@@ -81,4 +81,11 @@ public class Ui {
     public void showUnmarkTask(Task task) {
         System.out.println("I've unmarked this task as done: " + task);
     }
+
+    public void showFoundTasks(TaskList keywordTasks) {
+        this.showSepLine();
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(keywordTasks);
+        this.showSepLine();
+    }
 }
