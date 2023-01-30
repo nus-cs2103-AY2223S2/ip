@@ -85,18 +85,13 @@ public class Task {
         return equals(EMPTY_TASK);
     }
 
-<<<<<<< HEAD
     /**
      * Return string representation of the marked status
      *
      * @return String representation of marked status
      */
-    public String isMarked() {
-        return this.isDone ? "1" : "0";
-=======
     public String getMarkedStatus() {
         return isDone ? "1" : "0";
->>>>>>> branch-A-CodingStandard
     }
 
     /**

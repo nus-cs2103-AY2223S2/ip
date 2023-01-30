@@ -18,21 +18,15 @@ public class MarkCommand extends Command {
      */
     private final String INDEX_STRING;
 
-<<<<<<< HEAD
     /**
      * Constructor for a command to mark a task as done.
      *
      * @param commandString The mark command in string representation
-     * @param INDEX_STRING  The string representation of the index to be marked as done
+     * @param indexString   The string representation of the index to be marked as done
      */
-    public MarkCommand(String commandString, String INDEX_STRING) {
-        super(Commands.MARK, commandString);
-        this.INDEX_STRING = INDEX_STRING;
-=======
     public MarkCommand(String commandString, String indexString) {
         super(AvailableCommands.MARK, commandString);
         INDEX_STRING = indexString;
->>>>>>> branch-A-CodingStandard
     }
 
     /**
@@ -40,9 +34,9 @@ public class MarkCommand extends Command {
      * Checks if the index in string representation is valid. If so, mark the appropriate task as done. Otherwise,
      * throw an exception that states the issue with the string representation of the index.
      *
-     * @param tasks   List of tasks that are stored
-     * @param ui      UI to deal with the visual output
-     * @param storage Storage to deal with input and output of data
+     * @param taskList List of tasks that are stored
+     * @param ui       UI to deal with the visual output
+     * @param storage  Storage to deal with input and output of data
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

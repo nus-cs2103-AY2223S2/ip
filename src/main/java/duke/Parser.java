@@ -13,10 +13,7 @@ public class Parser {
      * @param fullCommand The full string test command that the user input
      * @return The respective command that the user called for
      */
-    public static Command parse(String fullCommand) {
-=======
     public static Command parse(String fullCommand) throws DukeException {
->>>>>>> branch-A-CodingStandard
         String[] inputSplit = fullCommand.split(" ", 2);
         String command = inputSplit[0];
         switch (command) {

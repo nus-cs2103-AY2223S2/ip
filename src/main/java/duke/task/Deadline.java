@@ -18,7 +18,6 @@ public class Deadline extends Task {
      */
     protected LocalDate by;
 
-<<<<<<< HEAD
     /**
      * Constructor for a deadline task with the given description and due date. It checks on whether the due date is
      * in the appropriate format first. If it is not, an exception is throw to provide hints on the due date format.
@@ -26,10 +25,7 @@ public class Deadline extends Task {
      * @param description The description of the deadline task
      * @param by          The due date of the deadline task
      */
-    public Deadline(String description, String by) {
-=======
     public Deadline(String description, String by) throws DukeException {
->>>>>>> branch-A-CodingStandard
         super(description);
         try {
             this.by = LocalDate.parse(by);

@@ -24,10 +24,10 @@ public class Storage {
     /**
      * Constructor for a new storage interface with the file path of the tasks data provided.
      *
-     * @param FILE_PATH The file path where the tasks data are stored
+     * @param filePath The file path where the tasks data are stored
      */
-    public Storage(String FILE_PATH) {
-        this.FILE_PATH = FILE_PATH;
+    public Storage(String filePath) {
+        FILE_PATH = filePath;
     }
 
     /**
@@ -37,14 +37,7 @@ public class Storage {
      *
      * @return A list of tasks loaded from the file path
      */
-    public ArrayList<Task> load() {
-=======
-    public Storage(String filePath) {
-        FILE_PATH = filePath;
-    }
-
     public ArrayList<Task> load() throws DukeException {
->>>>>>> branch-A-CodingStandard
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File file = new File(this.FILE_PATH);
@@ -78,13 +71,10 @@ public class Storage {
      * Saves all the tasks into their corresponding string representation to be loaded in the future. Throws an
      * exception if there is an error accessing or saving the data to the file path.
      *
-     * @param tasks The list of tasks to be saved
+     * @param taskList The list of tasks to be saved
      * @throws DukeException If there is an error saving the data of the tasks
      */
-    public void updateData(TaskList tasks) throws DukeException {
-=======
     public void updateData(TaskList taskList) throws DukeException {
->>>>>>> branch-A-CodingStandard
         try {
             FileWriter fileWriter = new FileWriter(this.FILE_PATH);
             String data = toData(taskList);
@@ -95,17 +85,13 @@ public class Storage {
         }
     }
 
-<<<<<<< HEAD
     /**
      * Converts the list of tasks provided to the corresponding string representation to be saved.
      *
-     * @param tasks The list of tasks
+     * @param taskList The list of tasks
      * @return The string representation of all the tasks
      */
-    private String toData(TaskList tasks) {
-=======
     private String toData(TaskList taskList) {
->>>>>>> branch-A-CodingStandard
         String output = "";
         for (Task task : taskList.getTasks()) {
             output += task.toData();

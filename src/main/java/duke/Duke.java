@@ -23,9 +23,7 @@ public class Duke {
     /**
      * Sends out the display of the respective tasks.
      */
-=======
     private TaskList taskList;
->>>>>>> branch-A-CodingStandard
     private final Ui UI;
 
     /**

@@ -21,16 +21,11 @@ public class AddDeadlineCommand extends Command {
      * Constructor for a command to add new deadline task.
      *
      * @param commandString The add deadline command in string representation
-     * @param DATA          The description and due date of the deadline task
+     * @param data          The description and due date of the deadline task
      */
-    public AddDeadlineCommand(String commandString, String DATA) {
-        super(Commands.ADD_DEADLINE, commandString);
-        this.DATA = DATA;
-=======
     public AddDeadlineCommand(String commandString, String data) {
         super(AvailableCommands.ADD_DEADLINE, commandString);
         DATA = data;
->>>>>>> branch-A-CodingStandard
     }
 
     /**
@@ -38,9 +33,9 @@ public class AddDeadlineCommand extends Command {
      * The due date is filtered out. If it exists, then a deadline task will be created. Otherwise, an exception
      * would be thrown stating that a due date was not specified.
      *
-     * @param tasks   List of tasks that are stored
-     * @param ui      UI to deal with the visual output
-     * @param storage Storage to deal with input and output of data
+     * @param taskList List of tasks that are stored
+     * @param ui       UI to deal with the visual output
+     * @param storage  Storage to deal with input and output of data
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

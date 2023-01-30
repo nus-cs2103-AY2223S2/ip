@@ -14,11 +14,10 @@ import java.util.regex.Pattern;
  * that correspond towards the actions specified.
  */
 public class Command {
-<<<<<<< HEAD
     /**
      * The command stored.
      */
-    private final Commands COMMAND;
+    private final AvailableCommands CURRENT_COMMAND;
     /**
      * The string representation of the command stored.
      */
@@ -27,13 +26,8 @@ public class Command {
     /**
      * The list of commands that are available for use.
      */
-    public enum Commands {
-=======
-    private final AvailableCommands CURRENT_COMMAND;
-    private final String COMMAND_STRING;
 
     public enum AvailableCommands {
->>>>>>> branch-A-CodingStandard
         EXIT,
         LIST,
         MARK,
@@ -45,36 +39,26 @@ public class Command {
         FIND
     }
 
-<<<<<<< HEAD
     /**
      * Constructor for a command object.
      *
-     * @param COMMAND        Command being stored that needs to be carried out
-     * @param COMMAND_STRING String representation of the command stored
+     * @param currentCommand Command being stored that needs to be carried out
+     * @param commandString  String representation of the command stored
      */
-    public Command(Commands COMMAND, String COMMAND_STRING) {
-        this.COMMAND = COMMAND;
-        this.COMMAND_STRING = COMMAND_STRING;
-    }
-
-    /**
-     * Executes the command being stored.
-     *
-     * @param tasks   List of tasks that are stored
-     * @param ui      UI to deal with the visual output
-     * @param storage Storage to deal with input and output of data
-     */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showError(String.format("Error processing %s command", this.COMMAND_STRING));
-=======
     public Command(AvailableCommands currentCommand, String commandString) {
         CURRENT_COMMAND = currentCommand;
         COMMAND_STRING = commandString;
     }
 
+    /**
+     * Executes the command being stored.
+     *
+     * @param taskList List of tasks that are stored
+     * @param ui       UI to deal with the visual output
+     * @param storage  Storage to deal with input and output of data
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.showError(String.format("Error processing %s command", COMMAND_STRING));
->>>>>>> branch-A-CodingStandard
     }
 
     /**

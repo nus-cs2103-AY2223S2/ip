@@ -21,24 +21,19 @@ public class AddTodoCommand extends Command {
      * Constructor for a command to add new todo task.
      *
      * @param commandString The add todo command in string representation
-     * @param DATA          The description of the todo task
+     * @param data          The description of the todo task
      */
-    public AddTodoCommand(String commandString, String DATA) {
-        super(Commands.ADD_TODO, commandString);
-        this.DATA = DATA;
-=======
     public AddTodoCommand(String commandString, String data) {
         super(AvailableCommands.ADD_TODO, commandString);
         DATA = data;
->>>>>>> branch-A-CodingStandard
     }
 
     /**
      * Adds a new todo task into the task list with the given description.
      *
-     * @param tasks   List of tasks that are stored
-     * @param ui      UI to deal with the visual output
-     * @param storage Storage to deal with input and output of data
+     * @param taskList List of tasks that are stored
+     * @param ui       UI to deal with the visual output
+     * @param storage  Storage to deal with input and output of data
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

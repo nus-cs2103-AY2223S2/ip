@@ -9,26 +9,21 @@ import duke.Ui;
  * A command that stores the command to quit the chatbot. The action of adding the task can be carried out when called.
  */
 public class ExitCommand extends Command {
-<<<<<<< HEAD
     /**
      * Constructor for a command to exit the chatbot.
      *
-     * @param COMMAND_STRING The exit command in string representation
+     * @param commandString The exit command in string representation
      */
-    public ExitCommand(String COMMAND_STRING) {
-        super(Commands.EXIT, COMMAND_STRING);
-=======
     public ExitCommand(String commandString) {
         super(AvailableCommands.EXIT, commandString);
->>>>>>> branch-A-CodingStandard
     }
 
     /**
      * Exits the chatbot and shows the exit message.
      *
-     * @param tasks   List of tasks that are stored
-     * @param ui      UI to deal with the visual output
-     * @param storage Storage to deal with input and output of data
+     * @param tasklist List of tasks that are stored
+     * @param ui       UI to deal with the visual output
+     * @param storage  Storage to deal with input and output of data
      */
     @Override
     public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {

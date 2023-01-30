@@ -21,16 +21,11 @@ public class AddEventCommand extends Command {
      * Constructor for a command to add new event task.
      *
      * @param commandString The add event command in string representation
-     * @param DATA          The description, start and end date of the event task
+     * @param data          The description, start and end date of the event task
      */
-    public AddEventCommand(String commandString, String DATA) {
-        super(Commands.ADD_EVENT, commandString);
-        this.DATA = DATA;
-=======
     public AddEventCommand(String commandString, String data) {
         super(AvailableCommands.ADD_EVENT, commandString);
         DATA = data;
->>>>>>> branch-A-CodingStandard
     }
 
     /**
@@ -38,9 +33,9 @@ public class AddEventCommand extends Command {
      * The start and end dates are filtered out. If they exist, then an event task will be created. Otherwise, an
      * exception would be thrown stating that either the start or end dates were not specified.
      *
-     * @param tasks   List of tasks that are stored
-     * @param ui      UI to deal with the visual output
-     * @param storage Storage to deal with input and output of data
+     * @param taskList List of tasks that are stored
+     * @param ui       UI to deal with the visual output
+     * @param storage  Storage to deal with input and output of data
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {

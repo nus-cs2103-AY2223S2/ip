@@ -18,21 +18,15 @@ public class UnmarkCommand extends Command {
      */
     private final String INDEX_STRING;
 
-<<<<<<< HEAD
     /**
      * Constructor for a command to unmark a task as not done.
      *
      * @param commandString The unmark command in string representation
-     * @param INDEX_STRING  The string representation of the index to be unmarked as not done
+     * @param indexString   The string representation of the index to be unmarked as not done
      */
-    public UnmarkCommand(String commandString, String INDEX_STRING) {
-        super(Commands.UNMARK, commandString);
-        this.INDEX_STRING = INDEX_STRING;
-=======
     public UnmarkCommand(String commandString, String indexString) {
         super(AvailableCommands.UNMARK, commandString);
         INDEX_STRING = indexString;
->>>>>>> branch-A-CodingStandard
     }
 
     /**
