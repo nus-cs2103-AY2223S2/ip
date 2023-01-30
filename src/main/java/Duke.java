@@ -176,7 +176,7 @@ public class Duke {
                     reset();
                 } catch (DateTimeParseException e) {
                     System.out.println("Duke: Wrong date/time format!");
-                    System.out.println("Please enter correct format (yyyy/MM/dd HHmm)!");
+                    System.out.println("     Please enter correct format (yyyy/MM/dd HHmm)!");
                     ;
                 }
             } else if (input.equalsIgnoreCase("deadline")) {
@@ -186,7 +186,7 @@ public class Duke {
                     reset();
                 } catch (DateTimeParseException e) {
                     System.out.println("Duke: Wrong date/time format!");
-                    System.out.println("Please enter correct format (yyyy/MM/dd HHmm)!");
+                    System.out.println("     Please enter correct format (yyyy/MM/dd HHmm)!");
                     continue;
                 }
             } else if (input.equalsIgnoreCase("delete")) {
