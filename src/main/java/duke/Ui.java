@@ -10,8 +10,9 @@ public class Ui {
     
     
     public static void showWelcomeMessage() {
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        String welcomeMsg = "Hello from\n" + logo +
+                "\n" + "Hello! I'm Duke\nWhat can I do for you?";
+        System.out.println(welcomeMsg);
     }
 
     public static void showGoodbyeMessage() {

@@ -31,7 +31,7 @@ public class Parser {
         try { 
             cmdType = Type.valueOf(firstWord.toUpperCase());
         } catch (Exception ex) {
-            System.err.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.err.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         Integer secondInt = 0;
         String byDate = "";
