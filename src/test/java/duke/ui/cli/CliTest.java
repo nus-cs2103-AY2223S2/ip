@@ -74,7 +74,8 @@ public class CliTest {
 
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 
-        Cli cli = new Cli(printStream, inputStream, (message) -> message, (message) -> message.equals("exit"));
+        Cli cli = new Cli(printStream, inputStream, (message, printer) -> printer.accept(message),
+                (message) -> message.equals("exit"));
 
         // Test
         cli.start();
