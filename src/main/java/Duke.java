@@ -1,11 +1,11 @@
+import java.util.Scanner;
+
 import duke.commands.Command;
 import duke.commands.ExitCommand;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.Scanner;
 
 /**
  * The Duke class implements a personal assistant chatbot that helps the user to keep track of various tasks.
@@ -15,8 +15,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static final String LOGO
-            = " ____        _\n"
+    private static final String LOGO = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"

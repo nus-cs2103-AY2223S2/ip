@@ -1,5 +1,7 @@
 package duke.commands;
 
+import java.time.LocalDateTime;
+
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -7,8 +9,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
 
 /**
  * The AddCommand class implements the action of adding tasks.
