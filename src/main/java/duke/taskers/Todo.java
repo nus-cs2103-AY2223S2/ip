@@ -32,7 +32,7 @@ public class Todo extends duke.taskers.Task {
     /**
      * String representation of the todo.
      *
-     * @return duke.taskers.Todo string.
+     * @return Todo string.
      */
     @Override
     public String toString() {

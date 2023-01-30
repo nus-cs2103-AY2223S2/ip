@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Deadline class for when the Task is a deadline.
  */
-public class Deadline extends duke.taskers.Task {
+public class Deadline extends Task {
 
     public static final String TASK_TYPE = "deadline";
     private static final DateTimeFormatter FORMATTER_FOR_STRING_ONLY = DateTimeFormatter.ofPattern("d MMM uuuu h.mma");

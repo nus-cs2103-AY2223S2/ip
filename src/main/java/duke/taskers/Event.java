@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Event class for when a Task is an event.
  */
-public class Event extends duke.taskers.Task {
+public class Event extends Task {
 
     public static final String TASK_TYPE = "event";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

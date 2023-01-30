@@ -50,9 +50,9 @@ public class Ui {
      */
     public void showMatchingTasks(ArrayList<Task> arrList) {
         String totalString = "";
-        totalString += " Here are the matching tasks in your list:";
+        totalString += "     Here are the matching tasks in your list:";
         for (int i = 0; i < arrList.size(); i++) {
-            totalString += "\n " + (i + 1) + "." + arrList.get(i).toString();
+            totalString += "\n     " + (i + 1) + "." + arrList.get(i).toString();
         }
         this.out.println(totalString);
     }
@@ -65,9 +65,9 @@ public class Ui {
      */
     public void showList(ArrayList<Task> arrList) {
         String totalString = "";
-        totalString += " Here are the tasks in your list:";
+        totalString += "     Here are the tasks in your list:";
         for (int i = 0; i < arrList.size(); i++) {
-            totalString += "\n " + (i + 1) + "." + arrList.get(i).toString();
+            totalString += "\n     " + (i + 1) + "." + arrList.get(i).toString();
         }
         this.out.println(totalString);
     }
@@ -76,8 +76,8 @@ public class Ui {
      * Prints out the line that sandwiches Duke's responses.
      */
     public void showLine() {
-        System.out.println("___________________________"
-                + "_______________________________");
+        System.out.println("    _______________________________________"
+                + "________________________________________________");
     }
 
     /**
@@ -85,7 +85,7 @@ public class Ui {
      */
     public void greet() {
         this.showLine();
-        this.out.println(" Hello! I am Duke! What can I do for you today?");
+        this.out.println("     Hello! I am Duke!\n     What can I do for you today?");
         this.showLine();
     }
 
@@ -95,7 +95,7 @@ public class Ui {
      * @param t duke.taskers.Task to be marked.
      */
     public void markResponse(Task t) {
-        String str = " Nice! I've marked this task as done!:\n" + "  " + t.toString();
+        String str = "     Nice! I've marked this task as done!:\n      " + t.toString();
         this.out.println(str);
     }
 
@@ -105,7 +105,7 @@ public class Ui {
      * @param t duke.taskers.Task to be unmarked.
      */
     public void unmarkResponse(Task t) {
-        String str = " OK, I've marked this task as not done yet:\n" + "  "
+        String str = "     OK, I've marked this task as not done yet:\n      "
                 + t.toString();
         this.out.println(str);
     }
@@ -118,7 +118,7 @@ public class Ui {
      */
     public void addItemResponse(Task t, ArrayList<Task> arr) {
         String str = "  " + t.toString();
-        str = " Got it. I've added this task:\n" + str;
+        str = "     Got it. I've added this task:\n    " + str;
         this.out.println(str + listUpdate(arr));
 
     }
@@ -139,7 +139,7 @@ public class Ui {
      * @param arr The array from the task to be deleted.
      */
     public void deleteItemResponse(Task t, ArrayList<Task> arr) {
-        String str = " Noted. I'm removing this task:\n  " + t.toString();
+        String str = "     Noted. I'm removing this task:\n      " + t.toString();
         this.out.println(str + listUpdate(arr));
 
     }
@@ -148,7 +148,7 @@ public class Ui {
      * Says goodbye when the program ends.
      */
     public void sayGoodBye() {
-        this.out.println(" Bye! Hope to see you again soon!");
+        this.out.println("     Bye! Hope to see you again soon!");
     }
 
     /**
@@ -162,7 +162,7 @@ public class Ui {
         if (arr.size() > 1) {
             plural = "s";
         }
-        return "\n Now you have " + arr.size()
+        return "\n     Now you have " + arr.size()
                 + " task" + plural + " in the list.";
     }
 
