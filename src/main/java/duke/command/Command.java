@@ -21,7 +21,8 @@ public class Command {
         DELETE,
         ADD_TODO,
         ADD_DEADLINE,
-        ADD_EVENT
+        ADD_EVENT,
+        FIND
     }
 
     public Command(Commands COMMAND, String COMMAND_STRING) {
