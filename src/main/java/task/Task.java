@@ -1,6 +1,6 @@
 package task;
 /**
- * Task is the superclass of the activities that can be stored within Duke.
+ * Task is the superclass of the activities that can be stored within core.Duke.
  */
 public abstract class Task {
     private boolean isComplete;

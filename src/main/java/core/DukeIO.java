@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import exceptions.DukeException;
 
 /**
- * Handles all text and file input output for Duke.
+ * Handles all text and file input output for core.Duke.
  */
 public class DukeIO extends PrintWriter {
 

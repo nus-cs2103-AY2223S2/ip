@@ -1,6 +1,5 @@
-import core.DukeIO;
-import core.Parser;
-import core.TaskMaster;
+package core;
+
 import exceptions.DukeException;
 
 /**
@@ -23,8 +22,10 @@ public class Duke {
         boolean shouldQuit = false;
         String userInput;
 
+        greetCli();
         initialize();
-        greet();
+        ioHandler.println(greet());
+        ioHandler.flush();
 
         while (!shouldQuit) {
             userInput = ioHandler.readLn();
@@ -42,11 +43,11 @@ public class Duke {
                 ioHandler.flush();
             }
         }
-        goodbye();
+        goodbyeCli();
     }
 
     /**
-     * Initialize Duke by initializing needed classes.
+     * Initialize core.Duke by initializing needed classes.
      */
     public static void initialize() {
         ioHandler = new DukeIO();
@@ -63,7 +64,7 @@ public class Duke {
     /**
      * Prints standard welcome message.
      */
-    public static void greet() {
+    public static void greetCli() {
         String logo = "                __  __ _           \n"
                 + "               / _|/ _| |          \n"
                 + "__      ____ _| |_| |_| | ___  ___ \n"
@@ -77,13 +78,68 @@ public class Duke {
     }
 
     /**
-     * Prints standard goodby message and closes DIO.
+     * Prints standard welcome message.
+     * @return standard welcome message.
      */
-    public static void goodbye() {
+    public static String greet() {
+        StringBuilder ret = new StringBuilder();
+        String logo = "                __  __ _           \n"
+                + "               / _|/ _| |          \n"
+                + "__      ____ _| |_| |_| | ___  ___ \n"
+                + "\\ \\ /\\ / / _` |  _|  _| |/ _ \\/ __|\n"
+                + " \\ V  V / (_| | | | | | |  __/\\__ \\\n"
+                + "  \\_/\\_/ \\__,_|_| |_| |_|\\___||___/\n";
+        ret.append("Hello from\n");
+        ret.append(logo);
+        ret.append("\n");
+        ret.append("Hello! I'm Waffles\n");
+        ret.append("What can I do for you?\n");
+
+        return ret.toString();
+    }
+
+    /**
+     * Prints standard goodbye message and closes DIO.
+     */
+    public static void goodbyeCli() {
         ioHandler.writeSave(taskMaster);
         ioHandler.println("Bye. Hope to see you again soon!");
         ioHandler.flush();
         ioHandler.close();
+    }
+
+    /**
+     * Prints standard goodbye message and closes DIO.
+     */
+    public static void goodbye() {
+        ioHandler.writeSave(taskMaster);
+    }
+
+
+    /**
+     * Process user commands and returns appropriate message.
+     * @param userInput String from the user
+     * @return Message depending on how the command is interpreted.
+     */
+    public String getResponse(String userInput) {
+        if (!userInput.isEmpty()) {
+            try {
+                Parser input = new Parser(userInput);
+                return input.parse(taskMaster);
+            } catch (exceptions.Quit e) {
+                goodbye();
+                System.exit(0);
+            } catch (DukeException de) {
+                return de.getMessage();
+            }
+        } else {
+            try {
+                throw new exceptions.invalid.Command();
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        }
+        return userInput;
     }
 }
 
