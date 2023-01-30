@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -99,6 +100,8 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("Woah.. Error parsing date time for deadline task. Please enter the by datetime in this format yyyy-mm-dd (e.g., 2023-10-15).");
             } finally {
                 saveListToFile(taskList);
             }
