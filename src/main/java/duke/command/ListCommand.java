@@ -9,7 +9,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * A command that stores the command to list the tasks in the task list. The action of adding the task can be carried
+ * A command that stores the command to list the tasks in the task list. The action of listing the task can be carried
  * out when called.
  */
 public class ListCommand extends Command {

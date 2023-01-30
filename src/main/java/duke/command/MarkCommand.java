@@ -9,8 +9,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * A command that stores the command to mark a task as done. The action of adding the task can be carried out when
- * called.
+ * A command that stores the command to mark a task as done. The action of marking the task as done when called.
  */
 public class MarkCommand extends Command {
     /**

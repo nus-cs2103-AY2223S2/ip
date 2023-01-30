@@ -9,7 +9,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * A command that stores the command to delete a task. The action of adding the task can be carried out when called.
+ * A command that stores the command to delete a task. The action of deleting the task can be carried out when called.
  */
 public class DeleteCommand extends Command {
     /**

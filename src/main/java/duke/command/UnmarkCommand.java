@@ -9,7 +9,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * A command that stores the command to unmark a task as not done. The action of adding the task can be carried out
+ * A command that stores the command to unmark a task as not done. The action of unmarking the task can be carried out
  * when called.
  */
 public class UnmarkCommand extends Command {

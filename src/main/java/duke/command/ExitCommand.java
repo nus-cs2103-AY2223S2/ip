@@ -6,7 +6,8 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * A command that stores the command to quit the chatbot. The action of adding the task can be carried out when called.
+ * A command that stores the command to quit the chatbot. The action of exiting the chatbot can be carried out when
+ * called.
  */
 public class ExitCommand extends Command {
     /**
