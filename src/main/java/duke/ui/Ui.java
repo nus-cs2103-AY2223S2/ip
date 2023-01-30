@@ -42,14 +42,14 @@ public class Ui {
                 + "| |_| | |_|  |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n"
                 + "What can I do for you?";
-        println(welcome);
+        printConsole(welcome);
     }
 
     /**
      * Prints dividers.
      */
     public void showLine() {
-        println("-".repeat(40));
+        printConsole("-".repeat(40));
     }
 
     /**
@@ -66,7 +66,7 @@ public class Ui {
      *
      * @param lines {@link String} array
      */
-    public void println(Object... lines) {
+    public void printConsole(Object... lines) {
         for (Object l : lines) {
             out.println(l.toString());
         }
@@ -80,7 +80,7 @@ public class Ui {
     public void showError(Object... lines) {
         for (Object l : lines) {
             out.println(l.toString());
-            println("Error! [ " + l + " ]");
+            printConsole("Error! [ " + l + " ]");
         }
     }
 }
