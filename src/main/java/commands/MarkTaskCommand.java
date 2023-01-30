@@ -32,12 +32,13 @@ public class MarkTaskCommand extends Command {
      * @param storage storage for reading and writing data to files
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            taskList.markTask(this.taskIndex);
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            taskList.markTask(taskIndex);
+            return String.format("Nice! Marked this task as done, I have:\n %s",
+                    taskList.get(taskIndex).toString());
+        } catch (Exception e) {
+            return e.getMessage();
         }
-
     }
 }

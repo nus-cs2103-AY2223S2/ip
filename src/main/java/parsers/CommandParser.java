@@ -1,13 +1,6 @@
 package parsers;
 
-import commands.AddTaskCommand;
-import commands.Command;
-import commands.Commands;
-import commands.DeleteTaskCommand;
-import commands.ExitCommand;
-import commands.ListCommand;
-import commands.MarkTaskCommand;
-import commands.UnmarkTaskCommand;
+import commands.*;
 import exceptions.DukeException;
 import exceptions.IncompleteCommandException;
 import exceptions.UnknownCommandException;
@@ -49,15 +42,17 @@ public class CommandParser extends Parser {
             case DEADLINE:
             case EVENT:
                 return new AddTaskCommand(response);
+            case FIND:
+                return new FindTaskCommand(commands[1]);
             default:
                 throw new UnknownCommandException("Fall to the Dark Side, you must not. "
-                        + "Invalid Commands.Commands.Command!", null);
+                        + "Invalid Command!", null);
             }
         } catch (DukeException e) {
             throw e;
         } catch (IllegalArgumentException e) {
             throw new UnknownCommandException("Fall to the Dark Side, you must not."
-                    + "Invalid Commands.Commands.Command!", null);
+                    + "Invalid Command!", null);
         }
     }
 

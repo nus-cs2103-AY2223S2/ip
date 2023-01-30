@@ -2,6 +2,7 @@ package commands;
 
 import exceptions.DukeException;
 import files.Storage;
+import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
 
@@ -32,12 +33,15 @@ public class DeleteTaskCommand extends Command {
      * @param storage storage for reading and writing data to files
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
+            Task taskToBeDeleted = taskList.get(this.indexString);
             taskList.deleteTask(this.indexString);
-        } catch (DukeException e) {
+            return String.format("Removed this task I have:\n %s\nLeft with %d tasks, you have",
+                    taskToBeDeleted.toString(), taskList.getSize());
+        } catch (Exception e) {
             System.out.println(e.getMessage());
+            return e.getMessage();
         }
-
     }
 }

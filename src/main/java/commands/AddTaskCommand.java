@@ -33,12 +33,16 @@ public class AddTaskCommand extends Command {
      * @param ui user interface
      * @param storage storage for reading and writing data to files
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task task = TaskInfoParser.parse(this.response);
             taskList.addTask(task);
+            String reply = "Got it. Added this task, I have:";
+            return String.format("%s\n %s\n%d tasks in the list, you have now!", reply,
+                    task.toString(), taskList.getSize());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 }

@@ -18,6 +18,7 @@ public abstract class Command {
      * @param taskList task list for command to operate on
      * @param ui ui for any response and interaction needed with user
      * @param storage storage for command to do IO operations on
+     * @return String representation of list
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 }

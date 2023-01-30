@@ -1,6 +1,5 @@
 package commands;
 
-import exceptions.DukeException;
 import files.Storage;
 import tasks.TaskList;
 import ui.Ui;
@@ -33,11 +32,14 @@ public class UnmarkTaskCommand extends Command {
      * @param storage storage for reading and writing data to files
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             taskList.unmarkTask(taskIndex);
-        } catch (DukeException e) {
+            return String.format("Ok! Marked this task as not done yet, I have:\n %s",
+                    taskList.get(taskIndex).toString());
+        } catch (Exception e) {
             System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 }
