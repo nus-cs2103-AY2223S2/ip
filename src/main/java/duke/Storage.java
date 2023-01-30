@@ -55,13 +55,15 @@ public class Storage {
      * @return Task.
      */
     public Task parseStringToTask(String string) {
-        String[] arr = string.split(",");
-        if (arr[0].equals("T")) {
-            return new ToDo(arr[2], arr[1].equals("1"));
-        } else if (arr[0].equals("D")) {
-            return new Deadline(arr[2], arr[1].equals("1"), LocalDate.parse(arr[3]));
+        String[] inputArray = string.split(",");
+        if (inputArray[0].equals("T")) {
+            return new ToDo(inputArray[2], inputArray[1].equals("1"));
+        } else if (inputArray[0].equals("D")) {
+            return new Deadline(inputArray[2], inputArray[1].equals("1"), LocalDate.parse(inputArray[3]));
         } else {
-            return new Event(arr[2], arr[1].equals("1"), LocalDate.parse(arr[3]), LocalDate.parse(arr[4]));
+            return new Event(inputArray[2], inputArray[1].equals("1"),
+                    LocalDate.parse(inputArray[3]),
+                    LocalDate.parse(inputArray[4]));
         }
     }
 

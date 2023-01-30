@@ -47,8 +47,12 @@ public class Event extends Task {
 
     @Override
     public String toStorableString() {
-        return "E" + "," + (this.isDone() ? "1" : "0") + "," + this.getDescription()
-                + "," + this.from.toString() + "," + this.to.toString();
+        return String.format("E,%s,%s,%s",
+                this.isDone() ? "1" : "0",
+                this.getDescription(),
+                this.from.toString(),
+                this.to.toString()
+        );
     }
 
 }

@@ -30,7 +30,10 @@ public class ToDo extends Task {
 
     @Override
     public String toStorableString() {
-        return "T," + (this.isDone() ? "1" : "0") + "," + this.getDescription();
+        return String.format("T,%s,%s",
+                this.isDone() ? "1" : "0",
+                this.getDescription()
+        );
     }
 
 }

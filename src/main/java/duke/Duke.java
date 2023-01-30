@@ -3,19 +3,18 @@ package duke;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 
 /**
- * This class a Duke that contains the main method.
+ * This class contains a Duke that contains the main method.
  */
 public class Duke extends Application {
     private ScrollPane scrollPane;
@@ -30,23 +29,23 @@ public class Duke extends Application {
 
     public static void main(String[] args) {
 
-        TextUi TextUi = new TextUi();
-        Parser Parser = new Parser();
-        Storage Storage = new Storage();
-        TaskList taskList = Storage.readSavedFile();
+        TextUi textUi = new TextUi();
+        Parser parser = new Parser();
+        Storage storage = new Storage();
+        TaskList taskList = storage.readSavedFile();
 
-        TextUi.getWelcomeMessage();
+        textUi.getWelcomeMessage();
 
         String input;
-        while (!(input = TextUi.in.nextLine()).equals("bye")) {
+        while (!(input = textUi.in.nextLine()).equals("bye")) {
             try {
-                Parser.parse(input, taskList, Storage, TextUi);
+                parser.parse(input, taskList, storage, textUi);
             } catch (DukeException dukeException) {
-                TextUi.getCustomMessage(dukeException.getMessage());
+                textUi.getCustomMessage(dukeException.getMessage());
             }
         }
 
-        TextUi.getGoodbyeMessage();
+        textUi.getGoodbyeMessage();
     }
     @Override
     public void start(Stage stage) {
@@ -146,7 +145,6 @@ public class Duke extends Application {
     private String getResponse(String input) {
         return "Grand Duke heard: " + input;
     }
-
 
 }
 

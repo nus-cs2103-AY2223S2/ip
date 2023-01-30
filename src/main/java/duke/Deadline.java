@@ -41,7 +41,10 @@ public class Deadline extends Task {
 
     @Override
     public String toStorableString() {
-        return "D" + "," + (this.isDone() ? "1" : "0") + ","
-                + this.getDescription() + "," + this.by.toString();
+        return String.format("D,%s,%s,%s",
+                this.isDone() ? "1" : "0",
+                this.getDescription(),
+                this.by.toString()
+                );
     }
 }

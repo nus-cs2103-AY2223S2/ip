@@ -13,8 +13,7 @@ public class Parser {
      * @param storage   Storage.
      * @param textUi    TextUi.
      */
-    public void parse(
-            String userInput, TaskList taskList, Storage storage, TextUi textUi)
+    public void parse(String userInput, TaskList taskList, Storage storage, TextUi textUi)
             throws DukeException {
 
         String command;
