@@ -20,8 +20,8 @@ import sam.task.ToDo;
 public class Storage {
     private Path savePath;
 
-    public Storage(String first, String... more) {
-        this.savePath = Path.of(first, more);
+    public Storage(Path savePath) {
+        this.savePath = savePath;
     }
 
     /**

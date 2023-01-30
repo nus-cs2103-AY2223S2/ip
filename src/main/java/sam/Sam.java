@@ -1,5 +1,7 @@
 package sam;
 
+import java.nio.file.Path;
+
 import sam.command.Command;
 import sam.command.ExitCommand;
 import sam.parser.Parser;
@@ -13,9 +15,9 @@ public class Sam {
     private TaskList tasks;
     private boolean isLive;
 
-    public Sam(String first, String... more) {
+    public Sam(Path savePath) {
         ui = new Ui();
-        storage = new Storage(first, more);
+        storage = new Storage(savePath);
         tasks = new TaskList();
         isLive = false;
     }
@@ -42,6 +44,7 @@ public class Sam {
     }
 
     public static void main(String[] args) {
-        new Sam("data", "sam.txt").run();
+        Path savePath = Path.of("data", "sam.txt");
+        new Sam(savePath).run();
     }
 }
