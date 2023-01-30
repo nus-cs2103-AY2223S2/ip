@@ -7,10 +7,14 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    public Parser() {
-
-    }
-
+    /**
+     * Parses a String command and returns a Command object on what the
+     * String wants to be executed.
+     *
+     * @param cmd Text form of command.
+     * @return Command to be executed.
+     * @throws DukeException If the string command is invalid.
+     */
     public static Command parse(String cmd) throws DukeException{
         String[] tokens = cmd.split(" ", 2);
         String command = tokens[0];

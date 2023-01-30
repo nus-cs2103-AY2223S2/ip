@@ -6,6 +6,11 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Creates a Duke object with the saved file at filepath.
+     *
+     * @param filepath Filepath to the saved history of the list.
+     */
     public Duke(String filepath) {
         this.storage = new Storage(filepath);
         this.ui = new Ui();
@@ -21,6 +26,9 @@ public class Duke {
             duke.run();
     }
 
+    /**
+     * Runs the Duke tasklist application.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
