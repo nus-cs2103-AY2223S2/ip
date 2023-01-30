@@ -142,5 +142,12 @@ public class Parser {
             }
         }
     }
+
+    public static boolean checkEmptyDescription(String[] checkString) throws EmptyDescription {
+        if (checkString.length == 1) {
+            throw new EmptyDescription(" The description of " + checkString[0] + " cannot be empty.");
+        }
+        return true;
+    }
 }
 
