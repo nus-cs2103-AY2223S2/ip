@@ -1,13 +1,12 @@
 package duke.entities;
 
 import duke.enums.TaskType;
-import duke.utils.IMarshal;
-import duke.utils.IUnmarshal;
+import duke.utils.ISerializable;
 
 /**
  * Represents a serializable task.
  */
-public class SerializableTask implements IMarshal<String>, IUnmarshal<Task> {
+public class SerializableTask implements ISerializable<String, Task> {
     /** Serializable task attributes **/
     private final TaskType taskType;
     private final boolean isDone;
