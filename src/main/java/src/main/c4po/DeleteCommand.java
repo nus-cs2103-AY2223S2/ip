@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
         try {
             Task toDelete = tasks.getItem(toDeletePosition);
 
-            boolean isSuccess = tasks.deleteItem(toDeletePosition);
+            boolean isSuccess = tasks.deleteItem(toDelete);
             if (isSuccess) {
                 Ui.showTaskDeletedQuote();
                 Ui.printTask(toDelete);
