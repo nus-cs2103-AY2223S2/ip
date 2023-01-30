@@ -2,48 +2,45 @@ package james;
 
 import james.command.Command;
 import james.parser.Parser;
+import james.storage.Storage;
 import james.task.TaskList;
 import james.ui.UI;
 
 /**
- * The main class of James Program.
+ * The main class of the James chatbot.
+ * The James program is a bot that allows users to add, delete and mark
+ * tasks as done.
  */
 public class James {
     /**
-     * The main method of James Program.
+     * The main method of the James program.
      */
-    public static void main(String[] args) throws JamesException {
-        new James();
-    }
-        private UI ui;
-        private Storage storage;
-        private TaskList taskList;
-        private Parser parser;
-
-        public James() throws JamesException {
-            parser = new Parser();
-            storage = new Storage();
-            ui = new UI();
-            taskList = storage.loadFile();
-
-            ui.welcome();
-            String input = ui.readCommand();
-
-            while (!input.equals("bye")) {
-                try {
-                    Command command = parser.parseCommand(input);
-                    command.assign(taskList, ui);
-                    command.execute();
-                } catch (JamesException e) {
-                    ui.printError(e);
-                } finally {
-                    input = ui.readCommand();
-                }
+    public James() throws JamesException {
+        Parser parser = new Parser();
+        Storage storage = new Storage();
+        UI ui = new UI();
+        TaskList taskList = storage.loadFile();
+        ui.welcome();
+        String input = ui.readCommand();
+        while (!input.equals("bye"))
+        {
+            try
+            {
+                Command command = parser.parseCommand(input);
+                command.assign(taskList, ui);
+                command.execute();
+            } catch (JamesException e)
+            {
+                ui.printError(e);
+            } finally
+            {
+                input = ui.readCommand();
             }
-            storage.writeToFile(taskList);
-            ui.exit();
         }
+        storage.writeToFile(taskList);
+        ui.exit();
     }
+}
 
 
 

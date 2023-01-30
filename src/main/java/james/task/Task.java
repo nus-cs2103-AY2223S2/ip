@@ -1,9 +1,15 @@
 package james.task;
 
+/**
+ * The task class.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
-
+    /**
+     * Creates a new task.
+     * @param description The task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

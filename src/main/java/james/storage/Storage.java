@@ -1,5 +1,6 @@
-package james;
+package james.storage;
 
+import james.JamesException;
 import james.task.*;
 
 import java.io.File;
@@ -12,7 +13,8 @@ public class Storage {
     String filePath = "data/james.txt";
     File file;
 
-    public Storage() throws JamesException {
+    public Storage() throws JamesException
+    {
         try {
             file = new File(filePath);
             if (!file.exists()) {
