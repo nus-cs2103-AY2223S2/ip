@@ -12,13 +12,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage interface that deals with the loading and storing of the tasks data.
+ */
 public class Storage {
+    /**
+     * The file path where the tasks data are stored.
+     */
     private final String FILE_PATH;
 
+    /**
+     * Constructor for a new storage interface with the file path of the tasks data provided.
+     *
+     * @param FILE_PATH The file path where the tasks data are stored
+     */
     public Storage(String FILE_PATH) {
         this.FILE_PATH = FILE_PATH;
     }
 
+    /**
+     * Attempt to load the tasks based on the data of the tasks provided. If the file does not exist, then a new
+     * blank file is created instead. Throws an exception if the program cannot create a new file or there is an
+     * error obtaining the data from the file path.
+     *
+     * @return A list of tasks loaded from the file path
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -49,6 +67,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves all the tasks into their corresponding string representation to be loaded in the future. Throws an
+     * exception if there is an error accessing or saving the data to the file path.
+     *
+     * @param tasks The list of tasks to be saved
+     * @throws DukeException If there is an error saving the data of the tasks
+     */
     public void updateData(TaskList tasks) throws DukeException {
         try {
             FileWriter myWriter = new FileWriter(this.FILE_PATH);
@@ -61,6 +86,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts the list of tasks provided to the corresponding string representation to be saved.
+     *
+     * @param tasks The list of tasks
+     * @return The string representation of all the tasks
+     */
     private String toData(TaskList tasks) {
         String output = "";
         for (Task task : tasks.getTasks()) {
@@ -70,6 +101,13 @@ public class Storage {
         return output;
     }
 
+    /**
+     * Converts a string representation of the task into its respective task object and is returned.
+     *
+     * @param data The string representation of the task data
+     * @return A corresponding task to the provided data
+     * @throws DukeException If the string representation does not match any format of tasks
+     */
     private Task fromData(String data) throws DukeException {
         String[] typeSplit = data.split(" \\| ", 2);
         switch (typeSplit[0]) {

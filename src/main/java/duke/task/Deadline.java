@@ -8,9 +8,23 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A deadline task object that stores its description, the due date and on whether is it done or not. The task can be
+ * marked as done or unmarked as not done.
+ */
 public class Deadline extends Task {
+    /**
+     * The due date of the deadline task.
+     */
     protected LocalDate by;
 
+    /**
+     * Constructor for a deadline task with the given description and due date. It checks on whether the due date is
+     * in the appropriate format first. If it is not, an exception is throw to provide hints on the due date format.
+     *
+     * @param description The description of the deadline task
+     * @param by          The due date of the deadline task
+     */
     public Deadline(String description, String by) {
         super(description);
         try {
@@ -22,6 +36,15 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Constructor for a deadline task with the given description, due date and its status of completion. It checks on
+     * whether the due date is in the appropriate format first. If it is not, an exception is throw to provide hints
+     * on the due date format.
+     *
+     * @param description The description of the deadline task
+     * @param by          The due date of the deadline task
+     * @param isMarked    Whether the deadline task is done or not
+     */
     public Deadline(String description, String by, boolean isMarked) {
         this(description, by);
         this.isDone = isMarked;
@@ -39,6 +62,13 @@ public class Deadline extends Task {
         return String.format("Deadline | marked: %s ; description: %s ; deadline: %s", this.isMarked(), this.description, formattedBy);
     }
 
+    /**
+     * Checks on whether the string representation of the deadline task is the same format as the one exported. If it
+     * is, then a new task is created with the described properties. Otherwise, return an empty task.
+     *
+     * @param data String representation of a deadline task
+     * @return A deadline task object that describes the given data of the task
+     */
     public static Task fromData(String data) {
         Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*) ; (deadline:) (.*)");
         Matcher matcher = pattern.matcher(data);
