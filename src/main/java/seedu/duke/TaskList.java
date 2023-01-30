@@ -10,6 +10,13 @@ public class TaskList {
         return list;
     }
 
+    public TaskList() {
+    }
+
+    public TaskList(ArrayList<Task> list) {
+        this.list = list;
+    }
+
     /**
      * Using the chat of the user, creates a new ToDo object and adds it to the list
      * @param chat (String inputted by user)
@@ -86,5 +93,17 @@ public class TaskList {
         int taskNumber = Integer.valueOf(taskNumberString) - 1;
         Task task = list.remove(taskNumber);
         return task;
+    }
+
+    @Override
+    public String toString() {
+        String response = "";
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            response += Integer.toString(i + 1) + ". ";
+            response += task.toString();
+            response += "\n";
+        }
+        return response;
     }
 }

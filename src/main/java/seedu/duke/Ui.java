@@ -44,14 +44,7 @@ public class Ui {
         String keyword = chat.split(" ")[0];
         switch(keyword) {
         case("list"): {
-            ArrayList<Task> list = ls.getList();
-            String response = "";
-            for (int i = 0; i < list.size(); i++) {
-                Task task = list.get(i);
-                response += Integer.toString(i + 1) + ". ";
-                response += task.toString();
-                response += "\n";
-            }
+            String response = ls.toString();
             Ui.print(response);
             break;
         }
@@ -115,6 +108,20 @@ public class Ui {
         }
         case("bye"): {
             receivedBye = true;
+            break;
+        }
+        case("find"): {
+            String search = chat.split(" ")[1];
+            ArrayList<Task> list = new ArrayList<>();
+            for (Task task : ls.getList()) {
+                if (task.contains(search)) {
+                    list.add(task);
+                }
+            }
+            TaskList filteredList = new TaskList(list);
+            String response = "Here are the matching tasks in your list:\n";
+            response += filteredList.toString();
+            Ui.print(response);
             break;
         }
         default:

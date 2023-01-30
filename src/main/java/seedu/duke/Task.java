@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public abstract class Task {
 
     protected String task;
@@ -39,6 +42,12 @@ public abstract class Task {
         }
         String response = "[" + abbreviation + "][" + status + "] " + task;
         return response.trim();
+    }
+
+    public Boolean contains(String search) {
+        Pattern pattern = Pattern.compile(search);
+        Matcher matcher = pattern.matcher(task);
+        return matcher.find();
     }
 
     public abstract String getBreakdown();
