@@ -20,7 +20,7 @@ public class AddTodoCommand extends Command {
      * Constructor for a command to add new todo task.
      *
      * @param commandString The add todo command in string representation
-     * @param DATA The description of the todo task
+     * @param DATA          The description of the todo task
      */
     public AddTodoCommand(String commandString, String DATA) {
         super(Commands.ADD_TODO, commandString);

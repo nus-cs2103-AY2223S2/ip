@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
      * Constructor for a command to delete a task.
      *
      * @param commandString The delete command in string representation
-     * @param INDEX_STRING The string representation of the index to be deleted
+     * @param INDEX_STRING  The string representation of the index to be deleted
      */
     public DeleteCommand(String commandString, String INDEX_STRING) {
         super(Commands.DELETE, commandString);

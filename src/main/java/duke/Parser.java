@@ -2,7 +2,17 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * A parser that parses all the user text based commands into the respective commands to be executed.
+ */
 public class Parser {
+    /**
+     * Checks on whether the command is recognised. If it is, a corresponding command is returned. Otherwise, an
+     * exception is throw to inform them that the command does not exit.
+     *
+     * @param fullCommand The full string test command that the user input
+     * @return The respective command that the user called for
+     */
     public static Command parse(String fullCommand) {
         String[] inputSplit = fullCommand.split(" ", 2);
         String command = inputSplit[0];

@@ -20,8 +20,8 @@ public class AddDeadlineCommand extends Command {
     /**
      * Constructor for a command to add new deadline task.
      *
-     * @param commandString  The add deadline command in string representation
-     * @param DATA The description and due date of the deadline task
+     * @param commandString The add deadline command in string representation
+     * @param DATA          The description and due date of the deadline task
      */
     public AddDeadlineCommand(String commandString, String DATA) {
         super(Commands.ADD_DEADLINE, commandString);

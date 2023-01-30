@@ -21,7 +21,7 @@ public class AddEventCommand extends Command {
      * Constructor for a command to add new event task.
      *
      * @param commandString The add event command in string representation
-     * @param DATA The description, start and end date of the event task
+     * @param DATA          The description, start and end date of the event task
      */
     public AddEventCommand(String commandString, String DATA) {
         super(Commands.ADD_EVENT, commandString);

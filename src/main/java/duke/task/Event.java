@@ -8,11 +8,30 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * An event task object that stores its description, the start and end date of the event and on whether is it done or
+ * not. The task can be marked as done or unmarked as not done.
+ */
 public class Event extends Task {
 
+    /**
+     * The start date of the event.
+     */
     protected LocalDate from;
+    /**
+     * The end date of the event.
+     */
     protected LocalDate to;
 
+    /**
+     * Constructor for an event task with the given description, start and end date. It checks on whether the start
+     * and end dates are in the appropriate format first. If it is not, an exception is throw to provide hints on the
+     * start and end dates format.
+     *
+     * @param description The description of the event task
+     * @param from        The start date of the event
+     * @param to          The end date of the event
+     */
     public Event(String description, String from, String to) {
         super(description);
         try {
@@ -25,6 +44,16 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Constructor for a deadline task with the given description, start date, end date and its status of completion.
+     * It checks on whether the start and end dates are in the appropriate format first. If it is not, an exception
+     * is throw to provide hints on the start and end dates format.
+     *
+     * @param description The description of the event task
+     * @param from        The start date of the event
+     * @param to          The end date of the event
+     * @param isMarked    Whether the event task is done or not
+     */
     public Event(String description, String from, String to, boolean isMarked) {
         this(description, from, to);
         this.isDone = isMarked;
@@ -44,6 +73,13 @@ public class Event extends Task {
         return String.format("Event | marked: %s ; description: %s ; from: %s ; to: %s", this.isMarked(), this.description, formattedFrom, formattedTo);
     }
 
+    /**
+     * Checks on whether the string representation of the event task is the same format as the one exported. If it is,
+     * then a new task is created with the described properties. Otherwise, return an empty task.
+     *
+     * @param data String representation of a event task
+     * @return An event task object that describes the given data of the task
+     */
     public static Task fromData(String data) {
         Pattern pattern = Pattern.compile("(marked:) (.*) ; (description:) (.*) ; (from:) (.*) ; (to:) (.*)");
         Matcher matcher = pattern.matcher(data);

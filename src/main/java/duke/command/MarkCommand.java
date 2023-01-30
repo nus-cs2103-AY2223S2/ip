@@ -21,7 +21,7 @@ public class MarkCommand extends Command {
      * Constructor for a command to mark a task as done.
      *
      * @param commandString The mark command in string representation
-     * @param INDEX_STRING The string representation of the index to be marked as done
+     * @param INDEX_STRING  The string representation of the index to be marked as done
      */
     public MarkCommand(String commandString, String INDEX_STRING) {
         super(Commands.MARK, commandString);
