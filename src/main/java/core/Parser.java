@@ -3,7 +3,7 @@ package core;
 import exceptions.DukeException;
 
 /**
- * Parses user input into usable terms for Duke.
+ * Parses user input into usable terms for core.Duke.
  */
 public class Parser {
     private String userInput;

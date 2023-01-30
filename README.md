@@ -1,7 +1,7 @@
 # Waffles
 > The best things in life are waffles.
 
-🧇 An *alternative* to Duke. 🧇
+🧇 An *alternative* to core.Duke. 🧇
 
 Are you looking for task manager that is:
 1. **Distraction Free**
@@ -25,7 +25,7 @@ If you are a Java programmer, you can experiment or add on to our [Source Code](
 ```Java
 public class Main {
     public static void main(String[] args) {
-        Duke.main(args);
+        core.Duke.main(args);
     }
 }
 ```

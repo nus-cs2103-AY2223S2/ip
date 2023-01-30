@@ -1,9 +1,10 @@
 package core;
 
-import exceptions.invalid.Index;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import exceptions.invalid.Index;
 
 class TaskMasterTest {
 
@@ -21,8 +22,8 @@ class TaskMasterTest {
         TaskMaster testcase = new TaskMaster();
         testcase.addToDo("Homework", false);
         try {
-            assertEquals("Nice! I've marked this task as done:\n" +
-                    "[T][X] Homework", testcase.markComplete(0,true));
+            assertEquals("Nice! I've marked this task as done:\n"
+                    + "[T][X] Homework", testcase.markComplete(0, true));
         } catch (Index e) {
             throw new RuntimeException(e);
         }
@@ -33,30 +34,9 @@ class TaskMasterTest {
     void markComplete_normal_failure() {
         TaskMaster testcase = new TaskMaster();
         try {
-            testcase.markComplete(9,true);
+            testcase.markComplete(9, true);
         } catch (Index e) {
             assertEquals("OOPS!!! The list does not contain index 10", e.getMessage());
-//            throw new RuntimeException(e);
         }
     }
-//
-//    @Test
-//    void delete() {
-//    }
-//
-//    @Test
-//    void addToDo() {
-//    }
-//
-//    @Test
-//    void addDeadLine() {
-//    }
-//
-//    @Test
-//    void addEvent() {
-//    }
-//
-//    @Test
-//    void export() {
-//    }
 }
