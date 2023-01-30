@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 import duke.dukeexception.DukeException;
 import duke.parser.Parser;
@@ -33,75 +32,51 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
+    public Duke() {
+        this("data/list.txt");
+    }
+
     /**
      * Runs the main logic of the chatbot.
      * Supports 3 tasks: Todo, Event and Deadline.
      * Supports commands: adding, deletion, marking,
      * unmarking, listing, finding.
      */
-    public void run() {
-        ui.showWelcome();
-        // Scanner for user input.
-        Scanner userInput = new Scanner(System.in);
-
-        while (true) {
-            String input = userInput.nextLine();
-            Command inputType = Parser.parse(input);
-
-            ui.showLine();
-
-            try {
-                switch (inputType) {
-                case LIST:
-                    tasks.listTasks();
-                    break;
-                case FIND:
-                    tasks.findTasks(Parser.contents(input));
-                    break;
-                case MARK:
-                    tasks.markTask(Parser.contents(input));
-                    break;
-                case UNMARK:
-                    tasks.unmarkTask(Parser.contents(input));
-                    break;
-                case DELETE:
-                    tasks.deleteTask(Parser.contents(input));
-                    break;
-                case UNKNOWN:
-                    throw new DukeException("unknown");
-                case BYE:
-                    ui.showGoodbye();
-                    break;
-                default:
-                    tasks.addTask(inputType, Parser.contents(input));
-                    break;
-                }
-            } catch (DukeException e) {
-                if (e.getMessage().equals("index")) {
-                    System.out.println("☹ OOPS!!! Index out of range.");
-                } else if (e.getMessage().equals("unknown")) {
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                } else {
-                    System.out.println("☹ OOPS!!! The description of a " + e.getMessage() + " cannot be empty.");
-                }
-            } catch (DateTimeParseException e) {
-                System.out.println("Incorrect format detected.");
-                System.out.println("Please enter date/time in the following format:");
-                System.out.println("    yyyy-MM-dd HHmm");
-            }
-
-            storage.writeData();
-            ui.showLine();
-
-            if (inputType == Command.BYE) {
+    public String run(String input) {
+        Command inputType = Parser.parse(input);
+        try {
+            switch (inputType) {
+            case LIST:
+                return tasks.listTasks();
+            case FIND:
+                return tasks.findTasks(Parser.contents(input));
+            case MARK:
+                return tasks.markTask(Parser.contents(input));
+            case UNMARK:
+                return tasks.unmarkTask(Parser.contents(input));
+            case DELETE:
+                return tasks.deleteTask(Parser.contents(input));
+            case UNKNOWN:
+                throw new DukeException("unknown");
+            case BYE:
                 break;
+            default:
+                return tasks.addTask(inputType, Parser.contents(input));
             }
+        } catch (DukeException e) {
+            if (e.getMessage().equals("index")) {
+                return "OOPS!!! Index out of range.";
+            } else if (e.getMessage().equals("unknown")) {
+                return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+            } else {
+                return "OOPS!!! The description of a " + e.getMessage() + " cannot be empty.";
+            }
+        } catch (DateTimeParseException e) {
+            return "Incorrect format detected." + "\nPlease enter date/time in the following format:"
+                    + "\n    yyyy-MM-dd HHmm";
         }
 
-        userInput.close();
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/list.txt").run();
+        storage.writeData();
+        return "Bye. Hope to see you soon!";
     }
 }
