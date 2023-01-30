@@ -131,7 +131,7 @@ public class Parser {
 
     public static boolean isNumeric(String string) {
         try {
-            int intValue = Integer.parseInt(string);
+            int value = Integer.parseInt(string);
             return true;
         } catch (NumberFormatException e) {
             System.out.println("Input String cannot be parsed to Integer.");
