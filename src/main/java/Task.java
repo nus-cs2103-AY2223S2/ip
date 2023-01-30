@@ -1,10 +1,12 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected char type;
 
-    public Task(String description) {
+    public Task(String description, char c, Boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.type = c;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -23,6 +25,11 @@ public class Task {
         return this.description;
     }
 
+    public String savedAs() {
+        return (this.type + "|" + this.isDone + "|" + this.description);
+    }
+
+    @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
