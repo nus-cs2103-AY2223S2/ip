@@ -1,24 +1,31 @@
-# Duke project template
+# Waffles
+> The best things in life are waffles.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+🧇 An *alternative* to Duke. 🧇
 
-## Setting up in Intellij
+Are you looking for task manager that is:
+1. **Distraction Free**
+2. Text-based
+3. Portable
+4. Open Sourced
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Waffles got you covered.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### Features:
+- [x] Keeps tracks of your tasks
+- [ ] Reminders (coming soon)
+
+### Download:
+* [Download](https://github.com/9fc70c892/cs2030s-ay2021)
+
+
+---
+If you are a Java programmer, you can experiment or add on to our [Source Code](https://github.com/9fc70c892/cs2030s-ay2021)!
+
+```Java
+public class Main {
+    public static void main(String[] args) {
+        Duke.main(args);
+    }
+}
+```
