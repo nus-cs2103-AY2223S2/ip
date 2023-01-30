@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,6 +20,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tunabot.exceptions.InputException;
+
 
 /**
  * Main class for TunaBot
@@ -132,56 +134,45 @@ public class TunaBot extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
+        Label welcome = new Label(Ui.greeting());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, new ImageView(duke)));
         sendButton.setOnMouseClicked((event) -> {
-            try {
-                handleUserInput();
-            } catch (InputException e) {
-                throw new RuntimeException(e);
-            }
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            try {
-                handleUserInput();
-            } catch (InputException e) {
-                throw new RuntimeException(e);
-            }
+            handleUserInput();
         });
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() throws InputException {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+    private void handleUserInput() {
+        String input = userInput.getText();
+        Label userText = new Label(input);
+        Label dukeText = new Label(getResponse(input));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            Platform.exit();
+        }
     }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) throws InputException {
-        return Parser.parse(input, tasks);
+    private String getResponse(String input) {
+        try {
+            return Parser.parse(input, tasks);
+        } catch (InputException e) {
+            return e.getMessage();
+        }
     }
 }
