@@ -6,11 +6,20 @@ import duke.DukeException;
 
 public class Duke {
 
+    /** Main storage used for Duke */
     private Storage storage;
+    /** Task's list to be used by Duke */
     private TaskList tasks;
+    /** UI for Duke */
     private Ui ui;
+    /** Parser for understanding commands */
     private Parser parser;
 
+    /**
+     * Constructor for the main Duke class
+     *
+     * @param fileName the name of the storage file which Duke will store its data in
+     */
     public Duke(String fileName){
         ui = new Ui("Duke!");
         storage = new Storage(fileName);
@@ -23,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * This is the main run method for Duke
+     */
     public void run() {
         ui.printGreetings();
         boolean isExit = false;
@@ -40,6 +52,11 @@ public class Duke {
         ui.printExit();
     }
 
+    /**
+     * This is the main method which invokes Duke to run
+     * 
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }
