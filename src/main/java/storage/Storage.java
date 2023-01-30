@@ -67,7 +67,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(this.dataFile);
             for (int i = 0; i < this.tasks.size(); i++) {
                 String line = tasks.get(i).toSaveFormat();
-                fileWriter.write(line);
+                fileWriter.write(line + "\n");
             }
             fileWriter.close();
         } catch (IOException e) {
@@ -87,23 +87,27 @@ public class Storage {
         String taskName = inputList[1];
 
         switch (taskType) {
-            case "T":
+            case "T": {
                 tasks.addTask(new ToDo(taskName));
                 break;
-            case "D":
+            }
+            case "D": {
                 String by = inputList[2];
                 LocalDateTime deadline = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
                 tasks.addTask(new Deadline(taskName, deadline));
                 break;
-            case "E":
+            }
+            case "E": {
                 String from = inputList[2];
                 String to = inputList[3];
                 LocalDateTime startDate = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
                 LocalDateTime endDate = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
                 tasks.addTask(new Event(taskName, startDate, endDate));
                 break;
-            default:
+            }
+            default: {
                 throw new DukeException("Unable to parse this line: " + input);
+            }
         }
     }
 }

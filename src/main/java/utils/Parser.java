@@ -32,8 +32,9 @@ public class Parser {
 
             boolean tooFewArgs = inputList.length <= 1;
             switch (commandType) {
-                case LIST:
+                case LIST: {
                     return new ListCommand();
+                }
                 case DEADLINE: {
                     if (tooFewArgs) {
                         throw new DukeException("Please give a name for your deadline!");
@@ -52,7 +53,7 @@ public class Parser {
                     String name = input.replaceFirst("todo ", "");
                     return new ToDoCommand(name);
                 }
-                case EVENT:
+                case EVENT: {
                     if (tooFewArgs) {
                         throw new DukeException("Please give a name for your event!");
                     } else if (!input.contains(" /from ")) {
@@ -66,6 +67,7 @@ public class Parser {
                     String from = parseCommand[0].strip();
                     String by = parseCommand[1].strip();
                     return new EventCommand(name, from, by);
+                }
                 case MARK: {
                     if (tooFewArgs) {
                         throw new DukeException("Please provide the index of the task!");
@@ -97,9 +99,10 @@ public class Parser {
                 case BYE: {
                     return new ByeCommand();
                 }
-                default:
+                default: {
                     throw new DukeException("Sorry, that command is not recognised. \n"
                             + "P.S. Maybe you could contact @dsja612 on github to request for more types of commands :)");
+                }
             }
         } catch (IllegalArgumentException e) {
             throw new DukeException("Sorry, that command is not recognised. \n"
