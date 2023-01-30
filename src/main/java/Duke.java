@@ -10,15 +10,19 @@ import views.UI;
 /**
  * Main driver class for Duke.
  */
-
-public class Duke {
+public final class Duke {
     private static final TaskList tasks = new TaskList();
     private static final Scanner sc = new Scanner(System.in);
     private static final UI ui = new UI();
     private static final Storage storage = new Storage(tasks);
 
+    private Duke() { }
 
     public static void main(String[] args) throws IOException {
+        Duke.run();
+    }
+
+    public static void run() throws IOException {
         storage.load();
 
         ui.printInitMessage();
