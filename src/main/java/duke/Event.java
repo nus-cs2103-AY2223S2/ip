@@ -1,6 +1,6 @@
 package duke;
 
-public class Event extends Task{
+public class Event extends Task {
 
     /** String used to represent the start time of event. */
     protected String from;

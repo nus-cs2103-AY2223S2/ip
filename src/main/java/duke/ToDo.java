@@ -1,7 +1,8 @@
 package duke;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
     /** String used to assign the name of the task. */
+
     protected String desc;
 
     /**

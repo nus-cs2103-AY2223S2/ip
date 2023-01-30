@@ -35,10 +35,9 @@ public class Duke {
     /**
      * This is the main run method for Duke.
      */
-    public void run() {
+    public void runDuke() {
         ui.printGreetings();
         boolean isExit = false;
-        boolean isValid;
         while (!isExit) {
             String fullCommand = ui.readCommand();
             try {
@@ -46,7 +45,7 @@ public class Duke {
             } catch (DukeException e) {
                 e.getMessage();
             }
-            isExit = parser.checkForExit(fullCommand);
+            isExit = parser.isExit(fullCommand);
         }
         ui.closeScanner();
         ui.printExit();
@@ -58,6 +57,7 @@ public class Duke {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+
+        new Duke("tasks.txt").runDuke();
     }
 }
