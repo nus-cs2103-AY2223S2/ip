@@ -1,11 +1,16 @@
+package duke.task;
+
+import duke.DukeException;
+import duke.Parser;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     protected LocalDateTime startTime;
     protected LocalDateTime endTime;
-    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+    protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    protected DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
     public Event(String input) throws DukeException {
         super(input);
         this.symbol = 'E';
@@ -23,18 +28,22 @@ public class Event extends Task {
         this.endTime = Parser.parseDateTime(dueArr[1]);
         this.duedateString = startTime.format(displayFormatter) + " to " + endTime.format(displayFormatter);
     }
-    public Event(String input, boolean isDone) {
+    public Event(String input, boolean isDone) throws DukeException {
         super(input, isDone);
         this.symbol = 'E';
         String[] temp = input.split(",");
         this.description = temp[0];
         String[] dueArr = temp[1].split(" to ");
-        this.startTime = LocalDateTime.parse(dueArr[0]);
-        this.endTime = LocalDateTime.parse(dueArr[1]);
-        this.duedateString = startTime.format(displayFormatter) + " to " + endTime.format(displayFormatter);
+        this.startTime = LocalDateTime.parse(dueArr[0], displayFormatter);
+        this.endTime = LocalDateTime.parse(dueArr[1], displayFormatter);
+        this.duedateString = temp[1];
     }
     public String saveTask() {
-        return this.symbol + "," + isDone + "," + this.description + "," + this.startTime.format(inputFormatter) + " to " + this.endTime.format(inputFormatter);
+//        String startTimeString = this.startTime.format(displayFormatter);
+//        String endTimeString = this.endTime.format(displayFormatter);
+//        return this.symbol + "," + isDone + "," + this.description + "," + startTimeString + " to " + endTimeString;
+        return this.symbol + "," + isDone + "," + this.description + "," + duedateString;
+
     }
 }
 

@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.*;
+
 import java.io.*;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -42,7 +46,8 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(file);
             for (Task cur : taskList.tasks) {
-                fileWriter.write(cur.saveTask());
+                String curText = cur.saveTask();
+                fileWriter.write(curText);
                 fileWriter.write('\n');
             }
             fileWriter.close();

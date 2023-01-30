@@ -1,11 +1,11 @@
-import java.time.LocalDateTime;
+package duke.task;
 
 public abstract class Task {
-    protected String description;
+    public String description;
     protected boolean isDone;
-    protected char symbol;
+    public char symbol;
 
-    protected String duedateString;
+    public String duedateString;
 
 
     public Task(String description, boolean isDone) {

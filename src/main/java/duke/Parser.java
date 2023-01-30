@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,9 +16,9 @@ public class Parser {
      * this ParseDateTime method was referenced from fellow classmate @jmestxr
      */
     public static LocalDateTime parseDateTime (String dateTimeString) throws DukeException {
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         try {
-            return LocalDateTime.parse(dateTimeString, inputFormatter);
+            return LocalDateTime.parse(dateTimeString, displayFormatter);
         } catch (DateTimeParseException err) {
             throw new DukeException("Invalid deadline format! Please format it in <yyyy-MM-dd HHmm> to <yyyy-MM-dd HHmm>");
         }

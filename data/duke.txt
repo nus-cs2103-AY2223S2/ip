@@ -1,5 +1,2 @@
-T,true,buy 
-E,false,project ,2023-01-30 18:00 to 2023-01-30 18:01
-D,false,,2023-01-30
-T,false,buy apples
-D,false,,2023-01-30
+E,false,project,Jan 30 2023 1800 to Jan 30 2023 1900
+E,false,project,Jan 30 2023 1800 to Jan 30 2023 1900
