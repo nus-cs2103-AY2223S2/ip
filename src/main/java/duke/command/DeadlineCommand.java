@@ -14,9 +14,10 @@ import java.time.LocalDate;
  * A Command subclass for the deadline command.
  */
 public class DeadlineCommand extends Command {
+
     @Override
     public void execute(Ui ui, TaskList list, String command) throws DukeException {
-        String[] parts = command.split("\\s+");
+        String[] parts = command.split(Values.SPACEX);
         int byIndex = Parser.getIndexOf(parts, "/by");
 
         // Get name of task.

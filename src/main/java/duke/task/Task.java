@@ -51,6 +51,15 @@ public abstract class Task implements java.io.Serializable {
     }
 
     /**
+     * Checks if a given word is in the description of the task.
+     * @param word Word to search for.
+     * @return true if word exists; false otherwise.
+     */
+    public boolean searchDescription(String word) {
+        return description.contains(word);
+    }
+
+    /**
      * Gets the type of task, as a String
      * @return 'T' for ToDo; 'D' for Deadline; 'E' for Event.
      */

@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.TodoCommand;
@@ -31,7 +32,7 @@ public class Parser {
      * @throws DukeException If command input is invalid.
      */
     public Command parse(String commandStr) throws DukeException{
-        switch (commandStr.split("\\s+")[0]) {
+        switch (commandStr.split(Values.SPACEX)[0]) {
         case "list":
             return new ListCommand();
         case "todo":
@@ -46,6 +47,8 @@ public class Parser {
             return new UnmarkCommand();
         case "delete":
             return new DeleteCommand();
+        case "find":
+            return new FindCommand();
         case "bye":
             isExit = true;
             return new ByeCommand();

@@ -55,6 +55,22 @@ public class TaskList {
     }
 
     /**
+     * Returns a new TaskList of all tasks that contain a given keyword in their description.
+     * @param keyword The word to search for.
+     * @return The resulting TaskList.
+     */
+    public TaskList find(String keyword) {
+        ArrayList<Task> output = new ArrayList<>();
+        for (Task task : list) {
+            if (task.searchDescription(keyword)) {
+                output.add(task);
+            }
+        }
+
+        return new TaskList(output);
+    }
+
+    /**
      * Gets the task stored in a given index.
      * @param taskIndex Index to get task from.
      * @return Task stored at taskIndex.
