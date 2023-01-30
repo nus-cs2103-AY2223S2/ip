@@ -1,3 +1,9 @@
+import Exceptions.CommandNotFoundException;
+import Exceptions.EmptyListException;
+import Exceptions.MissingInputException;
+import Exceptions.MissingSpacingException;
+import Exceptions.UnspecifiedTimeException;
+import Exceptions.WessyException;
 import java.util.Scanner;
 
 public class Wessy {
@@ -15,48 +21,57 @@ public class Wessy {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
-            int len = userInput.length();
-            if (userInput.equalsIgnoreCase("bye")) {
+            if (checkCmd(userInput, "bye")) {
                 printNormal("Bye. Hope to see you again soon!");
                 break;
-            } else if (userInput.equalsIgnoreCase("list")) {
+            } else if (checkCmd(userInput, "list")) {
                 printList();
-            } else if (checkCmd(userInput, "mark")) {
-                printMarkOrUnmark(userInput, true);
-            } else if (checkCmd(userInput,"unmark")) {
-                printMarkOrUnmark(userInput, false);
             } else {
-                String[] parsedTexts = new String[] {};
-                if (checkCmd(userInput, "todo")) {
-                    parsedTexts = parse(userInput, "todo ");
-                } else if (checkCmd(userInput, "deadline")) {
-                    parsedTexts = parse(userInput, "deadline ");
-                } else if (checkCmd(userInput, "event")) {
-                    parsedTexts = parse(userInput, "event ");
+                try{
+                    if (checkCmd(userInput, "mark")) {
+                        printMarkOrUnmark(userInput, true);
+                    } else if (checkCmd(userInput,"unmark")) {
+                        printMarkOrUnmark(userInput, false);
+                    } else if (checkCmd(userInput, "todo")) {
+                        printAdded(add(parse(userInput, "todo")));
+                    } else if (checkCmd(userInput, "deadline")) {
+                        printAdded(add(parse(userInput, "deadline")));
+                    } else if (checkCmd(userInput, "event")) {
+                        printAdded(add(parse(userInput, "event")));
+                    } else {
+                        throw new CommandNotFoundException();
+                    }
+                } catch (WessyException wEx) {
+                    printNormal(String.valueOf(wEx));
+                } catch (NumberFormatException nfe) {
+                    printNormal("☹ OOPS!!! It is not a number. Please enter a number.");
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    printNormal("☹ OOPS!!! Please enter a valid task number.");
                 }
-                printAdded(add(parsedTexts));
             }
         }
     }
 
-    static String[] parse(String description, String type) {
-        String byStr = " /by ";
-        String fromStr = " /from ";
-        String toStr = " /to ";
+    static String[] parse(String description, String cmd) throws MissingSpacingException, MissingInputException, UnspecifiedTimeException {
+        checkForMissingInput(description, cmd);
+        checkForSpacingAftCmd(description, cmd);
+        String byStr = "/by";
+        String fromStr = "/from";
+        String toStr = "/to";
         int firstIdx;
         int secondIdx;
-        description = description.substring(type.length());
-        if (type.charAt(0) == 'd') {
+        description = description.substring(cmd.length() + 1);
+        if (cmd.charAt(0) == 'd') {
             firstIdx = description.indexOf(byStr);
-            return new String[] {description.substring(0, firstIdx),
+            return new String[] {description.substring(0, firstIdx - 1),
                     description.substring(firstIdx + byStr.length())};
-        } else if (type.charAt(0) == 'e') {
+        } else if (cmd.charAt(0) == 'e') {
             firstIdx = description.indexOf(fromStr);
             secondIdx = description.indexOf(toStr);
-            return new String[] {description.substring(0, firstIdx),
-                    description.substring(firstIdx + fromStr.length(), secondIdx),
-                    description.substring(secondIdx + toStr.length())};
-        } else if (type.charAt(0) == 't') {
+            return new String[] {description.substring(0, firstIdx - 1),
+                    description.substring(firstIdx - 1 + fromStr.length(), secondIdx - 1),
+                    description.substring(secondIdx - 1 + toStr.length())};
+        } else if (cmd.charAt(0) == 't') {
             return new String[] {description};
         }
         return new String[] {};
@@ -65,6 +80,72 @@ public class Wessy {
     static boolean checkCmd(String userInput, String cmd) {
         int threshold = cmd.length();
         return userInput.length() >= threshold && userInput.substring(0,threshold).equalsIgnoreCase(cmd);
+    }
+
+    static void checkForSpacingAftCmd(String userInput, String cmd) throws MissingSpacingException {
+        if (userInput.charAt(cmd.length()) != ' ') {
+            throw new MissingSpacingException(cmd, true);
+        }
+    }
+
+    static boolean checkAllSpaces(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) != ' ') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static void checkForMissingInput(String userInput, String cmd) throws MissingInputException, MissingSpacingException, UnspecifiedTimeException {
+        if (userInput.equalsIgnoreCase(cmd) || checkAllSpaces(userInput.substring(cmd.length()))) {
+            throw new MissingInputException(cmd);
+        }
+        if (cmd.equals("deadline")) {
+            checkForTimeKeywordEx(userInput, "/by");
+            int idxOfBy = userInput.indexOf("/by");
+            if (idxOfBy == 8 || checkAllSpaces(userInput.substring(8, idxOfBy))) {
+                throw new MissingInputException(cmd);
+            }
+            if (idxOfBy + 3 == userInput.length() || checkAllSpaces(userInput.substring(idxOfBy + 3))) {
+                throw new UnspecifiedTimeException("/by");
+            }
+        }
+        if (cmd.equals("event")) {
+            checkForTimeKeywordEx(userInput, "/from");
+            int idxOfFrom = userInput.indexOf("/from");
+            if (idxOfFrom == 5 || checkAllSpaces(userInput.substring(5, idxOfFrom))) {
+                throw new MissingInputException(cmd);
+            }
+            checkForTimeKeywordEx(userInput, "/to");
+            int idxOfTo = userInput.indexOf("/to");
+            if (idxOfTo == idxOfFrom + 5 || checkAllSpaces(userInput.substring(idxOfFrom + 5, idxOfTo))) {
+                throw new UnspecifiedTimeException("/from");
+            }
+            if (idxOfTo + 3 == userInput.length() || checkAllSpaces(userInput.substring(idxOfTo + 3))) {
+                throw new UnspecifiedTimeException("/to");
+            }
+        }
+
+    }
+
+    static void checkForTimeKeywordEx(String userInput, String keyword) throws UnspecifiedTimeException, MissingSpacingException {
+        int idx = userInput.indexOf(keyword);
+        if (idx == -1) {
+            throw new UnspecifiedTimeException(keyword);
+        }
+        if (userInput.charAt(idx - 1) != ' ') {
+            throw new MissingSpacingException(keyword, false);
+        }
+        if (userInput.length() == idx + keyword.length() || userInput.charAt(idx + keyword.length()) != ' ') {
+            throw new MissingSpacingException(keyword, true);
+        }
+    }
+
+    static void checkForEmptyListBeforeMarking(String cmd) throws EmptyListException {
+        if (firstUnusedIdx == 0) {
+            throw new EmptyListException(cmd);
+        }
     }
 
     static void printNormal(String... linesOfString) {
@@ -118,33 +199,26 @@ public class Wessy {
         System.out.println(CLOSING_LINE);
     }
 
-    static void printMarkOrUnmark(String userInput, boolean isMark) {
-        int len = userInput.length();
+    static void printMarkOrUnmark(String userInput, boolean isMark) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
         int minLen = isMark ? 4 : 6;
-        // If they only type 'mark' or 'mark '
-        if (len == minLen || (len == minLen + 1 && userInput.charAt(minLen) == ' ')) {
-            printNormal("Please choose an index.");
-        // If they did not leave a space
-        } else if (len > minLen && userInput.charAt(minLen) != ' ') {
-            printNormal("Please enter the command in the correct format.");
-        } else {
-            // Check is the input string even integer OR is the index out of the array's bound
-            try {
-                int idx = Integer.parseInt(userInput.substring(minLen + 1)) - 1;
-                String start = isMark ? "Nice! I've" : "OK, I've";
-                if (isMark == tasks[idx].isDone) {
-                    start = "You have already";
-                }
-                if (isMark) {
-                    tasks[idx].mark();
-                } else {
-                    tasks[idx].unmark();
-                }
-                String end = isMark ? "done:" : "not done yet:";
-                printNormal(start + " marked this task as " + end, "  " + tasks[idx]);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-                printNormal("Please choose a valid index.");
-            }
+        String cmd = isMark ? "mark" : "unmark";
+        checkForEmptyListBeforeMarking(cmd);
+        checkForMissingInput(userInput, cmd);
+        checkForSpacingAftCmd(userInput, cmd);
+        int idx = Integer.parseInt(userInput.substring(minLen + 1)) - 1;
+        if (idx < 0 || idx >= firstUnusedIdx) {
+            throw new ArrayIndexOutOfBoundsException();
         }
+        String start = isMark ? "Nice! I've" : "OK, I've";
+        if (isMark == tasks[idx].isDone) {
+            start = "You have already";
+        }
+        if (isMark) {
+            tasks[idx].mark();
+        } else {
+            tasks[idx].unmark();
+        }
+        String end = isMark ? "done:" : "not done yet:";
+        printNormal(start + " marked this task as " + end, "  " + tasks[idx]);
     }
 }
