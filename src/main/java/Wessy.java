@@ -22,25 +22,25 @@ public class Wessy {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
-            if (checkCmd(userInput, "bye")) {
+            if (checkCmd(userInput, CmdType.BYE)) {
                 printNormal("Bye. Hope to see you again soon!");
                 break;
-            } else if (checkCmd(userInput, "list")) {
+            } else if (checkCmd(userInput, CmdType.LIST)) {
                 printList();
             } else {
                 try{
-                    if (checkCmd(userInput, "mark")) {
+                    if (checkCmd(userInput, CmdType.MARK)) {
                         markOrUnmark(userInput, true);
-                    } else if (checkCmd(userInput,"unmark")) {
+                    } else if (checkCmd(userInput,CmdType.UNMARK)) {
                         markOrUnmark(userInput, false);
-                    } else if (checkCmd(userInput, "delete")) {
+                    } else if (checkCmd(userInput, CmdType.DELETE)) {
                         delete(userInput);
-                    } else if (checkCmd(userInput, "todo")) {
-                        printAdded(add(parse(userInput, "todo")));
-                    } else if (checkCmd(userInput, "deadline")) {
-                        printAdded(add(parse(userInput, "deadline")));
-                    } else if (checkCmd(userInput, "event")) {
-                        printAdded(add(parse(userInput, "event")));
+                    } else if (checkCmd(userInput, CmdType.TODO)) {
+                        printAdded(add(parse(userInput, CmdType.TODO)));
+                    } else if (checkCmd(userInput, CmdType.DEADLINE)) {
+                        printAdded(add(parse(userInput, CmdType.DEADLINE)));
+                    } else if (checkCmd(userInput, CmdType.EVENT)) {
+                        printAdded(add(parse(userInput, CmdType.EVENT)));
                     } else {
                         throw new CommandNotFoundException();
                     }
@@ -55,37 +55,39 @@ public class Wessy {
         }
     }
 
-    static String[] parse(String description, String cmd) throws MissingSpacingException, MissingInputException, UnspecifiedTimeException {
-        checkForMissingInput(description, cmd);
-        checkForSpacingAftCmd(description, cmd);
+    static String[] parse(String description, CmdType type) throws MissingSpacingException, MissingInputException, UnspecifiedTimeException {
+        checkForMissingInput(description, type);
+        checkForSpacingAftCmd(description, type);
         String byStr = "/by";
         String fromStr = "/from";
         String toStr = "/to";
         int firstIdx;
         int secondIdx;
-        description = description.substring(cmd.length() + 1);
-        if (cmd.charAt(0) == 'd') {
-            firstIdx = description.indexOf(byStr);
-            return new String[] {description.substring(0, firstIdx - 1),
-                    description.substring(firstIdx + byStr.length() + 1)};
-        } else if (cmd.charAt(0) == 'e') {
-            firstIdx = description.indexOf(fromStr);
-            secondIdx = description.indexOf(toStr);
-            return new String[] {description.substring(0, firstIdx - 1),
-                    description.substring(firstIdx + fromStr.length() + 1, secondIdx - 1),
-                    description.substring(secondIdx + toStr.length() + 1)};
-        } else if (cmd.charAt(0) == 't') {
-            return new String[] {description};
+        description = description.substring(type.len() + 1);
+        switch (type) {
+            case DEADLINE:
+                firstIdx = description.indexOf(byStr);
+                return new String[]{description.substring(0, firstIdx - 1),
+                        description.substring(firstIdx + byStr.length() + 1)};
+            case EVENT:
+                firstIdx = description.indexOf(fromStr);
+                secondIdx = description.indexOf(toStr);
+                return new String[]{description.substring(0, firstIdx - 1),
+                        description.substring(firstIdx + fromStr.length() + 1, secondIdx - 1),
+                        description.substring(secondIdx + toStr.length() + 1)};
+            case TODO:
+                return new String[]{description};
         }
         return new String[] {};
     }
 
-    static boolean checkCmd(String userInput, String cmd) {
-        int threshold = cmd.length();
-        return userInput.length() >= threshold && userInput.substring(0,threshold).equalsIgnoreCase(cmd);
+    static boolean checkCmd(String userInput, CmdType type) {
+        int threshold = type.len();
+        return userInput.length() >= threshold && userInput.substring(0,threshold).equalsIgnoreCase(type.toString());
     }
 
-    static void checkForSpacingAftCmd(String userInput, String cmd) throws MissingSpacingException {
+    static void checkForSpacingAftCmd(String userInput, CmdType type) throws MissingSpacingException {
+        String cmd = type.toString();
         if (userInput.charAt(cmd.length()) != ' ') {
             throw new MissingSpacingException(cmd, true);
         }
@@ -100,11 +102,12 @@ public class Wessy {
         return true;
     }
 
-    static void checkForMissingInput(String userInput, String cmd) throws MissingInputException, MissingSpacingException, UnspecifiedTimeException {
+    static void checkForMissingInput(String userInput, CmdType type) throws MissingInputException, MissingSpacingException, UnspecifiedTimeException {
+        String cmd = type.toString();
         if (userInput.equalsIgnoreCase(cmd) || checkAllSpaces(userInput.substring(cmd.length()))) {
             throw new MissingInputException(cmd);
         }
-        if (cmd.equals("deadline")) {
+        if (type == CmdType.DEADLINE) {
             checkForTimeKeywordEx(userInput, "/by");
             int idxOfBy = userInput.indexOf("/by");
             if (idxOfBy == 8 || checkAllSpaces(userInput.substring(8, idxOfBy))) {
@@ -114,7 +117,7 @@ public class Wessy {
                 throw new UnspecifiedTimeException("/by");
             }
         }
-        if (cmd.equals("event")) {
+        if (type == CmdType.EVENT) {
             checkForTimeKeywordEx(userInput, "/from");
             int idxOfFrom = userInput.indexOf("/from");
             if (idxOfFrom == 5 || checkAllSpaces(userInput.substring(5, idxOfFrom))) {
@@ -145,9 +148,9 @@ public class Wessy {
         }
     }
 
-    static void checkForEmptyList(String cmd) throws EmptyListException {
+    static void checkForEmptyList(CmdType type) throws EmptyListException {
         if (tasks.isEmpty()) {
-            throw new EmptyListException(cmd);
+            throw new EmptyListException(type.toString());
         }
     }
 
@@ -204,11 +207,11 @@ public class Wessy {
         System.out.println(CLOSING_LINE);
     }
 
-    static int parseInt(String userInput, String cmd) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
-        checkForEmptyList(cmd);
-        checkForMissingInput(userInput, cmd);
-        checkForSpacingAftCmd(userInput, cmd);
-        int idx = Integer.parseInt(userInput.substring(cmd.length() + 1)) - 1;
+    static int parseInt(String userInput, CmdType type) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
+        checkForEmptyList(type);
+        checkForMissingInput(userInput, type);
+        checkForSpacingAftCmd(userInput, type);
+        int idx = Integer.parseInt(userInput.substring(type.len() + 1)) - 1;
         if (idx < 0 || idx >= tasks.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -216,8 +219,8 @@ public class Wessy {
     }
 
     static void markOrUnmark(String userInput, boolean isMark) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
-        String cmd = isMark ? "mark" : "unmark";
-        int idx = parseInt(userInput, cmd);
+        CmdType type = isMark ? CmdType.MARK : CmdType.UNMARK;
+        int idx = parseInt(userInput, type);
         String start = isMark ? "Nice! I've" : "OK, I've";
         if (isMark == tasks.get(idx).isDone) {
             start = "You have already";
@@ -232,7 +235,7 @@ public class Wessy {
     }
 
     static void delete(String userInput) throws EmptyListException, MissingInputException, MissingSpacingException, NumberFormatException, ArrayIndexOutOfBoundsException, UnspecifiedTimeException {
-        int idx = parseInt(userInput, "delete");
+        int idx = parseInt(userInput, CmdType.DELETE);
         Task removedTask = tasks.get(idx);
         tasks.remove(idx);
         int size = tasks.size();
