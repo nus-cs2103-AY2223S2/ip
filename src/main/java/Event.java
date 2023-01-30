@@ -1,11 +1,16 @@
-public class Event extends Task{
-    protected String duration;
-    private int isDone;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String duration, Integer isDone){
+public class Event extends Task{
+    private int isDone;
+    private LocalDate from;
+    private LocalDate to;
+
+    public Event(String description, LocalDate from, LocalDate to, Integer isDone){
         super(description, isDone = isDone);
-        this.duration = duration;
         this.isDone = isDone;
+        this.from = from;
+        this.to = to;
     }
 
     @Override
@@ -26,9 +31,9 @@ public class Event extends Task{
     @Override
     public String dataFormat(){
         if (isDone == 1) {
-            return "E/1/" + description + "/" + duration;
+            return "E/1/" + description + "/" + this.from + "/" + this.to;
         }else {
-            return "E/0/" + description + "/" + duration;
+            return "E/0/" + description + "/" + this.from + "/" + this.to;
         }
     }
 
@@ -39,6 +44,8 @@ public class Event extends Task{
 
     @Override
     public String toString(){
-        return "[E]["+ isDone + "]" + description + "(" + this.duration + ")";
+        return "[E]["+ isDone + "]" + description + " (from "
+                + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " to " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

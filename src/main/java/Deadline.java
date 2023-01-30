@@ -1,8 +1,12 @@
-public class Deadline extends Task{
-    protected String by;
-    private int isDone;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
-    public Deadline(String description, String by, Integer isDone){
+public class Deadline extends Task{
+    private int isDone;
+    private LocalDate by;
+
+    public Deadline(String description, LocalDate by, Integer isDone){
         super(description, isDone);
         this.by = by;
         this.isDone = isDone;
@@ -38,7 +42,7 @@ public class Deadline extends Task{
     }
     @Override
     public String toString(){
-        return "[D]["+ isDone + "]" + description + "(" + by + ")";
+        return "[D]["+ isDone + "]" + description + " (by " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
 

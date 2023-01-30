@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
@@ -47,10 +48,10 @@ public class Database {
                         arrayList.add(new ToDos(data_parts[2], Integer.valueOf(data_parts[1])));
                         break;
                     case "D":
-                        arrayList.add(new Deadline(data_parts[2], data_parts[3], Integer.valueOf(data_parts[1])));
+                        arrayList.add(new Deadline(data_parts[2], LocalDate.parse(data_parts[3]), Integer.valueOf(data_parts[1])));
                         break;
                     case "E":
-                        arrayList.add(new Event(data_parts[2], data_parts[3], Integer.valueOf(data_parts[1])));
+                        arrayList.add(new Event(data_parts[2], LocalDate.parse(data_parts[3]),LocalDate.parse(data_parts[4]), Integer.valueOf(data_parts[1])));
                         break;
                 }
             }
@@ -58,7 +59,6 @@ public class Database {
         } catch (IOException e){
             System.out.println(e);
         }
-//        System.out.println("getdata function: " + Arrays.deepToString(arrayList.toArray()));
         return arrayList;
     }
 

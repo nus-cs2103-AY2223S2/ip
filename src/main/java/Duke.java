@@ -1,7 +1,11 @@
+import javax.swing.text.html.HTMLDocument;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  *Duke is a program that help user track list of tasks, it can take in todos, deadline and events tasks and allow
@@ -100,29 +104,51 @@ public class Duke {
                         String err_msg = "☹ OOPS!!! The description or date of a deadline cannot be empty";
                         throw new DukeException(err_msg);
                     }
-                    System.out.println("Got it. I've added this task");
-                    System.out.println(Arrays.toString(ddl_str_arr));
-                    Deadline deadline = new Deadline(ddl_str_arr[0].substring(9), ddl_str_arr[1], 0);
-
-                    ArrayList arraylist = db.get_data();
-                    arraylist.add(deadline);
-                    db.update_data(arraylist);
-                    System.out.println("added: " + deadline);
-                    System.out.println("Now you have " + arraylist.size() + " tasks in the list");
+                    try {
+                        LocalDate deadline_time = LocalDate.parse(ddl_str_arr[1]);
+                        Deadline deadline = new Deadline(ddl_str_arr[0].substring(9), deadline_time, 0);
+                        ArrayList arraylist = db.get_data();
+                        arraylist.add(deadline);
+                        db.update_data(arraylist);
+                        System.out.println("added: " + deadline);
+                        System.out.println("Now you have " + arraylist.size() + " tasks in the list");
+                    } catch (DateTimeParseException e) {
+                        String err_msg = "☹ OOPS!!! The description or date of a deadline is wrong, plase key in the" +
+                                "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
+                                + "You may key in: deadline hw1 /2001-02-10, Duke will record your deadline for hw1 as" +
+                                "2001-02-10";
+                        throw new DukeException(err_msg);
+                    }
                 } else if (len >= 7 && input.substring(0, 5).equals("event")) {
                     String[] event_str_arr = input.split(" /");
                     if (len <= 9 || event_str_arr.length <= 2) {
                         String err_msg = "☹ OOPS!!! The description or date of a event cannot be empty";
                         throw new DukeException(err_msg);
                     }
-                    System.out.println("Got it. I've added this task");
-                    Event event = new Event(event_str_arr[0].substring(6), event_str_arr[1] + event_str_arr[2], 0);
-                    ArrayList arraylist = db.get_data();
-                    arraylist.add(event);
-                    db.update_data(arraylist);
+                    try {
+                        System.out.println(Arrays.toString(event_str_arr));
+                        LocalDate from = LocalDate.parse(event_str_arr[1]);
+                        LocalDate to = LocalDate.parse(event_str_arr[2]);
+                        if (from.isAfter(to)){
+                            String err_msg = "☹ OOPS!!! Your time range is from a date to another date that is earlier" +
+                                    "than the former. Please key in a valid time range";
+                            throw new DukeException(err_msg);
+                        }
+                        Event event = new Event(event_str_arr[0].substring(6), from, to, 0);
+                        ArrayList arraylist = db.get_data();
+                        arraylist.add(event);
+                        System.out.println("Got it. I've added this task");
+                        db.update_data(arraylist);
 
-                    System.out.println("added: " + event);
-                    System.out.println("Now you have " + arraylist.size() + " tasks in the list");
+                        System.out.println("added: " + event);
+                        System.out.println("Now you have " + arraylist.size() + " tasks in the list");
+                    } catch (DateTimeParseException e) {
+                        String err_msg = "☹ OOPS!!! The description or date for the event is wrong, plase key in the" +
+                                "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
+                                + "You may key in: event hw1 /2001-02-10 /2001-02-12, Duke will record your event hw1 as" +
+                                "from 2001-02-10 to 2001-02-12";
+                        throw new DukeException(err_msg);
+                    }
                 } else {
                     String err_msg = "☹ OOPS!!! I'm sorry, but I don't know what that means";
                     throw new DukeException(err_msg);
