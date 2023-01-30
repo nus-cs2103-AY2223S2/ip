@@ -1,9 +1,12 @@
+package duke.util;
+
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
+import duke.util.TaskList;
 
-class SaveFile {
-    static void saveProgress(TaskList taskList) {
+public class Storage {
+    public static void saveProgress(TaskList taskList) {
         File savedFile = new File("MY_GRAND_PLAN.txt");
         System.out.println("[X] FILE CREATED");
         try {
@@ -21,5 +24,8 @@ class SaveFile {
         } catch (IOException e) {
             System.out.println("BEE BOO BOOP...");
         }
+    }
+    public static TaskList loadProgress(String link) {
+        return new TaskList();
     }
 }

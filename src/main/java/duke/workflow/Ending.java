@@ -1,4 +1,8 @@
-class Ending extends Event {
+package duke.workflow;
+
+import duke.util.TaskList;
+
+public class Ending extends Event {
     TaskList taskList;
     public Ending() {
         super(true);
@@ -13,16 +17,12 @@ class Ending extends Event {
         return this;
     }
 
-    TaskList getTaskList() {
+    public TaskList getTaskList() {
         return this.taskList;
     }
 
     @Override
     public String toString() {
-        String toPrintOut = "";
-        toPrintOut += "_".repeat(22) + '\n';
-        toPrintOut += "VERY WELL. THE WORLD IS SAFE FROM YOUR PLAN. FOR NOW" + '\n';
-        toPrintOut += "_".repeat(22) + '\n';
-        return toPrintOut;
+        return "VERY WELL. THE WORLD IS SAFE FROM YOUR PLAN. FOR NOW";
     }
 }

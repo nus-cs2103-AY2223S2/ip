@@ -1,7 +1,15 @@
+package duke.workflow;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
-class DoTask extends Event {
+import duke.util.TaskList;
+import duke.io.input.exception.DukeException;
+import duke.io.input.exception.UserInputException;
+import duke.util.service.ToDo;
+import duke.util.service.Deadline;
+import duke.util.service.ScheduledEvent;
+public class DoTask extends Event {
     boolean firstGreet;
     String lastCommand;
     TaskList taskList;
@@ -87,16 +95,15 @@ class DoTask extends Event {
         return this;
     }
 
-    TaskList getTaskList() {
+    public TaskList getTaskList() {
         return this.taskList;
     }
 
     @Override
     public String toString() {
         String toPrintOut = "";
-        toPrintOut += "_".repeat(22) + '\n';
         if (this.firstGreet) {
-            toPrintOut += "INTERESTING. VERY INTERESTING. WHAT'S YOUR PLANS?" + '\n';
+            toPrintOut += "INTERESTING. VERY INTERESTING. WHAT'S YOUR PLANS?";
         } else {
             if (lastCommand.equals("LIST")) {
                 toPrintOut += this.taskList.toString();
@@ -133,9 +140,8 @@ class DoTask extends Event {
                     }
                 }
             }
+            toPrintOut += '\n' + "WHAT ELSE?";
         }
-        toPrintOut += '\n' + "WHAT ELSE?" + '\n';
-        toPrintOut += "_".repeat(22) + '\n';
         return toPrintOut;
     }
 }

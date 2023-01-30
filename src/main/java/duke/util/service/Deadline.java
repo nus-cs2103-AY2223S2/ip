@@ -1,4 +1,7 @@
-class Deadline extends Task {
+package duke.util.service;
+
+import duke.util.Task;
+public class Deadline extends Task {
     String deadline;
     public Deadline(String deadline, String action) {
         super("D", action);
@@ -6,7 +9,7 @@ class Deadline extends Task {
     }
 
     @Override
-    String getAdditionalInfo() {
+    public String getAdditionalInfo() {
         return " (BY: " + this.deadline + ")";
     }
 

@@ -1,4 +1,7 @@
-class Greeting extends Event {
+package duke.workflow;
+
+import duke.util.TaskList;
+public class Greeting extends Event {
     int status;
 
     public Greeting() {
@@ -19,16 +22,12 @@ class Greeting extends Event {
         }
     }
 
-    TaskList getTaskList() {
+    public TaskList getTaskList() {
         return new TaskList();
     }
 
     @Override
     public String toString() {
-        String toPrintOut = "";
-        toPrintOut += "_".repeat(22) + '\n';
-        toPrintOut += "SHALL WE PLAY A GAME?" + '\n';
-        toPrintOut += "_".repeat(22) + '\n';
-        return toPrintOut;
+        return "SHALL WE PLAY A GAME?";
     }
 }

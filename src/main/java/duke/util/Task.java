@@ -1,4 +1,6 @@
-class Task {
+package duke.util;
+
+public class Task {
     String nature;
     boolean isDone;
     String action;
@@ -18,7 +20,7 @@ class Task {
         return this;
     }
 
-    String getAdditionalInfo () {
+    public String getAdditionalInfo () {
         return "";
     }
 

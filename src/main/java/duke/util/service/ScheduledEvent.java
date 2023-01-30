@@ -1,4 +1,8 @@
-class ScheduledEvent extends Task {
+package duke.util.service;
+
+import duke.util.Task;
+
+public class ScheduledEvent extends Task {
     String dateBegin;
     String dateEnd;
     public ScheduledEvent(String dateBegin, String dateEnd, String action) {
@@ -8,7 +12,7 @@ class ScheduledEvent extends Task {
     }
 
     @Override
-    String getAdditionalInfo() {
+    public String getAdditionalInfo() {
         return " (FROM: " + dateBegin + " TO: " + dateEnd + ")";
     }
 
