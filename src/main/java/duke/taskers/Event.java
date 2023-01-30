@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends duke.taskers.Task {
 
+    public static final String TASK_TYPE = "event";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final DateTimeFormatter FORMATTER_FOR_STRING_ONLY = DateTimeFormatter.ofPattern("d MMM uuuu h.mma");
     private final LocalDateTime start;

@@ -5,6 +5,9 @@ package duke.taskers;
  */
 public class Todo extends duke.taskers.Task {
 
+    public static final String TASK_TYPE = "todo";
+
+
     /**
      * Constructor of todo.
      *

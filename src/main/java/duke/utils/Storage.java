@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.Command;
 import duke.Duke;
 import duke.DukeException;
 import duke.taskers.Deadline;
@@ -89,19 +88,25 @@ public class Storage {
                 String str = sc.nextLine();
                 String[] valueArr = str.split("/");
 
-                String type = valueArr[0].toUpperCase().trim();
-                Command commandType = Parser.parseCommand(type);
                 Task thisTask = null;
                 boolean doneOrNot = valueArr[1].trim().equals("1");
-                if (commandType.equals(Command.TODO)) {
+                String type = valueArr[0].toLowerCase().trim();
+
+                switch (type) {
+                case Todo.TASK_TYPE:
                     thisTask = new Todo(valueArr[2], doneOrNot);
-                } else if (commandType.equals(Command.DEADLINE)) {
+                    break;
+                case Deadline.TASK_TYPE:
                     LocalDateTime end = Duke.createLocalDateTime(valueArr[3]);
                     thisTask = new Deadline(valueArr[2], doneOrNot, end);
-                } else {
-                    LocalDateTime start = Duke.createLocalDateTime(valueArr[3]);
-                    LocalDateTime end = Duke.createLocalDateTime(valueArr[4]);
-                    thisTask = new Event(valueArr[2], doneOrNot, start, end);
+                    break;
+                case Event.TASK_TYPE:
+                    LocalDateTime startDate = Duke.createLocalDateTime(valueArr[3]);
+                    LocalDateTime endDate = Duke.createLocalDateTime(valueArr[4]);
+                    thisTask = new Event(valueArr[2], doneOrNot, startDate, endDate);
+                    break;
+                default:
+                    throw new DukeException("Something went wrong");
                 }
                 loadedTasks.add(thisTask);
             }

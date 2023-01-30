@@ -15,14 +15,14 @@ public class DukeException extends Exception {
         super(errorMessage);
     }
 
-    /**
-     * Returns string representation of the duke exception.
-     *
-     * @return The string of the duke exception.
-     */
-    @Override
-    public String toString() {
-
-        return "Duke Exception: OOPS! " + super.getMessage();
-    }
+//    /**
+//     * Returns string representation of the duke exception.
+//     *
+//     * @return The string of the duke exception.
+//     */
+//    @Override
+//    public String toString() {
+//
+//        return "Duke Exception: OOPS! " + super.getMessage();
+//    }
 }

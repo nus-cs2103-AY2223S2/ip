@@ -1,79 +1,156 @@
 package duke.utils;
-import duke.Command;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import duke.DukeException;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddTodoCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkCommand;
+import duke.commands.UnmarkCommand;
 
 /**
  * Parser class to help understand the input lines.
  */
 public class Parser {
 
+    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+
     /**
-     * Parses command.
+     * Gets the index that is the second argument for certain commands.
      *
-     * @param command String to be parsed.
-     * @return The duke.Command type.
+     * @param str The string to be parsed.
+     * @return The index that we want.
+     * @throws DukeException When the string does not contain a number.
      */
-    public static Command parseCommand(String command) throws DukeException {
-        if (!Command.contains(command)) {
-            throw new DukeException("Sorry! I don't know what that means!");
+    public static int returnIndexFromString(String str) throws DukeException {
+        String trimmedStr = str.trim();
+        if (!trimmedStr.chars().allMatch(Character::isDigit)) {
+            throw new DukeException("Wrong format!");
         }
-        return Command.valueOf(command);
+        return Integer.parseInt(trimmedStr) - 1;
     }
 
     /**
-     * Parses starting elements.
+     * Prepares the Command for todo.
      *
-     * @param elemString String to be parsed.
-     * @return An array of individual commands.
+     * @param args Arguments to be parsed.
+     * @return The AddTodoCommand.
      */
-    public static String[] parseStartingElements(String elemString) {
-
-        return elemString.split(" ");
+    public static AddTodoCommand prepareAddTodo(String args) {
+        return new AddTodoCommand(args, false);
     }
 
     /**
-     * Parses todo.
+     * Prepares the Command for deadline.
      *
-     * @param str String to be parsed.
-     * @return An array of individual commands.
+     * @param args The arguments to be parsed.
+     * @return The AddDeadlineCommand.
+     * @throws DukeException When the input string is in the wrong format.
      */
-    public static String parseTodo(String str) {
-
-        return str.substring(4);
-    }
-
-    /**
-     * Parses deadline.
-     *
-     * @param str String to be parsed.
-     * @return An array of individual commands.
-     */
-    public static String[] parseDeadline(String str) {
-        String temp = str.substring(8);
-
-        return temp.split(" /by ");
-    }
-
-
-    /**
-     * Parses an event statement.
-     *
-     * @param str String to be parsed.
-     * @return The commands after 'event', segmented into an array.
-     * @throws DukeException If the format is wrong.
-     */
-    public static String[] parseEvent(String str) throws DukeException {
-        String temp = str.substring(5);
-        String[] arr1 = temp.split(" /from ");
-        if (arr1.length != 2) {
-            throw new DukeException("I don't know what that means. "
-                    + "Format it as 'event [do something] /from [start date] /to [end date]'");
+    public static AddDeadlineCommand prepareAddDeadline(String args) throws DukeException {
+        final String[] arr = args.split(" /by ");
+        if (arr.length != 2) {
+            throw new DukeException("Wrong format. Correct format: 'deadline {do something} /by {end date time}.'");
         }
-        String[] arr2 = arr1[1].split(" /to ");
-        if (arr2.length != 2) {
-            throw new DukeException("I don't know what that means. "
-                    + "Format it as 'event [do something] /from [start date] /to [end date]'");
-        }
-        return new String[] {arr1[0], arr2[0], arr2[1]};
+
+        LocalDateTime endDate = LocalDateTime.parse(arr[1], FORMATTER);
+        return new AddDeadlineCommand(arr[0], false, endDate);
     }
+
+
+    /**
+     * Prepares the Command for event.
+     *
+     * @param args String to be parsed.
+     * @return The AddEventCommand.
+     * @throws DukeException When the input string is not in the correct format.
+     */
+    public static AddEventCommand prepareAddEvent(String args) throws DukeException {
+        final String[] firstHalf = args.split(" /from ");
+        if (firstHalf.length != 2) {
+            throw new DukeException("Wrong format. Correct format: "
+                    + "'event {some event} /from {start date time} /to {end date time}'");
+        }
+        final String[] secondHalf = firstHalf[1].split(" /to ");
+        if (secondHalf.length != 2) {
+            throw new DukeException("Wrong format. Correct format: "
+                    + "'event {some event} /from {start date time} /to {end date time}'");
+        }
+        LocalDateTime startDate = LocalDateTime.parse(secondHalf[0], FORMATTER);
+        LocalDateTime endDate = LocalDateTime.parse(secondHalf[1], FORMATTER);
+        return new AddEventCommand(firstHalf[0], false, startDate, endDate);
+
+    }
+
+    /**
+     * Parses the whole user input at first.
+     *
+     * @param userInput The user input string.
+     * @return The Command being called.
+     * @throws DukeException If the formatting is not right.
+     */
+    public static Command parse(String userInput) throws DukeException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            throw new DukeException("Sorry, I don't understand you!");
+        }
+        String commandWord = matcher.group("commandWord").toLowerCase();
+        String args = matcher.group("arguments");
+
+        switch (commandWord) {
+        case AddTodoCommand.COMMAND_WORD:
+            if (args.equals("")) {
+                throw new DukeException("Argument cannot be empty");
+            }
+            return prepareAddTodo(args);
+        case AddDeadlineCommand.COMMAND_WORD:
+            if (args.equals("")) {
+                throw new DukeException("Argument cannot be empty");
+            }
+            return prepareAddDeadline(args);
+        case AddEventCommand.COMMAND_WORD:
+            if (args.equals("")) {
+                throw new DukeException("Argument cannot be empty");
+            }
+            return prepareAddEvent(args);
+        case DeleteCommand.COMMAND_WORD:
+            if (args.equals("")) {
+                throw new DukeException("Argument cannot be empty");
+            }
+            return new DeleteCommand(returnIndexFromString(args));
+        case MarkCommand.COMMAND_WORD:
+            if (args.equals("")) {
+                throw new DukeException("Argument cannot be empty");
+            }
+            return new MarkCommand(returnIndexFromString(args));
+        case UnmarkCommand.COMMAND_WORD:
+            if (args.equals("")) {
+                throw new DukeException("Argument cannot be empty");
+            }
+            return new UnmarkCommand(returnIndexFromString(args));
+        case FindCommand.COMMAND_WORD:
+            if (args.equals("")) {
+                throw new DukeException("Argument cannot be empty");
+            }
+            return new FindCommand(args.trim());
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        default:
+            throw new DukeException("Sorry, I don't understand you.");
+        }
+    }
+
 }

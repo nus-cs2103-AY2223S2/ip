@@ -1,15 +1,9 @@
 package duke.utils;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import duke.Command;
-import duke.Duke;
 import duke.DukeException;
-import duke.taskers.Deadline;
-import duke.taskers.Event;
 import duke.taskers.Task;
-import duke.taskers.Todo;
 
 /**
  * The task list that tracks all the items in the list.
@@ -37,7 +31,10 @@ public class TaskList {
      * @param index The index in the array of the task we want marked.
      * @return The task that is marked.
      */
-    public Task markTaskInListDone(int index) {
+    public Task markTaskInListDone(int index) throws DukeException {
+        if (index < 0 || index >= this.listOfThings.size()) {
+            throw new DukeException("Index out of bounds.");
+        }
         this.listOfThings.get(index).markDone();
         return this.listOfThings.get(index);
     }
@@ -49,58 +46,22 @@ public class TaskList {
      * @param index The index in the array of the task we want unmarked.
      * @return The task we just unmarked.
      */
-    public Task markTaskInListUndone(int index) {
+    public Task markTaskInListUndone(int index) throws DukeException {
+        if (index < 0 || index >= this.listOfThings.size()) {
+            throw new DukeException("Index out of bounds.");
+        }
         this.listOfThings.get(index).markUndone();
         return this.listOfThings.get(index);
     }
 
     /**
-     * Adds the duke.Task inside.
+     * Adds an item to the task list.
      *
-     * @param text The text containing the information of the command.
-     * @param add Type of add command use.
-     * @throws DukeException When the format is wrong.
+     * @param task The task to be added to the list.
      */
-    public Task addItem(String text, Command add) throws DukeException {
-        Task addedItem = null;
-        if (add.equals(Command.TODO)) {
-            String contents = Parser.parseTodo(text);
-            if (contents.length() == 0) {
-                throw new DukeException("The description of a todo cannot be empty");
-            }
-            addedItem = new Todo(contents, false);
-
-        } else if (add.equals(Command.DEADLINE)) {
-            String[] arr = Parser.parseDeadline(text);
-            if (arr.length != 2) {
-                throw new DukeException("I don't know what that means."
-                        + " Format it as 'deadline [do something] /by [date]");
-            }
-            LocalDateTime end = Duke.createLocalDateTime(arr[1]);
-            if (end != null) {
-                addedItem = new Deadline(arr[0], false, end);
-            } else {
-                throw new DukeException("Format date as YYYY-MM-DD HH:mm");
-            }
-        } else {
-            String[] arr = Parser.parseEvent(text);
-            if (arr.length != 3) {
-                throw new DukeException("I don't know what that means. "
-                        + "Format it as 'event [do something] /from [start date] /to"
-                        + " [end date]'");
-            }
-            LocalDateTime start = Duke.createLocalDateTime(arr[1]);
-            LocalDateTime end = Duke.createLocalDateTime(arr[2]);
-            if (start != null && end != null) {
-                addedItem = new Event(arr[0], false, start, end);
-            } else {
-                throw new DukeException("Format date as YYYY-MM-DD HH:mm");
-            }
-        }
-        this.listOfThings.add(addedItem);
-        return addedItem;
+    public void addItem(Task task) {
+        this.listOfThings.add(task);
     }
-
 
     /**
      * Finds the matching duke.taskers.Task with respect to the keyword.
@@ -120,12 +81,17 @@ public class TaskList {
     }
 
     /**
-     * Removes the item in the list.
+     * Deletes the item from the task list.
      *
-     * @param index The index of the item to be removed.
+     * @param index The index of the task to be deleted.
+     * @return The task that is deleted.
      */
-    public Task removeItem(int index) {
+    public Task deleteItem(int index) throws DukeException {
+        if (index < 0 || index >= this.listOfThings.size()) {
+            throw new DukeException("Index out of bounds.");
+        }
         return this.listOfThings.remove(index);
     }
+
 
 }

@@ -5,9 +5,8 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import duke.taskers.Task;
+import duke.commands.Command;
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
@@ -20,9 +19,9 @@ public class Duke {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
 
     /**
      * * Duke constructor.
@@ -59,92 +58,28 @@ public class Duke {
         return date;
     }
 
-
     /**
-     * Driver function.
+     * Runs duke.
      */
     public void run() {
-        this.ui.greetings();
-        Scanner input = new Scanner(System.in);
+        this.ui.greet();
         while (true) {
             try {
-                String line = input.nextLine();
-                String upperLine = line.toUpperCase();
-                String command = upperLine.split(" ")[0].trim();
-                Command cm = Parser.parseCommand(command);
-                String[] elemArr = Parser.parseStartingElements(upperLine);
-                if (cm.equals(Command.BYE)) {
-                    if (elemArr.length == 1) {
-                        break;
-                    } else {
-                        throw new DukeException("Did you mean to say bye? Type 'bye' to quit the program.");
-                    }
-                } else if (cm.equals(Command.LIST)) {
-                    if (elemArr.length == 1) {
-                        this.ui.printList(this.tasks.getList());
-                    } else {
-                        throw new DukeException("No argument in list allowed.");
-                    }
-                } else if (cm.equals(Command.MARK)) {
-                    if (elemArr.length != 2) {
-                        throw new DukeException("Wrong format. Format it as 'mark [index]'");
-                    }
-                    if (!elemArr[1].chars().allMatch(Character::isDigit)) {
-                        throw new DukeException("Index should be a number");
-                    }
-                    int idx = Integer.parseInt(elemArr[1]) - 1;
-                    if (idx >= this.tasks.getList().size() || idx < 0) {
-                        throw new DukeException("This index doesn't exist.");
-                    }
-                    Task markedTask = this.tasks.markTaskInListDone(idx);
-                    this.ui.markResponse(markedTask);
-                    this.storage.deleteFileAndRedo(this.tasks.getList());
-                } else if (cm.equals(Command.UNMARK)) {
-                    if (elemArr.length != 2) {
-                        throw new DukeException("Wrong format. Format it as 'mark [index]'");
-                    }
-                    if (!elemArr[1].chars().allMatch(Character::isDigit)) {
-                        throw new DukeException("Index should be a number");
-                    }
-                    int idx = Integer.parseInt(elemArr[1]) - 1;
-                    if (idx >= this.tasks.getList().size() || idx < 0) {
-                        throw new DukeException("This index doesn't exist.");
-                    }
-                    Task unmarkedTask = this.tasks.markTaskInListUndone(idx);
-                    this.ui.unmarkResponse(unmarkedTask);
-                    this.storage.deleteFileAndRedo(this.tasks.getList());
-                } else if (cm.equals(Command.DELETE)) {
-                    if (elemArr.length != 2) {
-                        throw new DukeException("Only one argument for delete allowed");
-                    }
-                    String idxStr = elemArr[1];
-                    if (!idxStr.chars().allMatch(Character::isDigit)) {
-                        throw new DukeException("Argument must be a digit");
-                    }
-                    int idx = Integer.parseInt(idxStr) - 1;
-                    if (idx >= this.tasks.getList().size() || idx < 0) {
-                        throw new DukeException("This index doesn't exist.");
-                    }
-                    Task removedTask = this.tasks.removeItem(idx);
-                    this.ui.deleteItemResponse(removedTask, this.tasks.getList());
-                    this.storage.deleteFileAndRedo(this.tasks.getList());
-                } else if (cm.equals(Command.FIND)) {
-                    if (elemArr.length != 2) {
-                        throw new DukeException("Find must have a keyword.");
-                    }
-                    String keyword = elemArr[1];
-                    ArrayList<Task> matchingTasks = this.tasks.findMatching(keyword);
-                    this.ui.showMatchingTasks(matchingTasks);
-                } else {
-                    Task addedTask = this.tasks.addItem(line, Command.valueOf(command));
-                    this.storage.writeToFile(addedTask);
-                    this.ui.addItemResponse(addedTask, this.tasks.getList());
+                String fullCommand = this.ui.readCommand();
+                this.ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                if (c.isExit()) {
+                    this.ui.sayGoodBye();
+                    break;
                 }
+                c.execute(this.tasks, this.ui, this.storage);
             } catch (DukeException e) {
-                this.ui.printWithLines(" " + e.toString());
+                this.ui.showError(e);
+            } finally {
+                this.ui.showLine();
             }
         }
-        this.ui.sayGoodBye();
+        System.exit(0);
     }
 
     /**
@@ -155,7 +90,6 @@ public class Duke {
     public static DateTimeFormatter getFormatter() {
         return FORMATTER;
     }
-
 
     /**
      * The main function.
