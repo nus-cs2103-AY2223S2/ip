@@ -18,11 +18,12 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("./data/duke.txt");
+        Duke duke = new Duke("data/duke.txt");
         duke.runApp();
     }
 
     public void runApp() {
+        ui.showDuke();
         ui.greetingMessage();
 
         boolean enteredBye = false;
