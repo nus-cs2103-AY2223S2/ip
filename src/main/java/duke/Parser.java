@@ -16,45 +16,37 @@ class Parser {
      * @throws IllegalArgumentException
      * @throws IndexOutOfBoundsException
      */
-    public static void parseRawString(String input, TaskList tasks) throws IllegalArgumentException,
+    public static String parseRawString(String input, TaskList tasks) throws IllegalArgumentException,
             IndexOutOfBoundsException {
         String[] tokens = input.split(" ", 2);
         Query query = Query.valueOf(tokens[0].toUpperCase());
         switch (query) {
         case LIST:
-            list(tasks);
-            break;
+            return list(tasks);
         case FIND:
-            find(tasks, tokens[1]);
-            break;
+            return find(tasks, tokens[1]);
         case MARK:
-            mark(true, tasks, tokens[1]);
-            break;
+            return mark(true, tasks, tokens[1]);
         case UNMARK:
-            mark(false, tasks, tokens[1]);
-            break;
+            return mark(false, tasks, tokens[1]);
         case TODO:
-            addTodo(tasks, tokens[1]);
-            break;
+            return addTodo(tasks, tokens[1]);
         case DEADLINE:
-            addDeadline(tasks, tokens[1]);
-            break;
+            return addDeadline(tasks, tokens[1]);
         case EVENT:
-            addEvent(tasks, tokens[1]);
-            break;
+            return addEvent(tasks, tokens[1]);
         case DELETE:
-            delete(tasks, tokens[1]);
-            break;
+            return delete(tasks, tokens[1]);
         default:
-            break;
+            return "";
         }
     }
     /**
      * Pass ArrayList of Task to UI.
      * @param tasks
      */
-    private static void list(TaskList tasks) {
-        Ui.list(tasks.get());
+    private static String list(TaskList tasks) {
+        return Ui.list(tasks.get());
     }
 
     /**
@@ -62,14 +54,14 @@ class Parser {
      * @param tasks
      * @param searchString
      */
-    private static void find(TaskList tasks, String searchString) {
+    private static String find(TaskList tasks, String searchString) {
         List<Task> listTask = tasks
                 .get()
                 .stream()
                 .filter(task -> task.toString()
                 .contains(searchString))
                 .collect(Collectors.toList());
-        Ui.find(new ArrayList<Task>(listTask));
+        return Ui.find(new ArrayList<Task>(listTask));
     }
 
     /**
@@ -78,15 +70,15 @@ class Parser {
      * @param tasks
      * @param numString
      */
-    private static void mark(boolean isMark, TaskList tasks, String numString) {
+    private static String mark(boolean isMark, TaskList tasks, String numString) {
         try {
             int num = Integer.parseInt(numString);
             Task task = tasks.mark(isMark, num - 1);
-            Ui.mark(isMark, task);
+            return Ui.mark(isMark, task);
         } catch (NumberFormatException exception) {
-            Ui.notANumber();
+            return Ui.notANumber();
         } catch (IndexOutOfBoundsException exception) {
-            Ui.numberOutOfBounds();
+            return Ui.numberOutOfBounds();
         }
     }
     /**
@@ -94,10 +86,10 @@ class Parser {
      * @param tasks
      * @param nameString
      */
-    private static void addTodo(TaskList tasks, String nameString) {
+    private static String addTodo(TaskList tasks, String nameString) {
         Todo task = new Todo(nameString);
         tasks.add(task);
-        Ui.addTask("todo", task);
+        return Ui.addTask("todo", task);
     }
 
     /**
@@ -105,18 +97,18 @@ class Parser {
      * @param tasks
      * @param paramString
      */
-    private static void addDeadline(TaskList tasks, String paramString) {
+    private static String addDeadline(TaskList tasks, String paramString) {
         try {
             String[] tokens = paramString.split(" /by ");
             String name = tokens[0];
             String by = tokens[1];
             Deadline task = new Deadline(name, parseDate(by));
             tasks.add(task);
-            Ui.addTask("deadline", task);
+            return Ui.addTask("deadline", task);
         } catch (IndexOutOfBoundsException exception) {
-            Ui.missingOptions("/by");
+            return Ui.missingOptions("/by");
         } catch (DateTimeParseException exception) {
-            Ui.wrongDateFormat();
+            return Ui.wrongDateFormat();
         }
     }
 
@@ -125,7 +117,7 @@ class Parser {
      * @param tasks
      * @param paramString
      */
-    private static void addEvent(TaskList tasks, String paramString) {
+    private static String addEvent(TaskList tasks, String paramString) {
         try {
             String[] tokens = paramString.split(" /from ");
             String name = tokens[0];
@@ -135,11 +127,11 @@ class Parser {
             String to = options[1];
             Event task = new Event(name, parseDate(from), parseDate(to));
             tasks.add(task);
-            Ui.addTask("event", task);
+            return Ui.addTask("event", task);
         } catch (IndexOutOfBoundsException exception) {
-            Ui.missingOptions("/from /to");
+            return Ui.missingOptions("/from /to");
         } catch (DateTimeParseException exception) {
-            Ui.missingOptions("/by");
+            return Ui.missingOptions("/by");
         }
     }
 
@@ -148,15 +140,15 @@ class Parser {
      * @param tasks
      * @param numString
      */
-    private static void delete(TaskList tasks, String numString) {
+    private static String delete(TaskList tasks, String numString) {
         try {
             int num = Integer.parseInt(numString);
             Task task = tasks.delete(num - 1);
-            Ui.delete(task);
+            return Ui.delete(task);
         } catch (NumberFormatException exception) {
-            Ui.notANumber();
+            return Ui.notANumber();
         } catch (IndexOutOfBoundsException exception) {
-            Ui.numberOutOfBounds();
+            return Ui.numberOutOfBounds();
         }
     }
 
