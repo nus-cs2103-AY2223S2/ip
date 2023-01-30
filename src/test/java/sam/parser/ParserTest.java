@@ -1,20 +1,20 @@
 package sam.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
+import sam.SamException;
+import sam.command.AddCommand;
+import sam.command.DeleteCommand;
 import sam.command.ExitCommand;
 import sam.command.ListCommand;
 import sam.command.MarkCommand;
 import sam.task.SamMissingTaskTitleException;
 import sam.task.SamMissingTaskValueException;
-import sam.SamException;
-import sam.command.AddCommand;
-import sam.command.DeleteCommand;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
     @Test

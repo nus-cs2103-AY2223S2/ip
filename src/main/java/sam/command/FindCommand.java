@@ -6,6 +6,9 @@ import sam.Ui;
 import sam.storage.Storage;
 import sam.task.TaskList;
 
+/**
+ * Represents a user command to find a task.
+ */
 public class FindCommand extends Command {
     public FindCommand(String args) {
         super(args);
@@ -19,6 +22,6 @@ public class FindCommand extends Command {
         } else {
             list.add(0, String.format("I found %d matching tasks:", list.size()));
             ui.talk(list.toArray(new String[0]));
-        }  
+        }
     }
 }

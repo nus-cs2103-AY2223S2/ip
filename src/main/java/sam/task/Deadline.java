@@ -12,6 +12,13 @@ public class Deadline extends Task {
         this(title, by, false);
     }
 
+    /**
+     * Constructs a new Deadline task.
+     *
+     * @param title The title of the task.
+     * @param by The due date for the Deadline.
+     * @param isDone Indicates whether the task is done.
+     */
     public Deadline(String title, LocalDate by, boolean isDone) {
         super(title, isDone);
         this.by = by;

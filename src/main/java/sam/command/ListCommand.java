@@ -6,6 +6,9 @@ import sam.Ui;
 import sam.storage.Storage;
 import sam.task.TaskList;
 
+/**
+ * Represents a user command to list all tasks.
+ */
 public class ListCommand extends Command {
     public ListCommand(String args) {
         super(args);
@@ -20,5 +23,5 @@ public class ListCommand extends Command {
             list.add(0, "Here is your list:");
             ui.talk(list.toArray(new String[0]));
         }
-    }  
+    }
 }

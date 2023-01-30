@@ -16,7 +16,7 @@ public class TaskList {
     /**
      * Returns the task with the specified id.
      * If the id is invalid, returns null.
-     * 
+     *
      * @param id The id of the task to return.
      * @return The Task object with the specified id.
      */
@@ -29,7 +29,7 @@ public class TaskList {
 
     /**
      * Appends the specified task to the list.
-     * 
+     *
      * @param task The task to be appended.
      * @return {@code true}
      */
@@ -40,7 +40,7 @@ public class TaskList {
     /**
      * Removes the task with the specified id from the list and return it.
      * If the id is invalid, returns null.
-     * 
+     *
      * @param id The id of the task to remove.
      * @return The task that was removed from the list.
      */
@@ -53,7 +53,7 @@ public class TaskList {
 
     /**
      * Sets the task with the specified id as done or not done.
-     * 
+     *
      * @param id     The id of the task to mark.
      * @param isDone Indicates whether the task is done.
      * @return {@code true} if successful.
@@ -68,7 +68,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the list.
-     * 
+     *
      * @return The number of tasks in the list.
      */
     public int count() {
@@ -77,7 +77,7 @@ public class TaskList {
 
     /**
      * Generates a numbered string array of all tasks in the list.
-     * 
+     *
      * @return A string array of the tasks.
      */
     public List<String> getTasks() {
@@ -91,7 +91,7 @@ public class TaskList {
 
     /**
      * Generates a numbered string array of the tasks containing the specified substring.
-     * 
+     *
      * @return A string array of the tasks.
      */
     public List<String> findTasks(String subString) {

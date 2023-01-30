@@ -31,7 +31,7 @@ public class Ui {
     public Ui() {
         scanner = new Scanner(System.in);
     }
-    
+
     /**
      * Displays the logo of the app.
      */
@@ -41,7 +41,7 @@ public class Ui {
 
     /**
      * Prints the user's avatar and waits for user input.
-     * 
+     *
      * @return the input string.
      */
     public String acceptInput() {
@@ -53,7 +53,7 @@ public class Ui {
 
     /**
      * Prints Sam's avatar and a dialogue formed by the given strings.
-     * 
+     *
      * @param messages A list of strings representing lines of dialogue.
      */
     public void talk(String... messages) {

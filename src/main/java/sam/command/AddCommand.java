@@ -6,6 +6,7 @@ import java.util.Map;
 import sam.Ui;
 import sam.parser.Parser;
 import sam.parser.SamInvalidDateException;
+import sam.parser.SamUnknownCommandException;
 import sam.storage.SamSaveFailedException;
 import sam.storage.Storage;
 import sam.task.Deadline;
@@ -17,9 +18,18 @@ import sam.task.Task;
 import sam.task.TaskList;
 import sam.task.ToDo;
 
+/**
+ * Represents a user command to add a new task.
+ */
 public class AddCommand extends Command {
     private char taskType;
 
+    /**
+     * Constructs a new AddCommand to add a task of a given type.
+     *
+     * @param args The command string.
+     * @param taskType The type of task to add.
+     */
     public AddCommand(String args, char taskType) {
         super(args);
         this.taskType = taskType;
@@ -28,7 +38,8 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage)
             throws SamMissingTaskTitleException, SamMissingTaskValueException,
-            SamMissingTaskArgException, SamInvalidDateException, SamSaveFailedException {
+            SamMissingTaskArgException, SamInvalidDateException, SamSaveFailedException,
+            SamUnknownCommandException {
         Map<String, String> taskArgs = Parser.parseTaskArgs(args);
         String title = taskArgs.get("title");
         Task task = null;
@@ -52,6 +63,8 @@ public class AddCommand extends Command {
             LocalDate by = Parser.parseDate(taskArgs.get("by"));
             task = new Deadline(title, by);
             break;
+        default:
+            throw new SamUnknownCommandException();
         }
 
         tasks.addTask(task);

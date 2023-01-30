@@ -9,12 +9,20 @@ import sam.storage.SamLoadFailedException;
 import sam.storage.Storage;
 import sam.task.TaskList;
 
+/**
+ * Represents the main Sam program
+ */
 public class Sam {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
     private boolean isLive;
 
+    /**
+     * Constructs a new Sam instance with the given save path.
+     *
+     * @param savePath The path to the save file.
+     */
     public Sam(Path savePath) {
         ui = new Ui();
         storage = new Storage(savePath);
@@ -22,6 +30,9 @@ public class Sam {
         isLive = false;
     }
 
+    /**
+     * Begins executing Sam.
+     */
     public void run() {
         isLive = true;
         ui.showLogo();
@@ -43,6 +54,11 @@ public class Sam {
         }
     }
 
+    /**
+     * The main method of the program.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Path savePath = Path.of("data", "sam.txt");
         new Sam(savePath).run();

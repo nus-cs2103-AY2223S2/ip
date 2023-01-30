@@ -4,6 +4,9 @@ import sam.Ui;
 import sam.storage.Storage;
 import sam.task.TaskList;
 
+/**
+ * Represents a user command to exit from Sam.
+ */
 public class ExitCommand extends Command {
     public ExitCommand(String args) {
         super(args);

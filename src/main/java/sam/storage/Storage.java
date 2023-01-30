@@ -26,7 +26,7 @@ public class Storage {
 
     /**
      * Saves a TaskList into a file indicated by savePath.
-     * 
+     *
      * @param tasks The TaskList object that contains the tasks to be saved.
      * @throws SamSaveFailedException If the file fails to be written.
      */
@@ -55,7 +55,7 @@ public class Storage {
 
     /**
      * Loads the TaskList in the file indicated by savePath if it exists.
-     * 
+     *
      * @param tasks The TaskList object to be populated.
      * @throws SamLoadFailedException If an existing file cannot be read or a date is in the wrong format.
      */
@@ -82,10 +82,10 @@ public class Storage {
                     LocalDate by = Parser.parseDate(arr[3]);
                     t = new Deadline(arr[2], by, isDone);
                     break;
+                default:
+                    continue;
                 }
-                if (t != null) {
-                    tasks.addTask(t);
-                }
+                tasks.addTask(t);
             }
         } catch (IOException | SamInvalidDateException e) {
             throw new SamLoadFailedException();

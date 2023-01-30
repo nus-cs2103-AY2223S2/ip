@@ -10,6 +10,9 @@ import sam.task.SamMissingTaskException;
 import sam.task.Task;
 import sam.task.TaskList;
 
+/**
+ * Represents a user command to delete a task.
+ */
 public class DeleteCommand extends Command {
     public DeleteCommand(String args) {
         super(args);

@@ -14,6 +14,12 @@ public abstract class Task {
         this(title, false);
     }
 
+    /**
+     * Constructs a new Task.
+     *
+     * @param title The title of the task.
+     * @param isDone Indicates whether the task is done.
+     */
     public Task(String title, boolean isDone) {
         this.title = title;
         this.isDone = isDone;
@@ -25,7 +31,7 @@ public abstract class Task {
 
     /**
      * Returns a char representing the status of the task.
-     * 
+     *
      * @return An X if the task is done, or a blank space otherwise.
      */
     protected char getStatusIcon() {
@@ -34,7 +40,7 @@ public abstract class Task {
 
     /**
      * Returns an integer representing the status of the task.
-     * 
+     *
      * @return A 1 if the task is done, or a 0 otherwise.
      */
     protected int getStatusNo() {
@@ -43,7 +49,7 @@ public abstract class Task {
 
     /**
      * Formats the specified date to the format "MMM d yyyy"
-     * 
+     *
      * @param date The date to be formatted
      * @return A string representation of the date in the format "MMM d yyyy"
      */
@@ -54,7 +60,7 @@ public abstract class Task {
 
     /**
      * Formats the specified date to the format "d/M/yyyy"
-     * 
+     *
      * @param date The date to be formatted.
      * @return A string representation of the date in the format "d/M/yyyy"
      */
@@ -65,8 +71,8 @@ public abstract class Task {
 
     /**
      * Returns a string to be used when saving the task to a file.
-     * 
+     *
      * @return A string representation of the task.
      */
-    abstract public String toSaveFormat();
+    public abstract String toSaveFormat();
 }

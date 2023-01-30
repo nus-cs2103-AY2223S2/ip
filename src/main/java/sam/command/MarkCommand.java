@@ -9,9 +9,18 @@ import sam.storage.Storage;
 import sam.task.SamMissingTaskException;
 import sam.task.TaskList;
 
+/**
+ * Represents a user command to mark or unmark a task as done.
+ */
 public class MarkCommand extends Command {
-    boolean isDone;
+    private boolean isDone;
 
+    /**
+     * Constructs a new MarkCommand.
+     *
+     * @param args The command string.
+     * @param isDone Indicates whether the task is done.
+     */
     public MarkCommand(String args, boolean isDone) {
         super(args);
         this.isDone = isDone;

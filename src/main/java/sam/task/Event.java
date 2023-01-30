@@ -13,6 +13,14 @@ public class Event extends Task {
         this(title, from, to, false);
     }
 
+    /**
+     * Constructs a new Event task.
+     *
+     * @param title The title of the task.
+     * @param from The start date for the Event.
+     * @param to The end date for the Event.
+     * @param isDone Indicates whether the task is done.
+     */
     public Event(String title, LocalDate from, LocalDate to, boolean isDone) {
         super(title, isDone);
         this.from = from;

@@ -22,7 +22,7 @@ import sam.task.SamMissingTaskValueException;
 public class Parser {
     /**
      * Parses a string with the format "d/M/yyyy" as a LocalDate.
-     * 
+     *
      * @param input The date string to be parsed.
      * @return The parsed LocalDate object.
      * @throws SamInvalidDateException If the string is in the wrong format.
@@ -38,7 +38,7 @@ public class Parser {
 
     /**
      * Parses a string as an integer.
-     * 
+     *
      * @param input The string to be parsed.
      * @return The parsed integer.
      */
@@ -53,7 +53,7 @@ public class Parser {
     /**
      * Parses a string of task arguments into a Map.
      * Task arguments should be in the form 'title /key1 val1 /key2 val2 ...'
-     * 
+     *
      * @param input The string to be parsed.
      * @return A Map of the task arguments.
      * @throws SamMissingTaskTitleException If a title is not provided.
@@ -84,7 +84,7 @@ public class Parser {
 
     /**
      * Splits the first word of a string.
-     * 
+     *
      * @param input The string to split.
      * @return A string array with the first word and the rest of the string.
      */
@@ -95,7 +95,7 @@ public class Parser {
     /**
      * Parses a string into a command based on the first word.
      * The rest of the string is passed into the command as argument.
-     * 
+     *
      * @param input The user input.
      * @return A command object representing the given input.
      * @throws SamUnknownCommandException If the input doesn't match any command.
