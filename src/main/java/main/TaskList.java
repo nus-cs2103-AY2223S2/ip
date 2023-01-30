@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import task.Task;
 
+/**
+ * Stores the task into a TaskList
+ */
 public class TaskList {
     private ArrayList<Task> list;
 
@@ -11,14 +14,29 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Creates a TaskList
+     * 
+     * @param list the list of tasks from storage
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
+    /**
+     * mark the task
+     * 
+     * @param inputIndex index to be mark
+     */
     public void mark(int inputIndex) {
         this.list.get(inputIndex - 1).mark();
     }
 
+    /**
+     * unmark the task
+     * 
+     * @param inputIndex index to be unmarked
+     */
     public void unmark(int inputIndex) {
         this.list.get(inputIndex - 1).unmark();
     }

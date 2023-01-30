@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 import task.Task;
 
+/**
+ * Creates a Ui to interact with the user
+ */
 public class Ui {
     private StringBuilder output = new StringBuilder();
     private Scanner scanner;
