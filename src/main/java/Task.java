@@ -7,6 +7,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -17,9 +21,15 @@ public class Task {
     public void markUndone() {
         this.isDone = false;
     }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "]" + this.description;
     }
+
+    public String toFileString() {
+        return String.format("X | %d | %s", isDone ? 1 : 0, description);
+    }
+
 }
 
