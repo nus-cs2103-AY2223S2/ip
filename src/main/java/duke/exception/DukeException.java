@@ -60,6 +60,9 @@ public class DukeException extends Exception {
                     case 0:
                         this.message = String.format("Oops! The description of %s cannot be empty",task.toString());
                         break;
+                    case 1:
+                        this.message = "Please check if your inputs are valid.";
+                        break;
                     default:
                         this.message = "Something went wrong here";
                         break;
@@ -70,6 +73,9 @@ public class DukeException extends Exception {
                 switch(errorCode){
                     case 0:
                         this.message = String.format("Oops! The description of %s cannot be empty",task.toString());
+                        break;
+                    case 1:
+                        this.message = "Please check if your inputs are valid.";
                         break;
                     default:
                         this.message = "Something went wrong here";
