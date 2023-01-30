@@ -2,6 +2,9 @@ package tasks;
 
 import exceptions.NoTaskDescriptionException;
 import exceptions.UnknownTaskException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,8 +13,6 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 // import parsing.ParseDate;
 
@@ -51,16 +52,14 @@ public class Task {
 
     public static void addTask(String command, String userInput) throws UnknownTaskException, NoTaskDescriptionException {
         String[] taskStrings = userInput.split("/");
-        LocalDateTime date1 = LocalDateTime.now();
-        LocalDateTime date2 = LocalDateTime.now();
+
+        // "* could not be parsed at index *" -- "please enter valid date format: yyyy-mm-dd hh:mm(:ss)"
+        LocalDateTime[] dates = new LocalDateTime[2];
 
         for (int i = 0; i < taskStrings.length; i++) {
             taskStrings[i] = taskStrings[i].strip();
-            if (i == 1) {
-                date1 = LocalDateTime.parse(taskStrings[1]);
-            } 
-            if (i == 2) {
-                date2 = LocalDateTime.parse(taskStrings[2]);
+            if (i > 0) {
+                dates[i-1] = LocalDateTime.parse(taskStrings[i]);
             }
         }
         
@@ -71,21 +70,52 @@ public class Task {
             throw new UnknownTaskException(command);
         }
 
-
         switch(tt) {
         case TODO: 
             arr.add(new Todo(userInput));
             break;
         case DEADLINE:
-            arr.add(new Deadline(taskStrings[0], date1));
+            arr.add(new Deadline(taskStrings[0], dates[0]));
             break;
         case EVENT:
-            arr.add(new Event(taskStrings[0], date1, date2));
+            arr.add(new Event(taskStrings[0], dates[0], dates[1]));
             break;
         }
 
         System.out.println("The following task has been added to your list: \n    " + arr.get(curr) 
                             + "\n \nCurrently, your list has " + ++curr + (curr== 1 ? " task" : " tasks."));
+    }
+
+    public static void check(LocalDate date) {
+        String output = "";
+        int numTasks = 0;
+        for (int i = 0; i < arr.size(); i++) {
+            Task task = arr.get(i);
+            if (task instanceof Deadline) {
+                Deadline deadlineTask = (Deadline) task;
+                if (deadlineTask.isEqualDate(date)) {
+                    output += (numTasks+1) + ") " + deadlineTask + "\n";
+                    numTasks++;
+                }
+            } else if (task instanceof Event) {
+                Event eventTask = (Event) task;
+                if (eventTask.isEqualDate(date)) {
+                    output += (numTasks+1) + ") " + eventTask + "\n";
+                    numTasks++;
+                }
+            }
+        }
+
+        if (numTasks == 0) {
+            System.out.println("You have no tasks on " + date.toString());
+        } else {
+            String s = " tasks";
+            if (numTasks == 1) {
+                s = " task";
+            }
+            System.out.println("You have " + numTasks + s + " on " + date.toString());
+            System.out.print(output);
+        }
     }
 
     public static void deleteTask(int task) {
