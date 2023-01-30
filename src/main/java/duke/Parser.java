@@ -1,9 +1,19 @@
 package duke;
 public class Parser {
+
+    /**
+     * Constructor for the Deadline class.
+     */
     public Parser() {
         
     }
 
+    /**
+     * This method checks if the command entered is to exit.
+     *
+     * @param s The command to check.
+     * @return True if the command is to exit.
+     */
     public boolean checkForExit(String s) {
         return s.equalsIgnoreCase("bye");
     }

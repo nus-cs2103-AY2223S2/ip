@@ -10,17 +10,27 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Storage {
+
+    /** String representation of user home directory. */
     String home = System.getProperty("user.home");
+    /** Path object of storage entry. */
     Path filePath;
+    /** File object of storage entry. */
     File dukeDataFile;
+    /** TaskList to be loaded from storage. */
     TaskList loadTaskList;
 
+    /**
+     * Constructor for the Storage class.
+     *
+     * @param s The file storage class will operate on.
+     */
     public Storage(String s) {
         filePath = Paths.get(home, "data", s);
         loadTaskList = new TaskList();
     }
 
-    //Just a test, will remove later
+    //TODO: Just a test, will remove later
     public void dirTest() {
         try {
             dukeDataFile = new File(filePath.toString());
@@ -30,6 +40,12 @@ public class Storage {
         }
     }
 
+    /**
+     * This method loads the tasks in storage to TaskList.
+     *
+     * @return New TaskList if storage is empty, else the loaded TaskList
+     * @throws DukeException If there is any issues with reading the file
+     */
     public TaskList load() throws DukeException{
         dukeDataFile = new File(filePath.toString());
         if (Files.exists(filePath)) {
@@ -74,6 +90,11 @@ public class Storage {
         return new TaskList();
     }
 
+    /**
+     * This method saves the passed in TaskList to storage.
+     *
+     * @param saveTaskList The TaskList to save to storage.
+     */
     public void save(TaskList saveTaskList) {
         StringBuilder outputString = new StringBuilder();
         for (int i = 0; i < saveTaskList.tasks.size(); i++) {
