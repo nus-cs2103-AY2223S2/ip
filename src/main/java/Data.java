@@ -4,8 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Data {
+    private DateTimeFormatter savedFormat = DateTimeFormatter.ofPattern("dd/MMM/yyyy HHmm");
+    private DateTimeFormatter loadFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
     private boolean exist;
     private File saved;
     private String path;
@@ -71,13 +75,21 @@ public class Data {
             boolean isMarked = parsed[1].equals("1");
 
             if (type.equals("D")) {
-                Deadline temp = new Deadline(parsed[2], parsed[3]);
+                LocalDateTime savedDateTime = LocalDateTime.parse(parsed[3], savedFormat);
+                LocalDateTime loadDateTime = LocalDateTime.parse(savedDateTime.format(loadFormat), loadFormat);
+                Deadline temp = new Deadline(parsed[2], loadDateTime.format(loadFormat));
                 if (isMarked) {
                     temp.mark();
                 }
                 list.add(temp);
             } else if (type.equals("E")) {
-                Event temp = new Event(parsed[2], parsed[3], parsed[4]);
+                LocalDateTime savedStartTime = LocalDateTime.parse(parsed[3], savedFormat);
+                LocalDateTime loadStartTime = LocalDateTime.parse(savedStartTime.format(loadFormat), loadFormat);
+                LocalDateTime savedEndTime = LocalDateTime.parse(parsed[4], savedFormat);
+                LocalDateTime loadEndTime = LocalDateTime.parse(savedEndTime.format(loadFormat), loadFormat);
+                Event temp = new Event(parsed[2], 
+                    loadStartTime.format(loadFormat),
+                    loadEndTime.format(loadFormat));
                 if (isMarked) {
                     temp.mark();
                 } 

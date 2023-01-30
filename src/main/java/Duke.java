@@ -132,8 +132,12 @@ public class Duke {
         System.out.println();
         Data saved = new Data("./dukeSaved.txt");
         if(saved.isSaved()) {
-            System.out.println("Duke: Previously saved list available!");
             list = saved.load();
+            if(list.size() > 0) {
+                System.out.println("Duke: Previously saved list available!");
+            } else {
+                System.out.println("Duke: No previously saved list found.");
+            }
         } else {
             System.out.println("Duke: No previously saved list found.");
         }
@@ -177,7 +181,7 @@ public class Duke {
                 } catch (DateTimeParseException e) {
                     System.out.println("Duke: Wrong date/time format!");
                     System.out.println("     Please enter correct format (yyyy/MM/dd HHmm)!");
-                    ;
+                    reset();
                 }
             } else if (input.equalsIgnoreCase("deadline")) {
                 try {
@@ -186,8 +190,8 @@ public class Duke {
                     reset();
                 } catch (DateTimeParseException e) {
                     System.out.println("Duke: Wrong date/time format!");
-                    System.out.println("     Please enter correct format (yyyy/MM/dd HHmm)!");
-                    continue;
+                    System.out.println("      Please enter correct format (yyyy/MM/dd HHmm)!");
+                    reset();
                 }
             } else if (input.equalsIgnoreCase("delete")) {
                 if(list.isEmpty()) {
