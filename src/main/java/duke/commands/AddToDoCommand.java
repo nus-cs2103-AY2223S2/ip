@@ -1,9 +1,17 @@
+package duke.commands;
+
 import java.io.IOException;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
 
 public class AddToDoCommand extends Command {
     private final String description;
 
-    AddToDoCommand(String description) {
+    public AddToDoCommand(String description) {
         this.description = description;
     }
 

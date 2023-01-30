@@ -1,3 +1,5 @@
+package duke.ui;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -13,7 +15,7 @@ public class Ui {
     private static final String GREETING = "Welcome to Duke. How may I help you?";
 
     /** */
-    private static final String LOADING_ERROR = "Failed to find existing Task list. Creating new list...";
+    private static final String LOADING_ERROR = "Failed to find existing duke.task.Task list. Creating new list...";
 
     /** Simple exit message */
     private static final String GOODBYE = "Bye! See you again.";

@@ -1,4 +1,11 @@
-import java.util.ArrayList;
+package duke.parser;
+
+import duke.commands.*;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class Parser {
 
@@ -29,7 +36,7 @@ public class Parser {
             }
             return scannedTask;
         default:
-            throw new DukeException("Task list file is unreadable/corrupted.");
+            throw new DukeException("duke.task.Task list file is unreadable/corrupted.");
         }
     }
 
@@ -84,13 +91,13 @@ public class Parser {
                     String[] fromToArray = furtherSplitCommand[1].split(" /to ");
                     return new AddEventCommand(description, fromToArray[0], fromToArray[1]);
                 } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Event task must have /from and /to");
+                    throw new DukeException("duke.task.Event task must have /from and /to");
                 }
             } else {
-                throw new DukeException("Description and from/to of Event task cannot be empty. ");
+                throw new DukeException("Description and from/to of duke.task.Event task cannot be empty. ");
             }
         default:
-            //might add help in the future to show all commands
+            //might add help in the future to show all duke.commands
             throw new DukeException("Unrecognised command. Please try again.");
         }
     }

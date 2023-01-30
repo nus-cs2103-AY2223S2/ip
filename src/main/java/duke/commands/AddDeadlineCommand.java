@@ -1,11 +1,19 @@
+package duke.commands;
+
 import java.io.IOException;
-import java.time.LocalDate;
+
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.exception.DukeException;
 
 public class AddDeadlineCommand extends Command {
     private final String description;
     private final String deadline;
 
-    AddDeadlineCommand(String description, String deadline) {
+    public AddDeadlineCommand(String description, String deadline) {
         this.description = description;
         this.deadline = deadline;
     }

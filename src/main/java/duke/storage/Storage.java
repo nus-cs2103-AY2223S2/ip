@@ -1,3 +1,10 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,9 +21,9 @@ public class Storage {
     }
 
     /**
-     * Reads from txt file at path to extract Task list.
-     * @return array of Task
-     * @throws DukeException if failed to load Task List from file
+     * Reads from txt file at path to extract duke.task.Task list.
+     * @return array of duke.task.Task
+     * @throws DukeException if failed to load duke.task.Task List from file
      */
     public ArrayList<Task> load() throws DukeException {
         //if file is found successfully

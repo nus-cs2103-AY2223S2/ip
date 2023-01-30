@@ -1,11 +1,19 @@
+package duke.commands;
+
 import java.io.IOException;
+
+import duke.task.Task;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
 
 public class AddEventCommand extends Command {
     private final String description;
     private final String from;
     private final String to;
 
-    AddEventCommand(String description, String from, String to) {
+    public AddEventCommand(String description, String from, String to) {
         this.description = description;
         this.from = from;
         this.to = to;

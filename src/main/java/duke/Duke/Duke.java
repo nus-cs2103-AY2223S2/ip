@@ -1,7 +1,16 @@
+package duke.Duke;
+
+import duke.commands.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class Duke {
 
     /** Default file path which Duke will attempt to access
-     *  to load Task List
+     *  to load duke.task.Task List
      */
     private static final String PATH_TO_FILE = "data/duke.txt";
 

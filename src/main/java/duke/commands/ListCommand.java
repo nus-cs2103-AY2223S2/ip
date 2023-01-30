@@ -1,8 +1,15 @@
+package duke.commands;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 public class ListCommand extends Command {
 
 
     /**
-     * Displays all tasks in TaskList
+     * Displays all tasks in duke.task.TaskList
      * @param tasks
      * @param ui
      * @param storage

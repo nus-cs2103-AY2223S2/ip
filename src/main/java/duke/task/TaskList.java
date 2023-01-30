@@ -1,14 +1,16 @@
+package duke.task;
+
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> list;
+    protected final ArrayList<Task> list;
 
     /** In the event that task list failed to load */
-    TaskList() {
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
-    TaskList(ArrayList<Task> list) {
+    public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
