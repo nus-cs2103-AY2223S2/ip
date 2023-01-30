@@ -35,7 +35,7 @@ public class Duke {
         // Checks if the storage file is in the right folder
         String currLine;
         while ( (currLine = fr.readLine()) != null) {
-            fileElements.add(currLine);  // Copy storage.txt elements over
+            fileElements.add(currLine);  // Copy tasks from file over
         }
         fr.close();
         return fileElements;
