@@ -1,5 +1,7 @@
-import java.io.IOException;
-import java.util.ArrayList;
+package command;
+
+import task.*;
+
 import java.util.Locale;
 
 import static java.lang.Integer.parseInt;
@@ -85,7 +87,7 @@ public class Parser {
         int index = parseInt(inputAnalyzed[1]);
         // List
         list.mark(index);
-        // Ui
+        // command.Ui
         ui.showMarkSuccess(list.get(index - 1));
     }
 
@@ -142,7 +144,7 @@ public class Parser {
         }
         //List
         list.add(newTodo);
-        //Ui
+        //command.Ui
         ui.showAddTaskSuccess(newTodo, list);
     }
 
@@ -165,7 +167,7 @@ public class Parser {
         //Add Item
         Event newEvent = new Event(details, start, over);
         list.add(newEvent);
-        //Ui Section
+        //command.Ui Section
         ui.showAddTaskSuccess(newEvent, list);
     }
 }

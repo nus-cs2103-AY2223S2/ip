@@ -1,8 +1,9 @@
+package task;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
+
 import static java.lang.Integer.parseInt;
 
 public class TaskList extends ArrayList<Task> {
@@ -24,7 +25,7 @@ public class TaskList extends ArrayList<Task> {
                     this.add(todo);
                     break;
                 case "D":
-                    // Deadline
+                    // task.Deadline
                     Task dead = new Deadline(lineSplit[2], lineSplit[3]);
                     if (parseInt(lineSplit[1]) == 1) {
                         dead.setChecked(true);
@@ -32,7 +33,7 @@ public class TaskList extends ArrayList<Task> {
                     this.add(dead);
                     break;
                 case "E":
-                    // Event
+                    // task.Event
                     Task event = new Event(lineSplit[2], lineSplit[3], lineSplit[4]);
                     if (parseInt(lineSplit[1]) == 1) {
                         event.setChecked(true);
