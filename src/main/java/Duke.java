@@ -1,13 +1,17 @@
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String PATH = "data/Duke.txt";
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        List<Task> taskList = new ArrayList<>();
 
         System.out.println(formatOutput("Hey there! I'm Sirius\n\t What can I do for you today? :D"));
+        List<Task> taskList = loadFile();
 
         String input = sc.nextLine();
         while (!isBye(input)) {
@@ -91,16 +95,65 @@ public class Duke {
                         System.out.println(formatOutput("Got it. I've added this task:\n\t\t" + event.toString() + "\n\t Now you have " + taskList.size() + " tasks in the list."));
                         break;
                     default:
-                        throw new DukeException(formatOutput("Huh? What do you mean? :o"));
+                        throw new DukeException("Huh? What do you mean? :o");
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
+            } finally {
+                saveListToFile(taskList);
             }
             input = sc.nextLine();
         }
 
         System.out.println(formatOutput("Well, I'm off! Hope to see you again soon :)"));
     }
+
+    private static List<Task> loadFile() {
+        List<Task> initList = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(PATH));
+            String line = reader.readLine().trim();
+            while (line != null) {
+                String[] strArr = line.split(" \\| ");
+                String type = strArr[0];
+                boolean isCompleted = Integer.parseInt(strArr[1]) == 1;
+                String taskDesc = strArr[2];
+
+                switch (type) {
+                    case "T":
+                        initList.add(new Todo(taskDesc, isCompleted));
+                        break;
+                    case "D":
+                        initList.add(new Deadline(taskDesc, isCompleted, strArr[3]));
+                        break;
+                    case "E":
+                        initList.add(new Event(taskDesc, isCompleted, strArr[3], strArr[4]));
+                        break;
+                }
+                line = reader.readLine();
+            }
+        } catch (Exception e) {
+            System.out.println("No initial data found. I'll be generating a new task list for you..");
+            File newFile = new File(PATH);
+            newFile.getParentFile().mkdirs();
+            newFile.createNewFile();
+        } finally {
+            return initList;
+        }
+    }
+
+    private static void saveListToFile(List<Task> taskList) {
+        try {
+            FileWriter writer = new FileWriter(PATH, false);
+            for (Task t : taskList) {
+                writer.write(t.parseToSave() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Uh oh... An error occurred while I was trying to save your latest task list :0");
+        }
+    }
+
 
     public static String formatOutput(String input) {
         String line = "\t____________________________________________________________\n";
