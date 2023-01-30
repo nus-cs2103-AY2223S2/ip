@@ -76,7 +76,7 @@ public class Ui {
      * Prints out the line that sandwiches Duke's responses.
      */
     public void showLine() {
-        System.out.println("    _______________________________________"
+        this.out.println("    _______________________________________"
                 + "________________________________________________");
     }
 
@@ -129,7 +129,7 @@ public class Ui {
      * @param e The duke exception that is being thrown.
      */
     public void showError(DukeException e) {
-        System.out.println("Duke Exception: OOPS! " + e.getMessage());
+        this.out.println("     Duke Exception: OOPS! " + e.getMessage());
     }
 
     /**

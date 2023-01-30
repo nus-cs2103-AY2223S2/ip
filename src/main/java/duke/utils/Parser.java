@@ -2,6 +2,7 @@ package duke.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,7 +65,16 @@ public class Parser {
             throw new DukeException("Wrong format. Correct format: 'deadline {do something} /by {end date time}.'");
         }
 
-        LocalDateTime endDate = LocalDateTime.parse(arr[1], FORMATTER);
+        LocalDateTime endDate = null;
+        try {
+            endDate = LocalDateTime.parse(arr[1], FORMATTER);
+        } catch (DateTimeParseException e) {
+            endDate = null;
+        }
+
+        if (endDate == null) {
+            throw new DukeException("Datetime format is wrong. Please format as 'yyyy-MM-dd HH:mm'.");
+        }
         return new AddDeadlineCommand(arr[0], false, endDate);
     }
 
@@ -87,8 +97,19 @@ public class Parser {
             throw new DukeException("Wrong format. Correct format: "
                     + "'event {some event} /from {start date time} /to {end date time}'");
         }
-        LocalDateTime startDate = LocalDateTime.parse(secondHalf[0], FORMATTER);
-        LocalDateTime endDate = LocalDateTime.parse(secondHalf[1], FORMATTER);
+        LocalDateTime startDate = null;
+        LocalDateTime endDate = null;
+        try {
+            startDate = LocalDateTime.parse(secondHalf[0], FORMATTER);
+            endDate = LocalDateTime.parse(secondHalf[1], FORMATTER);
+        } catch (DateTimeParseException e) {
+            startDate = null;
+            endDate = null;
+        }
+
+        if (startDate == null && endDate == null) {
+            throw new DukeException("DateTime format is wrong. Please format as 'yyyy-MM-dd HH:mm'.");
+        }
         return new AddEventCommand(firstHalf[0], false, startDate, endDate);
 
     }
