@@ -14,9 +14,6 @@ public class Event extends Task{
         this.isDone = isDone;
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public String save() {
         return "E|" + (this.isDone ? 1 : 0) + "|" + this.description + "|" + this.time + "\n";

@@ -12,9 +12,6 @@ public class UnmarkCommand extends Command{
         this.index = index;
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task unmarkedTask = tasks.markTaskUndone(index);
@@ -22,9 +19,6 @@ public class UnmarkCommand extends Command{
         ui.showUnmarkTask(unmarkedTask);
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public boolean isExit() {
         return false;

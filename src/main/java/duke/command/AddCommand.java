@@ -11,9 +11,6 @@ public class AddCommand extends Command{
         this.task = task;
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage){
         tasks.addTask(task);
@@ -21,9 +18,6 @@ public class AddCommand extends Command{
         ui.showAddTask(task, tasks);
     }
 
-    /**
-     * @inheritDoc
-     */
     @Override
     public boolean isExit() {
         return false;
