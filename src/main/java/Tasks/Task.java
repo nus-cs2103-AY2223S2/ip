@@ -10,8 +10,14 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+// import parsing.ParseDate;
+
+/**
+ * This class represents a Generic Task which could be a Todo, Deadline or Event Task
+ */
 public class Task {
     private static ArrayList<Task> arr = new ArrayList<>();
     private static int curr = 0;
@@ -44,7 +50,20 @@ public class Task {
     }
 
     public static void addTask(String command, String userInput) throws UnknownTaskException, NoTaskDescriptionException {
-        String[] dates = userInput.split("/");
+        String[] taskStrings = userInput.split("/");
+        LocalDateTime date1 = LocalDateTime.now();
+        LocalDateTime date2 = LocalDateTime.now();
+
+        for (int i = 0; i < taskStrings.length; i++) {
+            taskStrings[i] = taskStrings[i].strip();
+            if (i == 1) {
+                date1 = LocalDateTime.parse(taskStrings[1]);
+            } 
+            if (i == 2) {
+                date2 = LocalDateTime.parse(taskStrings[2]);
+            }
+        }
+        
         TaskType tt;
         try {
             tt = TaskType.valueOf(command.toUpperCase());
@@ -52,17 +71,19 @@ public class Task {
             throw new UnknownTaskException(command);
         }
 
+
         switch(tt) {
-            case TODO: 
-                arr.add(new Todo(userInput));
-                break;
-            case DEADLINE:
-                arr.add(new Deadline(dates[0], dates[1]));
-                break;
-            case EVENT:
-                arr.add(new Event(dates[0], dates[1], dates[2]));
-                break;
+        case TODO: 
+            arr.add(new Todo(userInput));
+            break;
+        case DEADLINE:
+            arr.add(new Deadline(taskStrings[0], date1));
+            break;
+        case EVENT:
+            arr.add(new Event(taskStrings[0], date1, date2));
+            break;
         }
+
         System.out.println("The following task has been added to your list: \n    " + arr.get(curr) 
                             + "\n \nCurrently, your list has " + ++curr + (curr== 1 ? " task" : " tasks."));
     }
@@ -87,12 +108,15 @@ public class Task {
         return this.isChecked ? "[X]" : "[ ]";
     }
 
+    /** 
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return markToString() + " " + this.name;
     }
 
-    protected String taskToSave() {
+    protected String stringifyTaskToSave() {
         return this.isChecked.toString() + "|" + this.name;
     }
 
@@ -125,7 +149,7 @@ public class Task {
 
 
         for (int i = 0; i < curr; i++) {
-            stream.println(arr.get(i).taskToSave());
+            stream.println(arr.get(i).stringifyTaskToSave());
         }
 
         stream.close();

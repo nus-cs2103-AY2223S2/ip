@@ -1,22 +1,30 @@
 package tasks;
 
+import java.time.LocalDateTime;
+
 import exceptions.NoTaskDescriptionException;
 
+/**
+ * This class represents a Deadline Task to be done, with a deadline
+ */
 public class Deadline extends Task {
-    private String endDate;
+    private LocalDateTime endDate;
 
-    protected Deadline(String name, String endDate) throws NoTaskDescriptionException{
+    protected Deadline(String name, LocalDateTime endDate) throws NoTaskDescriptionException{
         super(name, "Deadline");
         this.endDate = endDate;
     }
 
+    /** 
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "[D] " + super.toString() + "( by: " + this.endDate + ")";
+        return "[D] " + super.toString() + " ( by: " + this.endDate + " )";
     }
 
     @Override
-    protected String taskToSave() {
-        return "D|" + super.taskToSave() + "|" + this.endDate;
+    protected String stringifyTaskToSave() {
+        return "D|" + super.stringifyTaskToSave() + "|" + this.endDate;
     }
 }

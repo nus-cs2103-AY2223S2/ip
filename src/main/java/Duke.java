@@ -53,28 +53,28 @@ public class Duke {
         }
 
         switch(job) {
-            case LIST:
-                Task.listTasks();
-                break;
-            case MARK:
-                Task.markTasks(Integer.parseInt(commands[1])-1);
-                break;
-            case UNMARK:
-                Task.unmarkTasks(Integer.parseInt(commands[1])-1);
-                break;
-            case DELETE:
-                Task.deleteTask(Integer.parseInt(commands[1])-1);
-                break;
-            default:
-                String taskName = "";
-                for (int i = 1; i < commands.length; i++) {
-                    taskName += commands[i] + " ";
-                }
-                try {
-                    Task.addTask(commands[0], taskName);
-                } catch(Exception e) {
-                    System.out.println(e.getMessage());
-                }
+        case LIST:
+            Task.listTasks();
+            break;
+        case MARK:
+            Task.markTasks(Integer.parseInt(commands[1])-1);
+            break;
+        case UNMARK:
+            Task.unmarkTasks(Integer.parseInt(commands[1])-1);
+            break;
+        case DELETE:
+            Task.deleteTask(Integer.parseInt(commands[1])-1);
+            break;
+        default:
+            String taskName = "";
+            for (int i = 1; i < commands.length; i++) {
+                taskName += commands[i] + " ";
+            }
+            try {
+                Task.addTask(commands[0], taskName);
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
         System.out.println("\n----------------------------------\n");
         try {
