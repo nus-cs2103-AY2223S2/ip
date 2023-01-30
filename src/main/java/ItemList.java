@@ -34,6 +34,14 @@ public class ItemList {
         System.out.println((itemNumber + 1) + ". " + itemToUnmark);
     }
 
+    public void delete(int itemNumber) {
+        Item itemToRemove = list.get(itemNumber);
+        System.out.println("DukeyList: The following item has been removed!");
+        System.out.println(itemToRemove.toString());
+        list.remove(itemNumber);
+        this.printSize();
+    }
+
     public int getSize() {
         return list.size();
     }

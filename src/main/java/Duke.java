@@ -83,15 +83,19 @@ public class Duke {
                 String[] details = scanner.nextLine().split("/");
                 if (details.length != 3) {
                     Error.raiseIncorrectFormatError();
+                    continue;
                 }
                 for (int i = 0; i < 3; i += 1) {
                     details[i] = details[i].strip();
                 }
                 if (details[0].equals("")) {
                     Error.raiseEmptyDescriptionError("event");
+                    continue;
                 }
                 if (details[1].equals("") || details[2].equals("")) {
                     Error.raiseMissingEventTimeError();
+                    continue;
+
                 }
                 itemList.addItem(new Event(details[0], details[1], details[2]));
                 continue;
@@ -134,6 +138,26 @@ public class Duke {
                     continue;
                 }
                 itemList.unmark(itemNumber);
+                continue;
+            }
+
+            //delete
+            if (input.equals("delete")) {
+                String restOfInput = scanner.nextLine();
+                if (restOfInput.isEmpty()) {
+                    Error.raiseMissingIndexError();
+                    continue;
+                }
+                int itemNumber = parseInt(restOfInput.strip()) - 1;
+                if (itemNumber >= itemList.getSize()) {
+                    Error.raiseInvalidTaskNumberError(itemList.getSize());
+                    continue;
+                }
+                if (itemNumber < 0) {
+                    Error.raiseIndexError();
+                    continue;
+                }
+                itemList.delete(itemNumber);
                 continue;
             }
 
