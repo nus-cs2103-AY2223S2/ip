@@ -43,13 +43,11 @@ public class Parser {
                 if (ops.length != 3) {
                     throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_TODO_CMD);
                 }
-
                 return new AddCommand(DukeCommand.TODO, title, isDone);
             case "D":
                 if (ops.length != 4) {
                     throw new InvalidCommandArgsException(Message.EXCEPTION_INVALID_DATE_CMD);
                 }
-
                 return new AddCommand(DukeCommand.DEADLINE, title, isDone, DateUtil.toLocalDateTime(ops[3]));
             case "E":
                 if (ops.length != 5) {
