@@ -1,6 +1,9 @@
 package duke.model;
 
-public abstract class Task {
+
+import java.io.Serializable;
+
+public abstract class Task implements Serializable {
     private final String taskDescription;
     private boolean taskDone;
     protected Task(String taskDescription) {
