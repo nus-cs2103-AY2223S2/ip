@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 /**
  * Duke agent that knows how to manage a todo list.
  */
-public class Duke extends Application{
+public class Duke extends Application {
 
     private DukeRepo db;
     private Ui ui;
@@ -106,7 +106,7 @@ public class Duke extends Application{
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        
+
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogContainer.setSpacing(10);
 
@@ -132,7 +132,6 @@ public class Duke extends Application{
         try {
             Command c = Parser.parse(input);
             c.execute(db, con);
-            
             if (c.isExit()) {
                 close();
             }
@@ -141,6 +140,9 @@ public class Duke extends Application{
         }
     }
 
+    /**
+     * Handles exit event gracefully.
+     */
     public void close() {
         db.close();
         Platform.exit();

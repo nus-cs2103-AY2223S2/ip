@@ -51,7 +51,6 @@ public class MarkCommand extends Command {
         }
     }
 
-    
     @Override
     public void execute(DukeRepo db, Consumer<String> con) throws DukeException {
         StringBuilder sb = new StringBuilder();

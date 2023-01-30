@@ -108,10 +108,10 @@ public class ListCommand extends Command {
         List<Task> filtered;
         StringBuilder sb = new StringBuilder();
 
-        if(!filterDate.isEmpty()) {
+        if (!filterDate.isEmpty()) {
             sb.append(Message.FIND_TASKS + "\n");
             filtered = filter(db, filterDate.get());
-        }else if(!filterString.isEmpty()) {
+        } else if (!filterString.isEmpty()) {
             sb.append(Message.FIND_TASKS + "\n");
             filtered = filter(db, filterString.get());
         } else {

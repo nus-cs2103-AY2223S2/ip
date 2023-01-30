@@ -48,7 +48,7 @@ public class DialogBox extends HBox {
 
     /**
      * Returns the dialog for user
-     * 
+     *
      * @param text
      * @param img
      * @return
@@ -57,10 +57,9 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
-    
     /**
      * Returns the dialog for duke
-     * 
+     *
      * @param text
      * @param img
      * @return
