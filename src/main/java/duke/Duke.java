@@ -15,34 +15,29 @@ import duke.task.TaskList;
  * in response to user's input.
  */
 public class Duke {
-    public static void main(String[] args) {
-        boolean end = false;
-        Storage storage = new Storage();
-        TaskList taskList = new TaskList(storage.load());
-        Parser parser = new Parser();
-        MessageGenerator messageGenerator = new MessageGenerator(taskList, storage);
+
+    Storage storage = new Storage();
+    TaskList taskList = new TaskList(storage.load());
+    Parser parser = new Parser();
+    MessageGenerator messageGenerator = new MessageGenerator(taskList, storage);
+
+    public Duke() {}
+
+    public String getInitMessage() {
         DukeMessage initMessage = new DukeMessage(MessageStatus.START);
-        System.out.println(initMessage);
+        return initMessage.toString();
+    }
 
-        Scanner scanner = new Scanner(System.in);
+    public String getResponse(String input) {
 
-        while (!end && scanner.hasNextLine()) {
-            String userMessage = scanner.nextLine();
-            if (userMessage.equals("bye")) {
-                end = true;
-                scanner.close();
-            }
-            try {
-                MessageStatus responseStatus = parser.process(userMessage);
-                DukeMessage dukeResponse = messageGenerator.generate(responseStatus, userMessage);
-                System.out.println(dukeResponse);
-            } catch (InvalidInputException | InvalidTodoException | InvalidDeadlineException |
-                     InvalidEventException e) {
-                System.out.println(e.getMessage());
-            }
-
+        try {
+            MessageStatus responseStatus = parser.process(input);
+            DukeMessage dukeResponse = messageGenerator.generate(responseStatus, input);
+            return dukeResponse.toString();
+        } catch (InvalidInputException | InvalidTodoException | InvalidDeadlineException |
+                InvalidEventException e) {
+            return e.getMessage();
         }
-
 
     }
 }
