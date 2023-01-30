@@ -3,6 +3,10 @@ package duke.command;
 import duke.DukeException;
 import duke.task.TaskList;
 
+/**
+ * A command that sets the task as completed or not.
+ * @author Junyi
+ */
 public class MarkCommand extends Command {
 
     private final TaskList taskList;
@@ -29,8 +33,7 @@ public class MarkCommand extends Command {
 
         if (isDone) {
             stringBuilder.append("This task is now done, what's next?\n");
-        }
-        else {
+        } else {
             stringBuilder.append("This task is now not done, how disappointing...\n");
         }
         stringBuilder.append(taskList.get(taskIndex));

@@ -1,12 +1,10 @@
 package duke.util;
 
-import duke.Duke;
 import duke.task.Task;
-
-import java.util.Scanner;
 
 /**
  * The Ui class deals with interactions with the user.
+ * @author Junyi
  */
 public class Ui {
 
@@ -28,8 +26,14 @@ public class Ui {
      * Displays a welcome message.
      */
     public String showWelcomeMessage() {
-        return "Hello, I am \n" + Duke.LOGO + "\n" +
-                "How shall I assist you today?";
+        String logo = "______     ______     __     __    \n"
+                + "/\\  __ \\   /\\  == \\   /\\ \\   /\\ \\   \n"
+                + "\\ \\  __ \\  \\ \\  __<   \\ \\ \\  \\ \\ \\  \n"
+                + " \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_\\  \\ \\_\\ \n"
+                + "  \\/_/\\/_/   \\/_/ /_/   \\/_/   \\/_/ \n";
+
+        return logo
+                + "How shall I assist you today?";
     }
 
     /**
@@ -38,8 +42,8 @@ public class Ui {
      * @param task The created Task.
      */
     public String showTaskCreatedMessage(Task task) {
-        return "Hey new task added!\n" +
-                task;
+        return "Hey new task added!\n"
+                + task;
     }
 
     /**

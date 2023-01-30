@@ -5,6 +5,10 @@ import duke.task.TaskList;
 import duke.task.TodoTask;
 import duke.util.Ui;
 
+/**
+ * A command that creates a TodoTask
+ * @author Junyi
+ */
 public class TodoCommand extends Command {
 
     private final TaskList taskList;

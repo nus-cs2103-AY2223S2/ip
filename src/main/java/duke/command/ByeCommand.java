@@ -2,6 +2,10 @@ package duke.command;
 
 import duke.DukeException;
 
+/**
+ * A command that asks Dukes to exit
+ * @author Junyi
+ */
 public class ByeCommand extends Command {
 
     @Override

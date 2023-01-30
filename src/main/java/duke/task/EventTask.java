@@ -3,7 +3,11 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class EventTask extends Task{
+/**
+ * A task class representing a simple task that has a specific date range
+ * @author Junyi
+ */
+public class EventTask extends Task {
     /* Start date of the task */
     protected LocalDate from;
 

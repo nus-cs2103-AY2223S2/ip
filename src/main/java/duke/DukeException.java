@@ -1,7 +1,8 @@
 package duke;
 
 /**
- * Custom exception for Duke
+ * DukeException is a custom exception to encapsulates any errors faced during its execution.
+ * @author Junyi
  */
 public class DukeException extends Exception {
     private final String message;

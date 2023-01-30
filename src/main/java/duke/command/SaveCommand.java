@@ -1,12 +1,16 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
 
-import java.io.IOException;
-
+/**
+ * A command to save all current tasks to the disk.
+ * @author Junyi
+ */
 public class SaveCommand extends Command {
 
     private final TaskList taskList;

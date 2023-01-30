@@ -1,12 +1,16 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.DukeException;
 import duke.task.EventTask;
 import duke.task.TaskList;
 import duke.util.Ui;
 
-import java.time.LocalDate;
-
+/**
+ * A command that creates an EventTask
+ * @author Junyi
+ */
 public class EventCommand extends Command {
 
     private final TaskList taskList;

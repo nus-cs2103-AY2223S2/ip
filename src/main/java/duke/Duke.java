@@ -1,21 +1,16 @@
 package duke;
 
 import duke.command.Command;
-import duke.task.*;
+import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
 /**
- * Main Chatbot logic
+ * The Duke class connects all the components to form the main chatbot logic.
+ * @author Junyi
  */
 public class Duke {
-
-    public static String LOGO = "______     ______     __     __    \n" +
-            "/\\  __ \\   /\\  == \\   /\\ \\   /\\ \\   \n" +
-            "\\ \\  __ \\  \\ \\  __<   \\ \\ \\  \\ \\ \\  \n" +
-            " \\ \\_\\ \\_\\  \\ \\_\\ \\_\\  \\ \\_\\  \\ \\_\\ \n" +
-            "  \\/_/\\/_/   \\/_/ /_/   \\/_/   \\/_/ \n";
 
     private final TaskList taskList;
     private final Storage storage;
@@ -53,5 +48,4 @@ public class Duke {
             return "Sorry, I ran into a problem... Try again";
         }
     }
-
 }

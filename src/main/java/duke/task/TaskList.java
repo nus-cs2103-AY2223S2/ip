@@ -3,6 +3,10 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * A wrapper class for arraylist of tasks
+ * @author Junyi
+ */
 public class TaskList {
     /* An ArrayList of tasks */
     private final ArrayList<Task> tasks;

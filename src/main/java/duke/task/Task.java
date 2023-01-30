@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * A base Task class that has a description and a completed status
+ * @author Junyi
+ */
 public class Task {
     /* True if task is completed */
     protected boolean isDone;
