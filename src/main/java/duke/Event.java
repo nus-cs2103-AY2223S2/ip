@@ -1,4 +1,6 @@
-public class Event extends Task{
+package duke;
+
+public class Event extends Task {
     protected Times from, to;
     protected String type = "[E]";
     public Event(String description, String from, String to) {
@@ -7,7 +9,7 @@ public class Event extends Task{
         this.to = new Times(to);
     }
 
-    public static Event createEvent(String input) throws DukeException{
+    public static Event createEvent(String input) throws DukeException {
         int index1 = input.indexOf("/");
         int index2 = input.lastIndexOf("/");
         if (index1 == -1 || index2 == -1) {

@@ -1,3 +1,7 @@
+package duke;
+
+import duke.*;
+
 public class Parser {
     private static final int TODO_LENGTH = 4;
     Parser() {}

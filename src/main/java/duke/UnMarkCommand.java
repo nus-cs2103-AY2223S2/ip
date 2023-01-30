@@ -1,4 +1,10 @@
-public class UnMarkCommand implements Command{
+package duke;
+
+import duke.Command;
+import duke.DukeException;
+import duke.TaskList;
+
+public class UnMarkCommand implements Command {
     private int unMarkIndex;
     UnMarkCommand(int i) {
         unMarkIndex = i;

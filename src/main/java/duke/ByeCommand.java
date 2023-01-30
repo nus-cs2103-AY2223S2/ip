@@ -1,3 +1,5 @@
+package duke;
+
 public class ByeCommand implements Command {
     ByeCommand() {}
 

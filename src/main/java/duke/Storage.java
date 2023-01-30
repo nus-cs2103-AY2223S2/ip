@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.nio.file.*;
 import java.nio.charset.StandardCharsets;

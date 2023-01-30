@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Command;
+
 public class DeadlineCommand implements Command {
     private Task newDeadline;
 

@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Command;
+
 public class ListCommand implements Command {
     ListCommand() {}
     @Override

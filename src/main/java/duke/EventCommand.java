@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Command;
+
 public class EventCommand implements Command {
     private Task newEvent;
     EventCommand(Task t) {

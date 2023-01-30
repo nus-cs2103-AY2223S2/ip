@@ -1,3 +1,8 @@
+package duke;
+
+import duke.Command;
+import duke.DukeException;
+
 public class MarkCommand implements Command {
     private int markIndex;
     MarkCommand(int i) {
