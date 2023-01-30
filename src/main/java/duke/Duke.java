@@ -60,7 +60,7 @@ public class Duke {
                     break;
 
                 case "bye":
-                    System.out.println("Byeee! Hope to see you again! Signing off, Duke.");
+                    System.out.println("Byeee! Hope to see you again! Signing off, duke.Duke.");
                     break;
 
                 case "mark":
