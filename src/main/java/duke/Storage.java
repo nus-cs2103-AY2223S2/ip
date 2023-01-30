@@ -23,7 +23,7 @@ public class Storage {
     /**
      * Checks whether the log file exists or not. If the log file does not exists, a new log file
      * will be created.
-     * 
+     *
      * @return {@code true} if the log file exists, otherwise {@code false}.
      */
     private boolean createFileIfNotExists() {
@@ -43,7 +43,7 @@ public class Storage {
     /**
      * Constructs a {@code TaskList} from the log file. If the log file does not exist, or an
      * exception is caught, an empty {@code TaskList} will be returned.
-     * 
+     *
      * @return a {@code TaskList} instance
      */
     public TaskList readTaskList() {
@@ -62,7 +62,7 @@ public class Storage {
     /**
      * Writes a {@code TaskList} into the log file. The log file will be created if it does not
      * exist.
-     * 
+     *
      * @param list the {@code TaskList} to be written into the log file
      */
     public void writeTaskList(TaskList list) {

@@ -18,14 +18,14 @@ public abstract class Task implements Serializable {
     /**
      * Creates a {@code Task} with the given description. The created task will be marked as not
      * done.
-     * 
+     *
      * @param description a string describes the created task
      */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
-    
+
     /**
      * Marks this {@code Task} as done.
      */

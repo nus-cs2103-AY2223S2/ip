@@ -37,7 +37,7 @@ public class Parser {
 
     /**
      * Parses an input string as a command.
-     * 
+     *
      * @param input the input string
      * @return a command corresponded to the input string
      */

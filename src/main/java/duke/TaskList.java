@@ -30,7 +30,7 @@ public class TaskList implements Serializable {
 
     /**
      * Initializes a {@code TaskList} by copying the given list of tasks.
-     * 
+     *
      * @param tasks the list of tasks to populate this {@code TaskList}
      */
     public TaskList(List<Task> tasks) {
@@ -48,7 +48,7 @@ public class TaskList implements Serializable {
 
     /**
      * Adds a new task into this {@code TaskList}.
-     * 
+     *
      * @param task the task to be added
      * @return {@code true} if the task was added, otherwise {@code false}
      */
@@ -58,7 +58,7 @@ public class TaskList implements Serializable {
 
     /**
      * Gets the task located at the given index.
-     * 
+     *
      * @param index the index of the task
      * @return the accessed task
      */
@@ -69,7 +69,7 @@ public class TaskList implements Serializable {
 
     /**
      * Removes the task located at the given index.
-     * 
+     *
      * @param index the index of the task
      * @return the removed task
      */
@@ -80,7 +80,7 @@ public class TaskList implements Serializable {
 
     /**
      * Returns the size of this {@code TaskList}.
-     * 
+     *
      * @return the number of tasks stored in this {@code TaskList}
      */
     public int size() {
@@ -89,7 +89,7 @@ public class TaskList implements Serializable {
 
     /**
      * Counts the number of stored tasks.
-     * 
+     *
      * @return a string representing the number of stored tasks
      */
     public String countTaskAsString() {
@@ -99,7 +99,7 @@ public class TaskList implements Serializable {
 
     private String listTasksFrom(Stream<Task> stream) {
         return stream.map(new Function<Task, String>() {
-            int index = 1;
+            private int index = 1;
 
             @Override
             public String apply(Task task) {
@@ -112,7 +112,7 @@ public class TaskList implements Serializable {
 
     /**
      * Lists all stored tasks, with indicies. Indicies start from {@code 1}.
-     * 
+     *
      * @return a string showing the contents of all tasks, with indicies.
      */
     public String listAllTasks() {

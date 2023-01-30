@@ -13,7 +13,7 @@ public class UI {
 
     /**
      * Prints a message to the output.
-     * 
+     *
      * @param msg the message to be printed to the output
      */
     public static void echo(String msg) {
@@ -33,7 +33,7 @@ public class UI {
 
     /**
      * Reads the next command from the user.
-     * 
+     *
      * @return a string representing the command
      */
     public static String readCommand() {
@@ -42,7 +42,7 @@ public class UI {
 
     /**
      * Prints the message of an error to the ouput.
-     * 
+     *
      * @param ex a error of the application
      */
     public static void echoError(DukeRuntimeException ex) {

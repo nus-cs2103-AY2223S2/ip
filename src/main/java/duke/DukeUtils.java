@@ -23,7 +23,7 @@ public class DukeUtils {
 
     /**
      * Converts a {@code LocalDate} instance to a {@code String}, using MMM dd yyyy format.
-     * 
+     *
      * @param date the {@code LocalDate} instance to be converted
      * @return a string, representing the {@code LocalDate} instance
      */
@@ -34,7 +34,7 @@ public class DukeUtils {
     /**
      * Converts an input string to a {@code LocalDate} instance. If the conversion fails, an empty
      * {@code Optional} is returned.
-     * 
+     *
      * @param input the input string
      * @return an {@code Optional} instance holding the conversion result
      */
@@ -49,7 +49,7 @@ public class DukeUtils {
     /**
      * Converts an input string to an integer. If the conversion fails, an empty {@code OptionalInt}
      * is returned.
-     * 
+     *
      * @param input the input string
      * @return an {@code OptionalInt} holding the result of the conversion
      */

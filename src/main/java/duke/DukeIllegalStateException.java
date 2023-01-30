@@ -1,7 +1,7 @@
 package duke;
 
 public class DukeIllegalStateException extends DukeRuntimeException {
-    
+
     public DukeIllegalStateException() {
         super();
     }
