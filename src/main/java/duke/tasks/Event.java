@@ -1,6 +1,5 @@
 package duke.tasks;
 
-import duke.tasks.Task;
 
 public class Event extends Task {
 
@@ -12,8 +11,9 @@ public class Event extends Task {
 
     /**
      * Constructor
+     *
      * @param detail the description including task name of the task
-     * @param time the time of the task
+     * @param time   the time of the task
      */
     public Event(String detail, String time) {
         super(detail);
@@ -23,16 +23,19 @@ public class Event extends Task {
 
     /**
      * String representation of the task details
+     *
      * @return a string including the task name and duration
      */
     @Override
     public String toString() {
-        return "[E]" + "[" + super.getStatusIcon() + "] " + eventDetail + " (from: " + time.split("from ")[1].split(" to ")[0] + " to:"
-                + time.split("from ", 2)[1].split(" to")[1] +  ")";
+        return "[E]" + "[" + super.getStatusIcon() + "] " + eventDetail + " (from: "
+            + time.split("from ")[1].split(" to ")[0] + " to:"
+            + time.split("from ", 2)[1].split(" to")[1] + ")";
     }
 
     /**
      * Get the type of task
+     *
      * @return a string "event"
      */
     public String getType() {
@@ -41,6 +44,7 @@ public class Event extends Task {
 
     /**
      * Gets the type of task
+     *
      * @return a String representing event detail
      */
     public String getDetail() {
@@ -49,6 +53,7 @@ public class Event extends Task {
 
     /**
      * Gets the time of task
+     *
      * @return a String representing time
      */
     public String getTime() {

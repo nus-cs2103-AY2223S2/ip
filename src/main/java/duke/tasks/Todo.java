@@ -2,7 +2,7 @@ package duke.tasks;
 
 public class Todo extends Task {
 
-    public String todo;
+    protected String todo;
 
     /**
      * Constructor
@@ -17,7 +17,7 @@ public class Todo extends Task {
      * @return string with task details
      */
     public String toString() {
-        return "[T]" + "[" + super.getStatusIcon()+ "] " + this.todo;
+        return "[T]" + "[" + super.getStatusIcon() + "] " + this.todo;
     }
     /**
      * Get the type of task

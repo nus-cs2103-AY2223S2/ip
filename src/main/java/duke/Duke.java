@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exceptions.DirectoryNotFoundException;
 import duke.exceptions.DukeException;
@@ -7,7 +10,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-import java.io.*;
+
 
 
 public class Duke {
@@ -45,14 +48,13 @@ public class Duke {
                 ui.showError("wrong");
             } catch (DirectoryNotFoundException e) {
                 ui.showError(e.toString());
-            } catch(FileNotFoundException e) {
+            } catch (FileNotFoundException e) {
                 ui.showError(e.getMessage());
-            } catch(IOException e) {
+            } catch (IOException e) {
                 ui.showError(e.getMessage());
             } catch (DukeException e) {
                 ui.showError(e.toString());
-            }
-            finally {
+            } finally {
 
             }
         }

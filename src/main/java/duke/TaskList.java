@@ -1,17 +1,18 @@
 package duke;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-import duke.ui.Ui;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.ui.Ui;
+
 
 public class TaskList {
 
@@ -30,30 +31,31 @@ public class TaskList {
 
                 String[] line = cur.split("\\|");
 
-                switch(line[0].trim()) {
-                    case "T":
-                        taskList.add(new Todo(line[2].trim()));
-                        if (line[1].equals("1")) {
-                            taskList.get(taskList.size()-1).markAsDone();
-                        }
-                        break;
-                    case "D":
-                        LocalDate time = LocalDate.parse(line[3].trim());
-                        taskList.add(new Deadline(line[2].trim()+" ", time));
-                        if (line[1].trim().equals("1")) {
-                            taskList.get(taskList.size()-1).markAsDone();
-                        }
-                        break;
-                    case "E":
-                        taskList.add(new Event(line[2].trim() + " ", line[3].trim()));
-                        if (line[1].trim().equals("1")) {
-                            taskList.get(taskList.size()-1).markAsDone();
-                        }
-                        break;
+                switch (line[0].trim()) {
+                case "T":
+                    taskList.add(new Todo(line[2].trim()));
+                    if (line[1].equals("1")) {
+                        taskList.get(taskList.size() - 1).markAsDone();
+                    }
+                    break;
+                case "D":
+                    LocalDate time = LocalDate.parse(line[3].trim());
+                    taskList.add(new Deadline(line[2].trim() + " ", time));
+                    if (line[1].trim().equals("1")) {
+                        taskList.get(taskList.size() - 1).markAsDone();
+                    }
+                    break;
+                case "E":
+                    taskList.add(new Event(line[2].trim() + " ", line[3].trim()));
+                    if (line[1].trim().equals("1")) {
+                        taskList.get(taskList.size() - 1).markAsDone();
+                    }
+                    break;
+                default:
                 }
             }
         } catch (FileNotFoundException e) {
-            Ui.FileExceptionUi();
+            Ui.fileExceptionUi();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
