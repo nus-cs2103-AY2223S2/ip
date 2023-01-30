@@ -48,6 +48,7 @@ public class MassDeleteCommand extends Command {
 
     /**
      * Creates a response message for the MassDeleteCommand execution.
+     *
      * @param tasks The user TaskList that contains all the task to be manipulated
      * @return The response message for the MassDeleteCommand execution
      */

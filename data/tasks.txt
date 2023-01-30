@@ -1,5 +1,3 @@
-[D] | [X] | eat | Jan 15 2021 03:00
-[E] | [X] |  eat | 2023-01-28T15:00 | 2023-01-31T15:00
-[F] | [ ] | eat | PT15M
-[F] | [ ] | have fun | PT48H
-[T] | [X] | eat
+[D] | [ ] | submit report | Jan 30 2023 11:59
+[F] | [X] | do Computer Network homework | PT2H
+[T] | [ ] | buy milk
