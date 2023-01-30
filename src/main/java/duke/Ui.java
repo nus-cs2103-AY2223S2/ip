@@ -1,7 +1,9 @@
 package duke;
 
-import duke.task.TaskList;
 import java.util.Scanner;
+
+import duke.task.TaskList;
+
 
 /**
  * Handles all Ui displaying and user input.
@@ -20,8 +22,7 @@ public class Ui {
      * Displays the starting logo for Duke.
      */
     public void displayIntro() {
-        String logo
-                = " ___________________\n"
+        String logo = " ___________________\n"
                 + " | _______________ |\n"
                 + " | |             | |\n"
                 + " | |     MEL     | |\n"
@@ -149,6 +150,12 @@ public class Ui {
         System.out.println("OK, I've marked this task as not done yet:\n" + taskUnmarked);
     }
 
+    /**
+     * Displays the results that contains search input.
+     *
+     * @param list Task list to search through.
+     * @param searchInput String input to search substring.
+     */
     public void displayResults(TaskList list, String searchInput) {
         System.out.println("Here are the matching tasks in your list:");
         int count = 1;

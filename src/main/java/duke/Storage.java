@@ -1,9 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-import duke.task.TaskList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,6 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 
 /**
  * Handles loading tasks from the file and saving tasks in the file.
@@ -69,6 +71,8 @@ public class Storage {
                         Deadline deadlineTask = new Deadline(description.split(" \\(by: ")[0],
                                 isMarked, byDate);
                         taskList.add(deadlineTask);
+                        break;
+                    default:
                         break;
                     }
                 }

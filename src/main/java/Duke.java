@@ -1,17 +1,21 @@
+import java.time.LocalDate;
+
 import duke.DukeException;
-import duke.Ui;
 import duke.Parser;
 import duke.Storage;
+import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
-import java.time.LocalDate;
 
 /**
  * Handles Duke, a Personal Assistant Chatbot that helps a person to keep track of various things.
  */
 public class Duke {
+    /**
+     * Handles identifying task type.
+     */
     public enum TaskType {
         TODO,
         EVENT,
@@ -59,6 +63,8 @@ public class Duke {
                 ui.displayInvalidByFormat();
                 break;
             }
+        default:
+            break;
         }
         storage.saveToFile();
     }
@@ -99,7 +105,7 @@ public class Duke {
 
     /**
      * Searches task containing search inputs.
-     * 
+     *
      * @param searchInput Substring to find if any tasks contains it.
      */
     private static void find(String searchInput) {
@@ -109,7 +115,7 @@ public class Duke {
 
     /**
      * Entry point to Duke application where Duke is initialized.
-     * 
+     *
      * @param args Unused arguments that user optionally provides when Duke is launched.
      */
     public static void main(String[] args) {
