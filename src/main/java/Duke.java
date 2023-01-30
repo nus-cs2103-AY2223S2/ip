@@ -1,6 +1,7 @@
-import java.io.*;
-
-import tasks.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import tasks.Task;
 
 public class Duke {
     
@@ -76,6 +77,11 @@ public class Duke {
                 }
         }
         System.out.println("\n----------------------------------\n");
+        try {
+            Task.save();
+        } catch (IOException e) { // should not encounter this.
+            System.out.println(e.getMessage());
+        }
     }
 
 }

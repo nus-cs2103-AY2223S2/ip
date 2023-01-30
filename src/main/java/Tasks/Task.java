@@ -1,7 +1,16 @@
 package tasks;
 
+import exceptions.NoTaskDescriptionException;
+import exceptions.UnknownTaskException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import exceptions.*;
 
 public class Task {
     private static ArrayList<Task> arr = new ArrayList<>();
@@ -9,6 +18,12 @@ public class Task {
 
     protected String name;
     protected Boolean isChecked = false;
+
+    enum TaskType {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
 
     protected Task(String name, String type) throws NoTaskDescriptionException {
         if (name.isBlank()) {
@@ -30,18 +45,23 @@ public class Task {
 
     public static void addTask(String command, String userInput) throws UnknownTaskException, NoTaskDescriptionException {
         String[] dates = userInput.split("/");
-        switch(command.toUpperCase()) {
-            case "TODO": 
+        TaskType tt;
+        try {
+            tt = TaskType.valueOf(command.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new UnknownTaskException(command);
+        }
+
+        switch(tt) {
+            case TODO: 
                 arr.add(new Todo(userInput));
                 break;
-            case "DEADLINE":
+            case DEADLINE:
                 arr.add(new Deadline(dates[0], dates[1]));
                 break;
-            case "EVENT":
+            case EVENT:
                 arr.add(new Event(dates[0], dates[1], dates[2]));
                 break;
-            default:
-                throw new UnknownTaskException(command);
         }
         System.out.println("The following task has been added to your list: \n    " + arr.get(curr) 
                             + "\n \nCurrently, your list has " + ++curr + (curr== 1 ? " task" : " tasks."));
@@ -67,7 +87,48 @@ public class Task {
         return this.isChecked ? "[X]" : "[ ]";
     }
 
-    protected String TasktoString() {
+    @Override
+    public String toString() {
         return markToString() + " " + this.name;
     }
+
+    protected String taskToSave() {
+        return this.isChecked.toString() + "|" + this.name;
+    }
+
+    /**
+     * Saves the most updated list into a txt file
+     * 
+     * @throws IOException
+     */
+    public static void save() throws IOException {
+        String home = System.getProperty("user.home");
+        Path path = Paths.get(home, "DataDuke");
+        File file = Paths.get(path.toString(), "Data.txt").toFile();
+
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+                
+            } catch (IOException e) {
+                System.out.println("Unable to write to " + path.toString());
+            }
+        }
+        
+        PrintStream stream;
+        try { 
+            stream = new PrintStream(file.toString());
+        } catch (FileNotFoundException e) {
+                Files.createDirectories(path);
+                stream = new PrintStream(file.toString());
+        } 
+
+
+        for (int i = 0; i < curr; i++) {
+            stream.println(arr.get(i).taskToSave());
+        }
+
+        stream.close();
+    }
+
 }

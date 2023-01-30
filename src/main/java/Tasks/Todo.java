@@ -10,6 +10,11 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T] " + this.TasktoString();
+        return "[T] " + super.toString();
+    }
+
+    @Override
+    protected String taskToSave() {
+        return "T|" + super.taskToSave();
     }
 }

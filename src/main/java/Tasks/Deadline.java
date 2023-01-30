@@ -12,6 +12,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D] " + this.TasktoString() + "( by: " + this.endDate + ")";
+        return "[D] " + super.toString() + "( by: " + this.endDate + ")";
+    }
+
+    @Override
+    protected String taskToSave() {
+        return "D|" + super.taskToSave() + "|" + this.endDate;
     }
 }
