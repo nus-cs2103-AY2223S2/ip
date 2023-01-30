@@ -3,6 +3,7 @@ package duke.parser;
 import duke.command.AddTaskCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
+import duke.command.FindCommand;
 import duke.command.ShowListCommand;
 import duke.command.MarkDoneCommand;
 import duke.command.MarkUndoneCommand;
@@ -43,7 +44,7 @@ public class Parser {
                 case TODO:
                     if (input.split(" ").length == 1) {
                         throw new DukeException("____________________________________________________________\n" +
-                                "  ☹ OOPS!!! The description of a todo cannot be empty.\n" +
+                                "   OOPS!!! The description of a todo cannot be empty.\n" +
                                 "____________________________________________________________");
                     }
                     detail = input.split(" ",2)[1];
@@ -53,9 +54,12 @@ public class Parser {
                     return new DeleteCommand(index - 1);
                 case BYE:
                     return new ByeCommand();
+                case FIND:
+                    detail = input.split(" ", 2)[1].trim();
+                    return new FindCommand(detail);
                 default:
                     throw new DukeException("____________________________________________________________\n" +
-                            "  ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                            "   OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                             "____________________________________________________________");
             }
 

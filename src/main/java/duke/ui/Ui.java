@@ -3,6 +3,7 @@ package duke.ui;
 import duke.TaskList;
 import duke.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -51,13 +52,13 @@ public class Ui {
 
     public static void DirectoryExceptionUi() {
         System.out.println("____________________________________________________________\n" +
-                "  ☹ OOPS!!! Directory not found, please create the directory \"data\" first\n" +
+                "   OOPS!!! Directory not found, please create the directory \"data\" first\n" +
                 "____________________________________________________________");
     }
 
     public static void FileExceptionUi() {
         System.out.println("____________________________________________________________\n" +
-                "  ☹ OOPS!!! File not found, please create the file \"duke.txt\" first\n" +
+                "   OOPS!!! File not found, please create the file \"duke.txt\" first\n" +
                 "____________________________________________________________");
     }
 
@@ -67,7 +68,7 @@ public class Ui {
         }
         else {
             System.out.println("____________________________________________________________\n" +
-                    "  ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                    "   OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
                     "____________________________________________________________");
         }
     }
@@ -95,6 +96,17 @@ public class Ui {
     }
 
 
+    public static void find(ArrayList<Integer> found, TaskList list) {
+        int counter = 1;
+        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("Here are the matching tasks in your list:");
+        for (Integer cur : found) {
+            System.out.println(counter + "." + list.getTask(cur).toString());
+            counter += 1;
+        }
+        System.out.println("------------------------------------------------------------------------------");
+
+    }
 
 
 }
