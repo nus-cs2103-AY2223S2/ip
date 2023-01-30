@@ -7,7 +7,6 @@ import saturday.models.Event;
 import saturday.models.Task;
 import saturday.models.ToDo;
 import saturday.utilities.DateTimeParser;
-import saturday.utilities.Ui;
 /**
  * Enum class for handling different commands.
  */
@@ -17,14 +16,14 @@ public enum Command {
      */
     TODO("todo") {
         @Override
-        public void execute(TaskList taskList, String args) {
+        public String execute(TaskList taskList, String args) {
             int space = args.indexOf(" ");
             if (space != -1) {
                 String description = args.substring(args.indexOf(" ") + 1);
                 ToDo task = new ToDo(description);
                 taskList.add(task);
-                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
-                        + " tasks in the list.");
+                return "Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
+                        + " tasks in the list.";
             } else {
                 throw new SaturdayException("OOPS!!! The description of a todo cannot be empty");
             }
@@ -35,7 +34,7 @@ public enum Command {
      */
     DEADLINE("deadline") {
         @Override
-        public void execute(TaskList taskList, String args) {
+        public String execute(TaskList taskList, String args) {
             int space = args.indexOf(" ");
             int by = args.indexOf("/by");
             if (space != -1 && by != -1 && by > space) {
@@ -43,8 +42,8 @@ public enum Command {
                 String deadline = args.substring(by + 4);
                 Deadline task = new Deadline(description, deadline);
                 taskList.add(task);
-                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
-                        + " tasks in the list.");
+                return "Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
+                        + " tasks in the list.";
             } else {
                 throw new SaturdayException("OOPS!!! The deadline cannot be empty (use /by)");
             }
@@ -55,7 +54,7 @@ public enum Command {
      */
     EVENT("event") {
         @Override
-        public void execute(TaskList taskList, String args) {
+        public String execute(TaskList taskList, String args) {
             int space = args.indexOf(" ");
             int from = args.indexOf("/from");
             int to = args.indexOf("/to");
@@ -65,8 +64,8 @@ public enum Command {
                 String end = args.substring(to + 4);
                 Event task = new Event(description, start, end);
                 taskList.add(task);
-                Ui.output("Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
-                        + " tasks in the list.");
+                return "Got it. I've added this task:\n\t " + task + "\n\tNow you have " + taskList.size()
+                        + " tasks in the list.";
             } else {
                 throw new SaturdayException("OOPS!!! The timeframe cannot be empty (use /from and /to)");
             }
@@ -77,15 +76,15 @@ public enum Command {
      */
     LIST("list") {
         @Override
-        public void execute(TaskList taskList, String args) {
+        public String execute(TaskList taskList, String args) {
             int on = args.indexOf("/on");
             if (args.equals("list")) {
-                Ui.output("Here are the tasks in your list:\n\t" + taskList.toString());
+                return "Here are the tasks in your list:\n\t" + taskList.toString();
             } else if (on != -1) {
                 String date = args.substring(on + 4);
                 TaskList taskListOnDate = taskList.getTaskListOnDate(date);
-                Ui.output("Here are the tasks on: " + DateTimeParser.printDateTime(DateTimeParser.parseDate(date))
-                        + "\n\t" + taskListOnDate.toString());
+                return "Here are the tasks on: " + DateTimeParser.printDateTime(DateTimeParser.parseDate(date))
+                        + "\n\t" + taskListOnDate.toString();
             } else {
                 throw new SaturdayException("OOPS!!! Input a valid date to check your list against");
             }
@@ -96,7 +95,7 @@ public enum Command {
      */
     MARK("mark") {
         @Override
-        public void execute(TaskList taskList, String args) {
+        public String execute(TaskList taskList, String args) {
             String[] parts = args.split("\\s");
             if (parts.length > 1) {
                 String number = parts[1];
@@ -104,14 +103,13 @@ public enum Command {
                     int i = Integer.parseInt(number);
                     try {
                         taskList.mark(i);
-                        Ui.output("Nice! I've marked this task as done:\n\t  " + taskList.get(i));
+                        return "Nice! I've marked this task as done:\n\t  " + taskList.get(i);
                     } catch (IndexOutOfBoundsException e) {
-                        Ui.output("OOPS!!! There's no such task in your list");
+                        return "OOPS!!! There's no such task in your list";
                     }
                 }
-            } else {
-                throw new SaturdayException("OOPS!!! Please input the number of the item you would like to mark");
             }
+            throw new SaturdayException("OOPS!!! Please input the number of the item you would like to mark");
         }
     },
     /**
@@ -119,7 +117,7 @@ public enum Command {
      */
     UNMARK("unmark") {
         @Override
-        public void execute(TaskList taskList, String args) {
+        public String execute(TaskList taskList, String args) {
             String[] parts = args.split("\\s");
             if (parts.length > 1) {
                 String number = parts[1];
@@ -127,14 +125,13 @@ public enum Command {
                     int i = Integer.parseInt(number);
                     try {
                         taskList.unMark(i);
-                        Ui.output("OK, I've marked this task as not done yet:\n\t  " + taskList.get(i));
+                        return "OK, I've marked this task as not done yet:\n\t  " + taskList.get(i);
                     } catch (IndexOutOfBoundsException e) {
-                        Ui.output("OOPS!!! There's no such task in your list");
+                        return "OOPS!!! There's no such task in your list";
                     }
                 }
-            } else {
-                throw new SaturdayException("OOPS!!! Please input the number of the item you would like to mark");
             }
+            throw new SaturdayException("OOPS!!! Please input the number of the item you would like to mark");
         }
     },
     /**
@@ -142,7 +139,7 @@ public enum Command {
      */
     DELETE("delete") {
         @Override
-        public void execute(TaskList taskList, String args) {
+        public String execute(TaskList taskList, String args) {
             String[] parts = args.split("\\s");
             if (parts.length > 1) {
                 String number = parts[1];
@@ -150,25 +147,24 @@ public enum Command {
                     int i = Integer.parseInt(number);
                     try {
                         Task removedTask = taskList.remove(i);
-                        Ui.output("Noted. I've removed this task:\n\t  " + removedTask + "\n\tNow you have "
-                                + taskList.size() + " tasks in the list.");
+                        return "Noted. I've removed this task:\n\t  " + removedTask + "\n\tNow you have "
+                                + taskList.size() + " tasks in the list.";
                     } catch (IndexOutOfBoundsException e) {
-                        Ui.output("OOPS!!! There's no such task in your list");
+                        return "OOPS!!! There's no such task in your list";
                     }
                 }
-            } else {
-                throw new SaturdayException("OOPS!!! Please input the number of the item you would like to mark");
             }
+            throw new SaturdayException("OOPS!!! Please input the number of the item you would like to mark");
         }
     },
     FIND("find") {
         @Override
-        public void execute(TaskList taskList, String args) {
+        public String execute(TaskList taskList, String args) {
             int space = args.indexOf(" ");
             if (space != 1) {
                 String query = args.substring(args.indexOf(" ") + 1);
                 TaskList queriedTaskList = taskList.find(query);
-                Ui.output("Here are the tasks in your list:\n\t" + queriedTaskList.toString());
+                return "Here are the tasks in your list:\n\t" + queriedTaskList.toString();
             } else {
                 throw new SaturdayException("OOPS!!! What is it you're trying to find?");
             }
@@ -179,7 +175,9 @@ public enum Command {
      */
     BYE("bye") {
         @Override
-        public void execute(TaskList taskList, String args) {}
+        public String execute(TaskList taskList, String args) {
+            return "BYE";
+        }
     };
 
     /**
@@ -204,7 +202,7 @@ public enum Command {
      * @param taskList The TaskList to execute the command on
      * @param args The instructions of the command
      */
-    public abstract void execute(TaskList taskList, String args);
+    public abstract String execute(TaskList taskList, String args);
 
     /**
      * Method to identify the command to be used on the program.

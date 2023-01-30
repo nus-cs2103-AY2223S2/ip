@@ -74,9 +74,25 @@ public class Saturday {
      *
      * @param args command line arguments
      */
-    public static void main(String[] args) {
-        String filePath = Storage.getFilePath();
-        new Saturday(filePath).run();
-    }
+//    public static void main(String[] args) {
+//        String filePath = Storage.getFilePath();
+//        new Saturday(filePath).run();
+//        SaturdayFX.launch(args);
+//    }
 
+    public String getResponse(String input) {
+        String output = "What";
+        try {
+            Command command = Command.getCommand(input);
+            if (command.equals(Command.BYE)) {
+                isActive = false;
+                return "Bye. Hope to see you again soon!";
+            }
+            output = command.execute(taskList, input);
+            storage.saveTaskList(taskList);
+        } catch (SaturdayException e) {
+            return e.getMessage();
+        }
+        return output;
+    }
 }
