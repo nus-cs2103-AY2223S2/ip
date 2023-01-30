@@ -24,6 +24,10 @@ public class Task {
         return "";
     }
 
+    public boolean getStatus() {
+        return isDone;
+    }
+
     @Override
     public String toString() {
         String toPrintOut = "";
