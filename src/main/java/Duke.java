@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.util.ArrayList;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -147,6 +147,8 @@ public class Duke {
                 System.out.println("Can you please double check your task number?");
             } catch (NumberFormatException e) {
                 System.out.println("Can you please pass in a number?");
+            } catch (DateTimeParseException e) {
+                System.out.println("Can you please ensure your dates are valid? (hint: yyyy-mm-dd)");
             }
 
             printHorizontalLine();
