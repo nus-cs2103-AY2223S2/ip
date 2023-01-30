@@ -1,11 +1,13 @@
 import java.util.Scanner;
-
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
 /** Duke chat bot.
  * @author Hee Jia Yuan
  */
 public class Duke {
     /**
-     * Runs the main chat program.
+     * Runs the main Duke chat-bot program.
      * @param args
      */
     public static void main(String[] args) {
@@ -13,9 +15,16 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         TaskStorage taskStorage = new TaskStorage();
 
+        //If Hard Drive did not crete file, an existing file exists.
+        //Proceed to load data from hard drive.
+        if (!DriveStorageOOP.createFile()) {
+                DriveStorageOOP.loadTasks(taskStorage);
+        }
+
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
             try {
+                //Duke bot executes actions based on one word commands from User Input.
                 oneWordCommand(userInput, taskStorage);
             } catch (Exception e) {
                 respond("I'm sorry, but to use this command, you must have a valid body message.");
@@ -23,82 +32,94 @@ public class Duke {
         }
     }
 
-
+    /**
+     *
+     * @param userInput User Input String.
+     * @param taskStorage A storage that keeps track of Tasks.
+     * @throws Exception Throws exception when user gives a wrong input command.
+     */
     public static void oneWordCommand(String userInput, TaskStorage taskStorage) throws Exception {
-        String firstWord = userInput.split(" ", 2)[0];
 
         if (userInput.equals("bye")) {
             respond("Goodbye! Have a nice day ahead.\n");
             return;
         }
 
-        if (userInput.equals("list")) {
+        else if (userInput.equals("list")) {
             taskStorage.listTasks();
             return;
         }
 
-        if (firstWord.equals("mark")) {
+        String firstWord = userInput.split(" ", 2)[0];
 
+        if (firstWord.equals("mark")) {
+            //Second word should be an integer dictating which Task to mark.
             String secondWord = userInput.split(" ", 2)[1];
             int taskNumber = Integer.parseInt(secondWord);
-            taskStorage.updateTask(taskNumber);
-            Task target = taskStorage.getTask(taskNumber);
-            respond("I have marked this task as done! \n" + target.provideDetails());
+            Task task = taskStorage.getTask(taskNumber);
+            DriveStorageOOP.changeTaskStatus(task.getStorageLine());
+            taskStorage.mark(taskNumber);
+            respond("I have marked this task as done! \n" + task.provideDetails());
             return;
-
         }
 
         if (firstWord.equals("unmark")) {
-
+            //Second word should be an integer dictating which Task to unmark.
             String secondWord = userInput.split(" ", 2)[1];
             int taskNumber = Integer.parseInt(secondWord);
-            taskStorage.updateTask(taskNumber);
-            Task target = taskStorage.getTask(taskNumber);
-            respond("I have marked this task as undone! \n" + target.provideDetails());
+            Task task = taskStorage.getTask(taskNumber);
+            DriveStorageOOP.changeTaskStatus(task.getStorageLine());
+            taskStorage.unmark(taskNumber);
+            respond("I have marked this task as undone! \n" + task.provideDetails());
             return;
-
         }
 
         if (firstWord.equals("todo")) {
-            String bodyMessage = userInput.split(" ", 2)[1];
-            ToDo newTask = new ToDo(bodyMessage);
-            taskStorage.storeTasks(newTask);
-            respond("I have added this new task:\n" + newTask.provideDetails()
+            //Rest of message describes the Task.
+            String body = userInput.split(" ", 2)[1];
+            ToDo task = new ToDo("todo", body, false);
+            taskStorage.addTask(task);
+            DriveStorageOOP.addTask(task.getStorageLine());
+
+            respond("I have added this new task:\n" + task.provideDetails()
                     + "\nYou now currently have "
                     + taskStorage.getStorageCount() + " tasks.");
             return;
-
-
         }
+
         if (firstWord.equals("deadline")) {
-            String bodyMessage = userInput.split(" ", 2)[1];
-            Deadline newTask = new Deadline(bodyMessage);
-            taskStorage.storeTasks(newTask);
+            //Rest of message describes the Task.
+            String body = userInput.split(" ", 2)[1];
+            Deadline newTask = new Deadline("deadline", body, false);
+            taskStorage.addTask(newTask);
+            DriveStorageOOP.addTask(newTask.getStorageLine());
             respond("I have added this new task:\n" + newTask.provideDetails()
                     + "\nYou now currently have "
                     + taskStorage.getStorageCount() + " tasks.");
             return;
-
-
         }
         if (firstWord.equals("event")) {
-            String bodyMessage = userInput.split(" ", 2)[1];
-            Event newTask = new Event(bodyMessage);
-            taskStorage.storeTasks(newTask);
+            //Rest of message describes the Task.
+            String body = userInput.split(" ", 2)[1];
+            Event newTask = new Event("event", body, false);
+            taskStorage.addTask(newTask);
+            DriveStorageOOP.addTask(newTask.getStorageLine());
+
             respond("I have added this new task:\n" + newTask.provideDetails()
                     + "\nYou now currently have "
                     + taskStorage.getStorageCount() + " tasks.");
 
+
         } if (firstWord.equals("delete")) {
-            String bodyMessage = userInput.split(" ", 2)[1];
-            int taskNumber = Integer.parseInt(bodyMessage);
-            Task toDelete = taskStorage.getTask(taskNumber);
+            //second word should be an integer
+            String secondWord = userInput.split(" ", 2)[1];
+            int taskNumber = Integer.parseInt(secondWord);
+            Task task = taskStorage.getTask(taskNumber);
             taskStorage.deleteTask(taskNumber);
+            DriveStorageOOP.deleteTask(task.getStorageLine());
 
-
-            respond("We have removed this task: " + toDelete.provideDetails() + "\nYou now have "
+            respond("We have removed this task: " + task.provideDetails() + "\nYou now have "
                                 + taskStorage.getStorageCount() + " tasks remaining");
-
 
 
         } else {
@@ -108,7 +129,6 @@ public class Duke {
 
 
     }
-
 
 
     /**

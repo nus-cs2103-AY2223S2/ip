@@ -1,36 +1,54 @@
 
 /**
- * Encapsulates a Task.
+ * Encapsulates a description.
  */
 class Task {
     /**
-     * Status of the Task.
+     * Status of the task.
      */
-    boolean completed = false;
+    boolean completed ;
 
     /**
-     * Details of the Task.
+     * Details of the task.
      */
-    String task;
+    String description;
 
-    public Task(String task) {
-        this.task = task;
+    /**
+     * Data of the task stored in the hard drive.
+     */
+    String storedData;
+    
+
+    public Task(String keyword, String description, Boolean completed) {
+        this.description = description;
+        this.storedData = keyword + " " + description;
+        this.completed = completed;
     }
 
     /**
-     * Provides Details of the Task.
-     * @return String detail message of Task.
+     * Provides Details of the description.
+     * @return String detail message of description.
      */
     public String provideDetails() {
-        return completed ? "[x] " + task
-                : "[ ] " + task;
+        return completed ? "[x] " + description
+                : "[ ] " + description;
     }
 
     /**
-     * Flips the status of the Task.
+     * Flips the completed of the description.
      */
-    public void updateTask() {
-        this.completed = !this.completed;
+    public void unmark() {
+        this.completed = false;
+    }
+
+    public void mark() {
+        this.completed = true;
+    }
+
+
+    public String getStorageLine() {
+        return this.completed ? "1 " + storedData
+                              : "0 " + storedData;
     }
 
 }

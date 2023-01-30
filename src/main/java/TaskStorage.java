@@ -32,7 +32,7 @@ class TaskStorage {
      * Stores a new task in storage.
      * @param task The task to be stored.
      */
-    public void storeTasks(Task task) {
+    public void addTask(Task task) {
         this.storage.add(task);
     }
 
@@ -40,9 +40,14 @@ class TaskStorage {
      * Updates the status of a Task.
      * @param number The number representing the task to be updated.
      */
-    public void updateTask(int number) {
-        this.storage.get(number - 1).updateTask();
+    public void mark(int number) {
+        this.storage.get(number - 1).mark();
     }
+
+    public void unmark(int number) {
+        this.storage.get(number - 1).unmark();
+    }
+
 
     public void deleteTask(int number) {
         this.storage.remove(number - 1);

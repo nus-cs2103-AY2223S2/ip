@@ -1,13 +1,13 @@
 class ToDo extends Task {
 
-    public ToDo(String message) {
-        super(message);
+    public ToDo(String keyword, String message, Boolean completed) {
+        super(keyword, message, completed);
     }
 
     @Override
     public String provideDetails() {
-        return this.completed ? "[T]" + "[x] " + this.task
-                : "[T]" + "[ ] " + this.task;
+        return this.completed ? "[T]" + "[x] " + this.description
+                : "[T]" + "[ ] " + this.description;
     }
 
 
