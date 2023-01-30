@@ -1,6 +1,8 @@
 package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class Parser {
 
@@ -52,13 +54,19 @@ public class Parser {
             } else if (isTodoTask(input)) {
                 todoInputChecker(input);
                 inputTodo(input.replace("todo ", ""));
-
+            } else if (isFindTask(input)) {
+                findTaskInputChecker(input);
+                findTasks(input);
             } else {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException e) {
             ui.printMessage(e.getMessage());
         }
+    }
+
+    public boolean isFindTask(String s) {
+        return s.startsWith("find");
     }
 
     public boolean isDeadlineTask(String s) {
@@ -136,6 +144,36 @@ public class Parser {
             if (inputArray[1].trim().length() == 0) {
                 throw new DukeException("OOPS!!! You have to choose a task to delete.");
             }
+        }
+    }
+
+    public void findTaskInputChecker(String input) throws DukeException {
+        String[] inputArray = input.split(" ", 2);
+        if (inputArray.length != 2) {
+            throw new DukeException("OOPS!!! Invalid search term. Try adding a task description.");
+        } else {
+            if (inputArray[1].trim().length() == 0) {
+                throw new DukeException("OOPS!!! Invalid search term. Try adding a task description.");
+            }
+        }
+    }
+
+    public void findTasks(String input) throws DukeException {
+        ArrayList<Integer> taskNumbers = new ArrayList<>();
+        try {
+            for (int i = 1; i <= this.taskList.numberOfTasks(); i++) {
+                if (this.taskList.getTask(i).description.toLowerCase()
+                        .contains(input.replace("find ", "").toLowerCase())) {
+                    taskNumbers.add(i);
+                }
+            }
+            if (taskNumbers.size() == 0) {
+                throw new DukeException("OOPS!!! No such task matches your description.");
+            }
+            ui.findTasksMessage();
+            ui.printFoundTasks(this.taskList, taskNumbers);
+        } catch (Exception e) {
+            ui.printMessage(e.getMessage());
         }
     }
 

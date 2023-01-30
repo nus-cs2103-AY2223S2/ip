@@ -60,6 +60,19 @@ public class Ui {
         printLongLine();
     }
 
+    public void findTasksMessage() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public void printFoundTasks(TaskList taskList, ArrayList<Integer> taskNumbers) {
+        for (int j = 0; j < taskNumbers.size(); j++) {
+            int tempTaskNumber = taskNumbers.get(j);
+            Task tempTask = taskList.getTask(tempTaskNumber);
+            System.out.println(String.format("\t%d. %s", tempTaskNumber, tempTask));
+        }
+
+    }
+
     public void markTaskAsDoneMessage(Task t) {
         printMessage("Nice! I've marked this task as done:\n\t" + t);
     }

@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -34,7 +35,8 @@ public class TaskList {
     void markTaskAsIncomplete(int taskNumber) throws DukeException {
         if (taskNumber < 1 || taskNumber > numberOfTasks()) {
             throw new DukeException("OOPS!!! Invalid task number. Please try again.");
-        }tasks.get(taskNumber - 1).markAsNotDone();
+        }
+        tasks.get(taskNumber - 1).markAsNotDone();
     }
 
     void add(Task t) {
@@ -47,8 +49,6 @@ public class TaskList {
         }
         tasks.remove(taskNumber - 1);
     }
-
-
 
 
 
