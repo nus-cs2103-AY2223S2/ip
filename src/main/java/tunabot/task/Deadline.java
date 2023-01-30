@@ -38,7 +38,7 @@ public class Deadline extends Task {
     }
     @Override
     public String saveFormat() {
-        return "T;" + this.name + ";" + this.isDone + ";" + this.getDeadline();
+        return "T;" + this.name + ";" + this.getDone() + ";" + this.getDeadline();
     }
     @Override
     public String toString() {

@@ -5,11 +5,11 @@ package tunabot.task;
  */
 public class Task {
     final String name;
-    boolean isDone;
+    private boolean isDone;
 
     /**
      * Initializes new Task with given name
-     * @param name
+     * @param name Name of Task
      */
     public Task(String name) {
         this.name = name;
@@ -18,10 +18,10 @@ public class Task {
 
     /**
      * Initializes new Task with given name and status
-     * @param name
-     * @param isDone
+     * @param name Name of Task
+     * @param isDone Status of Task
      */
-    public  Task(String name, String isDone) {
+    public Task(String name, String isDone) {
         this.name = name;
         this.isDone = isDone.equals("true");
     }
@@ -47,9 +47,8 @@ public class Task {
         this.isDone = false;
     }
     public String saveFormat() {
-        return "T;" + this.name + ";" +this.isDone;
+        return "T;" + this.name + ";" + this.isDone;
     }
-    
     @Override
     public String toString() {
         String box;
@@ -58,6 +57,6 @@ public class Task {
         } else {
             box = "[ ] ";
         }
-        return"[T]" + box + this.getName();
+        return "[T]" + box + this.getName();
     }
 }

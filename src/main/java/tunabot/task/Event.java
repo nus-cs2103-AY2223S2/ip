@@ -50,7 +50,7 @@ public class Event extends Task {
 
     @Override
     public String saveFormat() {
-        return "E;" + this.name + ";" + this.isDone + ";" + this.getStart() + ";" + this.getEnd();
+        return "E;" + this.name + ";" + this.getDone() + ";" + this.getStart() + ";" + this.getEnd();
     }
 
     @Override

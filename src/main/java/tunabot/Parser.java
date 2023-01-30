@@ -17,18 +17,13 @@ public class Parser {
      * @return true If input is "bye" else false
      * @throws InputException If the command does not fit required format
      */
-    public static boolean parse(String input, TaskList tasks) throws InputException {
+    public static String parse(String input, TaskList tasks) throws InputException {
         String[] command = input.split(" ", 2);
         switch (command[0]) {
         case "list":
-            System.out.println("BLUB! There are " + tasks.size() + " task(s)!");
-            for (int i = 1; i <= tasks.size(); i++) {
-                System.out.println("    " + i + ". " + tasks.get(i - 1));
-            }
-            break;
+            return Ui.list(tasks);
         case "bye":
-            System.out.println("    Bye! Blub blub!");
-            return true;
+            return "    Bye! Blub blub!";
         case "mark":
             if (command.length < 2) {
                 throw new InputException("BLUB! No task chosen!");
@@ -36,14 +31,12 @@ public class Parser {
             try {
                 int index = Integer.parseInt(command[1]);
                 tasks.get(index - 1).markDone();
-                System.out.println("    Blub! i have marked this as done!");
-                System.out.println(tasks.get(index - 1));
+                return Ui.mark(tasks.get(index - 1));
             } catch (IllegalArgumentException e) {
                 throw new InputException("BLUB! Index chosen isn't a number!");
             } catch (IndexOutOfBoundsException e) {
-                throw new InputException("BLUB! duke.task.Task chosen isn't on the list!");
+                throw new InputException("BLUB! Task chosen isn't on the list!");
             }
-            break;
         case "unmark":
             if (command.length < 2) {
                 throw new InputException("BLUB! No task chosen!");
@@ -51,71 +44,62 @@ public class Parser {
             try {
                 int index = Integer.parseInt(command[1]);
                 tasks.get(index - 1).unmarkDone();
-                System.out.println("    Blub! i have marked this as not done!");
-                System.out.println(tasks.get(index - 1));
+                return Ui.unmark(tasks.get(index - 1));
             } catch (IllegalArgumentException e) {
                 throw new InputException("BLUB! Index chosen isn't a number!");
             } catch (IndexOutOfBoundsException e) {
-                throw new InputException("BLUB! duke.task.Task chosen isn't on the list!");
+                throw new InputException("BLUB! Task chosen isn't on the list!");
             }
-            break;
         case "delete":
             if (command.length < 2) {
                 throw new InputException("BLUB! No task chosen!");
             }
             try {
                 int index = Integer.parseInt(command[1]);
-                System.out.println("    Blub! i have deleted this task!");
-                System.out.println(tasks.get(index - 1));
+
+                String delete = Ui.delete(tasks.get((index - 1)), tasks.size() - 1);
                 tasks.remove(index - 1);
-                System.out.println("    Blub! You have " + tasks.size() + " tasks now!");
+                return delete;
             } catch (IllegalArgumentException e) {
                 throw new InputException("BLUB! Index chosen isn't a number!");
             } catch (IndexOutOfBoundsException e) {
-                throw new InputException("BLUB! duke.task.Task chosen isn't on the list!");
+                throw new InputException("BLUB! Task chosen isn't on the list!");
             }
-            break;
         case "todo":
             if (command.length < 2) {
-                throw new InputException("BLUB! duke.task.Task needs a name!");
+                throw new InputException("BLUB! Task needs a name!");
             } else {
                 Task newTask = new Task(command[1]);
                 tasks.add(newTask);
-                System.out.println("    Blub! added: \n" + newTask);
-                System.out.println("    Blub! You have " + tasks.size() + " tasks now!");
+                return Ui.add(newTask, tasks.size());
             }
-            break;
         case "event":
             if (command.length < 2) {
-                throw new InputException("BLUB! duke.task.Event needs a name, "
+                throw new InputException("BLUB! Event needs a name, "
                     + "a start time and end time!");
             } else {
                 String[] details = command[1].split("/from |/to ", 3);
                 if (details.length < 3) {
-                    throw new InputException("BLUB! duke.task.Event is missing info!"
+                    throw new InputException("BLUB! Event is missing info!"
                         + " Please check input. BLUB!");
                 }
                 Event newEvent = new Event(details[0], details[1], details[2]);
                 tasks.add(newEvent);
-                System.out.println("    Blub! added: \n" + newEvent);
-                System.out.println("    Blub! You have " + tasks.size() + " tasks now!");
+                return Ui.add(newEvent, tasks.size());
             }
-            break;
         case "deadline":
             if (command.length < 2) {
-                throw new InputException("BLUB! duke.task.Deadline needs a name and due date!");
+                throw new InputException("BLUB! Deadline needs a name and due date!");
             } else {
                 String[] details = command[1].split("/by ", 2);
                 if (details.length < 2) {
-                    throw new InputException("BLUB! duke.task.Deadline is missing info!"
+                    throw new InputException("BLUB! Deadline is missing info!"
                         + " PLease check input. BLUB!");
                 }
                 Deadline newDeadline = new Deadline(details[0], details[1]);
                 tasks.add(newDeadline);
-                System.out.println("    Blub! added: \n" + newDeadline);
-                System.out.println("    Blub! You have " + tasks.size() + " tasks now!");
+                return Ui.add(newDeadline, tasks.size());
             }
-            break;
         case "find":
             if (command.length < 2) {
                 throw new InputException("BLUB! find needs a search target!");
@@ -123,18 +107,15 @@ public class Parser {
                 String target = command[1];
                 TaskList targetList = tasks.find(target);
                 if (targetList.size() == 0) {
-                    System.out.println("BLUB! No matching tasks!");
+                    return "BLUB! No matching tasks!";
                 } else {
-                    System.out.println("BLUB! Here are your matching task(s)!");
-                    for (int i = 1; i <= targetList.size(); i++) {
-                        System.out.println("    " + i + ". " + targetList.get(i - 1));
-                    }
+                    String found = "BLUB! Here are your matching task(s)!\n";
+                    found += Ui.list(targetList);
+                    return found;
                 }
             }
-            break;
         default:
-            System.out.println("BLUB OH! INVALID COMMAND!");
+            return "BLUB OH! INVALID COMMAND!";
         }
-        return false;
     }
 }
