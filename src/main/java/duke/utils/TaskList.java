@@ -1,4 +1,12 @@
-package duke;
+package duke.utils;
+
+import duke.taskers.Deadline;
+import duke.taskers.Event;
+import duke.taskers.Task;
+import duke.taskers.Todo;
+import duke.Duke;
+import duke.DukeException;
+import duke.Command;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -91,7 +99,7 @@ public class TaskList {
 
 
     /**
-     * Finds the matching duke.Task with respect to the keyword.
+     * Finds the matching duke.taskers.Task with respect to the keyword.
      *
      * @param keyword The keyword string.
      * @return An array of Tasks that contain that matching keyword.

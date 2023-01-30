@@ -1,4 +1,4 @@
-package duke;
+package duke.taskers;
 
 import org.junit.jupiter.api.Test;
 

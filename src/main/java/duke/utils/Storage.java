@@ -1,4 +1,13 @@
-package duke;
+package duke.utils;
+
+import duke.taskers.Deadline;
+import duke.taskers.Event;
+import duke.taskers.Task;
+import duke.taskers.Todo;
+import duke.DukeException;
+import duke.Command;
+import duke.Duke;
+
 
 import java.io.File;
 import java.io.FileWriter;

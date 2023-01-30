@@ -1,4 +1,7 @@
-package duke;
+package duke.utils;
+import duke.Command;
+import duke.DukeException;
+
 
 public class Parser {
 
