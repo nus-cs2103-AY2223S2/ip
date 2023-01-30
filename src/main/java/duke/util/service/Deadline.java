@@ -1,4 +1,8 @@
-class Deadline extends Task {
+package duke.util.service;
+
+import duke.util.Task;
+
+public class Deadline extends Task {
     String deadline;
     public Deadline(String deadline, String action) {
         super("D", action);

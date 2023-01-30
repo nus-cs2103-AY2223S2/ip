@@ -1,4 +1,6 @@
-class Task {
+package duke.util;
+
+public class Task {
     String nature;
     boolean isDone;
     String action;

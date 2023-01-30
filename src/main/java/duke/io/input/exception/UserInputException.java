@@ -1,7 +1,9 @@
+package duke.io.input.exception;
+
 import java.util.Arrays;
 import java.util.List;
-class UserInputException extends Exception {
-    static void checkUserInput(String input, int currentSize) throws DukeException {
+public class UserInputException extends Exception {
+    public static void checkUserInput(String input, int currentSize) throws DukeException {
         String[] inputSplitArray = input.split(" ");
         List<String> inputSplitList = Arrays.asList(inputSplitArray);
         String command = inputSplitList.get(0);

@@ -1,12 +1,14 @@
-abstract class Event {
+package duke.workflow;
+
+public abstract class Event {
     boolean isFinalEvent;
 
     public Event (boolean isFinalEvent) {
         this.isFinalEvent = isFinalEvent;
     }
-    abstract Event toNext();
+    public abstract Event toNext();
 
-    boolean getStatus() {
+    public boolean getStatus() {
         return this.isFinalEvent;
     }
 }

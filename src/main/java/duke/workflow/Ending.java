@@ -1,4 +1,6 @@
-class Ending extends Event {
+package duke.workflow;
+
+public class Ending extends Event {
     public Ending() {
         super(true);
     }

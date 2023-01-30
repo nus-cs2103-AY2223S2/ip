@@ -1,4 +1,6 @@
-class Greeting extends Event {
+package duke.workflow;
+
+public class Greeting extends Event {
     int status;
 
     public Greeting() {

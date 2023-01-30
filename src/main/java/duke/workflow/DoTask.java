@@ -1,7 +1,16 @@
+package duke.workflow;
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
-class DoTask extends Event {
+import duke.util.TaskList;
+import duke.io.input.exception.UserInputException;
+import duke.io.input.exception.DukeException;
+import duke.util.service.ToDo;
+import duke.util.service.Deadline;
+import duke.util.service.ScheduledEvent;
+
+public class DoTask extends Event {
     boolean firstGreet;
     String lastCommand;
     TaskList taskList;

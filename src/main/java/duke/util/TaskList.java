@@ -1,39 +1,42 @@
+package duke.util;
+
 import java.util.ArrayList;
 import java.util.List;
 
-class TaskList {
+
+public class TaskList {
     List<Task> listTask;
 
     public TaskList() {
         this.listTask = new ArrayList<Task>();
     }
 
-    TaskList markDone(int index) {
+    public TaskList markDone(int index) {
         Task currentTask = this.listTask.get(index);
         this.listTask.set(index, currentTask.markDone());
         return this;
     }
 
-    TaskList unMark(int index) {
+    public TaskList unMark(int index) {
         Task currentTask = this.listTask.get(index);
         this.listTask.set(index, currentTask.unMark());
         return this;
     }
 
-    TaskList addTask(Task task) {
+    public TaskList addTask(Task task) {
         this.listTask.add(task);
         return this;
     }
 
-    String getTask(int index) {
+    public String getTask(int index) {
         return this.listTask.get(index).toString();
     }
 
-    int getSize() {
+    public int getSize() {
         return this.listTask.size();
     }
 
-    TaskList removeTask(int index) {
+    public TaskList removeTask(int index) {
         this.listTask.remove(index);
         return this;
     }

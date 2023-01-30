@@ -1,5 +1,9 @@
+package duke.io.input.ui;
+
 import java.util.Scanner;
-class UserInteraction {
+import duke.workflow.Greeting;
+import duke.workflow.Event;
+public class UserInteraction {
     public void chat() {
         Scanner sc = new Scanner(System.in);
         Greeting greeting = new Greeting();
