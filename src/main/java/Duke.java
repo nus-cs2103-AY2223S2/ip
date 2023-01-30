@@ -1,5 +1,3 @@
-import java.util.Scanner;
-import java.util.ArrayList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -26,10 +24,9 @@ public class Duke {
         }
     }
 
-    public void run() {
+    public void runDuke() {
         ui.printGreetings();
         boolean isExit = false;
-        boolean isValid;
         while (!isExit) {
             String fullCommand = ui.readCommand();
             //parser takes the command here and does what it needs to?
@@ -46,7 +43,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+        new Duke("tasks.txt").runDuke();
 //        Scanner sc = new Scanner(System.in);
 //        ArrayList<Task> tasks = new ArrayList<>();
 //        Storage s = new Storage("test.txt");
