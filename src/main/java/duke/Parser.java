@@ -13,9 +13,8 @@ public class Parser {
      * @param storage   Storage.
      * @param textUi    TextUi.
      */
-    public void parse(String userInput, TaskList taskList, Storage storage, TextUi textUi)
+    public String parse(String userInput, TaskList taskList, Storage storage, TextUi textUi)
             throws DukeException {
-
         String command;
         String body;
 
@@ -29,29 +28,21 @@ public class Parser {
 
         switch (command) {
         case "list":
-            Commands.executeListCommand(textUi, taskList);
-            break;
+            return Commands.executeListCommand(taskList);
         case "mark":
-            Commands.executeMarkCommand(body, textUi, taskList, storage);
-            break;
+            return Commands.executeMarkCommand(body, taskList, storage);
         case "unmark":
-            Commands.executeUnmarkCommand(body, textUi, taskList, storage);
-            break;
+            return Commands.executeUnmarkCommand(body, taskList, storage);
         case "delete":
-            Commands.executeDeleteCommand(body, textUi, taskList, storage);
-            break;
+            return Commands.executeDeleteCommand(body, textUi, taskList, storage);
         case "todo":
-            Commands.executeToDoCommand(body, textUi, taskList, storage);
-            break;
+            return Commands.executeToDoCommand(body, textUi, taskList, storage);
         case "deadline":
-            Commands.executeDeadlineCommand(body, textUi, taskList, storage);
-            break;
+            return Commands.executeDeadlineCommand(body, textUi, taskList, storage);
         case "event":
-            Commands.executeEventCommand(body, textUi, taskList, storage);
-            break;
+            return Commands.executeEventCommand(body, textUi, taskList, storage);
         case "find":
-            Commands.executeFindCommand(body, textUi, taskList);
-            break;
+            return Commands.executeFindCommand(body, textUi, taskList);
         default:
             throw new DukeException("I'm sorry, I don't know what that means!");
         }

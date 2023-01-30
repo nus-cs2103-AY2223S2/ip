@@ -32,7 +32,7 @@ public class CommandsTest {
         Integer indexOfNewTask;
         try {
             indexOfNewTask = taskList.getArraySize();
-            Commands.executeMarkCommand(indexOfNewTask.toString(), TextUi, taskList, storage);
+            Commands.executeMarkCommand(indexOfNewTask.toString(), taskList, storage);
         } catch (DukeException e) {
             throw new RuntimeException(e);
         }

@@ -47,7 +47,7 @@ public class Event extends Task {
 
     @Override
     public String toStorableString() {
-        return String.format("E,%s,%s,%s",
+        return String.format("E,%s,%s,%s,%s",
                 this.isDone() ? "1" : "0",
                 this.getDescription(),
                 this.from.toString(),

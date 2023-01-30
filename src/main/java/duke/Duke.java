@@ -23,35 +23,25 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image grandDuke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    private static Parser parser;
+    private static Storage storage;
+    private static TaskList taskList;
+    private static TextUi textUi;
 
     public static void main(String[] args) {
 
-        TextUi textUi = new TextUi();
-        Parser parser = new Parser();
-        Storage storage = new Storage();
-        TaskList taskList = storage.readSavedFile();
-
-        textUi.getWelcomeMessage();
-
-        String input;
-        while (!(input = textUi.in.nextLine()).equals("bye")) {
-            try {
-                parser.parse(input, taskList, storage, textUi);
-            } catch (DukeException dukeException) {
-                textUi.getCustomMessage(dukeException.getMessage());
-            }
-        }
-
-        textUi.getGoodbyeMessage();
     }
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
-
         //The container for the content of the chat to scroll.
+        textUi = new TextUi();
+        parser = new Parser();
+        storage = new Storage();
+        taskList = storage.readSavedFile();
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -108,20 +98,10 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
+        //Send a welcome message
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(new Label(textUi.getWelcomeMessage()), new ImageView(grandDuke))
+        );
     }
 
     /**
@@ -134,17 +114,24 @@ public class Duke extends Application {
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getDukeDialog(dukeText, new ImageView(grandDuke))
         );
         userInput.clear();
     }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Grand Duke heard: " + input;
+    private static String getResponse(String input) {
+        if (!input.equals("bye")) {
+            try {
+                return parser.parse(input, taskList, storage, textUi);
+            } catch (DukeException dukeException) {
+                return dukeException.getMessage();
+            }
+        } else {
+            return textUi.getGoodbyeMessage();
+        }
     }
-
 }
-

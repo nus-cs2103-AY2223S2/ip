@@ -22,13 +22,12 @@ class TextUi {
         this.out = out;
     }
 
-    public void getWelcomeMessage() {
-        out.println("Hello! I'm duke.Duke.");
-        out.println("What can I do for you?");
+    public String getWelcomeMessage() {
+        return "Hello! I'm Grand Duke.\nWhat can I do for you?";
     }
 
-    public void getGoodbyeMessage() {
-        out.println("Bye. Hope to see you again soon!");
+    public String getGoodbyeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     public void printLine() {
@@ -41,22 +40,18 @@ class TextUi {
         out.println("____________________");
     }
 
-    public void getTaskAddedMessage(Task task, int sizeOfList) {
-        out.println("____________________");
-        out.println("Got it. I've added this task:");
-        out.println(task);
-        out.println("Now you have " + sizeOfList
-                + " task" + (sizeOfList > 1 ? "s" : "") + " in the list.");
-        out.println("____________________");
+    public String getTaskAddedMessage(Task task, int sizeOfList) {
+        return String.format("Got it. I've added this task:\n%s\nNow you have %s task%s in the list.",
+                task,
+                sizeOfList,
+                sizeOfList > 1 ? "s" : "");
     }
 
-    public void getTaskRemovedMessage(Task task, int sizeOfList) {
-        out.println("____________________");
-        out.println("Noted. I've removed this task:");
-        out.println(task);
-        out.println("Now you have " + sizeOfList
-                + " task" + (sizeOfList > 1 ? "s" : "") + " in the list.");
-        out.println("____________________");
+    public String getTaskRemovedMessage(Task task, int sizeOfList) {
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %s task%s in the list.",
+                task,
+                sizeOfList,
+                sizeOfList > 1 ? "s" : "");
     }
 
 }
