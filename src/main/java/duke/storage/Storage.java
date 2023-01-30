@@ -16,8 +16,8 @@ import duke.data.task.Todo;
  */
 public class Storage {
 
-    private static String filePath;
-    private static File f;
+    private String filePath;
+    private File f;
 
     public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
@@ -32,7 +32,7 @@ public class Storage {
         }
     }
 
-    public static ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws DukeException {
         try {
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
             ArrayList<Task> tasks = new ArrayList<Task>();
@@ -61,7 +61,7 @@ public class Storage {
 
     }
 
-    public static void save(String taskListString) throws DukeException {
+    public void save(String taskListString) throws DukeException {
         try {
             FileWriter fw = new FileWriter("src/main/java/duke/data/duke.txt");
             fw.write(taskListString);

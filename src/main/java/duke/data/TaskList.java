@@ -18,7 +18,7 @@ public class TaskList extends ArrayList<Task> {
         String result = "";
         for (int i = 0; i < size(); i++) {
             result += get(i).storageStr();
-            result += "\n";
+            result += System.lineSeparator();
         }
         return result;
     }

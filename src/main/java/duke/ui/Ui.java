@@ -13,7 +13,7 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final String DIVIDER = "----------------------------------------------------\n";
+    private static final String DIVIDER = "----------------------------------------------------";
 
     private Scanner sc;
 
