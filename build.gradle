@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -10,11 +11,15 @@ repositories {
 
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+    testCompileOnly 'junit:junit:4.13'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform() {
+        includeEngines 'junit-vintage'
+        // excludeEngines 'junit-jupiter'
+    }
 
     testLogging {
         events "passed", "skipped", "failed"
@@ -38,4 +43,8 @@ shadowJar {
 
 run{
     standardInput = System.in
+}
+
+checkstyle {
+    toolVersion = '10.2'
 }
