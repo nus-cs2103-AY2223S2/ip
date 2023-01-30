@@ -10,7 +10,8 @@ public class Deadline extends Task {
     protected LocalDate time;
 
     /**
-     * Constructor
+     * Initialises the object
+     *
      * @param detail a string description of the entire description of the task
      * @param time deadline date
      */
@@ -21,15 +22,18 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of the task details
+     * Outputs task details
+     *
      * @return a string including the task name and time
      */
     @Override
     public String toString() {
-        return "[D]" + "[" + this.getStatusIcon() + "] " + eventDetail + " (by: " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + "[" + this.getStatusIcon() + "] "
+            + eventDetail + " (by: " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
     /**
      * Gets the type of task
+     *
      * @return a string "deadline"
      */
     public String getType() {
@@ -37,6 +41,7 @@ public class Deadline extends Task {
     }
     /**
      * Gets the type of task
+     *
      * @return a String representing event detail
      */
     public String getDetail() {
@@ -44,6 +49,7 @@ public class Deadline extends Task {
     }
     /**
      * Gets the time of task
+     *
      * @return a String representing time
      */
     public String getTime() {

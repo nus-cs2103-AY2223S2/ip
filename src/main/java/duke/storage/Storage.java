@@ -19,7 +19,13 @@ public class Storage {
         this.path = path;
     }
 
-
+    /**
+     * Loads the tasks from the text file and store them in the task list
+     *
+     * @return A file object to be given to the task list as input
+     * @throws DirectoryNotFoundException
+     * @throws FileNotFoundException
+     */
     public File load() throws DirectoryNotFoundException, FileNotFoundException{
             Path directory = Paths.get("data");
             Path file = Paths.get(path);
@@ -35,6 +41,12 @@ public class Storage {
             return f;
     }
 
+
+    /**
+     * Writes the tasks to the text file when there is a change
+     *
+     * @param tasks The task list
+     */
     public void write(TaskList tasks) {
         try {
             Path directory = Paths.get("data");

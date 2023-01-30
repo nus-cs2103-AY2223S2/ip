@@ -15,10 +15,22 @@ public class MarkUndoneCommand extends Command {
 
     protected int index;
 
+    /**
+     * Initialises the object
+     *
+     * @param index Index of the task in the list
+     */
     public MarkUndoneCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Executes the current command
+     *
+     * @param tasks The task list
+     * @param ui The ui object
+     * @param storage The storage object
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage)throws FileNotFoundException,
             IllegalArgumentException, DukeException, DirectoryNotFoundException, IOException {
         Task marked = tasks.unmark(index);
@@ -26,6 +38,9 @@ public class MarkUndoneCommand extends Command {
         storage.write(tasks);
     }
 
+    /**
+     * Checks if this is exit command
+     */
     public boolean isExit() {
         return false;
     }

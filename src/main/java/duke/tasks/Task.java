@@ -8,7 +8,8 @@ public class Task {
 
 
     /**
-     * Constructor
+     * Initialises the object
+     *
      * @param description the entire description of the task
      */
     public Task(String description) {
@@ -18,7 +19,7 @@ public class Task {
     }
 
     /**
-     * Decrease the counter by 1
+     * Decreases the counter by 1
      */
     public static void decreaseCounter() {
         counter -= 1;
@@ -26,6 +27,7 @@ public class Task {
 
     /**
      * Gets the type of the task
+     *
      * @return a string "task"
      */
     public String getType() {
@@ -36,6 +38,7 @@ public class Task {
 
     /**
      * Gets the status of the task
+     *
      * @return a String representing whether task is done
      */
     public String getStatusIcon() {
@@ -43,7 +46,7 @@ public class Task {
     }
 
     /**
-     * Method to get the details of the task
+     * Gets the details of the task
      * @return a string description of the task
      */
     public String getDescription() {
@@ -73,7 +76,8 @@ public class Task {
     }
 
     /**
-     * String representation of the type of the task
+     * Outputs the type of the task
+     *
      * @return a string of task details
      */
     @Override
@@ -83,6 +87,7 @@ public class Task {
 
     /**
      * Gets the time of task
+     *
      * @return a String representing time
      */
     public String getTime() {

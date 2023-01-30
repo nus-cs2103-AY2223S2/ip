@@ -10,16 +10,31 @@ public class DeleteCommand extends Command {
 
     protected int index;
 
+    /**
+     * Initialises the object
+     *
+     * @param index Index of the task in the list
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Executes the current command
+     *
+     * @param list The task list
+     * @param ui The ui object
+     * @param storage The storage object
+     */
     public void execute(TaskList list, Ui ui, Storage storage) {
         Task task = list.delete(index);
         ui.delete(task, list.getLength());
         storage.write(list);
     }
 
+    /**
+     * Checks if this is exit command
+     */
     public boolean isExit() {
         return false;
     }

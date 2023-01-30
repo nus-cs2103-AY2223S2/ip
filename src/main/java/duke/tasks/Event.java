@@ -11,7 +11,7 @@ public class Event extends Task {
     protected String timeDescription;
 
     /**
-     * Constructor
+     * Initialises the object
      * @param detail the description including task name of the task
      * @param time the time of the task
      */
@@ -22,17 +22,19 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of the task details
+     * Outputs task details
      * @return a string including the task name and duration
      */
     @Override
     public String toString() {
-        return "[E]" + "[" + super.getStatusIcon() + "] " + eventDetail + " (from: " + time.split("from ")[1].split(" to ")[0] + " to:"
+        return "[E]" + "[" + super.getStatusIcon() + "] " +
+            eventDetail + " (from: " + time.split("from ")[1].split(" to ")[0] + " to:"
                 + time.split("from ", 2)[1].split(" to")[1] +  ")";
     }
 
     /**
-     * Get the type of task
+     * Gets the type of task
+     *
      * @return a string "event"
      */
     public String getType() {
@@ -41,6 +43,7 @@ public class Event extends Task {
 
     /**
      * Gets the type of task
+     *
      * @return a String representing event detail
      */
     public String getDetail() {
@@ -49,6 +52,7 @@ public class Event extends Task {
 
     /**
      * Gets the time of task
+     *
      * @return a String representing time
      */
     public String getTime() {

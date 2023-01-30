@@ -8,11 +8,20 @@ import duke.ui.Ui;
 public class ShowListCommand extends Command {
 
 
-
+    /**
+     * Executes the current command
+     *
+     * @param tasks The task list
+     * @param ui The ui object
+     * @param storage The storage object
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.listUI(tasks);
     }
 
+    /**
+     * Checks if this is exit command
+     */
     public boolean isExit() {
         return false;
     }

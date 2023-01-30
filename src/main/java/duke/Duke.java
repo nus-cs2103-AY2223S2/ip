@@ -17,6 +17,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initialises the object
+     *
+     * @param filePath The string representation of the file path
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -31,6 +36,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
