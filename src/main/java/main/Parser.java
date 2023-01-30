@@ -8,6 +8,7 @@ import command.Command;
 import command.DeadlineCommand;
 import command.DeleteCommand;
 import command.EventsCommand;
+import command.FindCommand;
 import command.ListCommand;
 import command.MarkCommand;
 import command.TodoCommand;
@@ -24,6 +25,7 @@ import task.ToDos;
 public class Parser {
     private static final int INPUT_LENGTH_VALIDATE = 2;
     private static final int INPUT_LENGTH_WITH_DATE = 3;
+    private static final int INPUT_LENGTH_KEYWORD = 2;
 
     public Parser() {
     }
@@ -117,6 +119,9 @@ public class Parser {
             String taskName = input.substring(startIndex).split("/")[0];
             Task newTask = new Events(taskName, dateFrom, dateTo);
             return new EventsCommand(newTask);
+        } else if (command.equals("find")) {
+            checkKeywordFormat(splitInput);
+            return new FindCommand(splitInput[1]);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -137,6 +142,12 @@ public class Parser {
         String[] yearAndTime = splitInput[2].split(" ");
         if (!(yearAndTime.length == 2 && isNumeric(yearAndTime[0]) && isNumeric(yearAndTime[1]))) {
             throw new DukeException("Not a valid date format Format must be dd/mm/yyyy HHmm");
+        }
+    }
+
+    private void checkKeywordFormat(String[] splitInput) throws DukeException {
+        if (splitInput.length > INPUT_LENGTH_KEYWORD) {
+            throw new DukeException("Cannot have multiple keywords sorry :(.");
         }
     }
 
