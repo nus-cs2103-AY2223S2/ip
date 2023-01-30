@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public abstract class Task {
     private String description;
     private boolean done;
@@ -29,17 +32,22 @@ public abstract class Task {
     public static Task parseCsvString(String csvString) {
         String[] arguments = csvString.split(",");
         Task result = null;
-        switch (arguments[0]) {
-        case "D":
-            result = new Deadline(arguments[1], arguments[3]);
-            break;
-        case "T":
-            result = new ToDo(arguments[1]);
-            break;
-        case "E":
-            result = new Event(arguments[1], arguments[3], arguments[4]);
-            break;
-        default:
+        try {
+            switch (arguments[0]) {
+                case "D":
+                    result = new Deadline(arguments[1], LocalDate.parse(arguments[3]));
+                    break;
+                case "T":
+                    result = new ToDo(arguments[1]);
+                    break;
+                case "E":
+                    result = new Event(arguments[1], arguments[3], arguments[4]);
+                    break;
+                default:
+                    return null;
+            }
+        } catch (DateTimeParseException e) {
+            System.out.println(">>> Unable to parse date: " + e.toString());
             return null;
         }
         result.done = Boolean.parseBoolean(arguments[2]);

@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -73,9 +75,19 @@ public class Duke {
                         }
 
                         // startIndex of command.substring() is 9 as "deadline " is 9 chars long
-                        tasks.add(new Deadline(
-                                command.substring(9, byIndex).trim(),
-                                command.substring(byIndex + 4, command.length()).trim()));
+                        try {
+                            LocalDate deadline = LocalDate.parse(
+                                    command.substring(byIndex + 4, command.length()).trim());
+                            tasks.add(new Deadline(
+                                    command.substring(9, byIndex).trim(),
+                                    deadline));
+                        } catch (DateTimeParseException e) {
+                            prettyPrint("Uh-oh, Clippy didn't quite understand the date provided.");
+                            prettyPrint("Deadline not saved. " +
+                                    "Try again with dates in the following format:");
+                            prettyPrint("===> yyyy-mm-dd <====");
+                            return true;
+                        }
                     } else if (args[0].equals("event")) {
                         // todo: check if BOTH '/from' and '/to' exists
                         int fromIndex = command.indexOf("/from ");

@@ -1,13 +1,18 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private String by;
-    public Deadline(String description, String by) {
+    private LocalDate by;
+    public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        // only show day of the week + day of the month + month
+        return "[D]" + super.toString() +
+                " (by: " + by.format(DateTimeFormatter.ofPattern("EEE dd MMM")) + ")";
     }
 
     @Override
