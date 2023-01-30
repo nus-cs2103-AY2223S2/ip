@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 import java.util.ArrayList;
 
 public class Duke {
@@ -7,46 +8,66 @@ public class Duke {
     private void Input() {
         while (true) {
             String userInput = this.scanner.nextLine();
-            if (userInput.equals("bye")) {
-                this.exit();
-                break;
+            try{
+                if (userInput.equals("bye")) {
+                    this.exit();
+                    break;
+                }
+                if (userInput.equals("list")) {
+                    this.showList();
+                    continue;
+                }
+                if (userInput.startsWith("mark")) {
+                    int taskNum = Integer.parseInt(userInput.substring(5));
+                    this.markTask(taskNum);
+                    continue;
+                }
+                if (userInput.startsWith("unmark")) {
+                    int taskNum = Integer.parseInt(userInput.substring(7));
+                    this.unmarkTask(taskNum);
+                    continue;
+                }
+                if (userInput.startsWith("todo")) {
+                    String todo = userInput.replace("todo", "");
+                    emptyTodo(todo);
+                    addTodo(todo);
+                    continue;
+                }
+                if (userInput.startsWith("event")) {
+                    String[] event = ErrorEventOrDeadline(userInput, "event", "/at");
+                    addEvent(event[0], event[1]);
+                    continue;
+                }
+                if (userInput.startsWith("deadline")) {
+                    String[] deadline = ErrorEventOrDeadline(userInput, "deadline", "/by");
+                    addDeadline(deadline[0], deadline[1]);
+                    continue;
+                }
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (DukeException exception) {
+                printMessage(exception.getMessage());
             }
-            if (userInput.equals("list")) {
-                this.showList();
-                continue;
-            }
-            if (userInput.startsWith("mark")) {
-                int taskNum = Integer.parseInt(userInput.substring(5));
-                this.markTask(taskNum);
-                continue;
-            }
-            if (userInput.startsWith("unmark")) {
-                int taskNum = Integer.parseInt(userInput.substring(7));
-                this.unmarkTask(taskNum);
-                continue;
-            }
-            if (userInput.startsWith("todo")) {
-                String todo = userInput.replace("todo ", "");
-                addTodo(todo);
-                continue;
-            }
-            if (userInput.startsWith("event")) {
-                String[] event = userInput.replace("event ", "").split(" /from ");
-                addEvent(event[0], event[1]);
-                continue;
-            }
-            if (userInput.startsWith("deadline")) {
-                String[] deadline = userInput.replace("deadline ", "").split(" /by ");
-                addDeadline(deadline[0], deadline[1]);
-                continue;
-            }
-            this.addTask(userInput);
         }
     }
 
-    private void addTask(String userInput) {
-        this.list.add(new Task(userInput));
-        System.out.println("\tadded: " + userInput + "\n");
+    private void emptyTodo(String todo) throws DukeException {
+        if (todo.isEmpty()) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+    }
+
+    private String[] ErrorEventOrDeadline(String input, String textToReplace, String textToSplit) throws DukeException {
+        String[] splitInput = input.replaceFirst(textToReplace, "")
+                .trim().split(textToSplit);
+
+        for (int i = 0; i < splitInput.length; i++) {
+            splitInput[i] = splitInput[i].trim();
+        }
+
+        if (splitInput.length != 2 || splitInput[0].isBlank() || splitInput[1].isBlank()) {
+            throw new DukeException("☹ OOPS!!! Please make sure the date is not empty");
+        }
+        return splitInput;
     }
 
     private void addTodo(String description) {
@@ -95,6 +116,10 @@ public class Duke {
 
     private void exit() {
         System.out.println("\tBye, hope to see you again!");
+    }
+
+    private void printMessage(String message) {
+        System.out.println("\t" + message);
     }
 
     public static void main(String[] args) {
