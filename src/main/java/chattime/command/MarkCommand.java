@@ -28,23 +28,23 @@ public class MarkCommand extends Command {
      * Gets task from task list.
      * Executes task status marking and returns UI message respectively to user.
      * Updates data in storage file.
-     *
-     * @param ui UI instance of bot.
+     *  @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      * @param storage Storage file to store current state items of task list.
+     * @return Bot's reply to user's task mark or unmark done command.
      */
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         Task target = taskList.getTask(taskIndex);
 
         if (isDone) {
             target.markAsDone();
-            ui.replyDoneMessage(target);
+            storage.rewriteFile(taskIndex, taskList.getTask(taskIndex));
+            return ui.replyDoneMessage(target);
         } else {
             target.unmarkDone();
-            ui.replyNotDoneMessage(target);
+            storage.rewriteFile(taskIndex, taskList.getTask(taskIndex));
+            return ui.replyNotDoneMessage(target);
         }
-
-        storage.updateFile(taskIndex, taskList.getTask(taskIndex));
     }
 
 }

@@ -1,0 +1,54 @@
+.anchor-pane {
+    -fx-background-color: #e0e9eb;
+    -fx-effect: innershadow(gaussian ,rgba(0,0,0,0.5), 10,0,0,0);
+}
+
+.scroll-pane {
+    -fx-background-color: #e0e9eb;
+}
+
+.text-field {
+    -fx-font-family: Candara;
+    -fx-font-size: 14px;
+    -fx-padding: 4, 0, 4, 0;
+    -fx-background-colour: #edf2f4;
+    -fx-background-radius: 4;
+    -fx-background-insets: 1.5;
+    -fx-border-width: 3px;
+    -fx-border-color: #8d99ae;
+    -fx-border-radius: 6px;
+}
+
+.vbox-dialog {
+    -fx-background-color: #e0e9eb;
+    -fx-padding: 10, 0, 10, 10;
+}
+
+.button {
+    -fx-background-color: #0081a7;
+    -fx-background-radius: 8;
+    -fx-font-size: 17px;
+    -fx-text-fill: #e6e6e6;
+    -fx-font-family: Broadway;
+    -fx-background-insets: 1.5;
+}
+
+.text-field:focused {
+    -fx-highlight-fill: #ffdd33;
+}
+
+.text-field:hover {
+    -fx-highlight-fill: #ffd11a;
+    -fx-effect: dropshadow(gaussian ,rgba(0,0,0,0.5), 10,0,0,0);
+}
+
+.button:pressed {
+    -fx-background-color: #004e66;
+    -fx-effect: innershadow(gaussian ,rgba(0,0,0,0.5), 10,0,0,0);
+}
+
+.button:hover {
+    -fx-background-color: #33cfff;
+    -fx-text-fill: #002733;
+    -fx-effect: innershadow(gaussian ,rgba(0,0,0,0.5), 10,0,0,0);
+}

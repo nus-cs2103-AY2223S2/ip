@@ -1,0 +1,14 @@
+.label {
+    -fx-background-color: #00afb9;
+    -fx-background-radius: 8;
+    -fx-font-size: 14px;
+    -fx-text-fill: #22223b;
+    -fx-font-family: Cambria;
+    -fx-padding: 10, 10, 10, 10;
+    -fx-width: 70%;
+    -fx-effect: dropshadow(gaussian ,rgba(0,0,0,0.3), 10,0,0,0);
+}
+
+.label:hover {
+    -fx-effect: innershadow(gaussian ,rgba(0,0,0,0.5), 10,0,0,0);
+}

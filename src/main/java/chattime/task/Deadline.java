@@ -42,12 +42,12 @@ public class Deadline extends Task {
     /**
      * Returns comparison result of input time with task relevant time.
      *
-     * @param time User's input time.
+     * @param date User's input time.
      * @return true if the input time and task deadline are the same, otherwise false.
      */
     @Override
-    public boolean isOnDate(LocalDate time) {
-        return byDate.isEqual(time);
+    public boolean isOnDate(LocalDate date) {
+        return byDate.isEqual(date);
     }
 
     /**
@@ -57,8 +57,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[" + TaskType.DEADLINE + "]" + super.toString() + " (by: "
-                + byDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy "))
-                + (byTime == null ? "" : byTime.format(DateTimeFormatter.ofPattern("hh:mm a"))) + ")";
+        String dateString = byDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String timeString = (byTime == null ? "" : byTime.format(DateTimeFormatter.ofPattern(" hh:mm a")));
+
+        return "[" + TaskType.DEADLINE + "]" + super.toString() + " (by: " + dateString + timeString + ")";
     }
 }

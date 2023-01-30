@@ -10,6 +10,7 @@ import chattime.command.ByeCommand;
 import chattime.command.Command;
 import chattime.command.DeleteCommand;
 import chattime.command.FindCommand;
+import chattime.command.HelpCommand;
 import chattime.command.ListCommand;
 import chattime.command.MarkCommand;
 import chattime.exception.ChattimeException;
@@ -25,16 +26,21 @@ import chattime.task.Todo;
 public class Parser {
 
     private static final String NO_DESCRIPTION = "OOPS!!! The description of %s cannot be empty.";
-    private static final String MISSED_PARAM = "OOPS!!! %s should be in form of %s.";
+    private static final String MISSED_PARAM = "OOPS!!! %s should be in the form of\n%s.";
     private static final String NO_INDEX = "OOPS!!! The index to %1$s cannot be empty.";
     private static final String NEED_INT = "OOPS!!! The index to %1$s must be positive integer.";
-    private static final String IDX_OUT_OF_BOUND = "OOPS!!! The index is too large! We currently have %d task(s).";
-    private static final String UNRECOGNISED_COMMAND = "Sorry... but I don't understand what you said >,<";
+    private static final String IDX_OUT_OF_BOUND = "OOPS!!! The index is invalid! We currently have %d task(s).";
+    private static final String UNRECOGNISED_COMMAND = "Sorry... but I don't understand what you said >,<\n\n"
+            + "Type `help` if you need me!";
+    private static final String CLEAN_COMMAND_ALERT = "@^@ I'm sorry but your message should not contain any \"@\" .";
+    private static final String EVENT_FORMAT = "event (task) /from (yyyy-mm-dd hh:mm) /to (yyyy-mm-dd hh:mm)";
+    private static final String DATETIME_FORMAT = "OOPS!!! Please enter both date and time in format yyyy-mm-dd hh:mm"
+            + "or yyyy-mm-dd";
 
     private static String userInput;
     private static String[] splitCommand;
     private static String command;
-    private static String description = null;
+    private static String description;
 
     /**
      * Returns suitable Command object for further execution.
@@ -50,6 +56,9 @@ public class Parser {
         switch (command) {
         case "bye":
             return parseBye();
+
+        case "help":
+            return parseHelp();
 
         case "list":
             return parseList();
@@ -105,6 +114,8 @@ public class Parser {
 
         if (splitCommand.length > 1) {
             description = splitCommand[1];
+        } else {
+            description = null;
         }
     }
 
@@ -115,7 +126,7 @@ public class Parser {
      */
     private static void checkCleanCommand() throws ChattimeException {
         if (userInput.contains("@")) {
-            throw new ChattimeException("@^@ I'm sorry but your message should not contain any \"@\" .");
+            throw new ChattimeException(CLEAN_COMMAND_ALERT);
         }
     }
 
@@ -168,6 +179,16 @@ public class Parser {
     }
 
     /**
+     * Processes help command and generate a HelpCommand object.
+     * Do not throw any exception as long as the command is 'help'.
+     *
+     * @return HelpCommand object.
+     */
+    private static HelpCommand parseHelp() {
+        return new HelpCommand();
+    }
+
+    /**
      * Processes bye command and generate a ByeCommand object.
      *
      * @return ByeCommand object.
@@ -175,7 +196,7 @@ public class Parser {
      */
     private static ByeCommand parseBye() throws ChattimeException {
         if (description != null) {
-            throw new ChattimeException("Type \"bye\" if you really want to say goodbye to me.");
+            throw new ChattimeException("Type \"bye\" if you really want to say goodbye to me :(");
         }
 
         return new ByeCommand();
@@ -221,7 +242,7 @@ public class Parser {
             return new AddCommand(deadlineTask);
 
         } catch (DateTimeParseException e) {
-            throw new ChattimeException("OOPS!!! Please enter date and time in format yyyy-mm-dd or yyyy-mm-dd hh:mm");
+            throw new ChattimeException(DATETIME_FORMAT);
         }
     }
 
@@ -236,17 +257,11 @@ public class Parser {
         String[] splitTask = description.split(" /from ", 2);
         String task = splitTask[0];
 
-        if (splitTask.length < 2 || splitTask[1].equals("")) {
-            throw new ChattimeException(String.format(
-                    MISSED_PARAM, command, "event (task) /from (yyyy-mm-dd hh:mm) /to (yyyy-mm-dd hh:mm)"));
-        }
+        checkDescriptionFormat(splitTask);
 
         String[] splitFrom = splitTask[1].split(" /to ", 2);
 
-        if (splitFrom.length < 2 || splitFrom[1].equals("")) {
-            throw new ChattimeException(String.format(
-                    MISSED_PARAM, command, "event (task) /from (yyyy-mm-dd hh:mm) /to (yyyy-mm-dd hh:mm)"));
-        }
+        checkDescriptionFormat(splitFrom);
 
         try {
             String[] from = splitFrom[0].split(" ", 2);
@@ -272,7 +287,19 @@ public class Parser {
             return new AddCommand(eventTask);
 
         } catch (DateTimeParseException e) {
-            throw new ChattimeException("OOPS!!! Please enter both date and time in format yyyy-mm-dd hh:mm");
+            throw new ChattimeException(DATETIME_FORMAT);
+        }
+    }
+
+    /**
+     * Checks parsed command is of the right format.
+     *
+     * @param split Processed command.
+     * @throws ChattimeException Alert user to input the right command format.
+     */
+    private static void checkDescriptionFormat(String[] split) throws ChattimeException {
+        if (split.length < 2 || split[1].equals("")) {
+            throw new ChattimeException(String.format(MISSED_PARAM, command, EVENT_FORMAT));
         }
     }
 
@@ -293,7 +320,7 @@ public class Parser {
             return new ListCommand(date);
 
         } catch (DateTimeParseException e) {
-            throw new ChattimeException("OOPS!!! Please enter date and time in format yyyy-mm-dd");
+            throw new ChattimeException(DATETIME_FORMAT);
         }
     }
 

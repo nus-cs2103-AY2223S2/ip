@@ -46,14 +46,15 @@ public class Event extends Task {
     /**
      * Returns comparison result of input time with task relevant time.
      *
-     * @param time User's input time.
+     * @param date User's input time.
      * @return true if the input time is between the task start time and the task deadline, otherwise false.
      */
     @Override
-    public boolean isOnDate(LocalDate time) {
-        return fromDate.isEqual(time)
-                || toDate.isEqual(time)
-                || (fromDate.isBefore(time) && toDate.isAfter(time));
+    public boolean isOnDate(LocalDate date) {
+        Boolean isOnSameDate = fromDate.isEqual(date) || toDate.isEqual(date);
+        Boolean isInDateRange = (fromDate.isBefore(date) && toDate.isAfter(date));
+
+        return isOnSameDate || isInDateRange;
     }
 
     /**
@@ -63,10 +64,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[" + TaskType.EVENT + "]" + super.toString() + " (from: "
-                + fromDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy "))
-                + (fromTime == null ? "" : fromTime.format(DateTimeFormatter.ofPattern("hh:mm a ")))
-                + "to: " + toDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy "))
-                + (toTime == null ? "" : toTime.format(DateTimeFormatter.ofPattern("hh:mm a"))) + ")";
+        String fromDateString = fromDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String fromTimeString = (fromTime == null ? "" : fromTime.format(DateTimeFormatter.ofPattern(" hh:mma")));
+        String toDateString = toDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String toTimeString = (toTime == null ? "" : toTime.format(DateTimeFormatter.ofPattern(" hh:mma")));
+
+        return "[" + TaskType.EVENT + "]" + super.toString()
+                + " (from: " + fromDateString + fromTimeString + " to: " + toDateString + toTimeString + ")";
     }
 }

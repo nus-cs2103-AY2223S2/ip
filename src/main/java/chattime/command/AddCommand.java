@@ -24,16 +24,16 @@ public class AddCommand extends Command {
      * Implements and executes main logic of AddCommand object.
      * Adds task to task list and storage file.
      * Returns UI message to notify successful task added.
-     *
-     * @param ui UI instance of bot.
+     *  @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      * @param storage Storage file to store current state items of task list.
+     * @return Bot's reply to user's add task command.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         taskList.addTask(task);
         storage.saveToFile(task);
-        ui.printAddTask(task, Task.printTotalTask());
+        return ui.printAddTask(task, Task.printTotalTask());
     }
 
 }

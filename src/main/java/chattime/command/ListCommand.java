@@ -27,17 +27,17 @@ public class ListCommand extends Command {
     /**
      * Implements and executes main logic of ListCommand object.
      * Assign cases into displayList and listTime.
-     *
-     * @param ui UI instance of bot.
+     *  @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      * @param storage Storage file to store current state items of task list.
+     * @return Bot's reply to user's request list command.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         if (requestedDate == null) {
-            displayList(ui, taskList);
+            return displayList(ui, taskList);
         } else {
-            listTime(ui, taskList);
+            return listTime(ui, taskList);
         }
     };
 
@@ -47,20 +47,20 @@ public class ListCommand extends Command {
      * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      */
-    private void displayList(Ui ui, TaskList taskList) {
+    private String displayList(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
-            ui.warnEmptyList();
+            return ui.warnEmptyList();
 
         } else {
             int i = 1;
-            String message = "chattime.task.Task(s) waiting to be completed:";
+            String message = "Task(s) waiting to be completed:";
 
             for (Task task : taskList.getList()) {
                 message = message.concat(String.format("\n     %d. %s", i, task));
                 i++;
             }
 
-            ui.replyUser(message);
+            return message;
         }
     }
 
@@ -70,9 +70,9 @@ public class ListCommand extends Command {
      * @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      */
-    private void listTime(Ui ui, TaskList taskList) {
+    private String listTime(Ui ui, TaskList taskList) {
         if (taskList.getList().size() == 0) {
-            ui.warnEmptyList();
+            return ui.warnEmptyList();
 
         } else {
             int i = 1;
@@ -94,7 +94,7 @@ public class ListCommand extends Command {
 
             message += "\n     You have " + total + " task(s) on this day. With " + pending + " task(s) to go.";
 
-            ui.replyUser(message);
+            return message;
         }
     }
 }

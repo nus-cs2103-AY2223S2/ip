@@ -23,15 +23,15 @@ public class FindCommand extends Command {
 
     /**
      * Executes logic of displaying task list by filtering task objects on given keyword.
-     *
-     * @param ui UI instance of bot.
+     *  @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      * @param storage Storage file to store current state items of task list.
+     * @return Bot's reply to user's find task command.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         if (taskList.getList().size() == 0) {
-            ui.warnEmptyList();
+            return ui.warnEmptyList();
 
         } else {
             int i = 1;
@@ -50,10 +50,14 @@ public class FindCommand extends Command {
                 }
             }
 
-            message += "\n     Here have " + total + " result(s) with keyword "
-                    + keyword + ". " + pending + " task(s) to go.";
+            message += "Here have " + total + " result(s) with keyword \""
+                    + keyword + "\". Still have" + pending + " task(s) to go.";
 
-            ui.replyUser(message);
+            if (total == 0) {
+                message = "Whoo! Seems that you don't have any task related to \"" + keyword + "\" currently.";
+            }
+
+            return message;
         }
     }
 }

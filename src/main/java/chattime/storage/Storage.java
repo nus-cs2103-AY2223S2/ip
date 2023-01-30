@@ -51,20 +51,40 @@ public class Storage {
     public void openFile(String filePath) {
         try {
             file = new File(filePath);
+
             if (!file.exists()) {
-
-                if (!file.getParentFile().exists()) {
-                    if (!file.getParentFile().mkdirs()) {
-                        throw new IOException("New directory cannot be created!");
-                    }
-                }
-
-                if (!file.createNewFile()) {
-                    throw new IOException("New file cannot be created!");
-                }
+                checkAndCreateDirectory(file);
+                checkAndCreateFile(file);
             }
+
         } catch (IOException e) {
-            ui.printError(e.getMessage());
+            System.err.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Checks whether directory in path exists, creates one if not.
+     *
+     * @param file File instance of the specified file path.
+     * @throws IOException When directory cannot be created.
+     */
+    private void checkAndCreateDirectory(File file) throws IOException {
+        if (!file.getParentFile().exists()) {
+            if (!file.getParentFile().mkdirs()) {
+                throw new IOException("New directory cannot be created!");
+            }
+        }
+    }
+
+    /**
+     * Checks whether file in path exists, creates one if not.
+     *
+     * @param file File instance of the specified file path.
+     * @throws IOException When file cannot be created.
+     */
+    private void checkAndCreateFile(File file) throws IOException {
+        if (!file.createNewFile()) {
+            throw new IOException("New file cannot be created!");
         }
     }
 
@@ -90,35 +110,18 @@ public class Storage {
                     break;
 
                 case "D":
-                    try {
-                        LocalDate byDate = LocalDate.parse(taskSplit[3]);
-                        LocalTime byTime = (taskSplit[4].equals("0") ? null : LocalTime.parse(taskSplit[4]));
-                        inputTask = new Deadline(taskSplit[2], byDate, byTime);
-
-                    } catch (DateTimeParseException e) {
-                        ui.printError("OOPS!!! Datetime error in storage!");
-                    }
+                    inputTask = createDeadlineObject(taskSplit);
                     break;
 
                 case "E":
-                    try {
-                        LocalDate fromDate = LocalDate.parse(taskSplit[3]);
-                        LocalTime fromTime = LocalTime.parse(taskSplit[4]);
-                        LocalDate toDate = LocalDate.parse(taskSplit[5]);
-                        LocalTime toTime = LocalTime.parse(taskSplit[6]);
-
-                        inputTask = new Event(taskSplit[2], fromDate, fromTime, toDate, toTime);
-
-                    } catch (DateTimeParseException e) {
-                        ui.printError("OOPS!!! Datetime error in storage!");
-                    }
+                    inputTask = createEventObject(taskSplit);
                     break;
 
                 default:
-                    throw new ChattimeException("chattime.task.Task type error : " + taskSplit[0]);
+                    throw new ChattimeException("Task type error : " + taskSplit[0]);
                 }
 
-                if (inputTask != null && taskSplit[1].equals("1")) {
+                if (taskSplit[1].equals("1")) {
                     inputTask.markAsDone();
                 }
 
@@ -128,9 +131,48 @@ public class Storage {
             return initialTasks;
 
         } catch (IOException | ChattimeException e) {
-            ui.printError(e.getMessage());
+            System.err.println(e.getMessage());
         }
         return initialTasks;
+    }
+
+    /**
+     * Creates deadline object from storage string.
+     *
+     * @param taskSplit Processed storage string.
+     * @return New deadline object respective to the storage string.
+     * @throws ChattimeException Handle datetime format mismatch error.
+     */
+    private Deadline createDeadlineObject(String[] taskSplit) throws ChattimeException {
+        try {
+            LocalDate byDate = LocalDate.parse(taskSplit[3]);
+            LocalTime byTime = (taskSplit[4].equals("0") ? null : LocalTime.parse(taskSplit[4]));
+
+            return new Deadline(taskSplit[2], byDate, byTime);
+        } catch (DateTimeParseException e) {
+            throw new ChattimeException("OOPS!!! Datetime error in storage!");
+        }
+    }
+
+    /**
+     * Created event object from storage string.
+     *
+     * @param taskSplit Processed storage string.
+     * @return New event object respective to the storage string.
+     * @throws ChattimeException Handle datetime format mismatch error.
+     */
+    private Event createEventObject(String[] taskSplit) throws ChattimeException {
+        try {
+            LocalDate fromDate = LocalDate.parse(taskSplit[3]);
+            LocalTime fromTime = LocalTime.parse(taskSplit[4]);
+            LocalDate toDate = LocalDate.parse(taskSplit[5]);
+            LocalTime toTime = LocalTime.parse(taskSplit[6]);
+
+            return new Event(taskSplit[2], fromDate, fromTime, toDate, toTime);
+
+        } catch (DateTimeParseException e) {
+            throw new ChattimeException("OOPS!!! Datetime error in storage!");
+        }
     }
 
     /**
@@ -145,12 +187,12 @@ public class Storage {
     }
 
     /**
-     * Updates storage file once a variable attribute of a task changed.
+     * Updates storage file by delete or update task of specified index.
      *
-     * @param index The index number of changed task.
-     * @param task The modified task.
+     * @param index Index of the removed or updated task.
+     * @param task Updated task, takes no parameter in delete condition.
      */
-    public void updateFile(int index, Task task) {
+    public void rewriteFile(int index, Task... task) {
         BufferedReader lineSearch;
 
         try {
@@ -162,59 +204,26 @@ public class Storage {
             while (content != null) {
 
                 if (lineCount == index) {
-                    content = task.toDataString();
+                    try {
+                        content = task[0].toDataString();
+                    } catch (IndexOutOfBoundsException e) {
+                        lineCount++;
+                        content = lineSearch.readLine();
+                        continue;
+                    }
                 }
-
                 updateString.append(content).append(System.lineSeparator());
                 lineCount++;
                 content = lineSearch.readLine();
             }
 
             if (lineCount < index) {
-                throw new IndexOutOfBoundsException("chattime.task.Task not saved in storage!");
+                throw new IndexOutOfBoundsException("Task not saved in storage!");
 
             } else {
                 writeToFile(updateString.toString(), false);
             }
         } catch (IOException | IndexOutOfBoundsException e) {
-            ui.printError(e.getMessage());
-        }
-    }
-
-    /**
-     * Removes deleted task from storage file.
-     *
-     * @param index Index of the removed task.
-     */
-    public void deleteFromFile(int index) {
-        BufferedReader lineSearch;
-
-        try {
-            lineSearch = new BufferedReader(new FileReader(file));
-            String content = lineSearch.readLine();
-            int lineCount = 1;
-            StringBuilder updateString = new StringBuilder();
-
-            while (content != null) {
-
-                if (lineCount == index) {
-                    lineCount++;
-                    content = lineSearch.readLine();
-                    continue;
-                }
-
-                updateString.append(content).append(System.lineSeparator());
-                lineCount++;
-                content = lineSearch.readLine();
-            }
-
-            if (lineCount < index) {
-                throw new IndexOutOfBoundsException("chattime.task.Task not saved in storage!");
-
-            } else {
-                writeToFile(updateString.toString(), false);
-            }
-        } catch (IOException e) {
             ui.printError(e.getMessage());
         }
     }

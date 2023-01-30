@@ -1,7 +1,5 @@
 package chattime;
 
-import java.util.Scanner;
-
 import chattime.command.Command;
 import chattime.exception.ChattimeException;
 import chattime.parser.Parser;
@@ -16,9 +14,8 @@ public class Chattime {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
-
     /**
-     * Initializes a bot with uiobjects a nd a storage space with provided path to store list.
+     * Initializes a bot with ui objects a nd a storage space with provided path to store list.
      *
      * @param filePath Path to storage.
      */
@@ -31,35 +28,33 @@ public class Chattime {
     /**
      * Runs the bot and handles user's input.
      */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        String userInput;
-        Command cmd;
+    String getResponse(String input) {
+        String response = "";
+        try {
+            Command cmd = Parser.parse(input);
 
-        while (ui.getExecuteStatus()) {
-
-            userInput = sc.nextLine();
-
-            try {
-                cmd = Parser.parse(userInput);
-
-                if (cmd != null) {
-                    cmd.execute(ui, tasks, storage);
-                }
-            } catch (ChattimeException e) {
-                ui.printError(e.getMessage());
+            if (cmd != null) {
+                response = cmd.execute(ui, tasks, storage);
             }
+        } catch (ChattimeException e) {
+            return ui.printError(e.getMessage());
         }
-
+        return response;
     }
 
     /**
-     * Initiates the whole bot program.
-     *
-     * @param args Supplied command-line arguments.
+     * Replies gretting message to user.
+     * @return Greeting words.
      */
-    public static void main(String[] args) {
-        new Chattime("").run();
+    String greet() {
+        return ui.initUi();
     }
 
+    /**
+     * Determines if the 'bye' command is given to a bot instance.
+     * @return The running status of current bot.
+     */
+    boolean checkRunningStatus() {
+        return ui.getExecuteStatus();
+    }
 }

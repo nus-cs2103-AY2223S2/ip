@@ -23,6 +23,6 @@ public class DeadlineTest {
     public void toStringTest() {
         Deadline testTask = new Deadline("Test",
                 LocalDate.of(2023, 1, 1));
-        assertEquals("[D][ ] Test (by: Jan 01 2023 )", testTask.toString());
+        assertEquals("[D][ ] Test (by: Jan 01 2023)", testTask.toString());
     }
 }

@@ -117,10 +117,10 @@ public class Task {
     /**
      * Returns comparison result of input time with task relevant time.
      *
-     * @param time User's input time.
+     * @param date User's input time.
      * @return false as default.
      */
-    public boolean isOnDate(LocalDate time) {
+    public boolean isOnDate(LocalDate date) {
         return false;
     }
 

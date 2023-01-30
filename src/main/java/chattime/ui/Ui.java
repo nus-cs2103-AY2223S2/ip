@@ -7,24 +7,34 @@ import chattime.task.Task;
  */
 public class Ui {
 
-    private static final String GREET = "Hey! I'm your friend, chattime.Chattime!  (# v #) /\n"
-            + "     How can I help you *^*";
-    private static final String LINE = "---------------------------------------------------------------------"
-            + "******************CHATTIME";
-    private static final String ERR_LINE = "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-            + "******************CHATTIME";
+    private static final String GREET = "Hey! I'm your friend, Chattime!(# v #) /\n"
+            + "How can I help you today *^*\n\nType `help` and I will come to you %v%";
     private static final String BYE = "Bye bye >^<! Visit me again when you need me ~";
+
     private static final String LOGO = "      ___\n"
                         + "     /*  \\    \\(*.*)/\n"
-                        + "    /::\\  \\     ___\n"
-                        + "   /:/::\\  \\   /*  \\\n"
-                        + "  /:/  \\:\\  \\  \\:\\  \\\n"
-                        + " /:/__/ \\:\\__\\  \\:\\  \\\n"
-                        + " \\:\\ \\   \\/__/  /::\\  \\\n"
-                        + "  \\:\\ \\        /:/::\\__\\\n"
-                        + "   \\:\\ \\*H*A*T/:/  \\/__/*I*M*E\n"
-                        + "    \\:\\_\\    /:/  /\n"
-                        + "     \\/__/   \\/__/\n";
+                        + "    /::\\   \\          __\n"
+                        + "   /:/::\\   \\     /*   \\\n"
+                        + "  /:/  \\:\\   \\   \\ : \\  \\\n"
+                        + " /:/__/\\:\\__\\  \\ : \\  \\\n"
+                        + " \\:\\ \\    \\/__/ / ::  \\   \\\n"
+                        + "  \\:\\ \\            /: /\\    \\__\\\n"
+                        + "   \\:\\ \\*H*A*T/ /  \\/__/*I*M*E\n"
+                        + "    \\:\\_\\    / :/  /\n"
+                        + "      \\/_/   \\/_/\n";
+
+    private static final String GUIDE = "If you need my help, call me with these!\n\n"
+            + "todo <task> -- to add todo stuff\n\n"
+            + "deadline <task> /by <date in yyyy-mm-dd or yyyy-mm-dd hh:mm> -- to add todo stuff with deadline\n\n"
+            + "event <task> /from <date in yyyy-mm-dd or yyyy-mm-dd hh:mm> /to <date in yyyy-mm-dd or yyyy-mm-dd hh:mm>"
+            + " -- to add event with start datetime to end datetime\n\n"
+            + "list -- to list all current stored tasks\n\n"
+            + "listTime <date in yyyy-mm-dd> -- to list all current tasks within the specified date\n\n"
+            + "mark <index of task> -- to mark the specified task as done\n\n"
+            + "unmark <index of task> -- to unmark the specified task\n\n"
+            + "delete <index of task> -- to delete the specified task from list\n\n"
+            + "bye -- to say goodbye to me and end our chat :(\n\n"
+            + "help -- to review this guide";
 
     private boolean isRunning;
 
@@ -39,20 +49,8 @@ public class Ui {
     /**
      * Returns initial UI message to user.
      */
-    public void initUi() {
-        System.out.println("Welcome to\n" + LOGO);
-        replyUser(GREET);
-    }
-
-    /**
-     * Returns bot response message to user with specific format.
-     *
-     * @param message Bot response message.
-     */
-    public void replyUser(String message) {
-        System.out.println("    " + LINE);
-        System.out.println("     " + message);
-        System.out.println("    " + LINE);
+    public String initUi() {
+        return "Welcome to\n" + LOGO + "\n" + GREET;
     }
 
     /**
@@ -61,8 +59,8 @@ public class Ui {
      * @param task Task added recently.
      * @param totalTask Message about total number of available tasks.
      */
-    public void printAddTask(Task task, String totalTask) {
-        replyUser(String.format("Got it! I've added this task:\n       %s\n     %s", task, totalTask));
+    public String printAddTask(Task task, String totalTask) {
+        return String.format("Got it! I've added this task:\n   %s\n%s", task, totalTask);
     }
 
     /**
@@ -70,8 +68,8 @@ public class Ui {
      *
      * @param task Task unmarked recently.
      */
-    public void replyNotDoneMessage(Task task) {
-        replyUser(String.format("Arghh! This job is not done yet:\n       %s", task));
+    public String replyNotDoneMessage(Task task) {
+        return String.format("Arghh! This job is not done yet:\n       %s", task);
     }
 
     /**
@@ -79,8 +77,8 @@ public class Ui {
      *
      * @param task Task marked recently.
      */
-    public void replyDoneMessage(Task task) {
-        replyUser(String.format("Congrats! You've done this job:\n       %s", task));
+    public String replyDoneMessage(Task task) {
+        return String.format("Congrats! You've done this job:\n       %s", task);
     }
 
     /**
@@ -89,9 +87,8 @@ public class Ui {
      * @param task Task removed recently.
      * @param totalTask Message about total number of available tasks.
      */
-    public void replyRemoveTaskMsg(Task task, String totalTask) {
-        replyUser(
-                String.format("Okay!!! I've removed this task for you:\n       %s\n     %s", task, totalTask));
+    public String replyRemoveTaskMsg(Task task, String totalTask) {
+        return String.format("Okay!!! I've removed this task for you:\n       %s\n     %s", task, totalTask);
     }
 
     /**
@@ -99,17 +96,15 @@ public class Ui {
      *
      * @param errMsg Bot error message.
      */
-    public void printError(String errMsg) {
-        System.out.println("    " + ERR_LINE);
-        System.out.println("     " + errMsg);
-        System.out.println("    " + ERR_LINE);
+    public String printError(String errMsg) {
+        return errMsg;
     }
 
     /**
      * Returns error message to user when operation on empty task list is requested.
      */
-    public void warnEmptyList() {
-        printError("Can't find anything in the list @~@");
+    public String warnEmptyList() {
+        return "Can't find anything in the list @~@";
     }
 
     /**
@@ -131,7 +126,14 @@ public class Ui {
     /**
      * Returns exit message to user.
      */
-    public void exit() {
-        replyUser(BYE);
+    public String exit() {
+        return BYE;
+    }
+
+    /**
+     * Returns user guide.
+     */
+    public String printGuide() {
+        return GUIDE;
     }
 }

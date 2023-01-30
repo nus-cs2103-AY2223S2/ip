@@ -12,11 +12,11 @@ public abstract class Command {
 
     /**
      * Implements and executes main logic of Command object.
-     *
-     * @param ui UI instance of bot.
+     *  @param ui UI instance of bot.
      * @param taskList Current task list storing tasks.
      * @param storage Storage file to store current state items of task list.
+     * @return Bot's reply to user's command.
      */
-    public abstract void execute(Ui ui, TaskList taskList, Storage storage);
+    public abstract String execute(Ui ui, TaskList taskList, Storage storage);
 
 }
