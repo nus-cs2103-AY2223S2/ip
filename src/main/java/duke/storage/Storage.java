@@ -23,21 +23,35 @@ public class Storage {
     }
 
 
-    public File load() throws DirectoryNotFoundException, FileNotFoundException {
-        Path directory = Paths.get("data");
-        Path file = Paths.get(path);
-        boolean fileExists = java.nio.file.Files.exists(file);
-        boolean directoryExists = java.nio.file.Files.exists(directory);
-        if (!directoryExists) {
-            throw new DirectoryNotFoundException();
-        }
-        if (!fileExists) {
-            throw new FileNotFoundException();
-        }
-        File f = new File(path); // create a File for the given file path
-        return f;
+    /**
+     * Loads the tasks from the text file and store them in the task list
+     *
+     * @return A file object to be given to the task list as input
+     * @throws DirectoryNotFoundException
+     * @throws FileNotFoundException
+     */
+    public File load() throws DirectoryNotFoundException, FileNotFoundException{
+            Path directory = Paths.get("data");
+            Path file = Paths.get(path);
+            boolean FileExists = java.nio.file.Files.exists(file);
+            boolean directoryExists = java.nio.file.Files.exists(directory);
+            if (!directoryExists) {
+                throw new DirectoryNotFoundException();
+            }
+            if (!FileExists) {
+                throw new FileNotFoundException();
+            }
+            File f = new File(path); // create a File for the given file path
+            return f;
+
     }
 
+
+    /**
+     * Writes the tasks to the text file when there is a change
+     *
+     * @param tasks The task list
+     */
     public void write(TaskList tasks) {
         try {
             Path directory = Paths.get("data");

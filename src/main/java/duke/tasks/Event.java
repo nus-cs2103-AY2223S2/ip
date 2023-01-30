@@ -10,7 +10,7 @@ public class Event extends Task {
     protected String timeDescription;
 
     /**
-     * Constructor
+     * Initialises the object
      *
      * @param detail the description including task name of the task
      * @param time   the time of the task
@@ -22,7 +22,7 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of the task details
+     * Outputs task details
      *
      * @return a string including the task name and duration
      */

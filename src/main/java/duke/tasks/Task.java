@@ -9,7 +9,7 @@ public class Task {
 
 
     /**
-     * Constructor
+     * Initialises the object
      *
      * @param description the entire description of the task
      */
@@ -20,7 +20,7 @@ public class Task {
     }
 
     /**
-     * Decrease the counter by 1
+     * Decreases the counter by 1
      */
     public static void decreaseCounter() {
         counter -= 1;
@@ -46,7 +46,7 @@ public class Task {
     }
 
     /**
-     * Method to get the details of the task
+     * Gets the details of the task
      *
      * @return a string description of the task
      */
@@ -78,7 +78,7 @@ public class Task {
     }
 
     /**
-     * String representation of the type of the task
+     * Outputs the type of the task
      *
      * @return a string of task details
      */

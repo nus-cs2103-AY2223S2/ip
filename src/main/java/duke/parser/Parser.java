@@ -21,6 +21,15 @@ import duke.tasks.Todo;
 
 public class Parser {
 
+
+    /**
+     * Parses the user's instructions and creates commands
+     *
+     * @param input The input from the user
+     * @return A command object corresponding to the user's command
+     * @throws DukeException
+     * @throws IllegalArgumentException
+     */
     public static Command parse(String input) throws DukeException, IllegalArgumentException {
         String command = input.split(" ")[0].toUpperCase();
         Commands cur = Enum.valueOf(Commands.class, command);
