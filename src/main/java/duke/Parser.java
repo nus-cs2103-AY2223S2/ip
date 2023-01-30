@@ -11,11 +11,6 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 public class Parser {
-    protected Ui ui;
-
-    public Parser(Ui ui) {
-        this.ui = ui;
-    }
 
     public Command commandExecute(String input, TaskList toDo, Storage storage) {
 
