@@ -451,7 +451,7 @@ class Deadline extends Task {
      */
     Deadline (String name, int status, String dlString) {
         super(name, status);
-        this.deadline = Parse.formatDateTime(dlString);
+        this.deadline = Parser.formatDateTime(dlString);
     }
 
     private int getStatusNo() {
@@ -465,11 +465,11 @@ class Deadline extends Task {
      * overrides the toString method
      */
     public String toString() {
-        return "[D]" + status + " " + name + "(by " + Parse.TransformDateTime(deadline) + ")";
+        return "[D]" + status + " " + name + "(by " + Parser.TransformDateTime(deadline) + ")";
     }
     
     public String toStoreFormatString() {
-        return String.format("D/%s/%d/%s", super.name, this.getStatusNo(), Parse.reverseFormatDateTime(deadline));
+        return String.format("D/%s/%d/%s", super.name, this.getStatusNo(), Parser.reverseFormatDateTime(deadline));
     }
 }
 
@@ -485,8 +485,8 @@ class Event extends Task {
      */
     Event(String name, int status, String from, String to) {
         super(name, status);
-        this.from = Parse.formatDateTime(from);
-        this.to = Parse.formatDateTime(to);
+        this.from = Parser.formatDateTime(from);
+        this.to = Parser.formatDateTime(to);
     }
 
     private int getStatusNo() {
@@ -501,12 +501,12 @@ class Event extends Task {
      * overrrides toString method
      */
     public String toString() {
-        return String.format("[E]%s %s (from %s to %s)", status, name, Parse.TransformDateTime(from), 
-        Parse.TransformDateTime(to));
+        return String.format("[E]%s %s (from %s to %s)", status, name, Parser.TransformDateTime(from),
+        Parser.TransformDateTime(to));
     }
     
     public String toStoreFormatString() {
-        return String.format("E/%s/%d/%s/%s", super.name, this.getStatusNo(), Parse.reverseFormatDateTime(from), Parse.reverseFormatDateTime(to));
+        return String.format("E/%s/%d/%s/%s", super.name, this.getStatusNo(), Parser.reverseFormatDateTime(from), Parser.reverseFormatDateTime(to));
     }
 }
 
