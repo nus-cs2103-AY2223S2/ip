@@ -1,18 +1,37 @@
-import Exceptions.CommandNotFoundException;
+import Duke.TaskMethods;
+import Duke.TaskList;
+import Exceptions.DukeMainExceptions;
+import Storage.Storage;
+import Duke.UI;
 
+import Exceptions.CommandNotFoundException;
+import Exceptions.DukeMainExceptions;
+
+import java.io.IOException;
 import java.util.Scanner;
 
-public class Duke {
-    public static void main(String[] args) {
-        TaskMethods t = new TaskMethods();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?\n");
 
+public class Duke {
+    private TaskList taskList;
+    private Storage storage;
+    private UI ui;
+    public Duke(String filePath) throws IOException {
+        taskList = new TaskList();
+        storage = new Storage(filePath);
+        ui = new UI();
+
+
+        try {
+            taskList = new TaskList(storage.loadTasks());
+        } catch (IOException | DukeMainExceptions errMsg) {
+            System.out.println(errMsg);
+        }
+    }
+
+    public void run() {
+        TaskMethods t = new TaskMethods();
+        ui.greet();
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             String input;
             Scanner scan = new Scanner(System.in);
@@ -23,7 +42,7 @@ public class Duke {
                     : "";
 
             if (splitCommand[0].equals("bye")) {
-                t.bye();
+                ui.bye();
                 break;
             } else if (splitCommand[0].equals("list")) {
                 t.list();
@@ -43,6 +62,11 @@ public class Duke {
                 throw new CommandNotFoundException("I'm sorry, but I don't know what that means :-(");
             }
         }
+        ui.bye();
+    }
+
+    public static void main(String[] args) throws CommandNotFoundException, IOException {
+        new Duke("data/duke.txt").run();
 
     }
 }
