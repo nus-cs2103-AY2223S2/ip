@@ -1,29 +1,36 @@
 package duke.utils;
 
-import duke.taskers.Deadline;
-import duke.taskers.Event;
-import duke.taskers.Task;
-import duke.taskers.Todo;
-import duke.DukeException;
-import duke.Command;
-import duke.Duke;
-
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
+import duke.Command;
+import duke.Duke;
+import duke.DukeException;
+import duke.taskers.Deadline;
+import duke.taskers.Event;
+import duke.taskers.Task;
+import duke.taskers.Todo;
+
+/**
+ * Storage class the stores data into a file.
+ */
 public class Storage {
 
     private String filePath;
     private String dirPath;
     private File dukeFile;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath The path to the duke file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         int lastIndexOfSlash = this.filePath.lastIndexOf(File.separator);

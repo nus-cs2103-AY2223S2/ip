@@ -1,15 +1,14 @@
 package duke.taskers;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.junit.jupiter.api.Test;
+
 public class EventTest {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
 
     @Test
     public void testString1() {

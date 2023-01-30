@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * An enums class that contains the valid commands.
+ */
 public enum Command {
     TODO,
     DEADLINE,

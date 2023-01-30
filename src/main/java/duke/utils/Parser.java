@@ -2,7 +2,9 @@ package duke.utils;
 import duke.Command;
 import duke.DukeException;
 
-
+/**
+ * Parser class to help understand the input lines.
+ */
 public class Parser {
 
     /**
@@ -64,13 +66,13 @@ public class Parser {
         String temp = str.substring(5);
         String[] arr1 = temp.split(" /from ");
         if (arr1.length != 2) {
-            throw new DukeException("I don't know what that means. " +
-                    "Format it as 'event [do something] /from [start date] /to [end date]'");
+            throw new DukeException("I don't know what that means. "
+                    + "Format it as 'event [do something] /from [start date] /to [end date]'");
         }
         String[] arr2 = arr1[1].split(" /to ");
         if (arr2.length != 2) {
-            throw new DukeException("I don't know what that means. " +
-                    "Format it as 'event [do something] /from [start date] /to [end date]'");
+            throw new DukeException("I don't know what that means. "
+                    + "Format it as 'event [do something] /from [start date] /to [end date]'");
         }
         return new String[] {arr1[0], arr2[0], arr2[1]};
     }

@@ -3,11 +3,14 @@ package duke.taskers;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class for when the Task is a deadline.
+ */
 public class Deadline extends duke.taskers.Task {
 
-    private final LocalDateTime end;
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static final DateTimeFormatter FORMATTER_FOR_STRING_ONLY = DateTimeFormatter.ofPattern("d MMM uuuu h.mma");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final LocalDateTime end;
 
 
     /**

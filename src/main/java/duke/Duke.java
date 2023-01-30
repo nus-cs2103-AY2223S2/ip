@@ -1,19 +1,21 @@
 package duke;
 
+import java.io.File;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.taskers.Task;
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
-import java.util.Scanner;
-import java.util.ArrayList;
-
-import java.io.File;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
+/**
+ * The Duke class.
+ */
 public class Duke {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -23,7 +25,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * duke.Duke constructor.
+     * * Duke constructor.
      *
      * @param filePathName The string representing the path to the file duke.
      */
@@ -39,12 +41,12 @@ public class Duke {
         this.tasks = tasks1;
     }
 
-     /**
-     * Creates the localdatetime by parsing the text string.
-      *
-     * @param dateTime The string representation of the local date time.
-     * @return The LocalDateTime object being created.
-     */
+    /**
+    * Creates the localdatetime by parsing the text string.
+    *
+    * @param dateTime The string representation of the local date time.
+    * @return The LocalDateTime object being created.
+    */
     public static LocalDateTime createLocalDateTime(String dateTime) {
         LocalDateTime date;
         try {
@@ -155,9 +157,13 @@ public class Duke {
     }
 
 
+    /**
+     * The main function.
+     * @param args Inputs into the main function.
+     */
     public static void main(String[] args) {
-        String filePathName = "." + File.separator + "src" + File.separator +
-                "main" + File.separator + "data" + File.separator + "duke";
+        String filePathName = "." + File.separator + "src" + File.separator
+                + "main" + File.separator + "data" + File.separator + "duke";
         new Duke(filePathName).run();
     }
 }

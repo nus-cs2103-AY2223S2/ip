@@ -1,5 +1,8 @@
 package duke.taskers;
 
+/**
+ * The Todo class when a Task is a todo.
+ */
 public class Todo extends duke.taskers.Task {
 
     /**
@@ -8,8 +11,7 @@ public class Todo extends duke.taskers.Task {
      * @param description Description of what the todo task is.
      * @param isDone True if todo is done, false if todo is not done.
      */
-    public Todo(String description,  boolean isDone) {
-
+    public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 

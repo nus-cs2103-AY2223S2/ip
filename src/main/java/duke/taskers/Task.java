@@ -1,9 +1,19 @@
 package duke.taskers;
 
+/**
+ * Task class.
+ */
 public class Task {
+
     private final String description;
     private boolean isDone;
 
+    /**
+     * Constructor for that Task class.
+     *
+     * @param description The description of the Task.
+     * @param isDone Boolean to show if the task is done or not.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -44,8 +54,8 @@ public class Task {
      */
     @Override
     public String toString() {
-        return (this.isDone ? "[X]" : "[ ]") +
-                this.description;
+        return (this.isDone ? "[X]" : "[ ]")
+                + this.description;
     }
 
 }

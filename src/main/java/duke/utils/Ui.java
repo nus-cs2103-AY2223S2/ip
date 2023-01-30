@@ -1,9 +1,12 @@
 package duke.utils;
 
-import duke.taskers.Task;
-
 import java.util.ArrayList;
 
+import duke.taskers.Task;
+
+/**
+ * UI class the handles the user interaction.
+ */
 public class Ui {
 
     /**
@@ -13,7 +16,7 @@ public class Ui {
         String totalString = "";
         totalString += " Here are the tasks in your list:";
         for (int i = 0; i < arrList.size(); i++) {
-            totalString += "\n     " + (i+1) + "." + arrList.get(i).toString();
+            totalString += "\n     " + (i + 1) + "." + arrList.get(i).toString();
         }
         this.printWithLines(totalString);
     }
@@ -27,7 +30,7 @@ public class Ui {
         String totalString = "";
         totalString += " Here are the matching tasks in your list:";
         for (int i = 0; i < arrList.size(); i++) {
-            totalString += "\n     " + (i+1) + "." + arrList.get(i).toString();
+            totalString += "\n     " + (i + 1) + "." + arrList.get(i).toString();
         }
         this.printWithLines(totalString);
     }
@@ -67,7 +70,8 @@ public class Ui {
      * @param t duke.taskers.Task to be unmarked.
      */
     public void unmarkResponse(Task t) {
-        String str = " OK, I've marked this task as not done yet:\n" + "       " + t.toString();
+        String str = " OK, I've marked this task as not done yet:\n" + "       "
+                + t.toString();
         this.printWithLines(str);
     }
 
@@ -91,6 +95,12 @@ public class Ui {
         this.printWithLines(" Bye! Hope to see you again soon!");
     }
 
+    /**
+     * Replies when the item is deleted.
+     *
+     * @param t The task to be deleted.
+     * @param arr The array from the task to be deleted.
+     */
     public void deleteItemResponse(Task t, ArrayList<Task> arr) {
         String str = " Noted. I'm removing this task:\n       " + t.toString();
         this.printWithLines(str + listUpdate(arr));
@@ -98,16 +108,18 @@ public class Ui {
     }
 
     /**
+     * Updates the list.
      *
-     * @return The string that updates the number of elements left in the string.
+     * @param arr The array that is remaining after something is done.
+     * @return The string reply.
      */
     public String listUpdate(ArrayList<Task> arr) {
         String plural = "";
         if (arr.size() > 1) {
             plural = "s";
         }
-        return "\n     Now you have " + arr.size() +
-                " task" + plural + " in the list.";
+        return "\n     Now you have " + arr.size()
+                + " task" + plural + " in the list.";
     }
 
 
