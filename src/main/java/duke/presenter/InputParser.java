@@ -50,6 +50,12 @@ public class InputParser {
                     }
                     return commandFactory.createCommand(CommandType.CREATE_TODO,
                             input.substring(4).strip());
+                case "find":
+                    if (tokens.length == 1) {
+                        throw new InvalidParameterError("Oops! Search string cannot be empty");
+                    }
+                    return commandFactory.createCommand(CommandType.FIND,
+                            input.substring(4).strip());
                 case "deadline":
                     matcher = deadlinePattern.matcher(input);
                     // handle matcher not matching

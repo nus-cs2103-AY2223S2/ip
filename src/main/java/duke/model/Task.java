@@ -19,9 +19,6 @@ public abstract class Task implements Serializable {
         this.taskDone = false;
     }
 
-    public String getTaskDescription() {
-        return this.taskDescription;
-    }
     @Override
     public String toString() {
         if (this.taskDone) {
@@ -33,5 +30,9 @@ public abstract class Task implements Serializable {
 
     boolean isDueOn(LocalDateTime time) {
         return false; // general tasks don't have a specific deadline
+    }
+
+    boolean descriptionContains(String s) {
+        return this.taskDescription.contains(s);
     }
 }

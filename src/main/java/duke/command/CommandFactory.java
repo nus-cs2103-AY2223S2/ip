@@ -9,7 +9,8 @@ public class CommandFactory {
     private final TaskModel taskModel;
     private final TaskView taskView;
     public enum CommandType {
-        GREET, BYE, LIST, MARK_DONE, MARK_UNDONE, CREATE_TODO, CREATE_DEADLINE, CREATE_EVENT, DELETE_TASK
+        GREET, BYE, LIST, MARK_DONE, MARK_UNDONE, CREATE_TODO,
+        CREATE_DEADLINE, CREATE_EVENT, DELETE_TASK, FIND,
     }
     public CommandFactory(TaskModel taskModel, TaskView taskView) {
         this.taskModel = taskModel;
@@ -54,6 +55,8 @@ public class CommandFactory {
             case DELETE_TASK:
                 int indexToDelete = Integer.parseInt(args[0]) - 1;
                 return new DeleteTaskCommand(taskView, taskModel, indexToDelete);
+            case FIND:
+                return new FindTaskCommand(taskModel, taskView, args[0]);
             default:
                 // in case we add more to CommandType and forget to add here
                 return null;

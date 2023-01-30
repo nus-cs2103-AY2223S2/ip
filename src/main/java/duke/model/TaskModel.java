@@ -98,4 +98,14 @@ public class TaskModel implements Model {
         tasks.get(taskIndex).markTaskUndone(); // handle out of bounds exception
         writeToFile();
     }
+
+    public List<Task> findTasks(String subStr) {
+        List<Task> res = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.descriptionContains(subStr)) {
+                res.add(task);
+            }
+        }
+        return res;
+    }
 }
