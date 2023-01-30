@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Utility class for saving and loading a list of tasks to and from a text file.
+ */
 public class Storage {
     private String storagePath;
 

@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Class that contains user interaction functionality. User interaction is done via the command line.
+ */
 public class Ui {
     private Scanner inputReader = new Scanner(System.in);
     private String wrapTop = "________________________________\n";

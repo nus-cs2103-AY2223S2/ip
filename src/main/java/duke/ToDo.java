@@ -3,6 +3,9 @@ package duke;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Represents a to do task. Inherits from the Task class;
+ */
 public class ToDo extends Task {
 
     public ToDo(String description) {

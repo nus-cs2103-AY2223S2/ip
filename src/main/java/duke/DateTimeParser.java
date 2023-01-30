@@ -8,7 +8,10 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
-
+/**
+ * Contains functionality for parsing date and time input, as well as formatting
+ * LocalDate and LocalDateTime objects.
+ */
 public class DateTimeParser {
 
     private static DateTimeFormatter parser = new DateTimeFormatterBuilder()

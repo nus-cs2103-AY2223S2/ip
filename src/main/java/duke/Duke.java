@@ -3,6 +3,10 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Contains the entry point of the Duke application, a Personal Assistant Chatbot used
+ * for keeping track of various things.
+ */
 public class Duke {
     private static TaskList taskList = new TaskList();
     private static boolean exitApp = false;

@@ -3,6 +3,9 @@ package duke;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Used to parse user input into recognised commands and execute them.
+ */
 public class Parser {
 
     /**

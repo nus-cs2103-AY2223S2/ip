@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a generic task
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

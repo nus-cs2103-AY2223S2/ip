@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Represents an iterable list of tasks.
+ */
 public class TaskList implements Iterable<Task> {
     private ArrayList<Task> taskList;
 
