@@ -1,4 +1,6 @@
-package storage;
+package duke.storage;
+
+import duke.task.TaskList;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,8 +14,6 @@ import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import task.Task;
-import task.TaskList;
 
 public class Storage {
     private final String filePath;

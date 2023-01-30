@@ -1,18 +1,18 @@
-package parser;
+package duke.parser;
 
-import exceptions.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.Todo;
+import duke.exceptions.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import storage.Storage;
-import ui.Ui;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 
 public class Parser {
@@ -34,7 +34,7 @@ public class Parser {
             int idx;
             Task tsk;
             String markMsg, tskNum;
-            String cfmMsg = "Got it. I've added this task:";
+            String cfmMsg = "Got it. I've added this duke.exceptions.task:";
             String[] desc;
             LocalDateTime date, from, to;
 
@@ -51,7 +51,7 @@ public class Parser {
                     idx = Integer.parseInt(inputs[1]) - 1;
                     tsk = data.get(idx);
                     tsk.mark();
-                    markMsg = "Nice! I've marked this task as done:";
+                    markMsg = "Nice! I've marked this duke.exceptions.task as done:";
                     String markedTask = String.format(" %s", tsk);
                     String[] markedMsg = {markMsg, markedTask};
                     this.ui.printMsg(markedMsg);
@@ -60,7 +60,7 @@ public class Parser {
                     idx = Integer.parseInt(inputs[1]) - 1;
                     tsk = data.get(idx);
                     tsk.unmark();
-                    markMsg = "OK, I've marked this task as not done yet:";
+                    markMsg = "OK, I've marked this duke.exceptions.task as not done yet:";
                     String unmarkedTask = String.format(" %s", tsk);
                     String[] unmarkedMsg = {markMsg, unmarkedTask};
                     this.ui.printMsg(unmarkedMsg);
@@ -98,7 +98,7 @@ public class Parser {
                     tsk = data.get(idx);
                     data.delete(idx);
                     tskNum = String.format("Now you have %d tasks in the list.", data.size());
-                    String[] delMsg = {"Noted. I've removed this task:", tsk.toString(), tskNum};
+                    String[] delMsg = {"Noted. I've removed this duke.exceptions.task:", tsk.toString(), tskNum};
                     this.ui.printMsg(delMsg);
                     break;
                 default:

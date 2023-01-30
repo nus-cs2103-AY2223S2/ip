@@ -1,7 +1,7 @@
 
-import parser.Parser;
-import storage.Storage;
-import ui.Ui;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 public class Duke {
     private final Parser parser;
