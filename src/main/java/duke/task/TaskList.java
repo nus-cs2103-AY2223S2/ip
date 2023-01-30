@@ -76,6 +76,28 @@ public class TaskList {
 
     }
 
+    public void find(String[] parts) throws EmptyDescriptionException {
+        if (parts.length == 1) {
+            throw new EmptyDescriptionException();
+        }
+
+        StringBuilder newList = new StringBuilder();
+        int counter = 1;
+        for (Task task: list) {
+            String description = task.getDescription().toLowerCase();
+            String word = parts[1].trim();
+
+            if (description.contains(word.toLowerCase())) {
+                newList.append(counter + ". "
+                        + task.toString() + "\n");
+
+                counter++;
+            }
+
+        }
+        System.out.println("Here are the matching tasks in your list: \n" + newList);
+    }
+
     public void createTask(String[] parts) throws EmptyDescriptionException {
 
         String taskType = parts[0];
