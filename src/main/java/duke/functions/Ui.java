@@ -24,8 +24,8 @@ public class Ui {
                 }
                 String[] inputArr = input.split(" ", 2);
                 //Check for invalid commands (first word)
-                boolean validCommand = commandList.contains(inputArr[0]);
-                if (!validCommand) {
+                boolean isValidCommand = commandList.contains(inputArr[0]);
+                if (!isValidCommand) {
                     throw new InvalidCommandException();
                 }
                 p.handleInput(input, records);
@@ -37,9 +37,8 @@ public class Ui {
     }
 
     public static String format(String input) {
-        return "____________________________________________________________\n" +
-                input +
-                "\n____________________________________________________________";
+        String s = "____________________________________________________________";
+        return String.format("%s\n%s\n%s", s, input, s);
     }
 
     public void greet() {

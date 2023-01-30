@@ -25,7 +25,6 @@ public class Parser {
         if (input.contains("/")) {
             String[] split = input.split("/", 2);
             String[] secondSplit = split[0].split(" ", 2);
-
             String command = secondSplit[0];
             String name = secondSplit[1];
             String time = split[1];
