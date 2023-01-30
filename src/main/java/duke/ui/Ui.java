@@ -79,8 +79,7 @@ public class Ui {
      */
     public void showError(Object... lines) {
         for (Object l : lines) {
-            out.println(l.toString());
-            printConsole("Error! [ " + l + " ]");
+            printConsole("[Error!] " + l);
         }
     }
 }
