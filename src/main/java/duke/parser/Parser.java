@@ -1,7 +1,16 @@
 package duke.parser;
 
-
-import duke.commands.*;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.MarkCommand;
+import duke.commands.ListCommand;
+import duke.commands.UnmarkCommand;
+import duke.commands.EventCommand;
+import duke.commands.TodoCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.exception.DukeException;
 
 import java.time.LocalDate;
@@ -17,6 +26,12 @@ public class Parser {
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     public static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
+    /**
+     * Parses a user input and returns a command to be executed.
+     *
+     * @param userInput The user input to be parsed.
+     * @return A command to be executed.
+     */
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {

@@ -3,6 +3,9 @@ package duke.commands;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
+/**
+ * Represents a next command.
+ */
 public class NextCommand extends Command {
 
     @Override

@@ -6,6 +6,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.TextUi;
 
+/**
+ * Represents a Duke object
+ */
 public class Duke {
 
     private TextUi ui;

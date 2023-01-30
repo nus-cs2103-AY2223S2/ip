@@ -118,7 +118,7 @@ public class TaskList {
      * @throws DukeException If the task has already been marked.
      */
     public void markTask(int TaskNumber) throws DukeException {
-        Task task = tasks.get(TaskNumber-1);
+        Task task = tasks.get(TaskNumber - 1);
         if (task.isMarked) {
             throw new DukeException("This task has already been marked as done.");
         } else {
@@ -138,7 +138,7 @@ public class TaskList {
      * @throws DukeException If the task is already unmarked.
      */
     public void unmarkTask(int taskNumber) throws DukeException {
-        Task task = tasks.get(taskNumber-1);
+        Task task = tasks.get(taskNumber - 1);
         if (!task.isMarked()) {
             throw new DukeException("Oops! This task has not been marked as done before.");
         } else {
@@ -153,7 +153,6 @@ public class TaskList {
      * Returns a list of Task objects that match the keyword.
      *
      * @param keyword The string to search for.
-     * @return The list of Task objects that match the keyword.
      */
     public void search(String keyword) throws DukeException {
         List<Task> searched = new ArrayList<>();

@@ -3,6 +3,9 @@ package duke.commands;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
+/**
+ * Represents an exit command.
+ */
 public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";

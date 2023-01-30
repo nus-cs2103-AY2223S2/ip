@@ -4,10 +4,18 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
+/**
+ * Represents a delete command.
+ */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     protected int taskNumber;
 
+    /**
+     * A constructor to initialize a delete command.
+     *
+     * @param taskNumber The task number of the task to be deleted.
+     */
     public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
