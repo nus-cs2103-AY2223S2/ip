@@ -9,6 +9,9 @@ import exceptions.UnknownCommandException;
 import formatters.DateTimeUtils;
 import formatters.StringUtils;
 
+/**
+ * Represents a basic task with a deadline.
+ */
 public class Deadline extends Task {
 
     private LocalDate deadlineDate;

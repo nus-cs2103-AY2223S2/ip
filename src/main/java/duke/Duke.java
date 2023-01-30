@@ -55,4 +55,7 @@ public class Duke {
         storage.saveData(FILEPATH, taskList);
         System.out.println(BANNER);
     }
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 }

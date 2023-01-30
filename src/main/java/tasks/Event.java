@@ -9,7 +9,9 @@ import exceptions.UnknownCommandException;
 import formatters.DateTimeUtils;
 import formatters.StringUtils;
 
-
+/**
+ * Represents a basic task that lasts over a period of time.
+ */
 public class Event extends Task {
 
     private String startTimeString;
