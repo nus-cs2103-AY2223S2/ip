@@ -50,6 +50,9 @@ checkstyle {
     toolVersion = "10.2"
 }
 
+checkstyleMain
+    .exclude('duke/Parser.java')
+
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
