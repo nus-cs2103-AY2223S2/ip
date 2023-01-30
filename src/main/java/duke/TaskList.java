@@ -16,7 +16,7 @@ public class TaskList {
         return this.tasks;
     }
 
-    Task getTask(int taskNumber){
+    Task getTask(int taskNumber) {
         return tasks.get(taskNumber - 1);
     }
 
@@ -47,9 +47,4 @@ public class TaskList {
         }
         tasks.remove(taskNumber - 1);
     }
-
-
-
-
-
 }

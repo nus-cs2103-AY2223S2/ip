@@ -7,12 +7,12 @@ public class Ui {
 
     Ui() {
         scanner = new Scanner(System.in);
-
     }
 
     String readInput() {
         return scanner.nextLine();
     }
+
     void showDuke() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"

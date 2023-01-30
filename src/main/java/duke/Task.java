@@ -13,7 +13,9 @@ public class Task {
         this.isDone = true;
     }
 
-    public void markAsNotDone() { this.isDone = false; }
+    public void markAsNotDone() {
+        this.isDone = false;
+    }
 
     @Override
     public String toString() {
@@ -23,5 +25,4 @@ public class Task {
     public String sendOutputToFile() {
         return String.format("Task | %d | %s", isDone ? 1 : 0, description);
     }
-
 }

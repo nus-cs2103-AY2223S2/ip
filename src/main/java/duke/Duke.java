@@ -25,10 +25,8 @@ public class Duke {
     public void runApp() {
         ui.showDuke();
         ui.greetingMessage();
-
         boolean enteredBye = false;
         while (!enteredBye) {
-
             try {
                 String input = ui.readInput();
                 if (input.equals("bye")) {
