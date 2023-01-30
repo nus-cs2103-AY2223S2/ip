@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 
 public class CommandManager {
 
     public static void run(String input, String[] command, TaskList tasks) {
-
         try {
             if (command[0].equals("list")) {
                 tasks.listTasks();
@@ -22,9 +23,11 @@ public class CommandManager {
             } else {
                 System.out.println("Invalid command wake up brother");
             }
-        } catch (DukeException dukeException) {
-            System.out.println(dukeException.getMessage());
+        } catch (InvalidTaskDescriptionException e) {
+            System.out.println(e.getMessage());
         }
+
+
     }
 }
 

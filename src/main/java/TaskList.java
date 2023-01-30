@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TaskList {
     ArrayList<Task> tasks;
@@ -27,11 +28,14 @@ public class TaskList {
 
     //add event
     public void addEvent(String input) throws InvalidTaskDescriptionException{
-        String[] newInput = input.split("/");
-        if (newInput.length < 2) {
+        String[] nInput = input.split("/");
+        if (nInput.length < 2) {
             throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
         }
-        tasks.add(currentSize, new Event(newInput[0], newInput[1], newInput[2]));
+        String[] newInput = input.split("/");
+        String date1 = newInput[1]  + "/" +  newInput[2]  + "/" +  newInput[3];
+        String date2 = newInput[4]  + "/" +  newInput[5]  + "/" +  newInput[6];
+        tasks.add(currentSize, new Event(newInput[0], date1, date2));
         this.currentSize++;
         System.out.println("Gotchu fam");
         System.out.printf("I've added\n" + tasks.get(currentSize-1).toString() +
@@ -41,11 +45,15 @@ public class TaskList {
 
     //add deadline
     public void addDeadline(String input) throws InvalidTaskDescriptionException{
-        String[] newInput = input.split("/");
-        if (newInput.length < 2) {
+        String[] nInput = input.split("/");
+        if (nInput.length < 2) {
             throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
         }
-        tasks.add(currentSize, new Deadline(newInput[0], newInput[1]));
+        String[] newInput = input.split("/");
+        String date = newInput[1] + "/" +  newInput[2]  + "/"  + newInput[3];
+        System.out.println(Arrays.toString(newInput));
+        System.out.println(date);
+        tasks.add(currentSize, new Deadline(newInput[0], date));
         this.currentSize++;
         System.out.println("Gotchu fam");
         System.out.printf("I've added\n" + tasks.get(currentSize-1).toString() +
