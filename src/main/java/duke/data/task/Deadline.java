@@ -5,8 +5,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-
+    /** Deadline date */
     protected LocalDate byDate = null;
+    /** Deadline time */
     protected LocalTime byTime = null;
 
     public Deadline(String description, String by) {

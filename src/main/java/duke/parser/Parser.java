@@ -66,8 +66,7 @@ public class Parser {
                 throw new DukeException("Unable to delete.");
             }
             return new DeleteCommand(details);
-        }
-        else {
+        } else {
             throw new DukeException("I do not quite understand that.");
         }
     }

@@ -13,6 +13,14 @@ public class AddEventCommand extends Command {
     private String details;
     private String from;
     private String to;
+
+    /**
+     * Constructor for add event command.
+     *
+     * @param details Description of event task.
+     * @param from Start of event task.
+     * @param to End of event task.
+     */
     public AddEventCommand(String details, String from, String to) {
         this.details = details;
         this.from = from;
