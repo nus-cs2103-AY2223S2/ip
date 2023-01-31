@@ -1,71 +1,79 @@
 import java.io.File;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
-public class DriveStorageOOP {
+import java.util.ArrayList;
 
+/**
+ * Handles storing of Tasks in hard drive.
+ */
+public class Storage {
 
+    /** File path to stored file in hard drive. */
+    private String filePath;
 
-    public static boolean createFile() {
-        try {
-            File storage = new File("duke.txt");
-            if (storage.createNewFile()) {
-                System.out.println("File created: " + storage.getName());
-                return true;
-
-            } else {
-                System.out.println("File already exists. " +
-                        "No action is needed. Any past tasks will be loaded into this session as well.");
-                return false;
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-            return false;
-
-        }
+    /**
+     * Creates a new Storage session.
+     * @param filePath File path to stored file in hard drive.
+     */
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
-    public static void loadTasks(TaskStorage taskStorage) {
+    /**
+     * Loads a list of tasks from hard drive.
+     * @return A list of tasks stored in hard drive.
+     * @throws DukeException when there is an error loading tasks from hard drive.
+     */
+    public ArrayList<Task> load() throws DukeException {
+        File file = new File(filePath);
 
         try {
-            File myObj = new File("duke.txt");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String[] nextLine = myReader.nextLine().split(" ", 3);
-                Boolean completed = nextLine[0].equals("1") ? true : false;
+            if (file.createNewFile()) {
+                System.out.println("No existing tasks found on this device. New storage created: " + file.getName());
+            } else {
+                System.out.println("Existing tasks found on this device have been loaded into this session. " +
+                        "No action is needed.");
+            }
+        } catch (Exception e) {
+            throw new DukeException();
+        }
+
+        try {
+            Scanner scanner = new Scanner(file);
+            ArrayList<Task> tasks = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                String[] nextLine = scanner.nextLine().split(" ", 3);
+                Boolean isCompleted = nextLine[0].equals("1") ? true : false;
                 String firstWord = nextLine[1];
 
                 if (firstWord.equals("deadline")) {
                     String bodyMessage = nextLine[2];
-                    DeadLine newTask = new DeadLine("deadline", bodyMessage, completed);
-                    taskStorage.addTask(newTask);
-                    continue;
-
-                }
-                if (firstWord.equals("event")) {
+                    DeadLine task = new DeadLine("deadline", bodyMessage, isCompleted);
+                    tasks.add(task);
+                } else if (firstWord.equals("event")) {
                     String bodyMessage = nextLine[2];
-                    Event newTask = new Event("event", bodyMessage, completed);
-                    taskStorage.addTask(newTask);
-                    continue;
-                }
-
-                if (firstWord.equals("todo")) {
+                    Event task = new Event("event", bodyMessage, isCompleted);
+                    tasks.add(task);
+                } else if (firstWord.equals("todo")) {
                     String bodyMessage = nextLine[2];
-                    ToDo newTask = new ToDo("todo", bodyMessage, completed);
-                    taskStorage.addTask(newTask);
+                    ToDo task = new ToDo("todo", bodyMessage, isCompleted);
+                    tasks.add(task);
                 }
             }
-
-            myReader.close();
+            scanner.close();
+            return tasks;
         }   catch (Exception e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            throw new DukeException();
         }
     }
 
-    public static void changeTaskStatus(String taskData) {
+    /**
+     * Updates task completion status in hard drive.
+     * @param taskData A String that identifies the task in hard drive.
+     * @throws DukeException when there is an error performing the operation.
+     */
+    public void changeTaskStatus(String taskData) throws DukeException {
         try {
             //Instantiating the File class
             File myObj = new File("duke.txt");
@@ -74,10 +82,10 @@ public class DriveStorageOOP {
 
             StringBuffer buffer = new StringBuffer();
 
-            String completed = taskData.split(" ", 2)[0];
+            String isCompleted = taskData.split(" ", 2)[0];
             String description =   taskData.split(" ", 2)[1];
 
-            String updatedDescription = completed.equals("1") ? "0 " + description : "1 " + description;
+            String updatedDescription = isCompleted.equals("1") ? "0 " + description : "1 " + description;
 
             //Reading lines of the file and appending them to StringBuffer
             while (sc.hasNextLine()) {
@@ -95,15 +103,18 @@ public class DriveStorageOOP {
             FileWriter writer = new FileWriter("duke.txt");
             writer.append(fileContents);
             writer.close();
-            System.out.println("updated hard drive!");
         }
         catch (Exception e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            throw new DukeException();
         }
     }
 
-    public static void deleteTask(String taskData) {
+    /**
+     * Deletes task from hard drive.
+     * @param taskData A String that identifies the task in hard drive.
+     * @throws DukeException when there is an error performing the operation.
+     */
+    public void deleteTask(String taskData) throws DukeException {
         try {
             //Instantiating the File class
             File myObj = new File("duke.txt");
@@ -134,15 +145,16 @@ public class DriveStorageOOP {
             System.out.println("updated hard drive!");
         }
         catch (Exception e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+           throw new DukeException();
         }
     }
 
-
-
-
-    public static void addTask(String input) {
+    /**
+     * Adds a task to hard drive.
+     * @param input Description of task to be added to hard drive.
+     * @throws DukeException when there is an error performing the operation.
+     */
+    public void addTask(String input) throws DukeException {
         try {
             //Instantiating the File class
             File myObj = new File("duke.txt");
@@ -169,8 +181,7 @@ public class DriveStorageOOP {
         }
 
         catch (Exception e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            throw new DukeException();
         }
     }
 
