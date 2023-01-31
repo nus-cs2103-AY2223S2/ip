@@ -216,6 +216,13 @@ public class Parser {
 
     }
 
+    /**
+     * Parses the user's text input into an executable command.
+     *
+     * @param userCommand The user's text input.
+     * @return The executable command obtained from the user's input.
+     * @throws DukeException When the user's input cannot be parsed into an executable command.
+     */
     public static Command parse(String userCommand) throws DukeException {
 
         String command = userCommand.strip().replaceAll("( )+", " ");
