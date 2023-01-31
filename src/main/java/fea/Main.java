@@ -15,17 +15,20 @@ import javafx.stage.Stage;
  * A GUI for FEA using FXML.
  */
 public class Main extends Application {
+    private static final String APP_NAME = "Fate Eggplant Assistant";
+    private static final String MAIN_WINDOW_PATH = "/view/MainWindow.fxml";
+    private static final String LOGO_PATH = "/images/logo.png";
     private String filePath = String.format("data%sfea.txt", File.separator);
     private Fea fea = new Fea(filePath);
 
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(MAIN_WINDOW_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setTitle("Fate Eggplant Assistant");
-            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/logo.png")));
+            stage.setTitle(APP_NAME);
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream(LOGO_PATH)));
             stage.setScene(scene);
             stage.sizeToScene();
             fxmlLoader.<MainWindow>getController().setFea(fea);
