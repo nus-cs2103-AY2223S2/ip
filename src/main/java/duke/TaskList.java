@@ -1,10 +1,8 @@
 package duke;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import duke.tasks.Task;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Represents a list of Task to store users' tasks
@@ -34,9 +32,9 @@ public class TaskList {
         tasks.add(task);
         if (!isLoad) {
             Ui.print(
-                    "Got it. I've added this task:\n" +
-                            "\t  " + task + "\n" +
-                            "\tNow you have " + tasks.size() + " task(s) in the list."
+                    "Got it. I've added this task:\n"
+                            + "\t  " + task + "\n"
+                            + "\tNow you have " + tasks.size() + " task(s) in the list."
             );
         }
     }
@@ -48,9 +46,9 @@ public class TaskList {
      */
     public void deleteTask(int taskId) {
         Ui.print(
-                "Noted. I've removed this task:\n" +
-                        "\t  " + tasks.get(taskId) + "\n" +
-                        "\tNow you have " + (tasks.size() - 1) + " task(s) in the list."
+                "Noted. I've removed this task:\n"
+                        + "\t  " + tasks.get(taskId) + "\n"
+                        + "\tNow you have " + (tasks.size() - 1) + " task(s) in the list."
         );
         tasks.remove(taskId);
     }

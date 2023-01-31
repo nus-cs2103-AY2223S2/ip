@@ -22,7 +22,7 @@ public class Todo extends Task {
     public String getData() {
         StringBuilder sb = new StringBuilder();
         sb.append("T | ");
-        if (this.isDone) {
+        if (isTaskDone()) {
             sb.append("1 | ");
         } else {
             sb.append("0 | ");

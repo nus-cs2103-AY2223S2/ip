@@ -37,8 +37,8 @@ public class Ui {
      * Prints greeting message to user.
      */
     public static void greet() {
-        print("Hello! I'm Duke\n" +
-                "\tWhat can I do for you?");
+        print("Hello! I'm Duke\n"
+                + "\tWhat can I do for you?");
     }
 
     /**

@@ -1,9 +1,8 @@
 package duke.tasks;
-
-import exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import exception.DukeException;
 
 /**
  * Represents Task object with event type.
@@ -27,8 +26,8 @@ public class Event extends Task {
             this.start = LocalDate.parse(start);
             this.end = LocalDate.parse(end);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Parse Error: " + e.getMessage() + "\n" +
-                    "\tAccepted format: \"YYYY-MM-DD\"");
+            throw new DukeException("Parse Error: " + e.getMessage() + "\n"
+                    + "\tAccepted format: \"YYYY-MM-DD\"");
         }
 
     }
@@ -43,7 +42,7 @@ public class Event extends Task {
     public String getData() {
         StringBuilder sb = new StringBuilder();
         sb.append("E | ");
-        if (this.isDone) {
+        if (isTaskDone()) {
             sb.append("1 | ");
         } else {
             sb.append("0 | ");
@@ -61,8 +60,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() +
-                " (from: " + start.getMonth().toString().substring(0, 3) + " " + start.getDayOfMonth() + " " + start.getYear() +
-                " to: " + end.getMonth().toString().substring(0, 3) + " " + end.getDayOfMonth() + " " + end.getYear() + ")";
+        return "[E]" + super.toString()
+                + " (from: " + start.getMonth().toString().substring(0, 3) + " "
+                + start.getDayOfMonth() + " " + start.getYear()
+                + " to: " + end.getMonth().toString().substring(0, 3) + " "
+                + end.getDayOfMonth() + " " + end.getYear() + ")";
     }
 }

@@ -1,10 +1,8 @@
 package duke.tasks;
-
-import exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import exception.DukeException;
 
 /**
  * Represents Task object with deadline type.
@@ -25,8 +23,8 @@ public class Deadline extends Task {
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Parse Error: " + e.getMessage() + "\n" +
-                    "\tAccepted format: \"YYYY-MM-DD\"");
+            throw new DukeException("Parse Error: " + e.getMessage() + "\n"
+                    + "\tAccepted format: \"YYYY-MM-DD\"");
         }
     }
 
@@ -40,7 +38,7 @@ public class Deadline extends Task {
     public String getData() {
         StringBuilder sb = new StringBuilder();
         sb.append("D | ");
-        if (this.isDone) {
+        if (isTaskDone()) {
             sb.append("1 | ");
         } else {
             sb.append("0 | ");
@@ -57,9 +55,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                by.getMonth().toString().substring(0, 3) + " " +
-                by.getDayOfMonth() + " " +
-                by.getYear() + ")";
+        return "[D]" + super.toString() + " (by: "
+                + by.getMonth().toString().substring(0, 3) + " "
+                + by.getDayOfMonth() + " "
+                + by.getYear() + ")";
     }
 }
