@@ -1,17 +1,16 @@
-package storage;
+package duke.storage;
 
-import exception.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
-import tasklist.TaskList;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,7 +37,7 @@ public class Storage {
                 Files.createFile(filePath);
             }
         } catch (IOException e) {
-            throw new DukeException("An error occurred while loading storage.");
+            throw new DukeException("An error occurred while loading duke.storage.");
         }
     }
 
@@ -62,7 +61,7 @@ public class Storage {
                     task = new Event(splitData[2], splitData[3], splitData[4]);
                     break;
                 default:
-                    throw new DukeException("Invalid storage format.");
+                    throw new DukeException("Invalid duke.storage format.");
                 }
                 if (splitData[1].equals("X")) {
                     task.markAsDone();

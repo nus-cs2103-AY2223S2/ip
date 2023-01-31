@@ -1,4 +1,4 @@
-package parser;
+package duke.parser;
 
 public class Parser {
     private String input;

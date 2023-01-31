@@ -1,7 +1,7 @@
-package exception;
+package duke.exception;
 
 /**
- * Class to represent exceptions specific to Duke.
+ * Class to represent exceptions specific to duke.Duke.
  */
 public class DukeException extends Exception {
     /**

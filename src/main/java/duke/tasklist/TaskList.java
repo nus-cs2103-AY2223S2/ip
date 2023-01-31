@@ -1,7 +1,7 @@
-package tasklist;
+package duke.tasklist;
 
-import exception.DukeException;
-import task.Task;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class TaskList {
         try {
             return list.get(i);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Unable to get task.");
+            throw new DukeException("Unable to get duke.task.");
         }
     }
 
@@ -38,7 +38,7 @@ public class TaskList {
             Task t = list.remove(i);
             return t;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Unable to remove task.");
+            throw new DukeException("Unable to remove duke.task.");
         }
     }
 }

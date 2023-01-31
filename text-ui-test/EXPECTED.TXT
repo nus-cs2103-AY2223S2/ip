@@ -6,29 +6,29 @@ Hello from
 |____/ \__,_|_|\_\___|
 
     ____________________________________________________________
-     Hello! I'm Duke
+     Hello! I'm duke.Duke
      What can I do for you?
     ____________________________________________________________
     ____________________________________________________________
      ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
     ____________________________________________________________
     ____________________________________________________________
-     Got it. I've added this task:
+     Got it. I've added this duke.task:
        [T][ ] borrow book
      Now you have 1 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
-     Got it. I've added this task:
+     Got it. I've added this duke.task:
        [D][ ] return book (by: Feb 01 2023 15:00)
      Now you have 2 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
-     Got it. I've added this task:
+     Got it. I've added this duke.task:
        [E][ ] project meeting (from: Feb 07 2023 17:00 to: Feb 11 2023 23:00)
      Now you have 3 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
-     Nice! I've marked this task as done:
+     Nice! I've marked this duke.task as done:
        [D][X] return book (by: Feb 01 2023 15:00)
     ____________________________________________________________
     ____________________________________________________________
@@ -44,7 +44,7 @@ Hello from
      ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
     ____________________________________________________________
     ____________________________________________________________
-     Noted. I've removed this task:
+     Noted. I've removed this duke.task:
        [D][X] return book (by: Feb 01 2023 15:00)
      Now you have 2 tasks in the list.
     ____________________________________________________________
@@ -54,12 +54,12 @@ Hello from
      2.[E][ ] project meeting (from: Feb 07 2023 17:00 to: Feb 11 2023 23:00)
     ____________________________________________________________
     ____________________________________________________________
-     Noted. I've removed this task:
+     Noted. I've removed this duke.task:
        [T][ ] borrow book
      Now you have 1 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
-     Noted. I've removed this task:
+     Noted. I've removed this duke.task:
        [E][ ] project meeting (from: Feb 07 2023 17:00 to: Feb 11 2023 23:00)
      Now you have 0 tasks in the list.
     ____________________________________________________________

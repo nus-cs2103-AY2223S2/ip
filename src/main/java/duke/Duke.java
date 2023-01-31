@@ -1,10 +1,12 @@
+package duke;
+
 import java.util.Scanner;
 
-import exception.DukeException;
-import parser.Parser;
-import storage.Storage;
-import tasklist.TaskList;
-import ui.Ui;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
 
@@ -25,10 +27,10 @@ public class Duke {
 
     /**
      * Replies to user inputs according to requirements.
-     * If user inputs "bye", return to exit Duke.
+     * If user inputs "bye", return to exit duke.Duke.
      * If user inputs "list", print current tasks.
-     * If user inputs "mark NUMBER" or "unmark NUMBER", update the doneness of that task number.
-     * If user inputs a task, add to current tasks.
+     * If user inputs "mark NUMBER" or "unmark NUMBER", update the doneness of that duke.task number.
+     * If user inputs a duke.task, add to current tasks.
      */
     public void run() {
         try {

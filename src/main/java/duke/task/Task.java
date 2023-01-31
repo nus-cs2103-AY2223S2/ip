@@ -1,7 +1,7 @@
-package task;
+package duke.task;
 
 /**
- * Class to store task description along with completion status.
+ * Class to store duke.task description along with completion status.
  */
 public abstract class Task {
     protected String description;
@@ -23,7 +23,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done duke.task with X
     }
 
     public String getDescription() {
