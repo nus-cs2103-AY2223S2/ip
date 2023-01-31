@@ -21,7 +21,7 @@ public class AddToDoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask = new ToDo(description);
         tasks.add(newTask);
-        ui.showToUser("You have added: " + newTask.toString(), "You have " + tasks.getSize() + " tasks in the list.");
+        ui.showToUser("You have added: " + newTask, "You have " + tasks.getSize() + " tasks in the list.");
         try {
             storage.appendToFile(newTask);
         } catch (IOException e) {

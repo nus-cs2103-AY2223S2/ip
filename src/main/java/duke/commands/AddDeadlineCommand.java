@@ -24,7 +24,7 @@ public class AddDeadlineCommand extends Command {
         try {
             Task newTask = new Deadline(description, deadline);
             tasks.add(newTask);
-            ui.showToUser("You have added: " + newTask.toString(), "You have " + tasks.getSize() + " tasks in the list.");
+            ui.showToUser("You have added: " + newTask, "You have " + tasks.getSize() + " tasks in the list.");
             storage.appendToFile(newTask);
         } catch (IOException e) {
             throw new DukeException("Unable to write to file. Please run Duke again.");

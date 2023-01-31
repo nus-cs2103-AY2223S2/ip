@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import duke.exception.DukeException;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    private final LocalDate by;
 
     public Deadline(String description, String by) {
         super(description);

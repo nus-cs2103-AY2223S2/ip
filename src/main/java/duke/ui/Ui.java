@@ -68,10 +68,6 @@ public class Ui {
         showToUser(LOADING_ERROR);
     }
 
-    public void showTaskReply(int numOfTasks) {
-        showToUser();
-    }
-
     /** Shows a variable number of messages to user */
     public void showToUser(String... message) {
         for (String m : message) {
