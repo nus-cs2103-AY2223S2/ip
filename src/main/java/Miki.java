@@ -36,8 +36,11 @@ public class Miki {
         if (!hasNoAutoload) {
             try {
                 storage.load("autosave.txt", tasks);
-            } catch (IOException | Storage.MikiLoadException ex) {
+            } catch (IOException ex) {
 
+            } catch (Storage.MikiLoadException ex) {
+                ui.print("the autosave is corrupted... not using that!");
+                ui.printDiv();
             }
         }
 

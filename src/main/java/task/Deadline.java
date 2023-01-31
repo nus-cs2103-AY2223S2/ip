@@ -36,7 +36,7 @@ public class Deadline extends Task {
     public static Deadline parseArgs(String[] args) throws TaskParseException {
         String objective = "";
         String by = "";
-        boolean isInTokenBy = false;
+        boolean isInTokenBy = false; // true after scanning "/by" token - subsequent text is part of "by"-timing
         if (Collections.frequency(Arrays.asList(args), "/by") > 1) {
             throw new TaskParseException("This deadline has too many timings!");
         }

@@ -139,7 +139,7 @@ public class Storage {
                 }
             }
         } catch (NumberFormatException | TaskParseException ex) {
-            throw new MikiLoadException("this file is corrupt...");
+            throw new MikiLoadException("this file is corrupted...");
         } finally {
             br.close();
         }

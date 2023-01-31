@@ -40,8 +40,8 @@ public class Event extends Task {
         String objective = "";
         String from = "";
         String to = "";
-        boolean isInTokenFrom = false;
-        boolean isInTokenTo = false;
+        boolean isInTokenFrom = false; // true after scanning "/from" token - subsequent text is part of "from"-timing
+        boolean isInTokenTo = false; // true after scanning "/to" token - subsequent text is part of "to"-timing
         if (Collections.frequency(Arrays.asList(args), "/from") > 1) {
             throw new TaskParseException("This event has too many start-times!");
         }
