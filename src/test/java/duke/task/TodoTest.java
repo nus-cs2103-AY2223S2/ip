@@ -9,9 +9,9 @@ class TodoTest {
     @Test
     void todoTest(){
         Todo test = new Todo("test");
-        assertEquals("[T][ ]test", test.toString(), "toString() method works");
+        assertEquals("[T][ ] test", test.toString(), "toString() method works");
 
         test.markDone();
-        assertEquals("[T][X]test", test.toString(), "markDone() method works");
+        assertEquals("[T][X] test", test.toString(), "markDone() method works");
     }
 }

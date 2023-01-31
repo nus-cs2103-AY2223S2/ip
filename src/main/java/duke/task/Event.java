@@ -28,6 +28,6 @@ public class Event extends Task {
     public String toString() {
         String fromDateFormat = this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
         String toDateFormat = this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
-        return "[E]" + super.toString() + "(from: " + fromDateFormat + " to: " + toDateFormat + ")";
+        return "[E]" + super.toString() + " (from: " + fromDateFormat + " to: " + toDateFormat + ")";
     }
 }
