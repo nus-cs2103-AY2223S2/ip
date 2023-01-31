@@ -25,7 +25,8 @@ public class Delete implements Command {
     public void run(TaskList tasks, Ui ui, Storage storage) {
         try {
             Task task = tasks.delete(idx);
-            ui.print("hm hmm... task #" + (idx + 1) + " deleted! " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " left.");
+            ui.print("hm hmm... task #" + (idx + 1) + " deleted! "
+                    + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " left.");
             ui.print("- " + task);
         } catch (TaskListIndexException ex) {
             ui.print("?!?!? " + ex.getMessage());

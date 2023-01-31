@@ -1,16 +1,24 @@
 package command;
 
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
+
 import shigure.Ui;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
 
-import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
-
+/**
+ * A command printing the contents of a <code>TaskList</code> matching a given regular expression.
+ */
 public class Find implements Command {
     private String regex = "";
 
+    /**
+     * Creates a find command.
+     *
+     * @param regex regular expression to match against.
+     */
     public Find(String regex) {
         this.regex = regex;
     }

@@ -1,12 +1,12 @@
-import org.junit.jupiter.api.Test;
-import shigure.Ui;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+
+import org.junit.jupiter.api.Test;
+import shigure.Ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -55,13 +55,14 @@ public class UiTest {
         assertEquals("     hello world\n"
                         + "    ____________________________________________________________________________\n"
                         + "     mint fantôme\n"
-                        + ">"
-                , out);
+                        + ">",
+                out);
     }
 
     //@Test
     public void printRead() {
-        ByteArrayInputStream inStream = new ByteArrayInputStream("Input text \u29CD\u23E7\u2A33\u2A7C\u299E\u2A04\u2B48".getBytes());
+        ByteArrayInputStream inStream =
+                new ByteArrayInputStream("Input text \u29CD\u23E7\u2A33\u2A7C\u299E\u2A04\u2B48".getBytes());
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         System.setIn(inStream);
         System.setOut(new PrintStream(outStream));
@@ -83,7 +84,7 @@ public class UiTest {
                         + "    \u6587\u6708\u307F\u304D x fantôme\n"
                         + "    ____________________________________________________________________________"
                         + "    \u225D\u237C\u2A50\u2A69\u2368\u2118\n"
-                        + ">"
-                , out);
+                        + ">",
+                out);
     }
 }

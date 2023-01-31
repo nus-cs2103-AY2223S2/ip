@@ -1,8 +1,8 @@
+import java.time.LocalDateTime;
+
 import exception.TaskParseException;
 import org.junit.jupiter.api.Test;
 import task.Event;
-
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,7 +31,8 @@ public class EventTest {
     @Test
     public void parse() {
         assertDoesNotThrow(() -> {
-            Event event = Event.parseArgs(new String[]{"Body", "/from", "2023-03-04", "11:35", "/to", "2023-03-04", "14:20"});
+            Event event = Event.parseArgs(
+                    new String[]{"Body", "/from", "2023-03-04", "11:35", "/to", "2023-03-04", "14:20"});
             assertEquals("[E][ ] Body (04 Mar 2023 11:35 AM - 04 Mar 2023 02:20 PM)", event.toString());
             assertTrue(event.isBeforeDate(LocalDateTime.of(2023, 3, 4, 11, 35)));
             assertFalse(event.isBeforeDate(LocalDateTime.of(2023, 3, 4, 11, 34)));

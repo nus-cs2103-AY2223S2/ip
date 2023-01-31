@@ -1,12 +1,12 @@
 package task;
 
-import exception.TaskParseException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+
+import exception.TaskParseException;
 
 /**
  * Implementation of a <code>Task</code> with a chronological start-time and end-time.

@@ -1,11 +1,11 @@
+import java.io.IOException;
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 import storage.Storage;
 import task.Event;
 import task.TaskList;
 import task.Todo;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,7 +40,8 @@ public class StorageTest {
     public void load_noFile_exceptionThrown() {
         Storage storage = new Storage("./data/.gradle/");
         TaskList tasks = new TaskList();
-        IOException ex = assertThrows(IOException.class, () -> storage.load("load_noFile_exceptionThrown", new TaskList()));
+        IOException ex = assertThrows(IOException.class, () ->
+                storage.load("load_noFile_exceptionThrown", new TaskList()));
         assertEquals(".\\data\\.gradle\\load_noFile_exceptionThrown", ex.getMessage());
     }
 }

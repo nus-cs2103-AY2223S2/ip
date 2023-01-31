@@ -1,11 +1,5 @@
 package storage;
 
-import exception.TaskParseException;
-import task.Deadline;
-import task.Event;
-import task.TaskList;
-import task.Todo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,6 +8,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import exception.TaskParseException;
+import task.Deadline;
+import task.Event;
+import task.TaskList;
+import task.Todo;
 
 /**
  * A storage handler for reading and writing to a filesystem.

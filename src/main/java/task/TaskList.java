@@ -1,11 +1,11 @@
 package task;
 
-import exception.TaskListIndexException;
-
 import java.util.ArrayList;
 
+import exception.TaskListIndexException;
+
 /**
- * A wrapper for <code>ArrayList<Task></code> with custom
+ * A wrapper for <code>ArrayList&lt;Task&gt;</code> with custom
  * <code>IndexOutOfBoundsException</code> handling.
  */
 public class TaskList {

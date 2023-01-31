@@ -1,5 +1,10 @@
 package task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.Collections;
+
 import command.AddTask;
 import command.Command;
 import command.Delete;
@@ -13,11 +18,6 @@ import command.Save;
 import command.Unmark;
 import exception.MikiArgsException;
 import exception.TaskParseException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * A parser for Miki interactive command-line inputs.

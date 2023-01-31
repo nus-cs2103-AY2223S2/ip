@@ -1,10 +1,10 @@
 package command;
 
+import java.io.IOException;
+
 import shigure.Ui;
 import storage.Storage;
 import task.TaskList;
-
-import java.io.IOException;
 
 /**
  * A command saving the contents of a <code>TaskList</code> to a file.

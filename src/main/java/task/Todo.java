@@ -1,10 +1,10 @@
 package task;
 
-import exception.TaskParseException;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import exception.TaskParseException;
 
 /**
  * Implementation of a <code>Task</code> with no particular chronological position.

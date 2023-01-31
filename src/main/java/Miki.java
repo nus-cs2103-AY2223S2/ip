@@ -1,10 +1,10 @@
+import java.io.IOException;
+
 import command.Command;
 import shigure.Ui;
 import storage.Storage;
 import task.Parser;
 import task.TaskList;
-
-import java.io.IOException;
 
 /**
  * Main class of the Miki personal-task manager project.
@@ -37,7 +37,7 @@ public class Miki {
             try {
                 storage.load("autosave.txt", tasks);
             } catch (IOException ex) {
-
+                // Do nothing
             } catch (Storage.MikiLoadException ex) {
                 ui.print("the autosave is corrupted... not using that!");
                 ui.printDiv();
@@ -55,7 +55,7 @@ public class Miki {
             try {
                 storage.save("autosave.txt", tasks);
             } catch (IOException ex) {
-
+                // Do nothing
             }
         }
     }

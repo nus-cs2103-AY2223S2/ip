@@ -6,7 +6,8 @@ import java.util.Scanner;
  * A UI controller for Miki interactive command-line I/O.
  */
 public class Ui {
-    private static final String DIV = "    ____________________________________________________________________________";
+    private static final String DIV =
+            "    ____________________________________________________________________________";
     private final boolean isAsciiOnly;
     private final boolean isAutoDiv = true;
     private final Scanner sc = new Scanner(System.in);
