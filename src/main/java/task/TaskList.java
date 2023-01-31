@@ -49,7 +49,7 @@ public class TaskList {
     private void isInList(int id) {
         if (id >= this.tasks.size() || id < 0) {
             throw new NotFoundException("List",
-                    String.format("Haiya we only got %d things lah.", this.tasks.size()), null);
+                    String.format("Only have %d things. FAILURE.", this.tasks.size()), null);
         }
     }
 
@@ -57,7 +57,11 @@ public class TaskList {
      * Prints the size of the task list.
      */
     public String printSize() {
-        return String.format("Now have %d items.%n", this.tasks.size());
+        int size = this.tasks.size();
+        if (size > 5) {
+            return String.format("Haiya now %d things to do... Why so many? Why so weak?", size);
+        }
+        return String.format("Good, good. Now only have %d things to do.", size);
     }
 
     /**
@@ -66,10 +70,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         this.tasks.add(task);
-        StringBuilder finalString = new StringBuilder();
-        finalString.append("OK I put in for you:\n" + task);
-        this.printSize();
-        return finalString.toString();
+        return "OK OK Uncle Roger add for you:\n" + task + this.printSize();
     }
 
     /**
@@ -78,11 +79,9 @@ public class TaskList {
      */
     public String deleteTask(int index) {
         this.isInList(index);
-        StringBuilder finalString = new StringBuilder();
-        finalString.append("OK I take out for you:\n" + this.tasks.get(index));
+        String finalString = "FUIYOH task completed:\n" + this.tasks.get(index);
         this.tasks.remove(index);
-        this.printSize();
-        return finalString.toString();
+        return finalString;
     }
 
     /**
@@ -111,7 +110,7 @@ public class TaskList {
         }
 
         StringBuilder finalString = new StringBuilder();
-        finalString.append("Here's your list:\n");
+        finalString.append("OK OK Uncle Roger tell you what to do:\n");
         int count = 0;
         for (int id = 0; id < this.tasks.size(); id++) {
             Task task = this.getTask(id);
@@ -132,7 +131,7 @@ public class TaskList {
         this.isInList(index);
         Task task = this.tasks.get(index);
         task.mark(isToMark);
-        return String.format("OK %smark for you already:\n", isToMark ? "" : "un") + task;
+        return String.format("OK OK Uncle Roger %smark for you:\n", isToMark ? "" : "un") + task;
     }
 
     /**

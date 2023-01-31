@@ -11,6 +11,6 @@ public class NotFoundException extends DukeException {
      * @param err Throwable to pass to parent constructor.
      */
     public NotFoundException(String source, String reason, Throwable err) {
-        super(String.format("Haiya nothing here in the %s lah. \n%s", source, reason), err);
+        super(String.format("Haiya cannot find in %s. %s", source, reason), err);
     }
 }
