@@ -7,6 +7,12 @@ import leo.storage.Storage;
  */
 public class ExitCommand extends Command {
 
+    /**
+     * Constructor to create an ExitCommand object.
+     *
+     * @param s Storage to store the task.
+     * @param c Description of the task.
+     */
     public ExitCommand(Storage s, String c) {
         super(s, c);
         exit();

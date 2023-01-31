@@ -1,4 +1,4 @@
-package leo.leoException;
+package leo.leoexception;
 
 /**
  * Represents an exception when an unmarked Task is set to be unmark.

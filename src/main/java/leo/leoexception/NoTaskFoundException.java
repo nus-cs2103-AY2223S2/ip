@@ -1,4 +1,4 @@
-package leo.leoException;
+package leo.leoexception;
 
 /**
  * Represents an exception when no Tasks in found.

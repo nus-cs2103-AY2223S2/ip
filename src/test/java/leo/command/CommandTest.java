@@ -1,9 +1,10 @@
 package leo.command;
 
-import leo.storage.Storage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import leo.storage.Storage;
 
 public class CommandTest {
 

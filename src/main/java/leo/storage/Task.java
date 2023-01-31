@@ -1,7 +1,7 @@
 package leo.storage;
 
-import leo.leoException.IncorrectMarkException;
-import leo.leoException.IncorrectUnmarkException;
+import leo.leoexception.IncorrectMarkException;
+import leo.leoexception.IncorrectUnmarkException;
 import leo.ui.Ui;
 
 /**
@@ -13,6 +13,11 @@ public class Task {
     private boolean done;
     private TaskType type;
 
+    /**
+     * Constructor for creating a Task object.
+     *
+     * @param task Description of the Task.
+     */
     public Task(String task) {
         this.task = task;
         this.done = false;

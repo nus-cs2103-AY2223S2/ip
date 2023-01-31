@@ -7,6 +7,12 @@ import leo.storage.Storage;
  */
 public class MarkCommand extends Command {
 
+    /**
+     * Constructor to create a MarkCommand object.
+     *
+     * @param s Storage to store the task.
+     * @param c Description of the task.
+     */
     public MarkCommand(Storage s, String c) {
         super(s, c);
         int num = extractTaskNum();

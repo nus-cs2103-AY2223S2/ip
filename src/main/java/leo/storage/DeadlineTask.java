@@ -11,6 +11,12 @@ public class DeadlineTask extends Task {
 
     private final LocalDateTime deadline;
 
+    /**
+     * Constructor to create a DeadlineTask object.
+     *
+     * @param task Description of the task.
+     * @param by Deadline of the task.
+     */
     public DeadlineTask(String task, LocalDateTime by) {
         super(task);
         this.deadline = by;

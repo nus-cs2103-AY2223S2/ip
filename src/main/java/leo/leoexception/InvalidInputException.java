@@ -1,4 +1,4 @@
-package leo.leoException;
+package leo.leoexception;
 
 /**
  * Represents an exception when input is not a supported feature.

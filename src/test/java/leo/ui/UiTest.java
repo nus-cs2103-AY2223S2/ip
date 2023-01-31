@@ -1,12 +1,12 @@
 package leo.ui;
 
-import leo.leoException.IncorrectMarkException;
-import leo.storage.Task;
-import leo.storage.TaskType;
-import leo.ui.Ui;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import leo.leoexception.IncorrectMarkException;
+import leo.storage.Task;
+import leo.storage.TaskType;
 
 public class UiTest {
 

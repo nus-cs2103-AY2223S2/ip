@@ -1,10 +1,11 @@
 package leo.storage;
 
-import leo.leoException.IncorrectMarkException;
-import leo.leoException.NoStorageFileException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import leo.leoexception.IncorrectMarkException;
+import leo.leoexception.NoStorageFileException;
 
 public class StorageTest {
 

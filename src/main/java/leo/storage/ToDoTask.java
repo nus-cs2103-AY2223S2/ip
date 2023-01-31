@@ -6,6 +6,11 @@ package leo.storage;
  */
 public class ToDoTask extends Task {
 
+    /**
+     * Constructor for creating a ToDoTask object.
+     *
+     * @param task Description of the Task.
+     */
     public ToDoTask(String task) {
         super(task);
         setType(TaskType.TODO);

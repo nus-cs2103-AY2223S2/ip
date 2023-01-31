@@ -12,6 +12,13 @@ public class EventTask extends Task {
     private final LocalDateTime from;
     private final LocalDateTime to;
 
+    /**
+     * Constructor to create an EventTask object.
+     *
+     * @param task Description of the Task.
+     * @param from Start date of the Task.
+     * @param to End date of the Task.
+     */
     public EventTask(String task, LocalDateTime from, LocalDateTime to) {
         super(task);
         this.from = from;

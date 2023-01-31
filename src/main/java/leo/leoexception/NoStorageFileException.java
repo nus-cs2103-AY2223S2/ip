@@ -1,4 +1,4 @@
-package leo.leoException;
+package leo.leoexception;
 
 /**
  * Represents an exception when no data file containing the list of Tasks is found.

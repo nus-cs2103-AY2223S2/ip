@@ -1,21 +1,27 @@
 package leo.command;
 
-import leo.leoException.LeoException;
-import leo.leoException.NoKeywordException;
-import leo.leoException.NoTaskFoundException;
+import java.util.ArrayList;
+import java.util.List;
+
+import leo.leoexception.LeoException;
+import leo.leoexception.NoKeywordException;
+import leo.leoexception.NoTaskFoundException;
 import leo.storage.Storage;
 import leo.storage.Task;
 import leo.storage.TaskList;
 import leo.ui.Ui;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents a find command input by user.
  */
 public class FindCommand extends Command {
 
+    /**
+     * Constructor to create FindCommand object.
+     *
+     * @param storage Storage to store the task.
+     * @param task Description of the task.
+     */
     public FindCommand(Storage storage, String task) {
         super(storage, task);
         try {

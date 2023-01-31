@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import leo.leoException.IncorrectMarkException;
-import leo.leoException.LeoException;
-import leo.leoException.NoTaskFoundException;
-import leo.leoException.NoStorageFileException;
+import leo.leoexception.IncorrectMarkException;
+import leo.leoexception.LeoException;
+import leo.leoexception.NoStorageFileException;
+import leo.leoexception.NoTaskFoundException;
 import leo.ui.Ui;
 
 /**
@@ -27,6 +27,13 @@ public class Storage {
     private final String dataFilePath;
     private final File taskFile;
 
+    /**
+     * Constructor for creating a Storage object.
+     *
+     * @param filePath The path where the Tasks are stored.
+     * @throws NoStorageFileException If file cannot be found.
+     * @throws IncorrectMarkException If Task has already been marked.
+     */
     public Storage(String filePath) throws NoStorageFileException, IncorrectMarkException {
         String root = Paths.get("").toAbsolutePath().toString();
         this.dataFilePath = Paths.get(root, filePath).toString();
@@ -59,9 +66,10 @@ public class Storage {
                 try {
                     if (taskType == 'T') {
                         Task t = new ToDoTask(description);
-                        if (completion == 'X')
+                        if (completion == 'X') {
                             t.mark();
-                        taskList.add(t);
+                            taskList.add(t);
+                        }
                     } else {
                         String[] temp = description.split("\\|");
                         String taskDescription = temp[0].strip();
@@ -69,16 +77,18 @@ public class Storage {
                         LocalDateTime dt = convertString(time);
                         if (taskType == 'D') {
                             Task t = new DeadlineTask(taskDescription, dt);
-                            if (completion == 'X')
+                            if (completion == 'X') {
                                 t.mark();
-                            taskList.add(t);
+                                taskList.add(t);
+                            }
                         } else if (taskType == 'E') {
                             String to = temp[2].strip();
                             LocalDateTime dtTo = convertString(to);
                             Task t = new EventTask(taskDescription, dt, dtTo);
-                            if (completion == 'X')
+                            if (completion == 'X') {
                                 t.mark();
-                            taskList.add(t);
+                                taskList.add(t);
+                            }
                         }
                     }
                 } catch (LeoException e) {
@@ -151,7 +161,7 @@ public class Storage {
     public void delete(int num) {
         Task removed;
         try {
-            removed = getTask(num -1);
+            removed = getTask(num - 1);
             data.removeTask(num - 1);
             Ui.displayMessage(Ui.leoResponse("I have removed task " + num + ":"));
             assert removed != null;

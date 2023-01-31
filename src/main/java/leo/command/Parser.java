@@ -2,7 +2,8 @@ package leo.command;
 
 import java.util.Objects;
 import java.util.Scanner;
-import leo.leoException.LeoException;
+
+import leo.leoexception.LeoException;
 import leo.storage.Storage;
 import leo.ui.Ui;
 
@@ -13,6 +14,11 @@ public class Parser {
 
     private final Storage s;
 
+    /**
+     * Constructor to create a Parser object.
+     *
+     * @param s Storage to store Tasks from commands by user.
+     */
     public Parser(Storage s) {
         this.s = s;
     }

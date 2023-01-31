@@ -1,7 +1,6 @@
 package leo.command;
 
-import leo.leoException.LeoException;
-import leo.leoException.NoStorageFileException;
+import leo.leoexception.LeoException;
 import leo.storage.Storage;
 import leo.ui.Ui;
 
@@ -13,6 +12,12 @@ public class Command {
     private final Storage storage;
     private final String command;
 
+    /**
+     * Constructor to create a Command object.
+     *
+     * @param s Storage to store the task.
+     * @param command Description of the task.
+     */
     public Command(Storage s, String command) {
         this.storage = s;
         this.command = command;
@@ -31,7 +36,6 @@ public class Command {
     /**
      * Updates and write tasks to data file.
      * Prints farewell message and exits program.
-     * 
      */
     public void exit() {
         try {

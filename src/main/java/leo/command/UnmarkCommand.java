@@ -7,6 +7,12 @@ import leo.storage.Storage;
  */
 public class UnmarkCommand extends Command {
 
+    /**
+     * Constructor for creating an UnmarkCommand object.
+     *
+     * @param s Storage to store the task.
+     * @param c Description of the task.
+     */
     public UnmarkCommand(Storage s, String c) {
         super(s, c);
         int num = extractTaskNum();

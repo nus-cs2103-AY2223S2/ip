@@ -1,10 +1,13 @@
 package leo.command;
 
-import leo.leoException.EmptyDeadlineException;
-import leo.leoException.EmptyDescriptionException;
-import leo.leoException.IncompleteDurationException;
-import leo.leoException.InvalidInputException;
-import leo.leoException.LeoException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import leo.leoexception.EmptyDeadlineException;
+import leo.leoexception.EmptyDescriptionException;
+import leo.leoexception.IncompleteDurationException;
+import leo.leoexception.InvalidInputException;
+import leo.leoexception.LeoException;
 import leo.storage.DeadlineTask;
 import leo.storage.EventTask;
 import leo.storage.Storage;
@@ -12,14 +15,18 @@ import leo.storage.Task;
 import leo.storage.ToDoTask;
 import leo.ui.Ui;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * Represents an addition command input by user.
  */
 public class AddCommand extends Command {
 
+    /**
+     * Constructor to create an AddCommand object.
+     *
+     * @param s Storage to store the task.
+     * @param task Description of the task.
+     * @throws LeoException If the command is incomplete or cannot be comprehended.
+     */
     public AddCommand(Storage s, String task) throws LeoException {
         super(s, task);
         try {

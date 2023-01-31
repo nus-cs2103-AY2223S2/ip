@@ -12,12 +12,12 @@ public class Ui {
      *
      */
     public void greetings() {
-        String helloLogo = "__   __   ______   __       __        _____ \n" +
-                "| |  | |  | ____|  | |      | |      /  __  \\ \n" +
-                "| |__| |  | |____  | |      | |      | |  | |\n" +
-                "|  __  |  | ____|  | |      | |      | |  | |\n" +
-                "| |  | |  | |____  | |____  | |____  | |__| |\n" +
-                "|_|  |_|  |______| |______| |______| \\_____/\n";
+        String helloLogo = "__   __   ______   __       __        _____ \n"
+                + "| |  | |  | ____|  | |      | |      /  __  \\ \n"
+                + "| |__| |  | |____  | |      | |      | |  | |\n"
+                + "|  __  |  | ____|  | |      | |      | |  | |\n"
+                + "| |  | |  | |____  | |____  | |____  | |__| |\n"
+                + "|_|  |_|  |______| |______| |______| \\_____/\n";
         displayMessage(helloLogo);
         String greetingMessage = "Good day, I am Leo!";
         String followUp = "How can I assist you today?";
@@ -63,14 +63,15 @@ public class Ui {
      */
     public static String type(Task t) {
         switch (t.getType()) {
-            case TODO:
-                return "[T]";
-            case DEADLINE:
-                return "[D]";
-            case EVENT:
-                return "[E]";
+        case TODO:
+            return "[T]";
+        case DEADLINE:
+            return "[D]";
+        case EVENT:
+            return "[E]";
+        default:
+            return null;
         }
-        return null;
     }
 
     /**

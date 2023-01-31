@@ -1,8 +1,8 @@
 package leo.storage;
 
-import leo.ui.Ui;
-
 import java.util.List;
+
+import leo.ui.Ui;
 
 /**
  * Represents a list of Tasks.
@@ -11,6 +11,11 @@ public class TaskList {
 
     private final List<Task> taskList;
 
+    /**
+     * Constructor for creating a TaskList object containing Tasks.
+     *
+     * @param tasks The list of tasks to be in the taskList.
+     */
     public TaskList(List<Task> tasks) {
         this.taskList = tasks;
     }
@@ -52,6 +57,9 @@ public class TaskList {
         return taskList.get(num);
     }
 
+    /**
+     * Constructor for displaying the list of Tasks.
+     */
     public void display() {
         for (int i = 0; i < size(); i++) {
             Ui.displayMessage((i + 1) + ". " + getTask(i).toString());
