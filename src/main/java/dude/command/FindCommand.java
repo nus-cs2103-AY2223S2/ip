@@ -18,7 +18,7 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> filteredTasks = new ArrayList<>();
         int taskCount = Task.getTaskCount();
         for (int i = 1; i <= taskCount; i++) {
@@ -27,6 +27,6 @@ public class FindCommand extends Command {
                 filteredTasks.add(currentTask);
             }
         }
-        ui.showFind(filteredTasks);
+        return ui.showFind(filteredTasks);
     }
 }

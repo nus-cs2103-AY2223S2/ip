@@ -55,6 +55,15 @@ public class Dude {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DudeException e) {
+            return e.getMessage();
+        }
+    }
+
     public static void main(String[] args) {
         new Dude("data/tasks.txt").run();
     }

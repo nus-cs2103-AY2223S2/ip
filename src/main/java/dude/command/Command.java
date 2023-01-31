@@ -31,10 +31,11 @@ public abstract class Command {
     /**
      * Executes the command.
      *
-     * @param tasks TaskList object to store a list of task.
-     * @param ui Ui object to communicate with user.
+     * @param tasks   TaskList object to store a list of task.
+     * @param ui      Ui object to communicate with user.
      * @param storage Storage object for data manipulation.
+     * @return
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
 }

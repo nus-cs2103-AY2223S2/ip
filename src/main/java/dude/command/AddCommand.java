@@ -22,11 +22,13 @@ public class AddCommand extends Command {
 
     /**
      * {@inheritDoc}
+     *
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(newTask);
         storage.saveData(tasks);
-        ui.showAdd(newTask);
+        return ui.showAdd(newTask);
     }
 }

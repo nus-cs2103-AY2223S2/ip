@@ -22,18 +22,8 @@ public class Ui {
     /**
      * Prints welcome message to user
      */
-    public void showWelcome() {
-        String logo = "  _____           __     \n"
-                + " |  __ \\ __ __    | | ___  \n"
-                + " | |  | | | | |/ _` |/ _ \\\n"
-                + " | |__| | |_| | (_| |  __/\n"
-                + " |_____/ \\__,_|\\__,_|\\___|\n";
-
-        System.out.println(logo);
-        showLine();
-        System.out.println("\tEh hello! I'm dude.");
-        System.out.println("\tWhat you want me do for you?");
-        showLine();
+    public String showWelcome() {
+        return "Eh hello! I'm dude.\n" + "What you want me do for you?\n";
     }
 
     /**
@@ -41,8 +31,8 @@ public class Ui {
      *
      * @param tasks TaskList to be printed to user.
      */
-    public void showList(TaskList tasks) {
-        System.out.print(tasks);
+    public String showList(TaskList tasks) {
+        return tasks.toString();
     }
 
     /**
@@ -50,10 +40,9 @@ public class Ui {
      *
      * @param newTask Task added to be printed to user.
      */
-    public void showAdd(Task newTask) {
-        System.out.println("\tGot it. I've added this task already:");
-        System.out.println("\t" + newTask);
-        System.out.println("\tNow got " + Task.getTaskCount() + " tasks in your list liao.");
+    public String showAdd(Task newTask) {
+        return "Got it. I've added this task already:\n" + "" + newTask + "\n"
+                + "Now got " + Task.getTaskCount() + " tasks in your list liao.";
     }
 
     /**
@@ -61,10 +50,9 @@ public class Ui {
      *
      * @param currentTask Task to be printed to user.
      */
-    public void showDelete(Task currentTask) {
-        System.out.println("\tOkay can. I've removed this task already:");
-        System.out.println("\t" + currentTask);
-        System.out.println("\tNow only left with " + Task.getTaskCount() + " tasks in your list liao.");
+    public String showDelete(Task currentTask) {
+        return "Okay can. I've removed this task already:\n" + "" + currentTask + "\n"
+                + "Now only left with " + Task.getTaskCount() + " tasks in your list liao.";
     }
 
     /**
@@ -72,9 +60,8 @@ public class Ui {
      *
      * @param currentTask Task to be printed to user.
      */
-    public void showMark(Task currentTask) {
-        System.out.println("\tSwee! I've marked this task as done loh:");
-        System.out.println("\t" + currentTask);
+    public String showMark(Task currentTask) {
+        return "Swee! I've marked this task as done loh:\n" + "" + currentTask + "\n";
     }
 
     /**
@@ -82,9 +69,8 @@ public class Ui {
      *
      * @param currentTask Task to be printed to user.
      */
-    public void showUnmark(Task currentTask) {
-        System.out.println("\tOkay liar, I've marked this task as undone liao:");
-        System.out.println("\t" + currentTask);
+    public String showUnmark(Task currentTask) {
+        return "Okay liar, I've marked this task as undone liao:\n" + "" + currentTask + "\n";
     }
 
     /**
@@ -92,14 +78,16 @@ public class Ui {
      *
      * @param tasks List of Task for searching
      */
-    public void showFind(List<Task> tasks) {
+    public String showFind(List<Task> tasks) {
+        StringBuilder result = new StringBuilder();
         if (tasks.size() != 0) {
-            System.out.println("\tOkay come, here are the task I found containing your keyword: ");
+            System.out.println("Okay come, here are the task I found containing your keyword: ");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("\t" + (i + 1) + "." + tasks.get(i).toString());
+                result.append(i + 1).append(".").append(tasks.get(i).toString()).append("\n");
             }
+            return result.toString();
         } else {
-            System.out.println("\tI cannot find any task containing your keyword sia");
+            return "I cannot find any task containing your keyword sia\n";
         }
 
     }
@@ -109,22 +97,22 @@ public class Ui {
      *
      * @param error Error message to be printed.
      */
-    public void showError(String error) {
-        System.out.println(error);
+    public String showError(String error) {
+        return error + "\n";
     }
 
     /**
      * Prints goodbye message to user.
      */
-    public void showGoodbye() {
-        System.out.println("\tCiaos! See you next time.");
+    public String showGoodbye() {
+        return "Ciaos! See you next time.\n";
     }
 
     /**
      * Prints loading error message to user.
      */
-    public void showLoadingError() {
-        System.out.println("\tBzzz.. Sorry ah, I think something went wrong with me, am unable to wake up");
+    public String showLoadingError() {
+        return "Bzzz.. Sorry ah, I think something went wrong with me, am unable to wake up\n";
     }
 
     /**

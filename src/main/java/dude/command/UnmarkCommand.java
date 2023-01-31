@@ -22,16 +22,18 @@ public class UnmarkCommand extends Command {
 
     /**
      * {@inheritDoc}
+     *
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (Task.getTaskCount() >= taskIndex && Task.getTaskCount() != 0) {
             Task currentTask = tasks.getTask(taskIndex);
             currentTask.unmark();
             storage.saveData(tasks);
-            ui.showUnmark(currentTask);
+            return ui.showUnmark(currentTask);
         } else {
-            ui.showError("\tUhh... Where got this task for me to unmark?");
+            return ui.showError("Uhh... Where got this task for me to unmark?");
         }
     }
 }
