@@ -1,5 +1,6 @@
 package fea.storage;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -42,6 +43,7 @@ public class Storage {
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String[] args = scanner.nextLine().split(" \\| ");
+                checkTaskFormat(args[0], args[1]);
                 if ("T".equals(args[0])) {
                     Todo newTodo = new Todo(args[2]);
                     if (args[1].equals("1")) {
@@ -101,5 +103,17 @@ public class Storage {
         } catch (IOException e) {
             throw new FeaException("Data file could not be found.");
         }
+    }
+
+    /**
+     * Checks if the task format is correct to be stored in the data file.
+     * @param taskType The type of task.
+     * @param taskMark The mark of the task.
+     */
+    private void checkTaskFormat(String taskType, String taskMark) {
+        boolean isValidTaskType = taskType.matches("[TDE]");
+        assert(isValidTaskType) : "Invalid task type";
+        boolean isValidTaskMark = taskMark.matches("[01]");
+        assert(isValidTaskMark) : "Invalid task mark";
     }
 }
