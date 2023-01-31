@@ -1,5 +1,3 @@
-import jdk.jfr.Event;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
@@ -25,7 +23,6 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     public void loadTasks(TaskList taskList) throws IOException {
