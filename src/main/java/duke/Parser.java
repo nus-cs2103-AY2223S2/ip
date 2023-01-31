@@ -20,6 +20,7 @@ public class Parser {
 
     /**
      * Parses user inputs.
+     *
      * @param input User input.
      */
     public void parse(String input) {
@@ -33,18 +34,16 @@ public class Parser {
             if (arrNext.length <= 1) {
                 if (Objects.equals(next, "todo") || Objects.equals(next, "deadline") ||
                         Objects.equals(next, "event") || Objects.equals(next, "mark") ||
-                        Objects.equals(next, "unmark") || Objects.equals(next, "delete")) {
+                        Objects.equals(next, "unmark") || Objects.equals(next, "delete") ||
+                        Objects.equals(next, "find")) {
                     if (!Objects.equals(next, "list") && !Objects.equals(next, "bye")) {
                         throw new EmptyDescription(" The description of " + next + " cannot be empty.");
                     }
                 }
-                if ((!Objects.equals(next, "todo") && !Objects.equals(next, "deadline") &&
-                        !Objects.equals(next, "event"))) {
-                    if (!Objects.equals(next, "list") && !Objects.equals(next, "mark") &&
-                            !Objects.equals(next, "unmark") && !Objects.equals(next, "delete") &&
-                            !Objects.equals(next, "bye")) {
-                        throw new WrongTask(" I'm sorry, but I don't know what that means :-(");
-                    }
+            }
+            if ((!Objects.equals(next, "todo") && !Objects.equals(next, "deadline") && !Objects.equals(next, "event"))) {
+                if (!Objects.equals(next, "list") && !Objects.equals(next, "mark") && !Objects.equals(next, "unmark") && !Objects.equals(next, "delete") && !Objects.equals(next, "bye") && !Objects.equals(next, "find")) {
+                    throw new WrongTask(" I'm sorry, but I don't know what that means :-(");
                 }
             }
         } catch (EmptyDescription |
@@ -118,6 +117,24 @@ public class Parser {
             }
             break;
         }
+        case "find": {
+            TaskList matchingTasks = new TaskList();
+            for (int i = 0; i < taskList.getNumberOfTasks(); i++) {
+                Task task = taskList.getTask(i);
+                String descriptionOfTask = task.description;
+                String[] splitTaskString = descriptionOfTask.split(" ");
+                for (String s : splitTaskString) {
+                    if (Objects.equals(s, after)) {
+                        matchingTasks.addTask(task);
+                    }
+                }
+            }
+            System.out.println("Here are the matching tasks in your list:");
+            for (int k = 0; k < matchingTasks.getNumberOfTasks(); k++) {
+                System.out.println(k + 1 + "." + matchingTasks.getTask(k));
+            }
+            break;
+        }
         case "unmark": {
             int number = Integer.parseInt(after);
             try {
@@ -158,6 +175,7 @@ public class Parser {
 
     /**
      * Checks if a task has an empty description.
+     *
      * @param checkString User input to be checked.
      * @return True or false depending on whether description of task is empty.
      * @throws EmptyDescription If the description of task is empty.
