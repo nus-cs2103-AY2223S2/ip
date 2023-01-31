@@ -37,56 +37,62 @@ public class Ui {
      * Prints a task to standard output.
      * @param t any task
      */
-    private void printNewTask(Task t) {
+    private ArrayList<String> printNewTask(Task t) {
+        ArrayList<String> temp = new ArrayList<>();
+
         if (t instanceof Event) {
-            System.out.println("  new event added!");
+            temp.add("  new event added!");
         } else if (t instanceof Deadline) {
-            System.out.println("  new deadline added!");
+            temp.add("  new deadline added!");
         } else if (t instanceof ToDo) {
-            System.out.println("  new todo added!");
+            temp.add("  new todo added!");
         }
-        System.out.println("    " + t.toString());
-        System.out.println("  Now you have " + String.valueOf(this.myTaskList.countTasks()) +
+        temp.add("    " + t.toString());
+        temp.add("  Now you have " + String.valueOf(this.myTaskList.countTasks()) +
                 " tasks in the list!");
+        return temp;
     }
 
     /**
      * Prints a reply to standard output when the user does not enter a task.
      * @param inputCommand What the user inputs
      */
-    public void printReply(String inputCommand) {
+    public ArrayList<String> printReply(String inputCommand) {
+        ArrayList<String> temp = new ArrayList<>();
         switch (inputCommand) {
             case "list":
                 for (int i = 0; i < myTaskList.countTasks(); i++) {
-                    System.out.println("  " + String.valueOf(i + 1) + ". " + myTaskList.getTaskAtIndex(i));
+                    temp.add("  " + String.valueOf(i + 1) + ". " + myTaskList.getTaskAtIndex(i));
                 }
                 break;
             case "bye":
-                System.out.println("  See you again");
+                temp.add("  See you again");
                 break;
             default:
-                System.out.println("  this is not a task, contact admin");
+                temp.add("  this is not a task, contact admin");
                 break;
         }
+        return temp;
     }
     /**
      * Prints a reply to standard output given a command to add, mark or delete a task.
      * @param inputCommand What the user inputs
      */
-    public void printReply(String inputCommand, Task currTask) throws EmptyDescriptionException {
+    public ArrayList<String> printReply(String inputCommand, Task currTask) throws EmptyDescriptionException {
+        ArrayList<String> temp = new ArrayList<>();
         switch (inputCommand) {
         case "mark":
-            System.out.println("  You are done with: ");
-            System.out.println("    " + currTask.toString());
+            temp.add("  You are done with: ");
+            temp.add("    " + currTask.toString());
             break;
         case "unmark":
-            System.out.println("  OK, continue working on: ");
-            System.out.println("    " + currTask.toString());
+            temp.add("  OK, continue working on: ");
+            temp.add("    " + currTask.toString());
             break;
         case "delete":
-            System.out.println("  I've removed this task:");
-            System.out.println("    " + currTask.toString());
-            System.out.println("  Now you have "+ String.valueOf(this.myTaskList.countTasks()) +
+            temp.add("  I've removed this task:");
+            temp.add("    " + currTask.toString());
+            temp.add("  Now you have "+ String.valueOf(this.myTaskList.countTasks()) +
                     " tasks in the list!");
             break;
         case "deadline":
@@ -95,11 +101,15 @@ public class Ui {
             printNewTask(currTask);
             break;
         }
+        return temp;
     }
-    public void printMatchingTasks(ArrayList<Task> matchingTasks) {
+
+    public ArrayList<String> printMatchingTasks(ArrayList<Task> matchingTasks) {
+        ArrayList<String> temp = new ArrayList<>();
         for (int i = 0; i < matchingTasks.size(); i++) {
-            System.out.println("You have " + String.valueOf(matchingTasks.size()) + " matching tasks");
-            System.out.println("  " + matchingTasks.get(i));
+            temp.add("You have " + String.valueOf(matchingTasks.size()) + " matching tasks");
+            temp.add("  " + matchingTasks.get(i));
         }
+        return temp;
     }
 }

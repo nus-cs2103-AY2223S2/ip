@@ -187,8 +187,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogueBox.getUserDialog(userText, new ImageView(user)),
-                DialogueBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }
@@ -198,6 +198,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
+        for (int i = 0; i < )
         return "Duke heard: " + input;
     }
 
