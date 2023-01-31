@@ -1,11 +1,14 @@
 package dude.ui;
 
-import dude.task.Task;
-import dude.task.TaskList;
-
 import java.util.List;
 import java.util.Scanner;
 
+import dude.task.Task;
+import dude.task.TaskList;
+
+/**
+ * Handles interactions with user
+ */
 public class Ui {
     private static Scanner sc = new Scanner(System.in);
 
@@ -20,11 +23,11 @@ public class Ui {
      * Prints welcome message to user
      */
     public void showWelcome() {
-        String logo = "  _____           __     \n" +
-                " |  __ \\ __ __    | | ___  \n" +
-                " | |  | | | | |/ _` |/ _ \\\n" +
-                " | |__| | |_| | (_| |  __/\n" +
-                " |_____/ \\__,_|\\__,_|\\___|\n";
+        String logo = "  _____           __     \n"
+                + " |  __ \\ __ __    | | ___  \n"
+                + " | |  | | | | |/ _` |/ _ \\\n"
+                + " | |__| | |_| | (_| |  __/\n"
+                + " |_____/ \\__,_|\\__,_|\\___|\n";
 
         System.out.println(logo);
         showLine();
@@ -42,6 +45,11 @@ public class Ui {
         System.out.print(tasks);
     }
 
+    /**
+     * Prints add message and added task to user.
+     *
+     * @param newTask Task added to be printed to user.
+     */
     public void showAdd(Task newTask) {
         System.out.println("\tGot it. I've added this task already:");
         System.out.println("\t" + newTask);
@@ -88,7 +96,7 @@ public class Ui {
         if (tasks.size() != 0) {
             System.out.println("\tOkay come, here are the task I found containing your keyword: ");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("\t" + (i+1) + "." + tasks.get(i).toString());
+                System.out.println("\t" + (i + 1) + "." + tasks.get(i).toString());
             }
         } else {
             System.out.println("\tI cannot find any task containing your keyword sia");

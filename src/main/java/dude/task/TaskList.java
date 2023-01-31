@@ -3,6 +3,9 @@ package dude.task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A list of Tasks
+ */
 public class TaskList {
     private final List<Task> tasks;
 
@@ -83,5 +86,4 @@ public class TaskList {
         }
         return result.toString();
     }
-
 }

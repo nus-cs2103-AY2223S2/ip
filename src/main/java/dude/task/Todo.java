@@ -1,5 +1,8 @@
 package dude.task;
 
+/**
+ * Task with description
+ */
 public class Todo extends Task {
     /**
      * Initializes Todo.
