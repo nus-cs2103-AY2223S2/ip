@@ -19,17 +19,17 @@ public class TaskList {
         this.numTasks +=1;
         return "Task added. You now have:" + this.numTasks + " task(s).";
     }
-    public String addTask(String name){ //todo
+    public String addTask(String name){
         Task task = new ToDo(name);
         return processTask(task);
     }
 
-    public String addTask(String name, String end){ //deadline
+    public String addTask(String name, String end){
         Task task = new Deadline(name,end);
         return processTask(task);
     }
 
-    public String addTask(String name, String  start, String  end){ //event
+    public String addTask(String name, String  start, String  end){
         Task task = new Event(name,start,end);
         return processTask(task);
     }
@@ -60,7 +60,7 @@ public class TaskList {
         return "Task " + index + " deleted.";
     }
 
-    public String toSave(){ //converts all tasks in tasklist to be written into save file
+    public String toSave(){
         String output = "";
         for(int i = 0; i<numTasks; i++){
             output+=taskList.get(i)+"\n";
@@ -68,7 +68,7 @@ public class TaskList {
         return output;
     }
 
-    public void fromSave(String saveData){ //converts the text in a save file back into tasks
+    public void fromSave(String saveData){
         ArrayList saveTaskList = new ArrayList<>();
         String data[] = saveData.split("\n");
         this.numTasks = 0;
