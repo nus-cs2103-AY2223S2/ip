@@ -2,6 +2,9 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Represents the test-based user interface of the chatbot.
+ */
 public class Ui {
 
     private static final String LINE = "------------------------------------------------------------";
