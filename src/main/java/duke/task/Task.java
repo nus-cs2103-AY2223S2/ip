@@ -50,6 +50,10 @@ public abstract class Task {
 
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public void mark() {
         this.isDone = true;
     }
