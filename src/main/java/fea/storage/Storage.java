@@ -48,7 +48,6 @@ public class Storage {
                 checkTaskFormat(args[0], args[1]);
                 switch (args[0]) {
                 case "T":
-                if ("T".equals(args[0])) {
                     Todo newTodo = new Todo(args[2]);
                     if (args[1].equals("1")) {
                         newTodo.toggleMark();
