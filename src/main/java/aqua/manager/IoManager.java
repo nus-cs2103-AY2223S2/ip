@@ -35,7 +35,7 @@ public class IoManager {
             "Hanya??",
             "I was looking through my notes and could not remember your previous tasks because:",
             "  %s",
-            "Gomennasai!! But you did not touch it right? ( ･̆-･̆)");
+            "Gomennasai!! But you did not touch it right? ( ･-･)");
     /** All other exception message format. */
     private static final String EXCEPTION_FORMAT_DEATH = String.join("\n",
             "UWAWAWA!!",
