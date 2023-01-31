@@ -6,6 +6,7 @@ import duke.exceptions.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 /**
  * This class manages the parsing of user inputs.
@@ -45,21 +46,21 @@ public class Parser {
             this.index = this.retrieveIndex(delimited);
             return Commands.UNMARK;
         case "todo":
-            this.name = this.retrieveName(input, delimited);
+            this.name = this.retrieveName(input);
             return Commands.TODO;
         case "deadline":
-            this.name = this.retrieveName(input, delimited);
-            this.retrieveDates(TaskTypes.DEADLINE, input, delimited);
+            this.name = this.retrieveName(input);
+            this.retrieveDates(TaskTypes.DEADLINE, input);
             return Commands.DEADLINE;
         case "event":
-            this.name = this.retrieveName(input, delimited);
-            this.retrieveDates(TaskTypes.EVENT, input, delimited);
+            this.name = this.retrieveName(input);
+            this.retrieveDates(TaskTypes.EVENT, input);
             return Commands.EVENT;
         case "delete":
             this.index = this.retrieveIndex(delimited);
             return Commands.DELETE;
         case "find":
-            this.name = this.retrieveName(input, delimited);
+            this.name = this.retrieveName(input);
             return Commands.FIND;
         default:
             return Commands.DEFAULT;
@@ -82,15 +83,16 @@ public class Parser {
         }
     }
 
-    private String retrieveName(String input, String[] delimitedInput)
+    private String retrieveName(String input)
             throws DukeException {
-        if (delimitedInput.length < 2) {
+        try {
+            return input.split(" /")[0].split(" ", 2)[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Invalid description provided.");
         }
-        return input.split(" /")[0].split(" ", 2)[1];
     }
 
-    private void retrieveDates(TaskTypes type, String input, String[] delimitedInput)
+    private void retrieveDates(TaskTypes type, String input)
             throws DukeException {
         String[] temp;
         switch (type) {
@@ -100,13 +102,13 @@ public class Parser {
             }
             temp = input.split(" /by ");
             if (temp.length < 2) {
-                throw new DukeException("Please provide a valid deadline.");
+                throw new DukeException("Please provide a valid date.");
             }
             try {
                 this.dates[0] = LocalDate.parse(temp[1]);
             } catch (DateTimeParseException e) {
                 throw new DukeException(
-                        "Please provide the deadline in the following "
+                        "Please provide a valid date in the following "
                                 + "format: YYYY-MM-DD.");
             }
             break;

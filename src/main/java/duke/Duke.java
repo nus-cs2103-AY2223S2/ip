@@ -10,33 +10,24 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.tasklist.Tasklist;
-import duke.ui.Ui;
 
 import java.time.LocalDate;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
- * Main class for running Duke.
+ * Duke is the personal assistant for managing user
+ * tasks such as todos, deadlines, and events.
  */
 public class Duke {
     private static final String FILE_PATH = "data/data.txt";
-    private Ui ui;
     private Parser parser;
     private final Tasklist tasklist;
     private boolean isActive;
 
     public Duke() {
-        this.ui = new Ui();
         this.parser = new Parser();
         this.tasklist = new Tasklist(new TaskStorage(FILE_PATH));
-        ui.greet();
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 
     /**
@@ -46,136 +37,134 @@ public class Duke {
      */
     public void run() {
         this.isActive = true;
-        Scanner s = new Scanner(System.in);
-        while (this.isActive) {
-            String input = s.nextLine();
+    }
+
+    public String getResponse(String input) {
+        if (this.isActive) {
             try {
                 Commands command = this.parser.parseInput(input);
                 switch (command) {
                 case BYE:
-                    this.exit();
-                    break;
+                    return this.exit();
                 case LIST:
-                    this.viewList();
-                    break;
+                    return this.viewList();
                 case MARK:
-                    this.mark(parser.getIndex());
-                    break;
+                    return this.mark(parser.getIndex());
                 case UNMARK:
-                    this.unmark(parser.getIndex());
-                    break;
+                    return this.unmark(parser.getIndex());
                 case TODO:
-                    this.addTask(parser.getName());
-                    break;
+                    return this.addTask(parser.getName());
                 case DEADLINE:
-                    this.addTask(
+                    return this.addTask(
                             parser.getName(),
                             parser.getDeadline());
-                    break;
                 case EVENT:
-                    this.addTask(
+                    return this.addTask(
                             parser.getName(),
                             parser.getStartDate(),
                             parser.getEndDate());
-                    break;
                 case DELETE:
-                    this.deleteTask(parser.getIndex());
-                    break;
+                    return this.deleteTask(parser.getIndex());
                 case FIND:
-                    this.findTask(parser.getName());
-                    break;
+                    return this.findTask(parser.getName());
                 case DEFAULT:
-                    this.ui.printOutput("I don't quite get what that means.");
+                    return "I don't quite get what that means.";
                 }
             } catch (DukeException e) {
-                this.ui.printOutput(e.getMessage());
+                return e.getMessage();
             }
         }
+        return "Duke is currently offline";
     }
 
-    private void exit() {
-        this.ui.printOutput("Bye. Hope to see you again soon!");
+    private String exit() {
         this.isActive = false;
+        return "Bye. Hope to see you again soon!";
     }
 
-    private void viewList() {
+    private String viewList() {
         if (this.tasklist.size() == 0) {
-            this.ui.printOutput("You currently have no tasks.");
+            return "You currently have no tasks.";
         } else {
-            this.ui.printOutput(
-                    "Here is a list of your tasks:",
-                    this.tasklist.getList());
+            String tasks = formatTasks(this.tasklist.getList());
+            return "Here is a list of your tasks:\n" + tasks;
         }
     }
 
-    private void mark(int index) throws DukeException {
+    private String formatTasks(ArrayList<Task> tasks) {
+        String res = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            res += "\t " + String.valueOf(i+1) + "." +  tasks.get(i);
+            res += "\n";
+        }
+        return res;
+    }
+
+    private String mark(int index) throws DukeException {
         if (this.tasklist.mark(index)) {
-            this.ui.printOutput("I've marked this as done:\n\t "
-                    + this.tasklist.get(index));
+            return "I've marked this as done:\n\t "
+                    + this.tasklist.get(index);
         } else {
-            this.ui.printOutput(
-                    "The selected task has already been marked as done.");
+            return "The selected task has already been marked as done.";
         }
     }
 
-    private void unmark(int index) throws DukeException {
+    private String unmark(int index) throws DukeException {
         if (this.tasklist.unmark(index)) {
-            this.ui.printOutput("I've marked this as not done yet:\n\t "
-                    + this.tasklist.get(index));
+            return "I've marked this as not done yet:\n\t "
+                    + this.tasklist.get(index);
         } else {
-            this.ui.printOutput("The selected task has not yet been marked as done.");
+            return "The selected task has not yet been marked as done.";
         }
     }
 
-    private void addTask(String name) {
+    private String addTask(String name) {
         Task t = new Todo(name);
         this.tasklist.addTask(t, TaskTypes.TODO);
-        this.ui.printOutput(
-                "I've added the following to your list of tasks:\n\t\t"
-                        + t
-                        + "\n\t You now have "
-                        + this.tasklist.size()
-                        + " task(s) in the list.");
+        return "I've added the following to your list of tasks:\n\t\t"
+                + t
+                + "\n\t You now have "
+                + this.tasklist.size()
+                + " task(s) in the list.";
     }
 
-    private void addTask(String name, LocalDate byDate) {
+    private String addTask(String name, LocalDate byDate) {
         Task t = new Deadline(name, byDate);
         this.tasklist.addTask(t, TaskTypes.DEADLINE);
-        this.ui.printOutput(
-                "I've added the following to your list of tasks:\n\t\t"
-                        + t
-                        + "\n\t You now have "
-                        + this.tasklist.size()
-                        + " task(s) in the list.");
+        return "I've added the following to your list of tasks:\n\t\t"
+                + t
+                + "\n\t You now have "
+                + this.tasklist.size()
+                + " task(s) in the list.";
     }
 
-    private void addTask(String name, LocalDate startDate, LocalDate endDate) {
+    private String addTask(String name, LocalDate startDate, LocalDate endDate) {
         Task t = new Event(name, startDate, endDate);
         this.tasklist.addTask(t, TaskTypes.EVENT);
-        this.ui.printOutput(
-                "I've added the following to your list of tasks:\n\t\t"
-                        + t
-                        + "\n\t You now have "
-                        + this.tasklist.size()
-                        + " task(s) in the list.");
+        return "I've added the following to your list of tasks:\n\t\t"
+                + t
+                + "\n\t You now have "
+                + this.tasklist.size()
+                + " task(s) in the list.";
     }
 
-    private void deleteTask(int index) throws DukeException {
+    private String deleteTask(int index) throws DukeException {
         Task task = this.tasklist.deleteTask(index);
-        this.ui.printOutput(
-                "I've removed the following from your list of tasks:\n\t\t"
-                + task + "\n\t You now have " + this.tasklist.size() + " task(s) in the list.");
+        return "I've removed the following from your list of tasks:\n\t\t"
+                + task
+                + "\n\t You now have "
+                + this.tasklist.size()
+                + " task(s) in the list.";
     }
 
-    private void findTask(String word) {
+    private String findTask(String word) {
         ArrayList<Task> tasks = this.tasklist.find(word);
         if (tasks.size() == 0) {
-            this.ui.printOutput(
-                    "I could not find any task matching your request.");
+            return "I could not find any task matching your request.";
         } else {
-            this.ui.printOutput(
-                    "Here are the matching tasks in your list: ",
-                    tasks);
+            String matchingTasks = this.formatTasks(tasks);
+            return "Here are the matching tasks in your list:\n"
+                    + matchingTasks;
         }
     }
 }

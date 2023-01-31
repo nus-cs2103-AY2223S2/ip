@@ -123,6 +123,13 @@ public class Tasklist {
         return false;
     }
 
+    /**
+     * Returns a list of tasks with a description matching
+     * the input description.
+     *
+     * @param word
+     * @return
+     */
     public ArrayList<Task> find(String word) {
         ArrayList<Task> result =
                 this.tasks.stream()
