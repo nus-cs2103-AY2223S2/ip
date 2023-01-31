@@ -111,7 +111,7 @@ public class Duke {
 
     /**
      * Adds a Deadline to all Tasks that Skittles has stored.
-     * @param input The entire String that the user has input i.e. "deadline xxx /by yyy".
+     * @param userTyped The entire String that the user has input i.e. "deadline xxx /by yyy".
      * @throws SkittlesException If an incorrect input is entered.
      */
     public void addTimeSensitive(String userTyped) throws SkittlesException {
