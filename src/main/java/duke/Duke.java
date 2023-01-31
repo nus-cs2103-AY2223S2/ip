@@ -41,27 +41,42 @@ public class Duke {
      * Supports 3 tasks: Todo, Event and Deadline.
      * Supports commands: adding, deletion, marking,
      * unmarking, listing, finding.
+     * @param input The user input
+     * @return The output of the chatbot.
      */
     public String run(String input) {
         Command inputType = Parser.parse(input);
+        String output;
         try {
             switch (inputType) {
             case LIST:
-                return tasks.listTasks();
+                output = tasks.listTasks();
+                storage.writeData();
+                return output;
             case FIND:
-                return tasks.findTasks(Parser.contents(input));
+                output = tasks.findTasks(Parser.contents(input));
+                storage.writeData();
+                return output;
             case MARK:
-                return tasks.markTask(Parser.contents(input));
+                output = tasks.markTask(Parser.contents(input));
+                storage.writeData();
+                return output;
             case UNMARK:
-                return tasks.unmarkTask(Parser.contents(input));
+                output = tasks.unmarkTask(Parser.contents(input));
+                storage.writeData();
+                return output;
             case DELETE:
-                return tasks.deleteTask(Parser.contents(input));
+                output = tasks.deleteTask(Parser.contents(input));
+                storage.writeData();
+                return output;
             case UNKNOWN:
                 throw new DukeException("unknown");
             case BYE:
                 break;
             default:
-                return tasks.addTask(inputType, Parser.contents(input));
+                output = tasks.addTask(inputType, Parser.contents(input));
+                storage.writeData();
+                return output;
             }
         } catch (DukeException e) {
             if (e.getMessage().equals("index")) {
