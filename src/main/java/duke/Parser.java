@@ -1,12 +1,15 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.util.ArrayList;
-
+/**
+ * Parser class takes in commands and executes them.
+ */
 public class Parser {
 
     /**
@@ -26,8 +29,8 @@ public class Parser {
             try {
                 Task task = Todo.create(content);
                 taskList.addTask(task);
-                response = "Ok boss. Added task:\n" + task.toString() +
-                        "\nNow you have " + taskList.getSize() + " in the list.";
+                response = "Ok boss. Added task:\n" + task.toString()
+                        + "\nNow you have " + taskList.getSize() + " in the list.";
             } catch (DukeException e) {
                 response = "☹ OOPS!!! The description of a todo cannot be empty.";
             }
@@ -36,8 +39,8 @@ public class Parser {
             try {
                 Task task = Deadline.create(content);
                 taskList.addTask(task);
-                response = "Ok boss. Added task:\n" + task.toString() +
-                        "\nNow you have " + taskList.getSize() + " in the list.";
+                response = "Ok boss. Added task:\n" + task.toString()
+                        + "\nNow you have " + taskList.getSize() + " in the list.";
             } catch (DukeException e) {
                 response = "☹ OOPS!!! Invalid input for deadline.";
             }
@@ -46,8 +49,8 @@ public class Parser {
             try {
                 Task task = Event.create(content);
                 taskList.addTask(task);
-                response = "Ok boss. Added task:\n" + task.toString() +
-                        "\nNow you have " + taskList.getSize() + " in the list.";
+                response = "Ok boss. Added task:\n" + task.toString()
+                        + "\nNow you have " + taskList.getSize() + " in the list.";
             } catch (DukeException e) {
                 response = "☹ OOPS!!! Invalid input for event.";
             }
@@ -89,8 +92,8 @@ public class Parser {
                     response = "☹ OOPS!!! No such task in list.";
                 } else {
                     Task task = taskList.deleteTask(index);
-                    response = "Ok boss! Duke.Task removed: \n" + task.toString() +
-                            "\nNow you have " + taskList.getSize() + " in the list.";
+                    response = "Ok boss! Duke.Task removed: \n" + task.toString()
+                            + "\nNow you have " + taskList.getSize() + " in the list.";
                 }
             }
 

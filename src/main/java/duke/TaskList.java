@@ -1,9 +1,12 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
+import duke.task.Task;
+
+/**
+ * Handles storage of tasks.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -31,7 +34,12 @@ public class TaskList {
     public int getSize() {
         return this.tasks.size();
     }
-    
+
+    /**
+     * Given an array of integers, returns the tasks of those indexes in string form.
+     * @param arrayList Arraylist of integers.
+     * @return String of tasks.
+     */
     public String toStringIndexes(ArrayList<Integer> arrayList) {
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < arrayList.size(); i++) {
@@ -41,6 +49,12 @@ public class TaskList {
         return str.toString();
     }
 
+    /**
+     * Given a word, searches all tasks and compiles the index of all tasks that
+     * contain that word into an ArrayList.
+     * @param str Word to be found.
+     * @return ArrayList of integers corresponding to tasks.
+     */
     public ArrayList<Integer> findIndexesContaining(String str) {
         ArrayList<Integer> arrayList = new ArrayList<>();
         for (int i = 0; i < this.tasks.size(); i++) {

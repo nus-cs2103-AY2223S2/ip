@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Task parent class.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -39,7 +42,7 @@ public class Task {
      *
      * @return String of the type of Task.
      */
-    public String getType(){
+    public String getType() {
         return "task";
     }
 
@@ -53,7 +56,7 @@ public class Task {
     }
 
     public String toString() {
-        return this.getStatusIcon() + " " +this.description;
+        return this.getStatusIcon() + " " + this.description;
     }
 
     /**

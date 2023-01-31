@@ -1,12 +1,19 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
-
+/**
+ * Handle loading and saving of data.
+ */
 public class Storage {
 
     protected String filePath;
@@ -72,12 +79,12 @@ public class Storage {
      * @param taskList TaskList to write from.
      * @throws DukeException If error writing to file.
      */
-    public void save(TaskList taskList) throws DukeException{
+    public void save(TaskList taskList) throws DukeException {
         try {
             File file = new File("./data/duke.txt");
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (int i  = 0; i < taskList.getSize(); i++) {
+            for (int i = 0; i < taskList.getSize(); i++) {
                 Task t = taskList.getTask(i);
                 String entry = t.getType() + " " + t.getIsDone() + " " + t.getDescription();
                 if (t instanceof Deadline) {

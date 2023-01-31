@@ -1,15 +1,45 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+import duke.DukeException;
 
+/**
+ * Event task with start time and end time.
+ */
+public class Event extends Task {
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected LocalDateTime startTime;
     protected LocalDateTime endTime;
-    private static final DateTimeFormatter FORMATTER  = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    /**
+     * Constructor for Event object.
+     *
+     * @param description Description of task.
+     * @param startTime Starting time of Event in the format yyyy-MM-dd HH:mm.
+     * @param endTime Ending time of Event in the format yyyy-MM-dd HH:mm.
+     */
+    public Event(String description, LocalDateTime startTime, LocalDateTime endTime) {
+        super(description);
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    /**
+     * Constructor for Event object with boolean input.
+     *
+     * @param description Description of task.
+     * @param startTime Starting time of Event in the format yyyy-MM-dd HH:mm.
+     * @param endTime Ending time of Event in the format yyyy-MM-dd HH:mm.
+     * @param isDone Whether task is marked complete.
+     */
+    public Event(String description, LocalDateTime startTime, LocalDateTime endTime, Boolean isDone) {
+        super(description, isDone);
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 
     /**
      * Factory method to create Event object. String object should contain
@@ -45,7 +75,7 @@ public class Event extends Task{
      * @return Event object.
      * @throws DukeException If format of input is incorrect.
      */
-    public static Event create(String str, Boolean isDone) throws DukeException{
+    public static Event create(String str, Boolean isDone) throws DukeException {
         if (str.length() < 1) {
             throw new DukeException();
         } else {
@@ -60,33 +90,6 @@ public class Event extends Task{
                         LocalDateTime.parse(to, Event.FORMATTER), isDone);
             }
         }
-    }
-
-    /**
-     * Constructor for Event object.
-     *
-     * @param description Description of task.
-     * @param startTime Starting time of Event in the format yyyy-MM-dd HH:mm.
-     * @param endTime Ending time of Event in the format yyyy-MM-dd HH:mm.
-     */
-    public Event(String description, LocalDateTime startTime, LocalDateTime endTime) {
-        super(description);
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
-
-    /**
-     * Constructor for Event object with boolean input.
-     *
-     * @param description Description of task.
-     * @param startTime Starting time of Event in the format yyyy-MM-dd HH:mm.
-     * @param endTime Ending time of Event in the format yyyy-MM-dd HH:mm.
-     * @param isDone Whether task is marked complete.
-     */
-    public Event(String description, LocalDateTime startTime, LocalDateTime endTime, Boolean isDone) {
-        super(description, isDone);
-        this.startTime = startTime;
-        this.endTime = endTime;
     }
 
     public String getStartTime() {

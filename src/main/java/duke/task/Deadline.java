@@ -1,14 +1,40 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+import duke.DukeException;
 
+/**
+ * Deadline Task with a due date.
+ */
+public class Deadline extends Task {
+
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected LocalDateTime dueDate;
-    private static final DateTimeFormatter FORMATTER  = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    /**
+     * Constructor for Deadline object.
+     *
+     * @param description Description of task.
+     * @param dueDate Deadline of task in yyyy-MM-dd HH:mm format.
+     */
+    public Deadline(String description, LocalDateTime dueDate) {
+        super(description);
+        this.dueDate = dueDate;
+    }
+
+    /**
+     * Constructor for Deadline object.
+     *
+     * @param description Description of task.
+     * @param dueDate Deadline of task in yyyy-MM-dd HH:mm format.
+     * @param isDone Whether task is marked complete.
+     */
+    public Deadline(String description, LocalDateTime dueDate, Boolean isDone) {
+        super(description, isDone);
+        this.dueDate = dueDate;
+    }
 
     /**
      * Factory method to create Deadline object. String input should contain dueDate
@@ -40,7 +66,7 @@ public class Deadline extends Task{
      * @return Deadline object.
      * @throws DukeException If format of input is incorrect.
      */
-    public static Deadline create(String str, Boolean isDone) throws DukeException{
+    public static Deadline create(String str, Boolean isDone) throws DukeException {
         if (str.length() < 1) {
             throw new DukeException();
         } else {
@@ -51,29 +77,6 @@ public class Deadline extends Task{
                 return new Deadline(text[0], LocalDateTime.parse(text[1], Deadline.FORMATTER), isDone);
             }
         }
-    }
-
-    /**
-     * Constructor for Deadline object.
-     *
-     * @param description Description of task.
-     * @param dueDate Deadline of task in yyyy-MM-dd HH:mm format.
-     */
-    public Deadline(String description, LocalDateTime dueDate) {
-        super(description);
-        this.dueDate = dueDate;
-    }
-
-    /**
-     * Constructor for Deadline object.
-     *
-     * @param description Description of task.
-     * @param dueDate Deadline of task in yyyy-MM-dd HH:mm format.
-     * @param isDone Whether task is marked complete.
-     */
-    public Deadline(String description, LocalDateTime dueDate, Boolean isDone) {
-        super(description, isDone);
-        this.dueDate = dueDate;
     }
 
     public String getDueDate() {

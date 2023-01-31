@@ -2,7 +2,29 @@ package duke.task;
 
 import duke.DukeException;
 
-public class Todo extends Task{
+/**
+ * Todo class.
+ */
+public class Todo extends Task {
+
+    /**
+     * Constructor for Todo object.
+     *
+     * @param description Description of task.
+     */
+    public Todo(String description) {
+        super(description);
+    }
+
+    /**
+     * Constructor for Todo object with boolean
+     *
+     * @param description Description of task.
+     * @param isDone Whether task is marked complete
+     */
+    public Todo(String description, Boolean isDone) {
+        super(description, isDone);
+    }
 
     /**
      * Factory method to create Todo object.
@@ -27,31 +49,12 @@ public class Todo extends Task{
      * @return Todo object.
      * @throws DukeException If input String length is < 1.
      */
-    public static Todo create(String text, Boolean isDone) throws DukeException{
+    public static Todo create(String text, Boolean isDone) throws DukeException {
         if (text.length() < 1) {
             throw new DukeException();
         } else {
             return new Todo(text.substring(1), isDone);
         }
-    }
-
-    /**
-     * Constructor for Todo object.
-     *
-     * @param description Description of task.
-     */
-    public Todo(String description) {
-        super(description);
-    }
-
-    /**
-     * Constructor for Todo object with boolean
-     *
-     * @param description Description of task.
-     * @param isDone Whether task is marked complete
-     */
-    public Todo(String description, Boolean isDone) {
-        super(description, isDone);
     }
 
     @Override
@@ -60,7 +63,7 @@ public class Todo extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 }
