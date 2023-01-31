@@ -1,7 +1,7 @@
 import Duke.TaskMethods;
 import Duke.TaskList;
 import Exceptions.DukeMainExceptions;
-import Storage.Storage;
+import Duke.Storage.Storage;
 import Duke.Ui;
 import Duke.Parser;
 

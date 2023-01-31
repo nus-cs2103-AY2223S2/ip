@@ -1,12 +1,8 @@
 package Duke;
 
-import Duke.Tasks.*;
-import Duke.TaskList;
 import Exceptions.CommandNotFoundException;
-import Exceptions.DukeMainExceptions;
-import Storage.Storage;
+import Duke.Storage.Storage;
 
-import java.io.IOException;
 public class Parser {
     private TaskList t;
     private Storage storage;
