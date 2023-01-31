@@ -34,11 +34,26 @@ public class DeadlineCommand extends Command {
      * @throws DukeException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task newTask = new Deadline(this.title,
-                this.deadline);
+        Task newTask = new Deadline(this.title, this.deadline);
         tasks.add(newTask);
         ui.showAdd(newTask);
         storage.save(tasks);
+    }
+
+    /**
+     * Executes the command
+     *
+     * @param tasks   TaskList object to get and set the list
+     * @param ui      object to reply to user after the command has executed
+     * @param storage object required when command writes to file
+     * @return returns the UI text instead of printing
+     * @throws DukeException
+     */
+    public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        Task newTask = new Deadline(this.title, this.deadline);
+        tasks.add(newTask);
+        storage.save(tasks);
+        return ui.stringAdd(newTask);
     }
 
     /**

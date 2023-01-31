@@ -36,6 +36,20 @@ public class FindCommand extends Command {
     }
 
     /**
+     * Executes the command
+     *
+     * @param tasks   TaskList object to get and set the list
+     * @param ui      object to reply to user after the command has executed
+     * @param storage object required when command writes to file
+     * @return returns the UI text instead of printing
+     * @throws DukeException
+     */
+    public String executeString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ArrayList<Task> result = tasks.search(query);
+        return ui.stringList(result);
+    }
+
+    /**
      * Checks if this command will exit the program
      *
      * @return boolean True if the command will exit the program

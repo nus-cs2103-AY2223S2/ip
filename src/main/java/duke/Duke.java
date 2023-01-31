@@ -48,6 +48,13 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.executeString(tasks, ui, storage);
+            // System.out.println(c.executeString(tasks, ui, storage));
+            // return "asdf";
+        } catch (DukeException e) {
+            return ui.stringError(e.getMessage());
+        }
     }
 }
