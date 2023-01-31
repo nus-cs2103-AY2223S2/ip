@@ -30,6 +30,17 @@ public class TaskList {
         this.tasks.get(index - 1).markAsUndone();
     }
 
+    public TaskList find(String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.toString().contains(keyword)) {
+                result.add(task);
+            }
+        }
+
+        return new TaskList(result);
+    }
+
     public void listTasks() {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + 1 + "." + tasks.get(i));
