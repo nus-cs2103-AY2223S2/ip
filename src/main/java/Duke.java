@@ -1,18 +1,71 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
+    private static List<Task> store = new ArrayList<>();
 
+    private static void readSaveFile(String filePath) throws FileNotFoundException, EmptyDescriptionException {
+        File file = new File(filePath);
+        Scanner sc = new Scanner(file);
+        while (sc.hasNext()) {
+            String task = sc.nextLine();
+            textToTask(task);
+            System.out.print(task + "\n");
+        }
+    }
+
+    private static void writeSaveFile(String filePath, String data) throws IOException{
+        File file = new File(filePath);
+        file.createNewFile();
+        FileWriter writer = new FileWriter(filePath, false);
+        writer.write(data);
+        writer.close();
+    }
+
+    private static String reformatArr(List<Task> list) {
+        String data = "";
+        for (int i = 0; i < list.size(); i++) {
+            data += list.get(i).getFileDescription() + "\n";
+        }
+        return data;
+    }
+    private static void textToTask(String task) throws EmptyDescriptionException {
+        String[] input = task.split(" \\| ");
+        String type = input[0];
+        String mark = input[1];
+        Task x = null;
+        if (type.equals("T")) {
+            x = new ToDo(input[2]);
+        } else if (type.equals("D")) {
+            x = new Deadline(input[2], input[3]);
+        } else if (type.equals("E")) {
+            x = new Event(input[2], input[3], input[4]);
+        }
+        if (mark.equals("X")) {
+            x.markAsDone();
+        }
+        store.add(x);
+    }
 
     public static void main(String[] args) {
         System.out.println("Hello Boss.\n" + "How may i help you?\n");
 
+        try {
+            readSaveFile("data/duke.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("save file empty.");
+        } catch (EmptyDescriptionException ue) {
+            System.out.println("empty description.");
+        }
+
         Scanner sc = new Scanner(System.in);
 
         String echo = sc.nextLine();
-
-        List<Task> store = new ArrayList<>();
 
         while (true) {
             if (echo.equals("list")) {
@@ -21,7 +74,13 @@ public class Duke {
                 }
                 echo = sc.nextLine();
             } else if (echo.equals("bye")) {
+                try {
+                    writeSaveFile("data/duke.txt", reformatArr(store));
+                } catch (IOException e) {
+                    System.out.println("something went wrong...");
+                }
                 System.out.println("Bye, have a good day!");
+                break;
             } else if (echo.contains("delete")) {
                 int index = Integer.parseInt(echo.substring(7));
                 index--;
@@ -60,8 +119,8 @@ public class Duke {
                     } else if (echo.contains("deadline")) {
                         echo = echo.replace("deadline", "");
                         String description = echo.split("/by")[0];
-                        String date = echo.split("/by ")[1];
-                        Deadline deadline = new Deadline(description, date);
+                        String dateAndTime = echo.split("/by ")[1];
+                        Deadline deadline = new Deadline(description, dateAndTime);
                         store.add(deadline);
                         System.out.println("Got it. I've added this task:\n" + deadline.toString() +
                                 "\nNow you have " + store.size() + " tasks in the list.\n");
@@ -89,6 +148,6 @@ public class Duke {
                 }
             }
         }
-        System.out.println("OOPS! Something went wrong.");
+        System.out.println(":-/");
     }
 }
