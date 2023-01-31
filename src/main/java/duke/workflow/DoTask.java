@@ -1,8 +1,12 @@
 package duke.workflow;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import duke.util.TaskList;
 import duke.io.input.exception.UserInputException;
 import duke.io.input.exception.DukeException;
@@ -109,7 +113,9 @@ public class DoTask extends Event {
                         String deadlineAction = deadlineList.get(0);
                         String[] deadlinePhraseArray = deadlineAction.split("DEADLINE ");
                         List<String> deadlinePhraseList = Arrays.asList(deadlinePhraseArray);
-                        return new DoTask(false, deadlinePhraseList.get(1), this.taskList.addTask(new Deadline(deadlineList.get(1), deadlinePhraseList.get(1))));
+                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                        return new DoTask(false, deadlinePhraseList.get(1), this.taskList.addTask(
+                                new Deadline(LocalDateTime.parse(deadlineList.get(1), format), deadlinePhraseList.get(1))));
                     }
                     if (words.get(0).equals("EVENT")) {
                         String[] splitFrom = nextTask.split(" /FROM ");
@@ -122,7 +128,9 @@ public class DoTask extends Event {
                         List<String> timeLineSplit = Arrays.asList(timeFrame);
                         String eventBegin = timeLineSplit.get(0);
                         String eventEnd = timeLineSplit.get(1);
-                        return new DoTask(false, eventPhraseList.get(1), this.taskList.addTask(new ScheduledEvent(eventBegin, eventEnd, eventPhraseList.get(1))));
+                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                        return new DoTask(false, eventPhraseList.get(1), this.taskList.addTask(
+                                new ScheduledEvent(LocalDateTime.parse(eventBegin, format), LocalDateTime.parse(eventEnd, format), eventPhraseList.get(1))));
                     }
                     if (words.get(0).equals("DELETE")) {
                         this.removedTask = this.taskList.getTask(Integer.valueOf(words.get(1)) - 1);
