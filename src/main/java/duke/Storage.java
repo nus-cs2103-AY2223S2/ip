@@ -7,12 +7,25 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import duke.exceptions.DukeCannotFindFileException;
 
+/**
+ * Represents the storage used to save the tasklist.
+ * Handles the reading and writing of text files so that state can be saved.
+ * @author lukkesreysandeur
+ */
 public class Storage {
+    /** The filepath of the saved file. */
     private final String saveLocation = "data/savestate.txt";
+    /** The folder that the saved file is stored in. */
     private final String saveFolder = "data";
+    /** Boolean stating whether the folder has been created. */
     private boolean isFolderCreated = false;
+    /** Boolean stating whether the file has been created. */
     private boolean isFileCreated = false;
 
+    /**
+     * Initialises the storage object.
+     * Sets the booleans to true if the file and folder can be found.
+     */
     public Storage() {
         File folder = new File(saveFolder);
         if (folder.exists()) {
@@ -24,6 +37,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current state of the tasklist by writing to a text file.
+     * Creates new folder and file if they cannot be found, then sets the booleans to true.
+     * @param lst The current tasklist object.
+     */
     public void saveState(TaskList lst) {
         if (!isFolderCreated) {
             File folder = new File(saveFolder);
@@ -53,6 +71,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the saved text file into the tasklist, throws error if the file cannot be found.
+     * @param lst The tasklist to be saved into.
+     * @throws DukeCannotFindFileException
+     */
     public void loadState(TaskList lst) throws DukeCannotFindFileException {
         if (!isFileCreated) {
             throw new DukeCannotFindFileException();

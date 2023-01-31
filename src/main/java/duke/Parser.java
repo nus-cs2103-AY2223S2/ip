@@ -4,10 +4,22 @@ import duke.commands.Command;
 import duke.exceptions.DukeUnknownInputException;
 import duke.commands.*;
 
+/**
+ * Helps to parse user input into commands that the chat bot understands.
+ * @author lukkesreysandeur
+ */
 public class Parser {
-
+    /**
+     * Initialises Parser object.
+     */
     public Parser() {}
 
+    /**
+     * Parses the user inputted command and returns a command; throws error if command is invalid.
+     * @param fullCommand Command entered by the user.
+     * @return Command object that will handle the requested action.
+     * @throws DukeUnknownInputException
+     */
     public Command parse(String fullCommand) throws DukeUnknownInputException {
         String[] commands = fullCommand.split(" ", 2);
         String command = commands[0];

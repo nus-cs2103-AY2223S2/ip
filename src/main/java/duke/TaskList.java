@@ -11,13 +11,27 @@ import java.util.regex.Matcher;
 import java.lang.StringBuilder;
 
 import java.util.ArrayList;
+
+/**
+ * Represents the list that contains the tasks of the chat bot.
+ * @author lukkesreysandeur
+ */
 public class TaskList {
+    /** List to store the tasks. */
     private ArrayList<Task> list;
 
+    /**
+     * Initialises the tasklist by creating a new list to store the tasks.
+     */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Adds the input task to the tasklist
+     * @param t The task to be added
+     * @return A response acknowledging the addition of a task.
+     */
     public String add(Task t) {
         list.add(t);
         int size = list.size();
@@ -25,6 +39,10 @@ public class TaskList {
                 t.toString(), size, size == 1 ? "" : "s");
     }
 
+    /**
+     * Lists the items in the tasklist along with their completed state.
+     * @return Response containing the contents of the tasklist in text form.
+     */
     public String listItems() {
         StringBuilder str = new StringBuilder();
         int count = 1;
@@ -39,6 +57,14 @@ public class TaskList {
         return String.format("Here are the tasks in your list:\n%s", str);
     }
 
+    /**
+     * Marks or unmarks a specified task in the tasklist depending on the action given.
+     * @param param The index of the task.
+     * @param action One of two actions: "mark" or "unmark".
+     * @return A string detailing whether the action was successful or not.
+     * @throws DukeInvalidInputException
+     * @throws DukeEmptyInputException
+     */
     public String changeState(String param, String action) throws DukeInvalidInputException, DukeEmptyInputException {
         Pattern pattern = Pattern.compile("\\s");
         Matcher matcher = pattern.matcher(param.trim());
@@ -61,6 +87,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes specified task from the tasklist.
+     * @param input The index of the task.
+     * @return A string telling the user if the deletion of the task was successful.
+     * @throws DukeInvalidInputException
+     */
     public String delete(String input) throws DukeInvalidInputException {
         Pattern pattern = Pattern.compile("\\s");
         Matcher matcher = pattern.matcher(input.trim());
@@ -82,6 +114,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Converts the tasklist contents into formatted text that can be stored in a text file.
+     * @return A string of a certain format that represents the tasklist contents.
+     */
     public String listToText() {
         StringBuilder textString = new StringBuilder();
         for (Task t : list) {
@@ -90,6 +126,10 @@ public class TaskList {
         return textString.toString();
     }
 
+    /**
+     * Loads a task into the tasklist based on formatted text.
+     * @param taskText The string representing the task.
+     */
     public void loadTask(String taskText) {
         try {
             list.add(Task.fromText(taskText));
