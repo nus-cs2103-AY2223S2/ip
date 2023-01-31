@@ -1,5 +1,7 @@
 package util;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -253,5 +255,17 @@ public class Parser<T> {
             }
             return Result.error("Not EOL yet.");
         });
+    }
+
+    public static Parser<LocalDate> dateParser() {
+        return new Parser<>(inp -> nextStrParser().parse(inp).match(
+                pr -> {
+                    try {
+                        return Result.ok(LocalDate.parse(pr.first()), pr.second());
+                    } catch (DateTimeParseException ex) {
+                        return Result.error("Failed to parse date.");
+                    }
+                },
+                msg -> Result.error(msg)));
     }
 }
