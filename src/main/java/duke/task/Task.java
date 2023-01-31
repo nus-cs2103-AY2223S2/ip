@@ -66,6 +66,16 @@ public abstract class Task implements Serializable {
     public boolean isDone() { return this.isDone; }
 
     /**
+     * The contains method checks if the target string is contained in the description field.
+     *
+     * @param target The string to search for in the description field.
+     * @return true if the target string is found in the description, false otherwise.
+     */
+    public boolean contains(String target) {
+        return this.description.contains(target);
+    }
+
+    /**
      * Formats the task as "[taskStatus] taskDescription".
      *
      * @return a string representation of the task

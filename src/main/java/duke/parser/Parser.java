@@ -117,6 +117,15 @@ public class Parser {
                     String[] delMsg = {"Noted. I've removed this task:", tsk.toString(), tskNum};
                     this.ui.printMsg(delMsg);
                     break;
+                case "find":
+                    String query = inputs[1];
+                    String[] taskStrList = data.find(query);
+                    if (taskStrList.length == 0) {
+                        this.ui.printMsg("Sorry, I could not find any matches.");
+                    } else {
+                        this.ui.printList("Here are the matching tasks in your list: ", data.find(query));
+                    }
+                    break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 
