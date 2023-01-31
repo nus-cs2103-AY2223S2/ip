@@ -23,6 +23,14 @@ public class Task {
         this.isCompleted = false;
     }
 
+    public String getTaskType() {
+        return this.toString().substring(1, 2);
+    }
+
+    public String getTask() {
+        return " ";
+    }
+
     public String toString() {
         return this.currentTaskStatus() + " " + this.taskString;
     }

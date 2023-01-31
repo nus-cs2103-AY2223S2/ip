@@ -1,5 +1,5 @@
 todo cook
-event buy milktea /from 4am /to 7pm
+event pay /from 4am /to 7pm
 deadline code /by no idea :-p
 mark 1
 list
