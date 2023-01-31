@@ -1,10 +1,12 @@
 package Duke;
 
 import Duke.Storage.Storage;
+import Duke.Tasks.Task;
 
 import Exceptions.CommandNotFoundException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Parser {
     private TaskList t;
@@ -62,6 +64,13 @@ public class Parser {
                     ? input.split(" ", 2)[1]
                     : "";
             t.addEvent(splitDescription);
+            break;
+        case "FIND":
+            splitDescription = input.split(" ", 2).length == 2
+                    ? input.split(" ", 2)[1]
+                    : "";
+            ArrayList<Task> filteredTasks = t.findRelevantTasks(splitDescription);
+            System.out.println(filteredTasks);
             break;
         default:
             throw new CommandNotFoundException("I'm sorry, but I don't know what that means :-(");
