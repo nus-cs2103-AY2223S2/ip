@@ -38,20 +38,20 @@ public class TaskList {
     /**
      * Removes task from list at given index.
      *
-     * @param i Index where task is to be removed.
+     * @param index Index where task is to be removed.
      */
-    public void remove(int i) {
-        tasks.remove(i);
+    public void remove(int index) {
+        tasks.remove(index);
     }
 
     /**
      * Returns a task at a given index.
      *
-     * @param i Index where task is to be returned.
+     * @param index Index where task is to be returned.
      * @return The task requested by Duke.
      */
-    public Task get(int i) {
-        return tasks.get(i);
+    public Task get(int index) {
+        return tasks.get(index);
     }
 
     /**

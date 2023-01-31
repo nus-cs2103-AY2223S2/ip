@@ -3,7 +3,7 @@ package task;
 /**
  * Class for a Todo Task.
  */
-public class TodoTask extends Task{
+public class TodoTask extends Task {
     /**
      * Constructor for todo Task.
      *
@@ -13,7 +13,7 @@ public class TodoTask extends Task{
         super(name);
   }
 
-    /**\
+    /**
      * Constructor for todo Task when loaded in from hard drive.
      *
      * @param name Title/name of task.

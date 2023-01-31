@@ -56,4 +56,8 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Yo! The name is\n" + projName);
     }
+
+    public static void showSavedDataMessage() {
+        System.out.println("Data was saved successfully!");
+    }
 }

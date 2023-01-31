@@ -21,13 +21,15 @@ public class Duke {
         storage = new Storage(filePath);
         TaskList taskList;
         ui.showWelcomeMessage();
+
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
             Ui.showLoadingErrorMessage();
             taskList = new TaskList();
         }
-        parser = new Parser(ui, storage, taskList);
+
+        parser = new Parser(storage, taskList);
     }
 
     /**
@@ -46,7 +48,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         new Duke(SAVED_PATH).run();
     }
 }

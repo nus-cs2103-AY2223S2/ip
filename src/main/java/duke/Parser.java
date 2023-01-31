@@ -14,19 +14,16 @@ import java.time.format.DateTimeParseException;
  * Parser class that handles inputs made by user.
  */
 public class Parser {
-    Ui ui;
-    Storage storage;
-    TaskList taskList;
+    private Storage storage;
+    private TaskList taskList;
 
     /**
      * Constructor for a parser.
      *
-     * @param ui Ui instance of Duke.
      * @param storage Storage instance of Duke.
      * @param taskList TaskList containing the tasks.
      */
-    public Parser(Ui ui, Storage storage, TaskList taskList) {
-        this.ui = ui;
+    public Parser(Storage storage, TaskList taskList) {
         this.storage = storage;
         this.taskList = taskList;
     }
@@ -42,16 +39,18 @@ public class Parser {
      */
     public boolean readInput(String input) throws DukeException, IOException {
         String firstInput = input.split(" ")[0];
-        LocalDate now = LocalDate.now();
+        LocalDate currentTime = LocalDate.now();
 
         try {
             switch (firstInput) {
             case "list":
                 System.out.println("Here are the tasks you asked for!");
+
                 for (int i = 0; i < taskList.size(); i += 1) {
                     int currItem = i + 1;
                     System.out.println(currItem + ": " + taskList.get(i));
                 }
+
                 System.out.println("You now have " + taskList.size() + " items in your list.");
                 return true;
 
@@ -63,6 +62,7 @@ public class Parser {
                 if (input.split(" ").length < 2) {
                     throw new DukeException("Mark? Mark what?");
                 }
+
                 try {
                     int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task selectedTask = taskList.get(taskIndex);
@@ -78,6 +78,7 @@ public class Parser {
                 if (input.split(" ").length < 2) {
                     throw new DukeException("Unmark? Unmark what?");
                 }
+
                 try {
                     int untaskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task unselectedTask = taskList.get(untaskIndex);
@@ -101,37 +102,47 @@ public class Parser {
 
             case "deadline":
                 String deadlineDetails = input.substring(9);
+
                 if (deadlineDetails.split(" /by ").length < 2) {
-                    throw new DukeException("Wait a minute, you're missing something! Could be the name or date...");
+                    throw new DukeException("Wait a minute, "
+                            + "you're missing something! Could be the name or date...");
                 }
+
                 String deadlineName = deadlineDetails.split(" /by ")[0];
                 String deadlineDateStr = deadlineDetails.split(" /by ")[1];
                 LocalDate deadlineDate = LocalDate.parse(deadlineDateStr);
-                // make sure date not before curr date
-                if (deadlineDate.isBefore(now)) {
+
+                if (deadlineDate.isBefore(currentTime)) {
                     throw new DukeException("Wait! Time travelling is not in my kit!");
                 }
+
                 DeadlineTask deadlineTask = new DeadlineTask(deadlineName, deadlineDate);
                 addTask(deadlineTask, deadlineName);
                 return true;
 
             case "event":
                 String eventDetails = input.substring(6);
-                if (eventDetails.split(" /from ").length < 2 || eventDetails.split(" /to ").length < 2) {
+
+                if (eventDetails.split(" /from ").length < 2
+                        || eventDetails.split(" /to ").length < 2) {
                     throw new DukeException("Hold up, you might be missing something here buddy!");
                 }
+
                 String eventName = eventDetails.split(" /from ")[0];
                 String eventDate = eventDetails.split(" /from ")[1];
                 String eventStartStr = eventDate.split(" /to ")[0];
                 String eventEndStr = eventDate.split(" /to ")[1];
                 LocalDate eventStart = LocalDate.parse(eventStartStr);
                 LocalDate eventEnd = LocalDate.parse(eventEndStr);
-                if (eventStart.isBefore(now) || eventEnd.isBefore(now)) {
+
+                if (eventStart.isBefore(currentTime) || eventEnd.isBefore(currentTime)) {
                     throw new DukeException("Wait! Time travelling is not in my kit!");
                 }
+
                 if (eventStart.isAfter(eventEnd)) {
                     throw new DukeException("Ohhh I wasn't aware time travels backwards for you :O");
                 }
+
                 EventTask eventTask = new EventTask(eventName, eventStart, eventEnd);
                 addTask(eventTask, eventName);
                 return true;
@@ -140,6 +151,7 @@ public class Parser {
                 if (input.split(" ").length < 2) {
                     throw new DukeException("Delete? Delete what?");
                 }
+
                 try {
                     int deleteIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                     Task deleteTask = taskList.get(deleteIndex);
@@ -158,7 +170,8 @@ public class Parser {
         } catch (IOException io) {
             throw new DukeException("Something is up with your files it seems");
         } catch (DateTimeParseException dl) {
-            throw new DukeException("Beep boop this robot can only understand dates in the form yyyy-mm-dd");
+            throw new DukeException("Beep boop "
+                    + "this robot can only understand dates in the form yyyy-mm-dd");
         }
     }
 

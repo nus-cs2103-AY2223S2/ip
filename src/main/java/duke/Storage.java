@@ -1,6 +1,10 @@
 package duke;
 
-import task.*;
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.TaskList;
+import task.TodoTask;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -39,17 +43,22 @@ public class Storage {
                 throw new DukeException("Directories can't be made? Or did something go wrong...");
             }
         }
+
         if (!file.exists()) {
             if (!file.createNewFile()) {
                 throw new DukeException("This file both doesn't exist and cannot be made D:");
             }
         }
+
         FileWriter fileWriter = new FileWriter(file);
+
         for (Task task : taskList.asList()) {
             fileWriter.write(task.toString());
             fileWriter.write(System.lineSeparator());
         }
+
         fileWriter.close();
+        Ui.showSavedDataMessage();
     }
 
     /**
@@ -60,6 +69,7 @@ public class Storage {
      */
     public Task[] load() throws DukeException {
         File f = new File(SAVED_PATH);
+
         try {
             if (!f.exists()) { //file didn't exist yet
                 Ui.showNewUserMessage();
@@ -69,6 +79,7 @@ public class Storage {
                 System.out.println("Here's the tasks you have:");
                 Scanner scanner = new Scanner(f);
                 ArrayList<Task> taskList = new ArrayList<>();
+
                 while (scanner.hasNextLine()) {
                     Task task;
                     String currTask = scanner.nextLine();
@@ -76,21 +87,25 @@ public class Storage {
                     String taskCompletion = currTask.substring(4,7);
                     Boolean complete = Objects.equals(taskCompletion, "[X]");
                     String taskDetails;
+
                     if (complete) {
                         taskDetails = currTask.split(" \\[X] ")[1];
                     } else {
                         taskDetails = currTask.split(" \\[ ] ")[1];
                     }
-                    switch (taskType){
+
+                    switch (taskType) {
                     case "[T]":
                         task = new TodoTask(taskDetails, complete);
                         break;
+
                     case "[D]":
                         String deadlineName = taskDetails.split(" \\(by: ")[0];
                         String date = taskDetails.split(" \\(by: ")[1].split("\\)")[0];
                         LocalDate deadLine = LocalDate.parse(date);
                         task = new DeadlineTask(deadlineName, deadLine, complete);
                         break;
+
                     case "[E]":
                         String eventName = taskDetails.split(" \\(from:")[0];
                         String eventPeriod = taskDetails.split("\\(from: ")[1];
@@ -100,15 +115,19 @@ public class Storage {
                         LocalDate end = LocalDate.parse(endStr);
                         task = new EventTask(eventName, start, end, complete);
                         break;
+
                     default:
                         task = new Task(taskDetails);
                     }
+
                     taskList.add(task);
                 }
+
                 for (int i = 0; i < taskList.size(); i += 1) {
                     int currItem = i + 1;
                     System.out.println(currItem + ": " + taskList.get(i));
                 }
+
                 Ui.showWelcomePrompt();
                 return taskList.toArray(new Task[0]);
             }

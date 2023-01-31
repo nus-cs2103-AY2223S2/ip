@@ -1,10 +1,8 @@
 package task;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,7 +16,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void secondTest() {
+    public void sizeTest() {
         Task task1 = new TodoTask("Do work");
         Task task2 = new DeadlineTask("Return book", LocalDate.parse("2024-01-01"), true);
         Task[] taskArray = {task1, task2};
