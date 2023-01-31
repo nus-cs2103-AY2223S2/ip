@@ -6,10 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -20,7 +21,7 @@ import java.util.Collections;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -36,6 +37,12 @@ public class DialogBox extends HBox {
 
         dialog.setText(message);
         displayPicture.setImage(img);
+
+        Circle clip = new Circle();
+        clip.setRadius(25);
+        clip.setCenterX(25);
+        clip.setCenterY(25);
+        displayPicture.setClip(clip);
     }
 
     private void flip() {

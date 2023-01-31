@@ -26,6 +26,10 @@ public class Gui implements Ui {
 
         mainWindow = new MainWindow(inputHandler);
         stage.setScene(new Scene(mainWindow));
+
+        stage.setMinWidth(600);
+        stage.setMinHeight(600);
+        stage.setResizable(false);
     }
 
     @Override
