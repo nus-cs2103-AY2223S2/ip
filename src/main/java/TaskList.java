@@ -51,16 +51,7 @@ public class TaskList {
         list.add(t);
         length += 1;
     }
-
-    /**
-     * Deletes a task at specified index
-     * @param i index of task to be deleted
-     * @return String showing which task has been removed
-     */
-    public String deleteTask(int i) {
-        length -= 1;
-        return ("Noted. I have removed this task: \n" + list.remove(i));
-    }
+    
 
     static void validate(Integer length, Integer error_length, String task) throws DukeException {
         if (length == error_length) {
