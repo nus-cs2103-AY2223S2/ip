@@ -1,7 +1,5 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
@@ -9,16 +7,18 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.tasks.Task;
+
 /**
  * Ui class deals with interactions with the user.
  */
 public class Ui {
-    final static String logo = " ____        _        \n"
+    static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    protected final static String SEPARATOR = "\t____________________________________________________________";
+    static final String SEPARATOR = "\t____________________________________________________________";
     private Scanner sc;
 
     /**
@@ -46,7 +46,7 @@ public class Ui {
      * Prints welcome message to user of Duke.
      */
     public void welcomeMessage() {
-        System.out.println(logo
+        System.out.println(LOGO
                 + "\n"
                 + SEPARATOR
                 + "\n\tHello! I'm Duke\n"

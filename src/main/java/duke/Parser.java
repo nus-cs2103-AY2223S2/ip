@@ -1,21 +1,22 @@
 package duke;
 
 import duke.command.ByeCommand;
-import duke.command.FindCommand;
-import duke.command.MarkCommand;
-import duke.command.EventCommand;
-import duke.command.UnmarkCommand;
-import duke.command.DeadlineCommand;
-import duke.command.ListCommand;
-import duke.command.ToDoCommand;
-import duke.command.DeleteCommand;
 import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.ToDoCommand;
+import duke.command.UnmarkCommand;
+
 
 /**
  * Parser class deals with making sense of the user command.
  */
 public class Parser {
-    public enum Commands {
+    private enum Commands {
         bye,
         list,
         mark,
@@ -103,5 +104,4 @@ public class Parser {
             throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!");
         }
     }
-
 }

@@ -6,17 +6,21 @@
  */
 package duke;
 
-import duke.command.Command;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Duke {
-    private Storage storage;
-    private Ui ui;
-    private static boolean isExit;
+import duke.command.Command;
 
+/**
+ * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
+ *
+ * @author dfordarius
+ */
+
+public class Duke {
+    private final Storage storage;
+    private final Ui ui;
     private TaskList tasks;
 
     /**
@@ -42,7 +46,7 @@ public class Duke {
     public void start() {
         ui.welcomeMessage();
         ui.showListFromStorage(storage);
-        isExit = false;
+        boolean isExit = false;
         while (!isExit) {
             try {
                 String command = ui.readCommand();
@@ -55,6 +59,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method of Duke.
+     *
+     * @param args The command line arguments.
+     */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void main(String[] args) {
         String filepath = System.getProperty("user.home") + "/data/data.txt";
         File file = new File(filepath);

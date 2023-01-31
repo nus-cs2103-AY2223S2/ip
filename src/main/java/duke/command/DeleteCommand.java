@@ -11,7 +11,7 @@ import duke.tasks.Task;
  */
 
 public class DeleteCommand extends Command {
-    int index;
+    private int index;
 
     /**
      * Constructor for DeleteCommand.
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
      * @param task    Task list containing the list of tasks.
      * @param storage Saves tasks into the file locally.
      * @param ui      Deals with interactions with user.
-     * @throws DukeException if command cannot be recognised or task number does not exist.
+     * @throws DukeException if the task is empty or the index inputted by user does not exist.
      */
     @Override
     public void execute(TaskList task, Storage storage, Ui ui) throws DukeException {
