@@ -6,25 +6,22 @@ import duke.ui.Ui;
  * Represents a command that is entered by the user
  */
 public abstract class Command {
-    /** The Ui for the command to print output. */
-    protected Ui ui;
-
     /** Whether the command should cause the bot to exit. */
     protected boolean isExit = false;
 
     /**
      * Constructs a <code>Command</code> instance.
-     *
-     * @param ui The Ui for the command to print output.
      */
-    public Command(Ui ui) {
-        this.ui = ui;
+    public Command() {
+        //Empty constructor
     }
 
     /**
      * Runs the given command.
+     *
+     * @return the string output of running a given command
      */
-    public abstract void runCommand();
+    public abstract String runCommand();
 
     /**
      * Checks if the command should cause the bot to exit.
