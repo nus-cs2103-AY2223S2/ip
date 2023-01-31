@@ -14,16 +14,29 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a storage class that handles the reading and writing to the data text file
+ * for data persistence.
+ */
 public class Storage {
     private File f;
     private String filePath;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
+    /**
+     * Class constructor with a given file path to the text file.
+     * @param filePath
+     */
     public Storage(String filePath)  {
         this.f = new File(filePath);
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the tasks in the text file and converts them into an ArrayList of Task.
+     * @return an ArrayList of Task that was stored in the text file.
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> loadTasks() throws FileNotFoundException {
             Scanner sc = new Scanner(f);
             ArrayList<Task> taskList = new ArrayList<>();
@@ -35,6 +48,11 @@ public class Storage {
 
     }
 
+    /**
+     * Persists the current task list state to memory.
+     * @param taskListState
+     * @throws IOException
+     */
     public void saveTasks(ArrayList<Task> taskListState) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : taskListState) {

@@ -5,6 +5,9 @@ import exception.InvalidCommandException;
 import exception.TaskFactoryException;
 import tasks.TaskFactory;
 
+/**
+ * Represents a parser that parses raw user input and returns an executable Command.
+ */
 public class Parser {
 
     private TaskFactory taskFactory;
@@ -13,6 +16,13 @@ public class Parser {
         this.taskFactory = taskFactory;
     }
 
+    /**
+     * Parses and returns a command according to the raw user input.
+     * @param fullCommand
+     * @return a Command according to the user input.
+     * @throws InvalidCommandException
+     * @throws TaskFactoryException
+     */
     public Command parse(String fullCommand) throws InvalidCommandException, TaskFactoryException {
         String[] splitStr = fullCommand.split("\\s+", 2);
         String command = splitStr[0];

@@ -7,6 +7,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class TaskFactory {
+
+    /**
+     * Returns a Task according to the given instruction.
+     * Parses the instruction to determine which type of Command to return.
+     *
+     * @param instruction
+     * @return Task object as specified by the instruction.
+     * @throws TaskFactoryException
+     */
     public Task make(String instruction) throws TaskFactoryException {
         String[] splitStr = instruction.split("\\s+", 2);
         String taskType = splitStr[0];
