@@ -149,11 +149,10 @@ public class TaskList {
      */
     public String guiAddToDo(String[] curr, Ui ui) throws DukeException {
         String todo = curr[0].substring(5).trim();
-        if (todo.isBlank()) {
-            throw new DukeException("You need to add a todo with format `todo {title}`");
-        } else {
+        if (!todo.isBlank()) {
             return guiAdd(new ToDo(todo), ui);
         }
+        throw new DukeException("You need to add a todo with format `todo {title}`");
     }
 
     /**
@@ -234,12 +233,11 @@ public class TaskList {
     public String guiMark(String[] currTitle, Ui ui) throws DukeException {
         try {
             int idx = Integer.parseInt(currTitle[1]) - 1;
-            if (items.get(idx).isMarked()) {
-                throw new AlreadyMarkedException();
-            } else {
+            if (!items.get(idx).isMarked()) {
                 items.get(idx).mark();
                 return ui.guiMarkMessage(items.get(idx));
             }
+            throw new AlreadyMarkedException();
         } catch (AlreadyMarkedException e) {
             throw new AlreadyMarkedException("Already Marked!");
         } catch (Exception e) {
@@ -281,12 +279,11 @@ public class TaskList {
     public String guiUnmark(String[] currTitle, Ui ui) throws DukeException {
         try {
             int idx = Integer.parseInt(currTitle[1]) - 1;
-            if (!items.get(idx).isMarked()) {
-                throw new AlreadyUnmarkedException();
-            } else {
+            if (items.get(idx).isMarked()) {
                 items.get(idx).unmark();
                 return ui.guiUnmarkMessage(items.get(idx));
             }
+            throw new AlreadyUnmarkedException();
         } catch (AlreadyUnmarkedException e) {
             throw new AlreadyUnmarkedException("Already unmarked!");
         } catch (Exception e) {
@@ -338,12 +335,10 @@ public class TaskList {
                     temp.initAdd(items.get(i));
                 }
             }
-            if (temp.isEmpty()) {
-                return ui.guiFailedSearch();
-            } else {
+            if (!temp.isEmpty()) {
                 return ui.guiPrintSearch(temp);
             }
-
+            return ui.guiFailedSearch();
         } catch (Exception e) {
             throw new DukeException("You need to do a search with the format `find {substring}`");
         }
