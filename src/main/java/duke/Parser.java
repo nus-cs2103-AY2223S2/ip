@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Parser {
     public Parser(){
@@ -6,7 +6,9 @@ public class Parser {
 
     public String parse(String input) {
         Integer len = input.length();
-        if (input.equals("list")) {
+        if (input.equals("bye")){
+            return "BYE";
+        } else if (input.equals("list")) {
             return "LIST";
         } else if (len >= 8 && input.substring(0, 6).equals("delete")) {
             return "DELETE";

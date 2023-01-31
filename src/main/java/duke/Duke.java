@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -32,6 +32,8 @@ public class Duke {
             ArrayList<Task> arrayList = storage.load();
             try {
                 switch (command){
+                    case "BYE" :
+                        break;
                     case "LIST":
                         if (arrayList.size() == 0){
                             String err_msg = "You have not upload any task yet";
