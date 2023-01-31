@@ -8,18 +8,34 @@ import java.util.regex.Pattern;
 import java.util.Scanner;
 import java.io.FileReader;
 
+/**
+ * Represents a persistent storage that creates a file
+ * , can be written to and read from.
+ */
 class Storage {
-//    private static final Pattern TO_MATCH = Pattern.compile("\\[(?<taskType>\\S)]\\[(?<isDone>[ X])] (?<description>.*)");
     private static final Pattern TO_MATCH = Pattern.compile("\\[(?<type>\\S)]\\[(?<done>[ X])] (?<arguments>.*)");
     private final String fileName;
     private FileWriter fw;
     private File dataFile;
 
+    /**
+     * Creates a storage.
+     *
+     * @param fileName File name for the file.
+     * @throws IOException If I/O error occurs while Opening or Creating file.
+     */
     Storage(String fileName) throws IOException {
         this.fileName = fileName;
         fw = new FileWriter(fileName, true);
     }
 
+    /**
+     * Reads file and returns TaskList.
+     *
+     * @return TaskLitt.
+     * @throws IOException If file cannot be read.
+     * @throws DukeException If file format is corrupted.
+     */
     TaskList load() throws IOException, DukeException {
         TaskList tl = new TaskList();
         Parser tp = new Parser(tl);
@@ -61,19 +77,41 @@ class Storage {
         return tl;
     }
 
+    /**
+     * Writes line to file.
+     * Newline will be appended after writing string.
+     *
+     * @param s String to write.
+     * @throws IOException If I/O error occurs while writing.
+     */
     void write(String s) throws IOException {
        fw.write(s + '\n');
        fw.flush();
     }
 
+    /**
+     * Closes file.
+     *
+     * @throws IOException If I/O error occurs while closing.
+     */
     void close() throws IOException {
         fw.close();
     }
 
+    /**
+     * Checks if string matches format.
+     *
+     * @param s String to check.
+     * @return Boolean if string matches format.
+     */
     boolean matchesFormat(String s) {
         Matcher matcher = TO_MATCH.matcher(s);
         return matcher.matches();
     }
+
+    /**
+     * Creates file.
+     */
     void createFile() {
         File file = new File(fileName);
         File directory = new File(file.getParent());

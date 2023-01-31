@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * This is Joe, my java bot!
+ */
 class Joe {
     private Storage storage;
     private TaskList taskList;
@@ -36,6 +39,7 @@ class Joe {
         return out;
     }
 
+    
     String sayBye() {
         try {
             storage.close();
