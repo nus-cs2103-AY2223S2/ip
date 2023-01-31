@@ -1,10 +1,18 @@
 package alfred.parser;
 
-import alfred.command.*;
-import alfred.exceptions.AlfredException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import alfred.command.AddCommand;
+import alfred.command.Command;
+import alfred.command.DeleteCommand;
+import alfred.command.ExitCommand;
+import alfred.command.ListCommand;
+import alfred.command.ListDateCommand;
+import alfred.command.MarkCommand;
+import alfred.command.UnmarkCommand;
+import alfred.exceptions.AlfredException;
 
 public class Parser {
 

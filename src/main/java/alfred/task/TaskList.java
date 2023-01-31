@@ -1,11 +1,12 @@
 package alfred.task;
 
-import alfred.exceptions.AlfredException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import alfred.exceptions.AlfredException;
 
 public class TaskList {
 

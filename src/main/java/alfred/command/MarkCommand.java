@@ -1,10 +1,10 @@
 package alfred.command;
 
-import alfred.task.TaskList;
-import alfred.task.Task;
-import alfred.ui.Ui;
-import alfred.storage.Storage;
 import alfred.exceptions.AlfredException;
+import alfred.storage.Storage;
+import alfred.task.Task;
+import alfred.task.TaskList;
+import alfred.ui.Ui;
 
 public class MarkCommand extends Command {
 
@@ -18,8 +18,8 @@ public class MarkCommand extends Command {
         try {
             Task task = tasks.getTask(taskIndex);
             task.markAsDone();
-            String output = "Well done! Good job " +
-                    "for completing your task!\n";
+            String output = "Well done! Good job "
+                    + "for completing your task!\n";
             output += String.format("      %s\n", task);
             ui.displayCommand(output);
         } catch (NumberFormatException e) {

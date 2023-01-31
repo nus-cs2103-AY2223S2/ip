@@ -1,15 +1,16 @@
 package alfred.command;
 
-import alfred.task.TaskList;
-import alfred.task.Task;
-import alfred.task.ToDo;
+import java.time.format.DateTimeParseException;
+
+import alfred.exceptions.AlfredException;
+import alfred.storage.Storage;
 import alfred.task.Deadline;
 import alfred.task.Event;
-import alfred.storage.Storage;
-import alfred.exceptions.AlfredException;
+import alfred.task.Task;
+import alfred.task.TaskList;
+import alfred.task.ToDo;
 import alfred.ui.Ui;
 
-import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
 
@@ -55,13 +56,13 @@ public class AddCommand extends Command {
         case "event": // need to consider what if no '/from' and '/or' is not given?
             lineArr = fullCommand.split("/from | /to ");
             if (lineArr.length < 2) { // not sure how to check if there's /from and /to
-                throw new AlfredException("Events should have start and end time. " +
-                        "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"\n");
+                throw new AlfredException("Events should have start and end time. "
+                        + "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"\n");
             }
             descriptionArr = lineArr[0].split(" ", 2);
             if (descriptionArr.length == 1) {
-                throw new AlfredException("Events should have start and end time. " +
-                        "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"\n");
+                throw new AlfredException("Events should have start and end time. "
+                        + "Eg: \"<EventName> /from <StartTime> /to <EndTime>\"\n");
             }
             try {
                 task = new Event(descriptionArr[1], lineArr[1], lineArr[2]);
@@ -76,8 +77,8 @@ public class AddCommand extends Command {
 
         // Alfred's response to remaining tasks
         String numTasks = tasks.getSize() == 1 ? "task" : "tasks";
-        String output = String.format("Noted, task added: \n      %s\n" +
-                "    Number of %s in the list: %d\n", task, numTasks, tasks.getSize());
+        String output = String.format("Noted, task added: \n      %s\n"
+                + "    Number of %s in the list: %d\n", task, numTasks, tasks.getSize());
         ui.displayCommand(output);
     }
 

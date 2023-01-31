@@ -1,8 +1,8 @@
 package alfred.command;
 
+import alfred.storage.Storage;
 import alfred.task.TaskList;
 import alfred.ui.Ui;
-import alfred.storage.Storage;
 
 public class ListCommand extends Command {
 

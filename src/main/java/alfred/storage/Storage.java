@@ -1,11 +1,16 @@
 package alfred.storage;
 
-import alfred.task.*;
-import alfred.exceptions.AlfredException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import alfred.exceptions.AlfredException;
+import alfred.task.Deadline;
+import alfred.task.Event;
+import alfred.task.Task;
+import alfred.task.TaskList;
+import alfred.task.ToDo;
 
 public class Storage {
 
@@ -53,7 +58,6 @@ public class Storage {
                         default:
                             throw new AlfredException("I'm sorry but there is an"
                                     + " invalid task in the data file");
-                            // No task type
                         }
                         tasks.add(task);
                     } catch (ArrayIndexOutOfBoundsException e) {
