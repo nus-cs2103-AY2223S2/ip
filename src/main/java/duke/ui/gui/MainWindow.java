@@ -26,8 +26,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private final Image userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(getClass().getResourceAsStream("/images/user.png"));
+    private final Image dukeImage = new Image(getClass().getResourceAsStream("/images/duke.png"));
 
     private final BiConsumer<String, Consumer<String>> inputHandler;
 
