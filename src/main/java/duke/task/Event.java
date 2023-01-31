@@ -11,6 +11,15 @@ public class Event extends Task{
     protected String startString;
     protected String endString;
 
+    /**
+     * constructor of the event class
+     * @param item is the task name
+     * @param type is the type of task
+     * @param start is a Date object indicating the starting time of the event
+     * @param end is a Date object indicating the ending time of the event
+     * @param startStringVer is the same as date but stores the date as string
+     * @param endStringVer is the same as date but stores the date as string
+     */
     public Event(String item, String type, Date start, Date end, String startStringVer, String endStringVer) {
         super(item,type);
         eventStart = start;
@@ -24,6 +33,10 @@ public class Event extends Task{
         return "[E]" + super.toString() + " (From: " + convertToString.format(eventStart) + " To: " + convertToString.format(eventEnd) + ")";
     }
 
+    /**
+     * gets the time of the event
+     * @return the timing of the event in String form
+     */
     @Override
     public String getTime() {
         return startString + "-" + endString;

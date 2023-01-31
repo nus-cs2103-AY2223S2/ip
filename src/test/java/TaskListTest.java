@@ -10,6 +10,10 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
+
+    /**
+     * test for adding Task object
+     */
     @Test
     public void addItem() { //adding one item
 
@@ -27,6 +31,9 @@ public class TaskListTest {
         assertEquals("[T][ ] Item3", actual);
     }
 
+    /**
+     * test for adding Deadline Object
+     */
     @Test
     public void addItemDeadline() { //adding one item
         try {
@@ -47,7 +54,10 @@ public class TaskListTest {
         }
     }
 
-//    @Test
+    /**
+     * test for adding Event object
+     */
+    @Test
     public void addItemEvent() { //adding one item
         try {
             TaskList toDoList = new TaskList();

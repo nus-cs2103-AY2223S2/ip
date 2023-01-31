@@ -14,6 +14,11 @@ import java.io.FileNotFoundException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
+
+    /**
+     * test if task can be deleted through user input and command generated is correct
+     * @throws FileNotFoundException when path name cannot be found
+     */
     @Test
     public void deleteTask() throws FileNotFoundException {
         TaskList dummyList = new TaskList();
@@ -26,7 +31,7 @@ public class ParserTest {
         dummyList.addTask(new Task("Item3","T"));
         dummyList.addTask(new Task("Item4","T"));
 
-        Command c = parser.commandExecute("delete 4", dummyList, dummyStorage);
+        Command c = parser.parse("delete 4", dummyList);
         assertEquals(true, c instanceof DeleteCommand);
 
         c.executeCommand(dummyList, dummyStorage, dummyUi);
@@ -35,6 +40,10 @@ public class ParserTest {
 
     }
 
+    /**
+     * test if task can be mark through user input and command generated is correct
+     * @throws FileNotFoundException when path name cannot be found
+     */
     @Test
     public void markTask() throws FileNotFoundException {
         TaskList dummyList = new TaskList();
@@ -47,12 +56,12 @@ public class ParserTest {
         dummyList.addTask(new Task("Item3","T"));
         dummyList.addTask(new Task("Item4","T"));
 
-        Command c = parser.commandExecute("mark 4", dummyList, dummyStorage);
+        Command c = parser.parse("mark 4", dummyList);
         assertEquals(false, c instanceof UnmarkCommand);
         assertEquals(true, c instanceof MarkCommand);
 
         c.executeCommand(dummyList, dummyStorage, dummyUi);
-        boolean isMark = dummyList.getTasks().get(3).getStatus();
+        boolean isMark = dummyList.getTasks().get(3).getComplete();
 
         assertEquals(true, isMark);
     }

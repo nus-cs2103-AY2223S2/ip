@@ -24,7 +24,6 @@ public class Storage {
 
     /**
      * Update the text file whenever a task is added, removed or modified.
-     *
      * @param entireList A list in which all tasks are stored
      */
     public void updateFile(ArrayList<Task> entireList) throws FileNotFoundException {
@@ -35,7 +34,7 @@ public class Storage {
             for (int i = 0; i < entireList.size(); i++) {
                 Task task = entireList.get(i);
 
-                boolean isMark = task.getStatus();
+                boolean isMark = task.getComplete();
                 String type = task.getTypes();
                 String name = task.getItem();
 
@@ -57,13 +56,12 @@ public class Storage {
             pw.close();
 
         }catch(IOException i) {
-            i.printStackTrace();
+            System.out.println("Your file cannot be saved! I did you warned from the start :>");
         }
     }
 
     /**
      * Loads the text of the file into an array.
-     *
      * @param entireList A list in which all tasks are stored
      */
 
@@ -105,8 +103,9 @@ public class Storage {
 
 
         } catch (IOException i) {
-            System.out.println("File not found!");
-//            i.printStackTrace();
+            System.out.println("File not found! Proceeding without a saved file.\nPlease note that you will not be able" +
+                    " to save your progress either\n but you can still use me as you wish :>\n");
+
         } catch (ParseException e) {
             System.out.println("Unable to load file. Please check your that the item's date where it should be in the form of" +
                     " dd/MM/yyyy HH:mm");

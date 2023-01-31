@@ -5,14 +5,23 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 
-import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
+
+/**
+ * This class is to check if user inputs are valid
+ */
 public class Parser {
 
-    public Command commandExecute(String input, TaskList toDo, Storage storage) {
+    /**
+     * Checks if the user input are valid and return a Command corresponding to user input
+     * @param input is the user input
+     * @param tasklist is where all the tasks are stored
+     * @return a new Command object based on the user input
+     */
+    public Command parse(String input, TaskList tasklist) {
 
         String[] instruction = input.split(" ", 2);
 
@@ -28,7 +37,7 @@ public class Parser {
                     throw new ArgumentException("What are we marking again?");
                 }
                 int index = Integer.parseInt(instruction[1]);
-                if ((index - 1) < 0 || (index - 1) >= toDo.numberOfTask()) {
+                if ((index - 1) < 0 || (index - 1) >= tasklist.numberOfTask()) {
                     throw new ArgumentException("Can't find the index");
                 }
 
@@ -42,7 +51,7 @@ public class Parser {
                     throw new ArgumentException("What are we unmarking again?");
                 }
                 int index = Integer.parseInt(instruction[1]);
-                if ((index - 1) < 0 || (index - 1) >= toDo.numberOfTask()) {
+                if ((index - 1) < 0 || (index - 1) >= tasklist.numberOfTask()) {
                     throw new ArgumentException("Can't find the index");
                 }
 
@@ -57,7 +66,7 @@ public class Parser {
                 }
                 int index = Integer.parseInt(instruction[1]);
 
-                if ((index - 1) < 0 || (index - 1) >= toDo.numberOfTask()) {
+                if ((index - 1) < 0 || (index - 1) >= tasklist.numberOfTask()) {
                     throw new ArgumentException("Can't find the index");
                 }
 
@@ -71,7 +80,7 @@ public class Parser {
 
                 if (!command.equals("todo") && !command.equals("deadline") &&
                         !command.equals("event") && !command.equals("delete")) {
-                    throw new DukeException("*sigh* No such commands, please be serious.");
+                    throw new ArgumentException("*sigh* No such commands, please be serious.");
                 }
 
                 if (instruction.length == 1) {
@@ -151,9 +160,7 @@ public class Parser {
                 }
             }
 
-        } catch (DukeException ex) {
-            System.out.println(ex.getMessage());
-        } catch (ArgumentException ex2) {
+        }  catch (ArgumentException ex2) {
             System.out.println(ex2.getMessage());
         } catch (ParseException e) {
             System.out.println("Please enter the time of the format dd/MM/yyyy HH:mm");
