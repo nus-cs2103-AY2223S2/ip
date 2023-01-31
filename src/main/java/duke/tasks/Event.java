@@ -18,6 +18,25 @@ public class Event extends Task {
     private Optional<LocalDate> chronoToDate;
 
     /**
+     * Constructor method.
+     * @param taskName Task name
+     * @param fromDate Start date of task
+     * @param toDate End date of task
+     * @param isDone Task completion status
+     */
+    public Event(String taskName, String fromDate, String toDate, boolean isDone) {
+        super(taskName, "E", isDone);
+
+        this.fromDate = fromDate;
+        this.chronoFromDate = Parser.parseDate(fromDate);
+
+        this.toDate = toDate;
+        this.chronoToDate = Parser.parseDate(toDate);
+
+        this.isDone = isDone;
+    }
+
+    /**
      * Factory method.
      * @param commandInput Command line input that the user entered.
      * @return New Event task
@@ -30,26 +49,6 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor method.
-     * @param taskName Task name
-     * @param fromDate Start date of task
-     * @param toDate End date of task
-     * @param isDone Task completion status
-     */
-    public Event(String taskName, String fromDate, String toDate, boolean isDone) {
-        super(taskName, "E", isDone);
-  
-        this.fromDate = fromDate;
-        this.chronoFromDate = Parser.parseDate(fromDate);
-
-        this.toDate = toDate;
-        this.chronoToDate = Parser.parseDate(toDate);
-
-        this.isDone = isDone;
-    }
-
-    
-     /**
      * Represents fields of this task as a string
      * @return String representation of fields in this task
      */
