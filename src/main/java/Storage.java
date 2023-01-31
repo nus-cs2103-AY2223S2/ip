@@ -7,12 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Save {
-    public static List<Task> loadTaskList() throws FileNotFoundException {
+public class Storage {
+    protected String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public List<Task> load() throws FileNotFoundException {
         List<Task> tasks = new ArrayList<>();
 
         // check if file exists
-        File f = new File("./data/data.txt");
+        File f = new File(filePath);
 
         if (f.exists()) {
             Scanner s = new Scanner(f);
@@ -46,18 +52,21 @@ public class Save {
         return tasks;
     }
 
-    public static void saveTaskList(List<Task> taskList) throws IOException {
+    public void save(List<Task> taskList) throws IOException {
         // check if directory exists
         File dir = new File("./data");
-        if (!dir.exists()) dir.mkdirs();
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
 
         // check if file exists
-        File f = new File("./data/data.txt");
+        File f = new File(filePath);
+
         if (!f.isFile()) {
             f.createNewFile();
         }
 
-        PrintWriter output = new PrintWriter("./data/data.txt");
+        PrintWriter output = new PrintWriter(filePath);
 
         for (Task task : taskList) {
             if (task instanceof Todo) {
