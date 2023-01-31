@@ -25,7 +25,9 @@ public class AddCommand implements Command {
         + " event <task> /from <date> /to <date>, <task> and <date> cannot be empty.";
     private static final String INVALID_DATE_FORMAT =
             "Dates must be in the format: dd/mm/yyyy HHmm (e.g. 12/12/2023 1800)";
+    private static final String INVALID_UNKNOWN = "I'm sorry, but I don't know what that means.";
     private static final String END_BEFORE_START = "The start date must be before the end date.";
+    private static final String FULL_LIST = "List is full!";
     private Character taskType;
     private String fullCommand;
 
@@ -51,7 +53,7 @@ public class AddCommand implements Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws FeaException {
         if (tasks.size() >= 100) {
-            throw new ListException("List is full!");
+            throw new ListException(FULL_LIST);
         }
         switch (taskType) {
         case 'T':
@@ -90,7 +92,7 @@ public class AddCommand implements Command {
                 throw new InvalidInputException(INVALID_DATE_FORMAT);
             }
         default:
-            throw new InvalidInputException("I'm sorry, but I don't know what that means");
+            throw new InvalidInputException(INVALID_UNKNOWN);
         }
     }
 

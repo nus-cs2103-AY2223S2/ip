@@ -9,6 +9,7 @@ import fea.ui.Ui;
  * FindCommand class that implements the Command interface.
  */
 public class FindCommand implements Command {
+    private static final String INVALID_FIND_FORMAT = "The find command must be in the format: find <keyword>";
     private String fullCommand;
 
     public FindCommand(String fullCommand) {
@@ -30,7 +31,7 @@ public class FindCommand implements Command {
             String keyword = fullCommand.substring(5);
             return tasks.findTask(keyword, ui);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new FeaException("The find command must be in the format: find <keyword>");
+            throw new FeaException(INVALID_FIND_FORMAT);
         }
     }
 

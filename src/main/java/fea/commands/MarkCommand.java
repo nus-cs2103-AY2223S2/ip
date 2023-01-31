@@ -11,6 +11,7 @@ import fea.ui.Ui;
 
 public class MarkCommand implements Command {
 
+    private static final String INVALID_TASK_NUMBER = "Please enter a valid task number!";
     private boolean toMark;
     private String fullCommand;
 
@@ -38,11 +39,11 @@ public class MarkCommand implements Command {
         try {
             int taskNum = Integer.parseInt(this.fullCommand.substring(toMark ? 5 : 7));
             if (taskNum > tasks.size() || taskNum < 1) {
-                throw new TaskException("Please enter a valid task number!");
+                throw new TaskException(INVALID_TASK_NUMBER);
             }
             return tasks.markTask(taskNum, storage, ui, toMark);
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
-            throw new TaskException("Please enter a valid task number!");
+            throw new TaskException(INVALID_TASK_NUMBER);
         }
     }
 

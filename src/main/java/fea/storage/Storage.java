@@ -21,7 +21,9 @@ import fea.task.Todo;
  */
 
 public class Storage {
+    private static final String FILE_NOT_FOUND = "Data file could not be found.";
     private Path filePath;
+    private final String fileNotCreated = String.format("File could not be created at %s", filePath);
 
     public Storage(String filePath) {
         this.filePath = Paths.get(filePath);
@@ -35,36 +37,42 @@ public class Storage {
     public ArrayList<Task> loadTasks() throws FeaException {
         File file = this.filePath.toFile();
         if (!file.exists()) {
-            throw new FeaException("Data file could not be found.");
+            throw new FeaException(FILE_NOT_FOUND);
         }
         ArrayList<Task> loadedList = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String[] args = scanner.nextLine().split(" \\| ");
-                if ("T".equals(args[0])) {
+                switch (args[0]) {
+                case "T":
                     Todo newTodo = new Todo(args[2]);
                     if (args[1].equals("1")) {
                         newTodo.toggleMark();
                     }
                     loadedList.add(newTodo);
-                } else if ("D".equals(args[0])) {
+                    break;
+                case "D":
                     Deadline newDeadline = new Deadline(args[2], LocalDateTime.parse(args[3], formatter));
                     if (args[1].equals("1")) {
                         newDeadline.toggleMark();
                     }
                     loadedList.add(newDeadline);
-                } else if ("E".equals(args[0])) {
+                    break;
+                case "E":
                     Event newEvent = new Event(args[2], LocalDateTime.parse(args[3], formatter),
                             LocalDateTime.parse(args[4], formatter));
                     if (args[1].equals("1")) {
                         newEvent.toggleMark();
                     }
                     loadedList.add(newEvent);
+                    break;
+                default:
+                    break;
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new FeaException("Data file could not be found.");
+            throw new FeaException(FILE_NOT_FOUND);
         }
         return loadedList;
     }
@@ -81,7 +89,7 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                throw new FeaException(String.format("File could not be created at %s", filePath));
+                throw new FeaException(fileNotCreated);
             }
         }
 
@@ -99,7 +107,7 @@ public class Storage {
                 fileWriter.write(newString);
             }
         } catch (IOException e) {
-            throw new FeaException("Data file could not be found.");
+            throw new FeaException(FILE_NOT_FOUND);
         }
     }
 }

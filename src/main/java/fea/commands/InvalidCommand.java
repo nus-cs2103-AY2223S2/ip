@@ -11,6 +11,8 @@ import fea.ui.Ui;
 
 public class InvalidCommand implements Command {
 
+    private static final String INVALID_UNKNOWN = "I'm sorry, but I don't know what that means.";
+
     /**
      * Throws an exception if the command is invalid.
      *
@@ -22,7 +24,7 @@ public class InvalidCommand implements Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws FeaException {
-        throw new InvalidInputException("I'm sorry, but I don't know what that means.");
+        throw new InvalidInputException(INVALID_UNKNOWN);
     }
 
     @Override
