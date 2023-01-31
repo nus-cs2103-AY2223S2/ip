@@ -32,7 +32,7 @@ public class DeadlineCommand extends Command {
      * @param tasks The lists of all available tasks.
      * @param storage The Storage object to allow local saving after adding a new deadline task.
      */
-    public DeadlineCommand(Ui ui, String taskName, String deadline,TaskList tasks, Storage storage) {
+    public DeadlineCommand(Ui ui, String taskName, String deadline, TaskList tasks, Storage storage) {
         super(ui);
         this.taskName = taskName;
         this.deadline = deadline;

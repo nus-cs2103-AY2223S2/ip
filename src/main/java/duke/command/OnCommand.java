@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.time.temporal.Temporal;
+
 import duke.datetime.DateTime;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.time.temporal.Temporal;
 
 /**
  * Represents an on command that is entered by the user to check what tasks are there on a specific day.
@@ -45,16 +45,15 @@ public class OnCommand extends Command {
             Task currTask = tasks.getTask(t);
             if (currTask instanceof Deadline) {
                 if (DateTime.isEqualDate(dateObject, ((Deadline) currTask).getDeadline())) {
-                    ui.printStatement(Integer.toString(count) + ". " +
-                            currTask.getStatusOfTaskInString());
+                    ui.printStatement(Integer.toString(count) + ". "
+                            + currTask.getStatusOfTaskInString());
                     count += 1;
                 }
-            }
-            else if (currTask instanceof Event) {
-                if (DateTime.isValidDuration(((Event) currTask).getStartDate(), dateObject) &&
-                        DateTime.isValidDuration(dateObject, ((Event) currTask).getEndDate())) {
-                    ui.printStatement(Integer.toString(count) + ". " +
-                            currTask.getStatusOfTaskInString());
+            } else if (currTask instanceof Event) {
+                if (DateTime.isValidDuration(((Event) currTask).getStartDate(), dateObject)
+                        && DateTime.isValidDuration(dateObject, ((Event) currTask).getEndDate())) {
+                    ui.printStatement(Integer.toString(count) + ". "
+                            + currTask.getStatusOfTaskInString());
                     count += 1;
                 }
             }

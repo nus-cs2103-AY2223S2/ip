@@ -1,14 +1,26 @@
 package duke.parser;
 
-import duke.command.*;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.Temporal;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.OnCommand;
+import duke.command.ToDoCommand;
+import duke.command.UnmarkCommand;
 import duke.datetime.DateTime;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.time.format.DateTimeParseException;
-import java.time.temporal.Temporal;
 
 /**
  * Represents a parser that will parse and process commands entered by the user into the chatbot.
@@ -45,6 +57,8 @@ public class Parser {
             return CommandType.LIST;
         case "help":
             return CommandType.HELP;
+        default:
+            //Do nothing
         }
 
         //Multiple word commands
@@ -62,8 +76,8 @@ public class Parser {
                 }
                 int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
                 if (!(indexOfTask <= tasks.getSizeOfTaskList() - 1 && indexOfTask >= 0)) {
-                    throw new DukeException("Please enter a valid task number. You currently have " +
-                            Integer.toString(tasks.getSizeOfTaskList()) + " tasks.");
+                    throw new DukeException("Please enter a valid task number. You currently have "
+                           + Integer.toString(tasks.getSizeOfTaskList()) + " tasks.");
                 }
                 CommandType ctMark = CommandType.MARK;
                 ctMark.setIndex(indexOfTask);
@@ -84,8 +98,8 @@ public class Parser {
                 }
                 int indexOfTask = Integer.parseInt(inputArray[1]) - 1;
                 if (!(indexOfTask <= tasks.getSizeOfTaskList() - 1 && indexOfTask >= 0)) {
-                    throw new DukeException("Please enter a valid task number. You currently have " +
-                            Integer.toString(tasks.getSizeOfTaskList()) + " tasks.");
+                    throw new DukeException("Please enter a valid task number. You currently have "
+                            + Integer.toString(tasks.getSizeOfTaskList()) + " tasks.");
                 }
                 CommandType ctUnmark = CommandType.UNMARK;
                 ctUnmark.setIndex(indexOfTask);
@@ -185,7 +199,7 @@ public class Parser {
                 Ui.printStraightLine();
                 return CommandType.NOTHING;
             }
-        case "event" :
+        case "event":
             try {
                 int indexOfType = rawCommand.indexOf("event");
                 if (indexOfType + 5 > rawCommand.length() - 1) {
@@ -236,7 +250,7 @@ public class Parser {
                 Temporal start = DateTime.getDateTimeObject(startDate);
                 Temporal end = DateTime.getDateTimeObject(endDate);
 
-                if (! DateTime.isValidDuration(start, end)) {
+                if (!DateTime.isValidDuration(start, end)) {
                     throw new DukeException("Start date must be before end date.");
                 }
 
