@@ -13,7 +13,6 @@ public class Deadline extends Task {
         String deadlineTime = strArr[1].substring(1);
         if (deadlineTime.contains("/")) {
             String[] strArrDate = deadlineTime.split("/");
-            System.out.println(Arrays.toString(strArrDate));
             this.deadlineDue = this.dateFormat(strArrDate);
         } else {
             this.deadlineDue = "(" + "by:" + strArr[1].substring(0) + ")";
