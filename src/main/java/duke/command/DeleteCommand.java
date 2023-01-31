@@ -26,9 +26,9 @@ public class DeleteCommand extends Command {
     /**
      * A method that deletes a task from the task list.
      *
-     * @param task    Task list containing the list of tasks.
+     * @param task Task list containing the list of tasks.
      * @param storage Saves tasks into the file locally.
-     * @param ui      Deals with interactions with user.
+     * @param ui Deals with interactions with user.
      * @throws DukeException if the task is empty or the index inputted by user does not exist.
      */
     @Override
