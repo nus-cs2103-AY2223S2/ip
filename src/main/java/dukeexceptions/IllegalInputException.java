@@ -1,4 +1,4 @@
-package Exceptions;
+package dukeexceptions;
 
 public class IllegalInputException extends IllegalArgumentException{
     public IllegalInputException(String s) {

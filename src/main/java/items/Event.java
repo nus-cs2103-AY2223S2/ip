@@ -10,6 +10,18 @@ public class Event extends Task{
         this.endDate = endDate;
     }
 
+    public Event(String description, boolean done, String startDate, String endDate) {
+        super(description, "E", done);
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    @Override
+    public String generateStorageForm() {
+        return this.getTaskType() + "@" + this.getDescription() + "@" + this.getStatusIcon() + "@"
+                + this.startDate + "@" + this.endDate;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getTaskType() + "]" + "[" + this.getStatusIcon() + "]"

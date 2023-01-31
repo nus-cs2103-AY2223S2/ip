@@ -1,4 +1,4 @@
-package Exceptions;
+package dukeexceptions;
 
 public class IllegalCommandException extends IllegalArgumentException{
     public IllegalCommandException(String errorMessage){
