@@ -61,7 +61,7 @@ public class MainWindow extends AnchorPane {
      * Greets the user.
      */
     public void showGreeting() {
-        showDukeDialog("Hello!");
+        showDukeDialog("Hello!\nRetrieving tasks from storage...");
     }
 
     /**
@@ -81,7 +81,7 @@ public class MainWindow extends AnchorPane {
      * Prompts user to start giving commands.
      */
     public void showPrompt() {
-        showDukeDialog("Awaiting commands...");
+        showDukeDialog("Task list is now ready! Awaiting commands...");
     }
 
     /**
@@ -148,7 +148,7 @@ public class MainWindow extends AnchorPane {
      * Bids farewell to the user.
      */
     public void showFarewellMessage() {
-        showDukeDialog("Good bye!");
+        showDukeDialog("Good bye!\nClosing in 5 seconds...");
     }
 
     /**
