@@ -30,16 +30,20 @@ public class Parser {
 
     }
 
-
-
     public String readCommand(String[] readLine) {
         return readLine[0];
     }
 
-    public int singleQueryInteger(String[] readLine) throws DukeException {
+    /**
+     *
+     * @param line a string array split by 1 whitespace when the input is read.
+     * @return an useful integer value, most often the index of the task list.
+     * @throws DukeException
+     */
+    public int singleQueryInteger(String[] line) throws DukeException {
         int s;
         try {
-            s = Integer.valueOf(readLine[1]);
+            s = Integer.valueOf(line[1]);
         } catch (NumberFormatException arr) {
             throw new InvalidException();
         } catch (Exception err) {
@@ -59,63 +63,64 @@ public class Parser {
         ArrayList<String> queries;
         String joined = String.join("", line);
         switch(this.readCommand(line)) {
+        case "list":
+            c = new ListCommand();
+            break;
+        case "delete":
+            c = new DeleteCommand(this.singleQueryInteger(line));
+            break;
 
-            case "list":
-                c = new ListCommand();
-                break;
-            case "delete":
-                c = new DeleteCommand(this.singleQueryInteger(line));
-                break;
-            case "mark":
-                c = new MarkCommand(this.singleQueryInteger(line), true);
-                break;
-            case "unmark":
-                c = new MarkCommand(this.singleQueryInteger(line), false);
-                break;
+        case "mark":
+            c = new MarkCommand(this.singleQueryInteger(line), true);
+            break;
 
-            case "todo":
-                if (line.length == 1) {
-                    throw new NoArgsException("deadline");
-                }
+        case "unmark":
+            c = new MarkCommand(this.singleQueryInteger(line), false);
+            break;
 
-                String description = this.queries(line, List.<String>of()).get(0);
-                c = new TodoCommand(new Todos(description));
-                break;
-            case "event":
-                if (line.length == 1) {
-                    throw new NoArgsException("deadline");
-                } else if (joined.split("/").length != 3) {
-                    throw new InvalidException();
-                }
+        case "todo":
+            if (line.length == 1) {
+                throw new NoArgsException("deadline");
+            }
+            String description = this.queries(line, List.<String>of()).get(0);
+            c = new TodoCommand(new Todos(description));
+            break;
+        case "event":
+            if (line.length == 1) {
+                throw new NoArgsException("deadline");
+            } else if (joined.split("/").length != 3) {
+                throw new InvalidException();
+            }
 
-                queries = this.queries(line, List.<String>of("from", "to"));
-                Events event = new Events(queries);
-                c = new EventCommand(event);
-                break;
+            queries = this.queries(line, List.<String>of("from", "to"));
+            Events event = new Events(queries);
+            c = new EventCommand(event);
+            break;
+        case "deadline":
+            if (line.length == 1) {
+                throw new NoArgsException("deadline");
+            } else if (joined.split("/").length != 2) {
+                throw new InvalidException();
+            }
 
-            case "deadline":
-                if (line.length == 1) {
-                    throw new NoArgsException("deadline");
-                } else if (joined.split("/").length != 2) {
-                    throw new InvalidException();
-                }
+            queries = this.queries(line, List.<String>of("by"));
+            c = new DeadLineCommand(new Deadlines(queries));
+            break;
 
-                queries = this.queries(line, List.<String>of("by"));
-                c = new DeadLineCommand(new Deadlines(queries));
-                break;
-            case "bye":
-                c = new ByeCommand();
-                break;
+        case "bye":
+            c = new ByeCommand();
+            break;
 
-            case "find":
-                if (line.length == 1) {
-                    throw new NoArgsException("deadline");
-                }
-                String query = this.queries(line, List.<String>of()).get(0);
-                c = new FindCommand(query);
-                break;
-            default:
-                throw new UnrecognisableException();
+        case "find":
+            if (line.length == 1) {
+                throw new NoArgsException("deadline");
+            }
+            String query = this.queries(line, List.<String>of()).get(0);
+            c = new FindCommand(query);
+            break;
+
+        default:
+            throw new UnrecognisableException();
         }
         return c;
     }
