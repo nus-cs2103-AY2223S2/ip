@@ -9,6 +9,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 
+/**
+ * Duke Class: Serves as entry point of the program, or JAR file.
+ *
+ */
 public class Duke {
     public static void main(String[] args) {
         try {
@@ -29,14 +33,6 @@ public class Duke {
                 e.printStackTrace();
         }
     }
-
-    public static String formatStr(String str) {
-        String returnstr =  ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n"
-                            + str + "\n"
-                            + "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-        return returnstr;
-    }
-
 
 }
 
