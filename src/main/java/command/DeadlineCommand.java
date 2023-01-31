@@ -4,6 +4,13 @@ import duke.Ui;
 import task.Deadline;
 import task.TaskList;
 
+/**
+ * This class will carry the implementation of the Deadline Command
+ * Takes in the command line command,parses as well as executing it.
+ *
+ * @author Bryan Ong
+ *
+ */
 public class DeadlineCommand {
     private String[] inputs;
     private static StringBuilder strBuild = new StringBuilder();
@@ -12,6 +19,12 @@ public class DeadlineCommand {
         this.inputs = inputs;
     }
 
+
+    /**
+     * This method is used to create the Deadline command.
+     * Parsing as well as creation of Deadline object is done here.
+     *
+     */
     public void create() {
         boolean isName = true;
         String n = " ", e = " ";

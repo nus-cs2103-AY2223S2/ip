@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Scanner;
 
+/**
+ * This class handles the TaskList operations.
+ * @author Bryan Ong
+ */
 public class TaskList {
 
     private static File dataFile;
@@ -23,13 +27,30 @@ public class TaskList {
             init();
         }
     }
+
+    /**
+     * This method handles the addition of Task
+     * to the Tasklist.
+     * @param t Task to be added.
+     */
     public static void addToList(Task t) {
         taskList.add(t);
     }
 
+    /**
+     * This method handles the retrieval of task
+     * by its serial number.
+     * @param num Serial number.
+     * @return Task The task of this serial number.
+     */
     public static Task get(int num) {
         return taskList.get(num);
     }
+
+    /**
+     * This method handles the initialization of the file.
+     * @throws FileNotFoundException
+     */
     private void init() throws FileNotFoundException {
         Scanner sc = new Scanner(dataFile);
         while (sc.hasNext()) {
@@ -55,6 +76,10 @@ public class TaskList {
             }
         }
     }
+
+    /**
+     * This method handles the printing of list command.
+     */
     public static void printList() {
         ListIterator<Task> li = taskList.listIterator();
         if (!li.hasNext()) {

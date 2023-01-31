@@ -5,6 +5,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * This class handles the storing of
+ * Deadline Task attributes.
+ * @author Bryan Ong
+ */
 public class Deadline extends Task {
 
     private static StringBuilder strBuild = new StringBuilder();
@@ -15,11 +20,21 @@ public class Deadline extends Task {
                 Task.DATE_TIME_FORMATTER);
     }
 
+    /**
+     * This method handles the writing to data file
+     * @param file File to be written to
+     * @return String Information of task to be written.
+     */
     @Override
     public String write(File file) {
         return this.toWrite();
     }
 
+    /**
+     * This method handles the creation of the String
+     * to be printed on user interface.
+     * @return String Message to be printed.
+     */
     @Override
     public String toString() {
         return "   [D]" + super.toString() + " |by: "
@@ -27,6 +42,11 @@ public class Deadline extends Task {
                 FormatStyle.SHORT)) + "|\n";
     }
 
+    /**
+     * This method handles the creation of the String
+     * to be written on data file.
+     * @return String Message to be written.
+     */
     @Override
     public String toWrite() {
         return "D | " + super.toWrite() + " | " + end.format(Task.DATE_TIME_FORMATTER) + "\n";

@@ -4,6 +4,13 @@ import duke.Ui;
 import task.TaskList;
 import task.Todo;
 
+/**
+ * This class will carry the implementation of the Todo Command
+ * Takes in the command line command,parses as well as executing it.
+ *
+ * @author Bryan Ong
+ *
+ */
 public class TodoCommand {
 
     private String[] inputs;
@@ -13,6 +20,11 @@ public class TodoCommand {
         this.inputs = inputs;
     }
 
+    /**
+     * This method is used to create the Todo command.
+     * Parsing as well as creation of Todo object is done here.
+     *
+     */
     public void create() {
         if (inputs.length == 1) {
             Ui.printTodoError();

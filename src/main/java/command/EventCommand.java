@@ -4,6 +4,13 @@ import duke.Ui;
 import task.Event;
 import task.TaskList;
 
+/**
+ * This class will carry the implementation of the Event Command
+ * Takes in the command line command,parses as well as executing it.
+ *
+ * @author Bryan Ong
+ *
+ */
 public class EventCommand {
     private String[] inputs;
     private static StringBuilder strBuild = new StringBuilder();
@@ -12,6 +19,11 @@ public class EventCommand {
         this.inputs = inputs;
     }
 
+    /**
+     * This method is used to create the Event command.
+     * Parsing as well as creation of Event object is done here.
+     *
+     */
     public void create() {
         boolean isName = true;
         boolean isStart = false;

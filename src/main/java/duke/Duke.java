@@ -8,6 +8,14 @@ import command.TodoCommand;
 import command.UnMarkCommand;
 import task.TaskList;
 
+/**
+ * The Duke program implements an application that
+ * is able to track the tasks that a user has.
+ * The task is divided into three different categories
+ * Todo, Event and Deadline.
+ *
+ * @author Bryan Ong
+ */
 public class Duke {
     static final String DIRPATH = "./data";
     static final String FILEPATH = "./data/tasks.txt";
@@ -23,6 +31,12 @@ public class Duke {
         parser = new Parser();
 
     }
+
+    /**
+     * This method runs the main program, taking in of input
+     * and running the correct commands accordingly until "bye"
+     * is detected.
+     */
     public void run() {
         boolean isExit = false;
 
@@ -62,6 +76,13 @@ public class Duke {
         TaskList.writeToFile();
         ui.printBye();
     }
+
+    /**
+     * This method invokes the run method to get the
+     * main program from running.
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         new Duke(DIRPATH, FILEPATH).run();
     }
