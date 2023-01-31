@@ -1,3 +1,5 @@
+package Duke;
+
 public class Command {
 
     private String type;
