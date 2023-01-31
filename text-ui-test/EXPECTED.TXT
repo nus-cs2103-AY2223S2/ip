@@ -3,13 +3,17 @@
     How can I help?
     ____________________________________________________________
     ____________________________________________________________
+    It appears we haven't met!
+    Start typing away your tasks and I'll note them down accordingly :)
+    ____________________________________________________________
+    ____________________________________________________________
     Got it. I've added this task:
       [D][] Complete CS2103 Individual Project Week 2 (by: Fri, Jan 20 2023, 11:59 PM)
     Now you have 1 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
-      [T][] check email for updates on NOC
+      [T][] Check email for updates on NOC
     Now you have 2 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
@@ -19,60 +23,61 @@
     ____________________________________________________________
     ____________________________________________________________
     Here's everything I've noted down for you:
-    1. [D][] Complete CS2103 Individual Project Week 2 (by: Fri, Jan 20 2023, 11:59 PM)
-    2. [T][] check email for updates on NOC
-    3. [E][] DJ gig at Cherry Discotheque (from: Thu, Jan 21 0023, 10:00 PM to: Sat, Jan 21 2023, 4:00 AM)
+        1. [D][] Complete CS2103 Individual Project Week 2 (by: Fri, Jan 20 2023, 11:59 PM)
+        2. [T][] Check email for updates on NOC
+        3. [E][] DJ gig at Cherry Discotheque (from: Thu, Jan 21 0023, 10:00 PM to: Sat, Jan 21 2023, 4:00 AM)
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
-      [T][] finalise DJ setlist
+      [T][] Finalise DJ setlist
     Now you have 4 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
     Well Done! I've marked this task as done:
-      [T][X] finalise DJ setlist
+      [T][X] Finalise DJ setlist
     Now you have 3 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
-      [T][] buy body soap and cleaning wipes
+      [T][] Buy body soap and cleaning wipes
     Now you have 4 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
     OK, I've marked this task as not done yet:
-      [T][] finalise DJ setlist
+      [T][] Finalise DJ setlist
     Now you have 5 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
     Well Done! I've marked this task as done:
-      [T][X] buy body soap and cleaning wipes
+      [T][X] Buy body soap and cleaning wipes
     Now you have 4 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
     Here's everything I've noted down for you:
-    1. [D][] Complete CS2103 Individual Project Week 2 (by: Fri, Jan 20 2023, 11:59 PM)
-    2. [T][] check email for updates on NOC
-    3. [E][] DJ gig at Cherry Discotheque (from: Thu, Jan 21 0023, 10:00 PM to: Sat, Jan 21 2023, 4:00 AM)
-    4. [T][] finalise DJ setlist
-    5. [T][X] buy body soap and cleaning wipes
+        1. [D][] Complete CS2103 Individual Project Week 2 (by: Fri, Jan 20 2023, 11:59 PM)
+        2. [T][] Check email for updates on NOC
+        3. [E][] DJ gig at Cherry Discotheque (from: Thu, Jan 21 0023, 10:00 PM to: Sat, Jan 21 2023, 4:00 AM)
+        4. [T][] Finalise DJ setlist
+        5. [T][X] Buy body soap and cleaning wipes
     ____________________________________________________________
     ____________________________________________________________
     Well Done! I've marked this task as done:
-      [T][X] check email for updates on NOC
+      [T][X] Check email for updates on NOC
     Now you have 3 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
     Noted. I've removed this task:
-      [T][X] check email for updates on NOC
+      [T][X] Check email for updates on NOC
     Now you have 3 task(s) in the list.
     ____________________________________________________________
     ____________________________________________________________
     Here's everything I've noted down for you:
-    1. [D][] Complete CS2103 Individual Project Week 2 (by: Fri, Jan 20 2023, 11:59 PM)
-    2. [E][] DJ gig at Cherry Discotheque (from: Thu, Jan 21 0023, 10:00 PM to: Sat, Jan 21 2023, 4:00 AM)
-    3. [T][] finalise DJ setlist
-    4. [T][X] buy body soap and cleaning wipes
+        1. [D][] Complete CS2103 Individual Project Week 2 (by: Fri, Jan 20 2023, 11:59 PM)
+        2. [E][] DJ gig at Cherry Discotheque (from: Thu, Jan 21 0023, 10:00 PM to: Sat, Jan 21 2023, 4:00 AM)
+        3. [T][] Finalise DJ setlist
+        4. [T][X] Buy body soap and cleaning wipes
     ____________________________________________________________
     ____________________________________________________________
+    Okay, I've save your list for the next session!
     Goodbye and have a pleasant day!
     ____________________________________________________________

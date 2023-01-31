@@ -1,10 +1,10 @@
 deadline Complete CS2103 Individual Project Week 2 /by 20/01/2023 2359
-todo check email for updates on NOC
+todo Check email for updates on NOC
 event DJ gig at Cherry Discotheque /from 21/01/23 2200 /to 21/01/2023 0400
 list
-todo finalise DJ setlist
+todo Finalise DJ setlist
 mark 4
-todo buy body soap and cleaning wipes
+todo Buy body soap and cleaning wipes
 unmark 4
 mark 5
 list

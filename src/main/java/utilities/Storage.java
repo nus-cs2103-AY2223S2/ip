@@ -8,12 +8,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    private static String filepath = "data/sunday.txt";
+    private static String filepath = "../data/sunday.txt";
     public static boolean createDataFile() throws SundayException {
         try {
             File dataFile = new File(filepath);
             return dataFile.createNewFile();
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             throw new SundayException("ERROR: Unable to initialise data file");
         }
     }
@@ -58,6 +59,7 @@ public class Storage {
             reader.close();
         } catch (FileNotFoundException e) {
             Ui.setDefaultStream();
+            System.out.println(e.getMessage());
             throw new SundayException("ERROR: Incorrect data file directory");
         }
     }
@@ -68,6 +70,7 @@ public class Storage {
             myWriter.close();
             return true;
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             throw new SundayException("ERROR: Unable to write to data file");
         }
     }
