@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Models ToDo which is a task.
+ */
 public class ToDo extends Task {
     /** String used to assign the name of the task. */
 
@@ -37,7 +40,7 @@ public class ToDo extends Task {
     /**
      * {@inheritDoc}
      */
-    public String asCSV() {
+    public String asCsv() {
         if (super.isDone) {
             return "T,1," + desc;
         } else {

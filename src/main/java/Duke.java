@@ -1,9 +1,12 @@
+import duke.DukeException;
+import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Parser;
-import duke.DukeException;
 
+/**
+ * The main class that Duke is invoked on.
+ */
 public class Duke {
 
     /** Main storage used for Duke. */
@@ -20,7 +23,7 @@ public class Duke {
      *
      * @param fileName the name of the storage file which Duke will store its data in.
      */
-    public Duke(String fileName){
+    public Duke(String fileName) {
         ui = new Ui("Duke!");
         storage = new Storage(fileName);
         parser = new Parser();

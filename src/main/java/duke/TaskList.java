@@ -2,7 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
-
+/**
+ * A class that allows operations on a list of tasks.
+ */
 public class TaskList {
     /** ArrayList used to store all the task. */
     protected ArrayList<Task> tasks;
@@ -98,6 +100,10 @@ public class TaskList {
                 + tasks.size());
     }
 
+    /**
+     * Method to search through the task list to find a specific task
+     * @param searchString The string to search with.
+     */
     public void searchTask(String searchString) {
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).name.contains(searchString)) {

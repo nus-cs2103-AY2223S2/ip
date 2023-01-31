@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Models a Task.
+ */
 public abstract class Task {
 
     /** Boolean used to determine if the task is completed or not. */
@@ -60,5 +63,5 @@ public abstract class Task {
      *
      * @return Task in CSV representation.
      */
-    public abstract String asCSV();
+    public abstract String asCsv();
 }
