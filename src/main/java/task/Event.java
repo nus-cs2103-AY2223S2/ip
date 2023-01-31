@@ -18,7 +18,7 @@ public class Event extends Task {
     public Event(String description, String from, String to) {
         super(description);
         this.from = LocalDateTime.parse(from, inputFormatter);
-        this.to = LocalDateTime.parse(to, inputFormatter);;
+        this.to = LocalDateTime.parse(to, inputFormatter);
     }
 
     // to write to file or other internal use

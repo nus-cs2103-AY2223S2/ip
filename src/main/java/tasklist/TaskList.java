@@ -12,6 +12,10 @@ public class TaskList {
         this.list = list;
     }
 
+    public TaskList() {
+        this.list = new ArrayList<>();
+    }
+
     public int getSize() {
         return list.size();
     }
