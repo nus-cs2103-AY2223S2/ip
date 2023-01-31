@@ -8,7 +8,7 @@ public class ExitCommand extends Command {
         return true;
     }
 
-    public void execute(TaskList task, Ui ui, Storage storage) {
-        ui.showGoodbyeMessage();
+    public String execute(TaskList task, Ui ui, Storage storage) {
+        return ui.showGoodbyeMessage();
     }
 }

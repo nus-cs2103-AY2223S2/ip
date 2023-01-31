@@ -47,9 +47,9 @@ public class AddCommand extends Command{
         return false;
     }
 
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeIOException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeIOException {
         task.add(this.task);
         storage.updateData(this.task);
-        ui.responseToLAddTaskCommand(this.task, task);
+        return ui.responseToLAddTaskCommand(this.task, task);
     }
 }
