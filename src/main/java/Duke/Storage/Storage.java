@@ -1,6 +1,5 @@
 package Duke.Storage;
 
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -8,9 +7,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import Duke.TaskList;
-import Exceptions.DukeMainExceptions;
 import Duke.Tasks.Task;
 
+import Exceptions.DukeMainExceptions;
 
 public class Storage {
     protected File file;
@@ -53,7 +52,6 @@ public class Storage {
                 splitDescription = input.split(" ", 2).length == 2
                         ? input.split(" ", 2)[1]
                         : "";
-
                 task = tasks.addTodo(splitDescription);
                 if  (splitInput[1].equals("X")) {
                     task.markDone();
@@ -100,5 +98,4 @@ public class Storage {
         }
         bw.close();
     }
-
 }

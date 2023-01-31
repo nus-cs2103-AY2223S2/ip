@@ -3,7 +3,6 @@ package Duke.Tasks;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeParseException;
 
 import Exceptions.InvalidDateFormatExceptions;
 
@@ -29,7 +28,6 @@ public class Deadline extends Task {
                     "\tPlease try again with the correct format \"YYYY-MM-DD\"";
             throw new InvalidDateFormatExceptions(errMsg);
         }
-
     }
 
     /**
