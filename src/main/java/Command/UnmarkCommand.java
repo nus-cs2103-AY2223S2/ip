@@ -1,4 +1,10 @@
-import java.io.IOException;
+package Command;
+
+import Main.TaskList;
+import Main.Storage;
+import Main.DukeException;
+import Main.Ui;
+import Task.Task;
 
 public class UnmarkCommand extends Command{
 
@@ -9,7 +15,7 @@ public class UnmarkCommand extends Command{
     }
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index > taskList.getTotalNumberOfTask()) {
-            throw new DukeException ("Index too large");
+            throw new DukeException("Index too large");
         } else if (index <= 0) {
             throw new DukeException("Index too small");
         }

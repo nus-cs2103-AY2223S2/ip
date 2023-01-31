@@ -1,5 +1,13 @@
-import java.io.IOException;
+package Command;
+
 import java.time.LocalDate;
+
+import Main.TaskList;
+import Main.Storage;
+import Main.DukeException;
+import Main.Ui;
+import Task.Deadline;
+import Task.Task;
 
 public class DeadlineCommand extends Command {
     String description;
@@ -11,11 +19,10 @@ public class DeadlineCommand extends Command {
 
     }
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        //index out of bound
         Task t = new Deadline(description, endDate);
         taskList.addTask(t);
         storage.writeFile(taskList);
-        ui.outputDeleteTask(t);
+        ui.outputAddTask(t);
     }
 
 }

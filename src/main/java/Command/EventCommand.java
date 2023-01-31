@@ -1,5 +1,13 @@
-import java.io.IOException;
+package Command;
+
 import java.time.LocalDate;
+
+import Main.TaskList;
+import Main.Storage;
+import Main.DukeException;
+import Main.Ui;
+import Task.Task;
+import Task.Event;
 
 public class EventCommand extends Command{
     String description;

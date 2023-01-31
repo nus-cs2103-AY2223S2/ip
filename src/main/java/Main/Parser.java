@@ -1,3 +1,7 @@
+package Main;
+
+import Command.*;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
@@ -32,7 +36,7 @@ public class Parser {
 
     }
 
-    public static LocalDate convertStringToDate(String date) throws DukeException {
+    private static LocalDate convertStringToDate(String date) throws DukeException {
         try {
             String[] arr = date.split("-");
             return LocalDate.of(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Integer.parseInt(arr[2]));

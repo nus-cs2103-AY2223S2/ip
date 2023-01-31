@@ -1,9 +1,10 @@
+package Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate endDate;
     private static final DateTimeFormatter formatOfDate = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
 
@@ -19,7 +20,7 @@ public class Deadline extends Task{
 
     public  String toText() {
         return "D" + "|" + getNameOfTask() + "|" + (isDone() ? 1 : 0) + "|" + endDate;
-    };
+    }
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + formatOfDate.format(endDate) + ")";

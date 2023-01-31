@@ -1,3 +1,5 @@
+package Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +16,7 @@ public class Event extends Task {
 
     public String toText() {
         return "E" + "|" + getNameOfTask() + "|" + (isDone() ? 1 : 0) + "|" + formatOfDate.format(startDate) + "|" + formatOfDate.format(endDate);
-    };
+    }
 
     public LocalDate getDate() {
         return startDate;

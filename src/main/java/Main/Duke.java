@@ -1,4 +1,6 @@
-import java.io.IOException;
+package Main;
+
+import Command.Command;
 public class Duke {
 
     private Storage storage;
@@ -6,7 +8,7 @@ public class Duke {
     private Ui ui;
 
 
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         try {
             ui = new Ui();
             storage = new Storage(filePath);
@@ -16,7 +18,7 @@ public class Duke {
         }
     }
 
-    public void run() throws IOException {
+    private void run() {
         Ui.greet();
         boolean isExit = false;
         while (!isExit) {
@@ -34,7 +36,7 @@ public class Duke {
         }
 
     }
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }
 }
