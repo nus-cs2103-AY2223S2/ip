@@ -33,9 +33,7 @@ public class TaskList {
             throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
         }
         String[] newInput = input.split("/");
-        String date1 = newInput[1]  + "/" +  newInput[2]  + "/" +  newInput[3];
-        String date2 = newInput[4]  + "/" +  newInput[5]  + "/" +  newInput[6];
-        tasks.add(currentSize, new Event(newInput[0], date1, date2));
+        tasks.add(currentSize, new Event(newInput[0], newInput[1], newInput[2]));
         this.currentSize++;
         System.out.println("Gotchu fam");
         System.out.printf("I've added\n" + tasks.get(currentSize-1).toString() +
@@ -50,10 +48,9 @@ public class TaskList {
             throw new InvalidTaskDescriptionException("brother wake up and put a legit description can");
         }
         String[] newInput = input.split("/");
-        String date = newInput[1] + "/" +  newInput[2]  + "/"  + newInput[3];
         System.out.println(Arrays.toString(newInput));
-        System.out.println(date);
-        tasks.add(currentSize, new Deadline(newInput[0], date));
+        System.out.println(newInput[1]);
+        tasks.add(currentSize, new Deadline(newInput[0], newInput[1]));
         this.currentSize++;
         System.out.println("Gotchu fam");
         System.out.printf("I've added\n" + tasks.get(currentSize-1).toString() +
@@ -65,17 +62,18 @@ public class TaskList {
     //delete
     public void deleteTask(String[] command) {
         int taskPointer = Integer.parseInt(command[1]) - 1;
-        Task temp = tasks.get(taskPointer);
+        //Task temp = tasks.get(taskPointer);
         try {
+            Task temp = tasks.get(taskPointer);
             tasks.remove(taskPointer);
+            this.currentSize--;
+            System.out.println("Ok bro I've removed this : ");
+            System.out.printf(temp.toString() +
+                    "\nfrom all the shit u need to do\n");
+            System.out.println("Hope you have a better life now");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Wake up and choose a better task to mark");
+            System.out.println("brother look at how long ur list is first then delete lah");
         }
-        this.currentSize--;
-        System.out.println("Ok bro I've removed this : ");
-        System.out.printf(temp.toString() +
-                "\nfrom all the shit u need to do\n");
-        System.out.println("Hope you have a better life now");
     }
 
 

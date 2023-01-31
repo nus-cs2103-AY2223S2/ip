@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-
+//this is the class that parses commands
 public class CommandManager {
 
     public static void run(String input, String[] command, TaskList tasks) {

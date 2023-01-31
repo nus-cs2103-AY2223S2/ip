@@ -51,10 +51,10 @@ public class Storage {
             File file = new File(this.path);
             if (!file.exists()) {
                 Files.createFile(Path.of("./duke.txt"));
-                System.out.println("we here bois2");
+                //System.out.println("we here bois2");
             }
             Scanner sc = new Scanner(file);
-            System.out.println("we here bois3");
+            //System.out.println("we here bois3");
             while(sc.hasNextLine()) {
                 //System.out.println("we here bois1");
                 String temp1 = sc.nextLine();
@@ -91,7 +91,7 @@ public class Storage {
             System.out.println("bro where tf is ur file");
             System.out.println(exception.getMessage());
         }
-        System.out.println("we here bois4");
+        //System.out.println("we here bois4");
         return tasklist;
     }
 }

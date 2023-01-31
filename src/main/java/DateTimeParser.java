@@ -11,12 +11,10 @@ public class DateTimeParser {
     public static LocalDate parse(String rawDate) {
 
 
-        String[] splitDate = rawDate.split("/");
-        String[] splitTime = splitDate[2].split(" ");
-        String day = splitDate[0];
+        String[] splitDate = rawDate.split("-");
+        String year = splitDate[0];
         String month = splitDate[1];
-        String year = splitTime[0];
-        String time = splitTime[1];
+        String day = splitDate[2];
 
 
         String newTime = year +"-" + month + "-" + day;
