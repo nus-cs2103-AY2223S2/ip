@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.lang.StringBuilder;
-
 import duke.storage.Storage;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;

@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.lang.StringBuilder;
-
 import duke.datetime.DateTime;
 import duke.storage.Storage;
 import duke.task.Deadline;

@@ -1,6 +1,5 @@
 package duke.tasklist;
 
-import java.lang.StringBuilder;
 import java.util.ArrayList;
 
 import duke.task.Task;

@@ -1,34 +1,45 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * Represents a Dialog box that will appear in the GUI, containing an image and the text message.
- * It is a custom Control.
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and
+ * a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
-
-    //Controls in the dialogue box
-    private Label text;
+    //Components inside the dialogue box
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
-    public DialogBox(Label label, ImageView imageView) {
-        text = label;
-        displayPicture = imageView;
+    private DialogBox(String text, Image image) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        dialog.setText(text);
+        displayPicture.setImage(image);
     }
+
+
 
     /**
      * Flips a dialog box such that the ImageView is on the left and text is on the right.
@@ -37,28 +48,29 @@ public class DialogBox extends HBox {
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
     /**
      * Returns a user dialog box.
      * @param label Text label in the user dialog box.
-     * @param imageView Image of the user.
+     * @param image Image of the user.
      * @return a user dialog box containing the required label and image.
      */
-    public static DialogBox getUserDialog(Label label, ImageView imageView) {
-        return new DialogBox(label, imageView);
+    public static DialogBox getUserDialog(String label, Image image) {
+        return new DialogBox(label, image);
     }
 
     /**
      * Returns a bot dialog box which is flipped as compared to the user dialog box
      * @param label Text label in the bot dialog box.
-     * @param imageView Image of the bot
+     * @param image Image of the bot
      * @return a bot dialog box containing the required label and image.
      */
-    public static DialogBox getDukeDialog(Label label, ImageView imageView) {
-        DialogBox dukeDialogBox = new DialogBox(label, imageView);
+    public static DialogBox getDukeDialog(String label, Image image) {
+        DialogBox dukeDialogBox = new DialogBox(label, image);
         dukeDialogBox.flip();
         return dukeDialogBox;
     }

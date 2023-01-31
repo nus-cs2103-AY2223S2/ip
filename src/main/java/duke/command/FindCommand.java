@@ -1,6 +1,5 @@
 package duke.command;
 
-import java.lang.StringBuilder;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 

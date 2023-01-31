@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.lang.StringBuilder;
-
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -27,7 +25,7 @@ public class MarkCommand extends Command {
      * @param tasks The <code>TaskList</code> of all available tasks.
      * @param storage The <code>Storage</code> object to allow local saving of the mark operation.
      */
-    public MarkCommand( int taskNumber, TaskList tasks, Storage storage) {
+    public MarkCommand(int taskNumber, TaskList tasks, Storage storage) {
         super();
         this.taskNumber = taskNumber;
         this.tasks = tasks;
@@ -48,7 +46,7 @@ public class MarkCommand extends Command {
 
         //Inform user
         StringBuilder sb = new StringBuilder();
-        sb.append("Poof! One less worry. The following task is now marked as done:\n");
+        sb.append("Poof! One less worry. The following task is now marked as done:\n\n");
         sb.append(currentTask.getStatusOfTaskInString());
         return sb.toString();
     }

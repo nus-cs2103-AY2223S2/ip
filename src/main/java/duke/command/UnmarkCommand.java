@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.lang.StringBuilder;
-
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
@@ -50,7 +48,7 @@ public class UnmarkCommand extends Command {
 
         //Prepare string
         StringBuilder sb = new StringBuilder();
-        sb.append("Alright! The following task is now marked as undone. I will help you keep an eye on it.\n");
+        sb.append("Alright! The following task is now marked as undone. I will help you keep an eye on it.\n\n");
         sb.append(currentTask.getStatusOfTaskInString());
 
         return sb.toString();
