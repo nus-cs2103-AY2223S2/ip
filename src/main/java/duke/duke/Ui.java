@@ -12,7 +12,6 @@ public class Ui {
     private static String divider;
     private final Scanner scanner;
 
-
     Ui() {
         this.logo = "....................*******************************...................\n"
                 + "...................V:V**.......................:VV:V..................\n"
