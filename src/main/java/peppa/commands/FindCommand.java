@@ -1,13 +1,25 @@
 package peppa.commands;
 
-import peppa.*;
-
 import java.util.ArrayList;
 
+import peppa.PeppaException;
+import peppa.Storage;
+import peppa.Task;
+import peppa.TaskList;
+import peppa.Ui;
+
+/**
+ * Represents a find command that searches for tasks using a keyword.
+ */
 public class FindCommand implements Command {
     public static final String COMMAND_WORD = "find";
     private String keyword;
 
+    /**
+     * Constructs a find command with the specified keyword.
+     *
+     * @param keyword The keyword that the user is searching for in the tasklist.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }

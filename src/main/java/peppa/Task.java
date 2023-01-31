@@ -1,5 +1,8 @@
 package peppa;
 
+/**
+ * Provides a skeletal implementation of a task.
+ */
 public abstract class Task {
     protected String name;
     protected boolean done;
@@ -7,6 +10,12 @@ public abstract class Task {
     public Task() {
 
     }
+
+    /**
+     * Constructs a task with the specified name.
+     *
+     * @param name Name/description of the task.
+     */
     public Task(String name) {
         this.name = name;
         this.done = false;
@@ -30,5 +39,10 @@ public abstract class Task {
         return "[" + getStatusIcon() + "] " + name;
     }
 
+    /**
+     * Returns a specially formatted string that is used for writing to storage.
+     *
+     * @return A specially formatted String representation of the task.
+     */
     public abstract String toFormatString();
 }

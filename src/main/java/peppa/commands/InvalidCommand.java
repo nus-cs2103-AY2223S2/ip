@@ -8,9 +8,11 @@ import peppa.Ui;
  * Represents an invalid command that the chatbot fails to recognise.
  */
 public class InvalidCommand implements Command {
-    public InvalidCommand() {
 
-    }
+    /**
+     * Constructs an invalid command.
+     */
+    public InvalidCommand() { }
 
     @Override
     public String execute(TaskList taskList, Ui screen, Storage storage) {

@@ -19,6 +19,12 @@ public class DeadlineCommand implements Command {
     private String taskDescription;
     private LocalDateTime deadline;
 
+    /**
+     * Constructs a deadline command with the specified task description and deadline.
+     *
+     * @param taskDescription Details about the deadline to be added.
+     * @param deadline The date and time by which the task should be completed.
+     */
     public DeadlineCommand(String taskDescription, LocalDateTime deadline) {
         this.taskDescription = taskDescription;
         this.deadline = deadline;

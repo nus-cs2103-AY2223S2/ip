@@ -20,7 +20,13 @@ public class EventCommand implements Command {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public EventCommand() {};
+    /**
+     * Constructs an event command with the specified task description, start date and end date.
+     *
+     * @param taskDescription Details about the event to be added.
+     * @param startDate Date on which the event commences.
+     * @param endDate Date on which the event ends.
+     */
     public EventCommand(String taskDescription, LocalDate startDate, LocalDate endDate) {
         this.taskDescription = taskDescription;
         this.startDate = startDate;

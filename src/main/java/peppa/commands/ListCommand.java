@@ -11,9 +11,10 @@ public class ListCommand implements Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public ListCommand() {
-
-    }
+    /**
+     * Constructs a list command.
+     */
+    public ListCommand() { }
 
     @Override
     public String execute(TaskList taskList, Ui screen, Storage storage) {

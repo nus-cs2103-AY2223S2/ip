@@ -13,8 +13,11 @@ public class Storage {
     private String filepath;
     private File f;
 
-    private Storage() {}
-
+    /**
+     * Constructs a storage object with the specified file path.
+     *
+     * @param filepath The path of the file containing pre-existing tasks, if any.
+     */
     public Storage(String filepath) {
         try {
             this.filepath = filepath;

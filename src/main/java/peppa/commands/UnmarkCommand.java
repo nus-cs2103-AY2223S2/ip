@@ -13,8 +13,12 @@ public class UnmarkCommand implements Command {
     public static final String COMMAND_WORD = "unmark";
     private int taskIndex;
 
-    public UnmarkCommand() {}
-
+    /**
+     * Constructs an unmark command with the index of the task to be unmarked as done.
+     * Tasks are zero-indexed.
+     *
+     * @param taskIndex Index of the task to be unmarked as done. Should be >= 0 and < length of the tasklist.
+     */
     public UnmarkCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }

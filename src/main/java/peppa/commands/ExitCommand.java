@@ -9,9 +9,11 @@ import peppa.Ui;
  */
 public class ExitCommand implements Command {
     public static final String COMMAND_WORD = "bye";
-    public ExitCommand() {
 
-    }
+    /**
+     * Constructs an exit command.
+     */
+    public ExitCommand() { }
 
     @Override
     public String execute(TaskList taskList, Ui screen, Storage storage) {

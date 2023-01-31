@@ -7,6 +7,10 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private ArrayList<Task> taskList;
+
+    /**
+     * Constructs a list of tasks stored in an ArrayList.
+     */
     public TaskList() {
         taskList = new ArrayList<>();
     }
@@ -29,6 +33,12 @@ public class TaskList {
         taskList.remove(task);
     }
 
+    /**
+     * Searches for tasks in the list which contain the specified keyword.
+     *
+     * @param keyword The keyword that the user is searching for.
+     * @return Subset of tasks in the master list that match the given keyword.
+     */
     public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> matchedTasks = new ArrayList<>();
         for (Task task : taskList) {

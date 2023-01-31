@@ -9,6 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDateTime dueDate;
 
+    /**
+     * Constructs a deadline task with the specified name and due date.
+     *
+     * @param name Name/description of the deadline.
+     * @param dueDate Date and time by which the task should be completed.
+     */
     public Deadline(String name, LocalDateTime dueDate) {
         super(name);
         this.dueDate = dueDate;

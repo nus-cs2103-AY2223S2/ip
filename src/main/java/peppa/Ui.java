@@ -19,6 +19,9 @@ public class Ui {
     public static final String DIVIDER = "=============================================";
     private Scanner sc;
 
+    /**
+     * Constructs a user interface for the command-line version of Peppa.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }

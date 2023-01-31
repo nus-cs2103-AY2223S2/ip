@@ -15,8 +15,11 @@ public class TodoCommand implements Command {
     public static final int DESC_INDEX = 5;
     private String taskDescription;
 
-    public TodoCommand() {}
-
+    /**
+     * Constructs a todo command with the specified task description.
+     *
+     * @param taskDescription Details about the todo to be added.
+     */
     public TodoCommand(String taskDescription) {
         this.taskDescription = taskDescription;
     }

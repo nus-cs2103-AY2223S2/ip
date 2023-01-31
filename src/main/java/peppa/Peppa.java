@@ -2,6 +2,9 @@ package peppa;
 
 import peppa.commands.Command;
 
+/**
+ * Represents the chatbot application.
+ */
 public class Peppa {
     public static final String FILE_PATH = "data/todo.txt";
     private Ui screen;
@@ -11,7 +14,7 @@ public class Peppa {
     public Peppa() {}
 
     /**
-     * Starts the chatbot interface.
+     * Starts the chatbot application.
      */
     public Peppa(String filepath) {
         this.screen = new Ui();

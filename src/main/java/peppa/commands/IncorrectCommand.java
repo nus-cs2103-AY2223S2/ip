@@ -11,8 +11,11 @@ import peppa.Ui;
 public class IncorrectCommand implements Command {
     private String errorMessage;
 
-    public IncorrectCommand() {}
-
+    /**
+     * Constructs an incorrect command with the specified error message.
+     *
+     * @param errorMessage The error message to be displayed to the user.
+     */
     public IncorrectCommand(String errorMessage) {
         this.errorMessage = errorMessage;
     }

@@ -13,9 +13,14 @@ public class DeleteCommand implements Command {
     public static final String COMMAND_WORD = "delete";
     private int taskIndex;
 
-    public DeleteCommand() {}
-
+    /**
+     * Constructs a delete command with the index of the task to be deleted.
+     * Tasks are zero-indexed.
+     *
+     * @param taskIndex Index of the task to be deleted. Should be >= 0 and < length of the tasklist.
+     */
     public DeleteCommand(int taskIndex) {
+
         this.taskIndex = taskIndex;
     }
 
