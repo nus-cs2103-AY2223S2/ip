@@ -58,22 +58,22 @@ public class Parser {
                 }
             case deadline:
                 if (splitString.length == 1) {
-                    throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
+                    throw new DukeException("\tOOPS!!! The description of a deadline cannot be empty.");
                 } else {
                     String[] splitDescription = splitString[1].split(" /by ");
                     if (splitDescription.length == 1) {
-                        throw new DukeException("\t☹ OOPS!!! The date of a deadline cannot be empty.");
+                        throw new DukeException("\tOOPS!!! The date of a deadline cannot be empty.");
                     }
                     return new DeadlineCommand(splitDescription[0], splitDescription[1]);
                 }
             case event:
                 if (splitString.length == 1) {
-                    throw new DukeException("\t☹ OOPS!!! The description of an event cannot be empty.");
+                    throw new DukeException("\tOOPS!!! The description of an event cannot be empty.");
                 } else {
                     String[] splitDescriptionArray = splitString[1].split(" /from ");
                     String[] timeSplitArray = splitDescriptionArray[1].split("/to");
                     if (timeSplitArray.length == 1) {
-                        throw new DukeException("\t☹ OOPS!!! The date of an event cannot be empty.");
+                        throw new DukeException("\tOOPS!!! The date of an event cannot be empty.");
                     }
                     return new EventCommand(splitDescriptionArray[0], timeSplitArray[0], timeSplitArray[1]);
                 }

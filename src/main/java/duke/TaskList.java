@@ -38,7 +38,7 @@ public class TaskList {
      * Creates a new Deadline object.
      *
      * @param description Description of the Deadline object.
-     * @param by          The due date of the deadline.
+     * @param by The due date of the deadline.
      */
     public void addDeadline(String description, String by) throws DukeException {
         Deadline deadline = new Deadline(description, by, false);
@@ -60,8 +60,8 @@ public class TaskList {
      * Creates a new Event object.
      *
      * @param description Description of the Event object.
-     * @param from        The start of the event.
-     * @param to          The end of the event.
+     * @param from The start of the event.
+     * @param to The end of the event.
      */
 
     public void addEvent(String description, String from, String to) throws DukeException {
@@ -100,16 +100,18 @@ public class TaskList {
     /**
      * Prints the tasks in the list for the user.
      */
-    public void printList() {
+    public String printList() {
+        String s = "";
         int i = 1;
-        System.out.println("\n\tHere are the tasks in your list:");
+        s = "\n\tHere are the tasks in your list:";
         for (Task task : listOfTasks) {
-            System.out.println("\t"
+            s += "\n\t"
                     + i
                     + ". "
-                    + task.toString());
+                    + task.toString();
             i++;
         }
+        return s;
     }
 
     /**

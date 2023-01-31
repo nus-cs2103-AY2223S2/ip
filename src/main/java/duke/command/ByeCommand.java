@@ -19,14 +19,15 @@ public class ByeCommand extends Command {
     /**
      * Displays bye message to user.
      *
-     * @param task Tasklist containing the list of tasks.
+     * @param task TaskList containing the list of tasks.
      * @param storage Saves tasks into the file locally.
      * @param ui Deals with interactions with user.
+     * @return String response from Duke.
      * @throws DukeException if command cannot be recognised.
      */
     @Override
-    public void execute(TaskList task, Storage storage, Ui ui) {
+    public String execute(TaskList task, Storage storage, Ui ui) {
         storage.saveTasksToFile(task.getListOfTasks());
-        ui.byeMessage();
+        return ui.byeMessage();
     }
 }

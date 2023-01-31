@@ -1,66 +1,48 @@
 package duke;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import duke.tasks.Task;
+import javafx.animation.PauseTransition;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.tasks.Task;
 
 /**
  * Ui class deals with interactions with the user.
  */
 public class Ui {
-    static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    static final String SEPARATOR = "\t____________________________________________________________";
     private Scanner sc;
+    private Stage stage;
 
     /**
-     * Contructor for the Ui class.
-     */
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
-
-    public void printSeparator() {
-        System.out.println(SEPARATOR);
-    }
-
-    /**
-     * Reads next command inputted by user.
+     * Constructor for the Ui class.
      *
-     * @return
+     * @param stage The Stage of the application.
      */
-
-    public String readCommand() {
-        return sc.nextLine();
+    public Ui(Stage stage) {
+        this.stage = stage;
     }
 
     /**
      * Prints welcome message to user of Duke.
      */
-    public void welcomeMessage() {
-        System.out.println(LOGO
-                + "\n"
-                + SEPARATOR
-                + "\n\tHello! I'm Duke\n"
-                + "\tWhat can I do for you?\n"
-                + SEPARATOR);
+
+    public static String welcomeMessage() {
+        String message ="\tHello! I'm Duke\n"
+                + "\tWhat can I do for you?\n";
+        return message;
     }
 
     /**
-     * Prints bye message to user of Duke.
+     * Prints bye message to user of Duke and closes Duke.
      */
-    public void byeMessage() {
-        System.out.println(SEPARATOR
-                + "\n\t Bye. Hope to see you again soon!\n"
-                + SEPARATOR);
+    public String byeMessage() {
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(event -> stage.close());
+        delay.play();
+        String message = "\t Bye. Hope to see you again soon!\n";
+        return message;
     }
 
     /**
@@ -68,9 +50,9 @@ public class Ui {
      *
      * @param task Task to be marked Done.
      */
-    public void showMark(Task task) {
-        System.out.println(SEPARATOR + "\n\tNice! I've marked this task as done:\n\t  " + task.toString()
-                + "\n" + SEPARATOR);
+    public String showMark(Task task) {
+        String message = "\tNice! I've marked this task as done:\n\t  " + task.toString();
+        return message;
     }
 
     /**
@@ -78,9 +60,9 @@ public class Ui {
      *
      * @param task Task to be marked Undone.
      */
-    public void showUnmark(Task task) {
-        System.out.println(SEPARATOR + "\n\tOK, I've marked this task as not done yet:\n\t  " + task.toString()
-                + "\n" + SEPARATOR);
+    public String showUnmark(Task task) {
+        String message ="\tOK, I've marked this task as not done yet:\n\t  " + task.toString();
+        return message;
     }
 
     /**
@@ -89,11 +71,11 @@ public class Ui {
      * @param task Task to be added.
      * @param size Size of the tasklist
      */
-    public void showAdd(Task task, int size) {
-        System.out.println(SEPARATOR + "\n\tGot it. I've added this task:\n\t  "
+    public String showAdd(Task task, int size) {
+        String message = "\tGot it. I've added this task:\n\t  "
                 + task.toString() + "\n\tNow you have "
-                + size + " task(s) in the list.\n"
-                + SEPARATOR);
+                + size + " task(s) in the list.";
+        return message;
     }
 
     /**
@@ -102,11 +84,11 @@ public class Ui {
      * @param task Task to be deleted.
      * @param size Size of the tasklist.
      */
-    public void showDelete(Task task, int size) {
-        System.out.println(SEPARATOR + "\n\tNoted. I've removed this task:\n\t  "
+    public String showDelete(Task task, int size) {
+        String message ="\tNoted. I've removed this task:\n\t  "
                 + task.toString() + "\n\tNow you have "
-                + size + " task(s) in the list.\n"
-                + SEPARATOR);
+                + size + " task(s) in the list.";
+        return message;
     }
 
     /**
@@ -114,10 +96,9 @@ public class Ui {
      *
      * @param taskList TaskList which contains the list of tasks.
      */
-    public void showList(TaskList taskList) {
-        System.out.print(SEPARATOR);
-        taskList.printList();
-        System.out.println(SEPARATOR);
+    public String showList(TaskList taskList) {
+        String message = taskList.printList();
+        return message;
     }
 
     /**
@@ -125,57 +106,20 @@ public class Ui {
      *
      * @param listOfTasksFound ArrayList consisting of strings of tasks found using FindCommand.
      */
-    public void printFindList(ArrayList<String> listOfTasksFound) {
+    public String printFindList(ArrayList<String> listOfTasksFound) {
         int i = 1;
-        System.out.println(SEPARATOR + "\n\tHere are the matching tasks in your list:");
+        String s = "";
+        s = "\tHere are the matching tasks in your list:";
         for (String string : listOfTasksFound) {
-            System.out.println("\t"
+            s += "\n\t"
                     + i
                     + ". "
-                    + string);
+                    + string;
+            i++;
         }
-        System.out.println("\tThere are "
+        s += "\n\tThere are "
                 + listOfTasksFound.size()
-                + " matching task(s) in your list."
-                + "\n"
-                + SEPARATOR);
-    }
-
-    /**
-     * Outputs the data stored in the local filepath.
-     *
-     * @param storage Storage contains the filepath where data is saved locally.
-     */
-    public void showListFromStorage(Storage storage) {
-        String filepath = storage.getFilepath();
-        if (!Files.exists(Path.of(filepath))) {
-            new File(filepath).getParentFile().mkdirs();
-        } else {
-            File file = new File(filepath);
-            try {
-                Scanner sc = new Scanner(file);
-                System.out.println("\tThese is your current TaskList");
-                while (sc.hasNextLine()) {
-                    String text = sc.nextLine();
-                    System.out.println("\t" + text.trim());
-                }
-                System.out.println(SEPARATOR);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    /**
-     * Outputs error message to user.
-     *
-     * @param errorMessage
-     */
-    public void showError(String errorMessage) {
-        System.out.println(SEPARATOR
-                + "\n"
-                + errorMessage
-                + "\n"
-                + SEPARATOR);
+                + " matching task(s) in your list.";
+        return s;
     }
 }

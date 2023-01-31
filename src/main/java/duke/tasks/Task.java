@@ -89,8 +89,6 @@ public class Task {
         default:
             throw new DukeException("☹ OOPS!!! Unrecognised task type!");
         }
-
-
     }
 
     /**
