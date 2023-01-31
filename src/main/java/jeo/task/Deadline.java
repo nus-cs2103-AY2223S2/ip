@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     protected final String DATE_TIME_TO_PARSE = "yyyy-MM-dd HH:mm";
     protected final String DATE_TIME_TO_PRINT = "d MMM yyyy HH:mm";
-    protected String by;
+    protected String dueDate;
     protected LocalDateTime byDateTime;
 
     /**
@@ -25,7 +25,7 @@ public class Deadline extends Task {
         DateTimeFormatter formatterParse = DateTimeFormatter.ofPattern(DATE_TIME_TO_PARSE);
         DateTimeFormatter formatterPrint = DateTimeFormatter.ofPattern(DATE_TIME_TO_PRINT);
         this.byDateTime = LocalDateTime.parse(by, formatterParse);
-        this.by = byDateTime.format(formatterPrint);
+        this.dueDate = byDateTime.format(formatterPrint);
     }
 
     /**
@@ -41,7 +41,7 @@ public class Deadline extends Task {
      * @return the formatted due date-time.
      */
     public String getFormattedBy() {
-        return by;
+        return dueDate;
     }
 
     /**
