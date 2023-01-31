@@ -62,7 +62,8 @@ public class Storage {
     public void writeTasksToFile(ArrayList<Task> tasks) {
         try {
 
-            List<String> taskStrings = tasks.stream()
+            List<String> taskStrings = tasks
+                    .stream()
                     .map(Task::getFileRepresentation)
                     .collect(Collectors.toList());
 
