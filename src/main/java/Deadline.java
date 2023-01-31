@@ -1,15 +1,17 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
-    protected LocalDate by;
+    private final LocalDateTime by;
 
-    public Deadline(String description, LocalDate by) throws DukeException{
+    public Deadline(String description, LocalDateTime by) throws DateTimeParseException {
         super(description);
         this.by = by;
     }
 
-    public LocalDate getBy() {
+    public LocalDateTime getBy() {
         return this.by;
     }
 
@@ -17,10 +19,5 @@ public class Deadline extends Task {
     public String toString() {
         String dateFormat = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
         return "[D]" + super.toString() + "(by: " + dateFormat + ")";
-    }
-    @Override
-    public String toFileString() {
-        String dateFormat = this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
-        return String.format("D | %d | %s | %s", isDone ? 1 : 0, description, dateFormat);
     }
 }

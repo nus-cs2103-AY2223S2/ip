@@ -1,23 +1,24 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
-    protected LocalDate from;
-    protected LocalDate to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
-    public Event(String description, LocalDate from, LocalDate to) throws DukeException{
+    public Event(String description, LocalDateTime from, LocalDateTime to) throws DateTimeParseException {
         super(description);
         this.from = from;
         this.to = to;
 
     }
 
-    public LocalDate getFrom() {
+    public LocalDateTime getFrom() {
         return this.from;
     }
 
-    public LocalDate getTo() {
+    public LocalDateTime getTo() {
         return this.to;
     }
 
@@ -25,13 +26,6 @@ public class Event extends Task {
     public String toString() {
         String fromDateFormat = this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
         String toDateFormat = this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
-        return "[E]" + super.toString() + "(from: " + fromDateFormat + "to: " + toDateFormat + ")";
-    }
-
-    @Override
-    public String toFileString() {
-        String fromDateFormat = this.from.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
-        String toDateFormat = this.to.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
-        return String.format("E | %d | %s | %s | %s", isDone ? 1 : 0, description, fromDateFormat, toDateFormat);
+        return "[E]" + super.toString() + "(from: " + fromDateFormat + " to: " + toDateFormat + ")";
     }
 }

@@ -1,6 +1,6 @@
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private final String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -15,6 +15,9 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
     public void markDone() {
         this.isDone = true;
     }
@@ -26,10 +29,5 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "]" + this.description;
     }
-
-    public String toFileString() {
-        return String.format("X | %d | %s", isDone ? 1 : 0, description);
-    }
-
 }
 
