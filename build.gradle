@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
