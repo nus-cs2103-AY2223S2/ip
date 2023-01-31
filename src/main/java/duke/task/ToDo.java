@@ -3,7 +3,7 @@ package duke.task;
 /**
  * A task subclass to represent a ToDo (no date).
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Constructor for ToDo class.

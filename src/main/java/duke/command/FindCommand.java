@@ -8,7 +8,7 @@ import duke.Values;
 /**
  * A Command subclass for the find command.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     @Override
     public void execute(Ui ui, TaskList list, String command) throws DukeException {

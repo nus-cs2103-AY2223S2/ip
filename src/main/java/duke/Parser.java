@@ -31,7 +31,7 @@ public class Parser {
      * @return The Command obtained from parsing.
      * @throws DukeException If command input is invalid.
      */
-    public Command parse(String commandStr) throws DukeException{
+    public Command parse(String commandStr) throws DukeException {
         switch (commandStr.split(Values.SPACEX)[0]) {
         case "list":
             return new ListCommand();

@@ -1,17 +1,17 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.task.Event;
 import duke.Parser;
-import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
 import duke.Values;
+import duke.task.Event;
+import duke.task.Task;
 
 /**
  * A Command subclass for the event command.
  */
-public class EventCommand extends Command{
+public class EventCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList list, String command) throws DukeException {
         String[] parts = command.split(Values.SPACEX);
@@ -26,26 +26,26 @@ public class EventCommand extends Command{
         }
         // Get start date.
         StringBuilder startDate = new StringBuilder();
-        for (int i = fromIndex+1; i < toIndex; i++) {
-            startDate.append(i == fromIndex+1 ? "" : Values.SPACE);
+        for (int i = fromIndex + 1; i < toIndex; i++) {
+            startDate.append(i == fromIndex + 1 ? "" : Values.SPACE);
             startDate.append(parts[i]);
         }
         // Get end date.
         StringBuilder endDate = new StringBuilder();
-        for (int i = toIndex+1; i < parts.length; i++) {
-            endDate.append(i == toIndex+1 ? "" : Values.SPACE);
+        for (int i = toIndex + 1; i < parts.length; i++) {
+            endDate.append(i == toIndex + 1 ? "" : Values.SPACE);
             endDate.append(parts[i]);
         }
 
         if (taskName.length() == 0 || startDate.length() == 0 || endDate.length() == 0) {
-            throw new DukeException("Please provide a description, start date, and end date.\n" +
-                    "\tFormat: event <description> /from <start_date> /to <end_date>");
+            throw new DukeException("Please provide a description, start date, and end date.\n"
+                    + "\tFormat: event <description> /from <start_date> /to <end_date>");
         }
 
         Task task = new Event(taskName.toString(), startDate.toString(), endDate.toString());
         list.addTask(task);
-        ui.pixlPrint("Added new event!\n" +
-                "\t" + task.formatTask() +
-                "\nYou now have " + list.getSize() + " task(s) in the list.");
+        ui.pixlPrint("Added new event!\n"
+                + "\t" + task.formatTask()
+                + "\nYou now have " + list.getSize() + " task(s) in the list.");
     }
 }

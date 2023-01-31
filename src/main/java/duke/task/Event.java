@@ -3,7 +3,7 @@ package duke.task;
 /**
  * A task subclass to represent an Event (start and end dates).
  */
-public class Event extends Task{
+public class Event extends Task {
     // Start and end dates/time.
     private String startDate;
     private String endDate;
