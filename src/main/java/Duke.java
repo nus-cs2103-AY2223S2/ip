@@ -6,65 +6,39 @@ import java.io.File;
 
 public class Duke {
 
-    private static Scanner sc = new Scanner(System.in);
-    private static TaskList taskList = new TaskList();
-    public static void main(String[] args) {
-        /*
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        */
-        System.out.println("Hello! I am Duke Nice To Meet You\n");
-        TaskAssigner taskAssigner = new TaskAssigner();
-        Storage storage = new Storage();
+    private Storage storage;
+    private Ui ui;
+    private TaskList taskList;
+
+    public Duke() {
+        this.storage = new Storage();
+        this.ui = new Ui();
+        this.taskList = new TaskList();
 
         try {
             storage.loadTasks(taskList);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
 
+    public void run() {
+        ui.greet();
         boolean ongoing = true;
-        while(ongoing) {
-            String command = sc.nextLine();
-
+        while (ongoing) {
             try {
-                if (command.equals("bye")) {
-                    System.out.println("Bye! Hope to See You Again!");
-                    break;
-                }
-
-                if (command.contains("delete") && command.substring(0,6).equals("delete")) {
-                    taskList.deleteTask(Integer.parseInt(command.substring(7)));
-                    continue;
-                }
-
-                if (command.contains("mark") || command.contains("unmark")) {
-                    if (command.substring(0, 4).equals("mark")) {
-                        taskList.markTask(Integer.parseInt(command.substring(5)));
-                        continue;
-                    }
-
-                    if (command.substring(0, 6).equals("unmark")) {
-                        taskList.unmarkTask(Integer.parseInt(command.substring(7)));
-                        continue;
-                    }
-                }
-
-                if (command.equals("list")) {
-                    taskList.printTasks();
-                    continue;
-                }
-                Task task = taskAssigner.assignTask(command);
-                taskList.add(task);
+                String fullCommand = ui.getCommand();
+                Command c = Parser.stringToCommand(fullCommand);
+                c.execute(ui, storage, taskList);
+                ongoing = c.isExit();
+                storage.saveTasks(taskList);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         }
-        storage.saveTasks(taskList);
-        sc.close();
     }
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
 }

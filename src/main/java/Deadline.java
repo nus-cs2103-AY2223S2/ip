@@ -5,10 +5,9 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     public Deadline(String description, String by) {
-        super(description);
-        this.by = Parser.stringToDate(by);
+            super(description);
+            this.by = Parser.stringToDate(by);
     }
-
     @Override
     public String getStatusIcon() {
         return "[D]" + super.getStatusIcon();
