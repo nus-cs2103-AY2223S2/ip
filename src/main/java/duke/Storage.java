@@ -1,9 +1,9 @@
-package Duke;
+package duke;
 
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Tasks.Task;
-import Duke.Tasks.ToDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,20 +20,18 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
-
-        f = new File(filePath); // create a File for the given file path
+        f = new File(filePath);
         try {
             if(!f.exists()) {
                 f.createNewFile();
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     public TaskList load() throws FileNotFoundException {
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        Scanner s = new Scanner(f);
         TaskList l = new TaskList();
 
         while (s.hasNext()) {
@@ -41,15 +39,15 @@ public class Storage {
             String parts[] = str.split("~", 5);
 
             switch (parts[0]) {
-                case "T":
-                    l.add(new ToDo(parts[2], parts[1].equals("1")));
-                    break;
-                case "D":
-                    l.add(new Deadline(parts[2], parts[1].equals("1"), LocalDate.parse(parts[3])));
-                    break;
-                case "E":
-                    l.add(new Event(parts[2], parts[1].equals("1"), parts[3], parts[4]));
-                    break;
+            case "T":
+                l.add(new ToDo(parts[2], parts[1].equals("1")));
+                break;
+            case "D":
+                l.add(new Deadline(parts[2], parts[1].equals("1"), LocalDate.parse(parts[3])));
+                break;
+            case "E":
+                l.add(new Event(parts[2], parts[1].equals("1"), parts[3], parts[4]));
+                break;
             }
         }
         return l;

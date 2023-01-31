@@ -1,11 +1,16 @@
-package Duke;
+package duke;
 
-import Duke.Tasks.Task;
+import duke.tasks.Task;
 
 import java.util.Scanner;
 
 public class Ui {
     public Ui() {
+    }
+
+    public String readCommand() {
+        Scanner bucky = new Scanner(System. in);
+        return bucky.nextLine();
     }
 
     public void showWelcome() {
@@ -14,11 +19,6 @@ public class Ui {
 
     public void showLine() {
         System.out.println("_______________________");
-    }
-
-    public String readCommand() { // endless reading
-        Scanner bucky = new Scanner(System. in);
-        return bucky.nextLine();
     }
 
     public void showError(Exception e) {

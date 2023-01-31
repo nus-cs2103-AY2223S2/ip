@@ -1,9 +1,8 @@
-package Duke.Tasks;
+package duke.tasks;
 
 public class Event extends Task {
 
     protected String from;
-
     protected String to;
 
     public Event(String description, boolean isDone, String from, String to) {

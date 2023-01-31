@@ -1,15 +1,13 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Command.Command;
-import Duke.Exceptions.InvalidArgumentException;
-import Duke.Storage;
-import Duke.TaskList;
-import Duke.Ui;
+import duke.exceptions.InvalidArgumentException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class MarkCommand extends Command {
 
     private int mark;
-
     private int index;
 
     public MarkCommand(int mark, int index) {
@@ -30,7 +28,7 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o) { //method might be faulty
         if (o == this) {
             return true;
         }

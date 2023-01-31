@@ -1,21 +1,19 @@
-package Duke.Command;
+package duke.command;
 
-import Duke.Storage;
-import Duke.TaskList;
-import Duke.TaskType;
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Tasks.ToDo;
-import Duke.Ui;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
+import duke.Storage;
+import duke.TaskList;
+import duke.TaskType;
+import duke.Ui;
 
 import java.time.LocalDate;
 
 public class AddCommand extends Command{
 
     private TaskType t;
-
     private String desc;
-
     private boolean isDone;
     private LocalDate deadlineBy;
     private String eventFrom;
