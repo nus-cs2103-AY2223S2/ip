@@ -30,14 +30,10 @@ public class Ui {
      * Displays all tasks in TaskList to user.
      *
      */
-    public void showTasksMessage(ArrayList<Task> tasks) {
+    public void showTasksMessage(TaskList tasks) {
         if (tasks.size() != 0) {
             System.out.println("Here are the tasks in your list:");
-            int idx = 1;
-            for (Task task : tasks) {
-                System.out.printf("%d.%s%n", idx, task);
-                idx++;
-            }
+            System.out.print(tasks);
         } else {
             System.out.println("There are no tasks currently!");
         }
@@ -73,7 +69,7 @@ public class Ui {
      * Displays message to user upon successfully adding the task to the TaskList.
      *
      */
-    public void addedTaskMessage(Task task, ArrayList<Task> tasks) {
+    public void addedTaskMessage(Task task, TaskList tasks) {
         System.out.println("Got it. I've added this task:\n" + task);
         System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
     }
@@ -99,7 +95,7 @@ public class Ui {
      * Displays message to user upon successfully deleting the task.
      *
      */
-    public void deleteTaskMessage(Task task, ArrayList<Task> tasks) {
+    public void deleteTaskMessage(Task task, TaskList tasks) {
         System.out.println("Noted. I've removed this task:\n" + task);
         System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
     }

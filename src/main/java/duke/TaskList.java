@@ -11,15 +11,6 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructor for storing current TaskList.
-     *
-     * @param taskList list of tasks.
-     */
-    public TaskList(ArrayList<Task> taskList) {
-        this.tasks = taskList;
-    }
-
-    /**
      * Constructor for initialising new TaskList.
      *
      */
@@ -79,5 +70,29 @@ public class TaskList {
 
     public ArrayList<Task> getTaskList() {
         return tasks;
+    }
+
+    public int size() {
+        return tasks.size();
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        int idx = 1;
+        for (Task task : tasks) {
+            result += String.format("%d.%s\n", idx, task);
+            idx++;
+        }
+        return result;
+    }
+
+    public String saveString() {
+        String result = "";
+        for (Task task: tasks) {
+            result += task.getText();
+            result += "\n";
+        }
+        return result;
     }
 }

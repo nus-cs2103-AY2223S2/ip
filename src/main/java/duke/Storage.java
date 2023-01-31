@@ -26,8 +26,8 @@ public class Storage {
      * @return List of saved tasks.
      * @throws DukeException if there is an error with reading or creating the txt file.
      */
-    public ArrayList<Task> load() throws DukeException {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public TaskList load() throws DukeException {
+        TaskList tasks = new TaskList();
         try {
             File dir = new File(DIR_PATH);
             dir.mkdirs();
@@ -39,7 +39,7 @@ public class Storage {
             while (fileScanner.hasNext()) {
                 String input = fileScanner.nextLine();
                 Task task = readTaskString(input);
-                tasks.add(task);
+                tasks.addTask(task);
             }
         } catch (IOException | DukeException e) {
             throw new DukeException(e.getMessage());
@@ -53,13 +53,10 @@ public class Storage {
      * @param tasks List of current tasks.
      * @throws DukeException if there is an error writing to the txt file.
      */
-    public void saveToFile(ArrayList<Task> tasks) throws DukeException {
+    public void saveToFile(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(DIR_PATH + filePath);
-            for (Task task: tasks) {
-                fw.write(task.getText());
-                fw.write(System.lineSeparator());
-            }
+            fw.write(tasks.saveString());
             fw.close();
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
