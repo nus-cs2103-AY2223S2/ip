@@ -43,17 +43,15 @@ public abstract class EventLoop implements Disposable {
      * The function that starts the event loop.
      */
     public void run() {
-        ExitStatus status = ExitStatus.continueExecute;
-        while (true) {
-            if (!reader.hasNextLine()) {
-                break;
-            }
-            status = rootCommandable.execute(getTokens());
-            if (status == ExitStatus.terminate) {
-                break;
-            }
-        }
+        ExitStatus status = runOnce();
         dispose();
+    }
+
+    public ExitStatus runOnce() {
+        if (!reader.hasNextLine()) {
+            return ExitStatus.finishCurrentIteration;
+        }
+        return rootCommandable.execute(getTokens());
     }
 
     @Override

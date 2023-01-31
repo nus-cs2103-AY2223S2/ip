@@ -6,13 +6,18 @@ import data.DataLoaderImpl;
 import data.DataSaverImpl;
 import domain.entities.DataLoader;
 import domain.entities.DataSaver;
+import domain.entities.core.Writable;
 import domain.usecases.ByeUsecase;
 import domain.usecases.EchoUsecase;
 import domain.usecases.TaskManagerUsecase;
 import domain.usecases.UnknownCommandUsecase;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import presentation.controllers.DukeEventLoop;
+import presentation.gui.MainWindow;
 import presentation.ui.DummyWritable;
 import presentation.ui.SystemErr;
 import presentation.ui.SystemOut;
@@ -23,28 +28,9 @@ import java.time.format.DateTimeFormatter;
  * The main class for Duke.
  */
 public class Duke extends Application {
-    /**
-     * The main method for Duke.
-     *
-     * @param args the command line arguments, if any.
-     */
-    public static void main(String[] args) {
-        initOrCrash();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        final DukeEventLoop initializingLoop = DukeEventLoop.createInitializingLoop();
-        initializingLoop.run();
-        final DukeEventLoop eventLoop = DukeEventLoop.createEventLoop();
-        eventLoop.run();
-    }
-
-    private static void initOrCrash() {
+    private static DukeEventLoop initOrCrash(Writable target) {
         try {
-            registerSingletons();
+            registerSingletons(target);
         } catch (WriteException e) {
             System.err.println("Unable to initialize app.");
             System.err.println(e.getMessage());
@@ -59,7 +45,8 @@ public class Duke extends Application {
     /**
      * This would register the singletons that we would be using later on.
      */
-    private static void registerSingletons() throws WriteException, LoadException {
+    private static void registerSingletons(Writable target) throws WriteException,
+            LoadException {
         Singletons.registerSingleton(DateTimeFormatter.class,
                 DateTimeFormatter.ofPattern("MMM d yyyy"));
         // Persistence related
@@ -77,11 +64,11 @@ public class Duke extends Application {
         // Use cases
         Singletons.registerLazySingleton(
                 ByeUsecase.class,
-                () -> new ByeUsecase(Singletons.get(SystemOut.class))
+                () -> new ByeUsecase(target)
         );
         Singletons.registerLazySingleton(
                 EchoUsecase.class,
-                () -> new EchoUsecase(Singletons.get(SystemOut.class))
+                () -> new EchoUsecase(target)
         );
         Singletons.registerLazySingleton(
                 TaskManagerUsecase.class,
@@ -102,16 +89,18 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        initOrCrash();
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource(
-//                    "/presentation/gui/MainWindow.fxml"));
-//            AnchorPane ap = fxmlLoader.load();
-//            Scene scene = new Scene(ap);
-//            primaryStage.setScene(scene);
-//            primaryStage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            final FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource(
+                    "/presentation/gui/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            primaryStage.setScene(scene);
+            MainWindow window = fxmlLoader.getController();
+            window.setDukeEventLoop(Singletons.get(DukeEventLoop.class));
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
