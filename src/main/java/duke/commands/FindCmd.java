@@ -6,7 +6,7 @@ import duke.exceptions.CommandExecutionError;
 import duke.tasks.TaskList;
 
 public class FindCmd extends Command {
-    TaskList findResult;
+    private TaskList findResult;
 
     /**
      * Constructor method.
@@ -15,7 +15,7 @@ public class FindCmd extends Command {
      */
     public FindCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
-    } 
+    }
 
     /** Searches for specified keyword in the task list */
     public void execute() throws CommandExecutionError {
@@ -28,5 +28,8 @@ public class FindCmd extends Command {
     public void uiReply() {
         Ui.displayMsg("Here are matching tasks in your list:\n" + this.findResult.toString());
     }
-    
+
+    public TaskList getFindResult() {
+        return this.findResult;
+    }
 }
