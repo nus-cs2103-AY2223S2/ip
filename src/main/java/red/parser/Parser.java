@@ -1,9 +1,11 @@
 package red.parser;
 
 import red.exception.RedException;
+
 import red.task.DeadlineTask;
 import red.task.EventTask;
 import red.task.ToDoTask;
+
 import red.command.AddCommand;
 import red.command.Command;
 import red.command.DeleteCommand;
@@ -13,12 +15,12 @@ import red.command.MarkCommand;
 import red.command.UnmarkCommand;
 
 public class Parser {
-    private static String[] arrOfStr;
+
 
 
 
     public static Command parse(String input) throws RedException {
-        arrOfStr = input.split(" ", 2);
+        String[] arrOfStr = input.split(" ", 2);
 
 
         if(input.equals("bye")) {
@@ -30,14 +32,14 @@ public class Parser {
                 if(arrOfStr.length <= 1) {
                     throw new RedException("Specification of which task to mark is missing\n");
                 }
-                Integer index = Integer.valueOf(arrOfStr[1]) - 1;
+                int index = Integer.parseInt(arrOfStr[1]) - 1;
                 return new MarkCommand(index);
 
             } else if(arrOfStr[0].equals("unmark")) {
                 if(arrOfStr.length <= 1) {
                     throw new RedException("Specification of a which task to unmark is missing\n");
                 }
-                Integer index = Integer.valueOf(arrOfStr[1]) - 1;
+                int index = Integer.parseInt(arrOfStr[1]) - 1;
                 return  new UnmarkCommand(index);
 
             } else if(arrOfStr[0].equals("deadline")) {

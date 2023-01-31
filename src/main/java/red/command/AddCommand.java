@@ -1,15 +1,17 @@
 package red.command;
 
 import red.exception.RedException;
+
 import red.storage.Storage;
+
 import red.task.Task;
 import red.task.TaskList;
+
 import red.ui.UI;
 
 /**
  * This class specifies the act of adding a class to the current list of tasks.
  */
-
 public class AddCommand extends Command {
     private final Task task;
 
