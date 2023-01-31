@@ -1,4 +1,4 @@
-package duke;
+package duke.logic;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,10 +6,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.DukeException;
+import duke.logic.task.Deadline;
+import duke.logic.task.Event;
+import duke.logic.task.Task;
+import duke.logic.task.Todo;
 
 /**
  * Handle loading and saving of data.

@@ -1,8 +1,8 @@
-package duke;
+package duke.logic;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
+import duke.logic.task.Task;
 
 /**
  * Handles storage of tasks.
