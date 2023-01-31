@@ -1,10 +1,10 @@
 package Duke;
 import java.time.LocalDate;
 public class Event extends Task {
-    private LocalDate start;
-    private LocalDate end;
+    private String start;
+    private String end;
 
-    public Event(String name, LocalDate start, LocalDate end) {
+    public Event(String name, String start, String end) {
         super(name);
         this.start = start;
         this.end = end;
@@ -12,6 +12,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (from: " + this.start + " to: " + this.end + ")";
+        return "[E] | " + super.toString() + " | from: | " + this.start + " | to: | " + this.end;
     }
 }

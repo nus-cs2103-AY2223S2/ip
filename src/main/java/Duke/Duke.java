@@ -56,6 +56,8 @@ public class Duke {
         String[] parameters;
         TaskList taskList = new TaskList();
         Scanner myObj = new Scanner(System.in);
+        Saver saver = new Saver();
+        saver.load(taskList);
 
         while (true) {
             String input = myObj.nextLine();
@@ -75,14 +77,15 @@ public class Duke {
                 } else if (command.equals(Commands.DELETE)) {
                     System.out.println(taskList.deleteTask(Integer.parseInt(parameters[0])));
                 } else if (command.equals(Commands.DEADLINE)) {
-                    System.out.println(taskList.addTask(parameters[0], LocalDate.parse(parameters[1])));
+                    System.out.println(taskList.addTask(parameters[0], (parameters[1])));
                 } else if (command.equals(Commands.EVENT)) {
-                    System.out.println(taskList.addTask(parameters[0], LocalDate.parse(parameters[1]),
-                            LocalDate.parse(parameters[2])));
+                    System.out.println(taskList.addTask(parameters[0], parameters[1],
+                            parameters[2]));
                 } else if (command.equals(Commands.FIND)) {
                     System.out.println(taskList.findTasks(parameters[0]));
                 }
             }
+            saver.save(taskList);
         }
     }
 }

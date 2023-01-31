@@ -23,10 +23,10 @@ public abstract class Task {
     @Override
     public String toString() {
         if(this.isDone) {
-            return "[X] " + this.name;
+            return "[X] | " + this.name;
         }
         else {
-            return "[ ] " + this.name;
+            return "[ ] | " + this.name;
         }
     }
 }
