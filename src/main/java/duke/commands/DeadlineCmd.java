@@ -25,14 +25,14 @@ public class DeadlineCmd extends Command {
         super(taskList, lineInput);
     }
 
-    // Adds the Deadline task to the task list.
+    /** Adds the Deadline task to the task list. */
     public void execute() throws CommandExecutionError { 
         this.deadline = Deadline.create(this.lineInput);
         taskList.add(this.deadline);
         uiReply();
     };
     
-    // Acknowlege on UI that the Deadline task has been added.
+    /** Acknowlege on UI that the Deadline task has been added. */
     public void uiReply() {
         Ui.displayMsg("Got it. I've added this task:\n"
                 + Ui.indentString(this.deadline.toString(), 1)
