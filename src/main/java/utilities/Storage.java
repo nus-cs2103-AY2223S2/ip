@@ -1,8 +1,6 @@
 package utilities;
-import command.Command;
-import exceptions.SundayException;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,7 +8,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import command.Command;
+import exceptions.SundayException;
+
+/**
+ * The Storage class is responsible for managing file I/O operations for the Sunday task manager.
+ * It provides methods for creating, reading from, and writing to a data file that stores the list of tasks.
+ *
+ * @author Tan Yan-Hao Joshua
+ */
 public class Storage {
+
+    /**
+     * Retrieves the file path of the "sunday.txt" file in the "data" directory.
+     * If the "data" directory does not exist, it will be created.
+     *
+     * @return The file path of the "sunday.txt" file
+     * @throws IOException If the "data" directory failed to be created.
+     */
     private static String getFilepath() throws IOException {
         Path dataDir = Paths.get(System.getProperty("user.dir"), "data");
         if (!Files.exists(dataDir)) {
@@ -19,6 +34,13 @@ public class Storage {
         Path saveFilepath = Paths.get(dataDir.toString(), "sunday.txt");
         return saveFilepath.toString();
     }
+
+    /**
+     * Creates a new data file at the specified file path.
+     *
+     * @return True if the file was created successfully, false otherwise.
+     * @throws SundayException If there was an error creating the file.
+     */
     public static boolean createDataFile() throws SundayException {
         try {
             String filepath = getFilepath();
@@ -29,6 +51,13 @@ public class Storage {
             throw new SundayException("ERROR: Unable to initialise data file");
         }
     }
+
+    /**
+     * Reads data from a file at the specified file path and executes relevant
+     * commands based on the data read.
+     *
+     * @throws SundayException If there was an error reading the file or executing the commands.
+     */
     public static void readFromDataFile() throws SundayException {
         try {
             String filepath = getFilepath();
@@ -75,6 +104,14 @@ public class Storage {
             throw new SundayException("ERROR: Unable to read from data file");
         }
     }
+
+    /**
+     * Writes a line of data to the specified file path.
+     *
+     * @param line The line of data to write to the file.
+     * @return True if write was successful, false otherwise.
+     * @throws SundayException If there was an error writing to the file.
+     */
     public static boolean writeToDataFile(String line) throws SundayException {
         try {
             String filepath = getFilepath();
