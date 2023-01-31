@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 import java.util.Scanner;
 import java.util.ArrayList;

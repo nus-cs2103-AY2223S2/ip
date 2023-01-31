@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 public abstract class Task {
     protected String description;

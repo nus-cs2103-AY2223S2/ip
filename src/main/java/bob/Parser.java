@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package Bob;
+package bob;
 
 import java.util.ArrayList;
 
