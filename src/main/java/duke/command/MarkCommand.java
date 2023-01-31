@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.tasks.Task;
+
 public class MarkCommand extends Command {
     public MarkCommand(String textCmd) {
         super(textCmd);

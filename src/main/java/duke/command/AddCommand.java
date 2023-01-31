@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.tasks.Task;
+
 public class AddCommand extends Command {
 
     protected TaskAssigner taskAssigner;

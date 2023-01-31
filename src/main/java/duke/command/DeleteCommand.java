@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.*;
+import duke.tasks.Task;
+
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String textCmd) {
