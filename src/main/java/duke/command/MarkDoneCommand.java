@@ -33,12 +33,12 @@ public class MarkDoneCommand extends Command {
      * @param ui The ui object
      * @param storage The storage object
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage)throws FileNotFoundException,
+    public String execute(TaskList tasks, Ui ui, Storage storage)throws FileNotFoundException,
 
             IllegalArgumentException, DukeException, DirectoryNotFoundException, IOException {
         Task marked = tasks.mark(index);
-        ui.mark(marked);
         storage.write(tasks);
+        return ui.mark(marked);
     }
 
     /**

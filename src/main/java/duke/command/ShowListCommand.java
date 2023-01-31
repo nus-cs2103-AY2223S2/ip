@@ -14,8 +14,8 @@ public class ShowListCommand extends Command {
      * @param ui The ui object
      * @param storage The storage object
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.listUI(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.listUI(tasks);
     }
 
     /**

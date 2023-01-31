@@ -19,8 +19,9 @@ public abstract class Command {
      * @param tasks The task list
      * @param ui The ui object
      * @param storage The storage object
+     * @return The command result
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage)throws FileNotFoundException,
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage)throws FileNotFoundException,
             IllegalArgumentException, DukeException, DirectoryNotFoundException, IOException;
     /**
      * Checks if this is exit command

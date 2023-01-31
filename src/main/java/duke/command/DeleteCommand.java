@@ -25,10 +25,10 @@ public class DeleteCommand extends Command {
      * @param ui The ui object
      * @param storage The storage object
      */
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         Task task = list.delete(index);
-        ui.delete(task, list.getLength());
         storage.write(list);
+        return ui.delete(task, list.getLength());
     }
 
     /**
