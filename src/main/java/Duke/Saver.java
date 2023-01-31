@@ -18,12 +18,12 @@ public class Saver {
     /**
      * Creates a file with the specified path, if it does not exist
      */
-    public static void createFile(){
+    public static void createFile() {
         File directory = new File(PATH);
         if(!directory.exists()) {
             directory.mkdirs();
         }
-        File file = new File(PATH+FILE_NAME);
+        File file = new File(PATH + FILE_NAME);
         try {
             file.createNewFile();
         } catch (IOException e) {
@@ -35,7 +35,7 @@ public class Saver {
      * Saves the current taskList on duke locally on a text file.
      * @param taskList the taskList to be saved into the data file.
      */
-    public void save(TaskList taskList){
+    public void save(TaskList taskList) {
         try {
             createFile();
             FileWriter writer = new FileWriter(PATH + FILE_NAME);
@@ -50,14 +50,13 @@ public class Saver {
      * Loads the content from the stored text file into a taskList Object.
      * @param taskList the taskList to store the contents of the file into.
      */
-    public void load(TaskList taskList){
+    public void load(TaskList taskList) {
         try {
             createFile();
-            Path path = Paths.get(PATH+FILE_NAME);
+            Path path = Paths.get(PATH + FILE_NAME);
             taskList.fromSave(Files.readString(path));
             System.out.println("tasks loaded successfully.");
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

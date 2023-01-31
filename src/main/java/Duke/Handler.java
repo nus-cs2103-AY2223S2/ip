@@ -9,47 +9,42 @@ public class Handler {
     private enum Commands {
         BYE, LIST, MARK, UNMARK, DELETE, TODO, EVENT, DEADLINE, FIND
     }
-    public static Enum getCommand(String input){ //get the command
+    
+    public static Enum getCommand(String input) { //get the command
         return Commands.valueOf(input.split(" ")[0].toUpperCase());
     }
 
-    public static String[] getParameters(String input){ //get all tokens after the command
+    public static String[] getParameters(String input) { //get all tokens after the command
         return input.split(" ", 2)[1].split(" ");
     }
 
-    public static String[] parseParameters(Enum command, String[] parameters){ //get only the useful tokens
-        if(command.equals(Commands.MARK) || command.equals(Commands.UNMARK) || command.equals(Commands.DELETE) ||
-                command.equals(Commands.FIND)){
+    public static String[] parseParameters(Enum command, String[] parameters) { //get only the useful tokens
+        if (command.equals(Commands.MARK) || command.equals(Commands.UNMARK) || command.equals(Commands.DELETE) ||
+                command.equals(Commands.FIND)) {
             String[] cleanedParameters = new String[1];
             cleanedParameters[0] = parameters[0];
             return cleanedParameters;
-        }
-        else if(command.equals(Commands.TODO)){
+        } else if(command.equals(Commands.TODO)) {
             String[] cleanedParameters = new String[1];
             cleanedParameters[0] = parameters[0];
             return cleanedParameters;
-
-        }
-        else if(command.equals(Commands.DEADLINE)){
+        } else if(command.equals(Commands.DEADLINE)) {
             String[] cleanedParameters = new String[2];
             cleanedParameters[0] = parameters[0];
             cleanedParameters[1] = parameters[2];
             return cleanedParameters;
-
-        }
-        else if(command.equals(Commands.EVENT)){
+        } else if(command.equals(Commands.EVENT)) {
             String[] cleanedParameters = new String[3];
             cleanedParameters[0] = parameters[0];
             cleanedParameters[1] = parameters[2];
             cleanedParameters[2] = parameters[4];
             return cleanedParameters;
-        }
-        else{
+        } else {
             return null;
         }
     }
 
-    public String processCommand(String input, TaskList taskList){
+    public String processCommand(String input, TaskList taskList) {
         Enum command = getCommand(input);
         if (command.equals(Commands.BYE)) { // no parameters
             return "bai";
