@@ -1,5 +1,7 @@
 This is your current task list:
-1. [E][X] cry        (From: 2pm       To: 8am) 
-2. [T][ ] eat5      
-3. [T][ ] die
+1. [E][ ] cry         (From: 2pm        To: 8am) 
+2. [T][ ] eat5       
+3. [T][ ] die 
+4. [T][ ] eat food 
+5. [T][ ] eat drink 
 
