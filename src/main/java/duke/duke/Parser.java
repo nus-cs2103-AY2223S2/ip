@@ -36,9 +36,9 @@ public class Parser {
 
     /**
      *
-     * @param line a string array split by 1 whitespace when the input is read.
-     * @return an useful integer value, most often the index of the task list.
-     * @throws DukeException
+     * @param line A string array split by 1 whitespace when the input is read.
+     * @return A useful integer value, most often the index of the task list.
+     * @throws DukeException If the string cannot be converted into an integer.
      */
     public int singleQueryInteger(String[] line) throws DukeException {
         int s;
@@ -54,8 +54,8 @@ public class Parser {
 
     /**
      * Parses a processed form of the user input and matches it to the correct command.
-     * @param line a string array split by 1 whitespace when the input is read.
-     * @return an appropriate command.
+     * @param line A string array split by 1 whitespace when the input is read.
+     * @return An appropriate command.
      * @throws DukeException
      */
     public Command parse(String[] line) throws DukeException {
@@ -82,7 +82,7 @@ public class Parser {
             if (line.length == 1) {
                 throw new NoArgsException("deadline");
             }
-            String description = this.queries(line, List.<String>of()).get(0);
+            String description = this.queries(line, Todos.keywords).get(0);
             c = new TodoCommand(new Todos(description));
             break;
         case "event":
@@ -92,7 +92,7 @@ public class Parser {
                 throw new InvalidException();
             }
 
-            queries = this.queries(line, List.<String>of("from", "to"));
+            queries = this.queries(line, Events.keywords);
             Events event = new Events(queries);
             c = new EventCommand(event);
             break;
@@ -103,7 +103,7 @@ public class Parser {
                 throw new InvalidException();
             }
 
-            queries = this.queries(line, List.<String>of("by"));
+            queries = this.queries(line, Deadlines.keywords);
             c = new DeadLineCommand(new Deadlines(queries));
             break;
 
@@ -127,8 +127,8 @@ public class Parser {
 
     /**
      * Obtains a set of queries/arguments for commands.
-     * @param readLine
-     * @param keywords
+     * @param readLine A string array split by 1 whitespace when the input is read.
+     * @param keywords A list of keywords associated with the task class, such as "from".
      * @return an array-list of queries.
      * @throws DukeException
      */

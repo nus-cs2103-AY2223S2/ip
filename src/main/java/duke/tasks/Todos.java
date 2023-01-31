@@ -6,7 +6,7 @@ import java.util.List;
  * A specific kind of task with no time-frames.
  */
 public class Todos extends Task {
-    private static final List<String> keywords = List.<String>of();
+    public static final List<String> keywords = List.<String>of();
     public Todos(String description) {
         this(false, description);
     }

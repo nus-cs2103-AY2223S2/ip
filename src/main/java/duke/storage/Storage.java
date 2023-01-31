@@ -28,8 +28,8 @@ public class Storage {
      * Reads and loads the data from data.txt.
      * Each line is read and a corresponding task is created.
      * From there, a new task list is constructed.
-     * @return a list of tasks.
-     * @throws FileNotFoundException
+     * @return A list of tasks.
+     * @throws FileNotFoundException If file is not found.
      */
     public TaskList loadFile() throws LoadException {
 
@@ -79,8 +79,8 @@ public class Storage {
      * Dumps the ArrayList dumpFile into data.txt.
      * Each task in a task list is converted into a readable format.
      * The task list is then dumped into the file.
-     * @param tasks a list of tasks to be dumped.
-     * @throws IOException
+     * @param tasks A list of tasks to be dumped.
+     * @throws IOException If an error is encountered while accessing information.
      */
     public void dumpFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);

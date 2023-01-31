@@ -75,8 +75,8 @@ public class TaskList {
 
     /**
      * Removes a task given its task number.
-     * @param index index of task in the list by 1-base indexing.
-     * @return the removed task.
+     * @param index The index of task in the list by 1-base indexing.
+     * @return The removed task.
      */
     public Task remove(int index) {
         return this.storer.remove(index - 1);

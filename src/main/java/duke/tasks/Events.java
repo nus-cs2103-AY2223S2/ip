@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Events extends Task {
     protected LocalDateTime start;
-    private static final List<String> keywords = List.<String>of("from", "to");
+    public static final List<String> keywords = List.<String>of("from", "to");
 
     protected LocalDateTime end;
 

@@ -11,8 +11,9 @@ import java.util.List;
  */
 public class Deadlines extends Task {
 
+    public static final List<String> keywords = List.<String>of("by");
     protected LocalDateTime deadline;
-    private static final List<String> keywords = List.<String>of("by");
+
     public Deadlines(String description, String deadline) throws DukeException {
         this(false, description, deadline);
     }
@@ -44,8 +45,8 @@ public class Deadlines extends Task {
     public String formatText() {
         String divider = " | ";
         String isMarked = this.isDone ? "1" : "0";
-        return "D" + divider + isMarked + divider + this.description + divider +
-                this.deadline.format(FORMATTER);
+        return "D" + divider + isMarked + divider + this.description + divider
+                + this.deadline.format(FORMATTER);
     }
 
     public List<String> getKeywords() {

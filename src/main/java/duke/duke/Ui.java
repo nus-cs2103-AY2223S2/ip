@@ -9,8 +9,9 @@ import java.util.Scanner;
 public class Ui {
     private static String logo;
     private static String welcome;
-    private final Scanner scanner;
     private static String divider;
+    private final Scanner scanner;
+
 
     Ui() {
         this.logo = "....................*******************************...................\n"
@@ -51,7 +52,7 @@ public class Ui {
 
     /**
      * Reads user input and converts into a more readable form for the parser.
-     * @return a processed form of the input.
+     * @return A processed form of the input.
      *
      */
     public String[] readLine() {
@@ -74,7 +75,7 @@ public class Ui {
 
     /**
      * Displays text on the screen.
-     * @param str
+     * @param str Text to display.
      */
     public void display(String str) {
         System.out.println(this.divider + str + this.divider);
@@ -82,7 +83,7 @@ public class Ui {
 
     /**
      * Displays error messages.
-     * @param err
+     * @param err Error to show.
      */
     public void showError(Exception err) {
         display(err.getMessage());

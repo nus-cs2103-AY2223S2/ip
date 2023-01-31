@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * An error for when the date/times are formatted wrongly
+ * An error for when the date/times are formatted wrongly.
  */
 public class FormatException extends DukeException {
     public FormatException(String format) {
