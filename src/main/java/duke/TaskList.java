@@ -114,8 +114,6 @@ public class TaskList {
                     count++;
                 }
             }
-
-
         }
         else {
             Task task;
