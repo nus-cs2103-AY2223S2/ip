@@ -11,6 +11,14 @@ public class Event extends Task{
         this.to = to;
     }
 
+    public LocalDate getFrom() {
+        return from;
+    }
+
+    public LocalDate getTo() {
+        return to;
+    }
+
     public String toString() {
         return super.toString() +
                 String.format("[from: %s to: %s]", this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy")),

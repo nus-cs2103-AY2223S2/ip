@@ -8,6 +8,10 @@ public class Deadline extends Task {
         this.byWhen = byWhen;
     }
 
+    public LocalDate getByWhen() {
+        return byWhen;
+    }
+
     public String toString() {
         return super.toString() + String.format("[by %s]", this.byWhen.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
