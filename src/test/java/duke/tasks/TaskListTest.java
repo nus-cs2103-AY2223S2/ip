@@ -7,7 +7,7 @@ import duke.tasks.Event;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
 
-class TaskListTest {  
+class TaskListTest {
     private static TaskList testList;
 
     public void initTestList() {
@@ -21,7 +21,7 @@ class TaskListTest {
         }
     }
 
-    @Test 
+    @Test
     public void testStringConversion() {
         initTestList();
 
@@ -41,13 +41,13 @@ class TaskListTest {
         String findKeyword = "book";
         assertEquals(testList.get(3), testList.find(findKeyword).get(0));
         assertEquals(testList.get(4), testList.find(findKeyword).get(1));
-    } 
+    }
 
-    @Test 
+    @Test
     public void testCountTasks() {
         initTestList();
 
         assertEquals(5, testList.countTasks());
     }
-    
+
 }

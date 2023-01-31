@@ -45,7 +45,7 @@ public enum CommandInput {
         switch (commandInput) {
         case LIST:
             return new ListCmd(tasks, Ui.getLine());
-        case MARK:  
+        case MARK:
             return new MarkCmd(tasks, Ui.getLine());
         case UNMARK:
             return new UnmarkCmd(tasks, Ui.getLine());

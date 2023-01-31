@@ -9,10 +9,10 @@ public class UnrecognizedCmd extends Command {
         super(taskList, lineInput);
     }
 
-    public void execute() throws CommandExecutionError { 
+    public void execute() throws CommandExecutionError {
         uiReply();
     };
-    
+
     // Acknowlege on UI that command is not recognized.
     public void uiReply() {
         Ui.displayMsg("OOPS!!! I'm sorry, but I don't know what that means :-(");

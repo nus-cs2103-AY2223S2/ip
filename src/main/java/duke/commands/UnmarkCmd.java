@@ -8,9 +8,9 @@ import duke.tasks.TaskList;
 
 /**
  * Command class for 'unmark' command keyword.
- * Change status of a task to incomplete, at a specified index 
+ * Change status of a task to incomplete, at a specified index
  * <p>
- * Command format: "unmark <list_index>"
+ * Command format: "unmark &lt;list_index&gt;"
  */
 public class UnmarkCmd extends Command {
     private int index;

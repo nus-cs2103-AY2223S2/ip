@@ -10,7 +10,8 @@ public class CommandExecutionError extends Exception {
         super(errorMessage);
     }
 
-    /** Craft string representation of the exception. 
+    /**
+     * Craft string representation of the exception.
      * @return String representation of exception, without its class name
      */
     @Override

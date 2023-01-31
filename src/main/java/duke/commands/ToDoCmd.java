@@ -10,7 +10,7 @@ import duke.tasks.ToDo;
  * Command class for 'todo' command keyword.
  * Creates a new ToDo task and adds it to the task list.
  * <p>
- * Command format: "todo <task_name>"
+ * Command format: "todo &lt;task_name&gt;"
  */
 public class ToDoCmd extends Command {
     private Task toDo;
@@ -33,7 +33,7 @@ public class ToDoCmd extends Command {
 
     // Acknowlege on UI that the Deadline task has been added.
     public void uiReply() {
-        Ui.displayMsg("Got it. I've added this task:\n" 
+        Ui.displayMsg("Got it. I've added this task:\n"
                 + Ui.indentString(this.toDo.toString(), 1)
                 + "\n" + Ui.numTaskToString(taskList.countTasks()));
     };

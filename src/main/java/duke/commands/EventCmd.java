@@ -12,7 +12,7 @@ import duke.tasks.TaskList;
  * Creates a new Event task and adds it to the task list.
  * Command input must be accompanied by a '/from' & '/to' keyword to indicate the start/end dates of the task.
  * <p>
- * Command format: "event <task_name> /from <start_date> /by <end_date>"
+ * Command format: "event &lt;task_name&gt; /from &lt;start_date&gt; /by &lt;end_date&gt;"
  */
 public class EventCmd extends Command {
     private Task event;
@@ -32,7 +32,7 @@ public class EventCmd extends Command {
         taskList.add(this.event);
         uiReply();
     };
-    
+
     // Acknowlege on UI that the Deadline task has been added.
     public void uiReply() {
         Ui.displayMsg("Got it. I've added this task:\n"

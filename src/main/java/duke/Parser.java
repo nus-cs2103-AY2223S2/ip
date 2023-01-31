@@ -188,7 +188,7 @@ class ParsedLoadedTask {
     private String fromDate;
     private String toDate;
 
-    public ParsedLoadedTask(char taskType, String taskName, boolean isDone, 
+    public ParsedLoadedTask(char taskType, String taskName, boolean isDone,
             String dueDate, String fromDate, String toDate) {
         this.taskType = taskType;
         this.taskName = taskName;

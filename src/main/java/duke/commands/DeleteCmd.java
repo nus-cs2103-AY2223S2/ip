@@ -10,7 +10,7 @@ import duke.tasks.TaskList;
  * Command class for 'delete' keyword.
  * Deletes a task from the task list according to a specified index.
  * <p>
- * Command format: "delete <list_index>"
+ * Command format: "delete &lt;list_index&gt;"
  */
 public class DeleteCmd extends Command {
     private Task task;
@@ -22,7 +22,7 @@ public class DeleteCmd extends Command {
      */
     public DeleteCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
-    } 
+    }
 
     /** Deletes the specified task from the task list. */
     public void execute() throws CommandExecutionError {

@@ -31,7 +31,7 @@ public class Duke {
                 command.execute();
             } catch (CommandExecutionError e) {
                 Ui.displayMsg("Couldn't execute command :/ \n" + e.toString());
-            } 
+            }
             Ui.getNextCommand();
         }
     }

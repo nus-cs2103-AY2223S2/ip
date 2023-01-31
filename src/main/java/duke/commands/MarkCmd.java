@@ -10,7 +10,7 @@ import duke.tasks.TaskList;
  * Command class for 'mark' command keyword.
  * Marks a task at a specified index as completed.
  * <p>
- * Command format: "mark <list_index>"
+ * Command format: "mark &lt;list_index&gt;"
  */
 public class MarkCmd extends Command {
     private int index;

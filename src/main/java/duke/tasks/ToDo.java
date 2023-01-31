@@ -9,6 +9,15 @@ import duke.exceptions.TaskNameNotSpecified;
 public class ToDo extends Task {
 
     /**
+     * Constructor method.
+     * @param taskName Task name
+     * @param isDone Completion status of task
+     */
+    public ToDo(String taskName, boolean isDone) {
+        super(taskName, "T", isDone);
+    }
+
+    /**
      * Factory method.
      * @param commandInput Command line input that the user entered.
      * @return New ToDo task
@@ -20,15 +29,6 @@ public class ToDo extends Task {
         } catch (StringIndexOutOfBoundsException e) {
             throw new TaskNameNotSpecified();
         }
-    }
-
-    /**
-     * Constructor method.
-     * @param taskName Task name    
-     * @param isDone Completion status of task
-     */
-    public ToDo(String taskName, boolean isDone) {
-        super(taskName, "T", isDone);
     }
 
     /**

@@ -10,7 +10,7 @@ import duke.tasks.TaskList;
  * Command format: "list"
  */
 public class ListCmd extends Command {
-    
+
     /**
      * Constructor method.
      * @param taskList Task list to output to UI
@@ -18,7 +18,7 @@ public class ListCmd extends Command {
      */
     public ListCmd(TaskList taskList, String lineInput) {
         super(taskList, lineInput);
-    } 
+    }
 
     // Executes UI reply
     public void execute() {
