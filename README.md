@@ -16,8 +16,8 @@ It's
 
 ## Features
 - [x] Managing todo
-- [ ] Managing deadlines
-- [ ] Managing events
+- [] Managing deadlines
+- [] Managing events
 
 This is the main function:
    ```ruby
