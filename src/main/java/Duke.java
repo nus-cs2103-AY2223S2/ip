@@ -28,8 +28,8 @@ public class Duke {
     }
 
     /**
-     * a function that runs the program by repeatedly accepting user input and respond to them
-     * until the user wants to exit the program.
+     * a function that runs the program by repeatedly accepting user input and respond to them until
+     * the user wants to exit the program.
      */
     public void run() {
         ui.welcome();

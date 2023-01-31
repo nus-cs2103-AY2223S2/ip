@@ -17,6 +17,9 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 *.class
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 Dukeold.java
 >>>>>>> A-CodingStandard
+=======
+>>>>>>> branch-Level-9

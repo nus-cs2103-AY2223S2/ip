@@ -32,10 +32,11 @@ public class Storage {
     }
 
     /**
-     * a method that loads the local tasks into the TaskList if they exist.
-     * prints customised messages if the file and/or folder does not exist, and create them accordingly
-     * @return an empty ArrayList<Task> if no local tasks are found, or an ArrayList<Task> containing all
-     * local tasks if they are found.
+     * a method that loads the local tasks into the TaskList if they exist. prints customised
+     * messages if the file and/or folder does not exist, and create them accordingly
+     * 
+     * @return an empty ArrayList<Task> if no local tasks are found, or an ArrayList<Task>
+     *         containing all local tasks if they are found.
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> defaultTasks = new ArrayList<>();
@@ -78,7 +79,6 @@ public class Storage {
      * @return an ArrayList<Task> containing all local tasks
      * @throws FileNotFoundException if the local file is not found.
      */
-
     private static ArrayList<Task> loadDefaultTasks(ArrayList<Task> tasks, File file)
             throws FileNotFoundException {
         Scanner s = new Scanner(file);

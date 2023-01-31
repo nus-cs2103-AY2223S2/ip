@@ -6,10 +6,9 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * A TaskList stores all tasks temporarily for easy access of the tasks
- * while the program is running. It behaves like an ArrayList of Tasks but
- * supports more functions such as updating tasks and formatting itself to be
- * saved to the local hard disk.
+ * A TaskList stores all tasks temporarily for easy access of the tasks while the program is
+ * running. It behaves like an ArrayList of Tasks but supports more functions such as updating tasks
+ * and formatting itself to be saved to the local hard disk.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
