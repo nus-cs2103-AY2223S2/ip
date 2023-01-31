@@ -40,6 +40,9 @@ public class Duke extends Application {
             System.err.println(e.getMessage());
             System.exit(1);
         }
+        DukeEventLoop loop = DukeEventLoop.createInitializingLoop();
+        loop.run();
+        return DukeEventLoop.createEventLoop(target);
     }
 
     /**
@@ -74,12 +77,12 @@ public class Duke extends Application {
                 TaskManagerUsecase.class,
                 () -> new TaskManagerUsecase(
                         Singletons.get(DummyWritable.class),
-                        Singletons.get(SystemErr.class),
+                        target,
                         Singletons.get(DataSaver.class))
         );
         Singletons.registerLazySingleton(
                 UnknownCommandUsecase.class,
-                () -> new UnknownCommandUsecase(Singletons.get(SystemErr.class))
+                () -> new UnknownCommandUsecase(target)
         );
         Singletons.registerLazySingleton(
                 TokenUtilities.class,
@@ -96,7 +99,8 @@ public class Duke extends Application {
             Scene scene = new Scene(ap);
             primaryStage.setScene(scene);
             MainWindow window = fxmlLoader.getController();
-            window.setDukeEventLoop(Singletons.get(DukeEventLoop.class));
+            final DukeEventLoop loop = initOrCrash(window);
+            window.setDukeEventLoop(loop);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (Exception e) {

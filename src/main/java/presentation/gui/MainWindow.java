@@ -1,5 +1,6 @@
 package presentation.gui;
 
+import domain.entities.core.ExitStatus;
 import domain.entities.core.Writable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -35,24 +36,22 @@ public class MainWindow extends AnchorPane implements Writable {
     public void initialize() {
     }
 
-    private void write(String message) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(message,
-                dukeImage));
-    }
-
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input,
                 userImage));
-        dukeEventLoop.runOnce();
+        final ExitStatus result = dukeEventLoop.runWithCommand(input);
+        if (result == ExitStatus.terminate) {
+            System.exit(0);
+        }
         userInput.clear();
     }
 
     @Override
     public void writeln(Object content) {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog
-                (content.toString(), userImage));
+                (content.toString(), dukeImage));
     }
 
     @Override

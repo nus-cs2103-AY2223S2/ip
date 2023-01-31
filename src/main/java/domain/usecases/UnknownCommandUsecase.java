@@ -28,7 +28,7 @@ public class UnknownCommandUsecase implements Commandable, CommandRegisterable {
 
     @Override
     public ExitStatus execute(String[] tokens) {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that " +
+        writable.writeln("☹ OOPS!!! I'm sorry, but I don't know what that " +
                 "means :-(");
         return ExitStatus.finishCurrentIteration;
     }

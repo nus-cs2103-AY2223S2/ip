@@ -34,7 +34,7 @@ public class TaskManagerUsecase implements CommandRegisterable {
     /**
      * The writable for writing errors.
      */
-    private final Writable errorWritable;
+    private Writable errorWritable;
     /**
      * The writable that this manager writes to.
      */
@@ -347,5 +347,14 @@ public class TaskManagerUsecase implements CommandRegisterable {
      */
     public void redirectOutput(Writable writable) {
         this.writable = writable;
+    }
+
+    /**
+     * Redirects the error output of this class to the given writable.
+     *
+     * @param writable the writable for this class.
+     */
+    public void redirectErrorOutput(Writable writable) {
+        this.errorWritable = writable;
     }
 }
