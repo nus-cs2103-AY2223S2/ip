@@ -11,7 +11,18 @@ import task.Todo;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * Handles input cases by the user.
+ */
 public class Parser {
+
+    /**
+     * Handles inputs, and outputs the according string.
+     *
+     * @param sc Scans the inputs of the user.
+     * @param tasks Stores the Tasks objects into
+     * @param pw Writes to the screen for the user to comprehend.
+     */
     public static void handleInputs(Scanner sc, TaskList tasks, PrintWriter pw) {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
