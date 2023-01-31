@@ -23,6 +23,6 @@ abstract public class Task {
         this.checked = checked;
     }
 
-    abstract public String storeTaskString();
+    abstract public String getStoreTaskString();
     abstract public String getTaskType();
 }

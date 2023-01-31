@@ -23,7 +23,7 @@ public class ToDo extends Task {
         return "T";
     }
     @Override
-    public String storeTaskString() {
+    public String getStoreTaskString() {
         return this.getTaskType() + " | " + this.getCheckedString() + " | " + this.getStr();
     }
     @Override

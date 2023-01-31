@@ -34,7 +34,7 @@ public class DeadLine extends Task {
     }
 
     @Override
-    public String storeTaskString() {
+    public String getStoreTaskString() {
         return this.getTaskType() + " | " + this.getCheckedString() + " | " + this.getStr() + " | " + this.getDateTime();
     }
 

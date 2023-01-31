@@ -44,7 +44,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String storeTaskString() {
+    public String getStoreTaskString() {
         return this.getTaskType() + " | " + this.getCheckedString() + " | " + this.getStr() + " | " + this.getStart() + " | " + this.getEnd();
     }
 
