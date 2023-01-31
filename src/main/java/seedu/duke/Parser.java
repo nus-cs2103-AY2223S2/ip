@@ -38,7 +38,7 @@ public class Parser {
      */
     public String checkDescription(String str, String task) throws DukeException {
         if (str.equals("")) {
-            String message = "☹ OOPS!!! The description of a " + task + " cannot be empty.";
+            String message = "OOPS!!! The description of a " + task + " cannot be empty.";
             throw new DukeException(message);
         }
         return str;
@@ -56,7 +56,7 @@ public class Parser {
      */
     public String checkTime(String str, String task, String type) throws DukeException {
         if (str.equals("")) {
-            String message = "☹ OOPS!!! The /" + type + " part of a " + task + " cannot be empty.";
+            String message = "OOPS!!! The /" + type + " part of a " + task + " cannot be empty.";
             throw new DukeException(message);
         }
         return str;
@@ -78,8 +78,7 @@ public class Parser {
             }
         }
         if (flag) {
-            String message = "____________________________________________________________\n"
-                    + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
             throw new DukeException(message);
         }
         return Duke.Commands.valueOf(command);
