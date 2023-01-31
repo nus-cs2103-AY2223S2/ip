@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a task that should be completed, with no time constraints.
+ */
 public class ToDo extends Task {
 
     public ToDo(String description) {

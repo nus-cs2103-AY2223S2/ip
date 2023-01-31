@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task with the description of the task and
+ * the status of the task - whether it is done.
+ */
 public abstract class Task {
 
     protected final String description;

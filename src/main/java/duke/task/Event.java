@@ -2,6 +2,10 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents an event - a task with specific start and end
+ * dates and times.
+ */
 public class Event extends Task {
 
     private final LocalDateTime from;
