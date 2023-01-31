@@ -1,12 +1,17 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 
 public class Duke {
     public static ArrayList<Task> todos = new ArrayList<>();
+    public static File dir = new File("./data/");
+    public static File file = new File("./data/todo_list.txt");
 
     public static class Task {
         protected String description;
@@ -93,10 +98,10 @@ public class Duke {
         }
     }
 
+
     public static String parse_date(String s) {
         DateTimeFormatter read_fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         DateTimeFormatter print_fmt = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        
         try {
             LocalDate lt = LocalDate.parse(s, read_fmt);
             return lt.format(print_fmt);
@@ -104,6 +109,33 @@ public class Duke {
             print(e.toString());
         }
         return s;
+    }
+
+    public static void save_to_file() {
+        try {
+            if (!dir.exists()){
+                while (!dir.mkdirs()) {
+                    print(dir.getName() + " created\n");
+                }
+            }
+
+            if (file.createNewFile()) {
+                print(file.getName() + " created\n");
+            }
+
+            FileWriter fw = new FileWriter(file, false);
+            if (todos.isEmpty()) {
+                return;
+            } else {
+                for (Task t : todos) {
+                    String desc = t.toString() + "\n";
+                    fw.write(desc);
+                }
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
     }
 
     public static void process_input(String input) throws DukeCommandNotFoundException, DukeEmptyTaskException {
@@ -219,6 +251,7 @@ public class Duke {
             default:
                 throw new DukeCommandNotFoundException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+        save_to_file();
     }
 
     public static void main(String[] args) {
