@@ -5,59 +5,8 @@ package duke.tasks;
  * the task
  */
 public abstract class ITask {
-    /**
-     * TaskTypes represent different type of task
-     */
-    public enum TaskTypes {
-        ToDos,
-        Deadlines,
-        Events,
-        Find,
-        Unknown
-
-    }
-
-    public boolean descriptionContain(String keyword) {
-        return description.contains(keyword);
-    }
-
-
-    /**
-     * To Convert String command to enum TaskTypes
-     *
-     * @param cmd String command
-     */
-    public static ITask.TaskTypes convertTaskTypeCmdToEnum(String cmd) {
-        switch (cmd) {
-            case "todo":
-                return TaskTypes.ToDos;
-            case "deadline":
-                return TaskTypes.Deadlines;
-            case "event":
-                return TaskTypes.Events;
-            case "find":
-                return TaskTypes.Find;
-        }
-        return TaskTypes.Unknown;
-    }
-
 
     private final String description;
-
-    /**
-     * To mark the task as done
-     */
-    public void markAsDone() {
-        isDone = true;
-    }
-
-    /**
-     * To mark the task as undone
-     */
-    public void markAsUnDone() {
-        isDone = false;
-    }
-
     private boolean isDone;
 
     /**
@@ -82,9 +31,62 @@ public abstract class ITask {
     }
 
     /**
+     * TaskTypes represent different type of task
+     */
+    public enum TaskTypes {
+        ToDos,
+        Deadlines,
+        Events,
+        Find,
+        Unknown
+
+    }
+
+    public boolean descriptionContain(String keyword) {
+        return description.contains(keyword);
+    }
+
+
+    /**
+     * To Convert String command to enum TaskTypes
+     *
+     * @param cmd String command
+     */
+    public static ITask.TaskTypes convertTaskTypeCmdToEnum(String cmd) {
+        switch (cmd) {
+        case "todo":
+            return TaskTypes.ToDos;
+        case "deadline":
+            return TaskTypes.Deadlines;
+        case "event":
+            return TaskTypes.Events;
+        case "find":
+            return TaskTypes.Find;
+        default: return TaskTypes.Unknown;
+        }
+    }
+
+
+
+    /**
+     * To mark the task as done
+     */
+    public void markAsDone() {
+        isDone = true;
+    }
+
+    /**
+     * To mark the task as undone
+     */
+    public void markAsUnDone() {
+        isDone = false;
+    }
+
+
+    /**
      * To convert the task into string for export the local file
      */
-    abstract public String toSaveFormat();
+    public abstract String toSaveFormat();
 
     /**
      * To convert the task status to a String icon representation

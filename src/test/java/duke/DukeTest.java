@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 
 public class DukeTest {
     @Test
-    public void dummyTest(){
+    public void dummyTest() {
         Assertions.assertEquals(2, 2);
     }
 
     @Test
-    public void anotherDummyTest(){
+    public void anotherDummyTest() {
         Assertions.assertEquals(4, 4);
     }
 }

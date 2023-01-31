@@ -1,9 +1,10 @@
 package duke.tasks;
 
 
+import java.util.Date;
+
 import duke.utilities.Parser;
 
-import java.util.Date;
 /**
  * Represents Event task. A <code>Event</code> class corresponds to
  * the event task
@@ -13,11 +14,27 @@ public class Event extends ITask {
     private final Date from;
     private final Date to;
 
+    /**
+     * Constructor for Deadline
+     *
+     * @param description for task
+     * @param from        date
+     * @param to          date
+     */
     public Event(String description, Date from, Date to) {
         super(description);
         this.from = from;
         this.to = to;
     }
+
+    /**
+     * Constructor for Deadline
+     *
+     * @param description for task
+     * @param from        date
+     * @param to          date
+     * @param isDone      status
+     */
     public Event(String description, Date from, Date to, boolean isDone) {
         super(description, isDone);
         this.from = from;

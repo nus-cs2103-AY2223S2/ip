@@ -12,3 +12,4 @@ public class IncompleteCommandException extends DukeException {
         super("☹ OOPS!!! The " + errorMessage + " cannot be empty from your command");
     }
 }
+

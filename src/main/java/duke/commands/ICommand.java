@@ -7,13 +7,10 @@ import duke.utilities.Parser;
  * the action to execute
  */
 public abstract class ICommand {
-    public Parser getParser() {
-        return _parser;
-    }
 
-    private String _msg = "Starting Command";
+    private String msg = "Starting Command";
 
-    private final Parser _parser;
+    private final Parser parser;
 
     /**
      * To create a ICommand object which manipulate the task
@@ -21,7 +18,11 @@ public abstract class ICommand {
      * @param parser in-charge to convert user input to valid program input command
      */
     public ICommand(Parser parser) {
-        this._parser = parser;
+        this.parser = parser;
+    }
+
+    public Parser getParser() {
+        return parser;
     }
 
     /**
@@ -32,10 +33,10 @@ public abstract class ICommand {
     public abstract boolean run() throws DukeException;
 
     public String getMsg() {
-        return _msg;
+        return msg;
     }
 
-    public void setMsg(String _msg) {
-        this._msg = _msg;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

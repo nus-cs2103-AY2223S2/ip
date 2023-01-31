@@ -1,11 +1,7 @@
 package duke.utilities;
 
-import duke.exceptions.DukeException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.ITask;
-import duke.tasks.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,8 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ITask;
+import duke.tasks.Todo;
 
 class StorageTest {
 
@@ -31,8 +32,10 @@ class StorageTest {
 
     private void generateSampleTasks(ArrayList<ITask> expected) {
         ITask todo = new Todo("x", false);
-        ITask deadline = new Deadline("return book", new Date(Long.parseLong("1575280800000")), true);
-        ITask event = new Event("buy burger", new Date(Long.parseLong("1575280800000")), new Date(Long.parseLong("1575291600000")), false);
+        ITask deadline = new Deadline("return book",
+                new Date(Long.parseLong("1575280800000")), true);
+        ITask event = new Event("buy burger", new Date(Long.parseLong("1575280800000")),
+                new Date(Long.parseLong("1575291600000")), false);
         expected.add(todo);
         expected.add(deadline);
         expected.add(event);

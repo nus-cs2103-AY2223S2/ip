@@ -1,16 +1,17 @@
 package duke.utilities;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.tasks.ITask;
 
-import java.util.ArrayList;
 /**
  * Represents a manager to handle all tasks. A <code>TaskManager</code> object corresponds to
  * a manager handle all task
  */
 public class TaskManager {
-    private ArrayList<ITask> _tasks;
-    private final Storage _storage;
+    private ArrayList<ITask> tasks;
+    private final Storage storage;
 
     /**
      * Constructor for TaskManager
@@ -18,12 +19,13 @@ public class TaskManager {
      * @param filePath the path to local database file
      */
     public TaskManager(String filePath) {
-        _tasks = new ArrayList<>();
-        _storage = new Storage(filePath);
+        tasks = new ArrayList<>();
+        storage = new Storage(filePath);
     }
+
     @SuppressWarnings("SuspiciousMethodCalls")
-    public int getObjectIndex(Object obj){
-        return _tasks.indexOf(obj);
+    public int getObjectIndex(Object obj) {
+        return tasks.indexOf(obj);
     }
 
 
@@ -33,25 +35,25 @@ public class TaskManager {
      * @throws DukeException IF error occur during loading of task.
      */
     public void load() throws DukeException {
-        _tasks = _storage.load();
+        tasks = storage.load();
     }
 
     /**
      * Return all tasks
      */
     public ArrayList<ITask> getTasks() {
-        return _tasks;
+        return tasks;
     }
 
     public Object[] find(String keyword) {
-        return _tasks.stream().filter(x -> x.descriptionContain(keyword)).toArray();
+        return tasks.stream().filter(x -> x.descriptionContain(keyword)).toArray();
     }
 
     /**
      * Return the size of task
      */
     public int size() {
-        return _tasks.size();
+        return tasks.size();
     }
 
     /**
@@ -60,8 +62,8 @@ public class TaskManager {
      * @param index the index of task to be remove
      */
     public ITask remove(int index) throws DukeException {
-        ITask task = _tasks.remove(index);
-        _storage.saveAll(_tasks);
+        ITask task = tasks.remove(index);
+        storage.saveAll(tasks);
         return task;
     }
 
@@ -71,8 +73,8 @@ public class TaskManager {
      * @param task the task to be added to the task list
      */
     public void add(ITask task) throws DukeException {
-        _tasks.add(task);
-        _storage.saveAll(_tasks);
+        tasks.add(task);
+        storage.saveAll(tasks);
     }
 
     /**
@@ -82,13 +84,13 @@ public class TaskManager {
      * @param isDone status of task
      */
     public ITask mark(int index, boolean isDone) throws DukeException {
-        ITask task = _tasks.get(index);
+        ITask task = tasks.get(index);
         if (isDone) {
             task.markAsDone();
         } else {
             task.markAsUnDone();
         }
-        _storage.saveAll(_tasks);
+        storage.saveAll(tasks);
 
         return task;
     }

@@ -1,4 +1,5 @@
 package duke.tasks;
+
 /**
  * Represents todo task. A <code>Todo</code> class corresponds to
  * the todo task

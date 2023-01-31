@@ -3,9 +3,11 @@ package duke.commands;
 import duke.exceptions.DukeException;
 import duke.utilities.Parser;
 
-
-
-public class Find extends ICommand{
+/**
+ * Represents Find action command. A <code>Find</code> object corresponds to
+ * the action find from a task
+ */
+public class Find extends ICommand {
     public Find(Parser parser) {
         super(parser);
     }
@@ -13,11 +15,12 @@ public class Find extends ICommand{
     @Override
     public boolean run() throws DukeException {
         getParser().forFind();
-        Object[] tasks =  getParser().getTaskManager().find(getParser().getDescription());
-        StringBuilder result = new StringBuilder(); // Arrays.stream(tasks).map(x -> getParser().getTaskManager().getObjectIndex(x));
+        Object[] tasks = getParser().getTaskManager().find(getParser().getDescription());
+        StringBuilder result = new StringBuilder();
         for (Object task : tasks) {
-             result.append(getParser().getTaskManager().getObjectIndex(task)).append(1).append(".").append(task.toString());
-             result.append("\n");
+            result.append(getParser().getTaskManager().getObjectIndex(task))
+                    .append(1).append(".").append(task.toString());
+            result.append("\n");
         }
         setMsg(result.toString());
         return false;

@@ -38,7 +38,7 @@ public class Duke {
             try {
                 ICommand cmd = ui.readCommand(taskManger);
                 isDone = cmd.run();
-                ui.Speak(cmd.getMsg());
+                ui.speak(cmd.getMsg());
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
