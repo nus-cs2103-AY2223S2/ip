@@ -1,6 +1,5 @@
 package Ava.Tasks;
 
-
 public class Task {
     protected String message;
     protected boolean marked = false;

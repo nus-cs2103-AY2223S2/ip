@@ -1,6 +1,5 @@
 package Ava.Commands;
 
-
 import Ava.Exceptions.AvaException;
 import Ava.Exceptions.NonExistentTask;
 import Ava.Storage;
@@ -10,23 +9,23 @@ import Ava.Tasks.Task;
 import static java.lang.Character.isDigit;
 
 /**
- * Marks Task
+ * Unmarks Task
  */
-public class MarkTask implements AvaCommand {
+public class UnmarkTask implements AvaCommand {
     String[] parsedInput;
     Task changedTask;
-    private final static String MESSAGE = "Yayy! One more task done:";
+    private final static String MESSAGE = "Ahh! More work to be done on this task:";
 
     /**
-     * MarkTask Contructor
+     * UnmarkTask Contructor
      * @param parsedInput string array of the index of the task to be marked.
      */
-    public MarkTask(String[] parsedInput) {
+    public UnmarkTask(String[] parsedInput){
         this.parsedInput = parsedInput;
     }
 
     /**
-     * Retreive marked task
+     * Retreive unmarked task
      * @param t a TaskList object
      * @param s a Storage object
      * @return true indicate program running
@@ -34,11 +33,10 @@ public class MarkTask implements AvaCommand {
      */
     @Override
     public boolean run(TaskList t, Storage s) throws AvaException {
-        this.changedTask = t.mark(Integer.valueOf(this.parsedInput[0]));
+        this.changedTask = t.unmark(Integer.valueOf(this.parsedInput[0]));
         t.updateStorage(s);
         return true;
     }
-
 
     /**
      * @param formatSpace identation required by the UI

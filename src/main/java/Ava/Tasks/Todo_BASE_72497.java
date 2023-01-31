@@ -1,6 +1,5 @@
 package Ava.Tasks;
 
-
 /**
  * Todo class extends Task
  **/

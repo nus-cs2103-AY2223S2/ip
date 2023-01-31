@@ -1,6 +1,6 @@
 package Ava;
-
 import Ava.Exceptions.AvaException;
+import Ava.Exceptions.CommandNotFoundException;
 import Ava.Exceptions.NonExistentTask;
 import Ava.Tasks.Deadline;
 import Ava.Tasks.Event;

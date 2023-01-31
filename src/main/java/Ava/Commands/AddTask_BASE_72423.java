@@ -1,5 +1,4 @@
 package Ava.Commands;
-
 import Ava.Ava.TASK_TYPE;
 import Ava.Exceptions.AvaException;
 import Ava.Exceptions.CommandNotFoundException;
