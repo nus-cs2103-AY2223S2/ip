@@ -1,8 +1,15 @@
+<<<<<<< HEAD
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import tasks.Task;
+=======
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import tasks.*;
+>>>>>>> branch-level-8
 
 public class Duke {
     
@@ -55,6 +62,30 @@ public class Duke {
         }
 
         switch(job) {
+<<<<<<< HEAD
+        case LIST:
+            Task.listTasks();
+            break;
+        case MARK:
+            Task.markTasks(Integer.parseInt(commands[1])-1);
+            break;
+        case UNMARK:
+            Task.unmarkTasks(Integer.parseInt(commands[1])-1);
+            break;
+        case DELETE:
+            Task.deleteTask(Integer.parseInt(commands[1])-1);
+            break;
+        default:
+            String taskName = "";
+            for (int i = 1; i < commands.length; i++) {
+                taskName += commands[i] + " ";
+            }
+            try {
+                Task.addTask(commands[0], taskName);
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
+=======
             case LIST:
                 Task.listTasks();
                 break;
@@ -84,8 +115,14 @@ public class Duke {
                 } catch(Exception e) {
                     System.out.println(e.getMessage());
                 }
+>>>>>>> branch-level-8
         }
         System.out.println("\n----------------------------------\n");
+        try {
+            Task.save();
+        } catch (IOException e) { // should not encounter this.
+            System.out.println(e.getMessage());
+        }
     }
 
 }

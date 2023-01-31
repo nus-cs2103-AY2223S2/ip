@@ -1,11 +1,24 @@
 package tasks;
 
+import exceptions.NoTaskDescriptionException;
+import exceptions.UnknownTaskException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import exceptions.UnknownTaskException;
-import exceptions.NoTaskDescriptionException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+// import parsing.ParseDate;
+
+/**
+ * This class represents a Generic Task which could be a Todo, Deadline or Event Task
+ */
 public class Task {
     private static ArrayList<Task> arr = new ArrayList<>();
     private static int curr = 0;
@@ -125,7 +138,51 @@ public class Task {
         return this.isChecked ? "[X]" : "[ ]";
     }
 
-    protected String TasktoString() {
+    /** 
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
         return markToString() + " " + this.name;
     }
+
+    protected String stringifyTaskToSave() {
+        return this.isChecked.toString() + "|" + this.name;
+    }
+
+    /**
+     * Saves the most updated list into a txt file
+     * 
+     * @throws IOException
+     */
+    public static void save() throws IOException {
+        String home = System.getProperty("user.home");
+        Path path = Paths.get(home, "DataDuke");
+        File file = Paths.get(path.toString(), "Data.txt").toFile();
+
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+                
+            } catch (IOException e) {
+                System.out.println("Unable to write to " + path.toString());
+            }
+        }
+        
+        PrintStream stream;
+        try { 
+            stream = new PrintStream(file.toString());
+        } catch (FileNotFoundException e) {
+                Files.createDirectories(path);
+                stream = new PrintStream(file.toString());
+        } 
+
+
+        for (int i = 0; i < curr; i++) {
+            stream.println(arr.get(i).stringifyTaskToSave());
+        }
+
+        stream.close();
+    }
+
 }

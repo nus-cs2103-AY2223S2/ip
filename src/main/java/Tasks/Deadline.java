@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import exceptions.NoTaskDescriptionException;
 import parsing.ParsedDate;
 
+/**
+ * This class represents a Deadline Task to be done, with a deadline
+ */
 public class Deadline extends Task {
     private ParsedDate endDate;
 
@@ -23,8 +26,16 @@ public class Deadline extends Task {
         return this.endDate.isEqualDate(date);
     }
 
+    /** 
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "[D] " + this.TasktoString() + " ( by: " + this.endDate + " )";
+        return "[D] " + super.toString() + " ( by: " + this.endDate + " )";
+    }
+
+    @Override
+    protected String stringifyTaskToSave() {
+        return "D|" + super.stringifyTaskToSave() + "|" + this.endDate;
     }
 }
