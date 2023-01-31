@@ -1,0 +1,6 @@
+[T] [_] hi
+[D] [X] hii by: 1
+[E] [X] hii from: 1 to: 2
+[T] [X] hiii
+[T] [_] hiiii
+[T] [_] hiiiii
