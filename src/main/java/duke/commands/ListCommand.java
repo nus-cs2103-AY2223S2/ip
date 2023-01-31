@@ -14,7 +14,7 @@ public class ListCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showToUser("Here are the tasks in your list:");
+        ui.showToUser("Here are the tasks in your list: ");
         ArrayList<Task> userTasks = tasks.getTasks();
         for (int i = 1; i <= userTasks.size(); i++) {
             ui.showToUser(i + "." + userTasks.get(i - 1).toString() + "\n");
