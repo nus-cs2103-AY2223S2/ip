@@ -52,13 +52,14 @@ public class TaskList {
         try {
             tasks.get(taskNumber - 1).mark();
         } catch (Exception e) {
-            throw new DukeException("duke.task.Task does not exist, current number of tasks: " + tasks.size());
+            throw new DukeException(
+                    "duke.task.Task does not exist, current number of tasks: " + tasks.size());
         }
         return tasks.get(taskNumber - 1);
     }
 
     /**
-     * Similar to mark, unmark marks a Task as "not done".
+     * Similar to mark, unmark marks a Task as "not done"
      * @param taskNumber the number of the Task to be unmarked
      * @return the updated Task
      * @throws DukeException if the user wants to unmark a Task that does not exist
@@ -67,13 +68,34 @@ public class TaskList {
         try {
             tasks.get(taskNumber - 1).unmark();
         } catch (Exception e) {
-            throw new DukeException("duke.task.Task does not exist, current number of tasks: " + tasks.size());
+            throw new DukeException(
+                    "duke.task.Task does not exist, current number of tasks: " + tasks.size());
         }
         return tasks.get(taskNumber - 1);
     }
 
+
+    public String find(String searchLine) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.toString().contains(searchLine)) {
+                foundTasks.add(task);
+            }
+        }
+        if (foundTasks.size() == 0) {
+            return "No related tasks found";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Found related tasks:\n");
+        for (int i = 1; i <= foundTasks.size(); i++) {
+            sb.append("    " + i + ". " + foundTasks.get(i - 1) + "\n");
+        }
+        return sb.toString();
+    }
+
     /**
      * a method that removes a Task from the list
+     * 
      * @param taskNumber the number of the Task to be removed
      * @return the removed Task
      * @throws DukeException if the user wants to remove a task that does not exist
@@ -82,7 +104,8 @@ public class TaskList {
         try {
             return tasks.remove(taskNumber - 1);
         } catch (Exception e) {
-            throw new DukeException("duke.task.Task does not exist, current number of tasks: " + tasks.size());
+            throw new DukeException(
+                    "duke.task.Task does not exist, current number of tasks: " + tasks.size());
         }
     }
     public String find(String searchLine) {

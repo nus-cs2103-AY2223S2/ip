@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.2">
+<file name="/Users/niuboqian/ip/src/main/java/Duke.java">
+<error line="1" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+<error line="8" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="13" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="24" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/AddCommand.java">
+<error line="1" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+<error line="3" column="1" severity="error" message="Redundant import from the same package - duke.command.Command." source="com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"/>
+<error line="9" column="1" severity="error" message="Import statement for &apos;java.io.IOException&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="11" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="18" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/ByeCommand.java">
+<error line="3" column="1" severity="error" message="Redundant import from the same package - duke.command.Command." source="com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"/>
+<error line="8" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/Command.java">
+<error line="1" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+<error line="7" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/DeleteCommand.java">
+<error line="1" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+<error line="3" column="1" severity="error" message="Redundant import from the same package - duke.command.Command." source="com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"/>
+<error line="9" column="1" severity="error" message="Import statement for &apos;java.io.IOException&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="11" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="17" severity="error" message="Line matches the illegal pattern &apos;Trailing whitespace&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+<error line="18" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/ListCommand.java">
+<error line="7" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/MarkCommand.java">
+<error line="3" column="1" severity="error" message="Redundant import from the same package - duke.command.Command." source="com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"/>
+<error line="9" column="1" severity="error" message="Import statement for &apos;java.io.IOException&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="11" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="17" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/command/UnmarkCommand.java">
+<error line="3" column="1" severity="error" message="Redundant import from the same package - duke.command.Command." source="com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"/>
+<error line="9" column="1" severity="error" message="Import statement for &apos;java.io.IOException&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="11" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="17" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/commandtype/CommandType.java">
+<error line="1" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/dukeexception/DukeException.java">
+<error line="3" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="8" column="5" severity="error" message="Javadoc content should start from the next line after /**." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocContentLocationCheck"/>
+<error line="9" severity="error" message="Line matches the illegal pattern &apos;Trailing whitespace&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+<error line="10" severity="error" message="Javadoc comment at column 23 has parse error. Details: mismatched input &apos;:&apos; expecting &lt;EOF&gt; while parsing JAVADOC" source="com.puppycrawl.tools.checkstyle.checks.javadoc.AtclauseOrderCheck"/>
+<error line="10" column="8" severity="error" message="Unused @param tag for &apos;inputLine:&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="11" severity="error" message="Line matches the illegal pattern &apos;Trailing whitespace&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+<error line="23" severity="error" message="Line matches the illegal pattern &apos;Trailing whitespace&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/parser/Parser.java">
+<error line="2" column="20" severity="error" message="Using the &apos;.*&apos; form of import should be avoided - duke.command.*." source="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
+<error line="8" column="1" severity="error" message="Import statement for &apos;java.time.LocalDateTime&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="9" column="1" severity="error" message="Import statement for &apos;java.time.format.DateTimeFormatter&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="11" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="12" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="14" column="13" severity="error" message="Javadoc comment is placed in the wrong location." source="com.puppycrawl.tools.checkstyle.checks.javadoc.InvalidJavadocPositionCheck"/>
+<error line="21" column="25" severity="error" message="Array brackets at illegal position." source="com.puppycrawl.tools.checkstyle.checks.ArrayTypeStyleCheck"/>
+<error line="24" severity="error" message="Line matches the illegal pattern &apos;Trailing whitespace&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+<error line="31" column="13" severity="error" message="Block comment has incorrect indentation level 12, expected is 16, indentation should be the same level as line 34." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
+<error line="31" column="13" severity="error" message="Javadoc comment is placed in the wrong location." source="com.puppycrawl.tools.checkstyle.checks.javadoc.InvalidJavadocPositionCheck"/>
+<error line="37" column="13" severity="error" message="Block comment has incorrect indentation level 12, expected is 16, indentation should be the same level as line 40." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
+<error line="37" column="13" severity="error" message="Javadoc comment is placed in the wrong location." source="com.puppycrawl.tools.checkstyle.checks.javadoc.InvalidJavadocPositionCheck"/>
+<error line="43" column="13" severity="error" message="Block comment has incorrect indentation level 12, expected is 16, indentation should be the same level as line 46." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
+<error line="43" column="13" severity="error" message="Javadoc comment is placed in the wrong location." source="com.puppycrawl.tools.checkstyle.checks.javadoc.InvalidJavadocPositionCheck"/>
+<error line="50" column="13" severity="error" message="Block comment has incorrect indentation level 12, expected is 16, indentation should be the same level as line 53." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
+<error line="50" column="13" severity="error" message="Javadoc comment is placed in the wrong location." source="com.puppycrawl.tools.checkstyle.checks.javadoc.InvalidJavadocPositionCheck"/>
+<error line="57" column="13" severity="error" message="Block comment has incorrect indentation level 12, expected is 16, indentation should be the same level as line 60." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
+<error line="57" column="13" severity="error" message="Javadoc comment is placed in the wrong location." source="com.puppycrawl.tools.checkstyle.checks.javadoc.InvalidJavadocPositionCheck"/>
+<error line="63" column="13" severity="error" message="Block comment has incorrect indentation level 12, expected is 16, indentation should be the same level as line 66." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
+<error line="63" column="13" severity="error" message="Javadoc comment is placed in the wrong location." source="com.puppycrawl.tools.checkstyle.checks.javadoc.InvalidJavadocPositionCheck"/>
+<error line="71" column="13" severity="error" message="Javadoc comment is placed in the wrong location." source="com.puppycrawl.tools.checkstyle.checks.javadoc.InvalidJavadocPositionCheck"/>
+<error line="78" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="84" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="89" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="89" column="26" severity="error" message="Name &apos;TransformDateTime&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*(_[a-z][a-zA-Z0-9]+){0,2}$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.MethodNameCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/storage/Storage.java">
+<error line="10" column="1" severity="error" message="Import statement for &apos;java.io.File&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="11" column="1" severity="error" message="Import statement for &apos;java.io.FileNotFoundException&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="12" column="1" severity="error" message="Import statement for &apos;java.io.FileWriter&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="13" column="1" severity="error" message="Import statement for &apos;java.io.IOException&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="14" column="1" severity="error" message="Import statement for &apos;java.util.ArrayList&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="15" column="1" severity="error" message="Import statement for &apos;java.util.Scanner&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="17" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="21" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="26" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="29" severity="error" message="Line is longer than 120 characters (found 124)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="61" column="9" severity="error" message="&apos;while&apos; is not followed by whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="63" column="13" severity="error" message="switch without &quot;default&quot; clause." source="com.puppycrawl.tools.checkstyle.checks.coding.MissingSwitchDefaultCheck"/>
+<error line="64" column="17" severity="error" message="&apos;case&apos; child has incorrect indentation level 16, expected level should be 12." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="65" column="21" severity="error" message="&apos;block&apos; child has incorrect indentation level 20, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="66" column="21" severity="error" message="&apos;block&apos; child has incorrect indentation level 20, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="67" column="17" severity="error" message="&apos;case&apos; child has incorrect indentation level 16, expected level should be 12." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="68" column="21" severity="error" message="&apos;block&apos; child has incorrect indentation level 20, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="69" column="21" severity="error" message="&apos;block&apos; child has incorrect indentation level 20, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="70" column="17" severity="error" message="&apos;case&apos; child has incorrect indentation level 16, expected level should be 12." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="71" column="21" severity="error" message="&apos;block&apos; child has incorrect indentation level 20, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="72" column="21" severity="error" message="&apos;block&apos; child has incorrect indentation level 20, expected level should be 16." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="79" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/task/Deadline.java">
+<error line="1" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+<error line="5" column="1" severity="error" message="Import statement for &apos;java.time.LocalDateTime&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="14" severity="error" message="Javadoc comment at column 18 has parse error. Details: mismatched input &apos;:&apos; expecting &lt;EOF&gt; while parsing JAVADOC" source="com.puppycrawl.tools.checkstyle.checks.javadoc.AtclauseOrderCheck"/>
+<error line="36" severity="error" message="Line matches the illegal pattern &apos;Trailing whitespace&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/task/Event.java">
+<error line="5" column="1" severity="error" message="Import statement for &apos;java.time.LocalDateTime&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="7" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="10" column="5" severity="error" message="Javadoc content should start from the next line after /**." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocContentLocationCheck"/>
+<error line="11" severity="error" message="Line matches the illegal pattern &apos;Trailing whitespace&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+<error line="12" severity="error" message="Javadoc comment at column 18 has parse error. Details: mismatched input &apos;:&apos; expecting &lt;EOF&gt; while parsing JAVADOC" source="com.puppycrawl.tools.checkstyle.checks.javadoc.AtclauseOrderCheck"/>
+<error line="38" severity="error" message="Line matches the illegal pattern &apos;Trailing whitespace&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+<error line="40" severity="error" message="Line is longer than 120 characters (found 148)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/task/Task.java">
+<error line="1" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+<error line="3" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="5" severity="error" message="Javadoc comment at column 18 has parse error. Details: mismatched input &apos;:&apos; expecting &lt;EOF&gt; while parsing JAVADOC" source="com.puppycrawl.tools.checkstyle.checks.javadoc.AtclauseOrderCheck"/>
+<error line="11" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="27" severity="error" message="Unused Javadoc tag." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="34" severity="error" message="Unused Javadoc tag." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/task/Todo.java">
+<error line="1" severity="error" message="File does not end with a newline." source="com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"/>
+<error line="3" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="4" column="5" severity="error" message="Javadoc content should start from the next line after /**." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocContentLocationCheck"/>
+<error line="5" severity="error" message="Line matches the illegal pattern &apos;Trailing whitespace&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+<error line="6" severity="error" message="Javadoc comment at column 18 has parse error. Details: mismatched input &apos;:&apos; expecting &lt;EOF&gt; while parsing JAVADOC" source="com.puppycrawl.tools.checkstyle.checks.javadoc.AtclauseOrderCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/tasklist/TaskList.java">
+<error line="6" column="1" severity="error" message="Import statement for &apos;java.util.ArrayList&apos; is in the wrong order. Should be in the &apos;STANDARD_JAVA_PACKAGE&apos; group, expecting not assigned imports on this line." source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="8" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="23" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="27" column="9" severity="error" message="Javadoc comment is placed in the wrong location." source="com.puppycrawl.tools.checkstyle.checks.javadoc.InvalidJavadocPositionCheck"/>
+<error line="38" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="47" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="56" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+<file name="/Users/niuboqian/ip/src/main/java/duke/ui/Ui.java">
+<error line="5" column="1" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="6" severity="error" message="Line matches the illegal pattern &apos;Trailing whitespace&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+<error line="6" column="52" severity="error" message="&apos;+&apos; should be on a new line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck"/>
+<error line="7" column="5" severity="error" message="&apos;&quot; ____        _        \n&quot;&apos; has incorrect indentation level 4, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="7" column="32" severity="error" message="&apos;+&apos; should be on a new line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck"/>
+<error line="8" column="5" severity="error" message="&apos;&quot;|  _ \\ _   _| | _____ \n&quot;&apos; has incorrect indentation level 4, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="8" column="33" severity="error" message="&apos;+&apos; should be on a new line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck"/>
+<error line="9" column="5" severity="error" message="&apos;&quot;| | | | | | | |/ / _ \\\n&quot;&apos; has incorrect indentation level 4, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="9" column="33" severity="error" message="&apos;+&apos; should be on a new line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck"/>
+<error line="10" column="5" severity="error" message="&apos;&quot;| |_| | |_| |   &lt;  __/\n&quot;&apos; has incorrect indentation level 4, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="10" column="32" severity="error" message="&apos;+&apos; should be on a new line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.OperatorWrapCheck"/>
+<error line="11" column="5" severity="error" message="&apos;&quot;|____/ \\__,_|_|\\_\\___|\n&quot;&apos; has incorrect indentation level 4, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="17" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="26" severity="error" message="Line matches the illegal pattern &apos;Trailing whitespace&apos;." source="com.puppycrawl.tools.checkstyle.checks.regexp.RegexpCheck"/>
+<error line="27" column="5" severity="error" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+</checkstyle>

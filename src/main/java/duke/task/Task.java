@@ -27,6 +27,7 @@ public class Task {
     public void mark() {
         this.status = "[X]";
     }
+
     /**
      * method to update a task as undone
      */
