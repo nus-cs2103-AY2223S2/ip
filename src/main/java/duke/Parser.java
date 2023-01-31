@@ -36,7 +36,7 @@ public class Parser {
         String firstWord = s[0];
 
         if (firstWord.equals("mark") || firstWord.equals("unmark") || firstWord.equals("delete") || firstWord.equals("todo") ||
-                firstWord.equals("deadline") || firstWord.equals("event")) {
+                firstWord.equals("deadline") || firstWord.equals("event") || firstWord.equals("find")) {
             if (s.length <= 1) { throw new InvalidArgumentException();} //might wanna chk for firstWord first
 
             switch (firstWord) {
@@ -48,6 +48,8 @@ public class Parser {
                 return new DeleteCommand(Integer.parseInt(s[1]) - 1);
             case "todo":
                 return new AddCommand(TaskType.ToDo, s[1], false);
+            case "find":
+                return new FindCommand(s[1]);
             case "deadline":
                 String st[] = s[1].split(" /by ", 2);
                 return new AddCommand(TaskType.Deadline, st[0], false, LocalDate.parse(st[1]));
