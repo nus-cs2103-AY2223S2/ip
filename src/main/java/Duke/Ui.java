@@ -1,8 +1,8 @@
 package Duke;
 
-public class UI {
+public class Ui {
 
-    public UI() {
+    public Ui() {
 
     }
 

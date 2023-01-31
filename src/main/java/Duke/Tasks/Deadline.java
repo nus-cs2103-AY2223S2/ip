@@ -5,19 +5,28 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeParseException;
 
+import Exceptions.InvalidDateFormatExceptions;
+
 public class Deadline extends Task {
 
     protected String dueDate;
     protected LocalDate localDate;
 
-    public Deadline(String description, String dueDate) throws DateTimeParseException {
+    public Deadline(String description, String dueDate) throws InvalidDateFormatExceptions {
         super(description);
         this.dueDate = dueDate;
-        this.localDate = LocalDate.parse(dueDate);
+        try {
+            this.localDate = LocalDate.parse(dueDate);
+        } catch (InvalidDateFormatExceptions e) {
+            String errMsg = "Parse error: " + e.getMessage() +"\n" +
+                    "\tPlease try again with the correct format \"YYYY-MM-DD\"";
+            throw new InvalidDateFormatExceptions(errMsg);
+        }
+
     }
 
     public boolean isDueSoon() {
-        if (this.done) {
+        if (this.isComplete) {
             return false;
         } else {
             LocalDate currentTime = LocalDate.now();

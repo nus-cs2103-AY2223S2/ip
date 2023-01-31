@@ -1,5 +1,7 @@
 package Duke.Tasks;
 
+import Exceptions.InvalidDateFormatExceptions;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
@@ -9,16 +11,25 @@ public class Event extends Task {
     protected String startingTime;
     protected String endingTime;
     protected LocalDate localStartingDate;
+    protected LocalDate localEndingDate;
 
     public Event(String description, String startingTime, String endingTime) throws DateTimeParseException {
         super(description);
         this.startingTime = startingTime;
         this.endingTime = endingTime;
+        try {
+            this.localStartingDate = LocalDate.parse(startingTime);
+            this.localEndingDate = LocalDate.parse(endingTime);
+        } catch (InvalidDateFormatExceptions e) {
+            String errMsg = "Parse error: " + e.getMessage() +"\n" +
+                    "\tPlease try again with the correct format \"YYYY-MM-DD\"";
+            throw new InvalidDateFormatExceptions(errMsg);
+        }
         this.localStartingDate = LocalDate.parse(startingTime);
     }
 
     public boolean isComingSoon() {
-        if (this.done) {
+        if (this.isComplete) {
             return false;
         } else {
             LocalDate currentTime = LocalDate.now();
@@ -40,7 +51,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (" + localStartingDate.getMonth() + " "
-                + localStartingDate.getDayOfMonth() + " " + localStartingDate.getYear() + ")";
+        return "[E]" + super.toString() + " (" + localStartingDate.getDayOfMonth() + "/"
+                + localStartingDate.getMonth() + "/"
+                + localStartingDate.getYear() + " to "
+                + localEndingDate.getDayOfMonth() + "/"
+                + localEndingDate.getMonth() + "/"
+                + localEndingDate.getYear() +")";
     }
 }
