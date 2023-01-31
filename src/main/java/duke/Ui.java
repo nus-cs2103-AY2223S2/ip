@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * Class for Ui
@@ -111,5 +112,10 @@ public class Ui {
      */
     public void showError(Exception e) {
         System.out.print(e.getMessage());
+    }
+
+    public static String getInput() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
 }

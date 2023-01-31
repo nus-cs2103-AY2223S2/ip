@@ -1,8 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /**
  * Class for Duke, a Personal Assistant Chatbot
  */
@@ -11,15 +8,15 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private static boolean isExit = false;
+    private final String FILE_PATH = ("./data/Duke.txt");
 
     /**
-     * Constructor for Duke Class
-     * @param filePath File path to task log
+     * Constructor for Duke Class. If log file does not exist, create a new log file
      */
-
-    public Duke(String filePath) {
+    public Duke() {
+        Storage.logFileExists(FILE_PATH);
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         tasks = new TaskList(storage.loadTasksFromTaskLog());
     }
 
@@ -29,61 +26,17 @@ public class Duke {
     public void run() {
         ui.greetUser();
         while (!isExit) {
-            Scanner sc = new Scanner(System.in);
-            String userInput = sc.nextLine();
-            String userCommand = Parser.getCommand(userInput);
-            try {
-                switch (userCommand) {
-                case "bye":
-                    ui.sayGoodbye();
-                    return;
-                case "list":
-                    ui.printTasks(tasks);
-                    break;
-                case "delete":
-                    int taskIndex = Integer.parseInt(userInput.split(" ")[1]) - 1;
-                    ui.informDeletion(tasks.getTask(taskIndex), tasks.getSize());
-                    tasks.deleteTask(taskIndex);
-                    Storage.saveTasksToTaskLog(tasks);
-                    break;
-                case "mark":
-                    int toMark = userInput.charAt(5) - 48;
-                    Task toMarkTask = tasks.getTask(toMark - 1);
-                    toMarkTask.markTask();
-                    ui.informTaskIsMarked(toMarkTask);
-                    Storage.saveTasksToTaskLog(tasks);
-                    break;
-                case "unmark":
-                    int toUnMark = userInput.charAt(7) - 48;
-                    Task toUnMarkTask = tasks.getTask(toUnMark - 1);
-                    toUnMarkTask.unmarkTask();
-                    ui.informTaskIsUnMarked(toUnMarkTask);
-                    Storage.saveTasksToTaskLog(tasks);
-                    break;
-                case "find":
-                    String keyword = Parser.getFindKeyword(userInput);
-                    ArrayList<Task> foundTasks = tasks.filterTasks(keyword);
-                    ui.printFoundTasks(foundTasks);
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    Task newTask = Parser.translateUserInputToTask(userInput);
-                    tasks.addTask(newTask);
-                    break;
-                default:
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n\n");
-                }
-            } catch (DukeException e) {
-                this.ui.showError(e);
-            }
+            String userInput = ui.getInput();
+            Command c = new Command(userInput);
+            c.execute(tasks, storage, ui);
+            isExit = c.getExitStatus();
         }
     }
 
     /**
      * Initialise Duke chatbot
      */
-    public static void main(String[] args) throws DukeException {
-        new Duke("./data/Duke.txt").run();
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }

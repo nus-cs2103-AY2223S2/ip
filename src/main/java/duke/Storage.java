@@ -58,4 +58,16 @@ public class Storage {
             e.printStackTrace();
         }
     }
+
+    public static void logFileExists(String filePath) {
+        File logFile = new File(filePath);
+        try {
+            if (!logFile.exists()) {
+                logFile.getParentFile().mkdir();
+                logFile.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("Log file cannot be created");
+        }
+    }
 }
