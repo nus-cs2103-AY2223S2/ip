@@ -8,7 +8,7 @@ public class Event extends Task {
     private final LocalDateTime toTime;
 
     public Event(String taskDescription, LocalDateTime fromTime, LocalDateTime toTime) {
-        this.taskDescription = taskDescription;
+        setTaskDescription(taskDescription);
         this.fromTime = fromTime;
         this.toTime = toTime;
     }

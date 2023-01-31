@@ -1,9 +1,9 @@
 package duke;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     public ToDo(String taskDescription) {
-        this.taskDescription = taskDescription;
+        setTaskDescription(taskDescription);
     }
 
     @Override
