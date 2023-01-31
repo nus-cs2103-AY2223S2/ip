@@ -30,7 +30,7 @@ public class Ui {
      * Prints a line.
      */
     public void showLine() {
-        System.out.println("    ______________________________________________________________");
+        System.out.println("______________________________________________________________");
 
     }
 
@@ -62,21 +62,21 @@ public class Ui {
      * Prints the user guide for different commands of Duke.
      */
     public void showGuide() {
-        System.out.println("    list");
-        System.out.println("    todo (content)");
-        System.out.println("    deadline (content) /by (dd/MM/yyyy HH:mm)");
-        System.out.println("    event (content) /from (dd/MM/yyyy HH:mm) /to (dd/MM/yyyy HH:mm)");
-        System.out.println("    mark (index)");
-        System.out.println("    unmark (index)");
-        System.out.println("    delete (index)");
-        System.out.println("    bye");
+        System.out.println("list");
+        System.out.println("todo (content)");
+        System.out.println("deadline (content) /by (dd/MM/yyyy HH:mm)");
+        System.out.println("event (content) /from (dd/MM/yyyy HH:mm) /to (dd/MM/yyyy HH:mm)");
+        System.out.println("mark (index)");
+        System.out.println("unmark (index)");
+        System.out.println("delete (index)");
+        System.out.println("bye");
     }
 
     /**
      * Prints the farewell message.
      */
     public void end() {
-        System.out.println("    Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!");
         this.sc.close();
     }
 }

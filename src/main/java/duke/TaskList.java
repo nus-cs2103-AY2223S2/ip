@@ -33,9 +33,9 @@ public class TaskList {
         ToDo newTask = new ToDo(input);
         this.list.add(newTask);
         if (needPrint) {
-            System.out.println("    Got it. I've added this task:");
-            System.out.println("    " + newTask.toString());
-            System.out.println("    Now you have " + (this.list.size() - 1) + " tasks in the list.");
+            System.out.println("Got it. I've added this task:");
+            System.out.println(newTask.toString());
+            System.out.println("Now you have " + (this.list.size() - 1) + " tasks in the list.");
         }
     }
 
@@ -53,9 +53,9 @@ public class TaskList {
         Deadline newTask = new Deadline(input, deadline);
         this.list.add(newTask);
         if (needPrint) {
-            System.out.println("    Got it. I've added this task:");
-            System.out.println("    " + newTask.toString());
-            System.out.println("    Now you have " + (this.list.size() - 1) + " tasks in the list.");
+            System.out.println("Got it. I've added this task:");
+            System.out.println(newTask.toString());
+            System.out.println("Now you have " + (this.list.size() - 1) + " tasks in the list.");
         }
     }
 
@@ -74,9 +74,9 @@ public class TaskList {
         Event newTask = new Event(input, from, to);
         this.list.add(newTask);
         if (needPrint) {
-            System.out.println("    Got it. I've added this task:");
-            System.out.println("    " + newTask.toString());
-            System.out.println("    Now you have " + (this.list.size() - 1) + " tasks in the list.");
+            System.out.println("Got it. I've added this task:");
+            System.out.println(newTask.toString());
+            System.out.println("Now you have " + (this.list.size() - 1) + " tasks in the list.");
         }
     }
 
@@ -100,9 +100,9 @@ public class TaskList {
     public void delete(int index) {
         Task removedTask = this.list.get(index);
         this.list.remove(index);
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("    " + removedTask.toString());
-        System.out.println("    Now you have " + (this.list.size() - 1) + " tasks in the list.");
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(removedTask.toString());
+        System.out.println("Now you have " + (this.list.size() - 1) + " tasks in the list.");
     }
 
     /**
@@ -114,16 +114,30 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    public void find(String target) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        foundTasks.add(new ToDo("zeroth"));
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i < this.list.size(); i++) {
+            if (this.list.get(i).getTask().contains(target)) {
+                foundTasks.add(list.get(i));
+            }
+        }
+        for (int i = 1; i < foundTasks.size(); i++) {
+            System.out.println(i + ". " + foundTasks.get(i).toString());
+        }
+    }
+
     /**
      * Stringifies the TaskList.
      * @return the string representation of the TaskList
      */
     @Override
     public String toString() {
-        String str = "    Here are the tasks in your list:";
+        String str = "Here are the tasks in your list:";
         for (int i = 1; i < this.list.size(); i++) {
             str += "\n";
-            str += "    " + i + ". " + this.list.get(i).toString();
+            str += i + ". " + this.list.get(i).toString();
         }
         return str;
     }

@@ -23,8 +23,8 @@ public abstract class Task {
     public void markDone(boolean needPrint) {
         this.isDone = true;
         if (needPrint) {
-            System.out.println("    Nice! I've marked this task as done:");
-            System.out.println("    " + this.toString());
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(this.toString());
         }
     }
 
@@ -35,8 +35,8 @@ public abstract class Task {
     public void unmark(boolean needPrint) {
         this.isDone = false;
         if (needPrint) {
-            System.out.println("    OK, I've marked this task as not done yet:");
-            System.out.println("    " + this.toString());
+            System.out.println("OK, I've marked this task as not done yet:");
+            System.out.println(this.toString());
         }
     }
 
