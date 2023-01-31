@@ -71,11 +71,10 @@ public class Task {
         String[] keyWordsArr = keyWords.split(" ");
         if (wordDict.isEmpty()) {
             wordDict.addAll(Arrays.asList(description.split(" ")));
-        } else {
-            for (String keyWord : keyWordsArr) {
-                if (!wordDict.contains(keyWord)) {
-                    return false;
-                }
+        }
+        for (String keyWord : keyWordsArr) {
+            if (!wordDict.contains(keyWord)) {
+                return false;
             }
         }
         return true;
