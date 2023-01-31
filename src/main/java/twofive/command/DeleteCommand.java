@@ -7,7 +7,6 @@ import twofive.exception.InvalidTaskException;
 import twofive.storage.Storage;
 import twofive.task.Task;
 import twofive.ui.TaskContainer;
-import twofive.ui.Ui;
 
 /**
  * Deletes a task given its number in a list of tasks when command is executed.
@@ -15,8 +14,8 @@ import twofive.ui.Ui;
 public class DeleteCommand extends Command {
     private int taskNum;
 
-    public DeleteCommand(int taskNum) {
-        this.taskNum = taskNum;
+    public DeleteCommand(int t) {
+        taskNum = t;
     }
 
     /**
@@ -29,10 +28,10 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws InvalidTaskException {
         String commandResult = "";
-        if (this.taskNum < 0 || this.taskNum >= tasks.getTasksNum()) {
+        if (taskNum < 0 || taskNum >= tasks.getTasksNum()) {
             throw new InvalidTaskException();
         } else {
-            Task currentTask = tasks.deleteTask(this.taskNum);
+            Task currentTask = tasks.deleteTask(taskNum);
             try {
                 storage.save(tasks);
                 TaskContainer.setTasks(tasks.getTasks());

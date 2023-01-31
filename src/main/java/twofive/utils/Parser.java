@@ -26,7 +26,14 @@ import twofive.exception.MissingArgumentException;
  * intended to be performed by the user.
  */
 public class Parser {
-    // Ensure valid task number is provided
+    /**
+     * Ensure a valid task number is provided when performing an action on a specific task.
+     *
+     * @param input The full command entered by the user.
+     * @return int representing the task number.
+     * @throws EmptyTasknumException If no task number is provided by the user.
+     * @throws NumberFormatException If the user enters something other than an integer.
+     */
     private static int validateTaskNum(String input) throws EmptyTasknumException, NumberFormatException {
         String[] taskNumSplit = input.split(" ");
         if (taskNumSplit.length <= 1 || taskNumSplit[1].trim().equals("")) {
@@ -37,7 +44,14 @@ public class Parser {
         }
     }
 
-    // Ensure a valid description is provided when adding a new task
+    /**
+     * Ensure a valid description is provided when adding a new task.
+     *
+     * @param input The full command entered by the user.
+     * @param commandWord The command keyword.
+     * @return String containing the description of the task.
+     * @throws EmptyDescriptionException If no description is provided by the user.
+     */
     private static String validateDescription(String input, String commandWord) throws EmptyDescriptionException {
         String[] descriptionSplit = input.split(commandWord);
         if (descriptionSplit.length <= 1 || descriptionSplit[1].trim().equals("")) {

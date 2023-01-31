@@ -7,6 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+/**
+ * Represents a box containing details of a task, such as its index, description
+ * type, completion status and other details.
+ */
 public class TaskBox extends HBox {
     @FXML
     private Label taskNumber;

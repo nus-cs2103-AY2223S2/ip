@@ -3,7 +3,6 @@ package twofive.command;
 import twofive.data.TaskList;
 import twofive.storage.Storage;
 import twofive.ui.TaskContainer;
-import twofive.ui.Ui;
 
 /**
  * Lists all tasks added when command is executed.

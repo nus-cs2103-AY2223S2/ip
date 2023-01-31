@@ -23,7 +23,7 @@ import twofive.task.ToDo;
  * Parses the contents of a given file into a list of tasks.
  */
 public class FileParser {
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private File taskFile;
 
     public FileParser(File taskFile) {
@@ -82,7 +82,7 @@ public class FileParser {
                 case "D":
                     if (taskSplit.length == 4) {
                         String deadlineString = taskSplit[3].trim();
-                        LocalDateTime deadline = LocalDateTime.parse(deadlineString, formatter);
+                        LocalDateTime deadline = LocalDateTime.parse(deadlineString, FORMATTER);
                         currentTask = new Deadline(taskDescription, deadline);
                     } else {
                         // Missing deadline for Deadline task
@@ -93,8 +93,8 @@ public class FileParser {
                     if (taskSplit.length == 5) {
                         String startTimeString = taskSplit[3].trim();
                         String endTimeString = taskSplit[4].trim();
-                        LocalDateTime startTime = LocalDateTime.parse(startTimeString, formatter);
-                        LocalDateTime endTime = LocalDateTime.parse(endTimeString, formatter);
+                        LocalDateTime startTime = LocalDateTime.parse(startTimeString, FORMATTER);
+                        LocalDateTime endTime = LocalDateTime.parse(endTimeString, FORMATTER);
                         currentTask = new Event(taskDescription, startTime, endTime);
                     } else {
                         if (taskSplit.length == 4) {

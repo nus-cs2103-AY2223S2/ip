@@ -9,7 +9,6 @@ import twofive.data.TaskList;
 import twofive.storage.Storage;
 import twofive.task.Deadline;
 import twofive.ui.TaskContainer;
-import twofive.ui.Ui;
 
 /**
  * Adds a new Deadline task given a description and a deadline
@@ -50,8 +49,8 @@ public class DeadlineCommand extends Command {
             tasks.addTask(newDeadline);
             storage.save(tasks);
             TaskContainer.setTasks(tasks.getTasks());
-            commandResult = "Got it. I've added this task:\n " + newDeadline + "\n" + "Now you have " + tasks.getTasksNum()
-                            + "this is a test test tasks in the list";
+            commandResult = "Got it. I've added this task:\n " + newDeadline + "\n" + "Now you have "
+                    + tasks.getTasksNum() + "this is a test test tasks in the list";
         } catch (DateTimeParseException e) {
             commandResult = "Deadline must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31";
         } catch (IOException e) {

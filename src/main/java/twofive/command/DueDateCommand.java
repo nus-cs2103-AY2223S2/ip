@@ -7,7 +7,6 @@ import java.time.format.DateTimeParseException;
 import twofive.data.TaskList;
 import twofive.storage.Storage;
 import twofive.ui.TaskContainer;
-import twofive.ui.Ui;
 
 /**
  * Lists all tasks with a deadline, start time or end time, given a
@@ -34,10 +33,10 @@ public class DueDateCommand extends Command {
         try {
             LocalDate dueDate = LocalDate.parse(dueDateString, dueDateFormatter);
             TaskContainer.setTasks(tasks.getTasksOnDate(dueDate));
-            commandResult = "Here are the tasks in your list due on " + dueDate.format(DateTimeFormatter.ofPattern("EEE " +
-                    "MMM d yyyy"));
+            commandResult = "Here are the tasks in your list due on "
+                    + dueDate.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy"));
         } catch (DateTimeParseException e) {
-           commandResult = "Due date must be in the format yyyy-MM-dd, e.g. 2023-01-23";
+            commandResult = "Due date must be in the format yyyy-MM-dd, e.g. 2023-01-23";
         }
         return commandResult;
     }

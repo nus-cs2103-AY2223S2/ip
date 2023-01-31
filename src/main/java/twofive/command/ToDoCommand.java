@@ -6,7 +6,6 @@ import twofive.data.TaskList;
 import twofive.storage.Storage;
 import twofive.task.ToDo;
 import twofive.ui.TaskContainer;
-import twofive.ui.Ui;
 
 /**
  * Adds a new ToDo task given a description when command is executed.

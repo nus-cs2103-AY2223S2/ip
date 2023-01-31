@@ -17,9 +17,8 @@ import twofive.exception.TwoFiveException;
  * and displaying the corresponding outputs.
  */
 public class Ui extends Application {
-    private TwoFive twoFive;
-
     private static FXMLLoader fxmlLoader;
+    private TwoFive twoFive;
 
     @Override
     public void start(Stage stage) throws NullPointerException {

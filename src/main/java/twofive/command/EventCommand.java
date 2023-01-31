@@ -9,7 +9,6 @@ import twofive.data.TaskList;
 import twofive.storage.Storage;
 import twofive.task.Event;
 import twofive.ui.TaskContainer;
-import twofive.ui.Ui;
 
 /**
  * Adds a new Event task given a description, a start time and an end time

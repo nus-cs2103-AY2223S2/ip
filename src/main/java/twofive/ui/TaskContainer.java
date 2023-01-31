@@ -1,13 +1,21 @@
 package twofive.ui;
 
+import java.util.ArrayList;
+
 import javafx.scene.layout.VBox;
 import twofive.task.Task;
 
-import java.util.ArrayList;
-
+/**
+ * Represents a list of tasks to be displayed to the user.
+ */
 public class TaskContainer extends VBox {
     private static ArrayList<Task> tasks;
 
+    /**
+     * Represents a container for a list of tasks.
+     *
+     * @param t ArrayList containing list of tasks to be shown.
+     */
     public TaskContainer(ArrayList<Task> t) {
         tasks = t;
         this.setStyle("-fx-background-color: #FFFFFF;");
@@ -17,6 +25,9 @@ public class TaskContainer extends VBox {
         tasks = t;
     }
 
+    /**
+     * Displays the list of tasks to the user.
+     */
     public void showTasks() {
         this.getChildren().clear();
         for (int i = 0; i < tasks.size(); i++) {

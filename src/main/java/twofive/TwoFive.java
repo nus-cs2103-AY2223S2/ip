@@ -34,6 +34,13 @@ public class TwoFive {
         Application.launch(Ui.class, args);
     }
 
+    /**
+     * Returns a String which is the result of the command executed according to
+     * the user's input.
+     *
+     * @param fullCommand String representing the command entered by the user.
+     * @return String containing command execution result.
+     */
     public String handleUserInput(String fullCommand) {
         String commandResult = "";
         try {

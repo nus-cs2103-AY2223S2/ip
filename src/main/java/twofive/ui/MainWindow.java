@@ -1,18 +1,16 @@
 package twofive.ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import twofive.TwoFive;
-import twofive.task.Task;
 
-import java.util.ArrayList;
-
+/**
+ * Represents the main window of the chatbot GUI.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane commandScrollPane;
@@ -31,6 +29,9 @@ public class MainWindow extends AnchorPane {
 
     private TwoFive twoFive;
 
+    /**
+     * Initializes the components of the main window.
+     */
     @FXML
     public void initialize() {
         commandScrollPane.vvalueProperty().bind(commandContainer.heightProperty());

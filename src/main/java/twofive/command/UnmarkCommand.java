@@ -8,7 +8,6 @@ import twofive.exception.TaskUndoneException;
 import twofive.storage.Storage;
 import twofive.task.Task;
 import twofive.ui.TaskContainer;
-import twofive.ui.Ui;
 
 /**
  * Marks a task as not done given its number in a list of tasks

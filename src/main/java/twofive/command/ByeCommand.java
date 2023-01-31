@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import twofive.data.TaskList;
 import twofive.storage.Storage;
-import twofive.ui.Ui;
 
 /**
  * Results in the program saving current tasks and exiting when this command
