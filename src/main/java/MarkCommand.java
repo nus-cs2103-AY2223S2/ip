@@ -1,13 +1,11 @@
 public class MarkCommand extends Command {
-    TaskList taskList;
     int taskIdToMark;
 
-    public MarkCommand(TaskList taskList, int taskIdToMark) {
-        this.taskList = taskList;
+    public MarkCommand(int taskIdToMark) {
         this.taskIdToMark = taskIdToMark;
     }
     @Override
-    public void execute() {
+    public void execute(Ui ui, TaskList taskList, Storage storage) {
         taskList.mark(taskIdToMark);
     }
 }

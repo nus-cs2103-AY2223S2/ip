@@ -1,16 +1,12 @@
 public class DeleteCommand extends Command {
-    private Ui ui;
-    private TaskList taskList;
     private int taskId;
 
-    public DeleteCommand(Ui ui, TaskList taskList, int taskId) {
-        this.ui = ui;
-        this.taskList = taskList;
+    public DeleteCommand(int taskId) {
         this.taskId = taskId;
     }
 
     @Override
-    public void execute() {
+    public void execute(Ui ui, TaskList taskList, Storage storage) {
        taskList.remove(taskId);
     }
 }

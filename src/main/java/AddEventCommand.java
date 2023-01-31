@@ -5,17 +5,15 @@ public class AddEventCommand extends AddCommand {
     private LocalDate from;
     private LocalDate to;
 
-    public AddEventCommand(Ui ui, TaskList taskList, String description,
-                           LocalDate from, LocalDate to) {
-        super(ui, taskList);
+    public AddEventCommand(String description, LocalDate from, LocalDate to) {
         this.description = description;
         this.from = from;
         this.to = to;
     }
 
     @Override
-    public void execute() {
+    public void execute(Ui ui, TaskList taskList, Storage storage) {
         taskList.add(new Event(description, from, to));
-        super.printCreatedTaskStatus();
+        super.printCreatedTaskStatus(taskList, ui);
     }
 }

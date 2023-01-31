@@ -1,13 +1,6 @@
 public class ListCommand extends Command {
-    private Ui ui;
-    private TaskList taskList;
-    public ListCommand(Ui ui, TaskList taskList) {
-        this.ui = ui;
-        this.taskList = taskList;
-    }
-
     @Override
-    public void execute() {
+    public void execute(Ui ui, TaskList taskList, Storage storage) {
         if (taskList.isEmpty()) {
             ui.prettyPrint("No tasks found!");
         }
