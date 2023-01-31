@@ -1,8 +1,15 @@
 //Event is one of 3 types of Task, so it must be a child of Task
-public class Event extends Task {
-    protected String startTime;
-    protected String endTime;
 
+public class Event extends Task {
+    private final String startTime;
+    private final String endTime;
+
+    /**
+     * Constructor for an Event.
+     * @param name The name of the event.
+     * @param startTime the start time of the event.
+     * @param endTime the end time of the event
+     */
     public Event(String name, String startTime, String endTime) {
         super(name);
         this.startTime = startTime;
