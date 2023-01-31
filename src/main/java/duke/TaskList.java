@@ -83,6 +83,11 @@ public class TaskList {
         return allTasks;
     }
 
+    /**
+     * finds tasks that contains the word
+     * @param word to find tasks
+     * @return string of all the tasks that contains word
+     */
     public String findTaskWithWord (String word) {
         String tasksWithWord = "Here are the matching tasks in your list:\n";
         int index = 0;
