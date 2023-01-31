@@ -1,26 +1,28 @@
 package duke.command;
 
-import duke.ui.Ui;
-
 /**
  * Represents a "bye" command that is entered by the user.
  */
 public class ByeCommand extends Command {
+    private static final String EXIT_MESSAGE = "Goodbye. Hope that I have managed to scare all your problems away."
+            + "\nHave a great day! :)";
+
+
     /**
      * Constructs a <code>ByeCommand</code>.
      */
-    public ByeCommand(Ui ui) {
-        super(ui);
+    public ByeCommand() {
+        super();
         isExit = true;
     }
 
     /**
-     * Causes the bot to print exit message, and properly exit.
+     * Causes the bot to return the exit message.
+     *
+     * @return the exit message
      */
     @Override
-    public void runCommand() {
-        ui.printExitMessage();
-        ui.cleanUpUi();
-
+    public String runCommand() {
+        return EXIT_MESSAGE;
     }
 }

@@ -7,7 +7,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents an on command that is entered by the user to check what tasks are there on a specific day.
@@ -22,45 +21,53 @@ public class OnCommand extends Command {
     /**
      * Constructs an OnCommand
      *
-     * @param ui The <code>Ui</code> to allow the command to print messages to the user.
      * @param tasks The <code>TaskList</code>> of all available tasks.
      * @param date The date to be checked.
      */
-    public OnCommand(Ui ui, String date, TaskList tasks) {
-        super(ui);
+    public OnCommand(String date, TaskList tasks) {
+        super();
         this.dateObject = DateTime.getDateTimeObject(date);
         this.tasks = tasks;
     }
 
     /**
-     * Prints out all the tasks that occur on the given date.
+     * Gets all the tasks that occur on the given date.
+     *
+     * @return a string containing all the tasks that occur on the given date.
      */
     @Override
-    public void runCommand() {
-        Ui.printStraightLine();
-        System.out.println("Tasks on: " + DateTime.formatDate(dateObject));
+    public String runCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Tasks on: ");
+        sb.append(DateTime.formatDate(dateObject));
+        sb.append("\n\n");
+
         int count = 1;
         //Iterate through each task and check
         for (int t = 0; t < tasks.getSizeOfTaskList(); t = t + 1) {
             Task currTask = tasks.getTask(t);
             if (currTask instanceof Deadline) {
                 if (DateTime.isEqualDate(dateObject, ((Deadline) currTask).getDeadline())) {
-                    ui.printStatement(Integer.toString(count) + ". "
-                            + currTask.getStatusOfTaskInString());
+                    sb.append(count);
+                    sb.append(". ");
+                    sb.append(currTask.getStatusOfTaskInString());
+                    sb.append("\n");
                     count += 1;
                 }
             } else if (currTask instanceof Event) {
                 if (DateTime.isValidDuration(((Event) currTask).getStartDate(), dateObject)
                         && DateTime.isValidDuration(dateObject, ((Event) currTask).getEndDate())) {
-                    ui.printStatement(Integer.toString(count) + ". "
-                            + currTask.getStatusOfTaskInString());
+                    sb.append(count);
+                    sb.append(". ");
+                    sb.append(currTask.getStatusOfTaskInString());
+                    sb.append("\n");
                     count += 1;
                 }
             }
         }
         if (count == 1) {
-            ui.printStatement("You have no tasks on this day.");
+            sb.append("You have no tasks on this day.");
         }
-        Ui.printStraightLine();
+        return sb.toString();
     }
 }

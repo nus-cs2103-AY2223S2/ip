@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class ParserTest {
     @Test
     public void parseRawCommand_validCommands_success() {
-        Parser ps = new Parser(new Ui(), new TaskListStub());
+        Parser ps = new Parser(new TaskListStub());
 
         assertEquals(ps.parseRawCommand("bye"), CommandType.BYE);
         assertEquals(ps.parseRawCommand("list"), CommandType.LIST);
@@ -29,17 +29,17 @@ public class ParserTest {
     }
 
     @Test
-    public void parseRawCommand_invalidCommands_outputNothing() {
-        Parser ps = new Parser(new Ui(), new TaskListStub());
+    public void parseRawCommand_invalidCommands_outputEXCEPTION() {
+        Parser ps = new Parser(new TaskListStub());
 
-        assertEquals(ps.parseRawCommand("mark -1"), CommandType.NOTHING);
-        assertEquals(ps.parseRawCommand("unmark 4"), CommandType.NOTHING);
-        assertEquals(ps.parseRawCommand("delete 0"), CommandType.NOTHING);
-        assertEquals(ps.parseRawCommand("deadline /by 2023-02-02"), CommandType.NOTHING);
-        assertEquals(ps.parseRawCommand("deadline TaskName /by"), CommandType.NOTHING);
-        assertEquals(ps.parseRawCommand("deadline TaskName by 2023-02-02"), CommandType.NOTHING);
-        assertEquals(ps.parseRawCommand("event TaskName /from 2023-02-02 /to 2023-01-02"), CommandType.NOTHING);
-        assertEquals(ps.parseRawCommand("on 5 Feb"), CommandType.NOTHING);
+        assertEquals(ps.parseRawCommand("mark -1"), CommandType.EXCEPTION);
+        assertEquals(ps.parseRawCommand("unmark 4"), CommandType.EXCEPTION);
+        assertEquals(ps.parseRawCommand("delete 0"), CommandType.EXCEPTION);
+        assertEquals(ps.parseRawCommand("deadline /by 2023-02-02"), CommandType.EXCEPTION);
+        assertEquals(ps.parseRawCommand("deadline TaskName /by"), CommandType.EXCEPTION);
+        assertEquals(ps.parseRawCommand("deadline TaskName by 2023-02-02"), CommandType.EXCEPTION);
+        assertEquals(ps.parseRawCommand("event TaskName /from 2023-02-02 /to 2023-01-02"), CommandType.EXCEPTION);
+        assertEquals(ps.parseRawCommand("on 5 Feb"), CommandType.EXCEPTION);
     }
 
 }

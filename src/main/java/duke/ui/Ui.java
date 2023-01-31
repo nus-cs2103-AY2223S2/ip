@@ -7,26 +7,26 @@ import java.util.Scanner;
  */
 public class Ui {
     /** Logo for the name of the chatbot. **/
-    private static final String LOGO = " |          ______    ______\n"
-                                     + " | ____    |      |  |      |\n"
-                                     + " |      |  |      |  |      |\n"
+    public static final String LOGO = " |            ______    ______\n"
+                                     + " | ____    |         |  |         |\n"
+                                     + " |        |  |         |  |         |\n"
                                      + " | ____ |  |______|  |______|\n";
 
     /** Straight line that separates commands. **/
-    private static final String STRAIGHT_LINE =
+    public static final String STRAIGHT_LINE =
             "_______________________________________________________________________________________________";
 
 
     /** Commands that supported by the chatbot. */
-    private static final String COMMAND_LIST =
+    public static final String COMMAND_LIST =
             "1.  list -> Provides a list of existing tasks.\n"
                     + "2.  mark X -> Marks task number X as done.\n"
                     + "3.  unmark X -> Marks task number X as undone.\n"
                     + "4.  todo taskName -> Creates a todo task with name taskName.\n"
                     + "5.  deadline taskName /by date -> Creates a deadline task with name taskName and deadline"
-                            + "date.\n"
+                            + " date.\n"
                     + "6.  event taskName /from startDate /to endDate -> Creates an event task with name taskName,\n"
-                    + "    start date startDate, and end date endDate.\n"
+                    + "     start date startDate, and end date endDate.\n"
                     + "7.  delete X -> Deletes task number X from the list.\n"
                     + "8.  on givenDate -> Displays all the tasks that occur on givenDate.\n"
                     + "9.  find keyPhrase -> Displays all the tasks whose names contain any words from keyPhrase.\n"
@@ -35,7 +35,7 @@ public class Ui {
                     + "Please enter dates in the format of either yyyy-MM-dd hh:mm or yyyy-MM-dd.";
 
     /** Introductory message excluding logo and command list. */
-    private static final String INTRODUCTORY_BODY = "Boo! Nice to meet you.\n"
+    public static final String INTRODUCTORY_BODY = "Boo! Nice to meet you.\n"
             + "I am here to scare all your problems away by keeping track of your tasks.\n"
                     + "What can I help you with today?\n"
                             + "\nSupported Commands:";
@@ -126,4 +126,5 @@ public class Ui {
     public void cleanUpUi() {
         sc.close();
     }
+
 }

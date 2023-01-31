@@ -3,7 +3,6 @@ package duke.command;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents an unmark command that is entered by the user to mark a task as undone.
@@ -22,13 +21,12 @@ public class UnmarkCommand extends Command {
     /**
      * Constructs an UnmarkCommand.
      *
-     * @param ui The <code>Ui</code> to allow the command to print messages to the user.
      * @param taskNumber The number of the task which is to be marked as undone.
      * @param tasks The <code>TaskList</code> of all available tasks.
      * @param storage The <code>Storage</code> object to allow local saving of the unmark operation.
      */
-    public UnmarkCommand(Ui ui, int taskNumber, TaskList tasks, Storage storage) {
-        super(ui);
+    public UnmarkCommand(int taskNumber, TaskList tasks, Storage storage) {
+        super();
         this.taskNumber = taskNumber;
         this.tasks = tasks;
         this.storage = storage;
@@ -36,18 +34,23 @@ public class UnmarkCommand extends Command {
 
     /**
      * Marks a given task as undone.
+     *
+     * @return a string indicating that the task has been marked as undone.
      */
     @Override
-    public void runCommand() {
+    public String runCommand() {
         //Updates and print changes
         Task currentTask = tasks.getTask(taskNumber);
         currentTask.setUndoneStatus();
-        Ui.printStraightLine();
-        ui.printStatement("Alright! The following task is now marked as undone. I will help you keep an eye on it.");
-        ui.printStatement(currentTask.getStatusOfTaskInString());
-        Ui.printStraightLine();
 
         //Save changes
         storage.saveTasks(tasks);
+
+        //Prepare string
+        StringBuilder sb = new StringBuilder();
+        sb.append("Alright! The following task is now marked as undone. I will help you keep an eye on it.\n\n");
+        sb.append(currentTask.getStatusOfTaskInString());
+
+        return sb.toString();
     }
 }

@@ -4,7 +4,6 @@ import duke.datetime.DateTime;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a deadline command that is entered by the user to create a task with a deadline.
@@ -26,14 +25,13 @@ public class DeadlineCommand extends Command {
     /**
      * Constructs a <code>DeadlineCommand</code>.
      *
-     * @param ui The Ui to allow the command to print messages to the user.
      * @param taskName The name of the deadline task to be created.
      * @param deadline The deadline of the task.
      * @param tasks The lists of all available tasks.
      * @param storage The Storage object to allow local saving after adding a new deadline task.
      */
-    public DeadlineCommand(Ui ui, String taskName, String deadline, TaskList tasks, Storage storage) {
-        super(ui);
+    public DeadlineCommand(String taskName, String deadline, TaskList tasks, Storage storage) {
+        super();
         this.taskName = taskName;
         this.deadline = deadline;
         this.tasks = tasks;
@@ -42,25 +40,25 @@ public class DeadlineCommand extends Command {
 
     /**
      * Creates a deadline task and updates the local data file.
+     *
+     * @return a string informing the user that the file has been created.
      */
     @Override
-    public void runCommand() {
+    public String runCommand() {
         //Creates task and saves it
         Deadline newDeadlineTask = new Deadline(taskName, deadline, DateTime.getDateTimeObject(deadline));
         tasks.addTask(newDeadlineTask);
         storage.saveTasks(tasks);
 
-        //Notifies the user
-        Ui.printStraightLine();
-        ui.printStatement("Added task to list:");
-        ui.printStatement(newDeadlineTask.getStatusOfTaskInString());
+        //Prepares output string
+        StringBuilder sb = new StringBuilder();
+        sb.append("Added task to list:\n");
+        sb.append(newDeadlineTask.getStatusOfTaskInString() + "\n");
         if (tasks.getSizeOfTaskList() == 1) {
-            ui.printStatement("\nCurrently, there is 1 task in your list.");
+            sb.append("\nCurrently, there is 1 task in your list.");
         } else {
-            ui.printStatement("\nCurrently, there are " + Integer.toString(tasks.getSizeOfTaskList())
-                    + " tasks in your list.");
+            sb.append("\nCurrently, there are " + tasks.getSizeOfTaskList() + " tasks in your list.");
         }
-        Ui.printStraightLine();
+        return sb.toString();
     }
 }
-

@@ -5,68 +5,51 @@ import duke.parser.CommandType;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a chatbot that one can interact with to keep track of tasks.
  */
 public class Duke {
+    //Bot elements
+    private Storage storage;
+    private TaskList taskList;
+    private Parser parser;
+
 
     /**
-     * Gets the chatbot instance running.
+     * Constructs a chatbot instance.
      */
-    public void run() {
-        //Prepare components
-        Ui userInterface = new Ui();
-        Storage storage = new Storage("data", "tasks.txt");
-        TaskList taskList = new TaskList();
-        Parser parser = new Parser(userInterface, taskList);
-
+    public Duke() {
+        //Initialise components
+        storage = new Storage("data", "tasks.txt");
+        taskList = new TaskList();
+        parser = new Parser(taskList);
 
         //Prepare data file
         if (!storage.prepareFile()) {
-            //Shuts down the bot as data file cannot be created successfully
-            userInterface.printShutDownMessage();
-            userInterface.cleanUpUi();
-            return;
+            System.exit(1);
         }
 
-        //Load data from data file
         if (!storage.loadTasksFromFile(taskList)) {
             //Cannot read from data file. Start with new empty task list.
             taskList = new TaskList();
-        }
-
-        //Read in and process user commands
-        while (true) {
-            //Process command
-            String rawCommand = userInterface.getUserCommand();
-            CommandType commandType = parser.parseRawCommand(rawCommand);
-            Command command = parser.parseCommandType(commandType, taskList, storage);
-
-            //Incorrect format
-            if (command == null) {
-                continue;
-            } else {
-                //Run command
-                command.runCommand();
-
-                //Check for exit command
-                if (command.isExit()) {
-                    break;
-                }
-            }
         }
     }
 
 
     /**
-     * Launches the chatbot.
+     * Gets the response of the bot in accordance to what the user types in
      *
-     * @param args The command line arguments that one can type.
+     * @param input The user's input to be responded to.
+     * @return the string containing the bot's response.
      */
-    public static void main(String[] args) {
-        new Duke().run();
+    public String getResponse(String input) {
+
+        CommandType commandType = parser.parseRawCommand(input);
+        Command command = parser.parseCommandType(commandType, taskList, storage);
+
+        return command.runCommand();
+
     }
 }
 

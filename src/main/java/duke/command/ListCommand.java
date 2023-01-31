@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a "list" command that is entered by the user.
@@ -12,16 +11,17 @@ public class ListCommand extends Command {
     /**
      * Constructs a <code>ListCommand</code>.
      */
-    public ListCommand(Ui ui, TaskList tasks) {
-        super(ui);
+    public ListCommand(TaskList tasks) {
         this.tasks = tasks;
     }
 
     /**
      * Causes the bot to print out the contents of the user's task list.
+     *
+     * @return a String containing the contents of the task list
      */
     @Override
-    public void runCommand() {
-        tasks.printUserTasks();
+    public String runCommand() {
+        return tasks.getUserTasks();
     }
 }

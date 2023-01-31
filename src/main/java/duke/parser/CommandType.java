@@ -5,7 +5,7 @@ package duke.parser;
  */
 public enum CommandType {
     /** Possible command types. */
-    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, ON, HELP, INVALID, NOTHING, FIND;
+    BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, ON, HELP, INVALID, EXCEPTION, FIND;
 
     /** Name of task associated with to-do, deadline and event commands. */
     private String taskName;
@@ -21,6 +21,8 @@ public enum CommandType {
     private String onDate;
     /** Phrase to look up in task names. */
     private String keyPhrase;
+    /** Exception message to be displayed. */
+    private String exceptionMessage;
 
 
 
@@ -87,7 +89,14 @@ public enum CommandType {
         return this.keyPhrase;
     }
 
-
+    /**
+     * Gets the exception message if an exception occurred for the task.
+     *
+     * @return the exception message
+     */
+    public String getExceptionMessage() {
+        return this.exceptionMessage;
+    }
 
     /**
      * Sets the name of the task associated with this command. The command is to-do, deadline or event.
@@ -137,5 +146,12 @@ public enum CommandType {
      */
     public void setKeyPhrase(String keyPhrase) {
         this.keyPhrase = keyPhrase;
+    }
+
+    /**
+     * Sets the exception message that has occurred during the command
+     */
+    public void setExceptionMessage(String exceptionMessage) {
+        this.exceptionMessage = exceptionMessage;
     }
 }
