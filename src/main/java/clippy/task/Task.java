@@ -89,4 +89,12 @@ public abstract class Task {
         return result;
     }
 
+    /**
+     * Returns true if keyword is found in Task's description.
+     * @param keyword The keyword to search for in the Task's description.
+     * @return True if keyword is found in Task's description.
+     */
+    public boolean hasKeywordInDescription(String keyword) {
+        return this.description.contains(keyword);
+    }
 }
