@@ -3,6 +3,7 @@ package twofive.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Represents a Deadline task with a given description and deadline.
@@ -56,5 +57,15 @@ public class Deadline extends Task {
         Deadline deadlineTask = (Deadline) o;
 
         return super.equals(deadlineTask) && deadlineTask.deadline.equals(this.deadline);
+    }
+
+    @Override
+    public ArrayList<String> getTaskDetails() {
+        ArrayList<String> taskDetails = new ArrayList<>();
+        taskDetails.add("Deadline");
+        taskDetails.add(super.getTaskStatus());
+        taskDetails.add(super.getTaskDescription());
+        taskDetails.add(this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HH:mm")));
+        return taskDetails;
     }
 }

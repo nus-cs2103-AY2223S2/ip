@@ -1,6 +1,7 @@
 package twofive.task;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Represents a Todo task with a given description.
@@ -36,5 +37,12 @@ public class ToDo extends Task {
         return false;
     }
 
-
+    @Override
+    public ArrayList<String> getTaskDetails() {
+        ArrayList<String> taskDetails = new ArrayList<>();
+        taskDetails.add("ToDo");
+        taskDetails.add(super.getTaskStatus());
+        taskDetails.add(super.getTaskDescription());
+        return taskDetails;
+    }
 }

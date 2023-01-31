@@ -3,6 +3,7 @@ package twofive.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Represents an Event task with a given description, start time and end time.
@@ -60,5 +61,16 @@ public class Event extends Task {
         Event event = (Event) o;
 
         return super.equals(event) && event.startTime.equals(this.startTime) && event.endTime.equals(this.endTime);
+    }
+
+    @Override
+    public ArrayList<String> getTaskDetails() {
+        ArrayList<String> taskDetails = new ArrayList<>();
+        taskDetails.add("Event");
+        taskDetails.add(super.getTaskStatus());
+        taskDetails.add(super.getTaskDescription());
+        taskDetails.add(this.startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd " + "HH:mm")));
+        taskDetails.add(this.endTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        return taskDetails;
     }
 }

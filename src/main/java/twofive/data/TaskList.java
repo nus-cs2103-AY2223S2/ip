@@ -1,7 +1,6 @@
 package twofive.data;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import twofive.exception.TaskDoneException;
@@ -20,27 +19,6 @@ public class TaskList {
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
-    }
-
-    /**
-     * Returns a String containing all tasks currently added, including
-     * their type, whether it is done and the description.
-     * Contains the deadline for Deadline tasks.
-     * Contains the start time and end time for Event tasks.
-     *
-     * @return String containing all added tasks.
-     */
-    public String getTasksList() {
-        StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list:\n");
-        int taskIndex = 1;
-        for (Task task : tasks) {
-            stringBuilder.append(taskIndex + ". " + task);
-            if (taskIndex - 1 < tasks.size() - 1) {
-                stringBuilder.append("\n");
-            }
-            taskIndex++;
-        }
-        return stringBuilder.toString();
     }
 
     /**
@@ -97,35 +75,23 @@ public class TaskList {
     }
 
     /**
-     * Returns a String containing all tasks which have a deadline, start time
+     * Returns an ArrayList containing all tasks which have a deadline, start time
      * or end time on the given date, including their type, whether it is
      * done and the description.
      * Contains the deadline for Deadline tasks.
      * Contains the start time and end time for Event tasks.
      *
      * @param date Date in which tasks are due
-     * @return String containing all added tasks with a deadline on the given date.
+     * @return ArrayList containing all added tasks with a deadline on the given date.
      */
-    public String getTasksOnDateList(LocalDate date) {
-        StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list due on "
-                + date.format(DateTimeFormatter.ofPattern("EEE MMM d yyyy")) + ":\n");
-        int taskIndex = 1;
-        int numTasksDue = 0;
+    public ArrayList<Task> getTasksOnDate(LocalDate date) {
+        ArrayList<Task> todayTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.isToday(date)) {
-                numTasksDue++;
+                todayTasks.add(task);
             }
         }
-        for (Task task : tasks) {
-            if (task.isToday(date)) {
-                stringBuilder.append(taskIndex + ". " + task);
-                if (taskIndex - 1 < numTasksDue - 1) {
-                    stringBuilder.append("\n");
-                }
-                taskIndex++;
-            }
-        }
-        return stringBuilder.toString();
+        return todayTasks;
     }
 
     /**
@@ -142,35 +108,25 @@ public class TaskList {
     }
 
     /**
-     * Returns a String containing all tasks which have the specified keyword in their description,
+     * Returns an ArrayList containing all tasks which have the specified keyword in their description,
      * including their type, whether it is done and the description.
      * Contains the deadline for Deadline tasks.
      * Contains the start time and end time for Event tasks.
      *
      * @param keyword Keyword used to filter tasks
-     * @return String containing all added tasks with the keyword in their description
+     * @return ArrayList containing all added tasks with the keyword in their description
      */
-    public String getKeywordString(String keyword) {
-        StringBuilder stringBuilder = new StringBuilder("Here are the tasks in your list with keyword ["
-                + keyword
-                + "] in "
-                + "their description:\n");
-        int taskIndex = 1;
-        int numTasksWithKeyword = 0;
+    public ArrayList<Task> getTasksByKeyword(String keyword) {
+        ArrayList<Task> tasksWithKeyword = new ArrayList<>();
         for (Task task : tasks) {
             if (task.hasKeyword(keyword)) {
-                numTasksWithKeyword++;
+                tasksWithKeyword.add(task);
             }
         }
-        for (Task task : tasks) {
-            if (task.hasKeyword(keyword)) {
-                stringBuilder.append(taskIndex + ". " + task);
-                if (taskIndex - 1 < numTasksWithKeyword - 1) {
-                    stringBuilder.append("\n");
-                }
-                taskIndex++;
-            }
-        }
-        return stringBuilder.toString();
+        return tasksWithKeyword;
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 }

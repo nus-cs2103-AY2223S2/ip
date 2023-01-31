@@ -12,7 +12,7 @@ public class TodoTest {
     @Test
     public void toDoStringTest() {
         ToDo toDo = new ToDo("return book");
-        assertEquals("[T][ ] return book", toDo.toString());
+        assertEquals("[T]Undone return book", toDo.toString());
     }
 
     @Test

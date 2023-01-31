@@ -15,7 +15,8 @@ public class EventTest {
         LocalDateTime startTime = LocalDateTime.parse("2023-08-06 14:00", formatter);
         LocalDateTime endTime = LocalDateTime.parse("2023-08-06 16:00", formatter);
         Event event = new Event("return book", startTime, endTime);
-        assertEquals("[E][ ] return book (from: Sun Aug 6 2023 02:00PM to: Sun Aug 6 2023 04:00PM)", event.toString());
+        assertEquals("[E]Undone return book (from: Sun Aug 6 2023 02:00PM to: Sun Aug 6 2023 04:00PM)",
+                event.toString());
     }
 
     @Test
