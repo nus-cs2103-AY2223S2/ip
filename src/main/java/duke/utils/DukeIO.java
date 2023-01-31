@@ -1,6 +1,9 @@
-package duke;
+package duke.utils;
 
 import java.util.ArrayList;
+
+import duke.Tasks.Task;
+import duke.Tasks.TaskList;
 
 public class DukeIO {
 

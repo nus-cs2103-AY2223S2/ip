@@ -1,6 +1,13 @@
 package duke;
 
 import org.junit.jupiter.api.Test;
+
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.Tasks.TaskList;
+import duke.Tasks.ToDo;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 

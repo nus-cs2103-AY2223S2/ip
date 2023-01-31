@@ -1,4 +1,4 @@
-package duke;
+package duke.utils;
 
 import java.io.IOException;
 import java.io.FileInputStream;
@@ -8,6 +8,8 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import duke.Tasks.Task;
 
 public class Storage {
     private static DukeIO dukeIo = new DukeIO();

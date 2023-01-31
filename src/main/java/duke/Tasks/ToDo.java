@@ -1,4 +1,4 @@
-package duke;
+package duke.Tasks;
 
 public class ToDo extends Task {
     private static final String FORMAT = "todo {task name}";

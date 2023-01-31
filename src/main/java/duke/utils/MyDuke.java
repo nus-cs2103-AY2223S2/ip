@@ -1,10 +1,17 @@
-package duke;
+package duke.utils;
 
 import java.util.List;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+
+import duke.DukeException.InvalidCommandException;
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
+import duke.Tasks.Task;
+import duke.Tasks.TaskList;
+import duke.Tasks.ToDo;
 
 public class MyDuke {
     private static DukeIO dukeIo = new DukeIO();
