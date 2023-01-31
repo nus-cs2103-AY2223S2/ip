@@ -47,6 +47,16 @@ public abstract class Command {
     // static method cannot be abstract
     // if child method wants to throw exception, parent method must also do
 
+    /**
+     * Abstract method that returns the supposed string output after executing the command.
+     *
+     * @param tasks contains the task list.
+     * @param ui the UI in charge of user interactions.
+     * @param storage handles the loading and saving of files.
+     * @throws DukeException if unexpected runtime issue occurs.
+     */
+    public abstract String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException;
+
     public boolean isExit() {
         return this.isExit;
     }

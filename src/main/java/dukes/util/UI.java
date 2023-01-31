@@ -4,11 +4,6 @@ import dukes.task.Task;
 
 import java.util.Scanner;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
 /**
  * The util class for reading inputs and providing feedbacks to user.
  */
@@ -94,6 +89,23 @@ public class UI {
     }
 
     /**
+     * Display success message when user add tasks into list.
+     *
+     * @param theTask the task added into the list.
+     * @param tasks the list of tasks.
+     * @return the success message.
+     */
+    public static String returnAdd(Task theTask, TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(WORD_ADD).append("\n");
+        sb.append(theTask.toString()).append("\n");
+        int numTask = tasks.getTaskList().size();
+        sb.append("Now you have " + numTask +
+                " tasks in the list.");
+        return sb.toString();
+    }
+
+    /**
      * Display success message when user delete tasks from list.
      *
      * @param theTask the task deleted from the list.
@@ -105,6 +117,23 @@ public class UI {
         int numTask = tasks.getTaskList().size();
         System.out.println("Now you have " + numTask +
                 " tasks in the list.");
+    }
+
+    /**
+     * Display success message when user delete tasks from list.
+     *
+     * @param theTask the task deleted from the list.
+     * @param tasks the list of tasks.
+     * @return the delete message.
+     */
+    public static String returnDelete(Task theTask, TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(WORD_DELETE).append("\n");
+        sb.append(theTask.toString()).append("\n");
+        int numTask = tasks.getTaskList().size();
+        sb.append("Now you have " + numTask +
+                " tasks in the list.");
+        return sb.toString();
     }
 
     /**
@@ -124,6 +153,26 @@ public class UI {
     }
 
     /**
+     * Display success message when user list all the tasks,
+     * or list the tasks on the specific date.
+     *
+     * @param str a string containing the list of tasks to be displayed.
+     * @param action 0 for list, 1 for search.
+     * @return the list string.
+     */
+    public static String returnList(String str, int action) {
+        StringBuilder sb = new StringBuilder();
+        if (action == 0) {
+            sb.append(WORD_LIST);
+        } else {
+            sb.append(WORD_SEARCH);
+        }
+        sb.append("\n");
+        sb.append(str);
+        return sb.toString();
+    }
+
+    /**
      * Display success message when user mark a task as done or undone.
      *
      * @param theTask the task to be marked.
@@ -139,12 +188,42 @@ public class UI {
     }
 
     /**
+     * Display success message when user mark a task as done or undone.
+     *
+     * @param theTask the task to be marked.
+     * @param action 0 for mark, 1 for unmark.
+     * @return the mark or unmark string.
+     */
+    public static String returnMark(Task theTask, int action) {
+        StringBuilder sb = new StringBuilder();
+        if (action == 0) {
+            sb.append(WORD_MARK_DONE);
+        } else {
+            sb.append(WORD_MARK_UNDONE);
+        }
+        sb.append("\n");
+        sb.append(" " + theTask.toString());
+        return sb.toString();
+    }
+
+    /**
      * Display success message when user find tasks based on specific pattern.
-     * @param str
+     *
+     * @param str the find keyword.
      */
     public static void showFind(String str) {
         System.out.println(WORD_FIND);
         System.out.println(str);
+    }
+
+    /**
+     * Display success message when user find tasks based on specific pattern.
+     *
+     * @param str the find keyword.
+     * @return the find output.
+     */
+    public static String returnFind(String str) {
+        return WORD_FIND + "\n" + str;
     }
 
     /**
