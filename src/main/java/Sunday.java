@@ -4,7 +4,9 @@ import utilities.Parser;
 import utilities.Ui;
 
 public class Sunday {
+
     private Ui ui;
+
     public Sunday(String filepath) {
         this.ui = new Ui();
         try {
@@ -27,6 +29,7 @@ public class Sunday {
         }
         this.ui.close();
     }
+
     public static void main(String[] args) {
         new Sunday("../data/sunday.txt").run();
     }

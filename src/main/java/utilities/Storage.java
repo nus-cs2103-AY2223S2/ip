@@ -1,8 +1,6 @@
 package utilities;
-import command.Command;
-import exceptions.SundayException;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,7 +8,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import command.Command;
+import exceptions.SundayException;
+
 public class Storage {
+
     private static String getFilepath() throws IOException {
         Path dataDir = Paths.get(System.getProperty("user.dir"), "data");
         if (!Files.exists(dataDir)) {
@@ -19,6 +21,7 @@ public class Storage {
         Path saveFilepath = Paths.get(dataDir.toString(), "sunday.txt");
         return saveFilepath.toString();
     }
+
     public static boolean createDataFile() throws SundayException {
         try {
             String filepath = getFilepath();
@@ -29,6 +32,7 @@ public class Storage {
             throw new SundayException("ERROR: Unable to initialise data file");
         }
     }
+
     public static void readFromDataFile() throws SundayException {
         try {
             String filepath = getFilepath();
@@ -75,6 +79,7 @@ public class Storage {
             throw new SundayException("ERROR: Unable to read from data file");
         }
     }
+
     public static boolean writeToDataFile(String line) throws SundayException {
         try {
             String filepath = getFilepath();

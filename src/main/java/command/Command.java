@@ -1,4 +1,7 @@
 package command;
+
+import java.text.ParseException;
+
 import collections.TaskList;
 import exceptions.SundayException;
 import task.Deadline;
@@ -6,10 +9,10 @@ import task.Event;
 import task.Task;
 import task.ToDo;
 import utilities.Ui;
-import java.text.ParseException;
 
 public enum Command {
-    INITIALIZE ("init") {
+
+    INITIALIZE("init") {
         @Override
         public void execute(String filepath) throws SundayException {
             Ui.printWelcome();
@@ -21,7 +24,8 @@ public enum Command {
             }
         }
     },
-    LIST ("list") {
+
+    LIST("list") {
         @Override
         public void execute(String input) {
             if (list.isEmpty()) {
@@ -31,7 +35,8 @@ public enum Command {
             }
         }
     },
-    DEADLINE ("deadline") {
+
+    DEADLINE("deadline") {
         @Override
         public void execute(String input) throws SundayException {
             try {
@@ -68,7 +73,8 @@ public enum Command {
             }
         }
     },
-    EVENT ("event") {
+
+    EVENT("event") {
         @Override
         public void execute(String input) throws SundayException {
             try {
@@ -113,7 +119,8 @@ public enum Command {
             }
         }
     },
-    TODO ("todo") {
+
+    TODO("todo") {
         @Override
         public void execute(String input) throws SundayException {
             try {
@@ -126,7 +133,8 @@ public enum Command {
             }
         }
     },
-    MARK ("mark") {
+
+    MARK("mark") {
         @Override
         public void execute(String input) throws SundayException {
             try {
@@ -140,21 +148,23 @@ public enum Command {
             }
         }
     },
-    UNMARK ("unmark") {
+
+    UNMARK("unmark") {
         @Override
         public void execute(String input) throws SundayException {
             try {
                 int index = Integer.parseInt(input.substring(1)) - 1;
                 Task unmarked = list.unmark(index);
                 Ui.printUnmarkedTask(unmarked, list.getUncompletedSize());
-            }  catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 throw new SundayException("OOPS!!! You did not specify which task you wanted me to unmark");
             } catch (IndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! Seems like that task does not exist.");
             }
         }
     },
-    DELETE ("delete") {
+
+    DELETE("delete") {
         @Override
         public void execute(String input) throws SundayException {
             try {
@@ -168,17 +178,22 @@ public enum Command {
             }
         }
     },
-    BYE ("bye") {
+
+    BYE("bye") {
         @Override
         public void execute(String input) throws SundayException {
             boolean didSave = list.save();
             Ui.printGoodbye(didSave);
         }
     };
-    private String command;
+
     private static TaskList list = new TaskList();
+
+    private String command;
+
     Command(String command) {
         this.command = command;
     }
+
     public abstract void execute(String input) throws SundayException;
 }
