@@ -1,9 +1,9 @@
 package duke.tasklist;
 
+import java.util.ArrayList;
+
 import duke.dukeexception.DukeException;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * A TaskList stores all tasks temporarily for easy access of the tasks while the program is

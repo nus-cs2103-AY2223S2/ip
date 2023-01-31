@@ -9,26 +9,22 @@ public class Ui {
     /**
      * the welcome message to be displayed when the programm starts running
      */
-    private String welcomeMessage = "Hello from\n" + " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    /**
-     * prints the welcome message
-     */
+    private String welcomeMessage = "Hello from\n"
+        + " ____        _        \n"
+        + "|  _ \\ _   _| | _____ \n"
+        + "| | | | | | | |/ / _ \\\n"
+        + "| |_| | |_| |   <  __/\n"
+        + "|____/ \\__,_|_|\\_\\___|\n";
+
     public void welcome() {
         System.out.println(welcomeMessage);
     }
-
-    /**
-     * method that reads user input
-     * @return the String input by the user
-     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         return input;
     }
-
+    
     /**
      * Displays an error message if the default tasks cannot be loaded.
      */

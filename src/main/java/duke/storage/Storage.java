@@ -1,5 +1,12 @@
 package duke.storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.dukeexception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -7,12 +14,6 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.tasklist.TaskList;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * class that handles saving and reading tasks saved on the local hard disk
@@ -41,8 +42,7 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> defaultTasks = new ArrayList<>();
         if (!taskFolder.exists()) {
-            System.out.println(
-                    "---The default duke.task.Task Folder is not found, creating data folder with task file...");
+            System.out.println("---The default duke.task.Task Folder is not found, creating data folder...");
             taskFolder.mkdir();
             System.out.println("---Task Folder created successfully");
             File f = new File(taskFolder, "task.txt");
@@ -85,16 +85,17 @@ public class Storage {
         while (s.hasNext()) {
             String[] lineArr = s.nextLine().split("/");
             switch (lineArr[0]) {
-                case "D":
-                    tasks.add(new Deadline(lineArr[1], Integer.parseInt(lineArr[2]), lineArr[3]));
-                    break;
-                case "T":
-                    tasks.add(new Todo(lineArr[1], Integer.parseInt(lineArr[2])));
-                    break;
-                case "E":
-                    tasks.add(new Event(lineArr[1], Integer.parseInt(lineArr[2]), lineArr[3],
-                            lineArr[4]));
-                    break;
+            case "D":
+                tasks.add(new Deadline(lineArr[1], Integer.parseInt(lineArr[2]), lineArr[3]));
+                break;
+            case "T":
+                tasks.add(new Todo(lineArr[1], Integer.parseInt(lineArr[2])));
+                break;
+            case "E":
+                tasks.add(new Event(lineArr[1], Integer.parseInt(lineArr[2]), lineArr[3], lineArr[4]));
+                break;
+            default:
+                continue;
             }
         }
         s.close();

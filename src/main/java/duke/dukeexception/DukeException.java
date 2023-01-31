@@ -4,12 +4,9 @@ public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);
     }
-
     /**
-     * 
-     * @param inputLine: a line of command entered by the user, to be checked if it is valid
-     * @throws DukeException: throws a customised exception message if the command input is not
-     *         valid.
+     * @param inputLine a line of command entered by the user, to be checked if it is valid
+     * @throws DukeException throws a customised exception message if the command input is not valid
      */
     public static void checkInput(String inputLine) throws DukeException {
         if (inputLine.equals("deadline")) {

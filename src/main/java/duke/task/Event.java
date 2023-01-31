@@ -1,22 +1,24 @@
 package duke.task;
 
-import duke.parser.Parser;
-
 import java.time.LocalDateTime;
 
+<<<<<<< HEAD
 /**
  * an Event class comes with a start time and an end time
  */
+=======
+import duke.parser.Parser;
+
+>>>>>>> branch-A-CodingStandard
 public class Event extends Task {
     protected final LocalDateTime from;
     protected final LocalDateTime to;
 
     /**
-     * 
-     * @param name: a string indicating thename of the duke.task.Event task
-     * @param status: an int that checks if the duke.task.Event is done or not
-     * @param from: a string representing the starting time passed in by the user
-     * @param to: a string representing the ending time passed in by the user
+     * @param name a string indicating thename of the duke.task.Event task
+     * @param status a String that checks if the duke.task.Event is done or not
+     * @param from a string representing the starting time passed in by the user
+     * @param to a string representing the ending time passed in by the user
      */
     public Event(String name, int status, String from, String to) {
         super(name, status);

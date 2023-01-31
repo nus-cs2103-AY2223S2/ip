@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.parser.Parser;
-
 import java.time.LocalDateTime;
+
+import duke.parser.Parser;
 
 /**
  * A Deadline task comes with a deadline
@@ -11,9 +11,9 @@ public class Deadline extends Task {
     protected final LocalDateTime deadline;
 
     /**
-     * @param name: a string indicating the name of the task
-     * @param status: an int indicating whether the task is done or not
-     * @param deadline: a string indicating the deadline of the task
+     * @param name a string indicating the name of the task
+     * @param status a String indicating whether the task is done or not
+     * @param deadline a string indicating the deadline of the task
      */
     public Deadline(String name, int status, String deadline) {
         super(name, status);
@@ -36,7 +36,7 @@ public class Deadline extends Task {
      * overrides the toString method: displays the type, then status, then name, then deadline
      */
     public String toString() {
-        return "[D]" + status + " " + name + "(by " + Parser.TransformDateTime(deadline) + ")";
+        return "[D]" + status + " " + name + "(by " + Parser.transformDateTime(deadline) + ")";
     }
 
     /**
