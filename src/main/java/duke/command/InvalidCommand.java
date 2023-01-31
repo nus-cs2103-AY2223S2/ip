@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.ui.Ui;
-
 /**
  * Represents an invalid command that is entered by the user.
  */
@@ -9,18 +7,19 @@ public class InvalidCommand extends Command {
     /**
      * Constructs an <code>InvalidCommand</code>.
      */
-    public InvalidCommand(Ui ui) {
-        super(ui);
+    public InvalidCommand() {
+        super();
     }
 
     /**
-     * Causes the bot indicate that it cannot understand this invalid command.
+     * Causes the bot to indicate that it cannot understand this invalid command.
+     *
+     * @return a string indicating that the command cannot be understood.
+     *
      */
     @Override
-    public void runCommand() {
-        Ui.printStraightLine();
-        ui.printStatement("Sorry. I do not understand this command. Please try again.");
-        Ui.printStraightLine();
+    public String runCommand() {
+        return "Sorry. I do not understand this command. Please try again.";
     }
 
 }

@@ -1,9 +1,10 @@
 package duke.command;
 
+import java.lang.StringBuilder;
+
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a delete command entered by the user to delete a task from the task list.
@@ -21,13 +22,12 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructs a <code>DeleteCommand</code>.
-     * @param ui The <code>Ui</code> to allow the command to print messages to the user.
+     *
      * @param taskIndex The index of the task which is to be deleted.
      * @param tasks The <code>TaskList</code> of all available tasks.
      * @param storage The <code>Storage</code> object to allow local saving of the deletion.
      */
-    public DeleteCommand(Ui ui, int taskIndex, TaskList tasks, Storage storage) {
-        super(ui);
+    public DeleteCommand(int taskIndex, TaskList tasks, Storage storage) {
         this.taskIndex = taskIndex;
         this.tasks = tasks;
         this.storage = storage;
@@ -35,19 +35,24 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes a task from the task list.
+     *
+     * @return a string that indicates to the user that the task has been deleted.
      */
     @Override
-    public void runCommand() {
+    public String runCommand() {
         //Updates and print changes
         Task deletedTask = tasks.getTask(taskIndex);
         tasks.deleteTask(taskIndex);
-        Ui.printStraightLine();
-        ui.printStatement("Ta-da! The following task has been deleted.");
-        ui.printStatement(deletedTask.getStatusOfTaskInString());
-        Ui.printStraightLine();
 
         //Save changes
         storage.saveTasks(tasks);
-    }
 
+        //Prepare output
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Ta-da! The following task has been deleted.\n");
+        sb.append(deletedTask.getStatusOfTaskInString());
+
+        return sb.toString();
+    }
 }

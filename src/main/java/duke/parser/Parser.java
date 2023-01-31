@@ -3,19 +3,7 @@ package duke.parser;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.Temporal;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.HelpCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.OnCommand;
-import duke.command.ToDoCommand;
-import duke.command.UnmarkCommand;
+import duke.command.*;
 import duke.datetime.DateTime;
 import duke.exception.DukeException;
 import duke.storage.Storage;
@@ -26,19 +14,15 @@ import duke.ui.Ui;
  * Represents a parser that will parse and process commands entered by the user into the chatbot.
  */
 public class Parser {
-    /** The Ui object that will be passed into the commands. */
-    private Ui ui;
-
     /** The task list required to check whether command is valid. */
     private TaskList tasks;
 
     /**
      * Constructs a <code>Parser</code> instance.
      *
-     * @param ui The <code>Ui</code> object that will handle the command messages.
+     * @param tasks Task list of the user
      */
-    public Parser(Ui ui, TaskList tasks) {
-        this.ui = ui;
+    public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 
@@ -83,10 +67,9 @@ public class Parser {
                 ctMark.setIndex(indexOfTask);
                 return ctMark;
             } catch (DukeException dukeException) {
-                Ui.printStraightLine();
-                ui.printStatement(dukeException.getMessage());
-                Ui.printStraightLine();
-                return CommandType.NOTHING;
+                CommandType ctException = CommandType.EXCEPTION;
+                ctException.setExceptionMessage(dukeException.getMessage());
+                return ctException;
             }
         case "unmark":
             try {
@@ -105,10 +88,9 @@ public class Parser {
                 ctUnmark.setIndex(indexOfTask);
                 return ctUnmark;
             } catch (DukeException dukeException) {
-                Ui.printStraightLine();
-                ui.printStatement(dukeException.getMessage());
-                Ui.printStraightLine();
-                return CommandType.NOTHING;
+                CommandType ctException = CommandType.EXCEPTION;
+                ctException.setExceptionMessage(dukeException.getMessage());
+                return ctException;
             }
         case "delete":
             try {
@@ -127,10 +109,9 @@ public class Parser {
                 ctDelete.setIndex((indexOfTask));
                 return ctDelete;
             } catch (DukeException dukeException) {
-                Ui.printStraightLine();
-                ui.printStatement(dukeException.getMessage());
-                Ui.printStraightLine();
-                return CommandType.NOTHING;
+                CommandType ctException = CommandType.EXCEPTION;
+                ctException.setExceptionMessage(dukeException.getMessage());
+                return ctException;
             }
         case "todo":
             try {
@@ -143,10 +124,9 @@ public class Parser {
                 ctToDo.setTaskName(taskName);
                 return ctToDo;
             } catch (DukeException dukeException) {
-                Ui.printStraightLine();
-                ui.printStatement(dukeException.getMessage());
-                Ui.printStraightLine();
-                break;
+                CommandType ctException = CommandType.EXCEPTION;
+                ctException.setExceptionMessage(dukeException.getMessage());
+                return ctException;
             }
         case "deadline":
             try {
@@ -188,16 +168,15 @@ public class Parser {
                 return ctDeadline;
 
             } catch (DukeException dukeException) {
-                Ui.printStraightLine();
-                System.out.println(dukeException.getMessage());
-                Ui.printStraightLine();
-                return CommandType.NOTHING;
+                CommandType ctException = CommandType.EXCEPTION;
+                ctException.setExceptionMessage(dukeException.getMessage());
+                return ctException;
             } catch (DateTimeParseException dateTimeException) {
-                Ui.printStraightLine();
-                ui.printStatement("Please check that you entered a valid date, and that the date should be in "
+                CommandType ctException = CommandType.EXCEPTION;
+                ctException.setExceptionMessage(
+                        "Please check that you entered a valid date, and that the date should be in "
                         + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
-                Ui.printStraightLine();
-                return CommandType.NOTHING;
+                return ctException;
             }
         case "event":
             try {
@@ -260,16 +239,15 @@ public class Parser {
                 ctEvent.setEndDate(endDate);
                 return ctEvent;
             } catch (DukeException dukeException) {
-                Ui.printStraightLine();
-                ui.printStatement(dukeException.getMessage());
-                Ui.printStraightLine();
-                return CommandType.NOTHING;
+                CommandType ctException = CommandType.EXCEPTION;
+                ctException.setExceptionMessage(dukeException.getMessage());
+                return ctException;
             } catch (DateTimeParseException dateTimeException) {
-                Ui.printStraightLine();
-                ui.printStatement("Please check that you entered a valid date, and that the date should be in "
-                        + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
-                Ui.printStraightLine();
-                return CommandType.NOTHING;
+                CommandType ctException = CommandType.EXCEPTION;
+                ctException.setExceptionMessage(
+                        "Please check that you entered a valid date, and that the date should be in "
+                                + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
+                return ctException;
             }
         case "on":
             try {
@@ -282,16 +260,15 @@ public class Parser {
                 ctOn.setOnDate(dateString);
                 return ctOn;
             } catch (DukeException dukeException) {
-                Ui.printStraightLine();
-                ui.printStatement(dukeException.getMessage());
-                Ui.printStraightLine();
-                return CommandType.NOTHING;
+                CommandType ctException = CommandType.EXCEPTION;
+                ctException.setExceptionMessage(dukeException.getMessage());
+                return ctException;
             } catch (DateTimeParseException dateTimeException) {
-                Ui.printStraightLine();
-                ui.printStatement("Please check that you entered a valid date, and that the date should be in "
-                        + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
-                Ui.printStraightLine();
-                return CommandType.NOTHING;
+                CommandType ctException = CommandType.EXCEPTION;
+                ctException.setExceptionMessage(
+                        "Please check that you entered a valid date, and that the date should be in "
+                                + "the format of\nyyyy-MM-dd hh:mm or yyyy-MM-dd.");
+                return ctException;
             }
         case "find":
             CommandType ctFind = CommandType.FIND;
@@ -300,7 +277,6 @@ public class Parser {
         default:
             return CommandType.INVALID;
         }
-        return CommandType.INVALID;
     }
 
     /**
@@ -311,32 +287,32 @@ public class Parser {
     public Command parseCommandType(CommandType command, TaskList tasks, Storage storage) {
         switch (command) {
         case BYE:
-            return new ByeCommand(ui);
+            return new ByeCommand();
         case LIST:
-            return new ListCommand(ui, tasks);
+            return new ListCommand(tasks);
         case MARK:
-            return new MarkCommand(ui, command.getIndex(), tasks, storage);
+            return new MarkCommand(command.getIndex(), tasks, storage);
         case UNMARK:
-            return new UnmarkCommand(ui, command.getIndex(), tasks, storage);
+            return new UnmarkCommand(command.getIndex(), tasks, storage);
         case TODO:
-            return new ToDoCommand(ui, command.getTaskName(), tasks, storage);
+            return new ToDoCommand(command.getTaskName(), tasks, storage);
         case DEADLINE:
-            return new DeadlineCommand(ui, command.getTaskName(), command.getDeadline(), tasks, storage);
+            return new DeadlineCommand(command.getTaskName(), command.getDeadline(), tasks, storage);
         case EVENT:
-            return new EventCommand(ui, command.getTaskName(), command.getStartDate(), command.getEndDate(),
+            return new EventCommand(command.getTaskName(), command.getStartDate(), command.getEndDate(),
                     tasks, storage);
         case DELETE:
-            return new DeleteCommand(ui, command.getIndex(), tasks, storage);
+            return new DeleteCommand(command.getIndex(), tasks, storage);
         case ON:
-            return new OnCommand(ui, command.getOnDate(), tasks);
+            return new OnCommand(command.getOnDate(), tasks);
         case HELP:
-            return new HelpCommand(ui);
+            return new HelpCommand();
         case FIND:
-            return new FindCommand(ui, command.getKeyPhrase(), tasks);
+            return new FindCommand(command.getKeyPhrase(), tasks);
         case INVALID:
-            return new InvalidCommand(ui);
+            return new InvalidCommand();
         default:
-            return null;
+            return new ExceptionCommand(command.getExceptionMessage());
         }
     }
 

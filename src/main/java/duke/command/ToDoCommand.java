@@ -1,9 +1,10 @@
 package duke.command;
 
+import java.lang.StringBuilder;
+
 import duke.storage.Storage;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 /**
  * Represents a to-do command that is entered by the user to create a new to-do task.
@@ -22,13 +23,12 @@ public class ToDoCommand extends Command {
     /**
      * Constructs a <code>ToDoCommand</code>.
      *
-     * @param ui The <code>Ui</code> to allow the command to print messages to the user.
      * @param taskName The name of the to-do task to be created.
      * @param tasks The <code>TaskList</code> of all available tasks.
      * @param storage The <code>Storage</code> object to allow local saving after adding the to-do task.
      */
-    public ToDoCommand(Ui ui, String taskName, TaskList tasks, Storage storage) {
-        super(ui);
+    public ToDoCommand(String taskName, TaskList tasks, Storage storage) {
+        super();
         this.taskName = taskName;
         this.tasks = tasks;
         this.storage = storage;
@@ -36,25 +36,28 @@ public class ToDoCommand extends Command {
 
     /**
      * Creates a to-do task and updates the local data file.
+     *
+     * @return a string stating the to-do task that has been created.
      */
     @Override
-    public void runCommand() {
+    public String runCommand() {
         //Creates task and saves it
         ToDo newToDoTask = new ToDo(taskName);
         tasks.addTask(newToDoTask);
         storage.saveTasks(tasks);
 
         //Notifies the user
-        Ui.printStraightLine();
-        ui.printStatement("Added task to list:");
-        ui.printStatement(newToDoTask.getStatusOfTaskInString());
+        StringBuilder sb = new StringBuilder();
+        sb.append("Added task to list:\n");
+        sb.append(newToDoTask.getStatusOfTaskInString());
+        sb.append("\n");
+
         if (tasks.getSizeOfTaskList() == 1) {
-            ui.printStatement("\nCurrently, there is 1 task in your list.");
+            sb.append("\nCurrently, there is 1 task in your list.");
         } else {
-            ui.printStatement("\nCurrently, there are " + Integer.toString(tasks.getSizeOfTaskList())
-                    + " tasks in your list.");
+            sb.append("\nCurrently, there are " + tasks.getSizeOfTaskList() + " tasks in your list.");
         }
-        Ui.printStraightLine();
+        return sb.toString();
     }
 }
 

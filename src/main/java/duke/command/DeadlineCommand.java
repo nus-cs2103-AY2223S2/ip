@@ -1,12 +1,11 @@
 package duke.command;
 
+import java.lang.StringBuilder;
+
 import duke.datetime.DateTime;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.tasklist.TaskList;
-import duke.ui.Ui;
-
-import java.lang.StringBuilder;
 
 /**
  * Represents a deadline command that is entered by the user to create a task with a deadline.
@@ -28,14 +27,13 @@ public class DeadlineCommand extends Command {
     /**
      * Constructs a <code>DeadlineCommand</code>.
      *
-     * @param ui The Ui to allow the command to print messages to the user.
      * @param taskName The name of the deadline task to be created.
      * @param deadline The deadline of the task.
      * @param tasks The lists of all available tasks.
      * @param storage The Storage object to allow local saving after adding a new deadline task.
      */
-    public DeadlineCommand(Ui ui, String taskName, String deadline, TaskList tasks, Storage storage) {
-        super(ui);
+    public DeadlineCommand(String taskName, String deadline, TaskList tasks, Storage storage) {
+        super();
         this.taskName = taskName;
         this.deadline = deadline;
         this.tasks = tasks;
@@ -43,8 +41,9 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Creates a deadline task and updates the local data file, and returns a string informing the user
-     * that the file has been created.
+     * Creates a deadline task and updates the local data file.
+     *
+     * @return a string informing the user that the file has been created.
      */
     @Override
     public String runCommand() {
@@ -52,6 +51,8 @@ public class DeadlineCommand extends Command {
         Deadline newDeadlineTask = new Deadline(taskName, deadline, DateTime.getDateTimeObject(deadline));
         tasks.addTask(newDeadlineTask);
         storage.saveTasks(tasks);
+
+        //Prepares output string
         StringBuilder sb = new StringBuilder();
         sb.append("Added task to list:\n");
         sb.append(newDeadlineTask.getStatusOfTaskInString() + "\n");

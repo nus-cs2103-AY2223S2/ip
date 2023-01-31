@@ -1,5 +1,6 @@
 package duke.tasklist;
 
+import java.lang.StringBuilder;
 import java.util.ArrayList;
 
 import duke.task.Task;
@@ -9,7 +10,9 @@ import duke.ui.Ui;
  * Represents the list of <code>Tasks</code> that the user has entered into the chatbot.
  */
 public class TaskList {
-    /** List that stores all the Task objects. */
+    /**
+     * List that stores all the Task objects.
+     */
     private ArrayList<Task> tasks;
 
     /**
@@ -52,6 +55,7 @@ public class TaskList {
     public void deleteTask(int index) {
         tasks.remove(index);
     }
+
     /**
      * Prints out all the user tasks that have been entered by the user thus far.
      */
@@ -71,5 +75,28 @@ public class TaskList {
             System.out.println(output);
         }
         Ui.printStraightLine();
+    }
+
+
+    /**
+     * Gets all the user tasks that have been entered by the user thus far
+     *
+     * @return a string listing out all the available user tasks.
+     */
+    public String getUserTasks() {
+        StringBuilder sb = new StringBuilder();
+        if (tasks.size() == 0) {
+            sb.append("There are currently no tasks in your list.");
+            return sb.toString();
+        }
+        sb.append("Here are the tasks in your list:\n\n");
+        int numberOfTasks = tasks.size();
+        //Process each task in the storage
+        for (int i = 0; i < numberOfTasks; i = i + 1) {
+            String numbering = Integer.toString(i + 1) + ". ";
+            String output = numbering + tasks.get(i).getStatusOfTaskInString() + "\n";
+            sb.append(output);
+        }
+        return sb.toString();
     }
 }

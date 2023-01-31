@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.ui.Ui;
-
 /**
  * Represents a command that is entered by the user
  */

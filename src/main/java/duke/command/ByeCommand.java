@@ -18,6 +18,8 @@ public class ByeCommand extends Command {
 
     /**
      * Causes the bot to return the exit message.
+     *
+     * @return the exit message
      */
     @Override
     public String runCommand() {

@@ -1,6 +1,7 @@
 package duke;
 
 import javafx.application.Application;
+import javafx.animation.PauseTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 import duke.command.Command;
@@ -31,11 +33,10 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/human.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/ghost.png"));
 
     //Bot elements
-    private Ui userInterface;
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
@@ -49,7 +50,7 @@ public class Duke extends Application {
         Ui userInterface = new Ui();
         Storage storage = new Storage("data", "tasks.txt");
         TaskList taskList = new TaskList();
-        Parser parser = new Parser(userInterface, taskList);
+        Parser parser = new Parser(taskList);
 
 
         //Prepare data file
@@ -136,12 +137,12 @@ public class Duke extends Application {
         //Customise the title and dimensions of the window
         stage.setTitle("Boo");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(700.0);
+        stage.setMinWidth(800.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(800.0, 700.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(800, 600);
         //Horizontal scroll bar of scroll pane never to be shown
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         //Vertical scroll bar of scroll pane always to be shown
@@ -152,7 +153,7 @@ public class Duke extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(700.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -170,12 +171,14 @@ public class Duke extends Application {
 
         //Step 3: Add functionality to handle user input
 
+        generateStartingMessage();
+
         /* Event handler for send button.
            When user clicks send, a label containing the user's input will be created
            and set as a child of the dialog container.
         */
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
 
 
@@ -184,7 +187,7 @@ public class Duke extends Application {
            a label containing the user's input and set as a child of the dialog container.
         */
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
 
 
@@ -212,10 +215,12 @@ public class Duke extends Application {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing the bot's reply,
      * and then appends them to the dialog container. Clears the user input after processing.
+     *
+     * @param stage that has the input element which is accepting user input
      */
-    private void handleUserInput() {
+    private void handleUserInput(Stage stage) {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText())); //Just echo for now
+        Label dukeText = new Label(getResponse(userInput.getText(), stage)); //Just echo for now
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -225,29 +230,29 @@ public class Duke extends Application {
 
 
     /**
-     * Stub function that generates a response to user input
+     * Gets the response of the bot in accordance to what the user types in
+     *
+     * @param input The user's input to be responded to.
+     * @param stage The stage that is encapsulating the nodes.
+     * @return the string containing the bot's response.
      */
-    private String getResponse(String input) {
+    private String getResponse(String input, Stage stage) {
+
         CommandType commandType = parser.parseRawCommand(input);
         Command command = parser.parseCommandType(commandType, taskList, storage);
-        //Incorrect format
-        if (command == null) {
-            return "An error occurred. Please try again.";
-        } else {
 
-            //Run command
-            command.runCommand();
-
-            //Check for exit command
-            if (command.isExit()) {
-                break;
-            }
+        //Need to close the application
+        if (input.equals("bye")) {
+            PauseTransition delayBeforeClosing = new PauseTransition(Duration.seconds(5));
+            //Closes the stage after the specified duration
+            delayBeforeClosing.setOnFinished(event -> stage.close());
+            delayBeforeClosing.play();
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
         }
-    }
 
+        return command.runCommand();
 
-
-        return "Duke heard: " + input;
     }
 
 
@@ -256,10 +261,9 @@ public class Duke extends Application {
      */
     private void initialiseBot() {
         //Initialise components
-        userInterface = new Ui();
         storage = new Storage("data", "tasks.txt");
         taskList = new TaskList();
-        parser = new Parser(userInterface, taskList);
+        parser = new Parser(taskList);
 
         //Prepare data file
         if (!storage.prepareFile()) {
@@ -270,6 +274,17 @@ public class Duke extends Application {
             //Cannot read from data file. Start with new empty task list.
             taskList = new TaskList();
         }
+    }
+
+    /**
+     * Generates the starting message from the bot.
+     */
+    private void generateStartingMessage() {
+        Label dukeText = new Label(Ui.LOGO + "\n\n" + Ui.INTRODUCTORY_BODY + "\n\n" + Ui.COMMAND_LIST);
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
     }
 
 //
