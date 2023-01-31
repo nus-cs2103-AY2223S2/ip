@@ -1,10 +1,15 @@
 package red;
 
 import red.command.Command;
+
 import red.exception.RedException;
+
 import red.parser.Parser;
+
 import red.storage.Storage;
+
 import red.task.TaskList;
+
 import red.ui.UI;
 
 /**

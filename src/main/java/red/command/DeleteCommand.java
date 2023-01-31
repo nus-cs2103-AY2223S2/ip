@@ -1,9 +1,12 @@
 package red.command;
 
 import red.exception.RedException;
+
 import red.storage.Storage;
+
 import red.task.Task;
 import red.task.TaskList;
+
 import red.ui.UI;
 
 /**
@@ -38,12 +41,12 @@ public class DeleteCommand extends Command {
             throw new RedException("There are no tasks to be removed");
         }
         if (tasks.getTaskListSize() < this.taskIndex) {
-            throw new RedException(String.format("The task with the specified index does not exist",
-                    tasks.getTaskListSize()));
+            throw new RedException("The task with the specified index does not exist");
         } else {
             Task deletedTask = tasks.deleteTask(this.taskIndex);
             String message = String.format("Noted. I've removed this task:\n %s \nNow you have %d tasks in the list.",
                     deletedTask.toString(), tasks.getTaskListSize());
+            System.out.println(message);
         }
     }
 
