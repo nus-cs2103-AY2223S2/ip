@@ -26,10 +26,10 @@ public class AddTaskCommand extends Command {
      * @param ui The ui object
      * @param storage The storage object
      */
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         list.add(task);
-        ui.addTask(task, list.getLength());
         storage.write(list);
+        return ui.addTask(task, list.getLength());
     }
 
     /**

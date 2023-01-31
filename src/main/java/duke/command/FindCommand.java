@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      * @param ui The ui object
      * @param storage The storage object
      */
-    public void execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         ArrayList<Integer> found = new ArrayList<>();
         for (Integer i = 0; i < list.getLength(); i++) {
             String cur = list.getTask(i).toString();
@@ -32,7 +32,7 @@ public class FindCommand extends Command {
                 found.add(i);
             }
         }
-        ui.find(found, list);
+        return ui.find(found, list);
     }
 
     /**

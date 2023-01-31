@@ -1,4 +1,8 @@
-E | 1 | say hi | from 2 to 5
-E | 0 | say hi | from 2 to 5
+E | 1 | say hi| from 2 to 5
+E | 0 | say hi| from 2 to 5
 T | 0 | hi
-D | 0 | say hi | 2023-01-01
+T | 0 | eat dinner
+E | 0 | say hi| from 2 to 4
+T | 0 | hi
+T | 0 | hi
+T | 0 | hi

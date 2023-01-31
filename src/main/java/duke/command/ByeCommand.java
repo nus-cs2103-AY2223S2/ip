@@ -13,8 +13,8 @@ public class ByeCommand extends Command {
      * @param ui The ui object
      * @param storage The storage object
      */
-    public void execute(TaskList list, Ui ui, Storage storage) {
-
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        return ("Bye. Hope to see you again soon!");
     }
 
     /**
