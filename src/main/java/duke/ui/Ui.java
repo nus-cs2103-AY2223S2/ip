@@ -25,7 +25,7 @@ public class Ui {
      * @param taskNumber
      * @param task
      */
-    public void sendTaskDetails(int taskNumber, Task task) {
-        System.out.println(taskNumber + ". " + task);
+    public String sendTaskDetails(int taskNumber, Task task) {
+        return taskNumber + ". " + task + "\n";
     }
 }

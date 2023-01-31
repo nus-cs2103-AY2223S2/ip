@@ -32,44 +32,45 @@ public class Command {
      * @param tasks
      * @throws DukeException
      */
-    public void executeCommand(Parser.Action action, String userInput, TaskList tasks, Storage storage)
+    public String executeCommand(Parser.Action action, String userInput, TaskList tasks, Storage storage)
             throws DukeException {
+        String response = "";
         switch(action) {
         case LIST:
-            this.listTasksCommand(tasks);
-            break;
+            response = this.listTasksCommand(tasks);
+            return response;
         case FIND:
-            tasks.findTask(this.parser.getKeyword(userInput));
-            break;
+            response = tasks.findTask(this.parser.getKeyword(userInput));
+            return response;
         case TODO:
-            tasks.addTask(new ToDo(this.parser.getTodoDescription(userInput)));
+            response = tasks.addTask(new ToDo(this.parser.getTodoDescription(userInput)));
             storage.saveData(tasks);
-            break;
+            return response;
         case DEADLINE:
-            tasks.addTask(new Deadline(this.parser.getDeadlineDescription(userInput),
+            response = tasks.addTask(new Deadline(this.parser.getDeadlineDescription(userInput),
                     this.parser.getDeadlineDate(userInput)));
             storage.saveData(tasks);
-            break;
+            return response;
         case EVENT:
             LocalDate[] eventDetails = this.parser.getEventDateDetails(userInput);
-            tasks.addTask(new Event(this.parser.getEventDescription(userInput),
+            response = tasks.addTask(new Event(this.parser.getEventDescription(userInput),
                     eventDetails[0], eventDetails[1]));
             storage.saveData(tasks);
-            break;
+            return response;
         case MARK:
-            tasks.markTask(this.parser.getTaskIndex(userInput));
+            response = tasks.markTask(this.parser.getTaskIndex(userInput));
             storage.saveData(tasks);
-            break;
+            return response;
         case UNMARK:
-            tasks.unmarkTask(this.parser.getTaskIndex(userInput));
+            response = tasks.unmarkTask(this.parser.getTaskIndex(userInput));
             storage.saveData(tasks);
-            break;
+            return response;
         case DELETE:
-            tasks.removeTask(this.parser.getTaskIndex(userInput));
+            response = tasks.removeTask(this.parser.getTaskIndex(userInput));
             storage.saveData(tasks);
-            break;
+            return response;
         case UNKNOWN:
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            return "I'm sorry, but I don't know what that means :-(";
         default:
             throw new DukeException("");
         }
@@ -80,14 +81,15 @@ public class Command {
      * @param store
      * @throws DukeException
      */
-    public void listTasksCommand(TaskList store) throws DukeException {
+    public String listTasksCommand(TaskList store) throws DukeException {
+        String s = "Here are the tasks in your list:\n";
         try {
-            System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < store.getSize(); i++) {
-                ui.sendTaskDetails(i + 1, store.getTask(i));
+                s = s + ui.sendTaskDetails(i + 1, store.getTask(i));
             }
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
+        return s;
     }
 }
