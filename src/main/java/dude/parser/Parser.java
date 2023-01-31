@@ -44,7 +44,7 @@ public class Parser {
         try {
             commandType = CommandType.valueOf(cmd[0].toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new DudeException("\tUhh... You give me wrong command leh");
+            throw new DudeException("Uhh... You give me wrong command leh");
         }
 
         validate(commandType, command);
@@ -72,7 +72,7 @@ public class Parser {
         case FIND:
             return new FindCommand(cmd[1]);
         default:
-            throw new DudeException("\tUhh... You give me wrong command leh");
+            throw new DudeException("Uhh... You give me wrong command leh");
         }
     }
 
@@ -93,53 +93,53 @@ public class Parser {
         case LIST:
         case BYE:
             if (cmd.length != 1) {
-                throw new DudeException("\tUhh... I think you added extra commands?");
+                throw new DudeException("Uhh... I think you added extra commands?");
             }
             break;
         case MARK:
         case UNMARK:
         case DELETE:
             if (input.length > 2) {
-                throw new DudeException("\tUhh... I think you added extra commands leh");
+                throw new DudeException("Uhh... I think you added extra commands leh");
             } else if (input.length < 2) {
-                throw new DudeException("\tUhh... You also need to put the task after the command");
+                throw new DudeException("Uhh... You also need to put the task after the command");
             } else {
                 try {
                     Integer.parseInt(cmd[1]);
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                    throw new DudeException("\tUhh... You need to use a valid task number also");
+                    throw new DudeException("Uhh... You need to use a valid task number also");
                 }
             }
             break;
         case TODO:
             if (cmd.length < 2) {
-                throw new DudeException("\tUhh...  You need to type the description also");
+                throw new DudeException("Uhh...  You need to type the description also");
             }
             break;
         case DEADLINE:
             if (input.length < 2 || !cmd[1].contains("/by")) {
-                throw new DudeException("\tUhh...  You need to use /by to indicate the date");
+                throw new DudeException("Uhh...  You need to use /by to indicate the date");
             } else if (input[1].equals("/by")) {
-                throw new DudeException("\tUhh...  You need to include the description also");
+                throw new DudeException("Uhh...  You need to include the description also");
             } else if (input[input.length - 1].equals("/by")) {
-                throw new DudeException("\tUhh...  You need to include the date also");
+                throw new DudeException("Uhh...  You need to include the date also");
             }
 
             format = cmd[1].split(" /by ");
             try {
                 LocalDate.parse(format[1]);
             } catch (DateTimeParseException e) {
-                throw new DudeException("\tUhh... You using wrong format of date leh (YYYY-MM-DD HHmm)");
+                throw new DudeException("Uhh... You using wrong format of date leh (YYYY-MM-DD HHmm)");
             }
             break;
         case EVENT:
             if (input.length < 2 || !cmd[1].contains("/from") || !cmd[1].contains("/to")) {
-                throw new DudeException("\tUhh...  You need to use /from and /to to indicate the dates for the event");
+                throw new DudeException("Uhh...  You need to use /from and /to to indicate the dates for the event");
             } else if (input[1].equals("/from") || input[1].equals("/to")) {
-                throw new DudeException("\tUhh...  You need to include the description also");
+                throw new DudeException("Uhh...  You need to include the description also");
             } else if (input[input.length - 1].equals("/from")
                     || input[input.length - 1].equals("/to")) {
-                throw new DudeException("\tUhh... Please include the dates and ensure it is in the valid format");
+                throw new DudeException("Uhh... Please include the dates and ensure it is in the valid format");
             }
 
             format = cmd[1].split(" /from ");
@@ -147,19 +147,19 @@ public class Parser {
 
             try {
                 if (LocalDate.parse(details[0]).isBefore(LocalDate.parse(details[1]))) {
-                    throw new DudeException("\tUhh... Your start date must be earlier than your end date");
+                    throw new DudeException("Uhh... Your start date must be earlier than your end date");
                 }
             } catch (DateTimeParseException e) {
-                throw new DudeException("\tUhh... You using wrong format of date leh (YYYY-MM-DD HHmm)");
+                throw new DudeException("Uhh... You using wrong format of date leh (YYYY-MM-DD HHmm)");
             }
             break;
         case FIND:
             if (input.length < 2) {
-                throw new DudeException("\tUhh... You also need to put the keyword after the command");
+                throw new DudeException("Uhh... You also need to put the keyword after the command");
             }
             break;
         default:
-            throw new DudeException("\tUhh...  This one invalid command leh");
+            throw new DudeException("Uhh...  This one invalid command leh");
         }
     }
 }

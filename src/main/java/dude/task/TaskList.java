@@ -77,12 +77,12 @@ public class TaskList {
     public String toString() {
         StringBuilder result;
         if (tasks.size() != 0) {
-            result = new StringBuilder("\tHere are the tasks in your list: \n");
+            result = new StringBuilder("Here are the tasks in your list: \n");
             for (int i = 0; i < tasks.size(); i++) {
-                result.append("\t").append(i + 1).append(".").append(tasks.get(i).toString()).append("\n");
+                result.append(i + 1).append(".").append(tasks.get(i).toString()).append("\n");
             }
         } else {
-            result = new StringBuilder("\tEh... You currently got no task leh.\n");
+            result = new StringBuilder("Eh... You currently got no task leh.\n");
         }
         return result.toString();
     }

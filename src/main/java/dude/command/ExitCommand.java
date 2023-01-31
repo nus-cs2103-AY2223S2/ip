@@ -10,11 +10,13 @@ import dude.ui.Ui;
 public class ExitCommand extends Command {
     /**
      * {@inheritDoc}
+     *
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveData(tasks);
-        ui.showGoodbye();
         setExit(true);
+        return ui.showGoodbye();
     }
 }

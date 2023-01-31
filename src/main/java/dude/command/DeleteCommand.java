@@ -22,16 +22,18 @@ public class DeleteCommand extends Command {
 
     /**
      * {@inheritDoc}
+     *
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (Task.getTaskCount() >= taskIndex && Task.getTaskCount() != 0) {
             Task currentTask = tasks.getTask(taskIndex);
             tasks.deleteTask(taskIndex);
             storage.saveData(tasks);
-            ui.showDelete(currentTask);
+            return ui.showDelete(currentTask);
         } else {
-            ui.showError("\tUhh... Where got this task for me to delete?");
+            return ui.showError("Uhh... Where got this task for me to delete?");
         }
     }
 }
