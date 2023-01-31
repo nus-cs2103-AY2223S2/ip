@@ -10,8 +10,6 @@ package seedu.duke;
  */
 public class Duke {
 
-    private static boolean isStart = false;
-
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
@@ -19,7 +17,7 @@ public class Duke {
     /**
      * Represents the set of commands by the user.
      */
-    public enum Commands {
+    protected enum Commands {
         bye,
         mark,
         unmark,
@@ -56,10 +54,6 @@ public class Duke {
         // Return of the final String to add.
         String dukeText = "";
 
-        if (!isStart) {
-            dukeText += ui.welcome();
-        }
-        isStart = true;
         description = "";
         Parser userParse = new Parser(input);
         try {
@@ -115,5 +109,18 @@ public class Duke {
     protected String getResponse(String input) {
         Duke currDuke = new Duke("data/duke.txt");
         return "Duke: \n" + currDuke.run(input);
+    }
+
+    /**
+     * Returns the list of Commands.
+     *
+     * @return A String of List of commands.
+     */
+    public static String getCommands() {
+        String commandList = "";
+        for (Commands curr : Commands.values()) {
+            commandList += curr.name() + "\n";
+        }
+        return commandList;
     }
 }

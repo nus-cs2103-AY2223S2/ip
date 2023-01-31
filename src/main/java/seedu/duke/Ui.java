@@ -20,7 +20,7 @@ public class Ui {
      *
      * @return The String for Duke reply.
      */
-    public String welcome() {
+    public String welcome(String commands) {
         //Logo of Duke
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -29,6 +29,8 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         logo = "Hello from\n" + logo;
+        logo += "Here are the lists of commands:\n";
+        logo += commands;
         return logo;
     }
 

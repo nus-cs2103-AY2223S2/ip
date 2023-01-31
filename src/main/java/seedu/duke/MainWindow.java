@@ -31,9 +31,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialization of the application. Bind the scroll pane and also print out the welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        Ui ui = new Ui();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.welcome(Duke.getCommands()), dukeImage));
     }
 
     /**
