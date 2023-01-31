@@ -6,7 +6,6 @@ package duke;
  * @since 0.0
  */
 public class ToDos extends Task{
-    protected String by;
     private int isDone;
 
     public ToDos(String description, Integer isDone){

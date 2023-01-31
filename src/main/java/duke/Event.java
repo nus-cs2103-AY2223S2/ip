@@ -14,7 +14,7 @@ public class Event extends Task{
     private final LocalDate to;
 
     public Event(String description, LocalDate from, LocalDate to, Integer isDone){
-        super(description, isDone = isDone);
+        super(description, isDone);
         this.isDone = isDone;
         this.from = from;
         this.to = to;

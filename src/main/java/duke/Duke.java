@@ -15,46 +15,45 @@ public class Duke {
     private final UI ui;
 
     public Duke () {
-        Storage storage = new Storage("duke.txt");
-        this.storage = storage;
+        this.storage = new Storage("duke.txt");
         this.ui = new UI();
     }
 
     public void run(){
         ui.showWelcome();
-        int i = 1;
+        int i;
         String input = "";
 
         while (!input.equals("bye")) {
             input = ui.readCommand();
-            Integer len = input.length();
+            int len = input.length();
             Parser parser = new Parser();
             String command = parser.parse(input);
-            ArrayList<Task> arrayList = storage.load();
+            ArrayList<Task> task_list = storage.load();
             try {
                 switch (command){
                     case "BYE" :
                         break;
                     case "LIST":
-                        if (arrayList.size() == 0){
+                        if (task_list.size() == 0){
                             String err_msg = "You have not upload any task yet";
                             throw new DukeException(err_msg);
                         }
                         System.out.println("Here are the tasks in your list:");
                         i = 1;
-                        for (Task task : arrayList) {
+                        for (Task task : task_list) {
                             System.out.println(i + ". " + task.toString());
                             i++;
                         }
                         continue;
                     case "DELETE":
                         try{
-                            Integer num = Integer.parseInt(input.substring(7));
-                            Task curr_task = arrayList.get(num - 1);
+                            int num = Integer.parseInt(input.substring(7));
+                            Task curr_task = task_list.get(num - 1);
                             System.out.println("Noted. I've removed this task: \n  " + curr_task.toString());
-                            arrayList.remove(curr_task);
-                            storage.update_data(arrayList);
-                            System.out.println("Now you have " + (arrayList.size()) + " tasks in the list");
+                            task_list.remove(curr_task);
+                            storage.update_data(task_list);
+                            System.out.println("Now you have " + (task_list.size()) + " tasks in the list");
                         } catch (IndexOutOfBoundsException err1){
                             String err_msg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
                             System.out.println(err_msg);
@@ -65,12 +64,12 @@ public class Duke {
                         continue;
                     case "MARK":
                         try {
-                            Integer num = Integer.parseInt(input.substring(5));
-                            Task curr_task = arrayList.get(num - 1);
+                            int num = Integer.parseInt(input.substring(5));
+                            Task curr_task = task_list.get(num - 1);
                             System.out.println("Nice! I've marked this task as done");
                             curr_task.markAsDone();
-                            arrayList.set(num - 1, curr_task);
-                            storage.update_data(arrayList);
+                            task_list.set(num - 1, curr_task);
+                            storage.update_data(task_list);
                             System.out.println(curr_task.getStatusIcon() + " " + curr_task.getDes());
                         } catch (IndexOutOfBoundsException err1) {
                             String err_msg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
@@ -82,12 +81,12 @@ public class Duke {
                         continue;
                     case "UNMARK":
                         try{
-                            Integer num = Integer.parseInt(input.substring(7));
-                            Task curr_task = arrayList.get(num - 1);
+                            int num = Integer.parseInt(input.substring(7));
+                            Task curr_task = task_list.get(num - 1);
                             System.out.println("OK, I've marked this task as not done yet");
                             curr_task.unMark();
-                            arrayList.set(num - 1, curr_task);
-                            storage.update_data(arrayList);
+                            task_list.set(num - 1, curr_task);
+                            storage.update_data(task_list);
                             System.out.println(curr_task.getStatusIcon() + " " + curr_task.getDes());
                         } catch (IndexOutOfBoundsException err1){
                             String err_msg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
@@ -99,16 +98,15 @@ public class Duke {
                         continue;
                     case "TODO":
                         if (len <= 5) {
-                            String err_msg = "☹ OOPS!!! The description of a todo cannot be empty";
-                            input = ui.readCommand();
+                            System.out.println("☹ OOPS!!! The description of a todo cannot be empty");
                             continue;
                         }
                         System.out.println("Got it. I've added this task:");
                         ToDos todo = new ToDos(input.substring(5), 0);
-                        arrayList.add(todo);
-                        storage.update_data(arrayList);
+                        task_list.add(todo);
+                        storage.update_data(task_list);
                         System.out.println("added: " + todo);
-                        System.out.println("Now you have " + arrayList.size() + " tasks in the list");
+                        System.out.println("Now you have " + task_list.size() + " tasks in the list");
                         continue;
                     case "DEADLINE":
                         String[] ddl_str_arr = input.split(" /");
@@ -119,10 +117,10 @@ public class Duke {
                         try {
                             LocalDate deadline_time = LocalDate.parse(ddl_str_arr[1]);
                             Deadline deadline = new Deadline(ddl_str_arr[0].substring(9), deadline_time, 0);
-                            arrayList.add(deadline);
-                            storage.update_data(arrayList);
+                            task_list.add(deadline);
+                            storage.update_data(task_list);
                             System.out.println("added: " + deadline);
-                            System.out.println("Now you have " + arrayList.size() + " tasks in the list");
+                            System.out.println("Now you have " + task_list.size() + " tasks in the list");
                         } catch (DateTimeParseException e) {
                             String err_msg = "☹ OOPS!!! The description or date of a deadline is wrong, plase key in the" +
                                     "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
@@ -147,13 +145,12 @@ public class Duke {
                                 throw new DukeException(err_msg);
                             }
                             Event event = new Event(event_str_arr[0].substring(6), from, to, 0);
-                            ArrayList arraylist = storage.load();
-                            arraylist.add(event);
+                            task_list.add(event);
                             System.out.println("Got it. I've added this task");
-                            storage.update_data(arraylist);
+                            storage.update_data(task_list);
 
                             System.out.println("added: " + event);
-                            System.out.println("Now you have " + arraylist.size() + " tasks in the list");
+                            System.out.println("Now you have " + task_list.size() + " tasks in the list");
                         } catch (DateTimeParseException e) {
                             String err_msg = "☹ OOPS!!! The description or date for the event is wrong, plase key in the" +
                                     "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
@@ -167,7 +164,7 @@ public class Duke {
                         throw new DukeException(err_msg);
                     }
                 }catch (DukeException e){
-                System.out.println(e);
+                    System.out.println(e);
             }
             input = ui.readCommand();
         }

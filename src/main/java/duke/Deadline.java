@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task{
     private int isDone;
-    private LocalDate by;
+    private final LocalDate by;
 
     public Deadline(String description, LocalDate by, Integer isDone){
         super(description, isDone);
