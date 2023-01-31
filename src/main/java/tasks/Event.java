@@ -2,10 +2,22 @@ package tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Represents an Event Task.
+ * It contains the task description as well as the start and end of
+ * the event in LocalDateTime format.
+ */
 public class Event extends Task {
     private LocalDateTime start;
     private LocalDateTime end;
+
+    /**
+     * Returns an Event with the given task description with start and end datetime.
+     *
+     * @param taskDescription
+     * @param start
+     * @param end
+     */
     public Event(String taskDescription, LocalDateTime start, LocalDateTime end) {
         super(taskDescription);
         this.start = start;

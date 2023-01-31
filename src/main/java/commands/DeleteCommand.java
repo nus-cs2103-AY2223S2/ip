@@ -10,6 +10,10 @@ import java.io.IOException;
 public class DeleteCommand extends Command{
     private int index;
 
+    /**
+     * Returns a Command that when executed deletes a task at a given index of TaskList.
+     * @param index
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }

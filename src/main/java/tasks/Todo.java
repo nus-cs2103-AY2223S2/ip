@@ -1,6 +1,13 @@
 package tasks;
 
+/**
+ * Represents a Todo Task.
+ */
 public class Todo extends Task{
+    /**
+     * Returns a Todo with the given task description.
+     * @param taskDescription
+     */
     public Todo(String taskDescription) {
         super(taskDescription);
     }

@@ -3,10 +3,20 @@ package tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline Task.
+ * It contains the task description as well as the deadline in LocalDateTime format.
+ */
 public class Deadline extends Task {
 
     private LocalDateTime deadline;
 
+    /**
+     * Returns a Deadline task with the given task description and deadline.
+     *
+     * @param taskDescription
+     * @param deadline
+     */
     public Deadline(String taskDescription, LocalDateTime deadline) {
         super(taskDescription);
         this.deadline = deadline;
