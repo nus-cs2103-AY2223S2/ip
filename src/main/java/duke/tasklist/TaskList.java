@@ -47,17 +47,13 @@ public class TaskList {
      * @param index
      * @throws DukeException
      */
-    public String markTask(int index) throws DukeException {
-        String s = "";
+    public void markTask(int index) throws DukeException {
         // handle errors out of range
         if (index < 0 || index >= this.getSize()) {
             int display = index + 1;
             throw new DukeException("duke.task.Task " + display + " does not exist.");
         }
         this.getTask(index).markAsDone();
-        s = s + "Nice! I've marked this task as done: \n";
-        s = s + this.getTask(index).toString();
-        return s;
     }
 
     /**
@@ -65,29 +61,21 @@ public class TaskList {
      * @param index
      * @throws DukeException
      */
-    public String unmarkTask(int index) throws DukeException {
-        String s = "";
+    public void unmarkTask(int index) throws DukeException {
         // handle errors out of range
         if (index < 0 || index >= this.getSize()) {
             int display = index + 1;
             throw new DukeException("duke.task.Task " + display + " does not exist.");
         }
         this.getTask(index).markAsUndone();
-        s = s + "OK, I've marked this task as not done yet:";
-        s = s + this.getTask(index).toString();
-        return s;
     }
 
     /**
      * Add task to taskList
      * @param task
      */
-    public String addTask(Task task) {
-        String s = "Got it. I've added this task:\n";
-        s = s + task.toString() + "\n";
+    public void addTask(Task task) {
         taskList.add(task);
-        s = s + "Now you have " + this.getSize() + " tasks in the list.";
-        return s;
     }
 
     /**
@@ -95,32 +83,29 @@ public class TaskList {
      * @param index
      * @throws DukeException
      */
-    public String removeTask(int index) throws DukeException {
-        String s = "";
+    public void removeTask(int index) throws DukeException {
         // handle errors out of range
         if (index < 0 || index >= this.getSize()) {
             int display = index + 1;
             throw new DukeException("duke.task.Task " + display + " does not exist.");
         }
-        s = s + "Noted. I've removed this task:\n";
-        s = s + this.getTask(index).toString() + "\n";
         taskList.remove(index);
-        s = s + "Now you have " + this.getSize() + " tasks in the list.";
-        return s;
     }
 
     /**
-     * Finds and prints task details based on keyword by user
+     * Find and filter task list based on keyword
      * @param keyword
+     * @return List of filtered tasks
      * @throws DukeException
      */
-    public String findTask(String keyword) throws DukeException {
-        String s = "Here are the matching tasks in your list:";
+    public TaskList findTask(String keyword) throws DukeException {
+        TaskList filteredTaskList = new TaskList(new ArrayList<>());
         for (int i = 0; i < this.getSize(); i++) {
             if (this.getTask(i).getStorageDetails().contains(keyword)) {
-                s = s + this.ui.sendTaskDetails(i + 1, this.getTask(i));
+                filteredTaskList.addTask(this.getTask(i));
             }
         }
-        return s;
+        return filteredTaskList;
     }
+
 }

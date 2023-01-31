@@ -38,27 +38,13 @@ public class Duke {
     }
 
     /**
-     * Main logic to run the program
-     * Ends when user inputs "bye"
-     * @throws DukeException
-     */
-    public void run() throws DukeException {
-        this.ui.sendGreetingsMessage();
-        Scanner myObj = new Scanner(System.in);
-        String userInput = myObj.nextLine();
-        while (!userInput.equals("bye")) {
-            this.command.executeCommand(this.parser.getCommand(userInput), userInput, tasks, storage);
-            myObj = new Scanner(System.in);
-            userInput = myObj.nextLine();
-        }
-        ui.sendGoodByeMessage();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Get message based on user input
      */
     public String getResponse(String input) throws DukeException {
-        return this.command.executeCommand(this.parser.getCommand(input), input, tasks, storage);
+        try {
+            return this.command.executeCommand(this.parser.getCommand(input), input, tasks, storage);
+        } catch (Exception e) {
+            return ui.getUnknownMessage();
+        }
     }
 }

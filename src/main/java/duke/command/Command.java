@@ -6,6 +6,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -34,62 +35,49 @@ public class Command {
      */
     public String executeCommand(Parser.Action action, String userInput, TaskList tasks, Storage storage)
             throws DukeException {
-        String response = "";
         switch(action) {
         case LIST:
-            response = this.listTasksCommand(tasks);
-            return response;
+            return ui.getTaskListDetailsMessage(tasks);
         case FIND:
-            response = tasks.findTask(this.parser.getKeyword(userInput));
-            return response;
+            TaskList filteredTaskList = tasks.findTask(this.parser.getKeyword(userInput));
+            return ui.getFindTaskListMessage(filteredTaskList);
         case TODO:
-            response = tasks.addTask(new ToDo(this.parser.getTodoDescription(userInput)));
+            ToDo todo = new ToDo(this.parser.getTodoDescription(userInput));
+            tasks.addTask(todo);
             storage.saveData(tasks);
-            return response;
+            return ui.getAddTaskMessage(todo, tasks.getSize());
         case DEADLINE:
-            response = tasks.addTask(new Deadline(this.parser.getDeadlineDescription(userInput),
-                    this.parser.getDeadlineDate(userInput)));
+            Deadline deadline = new Deadline(this.parser.getDeadlineDescription(userInput),
+                    this.parser.getDeadlineDate(userInput));
+            tasks.addTask(deadline);
             storage.saveData(tasks);
-            return response;
+            return ui.getAddTaskMessage(deadline, tasks.getSize());
         case EVENT:
             LocalDate[] eventDetails = this.parser.getEventDateDetails(userInput);
-            response = tasks.addTask(new Event(this.parser.getEventDescription(userInput),
-                    eventDetails[0], eventDetails[1]));
+            Event event = new Event(this.parser.getEventDescription(userInput),
+                    eventDetails[0], eventDetails[1]);
+            tasks.addTask(event);
             storage.saveData(tasks);
-            return response;
+            return ui.getAddTaskMessage(event, tasks.getSize());
         case MARK:
-            response = tasks.markTask(this.parser.getTaskIndex(userInput));
+            Task markTask = tasks.getTask(this.parser.getTaskIndex(userInput));
+            tasks.markTask(this.parser.getTaskIndex(userInput));
             storage.saveData(tasks);
-            return response;
+            return ui.getMarkTaskMessage(markTask);
         case UNMARK:
-            response = tasks.unmarkTask(this.parser.getTaskIndex(userInput));
+            Task unmarkTask = tasks.getTask(this.parser.getTaskIndex(userInput));
+            tasks.unmarkTask(this.parser.getTaskIndex(userInput));
             storage.saveData(tasks);
-            return response;
+            return ui.getUnmarkTaskMessage(unmarkTask);
         case DELETE:
-            response = tasks.removeTask(this.parser.getTaskIndex(userInput));
+            Task deleteTask = tasks.getTask(parser.getTaskIndex(userInput));
+            String response = ui.getRemoveTaskMessage(deleteTask);
+            tasks.removeTask(this.parser.getTaskIndex(userInput));
             storage.saveData(tasks);
+            response = response + ui.getTotalTasksMessage(tasks.getSize());
             return response;
-        case UNKNOWN:
-            return "I'm sorry, but I don't know what that means :-(";
         default:
-            throw new DukeException("");
+            return "I'm sorry, but I don't know what that means :-(";
         }
-    }
-
-    /**
-     * Loop through task lists to print task details
-     * @param store
-     * @throws DukeException
-     */
-    public String listTasksCommand(TaskList store) throws DukeException {
-        String s = "Here are the tasks in your list:\n";
-        try {
-            for (int i = 0; i < store.getSize(); i++) {
-                s = s + ui.sendTaskDetails(i + 1, store.getTask(i));
-            }
-        } catch (Exception e) {
-            throw new DukeException(e.getMessage());
-        }
-        return s;
     }
 }
