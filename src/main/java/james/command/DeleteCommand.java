@@ -3,10 +3,10 @@ package james.command;
 import james.JamesException;
 import james.task.Task;
 
-public class deleteCommand extends Command {
+public class DeleteCommand extends Command {
     private int index;
 
-    public deleteCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
 

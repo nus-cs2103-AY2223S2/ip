@@ -3,10 +3,10 @@ package james.command;
 import james.JamesException;
 import james.task.Event;
 
-public class addEventCommand extends Command {
+public class AddEventCommand extends Command {
     private Event event;
 
-    public addEventCommand(Event event) {
+    public AddEventCommand(Event event) {
         this.event = event;
     }
 

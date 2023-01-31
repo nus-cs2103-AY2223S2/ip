@@ -1,5 +1,6 @@
-package james;
+package james.ui;
 
+import james.JamesException;
 import james.task.Task;
 import james.task.TaskList;
 

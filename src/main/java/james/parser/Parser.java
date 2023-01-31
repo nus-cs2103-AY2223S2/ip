@@ -1,13 +1,13 @@
 package james.parser;
 
 import james.JamesException;
-import james.command.addDeadlineCommand;
-import james.command.addEventCommand;
-import james.command.addListCommand;
-import james.command.addToDoCommand;
-import james.command.addMarkCommand;
-import james.command.addUnmarkCommand;
-import james.command.deleteCommand;
+import james.command.AddDeadlineCommand;
+import james.command.AddEventCommand;
+import james.command.AddListCommand;
+import james.command.AddToDoCommand;
+import james.command.AddMarkCommand;
+import james.command.AddUnmarkCommand;
+import james.command.DeleteCommand;
 import james.command.Command;
 import james.task.Deadline;
 import james.task.Event;
@@ -18,10 +18,12 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     private String parseTask(String input) {
+
         return input.split(" ", 2)[1];
     }
 
     private String parseDescription(String input) {
+
         return parseTask(input).split(" /by ")[0];
     }
 
@@ -76,19 +78,19 @@ public class Parser {
 
     public Command parseCommand(String input) throws JamesException {
                 if (input.equals("list")) {
-                    return new addListCommand();
+                    return new AddListCommand();
                 } else if (input.startsWith("mark")) {
-                    return new addMarkCommand(Integer.parseInt(input.split(" ")[1]) - 1);
+                    return new AddMarkCommand(Integer.parseInt(input.split(" ")[1]) - 1);
                 } else if (input.startsWith("unmark")) {
-                    return new addUnmarkCommand(Integer.parseInt(input.split(" ")[1]) - 1);
+                    return new AddUnmarkCommand(Integer.parseInt(input.split(" ")[1]) - 1);
                 } else if (input.startsWith("todo")) {
-                    return new addToDoCommand(parseToDoTask(input));
+                    return new AddToDoCommand(parseToDoTask(input));
                 } else if (input.startsWith("deadline")) {
-                    return new addDeadlineCommand(parseDeadlineTask(input));
+                    return new AddDeadlineCommand(parseDeadlineTask(input));
                 } else if (input.startsWith("event")) {
-                    return new addEventCommand(parseEventTask(input));
+                    return new AddEventCommand(parseEventTask(input));
                 } else if (input.startsWith("delete")) {
-                    return new deleteCommand(Integer.parseInt(input.split(" ")[1]) - 1);
+                    return new DeleteCommand(Integer.parseInt(input.split(" ")[1]) - 1);
                 } else {
                     throw new JamesException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

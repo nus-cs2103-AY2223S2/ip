@@ -2,7 +2,9 @@ package james;
 
 import james.command.Command;
 import james.parser.Parser;
+import james.storage.Storage;
 import james.task.TaskList;
+import james.ui.UI;
 
 public class James {
         private UI ui;
@@ -32,10 +34,6 @@ public class James {
             }
             storage.writeToFile(taskList);
             ui.exit();
-        }
-
-        public static void main(String[] args) throws JamesException {
-            new James();
         }
     }
 

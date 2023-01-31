@@ -1,7 +1,5 @@
 package james.task;
 
-import james.task.Task;
-
 import java.util.ArrayList;
 
 public class TaskList {
@@ -17,7 +15,7 @@ public class TaskList {
     }
 
     public void unmarkTask(int index) {
-        taskList.get(index).markUnDone();
+        taskList.get(index).markUndone();
     }
 
     public Task getTask(int index) {
