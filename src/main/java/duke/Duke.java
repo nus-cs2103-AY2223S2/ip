@@ -1,9 +1,8 @@
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
+package duke;
+
+import task.TaskList;
+
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class Duke {
 //    public static String projName = " ____        _        \n"
@@ -11,7 +10,7 @@ public class Duke {
 //                                    + "| | | | | | | |/ / _ \\\n"
 //                                    + "| |_| | |_| |   <  __/\n"
 //                                    + "|____/ \\__,_|_|\\_\\___|\n";
-//    ArrayList<Task> tasks = new ArrayList<>();
+//    ArrayList<task.Task> tasks = new ArrayList<>();
     private final static String SAVED_PATH = "data/tasks.txt";
     private Ui ui;
     private Storage storage;
