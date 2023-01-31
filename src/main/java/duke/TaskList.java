@@ -108,6 +108,19 @@ public class TaskList {
                 list.remove(lastInteger);
             }
         }
+        else if (userInput.startsWith("find")) {
+            validate(userInput.length(), 4, "find");
+            int idx = userInput.indexOf(" ");
+            Integer count = 1;
+            String findName = userInput.substring(idx + 1);
+            System.out.println("Here are the matching tasks in your list:");
+            for (Task t : list) {
+                if (t.description.contains(findName)) {
+                    System.out.println(count.toString() + "." + t);
+                    count++;
+                }
+            }
+        }
         else {
             Task task;
             if (userInput.startsWith("todo")) {
