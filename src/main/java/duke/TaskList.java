@@ -20,82 +20,81 @@ public class TaskList {
         return this.tasks;
     }
 
-    public void list() {
-        Ui.separator();
+    public String list() {
+        String list = "";
         for (int i = 0; i < this.tasks.size(); i++) {
             int currentNumber = i + 1;
             Task task = this.tasks.get(i);
 
-            System.out.println("\t" + currentNumber + "." + task);
+            list = list + "\t" + currentNumber + "." + task + "\n";
         }
-        Ui.separator();
+        return list;
     }
 
 
-    public void delete(int index) {
-        Ui.separator();
+    public String delete(int index) {
+        String output;
         Task task = this.tasks.get(index - 1);
         this.tasks.remove(index - 1);
-        System.out.println("Noted. I've removed this task:" + "\n\t" + task);
-        System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
-        Ui.separator();
+        output = "Noted. I've removed this task:" + "\n\t" + task;
+        output = output + "\nNow you have " + this.tasks.size() + " tasks in the list.";
+        return output;
     }
 
-    public void addToDo(String taskDetails) {
+    public String addToDo(String taskDetails) {
+        String output;
         ToDo task = new ToDo(taskDetails);
         this.tasks.add(task);
-        System.out.println("\t" + task);
-        System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
-        Ui.separator();
+        output = "\t" + task;
+        output = output + "Now you have " + this.tasks.size() + " tasks in the list.";
+        return output;
     }
 
-    public void addDeadline(String description, String by) {
+    public String addDeadline(String description, String by) {
+        String output;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse(by, format);
         Deadline task = new Deadline(description, date);
         this.tasks.add(task);
-        System.out.println("\t" + task);
-        System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
-        Ui.separator();
+        output = "\t" + task;
+        output = output + "Now you have " + this.tasks.size() + " tasks in the list.";
+        return output;
     }
 
-    public void addEvent(String description, String from, String to) {
+    public String addEvent(String description, String from, String to) {
+        String output;
         Event task = new Event(description, from, to);
         this.tasks.add(task);
-        System.out.println("\t" + task);
-        System.out.println("Now you have " + this.tasks.size() + " tasks in the list.");
-        Ui.separator();
+        output = "\t" + task;
+        output = output + "Now you have " + this.tasks.size() + " tasks in the list.";
+        return output;
     }
 
     /**
      *  Filters the tasklist based on input and returns if task contains words from the input.
      * @param input String.
      */
-    public void find(String input) {
+    public String find(String input) {
+        String output;
         int counter = 1;
-        Ui.separator();
-        System.out.println("Here are the matching tasks in your list:");
+        output = "Here are the matching tasks in your list:";
         for (Task task : tasks) {
             if (task.getDescription().contains(input)) {
-                System.out.println("\t" + counter + "." + task);
+                output = output + "\n\t" + counter + "." + task;
                 counter++;
             }
         }
-        Ui.separator();
+        return output;
     }
 
-    public void setTaskStatus(int index, boolean isDone) {
+    public String setTaskStatus(int index, boolean isDone) {
         Task task = this.tasks.get(index - 1);
         task.setDone(isDone);
-        Ui.separator();
-        System.out.println("\tOk, I have marked this task as " + (isDone ? "done" : "not done yet") + ":\n\t\t"
-                + task);
-        Ui.separator();
+        return "\tOk, I have marked this task as " + (isDone ? "done" : "not done yet") + ":\n\t\t"
+                + task;
     }
 
     public int listSize() {
         return this.tasks.size();
     }
-
-
 }

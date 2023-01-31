@@ -23,41 +23,42 @@ public class Parser {
      * and then uses the rest of the words as arguments for the operation.
      * @param input User's input
      */
-    public void parse(String input) {
+    public String parse(String input) {
+        String str;
         try {
             String[] arr = input.split(" ", 2);
             boolean details = arr.length != 1;
             switch (arr[0]) {
             case "bye":
-                ui.exit();
+                str = ui.exit();
                 break;
             case "list":
-                tasklist.list();
+                str = tasklist.list();
                 break;
             case "mark":
                 if (!details) {
                     throw new DukeException("Please include the task index to mark");
                 } else {
-                    tasklist.setTaskStatus(Integer.parseInt(arr[1]), true);
+                    str = tasklist.setTaskStatus(Integer.parseInt(arr[1]), true);
                     break;
                 }
             case "unmark":
                 if (!details) {
                     throw new DukeException("Please include the task index to unmark.");
                 }
-                tasklist.setTaskStatus(Integer.parseInt(arr[1]), false);
+                str = tasklist.setTaskStatus(Integer.parseInt(arr[1]), false);
                 break;
             case "delete":
                 if (!details) {
                     throw new DukeException("Please include the task index to delete.");
                 }
-                tasklist.delete(Integer.parseInt(arr[1]));
+                str = tasklist.delete(Integer.parseInt(arr[1]));
                 break;
             case "todo":
                 if (!details) {
                     throw new DukeException("Please include the todo details.");
                 }
-                tasklist.addToDo(arr[1]);
+                str = tasklist.addToDo(arr[1]);
                 break;
             case "deadline":
                 if (!details) {
@@ -68,7 +69,7 @@ public class Parser {
                     throw new DukeException("Please insert deadline date after /by");
                 }
 
-                tasklist.addDeadline(descriptionBy[0], descriptionBy[1]);
+                str = tasklist.addDeadline(descriptionBy[0], descriptionBy[1]);
                 break;
             case "event":
                 if (!details) {
@@ -82,13 +83,13 @@ public class Parser {
                 if (fromTo.length == 1) {
                     throw new DukeException("Please insert the date the event takes place until, after /to ");
                 }
-                tasklist.addEvent(descriptionOthers[0], fromTo[0], fromTo[1]);
+                str = tasklist.addEvent(descriptionOthers[0], fromTo[0], fromTo[1]);
                 break;
             case "find":
                 if (!details) {
                     throw new DukeException("Please include the task you would like to find.");
                 }
-                tasklist.find(arr[1]);
+                str = tasklist.find(arr[1]);
                 break;
             default:
                 throw new DukeException("Sorry, I don't know what that means.");
@@ -97,8 +98,10 @@ public class Parser {
             // handle changes to arraylist
             storage.writeFile(tasklist);
         } catch (DukeException e) {
-            ui.showError(e);
+            str = ui.showError(e);
+
         }
+        return str;
     }
 
 }
