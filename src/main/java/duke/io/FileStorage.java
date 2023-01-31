@@ -36,7 +36,8 @@ public class FileStorage implements Storage {
         try {
             ensureDirectoriesExist();
             Files.createFile(path);
-        } catch (FileAlreadyExistsException ignored) {
+        } catch (FileAlreadyExistsException e) {
+            // Ignored
         } catch (IOException e) {
             throw new DukeException("I encountered an I/O error when creating the save file!");
         } catch (SecurityException e) {
@@ -71,7 +72,8 @@ public class FileStorage implements Storage {
     private void ensureDirectoriesExist() throws IOException {
         try {
             Files.createDirectories(path.getParent());
-        } catch (FileAlreadyExistsException ignored) {
+        } catch (FileAlreadyExistsException e) {
+            // Ignored
         }
     }
 }

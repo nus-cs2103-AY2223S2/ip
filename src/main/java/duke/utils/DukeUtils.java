@@ -4,7 +4,6 @@ import duke.command.Parser;
 import duke.exception.DukeException;
 import duke.io.FileStorage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 import java.nio.file.Path;
 import java.util.function.Consumer;
@@ -38,8 +37,8 @@ public abstract class DukeUtils {
      * Loads the previously saved tasks list from storage if it exists and returns it. Otherwise, creates a new file for
      * storing the task list and returns an empty task list.
      *
-     * @throws DukeException Indicates an error in loading from storage or creating storage.
      * @return The task list loaded from storage if it exists. Otherwise, returns an empty task list.
+     * @throws DukeException Indicates an error in loading from storage or creating storage.
      */
     public static TaskList loadTasks() throws DukeException {
         return new TaskList(new FileStorage(SAVE_FILE_PATH));
