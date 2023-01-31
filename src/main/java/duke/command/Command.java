@@ -19,10 +19,9 @@ public abstract class Command {
     }
 
     /**
-     * Performs the command and returns if the conversation with
-     * the chatbot has ended.
+     * Performs the command and returns the relevant reply.
      *
-     * @return True if conversation has ended and false otherwise.
+     * @return Taskbot reply to the command.
      */
-    public abstract boolean execute();
+    public abstract String execute();
 }

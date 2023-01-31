@@ -22,35 +22,34 @@ public class Parser {
      * Returns an instance of the correct command from the user's input.
      *
      * @param input User's input.
-     * @param ui Medium which the chatbot uses to communicate.
      * @param taskList List of task maintained by the chatbot.
      * @param storage Chatbot's storage of the tasks it maintains.
      * @return Command instance.
      * @throws DukeException If input is not recognized.
      */
-    public static Command parseCommand(String input, Ui ui, TaskList taskList, Storage storage)
+    public static Command parseCommand(String input, TaskList taskList, Storage storage)
             throws DukeException {
         String type = input.split(" ", 2)[0];
 
         switch(type) {
         case "todo":
-            return new CreateTodoCommand(input, ui, taskList, storage);
+            return new CreateTodoCommand(input, taskList, storage);
         case "deadline":
-            return new CreateDeadlineCommand(input, ui, taskList, storage);
+            return new CreateDeadlineCommand(input, taskList, storage);
         case "event":
-            return new CreateEventCommand(input, ui, taskList, storage);
+            return new CreateEventCommand(input, taskList, storage);
         case "mark":
-            return new MarkTaskCommand(input, ui, taskList, storage);
+            return new MarkTaskCommand(input, taskList, storage);
         case "unmark":
-            return new UnmarkTaskCommand(input, ui, taskList, storage);
+            return new UnmarkTaskCommand(input, taskList, storage);
         case "delete":
-            return new DeleteTaskCommand(input, ui, taskList, storage);
+            return new DeleteTaskCommand(input, taskList, storage);
         case "list":
-            return new ListTasksCommand(input, ui, taskList);
+            return new ListTasksCommand(input, taskList);
         case "find":
-            return new FindTaskWithTextCommand(input, ui, taskList);
+            return new FindTaskWithTextCommand(input, taskList);
         case "bye":
-            return new EndChatCommand(input, ui);
+            return new EndChatCommand(input);
         default:
             throw new DukeException("Input is not recognized.");
         }

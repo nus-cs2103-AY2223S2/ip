@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -14,9 +13,6 @@ import duke.task.TaskList;
  * @author wz2k
  */
 public class DeleteTaskCommand extends Command {
-    /** The medium which the chatbot uses to communicate */
-    private Ui ui;
-
     /** The list of task maintained by the chatbot */
     private TaskList taskList;
 
@@ -27,36 +23,32 @@ public class DeleteTaskCommand extends Command {
      * Creates a command that deletes a task.
      *
      * @param commandMessage User's input.
-     * @param ui Communication medium.
      * @param taskList List of tasks.
      * @param storage Task storage.
      */
-    public DeleteTaskCommand(String commandMessage, Ui ui, TaskList taskList, Storage storage) {
+    public DeleteTaskCommand(String commandMessage, TaskList taskList, Storage storage) {
         super(commandMessage);
-        this.ui = ui;
         this.taskList = taskList;
         this.storage = storage;
     }
 
     /**
-     * Deletes a task from the chatbot's task list and storage and returns if the
-     * conversation with the chatbot has ended.
+     * Deletes a task from the chatbot's task list and storage and returns the
+     * reply for task deletion.
      *
-     * @return True if conversation has ended and false otherwise.
+     * @return Taskbot reply to the task deletion.
      */
     @Override
-    public boolean execute() {
+    public String execute() {
         try {
             String[] commandMessageArr = commandMessage.split(" ", 2);
             int taskNumber = Integer.parseInt(commandMessageArr[1]);
             Task task = taskList.deleteTask(taskNumber);
 
             storage.restructure(taskList);
-            ui.replyTaskDeleted(task);
+            return "The following task has been deleted:\n" + "  " + task;
         } catch (IOException | DukeException exception) {
-            ui.replyError(exception.getMessage());
+            return "An error has occurred!\n" + exception.getMessage();
         }
-
-        return false;
     }
 }
