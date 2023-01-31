@@ -157,7 +157,7 @@ public class Parser {
      * @param errorMessage Error message to be printed on the program.
      * @throws DukeException Throws exception if input length does not meet minimum length.
      */
-    private static void checkInputFormat(int inputLength, int minimumLength, String errorMessage) throws DukeException {
+    public static void checkInputFormat(int inputLength, int minimumLength, String errorMessage) throws DukeException {
         if (inputLength < minimumLength) {
             throw new DukeException(errorMessage);
         }
