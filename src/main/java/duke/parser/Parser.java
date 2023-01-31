@@ -34,7 +34,7 @@ public class Parser {
             int idx;
             Task tsk;
             String markMsg, tskNum;
-            String cfmMsg = "Got it. I've added this duke.exceptions.task:";
+            String cfmMsg = "Got it. I've added this task:";
             String[] desc;
             LocalDateTime date, from, to;
 
@@ -51,7 +51,7 @@ public class Parser {
                     idx = Integer.parseInt(inputs[1]) - 1;
                     tsk = data.get(idx);
                     tsk.mark();
-                    markMsg = "Nice! I've marked this duke.exceptions.task as done:";
+                    markMsg = "Nice! I've marked this task as done:";
                     String markedTask = String.format(" %s", tsk);
                     String[] markedMsg = {markMsg, markedTask};
                     this.ui.printMsg(markedMsg);
@@ -60,7 +60,7 @@ public class Parser {
                     idx = Integer.parseInt(inputs[1]) - 1;
                     tsk = data.get(idx);
                     tsk.unmark();
-                    markMsg = "OK, I've marked this duke.exceptions.task as not done yet:";
+                    markMsg = "OK, I've marked this task as not done yet:";
                     String unmarkedTask = String.format(" %s", tsk);
                     String[] unmarkedMsg = {markMsg, unmarkedTask};
                     this.ui.printMsg(unmarkedMsg);
@@ -98,7 +98,7 @@ public class Parser {
                     tsk = data.get(idx);
                     data.delete(idx);
                     tskNum = String.format("Now you have %d tasks in the list.", data.size());
-                    String[] delMsg = {"Noted. I've removed this duke.exceptions.task:", tsk.toString(), tskNum};
+                    String[] delMsg = {"Noted. I've removed this task:", tsk.toString(), tskNum};
                     this.ui.printMsg(delMsg);
                     break;
                 default:
@@ -118,8 +118,8 @@ public class Parser {
         try {
             date = LocalDateTime.parse(dateString, formatter);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Invalid date format: " + dateString + ". Please give your date" +
-                    " in the form M/d/yyyy HHmm.");
+            throw new IllegalArgumentException("Invalid date format: " + dateString + ". Please give your date"
+                    + " in the form M/d/yyyy HHmm.");
         }
         return date;
     }
