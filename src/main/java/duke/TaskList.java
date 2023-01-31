@@ -12,12 +12,23 @@ public class TaskList {
     private final Storage storage;
     public static LinkedList<Task> tasks;
 
+    /**
+     * An abstraction of the list of tasks
+     *
+     * @param ui Required for the TaskList to ask Duke to speak
+     * @param storage For the TaskList to update
+     */
     public TaskList (Ui ui, Storage storage) {
         this.ui = ui;
         this.storage = storage;
         tasks = new LinkedList<>();
     }
 
+    /**
+     * Intiallize the TaskList with items from the logfile
+     *
+     * @param p A parser is required to read the input files
+     */
     public void init(Parser p) {
         Scanner sc;
         try {
@@ -38,6 +49,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the String of stuff
+     * @return
+     */
     public String[] toStringList() {
         String[] output = new String[tasks.size()];
 
@@ -53,17 +68,34 @@ public class TaskList {
         return output;
     }
 
+    /**
+     * Prints the status of the tasklist
+     *
+     * @param text Any message to preprend before the text
+     * @param t Prints out the name of the task
+     */
     public void printStatus(String text, Task t) {
         storage.update(tasks);
         String[] output = {text, t.toString(), String.format("Now you have %d task(s) in the list.", tasks.size())};
         ui.print(output);
     }
 
+    /**
+     * Add a task to tasklist. Also prints the status of the tasklist
+     *
+     * @param t Task to be added
+     */
     public void add(Task t) {
         tasks.add(t);
         printStatus("Got it. I've added this task:", t);
     }
 
+    /**
+     * Set a task to done or not done
+     *
+     * @param index of the task in the tasklist
+     * @param done boolean to set true or false
+     */
     public void setDone(int index, boolean done) {
         Task t = tasks.get(index - 1);
         t.setDone(done);
@@ -74,6 +106,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete a task from the tasklist
+     *
+     * @param index of the task
+     */
     public void delete(int index) {
         Task t = tasks.remove(index - 1);
         printStatus("Noted. I've removed this task:", t);

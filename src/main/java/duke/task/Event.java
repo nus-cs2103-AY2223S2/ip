@@ -35,13 +35,6 @@ public class Event extends Task {
         classIcon = "E";
     }
 
-//    public Event(String description, String to, String from) {
-//        super(description);
-//        this.to = LocalDate.parse(to);
-//        this.from = LocalDate.parse(from);
-//        classIcon = "E";
-//    }
-
     @Override
     public String toString() {
         return String.format(

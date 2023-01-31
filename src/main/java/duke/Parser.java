@@ -16,6 +16,14 @@ public class Parser {
     public final DateTimeFormatter inputFormat;
     public final DateTimeFormatter outputFormat;
 
+    /**
+     * Creates an abstraction of a parser to parse all kinds of text strings
+     *
+     * @param ui For some tasks to print stuff
+     * @param tasks Tasklist that will be used to referenced for functions
+     * @param inputFormat A DateTimeFormatter to process user inputs
+     * @param outputFormat A DateTimeFormatter to format date outputs to users
+     */
     public Parser(Ui ui, TaskList tasks, DateTimeFormatter inputFormat, DateTimeFormatter outputFormat) {
         this.ui = ui;
         this.tasks = tasks;

@@ -11,6 +11,12 @@ public class Storage {
     public File log;
     public Parser p;
 
+    /**
+     * Creates a storage - an abstraction to maintain the logfile
+     *
+     * @param parent The location of the direction of the child file
+     * @param child The name of the child file
+     */
     public Storage (String parent, String child) {
         log = new File(parent, child);
         if (!log.exists()) {
@@ -24,6 +30,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Edit the file to ensure it is up-to-date
+     *
+     * @param tasks TaskList used to update the log file
+     */
     public void update(LinkedList<Task> tasks) {
         try {
             FileWriter fw = new FileWriter(log);
