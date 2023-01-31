@@ -1,7 +1,5 @@
 package clippy.storage;
 
-import clippy.task.Task;
-import clippy.ui.Ui;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,6 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import clippy.task.Task;
+import clippy.ui.Ui;
+
+/**
+ * The agent which helps to communicate with files used to store program data.
+ *
+ * @author chunzkok
+ */
 public class Storage {
     private static final String SAVE_FILE_PATH = "./data/";
     private static final String SAVE_FILE_NAME = "state.data";
@@ -17,10 +23,20 @@ public class Storage {
     private Ui ui;
 
     // todo: raise exceptions on errors and handle in Duke to print error messages instead
+    /**
+     * Creates a new Storage instance.
+     *
+     * @param ui The Ui instance of the current run.
+     */
     public Storage(Ui ui) {
         this.ui = ui;
     }
 
+    /**
+     * Reads data from the program's save file into a List of Tasks.
+     *
+     * @return A list of Tasks obtained from parsing the save file.
+     */
     public List<Task> loadState() {
         this.ui.systemPrint("Loading saved data...");
 
@@ -59,6 +75,12 @@ public class Storage {
 
         return null;
     }
+
+    /**
+     * Saves a list of Tasks into the program's save file.
+     *
+     * @param tasks A list of Tasks to be saved.
+     */
     public void saveState(List<Task> tasks) {
         // will save entire `tasks` list for now, will make it more specific
         // in later iterations

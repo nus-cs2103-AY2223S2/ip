@@ -3,10 +3,20 @@ package clippy.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * An abstraction over all tasks tracked by this program.
+ *
+ * @author chunzkok
+ */
 public abstract class Task {
     private String description;
     private boolean done;
 
+    /**
+     * Helps to create a subclass of Task.
+     *
+     * @param description The description of the task.
+     */
     public Task(String description) {
         this.description = description;
         // assumed to be not complete upon initialisation
@@ -14,23 +24,43 @@ public abstract class Task {
         this.done = false;
     }
 
+    /**
+     * Marks the task as complete.
+     */
     public void complete() {
         this.done = true;
     }
 
+    /**
+     * Marks the task as incomplete.
+     */
     public void uncomplete() {
         this.done = false;
     }
 
+    /**
+     * Returns a string representation of the Task.
+     * @return A string representation of the Task.
+     */
     @Override
     public String toString() {
         return (this.done ? "[X] " : "[ ] ") + this.description;
     }
 
+    /**
+     * Returns a string representation of the Task in CSV form.
+     * @return A string representation of the Task in CSV form.
+     */
     public String getCsvString() {
         return String.format("%s,%b", this.description, this.done);
     }
 
+    /**
+     * Identifies the appropriate subclass of Task to be instantiated based on a CSV line.
+     *
+     * @param csvString A line of CSV values.
+     * @return The corresponding Task represented by the CSV line.
+     */
     public static Task parseCsvString(String csvString) {
         String[] arguments = csvString.split(",");
         Task result = null;
