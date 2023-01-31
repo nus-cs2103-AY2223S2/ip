@@ -1,6 +1,6 @@
-package DukeBot.Exception.IncludeExceptions;
+package duke.exception.IncludeExceptions;
 
-import DukeBot.Exception.DukeException;
+import duke.exception.DukeException;
 
 public class IncludeException extends DukeException {
     public IncludeException(String err) {

@@ -1,14 +1,15 @@
-package DukeBot;
+package duke.database;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.exception.DatabaseExceptions.DatabaseNotLoadingException;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Database {
@@ -23,7 +24,7 @@ public class Database {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DatabaseNotLoadingException {
         try {
 
             File dataFolder = new File("data");
@@ -50,10 +51,8 @@ public class Database {
             return tasks;
 
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Shimata");
+            throw new DatabaseNotLoadingException();
         }
-        return new ArrayList<>();
     }
 
     public void update(ArrayList<Task> tasks) throws IOException {

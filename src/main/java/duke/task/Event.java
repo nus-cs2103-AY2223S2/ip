@@ -1,4 +1,6 @@
-package DukeBot;
+package duke.task;
+
+import DukeBot.Types;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +9,7 @@ import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Event extends Task{
+public class Event extends Task {
     private static final String typeToString = "E";
     private final LocalDateTime startDateTime;
     private final LocalDateTime endDateTime;

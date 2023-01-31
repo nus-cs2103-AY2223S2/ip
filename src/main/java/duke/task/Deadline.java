@@ -1,4 +1,6 @@
-package DukeBot;
+package duke.task;
+import DukeBot.Types;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,7 +32,7 @@ public class Deadline extends Task {
     @Override
     public String status() {
         String status = this.completed ? "[X]" : "[ ]";
-        return "[" + typeToString + "]" + status + details + " (by: " +
+        return "[" + typeToString + "]" + status + this.details + " (by: " +
                 this.deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " [" +
                 this.deadline.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")";
     }

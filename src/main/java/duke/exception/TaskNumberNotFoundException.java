@@ -1,4 +1,4 @@
-package DukeBot.Exception;
+package duke.exception;
 
 public class TaskNumberNotFoundException extends DukeException {
     public TaskNumberNotFoundException() {

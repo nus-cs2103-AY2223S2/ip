@@ -1,6 +1,6 @@
-package DukeBot.Exception.BlankFieldExceptions;
+package duke.exception.BlankFieldExceptions;
 
-import DukeBot.Exception.DukeException;
+import duke.exception.DukeException;
 
 public class BlankFieldException extends DukeException {
     public BlankFieldException(String err) {

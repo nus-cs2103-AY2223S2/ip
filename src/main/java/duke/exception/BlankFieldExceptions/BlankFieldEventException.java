@@ -1,4 +1,4 @@
-package DukeBot.Exception.BlankFieldExceptions;
+package duke.exception.BlankFieldExceptions;
 
 public class BlankFieldEventException extends BlankFieldException {
     public BlankFieldEventException() {

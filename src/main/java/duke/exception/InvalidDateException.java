@@ -1,6 +1,6 @@
-package DukeBot.Exception;
+package duke.exception;
 
-public class InvalidDateException extends DukeException{
+public class InvalidDateException extends DukeException {
 
     public InvalidDateException() {
         super("\n" + "    ____________________________________________________________\n" +

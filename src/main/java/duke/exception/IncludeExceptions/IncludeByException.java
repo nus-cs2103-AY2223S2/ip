@@ -1,4 +1,4 @@
-package DukeBot.Exception.IncludeExceptions;
+package duke.exception.IncludeExceptions;
 
 public class IncludeByException extends IncludeException {
     public IncludeByException () {

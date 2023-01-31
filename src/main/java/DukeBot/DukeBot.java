@@ -1,14 +1,21 @@
 package DukeBot;
-import DukeBot.Exception.BlankFieldExceptions.BlankFieldDeadlineException;
-import DukeBot.Exception.BlankFieldExceptions.BlankFieldEventException;
-import DukeBot.Exception.BlankFieldExceptions.BlankFieldException;
-import DukeBot.Exception.BlankFieldExceptions.BlankFieldTodoException;
-import DukeBot.Exception.IncludeExceptions.IncludeByException;
-import DukeBot.Exception.IncludeExceptions.IncludeException;
-import DukeBot.Exception.IncludeExceptions.IncludeToAndFromException;
-import DukeBot.Exception.InvalidDateException;
-import DukeBot.Exception.TaskNumberNotFoundException;
-import DukeBot.Exception.UnknownCommandError;
+import duke.database.Database;
+import duke.exception.BlankFieldExceptions.BlankFieldDeadlineException;
+import duke.exception.BlankFieldExceptions.BlankFieldEventException;
+import duke.exception.BlankFieldExceptions.BlankFieldException;
+import duke.exception.BlankFieldExceptions.BlankFieldTodoException;
+import duke.exception.DatabaseExceptions.DatabaseNotLoadingException;
+import duke.exception.IncludeExceptions.IncludeByException;
+import duke.exception.IncludeExceptions.IncludeException;
+import duke.exception.IncludeExceptions.IncludeToAndFromException;
+import duke.exception.InvalidDateException;
+import duke.exception.TaskNumberNotFoundException;
+import duke.exception.UnknownCommandError;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.time.format.DateTimeParseException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +33,7 @@ public class DukeBot {
     private final Database dataBase;
 
 
-    public DukeBot(Scanner scanner, String filePath) {
+    public DukeBot(Scanner scanner, String filePath) throws DatabaseNotLoadingException {
         this.scanner = scanner;
         this.isActive = true;
         this.dataBase = new Database(filePath);
@@ -36,7 +43,7 @@ public class DukeBot {
 
     public void activate() {
         System.out.println(FRAME +
-                "     Hello! I'm Duke\n" +
+                "     Hello! I'm duke.Duke\n" +
                 "     What can I do for you?\n" +
                 FRAME);
         while (this.isActive && this.scanner.hasNextLine()) {
@@ -135,7 +142,7 @@ public class DukeBot {
         this.list.remove(taskNumber - 1);
         this.lengthOfList -= 1;
         return FRAME +
-                " Noted. I've removed this task:\n" +
+                " Noted. I've removed this duke.task:\n" +
                 "       " + task +
                 "     Now you have " + this.lengthOfList + " tasks in the list." + "\n"
                 + FRAME;
@@ -146,7 +153,7 @@ public class DukeBot {
         Task task = this.list.get(taskNumber - 1);
         task.incomplete();
         return FRAME +
-                "     OK, I've marked this task as not done yet:\n" +
+                "     OK, I've marked this duke.task as not done yet:\n" +
                 "       [ ] " + task.details + "\n" +
                 FRAME;
     }
@@ -156,7 +163,7 @@ public class DukeBot {
         Task task = this.list.get(taskNumber - 1);
         task.complete();
         return FRAME +
-                "     Nice! I've marked this task as done:\n" +
+                "     Nice! I've marked this duke.task as done:\n" +
                 "       [X] " + task.details + "\n" +
                 FRAME;
     }
@@ -178,7 +185,7 @@ public class DukeBot {
         this.list.add(newToDo);
         this.lengthOfList += 1;
         return FRAME + "\n" +
-                "     Got it. I've added this task:" + "\n" +
+                "     Got it. I've added this duke.task:" + "\n" +
                 "     " + newToDo.status() + "\n" +
                 "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
                 FRAME;
@@ -187,7 +194,7 @@ public class DukeBot {
     public String addDeadline(String parameters) throws IncludeByException, BlankFieldDeadlineException, InvalidDateException {
 
 
-        // Extract deadline date and task item.
+        // Extract deadline date and duke.task item.
         String[] lines = parameters.split(" ");
         boolean by = false;
         StringBuilder task = new StringBuilder();
@@ -214,7 +221,7 @@ public class DukeBot {
             this.list.add(newDeadline);
             this.lengthOfList += 1;
             return FRAME + "\n" +
-                    "     Got it. I've added this task:" + "\n" +
+                    "     Got it. I've added this duke.task:" + "\n" +
                     "     " + newDeadline.status() + "\n" +
                     "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
                     FRAME;
@@ -227,7 +234,7 @@ public class DukeBot {
 
         // Extract event's start date and end date
         String[] lines = parameters.split(" ");
-        // State = 0 if extracting task item
+        // State = 0 if extracting duke.task item
         // State = 1 if extracting start date
         // State = 2 if extracting end date
         int state = 0;
@@ -268,7 +275,7 @@ public class DukeBot {
             this.list.add(newEvent);
             this.lengthOfList += 1;
             return FRAME + "\n" +
-                    "     Got it. I've added this task:" + "\n" +
+                    "     Got it. I've added this duke.task:" + "\n" +
                     "     " + newEvent.status() + "\n" +
                     "     Now you have " + this.lengthOfList + " tasks in the list" + "\n" +
                     FRAME;

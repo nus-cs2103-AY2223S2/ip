@@ -1,4 +1,6 @@
-package DukeBot;
+package duke.task;
+
+import DukeBot.Types;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -21,7 +23,7 @@ public class ToDo extends Task {
     @Override
     public String status() {
         String status = this.completed ? "[X]" : "[ ]";
-        return "[" + typeToString + "]" + status + " " + details;
+        return "[" + typeToString + "]" + status + " " + this.details;
     }
 
     @Override

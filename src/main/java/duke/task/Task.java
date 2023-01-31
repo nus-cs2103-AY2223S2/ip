@@ -1,7 +1,7 @@
-package DukeBot;
+package duke.task;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
+import DukeBot.Types;
+
 import java.util.ArrayList;
 
 public abstract class Task {
