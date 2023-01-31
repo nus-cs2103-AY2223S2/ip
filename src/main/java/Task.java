@@ -14,16 +14,17 @@ public class Task {
     public void mark() {
         this.isDone = true;
         System.out.println("\t Nice! I've marked this task as done:\n"
-                + "\t\t [X] " + this.description);
+                + "\t\t [X] " + this.description + "\n");
     }
 
     public void unmark() {
         this.isDone = false;
         System.out.println("\t OK, I've marked this task as not done yet:\n"
-                + "\t\t [ ] " + this.description);
+                + "\t\t [ ] " + this.description + "\n");
     }
 
-    public void showTask() {
-        System.out.println(" [" + getStatusIcon() + "] " + this.description);
+    @Override
+    public String toString() {
+        return " [" + getStatusIcon() + "] " + this.description;
     }
 }
