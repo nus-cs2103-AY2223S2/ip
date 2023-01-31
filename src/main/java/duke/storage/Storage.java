@@ -13,6 +13,10 @@ import java.util.Scanner;
 
 import java.util.stream.Collectors;
 
+/**
+ * Represents a storage manager that helps in storing and retrieving
+ * the list of Tasks from a text file.
+ */
 public class Storage {
 
     public final String folderPath;
