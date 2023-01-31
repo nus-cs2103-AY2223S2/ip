@@ -1,8 +1,8 @@
 package duke;
 
-import duke.command.Command;
-
 import java.io.File;
+
+import duke.command.Command;
 
 /**
  * A chatbot named duke that can process the commands in command line format. The chatbot allows for the adding of

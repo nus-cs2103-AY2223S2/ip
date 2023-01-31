@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * A command that stores the command to unmark a task as not done. The action of unmarking the task can be carried out

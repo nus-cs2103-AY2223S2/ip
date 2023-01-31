@@ -1,12 +1,13 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.DukeException;
+
 
 /**
  * A deadline task object that stores its description, the due date and on whether is it done or not. The task can be

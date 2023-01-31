@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * A command that stores the command to list the tasks in the task list. The action of listing the task can be carried

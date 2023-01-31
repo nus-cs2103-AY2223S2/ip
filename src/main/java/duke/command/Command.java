@@ -1,13 +1,14 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 /**
  * A Command stores the command, together with the command string. The appropriate action can be called subsequently
