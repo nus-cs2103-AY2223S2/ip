@@ -1,3 +1,5 @@
+package duke;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -17,11 +19,5 @@ public class Task {
 
     public void markUnmark(boolean marked) {
         this.isDone = marked;
-        if (marked) {
-            System.out.println("Nice! I've marked this task as done:");
-        } else {
-            System.out.println("OK, I've marked this task as not done yet:");
-        }
-        System.out.println(this);
     }
 }

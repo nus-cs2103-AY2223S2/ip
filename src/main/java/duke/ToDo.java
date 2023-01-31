@@ -1,3 +1,5 @@
+package duke;
+
 public class ToDo extends Task {
     public ToDo(String description) {
         super(description);
@@ -9,9 +11,6 @@ public class ToDo extends Task {
     }
 
     public static ToDo addToDo(String description) {
-        ToDo t = new ToDo(description);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(t);
-        return t;
+        return new ToDo(description);
     }
 }
