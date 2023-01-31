@@ -21,8 +21,6 @@ import duke.command.Command;
 public class Duke {
     private final Storage storage;
     private final Ui ui;
-
-
     private TaskList tasks;
 
     /**
