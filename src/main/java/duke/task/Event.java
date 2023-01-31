@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an Event task with a from time and to time.
+ */
 public class Event extends Task {
     private String from;
     private String to;
@@ -71,7 +74,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (from: " + this.fromDate.format(DateTimeFormatter.ofPattern("HHmm MMM d yyyy")) +
-                " to: " + this.toDate.format(DateTimeFormatter.ofPattern("HHmm MMM d yyyy")) + ")";
+        return super.toString() + " (from: " + this.fromDate.format(DateTimeFormatter.ofPattern("HHmm MMM d yyyy"))
+              + " to: " + this.toDate.format(DateTimeFormatter.ofPattern("HHmm MMM d yyyy")) + ")";
     }
 }

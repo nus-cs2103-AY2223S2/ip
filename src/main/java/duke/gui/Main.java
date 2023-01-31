@@ -1,13 +1,13 @@
 package duke.gui;
 
+import java.io.IOException;
+
 import duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * GUI for Duke using FXML.
@@ -18,8 +18,7 @@ public class Main extends Application {
     /**
      * Where the program will run when starting up for GUI.
      *
-     * @param stage the primary stage for this application, onto which
-     * the application scene can be set.
+     * @param stage the primary stage for this application, onto which the application scene can be set.
      */
     @Override
     public void start(Stage stage) {

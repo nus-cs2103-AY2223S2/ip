@@ -1,5 +1,7 @@
 package duke.gui;
 
+import java.util.concurrent.TimeUnit;
+
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -9,8 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow.

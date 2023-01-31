@@ -5,9 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 
@@ -31,7 +31,7 @@ public class Storage {
     public void loadData(TaskList taskList) throws IOException {
         try {
             Scanner in = new Scanner(Paths.get("data", "duke.txt"));
-            while(in.hasNextLine()) {
+            while (in.hasNextLine()) {
                 String line = in.nextLine();
                 parse_data(line, taskList);
             }

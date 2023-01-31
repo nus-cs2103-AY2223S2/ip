@@ -1,10 +1,15 @@
 package duke.task;
 
+import java.util.ArrayList;
+
+import duke.exception.AlreadyMarkedException;
+import duke.exception.AlreadyUnmarkedException;
 import duke.exception.DukeException;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-
+/**
+ * Represents List of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> items;
 
@@ -54,7 +59,8 @@ public class TaskList {
             add(new Event(descr, from, to), ui);
         } catch (Exception e) {
             throw new DukeException(
-                    "You need to fill in an event with format `event {title} /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm`");
+                    "You need to fill in an event with format "
+                            + "`event {title} /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm`");
         }
     }
 
@@ -75,7 +81,8 @@ public class TaskList {
             return guiAdd(new Event(descr, from, to), ui);
         } catch (Exception e) {
             throw new DukeException(
-                    "You need to fill in an event with format `event {title} /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm`");
+                    "You need to fill in an event with format "
+                            + "`event {title} /from dd/MM/yyyy HHmm /to dd/MM/yyyy HHmm`");
         }
     }
 
@@ -152,13 +159,13 @@ public class TaskList {
     /**
      * Method to delete a Task from the TaskList via input String array.
      *
-     * @param curr_title a String array from user input to be parsed.
+     * @param currTitle a String array from user input to be parsed.
      * @param ui         ui to give user the message.
      * @throws DukeException If user input is erroneous.
      */
-    public void deleteTask(String[] curr_title, Ui ui) throws DukeException {
+    public void deleteTask(String[] currTitle, Ui ui) throws DukeException {
         try {
-            int idx = Integer.parseInt(curr_title[1]) - 1;
+            int idx = Integer.parseInt(currTitle[1]) - 1;
             if (idx >= items.size() || idx < 0) {
                 throw new DukeException();
             } else {
@@ -173,14 +180,14 @@ public class TaskList {
     /**
      * Method to delete a Task from the TaskList via input String array for GUI.
      *
-     * @param curr_title a String array from user input to be parsed.
+     * @param currTitle a String array from user input to be parsed.
      * @param ui         ui to give user the message.
      * @return String message for GUI.
      * @throws DukeException If user input is erroneous.
      */
-    public String guiDeleteTask(String[] curr_title, Ui ui) throws DukeException {
+    public String guiDeleteTask(String[] currTitle, Ui ui) throws DukeException {
         try {
-            int idx = Integer.parseInt(curr_title[1]) - 1;
+            int idx = Integer.parseInt(currTitle[1]) - 1;
             if (idx >= items.size() || idx < 0) {
                 throw new DukeException();
             } else {
@@ -196,13 +203,13 @@ public class TaskList {
     /**
      * Method to mark Task in TaskList via input String array.
      *
-     * @param curr_title a String array from user input to be parsed
+     * @param currTitle a String array from user input to be parsed
      * @param ui         ui to give user the message.
      * @throws DukeException If user input is erroneous.
      */
-    public void mark(String[] curr_title, Ui ui) throws DukeException {
+    public void mark(String[] currTitle, Ui ui) throws DukeException {
         try {
-            int idx = Integer.parseInt(curr_title[1]) - 1;
+            int idx = Integer.parseInt(currTitle[1]) - 1;
             if (items.get(idx).isMarked()) {
                 throw new AlreadyMarkedException();
             } else {
@@ -219,14 +226,14 @@ public class TaskList {
     /**
      * Mark task in GUI.
      *
-     * @param curr_title a String array from user input to be parsed
+     * @param currTitle a String array from user input to be parsed
      * @param ui         ui to give user the message.
      * @return String for mark message.
      * @throws DukeException If user input is erroneous.
      */
-    public String guiMark(String[] curr_title, Ui ui) throws DukeException {
+    public String guiMark(String[] currTitle, Ui ui) throws DukeException {
         try {
-            int idx = Integer.parseInt(curr_title[1]) - 1;
+            int idx = Integer.parseInt(currTitle[1]) - 1;
             if (items.get(idx).isMarked()) {
                 throw new AlreadyMarkedException();
             } else {
@@ -243,13 +250,13 @@ public class TaskList {
     /**
      * Method to unmark Task in TaskList via input String array.
      *
-     * @param curr_title a String array from user input to be parsed.
+     * @param currTitle a String array from user input to be parsed.
      * @param ui         ui to give user the message.
      * @throws DukeException If user input is erroneous.
      */
-    public void unmark(String[] curr_title, Ui ui) throws DukeException {
+    public void unmark(String[] currTitle, Ui ui) throws DukeException {
         try {
-            int idx = Integer.parseInt(curr_title[1]) - 1;
+            int idx = Integer.parseInt(currTitle[1]) - 1;
             if (!items.get(idx).isMarked()) {
                 throw new AlreadyUnmarkedException();
             } else {
@@ -266,14 +273,14 @@ public class TaskList {
     /**
      * Unmark in GUI.
      *
-     * @param curr_title a String array from user input to be parsed.
+     * @param currTitle a String array from user input to be parsed.
      * @param ui         ui to give user the message.
      * @return String for unmark message.
      * @throws DukeException If user input is erroneous.
      */
-    public String guiUnmark(String[] curr_title, Ui ui) throws DukeException {
+    public String guiUnmark(String[] currTitle, Ui ui) throws DukeException {
         try {
-            int idx = Integer.parseInt(curr_title[1]) - 1;
+            int idx = Integer.parseInt(currTitle[1]) - 1;
             if (!items.get(idx).isMarked()) {
                 throw new AlreadyUnmarkedException();
             } else {
@@ -290,13 +297,13 @@ public class TaskList {
     /**
      * Method to find a keyword within tasks via String array from user input.
      *
-     * @param curr_title String array with user input.
+     * @param currTitle String array with user input.
      * @param ui         ui to show user messages.
      * @throws DukeException if there is error in the command.
      */
-    public void findTask(String[] curr_title, Ui ui) throws DukeException {
+    public void findTask(String[] currTitle, Ui ui) throws DukeException {
         try {
-            String searchFor = curr_title[1].trim();
+            String searchFor = currTitle[1].trim();
             TaskList temp = new TaskList();
             for (int i = 0; i < items.size(); i++) {
                 if (items.get(i).contains(searchFor)) {
@@ -317,14 +324,14 @@ public class TaskList {
     /**
      * Method to find a keyword within tasks via String array from user input for GUI.
      *
-     * @param curr_title String array with user input.
+     * @param currTitle String array with user input.
      * @param ui         ui to show user messages.
      * @return String message for GUI.
      * @throws DukeException if there is error in the command.
      */
-    public String guiFindTask(String[] curr_title, Ui ui) throws DukeException {
+    public String guiFindTask(String[] currTitle, Ui ui) throws DukeException {
         try {
-            String searchFor = curr_title[1].trim();
+            String searchFor = currTitle[1].trim();
             TaskList temp = new TaskList();
             for (int i = 0; i < items.size(); i++) {
                 if (items.get(i).contains(searchFor)) {

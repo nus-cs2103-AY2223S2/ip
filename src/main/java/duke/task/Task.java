@@ -1,11 +1,15 @@
 package duke.task;
 
+/**
+ * Represents over-arching Task type.
+ */
 public class Task {
-    boolean done;
-    private final String CHECKED = "[X]";
-    private final String UNCHECKED = "[ ]";
     protected String title;
     protected String type;
+    protected boolean done;
+    private final String CHECKED = "[X]";
+    private final String UNCHECKED = "[ ]";
+
 
     /**
      * Constructor Method for Task.

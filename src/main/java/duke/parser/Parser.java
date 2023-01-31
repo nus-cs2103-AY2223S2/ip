@@ -10,15 +10,15 @@ import duke.ui.Ui;
  * To process the data in String format
  */
 public class Parser {
-    private Scanner usr_in;
+    private Scanner userIn;
 
     /**
      * Constructor method for Parser.
      *
-     * @param usr_in Scanner object that takes in user input.
+     * @param userIn Scanner object that takes in user input.
      */
-    public Parser(Scanner usr_in) {
-        this.usr_in = usr_in;
+    public Parser(Scanner userIn) {
+        this.userIn = userIn;
     }
 
     /**
@@ -29,34 +29,34 @@ public class Parser {
      * @throws DukeException if there is an error (usually user input error).
      */
     public void parse_cmds(TaskList taskList, Ui ui) throws DukeException {
-        String curr_in = usr_in.nextLine().trim();
+        String currIn = userIn.nextLine().trim();
         String[] curr = new String[0];
-        if (curr_in.contains("/by")) {
-            curr = curr_in.split("/by"); //split into title and time-related
-        } else if (curr_in.contains("/from")) {
-            curr = curr_in.split("/from");
+        if (currIn.contains("/by")) {
+            curr = currIn.split("/by"); //split into title and time-related
+        } else if (currIn.contains("/from")) {
+            curr = currIn.split("/from");
         } else {
-            curr = new String[]{curr_in};
+            curr = new String[]{currIn};
         }
-        String[] curr_title = curr[0].split(" "); //split title by word
-        if (curr_in.equals("bye")) {
+        String[] currTitle = curr[0].split(" "); //split title by word
+        if (currIn.equals("bye")) {
             taskList.end(ui);
-        } else if (curr_in.equals("list")) {
+        } else if (currIn.equals("list")) {
             ui.print(taskList);
-        } else if (curr_title[0].equals("mark")) {
-            taskList.mark(curr_title, ui);
-        } else if (curr_title[0].equals("unmark")) {
-            taskList.unmark(curr_title, ui);
-        } else if (curr_title[0].equals("todo")) {
+        } else if (currTitle[0].equals("mark")) {
+            taskList.mark(currTitle, ui);
+        } else if (currTitle[0].equals("unmark")) {
+            taskList.unmark(currTitle, ui);
+        } else if (currTitle[0].equals("todo")) {
             taskList.addToDo(curr, ui);
-        } else if (curr_title[0].equals("deadline")) {
+        } else if (currTitle[0].equals("deadline")) {
             taskList.addDeadline(curr, ui);
-        } else if (curr_title[0].equals("event")) {
+        } else if (currTitle[0].equals("event")) {
             taskList.addEvent(curr, ui);
-        } else if (curr_title[0].equals("delete")) {
-            taskList.deleteTask(curr_title, ui);
-        } else if (curr_title[0].equals("find")) {
-            taskList.findTask(curr_title, ui);
+        } else if (currTitle[0].equals("delete")) {
+            taskList.deleteTask(currTitle, ui);
+        } else if (currTitle[0].equals("find")) {
+            taskList.findTask(currTitle, ui);
         } else {
             throw new DukeException("Hmmm, I don't understand what you want to do");
         }
@@ -70,34 +70,34 @@ public class Parser {
      * @return String representing command
      */
     public static String parse(String input, TaskList taskList, Ui ui) throws DukeException {
-        String curr_in = input;
+        String currIn = input;
         String[] curr = new String[0];
-        if (curr_in.contains("/by")) {
-            curr = curr_in.split("/by"); //split into title and time-related
-        } else if (curr_in.contains("/from")) {
-            curr = curr_in.split("/from");
+        if (currIn.contains("/by")) {
+            curr = currIn.split("/by"); //split into title and time-related
+        } else if (currIn.contains("/from")) {
+            curr = currIn.split("/from");
         } else {
-            curr = new String[]{curr_in};
+            curr = new String[]{currIn};
         }
-        String[] curr_title = curr[0].split(" "); //split title by word
-        if (curr_in.equals("bye")) {
+        String[] currTitle = curr[0].split(" "); //split title by word
+        if (currIn.equals("bye")) {
             return "\t Bye. See you next time! :)\n";
-        } else if (curr_in.equals("list")) {
+        } else if (currIn.equals("list")) {
             return ui.guiPrint(taskList);
-        } else if (curr_title[0].equals("mark")) {
-            return taskList.guiMark(curr_title, ui);
-        } else if (curr_title[0].equals("unmark")) {
-            return taskList.guiUnmark(curr_title, ui);
-        } else if (curr_title[0].equals("todo")) {
+        } else if (currTitle[0].equals("mark")) {
+            return taskList.guiMark(currTitle, ui);
+        } else if (currTitle[0].equals("unmark")) {
+            return taskList.guiUnmark(currTitle, ui);
+        } else if (currTitle[0].equals("todo")) {
             return taskList.guiAddToDo(curr, ui);
-        } else if (curr_title[0].equals("deadline")) {
+        } else if (currTitle[0].equals("deadline")) {
             return taskList.guiAddDeadline(curr, ui);
-        } else if (curr_title[0].equals("event")) {
+        } else if (currTitle[0].equals("event")) {
             return taskList.guiAddEvent(curr, ui);
-        } else if (curr_title[0].equals("delete")) {
-            return taskList.guiDeleteTask(curr_title, ui);
-        } else if (curr_title[0].equals("find")) {
-            return taskList.guiFindTask(curr_title, ui);
+        } else if (currTitle[0].equals("delete")) {
+            return taskList.guiDeleteTask(currTitle, ui);
+        } else if (currTitle[0].equals("find")) {
+            return taskList.guiFindTask(currTitle, ui);
         } else {
             throw new DukeException("Hmmm, I don't understand what you want to do");
         }

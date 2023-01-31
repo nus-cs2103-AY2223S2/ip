@@ -1,7 +1,8 @@
 package duke.exception;
 
-import duke.exception.DukeException;
-
+/**
+ * Represents an exception where a task is already marked.
+ */
 public class AlreadyMarkedException extends DukeException {
     public AlreadyMarkedException() {
 
@@ -15,7 +16,7 @@ public class AlreadyMarkedException extends DukeException {
         super(cause);
     }
 
-    public AlreadyMarkedException (String message, Throwable cause) {
-        super (message, cause);
+    public AlreadyMarkedException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents Deadline task with an end date.
+ */
 public class Deadline extends Task {
     private String deadline;
     private LocalDateTime dateline;

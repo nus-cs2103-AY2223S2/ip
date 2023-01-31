@@ -1,6 +1,8 @@
 package duke.ui;
 
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskList;
+
 
 /**
  * Class for handling UI (user facing interface)
@@ -181,7 +183,6 @@ public class Ui {
 
     /**
      * Method to print results of a word search.
-     * 
      * @param temp taskList to be printed.
      */
     public void printSearch(TaskList temp) {

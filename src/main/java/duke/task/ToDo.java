@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents the simplest type of task.
+ */
 public class ToDo extends Task {
     /**
      * Constructor Method for ToDo.

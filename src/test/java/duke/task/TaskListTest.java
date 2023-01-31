@@ -1,10 +1,13 @@
 package duke.task;
-import duke.exception.DukeException;
-import duke.ui.Ui;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.exception.DukeException;
+import duke.ui.Ui;
+
 public class TaskListTest {
     private TaskList taskList = new TaskList();
     @BeforeEach
@@ -19,17 +22,17 @@ public class TaskListTest {
 
     @Test
     public void addTasks() {
-        String expected = "\t 1. [T][ ] Thing\n" +
-                "\t 2. [D][X] Next Thing (by: 1730 Dec 2 2019)\n" +
-                "\t 3. [E][ ] Last thing (from: 1730 Dec 2 2019 to: 1730 Dec 3 2019)\n";
+        String expected = "\t 1. [T][ ] Thing\n"
+                + "\t 2. [D][X] Next Thing (by: 1730 Dec 2 2019)\n"
+                + "\t 3. [E][ ] Last thing (from: 1730 Dec 2 2019 to: 1730 Dec 3 2019)\n";
         assertEquals(taskList.toString(), expected);
     }
 
     @Test
     public void toData() {
-        String expected = "[T] | 0 | Thing\n" +
-                "[D] | 1 | Next Thing | 02/12/2019 1730\n" +
-                "[E] | 0 | Last thing | 02/12/2019 1730-03/12/2019 1730\n";
+        String expected = "[T] | 0 | Thing\n"
+                + "[D] | 1 | Next Thing | 02/12/2019 1730\n"
+                + "[E] | 0 | Last thing | 02/12/2019 1730-03/12/2019 1730\n";
         assertEquals(taskList.itemsToData(), expected);
     }
 
@@ -39,9 +42,9 @@ public class TaskListTest {
         taskList.mark(new String[]{"mark", "3"}, ui);
         taskList.unmark(new String[]{"unmark", "2"}, ui);
 
-        String expected = "[T] | 0 | Thing\n" +
-                "[D] | 0 | Next Thing | 02/12/2019 1730\n" +
-                "[E] | 1 | Last thing | 02/12/2019 1730-03/12/2019 1730\n";
+        String expected = "[T] | 0 | Thing\n"
+                + "[D] | 0 | Next Thing | 02/12/2019 1730\n"
+                + "[E] | 1 | Last thing | 02/12/2019 1730-03/12/2019 1730\n";
 
         assertEquals(taskList.itemsToData(), expected);
     }
