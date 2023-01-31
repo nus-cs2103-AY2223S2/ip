@@ -100,7 +100,7 @@ public class Parser {
             Ui.print("Please enter a valid action!");
         }
     }
-    
+
     enum Actions {LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND}
 
 }
