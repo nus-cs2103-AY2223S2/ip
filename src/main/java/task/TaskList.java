@@ -9,14 +9,14 @@ public class TaskList {
     private ArrayList<Task> records = new ArrayList<>();
 
     // default constructor
-    public void add(Task task) {
+    public String add(Task task) {
         records.add(task);
-        System.out.println("B: " + task.toString() + "has been added");
+        return "B: " + task.toString() + "has been added";
     }
 
-    public void delete(int x) {
+    public String delete(int x) {
         Task temp = records.remove(x-1);
-        System.out.println("B: " + temp.toString() + "has been removed");
+        return "B: " + temp.toString() + "has been removed";
     }
 
     public String print() {
@@ -38,12 +38,12 @@ public class TaskList {
         return s;
     }
 
-    public void mark(int x) {
-        records.get(x-1).setComplete();
+    public String mark(int x) {
+        return records.get(x-1).setComplete();
     }
 
-    public void unmark(int x) {
-        records.get(x-1).setIncomplete();
+    public String unmark(int x) {
+        return records.get(x-1).setIncomplete();
     }
 
     public int size() {
@@ -54,21 +54,23 @@ public class TaskList {
      * Finds and prints out missions that contain the keyword specified by user.
      * @param s keyword that user inputs
      */
-    public void find(String s) {
-        System.out.println("B: " + "These are what I found:");
+    public String find(String s) {
+        String ans = "These are what I found:";
 
         int x = 1;
         int n = this.records.size();
 
         for (int i = 0; i < n; i++) {
             if (this.records.get(i).contains(s)) {
-                System.out.println(x + ". " + this.records.get(i).toString());
+                ans +="\n" + x + ". " + this.records.get(i).toString();
                 x++;
             }
         }
 
         if (x == 1) {
-            System.out.println("B: " + "No missions contain this keyword.");
+            ans = "No missions contain this keyword.";
         }
+
+        return ans;
     }
 }

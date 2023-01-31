@@ -6,7 +6,7 @@ import task.TaskList;
 import java.util.Scanner;
 
 /**
- * Main program user sees and interacts with.
+ * Deprecated. Converted to GUI.
  */
 public class Ui {
     private Scanner sc = new Scanner(System.in);
@@ -28,7 +28,7 @@ public class Ui {
 
         while (check) {
             System.out.println("\n----- Awaiting command -----");
-            check = this.parser.continueCommand(sc.nextLine(), l);
+            // check = this.parser.readCommand(sc.nextLine(), l);
         }
     }
 }

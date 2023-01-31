@@ -15,27 +15,24 @@ public class Task {
     /**
      * Marks entry as completed and prompts user if action is redundant.
      */
-    public void setComplete() {
-
+    public String setComplete() {
         if (this.status) {
-            System.out.println("Mission is already completed.");
-            return;
+            return "Mission is already completed.";
         }
         this.status = true;
-        System.out.println("Mission Completed!\n" + this);
+        return "Mission Completed!\n" + this;
     }
 
 
     /**
      * Marks entry as incomplete and prompts user if action is redundant.
      */
-    public void setIncomplete() {
+    public String setIncomplete() {
         if (!this.status) {
-            System.out.println("Mission is originally incomplete.");
-            return;
+            return "Mission is originally incomplete.";
         }
         this.status = false;
-        System.out.println("Mission Re-initialised\n" + this);
+        return "Mission Re-initialised\n" + this;
     }
 
     /**

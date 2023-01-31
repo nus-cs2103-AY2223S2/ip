@@ -25,79 +25,66 @@ public class Parser {
      * Executes command given.
      *
      * @param userinput string to be read as command for execution
-     * @param l reference to record of list of tasks
      * @return whether program should continue
      */
-    public boolean continueCommand(String userinput, TaskList l) {
+    public String readCommand(String userinput, TaskList l) {
         try {
+            userinput = userinput.toLowerCase();
             String[] parts = userinput.split(" ");
             Commands command = Commands.valueOf(parts[0]);
 
             switch (command) {
             case bye:
-                System.out.println("Roger. Agent Bond signing off ~");
-                return false;
+                return "Roger. Agent Bond signing off ~";
 
             case missions:
-                System.out.println(l.print());
-                return true;
+                return l.print();
 
             case unmark:
-                l.unmark(Integer.parseInt(parts[1]));
-                return true;
+                return l.unmark(Integer.parseInt(parts[1]));
 
             case mark:
-                l.mark(Integer.parseInt(parts[1]));
-                return true;
+                return l.mark(Integer.parseInt(parts[1]));
 
             case todo:
-                l.add(new Todo(userinput.substring(5)));
-                return true;
+                return l.add(new Todo(userinput.substring(5)));
 
             case deadline:
                 parts = userinput.split("/");
                 if (parts.length != 2) {
                     throw new DukeException("Please enter valid end date.");
                 }
-                l.add(new Deadline(parts[0], parts[1]));
-                return true;
+                return l.add(new Deadline(parts[0], parts[1]));
 
             case event:
                 parts = userinput.split("/");
                 if (parts.length != 3) {
                     throw new DukeException("Please enter valid start and end dates.");
                 }
-                l.add(new Event(parts[0], parts[1], parts[2]));
-                return true;
+                return l.add(new Event(parts[0], parts[1], parts[2]));
 
             case delete:
-                l.delete(Integer.parseInt(parts[1]));
-                return true;
+                return l.delete(Integer.parseInt(parts[1]));
 
             case find:
-                l.find(parts[1]);
-                return true;
+                return l.find(parts[1]);
 
             case help:
-                System.out.println("B: " + Instructions.generate());
-                return true;
+                return "B: " + Instructions.generate();
 
             default:
-                System.out.println("Something has gone wrong!");
-                return false;
-
+                return "Something has gone wrong!";
             }
         } catch (DukeException e) {
-            System.out.println("B: " + e.getMessage());
+            return "B: " + e.getMessage();
         } catch (DateTimeParseException e) {
-            System.out.println("B: Please enter a valid date format");
+            return "B: Please enter a valid date format";
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("B: Please key in a valid command. Enter 'help' for instructions.");
+            return "B: Please key in a valid command. Enter 'help' for instructions.";
         } catch (NumberFormatException e) {
-            System.out.println("B: Please key in an integer number");
+            return "B: Please key in an integer number";
         } catch (IllegalArgumentException e) {
-            System.out.println("B: Command not recognised. Please re-try");
+            return "B: Command not recognised. Please re-try";
         }
-        return true;
     }
 }
