@@ -22,7 +22,7 @@ public class AddListCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof addListCommand;
+        return obj instanceof AddListCommand;
     }
 
 

@@ -21,8 +21,8 @@ public class AddEventCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof addEventCommand) {
-            return event.equals(((addEventCommand) obj).event);
+        if (obj instanceof AddEventCommand) {
+            return event.equals(((AddEventCommand) obj).event);
         }
         return false;
     }

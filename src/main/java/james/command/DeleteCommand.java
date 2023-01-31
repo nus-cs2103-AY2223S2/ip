@@ -15,8 +15,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof deleteCommand) {
-            return index == ((deleteCommand) obj).index;
+        if (obj instanceof DeleteCommand) {
+            return index == ((DeleteCommand) obj).index;
         }
         return false;
     }

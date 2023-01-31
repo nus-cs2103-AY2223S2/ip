@@ -25,8 +25,8 @@ public class AddUnmarkCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof addUnmarkCommand) {
-            return taskNumber == ((addUnmarkCommand) obj).taskNumber;
+        if (obj instanceof AddUnmarkCommand) {
+            return taskNumber == ((AddUnmarkCommand) obj).taskNumber;
         }
         return false;
     }

@@ -20,8 +20,8 @@ public class AddToDoCommand extends Command {
     }
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof addToDoCommand) {
-            return toDo.equals(((addToDoCommand) obj).toDo);
+        if (obj instanceof AddToDoCommand) {
+            return toDo.equals(((AddToDoCommand) obj).toDo);
         }
         return false;
     }

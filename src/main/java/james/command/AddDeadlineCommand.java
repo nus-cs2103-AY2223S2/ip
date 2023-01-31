@@ -22,8 +22,8 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof addDeadlineCommand) {
-            return deadline.equals(((addDeadlineCommand) obj).deadline);
+        if (obj instanceof AddDeadlineCommand) {
+            return deadline.equals(((AddDeadlineCommand) obj).deadline);
         }
         return false;
     }
