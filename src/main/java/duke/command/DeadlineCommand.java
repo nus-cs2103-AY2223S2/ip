@@ -35,16 +35,16 @@ public class DeadlineCommand extends Command {
         try {
             StringBuilder stringBuilder = new StringBuilder();
             StringBuilder endTime = new StringBuilder();
-            boolean b = false;
+            boolean hasBy = false;
             for (int i = 1; i < command.length; i++) {
-                if (b) {
+                if (hasBy) {
                     endTime.append(command[i]);
                     if (i + 1 != command.length) {
                         endTime.append(" ");
                     }
                 } else {
                     if (command[i].equals("/by")) {
-                        b = true;
+                        hasBy = true;
                         stringBuilder.setLength(stringBuilder.length() - 1);
                         continue;
                     }
