@@ -7,7 +7,6 @@ import duke.ui.Ui;
 import org.junit.jupiter.api.Test;
 import storage.StorageStub;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddDeadlineCommandTest {

@@ -2,6 +2,9 @@ package duke.task;
 
 import java.util.ArrayList;
 
+/**
+ * Contains the list of tasks and operations to add/delete/mark/unmark the tasks in the list.
+ */
 public class TaskList {
     protected final ArrayList<Task> list;
 
@@ -22,10 +25,6 @@ public class TaskList {
         return list.remove(index);
     }
 
-    public ArrayList<Task> getList() {
-        return this.list;
-    }
-
     public void mark(int index) {
         Task currentTask = list.get(index);
         currentTask.markAsDone();
@@ -34,6 +33,10 @@ public class TaskList {
     public void unmark(int index) {
         Task currentTask = list.get(index);
         currentTask.markAsUndone();
+    }
+
+    public ArrayList<Task> getList() {
+        return this.list;
     }
 
     public int getSize() {

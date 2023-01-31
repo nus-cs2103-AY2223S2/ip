@@ -1,8 +1,8 @@
 package duke.task;
 
-public class Task {
-    protected String description;
-    protected boolean isDone;
+public abstract class Task {
+    private final String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -24,7 +24,7 @@ public class Task {
     public String toTXT() {
         String isDoneAsInt = isDone ? "1" : "0";
         return String.format("%s | %s", isDoneAsInt, this.description);
-    };
+    }
 
     @Override
     public String toString() {

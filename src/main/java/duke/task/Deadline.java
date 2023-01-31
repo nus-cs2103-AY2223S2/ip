@@ -3,11 +3,17 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import duke.exception.DukeException;
-
+/**
+ * Represents Deadline task with a description and a deadline.
+ */
 public class Deadline extends Task {
-    protected LocalDate by;
+    private final LocalDate by;
 
+    /**
+     * Constructor for deadline. Could throw DateTimeParseException which is handled in AddDeadlineCommand instead.
+     * @param description for the task
+     * @param by deadline date as a string
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDate.parse(by);

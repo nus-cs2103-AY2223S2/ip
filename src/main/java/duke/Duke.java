@@ -9,9 +9,7 @@ import duke.ui.Ui;
 
 public class Duke {
 
-    /** Default file path which Duke will attempt to access
-     *  to load duke.task.Task List
-     */
+    /** Default file path which Duke will attempt to access to load duke.task.Task List */
     private static final String PATH_TO_FILE = "data/duke.txt";
 
     private final Storage storage;
