@@ -154,5 +154,6 @@ public class Duke {
                 System.out.println(ex.getMessage());
             }
         }
+        input.close();
     }
 }
