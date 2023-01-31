@@ -20,7 +20,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> filteredTasks = new ArrayList<>();
-        int taskCount = Task.count;
+        int taskCount = Task.getTaskCount();
         for (int i = 1; i <= taskCount; i++) {
             Task currentTask = tasks.getTask(i);
             if (currentTask.contains(keyword)) {

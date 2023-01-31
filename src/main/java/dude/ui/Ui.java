@@ -53,7 +53,7 @@ public class Ui {
     public void showAdd(Task newTask) {
         System.out.println("\tGot it. I've added this task already:");
         System.out.println("\t" + newTask);
-        System.out.println("\tNow got " + Task.count + " tasks in your list liao.");
+        System.out.println("\tNow got " + Task.getTaskCount() + " tasks in your list liao.");
     }
 
     /**
@@ -64,7 +64,7 @@ public class Ui {
     public void showDelete(Task currentTask) {
         System.out.println("\tOkay can. I've removed this task already:");
         System.out.println("\t" + currentTask);
-        System.out.println("\tNow only left with " + Task.count + " tasks in your list liao.");
+        System.out.println("\tNow only left with " + Task.getTaskCount() + " tasks in your list liao.");
     }
 
     /**

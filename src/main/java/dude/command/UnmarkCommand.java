@@ -25,13 +25,13 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        if (Task.count >= taskIndex && Task.count != 0) {
+        if (Task.getTaskCount() >= taskIndex && Task.getTaskCount() != 0) {
             Task currentTask = tasks.getTask(taskIndex);
             currentTask.unmark();
             storage.saveData(tasks);
             ui.showUnmark(currentTask);
         } else {
-            ui.showError("\tUhh... Where got this task for me to mark?");
+            ui.showError("\tUhh... Where got this task for me to unmark?");
         }
     }
 }

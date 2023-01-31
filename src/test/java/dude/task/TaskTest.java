@@ -1,12 +1,12 @@
 package dude.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskTest {
     @Test
-    public void markStatus_success(){
+    public void markStatus_success() {
         Todo todoTask = new Todo("Todo");
         Deadline deadlineTask = new Deadline("Deadline", "2023-01-19 1800");
         Task eventTask = new Event("Event", "2023-01-19 1800", "2023-01-21 2200");
@@ -24,3 +24,4 @@ public class TaskTest {
         assertEquals(" ", eventTask.getStatusIcon());
     }
 }
+

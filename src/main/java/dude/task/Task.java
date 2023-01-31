@@ -4,9 +4,9 @@ package dude.task;
  * Task structure for all tasks
  */
 public abstract class Task {
+    private static int count;
     protected String description;
     protected boolean isDone;
-    public static int count;
 
     /**
      * Initializes Task.
@@ -63,6 +63,13 @@ public abstract class Task {
      */
     public static void decreaseTaskCount() {
         count--;
+    }
+
+    /**
+     * Get current task count.
+     */
+    public static int getTaskCount() {
+        return count;
     }
 
     /**

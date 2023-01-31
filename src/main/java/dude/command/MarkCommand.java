@@ -25,7 +25,7 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        if (Task.count >= taskIndex && Task.count != 0) {
+        if (Task.getTaskCount() >= taskIndex && Task.getTaskCount() != 0) {
             Task currentTask = tasks.getTask(taskIndex);
             currentTask.mark();
             storage.saveData(tasks);
