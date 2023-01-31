@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Models an deadline which is a task.
+ */
 public class Deadline extends Task {
 
     /** String used to represent the deadline of task. */
@@ -12,7 +15,7 @@ public class Deadline extends Task {
     protected String desc;
 
     /** Date object used to represent the deadline of task. */
-    LocalDate byDate;
+    private LocalDate byDate;
 
     /**
      * Constructor for the Deadline class.
@@ -52,7 +55,7 @@ public class Deadline extends Task {
     /**
      * {@inheritDoc}
      */
-    public String asCSV() {
+    public String asCsv() {
         if (super.isDone) {
             return "D,1" + desc + "," + by;
         } else {

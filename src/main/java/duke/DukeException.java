@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Duke's own exception which can be customized
+ */
 public class DukeException extends Exception {
 
     /**

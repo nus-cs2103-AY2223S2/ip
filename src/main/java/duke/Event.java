@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Models an event which is a task
+ */
 public class Event extends Task {
 
     /** String used to represent the start time of event. */
@@ -43,13 +46,13 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from +" to: " + to +")";
+        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
 
     /**
      * {@inheritDoc}
      */
-    public String asCSV() {
+    public String asCsv() {
         if (super.isDone) {
             return "E,1," + desc + "," + from + "," + to;
         } else {

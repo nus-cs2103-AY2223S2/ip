@@ -1,11 +1,14 @@
 package duke;
+
+/**
+ * This is the class that parses the command sent to Duke.
+ */
 public class Parser {
 
     /**
      * Constructor for the Deadline class.
      */
     public Parser() {
-        
     }
 
     /**
@@ -19,7 +22,16 @@ public class Parser {
     }
 
     //TODO: Abstract out printing to UI elements
-    public void executeCommand(String inputCommand, TaskList tasks, Storage storage, Ui ui) throws DukeException{
+    /**
+     * This method executes the command itself.
+     *
+     * @param inputCommand The command to execute.
+     * @param tasks The TaskList to use.
+     * @param storage The Storage to use.
+     * @param ui The Ui that is displayed to user.
+     * @throws DukeException If there is an error.
+     */
+    public void executeCommand(String inputCommand, TaskList tasks, Storage storage, Ui ui) throws DukeException {
         int selectedNum;
         String[] inputCmdArr = inputCommand.split(" ");
         switch(inputCmdArr[0]) {

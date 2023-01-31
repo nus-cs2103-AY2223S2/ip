@@ -98,7 +98,7 @@ public class Storage {
     public void save(TaskList saveTaskList) {
         StringBuilder outputString = new StringBuilder();
         for (int i = 0; i < saveTaskList.tasks.size(); i++) {
-            outputString.append(saveTaskList.tasks.get(i).asCSV());
+            outputString.append(saveTaskList.tasks.get(i).asCsv());
             outputString.append(System.getProperty("line.separator"));
         }
         try {
