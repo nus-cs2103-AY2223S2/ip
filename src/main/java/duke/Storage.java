@@ -31,11 +31,10 @@ public class Storage {
         try {
             PrintWriter pw = new PrintWriter(new FileOutputStream(filePath));
 
-
             for (int i = 0; i < entireList.size(); i++) {
                 Task task = entireList.get(i);
 
-                boolean isMark = task.getStatus();
+                boolean isMark = task.getComplete();
                 String type = task.getTypes();
                 String name = task.getItem();
 
@@ -103,10 +102,8 @@ public class Storage {
                 entireList.add(task);
             }
 
-
         } catch (IOException i) {
             System.out.println("File not found!");
-//            i.printStackTrace();
         } catch (ParseException e) {
             System.out.println("Unable to load file. Please check your that the item's date where it should be in the form of" +
                     " dd/MM/yyyy HH:mm");

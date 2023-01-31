@@ -5,7 +5,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 
-import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -24,11 +23,11 @@ public class Parser {
 
                 if (instruction.length <= 1) {
                     throw new ArgumentException("What are we marking again?");
-                } else if (!instruction[1].matches("[0-9]+")) {
+                } else if (!instruction[1].matches("[0-9] + ")) {
                     throw new ArgumentException("What are we marking again?");
                 }
                 int index = Integer.parseInt(instruction[1]);
-                if ((index - 1) < 0 || (index - 1) >= toDo.numberOfTask()) {
+                if ((index - 1) < 0 || (index - 1) >= toDo.getNumberOfTask()) {
                     throw new ArgumentException("Can't find the index");
                 }
 
@@ -42,7 +41,7 @@ public class Parser {
                     throw new ArgumentException("What are we unmarking again?");
                 }
                 int index = Integer.parseInt(instruction[1]);
-                if ((index - 1) < 0 || (index - 1) >= toDo.numberOfTask()) {
+                if ((index - 1) < 0 || (index - 1) >= toDo.getNumberOfTask()) {
                     throw new ArgumentException("Can't find the index");
                 }
 
@@ -57,7 +56,7 @@ public class Parser {
                 }
                 int index = Integer.parseInt(instruction[1]);
 
-                if ((index - 1) < 0 || (index - 1) >= toDo.numberOfTask()) {
+                if ((index - 1) < 0 || (index - 1) >= toDo.getNumberOfTask()) {
                     throw new ArgumentException("Can't find the index");
                 }
 
@@ -71,7 +70,7 @@ public class Parser {
 
                 if (!command.equals("todo") && !command.equals("deadline") &&
                         !command.equals("event") && !command.equals("delete")) {
-                    throw new DukeException("*sigh* No such commands, please be serious.");
+                    throw new ArgumentException("*sigh* No such commands, please be serious.");
                 }
 
                 if (instruction.length == 1) {
@@ -151,8 +150,6 @@ public class Parser {
                 }
             }
 
-        } catch (DukeException ex) {
-            System.out.println(ex.getMessage());
         } catch (ArgumentException ex2) {
             System.out.println(ex2.getMessage());
         } catch (ParseException e) {

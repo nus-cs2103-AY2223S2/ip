@@ -2,13 +2,13 @@ package duke.task;
 
 public class Task {
     protected String item;
-    protected boolean status;
+    protected boolean isComplete;
     protected String types; // toDo, deadline, events
 
-    public Task(String x, String y) {
-        item = x;
-        types = y;
-        status = false;
+    public Task(String item, String types) {
+        this.item = item;
+        this.types = types;
+        isComplete = false;
     }
 
     public String getTime() {
@@ -18,8 +18,8 @@ public class Task {
     public String getItem() {
         return item;
     }
-    public boolean getStatus() {
-        return status;
+    public boolean getComplete() {
+        return isComplete;
     }
 
     public String getTypes() {
@@ -29,7 +29,7 @@ public class Task {
     @Override
     public String toString(){
         String getter;
-        if (status == false) {
+        if (isComplete == false) {
             getter = "[ ] " + item;
         } else {
             getter = "[X] " + item;
@@ -43,10 +43,10 @@ public class Task {
     }
 
     public void mark(){
-        status = true;
+        isComplete = true;
     }
 
     public void unmark(){
-        status = false;
+        isComplete = false;
     }
 }

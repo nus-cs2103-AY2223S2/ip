@@ -1,20 +1,12 @@
 package duke;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Ui {
     private final Scanner sc;
-    private final PrintStream out;
-
-    public Ui(InputStream in, PrintStream out) {
-        this.sc = new Scanner(in);
-        this.out = out;
-    }
 
     public Ui() {
-        this(System.in, System.out);
+        sc = new Scanner(System.in);
     }
 
     public void greet() {

@@ -10,7 +10,6 @@ public class Duke {
     public Ui ui;
     public Storage storage;
     public TaskList listOfTasks;
-
     public Parser parser;
 
     public Duke()  {
@@ -23,6 +22,7 @@ public class Duke {
             listOfTasks.allTasks = storage.loadFile(listOfTasks.getTasks());
 
         }  catch (IOException i) {
+            ui.printText("Remember that since the file cannot be loaded, you cannot save your file!");
         }
     }
 

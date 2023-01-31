@@ -52,7 +52,7 @@ public class ParserTest {
         assertEquals(true, c instanceof MarkCommand);
 
         c.executeCommand(dummyList, dummyStorage, dummyUi);
-        boolean isMark = dummyList.getTasks().get(3).getStatus();
+        boolean isMark = dummyList.getTasks().get(3).getComplete();
 
         assertEquals(true, isMark);
     }

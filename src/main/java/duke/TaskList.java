@@ -1,11 +1,8 @@
 package duke;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 
 import java.util.ArrayList;
 
-import java.util.Date;
 public class TaskList {
 
     ArrayList<Task> allTasks;
@@ -14,7 +11,7 @@ public class TaskList {
         allTasks =  new ArrayList<Task>();
     }
 
-    public int numberOfTask() {
+    public int getNumberOfTask() {
         return allTasks.size();
     }
 
@@ -37,15 +34,15 @@ public class TaskList {
     }
 
     public void markTask(int index) {
-        allTasks.get(index-1).mark();
+        allTasks.get(index - 1).mark();
     }
 
     public void unmarkTask(int index) {
-        allTasks.get(index-1).unmark();
+        allTasks.get(index - 1).unmark();
     }
 
     public void deleteTask(int index) {
-        System.out.println(" " + allTasks.get(index-1).toString());
+        System.out.println(" " + allTasks.get(index - 1).toString());
         allTasks.remove(index-1);
     }
 

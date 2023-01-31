@@ -19,7 +19,7 @@ public class AddCommand extends Command {
         taskList.addTask(task);
         ui.printText(" " + task);
 
-        ui.printText("Now you have " + taskList.numberOfTask() + " tasks in the list.");
+        ui.printText("Now you have " + taskList.getNumberOfTask() + " tasks in the list.");
 
     }
 
