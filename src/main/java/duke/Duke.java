@@ -74,6 +74,12 @@ public class Duke {
         storage.saveData(FILEPATH, taskList);
         System.out.println(BANNER);
     }
+
+    /**
+     * Handles response from user input to send to dialog box.
+     * @param input raw command input from the user
+     * @return reply status
+     */
     public String handleResponse(String input) {
         try {
             if (isExit && input.isEmpty()) {
@@ -94,6 +100,11 @@ public class Duke {
             return e.getMessage();
         }
     }
+
+    /**
+     * Save tasks from task list into the file specified by FILEPATH.
+     * @return status message
+     */
     public String saveTasks() {
         String status = storage.saveData(FILEPATH, taskList);
         return status;
