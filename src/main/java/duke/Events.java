@@ -28,7 +28,7 @@ public class Events extends Task {
      * @param end end time of events.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
-    public Events(String description, String  start, String  end) throws DukeInvalidArgumentException {
+    public Events(String description, String start, String end) throws DukeInvalidArgumentException {
         super(description);
         try {
             this.start = LocalDateTime.parse(start);

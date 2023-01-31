@@ -18,5 +18,6 @@ public abstract class Command {
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
      */
-    protected abstract void execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException, DukeIOException;
+    protected abstract String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException,
+            DukeIOException;
 }

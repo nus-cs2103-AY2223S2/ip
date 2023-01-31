@@ -8,8 +8,8 @@ public class ListCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList task, Ui ui, Storage storage){
-        ui.responseToListCommand(task);
+    public String execute(TaskList task, Ui ui, Storage storage){
+        return ui.responseToListCommand(task);
     }
 }
 

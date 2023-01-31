@@ -6,136 +6,140 @@ import java.util.Scanner;
  * User interface of the application.
  */
 public class Ui {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
     private static final String DIVIDER = "____________________________________________________________";
 
     /**
-     * Print the divider among multiple response.
+     * Return the divider among multiple response.
+     *
+     * @return horizontal line.
      */
-    protected void printHorizontalLine() {
-        System.out.println("\t" + DIVIDER);
+//    protected String printHorizontalLine() {
+//        return "\t" + DIVIDER;
+//    }
+
+    /**
+     * Return the welcome message upon start of the application.
+     *
+     * @return welcome message
+     */
+    public String showWelcomeMessage() {
+        String msg = "Hello! I'm Duke\n" + "What can I do for you?";
+        return  msg;
     }
 
     /**
-     * Print the welcome message upon start of the application.
+     * Return the exit message when application terminate.
+     *
+     * @return goodbye message.
      */
-    public void showWelcomeMessage() {
-        printHorizontalLine();
-        System.out.println("\tHello! I'm Duke\n" + "\tWhat can I do for you?");
-        printHorizontalLine();
+    public String showGoodbyeMessage() {
+        String msg = "Bye. Hope to see you again soon!";
+        return msg;
     }
 
     /**
-     * Print the exit message when application terminate.
-     */
-    public void showGoodbyeMessage() {
-        //closeScanner();
-        printHorizontalLine();
-        System.out.println("\tBye. Hope to see you again soon!");
-        printHorizontalLine();
-    }
-
-    /**
-     * Print response to the task command.
+     * Return response to the task command.
      *
      * @param taskList list that contain the task.
+     * @return message for list command.
      */
-    public void responseToListCommand(TaskList taskList) {
-
-        printHorizontalLine();
-        System.out.println("\tHere are the tasks in your list:");
+    public String responseToListCommand(TaskList taskList) {
+        String msg = "Here are the tasks in your list:";
         for(int i = 0; i < taskList.size(); i++) {
             int tmp = i + 1;
-            System.out.println("\t" + tmp + "." + taskList.getTaskAt(i));
+            msg += "\n" + tmp + "." + taskList.getTaskAt(i);
         }
-        printHorizontalLine();
+        return msg;
     }
 
 
     /**
-     * Print response to the add task command.
+     * Return response to the add task command.
      *
      * @param task task to be added into task list.
      * @param taskList list that contain the task.
+     * @return message for add task command.
      */
-    public void responseToLAddTaskCommand(Task task, TaskList taskList) {
-        printHorizontalLine();
-        System.out.println("\tGot it. I've added this task:\n\t  " + task + "\n\tNow you have "
-                + taskList.size() + " tasks in the list.");
-        printHorizontalLine();
+    public String responseToLAddTaskCommand(Task task, TaskList taskList) {
+        String msg = "Got it. I've added this task:\n  " + task + "\nNow you have "
+                + taskList.size() + " tasks in the list.";
+        return msg;
     }
 
 
     /**
-     * Print response to the mark command
+     * Return response to the mark command
      *
      * @param task task to be marked as done.
+     * @return message for mark command.
      */
-    public void responseToMarkTaskCommand(Task task) {
-        printHorizontalLine();
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t  " + task);
-        printHorizontalLine();
+    public String responseToMarkTaskCommand(Task task) {
+        String msg = "Nice! I've marked this task as done:\n";
+        msg += "  " + task;
+        return msg;
     }
 
     /**
-     * Print response to the unmark response.
+     * Return response to the unmark response.
      *
      * @param task task to be marked as undone.
+     * @return message for unmark command.
      */
-    public void responseToUnmarkTaskCommand(Task task) {
-        printHorizontalLine();
-        System.out.println("\tOK, I've marked this task as not done yet:");
-        System.out.println("\t  " + task);
-        printHorizontalLine();
+    public String responseToUnmarkTaskCommand(Task task) {
+        String msg = "OK, I've marked this task as not done yet:\n";
+        msg += "  " + task;
+        return msg;
     }
 
     /**
-     * Print response to delete command.
+     * Return response to delete command.
      *
      * @param taskList list that contained the task
      * @param index task to be deleted from task list.
+     * @return message for delete command.
      */
-    public void responseToDeleteTaskCommand(TaskList taskList, int index) {
-        printHorizontalLine();
-        System.out.println("\tNoted. I've removed this task:\n\t  " + taskList.getTaskAt(index)
-                + "\n\tNow you have " + (taskList.size() - 1) + " tasks in the list.");
-        printHorizontalLine();
+    public String responseToDeleteTaskCommand(TaskList taskList, int index) {
+        String msg = "Noted. I've removed this task:\n  " + taskList.getTaskAt(index)
+                + "\nNow you have " + (taskList.size() - 1) + " tasks in the list.";
+        return msg;
     }
 
     /**
-     * Print response to delete command.
+     * Return response to delete command.
      *
      * @param taskList list that contained the task
+     * @return message for find task command.
      */
-    public void responseToFindTaskCommand(TaskList taskList) {
-        printHorizontalLine();
+    public String responseToFindTaskCommand(TaskList taskList) {
+        String msg = "";
         for (int i = 0; i < taskList.size(); i++) {
             int index = i + 1;
-            System.out.println("\t" + index + "." + taskList.getTaskAt(i).toString());
+            msg += "\n" + index + "." + taskList.getTaskAt(i).toString();
         }
-        printHorizontalLine();
+        return msg;
     }
 
     /**
-     * Print loading error
+     * Return loading error message
      * If the file given doesn't exit, it will print this error.
+     *
+     * @return message for loading error.
      */
-    public void showLoadingError() {
-        printHorizontalLine();
-        System.out.println("\t☹ OOPS!!! Unable to load data from the file");
-        printHorizontalLine();
+    public String showLoadingError() {
+        String msg = "OOPS!!! Unable to load data from the file";
+        return msg;
     }
 
     /**
-     * Print the error caused in the program.
+     * Return the error caused in the program.
      *
-     * @param msg error message to print.
+     * @param errorMsg error message to print.
+     * @return error message.
      */
-    public void showError(String msg) {
-        printHorizontalLine();
-        System.out.println("\t☹ OOPS!!! "+ msg);
-        printHorizontalLine();
+    public String showError(String errorMsg) {
+        String msg = "OOPS!!! "+ errorMsg;
+        return msg;
     }
 
     /**
@@ -145,10 +149,10 @@ public class Ui {
      */
     public String requestForUserInput() {
         System.out.println("\tEnter Command: ");
-        return scanner.nextLine();
+        return SCANNER.nextLine();
     }
 
     private void closeScanner() {
-        scanner.close();
+        SCANNER.close();
     }
 }

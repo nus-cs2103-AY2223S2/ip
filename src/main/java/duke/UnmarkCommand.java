@@ -27,7 +27,7 @@ public class UnmarkCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeIOException, DukeInvalidArgumentException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeIOException, DukeInvalidArgumentException {
         if (toggleLineNumber >= task.size()) {
             throw new DukeInvalidArgumentException("There are only " + task.size()
                     + " tasks in list, but want to unmark " + (toggleLineNumber + 1) + "th task.");
@@ -36,6 +36,6 @@ public class UnmarkCommand extends Command {
         Task t = task.getTaskAt(toggleLineNumber);
         t.setDone(false);
         storage.updateData(toggleLineNumber, 0);
-        ui.responseToUnmarkTaskCommand(t);
+        return ui.responseToUnmarkTaskCommand(t);
     }
 }

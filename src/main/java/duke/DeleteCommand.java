@@ -27,13 +27,14 @@ public class DeleteCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException, DukeIOException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException, DukeIOException {
         if (deletedLineNumber >= task.size()) {
             throw new DukeInvalidArgumentException("There are only" + task.size()
                     + "tasks in list, but want to delete " + deletedLineNumber + "th task.");
         }
-        ui.responseToDeleteTaskCommand(task, deletedLineNumber);
+        String responseMsg = ui.responseToDeleteTaskCommand(task, deletedLineNumber);
         task.removeTaskAt(deletedLineNumber);
         storage.removeData(deletedLineNumber);
+        return responseMsg;
     }
 }

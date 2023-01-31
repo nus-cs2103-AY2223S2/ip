@@ -8,6 +8,24 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    protected String greetingMsg;
+
+    /**
+     * Return response given a user input.
+     *
+     * @param input command to execute.
+     * @return response given by duke
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
+    }
+
+    public Duke() {}
 
     /**
      * Constructor to create duke instance.
@@ -19,6 +37,7 @@ public class Duke {
             ui = new Ui();
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
+            greetingMsg = ui.showWelcomeMessage();
         } catch (DukeException e) {
             ui.showLoadingError();
             Storage.setDefaultStorage();
