@@ -16,11 +16,15 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showToUser("Here are your tasks: ");
-        int count = 1;
-        for (Task t : tasks.getList()) {
-            ui.showToUser(count + ". " + t.toString());
-            count++;
+        if (tasks.getSize() == 0) {
+            ui.showToUser("Task list is empty.");
+        } else {
+            ui.showToUser("Here are your tasks: ");
+            int count = 1;
+            for (Task t : tasks.getList()) {
+                ui.showToUser(count + ". " + t.toString());
+                count++;
+            }
         }
     }
 }

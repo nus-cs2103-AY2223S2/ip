@@ -8,13 +8,9 @@ import duke.exception.DukeException;
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String description, String by) throws DukeException{
+    public Deadline(String description, String by) {
         super(description);
-        try {
-            this.by = LocalDate.parse(by);
-        } catch (java.time.format.DateTimeParseException e) {
-            throw new DukeException("Date must be in yyyy-mm-dd format.");
-        }
+        this.by = LocalDate.parse(by);
     }
 
     @Override
