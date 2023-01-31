@@ -15,7 +15,7 @@ import duke.task.Task;
  * The duke component that is responsible for saving and loading tasks from local storage.
  */
 public class Storage {
-    private static final String DATA_PATH = "data/duke.txt";
+    private static final String DATA_PATH = System.getProperty("user.dir") + "/data/duke.txt";
 
     /**
      * Loads and returns a list of tasks stored locally.
