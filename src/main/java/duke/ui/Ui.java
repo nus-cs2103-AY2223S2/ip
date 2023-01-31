@@ -19,10 +19,13 @@ public class Ui {
         return "________________________________________________________________\n";
     }
 
-    public String readCommand() {
+    public String readCommand() throws DukeException {
         String command = "";
         if (SCANNER.hasNextLine()) {
             command = SCANNER.nextLine();
+            if (command.contains("~")) {
+                throw new DukeException("Fake Duke doesn't like it when the input has the symbol ~.");
+            }
         }
         return command;
     }
