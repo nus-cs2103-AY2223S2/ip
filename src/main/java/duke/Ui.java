@@ -2,6 +2,8 @@ package duke;
 
 import java.util.Scanner;
 
+
+
 /**
  * Stores the scanner and handles what information to display to the user.
  */
@@ -9,10 +11,12 @@ public class Ui {
 
     private final Scanner sc;
 
+    /**
+     * Constructor for starting the Ui and launching Stage for JavaFX
+     */
     public Ui() {
         greet();
         sc = new Scanner(System.in);
-
     }
 
     public boolean hasUserInput() {
@@ -23,30 +27,25 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void greet() {
+    public String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo + "Hello! I'm Duke\nWhat can I do for you?");
-        separator();
+        return logo + "Hello! I'm Duke\nWhat can I do for you?";
     }
 
-    public void exit() {
-        separator();
-        System.out.println("\tBye. Hope to see you again soon!");
-        separator();
+    public String exit() {
         System.exit(0);
+        return "\tBye. Hope to see you again soon!";
     }
 
-    public void showError(DukeException err) {
-        separator();
-        System.out.println("\t" + err);
-        separator();
+    public String showError(DukeException err) {
+        return "\t" + err;
     }
 
-    public static void separator() {
-        System.out.println("---------------------------------------------------------------");
-    }
+//    public static void separator() {
+//        System.out.println("---------------------------------------------------------------");
+//    }
 }
