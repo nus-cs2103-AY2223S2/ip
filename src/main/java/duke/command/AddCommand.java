@@ -15,6 +15,6 @@ public class AddCommand extends Command {
     public void execute(Ui ui, Storage storage, TaskList taskList) throws DukeException {
         Task to_add = taskAssigner.assignTask(textCmd);
         taskList.add(to_add);
-        ui.printAddTask(to_add, taskList.num_tasks);
+        ui.printAddTask(to_add, taskList.getNumTasks());
     }
 }

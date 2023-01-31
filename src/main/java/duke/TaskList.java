@@ -13,6 +13,10 @@ public class TaskList {
         num_tasks = 0;
     }
 
+    public Integer getNumTasks() {
+        return num_tasks;
+    }
+
     public Task markTask(int task_index) throws DukeException {
         if (task_index > num_tasks || task_index < 1) {
             throw new DukeException("There is no such task available\n");
