@@ -38,5 +38,5 @@ public class DeadlineTest {
         assertEquals("[D][X] d1 (by: Jan 01 2023 06:00 PM)",
                 deadline.toString());
     }
-    
+
 }
