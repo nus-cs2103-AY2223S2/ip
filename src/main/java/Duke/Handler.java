@@ -69,6 +69,6 @@ public class Handler {
                 return taskList.findTasks(parameters[0]);
             }
         }
-        return "hi";
+        return "";
     }
 }
