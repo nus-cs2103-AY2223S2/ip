@@ -1,11 +1,11 @@
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import response.Response;
+import task.Task;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -39,7 +39,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         Response response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll();
+        dialogContainer.getChildren().clear();
+
+        for (Task t: response.tasks.getTasks()) {
+            dialogContainer.getChildren().add(new Label(t.toString()));
+        }
+
         userInput.clear();
     }
 }

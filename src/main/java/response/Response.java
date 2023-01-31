@@ -6,8 +6,8 @@ import task.TaskList;
  * Represents a response for the application.
  */
 public class Response {
-    private String message;
-    private TaskList tasks;
+    public String message;
+    public TaskList tasks;
 
     /**
      * Constructor for Response object
