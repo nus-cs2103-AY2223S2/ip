@@ -1,7 +1,6 @@
 package duke.main;
 
 import duke.command.*;
-import duke.main.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -10,7 +9,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser class parse input received from user and return respective commands
+ */
 public class Parser {
+    /**
+     * Takes in line of input as command from user. process the input
+     * and check if valid, if it is then return respective commands,
+     * else throw a Duke exception to inform user invalidity of input.
+     * @param fullCommand the line of input from user
+     * @return respective command to the input
+     * @throws DukeException when input is invalid
+     */
     public static Command parseCommand(String fullCommand) throws DukeException {
         String[] splits = fullCommand.split(" ", 2 );
         switch (splits[0]) {

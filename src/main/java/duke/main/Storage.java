@@ -10,9 +10,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class stores and loads tasks from the specified saved file
+ */
 public class Storage {
     private final File file;
 
+    /**
+     * Constructor method that create file if it does not exist
+     * @param filepath the specified path of file location
+     * @throws DukeException when file cannot be created
+     * @throws IOException when file creation has an error
+     */
     public Storage(String filepath) throws DukeException, IOException {
         String[] splits = filepath.split("/");
         File dir = new File(splits[0]);
@@ -29,6 +38,12 @@ public class Storage {
         }
         this.file = dataFile;
     }
+
+    /**
+     * updates the specified saved file based on the tasklist passed into it
+     * @param tasklist the tasklist containing the updated tasks
+     * @throws IOException when the filewriter has an error
+     */
     public void update(Tasklist tasklist) throws IOException {
         StringBuilder strings = new StringBuilder();
         FileWriter fw = new FileWriter(this.file);
@@ -65,6 +80,13 @@ public class Storage {
         fw.write(strings.toString());
         fw.close();
     }
+
+    /**
+     * loads the tasks from the specified saved file
+     * @return an arraylist of tasks from the saved file or creates a new arraylist if file is empty
+     * @throws DukeException when data from file cannot be read
+     * @throws FileNotFoundException when saved file cannot be found
+     */
     public ArrayList<Task> load() throws DukeException, FileNotFoundException {
             Scanner scan = new Scanner(this.file);
             ArrayList<Task> tasks = new ArrayList<>();

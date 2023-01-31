@@ -4,6 +4,9 @@ import duke.command.Command;
 
 import java.io.IOException;
 
+/**
+ * Main class for Duke program
+ */
 public class Duke {
     private final Ui ui;
     private Tasklist tasks;
@@ -23,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * method to start Duke program
+     */
     public void run() {
         ui.printGreeting();
         boolean isExit = false;
@@ -41,6 +47,12 @@ public class Duke {
         ui.printBye();
         ui.closeScanner();
     }
+
+    /**
+     * main method of Duke program.
+     * Initialise Duke and starts it with run()
+     * @param args Args passed into main method
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
