@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * A Todo is a Task that does not have any time limit
+ */
 public class Todo extends Task {
     /**
      * @param name a String indicating the name of the todo task

@@ -10,10 +10,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ddab3ad-c291-470d-becc-83d7dd94d3a1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/duke/command/FindCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Duke.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/data/tasks.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/tasks.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/command/FindCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/command/FindCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/dukeexception/DukeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/dukeexception/DukeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/storage/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/storage/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/task/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/task/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/task/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/task/Todo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/duke/tasklist/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/tasklist/TaskList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/duke/ui/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/duke/ui/Ui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/duke/task/EventTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/duke/task/EventTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/duke/task/TodoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/duke/task/TodoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/duke/tasks/EventTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/duke/tasks/TodoTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

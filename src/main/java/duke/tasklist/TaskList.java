@@ -87,6 +87,11 @@ public class TaskList {
                     "duke.task.Task does not exist, current number of tasks: " + tasks.size());
         }
     }
+    /**
+     * method used to find all tasks that contains the search phrase
+     * @param searchLine a String that is the phrase user is interested in
+     * @return a String that represents all target tasks
+     */
     public String find(String searchLine) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : tasks) {

@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import duke.parser.Parser;
 
+/**
+ * an Event is a task that has a starting time and an ending time
+ */
 public class Event extends Task {
     protected final LocalDateTime from;
     protected final LocalDateTime to;

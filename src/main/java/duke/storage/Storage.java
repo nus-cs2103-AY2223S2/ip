@@ -35,8 +35,7 @@ public class Storage {
     /**
      * a method that loads the local tasks into the TaskList if they exist. prints customised
      * messages if the file and/or folder does not exist, and create them accordingly
-     * 
-     * @return an empty ArrayList<Task> if no local tasks are found, or an ArrayList<Task>
+     * @return an empty ArrayList of Tasks if no local tasks are found, or an ArrayList
      *         containing all local tasks if they are found.
      */
     public ArrayList<Task> load() throws DukeException {
@@ -73,10 +72,10 @@ public class Storage {
     }
 
     /**
-     * method that loads all local tasks to an ArrayList<Task> to be passed to TaskList
-     * @param tasks default ArrayList<Task>
+     * method that loads all local tasks to an ArrayList of Tasks to be passed to TaskList
+     * @param tasks default ArrayList of Tasks
      * @param file local file that contains all local tasks
-     * @return an ArrayList<Task> containing all local tasks
+     * @return an ArrayList of Tasks containing all local tasks
      * @throws FileNotFoundException if the local file is not found.
      */
     private static ArrayList<Task> loadDefaultTasks(ArrayList<Task> tasks, File file)
@@ -102,6 +101,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * method used to update the locally saved tasks according to the TaskList
+     * @param tasks
+     * @throws IOException
+     */
     public void update(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.allTasks);
         fw.write(tasks.getWriteString());

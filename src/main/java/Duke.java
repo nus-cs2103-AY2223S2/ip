@@ -6,6 +6,9 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 
+/**
+ * The main class for running the application
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;

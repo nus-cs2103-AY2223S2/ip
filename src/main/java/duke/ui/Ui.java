@@ -19,12 +19,16 @@ public class Ui {
     public void welcome() {
         System.out.println(welcomeMessage);
     }
+
+    /**
+     * method to take in user input
+     * @return a String that is the same as what the use has input
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         return input;
     }
-    
     /**
      * Displays an error message if the default tasks cannot be loaded.
      */

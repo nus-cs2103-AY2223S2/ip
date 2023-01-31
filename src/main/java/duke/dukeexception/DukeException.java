@@ -1,5 +1,8 @@
 package duke.dukeexception;
 
+/**
+ * class that handles exceptions unique to the Duke application
+ */
 public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);
