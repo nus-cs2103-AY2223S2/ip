@@ -1,6 +1,7 @@
 package twofive.task;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import twofive.exception.TaskDoneException;
 import twofive.exception.TaskUndoneException;
@@ -29,7 +30,7 @@ public abstract class Task {
      * @return String indicating whether the task is done.
      */
     public String getTaskStatus() {
-        return (isDone ? "[X]" : "[ ]");
+        return isDone ? "Completed" : "Undone";
     }
 
     /**
@@ -111,4 +112,10 @@ public abstract class Task {
                 .toLowerCase()
                 .contains(keyword.toLowerCase());
     }
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public abstract ArrayList<String> getTaskDetails();
 }

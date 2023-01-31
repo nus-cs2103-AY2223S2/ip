@@ -2,6 +2,7 @@ package twofive.command;
 
 import twofive.data.TaskList;
 import twofive.storage.Storage;
+import twofive.ui.TaskContainer;
 import twofive.ui.Ui;
 
 /**
@@ -18,11 +19,14 @@ public class FindCommand extends Command {
      * Prints out all tasks added with the keyword in their description given a task list.
      *
      * @param tasks List of all current tasks.
-     * @param ui UI interacting with user.
      * @param storage Storage for saving or loading tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage(tasks.getKeywordString(this.keyword));
+    public String execute(TaskList tasks, Storage storage) {
+        TaskContainer.setTasks(tasks.getTasksByKeyword(this.keyword));
+        return "Here are the tasks in your list with keyword ["
+                + keyword
+                + "] in "
+                + "their description";
     }
 }

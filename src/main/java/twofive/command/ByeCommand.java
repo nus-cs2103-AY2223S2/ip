@@ -16,17 +16,19 @@ public class ByeCommand extends Command {
      * Displays error message if error encountered while saving tasks.
      *
      * @param tasks List of all current tasks.
-     * @param ui UI interacting with user.
      * @param storage Storage for saving tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
+        String commandResult;
         try {
             storage.save(tasks);
-            ui.showExit();
+            commandResult = "Tasks saved successfully.\nBye. Hope to see you again soon!";
+            System.exit(0);
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            commandResult = e.getMessage();
         }
+        return commandResult;
     }
 
     @Override

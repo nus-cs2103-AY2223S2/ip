@@ -23,8 +23,7 @@ public abstract class Command {
      * Executes actions given a list of tasks, a UI object and a Storage object.
      *
      * @param tasks List of all current tasks.
-     * @param ui UI interacting with user.
      * @param storage Storage for saving or loading tasks.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws TwoFiveException;
+    public abstract String execute(TaskList tasks, Storage storage) throws TwoFiveException;
 }

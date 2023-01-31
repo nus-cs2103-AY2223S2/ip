@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import twofive.data.TaskList;
 import twofive.storage.Storage;
 import twofive.task.Event;
+import twofive.ui.TaskContainer;
 import twofive.ui.Ui;
 
 /**
@@ -40,11 +41,11 @@ public class EventCommand extends Command {
      * display error message.
      *
      * @param tasks List of tasks to be added to.
-     * @param ui UI interacting with user.
      * @param storage Storage for saving or loading tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
+        String commandResult = "";
         try {
             LocalDateTime startTime = LocalDateTime.parse(startTimeString, formatter);
             LocalDateTime endTime = LocalDateTime.parse(endTimeString, formatter);
@@ -53,12 +54,14 @@ public class EventCommand extends Command {
             //Adds new task to list of tasks
             tasks.addTask(newEvent);
             storage.save(tasks);
-            ui.showMessage("Got it. I've added this task:\n " + newEvent + "\n"
-                    + "Now you have " + tasks.getTasksNum() + " tasks in the list");
+            TaskContainer.setTasks(tasks.getTasks());
+            commandResult = "Got it. I've added this task:\n " + newEvent + "\n"
+                    + "Now you have " + tasks.getTasksNum() + " tasks in the list";
         } catch (DateTimeParseException e) {
-            ui.showError("Start time and end time must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
+            commandResult = "Start time and end time must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31";
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            commandResult = e.getMessage();
         }
+        return commandResult;
     }
 }

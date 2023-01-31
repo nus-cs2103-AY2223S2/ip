@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 import twofive.data.TaskList;
 import twofive.storage.Storage;
 import twofive.task.Deadline;
+import twofive.ui.TaskContainer;
 import twofive.ui.Ui;
 
 /**
@@ -36,11 +37,11 @@ public class DeadlineCommand extends Command {
      * If deadline given is not in yyyy-MM-dd HH:mm format, display error message.
      *
      * @param tasks List of tasks to be added to.
-     * @param ui UI interacting with user.
      * @param storage Storage for saving or loading tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
+        String commandResult = "";
         try {
             LocalDateTime deadline = LocalDateTime.parse(deadlineString, formatter);
             Deadline newDeadline = new Deadline(taskDescription, deadline);
@@ -48,13 +49,14 @@ public class DeadlineCommand extends Command {
             //Adds new task to list of tasks
             tasks.addTask(newDeadline);
             storage.save(tasks);
-            ui.showMessage(
-                    "Got it. I've added this task:\n " + newDeadline + "\n" + "Now you have " + tasks.getTasksNum()
-                            + "this is a test test tasks in the list");
+            TaskContainer.setTasks(tasks.getTasks());
+            commandResult = "Got it. I've added this task:\n " + newDeadline + "\n" + "Now you have " + tasks.getTasksNum()
+                            + "this is a test test tasks in the list";
         } catch (DateTimeParseException e) {
-            ui.showError("Deadline must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31");
+            commandResult = "Deadline must be in the format yyyy-MM-dd HH:mm, e.g. 2023-01-23 16:31";
         } catch (IOException e) {
-            ui.showError(e.getMessage());
+            commandResult = e.getMessage();
         }
+        return commandResult;
     }
 }
