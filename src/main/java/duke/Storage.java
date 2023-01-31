@@ -1,3 +1,7 @@
+package duke;
+
+import tasks.*;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

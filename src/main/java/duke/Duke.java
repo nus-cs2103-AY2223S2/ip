@@ -1,4 +1,9 @@
-import java.io.*;
+package duke;
+
+import commands.Command;
+import exceptions.DukeException;
+
+import java.io.File;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
