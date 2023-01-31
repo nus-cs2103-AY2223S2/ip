@@ -34,5 +34,3 @@ public abstract class Task implements Serializable {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 }
-
-//...

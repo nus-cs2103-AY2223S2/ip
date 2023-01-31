@@ -1,19 +1,17 @@
 package duke.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-import duke.storage.Storage;
 import duke.ui.Ui;
-
 
 public class Parser {
     private Storage storage;
@@ -27,13 +25,14 @@ public class Parser {
     public boolean parse(String input) {
         String cmd;
 
-        try{
+        try {
             String[] inputs = input.split(" ", 2);
             cmd = inputs[0];
 
             int idx;
             Task tsk;
-            String markMsg, tskNum;
+            String markMsg
+            String tskNum;
             String cfmMsg = "Got it. I've added this task:";
             String[] desc;
             LocalDateTime date, from, to;
@@ -123,5 +122,4 @@ public class Parser {
         }
         return date;
     }
-
 }
