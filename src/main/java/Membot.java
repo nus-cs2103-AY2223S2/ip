@@ -2,6 +2,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import commands.Command;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import model.Task;
 import storage.StorageManager;
 import utils.EmptyInputException;
@@ -65,14 +69,5 @@ public class Membot {
                 ui.printlnError(e.toString());
             }
         }
-    }
-
-    /**
-     * Main entry point to Membot.
-     *
-     * @param args Optional arguments when starting Membot.
-     */
-    public static void main(String[] args) {
-        run();
     }
 }
