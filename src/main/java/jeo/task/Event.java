@@ -10,8 +10,8 @@ import java.time.format.DateTimeParseException;
  * @version 0.1
  */
 public class Event extends Task {
-    protected final String DATE_TIME_PARSED = "yyyy-MM-dd HH:mm";
-    protected final String DATE_TIME_TO_PRINT = "d MMM yyyy HH:mm";
+    protected static final String DATE_TIME_PARSED = "yyyy-MM-dd HH:mm";
+    protected static final String DATE_TIME_TO_PRINT = "d MMM yyyy HH:mm";
     protected String fromDateString;
     protected String toDateString;
     protected LocalDateTime fromDateTime;

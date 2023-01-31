@@ -1,10 +1,5 @@
 package jeo.database;
 
-import jeo.task.Deadline;
-import jeo.task.Event;
-import jeo.task.Task;
-import jeo.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,14 +8,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import jeo.task.Deadline;
+import jeo.task.Event;
+import jeo.task.Task;
+import jeo.task.ToDo;
+
 /**
  * Represents the storage for loading and saving tasks.
  * @author Goh Jun How
  * @version 0.1
  */
 public class Storage {
+    protected static final String DATE_TIME_TO_PARSE = "yyyy-MM-dd HH:mm";
     protected String path;
-    protected final String DATE_TIME_TO_PARSE = "yyyy-MM-dd HH:mm";
 
     /**
      * Creates the storage object with the specified path to load tasks.
@@ -91,17 +91,17 @@ public class Storage {
         Task task = null;
         String[] arr = str.split("\\\\");
         switch (arr[2]) {
-            case "T":
-                task = new ToDo(arr[1]);
-                break;
-            case "D":
-                task = new Deadline(arr[1], arr[3]);
-                break;
-            case "E":
-                task = new Event(arr[1], arr[3], arr[4]);
-                break;
-            default:
-                throw new IllegalStateException();
+        case "T":
+            task = new ToDo(arr[1]);
+            break;
+        case "D":
+            task = new Deadline(arr[1], arr[3]);
+            break;
+        case "E":
+            task = new Event(arr[1], arr[3], arr[4]);
+            break;
+        default:
+            throw new IllegalStateException();
         }
         if (arr[0].equals("X")) {
             task.markAsDone();

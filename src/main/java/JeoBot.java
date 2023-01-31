@@ -1,20 +1,20 @@
-import jeo.parser.Parser;
-import jeo.database.Storage;
-import jeo.database.TaskList;
-import jeo.exception.JeoException;
-import jeo.task.Deadline;
-import jeo.task.Event;
-import jeo.task.Task;
-import jeo.task.ToDo;
-import jeo.ui.Ui;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 import java.util.HashMap;
+import java.util.Scanner;
+
+import jeo.database.Storage;
+import jeo.database.TaskList;
+import jeo.exception.JeoException;
+import jeo.parser.Parser;
+import jeo.task.Deadline;
+import jeo.task.Event;
+import jeo.task.Task;
+import jeo.task.ToDo;
+import jeo.ui.Ui;
 
 /**
  * Represents the bot which the user may run.
@@ -22,7 +22,7 @@ import java.util.HashMap;
  * @version 0.1
  */
 public class JeoBot {
-    protected final String DATE_PARSE = "yyyy-MM-dd";
+    protected static final String DATE_PARSE = "yyyy-MM-dd";
     protected Ui ui;
     protected Storage store;
     protected TaskList taskList;
@@ -118,11 +118,14 @@ public class JeoBot {
                 case FIND:
                     String keyword = hm.get("key");
                     ui.showTasksWithKeyword(keyword, taskList);
+                    break;
+                default:
+                    throw new IllegalStateException();
                 }
                 store.save(taskList.getTaskList());
             } catch (IOException e) {
                 ui.showSavingError();
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | IllegalStateException e) {
                 ui.showInvalidCommand();
             } catch (IndexOutOfBoundsException e) {
                 ui.showIndexingError();

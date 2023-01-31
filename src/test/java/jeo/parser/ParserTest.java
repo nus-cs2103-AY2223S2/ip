@@ -1,9 +1,10 @@
 package jeo.parser;
 
-import jeo.exception.JeoException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import jeo.exception.JeoException;
 
 public class ParserTest {
     @Test

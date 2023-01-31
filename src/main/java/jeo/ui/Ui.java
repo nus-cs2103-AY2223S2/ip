@@ -1,12 +1,12 @@
 package jeo.ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import jeo.database.TaskList;
 import jeo.task.Deadline;
 import jeo.task.Event;
 import jeo.task.Task;
-import jeo.database.TaskList;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the Ui for dealing with user interactions.
@@ -14,8 +14,8 @@ import java.time.format.DateTimeFormatter;
  * @version 0.1
  */
 public class Ui {
-    protected final String BOT_NAME = "JeoBot";
-    protected final String DATE_TO_PRINT = "d MMM yyyy";
+    protected static final String BOT_NAME = "JeoBot";
+    protected static final String DATE_TO_PRINT = "d MMM yyyy";
 
     /**
      * Prints a divider for the greeting message.
@@ -28,8 +28,8 @@ public class Ui {
      * Prints a divider for command response messages.
      */
     public void showBodyDivider() {
-        System.out.println("________________________________________________________________" +
-                "_________________________");
+        System.out.println("________________________________________________________________"
+                + "_________________________");
     }
 
     /**
@@ -109,7 +109,7 @@ public class Ui {
      * @param taskListSize An integer representing the remaining number of tasks.
      */
     public void showTaskDeleted(Task task, int taskListSize) {
-        String statement = "Got it! I've removed this task:\n" +task + "\nNow you have ";
+        String statement = "Got it! I've removed this task:\n" + task + "\nNow you have ";
         System.out.println(statement + taskListSize + " task(s) in the list.");
     }
 
@@ -137,7 +137,7 @@ public class Ui {
         System.out.println("Here are all the tasks in your list:");
         for (int i = 0; i < list.getNumberOfTasks(); i++) {
             StringBuilder sb = new StringBuilder()
-                    .append(i+1)
+                    .append(i + 1)
                     .append(".")
                     .append(list.getTaskAtIndex(i));
             System.out.println(sb);

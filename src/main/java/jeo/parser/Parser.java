@@ -1,8 +1,8 @@
 package jeo.parser;
 
-import jeo.exception.JeoException;
-
 import java.util.HashMap;
+
+import jeo.exception.JeoException;
 
 /**
  * Represents the parser which parses user input as a string.
@@ -90,15 +90,15 @@ public class Parser {
         } else if (str.toLowerCase().startsWith("mark")) {
             hm.put("command", "mark");
             int i = parseSubStringActions(str, 4);
-            hm.put("index", Integer.toString(i-1));
+            hm.put("index", Integer.toString(i - 1));
         } else if (str.toLowerCase().startsWith("unmark")) {
             hm.put("command", "unmark");
             int i = parseSubStringActions(str, 6);
-            hm.put("index", Integer.toString(i-1));
+            hm.put("index", Integer.toString(i - 1));
         } else if (str.toLowerCase().startsWith("delete")) {
             hm.put("command", "delete");
             int i = parseSubStringActions(str, 6);
-            hm.put("index", Integer.toString(i-1));
+            hm.put("index", Integer.toString(i - 1));
         } else if (str.toLowerCase().startsWith("due")) {
             hm.put("command", "due");
             String by = str.substring(3).trim();
@@ -154,7 +154,7 @@ public class Parser {
         StringBuilder sb = new StringBuilder();
         int i = 0;
         String first = "";
-        String second  = "";
+        String second = "";
         while (i < s.length()) {
             if (s.charAt(i) != '/') {
                 sb.append(s.charAt(i));

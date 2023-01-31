@@ -1,8 +1,8 @@
 package jeo.database;
 
-import jeo.task.Task;
-
 import java.util.ArrayList;
+
+import jeo.task.Task;
 
 /**
  * Represents the tasks stored as a list.

@@ -1,9 +1,10 @@
 package jeo.database;
 
-import jeo.task.StubTask;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import jeo.task.StubTask;
 
 public class TaskListTest {
 
