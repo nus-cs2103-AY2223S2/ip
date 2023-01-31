@@ -3,13 +3,13 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Events extends Task {
+public class Event extends Task {
 
     protected LocalDateTime from;
     protected LocalDateTime to;
     protected DateTimeFormatter timeFormat;
 
-    public Events(String description, LocalDateTime from, LocalDateTime to, Boolean isDone) {
+    public Event(String description, LocalDateTime from, LocalDateTime to, Boolean isDone) {
         super(description, 'E', isDone);
         this.from = from;
         this.to = to;
