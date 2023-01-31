@@ -20,6 +20,10 @@ public class TaskList {
         this.tasks.get(taskId - 1).complete();
     }
 
+    public void unmark(int taskId) {
+        this.tasks.get(taskId - 1).uncomplete();
+    }
+
     public List<Task> getList() {
         return this.tasks;
     }
