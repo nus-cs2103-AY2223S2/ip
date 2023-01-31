@@ -31,7 +31,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Terminates the current instance of the chatbot by exiting the program.
+     * Terminates the current instance of the chatbot by exiting the program after displaying exit message.
      */
     void exit() {
         storage.updateData(this.taskList);
@@ -47,6 +47,11 @@ public class Duke extends Application {
                 " tasks in the list\n";
     }
 
+    /**
+     * Returns a <code>Message</code> that represents the response of the chatbot when prompted by an input by user.
+     * @param msg A <code>Message</code> object representing the user's request
+     * @return A <code>Message</code> object containing the response of the bot to the user's request
+     */
     public Message respondToMessage(Message msg) {
         String input = msg.getMessage();
         String[] tokens = parser.parseUserInput(input);
@@ -123,11 +128,13 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         ui.initUiElems(stage);
-//        ui.setLayout(stage, mainLayout);
-//        ui.setEventListeners(this);
         ui.displayWelcomeMessage();
     }
 }

@@ -49,11 +49,19 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Creates a dialog entry originating from the user on the GUI.
+     * @param userString <code>String</code> representing user message.
+     */
     private void displayUserDialog(String userString) {
         dialogContainer.getChildren()
                 .add(DialogBox.getUserDialog(userString, userImage));
     }
 
+    /**
+     * Creates a dialog entry originating from Duke on the GUI.
+     * @param dukeString <code>String</code> representing Duke message.
+     */
     void displayDukeDialog(String dukeString) {
         dialogContainer.getChildren()
                 .add(DialogBox.getDukeDialog(dukeString, dukeImage));

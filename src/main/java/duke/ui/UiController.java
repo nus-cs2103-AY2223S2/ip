@@ -23,7 +23,7 @@ public class UiController {
     }
 
     /**
-     * Method to display standard welcome message to user.
+     * Displays welcome message from Duke on GUI.
      */
     public void displayWelcomeMessage() {
         String welcomeText = """
@@ -32,11 +32,18 @@ public class UiController {
         fxmlLoader.<MainWindow>getController().displayDukeDialog(welcomeText);
     }
 
+    /**
+     * Displays goodbye message from Duke on GUI.
+     */
     public void displayGoodbyeMessage() {
         String goodbyeText = " Goodbye. Hope to see you again soon.";
         fxmlLoader.<MainWindow>getController().displayDukeDialog(goodbyeText);
     }
 
+    /**
+     * Initialises UI elements from FXML files.
+     * @param stage <code>Stage</code> supplied to the instance of JavaFX <code>Application</code>.
+     */
     public void initUiElems(Stage stage) {
         try {
             this.fxmlLoader = new FXMLLoader(UiController.class.getResource("/view/MainWindow.fxml"));
@@ -50,6 +57,11 @@ public class UiController {
         }
     }
 
+    /**
+     * Gets Duke's response to a message from the user.
+     * @param msg User's message.
+     * @return Duke's response.
+     */
     Message getResponse(Message msg) {
         return context.respondToMessage(msg);
     }
