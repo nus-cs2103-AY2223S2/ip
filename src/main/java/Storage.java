@@ -11,7 +11,7 @@ public class Storage {
     private static final Path dataPath = Paths.get("data");
     private static final Path taskListPath = Paths.get("data", "duke.txt");
 
-    private ArrayList<Task> parseTaskList() throws IOException {
+    private ArrayList<Task> parseTaskList() throws IOException, DukeStorageException {
         List<String> lines = Files.readAllLines(taskListPath);
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -36,8 +36,8 @@ public class Storage {
                     newTask = new Event(description, fromDate, toDate);
                     break;
                 default:
-                    System.out.println("Unknown Task!");
-                    continue;
+                    storeTaskList(new ArrayList<>()); // clear data file
+                    throw new DukeStorageException("Oops, something is wrong with the data file! :(\n");
             }
 
             taskList.add(newTask);
@@ -59,11 +59,13 @@ public class Storage {
             }
             return parseTaskList();
 
+        } catch (DukeStorageException e) {
+            System.out.println(e.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return new ArrayList<>();
     }
 
     public void storeTaskList(ArrayList<Task> taskList) {
