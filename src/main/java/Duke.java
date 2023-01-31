@@ -6,7 +6,7 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        System.out.println("Hello from mars.\n" + "How may i help you?\n");
+        System.out.println("Hello Boss.\n" + "How may i help you?\n");
 
         Scanner sc = new Scanner(System.in);
 
@@ -60,7 +60,7 @@ public class Duke {
                     } else if (echo.contains("deadline")) {
                         echo = echo.replace("deadline", "");
                         String description = echo.split("/by")[0];
-                        String date = echo.split("/by")[1];
+                        String date = echo.split("/by ")[1];
                         Deadline deadline = new Deadline(description, date);
                         store.add(deadline);
                         System.out.println("Got it. I've added this task:\n" + deadline.toString() +
