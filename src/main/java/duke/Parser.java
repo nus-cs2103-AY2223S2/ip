@@ -6,7 +6,7 @@ import duke.commands.*;
  * The class used to identify user commands.
  */
 public class Parser {
-    private enum CMD {
+    private enum cmds {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND;
     }
 
@@ -18,7 +18,7 @@ public class Parser {
      */
     public static Command parse(String cmdLine) {
         try {
-            CMD order = CMD.valueOf(cmdLine.split(" ")[0].toUpperCase());
+            cmds order = cmds.valueOf(cmdLine.split(" ")[0].toUpperCase());
             switch (order) {
             case BYE:
                 return new Bye();
@@ -47,10 +47,12 @@ public class Parser {
             case FIND:
                 return new Find(cmdLine);
                 // Fallthrough
+            default:
+                return new notACommand();
+                // Fallthrough
             }
         } catch (IllegalArgumentException e) {
             return new notACommand();
         }
-        return new notACommand();
     }
 }

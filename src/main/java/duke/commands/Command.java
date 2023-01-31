@@ -1,8 +1,8 @@
 package duke.commands;
 
-import duke.taskType.TaskList;
 import duke.Ui;
 import duke.Storage;
+import duke.taskType.TaskList;
 
 /**
  * The abstract class for commands.

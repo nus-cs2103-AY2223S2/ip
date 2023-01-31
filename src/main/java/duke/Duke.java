@@ -1,7 +1,7 @@
 package duke;
 
+import duke.commands.Command;
 import duke.taskType.TaskList;
-import duke.commands.*;
 
 /**
  * The main class of this task list management bot.
@@ -36,7 +36,9 @@ public class Duke {
             command.operate(lst, ui, storage);
             ui.printLine();
             System.out.println();
-            if (command.isBye()) break;
+            if (command.isBye()) {
+                break;
+            }
         }
     }
 
