@@ -6,13 +6,26 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+/**
+ * List of tasks that the user can add, mark, find or delete.
+ */
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
 
+    /**
+     * Class constructor of Storage.
+     * Initialize by adding a zeroth element so that the index of tasks can start from 1.
+     */
     public TaskList() {
         this.list.add(new ToDo("zeroth"));
     }
 
+    /**
+     * Add a Todo Task to the TaskList.
+     * @param input the content of the new Todo Task
+     * @param needPrint the indicator that shows whether the message needs to be printed
+     * @throws DukeException if the content is empty
+     */
     public void add(String input, boolean needPrint) throws DukeException {
         if (isEmpty(input)) {
             throw new DukeException("The description of a todo cannot be empty.");
@@ -26,6 +39,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add a Deadline Task to the TaskList.
+     * @param input the content of the new Deadline Task
+     * @param deadline the deadline date and time of the new Deadline Task
+     * @param needPrint the indicator that shows whether the message needs to be printed
+     * @throws DukeException if the content is empty
+     */
     public void add(String input, String deadline, boolean needPrint) throws DukeException {
         if (isEmpty(input) || isEmpty(deadline)) {
             throw new DukeException("The description and deadline of a deadline cannot be empty.");
@@ -39,6 +59,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add a Event Task to the TaskList.
+     * @param input the content of the new Event Task
+     * @param from the start date and time of the new Event Task
+     * @param to the end date and time of the new Event Task
+     * @param needPrint the indicator that shows whether the message needs to be printed
+     * @throws DukeException if the content is empty
+     */
     public void add(String input, String from, String to, boolean needPrint) throws DukeException {
         if (input.equals("") || from.equals("") || to.equals("")) {
             throw new DukeException("The description and duration of an event cannot be empty.");
@@ -52,6 +80,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Checks whether the string is an empty string, excluding spaces.
+     * @param str the string to be checked
+     * @return true when the string is empty
+     */
     public boolean isEmpty(String str) {
         String temp = str.replaceAll("\\s+", "");
         if (temp.equals("")) {
@@ -60,6 +93,10 @@ public class TaskList {
         return false;
     }
 
+    /**
+     * Deletes a Task from the TaskList.
+     * @param index the index of the Task to be deleted
+     */
     public void delete(int index) {
         Task removedTask = this.list.get(index);
         this.list.remove(index);
@@ -68,6 +105,11 @@ public class TaskList {
         System.out.println("Now you have " + (this.list.size() - 1) + " tasks in the list.");
     }
 
+    /**
+     * Returns a task with the given index.
+     * @param index the Task to be returns
+     * @return Task with the given index in the TaskList
+     */
     public Task get(int index) {
         return this.list.get(index);
     }
@@ -86,6 +128,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Stringifies the TaskList.
+     * @return the string representation of the TaskList
+     */
     @Override
     public String toString() {
         String str = "Here are the tasks in your list:";
@@ -96,6 +142,10 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Stringifies the TaskList with relevant format for the saved data file.
+     * @return the string representation of the TaskList that follows the format for the saved data file
+     */
     public String toTxtString() {
         String data = "";
         for (int i = 1; i < this.list.size(); i++) {
@@ -104,6 +154,10 @@ public class TaskList {
         return data;
     }
 
+    /**
+     * Returns the number of Tasks in this TaskList.
+     * @return the number of Tasks in this TaskList
+     */
     public int size() {
         return list.size();
     }

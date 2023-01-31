@@ -6,13 +6,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage that reads and writes to the saved data file in local storage.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Class constructor of Storage.
+     * @param filePath the path of the data file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads TaskList from the saved data file.
+     * @return TaskList containing the tasks saved in the local data file.
+     * @throws FileNotFoundException If data file does not exist.
+     */
     public TaskList load() throws FileNotFoundException {
         File f = new File(this.filePath);
         Scanner sc = new Scanner(f);
@@ -66,6 +78,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the data in Duke that is running to the local data file.
+     * @param dukeData the data to be saved in string
+     * @throws IOException If file cannot be written into the data file.
+     */
     public void writeToFile(String dukeData) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
         fw.write(dukeData);

@@ -1,9 +1,16 @@
 package duke;
 import duke.command.*;
 
+/**
+ * Parses a Command based on the string input.
+ */
 public class Parser {
-    public Parser() {}
 
+    /**
+     * Returns a Command respective to each command input.
+     * @param fullCommand the command that needs to be parsed
+     * @return the command that needs to be executed
+     */
     public static Command parse(String fullCommand) {
         String[] fullCommandArr = fullCommand.replaceFirst(" ", "#").split("#");
         String command = fullCommandArr[0];
