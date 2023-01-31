@@ -1,5 +1,8 @@
 package duke.DukeException;
 
+/**
+ * Exception class that handles errors specific to Duke.
+ */
 public class InvalidCommandException extends Exception {
 
     private static final String HELP = " View all tasks with `list`";
@@ -15,6 +18,10 @@ public class InvalidCommandException extends Exception {
                                                         + HELP;
     public String errorMessage;
     
+    /**
+     * Public constructor for InvalidCommandException
+     * @param err Error message
+     */
     public InvalidCommandException(String err) {
         super(err);
         this.errorMessage = err;
