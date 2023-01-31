@@ -22,7 +22,7 @@ public class Deadline extends Task {
     }
 
     public String getByDate() {
-        return by;
+        return byDate.format(FORMATTER);
     }
 
 }

@@ -4,9 +4,12 @@ import java.util.Scanner;
 
 public class Storage {
 
-    public Storage() {
+    private String filename;
+
+    public Storage(String filename) {
+        this.filename = filename;
         try {
-            File f = new File("list_storage.txt");
+            File f = new File(filename);
             f.createNewFile();
         } catch (IOException e) {
             System.out.println("IOException error: " + e);
@@ -15,7 +18,7 @@ public class Storage {
 
     public void storeList(ArrayList<Task> taskArr) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("list_storage.txt", false));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filename, false));
             for (Task task : taskArr) {
                 // Format descriptions of todo, deadline, event
                 String descrip = "";
@@ -49,7 +52,7 @@ public class Storage {
     public ArrayList<Task> loadList() {
         ArrayList<Task> taskArr = new ArrayList<>();
         try {
-            File f = new File("list_storage.txt");
+            File f = new File(filename);
             Scanner scanner = new Scanner(f);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();

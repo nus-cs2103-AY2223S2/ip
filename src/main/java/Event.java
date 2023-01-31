@@ -28,11 +28,11 @@ public class Event extends Task {
     }
 
     public String getFromDate() {
-        return from;
+        return fromDate.format(FORMATTER);
     }
 
     public String getToDate() {
-        return to;
+        return toDate.format(FORMATTER);
     }
 
 }
