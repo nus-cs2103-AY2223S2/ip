@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 
 public abstract class Task {
     private String description;
-    DateFormat readFormat = new SimpleDateFormat( "dd/mm/yyyy hhmm");
+    DateFormat readFormat = new SimpleDateFormat( "dd/MM/yyyy HHmm");
     DateFormat writeFormat = new SimpleDateFormat( "E, MMM dd yyyy, h:mm aa");
     private boolean isComplete;
     public Task(String description) {
