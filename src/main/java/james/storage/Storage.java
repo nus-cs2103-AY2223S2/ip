@@ -8,11 +8,21 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The storage of a taskList.
+ * The class allows reading from the file and writing to the file.
+ * Creates the file if it does not exist.
+ * The file is stored in the data folder as data/james.txt.
+ */
 public class Storage {
 
     String filePath = "data/james.txt";
     File file;
 
+    /**
+     * Creates the storage object.
+     * @throws JamesException If the file cannot be created.
+     */
     public Storage() throws JamesException
     {
         try {
@@ -27,6 +37,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the file and loads the task list
+     * @return The task list.
+     * @throws JamesException If the file cannot be read.
+     */
     public TaskList loadFile() throws JamesException {
         TaskList taskList = new TaskList();
         try {
@@ -56,6 +71,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes the task list to the file.
+     * @param taskList The task list to be written.
+     * @throws JamesException If the file cannot be written.
+     */
     public void writeToFile(TaskList taskList) throws JamesException {
         try {
             FileWriter file = new FileWriter(filePath);

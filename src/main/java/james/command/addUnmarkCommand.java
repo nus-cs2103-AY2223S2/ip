@@ -3,6 +3,9 @@ package james.command;
 import james.JamesException;
 import james.task.Task;
 
+/**
+ * The command to mark a task as not done.
+ */
 public class addUnmarkCommand extends Command {
     private int taskNumber;
 

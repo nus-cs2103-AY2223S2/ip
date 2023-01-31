@@ -3,6 +3,9 @@ package james.command;
 import james.JamesException;
 import james.task.Event;
 
+/**
+ * The command to add an event to the task list.
+ */
 public class addEventCommand extends Command {
     private Event event;
 

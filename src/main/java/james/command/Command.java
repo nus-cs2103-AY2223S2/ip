@@ -4,6 +4,9 @@ import james.JamesException;
 import james.task.TaskList;
 import james.ui.UI;
 
+/**
+ * The command to be executed. All specific commands are subclasses of this class.
+ */
 public abstract class Command {
     protected TaskList taskList;
     protected UI ui;

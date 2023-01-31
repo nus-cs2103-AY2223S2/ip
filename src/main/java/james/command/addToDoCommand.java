@@ -3,6 +3,9 @@ package james.command;
 import james.JamesException;
 import james.task.ToDo;
 
+/**
+ * The command to add a todo to the task list.
+ */
 public class addToDoCommand extends Command {
     private ToDo toDo;
 

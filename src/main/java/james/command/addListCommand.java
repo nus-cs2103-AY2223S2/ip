@@ -4,6 +4,9 @@ import james.JamesException;
 import james.task.TaskList;
 import james.ui.UI;
 
+/**
+ * The command to list all tasks in the task list.
+ */
 public class addListCommand extends Command {
     public addListCommand() {
     }

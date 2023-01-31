@@ -12,10 +12,11 @@ import james.command.Command;
 import james.task.Deadline;
 import james.task.Event;
 import james.task.ToDo;
-
-
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses the user input and returns the appropriate command.
+ */
 public class Parser {
     private String parseTask(String input) {
         return input.split(" ", 2)[1];
