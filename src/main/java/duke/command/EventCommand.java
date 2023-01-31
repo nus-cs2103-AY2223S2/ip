@@ -34,26 +34,26 @@ public class EventCommand extends Command {
             StringBuilder stringBuilder = new StringBuilder();
             StringBuilder startTime = new StringBuilder();
             StringBuilder endTime = new StringBuilder();
-            boolean fr = false;
-            boolean t = false;
+            boolean hasFrom = false;
+            boolean hasTo = false;
             for (int i = 1; i < command.length; i++) {
-                if (fr) {
+                if (hasFrom) {
                     if (command[i].equals("/to")) {
-                        t = true;
-                        fr = false;
+                        hasTo = true;
+                        hasFrom = false;
                         startTime.setLength(startTime.length() - 1);
                         continue;
                     }
                     startTime.append(command[i]);
                     startTime.append(" ");
-                } else if (t) {
+                } else if (hasTo) {
                     endTime.append(command[i]);
                     if (i + 1 != command.length) {
                         endTime.append(" ");
                     }
                 } else {
                     if (command[i].equals("/from")) {
-                        fr = true;
+                        hasFrom = true;
                         stringBuilder.setLength(stringBuilder.length() - 1);
                         continue;
                     }
