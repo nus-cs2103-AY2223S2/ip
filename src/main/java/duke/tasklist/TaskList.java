@@ -59,7 +59,7 @@ public class TaskList {
     }
 
     /**
-     * Similar to mark, unmark marks a Task as "not done"
+     * Similar to mark, unmark marks a Task as "not done".
      * @param taskNumber the number of the Task to be unmarked
      * @return the updated Task
      * @throws DukeException if the user wants to unmark a Task that does not exist
@@ -73,7 +73,6 @@ public class TaskList {
         }
         return tasks.get(taskNumber - 1);
     }
-
 
     public String find(String searchLine) {
         ArrayList<Task> foundTasks = new ArrayList<>();
@@ -95,7 +94,6 @@ public class TaskList {
 
     /**
      * a method that removes a Task from the list
-     * 
      * @param taskNumber the number of the Task to be removed
      * @return the removed Task
      * @throws DukeException if the user wants to remove a task that does not exist
