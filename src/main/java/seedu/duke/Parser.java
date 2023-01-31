@@ -31,35 +31,32 @@ public class Parser {
      * Returns the String description of the task from the input.
      * If the description is empty, throw a DukeException.
      *
-     * @param str The description of the task.
-     * @param task The task name.
+     * @param str The description and name of the task.
      * @return The description of the task.
      * @throws DukeException If str is empty.
      */
-    public String checkDescription(String str, String task) throws DukeException {
-        if (str.equals("")) {
-            String message = "OOPS!!! The description of a " + task + " cannot be empty.";
+    public String checkDescription(String... str) throws DukeException {
+        if (str[0].equals("")) {
+            String message = "OOPS!!! The description of a " + str[1] + " cannot be empty.";
             throw new DukeException(message);
         }
-        return str;
+        return str[0];
     }
 
     /**
      * Returns the String time of the task from the input.
      * If the time is empty, throw a DukeException.
      *
-     * @param str The time of the task.
-     * @param task The task name.
-     * @param type The task type. e.g., by
+     * @param str The time, type and name of the task.
      * @return The time of the task in String.
      * @throws DukeException If str is empty.
      */
-    public String checkTime(String str, String task, String type) throws DukeException {
-        if (str.equals("")) {
-            String message = "OOPS!!! The /" + type + " part of a " + task + " cannot be empty.";
+    public String checkTime(String... str) throws DukeException {
+        if (str[0].equals("")) {
+            String message = "OOPS!!! The /" + str[2] + " part of a " + str[1] + " cannot be empty.";
             throw new DukeException(message);
         }
-        return str;
+        return str[0];
     }
 
     /**
