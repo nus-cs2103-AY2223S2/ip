@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -42,7 +43,10 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setTranslateY(10);
         displayPicture.setImage(img);
+        displayPicture.setFitHeight(100);
+        displayPicture.setClip(new Circle(50, 50, 45));
     }
 
     /** Flips the dialog box such that the ImageView is on the left and text on the right. */
