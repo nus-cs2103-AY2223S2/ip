@@ -38,8 +38,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         Ui ui = new Ui();
-        return String.format("[E][%c] %s (from: %s to: %s)", this.getStatusIcon(), this.description
-                , ui.getStringDateTime(this.startDateTime), ui.getStringDateTime(this.endDateTime));
+        return String.format("[E][%c] %s (from: %s to: %s) %s", this.getStatusIcon(), this.description,
+                ui.getStringDateTime(this.startDateTime), ui.getStringDateTime(this.endDateTime),
+                super.urgentMessage(this.startDateTime));
     }
 
     private void setEventDateTimes(String description) throws DukeException {

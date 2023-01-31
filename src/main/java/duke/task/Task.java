@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
 /**
  * Represents a task added by the user.
  * It has a description attached to it and a isDone status.
@@ -58,5 +61,17 @@ public class Task {
      */
     public String getRawTask() {
         return String.format("T ~ %d ~ %s\n", isDone ? 1 : 0, this.description);
+    }
+
+    public String urgentMessage(LocalDateTime dateTime) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        int diff = currentDateTime.compareTo(dateTime);
+        if (diff > 0) {
+            return "⚠ TASK EXPIRED! ⚠";
+        } else if (diff == -1) {
+            return "⚠ TASK EXPIRING SOON! ⚠";
+        } else {
+            return "";
+        }
     }
 }
