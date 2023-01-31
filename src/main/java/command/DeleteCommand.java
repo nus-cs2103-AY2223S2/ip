@@ -1,5 +1,7 @@
 package command;
 
+import response.Response;
+
 import sys.Ui;
 import sys.Storage;
 
@@ -31,9 +33,10 @@ public class DeleteCommand extends Command {
      * @param ui the user interface running.
      * @param storage the storage location for the program.
      * @throws DukeException If an invalid input is given.
+     * @return Response containing remaining tasks.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
+    public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         // Find index of task to delete
         Integer idx = Integer.valueOf(input.split(" ")[1]) - 1;
 
@@ -47,9 +50,11 @@ public class DeleteCommand extends Command {
         storage.save(tl);
 
         // Print statement
-        System.out.println("Noted. I've removed this task:\n" + t
+        String message = "Noted. I've removed this task:\n" + t
                 + "\nNow you have " + tl.numberOfTasks()
                 + (tl.numberOfTasks() > 1 ? " tasks" : " task")
-                + " in the list.");
+                + " in the list.";
+
+        return new Response(message, tl);
     }
 }

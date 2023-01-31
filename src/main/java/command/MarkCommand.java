@@ -1,5 +1,6 @@
 package command;
 
+import response.Response;
 import sys.Ui;
 import sys.Storage;
 
@@ -30,9 +31,10 @@ public class MarkCommand extends Command {
      * @param ui the user interface running.
      * @param storage the storage location for the program.
      * @throws DukeException If an invalid input is given.
+     * @return Returns response containing all tasks.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
+    public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         // Find index to mark
         Integer idx = Integer.valueOf(input.split(" ")[1]) - 1;
 
@@ -45,7 +47,8 @@ public class MarkCommand extends Command {
         tl.markTask(idx);
         storage.save(tl);
 
-        // Print statement
-        System.out.println("Nice! I've marked this task as done:\n" + tl.getTask(idx));
+        String message = "Nice! I've marked this task as done:\n" + tl.getTask(idx);
+
+        return new Response(message, tl);
     }
 }

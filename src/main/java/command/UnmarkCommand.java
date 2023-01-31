@@ -1,5 +1,6 @@
 package command;
 
+import response.Response;
 import task.TaskList;
 
 import sys.Ui;
@@ -30,9 +31,10 @@ public class UnmarkCommand extends Command {
      * @param ui the user interface running.
      * @param storage the storage location for the program.
      * @throws DukeException If an invalid input is given.
+     * @return Returns remaining tasks.
      */
     @Override
-    public void execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
+    public Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException {
         // Get index to unmark
         Integer idx = Integer.valueOf(input.split(" ")[1]) - 1;
 
@@ -46,6 +48,8 @@ public class UnmarkCommand extends Command {
         storage.save(tl);
 
         // Print statement
-        System.out.println("OK, I've marked this task as not done yet:\n" + tl.getTask(idx));
+        String message = "OK, I've marked this task as not done yet:\n" + tl.getTask(idx);
+
+        return new Response(message, tl);
     }
 }

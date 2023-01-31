@@ -1,5 +1,7 @@
 package command;
 
+import response.Response;
+
 import sys.Ui;
 import sys.Storage;
 
@@ -29,7 +31,7 @@ public abstract class Command {
      * @param storage the storage location for the program.
      * @throws DukeException If an invalid input is given.
      */
-    public abstract void execute(TaskList tl, Ui ui, Storage storage) throws DukeException;
+    public abstract Response execute(TaskList tl, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns the matching regex for the command

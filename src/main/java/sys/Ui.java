@@ -1,9 +1,12 @@
 package sys;
 
+import javafx.scene.control.Label;
+
 import command.Command;
 
 import exception.DukeException;
 
+import response.Response;
 import task.TaskList;
 
 import java.util.Scanner;
@@ -15,6 +18,7 @@ public class Ui {
 
     private Storage storage;
     private TaskList tasks;
+    private Parser parser;
 
     /**
      * Constructor for UI.
@@ -30,37 +34,46 @@ public class Ui {
     public void setContext(Storage storage, TaskList tasks) {
         this.storage = storage;
         this.tasks = tasks;
+        this.parser = new Parser(tasks, storage, this);
     }
 
     /**
      * Allows the application to accept commands from the user via standard input.
+     *
+     * @param input The input given by the user.
+     * @return The output from the program.
      */
-    public void acceptInput() {
-
-        // Print welcome message.
-        System.out.println("Hello! I'm Duke\n What can I do for you?");
-
-        // Create Scanner and Parser object.
-        Scanner sc = new Scanner(System.in);
-        Parser p = new Parser(this.tasks, this.storage, this);
-
+    public Response send(String input) {
         // Accept input from user.
-        while (sc.hasNextLine()) {
-            try {
-                String input = sc.nextLine();
-                this.showLine();
+        try {
+            this.showLine();
 
-                // Parse input line.
-                Command c = p.parse(input);
+            // Parse input line.
+            Command c = parser.parse(input);
 
-                // Execute the command.
-                c.execute(this.tasks, this, this.storage);
-            } catch (DukeException e) {
-                showError(e.getMessage());
-            } finally {
-                this.showLine();
-            }
+            // Execute the command.
+            Response output = c.execute(this.tasks, this, this.storage);
+
+            System.out.println(output);
+
+            return output;
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            return new Response(e.getMessage(), tasks);
         }
+    }
+
+    /**
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
     }
 
     /**
