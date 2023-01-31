@@ -1,17 +1,28 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.time.LocalDate;
-
+/**
+ * Represents an Event command.
+ */
 public class AddEventCommand extends Command {
     private String description;
     private LocalDate from;
     private LocalDate to;
+
+    /**
+     * Constructor for AddEventCommand.
+     *
+     * @param eventDescription Description of an event task.
+     * @param from Date the event starts.
+     * @param to Date the event ends.
+     */
     public AddEventCommand(String eventDescription, LocalDate from, LocalDate to) {
         this.description = eventDescription;
         this.from = from;

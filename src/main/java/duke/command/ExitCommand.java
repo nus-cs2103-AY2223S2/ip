@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents an Exit command.
+ */
 public class ExitCommand extends Command {
 
     public ExitCommand() {

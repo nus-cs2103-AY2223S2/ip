@@ -6,8 +6,10 @@ import duke.task.TaskList;
 import duke.ui.Parser;
 import duke.ui.Ui;
 
-import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the chatbot users interact with.
+ */
 public class Duke {
 
     private static final String FILE_PATH = "./data/duke.txt";

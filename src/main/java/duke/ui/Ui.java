@@ -2,11 +2,19 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Represents the UI of the bot.
+ */
 public class Ui {
     private String botName;
     private Scanner sc;
 
-    public Ui (String name) {
+    /**
+     * Constructor for UI.
+     *
+     * @param name Name of chatbot.
+     */
+    public Ui(String name) {
         this.botName = name;
         this.sc = new Scanner(System.in);
     }
