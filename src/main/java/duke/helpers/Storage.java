@@ -1,6 +1,4 @@
-package helpers;
-
-import helpers.Ui;
+package duke.helpers;
 
 import java.io.FileWriter;
 import java.io.File;

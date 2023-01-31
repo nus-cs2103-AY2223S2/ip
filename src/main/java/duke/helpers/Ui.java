@@ -1,4 +1,4 @@
-package helpers;
+package duke.helpers;
 
 import duke.exceptions.OutOfIndexException;
 import duke.exceptions.VagueInputException;

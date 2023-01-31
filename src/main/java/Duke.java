@@ -1,7 +1,7 @@
-import helpers.Parser;
-import helpers.Storage;
-import helpers.TaskList;
-import helpers.Ui;
+import duke.helpers.Parser;
+import duke.helpers.Storage;
+import duke.helpers.TaskList;
+import duke.helpers.Ui;
 
 import java.io.PrintWriter;
 import java.util.Scanner;
