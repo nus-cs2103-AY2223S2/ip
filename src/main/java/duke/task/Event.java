@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.parser.Parser;
-import duke.ui.Ui;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.ui.Ui;
 
 /**
  * Represents an Event, which is a type of Task that starts at a specific datetime and ends at a specific datetime.
@@ -15,11 +15,23 @@ public class Event extends Task {
     protected LocalDateTime startDateTime;
     protected LocalDateTime endDateTime;
 
+    /**
+     * Constructor for Event class that sets the description and event start and end date times.
+     *
+     * @param description Description of Event.
+     * @throws DukeException Throws exception if unable to set date times.
+     */
     public Event(String description) throws DukeException {
         super(description.split(" /from ")[0]);
         setEventDateTimes(description);
     }
 
+    /**
+     * Constructor for Event class that sets the description, event start and end date times, and event status.
+     *
+     * @param description Description of Event.
+     * @throws DukeException Throws exception if unable to set date times.
+     */
     public Event(String description, String taskStatus) throws DukeException {
         super(description.split(" /from ")[0]);
         setEventDateTimes(description);
@@ -33,7 +45,7 @@ public class Event extends Task {
      * Returns the String representation of an Event.
      *
      * @return String representation of an Event in this format:
-     * [E][{status}] {description} (from: {start datetime} to: {end datetime}).
+     *     [E][{status}] {description} (from: {start datetime} to: {end datetime}).
      */
     @Override
     public String toString() {
@@ -60,7 +72,7 @@ public class Event extends Task {
      * Returns the raw String representation of an Event to be stored in the local file for storage.
      *
      * @return Raw String representation of a Task in this format:
-     * E ~ {status} ~ {description} ~ {start datetime} ~ {end datetime}.
+     *     E ~ {status} ~ {description} ~ {start datetime} ~ {end datetime}.
      */
     @Override
     public String getRawTask() {

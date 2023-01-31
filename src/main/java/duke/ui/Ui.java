@@ -1,13 +1,13 @@
 package duke.ui;
 
-import duke.exception.DukeException;
-import duke.task.TaskList;
-import duke.task.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Handles interactions with the user.
@@ -19,6 +19,12 @@ public class Ui {
         return "________________________________________________________________\n";
     }
 
+    /**
+     * Reads command from scanner object.
+     *
+     * @return Command that was read.
+     * @throws DukeException Throws exception if command is invalid.
+     */
     public String readCommand() throws DukeException {
         String command = "";
         if (SCANNER.hasNextLine()) {
@@ -34,7 +40,7 @@ public class Ui {
      * Prints out the greeting for Fake Duke.
      */
     public void showWelcome() {
-       System.out.println(this.showLine()
+        System.out.println(this.showLine()
                 + "Hello!~ I'm the one and only ✨ FAKE DUKE ✨\nWhat can I do for you?\n"
                 + this.showLine());
     }

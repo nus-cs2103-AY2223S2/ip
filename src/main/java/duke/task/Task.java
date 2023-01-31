@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Represents a task added by the user.
@@ -11,6 +10,11 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task class, used to set description and status of task.
+     *
+     * @param description Description of task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -63,6 +67,12 @@ public class Task {
         return String.format("T ~ %d ~ %s\n", isDone ? 1 : 0, this.description);
     }
 
+    /**
+     * Returns warning message if the date time of the task is expired or expiring soon.
+     *
+     * @param dateTime Date time of the task.
+     * @return Warning message to be printed to user.
+     */
     public String urgentMessage(LocalDateTime dateTime) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         int diff = currentDateTime.compareTo(dateTime);
