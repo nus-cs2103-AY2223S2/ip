@@ -1,9 +1,6 @@
 package peppa.commands;
 
-import peppa.Storage;
-import peppa.Task;
-import peppa.TaskList;
-import peppa.Ui;
+import peppa.*;
 
 import java.util.ArrayList;
 
@@ -16,13 +13,13 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui screen, Storage storage) {
+    public String execute(TaskList taskList, Ui screen, Storage storage) throws PeppaException {
         ArrayList<Task> results = taskList.findTasks(keyword);
         if (results.size() == 0) {
-            Ui.displayMessage("Boink! Peppa could not find any tasks with the specified keyword. "
-                    + "Please try again. ");
+            throw new PeppaException("Boink! Peppa could not find any tasks with the specified keyword. "
+                    + "Please try again.\n");
         } else {
-            Ui.displayMatchingTasks(results);
+            return Ui.getMatchingTasks(results);
         }
     }
 

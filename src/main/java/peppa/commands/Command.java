@@ -6,6 +6,6 @@ import peppa.TaskList;
 import peppa.Ui;
 
 public interface Command {
-    public void execute(TaskList taskList, Ui screen, Storage storage) throws PeppaException;
+    public String execute(TaskList taskList, Ui screen, Storage storage) throws PeppaException;
     public boolean isExit();
 }

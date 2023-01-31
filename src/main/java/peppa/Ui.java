@@ -24,37 +24,35 @@ public class Ui {
     }
 
     /**
-     * Prints custom message upon a successful add task operation.
+     * Returns custom message upon a successful add task operation.
      *
      * @param task Task that was added.
      */
-    public static void displayAddTaskMessage(Task task) {
-        System.out.println("Oink! I've added the following task:");
-        System.out.println("> " + task.toString());
+    public static String getAddTaskMessage(Task task) {
+        return "Oink! I've added the following task:\n" + "> " + task.toString() + "\n";
     }
 
     /**
-     * Prints list of commands that the chatbot currently supports.
+     * Returns a list of commands that the chatbot currently supports.
      */
-    public static void displayCommands() {
-        System.out.println("> " + ListCommand.COMMAND_WORD + "\n"
+    public static String getCommands() {
+        return "> " + ListCommand.COMMAND_WORD + "\n"
                 + "> " + MarkCommand.COMMAND_WORD + "\n"
                 + "> " + UnmarkCommand.COMMAND_WORD + "\n"
                 + "> " + TodoCommand.COMMAND_WORD + "\n"
                 + "> " + DeadlineCommand.COMMAND_WORD + "\n"
                 + "> " + EventCommand.COMMAND_WORD + "\n"
                 + "> " + DeleteCommand.COMMAND_WORD + "\n"
-                + "> " + ExitCommand.COMMAND_WORD);
+                + "> " + ExitCommand.COMMAND_WORD + "\n";
     }
 
     /**
-     * Prints custom message upon a successful delete task operation.
+     * Returns custom message upon a successful delete task operation.
      *
      * @param task Task that was deleted.
      */
-    public static void displayDeleteTaskMessage(Task task) {
-        System.out.println("Oink! I've removed the following task:");
-        System.out.println("> " + task.toString());
+    public static String getDeleteTaskMessage(Task task) {
+        return "Oink! I've removed the following task:\n" + "> " + task.toString() + "\n";
     }
 
     /**
@@ -68,51 +66,51 @@ public class Ui {
     }
 
     /**
-     * Prints custom message upon a successful mark task as done operation.
+     * Returns custom message upon a successful mark task as done operation.
      *
      * @param task Task that was marked as done.
      */
-    public static void displayMarkDoneMessage(Task task) {
-        System.out.println("Oink! I've marked this task as done:");
-        System.out.println("> " + task.toString());
+    public static String getMarkDoneMessage(Task task) {
+        return "Oink! I've marked this task as done:\n" + "> " + task.toString() + "\n";
     }
 
-    public static void displayMatchingTasks(ArrayList<Task> tasks) {
-        System.out.println("Oink! Here are the matching tasks in your list:");
+    public static String getMatchingTasks(ArrayList<Task> tasks) {
+        StringBuilder response = new StringBuilder("Oink! Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+            response.append((i + 1) + ". " + tasks.get(i) + "\n");
         }
+        return response.toString();
     }
 
     /**
-     * Prints the current tasklist, including the details of each task (e.g. id and description).
+     * Returns the current tasklist, including the details of each task (e.g. id and description).
      *
      * @param tasks List of tasks.
      */
-    public static void displayTaskList(TaskList tasks) {
-        System.out.println("Oink! Here are the tasks in your list currently:");
+    public static String getTaskList(TaskList tasks) {
+        StringBuilder response = new StringBuilder("Oink! Here are the tasks in your list currently:\n");
         for (int i = 0; i < tasks.getLength(); i++) {
-            System.out.println((i + 1) + ". " + tasks.retrieveTask(i));
+            response.append((i + 1) + ". " + tasks.retrieveTask(i) + "\n");
         }
+        return response.toString();
     }
 
     /**
-     * Prints the number of tasks in the list currently.
+     * Returns the number of tasks in the list currently.
      *
      * @param tasks List of tasks.
      */
-    public static void displayTaskSummary(TaskList tasks) {
-        System.out.println("You now have " + tasks.getLength() + " tasks in the list.");
+    public static String getTaskSummary(TaskList tasks) {
+        return "You now have " + tasks.getLength() + " tasks in the list.";
     }
 
     /**
-     * Prints custom message upon a successful unmark task as done operation.
+     * Returns custom message upon a successful unmark task as done operation.
      *
      * @param task Task that was unmarked as done.
      */
-    public static void displayUnmarkDoneMessage(Task task) {
-        System.out.println("Oink! I've marked this task as undone:");
-        System.out.println("> " + task.toString());
+    public static String getUnmarkDoneMessage(Task task) {
+        return "Oink! I've marked this task as undone:\n" + "> " + task.toString() + "\n";
     }
 
     /**
@@ -144,11 +142,11 @@ public class Ui {
     }
 
     /**
-     * Prints farewell message upon leaving the chatbot.
+     * Returns farewell message upon leaving the chatbot.
      */
-    public void terminateSession() {
-        System.out.println("Oink oink! See you again :)");
+    public String terminateSession() {
         this.sc.close();
+        return "Oink oink! See you again :)";
     }
 
     /**
