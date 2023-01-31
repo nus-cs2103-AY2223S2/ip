@@ -1,12 +1,11 @@
 package duke.command;
 
-import duke.command.Command;
+import java.io.IOException;
+
 import duke.dukeexception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 public class UnmarkCommand extends Command {
     private int taskNo;

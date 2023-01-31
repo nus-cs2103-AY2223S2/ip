@@ -1,9 +1,9 @@
 package duke.tasklist;
 
+import java.util.ArrayList;
+
 import duke.dukeexception.DukeException;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -24,9 +24,7 @@ public class TaskList {
         if (tasks.size() == 0) {
             return "You do not have any tasks yet";
         }
-        /**
-         * loop through all tasks in the arraylist and print out each task
-         */
+
         StringBuilder sb = new StringBuilder();
         sb.append("1. " + tasks.get(0) + "\n");
         for (int i = 2; i <= tasks.size(); i++) {
