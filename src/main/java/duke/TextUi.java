@@ -30,6 +30,12 @@ public class TextUi {
             "Alright. I've marked this task as undone :";
     private final static String DELETE_TASK_MESSAGE =
             "NOTED. I've removed this task from your task list :";
+    private final static String FIND_TASK_MESSAGE = "Here are some similar tasks I have found in your task list:";
+
+    public void showBorder() {
+        System.out.println(BORDER);
+    }
+
     public void showGreetMessage() {
         System.out.println( BORDER + '\n' +
             LOGO + '\n' + '\n' +
@@ -81,6 +87,11 @@ public class TextUi {
         System.out.println(BORDER);
         taskslist.list();
         System.out.println(BORDER);
+    }
+
+    public void showFindMessage() {
+        System.out.println(BORDER + '\n' +
+                FIND_TASK_MESSAGE);
     }
 
     public void showLoadingError() {
