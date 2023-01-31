@@ -1,3 +1,4 @@
+package skittles;
 public abstract class Task {
     private String name;
     private boolean doneOrNot;

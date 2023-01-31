@@ -1,3 +1,5 @@
+package skittles;
+
 //ToDo is one of 3 types of Task, so it must be a child of Task
 public class ToDo extends Task {
 

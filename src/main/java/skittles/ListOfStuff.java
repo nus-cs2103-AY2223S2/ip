@@ -1,3 +1,4 @@
+package skittles;
 import java.util.ArrayList;
 
 public class ListOfStuff {

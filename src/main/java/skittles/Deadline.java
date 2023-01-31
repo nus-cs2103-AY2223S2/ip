@@ -1,3 +1,4 @@
+package skittles;
 //Deadline is one of 3 types of Task, so it must be a child of Task
 import java.text.DateFormat;
 import java.text.ParseException;
