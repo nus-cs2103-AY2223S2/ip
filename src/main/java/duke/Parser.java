@@ -93,7 +93,7 @@ public class Parser {
                 if (splitString[1].trim().equals("")) {
                     throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!.");
                 } else {
-                    return new FindCommand(splitString[1]);
+                    return new FindCommand(splitString[1].split(" "));
                 }
             default:
                 throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
