@@ -8,6 +8,7 @@ import alfred.command.AddCommand;
 import alfred.command.Command;
 import alfred.command.DeleteCommand;
 import alfred.command.ExitCommand;
+import alfred.command.FindCommand;
 import alfred.command.ListCommand;
 import alfred.command.ListDateCommand;
 import alfred.command.MarkCommand;
