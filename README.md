@@ -8,13 +8,13 @@ It's
 - easy to learn
 - ~~Fast~~ _SUPER FAST_ to use
 
-## Steps
+## Steps to run
 1. Pull the code from the repo [here](https://github.com/anchengyang/ip)
 2. Run it
 3. Add your tasks
 4. Let it manage your tasks for you 👍
 
-Features:
+## Features
 - [x] Managing todo
 - [ ] Managing deadlines
 - [ ] Managing events
