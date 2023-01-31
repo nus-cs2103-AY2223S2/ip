@@ -1,10 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
     private Scanner input = new Scanner(System.in);
-    private Task tasks[] = new Task[100];
-    private int taskIndex = 0;
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     public void start() {
         String logo = "\t  ____        _        \n"
@@ -27,10 +27,10 @@ public class Duke {
         }
         try {
             int index = Integer.parseInt(command.split(" ")[1]) - 1;
-            if (index + 1 > taskIndex || index < 0) {
+            if (index + 1 > tasks.size() || index < 0) {
                 throw new DukeException("\t ☹ OOPS!!! Please input a valid number.\n");
             }
-            tasks[index].mark();
+            tasks.get(index).mark();
         } catch (NumberFormatException ex) {
             System.out.println("\t ☹ OOPS!!! Please input a valid number.\n");
         }
@@ -42,30 +42,29 @@ public class Duke {
         }
         try {
             int index = Integer.parseInt(command.split(" ")[1]) - 1;
-            if (index + 1 > taskIndex || index < 0) {
+            if (index + 1 > tasks.size() || index < 0) {
                 throw new DukeException("\t ☹ OOPS!!! Please input a valid number.\n");
-            } else if (tasks[index].getStatusIcon().equals(" ")) {
+            } else if (tasks.get(index).getStatusIcon().equals(" ")) {
                 throw new DukeException("\t ☹ OOPS!!! This task has not been marked yet.\n");
             }
-            tasks[index].unmark();
+            tasks.get(index).unmark();
         } catch (NumberFormatException ex) {
             System.out.println("\t ☹ OOPS!!! Please input a valid number.\n");
         }
     }
 
     public void list() {
-        for (int i = 0; i < taskIndex; i++) {
-            System.out.print("\t " + (i + 1) + "." + tasks[i].toString() + "\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.print("\t " + (i + 1) + "." + tasks.get(i).toString() + "\n");
         }
         System.out.print("\n");
     }
 
     public void addTask(Task task) {
-        tasks[taskIndex] = task;
-        taskIndex++;
+        tasks.add(task);
         System.out.println("\t Got it. I've added this task:\n"
-                + "\t\t "+ tasks[taskIndex - 1].toString()
-                + "\n\t Now you have " + taskIndex + " tasks in the list.\n");
+                + "\t\t "+ tasks.get(tasks.size() - 1).toString()
+                + "\n\t Now you have " + tasks.size() + " tasks in the list.\n");
     }
     public void todo(String command) throws DukeException {
         if (command.trim().equals("todo")) {
@@ -121,6 +120,26 @@ public class Duke {
         addTask(event);
     }
 
+    public void delete(String command) throws DukeException {
+        command = command.trim();
+        if (command.equals("delete")) {
+            throw new DukeException("\t ☹ OOPS!!! The description of a delete cannot be empty.\n");
+        }
+        int index;
+        try {
+            index = Integer.parseInt(command.split(" ")[1]);
+        } catch (NumberFormatException ex) {
+            throw new DukeException("\t ☹ OOPS!!! Please input a valid number.\n");
+        }
+        if (index < 1 || index > tasks.size()) {
+            throw new DukeException("\t ☹ OOPS!!! The input is out of range.\n");
+        }
+        System.out.println("\t Noted. I've removed this task:\n"
+                + "\t\t " + tasks.get(index - 1).toString());
+        tasks.remove(index - 1);
+        System.out.println("\t Now you have " + tasks.size() + " tasks in the list.\n");
+    }
+
     public void run() {
         start();
         while (true) {
@@ -145,9 +164,12 @@ public class Duke {
                 } else if (command.startsWith("deadline")) {
                     display();
                     deadline(command);
-                } else if(command.startsWith("event")) {
+                } else if (command.startsWith("event")) {
                     display();
                     event(command);
+                } else if (command.startsWith("delete")) {
+                    display();
+                    delete(command);
                 } else {
                     display();
                     System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means.\n");
@@ -157,8 +179,6 @@ public class Duke {
             }
         }
     }
-
-
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
