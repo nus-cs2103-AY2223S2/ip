@@ -1,5 +1,7 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 public class Duke {
     public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
@@ -54,28 +56,38 @@ public class Duke {
                     if (commandToEcho.equals("deadline")) {
                         System.out.println("OOPS!!! The description of a deadline cannot be empty.");
                     } else {
-                        System.out.println("Got it. I've added this task:");
-                        String desc = getDesc(9, commandToEcho);
-                        String byWhen = getByWhen(commandToEcho);
-                        currentTask = new Deadline(desc, byWhen);
-                        storeTasks.add(currentTask);
-                        System.out.println(currentTask);
-                        numElem++;
-                        System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
+                        try {
+                            String desc = getDesc(9, commandToEcho);
+                            LocalDate byWhen = getByWhen(commandToEcho);
+                            currentTask = new Deadline(desc, byWhen);
+                            storeTasks.add(currentTask);
+                            System.out.println("Got it. I've added this task:");
+                            System.out.println(currentTask);
+                            numElem++;
+                            System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
+                        } catch (Exception e) {
+                        }
                     }
                 } else if (commandToEcho.length() >= 5 && commandToEcho.substring(0, 5).equals("event")) {
                     if (commandToEcho.equals("event")) {
                         System.out.println("OOPS!!! The description of an event cannot be empty.");
                     } else {
-                        System.out.println("Got it. I've added this task:");
-                        String desc = getDesc(6, commandToEcho);
-                        String from = getFrom(commandToEcho);
-                        String to = getTo(commandToEcho);
-                        currentTask = new Event(desc, from, to);
-                        storeTasks.add(currentTask);
-                        System.out.println(currentTask);
-                        numElem++;
-                        System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
+                        try {
+                            String desc = getDesc(6, commandToEcho);
+                            LocalDate from = getFrom(commandToEcho);
+                            LocalDate to = getTo(commandToEcho);
+                            if (to.isAfter(from)) {
+                                currentTask = new Event(desc, from, to);
+                                storeTasks.add(currentTask);
+                                System.out.println("Got it. I've added this task:");
+                                System.out.println(currentTask);
+                                numElem++;
+                                System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
+                            } else {
+                                System.out.println("ERROR!! From date cannot be BEFORE To date!");
+                            }
+                        } catch (Exception e) {
+                        }
                     }
                 } else {
                     System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -125,65 +137,37 @@ public class Duke {
         }
         return desc;
     }
-    static String getByWhen(String commandToEcho) {
-        String byWhen = "";
-        int toMinus = 1;
-        char fromBack = commandToEcho.charAt(commandToEcho.length() - toMinus);
-        while (fromBack != ('/')) {
-            byWhen = fromBack + byWhen;
-            toMinus++;
-            fromBack = commandToEcho.charAt(commandToEcho.length() - toMinus);
+    static LocalDate getByWhen(String commandToEcho) throws DateTimeParseException {
+        String[] arrOfStr = commandToEcho.split("/by")[1].split(" ");
+        String strDate = arrOfStr[1];
+        try {
+            LocalDate date = LocalDate.parse(strDate);
+            return date;
+        } catch (DateTimeParseException e) {
+            System.out.println("INVALID DATE!!! Please enter date in YYYY/MM/DD format");
+            throw e;
         }
-        return byWhen;
     }
 
-    static String getFrom(String commandToEcho) {
-        String from = "";
-        int index = 0;
-        String req = "";
-        char front = commandToEcho.charAt(index);
-        while (front != ('/')) {
-            index++;
-            front = commandToEcho.charAt(index);
+    static LocalDate getFrom(String commandToEcho) throws DateTimeParseException {
+        String[] arrOfStr = commandToEcho.split("/from")[1].split(" ");
+        try {
+            LocalDate from = LocalDate.parse(arrOfStr[1]);
+            return from;
+        } catch (DateTimeParseException e) {
+            System.out.println("INVALID 'From' DATE!!! Please enter date in YYYY/MM/DD format");
+            throw e;
         }
-        while (!from.equals("/from ")) {
-            from = from + front;
-            index++;
-            front = commandToEcho.charAt(index);
-        }
-        while (front != ('/')) {
-            req = req + front;
-            index++;
-            front = commandToEcho.charAt(index);
-        }
-        return req;
     }
 
-    static String getTo(String commandToEcho) {
-        int commandSize = commandToEcho.length();
-        String from = "";
-        int index = 0;
-        String req = "";
-        char front = commandToEcho.charAt(index);
-        int numSlash=0;
-        while (front != ('/') || numSlash!=1) {
-            if(front == ('/')) {
-                numSlash++;
-            }
-            index++;
-            front = commandToEcho.charAt(index);
+    static LocalDate getTo(String commandToEcho) throws DateTimeParseException {
+        String[] arrOfStr = commandToEcho.split("/from")[1].split(" ");
+        try {
+            LocalDate to = LocalDate.parse((arrOfStr[3]));
+            return to;
+        } catch (DateTimeParseException e) {
+            System.out.println("INVALID 'To' DATE!!! Please enter date in YYYY/MM/DD format");
+            throw e;
         }
-        while (!from.equals("/to ")) {
-            from = from + front;
-            index++;
-            front = commandToEcho.charAt(index);
-        }
-        while (index < commandSize-1) {
-            req = req + front;
-            index++;
-            front = commandToEcho.charAt(index);
-        }
-        req = req + front;
-        return req;
     }
 }
