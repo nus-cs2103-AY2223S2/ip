@@ -8,27 +8,48 @@ import Exceptions.NoDeadlineException;
 import Exceptions.NoDescriptionException;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TaskList {
     private ArrayList<Task> taskList;
     private static int index;
 
+    /**
+     * The constructor that uses to create a TaskList instance.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>(100);
         this.index = 0;
     }
 
-    public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+    /**
+     * Return the size of the task list.
+     *
+     * @return The size of the list.
+     */
+    public int getSize() {
+        return this.index;
     }
+
+    /**
+     * Get the specific task correspond to the given index.
+     *
+     * @param index The index of the task.
+     * @return Return the task of the given index.
+     */
+    public Task getTask(int index) {
+        return this.taskList.get(index);
+    }
+
+    /**
+     * Delete the task according to the input index.
+     *
+     * @param input The index of the task that need to be deleted.
+     */
 
     public void delete(int input) {
         Task currTask = this.taskList.get(input - 1);
         this.taskList.remove(input);
-
         this.index--;
         System.out.println("\t--------------------------");
         System.out.println("\tNoted. I've removed this task:");
@@ -37,12 +58,18 @@ public class TaskList {
         System.out.println("\t--------------------------");
 
     }
-    public void addTodo(String input) throws NoDescriptionException {
+
+    /**
+     * Add the task of Todo type into the task list.
+     *
+     * @param input A command by the user which contains task description.
+     * @throws NoDescriptionException Return error message if there is no task description.
+     */
+    public Task addTodo(String input) throws NoDescriptionException {
         if (input.trim().equals("")) {
             throw new NoDescriptionException("The description of a todo cannot be empty.");
         }
         Task newTodo = new Todo(input);
-//        this.taskList[this.index] = newTodo;
         this.taskList.add(newTodo);
         this.index++;
         System.out.println("\t--------------------------");
@@ -50,9 +77,18 @@ public class TaskList {
         System.out.println("\t\t" + newTodo.toString());
         System.out.println("\tNow you have " + this.index + " tasks in the list.");
         System.out.println("\t--------------------------");
+        return newTodo;
     }
 
-    public void addDeadline(String input) throws NoDescriptionException,
+    /**
+     * Add tasks of Deadline type into the task list.
+     *
+     * @return Task Return the created task.
+     * @param input A command by the user which contains task description and due date.
+     * @throws NoDescriptionException Return error message if there is no task description.
+     * @throws NoDeadlineException Return error message if there is no specified deadline.
+     */
+    public Task addDeadline(String input) throws NoDescriptionException,
             NoDeadlineException {
         String[] splitDesWithBy = input.split(" /by ", 2);
         String description = splitDesWithBy[0].trim();
@@ -66,7 +102,6 @@ public class TaskList {
         String dueDate = splitDesWithBy[1].trim();
 
         Task newDeadline = new Deadline(description, dueDate);
-//        this.taskList[this.index] = newDeadline;
         this.taskList.add(newDeadline);
         this.index++;
         System.out.println("\t--------------------------");
@@ -74,9 +109,18 @@ public class TaskList {
         System.out.println("\t\t" + newDeadline.toString());
         System.out.println("\tNow you have " + this.index  + " tasks in the list.");
         System.out.println("\t--------------------------");
+        return newDeadline;
     }
 
-    public void addEvent(String input) throws NoDeadlineException,
+    /**
+     * Add task of Event type into the task list.
+     *
+     * @param input A command by the user which contains task description, event starting
+     *              date and event ending date.
+     * @throws NoDeadlineException Return error message if there is no specified starting time or ending time.
+     * @throws NoDescriptionException Return error message if there is no task description.
+     */
+    public Task addEvent(String input) throws NoDeadlineException,
             NoDescriptionException{
         String[] splitDesWithFrom = input.split(" /from ", 2);
         String description = splitDesWithFrom[0].trim();
@@ -98,10 +142,7 @@ public class TaskList {
 
         String endingTime = period[1].trim();
 
-
-
         Task newEvent = new Event(description, startingTime, endingTime);
-//        this.taskList[this.index] = newEvent;
         this.taskList.add(newEvent);
         this.index++;
         System.out.println("\t--------------------------");
@@ -109,7 +150,12 @@ public class TaskList {
         System.out.println("\t\t" + newEvent.toString());
         System.out.println("\tNow you have " + this.index + " tasks in the list.");
         System.out.println("\t--------------------------");
+        return newEvent;
     }
+
+    /**
+     * Print out the current task list that has been stored.
+     */
     public void list() {
         System.out.println("\t--------------------------");
         if (this.index == 0) {
@@ -124,6 +170,11 @@ public class TaskList {
         System.out.println("\t--------------------------");
     }
 
+    /**
+     * Mark the task as done correspond to the inserted index by the user.
+     *
+     * @param input The index of the task that is done.
+     */
     public void mark(int input) {
         Task currTask = this.taskList.get(input - 1);
         currTask.markDone();
@@ -133,6 +184,11 @@ public class TaskList {
         System.out.println("\t--------------------------");
     }
 
+    /**
+     * Mark the task as not done yet correspond to the inserted index by the user.
+     *
+     * @param input The index of the task that is not done yet.
+     */
     public void unmark(int input) {
         Task currTask = this.taskList.get(input - 1);
         currTask.markNotDone();
@@ -141,5 +197,6 @@ public class TaskList {
         System.out.println("\t\t" + currTask.toString());
         System.out.println("\t--------------------------");
     }
+
 
 }

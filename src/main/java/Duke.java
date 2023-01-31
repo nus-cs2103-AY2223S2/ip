@@ -16,6 +16,14 @@ public class Duke {
     private Storage storage;
     private Ui ui;
     private Parser parser;
+
+    /**
+     * Constructor of Duke class.
+     *
+     * @param filePath The path that can access to the file.
+     * @throws IOException
+     */
+
     public Duke(String filePath) throws IOException {
         taskList = new TaskList();
         storage = new Storage(filePath);
@@ -24,13 +32,16 @@ public class Duke {
 
 
         try {
-            taskList = new TaskList(storage.loadTasks());
+            taskList = storage.loadTasks();
         } catch (IOException | DukeMainExceptions errMsg) {
             System.out.println(errMsg);
         }
     }
 
-    public void run() {
+    /**
+     * Execute the main program.
+     */
+    public void run() throws IOException {
         ui.greet();
         String input;
         Scanner scanner = new Scanner(System.in);

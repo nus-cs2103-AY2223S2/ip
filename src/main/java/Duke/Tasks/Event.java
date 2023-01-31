@@ -28,6 +28,12 @@ public class Event extends Task {
         this.localStartingDate = LocalDate.parse(startingTime);
     }
 
+    /**
+     * Check whether the event is near starting date(one week before).
+     *
+     * @return Return true if the task is not done yet and
+     *         the event is one week from now.
+     */
     public boolean isComingSoon() {
         if (this.isComplete) {
             return false;
@@ -44,6 +50,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Print the task into the specific file.
+     *
+     * @return Return the information of the task.
+     */
     @Override
     public String printTask() {
         return String.format("E | %d | %s | %s-%s ", isComplete ? 1 : 0, description, startingTime, endingTime);

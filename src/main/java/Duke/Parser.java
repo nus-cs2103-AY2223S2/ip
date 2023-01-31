@@ -3,16 +3,30 @@ package Duke;
 import Exceptions.CommandNotFoundException;
 import Duke.Storage.Storage;
 
+import java.io.IOException;
+
 public class Parser {
     private TaskList t;
     private Storage storage;
 
+    /**
+     * Constructor of the parser class.
+     *
+     * @param tasks The task list that is stored inside the file.
+     * @param storage
+     */
     public Parser(TaskList tasks, Storage storage) {
         this.t = tasks;
         this.storage = storage;
     }
 
-    public void parse(String input) throws CommandNotFoundException {
+    /**
+     * Parses the input by the users to corresponding commands
+     *
+     * @param input The command inserted by the users.
+     * @throws CommandNotFoundException
+     */
+    public void parse(String input) throws CommandNotFoundException, IOException {
         assert (input != null) : "The command cannot be null.";
         String[] splitCommand = input.split(" ");
         String command = splitCommand[0].toUpperCase();
@@ -51,5 +65,6 @@ public class Parser {
         default:
             throw new CommandNotFoundException("I'm sorry, but I don't know what that means :-(");
         }
+//        storage.storeTasks();
     }
 }

@@ -12,6 +12,13 @@ public class Deadline extends Task {
     protected String dueDate;
     protected LocalDate localDate;
 
+    /**
+     * The constructor of Deadline class, uses to create Deadline instance.
+     *
+     * @param description The description or the name of the task.
+     * @param dueDate The deadline of the task.
+     * @throws InvalidDateFormatExceptions
+     */
     public Deadline(String description, String dueDate) throws InvalidDateFormatExceptions {
         super(description);
         this.dueDate = dueDate;
@@ -25,6 +32,12 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * Check whether the task is near the deadline(3 days).
+     *
+     * @return Return true if the task is not done yet and
+     *         is going to due soon in 3 days.
+     */
     public boolean isDueSoon() {
         if (this.isComplete) {
             return false;
@@ -41,6 +54,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Print the task into the specific file.
+     *
+     * @return Return the information of the task.
+     */
     @Override
     public String printTask() {
         return String.format("D | %d | %s | %s ", isComplete ? 1 : 0, description, dueDate);

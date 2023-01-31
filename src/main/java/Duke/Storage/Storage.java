@@ -5,20 +5,24 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+import Duke.TaskList;
 import Exceptions.DukeMainExceptions;
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
 import Duke.Tasks.Task;
-import Duke.Tasks.Todo;
 
 
 public class Storage {
     protected File file;
     protected String filePath;
+    protected TaskList tasks;
 
+    /**
+     * The constructor of Storage class. Use to create storage instance.
+     *
+     * @param filePath The path that directed to the location of the file.
+     * @throws IOException
+     */
     public Storage(String filePath) throws  IOException{
         this.filePath = filePath;
         this.file = new File(filePath);
@@ -29,52 +33,70 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> loadTasks() throws IOException, DukeMainExceptions {
-        ArrayList<Task> database = new ArrayList<>(100);
+    /**
+     * Load the tasks that has been stored inside the file.
+     *
+     * @return Return the task list.
+     * @throws IOException
+     * @throws DukeMainExceptions
+     */
+    public TaskList loadTasks() throws IOException, DukeMainExceptions {
+        this.tasks = new TaskList();
         Scanner scanner = new Scanner(this.file);
 
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
             String[] splitInput = input.split(" \\| ");
+            String splitDescription;
             Task task;
             if (splitInput[0].equals("T")) {
-                task = new Todo(splitInput[2]);
+                splitDescription = input.split(" ", 2).length == 2
+                        ? input.split(" ", 2)[1]
+                        : "";
+
+                task = tasks.addTodo(splitDescription);
+                if  (splitInput[1].equals("X")) {
+                    task.markDone();
+                }
             } else if (splitInput[0].equals("E")) {
-                task = new Event(splitInput[2], splitInput[3], splitInput[4]);
+                splitDescription = input.split(" ", 2).length == 2
+                        ? input.split(" ", 2)[1]
+                        : "";
+                task = tasks.addEvent(splitDescription);
+                if  (splitInput[1].equals("X")) {
+                    task.markDone();
+                }
             } else if (splitInput[0].equals("D")) {
-                task = new Deadline(splitInput[2], splitInput[3]);
+                splitDescription = input.split(" ", 2).length == 2
+                        ? input.split(" ", 2)[1]
+                        : "";
+                task = tasks.addDeadline(splitDescription);
+                if  (splitInput[1].equals("X")) {
+                    task.markDone();
+                }
             } else {
                 throw new DukeMainExceptions("Unknown task type. Please check again.");
             }
-            // Check the status of the task
-            if (splitInput[1].equals("X")) {
-                task.markDone();
-            }
-
-            database.add(task);
         }
-        return database;
+        return this.tasks;
     }
 
-    public void storeTasks(ArrayList<Task> taskList) throws IOException {
-//        try {
-//            FileWriter fw = new FileWriter(filePath);
-//            for (Task task : taskList) {
-//                fw.write(task.printTask() + "\n");
-//            }
-//            fw.close();
-//        }
-//        catch (IOException exception) {
-//            System.out.println("Path invalid. Please try again.");
-//        }
+    /**
+     * Store the tasks into the specific file.
+     *
+     * @throws IOException
+     */
+    public void storeTasks() throws IOException {
         String filePath = "./data/duke.txt";
         File file  = new File(filePath);
 
         final FileWriter fw = new FileWriter(file.getAbsoluteFile());
         BufferedWriter bw = new BufferedWriter(fw);
 
-        for (Task task : taskList) {
-            bw.append(task.printTask());
+        for (int i = 0; i < this.tasks.getSize(); i++) {
+            Task currTask = this.tasks.getTask(i);
+            System.out.println(currTask.toString());
+            bw.append(currTask.printTask());
         }
         bw.close();
     }
