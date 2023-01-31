@@ -53,14 +53,14 @@ public class Task implements Serializable {
             String cmd = taskArray[0], desc = taskArray[1];
 
             switch (cmd) {
-                case "deadline":
-                    return Deadline.createDeadline(desc, cmd);
-                case "event":
-                    return Event.createEvent(desc, cmd);
-                case "todo":
-                    return new Todo(desc, cmd);
-                default:
-                    throw new InvalidCommandException();
+            case "deadline":
+                return Deadline.createDeadline(desc, cmd);
+            case "event":
+                return Event.createEvent(desc, cmd);
+            case "todo":
+                return new Todo(desc, cmd);
+            default:
+                throw new InvalidCommandException();
             }
         } catch (LeoTaskException e) {
             e.printStackTrace();

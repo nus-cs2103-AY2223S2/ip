@@ -27,8 +27,7 @@ public class TaskList implements Serializable {
             System.out.printf("You have %d tasks in your list, vamos, get moving!\n", tasks.size());
             Ui.printDivider();
         } catch (LeoTaskException e) {
-            e.printStackTrace();
-            System.out.println();
+            Ui.printError(e);
         }
     }
 
@@ -74,7 +73,6 @@ public class TaskList implements Serializable {
             }
         } catch (LeoTaskException e) {
             Ui.printError(e);
-            return;
         }
     }
 }
