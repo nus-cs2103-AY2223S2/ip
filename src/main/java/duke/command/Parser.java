@@ -30,6 +30,12 @@ public class Parser {
             }
         } else if (command.equals("list")) {
             return new ListCommand();
+        } else if (command.equals("find")) {
+            if (chunked.length != 1) {
+                throw new DukeInvalidCommandException();
+            } else {
+                return new FindCommand(chunked[1]);
+            }
         } else if (command.equals("todo")) {
             String rest = line.substring(4).trim();
             if (rest.isBlank()) {
