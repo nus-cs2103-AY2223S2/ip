@@ -2,6 +2,7 @@
  * Project name: Duke
  * @author Tan Jun Da A023489eU
  */
+
 package seedu.duke;
 
 import seedu.duke.task.Task;
@@ -16,8 +17,10 @@ public class Ui {
 
     /**
      * Welcome message.
+     *
+     * @return The String for Duke reply.
      */
-    public void welcome() {
+    public String welcome() {
         //Logo of Duke
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,16 +28,18 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        System.out.println("Hello from\n" + logo);
-        System.out.println("____________________________________________________________");
+        logo = "Hello from\n" + logo;
+        return logo;
     }
 
     /**
      * Loading error message.
+     *
+     * @return The String for Duke reply.
      */
-    public void showLoadingError() {
-        System.out.println("File not found");
-        System.out.println("Creating temporary Task List.");
+    public String showLoadingError() {
+        String uiText = "File not found\n" + "Creating temporary Task List.\n";
+        return uiText;
     }
 
     /**
@@ -42,10 +47,12 @@ public class Ui {
      *
      * @param tasks The TaskList.
      * @param userParse The input from the user.
+     * @return The String for Duke reply.
      */
-    public void markDisplay(TaskList tasks, Parser userParse) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).toString());
+    public String markDisplay(TaskList tasks, Parser userParse) {
+        String uiText = "Nice! I've marked this task as done:\n";
+        uiText += tasks.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).toString() + "\n";
+        return uiText;
     }
 
     /**
@@ -53,56 +60,67 @@ public class Ui {
      *
      * @param tasks The TaskList.
      * @param userParse The input from the user.
+     * @return The String for Duke reply.
      */
-    public void unmarkDisplay(TaskList tasks, Parser userParse) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(tasks.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).toString());
+    public String unmarkDisplay(TaskList tasks, Parser userParse) {
+        String uiText = "OK, I've marked this task as not done yet:";
+        uiText += tasks.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).toString() + "\n";
+        return uiText;
     }
 
     /**
      * List message.
      *
      * @param tasks The TaskList.
+     * @return The String for Duke reply.
      */
-    public void list(TaskList tasks) {
+    public String list(TaskList tasks) {
         int numbering = 1;
+        String uiText = "";
         for (int i = 0; i < tasks.counter; i++) {
-            System.out.println(numbering + ". " + tasks.tasksList.get(i).toString());
+            uiText += numbering + ". " + tasks.tasksList.get(i).toString() + "\n";
             numbering++;
         }
+        return uiText;
     }
 
     /**
      * Added Todo message.
      *
      * @param tasks The TaskList.
+     * @return The String for Duke reply.
      */
-    public void addTodoMessage(TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks.tasksList.get(tasks.counter - 1).toString());
-        System.out.println("Now you have " + tasks.counter + " task(s) in the list.");
+    public String addTodoMessage(TaskList tasks) {
+        String uiText = "Got it. I've added this task:\n";
+        uiText += tasks.tasksList.get(tasks.counter - 1).toString() + "\n";
+        uiText += "Now you have " + tasks.counter + " task(s) in the list.\n";
+        return uiText;
     }
 
     /**
      * Added Deadline message.
      *
      * @param tasks The TaskList.
+     * @return The String for Duke reply.
      */
-    public void addDeadlineMessage(TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks.tasksList.get(tasks.counter - 1).toString());
-        System.out.println("Now you have " + tasks.counter + " task(s) in the list.");
+    public String addDeadlineMessage(TaskList tasks) {
+        String uiText = "Got it. I've added this task:\n";
+        uiText += tasks.tasksList.get(tasks.counter - 1).toString() + "\n";
+        uiText += "Now you have " + tasks.counter + " task(s) in the list.\n";
+        return uiText;
     }
 
     /**
      * Added Event message.
      *
      * @param tasks The TaskList.
+     * @return The String for Duke reply.
      */
-    public void addEventMessage(TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks.tasksList.get(tasks.counter - 1).toString());
-        System.out.println("Now you have " + tasks.counter + " task(s) in the list.");
+    public String addEventMessage(TaskList tasks) {
+        String uiText = "Got it. I've added this task:\n";
+        uiText += tasks.tasksList.get(tasks.counter - 1).toString() + "\n";
+        uiText += "Now you have " + tasks.counter + " task(s) in the list.\n";
+        return uiText;
     }
 
     /**
@@ -110,32 +128,39 @@ public class Ui {
      *
      * @param tasks The TaskList.
      * @param deleted The Task deleted.
+     * @return The String for Duke reply.
      */
-    public void deleteMessage(TaskList tasks, Task deleted) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deleted.toString());
-        System.out.println("Now you have " + tasks.counter + " task(s) in the list.");
+    public String deleteMessage(TaskList tasks, Task deleted) {
+        String uiText = "Noted. I've removed this task:\n";
+        uiText = deleted.toString() + "\n";
+        uiText = "Now you have " + tasks.counter + " task(s) in the list.\n";
+        return uiText;
     }
 
     /**
      * Goodbye message.
+     *
+     * @return The String for Duke reply.
      */
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
+    public String bye() {
+        String uiText = "Bye. Hope to see you again soon!\n";
+        return uiText;
     }
 
     /**
      * Found or not found matching tasks message.
      *
      * @param tasks The temporary TaskList for the find.
+     * @return The String for Duke reply.
      */
-    public void findMessage(TaskList tasks) {
+    public String findMessage(TaskList tasks) {
+        String uiText = "";
         if (tasks.tasksList.isEmpty()) {
-            System.out.println("Sorry! There are no matching tasks in your list.");
+            uiText += "Sorry! There are no matching tasks in your list.\n";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
-            list(tasks);
+            uiText += "Here are the matching tasks in your list:\n";
+            uiText += list(tasks);
         }
+        return uiText;
     }
 }
