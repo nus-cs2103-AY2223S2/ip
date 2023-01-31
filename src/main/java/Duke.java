@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) {
@@ -59,8 +60,9 @@ public class Duke {
                         if (description.equals("") || description.equals(" ")) {
                             throw new MissingDescriptionException();
                         } else {
-                            String date = command.split("/by")[1];
-                            Deadline deadline = new Deadline(description, date);
+                            String date = command.split("/by ")[1];
+                            LocalDate dateString = LocalDate.parse(date);
+                            Deadline deadline = new Deadline(description, dateString);
                             list.add(deadline);
                             System.out
                                     .println("Got it. I've added this task:\n" + deadline.toString() + "\nNow you have "
