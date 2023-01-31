@@ -50,5 +50,16 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/duke.tasks.txt").run();
     }
+
+    public String getResponse(String input) {
+        try {
+            ICommand cmd = ui.readCommand(taskManger, input);
+            cmd.run();
+            return cmd.getMsg();
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+
+    }
 }
 

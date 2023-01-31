@@ -106,4 +106,44 @@ public class UserInterface {
             throw new InvalidCommandException(cmd);
         }
     }
+
+    /**
+     * The function to read the user command
+     *
+     * @param taskManager hand over the command to task manager
+     * @param input       from Gui
+     * @throws DukeException IF error occur
+     */
+    public ICommand readCommand(TaskManager taskManager, String input) throws DukeException {
+        String[] cmd = input.split(" ", 2);
+        if (cmd.length < 1) {
+            throw new InvalidCommandException(input);
+        }
+        String content = "";
+        if (cmd.length > 1) {
+            content = cmd[1].trim();
+        }
+        switch (cmd[0]) {
+        case "bye":
+            return new Exit(new Parser(taskManager));
+        case "list":
+            return new ListTasks(new Parser(taskManager));
+
+        case "mark":
+            return new Mark(new Parser(content, taskManager));
+
+        case "unmark":
+            return new Unmark(new Parser(content, taskManager));
+        case "delete":
+            return new Delete(new Parser(content, taskManager));
+        case "todo":
+        case "deadline":
+        case "event":
+            return new Add(new Parser(content, taskManager, ITask.convertTaskTypeCmdToEnum(cmd[0])));
+        case "find":
+            return new Find(new Parser(content, taskManager, ITask.convertTaskTypeCmdToEnum(cmd[0])));
+        default:
+            throw new InvalidCommandException(cmd[0]);
+        }
+    }
 }
