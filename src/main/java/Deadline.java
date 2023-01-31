@@ -6,6 +6,10 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
     }
+    @Override
+    public String getFileDescription() {
+        return "D | " + super.getStatusIcon() + " | " + super.description + " | "  + by;
+    }
 
     @Override
     public String toString() {
