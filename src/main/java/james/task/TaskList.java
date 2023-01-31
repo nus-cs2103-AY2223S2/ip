@@ -2,11 +2,14 @@ package james.task;
 
 import java.util.ArrayList;
 
+/**
+ * The task list class.
+ * Contains the task list and operations to modify the task list.
+ */
 public class TaskList {
     ArrayList<Task> taskList = new ArrayList<>();
 
     public void addToTaskList(Task task) {
-
         taskList.add(task);
     }
 

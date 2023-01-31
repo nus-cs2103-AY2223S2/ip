@@ -3,6 +3,9 @@ package james.command;
 import james.JamesException;
 import james.task.Task;
 
+/**
+ * The command to delete a task from the task list.
+ */
 public class DeleteCommand extends Command {
     private int index;
 

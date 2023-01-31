@@ -2,12 +2,13 @@ package james.task;
 
 import james.JamesException;
 
+/**
+ * The todo class.
+ * A todo is a task that is listed on the taskList without a deadline.
+ */
 public class ToDo extends Task {
-    public ToDo(String description) throws JamesException {
+    public ToDo(String description) {
         super(description);
-        if (description.isEmpty()) {
-            throw new JamesException("OOPS!!! The description of a todo task cannot be empty.");
-        }
     }
     @Override
     public String toString() {

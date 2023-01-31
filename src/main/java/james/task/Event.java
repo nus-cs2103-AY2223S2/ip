@@ -4,9 +4,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
+    /** Starting time in d/MM/yyyy HHmm format */
     protected LocalDateTime start;
+    /** Ending time in d/MM/yyyy HHmm format */
     protected LocalDateTime end;
-
+    /**
+     * Constructor for Event.
+     *
+     * @param description The task description.
+     * @param start The start time of the event.
+     * @param end   The end time of the event.
+     */
     public Event(String description, String start, String end) {
         super(description);
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");

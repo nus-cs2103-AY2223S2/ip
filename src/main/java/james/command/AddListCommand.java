@@ -2,8 +2,11 @@ package james.command;
 
 import james.JamesException;
 import james.task.TaskList;
-import james.UI;
+import james.ui.UI;
 
+/**
+ * The command to list all tasks in the task list.
+ */
 public class AddListCommand extends Command {
     public AddListCommand() {
     }

@@ -3,11 +3,13 @@ package james.command;
 import james.JamesException;
 import james.task.Task;
 
+/**
+ * The command to mark a task as done.
+ */
 public class AddMarkCommand extends Command {
     private int taskNumber;
 
     public AddMarkCommand(int taskNumber) {
-
         this.taskNumber = taskNumber;
     }
 
