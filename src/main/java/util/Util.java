@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Util {
-    
+
     private static final List<Character> WS = List.of(' ', '\n', '\t', '\r');
 
     private Util() {
@@ -54,5 +54,9 @@ public class Util {
         }
 
         return str.substring(start, end);
+    }
+
+    public static String listToString(List<Character> s) {
+        return s.stream().map(c -> c.toString()).reduce("", (a, b) -> a + b);
     }
 }

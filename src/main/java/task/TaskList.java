@@ -1,4 +1,5 @@
 package task;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class TaskList implements Serializable {
 
     public String get(int number) {
         int index = number - 1;
-        return String.format("\n\t%d) %s\n", number, this.lst.get(index));
+        return String.format("\n\t%d) %s", number, this.lst.get(index));
     }
 
     public String getLast() {
@@ -58,7 +59,7 @@ public class TaskList implements Serializable {
         }
         return res + '\n';
     }
-    
+
     @Override
     public String toString() {
         if (this.lst.isEmpty()) {
@@ -67,6 +68,6 @@ public class TaskList implements Serializable {
 
         return IntStream.range(0, this.size())
                 .mapToObj(i -> String.format("\n\t%d) %s", i + 1, this.lst.get(i)))
-                .reduce("", (a, b) -> a + b) + '\n';
+                .reduce("", (a, b) -> a + b);
     }
 }
