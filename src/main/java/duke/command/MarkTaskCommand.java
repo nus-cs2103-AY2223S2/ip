@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a Mark command.
+ */
 public class MarkTaskCommand extends Command {
     private int idx;
     public MarkTaskCommand(int idx) {

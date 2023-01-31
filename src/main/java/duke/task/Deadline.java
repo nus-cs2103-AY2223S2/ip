@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline.
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;
@@ -36,5 +39,4 @@ public class Deadline extends Task {
         return "D" + "|" + (super.isDone ? "1" : "0")
                 + "|" + super.description + "|" + this.by;
     }
-
 }

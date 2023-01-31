@@ -1,11 +1,5 @@
 package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.ui.Ui;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.ui.Ui;
+
+/**
+ * Represents a storage to handle saving and loading save file.
+ */
 public class Storage {
     private String fileDirectory;
     private String fileName;
@@ -26,8 +29,8 @@ public class Storage {
      * Constructor for storage.
      *
      * @param fileDirectory Directory of the save file.
-     * @param fileName Name of the save file.
-     * @param ui Ui instance to take care of user interface.
+     * @param fileName      Name of the save file.
+     * @param ui            Ui instance to take care of user interface.
      */
     public Storage(String fileDirectory, String fileName, Ui ui) {
         this.fileDirectory = fileDirectory;
@@ -48,7 +51,7 @@ public class Storage {
 
         switch (taskType) {
         case "T":
-            t = new ToDo(description);
+            t = new Todo(description);
             break;
         case "D":
             LocalDate by = LocalDate.parse(command[3].trim());
@@ -59,6 +62,7 @@ public class Storage {
             LocalDate to = LocalDate.parse(command[4].trim());
             t = new Event(description, from, to);
             break;
+        default:
         }
 
         boolean isMarked = command[1].equals("1");
@@ -73,7 +77,7 @@ public class Storage {
      * Creates parent directories and the file if necessary. Then returns file.
      *
      * @param directory Directory of the file
-     * @param filename Name of the file
+     * @param filename  Name of the file
      * @return The file
      */
     private File fileWithAssurance(String directory, String filename) {

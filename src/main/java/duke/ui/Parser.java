@@ -1,11 +1,24 @@
 package duke.ui;
 
-import duke.command.*;
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
+import duke.command.DeleteTaskCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListTasksCommand;
+import duke.command.MarkTaskCommand;
+import duke.command.Operation;
+import duke.command.UnmarkTaskCommand;
+
+/**
+ * Represents a parser to process user inputs.
+ */
 public class Parser {
 
     /**
@@ -14,10 +27,10 @@ public class Parser {
      * @param input User input.
      * @return Command instance derived from the user input.
      * @throws DukeException If any of the following is violated:
-     * If no command description is given.
-     * If command given is not valid.
-     * If the date format is not valid.
-     * If format of task index is invalid.
+     *         If no command description is given.
+     *         If command given is not valid.
+     *         If the date format is not valid.
+     *         If format of task index is invalid.
      */
     public static Command parse(String input) throws DukeException {
 
@@ -49,6 +62,7 @@ public class Parser {
                 return deleteTaskParser(input);
             case FIND:
                 return findTaskParser(input);
+            default:
             }
 
             return null; // cannot reach here, as duke.command.Operation.valueOf throws IllegalArgumentException
@@ -118,6 +132,7 @@ public class Parser {
             LocalDate to = LocalDate.parse(fromAndTo[1].trim());
 
             return new AddEventCommand(eventDescription, from, to);
+        default:
         }
 
         return null;

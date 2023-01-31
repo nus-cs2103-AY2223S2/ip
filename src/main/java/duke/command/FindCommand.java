@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a Find command.
+ */
 public class FindCommand extends Command {
     private String keyword;
     public FindCommand(String keyword) {

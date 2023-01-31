@@ -1,4 +1,0 @@
-T|1|read book
-D|0|buy book |2023-01-31
-T|0|sell book
-T|0|eat ass

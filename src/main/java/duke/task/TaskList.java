@@ -1,11 +1,15 @@
 package duke.task;
 
-import duke.Duke;
-import duke.DukeException;
-
 import java.util.HashMap;
 import java.util.List;
 
+import duke.DukeException;
+
+
+
+/**
+ * Represents a list of tasks.
+ */
 public class TaskList {
     private List<Task> taskList;
     private HashMap<Integer, Task> indexToTask;

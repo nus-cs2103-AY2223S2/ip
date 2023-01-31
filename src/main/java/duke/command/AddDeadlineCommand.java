@@ -1,16 +1,26 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.time.LocalDate;
-
+/**
+ * Represents a Deadline command.
+ */
 public class AddDeadlineCommand extends Command {
     private String deadlineDescription;
     private LocalDate by;
+
+    /**
+     * Constructor for AddDeadLineCommand
+     *
+     * @param deadlineDescription Description of the deadline task.
+     * @param by Date of the deadline.
+     */
     public AddDeadlineCommand(String deadlineDescription, LocalDate by) {
         super();
         this.deadlineDescription = deadlineDescription;
