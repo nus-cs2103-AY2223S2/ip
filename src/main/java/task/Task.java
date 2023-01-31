@@ -1,6 +1,9 @@
 package task;
 import helpers.Ui;
 
+/**
+ * Represents a Task object in TaskList, has 3 subclasses (Todo, Event, Deadline)
+ */
 public class Task {
     protected boolean mark;
     protected String content;
