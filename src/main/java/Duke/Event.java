@@ -1,5 +1,9 @@
 package Duke;
-import java.time.LocalDate;
+
+/**
+ * Class representing an Event task with a start and end time.
+ * @author Bryan Juniano
+ */
 public class Event extends Task {
     private String start;
     private String end;

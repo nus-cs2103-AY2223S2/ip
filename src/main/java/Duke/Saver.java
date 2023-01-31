@@ -6,6 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Class to save and load tasks to and from Duke.
+ * @author Bryan Juniano
+ */
+
 public class Saver {
     protected final static String PATH = "./data";
     protected final static String FILE_NAME = "/tasks.txt";

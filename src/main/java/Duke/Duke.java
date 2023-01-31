@@ -1,7 +1,10 @@
 package Duke;
 import java.util.Scanner;
 
-
+/**
+ * Main driver class for Duke.
+ * @author Bryan Juniano
+ */
 
 public class Duke {
     private enum Commands {

@@ -1,5 +1,9 @@
 package Duke;
 
+/**
+ * Class representing a Deadline task with an end time.
+ * @author Bryan Juniano
+ */
 import java.time.LocalDate;
 public class Deadline extends Task {
     private String end;

@@ -1,5 +1,9 @@
 package Duke;
 
+/**
+ * Abstract class representing a task.
+ * @author Bryan Juniano
+ */
 
 public abstract class Task {
     private String name;

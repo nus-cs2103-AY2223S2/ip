@@ -1,6 +1,11 @@
 package Duke;
 import java.util.ArrayList;
-import java.time.LocalDate;
+
+/**
+ * Class representing an array of tasks.
+ * @author Bryan Juniano
+ */
+
 public class TaskList {
     private ArrayList<Task> taskList;
     private int numTasks;
