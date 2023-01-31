@@ -41,12 +41,6 @@ public class Duke {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } catch (NumberFormatException e) {
-                ui.showError("Task must be referenced by its index.");
-            } catch (IllegalArgumentException e) {
-                ui.showError("Invalid duke command.");
-            } catch (DateTimeParseException e) {
-                ui.showError("Wrong date format given.");
             }
         }
 
@@ -54,6 +48,10 @@ public class Duke {
         ui.terminate();
     }
 
+    /**
+     * Driver method.
+     * @param args
+     */
     public static void main(String[] args) {
         Duke bot = new Duke();
         bot.run();

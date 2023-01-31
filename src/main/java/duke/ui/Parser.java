@@ -8,52 +8,57 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    public Parser() {
-    }
-
     /**
      * Parses the user input into a meaningful command.
      *
      * @param input User input.
      * @return Command instance derived from the user input.
-     * @throws DukeException If no command description is given.
-     * @throws IllegalArgumentException If command given is not valid.
-     * @throws DateTimeParseException If the date format is not valid.
-     * @throws NumberFormatException If format of task index is invalid.
+     * @throws DukeException If any of the following is violated:
+     * If no command description is given.
+     * If command given is not valid.
+     * If the date format is not valid.
+     * If format of task index is invalid.
      */
-    public static Command parse(String input) throws DukeException, IllegalArgumentException,
-            DateTimeParseException, NumberFormatException {
+    public static Command parse(String input) throws DukeException {
 
-        if (input.equals("bye")) {
-            return new ExitCommand();
+        try {
+            if (input.equals("bye")) {
+                return new ExitCommand();
+            }
+
+            // Split strings into 2, first part is the operation, 2nd part is the description
+            String[] command = input.split(" ", 2);
+            Operation op = Operation.valueOf(command[0].toUpperCase());
+
+            if (!op.equals(Operation.LIST) && command.length < 2) {
+                throw new DukeException("No command description given.");
+            }
+
+            switch (op) {
+            case MARK:
+                return markTaskParser(input);
+            case UNMARK:
+                return unmarkTaskParser(input);
+            case TODO:
+            case DEADLINE:
+            case EVENT:
+                return addTaskParser(input);
+            case LIST:
+                return new ListTasksCommand();
+            case DELETE:
+                return deleteTaskParser(input);
+            case FIND:
+                return findTaskParser(input);
+            }
+
+            return null; // cannot reach here, as duke.command.Operation.valueOf throws IllegalArgumentException
+        } catch (NumberFormatException e) {
+            throw new DukeException("Task must be referenced by its index.");
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("Invalid command.");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Wrong date format given.");
         }
-
-        // Split strings into 2, first part is the operation, 2nd part is the description
-        String[] command = input.split(" ", 2);
-        Operation op = Operation.valueOf(command[0].toUpperCase());
-
-        if (!op.equals(Operation.LIST) && command.length < 2) {
-            throw new DukeException("No command description given.");
-        }
-
-        switch (op) {
-        case MARK:
-            return markTaskParser(input);
-        case UNMARK:
-            return unmarkTaskParser(input);
-        case TODO:
-        case DEADLINE:
-        case EVENT:
-            return addTaskParser(input);
-        case LIST:
-            return new ListTasksCommand();
-        case DELETE:
-            return deleteTaskParser(input);
-        case FIND:
-            return findTaskParser(input);
-        }
-
-        return null; // cannot reach here, as duke.command.Operation.valueOf throws IllegalArgumentException
     }
 
     /**
@@ -84,6 +89,7 @@ public class Parser {
 
     /**
      * Parses the command to add a task.
+     *
      * @param input User input.
      * @return A Command instance representing the type of task to add.
      * @throws DateTimeParseException If the date format is invalid.
@@ -119,6 +125,7 @@ public class Parser {
 
     /**
      * Parses the command to delete a task.
+     *
      * @param input User input.
      * @return A Command instance to delete a task.
      * @throws NumberFormatException If the date format is invalid.
@@ -129,7 +136,13 @@ public class Parser {
         return new DeleteTaskCommand(taskIndex);
     }
 
-    public static Command findTaskParser(String input) throws DukeException {
+    /**
+     * Parses the command to find tasks matching keyword.
+     *
+     * @param input User input.
+     * @return A Command instance to find tasks.
+     */
+    public static Command findTaskParser(String input) {
         String[] command = input.split(" ", 2);
         String keyword = command[1];
         return new FindCommand(keyword);
