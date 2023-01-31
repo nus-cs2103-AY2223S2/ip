@@ -62,6 +62,9 @@ public class Parser {
         }
         case "list":
             return dispatch(CommandType.LIST, EMPTY_ARG_LIST);
+        case "find":
+            // todo: check if args[1] is valid input
+            return dispatch(CommandType.FIND, new String[] { args[1].trim() });
         case "delete":
             // todo: check for valid list index
             return dispatch(CommandType.DELETE, new String[]{ args[1] });
@@ -88,6 +91,8 @@ public class Parser {
             return new ListCommand();
         case DELETE:
             return new DeleteCommand(Integer.parseInt(args[0]));
+        case FIND:
+            return new FindCommand(args[0]);
         default:
             return null;
         }

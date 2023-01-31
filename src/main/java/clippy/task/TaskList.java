@@ -2,6 +2,7 @@ package clippy.task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private List<Task> tasks;
@@ -52,5 +53,16 @@ public class TaskList {
 
     public List<Task> getList() {
         return this.tasks;
+    }
+
+    /**
+     * Returns a list of tasks that contain the search query in their descriptions.
+     * @param query Keyword(s) to be used to filter the Tasks.
+     * @return A list of tasks that contain the search query in their descriptions.
+     */
+    public List<Task> find(String query) {
+        return this.tasks.stream()
+                .filter(x -> x.hasKeywordInDescription(query))
+                .collect(Collectors.toList());
     }
 }
