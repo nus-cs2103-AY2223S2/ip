@@ -1,9 +1,96 @@
-.text-display-area {
+.root {
+    /* Edit of default mordena css from https://gist.github.com/maxd/63691840fc372f22f470 */
+
+    -fx-base: rgb(188, 165, 192);
+    -fx-background: rgb(220, 179, 228);
+
+    /* Inside boxes */
+    -fx-control-inner-background: rgb(188, 165, 192);
+
+    /* Text colors */
+    -fx-dark-text-color: rgb(39, 39, 39);
+    -fx-mid-text-color: rgb(125, 125, 125);
+    -fx-light-text-color: rgb(232, 232, 232);
+
+    /* Highlight fill color */
+    -fx-accent: rgb(6, 99, 102);
+
+    /* Highlight flow for focus */
+    -fx-focus-color: rgb(167, 138, 173);
+    -fx-faint-focus-color: rgba(167, 138, 173, 0.167);
+
+    -fx-color: -fx-base;
+
+    -fx-hover-base: ladder(
+        -fx-base,
+        derive(-fx-base, -2%) 20%,
+        derive(-fx-base, -5%) 35%,
+        derive(-fx-base, -10%) 50%
+    );
+
+    -fx-text-background-color: ladder(
+        -fx-background,
+        -fx-light-text-color 35%,
+        -fx-mid-text-color  36%,
+        -fx-mid-text-color  44%,
+        -fx-dark-text-color   45%
+    );
+
+    -fx-box-border: derive(-fx-color,-15%);
+
+    -fx-text-box-border: derive(-fx-background, -15%);
+
+    -fx-shadow-highlight-color: derive(-fx-color, -10%);
+
+    -fx-outer-border: derive(-fx-color, -10%);
+
+    -fx-inner-border: derive(-fx-color, -12%);
+    -fx-inner-border-horizontal: -fx-inner-border;
+    -fx-inner-border-bottomup: -fx-inner-border;
+
+
+    -fx-body-color: -fx-color;
+    -fx-body-color-bottomup: -fx-color;
+    -fx-body-color-to-right: -fx-color;
+}
+
+
+.scroll-pane {
+    -fx-color: rgb(187, 213, 212);
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius : 3, 3, 2, 1;
+}
+
+
+.scroll-pane .viewport {
     -fx-background-color: rgb(187, 213, 212);
 }
 
+
+.scroll-bar .track {
+    -fx-background-color: rgb(187, 213, 212);
+    -fx-border-color: transparent;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button,
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color : transparent;
+    -fx-shape : " ";
+    -fx-padding : 0.0;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color : rgb(188, 165, 192);
+    -fx-background-insets : 2.0, 0.0, 0.0, 0.0;
+    -fx-background-radius : 5.0;
+}
+
 .speech-bubble {
-    -bubble-fill-color: rgb(63, 197, 53);
+    -bubble-fill-color: rgb(198, 197, 134);
+    -fx-background: -bubble-fill-color;
 }
 
 .speech-bubble .main-speech-bubble-left {
