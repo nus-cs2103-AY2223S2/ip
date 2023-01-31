@@ -1,3 +1,4 @@
+package duke;
 
 public class Parser {
     public static String[] parseCommand(String userInput) {
