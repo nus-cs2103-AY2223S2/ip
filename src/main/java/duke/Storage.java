@@ -18,6 +18,13 @@ public class Storage {
     private File f;
     private String text;
 
+    /**
+     * Constructor which creates a Storage instance.
+     * Creates a File instance with the given file path whether the file exists or not.
+     *
+     * @param filePath path in computer directory to the file.
+     * @return Storage instance with File object created.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         f = new File(filePath);
@@ -30,6 +37,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a List of Task after parsing the File object.
+     * Runs at the start of Duke program.
+     *
+     * @return TaskList instance.
+     * @throws FileNotFoundException  If File is not found by Scanner.
+     */
     public TaskList load() throws FileNotFoundException {
         Scanner s = new Scanner(f);
         TaskList l = new TaskList();
@@ -53,6 +67,13 @@ public class Storage {
         return l;
     }
 
+    /**
+     * Saves TaskList into File for storage.
+     * Runs at the end of Duke program.
+     *
+     * @param l TaskList instance.
+     * @throws IOException  If there is an error when writing to File.
+     */
     public void save(TaskList l) throws IOException{
         FileWriter fw = new FileWriter(filePath);
         for (Task i : l) {

@@ -11,6 +11,15 @@ import java.time.LocalDate;
 
 public class Parser {
 
+    /**
+     * Returns a Command instance after parsing the String.
+     *
+     * @param fullCommand String version of the command
+     * @return Command instance
+     * @throws EmptyCommandException If param fullCommand is empty.
+     * @throws InvalidCommandException If param fullCommand's first word is not a valid instruction.
+     * @throws InvalidArgumentException If param fullCommand's first word is not followed by a valid argument.
+     */
     public static Command parse(String fullCommand) throws EmptyCommandException, InvalidCommandException, InvalidArgumentException {
         if (fullCommand.equals("")) {
             throw new EmptyCommandException();
