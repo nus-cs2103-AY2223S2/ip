@@ -58,8 +58,8 @@ public class Parser {
 
         } else if (command.equals("event")) {
             String rest = line.substring(5).trim();
-            String pattern = ".+ /from [0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9] [0-9][0-9][0-9][0-9]" +
-                    " /to [0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9] [0-9][0-9][0-9][0-9]";
+            String pattern = ".+ /from [0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9] [0-9][0-9][0-9][0-9]"
+                    + " /to [0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9] [0-9][0-9][0-9][0-9]";
 
             if (!rest.matches(pattern)) {
                 throw new DukeInvalidCommandException();

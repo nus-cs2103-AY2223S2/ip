@@ -1,8 +1,9 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.exception.DukeInvalidArgumentException;
-import java.util.ArrayList;
 
 /**
  * A list that stores Tasks.

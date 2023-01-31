@@ -1,9 +1,9 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * A class that deals with interactions with the user.
@@ -12,7 +12,11 @@ import java.util.Scanner;
 public class Ui {
 
     private final Scanner sc = new Scanner(System.in);
-    public boolean firstTime = false;
+    private boolean firstTime = false;
+
+    public void setFirstTime(boolean b) {
+        firstTime = b;
+    }
     public void showWelcome() {
         System.out.println("૮₍ ˃ ᵕ ˂ ₎ა");
         System.out.println("Hello! I'm Duke, your favourite pink bunny.");
@@ -32,9 +36,9 @@ public class Ui {
      * Displays a bunny divider.
      */
     public void showBunny() {
-        System.out.println("(\\ (\\\n" +
-                "(„• ֊ •„) ♡\n" +
-                "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+        System.out.println("(\\ (\\\n"
+                + "(„• ֊ •„) ♡\n"
+                + "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     }
 
     /**

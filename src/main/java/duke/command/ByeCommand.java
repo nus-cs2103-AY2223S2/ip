@@ -1,10 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import java.io.IOException;
 
 /**
  * A command to quit the Duke program.

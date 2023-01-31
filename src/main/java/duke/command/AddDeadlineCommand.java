@@ -1,10 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import java.io.IOException;
 
 /**
  * A command to add a Deadline to the TaskList.
