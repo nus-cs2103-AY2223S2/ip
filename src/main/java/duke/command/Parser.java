@@ -1,6 +1,10 @@
 package duke.command;
 
-import duke.*;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -127,7 +131,7 @@ public final class Parser {
         }
     }
 
-    public static Command getCommandType(String userInput) throws DukeException{
+    public static Command getCommandType(String userInput) throws DukeException {
         String command = userInput.split(" ")[0];
         switch (command) {
         case "bye":

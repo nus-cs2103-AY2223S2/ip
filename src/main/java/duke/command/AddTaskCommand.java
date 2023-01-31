@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.*;
+import duke.task.Task;
 
 public class AddTaskCommand extends Command {
     public AddTaskCommand(String userInput) {

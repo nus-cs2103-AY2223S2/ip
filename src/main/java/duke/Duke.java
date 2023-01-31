@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.command.Parser;
+import duke.exception.DukeException;
 
 /**
  * Class for Duke, a Personal Assistant Chatbot
@@ -26,7 +27,7 @@ public class Duke {
     /**
      * Runs Duke interface which interprets user input
      */
-    public void run() throws DukeException{
+    public void run() throws DukeException {
         ui.greetUser();
         while (!isExit) {
             String userInput = ui.getInput();
@@ -39,7 +40,7 @@ public class Duke {
     /**
      * Initialise Duke chatbot
      */
-    public static void main(String[] args) throws DukeException{
+    public static void main(String[] args) throws DukeException {
         new Duke().run();
     }
 }

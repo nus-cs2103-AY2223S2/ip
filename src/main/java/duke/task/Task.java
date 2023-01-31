@@ -1,7 +1,7 @@
-package duke;
+package duke.task;
 
 /**
- * Class for Task
+ * Parent Class for Task
  */
 public class Task {
     private boolean isMarked;

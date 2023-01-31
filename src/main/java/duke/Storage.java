@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Parser;
+import duke.task.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,7 +34,7 @@ public class Storage {
         try {
             taskLogScanner = new Scanner(taskLog);
         } catch (FileNotFoundException e) {
-            System.out.println("duke.Task log file not found");
+            System.out.println("duke.task.Task log file not found");
         }
 
         ArrayList<Task> tasks = new ArrayList<>();

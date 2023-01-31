@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.*;
+import duke.task.Task;
 
 public class UnmarkCommand extends Command {
     public UnmarkCommand(String userInput) {
