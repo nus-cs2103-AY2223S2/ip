@@ -111,6 +111,16 @@ public class AddCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * Add the new task to the task list,
+     * save the new task list to hard disk, and provide feedback to user.
+     *
+     * @param tasks contains the task list.
+     * @param ui the UI in charge of user interactions.
+     * @param storage handles the loading and saving of files.
+     * @throws DukeException if unexpected runtime issue occurs.
+     * @return method feedback
+     */
     public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {
         List<Task> taskList = tasks.getTaskList();
         Task theTask;

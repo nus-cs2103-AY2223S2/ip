@@ -20,9 +20,12 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
     /** Handles text component of input */
     @FXML
     private Label dialog;
+
+    /** Handles the icon component of input */
     @FXML
     private ImageView displayPicture;
 
@@ -50,10 +53,25 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Create User's dialog box
+     *
+     * @param text user input text
+     * @param img user icon
+     * @return a DialogBox representing user's activity
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+
+    /**
+     * Create chat engine's dialog box
+     *
+     * @param text chat engine output text
+     * @param img chat engine icon
+     * @return a DialogBox representing chat engine's activity
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

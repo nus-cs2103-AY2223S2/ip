@@ -78,6 +78,12 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Generates the response of duke engine used by MainWindow.
+     *
+     * @param fullCommand user's command input
+     * @return duke engine's corresponding output
+     */
     public String getResponse(String fullCommand) {
         try {
             Command c = parser.parse(fullCommand);
@@ -96,13 +102,5 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
-//    @Override
-//    public void start(Stage stage) {
-//        Label helloWorld = new Label("Hello World!");
-//        Scene scene = new Scene(helloWorld);
-//
-//        stage.setScene(scene);
-//        stage.show();
-//    }
 
 }

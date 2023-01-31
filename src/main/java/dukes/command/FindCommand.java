@@ -49,6 +49,15 @@ public class FindCommand extends Command {
         ui.showFind(sb.toString());
     }
 
+    /**
+     * Print the tasks in the list that matches the specific pattern.
+     *
+     * @param tasks contains the task list.
+     * @param ui the UI in charge of user interactions.
+     * @param storage handles the loading and saving of files.
+     * @throws DukeException if unexpected runtime issue occurs.
+     * @return method feedback
+     */
     public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {
         List<Task> findList = tasks.searchTaskList(this.body);
         StringBuilder sb = new StringBuilder();

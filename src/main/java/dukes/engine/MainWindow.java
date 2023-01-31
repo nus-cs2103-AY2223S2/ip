@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -26,11 +27,19 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ButtonMenu.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/ButtonPower.png"));
 
+    /**
+     * Initialise the scroll pane property, used by FXML
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Set duke engine
+     *
+     * @param d the duke engine used.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

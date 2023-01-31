@@ -99,6 +99,16 @@ public class ListCommand extends Command {
         }
     }
 
+    /**
+     * List all the task, or the specific task in the given date, from the task list.
+     * Then return the list string.
+     *
+     * @param tasks contains the task list.
+     * @param ui the UI in charge of user interactions.
+     * @param storage handles the loading and saving of files.
+     * @throws DukeException if the index provided is out of bounds.
+     * @return method feedback
+     */
     public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {
         List<Task> taskList = tasks.getTaskList();
         if (action == 0) { // just list
