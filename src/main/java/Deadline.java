@@ -8,7 +8,6 @@ public class Deadline extends Duke.Task {
     public Deadline(String content) {
         super(content.substring(9).split("/")[0]);
         String[] strArr = content.split("/by");
-//        System.out.println(Arrays.toString(strArr));
         String deadlineTime = strArr[1].substring(1);
         if (deadlineTime.contains("/")) {
             String[] strArrDate = deadlineTime.split("/");

@@ -17,10 +17,6 @@ public class Event extends Duke.Task {
             String[] strArrEnd = eventEndTime.split("/");
             eventEndTime = dateFormat(strArrEnd);
         }
-        System.out.println(Arrays.toString(eventTime));
-        System.out.println(eventStartTime + " " + eventEndTime);
-        System.out.println(Arrays.toString(eventStartTime.split("/")));
-        System.out.println(Arrays.toString(eventEndTime.split("/")));
         this.eventSpan = "(" + "by: " + eventStartTime + " to: " + eventEndTime + ")";
     }
 

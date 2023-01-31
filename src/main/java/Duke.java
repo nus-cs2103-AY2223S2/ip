@@ -18,9 +18,9 @@ public class Duke {
         System.out.println(greeting);
 
         Scanner sc = new Scanner(System.in);
-        String textDir = System.getProperty("user.dir")+"/duke.txt";
 
         try {
+            String textDir = System.getProperty("user.dir")+"/duke.txt";
             File file = new File(textDir);
             TaskList tasks = new TaskList();
             if (!file.exists()) {
