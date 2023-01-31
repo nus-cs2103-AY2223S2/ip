@@ -1,3 +1,9 @@
+package duke.main;
+
+import duke.main.DukeException;
+import duke.main.Tasklist;
+import duke.task.Task;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -29,7 +35,7 @@ public class Ui {
     }
     public  void printDeleteTaskMessage(Task task, Tasklist tasklist) {
         printLine();
-        System.out.println("This task has been removed:\n" + task);
+        System.out.println(" Noted. I've removed this task:\n" + task);
         printTaskNum(tasklist);
         printLine();
     }
@@ -43,7 +49,7 @@ public class Ui {
     }
     public  void printMarkTaskMessage(Task task) {
         printLine();
-        System.out.println("This task is marked as done:\n" + task.toString());
+        System.out.println("Nice! This task is marked as done:\n" + task.toString());
         printLine();
     }
     public  void printUnmarkTaskMessage(Task task) {

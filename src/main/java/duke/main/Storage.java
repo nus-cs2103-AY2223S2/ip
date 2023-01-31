@@ -1,10 +1,12 @@
+package duke.main;
+
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,16 +14,6 @@ public class Storage {
     private final File file;
 
     public Storage(String filepath) throws DukeException, IOException {
-//        try {
-//            file = new File(filepath);
-//            if (!file.exists()) {
-//                file.getParentFile().mkdirs();
-//                file.createNewFile();
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            throw new DukeException("☹ OOPS!!! File could not be created.");
-//        }
         String[] splits = filepath.split("/");
         File dir = new File(splits[0]);
         if (!dir.exists()) {
