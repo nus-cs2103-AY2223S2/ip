@@ -5,8 +5,8 @@ public class Deadline extends Task {
 
     protected LocalDate by;
 
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(String description, String fullDescription, String by) {
+        super(description, fullDescription);
         this.by = LocalDate.parse(by);
     }
 
