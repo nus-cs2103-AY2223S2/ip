@@ -29,7 +29,9 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/miffy.jpeg"));
 
 
-    /** Initializes the scroll pane and dialog container. */
+    /**
+     * Initializes the scroll pane and dialog container.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -38,6 +40,11 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Set the current main class
+     *
+     * @param d current Duke class
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

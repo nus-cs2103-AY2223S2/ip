@@ -25,6 +25,7 @@ public class TaskList {
 
     /**
      * Prints list
+     * @return print items in the list
      */
     public String printList() {
         return this.storage.displayList();
@@ -34,6 +35,7 @@ public class TaskList {
      * Marks list item
      *
      * @param index items index in array list
+     * @return indicate item is marked
      */
     public String markItem(int index) {
         this.storage.markListItem(index);
@@ -44,6 +46,7 @@ public class TaskList {
      * Unmarks list item
      *
      * @param index items index in array list
+     * @return indicate item is unmarked
      */
     public String unmarkItem(int index) {
         this.storage.unmarkListItem(index);
@@ -54,6 +57,7 @@ public class TaskList {
      * Deletes list item
      *
      * @param index items index in array list
+     * @return indicate item has been deleted
      */
     public String deleteTask(int index) {
         this.storage.deleteListItem(index);
@@ -115,6 +119,7 @@ public class TaskList {
      * Finds items that contains word enter by user
      *
      * @param input to be entered by the users
+     * @return show result co-relates to the search input
      */
     public String findItem(String input) {
         return this.storage.findListItem(input);

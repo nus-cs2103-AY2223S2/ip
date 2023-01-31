@@ -32,6 +32,8 @@ public class Duke {
     /**
      * Allow users to add, mark and un-mark, delete, add task (to-do, deadline, event)
      * or show items in a list and will exit if the bye command is returned
+     * @param input instruction from the user
+     * @return task description as result
      */
     public String userInputs(String input) {
         Ui.welcomeMessage();

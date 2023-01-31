@@ -21,6 +21,7 @@ public abstract class Command {
      * @param taskList arraylist that stores tasks
      * @param storage  stores data of tasks
      * @param ui       responds to user input
+     * @return instruction successfully set
      * @throws TaskException displays error messages
      */
     public abstract String execute(TaskList taskList, Storage storage, Ui ui) throws TaskException;

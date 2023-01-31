@@ -36,6 +36,7 @@ public class MarkCommand extends Command {
      * @param taskList arraylist that stores tasks
      * @param storage  stores data of tasks
      * @param ui       responds to user input
+     * @return instruction successfully set
      * @throws TaskException displays error messages
      */
     @Override

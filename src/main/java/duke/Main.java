@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+
 import duke.gui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +10,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Rick using FXML.
+ * A GUI that uses FXML.
  *
  * @author ni shenghan
- * AY2223-S2 CS2103T
  */
 public class Main extends Application {
 

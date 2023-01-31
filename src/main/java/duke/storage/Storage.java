@@ -35,6 +35,7 @@ public class Storage {
 
     /**
      * Prints list items according to list index
+     * @return print display list
      */
     public String displayList() {
         String printList = "";
@@ -109,6 +110,7 @@ public class Storage {
      * Finds word that contains in existing tasks
      *
      * @param input to be entered by the user
+     * @return print find list
      */
     public String findListItem(String input) {
         String itemNumber = "";
