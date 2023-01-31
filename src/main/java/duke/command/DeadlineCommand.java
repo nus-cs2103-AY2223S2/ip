@@ -27,11 +27,13 @@ public class DeadlineCommand extends Command {
 
     /**
      * Method to add a deadline task to the TaskList.
-     * @param tasks List of tasks.
-     * @param ui Ui of the chat.
+     *
+     * @param tasks   List of tasks.
+     * @param ui      Ui of the chat.
      * @param storage Storage of Duke.
+     * @return The confirmation message
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             StringBuilder stringBuilder = new StringBuilder();
             StringBuilder endTime = new StringBuilder();
@@ -56,10 +58,10 @@ public class DeadlineCommand extends Command {
                 throw new DukeException(null, null);
             }
             tasks.add(new Deadline(stringBuilder.toString(), endTime.toString()));
-            ui.addMsg(tasks);
             storage.saveToDisk(tasks);
+            return ui.addMsg(tasks);
         } catch (DukeException e) {
-            ui.deadlineError();
+            return ui.deadlineError();
         }
     }
 }

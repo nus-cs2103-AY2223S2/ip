@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.util.Scanner;
 
+import duke.task.Task;
 import duke.task.TaskList;
 
 /**
@@ -12,13 +13,7 @@ import duke.task.TaskList;
  * @since       0.1
  */
 public class Ui {
-    private static final String LOGO_AND_GREETINGS = "Hello from\n"
-            + " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n"
-            + "Hello! I'm Duke\n"
+    private static final String LOGO_AND_GREETINGS = "Hello! I'm Duke\n"
             + "What can I do for you?";
     private Scanner scanner;
 
@@ -31,9 +26,10 @@ public class Ui {
 
     /**
      * Prints to console the greeting message.
+     * @return The opening message.
      */
-    public void printGreetings() {
-        System.out.println(LOGO_AND_GREETINGS);
+    public String openingMsg() {
+        return LOGO_AND_GREETINGS;
     }
 
     /**
@@ -51,20 +47,23 @@ public class Ui {
 
     /**
      * Prints to console the goodbye message.
+     * @return The exit message.
      */
-    public void goodBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String goodBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Prints to console the current task list.
      * @param tasks The list of tasks.
+     * @return Message showing the list of tasks.
      */
-    public void showList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
+    public String showList(TaskList tasks) {
+        StringBuilder listTask = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i).toString());
+            listTask.append(i + 1).append(".").append(tasks.get(i).toString()).append("\n");
         }
+        return listTask.toString();
     }
 
     /**
@@ -72,12 +71,14 @@ public class Ui {
      * with descriptions that contains the
      * targeted word.
      * @param tasks List of tasks.
+     * @return Message showing a list of tasks with the key word.
      */
-    public void showListWithMatchedWords(TaskList tasks) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showListWithMatchedWords(TaskList tasks) {
+        StringBuilder listWithMatchedWords = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i).toString());
+            listWithMatchedWords.append(i + 1).append(".").append(tasks.get(i).toString()).append("\n");
         }
+        return listWithMatchedWords.toString();
     }
 
     /**
@@ -85,18 +86,20 @@ public class Ui {
      * are no tasks with descriptions that contains
      * the targeted word.
      * @param word The targeted word.
+     * @return Message saying that is no matching words found.
      */
-    public void noMatchingWords(String word) {
-        System.out.printf("There are no task that contains the word: %s", word);
+    public String noMatchingWords(String word) {
+        return String.format("There are no task that contains the word: %s", word);
     }
 
     /**
      * Method to print to console an error
      * message when there is no valid word
      * after the find command.
+     * @return Error message for the find command.
      */
-    public void findError() {
-        System.out.println("☹ OOPS!!! The keyword is not valid!");
+    public String findError() {
+        return "☹ OOPS!!! The keyword is not valid!";
     }
 
     /**
@@ -104,38 +107,42 @@ public class Ui {
      *
      * @param tasks The list of tasks.
      * @param index The index of the task in the task list.
+     * @return The marked task.
      */
-    public void markMsg(TaskList tasks, int index) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks.get(index).toString());
+    public String markMsg(TaskList tasks, int index) {
+        return "Nice! I've marked this task as done:\n"
+                + tasks.get(index).toString();
     }
 
     /**
      * Prints to console error message when
      * there is no/an invalid number
      * after the mark command.
+     * @return Error message for the mark command.
      */
-    public void markError() {
-        System.out.println("☹ OOPS!!! A valid number has to follow the mark command!");
+    public String markError() {
+        return "☹ OOPS!!! A valid number has to follow the mark command!";
     }
 
     /**
      * Prints to console the task that was unmarked.
      * @param tasks The list of tasks.
      * @param index The index of task in the task list.
+     * @return Message showing the task being unmarked.
      */
-    public void unmarkMsg(TaskList tasks, int index) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(tasks.get(index).toString());
+    public String unmarkMsg(TaskList tasks, int index) {
+        return "OK, I've marked this task as not done yet:\n"
+                + tasks.get(index).toString();
     }
 
     /**
      * Prints to console error message when
      * there is no/an invalid number
      * after the unmark command.
+     * @return Error message from the unmark command.
      */
-    public void unmarkError() {
-        System.out.println("☹ OOPS!!! A valid number has to follow the unmark command!");
+    public String unmarkError() {
+        return "☹ OOPS!!! A valid number has to follow the unmark command!";
     }
 
     /**
@@ -143,66 +150,75 @@ public class Ui {
      * a task was added to the task list.
      *
      * @param tasks The list of tasks.
+     * @return Message showing the added task.
      */
-    public void addMsg(TaskList tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks.get(tasks.size() - 1).toString());
-        System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
+    public String addMsg(TaskList tasks) {
+        return "Got it. I've added this task:\n"
+                + tasks.get(tasks.size() - 1).toString()
+                + "\n"
+                + String.format("Now you have %d tasks in the list.\n", tasks.size());
     }
 
     /**
      * Prints to console a message to indicate that
      * a task was removed from the task list.
-     * @param tasks The list of tasks
-     * @param index The index of the task in the task list.
+     * @param task The task being removed.
+     * @param size Size of the current tasklist.
+     * @return Message showing the deleted task.
      */
-    public void deleteMsg(TaskList tasks, int index) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(tasks.get(index).toString());
-        System.out.printf("Now you have %d tasks in the list.\n", tasks.size() - 1);
+    public String deleteMsg(Task task, int size) {
+        return "Noted. I've removed this task:\n"
+                + task.toString()
+                + "\n"
+                + String.format("Now you have %d tasks in the list.\n", size);
     }
 
     /**
      * Prints to console an error message when
      * there is no description after the todo command.
+     * @return Error message when the description is empty.
      * */
-    public void todoError() {
-        System.out.println("☹ OOPS!!! The description cannot be empty!");
+    public String todoError() {
+        return "☹ OOPS!!! The description cannot be empty!";
     }
 
     /**
      * Prints to console an error message when
      * there is no description or timing after the
      * event command.
+     * @return Message when there is an error with the event command.
      */
-    public void eventError() {
-        System.out.println("☹ OOPS!!! The timing was not specified or there was no description!");
+    public String eventError() {
+        return "☹ OOPS!!! The timing was not specified or there was no description!";
     }
 
     /**
      * Prints to console an error message when
      *  there is no description or timing after
      *  the deadline command.
+     * @return Message when there is an error with the deadline command.
      */
-    public void deadlineError() {
-        System.out.println("☹ OOPS!!! The timing needs to be in format yyyy-mm-dd hhmm"
-                + " or there was no description!");
+    public String deadlineError() {
+        return "☹ OOPS!!! The timing needs to be in format yyyy-mm-dd hhmm"
+                + " or there was no description!";
     }
 
     /**
      * Prints to console an error message when
      * there is no number after the delete command.
+     * @return Message when there is an error with the delete command.
      */
-    public void deleteError() {
-        System.out.println("☹ OOPS!!! A valid number has to follow the delete command.");
+    public String deleteError() {
+        return "☹ OOPS!!! A valid number has to follow the delete command.";
     }
 
     /**
      * Prints to console an error message when
      * an unknown command is parsed.
+     * @return Message when there is an unknown command.
      */
-    public void unknownMsg() {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public String unknownMsg() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     /**

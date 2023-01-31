@@ -1,12 +1,17 @@
 # IDEA files
 /.idea/
 /out/
+
+
+.vscode/
+/.settings/
+.gitignore
 /*.iml
 
 #Duke tasklist
 duke.txt
 
-*.project
+.project
 
 # Class files
 *.class

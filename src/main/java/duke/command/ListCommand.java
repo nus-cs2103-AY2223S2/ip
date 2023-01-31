@@ -26,8 +26,9 @@ public class ListCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui of the chat.
      * @param storage Storage of Duke.
+     * @return List of tasks.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showList(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showList(tasks);
     }
 }

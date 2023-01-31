@@ -27,8 +27,9 @@ public class NoCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui of the chat.
      * @param storage Storage of Duke.
+     * @return Message when there is an unknown command.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.unknownMsg();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.unknownMsg();
     }
 }

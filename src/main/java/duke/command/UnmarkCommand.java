@@ -29,8 +29,9 @@ public class UnmarkCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui of the chat.
      * @param storage Storage of Duke.
+     * @return Message of the task being unmarked.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (this.command.length == 1) {
                 throw new DukeException(null, null);
@@ -47,11 +48,11 @@ public class UnmarkCommand extends Command {
                 throw new DukeException(null, null);
             }
             tasks.get(index).unmarkTask();
-            ui.unmarkMsg(tasks, index);
             storage.saveToDisk(tasks);
             scanner.close();
+            return ui.unmarkMsg(tasks, index);
         } catch (DukeException e) {
-            ui.unmarkError();
+            return ui.unmarkError();
         }
     }
 }

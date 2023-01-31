@@ -30,7 +30,7 @@ public class MarkCommand extends Command {
      * @param ui Ui of the chat.
      * @param storage Storage of Duke.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (this.command.length == 1) {
                 throw new DukeException(null, null);
@@ -46,11 +46,11 @@ public class MarkCommand extends Command {
                 throw new DukeException(null, null);
             }
             tasks.get(index).markAsDone();
-            ui.markMsg(tasks, index);
             storage.saveToDisk(tasks);
             scanner.close();
+            return ui.markMsg(tasks, index);
         } catch (DukeException e) {
-            ui.markError();
+            return ui.markError();
         }
     }
 }

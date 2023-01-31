@@ -28,8 +28,10 @@ public abstract class Command {
      * @param tasks List of tasks.
      * @param ui Ui of the chat.
      * @param storage Storage of Duke.
+     * @return Nothing
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "";
     }
 
     /**

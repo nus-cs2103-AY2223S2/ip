@@ -24,9 +24,10 @@ public class ByeCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui of the chat.
      * @param storage Storage of duke.
+     * @return Goodbye message of duke.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.goodBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.goodBye();
     }
 
     /**

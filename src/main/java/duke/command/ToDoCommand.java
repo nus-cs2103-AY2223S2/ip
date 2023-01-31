@@ -25,8 +25,9 @@ public class ToDoCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui of the chat.
      * @param storage Storage of Duke.
+     * @return Confirmation message.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (command.length == 1) {
                 throw new DukeException(null, null);
@@ -39,10 +40,10 @@ public class ToDoCommand extends Command {
                 }
             }
             tasks.add(new Todo(stringBuilder.toString()));
-            ui.addMsg(tasks);
             storage.saveToDisk(tasks);
+            return ui.addMsg(tasks);
         } catch (DukeException e) {
-            ui.todoError();
+            return ui.todoError();
         }
     }
 }

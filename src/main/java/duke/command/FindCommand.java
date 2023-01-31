@@ -32,8 +32,9 @@ public class FindCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui of chat.
      * @param storage Storage of Duke.
+     * @return List of task containing the keyword.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (this.command.length == 1 || this.command.length > 2) {
                 throw new DukeException(null, null);
@@ -47,11 +48,11 @@ public class FindCommand extends Command {
                 }
             }
             if (temp.size() == 0) {
-                ui.noMatchingWords(word);
+                return ui.noMatchingWords(word);
             }
-            ui.showListWithMatchedWords(temp);
+            return ui.showListWithMatchedWords(temp);
         } catch (DukeException e) {
-            ui.findError();
+            return ui.findError();
         }
     }
 }

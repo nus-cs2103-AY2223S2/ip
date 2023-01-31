@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -29,8 +30,9 @@ public class DeleteCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui of the chat.
      * @param storage Storage of Duke.
+     * @return The confirmation message.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (command.length == 1) {
                 throw new DukeException(null, null);
@@ -45,12 +47,13 @@ public class DeleteCommand extends Command {
                 scanner.close();
                 throw new DukeException(null, null);
             }
-            ui.deleteMsg(tasks, index);
+            Task deletedTask = tasks.get(index);
             tasks.remove(index);
             storage.saveToDisk(tasks);
             scanner.close();
+            return ui.deleteMsg(deletedTask, tasks.size());
         } catch (DukeException e) {
-            ui.deleteError();
+            return ui.deleteError();
         }
     }
 }

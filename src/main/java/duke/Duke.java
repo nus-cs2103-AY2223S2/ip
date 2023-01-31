@@ -6,7 +6,6 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-
 /**
  * Duke program implements an interactive chatbot with the
  * function to keep track of tasks.
@@ -19,8 +18,7 @@ public class Duke {
     private final Storage storage;
     private final Ui ui;
     private final TaskList tasks;
-
-
+    private final Parser parser;
     /**
      * Constructor for class Duke.
      *
@@ -30,31 +28,24 @@ public class Duke {
         this.storage = new Storage(fileName);
         this.ui = new Ui();
         this.tasks = new TaskList();
+        this.parser = new Parser();
     }
 
     /**
-     * This method is used to start the chat.
-     *
+     * Method that returns the opening message.
+     * @return  String of opening message.
      */
-    private void chat() {
-        this.ui.printGreetings();
-        Parser parser = new Parser();
-        boolean isExit = false;
-        while (!isExit) {
-            String command = this.ui.getLine();
-            Command c = parser.parse(command);
-            c.execute(tasks, ui, storage);
-            isExit = c.isExit();
-        }
-        ui.endUi();
+    public String getOpeningMessage() {
+        return ui.openingMsg();
     }
 
     /**
-     * This is the main method that starts the Duke program.
-     *
-     * @param args Unused
+     * Method to get response from duke.
+     * @param input String input by the user.
+     * @return String response by duke.
      */
-    public static void main(String[] args) {
-        new Duke("duke").chat();
+    public String getResponse(String input) {
+        Command c = parser.parse(input);
+        return c.execute(tasks, ui, storage);
     }
 }
