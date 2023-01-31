@@ -2,15 +2,19 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandBye;
+import duke.command.CommandDelete;
+import duke.command.CommandFind;
 import duke.command.CommandList;
 import duke.command.CommandMark;
-import duke.command.CommandDelete;
 import duke.command.CommandTask;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents a parser for input text.
+ */
 public class Parser {
     /**
      * Returns the command object that the input line represents.
@@ -72,7 +76,9 @@ public class Parser {
                     int indexFrom = fullCommand.indexOf("/from");
                     int indexTo = fullCommand.indexOf("/to");
                     if (indexFrom != -1 && indexTo != -1) {
-                        t = new Event(fullCommand.substring(6, indexFrom), fullCommand.substring(indexFrom + 6, indexTo - 1), fullCommand.substring(indexTo + 4));
+                        t = new Event(fullCommand.substring(6, indexFrom),
+                                fullCommand.substring(indexFrom + 6, indexTo - 1),
+                                fullCommand.substring(indexTo + 4));
                     } else {
                         throw new DukeException("OOPS!!! Can't find a /from or /to time for an event.");
                     }

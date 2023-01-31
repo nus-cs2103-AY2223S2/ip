@@ -2,10 +2,13 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.task.Task;
 import duke.Ui;
+import duke.task.Task;
 
-public class CommandTask extends Command{
+/**
+ * Represents a command to add a task.
+ */
+public class CommandTask extends Command {
     private final Task task;
 
     /**

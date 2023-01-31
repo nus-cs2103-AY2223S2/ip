@@ -4,7 +4,10 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public class CommandList extends Command{
+/**
+ * Represents a list command.
+ */
+public class CommandList extends Command {
     /**
      * Returns a list command.
      * @param command full unparsed command.

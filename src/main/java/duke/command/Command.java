@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Represents an executable command.
+ */
 public abstract class Command {
     private final String fullCommand;
 

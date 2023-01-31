@@ -1,18 +1,20 @@
 package duke;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Path;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
-
-
+/**
+ * Represents a storage object for backup.
+ */
 public class Storage {
     private final Path backupPath;
 
@@ -38,7 +40,7 @@ public class Storage {
      * Load entire task list into the backup file.
      * @param arr task list.
      */
-    public void writeArray (TaskList arr) {
+    public void writeArray(TaskList arr) {
         File file = new File(backupPath.toString());
         try {
             boolean fileCreated = file.createNewFile();
@@ -56,7 +58,7 @@ public class Storage {
      * Reads backup file and converts into task list.
      * @return task list.
      */
-    public TaskList readArray () {
+    public TaskList readArray() {
         TaskList arr = new TaskList();
 
         try {

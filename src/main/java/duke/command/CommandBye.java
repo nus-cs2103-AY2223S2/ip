@@ -4,7 +4,10 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public class CommandBye extends Command{
+/**
+ * Represents a bye command.
+ */
+public class CommandBye extends Command {
     /**
      * Returns a bye command.
      * @param command full unparsed command.

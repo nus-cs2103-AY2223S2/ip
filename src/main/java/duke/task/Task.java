@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents a task.
+ */
 public class Task {
     protected String desc;
     protected boolean isDone;
@@ -25,7 +28,7 @@ public class Task {
      * Sets the status of the task.
      * @param isDone final status of the task.
      */
-    public void setStatus(Boolean isDone){
+    public void setStatus(Boolean isDone) {
         this.isDone = isDone;
     }
 

@@ -2,6 +2,9 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * Represents a duke chatbot.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;

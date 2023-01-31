@@ -2,9 +2,12 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.task.Ui;
+import duke.Ui;
 
-public class CommandFind extends Command{
+/**
+ * Represents a find command.
+ */
+public class CommandFind extends Command {
     private String word;
 
     /**

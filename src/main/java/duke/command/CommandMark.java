@@ -4,7 +4,10 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public class CommandMark extends Command{
+/**
+ * Represents a mark command.
+ */
+public class CommandMark extends Command {
     private final int index;
     private final boolean mark;
 

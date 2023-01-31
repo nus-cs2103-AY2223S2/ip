@@ -4,7 +4,10 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-public class CommandDelete extends Command{
+/**
+ * Represents a delete command.
+ */
+public class CommandDelete extends Command {
     private final int index;
 
     /**

@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Represents an ui object for interaction with user.
+ */
 public class Ui {
     private Scanner sc = new Scanner(System.in);
 
