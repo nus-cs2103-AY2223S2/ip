@@ -86,6 +86,5 @@ public class Ui {
      */
     public static void shutDown() {
         isRunning = false;
-        displayMsg("Bye. Hope to see you again soon!");
     }
 }

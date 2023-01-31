@@ -25,7 +25,6 @@ public class DeadlineCmd extends Command {
         super(taskList, lineInput);
     }
 
-
     // Adds the Deadline task to the task list.
     public void execute() throws CommandExecutionError { 
         this.deadline = Deadline.create(this.lineInput);
