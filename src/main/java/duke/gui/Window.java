@@ -13,6 +13,7 @@ public class Window {
     static public Pane makeWindow(Duke duke) {
         //pane to gather user input
         Pane inputLayout = new Pane();
+        inputLayout.setPrefSize(385, 180);
 
         //pane to hold list of tasks
         VBox outputLayout = new VBox();
@@ -35,18 +36,15 @@ public class Window {
         //main layout
         VBox mainLayout = new VBox();
         mainLayout.getChildren().addAll(buttonLayout, inputLayout, scrollPane);
-        mainLayout.setPrefSize(400.0, 600.0);
         return mainLayout;
     }
 
-    static public void setStage(Stage stage,Scene scene) {
+    static public void setStage(Stage stage, Scene scene) {
         //set stage
         stage.setScene(scene);
         stage.show();
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
     }
 
 

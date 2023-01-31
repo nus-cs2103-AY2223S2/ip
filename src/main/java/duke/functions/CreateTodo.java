@@ -2,7 +2,7 @@ package duke.functions;
 
 import duke.task.ToDo;
 
-public class CreateTodo extends Functions{
+public class CreateTodo extends Functions {
     /**
      * Constructor for an instance of Function.
      *
@@ -12,6 +12,7 @@ public class CreateTodo extends Functions{
     public CreateTodo(Functions fn) {
         super(fn.getTl(), fn.getSt(), fn.getOutputLayout());
     }
+
     /**
      * Method to define function of todo command. Creates todo task
      *

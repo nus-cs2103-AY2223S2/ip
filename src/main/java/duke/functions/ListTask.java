@@ -1,6 +1,6 @@
 package duke.functions;
 
-public class ListTask extends Functions{
+public class ListTask extends Functions {
     /**
      * Constructor for an instance of Function.
      *

@@ -2,7 +2,7 @@ package duke.functions;
 
 import duke.dukeExceptions.DukeException;
 
-public class DeleteTask extends Functions{
+public class DeleteTask extends Functions {
     /**
      * Constructor for an instance of Function.
      *
@@ -21,6 +21,10 @@ public class DeleteTask extends Functions{
      */
     public void delete(String inp) {
         int index = Integer.parseInt(inp) - 1;
+        if (index + 1 > this.tl.count() || index + 1 <= 0) {
+            outputLayout.getChildren().add(getDialogLabel("Task index does not exists..."));
+            return;
+        }
         String h = "Noted. I've removed this task:\n";
         String des = tl.getTask(index).printStatus();
         tl.removeTask(index);

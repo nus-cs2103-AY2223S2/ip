@@ -2,7 +2,7 @@ package duke.functions;
 
 import duke.task.Task;
 
-public class FindTask extends Functions{
+public class FindTask extends Functions {
 
     /**
      * Constructor for an instance of Function.

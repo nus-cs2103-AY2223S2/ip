@@ -2,7 +2,7 @@ package duke.functions;
 
 import duke.task.Event;
 
-public class CreateEvent extends Functions{
+public class CreateEvent extends Functions {
 
     /**
      * Constructor for an instance of Function.

@@ -42,10 +42,10 @@ public class Storage {
         try {
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
-                if (sc.nextLine().length() == 0) {
+                String l = sc.nextLine();
+                if (l.length() == 0) {
                     continue;
                 }
-                String l = sc.nextLine();
                 String[] line = l.split(" \\| ");
                 Task t = TaskMap.get(line[0]);
                 t.setStatus(line[1].equals("X") ? true : false);

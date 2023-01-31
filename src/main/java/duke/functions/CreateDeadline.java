@@ -1,9 +1,9 @@
 package duke.functions;
 
-import duke.task.Deadline;
 import duke.dukeExceptions.DukeException;
+import duke.task.Deadline;
 
-public class CreateDeadline extends Functions{
+public class CreateDeadline extends Functions {
     /**
      * Constructor for an instance of Function.
      *
