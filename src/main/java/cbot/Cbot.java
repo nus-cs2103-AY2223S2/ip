@@ -8,7 +8,6 @@ import cbot.io.UI;
 import cbot.task.TaskList;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -18,75 +17,78 @@ import java.time.format.DateTimeParseException;
 public class Cbot {
     private TaskList tl;
     private final FileStuff fs;
-    private final UI ui;
-    
+    private boolean doBye;
+    private boolean prevBad;
+
     private static final String PATH = "data/cbot_save.txt";
 
     /**
      * Constructs a fresh Cbot instance.
-     *
-     * @param filePath Directory location (relative) of the save file.
-     * @throws IOException If the save file cannot be read.
-     * @see #run()
      */
-    Cbot(String filePath) throws IOException {
-        this.fs = new FileStuff(filePath);
-        this.ui = new UI();
+    public Cbot() {
+        this.fs = new FileStuff(PATH);
+        this.doBye = false;
 
         try {
             this.tl = fs.loadFile();
         } catch (FileNotFoundException e) {
             fs.makeFile();
-            UI.sayNewFile(filePath);
             this.tl = new TaskList();
         }
     }
 
     /**
-     * Starts up Cbot to be used.
+     * Returns true if the BYE Command has been called.
      *
-     * @throws IOException If the save file cannot be accessed.
+     * @return true if
      */
-    void run() throws IOException {
-        UI.sayHi();
-        
-        boolean doLoop = true;
-        boolean doSave = false;
-        
-        while (doLoop) {
-            String userInput;
-            Parser p;
-            
-            try {
-                userInput = this.ui.askUser();
-                p = new Parser(userInput);
-                
-                if (p.isBye()) {
-                    doLoop = false;
-                } else {
-                    if (p.needSave()) {
-                        doSave = true;
-                    }
-                    p.respond(tl);
-                }
-            } catch (BadInputException e) {
-                UI.warnBad(e);
-            } catch (PoorInputException e) {
-                UI.warn(e);
-            } catch (DateTimeParseException e) {
-                UI.warnTime();
-            }
-            
-            if (doSave) {
-                this.fs.saveFile(tl);
-                doSave = false;
-            }
-        }
-        
-        UI.sayBye();
+    public boolean isBye() {
+        return this.doBye;
     }
 
-    public static void main(String[] args) throws IOException {
-        new Cbot(PATH).run();
+    public boolean isBad() {
+        return this.prevBad;
+    }
+
+    public static String sayHi() {
+        return UI.sayHi();
+    }
+
+    /**
+     * Processes the input against the current list of tasks.
+     *
+     * @param input The full user-given command.
+     * @return Cbot's response to the input.
+     * @see Parser
+     */
+    public String getResponse(String input) {
+        String output;
+        Parser p;
+
+        try {
+            p = new Parser(input);
+
+            if (p.isBye()) {
+                this.doBye = true;
+            }
+
+            output = p.respond(tl);
+            this.prevBad = false;
+
+            if (p.needSave()) {
+                this.fs.saveFile(tl);
+            }
+        } catch (BadInputException e) {
+            this.prevBad = true;
+            return UI.warnBad(e);
+        } catch (PoorInputException e) {
+            this.prevBad = true;
+            return UI.warn(e);
+        } catch (DateTimeParseException e) {
+            this.prevBad = true;
+            return UI.warnTime();
+        }
+
+        return output;
     }
 }

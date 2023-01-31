@@ -39,29 +39,34 @@ public class FileStuff {
 
     /**
      * Creates the parent file and the save file itself, if either or both do not yet exist.
-     *
-     * @throws IOException If the save file cannot be accessed.
      */
-    public void makeFile() throws IOException  {
-        this.file.getParentFile().mkdir();
-        this.file.createNewFile();
+    public void makeFile() {
+        try {
+            this.file.getParentFile().mkdir();
+            this.file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Writes the current state of the TaskList to the save file.
      *
      * @param tl The TaskList to save.
-     * @throws IOException If the save file cannot be accessed.
      * @see TaskList
      */
-    public void saveFile(TaskList tl) throws IOException {
+    public void saveFile(TaskList tl) {
         if (!fileExists()) {
             makeFile();
         }
-        
-        FileWriter fw = new FileWriter(this.file);
-        fw.write(tl.makeFileFriendly());
-        fw.close();
+
+        try {
+            FileWriter fw = new FileWriter(this.file);
+            fw.write(tl.makeFileFriendly());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

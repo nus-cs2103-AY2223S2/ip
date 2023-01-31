@@ -13,8 +13,8 @@ import java.util.function.Predicate;
 public class TaskList {
     private final ArrayList<Task> tdl;
 
-    //private static final int GAPS = 11;
-    private static final String GAP = "             ";
+    //private static final int GAPS = 3;
+    private static final String GAP = "   ";
 
     /**
      * Constructs an empty list of tasks.

@@ -23,14 +23,18 @@ public class Parser {
      *
      * @param input The user's input.
      * @throws PoorInputException If the input command is not recognized.
-     * @see UI#askUser()
      * @see Command
      */
     public Parser(String input) throws PoorInputException {
         this.c = null;
         this.text = "";
+
         boolean matchFound = false;
-        
+
+        if (input.contains(Task.SEP)) {
+            throw new BadInputException("Please avoid using: \"" + Task.SEP + "\"");
+        }
+
         for (Command c : Command.values()) {
             if (c.match(input)) {
                 this.c = c;
@@ -70,19 +74,26 @@ public class Parser {
      * @param tl The current list of tasks.
      * @throws PoorInputException If the input text is improper or erroneous.
      * @throws DateTimeParseException If some provided datetime is not in a recognized format.
+     * @return The String response to the command.
      */
-    public void respond(TaskList tl) throws PoorInputException, DateTimeParseException {
+    public String respond(TaskList tl) throws PoorInputException, DateTimeParseException {
+        String output;
+
         if (this.c.missingText(this.text)) {
             throw new PoorInputException("That command needs an input");
         }
         
         switch (this.c) {
+        case BYE:
+            output = UI.sayBye();
+            break;
+
         case LIST:
             if (tl.getCount() == 0) {
-                UI.say("Freedom! You have no tasks :D");
+                output = UI.say("Freedom! You have no tasks :D");
             } else {
-                UI.say("Here's what you have:");
-                UI.printMany(tl.listTasks());
+                output = UI.say("Here's what you have:\n")
+                        + UI.printMany(tl.listTasks());
             }
             break;
         
@@ -94,7 +105,7 @@ public class Parser {
                     throw new PoorInputException(tl.rangeError(num));
                 }
                 
-                UI.say(tl.mark(num));
+                output = UI.say(tl.mark(num));
             } catch (NumberFormatException e) {
                 throw new BadInputException("Invalid index!");
             }
@@ -108,7 +119,7 @@ public class Parser {
                     throw new PoorInputException(tl.rangeError(num));
                 }
                 
-                UI.say(tl.unmark(num));
+                output = UI.say(tl.unmark(num));
             } catch (NumberFormatException e) {
                 throw new BadInputException("Invalid index!");
             }
@@ -122,14 +133,14 @@ public class Parser {
                     throw new PoorInputException(tl.rangeError(num));
                 }
                 
-                UI.say(tl.delTask(num));
+                output = UI.say(tl.delTask(num));
             } catch (NumberFormatException e) {
                 throw new BadInputException("Invalid index!");
             }
             break;
             
         case TODO:
-            UI.say(tl.addTask(new Task(this.text)));
+            output = UI.say(tl.addTask(new Task(this.text)));
             break;
             
         case DEADLINE:
@@ -155,7 +166,7 @@ public class Parser {
             String dlDueStr = this.text.substring(byIndex + BY_LENGTH);
             
             LocalDateTime dlDue = TimeStuff.parseDT(dlDueStr);
-            UI.say(tl.addTask(new Deadline(dlDesc, dlDue)));
+            output = UI.say(tl.addTask(new Deadline(dlDesc, dlDue)));
             break;
             
         case EVENT:
@@ -200,7 +211,7 @@ public class Parser {
                 throw new BadInputException("Hey! You have to start *before* you end...");
             }
             
-            UI.say(tl.addTask(new Event(eDesc, eStart, eEnd)));
+            output = UI.say(tl.addTask(new Event(eDesc, eStart, eEnd)));
             break;
             
         case SORT:
@@ -209,8 +220,8 @@ public class Parser {
             }
             
             tl.sort();
-            UI.say("Okay! I've sorted your tasks by date:");
-            UI.printMany(tl.listTasks());
+            output = UI.say("Okay! I've sorted your tasks by date:\n")
+                    + UI.printMany(tl.listTasks());
             break;
             
         case BEFORE:
@@ -224,10 +235,10 @@ public class Parser {
                     (t.hasTime() && t.compareTo(new Deadline("", bef)) < 0));
             
             if (arrBef.isEmpty()) {
-                UI.say("You don't have any tasks before " + this.text);
+                output = UI.say("You don't have any tasks before " + this.text);
             } else {
-                UI.say("Here are your tasks before " + this.text + ":");
-                UI.printMany(arrBef);
+                output = UI.say("Here are your tasks before " + this.text + ":\n")
+                        + UI.printMany(arrBef);
             }
             break;
             
@@ -242,10 +253,10 @@ public class Parser {
                     (t.hasTime() && t.compareTo(new Deadline("", aft)) > 0));
             
             if (arrAft.isEmpty()) {
-                UI.say("You don't have any tasks after " + this.text);
+                output = UI.say("You don't have any tasks after " + this.text);
             } else {
-                UI.say("Here are your tasks after " + this.text + ":");
-                UI.printMany(arrAft);
+                output = UI.say("Here are your tasks after " + this.text + ":\n")
+                        + UI.printMany(arrAft);
             }
             break;
             
@@ -261,21 +272,21 @@ public class Parser {
             case "todo":
             case "td":
             case "t":
-                msg = "Ok! These are on your ToDo list:";
+                msg = "Ok! These are on your ToDo list:\n";
                 arrFilter = tl.listFilter(t -> t.getSymbol().equals(Task.TODO_SYMBOL));
                 break;
             
             case "deadline":
             case "dl":
             case "d":
-                msg = "Ok! Here are your Deadlines:";
+                msg = "Ok! Here are your Deadlines:\n";
                 arrFilter = tl.listFilter(t -> t.getSymbol().equals(Deadline.DEADLINE_SYMBOL));
                 break;
             
             case "event":
             case "ev":
             case "e":
-                msg = "Ok! Here are your Events:";
+                msg = "Ok! Here are your Events:\n";
                 arrFilter = tl.listFilter(t -> t.getSymbol().equals(Event.EVENT_SYMBOL));
                 break;
             
@@ -283,7 +294,7 @@ public class Parser {
             case "done":
             case "completed":
             case "x":
-                msg = "Ok! Here are the Tasks you've completed:";
+                msg = "Ok! Here are the Tasks you've completed:\n";
                 arrFilter = tl.listFilter(t -> t.getStatus().equals(Task.DONE_TRUE));
                 break;
             
@@ -291,7 +302,7 @@ public class Parser {
             case "not done":
             case "!done":
             case "undone":
-                msg = "Ok! Here are the Tasks you haven't completed yet:";
+                msg = "Ok! Here are the Tasks you haven't completed yet:\n";
                 arrFilter = tl.listFilter(t -> !t.getStatus().equals(Task.DONE_TRUE));
                 break;
             
@@ -300,10 +311,10 @@ public class Parser {
             }
             
             if (arrFilter.isEmpty()) {
-                UI.say("You don't have any of those :/");
+                output = UI.say("You don't have any of those :/");
             } else {
-                UI.say(msg);
-                UI.printMany(arrFilter);
+                output = UI.say(msg)
+                        + UI.printMany(arrFilter);
             }
             break;
 
@@ -318,10 +329,10 @@ public class Parser {
                     t.getDesc().toLowerCase().contains(lowText));
 
             if (arrFind.isEmpty()) {
-                UI.say("Nope, nothing matches your search!");
+                output = UI.say("Nope, nothing matches your search!");
             } else {
-                UI.say("Here! I found these:");
-                UI.printMany(arrFind);
+                output = UI.say("Here! I found these:\n")
+                        + UI.printMany(arrFind);
             }
             break;
             
@@ -329,5 +340,7 @@ public class Parser {
             // catches all the BADs
             throw new PoorInputException("That command needs an input");
         }
+
+        return output;
     }
 }
