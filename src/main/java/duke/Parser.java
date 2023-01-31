@@ -22,16 +22,16 @@ public class Parser {
      */
     public static String parseCommandInput(String lineInput) {
         return lineInput.split(" ")[0];
-    } 
+    }
 
     /**
      * Used by 'Deadline' & 'Event' class to get string dates as LocalDate objects.
-     * @param lineInput Command line input that user entered
+     * @param timeInput Command line input that user entered
      * @return CommandInput type
      */
     public static Optional<LocalDate> parseDate(String timeInput) {
         try {
-            timeInput = timeInput.replaceAll("/","-");
+            timeInput = timeInput.replaceAll("/", "-");
             return Optional.of(LocalDate.parse(timeInput));
         } catch (DateTimeParseException e) {
             return Optional.empty();
@@ -75,7 +75,7 @@ public class Parser {
         int indexOfBy = commandInput.indexOf("/by");
         if (indexOfBy == -1) {
             throw new DeadlineByNotSpecified();
-        } 
+        }
 
         taskName = commandInput.substring(9, indexOfBy - 1);
         if (taskName.equals("")) {
@@ -125,7 +125,6 @@ public class Parser {
 
         try {
             toDate = commandInput.substring(indexOfTo + 4, commandInput.length());
-           
         } catch (StringIndexOutOfBoundsException e) {
             throw new EventFromToNotSpecified();
         }
@@ -172,6 +171,7 @@ public class Parser {
             fromDate = info3[0].substring(6);
             toDate = info3[1].substring(0, info3[1].indexOf(")"));
             break;
+        default:
         }
         return new ParsedLoadedTask(taskType, taskName, isDone, dueDate, fromDate, toDate);
     }
@@ -181,19 +181,39 @@ public class Parser {
  * Helper class to hold parsed information of a task loaded from a data file.
  */
 class ParsedLoadedTask {
-    char taskType;
-    String taskName;
-    boolean isDone;
-    String dueDate;
-    String fromDate;
-    String toDate;
+    private char taskType;
+    private String taskName;
+    private boolean isDone;
+    private String dueDate;
+    private String fromDate;
+    private String toDate;
 
-    public ParsedLoadedTask(char taskType, String taskName, boolean isDone, String dueDate, String fromDate, String toDate) {
+    public ParsedLoadedTask(char taskType, String taskName, boolean isDone, 
+            String dueDate, String fromDate, String toDate) {
         this.taskType = taskType;
         this.taskName = taskName;
         this.isDone = isDone;
         this.dueDate = dueDate;
         this.fromDate = fromDate;
         this.toDate = toDate;
+    }
+
+    public char getTaskType() {
+        return this.taskType;
+    }
+    public String getTaskName() {
+        return this.taskName;
+    }
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+    public String getDueDate() {
+        return this.dueDate;
+    }
+    public String getFromDate() {
+        return this.fromDate;
+    }
+    public String getToDate() {
+        return this.toDate;
     }
 }

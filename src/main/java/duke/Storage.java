@@ -55,18 +55,18 @@ public class Storage {
                 ParsedLoadedTask parsedTaskInfo = Parser.parseLoadTask(strTask);
                 Task task;
 
-                switch (parsedTaskInfo.taskType) {
+                switch (parsedTaskInfo.getTaskType()) {
                 case ('T'):
-                    task = new ToDo(parsedTaskInfo.taskName, parsedTaskInfo.isDone);
+                    task = new ToDo(parsedTaskInfo.getTaskName(), parsedTaskInfo.getIsDone());
                     tasks.add(task);
                     break;
                 case ('D'):
-                    task = new Deadline(parsedTaskInfo.taskName, parsedTaskInfo.dueDate, parsedTaskInfo.isDone);
+                    task = new Deadline(parsedTaskInfo.getTaskName(), parsedTaskInfo.getDueDate(), parsedTaskInfo.getIsDone());
                     tasks.add(task);
                     break;
                 case ('E'):
-                    task = new Event(parsedTaskInfo.taskName, parsedTaskInfo.fromDate, 
-                    parsedTaskInfo.toDate, parsedTaskInfo.isDone);
+                    task = new Event(parsedTaskInfo.getTaskName(), parsedTaskInfo.getFromDate(), 
+                    parsedTaskInfo.getToDate(), parsedTaskInfo.getIsDone());
                     tasks.add(task);
                     break;
                 }
