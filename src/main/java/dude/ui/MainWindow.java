@@ -1,5 +1,7 @@
 package dude.ui;
 
+import java.util.Objects;
+
 import dude.Dude;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.Objects;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -30,13 +31,16 @@ public class MainWindow extends AnchorPane {
 
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dudeImage = new Image(this.getClass().getResourceAsStream("/images/DaDude.png"));
 
+    /**
+     * Initializes the window and starts with a greeting
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(ui.showWelcome(), dukeImage)
+                DialogBox.getDudeDialog(ui.showWelcome(), dudeImage)
         );
     }
 
@@ -54,7 +58,7 @@ public class MainWindow extends AnchorPane {
         String response = dude.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDudeDialog(response, dudeImage)
         );
         userInput.clear();
         if (Objects.equals(response, "Ciaos! See you next time.\n")) {

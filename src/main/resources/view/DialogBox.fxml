@@ -8,13 +8,16 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" prefHeight="84.0" prefWidth="262.0" text="Label" wrapText="true">
+        <Label fx:id="dialog" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-color: black; -fx-border-radius: 10;" text="Label" wrapText="true">
          <HBox.margin>
             <Insets />
          </HBox.margin>
          <font>
             <Font name="Arial" size="12.0" />
-         </font></Label>
+         </font>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding></Label>
         <ImageView fx:id="displayPicture" fitHeight="84.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
             <Insets left="10.0" right="10.0" />

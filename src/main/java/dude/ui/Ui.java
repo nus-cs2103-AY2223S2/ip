@@ -23,7 +23,7 @@ public class Ui {
      * Prints welcome message to user
      */
     public String showWelcome() {
-        return "Eh hello! I'm dude.\n" + "What you want me do for you?\n";
+        return "Eh hello! I'm dude. What you want me do for you?\n";
     }
 
     /**
