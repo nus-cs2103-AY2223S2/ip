@@ -5,13 +5,18 @@
 
 package seedu.duke;
 
+import seedu.duke.task.Task;
+
 /**
  * Represents the main program of Duke.
  */
 public class Duke {
 
+    private static boolean isFind = false;
+    private static TaskList tempTasks;
+    private static TaskList tasks;
+
     private Ui ui;
-    private TaskList tasks;
     private Storage storage;
 
     /**
@@ -26,7 +31,8 @@ public class Duke {
         deadline,
         event,
         delete,
-        find
+        find,
+        originalList
     }
 
     /**
@@ -37,11 +43,13 @@ public class Duke {
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
+        if (!isFind) {
+            try {
+                tasks = new TaskList(storage.load());
+            } catch (DukeException e) {
+                ui.showLoadingError();
+                tasks = new TaskList();
+            }
         }
     }
 
@@ -61,39 +69,108 @@ public class Duke {
             switch(userCommand) {
             case bye:
                 dukeText += ui.bye();
+                storage.write(tasks);
                 break;
             case mark:
-                dukeText += ui.markDisplay(tasks.mark(userParse), userParse);
+                if (isFind) {
+                    TaskList marked = tempTasks.mark(userParse);
+                    dukeText += ui.markDisplay(marked, userParse);
+                    for (int i = 0; i < tasks.tasksCounter; i++) {
+                        if (marked.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1)
+                                == tasks.tasksList.get(i)) {
+                            tasks.tasksList.get(i).mark();
+                            System.out.println("test");
+                        }
+                    }
+                } else {
+                    dukeText += ui.markDisplay(tasks.mark(userParse), userParse);
+                }
+                storage.write(tasks);
                 break;
             case unmark:
-                dukeText += ui.unmarkDisplay(tasks.unmark(userParse), userParse);
+                if (isFind) {
+                    TaskList unmarked = tempTasks.unmark(userParse);
+                    dukeText += ui.unmarkDisplay(unmarked, userParse);
+                    for (int i = 0; i < tasks.tasksCounter; i++) {
+                        if (unmarked.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1)
+                                == tasks.tasksList.get(i)) {
+                            tasks.tasksList.get(i).unmark();
+                        }
+                    }
+                } else {
+                    dukeText += ui.unmarkDisplay(tasks.unmark(userParse), userParse);
+                }
+                storage.write(tasks);
                 break;
             case list:
-                dukeText += "Here are the list of tasks:\n";
-                dukeText += ui.list(tasks);
+                if (isFind) {
+                    dukeText += "Here are the list of found tasks:\n";
+                    dukeText += ui.list(tempTasks);
+                } else {
+                    dukeText += "Here are the list of tasks:\n";
+                    dukeText += ui.list(tasks);
+                }
                 break;
             case todo:
+                if (isFind) {
+                    dukeText += "Exiting out of \"found\" list\n";
+                    isFind = false;
+                    tempTasks = new TaskList(tasks);
+                }
                 tasks.addTodo(description, userParse);
                 dukeText += ui.addTodoMessage(tasks);
+                storage.write(tasks);
                 break;
             case deadline:
+                if (isFind) {
+                    dukeText += "Exiting out of \"found\" list\n";
+                    isFind = false;
+                    tempTasks = new TaskList(tasks);
+                }
                 tasks.addDeadline(description, userParse);
                 dukeText += ui.addDeadlineMessage(tasks);
+                storage.write(tasks);
                 break;
             case event:
+                if (isFind) {
+                    dukeText += "Exiting out of \"found\" list\n";
+                    isFind = false;
+                    tempTasks = new TaskList(tasks);
+                }
                 tasks.addEvent(description, userParse);
                 dukeText += ui.addEventMessage(tasks);
+                storage.write(tasks);
                 break;
             case delete:
-                dukeText += ui.deleteMessage(tasks, tasks.delete(userParse));
+                if (isFind) {
+                    Task deleted = tempTasks.delete(userParse);
+                    dukeText += ui.deleteMessage(tempTasks, deleted);
+                    for (int i = 0; i < tasks.tasksCounter; i++) {
+                        if (deleted == tasks.tasksList.get(i)) {
+                            tasks.tasksList.remove(i);
+                            tasks.tasksCounter--;
+                        }
+                    }
+                } else {
+                    dukeText += ui.deleteMessage(tasks, tasks.delete(userParse));
+                }
+                storage.write(tasks);
                 break;
             case find:
-                dukeText += ui.findMessage(tasks.find(userParse));
+                isFind = true;
+                tempTasks = tasks.find(userParse);
+                dukeText += ui.findMessage(tempTasks);
+                break;
+            case originalList:
+                isFind = false;
+                tempTasks = new TaskList(tasks);
+                dukeText += "Here are the list of tasks:\n";
+                dukeText += ui.list(tasks);
+                storage.write(tasks);
                 break;
             default:
                 break;
             }
-            storage.write(tasks);
         } catch (DukeException e) {
             dukeText += e.getMessage();
         }

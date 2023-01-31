@@ -21,7 +21,7 @@ import seedu.duke.task.Todo;
 public class TaskList {
 
     protected List<Task> tasksList;
-    protected int counter;
+    protected int tasksCounter;
 
     /**
      * Constructor for the TaskList class.
@@ -30,7 +30,7 @@ public class TaskList {
      */
     public TaskList(List<Task> tasksList) {
         this.tasksList = tasksList;
-        this.counter = tasksList.size();
+        this.tasksCounter = tasksList.size();
     }
 
     /**
@@ -38,7 +38,17 @@ public class TaskList {
      */
     public TaskList() {
         this.tasksList = new ArrayList<>();
-        this.counter = 0;
+        this.tasksCounter = 0;
+    }
+
+    /**
+     * Constructor for the Copy of the TaskList.
+     *
+     * @param original The original TaskList object.
+     */
+    public TaskList(TaskList original) {
+        this.tasksList = new ArrayList<>(original.tasksList);
+        this.tasksCounter = original.tasksCounter;
     }
 
     /**
@@ -81,7 +91,7 @@ public class TaskList {
         }
         try {
             tasksList.add(new Todo(userParse.checkDescription(description, "todo")));
-            counter++;
+            tasksCounter++;
         } catch (DukeException e) {
             throw e;
         }
@@ -115,7 +125,7 @@ public class TaskList {
         try {
             tasksList.add(new Deadline(userParse.checkDescription(description, "deadline"),
                     userParse.checkTime(deadline, "deadline", "by")));
-            counter++;
+            tasksCounter++;
         } catch (DukeException e) {
             throw e;
         }
@@ -159,7 +169,7 @@ public class TaskList {
             tasksList.add(new Event(userParse.checkDescription(description, "event"),
                     userParse.checkTime(from, "event", "from"),
                     userParse.checkTime(to, "event", "to")));
-            counter++;
+            tasksCounter++;
         } catch (DukeException e) {
             throw e;
         }
@@ -174,7 +184,7 @@ public class TaskList {
     public Task delete(Parser userParse) {
         String[] inputArr = userParse.inputArr;
         Task deleted = tasksList.remove(Integer.parseInt(inputArr[1]) - 1);
-        counter--;
+        tasksCounter--;
         return deleted;
     }
 
@@ -190,7 +200,7 @@ public class TaskList {
         for (Task curr : this.tasksList) {
             if (curr.getDescription().contains(toMatch)) {
                 tempFind.tasksList.add(curr);
-                tempFind.counter++;
+                tempFind.tasksCounter++;
             }
         }
         return tempFind;

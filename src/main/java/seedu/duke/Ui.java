@@ -65,7 +65,7 @@ public class Ui {
      * @return The String for Duke reply.
      */
     public String unmarkDisplay(TaskList tasks, Parser userParse) {
-        String uiText = "OK, I've marked this task as not done yet:";
+        String uiText = "OK, I've marked this task as not done yet:\n";
         uiText += tasks.tasksList.get(Integer.parseInt(userParse.inputArr[1]) - 1).toString() + "\n";
         return uiText;
     }
@@ -79,7 +79,7 @@ public class Ui {
     public String list(TaskList tasks) {
         int numbering = 1;
         String uiText = "";
-        for (int i = 0; i < tasks.counter; i++) {
+        for (int i = 0; i < tasks.tasksCounter; i++) {
             uiText += numbering + ". " + tasks.tasksList.get(i).toString() + "\n";
             numbering++;
         }
@@ -94,8 +94,8 @@ public class Ui {
      */
     public String addTodoMessage(TaskList tasks) {
         String uiText = "Got it. I've added this task:\n";
-        uiText += tasks.tasksList.get(tasks.counter - 1).toString() + "\n";
-        uiText += "Now you have " + tasks.counter + " task(s) in the list.\n";
+        uiText += tasks.tasksList.get(tasks.tasksCounter - 1).toString() + "\n";
+        uiText += "Now you have " + tasks.tasksCounter + " task(s) in the list.\n";
         return uiText;
     }
 
@@ -107,8 +107,8 @@ public class Ui {
      */
     public String addDeadlineMessage(TaskList tasks) {
         String uiText = "Got it. I've added this task:\n";
-        uiText += tasks.tasksList.get(tasks.counter - 1).toString() + "\n";
-        uiText += "Now you have " + tasks.counter + " task(s) in the list.\n";
+        uiText += tasks.tasksList.get(tasks.tasksCounter - 1).toString() + "\n";
+        uiText += "Now you have " + tasks.tasksCounter + " task(s) in the list.\n";
         return uiText;
     }
 
@@ -120,8 +120,8 @@ public class Ui {
      */
     public String addEventMessage(TaskList tasks) {
         String uiText = "Got it. I've added this task:\n";
-        uiText += tasks.tasksList.get(tasks.counter - 1).toString() + "\n";
-        uiText += "Now you have " + tasks.counter + " task(s) in the list.\n";
+        uiText += tasks.tasksList.get(tasks.tasksCounter - 1).toString() + "\n";
+        uiText += "Now you have " + tasks.tasksCounter + " task(s) in the list.\n";
         return uiText;
     }
 
@@ -135,7 +135,7 @@ public class Ui {
     public String deleteMessage(TaskList tasks, Task deleted) {
         String uiText = "Noted. I've removed this task:\n";
         uiText = deleted.toString() + "\n";
-        uiText = "Now you have " + tasks.counter + " task(s) in the list.\n";
+        uiText = "Now you have " + tasks.tasksCounter + " task(s) in the list.\n";
         return uiText;
     }
 
