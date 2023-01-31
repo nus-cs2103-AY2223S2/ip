@@ -34,6 +34,8 @@ public class Parser {
             return "DEADLINE";
         } else if (len >= 7 && input.substring(0, 5).equals("event")) {
             return "EVENT";
+        } else if (len >= 6 && input.substring(0, 4).equals("find")){
+            return "FIND";
         } else {
             return "ERROR";
         }

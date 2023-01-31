@@ -159,6 +159,24 @@ public class Duke {
                             throw new DukeException(err_msg);
                         }
                         continue;
+                    case "FIND":
+                        String[] find_input_arr = input.split(" ");
+                        if (arrayList.size() == 0){
+                            String err_msg = "You have not upload any task yet";
+                            throw new DukeException(err_msg);
+                        }
+                        System.out.println("Here are the matching tasks in your list:");
+                        i = 1;
+                        for (Task task : arrayList) {
+                            if (task.description.contains(find_input_arr[1])){
+                                System.out.println(i + ". " + task.toString());
+                                i++;
+                            }
+                        }
+                        if(i == 1) {
+                            System.out.println("There are no matching task");
+                        }
+                        continue;
                     case "ERROR":
                         String err_msg = "☹ OOPS!!! I'm sorry, but I don't know what that means";
                         throw new DukeException(err_msg);
