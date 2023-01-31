@@ -52,7 +52,7 @@ public class Storage {
             String[] strTasks = strData.split("\n");
             for (String strTask : strTasks) {
                 if (strTask.length() == 1) {
-                    return ;  // for handling empty file, it still contains "\n"
+                    return; // for handling empty file, it still contains "\n"
                 }
                 ParsedLoadedTask parsedTaskInfo = Parser.parseLoadTask(strTask);
                 Task task;
@@ -63,7 +63,7 @@ public class Storage {
                     tasks.add(task);
                     break;
                 case ('D'):
-                    task = new Deadline(parsedTaskInfo.getTaskName(), 
+                    task = new Deadline(parsedTaskInfo.getTaskName(),
                             parsedTaskInfo.getDueDate(), parsedTaskInfo.getIsDone());
                     tasks.add(task);
                     break;
