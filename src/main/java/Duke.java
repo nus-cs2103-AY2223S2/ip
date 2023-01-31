@@ -1,4 +1,7 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
     static private final String MAKE_DEADLINE = "deadline";
@@ -34,7 +37,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
 
         boolean loop = true;
-        List<Task> toDoList = new LinkedList<>();
+        List<Task> toDoList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         while (loop) {
@@ -152,6 +155,32 @@ public class Duke {
                     System.out.println("    ____________________________________________________________");
                     System.out.println("    You're missing the either the '/from' or '/to' flag, or both! Buhcock!");
                     System.out.println("    ____________________________________________________________");
+                    break;
+
+                case "delete":
+                    if (words.length == 1) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("    Mucka blucka - Buh cluck! Which task do you wanna delete?   ");
+                        System.out.println("    ____________________________________________________________");
+                    }
+                    else if (isNumeric(words[1])) {
+                        Integer itemNumber = Integer.parseInt(words[1]);
+                        if (itemNumber > toDoList.size() || itemNumber <= 0) {
+                            System.out.println("    ____________________________________________________________");
+                            System.out.println("    That's not...? In the list...? Buh caw?");
+                            System.out.println("    ____________________________________________________________");
+                        } else {
+                            System.out.println("    ____________________________________________________________");
+                            System.out.println(String.format("   Buh cuck! Removed the following:\n     %s", toDoList.get(itemNumber - 1).toString()));
+                            System.out.println("    ____________________________________________________________");
+                            toDoList.remove(itemNumber - 1);
+                        }
+                    } else {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("    Ya gotta give me a working number, bucko!");
+                        System.out.println("    ____________________________________________________________");
+                    }
+                    break;
 
 
                 default:
