@@ -7,6 +7,12 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The Duke class represents an instance of a Duke.
+ *
+ * @author Tan Wei Shwin, Linus
+ * @version 0.1
+ */
 public class Duke {
     /** Storage of Duke */
     private Storage storage;
