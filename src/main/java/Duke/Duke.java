@@ -13,6 +13,7 @@ public class Duke {
         Saver saver = new Saver();
         Handler handler = new Handler();
         saver.load(taskList);
+
         while (true) {
             String input = myObj.nextLine();
             System.out.println(handler.processCommand(input, taskList));
