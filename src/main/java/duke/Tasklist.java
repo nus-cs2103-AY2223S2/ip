@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 
 public class Tasklist {
-    ArrayList<Task> listOfThings = new ArrayList<Task>();
+	ArrayList<Task> listOfThings = new ArrayList<Task>();
 
     /**
      * Add a task to the tasklist
@@ -57,21 +57,21 @@ public class Tasklist {
         System.out.println("Now you have " + listOfThings.size() + " tasks in the list.");
     }
 
-    public int size() {
-        return listOfThings.size();
-    }
+	public int size() {
+		return listOfThings.size();
+	}
 
-    public Task get(int i) {
-        return listOfThings.get(i);
-    }
+	public Task get(int i) {
+		return listOfThings.get(i);
+	}
 
-    public void set(int i, Task task) {
-        listOfThings.set(i, task);
-    }
+	public void set(int i, Task task) {
+		listOfThings.set(i, task);
+	}
 
-    public void printList() {
-        for (int i = 0; i < listOfThings.size(); i++) {
-            System.out.println(i + 1 + ". " + listOfThings.get(i));
-        }
-    }
+	public void printList() {
+		for (int i = 0; i < listOfThings.size(); i++) {
+			System.out.println(i + 1 + ". " + listOfThings.get(i));
+		}
+	}
 } 
