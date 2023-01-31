@@ -1,5 +1,9 @@
+package monad;
+
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import util.Pair;
 
 public class Result<T> {
     private final Either<Pair<T, String>, String> result;
@@ -49,7 +53,7 @@ public class Result<T> {
     // return this.result.fromRight(null);
     // }
 
-    public <U> U match(Function<? super Pair<? extends T, String>, ? extends U> okFunction,
+    public <U> U match(Function<? super Pair<? extends T, ? extends String>, ? extends U> okFunction,
             Function<? super String, ? extends U> errorFunction) {
         return this.result.match(okFunction, errorFunction);
     }
