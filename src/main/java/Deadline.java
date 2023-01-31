@@ -10,6 +10,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String convertToText() {
+        return String.format("D | %d | %s | %s", super.getDoneOrNot() ? 1 : 0, super.getName(),
+                        this.dateline + System.lineSeparator());
+    }
+
+    @Override
     public String toString() {
         //making sure printing matches the expected format
         return "[D]" + super.toString() + " " + "(by: " + dateline + ")";

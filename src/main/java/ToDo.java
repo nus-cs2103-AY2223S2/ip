@@ -11,4 +11,9 @@ public class ToDo extends Task {
         //making sure we add the "[T]"
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String convertToText() {
+        return String.format("T | %d | %s", super.getDoneOrNot() ? 1 : 0, super.getName() + System.lineSeparator());
+    }
 }
