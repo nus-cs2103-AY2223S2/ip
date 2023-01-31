@@ -6,7 +6,7 @@ import red.task.TaskList;
 import red.ui.UI;
 
 /**
- * This abstract class is the parent class of methods that alter the current list of tasks.
+ * This abstract class is the parent class of classes that alter the current list of tasks.
  */
 
 public abstract class Command {

@@ -12,11 +12,19 @@ import red.command.ListCommand;
 import red.command.MarkCommand;
 import red.command.UnmarkCommand;
 
+/**
+ * This class interprets the inputs by the user.
+ */
 public class Parser {
     private static String[] arrOfStr;
 
 
-
+    /**
+     * Parses through the user string input to understand what action should be taken next.
+     *
+     * @param input The user's instructions to the program.
+     * @throws RedException Throws Exception when the user inputs invalid instruction.
+     */
     public static Command parse(String input) throws RedException {
         arrOfStr = input.split(" ", 2);
 
