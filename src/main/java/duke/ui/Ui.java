@@ -50,13 +50,14 @@ public class Ui {
         System.out.println(msg);
         if (msg.equals("Hmm, your command format's a little off!")) {
             System.out.println("Here are the appropriate formats to use:");
-            System.out.println("todo <desc>");
-            System.out.println("deadline <desc> /by dd/mm/yyyy hhmm");
-            System.out.println("event <desc> /from dd/mm/yyyy hhmm /to dd/mm/yyyy hhmm");
+            System.out.println("todo DESC");
+            System.out.println("deadline DESC /by DD/MM/YYYY HHMM");
+            System.out.println("event DESC /from DD/MM/YYYY HHMM /to DD/MM/YYYY HHMM");
             System.out.println("list");
-            System.out.println("mark <integer>");
-            System.out.println("unmark <integer>");
-            System.out.println("delete <integer>");
+            System.out.println("find KEYWORD");
+            System.out.println("mark TASK_NUM");
+            System.out.println("unmark TASK_NUM");
+            System.out.println("delete TASK_NUM");
             System.out.println("bye");
         }
     }
@@ -124,6 +125,21 @@ public class Ui {
             System.out.println("Here are all the things on your list!");
             for (int i = 0; i < tasks.size(); i++) {
                 Task t = tasks.get(i);
+                System.out.println(String.format("%s. %s", i + 1, t));
+            }
+        }
+    }
+
+    /**
+     * Finds tasks in the list of tasks that contain the given keyword.
+     * @param keyword Keyword to find in list of tasks.
+     * @param tasks List of tasks.
+     */
+    public void find(String keyword, TaskList tasks) {
+        System.out.println("Here are all the things on your list with this keyword!");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            if (t.getDesc().contains(keyword)) {
                 System.out.println(String.format("%s. %s", i + 1, t));
             }
         }
