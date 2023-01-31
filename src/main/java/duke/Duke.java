@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 import duke.DukeException.InvalidCommandException;
 import duke.Tasks.TaskList;
 import duke.utils.DukeIO;
@@ -9,6 +7,7 @@ import duke.utils.MyDuke;
 import duke.utils.Parser;
 import duke.utils.Storage;
 
+import java.io.IOException;
 import java.io.FileNotFoundException;
 
 public class Duke {
