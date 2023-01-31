@@ -28,7 +28,7 @@ public class Parser {
         String cmd;
 
         try{
-            String inputs[] = input.split(" ", 2);
+            String[] inputs = input.split(" ", 2);
             cmd = inputs[0];
 
             int idx;
