@@ -14,39 +14,22 @@ import uwuke.task.TaskList;
 public class UwUke {
 
     private final static int CAPACITY = 100;
+    private static TaskList tasks;
+    private static Scanner sc = new Scanner(System.in);
 
-    private static Command getCommand(String input) {
-        if (input.equals("list")) {
-            return Command.LIST;
-        } else if (input.matches("^mark\\s\\d+$")) {
-            return Command.MARK;
-        } else if (input.matches("^unmark\\s\\d+$")) {
-            return Command.UNMARK;
-        } else if (input.matches("^deadline\\s.+/by\\s.+$")) {
-            return Command.DEADLINE;
-        } else if (input.matches("^event\\s.+/from\\s.+/to\\s.+$")) {
-            return Command.EVENT;
-        } else if (input.matches("^todo\\s.+$")) {
-            return Command.TODO;
-        } else if (input.matches("^delete\\s\\d+$")) {
-            return Command.DELETE;
-        } else if (input.matches("find\\s.+")) {
-            return Command.FIND;
-        } else {
-            return Command.UNKNOWN;
-        }
-    }
-
-    public static void main(String[] args) {
+    private static void init() {
         Printer.uwu();
-        TaskList tasks = new TaskList(CAPACITY);
+        tasks = new TaskList(CAPACITY);
         try {
             tasks = Storage.readSavedTasks();
         } catch (Exception e) {
             Printer.printError("Could not load save file");
             tasks = new TaskList();
         }
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
+    }
+
+    private static void run() {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
@@ -54,7 +37,7 @@ public class UwUke {
                 if (input.contains(",")) { // Can potentially cause fatal errors when trying to read files if commas were allowed.
                     throw new DukeException("Please do not use reserved character \',\'.");
                 }
-                switch (getCommand(input)) {
+                switch (Command.matchCommand(input)) {
                 case LIST:
                     Printer.printTasks(tasks.getList());
                     break;
@@ -89,6 +72,7 @@ public class UwUke {
             try {
                 input = sc.nextLine();
             } catch (Exception e) {
+                Printer.printError("Error occurred when trying to read next line, try again.");
                 input = "";
             }
         }
@@ -98,7 +82,11 @@ public class UwUke {
         } catch (Exception e) {
             Printer.printWithDecorations("Error occured when trying to save tasks");
         }
+    }
 
+    public static void main(String[] args) {
+        init();
+        run();
         sc.close();
         Printer.printBye();
     }
