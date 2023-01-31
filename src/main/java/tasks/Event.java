@@ -25,14 +25,14 @@ public class Event extends Task {
     @Override
     public String toEncodedString() {
         return "[" + TaskType.E + "]" + super.toString() + " /from "
-                + this.startDateTime.format(this.outputDateTimeFormatter) + " /to "
-                + this.endDateTime.format(this.outputDateTimeFormatter);
+                + this.startDateTime.format(Task.getOutputDateTimeFormatter()) + " /to "
+                + this.endDateTime.format(Task.getOutputDateTimeFormatter());
     }
 
     @Override
     public String toString() {
         return "[" + TaskType.E + "]" + super.toString() + " (from: "
-                + this.startDateTime.format(this.outputDateTimeFormatter) + " to: "
-                + this.endDateTime.format(this.outputDateTimeFormatter) + ")";
+                + this.startDateTime.format(Task.getOutputDateTimeFormatter()) + " to: "
+                + this.endDateTime.format(Task.getOutputDateTimeFormatter()) + ")";
     }
 }

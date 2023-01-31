@@ -9,6 +9,11 @@ import java.util.regex.Pattern;
  */
 public abstract class Task {
     /**
+     * Formatters to parse date time strings.
+     */
+    private static DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private static DateTimeFormatter outputDateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
+    /**
      * Description of the task.
      */
     protected String description;
@@ -18,12 +23,6 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Formatters to parse date time strings.
-     */
-    public static DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-    public static DateTimeFormatter outputDateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
-
-    /**
      * Constructs a new task.
      *
      * @param description Description of the task.
@@ -31,6 +30,22 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    /**
+     * Gets the date time formatter for input.
+     * @return Date time formatter for input.
+     */
+    public static DateTimeFormatter getInputDateTimeFormatter() {
+        return inputDateTimeFormatter;
+    }
+
+    /**
+     * Gets the date time formatter for output.
+     * @return Date time formatter for output.
+     */
+    public static DateTimeFormatter getOutputDateTimeFormatter() {
+        return outputDateTimeFormatter;
     }
 
     /**

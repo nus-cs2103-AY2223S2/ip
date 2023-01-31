@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 import exceptions.DukeException;
 import exceptions.InvalidDataFileException;
 import exceptions.TaskNotFoundException;
@@ -7,8 +9,6 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.ToDo;
-
-import java.util.ArrayList;
 
 /**
  * Wraps the task list and provides methods to interact with it.
@@ -42,7 +42,7 @@ public class TaskList {
                 break;
             case "E":
                 toAdd = new Event(fileCommand[2], Parser.parseDate(fileCommand[3], true),
-                        Parser.parseDate(fileCommand[4], true));
+                    Parser.parseDate(fileCommand[4], true));
                 break;
             default:
                 throw new InvalidDataFileException();

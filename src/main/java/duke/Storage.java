@@ -1,12 +1,12 @@
 package duke;
 
-import exceptions.DukeException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import exceptions.DukeException;
 
 /**
  * Writes and loads task lists to and from storage.

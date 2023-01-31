@@ -1,6 +1,7 @@
 package duke;
 
 import exceptions.DukeException;
+import exceptions.UnknownCommandException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -88,10 +89,12 @@ public class Duke {
                     break;
                 case "event":
                     task = new Event(parsedCommand[1], Parser.parseDate(parsedCommand[2], false),
-                            Parser.parseDate(parsedCommand[3], false));
+                        Parser.parseDate(parsedCommand[3], false));
                     tasks.addTask(task);
                     ui.showAddTaskMessage(task, tasks);
                     break;
+                default:
+                    throw new UnknownCommandException();
                 }
 
                 // After each command, save the current task list to the file

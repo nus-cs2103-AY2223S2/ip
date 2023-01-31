@@ -21,13 +21,13 @@ public class Deadline extends Task {
 
     @Override
     public String toEncodedString() {
-        return "[" + TaskType.D + "]" + super.toString() + " /by " +
-                this.endDateTime.format(this.outputDateTimeFormatter);
+        return "[" + TaskType.D + "]" + super.toString() + " /by "
+            + this.endDateTime.format(Task.getOutputDateTimeFormatter());
     }
 
     @Override
     public String toString() {
         return "[" + TaskType.D + "]" + super.toString() + " (by: "
-                + this.endDateTime.format(this.outputDateTimeFormatter) + ")";
+                + this.endDateTime.format(Task.getOutputDateTimeFormatter()) + ")";
     }
 }

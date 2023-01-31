@@ -1,9 +1,9 @@
 package duke;
 
-import tasks.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import tasks.Task;
 
 /**
  * Handles interaction with the user and prints information about the program.
