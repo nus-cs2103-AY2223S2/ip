@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import duke.command.Command;
 import duke.task.TaskList;
@@ -18,45 +17,29 @@ public class Duke {
     /** The chatbot's storage of the tasks it maintains */
     private Storage storage;
 
-    /** The medium which the chatbot uses to communicate */
-    private Ui ui;
-
     /**
      * Creates a chatbot with the specified file path as storage.
      *
      * @param filePath File path to store data for tasks.
+     * @throws IOException If an I/O error occurs.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-
-        try {
-            storage = new Storage(filePath);
-            taskList = new TaskList(storage.getTasks());
-        } catch (IOException exception) {
-            ui.replyError(exception.getMessage());
-        }
+    public Duke(String filePath) throws IOException {
+        storage = new Storage(filePath);
+        taskList = new TaskList(storage.getTasks());
     }
 
     /**
-     * Starts off the chatbot.
+     * Returns the response of the chatbot based on the given input.
      *
-     * @param args Unused.
+     * @param input User's CLI input.
+     * @return Chatbot's response.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
-        Scanner scanner = new Scanner(System.in);
-        boolean isEnd = false;
-
-        duke.ui.greetUser();
-
-        while (!isEnd) {
-            try {
-                String input = scanner.nextLine();
-                Command command = Parser.parseCommand(input, duke.ui, duke.taskList, duke.storage);
-                isEnd = command.execute();
-            } catch (DukeException exception) {
-                duke.ui.replyError(exception.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parseCommand(input, taskList, storage);
+            return command.execute();
+        } catch (DukeException exception) {
+            return "An error has occurred!\n" + exception.getMessage();
         }
     }
 }

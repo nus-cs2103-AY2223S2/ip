@@ -3,7 +3,6 @@ package duke.command;
 import java.io.IOException;
 
 import duke.Storage;
-import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -14,9 +13,6 @@ import duke.task.TaskList;
  * @author wz2k
  */
 public class CreateDeadlineCommand extends Command {
-    /** The medium which the chatbot uses to communicate */
-    private Ui ui;
-
     /** The list of task maintained by the chatbot */
     private TaskList taskList;
 
@@ -27,25 +23,23 @@ public class CreateDeadlineCommand extends Command {
      * Creates a command for creating deadlines.
      *
      * @param commandMessage User's input.
-     * @param ui Communication medium.
      * @param taskList List of tasks.
      * @param storage Task storage.
      */
-    public CreateDeadlineCommand(String commandMessage, Ui ui, TaskList taskList, Storage storage) {
+    public CreateDeadlineCommand(String commandMessage, TaskList taskList, Storage storage) {
         super(commandMessage);
-        this.ui = ui;
         this.taskList = taskList;
         this.storage = storage;
     }
 
     /**
-     * Creates and stores a new deadline task and returns if the
-     * conversation with the chatbot has ended.
+     * Creates and stores a new deadline task and returns the reply
+     * for deadline creation.
      *
-     * @return True if conversation has ended and false otherwise.
+     * @return Taskbot reply to the deadline creation.
      */
     @Override
-    public boolean execute() {
+    public String execute() {
         try {
             String[] commandMessageArr = commandMessage.split("/", 2);
             Task task = new Deadline(commandMessageArr[0].substring(9), false,
@@ -53,11 +47,9 @@ public class CreateDeadlineCommand extends Command {
 
             taskList.addTask(task);
             storage.storeTask(task);
-            ui.replyTaskAdded(task);
+            return "The following task has been added:\n" + "  " + task;
         } catch (IOException exception) {
-            ui.replyError(exception.getMessage());
+            return "An error has occurred!\n" + exception.getMessage();
         }
-
-        return false;
     }
 }

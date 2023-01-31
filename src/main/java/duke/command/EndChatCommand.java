@@ -1,25 +1,18 @@
 package duke.command;
 
-import duke.Ui;
-
 /**
  * Represents a command that ends the conversation with the chatbot.
  *
  * @author wz2k
  */
 public class EndChatCommand extends Command {
-    /** The medium which the chatbot uses to communicate */
-    private Ui ui;
-
     /**
      * Creates a command to end the chat.
      *
      * @param commandMessage User's input.
-     * @param ui Communication medium.
      */
-    public EndChatCommand(String commandMessage, Ui ui) {
+    public EndChatCommand(String commandMessage) {
         super(commandMessage);
-        this.ui = ui;
     }
 
     /**
@@ -28,8 +21,7 @@ public class EndChatCommand extends Command {
      * @return True as the conversation has ended.
      */
     @Override
-    public boolean execute() {
-        ui.endChat();
-        return true;
+    public String execute() {
+        return "Click the X at the top right corner to exit";
     }
 }
