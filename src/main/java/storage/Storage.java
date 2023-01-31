@@ -3,9 +3,9 @@ package storage;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
-import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Iterator;
 
@@ -98,13 +98,10 @@ public class Storage {
                 dukeWriter.write("T | " + i.getStatusIcon() + " | " + i.getDescription() + "\n");
             } else if (i instanceof Deadline) {
                 String[] nameAndDeadline = i.toString().split("\\(by: ");
-                String deadline = nameAndDeadline[1];
                 dukeWriter.write("D | " + i.getStatusIcon() + " | " + i.getDescription() + i.getRemarks() + "\n");
             } else {
                 String[] nameAndStart = i.toString().split(" \\(from: ");
                 String[] startAndEnd = nameAndStart[1].split(" to: ");
-                String start = startAndEnd[0];
-                String end = startAndEnd[1];
                 dukeWriter.write("E | " + i.getStatusIcon() + " | " + i.getDescription() + i.getRemarks() + "\n");
             }
         }

@@ -3,10 +3,10 @@ package parser;
 import java.util.Arrays;
 import java.util.stream.Stream;
 public class Parser {
-    private static String[] VALID_COMMANDS = {"mark", "unmark", "list", "delete", "bye", "todo", "event", "deadline"};
+    private final static String[] VALID_COMMANDS = {"mark", "unmark", "list", "delete", "bye", "todo", "event", "deadline"};
 
     public boolean isValidCommand(String input) {
-        return Arrays.stream(VALID_COMMANDS).anyMatch(input.split(" ")[0]::equals);
+        return Arrays.asList(VALID_COMMANDS).contains(input.split(" ")[0]);
     }
 
     public boolean checkTodo(String input) {

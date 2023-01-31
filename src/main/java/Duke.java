@@ -14,36 +14,43 @@ public class Duke {
     private static Parser logic = new Parser();
 
     public static void main(String[] args) throws DukeException, IOException {
-        ui.welcomeMessage();
+        ui.printWelcomeMessage();
         storage.loadData(list);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
         while (!logic.checkBye(input)) {
             if (logic.checkList(input)) {
-                ui.listMessage();
+                ui.printListMessage();
                 list.list();
+                ui.showLine();
             } else if (logic.checkMark(input)) {
                 int num = Integer.parseInt(input.split(" ")[1]);
                 list.mark(num);
-                ui.markMessage(list.get(num));
+                ui.printMarkMessage(list.get(num));
+                ui.showLine();
             } else if (logic.checkUnmark(input)) {
                 int num = Integer.parseInt(input.split(" ")[1]);
                 list.unmark(num);
-                ui.unmarkMessage(list.get(num));
+                ui.printUnmarkMessage(list.get(num));
+                ui.showLine();
            } else if (logic.checkDelete(input)) {
                 int num = Integer.parseInt(input.split(" ")[1]);
-                ui.deleteMessage(list.get(num), list);
+                ui.printDeleteMessage(list.get(num), list);
                 list.delete(num);
+                ui.showLine();
             } else if (logic.checkTask(input)) {
                 list.add(input);
-                ui.addMessage(list.getLast(), list);
+                ui.printAddMessage(list.getLast(), list);
+                ui.showLine();
             } else if (!logic.isValidCommand(input)) {
-                ui.invalidCommandMessage();
+                ui.printInvalidCommandMessage();
+                ui.showLine();
             }
             input = sc.nextLine();
         }
         storage.saveData(list);
-        ui.byeMessage();
+        ui.printByeMessage();
+        ui.showLine();
     }
 }
