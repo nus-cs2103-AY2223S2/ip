@@ -11,7 +11,7 @@ import duke.tasks.TaskList;
  * Creates a new Deadline task and adds it to the task list.
  * Command input must be accompanied by a '/by' keyword to indicate the due date of the task.
  * <p>
- * Command format: "deadline <task_name> /by <due_date>"
+ * Command format: "deadline &lt;task_name&gt; /by &lt;due_date&gt;"
  */
 public class DeadlineCmd extends Command {
     private Task deadline;
@@ -26,12 +26,12 @@ public class DeadlineCmd extends Command {
     }
 
     /** Adds the Deadline task to the task list. */
-    public void execute() throws CommandExecutionError { 
+    public void execute() throws CommandExecutionError {
         this.deadline = Deadline.create(this.lineInput);
         taskList.add(this.deadline);
         uiReply();
     };
-    
+
     /** Acknowlege on UI that the Deadline task has been added. */
     public void uiReply() {
         Ui.displayMsg("Got it. I've added this task:\n"
