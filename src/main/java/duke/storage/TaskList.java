@@ -50,7 +50,7 @@ public class TaskList {
 
     /**
      * Marks a task as done.
-     * @param index
+     * @param index index of task in the list by 1-base indexing.
      */
     public void markTask(int index) {
         this.storer.get(index - 1).mark();
@@ -58,7 +58,7 @@ public class TaskList {
 
     /**
      * Unmarks a task as done.
-     * @param index
+     * @param index index of task in the list by 1-base indexing.
      */
     public void unmarkTask(int index) {
         this.storer.get(index - 1).unmark();
@@ -66,7 +66,7 @@ public class TaskList {
 
     /**
      * Obtain a task by its task number.
-     * @param index
+     * @param index index of task in the list by 1-base indexing.
      * @return the task at the given index.
      */
     public Task get(int index) {
@@ -75,7 +75,7 @@ public class TaskList {
 
     /**
      * Removes a task given its task number.
-     * @param index
+     * @param index index of task in the list by 1-base indexing.
      * @return the removed task.
      */
     public Task remove(int index) {

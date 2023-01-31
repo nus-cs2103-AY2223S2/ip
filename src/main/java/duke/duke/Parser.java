@@ -10,10 +10,10 @@ import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.TodoCommand;
 import duke.exceptions.DukeException;
-import duke.exceptions.EmptyException;
 import duke.exceptions.IncompleteException;
 import duke.exceptions.InvalidException;
 import duke.exceptions.NoArgsException;
+import duke.exceptions.UnrecognisableException;
 import duke.tasks.Deadlines;
 import duke.tasks.Events;
 import duke.tasks.Todos;
@@ -50,7 +50,7 @@ public class Parser {
 
     /**
      * Parses a processed form of the user input and matches it to the correct command.
-     * @param line
+     * @param line a string array split by 1 whitespace when the input is read.
      * @return an appropriate command.
      * @throws DukeException
      */
@@ -115,7 +115,7 @@ public class Parser {
                 c = new FindCommand(query);
                 break;
             default:
-                throw new EmptyException();
+                throw new UnrecognisableException();
         }
         return c;
     }

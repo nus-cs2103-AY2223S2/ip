@@ -4,13 +4,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
+    /**
+     * A formatter for inputs by the user.
+     */
     protected static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    /**
+     * A formatter to dump into storage.
+     */
     protected static final DateTimeFormatter PRINTFORMATTER =
             DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
