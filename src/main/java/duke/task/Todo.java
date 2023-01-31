@@ -8,6 +8,14 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, String taskStatus) {
+        super(description);
+
+        if (taskStatus.equals("1")) {
+            this.mark();
+        }
+    }
+
     /**
      * Returns the String representation of a Todo.
      *

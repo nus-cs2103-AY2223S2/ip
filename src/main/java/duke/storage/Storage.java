@@ -28,17 +28,15 @@ public class Storage {
      * Create directory (if necessary) and file if the file do not exist.
      *
      * @return List of tasks that are loaded from local storage.
-     * @throws DukeException
+     * @throws DukeException Throws exception if file cannot be found locally or created.
      */
     public ArrayList<Task> load() throws DukeException {
         File f = new File(this.FILEPATH);
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(f);
-            int idx = 0;
             while (s.hasNext()) {
-                idx++;
-                Task task = PARSER.processTask(s.nextLine(), idx);
+                Task task = PARSER.processTask(s.nextLine());
                 tasks.add(task);
             }
         } catch (FileNotFoundException fnfe) {
@@ -48,7 +46,8 @@ public class Storage {
             } catch (IOException ioe) {
                 throw new DukeException("Fake Duke can't create the file.");
             }
-            throw new DukeException(String.format("Fake Duke can't find the file. I will create the file (%s) :D", this.FILEPATH));
+            throw new DukeException(String.format("Fake Duke can't find the file. I have created the file (%s) :D",
+                    this.FILEPATH));
         }
         return tasks;
     }
@@ -57,7 +56,7 @@ public class Storage {
      * Saves tasks to local storage.
      *
      * @param tasks All the tasks that should be saved to local storage.
-     * @throws DukeException
+     * @throws DukeException Throws exception if task cannot be obtained to save to file.
      */
     public void saveTasks(TaskList tasks) throws DukeException {
         try {

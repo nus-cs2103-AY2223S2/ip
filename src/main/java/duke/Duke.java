@@ -7,6 +7,8 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+import java.util.Scanner;
+
 /**
  * Main class for Fake Duke the chat bot.
  */

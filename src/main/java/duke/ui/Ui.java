@@ -4,22 +4,26 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.task.Task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
  * Handles interactions with the user.
  */
 public class Ui {
+    private final Scanner SCANNER = new Scanner(System.in);
+
     public String showLine() {
         return "________________________________________________________________\n";
     }
 
     public String readCommand() {
-        Scanner sc = new Scanner(System.in);
         String command = "";
-            command = sc.nextLine();
+        if (SCANNER.hasNextLine()) {
+            command = SCANNER.nextLine();
+        }
         return command;
     }
 
@@ -27,17 +31,8 @@ public class Ui {
      * Prints out the greeting for Fake Duke.
      */
     public void showWelcome() {
-        String logo = "  _____     _       _  __  U _____ u      ____     _   _    _  __  U _____ u \n"
-                + " |\" ___|U  /\"\\  u  |\"|/ /  \\| ___\"|/     |  _\"\\ U |\"|u| |  |\"|/ /  \\| ___\"|/ \n"
-                + "U| |_  u \\/ _ \\/   | ' /    |  _|\"      /| | | | \\| |\\| |  | ' /    |  _|\"   \n"
-                + "\\|  _|/  / ___ \\ U/| . \\\\u  | |___      U| |_| |\\ | |_| |U/| . \\\\u  | |___   \n"
-                + " |_|    /_/   \\_\\  |_|\\_\\   |_____|      |____/ u<<\\___/   |_|\\_\\   |_____|  \n"
-                + " )(\\\\,-  \\\\    >>,-,>> \\\\,-.<<   >>       |||_  (__) )(  ,-,>> \\\\,-.<<   >>  \n"
-                + "(__)(_/ (__)  (__)\\.)   (_/(__) (__)     (__)_)     (__)  \\.)   (_/(__) (__) \n";
-        System.out.println(this.showLine()
-                + "Hello!~ I'm the one and only\n"
-                + logo
-                + "What can I do for you?\n"
+       System.out.println(this.showLine()
+                + "Hello!~ I'm the one and only ✨ FAKE DUKE ✨\nWhat can I do for you?\n"
                 + this.showLine());
     }
 
@@ -103,7 +98,7 @@ public class Ui {
      * Prints the list of tasks.
      *
      * @param taskList List of tasks.
-     * @throws DukeException
+     * @throws DukeException Throws exception if unable to get task.
      */
     public void showList(TaskList taskList) throws DukeException {
         System.out.println(this.showLine()
@@ -145,5 +140,16 @@ public class Ui {
             System.out.println(i + "." + foundTasks.get(i - 1));
         }
         System.out.println(this.showLine());
+    }
+
+    /**
+     * Returns datetime in String for printing.
+     *
+     * @param dateTime Datetime of Task.
+     * @return String representation of datetime.
+     */
+    public String getStringDateTime(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd-MM-yyyy HH:mma");
+        return dateTime.format(formatter);
     }
 }

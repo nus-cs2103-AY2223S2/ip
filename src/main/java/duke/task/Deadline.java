@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,12 +16,14 @@ public class Deadline extends Task {
 
     public Deadline(String description) throws DukeException {
         super(description.split(" /by ")[0]);
-        try {
-            this.deadline = this.parseDateTime(description.split(" /by ")[1]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
-        } catch (DateTimeParseException dtpe) {
-            throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
+        this.setDeadline(description);
+    }
+
+    public Deadline(String description, String taskStatus) throws DukeException {
+        super(description.split(" /by ")[0]);
+        this.setDeadline(description);
+        if (taskStatus.equals("1")) {
+            this.mark();
         }
     }
 
@@ -32,7 +36,17 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[D][%c] %s (by: %s)", this.getStatusIcon(), this.description
-                , this.getStringDateTime(this.deadline));
+                , new Ui().getStringDateTime(this.deadline));
+    }
+
+    private void setDeadline(String description) throws DukeException {
+        try {
+            this.deadline = new Parser().parseDateTime(description.split(" /by ")[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
+        } catch (DateTimeParseException dtpe) {
+            throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
+        }
     }
 
     /**

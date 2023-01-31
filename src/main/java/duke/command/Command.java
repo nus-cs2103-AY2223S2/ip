@@ -12,7 +12,7 @@ public class Command {
     protected boolean isExit;
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        // Do nothing
+        System.out.println("You did not specify your command.");
     }
 
     public boolean isExit() {

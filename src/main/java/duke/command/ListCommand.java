@@ -15,7 +15,7 @@ public class ListCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui object that handles all Ui actions.
      * @param storage Storage object that handles all Storage actions.
-     * @throws DukeException
+     * @throws DukeException Throws exception from the methods called in this method.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

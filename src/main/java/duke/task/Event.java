@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.ui.Ui;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,14 +17,15 @@ public class Event extends Task {
 
     public Event(String description) throws DukeException {
         super(description.split(" /from ")[0]);
-        try {
-            String dateTimes = description.split(" /from ")[1];
-            this.startDateTime = parseDateTime(dateTimes.split(" /to ")[0]);
-            this.endDateTime = parseDateTime(dateTimes.split(" /to ")[1]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
-        } catch (DateTimeParseException dtpe) {
-            throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
+        setEventDateTimes(description);
+    }
+
+    public Event(String description, String taskStatus) throws DukeException {
+        super(description.split(" /from ")[0]);
+        setEventDateTimes(description);
+
+        if (taskStatus.equals("1")) {
+            this.mark();
         }
     }
 
@@ -34,8 +37,22 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        Ui ui = new Ui();
         return String.format("[E][%c] %s (from: %s to: %s)", this.getStatusIcon(), this.description
-                , this.getStringDateTime(this.startDateTime), this.getStringDateTime(this.endDateTime));
+                , ui.getStringDateTime(this.startDateTime), ui.getStringDateTime(this.endDateTime));
+    }
+
+    private void setEventDateTimes(String description) throws DukeException {
+        Parser parser = new Parser();
+        try {
+            String dateTimes = description.split(" /from ")[1];
+            this.startDateTime = parser.parseDateTime(dateTimes.split(" /to ")[0]);
+            this.endDateTime = parser.parseDateTime(dateTimes.split(" /to ")[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("☹ I'm sorry, but Fake Duke doesn't know what that means :-(");
+        } catch (DateTimeParseException dtpe) {
+            throw new DukeException("Invalid datetime format. Please use yyyy-mm-dd HH:mm (E.g. 2019-10-15 18:00).");
+        }
     }
 
     /**

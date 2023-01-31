@@ -10,10 +10,10 @@ import duke.ui.Ui;
  * Adds task when user input indicates add.
  */
 public class AddCommand extends Command {
-    private Task task;
+    private final Task TASK;
 
     public AddCommand(Task task) {
-        this.task = task;
+        this.TASK = task;
     }
 
     /**
@@ -22,12 +22,12 @@ public class AddCommand extends Command {
      * @param tasks List of tasks.
      * @param ui Ui object that handles all Ui actions.
      * @param storage Storage object that handles all Storage actions.
-     * @throws DukeException
+     * @throws DukeException Throws exception from the methods called in this method.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.addTask(this.task);
+        tasks.addTask(this.TASK);
         storage.saveTasks(tasks);
-        ui.showAdd(this.task, tasks);
+        ui.showAdd(this.TASK, tasks);
     }
 }
