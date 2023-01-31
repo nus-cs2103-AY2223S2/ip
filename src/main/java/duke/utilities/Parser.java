@@ -1,5 +1,10 @@
 package duke.utilities;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import duke.exceptions.ContentEmpty;
 import duke.exceptions.DateParseException;
 import duke.exceptions.DukeException;
@@ -7,27 +12,74 @@ import duke.exceptions.IncompleteCommandException;
 import duke.exceptions.InvalidMarkInput;
 import duke.tasks.ITask;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Parser class to translate user input to valid program input
  */
 public class Parser {
-    private boolean processed = false;
-    private String _input;
-    private String _description;
     /**
      * Pre-define input date format
      */
-    public final static DateFormat DATE_IN_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    public static final DateFormat DATE_IN_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     /**
      * Pre-define output date format
      */
-    public final static DateFormat DATE_OUTPUT_FORMAT = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss aa");
+    public static final DateFormat DATE_OUTPUT_FORMAT = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss aa");
+
+
+    private boolean processed = false;
+    private String input;
+    private int index;
+    private String description;
+    private ITask.TaskTypes type;
+    private Date by;
+    private Date from;
+    private Date to;
+
+    private TaskManager taskManager;
+
+    /**
+     * Constructor for Parser
+     *
+     * @param input input from user
+     */
+    public Parser(String input) {
+        this.input = input;
+    }
+
+    /**
+     * Constructor for Parser
+     *
+     * @param taskManager to handle to task
+     */
+    public Parser(TaskManager taskManager) {
+        this.taskManager = taskManager;
+    }
+
+    /**
+     * Constructor for Parser
+     *
+     * @param input       input from user
+     * @param taskManager to handle to task
+     */
+    public Parser(String input, TaskManager taskManager) {
+        this.input = input;
+        this.taskManager = taskManager;
+    }
+
+    /**
+     * Constructor for Parser
+     *
+     * @param input       input from user
+     * @param taskManager to handle to task
+     * @param type        of the command
+     */
+    public Parser(String input, TaskManager taskManager, ITask.TaskTypes type) {
+        this.taskManager = taskManager;
+        this.input = input;
+        this.type = type;
+    }
 
 
     /**
@@ -36,10 +88,10 @@ public class Parser {
      * @throws DukeException IF error occur
      */
     public Date getBy() throws DukeException {
-        if (_by == null) {
+        if (by == null) {
             throw new ContentEmpty("'by'");
         }
-        return _by;
+        return by;
 
     }
 
@@ -52,18 +104,18 @@ public class Parser {
      */
     public void forDeadline() throws DukeException {
         if (!processed) {
-            if (!_input.contains("/by")) {
+            if (!input.contains("/by")) {
                 throw new IncompleteCommandException("/by");
             }
 
-            String[] temp = _input.split("/by");
+            String[] temp = input.split("/by");
             if (temp.length < 1) {
                 throw new ContentEmpty("'/by command'");
             }
-            _description = temp[0].trim();
+            description = temp[0].trim();
 
             try {
-                _by = DATE_IN_FORMAT.parse(temp[1].trim());
+                by = DATE_IN_FORMAT.parse(temp[1].trim());
             } catch (ParseException e) {
                 throw new DateParseException(e.getMessage());
             }
@@ -78,10 +130,10 @@ public class Parser {
      * @throws DukeException IF error occur
      */
     public Date getFrom() throws DukeException {
-        if (_from == null) {
+        if (from == null) {
             throw new ContentEmpty("'from'");
         }
-        return _from;
+        return from;
     }
 
     /**
@@ -90,69 +142,18 @@ public class Parser {
      * @throws DukeException IF error occur
      */
     public Date getTo() throws DukeException {
-        if (_to == null) {
+        if (to == null) {
             throw new ContentEmpty("'to'");
         }
-        return _to;
+        return to;
     }
 
-    private Date _by;
-    private Date _from;
-    private Date _to;
-
-
-    private TaskManager _taskManager;
 
     /**
      * Return the enum type of task
      */
     public ITask.TaskTypes getType() {
-        return _type;
-    }
-
-    private ITask.TaskTypes _type;
-    private int _index;
-
-    /**
-     * Constructor for Parser
-     *
-     * @param input input from user
-     */
-    public Parser(String input) {
-        _input = input;
-    }
-
-    /**
-     * Constructor for Parser
-     *
-     * @param taskManager to handle to task
-     */
-    public Parser(TaskManager taskManager) {
-        _taskManager = taskManager;
-    }
-
-    /**
-     * Constructor for Parser
-     *
-     * @param input       input from user
-     * @param taskManager to handle to task
-     */
-    public Parser(String input, TaskManager taskManager) {
-        _input = input;
-        _taskManager = taskManager;
-    }
-
-    /**
-     * Constructor for Parser
-     *
-     * @param input       input from user
-     * @param taskManager to handle to task
-     * @param type        of the command
-     */
-    public Parser(String input, TaskManager taskManager, ITask.TaskTypes type) {
-        _taskManager = taskManager;
-        _input = input;
-        _type = type;
+        return type;
     }
 
     /**
@@ -160,7 +161,7 @@ public class Parser {
      */
 
     public TaskManager getTaskManager() {
-        return _taskManager;
+        return taskManager;
     }
 
     /**
@@ -172,16 +173,16 @@ public class Parser {
     public int getIndex() throws DukeException {
         if (!processed) {
             try {
-                _index = Integer.parseInt(_input) - 1;
+                index = Integer.parseInt(input) - 1;
             } catch (NumberFormatException e) {
-                throw new InvalidMarkInput(_input);
+                throw new InvalidMarkInput(input);
             }
-            if (_index < 0 || _index > _taskManager.size() - 1) {
-                throw new InvalidMarkInput(_input);
+            if (index < 0 || index > taskManager.size() - 1) {
+                throw new InvalidMarkInput(input);
             }
             processed = true;
         }
-        return _index;
+        return index;
     }
 
     /**
@@ -190,10 +191,10 @@ public class Parser {
      * @throws DukeException IF error occur
      */
     public String getDescription() throws DukeException {
-        if (_description.isEmpty()) {
+        if (description.isEmpty()) {
             throw new ContentEmpty("'description'");
         }
-        return _description;
+        return description;
     }
 
 
@@ -205,26 +206,26 @@ public class Parser {
      */
     public void forEvent() throws DukeException {
 
-        if (!_input.contains("/from")) {
+        if (!input.contains("/from")) {
             throw new IncompleteCommandException("/from");
         }
         String[] result = new String[3];
-        String[] temp = _input.split("/from");
+        String[] temp = input.split("/from");
         result[0] = temp[0];
         String[] temp2 = temp[1].split("/to");
 
-        if (!_input.contains("/to")) {
+        if (!input.contains("/to")) {
             throw new IncompleteCommandException("/to");
         }
         result[1] = temp2[0];
         result[2] = temp2[1];
         try {
-            _from = DATE_IN_FORMAT.parse(result[1].trim());
-            _to = DATE_IN_FORMAT.parse(result[2].trim());
+            from = DATE_IN_FORMAT.parse(result[1].trim());
+            to = DATE_IN_FORMAT.parse(result[2].trim());
         } catch (ParseException e) {
             throw new DateParseException(e.getMessage());
         }
-        _description = result[0].trim();
+        description = result[0].trim();
         processed = true;
 
     }
@@ -234,11 +235,16 @@ public class Parser {
      * task
      */
     public void forTodo() {
-        _description = _input;
+        description = input;
         processed = true;
     }
+
+    /**
+     * Convert the user input to valid program input for a Find
+     * task
+     */
     public void forFind() {
-        _description = _input;
+        description = input;
         processed = true;
     }
 

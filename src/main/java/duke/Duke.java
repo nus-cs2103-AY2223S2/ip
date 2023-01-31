@@ -9,8 +9,8 @@ import duke.utilities.UserInterface;
  * Main class represents Duke chatbot
  */
 public class Duke {
-    private TaskManager _taskManger;
-    private final UserInterface _ui;
+    private TaskManager taskManger;
+    private final UserInterface ui;
 
     /**
      * Constructor for Duke
@@ -18,13 +18,13 @@ public class Duke {
      * @param filePath the path to save and load the tasks from disk
      */
     public Duke(String filePath) {
-        _ui = new UserInterface();
+        ui = new UserInterface();
         try {
-            _taskManger = new TaskManager(filePath);
-            _taskManger.load();
+            taskManger = new TaskManager(filePath);
+            taskManger.load();
         } catch (DukeException e) {
-            _ui.showLoadingError(e.getMessage());
-            _taskManger = new TaskManager(filePath);
+            ui.showLoadingError(e.getMessage());
+            taskManger = new TaskManager(filePath);
         }
     }
 
@@ -32,17 +32,17 @@ public class Duke {
      * run and start the Duke bot
      */
     public void run() {
-        _ui.showWelcome();
+        ui.showWelcome();
         boolean isDone = false;
         while (!isDone) {
             try {
-                ICommand cmd = _ui.readCommand(_taskManger);
+                ICommand cmd = ui.readCommand(taskManger);
                 isDone = cmd.run();
-                _ui.Speak(cmd.getMsg());
+                ui.Speak(cmd.getMsg());
             } catch (DukeException e) {
-                _ui.showError(e.getMessage());
+                ui.showError(e.getMessage());
             } finally {
-                _ui.getCommand("Enter new command to continue: ");
+                ui.getCommand("Enter new command to continue: ");
             }
         }
     }
