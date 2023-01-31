@@ -13,9 +13,8 @@ public class Duke {
             "\\___/ \\___/  \\___|\n";
 
 
-
-                String greeting = "\tHello! I'm Joe\n" +
-                "\tWhat Can I do for you?";
+        String greeting = "\tHello! I'm Joe\n" +
+        "\tWhat Can I do for you?";
 
         System.out.println("Hello from\n" + logo);
         Joe.printNewLine();
