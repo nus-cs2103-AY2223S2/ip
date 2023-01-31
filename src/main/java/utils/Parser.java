@@ -45,6 +45,8 @@ public class Parser {
             return new ToggleMarkTaskCommand(Integer.parseInt(splitStr[1]), true);
         case "unmark":
             return new ToggleMarkTaskCommand(Integer.parseInt(splitStr[1]), false);
+        case "find":
+            return new FindCommand(splitStr[1]);
         default:
             throw new InvalidCommandException("Unknown command");
         }

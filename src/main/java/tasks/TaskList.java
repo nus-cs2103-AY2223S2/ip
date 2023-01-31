@@ -56,6 +56,18 @@ public class TaskList {
         this.tasks.get(index - 1).markAsUndone();
     }
 
+
+    public TaskList find(String keyword) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.toString().contains(keyword)) {
+                result.add(task);
+            }
+        }
+
+        return new TaskList(result);
+    }
+
     /**
      * Prints all the tasks in the task list.
      */
