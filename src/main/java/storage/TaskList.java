@@ -9,11 +9,17 @@ import exception.DukeException;
 import java.util.ArrayList;
 
 /**
- * Represents list of task. A <code>TaskList</code> object corresponds to
+ * Represents list of tasks. A <code>TaskList</code> object corresponds to
  * the list of tasks that the user has recorded
  */
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
 public class TaskList {
     private final ArrayList<Task> list;
+    private final HashMap<String, HashSet<Task>> map = new HashMap<>();
 
     public TaskList(ArrayList<Task> list) {
         this.list = list;
@@ -21,6 +27,30 @@ public class TaskList {
 
     public TaskList() {
         this.list = new ArrayList<>();
+    }
+
+    public void addFind(String description, Task task) {
+        String[] words = description.split(" ");
+        for (String word: words) {
+            if (!map.containsKey(word)) {
+                map.put(word, new HashSet<>());
+            }
+            map.get(word).add(task);
+        }
+    }
+
+    public void removeFind(Task task) {
+        for (Map.Entry<String, HashSet<Task>> set : map.entrySet()) {
+            if (set.getValue().contains(task)) {
+                set.getValue().remove(task);
+            }
+        }
+    }
+    
+    public void find(String word) {
+        for (Task task: map.get(word)) {
+            System.out.println(task.toString());
+        }
     }
 
     public ArrayList<Task> getList() {
@@ -134,6 +164,7 @@ public class TaskList {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
+        addFind(newTask.getDescription(), newTask);
         list.add(newTask);
     }
     /**

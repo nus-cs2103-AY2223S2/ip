@@ -4,7 +4,6 @@ import storage.TaskList;
 import task.Task;
 
 public class Ui {
-    public Ui() {};
 
     public void printInvalidCommandMessage() {
         System.out.println("Sorry, I don't know what that means! :'( \n");
@@ -14,6 +13,10 @@ public class Ui {
     }
     public void showLine() {
         System.out.println("----------------------------------");
+    }
+
+    public void printFindMessgae() {
+        System.out.println("Here are the matching tasks in your list:\n");
     }
 
     public void printListMessage() {

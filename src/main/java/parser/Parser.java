@@ -14,6 +14,9 @@ public class Parser {
         return Arrays.asList(VALID_COMMANDS).contains(input.split(" ")[0]);
     }
 
+    public boolean checkFind(String input) {
+        return input.split(" ")[0].equals("find");
+    }
     public boolean checkTodo(String input) {
         return input.split(" ")[0].equals("todo");
     }
