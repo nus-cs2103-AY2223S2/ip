@@ -3,6 +3,7 @@ package duke.task;
 public class Task {
     protected String item;
     protected boolean isComplete;
+
     protected String types; // todo, deadline, events
 
     /**
@@ -11,6 +12,7 @@ public class Task {
      * @param item is the name of the task
      * @param types is the type of the task mainly "T" for todo, "D" for deadline and "E" for event
      */
+
     public Task(String item, String types) {
         this.item = item;
         this.types = types;
@@ -37,6 +39,7 @@ public class Task {
      * gets whether the task is mark or not
      * @return true for mark and false for unmark
      */
+
     public boolean getComplete() {
         return isComplete;
     }

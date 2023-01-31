@@ -19,7 +19,8 @@ public class TaskList {
      * gets the number of tasks
      * @return the number of task in the allTasks
      */
-    public int numberOfTask() {
+
+    public int getNumberOfTask() {
         return allTasks.size();
     }
 
@@ -54,7 +55,7 @@ public class TaskList {
      * @param index of task to be mark
      */
     public void markTask(int index) {
-        allTasks.get(index-1).mark();
+        allTasks.get(index - 1).mark();
     }
 
     /**
@@ -62,7 +63,7 @@ public class TaskList {
      * @param index of task to be mark
      */
     public void unmarkTask(int index) {
-        allTasks.get(index-1).unmark();
+        allTasks.get(index - 1).unmark();
     }
 
     /**
@@ -81,6 +82,4 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return allTasks;
     }
-
-
 }

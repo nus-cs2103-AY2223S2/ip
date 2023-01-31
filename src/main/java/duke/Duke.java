@@ -19,7 +19,7 @@ public class Duke {
     public Duke()  {
         ui = new Ui();
         ui.displayLogo();
-        storage = new Storage("/Users/risten/Documents/NUS/CS2109S/ip/data/duke.txt");
+        storage = new Storage("/Users/kristen/Documents/NUS/CS2109S/ip/data/duke.txt");
         parser = new Parser();
 
         try {
@@ -27,7 +27,7 @@ public class Duke {
             listOfTasks.allTasks = storage.loadFile(listOfTasks.getTasks());
 
         }  catch (IOException i) {
-            System.out.println(i);
+            ui.printText("Remember that since the file cannot be loaded, you cannot save your file!");
         }
     }
 

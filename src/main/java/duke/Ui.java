@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Ui {
@@ -12,7 +10,7 @@ public class Ui {
      * initialise scanners sc
      */
     public Ui() {
-        this.sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     /**

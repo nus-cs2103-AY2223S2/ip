@@ -37,7 +37,8 @@ public class Parser {
                     throw new ArgumentException("What are we marking again?");
                 }
                 int index = Integer.parseInt(instruction[1]);
-                if ((index - 1) < 0 || (index - 1) >= tasklist.numberOfTask()) {
+
+                if ((index - 1) < 0 || (index - 1) >= tasklist.getNumberOfTask()) {
                     throw new ArgumentException("Can't find the index");
                 }
 
@@ -51,7 +52,8 @@ public class Parser {
                     throw new ArgumentException("What are we unmarking again?");
                 }
                 int index = Integer.parseInt(instruction[1]);
-                if ((index - 1) < 0 || (index - 1) >= tasklist.numberOfTask()) {
+
+                if ((index - 1) < 0 || (index - 1) >= tasklist.getNumberOfTask()) {
                     throw new ArgumentException("Can't find the index");
                 }
 
@@ -66,7 +68,8 @@ public class Parser {
                 }
                 int index = Integer.parseInt(instruction[1]);
 
-                if ((index - 1) < 0 || (index - 1) >= tasklist.numberOfTask()) {
+                if ((index - 1) < 0 || (index - 1) >= tasklist.getNumberOfTask()) {
+
                     throw new ArgumentException("Can't find the index");
                 }
 
@@ -160,7 +163,7 @@ public class Parser {
                 }
             }
 
-        }  catch (ArgumentException ex2) {
+        } catch (ArgumentException ex2) {
             System.out.println(ex2.getMessage());
         } catch (ParseException e) {
             System.out.println("Please enter the time of the format dd/MM/yyyy HH:mm");

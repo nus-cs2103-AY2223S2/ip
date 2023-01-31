@@ -30,7 +30,6 @@ public class Storage {
         try {
             PrintWriter pw = new PrintWriter(new FileOutputStream(filePath));
 
-
             for (int i = 0; i < entireList.size(); i++) {
                 Task task = entireList.get(i);
 
@@ -100,7 +99,6 @@ public class Storage {
 
                 entireList.add(task);
             }
-
 
         } catch (IOException i) {
             System.out.println("File not found! Proceeding without a saved file.\nPlease note that you will not be able" +

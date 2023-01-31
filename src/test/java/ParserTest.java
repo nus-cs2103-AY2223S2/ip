@@ -56,6 +56,7 @@ public class ParserTest {
         dummyList.addTask(new Task("Item3","T"));
         dummyList.addTask(new Task("Item4","T"));
 
+        dummyUi.printText(dummyList.printList());
         Command c = parser.parse("mark 4", dummyList);
         assertEquals(false, c instanceof UnmarkCommand);
         assertEquals(true, c instanceof MarkCommand);
