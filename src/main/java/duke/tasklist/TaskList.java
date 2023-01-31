@@ -101,7 +101,7 @@ public class TaskList {
      * Deletes a Task from the list of Tasks.
      *
      * @param taskNumber The number to indicate which Task is to be deleted.
-     * @throws DukeException
+     * @throws DukeException When the task number given is not valid.
      */
     public void deleteTask(int taskNumber) throws DukeException {
         boolean isValidTaskNumber =
