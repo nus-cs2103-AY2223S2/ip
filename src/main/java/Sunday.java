@@ -8,7 +8,7 @@ public class Sunday {
     public Sunday(String filepath) {
         this.ui = new Ui();
         try {
-            Command.INITIALIZE.execute("data/sunday.txt");
+            Command.INITIALIZE.execute(filepath);
         } catch (SundayException e) {
             Ui.printException(e);
         }
@@ -28,6 +28,6 @@ public class Sunday {
         this.ui.close();
     }
     public static void main(String[] args) {
-        new Sunday("data/sunday.txt").run();
+        new Sunday("../data/sunday.txt").run();
     }
 }

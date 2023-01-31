@@ -5,12 +5,23 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Storage {
-    private static String filepath = "../data/sunday.txt";
+    private static String getFilepath() throws IOException {
+        Path dataDir = Paths.get(System.getProperty("user.dir"), "data");
+        if (!Files.exists(dataDir)) {
+            Files.createDirectory(dataDir);
+        }
+        Path saveFilepath = Paths.get(dataDir.toString(), "sunday.txt");
+        return saveFilepath.toString();
+    }
     public static boolean createDataFile() throws SundayException {
         try {
+            String filepath = getFilepath();
             File dataFile = new File(filepath);
             return dataFile.createNewFile();
         } catch (IOException e) {
@@ -20,6 +31,7 @@ public class Storage {
     }
     public static void readFromDataFile() throws SundayException {
         try {
+            String filepath = getFilepath();
             File dataFile = new File(filepath);
             Scanner reader = new Scanner(dataFile);
             Ui.setDummyStream();
@@ -57,14 +69,15 @@ public class Storage {
             }
             Ui.setDefaultStream();
             reader.close();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             Ui.setDefaultStream();
             System.out.println(e.getMessage());
-            throw new SundayException("ERROR: Incorrect data file directory");
+            throw new SundayException("ERROR: Unable to read from data file");
         }
     }
     public static boolean writeToDataFile(String line) throws SundayException {
         try {
+            String filepath = getFilepath();
             FileWriter myWriter = new FileWriter(filepath);
             myWriter.write(line);
             myWriter.close();
