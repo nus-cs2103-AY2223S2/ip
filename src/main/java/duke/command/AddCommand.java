@@ -19,6 +19,11 @@ public class AddCommand extends Command {
 
     }
 
+    /**
+     * Executes the command by adding the given Task to the list of Tasks.
+     *
+     * @param taskList The TaskList object that manages the list of Tasks.
+     */
     @Override
     public void execute(TaskList taskList) {
         taskList.addTask(this.task, this.taskType);

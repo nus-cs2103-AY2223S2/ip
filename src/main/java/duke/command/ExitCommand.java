@@ -11,6 +11,11 @@ public class ExitCommand extends Command {
         super(true);
     }
 
+    /**
+     * Executes the command by signing off from the chatbot session.
+     *
+     * @param taskList The TaskList object that manages the list of Tasks.
+     */
     @Override
     public void execute(TaskList taskList) {
         System.out.println("Bye. Have a nice day!");
