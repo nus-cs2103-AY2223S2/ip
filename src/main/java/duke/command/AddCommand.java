@@ -42,7 +42,8 @@ public class AddCommand extends Command {
      * @param ui       responds to user input
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
         taskList.addItem(instruction.toString(), input);
+        return "Task has been added";
     }
 }

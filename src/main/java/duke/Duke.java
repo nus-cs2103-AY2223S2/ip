@@ -30,44 +30,31 @@ public class Duke {
     }
 
     /**
-     * Represents main class of duke
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke("./data/duke.txt").userInputs();
-    }
-
-    /**
      * Allow users to add, mark and un-mark, delete, add task (to-do, deadline, event)
      * or show items in a list and will exit if the bye command is returned
      */
-    public void userInputs() {
-
-        this.ui.welcomeMessage();
+    public String userInputs(String input) {
+        Ui.welcomeMessage();
         this.storage.loadFileData();
-        boolean isExit = false;
 
-        while (!isExit) {
-            try {
-                String input = ui.readCommand();
-                ui.showLine();
-                Command c = this.parser.parse(input);
-                c.execute(tasks, storage, ui);
-                isExit = c.isExit();
-                this.storage.writeToFile();
+        try {
 
-            } catch (TaskException e) {
-                System.out.println(e.getMessage());
-            } catch (NullPointerException e) {
-                System.out.println("Object pointing to null, please check code");
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Check if the index is within the size of the array");
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Nothing to mark/unmark!");
-            } finally {
-                ui.showLine();
-            }
+            Command c = this.parser.parse(input);
+
+            boolean isExit = c.isExit();
+            this.storage.writeToFile();
+            return c.execute(tasks, storage, ui);
+
+        } catch (TaskException e) {
+            return e.getMessage();
+        } catch (NullPointerException e) {
+            return "Object pointing to null, please check code";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Check if the index is within the size of the array";
+        } catch (IndexOutOfBoundsException e) {
+            return "Nothing to mark/unmark!";
         }
+
     }
+
 }

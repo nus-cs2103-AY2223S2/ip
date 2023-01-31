@@ -14,8 +14,9 @@ public class TaskList {
 
     /**
      * Contains sets of task
+     *
      * @param storage stores data
-     * @param ui responds to user inputs
+     * @param ui      responds to user inputs
      */
     public TaskList(Storage storage, Ui ui) {
         this.storage = storage;
@@ -25,9 +26,8 @@ public class TaskList {
     /**
      * Prints list
      */
-    public void printList() {
-        this.ui.listMessage();
-        this.storage.displayList();
+    public String printList() {
+        return this.storage.displayList();
     }
 
     /**
@@ -35,8 +35,9 @@ public class TaskList {
      *
      * @param index items index in array list
      */
-    public void markItem(int index) {
+    public String markItem(int index) {
         this.storage.markListItem(index);
+        return "Task has been marked";
     }
 
     /**
@@ -44,8 +45,9 @@ public class TaskList {
      *
      * @param index items index in array list
      */
-    public void unmarkItem(int index) {
+    public String unmarkItem(int index) {
         this.storage.unmarkListItem(index);
+        return "Task has been unmarked";
     }
 
     /**
@@ -53,8 +55,9 @@ public class TaskList {
      *
      * @param index items index in array list
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         this.storage.deleteListItem(index);
+        return "Task has been deleted";
     }
 
     /**
@@ -113,7 +116,7 @@ public class TaskList {
      *
      * @param input to be entered by the users
      */
-    public void findItem(String input) {
-        this.storage.findListItem(input);
+    public String findItem(String input) {
+        return this.storage.findListItem(input);
     }
 }

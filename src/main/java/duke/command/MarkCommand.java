@@ -39,7 +39,8 @@ public class MarkCommand extends Command {
      * @throws TaskException displays error messages
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
-        taskList.markItem(index);
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
+
+        return taskList.markItem(index);
     }
 }

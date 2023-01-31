@@ -29,7 +29,7 @@ public class DefaultCommand extends Command {
      * @throws TaskException displays error messages
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) throws TaskException {
-        ui.error("default");
+    public String execute(TaskList taskList, Storage storage, Ui ui) throws TaskException {
+        return ui.error("default");
     }
 }

@@ -36,10 +36,12 @@ public class Storage {
     /**
      * Prints list items according to list index
      */
-    public void displayList() {
+    public String displayList() {
+        String printList = "";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(i + 1 + "." + list.get(i));
+            printList = printList + (i + 1 + "." + list.get(i));
         }
+        return ui.listMessage(printList);
     }
 
     /**
@@ -108,13 +110,14 @@ public class Storage {
      *
      * @param input to be entered by the user
      */
-    public void findListItem(String input) {
+    public String findListItem(String input) {
+        String itemNumber = "";
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).toString().contains(input)) {
-                System.out.println((i + 1) + ". " + list.get(i));
+                itemNumber += ((i + 1) + ". " + list.get(i));
             }
         }
-
+        return "Following are the results found from searching " + input + ": \n" + itemNumber;
     }
 
     //Code extracted from https://www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java

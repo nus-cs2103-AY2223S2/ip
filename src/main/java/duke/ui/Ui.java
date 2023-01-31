@@ -20,16 +20,14 @@ public class Ui {
     /**
      * Represents the start-up message
      */
-    public void welcomeMessage() {
+    public static String welcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        System.out.println("Hello I'm \n" + logo);
-
-        System.out.println("What can I do for you?\n");
+        return ("Hello I'm \n" + logo + "What can I do for you?\n");
     }
 
     /**
@@ -44,15 +42,15 @@ public class Ui {
     /**
      * Displays sentence used for bye command
      */
-    public void byeMessage() {
-        System.out.println("Oh no! Pls don't leave me.. I'm your ONLY friend.. Rmb?? :(");
+    public String byeMessage() {
+        return "Oh no! Pls don't leave me.. I'm your ONLY friend.. Rmb?? :(";
     }
 
     /**
      * Displays sentence used in list command
      */
-    public void listMessage() {
-        System.out.println("Take a look at ye DREAM goals for 2023");
+    public String listMessage(String input) {
+        return ("Take a look at ye DREAM goals for 2023") + input;
     }
 
     /**
@@ -70,7 +68,7 @@ public class Ui {
      * @param code read type of commands in String
      * @throws TaskException return a custom error message if there is such error
      */
-    public void error(String code) throws TaskException {
+    public String error(String code) throws TaskException {
         switch (code) {
         case "todo":
             throw new TaskException("Please enter an to-do item");
@@ -85,13 +83,6 @@ public class Ui {
             throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
 
         }
-    }
-
-    /**
-     * Displays line to break up each commands into segments
-     */
-    public void showLine() {
-        System.out.println("_________________________________________");
     }
 
 }

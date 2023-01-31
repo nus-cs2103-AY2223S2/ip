@@ -32,7 +32,7 @@ public class FindCommand extends Command {
      * @param ui       responds to user input
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
-        taskList.findItem(input);
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
+        return taskList.findItem(input);
     }
 }

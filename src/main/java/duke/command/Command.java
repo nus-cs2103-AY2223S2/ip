@@ -23,5 +23,5 @@ public abstract class Command {
      * @param ui       responds to user input
      * @throws TaskException displays error messages
      */
-    public abstract void execute(TaskList taskList, Storage storage, Ui ui) throws TaskException;
+    public abstract String execute(TaskList taskList, Storage storage, Ui ui) throws TaskException;
 }

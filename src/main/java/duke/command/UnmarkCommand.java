@@ -33,12 +33,14 @@ public class UnmarkCommand extends Command {
 
     /**
      * Unmarks task items
+     *
      * @param taskList arraylist that stores tasks
      * @param storage  stores data of tasks
      * @param ui       responds to user input
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
-        taskList.unmarkItem(index);
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
+
+        return taskList.unmarkItem(index);
     }
 }

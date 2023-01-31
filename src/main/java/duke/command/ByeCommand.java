@@ -27,8 +27,8 @@ public class ByeCommand extends Command {
      * @param ui       responds to user input
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
-        ui.byeMessage();
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
         storage.writeToFile();
+        return ui.byeMessage();
     }
 }

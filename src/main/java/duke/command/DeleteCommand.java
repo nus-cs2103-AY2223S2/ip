@@ -39,7 +39,8 @@ public class DeleteCommand extends Command {
      * @param ui       responds to user input
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
-        taskList.deleteTask(index);
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
+
+        return taskList.deleteTask(index);
     }
 }
