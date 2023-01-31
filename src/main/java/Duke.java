@@ -1,15 +1,16 @@
-import java.io.*;
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 public class Duke {
     public static void main(String[] args) throws FileNotFoundException {
         ArrayList<Task> storeTasks = getFileContents();
         Scanner sc = new Scanner(System.in);
         int numElem = storeTasks.size();
-        System.out.println(storeTasks);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -59,28 +60,38 @@ public class Duke {
                     if (commandToEcho.equals("deadline")) {
                         System.out.println("OOPS!!! The description of a deadline cannot be empty.");
                     } else {
-                        System.out.println("Got it. I've added this task:");
-                        String desc = getDesc(9, commandToEcho);
-                        String byWhen = getByWhen(commandToEcho);
-                        currentTask = new Deadline(desc, byWhen);
-                        storeTasks.add(currentTask);
-                        System.out.println(currentTask);
-                        numElem++;
-                        System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
+                        try {
+                            String desc = getDesc(9, commandToEcho);
+                            LocalDate byWhen = getByWhen(commandToEcho);
+                            currentTask = new Deadline(desc, byWhen);
+                            storeTasks.add(currentTask);
+                            System.out.println("Got it. I've added this task:");
+                            System.out.println(currentTask);
+                            numElem++;
+                            System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
+                        } catch (Exception e) {
+                        }
                     }
                 } else if (commandToEcho.length() >= 5 && commandToEcho.substring(0, 5).equals("event")) {
                     if (commandToEcho.equals("event")) {
                         System.out.println("OOPS!!! The description of an event cannot be empty.");
                     } else {
-                        System.out.println("Got it. I've added this task:");
-                        String desc = getDesc(6, commandToEcho);
-                        String from = getFrom(commandToEcho);
-                        String to = getTo(commandToEcho);
-                        currentTask = new Event(desc, from, to);
-                        storeTasks.add(currentTask);
-                        System.out.println(currentTask);
-                        numElem++;
-                        System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
+                        try {
+                            String desc = getDesc(6, commandToEcho);
+                            LocalDate from = getFrom(commandToEcho);
+                            LocalDate to = getTo(commandToEcho);
+                            if (to.isAfter(from)) {
+                                currentTask = new Event(desc, from, to);
+                                storeTasks.add(currentTask);
+                                System.out.println("Got it. I've added this task:");
+                                System.out.println(currentTask);
+                                numElem++;
+                                System.out.println(String.format("Now you have %d task(s) in the list.", numElem));
+                            } else {
+                                System.out.println("ERROR!! From date cannot be BEFORE To date!");
+                            }
+                        } catch (Exception e) {
+                        }
                     }
                 } else {
                     System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -130,66 +141,38 @@ public class Duke {
         }
         return desc;
     }
-    static String getByWhen(String commandToEcho) {
-        String byWhen = "";
-        int toMinus = 1;
-        char fromBack = commandToEcho.charAt(commandToEcho.length() - toMinus);
-        while (fromBack != ('/')) {
-            byWhen = fromBack + byWhen;
-            toMinus++;
-            fromBack = commandToEcho.charAt(commandToEcho.length() - toMinus);
+    static LocalDate getByWhen(String commandToEcho) throws DateTimeParseException {
+        String[] arrOfStr = commandToEcho.split("/by")[1].split(" ");
+        String strDate = arrOfStr[1];
+        try {
+            LocalDate date = LocalDate.parse(strDate);
+            return date;
+        } catch (DateTimeParseException e) {
+            System.out.println("INVALID DATE!!! Please enter date in YYYY/MM/DD format");
+            throw e;
         }
-        return byWhen;
     }
 
-    static String getFrom(String commandToEcho) {
-        String from = "";
-        int index = 0;
-        String req = "";
-        char front = commandToEcho.charAt(index);
-        while (front != ('/')) {
-            index++;
-            front = commandToEcho.charAt(index);
+    static LocalDate getFrom(String commandToEcho) throws DateTimeParseException {
+        String[] arrOfStr = commandToEcho.split("/from")[1].split(" ");
+        try {
+            LocalDate from = LocalDate.parse(arrOfStr[1]);
+            return from;
+        } catch (DateTimeParseException e) {
+            System.out.println("INVALID 'From' DATE!!! Please enter date in YYYY/MM/DD format");
+            throw e;
         }
-        while (!from.equals("/from ")) {
-            from = from + front;
-            index++;
-            front = commandToEcho.charAt(index);
-        }
-        while (front != ('/')) {
-            req = req + front;
-            index++;
-            front = commandToEcho.charAt(index);
-        }
-        return req;
     }
 
-    static String getTo(String commandToEcho) {
-        int commandSize = commandToEcho.length();
-        String from = "";
-        int index = 0;
-        String req = "";
-        char front = commandToEcho.charAt(index);
-        int numSlash=0;
-        while (front != ('/') || numSlash!=1) {
-            if(front == ('/')) {
-                numSlash++;
-            }
-            index++;
-            front = commandToEcho.charAt(index);
+    static LocalDate getTo(String commandToEcho) throws DateTimeParseException {
+        String[] arrOfStr = commandToEcho.split("/from")[1].split(" ");
+        try {
+            LocalDate to = LocalDate.parse((arrOfStr[3]));
+            return to;
+        } catch (DateTimeParseException e) {
+            System.out.println("INVALID 'To' DATE!!! Please enter date in YYYY/MM/DD format");
+            throw e;
         }
-        while (!from.equals("/to ")) {
-            from = from + front;
-            index++;
-            front = commandToEcho.charAt(index);
-        }
-        while (index < commandSize-1) {
-            req = req + front;
-            index++;
-            front = commandToEcho.charAt(index);
-        }
-        req = req + front;
-        return req;
     }
 
     private static ArrayList<Task> getFileContents() throws FileNotFoundException {
@@ -206,24 +189,24 @@ public class Duke {
         int numElem = 0;
         while (sc.hasNext()) {
             String currentLine = sc.nextLine();
-            String[] arrOfStr = currentLine.split("\\[");
-            char typeOfTask = arrOfStr[1].charAt(0);
-            char marker = arrOfStr[2].charAt(0);
+            String[] arrOfDetails = currentLine.split("\\|");
+            String type = arrOfDetails[0];
+            char marker = arrOfDetails[2].charAt(0);
             boolean isMarked = (marker=='X') ? true : false;
-            if (typeOfTask == 'T') {
-                String desc = arrOfStr[2].replace("]","");
-                storeTasks.add(new Todo(desc.substring(2)));
-            } else if (typeOfTask == 'D') {
-                String desc = arrOfStr[2].substring(3);
-                String byWhen = arrOfStr[3].replace("]","");
+            String desc = arrOfDetails[1];
+            switch (type) {
+            case "T":// T|desc|X
+                storeTasks.add(new Todo(desc));
+                break;
+            case "D": //D|desc|X|byWhen
+                LocalDate byWhen = LocalDate.parse(arrOfDetails[3]);
                 storeTasks.add(new Deadline(desc,byWhen));
-            } else if (typeOfTask == 'E') {
-                String desc = arrOfStr[2].substring(3);
-                String byWhen = arrOfStr[3].replace("]","");
-                String[] arrOfFromTo = byWhen.split(":");
-                String from = arrOfFromTo[1].split("to")[0].substring(1);
-                String to = arrOfFromTo[2].substring(1);
+                break;
+            case "E": //D|desc|X|from|to
+                LocalDate from = LocalDate.parse(arrOfDetails[3]);
+                LocalDate to = LocalDate.parse(arrOfDetails[4]);
                 storeTasks.add(new Event(desc,from,to));
+                break;
             }
             if (isMarked) {
                 storeTasks.get(numElem).markAsDone();
@@ -236,11 +219,26 @@ public class Duke {
     private static void saveTasks(ArrayList<Task> storeTasks) {
         try {
             FileWriter fw = new FileWriter("data/duke.txt");
-            fw.write(storeTasks.get(0).toString() + "\n");
+            fw.write("");
             fw.close();
             fw = new FileWriter("data/duke.txt", true);
-            for (int i = 1; i < storeTasks.size(); i++) {
-                fw.write(storeTasks.get(i).toString() + "\n");
+            for (Task t: storeTasks) {
+                String type = t.getType();
+                String content = "";
+                switch (type) {
+                case "T": // T|desc|X
+                    content = String.format("%s|%s|%s",t.getType(),t.getDesc(),t.getStatusIcon());
+                    break;
+                case "D": //D|desc|X|from
+                    Deadline deadlineTask = (Deadline) t;
+                    content = String.format("%s|%s|%s|%s",t.getType(),t.getDesc(),t.getStatusIcon(),deadlineTask.getByWhen());
+                    break;
+                case "E": //D|desc|X|from|to
+                    Event eventTask = (Event) t;
+                    content = String.format("%s|%s|%s|%s|%s",t.getType(),t.getDesc(),t.getStatusIcon(),eventTask.getFrom(),eventTask.getTo());
+                    break;
+                }
+                fw.write(content + "\n");
             }
             fw.close();
         } catch (IOException e) {
