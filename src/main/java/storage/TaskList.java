@@ -7,6 +7,11 @@ import task.ToDo;
 import exception.DukeException;
 
 import java.util.ArrayList;
+
+/**
+ * Represents list of task. A <code>TaskList</code> object corresponds to
+ * the list of tasks that the user has recorded
+ */
 public class TaskList {
     private final ArrayList<Task> list;
 
@@ -22,16 +27,30 @@ public class TaskList {
         return list;
     }
 
+    /**
+     * Prints tasks in the task list.
+     *
+     */
     public void list() {
         for (int i = 1; i <= list.size(); i++) {
             System.out.println(i + ": " + list.get(i - 1));
         }
     }
-
+    /**
+     * Adds a task to the task list.
+     *
+     * @param newTask Task to be added.
+     */
     public void add(Task newTask) {
         list.add(newTask);
 
     }
+
+    /**
+     * Converts a string into a task and adds it to the task list.
+     *
+     * @param input String to be converted to task, then added to task list.
+     */
     public void add(String input) {
         Task newTask;
         String[] inputs = input.split(" ");
@@ -117,27 +136,57 @@ public class TaskList {
         }
         list.add(newTask);
     }
-
+    /**
+     * Deletes the task from task list.
+     *
+     * @param num Index of the task to be deleted.
+     */
     public void delete(int num) {
         Task removed = list.remove(num - 1);
     }
 
+    /**
+     * Marks the task in task list as done.
+     *
+     * @param num Index of the task to be marked as done.
+     */
     public void mark(int num) {
         list.get(num - 1).mark();
     }
 
+    /**
+     * Marks the task in task list as undone.
+     *
+     * @param num Index of the task to be marked as undone.
+     */
     public void unmark(int num) {
         list.get(num - 1).unmark();
     }
 
+    /**
+     * Returns the number of tasks in task list.
+     *
+     * @return Size of task list.
+     */
     public int size() {
         return list.size();
     }
 
+    /**
+     * Returns the task with the specified index in task list.
+     *
+     * @param num Index of the task to be returned.
+     * @return Task at index num.
+     */
     public Task get(int num) {
         return list.get(num - 1);
     }
 
+    /**
+     * Returns the last task in task list.
+     *
+     * @return Task at end of task list.
+     */
     public Task getLast() {
         return list.get(list.size() - 1);
     }

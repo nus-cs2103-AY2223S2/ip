@@ -1,10 +1,15 @@
 package parser;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 public class Parser {
     private final static String[] VALID_COMMANDS = {"mark", "unmark", "list", "delete", "bye", "todo", "event", "deadline"};
 
+    /**
+     * Returns a boolean stating if the command is valid.
+     *
+     * @param input Command to check.
+     * @return True if command is valid, False otherwise.
+     */
     public boolean isValidCommand(String input) {
         return Arrays.asList(VALID_COMMANDS).contains(input.split(" ")[0]);
     }
