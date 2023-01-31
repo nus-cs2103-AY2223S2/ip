@@ -1,5 +1,6 @@
 package dukes.command;
 
+import dukes.util.DukeException;
 import dukes.util.TaskList;
 import dukes.util.UI;
 import dukes.util.Storage;
@@ -30,8 +31,12 @@ public class ExitCommand extends Command {
      * @param storage handles the loading and saving of files.
      * @throws DukeException if the index provided is out of bounds.
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         // do nothing
+    }
+
+    public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {
+        return "Gooodbye, wish you a nice day!";
     }
 
 }

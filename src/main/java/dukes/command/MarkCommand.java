@@ -59,4 +59,21 @@ public class MarkCommand extends Command {
             throw new DukeException("You have entered an invalid index.");
         }
     }
+
+    public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {
+        List<Task> taskList = tasks.getTaskList();
+        int index = Integer.parseInt(body);
+        try {
+            Task theTask = taskList.get(index - 1);
+            if (this.action == 0) {
+                theTask.setDone();
+            } else {
+                theTask.setUnDone();
+            }
+            storage.save(tasks);
+            return ui.returnMark(theTask, action);
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException("You have entered an invalid index.");
+        }
+    }
 }

@@ -93,6 +93,16 @@ public class UI {
                 " tasks in the list.");
     }
 
+    public static String returnAdd(Task theTask, TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(WORD_ADD).append("\n");
+        sb.append(theTask.toString()).append("\n");
+        int numTask = tasks.getTaskList().size();
+        sb.append("Now you have " + numTask +
+                " tasks in the list.");
+        return sb.toString();
+    }
+
     /**
      * Display success message when user delete tasks from list.
      *
@@ -105,6 +115,16 @@ public class UI {
         int numTask = tasks.getTaskList().size();
         System.out.println("Now you have " + numTask +
                 " tasks in the list.");
+    }
+
+    public static String returnDelete(Task theTask, TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(WORD_DELETE).append("\n");
+        sb.append(theTask.toString()).append("\n");
+        int numTask = tasks.getTaskList().size();
+        sb.append("Now you have " + numTask +
+                " tasks in the list.");
+        return sb.toString();
     }
 
     /**
@@ -123,6 +143,18 @@ public class UI {
         System.out.println(str);
     }
 
+    public static String returnList(String str, int action) {
+        StringBuilder sb = new StringBuilder();
+        if (action == 0) {
+            sb.append(WORD_LIST);
+        } else {
+            sb.append(WORD_SEARCH);
+        }
+        sb.append("\n");
+        sb.append(str);
+        return sb.toString();
+    }
+
     /**
      * Display success message when user mark a task as done or undone.
      *
@@ -138,6 +170,18 @@ public class UI {
         System.out.println(" " + theTask.toString());
     }
 
+    public static String returnMark(Task theTask, int action) {
+        StringBuilder sb = new StringBuilder();
+        if (action == 0) {
+            sb.append(WORD_MARK_DONE);
+        } else {
+            sb.append(WORD_MARK_UNDONE);
+        }
+        sb.append("\n");
+        sb.append(" " + theTask.toString());
+        return sb.toString();
+    }
+
     /**
      * Display success message when user find tasks based on specific pattern.
      * @param str
@@ -145,6 +189,10 @@ public class UI {
     public static void showFind(String str) {
         System.out.println(WORD_FIND);
         System.out.println(str);
+    }
+
+    public static String returnFind(String str) {
+        return WORD_FIND + "\n" + str;
     }
 
     /**

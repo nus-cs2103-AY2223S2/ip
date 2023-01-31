@@ -98,4 +98,42 @@ public class ListCommand extends Command {
             ui.showList(sb.toString(), 1);
         }
     }
+
+    public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {
+        List<Task> taskList = tasks.getTaskList();
+        if (action == 0) { // just list
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < taskList.size(); i++) {
+                sb.append(i+1).append(". ");
+                sb.append(taskList.get(i).toString()).append("\n");
+            }
+            if (sb.length() != 0) {
+                sb.deleteCharAt(sb.length() - 1);
+            }
+            return ui.returnList(sb.toString(), 0);
+        } else { // search
+            StringBuilder sb = new StringBuilder();
+            int counter = 0;
+            for (int i = 0; i < taskList.size(); i++) {
+                Task theTask = taskList.get(i);
+                if (theTask.getTag().equals("D") &&
+                        theTask.getDeadLine().equals(date)) {
+                    counter += 1;
+                    sb.append(counter).append(". ");
+                    sb.append(theTask.toString()).append("\n");
+                } else if (theTask.getTag().equals("E") &&
+                        (theTask.getStart().isBefore(date) || theTask.getStart().equals(date)) &&
+                        (theTask.getEnd().isAfter(date) || theTask.getEnd().equals(date))) {
+                    // begin < theDate, end > theDate
+                    counter += 1;
+                    sb.append(counter).append(". ");
+                    sb.append(theTask.toString()).append("\n");
+                }
+            }
+            if (sb.length() != 0) {
+                sb.deleteCharAt(sb.length() - 1);
+            }
+            return ui.returnList(sb.toString(), 1);
+        }
+    }
 }

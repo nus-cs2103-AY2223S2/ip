@@ -12,15 +12,11 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
 /**
  * The main driver class of Duke software.
  */
-public class Duke extends Application {
+//public class Duke extends Application {
+public class Duke {
 
     /** Handles loading and saving information to hard disk. */
     private Storage storage;
@@ -30,11 +26,14 @@ public class Duke extends Application {
     private Parser parser;
     /** Handles interactions with user. */
     private UI ui;
+    public static final String DEFAULT_PATH = "data/tasks.txt";
 
-    // public Duke() {}
-    // When JavaFX build the Application, "Application.launch(Duke.class, args)",
+    // When JavaFX builds the Application, "Application.launch(Duke.class, args)",
     // it is actually trying to create Duke().
     // But if your code does not have this constructor, it will fail.
+    public Duke() {
+        this(DEFAULT_PATH);
+    }
 
     /**
      * Constructor of Duke class.
@@ -79,6 +78,15 @@ public class Duke extends Application {
         sc.close();
     }
 
+    public String getResponse(String fullCommand) {
+        try {
+            Command c = parser.parse(fullCommand);
+            return c.runCommand(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
     /**
      * Main driver of the Duke engine.
      *
@@ -88,13 +96,13 @@ public class Duke extends Application {
         new Duke("data/tasks.txt").run();
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!");
-        Scene scene = new Scene(helloWorld);
-
-        stage.setScene(scene);
-        stage.show();
-    }
+//    @Override
+//    public void start(Stage stage) {
+//        Label helloWorld = new Label("Hello World!");
+//        Scene scene = new Scene(helloWorld);
+//
+//        stage.setScene(scene);
+//        stage.show();
+//    }
 
 }

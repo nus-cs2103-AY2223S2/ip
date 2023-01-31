@@ -47,6 +47,8 @@ public abstract class Command {
     // static method cannot be abstract
     // if child method wants to throw exception, parent method must also do
 
+    public abstract String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException;
+
     public boolean isExit() {
         return this.isExit;
     }

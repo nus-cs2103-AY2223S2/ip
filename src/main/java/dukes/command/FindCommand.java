@@ -48,4 +48,17 @@ public class FindCommand extends Command {
         }
         ui.showFind(sb.toString());
     }
+
+    public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {
+        List<Task> findList = tasks.searchTaskList(this.body);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < findList.size(); i++) {
+            sb.append(i+1).append(". ");
+            sb.append(findList.get(i).toString()).append("\n");
+        }
+        if (sb.length() != 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return ui.returnFind(sb.toString());
+    }
 }

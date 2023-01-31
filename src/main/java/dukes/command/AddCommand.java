@@ -110,4 +110,20 @@ public class AddCommand extends Command {
         ui.showAdd(theTask, tasks);
         storage.save(tasks);
     }
+
+    public String runCommand(TaskList tasks, UI ui, Storage storage) throws DukeException {
+        List<Task> taskList = tasks.getTaskList();
+        Task theTask;
+        if (this.taskTag.equals("T")) {
+            // here body is just taskName
+            theTask = new ToDo(this.body);
+        } else if (this.taskTag.equals("D")) {
+            theTask = new DeadLine(this.body, this.deadline);
+        } else {
+            theTask = new Event(this.body, this.start, this.end);
+        }
+        taskList.add(theTask);
+        storage.save(tasks);
+        return ui.returnAdd(theTask, tasks);
+    }
 }
