@@ -1,4 +1,10 @@
+package clippy.command;
+
 import java.time.LocalDate;
+import clippy.storage.Storage;
+import clippy.task.Event;
+import clippy.task.TaskList;
+import clippy.ui.Ui;
 
 public class AddEventCommand extends AddCommand {
     private String description;

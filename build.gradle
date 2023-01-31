@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClassName = "Clippy"
+    mainClassName = "clippy.Clippy"
 }
 
 shadowJar {

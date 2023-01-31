@@ -1,3 +1,5 @@
+package clippy.exception;
+
 public class ClippyException extends Exception {
     String msg;
     public ClippyException(String msg) {

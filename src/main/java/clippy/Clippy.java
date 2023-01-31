@@ -1,3 +1,12 @@
+package clippy;
+
+import clippy.command.Command;
+import clippy.command.Parser;
+import clippy.exception.ClippyException;
+import clippy.storage.Storage;
+import clippy.task.TaskList;
+import clippy.ui.Ui;
+
 public class Clippy {
     private static final String logo = "   _____  _  _                      \n" +
             "  / ____|| |(_)                     \n" +

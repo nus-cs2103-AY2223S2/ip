@@ -1,3 +1,8 @@
+package clippy.command;
+
+import clippy.task.TaskList;
+import clippy.ui.Ui;
+
 public abstract class AddCommand extends Command {
 
     protected void printCreatedTaskStatus(TaskList taskList, Ui ui) {

@@ -1,3 +1,5 @@
+package clippy.command;
+
 public enum CommandType {
     TODO,
     DEADLINE,

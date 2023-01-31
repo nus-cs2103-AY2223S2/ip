@@ -1,4 +1,10 @@
+package clippy.command;
+
 import java.time.LocalDate;
+import clippy.storage.Storage;
+import clippy.task.Deadline;
+import clippy.task.TaskList;
+import clippy.ui.Ui;
 
 public class AddDeadlineCommand extends AddCommand {
     private String description;

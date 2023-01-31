@@ -1,3 +1,7 @@
+package clippy.storage;
+
+import clippy.task.Task;
+import clippy.ui.Ui;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -62,7 +66,7 @@ public class Storage {
             FileWriter saveFileWriter = new FileWriter(saveFile, false);
             for (int i = 0; i < tasks.size(); i++) {
                 saveFileWriter.write(tasks.get(i).getCsvString());
-                // add line separator if not last Task in `tasks`
+                // add line separator if not last clippy.task.Task in `tasks`
                 if (i < tasks.size() - 1) {
                     saveFileWriter.write(System.lineSeparator());
                 }
