@@ -33,6 +33,7 @@ public class Storage {
             Scanner in = new Scanner(Paths.get("data", "duke.txt"));
             while (in.hasNextLine()) {
                 String line = in.nextLine();
+                assert line != null : "Line is null";
                 parse_data(line, taskList);
             }
         } catch (IOException e) {

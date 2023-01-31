@@ -65,6 +65,7 @@ public class Duke {
         String response;
         try {
             response = Parser.parse(input, taskList, ui);
+            assert response != null : "Response is null";
             storage.writeToData(taskList.itemsToData());
             return response;
         } catch (Exception e) {
