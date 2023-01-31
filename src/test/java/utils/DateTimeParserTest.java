@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import membot.utils.DateTimeParser;
+
 public class DateTimeParserTest {
     @Test
     public void parseTest() {

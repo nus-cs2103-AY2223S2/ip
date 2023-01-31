@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import membot.utils.InputValidator;
+import membot.utils.InvalidCommandException;
+
 public class InputValidatorTest {
     @Test
     public void isCheckInputValidTest() {
