@@ -1,4 +1,12 @@
+package duke;
+
 import java.util.Scanner;
+
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.parser.Parser;
+import duke.exception.DukeException;
 
 public class Duke {
 

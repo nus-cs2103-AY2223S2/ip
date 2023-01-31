@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -6,6 +8,13 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.exception.DukeStorageException;
+
 
 public class Storage {
     private static final Path dataPath = Paths.get("data");
