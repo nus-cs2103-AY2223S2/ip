@@ -1,17 +1,13 @@
 package duke.task;
 
-/**
- * class that represents tasks created by the user, can be marked as done or undone
- */
 public class Task {
+    /**
+     * @param name: a string indicating the name of the task
+     * @param status: a boolean indicating whether the task is done or not
+     */
     protected String name;
     protected String status;
 
-    /**
-     * Constructor
-     * @param name the name of the task
-     * @param status a number that indicates the task is done if it is 1
-     */
     public Task(String name, int status) {
         this.name = name;
         if (status == 1) {
@@ -20,24 +16,27 @@ public class Task {
             this.status = "[ ]";
         }
     }
-
+    /**
+     * overrides the toString method
+     */
+    public String toString() {
+        return "." + status + " " + name;
+    }
     /**
      * method to update a task as done.
+     * @return a new duke.task.Task with status being true
      */
     public void mark() {
         this.status = "[X]";
     }
     /**
      * method to update a task as undone
+     * @return a new duke.task.Task with status being false
      */
     public void unmark() {
         this.status = "[ ]";
     }
 
-    /**
-     * a method that helps with updating local hard disk
-     * @return a Strnig to be written to the local hard disk
-     */
     public String toStoreFormatString() {
         return "";
     }
