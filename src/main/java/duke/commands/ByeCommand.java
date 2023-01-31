@@ -1,7 +1,7 @@
 package duke.commands;
 
 import duke.database.Database;
-import duke.exception.DatabaseExceptions.DatabaseNotUpdatingException;
+import duke.exception.databaseexceptions.DatabaseNotUpdatingException;
 import duke.exception.DukeException;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;

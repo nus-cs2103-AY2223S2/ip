@@ -1,4 +1,4 @@
-package duke.exception.IncludeExceptions;
+package duke.exception.includeexceptions;
 
 public class IncludeByException extends IncludeException {
     public IncludeByException () {

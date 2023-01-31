@@ -1,11 +1,13 @@
 package duke.parser;
 
 import duke.commands.*;
-import duke.exception.BlankFieldExceptions.BlankFieldDeadlineException;
-import duke.exception.BlankFieldExceptions.BlankFieldEventException;
-import duke.exception.BlankFieldExceptions.BlankFieldTodoException;
+import duke.exception.blankfieldexceptions.BlankFieldDeadlineException;
+import duke.exception.blankfieldexceptions.BlankFieldEventException;
+import duke.exception.blankfieldexceptions.BlankFieldTodoException;
+import duke.exception.DukeException;
 import duke.exception.TaskNumberNotFoundException;
 import duke.exception.UnknownCommandError;
+import duke.exception.parserexceptions.ParserException;
 
 import java.util.Objects;
 
@@ -17,7 +19,7 @@ public class Parser {
 
     }
 
-    public Command parse(String command, int lengthOfList) throws BlankFieldEventException, BlankFieldDeadlineException, BlankFieldTodoException, TaskNumberNotFoundException, UnknownCommandError {
+    public Command parse(String command, int lengthOfList) throws DukeException {
         if (Objects.equals(command, "list")) {
             return new ListCommand();
         } else if (Objects.equals(command, "bye")) {
@@ -28,7 +30,7 @@ public class Parser {
         String[] words = command.split(" ", 2);
 
         if (words.length <= 1) {
-            throw new BlankFieldEventException();
+            throw new ParserException();
         }
 
         String keyWord = words[0];

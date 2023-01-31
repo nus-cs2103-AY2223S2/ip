@@ -2,7 +2,7 @@ package duke.database;
 
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.exception.DatabaseExceptions.DatabaseNotLoadingException;
+import duke.exception.databaseexceptions.DatabaseNotLoadingException;
 import duke.task.Task;
 import duke.task.ToDo;
 

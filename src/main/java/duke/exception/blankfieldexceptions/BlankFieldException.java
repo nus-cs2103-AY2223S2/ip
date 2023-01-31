@@ -1,4 +1,4 @@
-package duke.exception.BlankFieldExceptions;
+package duke.exception.blankfieldexceptions;
 
 import duke.exception.DukeException;
 

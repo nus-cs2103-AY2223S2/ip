@@ -1,4 +1,4 @@
-package duke.exception.BlankFieldExceptions;
+package duke.exception.blankfieldexceptions;
 
 public class BlankFieldEventException extends BlankFieldException {
     public BlankFieldEventException() {

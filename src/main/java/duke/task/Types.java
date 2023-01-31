@@ -1,4 +1,4 @@
-package DukeBot;
+package duke.task;
 
 public enum Types {
     TODO("T"),

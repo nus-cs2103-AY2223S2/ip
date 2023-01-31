@@ -2,8 +2,8 @@ package duke.commands;
 
 import duke.database.Database;
 import duke.task.Event;
-import duke.exception.BlankFieldExceptions.BlankFieldEventException;
-import duke.exception.IncludeExceptions.IncludeToAndFromException;
+import duke.exception.blankfieldexceptions.BlankFieldEventException;
+import duke.exception.includeexceptions.IncludeToAndFromException;
 import duke.exception.InvalidDateException;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;

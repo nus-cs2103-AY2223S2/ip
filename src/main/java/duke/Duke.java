@@ -30,7 +30,7 @@ public class Duke {
 
     public void run() {
         System.out.println(FRAME +
-                "     Hello! I'm duke.Duke\n" +
+                "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
                 FRAME);
         while (this.isActive && this.ui.hasNextCommand()) {

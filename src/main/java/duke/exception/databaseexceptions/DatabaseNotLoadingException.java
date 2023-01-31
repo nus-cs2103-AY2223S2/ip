@@ -1,13 +1,13 @@
-package duke.exception.DatabaseExceptions;
+package duke.exception.databaseexceptions;
 
 import duke.exception.DukeException;
 
-public class DatabaseNotUpdatingException extends DukeException {
+public class DatabaseNotLoadingException extends DukeException {
 
-    public DatabaseNotUpdatingException() {
+    public DatabaseNotLoadingException() {
         super("\n" + "    ____________________________________________________________\n" +
                 "Oh dear, it seems something went wrong with the Database." + "\n" +
-                "Try updating it again" + "\n" +
+                "Creating an empty one for now" + "\n" +
                 "    ____________________________________________________________\n");
     }
 }

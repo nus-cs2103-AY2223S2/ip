@@ -1,4 +1,4 @@
-package duke.exception.IncludeExceptions;
+package duke.exception.includeexceptions;
 
 import duke.exception.DukeException;
 
