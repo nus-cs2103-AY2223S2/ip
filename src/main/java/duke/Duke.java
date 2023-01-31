@@ -5,12 +5,6 @@ import task.TaskList;
 import java.io.IOException;
 
 public class Duke {
-//    public static String projName = " ____        _        \n"
-//                                    + "|  _ \\ _   _| | _____ \n"
-//                                    + "| | | | | | | |/ / _ \\\n"
-//                                    + "| |_| | |_| |   <  __/\n"
-//                                    + "|____/ \\__,_|_|\\_\\___|\n";
-//    ArrayList<task.Task> tasks = new ArrayList<>();
     private final static String SAVED_PATH = "data/tasks.txt";
     private Ui ui;
     private Storage storage;
