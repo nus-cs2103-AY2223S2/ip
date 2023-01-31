@@ -1,15 +1,12 @@
-import javax.swing.text.html.HTMLDocument;
-import java.awt.*;
+package Duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 /**
- *Duke is a program that help user track list of tasks, it can take in todos, deadline and events tasks and allow
+ *Duke.Duke is a program that help user track list of tasks, it can take in todos, deadline and events tasks and allow
  *users to mark tasks as done or undone and delete the task.
  */
 public class Duke {
@@ -56,7 +53,7 @@ public class Duke {
                             storage.update_data(arrayList);
                             System.out.println("Now you have " + (arrayList.size()) + " tasks in the list");
                         } catch (IndexOutOfBoundsException err1){
-                            String err_msg = "☹ OOPS!!! Please the Task number that you have keyed in is invalid.";
+                            String err_msg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
                             System.out.println(err_msg);
                         } catch (NumberFormatException err2) {
                             String err_msg = "☹ OOPS!!! Please key in a valid Number.";
@@ -73,7 +70,7 @@ public class Duke {
                             storage.update_data(arrayList);
                             System.out.println(curr_task.getStatusIcon() + " " + curr_task.getDes());
                         } catch (IndexOutOfBoundsException err1) {
-                            String err_msg = "☹ OOPS!!! Please the Task number that you have keyed in is invalid.";
+                            String err_msg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
                             System.out.println(err_msg);
                         } catch (NumberFormatException err2) {
                             String err_msg = "☹ OOPS!!! Please key in a valid Number.";
@@ -90,7 +87,7 @@ public class Duke {
                             storage.update_data(arrayList);
                             System.out.println(curr_task.getStatusIcon() + " " + curr_task.getDes());
                         } catch (IndexOutOfBoundsException err1){
-                            String err_msg = "☹ OOPS!!! Please the Task number that you have keyed in is invalid.";
+                            String err_msg = "☹ OOPS!!! Please the Duke.Task number that you have keyed in is invalid.";
                             System.out.println(err_msg);
                         } catch (NumberFormatException err2) {
                             String err_msg = "☹ OOPS!!! Please key in a valid Number.";
@@ -126,7 +123,7 @@ public class Duke {
                         } catch (DateTimeParseException e) {
                             String err_msg = "☹ OOPS!!! The description or date of a deadline is wrong, plase key in the" +
                                     "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
-                                    + "You may key in: deadline hw1 /2001-02-10, Duke will record your deadline for hw1 as" +
+                                    + "You may key in: deadline hw1 /2001-02-10, Duke.Duke will record your deadline for hw1 as" +
                                     "2001-02-10";
                             throw new DukeException(err_msg);
                         }
@@ -157,7 +154,7 @@ public class Duke {
                         } catch (DateTimeParseException e) {
                             String err_msg = "☹ OOPS!!! The description or date for the event is wrong, plase key in the" +
                                     "date in the format of yyyy-mm-dd, eg. 2001-02-10\n"
-                                    + "You may key in: event hw1 /2001-02-10 /2001-02-12, Duke will record your event hw1 as" +
+                                    + "You may key in: event hw1 /2001-02-10 /2001-02-12, Duke.Duke will record your event hw1 as" +
                                     "from 2001-02-10 to 2001-02-12";
                             throw new DukeException(err_msg);
                         }

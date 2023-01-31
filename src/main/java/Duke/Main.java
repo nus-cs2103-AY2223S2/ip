@@ -1,3 +1,5 @@
+package Duke;
+
 import java.util.Arrays;
 
 public class Main {

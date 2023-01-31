@@ -1,3 +1,5 @@
+package Duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -25,7 +27,7 @@ public class Event extends Task{
 
     @Override
     public String getType() {
-        return "Event";
+        return "Duke.Event";
     }
 
     @Override

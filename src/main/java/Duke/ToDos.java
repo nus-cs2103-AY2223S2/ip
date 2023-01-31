@@ -1,3 +1,5 @@
+package Duke;
+
 public class ToDos extends Task{
     protected String by;
     private int isDone;

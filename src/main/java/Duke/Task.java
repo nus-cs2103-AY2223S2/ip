@@ -1,3 +1,5 @@
+package Duke;
+
 public class Task {
     protected String description;
     private int isDone;
@@ -8,7 +10,7 @@ public class Task {
     }
 
     public String getType(){
-        return "Task";
+        return "Duke.Task";
     }
 
     public String getDes(){

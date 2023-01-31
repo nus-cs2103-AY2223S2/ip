@@ -1,6 +1,7 @@
+package Duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Deadline extends Task{
     private int isDone;
@@ -29,7 +30,7 @@ public class Deadline extends Task{
     @Override
 
     public String getType() {
-        return "Deadline";
+        return "Duke.Deadline";
     }
 
     @Override
