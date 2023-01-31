@@ -13,7 +13,7 @@ public class ByeCmd extends Command {
         super(taskList, lineInput);
     }
 
-    public void execute() throws CommandExecutionError { 
+    public void execute() throws CommandExecutionError {
         Ui.shutDown();
         try {
             Storage.saveToFile(taskList);
@@ -21,7 +21,7 @@ public class ByeCmd extends Command {
             // Ui.showSavingError()
         }
     };
-    
+
     // Acknowlege on UI that Duke is exiting.
     public void uiReply() {
         Ui.displayMsg("Bye. Hope to see you again soon!");
