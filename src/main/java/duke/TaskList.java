@@ -5,7 +5,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import duke.ui.Ui;
+import duke.ui.UiController;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -112,7 +112,7 @@ public class TaskList {
      * @throws DukeException In the event that the name of the task is not specified, or the from and to date times are
      * not specified in the correct format with <code>/from</code> and <code>/to</code> tags.
      */
-    Task addEvent(String[] tokens, Ui ui) throws DukeException {
+    Task addEvent(String[] tokens, UiController ui) throws DukeException {
         StringBuilder sb = new StringBuilder();
         int idxFrom = Arrays.asList(tokens).indexOf("/from");
         int idxTo = Arrays.asList(tokens).indexOf("/to");
@@ -158,7 +158,7 @@ public class TaskList {
      * @param tokens <code>String[]</code> of arguments from <code>Parser</code>, specifying the index to mark.
      * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      */
-    Task markListItem(String[] tokens, Ui ui) throws DukeException {
+    Task markListItem(String[] tokens, UiController ui) throws DukeException {
         try {
             int listIndex = Integer.parseInt(tokens[1])-1;
             tasks.get(listIndex).setStatus("X");
@@ -175,7 +175,7 @@ public class TaskList {
      * @param tokens <code>String[]</code> of arguments from <code>Parser</code>, specifying the index to unmark.
      * @param ui Instance of <code>Ui</code> associated with the calling instance of <code>Duke</code>.
      */
-    Task unmarkListItem(String[] tokens, Ui ui) throws DukeException {
+    Task unmarkListItem(String[] tokens, UiController ui) throws DukeException {
         try {
             int listIndex = Integer.parseInt(tokens[1]) - 1;
             tasks.get(listIndex).setStatus(" ");
@@ -194,7 +194,7 @@ public class TaskList {
      * @throws DukeException In the event that the specified list index is out of bounds, or the argument corresponding
      * to the deletion index is not an integer.
      */
-    Task deleteItem(String[] tokens, Ui ui) throws DukeException {
+    Task deleteItem(String[] tokens, UiController ui) throws DukeException {
         if (tokens.length != 2) {
             throw new DukeException("please specify delete command as delete [list index]");
         } else if (tasks.size() == 0) {
