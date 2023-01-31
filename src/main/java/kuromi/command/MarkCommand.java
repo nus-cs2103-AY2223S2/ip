@@ -1,9 +1,9 @@
-package duke.command;
+package kuromi.command;
 
-import duke.Storage;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.TaskList;
+import kuromi.Storage;
+import kuromi.Ui;
+import kuromi.task.Task;
+import kuromi.task.TaskList;
 
 /**
  * Mark task as done.

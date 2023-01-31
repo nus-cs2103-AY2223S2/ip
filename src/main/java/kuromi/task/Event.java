@@ -1,4 +1,4 @@
-package duke.task;
+package kuromi.task;
 
 /**
  * Event task represented by description, start date, and end date. Extends from Task class.

@@ -1,4 +1,4 @@
-package duke.task;
+package kuromi.task;
 
 /**
  * Todo task represented by description. Extends from Task class.

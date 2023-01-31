@@ -1,4 +1,4 @@
-package duke.task;
+package kuromi.task;
 
 import java.util.ArrayList;
 

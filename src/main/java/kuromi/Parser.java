@@ -1,18 +1,18 @@
-package duke;
+package kuromi;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.CommandType;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkCommand;
-import duke.command.UnmarkCommand;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
+import kuromi.command.AddCommand;
+import kuromi.command.Command;
+import kuromi.command.CommandType;
+import kuromi.command.DeleteCommand;
+import kuromi.command.ExitCommand;
+import kuromi.command.FindCommand;
+import kuromi.command.ListCommand;
+import kuromi.command.MarkCommand;
+import kuromi.command.UnmarkCommand;
+import kuromi.task.Deadline;
+import kuromi.task.Event;
+import kuromi.task.TaskList;
+import kuromi.task.Todo;
 
 /**
  * Parser class parses the full user's input to understand what command the user has typed.
@@ -27,9 +27,9 @@ public class Parser {
      * @param ui UI of the current session.
      * @param tasks Tasks for the current session.
      * @return Command Type.
-     * @throws DukeException If user input is incomplete.
+     * @throws KuromiException If user input is incomplete.
      */
-    public static Command parse(String inp, Ui ui, TaskList tasks) throws DukeException {
+    public static Command parse(String inp, Ui ui, TaskList tasks) throws KuromiException {
         String[] temp = inp.split(" ");
         CommandType c;
         boolean isExist = false;
@@ -40,7 +40,7 @@ public class Parser {
             }
         }
         if (!isExist) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new KuromiException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         c = CommandType.valueOf(temp[0]);
         Command cur = new ExitCommand();
@@ -62,28 +62,28 @@ public class Parser {
                     }
                 }
                 if (keyword.equals("")) {
-                    throw new DukeException("☹ OOPS!!! The keyword cannot be empty.");
+                    throw new KuromiException("☹ OOPS!!! The keyword cannot be empty.");
                 }
                 cur = new FindCommand(keyword);
                 break;
             case mark:
                 int idx = Integer.parseInt(temp[1]);
                 if (idx > tasks.size()) {
-                    throw new DukeException("☹ OOPS!!! The index does not exist.");
+                    throw new KuromiException("☹ OOPS!!! The index does not exist.");
                 }
                 cur = new MarkCommand(idx);
                 break;
             case unmark:
                 int idx2 = Integer.parseInt(temp[1]);
                 if (idx2 > tasks.size()) {
-                    throw new DukeException("☹ OOPS!!! The index does not exist.");
+                    throw new KuromiException("☹ OOPS!!! The index does not exist.");
                 }
                 cur = new UnmarkCommand(idx2);
                 break;
             case delete:
                 int idx3 = Integer.parseInt(temp[1]);
                 if (idx3 > tasks.size()) {
-                    throw new DukeException("☹ OOPS!!! The index does not exist.");
+                    throw new KuromiException("☹ OOPS!!! The index does not exist.");
                 }
                 cur = new DeleteCommand(idx3);
                 return cur;
@@ -96,7 +96,7 @@ public class Parser {
                     }
                 }
                 if (desc.equals("")) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new KuromiException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
                 cur = new AddCommand(new Todo(desc));
                 break;
@@ -114,7 +114,7 @@ public class Parser {
                     }
                 }
                 if (desc2.equals("")) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    throw new KuromiException("☹ OOPS!!! The description of a deadline cannot be empty.");
                 }
                 String by = "";
                 for (int i = counter; i < temp.length; i++) {
@@ -125,7 +125,7 @@ public class Parser {
                     }
                 }
                 if (by.equals("")) {
-                    throw new DukeException("☹ OOPS!!! The deadline of a deadline cannot be empty.");
+                    throw new KuromiException("☹ OOPS!!! The deadline of a deadline cannot be empty.");
                 }
                 cur = new AddCommand(new Deadline(desc2, by));
                 break;
@@ -143,7 +143,7 @@ public class Parser {
                     }
                 }
                 if (desc3.equals("")) {
-                    throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                    throw new KuromiException("☹ OOPS!!! The description of an event cannot be empty.");
                 }
                 String from = "";
                 int counter3 = temp.length;
@@ -158,7 +158,7 @@ public class Parser {
                     }
                 }
                 if (from.equals("")) {
-                    throw new DukeException("☹ OOPS!!! The start date of a deadline cannot be empty.");
+                    throw new KuromiException("☹ OOPS!!! The start date of a deadline cannot be empty.");
                 }
                 String by2 = "";
                 for (int i = counter3; i < temp.length; i++) {
@@ -169,14 +169,14 @@ public class Parser {
                 }
                 cur = new AddCommand(new Event(desc3, by2, from));
                 if (by2.equals("")) {
-                    throw new DukeException("☹ OOPS!!! The end date of a deadline cannot be empty.");
+                    throw new KuromiException("☹ OOPS!!! The end date of a deadline cannot be empty.");
                 }
                 break;
             default:
-                throw new DukeException("");
+                throw new KuromiException("");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The index cannot be empty.");
+            throw new KuromiException("☹ OOPS!!! The index cannot be empty.");
         }
 
         return cur;

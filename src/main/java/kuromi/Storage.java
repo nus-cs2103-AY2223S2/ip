@@ -1,4 +1,4 @@
-package duke;
+package kuromi;
 
 import static java.lang.Boolean.parseBoolean;
 
@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
+import kuromi.task.Deadline;
+import kuromi.task.Event;
+import kuromi.task.Task;
+import kuromi.task.TaskList;
+import kuromi.task.Todo;
 
 /**
  * Read data from the file in the hard disk and store data to the same file if there are any updates to the
@@ -37,9 +37,9 @@ public class Storage {
      * Loads the data that is stored in the file.
      *
      * @return ArrayList of Tasks from the file.
-     * @throws DukeException If file not found.
+     * @throws KuromiException If file not found.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws KuromiException {
         try {
             Scanner scanner = new Scanner(filePath.toFile());
             ArrayList<Task> tasks = new ArrayList<Task>();
@@ -56,7 +56,7 @@ public class Storage {
             }
             return tasks;
         } catch (FileNotFoundException e) {
-            throw new DukeException("Loading Error\n");
+            throw new KuromiException("Loading Error\n");
         }
     }
 

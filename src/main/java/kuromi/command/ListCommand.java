@@ -1,8 +1,8 @@
-package duke.command;
+package kuromi.command;
 
-import duke.Storage;
-import duke.Ui;
-import duke.task.TaskList;
+import kuromi.Storage;
+import kuromi.Ui;
+import kuromi.task.TaskList;
 
 /**
  * Command to list the tasks in the task list.

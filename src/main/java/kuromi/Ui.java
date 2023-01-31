@@ -1,4 +1,4 @@
-package duke;
+package kuromi;
 
 import java.util.Scanner;
 
@@ -51,7 +51,7 @@ public class Ui {
      */
     public void showWelcome() {
         this.showLine();
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Kuromi\nWhat can I do for you?");
         this.showLine();
         this.showEnter();
     }
