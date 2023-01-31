@@ -1,4 +1,4 @@
-package dukeexceptions;
+package duke.dukeexceptions;
 
 public class DukeExceptions extends RuntimeException {
     public DukeExceptions(String errorMessage) {

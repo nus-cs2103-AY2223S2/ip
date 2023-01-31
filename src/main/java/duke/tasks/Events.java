@@ -1,5 +1,5 @@
-package tasks;
-import dukeexceptions.DukeExceptions;
+package duke.tasks;
+import duke.dukeexceptions.DukeExceptions;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,8 +35,8 @@ public class Events extends Task {
         String completed = this.isDone? "1":"0";
         return this.tag + " | " + completed + " | "
                 + this.description
-                + " | " + this.from.format(DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mm a"))
-                + " - " + this.to.format(DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mm a"));
+                + " | " + this.from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+                + " - " + this.to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     @Override

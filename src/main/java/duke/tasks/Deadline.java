@@ -1,10 +1,10 @@
-package tasks;
+package duke.tasks;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import dukeexceptions.DukeExceptions;
+import duke.dukeexceptions.DukeExceptions;
 
 public class Deadline extends Task {
 
@@ -25,7 +25,7 @@ public class Deadline extends Task {
 
     public String saveTask() {
         String completed = this.isDone? "1":"0";
-        String formattedDate = by.format(DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mm a"));
+        String formattedDate = by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
         return this.tag + " | " + completed + " | "
                 + this.description + " | " + formattedDate;

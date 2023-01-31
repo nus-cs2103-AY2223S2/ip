@@ -1,9 +1,9 @@
-import dukeexceptions.MissingArgumentException;
-import dukeexceptions.UnknownCommandException;
-import tasks.Deadline;
-import tasks.Events;
-import tasks.Task;
-import tasks.ToDo;
+package duke.tasklist;
+import duke.dukeexceptions.MissingArgumentException;
+import duke.tasks.Deadline;
+import duke.tasks.Events;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 public class TaskList {
     protected Task[] list;
@@ -19,32 +19,26 @@ public class TaskList {
     }
 
     public void list(){
-        System.out.print("  ________________________________\n");
         System.out.print("  Here are the tasks in your list:\n");
         for(int i = 0; i < this.len ; i++){
             int index = i + 1;
             String item = "  " + index + ". " + list[i].toString();
             System.out.print(item);
         }
-        System.out.print("  ________________________________\n");
     }
 
     public void setDone(int index){
         this.list[index].setDone();
-        String reply = "  ________________________________\n"
-                + "  Nice! I've marked this task as done:\n"
-                + "    " + list[index].toString()
-                + "  ________________________________\n";
-        System.out.print(reply + "\n");
+        String reply = "  Nice! I've marked this task as done:\n"
+                + "    " + list[index].toString();
+        System.out.print(reply);
     }
 
     public void setNotDone(int index){
         this.list[index].setNotDone();
-        String reply = "  ________________________________\n"
-                + "  OK, I've marked this task as not done:\n"
-                + "    " + list[index].toString()
-                + "  ________________________________\n";
-        System.out.print(reply + "\n");
+        String reply = "  OK, I've marked this task as not done:\n"
+                + "    " + list[index].toString();
+        System.out.print(reply);
     }
 
     public void addToDo(String description) throws MissingArgumentException {
@@ -55,11 +49,9 @@ public class TaskList {
         this.list[len] = new ToDo(description);
         this.len++;
 
-        String reply = "  ________________________________\n"
-                + "  Got it. I've added this task:\n"
+        String reply = "Got it. I've added this task:\n"
                 + "    " + taskToString(len - 1)
-                + "  Now you have " + this.len + " tasks in the list.\n"
-                + "  ________________________________\n";
+                + "  Now you have " + this.len + " tasks in the list.\n";
         System.out.print(reply);
     }
 
@@ -77,11 +69,9 @@ public class TaskList {
         this.list[len] = new Deadline(description, by);
         this.len++;
 
-        String reply = "  ________________________________\n"
-                + "  Got it. I've added this task:\n"
+        String reply = "  Got it. I've added this task:\n"
                 + "    " + taskToString(len - 1)
-                + "  Now you have " + this.len + " tasks in the list.\n"
-                + "  ________________________________\n";
+                + "  Now you have " + this.len + " tasks in the list.\n";
         System.out.print(reply);
     }
 
@@ -108,11 +98,9 @@ public class TaskList {
         this.list[len] = new Events(description, from, to);
         this.len++;
 
-        String reply = "  ________________________________\n"
-                + "  Got it. I've added this task:\n"
+        String reply = "  Got it. I've added this task:\n"
                 + "    " + taskToString(len - 1)
-                + "  Now you have " + this.len + " tasks in the list.\n"
-                + "  ________________________________\n";
+                + "  Now you have " + this.len + " tasks in the list.\n";
         System.out.print(reply);
     }
 
@@ -120,29 +108,22 @@ public class TaskList {
         return list[index].toString();
     }
 
-    public void unknownCommand() throws MissingArgumentException{
-        throw new UnknownCommandException();
-    }
-
-    public void delete(String requestContent) throws MissingArgumentException{
-        if(requestContent.trim() == ""){
-            throw new MissingArgumentException("The index cannot be empty.");
-        }
-
-        int index = Integer.parseInt(requestContent.trim()) - 1;
-
-        for (int i = index+1; i < this.len; i++){
+    public void delete(int index) {
+        Task deletedTask = list[index];
+        for (int i = index; i < this.len; i++){
             this.list[i] = this.list[i+1];
         }
 
         this.len--;
-        String reply = "  ________________________________\n"
-                + "  Noted. I've removed this task:\n"
-                + "    " + list[index].toString()
-                + "  Now you have " + this.len + " tasks in the list.\n"
-                + "  ________________________________\n";
+        String reply = "  Noted. I've removed this task:\n"
+                + "    " + deletedTask.toString()
+                + "  Now you have " + this.len + " tasks in the list.\n";
         System.out.print(reply);
+    }
 
+    public void addTask(Task task){
+        this.list[len] = task;
+        this.len++;
     }
 
     public String saveTaskList(){
