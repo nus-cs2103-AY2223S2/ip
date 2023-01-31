@@ -1,3 +1,5 @@
+package Bob
+
 public class Bob {
     private Storage storage;
     private TaskList tasks;
