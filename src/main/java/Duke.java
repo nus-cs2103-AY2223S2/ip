@@ -4,7 +4,8 @@ import java.util.Scanner;
 public class Duke {
     private static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String GOODBYE = "Bye. Hope to see you again soon!";
-    private static final ArrayList<Task> TASKS = new ArrayList<>();
+    private static ArrayList<Task> TASKS = new ArrayList<>();
+    private static final Storage STORAGE = new Storage("data/duke.txt");
 
     /**
      * @param txt text to indent.
@@ -52,22 +53,22 @@ public class Duke {
     private static boolean executeInput(String inp) throws DukeException {
         Duke.Command cmd;
         String description = "";
+        String[] splitInput = inp.split(" ", 2);
         try {
-            cmd = Duke.Command.valueOf(inp.split(" ")[0].toUpperCase());
-            if (cmd != Command.LIST && cmd != Command.BYE) {
-                String[] checkEmpty = inp.split(" ", 2);
-                if (checkEmpty.length < 2 || checkEmpty[1].isBlank()) {
+            cmd = Duke.Command.valueOf(splitInput[0].substring(0, 1).toUpperCase() + splitInput[0].substring(1));
+            if (cmd != Command.List && cmd != Command.Bye) {
+                if (splitInput.length < 2 || splitInput[1].isBlank()) {
                     throw new DukeException("☹ OOPS!!! The description of a " + cmd.toString().toLowerCase() +
                             " cannot be empty.");
                 }
-                description = checkEmpty[1];
+                description = splitInput[1];
             }
         } catch (IllegalArgumentException e) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         switch (cmd) {
-            case LIST:
+            case List:
                 if (TASKS.isEmpty()) prettifyOut("Your list is empty!");
                 else {
                     int count = 1;
@@ -80,8 +81,8 @@ public class Duke {
                     borderLine();
                 }
                 break;
-            case MARK:
-                int taskToMark = Integer.parseInt(inp.split(" ")[1]) - 1;
+            case Mark:
+                int taskToMark = Integer.parseInt(splitInput[1]) - 1;
                 if (taskToMark >= TASKS.size()) {
                     prettifyOut("Task does not exist!");
                 } else {
@@ -89,8 +90,8 @@ public class Duke {
                     prettifyOut("Nice! I've marked this task as done:\n" + TASKS.get(taskToMark));
                 }
                 break;
-            case UNMARK:
-                int taskToUnmark = Integer.parseInt(inp.split(" ")[1]) - 1;
+            case Unmark:
+                int taskToUnmark = Integer.parseInt(splitInput[1]) - 1;
                 if (taskToUnmark >= TASKS.size()) {
                     prettifyOut("Task does not exist!");
                 } else {
@@ -98,26 +99,26 @@ public class Duke {
                     prettifyOut("OK, I've marked this task as not done yet:\n" + TASKS.get(taskToUnmark));
                 }
                 break;
-            case TODO:
+            case Todo:
                 Task td = new ToDo(description);
                 TASKS.add(td);
                 printTaskAdded(td);
                 break;
-            case DEADLINE:
+            case Deadline:
                 String[] deadline = description.split(" /by ");
                 Task dl = new Deadline(deadline[0], deadline[1]);
                 TASKS.add(dl);
                 printTaskAdded(dl);
                 break;
-            case EVENT:
+            case Event:
                 String[] event = description.split(" /from ");
                 String[] timing = event[1].split(" /to ");
                 Task ev = new Event(event[0], timing[0], timing[1]);
                 TASKS.add(ev);
                 printTaskAdded(ev);
                 break;
-            case DELETE:
-                int taskToDelete = Integer.parseInt(inp.split(" ")[1]) - 1;
+            case Delete:
+                int taskToDelete = Integer.parseInt(splitInput[1]) - 1;
                 if (taskToDelete >= TASKS.size()) {
                     prettifyOut("Task does not exist!");
                 } else {
@@ -126,7 +127,7 @@ public class Duke {
                     TASKS.remove(taskToDelete);
                 }
                 break;
-            case BYE:
+            case Bye:
                 prettifyOut(GOODBYE);
                 return false;
         }
@@ -140,21 +141,23 @@ public class Duke {
      * @param args command line arguments.
      */
     public static void main(String[] args) {
-        boolean cont = true;
-        prettifyOut(GREETING);
+        try {
+            boolean toContinue = true;
+            TASKS = STORAGE.load();
+            prettifyOut(GREETING);
 
-        Scanner input = new Scanner(System.in);
-        while (cont) {
-            String userInput = input.nextLine();
-            if (userInput.isBlank()) {
-                borderLine();
-                continue;
+            Scanner input = new Scanner(System.in);
+            while (toContinue) {
+                String userInput = input.nextLine();
+                if (userInput.isBlank()) {
+                    borderLine();
+                    continue;
+                }
+                toContinue = executeInput(userInput);
+                STORAGE.save(TASKS);
             }
-            try {
-                cont = executeInput(userInput);
-            } catch (DukeException e) {
-                prettifyOut(e.getMessage());
-            }
+        } catch (DukeException e) {
+            prettifyOut(e.getMessage());
         }
     }
 
@@ -162,6 +165,6 @@ public class Duke {
      * Available commands.
      */
     public enum Command {
-        LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
+        List, Mark, Unmark, Todo, Deadline, Event, Delete, Bye
     }
 }

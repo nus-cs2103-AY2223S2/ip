@@ -7,6 +7,13 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * @return the string representation of the task to be stored in the hard disk.
+     */
+    public String toStorageString() {
+        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
