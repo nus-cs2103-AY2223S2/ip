@@ -1,6 +1,9 @@
 package duke;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -10,6 +13,7 @@ public class Parser {
 		TODO,
 		DEADLINE,
 		EVENT,
+		FIND,
 		MARK,
 		UNMARK,
 		LIST,
@@ -18,7 +22,7 @@ public class Parser {
 		ERR
 	}
 
-	public static boolean isReceivedCommand(Tasklist tasklist, String msg, Scanner echoScanner, boolean loop) {
+	public static boolean receiveCommand(Tasklist tasklist, String msg, Scanner echoScanner, boolean loop) {
 		String firstWord = "";
 		if (msg.contains(" ")) {
 			firstWord = msg.substring(0, msg.indexOf(" "));
@@ -82,6 +86,26 @@ public class Parser {
 			} catch (Exception ex) {
 				System.err.println("Please indicate a valid task to delete!");
 			}
+			break;
+
+		case FIND:
+			try {
+				String searchWord = msg.substring(msg.indexOf(" ") + 1, msg.length());
+				Predicate<Task> byMatch = task -> task.description.contains(searchWord);
+				List<Task> filteredList = tasklist.listOfThings.stream()
+						.filter(byMatch).collect(Collectors.toList());
+				if (filteredList.isEmpty()) {
+					System.out.println("There were no matching occurences of this task!");
+				} else {
+					System.out.println("Here are some matching tasks in your list!");
+					for (int i = 0; i < filteredList.size(); i++) {
+						System.out.println(i + 1 + ". " + filteredList.get(i));
+					}
+				}
+			} catch (Exception ex) {
+				System.err.println("There were no matching occurences of this task!");
+			}
+
 			break;
 		case TODO:
 			try {
