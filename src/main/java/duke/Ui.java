@@ -133,6 +133,7 @@ public class Ui {
                     + i
                     + ". "
                     + string);
+            i++;
         }
         System.out.println("\tThere are "
                 + listOfTasksFound.size()

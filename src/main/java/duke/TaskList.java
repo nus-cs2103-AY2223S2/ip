@@ -118,11 +118,13 @@ public class TaskList {
      * @param keyword Specific keyword(s) of task to be found in the task list.
      * @return ArrayList consisting of tasks that match the keyword.
      */
-    public ArrayList<String> findTaskMatchingKeyword(String keyword) {
+    public ArrayList<String> findTaskMatchingKeyword(String ... keyword) {
         ArrayList<String> matchingTasks = new ArrayList<>();
         for (Task task : listOfTasks) {
-            if (task.getDescription().contains(keyword)) {
-                matchingTasks.add(task.toString());
+            for (String matching : keyword) {
+                if (task.getDescription().contains(matching)) {
+                    matchingTasks.add(task.toString());
+                }
             }
         }
         return matchingTasks;
