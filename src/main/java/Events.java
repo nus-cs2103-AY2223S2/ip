@@ -1,11 +1,14 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Events extends Task {
-    protected String startDate;
-    protected String endDate;
+    protected LocalDate startDate;
+    protected LocalDate endDate;
 
     public Events(String description, String startDate, String endDate) {
         super(description);
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = Parser.stringToDate(startDate);
+        this.endDate = Parser.stringToDate(endDate);
     }
 
     @Override

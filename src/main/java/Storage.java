@@ -44,7 +44,6 @@ public class Storage {
         while (sc.hasNext()) {
             String ref = sc.nextLine();
             String[] text = ref.split("\\|");
-            System.out.println(text[0]);
             Task curr = new Task("");
 
             switch (text[0]) {
