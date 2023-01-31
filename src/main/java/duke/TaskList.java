@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @param <Task>
  */
 public class TaskList<Task> {
-    ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     /**
      * Constructor for TaskList, uses an ArrayList containing tasks
@@ -21,7 +21,6 @@ public class TaskList<Task> {
     }
 
     /**
-     *
      * @param index location of the task in the TaskList
      * @return Task at the index of the TaskList
      */

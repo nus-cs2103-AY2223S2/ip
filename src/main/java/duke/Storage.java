@@ -10,8 +10,8 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    String filePath;
-    String directoryPath;
+    private String filePath;
+    private String directoryPath;
 
     /**
      * Constructor for Storage

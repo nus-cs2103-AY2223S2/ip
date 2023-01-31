@@ -7,8 +7,8 @@ package duke;
 public abstract class Task {
 
     public static final String SEPARATOR = " | ";
-    String description;
-    boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructor for Task
@@ -54,7 +54,7 @@ public abstract class Task {
     /**
      * Sets task as uncompleted
      */
-    public void setAsUndone(){
+    public void setAsUndone() {
         isDone = false;
     }
 
@@ -62,8 +62,7 @@ public abstract class Task {
     /**
      * Finds tasks that contain word in their description
      * @param word String containing common prefix
-     * @return true if the description of the task contains word
-     * else false
+     * @return true if the description of the task contains word else false
      */
     boolean containsWord(String word) {
         return (description.indexOf(word) == -1) ? false : true;

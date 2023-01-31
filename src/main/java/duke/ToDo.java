@@ -18,7 +18,8 @@ public class ToDo extends Task {
     /**
      * Same as above constructor, but with isDone initialised as false
      */
-    public ToDo(String description) {super(description);
+    public ToDo(String description) {
+        super(description);
     }
 
     public String getTaskIcon() {
@@ -33,7 +34,7 @@ public class ToDo extends Task {
     }
     @Override
     public String toString() {
-        return String.format("[%s]%s %s", this.getTaskIcon(),this.getStatusIcon(),
+        return String.format("[%s]%s %s", this.getTaskIcon(), this.getStatusIcon(),
                 this.getDescription());
     }
 }

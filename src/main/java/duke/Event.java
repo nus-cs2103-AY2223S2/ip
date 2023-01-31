@@ -1,7 +1,7 @@
 package duke;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Event is a subclass of Task. It specifies the start date and
@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    LocalDate startDate;
-    LocalDate endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     /**
      * Constructor for Event
@@ -50,7 +50,6 @@ public class Event extends Task {
     }
 
     /**
-     *
      * @return String formatted as d MMM yyyy
      */
     public String dateFormatter() {
@@ -64,7 +63,6 @@ public class Event extends Task {
 
 
     /**
-     *
      * @return String with task formatted to be saved into duke.txt
      */
     public String toSave() {

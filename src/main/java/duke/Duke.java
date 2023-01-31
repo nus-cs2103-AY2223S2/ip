@@ -8,11 +8,11 @@ public class Duke {
 
     public static final String DIRECTORY_PATH = "data";
     public static final String FILE_PATH = "data/duke.txt";
-    Storage storage;
-    TaskList<Task> taskList;
+    private Storage storage;
+    private TaskList<Task> taskList;
 
-    Parser parser;
-    Ui ui;
+    private Parser parser;
+    private Ui ui;
 
     /**
      * Constructor for Duke
@@ -29,6 +29,8 @@ public class Duke {
         this.ui = new Ui();
         this.parser = new Parser();
     }
+
+    public Duke() {}
 
     /**
      * Runs the program and catches IOException if file is not found
@@ -51,9 +53,12 @@ public class Duke {
         }
     }
 
-
     public static void main(String[] args) {
         new Duke(FILE_PATH, DIRECTORY_PATH).run();
+    }
+
+    String getResponse(String input) {
+        return "Duke read: " + input;
     }
 }
 

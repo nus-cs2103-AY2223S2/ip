@@ -17,6 +17,10 @@ public class Ui {
         return sc.nextLine();
     }
 
+    boolean hasNextLine() {
+        return sc.hasNextLine();
+    }
+
     /**
      * Prints welcome message to user when user first starts
      * the program
@@ -40,8 +44,7 @@ public class Ui {
 
     /**
      * Prints the completed task
-     * @param string the toString() of the task that is marked
-     * as done
+     * @param string the toString() of the task that is marked as done
      */
     void printMarkedTaskMessage(String string) {
         System.out.println("Good job on completing this task!" + "\n" + string);
@@ -49,8 +52,7 @@ public class Ui {
 
     /**
      * Prints the uncompleted task
-     * @param string The toString() of the task that is marked
-     * as undone
+     * @param string The toString() of the task that is marked as undone
      */
     void printUnmarkedTaskMessage(String string) {
         System.out.println("Remember to complete this task!!" + "\n" + string);

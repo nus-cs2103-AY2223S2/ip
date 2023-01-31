@@ -1,14 +1,14 @@
 package duke;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Deadline is a subclass of Task. It contains a specified deadline for a task.
  */
 public class Deadline extends Task {
 
-    LocalDate date;
+    private LocalDate date;
 
     /**
      * Constructor for Deadline
@@ -42,7 +42,6 @@ public class Deadline extends Task {
 
 
     /**
-     *
      * @return String of task icon
      */
     public String getTaskIcon() {
@@ -50,7 +49,6 @@ public class Deadline extends Task {
     }
 
     /**
-     *
      * @return String formatted as d MMM yyyy (e.g 1 Jan 2020)
      */
     String dateFormatter() {
@@ -59,7 +57,6 @@ public class Deadline extends Task {
     }
 
     /**
-     *
      * @return String with task formatted to be saved into duke.txt
      */
     public String toSave() {
