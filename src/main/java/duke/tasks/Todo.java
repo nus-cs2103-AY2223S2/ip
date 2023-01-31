@@ -1,4 +1,4 @@
-import java.util.*;
+package duke.tasks;
 
 public class Todo extends Task {
 
@@ -7,6 +7,12 @@ public class Todo extends Task {
 
     public Todo(String name) {
         super(name);
+    }
+
+    //getter for type
+
+    public static String getType() {
+        return type;
     }
 
     @Override

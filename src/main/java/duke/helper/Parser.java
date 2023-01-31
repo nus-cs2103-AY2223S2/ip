@@ -1,8 +1,12 @@
-import java.util.ArrayList;
-import java.time.LocalDateTime;
-import java.util.Arrays;
+package duke.helper;
+
+import duke.tasks.*;
+
+
+import duke.exceptions.InvalidTaskDescriptionException;
+
 //this is the class that parses commands
-public class CommandManager {
+public class Parser {
 
     public static void run(String input, String[] command, TaskList tasks) {
         try {

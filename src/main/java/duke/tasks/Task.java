@@ -1,4 +1,4 @@
-import java.util.*;
+package duke.tasks;
 
 public class Task {
 
@@ -10,6 +10,18 @@ public class Task {
     public Task(String name) {
         this.name = name;
         this.completionStatus = false;
+    }
+
+    //getter for completion status
+
+    public boolean getCompletionStatus() {
+        return this.completionStatus;
+    }
+
+    //getter for the name of the duke.tasks
+
+    public String getName() {
+        return this.name;
     }
 
     public void markAsDone() {

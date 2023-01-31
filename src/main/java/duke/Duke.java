@@ -1,7 +1,10 @@
-// Tan Matthew Simon Castaneda
-import java.util.*;
-import java.io.*;
-import java.nio.file.*;
+package duke;// Tan Matthew Simon Castaneda
+
+import duke.helper.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 public class Duke {
 
     private String filepath;
@@ -16,8 +19,9 @@ public class Duke {
         this.storage = new Storage(filepath);
         try {
             this.taskList = storage.loadTask();
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+        } catch (Exception e) {
+            System.out.println("honggan");
+            System.out.println(e.getMessage());
         }
         ui.startUp();
 
@@ -35,7 +39,7 @@ public class Duke {
                 this.storage.saveTask(this.taskList);
                 break;
             } else {
-                CommandManager.run(input, command, this.taskList);
+                Parser.run(input, command, this.taskList);
             }
         }
         ui.close();

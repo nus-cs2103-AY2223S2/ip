@@ -5,13 +5,13 @@ Gotchu fam
 I've added
 [T][ ] fuck bitches
 to all the shit u need to do
-shag bro now u got 1 tasks
+shag bro now u got 1 duke.tasks
 todo get money
 Gotchu fam
 I've added
 [T][ ] get money
 to all the shit u need to do
-shag bro now u got 2 tasks
+shag bro now u got 2 duke.tasks
 list
 1.[T][ ] fuck bitches
 2.[T][ ] get money
@@ -20,7 +20,7 @@ Gotchu fam
 I've added
 [E][ ] event sex (from: now to: later)
 to all the shit u need to do
-shag bro now u got 3 tasks
+shag bro now u got 3 duke.tasks
 list
 1.[T][ ] fuck bitches
 2.[T][ ] get money
@@ -40,7 +40,7 @@ Gotchu fam
 I've added
 [D][ ] deadline pill (by: 4pm)
 to all the shit u need to do
-shag bro now u got 4 tasks
+shag bro now u got 4 duke.tasks
 list
 1.[T][ ] fuck bitches
 2.[T][ ] get money

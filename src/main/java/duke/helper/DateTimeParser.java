@@ -1,3 +1,5 @@
+package duke.helper;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -46,11 +48,11 @@ public class DateTimeParser {
 
         //date out of bounds
         if (day < 0 |  day > 31) {
-            throw new DateOutOfBoundsException("bro wakeup this day got exist meh");
+            throw new duke.exceptions.DateOutOfBoundsException("bro wakeup this day got exist meh");
         } else if (month < 0 | month > 12) {
-            throw new DateOutOfBoundsException("bro wakeup this month got exist meh");
+            throw new duke.exceptions.DateOutOfBoundsException("bro wakeup this month got exist meh");
         } else if (time < 0 | time > 2400) {
-            throw new DateOutOfBoundsException("wakeup and move on its the next day already");
+            throw new duke.exceptions.DateOutOfBoundsException("wakeup and move on its the next day already");
         } else {
             return LocalDateTime.of(year, month, day, hour, minute);
         }

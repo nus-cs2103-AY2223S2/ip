@@ -1,5 +1,10 @@
-import java.io.FileNotFoundException;
-import java.util.Arrays;
+package duke.storage;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+
 import java.nio.file.*;
 import java.util.Scanner;
 import java.io.File;
@@ -17,22 +22,22 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(this.path);
 
-            for (int i = 0; i < tasklist.currentSize; i++) {
+            for (int i = 0; i < tasklist.getCurrentSize(); i++) {
 
-                if (tasklist.tasks.get(i) instanceof Deadline) {
-                    Deadline curr = (Deadline) tasklist.tasks.get(i);
-                    fileWriter.write(curr.type +"/" + String.valueOf(curr.completionStatus) + "/" + curr.name);
-                    fileWriter.write("/" + curr.endTime);
-                } else if (tasklist.tasks.get(i) instanceof Event) {
-                    Event curr = (Event) tasklist.tasks.get(i);
-                    fileWriter.write(curr.type +"/" + String.valueOf(curr.completionStatus) + "/" + curr.name);
-                    fileWriter.write("/" + curr.startTime);
-                    fileWriter.write("/" + curr.endTime);
-                } else if (tasklist.tasks.get(i) instanceof Todo) {
-                    Todo curr = (Todo) tasklist.tasks.get(i);
-                    fileWriter.write(curr.type +"/" + String.valueOf(curr.completionStatus) + "/" + curr.name);
+                if (tasklist.getTasks().get(i) instanceof Deadline) {
+                    Deadline curr = (Deadline) tasklist.getTasks().get(i);
+                    fileWriter.write(curr.getType() +"/" + String.valueOf(curr.getCompletionStatus() + "/" + curr.getName()));
+                    fileWriter.write("/" + curr.getEndTime());
+                } else if (tasklist.getTasks().get(i) instanceof Event) {
+                    Event curr = (Event) tasklist.getTasks().get(i);
+                    fileWriter.write(curr.getType() +"/" + String.valueOf(curr.getCompletionStatus()) + "/" + curr.getName());
+                    fileWriter.write("/" + curr.getStartTime());
+                    fileWriter.write("/" + curr.getEndTime());
+                } else if (tasklist.getTasks().get(i) instanceof Todo) {
+                    Todo curr = (Todo) tasklist.getTasks().get(i);
+                    fileWriter.write(curr.getType() +"/" + String.valueOf(curr.getCompletionStatus()) + "/" + curr.getName());
                 }
-                if (i < tasklist.currentSize - 1) {
+                if (i < tasklist.getCurrentSize() - 1) {
                     fileWriter.write("\n");
                 }
             }
@@ -66,22 +71,19 @@ public class Storage {
                     if (input[1].equals("true")) {
                         temp.markAsDone();
                     }
-                    tasklist.tasks.add(temp);
-                    tasklist.currentSize++;
+                    tasklist.append(temp);
                 } else if (input[0].equals("D")) {
                     Deadline temp = new Deadline(input[2], input[3]);
                     if (input[1].equals("true")) {
                         temp.markAsDone();
                     }
-                    tasklist.tasks.add(temp);
-                    tasklist.currentSize++;
+                    tasklist.append(temp);
                 } else if (input[0].equals("E")) {
                     Event temp = new Event(input[2], input[3], input[4]);
                     if (input[1].equals("true")) {
                         temp.markAsDone();
                     }
-                    tasklist.tasks.add(temp);
-                    tasklist.currentSize++;
+                    tasklist.append(temp);
                 } else {
                     System.out.println("Invalid type idek how u got here man");
                 }
