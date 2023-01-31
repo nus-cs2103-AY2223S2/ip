@@ -16,6 +16,7 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
     private Ui ui;
+    private boolean exitStatus;
 
     /**
      * Initialises classes need to read and write the program.
@@ -27,6 +28,7 @@ public class Duke {
         this.storage = new Storage(filePath, this.ui);
         this.tasks = new TaskList(this.storage, this.ui);
         this.parser = new Parser();
+        this.exitStatus = false;
     }
 
     /**
@@ -40,10 +42,8 @@ public class Duke {
         this.storage.loadFileData();
 
         try {
-
             Command c = this.parser.parse(input);
-
-            boolean isExit = c.isExit();
+            this.exitStatus = c.isExit();
             this.storage.writeToFile();
             return c.execute(tasks, storage, ui);
 
@@ -57,6 +57,14 @@ public class Duke {
             return "Nothing to mark/unmark!";
         }
 
+    }
+
+    /**
+     * Closes app upon receiving 'true'
+     * @return boolean of exitStatus
+     */
+    public boolean isExitApp() {
+        return this.exitStatus;
     }
 
 }
