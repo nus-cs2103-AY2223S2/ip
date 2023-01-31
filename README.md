@@ -15,9 +15,9 @@ It's
 4. Let it manage your tasks for you 👍
 
 ## Features
-- [x] Managing todo
-- [ ] Managing deadlines
-- [ ] Managing events
+-[x] Managing todo
+-[ ] Managing deadlines
+-[ ] Managing events
 
 This is the main function:
    ```ruby
