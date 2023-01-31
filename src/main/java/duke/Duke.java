@@ -1,25 +1,20 @@
 package duke;
 
 import duke.command.Command;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 /**
  * Main class that runs the chatbot
  */
-public class Duke extends Application {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
-     * @param filePath
+     * Default constructor for Duke
      */
-    public Duke(String filePath) {
-        // TODO use filePath
+    public Duke() {
         ui = new Ui();
         storage = new Storage();
         try {
@@ -48,16 +43,11 @@ public class Duke extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
