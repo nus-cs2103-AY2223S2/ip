@@ -1,4 +1,5 @@
 package duke.parser;
+
 import duke.command.*;
 import duke.commandtype.CommandType;
 import duke.dukeexception.DukeException;
@@ -51,9 +52,11 @@ public class Parser {
                     return new AddCommand(todo);
                 case DELETE:
                     return new DeleteCommand(Integer.parseInt(words[1]));
+                case FIND:
+                    return new FindCommand(inputLine.split(" ", 2)[1]);
                 default:
                     throw new DukeException("Not a valid command: " + inputLine);
-                }
+            }
         } catch (DukeException e) {
             throw e;
         }

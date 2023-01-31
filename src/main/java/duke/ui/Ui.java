@@ -9,13 +9,9 @@ public class Ui {
     /**
      * the welcome message to be displayed when the programm starts running
      */
-    private String welcomeMessage = "Hello from\n" + 
-    " ____        _        \n" +
-    "|  _ \\ _   _| | _____ \n" +
-    "| | | | | | | |/ / _ \\\n" +
-    "| |_| | |_| |   <  __/\n" +
-    "|____/ \\__,_|_|\\_\\___|\n";
-
+    private String welcomeMessage = "Hello from\n" + " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
     /**
      * prints the welcome message
      */

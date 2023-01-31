@@ -17,6 +17,7 @@ public class Todo extends Task {
             return 1;
         }
     }
+
     /**
      * overrides toString method to display the type of the task, its status, and then its name.
      */
