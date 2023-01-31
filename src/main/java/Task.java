@@ -1,15 +1,15 @@
-public class Task {
+public abstract class Task {
     private String name;
     private boolean doneOrNot;
-    private int rank;
-    private static int numOfThings = 1;
+    //private int rank;
+    //private static int numOfThings = 1;
 
     //constructor
     public Task(String name) {
         this.name = name;
         this.doneOrNot = false;
-        this.rank = numOfThings;
-        numOfThings += 1;
+        //this.rank = numOfThings;
+        //numOfThings += 1;
     }
 
     public String isCompleted() {
@@ -40,16 +40,24 @@ public class Task {
         }
     }
 
-    public int getRank() {
+    /* public int getRank() {
         return rank;
-    }
+    } */
 
-    public void setRank(int n) {
+    /* public void setRank(int n) {
         this.rank = n;
+    } */
+
+    public Boolean getDoneOrNot() {
+        return this.doneOrNot;
     }
 
     @Override
     public String toString() {
         return this.getCompletedOrNotSign() + this.name;
     }
+
+    public abstract String convertToText();
+
+
 }

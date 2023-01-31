@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Duke {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+    public Duke() {}
+
+    private static final Scanner takingInput = new Scanner(System.in);
 
     private static String greetingsFromSkittles = "Hello I'm Skittles\nWhat can I do for you?\n";
     private static String adiosFromSkittles = "Bye. Hope to see you again soon!";
@@ -13,15 +14,12 @@ public class Duke {
     private static String gotItMessage = "Got it. I've added this task:\n";
 
     //keeping track of number of things in list
-    static int numOfThings = 0;
+    //static int numOfThings = 0;
 
-    static String howLongListNowMessage = "\nNow you have " + numOfThings + " tasks in the list";
-
-        //assume no more than 100 tasks
-        static ArrayList<Task> lstOfTasks = new ArrayList<>();
+    private static final ListOfStuff lstOfTasks = new ListOfStuff(Data.loadUpInfo());
 
         //method to greet
-        public static void hello() {
+        public void hello() {
             System.out.print(greetingsFromSkittles);
         }
 
@@ -29,12 +27,23 @@ public class Duke {
             System.out.print(adiosFromSkittles);
         }
 
+    /**
+     * Interpret what the user has entered as an input and categorises it into a Command.
+     * @param input User's input
+     * @return The correct command that is interpreted from the user input.
+     */
+    public static Instruction inputToInstruction(String userTyped) {
+        String[] typed = userTyped.split(" ", 2);
+        return Instruction.scanUserTyped(typed[0]);
+    }
+/*
         public static void addStufftoLst(String xx) {
             lstOfTasks.add(new Task(xx));
             numOfThings += 1;
             System.out.println("added: " + xx);
         }
-
+*/
+/*
         //basically print out the list. must be numbered.
         public static void displayLst() {
             boolean isItMT = false;
@@ -53,8 +62,8 @@ public class Duke {
                 System.out.println(txtToDisplay);
             }
         }
-
-
+*/
+/*
         public static void completeTask(String xx) {
             int taskNum = Integer.parseInt(xx);
             String txt = "Try again! You don't have that task in your list!";
@@ -80,31 +89,95 @@ public class Duke {
             }
             System.out.println(txt);
         }
-
-    public static void addAToDo(String todo) {
-        ToDo mustDo = new ToDo(todo);
+/*
+    /**
+     * Adds a Todo to all Tasks that Skittles has stored.
+     * @param input The entire String that the user has input i.e. "todo xxx".
+     * @throws SkittlesException If an incorrect input is entered.
+     */
+    public void addAToDo(String userTyped) throws SkittlesException {
+        //firstly we check if the user only inputted one word "todo"
+        if (userTyped.split(" ",2).length == 1) {
+            throw new SkittlesException("Hey you didn't include a todo!");
+        }
+        //otherwise if todo is inputted with other words, check the info
+        String[] generalInfo = userTyped.split(" ",2);
+        ToDo mustDo = new ToDo(generalInfo[1]);
         lstOfTasks.add(mustDo);
-        numOfThings += 1;
+        Data.addInsideFile(mustDo);
         System.out.println("Got it. I've added this task:\n" + mustDo.toString() +
-                            "\nNow you have " + numOfThings + " tasks in the list.");
+                            "\nNow you have " + ListOfStuff.numOfThings() + " tasks in the list.");
     }
 
-    public static void addTimeSensitive(String name, String doByWhen) {
-        Deadline dateline = new Deadline(name, doByWhen);
-        lstOfTasks.add(dateline);
-        numOfThings += 1;
-        System.out.println("Got it. I've added this task:\n" + dateline.toString() +
-                            "\nNow you have " + numOfThings + " tasks in the list");
+    /**
+     * Adds a Deadline to all Tasks that Skittles has stored.
+     * @param input The entire String that the user has input i.e. "deadline xxx /by yyy".
+     * @throws SkittlesException If an incorrect input is entered.
+     */
+    public void addTimeSensitive(String userTyped) throws SkittlesException {
+        // First check if the user has only input the one word "deadline".
+        if (userTyped.split(" ", 2).length == 1) {
+            throw new SkittlesException("Hey it looks like you are missing the description and the deadline date!");
+        }
+        // If "deadline" is entered with more words, check information.
+        String[] information = userTyped.split(" ", 2);
+        String [] description = information[1].split("/by ", 2);
+        //In the case where date is not entered.
+        if (description.length == 1) {
+            throw new SkittlesException("Hey you are missing the deadline date! Please attempt again.");
+        }
+        Deadline newDeadline = new Deadline(description[0], description[1]);
+        lstOfTasks.add(newDeadline);
+        Data.addInsideFile(newDeadline);
+        System.out.println("Got it. I've added this task:\n" + newDeadline.toString() + "\nNow you have " + ListOfStuff.numOfThings() + " tasks in the list");
     }
 
-    public static void addAnEvent(String name, String startTime, String endTime) {
-        Event suitAndTie = new Event(name, startTime, endTime);
+    /**
+     * Adds an Event to all Tasks that Skittles has stored.
+     * @param input The entire String that the user has input i.e. "event xxx /from yyy /to zzz".
+     * @throws SkittlesException If an incorrect input is entered.
+     */
+    public void addAnEvent(String userTyped) throws SkittlesException {
+        //Start by checking if user only inputted one word "event"
+        if (userTyped.split(" ",2).length == 1) {
+            throw new SkittlesException("Hey you didn't type the event and the time range!");
+        }
+
+        String[] generalInfo = userTyped.split(" ",2);
+        String[] eventAndEntireTimeRange= generalInfo[1].split(" /from ",2);
+        String[] startAndEndTime = eventAndEntireTimeRange[1].split(" /to ",2);
+
+        //next possibility the word "event" is typed with actual event but no time range
+        if (userTyped.split(" ",2)[1].split(" /from ",2).length == 1) {
+            throw new SkittlesException("Hey looks like you're missing a time range!");
+        }
+
+        String actualEvent = eventAndEntireTimeRange[0];
+        String startTime = startAndEndTime[0];
+        String endTime = startAndEndTime[1];
+        Event suitAndTie = new Event(actualEvent, startTime, endTime);
         lstOfTasks.add(suitAndTie);
-        numOfThings += 1;
+        Data.addInsideFile(suitAndTie);
         System.out.println("Got it. I've added this task:\n" + suitAndTie.toString() +
-                "\nNow you have " + numOfThings + " tasks in the list");
+                "\nNow you have " + ListOfStuff.numOfThings() + " tasks in the list");
     }
 
+    /* Method that saves Tasks in the hard disk whenever called
+    */
+    public void save() {
+        try {
+            FileWriter info = new FileWriter("./data/data.txt");
+            for (Task task : ListOfStuff.getSkittlesList()) {
+                info.write(task.toString() + "\n");
+            }
+            info.close();
+            System.out.print("Tasks have been saved");
+        } catch (IOException e) {
+            System.out.println("Hey an error occurred when saving the data!");
+        }
+    }
+
+    /*
     public static void delete (String userTyped) {
         try {
             String rankOfTaskToDelete = userTyped.split(" ",2)[1];
@@ -115,66 +188,85 @@ public class Duke {
             /* for (int i = taskToDeleteInt; i < numOfThings; i++) {
                 int updatedRank = lstOfTasks.get(i).getRank() - 1;
 
-            } */
+            }
             System.out.println("Noted. I've removed this task.\n" + deleted.toString()
                     + "\nNow you have " + numOfThings + " tasks in the list.");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("You didn't enter a valid task to delete man!");
         }
     }
+    */
+    public void begin() {
 
-
-    public static void main(String[] args) {
+        boolean repeatStatus = true;
 
         //start by greeting
         hello();
-        while (true) {
-            Scanner takingInput = new Scanner(System.in);
-            String userTyped = takingInput.nextLine().toLowerCase();
-                String frontWord = userTyped.split(" ")[0];
-                //exit
-                if (frontWord.equals("bye")) {
+        String input = takingInput.nextLine();
+        Instruction instruction = inputToInstruction(input);
+
+        while (repeatStatus) {
+            //String userTyped = takingInput.nextLine().toLowerCase();
+            //String frontWord = userTyped.split(" ",2)[0];
+            switch(instruction) {
+                case BYE:
+                    repeatStatus = false;
                     adios();
                     break;
-                } else if (frontWord.equals("list")) {
+                case LIST:
                     //show user the list in this case
-                    displayLst();
-                } else if (frontWord.equals("mark")) {
-                    completeTask(userTyped.substring(userTyped.length() - 1));
-                } else if (frontWord.equals("unmark")) {
-                    undoCompleteTask(userTyped.substring(userTyped.length() - 1));
-                } else if (frontWord.equals("todo")) {
+                    ListOfStuff.displayLst();
+                    break;
+                case MARK:
                     try {
-                        String actualTask = userTyped.split(" ", 2)[1];
-                        addAToDo(actualTask);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("You didn't type a todo man!");
+                        ListOfStuff.completeTask(input);
+                        ListOfStuff.refresh();
+                    } catch (SkittlesException e) {
+                        System.out.println(e.getMessage());
                     }
-                } else if (frontWord.equals("deadline")) {
+                    break;
+                case TODO:
                     try {
-                        String actualDeadlineTask = userTyped.split(" ", 2)[1].split(" /by ",2)[0];
-                        String byWhen = userTyped.split(" ", 2)[1].split(" /by ",2)[1];
-                        addTimeSensitive(actualDeadlineTask,byWhen);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("You didn't type a deadline man!");
+                        addAToDo(input);
+                    } catch (SkittlesException e) {
+                        System.out.println(e.getMessage());
                     }
-                } else if (frontWord.equals("event")) {
+                    break;
+                case DEADLINE:
                     try {
-                        String actualEvent = userTyped.split(" ",2)[1].split(" /from ", 2)[0];
-                        String startTime =  userTyped.split(" ",2)[1].split(" /from ", 2)[1]
-                                .split(" /to ",2)[0];
-                        String endTime =  userTyped.split(" ",2)[1].split(" /from ", 2)[1]
-                                .split(" /to ",2)[1];
-                        addAnEvent(actualEvent,startTime,endTime);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("You didn't type an event man!");
+                        addTimeSensitive(input);
+                    } catch (SkittlesException e) {
+                        System.out.println(e.getMessage());
                     }
-                } else if (frontWord.equals("delete")) {
-                    delete(userTyped);
-                } else {
+                    break;
+                case EVENT:
+                    try {
+                        addAnEvent(input);
+                    } catch (SkittlesException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case DELETE:
+                    try {
+                        ListOfStuff.delete(input);
+                        ListOfStuff.refresh();
+                    } catch (SkittlesException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                default:
                     System.out.println("Try again fat fingers!");
                 }
+            if (repeatStatus) {
+                input = takingInput.nextLine();
+                instruction = inputToInstruction(input);
             }
+            }
+        }
+
+        public static void main(String[] args) {
+            Duke skittles = new Duke();
+            skittles.begin();
         }
     }
 
