@@ -4,12 +4,15 @@ import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.TodoCommand;
 import duke.commands.UnmarkCommand;
-import duke.commands.FindCommand;
 
+/**
+ * The class to generate Command objects.
+ */
 public class Parser {
 
     private enum Type {

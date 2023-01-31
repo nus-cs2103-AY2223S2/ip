@@ -5,6 +5,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Task;
 
+/**
+ * The class for the Delete command which extends Command class.
+ */
 public class DeleteCommand extends Command {
     private String input;
 

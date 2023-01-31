@@ -1,6 +1,9 @@
 package duke.tasks;
 import java.io.Serializable;
 
+/**
+ * The Task object that implements Serializable.
+ */
 public class Task implements Serializable {
     private String description;
     private boolean done;
@@ -15,6 +18,12 @@ public class Task implements Serializable {
         this.done = false;
     }
 
+    /**
+     * Check if the task's description contains the given keyword.
+     *
+     * @param keyword The keyword argument.
+     * @return A boolean value.
+     */
     public boolean contains(String keyword) {
         if (description.length() >= keyword.length()) {
             return description.contains(keyword);

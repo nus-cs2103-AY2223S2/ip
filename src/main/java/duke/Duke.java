@@ -1,6 +1,9 @@
 package duke;
 import duke.commands.Command;
 
+/**
+ * The main class.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;

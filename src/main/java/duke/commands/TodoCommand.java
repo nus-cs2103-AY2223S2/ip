@@ -1,10 +1,13 @@
 package duke.commands;
 import duke.DukeException;
-import duke.TaskList;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Todo;
 
+/**
+ * The class for the Todo command which extends Command class.
+ */
 public class TodoCommand extends Command {
     private String input;
 

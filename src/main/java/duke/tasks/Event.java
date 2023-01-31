@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * The Event object that extends Task.
+ */
 public class Event extends Task {
     private String from;
     private String to;

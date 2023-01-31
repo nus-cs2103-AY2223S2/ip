@@ -3,6 +3,9 @@ import duke.tasks.Task;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The TaskList that stores Task objects.
+ */
 public class TaskList implements Serializable {
     private ArrayList<Task> tasks;
 

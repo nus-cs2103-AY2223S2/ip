@@ -1,8 +1,11 @@
 package duke.commands;
-import duke.TaskList;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 
+/**
+ * The abstract class for command.
+ */
 public abstract class Command {
 
     /**

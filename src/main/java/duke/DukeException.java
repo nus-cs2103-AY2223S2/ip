@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * The class that extends Exception class.
+ */
 public class DukeException extends Exception {
 
     /**

@@ -3,6 +3,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * The class for the Bye command which extends Command class.
+ */
 public class ByeCommand extends Command {
     private String input;
 

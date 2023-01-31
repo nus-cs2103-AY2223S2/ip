@@ -1,10 +1,13 @@
 package duke.commands;
 import duke.DukeException;
-import duke.TaskList;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Event;
 
+/**
+ * The class for the Event command which extends Command class.
+ */
 public class EventCommand extends Command {
     private String input;
 
@@ -22,22 +25,22 @@ public class EventCommand extends Command {
      */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            int index_from = input.indexOf("/");
-            int index_to = input.lastIndexOf("/");
+            int indexFrom = input.indexOf("/");
+            int indexTo = input.lastIndexOf("/");
 
-            if ((index_from + 6 > index_to - 1)
-                    || (index_to + 4 > input.length())
-                    || (index_from - 1 < 6)) {
-                throw new DukeException("    OOPS!!! Event must be in the format\n" +
-                        "    event <description> /from <date> /to <date>");
+            if ((indexFrom + 6 > indexTo - 1)
+                    || (indexTo + 4 > input.length())
+                    || (indexFrom - 1 < 6)) {
+                throw new DukeException("    OOPS!!! Event must be in the format\n"
+                        + "    event <description> /from <date> /to <date>");
             }
-            if (!(input.substring(index_from, index_from + 6).equals("/from ")
-                    && input.substring(index_to, index_to + 4).equals("/to "))) {
+            if (!(input.substring(indexFrom, indexFrom + 6).equals("/from ")
+                    && input.substring(indexTo, indexTo + 4).equals("/to "))) {
                 throw new DukeException("    OOPS!!! Deadline should be followed by a /from and a /to command.");
             }
-            Event e = new Event(input.substring(6, index_from - 1),
-                    input.substring(index_from + 6, index_to - 1),
-                    input.substring(index_to + 4, input.length()));
+            Event e = new Event(input.substring(6, indexFrom - 1),
+                    input.substring(indexFrom + 6, indexTo - 1),
+                    input.substring(indexTo + 4, input.length()));
             tasks.add(e);
             storage.saveTaskList(tasks);
             System.out.println("    Got it. I've added this task:");

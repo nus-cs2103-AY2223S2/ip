@@ -2,10 +2,13 @@ package duke;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.ObjectInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
+/**
+ * The class to store tasks into a text file.
+ */
 public class Storage {
     private String filePath;
 

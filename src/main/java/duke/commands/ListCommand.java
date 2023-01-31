@@ -1,8 +1,11 @@
 package duke.commands;
-import duke.TaskList;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 
+/**
+ * The class for the List command which extends Command class.
+ */
 public class ListCommand extends Command {
     private String input;
 
