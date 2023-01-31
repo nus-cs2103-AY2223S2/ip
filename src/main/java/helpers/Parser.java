@@ -32,7 +32,7 @@ public class Parser {
                     System.out.println(Ui.formatStr(tasks.listThings()));
                 } else if (splitArr.length == 1) {
                     throw new VagueInputException("Oh no! What do you mean? \n" +
-                            "I'm confused. Please specify... @.@");
+                            "I'm confused. Please specify... @.@");   
                 }
                 else if (splitArr[0].equals("mark") || splitArr[0].equals("unmark")) {
                     if ((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
