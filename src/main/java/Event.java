@@ -18,7 +18,7 @@ public class Event extends Task {
         if (dateTime.length < 2) {
             throw new DukeException("Missing End Time");
         }
-        return new Event(startEndTime[0], false, dateTime[0], dateTime[1]);
+        return new Event(startEndTime[0], false, DateTimeUtils.dateFormatter(dateTime[0]), DateTimeUtils.dateFormatter(dateTime[1]));
     }
 
     public static Event generateTask(String[] taskLine) {

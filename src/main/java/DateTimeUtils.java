@@ -1,26 +1,14 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DateTimeUtils {
-    public static String dateFormatter(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("MMM dd yyyy");
+    public static String dateFormatter(String date) throws DukeException {
         try {
-            return String.valueOf(format.parse(date));
-        } catch (ParseException e) {
-            System.out.println("Wrong Date Format!");
+            LocalDate localDate = LocalDate.parse(date);
+            return localDate.format(DateTimeFormatter.ofPattern("dd MMM uuuu"));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Wrong Date Format, please write in yyyy-MM-dd");
         }
-
-        return date;
-    }
-
-    public static String timeFormatter(String time) {
-        SimpleDateFormat format = new SimpleDateFormat("HHmm");
-        try {
-            return String.valueOf(format.parse(time));
-        } catch (ParseException e) {
-            System.out.println("Wrong Time Format!");
-        }
-
-        return time;
     }
 }

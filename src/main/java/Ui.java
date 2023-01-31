@@ -10,7 +10,7 @@ public class Ui {
     private final String DIVIDER_LINE = "_________________________________________________\n";
     private final String BYE_MSG = "Bye. Hope to see you again soon!";
 
-    private Scanner scanner;
+    private final Scanner scanner;
     public Ui() {
         scanner = new Scanner(System.in);
     }

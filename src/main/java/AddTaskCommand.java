@@ -1,6 +1,10 @@
-public class AddTaskCommand extends Command {
+abstract public class AddTaskCommand extends Command {
+    public AddTaskCommand(String[] inputArr) {
+        super(inputArr);
+    }
+
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
     }
 

@@ -1,11 +1,13 @@
+public class DeleteTaskCommand extends Command {
 
-public class ListCommand extends Command {
-    public ListCommand(String[] inputArr) {
+    public DeleteTaskCommand(String[] inputArr) {
         super(inputArr);
     }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.listTask(inputArr);
+        taskList.deleteTask(inputArr, ui);
+        storage.writeData(taskList);
     }
 
     @Override

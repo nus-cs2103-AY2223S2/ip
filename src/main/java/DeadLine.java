@@ -13,7 +13,7 @@ public class DeadLine extends Task {
         if (toPrintSplit.length < 2) {
             throw new DukeException("Missing deadline");
         }
-        return new DeadLine(toPrintSplit[0], false, toPrintSplit[1]);
+        return new DeadLine(toPrintSplit[0], false, DateTimeUtils.dateFormatter(toPrintSplit[1]));
     }
     public static DeadLine generateTask(String[] taskLine) {
         boolean check = taskLine[1].equals("1");

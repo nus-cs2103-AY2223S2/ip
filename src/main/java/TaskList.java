@@ -27,8 +27,11 @@ public class TaskList {
         store.add(task);
     }
 
-    public void deleteTask(String num, Ui ui) throws DukeException {
-        int index = Integer.parseInt(num) - 1;
+    public void deleteTask(String[] inputArr, Ui ui) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("Invalid format, please give numbers");
+        }
+        int index = Integer.parseInt(inputArr[1]) - 1;
         int size = this.getSize();
         if (index >= size | index < 0) {
             throw new DukeException("Index out of bounds");
