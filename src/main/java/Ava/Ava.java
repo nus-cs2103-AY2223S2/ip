@@ -1,9 +1,9 @@
-package cloneAva;
+package Ava;
 
 
 
-import cloneAva.commands.AvaCommand;
-import cloneAva.exceptions.AvaException;
+import Ava.commands.AvaCommand;
+import Ava.exceptions.AvaException;
 
 import java.util.Scanner;
 public class Ava {

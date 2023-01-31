@@ -1,4 +1,4 @@
-package cloneAva;
+package Ava;
 
 public class Ui {
     //ASCII Emoticons

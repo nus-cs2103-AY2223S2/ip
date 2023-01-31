@@ -1,8 +1,8 @@
-package cloneAva.commands;
+package Ava.commands;
 
-import cloneAva.Storage;
-import cloneAva.TaskList;
-import cloneAva.exceptions.AvaException;
+import Ava.Storage;
+import Ava.TaskList;
+import Ava.exceptions.AvaException;
 
 public interface AvaCommand {
     /**

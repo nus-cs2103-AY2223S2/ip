@@ -1,11 +1,11 @@
-package cloneAva.commands;
+package Ava.commands;
 
 
-import cloneAva.Storage;
-import cloneAva.TaskList;
-import cloneAva.exceptions.AvaException;
-import cloneAva.exceptions.NonExistentTask;
-import cloneAva.tasks.Task;
+import Ava.Storage;
+import Ava.TaskList;
+import Ava.exceptions.AvaException;
+import Ava.exceptions.NonExistentTask;
+import Ava.tasks.Task;
 
 import static java.lang.Character.isDigit;
 

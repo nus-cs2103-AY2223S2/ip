@@ -1,4 +1,4 @@
-package cloneAva.exceptions;
+package Ava.exceptions;
 
 
 public class CommandNotFoundException extends AvaException {

@@ -1,11 +1,11 @@
-package cloneAva;
+package Ava;
 
-import cloneAva.exceptions.AvaException;
-import cloneAva.exceptions.NonExistentTask;
-import cloneAva.tasks.Deadline;
-import cloneAva.tasks.Event;
-import cloneAva.tasks.Task;
-import cloneAva.tasks.Todo;
+import Ava.exceptions.AvaException;
+import Ava.exceptions.NonExistentTask;
+import Ava.tasks.Deadline;
+import Ava.tasks.Event;
+import Ava.tasks.Task;
+import Ava.tasks.Todo;
 
 import java.util.ArrayList;
 

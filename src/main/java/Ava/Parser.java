@@ -1,8 +1,8 @@
-package cloneAva;
+package Ava;
 
-import cloneAva.commands.*;
-import cloneAva.exceptions.AvaException;
-import cloneAva.exceptions.CommandNotFoundException;
+import Ava.commands.*;
+import Ava.exceptions.AvaException;
+import Ava.exceptions.CommandNotFoundException;
 
 
 public class Parser {

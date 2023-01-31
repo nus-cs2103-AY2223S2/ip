@@ -1,32 +1,32 @@
-package cloneAva.commands;
+package Ava.commands;
 
 
-import cloneAva.Storage;
-import cloneAva.TaskList;
-import cloneAva.exceptions.AvaException;
-import cloneAva.exceptions.NonExistentTask;
-import cloneAva.tasks.Task;
+import Ava.Storage;
+import Ava.TaskList;
+import Ava.exceptions.AvaException;
+import Ava.exceptions.NonExistentTask;
+import Ava.tasks.Task;
 
 import static java.lang.Character.isDigit;
 
 /**
- * Unmarks Task
+ * Marks Task
  */
-public class UnmarkTask implements AvaCommand {
+public class MarkTask implements AvaCommand {
     String[] parsedInput;
     Task changedTask;
-    private final static String MESSAGE = "Ahh! More work to be done on this task:";
+    private final static String MESSAGE = "Yayy! One more task done:";
 
     /**
-     * UnmarkTask Contructor
+     * MarkTask Contructor
      * @param parsedInput string array of the index of the task to be marked.
      */
-    public UnmarkTask(String[] parsedInput){
+    public MarkTask(String[] parsedInput) {
         this.parsedInput = parsedInput;
     }
 
     /**
-     * Retreive unmarked task
+     * Retreive marked task
      * @param t a TaskList object
      * @param s a Storage object
      * @return true indicate program running
@@ -34,10 +34,11 @@ public class UnmarkTask implements AvaCommand {
      */
     @Override
     public boolean run(TaskList t, Storage s) throws AvaException {
-        this.changedTask = t.unmark(Integer.valueOf(this.parsedInput[0]));
+        this.changedTask = t.mark(Integer.valueOf(this.parsedInput[0]));
         t.updateStorage(s);
         return true;
     }
+
 
     /**
      * @param formatSpace identation required by the UI

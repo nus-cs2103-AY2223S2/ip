@@ -1,8 +1,8 @@
-package cloneAva.commands;
+package Ava.commands;
 
 
-import cloneAva.Storage;
-import cloneAva.TaskList;
+import Ava.Storage;
+import Ava.TaskList;
 
 /**
  * Lists task

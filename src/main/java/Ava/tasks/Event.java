@@ -1,6 +1,6 @@
-package cloneAva.tasks;
+package Ava.tasks;
 
-import cloneAva.exceptions.DateTimeNotParsed;
+import Ava.exceptions.DateTimeNotParsed;
 
 /**
  * Event class extends Task

@@ -1,14 +1,14 @@
-package cloneAva.commands;
+package Ava.commands;
 
 import Ava.Ava.TASK_TYPE;
-import cloneAva.Storage;
-import cloneAva.TaskList;
-import cloneAva.exceptions.AvaException;
-import cloneAva.exceptions.CommandNotFoundException;
-import cloneAva.tasks.Deadline;
-import cloneAva.tasks.Event;
-import cloneAva.tasks.Task;
-import cloneAva.tasks.Todo;
+import Ava.Storage;
+import Ava.TaskList;
+import Ava.exceptions.AvaException;
+import Ava.exceptions.CommandNotFoundException;
+import Ava.tasks.Deadline;
+import Ava.tasks.Event;
+import Ava.tasks.Task;
+import Ava.tasks.Todo;
 
 /**
  * Add Task to the TaskList

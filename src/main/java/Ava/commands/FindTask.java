@@ -1,10 +1,10 @@
-package cloneAva.commands;
+package Ava.commands;
 
 
-import cloneAva.Storage;
-import cloneAva.TaskList;
-import cloneAva.exceptions.AvaException;
-import cloneAva.exceptions.CommandNotFoundException;
+import Ava.Storage;
+import Ava.TaskList;
+import Ava.exceptions.AvaException;
+import Ava.exceptions.CommandNotFoundException;
 
 /**
  * finds Task

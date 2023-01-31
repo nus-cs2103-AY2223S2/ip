@@ -1,4 +1,4 @@
-package cloneAva;
+package Ava;
 
 import java.io.File;
 import java.io.FileWriter;

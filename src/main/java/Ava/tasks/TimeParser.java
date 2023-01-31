@@ -1,7 +1,7 @@
-package cloneAva.tasks;
+package Ava.tasks;
 
 
-import cloneAva.exceptions.DateTimeNotParsed;
+import Ava.exceptions.DateTimeNotParsed;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
