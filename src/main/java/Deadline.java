@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private static final String taskType = "[D]";
@@ -11,7 +12,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String dateString = date.getDayOfMonth() + " " + date.getMonth().toString() + " " + date.getYear();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
+        String dateString = date.format(dateFormatter);
         return taskType + super.toString() + " (by: " + dateString + ")";
     }
 }

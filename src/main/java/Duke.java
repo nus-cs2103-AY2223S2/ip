@@ -1,12 +1,113 @@
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
+
+    private static void writeToFile(String filePath, String text) throws IOException {
+        File f = new File(filePath);
+        f.createNewFile();
+        FileWriter fw = new FileWriter(filePath, false);
+        fw.write(text);
+        fw.close();
+    }
+
+    private static Task textToTask(String data) throws DukeException {
+        Boolean taskIsDone = false;
+        String task = "";
+        String description = "";
+        if (data.contains("[T]")) {
+            String statusAndTask = data.replace("[T]", "");
+            if (statusAndTask.contains("[X]")) {
+                taskIsDone = true;
+            }
+            if (taskIsDone) {
+                description = statusAndTask.replace("[X]", "");
+            } else {
+                description = statusAndTask.replace("[ ]", "");
+            }
+            Task todo = new Todo(description);
+            if (taskIsDone) {
+                todo.markAsDone();
+            }
+            return todo;
+
+        } else if (data.contains("[D]")) {
+            String statusAndTask = data.replace("[D]", "");
+            if (statusAndTask.contains("[X]")) {
+                taskIsDone = true;
+            }
+            if (taskIsDone) {
+                task = statusAndTask.replace("[X]", "");
+            } else {
+                task = statusAndTask.replace("[ ]", "");
+            }
+
+            String[] arr = task.split(" \\(by: ");
+            description = arr[0];
+            String time = arr[1].replace(")", "");
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM u");
+            LocalDate date = LocalDate.parse(time, dateFormatter);
+
+            Task deadline = new Deadline(description, date);
+            if (taskIsDone) {
+                deadline.markAsDone();
+            }
+            return deadline;
+
+        } else if (data.contains("[E]")) {
+            String statusAndTask = data.replace("[E]", "");
+            if (statusAndTask.contains("[X]")) {
+                taskIsDone = true;
+            }
+            if (taskIsDone) {
+                task = statusAndTask.replace("[X]", "");
+            } else {
+                task = statusAndTask.replace("[ ]", "");
+            }
+            String[] arr = task.split(" \\(from: ", 2);
+            description = arr[0];
+            String[] duration = arr[1].split(" to:", 2);
+            String from = duration[0];
+            String to = duration[1].replace(")", "");
+
+            Task event = new Event(description, from, to);
+            if (taskIsDone) {
+                event.markAsDone();
+            }
+            return event;
+        } else {
+            throw new DukeException("File cannot be loaded");
+        }
+    }
+
     public static void main(String[] args) {
 
         ArrayList<Task> list = new ArrayList<>();
 
         System.out.println("Hello! I'm Somebody\n" + "What can I do for you?");
+
+        try {
+            File f = new File("data/duke.txt");
+            Scanner sn = new Scanner(f);
+            while (sn.hasNext()) {
+                String text = sn.nextLine();
+                Task task = textToTask(text);
+                list.add(task);
+                System.out.println(text);
+            }
+            sn.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("There are no tasks as of now!");
+        } catch (DukeException d) {
+            System.out.println(d.toString());
+        }
+
         Scanner scn = new Scanner(System.in);
         while (true) {
 
@@ -27,6 +128,18 @@ public class Duke {
                 System.out.println("OK, I've marked this task as not done yet:\n" + task.toString());
 
             } else if (Objects.equals(input.toLowerCase(), "bye")) {
+
+                int len = list.size();
+                String text = "";
+                for (int i = 0; i < len; i++) {
+                    text += list.get(i).toString();
+                    text += "\n";
+                }
+                try {
+                    writeToFile("data/duke.txt", text);
+                } catch (IOException e) {
+                    System.out.println("Error saving file: " + e.getMessage());
+                }
 
                 System.out.println("Bye. Hope to see you again soon!");
                 scn.close();
@@ -88,6 +201,8 @@ public class Duke {
                     }
                 } catch (DukeException e) {
                     System.out.println(e.toString());
+                } catch (DateTimeParseException e) {
+                    System.out.println("input date in YYYY-MM-DD format!");
                 }
             }
 
