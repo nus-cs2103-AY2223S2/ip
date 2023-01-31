@@ -14,7 +14,7 @@ public class DeadlineTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime deadline = LocalDateTime.parse("2023-06-06 06:06", formatter);
         Deadline deadlineTask = new Deadline("return book", deadline);
-        assertEquals("[D][ ] return book (by: Tue Jun 6 2023 06:06AM)", deadlineTask.toString());
+        assertEquals("[D]Undone return book (by: Tue Jun 6 2023 06:06AM)", deadlineTask.toString());
     }
 
     @Test
