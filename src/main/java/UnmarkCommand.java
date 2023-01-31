@@ -6,6 +6,7 @@ public class UnmarkCommand extends Command{
     }
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
-        taskList.unmark(taskIdToUnmark);
+        ui.prettyPrint("Aww... I've marked this task as not done yet: ");
+        ui.prettyPrint(taskList.unmark(taskIdToUnmark).toString());
     }
 }

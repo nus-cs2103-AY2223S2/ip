@@ -4,8 +4,13 @@ import java.util.List;
 public class TaskList {
     private List<Task> tasks;
 
+
     public TaskList() {
         this.tasks = new ArrayList<>();
+    }
+
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public void add(Task task) {
@@ -31,12 +36,16 @@ public class TaskList {
         return this.tasks.isEmpty();
     }
 
-    public void mark(int taskId) {
-        this.tasks.get(taskId - 1).complete();
+    public Task mark(int taskId) {
+        Task taskToMark = this.get(taskId);
+        taskToMark.complete();
+        return taskToMark;
     }
 
-    public void unmark(int taskId) {
-        this.tasks.get(taskId - 1).uncomplete();
+    public Task unmark(int taskId) {
+        Task taskToUnmark = this.get(taskId);
+        taskToUnmark.uncomplete();
+        return taskToUnmark;
     }
 
     public List<Task> getList() {

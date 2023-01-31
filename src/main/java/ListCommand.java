@@ -5,7 +5,7 @@ public class ListCommand extends Command {
             ui.prettyPrint("No tasks found!");
         }
         for (int i = 1; i <= taskList.getSize(); i++) {
-            ui.prettyPrint(String.format("%d. %s", i, taskList.get(i - 1)));
+            ui.prettyPrint(String.format("%d. %s", i, taskList.get(i)));
         }
     }
 }

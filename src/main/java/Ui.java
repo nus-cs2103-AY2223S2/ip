@@ -1,17 +1,25 @@
+import java.util.Scanner;
+
 public class Ui {
-    public String userPrompt;
-    public String systemPrompt;
+    private String userPrompt;
+    private String systemPrompt;
+    private Scanner sc;
 
     public Ui(String userPrompt, String systemPrompt) {
         this.userPrompt = userPrompt;
         this.systemPrompt = systemPrompt;
+        this.sc = new Scanner(System.in);
     }
 
-    public String prettyPrint(String output) {
-        return userPrompt + " " + output;
+    public void prettyPrint(String output) {
+        System.out.println(userPrompt + " " + output);
     }
 
-    public String systemPrint(String output) {
-        return systemPrompt + " " + output;
+    public void systemPrint(String output) {
+        System.out.println(systemPrompt + " " + output);
+    }
+
+    public String readCommand() {
+        return this.sc.nextLine();
     }
 }
