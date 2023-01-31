@@ -1,33 +1,60 @@
-import java.io.*;
+package fideline.save;
+
+import fideline.exception.DataFileInteractionException;
+import fideline.exception.DataFileNotFoundException;
+import fideline.exception.UnableToCreateDataFileException;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+
 import java.util.Scanner;
 
-public class DataHandler {
+public class Storage {
 
     private File dataFile;
 
-    DataHandler(String fileLocation) {
-
+    public Storage(String fileLocation) {
         dataFile = new File(fileLocation);
+    }
+
+    public String load() throws DataFileNotFoundException {
+        String outputString = "";
         try {
-            dataFile.createNewFile();
-        } catch (Exception e) {
-            System.out.println(e);
+            Scanner fileScan = new Scanner(dataFile);
+            while (fileScan.hasNext()) {
+                outputString += fileScan.nextLine() + "\n";
+            }
+            return outputString;
+        } catch (FileNotFoundException e) {
+            throw new DataFileNotFoundException();
         }
     }
 
-    public void addLine(String line) {
+    public void createDataFile() throws UnableToCreateDataFileException {
+        try {
+            dataFile.createNewFile();
+        } catch (Exception e) {
+            throw new UnableToCreateDataFileException(e.getMessage());
+        }
+    }
+
+    public void addLine(String line) throws DataFileInteractionException {
         try {
             FileWriter fw = new FileWriter(dataFile, true);
             PrintWriter pw = new PrintWriter(fw);
             pw.println(line);
             pw.close();
         } catch (IOException e) {
-            System.out.println(e);
+            throw new DataFileInteractionException(e.getMessage());
         }
 
     }
 
-    public void deleteLine(int lineNum) {
+    public void deleteLine(int lineNum) throws DataFileInteractionException {
         try {
             int lineCounter = 0;
             Scanner fileScan = new Scanner(dataFile);
@@ -47,29 +74,15 @@ public class DataHandler {
             pw.println(dataString);
             pw.close();
         } catch (IOException e) {
-            System.out.println(e);
+            throw new DataFileInteractionException(e.getMessage());
         }
     }
 
-    public String[] getData() {
-        String outputString = "";
-        try {
-            Scanner fileScan = new Scanner(dataFile);
 
-            while (fileScan.hasNext()) {
-                outputString += fileScan.nextLine() + "\n";
-            }
-
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        }
-        return outputString.split("\n");
-    }
-
-    public void editTaskStatus(int taskNum, boolean isDone){
+    public void editTaskStatus(int taskNum, boolean isDone) throws DataFileInteractionException {
         String newMark = (isDone ? "X" : " ");
         try {
-            int lineCounter = 0;
+            int lineCounter = 1;
             Scanner fileScan = new Scanner(dataFile);
             String dataString = "";
             while (fileScan.hasNext()) {
@@ -77,8 +90,8 @@ public class DataHandler {
                     dataString += fileScan.nextLine();
                 } else {
                     String s = fileScan.nextLine();
-                    dataString += s.substring(0,4) + newMark
-                            + s.substring(5,s.length());
+                    dataString += s.substring(0,2) + newMark
+                            + s.substring(3,s.length());
                 }
                 dataString += "\n";
                 lineCounter++;
@@ -89,7 +102,7 @@ public class DataHandler {
             pw.println(dataString);
             pw.close();
         } catch (IOException e) {
-            System.out.println(e);
+            throw new DataFileInteractionException(e.getMessage());
         }
     }
 
