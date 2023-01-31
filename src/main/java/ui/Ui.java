@@ -33,7 +33,7 @@ public class Ui {
     }
 
     public void deleteMessage(Task removed, TaskList list) {
-        System.out.println("Noted. I've removed this task: \n" + removed + "\nNow you have " + list.size() + " tasks in the list.");
+        System.out.println("Noted. I've removed this task: \n" + removed + "\nNow you have " + (list.size() - 1) + " tasks in the list.");
     }
 
     public void byeMessage() {

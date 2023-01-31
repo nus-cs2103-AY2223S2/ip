@@ -19,35 +19,31 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while (logic.isValidCommand(input)) {
+        while (!logic.checkBye(input)) {
             if (logic.checkList(input)) {
                 ui.listMessage();
                 list.list();
             } else if (logic.checkMark(input)) {
                 int num = Integer.parseInt(input.split(" ")[1]);
                 list.mark(num);
-                ui.markMessage(list.get(num - 1));
+                ui.markMessage(list.get(num));
             } else if (logic.checkUnmark(input)) {
                 int num = Integer.parseInt(input.split(" ")[1]);
                 list.unmark(num);
-                ui.unmarkMessage(list.get(num - 1));
+                ui.unmarkMessage(list.get(num));
            } else if (logic.checkDelete(input)) {
                 int num = Integer.parseInt(input.split(" ")[1]);
+                ui.deleteMessage(list.get(num), list);
                 list.delete(num);
-                ui.deleteMessage(list.get(num - 1), list);
             } else if (logic.checkTask(input)) {
                 list.add(input);
                 ui.addMessage(list.getLast(), list);
-            } else if (logic.checkBye(input)) {
-                storage.saveData(list);
-                ui.byeMessage();
-                break;
+            } else if (!logic.isValidCommand(input)) {
+                ui.invalidCommandMessage();
             }
             input = sc.nextLine();
         }
-        while (!logic.isValidCommand(input)) {
-            ui.invalidCommandMessage();
-            input = sc.nextLine();
-        }
+        storage.saveData(list);
+        ui.byeMessage();
     }
 }
