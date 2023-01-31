@@ -6,8 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import sebastian.Sebastian;
 
 /**
@@ -36,6 +36,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.setPadding(new Insets(30, 10, 0, 10));
         dialogContainer.setSpacing(30.0);
+        scrollPane.setFitToWidth(true);
+
+        BorderStroke borderStroke = new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
+                new CornerRadii(20.0), new BorderWidths(1.0));
+        Border roundBorder = new Border(borderStroke);
     }
 
     /**

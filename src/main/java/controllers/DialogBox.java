@@ -57,12 +57,14 @@ public class DialogBox extends HBox {
      */
     private void style() {
         Circle circle = new Circle();
-        circle.setCenterY(50.0);
-        circle.setCenterX(50.0);
-        circle.setRadius(50.0);
+        circle.setCenterY(25.0);
+        circle.setCenterX(25.0);
+        circle.setRadius(25.0);
         displayPicture.setClip(circle);
 
         this.setSpacing(10);
+        this.setFillHeight(false);
+
         BorderStroke borderStroke = new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID,
                 new CornerRadii(20.0), new BorderWidths(1.0));
         Border dialogBorder = new Border(borderStroke);
