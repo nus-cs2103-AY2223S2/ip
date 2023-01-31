@@ -1,6 +1,6 @@
 package duke.commands;
 
-import duke.DukeException;
+import duke.exceptions.DukeException;
 import duke.taskers.Task;
 import duke.utils.Storage;
 import duke.utils.TaskList;
@@ -23,17 +23,19 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Executes the command.
+     * Executes the task.
      *
      * @param taskList Respective task list.
      * @param ui Respective Ui.
      * @param storage Respective storage.
+     * @return String response.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task t = taskList.markTaskInListDone(super.getTargetIndex());
-        ui.markResponse(t);
         storage.deleteFileAndRedo(taskList.getList());
+        return ui.markResponse(t);
+
     }
 
     /**

@@ -31,11 +31,12 @@ public class FindCommand extends Command {
      * @param taskList Respective task list.
      * @param ui Respective Ui.
      * @param storage Respective storage.
+     * @return String response.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> matched = taskList.findMatching(this.keyword);
-        ui.showMatchingTasks(matched);
+        return ui.showMatchingTasks(matched);
     }
 
     /**

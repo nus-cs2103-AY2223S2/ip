@@ -32,12 +32,14 @@ public class AddEventCommand extends Command {
      * @param taskList Respective task list.
      * @param ui Respective Ui.
      * @param storage Respective storage.
+     * @return String response.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addItem(this.event);
-        ui.addItemResponse(this.event, taskList.getList());
         storage.writeToFile(this.event);
+        return ui.addItemResponse(this.event, taskList.getList());
+
     }
 
 

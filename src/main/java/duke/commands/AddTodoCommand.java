@@ -31,12 +31,14 @@ public class AddTodoCommand extends Command {
      * @param taskList Respective task list.
      * @param ui Respective Ui.
      * @param storage Respective storage.
+     * @return String response.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addItem(this.todo);
-        ui.addItemResponse(this.todo, taskList.getList());
         storage.writeToFile(this.todo);
+        return ui.addItemResponse(this.todo, taskList.getList());
+
     }
 
     /**

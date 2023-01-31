@@ -1,7 +1,6 @@
 TODO / 0 / task 2
-TODO / 0 / task 2
-TODO / 0 / task1
 DEADLINE / 0 / dodod / 2020-02-02 01:30
-TODO / 0 / task1
 TODO / 0 / task2
-EVENT / 0 / try this / 2002-02-02 01:30 / 2002-02-02 02:30
+EVENT / 1 / try this / 2002-02-02 01:30 / 2002-02-02 02:30
+TODO / 1 / task1
+DEADLINE / 0 / do something / 2001-02-02 01:30

@@ -1,12 +1,12 @@
 package duke;
 
-import java.io.File;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import duke.commands.Command;
+import duke.exceptions.DukeException;
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
@@ -41,6 +41,33 @@ public class Duke {
     }
 
     /**
+     * User input to be passed in.
+     *
+     * @param input Input string to be parsed.
+     * @return The response string.
+     */
+    public String getResponse(String input) {
+        String response = "";
+        try {
+            Command c = Parser.parse(input);
+            response = c.execute(this.tasks, this.ui, this.storage);
+        } catch (DukeException e) {
+            response = this.ui.showError(e);
+        }
+        return response;
+    }
+
+    /**
+     * Gets the greeting message when the program is first started.
+     *
+     * @return The greeting message.
+     */
+    public String getGreetingMessage() {
+        return this.ui.greet();
+    }
+
+
+    /**
     * Creates the localdatetime by parsing the text string.
     *
     * @param dateTime The string representation of the local date time.
@@ -51,36 +78,12 @@ public class Duke {
         try {
             String stringWithNoTrailingWhitespaces = dateTime.trim();
             date = LocalDateTime.parse(stringWithNoTrailingWhitespaces, FORMATTER);
-            // DateTimeFormatter.ofPattern("d MMM uuuu h.mma")
         } catch (DateTimeException e) {
             date = null;
         }
         return date;
     }
 
-    /**
-     * Runs duke.
-     */
-    public void run() {
-        this.ui.greet();
-        while (true) {
-            try {
-                String fullCommand = this.ui.readCommand();
-                this.ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                if (c.isExit()) {
-                    this.ui.sayGoodBye();
-                    break;
-                }
-                c.execute(this.tasks, this.ui, this.storage);
-            } catch (DukeException e) {
-                this.ui.showError(e);
-            } finally {
-                this.ui.showLine();
-            }
-        }
-        System.exit(0);
-    }
 
     /**
      * Function that returns the formatter for date time.
@@ -91,14 +94,10 @@ public class Duke {
         return FORMATTER;
     }
 
-    /**
-     * The main function.
-     * @param args Inputs into the main function.
-     */
-    public static void main(String[] args) {
-        String filePathName = "." + File.separator + "src" + File.separator
-                + "main" + File.separator + "data" + File.separator + "duke";
-        new Duke(filePathName).run();
-    }
+
+
+
 }
+
+
 

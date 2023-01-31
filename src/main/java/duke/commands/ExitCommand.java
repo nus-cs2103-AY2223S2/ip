@@ -20,14 +20,16 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Executes the command.
+     * Executes the task.
+     *
      * @param taskList Respective task list.
      * @param ui Respective Ui.
      * @param storage Respective storage.
+     * @return String response.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return "";
     }
 
     /**

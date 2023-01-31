@@ -6,7 +6,6 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.DukeException;
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
 import duke.commands.AddTodoCommand;
@@ -17,6 +16,8 @@ import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkCommand;
 import duke.commands.UnmarkCommand;
+import duke.exceptions.DukeException;
+
 
 /**
  * Parser class to help understand the input lines.

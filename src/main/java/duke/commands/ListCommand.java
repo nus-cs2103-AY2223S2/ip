@@ -28,11 +28,12 @@ public class ListCommand extends Command {
      * @param taskList Respective task list.
      * @param ui Respective Ui.
      * @param storage Respective storage.
+     * @return String response.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> allTasks = taskList.getList();
-        ui.showList(allTasks);
+        return ui.showList(allTasks);
     }
 
     /**

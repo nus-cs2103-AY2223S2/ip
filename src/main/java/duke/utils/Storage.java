@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.Duke;
-import duke.DukeException;
+import duke.exceptions.DukeException;
 import duke.taskers.Deadline;
 import duke.taskers.Event;
 import duke.taskers.Task;
