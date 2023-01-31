@@ -1,8 +1,8 @@
 package cbot.task;
 
-import cbot.time.TimeStuff;
-
 import java.time.LocalDateTime;
+
+import cbot.time.TimeStuff;
 
 /**
  * Task with a due date. Stores the description of the task, whether it has been completed or not,
@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
  * @see Event
  */
 public class Deadline extends Task {
-    private final LocalDateTime due;
-
     public static final String DEADLINE_SYMBOL = "D";
+
+    private final LocalDateTime due;
 
     /**
      * Constructs a task with the given description, deadline, and completion status.
@@ -28,22 +28,22 @@ public class Deadline extends Task {
         super(desc, isDone);
         this.due = due;
     }
-    
+
     @Override
     public String getSymbol() {
         return DEADLINE_SYMBOL;
     }
-    
+
     @Override
     public boolean hasTime() {
         return true;
     }
-    
+
     @Override
     public LocalDateTime getTime() {
         return this.due;
     }
-    
+
     @Override
     public String toString() {
         return String.format("%s (< %s)",

@@ -1,5 +1,9 @@
 package cbot;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import cbot.io.BadInputException;
 import cbot.io.FileStuff;
 import cbot.io.Parser;
@@ -7,20 +11,17 @@ import cbot.io.PoorInputException;
 import cbot.io.UI;
 import cbot.task.TaskList;
 
-import java.io.FileNotFoundException;
-import java.time.format.DateTimeParseException;
-
 /**
  * Your very own Personal Assistant Chatbot. Use Cbot to keep track of your tasks,
  * from deadlines to events, and even mark them as you complete them!
  */
 public class Cbot {
+    private static final String PATH = "data/cbot_save.txt";
+
     private TaskList tl;
     private final FileStuff fs;
     private boolean doBye;
     private boolean prevBad;
-
-    private static final String PATH = "data/cbot_save.txt";
 
     /**
      * Constructs a fresh Cbot instance.
@@ -40,7 +41,7 @@ public class Cbot {
     /**
      * Returns true if the BYE Command has been called.
      *
-     * @return true if
+     * @return true if BYE has been called.
      */
     public boolean isBye() {
         return this.doBye;

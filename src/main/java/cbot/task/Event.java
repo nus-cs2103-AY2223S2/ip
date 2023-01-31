@@ -1,8 +1,8 @@
 package cbot.task;
 
-import cbot.time.TimeStuff;
-
 import java.time.LocalDateTime;
+
+import cbot.time.TimeStuff;
 
 /**
  * Task with a start and end time. Stores the description of the task, whether it has been completed or not,
@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
  * @see Deadline
  */
 public class Event extends Task {
+    public static final String EVENT_SYMBOL = "E";
+
     private final LocalDateTime fromTime;
     private final LocalDateTime toTime;
-    
-    public static final String EVENT_SYMBOL = "E";
 
     /**
      * Constructs a task with the given description, start datetime, end datetime, and completion status.
@@ -31,27 +31,27 @@ public class Event extends Task {
         this.fromTime = fromTime;
         this.toTime = toTime;
     }
-    
+
     public String getSymbol() {
         return EVENT_SYMBOL;
     }
-    
+
     @Override
     public boolean hasTime() {
         return true;
     }
-    
+
     @Override
     public LocalDateTime getTime() {
         return this.fromTime;
     }
-    
+
     @Override
     public String toString() {
         return String.format("%s (%s - %s)",
                 super.toString(), TimeStuff.text(this.fromTime), TimeStuff.text(this.toTime));
     }
-    
+
     @Override
     public String makeFileFriendly() {
         return String.format("%s%s%s%s%s",

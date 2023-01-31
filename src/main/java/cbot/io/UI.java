@@ -3,10 +3,15 @@ package cbot.io;
 import java.lang.StringBuilder;
 import java.util.ArrayList;
 
+import cbot.task.Task;
+
 /**
  * Manages printing to and receiving from the user, mainly via the Command Line Interface.
  */
 public class UI {
+
+    //CHECKSTYLE.OFF: SingleSpaceSeparator
+
     // Frequently Used Strings
     private static final String BLANK     = "   ";
     private static final String INDENT    = " ~ ";

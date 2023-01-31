@@ -9,13 +9,13 @@ import java.time.LocalDateTime;
  * @see Event
  */
 public class Task implements Comparable<Task> {
-    protected String desc;
-    protected boolean isDone;
-    
     public static final String DONE_TRUE = "X";
     public static final String DONE_FALSE = " ";
     public static final String SEP = " ;; ";
     public static final String TODO_SYMBOL = "T";
+
+    private final String desc;
+    private boolean isDone;
 
     /**
      * Constructs a 'to-do' task with the given description and completion status.
@@ -135,14 +135,15 @@ public class Task implements Comparable<Task> {
      * Tasks are first compared by time (i.e. {@link #getTime()}, then lexicographically.
      *
      * @param other The task to be compared to.
-     * @return A negative integer, zero, or a positive integer if this is less than, equal to, or greater than the other.
+     * @return A negative integer, zero, or a positive integer if this is
+     *         less than, equal to, or greater than the other.
      */
     @Override
     public int compareTo(Task other) {
         if (this.getTime().isEqual(other.getTime())) {
             return getDesc().compareTo(other.getDesc());
         }
-        
+
         return getTime().compareTo(other.getTime());
     }
 }

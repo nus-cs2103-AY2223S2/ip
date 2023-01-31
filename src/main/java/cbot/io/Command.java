@@ -4,6 +4,9 @@ package cbot.io;
  * A command type accepted by Cbot.
  */
 public enum Command {
+    //CHECKSTYLE.OFF: MethodParamPad
+    //CHECKSTYLE.OFF: SingleSpaceSeparator
+
     //NAME      (str,           hasText,    save),
     /** Ends the Cbot session. */
     BYE         ("bye"),
@@ -76,7 +79,10 @@ public enum Command {
 
     /** Catches all other inputs. */
     NONE        ("");
-    
+
+    //CHECKSTYLE.ON: MethodParamPad
+    //CHECKSTYLE.ON: SingleSpaceSeparator
+
     private final String str;
     private final boolean hasText;
     private final boolean needSave;
@@ -140,7 +146,7 @@ public enum Command {
         if (this.hasText) {
             return input.substring(getLen()).trim();
         }
-        
+
         return "";
     }
 
