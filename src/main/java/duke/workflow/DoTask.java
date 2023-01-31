@@ -1,21 +1,20 @@
 package duke.workflow;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.List;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
-import duke.util.Storage;
-import duke.util.TaskList;
-import duke.io.input.exception.UserInputException;
 import duke.io.input.exception.DukeException;
-import duke.util.service.ToDo;
+import duke.io.input.exception.UserInputException;
+import duke.util.Storage;
+import duke.util.Task;
+import duke.util.TaskList;
 import duke.util.service.Deadline;
 import duke.util.service.ScheduledEvent;
-import duke.util.Task;
+import duke.util.service.ToDo;
+
 
 /**
  * A more specific implementation of {@code Event}.
@@ -25,12 +24,12 @@ import duke.util.Task;
  */
 
 public class DoTask extends Event {
-    boolean firstGreet;
-    String lastCommand;
-    TaskList taskList;
-    Task removedTask;
-    Storage storage;
-    TaskList foundList;
+    private boolean firstGreet;
+    private String lastCommand;
+    private TaskList taskList;
+    private Task removedTask;
+    private Storage storage;
+    private TaskList foundList;
 
     /**
      * Constructs the {@code DoTask} as the user interacts
@@ -97,7 +96,9 @@ public class DoTask extends Event {
                         String[] deadlinePhraseArray = deadlineAction.split("DEADLINE ");
                         List<String> deadlinePhraseList = Arrays.asList(deadlinePhraseArray);
                         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                        Deadline newTask = new Deadline(LocalDateTime.parse(deadlineList.get(1), format), deadlinePhraseList.get(1));
+                        Deadline newTask = new Deadline(
+                                LocalDateTime.parse(deadlineList.get(1), format),
+                                deadlinePhraseList.get(1));
                         for (String i : words) {
                             this.storage = this.storage.addToStorage(i, newTask);
                         }
@@ -118,7 +119,10 @@ public class DoTask extends Event {
                         String eventBegin = timeLineSplit.get(0);
                         String eventEnd = timeLineSplit.get(1);
                         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-                        ScheduledEvent newTask = new ScheduledEvent(LocalDateTime.parse(eventBegin, format), LocalDateTime.parse(eventEnd, format), eventPhraseList.get(1));
+                        ScheduledEvent newTask = new ScheduledEvent(
+                                LocalDateTime.parse(eventBegin, format),
+                                LocalDateTime.parse(eventEnd, format),
+                                eventPhraseList.get(1));
                         for (String i : words) {
                             this.storage = this.storage.addToStorage(i, newTask);
                         }
@@ -130,7 +134,7 @@ public class DoTask extends Event {
                     if (words.get(0).equals("DELETE")) {
                         this.firstGreet = false;
                         this.removedTask = this.taskList.getTask(Integer.valueOf(words.get(1)) - 1);
-                        String splitRemovedTask[] = this.removedTask.toString().split(" ");
+                        String[] splitRemovedTask = this.removedTask.toString().split(" ");
                         List<String> removedTaskArray = Arrays.asList(splitRemovedTask);
                         for (String i : removedTaskArray) {
                             this.storage = this.storage.removeFromStorage(i, this.removedTask);
@@ -140,7 +144,7 @@ public class DoTask extends Event {
                         return this;
                     }
                     if (words.get(0).equals("FIND")) {
-                        String toFind[] = nextTask.split("FIND ");
+                        String[] toFind = nextTask.split("FIND ");
                         List<String> keywords = Arrays.asList(toFind);
                         TaskList findList = this.storage.getTaskList(keywords.get(1));
                         this.firstGreet = false;
@@ -149,7 +153,7 @@ public class DoTask extends Event {
                         return this;
                     }
                 }
-            }  catch (DukeException exception) {
+            } catch (DukeException exception) {
                 System.out.println(exception);
             } catch (Exception exception) {
                 System.out.println("ERRRR ERROR ERRR. SYSTEM FAILURE. UNKNOWN EXCEPTION. ERR ERR");
@@ -194,7 +198,7 @@ public class DoTask extends Event {
                         toPrintOut += "THIS WAS NEVER IN YOUR PLANS";
                     } else {
                         toPrintOut += '\n' + "LET ME REMIND YOU OF WHAT YOU STARTED" + '\n';
-                        for (int i = 0;  i < this.foundList.getSize(); i++) {
+                        for (int i = 0; i < this.foundList.getSize(); i++) {
                             toPrintOut += this.foundList.getTask(i).toString() + '\n';
                         }
                     }

@@ -1,10 +1,10 @@
 package duke.util.service;
 
-import duke.util.Task;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+
+import duke.util.Task;
 
 /**
  * A more specific implementation of {@code Task}
@@ -12,8 +12,8 @@ import java.time.temporal.ChronoUnit;
  */
 
 public class ScheduledEvent extends Task {
-    LocalDateTime dateBegin;
-    LocalDateTime dateEnd;
+    private LocalDateTime dateBegin;
+    private LocalDateTime dateEnd;
 
     /**
      * Construct a {@code Deadline} with the action specified
@@ -22,7 +22,8 @@ public class ScheduledEvent extends Task {
      * and "/TO".
      */
 
-    public ScheduledEvent(LocalDateTime dateBegin, LocalDateTime dateEnd, String action) {
+    public ScheduledEvent(LocalDateTime dateBegin,
+                          LocalDateTime dateEnd, String action) {
         super("E", action);
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
@@ -30,14 +31,18 @@ public class ScheduledEvent extends Task {
 
     @Override
     public String getAdditionalInfo() {
-        return " (FROM: " + dateBegin.format(DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy")) +
-                " TO: " + dateEnd.format(DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy")) + ")";
+        return " (FROM: " + dateBegin.format(
+                DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy"))
+                + " TO: " + dateEnd.format(
+                        DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy")) + ")";
     }
 
     @Override
 
     public String toString() {
-        return super.toString() + " (FROM: " + dateBegin.format(DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy")) +
-                " TO: " + dateEnd.format(DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy")) + ")";
+        return super.toString() + " (FROM: " + dateBegin.format(
+                DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy"))
+                + " TO: " + dateEnd.format(
+                        DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy")) + ")";
     }
 }

@@ -3,7 +3,7 @@ package duke.workflow;
 import duke.util.TaskList;
 
 public abstract class Event {
-    boolean isFinalEvent;
+    private boolean isFinalEvent;
 
     public Event (boolean isFinalEvent) {
         this.isFinalEvent = isFinalEvent;

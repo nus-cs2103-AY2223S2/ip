@@ -1,11 +1,12 @@
 package duke.io.input.ui;
 
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
+
 import duke.util.Storage;
 import duke.workflow.Event;
-import  duke.workflow.Greeting;
+import duke.workflow.Greeting;
 
 /**
  * Initiates Duke's interaction workflow with use.
@@ -22,6 +23,9 @@ import  duke.workflow.Greeting;
  */
 
 public class UserInteraction {
+    /**
+     * Print out Duke's logo.
+     */
     public void printLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -33,6 +37,13 @@ public class UserInteraction {
         System.out.println("_".repeat(22));
         System.out.println("");
     }
+
+    /**
+     * Print a specified {@code String} input wrapped
+     * in a styled box.
+     *
+     * @param input the {@code String} being printed out
+     */
 
     public static void printWithBracket(String input) {
         if (input.contains("\n")) {
@@ -54,6 +65,10 @@ public class UserInteraction {
             System.out.println("_".repeat(size));
         }
     }
+
+    /**
+     * Duke begins interacting with user.
+     */
 
     public void chatBegin() {
         Scanner sc = new Scanner(System.in);
@@ -79,8 +94,8 @@ public class UserInteraction {
             }
         } else {
             while (!isPlaying.equals("YES") && !isPlaying.equals("NO")) {
-                UserInteraction.printWithBracket("FOCUS, HUMAN. " +
-                        "YOU ARE TO ENTER INPUT WITH FULL CAPS.");
+                UserInteraction.printWithBracket("FOCUS, HUMAN. "
+                        + "YOU ARE TO ENTER INPUT WITH FULL CAPS.");
                 isPlaying = sc.nextLine();
             }
             if (isPlaying.equals("NO")) {

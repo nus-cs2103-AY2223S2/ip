@@ -6,9 +6,9 @@ package duke.util;
  */
 
 public class Task {
-    String nature;
-    boolean isDone;
-    String action;
+    private String nature;
+    private boolean isDone;
+    private String action;
 
     /**
      * Constructs a task with the specified nature and action from the user.
@@ -51,6 +51,14 @@ public class Task {
 
     public boolean getStatus() {
         return isDone;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public String getNature() {
+        return nature;
     }
 
     @Override

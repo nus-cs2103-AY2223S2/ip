@@ -10,7 +10,7 @@ import duke.util.TaskList;
  */
 
 public class Ending extends Event {
-    TaskList taskList;
+    private TaskList taskList;
 
     /**
      * Constructs the {@code Ending} event with an empty

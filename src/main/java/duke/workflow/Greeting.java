@@ -10,7 +10,7 @@ import duke.util.TaskList;
  */
 
 public class Greeting extends Event {
-    int status;
+    private int status;
 
     /**
      * Constructs the {@code Greeting} event that greets the user.

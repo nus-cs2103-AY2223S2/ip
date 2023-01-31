@@ -1,20 +1,36 @@
 package duke.util;
 
-import java.io.FileWriter;
 import java.io.File;
-import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
-import duke.util.TaskList;
+import java.util.Scanner;
+
+/**
+ * Load user's existing plan every duke's start up,
+ * and save his/ her current progress after program is finished.
+ *
+ * <p> Keep a database by implementing {@code HashMap}
+ * to find Tasks that contain a specified keyword. </p>
+ */
 
 public class Storage {
 
-    HashMap<String, TaskList> database;
+    private HashMap<String, TaskList> database;
 
+    /**
+     * Construct the {@code Storage} object with
+     * empty database
+     */
     public Storage() {
-        this.database = new HashMap<String, TaskList>();
+        this.database = new HashMap<>();
     }
+
+    /**
+     * Save the user's current progress to the
+     * output directory.
+     */
 
     public static void saveProgress(TaskList taskList) {
         File savedFile = new File("MY_GRAND_PLAN.txt");
@@ -23,10 +39,14 @@ public class Storage {
             FileWriter myWriter = new FileWriter("MY_GRAND_PLAN.txt", true);
             for (int i = 0; i < taskList.getSize(); i++) {
                 Task currenttask = taskList.getTask(i);
-                if(currenttask.isDone) {
-                    myWriter.write(currenttask.nature + " | " + "X" + " | " + currenttask.action + currenttask.getAdditionalInfo() + '\n');
+                if (currenttask.getStatus()) {
+                    myWriter.write(currenttask.getNature()
+                            + " | " + "X" + " | " + currenttask.getAction()
+                            + currenttask.getAdditionalInfo() + '\n');
                 } else {
-                    myWriter.write(currenttask.nature + " | " + " " + " | " + currenttask.action + currenttask.getAdditionalInfo() + '\n');
+                    myWriter.write(currenttask.getNature()
+                            + " | " + " " + " | " + currenttask.getAction()
+                            + currenttask.getAdditionalInfo() + '\n');
                 }
             }
             myWriter.close();
@@ -35,7 +55,15 @@ public class Storage {
             System.out.println("BEE BOO BOOP...");
         }
     }
-    public static TaskList loadProgress(String link) {
+
+    /**
+     * Load the user's existing progress from the
+     * output directory.
+     *
+     * @return a {@code TaskList} with the user's
+     *          existing Task
+     */
+    public static TaskList loadProgress() {
         try {
             File previousProgress = new File("MY_GRAND_PLAN.txt");
             Scanner progressScanner = new Scanner(previousProgress);
@@ -51,6 +79,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Retrieve the list of tasks that contains a specified keyword.
+     * @param keyword the keyword to search the list of tasks
+     * @return a {@code TaskList} where each task in the list contains
+     *          the specified keyword
+     */
+
     public TaskList getTaskList(String keyword) {
         if (this.database.containsKey(keyword)) {
             return this.database.get(keyword);
@@ -58,6 +93,12 @@ public class Storage {
             return new TaskList();
         }
     }
+
+    /**
+     * Add a task to the database and assign it to a key for easy retrieval.
+     * @param keyword the keyword to assign the {@code Task}
+     * @return a new {@code Storage} with the task added to the database
+     */
 
     public Storage addToStorage(String keyword, Task task) {
         if (this.database.containsKey(keyword)) {
@@ -71,6 +112,15 @@ public class Storage {
         }
         return this;
     }
+
+    /**
+     * Remove a task from the database
+     *
+     * @param keyword the keyword to remove the {@code Task} from the
+     *                list of Tasks in database with assigned to that
+     *                keyword
+     * @return a new {@code Storage} with the task removed from the database
+     */
 
     public Storage removeFromStorage(String keyword, Task task) {
         if (this.database.containsKey(keyword)) {

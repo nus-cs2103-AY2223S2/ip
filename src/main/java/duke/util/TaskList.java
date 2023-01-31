@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public class TaskList {
-    List<Task> listTask;
+    private List<Task> listTask;
 
     /**
      * Constructs an empty list of {@code Task}.
@@ -72,12 +72,10 @@ public class TaskList {
      * Retrieve {@code Task} to the list of tasks,
      * return type is {@code Task}.
      *
-     * @param index in dex of the {@code Task
+     * @param index in dex of the {@code Task}
      *               to retrieve
      *
-     * @return the task as a {@code Task}
-     * @throws duke.io.input.exception.UserInputException if index is out of range
-     *                of the list of tasks
+     * @return the task at the specified index
      */
 
     public Task getTask(int index) {

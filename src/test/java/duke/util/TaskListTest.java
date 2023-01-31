@@ -1,13 +1,14 @@
 package duke.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
-import duke.util.TaskList;
+
 import duke.util.service.ToDo;
 
 public class TaskListTest {
-    TaskList taskList = new TaskList();
-    ToDo todoCheck = new ToDo("DRINK WATER");
+    private TaskList taskList = new TaskList();
+    private ToDo todoCheck = new ToDo("DRINK WATER");
     @Test
     void markDoneTest() {
         taskList = taskList.addTask(todoCheck);

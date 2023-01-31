@@ -1,11 +1,9 @@
 package duke.util.service;
 
-import duke.util.Task;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+
+import duke.util.Task;
 
 /**
  * A more specific implementation of {@code Task}
@@ -13,7 +11,7 @@ import java.time.temporal.ChronoUnit;
  */
 
 public class Deadline extends Task {
-    LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     /**
      * Construct a {@code Deadline} with the
@@ -27,6 +25,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (BY: " + this.deadline.format(DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy")) + ")";
+        return super.toString() + " (BY: " + this.deadline.format(
+                DateTimeFormatter.ofPattern("hh:mm a MMM dd yyyy")) + ")";
     }
 }
