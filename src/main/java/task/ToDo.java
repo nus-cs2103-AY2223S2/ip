@@ -1,3 +1,7 @@
+package task;
+
+import dukeexception.DukeException;
+
 public class ToDo extends Task {
     private ToDo(String str, boolean checked) {
         super(str, checked);

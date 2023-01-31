@@ -1,3 +1,11 @@
+package command;
+
+import dukeexception.DukeException;
+import store.Storage;
+import store.TaskList;
+import task.Event;
+import userinteraction.Ui;
+
 public class AddEventCommand extends AddTaskCommand {
     public AddEventCommand(String[] inputArr) {
         super(inputArr);

@@ -1,3 +1,8 @@
+package task;
+
+import dukeexception.DukeException;
+import utils.DateTimeUtils;
+
 public class Event extends Task {
     private final String start;
     private final String end;

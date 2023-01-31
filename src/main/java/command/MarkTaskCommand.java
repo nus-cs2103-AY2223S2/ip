@@ -1,3 +1,10 @@
+package command;
+
+import dukeexception.DukeException;
+import store.Storage;
+import store.TaskList;
+import userinteraction.Ui;
+
 public class MarkTaskCommand extends Command {
     private final boolean isMarked;
     public MarkTaskCommand(String[] inputArr, boolean isMarked) {

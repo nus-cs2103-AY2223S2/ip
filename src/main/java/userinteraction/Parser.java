@@ -1,3 +1,8 @@
+package userinteraction;
+
+import command.*;
+import dukeexception.DukeException;
+
 public class Parser {
     private enum CommandNames {
         LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, BYE
@@ -31,7 +36,7 @@ public class Parser {
         } catch(NumberFormatException e) {
             System.out.println("Please provide numbers");
         } catch(IllegalArgumentException e) {
-            System.out.println("Invalid Command");
+            System.out.println("Invalid command.Command");
         } catch (Exception e) {
             System.out.println("Unknown error");
         }

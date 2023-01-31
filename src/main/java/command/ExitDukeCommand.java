@@ -1,3 +1,9 @@
+package command;
+
+import store.Storage;
+import store.TaskList;
+import userinteraction.Ui;
+
 public class ExitDukeCommand extends Command {
     public ExitDukeCommand(String[] inputArr) {
         super(inputArr);

@@ -1,3 +1,11 @@
+package command;
+
+import dukeexception.DukeException;
+import store.Storage;
+import store.TaskList;
+import task.DeadLine;
+import userinteraction.Ui;
+
 public class AddDeadLineCommand extends AddTaskCommand {
     public AddDeadLineCommand(String[] inputArr) {
         super(inputArr);

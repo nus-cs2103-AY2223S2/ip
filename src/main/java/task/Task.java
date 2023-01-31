@@ -1,3 +1,5 @@
+package task;
+
 abstract public class Task {
     private final String str;
     private boolean checked;
