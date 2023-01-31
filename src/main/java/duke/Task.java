@@ -1,4 +1,8 @@
-public abstract class Task {
+package duke;
+
+import java.io.Serializable;
+
+public abstract class Task implements Serializable {
     protected String description;
     protected boolean isDone;
 
