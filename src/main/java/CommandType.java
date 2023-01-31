@@ -5,5 +5,6 @@ public enum CommandType {
     MARK,
     UNMARK,
     LIST,
+    DELETE,
     BYE
 }

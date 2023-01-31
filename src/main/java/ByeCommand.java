@@ -6,4 +6,9 @@ public class ByeCommand extends Command {
         ui.systemPrint("State successfully saved.");
         ui.prettyPrint("Hope I helped. Goodbye!");
     }
+
+    @Override
+    public boolean shouldContinue() {
+        return false;
+    }
 }

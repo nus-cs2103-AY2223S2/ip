@@ -1,7 +1,7 @@
 public class UnmarkCommand extends Command{
     int taskIdToUnmark;
 
-    public UnmarkCommand(TaskList taskList, int taskIdToUnmark) {
+    public UnmarkCommand(int taskIdToUnmark) {
         this.taskIdToUnmark = taskIdToUnmark;
     }
     @Override
