@@ -82,4 +82,21 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return allTasks;
     }
+
+    public String findTaskWithWord (String word) {
+        String tasksWithWord = "Here are the matching tasks in your list:\n";
+        int index = 0;
+        for (int i = 0; i < allTasks.size(); i++) {
+            if (allTasks.get(i).getItem().contains(word)) {
+                index++;
+                tasksWithWord = tasksWithWord.concat(i + ". "+ allTasks.get(i).toString()) + "\n";
+            }
+        }
+
+        if (index == 0) {
+            return "Unable to find task with the word+ " + word;
+        }
+
+        return tasksWithWord;
+    }
 }
