@@ -1,15 +1,14 @@
 package duke;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Scanner;
-import java.io.FileReader;
 
 class Storage {
-//    private static final Pattern TO_MATCH = Pattern.compile("\\[(?<taskType>\\S)]\\[(?<isDone>[ X])] (?<description>.*)");
     private static final Pattern TO_MATCH = Pattern.compile("\\[(?<type>\\S)]\\[(?<done>[ X])] (?<arguments>.*)");
     private final String fileName;
     private FileWriter fw;
@@ -32,7 +31,7 @@ class Storage {
                 throw new DukeException("Task List is Corrupted!");
             }
             String taskType = matcher.group("type");
-            boolean isDone =  matcher.group("done").equals("X");
+            boolean isDone = matcher.group("done").equals("X");
             String description = matcher.group("arguments");
             switch (taskType) {
             case "T":
@@ -62,8 +61,8 @@ class Storage {
     }
 
     void write(String s) throws IOException {
-       fw.write(s + '\n');
-       fw.flush();
+        fw.write(s + '\n');
+        fw.flush();
     }
 
     void close() throws IOException {

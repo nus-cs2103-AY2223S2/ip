@@ -1,6 +1,5 @@
 package duke;
 
-import java.lang.StringBuilder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -28,7 +27,7 @@ class Parser {
     String returnList() {
         StringBuilder out = new StringBuilder();
         for (int i = 1; i <= taskList.size(); i++) {
-            out.append(String.format("%d. %s\n", i, taskList.get(i-1)));
+            out.append(String.format("%d. %s\n", i, taskList.get(i - 1)));
         }
         return out.toString();
     }
@@ -50,7 +49,7 @@ class Parser {
     String delete(String input) {
         int i = Integer.parseInt(input.split(" ", 2)[1]) - 1;
         Task task = taskList.remove(i);
-        String out =  String.format("\tNoted. I've removed this task:\n\t  %s", task);
+        String out = String.format("\tNoted. I've removed this task:\n\t  %s", task);
         out += String.format("\n\tNow you have %d tasks in the list.", taskList.size());
         return out;
     }
@@ -94,6 +93,8 @@ class Parser {
                 taskList.add(task);
                 return new String[]{String.valueOf(taskList.size()), String.format("added: %s", task)};
             }
+            default:
+                DukeException.rethrow("UnknownCommand");
             }
         } catch (DukeException.ToDoException | DukeException.UnknownCommandException e) {
             System.out.println(e.getMessage());
