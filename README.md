@@ -2,6 +2,15 @@
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
+## Image Credits
+
+Image credited to Stable Diffusion. Images are generated using [Diffusion Bee](https://diffusionbee.com), GUI Wrapper of Stable Diffusion
+![Duke](src/main/resources/images/Duke.png)
+![User](src/main/resources/images/User.png)
+
+![Gen1](src/main/resources/images/Bee_SS_1.png)
+![Gen2](src/main/resources/images/Bee_SS_2.png)
+
 ## Setting up in Intellij
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
