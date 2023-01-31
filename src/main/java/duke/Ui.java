@@ -8,11 +8,19 @@ import java.util.Scanner;
 public class Ui {
     private static Scanner sc = new Scanner(System.in);
 
-    // For checking whether to continue running Duke, i.e. exit command has not been called.
-    public static boolean isRunning = true;
-    // Command line input from user stored here.
-    public static String line;
-     
+    /** For checking whether to continue running Duke, i.e. exit command has not been called. */
+    private static boolean isRunning = true;
+    /** Command line input from user stored here. */
+    private static String line;
+
+    public static boolean getIsRunning() {
+        return isRunning;
+    }
+
+    public static String getLine() {
+        return line;
+    }
+
     /**
      * Craft string output for showing number of tasks in a list.
      * @param numTask Number of tasks in the list
@@ -40,7 +48,7 @@ public class Ui {
         try {
             if (isRunning) {
                 line = sc.nextLine();
-            } 
+            }
         } catch (java.util.NoSuchElementException e) {
             isRunning = false;
         }
@@ -72,7 +80,7 @@ public class Ui {
      * @return Indented message.
      */
     public static String indentString(String msg, int indendationLevel) {
-        String indent = "  " .repeat(indendationLevel);
+        String indent = "  ".repeat(indendationLevel);
         String[] lines = msg.split("\n");
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < lines.length; i++) {

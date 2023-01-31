@@ -44,23 +44,23 @@ public enum CommandInput {
         CommandInput commandInput = getCommandInput(commandLine);
         switch (commandInput) {
         case LIST:
-            return new ListCmd(tasks, Ui.line);
+            return new ListCmd(tasks, Ui.getLine());
         case MARK:  
-            return new MarkCmd(tasks, Ui.line);
+            return new MarkCmd(tasks, Ui.getLine());
         case UNMARK:
-            return new UnmarkCmd(tasks, Ui.line);
+            return new UnmarkCmd(tasks, Ui.getLine());
         case DELETE:
-            return new DeleteCmd(tasks, Ui.line);
+            return new DeleteCmd(tasks, Ui.getLine());
         case EVENT:
-            return new EventCmd(tasks, Ui.line);
+            return new EventCmd(tasks, Ui.getLine());
         case DEADLINE:
-            return new DeadlineCmd(tasks, Ui.line);
+            return new DeadlineCmd(tasks, Ui.getLine());
         case TODO:
-            return new ToDoCmd(tasks, Ui.line);
+            return new ToDoCmd(tasks, Ui.getLine());
         case BYE:
-            return new ByeCmd(tasks, Ui.line);
+            return new ByeCmd(tasks, Ui.getLine());
         case FIND:
-            return new FindCmd(tasks, Ui.line);
+            return new FindCmd(tasks, Ui.getLine());
         default:
             return new UnrecognizedCmd(tasks, commandLine);
         }

@@ -25,8 +25,8 @@ public class Duke {
 
     public void run() {
         Ui.greetUser();
-        while (Ui.isRunning) {
-            Command command = CommandInput.getCommandFromInput(Ui.line, tasks);
+        while (Ui.getIsRunning()) {
+            Command command = CommandInput.getCommandFromInput(Ui.getLine(), tasks);
             try {
                 command.execute();
             } catch (CommandExecutionError e) {
