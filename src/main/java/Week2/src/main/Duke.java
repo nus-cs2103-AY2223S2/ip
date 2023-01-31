@@ -3,6 +3,10 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
 import java.io.FileWriter;
 import java.io.IOException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * A simple todo bot to manage my todo list.
@@ -10,12 +14,16 @@ import java.io.IOException;
  * A simple todo bot that helps you to manage your tasks with deadline or occuring time.
  * @author Park Hyunjin
  */
-public class Duke {
+public class Duke extends Application {
     private static Storage storage;
     private Ui ui;
     private static TaskList tasklist;
     static boolean isBye = false;
 
+    @Override
+    public void start(Stage stage) {
+        
+    }
     /**
      * Constructor of Duke.
      * It begins the basic operation of the program when it is constructed.
