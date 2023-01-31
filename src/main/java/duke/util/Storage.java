@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
 import duke.util.TaskList;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Storage {
     public static void saveProgress(TaskList taskList) {
@@ -26,6 +28,18 @@ public class Storage {
         }
     }
     public static TaskList loadProgress(String link) {
-        return new TaskList();
+        try {
+            File previousProgress = new File("MY_GRAND_PLAN.txt");
+            Scanner progressScanner = new Scanner(previousProgress);
+            TaskList returnTaskList = new TaskList();
+            while (progressScanner.hasNextLine()) {
+                String data = progressScanner.nextLine();
+
+            }
+            progressScanner.close();
+            return returnTaskList;
+        } catch (FileNotFoundException e) {
+            return new TaskList();
+        }
     }
 }

@@ -1,20 +1,38 @@
 package duke.workflow;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import duke.util.TaskList;
-import duke.io.input.exception.DukeException;
 import duke.io.input.exception.UserInputException;
+import duke.io.input.exception.DukeException;
 import duke.util.service.ToDo;
 import duke.util.service.Deadline;
 import duke.util.service.ScheduledEvent;
+
+/**
+ * A more specific implementation of {@code Event}.
+ *
+ * Part of the workflow where the chatbot determines the next
+ * possible action based on the user's input
+ */
+
 public class DoTask extends Event {
     boolean firstGreet;
     String lastCommand;
     TaskList taskList;
     String removedTask;
 
+    /**
+     * Constructs the initial {@code DoTask} event when
+     * user uses Duke for the first time. The last command,
+     * as well as the taskList, is empty.
+     *
+     */
     public DoTask() {
         super(false);
         this.firstGreet = true;
@@ -22,12 +40,34 @@ public class DoTask extends Event {
         this.taskList = new TaskList();
     }
 
+    /**
+     * Constructs the new {@code DoTask} event after the user has
+     * entered an input.
+     *
+     * @param firstGreet is true if it's the first time user interacts with Duke;
+     *                   false otherwise
+     * @param lastCommand the last input entered by user
+     * @param taskList the current list of tasks at the moment
+     *                 the user enters the new input
+     */
     public DoTask(boolean firstGreet, String lastCommand, TaskList taskList) {
         super(false);
         this.firstGreet = firstGreet;
         this.lastCommand = lastCommand;
         this.taskList = taskList;
     }
+
+    /**
+     * Constructs the new {@code DoTask} event after the user has
+     * deleted a task in the list of tasks.
+     *
+     * @param firstGreet is true if it's the first time user interacts with Duke;
+     *                   false otherwise
+     * @param lastCommand the last input entered by user
+     * @param taskList the current list of tasks at the moment
+     *                 the user enters the new input
+     * @param removedTask the task removed by user from the previous command
+     */
 
     public DoTask(boolean firstGreet, String lastCommand, TaskList taskList, String removedTask) {
         super(false);
@@ -36,6 +76,13 @@ public class DoTask extends Event {
         this.taskList = taskList;
         this.removedTask = removedTask;
     }
+
+    /**
+     * Determines the next possible action after the user has entered an input.
+     *
+     * @return a new event that follows from the last user input
+     */
+
     public Event toNext() {
         Scanner sc = new Scanner(System.in);
         String nextTask = sc.nextLine();
@@ -66,7 +113,9 @@ public class DoTask extends Event {
                         String deadlineAction = deadlineList.get(0);
                         String[] deadlinePhraseArray = deadlineAction.split("DEADLINE ");
                         List<String> deadlinePhraseList = Arrays.asList(deadlinePhraseArray);
-                        return new DoTask(false, deadlinePhraseList.get(1), this.taskList.addTask(new Deadline(deadlineList.get(1), deadlinePhraseList.get(1))));
+                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                        return new DoTask(false, deadlinePhraseList.get(1), this.taskList.addTask(
+                                new Deadline(LocalDateTime.parse(deadlineList.get(1), format), deadlinePhraseList.get(1))));
                     }
                     if (words.get(0).equals("EVENT")) {
                         String[] splitFrom = nextTask.split(" /FROM ");
@@ -79,7 +128,9 @@ public class DoTask extends Event {
                         List<String> timeLineSplit = Arrays.asList(timeFrame);
                         String eventBegin = timeLineSplit.get(0);
                         String eventEnd = timeLineSplit.get(1);
-                        return new DoTask(false, eventPhraseList.get(1), this.taskList.addTask(new ScheduledEvent(eventBegin, eventEnd, eventPhraseList.get(1))));
+                        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+                        return new DoTask(false, eventPhraseList.get(1), this.taskList.addTask(
+                                new ScheduledEvent(LocalDateTime.parse(eventBegin, format), LocalDateTime.parse(eventEnd, format), eventPhraseList.get(1))));
                     }
                     if (words.get(0).equals("DELETE")) {
                         this.removedTask = this.taskList.getTask(Integer.valueOf(words.get(1)) - 1);
@@ -89,7 +140,7 @@ public class DoTask extends Event {
             }  catch (DukeException exception) {
                 System.out.println(exception);
             } catch (Exception exception) {
-                System.out.println("ERRRR ERROR ERRR");
+                System.out.println("ERRRR ERROR ERRR. SYSTEM FAILURE. UNKNOWN EXCEPTION. ERR ERR");
             }
         }
         return this;

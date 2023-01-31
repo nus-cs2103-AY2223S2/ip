@@ -6,6 +6,21 @@ import java.util.List;
 import duke.util.Storage;
 import duke.workflow.Event;
 import  duke.workflow.Greeting;
+
+/**
+ * Initiates Duke's interaction workflow with use.
+ * The flow starts with the {@code Greeting} event where Duke
+ * says hello to the user.
+ *
+ * <p> It then proceeds to the {@code DoTask} event
+ * where Duke makes sense of the user input and determine the possible
+ * actions. </p>
+ *
+ * <p> The workflow ends with the {@code Ending} event where Duke
+ * says goodbye to the user. </p>
+ *
+ */
+
 public class UserInteraction {
     public void printLogo() {
         String logo = " ____        _        \n"
