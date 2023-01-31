@@ -16,6 +16,10 @@ public class TaskList {
         return tasks;
     }
 
+    public String printDescription(int idx) {
+        return tasks.get(idx).getDescription();
+    }
+
     public void markTask(int idx) {
         tasks.get(idx).markTask();
     }

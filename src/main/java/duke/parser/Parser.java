@@ -18,9 +18,11 @@ public class Parser {
         Pattern mark = Pattern.compile("mark [0-9]+");
         Pattern unmark = Pattern.compile("unmark [0-9]+");
         Pattern delete = Pattern.compile("delete [0-9]+");
+        Pattern find = Pattern.compile("find .*");
         Matcher matchMark = mark.matcher(userInput);
         Matcher matchUnmark = unmark.matcher(userInput);
         Matcher matchDelete = delete.matcher(userInput);
+        Matcher matchFind = find.matcher(userInput);
 
         if (userInput.equals("list")) {
             return new ListCommand();
@@ -35,6 +37,9 @@ public class Parser {
         } else if (matchDelete.matches()) {
             int idx = Integer.parseInt(userInput.split(" ")[1]);
             return new DeleteCommand(idx);
+        } else if (matchFind.matches()) {
+            String keyword = userInput.split(" ")[1];
+            return new FindCommand(keyword);
         } else {
             String[] inputs = userInput.split(" ");
             String taskType = inputs[0];
