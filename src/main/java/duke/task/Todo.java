@@ -4,7 +4,7 @@ public class Todo extends Task {
     /**
      * 
      * @param name: a String indicating the name of the todo task
-     * @param status: a String indicating whether the task is done
+     * @param status: an int indicating whether the task is done
      */
     public Todo(String name, int status) {
         super(name, status);
@@ -18,12 +18,18 @@ public class Todo extends Task {
         }
     }
     /**
-     * overrides toString method
+     * overrides toString method to display the type of the task, its status, and then its name.
      */
+    @Override
     public String toString() {
         return "[T]" + status + " " + name;
     }
 
+    /**
+     * method that helps with updating local tasks
+     * @return a String to be written to local hard disk
+     */
+    @Override
     public String toStoreFormatString() {
         return String.format("T/%s/%d", super.name, this.getStatusNo());
     }
