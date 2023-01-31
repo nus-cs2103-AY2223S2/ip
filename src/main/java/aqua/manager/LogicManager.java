@@ -7,23 +7,35 @@ import java.util.Scanner;
 import aqua.exception.IllegalSyntaxException;
 import aqua.exception.LoadException;
 import aqua.exception.ProcedureExecutionException;
+import aqua.logic.CommandLineInput;
 import aqua.logic.parser.ArgumentParser;
 import aqua.logic.parser.CommandLineInputParser;
+import aqua.logic.parser.Parser;
 import aqua.storage.Loadable;
 
 /** Manager of the application's logical processes. */
 public class LogicManager implements Loadable {
-    private final CommandLineInputParser inputParser;
+    private final Parser<CommandLineInput> inputParser;
     private final TaskManager taskManager;
 
     private boolean isClosed = false;
 
 
     /**
-     * Constructs a LogicManager.
+     * Constructs a LogicManager that uses the default CommandLineInputParser.
      */
     public LogicManager() {
-        inputParser = new CommandLineInputParser(new ArgumentParser());
+        this(new CommandLineInputParser(new ArgumentParser()));
+    }
+
+
+    /**
+     * Construcs a LogicManager that uses the specified CommandLineInputParser.
+     *
+     * @param inputParser - the CommandLineInputParser to use.
+     */
+    public LogicManager(Parser<CommandLineInput> inputParser) {
+        this.inputParser = inputParser;
         taskManager = new TaskManager();
     }
 
@@ -56,7 +68,7 @@ public class LogicManager implements Loadable {
      *
      * @return the input parser.
      */
-    public CommandLineInputParser getInputParser() {
+    public Parser<CommandLineInput> getInputParser() {
         return inputParser;
     }
 
