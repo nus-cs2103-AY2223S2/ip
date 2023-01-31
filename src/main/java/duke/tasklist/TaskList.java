@@ -1,9 +1,9 @@
 package duke.tasklist;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Represents the list of <code>Tasks</code> that the user has entered into the chatbot.
@@ -63,7 +63,7 @@ public class TaskList {
             return;
         }
         System.out.println("Here are the tasks in your list:");
-        int numberOfTasks= tasks.size();
+        int numberOfTasks = tasks.size();
         //Process each task in the storage
         for (int i = 0; i < numberOfTasks; i = i + 1) {
             String numbering = Integer.toString(i + 1) + ". ";

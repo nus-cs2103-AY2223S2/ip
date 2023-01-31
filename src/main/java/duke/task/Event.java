@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.datetime.DateTime;
-
 import java.time.temporal.Temporal;
+
+import duke.datetime.DateTime;
 
 /**
  * Represents an event <code>Task</code> that can be kept track of, starting and ending at a specific date/time.
@@ -26,7 +26,6 @@ public class Event extends Task {
 
     /** A string where the start date is formatted in either yyyy-MM-dd HH:mm or yyyy-MM-dd. */
     private String formattedStartDate;
-    /** End date of the event. */
 
     /** A string where the deadline is formatted in either yyyy-MM-dd HH:mm or yyyy-MM-dd. */
     private String formattedEndDate;
@@ -59,10 +58,10 @@ public class Event extends Task {
     public String getStatusOfTaskInString() {
         String typeOfTask = "E";
         return (this.isDone)
-                ? "[" + typeOfTask + "][X] " + this.taskName + (" (from: ") + this.formattedStartDate +
-                        " to: " + this.formattedEndDate + ")"
-                : "[" + typeOfTask + "][ ] " + this.taskName + (" (from: ") + this.formattedStartDate +
-                        " to: " + this.formattedEndDate + ")";
+                ? "[" + typeOfTask + "][X] " + this.taskName + (" (from: ") + this.formattedStartDate
+                        + " to: " + this.formattedEndDate + ")"
+                : "[" + typeOfTask + "][ ] " + this.taskName + (" (from: ") + this.formattedStartDate
+                        + " to: " + this.formattedEndDate + ")";
     }
 
 
@@ -89,12 +88,16 @@ public class Event extends Task {
      *
      * @return the <code>String</code> containing the raw start date and time.
      */
-    public String getRawStartDate() { return rawStartDate;}
+    public String getRawStartDate() {
+        return rawStartDate;
+    }
 
     /**
      * Gets the raw end date of the task.
      *
      * @return the <code>String</code> containing the raw end date and time.
      */
-    public String getRawEndDate() { return rawEndDate;}
+    public String getRawEndDate() {
+        return rawEndDate;
+    }
 }

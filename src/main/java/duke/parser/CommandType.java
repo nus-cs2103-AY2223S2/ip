@@ -74,14 +74,18 @@ public enum CommandType {
      *
      * @return the date to be checked by this on command.
      */
-    public String getOnDate() { return this.onDate;}
+    public String getOnDate() {
+        return this.onDate;
+    }
 
     /**
      * Gets the key phrase to be looked up in task names.
      *
      * @return the key phrase to be checked.
      */
-    public String getKeyPhrase() { return this.keyPhrase;}
+    public String getKeyPhrase() {
+        return this.keyPhrase;
+    }
 
 
 
@@ -131,5 +135,7 @@ public enum CommandType {
     /**
      * Gets the key phrase to be looked up in task names.
      */
-    public void setKeyPhrase(String keyPhrase) { this.keyPhrase = keyPhrase;}
+    public void setKeyPhrase(String keyPhrase) {
+        this.keyPhrase = keyPhrase;
+    }
 }

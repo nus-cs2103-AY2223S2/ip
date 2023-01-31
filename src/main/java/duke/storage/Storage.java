@@ -1,14 +1,5 @@
 package duke.storage;
 
-import duke.datetime.DateTime;
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -18,16 +9,27 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.Temporal;
 import java.util.Scanner;
 
+import duke.datetime.DateTime;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 /**
  * Responsible for file-related operations, such as reading and writing of the data file when dealing with loading
  * and saving of task list.
  */
 public class Storage {
+    //CHECKSTYLE.OFF: Checker
     /** Absolute file path where the folder containing the data file is stored in. */
     private String data_file_folder_path;
 
     /** Absolute file path where the data file should be stored in. **/
     private String data_file_path;
+    //CHECKSTYLE.ON: Checker
 
     /**
      * Constructs a <code>Storage</code> instance.
@@ -48,9 +50,9 @@ public class Storage {
     public boolean prepareFile() {
         //Make the directory
         File directory = new File(data_file_folder_path);
-        if (! directory.exists()) {
+        if (!directory.exists()) {
             boolean makeDirectoryStatus = directory.mkdir();
-            if (! makeDirectoryStatus) {
+            if (!makeDirectoryStatus) {
                 Ui.printStraightLine();
                 System.out.println("Folder cannot be created.");
                 Ui.printStraightLine();
@@ -120,7 +122,7 @@ public class Storage {
                         //Create new event task
                         Temporal start = DateTime.getDateTimeObject(currentTaskArray[3]);
                         Temporal end = DateTime.getDateTimeObject(currentTaskArray[4]);
-                        if (! DateTime.isValidDuration(start, end)) {
+                        if (!DateTime.isValidDuration(start, end)) {
                             throw new DukeException("Start date must be before end date.");
                         }
                         Task eventTask = new Event(currentTaskArray[2], currentTaskArray[3], currentTaskArray[4],
@@ -142,6 +144,8 @@ public class Storage {
                         Ui.printStraightLine();
                         return false;
                     }
+                default:
+                    //Do nothing
                 }
             }
             s.close();

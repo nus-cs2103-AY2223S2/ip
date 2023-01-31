@@ -1,9 +1,10 @@
 package duke;
 
 import duke.command.Command;
-import duke.tasklist.TaskList;
-import duke.parser.*;
+import duke.parser.CommandType;
+import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
