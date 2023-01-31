@@ -1,4 +1,4 @@
-package Ava.Commands;
+package Ava.commands;
 
 
 import Ava.Storage;

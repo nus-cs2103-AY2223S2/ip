@@ -1,10 +1,11 @@
-package Ava.Commands;
+package ava.commands;
 
 import Ava.Ava;
-import Ava.Exceptions.AvaException;
+import Ava.commands.AddTask;
+import Ava.exceptions.AvaException;
 import Ava.Storage;
 import Ava.TaskList;
-import Ava.Tasks.Todo;
+import Ava.tasks.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

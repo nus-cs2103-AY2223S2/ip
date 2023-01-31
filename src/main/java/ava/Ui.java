@@ -1,7 +1,7 @@
 package Ava;
 
-import Ava.Commands.AvaCommand;
-import Ava.Exceptions.AvaException;
+import Ava.commands.AvaCommand;
+import Ava.exceptions.AvaException;
 import java.util.Scanner;
 
 public class Ui {

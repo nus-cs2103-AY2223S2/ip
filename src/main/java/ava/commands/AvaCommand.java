@@ -1,6 +1,6 @@
-package Ava.Commands;
+package Ava.commands;
 
-import Ava.Exceptions.AvaException;
+import Ava.exceptions.AvaException;
 import Ava.Storage;
 import Ava.TaskList;
 

@@ -1,11 +1,11 @@
 package Ava;
 
-import Ava.Exceptions.AvaException;
-import Ava.Exceptions.NonExistentTask;
-import Ava.Tasks.Deadline;
-import Ava.Tasks.Event;
-import Ava.Tasks.Task;
-import Ava.Tasks.Todo;
+import Ava.exceptions.AvaException;
+import Ava.exceptions.NonExistentTask;
+import Ava.tasks.Deadline;
+import Ava.tasks.Event;
+import Ava.tasks.Task;
+import Ava.tasks.Todo;
 
 
 import java.util.ArrayList;

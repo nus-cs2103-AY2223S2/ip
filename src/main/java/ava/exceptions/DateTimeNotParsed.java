@@ -1,4 +1,4 @@
-package Ava.Exceptions;
+package Ava.exceptions;
 
 
 public class DateTimeNotParsed extends AvaException{

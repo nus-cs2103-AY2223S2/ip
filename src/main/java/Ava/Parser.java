@@ -1,9 +1,8 @@
 package Ava;
 
-
-import Ava.Commands.*;
-import Ava.Exceptions.AvaException;
-import Ava.Exceptions.CommandNotFoundException;
+import Ava.commands.*;
+import Ava.exceptions.AvaException;
+import Ava.exceptions.CommandNotFoundException;
 
 
 
@@ -40,9 +39,6 @@ public class Parser {
                 case "bye" :
                     command = new Exit();
                     break;
-                case "find":
-                    command = new FindTask(parseFindTask(inputArray[1]));
-                    break;
                 default:
                     throw new CommandNotFoundException(input);
             }
@@ -71,10 +67,6 @@ public class Parser {
         output[1] = fromTo[0];
         output[2] = fromTo[1];
         return output;
-    }
-
-    private String[] parseFindTask(String mes) {
-        return new String[]{mes.trim()};
     }
 
     private String[] parseMarkUnmark(String mes){

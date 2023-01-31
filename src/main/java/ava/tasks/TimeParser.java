@@ -1,7 +1,7 @@
-package Ava.Tasks;
+package Ava.tasks;
 
 
-import Ava.Exceptions.DateTimeNotParsed;
+import Ava.exceptions.DateTimeNotParsed;
 
 import java.time.LocalDateTime;
 import java.time.LocalDate;
