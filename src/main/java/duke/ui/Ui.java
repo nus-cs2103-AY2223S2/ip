@@ -1,9 +1,9 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import duke.task.Task;
 
 /**
  * Prints messages with desired formatting.
@@ -43,7 +43,7 @@ public class Ui {
             if (line.length() > maxCharPerLine) {
                 int numNewLines = (int) Math.ceil(line.length() / maxCharPerLine);
                 String[] newLines = new String[numNewLines];
-                for (int i=0; i < numNewLines; i++) {
+                for (int i = 0; i < numNewLines; i++) {
                     if (i < numNewLines - 1) {
                         newLines[i] = line.substring(100 * i, 100 * i + 1);
                     } else {
@@ -84,7 +84,8 @@ public class Ui {
      * @param taskCount Number of tasks after new task is added.
      */
     public void printAddTaskMessage(Task task, int taskCount) {
-        String addTaskMessage = "Got it. I've added this task:\n     " + task + "\nNow you have " + taskCount + " tasks in the list";
+        String addTaskMessage = "Got it. I've added this task:\n     " + task //
+                + "\nNow you have " + taskCount + " tasks in the list";
         print(addTaskMessage);
     }
 
@@ -94,7 +95,8 @@ public class Ui {
      * @param taskCount Number of tasks after task is deleted.
      */
     public void printDeleteTaskMessage(Task task, int taskCount) {
-        String deleteTaskMessage = "Noted. I've removed this task:\n     " + task + "\nNow you have " + taskCount + " tasks in the list";
+        String deleteTaskMessage = "Noted. I've removed this task:\n     " + task //
+                + "\nNow you have " + taskCount + " tasks in the list";
         print(deleteTaskMessage);
     }
 

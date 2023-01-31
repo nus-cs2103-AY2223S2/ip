@@ -1,21 +1,29 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.Commands;
-import duke.storage.Storage;
-import duke.task.TaskList;
-import duke.ui.Ui;
-import duke.ui.Parser;
-import duke.exception.DukeException;
-
 import java.util.Scanner;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Parser;
+import duke.ui.Ui;
+
+/**
+ * Main class to run Duke programme.
+ *
+ * @author Lian Kok Hai
+ *
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    Parser parser;
+    private Parser parser;
 
+    /**
+     * Constructs a Duke instance with saved information loaded from save directory.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -28,6 +36,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke functionality.
+     */
     public void run() {
         Scanner s = new Scanner(System.in);
         String text;

@@ -1,14 +1,14 @@
 package duke.storage;
 
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Supports operations related to saving and loading TaskList from text file.
@@ -60,5 +60,4 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
 }

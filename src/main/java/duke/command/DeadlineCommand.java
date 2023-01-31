@@ -1,11 +1,11 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Deadline;
 import duke.ui.Ui;
-import duke.exception.DukeException;
 
 /**
  * Command to add new Deadline Task to TaskList.

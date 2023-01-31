@@ -36,7 +36,7 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public String getTaskName(){
+    public String getTaskName() {
         return this.taskName;
     }
 
@@ -46,7 +46,7 @@ public abstract class Task {
      *
      * @return Encoded String representation of task.
      */
-    abstract public String encode();
+    public abstract String encode();
 
     /**
      * Decodes a String representation of a task into a Task object.
@@ -59,15 +59,17 @@ public abstract class Task {
         String[] splitStr = str.split(" \\| ", 5);
         Task result = null;
         switch(splitStr[0]) {
-            case "T":
-                result = new ToDo(splitStr[2]);
-                break;
-            case "D":
-                result = new Deadline(splitStr[2], splitStr[3]);
-                break;
-            case "E":
-                result = new Event(splitStr[2], splitStr[3], splitStr[4]);
-                break;
+        case "T":
+            result = new ToDo(splitStr[2]);
+            break;
+        case "D":
+            result = new Deadline(splitStr[2], splitStr[3]);
+            break;
+        case "E":
+            result = new Event(splitStr[2], splitStr[3], splitStr[4]);
+            break;
+        default: {
+        }
         }
         if (result == null) {
             throw new DukeException("Invalid encoded String encountered");

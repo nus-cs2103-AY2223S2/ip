@@ -1,9 +1,9 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.exception.DukeException;
 
 /**
  * Abstract class representing a command a user can input to Duke.
@@ -11,7 +11,7 @@ import duke.exception.DukeException;
  * @author Lian Kok Hai
  */
 public abstract class Command {
-    boolean isExit = false;
+    protected boolean isExit = false;
 
     /**
      * Executes the function of command.
