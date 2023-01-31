@@ -3,9 +3,11 @@ package aqua.graphic;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 
 
 /** A speech bubble to display messages. */
@@ -23,6 +25,7 @@ public class SpeechBubble extends UiComponent<Region> {
 
     private final boolean isUser;
 
+    @FXML private ImageView iconView;
     @FXML private VBox bubbleDisplayArea;
 
 
@@ -35,6 +38,10 @@ public class SpeechBubble extends UiComponent<Region> {
     public SpeechBubble(boolean isUser) {
         super(getPath(isUser));
         this.isUser = isUser;
+        iconView.setClip(new Circle(
+                iconView.getFitWidth() / 2,
+                iconView.getFitHeight() / 2,
+                iconView.getFitHeight() / 2));
     }
 
 
