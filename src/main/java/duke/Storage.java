@@ -10,14 +10,29 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Storage class handles the interaction between local hard drive and Duke.
+ */
 public class Storage {
     File file;
     private final static String SAVED_PATH = "data/tasks.txt";
 
+    /**
+     * Constructor for Storage instance.
+     *
+     * @param filePath Path to locate file relative to project root.
+     */
     public Storage(String filePath) {
         file = new File(filePath);
     }
 
+    /**
+     * Method to write current TaskList onto file on hard drive.
+     *
+     * @param taskList TaskList with tasks in Duke.
+     * @throws IOException Thrown when file system encounters an error.
+     * @throws DukeException Thrown when unexpected behaviour occurs with Duke.
+     */
     public void save(TaskList taskList) throws IOException, DukeException {
         if (!file.getParentFile().exists()) { //check if directory exists, else make one
             if (!file.getParentFile().mkdirs()) {
@@ -37,6 +52,12 @@ public class Storage {
         fileWriter.close();
     }
 
+    /**
+     * Retrieves data from a previous session of Duke, if it exists.
+     *
+     * @return An array of Tasks.
+     * @throws DukeException Thrown when unexpected behaviour occurs with Duke.
+     */
     public Task[] load() throws DukeException {
         File f = new File(SAVED_PATH);
         try {

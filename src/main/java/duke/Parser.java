@@ -10,17 +10,36 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser class that handles inputs made by user.
+ */
 public class Parser {
     Ui ui;
     Storage storage;
     TaskList taskList;
 
+    /**
+     * Constructor for a parser.
+     *
+     * @param ui Ui instance of Duke.
+     * @param storage Storage instance of Duke.
+     * @param taskList TaskList containing the tasks.
+     */
     public Parser(Ui ui, Storage storage, TaskList taskList) {
         this.ui = ui;
         this.storage = storage;
         this.taskList = taskList;
     }
 
+    /**
+     * Returns a boolean, continues running the program if true, terminates it if false.
+     * Takes in user input and carries out functionality of the command.
+     *
+     * @param input Command input by user.
+     * @return True for Duke to continue running.
+     * @throws DukeException Thrown when unexpected behaviour occurs.
+     * @throws IOException Thrown when file system encounters an error.
+     */
     public boolean readInput(String input) throws DukeException, IOException {
         String firstInput = input.split(" ")[0];
         LocalDate now = LocalDate.now();

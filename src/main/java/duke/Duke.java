@@ -10,6 +10,12 @@ public class Duke {
     private Storage storage;
     private final Parser parser;
 
+    /**
+     * Constructs a Duke object for program to run.
+     * Initialises the ui, storage, parser and tasklist to be used for the program.
+     *
+     * @param filePath Path in which the file is located relative to project root.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,7 +30,10 @@ public class Duke {
         parser = new Parser(ui, storage, taskList);
     }
 
-    public void run() throws DukeException {
+    /**
+     * Accepts user input and checks whether program terminated or continues running.
+     */
+    public void run() {
         boolean isContinueRunning = true;
 
         while (isContinueRunning) {
