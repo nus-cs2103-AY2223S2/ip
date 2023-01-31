@@ -24,12 +24,9 @@ public class TaskList {
         if (tasks.size() == 0) {
             return "You do not have any tasks yet";
         }
-        /**
-         * loop through all tasks in the arraylist and print out each task
-         */
         StringBuilder sb = new StringBuilder();
-        sb.append("1. " + tasks.get(0) + "\n");
-        for (int i = 2; i <= tasks.size(); i++) {
+        sb.append("All Tasks:\n");
+        for (int i = 1; i <= tasks.size(); i++) {
             sb.append("    " + i + ". " + tasks.get(i - 1) + "\n");
         }
         return sb.toString();
@@ -59,6 +56,23 @@ public class TaskList {
         } catch (Exception e) {
             throw new DukeException("duke.task.Task does not exist, current number of tasks: " + tasks.size());
         }
+    }
+    public String find(String searchLine) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.toString().contains(searchLine)) {
+                foundTasks.add(task);
+            }
+        }
+        if (foundTasks.size() == 0) {
+            return "No related tasks found";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Found related tasks:\n");
+        for (int i = 1; i <= foundTasks.size(); i++) {
+            sb.append("    " + i + ". " + foundTasks.get(i - 1) + "\n");
+        }
+        return sb.toString();
     }
 
     public String getWriteString() {
