@@ -22,7 +22,7 @@ public class Parser {
 		ERR
 	}
 
-	public static boolean receiveCommand(Tasklist tasklist, String msg, Scanner echoScanner, boolean loop) {
+	public static boolean isReceivedCommand(Tasklist tasklist, String msg, Scanner echoScanner, boolean loop) {
 		String firstWord = "";
 		if (msg.contains(" ")) {
 			firstWord = msg.substring(0, msg.indexOf(" "));
