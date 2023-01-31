@@ -51,8 +51,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke" as Property<String>
-    archiveClassifier = null
+    archiveClassifier.set("duke")
 }
 
 run{

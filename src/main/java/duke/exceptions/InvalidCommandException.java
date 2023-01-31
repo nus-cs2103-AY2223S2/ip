@@ -9,6 +9,6 @@ public class InvalidCommandException extends DukeException {
      * @param errorMessage the invalid command
      */
     public InvalidCommandException(String errorMessage) {
-        super("☹ OOPS!!! I'm sorry, but I don't know what " + errorMessage + " means :-(");
+        super("☹ OOPS!!! I'm sorry, but I don't know what '" + errorMessage + "' means :-(");
     }
 }
