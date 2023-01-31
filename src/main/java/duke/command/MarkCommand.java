@@ -20,7 +20,7 @@ public class MarkCommand extends Command {
             l.get(index).markAsDone();
             ui.showMark(1, l.get(index));
         } else if (mark == 0) {
-            l.get(index).markAsDone();
+            l.get(index).unmark();
             ui.showMark(1, l.get(index));
         } else {
             throw new InvalidArgumentException(); //find a btr name

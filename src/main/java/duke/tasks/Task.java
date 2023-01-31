@@ -29,4 +29,8 @@ public class Task {
     public String saveFormat() {
         return (isDone? "1":"0") + "~" + description;
     }
+
+    public boolean isAMatch(String keyword) {
+        return description.contains(keyword);
+    }
 }
