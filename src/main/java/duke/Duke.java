@@ -1,5 +1,14 @@
 package duke;
 
+import duke.functions.Functions;
+import duke.gui.Window;
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
 /**
  * <h1>Duke task checklist</h1>
  * The Duke program helps keep track of your ongoin task.
@@ -9,14 +18,15 @@ package duke;
  * @version 1.0
  * @since 2023
  */
-public class Duke {
+public class Duke extends Application {
     /**
      * Represents a Duke program.
      */
-    private Art ar;
-    private Storage st;
     private Functions fn;
-    private UI ui;
+
+    public Duke() {
+
+    }
 
     /**
      * Constructor for a Duke instance. Load tasks previously saved.
@@ -24,42 +34,24 @@ public class Duke {
      * @param fp Indicate the file path to save task scheduled
      */
     public Duke(String fp) {
-        this.ar = new Art();
         try {
-            st = new Storage(fp);
+            Storage st = new Storage(fp);
             TaskList tl = st.load();
             this.fn = new Functions(tl, st);
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
-        this.ui = new UI(fn);
     }
 
-    /**
-     * Main method to run Duke from the console
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+    public Functions getFn() {
+        return this.fn;
     }
 
-    /**
-     * Method to run the Duke program
-     */
-    public void run() {
-        ar.show();
-        boolean flag = true;
-        while (flag) {
-            ui.getInput();
-            //could use enums here to check user input before going into switch case
-            try {
-                flag = ui.action();
-            } catch (DukeException e) {
-                System.out.println(e);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input...");
-            }
-        }
+    @Override
+    public void start(Stage stage) {
+        Duke d = new Duke("tasks.txt");
+        Pane p = Window.makeWindow(d);
+        Scene scene = new Scene(p);
+        Window.setStage(stage, scene);
     }
 }

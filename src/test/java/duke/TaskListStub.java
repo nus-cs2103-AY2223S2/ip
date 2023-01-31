@@ -1,9 +1,11 @@
 package duke;
 
+import duke.storage.TaskList;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskListStub extends TaskList{
+public class TaskListStub extends TaskList {
     List<TaskStub> list;
     public TaskListStub(){
         List<TaskStub> ls = new ArrayList<>();

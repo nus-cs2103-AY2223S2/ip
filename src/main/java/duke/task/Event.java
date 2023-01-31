@@ -1,8 +1,8 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 
-public class Events extends TimedTask {
+public class Event extends TimedTask {
     /**
      * Represent Event tasks. Event tasks have both start date time and end date time.
      */
@@ -13,23 +13,19 @@ public class Events extends TimedTask {
     /**
      * Empty constructor for an instance of an Event.
      */
-    public Events() {
+    public Event() {
         super();
     }
 
     /**
      * Constructor for an instance of an Event. Sets the status, description, start time and end time.
      */
-    public Events(boolean status, String des) {
+    public Event(boolean status, String des, String start, String end) {
         super();
         setStatus(status);
-        String[] d = new String[3];
-        String[] s = des.split(" /from ");
-        d[0] = s[0];
-        String[] x = s[1].split(" /to ");
-        d[1] = x[1];
-        setDes(d);
-        setStart(x[0]);
+        setDes(des);
+        setStart(start);
+        setEnd(end);
     }
 
     /**
@@ -38,13 +34,11 @@ public class Events extends TimedTask {
      * @param des Description of task. Includes start date time and end date time.
      */
     @Override
-    public void configure(String[] des) {
-        String[] d = new String[2];
-        d[0] = des[0];
-        String[] temp = des[1].split(" to ");
-        d[1] = dateTimeFileInParse(temp[1]).format(isoFormat);
-        setDes(d);
-        setStart(dateTimeFileInParse(temp[0]).format(isoFormat));
+    public void configure(String[] s) {
+        setDes(s[0]);
+        String[] d = s[1].split(" to ");
+        setStart(dateTimeFileInParse(d[0]).format(isoFormat));
+        setEnd(dateTimeFileInParse(d[1]).format(isoFormat));
     }
 
     /**
@@ -80,9 +74,9 @@ public class Events extends TimedTask {
      * Method to display status of task onto console
      */
     @Override
-    public void printStatus() {
+    public String printStatus() {
         String s = (status) ? "X" : " ";
-        System.out.println("[E][" + s + "] " + getDes() + " (from: " + toStringConsoleStart() + " to: " + toStringConsoleEnd() + ")");
+        return "[E][" + s + "] " + getDes() + " (from: " + toStringConsoleStart() + " to: " + toStringConsoleEnd() + ")\n";
     }
 
     /**

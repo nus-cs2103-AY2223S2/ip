@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,25 +42,24 @@ public abstract class TimedTask extends Task {
     }
 
     /**
-     * Method to set description of timed tasks. Includes setting end date
-     *
-     * @param des Description of task
-     */
-    @Override
-    public void setDes(String[] des) {
-        super.des = des[0];
-        setEnd(des[1]);
-    }
-
-    /**
      * Method to assist with loading from file.
      *
      * @param des String representation loaded from file
      */
     @Override
-    public void configure(String[] des) {
-        des[1] = dateTimeFileInParse(des[1]).format(isoFormat);
-        setDes(des);
+    public void configure(String[] s) {
+        setDes(s[0]);
+        setEnd(dateTimeFileInParse(s[1]).format(isoFormat));
+    }
+
+    /**
+     * Method to set description of timed tasks. Includes setting end date
+     *
+     * @param des Description of task
+     */
+    @Override
+    public void setDes(String des) {
+        super.des = des;
     }
 
     /**

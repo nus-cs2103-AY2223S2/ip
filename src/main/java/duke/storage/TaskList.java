@@ -1,4 +1,6 @@
-package duke;
+package duke.storage;
+
+import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +23,9 @@ public class TaskList {
      *
      * @param t Task object representing task created
      */
-    public void addTask(Task t) {
+    public String addTask(Task t) {
         this.list.add(t);
-        System.out.println("Got it. I've added this task: ");
-        t.printStatus();
-        printCount();
+        return printCount() + t.printStatus();
     }
 
     /**
@@ -34,7 +34,7 @@ public class TaskList {
      * @param t Task object read from file
      */
     public void loadTask(Task t) {
-        list.add(t);
+        this.list.add(t);
     }
 
     /**
@@ -53,12 +53,8 @@ public class TaskList {
      * @return Task Object
      * @throws taskNotFoundException
      */
-    public Task getTask(int index) throws taskNotFoundException {
-        try {
-            return this.list.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new taskNotFoundException();
-        }
+    public Task getTask(int index) {
+        return this.list.get(index);
     }
 
     /**
@@ -82,7 +78,7 @@ public class TaskList {
     /**
      * Method to display count
      */
-    public void printCount() {
-        System.out.println("Now you have " + count() + " task(s) in the list.");
+    public String printCount() {
+        return "Now you have " + count() + " task(s) in the list.\n";
     }
 }

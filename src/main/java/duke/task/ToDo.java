@@ -1,6 +1,6 @@
-package duke;
+package duke.task;
 
-public class ToDos extends Task {
+public class ToDo extends Task {
     /**
      * Representation of todo tasks.
      */
@@ -8,7 +8,7 @@ public class ToDos extends Task {
     /**
      * Empty constructor for an instance of a todo task
      */
-    public ToDos() {
+    public ToDo() {
         super();
     }
 
@@ -18,7 +18,7 @@ public class ToDos extends Task {
      * @param status
      * @param des
      */
-    public ToDos(boolean status, String des) {
+    public ToDo(boolean status, String des) {
         super(status, des);
     }
 
@@ -26,9 +26,9 @@ public class ToDos extends Task {
      * Method to display status of todo task
      */
     @Override
-    public void printStatus() {
+    public String printStatus() {
         String s = (status) ? "X" : " ";
-        System.out.println("[T][" + s + "] " + this.des);
+        return "[T][" + s + "] " + this.des + "\n";
     }
 
     /**
