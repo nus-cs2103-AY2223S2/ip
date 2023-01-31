@@ -62,7 +62,7 @@ public class Deadline extends Task {
     @Override
     public String convertToText() {
         return String.format("D | %d | %s | %s", super.getDoneOrNot() ? 1 : 0, super.getName(),
-                        this.dateline + System.lineSeparator());
+                        this.byWhen);
     }
 
     @Override
