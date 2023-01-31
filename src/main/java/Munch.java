@@ -1,14 +1,12 @@
-import AddTasks.Deadlines;
-import AddTasks.Events;
 import AddTasks.Task;
-import AddTasks.Todo;
 import Exceptions.IncompleteInputException;
 import Exceptions.InvalidInputException;
 import Exceptions.MunchException;
-import java.time.format.DateTimeParseException;
+import munch.Storage;
+import munch.TaskList;
+import munch.Ui;
 import java.util.ArrayList;
 import java.util.*;
-import java.time.LocalDate;
 
 
 public class Munch {
@@ -34,16 +32,13 @@ public class Munch {
         while (exit) {
             try {
                 String word = text.nextLine();
-                // check for specific words : "mark" and "unmark"
                 String[] words = word.split(" ");
 
-                // exit program
                 if (word.equals("bye")) {
                     Ui.exitMessage();
                     Storage.save(tasks, filePath);
                     exit = false;
 
-                    // generate list of tasks
                 } else if (word.equals("list")) {
                     ui.listMessage();
                     for (int i = 0; i < tasks.size(); i++) {
@@ -70,7 +65,6 @@ public class Munch {
                     throw new InvalidInputException();
                 }
                 ui.divider();
-                // Saving file into hard disk after every command
                 Storage.save(tasks, filePath);
             } catch (IncompleteInputException | InvalidInputException e) {
                 System.out.println(e.getMessage());

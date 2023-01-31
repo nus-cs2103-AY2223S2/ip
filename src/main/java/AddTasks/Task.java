@@ -13,38 +13,32 @@ public class Task {
         this.isDone = false;
     }
 
-    public static void addTask(Task t){
-        tasks.add(t);
-    }
-
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public Boolean markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
-        return isDone;
     }
 
-    public Boolean markAsUndone() {
+    public void markAsUndone() {
         this.isDone = false;
-        return isDone;
     }
 
-    public void wording(String str){
+    public void wording(String str) {
         // converting string to integer
-        if (str.equals("mark")){
+        if (str.equals("mark")) {
             this.markAsDone();
-            System.out.println("Dubzzzz! I've marked this task as done:");
-            System.out.println("  " + "[" + this.getStatusIcon() + "] " + this.description);
-        } else if (str.equals("unmark")){
+            System.out.println("Okay! I've marked this task as done:");
+            System.out.println(this);
+        } else if (str.equals("unmark")) {
             this.markAsUndone();
             System.out.println("Aites cool, I've marked this task as not done yet:");
-            System.out.println("  " + "[" + this.getStatusIcon() + "] " + this.description);
+            System.out.println(this);
         }
     }
 
     public String toString() {
-        return this.description.toString();
+        return this.description;
     }
 }

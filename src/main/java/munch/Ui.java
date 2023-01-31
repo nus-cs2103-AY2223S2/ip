@@ -1,8 +1,8 @@
+package munch;
+
 public class Ui {
 
-    public Ui() {
-
-    }
+    public Ui() {}
 
     public static void welcomeMessage() {
         System.out.println("Hello! I am Munch! :)");
