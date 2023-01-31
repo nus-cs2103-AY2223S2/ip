@@ -7,8 +7,6 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.Scanner;
-
 /**
  * Main class for Fake Duke the chat bot.
  */
@@ -17,6 +15,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke class
+     *
+     * @param filePath File path of the local file for tasks storage.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -49,7 +52,9 @@ public class Duke {
         }
     }
 
+    //CHECKSTYLE.OFF: JavadocMethod
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
+    //CHECKSTYLE.ON: JavadocMethod
 }

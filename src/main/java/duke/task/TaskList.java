@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
 
 /**
  * Contains the task list and the operations that can be performed on the tasks.
@@ -25,7 +25,7 @@ public class TaskList {
     public Task getTask(int taskIndex) throws DukeException {
         try {
             return this.TASK_LIST.get(taskIndex);
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Unable to get task.");
         }
     }
@@ -49,7 +49,7 @@ public class TaskList {
     public String deleteTask(int taskIndex) throws DukeException {
         try {
             return this.TASK_LIST.remove(taskIndex).toString();
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task index given is invalid :( Unable to delete.");
         }
     }

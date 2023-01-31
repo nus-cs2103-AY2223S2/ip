@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.parser.Parser;
-import duke.ui.Ui;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.ui.Ui;
 
 /**
  * Represents a Deadline, which is a type of Task that has to be done before a specific datetime.
@@ -14,11 +14,23 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     protected LocalDateTime deadline;
 
+    /**
+     * Constructor for Deadline class that sets the description and deadline.
+     *
+     * @param description Description of deadline.
+     * @throws DukeException Throws exception if unable to set deadline.
+     */
     public Deadline(String description) throws DukeException {
         super(description.split(" /by ")[0]);
         this.setDeadline(description);
     }
 
+    /**
+     * Constructor for Deadline class that sets the description, deadline, and status of deadline task.
+     *
+     * @param description Description of deadline.
+     * @throws DukeException Throws exception if unable to set deadline.
+     */
     public Deadline(String description, String taskStatus) throws DukeException {
         super(description.split(" /by ")[0]);
         this.setDeadline(description);
@@ -31,7 +43,7 @@ public class Deadline extends Task {
      * Returns the String representation of a Deadline.
      *
      * @return String representation of a Deadline in this format:
-     * [D][{status}] {description} (by: {deadline}).
+     *     [D][{status}] {description} (by: {deadline}).
      */
     @Override
     public String toString() {

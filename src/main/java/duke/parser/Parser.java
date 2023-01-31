@@ -1,6 +1,9 @@
 package duke.parser;
 
-import duke.exception.DukeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -9,14 +12,11 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Makes sense of the user command entered into Duke.
@@ -75,8 +75,8 @@ public class Parser {
             break;
         case event:
             checkInputFormat(splitInputs.length, 8,
-                    "Event must follow this format: event {description} /from {YYYY-MM-DD} {HH:MM} " +
-                    "/to {YYYY-MM-DD} {HH:MM}");
+                    "Event must follow this format: event {description} /from {YYYY-MM-DD} {HH:MM} "
+                    + "/to {YYYY-MM-DD} {HH:MM}");
             Event event = new Event(input.split(" ", 2)[1]);
             c = new AddCommand(event);
             break;
