@@ -28,7 +28,7 @@ public class Dude {
         try {
             tasks = new TaskList(storage.loadData());
         } catch (FileNotFoundException e) {
-            //ui.showLoadingError();
+            ui.showLoadingError();
             tasks = new TaskList();
 
         }

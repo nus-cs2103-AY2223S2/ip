@@ -121,6 +121,13 @@ public class Ui {
     }
 
     /**
+     * Prints loading error message to user.
+     */
+    public void showLoadingError() {
+        System.out.println("\tBzzz.. Sorry ah, I think something went wrong with me, am unable to wake up");
+    }
+
+    /**
      * Reads user command input and filters empty line.
      */
     public String readCommand() {
