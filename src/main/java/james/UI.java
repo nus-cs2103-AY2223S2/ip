@@ -3,6 +3,7 @@ package james;
 import james.task.Task;
 import james.task.TaskList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
@@ -56,4 +57,13 @@ public class UI {
     public String readCommand() {
         return scan.nextLine();
     }
+
+    public void printFoundTasks(ArrayList<Task> foundTasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < foundTasks.size(); i++) {
+            Task t = foundTasks.get(i);
+            System.out.println((i + 1) + "." + t);
+        }
+    }
+
 }

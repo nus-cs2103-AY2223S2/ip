@@ -33,6 +33,14 @@ public class Task {
         return isDoneIndicator + " | " + this.description;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            return description.equals(((Task) obj).description) && isDone == ((Task) obj).isDone;
+        }
+        return false;
+    }
+
 
 }
 

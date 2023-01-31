@@ -1,6 +1,7 @@
 package james.parser;
 
 import james.JamesException;
+import james.command.FindCommand;
 import james.command.addDeadlineCommand;
 import james.command.addEventCommand;
 import james.command.addListCommand;
@@ -74,6 +75,7 @@ public class Parser {
         }
     }
 
+
     public Command parseCommand(String input) throws JamesException {
                 if (input.equals("list")) {
                     return new addListCommand();
@@ -89,6 +91,8 @@ public class Parser {
                     return new addEventCommand(parseEventTask(input));
                 } else if (input.startsWith("delete")) {
                     return new deleteCommand(Integer.parseInt(input.split(" ")[1]) - 1);
+                } else if (input.startsWith("find")) {
+                    return new FindCommand(parseTask(input));
                 } else {
                     throw new JamesException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }

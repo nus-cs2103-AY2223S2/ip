@@ -22,7 +22,16 @@ public class Deadline extends Task {
     }
     @Override
     public String toStoreString() {
-        return "D | " + super.toStoreString() + " | " + this.by + "\n";
+        String dateFormat = this.by.format(DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+        return "D | " + super.toStoreString() + " | " + dateFormat + "\n";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            return super.equals(obj) && by.equals(((Deadline) obj).by);
+        }
+        return super.equals(obj);
     }
 
 }

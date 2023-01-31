@@ -16,4 +16,12 @@ public class addDeadlineCommand extends Command {
         ui.addTask(deadline, taskList.getSize());
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof addDeadlineCommand) {
+            return deadline.equals(((addDeadlineCommand) obj).deadline);
+        }
+        return false;
+    }
+
 }

@@ -16,6 +16,7 @@ public abstract class Command {
         this.ui = ui;
     }
 
+    public abstract boolean equals(Object obj);
 
     public abstract void execute() throws JamesException;
 

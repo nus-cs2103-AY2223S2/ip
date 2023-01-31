@@ -19,5 +19,13 @@ public class addUnmarkCommand extends Command {
         task.markUnDone();
         ui.unmarkTask(task);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof addUnmarkCommand) {
+            return taskNumber == ((addUnmarkCommand) obj).taskNumber;
+        }
+        return false;
+    }
 }
 

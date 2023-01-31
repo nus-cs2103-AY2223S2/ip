@@ -15,5 +15,13 @@ public class addToDoCommand extends Command {
         taskList.addToTaskList(toDo);
         ui.addTask(toDo, taskList.getSize());
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof addToDoCommand) {
+            return toDo.equals(((addToDoCommand) obj).toDo);
+        }
+        return false;
+    }
+
 
 }

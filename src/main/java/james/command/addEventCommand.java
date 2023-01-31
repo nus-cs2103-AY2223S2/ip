@@ -15,4 +15,12 @@ public class addEventCommand extends Command {
         taskList.addToTaskList(event);
         ui.addTask(event, taskList.getSize());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof addEventCommand) {
+            return event.equals(((addEventCommand) obj).event);
+        }
+        return false;
+    }
 }
