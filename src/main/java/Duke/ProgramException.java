@@ -3,8 +3,9 @@ package Duke;
  * Class to catch exceptions found when using Duke.
  * @author Bryan Juniano
  */
-public class ProgramException extends Exception{
-    public ProgramException(String exception){
+
+public class ProgramException extends Exception {
+    public ProgramException(String exception) {
         super(exception);
     }
 }
