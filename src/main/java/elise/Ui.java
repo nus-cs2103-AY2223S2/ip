@@ -11,12 +11,8 @@ public class Ui {
      */
     protected void showWelcome() {
         showLine();
-        String padding = "           ";
-        String logo = padding + " ____        _        \n"
-                + padding + "|  _ \\ _   _| | _____ \n"
-                + padding + "| | | | | | | |/ / _ \\\n"
-                + padding + "| |_| | |_| |   <  __/\n"
-                + "Hello from " + "|____/ \\__,_|_|\\_\\___|";
+        String logo = "           " + "█▀▀ █░░ █ █▀ █▀▀\n" +
+                "Hello from" + " ██▄ █▄▄ █ ▄█ ██▄";
         System.out.println(logo);
         showLine();
         System.out.println("I am a personal Chatbot who keep track of various things!\nEnter help to view commands!");
