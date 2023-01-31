@@ -1,5 +1,4 @@
 package duke;
-
 import duke.dukeexceptions.DukeExceptions;
 
 public class Ui {

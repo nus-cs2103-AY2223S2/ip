@@ -1,6 +1,5 @@
 package duke;
 import java.util.Scanner;
-
 import duke.commands.Command;
 import duke.dukeexceptions.DukeExceptions;
 import duke.parsers.Parser;
