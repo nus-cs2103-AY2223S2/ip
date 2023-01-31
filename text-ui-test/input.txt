@@ -1,11 +1,14 @@
 invalid
 todo borrow book
-deadline return book /by Sunday
-event project meeting /from Mon 2pm /to 4pm
+deadline return book /by 2023-02-01 15:00
+event project meeting /from 2023-02-07 17:00 /to 2023-02-11 23:00
 mark 2
 list
 todo
 blah
 delete 2
+list
+delete 1
+delete 1
 list
 bye
