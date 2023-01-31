@@ -102,6 +102,7 @@ public class Duke {
                     print(dir.getName() + " created\n");
                 }
             }
+
             if (file.createNewFile()) {
                 print(file.getName() + " created\n");
             }
