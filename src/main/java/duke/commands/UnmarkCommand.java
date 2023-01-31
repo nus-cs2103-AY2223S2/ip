@@ -7,6 +7,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
+/**
+ * Represents a Command that marks tasks in the TaskList as undone.
+ * */
 public class UnmarkCommand extends Command {
     private final int index;
 
@@ -14,6 +17,14 @@ public class UnmarkCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Finds the task in TaskList by user inputted index. Calls TaskList method to mark the task as undone.
+     * Marking an undone task as undone is allowed and will not result in any error.
+     * @param tasks Existing TaskList used by the main Duke class.
+     * @param ui Existing Ui used by the main Duke class.
+     * @param storage Existing Storage used by the main Duke class.
+     * @throws DukeException if something happened to task storage file during runtime or task specified does not exist.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {

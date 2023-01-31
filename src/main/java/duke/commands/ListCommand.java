@@ -1,18 +1,23 @@
 package duke.commands;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
+/**
+ * Represents a Command to display tasks in an indexed list to user.
+ * */
 public class ListCommand extends Command {
 
 
     /**
-     * Displays all tasks in duke.task.TaskList
-     * @param tasks
-     * @param ui
-     * @param storage
+     * Prompts Ui to display all tasks in an indexed list.
+     * Also prompts Ui to notify user if no tasks exist in TaskList.
+     * @param tasks Existing TaskList used by the main Duke class.
+     * @param ui Existing Ui used by the main Duke class.
+     * @param storage Existing Storage used by the main Duke class.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

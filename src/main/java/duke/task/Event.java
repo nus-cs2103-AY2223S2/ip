@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Represents Event task with a description from when to when.
+ */
 public class Event extends Task {
     private final String from;
     private final String to;
