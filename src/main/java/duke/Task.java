@@ -9,10 +9,6 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public String getType(){
-        return "Duke.Task";
-    }
-
     public String getDes(){
         return description;
     }
@@ -30,7 +26,6 @@ public class Task {
     public String dataFormat() {
         return "not yet";
     }
-
 
     public String toString(){
         return this.getStatusIcon() + " " + this.getDes();
