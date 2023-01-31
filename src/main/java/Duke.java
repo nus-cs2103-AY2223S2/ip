@@ -1,22 +1,23 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Path;
+import java.util.SimpleTimeZone;
 
 public class Duke {
     protected final TaskList taskList;
+    protected final ArrayList<String> commandList;
     protected Parser parser;
     protected Storage storage;
     protected Ui ui;
-    protected final String USER_HOME_DIRECTORY = System.getProperty("user.home");
+    protected String directoryPath;
+    protected String dataFilePath;
 
     protected Duke() {
+        this.dataFilePath = "./data/duke.txt";
+        this.directoryPath = "./data";
+        this.commandList = new ArrayList<>();
         this.taskList = new TaskList();
         this.parser = new Parser();
-        this.storage = new Storage();
+        this.storage = new Storage(directoryPath, dataFilePath);
         this.ui = new Ui();
     }
 
@@ -64,6 +65,58 @@ public class Duke {
 
     }
 
+    public void loadDataFromDisk() {
+        storage.loadData(commandList);
+        for (String userInput: commandList) {
+            String[] expressions = userInput.split(" ");
+            String command = expressions[0];
+
+            try {
+                if (userInput.equals(parser.convertEnum(Command.LIST))) {
+                    continue;
+                } else if (command.equals(parser.convertEnum(Command.MARK))) {
+                    parser.checkEmpty(userInput, command);
+                    String[] words = userInput.split(" ");
+                    int index = Integer.parseInt(words[1]) - 1;
+                    String tmp = mark_as_done(index);
+                } else if (command.equals(parser.convertEnum(Command.UNMARK))) {
+                    parser.checkEmpty(userInput, command);
+                    String[] words = userInput.split(" ");
+                    int index = Integer.parseInt(words[1]) - 1;
+                    String tmp = mark_as_undone(index);
+                } else if (userInput.equals(parser.convertEnum(Command.BYE))) {
+                    continue;
+                } else if (command.equals(parser.convertEnum(Command.TODO))) {
+                    parser.checkEmpty(userInput, command);
+                    Todo todo_task = new Todo(userInput);
+                    addTask(todo_task);
+                    String tmp = msg_of_add(todo_task);
+                } else if (command.equals(parser.convertEnum(Command.DEADLINE))) {
+                    parser.checkEmpty(userInput, command);
+                    Deadline ddl_task = new Deadline(userInput);
+                    addTask(ddl_task);
+                    String tmp = msg_of_add(ddl_task);
+                } else if (command.equals(parser.convertEnum(Command.EVENT))) {
+                    parser.checkEmpty(userInput, command);
+                    Event event_task = new Event(userInput);
+                    addTask(event_task);
+                    String tmp = msg_of_add(event_task);
+                } else if (command.equals(parser.convertEnum(Command.DELETE))) {
+                    parser.checkEmpty(userInput, command);
+                    String[] words = userInput.split(" ");
+                    int index = Integer.parseInt(words[1]) - 1;
+                    String tmp = delete_msg(index);
+                } else {
+                    throw new WeirdInputException();
+                }
+            } catch (WeirdInputException exc)  {
+                String tmp = ui.separate(exc.toString());
+            } catch (DukeException exc) {
+                String tmp = ui.separate(exc.toString());
+            }
+        }
+    }
+
     public void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -74,10 +127,13 @@ public class Duke {
 
         System.out.println(ui.greeting());
 
+        loadDataFromDisk();
+
         Scanner sc = new Scanner(System.in);
         String userInput;
         while (true) {
             userInput = sc.nextLine();
+            commandList.add(userInput);
             String[] expressions = userInput.split(" ");
             String command = expressions[0];
 
@@ -116,16 +172,22 @@ public class Duke {
                     String[] words = userInput.split(" ");
                     int index = Integer.parseInt(words[1]) - 1;
                     System.out.println(ui.separate(delete_msg(index)));
-                }
-                else {
+                } else {
                     throw new WeirdInputException();
                 }
-            } catch (WeirdInputException exc)  {
+            } catch (WeirdInputException exc) {
                 System.out.println(ui.separate(exc.toString()));
             } catch (DukeException exc) {
                 System.out.println(ui.separate(exc.toString()));
             }
         }
-        System.out.println(ui.separate(ui.ending()));
+
+        System.out.println(ui.ending());
+
+        String stringCommands = "";
+        for (String command: commandList) {
+            stringCommands += (command + "\n");
+        }
+        storage.saveToDisk(stringCommands + "\n");
     }
 }
