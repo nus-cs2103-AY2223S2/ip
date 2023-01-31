@@ -8,6 +8,7 @@ import duke.command.CommandType;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -40,6 +41,8 @@ public class Parser {
             return new ExitCommand();
         } else if (line.toUpperCase().equals(CommandType.LIST.name())) {
             return new ListCommand();
+        } else if (line.toUpperCase().equals(CommandType.HELP.name())) {
+            return new HelpCommand();
         } else {
             return processCommand(line);
         }

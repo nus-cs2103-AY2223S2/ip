@@ -18,8 +18,8 @@ public abstract class Task {
         this.name = name;
     }
 
-    public void setDone(boolean status) {
-        this.isDone = status;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public boolean isDone() {
