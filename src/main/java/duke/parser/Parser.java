@@ -144,13 +144,13 @@ public class Parser {
      * Determines if Mark/Unmark/Delete command is valid.
      * Attempts to parse the string after the keyword as integer.
      * @param splitCommand String arr of keyword and description
-     * @return true if splitCommand contains two non-empty elements and second element is an integer
+     * @return true if splitCommand contains two non-empty elements and second element is a positive integer
      */
     private static boolean isValidIndexCommand(String[] splitCommand) {
         if (splitCommand.length == 2) {
             try {
                 int num = Integer.parseInt(splitCommand[1]);
-                return num == 0 || num == 1;
+                return num > 0;
             } catch (NumberFormatException e) {
                 return false;
             }
