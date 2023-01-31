@@ -1,17 +1,19 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.FormatException;
 
-import java.time.LocalDateTime;
-import java.util.List;
+
 
 /**
  * A specific kind of task with a deadline.
  */
 public class Deadlines extends Task {
 
-    public static final List<String> keywords = List.<String>of("by");
+    public static final List<String> KEYWORDS = List.<String>of("by");
     protected LocalDateTime deadline;
 
     public Deadlines(String description, String deadline) throws DukeException {
@@ -50,7 +52,7 @@ public class Deadlines extends Task {
     }
 
     public List<String> getKeywords() {
-        return this.keywords;
+        return this.KEYWORDS;
     }
 
 }

@@ -1,17 +1,20 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.FormatException;
 
-import java.time.LocalDateTime;
-import java.util.List;
+
 
 /**
  * A specific kind of task with a time-window.
  */
 public class Events extends Task {
+    public static final List<String> KEYWORDS = List.<String>of("from", "to");
     protected LocalDateTime start;
-    public static final List<String> keywords = List.<String>of("from", "to");
+
 
     protected LocalDateTime end;
 
@@ -27,10 +30,7 @@ public class Events extends Task {
         } catch (Exception err) {
             throw new FormatException("yyyy-MM-dd HH:mm", err.getMessage());
         }
-
-
     }
-    
     public Events(List<String> queries) throws DukeException {
         this(queries.get(0), queries.get(1), queries.get(2));
     }
@@ -46,11 +46,11 @@ public class Events extends Task {
     public String formatText() {
         String divider = " | ";
         String isMarked = this.isDone ? "1" : "0";
-        return "E" + divider + isMarked + divider + this.description + divider +
-                this.start.format(Task.FORMATTER) + divider + this.end.format(Task.FORMATTER);
+        return "E" + divider + isMarked + divider + this.description + divider
+                + this.start.format(Task.FORMATTER) + divider + this.end.format(Task.FORMATTER);
     }
 
     public List<String> getKeywords() {
-        return this.keywords;
+        return this.KEYWORDS;
     }
 }
