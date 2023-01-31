@@ -1,5 +1,8 @@
 package duke;
 
+import duke.command.Command;
+import duke.command.Parser;
+
 /**
  * Class for Duke, a Personal Assistant Chatbot
  */
@@ -23,12 +26,12 @@ public class Duke {
     /**
      * Runs Duke interface which interprets user input
      */
-    public void run() {
+    public void run() throws DukeException{
         ui.greetUser();
         while (!isExit) {
             String userInput = ui.getInput();
-            Command c = new Command(userInput);
-            c.execute(tasks, storage, ui);
+            Command c = Parser.getCommandType(userInput);
+            c.execute(tasks, ui);
             isExit = c.getExitStatus();
         }
     }
@@ -36,7 +39,7 @@ public class Duke {
     /**
      * Initialise Duke chatbot
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException{
         new Duke().run();
     }
 }

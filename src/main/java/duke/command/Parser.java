@@ -1,4 +1,6 @@
-package duke;
+package duke.command;
+
+import duke.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -122,6 +124,30 @@ public final class Parser {
             return taskToReturn;
         } else {
             return null;
+        }
+    }
+
+    public static Command getCommandType(String userInput) throws DukeException{
+        String command = userInput.split(" ")[0];
+        switch (command) {
+        case "bye":
+            return new ExitCommand(userInput);
+        case "list":
+            return new ListCommand(userInput);
+        case "delete":
+            return new DeleteCommand(userInput);
+        case "mark":
+            return new MarkCommand(userInput);
+        case "unmark":
+            return new UnmarkCommand(userInput);
+        case "find":
+            return new FindCommand(userInput);
+        case "todo":
+        case "deadline":
+        case "event":
+            return new AddTaskCommand(userInput);
+        default:
+            throw new DukeException("Invalid command type");
         }
     }
 }
