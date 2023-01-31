@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -95,6 +98,19 @@ public class Duke {
         }
     }
 
+
+    public static String parse_date(String s) {
+        DateTimeFormatter read_fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        DateTimeFormatter print_fmt = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        try {
+            LocalDate lt = LocalDate.parse(s, read_fmt);
+            return lt.format(print_fmt);
+        } catch (DateTimeParseException e) {
+            print(e.toString());
+        }
+        return s;
+    }
+
     public static void save_to_file() {
         try {
             if (!dir.exists()){
@@ -171,6 +187,7 @@ public class Duke {
                     input = input.split(trigger)[1];
                     content = input.split("/by")[0].strip();
                     ddl = input.split("/by")[1].strip();
+                    ddl = parse_date(ddl);
                 } catch (IndexOutOfBoundsException e) {
                     print(e.toString());
                     System.exit(1);
@@ -191,6 +208,8 @@ public class Duke {
                     content = input.split("/from")[0].strip();
                     from = input.split("/from")[1].split("/to")[0].strip();
                     to = input.split("/from")[1].split("/to")[1].strip();
+                    from = parse_date(from);
+                    to = parse_date(to);
                 } catch (IndexOutOfBoundsException e) {
                     print(e.toString());
                     System.exit(1);
