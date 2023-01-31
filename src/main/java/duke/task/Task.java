@@ -13,7 +13,7 @@ public class Task implements Serializable {
         this.isDone = false;
     }
 
-    public String toggleStatus() {
+    private String toggleStatus() {
         return (isDone ? "X" : " ");
     }
 

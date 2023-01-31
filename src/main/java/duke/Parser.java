@@ -22,28 +22,27 @@ public class Parser {
         if (parts[0].equals("bye")) {
             this.fileManager.saveFile(this.taskList.getList());
             System.out.print("  Cya~ Till next time!");
-            //break;
         } else if (parts[0].equals("list")) {
             System.out.println("    Here are the tasks in your list:");
             this.taskList.list();
         } else if (parts[0].equals("mark")) {
             try {
-                int selection = Integer.parseInt(parts[1]) - 1;
-                this.taskList.mark(selection);
+                int taskNumber = Integer.parseInt(parts[1]);
+                this.taskList.mark(taskNumber);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("    Please specify which task to mark~  >:(");
             }
         } else if (parts[0].equals("unmark")) {
             try {
-                int selection = Integer.parseInt(parts[1]) - 1;
-                this.taskList.unmark(selection);
+                int taskNumber = Integer.parseInt(parts[1]);
+                this.taskList.unmark(taskNumber);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("    Please specify which task to unmark~  >:(");
             }
         } else if (parts[0].equals("delete")) {
             try {
-                int selection = Integer.parseInt(parts[1]) - 1;
-                this.taskList.remove(selection);
+                int taskNumber = Integer.parseInt(parts[1]);
+                this.taskList.remove(taskNumber);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("    Please specify which task to delete~ >:(");
             }

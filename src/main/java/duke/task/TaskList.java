@@ -16,22 +16,30 @@ public class TaskList {
     }
 
     public void remove(int taskNumber) {
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("     " + this.taskList.get(taskNumber).toString());
-        this.taskList.remove(taskNumber);
-        System.out.println("    Now you have " + this.taskList.size() + " tasks in the list");
+        try {
+            int taskIndex = taskNumber - 1;
+            Task taskToRemove = this.taskList.get(taskIndex);
+            System.out.println("    Noted. I've removed this task:");
+            System.out.println("     " + taskToRemove.toString());
+            this.taskList.remove(taskIndex);
+            System.out.println("    Now you have " + this.taskList.size() + " tasks in the list");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("    Incorrect selection made~  >:(");
+        }
     }
 
     public void mark(int taskNumber) {
-        this.taskList.get(taskNumber).mark();
+        int taskIndex = taskNumber - 1;
+        this.taskList.get(taskIndex).mark();
         System.out.println("    OK, I've marked this task as done:");
-        System.out.println("     " + this.taskList.get(taskNumber).toString());
+        System.out.println("     " + this.taskList.get(taskIndex).toString());
     }
 
     public void unmark(int taskNumber) {
-        this.taskList.get(taskNumber).unmark();
+        int taskIndex = taskNumber - 1;
+        this.taskList.get(taskIndex).unmark();
         System.out.println("    OK, I've marked this task as not done yet:");
-        System.out.println("     " + this.taskList.get(taskNumber).toString());
+        System.out.println("     " + this.taskList.get(taskIndex).toString());
     }
 
     public void list() {
@@ -39,6 +47,10 @@ public class TaskList {
             int numbering = i + 1;
             System.out.println("    " + numbering + "." + taskList.get(i).toString());
         }
+    }
+
+    public Task getTask(int taskIndex) {
+        return this.taskList.get(taskIndex);
     }
 
     public ArrayList<Task> getList() {
