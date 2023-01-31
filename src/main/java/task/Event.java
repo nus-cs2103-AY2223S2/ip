@@ -3,8 +3,17 @@ package task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Subclass of Task, its a Task with a start duration and end duration.
+ */
 public class Event extends Task {
     private String eventSpan;
+
+    /**
+     * Event Contructor: Takes in and process event content and deadline, stores it.
+     *
+     * @param content Contains the typed input read from user, changes it into Event object.
+     */
     public Event(String content) {
         super(content.substring(6).split("/")[0]);
         String[] strArr = content.split("/from");
@@ -21,6 +30,11 @@ public class Event extends Task {
         this.eventSpan = "(" + "by: " + eventStartTime + " to: " + eventEndTime + ")";
     }
 
+    /**
+     * Formats the date input by user neatly.
+     *
+     * @param strArrDate Formats the user's date input into a neat date notation.
+     */
     public String dateFormat(String[] strArrDate) {
         LocalDateTime dateTypeEvent;
         dateTypeEvent = LocalDateTime.of(Integer.parseInt(strArrDate[2].substring(0,4)),
@@ -31,6 +45,9 @@ public class Event extends Task {
         return dtf.format(dateTypeEvent);
     }
 
+    /**
+     * Event constructor: Takes in a boolean also, allowing is "marked" var to be customized.
+     */
     public Event(String content, boolean mark) {
         super(content.split("\\(")[0], mark);
         this.eventSpan = "(" + content.split("\\(")[1];
@@ -41,6 +58,9 @@ public class Event extends Task {
         return ". [E][" + super.markSign(super.mark) + "] " + super.content + this.eventSpan;
     }
 
+    /**
+     * Provides the String to be stored in duke.txt when program terminates.
+     */
     public String printRecord() {
         return "[E]" + " [" + super.markSign(super.mark) + "] " + super.content + this.eventSpan + "\n";
     }
