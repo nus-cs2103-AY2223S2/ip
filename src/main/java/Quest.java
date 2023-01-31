@@ -11,25 +11,23 @@ public class Quest {
         if (isCompleted) {
             return "[X]";
         } else {
-            return "[ ]";
+            return "[_]";
         }
     }
 
     public void markComplete() {
         if (isCompleted) {
-            System.out.println("Quest is already complete!\n" + toString());
+            // System.out.println("Quest is already complete!\n" + toString());
         } else {
             isCompleted = true;
-            System.out.println("Quest Complete! Hooray!\n" + toString());
         }
     }
 
     public void markIncomplete() {
         if (isCompleted) {
             isCompleted = false;
-            System.out.println("Quest Incomplete, the realm is in mortal danger!\n" + toString());
         } else {
-            System.out.println("Quest is already incomplete...\n" + toString());
+            // System.out.println("Quest is already incomplete...\n" + toString());
         }
     }
 

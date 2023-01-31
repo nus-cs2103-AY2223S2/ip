@@ -1,5 +1,9 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Page {
 
@@ -15,6 +19,38 @@ public class Page {
         String welcome = "Greetings! 'Tis I, Page, thy medieval assistant.\n" +
                 "Type 'help' for the list of available commands.";
         System.out.println(welcome);
+
+        File f = new File("data/questlog.txt");
+        try {
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                String[] splitLine = line.split(" ", 3);
+                String questType = splitLine[0];
+                String questCompletion = splitLine[1];
+                String restOfLine = splitLine[2];
+                Quest q;
+                if (questType.equals("[T]")) {
+                    q = new Todo(restOfLine);
+                } else if (questType.equals("[D]")) {
+                    String[] splitByBy = restOfLine.split(" by: ", 2);
+                    q = new Deadline(splitByBy[0], splitByBy[1]);
+                } else if (questType.equals("[E]")) {
+                    String[] splitByFromTo = restOfLine.split(" from: | to: ", 3);
+                    q = new Event(splitByFromTo[0], splitByFromTo[1], splitByFromTo[2]);
+                } else {
+                    System.out.println("oops, something wrong with the Quest Log :(");
+                    break;
+                }
+                if (questCompletion.equals("[X]")) {
+                    q.markComplete();
+                }
+                quests.add(q);
+            }
+            log();
+        } catch (FileNotFoundException e) {
+            System.out.println("Starting a new Quest Log.\n");
+        }
     }
 
     private void listen() {
@@ -46,6 +82,7 @@ public class Page {
                                 System.out.println("Sorry, you only have " + quests.size() + " quests!");
                             } else {
                                 quests.get(questNum - 1).markComplete();
+                                System.out.println("Quest Complete! Hooray!\n" + quests.get(questNum - 1).toString());
                             }
                         } catch (NumberFormatException nfe) {
                             System.out.println("Sorry, that's not a number!");
@@ -58,6 +95,7 @@ public class Page {
                                 System.out.println("Sorry, you only have " + quests.size() + " quests!");
                             } else {
                                 quests.get(questNum - 1).markIncomplete();
+                                System.out.println("Quest Incomplete, the realm is in mortal danger!\n" + quests.get(questNum - 1).toString());
                             }
                         } catch (NumberFormatException nfe) {
                             System.out.println("Sorry, that's not a number!");
@@ -160,6 +198,19 @@ public class Page {
 
     private void bye() {
         System.out.println("Farewell, my liege.");
+        File f = new File("data/questlog.txt");
+        try {
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+            FileWriter fw = new FileWriter("data/questlog.txt", false);
+            for (Quest q : quests) {
+                fw.write(q.toString() + "\n");
+            }
+            fw.close();
+            System.out.println(f.getAbsolutePath());
+        } catch (IOException e) {
+            System.out.println("Error: failed to save Quest Log :(" + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
