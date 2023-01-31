@@ -35,8 +35,7 @@ public class Duke {
 
     /**
      * Takes in a command and attempts to perform it, if valid.
-     * Accepted commands: [add], delete, todo, deadline, event, mark, unmark, list, bye
-     * [add] is invoked whenever any string that does not match other commands is entered.
+     * Accepted commands: delete, todo, deadline, event, mark, unmark, list, bye
      * @param   command a string containing the command entered by the user
      * @return          true if programme should continue accepting further commands, else false
      */
