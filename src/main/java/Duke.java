@@ -35,7 +35,7 @@ public class Duke {
                 //deadline return book /by Sunday
                 else if (input.equals("deadline")){
                     input = scan.nextLine();
-                    String[] arrOfStr = input.split("/by");
+                    String[] arrOfStr = input.split("/by ");
 
                     // input1 is the task
                     String input1 = arrOfStr[0];
