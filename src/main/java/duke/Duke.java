@@ -19,43 +19,54 @@ import duke.tasks.TaskList;
  * Main class where duke is initialized and runs.
  */
 public class Duke {
-    // Initialize and run duke
-    public static void main(String[] args) throws IOException {
-        TaskList taskList = new TaskList();
-        Storage.loadFromFile(taskList);
+    private TaskList tasks;
 
+    public Duke() {
+        tasks = new TaskList();
+        try {
+            Storage.loadFromFile(tasks);
+        } catch (IOException e) {
+            // Ui.showLoadingError();
+        }
+    }
+
+    public void run() {
         Ui.greetUser();
         while (Ui.isRunning) {
             CommandInput command = CommandInput.getCommandInput(Ui.line);
             try {
                 switch (command) {
                 case LIST:
-                    new ListCmd(taskList, Ui.line).execute();
+                    new ListCmd(tasks, Ui.line).execute();
                     break;
                 case MARK:  
-                    new MarkCmd(taskList, Ui.line).execute();
+                    new MarkCmd(tasks, Ui.line).execute();
                     break;
                 case UNMARK:
-                    new UnmarkCmd(taskList, Ui.line).execute();
+                    new UnmarkCmd(tasks, Ui.line).execute();
                     break;
                 case DELETE:
-                    new DeleteCmd(taskList, Ui.line).execute();
+                    new DeleteCmd(tasks, Ui.line).execute();
                     break;
                 case EVENT:
-                    new EventCmd(taskList, Ui.line).execute();
+                    new EventCmd(tasks, Ui.line).execute();
                     break;
                 case DEADLINE:
-                    new DeadlineCmd(taskList, Ui.line).execute();
+                    new DeadlineCmd(tasks, Ui.line).execute();
                     break;
                 case TODO:
-                    new ToDoCmd(taskList, Ui.line).execute();
+                    new ToDoCmd(tasks, Ui.line).execute();
                     break;
                 case BYE:
                     Ui.shutDown();
-                    Storage.saveToFile(taskList);;
+                    try {
+                    Storage.saveToFile(tasks);;
+                    } catch (IOException e) {
+                        // Ui.showSavingError()
+                    }
                     break;
                 case FIND:
-                    new FindCmd(taskList, Ui.line).execute();
+                    new FindCmd(tasks, Ui.line).execute();
                     break;
                 case UNRECOGNIZED_CMD:
                     Ui.displayMsg("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -66,5 +77,10 @@ public class Duke {
             } 
             Ui.getNextCommand();
         }
+    }
+
+    // Initialize and run duke
+    public static void main(String[] args) throws IOException {
+        new Duke().run();
     }
 }

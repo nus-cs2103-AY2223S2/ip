@@ -72,7 +72,7 @@ public class Storage {
                 }
             }
         } catch (NoSuchFileException e) {
-            // do nothing if no file exists (nothing to )
+            // do nothing if no file exists (nothing to execute)
         }
     }
 }
