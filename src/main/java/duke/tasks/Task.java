@@ -14,7 +14,7 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    protected abstract String stringFields(); 
+    protected abstract String stringFields();
 
     /**
      * Marks this task as completed.
@@ -23,7 +23,7 @@ public abstract class Task {
     public Task markDone() {
         this.isDone = true;
         return this;
-    } 
+    }
 
     /**
      * Marks this task as incomplete.
@@ -33,7 +33,7 @@ public abstract class Task {
         this.isDone = false;
         return this;
     }
-    
+
 
     /**
      * Represent this task as a string
