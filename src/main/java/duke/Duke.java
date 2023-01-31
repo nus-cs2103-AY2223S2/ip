@@ -1,11 +1,12 @@
 package duke;
 
+import duke.command.Command;
 import duke.exceptions.TaskException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-import duke.parser.Parser;
-import duke.command.*;
+
 
 /**
  * Acts as the main class for execution of user inputs.

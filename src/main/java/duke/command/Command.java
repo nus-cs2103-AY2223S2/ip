@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.tasklist.TaskList;
-import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.exceptions.TaskException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 /**
  * Gives command to execute an action

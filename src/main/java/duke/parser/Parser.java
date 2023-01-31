@@ -1,9 +1,18 @@
 package duke.parser;
 
-import duke.command.*;
+import java.util.Arrays;
+
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DefaultCommand;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
+import duke.command.UnmarkCommand;
 import duke.exceptions.TaskException;
 
-import java.util.Arrays;
 
 /**
  * Identifies command and executes its class respectively
@@ -38,41 +47,41 @@ public class Parser {
         Instructions instruction = Instructions.valueOf(first_word);
 
         switch (instruction) {
-            // Exit the system upon entering
-            case BYE:
-                return new ByeCommand();
+        // Exit the system upon entering
+        case BYE:
+            return new ByeCommand();
 
-            // Display a list of tasks that shows its completion and types
-            case LIST:
-                return new ListCommand();
+        // Display a list of tasks that shows its completion and types
+        case LIST:
+            return new ListCommand();
 
-            // Mark to complete the task, the second bracket will show a cross
-            case MARK:
-                return new MarkCommand(index);
+        // Mark to complete the task, the second bracket will show a cross
+        case MARK:
+            return new MarkCommand(index);
 
-            // Un-mark to redo the completion of the task, the cross will be
-            // removed from the second bracket
-            case UNMARK:
-                return new UnmarkCommand(index);
+        // Un-mark to redo the completion of the task, the cross will be
+        // removed from the second bracket
+        case UNMARK:
+            return new UnmarkCommand(index);
 
-            // Add task of type (To do/ deadline/ event)
-            case TODO:
-            case DEADLINE:
-            case EVENT: {
-                return new AddCommand(instruction.toString(), input);
-            }
+        // Add task of type (To do/ deadline/ event)
+        case TODO:
+        case DEADLINE:
+        case EVENT: {
+            return new AddCommand(instruction.toString(), input);
+        }
 
-            // Delete task from the list according to its numbering on the list
-            case DELETE:
-                return new DeleteCommand(index);
+        // Delete task from the list according to its numbering on the list
+        case DELETE:
+            return new DeleteCommand(index);
 
-            // Find tasks that contain the input word entered by user
-            case FIND:
-                return new FindCommand(part[1]);
+        // Find tasks that contain the input word entered by user
+        case FIND:
+            return new FindCommand(part[1]);
 
-            // default will throw an exception in case switch-case is unable to find instruction
-            default:
-                return new DefaultCommand();
+        // default will throw an exception in case switch-case is unable to find instruction
+        default:
+            return new DefaultCommand();
         }
     }
 }

@@ -1,15 +1,18 @@
 package duke.storage;
 
-import java.util.ArrayList;
-
-import duke.tasks.*;
-import duke.ui.Ui;
-
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+import duke.ui.Ui;
+
 
 /**
  * Stores instructions and data in this class
@@ -17,7 +20,7 @@ import java.io.IOException;
 public class Storage {
     private final String filePath;
     private Ui ui;
-    private static ArrayList<Task> list = new ArrayList<Task>(100);
+    private ArrayList<Task> list = new ArrayList<Task>(100);
 
     /**
      * Initialises to load the file when system begins
@@ -114,11 +117,7 @@ public class Storage {
 
     }
 
-
-    /**
-     * Part of the code extracted from
-     * https://www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
-     */
+    //Code extracted from https://www.codejava.net/java-se/file-io/how-to-read-and-write-text-file-in-java
 
     /**
      * Loads data from duke.txt

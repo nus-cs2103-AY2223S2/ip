@@ -30,7 +30,6 @@ public class Task {
     public void toBeUnmarked() {
         this.checkMark = false;
     }
-    
     /**
      * Displays name, date and time of the task
      *

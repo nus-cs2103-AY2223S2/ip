@@ -72,17 +72,17 @@ public class Ui {
      */
     public void error(String code) throws TaskException {
         switch (code) {
-            case "todo":
-                throw new TaskException("Please enter an to-do item");
+        case "todo":
+            throw new TaskException("Please enter an to-do item");
 
-            case "deadline":
-                throw new TaskException("Enter an valid item followed by a deadline");
+        case "deadline":
+            throw new TaskException("Enter an valid item followed by a deadline");
 
-            case "event":
-                throw new TaskException("Event item must include a start time and an end time");
+        case "event":
+            throw new TaskException("Event item must include a start time and an end time");
 
-            default:
-                throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
+        default:
+            throw new TaskException("Sorry! Duke has no idea what it is as it is not an instruction");
 
         }
     }
