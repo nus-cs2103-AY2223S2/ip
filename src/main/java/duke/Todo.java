@@ -1,10 +1,10 @@
 package duke;
 
-public class ToDos extends Task {
+public class Todo extends Task {
 
     protected String icon = "[T]";
 
-    public ToDos(String description, Boolean isDone) {
+    public Todo(String description, Boolean isDone) {
         super(description, 'T', isDone);
     }
 

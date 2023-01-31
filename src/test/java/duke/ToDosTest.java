@@ -13,7 +13,7 @@ public class ToDosTest {
 
     @Test
     public void testToString2() {
-        Task todo = new ToDos("See the sunrise", true);
+        Task todo = new Todo("See the sunrise", true);
         String result = todo.toString();
         assertEquals("[T][X] See the sunrise", result);
     }

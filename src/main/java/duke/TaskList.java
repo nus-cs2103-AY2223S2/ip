@@ -23,7 +23,7 @@ public class TaskList {
 
             switch (array[0]) {
                 case "T": {
-                    this.addTask(new ToDos(array[2], Boolean.parseBoolean(array[1])));
+                    this.addTask(new Todo(array[2], Boolean.parseBoolean(array[1])));
                     break;
                 }
                 case "D": {
@@ -34,7 +34,7 @@ public class TaskList {
                 case "E": {
                     LocalDateTime fromDate = LocalDateTime.parse(array[3], storageFormatter);
                     LocalDateTime toDate = LocalDateTime.parse(array[4], storageFormatter);
-                    this.addTask(new Events(array[2], fromDate, toDate, Boolean.parseBoolean(array[1])));
+                    this.addTask(new Event(array[2], fromDate, toDate, Boolean.parseBoolean(array[1])));
                     break;
                 }
 
@@ -108,7 +108,7 @@ public class TaskList {
                 validate(userInput.length(), 4, "todo");
                 int idx = userInput.indexOf(" ");
                 String taskName = userInput.substring(idx + 1);
-                task = new ToDos(taskName, false);
+                task = new Todo(taskName, false);
             }
             else if (userInput.startsWith("deadline")) {
                 validate(userInput.length(), 8, "deadline");
@@ -129,7 +129,7 @@ public class TaskList {
                 String toDate = userInput.substring(to_idx + 4);
                 LocalDateTime startDate = LocalDateTime.parse(fromDate, inputFormatter);
                 LocalDateTime endDate = LocalDateTime.parse(toDate, inputFormatter);
-                task = new Events(taskName, startDate, endDate, false);
+                task = new Event(taskName, startDate, endDate, false);
             }
             else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
