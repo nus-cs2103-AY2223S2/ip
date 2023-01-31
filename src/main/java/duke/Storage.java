@@ -3,6 +3,9 @@ package duke;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Handles the loading and saving of tasks.
+ */
 public class Storage {
     private final String filePath;
 
@@ -10,6 +13,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the previous saved file.
+     * @return Array of previous tasks.
+     */
     public TaskList loadFile() {
         TaskList taskList = null;
         try {
@@ -50,6 +57,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Appends new tasks to the file.
+     * @param task Task to be appended.
+     */
     public void appendToFile(Task task) {
         try {
             FileWriter fw = new FileWriter(this.filePath, true);
@@ -69,6 +80,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the file after mark, unmark or delete.
+     * @param taskList Array of all tasks.
+     */
     public void updateFile(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(this.filePath);

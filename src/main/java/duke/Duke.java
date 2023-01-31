@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Main class.
+ */
 public class Duke {
 
     private final TaskList taskList;
@@ -13,6 +16,9 @@ public class Duke {
         taskList = storage.loadFile();
     }
 
+    /**
+     * Runs Duke program.
+     */
     public void run() {
         Parser parser = new Parser(taskList, ui, storage);
         while (ui.hasNextInput()) {

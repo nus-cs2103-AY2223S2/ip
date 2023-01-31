@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+/**
+ * Handles user inputs for parsing.
+ */
 public class Parser {
     private final TaskList taskList;
     private final Ui ui;
@@ -15,6 +18,10 @@ public class Parser {
         this.storage = storage;
     }
 
+    /**
+     * Parses user inputs.
+     * @param input User input.
+     */
     public void parse(String input) {
         String[] arrNext = input.split(" ", 2);
         String next = arrNext[0];
@@ -143,6 +150,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if a task has an empty description.
+     * @param checkString User input to be checked.
+     * @return True or false depending on whether description of task is empty.
+     * @throws EmptyDescription If the description of task is empty.
+     */
     public static boolean checkEmptyDescription(String[] checkString) throws EmptyDescription {
         if (checkString.length == 1) {
             throw new EmptyDescription(" The description of " + checkString[0] + " cannot be empty.");
