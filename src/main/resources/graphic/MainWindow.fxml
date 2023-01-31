@@ -19,7 +19,7 @@
       </ScrollPane>
       <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
          <children>
-            <TextField fx:id="inputField" maxWidth="1.7976931348623157E308" promptText="Message" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="inputField" maxWidth="1.7976931348623157E308" onAction="#handleSend" promptText="Message" HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#handleSend" text="Send" />
          </children>
       </HBox>
