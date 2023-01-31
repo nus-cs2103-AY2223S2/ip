@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-public class Deadline extends Duke.Task {
+public class Deadline extends Task {
     private LocalDateTime dateTypeDeadline;
     private String deadlineDue;
     public Deadline(String content) {

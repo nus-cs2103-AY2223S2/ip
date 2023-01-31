@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private List<Duke.Task> tasks;
+    private List<Task> tasks;
 
     public TaskList() {
-        tasks = new ArrayList<Duke.Task>();
+        tasks = new ArrayList<Task>();
     }
 
-    public Duke.Task getTask(int index) {
+    public Task getTask(int index) {
         return this.tasks.get(index);
     }
 
@@ -16,7 +16,7 @@ public class TaskList {
         return tasks.size();
     }
 
-    public void addTask(Duke.Task task) {
+    public void addTask(Task task) {
         this.tasks.add(task);
     }
 
@@ -48,13 +48,13 @@ public class TaskList {
         }
     }
 
-    public String addReport(Duke.Task task) {
+    public String addReport(Task task) {
         String returnStr = "gotcha.\nyou added: " + task.toString().substring(2) + "\n"
                 + this.numberOfTasks();
         return returnStr;
     }
 
-    public String deleteReport(Duke.Task task) {
+    public String deleteReport(Task task) {
         String returnStr = "gotcha.\nyou you have deleted: " + task.toString().substring(2) + "\n"
                 + this.numberOfTasks();
         return returnStr;

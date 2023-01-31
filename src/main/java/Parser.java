@@ -13,7 +13,11 @@ public class Parser {
             try {
                 if (input.equals("list")) {
                     System.out.println(Ui.formatStr(tasks.listThings()));
-                } else if (splitArr[0].equals("mark") || splitArr[0].equals("unmark")) {
+                } else if (splitArr.length == 1) {
+                    throw new VagueInputException("Oh no! What do you mean? \n" +
+                            "I'm confused. Please specify... @.@");
+                }
+                else if (splitArr[0].equals("mark") || splitArr[0].equals("unmark")) {
                     if ((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
                         throw new OutOfIndexException("Help! \n" +
                                 "The number has to be within range of our task-list!\n" +
@@ -32,14 +36,15 @@ public class Parser {
                                 "This is undone. You can't mark it undone again. :0 \n" +
                                 "try again.");
                     }
-                    tasks.mark(splitArr[0], Integer.parseInt(splitArr[1]) - 1);
+                    System.out.println(Integer.parseInt(splitArr[1]));
+                    tasks.mark(splitArr[0], (Integer.parseInt(splitArr[1]) - 1));
                 } else if (splitArr[0].equals("delete")) {
                     if ((Integer.parseInt(splitArr[1])) > tasks.getSize()) {
                         throw new OutOfIndexException("Help! \n" +
                                 "The number has to be within range of our task-list!\n" +
                                 "Please try again!");
                     }
-                    Duke.Task newTask = tasks.getTask(Integer.parseInt(splitArr[1]) - 1);
+                    Task newTask = tasks.getTask(Integer.parseInt(splitArr[1]) - 1);
                     tasks.removeTask(Integer.parseInt(splitArr[1]) - 1);
                     System.out.println(Ui.formatStr(tasks.deleteReport(newTask)));
                 } else if (splitArr[0].equals("todo")) {

@@ -1,6 +1,7 @@
-[T] [X] work
-[D] [ ] do work                  (by: 23-Jan-2023)
-[E] [ ] make dish                (by: 23-Jan-2022 to: 11-Feb-1999)
+[D] [ ] do work                       (by: 23-Jan-2023)
+[E] [ ] make dish                     (by: 23-Jan-2022 to: 11-Feb-1999)
 [T] [ ] finish week 3 portion of 2103
-[D] [ ] eat my cake     (by: 21-Feb-2020)
-[T] [X] work
+[D] [X] eat my cake          (by: 21-Feb-2020)
+[T] [ ] test out refactoring
+[T] [X] floor
+[T] [ ] work

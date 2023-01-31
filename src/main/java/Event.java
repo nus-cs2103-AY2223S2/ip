@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-public class Event extends Duke.Task {
+public class Event extends Task {
     private String eventSpan;
     public Event(String content) {
         super(content.substring(6).split("/")[0]);
