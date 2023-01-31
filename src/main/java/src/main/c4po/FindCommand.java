@@ -48,6 +48,41 @@ public class FindCommand extends Command {
     }
 
     /**
+     * Executes the command with actions specific to each extension of this
+     * class Command
+     *
+     * @param tasks          are the list of tasks
+     * @param ui             is the instance of UI
+     * @param storage        the instance of Storage which holds and writes to the data file
+     * @param isStringOutput specifing this will allow users to access the String output method
+     * @throws BotException
+     */
+    @Override
+    public String execute(TaskList tasks, Ui ui, Storage storage, boolean isStringOutput) throws BotException {
+        StringBuilder findTaskResponse = new StringBuilder();
+
+        findTaskResponse.append(Ui.showTasksFound(true));
+        ArrayList<Task> tasksFound = new ArrayList<>();
+
+        for ( String keyword: keywordsSplit ) {
+            //Search for tasks
+            findTaskResponse.append("keyword(s) typed: ").append(keyword).append("\n");
+            ArrayList<Task> foundTasks = tasks.findTask(keyword);
+            if (!(foundTasks == null || foundTasks.isEmpty())) {
+                tasksFound.addAll(foundTasks);
+            }
+        }
+        if (tasksFound.isEmpty()) {
+            Ui.showNoTasksFound(true);
+        } else {
+            TaskList tempTaskList = new TaskList(tasksFound);
+            findTaskResponse.append(tempTaskList.printList(false, true));
+        }
+
+        return findTaskResponse.toString();
+    }
+
+    /**
      * Returns whether a command should cause bot to end interaction
      *
      * @return boolean to be used in the main loop

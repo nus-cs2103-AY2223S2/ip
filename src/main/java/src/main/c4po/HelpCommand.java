@@ -1,23 +1,19 @@
 package src.main.c4po;
 
-public class ListCommand extends Command{
+public class HelpCommand extends Command {
 
     /**
-     * An executable Command which lists all tasks in the task list
-     */
-    public ListCommand() {
-
-    }
-
-    /**
-     * {@inheritDoc}
-     * @param tasks
-     * @param ui
-     * @param storage
+     * Executes the command with actions specific to each extension of this
+     * class Command
+     *
+     * @param tasks   are the list of tasks
+     * @param ui      is the instance of UI
+     * @param storage the instance of Storage which holds and writes to the data file
+     * @throws BotException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.printList(true);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+
     }
 
     /**
@@ -32,12 +28,14 @@ public class ListCommand extends Command{
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage, boolean isStringOutput) throws BotException {
-        return tasks.printList(true,true);
+
+        return Ui.showCommandList(true);
     }
 
     /**
-     * {@inheritDoc}
-     * @return boolean
+     * Returns whether a command should cause bot to end interaction
+     *
+     * @return boolean to be used in the main loop
      */
     @Override
     public boolean isExit() {

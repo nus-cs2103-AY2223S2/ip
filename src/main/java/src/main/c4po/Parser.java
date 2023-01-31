@@ -83,6 +83,8 @@ public class Parser {
         } else if (receive.length() > 5 && "delete".equalsIgnoreCase(receive.substring(0,6))) {
             Integer index = Integer.valueOf(receive.substring(6).strip());
             return new DeleteCommand(index);
+        } else if (receive.length() > 8 && "/commands".equalsIgnoreCase(receive.substring(0,9))) {
+            return new HelpCommand();
         } else if (receive.length() > 3 && "find".equalsIgnoreCase(receive.substring(0,4))) {
             String keywords = receive.substring(4).strip();
             Ui.print(keywords);
@@ -94,8 +96,7 @@ public class Parser {
             return new FindCommand( new ArrayList<>(List.of(stringArr)));
 
         } else {
-            String unableToUnderstandQuote = Ui.UNABLE_TO_UNDERSTAND_QUOTE;
-            throw new BotException(unableToUnderstandQuote);
+            throw new BotException(Ui.UNABLE_TO_UNDERSTAND_QUOTE);
         }
     }
 }

@@ -185,7 +185,6 @@ public class TaskList {
         if (taskList.size() == 0) {
             Ui.showNothingInList();
         } else {
-
             int i = 1;
             if (toShowIndex) {
                 Ui.showListPre();
@@ -200,8 +199,41 @@ public class TaskList {
                     System.out.println(listInline);
                 }
             }
-
         }
+    }
+
+
+
+
+
+    /**
+     * Prints all the Tasks in the list with or without index n.o as per specification.
+     * This is useful for creating multiple task lists and printing them out together without
+     * having a mess of repeated numbering.
+     * @param toShowIndex determines if index number in list is printed
+     */
+    public String printList(boolean toShowIndex, boolean isStringOutput) {
+        StringBuilder printListOutput = new StringBuilder();
+        if (taskList.size() == 0) {
+            printListOutput.append(Ui.showNothingInList(true));
+        } else {
+            int i = 1;
+            if (toShowIndex) {
+                printListOutput.append(Ui.showListPre(true)).append("\n");
+
+                for (Task task: taskList) {
+                    String listInline = task.getTaskInline(i);
+                    i++;
+                    printListOutput.append(listInline).append("\n");
+                }
+            } else {
+                for (Task task: taskList) {
+                    String listInline = task.getTaskInline();
+                    printListOutput.append(listInline).append("\n");
+                }
+            }
+        }
+        return printListOutput.toString();
     }
 
 

@@ -88,7 +88,7 @@ public class Storage {
             }
         }
 
-        Ui.showLoadedMsg();
+
         return taskItems;
 
     }
