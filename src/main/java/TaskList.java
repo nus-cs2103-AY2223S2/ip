@@ -1,14 +1,17 @@
 import java.util.ArrayList;
 import java.time.LocalDateTime;
-import java.time.LocalDate;
 import java.lang.StringBuilder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.format.DateTimeFormatter;
 
 
 public class TaskList {
     private ArrayList<Task> list;
     private int length;
+    private DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    private DateTimeFormatter storageFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm");
+
 
     public TaskList(ArrayList<String> tasks) {
         this.list = new ArrayList<>();
@@ -22,11 +25,14 @@ public class TaskList {
                     break;
                 }
                 case "D": {
-                    this.addTask(new Deadline(array[2], array[3], Boolean.parseBoolean(array[1])));
+                    LocalDateTime byDate = LocalDateTime.parse(array[3], storageFormatter);
+                    this.addTask(new Deadline(array[2], byDate, Boolean.parseBoolean(array[1])));
                     break;
                 }
                 case "E": {
-                    this.addTask(new Events(array[2], array[3], array[4], Boolean.parseBoolean(array[1])));
+                    LocalDateTime fromDate = LocalDateTime.parse(array[3], storageFormatter);
+                    LocalDateTime toDate = LocalDateTime.parse(array[4], storageFormatter);
+                    this.addTask(new Events(array[2], fromDate, toDate, Boolean.parseBoolean(array[1])));
                     break;
                 }
 
@@ -107,8 +113,9 @@ public class TaskList {
                 int idx = userInput.indexOf(" ");
                 int by_idx = userInput.indexOf("/by");
                 String taskName = userInput.substring(idx + 1, by_idx);
-                String modifier = userInput.substring(by_idx + 3);
-                task = new Deadline(taskName, modifier, false);
+                String modifier = userInput.substring(by_idx + 4);
+                LocalDateTime byDate = LocalDateTime.parse(modifier, inputFormatter);
+                task = new Deadline(taskName, byDate, false);
             }
             else if (userInput.startsWith("event")) {
                 validate(userInput.length(), 5, "event");
@@ -116,9 +123,11 @@ public class TaskList {
                 int from_idx = userInput.indexOf("/from");
                 int to_idx = userInput.indexOf("/to");
                 String taskName = userInput.substring(idx + 1, from_idx);
-                String fromDate = userInput.substring(from_idx + 5, to_idx);
-                String toDate = userInput.substring(to_idx + 3);
-                task = new Events(taskName, fromDate, toDate, false);
+                String fromDate = userInput.substring(from_idx + 6, to_idx - 1);
+                String toDate = userInput.substring(to_idx + 4);
+                LocalDateTime startDate = LocalDateTime.parse(fromDate, inputFormatter);
+                LocalDateTime endDate = LocalDateTime.parse(toDate, inputFormatter);
+                task = new Events(taskName, startDate, endDate, false);
             }
             else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
