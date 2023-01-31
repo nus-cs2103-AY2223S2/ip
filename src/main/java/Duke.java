@@ -1,6 +1,8 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
+import java.io.File;
 
 public class Duke {
 
@@ -15,11 +17,17 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         */
-
         System.out.println("Hello! I am Duke Nice To Meet You\n");
         TaskAssigner taskAssigner = new TaskAssigner();
-        boolean ongoing = true;
+        Storage storage = new Storage();
 
+        try {
+            storage.loadTasks(taskList);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        boolean ongoing = true;
         while(ongoing) {
             String command = sc.nextLine();
 
@@ -56,6 +64,7 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
+        storage.saveTasks(taskList);
         sc.close();
     }
 }

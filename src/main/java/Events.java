@@ -17,4 +17,9 @@ public class Events extends Task {
     public String getDescription() {
         return super.getDescription() + " (from: " + this.startDate + " to: " + this.endDate + ")";
     }
+
+    @Override
+    public String saveString() {
+        return String.format("E|%s|%s|%s|%s", super.saveString(), super.description, this.startDate, this.endDate);
+    }
 }
