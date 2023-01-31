@@ -12,7 +12,7 @@ public class TaskListTest {
     void markDoneTest() {
         taskList = taskList.addTask(todoCheck);
         taskList.markDone(0);
-        assertEquals("[T][X] DRINK WATER", taskList.getTaskAtIndex(0).toString());
+        assertEquals("[T][X] DRINK WATER", taskList.getTask(0).toString());
     }
 
     @Test
@@ -20,14 +20,14 @@ public class TaskListTest {
         taskList = taskList.addTask(todoCheck);
         taskList.markDone(0);
         taskList.unMark(0);
-        assertEquals("[T][ ] DRINK WATER", taskList.getTaskAtIndex(0).toString());
+        assertEquals("[T][ ] DRINK WATER", taskList.getTask(0).toString());
     }
 
     @Test
     void addTaskTest() {
         taskList = taskList.addTask(todoCheck);
         assertEquals(1, taskList.getSize());
-        assertEquals(todoCheck.toString(), taskList.getTaskAtIndex(0).toString());
+        assertEquals(todoCheck.toString(), taskList.getTask(0).toString());
     }
 
 }

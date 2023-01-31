@@ -70,22 +70,6 @@ public class TaskList {
 
     /**
      * Retrieve {@code Task} to the list of tasks,
-     * return type is {@code String}.
-     *
-     * @param index in dex of the {@code Task
-     *               to retrieve
-     *
-     * @return the task as a {@code String}
-     * @throws duke.io.input.exception.UserInputException if index is out of range
-     *                of the list of tasks
-     */
-
-    public String getTask(int index) {
-        return this.listTask.get(index).toString();
-    }
-
-    /**
-     * Retrieve {@code Task} to the list of tasks,
      * return type is {@code Task}.
      *
      * @param index in dex of the {@code Task
@@ -96,7 +80,7 @@ public class TaskList {
      *                of the list of tasks
      */
 
-    public Task getTaskAtIndex(int index) {
+    public Task getTask(int index) {
         return this.listTask.get(index);
     }
 

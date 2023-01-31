@@ -89,6 +89,8 @@ public class UserInputException extends Exception {
             if (inputSplitList.size() > 1) {
                 throw new DukeException("ARE YOU EXPECTING ME TO DO SOMETHING WITH THE EXTRA INFO?");
             }
+        } else if (command.equals("FIND")) {
+
         } else {
             throw new DukeException("COMMAND NOT FOUND... WHAT ARE YOU UP TO...");
         }
