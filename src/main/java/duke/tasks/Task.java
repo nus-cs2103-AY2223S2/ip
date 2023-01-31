@@ -12,7 +12,7 @@ public class Task {
     /**
      * Indicates the completion status of the task.
      */
-    boolean isDone;
+    private boolean isDone;
 
     /**
      * Creates Task object with corresponding description
@@ -61,13 +61,22 @@ public class Task {
     public String getData() {
         StringBuilder sb = new StringBuilder();
         sb.append("T | ");
-        if (this.isDone) {
+        if (isDone) {
             sb.append("1 | ");
         } else {
             sb.append("0 | ");
         }
         sb.append(this.description).append("\n");
         return sb.toString();
+    }
+
+    /**
+     * Returns completion status of current task
+     *
+     * @return Boolean value that states the completion status of the task
+     */
+    public boolean isTaskDone() {
+        return isDone;
     }
 
     /**

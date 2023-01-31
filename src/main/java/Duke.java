@@ -1,13 +1,11 @@
+import java.io.IOException;
+import java.util.Scanner;
 
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
 import exception.DukeException;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * A chatbot that receives user's input on various predetermined
