@@ -19,10 +19,10 @@ public class Task implements Serializable {
     private String taskDesc;
     private boolean isDone = false;
     private Type type;
-    public final static List<String> descCommands = Arrays
+    final static List<String> descCommands = Arrays
             .asList(new String[] { "todo", "deadline", "event", "mark", "unmark", "delete" });
 
-    public final static List<String> commands = Arrays
+    final static List<String> commands = Arrays
             .asList(new String[] { "list", "bye", "todo", "deadline", "event", "mark", "unmark", "delete" });
 
     private Task(String taskDesc, String cmd) {
@@ -44,12 +44,15 @@ public class Task implements Serializable {
     public static Task createTask(String[] taskArray) throws LeoTaskException {
 
         try {
-            if (taskArray.length < 2) {
-                if (descCommands.contains(taskArray[0])) {
-                    throw new EmptyFieldException();
-                }
+
+            if (!commands.contains(taskArray[0])) {
                 throw new InvalidCommandException();
             }
+
+            if (taskArray.length < 2 && descCommands.contains(taskArray[0])) {
+                    throw new EmptyFieldException();
+            } 
+            
             String cmd = taskArray[0], desc = taskArray[1];
 
             switch (cmd) {
@@ -63,8 +66,6 @@ public class Task implements Serializable {
                 throw new InvalidCommandException();
             }
         } catch (LeoTaskException e) {
-            e.printStackTrace();
-            System.out.println();
             return null;
         }
     }
@@ -129,8 +130,7 @@ public class Task implements Serializable {
                 dl.by = stringToDate(dlDetails[1]);
                 return dl;
             } catch (MissingDeadlineException e) {
-                e.printStackTrace();
-                System.out.println();
+                Ui.printError(e);
                 return null;
             }
         }
@@ -172,8 +172,7 @@ public class Task implements Serializable {
                 ev.to = stringToDate(evDetails[1]);
                 return ev;
             } catch (MissingTimelineException e) {
-                e.printStackTrace();
-                System.out.println();
+                Ui.printError(e);
                 return null;
             }
         }
