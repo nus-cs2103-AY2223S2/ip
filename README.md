@@ -9,7 +9,7 @@ It's
 - ~~Fast~~ _SUPER FAST_ to use
 
 ## Steps
-1. Pull the code from the repo [here](https://github.com/anchengyang/ip/edit/master)
+1. Pull the code from the repo [here](https://github.com/anchengyang/ip)
 2. Run it
 3. Add your tasks
 4. Let it manage your tasks for you 👍
