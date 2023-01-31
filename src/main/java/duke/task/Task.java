@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task with the description of the task and
+ * the status of the task - whether it is done.
+ */
 public abstract class Task {
 
     protected final String description;
@@ -14,6 +18,12 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Gets a Task object from the file representation of the task.
+     *
+     * @param task The String representation of the task in the text file.
+     * @return The Task object corresponding to the String representation in the text file.
+     */
     public static Task getTaskFromString(String task) {
         String[] taskParts = task.split("~");
         String taskType = taskParts[0];
@@ -44,6 +54,12 @@ public abstract class Task {
 
     }
 
+    /**
+     * Gets the representation of the LocalDateTime object formatted like Jan 21 2023 06:00 PM.
+     *
+     * @param dateTime The LocalDateTime object to be formatted.
+     * @return The formatted String representation of the LocalDateTime object.
+     */
     public static String getDateTimeString(LocalDateTime dateTime) {
         DateTimeFormatter formatToPrint = DateTimeFormatter.ofPattern("MMM dd yyyy hh:mm a");
         return dateTime.format(formatToPrint);
@@ -64,6 +80,11 @@ public abstract class Task {
         return "[" + mark + "] " + this.description;
     }
 
+    /**
+     * Gets the String representation of the Task to be stored in the text file.
+     *
+     * @return The String representation of the Task to be stored in the text file.
+     */
     public abstract String getFileRepresentation();
 
 }

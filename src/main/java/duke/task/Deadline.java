@@ -2,6 +2,10 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a deadline - a task that should be completed within
+ * a particular date and time.
+ */
 public class Deadline extends Task {
 
     private final LocalDateTime by;
@@ -11,6 +15,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Gets the String representation of the deadline to be stored in the text file.
+     *
+     * @return The String representation of the deadline to be stored in the text file.
+     */
     @Override
     public String getFileRepresentation() {
         String mark = (super.isDone) ? "X" : " ";

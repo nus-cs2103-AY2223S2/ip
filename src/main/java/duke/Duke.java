@@ -12,6 +12,9 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Represents the chatbot that helps a user maintain a list of Tasks.
+ */
 public class Duke {
 
     private final Ui ui = new Ui();

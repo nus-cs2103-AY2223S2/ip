@@ -13,6 +13,10 @@ import java.util.Scanner;
 
 import java.util.stream.Collectors;
 
+/**
+ * Represents a storage manager that helps in storing and retrieving
+ * the list of Tasks from a text file.
+ */
 public class Storage {
 
     public final String folderPath;
@@ -28,6 +32,11 @@ public class Storage {
         this.fileName = filePath.substring(splitIndex + 1);
     }
 
+    /**
+     * Retrieves the list of Tasks from the text file.
+     *
+     * @return The list of Tasks stored in the text file.
+     */
     public ArrayList<Task> readTasksFromFile() {
 
         ArrayList<Task> tasks = new ArrayList<>();
@@ -59,6 +68,11 @@ public class Storage {
 
     }
 
+    /**
+     * Writes a list of Tasks to the text file.
+     *
+     * @param tasks The list of Tasks to be written to the text file.
+     */
     public void writeTasksToFile(ArrayList<Task> tasks) {
         try {
 

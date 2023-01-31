@@ -9,6 +9,10 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a task list manager that aids in storing and manipulating the
+ * list of Tasks.
+ */
 public class TaskList {
 
     private static final String TASKS_FILE_PATH = "data/duke_tasks.txt";
@@ -17,6 +21,9 @@ public class TaskList {
 
     private final ArrayList<Task> tasks = taskStorage.readTasksFromFile();
 
+    /**
+     * Displays all the Tasks in the list of Tasks.
+     */
     public void listTasks() {
         if (this.tasks.size() == 0) {
             System.out.println("You do not have any tasks added to the list.");
@@ -56,14 +63,32 @@ public class TaskList {
 
     }
 
+    /**
+     * Marks a particular Task in the list of Tasks, as done.
+     *
+     * @param taskNumber The number to indicate which Task is to be marked as done.
+     * @throws DukeException When the task number given is not valid.
+     */
     public void markTask(int taskNumber) throws DukeException {
         this.markUnmark(taskNumber, true);
     }
 
+    /**
+     * Marks a particular Task in the list of Tasks, as undone.
+     *
+     * @param taskNumber The number to indicate which Task is to be marked as undone.
+     * @throws DukeException When the task number given is not valid.
+     */
     public void unmarkTask(int taskNumber) throws DukeException {
         this.markUnmark(taskNumber, false);
     }
 
+    /**
+     * Adds a given Task to the list of Tasks.
+     *
+     * @param task The Task to be added to the list of Tasks.
+     * @param taskType The type of the given task.
+     */
     public void addTask(Task task, String taskType) {
         this.tasks.add(task);
         this.taskStorage.writeTasksToFile(this.tasks);
@@ -72,6 +97,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Deletes a Task from the list of Tasks.
+     *
+     * @param taskNumber The number to indicate which Task is to be deleted.
+     * @throws DukeException When the task number given is not valid.
+     */
     public void deleteTask(int taskNumber) throws DukeException {
         boolean isValidTaskNumber =
                 (taskNumber > 0 && taskNumber <= this.tasks.size());

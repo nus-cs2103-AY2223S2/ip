@@ -1,7 +1,8 @@
 package duke.exception;
 
-import duke.exception.DukeException;
-
+/**
+ * Represents an exception that is thrown when an invalid command is entered.
+ */
 public class DukeInvalidCommandException extends DukeException {
 
     public DukeInvalidCommandException(String message) {
