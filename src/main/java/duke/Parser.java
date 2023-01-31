@@ -66,6 +66,8 @@ public class Parser {
             } else if (instruction[0].equals("bye")) {
                 return new ExitCommand();
 
+            } else if (instruction[0].equals("find")) {
+                return new FindCommand(instruction[1]);
             } else { // adding into list
                 String command = instruction[0];
 
