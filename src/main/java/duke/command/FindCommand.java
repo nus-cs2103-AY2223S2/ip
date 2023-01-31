@@ -27,10 +27,11 @@ public class FindCommand extends Command {
      * @param task Task list containing the list of tasks.
      * @param storage Saves tasks into the file locally.
      * @param ui Deals with interactions with user.
+     * @return String response from Duke.
      * @throws DukeException if command cannot be recognised.
      */
     @Override
-    public void execute(TaskList task, Storage storage, Ui ui) throws DukeException {
-        ui.printFindList(task.findTaskMatchingKeyword(taskName));
+    public String execute(TaskList task, Storage storage, Ui ui) throws DukeException {
+        return ui.printFindList(task.findTaskMatchingKeyword(taskName));
     }
 }

@@ -6,7 +6,7 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * UnmarkCommand is a command that unamarks a task in the tasklist.
+ * UnmarkCommand is a command that UnMarks a task in the taskList.
  */
 public class UnmarkCommand extends Command {
 
@@ -15,7 +15,7 @@ public class UnmarkCommand extends Command {
     /**
      * Constructor for UnmarkCommand.
      *
-     * @param index Index of specific task in the tasklist to be unmark.
+     * @param index Index of specific task in the taskList to be unmark.
      */
     public UnmarkCommand(int index) {
         super(false);
@@ -23,17 +23,18 @@ public class UnmarkCommand extends Command {
     }
 
     /**
-     * Unmarks the specifc task in the tasklist and show message to user.
+     * UnMarks the specific task in the taskList and show message to user.
      *
-     * @param task Tasklist containing the list of tasks.
+     * @param task TaskList containing the list of tasks.
      * @param storage Saves tasks into the file locally.
      * @param ui Deals with interactions with user.
+     * @return String response from Duke.
      * @throws DukeException if duke does not recognise the command.
      */
     @Override
-    public void execute(TaskList task, Storage storage, Ui ui) throws DukeException {
+    public String execute(TaskList task, Storage storage, Ui ui) throws DukeException {
         task.unmarkTask(index);
-        ui.showUnmark(task.getTask(index));
         storage.saveTasksToFile(task.getListOfTasks());
+        return ui.showUnmark(task.getTask(index));
     }
 }
