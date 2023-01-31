@@ -1,338 +1,95 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.Path;
-import org.apache.commons.lang3.StringUtils;
-
 public class Bob {
-    private final Scanner scanner = new Scanner(System.in);
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    private ArrayList<Task> taskList = new ArrayList<>();
-    private static final Integer spacing = 5;
-
-    private static final String wrapper = padLeft("~".repeat(30));
-
-    private static final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd[ ha]");
-
-    private static String padLeft (String s) {
-        return " ".repeat(spacing) + s;
+    public Bob(String filePath) {
+        storage = new Storage(filePath);
+        ui = new Ui(5, "~", 30);
+        tasks = new TaskList();
     }
 
-    private final Path dataDirectoryPath = Paths.get("data/");
-    private final Path dataFilePath = Paths.get("data/taskList.txt");
-
-    // Accepts strings that can be separated by \n
-    private void formattedPrint(String s) {
-        String[] lines = s.split("\n");
-        System.out.println(wrapper);
-        for (String line : lines) {
-            System.out.println(padLeft(line));
-        }
-        System.out.println(wrapper);
-    }
-
-    private String getTaskDescription(Task t) {
-        return String.format("[%s][%s] %s", t.getTaskType(), t.getStatusIcon(), t);
-    }
-    private void printList() {
-        System.out.println(wrapper);
-        System.out.println(padLeft("Current task list: "));
-        // Iterate through list items sequentially
-        for (int i = 0, n = this.taskList.size(); i < n; i++) {
-            Task t = this.taskList.get(i);
-            String s = String.format("%d. %s", i + 1, getTaskDescription(t));
-            System.out.println(padLeft(s));
-        }
-        System.out.println(wrapper);
-    }
-
-    //Check that the string is a number
-    private static boolean isInt(String s) {
-        if (s == null) {
-            return false;
-        }
-        // Check that every char is a digit
-        for (int i = 0, len = s.length(); i < len; i++) {
-            char c = s.charAt(i);
-            if (c < '0' || c > '9') {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    // Check if string can be parsed to LocalDate
-    private static boolean isDate(String s) {
-        try {
-            LocalDate.parse(s, format);
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-    }
-    private void handleMarkCommand(String s) throws BobException{
-        String[] commands = s.split(" ");
-        Integer index = Integer.valueOf(commands[1]);
-
-        if (index < 1 || index > taskList.size()) { // Index not in range
-            throw new BobException("Index given is out of range!");
-        }
-
-        Task t = taskList.get(index - 1);
-
-        if (commands[0].equals("mark")) { // mark task
-            t.mark();
-            formattedPrint("I've marked this task as done!\n" +
-                    getTaskDescription(t));
-        } else { // unmark task
-            t.unmark();
-            formattedPrint("I've unmarked this task as not done!\n" +
-                    getTaskDescription(t));
-        }
-    }
-
-    // Determine if a string can be used to mark/unmark a task in a list of size max
-    // Commands are "mark" and "unmark"
-    private boolean isMarkCommand(String s) {
-        String[] words = s.split(" ");
-        String[] markCommands = new String[] {"mark", "unmark"};
-        Integer max = taskList.size();
-
-        return words.length == 2
-                && Arrays.asList(markCommands).contains(words[0]) // Check if word[0] matches any command
-                && isInt(words[1]);
-    }
-
-    // Command: todo <description>
-    private boolean isTodo(String s) {
-        String[] command = s.split(" ");
-        return command.length > 1 && command[0].equals("todo");
-    }
-
-    private void addTodo(String s) {
-        String[] command = s.split(" ", 2);
-        Todo t = new Todo(command[1]);
-        taskList.add(t);
-    }
-
-    // Command: event <description> /from <start> /to <4pm>
-    private boolean isEvent(String s) {
-        // A valid event would have only 1 /to and /from command
-        Boolean validMatches = StringUtils.countMatches(s, " /from ") == 1
-                && StringUtils.countMatches(s, " /to ") == 1;
-
-        // A valid command would have 3 different sections with this split
-        String[] splitCommand = s.split(" /from | /to ");
-
-        // Check if a description exists
-        String[] command_desc = splitCommand[0].split(" ");
-
-
-        return validMatches
-                && splitCommand.length == 3
-                && command_desc.length > 1
-                && command_desc[0].equals("event")
-                && s.indexOf("/from") < s.indexOf("/to") // A valid command has /from before /to
-                && isDate(splitCommand[1])
-                && isDate(splitCommand[2]);
-    }
-
-    private void addEvent(String s) {
-        String[] command = s.split( " /from | /to ");
-        String[] command_desc = command[0].split(" ", 2);
-        String description = command_desc[1];
-        LocalDate start = LocalDate.parse(command[1], format);
-        LocalDate end = LocalDate.parse(command[2], format);
-
-        Event e = new Event(description, start, end);
-        taskList.add(e);
-    }
-
-    // Command: deadline <description> /by <deadline>
-    private boolean isDeadline(String s) {
-        String[] splitCommand = s.split(" /by ");
-        String[] command_desc = splitCommand[0].split(" ", 2);
-
-        return splitCommand.length == 2
-                && command_desc.length == 2
-                && command_desc[0].equals("deadline")
-                && isDate(splitCommand[1]);
-    }
-
-    private void addDeadline(String s) {
-        String[] splitCommand = s.split(" /by ");
-        String[] command_desc = splitCommand[0].split(" ", 2);
-        String description = command_desc[1];
-        LocalDate deadline = LocalDate.parse(splitCommand[1], format);
-        Deadline d = new Deadline(description, deadline);
-        taskList.add(d);
-    }
-    private void addTask(String input) throws BobException {
-        if (isTodo(input)) {
-            addTodo(input);
-        } else if (isEvent(input)) {
-            addEvent(input);
-        } else if (isDeadline(input)) {
-            addDeadline(input);
-        } else { // Invalid command
-            throw new BobException("Sorry :( no valid command was entered");
-        }
-
-        // Get added task
-        Task t = taskList.get(taskList.size() - 1);
-        formattedPrint("I've added a new task!\n" + getTaskDescription(t));
-    }
-
-    private boolean isDelete(String input) {
-        String[] command = input.split(" ");
-        return command.length == 2 && command[0].equals("delete") && isInt(command[1]);
-    }
-
-    private void deleteTask(String input) throws BobException {
-        String[] command = input.split(" ");
-        Integer index = Integer.valueOf(command[1]);
-
-        if (index < 1 || index > taskList.size()) {
-            throw new BobException("Index given is out of range");
-        }
-        formattedPrint("Sure, removing this task!\n" +
-                       getTaskDescription(taskList.get(index - 1)));
-        taskList.remove(index - 1);
-    }
-
-    private void readTaskList() {
-        String flag = "bye";
-        String input = scanner.nextLine();
-
-        while (!input.equals(flag)) {
+    private void readTasks() {
+        String command = ui.readCommand();
+        while (!command.equals("bye")) {
             try {
-                if (input.equals("list")) { // Output list
-                    printList();
-                } else if (isMarkCommand(input)) { // Marking task
-                    handleMarkCommand(input);
-                } else if (isDelete(input)) {
-                    deleteTask(input);
-                } else {  // Add to list
-                    addTask(input);
+                int index;
+                Task t;
+
+                if (command.equals("list")) {
+                    ui.printList(tasks);
+                } else if (command.startsWith("todo")) {
+                    t = Parser.parseTodo(command);
+                    tasks.add(t);
+                    ui.printTaskAdded(t);
+                } else if (command.startsWith("event")) {
+                    t = Parser.parseEvent(command);
+                    tasks.add(t);
+                    ui.printTaskAdded(t);
+                } else if (command.startsWith("deadline")) {
+                    t = Parser.parseDeadline(command);
+                    tasks.add(t);
+                    ui.printTaskAdded(t);
+                } else if (command.startsWith("mark")) {
+                    index = Parser.parseIndex(command);
+                    ui.printMarkTask(tasks.get(index));
+                } else if (command.startsWith("unmark")) {
+                    index = Parser.parseIndex(command);
+                    tasks.unmark(index);
+                    ui.printUnmarkTask(tasks.get(index));
+                } else if (command.startsWith("delete")) {
+                    index = Parser.parseIndex(command);
+                    ui.printDeleteTask(tasks.delete(index));
+                } else { // Invalid command
+                    throw new BobException("Sorry :( no valid command was entered");
                 }
             } catch (BobException e) {
-                formattedPrint(e.getMessage());
+                ui.errorPrint(e);
+            } finally {
+                command = ui.readCommand();
             }
-            input = scanner.nextLine();
         }
     }
 
-    private String encodeTask(Task t) {
-        String common = String.format("%s | %s | %s", t.type, t.isDone, t.description);
-        StringBuilder encode = new StringBuilder(common);
-        switch (t.type) {
-        case "D":
-            Deadline d = (Deadline) t;
-            encode.append(String.format(" | %s", d.deadline));
-            break;
-        case "E":
-            Event e = (Event) t;
-            encode.append(String.format(" | %s | %s", e.start, e.end));
-            break;
-        }
-        return encode.toString();
-    }
-
-    private Task decodeTask(String s) throws IOException {
-        Task t;
-        // Separator is " | ", \\ for regex since | is a special character
-        String[] input = s.split(" \\| ");
-        String type = input[0];
-        Boolean isDone = Boolean.parseBoolean(input[1]);
-        String desc = input[2];
-
-        switch (type) {
-        case "T":
-            t = new Todo(desc);
-            break;
-        case "D":
-            LocalDate deadline = LocalDate.parse(input[3]);
-            t = new Deadline(desc, deadline);
-            break;
-        case "E":
-            LocalDate start = LocalDate.parse(input[3]);
-            LocalDate end = LocalDate.parse(input[4]);
-            t = new Event(desc, start, end);
-            break;
-        default:
-            throw new IOException("Invalid file input encountered!");
-        }
-        t.isDone = isDone;
-        return t;
-    }
-
-    // Using java.nio.file packages for cross-platform compatibility
-    private void saveList() {
+    private void loadTasks() {
         try {
-            // Create data directory if it does not exist
-            // Assume that a non-directory data file does not exist
-            if (!Files.exists(dataDirectoryPath)) {
-                Files.createDirectory(dataDirectoryPath);
-            }
-            BufferedWriter fw = Files.newBufferedWriter(dataFilePath);
-            for (Task t : taskList) {
-                String outputLine = encodeTask(t);
-                fw.write(outputLine); // Write to buffer
-                fw.newLine();
-            }
-            fw.flush(); // Write to file
-        } catch (IOException e) {
-            String errorMessage = "Error while saving to file - " + e.getMessage();
-            formattedPrint(errorMessage);
-        };
+            storage.load(tasks);
+        } catch (BobException e) {
+            ui.errorPrint(e);
+        } 
     }
-
-    private void loadList() {
+    
+    private void saveTasks() {
         try {
-            if (Files.exists(dataFilePath)) {
-                BufferedReader fr = Files.newBufferedReader(dataFilePath);
-
-                String line = fr.readLine();
-                while (line != null) { // While not EOF
-                    Task t = decodeTask(line);
-                    taskList.add(t);
-                    line = fr.readLine();
-                }
-            }
-        } catch (IOException e) {
-            String errorMessage = "Error while opening file - " + e.getMessage();
-            formattedPrint(errorMessage);
-        } finally {
-            printList();
+            storage.save(tasks);
+        } catch (BobException e) {
+            ui.errorPrint(e);
         }
+
     }
+
     /**
      * Main program for Bob, our chat-bot
      */
     public void start() {
         //Introduction message
-        formattedPrint("Hi, my name is Bob :)\n" +
-                "How may I help you?");
+        ui.printIntroduction();
 
         // Load task list from file
-        loadList();
+        loadTasks();
 
         // Read tasks from user
-        readTaskList();
+        readTasks();
 
         // Save task list to file
-        saveList();
+        saveTasks();
 
         // Goodbye message
-        formattedPrint("See you soon!");
+        ui.printGoodbye();
+    }
+
+    public static void main(String[] args) {
+        Bob bob = new Bob("data/taskList.txt");
+        bob.start();
     }
 }
