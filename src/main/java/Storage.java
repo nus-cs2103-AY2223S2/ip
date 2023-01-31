@@ -7,7 +7,6 @@ public class Storage {
 
     public static String path = "DukeData/tasks.txt";
     public static String dirPath = "DukeData";
-
     public Storage() {}
 
     public void saveTasks(TaskList taskList) {
