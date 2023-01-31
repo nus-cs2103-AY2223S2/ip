@@ -6,7 +6,6 @@ import domain.entities.core.*;
 import domain.usecases.ByeUsecase;
 import domain.usecases.TaskManagerUsecase;
 import domain.usecases.UnknownCommandUsecase;
-import presentation.ui.DummyWritable;
 import presentation.ui.SystemErr;
 import presentation.ui.SystemIn;
 
@@ -71,7 +70,7 @@ public class DukeEventLoop extends EventLoop {
                 new NestedCommandableObject(errorWriter);
         final TaskManagerUsecase manager =
                 Singletons.get(TaskManagerUsecase.class);
-        manager.redirectOutput(Singletons.get(DummyWritable.class));
+        manager.redirectOutput(Singletons.get(SystemErr.class));
         manager.registerReader(executable);
         return new DukeEventLoop(executable, readable, errorWriter);
     }

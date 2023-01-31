@@ -43,6 +43,7 @@ public class MainWindow extends AnchorPane implements Writable {
                 userImage));
         final ExitStatus result = dukeEventLoop.runWithCommand(input);
         if (result == ExitStatus.terminate) {
+            dukeEventLoop.dispose();
             System.exit(0);
         }
         userInput.clear();
