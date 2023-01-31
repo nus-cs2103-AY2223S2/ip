@@ -24,6 +24,9 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a parser that parses the user input into an executable command.
+ */
 public class Parser {
 
     private static LocalDateTime parseDateTime(String dateTimeText) {
