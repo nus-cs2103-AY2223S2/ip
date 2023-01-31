@@ -31,7 +31,7 @@ public class Storage {
         // create directory
         Path path = Paths.get(strDir);
         Files.createDirectories(path);
-    
+
         // output string to file
         PrintWriter out = new PrintWriter(fileName);
         out.println(tasks.toString());
@@ -45,13 +45,15 @@ public class Storage {
      * @throws IOException Specified file not found.
      */
     public static void loadFromFile(TaskList tasks) throws IOException {
-        try { 
+        try {
             Path fileNamePath = Path.of(fileName);
             String strData = Files.readString(fileNamePath);
 
             String[] strTasks = strData.split("\n");
             for (String strTask : strTasks) {
-                if (strTask.length() == 1) return;  // for handling empty file, it still contains "\n"
+                if (strTask.length() == 1) {
+                    return ;  // for handling empty file, it still contains "\n"
+                }
                 ParsedLoadedTask parsedTaskInfo = Parser.parseLoadTask(strTask);
                 Task task;
 
@@ -61,14 +63,16 @@ public class Storage {
                     tasks.add(task);
                     break;
                 case ('D'):
-                    task = new Deadline(parsedTaskInfo.getTaskName(), parsedTaskInfo.getDueDate(), parsedTaskInfo.getIsDone());
+                    task = new Deadline(parsedTaskInfo.getTaskName(), 
+                            parsedTaskInfo.getDueDate(), parsedTaskInfo.getIsDone());
                     tasks.add(task);
                     break;
                 case ('E'):
-                    task = new Event(parsedTaskInfo.getTaskName(), parsedTaskInfo.getFromDate(), 
-                    parsedTaskInfo.getToDate(), parsedTaskInfo.getIsDone());
+                    task = new Event(parsedTaskInfo.getTaskName(), parsedTaskInfo.getFromDate(),
+                            parsedTaskInfo.getToDate(), parsedTaskInfo.getIsDone());
                     tasks.add(task);
                     break;
+                default:
                 }
             }
         } catch (NoSuchFileException e) {
