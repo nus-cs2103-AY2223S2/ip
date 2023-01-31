@@ -10,6 +10,7 @@ import peppa.commands.DeadlineCommand;
 import peppa.commands.DeleteCommand;
 import peppa.commands.EventCommand;
 import peppa.commands.ExitCommand;
+import peppa.commands.FindCommand;
 import peppa.commands.IncorrectCommand;
 import peppa.commands.InvalidCommand;
 import peppa.commands.ListCommand;
@@ -75,12 +76,11 @@ public class Parser {
             LocalDateTime dueDate = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
             return new DeadlineCommand(desc, dueDate);
         } catch (PeppaException e) {
-            Ui.displayMessage(e.getMessage());
+            return new IncorrectCommand(e.getMessage());
         } catch (DateTimeParseException e) {
-            Ui.displayMessage("Boink! Peppa could not process the request. "
+            return new IncorrectCommand("Boink! Peppa could not process the request. "
                     + "Please enter the date in dd/MM/yyyy and time in HHmm (ie. 24h) format respectively.");
         }
-        return new IncorrectCommand();
     }
 
     /**
@@ -94,9 +94,8 @@ public class Parser {
             String idxStr = args[1];
             return new DeleteCommand(Integer.parseInt(idxStr) - 1);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            Ui.displayMessage("Boink! Peppa could not process the request. "
+            return new IncorrectCommand("Boink! Peppa could not process the request. "
                     + "Please enter a valid integer and try again.");
-            return new IncorrectCommand();
         }
     }
 
@@ -119,12 +118,11 @@ public class Parser {
             LocalDate to = LocalDate.parse(endDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             return new EventCommand(desc, from, to);
         } catch (PeppaException e) {
-            Ui.displayMessage(e.getMessage());
+            return new IncorrectCommand(e.getMessage());
         } catch (DateTimeParseException e) {
-            Ui.displayMessage("Boink! Peppa could not process the request. "
+            return new IncorrectCommand("Boink! Peppa could not process the request. "
                     + "Please enter the date in dd/MM/yyyy format and try again.");
         }
-        return new IncorrectCommand();
     }
 
     /**
@@ -177,9 +175,8 @@ public class Parser {
             String idxStr = args[1];
             return new MarkCommand(Integer.parseInt(idxStr) - 1);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            Ui.displayMessage("Boink! Peppa could not process the request. "
+            return new IncorrectCommand("Boink! Peppa could not process the request. "
                     + "Please enter a valid integer and try again.");
-            return new IncorrectCommand();
         }
     }
 
@@ -193,9 +190,8 @@ public class Parser {
         try {
             return new TodoCommand(command.substring(TodoCommand.DESC_INDEX));
         } catch (IndexOutOfBoundsException e) {
-            Ui.displayMessage("Boink! Peppa could not process the request. "
+            return new IncorrectCommand("Boink! Peppa could not process the request. "
                     + "Please enter a description for the task and try again.");
-            return new IncorrectCommand();
         }
     }
 
@@ -210,9 +206,8 @@ public class Parser {
             String idxStr = args[1];
             return new UnmarkCommand(Integer.parseInt(idxStr) - 1);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            Ui.displayMessage("Boink! Peppa could not process the request. "
+            return new IncorrectCommand("Boink! Peppa could not process the request. "
                     + "Please enter a valid integer and try again.");
-            return new IncorrectCommand();
         }
     }
 }

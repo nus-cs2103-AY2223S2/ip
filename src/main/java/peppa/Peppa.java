@@ -8,6 +8,8 @@ public class Peppa {
     private TaskList tasks;
     private Storage storage;
 
+    public Peppa() {}
+
     /**
      * Starts the chatbot interface.
      */
@@ -15,6 +17,7 @@ public class Peppa {
         this.screen = new Ui();
         this.tasks = new TaskList();
         this.storage = new Storage(filepath);
+        storage.loadData(tasks, screen);
     }
 
     public void run() {
@@ -32,6 +35,15 @@ public class Peppa {
             } finally {
                 screen.insertDivider();
             }
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parseCommand(input);
+            return c.execute(tasks, screen, storage);
+        } catch (PeppaException e) {
+            return e.getMessage();
         }
     }
 

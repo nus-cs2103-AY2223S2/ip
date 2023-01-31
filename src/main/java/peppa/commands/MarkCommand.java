@@ -19,15 +19,15 @@ public class MarkCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui screen, Storage storage) throws PeppaException {
+    public String execute(TaskList taskList, Ui screen, Storage storage) throws PeppaException {
         if (this.taskIndex < 0 || this.taskIndex >= taskList.getLength()) {
             throw new PeppaException("Boink! Peppa could not find the requested task. "
                     + "Please enter a valid integer and try again.");
         } else {
             Task task = taskList.retrieveTask(taskIndex);
             task.setDone(true);
-            Ui.displayMarkDoneMessage(task);
             storage.saveChanges(taskList);
+            return Ui.getMarkDoneMessage(task);
         }
     }
 

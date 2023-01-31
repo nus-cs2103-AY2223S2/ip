@@ -14,8 +14,8 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui screen, Storage storage) {
-        screen.terminateSession();
+    public String execute(TaskList taskList, Ui screen, Storage storage) {
+        return screen.terminateSession();
     }
 
     @Override

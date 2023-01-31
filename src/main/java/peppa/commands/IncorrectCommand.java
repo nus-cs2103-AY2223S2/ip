@@ -9,10 +9,17 @@ import peppa.Ui;
  * Could be a result of wrong parameters, incorrect formatting, etc.
  */
 public class IncorrectCommand implements Command {
+    private String errorMessage;
+
     public IncorrectCommand() {}
 
+    public IncorrectCommand(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
     @Override
-    public void execute(TaskList taskList, Ui screen, Storage storage) {
+    public String execute(TaskList taskList, Ui screen, Storage storage) {
+        return errorMessage;
     }
 
     @Override

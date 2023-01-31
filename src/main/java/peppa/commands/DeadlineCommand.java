@@ -61,12 +61,11 @@ public class DeadlineCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui screen, Storage storage) {
+    public String execute(TaskList taskList, Ui screen, Storage storage) {
         Task task = new Deadline(taskDescription, deadline);
         taskList.addTask(task);
-        Ui.displayAddTaskMessage(task);
-        Ui.displayTaskSummary(taskList);
         storage.saveChanges(taskList);
+        return Ui.getAddTaskMessage(task) + Ui.getTaskSummary(taskList);
     }
 
     @Override
