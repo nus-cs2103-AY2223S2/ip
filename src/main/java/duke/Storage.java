@@ -42,6 +42,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves data in the ArrayList to the databasse
+     * @param list
+     * @throws IOException
+     */
     public void save(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(file);
         for (Task t : list.getList()) {

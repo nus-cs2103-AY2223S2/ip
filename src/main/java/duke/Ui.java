@@ -5,6 +5,9 @@ public class Ui {
     public Ui() {
     }
 
+    /**
+     * Prints Logo of Duke
+     */
     public void showLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
