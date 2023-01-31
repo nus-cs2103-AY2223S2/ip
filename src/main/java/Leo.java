@@ -6,57 +6,48 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
+import leo.parser.Parser;
+import leo.storage.Storage;
 import leo.task.LeoTaskException;
 import leo.task.TaskList;
+import leo.ui.Ui;
 
 
 public class Leo {
 
+    private Parser parser = new Parser();
     private TaskList taskList;
+    private Ui ui = new Ui();
     public static void main(String[] args) throws LeoTaskException {
         // String logo = " ____ _ \n"
         // + "| _ \\ _ _| | _____ \n"
         // + "| | | | | | | |/ / _ \\\n"
         // + "| |_| | |_| | < __/\n"
         // + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from Argentina, I'm Leo!\n" + "What can I do for you?");
         new Leo().start();
     }
 
     public void start() throws LeoTaskException {
         //Get saved state
-
-        Scanner sc = new Scanner(System.in);
-        String cmd = sc.nextLine(); // reads in command fed by user
+        ui.greetUser();
+        String[] request = parser.parseRequest(); // reads in command fed by user
         readFile();
 
         if (taskList == null) {
             taskList = new TaskList();
         }
         
-        while (!cmd.equals("bye")) {
-            taskList.processRequest(cmd);
-            cmd = sc.nextLine();
+        while (!request[0].equals("bye")) {
+            taskList.processRequest(request);
+            request = parser.parseRequest();
         }
-        writeObjectToFile(taskList);
-        System.out.println("It was nice talking, see you soon!");
-        sc.close();
+        
+        Storage.writeObjectToFile(taskList);
+        ui.printExit();
+        parser.close();
     }
 
-    public void writeObjectToFile(Object obj) {
-        try {
-            FileOutputStream fileOut = new FileOutputStream("taskList.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(obj);
-            out.close();
-            fileOut.close();
-            System.out.println("Serialized data is saved in taskList.ser");
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
-    }
-
-    public void readFile() {
+    private void readFile() {
         try {
             FileInputStream fileIn = new FileInputStream("taskList.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -65,7 +56,7 @@ public class Leo {
             fileIn.close();
         } catch (FileNotFoundException i) {
             taskList = new TaskList();
-            writeObjectToFile(taskList);
+            Storage.writeObjectToFile(taskList);
             return;
         } catch (IOException i) {
             i.printStackTrace();

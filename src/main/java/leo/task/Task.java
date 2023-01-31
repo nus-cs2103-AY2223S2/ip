@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-class Task implements Serializable {
+import leo.ui.Ui;
+
+public class Task implements Serializable {
     private static final long serialVersionUID = 1L;
     
     enum Type {
@@ -17,10 +19,10 @@ class Task implements Serializable {
     private String taskDesc;
     private boolean isDone = false;
     private Type type;
-    final static List<String> descCommands = Arrays
+    public final static List<String> descCommands = Arrays
             .asList(new String[] { "todo", "deadline", "event", "mark", "unmark", "delete" });
 
-    final static List<String> commands = Arrays
+    public final static List<String> commands = Arrays
             .asList(new String[] { "list", "bye", "todo", "deadline", "event", "mark", "unmark", "delete" });
 
     private Task(String taskDesc, String cmd) {
@@ -39,8 +41,7 @@ class Task implements Serializable {
         }
     }
 
-    public static Task createTask(String request) throws LeoTaskException {
-        String[] taskArray = request.split(" ", 2);
+    public static Task createTask(String[] taskArray) throws LeoTaskException {
 
         try {
             if (taskArray.length < 2) {
@@ -70,16 +71,20 @@ class Task implements Serializable {
 
     public void setDone() {
         isDone = true;
+        Ui.printDivider();
         System.out.println(
                 "Well done on completing the task! Let me mark that as done! Campeon del mundo!");
         System.out.println(this);
+        Ui.printDivider();
 
     }
 
-    public void resetDone() {
+    public void setNotDone() {
         isDone = false;
+        Ui.printDivider();
         System.out.println("Ok, I've marked that as not done! Please get to it :(");
         System.out.println(this);
+        Ui.printDivider();
     }
 
     public boolean getDone() {
