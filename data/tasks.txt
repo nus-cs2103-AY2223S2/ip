@@ -1,2 +1,2 @@
-[T] | [X] | seggs
-[D] | [X] | seggs | by: | today
+[T] | [ ] | seggs
+[T] | [ ] | seggs

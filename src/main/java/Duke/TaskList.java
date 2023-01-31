@@ -42,6 +42,9 @@ public class TaskList {
         for(int i = 0; i<taskList.size(); i++){
             output += taskList.get(i) + "\n";
         }
+        if(output.equals("")){
+            output += "oops! You have no tasks at the moment.";
+        }
         return output;
     }
     public String markTask(int index){
