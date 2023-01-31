@@ -1,15 +1,25 @@
 package duke;
 
 import java.time.format.DateTimeFormatter;
+
+/**
+ * Represents a Task entered by the user.
+ */
 abstract class Task {
     private String taskDescription;
     private Boolean isDone = false;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy hh:mma");
 
+    /**
+     * Marks task as done.
+     */
     void mark() {
         isDone = true;
     }
 
+    /**
+     * Unmarks task as done.
+     */
     void unmark() {
         isDone = false;
     }
@@ -18,6 +28,11 @@ abstract class Task {
         this.taskDescription = taskDescription;
     }
 
+    /**
+     * Gets the task description.
+     *
+     * @return Description of task.
+     */
     String getTaskDescription() {
         return taskDescription;
     }

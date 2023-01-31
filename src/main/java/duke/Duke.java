@@ -1,8 +1,17 @@
 package duke;
 
 import java.util.Scanner;
+
+/**
+ * This is Duke who initialises Joe the Java Bot!
+ */
 public class Duke {
 
+    /**
+     * Runs Joe, my java bot!
+     *
+     * @param args Input arguments, will be ignored.
+     */
     public static void main(String[] args) {
         Joe joe = new Joe();
         Scanner sc = new Scanner(System.in);
