@@ -72,6 +72,26 @@ public class TaskList {
         return str;
     }
 
+
+    /**
+     * Returns the string representation of the task(s) that contain the specified keyword.
+     *
+     * @return A string consisting of the string representation of
+     * specific object in the queue with the specified keyword.
+     */
+    public String find(String descriptor) {
+        String str = " Here are the matching tasks in your list:\n";
+        int count = 0;
+        while (count < this.items.size()) {
+            int counter = count + 1;
+            if(this.items.get(count).getDescription().contains(descriptor)) {
+                str += counter + ". " + this.items.get(count) + " \n";
+            }
+            count++;
+        }
+        return str;
+    }
+
     /**
      * Returns the Task in the TaskList that corresponds to the index provided.
      *
