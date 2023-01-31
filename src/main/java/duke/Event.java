@@ -5,7 +5,7 @@ package duke;
  *
  * @author Sean Chin Jun Kai
  */
-public class Event extends Task{
+public class Event extends Task {
     protected String start;
     protected String end;
 

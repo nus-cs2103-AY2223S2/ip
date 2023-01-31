@@ -45,8 +45,7 @@ public class TaskList {
      */
     public Task getTask(int taskNumber) throws DukeException {
         try {
-            Task chosenTask = tasks.get(taskNumber - 1);
-            return chosenTask;
+            return tasks.get(taskNumber - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task does not exist!");
         }
@@ -56,18 +55,16 @@ public class TaskList {
      * Removes task from TaskList.
      *
      * @param chosen task to be removed.
-     * @return deleted Task.
      * @throws DukeException if Task does not exist in TaskList.
      */
-    public Task deleteTask(Task chosen) throws DukeException {
+    public void deleteTask(Task chosen) throws DukeException {
         this.tasks.remove(chosen);
-        return chosen;
     }
 
     /**
      * Finds all matching tasks containing the keyword
      *
-     * @param keyword
+     * @param keyword keyword passed in by user
      * @return list of tasks matching the keyword
      */
     public ArrayList<Task> getMatchingTasks(String keyword) {
@@ -82,9 +79,5 @@ public class TaskList {
 
     public ArrayList<Task> getTaskList() {
         return tasks;
-    }
-
-    public int size() {
-        return tasks.size();
     }
 }

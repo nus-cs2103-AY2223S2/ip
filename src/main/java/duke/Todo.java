@@ -5,7 +5,7 @@ package duke;
  *
  * @author Sean Chin Jun Kai
  */
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Constructor for creating a Todo object.
      *

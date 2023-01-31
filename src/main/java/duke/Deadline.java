@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Sean Chin Jun Kai
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate by;
 
     /**

@@ -123,7 +123,7 @@ public class Parser {
      * @return  Deadline object.
      * @throws DukeException if end date/time not present or wrong format of end date/time.
      */
-    public static Deadline parseDeadline(String[] args) throws DukeException{
+    public static Deadline parseDeadline(String[] args) throws DukeException {
         String[] separated = args[1].split("/by ");
         if (separated.length < 2) {
             throw new DukeException("Deadline needs to include a specific end date!");
@@ -161,8 +161,7 @@ public class Parser {
      */
     public static int parseTask(String[] args) throws DukeException {
         try {
-            int chosenId = Integer.parseInt(args[1]);
-            return chosenId;
+            return Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
             throw new DukeException("Given task number is invalid!");
         }

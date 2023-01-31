@@ -99,6 +99,9 @@ public class Duke {
                     ui.addedTaskMessage(created, tasks.getTaskList());
                     break;
                 }
+                default:
+                    // Switch will not reach here
+                    break;
                 }
             } catch (DukeException e) {
                 ui.showErrorMessage(e.getMessage());
@@ -107,7 +110,7 @@ public class Duke {
 
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new Duke("/duke.txt").run();
     }
 }

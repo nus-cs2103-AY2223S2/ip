@@ -62,6 +62,6 @@ public class Task {
      * @return String representation of task.
      */
     public String getText() {
-        return String.format("| %s | %s", this.getStatusIcon() == "X" ? "1" : "0", this.description);
+        return String.format("| %s | %s", this.getStatusIcon().equals("X") ? "1" : "0", this.description);
     }
 }
