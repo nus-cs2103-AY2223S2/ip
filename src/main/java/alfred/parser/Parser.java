@@ -21,6 +21,8 @@ public class Parser {
             return new UnmarkCommand(lineArr[1]);
         } else if (command.equals("delete") && lineArr.length == 2) {
             return new DeleteCommand(lineArr[1]);
+        } else if (command.equals("find")) { // what if there's task called "find ball?"
+            return new FindCommand(lineArr[1]);
         } else if (command.equals("list") && lineArr.length == 2) {
             String second = lineArr[1];
             try {
