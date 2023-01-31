@@ -1,13 +1,30 @@
 package alfred.parser;
 
-import alfred.command.*;
-import alfred.exceptions.AlfredException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import alfred.command.AddCommand;
+import alfred.command.Command;
+import alfred.command.DeleteCommand;
+import alfred.command.ExitCommand;
+import alfred.command.ListCommand;
+import alfred.command.ListDateCommand;
+import alfred.command.MarkCommand;
+import alfred.command.UnmarkCommand;
+import alfred.exceptions.AlfredException;
+
+/**
+ * Represents a parser that deals with making sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * Translates the user command into the respective command.
+     * @param fullCommand The full command given by the user.
+     * @return The command that is parsed out from the full command.
+     * @throws AlfredException The error thrown due to a failure to parse date and time.
+     */
     public Command parse(String fullCommand) throws AlfredException {
         String[] lineArr = fullCommand.split(" ");
         String command = lineArr[0];

@@ -1,20 +1,39 @@
 package alfred.storage;
 
-import alfred.task.*;
-import alfred.exceptions.AlfredException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import alfred.exceptions.AlfredException;
+import alfred.task.Deadline;
+import alfred.task.Event;
+import alfred.task.Task;
+import alfred.task.TaskList;
+import alfred.task.ToDo;
+
+/**
+ * Represents the storage that deals with loading tasks from a file and
+ * saving tasks in a file.
+ */
 public class Storage {
 
     private File dataFile;
 
+    /**
+     * Constructs a Storage object that deals with loading tasks from a file and
+     * saving tasks in a file.
+     * @param filePath The file that works with the storage object regarding loading and writing.
+     */
     public Storage(String filePath) {
         dataFile = new File(filePath);
     }
 
+    /**
+     * Loads the tasks from the file into an array list
+     * @return The array list containing all the tasks from the data file.
+     * @throws AlfredException The error that is thrown out when the file cannot be read.
+     */
     public ArrayList<Task> load() throws AlfredException {
         class CheckMark {
             public void isMark(int value, Task task) {
@@ -53,7 +72,6 @@ public class Storage {
                         default:
                             throw new AlfredException("I'm sorry but there is an"
                                     + " invalid task in the data file");
-                            // No task type
                         }
                         tasks.add(task);
                     } catch (ArrayIndexOutOfBoundsException e) {
@@ -65,8 +83,15 @@ public class Storage {
             throw new AlfredException("Error, invalid file path");
         }
         return tasks;
+
     }
 
+    /**
+     * Writes all the tasks in the task list into the data file.
+     * @param tasks All the tasks in the task list.
+     * @throws AlfredException The error given when writing tasks into the file results
+     *     in an error.
+     */
     public void write(TaskList tasks) throws AlfredException {
         tasks.writeToFile(dataFile);
     }

@@ -1,27 +1,47 @@
 package alfred.task;
 
-import alfred.exceptions.AlfredException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import alfred.exceptions.AlfredException;
+
+/**
+ * Represents a task list that contains all the task given the user.
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
+
+    /**
+     * Constructs an empty task list.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructs a task list that is filled with tasks from a data file.
+     * @param tasks Contains an array of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Adds a task into the task list.
+     * @param task A task given by the user.
+     */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Creates a String that contains all the information of the tasks inside the task list.
+     * @return The string that contains all the tasks in a format.
+     */
     public String getList() {
         int itemIndex = 1;
         StringBuilder listOfItems = new StringBuilder();
@@ -34,6 +54,12 @@ public class TaskList {
         return listOfItems.toString();
     }
 
+    /**
+     * Creates a String that contains all the information of the tasks inside the task list
+     * that has attribute of the date.
+     * @param date The date that we wish to find all the tasks that contains.
+     * @return The string that contains all the tasks in a format.
+     */
     public String getList(LocalDate date) {
         int itemIndex = 1;
         StringBuilder listOfItems = new StringBuilder();
@@ -48,6 +74,12 @@ public class TaskList {
         return listOfItems.toString();
     }
 
+    /**
+     * Writes all the tasks in the task list into the data file given.
+     * @param dataFile The data file that stores the data of this program
+     * @throws AlfredException An exception thrown when there is an error writing the tasks
+     *     into the data file.
+     */
     public void writeToFile(File dataFile) throws AlfredException {
         try {
             FileWriter fw = new FileWriter(dataFile);
@@ -61,18 +93,35 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the task from the task list.
+     * @param taskIndex The index of the task in the list.
+     */
     public void removeTask(int taskIndex) {
         tasks.remove(taskIndex);
     }
 
+    /**
+     * Retrieves the task from the task list at the given index.
+     * @param taskIndex The index of the task in the list.
+     * @return The task that is retrieved from.
+     */
     public Task getTask(int taskIndex) {
         return tasks.get(taskIndex);
     }
 
+    /**
+     * Retrieves the size of the task list.
+     * @return The size of the task list.
+     */
     public int getSize() {
         return tasks.size();
     }
 
+    /**
+     * Checks if the task list is empty
+     * @return True if the task list is empty, else false.
+     */
     public boolean isEmpty() {
         return tasks.isEmpty();
     }

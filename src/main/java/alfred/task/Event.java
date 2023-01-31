@@ -1,14 +1,23 @@
 package alfred.task;
 
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an Event task given by the user.
+ */
 public class Event extends Task {
 
     protected LocalDateTime startDate;
     protected LocalDateTime endDate;
 
+    /**
+     * Constructs an Event object that represents a unique task given by the user.
+     * @param description {@inheritDoc}
+     * @param startDate Provides the start date of the event.
+     * @param endDate Provides the end date of the event.
+     */
     public Event(String description, String startDate, String endDate) {
         super(description);
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
@@ -16,10 +25,17 @@ public class Event extends Task {
         this.endDate = LocalDateTime.parse(endDate, format);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean containsDate(LocalDate date) {
         return startDate.toLocalDate().isEqual(date) || endDate.toLocalDate().isEqual(date);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String addToFile() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
@@ -29,6 +45,9 @@ public class Event extends Task {
         return str + "\n";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");

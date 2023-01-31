@@ -4,20 +4,35 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task by the user that has a deadline.
+ */
 public class Deadline extends Task {
 
     protected LocalDateTime deadline;
 
+    /**
+     * Constructs a Deadline object that represents a unique task given by the user.
+     * @param description {@inheritDoc}
+     * @param deadline Provides the deadline of the task.
+     */
     public Deadline(String description, String deadline) {
         super(description);
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         this.deadline = LocalDateTime.parse(deadline, format);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean containsDate(LocalDate date) {
         return deadline.toLocalDate().isEqual(date);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String addToFile() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
@@ -25,6 +40,10 @@ public class Deadline extends Task {
                 isDone ? 1 : 0, this.description, this.deadline.format(formatter));
         return str + "\n";
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
