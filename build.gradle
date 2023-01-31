@@ -40,3 +40,12 @@ shadowJar {
 run{
     standardInput = System.in
 }
+
+plugins {
+    id 'checkstyle'
+    // other plugins
+}
+
+checkstyle {
+    toolVersion = '10.2'
+}

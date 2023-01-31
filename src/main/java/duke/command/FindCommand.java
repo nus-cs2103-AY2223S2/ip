@@ -12,11 +12,17 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showFoundTasks(tasks.findKeywordTasks(keyword));
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public boolean isExit() {
         return false;
