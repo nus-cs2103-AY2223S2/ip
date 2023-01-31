@@ -15,9 +15,12 @@ It's
 4. Let it manage your tasks for you 👍
 
 ## Features
--[x] Managing todo
--[ ] Managing deadlines
--[ ] Managing events
+- [x] Managing todo
+- [x] Managing deadlines
+- [x] Managing events
+- [x] Filter by keyword
+- [x] Mark and unmark tasks
+- [ ] Filter by date
 
 This is the main function:
    ```ruby
