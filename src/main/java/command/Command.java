@@ -1,7 +1,4 @@
 package command;
-
-import java.text.ParseException;
-
 import collections.TaskList;
 import exceptions.SundayException;
 import task.Deadline;
@@ -9,20 +6,10 @@ import task.Event;
 import task.Task;
 import task.ToDo;
 import utilities.Ui;
+import java.text.ParseException;
 
-/**
- * Enum representing different commands that can be executed in the task management system.
- * The commands include INITIALIZE, LIST, DEADLINE, EVENT, TODO, MARK, UNMARK, DELETE, and BYE.
- *
- * @author Tan Yan-Hao Joshua
- *
- */
 public enum Command {
-
-    /**
-     * Initializes the task list.
-     */
-    INITIALIZE("init") {
+    INITIALIZE ("init") {
         @Override
         public void execute(String filepath) throws SundayException {
             Ui.printWelcome();
@@ -34,11 +21,7 @@ public enum Command {
             }
         }
     },
-
-    /**
-     * Lists all the tasks in the task list.
-     */
-    LIST("list") {
+    LIST ("list") {
         @Override
         public void execute(String input) {
             if (list.isEmpty()) {
@@ -48,11 +31,7 @@ public enum Command {
             }
         }
     },
-
-    /**
-     * Adds a deadline task to the task list.
-     */
-    DEADLINE("deadline") {
+    DEADLINE ("deadline") {
         @Override
         public void execute(String input) throws SundayException {
             try {
@@ -89,11 +68,7 @@ public enum Command {
             }
         }
     },
-
-    /**
-     * Adds an event task to the task list.
-     */
-    EVENT("event") {
+    EVENT ("event") {
         @Override
         public void execute(String input) throws SundayException {
             try {
@@ -138,11 +113,7 @@ public enum Command {
             }
         }
     },
-
-    /**
-     * Adds a to-do task to the task list.
-     */
-    TODO("todo") {
+    TODO ("todo") {
         @Override
         public void execute(String input) throws SundayException {
             try {
@@ -155,11 +126,7 @@ public enum Command {
             }
         }
     },
-
-    /**
-     * Marks a task as complete.
-     */
-    MARK("mark") {
+    MARK ("mark") {
         @Override
         public void execute(String input) throws SundayException {
             try {
@@ -173,29 +140,21 @@ public enum Command {
             }
         }
     },
-
-    /**
-     * Unmarks a task as complete.
-     */
-    UNMARK("unmark") {
+    UNMARK ("unmark") {
         @Override
         public void execute(String input) throws SundayException {
             try {
                 int index = Integer.parseInt(input.substring(1)) - 1;
                 Task unmarked = list.unmark(index);
                 Ui.printUnmarkedTask(unmarked, list.getUncompletedSize());
-            } catch (NumberFormatException e) {
+            }  catch (NumberFormatException e) {
                 throw new SundayException("OOPS!!! You did not specify which task you wanted me to unmark");
             } catch (IndexOutOfBoundsException e) {
                 throw new SundayException("OOPS!!! Seems like that task does not exist.");
             }
         }
     },
-
-    /**
-     * Deletes a task from the task list.
-     */
-    DELETE("delete") {
+    DELETE ("delete") {
         @Override
         public void execute(String input) throws SundayException {
             try {
@@ -209,42 +168,17 @@ public enum Command {
             }
         }
     },
-
-    /**
-     * Exits the task management system.
-     */
-    BYE("bye") {
+    BYE ("bye") {
         @Override
         public void execute(String input) throws SundayException {
             boolean didSave = list.save();
             Ui.printGoodbye(didSave);
         }
     };
-
-    /**
-     * A static instance of TaskList to store tasks.
-     */
-    private static TaskList list = new TaskList();
-
-    /**
-     * The command string.
-     */
     private String command;
-
-    /**
-     * Constructor for the Command enum.
-     *
-     * @param command The string representation of the command.
-     */
+    private static TaskList list = new TaskList();
     Command(String command) {
         this.command = command;
     }
-
-    /**
-     * Executes the command with the given input.
-     *
-     * @param input The input to be used for executing the command.
-     * @throws SundayException If any error occurs during the execution of the command.
-     */
     public abstract void execute(String input) throws SundayException;
 }
