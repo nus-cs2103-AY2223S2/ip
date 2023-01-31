@@ -14,6 +14,10 @@ import java.nio.file.Paths;
 public class Saver {
     protected final static String PATH = "./data";
     protected final static String FILE_NAME = "/tasks.txt";
+
+    /**
+     * Creates a file with the specified path, if it does not exist
+     */
     public static void createFile(){
         File directory = new File(PATH);
         if(!directory.exists()) {
@@ -26,6 +30,11 @@ public class Saver {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Saves the current taskList on duke locally on a text file.
+     * @param taskList the taskList to be saved into the data file.
+     */
     public void save(TaskList taskList){
         try {
             createFile();
@@ -37,6 +46,10 @@ public class Saver {
         }
     }
 
+    /**
+     * Loads the content from the stored text file into a taskList Object.
+     * @param taskList the taskList to store the contents of the file into.
+     */
     public void load(TaskList taskList){
         try {
             createFile();
