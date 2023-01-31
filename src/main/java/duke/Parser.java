@@ -1,3 +1,7 @@
+package duke;
+
+import duke.DukeException;
+
 import java.io.FileNotFoundException;
 
 public class Parser {

@@ -1,3 +1,9 @@
+package duke;
+
+import duke.Deadline;
+import duke.DukeException;
+import duke.Event;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
