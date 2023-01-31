@@ -6,6 +6,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import java.io.IOException;
 
+/**
+ * A command to add an Event to the TaskList.
+ */
 public class AddEventCommand extends Command {
 
     private final String desc;
@@ -22,6 +25,13 @@ public class AddEventCommand extends Command {
         this.timeTo = timeTo;
     }
 
+    /**
+     * Executes the command.
+     * @param tasks List of tasks.
+     * @param ui UI handler.
+     * @param storage Storage to save and load list of tasks.
+     * @throws IOException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Event t = new Event(desc, dateFrom, timeFrom, dateTo, timeTo);
         tasks.add(t);

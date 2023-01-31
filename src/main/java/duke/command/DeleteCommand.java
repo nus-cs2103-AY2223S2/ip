@@ -8,6 +8,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import java.io.IOException;
 
+/**
+ * A command to delete a task from the TaskList.
+ */
 public class DeleteCommand extends Command {
 
     private final int num;
@@ -15,6 +18,14 @@ public class DeleteCommand extends Command {
         this.num = num;
     }
 
+    /**
+     * Executes the command.
+     * @param tasks List of tasks.
+     * @param ui UI handler.
+     * @param storage Storage to save and load list of tasks.
+     * @throws DukeException
+     * @throws IOException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         if (num <= 0) {
             throw new DukeInvalidArgumentException("Huh? Your task number needs to be greater than zero!");

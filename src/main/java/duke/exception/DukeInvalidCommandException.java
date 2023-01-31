@@ -1,5 +1,10 @@
 package duke.exception;
 
+/**
+ * A custom exception for the Duke program.
+ * It denotes an invalid command from the user,
+ * e.g. wrong format, invalid keyword.
+ */
 public class DukeInvalidCommandException extends DukeException {
 
     public DukeInvalidCommandException() {

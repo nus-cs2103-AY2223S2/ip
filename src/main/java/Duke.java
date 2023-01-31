@@ -6,12 +6,19 @@ import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 
+/**
+ * The main class of the program.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a new Duke.
+     * @param dirPath Directory path.
+     */
     public Duke(String dirPath) {
         this.ui = new Ui();
         this.storage = new Storage(dirPath);
@@ -23,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isBye = false;

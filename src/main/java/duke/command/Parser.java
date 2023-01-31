@@ -3,6 +3,10 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.exception.DukeInvalidCommandException;
 
+/**
+ * A class that deals with making sense of user input.
+ * It creates the appropriate Command object accordingly.
+ */
 public class Parser {
 
     public static Command parse(String line) throws DukeException {

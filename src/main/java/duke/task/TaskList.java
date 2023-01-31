@@ -4,6 +4,9 @@ import duke.exception.DukeException;
 import duke.exception.DukeInvalidArgumentException;
 import java.util.ArrayList;
 
+/**
+ * A list that stores Tasks.
+ */
 public class TaskList {
 
     private final ArrayList<Task> tasks;
@@ -16,6 +19,10 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Generates the details of all tasks in the list to save in data/tasks.txt.
+     * @return Details of all tasks in the list.
+     */
     public String generateTaskDetails() {
         String str = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -36,6 +43,12 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Marks a task as done.
+     * @param num The task number.
+     * @return The task that has been marked as done.
+     * @throws DukeException
+     */
     public Task mark(int num) throws DukeException {
         Task t = tasks.get(num);
         if (t.isDone()) {
@@ -46,6 +59,12 @@ public class TaskList {
         return t;
     }
 
+    /**
+     * Marks a task as undone.
+     * @param num The task number.
+     * @return The task that has been marked as undone.
+     * @throws DukeException
+     */
     public Task unmark(int num) throws DukeException {
         Task t = tasks.get(num);
         if (!t.isDone()) {
@@ -60,6 +79,11 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /**
+     * Deletes a task.
+     * @param num The task number.
+     * @return The task that has been deleted.
+     */
     public Task delete(int num) {
         Task t = tasks.get(num - 1);
         tasks.remove(num - 1);

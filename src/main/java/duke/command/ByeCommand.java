@@ -6,6 +6,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import java.io.IOException;
 
+/**
+ * A command to quit the Duke program.
+ */
 public class ByeCommand extends Command {
 
     @Override
@@ -13,6 +16,14 @@ public class ByeCommand extends Command {
         return true;
     }
 
+    /**
+     * Executes the command.
+     * @param tasks List of tasks.
+     * @param ui UI handler.
+     * @param storage Storage to save and load list of tasks.
+     * @throws DukeException
+     * @throws IOException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         ui.sayBye();
         storage.saveTasks(tasks);

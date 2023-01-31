@@ -5,6 +5,10 @@ import duke.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * A class that deals with interactions with the user.
+ * It accepts user input and displays text on the screen.
+ */
 public class Ui {
 
     private final Scanner sc = new Scanner(System.in);
@@ -23,12 +27,20 @@ public class Ui {
     public String readCommand() {
         return sc.nextLine();
     }
+
+    /**
+     * Displays a bunny divider.
+     */
     public void showBunny() {
         System.out.println("(\\ (\\\n" +
                 "(„• ֊ •„) ♡\n" +
                 "━O━O━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     }
 
+    /**
+     * Displays the error message.
+     * @param err Error.
+     */
     public void showError(Exception err) {
         String msg = err.getMessage();
         System.out.println(msg);
@@ -49,22 +61,40 @@ public class Ui {
         System.out.println("Bye bye :( Hope to see you again soon!");
     }
 
+    /**
+     * Tells the user that a task has been marked done.
+     * @param t The task that has been marked done.
+     */
     public void mark(Task t) {
         System.out.println("Okie! I've marked this task as done:");
         System.out.println(t);
     }
 
+    /**
+     * Tells the user that a task has been marked undone.
+     * @param t The task that has been marked done.
+     */
     public void unmark(Task t) {
         System.out.println("Okie! I've marked this task as not done yet:");
         System.out.println(t);
     }
 
+    /**
+     * Tells the user that a task has been added.
+     * @param t The task that has been added.
+     * @param tasks List of tasks.
+     */
     public void add(Task t, TaskList tasks) {
         System.out.println("Alright! I've added this task:");
         System.out.println(t);
         showTaskListStatus(tasks);
     }
 
+    /**
+     * Tells the user that a task has been deleted.
+     * @param t The task that has been deleted.
+     * @param tasks List of tasks.
+     */
     public void delete(Task t, TaskList tasks) {
         System.out.println("Okie! I've removed this task:");
         System.out.println(t);
@@ -79,6 +109,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Lists the tasks in the TaskList.
+     * @param tasks List of tasks.
+     */
     public void list(TaskList tasks) {
         if (tasks.isEmpty()) {
             System.out.println("Your list is currently empty!");
