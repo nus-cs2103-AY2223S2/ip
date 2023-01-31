@@ -3,7 +3,7 @@ package duke.commands;
 import duke.exception.InvalidArgumentDukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.uiText.UiText;
 
 /**
  * Represents a command to delete a task.
@@ -20,7 +20,7 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidArgumentDukeException {
+    public String execute(TaskList taskList, UiText uiText, Storage storage) throws InvalidArgumentDukeException {
         try {
             String taskString = taskList.getTaskString(number);
             taskList.remove(number);

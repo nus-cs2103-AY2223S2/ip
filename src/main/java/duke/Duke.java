@@ -5,7 +5,7 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.uiText.UiText;
 import javafx.application.Platform;
 
 /**
@@ -16,7 +16,7 @@ public class Duke {
     private static TaskList taskList = new TaskList();
     private static Parser parser = new Parser();
     private static Storage storage;
-    private static Ui ui = new Ui();
+    private static UiText uiText = new UiText();
 
     public Duke() {
 
@@ -37,7 +37,7 @@ public class Duke {
             if (command.isExit()) {
                 Platform.exit();
             } else {
-                return command.execute(taskList, ui, storage);
+                return command.execute(taskList, uiText, storage);
             }
             storage.save(taskList);
             return null;

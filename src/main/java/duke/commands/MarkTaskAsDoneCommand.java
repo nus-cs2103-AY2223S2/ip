@@ -3,7 +3,7 @@ package duke.commands;
 import duke.exception.InvalidArgumentDukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.uiText.UiText;
 
 /**
  * Represents a command to mark a task as done.
@@ -16,7 +16,7 @@ public class MarkTaskAsDoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidArgumentDukeException {
+    public String execute(TaskList taskList, UiText uiText, Storage storage) throws InvalidArgumentDukeException {
         try {
             taskList.markTaskAsDone(number);
             return "Good job. You have finished this task:\n"

@@ -1,9 +1,9 @@
-package duke.ui;
+package duke.uiText;
 
 /**
  * Class that deals with interactions with the user.
  */
-public class Ui {
+public class UiText {
 
     /**
      * Prints a greeting.

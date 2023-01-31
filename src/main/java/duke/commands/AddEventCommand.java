@@ -6,7 +6,7 @@ import duke.storage.Storage;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.uiText.UiText;
 
 /**
  * Represents a command to add an event to a tasklist.
@@ -29,7 +29,7 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, UiText uiText, Storage storage) {
         Task task = new EventTask(description, startDateTime, endDateTime);
         taskList.add(task);
         return "added: " + task;
