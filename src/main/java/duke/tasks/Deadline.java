@@ -17,6 +17,18 @@ public class Deadline extends Task {
     private Optional<LocalDate> chornoDueDate;
 
     /**
+     * Constructor method.
+     * @param taskName Task name
+     * @param dueDate Due date of task
+     * @param isDone Task completion status
+     */
+    public Deadline(String taskName, String dueDate, boolean isDone) {
+        super(taskName, "D", isDone);
+        this.dueDate = dueDate;
+        this.chornoDueDate = Parser.parseDate(dueDate);
+    }
+
+    /**
      * Factory method.
      * @param commandInput Command line input that the user entered.
      * @return New Deadline task
@@ -27,18 +39,6 @@ public class Deadline extends Task {
         String[] parseInfo = Parser.parseDeadlineCmd(commandInput);
         return new Deadline(parseInfo[0], parseInfo[1], false);
     }
-    
-    /**
-     * Constructor method.
-     * @param taskName Task name
-     * @param dueDate Due date of task
-     * @param isDone Task completion status
-     */
-    public Deadline(String taskName, String dueDate, boolean isDone) {
-        super(taskName, "D", isDone);
-        this.dueDate = dueDate;
-        this.chornoDueDate = Parser.parseDate(dueDate); 
-    }
 
     /**
      * Represents fields of this task as a string
@@ -48,7 +48,6 @@ public class Deadline extends Task {
     public String stringFields() {
         String dateString = this.chornoDueDate.isEmpty() ? dueDate
                 : chornoDueDate.get().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        
-        return " (by: " + dateString + ")"; 
+        return " (by: " + dateString + ")";
     }
 }
