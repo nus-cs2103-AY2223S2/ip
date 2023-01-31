@@ -20,7 +20,7 @@ public class Deadlines extends Task {
      *
      * @param description description of the task.
      * @param by deadline of the task.
-     * @throws DukeInvalidArgumentException
+     * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
     public Deadlines(String description, String by) throws DukeInvalidArgumentException {
         super(description);

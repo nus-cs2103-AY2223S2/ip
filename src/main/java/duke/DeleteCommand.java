@@ -23,11 +23,13 @@ public class DeleteCommand extends Command {
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }
 
-    public String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException, DukeIOException {
+    @Override
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException, DukeIoException {
         if (deletedLineNumber >= task.size()) {
             throw new DukeInvalidArgumentException("There are only" + task.size()
                     + "tasks in list, but want to delete " + deletedLineNumber + "th task.");

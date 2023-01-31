@@ -3,7 +3,7 @@ package duke;
 /**
  * Class for creating a add command, more specific for todo, deadline, and event command.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private final Task task;
 
     /**
@@ -43,11 +43,13 @@ public class AddCommand extends Command{
         }
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }
 
-    public String execute(TaskList task, Ui ui, Storage storage) throws DukeIOException {
+    @Override
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeIoException {
         task.add(this.task);
         storage.updateData(this.task);
         return ui.responseToLAddTaskCommand(this.task, task);

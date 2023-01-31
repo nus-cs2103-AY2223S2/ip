@@ -8,7 +8,7 @@ public class ListCommand extends Command {
         return false;
     }
 
-    public String execute(TaskList task, Ui ui, Storage storage){
+    public String execute(TaskList task, Ui ui, Storage storage) {
         return ui.responseToListCommand(task);
     }
 }

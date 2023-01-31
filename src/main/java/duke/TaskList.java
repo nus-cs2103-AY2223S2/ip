@@ -38,16 +38,6 @@ public class TaskList {
     }
 
     /**
-     * Replace the task in the task list given its index and task to replace.
-     *
-     * @param index index of task in task list.
-     * @param task task to replace.
-     */
-    protected void setTaskAt(int index, Task task) {
-        taskList.set(index, task);
-    }
-
-    /**
      * Insert task at the end of the task list.
      *
      * @param task task to be inserted.

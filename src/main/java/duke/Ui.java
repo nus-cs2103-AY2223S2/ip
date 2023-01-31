@@ -7,16 +7,6 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final String DIVIDER = "____________________________________________________________";
-
-    /**
-     * Return the divider among multiple response.
-     *
-     * @return horizontal line.
-     */
-//    protected String printHorizontalLine() {
-//        return "\t" + DIVIDER;
-//    }
 
     /**
      * Return the welcome message upon start of the application.
@@ -24,8 +14,7 @@ public class Ui {
      * @return welcome message
      */
     public String showWelcomeMessage() {
-        String msg = "Hello! I'm Duke\n" + "What can I do for you?";
-        return  msg;
+        return  "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
     /**
@@ -34,8 +23,7 @@ public class Ui {
      * @return goodbye message.
      */
     public String showGoodbyeMessage() {
-        String msg = "Bye. Hope to see you again soon!";
-        return msg;
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -46,7 +34,7 @@ public class Ui {
      */
     public String responseToListCommand(TaskList taskList) {
         String msg = "Here are the tasks in your list:";
-        for(int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             int tmp = i + 1;
             msg += "\n" + tmp + "." + taskList.getTaskAt(i);
         }
@@ -62,9 +50,8 @@ public class Ui {
      * @return message for add task command.
      */
     public String responseToLAddTaskCommand(Task task, TaskList taskList) {
-        String msg = "Got it. I've added this task:\n  " + task + "\nNow you have "
+        return"Got it. I've added this task:\n  " + task + "\nNow you have "
                 + taskList.size() + " tasks in the list.";
-        return msg;
     }
 
 
@@ -100,9 +87,8 @@ public class Ui {
      * @return message for delete command.
      */
     public String responseToDeleteTaskCommand(TaskList taskList, int index) {
-        String msg = "Noted. I've removed this task:\n  " + taskList.getTaskAt(index)
+        return "Noted. I've removed this task:\n  " + taskList.getTaskAt(index)
                 + "\nNow you have " + (taskList.size() - 1) + " tasks in the list.";
-        return msg;
     }
 
     /**
@@ -127,8 +113,7 @@ public class Ui {
      * @return message for loading error.
      */
     public String showLoadingError() {
-        String msg = "OOPS!!! Unable to load data from the file";
-        return msg;
+        return "OOPS!!! Unable to load data from the file";
     }
 
     /**
@@ -138,8 +123,7 @@ public class Ui {
      * @return error message.
      */
     public String showError(String errorMsg) {
-        String msg = "OOPS!!! "+ errorMsg;
-        return msg;
+        return "OOPS!!! " + errorMsg;
     }
 
     /**
@@ -150,9 +134,5 @@ public class Ui {
     public String requestForUserInput() {
         System.out.println("\tEnter Command: ");
         return SCANNER.nextLine();
-    }
-
-    private void closeScanner() {
-        SCANNER.close();
     }
 }

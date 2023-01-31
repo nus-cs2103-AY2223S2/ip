@@ -12,7 +12,6 @@ import java.io.IOException;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
     private Duke duke = new Duke("data/duke.txt");
 
     @Override

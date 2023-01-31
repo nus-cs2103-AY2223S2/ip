@@ -5,10 +5,30 @@ package duke;
  * Initialize the program and interact with the user.
  */
 public class Duke {
+    protected String greetingMsg;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    protected String greetingMsg;
+
+    public Duke() {}
+
+    /**
+     * Constructor to create duke instance.
+     *
+     * @param filePath description of the file path.
+     */
+    public Duke(String filePath) {
+        try {
+            ui = new Ui();
+            storage = new Storage(filePath);
+            tasks = new TaskList(storage.load());
+            greetingMsg = ui.showWelcomeMessage();
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            Storage.setDefaultStorage();
+            tasks = new TaskList();
+        }
+    }
 
     /**
      * Return response given a user input.
@@ -22,26 +42,6 @@ public class Duke {
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
-        }
-    }
-
-    public Duke() {}
-
-    /**
-     * Constructor to create duke instance.
-     *
-     * @param filePath
-     */
-    public Duke(String filePath) {
-        try {
-            ui = new Ui();
-            storage = new Storage(filePath);
-            tasks = new TaskList(storage.load());
-            greetingMsg = ui.showWelcomeMessage();
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            Storage.setDefaultStorage();
-            tasks = new TaskList();
         }
     }
 

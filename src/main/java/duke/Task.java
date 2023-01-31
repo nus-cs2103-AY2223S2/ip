@@ -9,7 +9,7 @@ public class Task {
      */
     protected String description;
     /**
-     * Status of the task, whether is has be done by the user or not.
+     * Status of the task, whether is has been done by the user or not.
      */
     protected boolean isDone;
 

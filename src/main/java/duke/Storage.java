@@ -54,14 +54,14 @@ public class Storage {
      * Insert new task into the file.
      *
      * @param t task to be inserted.
-     * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
+     * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      */
-    protected void updateData(Task t) throws DukeIOException {
+    protected void updateData(Task t) throws DukeIoException {
         try {
-            List<String> allLine =  Files.readAllLines(path);
+            List<String> allLine = Files.readAllLines(path);
             String s = t.toString().charAt(1) + " | " + t.getStatusIcon() + " | " + t.description;
             if (t instanceof Deadlines) {
-                Deadlines d =  (Deadlines) t;
+                Deadlines d = (Deadlines) t;
                 s += " | " + d.getBy();
             } else if (t instanceof Events) {
                 Events e = (Events) t;
@@ -70,7 +70,7 @@ public class Storage {
             allLine.add(s);
             Files.write(path, allLine);
         } catch (IOException e) {
-            throw new DukeIOException("Cannot read from " + filePath + " data file");
+            throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
     }
 
@@ -79,9 +79,9 @@ public class Storage {
      *
      * @param lineNumber line number in the file to be toggled.
      * @param status status of file that indicate whether the task is done or not.
-     * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
+     * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      */
-    protected void updateData(int lineNumber, int status) throws DukeIOException {
+    protected void updateData(int lineNumber, int status) throws DukeIoException {
         try {
             List<String> allLine = Files.readAllLines(path);
 
@@ -92,7 +92,7 @@ public class Storage {
 
             Files.write(path, allLine);
         } catch (IOException e) {
-            throw new DukeIOException("Cannot read from " + filePath + " data file");
+            throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
     }
 
@@ -100,9 +100,9 @@ public class Storage {
      * Remove specific task from the file.
      *
      * @param lineNumber line number in the file to be deleted.
-     * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
+     * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      */
-    protected void removeData(int lineNumber) throws DukeIOException {
+    protected void removeData(int lineNumber) throws DukeIoException {
         try {
             List<String> allLine = Files.readAllLines(path);
 
@@ -110,7 +110,7 @@ public class Storage {
             allLine.remove(lineNumber);
             Files.write(path, allLine);
         } catch (IOException e) {
-            throw new DukeIOException("Cannot read from " + filePath + " data file");
+            throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
     }
 
@@ -118,11 +118,11 @@ public class Storage {
      * Load the task from the file at the beginning of the program execution.
      *
      * @return list of task that stored in the file before.
-     * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
+     * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
      */
-    protected ArrayList<Task> load() throws DukeIOException, DukeInvalidArgumentException {
-        ArrayList<Task> taskList= new ArrayList<>();
+    protected ArrayList<Task> load() throws DukeIoException, DukeInvalidArgumentException {
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
             List<String> allLine = Files.readAllLines(path);
 
@@ -152,11 +152,11 @@ public class Storage {
 
             return taskList;
         } catch (IOException e) {
-            throw new DukeIOException("Cannot read from " + filePath + " data file");
+            throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
     }
 
-    protected TaskList findDataFromFile(String keyword) throws DukeIOException, DukeInvalidArgumentException {
+    protected TaskList findDataFromFile(String keyword) throws DukeIoException, DukeInvalidArgumentException {
         TaskList result = new TaskList();
         try {
             List<String> allLine = Files.readAllLines(path);
@@ -190,21 +190,7 @@ public class Storage {
 
             return result;
         } catch (IOException e) {
-            throw new DukeIOException("Cannot read from " + filePath + " data file");
-        }
-    }
-
-    /**
-     * Empty all the task that stored in the file.
-     *
-     * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
-     */
-    protected void emptyStorage() throws DukeIOException {
-        try {
-            List<String> emptyLine = new ArrayList<>();
-            Files.write(path, emptyLine);
-        } catch (IOException e) {
-            throw new DukeIOException("Cannot read from " + filePath + " data file");
+            throw new DukeIoException("Cannot read from " + filePath + " data file");
         }
     }
 }

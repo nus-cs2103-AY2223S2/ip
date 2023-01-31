@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represent an executable command.
+ */
 public abstract class Command {
 
     /**
@@ -16,8 +19,8 @@ public abstract class Command {
      * @param ui User Interface of the application.
      * @param storage Database that store previous undelete task.
      * @throws DukeInvalidArgumentException indicate that a command has been passed an illegal argument.
-     * @throws DukeIOException indicate failed or interrupted I/O operations occurred.
+     * @throws DukeIoException indicate failed or interrupted I/O operations occurred.
      */
     protected abstract String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException,
-            DukeIOException;
+            DukeIoException;
 }

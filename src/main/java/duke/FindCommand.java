@@ -5,6 +5,13 @@ package duke;
  */
 public class FindCommand extends Command {
     private final String keyword;
+
+    /**
+     * Constructor to create a find command.
+     *
+     * @param fullCommand user input.
+     * @throws DukeEmptyArgumentException indicate that a command has been passed an e empty argument.
+     */
     public FindCommand(String[] fullCommand) throws DukeEmptyArgumentException {
         try {
             keyword = fullCommand[1];
@@ -19,7 +26,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException, DukeIOException {
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeInvalidArgumentException, DukeIoException {
         TaskList taskList = storage.findDataFromFile(keyword);
         return ui.responseToFindTaskCommand(taskList);
     }

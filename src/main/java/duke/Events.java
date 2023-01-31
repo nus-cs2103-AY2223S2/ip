@@ -21,7 +21,7 @@ public class Events extends Task {
     private final DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     /**
-     * Constructor to create a event instance.
+     * Constructor to create an event instance.
      *
      * @param description description of the task.
      * @param start starting time of events.
@@ -46,13 +46,6 @@ public class Events extends Task {
 
     public String getEnd() {
         return endTime;
-    }
-
-    /**
-     * Print the deadline of the event.
-     */
-    public void getDeadline() {
-        System.out.println("The event is from" + start.format(format) + " to " + end.format(format));
     }
 
     /**
