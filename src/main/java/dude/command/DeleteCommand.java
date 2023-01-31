@@ -1,11 +1,13 @@
 package dude.command;
 
-import dude.exception.DudeException;
+import dude.storage.Storage;
 import dude.task.Task;
 import dude.task.TaskList;
-import dude.storage.Storage;
 import dude.ui.Ui;
 
+/**
+ * Command to delete Task
+ */
 public class DeleteCommand extends Command {
     private final int taskIndex;
 

@@ -1,9 +1,12 @@
 package dude.command;
 
-import dude.task.TaskList;
 import dude.storage.Storage;
+import dude.task.TaskList;
 import dude.ui.Ui;
 
+/**
+ * Command structure for all commands
+ */
 public abstract class Command {
     private boolean isExit;
 

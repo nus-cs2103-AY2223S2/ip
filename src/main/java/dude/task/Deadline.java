@@ -3,6 +3,9 @@ package dude.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Task with due date
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
@@ -22,7 +25,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 
     /**
@@ -30,6 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toRaw() {
-        return "D | " + (this.isDone ? 1 : 0) + " | " + description + " | " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + "\n";
+        return "D | " + (this.isDone ? 1 : 0) + " | " + description + " | "
+                + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + "\n";
     }
 }

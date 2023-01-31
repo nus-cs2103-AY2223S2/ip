@@ -1,9 +1,12 @@
 package dude.command;
 
-import dude.task.TaskList;
 import dude.storage.Storage;
+import dude.task.TaskList;
 import dude.ui.Ui;
 
+/**
+ * Command to exit Dude program
+ */
 public class ExitCommand extends Command {
     /**
      * {@inheritDoc}

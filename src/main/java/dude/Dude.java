@@ -1,5 +1,7 @@
 package dude;
 
+import java.io.FileNotFoundException;
+
 import dude.command.Command;
 import dude.exception.DudeException;
 import dude.parser.Parser;
@@ -7,8 +9,9 @@ import dude.storage.Storage;
 import dude.task.TaskList;
 import dude.ui.Ui;
 
-import java.io.FileNotFoundException;
-
+/**
+ * Handles the entire dude program
+ */
 public class Dude {
     private final Storage storage;
     private TaskList tasks;
@@ -25,7 +28,7 @@ public class Dude {
         try {
             tasks = new TaskList(storage.loadData());
         } catch (FileNotFoundException e) {
-//          ui.showLoadingError();
+            //ui.showLoadingError();
             tasks = new TaskList();
 
         }
@@ -44,11 +47,9 @@ public class Dude {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            }
-            catch (DudeException e) {
+            } catch (DudeException e) {
                 ui.showError(e.getMessage());
-            }
-            finally {
+            } finally {
                 ui.showLine();
             }
         }

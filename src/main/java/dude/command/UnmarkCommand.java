@@ -1,10 +1,13 @@
 package dude.command;
 
+import dude.storage.Storage;
 import dude.task.Task;
 import dude.task.TaskList;
-import dude.storage.Storage;
 import dude.ui.Ui;
 
+/**
+ * Command to unmark Task
+ */
 public class UnmarkCommand extends Command {
     private final int taskIndex;
 

@@ -1,10 +1,13 @@
 package dude.command;
 
-import dude.task.TaskList;
 import dude.storage.Storage;
+import dude.task.TaskList;
 import dude.ui.Ui;
 
-public class ListCommand extends Command{
+/**
+ * Command to list all the Tasks in TaskList
+ */
+public class ListCommand extends Command {
     /**
      * {@inheritDoc}
      */

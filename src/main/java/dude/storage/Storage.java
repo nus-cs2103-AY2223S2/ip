@@ -1,7 +1,5 @@
 package dude.storage;
 
-import dude.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,6 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import dude.task.Deadline;
+import dude.task.Event;
+import dude.task.Task;
+import dude.task.TaskList;
+import dude.task.Todo;
+
+/**
+ * Handles file data input and output
+ */
 public class Storage {
 
     private final String filePath;
@@ -74,17 +81,17 @@ public class Storage {
                 String[] output = sc.nextLine().split(" \\| ");
                 Task task = null;
                 switch (output[0]) {
-                    case "T":
-                        task = new Todo(output[2]);
-                        break;
-                    case "D":
-                        task = new Deadline(output[2], output[3]);
-                        break;
-                    case "E":
-                        task = new Event(output[2], output[3], output[4]);
-                        break;
-                    default:
-                        break;
+                case "T":
+                    task = new Todo(output[2]);
+                    break;
+                case "D":
+                    task = new Deadline(output[2], output[3]);
+                    break;
+                case "E":
+                    task = new Event(output[2], output[3], output[4]);
+                    break;
+                default:
+                    break;
                 }
 
                 if (output[1].equals("1")) {
