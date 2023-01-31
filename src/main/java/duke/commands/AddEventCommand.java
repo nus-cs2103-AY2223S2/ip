@@ -65,7 +65,7 @@ public class AddEventCommand extends Command {
             Event newEvent = new Event(task.toString(), startDate.toString().stripLeading(), endDate.toString().stripLeading());
             taskList.addTask(newEvent);
             ui.response(FRAME + "\n" +
-                    "     Got it. I've added this duke.task:" + "\n" +
+                    "     Got it. I've added this task:" + "\n" +
                     "     " + newEvent.status() + "\n" +
                     "     Now you have " + taskList.length() + " tasks in the list" + "\n" +
                     FRAME);

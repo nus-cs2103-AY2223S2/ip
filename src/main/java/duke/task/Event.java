@@ -31,7 +31,7 @@ public class Event extends Task {
 
     @Override
     public String status() {
-        String status = this.completed ? "[X]" : "[ ]";
+        String status = this.completed ? "[X] " : "[ ] ";
         return "[" + typeToString + "]" + status + this.details +
                 " (from: " + this.startDateTime.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " [" +
                 this.startDateTime.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")" + " to: " +

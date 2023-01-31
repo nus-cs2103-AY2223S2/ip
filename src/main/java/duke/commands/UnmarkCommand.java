@@ -20,7 +20,7 @@ public class UnmarkCommand extends Command {
         Task task = taskList.getTask(this.taskNumber);
         task.incomplete();
         ui.response(FRAME +
-                "     OK, I've marked this duke.task as not done yet:\n" +
+                "     OK, I've marked this task as not done yet:\n" +
                 "       [ ] " + task.details + "\n" +
                 FRAME);
     }

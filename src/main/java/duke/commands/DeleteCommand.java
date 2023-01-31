@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
         String taskDescription = taskList.getTask(taskNumber).status();
         taskList.deleteTask(taskNumber);
         ui.response(FRAME +
-                " Noted. I've removed this duke.task:\n" +
+                " Noted. I've removed this task:\n" +
                 "       " + taskDescription +
                 "     Now you have " + taskList.length() + " tasks in the list." + "\n"
                 + FRAME);

@@ -20,7 +20,7 @@ public class MarkCommand extends Command{
         Task task = taskList.getTask(this.taskNumber);
         task.complete();
         ui.response(FRAME +
-                "     Nice! I've marked this duke.task as done:\n" +
+                "     Nice! I've marked this task as done:\n" +
                 "       [X] " + task.details + "\n" +
                 FRAME);
     }

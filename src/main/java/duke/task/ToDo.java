@@ -20,7 +20,7 @@ public class ToDo extends Task {
 
     @Override
     public String status() {
-        String status = this.completed ? "[X]" : "[ ]";
+        String status = this.completed ? "[X] " : "[ ] ";
         return "[" + typeToString + "]" + status + " " + this.details;
     }
 

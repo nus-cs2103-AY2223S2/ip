@@ -30,7 +30,7 @@ public class Deadline extends Task {
 
     @Override
     public String status() {
-        String status = this.completed ? "[X]" : "[ ]";
+        String status = this.completed ? "[X] " : "[ ] ";
         return "[" + typeToString + "]" + status + this.details + " (by: " +
                 this.deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)) + " [" +
                 this.deadline.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)) + "]" + ")";
