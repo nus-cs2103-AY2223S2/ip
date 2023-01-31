@@ -43,6 +43,10 @@ public class Duke {
                     addDeadline(deadline[0], deadline[1]);
                     continue;
                 }
+                if (userInput.startsWith("delete")) {
+                    deleteTask(Integer.parseInt(userInput.substring(7)));
+                    continue;
+                }
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             } catch (DukeException exception) {
                 printMessage(exception.getMessage());
@@ -104,6 +108,14 @@ public class Duke {
         this.list.get(taskNum - 1).markAsUndone();
         System.out.println("\tOK, I've marked this task as not done yet:");
         System.out.println("\t" + this.list.get(taskNum - 1) + "\n");
+    }
+
+    private void deleteTask(int taskNum) {
+        Task deletedTask = list.get(taskNum - 1);
+        list.remove(taskNum - 1);
+        System.out.println("\tNoted. I've removed this task:");
+        System.out.println("\t\t" + deletedTask);
+        System.out.printf("\tNow you have " + list.size() + " tasks in the list." + "\n");
     }
 
     private void showList() {
