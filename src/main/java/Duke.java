@@ -96,6 +96,7 @@ public class Duke {
     public static String parse_date(String s) {
         DateTimeFormatter read_fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         DateTimeFormatter print_fmt = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        
         try {
             LocalDate lt = LocalDate.parse(s, read_fmt);
             return lt.format(print_fmt);
