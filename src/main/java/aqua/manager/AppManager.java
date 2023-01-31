@@ -1,5 +1,7 @@
 package aqua.manager;
 
+import java.util.ArrayDeque;
+
 import aqua.exception.LoadException;
 import aqua.logic.CommandLineInput;
 import aqua.logic.ExecutionService;
@@ -10,6 +12,12 @@ import aqua.logic.command.ListCommand;
 public class AppManager {
     private final LogicManager logicManager;
     private final IoManager ioManager;
+
+    /** Queue of {@code ExecutionService} waiting to be executed. */
+    private final ArrayDeque<ExecutionService> executionQueue = new ArrayDeque<>();
+
+    /** The currently running {@code ExecutionService} */
+    private ExecutionService runningService = null;
 
 
     /**
@@ -42,7 +50,7 @@ public class AppManager {
 
 
     /**
-     * Processes and executes the user's input.
+     * Processes and executes the user's input and queues the service created.
      */
     public void processInput() {
         // get input string
@@ -58,7 +66,31 @@ public class AppManager {
         }
 
         // start service
-        initiateService(commandInput.getService(logicManager));
+        queue(commandInput.getService(logicManager));
+    }
+
+
+    /**
+     * Queues the given service for execution.
+     *
+     * @param service - the service to queue.
+     */
+    private synchronized void queue(ExecutionService service) {
+        executionQueue.add(service);
+        executeNext();
+    }
+
+
+    /**
+     * Attempts to execute the next service in the queue. If there already is a
+     * running service or if the queue is empty, nothing will be done.
+     */
+    private synchronized void executeNext() {
+        if (runningService != null || executionQueue.isEmpty()) {
+            return;
+        }
+        runningService = executionQueue.poll();
+        initiateService(runningService);
     }
 
 
@@ -68,6 +100,7 @@ public class AppManager {
      * @param service - the service to start.
      */
     private void initiateService(ExecutionService service) {
+        runningService = service;
         service.setOnSucceeded(s -> handleExecutionSuccess(service));
         service.setOnFailed(f -> handleExecutionFailure(service));
         service.start();
@@ -85,7 +118,9 @@ public class AppManager {
      */
     private void handleExecutionSuccess(ExecutionService service) {
         ioManager.reply(service.getValue());
-        service.followUpDispatcher().ifPresent(this::initiateService);
+        service.followUpDispatcher().ifPresentOrElse(
+                this::initiateService,
+                this::completeService);
     }
 
 
@@ -99,5 +134,15 @@ public class AppManager {
      */
     private void handleExecutionFailure(ExecutionService service) {
         ioManager.replyException(service.getException());
+        completeService();
+    }
+
+
+    /**
+     * Clears the currently running service for the next service in queue.
+     */
+    private void completeService() {
+        runningService = null;
+        executeNext();
     }
 }
