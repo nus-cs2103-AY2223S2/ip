@@ -1,6 +1,7 @@
 package duke.buttons;
 
-import duke.Functions;
+import duke.functions.CreateEvent;
+import duke.functions.Functions;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -32,7 +33,7 @@ public class EventButton extends DukeButton {
             String des = desTextField.getText();
             String start = startTextField.getText();
             String end = endTextField.getText();
-            this.fn.events(des, start, end);
+            new CreateEvent(this.fn).events(des, start, end);
         });
 
         return vbox;

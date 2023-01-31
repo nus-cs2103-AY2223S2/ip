@@ -1,6 +1,7 @@
 package duke.buttons;
 
-import duke.Functions;
+import duke.functions.Functions;
+import duke.functions.ListTask;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -9,7 +10,7 @@ public class ListButton extends DukeButton {
         super(s, i, o, f);
         this.button.setOnMouseClicked((event) -> {
             this.inputLayout.getChildren().clear();
-            this.fn.list();
+            new ListTask(this.fn).list();
         });
     }
 

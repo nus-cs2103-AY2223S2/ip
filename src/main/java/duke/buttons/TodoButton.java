@@ -1,6 +1,7 @@
 package duke.buttons;
 
-import duke.Functions;
+import duke.functions.CreateTodo;
+import duke.functions.Functions;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -27,7 +28,7 @@ public class TodoButton extends DukeButton {
 
         addTaskButton.setOnMouseClicked((event) -> {
             String des = desTextField.getText();
-            this.fn.todo(des);
+            new CreateTodo(this.fn).todo(des);
         });
 
         return vbox;

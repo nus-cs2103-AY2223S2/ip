@@ -1,6 +1,7 @@
-package duke;
+package duke.gui;
 
 import duke.buttons.*;
+import duke.functions.Functions;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 

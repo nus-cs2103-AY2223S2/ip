@@ -1,6 +1,6 @@
-package duke;
+package duke.task;
 
-public class Deadlines extends TimedTask {
+public class Deadline extends TimedTask {
     /**
      * Represents Deadline Task for the Duke program
      */
@@ -8,7 +8,7 @@ public class Deadlines extends TimedTask {
     /**
      * Empty constructor for a Deadline instance.
      */
-    public Deadlines() {
+    public Deadline() {
         super();
     }
 
@@ -18,7 +18,7 @@ public class Deadlines extends TimedTask {
      * @param status Indicate if task is done or not
      * @param des    Description of task. Includes deadline of task
      */
-    public Deadlines(boolean status, String des, String end) {
+    public Deadline(boolean status, String des, String end) {
         super();
         setStatus(status);
         setDes(des);

@@ -1,6 +1,7 @@
 package duke.buttons;
 
-import duke.Functions;
+import duke.functions.Functions;
+import duke.functions.MarkTask;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,7 +27,7 @@ public class MarkButton extends DukeButton {
 
         markTaskButton.setOnMouseClicked((event) -> {
             String markIndex = markTextField.getText();
-            this.fn.mark(markIndex);
+            new MarkTask(this.fn).mark(markIndex, true);
         });
 
         return vbox;

@@ -1,6 +1,7 @@
 package duke.buttons;
 
-import duke.Functions;
+import duke.functions.FindTask;
+import duke.functions.Functions;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,7 +27,7 @@ public class FindButton extends DukeButton {
 
         findTaskButton.setOnMouseClicked((event) -> {
             String keyword = keywordTextField.getText();
-            this.fn.find(keyword);
+            new FindTask(this.fn).find(keyword);
         });
 
         return vbox;

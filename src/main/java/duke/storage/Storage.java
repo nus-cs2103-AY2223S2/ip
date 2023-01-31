@@ -1,4 +1,6 @@
-package duke;
+package duke.storage;
+
+import duke.task.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,6 +42,9 @@ public class Storage {
         try {
             Scanner sc = new Scanner(f);
             while (sc.hasNextLine()) {
+                if (sc.nextLine().length() == 0) {
+                    continue;
+                }
                 String l = sc.nextLine();
                 String[] line = l.split(" \\| ");
                 Task t = TaskMap.get(line[0]);

@@ -1,6 +1,7 @@
 package duke.buttons;
 
-import duke.Functions;
+import duke.functions.DeleteTask;
+import duke.functions.Functions;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,7 +27,7 @@ public class DeleteButton extends DukeButton {
 
         delTaskButton.setOnMouseClicked((event) -> {
             String delIndex = delTextField.getText();
-            this.fn.delete(delIndex);
+            new DeleteTask(this.fn).delete(delIndex);
         });
 
         return vbox;

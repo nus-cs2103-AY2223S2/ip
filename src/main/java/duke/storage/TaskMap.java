@@ -1,4 +1,9 @@
-package duke;
+package duke.storage;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class TaskMap {
     /**
@@ -8,11 +13,11 @@ public class TaskMap {
     static public Task get(String s) {
         switch (s) {
         case "T":
-            return new ToDos();
+            return new ToDo();
         case "E":
-            return new Events();
+            return new Event();
         case "D":
-            return new Deadlines();
+            return new Deadline();
         }
         return new Task();
     }

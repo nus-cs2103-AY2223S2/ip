@@ -1,4 +1,4 @@
-package duke;
+package duke.gui;
 
 public class Art {
     /**

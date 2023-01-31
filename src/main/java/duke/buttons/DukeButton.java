@@ -1,6 +1,6 @@
 package duke.buttons;
 
-import duke.Functions;
+import duke.functions.Functions;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;

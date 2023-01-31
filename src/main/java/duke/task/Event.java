@@ -1,8 +1,8 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDateTime;
 
-public class Events extends TimedTask {
+public class Event extends TimedTask {
     /**
      * Represent Event tasks. Event tasks have both start date time and end date time.
      */
@@ -13,14 +13,14 @@ public class Events extends TimedTask {
     /**
      * Empty constructor for an instance of an Event.
      */
-    public Events() {
+    public Event() {
         super();
     }
 
     /**
      * Constructor for an instance of an Event. Sets the status, description, start time and end time.
      */
-    public Events(boolean status, String des, String start, String end) {
+    public Event(boolean status, String des, String start, String end) {
         super();
         setStatus(status);
         setDes(des);

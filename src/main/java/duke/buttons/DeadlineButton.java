@@ -1,6 +1,7 @@
 package duke.buttons;
 
-import duke.Functions;
+import duke.functions.CreateDeadline;
+import duke.functions.Functions;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -30,7 +31,7 @@ public class DeadlineButton extends DukeButton {
         addTaskButton.setOnMouseClicked((event) -> {
             String des = desTextField.getText();
             String end = endTextField.getText();
-            this.fn.deadline(des, end);
+            new CreateDeadline(this.fn).deadline(des, end);
         });
         return vbox;
     }
