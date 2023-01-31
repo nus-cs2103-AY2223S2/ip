@@ -14,16 +14,32 @@ import java.time.format.DateTimeParseException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
-
+/**
+ * The Parser class is responsible for processing user input, updating the data in the task list, and providing feedback
+ * to the user through the UI.
+ *
+ * @author owen-yap
+ *
+ */
 public class Parser {
     private Storage storage;
     private Ui ui;
-
+    /**
+     * Constructs a Parser object with a reference to the Storage and Ui objects.
+     *
+     * @param storage The reference to the Storage object.
+     * @param ui The reference to the Ui object.
+     */
     public Parser(Storage storage, Ui ui) {
         this.storage = storage;
         this.ui = ui;
     }
-
+    /**
+     * Parses the input string and processes the command before executing the logic of the command.
+     *
+     * @param input The input string to be parsed.
+     * @return Returns false if the command is "bye", otherwise returns true.
+     */
     public boolean parse(String input) {
         String cmd;
 
@@ -112,6 +128,13 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Parses a given date string into a {@link LocalDateTime} object using the format M/d/yyyy HHmm.
+     *
+     * @param dateString The date string to parse in the format "M/d/yyyy HHmm".
+     * @return The {@link LocalDateTime} object parsed from the given date string.
+     * @throws IllegalArgumentException If the given date string does not match the expected format "M/d/yyyy HHmm".
+     */
     private LocalDateTime parseDate(String dateString) {
         LocalDateTime date;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy HHmm");

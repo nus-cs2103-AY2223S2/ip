@@ -14,14 +14,29 @@ import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * The Storage class is responsible for saving and loading the task list from a file.
+ *
+ * @author owen-yap
+ *
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs a Storage object which is initialized with the file path to store the data in.
+     *
+     * @param filePath The file path for this storage.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves the tasks in the specified TaskList to a file.
+     *
+     * @param tasks the TaskList to be saved
+     */
     public void saveTasks(TaskList tasks) {
         try {
             OutputStream output = new FileOutputStream("./data.txt");
@@ -33,6 +48,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks from the file and returns them as a TaskList.
+     *
+     * @return the TaskList loaded from the file
+     */
     public TaskList loadTasks() {
         InputStream input = null;
         try {
