@@ -18,38 +18,41 @@ import red.task.ToDoTask;
 import red.ui.UI;
 
 
-
+/**
+ * This class stores the information contained in the user's TaskList.
+ */
 public class Storage {
     private TaskList tasks;
     private final UI ui;
     protected static File f = new File("data\\tasklist.txt");
 
+    /**
+     * The constructor for Storage that takes in the TaskList and the UI.
+     *
+     * @param list The current list of tasks.
+     * @param ui The current ui
+     */
     public Storage(TaskList list, UI ui) {
         this.tasks = list;
         this.ui = ui;
     }
 
 
-    private void printStorageContents(String filePath) throws FileNotFoundException {
-        File f = new File("data\\tasklist.txt");
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            System.out.println(s.nextLine());
-        }
-    }
-
+    /**
+     * Saves the current TaskList to the file.
+     *
+     * @throws IOException Throws Exception when there is an issue with the file.
+     */
     public static void writeToStorage(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter("data\\tasklist.txt");
         fw.write(textToAdd + System.lineSeparator());
         fw.close();
     }
 
-    public static void appendToStorage(String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter("data\\tasklist.txt", true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.close();
-    }
 
+    /**
+     * Saves the current TaskList to the file.
+     */
     public void saveToStorage() {
         String TaskListCopy = tasks.toString();
         try {
@@ -59,6 +62,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the file that will store the information of the TaskList and creates a file if it does not exist
+     * while copying any information contained from a previous session into the current session.
+     *
+     */
     public void createStorage() {
         if(!f.exists()) {
             try {

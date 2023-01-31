@@ -8,7 +8,7 @@ import red.task.TaskList;
 import red.ui.UI;
 
 /**
- * The main Duke class to run
+ * The main Red class to run
  */
 public class Red {
     private final Storage storage;
@@ -26,13 +26,16 @@ public class Red {
         this.storage.createStorage();
     }
 
+    /**
+     * The function that starts the whole program.
+     */
     public void run() {
         ui.sayHello();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();

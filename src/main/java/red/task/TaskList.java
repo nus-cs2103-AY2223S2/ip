@@ -2,6 +2,10 @@ package red.task;
 
 import java.util.ArrayList;
 
+/**
+ * This class is the class that keeps track of tasks added by the user.
+ */
+
 public class TaskList {
 
     /** An array to store the items in the queue. */
@@ -18,7 +22,7 @@ public class TaskList {
     }
 
     /**
-     * Add the object e into the queue.
+     * Add the Task e into the queue.
      *
      * @param e The item to put in the queue.
      * @return false if the queue is full; true if e is added successfully.
@@ -30,22 +34,22 @@ public class TaskList {
         return true;
     }
 
+    /**
+     * Removes the Task with the specified index from the queue.
+     *
+     * @param index The index of the task to be removed from the queue.
+     * @return the specified task that was removed from the queue.
+     */
     public Task deleteTask(int index) {
         return this.items.remove(index - 1);
     }
 
-    public void recordTaskList() {
-        String str = "";
-        int count = 0;
-        while (count < this.items.size()) {
-            int counter = count + 1;
-            str += counter + ". " + this.items.get(count) + " \n";
 
-            count++;
-        }
-
-    }
-
+    /**
+     * Returns the size of the TaskList.
+     *
+     * @return integer size of the TaskList.
+     */
     public int getTaskListSize() {
         return this.items.size();
     }
@@ -68,6 +72,12 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Returns the Task in the TaskList that corresponds to the index provided.
+     *
+     * @param index The index of the Task in question.
+     * @return task specified by index.
+     */
     public Task indexOf(int index) {
         return items.get(index);
     }
