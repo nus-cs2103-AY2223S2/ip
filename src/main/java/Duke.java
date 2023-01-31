@@ -21,6 +21,7 @@ public class Duke {
         String userInput = myObj.nextLine();
         while (!userInput.equals("bye")) {
             tasklist.parser(userInput);
+            ui.showLine();
             database.save(tasklist);
             userInput = myObj.nextLine();
         }
