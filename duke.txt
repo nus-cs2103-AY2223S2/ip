@@ -1,7 +1,6 @@
-[D] [ ] do work                           (by: 23-Jan-2023)
-[E] [ ] make dish                         (by: 23-Jan-2022 to: 11-Feb-1999)
-[T] [ ] finish week 3 portion of 2103
-[D] [ ] eat my cake              (by: 21-Feb-2020)
-[T] [ ] test out refactoring
-[T] [X] floor
-[D] [X] clean cards    (by: 12-Mar-1983)
+[T] [X] work
+[T] [ ] mop floor
+[T] [ ] work
+[T] [ ] work
+[D] [ ] pack bags to return SG (by: 24-Jan-2023)
+[E] [ ] fly back to Singapore (by: 25-Jan-2023 to: 26-Jan-2023)

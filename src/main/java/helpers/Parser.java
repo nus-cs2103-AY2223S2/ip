@@ -63,6 +63,22 @@ public class Parser {
                     Task newTask = tasks.getTask(Integer.parseInt(splitArr[1]) - 1);
                     tasks.removeTask(Integer.parseInt(splitArr[1]) - 1);
                     System.out.println(Ui.formatStr(tasks.deleteReport(newTask)));
+                } else if (splitArr[0].equals("find")) {
+                    String searchTerm = input.substring(5);
+                    boolean hasFoundAnyTerms = false;
+                    String outputResults = "";
+                    for (int i = 0; i < tasks.getSize(); i++) {
+                        if (tasks.getTask(i).getContent().contains(searchTerm)) {
+                            if (outputResults == "") {
+                                outputResults += i + tasks.getTask(i).toString();
+                                hasFoundAnyTerms = true;
+                            } else {
+                                outputResults += "\n" + i + tasks.getTask(i).toString();
+                                hasFoundAnyTerms = true;
+                            }
+                        }
+                    }
+                    Ui.outputSearchResults(hasFoundAnyTerms, outputResults);
                 } else if (splitArr[0].equals("todo")) {
                     Todo newTodo = new Todo(input);
                     tasks.addTask(newTodo);

@@ -39,4 +39,19 @@ public class Ui {
         System.out.println(goodbyeMessage);
     }
 
+    /**
+     * Prints the found results, also using formatStr.
+     *
+     * @param hasFound Indicates whether a search result has been found or not.
+     * @param outputResult Contains the entire row by row result of results.
+     */
+    public static void outputSearchResults(boolean hasFound, String outputResult) {
+        String returnStr;
+        if (hasFound) {
+            returnStr = "Gotcha. We found the following terms: \n" + outputResult;
+        } else {
+            returnStr = "Sorry... we couldn't find any results matching :(";
+        } System.out.println(formatStr(returnStr));
+    }
+
 }

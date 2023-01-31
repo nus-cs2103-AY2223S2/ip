@@ -40,6 +40,6 @@ public class Deadline extends Task {
     }
 
     public String printRecord() {
-        return "[D]" + " [" + super.markSign(super.mark) + "] " + super.content + " " + this.deadlineDue + "\n";
+        return "[D]" + " [" + super.markSign(super.mark) + "] " + super.content + this.deadlineDue + "\n";
     }
 }

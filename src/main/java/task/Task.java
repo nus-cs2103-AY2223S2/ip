@@ -15,6 +15,10 @@ public class Task {
         this.mark = alternative;
     }
 
+    public String getContent() {
+        return this.content;
+    }
+
     public boolean getMark() {
         return this.mark;
     }

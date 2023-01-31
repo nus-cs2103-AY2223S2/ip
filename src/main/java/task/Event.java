@@ -42,6 +42,6 @@ public class Event extends Task {
     }
 
     public String printRecord() {
-        return "[E]" + " [" + super.markSign(super.mark) + "] " + super.content + " " + this.eventSpan + "\n";
+        return "[E]" + " [" + super.markSign(super.mark) + "] " + super.content + this.eventSpan + "\n";
     }
 }
