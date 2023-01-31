@@ -13,7 +13,7 @@ public class Deadline extends Task {
         super(details);
         try {
             this.deadDate = LocalDate.parse(dead);
-            this.dead = deadDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            this.dead = deadDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException ignored) {
             this.dead = dead;
         }

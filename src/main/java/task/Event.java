@@ -15,9 +15,9 @@ public class Event extends Task {
         super(details);
         try {
             this.startDate = LocalDate.parse(start);
-            this.startString = startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            this.startString = startDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
             this.endDate = LocalDate.parse(end);
-            this.endString = endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            this.endString = endDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException ignored) {
             if (startString == null) {
                 this.startString = start;
