@@ -44,17 +44,8 @@ public class Ui {
      * Displays all matching tasks in TaskList to user.
      *
      */
-    public void showMatchingTasksMessage(ArrayList<Task> matchingTasks) {
-        if (matchingTasks.size() != 0) {
-            System.out.println("Here are the matching tasks in your list:");
-            int idx = 1;
-            for (Task task : matchingTasks) {
-                System.out.printf("%d.%s%n", idx, task);
-                idx++;
-            }
-        } else {
-            System.out.println("There are no matching tasks currently!");
-        }
+    public void showMatchingTasksMessage(String tasksString) {
+        System.out.print(tasksString);
     }
 
     /**

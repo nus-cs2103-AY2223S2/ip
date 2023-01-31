@@ -58,14 +58,19 @@ public class TaskList {
      * @param keyword keyword passed in by user
      * @return list of tasks matching the keyword
      */
-    public ArrayList<Task> getMatchingTasks(String keyword) {
-        ArrayList<Task> selected = new ArrayList<>();
+    public String getMatchingTasksString(String keyword) {
+        String res = "";
         for (Task task: tasks) {
             if (task.toString().contains(keyword)) {
-                selected.add(task);
+                int idx = tasks.indexOf(task) + 1;
+                res += String.format("%d.%s\n", idx, task);
             }
         }
-        return selected;
+        if (res.equals("")) {
+            return "There are no matching tasks currently!";
+        } else {
+            return res;
+        }
     }
 
     public ArrayList<Task> getTaskList() {
