@@ -4,14 +4,10 @@ package duke.task;
  * Represents a task.
  */
 public abstract class Task {
-    /**
-     * The description of the task.
-     */
+    /** The description of the task. */
     protected String description;
 
-    /**
-     * Whether the task is done.
-     */
+    /** Whether the task is done. */
     protected boolean isDone;
 
     /**

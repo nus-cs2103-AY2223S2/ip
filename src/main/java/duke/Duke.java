@@ -10,17 +10,11 @@ import duke.command.Command;
  * @since 2022-01-25
  */
 public class Duke {
-    /**
-     * The storage object that handles the loading and saving of tasks.
-     */
+    /** The storage object that handles the loading and saving of tasks. */
     private Storage storage;
-    /**
-     * The task list that contains the tasks.
-     */
+    /** The task list that contains the tasks. */
     private TaskList tasks;
-    /**
-     * The ui object that handles the user interface.
-     */
+    /** The ui object that handles the user interface. */
     private Ui ui;
 
     /**

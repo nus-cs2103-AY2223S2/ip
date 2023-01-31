@@ -8,9 +8,7 @@ import duke.task.Task;
  * Ui class to handle user interaction.
  */
 public class Ui {
-    /**
-     * Scanner to read user input.
-     */
+    /** Scanner to read user input. */
     private Scanner sc;
 
     /**

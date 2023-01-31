@@ -16,9 +16,7 @@ import duke.task.Todo;
  * Storage class to handle saving and loading of tasks.
  */
 public class Storage {
-    /**
-     * File to save and load tasks from.
-     */
+    /** File to save and load tasks from. */
     private File file;
 
     /**
@@ -27,7 +25,7 @@ public class Storage {
      * @param filePath the path of the file to save and load tasks from.
      * @throws DukeException
      */
-    public Storage(String filePath) throws DukeException{
+    public Storage(String filePath) throws DukeException {
         this.file = new File(filePath);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
