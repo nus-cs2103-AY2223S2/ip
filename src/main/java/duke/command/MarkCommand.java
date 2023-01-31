@@ -28,16 +28,18 @@ public class MarkCommand extends Command {
      * @param storage Storage for updating local tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String result = "";
         try {
-            ui.printToFormat("Marked as completed:\n    " + tasks.mark(taskNo));
+            result += ui.changeToFormat("Marked as completed:\n    " + tasks.mark(taskNo));
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
         try {
             storage.update(tasks);
         } catch (IOException e) {
-            System.out.println("failed to update tasks locally: " + e.getMessage());
+            result += "failed to update tasks locally: " + e.getMessage();
         }
+        return result;
     }
 }

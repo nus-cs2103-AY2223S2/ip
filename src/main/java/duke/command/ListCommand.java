@@ -14,7 +14,7 @@ public class ListCommand extends Command {
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printToFormat(tasks.toString());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.changeToFormat(tasks.toString());
     }
 }

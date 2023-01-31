@@ -28,13 +28,15 @@ public class AddCommand extends Command {
      * @param storage Storage for updating local tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String result = "";
         tasks.add(task);
-        ui.printToFormat("Task successfully added:\n    " + task);
+        result = ui.changeToFormat("Task successfully added:\n    " + task);
         try {
             storage.update(tasks);
         } catch (IOException e) {
-            System.out.println("failed to update tasks locally: " + e.getMessage());
+            result += ("\nfailed to update tasks locally: " + e.getMessage());
         }
+        return result;
     }
 }

@@ -14,7 +14,7 @@ public abstract class Command {
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * method that determines whether the user wants to exit the program.

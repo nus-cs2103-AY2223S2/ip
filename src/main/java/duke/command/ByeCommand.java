@@ -24,7 +24,7 @@ public class ByeCommand extends Command {
      * @param storage Storage for updating local tasks
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printToFormat("Bye, have a nice day.");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "Bye, have a nice day.";
     }
 }

@@ -24,16 +24,18 @@ public class UnmarkCommand extends Command {
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String result = "";
         try {
-            ui.printToFormat("Marked as yet to complete:\n    " + tasks.unmark(taskNo));
+            result += ui.changeToFormat("Marked as yet to complete:\n    " + tasks.unmark(taskNo));
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
         try {
             storage.update(tasks);
         } catch (IOException e) {
-            System.out.println("failed to update tasks locally: " + e.getMessage());
+            result += "failed to update tasks locally: " + e.getMessage();
         }
+        return result;
     }
 }

@@ -30,16 +30,18 @@ public class DeleteCommand extends Command {
      * @param ui Ui for displaying messages in a unique way
      * @param storage Storage for updating local tasks
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String result = "";
         try {
-            ui.printToFormat("The following task is removed:\n    " + tasks.remove(taskNo));
+            result += ui.changeToFormat("The following task is removed:\n    " + tasks.remove(taskNo));
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            result += e.getMessage();
         }
         try {
             storage.update(tasks);
         } catch (IOException e) {
-            System.out.println("failed to update tasks locally: " + e.getMessage());
+            result += ("\nfailed to update tasks locally: " + e.getMessage());
         }
+        return result;
     }
 }

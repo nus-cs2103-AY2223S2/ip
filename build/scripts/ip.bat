@@ -82,10 +82,10 @@ set CMD_LINE_ARGS=%*
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\ip.jar
+set CLASSPATH=%APP_HOME%\lib\ip.jar;%APP_HOME%\lib\javafx-fxml-11-win.jar;%APP_HOME%\lib\javafx-fxml-11-mac.jar;%APP_HOME%\lib\javafx-fxml-11-linux.jar;%APP_HOME%\lib\javafx-controls-11-win.jar;%APP_HOME%\lib\javafx-controls-11-mac.jar;%APP_HOME%\lib\javafx-controls-11-linux.jar;%APP_HOME%\lib\javafx-controls-11.jar;%APP_HOME%\lib\javafx-graphics-11-win.jar;%APP_HOME%\lib\javafx-graphics-11-mac.jar;%APP_HOME%\lib\javafx-graphics-11-linux.jar;%APP_HOME%\lib\javafx-graphics-11.jar;%APP_HOME%\lib\javafx-base-11-win.jar;%APP_HOME%\lib\javafx-base-11-mac.jar;%APP_HOME%\lib\javafx-base-11-linux.jar;%APP_HOME%\lib\javafx-base-11.jar
 
 @rem Execute ip
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %IP_OPTS%  -classpath "%CLASSPATH%" duke.Duke %CMD_LINE_ARGS%
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %IP_OPTS%  -classpath "%CLASSPATH%" Duke %CMD_LINE_ARGS%
 
 :end
 @rem End local scope for the variables with windows NT shell
