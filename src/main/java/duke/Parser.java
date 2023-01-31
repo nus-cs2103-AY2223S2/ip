@@ -9,6 +9,7 @@ import task.TodoTask;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * Parser class that handles inputs made by user.
@@ -164,6 +165,23 @@ public class Parser {
             case "save":
                 storage.save(taskList);
                 return true;
+
+            case "find":
+                String keyword = input.substring(5);
+
+                if (keyword.length() <= 0) {
+                    throw new DukeException("Err... There's nothing to find here");
+                }
+
+                ArrayList<Task> filteredList = taskList.filterByKeyword(keyword);
+
+                for (int i = 0; i < filteredList.size(); i += 1) {
+                    int currItem = i + 1;
+                    System.out.println(currItem + ": " + filteredList.get(i));
+                }
+
+                return true;
+
             default:
                 throw new DukeException("Oops I do not recognise this command...");
             }

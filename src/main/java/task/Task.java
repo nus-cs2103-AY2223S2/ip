@@ -42,6 +42,10 @@ public class Task {
         this.completed = false;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         if (this.completed) {

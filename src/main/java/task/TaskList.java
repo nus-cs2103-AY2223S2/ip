@@ -71,4 +71,18 @@ public class TaskList {
     public Task[] asList() {
         return tasks.toArray(new Task[0]);
     }
+
+    public ArrayList<Task> filterByKeyword(String keyword) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+
+        for (int i = 0; i < tasks.size(); i += 1) {
+            Task currentTask = tasks.get(i);
+            String taskName = currentTask.getName();
+            if (taskName.contains(keyword)) {
+                filteredTasks.add(currentTask);
+            }
+        }
+
+        return filteredTasks;
+    }
 }
