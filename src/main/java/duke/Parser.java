@@ -5,7 +5,7 @@ public class Parser {
     }
 
     public String parse(String input) {
-        Integer len = input.length();
+        int len = input.length();
         if (input.equals("bye")){
             return "BYE";
         } else if (input.equals("list")) {

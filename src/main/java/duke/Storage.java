@@ -14,7 +14,7 @@ import java.util.Scanner;
  *it creates a new file under 'data' directory if the given file name does not appear under 'data'
  */
 public class Storage {
-    private String data_address;
+    private final String data_address;
     public Storage(String file_name) {
         Path currentRelativePath = Paths.get("");
         String currentRelativePath_name = currentRelativePath.toAbsolutePath().toString();
@@ -71,8 +71,8 @@ public class Storage {
             }
             fw.write(data);
             fw.close();
-        } catch (IOException E){
-            System.out.println(E);
+        } catch (IOException e){
+            System.out.println(e);
         }
     }
 }

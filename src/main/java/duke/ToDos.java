@@ -1,7 +1,6 @@
 package duke;
 
 public class ToDos extends Task{
-    protected String by;
     private int isDone;
 
     public ToDos(String description, Integer isDone){
@@ -17,11 +16,6 @@ public class ToDos extends Task{
     @Override
     public void unMark(){
         isDone = 0;
-    }
-
-    @Override
-    public String getType() {
-        return "Todo";
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
     private int isDone;
-    private LocalDate by;
+    private final LocalDate by;
 
     public Deadline(String description, LocalDate by, Integer isDone){
         super(description, isDone);
@@ -25,12 +25,6 @@ public class Deadline extends Task{
 
     public String getStatusIcon(){
         return (isDone == 1 ? "[X]": "[ ]");
-    }
-
-    @Override
-
-    public String getType() {
-        return "Duke.Deadline";
     }
 
     @Override

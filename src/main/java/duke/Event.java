@@ -5,11 +5,11 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
     private int isDone;
-    private LocalDate from;
-    private LocalDate to;
+    private final LocalDate from;
+    private final LocalDate to;
 
     public Event(String description, LocalDate from, LocalDate to, Integer isDone){
-        super(description, isDone = isDone);
+        super(description, isDone);
         this.isDone = isDone;
         this.from = from;
         this.to = to;
@@ -23,11 +23,6 @@ public class Event extends Task{
     @Override
     public void markAsDone(){
         isDone = 1;
-    }
-
-    @Override
-    public String getType() {
-        return "Duke.Event";
     }
 
     @Override
