@@ -19,7 +19,7 @@ public class Ui {
 
     /**
      * Takes in a file path and logs an attempt to load message to the user.
-     * 
+     *
      * @param filePath The file path of the data file.
      */
     public void logLoading(String filePath) {
@@ -28,7 +28,7 @@ public class Ui {
 
     /**
      * Logs a successful load message to the user if tasks is not empty.
-     * 
+     *
      * @param tasks The current task list.
      */
     public void logSuccessfulLoad(TaskList tasks) {
@@ -49,7 +49,7 @@ public class Ui {
 
     /**
      * Prints task when it is added or removed.
-     * 
+     *
      * @param task     The task to be printed.
      * @param taskList The current task list.
      * @param toAdd    True if task is to be added, false otherwise.
@@ -66,7 +66,7 @@ public class Ui {
 
     /**
      * Prints task when it is marked as done or not done.
-     * 
+     *
      * @param task   The task to be printed.
      * @param toMark True if task is to be marked as done, false otherwise.
      * @return String The string of the task to be marked.
@@ -80,7 +80,7 @@ public class Ui {
 
     /**
      * Prints the tasks in the task list.
-     * 
+     *
      * @param tasks The current task list.
      * @return String The string of the printed tasks.
      */
@@ -98,7 +98,7 @@ public class Ui {
 
     /**
      * Prints all tasks that contain the keyword.
-     * 
+     *
      * @param matchingTasksIndex An arraylist of the indexes of the tasks that
      *                           contain the keyword.
      * @param tasks              The current task list.

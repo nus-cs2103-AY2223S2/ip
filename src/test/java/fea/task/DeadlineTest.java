@@ -6,12 +6,10 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import fea.task.Deadline;
-
 public class DeadlineTest {
-  @Test
-  public void testToString() {
-    LocalDateTime by = LocalDateTime.parse("2022-01-01T00:00");
-    assertEquals("[D][ ] test (by: Jan 01 2022 12:00AM)", new Deadline("test", by).toString());
-  }
+    @Test
+    public void testToString() {
+        LocalDateTime by = LocalDateTime.parse("2022-01-01T00:00");
+        assertEquals("[D][ ] test (by: Jan 01 2022 12:00AM)", new Deadline("test", by).toString());
+    }
 }

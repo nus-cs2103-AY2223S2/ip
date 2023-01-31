@@ -32,6 +32,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/master.jpg"));
     private Image feaImage = new Image(this.getClass().getResourceAsStream("/images/mash.jpg"));
 
+    /**
+     * Initialise the main window for the FEA GUI.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -62,7 +65,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getFeaDialog(response, feaImage));
         userInput.clear();
         if (command.isExit()) {
-            // adapted from https://stackoverflow.com/questions/54229373/why-thread-sleep-doesnt-work-accordingly-in-javafx
+            // adapted from https://stackoverflow.com/questions/54229373/
+            // why-thread-sleep-doesnt-work-accordingly-in-javafx
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
             delay.setOnFinished(event -> {
                 stage.close();
