@@ -4,6 +4,9 @@ import duke.exception.DukeException;
 
 import duke.tasklist.TaskList;
 
+/**
+ * Represents a executable command.
+ */
 public abstract class Command {
 
     private final boolean isExit;
