@@ -38,7 +38,7 @@ public class Parser {
     public String checkDescription(String... str) throws DukeException {
         if (str[0].equals("")) {
             String message = "OOPS!!! The description of a " + str[1] + " cannot be empty.";
-            if(str.length > 2) {
+            if (str.length > 2) {
                 for (int i = 2; i < str.length; i++) {
                     message += str[i] + "\n";
                 }
@@ -59,7 +59,7 @@ public class Parser {
     public String checkTime(String... str) throws DukeException {
         if (str[0].equals("")) {
             String message = "OOPS!!! The /" + str[2] + " part of a " + str[1] + " cannot be empty.";
-            if(str.length > 2) {
+            if (str.length > 2) {
                 for (int i = 2; i < str.length; i++) {
                     message += str[i] + "\n";
                 }
