@@ -1,9 +1,14 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 
 public class Duke {
     public static ArrayList<Task> todos = new ArrayList<>();
+    public static File dir = new File("./data/");
+    public static File file = new File("./data/todo_list.txt");
 
     public static class Task {
         protected String description;
@@ -87,6 +92,32 @@ public class Duke {
     public static class DukeEmptyTaskException extends Exception {
         public DukeEmptyTaskException (String msg) {
             super(msg);
+        }
+    }
+
+    public static void save_to_file() {
+        try {
+            if (!dir.exists()){
+                while (!dir.mkdirs()) {
+                    print(dir.getName() + " created\n");
+                }
+            }
+            if (file.createNewFile()) {
+                print(file.getName() + " created\n");
+            }
+
+            FileWriter fw = new FileWriter(file, false);
+            if (todos.isEmpty()) {
+                return;
+            } else {
+                for (Task t : todos) {
+                    String desc = t.toString() + "\n";
+                    fw.write(desc);
+                }
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.getStackTrace();
         }
     }
 
@@ -200,6 +231,7 @@ public class Duke {
             default:
                 throw new DukeCommandNotFoundException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+        save_to_file();
     }
 
     public static void main(String[] args) {
