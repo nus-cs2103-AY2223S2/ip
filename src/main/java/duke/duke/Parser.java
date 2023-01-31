@@ -1,5 +1,8 @@
 package duke.duke;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadLineCommand;
@@ -17,8 +20,6 @@ import duke.exceptions.UnrecognisableException;
 import duke.tasks.Deadlines;
 import duke.tasks.Events;
 import duke.tasks.Todos;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A class that interprets user-input.
@@ -83,7 +84,7 @@ public class Parser {
             if (line.length == 1) {
                 throw new NoArgsException("deadline");
             }
-            String description = this.queries(line, Todos.keywords).get(0);
+            String description = this.queries(line, Todos.KEYWORDS).get(0);
             c = new TodoCommand(new Todos(description));
             break;
         case "event":
@@ -93,7 +94,7 @@ public class Parser {
                 throw new InvalidException();
             }
 
-            queries = this.queries(line, Events.keywords);
+            queries = this.queries(line, Events.KEYWORDS);
             Events event = new Events(queries);
             c = new EventCommand(event);
             break;
@@ -104,7 +105,7 @@ public class Parser {
                 throw new InvalidException();
             }
 
-            queries = this.queries(line, Deadlines.keywords);
+            queries = this.queries(line, Deadlines.KEYWORDS);
             c = new DeadLineCommand(new Deadlines(queries));
             break;
 

@@ -1,18 +1,21 @@
 package duke.storage;
 
-import duke.tasks.Deadlines;
-import duke.tasks.Events;
-import duke.exceptions.LoadException;
-import duke.tasks.Task;
-import duke.tasks.Todos;
-
-import java.io.FileNotFoundException;
 import java.io.File;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+import duke.exceptions.LoadException;
+import duke.tasks.Deadlines;
+import duke.tasks.Events;
+import duke.tasks.Task;
+import duke.tasks.Todos;
+
+
+
 
 /**
  * A class which handles reading and writing data onto a file.
@@ -43,15 +46,18 @@ public class Storage {
 
                 boolean isDone = inputs[1].equals("1") ? true : false;
                 switch(inputs[0]) {
-                    case "T":
-                        loadData.add(new Todos(isDone, inputs[2]));
-                        break;
-                    case "D":
-                        loadData.add(new Deadlines(isDone, inputs[2], inputs[3]));
-                        break;
-                    case "E":
-                        loadData.add(new Events(isDone, inputs[2], inputs[3], inputs[4]));
-                        break;
+                case "T":
+                    loadData.add(new Todos(isDone, inputs[2]));
+                    break;
+                case "D":
+                    loadData.add(new Deadlines(isDone, inputs[2], inputs[3]));
+                    break;
+                case "E":
+                    loadData.add(new Events(isDone, inputs[2], inputs[3], inputs[4]));
+                    break;
+                default:
+                    throw new LoadException();
+
                 }
             }
 
