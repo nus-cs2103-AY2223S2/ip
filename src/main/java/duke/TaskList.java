@@ -12,6 +12,7 @@ import duke.tasks.ToDo;
  */
 public class TaskList {
     private ArrayList<Task> listOfTasks;
+    private static ArrayList<Task> listOfFindTasks;
 
     /**
      * Constructor for TaskList without any saved data.
@@ -33,7 +34,6 @@ public class TaskList {
         }
     }
 
-
     /**
      * Creates a new Deadline object.
      *
@@ -54,7 +54,6 @@ public class TaskList {
         ToDo todo = new ToDo(description, false);
         listOfTasks.add(todo);
     }
-
 
     /**
      * Creates a new Event object.
@@ -120,15 +119,16 @@ public class TaskList {
      * @param keyword Specific keyword(s) of task to be found in the task list.
      * @return ArrayList consisting of tasks that match the keyword.
      */
-    public ArrayList<String> findTaskMatchingKeyword(String ... keyword) {
-        ArrayList<String> matchingTasks = new ArrayList<>();
+    public ArrayList<Task> findTaskMatchingKeyword(String ... keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : listOfTasks) {
             for (String matching : keyword) {
                 if (task.getDescription().contains(matching)) {
-                    matchingTasks.add(task.toString());
+                    matchingTasks.add(task);
                 }
             }
         }
+        this.listOfFindTasks = matchingTasks;
         return matchingTasks;
     }
 
@@ -167,5 +167,14 @@ public class TaskList {
      */
     public ArrayList<Task> getListOfTasks() {
         return listOfTasks;
+    }
+
+    /**
+     * Gets the list of tasks in the find list.
+     *
+     * @return Arraylist which consist of the tasks in the find list.
+     */
+    public ArrayList<Task> getListOfFindTasks() {
+        return listOfFindTasks;
     }
 }

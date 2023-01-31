@@ -27,7 +27,7 @@ public class Parser {
         delete,
         find
     }
-
+    private static boolean isFine;
     /**
      * The parse method creates new commands.
      *
@@ -43,6 +43,7 @@ public class Parser {
             case bye:
                 return new ByeCommand();
             case list:
+                isFine = false;
                 return new ListCommand();
             case mark:
                 if (splitString.length == 1) {
@@ -79,7 +80,7 @@ public class Parser {
                 }
             case todo:
                 if (splitString.length == 1) {
-                    throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException("\tOOPS!!! The description of a todo cannot be empty.");
                 } else {
                     return new ToDoCommand(splitString[1]);
                 }
@@ -87,12 +88,13 @@ public class Parser {
                 if (splitString.length == 1) {
                     throw new DukeException("\tPlease enter the task number to delete!");
                 } else {
-                    return new DeleteCommand(Integer.parseInt(splitString[1].trim()) - 1);
-                }
+                    return new DeleteCommand(Integer.parseInt(splitString[1].trim()) - 1, isFine);
+                    }
             case find:
                 if (splitString[1].trim().equals("")) {
                     throw new DukeException("\t☹ OOPS!!! The name of task u want to find cannot be empty!.");
                 } else {
+                    isFine = true;
                     return new FindCommand(splitString[1].split(" "));
                 }
             default:

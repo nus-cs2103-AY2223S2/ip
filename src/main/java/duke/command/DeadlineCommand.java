@@ -28,18 +28,18 @@ public class DeadlineCommand extends Command {
     /**
      * Adds a deadline task into the tasklist.
      *
-     * @param task Tasklist containing the list of tasks.
+     * @param tasks Tasklist containing the list of tasks.
      * @param storage Saves tasks into the file locally.
      * @param ui Deals with interactions with user.
      * @return String response from Duke.
      * @throws DukeException if command cannot be recognised.
      */
     @Override
-    public String execute(TaskList task, Storage storage, Ui ui) throws DukeException {
-        task.addDeadline(description, by);
-        int size = task.getSize();
-        Task temp = task.getTask(size - 1);
-        storage.saveTasksToFile(task.getListOfTasks());
+    public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+        tasks.addDeadline(description, by);
+        int size = tasks.getSize();
+        Task temp = tasks.getTask(size - 1);
+        storage.saveTasksToFile(tasks.getListOfTasks());
         return ui.showAdd(temp, size);
 
     }

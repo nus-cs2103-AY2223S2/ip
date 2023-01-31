@@ -26,18 +26,18 @@ public class ToDoCommand extends Command {
     /**
      * Adds the todo task into tasklist.
      *
-     * @param task Tasklist containing the list of tasks, displays the add message to user.
+     * @param tasks Tasklist containing the list of tasks, displays the add message to user.
      * @param storage Saves tasks into the file locally.
      * @param ui Deals with interactions with user.
      * @return String response from Duke.
      * @throws DukeException if duke does not recognise the command.
      */
     @Override
-    public String execute(TaskList task, Storage storage, Ui ui) throws DukeException {
-        task.addToDo(description);
-        int size = task.getSize();
-        Task temp = task.getTask(size - 1);
-        storage.saveTasksToFile(task.getListOfTasks());
+    public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+        tasks.addToDo(description);
+        int size = tasks.getSize();
+        Task temp = tasks.getTask(size - 1);
+        storage.saveTasksToFile(tasks.getListOfTasks());
         return ui.showAdd(temp, size);
     }
 }

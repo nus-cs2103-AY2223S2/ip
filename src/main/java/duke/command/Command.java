@@ -32,11 +32,11 @@ public abstract class Command {
     /**
      * Executes command according to its type.
      *
-     * @param task TaskList containing the list of tasks.
+     * @param tasks TaskList containing the list of tasks.
      * @param storage Saves tasks into the file locally.
      * @param ui Deals with interactions with user.
      * @return String response from Duke.
      * @throws DukeException if command cannot be recognised.
      */
-    public abstract String execute(TaskList task, Storage storage, Ui ui) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException;
 }

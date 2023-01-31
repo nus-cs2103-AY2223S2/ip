@@ -92,7 +92,16 @@ public class Ui {
                 + size + " task(s) in the list.";
         return message;
     }
-
+    /**
+     * Outputs deleted message to user.
+     *
+     * @param task Task to be deleted from findList.
+     */
+    public String showFindDelete(Task task) {
+        String message = "\tNoted. I've removed this task:\n\t  "
+                + task.toString();
+        return message;
+    }
     /**
      * Outputs the taskList to user.
      *
@@ -108,15 +117,15 @@ public class Ui {
      *
      * @param listOfTasksFound ArrayList consisting of strings of tasks found using FindCommand.
      */
-    public String printFindList(ArrayList<String> listOfTasksFound) {
+    public String printFindList(ArrayList<Task> listOfTasksFound) {
         int i = 1;
         String s = "";
         s = "\tHere are the matching tasks in your list:";
-        for (String string : listOfTasksFound) {
+        for (Task task : listOfTasksFound) {
             s += "\n\t"
                     + i
                     + ". "
-                    + string;
+                    + task.toString();
             i++;
         }
         s += "\n\tThere are "
