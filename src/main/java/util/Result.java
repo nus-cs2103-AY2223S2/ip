@@ -1,9 +1,7 @@
-package monad;
+package util;
 
 import java.util.function.Function;
 import java.util.function.Predicate;
-
-import util.Pair;
 
 public class Result<T> {
     private final Either<Pair<T, String>, String> result;
