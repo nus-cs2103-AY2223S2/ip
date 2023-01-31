@@ -8,6 +8,7 @@ import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.UnmarkCommand;
@@ -60,6 +61,8 @@ public class Parser {
                 return new AddCommand(todo);
             case DELETE:
                 return new DeleteCommand(Integer.parseInt(words[1]));
+            case FIND:
+                return new FindCommand(inputLine.split(" ", 2)[1]);
             default:
                 throw new DukeException("Not a valid command: " + inputLine);
             }
@@ -94,7 +97,7 @@ public class Parser {
      * @param dateTime LocalDateTime saved by Task object
      * @return a readable time as a String
      */
-    public static String TransformDateTime(LocalDateTime dateTime) {
+    public static String transformDateTime(LocalDateTime dateTime) {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy 'at' HH:mm");
         return dateTime.format(outputFormatter);
     }

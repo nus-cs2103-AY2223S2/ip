@@ -2,14 +2,8 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
-<<<<<<< HEAD
-/**
- * an Event class comes with a start time and an end time
- */
-=======
 import duke.parser.Parser;
 
->>>>>>> branch-A-CodingStandard
 public class Event extends Task {
     protected final LocalDateTime from;
     protected final LocalDateTime to;
@@ -44,7 +38,7 @@ public class Event extends Task {
      */
     public String toString() {
         return String.format("[E]%s %s (from %s to %s)", status, name,
-                Parser.TransformDateTime(from), Parser.TransformDateTime(to));
+                Parser.transformDateTime(from), Parser.transformDateTime(to));
     }
 
     /**

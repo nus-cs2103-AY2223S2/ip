@@ -73,24 +73,6 @@ public class TaskList {
         return tasks.get(taskNumber - 1);
     }
 
-    public String find(String searchLine) {
-        ArrayList<Task> foundTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.toString().contains(searchLine)) {
-                foundTasks.add(task);
-            }
-        }
-        if (foundTasks.size() == 0) {
-            return "No related tasks found";
-        }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Found related tasks:\n");
-        for (int i = 1; i <= foundTasks.size(); i++) {
-            sb.append("    " + i + ". " + foundTasks.get(i - 1) + "\n");
-        }
-        return sb.toString();
-    }
-
     /**
      * a method that removes a Task from the list
      * @param taskNumber the number of the Task to be removed
