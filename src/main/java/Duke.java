@@ -1,21 +1,22 @@
+
 import java.util.Scanner;
-import java.util.ArrayList;
+
 
 public class Duke {
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+
     public static void main(String[] args) throws Exception {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        System.out.println("\nHello! I'm Duke\nWhat can I do for you?\n");
 
-
-        Storage database = new Storage("./ip/data", "duke.txt");
+        Storage database = new Storage("./data", "duke.txt");
         TaskList tasklist = new TaskList(database.load());
+        Ui ui = new Ui();
 
+        ui.showLogo();
+        ui.showLine();
         Scanner myObj = new Scanner(System.in);
         String userInput = myObj.nextLine();
         while (!userInput.equals("bye")) {
@@ -24,6 +25,6 @@ public class Duke {
             userInput = myObj.nextLine();
         }
         database.save(tasklist);
-        System.out.println("Bye. Hope to see you again soon!");
+        ui.showBye();
     }
 }

@@ -1,3 +1,5 @@
+
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,12 +10,9 @@ public class Storage {
 
     private File folder;
     private File file;
-    private String folderName;
-    private String fileName;
+
 
     public Storage(String folderName, String fileName) {
-        this.folderName = folderName;
-        this.fileName = fileName;
         folder = new File(folderName);
         if (!folder.exists()) {
             folder.mkdir();
