@@ -16,12 +16,19 @@ public class TaskList {
         return this.tasks.remove(taskId - 1);
     }
 
+    public Task get(int taskId) {
+        return this.tasks.get(taskId - 1);
+    }
     public Task getLastTask() {
         return this.tasks.get(this.tasks.size() - 1);
     }
 
     public int getSize() {
         return this.tasks.size();
+    }
+
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
     }
 
     public void mark(int taskId) {
