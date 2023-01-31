@@ -97,8 +97,8 @@ public class Parser {
             if (isValidAddCommand(splitCommand) && splitDescription.length == 2) {
                 return new AddDeadlineCommand(splitDescription[0], splitDescription[1]);
             } else {
-                throw new DukeException("Description and date of Deadline task cannot be empty and " +
-                        "must be separated with \"/by\" . ");
+                throw new DukeException("Description and date of Deadline task cannot be empty and "
+                        + "must be separated with \"/by\" . ");
             }
         case "event":
             if (isValidAddCommand(splitCommand)) {

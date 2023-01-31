@@ -1,16 +1,16 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.parser.Parser;
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Class that is responsible for loading tasks from task storage file and writing to the file.
