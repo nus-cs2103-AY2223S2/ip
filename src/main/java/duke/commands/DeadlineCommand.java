@@ -1,11 +1,12 @@
 package duke.commands;
 
+import java.time.format.DateTimeParseException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Deadline;
-import java.time.format.DateTimeParseException;
 
 /**
  * The class for the Deadline command which extends Command class.
