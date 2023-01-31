@@ -9,10 +9,12 @@ import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.MainWindow;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Graphical user interface app for Duke.
@@ -50,6 +52,7 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
+        stage.setOnCloseRequest(event -> exit());
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
             stage.setScene(new Scene(fxmlLoader.load()));
@@ -132,6 +135,8 @@ public class Duke extends Application {
             controller.showStorageSaveFailure();
         }
         controller.showFarewellMessage();
-        stage.close();
+        PauseTransition delay = new PauseTransition(Duration.seconds(5));
+        delay.setOnFinished((event) -> stage.close());
+        delay.play();
     }
 }
