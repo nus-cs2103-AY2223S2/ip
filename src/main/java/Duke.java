@@ -1,9 +1,19 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-public class Duke {
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+public class Duke{
     
     
     public static void main(String[] args) {
+        
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,6 +25,31 @@ public class Duke {
         String input = scan.next();
         ArrayList<Task> list = new ArrayList<Task>(); 
         int counter = 0;
+        
+        //loadtasklist from data.txt
+        //if file does not exist, creates the file
+        File save = new File("data.txt");
+        if (save.exists()) {
+            try {
+                ObjectInputStream objin = new ObjectInputStream(new FileInputStream(save));
+                list = (ArrayList<Task>)objin.readObject();
+                for(Task task: list) {
+                    counter = counter + 1;
+                }
+
+                objin.close();
+            } catch (Exception e) {
+                System.out.println("File is empty");
+            }
+        } else {
+            try {
+                save.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Unable to create save file");
+            }
+        }
+
+        
 
         while (!input.equals("bye")){
             try{
@@ -117,6 +152,15 @@ public class Duke {
 
             input = scan.next();
           
+        }
+
+        // saves the bew list of tasks to hard drive once the  "bye" command is issued
+        try { 
+            ObjectOutputStream objout = new ObjectOutputStream(new FileOutputStream(save));
+            objout.writeObject(list);
+            objout.close();
+        } catch (IOException e) {
+            System.out.println("could not create save file");
         }
         System.out.println("Bye. Hope to see you again!");
     }
