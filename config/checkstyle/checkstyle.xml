@@ -55,11 +55,20 @@
           3. SPECIAL_IMPORTS: defined as org imports
           4. THIRD_PARTY_PACKAGE: defined as com imports
         -->
+<!--        <module name="CustomImportOrder">-->
+<!--            <property name="customImportOrderRules"-->
+<!--                      value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>-->
+<!--            <property name="specialImportsRegExp" value="^org\."/>-->
+<!--            <property name="thirdPartyPackageRegExp" value="^com\."/>-->
+<!--            <property name="sortImportsInGroupAlphabetically" value="true"/>-->
+<!--        </module>-->
+
+        <!-- pointed out by https://github.com/nus-cs2103-AY2223S2/forum/issues/108 -->
         <module name="CustomImportOrder">
             <property name="customImportOrderRules"
-                      value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
+                      value="STATIC###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE###STANDARD_JAVA_PACKAGE"/>
             <property name="specialImportsRegExp" value="^org\."/>
-            <property name="thirdPartyPackageRegExp" value="^com\."/>
+            <property name="thirdPartyPackageRegExp" value="^(com|duke|javafx)\."/>
             <property name="sortImportsInGroupAlphabetically" value="true"/>
         </module>
 
