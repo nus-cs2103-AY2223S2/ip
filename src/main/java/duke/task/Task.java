@@ -26,6 +26,15 @@ public abstract class Task {
         return String.format("%s | %s", isDoneAsInt, this.description);
     }
 
+    /**
+     * Helper function to check if a task description contains a keyword
+     * @param keyword derived from input by user
+     * @return true if keyword is found in description
+     */
+    public boolean contains(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);

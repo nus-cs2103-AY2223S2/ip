@@ -25,6 +25,10 @@ public class TaskList {
         return list.remove(index);
     }
 
+    public ArrayList<Task> getList() {
+        return this.list;
+    }
+
     public void mark(int index) {
         Task currentTask = list.get(index);
         currentTask.markAsDone();
@@ -35,8 +39,19 @@ public class TaskList {
         currentTask.markAsUndone();
     }
 
-    public ArrayList<Task> getList() {
-        return this.list;
+    /**
+     * Finds tasks that match a specific keyword by iterating through the list.
+     * @param keyword derived from user input
+     * @return ArrayList containing all matching tasks
+     */
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> foundList = new ArrayList<>();
+        for (Task t: list) {
+            if (t.contains(keyword)) {
+                foundList.add(t);
+            }
+        }
+        return foundList;
     }
 
     public int getSize() {

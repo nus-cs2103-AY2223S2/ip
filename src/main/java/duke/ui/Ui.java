@@ -2,7 +2,10 @@ package duke.ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * UI for Duke
@@ -66,6 +69,14 @@ public class Ui {
 
     public void showLoadingError() {
         showToUser(LOADING_ERROR);
+    }
+
+    public void showIndexedList(ArrayList<Task> tasks) {
+        int count = 1;
+        for (Task t : tasks) {
+            showToUser(count + ". " + t.toString());
+            count++;
+        }
     }
 
     /** Shows a variable number of messages to user */
