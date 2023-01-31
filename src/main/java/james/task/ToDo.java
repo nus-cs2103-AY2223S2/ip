@@ -21,5 +21,10 @@ public class ToDo extends Task {
         return "T | " + super.toStoreString() + "\n";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
 }
 

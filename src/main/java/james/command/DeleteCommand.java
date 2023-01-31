@@ -14,6 +14,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof deleteCommand) {
+            return index == ((deleteCommand) obj).index;
+        }
+        return false;
+    }
+
+    @Override
     public void execute() throws JamesException {
         if (index >= taskList.getSize()) {
             throw new JamesException("Task number is out of range!");

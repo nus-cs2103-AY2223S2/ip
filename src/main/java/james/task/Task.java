@@ -1,15 +1,9 @@
 package james.task;
 
-/**
- * The task class.
- */
 public class Task {
     protected String description;
     protected boolean isDone;
-    /**
-     * Creates a new task.
-     * @param description The task.
-     */
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -18,7 +12,6 @@ public class Task {
     public String getTask() {
         return this.description;
     }
-
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -27,28 +20,27 @@ public class Task {
         this.isDone = true;
     }
 
-    public void markUndone() {
+    public void markUnDone() {
         this.isDone = false;
-    }
-
-    public boolean setStatus(boolean isDone) {
-        this.isDone = isDone;
-        return isDone;
-    }
-
-    public boolean isDone() {
-        return isDone;
     }
 
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
     }
-
     public String toStoreString() {
         String isDoneIndicator = isDone ? "1" : "0";
         return isDoneIndicator + " | " + this.description;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            return description.equals(((Task) obj).description) && isDone == ((Task) obj).isDone;
+        }
+        return false;
+    }
+
 
 }
 

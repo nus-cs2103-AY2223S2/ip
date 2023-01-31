@@ -22,6 +22,14 @@ public class AddMarkCommand extends Command {
         task.markDone();
         ui.markTask(task);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof addMarkCommand) {
+            return taskNumber == ((addMarkCommand) obj).taskNumber;
+        }
+        return false;
+    }
 }
 
 

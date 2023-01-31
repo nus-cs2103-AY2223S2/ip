@@ -20,4 +20,10 @@ public class AddListCommand extends Command {
         ui.printTaskList(taskList);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof addListCommand;
+    }
+
+
 }
