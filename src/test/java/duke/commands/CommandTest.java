@@ -16,6 +16,10 @@ public class CommandTest {
             } 
         };
 
-        assertThrows(Command.ValidationException.class, () -> test.execute(null, null));
+        assertThrows(
+            Command.ValidationException.class, 
+            () -> test.execute(null, null), 
+            "validate() should throw Validation exception when called with a false boolean condition"
+        );
     }
 }

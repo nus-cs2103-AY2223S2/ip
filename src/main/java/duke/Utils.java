@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.StringJoiner;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -105,5 +106,16 @@ public final class Utils {
             LocalDate dateValue = date.get().atYear(currentTime.getYear());
             return LocalDateTime.of(dateValue, time.get());
         }
+    }
+
+    public static String flattenIterableWithIndex(Iterable<?> it, int start) {
+        StringJoiner joiner = new StringJoiner("\n");
+        int count = start - 1;
+        for (Object each : it) {
+            count++;
+            joiner.add(String.format("%d. %s", count, each.toString()));
+        }
+
+        return joiner.toString();
     }
 }

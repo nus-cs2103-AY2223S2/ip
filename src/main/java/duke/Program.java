@@ -22,7 +22,7 @@ public final class Program {
                 instance.runDuke();
                 return;
             } catch (IOException e) {
-                System.out.format("An IOException occurred while reading your tasks from disk%s\n", e.getMessage());
+                System.out.format("An IOException occurred while reading your tasks from disk: '%s'\n", e.getMessage());
             } catch (ClassNotFoundException e) {
                 System.out.println("Your data file was corrupted, so we were unable to read your tasks from there");
             }

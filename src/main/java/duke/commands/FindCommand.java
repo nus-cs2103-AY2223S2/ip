@@ -2,7 +2,6 @@ package duke.commands;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import duke.Duke;
 import duke.Utils;
@@ -30,14 +29,11 @@ public class FindCommand extends Command {
         if (filteredTasks.size() == 0) {
             output("Could not find any tasks that matched '%s'", searchStr);
         } else {
-            output(IntStream.range(0, filteredTasks.size())
-                .boxed()
-                .map(i -> String.format("%d. %s", i + 1, filteredTasks.get(i)))
-                .collect(Collectors.joining(
-                "\n", 
-                String.format("%d tasks matched '%s':\n", filteredTasks.size(), searchStr),
-                "\n"
-            )));
+            output("%d tasks matched '%s':\n%s",
+                filteredTasks.size(),
+                searchStr,
+                Utils.flattenIterableWithIndex(filteredTasks, 1)
+            );
         }
     }
 }

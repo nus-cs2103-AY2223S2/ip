@@ -26,11 +26,11 @@ public class TaskCommandTest {
         try {
             test.accept(null, instance);
         } catch (Exception e) {
-            fail();
+            fail(String.format("Should not throw exceptions: %s\n", e.toString()));
         }
 
-        assertEquals(1, instance.getTaskList().size());
-        assertEquals("X", instance.getTaskList().get(0).getType());
+        assertEquals(1, instance.getTaskList().size(), "Task list should have only one task");
+        assertEquals("X", instance.getTaskList().get(0).getType(), "Only task in list should have type 'X'");
     }
 
     @Test
@@ -51,7 +51,7 @@ public class TaskCommandTest {
         try {
             test.accept(null, instance);
         } catch (Exception e) {
-            fail();
+            fail(String.format("Should not throw exceptions: %s\n", e.getMessage()));
         }
 
         assertEquals(0, instance.getTaskList().size(), "Tasks are not added when validate fails");

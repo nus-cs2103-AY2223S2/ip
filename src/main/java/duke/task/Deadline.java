@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * A task with an associated deadline
  */
+@TaskInfo(type = "D")
 public class Deadline extends Task {
     /**
      * String representation of the deadline
@@ -15,11 +16,6 @@ public class Deadline extends Task {
     public Deadline(String task, LocalDateTime time) {
         super(task);
         this.deadline = time;
-    }
-
-    @Override
-    public String getType() { 
-        return "D";
     }
 
     @Override

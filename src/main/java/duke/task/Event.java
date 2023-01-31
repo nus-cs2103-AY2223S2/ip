@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * A task with an associated start and end time
  */
+@TaskInfo(type = "E")
 public class Event extends Task {
     /**
      * String representation of the start time
@@ -24,14 +25,9 @@ public class Event extends Task {
     }
 
     @Override
-    public String getType() { 
-        return "E";
-    }
-
-    @Override
     public String toString() {
         return String.format("%s (from: %s to: %s)",
-        super.toString(), 
+            super.toString(), 
             start.format(DateTimeFormatter.ofPattern("dd/MM kk:hh")),
             end.format(DateTimeFormatter.ofPattern("dd/MM kk:hh"))
         );

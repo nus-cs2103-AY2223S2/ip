@@ -11,6 +11,8 @@ public abstract class Task implements Serializable {
      */
     private final String description;
 
+    private final String typeString;
+
     /**
      * Boolean indicating if the task is completed or otherwise
      */
@@ -18,6 +20,8 @@ public abstract class Task implements Serializable {
 
     public Task(String task) {
         this.description = task;
+        TaskInfo anno = getClass().getAnnotation(TaskInfo.class);
+        this.typeString = anno.type();
     }
 
     /**
@@ -36,7 +40,9 @@ public abstract class Task implements Serializable {
      * Get the type string for the task
      * @return String
      */
-    public abstract String getType();
+    public String getType() {
+        return typeString;
+    }
 
     @Override
     public String toString() {
