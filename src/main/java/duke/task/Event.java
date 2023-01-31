@@ -17,6 +17,11 @@ public class Event extends Task {
         this.to = to;
     }
 
+    /**
+     * Gets the String representation of the event to be stored in the text file.
+     *
+     * @return The String representation of the event to be stored in the text file.
+     */
     @Override
     public String getFileRepresentation() {
         String mark = (super.isDone) ? "X" : " ";

@@ -9,6 +9,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Gets the String representation of the to-do to be stored in the text file.
+     *
+     * @return The String representation of the to-do to be stored in the text file.
+     */
     @Override
     public String getFileRepresentation() {
         String mark = (super.isDone) ? "X" : " ";
