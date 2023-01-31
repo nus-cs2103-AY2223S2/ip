@@ -8,14 +8,15 @@ import parser.Parser;
 import exception.DukeException;
 
 public class Duke {
-    private static TaskList list = new TaskList();
-    private static Ui ui = new Ui();
-    private static Storage storage = new Storage("duke.txt");
-    private static Parser logic = new Parser();
+    private static final TaskList list = new TaskList();
+    private static final Ui ui = new Ui();
+    private static final Parser logic = new Parser();
+
 
     public static void main(String[] args) throws DukeException, IOException {
         ui.printWelcomeMessage();
-        storage.loadData(list);
+        ui.showLine();
+        Storage.loadData(list);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -23,6 +24,11 @@ public class Duke {
             if (logic.checkList(input)) {
                 ui.printListMessage();
                 list.list();
+                ui.showLine();
+            }else if (logic.checkFind(input)) {
+                String word = input.split(" ")[1];
+                ui.printFindMessgae();
+                list.find(word);
                 ui.showLine();
             } else if (logic.checkMark(input)) {
                 int num = Integer.parseInt(input.split(" ")[1]);
@@ -37,6 +43,7 @@ public class Duke {
            } else if (logic.checkDelete(input)) {
                 int num = Integer.parseInt(input.split(" ")[1]);
                 ui.printDeleteMessage(list.get(num), list);
+                list.removeFind(list.get(num));
                 list.delete(num);
                 ui.showLine();
             } else if (logic.checkTask(input)) {
@@ -49,7 +56,7 @@ public class Duke {
             }
             input = sc.nextLine();
         }
-        storage.saveData(list);
+        Storage.saveData(list);
         ui.printByeMessage();
         ui.showLine();
     }

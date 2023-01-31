@@ -15,17 +15,13 @@ import task.Deadline;
 import task.ToDo;
 
 public class Storage {
-    protected static String path;
-    protected static File data;
+    protected final static String PATH = "duke.txt";
+    protected static File data = new File(PATH);
 
-    public Storage(String path) {
-        this.path = path;
-        this.data = new File(path);
-    }
 
     public static void loadData(TaskList list) throws IOException {
         data.createNewFile();
-        List<String> tmp = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
+        List<String> tmp = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
         Iterator<String> itr = tmp.iterator();
         Task newTask;
         while (itr.hasNext()) {
@@ -87,12 +83,13 @@ public class Storage {
             if (currLine[1].equals("X")) {
                 newTask.mark();
             }
+            list.addFind(description, newTask);
             list.add(newTask);
         }
     }
 
     public static void saveData(TaskList list) throws IOException {
-        FileWriter dukeWriter = new FileWriter(path, false);
+        FileWriter dukeWriter = new FileWriter(PATH, false);
         for (Task i : list.getList()) {
             if (i instanceof ToDo) {
                 dukeWriter.write("T | " + i.getStatusIcon() + " | " + i.getDescription() + "\n");

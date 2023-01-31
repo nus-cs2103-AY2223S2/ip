@@ -1,7 +1,6 @@
 package parser;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 public class Parser {
     private final static String[] VALID_COMMANDS = {"mark", "unmark", "list", "delete", "bye", "todo", "event", "deadline"};
 
@@ -9,6 +8,9 @@ public class Parser {
         return Arrays.asList(VALID_COMMANDS).contains(input.split(" ")[0]);
     }
 
+    public boolean checkFind(String input) {
+        return input.split(" ")[0].equals("find");
+    }
     public boolean checkTodo(String input) {
         return input.split(" ")[0].equals("todo");
     }
