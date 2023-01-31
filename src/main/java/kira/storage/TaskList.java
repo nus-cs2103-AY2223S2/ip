@@ -24,7 +24,7 @@ public class TaskList {
 
     /**
      * Constructs a tasklist with the given list of task.
-     * 
+     *
      * @param taskList
      */
     public TaskList(List<Task> taskList) {
@@ -41,7 +41,7 @@ public class TaskList {
 
     /**
      * Stores the Task into the ArrayList.
-     * 
+     *
      * @param task task to be stored
      */
     public void store(Task task) {
@@ -50,7 +50,7 @@ public class TaskList {
 
     /**
      * Marks the task as completed.
-     * 
+     *
      * @param index task to be marked as done
      * @return task at index
      * @throws KiraException Invalid-Index
@@ -64,10 +64,10 @@ public class TaskList {
 
         return currentTask;
     }
-    
+
     /**
      * Marks the task as incomplete.
-     * 
+     *
      * @param index task to be marked as incomplete
      * @return task at index
      * @throws KiraException Invalid-Index
@@ -84,7 +84,7 @@ public class TaskList {
 
     /**
      * Deletes the task from the taskList.
-     * 
+     *
      * @param index task to be deleted
      * @return task at index
      * @throws KiraException Invalid-Index
@@ -98,7 +98,7 @@ public class TaskList {
 
     /**
      * Finds all deadlines or events that are ongoing today.
-     * 
+     *
      * @return list of all tasks ongoing today
      */
     public List<Task> findToday() {
@@ -121,7 +121,7 @@ public class TaskList {
 
     /**
      * Saves the tasklist as a csv file.
-     * 
+     *
      * @param pathname dir of output file
      * @throws KiraException File-Output-Issue
      */
@@ -129,6 +129,12 @@ public class TaskList {
         SaveLoad.save(taskList, pathname);
     }
 
+    /**
+     * Finds all the tasks related to the keyword.
+     *
+     * @param keyword
+     * @return
+     */
     public List<Task> findByKey(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task t : taskList) {
@@ -138,4 +144,5 @@ public class TaskList {
         }
         return foundTasks;
     }
+
 }

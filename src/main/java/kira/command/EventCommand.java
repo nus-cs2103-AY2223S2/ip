@@ -8,12 +8,12 @@ import kira.ui.Ui;
  * Command for EVENT.
  */
 public class EventCommand extends Command {
-    
+
     private Event task;
 
     /**
-     * Constructs an executable to store an event task. 
-     * 
+     * Constructs an executable to store an event task.
+     *
      * @param task event task to be stored
      */
     public EventCommand(Event task) {

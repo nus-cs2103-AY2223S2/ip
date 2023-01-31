@@ -1,14 +1,14 @@
 package kira.storage;
 
-import org.junit.jupiter.api.Test;
-
-import kira.task.Task;
-import kira.task.TaskStub;
-import kira.exception.KiraException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import kira.exception.KiraException;
+import kira.task.Task;
+import kira.task.TaskStub;
 
 public class TaskListTest {
 
@@ -19,27 +19,27 @@ public class TaskListTest {
         test.add(new TaskStub(3));
         return test;
     }
-    
+
     @Test
     public void mark_correctIndex_success() throws KiraException {
         TaskList taskList = new TaskList(testList());
-        assertEquals(1, ((TaskStub) taskList.mark(1)).task_index);
-        assertEquals(2, ((TaskStub) taskList.mark(2)).task_index);
-        assertEquals(3, ((TaskStub) taskList.mark(3)).task_index);
+        assertEquals(1, ((TaskStub) taskList.mark(1)).getIndex());
+        assertEquals(2, ((TaskStub) taskList.mark(2)).getIndex());
+        assertEquals(3, ((TaskStub) taskList.mark(3)).getIndex());
     }
 
     @Test
     public void unmark_correctIndex_success() throws KiraException {
         TaskList taskList = new TaskList(testList());
-        assertEquals(1, ((TaskStub) taskList.unmark(1)).task_index);
-        assertEquals(2, ((TaskStub) taskList.unmark(2)).task_index);
-        assertEquals(3, ((TaskStub) taskList.unmark(3)).task_index);
+        assertEquals(1, ((TaskStub) taskList.unmark(1)).getIndex());
+        assertEquals(2, ((TaskStub) taskList.unmark(2)).getIndex());
+        assertEquals(3, ((TaskStub) taskList.unmark(3)).getIndex());
     }
 
     @Test
     public void delete_correctIndex_success() throws KiraException {
         TaskList taskList = new TaskList(testList());
-        assertEquals(1, ((TaskStub) taskList.delete(1)).task_index);
+        assertEquals(1, ((TaskStub) taskList.delete(1)).getIndex());
     }
 
     @Test
@@ -54,4 +54,5 @@ public class TaskListTest {
         TaskList taskList = new TaskList(testList());
         assertEquals(new ArrayList<>(), taskList.findToday());
     }
+
 }

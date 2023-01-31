@@ -28,10 +28,10 @@ enum CommandString {
  * Parser handles the parsing of user inputs into executable commands.
  */
 public class Parser {
-    
+
     /**
      * Parses the input to an executable command.
-     * 
+     *
      * @param input input string to be parsed
      * @return executable command
      * @throws KiraException Incorrect-Format, Invalid-Index
@@ -43,19 +43,19 @@ public class Parser {
             switch (commandString) {
             case BYE:
                 if (temp.length != 1) {
-                    throw new KiraException("Incorrect use of BYE.\n" 
+                    throw new KiraException("Incorrect use of BYE.\n"
                             + "There should be no extra arguments");
                 }
                 return new ByeCommand();
             case LIST:
                 if (temp.length != 1) {
-                    throw new KiraException("Incorrect use of LIST.\n" 
+                    throw new KiraException("Incorrect use of LIST.\n"
                             + "There should be no extra arguments");
                 }
                 return new ListCommand();
             case TODAY:
                 if (temp.length != 1) {
-                    throw new KiraException("Incorrect use of TODAY.\n" 
+                    throw new KiraException("Incorrect use of TODAY.\n"
                             + "There should be no extra arguments");
                 }
                 return new TodayCommand();
@@ -92,19 +92,20 @@ public class Parser {
                     throw new KiraException("Incorrect use of command for any TASK commands");
                 }
                 return parseTask(commandString.toString(), temp[1]);
+            default:
+                // Should never reach here. Programmer error!
+                throw new KiraException("Unexpected Error!");
             }
         } catch (NumberFormatException e) {
             throw new KiraException("Index is not a number...\nPlease check your arguments.");
         } catch (IllegalArgumentException e) {
             throw new KiraException("Sorry, I don't know this command :C");
-        } 
-        // Should never reach here
-        throw new KiraException("Unexpected error...");
+        }
     }
 
     /**
      * Parses the task with additional checks on validity.
-     * 
+     *
      * @param commandString
      * @param taskArguments
      * @return executable command
@@ -138,8 +139,10 @@ public class Parser {
                 throw new KiraException(errMsg);
             }
             return new EventCommand(new Event(desc, format[0], format[1]));
+        default:
+            // Should never reach here. Programmer error!
+            throw new KiraException("Unexpected Error!");
         }
-        // Should never reach here
-        throw new KiraException("Unexpected error...");
     }
+
 }

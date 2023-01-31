@@ -10,7 +10,7 @@ public abstract class Command {
 
     /**
      * Executes the command function.
-     * 
+     *
      * @param ui user interaction to print outputs
      * @param tasklist tasklist to be processed
      * @return boolean to signify whether the bot should continue functioning

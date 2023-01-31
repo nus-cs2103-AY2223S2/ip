@@ -1,4 +1,5 @@
 package kira;
+
 import java.util.Scanner;
 
 import kira.command.Command;
@@ -18,9 +19,9 @@ import kira.ui.Ui;
  */
 public class KiraBot {
 
-    private final Ui UI = new Ui();
+    private static final Ui UI = new Ui();
+    private static final String FILEPATH = "./store.csv";
     private TaskList taskList;
-    private final String FILEPATH = "./store.csv";
 
     private void run() {
         UI.startMsg();
@@ -52,6 +53,11 @@ public class KiraBot {
         scanner.close();
     }
 
+    /**
+     * Starts the software.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         KiraBot bot = new KiraBot();
         bot.run();

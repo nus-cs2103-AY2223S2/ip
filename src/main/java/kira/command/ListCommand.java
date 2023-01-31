@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     public ListCommand() {
 
     }
-    
+
     @Override
     public boolean execute(Ui ui, TaskList taskList) {
         ui.listMsg(taskList.getList());

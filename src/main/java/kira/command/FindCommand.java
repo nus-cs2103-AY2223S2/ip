@@ -3,10 +3,19 @@ package kira.command;
 import kira.storage.TaskList;
 import kira.ui.Ui;
 
+/**
+ * Command for FIND.
+ */
 public class FindCommand extends Command {
 
     private String keyword;
 
+    /**
+     * Constructs an executable to find the tasks containing
+     * the keyword.
+     *
+     * @param keyword
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
@@ -16,7 +25,5 @@ public class FindCommand extends Command {
         ui.findMsg(tasklist.findByKey(this.keyword), this.keyword);
         return true;
     }
-    
-    
 
 }

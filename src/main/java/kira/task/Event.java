@@ -15,7 +15,7 @@ public class Event extends Task {
 
     /**
      * Constructs an event task with a start and end datetime, and a description.
-     * 
+     *
      * @param description
      * @param startDate
      * @param endDate
@@ -39,7 +39,7 @@ public class Event extends Task {
 
     /**
      * Checks if today is between the startDate and the endDate.
-     * 
+     *
      * @return boolean to indicate
      */
     public boolean withinTimeframe() {
@@ -65,4 +65,5 @@ public class Event extends Task {
                 .append(", to: " + endDate.format(formatter) + ")");
         return sBuilder.toString();
     }
+
 }

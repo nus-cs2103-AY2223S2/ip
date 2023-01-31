@@ -7,7 +7,7 @@ import kira.ui.Ui;
  * Command for TODAY.
  */
 public class TodayCommand extends Command {
-    
+
     /**
      * Constructs an executable to list tasks ongoing
      * today.

@@ -7,7 +7,7 @@ import kira.task.Task;
 /**
  * Ui class manages user interactions, prettify output
  * to simulate a conversation with the user.
- * 
+ *
  * @author Eric Goh
  */
 public class Ui {
@@ -30,7 +30,7 @@ public class Ui {
 
     /**
      * Formats and prints any error message for the bot.
-     * 
+     *
      * @param msg Error message for the output.
      */
     public void errMsg(String msg) {
@@ -39,7 +39,7 @@ public class Ui {
 
     /**
      * Formats and prints message for the list command.
-     * 
+     *
      * @param taskList
      */
     public void listMsg(List<Task> taskList) {
@@ -49,26 +49,26 @@ public class Ui {
 
     /**
      * Formats and prints message for the list command.
-     * 
+     *
      * @param taskList
      */
     public void findMsg(List<Task> taskList, String keyword) {
-        Printer.printFormatReplyMsg("Here are all the tasks matching " 
-                + keyword 
+        Printer.printFormatReplyMsg("Here are all the tasks matching "
+                + keyword
                 + "~"
                 + listOfTasks(taskList));
     }
 
     /**
      * Formats and prints message for the today command.
-     * 
+     *
      * @param taskList
      */
     public void todayMsg(List<Task> taskList) {
         Printer.printFormatReplyMsg("Here are your tasks for today~"
                 + listOfTasks(taskList));
     }
-    
+
     private String listOfTasks(List<Task> taskList) {
         StringBuilder msg = new StringBuilder();
 
@@ -83,7 +83,7 @@ public class Ui {
 
     /**
      * Formats and prints the message for storing of task.
-     * 
+     *
      * @param task
      * @param size size of the tasklist
      */
@@ -97,31 +97,32 @@ public class Ui {
 
     /**
      * Formats and prints the message for deleting of task.
-     * 
+     *
      * @param task
      */
     public void deleteMsg(Task task) {
         Printer.printFormatReplyMsg("This task has been deleted~\n"
-        + task.toString());
+                + task.toString());
     }
 
     /**
      * Formats and prints the message for marking of task.
-     * 
+     *
      * @param task
      */
     public void markMsg(Task task) {
         Printer.printFormatReplyMsg("This task has been marked as completed~\n"
-        + task.toString());
+                + task.toString());
     }
 
     /**
      * Formats and prints the message for unmarking of task.
-     * 
+     *
      * @param task
      */
     public void unmarkMsg(Task task) {
         Printer.printFormatReplyMsg("This task has been reverted to incomplete~\n"
-        + task.toString());
+                + task.toString());
     }
+
 }

@@ -8,13 +8,13 @@ import kira.ui.Ui;
  * Command for UNMARK.
  */
 public class UnmarkCommand extends Command {
-    
+
     private int index;
 
     /**
      * Constructs an executable to mark task at the index
      * as incomplete.
-     * 
+     *
      * @param index task index to be marked
      */
     public UnmarkCommand(int index) {

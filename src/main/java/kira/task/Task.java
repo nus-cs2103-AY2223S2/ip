@@ -10,7 +10,7 @@ public abstract class Task {
 
     /**
      * Constructs an abstract task with a description.
-     * 
+     *
      * @param description
      */
     protected Task(String description) {
@@ -34,7 +34,7 @@ public abstract class Task {
 
     /**
      * Formats the task into saveload readable format.
-     * 
+     *
      * @return a newly formatted string
      */
     public String saveFormat() {
@@ -44,7 +44,7 @@ public abstract class Task {
 
     /**
      * Checks if the task description contains the keyword.
-     * 
+     *
      * @param keyword the keyword to search for
      * @return true if this task contains keyword, false otherwise
      */
@@ -60,4 +60,5 @@ public abstract class Task {
                 .append(this.description);
         return sBuilder.toString();
     }
+
 }

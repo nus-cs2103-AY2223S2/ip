@@ -1,13 +1,13 @@
 package kira.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import kira.exception.KiraException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class DeadlineTest {
-    
+
     @Test
     public void constructor_wrongDateInput_throwKiraException() {
         try {

@@ -13,13 +13,13 @@ public class ToDoCommand extends Command {
 
     /**
      * Constructs an executable to store a todo task.
-     * 
+     *
      * @param task todo task to be stored
      */
     public ToDoCommand(ToDo task) {
         this.task = task;
     }
-    
+
     @Override
     public boolean execute(Ui ui, TaskList taskList) {
         taskList.store(task);

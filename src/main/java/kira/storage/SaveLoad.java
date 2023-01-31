@@ -19,10 +19,10 @@ import kira.task.ToDo;
  * SaveLoad handles all the saving of tasklist and loading of tasklist into the bot.
  */
 public class SaveLoad {
-    
+
     /**
      * Saves current tasks list to a CSV file.
-     * 
+     *
      * @throws KiraException File-Output-Issue
      */
     public static void save(List<Task> taskList, String pathname) throws KiraException {
@@ -42,7 +42,7 @@ public class SaveLoad {
 
     /**
      * Loads and parses the csv save file into a list of tasks.
-     * 
+     *
      * @param pathname path where the csv file is stored
      * @return a list of tasks
      * @throws KiraException File-Not-Found
@@ -86,6 +86,9 @@ public class SaveLoad {
                     }
                     taskList.add(event);
                     break;
+                default:
+                    // Should never reach here. Programmer error!
+                    throw new KiraException("Unexpected Error!");
                 }
             }
             scanner.close();

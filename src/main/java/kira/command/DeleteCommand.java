@@ -8,13 +8,13 @@ import kira.ui.Ui;
  * Command for DELETE.
  */
 public class DeleteCommand extends Command {
-    
+
     private int index;
 
     /**
      * Constructs an executable to remove a task from the
      * task list.
-     * 
+     *
      * @param index task index to be removed
      */
     public DeleteCommand(int index) {

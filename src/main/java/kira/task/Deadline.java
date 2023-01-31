@@ -15,7 +15,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline task with a description and deadline.
-     * 
+     *
      * @param description
      * @param deadline
      * @throws KiraException DateTime-Parse-Error
@@ -34,7 +34,7 @@ public class Deadline extends Task {
 
     /**
      * Checks if today is the deadline.
-     * 
+     *
      * @return boolean to indicate
      */
     public boolean matchToday() {
@@ -47,11 +47,11 @@ public class Deadline extends Task {
     @Override
     public String saveFormat() {
         StringBuilder saveString = new StringBuilder("DEADLINE\",\"" + super.saveFormat());
-        saveString.append("\",\"" 
+        saveString.append("\",\""
                 + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
         return saveString.toString();
     }
-    
+
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
@@ -60,4 +60,5 @@ public class Deadline extends Task {
                 .append(" (by: " + deadline.format(formatter) + ")");
         return sBuilder.toString();
     }
+
 }

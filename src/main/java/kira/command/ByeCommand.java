@@ -7,7 +7,7 @@ import kira.ui.Ui;
  * Command for BYE.
  */
 public class ByeCommand extends Command {
-    
+
     /**
      * Constructs an executable to shut down the bot.
      */
