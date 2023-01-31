@@ -94,10 +94,17 @@ public class Parser {
                     throw new DukeException("Event task must have /from and /to");
                 }
             } else {
-                throw new DukeException("Description and from/to of Event task cannot be empty. ");
+                throw new DukeException("Description and from/to of Event task cannot be empty.");
+            }
+        case "find":
+            if (isValidFindCommand(splitCommand)) {
+                String findKeyword = splitCommand[1];
+                return new FindCommand(findKeyword);
+            } else {
+                throw new DukeException("Keyword of find command cannot be empty.");
             }
         default:
-            //might add help in the future to show all duke.commands
+            //TODO add help in the future to show all duke.commands to user
             throw new DukeException("Unrecognised command. Please try again.");
         }
     }
@@ -126,6 +133,15 @@ public class Parser {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Determine if command is a valid find command
+     * @param splitCommand arr of String
+     * @return true if array has 2 elements and second element is not blank (empty or whitespace)
+     */
+    private static boolean isValidFindCommand(String[] splitCommand) {
+        return splitCommand.length == 2 && !splitCommand[1].isBlank();
     }
 
 }

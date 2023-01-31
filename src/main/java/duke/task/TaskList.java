@@ -36,6 +36,21 @@ public class TaskList {
         currentTask.markAsUndone();
     }
 
+    /**
+     * Finds tasks that match a specific keyword by iterating through the list.
+     * @param keyword derived from user input
+     * @return ArrayList containing all matching tasks
+     */
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> foundList = new ArrayList<>();
+        for (Task t: list) {
+            if (t.contains(keyword)) {
+                foundList.add(t);
+            }
+        }
+        return foundList;
+    }
+
     public int getSize() {
         return list.size();
     }
