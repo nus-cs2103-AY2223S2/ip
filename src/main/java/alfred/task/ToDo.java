@@ -1,5 +1,4 @@
 package alfred.task;
-
 /**
  * Represents a to-do task given by the user.
  */

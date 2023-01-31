@@ -16,6 +16,7 @@ import alfred.task.ToDo;
  * Represents the storage that deals with loading tasks from a file and
  * saving tasks in a file.
  */
+
 public class Storage {
 
     private File dataFile;

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 import alfred.exceptions.AlfredException;
 
+
 /**
  * Represents a task list that contains all the task given the user.
  */
+
 public class TaskList {
 
     private ArrayList<Task> tasks;
