@@ -1,9 +1,21 @@
 package duke;
 
+/** Parser is a program that help identify the command type of user inputs
+ * @author CShuwen
+ * @version 1.0
+ * @since 0.0
+ */
 public class Parser {
     public Parser(){
     }
 
+    /**
+     * Returns lateral location of the specified position.
+     * If the position is unset, NaN is returned.
+     *
+     * @param input input from user.
+     * @return Type of the input/command in String form.
+     */
     public String parse(String input) {
         Integer len = input.length();
         if (input.equals("bye")){

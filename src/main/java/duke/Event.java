@@ -3,10 +3,15 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/** Event is a variation of Tasks that carries a task description and its start and end time
+ * @author CShuwen
+ * @version 1.0
+ * @since 0.0
+ */
 public class Event extends Task{
     private int isDone;
-    private LocalDate from;
-    private LocalDate to;
+    private final LocalDate from;
+    private final LocalDate to;
 
     public Event(String description, LocalDate from, LocalDate to, Integer isDone){
         super(description, isDone = isDone);
@@ -23,11 +28,6 @@ public class Event extends Task{
     @Override
     public void markAsDone(){
         isDone = 1;
-    }
-
-    @Override
-    public String getType() {
-        return "Duke.Event";
     }
 
     @Override

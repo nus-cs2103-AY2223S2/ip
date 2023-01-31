@@ -5,13 +5,14 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- *Duke.Duke is a program that help user track list of tasks, it can take in todos, deadline and events tasks and allow
- *users to mark tasks as done or undone and delete the task.
+/** Duke is a Chat Bot program that help user track list of tasks
+ * @author CShuwen
+ * @version 1.0
+ * @since 0.0
  */
 public class Duke {
-    private Storage storage;
-    private UI ui;
+    private final Storage storage;
+    private final UI ui;
 
     public Duke () {
         Storage storage = new Storage("duke.txt");

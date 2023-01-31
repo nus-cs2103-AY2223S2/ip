@@ -9,9 +9,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *Database is a class that help store data in the local file and also read data from local file,
- *it creates a new file under 'data' directory if the given file name does not appear under 'data'
+/** Storage is a class that help store data in the local file and also read data from local file,
+ * @author CShuwen
+ * @version 1.0
+ * @since 0.0
  */
 public class Storage {
     private String data_address;
@@ -34,6 +35,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns all tasks stored in duke.txt.
+     *
+     * @return An arrayList of all tasks stored in duke.txt.
+     * @throws IOException if the file duke.txt is not found.
+     */
     public ArrayList<Task> load(){
         ArrayList<Task> arrayList = new ArrayList<>();
         try{
@@ -62,6 +69,12 @@ public class Storage {
         return arrayList;
     }
 
+    /**
+     * Takes in an array of tasks and store in duke.txt
+     *
+     * @param arrayList an arraylist of tasks that need to be stored in duke.txt
+     * @throws IOException if the file duke.txt is not found.
+     */
     public void update_data(ArrayList<Task> arrayList){
         String data = "";
         try {

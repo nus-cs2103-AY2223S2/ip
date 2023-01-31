@@ -3,6 +3,11 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/** Deadline is a variation of Tasks that carries a task description and its deadline
+ * @author CShuwen
+ * @version 1.0
+ * @since 0.0
+ */
 public class Deadline extends Task{
     private int isDone;
     private LocalDate by;
@@ -25,12 +30,6 @@ public class Deadline extends Task{
 
     public String getStatusIcon(){
         return (isDone == 1 ? "[X]": "[ ]");
-    }
-
-    @Override
-
-    public String getType() {
-        return "Duke.Deadline";
     }
 
     @Override

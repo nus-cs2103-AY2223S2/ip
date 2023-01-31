@@ -1,5 +1,10 @@
 package duke;
 
+/**ToDos is a variation of Tasks that carries a task description
+ * @author CShuwen
+ * @version 1.0
+ * @since 0.0
+ */
 public class ToDos extends Task{
     protected String by;
     private int isDone;
@@ -17,11 +22,6 @@ public class ToDos extends Task{
     @Override
     public void unMark(){
         isDone = 0;
-    }
-
-    @Override
-    public String getType() {
-        return "Todo";
     }
 
     @Override
