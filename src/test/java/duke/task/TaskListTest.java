@@ -23,7 +23,7 @@ public class TaskListTest {
         Task testTask = new ToDo("test");
         Task dontCare = new ToDo("");
         TaskList list = new TaskList(new ArrayList<Task>(Arrays.asList(dontCare, testTask, dontCare)));
-        Task deleted = list.deleteTask(1);
+        list.deleteTask(1);
         TaskList listAfterDelete = new TaskList(new ArrayList<Task>(Arrays.asList(dontCare, dontCare)));
 
         assertEquals(listAfterDelete, list);

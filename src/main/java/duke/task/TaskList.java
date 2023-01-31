@@ -3,10 +3,12 @@ package duke.task;
 import duke.Duke;
 import duke.DukeException;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class TaskList {
     private List<Task> taskList;
+    private HashMap<Integer, Task> indexToTask;
 
     /**
      * Constructor for the task list.
@@ -14,6 +16,7 @@ public class TaskList {
      */
     public TaskList(List<Task> list) {
         taskList = list;
+        indexToTask = new HashMap<>();
     }
 
     /**
@@ -34,29 +37,23 @@ public class TaskList {
 
     /**
      * Lists out all the tasks in the list in chronological order.
+     * Map the task index to each task.
      *
      * @return The string representation of the list.
      * @throws DukeException If there is no task available.
      */
     public String listTasks() throws DukeException {
+        indexToTask.clear(); // Reset hashmap
 
         if (taskList.size() == 0) {
             throw new DukeException("No tasks available.");
         }
 
-        return this.toString();
-    }
-
-    /**
-     * Returns the string representation of the task list.
-     * @return The string representation of the task list.
-     */
-    @Override
-    public String toString() {
         StringBuilder stringList = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             stringList.append((i + 1) + ". " + task);
+            indexToTask.put(i, task);
 
             if (i < taskList.size() - 1) {
                 stringList.append(System.lineSeparator());
@@ -66,9 +63,8 @@ public class TaskList {
         return stringList.toString();
     }
 
-
     private void checkIndex(int idx) throws DukeException {
-        if (idx < 0 || idx >= taskList.size()) {
+        if (idx < 0 || idx >= indexToTask.size()) {
             throw new DukeException("Task index out of bounds.");
         }
     }
@@ -82,7 +78,7 @@ public class TaskList {
      */
     public void markTask(int idx) throws DukeException {
         checkIndex(idx);
-        Task t = taskList.get(idx);
+        Task t = indexToTask.get(idx);
         t.markAsDone();
     }
 
@@ -95,7 +91,7 @@ public class TaskList {
      */
     public void unmarkTask(int idx) throws DukeException {
         checkIndex(idx);
-        Task t = taskList.get(idx);
+        Task t = indexToTask.get(idx);
         t.markAsUndone();
     }
 
@@ -108,11 +104,17 @@ public class TaskList {
      */
     public Task deleteTask(int idx) throws DukeException {
         checkIndex(idx);
-        Task t = taskList.get(idx);
+        Task t = indexToTask.get(idx);
         taskList.remove(t);
         return t;
     }
 
+    /**
+     * Returns the task at the given index in the ArrayList task list.
+     *
+     * @param index Index of the task.
+     * @return The task at that index.
+     */
     public Task getTask(int index) {
         return taskList.get(index);
     }
@@ -146,26 +148,27 @@ public class TaskList {
     * @return String representation of all the matching tasks.
     */
     public String findTasks(String keyword) throws DukeException {
+        // Reset Hashmap
+        indexToTask.clear();
         StringBuilder foundTasks = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task t = taskList.get(i);
+
+        // Dynamically generated index
+        int idx = 0;
+        for (Task t : this.taskList) {
             String description = t.getDescription();
 
             if (description.contains(keyword)) {
-                foundTasks.append((i + 1) + ". " + t);
-
-                if (i < taskList.size() - 1) {
-                    foundTasks.append(System.lineSeparator());
-                }
+                foundTasks.append((idx + 1) + ". " + t + System.lineSeparator());
+                indexToTask.put(idx, t);
+                idx++;
             }
-
-
         }
 
         if (foundTasks.length() == 0) {
             throw new DukeException("No matching task found.");
         }
 
+        foundTasks.deleteCharAt(foundTasks.length() - 1);
         return foundTasks.toString();
     }
 
