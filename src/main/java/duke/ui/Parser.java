@@ -29,7 +29,7 @@ public class Parser {
      * @throws DukeException
      */
     public Command parse(String userInput) throws DukeException {
-        Commands command = Parser.getCommand(userInput); // will catch any invalid command alrdy
+        Commands command = Parser.getCommand(userInput);
         Command c = null;
         switch (command) {
         case BYE:
