@@ -7,7 +7,7 @@ public class Todo extends Task{
     }
 
     public String toText() {
-        return "T" + "|" + super.toText();
+        return "T" + "|" + getNameOfTask() + "|" + (isDone() ? 1 : 0);
     };
 
     public LocalDate getDate() {

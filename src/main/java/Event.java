@@ -13,7 +13,7 @@ public class Event extends Task {
     }
 
     public String toText() {
-        return "E" + "|" + super.toText() + "|" + formatOfDate.format(startDate) + "|" + formatOfDate.format(endDate);
+        return "E" + "|" + getNameOfTask() + "|" + (isDone() ? 1 : 0) + "|" + formatOfDate.format(startDate) + "|" + formatOfDate.format(endDate);
     };
 
     public LocalDate getDate() {

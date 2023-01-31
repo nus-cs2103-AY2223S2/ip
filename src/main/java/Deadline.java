@@ -18,7 +18,7 @@ public class Deadline extends Task{
     }
 
     public  String toText() {
-        return "D" + "|" + super.toText() + "|" + endDate;
+        return "D" + "|" + getNameOfTask() + "|" + (isDone() ? 1 : 0) + "|" + endDate;
     };
     @Override
     public String toString() {

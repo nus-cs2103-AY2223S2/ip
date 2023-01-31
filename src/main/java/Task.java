@@ -3,11 +3,9 @@ import java.time.LocalDate;
 public abstract class Task {
     private String nameOfTask;
     private boolean done;
-    public static int totalNumOfTask = 0;
 
     public Task(String name) {
         this.nameOfTask = name;
-        totalNumOfTask++;
         done = false;
     }
     public String getNameOfTask() {
@@ -23,16 +21,8 @@ public abstract class Task {
         return this.done;
     }
 
-    public static int getTotalNumOfTask() {
-        return totalNumOfTask;
-    }
-    public static void decreaseNumOfTask() {
-        totalNumOfTask--;
-    }
 
-    public String toText() {
-        return (this.isDone() ? "1" : "0") + "|" + this.nameOfTask;
-    };
+    public abstract String toText();
     abstract public LocalDate getDate();
 
     @Override
