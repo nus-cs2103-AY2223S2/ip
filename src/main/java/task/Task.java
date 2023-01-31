@@ -8,11 +8,19 @@ public class Task {
     protected boolean mark;
     protected String content;
 
+    /**
+     * Constructs an object of the Task class. By default, mark field is false.
+     */
     public Task(String content) {
         this.content = content;
         this.mark = false;
     }
 
+    /**
+     * Constructs an object of the Task class. 
+     *
+     * @param alternative sets the boolean field mark into true/false to initialize the Task obj.
+     */
     public Task(String content, boolean alternative) {
         this.content = content;
         this.mark = alternative;
@@ -26,6 +34,9 @@ public class Task {
         return this.mark;
     }
 
+    /**
+     * Allows for changing of the "mark" field within the Task class. Inverts the mark.
+     */
     public void setMark() {
         this.mark = !this.mark;
         String outputStr;
@@ -39,6 +50,11 @@ public class Task {
         System.out.println(Ui.formatStr(outputStr));
     }
 
+    /**
+     * returns true/false depending on the char read in.
+     *
+     * @param markBool represents the char read in (could be X or white space)
+     */
     public String markSign(boolean markBool) {
         if(markBool == true) return "X";
         else return " ";
