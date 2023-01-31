@@ -30,7 +30,7 @@ public class Parser {
                                 "This is already done. You can't mark it again. :0 \n" +
                                 "try again.");
                     } else if (splitArr[0].equals("unmark") &&
-                            tasks.getTask(Integer.parseInt(splitArr[1])).
+                            tasks.getTask(Integer.parseInt(splitArr[1]) - 1).
                                     getMark() != true) {
                         throw new WrongBooleanException("Hey! \n" +
                                 "This is undone. You can't mark it undone again. :0 \n" +
