@@ -6,7 +6,19 @@ import clippy.exception.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser to parse all user commands.
+ *
+ * @author chunzkok
+ */
 public class Parser {
+    /**
+     * Identifies the correct Command handler to be invoked based on the user input.
+     *
+     * @param command The command given by the user.
+     * @return A Command instance containing the corresponding command handler.
+     * @throws ClippyException
+     */
     public static Command parse(String command) throws ClippyException {
         String[] args = command.split(" ");
         final String[] EMPTY_ARG_LIST = new String[]{};
@@ -70,6 +82,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Instantiates the correct command handler object to be returned, assuming
+     * inputs are all valid.
+     *
+     * @param commandType The type of command given.
+     * @param args The arguments to the command.
+     * @param dates Dates, if any, to be used in the command.
+     * @return
+     */
     private static Command dispatch(CommandType commandType, String[] args, LocalDate... dates) {
         switch (commandType) {
         case BYE:
